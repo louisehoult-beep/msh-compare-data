@@ -20,7 +20,12 @@
   "frameworkAwards": "2026-09-30T12:30:14+00:00",
   "openTenders": "30/09/2026",
   "drugTariff": "2026-09-30",
-  "localIntel": "2026-09-30"
+  "localIntel": "2026-09-30",
+  "supplierDirectory": "2026-09-30",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-09-30",
+  "drugTariffViiia": null,
+  "hospitalPrescribing": null
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -28,7 +33,11 @@
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry.",
   "awards": "Award-stage notices whose TITLE matches /\\b(wound|woundcare|dressing|dressings|npwt|negative[- ]pressure wound|tissue viability|pressure ulcer|pressure sore|pressure relieving|pressure area care|debridement|larval therapy|compression (?:bandag|hosiery|garment|therapy|stocking)|lymphoedema|bandag(?:e|ing)|skin integrity|wound closure|suture|leg ulcer|diabetic foot|venous ulcer|honey dressing|silver dressing|foam dressing|hydrocolloid|alginate)\\b/i and does not match /\\b(seed viability|eye tissue|corneal|toilet tissue|paper hygiene|facial tissue|chest compression|test rig|laminar flow|pressure infus|blood pressure|pressure washer|tissue culture|breast tissue|soft tissue (?:sarcoma|imaging))\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 3314111 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, summarised. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's."
+  "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, summarised. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: wound). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 17 of the 21 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "mhraDsu": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "drugTariffViiia": null
  },
  "counts": {
   "frameworks": 5,
@@ -38,7 +47,14 @@
   "awardsMatched": 69,
   "awardsWithheldByBuyerCap": 0,
   "openTenders": 1,
-  "localIntel": 15
+  "localIntel": 15,
+  "suppliersFrameworkNamedAlsoTagged": 55,
+  "suppliersDirectoryTagged": 21,
+  "suppliersDirectoryOnOtherFrameworks": 7,
+  "suppliersDirectoryWithFrameworkNote": 17,
+  "gpMarkets": 2,
+  "mhraDsu": 0,
+  "drugTariffViiiaLines": 0
  },
  "frameworks": [
   {
@@ -329,7 +345,9 @@
     "General Wound Care",
     "Negative Pressure Wound Therapy",
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Crest Medical Ltd",
@@ -339,7 +357,9 @@
     "Advanced Wound Care",
     "General Wound Care",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Essity UK Limited",
@@ -353,7 +373,9 @@
     "Advanced Wound Care",
     "General Wound Care",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "GBUK Group",
@@ -366,7 +388,9 @@
     "Advanced Wound Care",
     "General Wound Care",
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Gentell UK Ltd",
@@ -379,7 +403,9 @@
     "Advanced Wound Care",
     "General Wound Care",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Mediq Healthcare UK Ltd",
@@ -389,7 +415,9 @@
     "Advanced Wound Care",
     "General Wound Care",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Medline Industries",
@@ -401,7 +429,9 @@
     "Advanced Wound Care",
     "Pressure Area Care and Patient Handling",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Reliance Medical",
@@ -413,7 +443,9 @@
     "Advanced Wound Care",
     "General Wound Care",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Solventum (3M Health Care)",
@@ -426,7 +458,9 @@
     "Advanced Wound Care",
     "Negative Pressure Wound Therapy",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Advanced Medical Solutions (AMS)",
@@ -437,7 +471,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "B. Braun Medical",
@@ -449,7 +485,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Clinisupplies",
@@ -460,7 +498,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Convatec",
@@ -472,7 +512,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "Negative Pressure Wound Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Delta Surgical",
@@ -483,7 +525,9 @@
    "frameworks": [
     "Pressure Area Care and Patient Handling",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Fannin (UK) Limited",
@@ -495,7 +539,9 @@
    "frameworks": [
     "General Wound Care",
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Frontier Therapeutics",
@@ -507,7 +553,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Global Health and Safety Ltd",
@@ -516,7 +564,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Ideal Medical Solutions",
@@ -528,7 +578,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "IMS Euro Ltd",
@@ -537,7 +589,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "L&R Medical / Activa (Lohmann & Rauscher)",
@@ -548,7 +602,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "OscarTech UK",
@@ -559,7 +615,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Paul Hartmann (HARTMANN)",
@@ -571,7 +629,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Richardson Healthcare",
@@ -582,7 +642,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Rocialle Healthcare",
@@ -593,7 +655,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "SAI Medical Solutions Ltd",
@@ -605,7 +669,9 @@
    "frameworks": [
     "General Wound Care",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Smith+Nephew",
@@ -616,7 +682,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "Negative Pressure Wound Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Steroplast Healthcare Ltd",
@@ -625,7 +693,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Stryker",
@@ -636,7 +706,9 @@
    "frameworks": [
     "Pressure Area Care and Patient Handling",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Trion Pharma Limited",
@@ -648,7 +720,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Unisurge International Limited",
@@ -659,7 +733,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Urgo Medical",
@@ -671,7 +747,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Vernacare",
@@ -682,7 +760,9 @@
    "frameworks": [
     "Advanced Wound Care",
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Absorbest AB",
@@ -690,7 +770,9 @@
    "variants": [],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Accora",
@@ -700,7 +782,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Advancis Medical (Brightwake)",
@@ -710,7 +794,9 @@
    ],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Agile Medical",
@@ -720,7 +806,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Algeo",
@@ -730,7 +818,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Anser Medical",
@@ -740,7 +830,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "AOTI",
@@ -750,7 +842,9 @@
    ],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Apollo Healthcare Technologies",
@@ -760,7 +854,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Aquilant Limited",
@@ -770,7 +866,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Arjo",
@@ -780,7 +878,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Artivion UK Ltd",
@@ -788,7 +888,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Assut UK LTD",
@@ -798,7 +900,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Baxter / Hillrom",
@@ -808,7 +912,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Baxter Healthcare Ltd",
@@ -816,7 +922,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "BD — Becton, Dickinson",
@@ -826,7 +934,9 @@
    ],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "BES Healthcare",
@@ -836,7 +946,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "CD Medical Ltd",
@@ -846,7 +958,9 @@
    ],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Central Medical Supplies",
@@ -856,7 +970,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Chemence Ltd",
@@ -864,7 +980,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "CJ Medical",
@@ -874,7 +992,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Clarity Pharma",
@@ -882,7 +1002,9 @@
    "variants": [],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "ClearHeal LTD",
@@ -890,7 +1012,9 @@
    "variants": [],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "CliniMed",
@@ -900,7 +1024,9 @@
    ],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Coloplast",
@@ -910,7 +1036,9 @@
    ],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Creed Medical Ltd",
@@ -918,7 +1046,9 @@
    "variants": [],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Critical Healthcare",
@@ -928,7 +1058,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Croyde Medical",
@@ -938,7 +1070,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Cuxson Gerrard & Company Limited",
@@ -946,7 +1080,9 @@
    "variants": [],
    "frameworks": [
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Direct Healthcare Group",
@@ -954,7 +1090,9 @@
    "variants": [],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Direct Manufacturing",
@@ -964,7 +1102,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Dot Medical Limited",
@@ -972,7 +1112,9 @@
    "variants": [],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Drive DeVilbiss Healthcare UK",
@@ -982,7 +1124,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Ennogen Healthcare",
@@ -992,7 +1136,9 @@
    ],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Espère Healthcare Ltd",
@@ -1000,7 +1146,9 @@
    "variants": [],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Etac Ltd",
@@ -1010,7 +1158,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Eurosurgical Ltd",
@@ -1020,7 +1170,9 @@
    ],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Evolan Pharma",
@@ -1028,7 +1180,9 @@
    "variants": [],
    "frameworks": [
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Felgains",
@@ -1036,7 +1190,9 @@
    "variants": [],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Fenton Pharmaceuticals Limited",
@@ -1044,7 +1200,9 @@
    "variants": [],
    "frameworks": [
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Firstkind Ltd",
@@ -1052,7 +1210,9 @@
    "variants": [],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Flen Health UK Ltd",
@@ -1060,7 +1220,9 @@
    "variants": [],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Griffiths and Nielsen Ltd",
@@ -1068,7 +1230,9 @@
    "variants": [],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "GS Medical Healthcare Ltd",
@@ -1078,7 +1242,9 @@
    ],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "GS Medical Healthcare Ltd (novating to GBUK Ltd)",
@@ -1086,7 +1252,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Guldmann",
@@ -1096,7 +1264,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "H & R Healthcare Ltd",
@@ -1104,7 +1274,9 @@
    "variants": [],
    "frameworks": [
     "Negative Pressure Wound Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Harvest Healthcare",
@@ -1112,7 +1284,9 @@
    "variants": [],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Health-Care Equipment & Supplies",
@@ -1122,7 +1296,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Healthium Medtech UK",
@@ -1132,7 +1308,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Hospital Direct",
@@ -1140,7 +1318,9 @@
    "variants": [],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Howard Wright Europe",
@@ -1150,7 +1330,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Inspire Community Trust",
@@ -1158,7 +1340,9 @@
    "variants": [],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Integra LifeSciences (Integra Neurosciences)",
@@ -1168,7 +1352,9 @@
    ],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Interweave Textiles",
@@ -1176,7 +1362,9 @@
    "variants": [],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Invacare UK",
@@ -1186,7 +1374,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "iQ Medical",
@@ -1196,7 +1386,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Iskus Health UK Limited",
@@ -1204,7 +1396,9 @@
    "variants": [],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Johnson & Johnson MedTech",
@@ -1214,7 +1408,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Joint Operations",
@@ -1224,7 +1420,9 @@
    ],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Kebomed UK Ltd",
@@ -1232,7 +1430,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Lenience UK Ltd",
@@ -1240,7 +1440,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "LINET UK",
@@ -1250,7 +1452,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Lisclare",
@@ -1260,7 +1464,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)",
@@ -1268,7 +1474,9 @@
    "variants": [],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "medi UK",
@@ -1278,7 +1486,9 @@
    ],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Medi-Plinth Equipment",
@@ -1288,7 +1498,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medicareplus",
@@ -1298,7 +1510,9 @@
    ],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Meditrade UK Ltd",
@@ -1306,7 +1520,9 @@
    "variants": [],
    "frameworks": [
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Mediworld Ltd",
@@ -1314,7 +1530,9 @@
    "variants": [],
    "frameworks": [
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "MedScience Distribution",
@@ -1324,7 +1542,9 @@
    ],
    "frameworks": [
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medserve (South West)",
@@ -1334,7 +1554,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medstrom",
@@ -1344,7 +1566,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medtronic",
@@ -1354,7 +1578,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Meril UK Pvt Ltd",
@@ -1364,7 +1590,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "MIP UK",
@@ -1374,7 +1602,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Montcalm International",
@@ -1384,7 +1614,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "OSKA Care",
@@ -1394,7 +1626,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Oswell Penda",
@@ -1404,7 +1638,9 @@
    ],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "P3 Medical Ltd",
@@ -1412,7 +1648,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Peacocks Medical Group",
@@ -1422,7 +1660,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Pearsalls Ltd",
@@ -1430,7 +1670,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Performance Health International Limited",
@@ -1440,7 +1682,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Phoenix Medical Ltd",
@@ -1448,7 +1692,9 @@
    "variants": [],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Polyco",
@@ -1458,7 +1704,9 @@
    ],
    "frameworks": [
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Prism Medical UK",
@@ -1468,7 +1716,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Promedics Orthopaedics Ltd",
@@ -1478,7 +1728,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "ProSys International Ltd",
@@ -1486,7 +1738,9 @@
    "variants": [],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "R&D Surgical Ltd",
@@ -1494,7 +1748,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Raise Healthcare Pvt Ltd",
@@ -1502,7 +1758,9 @@
    "variants": [],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Reflex Medical Limited",
@@ -1512,7 +1770,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Renray Healthcare",
@@ -1522,7 +1782,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Schulke & Mayr UK Ltd",
@@ -1530,7 +1792,9 @@
    "variants": [],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Sela Medical UK Ltd",
@@ -1538,7 +1802,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Select Health Care (UK)",
@@ -1548,7 +1814,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Silvalea",
@@ -1558,7 +1826,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "SP Services (UK) Ltd",
@@ -1566,7 +1836,9 @@
    "variants": [],
    "frameworks": [
     "General Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Steris",
@@ -1576,7 +1848,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "T.J Smith & Nephew Ltd",
@@ -1584,7 +1858,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Talarmade Limited",
@@ -1594,7 +1870,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Talley",
@@ -1604,7 +1882,9 @@
    ],
    "frameworks": [
     "Negative Pressure Wound Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Terumo Aortic",
@@ -1614,7 +1894,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "TFX Group Ltd (Teleflex Medical)",
@@ -1624,7 +1906,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Ultimate Healthcare",
@@ -1634,7 +1918,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Uniplex",
@@ -1644,7 +1930,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Wealden Rehab",
@@ -1654,7 +1942,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Willingsford Limited",
@@ -1662,7 +1952,9 @@
    "variants": [],
    "frameworks": [
     "Advanced Wound Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Winncare UK",
@@ -1672,7 +1964,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Winners First Trading Limited",
@@ -1682,7 +1976,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   }
  ],
  "awards": [
@@ -1828,7 +2124,7 @@
   {
    "title": "Dressings",
    "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland ) (PSDS)",
-   "supplier": "Crest Medical Ltd, Essity UK Ltd, GBUK Healthcare Ltd, Johnson & Johnson Medical",
+   "supplier": "Crest Medical Ltd, Essity UK Ltd, GBUK Healthcare Ltd, Johnson & Johnson Medical Ltd, KCI Medical Limited (Solventum), L&R Medical UK Ltd, Mediq Healthcare UK, Molnlycke Health Care Ltd, Reliance Medical Ltd, Rocialle Healthcare Ltd, Richardson Healthcare Ltd, TJ Smith and Nephew Ltd (Trading as Smith & Nephew), Urgo Limited, Vernacare International Limited",
    "date": "2026-07-01",
    "url": "https://www.find-tender.service.gov.uk/Notice/061766-2026",
    "value": null,
@@ -1858,7 +2154,7 @@
   {
    "title": "Pressure Area Care and Patient Handling",
    "buyer": "Supply Chain Coordination Limited",
-   "supplier": "A.Algeo Limited, Accora Limited, Agile Medical Ltd, Apollo Healthcare Technologi",
+   "supplier": "A.Algeo Limited, Accora Limited, Agile Medical Ltd, Apollo Healthcare Technologies Limited, Arjo UK Limited, BES Healthcare Ltd, Central Medical Supplies Ltd, C J Medical Limited, Croyde Medical Limited, Delta Surgical Limited, Direct Healthcare Group Limited, Direct Manufacturing Limited, Drive Devilbiss Healthcare Limited, Essential Healthcare Solutions (UK) Limited, Etac Limited, Felgains Ltd, Form-Al group Ltd, Frontier Therapeutics Limited, GBUK Ltd, Harvest Healthcare Limited, Health-Care Equipment and Supplies Co Ltd, Hill-Rom Limited, Hospital Direct (Marketing) Ltd, Howard Wright Europe Limited, Inspire Community Trust, Interweave Textiles Limited, Invacare Limited, IQ Medical Limited, Iskus Health UK Ltd, Linet UK Limited, Liscare Limited, Live By Lulu Limited, Medi-Plinth Equipment Limited, Medline Industries Limited, Medstrom Ltd, Med-I-Pant (U.K.) Limited, Molnlycke Health Care Limited, Montcalm International Limited, Nottingham Rehab Limited, Oska Care Limited, Peacocks Medical Group Limited, Performance Health International Limited, Pressure Care Management Limited, Prism UK Medical Limited, Promedics Orthopaedics Limited, Prosys International Limited, Renray Healthcare Limited, Select Health Care (UK) Ltd, Silvalea Limited, Steris Solutions Limited, Stryker UK Limited, Talar-Made Limited, Ultimate Healthcare Ltd, V. Guldmann A/S, Wealden Rehab Ltd, Winncare Pac Limited",
    "date": "2025-12-30",
    "url": "https://www.find-tender.service.gov.uk/Notice/086469-2025",
    "value": null,
@@ -1868,7 +2164,7 @@
   {
    "title": "Pressure Area Care and Patient Handling",
    "buyer": "Supply Chain Coordination Limited",
-   "supplier": "A.Algeo Limited, Accora Limited, Agile Medical Ltd, Apollo Healthcare Technologi",
+   "supplier": "A.Algeo Limited, Accora Limited, Agile Medical Ltd, Apollo Healthcare Technologies Limited, Arjo UK Limited, BES Healthcare Ltd, Central Medical Supplies Limited, C J Medical Limited, Croyde Medical Limited, Delta Surgical Limited, Direct Healthcare Group Limited, Direct Manufacturing Limited, Drive Devilbiss Healthcare Limited, Essential Healthcare Solutions (UK) Limited, Etac Limited, Felgains Ltd, Form-Al group Ltd, Frontier Therapeutics Limited, GBUK Ltd, Harvest Healthcare Limited, Health-Care Equipment and Supplies Co Ltd, Hill-Rom Limited, Hospital Direct (Marketing) Limited, Howard Wright Europe Limited, Inspire Community Trust, Interweave Textiles Limited, Invacare Limited, IQ Medical Limited, Iskus Health UK Ltd, Linet UK Limited, Liscare Limited, Live By Lulu Limited, Medi-Plinth Equipment Limited, Medline Industries Limited, Medserve (South West) Ltd, Medstrom Ltd, Med-I-Pant (U.K.) Limited, Molnlycke Health Care Limited, Montcalm International Limited, Nottingham Rehab Limited, Osaka Care Limited, Peacocks Medical Group Limited, Performance Health International Limited, Pressure Care Management Limited, Prism UK Medical Limited, Promedics Orthopaedics Limited, Prosys International Limited, Renray Healthcare Limited, Select Health Care (UK) Limited, Silvalea Limited, Steris Solutions Limited, Stryker UK Limited, Talar-Made Limited, Ultimate Healthcare Ltd, V. Guldmann A/S, Wealden Rehab Ltd, Winncare Pac Limited",
    "date": "2025-12-05",
    "url": "https://www.contractsfinder.service.gov.uk/Notice/b5aae683-346a-49b9-8f8c-98d1b6f05b56",
    "value": 198450000,
@@ -1888,7 +2184,7 @@
   {
    "title": "Wound Closure",
    "buyer": "Supply Chain Coordination Limited",
-   "supplier": "MEDTRONIC LIMITED, ADVANCED MEDICAL SYSTEMS LTD., Anser Medical Ltd, Aquilant Li",
+   "supplier": "MEDTRONIC LIMITED, ADVANCED MEDICAL SYSTEMS LTD., Anser Medical Ltd, Aquilant Limited, Artivion UK Ltd, ASSUT UK LTD, B. Braun Medical Limited, Baxter Healthcare Ltd, Chemence Ltd, Crest Medical Ltd, Critical Healthcare Ltd, Delta Surgical Ltd, Essity UK Limited, Gentell UK Ltd, GS Medical Healthcare Ltd, Healthium Medtech UK Limited, Ideal Medical Solutions Ltd, Johnson & Johnson Medical Ltd, KCI Medical Limited, Kebomed UK Ltd, Lenience UK Ltd, Mediq Healthcare UK Ltd, Medline Industries Ltd, Meril UK Pvt Ltd, OscarTech UK Ltd, P3 Medical Ltd, Pearsalls Ltd, R&D Surgical Ltd, Reflex Medical Limited, Reliance Medical Ltd, Richardson Healthcare Ltd, SAI MEDICAL SOLUTIONS LTD, Sela Medical UK LTD, Stryker UK Ltd, T.J.SMITH AND NEPHEW LIMITED, Terumo Aortic Ltd, TFX Group Ltd, Uniplex UK Ltd, Winners First Trading Limited",
    "date": "2025-10-14",
    "url": "https://www.find-tender.service.gov.uk/Notice/065219-2025",
    "value": null,
@@ -1938,7 +2234,7 @@
   {
    "title": "Suction Consumables, Wound Drainage, Autologous Blood Systems and Related Accessories",
    "buyer": "Supply Chain Coordination Limited",
-   "supplier": "Cardinal Health U.K. 432 Limited, Flexicare Medical Ltd, GBUK Ltd, Intersurgical",
+   "supplier": "Cardinal Health U.K. 432 Limited, Flexicare Medical Ltd, GBUK Ltd, Intersurgical Ltd, Iskus Health UK Limited, Ivor Shaw Ltd trading as Pennine Healthcare, Mediq Healthcare UK Ltd, Medline Industries Ltd, Proact Medical Ltd, Reflex Medical Limited, Richardson Healthcare Ltd, Salter Labs UK Limited, Stryker UK Ltd, Vygon (UK) Ltd, WESTBOURNE MEDICAL LIMITED, William Davies Care Limited",
    "date": "2025-06-06",
    "url": "https://www.find-tender.service.gov.uk/Notice/030577-2025",
    "value": null,
@@ -1958,7 +2254,7 @@
   {
    "title": "CF-Suction Consumables, Wound Drainage, Autologous Blood Systems and Related Accessories",
    "buyer": "Supply Chain Coordination Limited",
-   "supplier": "Cardinal Health U.K. 432 Limited, Aquilant Limited, BVM Medical Limited, Cook (U",
+   "supplier": "Cardinal Health U.K. 432 Limited, Aquilant Limited, BVM Medical Limited, Cook (UK) Limited, Athrodax Healthcare International Limited, Diagnostica Stago UK Ltd, Drive Devilbiss Healthcare Limited, Eschmann Technologies Ltd, Fannin (UK) Limited, Flexicare Medical Limited, Fresenius Kabi Limited, GBUK Ltd, Haemonetics Limited, Intersurgical Limited, Iskus Health Limited, Ivor Shaw Limited, Johnson & Johnson Medical Limited, Livanova UK Limited, Medasil Surgical Limited, Medela UK Limited, Mediq Healthcare UK Limited, Medline Industries Limited, Medtronic Limited, Ortus Technology Limited, P.W.Coole & Son Limited, Paramount Medical Solutions Limited, PFM Medical UK Limited, Proact Medical Limited, Reflex Medical Limited, Reliance Medical Ltd, Richardson Healthcare Limited, Rocket Medical PLC, Salter Labs UK Limited, Sinapi Biomedical UK Ltd, Stryker UK Limited, Summit Medical UK Limited, Timesco Healthcare Limited, Uniphar Medtech UK Limited, Vygon (UK) Limited, Westbourne Medical Limited, William Davies Care Limited",
    "date": "2025-04-29",
    "url": "https://www.contractsfinder.service.gov.uk/Notice/7738d4ff-9177-4348-b1b7-b92ffa259092",
    "value": 188400000,
@@ -1968,7 +2264,7 @@
   {
    "title": "CF CAN Advanced Wound Care",
    "buyer": "Supply Chain Coordination Limited",
-   "supplier": "Trion Pharma Limited, Unisurge International Limited, Vernacare International Li",
+   "supplier": "Trion Pharma Limited, Unisurge International Limited, Vernacare International Limited, Absorbest AB, Advanced Medical Solutions Ltd, AOTI LTD, B. Braun Medical Limited, Becton, Dickinson U.K. Limited, Brightwake Limited (trading as Advancis Medical), CD Medical Limited, Clarity Pharma Ltd, ClearHeal LTD, CliniMed Ltd, Clinisupplies Limited, Coloplast Ltd, ConvaTec Limited, Creed Medical Ltd, Crest Medical Ltd, Dot Medical Limited, Ennogen Healthcare Ltd, Espère Healthcare Ltd, Essity T/A BSN Medical Ltd, Eurosurgical Ltd, Firstkind Ltd, Flen Health UK Ltd, Frontier Therapeutics Limited, GBUK Ltd, Gentell UK Ltd, Global Health and Safety Ltd., Griffiths and Nielsen Ltd, GS Medical Healthcare Ltd, PAUL HARTMANN LIMITED, Ideal Medical Solutions Ltd, IMS Euro Ltd, INTEGRA NEUROSCIENCES LIMITED, Iskus Health UK Limited, Joint Operations (UK) LLP, KCI Medical Limited, L&R Medical UK Ltd, Medi UK Ltd, Medicareplus International Limited, Mediq Healthcare UK Ltd, Medline Industries Ltd, MedScience Distribution Ltd, Molnlycke Health Care Ltd, OscarTech UK Ltd, Oswell Penda Pharmaceutical Ltd, Phoenix Medical Ltd, Raise Healthcare Pvt Ltd, RELIANCE MEDICAL HOLDINGS LTD, Richardson Healthcare Ltd, Rocialle Healthcare Ltd, Schulke & Mayr UK Ltd, T.J.SMITH AND NEPHEW,LIMITED, Steroplast Healthcare Ltd, URGO LIMITED, Willingsford Limited",
    "date": "2025-04-10",
    "url": "https://www.contractsfinder.service.gov.uk/Notice/4b76114e-5b91-421d-b54c-66150e617a9e",
    "value": 1467008032,
@@ -2048,7 +2344,7 @@
   {
    "title": "Wound Management Products",
    "buyer": "Procurement and Logistics Service",
-   "supplier": "EDGE MEDICAL LTD, LR Medical UK Ltd, Healthcare 21 NI, FLEN HEALTH UK LTD, 3M Un",
+   "supplier": "EDGE MEDICAL LTD, LR Medical UK Ltd, Healthcare 21 NI, FLEN HEALTH UK LTD, 3M United Kingdom PLC, ADVANCED MEDICAL SOLUTIONS Ltd, INTEGRA NEUROSCIENCES LTD, URGO LTD, B. Braun Medical Limited, Fannin Limited, BRIGHTWAKE LIMITED, T.J.SMITH NEPHEW LIMITED, CONVATEC LTD, Paul Hartmann Ltd",
    "date": "2024-07-23",
    "url": "https://www.find-tender.service.gov.uk/Notice/022850-2024",
    "value": null,
@@ -2078,7 +2374,7 @@
   {
    "title": "Wound Drainage, Autologous Blood Systems and Related Accessories",
    "buyer": "NHS Supply Chain",
-   "supplier": "Aquilant Limited, Fresenius Kabi Limited, GBUK Ltd, LivaNova UK Limited, Medasil",
+   "supplier": "Aquilant Limited, Fresenius Kabi Limited, GBUK Ltd, LivaNova UK Limited, Medasil Surgical Limited, Medline Industries Limited, PFM Medical UK Limited, Summit Medical UK Limited",
    "date": "2024-02-12",
    "url": "https://www.contractsfinder.service.gov.uk/Notice/677c6283-9ef1-4fbd-a182-411ab518abda",
    "value": 6900000,
@@ -2554,5 +2850,2748 @@
   "nations": "Scotland, Wales, Northern Ireland and Ireland",
   "policy": "Policy and demand signals",
   "data": "Data sources"
- }
+ },
+ "directorySuppliers": [
+  {
+   "name": "Aero Healthcare Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Aero Healthcare Ltd",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "External Defibrillation Devices and Related Services and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/external-defibrillation-devices-related-equipment-and-associated-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: External Defibrillation Devices and Related Services and Accessories."
+  },
+  {
+   "name": "Eakin Ostomy (Pelican Healthcare)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Eakin Ostomy (Pelican Healthcare)",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Urology and Bowel Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/urology-and-bowel-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "Drug Tariff Part IX",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Urology and Bowel Management. The Hub's supplier directory also records: Drug Tariff Part IX."
+  },
+  {
+   "name": "Gardamed",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Gardamed",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Vascular Therapy and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/vascular-therapy-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Vascular Therapy and Associated Products. The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Haddenham Healthcare",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Haddenham Healthcare",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Vascular Therapy and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/vascular-therapy-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Vascular Therapy and Associated Products. The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Huntleigh",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Huntleigh",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Digital Diagnostic Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-gynaecology-and-sexual-health-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Orthotics, Podiatry and Immobilisation",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/orthoses-podiatry-and-immobilisation/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-monitoring-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on four NHS Supply Chain frameworks not counted as this speciality's: Digital Diagnostic Solutions; Maternity, Obstetrics, Gynaecology and Sexual Health Products; Orthotics, Podiatry and Immobilisation; Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services. The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Medela",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Medela",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Infant Feeding and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/baby-food-and-feeding-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-gynaecology-and-sexual-health-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — NPWT devices",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS Supply Chain — Maternity, Obstetrics, Gynaecology & Sexual Health (2019/S 214-525123, to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Infant Feeding and Accessories; Maternity, Obstetrics, Gynaecology and Sexual Health Products. The Hub's supplier directory also records: NHS Supply Chain — NPWT devices; NHS Supply Chain — Maternity, Obstetrics, Gynaecology & Sexual Health (2019/S 214-525123, to 2027)."
+  },
+  {
+   "name": "Sigvaris",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Sigvaris",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Vascular Therapy and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/vascular-therapy-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Vascular Therapy and Associated Products. The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Accel Heal",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Accel Heal",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Chemence Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Chemence Medical",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Clarity Medtech",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Clarity Medtech",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Credenhill",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Credenhill",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "eKare",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "eKare",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Healogics",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Healogics",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Healthy.io",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Healthy.io",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Herida Healthcare",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Herida Healthcare",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Independence Products Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Independence Products Ltd",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Inotec AMD (Natrox)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Inotec AMD (Natrox)",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Pioneer Wound Telehealth",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Pioneer Wound Telehealth",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Spirit Healthcare Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Spirit Healthcare Ltd",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Thesis (LimbO)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Thesis (LimbO)",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Thornton & Ross Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Thornton & Ross Ltd",
+   "seedLabels": [
+    "Wound care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": true,
+  "markets": [
+   {
+    "id": "dressings",
+    "label": "Wound management and other dressings: BNF 20.03",
+    "bnf": [
+     "20.03"
+    ],
+    "note": null,
+    "latestPeriod": "202607",
+    "baselinePeriod": "202507",
+    "items": 311013,
+    "cost": 11571748,
+    "items12m": 3344838,
+    "cost12m": 123531998,
+    "itemsYoY": -0.9,
+    "products": 1647,
+    "topNational": [
+     {
+      "code": "20030100167",
+      "label": "Dressit sterile dressing pack with gloves",
+      "generic": false,
+      "items": 16441,
+      "share": 5.3,
+      "cost": 131288,
+      "yoy": -3.1
+     },
+     {
+      "code": "20030100169",
+      "label": "Nurse It sterile dressing pack",
+      "generic": false,
+      "items": 13625,
+      "share": 4.4,
+      "cost": 101128,
+      "yoy": -1.3
+     },
+     {
+      "code": "20030100120",
+      "label": "Inadine dressing",
+      "generic": false,
+      "items": 8462,
+      "share": 2.7,
+      "cost": 34585,
+      "yoy": -12.7
+     },
+     {
+      "code": "20031700015",
+      "label": "Flaminal Forte gel dressing",
+      "generic": false,
+      "items": 7935,
+      "share": 2.6,
+      "cost": 225497,
+      "yoy": 7.1
+     },
+     {
+      "code": "20030900071",
+      "label": "Allevyn Gentle Border dressing",
+      "generic": false,
+      "items": 6890,
+      "share": 2.2,
+      "cost": 218591,
+      "yoy": -4.3
+     },
+     {
+      "code": "20030100183",
+      "label": "Tegaderm Film dressing",
+      "generic": false,
+      "items": 5438,
+      "share": 1.7,
+      "cost": 19177,
+      "yoy": 9.4
+     },
+     {
+      "code": "20030100370",
+      "label": "Softpore dressing",
+      "generic": false,
+      "items": 5381,
+      "share": 1.7,
+      "cost": 6978,
+      "yoy": 2.4
+     },
+     {
+      "code": "20030900398",
+      "label": "Mepilex Border Comfort dressing",
+      "generic": false,
+      "items": 5245,
+      "share": 1.7,
+      "cost": 154575,
+      "yoy": 9.1
+     },
+     {
+      "code": "20030100074",
+      "label": "Mepore dressing",
+      "generic": false,
+      "items": 4839,
+      "share": 1.6,
+      "cost": 13157,
+      "yoy": -4.7
+     },
+     {
+      "code": "20030900070",
+      "label": "Allevyn Gentle Border dressing",
+      "generic": false,
+      "items": 4668,
+      "share": 1.5,
+      "cost": 102426,
+      "yoy": -3.8
+     }
+    ],
+    "icbLeaders": [
+     {
+      "icb": "QOX",
+      "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+      "items": 2385,
+      "leaders": [
+       {
+        "code": "20030900071",
+        "label": "Allevyn Gentle Border dressing",
+        "generic": false,
+        "items": 153,
+        "share": 6.4
+       },
+       {
+        "code": "20030900070",
+        "label": "Allevyn Gentle Border dressing",
+        "generic": false,
+        "items": 136,
+        "share": 5.7
+       },
+       {
+        "code": "20030100169",
+        "label": "Nurse It sterile dressing pack",
+        "generic": false,
+        "items": 108,
+        "share": 4.5
+       }
+      ]
+     },
+     {
+      "icb": "QHL",
+      "name": "NHS Birmingham and Solihull",
+      "items": 13612,
+      "leaders": [
+       {
+        "code": "20033000432",
+        "label": "EmDress sterile dressing pack with gloves",
+        "generic": false,
+        "items": 1284,
+        "share": 9.4
+       },
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 751,
+        "share": 5.5
+       },
+       {
+        "code": "20030900071",
+        "label": "Allevyn Gentle Border dressing",
+        "generic": false,
+        "items": 657,
+        "share": 4.8
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 11395,
+      "leaders": [
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 882,
+        "share": 7.7
+       },
+       {
+        "code": "20030100120",
+        "label": "Inadine dressing",
+        "generic": false,
+        "items": 401,
+        "share": 3.5
+       },
+       {
+        "code": "20031700076",
+        "label": "Aquacel Extra dressing",
+        "generic": false,
+        "items": 302,
+        "share": 2.7
+       }
+      ]
+     },
+     {
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 532,
+      "leaders": [
+       {
+        "code": "20030100183",
+        "label": "Tegaderm Film dressing",
+        "generic": false,
+        "items": 91,
+        "share": 17.1
+       },
+       {
+        "code": "20030900398",
+        "label": "Mepilex Border Comfort dressing",
+        "generic": false,
+        "items": 19,
+        "share": 3.6
+       },
+       {
+        "code": "20030900397",
+        "label": "Mepilex Border Comfort dressing",
+        "generic": false,
+        "items": 17,
+        "share": 3.2
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 12101,
+      "leaders": [
+       {
+        "code": "20030900239",
+        "label": "Biatain Silicone dressing",
+        "generic": false,
+        "items": 557,
+        "share": 4.6
+       },
+       {
+        "code": "20030100169",
+        "label": "Nurse It sterile dressing pack",
+        "generic": false,
+        "items": 462,
+        "share": 3.8
+       },
+       {
+        "code": "20030900238",
+        "label": "Biatain Silicone dressing",
+        "generic": false,
+        "items": 359,
+        "share": 3.0
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 17415,
+      "leaders": [
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 937,
+        "share": 5.4
+       },
+       {
+        "code": "20030100169",
+        "label": "Nurse It sterile dressing pack",
+        "generic": false,
+        "items": 778,
+        "share": 4.5
+       },
+       {
+        "code": "20031700015",
+        "label": "Flaminal Forte gel dressing",
+        "generic": false,
+        "items": 645,
+        "share": 3.7
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 5591,
+      "leaders": [
+       {
+        "code": "20030100169",
+        "label": "Nurse It sterile dressing pack",
+        "generic": false,
+        "items": 584,
+        "share": 10.4
+       },
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 528,
+        "share": 9.4
+       },
+       {
+        "code": "20030100120",
+        "label": "Inadine dressing",
+        "generic": false,
+        "items": 240,
+        "share": 4.3
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 7878,
+      "leaders": [
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 243,
+        "share": 3.1
+       },
+       {
+        "code": "20030900219",
+        "label": "UrgoTul Absorb Border dressing",
+        "generic": false,
+        "items": 237,
+        "share": 3.0
+       },
+       {
+        "code": "20030100370",
+        "label": "Softpore dressing",
+        "generic": false,
+        "items": 202,
+        "share": 2.6
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 5628,
+      "leaders": [
+       {
+        "code": "20033000065",
+        "label": "Suprasorb P sensitive border dressing",
+        "generic": false,
+        "items": 383,
+        "share": 6.8
+       },
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 323,
+        "share": 5.7
+       },
+       {
+        "code": "20033000064",
+        "label": "Suprasorb P sensitive border dressing",
+        "generic": false,
+        "items": 228,
+        "share": 4.1
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 13274,
+      "leaders": [
+       {
+        "code": "20030900071",
+        "label": "Allevyn Gentle Border dressing",
+        "generic": false,
+        "items": 909,
+        "share": 6.8
+       },
+       {
+        "code": "20030100120",
+        "label": "Inadine dressing",
+        "generic": false,
+        "items": 691,
+        "share": 5.2
+       },
+       {
+        "code": "20031700015",
+        "label": "Flaminal Forte gel dressing",
+        "generic": false,
+        "items": 618,
+        "share": 4.7
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 6312,
+      "leaders": [
+       {
+        "code": "20030900219",
+        "label": "UrgoTul Absorb Border dressing",
+        "generic": false,
+        "items": 298,
+        "share": 4.7
+       },
+       {
+        "code": "20030100370",
+        "label": "Softpore dressing",
+        "generic": false,
+        "items": 281,
+        "share": 4.5
+       },
+       {
+        "code": "20030100371",
+        "label": "Softpore dressing",
+        "generic": false,
+        "items": 210,
+        "share": 3.3
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 10868,
+      "leaders": [
+       {
+        "code": "20030100169",
+        "label": "Nurse It sterile dressing pack",
+        "generic": false,
+        "items": 492,
+        "share": 4.5
+       },
+       {
+        "code": "20031700015",
+        "label": "Flaminal Forte gel dressing",
+        "generic": false,
+        "items": 379,
+        "share": 3.5
+       },
+       {
+        "code": "20030900239",
+        "label": "Biatain Silicone dressing",
+        "generic": false,
+        "items": 357,
+        "share": 3.3
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 4632,
+      "leaders": [
+       {
+        "code": "20030100169",
+        "label": "Nurse It sterile dressing pack",
+        "generic": false,
+        "items": 864,
+        "share": 18.7
+       },
+       {
+        "code": "20033000065",
+        "label": "Suprasorb P sensitive border dressing",
+        "generic": false,
+        "items": 358,
+        "share": 7.7
+       },
+       {
+        "code": "20033000064",
+        "label": "Suprasorb P sensitive border dressing",
+        "generic": false,
+        "items": 142,
+        "share": 3.1
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 15626,
+      "leaders": [
+       {
+        "code": "20030100183",
+        "label": "Tegaderm Film dressing",
+        "generic": false,
+        "items": 1714,
+        "share": 11.0
+       },
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 915,
+        "share": 5.9
+       },
+       {
+        "code": "20031700015",
+        "label": "Flaminal Forte gel dressing",
+        "generic": false,
+        "items": 511,
+        "share": 3.3
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 8922,
+      "leaders": [
+       {
+        "code": "20030100169",
+        "label": "Nurse It sterile dressing pack",
+        "generic": false,
+        "items": 828,
+        "share": 9.3
+       },
+       {
+        "code": "20030900398",
+        "label": "Mepilex Border Comfort dressing",
+        "generic": false,
+        "items": 613,
+        "share": 6.9
+       },
+       {
+        "code": "20030900397",
+        "label": "Mepilex Border Comfort dressing",
+        "generic": false,
+        "items": 512,
+        "share": 5.7
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 6521,
+      "leaders": [
+       {
+        "code": "20030900071",
+        "label": "Allevyn Gentle Border dressing",
+        "generic": false,
+        "items": 436,
+        "share": 6.7
+       },
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 431,
+        "share": 6.6
+       },
+       {
+        "code": "20030100169",
+        "label": "Nurse It sterile dressing pack",
+        "generic": false,
+        "items": 408,
+        "share": 6.3
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 15570,
+      "leaders": [
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 1751,
+        "share": 11.2
+       },
+       {
+        "code": "20030100169",
+        "label": "Nurse It sterile dressing pack",
+        "generic": false,
+        "items": 789,
+        "share": 5.1
+       },
+       {
+        "code": "20030900071",
+        "label": "Allevyn Gentle Border dressing",
+        "generic": false,
+        "items": 613,
+        "share": 3.9
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 8121,
+      "leaders": [
+       {
+        "code": "20030900398",
+        "label": "Mepilex Border Comfort dressing",
+        "generic": false,
+        "items": 825,
+        "share": 10.2
+       },
+       {
+        "code": "20030900397",
+        "label": "Mepilex Border Comfort dressing",
+        "generic": false,
+        "items": 486,
+        "share": 6.0
+       },
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 211,
+        "share": 2.6
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 13429,
+      "leaders": [
+       {
+        "code": "20030100169",
+        "label": "Nurse It sterile dressing pack",
+        "generic": false,
+        "items": 2288,
+        "share": 17.0
+       },
+       {
+        "code": "20031700311",
+        "label": "Zetuvit Plus Superabsorber dressing",
+        "generic": false,
+        "items": 421,
+        "share": 3.1
+       },
+       {
+        "code": "20030100183",
+        "label": "Tegaderm Film dressing",
+        "generic": false,
+        "items": 379,
+        "share": 2.8
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 2822,
+      "leaders": [
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 193,
+        "share": 6.8
+       },
+       {
+        "code": "20033000064",
+        "label": "Suprasorb P sensitive border dressing",
+        "generic": false,
+        "items": 157,
+        "share": 5.6
+       },
+       {
+        "code": "20030100370",
+        "label": "Softpore dressing",
+        "generic": false,
+        "items": 154,
+        "share": 5.5
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 8445,
+      "leaders": [
+       {
+        "code": "20030100169",
+        "label": "Nurse It sterile dressing pack",
+        "generic": false,
+        "items": 798,
+        "share": 9.4
+       },
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 646,
+        "share": 7.6
+       },
+       {
+        "code": "20030900398",
+        "label": "Mepilex Border Comfort dressing",
+        "generic": false,
+        "items": 423,
+        "share": 5.0
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 6372,
+      "leaders": [
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 598,
+        "share": 9.4
+       },
+       {
+        "code": "20030900398",
+        "label": "Mepilex Border Comfort dressing",
+        "generic": false,
+        "items": 242,
+        "share": 3.8
+       },
+       {
+        "code": "20030900071",
+        "label": "Allevyn Gentle Border dressing",
+        "generic": false,
+        "items": 216,
+        "share": 3.4
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 2938,
+      "leaders": [
+       {
+        "code": "20031500077",
+        "label": "Independence Xtra large wound drainage bag with extra dressing",
+        "generic": false,
+        "items": 399,
+        "share": 13.6
+       },
+       {
+        "code": "20030100074",
+        "label": "Mepore dressing",
+        "generic": false,
+        "items": 142,
+        "share": 4.8
+       },
+       {
+        "code": "20030100078",
+        "label": "Mepore dressing",
+        "generic": false,
+        "items": 79,
+        "share": 2.7
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 17194,
+      "leaders": [
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 2508,
+        "share": 14.6
+       },
+       {
+        "code": "20031700015",
+        "label": "Flaminal Forte gel dressing",
+        "generic": false,
+        "items": 771,
+        "share": 4.5
+       },
+       {
+        "code": "20030900071",
+        "label": "Allevyn Gentle Border dressing",
+        "generic": false,
+        "items": 668,
+        "share": 3.9
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 1282,
+      "leaders": [
+       {
+        "code": "20031500077",
+        "label": "Independence Xtra large wound drainage bag with extra dressing",
+        "generic": false,
+        "items": 106,
+        "share": 8.3
+       },
+       {
+        "code": "20031700015",
+        "label": "Flaminal Forte gel dressing",
+        "generic": false,
+        "items": 66,
+        "share": 5.1
+       },
+       {
+        "code": "20031700204",
+        "label": "Aquacel Ag+ Extra dressing",
+        "generic": false,
+        "items": 32,
+        "share": 2.5
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 8735,
+      "leaders": [
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 844,
+        "share": 9.7
+       },
+       {
+        "code": "20033000065",
+        "label": "Suprasorb P sensitive border dressing",
+        "generic": false,
+        "items": 505,
+        "share": 5.8
+       },
+       {
+        "code": "20030100120",
+        "label": "Inadine dressing",
+        "generic": false,
+        "items": 445,
+        "share": 5.1
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 5215,
+      "leaders": [
+       {
+        "code": "20030900398",
+        "label": "Mepilex Border Comfort dressing",
+        "generic": false,
+        "items": 335,
+        "share": 6.4
+       },
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 308,
+        "share": 5.9
+       },
+       {
+        "code": "20030900397",
+        "label": "Mepilex Border Comfort dressing",
+        "generic": false,
+        "items": 288,
+        "share": 5.5
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 4557,
+      "leaders": [
+       {
+        "code": "20030100120",
+        "label": "Inadine dressing",
+        "generic": false,
+        "items": 449,
+        "share": 9.9
+       },
+       {
+        "code": "20030900071",
+        "label": "Allevyn Gentle Border dressing",
+        "generic": false,
+        "items": 367,
+        "share": 8.1
+       },
+       {
+        "code": "20030900070",
+        "label": "Allevyn Gentle Border dressing",
+        "generic": false,
+        "items": 273,
+        "share": 6.0
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 7315,
+      "leaders": [
+       {
+        "code": "20030100169",
+        "label": "Nurse It sterile dressing pack",
+        "generic": false,
+        "items": 661,
+        "share": 9.0
+       },
+       {
+        "code": "20030100074",
+        "label": "Mepore dressing",
+        "generic": false,
+        "items": 172,
+        "share": 2.4
+       },
+       {
+        "code": "20030900398",
+        "label": "Mepilex Border Comfort dressing",
+        "generic": false,
+        "items": 167,
+        "share": 2.3
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 8859,
+      "leaders": [
+       {
+        "code": "20030100370",
+        "label": "Softpore dressing",
+        "generic": false,
+        "items": 354,
+        "share": 4.0
+       },
+       {
+        "code": "20030900239",
+        "label": "Biatain Silicone dressing",
+        "generic": false,
+        "items": 293,
+        "share": 3.3
+       },
+       {
+        "code": "20030100371",
+        "label": "Softpore dressing",
+        "generic": false,
+        "items": 287,
+        "share": 3.2
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 8451,
+      "leaders": [
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 519,
+        "share": 6.1
+       },
+       {
+        "code": "20030100074",
+        "label": "Mepore dressing",
+        "generic": false,
+        "items": 305,
+        "share": 3.6
+       },
+       {
+        "code": "20030100174",
+        "label": "OpSite Flexigrid dressing",
+        "generic": false,
+        "items": 296,
+        "share": 3.5
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 6134,
+      "leaders": [
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 391,
+        "share": 6.4
+       },
+       {
+        "code": "20030900239",
+        "label": "Biatain Silicone dressing",
+        "generic": false,
+        "items": 305,
+        "share": 5.0
+       },
+       {
+        "code": "20030100370",
+        "label": "Softpore dressing",
+        "generic": false,
+        "items": 250,
+        "share": 4.1
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 5408,
+      "leaders": [
+       {
+        "code": "20030100169",
+        "label": "Nurse It sterile dressing pack",
+        "generic": false,
+        "items": 531,
+        "share": 9.8
+       },
+       {
+        "code": "20030100074",
+        "label": "Mepore dressing",
+        "generic": false,
+        "items": 142,
+        "share": 2.6
+       },
+       {
+        "code": "20030900239",
+        "label": "Biatain Silicone dressing",
+        "generic": false,
+        "items": 131,
+        "share": 2.4
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 2408,
+      "leaders": [
+       {
+        "code": "20030100169",
+        "label": "Nurse It sterile dressing pack",
+        "generic": false,
+        "items": 99,
+        "share": 4.1
+       },
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 75,
+        "share": 3.1
+       },
+       {
+        "code": "20031700015",
+        "label": "Flaminal Forte gel dressing",
+        "generic": false,
+        "items": 73,
+        "share": 3.0
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 11567,
+      "leaders": [
+       {
+        "code": "20030900398",
+        "label": "Mepilex Border Comfort dressing",
+        "generic": false,
+        "items": 620,
+        "share": 5.4
+       },
+       {
+        "code": "20030900397",
+        "label": "Mepilex Border Comfort dressing",
+        "generic": false,
+        "items": 595,
+        "share": 5.1
+       },
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 448,
+        "share": 3.9
+       }
+      ]
+     },
+     {
+      "icb": "Z9B2Z",
+      "name": "NHS West and North London",
+      "items": 23074,
+      "leaders": [
+       {
+        "code": "20030100169",
+        "label": "Nurse It sterile dressing pack",
+        "generic": false,
+        "items": 2239,
+        "share": 9.7
+       },
+       {
+        "code": "20030100167",
+        "label": "Dressit sterile dressing pack with gloves",
+        "generic": false,
+        "items": 1067,
+        "share": 4.6
+       },
+       {
+        "code": "20030100120",
+        "label": "Inadine dressing",
+        "generic": false,
+        "items": 677,
+        "share": 2.9
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "compression",
+    "label": "Elastic hosiery, venous ulcer compression and lymphoedema garments: BNF 21.07, 21.20 and 21.27",
+    "bnf": [
+     "21.07",
+     "21.20",
+     "21.27"
+    ],
+    "note": null,
+    "latestPeriod": "202607",
+    "baselinePeriod": "202507",
+    "items": 108981,
+    "cost": 6154212,
+    "items12m": 1192480,
+    "cost12m": 65384742,
+    "itemsYoY": -4.5,
+    "products": 1674,
+    "topNational": [
+     {
+      "code": "21070410110",
+      "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+      "generic": false,
+      "items": 14639,
+      "share": 13.4,
+      "cost": 169979,
+      "yoy": -4.5
+     },
+     {
+      "code": "21070510130",
+      "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+      "generic": false,
+      "items": 10656,
+      "share": 9.8,
+      "cost": 182940,
+      "yoy": -8.4
+     },
+     {
+      "code": "21270002098",
+      "label": "Juzo Adjustable Compression System Light calf",
+      "generic": false,
+      "items": 1929,
+      "share": 1.8,
+      "cost": 256689,
+      "yoy": 43.2
+     },
+     {
+      "code": "21070510180",
+      "label": "Compression hosiery class II below knee stocking circular knit made to measure",
+      "generic": false,
+      "items": 1893,
+      "share": 1.7,
+      "cost": 80622,
+      "yoy": -5.8
+     },
+     {
+      "code": "21070410111",
+      "label": "Compression hosiery class I below knee stocking circular knit made to measure",
+      "generic": false,
+      "items": 1750,
+      "share": 1.6,
+      "cost": 74039,
+      "yoy": -5.2
+     },
+     {
+      "code": "21270001655",
+      "label": "ReadyWrap calf wrap",
+      "generic": false,
+      "items": 1530,
+      "share": 1.4,
+      "cost": 288393,
+      "yoy": -4.5
+     },
+     {
+      "code": "21070510140",
+      "label": "Compression hosiery class II thigh length stocking circular knit standard stock size",
+      "generic": false,
+      "items": 1515,
+      "share": 1.4,
+      "cost": 26284,
+      "yoy": -7.8
+     },
+     {
+      "code": "21270002916",
+      "label": "ReadyWrap foot CT wrap",
+      "generic": false,
+      "items": 1410,
+      "share": 1.3,
+      "cost": 78979,
+      "yoy": -6.3
+     },
+     {
+      "code": "21070630140",
+      "label": "Acti-Glide compression hosiery applicator",
+      "generic": false,
+      "items": 1385,
+      "share": 1.3,
+      "cost": 21204,
+      "yoy": -1.0
+     },
+     {
+      "code": "21070410120",
+      "label": "Compression hosiery class I thigh length stocking circular knit standard stock size",
+      "generic": false,
+      "items": 1189,
+      "share": 1.1,
+      "cost": 13944,
+      "yoy": -4.3
+     }
+    ],
+    "icbLeaders": [
+     {
+      "icb": "QOX",
+      "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+      "items": 2424,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 282,
+        "share": 11.6
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 181,
+        "share": 7.5
+       },
+       {
+        "code": "21270000412",
+        "label": "Mediven for men class",
+        "generic": false,
+        "items": 120,
+        "share": 5.0
+       }
+      ]
+     },
+     {
+      "icb": "QHL",
+      "name": "NHS Birmingham and Solihull",
+      "items": 3926,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 427,
+        "share": 10.9
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 314,
+        "share": 8.0
+       },
+       {
+        "code": "21070630148",
+        "label": "Magnide compression hosiery applicator medium - large",
+        "generic": false,
+        "items": 118,
+        "share": 3.0
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 3027,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 321,
+        "share": 10.6
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 287,
+        "share": 9.5
+       },
+       {
+        "code": "21270001655",
+        "label": "ReadyWrap calf wrap",
+        "generic": false,
+        "items": 94,
+        "share": 3.1
+       }
+      ]
+     },
+     {
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 1999,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 209,
+        "share": 10.5
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 183,
+        "share": 9.2
+       },
+       {
+        "code": "21270001655",
+        "label": "ReadyWrap calf wrap",
+        "generic": false,
+        "items": 78,
+        "share": 3.9
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 6302,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 931,
+        "share": 14.8
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 662,
+        "share": 10.5
+       },
+       {
+        "code": "21270002916",
+        "label": "ReadyWrap foot CT wrap",
+        "generic": false,
+        "items": 123,
+        "share": 2.0
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 3660,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 688,
+        "share": 18.8
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 449,
+        "share": 12.3
+       },
+       {
+        "code": "21070410111",
+        "label": "Compression hosiery class I below knee stocking circular knit made to measure",
+        "generic": false,
+        "items": 77,
+        "share": 2.1
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 1325,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 178,
+        "share": 13.4
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 121,
+        "share": 9.1
+       },
+       {
+        "code": "21270000412",
+        "label": "Mediven for men class",
+        "generic": false,
+        "items": 79,
+        "share": 6.0
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 1741,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 254,
+        "share": 14.6
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 210,
+        "share": 12.1
+       },
+       {
+        "code": "21070510180",
+        "label": "Compression hosiery class II below knee stocking circular knit made to measure",
+        "generic": false,
+        "items": 47,
+        "share": 2.7
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 1494,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 261,
+        "share": 17.5
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 187,
+        "share": 12.5
+       },
+       {
+        "code": "21070410111",
+        "label": "Compression hosiery class I below knee stocking circular knit made to measure",
+        "generic": false,
+        "items": 50,
+        "share": 3.3
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 1951,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 388,
+        "share": 19.9
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 210,
+        "share": 10.8
+       },
+       {
+        "code": "21270000412",
+        "label": "Mediven for men class",
+        "generic": false,
+        "items": 56,
+        "share": 2.9
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 1944,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 470,
+        "share": 24.2
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 228,
+        "share": 11.7
+       },
+       {
+        "code": "21270001655",
+        "label": "ReadyWrap calf wrap",
+        "generic": false,
+        "items": 45,
+        "share": 2.3
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 3536,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 626,
+        "share": 17.7
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 302,
+        "share": 8.5
+       },
+       {
+        "code": "21270002883",
+        "label": "duomed soft",
+        "generic": false,
+        "items": 86,
+        "share": 2.4
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 843,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 145,
+        "share": 17.2
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 76,
+        "share": 9.0
+       },
+       {
+        "code": "21070410111",
+        "label": "Compression hosiery class I below knee stocking circular knit made to measure",
+        "generic": false,
+        "items": 43,
+        "share": 5.1
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 4328,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 491,
+        "share": 11.3
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 434,
+        "share": 10.0
+       },
+       {
+        "code": "21270002098",
+        "label": "Juzo Adjustable Compression System Light calf",
+        "generic": false,
+        "items": 150,
+        "share": 3.5
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 4210,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 285,
+        "share": 6.8
+       },
+       {
+        "code": "21270000205",
+        "label": "Jobst Opaque class",
+        "generic": false,
+        "items": 200,
+        "share": 4.8
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 170,
+        "share": 4.0
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 2109,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 400,
+        "share": 19.0
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 138,
+        "share": 6.5
+       },
+       {
+        "code": "21270002883",
+        "label": "duomed soft",
+        "generic": false,
+        "items": 77,
+        "share": 3.7
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 4017,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 658,
+        "share": 16.4
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 493,
+        "share": 12.3
+       },
+       {
+        "code": "21270001655",
+        "label": "ReadyWrap calf wrap",
+        "generic": false,
+        "items": 150,
+        "share": 3.7
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 3410,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 326,
+        "share": 9.6
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 312,
+        "share": 9.1
+       },
+       {
+        "code": "21070410111",
+        "label": "Compression hosiery class I below knee stocking circular knit made to measure",
+        "generic": false,
+        "items": 84,
+        "share": 2.5
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 3419,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 258,
+        "share": 7.5
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 211,
+        "share": 6.2
+       },
+       {
+        "code": "21270000118",
+        "label": "Jobst Elvarex closed toe for lymphoedema garment",
+        "generic": false,
+        "items": 77,
+        "share": 2.3
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 1411,
+      "leaders": [
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 254,
+        "share": 18.0
+       },
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 193,
+        "share": 13.7
+       },
+       {
+        "code": "21070510180",
+        "label": "Compression hosiery class II below knee stocking circular knit made to measure",
+        "generic": false,
+        "items": 125,
+        "share": 8.9
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 2268,
+      "leaders": [
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 204,
+        "share": 9.0
+       },
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 161,
+        "share": 7.1
+       },
+       {
+        "code": "21270001887",
+        "label": "Jobst for Men Explore class",
+        "generic": false,
+        "items": 87,
+        "share": 3.8
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 4021,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 792,
+        "share": 19.7
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 356,
+        "share": 8.9
+       },
+       {
+        "code": "21270002098",
+        "label": "Juzo Adjustable Compression System Light calf",
+        "generic": false,
+        "items": 136,
+        "share": 3.4
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 3482,
+      "leaders": [
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 326,
+        "share": 9.4
+       },
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 318,
+        "share": 9.1
+       },
+       {
+        "code": "21070510140",
+        "label": "Compression hosiery class II thigh length stocking circular knit standard stock size",
+        "generic": false,
+        "items": 113,
+        "share": 3.2
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 5941,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 818,
+        "share": 13.8
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 577,
+        "share": 9.7
+       },
+       {
+        "code": "21270002916",
+        "label": "ReadyWrap foot CT wrap",
+        "generic": false,
+        "items": 129,
+        "share": 2.2
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 861,
+      "leaders": [
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 191,
+        "share": 22.2
+       },
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 92,
+        "share": 10.7
+       },
+       {
+        "code": "21070510180",
+        "label": "Compression hosiery class II below knee stocking circular knit made to measure",
+        "generic": false,
+        "items": 45,
+        "share": 5.2
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 1551,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 237,
+        "share": 15.3
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 176,
+        "share": 11.3
+       },
+       {
+        "code": "21270002098",
+        "label": "Juzo Adjustable Compression System Light calf",
+        "generic": false,
+        "items": 164,
+        "share": 10.6
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 1128,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 139,
+        "share": 12.3
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 85,
+        "share": 7.5
+       },
+       {
+        "code": "21270000205",
+        "label": "Jobst Opaque class",
+        "generic": false,
+        "items": 42,
+        "share": 3.7
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 1108,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 264,
+        "share": 23.8
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 143,
+        "share": 12.9
+       },
+       {
+        "code": "21270001655",
+        "label": "ReadyWrap calf wrap",
+        "generic": false,
+        "items": 35,
+        "share": 3.2
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 2535,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 298,
+        "share": 11.8
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 254,
+        "share": 10.0
+       },
+       {
+        "code": "21270002098",
+        "label": "Juzo Adjustable Compression System Light calf",
+        "generic": false,
+        "items": 64,
+        "share": 2.5
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 2168,
+      "leaders": [
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 347,
+        "share": 16.0
+       },
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 340,
+        "share": 15.7
+       },
+       {
+        "code": "21270002098",
+        "label": "Juzo Adjustable Compression System Light calf",
+        "generic": false,
+        "items": 81,
+        "share": 3.7
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 4068,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 496,
+        "share": 12.2
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 205,
+        "share": 5.0
+       },
+       {
+        "code": "21270002098",
+        "label": "Juzo Adjustable Compression System Light calf",
+        "generic": false,
+        "items": 151,
+        "share": 3.7
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 3315,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 397,
+        "share": 12.0
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 217,
+        "share": 6.5
+       },
+       {
+        "code": "21270002901",
+        "label": "Haddenham Comfiwave",
+        "generic": false,
+        "items": 105,
+        "share": 3.2
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 4568,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 671,
+        "share": 14.7
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 551,
+        "share": 12.1
+       },
+       {
+        "code": "21070410111",
+        "label": "Compression hosiery class I below knee stocking circular knit made to measure",
+        "generic": false,
+        "items": 92,
+        "share": 2.0
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 3044,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 408,
+        "share": 13.4
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 300,
+        "share": 9.9
+       },
+       {
+        "code": "21270002098",
+        "label": "Juzo Adjustable Compression System Light calf",
+        "generic": false,
+        "items": 82,
+        "share": 2.7
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 5328,
+      "leaders": [
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 706,
+        "share": 13.3
+       },
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 460,
+        "share": 8.6
+       },
+       {
+        "code": "21270001414",
+        "label": "Juzo Expert adhesive border for",
+        "generic": false,
+        "items": 237,
+        "share": 4.4
+       }
+      ]
+     },
+     {
+      "icb": "Z9B2Z",
+      "name": "NHS West and North London",
+      "items": 5821,
+      "leaders": [
+       {
+        "code": "21070510130",
+        "label": "Compression hosiery class II below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 832,
+        "share": 14.3
+       },
+       {
+        "code": "21070410110",
+        "label": "Compression hosiery class I below knee stocking circular knit standard stock size",
+        "generic": false,
+        "items": 678,
+        "share": 11.6
+       },
+       {
+        "code": "21070510180",
+        "label": "Compression hosiery class II below knee stocking circular knit made to measure",
+        "generic": false,
+        "items": 275,
+        "share": 4.7
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": true,
+  "whyEmpty": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "count": 0,
+  "roundupsExcluded": 0,
+  "updates": []
+ },
+ "drugTariffViiia": null
 }

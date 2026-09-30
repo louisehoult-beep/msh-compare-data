@@ -20,7 +20,12 @@
   "frameworkAwards": "2026-09-30T12:30:14+00:00",
   "openTenders": "30/09/2026",
   "drugTariff": "2026-09-30",
-  "localIntel": "2026-09-30"
+  "localIntel": "2026-09-30",
+  "supplierDirectory": "2026-09-30",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-09-30",
+  "drugTariffViiia": null,
+  "hospitalPrescribing": null
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -28,7 +33,11 @@
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. This is the one speciality in the Hub with no single buying route, and this panel shows the two NHS Supply Chain frameworks that do reach it — Digital Diagnostic Solutions and Radiotherapy IT Solutions. It cannot show the rest, because the rest are not NHS Supply Chain agreements: all four pages of the contract launch brief index were listed on 11/09/2026, 140 briefs, and no brief covers an electronic patient record, a GP clinical system, cyber security, networking or enterprise software. Those move through NHS Shared Business Services SBS10515 Tech Devices – Link 4, the NHS England Buying Catalogue, and Government Commercial Agency agreements including G-Cloud 15 (RM1557.15, live since 6 August 2026), none of which this feed covers. The award rows are correspondingly small: across the whole digital patch in the month to 10 September 2026 the median published award value was £21,911, and one £100m teleradiology framework modification was 98.4% of the total. The big money on this patch does not appear as a contract notice at all — it moves as capital business cases inside NHS England's Frontline Digitisation programme, as framework call-offs under a Unique Reference Number, and as G-Cloud awards without competition. An empty or short panel here is the honest answer, not a gap.",
   "awards": "Award-stage notices whose TITLE matches /\\b(electronic patient record|EPR|electronic health record|patient administration system|clinical systems?|electronic prescrib\\w*|ePMA|electronic document management|EDMS|EDRM|e-?observations?|cyber ?security|cyber essentials|interoperab\\w*|clinical decision support|digital dictation|speech recognition|health information exchange|electronic staff record|digital diagnostic solutions)\\b/i. NO EXCLUSION LIST IS APPLIED, because every notice this pattern matched was read one by one and all of them are this speciality. The loose terms that would have needed excluding were refused from the pattern above instead of admitted and then argued with. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: digital, it). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 14 of the 33 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
+  "mhraDsu": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "drugTariffViiia": null
  },
  "counts": {
   "frameworks": 2,
@@ -38,7 +47,14 @@
   "awardsMatched": 10,
   "awardsWithheldByBuyerCap": 0,
   "openTenders": 0,
-  "localIntel": 0
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 39,
+  "suppliersDirectoryTagged": 33,
+  "suppliersDirectoryOnOtherFrameworks": 9,
+  "suppliersDirectoryWithFrameworkNote": 14,
+  "gpMarkets": 0,
+  "mhraDsu": 0,
+  "drugTariffViiiaLines": 0
  },
  "frameworks": [
   {
@@ -175,7 +191,9 @@
    "frameworks": [
     "Digital Diagnostic Solutions",
     "Radiotherapy IT Solutions and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Agfa Healthcare IT UK Ltd",
@@ -183,7 +201,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Aidence",
@@ -191,7 +211,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Aidoc Medical Ltd",
@@ -199,7 +221,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "AMG Medtech Ltd",
@@ -207,7 +231,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Aptvision Limited",
@@ -215,7 +241,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Bridgehead Software",
@@ -223,7 +251,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Canon Medical Systems",
@@ -231,7 +261,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "CGM LAB Belgium",
@@ -241,7 +273,9 @@
    ],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Change Healthcare",
@@ -249,7 +283,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Circle Cardiovascular Imaging UK Ltd",
@@ -257,7 +293,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Cirdan Imaging Ltd",
@@ -265,7 +303,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Clinisys Solutions Limited",
@@ -273,7 +313,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Draeger Medical UK",
@@ -283,7 +325,9 @@
    ],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Elekta",
@@ -293,7 +337,9 @@
    ],
    "frameworks": [
     "Radiotherapy IT Solutions and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Endosoft Limited",
@@ -301,7 +347,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Epredia",
@@ -309,7 +357,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Feedback Medical Limited",
@@ -317,7 +367,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Fleischhacker GmbH & Co. KG",
@@ -325,7 +377,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Fujifilm Healthcare UK",
@@ -335,7 +389,9 @@
    ],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "GE HealthCare",
@@ -345,7 +401,9 @@
    ],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Getinge",
@@ -355,7 +413,9 @@
    ],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Haemonetics",
@@ -365,7 +425,9 @@
    ],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Harrison-AI Medical UK Ltd",
@@ -373,7 +435,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "HD Clinical Ltd",
@@ -381,7 +445,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Health Net Connections Ltd",
@@ -389,7 +455,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Heartflow UK Ltd",
@@ -397,7 +465,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Hermes Medical Solutions Ltd",
@@ -405,7 +475,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Hexarad",
@@ -413,7 +485,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Hospital Services Limited",
@@ -421,7 +495,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Huntleigh",
@@ -431,7 +507,9 @@
    ],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "InferVision UK Ltd",
@@ -439,7 +517,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Infinitt Europe GbmH",
@@ -447,7 +527,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "inHeart S.A.S",
@@ -455,7 +537,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Intelerad Medical Systems",
@@ -463,7 +547,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Intersystems",
@@ -471,7 +557,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Karl Storz UK",
@@ -481,7 +569,9 @@
    ],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Leica Microsystems (UK)",
@@ -491,7 +581,9 @@
    ],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Lucida Medical Ltd",
@@ -499,7 +591,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Magentus Software Limited",
@@ -507,7 +601,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Medical Imaging Systems (MIS Healthcare)",
@@ -517,7 +613,9 @@
    ],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Olympus (KeyMed)",
@@ -527,7 +625,9 @@
    ],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Oncology Systems Ltd (OSL)",
@@ -537,7 +637,9 @@
    ],
    "frameworks": [
     "Radiotherapy IT Solutions and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Radiobotics ApS",
@@ -545,7 +647,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Raysearch UK Ltd",
@@ -553,7 +657,9 @@
    "variants": [],
    "frameworks": [
     "Radiotherapy IT Solutions and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Roche Diagnostics UK",
@@ -563,7 +669,9 @@
    ],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Rosenfield Health Tech Ltd",
@@ -571,7 +679,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Sectra Limited",
@@ -579,7 +689,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Siemens Healthineers",
@@ -589,7 +701,9 @@
    ],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "SIM&CURE",
@@ -597,7 +711,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Soliton IT Limited",
@@ -605,7 +721,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Steris",
@@ -615,7 +733,9 @@
    ],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "SynApps Solutions Ltd",
@@ -623,7 +743,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Sysmex UK",
@@ -631,7 +753,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "System C",
@@ -641,7 +765,9 @@
    ],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "TidalSense",
@@ -649,7 +775,9 @@
    "variants": [],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
@@ -659,7 +787,9 @@
    ],
    "frameworks": [
     "Digital Diagnostic Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Varian (Siemens Healthineers)",
@@ -669,7 +799,9 @@
    ],
    "frameworks": [
     "Radiotherapy IT Solutions and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   }
  ],
  "awards": [
@@ -829,5 +961,662 @@
   "nations": "Scotland, Wales, Northern Ireland and Ireland",
   "policy": "Policy and demand signals",
   "data": "Data sources"
- }
+ },
+ "directorySuppliers": [
+  {
+   "name": "Agfa Healthcare UK Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Agfa Healthcare UK Ltd",
+   "seedLabels": [
+    "Digital and medical IT"
+   ],
+   "via": [
+    "speciality-map.json canonical label"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Fluoroscopy and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/fluoroscopy-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mobile X-Ray Systems and Associated Option and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-x-ray-systems-and-associated-option-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Static X-Ray and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/static-x-ray-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Fluoroscopy and Associated Options and Related Services; Mobile X-Ray Systems and Associated Option and Related Services; Static X-Ray and Associated Options and Related Services."
+  },
+  {
+   "name": "Agile Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Agile Medical",
+   "seedLabels": [
+    "Digital health and clinical software"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Medical Healthcare Furniture",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-healthcare-furniture/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pressure Area Care and Patient Handling",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-area-care-and-patient-handling/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Medical Healthcare Furniture; Pressure Area Care and Patient Handling."
+  },
+  {
+   "name": "Bender UK Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Bender UK Ltd",
+   "seedLabels": [
+    "Digital and medical IT"
+   ],
+   "via": [
+    "speciality-map.json canonical label"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Operating Theatres Equipment and Related Accessories and Services."
+  },
+  {
+   "name": "Broomwell Healthwatch",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Broomwell Healthwatch",
+   "seedLabels": [
+    "Virtual wards / RPM"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cardiac-and-pulmonary-diagnostics-and-exercise-stress-testing-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions."
+  },
+  {
+   "name": "Dakota Integrated Solutions Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Dakota Integrated Solutions Limited",
+   "seedLabels": [
+    "Digital and medical IT"
+   ],
+   "via": [
+    "speciality-map.json canonical label"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Office Supplies",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/office-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Printable Patient Identification Wristbands and Associated Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/printable-patient-identification-wristbands-and-associated-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Office Supplies; Printable Patient Identification Wristbands and Associated Accessories."
+  },
+  {
+   "name": "Glooko Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Glooko Ltd",
+   "seedLabels": [
+    "Digital health / AI"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/insulin-pumps-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Insulin Pumps, CGM & Hybrid Closed Loop (2025/S 000-4043)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products. The Hub's supplier directory also records: NHS Supply Chain — Insulin Pumps, CGM & Hybrid Closed Loop (2025/S 000-4043)."
+  },
+  {
+   "name": "Iansyst Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Iansyst Ltd",
+   "seedLabels": [
+    "IT & computer equipment"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices."
+  },
+  {
+   "name": "Possum Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Possum Ltd",
+   "seedLabels": [
+    "Digital health and clinical software"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices."
+  },
+  {
+   "name": "Vantive",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Vantive",
+   "seedLabels": [
+    "Digital and medical IT"
+   ],
+   "via": [
+    "speciality-map.json canonical label"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Renal Replacement Therapies Services, Technologies and Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/renal-replacement-therapy-equipment-and-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Renal Replacement Therapies (2023/S 000-017117, to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Renal Replacement Therapies Services, Technologies and Consumables. The Hub's supplier directory also records: NHS Supply Chain — Renal Replacement Therapies (2023/S 000-017117, to 2028)."
+  },
+  {
+   "name": "Accurx",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Accurx",
+   "seedLabels": [
+    "Digital health / AI",
+    "Clinical comms / ambient AI"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Alcidion",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Alcidion",
+   "seedLabels": [
+    "Digital health / AI",
+    "EPR / CDS"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Annalise.ai (Harrison.ai)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Annalise.ai (Harrison.ai)",
+   "seedLabels": [
+    "Digital health / AI",
+    "Radiology AI"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Brainomix",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Brainomix",
+   "seedLabels": [
+    "Digital health / AI",
+    "Stroke AI"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Current Health",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Current Health",
+   "seedLabels": [
+    "Digital health / AI",
+    "Virtual wards / RPM"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Doccla",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Doccla",
+   "seedLabels": [
+    "Digital health / AI",
+    "Virtual wards / RPM"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "DrDoctor",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "DrDoctor",
+   "seedLabels": [
+    "Digital health / AI",
+    "Patient engagement"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "eKare",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "eKare",
+   "seedLabels": [
+    "Digital and medical IT"
+   ],
+   "via": [
+    "speciality-map.json canonical label"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Feebris",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Feebris",
+   "seedLabels": [
+    "Digital health / AI",
+    "Virtual wards / RPM"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Healthy.io",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Healthy.io",
+   "seedLabels": [
+    "Digital and medical IT"
+   ],
+   "via": [
+    "speciality-map.json canonical label"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Heidi Health",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Heidi Health",
+   "seedLabels": [
+    "Digital health / AI",
+    "Ambient AI scribe"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Huma",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Huma",
+   "seedLabels": [
+    "Digital health / AI",
+    "Virtual wards / RPM"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Insight Direct",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Insight Direct",
+   "seedLabels": [
+    "Digital and medical IT"
+   ],
+   "via": [
+    "speciality-map.json canonical label"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Kheiron Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Kheiron Medical",
+   "seedLabels": [
+    "Digital health / AI",
+    "Breast screening AI"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Lenus Health",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Lenus Health",
+   "seedLabels": [
+    "Digital health / AI",
+    "Predictive AI"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Luscii",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Luscii",
+   "seedLabels": [
+    "Digital health / AI",
+    "Virtual wards / RPM"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "MDSAS",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "MDSAS",
+   "seedLabels": [
+    "Digital and medical IT"
+   ],
+   "via": [
+    "speciality-map.json canonical label"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Nervecentre",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Nervecentre",
+   "seedLabels": [
+    "Digital health / AI",
+    "EPR / e-obs"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Newton’s Tree",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Newton’s Tree",
+   "seedLabels": [
+    "Digital health / AI",
+    "AI governance"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Patients Know Best",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Patients Know Best",
+   "seedLabels": [
+    "Digital health / AI",
+    "Personal health record"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Pioneer Wound Telehealth",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Pioneer Wound Telehealth",
+   "seedLabels": [
+    "Digital and medical IT"
+   ],
+   "via": [
+    "speciality-map.json canonical label"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Qure.ai",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Qure.ai",
+   "seedLabels": [
+    "Digital health / AI",
+    "Radiology AI"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Skin Analytics",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Skin Analytics",
+   "seedLabels": [
+    "Digital health / AI",
+    "Dermatology AI"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Tortus",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Tortus",
+   "seedLabels": [
+    "Digital health / AI",
+    "Ambient AI scribe"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": false,
+  "markets": [],
+  "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": true,
+  "whyEmpty": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "count": 0,
+  "roundupsExcluded": 0,
+  "updates": []
+ },
+ "drugTariffViiia": null
 }

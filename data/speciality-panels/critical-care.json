@@ -20,15 +20,24 @@
   "frameworkAwards": "2026-09-30T12:30:14+00:00",
   "openTenders": "30/09/2026",
   "drugTariff": "2026-09-30",
-  "localIntel": "2026-09-30"
+  "localIntel": "2026-09-30",
+  "supplierDirectory": "2026-09-30",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-09-30",
+  "drugTariffViiia": null,
+  "hospitalPrescribing": null
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
-  "frameworks": "NHS Supply Chain framework names matching /(infusion pumps|renal replacement therap|patient monitoring equipment|anaesthesia machines)/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. These are the four NHS Supply Chain frameworks this page's own scope names, and being on one is not the same as selling to critical care. Each of the four is bought by wards far beyond the intensive care unit — the patient monitoring framework covers every bedside in the hospital, the anaesthesia framework covers the theatre suite and the neonatal unit — so a supplier counted here is a supplier on an agreement critical care buys through, never a measure of its critical care business. Three routes onto an ICU are missing from this count entirely: NHS Supply Chain's Pulse Oximetry, Capnography and Related Monitoring Technologies framework, which no speciality page yet claims; the Airway Management, Central Venous Catheter and Non Invasive Ventilation frameworks, counted on the theatres, vascular access and respiratory pages; and ECMO and specialist organ support, which NHS England commissions centrally through its Specialised Services route with no NHS Supply Chain framework page at all.",
-  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. These are the four NHS Supply Chain frameworks this page's own scope names, and being on one is not the same as selling to critical care. Each of the four is bought by wards far beyond the intensive care unit — the patient monitoring framework covers every bedside in the hospital, the anaesthesia framework covers the theatre suite and the neonatal unit — so a supplier counted here is a supplier on an agreement critical care buys through, never a measure of its critical care business. Three routes onto an ICU are missing from this count entirely: NHS Supply Chain's Pulse Oximetry, Capnography and Related Monitoring Technologies framework, which no speciality page yet claims; the Airway Management, Central Venous Catheter and Non Invasive Ventilation frameworks, counted on the theatres, vascular access and respiratory pages; and ECMO and specialist organ support, which NHS England commissions centrally through its Specialised Services route with no NHS Supply Chain framework page at all.",
+  "frameworks": "NHS Supply Chain framework names matching /(infusion pumps|renal replacement therap|patient monitoring equipment|anaesthesia machines)/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. These are the four NHS Supply Chain frameworks this page's own scope names, and being on one is not the same as selling to critical care. Each of them is bought by wards far beyond the intensive care unit — the patient monitoring framework covers every bedside in the hospital, the anaesthesia framework covers the theatre suite and the neonatal unit — so a supplier counted here is a supplier on an agreement critical care buys through, never a measure of its critical care business. Three routes onto an ICU are missing from this count entirely: NHS Supply Chain's Pulse Oximetry, Capnography and Related Monitoring Technologies framework, which no speciality page yet claims; the Airway Management, Central Venous Catheter and Non Invasive Ventilation frameworks, counted on the theatres, vascular access and respiratory pages; and ECMO and specialist organ support, which NHS England commissions centrally through its Specialised Services route with no NHS Supply Chain framework page at all.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. These are the four NHS Supply Chain frameworks this page's own scope names, and being on one is not the same as selling to critical care. Each of them is bought by wards far beyond the intensive care unit — the patient monitoring framework covers every bedside in the hospital, the anaesthesia framework covers the theatre suite and the neonatal unit — so a supplier counted here is a supplier on an agreement critical care buys through, never a measure of its critical care business. Three routes onto an ICU are missing from this count entirely: NHS Supply Chain's Pulse Oximetry, Capnography and Related Monitoring Technologies framework, which no speciality page yet claims; the Airway Management, Central Venous Catheter and Non Invasive Ventilation frameworks, counted on the theatres, vascular access and respiratory pages; and ECMO and specialist organ support, which NHS England commissions centrally through its Specialised Services route with no NHS Supply Chain framework page at all.",
   "awards": "Award-stage notices whose TITLE matches /\\b(critical care|intensive care|itu|high dependency unit|ventilators?|mechanical ventilation|ecmo|extracorporeal membrane oxygenation|patient monitors?|patient monitoring|vital signs? monitors?|pulse oximet\\w*|capnograph\\w*|infusion pumps?|infusion device|infusion system|rapid infuser|administration sets?|syringe (?:pumps?|drivers?)|crrt|renal replacement|h[ae]mofiltration|tracheostom\\w*|tracheal suction)\\b/i and does not match /\\b(medicines?|insulin|cpap|psychiatric intensive care)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33194 or 33195 or 33181 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: anaesthesia, monitoring). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 41 of the 49 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (10 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-09-30.",
+  "drugTariffViiia": null
  },
  "counts": {
   "frameworks": 4,
@@ -38,7 +47,14 @@
   "awardsMatched": 211,
   "awardsWithheldByBuyerCap": 0,
   "openTenders": 0,
-  "localIntel": 0
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 52,
+  "suppliersDirectoryTagged": 49,
+  "suppliersDirectoryOnOtherFrameworks": 41,
+  "suppliersDirectoryWithFrameworkNote": 41,
+  "gpMarkets": 0,
+  "mhraDsu": 106,
+  "drugTariffViiiaLines": 0
  },
  "frameworks": [
   {
@@ -228,7 +244,9 @@
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products",
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "BD — Becton, Dickinson",
@@ -239,7 +257,9 @@
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products",
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Central Medical Supplies",
@@ -250,7 +270,9 @@
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Draeger Medical UK",
@@ -261,7 +283,9 @@
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "GE HealthCare",
@@ -272,7 +296,9 @@
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Inspiration Healthcare",
@@ -284,7 +310,9 @@
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Medtronic",
@@ -295,7 +323,9 @@
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services",
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Mindray UK",
@@ -306,7 +336,9 @@
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Nihon Koden",
@@ -317,7 +349,9 @@
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Penlon",
@@ -328,7 +362,9 @@
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Philips",
@@ -339,7 +375,9 @@
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Vygon (UK)",
@@ -351,7 +389,9 @@
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products",
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "@SimulationMan Ltd",
@@ -359,7 +399,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "AC Cossor & Son (Surgical) Ltd",
@@ -367,7 +409,9 @@
    "variants": [],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Acime UK Ltd",
@@ -375,7 +419,9 @@
    "variants": [],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "ALXR Limited",
@@ -385,7 +431,9 @@
    ],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Andrac Ltd",
@@ -393,7 +441,9 @@
    "variants": [],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Aquilant Limited",
@@ -401,7 +451,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Arcomedical Infusion Ltd",
@@ -409,7 +461,9 @@
    "variants": [],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Athrodax Healthcare International Ltd",
@@ -419,7 +473,9 @@
    ],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Atom Medical Corporation UK ltd",
@@ -427,7 +483,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Avanos Medical UK Limited",
@@ -435,7 +493,9 @@
    "variants": [],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Baxter / Hillrom",
@@ -445,7 +505,9 @@
    ],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Baxter Healthcare Ltd",
@@ -453,7 +515,9 @@
    "variants": [],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "BECTON DICKINSON (CME) U.K. LIMITED",
@@ -461,7 +525,9 @@
    "variants": [],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "BMS Critical Care Ltd",
@@ -471,7 +537,9 @@
    ],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Bodystat",
@@ -479,7 +547,9 @@
    "variants": [],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Braun and Company Limited",
@@ -487,7 +557,9 @@
    "variants": [],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Charter Kontron Limited",
@@ -495,7 +567,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "CODAN Limited",
@@ -503,7 +577,9 @@
    "variants": [],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Crest Medical Ltd",
@@ -513,7 +589,9 @@
    ],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Croyde Medical",
@@ -523,7 +601,9 @@
    ],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "CytoSorbents Medical UK",
@@ -533,7 +613,9 @@
    ],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Delta Surgical",
@@ -543,7 +625,9 @@
    ],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Deltex Medical Ltd",
@@ -551,7 +635,9 @@
    "variants": [],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Dot Medical Limited",
@@ -559,7 +645,9 @@
    "variants": [],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "EDAN Medical (UK) Ltd",
@@ -567,7 +655,9 @@
    "variants": [],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Edwards Lifesciences",
@@ -577,7 +667,9 @@
    ],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Eitan Medical UK Ltd",
@@ -585,7 +677,9 @@
    "variants": [],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Fannin (UK) Limited",
@@ -595,7 +689,9 @@
    ],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Fresenius Kabi Ltd",
@@ -605,7 +701,9 @@
    ],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Fresenius Medical Care UK",
@@ -615,7 +713,9 @@
    ],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Fukuda Denshi UK Ltd",
@@ -623,7 +723,9 @@
    "variants": [],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "GBUK Group",
@@ -633,7 +735,9 @@
    ],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "GenX MediCare Ltd",
@@ -643,7 +747,9 @@
    ],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Getinge",
@@ -653,7 +759,9 @@
    ],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Hamilton Medical UK",
@@ -663,7 +771,9 @@
    ],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "HC21 (UK) Ltd",
@@ -671,7 +781,9 @@
    "variants": [],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Henleys Medical Supplies Limited",
@@ -679,7 +791,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Huntleigh",
@@ -689,7 +803,9 @@
    ],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "ICU Medical (incl. Smiths Medical)",
@@ -700,7 +816,9 @@
    ],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "InBody",
@@ -708,7 +826,9 @@
    "variants": [],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Kimal PLC",
@@ -718,7 +838,9 @@
    ],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Leib Medical Ltd",
@@ -726,7 +848,9 @@
    "variants": [],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "LINC Medical",
@@ -734,7 +858,9 @@
    "variants": [],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Löwenstein Medical UK",
@@ -744,7 +870,9 @@
    ],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Maltron International Ltd",
@@ -752,7 +880,9 @@
    "variants": [],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Masimo Europe",
@@ -762,7 +892,9 @@
    ],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "MEDACX Limited",
@@ -770,7 +902,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Medevolve Limited",
@@ -780,7 +914,9 @@
    ],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medica Advanced Technologies Ltd",
@@ -788,7 +924,9 @@
    "variants": [],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medical Access Ltd",
@@ -796,7 +934,9 @@
    "variants": [],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Mediprema",
@@ -804,7 +944,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Mediq Healthcare UK Ltd",
@@ -814,7 +956,9 @@
    ],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "MedScience Distribution",
@@ -824,7 +968,9 @@
    ],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Mieka Ltd",
@@ -832,7 +978,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "mOm Incubators Ltd",
@@ -840,7 +988,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Neoventa Medical Limited",
@@ -850,7 +1000,9 @@
    ],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Neurogen Ltd",
@@ -858,7 +1010,9 @@
    "variants": [],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Nikkiso Medical",
@@ -869,7 +1023,9 @@
    ],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Nipro Medical UK Ltd",
@@ -877,7 +1033,9 @@
    "variants": [],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Optima Medical Ltd",
@@ -885,7 +1043,9 @@
    "variants": [],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Ortus Technology Limited",
@@ -893,7 +1053,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Pro Health Solutions Limited",
@@ -901,7 +1063,9 @@
    "variants": [],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Probo Medical (formerly MIUS)",
@@ -911,7 +1075,9 @@
    ],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Prosum Medical Ltd",
@@ -919,7 +1085,9 @@
    "variants": [],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Qualasept Ltd t/a Bath ASU",
@@ -927,7 +1095,9 @@
    "variants": [],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Reliance Medical",
@@ -937,7 +1107,9 @@
    ],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "RPG Medical Limited",
@@ -945,7 +1117,9 @@
    "variants": [],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Rudolf Riester GmbH",
@@ -953,7 +1127,9 @@
    "variants": [],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Schiller UK Limited",
@@ -963,7 +1139,9 @@
    ],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Scott Medical Ltd",
@@ -971,7 +1149,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Spacelabs Healthcare Ltd",
@@ -979,7 +1159,9 @@
    "variants": [],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Spirit Medical Ltd",
@@ -987,7 +1169,9 @@
    "variants": [],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "TBG Solutions Limited",
@@ -995,7 +1179,9 @@
    "variants": [],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Terumo BCT",
@@ -1005,7 +1191,9 @@
    ],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "TLB Medical Supplies",
@@ -1013,7 +1201,9 @@
    "variants": [],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "U-drain Ltd",
@@ -1021,7 +1211,9 @@
    "variants": [],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "UNEEG Medical UK Ltd",
@@ -1029,7 +1221,9 @@
    "variants": [],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
@@ -1039,7 +1233,9 @@
    ],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Valiant Medical Ltd",
@@ -1047,7 +1243,9 @@
    "variants": [],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Vantive",
@@ -1057,7 +1255,9 @@
    ],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Viamed Ltd",
@@ -1065,7 +1265,9 @@
    "variants": [],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "VWS (UK) Ltd",
@@ -1075,7 +1277,9 @@
    ],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Walters Medical Ltd",
@@ -1083,7 +1287,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Wardray Premise Limited",
@@ -1091,7 +1297,9 @@
    "variants": [],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Xtra-Med",
@@ -1099,7 +1307,9 @@
    "variants": [],
    "frameworks": [
     "Renal Replacement Therapies Services, Technologies and Consumables"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Zoll Medical UK Limited",
@@ -1109,7 +1319,9 @@
    ],
    "frameworks": [
     "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   }
  ],
  "awards": [
@@ -1371,7 +1583,7 @@
   {
    "title": "Respiratory Therapy Consumables & Ventilator Consumables & Accessories",
    "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
-   "supplier": "HEADINGTON MEDICAL TECHNOLOGY LTD, CAVAGNA GROUP UK LIMITED, INTUS HEALTHCARE LT",
+   "supplier": "HEADINGTON MEDICAL TECHNOLOGY LTD, CAVAGNA GROUP UK LIMITED, INTUS HEALTHCARE LTD, PHILIPS ELECTRONICS UK LIMITED, INTERSURGICAL LIMITED, DRAEGER MEDICAL UK LIMITED, Aquilant Ltd, DRIVE DEVILBISS HEALTHCARE LIMITED, Fisher & Paykel Healthcare, Loewenstein Medical UK Ltd, Medicina, Nihon Kohden UK, NOWUS HEALTHCARE LTD, Remserve Medical Supplies Ltd, Sefam Medical Ltd",
    "date": "2026-07-22",
    "url": "https://www.find-tender.service.gov.uk/Notice/069368-2026",
    "value": null,
@@ -1609,5 +1821,1446 @@
   "nations": "Scotland, Wales, Northern Ireland and Ireland",
   "policy": "Policy and demand signals",
   "data": "Data sources"
- }
+ },
+ "directorySuppliers": [
+  {
+   "name": "Albert Waeschle Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Albert Waeschle Ltd",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Complete Ophthalmology Solutions 3",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ophthalmology-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pulse-oximetry-and-capnography-devices-and-support-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on four NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Complete Ophthalmology Solutions 3; Pulse Oximetry, Capnography and Related Monitoring Technologies; Total Patient Assessment Device Solutions."
+  },
+  {
+   "name": "Ambu UK",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Ambu UK",
+   "seedLabels": [
+    "Respiratory / anaesthesia",
+    "Patient monitoring",
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Orthotics, Podiatry and Immobilisation",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/orthoses-podiatry-and-immobilisation/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Airway Management (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on five NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Electrodes, Ultrasound Gels, Defibrillation and Related Consumables; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Orthotics, Podiatry and Immobilisation; Respiratory Solutions. The Hub's supplier directory also records: NHS Supply Chain — Airway Management (to 2028)."
+  },
+  {
+   "name": "APC Cardiovascular Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "APC Cardiovascular Ltd",
+   "seedLabels": [
+    "Patient monitoring"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/angiography-hybrid-theatres-capital-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services."
+  },
+  {
+   "name": "Aquilant Critical Care",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Aquilant Critical Care",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Respiratory Solutions."
+  },
+  {
+   "name": "Armstrong Medical (Eakin Respiratory)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Armstrong Medical (Eakin Respiratory)",
+   "seedLabels": [
+    "Respiratory / anaesthesia",
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/non-invasive-ventilation-sleep-therapy-cpap-sleep-monitoring-diagnostics/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Anaesthesia Machines & Ventilators (to 2029)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics; Respiratory Solutions. The Hub's supplier directory also records: NHS Supply Chain — Anaesthesia Machines & Ventilators (to 2029)."
+  },
+  {
+   "name": "Atos Medical (UK)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Atos Medical (UK)",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Airway Management Products and Associated Equipment."
+  },
+  {
+   "name": "Birmingham Optical Group",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Birmingham Optical Group",
+   "seedLabels": [
+    "Patient monitoring"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Complete Ophthalmology Solutions 3",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ophthalmology-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Complete Ophthalmology Solutions 3."
+  },
+  {
+   "name": "Brandon Medical Company Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Brandon Medical Company Ltd",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Operating Theatres Equipment and Related Accessories and Services."
+  },
+  {
+   "name": "Broomwell Healthwatch",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Broomwell Healthwatch",
+   "seedLabels": [
+    "Virtual wards / RPM"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cardiac-and-pulmonary-diagnostics-and-exercise-stress-testing-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions."
+  },
+  {
+   "name": "Cardinal Health U.K. 432 Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Cardinal Health U.K. 432 Ltd",
+   "seedLabels": [
+    "Patient monitoring"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Clinical and Sharps Waste Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/clinical-and-sharps-waste-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Enteral Feeding, Bile Bags and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/enteral-feeding-bile-bags-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Gloves",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-gloves/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Syringes, Needles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Vascular Therapy and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/vascular-therapy-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Syringes & Needles",
+     "url": "https://www.find-tender.service.gov.uk/Notice/002484-2026",
+     "source": "Find a Tender contract award notice"
+    }
+   ],
+   "frameworkNote": "Named on seven NHS Supply Chain frameworks not counted as this speciality's: Clinical and Sharps Waste Management; Electrodes, Ultrasound Gels, Defibrillation and Related Consumables; Enteral Feeding, Bile Bags and Associated Products; Surgical Gloves; Syringes, Needles and Associated Products; Total Patient Assessment Device Solutions; Vascular Therapy and Associated Products. The Hub's supplier directory also records: NHS Supply Chain — Syringes & Needles."
+  },
+  {
+   "name": "Ccmed Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Ccmed Ltd",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Airway Management Products and Associated Equipment."
+  },
+  {
+   "name": "Chalice Medical Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Chalice Medical Ltd",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Perfusion Devices, Consumables and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/perfusion/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Perfusion Devices, Consumables and Associated Equipment."
+  },
+  {
+   "name": "Chemical Intelligence Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Chemical Intelligence Limited",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Airway Management Products and Associated Equipment."
+  },
+  {
+   "name": "Conmed UK Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Conmed UK Ltd",
+   "seedLabels": [
+    "Patient monitoring"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrosurgical Consumables and Related Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrosurgical-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Minimally Invasive Surgery, Related Equipment and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/minimally-invasive-surgery/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Rigid Endoscopy and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/rigid-endoscopy-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Orthopaedic Solutions 3",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-orthopaedic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on seven NHS Supply Chain frameworks not counted as this speciality's: Electrodes, Ultrasound Gels, Defibrillation and Related Consumables; Electrosurgical Consumables and Related Accessories; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Minimally Invasive Surgery, Related Equipment and Accessories; Operating Theatres Equipment and Related Accessories and Services; Rigid Endoscopy and Associated Options and Related Services; Total Orthopaedic Solutions 3."
+  },
+  {
+   "name": "Cook Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Cook Medical",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Operating Theatres Equipment and Related Accessories and Services. The Hub's supplier directory also records: NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)."
+  },
+  {
+   "name": "Cortrium ApS",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Cortrium ApS",
+   "seedLabels": [
+    "Patient monitoring"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cardiac-and-pulmonary-diagnostics-and-exercise-stress-testing-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions."
+  },
+  {
+   "name": "Ebrington (NI) Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Ebrington (NI) Limited",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Electrodes, Ultrasound Gels, Defibrillation and Related Consumables."
+  },
+  {
+   "name": "Eden Medical (UK) Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Eden Medical (UK) Limited",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Respiratory Solutions."
+  },
+  {
+   "name": "Fisher & Paykel Healthcare",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Fisher & Paykel Healthcare",
+   "seedLabels": [
+    "Respiratory / anaesthesia",
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/non-invasive-ventilation-sleep-therapy-cpap-sleep-monitoring-diagnostics/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Airway Management (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics; Respiratory Solutions. The Hub's supplier directory also records: NHS Supply Chain — Airway Management (to 2028)."
+  },
+  {
+   "name": "Flexicare Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Flexicare Medical",
+   "seedLabels": [
+    "Respiratory / anaesthesia",
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/non-invasive-ventilation-sleep-therapy-cpap-sleep-monitoring-diagnostics/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Urology and Bowel Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/urology-and-bowel-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Airway Management (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on four NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics; Respiratory Solutions; Urology and Bowel Management. The Hub's supplier directory also records: NHS Supply Chain — Airway Management (to 2028)."
+  },
+  {
+   "name": "Freelance Surgical Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Freelance Surgical Limited",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Orthopaedic Solutions 3",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-orthopaedic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Total Orthopaedic Solutions 3."
+  },
+  {
+   "name": "Gvs Filter Technology UK Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Gvs Filter Technology UK Ltd",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Airway Management Products and Associated Equipment."
+  },
+  {
+   "name": "Hamilton Sales And Service UK Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Hamilton Sales And Service UK Ltd",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Airway Management Products and Associated Equipment."
+  },
+  {
+   "name": "Insight Medical Products Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Insight Medical Products Limited",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Airway Management Products and Associated Equipment."
+  },
+  {
+   "name": "Intermedical (UK) Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Intermedical (UK) Ltd",
+   "seedLabels": [
+    "Patient monitoring"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cardiac-and-pulmonary-diagnostics-and-exercise-stress-testing-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/non-invasive-ventilation-sleep-therapy-cpap-sleep-monitoring-diagnostics/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions; Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics; Respiratory Solutions."
+  },
+  {
+   "name": "Intersurgical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Intersurgical",
+   "seedLabels": [
+    "Respiratory / anaesthesia",
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/non-invasive-ventilation-sleep-therapy-cpap-sleep-monitoring-diagnostics/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Airway Management (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics; Respiratory Solutions. The Hub's supplier directory also records: NHS Supply Chain — Airway Management (to 2028)."
+  },
+  {
+   "name": "LifeSignals Europe Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "LifeSignals Europe Limited",
+   "seedLabels": [
+    "Patient monitoring"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cardiac-and-pulmonary-diagnostics-and-exercise-stress-testing-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions."
+  },
+  {
+   "name": "Love Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Love Medical",
+   "seedLabels": [
+    "Patient monitoring"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cardiac-and-pulmonary-diagnostics-and-exercise-stress-testing-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions."
+  },
+  {
+   "name": "Marshall Products",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Marshall Products",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Respiratory Solutions."
+  },
+  {
+   "name": "Medasil Surgical Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Medasil Surgical Ltd",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Airway Management Products and Associated Equipment."
+  },
+  {
+   "name": "Meditech Systems Ltd (Dorset)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Meditech Systems Ltd (Dorset)",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Respiratory Solutions."
+  },
+  {
+   "name": "Pall Europe Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Pall Europe Limited",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Intravenous Accessories and Pressure Monitoring Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Intravenous Accessories and Pressure Monitoring Accessories."
+  },
+  {
+   "name": "Pentland Medical Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Pentland Medical Ltd",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Airway Management Products and Associated Equipment."
+  },
+  {
+   "name": "Proact Medical Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Proact Medical Ltd",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Temperature Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-temperature-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pressure Infusers and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-infusers-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pulse-oximetry-and-capnography-devices-and-support-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on six NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Patient Temperature Management; Pressure Infusers and Associated Products; Pulse Oximetry, Capnography and Related Monitoring Technologies; Respiratory Solutions; Total Patient Assessment Device Solutions."
+  },
+  {
+   "name": "ResMed",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "ResMed",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/non-invasive-ventilation-sleep-therapy-cpap-sleep-monitoring-diagnostics/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics."
+  },
+  {
+   "name": "Ryna Medical Uk Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Ryna Medical Uk Limited",
+   "seedLabels": [
+    "Surgical & critical care"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Operating Theatres Equipment and Related Accessories and Services."
+  },
+  {
+   "name": "Sai Quality Fruits And Veg Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Sai Quality Fruits And Veg Limited",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Airway Management Products and Associated Equipment."
+  },
+  {
+   "name": "TFX Group Ltd (Teleflex Medical)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "TFX Group Ltd (Teleflex Medical)",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Central Venous Catheters and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/central-venous-catheters-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Minimally Invasive Surgery, Related Equipment and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/minimally-invasive-surgery/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Perfusion Devices, Consumables and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/perfusion/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Syringes, Needles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Urology and Bowel Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/urology-and-bowel-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Wound Closure",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/wound-closure/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Central Venous Catheters",
+     "url": "https://www.find-tender.service.gov.uk/Notice/001530-2025",
+     "source": "Find a Tender contract notice; dates and supplier count from NHS Supply Chain launch brief"
+    }
+   ],
+   "frameworkNote": "Named on nine NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Central Venous Catheters and Associated Products; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Minimally Invasive Surgery, Related Equipment and Accessories; Perfusion Devices, Consumables and Associated Equipment; Respiratory Solutions; Syringes, Needles and Associated Products; Urology and Bowel Management; Wound Closure. The Hub's supplier directory also records: NHS Supply Chain — Central Venous Catheters."
+  },
+  {
+   "name": "Timesco Healthcare Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Timesco Healthcare Ltd",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Central Venous Catheters and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/central-venous-catheters-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrosurgical Consumables and Related Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrosurgical-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-gynaecology-and-sexual-health-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pulse-oximetry-and-capnography-devices-and-support-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Instruments",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-instruments/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on eight NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Central Venous Catheters and Associated Products; Electrosurgical Consumables and Related Accessories; Maternity, Obstetrics, Gynaecology and Sexual Health Products; Pulse Oximetry, Capnography and Related Monitoring Technologies; Respiratory Solutions; Surgical Instruments; Total Patient Assessment Device Solutions."
+  },
+  {
+   "name": "Vyaire Medical Products Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Vyaire Medical Products Limited",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Temperature Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-temperature-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Patient Temperature Management."
+  },
+  {
+   "name": "William Davies Care Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "William Davies Care Limited",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Intravenous Accessories and Pressure Monitoring Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Intravenous Cannula and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-cannula-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Wheelchairs, Specialist Seating and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/powered-and-non-powered-wheelchairs/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on four NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Intravenous Accessories and Pressure Monitoring Accessories; Intravenous Cannula and Associated Products; Wheelchairs, Specialist Seating and Related Services."
+  },
+  {
+   "name": "Chiesi Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Chiesi Limited",
+   "seedLabels": [
+    "Respiratory / anaesthesia",
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Current Health",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Current Health",
+   "seedLabels": [
+    "Virtual wards / RPM"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Doccla",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Doccla",
+   "seedLabels": [
+    "Virtual wards / RPM"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Feebris",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Feebris",
+   "seedLabels": [
+    "Virtual wards / RPM"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Huma",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Huma",
+   "seedLabels": [
+    "Virtual wards / RPM"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Luscii",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Luscii",
+   "seedLabels": [
+    "Virtual wards / RPM"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Micrel Medical Devices",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Micrel Medical Devices",
+   "seedLabels": [
+    "Anaesthesia and critical care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Nervecentre",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Nervecentre",
+   "seedLabels": [
+    "EPR / e-obs"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": false,
+  "markets": [],
+  "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": false,
+  "whyEmpty": null,
+  "count": 106,
+  "roundupsExcluded": 10,
+  "updates": [
+   {
+    "title": "Filters should be used during the administration of Parenteral Nutrition for patients in all care settings",
+    "url": "https://www.gov.uk/drug-safety-update/filters-should-be-used-during-the-administration-of-parenteral-nutrition-for-patients-in-all-care-settings",
+    "published": "2026-09-02",
+    "updated": "2026-09-02",
+    "summary": "Administration of parenteral nutrition without a filter has been associated with a number of adverse incidents including an embolism which resulted in a fatal outcome."
+   },
+   {
+    "title": "#MedSafetyWeek (3-9 November 2025): A call to action to improve patient safety",
+    "url": "https://www.gov.uk/drug-safety-update/number-medsafetyweek-3-9-november-2025-a-call-to-action-to-improve-patient-safety",
+    "published": "2025-10-23",
+    "updated": "2025-10-23",
+    "summary": "The annual #MedSafetyWeek campaign takes place from 3 to 9 November 2025. This year’s campaign theme is ‘we can all help make medicines safer.’"
+   },
+   {
+    "title": "Paracetamol and pregnancy - reminder that taking paracetamol during pregnancy remains safe",
+    "url": "https://www.gov.uk/drug-safety-update/paracetamol-and-pregnancy-reminder-that-taking-paracetamol-during-pregnancy-remains-safe",
+    "published": "2025-09-23",
+    "updated": "2025-09-23",
+    "summary": "Patients should be reminded and reassured that there is no evidence that taking paracetamol during pregnancy causes autism in children. Paracetamol is recommended as the first-choice pain reliever for pregnant women, used at the lowest dose and for the shortest duration. It also acts as an antipyretic and is therefore used to treat fever."
+   },
+   {
+    "title": "Abrysvo▼ (Pfizer RSV vaccine) and Arexvy▼ (GSK RSV vaccine): be alert to a small risk of Guillain-Barré syndrome following vaccination in older adults",
+    "url": "https://www.gov.uk/drug-safety-update/abrysvov-pfizer-rsv-vaccine-and-arexvyv-gsk-rsv-vaccine-be-alert-to-a-small-risk-of-guillain-barre-syndrome-following-vaccination-in-older-adults",
+    "published": "2025-07-07",
+    "updated": "2025-07-07",
+    "summary": "There is a small increase in the risk of Guillain-Barré syndrome following vaccination with Abrysvo (Pfizer respiratory syncytial virus (RSV) vaccine) and Arexvy (GSK RSV vaccine) in adults aged 60 years and older. Healthcare professionals should advise all recipients of Abrysvo and Arexvy that they should be alert to signs and symptoms of Guillain-Barré syndrome and, if they occur, to seek immediate medical attention as it requires urgent treatment in hospital."
+   },
+   {
+    "title": "Prolonged-release opioids: Removal of indication for relief of post-operative pain",
+    "url": "https://www.gov.uk/drug-safety-update/prolonged-release-opioids-removal-of-indication-for-relief-of-post-operative-pain",
+    "published": "2025-03-12",
+    "updated": "2025-03-12",
+    "summary": "The indication for the treatment of post-operative pain has been removed from the licences of all prolonged release opioids due to the increased risk of persistent post-operative opioid use (PPOU) and opioid-induced ventilatory impairment (OIVI)."
+   },
+   {
+    "title": "GLP-1 and dual GIP/GLP-1 receptor agonists: potential risk of pulmonary aspiration during general anaesthesia or deep sedation",
+    "url": "https://www.gov.uk/drug-safety-update/glp-1-and-dual-gip-slash-glp-1-receptor-agonists-potential-risk-of-pulmonary-aspiration-during-general-anaesthesia-or-deep-sedation",
+    "published": "2025-01-28",
+    "updated": "2025-01-28",
+    "summary": "Healthcare professionals should be aware of the potential risk of pulmonary aspiration in patients using GLP-1 or dual GIP/GLP-1 receptor agonists who undergo surgery or procedures with general anaesthesia or deep sedation."
+   },
+   {
+    "title": "Calcium chloride, calcium gluconate: potential risk of underdosing with calcium gluconate in severe hyperkalaemia",
+    "url": "https://www.gov.uk/drug-safety-update/calcium-chloride-calcium-gluconate-potential-risk-of-underdosing-with-calcium-gluconate-in-severe-hyperkalaemia",
+    "published": "2023-06-27",
+    "updated": "2023-06-27",
+    "summary": "Calcium salts (either calcium chloride or calcium gluconate) are used to stabilise the myocardium and prevent cardiac arrest in patients experiencing severe hyperkalaemia. However, the two salts are not equivalent in terms of calcium dose. Ensure the correct dose is administered to avoid underdosing of calcium. If treated sub-optimally, hyperkalaemia can be fatal."
+   },
+   {
+    "title": "Glucose solutions: recommendations to minimise the risks associated with the accidental use of glucose solutions instead of saline solutions in arterial lines",
+    "url": "https://www.gov.uk/drug-safety-update/glucose-solutions-recommendations-to-minimise-the-risks-associated-with-the-accidental-use-of-glucose-solutions-instead-of-saline-solutions-in-arterial-lines",
+    "published": "2023-05-25",
+    "updated": "2023-05-25",
+    "summary": "We remind healthcare professionals that accidental use of glucose-containing solutions as flush fluid for arterial lines may contaminate blood samples and result in falsely high glucose readings. This may lead to inappropriate insulin administration and subsequent hypoglycaemia. Healthcare professionals should use saline solutions to flush arterial lines and use pressure infusion bags with transparent windows to ensure that the fluid label is visible at all times."
+   }
+  ]
+ },
+ "drugTariffViiia": null
 }

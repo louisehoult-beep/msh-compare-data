@@ -20,7 +20,12 @@
   "frameworkAwards": "2026-09-30T12:30:14+00:00",
   "openTenders": "30/09/2026",
   "drugTariff": "2026-09-30",
-  "localIntel": "2026-09-30"
+  "localIntel": "2026-09-30",
+  "supplierDirectory": "2026-09-30",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-09-30",
+  "drugTariffViiia": null,
+  "hospitalPrescribing": null
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -28,7 +33,11 @@
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. Read this panel differently from every other speciality's. NHS Supply Chain barely reaches this patch: it has exactly one agreement here, for batteries, lighting, tools, FM consumables and EV charging, and it buys none of the plant, works or construction the rest of the page is about. The real routes are Government Commercial Agency agreements RM6267 CWAS2 / NHS ProCure23 and RM6088 CWAS, which both expire on 31 March 2027 with all contracts awarded by that date; NHS Shared Business Services Hard Facilities Management 3, awarded 1 September 2026 with 28 lots and 185 suppliers, running from 20 October 2026; NHS SBS Public Sector Construction Works 2, still only a planned procurement notice with its tender delayed to mid-to-late November 2026; the New Hospital Programme's own Hospital 2.0 Alliance of ten construction firms; and, increasingly, dynamic markets opened by individual trusts under the Procurement Act 2023, which admit new suppliers at any time. None of those five is an NHS Supply Chain framework, so none appears in the Frameworks list above however large it is. One award row below is not NHS at all: “16_26 Flooring (Supply, Fit and Refurbishment)” was bought by Leicestershire County Council and is left in rather than blinding the rule to the word “flooring”, which NHS trusts also buy.",
   "awards": "Award-stage notices whose TITLE matches /\\b(backlog maintenance|estates?|capital works?|refurbishment|refurbish\\w*|ventilation|air handling|boiler|chiller|electrical infrastructure|fire (?:safety|alarm|compartmentation|stopping|damper)|roof\\w*|water (?:hygiene|safety|treatment)|legionella|decarbonisation|heat pump|modular (?:building|ward|theatre)|demolition|asbestos|RAAC|hard fm|soft fm|facilities management|building management system|lift replacement|standby generator|medical gas|construction works?|new build|main contractor|design and build)\\b/i and does not match /\\b(wheelchair (?:maintenance|servicing|repairs?)|equipment refurbishment|non[- ]?invasive ventilation|graduate management training)\\b/i. Four titles matched the include and are excluded by name, each read in full on 11 September 2026: a wheelchair maintenance and refurbishment contract (rehabilitation's patch, while a wheelchair LIFT stays here because it is estates), an Olympus endoscopy stack refurbishment at NHS Grampian, an NHS Supply Chain non-invasive ventilation and CPAP framework (respiratory - the one place where “ventilation” means a machine breathing for a patient rather than air handling), and the NHS Graduate Management Training Scheme engineering stream. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: facilities). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 11 of the 11 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
+  "mhraDsu": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "drugTariffViiia": null
  },
  "counts": {
   "frameworks": 1,
@@ -38,7 +47,14 @@
   "awardsMatched": 126,
   "awardsWithheldByBuyerCap": 0,
   "openTenders": 0,
-  "localIntel": 0
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 0,
+  "suppliersDirectoryTagged": 11,
+  "suppliersDirectoryOnOtherFrameworks": 10,
+  "suppliersDirectoryWithFrameworkNote": 11,
+  "gpMarkets": 0,
+  "mhraDsu": 0,
+  "drugTariffViiiaLines": 0
  },
  "frameworks": [
   {
@@ -81,7 +97,9 @@
    ],
    "frameworks": [
     "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Bates Office Services Ltd",
@@ -89,7 +107,9 @@
    "variants": [],
    "frameworks": [
     "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "City Electrical Factors Ltd",
@@ -97,7 +117,9 @@
    "variants": [],
    "frameworks": [
     "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Denchi Group Ltd",
@@ -105,7 +127,9 @@
    "variants": [],
    "frameworks": [
     "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "E.On Drive Solutions Uk Ltd",
@@ -113,7 +137,9 @@
    "variants": [],
    "frameworks": [
     "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Edmundson Electrical Limited",
@@ -121,7 +147,9 @@
    "variants": [],
    "frameworks": [
     "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Luceco Uk Limited",
@@ -129,7 +157,9 @@
    "variants": [],
    "frameworks": [
     "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Lyreco UK Limited",
@@ -139,7 +169,9 @@
    ],
    "frameworks": [
     "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Mer Fleet Services Limited",
@@ -147,7 +179,9 @@
    "variants": [],
    "frameworks": [
     "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "RS Components Limited",
@@ -155,7 +189,9 @@
    "variants": [],
    "frameworks": [
     "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Screwfix Direct Limited",
@@ -163,7 +199,9 @@
    "variants": [],
    "frameworks": [
     "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "TW Engineering Co. Ltd",
@@ -171,7 +209,9 @@
    "variants": [],
    "frameworks": [
     "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "UK Electric Ltd T/A H-Squared",
@@ -179,7 +219,9 @@
    "variants": [],
    "frameworks": [
     "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Upergy",
@@ -187,7 +229,9 @@
    "variants": [],
    "frameworks": [
     "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Vev Services Limited",
@@ -195,7 +239,9 @@
    "variants": [],
    "frameworks": [
     "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Yesss Electrical",
@@ -203,7 +249,9 @@
    "variants": [],
    "frameworks": [
     "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   }
  ],
  "awards": [
@@ -867,5 +915,388 @@
   "nations": "Scotland, Wales, Northern Ireland and Ireland",
   "policy": "Policy and demand signals",
   "data": "Data sources"
- }
+ },
+ "directorySuppliers": [
+  {
+   "name": "Agile Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Agile Medical",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Medical Healthcare Furniture",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-healthcare-furniture/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pressure Area Care and Patient Handling",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-area-care-and-patient-handling/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Medical Healthcare Furniture; Pressure Area Care and Patient Handling."
+  },
+  {
+   "name": "CK Facilities Management Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "CK Facilities Management Ltd",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Environmental Decontamination",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/environmental-decontamination/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Environmental Decontamination."
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Crest Medical Ltd",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Advanced Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/advanced-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Blood Collection Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/blood-collection-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Cleaning Equipment, Supplies and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cleaning-supplies-equipment-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Enteral Feeding, Bile Bags and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/enteral-feeding-bile-bags-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Extension Sets and Lines",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/extension-sets-and-lines/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "External Defibrillation Devices and Related Services and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/external-defibrillation-devices-related-equipment-and-associated-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "General Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/general-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Infusion Pumps and Administration Sets and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/infusion-pumps-and-administration-sets-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-gynaecology-and-sexual-health-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Orthotics, Podiatry and Immobilisation",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/orthoses-podiatry-and-immobilisation/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Temperature Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-temperature-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Physiotherapy and Occupational Therapy",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/physiotherapy-and-occupational-therapy/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Skin Cleansing, Disinfection and Hygiene",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/skin-cleansing-disinfection-and-hygiene/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Syringes, Needles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Wound Closure",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/wound-closure/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on sixteen NHS Supply Chain frameworks not counted as this speciality's: Advanced Wound Care; Blood Collection Devices; Cleaning Equipment, Supplies and Associated Products; Enteral Feeding, Bile Bags and Associated Products; Extension Sets and Lines; External Defibrillation Devices and Related Services and Accessories; General Wound Care; Infusion Pumps and Administration Sets and Associated Products; Maternity, Obstetrics, Gynaecology and Sexual Health Products; Orthotics, Podiatry and Immobilisation; Patient Temperature Management; Physiotherapy and Occupational Therapy; Skin Cleansing, Disinfection and Hygiene; Syringes, Needles and Associated Products; Total Patient Assessment Device Solutions; Wound Closure."
+  },
+  {
+   "name": "Gailarde Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Gailarde Ltd",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Curtains, Blinds and Associated Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/curtains-and-blinds/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Textiles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/textiles/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Curtains, Blinds and Associated Services; Textiles and Associated Products."
+  },
+  {
+   "name": "Grosvenor Contracts London Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Grosvenor Contracts London Ltd",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Curtains, Blinds and Associated Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/curtains-and-blinds/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Office and Outdoor Furniture",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/office-furniture/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Curtains, Blinds and Associated Services; Office and Outdoor Furniture."
+  },
+  {
+   "name": "GV Health",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "GV Health",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Cleaning Equipment, Supplies and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cleaning-supplies-equipment-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Clinical and Sharps Waste Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/clinical-and-sharps-waste-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Polymer Aprons",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/polymer-aprons/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Polymer Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/plastic-polymer-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on four NHS Supply Chain frameworks not counted as this speciality's: Cleaning Equipment, Supplies and Associated Products; Clinical and Sharps Waste Management; Polymer Aprons; Polymer Products."
+  },
+  {
+   "name": "HC Innovations",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "HC Innovations",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Paper Hygiene",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/paper-hygiene-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Wipes for Surface Cleaning and Disinfection",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/wipes-for-surface-cleaning-and-disinfection/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Paper Hygiene; Wipes for Surface Cleaning and Disinfection."
+  },
+  {
+   "name": "Interweave Textiles",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Interweave Textiles",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Pressure Area Care and Patient Handling",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-area-care-and-patient-handling/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Textiles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/textiles/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Pressure Area Care and Patient Handling; Textiles and Associated Products."
+  },
+  {
+   "name": "Serchem Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Serchem Limited",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Instrument Decontamination and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/instrument-decontamination-and-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Instrument Decontamination and Accessories."
+  },
+  {
+   "name": "Tristel Solutions Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Tristel Solutions Limited",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Cleaning Equipment, Supplies and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cleaning-supplies-equipment-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Decontamination Capital Equipment, Associated Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/decontamination-capital-equipment-endoscopy-and-sterile-services-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Instrument Decontamination and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/instrument-decontamination-and-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Cleaning Equipment, Supplies and Associated Products; Decontamination Capital Equipment, Associated Accessories and Services; Instrument Decontamination and Accessories."
+  },
+  {
+   "name": "Northumbria Healthcare Facilities Management",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Northumbria Healthcare Facilities Management",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "Single Use Theatre Protective Wear and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/single-use-theatre-protective-wear/",
+     "source": "nhssc-brief"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: Single Use Theatre Protective Wear and Related Consumables."
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": false,
+  "markets": [],
+  "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": true,
+  "whyEmpty": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "count": 0,
+  "roundupsExcluded": 0,
+  "updates": []
+ },
+ "drugTariffViiia": null
 }

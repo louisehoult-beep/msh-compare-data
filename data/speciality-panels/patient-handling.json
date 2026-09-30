@@ -20,7 +20,12 @@
   "frameworkAwards": "2026-09-30T12:30:14+00:00",
   "openTenders": "30/09/2026",
   "drugTariff": "2026-09-30",
-  "localIntel": "2026-09-30"
+  "localIntel": "2026-09-30",
+  "supplierDirectory": "2026-09-30",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-09-30",
+  "drugTariffViiia": null,
+  "hospitalPrescribing": null
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -28,7 +33,11 @@
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry.",
   "awards": "Award-stage notices whose TITLE matches /\\b(patient handling|manual handling|moving and handling|people handling|hoists?|patient sling|hoist sling|toileting sling|standing sling|falls prevention|falls management|falls detection|fall detection|falls service|mobility (?:aids?|equipment|goods|services?|scooters?)|walking aid|walking frame|rollator|crutch(?:es)?|wheelchairs?|specialist seating|postural support|riser recliner|profiling bed|hospital beds?|bed rails?|mattress(?:es)?|pressure redistribut\\w*|pressure relieving|pressure area care|patient transfer|transfer board|slide sheet|glide sheet|(?:integrated )?community equipment(?: service| loan\\w*| framework)?|aids for daily living|daily living aids?|bariatric|stand(?:ing)? aids?|turning aid|stairlift|stair lift)\\b/i and does not match /\\b(wheelchair lifts?|b7r|disabled adaptations|atw grant|hcid)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33193 or 3319212 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: handling). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 9 of the 21 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
+  "mhraDsu": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "drugTariffViiia": null
  },
  "counts": {
   "frameworks": 4,
@@ -38,7 +47,14 @@
   "awardsMatched": 168,
   "awardsWithheldByBuyerCap": 0,
   "openTenders": 0,
-  "localIntel": 0
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 61,
+  "suppliersDirectoryTagged": 21,
+  "suppliersDirectoryOnOtherFrameworks": 7,
+  "suppliersDirectoryWithFrameworkNote": 9,
+  "gpMarkets": 0,
+  "mhraDsu": 0,
+  "drugTariffViiiaLines": 0
  },
  "frameworks": [
   {
@@ -256,7 +272,9 @@
     "Physiotherapy and Occupational Therapy",
     "Pressure Area Care and Patient Handling",
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Etac Ltd",
@@ -269,7 +287,9 @@
     "Aids for Daily Living",
     "Pressure Area Care and Patient Handling",
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Invacare UK",
@@ -282,7 +302,9 @@
     "Aids for Daily Living",
     "Pressure Area Care and Patient Handling",
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "AJ Mobility Ltd",
@@ -291,7 +313,9 @@
    "frameworks": [
     "Aids for Daily Living",
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Algeo",
@@ -302,7 +326,9 @@
    "frameworks": [
     "Physiotherapy and Occupational Therapy",
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Arjo",
@@ -314,7 +340,9 @@
    "frameworks": [
     "Aids for Daily Living",
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "BES Healthcare",
@@ -326,7 +354,9 @@
    "frameworks": [
     "Pressure Area Care and Patient Handling",
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Drive DeVilbiss Healthcare UK",
@@ -338,7 +368,9 @@
    "frameworks": [
     "Aids for Daily Living",
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "GBUK Group",
@@ -350,7 +382,9 @@
    "frameworks": [
     "Aids for Daily Living",
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Inspire Community Trust",
@@ -359,7 +393,9 @@
    "frameworks": [
     "Pressure Area Care and Patient Handling",
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Lisclare",
@@ -371,7 +407,9 @@
    "frameworks": [
     "Aids for Daily Living",
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Medi-Plinth Equipment",
@@ -383,7 +421,9 @@
    "frameworks": [
     "Aids for Daily Living",
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Medline Industries",
@@ -394,7 +434,9 @@
    "frameworks": [
     "Physiotherapy and Occupational Therapy",
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Peacocks Medical Group",
@@ -406,7 +448,9 @@
    "frameworks": [
     "Pressure Area Care and Patient Handling",
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Prism Medical UK",
@@ -417,7 +461,9 @@
    "frameworks": [
     "Aids for Daily Living",
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Promedics Orthopaedics Ltd",
@@ -428,7 +474,9 @@
    "frameworks": [
     "Physiotherapy and Occupational Therapy",
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Rehabilitation Manufacturing Services",
@@ -439,7 +487,9 @@
    "frameworks": [
     "Aids for Daily Living",
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Roma Medical Aids Ltd",
@@ -450,7 +500,9 @@
    "frameworks": [
     "Aids for Daily Living",
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Sunrise Medical Ltd",
@@ -459,7 +511,9 @@
    "frameworks": [
     "Aids for Daily Living",
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Ultimate Healthcare",
@@ -471,7 +525,9 @@
    "frameworks": [
     "Aids for Daily Living",
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Aayan Medical Imaging Limited",
@@ -479,7 +535,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Accora",
@@ -489,7 +547,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Agile Medical",
@@ -499,7 +559,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Aidapt Bathrooms Ltd",
@@ -507,7 +569,9 @@
    "variants": [],
    "frameworks": [
     "Aids for Daily Living"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "AM Healthcare Group",
@@ -515,7 +579,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Apollo Healthcare Technologies",
@@ -525,7 +591,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Baxter / Hillrom",
@@ -535,7 +603,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Benmor Medical",
@@ -543,7 +613,9 @@
    "variants": [],
    "frameworks": [
     "Aids for Daily Living"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Blatchford Limited",
@@ -551,7 +623,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Brighthedge Ltd T/A Summit Medical and Scientific",
@@ -559,7 +633,9 @@
    "variants": [],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Cefndy Healthcare",
@@ -567,7 +643,9 @@
    "variants": [],
    "frameworks": [
     "Aids for Daily Living"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Central Medical Supplies",
@@ -577,7 +655,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Chiltern Invadex (UK) Limited",
@@ -585,7 +665,9 @@
    "variants": [],
    "frameworks": [
     "Aids for Daily Living"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Chunc Limited",
@@ -593,7 +675,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "CJ Medical",
@@ -603,7 +687,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Consolor Ltd",
@@ -611,7 +697,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Crest Medical Ltd",
@@ -619,7 +707,9 @@
    "variants": [],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Croyde Medical",
@@ -629,7 +719,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Cuxson Gerrard & Company Limited",
@@ -637,7 +729,9 @@
    "variants": [],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Delta Surgical",
@@ -647,7 +741,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "DGT Services Ltd",
@@ -655,7 +751,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Direct Healthcare Group",
@@ -663,7 +761,9 @@
    "variants": [],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Direct Manufacturing",
@@ -673,7 +773,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "DJO UK Ltd (Enovis)",
@@ -683,7 +785,9 @@
    ],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Enable Access Ltd",
@@ -691,7 +795,9 @@
    "variants": [],
    "frameworks": [
     "Aids for Daily Living"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Essential Healthcare Solutions (UK) Ltd",
@@ -699,7 +805,9 @@
    "variants": [],
    "frameworks": [
     "Aids for Daily Living"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Essity UK Limited",
@@ -709,7 +817,9 @@
    ],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Eureka Physiocare Ltd",
@@ -719,7 +829,9 @@
    ],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Fannin (UK) Limited",
@@ -729,7 +841,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Felgains",
@@ -737,7 +851,9 @@
    "variants": [],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "FormAL Group Ltd",
@@ -745,7 +861,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Frontier Therapeutics",
@@ -753,7 +871,9 @@
    "variants": [],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "GAMA Healthcare",
@@ -763,7 +883,9 @@
    ],
    "frameworks": [
     "Aids for Daily Living"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Guldmann",
@@ -773,7 +895,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Harvest Healthcare",
@@ -781,7 +905,9 @@
    "variants": [],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Health-Care Equipment & Supplies",
@@ -791,7 +917,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Henleys Medical Supplies Limited",
@@ -799,7 +927,9 @@
    "variants": [],
    "frameworks": [
     "Aids for Daily Living"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Hospital Direct",
@@ -807,7 +937,9 @@
    "variants": [],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Howard Wright Europe",
@@ -817,7 +949,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Independence Mobility Limited",
@@ -825,7 +959,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Interweave Textiles",
@@ -833,7 +969,9 @@
    "variants": [],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "iQ Medical",
@@ -843,7 +981,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Karma Mobility Ltd",
@@ -851,7 +991,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Kinetik Medical Devices",
@@ -861,7 +1003,9 @@
    ],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Koolpak Ltd",
@@ -869,7 +1013,9 @@
    "variants": [],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Langham Gordon Ellis",
@@ -877,7 +1023,9 @@
    "variants": [],
    "frameworks": [
     "Aids for Daily Living"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "LINET UK",
@@ -887,7 +1035,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)",
@@ -895,7 +1045,9 @@
    "variants": [],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medequip Assistive Technology",
@@ -905,7 +1057,9 @@
    ],
    "frameworks": [
     "Aids for Daily Living"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
@@ -913,7 +1067,9 @@
    "variants": [],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medichill UK Ltd",
@@ -921,7 +1077,9 @@
    "variants": [],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medinox (London) Limited",
@@ -929,7 +1087,9 @@
    "variants": [],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medserve (South West)",
@@ -939,7 +1099,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Medstrom",
@@ -949,7 +1111,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Meglio Ltd",
@@ -957,7 +1121,9 @@
    "variants": [],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Merits Health Products UK Ltd",
@@ -965,7 +1131,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "MEYRA UK LTD",
@@ -973,7 +1141,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Millbrook Healthcare",
@@ -983,7 +1153,9 @@
    ],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "MIP UK",
@@ -993,7 +1165,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Montcalm International",
@@ -1003,7 +1177,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Mölnlycke",
@@ -1013,7 +1189,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Nottingham Rehab Limited (Trading as NRS Healthcare)",
@@ -1021,7 +1199,9 @@
    "variants": [],
    "frameworks": [
     "Aids for Daily Living"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Omnimedical Ltd",
@@ -1029,7 +1209,9 @@
    "variants": [],
    "frameworks": [
     "Aids for Daily Living"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Orca Medical Ltd",
@@ -1037,7 +1219,9 @@
    "variants": [],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "OSKA Care",
@@ -1047,7 +1231,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Otto Bock Healthcare PLC",
@@ -1055,7 +1241,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Phoenix Medical Ltd",
@@ -1063,7 +1251,9 @@
    "variants": [],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Physiolab Technologies Limited",
@@ -1071,7 +1261,9 @@
    "variants": [],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Praxis Medical Ltd",
@@ -1079,7 +1271,9 @@
    "variants": [],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Pride Mobility Products Ltd",
@@ -1087,7 +1281,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "ProSys International Ltd",
@@ -1095,7 +1291,9 @@
    "variants": [],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "R Link Ltd",
@@ -1103,7 +1301,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Reliance Medical",
@@ -1113,7 +1313,9 @@
    ],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Renray Healthcare",
@@ -1123,7 +1325,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Ross Auto Engineering Limited",
@@ -1131,7 +1335,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Seating Matters",
@@ -1139,7 +1345,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Select Health Care (UK)",
@@ -1149,7 +1357,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Silvalea",
@@ -1159,7 +1369,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Spex UK Limited",
@@ -1167,7 +1379,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Splice Cast Ltd t/a Eureka Physiocare",
@@ -1175,7 +1389,9 @@
    "variants": [],
    "frameworks": [
     "Aids for Daily Living"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Steris",
@@ -1185,7 +1401,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Stryker",
@@ -1195,7 +1413,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Talarmade Limited",
@@ -1205,7 +1425,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "TENDERCARE LTD",
@@ -1213,7 +1435,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "The Helping Hand Company",
@@ -1221,7 +1445,9 @@
    "variants": [],
    "frameworks": [
     "Aids for Daily Living"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Thera Trainer UK Ltd",
@@ -1229,7 +1455,9 @@
    "variants": [],
    "frameworks": [
     "Physiotherapy and Occupational Therapy"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Trulife Limited",
@@ -1237,7 +1465,9 @@
    "variants": [],
    "frameworks": [
     "Aids for Daily Living"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Valley Northern Ltd",
@@ -1245,7 +1475,9 @@
    "variants": [],
    "frameworks": [
     "Aids for Daily Living"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Vernacare",
@@ -1255,7 +1487,9 @@
    ],
    "frameworks": [
     "Aids for Daily Living"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Wealden Rehab",
@@ -1265,7 +1499,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "WHEELSHARE (LONDON) LTD",
@@ -1273,7 +1509,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "William Davies Care Limited",
@@ -1281,7 +1519,9 @@
    "variants": [],
    "frameworks": [
     "Wheelchairs, Specialist Seating and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Winncare UK",
@@ -1291,7 +1531,9 @@
    ],
    "frameworks": [
     "Pressure Area Care and Patient Handling"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   }
  ],
  "awards": [
@@ -1722,7 +1964,7 @@
   {
    "title": "Pressure Area Care and Patient Handling",
    "buyer": "Supply Chain Coordination Limited",
-   "supplier": "A.Algeo Limited, Accora Limited, Agile Medical Ltd, Apollo Healthcare Technologi",
+   "supplier": "A.Algeo Limited, Accora Limited, Agile Medical Ltd, Apollo Healthcare Technologies Limited, Arjo UK Limited, BES Healthcare Ltd, Central Medical Supplies Ltd, C J Medical Limited, Croyde Medical Limited, Delta Surgical Limited, Direct Healthcare Group Limited, Direct Manufacturing Limited, Drive Devilbiss Healthcare Limited, Essential Healthcare Solutions (UK) Limited, Etac Limited, Felgains Ltd, Form-Al group Ltd, Frontier Therapeutics Limited, GBUK Ltd, Harvest Healthcare Limited, Health-Care Equipment and Supplies Co Ltd, Hill-Rom Limited, Hospital Direct (Marketing) Ltd, Howard Wright Europe Limited, Inspire Community Trust, Interweave Textiles Limited, Invacare Limited, IQ Medical Limited, Iskus Health UK Ltd, Linet UK Limited, Liscare Limited, Live By Lulu Limited, Medi-Plinth Equipment Limited, Medline Industries Limited, Medstrom Ltd, Med-I-Pant (U.K.) Limited, Molnlycke Health Care Limited, Montcalm International Limited, Nottingham Rehab Limited, Oska Care Limited, Peacocks Medical Group Limited, Performance Health International Limited, Pressure Care Management Limited, Prism UK Medical Limited, Promedics Orthopaedics Limited, Prosys International Limited, Renray Healthcare Limited, Select Health Care (UK) Ltd, Silvalea Limited, Steris Solutions Limited, Stryker UK Limited, Talar-Made Limited, Ultimate Healthcare Ltd, V. Guldmann A/S, Wealden Rehab Ltd, Winncare Pac Limited",
    "date": "2025-12-30",
    "url": "https://www.find-tender.service.gov.uk/Notice/086469-2025",
    "value": null,
@@ -1732,7 +1974,7 @@
   {
    "title": "Pressure Area Care and Patient Handling",
    "buyer": "Supply Chain Coordination Limited",
-   "supplier": "A.Algeo Limited, Accora Limited, Agile Medical Ltd, Apollo Healthcare Technologi",
+   "supplier": "A.Algeo Limited, Accora Limited, Agile Medical Ltd, Apollo Healthcare Technologies Limited, Arjo UK Limited, BES Healthcare Ltd, Central Medical Supplies Limited, C J Medical Limited, Croyde Medical Limited, Delta Surgical Limited, Direct Healthcare Group Limited, Direct Manufacturing Limited, Drive Devilbiss Healthcare Limited, Essential Healthcare Solutions (UK) Limited, Etac Limited, Felgains Ltd, Form-Al group Ltd, Frontier Therapeutics Limited, GBUK Ltd, Harvest Healthcare Limited, Health-Care Equipment and Supplies Co Ltd, Hill-Rom Limited, Hospital Direct (Marketing) Limited, Howard Wright Europe Limited, Inspire Community Trust, Interweave Textiles Limited, Invacare Limited, IQ Medical Limited, Iskus Health UK Ltd, Linet UK Limited, Liscare Limited, Live By Lulu Limited, Medi-Plinth Equipment Limited, Medline Industries Limited, Medserve (South West) Ltd, Medstrom Ltd, Med-I-Pant (U.K.) Limited, Molnlycke Health Care Limited, Montcalm International Limited, Nottingham Rehab Limited, Osaka Care Limited, Peacocks Medical Group Limited, Performance Health International Limited, Pressure Care Management Limited, Prism UK Medical Limited, Promedics Orthopaedics Limited, Prosys International Limited, Renray Healthcare Limited, Select Health Care (UK) Limited, Silvalea Limited, Steris Solutions Limited, Stryker UK Limited, Talar-Made Limited, Ultimate Healthcare Ltd, V. Guldmann A/S, Wealden Rehab Ltd, Winncare Pac Limited",
    "date": "2025-12-05",
    "url": "https://www.contractsfinder.service.gov.uk/Notice/b5aae683-346a-49b9-8f8c-98d1b6f05b56",
    "value": 198450000,
@@ -1822,7 +2064,7 @@
   {
    "title": "Wheelchairs, Specialist Seating and Related Services",
    "buyer": "Supply Chain Coordination Limited",
-   "supplier": "Aayan Medical Imaging Limited, AJ Mobility Ltd, AM Healthcare Group, BES Healthc",
+   "supplier": "Aayan Medical Imaging Limited, AJ Mobility Ltd, AM Healthcare Group, BES Healthcare, Blatchford Limited, Chunc Limited, Consolor Ltd, Etac Ltd, FormAL Group Ltd, Independence Mobility Limited, Invacare LTD, Karma Mobility Ltd, Merits Health Products UK Ltd, Meyra UK Ltd, Otto Bock Healthcare PLC, Peacocks Medical Group, Performance Health International Limited, Pride Mobility Products Ltd, R Link Ltd, Rehabilitation Manufacturing Services ltd, Roma Medical Aids ltd, Seating Matters, Spex UK Limited, Sunrise Medical Ltd, Tendercare Ltd, Wheelshare London Ltd, William Davies Care Limited",
    "date": "2025-08-05",
    "url": "https://www.find-tender.service.gov.uk/Notice/046177-2025",
    "value": null,
@@ -1840,5 +2082,484 @@
   "nations": "Scotland, Wales, Northern Ireland and Ireland",
   "policy": "Policy and demand signals",
   "data": "Data sources"
- }
+ },
+ "directorySuppliers": [
+  {
+   "name": "Acime UK Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Acime UK Ltd",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Medical Healthcare Furniture",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-healthcare-furniture/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Renal Replacement Therapies Services, Technologies and Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/renal-replacement-therapy-equipment-and-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Medical Healthcare Furniture; Operating Theatres Equipment and Related Accessories and Services; Renal Replacement Therapies Services, Technologies and Consumables."
+  },
+  {
+   "name": "Anetic Aid Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Anetic Aid Ltd",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Medical Healthcare Furniture",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-healthcare-furniture/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Orthopaedic Solutions 3",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-orthopaedic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Medical Healthcare Furniture; Operating Theatres Equipment and Related Accessories and Services; Total Orthopaedic Solutions 3."
+  },
+  {
+   "name": "Baxter Healthcare Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Baxter Healthcare Ltd",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Extension Sets and Lines",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/extension-sets-and-lines/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Infusion Pumps and Administration Sets and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/infusion-pumps-and-administration-sets-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Needlefree Connection Systems and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/needlefree-connection-systems-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Orthopaedic Solutions 3",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-orthopaedic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Urology and Bowel Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/urology-and-bowel-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Wound Closure",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/wound-closure/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Needle-free Connection Systems",
+     "url": "https://www.find-tender.service.gov.uk/Notice/074575-2025",
+     "source": "Find a Tender contract award notice; dates and supplier count from NHS Supply Chain launch brief"
+    },
+    {
+     "name": "NHS TPN framework",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on six NHS Supply Chain frameworks not counted as this speciality's: Extension Sets and Lines; Infusion Pumps and Administration Sets and Associated Products; Needlefree Connection Systems and Associated Products; Total Orthopaedic Solutions 3; Urology and Bowel Management; Wound Closure. The Hub's supplier directory also records: NHS Supply Chain — Needle-free Connection Systems; NHS TPN framework; NHS SBS — SBS10142."
+  },
+  {
+   "name": "Ocura Healthcare Furniture",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Ocura Healthcare Furniture",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Medical Healthcare Furniture",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-healthcare-furniture/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Medical Healthcare Furniture."
+  },
+  {
+   "name": "Talley",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Talley",
+   "seedLabels": [
+    "Moving and handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Negative Pressure Wound Therapy",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/negative-pressure-wound-therapy/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Negative Pressure Wound Therapy. The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Uniphar Medtech",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Uniphar Medtech",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Minimally Invasive Surgery, Related Equipment and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/minimally-invasive-surgery/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Perfusion Devices, Consumables and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/perfusion/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Minimally Invasive Surgery, Related Equipment and Accessories; Perfusion Devices, Consumables and Associated Equipment; Total Patient Assessment Device Solutions."
+  },
+  {
+   "name": "Urathon Europe Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Urathon Europe Ltd",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/insulin-pumps-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Insulin Pumps, CGM & Hybrid Closed Loop (2025/S 000-4043)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products. The Hub's supplier directory also records: NHS Supply Chain — Insulin Pumps, CGM & Hybrid Closed Loop (2025/S 000-4043)."
+  },
+  {
+   "name": "3ET (Ltd)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "3ET (Ltd)",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "A1 Momentum",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "A1 Momentum",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "CareFlex",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "CareFlex",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Caversham Health",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Caversham Health",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Herida Healthcare",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Herida Healthcare",
+   "seedLabels": [
+    "Moving and handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Jeenie Solutions",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Jeenie Solutions",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Jiraffe (Jenx)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Jiraffe (Jenx)",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Wheelchairs & Specialist Seating",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS Supply Chain — Wheelchairs & Specialist Seating."
+  },
+  {
+   "name": "Mangar International",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Mangar International",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Njord Medtech",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Njord Medtech",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Oxford Medical Healthcare Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Oxford Medical Healthcare Ltd",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Permobil UK",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Permobil UK",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Wheelchairs & Specialist Seating",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS Supply Chain — Wheelchairs & Specialist Seating."
+  },
+  {
+   "name": "Simply Moving and Sleeping",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Simply Moving and Sleeping",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Tierco Healthcare Group",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Tierco Healthcare Group",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Vivid Care",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Vivid Care",
+   "seedLabels": [
+    "Patient handling"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": false,
+  "markets": [],
+  "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": true,
+  "whyEmpty": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "count": 0,
+  "roundupsExcluded": 0,
+  "updates": []
+ },
+ "drugTariffViiia": null
 }

@@ -20,7 +20,12 @@
   "frameworkAwards": "2026-09-30T12:30:14+00:00",
   "openTenders": "30/09/2026",
   "drugTariff": "2026-09-30",
-  "localIntel": "2026-09-30"
+  "localIntel": "2026-09-30",
+  "supplierDirectory": "2026-09-30",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-09-30",
+  "drugTariffViiia": "2026-09-30",
+  "hospitalPrescribing": null
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -28,7 +33,11 @@
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. The single agreement this speciality is mostly bought on is not counted below. NHS Supply Chain's Interventional Cardiology, Interventional Radiology and Interventional Neuroradiology, Cardiac Rhythm Management and Electrophysiology framework (2021/S 000-017565), which carries the coronary, rhythm management, electrophysiology and intracardiac monitoring lots and 67 suppliers, publishes a supplier count on its brief but no list of names, so the Hub's framework dataset records it as unparsed and its suppliers cannot be named here. That agreement ends on 26 February 2027 and its successor, Find a Tender 2026/S 000-043775 Total Cardiology and Vascular Solutions, has an estimated award decision of 8 December 2026, so the framework picture on this patch is due to change wholesale within the year. Resuscitation is also deliberately absent: the External Defibrillation Devices framework and the Electrodes, Ultrasound Gels and Defibrillation consumables framework are not counted here, because their supplier lists are public access defibrillator distributors and general ward consumables rather than this speciality's market. What follows is therefore the structural heart, perfusion, cardiac physiology and catheter laboratory capital end of the patch, which is what the framework record holds, plus the award trail for the rest. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from this market. The page's Buying route and Framework calendar sections set out the full picture with their expiry dates.",
   "awards": "Award-stage notices whose TITLE matches /\\b(cardi[ao]\\w*|echocardi\\w*|myocardial|coronary|angina|\\becg\\b|electrocardiogra\\w*|holter|cath ?labs?\\b|catheteri[sz]ation lab\\w*|pacemakers?|pacing (?:lead|wire|system|pack)s?|implantable cardioverter|electrophysiolog\\w*|pulsed[- ]field ablation|catheter ablation|structural heart|transcatheter|\\btavi\\b|\\btavr\\b|heart valves?|mitral|tricuspid|aortic root|ventricular assist|impella|heart pumps?|mechanical circulatory|\\becmo\\b|atrial appendage|atrial fibrillation|perfusion|oxygenators?)\\b/i and does not match /\\b(medicines|ophthalm\\w*|lifeport|static perfusion|perfusion fluid|anaesthe\\w*|principal designer|training programme|cardiomyocyte|port-a-patch)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33112340 or 33121500 or 33123 or 85121231 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: cardiology). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 15 of the 15 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (23 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-09-30.",
+  "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-09: narrowed to the lines whose medicine NHSBSA prescribes under BNF chapter 2. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 53 of the 3,533 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
  },
  "counts": {
   "frameworks": 4,
@@ -38,7 +47,14 @@
   "awardsMatched": 183,
   "awardsWithheldByBuyerCap": 0,
   "openTenders": 0,
-  "localIntel": 0
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 17,
+  "suppliersDirectoryTagged": 15,
+  "suppliersDirectoryOnOtherFrameworks": 11,
+  "suppliersDirectoryWithFrameworkNote": 15,
+  "gpMarkets": 1,
+  "mhraDsu": 138,
+  "drugTariffViiiaLines": 448
  },
  "frameworks": [
   {
@@ -199,7 +215,9 @@
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
     "Perfusion Devices, Consumables and Associated Equipment",
     "Structural Heart and Ventricular Assist Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "GE HealthCare",
@@ -210,7 +228,9 @@
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Philips",
@@ -221,7 +241,9 @@
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Abbott Medical U.K. Ltd",
@@ -229,7 +251,9 @@
    "variants": [],
    "frameworks": [
     "Structural Heart and Ventricular Assist Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Abiomed Ltd",
@@ -237,7 +261,9 @@
    "variants": [],
    "frameworks": [
     "Structural Heart and Ventricular Assist Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Agito Medical A/S",
@@ -245,7 +271,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "AmRay UK",
@@ -253,7 +281,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "APC Cardiovascular Ltd",
@@ -261,7 +291,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Aquilant Limited",
@@ -269,7 +301,9 @@
    "variants": [],
    "frameworks": [
     "Structural Heart and Ventricular Assist Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Artivion UK Ltd",
@@ -279,7 +313,9 @@
    ],
    "frameworks": [
     "Structural Heart and Ventricular Assist Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Baxter / Hillrom",
@@ -289,7 +325,9 @@
    ],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "BD — Becton, Dickinson",
@@ -299,7 +337,9 @@
    ],
    "frameworks": [
     "Structural Heart and Ventricular Assist Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Broomwell Healthwatch",
@@ -307,7 +347,9 @@
    "variants": [],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Cambridge Heartwear",
@@ -315,7 +357,9 @@
    "variants": [],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Canon Medical Systems",
@@ -323,7 +367,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "CardioScan Ltd",
@@ -331,7 +377,9 @@
    "variants": [],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Chalice Medical Ltd",
@@ -339,7 +387,9 @@
    "variants": [],
    "frameworks": [
     "Perfusion Devices, Consumables and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Compleo Health Limited",
@@ -347,7 +397,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Corcym UK (Holding) Ltd",
@@ -355,7 +407,9 @@
    "variants": [],
    "frameworks": [
     "Structural Heart and Ventricular Assist Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Cortrium ApS",
@@ -363,7 +417,9 @@
    "variants": [],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Edwards Lifesciences",
@@ -373,7 +429,9 @@
    ],
    "frameworks": [
     "Structural Heart and Ventricular Assist Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Express Diagnostics Ltd",
@@ -381,7 +439,9 @@
    "variants": [],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Fukuda Denshi UK Ltd",
@@ -389,7 +449,9 @@
    "variants": [],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Genmed.Me Ltd",
@@ -397,7 +459,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Getinge",
@@ -407,7 +471,9 @@
    ],
    "frameworks": [
     "Perfusion Devices, Consumables and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Icentia Limited",
@@ -415,7 +481,9 @@
    "variants": [],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "InHealth Ltd",
@@ -423,7 +491,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Intermedical (UK) Ltd",
@@ -431,7 +501,9 @@
    "variants": [],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "iRhythm Technologies Ltd",
@@ -439,7 +511,9 @@
    "variants": [],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Jaeger Medical UK Limited",
@@ -447,7 +521,9 @@
    "variants": [],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "LifeSignals Europe Limited",
@@ -455,7 +531,9 @@
    "variants": [],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "LivaNova UK Limited",
@@ -463,7 +541,9 @@
    "variants": [],
    "frameworks": [
     "Perfusion Devices, Consumables and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Love Medical",
@@ -471,7 +551,9 @@
    "variants": [],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medical Graphics UK Ltd",
@@ -479,7 +561,9 @@
    "variants": [],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Meril UK Pvt Ltd",
@@ -487,7 +571,9 @@
    "variants": [],
    "frameworks": [
     "Structural Heart and Ventricular Assist Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Mindray UK",
@@ -497,7 +583,9 @@
    ],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Numed Healthcare",
@@ -507,7 +595,9 @@
    ],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "R&D Surgical Ltd",
@@ -515,7 +605,9 @@
    "variants": [],
    "frameworks": [
     "Structural Heart and Ventricular Assist Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Regent’s Park Healthcare",
@@ -523,7 +615,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Schiller UK Limited",
@@ -533,7 +627,9 @@
    ],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Seca Ltd",
@@ -543,7 +639,9 @@
    ],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Siemens Healthineers",
@@ -553,7 +651,9 @@
    ],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Spacelabs Healthcare Ltd",
@@ -561,7 +661,9 @@
    "variants": [],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Spectrum Medical Limited",
@@ -569,7 +671,9 @@
    "variants": [],
    "frameworks": [
     "Perfusion Devices, Consumables and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Technomed Ltd",
@@ -577,7 +681,9 @@
    "variants": [],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Terumo UK",
@@ -587,7 +693,9 @@
    ],
    "frameworks": [
     "Perfusion Devices, Consumables and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "TFX Group Ltd (Teleflex Medical)",
@@ -597,7 +705,9 @@
    ],
    "frameworks": [
     "Perfusion Devices, Consumables and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Uniphar Medtech",
@@ -607,7 +717,9 @@
    ],
    "frameworks": [
     "Perfusion Devices, Consumables and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
@@ -617,7 +729,9 @@
    ],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "United Imaging Health Ltd",
@@ -625,7 +739,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Walters Medical Ltd",
@@ -633,7 +749,9 @@
    "variants": [],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Williams Medical Supplies",
@@ -643,7 +761,9 @@
    ],
    "frameworks": [
     "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "WSR Medical Solutions Ltd",
@@ -651,7 +771,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "XVIVO",
@@ -659,7 +781,9 @@
    "variants": [],
    "frameworks": [
     "Perfusion Devices, Consumables and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   }
  ],
  "awards": [
@@ -1115,7 +1239,7 @@
   {
    "title": "Cath Labs and Cardiology Stents",
    "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotland) (NSS)",
-   "supplier": "Abbott Medical U.K. Ltd, APR Medtech Ltd, Biosensors International UK Limited, B",
+   "supplier": "Abbott Medical U.K. Ltd, APR Medtech Ltd, Biosensors International UK Limited, Boston Scientific, BVM Medical Limited, Cordis Medical UK Limited, GAP Medical Solutions Ltd, Medtronic Limited, Revasc Ltd, Terumo UK Ltd, Teleflex, Vascular Perspectives Ltd, SMT",
    "date": "2026-06-12",
    "url": "https://www.find-tender.service.gov.uk/Notice/055594-2026",
    "value": null,
@@ -1125,7 +1249,7 @@
   {
    "title": "NHSGJ0090/22 Supply of Heart Valves and Associated Products",
    "buyer": "NHS Golden Jubilee",
-   "supplier": "LeMaitre Vascular Limited, Corcym UK (Holding) Ltd, Edwards Lifesciences Ltd, Me",
+   "supplier": "LeMaitre Vascular Limited, Corcym UK (Holding) Ltd, Edwards Lifesciences Ltd, Medtronic Limited",
    "date": "2026-06-05",
    "url": "https://www.find-tender.service.gov.uk/Notice/053435-2026",
    "value": null,
@@ -1213,5 +1337,2410 @@
   "nations": "Scotland, Wales, Northern Ireland and Ireland",
   "policy": "Policy and demand signals",
   "data": "Data sources"
+ },
+ "directorySuppliers": [
+  {
+   "name": "Alivecor Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Alivecor Ltd",
+   "seedLabels": [
+    "Cardiology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Total Patient Assessment Device Solutions."
+  },
+  {
+   "name": "Boston Scientific",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Boston Scientific",
+   "seedLabels": [
+    "Cardiology / interventional",
+    "Cardiology"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Neuromodulation Devices and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/neuromodulation-devices-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Radiotherapy Treatment Systems and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-treatment-systems-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Implants for Men’s and Women’s Health",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-implants-for-mens-and-womens-health/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Mesh",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-mesh/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on seven NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Neuromodulation Devices and Associated Products; Operating Theatres Equipment and Related Accessories and Services; Radiotherapy Treatment Systems and Associated Options and Related Services; Surgical Implants for Men’s and Women’s Health; Surgical Mesh. The Hub's supplier directory also records: NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)."
+  },
+  {
+   "name": "Cook Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Cook Medical",
+   "seedLabels": [
+    "Cardiology / interventional",
+    "Cardiology"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Operating Theatres Equipment and Related Accessories and Services. The Hub's supplier directory also records: NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)."
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Crest Medical Ltd",
+   "seedLabels": [
+    "Cardiology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Advanced Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/advanced-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Blood Collection Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/blood-collection-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Cleaning Equipment, Supplies and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cleaning-supplies-equipment-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Enteral Feeding, Bile Bags and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/enteral-feeding-bile-bags-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Extension Sets and Lines",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/extension-sets-and-lines/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "External Defibrillation Devices and Related Services and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/external-defibrillation-devices-related-equipment-and-associated-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "General Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/general-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Infusion Pumps and Administration Sets and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/infusion-pumps-and-administration-sets-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-gynaecology-and-sexual-health-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Orthotics, Podiatry and Immobilisation",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/orthoses-podiatry-and-immobilisation/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Temperature Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-temperature-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Physiotherapy and Occupational Therapy",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/physiotherapy-and-occupational-therapy/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Skin Cleansing, Disinfection and Hygiene",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/skin-cleansing-disinfection-and-hygiene/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Syringes, Needles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Wound Closure",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/wound-closure/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on sixteen NHS Supply Chain frameworks not counted as this speciality's: Advanced Wound Care; Blood Collection Devices; Cleaning Equipment, Supplies and Associated Products; Enteral Feeding, Bile Bags and Associated Products; Extension Sets and Lines; External Defibrillation Devices and Related Services and Accessories; General Wound Care; Infusion Pumps and Administration Sets and Associated Products; Maternity, Obstetrics, Gynaecology and Sexual Health Products; Orthotics, Podiatry and Immobilisation; Patient Temperature Management; Physiotherapy and Occupational Therapy; Skin Cleansing, Disinfection and Hygiene; Syringes, Needles and Associated Products; Total Patient Assessment Device Solutions; Wound Closure."
+  },
+  {
+   "name": "Huntleigh",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Huntleigh",
+   "seedLabels": [
+    "Cardiology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Digital Diagnostic Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-gynaecology-and-sexual-health-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Orthotics, Podiatry and Immobilisation",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/orthoses-podiatry-and-immobilisation/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-monitoring-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on four NHS Supply Chain frameworks not counted as this speciality's: Digital Diagnostic Solutions; Maternity, Obstetrics, Gynaecology and Sexual Health Products; Orthotics, Podiatry and Immobilisation; Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services. The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Johnson & Johnson MedTech",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Johnson & Johnson MedTech",
+   "seedLabels": [
+    "Cardiology / interventional",
+    "Cardiology"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Central Venous Catheters and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/central-venous-catheters-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrosurgical Consumables and Related Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrosurgical-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Minimally Invasive Surgery, Related Equipment and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/minimally-invasive-surgery/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Implants for Men’s and Women’s Health",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-implants-for-mens-and-womens-health/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Mesh",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-mesh/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Orthopaedic Solutions 3",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-orthopaedic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Wound Closure",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/wound-closure/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on nine NHS Supply Chain frameworks not counted as this speciality's: Central Venous Catheters and Associated Products; Electrosurgical Consumables and Related Accessories; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Minimally Invasive Surgery, Related Equipment and Accessories; Operating Theatres Equipment and Related Accessories and Services; Surgical Implants for Men’s and Women’s Health; Surgical Mesh; Total Orthopaedic Solutions 3; Wound Closure. The Hub's supplier directory also records: NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)."
+  },
+  {
+   "name": "Merit Medical UK Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Merit Medical UK Ltd",
+   "seedLabels": [
+    "Cardiology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Extension Sets and Lines",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/extension-sets-and-lines/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Intravenous Accessories and Pressure Monitoring Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Needlefree Connection Systems and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/needlefree-connection-systems-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pressure Infusers and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-infusers-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Syringes, Needles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Syringes & Needles",
+     "url": "https://www.find-tender.service.gov.uk/Notice/002484-2026",
+     "source": "Find a Tender contract award notice"
+    }
+   ],
+   "frameworkNote": "Named on six NHS Supply Chain frameworks not counted as this speciality's: Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Extension Sets and Lines; Intravenous Accessories and Pressure Monitoring Accessories; Needlefree Connection Systems and Associated Products; Pressure Infusers and Associated Products; Syringes, Needles and Associated Products. The Hub's supplier directory also records: NHS Supply Chain — Syringes & Needles."
+  },
+  {
+   "name": "NISSHA Medical Technologies",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "NISSHA Medical Technologies",
+   "seedLabels": [
+    "Cardiology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrosurgical Consumables and Related Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrosurgical-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Medical Chart Paper and Ultrasound Film",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-chart-paper-and-ultrasound-film/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on four NHS Supply Chain frameworks not counted as this speciality's: Electrodes, Ultrasound Gels, Defibrillation and Related Consumables; Electrosurgical Consumables and Related Accessories; Medical Chart Paper and Ultrasound Film; Total Patient Assessment Device Solutions."
+  },
+  {
+   "name": "Terumo Aortic",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Terumo Aortic",
+   "seedLabels": [
+    "Cardiology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Wound Closure",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/wound-closure/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Wound Closure."
+  },
+  {
+   "name": "W.L. Gore & Associates",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "W.L. Gore & Associates",
+   "seedLabels": [
+    "Cardiology / interventional",
+    "Cardiology"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Minimally Invasive Surgery, Related Equipment and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/minimally-invasive-surgery/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Mesh",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-mesh/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Minimally Invasive Surgery, Related Equipment and Accessories; Surgical Mesh. The Hub's supplier directory also records: NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)."
+  },
+  {
+   "name": "Zoll Medical UK Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Zoll Medical UK Limited",
+   "seedLabels": [
+    "Cardiology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "External Defibrillation Devices and Related Services and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/external-defibrillation-devices-related-equipment-and-associated-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Medical Chart Paper and Ultrasound Film",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-chart-paper-and-ultrasound-film/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/non-invasive-ventilation-sleep-therapy-cpap-sleep-monitoring-diagnostics/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-monitoring-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pulse-oximetry-and-capnography-devices-and-support-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Simulation Devices and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/simulation-devices-and-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on eight NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Electrodes, Ultrasound Gels, Defibrillation and Related Consumables; External Defibrillation Devices and Related Services and Accessories; Medical Chart Paper and Ultrasound Film; Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics; Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services; Pulse Oximetry, Capnography and Related Monitoring Technologies; Simulation Devices and Services."
+  },
+  {
+   "name": "Aspire Pharma",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Aspire Pharma",
+   "seedLabels": [
+    "Cardiology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS England — NHS National Generic Pharmaceuticals, Wave 16a",
+     "url": "https://www.find-tender.service.gov.uk/Notice/082784-2026",
+     "source": "Find a Tender contract award notice"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142; NHS England — NHS National Generic Pharmaceuticals, Wave 16a."
+  },
+  {
+   "name": "Biotronik",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Biotronik",
+   "seedLabels": [
+    "Cardiology / interventional",
+    "Cardiology"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)."
+  },
+  {
+   "name": "Cordis",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Cordis",
+   "seedLabels": [
+    "Cardiology / interventional",
+    "Cardiology"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)."
+  },
+  {
+   "name": "Penumbra",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Penumbra",
+   "seedLabels": [
+    "Cardiology / interventional",
+    "Cardiology"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)."
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": true,
+  "markets": [
+   {
+    "id": "cv",
+    "label": "Cardiovascular system: BNF chapter 2",
+    "bnf": [
+     "chapter 2"
+    ],
+    "note": null,
+    "latestPeriod": "202607",
+    "baselinePeriod": "202507",
+    "items": 35257489,
+    "cost": 123573973,
+    "items12m": 396008041,
+    "cost12m": 1187547593,
+    "itemsYoY": 3.8,
+    "products": 343,
+    "topNational": [
+     {
+      "code": "0212000B0AA",
+      "label": "Atorvastatin",
+      "generic": true,
+      "items": 7074298,
+      "share": 20.1,
+      "cost": 6210533,
+      "yoy": 5.2
+     },
+     {
+      "code": "0206020A0AA",
+      "label": "Amlodipine",
+      "generic": true,
+      "items": 3654410,
+      "share": 10.4,
+      "cost": 2905541,
+      "yoy": 2.8
+     },
+     {
+      "code": "0205051R0AA",
+      "label": "Ramipril",
+      "generic": true,
+      "items": 3243868,
+      "share": 9.2,
+      "cost": 12462167,
+      "yoy": 2.9
+     },
+     {
+      "code": "0204000H0AA",
+      "label": "Bisoprolol",
+      "generic": true,
+      "items": 2807460,
+      "share": 8.0,
+      "cost": 5985711,
+      "yoy": 3.9
+     },
+     {
+      "code": "0209000A0AA",
+      "label": "Aspirin",
+      "generic": true,
+      "items": 1787286,
+      "share": 5.1,
+      "cost": 5115285,
+      "yoy": 1.2
+     },
+     {
+      "code": "0205052N0AA",
+      "label": "Losartan",
+      "generic": true,
+      "items": 1263632,
+      "share": 3.6,
+      "cost": 1014493,
+      "yoy": 7.8
+     },
+     {
+      "code": "0209000C0AA",
+      "label": "Clopidogrel",
+      "generic": true,
+      "items": 1093627,
+      "share": 3.1,
+      "cost": 889318,
+      "yoy": 3.4
+     },
+     {
+      "code": "0208020Z0AA",
+      "label": "Apixaban",
+      "generic": true,
+      "items": 1076839,
+      "share": 3.1,
+      "cost": 1891961,
+      "yoy": 15.7
+     },
+     {
+      "code": "0202020L0AA",
+      "label": "Furosemide",
+      "generic": true,
+      "items": 1006107,
+      "share": 2.9,
+      "cost": 860091,
+      "yoy": -0.2
+     },
+     {
+      "code": "0205052C0AA",
+      "label": "Candesartan",
+      "generic": true,
+      "items": 822311,
+      "share": 2.3,
+      "cost": 3451980,
+      "yoy": 7.2
+     }
+    ],
+    "icbLeaders": [
+     {
+      "icb": "QOX",
+      "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+      "items": 579188,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 119263,
+        "share": 20.6
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 58915,
+        "share": 10.2
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 50444,
+        "share": 8.7
+       }
+      ]
+     },
+     {
+      "icb": "QHL",
+      "name": "NHS Birmingham and Solihull",
+      "items": 660637,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 137388,
+        "share": 20.8
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 72229,
+        "share": 10.9
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 60820,
+        "share": 9.2
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 713942,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 144363,
+        "share": 20.2
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 68471,
+        "share": 9.6
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 67970,
+        "share": 9.5
+       }
+      ]
+     },
+     {
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 427431,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 85761,
+        "share": 20.1
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 45048,
+        "share": 10.5
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 43343,
+        "share": 10.1
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 1791692,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 359581,
+        "share": 20.1
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 190176,
+        "share": 10.6
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 150557,
+        "share": 8.4
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 1728303,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 331891,
+        "share": 19.2
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 170409,
+        "share": 9.9
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 162644,
+        "share": 9.4
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 435256,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 87235,
+        "share": 20.0
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 41427,
+        "share": 9.5
+       },
+       {
+        "code": "0204000H0AA",
+        "label": "Bisoprolol",
+        "generic": true,
+        "items": 36723,
+        "share": 8.4
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 614628,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 126124,
+        "share": 20.5
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 70272,
+        "share": 11.4
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 57017,
+        "share": 9.3
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 616752,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 119801,
+        "share": 19.4
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 68791,
+        "share": 11.2
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 65928,
+        "share": 10.7
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 787294,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 161228,
+        "share": 20.5
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 73839,
+        "share": 9.4
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 73392,
+        "share": 9.3
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 490388,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 93520,
+        "share": 19.1
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 47608,
+        "share": 9.7
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 45831,
+        "share": 9.3
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 1179730,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 236629,
+        "share": 20.1
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 129659,
+        "share": 11.0
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 109488,
+        "share": 9.3
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 433465,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 84485,
+        "share": 19.5
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 43002,
+        "share": 9.9
+       },
+       {
+        "code": "0204000H0AA",
+        "label": "Bisoprolol",
+        "generic": true,
+        "items": 37288,
+        "share": 8.6
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 1806713,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 360878,
+        "share": 20.0
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 185134,
+        "share": 10.2
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 149583,
+        "share": 8.3
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 1030316,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 188942,
+        "share": 18.3
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 113277,
+        "share": 11.0
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 100059,
+        "share": 9.7
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 469519,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 89049,
+        "share": 19.0
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 46403,
+        "share": 9.9
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 45604,
+        "share": 9.7
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 1342144,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 262263,
+        "share": 19.5
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 138389,
+        "share": 10.3
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 127822,
+        "share": 9.5
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 1039359,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 200242,
+        "share": 19.3
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 107233,
+        "share": 10.3
+       },
+       {
+        "code": "0204000H0AA",
+        "label": "Bisoprolol",
+        "generic": true,
+        "items": 81124,
+        "share": 7.8
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 1248634,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 236319,
+        "share": 18.9
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 131622,
+        "share": 10.5
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 126623,
+        "share": 10.1
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 738485,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 156869,
+        "share": 21.2
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 84170,
+        "share": 11.4
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 72630,
+        "share": 9.8
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 770566,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 148677,
+        "share": 19.3
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 78310,
+        "share": 10.2
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 77680,
+        "share": 10.1
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 1285111,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 254061,
+        "share": 19.8
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 117668,
+        "share": 9.2
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 106555,
+        "share": 8.3
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 1088981,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 245234,
+        "share": 22.5
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 134117,
+        "share": 12.3
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 104047,
+        "share": 9.6
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 2662869,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 558782,
+        "share": 21.0
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 253356,
+        "share": 9.5
+       },
+       {
+        "code": "0204000H0AA",
+        "label": "Bisoprolol",
+        "generic": true,
+        "items": 217224,
+        "share": 8.2
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 561694,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 117772,
+        "share": 21.0
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 69911,
+        "share": 12.4
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 69113,
+        "share": 12.3
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 750151,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 151193,
+        "share": 20.2
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 86005,
+        "share": 11.5
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 83161,
+        "share": 11.1
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 289253,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 58131,
+        "share": 20.1
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 33288,
+        "share": 11.5
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 27067,
+        "share": 9.4
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 330051,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 62344,
+        "share": 18.9
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 37184,
+        "share": 11.3
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 33595,
+        "share": 10.2
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 753307,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 156192,
+        "share": 20.7
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 90496,
+        "share": 12.0
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 66127,
+        "share": 8.8
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 717803,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 139313,
+        "share": 19.4
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 80313,
+        "share": 11.2
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 68476,
+        "share": 9.5
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 1109551,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 221434,
+        "share": 20.0
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 120582,
+        "share": 10.9
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 110930,
+        "share": 10.0
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 760538,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 146481,
+        "share": 19.3
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 85359,
+        "share": 11.2
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 75702,
+        "share": 10.0
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 1498552,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 296015,
+        "share": 19.8
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 148258,
+        "share": 9.9
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 130760,
+        "share": 8.7
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 1079439,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 221980,
+        "share": 20.6
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 115863,
+        "share": 10.7
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 92323,
+        "share": 8.6
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 1603500,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 323304,
+        "share": 20.2
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 158075,
+        "share": 9.9
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 149992,
+        "share": 9.4
+       }
+      ]
+     },
+     {
+      "icb": "Z9B2Z",
+      "name": "NHS West and North London",
+      "items": 1861488,
+      "leaders": [
+       {
+        "code": "0212000B0AA",
+        "label": "Atorvastatin",
+        "generic": true,
+        "items": 391455,
+        "share": 21.0
+       },
+       {
+        "code": "0206020A0AA",
+        "label": "Amlodipine",
+        "generic": true,
+        "items": 211219,
+        "share": 11.3
+       },
+       {
+        "code": "0205051R0AA",
+        "label": "Ramipril",
+        "generic": true,
+        "items": 152730,
+        "share": 8.2
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": false,
+  "whyEmpty": null,
+  "count": 138,
+  "roundupsExcluded": 23,
+  "updates": [
+   {
+    "title": "Domperidone: new contraindication in patients with phaeochromocytoma due to the risk of severe hypertension",
+    "url": "https://www.gov.uk/drug-safety-update/domperidone-new-contraindication-in-patients-with-phaeochromocytoma-due-to-the-risk-of-severe-hypertension",
+    "published": "2026-07-21",
+    "updated": "2026-07-21",
+    "summary": "The product information has been updated for all domperidone products, to include a contraindication for patients with confirmed or suspected phaeochromocytoma (a rare tumour of the adrenal gland), due to the risk of episodes of severe hypertension."
+   },
+   {
+    "title": "ACE-inhibitors: Be aware of the distinction between bradykinin- and histamine-mediated angioedema, as treatment strategies differ significantly",
+    "url": "https://www.gov.uk/drug-safety-update/ace-inhibitors-be-aware-of-the-distinction-between-bradykinin-and-histamine-mediated-angioedema-as-treatment-strategies-differ-significantly",
+    "published": "2026-06-16",
+    "updated": "2026-06-16",
+    "summary": "Healthcare professionals should be aware of the potential for delayed onset of angioedema and the distinction between bradykinin- and histamine-mediated cases, as treatment strategies differ significantly and bradykinin-mediated angioedema does not respond to standard treatment."
+   },
+   {
+    "title": "#MedSafetyWeek (3-9 November 2025): A call to action to improve patient safety",
+    "url": "https://www.gov.uk/drug-safety-update/number-medsafetyweek-3-9-november-2025-a-call-to-action-to-improve-patient-safety",
+    "published": "2025-10-23",
+    "updated": "2025-10-23",
+    "summary": "The annual #MedSafetyWeek campaign takes place from 3 to 9 November 2025. This year’s campaign theme is ‘we can all help make medicines safer.’"
+   },
+   {
+    "title": "Paracetamol and pregnancy - reminder that taking paracetamol during pregnancy remains safe",
+    "url": "https://www.gov.uk/drug-safety-update/paracetamol-and-pregnancy-reminder-that-taking-paracetamol-during-pregnancy-remains-safe",
+    "published": "2025-09-23",
+    "updated": "2025-09-23",
+    "summary": "Patients should be reminded and reassured that there is no evidence that taking paracetamol during pregnancy causes autism in children. Paracetamol is recommended as the first-choice pain reliever for pregnant women, used at the lowest dose and for the shortest duration. It also acts as an antipyretic and is therefore used to treat fever."
+   },
+   {
+    "title": "GLP-1 and dual GIP/GLP-1 receptor agonists: potential risk of pulmonary aspiration during general anaesthesia or deep sedation",
+    "url": "https://www.gov.uk/drug-safety-update/glp-1-and-dual-gip-slash-glp-1-receptor-agonists-potential-risk-of-pulmonary-aspiration-during-general-anaesthesia-or-deep-sedation",
+    "published": "2025-01-28",
+    "updated": "2025-01-28",
+    "summary": "Healthcare professionals should be aware of the potential risk of pulmonary aspiration in patients using GLP-1 or dual GIP/GLP-1 receptor agonists who undergo surgery or procedures with general anaesthesia or deep sedation."
+   },
+   {
+    "title": "GLP-1 receptor agonists: reminder of the potential side effects and to be aware of the potential for misuse",
+    "url": "https://www.gov.uk/drug-safety-update/glp-1-receptor-agonists-reminder-of-the-potential-side-effects-and-to-be-aware-of-the-potential-for-misuse",
+    "published": "2024-10-24",
+    "updated": "2024-10-24",
+    "summary": "Healthcare professionals are reminded to inform patients about the common and serious side effects associated with glucagon-like peptide-1 receptor agonists (GLP-1RAs)."
+   },
+   {
+    "title": "Yellow Card Biobank: call to contribute to study of genetic links to side effects",
+    "url": "https://www.gov.uk/drug-safety-update/yellow-card-biobank-call-to-contribute-to-study-of-genetic-links-to-side-effects",
+    "published": "2024-08-21",
+    "updated": "2024-08-21",
+    "summary": "Support this initiative to explore whether there is a genetic basis of side effects associated with direct-acting oral anticoagulants (DOACs) and allopurinol."
+   },
+   {
+    "title": "Pseudoephedrine: very rare risk of posterior reversible encephalopathy syndrome (PRES) and reversible cerebral vasoconstriction syndrome (RCVS)",
+    "url": "https://www.gov.uk/drug-safety-update/pseudoephedrine-very-rare-risk-of-posterior-reversible-encephalopathy-syndrome-pres-and-reversible-cerebral-vasoconstriction-syndrome-rcvs",
+    "published": "2024-02-20",
+    "updated": "2024-02-20",
+    "summary": "There have been very rare reports of posterior reversible encephalopathy syndrome (PRES) and reversible cerebral vasoconstriction syndrome (RCVS) with pseudoephedrine."
+   }
+  ]
+ },
+ "drugTariffViiia": {
+  "effectiveMonth": "2026-09",
+  "latestPublishedMonth": "2026-10",
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-viii",
+  "whole": false,
+  "bnfFilter": [
+   "chapter 2"
+  ],
+  "lineCount": 448,
+  "categoryCounts": {
+   "C": 208,
+   "M": 149,
+   "A": 85,
+   "H": 6
+  },
+  "fileLines": 3533,
+  "fileLinesWithoutBnf": 53,
+  "priceMin": 0.59,
+  "priceMax": 2300.0,
+  "linesShown": 80,
+  "lines": [
+   {
+    "medicine": "Amiloride 5mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 12.28,
+    "bnf": "0202030C0AAACAC"
+   },
+   {
+    "medicine": "Amiodarone 200mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 4.37,
+    "bnf": "0203020D0AAABAB"
+   },
+   {
+    "medicine": "Amlodipine 10mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.72,
+    "bnf": "0206020A0AAABAB"
+   },
+   {
+    "medicine": "Amlodipine 2.5mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 3.8,
+    "bnf": "0206020A0AAAVAV"
+   },
+   {
+    "medicine": "Amlodipine 5mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.64,
+    "bnf": "0206020A0AAAAAA"
+   },
+   {
+    "medicine": "Apixaban 2.5mg tablets",
+    "pack": "60 tablet",
+    "category": "M",
+    "price": 1.11,
+    "bnf": "0208020Z0AAAAAA"
+   },
+   {
+    "medicine": "Apixaban 5mg tablets",
+    "pack": "56 tablet",
+    "category": "M",
+    "price": 1.05,
+    "bnf": "0208020Z0AAABAB"
+   },
+   {
+    "medicine": "Aspirin 75mg dispersible tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 2.55,
+    "bnf": "0209000A0AAABAB"
+   },
+   {
+    "medicine": "Aspirin 75mg dispersible tablets",
+    "pack": "100 tablet",
+    "category": "M",
+    "price": 9.11,
+    "bnf": "0209000A0AAABAB"
+   },
+   {
+    "medicine": "Aspirin 75mg gastro-resistant tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.32,
+    "bnf": "0209000A0AAAKAK"
+   },
+   {
+    "medicine": "Aspirin 75mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.28,
+    "bnf": "0209000A0AAAJAJ"
+   },
+   {
+    "medicine": "Atenolol 100mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.77,
+    "bnf": "0204000E0AAACAC"
+   },
+   {
+    "medicine": "Atenolol 25mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.62,
+    "bnf": "0204000E0AAAGAG"
+   },
+   {
+    "medicine": "Atenolol 50mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.69,
+    "bnf": "0204000E0AAABAB"
+   },
+   {
+    "medicine": "Atorvastatin 10mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.63,
+    "bnf": "0212000B0AAAAAA"
+   },
+   {
+    "medicine": "Atorvastatin 20mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.72,
+    "bnf": "0212000B0AAABAB"
+   },
+   {
+    "medicine": "Atorvastatin 40mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.84,
+    "bnf": "0212000B0AAACAC"
+   },
+   {
+    "medicine": "Atorvastatin 80mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.33,
+    "bnf": "0212000B0AAADAD"
+   },
+   {
+    "medicine": "Bendroflumethiazide 2.5mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.65,
+    "bnf": "0202010B0AAABAB"
+   },
+   {
+    "medicine": "Bendroflumethiazide 5mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.83,
+    "bnf": "0202010B0AAACAC"
+   },
+   {
+    "medicine": "Bisoprolol 1.25mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.79,
+    "bnf": "0204000H0AAAMAM"
+   },
+   {
+    "medicine": "Bisoprolol 10mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.71,
+    "bnf": "0204000H0AAABAB"
+   },
+   {
+    "medicine": "Bisoprolol 2.5mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.69,
+    "bnf": "0204000H0AAAJAJ"
+   },
+   {
+    "medicine": "Bisoprolol 3.75mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.78,
+    "bnf": "0204000H0AAAKAK"
+   },
+   {
+    "medicine": "Bisoprolol 5mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.68,
+    "bnf": "0204000H0AAAAAA"
+   },
+   {
+    "medicine": "Bisoprolol 7.5mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.83,
+    "bnf": "0204000H0AAALAL"
+   },
+   {
+    "medicine": "Candesartan 16mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.03,
+    "bnf": "0205052C0AAADAD"
+   },
+   {
+    "medicine": "Candesartan 2mg tablets",
+    "pack": "7 tablet",
+    "category": "M",
+    "price": 0.64,
+    "bnf": "0205052C0AAAAAA"
+   },
+   {
+    "medicine": "Candesartan 32mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.42,
+    "bnf": "0205052C0AAAHAH"
+   },
+   {
+    "medicine": "Candesartan 4mg tablets",
+    "pack": "7 tablet",
+    "category": "M",
+    "price": 0.6,
+    "bnf": "0205052C0AAABAB"
+   },
+   {
+    "medicine": "Candesartan 8mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.88,
+    "bnf": "0205052C0AAACAC"
+   },
+   {
+    "medicine": "Carvedilol 12.5mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.19,
+    "bnf": "020400080AAABAB"
+   },
+   {
+    "medicine": "Carvedilol 25mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.2,
+    "bnf": "020400080AAACAC"
+   },
+   {
+    "medicine": "Carvedilol 3.125mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.83,
+    "bnf": "020400080AAAEAE"
+   },
+   {
+    "medicine": "Carvedilol 6.25mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.57,
+    "bnf": "020400080AAAFAF"
+   },
+   {
+    "medicine": "Clopidogrel 75mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.94,
+    "bnf": "0209000C0AAAAAA"
+   },
+   {
+    "medicine": "Co-amilofruse 5mg/40mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 4.52,
+    "bnf": "0202040B0AAAAAA"
+   },
+   {
+    "medicine": "Dabigatran etexilate 110mg capsules",
+    "pack": "10 capsule",
+    "category": "M",
+    "price": 0.59,
+    "bnf": "0208020X0AAABAB"
+   },
+   {
+    "medicine": "Dabigatran etexilate 110mg capsules",
+    "pack": "60 capsule",
+    "category": "M",
+    "price": 3.51,
+    "bnf": "0208020X0AAABAB"
+   },
+   {
+    "medicine": "Dabigatran etexilate 150mg capsules",
+    "pack": "60 capsule",
+    "category": "M",
+    "price": 3.77,
+    "bnf": "0208020X0AAACAC"
+   },
+   {
+    "medicine": "Digoxin 125microgram tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.09,
+    "bnf": "0201010F0AAAEAE"
+   },
+   {
+    "medicine": "Digoxin 250microgram tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.12,
+    "bnf": "0201010F0AAAFAF"
+   },
+   {
+    "medicine": "Digoxin 62.5microgram tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.14,
+    "bnf": "0201010F0AAADAD"
+   },
+   {
+    "medicine": "Diltiazem 60mg modified-release tablets",
+    "pack": "84 tablet",
+    "category": "M",
+    "price": 4.17,
+    "bnf": "0206020C0AAAAAA"
+   },
+   {
+    "medicine": "Doxazosin 1mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.73,
+    "bnf": "0205040D0AAAAAA"
+   },
+   {
+    "medicine": "Doxazosin 2mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.83,
+    "bnf": "0205040D0AAABAB"
+   },
+   {
+    "medicine": "Doxazosin 4mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.91,
+    "bnf": "0205040D0AAACAC"
+   },
+   {
+    "medicine": "Enalapril 10mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.12,
+    "bnf": "0205051I0AAACAC"
+   },
+   {
+    "medicine": "Enalapril 2.5mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 5.12,
+    "bnf": "0205051I0AAAAAA"
+   },
+   {
+    "medicine": "Enalapril 20mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.92,
+    "bnf": "0205051I0AAADAD"
+   },
+   {
+    "medicine": "Enalapril 5mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.91,
+    "bnf": "0205051I0AAABAB"
+   },
+   {
+    "medicine": "Eplerenone 25mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.94,
+    "bnf": "0202030X0AAAAAA"
+   },
+   {
+    "medicine": "Eplerenone 50mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 3.64,
+    "bnf": "0202030X0AAABAB"
+   },
+   {
+    "medicine": "Ezetimibe 10mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.99,
+    "bnf": "0212000L0AAAAAA"
+   },
+   {
+    "medicine": "Fenofibrate micronised 160mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 2.45,
+    "bnf": "0212000P0AAAEAE"
+   },
+   {
+    "medicine": "Fenofibrate micronised 200mg capsules",
+    "pack": "28 capsule",
+    "category": "M",
+    "price": 3.45,
+    "bnf": "0212000P0AAABAB"
+   },
+   {
+    "medicine": "Fenofibrate micronised 267mg capsules",
+    "pack": "28 capsule",
+    "category": "M",
+    "price": 20.83,
+    "bnf": "0212000P0AAADAD"
+   },
+   {
+    "medicine": "Flecainide 100mg tablets",
+    "pack": "60 tablet",
+    "category": "M",
+    "price": 3.45,
+    "bnf": "0203020I0AAADAD"
+   },
+   {
+    "medicine": "Flecainide 50mg tablets",
+    "pack": "60 tablet",
+    "category": "M",
+    "price": 2.16,
+    "bnf": "0203020I0AAAKAK"
+   },
+   {
+    "medicine": "Furosemide 20mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.62,
+    "bnf": "0202020L0AABBBB"
+   },
+   {
+    "medicine": "Furosemide 40mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.93,
+    "bnf": "0202020L0AABDBD"
+   },
+   {
+    "medicine": "Hydralazine 25mg tablets",
+    "pack": "56 tablet",
+    "category": "M",
+    "price": 2.8,
+    "bnf": "0205010J0AAAGAG"
+   },
+   {
+    "medicine": "Hydralazine 50mg tablets",
+    "pack": "56 tablet",
+    "category": "M",
+    "price": 3.28,
+    "bnf": "0205010J0AAAHAH"
+   },
+   {
+    "medicine": "Irbesartan 150mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 2.52,
+    "bnf": "0205052I0AAABAB"
+   },
+   {
+    "medicine": "Irbesartan 300mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.67,
+    "bnf": "0205052I0AAACAC"
+   },
+   {
+    "medicine": "Irbesartan 75mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.29,
+    "bnf": "0205052I0AAAAAA"
+   },
+   {
+    "medicine": "Isosorbide mononitrate 10mg tablets",
+    "pack": "56 tablet",
+    "category": "M",
+    "price": 1.76,
+    "bnf": "0206010K0AAABAB"
+   },
+   {
+    "medicine": "Ivabradine 2.5mg tablets",
+    "pack": "56 tablet",
+    "category": "M",
+    "price": 59.67,
+    "bnf": "0206030Y0AAACAC"
+   },
+   {
+    "medicine": "Ivabradine 5mg tablets",
+    "pack": "56 tablet",
+    "category": "M",
+    "price": 3.14,
+    "bnf": "0206030Y0AAAAAA"
+   },
+   {
+    "medicine": "Ivabradine 7.5mg tablets",
+    "pack": "56 tablet",
+    "category": "M",
+    "price": 3.9,
+    "bnf": "0206030Y0AAABAB"
+   },
+   {
+    "medicine": "Labetalol 100mg tablets",
+    "pack": "56 tablet",
+    "category": "M",
+    "price": 5.45,
+    "bnf": "0204000I0AAACAC"
+   },
+   {
+    "medicine": "Lacidipine 2mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.83,
+    "bnf": "0206020K0AAAAAA"
+   },
+   {
+    "medicine": "Lacidipine 4mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.84,
+    "bnf": "0206020K0AAABAB"
+   },
+   {
+    "medicine": "Lercanidipine 10mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.71,
+    "bnf": "0206020L0AAAAAA"
+   },
+   {
+    "medicine": "Lercanidipine 20mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 2.57,
+    "bnf": "0206020L0AAABAB"
+   },
+   {
+    "medicine": "Lisinopril 10mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.84,
+    "bnf": "0205051L0AAACAC"
+   },
+   {
+    "medicine": "Lisinopril 2.5mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.73,
+    "bnf": "0205051L0AAAAAA"
+   },
+   {
+    "medicine": "Lisinopril 20mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.01,
+    "bnf": "0205051L0AAADAD"
+   },
+   {
+    "medicine": "Lisinopril 5mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.79,
+    "bnf": "0205051L0AAABAB"
+   },
+   {
+    "medicine": "Losartan 100mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.83,
+    "bnf": "0205052N0AAADAD"
+   }
+  ]
  }
 }

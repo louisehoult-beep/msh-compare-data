@@ -20,7 +20,12 @@
   "frameworkAwards": "2026-09-30T12:30:14+00:00",
   "openTenders": "30/09/2026",
   "drugTariff": "2026-09-30",
-  "localIntel": "2026-09-30"
+  "localIntel": "2026-09-30",
+  "supplierDirectory": "2026-09-30",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-09-30",
+  "drugTariffViiia": "2026-09-30",
+  "hospitalPrescribing": null
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -28,7 +33,11 @@
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. This patch is two specialities sharing a page -- ear, nose and throat surgery and oral and maxillofacial surgery -- and neither of them buys most of its product through an agreement with its own name on it. The framework named after ENT covers flexible and video endoscopes only; the rigid ENT set is on Rigid Endoscopy, and the OMFS half is on Dental Technologies. Everything else this patch uses -- the microdebriders, coblation wands, image guidance systems, operating microscopes, nerve monitors, sinus balloons, tonsil instruments, tracheostomy tubes and the head and neck cancer implants -- is bought on cross-speciality agreements owned by theatres, capital or critical care, or trust by trust. Being named on a framework here is not evidence of volume on this patch, and being absent from one is not evidence of absence from the market. The audiology half of ear surgery -- cochlear implants, bone conduction devices, diagnostic and fitting equipment -- is on the Audiological Diagnostics Implantable Devices and Services framework and is counted on the audiology and hearing page, not here. ONE FRAMEWORK IS MISSING FROM THE LIST ABOVE ON PURPOSE. Dental Technologies, Implants and Related Consumables and Services (2023/S 000-008274, 5 January 2024 to 4 January 2028, 11 lots) is this patch's OMFS agreement and the Hub refuses to publish its supplier list, because NHS Supply Chain's own brief states 33 suppliers and the page parses 35: it renders three delisted names in the same block as the awarded ones and prints RPA Dental Equipment twice. A list that does not match the page it came from is not published here. Read the brief itself for that framework. THE DRUG TARIFF PANEL BELOW OVERLAPS THE RESPIRATORY PAGE ON PURPOSE: 582 of its 645 lines are the tracheostomy and laryngectomy range, which is counted there too because the airway through the stoma is respiratory's and the stoma itself is this speciality's. The 63 lines unique to this page are the voice prosthesis cleaning brushes, the tracheostomy dressings, the ear drops, the nasal preparations and the one auto inflation device.",
   "awards": "Award-stage notices whose TITLE matches /\\b(ENT|otolaryng\\w*|otolog\\w*|rhinolog\\w*|rhinoplast\\w*|rhinosinusit\\w*|septoplast\\w*|turbinate\\w*|nasal|nose|nasendoscop\\w*|paranasal|sinusitis|tonsil\\w*|adenoid\\w*|grommet\\w*|tympan\\w*|myringo\\w*|mastoid\\w*|otitis|otoscop\\w*|stapes|epistaxis|tracheostom\\w*|laryngectom\\w*|voice prosthes\\w*|hypoglossal|hyperglossal|head and neck|maxillofacial|OMFS|oral surgery|orthognathic|dental implant\\w*|thyroidectom\\w*|parathyroid\\w*|salivary|parotid|throat)\\b/i and does not match /\\b(nasal cannula\\w*|nasal high flow|nasal prong\\w*|nasal oxygen|nasogastric)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 85121240 or 85111100 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /^(Tracheostomy|Voice prosthesis|Laryngectomy|Auto inflation device|Olive oil ear drops|Sodium bicarbonate 5% ear drops|Burow|Sea water nasal spray|Sesame oil nasal spray|Nasal aspirator|Sodium chloride 0\\.9% nasal drops)/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,833 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's."
+  "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /^(Tracheostomy|Voice prosthesis|Laryngectomy|Auto inflation device|Olive oil ear drops|Sodium bicarbonate 5% ear drops|Burow|Sea water nasal spray|Sesame oil nasal spray|Nasal aspirator|Sodium chloride 0\\.9% nasal drops)/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,833 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: ent). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 16 of the 16 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (6 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-09-30.",
+  "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-09: narrowed to the lines whose medicine NHSBSA prescribes under BNF chapter 12. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 53 of the 3,533 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
  },
  "counts": {
   "frameworks": 2,
@@ -38,7 +47,14 @@
   "awardsMatched": 45,
   "awardsWithheldByBuyerCap": 0,
   "openTenders": 0,
-  "localIntel": 0
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 7,
+  "suppliersDirectoryTagged": 16,
+  "suppliersDirectoryOnOtherFrameworks": 14,
+  "suppliersDirectoryWithFrameworkNote": 16,
+  "gpMarkets": 2,
+  "mhraDsu": 24,
+  "drugTariffViiiaLines": 55
  },
  "frameworks": [
   {
@@ -105,7 +121,9 @@
    "frameworks": [
     "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Karl Storz UK",
@@ -117,7 +135,9 @@
    "frameworks": [
     "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "LiteOptics",
@@ -128,7 +148,9 @@
    "frameworks": [
     "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Olympus (KeyMed)",
@@ -139,7 +161,9 @@
    "frameworks": [
     "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Pentax Medical",
@@ -151,7 +175,9 @@
    "frameworks": [
     "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Richard Wolf UK",
@@ -162,7 +188,9 @@
    "frameworks": [
     "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Aquilant Endoscopy Limited",
@@ -172,7 +200,9 @@
    ],
    "frameworks": [
     "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Aquilant Limited",
@@ -182,7 +212,9 @@
    ],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Arthrex",
@@ -192,7 +224,9 @@
    ],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "B. Braun Medical",
@@ -202,7 +236,9 @@
    ],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Conmed UK Ltd",
@@ -212,7 +248,9 @@
    ],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Emmat Medical",
@@ -220,7 +258,9 @@
    "variants": [],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "G S Medical",
@@ -228,7 +268,9 @@
    "variants": [],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "LocaMed Ltd",
@@ -238,7 +280,9 @@
    ],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medtronic",
@@ -248,7 +292,9 @@
    ],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Novus Med Ltd",
@@ -258,7 +304,9 @@
    ],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "RB Medical Engineering Ltd",
@@ -268,7 +316,9 @@
    ],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Smith+Nephew",
@@ -278,7 +328,9 @@
    ],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Stryker",
@@ -288,7 +340,9 @@
    ],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   }
  ],
  "awards": [
@@ -565,7 +619,7 @@
   {
    "title": "ENT, Ophthalmology & Skin Medicines/Medical Devices",
    "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotland) (\"NSS\")",
-   "supplier": "Scope Ophthalmics Limited, Consilient Health Ltd, AbbVie Ltd, Altacor, Aspire Ph",
+   "supplier": "Scope Ophthalmics Limited, Consilient Health Ltd, AbbVie Ltd, Altacor, Aspire Pharma Ltd, Carl Zeiss Ltd, Crescent Pharma Limited, DRUGSRUS LTD, Ennogen Healthcare International Ltd, CST Pharma Ltd, Europharma Concepts Ltd (t/a Oralieve UK), Farmigea Ophthalmics Limited, Focus Pharmaceuticals Ltd, GlaxoSmithKline, Glenmark Pharmaceuticals Europe Ltd, Intrapharm Laboratories Ltd, Kent Pharmaceuticals Ltd, Manx Healthcare, Martindale Pharma, Medicom Healthcare, Mercury Pharmaceuticals Limited, Morningside Pharmaceuticals Limited, Ranbaxy (UK) Ltd, Rayner Intraocular Lenses Ltd, Reckitt Benckiser, Sandoz, Selective Supplies Ltd, TJ Smith and Nephew Ltd (Trading as Smith & Nephew), Thea Pharmaceuticals Limited, STADA UK - Thornton & Ross, Zentiva Pharma UK Ltd",
    "date": "2024-09-23",
    "url": "https://www.find-tender.service.gov.uk/Notice/030345-2024",
    "value": null,
@@ -685,7 +739,7 @@
   {
    "title": "NP37122 ENT, Ophthalmology & Skin Medicines/Medical Devices",
    "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotland) (\"NSS\")",
-   "supplier": "Zentiva Pharma UK Ltd, Thornton & Ross, TJ Smith and Nephew Ltd (Trading as Smit",
+   "supplier": "Zentiva Pharma UK Ltd, Thornton & Ross, TJ Smith and Nephew Ltd (Trading as Smith & Nephew), Thea Pharmaceuticals Limited, Teva UK Limited, Selective Supplies Ltd, Tetris Pharma Ltd, Scope Ophthalmics Ltd, Sandoz Ltd, Reckitt Benckiser, Rayner Intraocular Lenses Ltd, Ranbaxy (UK) Ltd, Parapharm Development Ltd, Mercury Pharma Group, Medicom Healthcare, Morningside Pharmaceuticals Limited, Martindale Pharma, Intrapharm Laboratories Ltd, Glenmark Pharmaceuticals Europe Ltd, GlaxoSmithKline, Ennogen Healthcare Ltd, Ecolab Ltd, DRUGSRUS LTD, CST Pharma Ltd, Crescent Pharma Limited, Carl Zeiss Ltd, Beaver Visitec International, Aspire Pharma Ltd, Altacor, AbbVie Ltd",
    "date": "2022-09-30",
    "url": "https://www.find-tender.service.gov.uk/Notice/027484-2022",
    "value": null,
@@ -715,7 +769,7 @@
   {
    "title": "Tracheostomy Tubes, Tube Holders and Accessories [3064381]",
    "buyer": "Procurement and Logistics Service",
-   "supplier": "NORTHERN HOSPITAL SUPPLIES LTD, KAPITEX HEALTHCARE LIMITED, Healthcare 21 NI, Sm",
+   "supplier": "NORTHERN HOSPITAL SUPPLIES LTD, KAPITEX HEALTHCARE LIMITED, Healthcare 21 NI, Smiths Medical International Ltd, TFX GROUP LIMITED",
    "date": "2021-11-08",
    "url": "https://www.find-tender.service.gov.uk/Notice/027918-2021",
    "value": null,
@@ -830,5 +884,3317 @@
   "nations": "Scotland, Wales, Northern Ireland and Ireland",
   "policy": "Policy and demand signals",
   "data": "Data sources"
+ },
+ "directorySuppliers": [
+  {
+   "name": "Advanced Bionics",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Advanced Bionics",
+   "seedLabels": [
+    "ENT / audiology",
+    "ENT"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Audiological Diagnostics Implantable Devices and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/audiological-implantable-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Audiological Diagnostics & Implantable Devices (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Audiological Diagnostics Implantable Devices and Services. The Hub's supplier directory also records: NHS Supply Chain — Audiological Diagnostics & Implantable Devices (to 2028)."
+  },
+  {
+   "name": "Amplivox",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Amplivox",
+   "seedLabels": [
+    "ENT / audiology",
+    "ENT"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Audiological Diagnostics Implantable Devices and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/audiological-implantable-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Audiological Diagnostics & Implantable Devices (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Audiological Diagnostics Implantable Devices and Services. The Hub's supplier directory also records: NHS Supply Chain — Audiological Diagnostics & Implantable Devices (to 2028)."
+  },
+  {
+   "name": "Carl Zeiss Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Carl Zeiss Ltd",
+   "seedLabels": [
+    "ENT"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Complete Ophthalmology Solutions 3",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ophthalmology-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Radiotherapy Treatment Systems and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-treatment-systems-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Complete Ophthalmology Solutions 3; Radiotherapy Treatment Systems and Associated Options and Related Services."
+  },
+  {
+   "name": "Cochlear Europe",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Cochlear Europe",
+   "seedLabels": [
+    "ENT / audiology",
+    "ENT"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Audiological Diagnostics Implantable Devices and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/audiological-implantable-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Audiological Diagnostics & Implantable Devices (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Audiological Diagnostics Implantable Devices and Services. The Hub's supplier directory also records: NHS Supply Chain — Audiological Diagnostics & Implantable Devices (to 2028)."
+  },
+  {
+   "name": "Coloplast",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Coloplast",
+   "seedLabels": [
+    "ENT"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Advanced Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/advanced-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Implants for Men’s and Women’s Health",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-implants-for-mens-and-womens-health/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Urology and Bowel Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/urology-and-bowel-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "Drug Tariff Part IX (IXA/IXB/IXC)",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS Supply Chain — Urology & Bowel Management",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on five NHS Supply Chain frameworks not counted as this speciality's: Advanced Wound Care; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Operating Theatres Equipment and Related Accessories and Services; Surgical Implants for Men’s and Women’s Health; Urology and Bowel Management. The Hub's supplier directory also records: Drug Tariff Part IX (IXA/IXB/IXC); NHS Supply Chain — Urology & Bowel Management; NHS SBS — SBS10142."
+  },
+  {
+   "name": "Diatec Diagnostics (Interacoustics)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Diatec Diagnostics (Interacoustics)",
+   "seedLabels": [
+    "ENT / audiology",
+    "ENT"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Audiological Diagnostics Implantable Devices and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/audiological-implantable-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Audiological Diagnostics & Implantable Devices (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Audiological Diagnostics Implantable Devices and Services. The Hub's supplier directory also records: NHS Supply Chain — Audiological Diagnostics & Implantable Devices (to 2028)."
+  },
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "GBUK Group",
+   "seedLabels": [
+    "ENT / neuro-otology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Advanced Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/advanced-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Aids for Daily Living",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/walking-aids-and-simple-aids-for-daily-living/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Blood Collection Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/blood-collection-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Central Venous Catheters and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/central-venous-catheters-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Disposable and Washable Continence Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/disposable-and-washable-continence-care-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Enteral Feeding, Bile Bags and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/enteral-feeding-bile-bags-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Extension Sets and Lines",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/extension-sets-and-lines/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "General Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/general-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Infant Feeding and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/baby-food-and-feeding-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Infusion Pumps and Administration Sets and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/infusion-pumps-and-administration-sets-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Intravenous Cannula and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-cannula-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-gynaecology-and-sexual-health-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Needlefree Connection Systems and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/needlefree-connection-systems-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Temperature Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-temperature-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Polymer Aprons",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/polymer-aprons/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pressure Area Care and Patient Handling",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-area-care-and-patient-handling/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pressure Infusers and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-infusers-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Instruments",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-instruments/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Syringes, Needles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Textiles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/textiles/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Urology and Bowel Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/urology-and-bowel-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Needle-free Connection Systems",
+     "url": "https://www.find-tender.service.gov.uk/Notice/074575-2025",
+     "source": "Find a Tender contract award notice; dates and supplier count from NHS Supply Chain launch brief"
+    }
+   ],
+   "frameworkNote": "Named on twenty-three NHS Supply Chain frameworks not counted as this speciality's: Advanced Wound Care; Aids for Daily Living; Blood Collection Devices; Central Venous Catheters and Associated Products; Disposable and Washable Continence Care; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Enteral Feeding, Bile Bags and Associated Products; Extension Sets and Lines; General Wound Care; Infant Feeding and Accessories; Infusion Pumps and Administration Sets and Associated Products; Intravenous Cannula and Associated Products; Maternity, Obstetrics, Gynaecology and Sexual Health Products; Needlefree Connection Systems and Associated Products; Patient Temperature Management; Polymer Aprons; Pressure Area Care and Patient Handling; Pressure Infusers and Associated Products; Surgical Instruments; Syringes, Needles and Associated Products; Textiles and Associated Products; Total Patient Assessment Device Solutions; Urology and Bowel Management. The Hub's supplier directory also records: NHS Supply Chain — Needle-free Connection Systems."
+  },
+  {
+   "name": "GN ReSound UK",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "GN ReSound UK",
+   "seedLabels": [
+    "ENT / audiology",
+    "ENT"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/hearing-aids-and-custom-ear-moulds/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Hearing Aids & Custom Ear Moulds (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories. The Hub's supplier directory also records: NHS Supply Chain — Hearing Aids & Custom Ear Moulds (to 2027)."
+  },
+  {
+   "name": "Inspire Medical Systems",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Inspire Medical Systems",
+   "seedLabels": [
+    "ENT"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Neuromodulation Devices and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/neuromodulation-devices-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Neuromodulation Devices and Associated Products."
+  },
+  {
+   "name": "MED-EL",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "MED-EL",
+   "seedLabels": [
+    "ENT / audiology",
+    "ENT"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Audiological Diagnostics Implantable Devices and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/audiological-implantable-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Audiological Diagnostics & Implantable Devices (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Audiological Diagnostics Implantable Devices and Services. The Hub's supplier directory also records: NHS Supply Chain — Audiological Diagnostics & Implantable Devices (to 2028)."
+  },
+  {
+   "name": "Nyxoah SA",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Nyxoah SA",
+   "seedLabels": [
+    "ENT"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Neuromodulation Devices and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/neuromodulation-devices-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Neuromodulation Devices and Associated Products."
+  },
+  {
+   "name": "Oticon",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Oticon",
+   "seedLabels": [
+    "ENT / audiology",
+    "ENT"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Audiological Diagnostics Implantable Devices and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/audiological-implantable-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/hearing-aids-and-custom-ear-moulds/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Hearing Aids & Custom Ear Moulds (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS Supply Chain — Audiological Diagnostics & Implantable Devices (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Audiological Diagnostics Implantable Devices and Services; Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories. The Hub's supplier directory also records: NHS Supply Chain — Hearing Aids & Custom Ear Moulds (to 2027); NHS Supply Chain — Audiological Diagnostics & Implantable Devices (to 2028)."
+  },
+  {
+   "name": "Sheffmed Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Sheffmed Limited",
+   "seedLabels": [
+    "ENT"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Audiological Diagnostics Implantable Devices and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/audiological-implantable-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Instruments",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-instruments/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Audiological Diagnostics Implantable Devices and Services; Surgical Instruments."
+  },
+  {
+   "name": "WS Audiology",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "WS Audiology",
+   "seedLabels": [
+    "ENT / audiology",
+    "ENT"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Audiological Diagnostics Implantable Devices and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/audiological-implantable-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Hearing Aids & Custom Ear Moulds (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS Supply Chain — Audiological Diagnostics & Implantable Devices (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Audiological Diagnostics Implantable Devices and Services. The Hub's supplier directory also records: NHS Supply Chain — Hearing Aids & Custom Ear Moulds (to 2027); NHS Supply Chain — Audiological Diagnostics & Implantable Devices (to 2028)."
+  },
+  {
+   "name": "Network Medical Products Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Network Medical Products Ltd",
+   "seedLabels": [
+    "ENT"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "Surgical Instruments",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-instruments/",
+     "source": "nhssc-brief"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: Surgical Instruments."
+  },
+  {
+   "name": "Sonova / Phonak UK",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Sonova / Phonak UK",
+   "seedLabels": [
+    "ENT / audiology",
+    "ENT"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Hearing Aids & Custom Ear Moulds (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS Supply Chain — Hearing Aids & Custom Ear Moulds (to 2027)."
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": true,
+  "markets": [
+   {
+    "id": "ent",
+    "label": "Ear, nose and oropharynx: BNF chapter 12",
+    "bnf": [
+     "chapter 12"
+    ],
+    "note": null,
+    "latestPeriod": "202607",
+    "baselinePeriod": "202507",
+    "items": 1023687,
+    "cost": 7202290,
+    "items12m": 11335137,
+    "cost12m": 82883113,
+    "itemsYoY": 4.3,
+    "products": 126,
+    "topNational": [
+     {
+      "code": "1202010U0AA",
+      "label": "Mometasone",
+      "generic": true,
+      "items": 250619,
+      "share": 24.5,
+      "cost": 687224,
+      "yoy": 4.0
+     },
+     {
+      "code": "120101050AA",
+      "label": "Dexamethasone",
+      "generic": true,
+      "items": 86267,
+      "share": 8.4,
+      "cost": 757753,
+      "yoy": 3268.5
+     },
+     {
+      "code": "1202010C0AA",
+      "label": "Beclometasone",
+      "generic": true,
+      "items": 84200,
+      "share": 8.2,
+      "cost": 232208,
+      "yoy": -6.5
+     },
+     {
+      "code": "1202010W0AA",
+      "label": "Fluticasone furoate",
+      "generic": true,
+      "items": 73027,
+      "share": 7.1,
+      "cost": 486942,
+      "yoy": 9.4
+     },
+     {
+      "code": "1202010W0BB",
+      "label": "Avamys",
+      "generic": false,
+      "items": 69230,
+      "share": 6.8,
+      "cost": 467460,
+      "yoy": 4.7
+     },
+     {
+      "code": "1202010Y0AA",
+      "label": "Fluticasone propionate",
+      "generic": true,
+      "items": 53270,
+      "share": 5.2,
+      "cost": 214529,
+      "yoy": 93.1
+     },
+     {
+      "code": "1202010M0AA",
+      "label": "Fluticasone propionate",
+      "generic": true,
+      "items": 51341,
+      "share": 5.0,
+      "cost": 829804,
+      "yoy": -2.1
+     },
+     {
+      "code": "1202010Y0BB",
+      "label": "Dymista",
+      "generic": false,
+      "items": 39703,
+      "share": 3.9,
+      "cost": 616723,
+      "yoy": -20.2
+     },
+     {
+      "code": "1203010E0AA",
+      "label": "Benzydamine",
+      "generic": true,
+      "items": 36923,
+      "share": 3.6,
+      "cost": 84748,
+      "yoy": 9.9
+     },
+     {
+      "code": "1201010AEAA",
+      "label": "Ciprofloxacin",
+      "generic": true,
+      "items": 34373,
+      "share": 3.4,
+      "cost": 226380,
+      "yoy": 63.5
+     }
+    ],
+    "icbLeaders": [
+     {
+      "icb": "QOX",
+      "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+      "items": 15595,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 3070,
+        "share": 19.7
+       },
+       {
+        "code": "1202010W0AA",
+        "label": "Fluticasone furoate",
+        "generic": true,
+        "items": 1688,
+        "share": 10.8
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 1359,
+        "share": 8.7
+       }
+      ]
+     },
+     {
+      "icb": "QHL",
+      "name": "NHS Birmingham and Solihull",
+      "items": 28230,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 5383,
+        "share": 19.1
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 2585,
+        "share": 9.2
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 2460,
+        "share": 8.7
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 22968,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 4361,
+        "share": 19.0
+       },
+       {
+        "code": "1202010Y0BB",
+        "label": "Dymista",
+        "generic": false,
+        "items": 2297,
+        "share": 10.0
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 1870,
+        "share": 8.1
+       }
+      ]
+     },
+     {
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 13812,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 4923,
+        "share": 35.6
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 1213,
+        "share": 8.8
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 1195,
+        "share": 8.7
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 49659,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 11521,
+        "share": 23.2
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 4237,
+        "share": 8.5
+       },
+       {
+        "code": "1202010W0AA",
+        "label": "Fluticasone furoate",
+        "generic": true,
+        "items": 4015,
+        "share": 8.1
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 56308,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 15436,
+        "share": 27.4
+       },
+       {
+        "code": "1202010Y0AA",
+        "label": "Fluticasone propionate",
+        "generic": true,
+        "items": 4810,
+        "share": 8.5
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 4009,
+        "share": 7.1
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 12130,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 2861,
+        "share": 23.6
+       },
+       {
+        "code": "1202010M0AA",
+        "label": "Fluticasone propionate",
+        "generic": true,
+        "items": 1327,
+        "share": 10.9
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 1322,
+        "share": 10.9
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 20070,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 4363,
+        "share": 21.7
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 2253,
+        "share": 11.2
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 1950,
+        "share": 9.7
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 18355,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 5374,
+        "share": 29.3
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 2090,
+        "share": 11.4
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 1993,
+        "share": 10.9
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 21694,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 5815,
+        "share": 26.8
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 4140,
+        "share": 19.1
+       },
+       {
+        "code": "1202010W0AA",
+        "label": "Fluticasone furoate",
+        "generic": true,
+        "items": 1605,
+        "share": 7.4
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 13716,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 3239,
+        "share": 23.6
+       },
+       {
+        "code": "1202010W0AA",
+        "label": "Fluticasone furoate",
+        "generic": true,
+        "items": 1874,
+        "share": 13.7
+       },
+       {
+        "code": "1202010M0AA",
+        "label": "Fluticasone propionate",
+        "generic": true,
+        "items": 1484,
+        "share": 10.8
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 32402,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 9228,
+        "share": 28.5
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 3342,
+        "share": 10.3
+       },
+       {
+        "code": "1202010W0AA",
+        "label": "Fluticasone furoate",
+        "generic": true,
+        "items": 2643,
+        "share": 8.2
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 9983,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 2217,
+        "share": 22.2
+       },
+       {
+        "code": "1202010W0AA",
+        "label": "Fluticasone furoate",
+        "generic": true,
+        "items": 999,
+        "share": 10.0
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 904,
+        "share": 9.1
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 61134,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 13639,
+        "share": 22.3
+       },
+       {
+        "code": "1202010W0BB",
+        "label": "Avamys",
+        "generic": false,
+        "items": 5663,
+        "share": 9.3
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 4489,
+        "share": 7.3
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 34791,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 8766,
+        "share": 25.2
+       },
+       {
+        "code": "1202010W0BB",
+        "label": "Avamys",
+        "generic": false,
+        "items": 3655,
+        "share": 10.5
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 2598,
+        "share": 7.5
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 14275,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 2936,
+        "share": 20.6
+       },
+       {
+        "code": "1202010W0AA",
+        "label": "Fluticasone furoate",
+        "generic": true,
+        "items": 2490,
+        "share": 17.4
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 1508,
+        "share": 10.6
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 34170,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 7919,
+        "share": 23.2
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 4721,
+        "share": 13.8
+       },
+       {
+        "code": "1202010W0AA",
+        "label": "Fluticasone furoate",
+        "generic": true,
+        "items": 3717,
+        "share": 10.9
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 29856,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 8209,
+        "share": 27.5
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 2841,
+        "share": 9.5
+       },
+       {
+        "code": "1202010W0BB",
+        "label": "Avamys",
+        "generic": false,
+        "items": 2720,
+        "share": 9.1
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 32115,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 11144,
+        "share": 34.7
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 3296,
+        "share": 10.3
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 3119,
+        "share": 9.7
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 20681,
+      "leaders": [
+       {
+        "code": "1202010W0BB",
+        "label": "Avamys",
+        "generic": false,
+        "items": 2692,
+        "share": 13.0
+       },
+       {
+        "code": "1202010W0AA",
+        "label": "Fluticasone furoate",
+        "generic": true,
+        "items": 2607,
+        "share": 12.6
+       },
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 2462,
+        "share": 11.9
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 15695,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 5079,
+        "share": 32.4
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 1648,
+        "share": 10.5
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 1496,
+        "share": 9.5
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 33840,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 10448,
+        "share": 30.9
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 3519,
+        "share": 10.4
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 2858,
+        "share": 8.4
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 34899,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 6761,
+        "share": 19.4
+       },
+       {
+        "code": "1202010W0BB",
+        "label": "Avamys",
+        "generic": false,
+        "items": 2954,
+        "share": 8.5
+       },
+       {
+        "code": "1202010M0AA",
+        "label": "Fluticasone propionate",
+        "generic": true,
+        "items": 2685,
+        "share": 7.7
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 57809,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 15436,
+        "share": 26.7
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 7943,
+        "share": 13.7
+       },
+       {
+        "code": "1202010W0AA",
+        "label": "Fluticasone furoate",
+        "generic": true,
+        "items": 5453,
+        "share": 9.4
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 13329,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 2844,
+        "share": 21.3
+       },
+       {
+        "code": "1202010W0BB",
+        "label": "Avamys",
+        "generic": false,
+        "items": 1784,
+        "share": 13.4
+       },
+       {
+        "code": "1202010W0AA",
+        "label": "Fluticasone furoate",
+        "generic": true,
+        "items": 1400,
+        "share": 10.5
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 20750,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 4609,
+        "share": 22.2
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 2032,
+        "share": 9.8
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 1948,
+        "share": 9.4
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 9012,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 2217,
+        "share": 24.6
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 853,
+        "share": 9.5
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 832,
+        "share": 9.2
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 9241,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 3353,
+        "share": 36.3
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 616,
+        "share": 6.7
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 614,
+        "share": 6.6
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 23358,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 4719,
+        "share": 20.2
+       },
+       {
+        "code": "1202010Y0AA",
+        "label": "Fluticasone propionate",
+        "generic": true,
+        "items": 2252,
+        "share": 9.6
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 2019,
+        "share": 8.6
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 23311,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 5314,
+        "share": 22.8
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 2173,
+        "share": 9.3
+       },
+       {
+        "code": "1202010Y0AA",
+        "label": "Fluticasone propionate",
+        "generic": true,
+        "items": 1758,
+        "share": 7.5
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 30250,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 6740,
+        "share": 22.3
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 2943,
+        "share": 9.7
+       },
+       {
+        "code": "1202010W0AA",
+        "label": "Fluticasone furoate",
+        "generic": true,
+        "items": 2656,
+        "share": 8.8
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 23630,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 6107,
+        "share": 25.8
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 2191,
+        "share": 9.3
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 1867,
+        "share": 7.9
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 47999,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 10778,
+        "share": 22.5
+       },
+       {
+        "code": "1202010W0BB",
+        "label": "Avamys",
+        "generic": false,
+        "items": 6352,
+        "share": 13.2
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 4588,
+        "share": 9.6
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 36222,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 11984,
+        "share": 33.1
+       },
+       {
+        "code": "1202010C0AA",
+        "label": "Beclometasone",
+        "generic": true,
+        "items": 3225,
+        "share": 8.9
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 2546,
+        "share": 7.0
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 42887,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 6620,
+        "share": 15.4
+       },
+       {
+        "code": "1202010W0AA",
+        "label": "Fluticasone furoate",
+        "generic": true,
+        "items": 4938,
+        "share": 11.5
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 4211,
+        "share": 9.8
+       }
+      ]
+     },
+     {
+      "icb": "Z9B2Z",
+      "name": "NHS West and North London",
+      "items": 59207,
+      "leaders": [
+       {
+        "code": "1202010U0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 14707,
+        "share": 24.8
+       },
+       {
+        "code": "120101050AA",
+        "label": "Dexamethasone",
+        "generic": true,
+        "items": 5000,
+        "share": 8.4
+       },
+       {
+        "code": "1202010M0AA",
+        "label": "Fluticasone propionate",
+        "generic": true,
+        "items": 4156,
+        "share": 7.0
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "trache",
+    "label": "Tracheostomy and laryngectomy appliances: BNF 20.05",
+    "bnf": [
+     "20.05"
+    ],
+    "note": null,
+    "latestPeriod": "202607",
+    "baselinePeriod": "202507",
+    "items": 16540,
+    "cost": 1692247,
+    "items12m": 187546,
+    "cost12m": 18865496,
+    "itemsYoY": -0.8,
+    "products": 325,
+    "topNational": [
+     {
+      "code": "20050400133",
+      "label": "Provox cleaning towel",
+      "generic": false,
+      "items": 1081,
+      "share": 6.5,
+      "cost": 26155,
+      "yoy": -3.1
+     },
+     {
+      "code": "20050300407",
+      "label": "Provox skin barrier wipes",
+      "generic": false,
+      "items": 764,
+      "share": 4.6,
+      "cost": 45885,
+      "yoy": 4.4
+     },
+     {
+      "code": "20050600115",
+      "label": "Provox Life Go HME filter cassette",
+      "generic": false,
+      "items": 761,
+      "share": 4.6,
+      "cost": 134283,
+      "yoy": -1.7
+     },
+     {
+      "code": "20050300406",
+      "label": "Provox adhesive remover wipes",
+      "generic": false,
+      "items": 644,
+      "share": 3.9,
+      "cost": 22858,
+      "yoy": 2.4
+     },
+     {
+      "code": "20050300252",
+      "label": "Provox TrachPhone HME filter cassette",
+      "generic": false,
+      "items": 558,
+      "share": 3.4,
+      "cost": 109102,
+      "yoy": 19.2
+     },
+     {
+      "code": "20050500022",
+      "label": "FreeVent neckband",
+      "generic": false,
+      "items": 547,
+      "share": 3.3,
+      "cost": 53868,
+      "yoy": 7.7
+     },
+     {
+      "code": "20050400155",
+      "label": "Provox Swab cleaning swab medium",
+      "generic": false,
+      "items": 537,
+      "share": 3.2,
+      "cost": 16961,
+      "yoy": -6.6
+     },
+     {
+      "code": "20050500005",
+      "label": "Insight two piece adjustable tracheostomy tube holder latex free TH100",
+      "generic": false,
+      "items": 516,
+      "share": 3.1,
+      "cost": 32792,
+      "yoy": 12.2
+     },
+     {
+      "code": "20050400148",
+      "label": "Trachi-Swab cleaning swab large",
+      "generic": false,
+      "items": 493,
+      "share": 3.0,
+      "cost": 17973,
+      "yoy": 45.9
+     },
+     {
+      "code": "20050600116",
+      "label": "Provox Life Home HME filter cassette",
+      "generic": false,
+      "items": 469,
+      "share": 2.8,
+      "cost": 73896,
+      "yoy": 1.3
+     }
+    ],
+    "icbLeaders": [
+     {
+      "icb": "QOX",
+      "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+      "items": 178,
+      "leaders": [
+       {
+        "code": "20050300251",
+        "label": "Provox XtraFlow HME filter cassette",
+        "generic": false,
+        "items": 13,
+        "share": 7.3
+       },
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 12,
+        "share": 6.7
+       },
+       {
+        "code": "20050300406",
+        "label": "Provox adhesive remover wipes",
+        "generic": false,
+        "items": 9,
+        "share": 5.1
+       }
+      ]
+     },
+     {
+      "icb": "QHL",
+      "name": "NHS Birmingham and Solihull",
+      "items": 444,
+      "leaders": [
+       {
+        "code": "20050200130",
+        "label": "Cascade shower protector",
+        "generic": false,
+        "items": 29,
+        "share": 6.5
+       },
+       {
+        "code": "20050300251",
+        "label": "Provox XtraFlow HME filter cassette",
+        "generic": false,
+        "items": 27,
+        "share": 6.1
+       },
+       {
+        "code": "20050300250",
+        "label": "Provox XtraMoist HME filter cassette",
+        "generic": false,
+        "items": 23,
+        "share": 5.2
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 437,
+      "leaders": [
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 29,
+        "share": 6.6
+       },
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 22,
+        "share": 5.0
+       },
+       {
+        "code": "20050300407",
+        "label": "Provox skin barrier wipes",
+        "generic": false,
+        "items": 21,
+        "share": 4.8
+       }
+      ]
+     },
+     {
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 251,
+      "leaders": [
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 23,
+        "share": 9.2
+       },
+       {
+        "code": "20050300407",
+        "label": "Provox skin barrier wipes",
+        "generic": false,
+        "items": 15,
+        "share": 6.0
+       },
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 14,
+        "share": 5.6
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 615,
+      "leaders": [
+       {
+        "code": "20050400148",
+        "label": "Trachi-Swab cleaning swab large",
+        "generic": false,
+        "items": 36,
+        "share": 5.9
+       },
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 27,
+        "share": 4.4
+       },
+       {
+        "code": "20050300407",
+        "label": "Provox skin barrier wipes",
+        "generic": false,
+        "items": 26,
+        "share": 4.2
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 739,
+      "leaders": [
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 60,
+        "share": 8.1
+       },
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 32,
+        "share": 4.3
+       },
+       {
+        "code": "20050500005",
+        "label": "Insight two piece adjustable tracheostomy tube holder latex free TH100",
+        "generic": false,
+        "items": 31,
+        "share": 4.2
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 176,
+      "leaders": [
+       {
+        "code": "20050300407",
+        "label": "Provox skin barrier wipes",
+        "generic": false,
+        "items": 13,
+        "share": 7.4
+       },
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 10,
+        "share": 5.7
+       },
+       {
+        "code": "20050400155",
+        "label": "Provox Swab cleaning swab medium",
+        "generic": false,
+        "items": 10,
+        "share": 5.7
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 304,
+      "leaders": [
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 22,
+        "share": 7.2
+       },
+       {
+        "code": "20050300407",
+        "label": "Provox skin barrier wipes",
+        "generic": false,
+        "items": 21,
+        "share": 6.9
+       },
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 19,
+        "share": 6.2
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 231,
+      "leaders": [
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 15,
+        "share": 6.5
+       },
+       {
+        "code": "20050300406",
+        "label": "Provox adhesive remover wipes",
+        "generic": false,
+        "items": 11,
+        "share": 4.8
+       },
+       {
+        "code": "20050400118",
+        "label": "Advazorb Plus (T) tracheostomy dressing",
+        "generic": false,
+        "items": 10,
+        "share": 4.3
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 291,
+      "leaders": [
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 17,
+        "share": 5.8
+       },
+       {
+        "code": "20050300250",
+        "label": "Provox XtraMoist HME filter cassette",
+        "generic": false,
+        "items": 17,
+        "share": 5.8
+       },
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 16,
+        "share": 5.5
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 199,
+      "leaders": [
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 19,
+        "share": 9.5
+       },
+       {
+        "code": "20050300406",
+        "label": "Provox adhesive remover wipes",
+        "generic": false,
+        "items": 11,
+        "share": 5.5
+       },
+       {
+        "code": "20050300407",
+        "label": "Provox skin barrier wipes",
+        "generic": false,
+        "items": 11,
+        "share": 5.5
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 455,
+      "leaders": [
+       {
+        "code": "20050500022",
+        "label": "FreeVent neckband",
+        "generic": false,
+        "items": 22,
+        "share": 4.8
+       },
+       {
+        "code": "20050300406",
+        "label": "Provox adhesive remover wipes",
+        "generic": false,
+        "items": 22,
+        "share": 4.8
+       },
+       {
+        "code": "20050300252",
+        "label": "Provox TrachPhone HME filter cassette",
+        "generic": false,
+        "items": 21,
+        "share": 4.6
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 221,
+      "leaders": [
+       {
+        "code": "20050500005",
+        "label": "Insight two piece adjustable tracheostomy tube holder latex free TH100",
+        "generic": false,
+        "items": 23,
+        "share": 10.4
+       },
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 18,
+        "share": 8.1
+       },
+       {
+        "code": "20050400105",
+        "label": "Metalline tracheostomy dressing",
+        "generic": false,
+        "items": 15,
+        "share": 6.8
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 1067,
+      "leaders": [
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 94,
+        "share": 8.8
+       },
+       {
+        "code": "20050500022",
+        "label": "FreeVent neckband",
+        "generic": false,
+        "items": 49,
+        "share": 4.6
+       },
+       {
+        "code": "20050300250",
+        "label": "Provox XtraMoist HME filter cassette",
+        "generic": false,
+        "items": 46,
+        "share": 4.3
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 470,
+      "leaders": [
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 42,
+        "share": 8.9
+       },
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 29,
+        "share": 6.2
+       },
+       {
+        "code": "20050300407",
+        "label": "Provox skin barrier wipes",
+        "generic": false,
+        "items": 25,
+        "share": 5.3
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 184,
+      "leaders": [
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 19,
+        "share": 10.3
+       },
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 10,
+        "share": 5.4
+       },
+       {
+        "code": "20050600116",
+        "label": "Provox Life Home HME filter cassette",
+        "generic": false,
+        "items": 9,
+        "share": 4.9
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 549,
+      "leaders": [
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 36,
+        "share": 6.6
+       },
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 25,
+        "share": 4.6
+       },
+       {
+        "code": "20050400118",
+        "label": "Advazorb Plus (T) tracheostomy dressing",
+        "generic": false,
+        "items": 24,
+        "share": 4.4
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 478,
+      "leaders": [
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 36,
+        "share": 7.5
+       },
+       {
+        "code": "20050300407",
+        "label": "Provox skin barrier wipes",
+        "generic": false,
+        "items": 33,
+        "share": 6.9
+       },
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 30,
+        "share": 6.3
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 687,
+      "leaders": [
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 45,
+        "share": 6.6
+       },
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 44,
+        "share": 6.4
+       },
+       {
+        "code": "20050300406",
+        "label": "Provox adhesive remover wipes",
+        "generic": false,
+        "items": 35,
+        "share": 5.1
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 225,
+      "leaders": [
+       {
+        "code": "20050500005",
+        "label": "Insight two piece adjustable tracheostomy tube holder latex free TH100",
+        "generic": false,
+        "items": 22,
+        "share": 9.8
+       },
+       {
+        "code": "20050400148",
+        "label": "Trachi-Swab cleaning swab large",
+        "generic": false,
+        "items": 16,
+        "share": 7.1
+       },
+       {
+        "code": "20050400119",
+        "label": "Advazorb (T) Lite tracheostomy dressing",
+        "generic": false,
+        "items": 14,
+        "share": 6.2
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 275,
+      "leaders": [
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 21,
+        "share": 7.6
+       },
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 18,
+        "share": 6.5
+       },
+       {
+        "code": "20050400155",
+        "label": "Provox Swab cleaning swab medium",
+        "generic": false,
+        "items": 16,
+        "share": 5.8
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 534,
+      "leaders": [
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 44,
+        "share": 8.2
+       },
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 38,
+        "share": 7.1
+       },
+       {
+        "code": "20050600116",
+        "label": "Provox Life Home HME filter cassette",
+        "generic": false,
+        "items": 29,
+        "share": 5.4
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 302,
+      "leaders": [
+       {
+        "code": "20050300407",
+        "label": "Provox skin barrier wipes",
+        "generic": false,
+        "items": 19,
+        "share": 6.3
+       },
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 16,
+        "share": 5.3
+       },
+       {
+        "code": "20050500022",
+        "label": "FreeVent neckband",
+        "generic": false,
+        "items": 14,
+        "share": 4.6
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 1294,
+      "leaders": [
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 81,
+        "share": 6.3
+       },
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 67,
+        "share": 5.2
+       },
+       {
+        "code": "20050300407",
+        "label": "Provox skin barrier wipes",
+        "generic": false,
+        "items": 54,
+        "share": 4.2
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 127,
+      "leaders": [
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 14,
+        "share": 11.0
+       },
+       {
+        "code": "20050400105",
+        "label": "Metalline tracheostomy dressing",
+        "generic": false,
+        "items": 9,
+        "share": 7.1
+       },
+       {
+        "code": "20050300406",
+        "label": "Provox adhesive remover wipes",
+        "generic": false,
+        "items": 8,
+        "share": 6.3
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 356,
+      "leaders": [
+       {
+        "code": "20050400148",
+        "label": "Trachi-Swab cleaning swab large",
+        "generic": false,
+        "items": 31,
+        "share": 8.7
+       },
+       {
+        "code": "20050400118",
+        "label": "Advazorb Plus (T) tracheostomy dressing",
+        "generic": false,
+        "items": 25,
+        "share": 7.0
+       },
+       {
+        "code": "20050300252",
+        "label": "Provox TrachPhone HME filter cassette",
+        "generic": false,
+        "items": 17,
+        "share": 4.8
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 134,
+      "leaders": [
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 13,
+        "share": 9.7
+       },
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 9,
+        "share": 6.7
+       },
+       {
+        "code": "20050400156",
+        "label": "Provox Swab cleaning swab large",
+        "generic": false,
+        "items": 9,
+        "share": 6.7
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 172,
+      "leaders": [
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 18,
+        "share": 10.5
+       },
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 14,
+        "share": 8.1
+       },
+       {
+        "code": "20050600127",
+        "label": "Provox Life Stability adhesive",
+        "generic": false,
+        "items": 11,
+        "share": 6.4
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 567,
+      "leaders": [
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 62,
+        "share": 10.9
+       },
+       {
+        "code": "20050400105",
+        "label": "Metalline tracheostomy dressing",
+        "generic": false,
+        "items": 30,
+        "share": 5.3
+       },
+       {
+        "code": "20050500003",
+        "label": "Trachi-Hold tracheostomy tube holder adult",
+        "generic": false,
+        "items": 26,
+        "share": 4.6
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 579,
+      "leaders": [
+       {
+        "code": "20050400148",
+        "label": "Trachi-Swab cleaning swab large",
+        "generic": false,
+        "items": 65,
+        "share": 11.2
+       },
+       {
+        "code": "20050300252",
+        "label": "Provox TrachPhone HME filter cassette",
+        "generic": false,
+        "items": 59,
+        "share": 10.2
+       },
+       {
+        "code": "20050500005",
+        "label": "Insight two piece adjustable tracheostomy tube holder latex free TH100",
+        "generic": false,
+        "items": 58,
+        "share": 10.0
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 602,
+      "leaders": [
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 50,
+        "share": 8.3
+       },
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 27,
+        "share": 4.5
+       },
+       {
+        "code": "20050500022",
+        "label": "FreeVent neckband",
+        "generic": false,
+        "items": 24,
+        "share": 4.0
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 393,
+      "leaders": [
+       {
+        "code": "20050400118",
+        "label": "Advazorb Plus (T) tracheostomy dressing",
+        "generic": false,
+        "items": 47,
+        "share": 12.0
+       },
+       {
+        "code": "20050500005",
+        "label": "Insight two piece adjustable tracheostomy tube holder latex free TH100",
+        "generic": false,
+        "items": 23,
+        "share": 5.9
+       },
+       {
+        "code": "20050400148",
+        "label": "Trachi-Swab cleaning swab large",
+        "generic": false,
+        "items": 21,
+        "share": 5.3
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 758,
+      "leaders": [
+       {
+        "code": "20050300407",
+        "label": "Provox skin barrier wipes",
+        "generic": false,
+        "items": 62,
+        "share": 8.2
+       },
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 57,
+        "share": 7.5
+       },
+       {
+        "code": "20050600115",
+        "label": "Provox Life Go HME filter cassette",
+        "generic": false,
+        "items": 41,
+        "share": 5.4
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 443,
+      "leaders": [
+       {
+        "code": "20050300251",
+        "label": "Provox XtraFlow HME filter cassette",
+        "generic": false,
+        "items": 30,
+        "share": 6.8
+       },
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 24,
+        "share": 5.4
+       },
+       {
+        "code": "20050300406",
+        "label": "Provox adhesive remover wipes",
+        "generic": false,
+        "items": 23,
+        "share": 5.2
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 840,
+      "leaders": [
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 70,
+        "share": 8.3
+       },
+       {
+        "code": "20050300251",
+        "label": "Provox XtraFlow HME filter cassette",
+        "generic": false,
+        "items": 34,
+        "share": 4.0
+       },
+       {
+        "code": "20050300406",
+        "label": "Provox adhesive remover wipes",
+        "generic": false,
+        "items": 34,
+        "share": 4.0
+       }
+      ]
+     },
+     {
+      "icb": "Z9B2Z",
+      "name": "NHS West and North London",
+      "items": 935,
+      "leaders": [
+       {
+        "code": "20050300252",
+        "label": "Provox TrachPhone HME filter cassette",
+        "generic": false,
+        "items": 67,
+        "share": 7.2
+       },
+       {
+        "code": "20050300407",
+        "label": "Provox skin barrier wipes",
+        "generic": false,
+        "items": 53,
+        "share": 5.7
+       },
+       {
+        "code": "20050400133",
+        "label": "Provox cleaning towel",
+        "generic": false,
+        "items": 52,
+        "share": 5.6
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": false,
+  "whyEmpty": null,
+  "count": 24,
+  "roundupsExcluded": 6,
+  "updates": [
+   {
+    "title": "Nasal decongestant sprays and drops containing xylometazoline hydrochloride / oxymetazoline hydrochloride: increased risk of rebound congestion, rhinitis medicamentosa, and tachyphylaxis with overuse",
+    "url": "https://www.gov.uk/drug-safety-update/nasal-decongestant-sprays-and-drops-containing-xylometazoline-hydrochloride-slash-oxymetazoline-hydrochloride-increased-risk-of-rebound-congestion-rhinitis-medicamentosa-and-tachyphylaxis-with-overuse",
+    "published": "2026-04-30",
+    "updated": "2026-04-30",
+    "summary": "There have been reports of worsening nasal congestion (rebound congestion) when the effects of nasal decongestant sprays or drops containing xylometazoline hydrochloride and oxymetazoline hydrochloride, wear off."
+   },
+   {
+    "title": "#MedSafetyWeek (3-9 November 2025): A call to action to improve patient safety",
+    "url": "https://www.gov.uk/drug-safety-update/number-medsafetyweek-3-9-november-2025-a-call-to-action-to-improve-patient-safety",
+    "published": "2025-10-23",
+    "updated": "2025-10-23",
+    "summary": "The annual #MedSafetyWeek campaign takes place from 3 to 9 November 2025. This year’s campaign theme is ‘we can all help make medicines safer.’"
+   },
+   {
+    "title": "Paracetamol and pregnancy - reminder that taking paracetamol during pregnancy remains safe",
+    "url": "https://www.gov.uk/drug-safety-update/paracetamol-and-pregnancy-reminder-that-taking-paracetamol-during-pregnancy-remains-safe",
+    "published": "2025-09-23",
+    "updated": "2025-09-23",
+    "summary": "Patients should be reminded and reassured that there is no evidence that taking paracetamol during pregnancy causes autism in children. Paracetamol is recommended as the first-choice pain reliever for pregnant women, used at the lowest dose and for the shortest duration. It also acts as an antipyretic and is therefore used to treat fever."
+   },
+   {
+    "title": "Pseudoephedrine: very rare risk of posterior reversible encephalopathy syndrome (PRES) and reversible cerebral vasoconstriction syndrome (RCVS)",
+    "url": "https://www.gov.uk/drug-safety-update/pseudoephedrine-very-rare-risk-of-posterior-reversible-encephalopathy-syndrome-pres-and-reversible-cerebral-vasoconstriction-syndrome-rcvs",
+    "published": "2024-02-20",
+    "updated": "2024-02-20",
+    "summary": "There have been very rare reports of posterior reversible encephalopathy syndrome (PRES) and reversible cerebral vasoconstriction syndrome (RCVS) with pseudoephedrine."
+   },
+   {
+    "title": "Codeine linctus: public consultation on the proposal to reclassify to a prescription-only medicine",
+    "url": "https://www.gov.uk/drug-safety-update/codeine-linctus-public-consultation-on-the-proposal-to-reclassify-to-a-prescription-only-medicine",
+    "published": "2023-07-24",
+    "updated": "2023-07-24",
+    "summary": "We have launched a public consultation on the proposal to reclassify codeine linctus to a prescription-only medicine."
+   },
+   {
+    "title": "Letters and drug alerts sent to healthcare professionals in July 2019",
+    "url": "https://www.gov.uk/drug-safety-update/letters-and-drug-alerts-sent-to-healthcare-professionals-in-july-2019",
+    "published": "2019-08-19",
+    "updated": "2019-08-19",
+    "summary": "Letters were sent about Oncaspar▼ (pegaspargase), Ketalar (ketamine) injection, and Elmiron (pentosan polysulfate sodium). A recall was issued for several medicines taken out of the regulated medicines supply chain, including a patient-level recall for Neupro 4mg/24hr patches and Vimpat 100mg tablets."
+   },
+   {
+    "title": "Letters and drug alerts sent to healthcare professionals in June 2019",
+    "url": "https://www.gov.uk/drug-safety-update/letters-and-drug-alerts-sent-to-healthcare-professionals-in-june-2019",
+    "published": "2019-07-17",
+    "updated": "2019-07-17",
+    "summary": "Letters were sent about Myocrisin (sodium aurothiomalate), Cerliponase alfa (Brineura▼), Darzalex▼(daratumumab), retinoids▼, and febuxostat (Adenuric). A recall alert was issued for medicines that were taken out of the regulated medicines supply chain during distribution. Other alerts were issued about paracetamol tablets, docetaxel injection, Baxter potassium-chloride-containing intravenous infusions, and Emerade adrenaline auto-injectors."
+   },
+   {
+    "title": "Letters and drug alerts sent to healthcare professionals in March 2019",
+    "url": "https://www.gov.uk/drug-safety-update/letters-and-drug-alerts-sent-to-healthcare-professionals-in-march-2019",
+    "published": "2019-04-16",
+    "updated": "2019-04-16",
+    "summary": "Letters were sent about Xeljanz▼ (tofacitinib), ranitidine, Nulojix (belatacept), fluoroquinolone antibiotics, Genvoya▼, Stribild▼, Tybost, and belimumab (Benlysta▼). Drug alerts were issued about Accord losartan potassium containing products and Ozurdex implants."
+   }
+  ]
+ },
+ "drugTariffViiia": {
+  "effectiveMonth": "2026-09",
+  "latestPublishedMonth": "2026-10",
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-viii",
+  "whole": false,
+  "bnfFilter": [
+   "chapter 12"
+  ],
+  "lineCount": 55,
+  "categoryCounts": {
+   "C": 48,
+   "M": 4,
+   "A": 2,
+   "H": 1
+  },
+  "fileLines": 3533,
+  "fileLinesWithoutBnf": 53,
+  "priceMin": 1.77,
+  "priceMax": 154.95,
+  "linesShown": 55,
+  "lines": [
+   {
+    "medicine": "Benzydamine 0.15% mouthwash sugar free",
+    "pack": "300 ml",
+    "category": "M",
+    "price": 3.13,
+    "bnf": "1203010E0AAAAAA"
+   },
+   {
+    "medicine": "Benzydamine 0.15% oromucosal spray sugar free",
+    "pack": "30 ml",
+    "category": "M",
+    "price": 1.77,
+    "bnf": "1203010E0AAABAB"
+   },
+   {
+    "medicine": "Fluticasone propionate 50micrograms/dose / Azelastine 137micrograms/dose nasal spray",
+    "pack": "120 dose",
+    "category": "M",
+    "price": 4.49,
+    "bnf": "1202010Y0AAAAAA"
+   },
+   {
+    "medicine": "Mometasone 50micrograms/dose nasal spray",
+    "pack": "140 dose",
+    "category": "M",
+    "price": 2.33,
+    "bnf": "1202010U0AAAAAA"
+   },
+   {
+    "medicine": "Acetic acid (glacial) 2% ear spray",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 4.92,
+    "bnf": "1201010B0AAAFAF"
+   },
+   {
+    "medicine": "Azelastine 140micrograms/dose nasal spray",
+    "pack": "22 ml",
+    "category": "C",
+    "price": 10.5,
+    "bnf": "1202010A0AAABAB"
+   },
+   {
+    "medicine": "Azelastine 210micrograms/dose nasal spray",
+    "pack": "20 ml",
+    "category": "C",
+    "price": 9.9,
+    "bnf": "1202010A0AAAEAE"
+   },
+   {
+    "medicine": "Beclometasone 50micrograms/dose nasal spray",
+    "pack": "200 dose",
+    "category": "C",
+    "price": 2.63,
+    "bnf": "1202010C0AAAAAA"
+   },
+   {
+    "medicine": "Benzocaine 10% dental gel sugar free",
+    "pack": "5.3 gram",
+    "category": "C",
+    "price": 2.74,
+    "bnf": "1203010C0AAAPAP"
+   },
+   {
+    "medicine": "Benzocaine 1mg/dose oromucosal spray sugar free",
+    "pack": "15 ml",
+    "category": "C",
+    "price": 3.79,
+    "bnf": "1203030B0AAAIAI"
+   },
+   {
+    "medicine": "Benzocaine 20% dental gel sugar free",
+    "pack": "5.3 gram",
+    "category": "C",
+    "price": 3.69,
+    "bnf": "1203010C0AAARAR"
+   },
+   {
+    "medicine": "Benzydamine 0.30% oromucosal spray sugar free",
+    "pack": "15 ml",
+    "category": "C",
+    "price": 4.6,
+    "bnf": "1203010E0AAACAC"
+   },
+   {
+    "medicine": "Benzydamine 3mg lozenges sugar free",
+    "pack": "20 lozenge",
+    "category": "C",
+    "price": 4.24,
+    "bnf": "1203030Y0AAAAAA"
+   },
+   {
+    "medicine": "Betamethasone 0.1% / Neomycin 0.5% ear/eye/nose drops",
+    "pack": "10 ml",
+    "category": "C",
+    "price": 2.39,
+    "bnf": "1201010E0AAABAB"
+   },
+   {
+    "medicine": "Chloramphenicol 10% ear drops",
+    "pack": "10 ml",
+    "category": "C",
+    "price": 144.23,
+    "bnf": "1201010H0AAABAB"
+   },
+   {
+    "medicine": "Chloramphenicol 5% ear drops",
+    "pack": "10 ml",
+    "category": "C",
+    "price": 154.95,
+    "bnf": "1201010H0AAAAAA"
+   },
+   {
+    "medicine": "Chlorhexidine 1% dental gel sugar free",
+    "pack": "50 gram",
+    "category": "C",
+    "price": 3.24,
+    "bnf": "1203040E0AAAAAA"
+   },
+   {
+    "medicine": "Chlorhexidine gluconate 0.06% / Sodium fluoride 0.05% mouthwash sugar free",
+    "pack": "500 ml",
+    "category": "C",
+    "price": 2.64,
+    "bnf": "1203040E0AAAHAH"
+   },
+   {
+    "medicine": "Choline salicylate 8.7% oromucosal gel sugar free",
+    "pack": "15 gram",
+    "category": "C",
+    "price": 3.82,
+    "bnf": "1203010K0AAABAB"
+   },
+   {
+    "medicine": "Ciprofloxacin 0.3% / Dexamethasone 0.1% ear drops",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 6.12,
+    "bnf": "1201010AEAAAAAA"
+   },
+   {
+    "medicine": "Ciprofloxacin 2mg/ml ear drops 0.25ml unit dose preservative free",
+    "pack": "15 unit dose",
+    "category": "C",
+    "price": 6.01,
+    "bnf": "1201010ACAAABAB"
+   },
+   {
+    "medicine": "Ciprofloxacin 3mg/ml / Fluocinolone acetonide 0.25mg/ml ear drops 0.25ml unit dose preservative free",
+    "pack": "15 unit dose",
+    "category": "C",
+    "price": 6.01,
+    "bnf": "1201010AFAAAAAA"
+   },
+   {
+    "medicine": "Dexamethasone 0.1% / Neomycin 0.5% / Acetic acid (glacial) 2% ear spray",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 8.58,
+    "bnf": "120101050AAABAB"
+   },
+   {
+    "medicine": "Dichlorobenzyl alcohol 1.2mg / Amylmetacresol 600microgram lozenges",
+    "pack": "24 lozenge",
+    "category": "C",
+    "price": 3.14,
+    "bnf": "1203030A0AAAAAA"
+   },
+   {
+    "medicine": "Docusate sodium 0.5% ear drops",
+    "pack": "10 ml",
+    "category": "C",
+    "price": 2.93,
+    "bnf": "1201030F0AAABAB"
+   },
+   {
+    "medicine": "Docusate sodium 5% ear drops",
+    "pack": "15 ml",
+    "category": "C",
+    "price": 5.6,
+    "bnf": "1201030F0AAACAC"
+   },
+   {
+    "medicine": "Doxycycline 20mg tablets",
+    "pack": "56 tablet",
+    "category": "C",
+    "price": 17.3,
+    "bnf": "1203010U0AAABAB"
+   },
+   {
+    "medicine": "Flumetasone 0.02% / Clioquinol 1% ear drops",
+    "pack": "7.5 ml",
+    "category": "C",
+    "price": 11.34,
+    "bnf": "1201010F0AAAAAA"
+   },
+   {
+    "medicine": "Flurbiprofen 8.75mg lozenges",
+    "pack": "16 lozenge",
+    "category": "C",
+    "price": 4.52,
+    "bnf": "1203010F0AAAAAA"
+   },
+   {
+    "medicine": "Fluticasone 400microgram/unit dose nasal drops",
+    "pack": "30 unit dose",
+    "category": "C",
+    "price": 21.99,
+    "bnf": "1202010M0AAABAB"
+   },
+   {
+    "medicine": "Fluticasone propionate 50micrograms/dose nasal spray",
+    "pack": "150 dose",
+    "category": "C",
+    "price": 11.01,
+    "bnf": "1202010M0AAACAC"
+   },
+   {
+    "medicine": "Gentamicin 0.3% / Hydrocortisone acetate 1% ear drops",
+    "pack": "10 ml",
+    "category": "C",
+    "price": 33.26,
+    "bnf": "1201010G0AAACAC"
+   },
+   {
+    "medicine": "Hexetidine 0.1% mouthwash sugar free",
+    "pack": "200 ml",
+    "category": "C",
+    "price": 3.24,
+    "bnf": "1203040G0AAAAAA"
+   },
+   {
+    "medicine": "Hydrogen peroxide 1.5% mouthwash sugar free",
+    "pack": "300 ml",
+    "category": "C",
+    "price": 2.94,
+    "bnf": "1203040I0AAADAD"
+   },
+   {
+    "medicine": "Ipratropium bromide 21micrograms/dose nasal spray",
+    "pack": "240 dose",
+    "category": "C",
+    "price": 8.72,
+    "bnf": "1202020I0AAABAB"
+   },
+   {
+    "medicine": "Levomenthol 0.3% ointment",
+    "pack": "14 gram",
+    "category": "C",
+    "price": 2.43,
+    "bnf": "120202000AAANAN"
+   },
+   {
+    "medicine": "Lidocaine 0.05% / Chlorhexidine 0.2% oromucosal spray sugar free",
+    "pack": "30 ml",
+    "category": "C",
+    "price": 5.71,
+    "bnf": "1203030M0AAAQAQ"
+   },
+   {
+    "medicine": "Lidocaine 0.33% / Cetylpyridinium chloride 0.1% oromucosal gel sugar free",
+    "pack": "10 gram",
+    "category": "C",
+    "price": 2.39,
+    "bnf": "1203010Q0AAACAC"
+   },
+   {
+    "medicine": "Miconazole 20mg/g oromucosal gel sugar free",
+    "pack": "15 gram",
+    "category": "C",
+    "price": 5.25,
+    "bnf": "1203020H0AAAAAA"
+   },
+   {
+    "medicine": "Miconazole 20mg/g oromucosal gel sugar free",
+    "pack": "80 gram",
+    "category": "C",
+    "price": 4.95,
+    "bnf": "1203020H0AAAAAA"
+   },
+   {
+    "medicine": "Mometasone 25micrograms/dose / Olopatadine 600micrograms/dose nasal spray",
+    "pack": "240 dose",
+    "category": "C",
+    "price": 13.32,
+    "bnf": "1202010Z0AAAAAA"
+   },
+   {
+    "medicine": "Mupirocin 2% nasal ointment",
+    "pack": "3 gram",
+    "category": "C",
+    "price": 4.24,
+    "bnf": "1202030R0AAAAAA"
+   },
+   {
+    "medicine": "Neomycin 0.5% / Chlorhexidine hydrochloride 0.1% nasal cream",
+    "pack": "15 gram",
+    "category": "C",
+    "price": 1.99,
+    "bnf": "1202030S0AAAAAA"
+   },
+   {
+    "medicine": "Phenazone 40mg/g / Lidocaine 10mg/g ear drops",
+    "pack": "15 ml",
+    "category": "C",
+    "price": 8.92,
+    "bnf": "1201010AGAAAAAA"
+   },
+   {
+    "medicine": "Pilocarpine 5mg tablets",
+    "pack": "84 tablet",
+    "category": "C",
+    "price": 41.14,
+    "bnf": "1203050P0AAABAB"
+   },
+   {
+    "medicine": "Sodium chloride 0.9% nebuliser liquid 2.5ml unit dose ampoules",
+    "pack": "20 unit dose",
+    "category": "C",
+    "price": 15.5,
+    "bnf": "1202020L0AACCCC"
+   },
+   {
+    "medicine": "Triamcinolone 55micrograms/dose nasal spray",
+    "pack": "120 dose",
+    "category": "C",
+    "price": 7.39,
+    "bnf": "1202010T0AAAAAA"
+   },
+   {
+    "medicine": "Urea hydrogen peroxide 5% ear drops",
+    "pack": "8 ml",
+    "category": "C",
+    "price": 3.59,
+    "bnf": "1201030N0AAAAAA"
+   },
+   {
+    "medicine": "Xylometazoline 0.05% nasal drops",
+    "pack": "10 ml",
+    "category": "C",
+    "price": 2.82,
+    "bnf": "1202020P0AAAAAA"
+   },
+   {
+    "medicine": "Xylometazoline 0.1% nasal drops",
+    "pack": "10 ml",
+    "category": "C",
+    "price": 2.5,
+    "bnf": "1202020P0AAABAB"
+   },
+   {
+    "medicine": "Xylometazoline 0.1% nasal spray",
+    "pack": "10 ml",
+    "category": "C",
+    "price": 2.97,
+    "bnf": "1202020P0AAACAC"
+   },
+   {
+    "medicine": "Xylometazoline 70micrograms/dose / Ipratropium bromide 84micrograms/dose nasal spray",
+    "pack": "70 dose",
+    "category": "C",
+    "price": 4.99,
+    "bnf": "1202020Q0AAAAAA"
+   },
+   {
+    "medicine": "Budesonide 64micrograms/dose nasal spray",
+    "pack": "120 dose",
+    "category": "A",
+    "price": 15.29,
+    "bnf": "1202010I0AAAFAF"
+   },
+   {
+    "medicine": "Chlorhexidine gluconate 0.2% mouthwash",
+    "pack": "300 ml",
+    "category": "A",
+    "price": 3.11,
+    "bnf": "1203040E0AAABAB"
+   },
+   {
+    "medicine": "Fluticasone furoate 27.5micrograms/dose nasal spray",
+    "pack": "120 dose",
+    "category": "H",
+    "price": 7.98,
+    "bnf": "1202010W0AAAAAA"
+   }
+  ]
  }
 }

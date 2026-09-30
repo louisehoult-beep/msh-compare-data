@@ -20,7 +20,12 @@
   "frameworkAwards": "2026-09-30T12:30:14+00:00",
   "openTenders": "30/09/2026",
   "drugTariff": "2026-09-30",
-  "localIntel": "2026-09-30"
+  "localIntel": "2026-09-30",
+  "supplierDirectory": "2026-09-30",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-09-30",
+  "drugTariffViiia": null,
+  "hospitalPrescribing": null
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -28,7 +33,11 @@
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. The framework this patch buys its implants through — NHS Supply Chain's Interventional Cardiology and Interventional Radiology framework, 2021/S 000-017565 Lot 1, which carries the endovascular stent grafts, peripheral vascular stents, carotid, iliac and renal stents and aneurysm coils — is not in the Hub's framework dataset, so its twelve suppliers are not counted below. Aortic and peripheral implants also travel through NHS England's Specialised Services Devices Programme, a central supply route with no NHS Supply Chain framework page at all. What follows is therefore the compression and capital-equipment end of this patch, which is what the record holds, not the whole buying picture. The page's Deep dive covers the IC/IR route.",
   "awards": "Award-stage notices whose TITLE matches /\\b(vascular|endovascular|evar|tevar|fevar|bevar|aneurysm|abdominal aortic|thoraco[- ]?abdominal|aortic dissection|aortic arch|aortic aneurysm|aortic stent|aortic graft|aortic endograft|peripheral arter\\w*|claudication|critical limb|limb ischaem\\w*|limb salvage|angioplasty|atherectomy|stent graft|endograft|carotid|endarterectomy|varicose|sclerotherapy|arteriovenous fistula|angiograph\\w*|angiogram|interventional radiolog\\w*|ankle brachial|abpi|amputation)\\b/i and does not match /\\b(retinal|vascular access|neuro[- ]?vascular)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: vascsurg). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 1 of the 1 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (0 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-09-30.",
+  "drugTariffViiia": null
  },
  "counts": {
   "frameworks": 2,
@@ -38,7 +47,14 @@
   "awardsMatched": 47,
   "awardsWithheldByBuyerCap": 0,
   "openTenders": 0,
-  "localIntel": 0
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 0,
+  "suppliersDirectoryTagged": 1,
+  "suppliersDirectoryOnOtherFrameworks": 1,
+  "suppliersDirectoryWithFrameworkNote": 1,
+  "gpMarkets": 0,
+  "mhraDsu": 2,
+  "drugTariffViiiaLines": 0
  },
  "frameworks": [
   {
@@ -117,7 +133,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "AmRay UK",
@@ -125,7 +143,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "APC Cardiovascular Ltd",
@@ -133,7 +153,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Arjo",
@@ -143,7 +165,9 @@
    ],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Canon Medical Systems",
@@ -151,7 +175,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Cardinal Health U.K. 432 Ltd",
@@ -161,7 +187,9 @@
    ],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Compleo Health Limited",
@@ -169,7 +197,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "crxcompression.com",
@@ -177,7 +207,9 @@
    "variants": [],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Daylong Direct (Credenhill)",
@@ -185,7 +217,9 @@
    "variants": [],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Direct Healthcare Group",
@@ -195,7 +229,9 @@
    ],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "DJO UK Ltd (Enovis)",
@@ -205,7 +241,9 @@
    ],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Essity UK Limited",
@@ -215,7 +253,9 @@
    ],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Gardamed",
@@ -225,7 +265,9 @@
    ],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Gardamed Limited (Barcelcom SA)",
@@ -233,7 +275,9 @@
    "variants": [],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Gardamed Ltd - Mego Afek",
@@ -243,7 +287,9 @@
    ],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "GE HealthCare",
@@ -253,7 +299,9 @@
    ],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Genmed.Me Ltd",
@@ -261,7 +309,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Global Health and Safety Ltd",
@@ -269,7 +319,9 @@
    "variants": [],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Griffiths and Nielsen Ltd",
@@ -277,7 +329,9 @@
    "variants": [],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Haddenham Healthcare",
@@ -287,7 +341,9 @@
    ],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "InHealth Ltd",
@@ -295,7 +351,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Juzo UK Limited",
@@ -303,7 +361,9 @@
    "variants": [],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "L&R Medical / Activa (Lohmann & Rauscher)",
@@ -313,7 +373,9 @@
    ],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medalin Limited",
@@ -321,7 +383,9 @@
    "variants": [],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "medi UK",
@@ -331,7 +395,9 @@
    ],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medtronic",
@@ -341,7 +407,9 @@
    ],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Neo-Innovations UK Ltd",
@@ -349,7 +417,9 @@
    "variants": [],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Philips",
@@ -359,7 +429,9 @@
    ],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Praxis Medical Ltd",
@@ -367,7 +439,9 @@
    "variants": [],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Regent’s Park Healthcare",
@@ -375,7 +449,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Rocialle Healthcare",
@@ -385,7 +461,9 @@
    ],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Siemens Healthineers",
@@ -395,7 +473,9 @@
    ],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Sigvaris",
@@ -405,7 +485,9 @@
    ],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Thuasne UK Ltd",
@@ -413,7 +495,9 @@
    "variants": [],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "United Imaging Health Ltd",
@@ -421,7 +505,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Urgo Medical",
@@ -431,7 +517,9 @@
    ],
    "frameworks": [
     "Vascular Therapy and Associated Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "WSR Medical Solutions Ltd",
@@ -439,7 +527,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   }
  ],
  "awards": [
@@ -629,7 +719,7 @@
   {
    "title": "Interventional Radiology Products [ 5328098 ]",
    "buyer": "Regional Business Services Organisation Procurement and Logistics Service",
-   "supplier": "ROCKET MEDICAL PLC, Stryker UK Ltd, Acandis GmbH, MERIT MEDICAL UK LIMITED, It's",
+   "supplier": "ROCKET MEDICAL PLC, Stryker UK Ltd, Acandis GmbH, MERIT MEDICAL UK LIMITED, It's Interventional Limited, VYGON U.K. LTD, COOK UK LTD, Boston Scientific Ltd, TERUMO UK LIMITED, Cordis Medical UK Ltd, SHOCKWAVE MEDICAL INC, Penumbra Interventional Therapies UK Limited, M3 MEDICAL, MEDTRONIC LIMITED, NORTHERN HOSPITAL SUPPLIES LTD, B V M MEDICAL LTD, ELECTRAMED LTD, BARD LTD, KEANEY MEDICAL LTD, APR MEDTECH LTD, PFM MEDICAL UK LIMITED, Uniphar Medtech Ltd t/a M.E.D. Surgical, BRACCO UK LIMITED, Iskus Health Limited",
    "date": "2025-09-29",
    "url": "https://www.find-tender.service.gov.uk/Notice/060548-2025",
    "value": null,
@@ -679,7 +769,7 @@
   {
    "title": "NP68424 Interventional Radiology",
    "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotland) (NSS)",
-   "supplier": "Becton Dickinson U.K. Limited, COOK (UK) LTD, GTA Medical Limited, INOMED HEALTH",
+   "supplier": "Becton Dickinson U.K. Limited, COOK (UK) LTD, GTA Medical Limited, INOMED HEALTH LIMITED, Leib Medical, Argon Medical Devices UK Ltd, Merit Medical UK, A/S Mermaid Medical Ltd, Pennamed, Teleflex",
    "date": "2025-02-27",
    "url": "https://www.find-tender.service.gov.uk/Notice/007421-2025",
    "value": null,
@@ -699,7 +789,7 @@
   {
    "title": "Operating and Mobile Interventional Radiology Tables, Related Accessories and Services",
    "buyer": "NHS Supply Chain Operated by Supply Chain Coordination Ltd (SCCL)",
-   "supplier": "A.C. Cossor & Son (Surgical) Limited, Bender UK Limited, Brandon Medical Company",
+   "supplier": "A.C. Cossor & Son (Surgical) Limited, Bender UK Limited, Brandon Medical Company Limited, D.P. Medical Systems Limited, Felgains Ltd, Getinge Limited, Hill-Rom Limited, MedScience Distribution Ltd, Melyd Surgical Limited, Starkstrom Limited, STERIS Solutions Limited, Stryker UK Limited, Xograph Healthcare Lkmited",
    "date": "2024-10-31",
    "url": "https://www.find-tender.service.gov.uk/Notice/035291-2024",
    "value": null,
@@ -729,7 +819,7 @@
   {
    "title": "Vascular Therapy and Associated Products",
    "buyer": "NHS Supply Chain",
-   "supplier": "ARJO UK LTD, CARDINAL HEALTH UK 432 LIMITED, Daylong Direct, Direct Health Group",
+   "supplier": "ARJO UK LTD, CARDINAL HEALTH UK 432 LIMITED, Daylong Direct, Direct Health Group, Enovis UK, Essity T/A BSN Medical Ltd, GARDAMED LIMITED, Gardamed Limited  (Barcelcom SA), Gardamed Ltd - Mego Afek, Global Health and Safety Ltd., Griffiths and Nielsen Ltd, Haddenham Healthcare Ltd, Juzo UK Limited, L&R Medical UK Ltd, Medalin Limited, MEDI UK LTD, NEO-INNOVATIONS UK LTD, Praxis Medical Ltd, Rocialle Healthcare Ltd, SIGVARIS BRITAIN LTD, THUASNE UK LTD, URGO LIMITED",
    "date": "2023-10-02",
    "url": "https://www.contractsfinder.service.gov.uk/Notice/bc490781-9738-464c-92e6-e433cdbfc8b8",
    "value": 96000000,
@@ -769,7 +859,7 @@
   {
    "title": "INTERVENTIONAL CARDIOLOGY, INTERVENTIONAL RADIOLOGY AND INTERVENTIONAL NEURORADIOLOGY, CARDIAC RHYTHM MANAGEMENT AND ELE",
    "buyer": "NHS Supply Chain Operated by Health Solutions Team Limited acting as agent of Supply Chain Coordination Ltd (SCCL)",
-   "supplier": "Abbott Medical U.K.Ltd, Acrostak-UK Ltd, Anser Medical Ltd, APC Cardiovascular L",
+   "supplier": "Abbott Medical U.K.Ltd, Acrostak-UK Ltd, Anser Medical Ltd, APC Cardiovascular Ltd, APR MEDTECH LTD, Aquilant Limited, Argon Medical Devices UK Ltd, B. Braun Medical Limited, Bard ltd, Becton, Dickinson U.K. Limited, Bentley Innomed, Biosensors SA, Boston Scientific Ltd, BVM MEDICAL LTD, Cardinal Health UK 432 Limited, Cardiologic Ltd, COOK (UK) LTD, Cormed Limited, CryoLife Europa, Ltd., Delta Surgical Ltd, Dot Medical Limited, Endologix International B.V., Getinge Limited, Guerbet, ICARDIOLOGY UK LTD, Inomed Health Limited, Insight Lifetech Ltd, KIMAL PLC, Leib Medical Ltd, LeMaitre Vascular Limited, Lombard Medical Limited, Macromed UK Ltd, MCT Lifesciences Ltd, MEDALLIANCE MA, Medtronic Limited, Meril UK Pvt Ltd, Merit Medical UK Ltd, Microport CRM UK, Opsens Inc, OscarTech UK Ltd, P14 Medical Limited, Penumbra Interventional Therapies UK Ltd, Shockwave Medical Inc, SMT, Spectranetics UK, Sysmex UK, Teleflex, Terumo Aortic, Terumo UK Ltd, U.K. Medical Limited, Vascular Perspectives Ltd, Vivasure Medical Ltd, Volcano Europe BV, W.L. Gore & Associates (UK) Ltd., BIOTRONIK UK LTD, Philips Electronics UK Limited",
    "date": "2022-11-22",
    "url": "https://www.find-tender.service.gov.uk/Notice/033148-2022",
    "value": null,
@@ -779,7 +869,7 @@
   {
    "title": "INTERVENTIONAL CARDIOLOGY, INTERVENTIONAL RADIOLOGY AND INTERVENTIONAL NEURORADIOLOGY, CARDIAC RHYTHM MANAGEMENT AND ELE",
    "buyer": "NHS Supply Chain",
-   "supplier": "Abbott Medical U.K.Ltd, Acrostak-UK Ltd, Acutus Medical, Adagio Medical, Anser M",
+   "supplier": "Abbott Medical U.K.Ltd, Acrostak-UK Ltd, Acutus Medical, Adagio Medical, Anser Medical Ltd, APC Cardiovascular Ltd, APR MEDTECH LTD, Aquilant Limited, Argon Medical Devices UK Ltd, AtriCure UK Limited, B. Braun Medical Limited, Bard ltd, Baylis Medical UK Ltd, Bentley Innomed, Biosensors SA, BIOTRONIK UK LTD, Boston Scientific Ltd, BVM MEDICAL LTD, Cardinal Health UK 432 Limited, Cardiologic Ltd, Circle Cardiovascular Imaging UK LTD, COOK (UK) LTD, Cormed Limited, CryoLife Europa, Ltd., Delta Surgical Ltd, Dot Medical Limited, EBR Systems Inc, Endologix International B.V., Getinge Limited, Guerbet, ICARDIOLOGY UK LTD, Inomed Health Limited, Insight Lifetech Ltd, Kaneka Pharma Europe NV, Johnson & Johnson Medical Ltd, KIMAL PLC, Leib Medical Ltd, Becton, Dickinson U.K. Limited, LeMaitre Vascular Limited, Lombard Medical Limited, Macromed UK Ltd, MCT Lifesciences Ltd, MEDALLIANCE MA, Medtronic Limited, Meril UK Pvt Ltd, Merit Medical UK Ltd, Microport CRM UK, Microvention UK, Neurologic Europe, NeuroVasc Technologies, Inc., Occlutech UK Ltd, Opsens Inc, OscarTech UK Ltd, P14 Medical Limited, Penumbra Interventional Therapies UK Ltd, phenox uk ltd, Philips Electronics UK Limited, Rapid Medical Sub. UK Ltd, Sela Medical UK LTD, Shockwave Medical Inc, SMT, Spectranetics UK, Stereotaxis, Inc., Stryker UK Ltd, Sysmex UK, Teleflex, Terumo Aortic, Terumo UK Ltd, U.K. Medical Limited, Vanguard AG, Vascular Perspectives Ltd, Vivasure Medical Ltd, Volcano Europe BV, W.L. Gore & Associates (UK) Ltd.",
    "date": "2022-10-28",
    "url": "https://www.contractsfinder.service.gov.uk/Notice/77ab0e15-6f5d-447f-8155-df2f11f49eef",
    "value": 300000000,
@@ -799,7 +889,7 @@
   {
    "title": "Supply of Vascular Products : Grafts and consumables via Tower 6 (HST)",
    "buyer": "University Hospitals of Leicester Nhs Trust",
-   "supplier": "ABBOTT LABORATORIES LIMITED, APC CARDIOVASCULAR LIMITED, AQUILANT INTERVENTIONAL",
+   "supplier": "ABBOTT LABORATORIES LIMITED, APC CARDIOVASCULAR LIMITED, AQUILANT INTERVENTIONAL, BARD LIMITED, BOSTON SCIENTIFIC (UK) LIMITED, CARDINAL HEALTH U.K. 432 LIMITED, COOK UK LIMITED, JOTEC UK LTD, MAQUET LIMITED, MEDIPLUS LIMITED, MEDTRONIC LIMITED, MERIT MEDICAL UK LIMITED, TERUMO AORTIC LIMITED, TFX GROUP LIMITED, W.L.GORE & ASSOCIATES LTD",
    "date": "2022-02-01",
    "url": "https://www.contractsfinder.service.gov.uk/Notice/90067a48-b0e7-4c5f-8c1f-99e28eb66784",
    "value": 262000,
@@ -839,7 +929,7 @@
   {
    "title": "Angiography & Hybrid Theatre Equipment and Related Services",
    "buyer": "NHS Supply Chain",
-   "supplier": "Althea UK and Ireland Limited, Canon Medical Systems Ltd, CHG-MERIDIAN UK LTD, G",
+   "supplier": "Althea UK and Ireland Limited, Canon Medical Systems Ltd, CHG-MERIDIAN UK LTD, GE Medical Systems Ltd, InHealth Limited, MEDECON HEALTHCARE, Medtronic Limited, Philips Electronics UK Limited, Siemens Healthcare Limited",
    "date": "2021-12-06",
    "url": "https://www.contractsfinder.service.gov.uk/Notice/b8d1dbef-066b-4e04-8537-802a01fbff49",
    "value": 200000,
@@ -887,5 +977,94 @@
   "nations": "Scotland, Wales, Northern Ireland and Ireland",
   "policy": "Policy and demand signals",
   "data": "Data sources"
- }
+ },
+ "directorySuppliers": [
+  {
+   "name": "Kimal PLC",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Kimal PLC",
+   "seedLabels": [
+    "Vascular surgery & peripheral intervention"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Central Venous Catheters and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/central-venous-catheters-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Intravenous Accessories and Pressure Monitoring Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-gynaecology-and-sexual-health-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Procedure Packs",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/custom-procedure-packs/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Renal Replacement Therapies Services, Technologies and Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/renal-replacement-therapy-equipment-and-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Central Venous Catheters",
+     "url": "https://www.find-tender.service.gov.uk/Notice/001530-2025",
+     "source": "Find a Tender contract notice; dates and supplier count from NHS Supply Chain launch brief"
+    }
+   ],
+   "frameworkNote": "Named on five NHS Supply Chain frameworks not counted as this speciality's: Central Venous Catheters and Associated Products; Intravenous Accessories and Pressure Monitoring Accessories; Maternity, Obstetrics, Gynaecology and Sexual Health Products; Procedure Packs; Renal Replacement Therapies Services, Technologies and Consumables. The Hub's supplier directory also records: NHS Supply Chain — Central Venous Catheters."
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": false,
+  "markets": [],
+  "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": false,
+  "whyEmpty": null,
+  "count": 2,
+  "roundupsExcluded": 0,
+  "updates": [
+   {
+    "title": "#MedSafetyWeek (3-9 November 2025): A call to action to improve patient safety",
+    "url": "https://www.gov.uk/drug-safety-update/number-medsafetyweek-3-9-november-2025-a-call-to-action-to-improve-patient-safety",
+    "published": "2025-10-23",
+    "updated": "2025-10-23",
+    "summary": "The annual #MedSafetyWeek campaign takes place from 3 to 9 November 2025. This year’s campaign theme is ‘we can all help make medicines safer.’"
+   },
+   {
+    "title": "Paracetamol and pregnancy - reminder that taking paracetamol during pregnancy remains safe",
+    "url": "https://www.gov.uk/drug-safety-update/paracetamol-and-pregnancy-reminder-that-taking-paracetamol-during-pregnancy-remains-safe",
+    "published": "2025-09-23",
+    "updated": "2025-09-23",
+    "summary": "Patients should be reminded and reassured that there is no evidence that taking paracetamol during pregnancy causes autism in children. Paracetamol is recommended as the first-choice pain reliever for pregnant women, used at the lowest dose and for the shortest duration. It also acts as an antipyretic and is therefore used to treat fever."
+   }
+  ]
+ },
+ "drugTariffViiia": null
 }

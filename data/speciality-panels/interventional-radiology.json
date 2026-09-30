@@ -20,7 +20,12 @@
   "frameworkAwards": "2026-09-30T12:30:14+00:00",
   "openTenders": "30/09/2026",
   "drugTariff": "2026-09-30",
-  "localIntel": "2026-09-30"
+  "localIntel": "2026-09-30",
+  "supplierDirectory": "2026-09-30",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-09-30",
+  "drugTariffViiia": null,
+  "hospitalPrescribing": null
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -28,7 +33,11 @@
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. The framework this speciality actually buys on is not counted below. NHS Supply Chain's Interventional Cardiology, Interventional Radiology and Interventional Neuroradiology, Cardiac Rhythm Management and Electrophysiology agreement (2021/S 000-017565), whose Lot 1 carries 52 of its 67 suppliers, publishes a supplier count on its brief but no list of names, so the Hub's framework dataset records it as unparsed and its suppliers cannot be named here. Operating and Mobile Interventional Radiology Tables is missing for the same kind of reason: its brief states 12 suppliers and only 11 could be read, and a list that does not match the page is not published. Two further routes have no NHS Supply Chain framework page at all: Syringes, Needles and Associated Products (2026/S 000-002484), which took this patch's 182 biopsy product codes on 1 July 2026, and Scotland's NP68424, which has 18 lots and 27 suppliers of its own. What follows is therefore the contrast and angio-suite end of this speciality, which is what the framework record holds, plus the award trail for the rest. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from this market. The page's Buying route section sets out all four routes with their expiry dates.",
   "awards": "Award-stage notices whose TITLE matches /\\b(interventional|embolis\\w*|emboliz\\w*|embolic\\w*|chemoembol\\w*|radioembol\\w*|angioplast\\w*|atherectom\\w*|thrombectom\\w*|thrombolys\\w*|contrast|lipiodol|percutaneous|nephrostom\\w*|endovascular|tumour ablation|tumor ablation|microwave ablation|cryoablat\\w*|image[- ]?guided|ct[- ]guided|ultrasound[- ]guided|needles including biopsy|uterine artery|prostate artery|genicular artery|vena cava filter|hybrid theatre)\\b/i and does not match /\\b(anti[- ]?embol\\w*|implantable cardiac|cath ?lab|heart pump\\w*)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33696800 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
+  "directorySuppliers": "No supplier directory label maps to this speciality, so no directory-tagged supplier is listed. That is a gap in the directory's vocabulary, not a finding that no company sells here, and no neighbouring page's list is borrowed to fill it.",
+  "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
+  "mhraDsu": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "drugTariffViiia": null
  },
  "counts": {
   "frameworks": 2,
@@ -38,7 +47,14 @@
   "awardsMatched": 74,
   "awardsWithheldByBuyerCap": 0,
   "openTenders": 0,
-  "localIntel": 0
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 0,
+  "suppliersDirectoryTagged": 0,
+  "suppliersDirectoryOnOtherFrameworks": 0,
+  "suppliersDirectoryWithFrameworkNote": 0,
+  "gpMarkets": 0,
+  "mhraDsu": 0,
+  "drugTariffViiiaLines": 0
  },
  "frameworks": [
   {
@@ -99,7 +115,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "AmRay UK",
@@ -107,7 +125,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "APC Cardiovascular Ltd",
@@ -115,7 +135,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Bayer",
@@ -125,7 +147,9 @@
    ],
    "frameworks": [
     "Contrast Injectors, Consumables and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Bracco UK Limited",
@@ -133,7 +157,9 @@
    "variants": [],
    "frameworks": [
     "Contrast Injectors, Consumables and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Canon Medical Systems",
@@ -141,7 +167,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Compleo Health Limited",
@@ -149,7 +177,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "GE HealthCare",
@@ -159,7 +189,9 @@
    ],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Genmed.Me Ltd",
@@ -167,7 +199,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Guerbet Laboratories Limited",
@@ -175,7 +209,9 @@
    "variants": [],
    "frameworks": [
     "Contrast Injectors, Consumables and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "InHealth Ltd",
@@ -183,7 +219,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medical Imaging Systems (MIS Healthcare)",
@@ -193,7 +231,9 @@
    ],
    "frameworks": [
     "Contrast Injectors, Consumables and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medtronic",
@@ -203,7 +243,9 @@
    ],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Philips",
@@ -213,7 +255,9 @@
    ],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Regent’s Park Healthcare",
@@ -221,7 +265,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Siemens Healthineers",
@@ -231,7 +277,9 @@
    ],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
@@ -241,7 +289,9 @@
    ],
    "frameworks": [
     "Contrast Injectors, Consumables and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "United Imaging Health Ltd",
@@ -249,7 +299,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "WSR Medical Solutions Ltd",
@@ -257,7 +309,9 @@
    "variants": [],
    "frameworks": [
     "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   }
  ],
  "awards": [
@@ -559,7 +613,7 @@
   {
    "title": "Interventional Radiology Products [ 5328098 ]",
    "buyer": "Regional Business Services Organisation Procurement and Logistics Service",
-   "supplier": "ROCKET MEDICAL PLC, Stryker UK Ltd, Acandis GmbH, MERIT MEDICAL UK LIMITED, It's",
+   "supplier": "ROCKET MEDICAL PLC, Stryker UK Ltd, Acandis GmbH, MERIT MEDICAL UK LIMITED, It's Interventional Limited, VYGON U.K. LTD, COOK UK LTD, Boston Scientific Ltd, TERUMO UK LIMITED, Cordis Medical UK Ltd, SHOCKWAVE MEDICAL INC, Penumbra Interventional Therapies UK Limited, M3 MEDICAL, MEDTRONIC LIMITED, NORTHERN HOSPITAL SUPPLIES LTD, B V M MEDICAL LTD, ELECTRAMED LTD, BARD LTD, KEANEY MEDICAL LTD, APR MEDTECH LTD, PFM MEDICAL UK LIMITED, Uniphar Medtech Ltd t/a M.E.D. Surgical, BRACCO UK LIMITED, Iskus Health Limited",
    "date": "2025-09-29",
    "url": "https://www.find-tender.service.gov.uk/Notice/060548-2025",
    "value": null,
@@ -579,7 +633,7 @@
   {
    "title": "Interventional Neuro Radiology and Thrombectomy Consumables",
    "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotland) (NSS)",
-   "supplier": "Abbott Medical U.K. Ltd, Acandis GmbH, Cordis Medical UK Limited, Microvention U",
+   "supplier": "Abbott Medical U.K. Ltd, Acandis GmbH, Cordis Medical UK Limited, Microvention UK Ltd, SELAMEDICL UK LTD",
    "date": "2025-07-28",
    "url": "https://www.find-tender.service.gov.uk/Notice/043625-2025",
    "value": null,
@@ -599,7 +653,7 @@
   {
    "title": "LPP/2024/001 Contrast Media and Associated Injectors/Consumables",
    "buyer": "NHS London Procurement Partnership (Hosted by Guy's and St Thomas' NHS FT)",
-   "supplier": "Bracco UK Ltd, Guerbert Laboratories Ltd, GE Healthcare Pharmaceutical Diagnosti",
+   "supplier": "Bracco UK Ltd, Guerbert Laboratories Ltd, GE Healthcare Pharmaceutical Diagnostics, Uniphar Medtech LIMITED, Bayer Plc, LEIB MEDICAL LTD",
    "date": "2025-07-01",
    "url": "https://www.contractsfinder.service.gov.uk/Notice/de5c163b-4e35-47f0-a74d-adb51ff1ce15",
    "value": 382877289,
@@ -619,7 +673,7 @@
   {
    "title": "NP68424 Interventional Radiology",
    "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotland) (NSS)",
-   "supplier": "Becton Dickinson U.K. Limited, COOK (UK) LTD, GTA Medical Limited, INOMED HEALTH",
+   "supplier": "Becton Dickinson U.K. Limited, COOK (UK) LTD, GTA Medical Limited, INOMED HEALTH LIMITED, Leib Medical, Argon Medical Devices UK Ltd, Merit Medical UK, A/S Mermaid Medical Ltd, Pennamed, Teleflex",
    "date": "2025-02-27",
    "url": "https://www.find-tender.service.gov.uk/Notice/007421-2025",
    "value": null,
@@ -677,5 +731,31 @@
   "nations": "Scotland, Wales, Northern Ireland and Ireland",
   "policy": "Policy and demand signals",
   "data": "Data sources"
- }
+ },
+ "directorySuppliers": [],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": false,
+  "markets": [],
+  "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": true,
+  "whyEmpty": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "count": 0,
+  "roundupsExcluded": 0,
+  "updates": []
+ },
+ "drugTariffViiia": null
 }

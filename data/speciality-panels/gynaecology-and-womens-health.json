@@ -20,15 +20,24 @@
   "frameworkAwards": "2026-09-30T12:30:14+00:00",
   "openTenders": "30/09/2026",
   "drugTariff": "2026-09-30",
-  "localIntel": "2026-09-30"
+  "localIntel": "2026-09-30",
+  "supplierDirectory": "2026-09-30",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-09-30",
+  "drugTariffViiia": "2026-09-30",
+  "hospitalPrescribing": null
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
-  "frameworks": "NHS Supply Chain framework names matching /\\b(gynaecolog\\w*|pessar\\w*|rigid endoscopy|minimally invasive surgery|surgical mesh|surgical implants for men)/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. There is no gynaecology category at NHS Supply Chain. Its briefs sit in six categories, none of which is a population or a speciality, so this patch is scattered across agreements owned by different category teams with different expiry dates. Six agreements are counted below and every one of them carries more than gynaecology. Maternity, Obstetrics, Gynaecology and Sexual Health Products has two lots and the obstetric half is the maternity and neonatal page's. Minimally Invasive Surgery has eight lots, of which only Lot 6, Gynaecological Endoscopy and Uterine Ablation, is named for this speciality; theatres and surgical counts Lots 1 to 5. Surgical Implants for Men's and Women's Health is half men's health, which is why companies known for penile implants and for breast implants both appear under a gynaecology Suppliers heading. NHS Supply Chain publishes no supplier-by-lot split for any of the three, so the supplier list is every company named on each agreement as a whole. THE SIX DELISTED COMPANIES ARE REMOVED, exactly as they are on the maternity and neonatal page, which shares that agreement. NHS Supply Chain's contract launch brief prints 51 current suppliers and then names Bray Group Limited, Cardiac Services UK Ltd, Durbin Plc, Medichill UK Ltd, Valley Northern and Viomedex Ltd as being delisted at the start of the new framework; the Hub's crawler read all 57 as suppliers. The brief states 54 in its own prose and prints 51, so 51 is what the published list supports and 54 is what NHS Supply Chain asserts. The upstream crawler still has the fault. THE SURGICAL MESH AGREEMENT IS COUNTED, WITH THE PAGE'S OWN WARNING ATTACHED. Its four lots are Synthetic, Biological, Specialist and Fixation Devices, and its published Clinical Information section names its clinical engagement as the British Hernia Society, the Association of Laparoscopic Surgeons of UK and Ireland, the Royal College of Surgeons, NHS consultant surgeons and key surgical mesh suppliers. No gynaecology or urogynaecology body is named, and the word prolapse appears once in the whole brief. The agreement is a route to this patch and the supplier list is real; it was not written with a urogynaecology customer in the room, and this panel says so rather than implying otherwise. Separately, transvaginal mesh repair of vaginal wall prolapse sits in NICE's research-only tier under HTG456 while mid-urethral slings for stress urinary incontinence do not, and the two are constantly conflated; the page sets out that distinction with its sources. ONE ROUTE THE PAGE NAMES IS MISSING FROM THIS PANEL BECAUSE THE HUB'S DATA DOES NOT HOLD IT. Operating Theatre and Outpatient Microscopes and Associated Accessories (2022/S 000-020537), the colposcope route, is not among the 121 framework records the Hub has crawled, so it cannot be shown here. The page carries it, including its 4 December 2026 expiry. That is a gap in this panel's source data, not a finding about the market. Neuromodulation Devices and Associated Products is also left out, because NHS Supply Chain publishes no lot breakdown for it and whether sacral neuromodulation for bladder is called off there is not verifiable from the public brief. THE AWARDS LIST COUNTS SEXUAL HEALTH, CONTRACEPTION, FERTILITY AND TERMINATION OF PREGNANCY, which the maternity and neonatal page explicitly does not, and it does NOT count breast implants, breast prostheses or breast reconstruction, which plastics, burns and reconstruction already counts. Three awards are shared with another page on purpose and each is shared because its own title says so: the surgical positioning table bought by NHS Wales is for maternity AND gynaecology procedures, the colposcope bought by University Hospitals Sussex is a gynaecology device sited on the Central Delivery Suite, and the electrosurgical devices bought for cut, coagulation and uterine ablation are a theatres purchase doing a gynaecology job. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market.",
-  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. There is no gynaecology category at NHS Supply Chain. Its briefs sit in six categories, none of which is a population or a speciality, so this patch is scattered across agreements owned by different category teams with different expiry dates. Six agreements are counted below and every one of them carries more than gynaecology. Maternity, Obstetrics, Gynaecology and Sexual Health Products has two lots and the obstetric half is the maternity and neonatal page's. Minimally Invasive Surgery has eight lots, of which only Lot 6, Gynaecological Endoscopy and Uterine Ablation, is named for this speciality; theatres and surgical counts Lots 1 to 5. Surgical Implants for Men's and Women's Health is half men's health, which is why companies known for penile implants and for breast implants both appear under a gynaecology Suppliers heading. NHS Supply Chain publishes no supplier-by-lot split for any of the three, so the supplier list is every company named on each agreement as a whole. THE SIX DELISTED COMPANIES ARE REMOVED, exactly as they are on the maternity and neonatal page, which shares that agreement. NHS Supply Chain's contract launch brief prints 51 current suppliers and then names Bray Group Limited, Cardiac Services UK Ltd, Durbin Plc, Medichill UK Ltd, Valley Northern and Viomedex Ltd as being delisted at the start of the new framework; the Hub's crawler read all 57 as suppliers. The brief states 54 in its own prose and prints 51, so 51 is what the published list supports and 54 is what NHS Supply Chain asserts. The upstream crawler still has the fault. THE SURGICAL MESH AGREEMENT IS COUNTED, WITH THE PAGE'S OWN WARNING ATTACHED. Its four lots are Synthetic, Biological, Specialist and Fixation Devices, and its published Clinical Information section names its clinical engagement as the British Hernia Society, the Association of Laparoscopic Surgeons of UK and Ireland, the Royal College of Surgeons, NHS consultant surgeons and key surgical mesh suppliers. No gynaecology or urogynaecology body is named, and the word prolapse appears once in the whole brief. The agreement is a route to this patch and the supplier list is real; it was not written with a urogynaecology customer in the room, and this panel says so rather than implying otherwise. Separately, transvaginal mesh repair of vaginal wall prolapse sits in NICE's research-only tier under HTG456 while mid-urethral slings for stress urinary incontinence do not, and the two are constantly conflated; the page sets out that distinction with its sources. ONE ROUTE THE PAGE NAMES IS MISSING FROM THIS PANEL BECAUSE THE HUB'S DATA DOES NOT HOLD IT. Operating Theatre and Outpatient Microscopes and Associated Accessories (2022/S 000-020537), the colposcope route, is not among the 121 framework records the Hub has crawled, so it cannot be shown here. The page carries it, including its 4 December 2026 expiry. That is a gap in this panel's source data, not a finding about the market. Neuromodulation Devices and Associated Products is also left out, because NHS Supply Chain publishes no lot breakdown for it and whether sacral neuromodulation for bladder is called off there is not verifiable from the public brief. THE AWARDS LIST COUNTS SEXUAL HEALTH, CONTRACEPTION, FERTILITY AND TERMINATION OF PREGNANCY, which the maternity and neonatal page explicitly does not, and it does NOT count breast implants, breast prostheses or breast reconstruction, which plastics, burns and reconstruction already counts. Three awards are shared with another page on purpose and each is shared because its own title says so: the surgical positioning table bought by NHS Wales is for maternity AND gynaecology procedures, the colposcope bought by University Hospitals Sussex is a gynaecology device sited on the Central Delivery Suite, and the electrosurgical devices bought for cut, coagulation and uterine ablation are a theatres purchase doing a gynaecology job. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market.",
+  "frameworks": "NHS Supply Chain framework names matching /\\b(gynaecolog\\w*|pessar\\w*|rigid endoscopy|minimally invasive surgery|surgical mesh|surgical implants for men)/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. There is no gynaecology category at NHS Supply Chain. Its briefs sit in six categories, none of which is a population or a speciality, so this patch is scattered across agreements owned by different category teams with different expiry dates. Six agreements are counted below and every one of them carries more than gynaecology. Maternity, Obstetrics, Gynaecology and Sexual Health Products has two lots and the obstetric half is the maternity and neonatal page's. Minimally Invasive Surgery has eight lots, of which only Lot 6, Gynaecological Endoscopy and Uterine Ablation, is named for this speciality; theatres and surgical counts Lots 1 to 5. Surgical Implants for Men's and Women's Health is half men's health, which is why companies known for penile implants and for breast implants both appear under a gynaecology Suppliers heading. NHS Supply Chain publishes no supplier-by-lot split for any of the three, so the supplier list is every company named on each agreement as a whole. THE SIX DELISTED COMPANIES ARE REMOVED, exactly as they are on the maternity and neonatal page, which shares that agreement. NHS Supply Chain's contract launch brief prints 51 current suppliers and then names Bray Group Limited, Cardiac Services UK Ltd, Durbin Plc, Medichill UK Ltd, Valley Northern and Viomedex Ltd as being delisted at the start of the new framework; the Hub's crawler read all 57 as suppliers. The brief states 54 in its own prose and prints 51, so 51 is what the published list supports and 54 is what NHS Supply Chain asserts. The upstream crawler still has the fault. THE SURGICAL MESH AGREEMENT IS COUNTED, WITH THE PAGE'S OWN WARNING ATTACHED. Its four lots are Synthetic, Biological, Specialist and Fixation Devices, and its published Clinical Information section names its clinical engagement as the British Hernia Society, the Association of Laparoscopic Surgeons of UK and Ireland, the Royal College of Surgeons, NHS consultant surgeons and key surgical mesh suppliers. No gynaecology or urogynaecology body is named, and the word prolapse appears once in the whole brief. The agreement is a route to this patch and the supplier list is real; it was not written with a urogynaecology customer in the room, and this panel says so rather than implying otherwise. Separately, transvaginal mesh repair of vaginal wall prolapse sits in NICE's research-only tier under HTG456 while mid-urethral slings for stress urinary incontinence do not, and the two are constantly conflated; the page sets out that distinction with its sources. ONE ROUTE THE PAGE NAMES IS MISSING FROM THIS PANEL BECAUSE THE HUB'S DATA DOES NOT HOLD IT. Operating Theatre and Outpatient Microscopes and Associated Accessories (2022/S 000-020537), the colposcope route, is not among the 122 framework records the Hub has crawled, so it cannot be shown here. The page carries it, including its 4 December 2026 expiry. That is a gap in this panel's source data, not a finding about the market. Neuromodulation Devices and Associated Products is also left out, because NHS Supply Chain publishes no lot breakdown for it and whether sacral neuromodulation for bladder is called off there is not verifiable from the public brief. THE AWARDS LIST COUNTS SEXUAL HEALTH, CONTRACEPTION, FERTILITY AND TERMINATION OF PREGNANCY, which the maternity and neonatal page explicitly does not, and it does NOT count breast implants, breast prostheses or breast reconstruction, which plastics, burns and reconstruction already counts. Three awards are shared with another page on purpose and each is shared because its own title says so: the surgical positioning table bought by NHS Wales is for maternity AND gynaecology procedures, the colposcope bought by University Hospitals Sussex is a gynaecology device sited on the Central Delivery Suite, and the electrosurgical devices bought for cut, coagulation and uterine ablation are a theatres purchase doing a gynaecology job. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. There is no gynaecology category at NHS Supply Chain. Its briefs sit in six categories, none of which is a population or a speciality, so this patch is scattered across agreements owned by different category teams with different expiry dates. Six agreements are counted below and every one of them carries more than gynaecology. Maternity, Obstetrics, Gynaecology and Sexual Health Products has two lots and the obstetric half is the maternity and neonatal page's. Minimally Invasive Surgery has eight lots, of which only Lot 6, Gynaecological Endoscopy and Uterine Ablation, is named for this speciality; theatres and surgical counts Lots 1 to 5. Surgical Implants for Men's and Women's Health is half men's health, which is why companies known for penile implants and for breast implants both appear under a gynaecology Suppliers heading. NHS Supply Chain publishes no supplier-by-lot split for any of the three, so the supplier list is every company named on each agreement as a whole. THE SIX DELISTED COMPANIES ARE REMOVED, exactly as they are on the maternity and neonatal page, which shares that agreement. NHS Supply Chain's contract launch brief prints 51 current suppliers and then names Bray Group Limited, Cardiac Services UK Ltd, Durbin Plc, Medichill UK Ltd, Valley Northern and Viomedex Ltd as being delisted at the start of the new framework; the Hub's crawler read all 57 as suppliers. The brief states 54 in its own prose and prints 51, so 51 is what the published list supports and 54 is what NHS Supply Chain asserts. The upstream crawler still has the fault. THE SURGICAL MESH AGREEMENT IS COUNTED, WITH THE PAGE'S OWN WARNING ATTACHED. Its four lots are Synthetic, Biological, Specialist and Fixation Devices, and its published Clinical Information section names its clinical engagement as the British Hernia Society, the Association of Laparoscopic Surgeons of UK and Ireland, the Royal College of Surgeons, NHS consultant surgeons and key surgical mesh suppliers. No gynaecology or urogynaecology body is named, and the word prolapse appears once in the whole brief. The agreement is a route to this patch and the supplier list is real; it was not written with a urogynaecology customer in the room, and this panel says so rather than implying otherwise. Separately, transvaginal mesh repair of vaginal wall prolapse sits in NICE's research-only tier under HTG456 while mid-urethral slings for stress urinary incontinence do not, and the two are constantly conflated; the page sets out that distinction with its sources. ONE ROUTE THE PAGE NAMES IS MISSING FROM THIS PANEL BECAUSE THE HUB'S DATA DOES NOT HOLD IT. Operating Theatre and Outpatient Microscopes and Associated Accessories (2022/S 000-020537), the colposcope route, is not among the 122 framework records the Hub has crawled, so it cannot be shown here. The page carries it, including its 4 December 2026 expiry. That is a gap in this panel's source data, not a finding about the market. Neuromodulation Devices and Associated Products is also left out, because NHS Supply Chain publishes no lot breakdown for it and whether sacral neuromodulation for bladder is called off there is not verifiable from the public brief. THE AWARDS LIST COUNTS SEXUAL HEALTH, CONTRACEPTION, FERTILITY AND TERMINATION OF PREGNANCY, which the maternity and neonatal page explicitly does not, and it does NOT count breast implants, breast prostheses or breast reconstruction, which plastics, burns and reconstruction already counts. Three awards are shared with another page on purpose and each is shared because its own title says so: the surgical positioning table bought by NHS Wales is for maternity AND gynaecology procedures, the colposcope bought by University Hospitals Sussex is a gynaecology device sited on the Central Delivery Suite, and the electrosurgical devices bought for cut, coagulation and uterine ablation are a theatres purchase doing a gynaecology job. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market.",
   "awards": "Award-stage notices whose TITLE matches /(?<![A-Za-z0-9])(gynaecolog\\w*|gynecolog\\w*|gynae\\w*|hysteroscop\\w*|hysterectom\\w*|colposcop\\w*|endometri\\w*|uterine|uterus|intra[- ]?uterine|fibroid\\w*|myomectom\\w*|adenomyosis|morcellat\\w*|novasure|pessar\\w*|prolapse|urogyn\\w*|vagin\\w*|vulv\\w*|cervical (?:screen\\w*|smear\\w*|cytolog\\w*)|contracept\\w*|condoms?|LNG[- ]?IUS|sexual health|fertilit\\w*|IVF|termination of pregnancy|termination services?|ovarian|ovaries|ovary|salping\\w*|oophorect\\w*|menopaus\\w*|menorrhagia|heavy menstrual bleeding|polycystic ovar\\w*|PCOS|women['’]?s health|womens health|women (?:&|and) child health|surgical mesh|transvaginal mesh|bulking agents?|stress incontinence|stress urinary incontinence|urodynamic\\w*)(?![A-Za-z0-9])/i. NO EXCLUSION LIST IS APPLIED, because every notice this pattern matched was read one by one and all of them are this speciality. The loose terms that would have needed excluding were refused from the pattern above instead of admitted and then argued with. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /pessar/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,833 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's."
+  "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /pessar/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,833 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: womens). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 10 of the 12 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (11 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-09-30.",
+  "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-09: narrowed to the lines whose medicine NHSBSA prescribes under BNF 07.01 or 07.02 or 07.03 or 07.05. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 53 of the 3,533 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
  },
  "counts": {
   "frameworks": 6,
@@ -38,7 +47,14 @@
   "awardsMatched": 91,
   "awardsWithheldByBuyerCap": 0,
   "openTenders": 1,
-  "localIntel": 0
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 35,
+  "suppliersDirectoryTagged": 12,
+  "suppliersDirectoryOnOtherFrameworks": 9,
+  "suppliersDirectoryWithFrameworkNote": 10,
+  "gpMarkets": 2,
+  "mhraDsu": 113,
+  "drugTariffViiiaLines": 47
  },
  "frameworks": [
   {
@@ -322,7 +338,9 @@
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Rigid Endoscopy and Associated Options and Related Services",
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Aquilant Limited",
@@ -335,7 +353,9 @@
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Rigid Endoscopy and Associated Options and Related Services",
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Elemental Healthcare Ltd",
@@ -348,7 +368,9 @@
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Eurosurgical Ltd",
@@ -361,7 +383,9 @@
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Johnson & Johnson MedTech",
@@ -373,7 +397,9 @@
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Implants for Men’s and Women’s Health",
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medtronic",
@@ -385,7 +411,9 @@
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Rigid Endoscopy and Associated Options and Related Services",
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "RB Medical Engineering Ltd",
@@ -399,7 +427,9 @@
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Advanced Medical Solutions (AMS)",
@@ -410,7 +440,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Boston Scientific",
@@ -421,7 +453,9 @@
    "frameworks": [
     "Surgical Implants for Men’s and Women’s Health",
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Conmed UK Ltd",
@@ -433,7 +467,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "HC21 (UK) Ltd",
@@ -442,7 +478,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Healthcare 25 Ltd",
@@ -454,7 +492,9 @@
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Ideal Medical Solutions",
@@ -463,7 +503,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "iMEDicare Ltd",
@@ -475,7 +517,9 @@
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
     "Surgical Implants for Men’s and Women’s Health"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "June Medical Ltd",
@@ -487,7 +531,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Karl Storz UK",
@@ -499,7 +545,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Lawmed Ltd",
@@ -508,7 +556,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "LocaMed Ltd",
@@ -520,7 +570,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Novus Med Ltd",
@@ -532,7 +584,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Olympus (KeyMed)",
@@ -544,7 +598,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Purple Surgical",
@@ -556,7 +612,9 @@
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Q Medical Technologies Ltd",
@@ -565,7 +623,9 @@
    "frameworks": [
     "Surgical Implants for Men’s and Women’s Health",
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Richard Wolf UK",
@@ -577,7 +637,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Sela Medical UK Ltd",
@@ -589,7 +651,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Stryker",
@@ -601,7 +665,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Trion Pharma Limited",
@@ -613,7 +679,9 @@
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
     "Obstetrics and Vinyl Pessaries"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Unisurge International Limited",
@@ -624,7 +692,9 @@
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "W.L. Gore & Associates",
@@ -635,7 +705,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Applied Medical UK Ltd",
@@ -643,7 +715,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Argon Medical Devices UK Ltd",
@@ -651,7 +725,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Arthrex",
@@ -661,7 +737,9 @@
    ],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Assut UK LTD",
@@ -669,7 +747,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Avicenna Surgical Limited",
@@ -677,7 +757,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Bariatric Solutions International",
@@ -685,7 +767,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "BD — Becton, Dickinson",
@@ -695,7 +779,9 @@
    ],
    "frameworks": [
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "BioSpectrum Ltd",
@@ -703,7 +789,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Bodywise (UK) Ltd",
@@ -711,7 +799,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Bolton Surgical Limited",
@@ -721,7 +811,9 @@
    ],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Bray Group Limited",
@@ -731,7 +823,9 @@
    ],
    "frameworks": [
     "Obstetrics and Vinyl Pessaries"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Bridea Medical B.V",
@@ -739,7 +833,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Carrow Medical Limited",
@@ -747,7 +843,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Ceannaire Medical",
@@ -755,7 +853,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "CJ Medical",
@@ -763,7 +863,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Coloplast",
@@ -773,7 +875,9 @@
    ],
    "frameworks": [
     "Surgical Implants for Men’s and Women’s Health"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Creed Medical Ltd",
@@ -781,7 +885,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Crest Medical Ltd",
@@ -789,7 +895,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Croyde Medical",
@@ -799,7 +907,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "D.P. Medical Systems Limited",
@@ -809,7 +919,9 @@
    ],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Dpek Healthcare Ltd",
@@ -817,7 +929,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Emmat Medical",
@@ -825,7 +939,9 @@
    "variants": [],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Erbe Medical UK Ltd",
@@ -833,7 +949,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Espère Healthcare Ltd",
@@ -843,7 +961,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Fairmont Medical Products Limited",
@@ -851,7 +971,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Fannin (UK) Limited",
@@ -861,7 +983,9 @@
    ],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Farla Medical",
@@ -871,7 +995,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "G S Medical",
@@ -879,7 +1005,9 @@
    "variants": [],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "GBUK Group",
@@ -889,7 +1017,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Genmed Enterprises Ltd",
@@ -897,7 +1027,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "GenX MediCare Ltd",
@@ -907,7 +1039,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "GS Medical Healthcare Ltd",
@@ -917,7 +1051,9 @@
    ],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Harris-Jones Medical Ltd",
@@ -925,7 +1061,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Healthium Medtech UK",
@@ -935,7 +1073,9 @@
    ],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Henleys Medical Supplies Limited",
@@ -943,7 +1083,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Henry Schien Medical",
@@ -953,7 +1095,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Hologic UK",
@@ -963,7 +1107,9 @@
    ],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Huntleigh",
@@ -973,7 +1119,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Integra LifeSciences (Integra Neurosciences)",
@@ -983,7 +1131,9 @@
    ],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Kebomed UK Ltd",
@@ -993,7 +1143,9 @@
    ],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Kimal PLC",
@@ -1003,7 +1155,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Laborie Medical Technologies UK Ltd",
@@ -1011,7 +1165,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Laprosurge Limited",
@@ -1019,7 +1175,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Lexington Medical UK Ltd",
@@ -1027,7 +1185,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Lil-Lets UK Limited",
@@ -1035,7 +1195,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "LiteOptics",
@@ -1045,7 +1207,9 @@
    ],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "LTC Healthcare (Leeds Trading Company)",
@@ -1053,7 +1217,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Medecon Healthcare UK",
@@ -1063,7 +1229,9 @@
    ],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medela",
@@ -1073,7 +1241,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Medical Devices Technology Inter Ltd",
@@ -1081,7 +1251,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Medicare Colgate Ltd (Sterifeed)",
@@ -1089,7 +1261,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Mediplus Ltd",
@@ -1097,7 +1271,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Mediq Healthcare UK Ltd",
@@ -1107,7 +1283,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medline Industries",
@@ -1117,7 +1295,9 @@
    ],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "MedScience Distribution",
@@ -1127,7 +1307,9 @@
    ],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Meril UK Pvt Ltd",
@@ -1135,7 +1317,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Mermaid Medical Ltd",
@@ -1143,7 +1327,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Minitouch Ltd",
@@ -1151,7 +1337,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Mölnlycke",
@@ -1161,7 +1349,9 @@
    ],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Optimum Medical",
@@ -1171,7 +1361,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Organon UK",
@@ -1181,7 +1373,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Origio Limited",
@@ -1189,7 +1383,9 @@
    "variants": [],
    "frameworks": [
     "Obstetrics and Vinyl Pessaries"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "OscarTech UK",
@@ -1199,7 +1395,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Owen Mumford",
@@ -1209,7 +1407,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Parburch Medical Developments Ltd",
@@ -1217,7 +1417,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Pasante Healthcare",
@@ -1225,7 +1427,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Pelvic Relief",
@@ -1233,7 +1437,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Pennine Healthcare (Ivor Shaw Ltd)",
@@ -1243,7 +1449,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Pentax Medical",
@@ -1253,7 +1461,9 @@
    ],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "pfm medical UK",
@@ -1263,7 +1473,9 @@
    ],
    "frameworks": [
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Pioneer Medical Europe Limited",
@@ -1271,7 +1483,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Praxis Medical Ltd",
@@ -1279,7 +1493,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Raise Healthcare Pvt Ltd",
@@ -1287,7 +1503,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Reflex Medical Limited",
@@ -1295,7 +1513,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Reliance Medical",
@@ -1305,7 +1525,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Rocialle Healthcare",
@@ -1315,7 +1537,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Rocket Medical",
@@ -1325,7 +1549,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Schultz Medical (UK) Limited",
@@ -1333,7 +1559,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Silimed UK Limited",
@@ -1341,7 +1569,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Implants for Men’s and Women’s Health"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Smith+Nephew",
@@ -1351,7 +1581,9 @@
    ],
    "frameworks": [
     "Rigid Endoscopy and Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "SRA Developments",
@@ -1359,7 +1591,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Starkstrom Limited",
@@ -1367,7 +1601,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Surgical Holdings Limited",
@@ -1377,7 +1613,9 @@
    ],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Sxwell UK Limited",
@@ -1385,7 +1623,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "TELA Bio Ltd",
@@ -1393,7 +1633,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Mesh"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "TFX Group Ltd (Teleflex Medical)",
@@ -1403,7 +1645,9 @@
    ],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Timesco Healthcare Ltd",
@@ -1411,7 +1655,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Uniphar Medtech",
@@ -1419,7 +1665,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Vanguard AG",
@@ -1427,7 +1675,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Venturis Medical Ltd",
@@ -1435,7 +1685,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Vernacare",
@@ -1445,7 +1697,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Viveca Biomed Ltd",
@@ -1453,7 +1707,9 @@
    "variants": [],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Vygon (UK)",
@@ -1463,7 +1719,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Williams Medical Supplies",
@@ -1473,7 +1731,9 @@
    ],
    "frameworks": [
     "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Winners First Trading Limited",
@@ -1481,7 +1741,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   }
  ],
  "awards": [
@@ -1926,7 +2188,7 @@
   {
    "title": "Contraceptive Medicines",
    "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland (PSDS)",
-   "supplier": "Lupin Healthcare UK Ltd, Morningside Pharmaceuticals Limited, Organon Pharma (UK",
+   "supplier": "Lupin Healthcare UK Ltd, Morningside Pharmaceuticals Limited, Organon Pharma (UK) Ltd., Pfizer Ltd, Zentiva Pharma UK Ltd",
    "date": "2026-08-13",
    "url": "https://www.find-tender.service.gov.uk/Notice/077388-2026",
    "value": null,
@@ -2131,5 +2393,3247 @@
   "nations": "Scotland, Wales, Northern Ireland and Ireland",
   "policy": "Policy and demand signals",
   "data": "Data sources"
+ },
+ "directorySuppliers": [
+  {
+   "name": "Agile Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Agile Medical",
+   "seedLabels": [
+    "Women's health and maternity"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Medical Healthcare Furniture",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-healthcare-furniture/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pressure Area Care and Patient Handling",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-area-care-and-patient-handling/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Medical Healthcare Furniture; Pressure Area Care and Patient Handling."
+  },
+  {
+   "name": "Bayer",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Bayer",
+   "seedLabels": [
+    "Women’s health / maternity"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Contrast Injectors, Consumables and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/contrast-injectors-consumables-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Contrast Injectors, Consumables and Associated Options and Related Services."
+  },
+  {
+   "name": "CliniMed",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "CliniMed",
+   "seedLabels": [
+    "Women’s health and maternity"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Advanced Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/advanced-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Urology and Bowel Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/urology-and-bowel-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "Drug Tariff Part IX (IXC/IXB)",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Advanced Wound Care; Urology and Bowel Management. The Hub's supplier directory also records: Drug Tariff Part IX (IXC/IXB); NHS SBS — SBS10142."
+  },
+  {
+   "name": "Cook Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Cook Medical",
+   "seedLabels": [
+    "Women’s health / maternity"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Operating Theatres Equipment and Related Accessories and Services. The Hub's supplier directory also records: NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)."
+  },
+  {
+   "name": "GE HealthCare",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "GE HealthCare",
+   "seedLabels": [
+    "Women’s health / maternity"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/anaesthesia-machines-ventilator-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/angiography-hybrid-theatres-capital-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Bladder Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/bladder-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Bone Densitometers, Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/bone-densitometers-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "CT Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ct-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cardiac-and-pulmonary-diagnostics-and-exercise-stress-testing-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Digital Diagnostic Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Fluoroscopy and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/fluoroscopy-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Magnetic Resonance Imaging Scanners and Associated Option and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/magnetic-resonance-imaging-scanners-and-associated-option-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mammography Imaging Systems and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mammography-imaging-systems-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mobile Image Intensifiers and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-image-intensifiers-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mobile X-Ray Systems and Associated Option and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-x-ray-systems-and-associated-option-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-monitoring-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pulse-oximetry-and-capnography-devices-and-support-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Static X-Ray and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/static-x-ray-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Ultrasound Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ultrasound-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Anaesthesia Machines & Ventilators (to 2029)",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS Supply Chain — Imaging Capital CT/MRI/X-ray (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS Supply Chain — Patient Monitoring (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on nineteen NHS Supply Chain frameworks not counted as this speciality's: Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services; Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services; Bladder Scanners and Associated Options and Related Services; Bone Densitometers, Associated Options and Related Services; CT Scanners and Associated Options and Related Services; Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions; Digital Diagnostic Solutions; Electrodes, Ultrasound Gels, Defibrillation and Related Consumables; Fluoroscopy and Associated Options and Related Services; Magnetic Resonance Imaging Scanners and Associated Option and Related Services; Mammography Imaging Systems and Associated Options and Related Services; Mobile Image Intensifiers and Associated Options and Related Services; Mobile X-Ray Systems and Associated Option and Related Services; Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services; Pulse Oximetry, Capnography and Related Monitoring Technologies; Respiratory Solutions; Static X-Ray and Associated Options and Related Services; Total Patient Assessment Device Solutions; Ultrasound Scanners and Associated Options and Related Services. The Hub's supplier directory also records: NHS Supply Chain — Anaesthesia Machines & Ventilators (to 2029); NHS Supply Chain — Imaging Capital CT/MRI/X-ray (to 2028); NHS Supply Chain — Patient Monitoring (to 2028)."
+  },
+  {
+   "name": "Intuitive Surgical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Intuitive Surgical",
+   "seedLabels": [
+    "Women’s health / maternity"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Robotic Medical Equipment and Associated Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/robotic-medical-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Robotic Medical Equipment",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Robotic Medical Equipment and Associated Accessories. The Hub's supplier directory also records: NHS Supply Chain — Robotic Medical Equipment."
+  },
+  {
+   "name": "Medichill UK Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Medichill UK Ltd",
+   "seedLabels": [
+    "Women's health and maternity"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Physiotherapy and Occupational Therapy",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/physiotherapy-and-occupational-therapy/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Physiotherapy and Occupational Therapy."
+  },
+  {
+   "name": "Philips",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Philips",
+   "seedLabels": [
+    "Women’s health / maternity"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/anaesthesia-machines-ventilator-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/angiography-hybrid-theatres-capital-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "CT Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ct-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cardiac-and-pulmonary-diagnostics-and-exercise-stress-testing-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Digital Diagnostic Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "External Defibrillation Devices and Related Services and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/external-defibrillation-devices-related-equipment-and-associated-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Finance Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/finance-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Fluoroscopy and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/fluoroscopy-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Magnetic Resonance Imaging Scanners and Associated Option and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/magnetic-resonance-imaging-scanners-and-associated-option-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Medical Chart Paper and Ultrasound Film",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-chart-paper-and-ultrasound-film/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mobile Image Intensifiers and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-image-intensifiers-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mobile X-Ray Systems and Associated Option and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-x-ray-systems-and-associated-option-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Nuclear Medicine Imaging and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/nuclear-medicine-imaging-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-monitoring-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pulse-oximetry-and-capnography-devices-and-support-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Radiotherapy IT Solutions and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-it-solutions-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Static X-Ray and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/static-x-ray-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Ultrasound Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ultrasound-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Anaesthesia Machines & Ventilators (to 2029)",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS Supply Chain — Imaging Capital CT/MRI/X-ray (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS Supply Chain — Patient Monitoring (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on twenty NHS Supply Chain frameworks not counted as this speciality's: Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services; Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services; CT Scanners and Associated Options and Related Services; Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions; Digital Diagnostic Solutions; Electrodes, Ultrasound Gels, Defibrillation and Related Consumables; External Defibrillation Devices and Related Services and Accessories; Finance Solutions; Fluoroscopy and Associated Options and Related Services; Magnetic Resonance Imaging Scanners and Associated Option and Related Services; Medical Chart Paper and Ultrasound Film; Mobile Image Intensifiers and Associated Options and Related Services; Mobile X-Ray Systems and Associated Option and Related Services; Nuclear Medicine Imaging and Associated Options and Related Services; Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services; Pulse Oximetry, Capnography and Related Monitoring Technologies; Radiotherapy IT Solutions and Associated Options and Related Services; Static X-Ray and Associated Options and Related Services; Total Patient Assessment Device Solutions; Ultrasound Scanners and Associated Options and Related Services. The Hub's supplier directory also records: NHS Supply Chain — Anaesthesia Machines & Ventilators (to 2029); NHS Supply Chain — Imaging Capital CT/MRI/X-ray (to 2028); NHS Supply Chain — Patient Monitoring (to 2028)."
+  },
+  {
+   "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+   "seedLabels": [
+    "Women's health and maternity"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Bladder Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/bladder-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cardiac-and-pulmonary-diagnostics-and-exercise-stress-testing-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Complete Ophthalmology Solutions 3",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ophthalmology-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Contrast Injectors, Consumables and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/contrast-injectors-consumables-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Digital Diagnostic Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "External Defibrillation Devices and Related Services and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/external-defibrillation-devices-related-equipment-and-associated-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Medical Chart Paper and Ultrasound Film",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-chart-paper-and-ultrasound-film/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Orthotics, Podiatry and Immobilisation",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/orthoses-podiatry-and-immobilisation/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-monitoring-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Specimen Cabinets and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/specimen-cabinets-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Ultrasound Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ultrasound-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on fourteen NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Bladder Scanners and Associated Options and Related Services; Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions; Complete Ophthalmology Solutions 3; Contrast Injectors, Consumables and Associated Options and Related Services; Digital Diagnostic Solutions; Electrodes, Ultrasound Gels, Defibrillation and Related Consumables; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; External Defibrillation Devices and Related Services and Accessories; Medical Chart Paper and Ultrasound Film; Orthotics, Podiatry and Immobilisation; Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services; Specimen Cabinets and Associated Options and Related Services; Ultrasound Scanners and Associated Options and Related Services."
+  },
+  {
+   "name": "CooperSurgical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "CooperSurgical",
+   "seedLabels": [
+    "Women’s health / maternity"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Maternity, Obstetrics, Gynaecology & Sexual Health (2019/S 214-525123, to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS Supply Chain — Maternity, Obstetrics, Gynaecology & Sexual Health (2019/S 214-525123, to 2027)."
+  },
+  {
+   "name": "Durbin Plc",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Durbin Plc",
+   "seedLabels": [
+    "Women's health and maternity"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Viomedex Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Viomedex Ltd",
+   "seedLabels": [
+    "Women's health and maternity"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": true,
+  "markets": [
+   {
+    "id": "gynae",
+    "label": "Obstetrics, gynaecology, contraceptives and menopause drugs: BNF 7.1, 7.2, 7.3 and 7.5",
+    "bnf": [
+     "07.01",
+     "07.02",
+     "07.03",
+     "07.05"
+    ],
+    "note": null,
+    "latestPeriod": "202607",
+    "baselinePeriod": "202507",
+    "items": 933673,
+    "cost": 10347936,
+    "items12m": 10508069,
+    "cost12m": 115141773,
+    "itemsYoY": 1.4,
+    "products": 103,
+    "topNational": [
+     {
+      "code": "0702010F0AA",
+      "label": "Estriol",
+      "generic": true,
+      "items": 186675,
+      "share": 20.0,
+      "cost": 2568084,
+      "yoy": 32.6
+     },
+     {
+      "code": "0703021Q0AA",
+      "label": "Desogestrel",
+      "generic": true,
+      "items": 175685,
+      "share": 18.8,
+      "cost": 393985,
+      "yoy": -10.4
+     },
+     {
+      "code": "0702010G0AA",
+      "label": "Estradiol",
+      "generic": true,
+      "items": 136067,
+      "share": 14.6,
+      "cost": 1457779,
+      "yoy": 22.9
+     },
+     {
+      "code": "0702020F0AA",
+      "label": "Clotrimazole",
+      "generic": true,
+      "items": 66125,
+      "share": 7.1,
+      "cost": 894492,
+      "yoy": -4.7
+     },
+     {
+      "code": "0703010F0BP",
+      "label": "Rigevidon tablets",
+      "generic": false,
+      "items": 47985,
+      "share": 5.1,
+      "cost": 126333,
+      "yoy": -19.6
+     },
+     {
+      "code": "0703022M0BB",
+      "label": "Depo-Provera",
+      "generic": false,
+      "items": 45628,
+      "share": 4.9,
+      "cost": 256930,
+      "yoy": -3.9
+     },
+     {
+      "code": "0702010G0BC",
+      "label": "Vagifem",
+      "generic": false,
+      "items": 40210,
+      "share": 4.3,
+      "cost": 614936,
+      "yoy": 3.2
+     },
+     {
+      "code": "0703010F0BE",
+      "label": "Microgynon",
+      "generic": false,
+      "items": 21710,
+      "share": 2.3,
+      "cost": 83345,
+      "yoy": -20.0
+     },
+     {
+      "code": "0702010G0BF",
+      "label": "Vagirux",
+      "generic": false,
+      "items": 20686,
+      "share": 2.2,
+      "cost": 237698,
+      "yoy": -18.1
+     },
+     {
+      "code": "0703010F0AA",
+      "label": "Ethinylestradiol",
+      "generic": true,
+      "items": 15897,
+      "share": 1.7,
+      "cost": 122986,
+      "yoy": -10.8
+     }
+    ],
+    "icbLeaders": [
+     {
+      "icb": "QOX",
+      "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+      "items": 17634,
+      "leaders": [
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 3640,
+        "share": 20.6
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 3309,
+        "share": 18.8
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 3100,
+        "share": 17.6
+       }
+      ]
+     },
+     {
+      "icb": "QHL",
+      "name": "NHS Birmingham and Solihull",
+      "items": 16910,
+      "leaders": [
+       {
+        "code": "0702020F0AA",
+        "label": "Clotrimazole",
+        "generic": true,
+        "items": 3112,
+        "share": 18.4
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 2847,
+        "share": 16.8
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 2618,
+        "share": 15.5
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 14825,
+      "leaders": [
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 3306,
+        "share": 22.3
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 2255,
+        "share": 15.2
+       },
+       {
+        "code": "0702020F0AA",
+        "label": "Clotrimazole",
+        "generic": true,
+        "items": 1835,
+        "share": 12.4
+       }
+      ]
+     },
+     {
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 16506,
+      "leaders": [
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 3256,
+        "share": 19.7
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 3008,
+        "share": 18.2
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 2802,
+        "share": 17.0
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 48311,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 9451,
+        "share": 19.6
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 7949,
+        "share": 16.5
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 7315,
+        "share": 15.1
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 43101,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 8271,
+        "share": 19.2
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 8084,
+        "share": 18.8
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 6393,
+        "share": 14.8
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 14367,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 3466,
+        "share": 24.1
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 2527,
+        "share": 17.6
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 2314,
+        "share": 16.1
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 16337,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 3212,
+        "share": 19.7
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 3162,
+        "share": 19.4
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 2067,
+        "share": 12.7
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 20461,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 4987,
+        "share": 24.4
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 4526,
+        "share": 22.1
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 3120,
+        "share": 15.2
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 25568,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 5866,
+        "share": 22.9
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 4808,
+        "share": 18.8
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 3779,
+        "share": 14.8
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 16144,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 3752,
+        "share": 23.2
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 3620,
+        "share": 22.4
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 3145,
+        "share": 19.5
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 31320,
+      "leaders": [
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 6011,
+        "share": 19.2
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 4668,
+        "share": 14.9
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 4154,
+        "share": 13.3
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 14192,
+      "leaders": [
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 2844,
+        "share": 20.0
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 2670,
+        "share": 18.8
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 2546,
+        "share": 17.9
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 45006,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 7833,
+        "share": 17.4
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 7685,
+        "share": 17.1
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 4969,
+        "share": 11.0
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 36657,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 7499,
+        "share": 20.5
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 6181,
+        "share": 16.9
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 5820,
+        "share": 15.9
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 16544,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 4418,
+        "share": 26.7
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 3410,
+        "share": 20.6
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 2627,
+        "share": 15.9
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 35218,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 7820,
+        "share": 22.2
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 7143,
+        "share": 20.3
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 3965,
+        "share": 11.3
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 29136,
+      "leaders": [
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 5891,
+        "share": 20.2
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 4403,
+        "share": 15.1
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 3903,
+        "share": 13.4
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 27160,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 5907,
+        "share": 21.7
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 5419,
+        "share": 20.0
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 4172,
+        "share": 15.4
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 14806,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 3281,
+        "share": 22.2
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 2266,
+        "share": 15.3
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 2257,
+        "share": 15.2
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 17221,
+      "leaders": [
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 4128,
+        "share": 24.0
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 3329,
+        "share": 19.3
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 2051,
+        "share": 11.9
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 42023,
+      "leaders": [
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 8829,
+        "share": 21.0
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 7893,
+        "share": 18.8
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 6650,
+        "share": 15.8
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 18030,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 3553,
+        "share": 19.7
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 3155,
+        "share": 17.5
+       },
+       {
+        "code": "0702020F0AA",
+        "label": "Clotrimazole",
+        "generic": true,
+        "items": 2854,
+        "share": 15.8
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 52841,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 9823,
+        "share": 18.6
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 9819,
+        "share": 18.6
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 8741,
+        "share": 16.5
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 14023,
+      "leaders": [
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 3454,
+        "share": 24.6
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 2989,
+        "share": 21.3
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 2024,
+        "share": 14.4
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 20330,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 4420,
+        "share": 21.7
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 4031,
+        "share": 19.8
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 3543,
+        "share": 17.4
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 8991,
+      "leaders": [
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 1863,
+        "share": 20.7
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 1554,
+        "share": 17.3
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 1388,
+        "share": 15.4
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 12290,
+      "leaders": [
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 2843,
+        "share": 23.1
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 2376,
+        "share": 19.3
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 2193,
+        "share": 17.8
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 20162,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 5295,
+        "share": 26.3
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 2835,
+        "share": 14.1
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 2112,
+        "share": 10.5
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 19364,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 3918,
+        "share": 20.2
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 3106,
+        "share": 16.0
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 2702,
+        "share": 14.0
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 23273,
+      "leaders": [
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 5292,
+        "share": 22.7
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 5189,
+        "share": 22.3
+       },
+       {
+        "code": "0702020F0AA",
+        "label": "Clotrimazole",
+        "generic": true,
+        "items": 1943,
+        "share": 8.3
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 18081,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 4106,
+        "share": 22.7
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 3703,
+        "share": 20.5
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 2865,
+        "share": 15.8
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 52989,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 11404,
+        "share": 21.5
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 10343,
+        "share": 19.5
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 8447,
+        "share": 15.9
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 39656,
+      "leaders": [
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 8524,
+        "share": 21.5
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 7597,
+        "share": 19.2
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 6204,
+        "share": 15.6
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 36166,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 6555,
+        "share": 18.1
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 6260,
+        "share": 17.3
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 4994,
+        "share": 13.8
+       }
+      ]
+     },
+     {
+      "icb": "Z9B2Z",
+      "name": "NHS West and North London",
+      "items": 37934,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 9040,
+        "share": 23.8
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 5618,
+        "share": 14.8
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 4898,
+        "share": 12.9
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "vaginal",
+    "label": "Vaginal moisturisers: BNF 21.23",
+    "bnf": [
+     "21.23"
+    ],
+    "note": null,
+    "latestPeriod": "202607",
+    "baselinePeriod": "202507",
+    "items": 33045,
+    "cost": 296646,
+    "items12m": 354529,
+    "cost12m": 3203777,
+    "itemsYoY": 10.3,
+    "products": 18,
+    "topNational": [
+     {
+      "code": "21230000119",
+      "label": "YES VM vaginal moisturiser tube",
+      "generic": false,
+      "items": 8411,
+      "share": 25.5,
+      "cost": 59773,
+      "yoy": 24.7
+     },
+     {
+      "code": "21230000105",
+      "label": "ReplensMD vaginal moisturiser tube",
+      "generic": false,
+      "items": 7536,
+      "share": 22.8,
+      "cost": 55577,
+      "yoy": 10.7
+     },
+     {
+      "code": "21230000100",
+      "label": "ReplensMD vaginal moisturiser unit dose",
+      "generic": false,
+      "items": 6433,
+      "share": 19.5,
+      "cost": 83176,
+      "yoy": -6.9
+     },
+     {
+      "code": "21230000118",
+      "label": "YES VM vaginal moisturiser pre-filled applicators",
+      "generic": false,
+      "items": 4452,
+      "share": 13.5,
+      "cost": 48821,
+      "yoy": 17.5
+     },
+     {
+      "code": "21230000117",
+      "label": "YES WB water based vaginal lubricant tube",
+      "generic": false,
+      "items": 1877,
+      "share": 5.7,
+      "cost": 14394,
+      "yoy": 18.2
+     },
+     {
+      "code": "21230000112",
+      "label": "Hyalofemme vaginal moisturiser",
+      "generic": false,
+      "items": 1722,
+      "share": 5.2,
+      "cost": 10695,
+      "yoy": 13.7
+     },
+     {
+      "code": "21230000116",
+      "label": "YES WB water-based vaginal lubricant pre-filled applicator",
+      "generic": false,
+      "items": 954,
+      "share": 2.9,
+      "cost": 9019,
+      "yoy": 7.4
+     },
+     {
+      "code": "21230000110",
+      "label": "Sylk vaginal moisturiser",
+      "generic": false,
+      "items": 512,
+      "share": 1.5,
+      "cost": 3048,
+      "yoy": -26.6
+     },
+     {
+      "code": "21230000115",
+      "label": "Regelle vaginal moisturiser",
+      "generic": false,
+      "items": 474,
+      "share": 1.4,
+      "cost": 4987,
+      "yoy": 2.6
+     },
+     {
+      "code": "21230000122",
+      "label": "Vagisil Internal Hydrating gel",
+      "generic": false,
+      "items": 324,
+      "share": 1.0,
+      "cost": 3296,
+      "yoy": 11.0
+     }
+    ],
+    "icbLeaders": [
+     {
+      "icb": "QOX",
+      "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+      "items": 626,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 194,
+        "share": 31.0
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 123,
+        "share": 19.6
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 105,
+        "share": 16.8
+       }
+      ]
+     },
+     {
+      "icb": "QHL",
+      "name": "NHS Birmingham and Solihull",
+      "items": 1068,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 309,
+        "share": 28.9
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 299,
+        "share": 28.0
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 170,
+        "share": 15.9
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 869,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 265,
+        "share": 30.5
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 198,
+        "share": 22.8
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 169,
+        "share": 19.4
+       }
+      ]
+     },
+     {
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 553,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 237,
+        "share": 42.9
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 91,
+        "share": 16.5
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 76,
+        "share": 13.7
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 1167,
+      "leaders": [
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 276,
+        "share": 23.7
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 255,
+        "share": 21.9
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 222,
+        "share": 19.0
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 2354,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 712,
+        "share": 30.2
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 653,
+        "share": 27.7
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 335,
+        "share": 14.2
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 601,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 189,
+        "share": 31.4
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 113,
+        "share": 18.8
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 111,
+        "share": 18.5
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 161,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 47,
+        "share": 29.2
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 40,
+        "share": 24.8
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 22,
+        "share": 13.7
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 601,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 144,
+        "share": 24.0
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 143,
+        "share": 23.8
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 137,
+        "share": 22.8
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 1049,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 384,
+        "share": 36.6
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 188,
+        "share": 17.9
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 185,
+        "share": 17.6
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 357,
+      "leaders": [
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 97,
+        "share": 27.2
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 92,
+        "share": 25.8
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 68,
+        "share": 19.0
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 452,
+      "leaders": [
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 100,
+        "share": 22.1
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 91,
+        "share": 20.1
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 77,
+        "share": 17.0
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 363,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 115,
+        "share": 31.7
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 84,
+        "share": 23.1
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 51,
+        "share": 14.0
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 2271,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 658,
+        "share": 29.0
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 624,
+        "share": 27.5
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 325,
+        "share": 14.3
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 964,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 273,
+        "share": 28.3
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 183,
+        "share": 19.0
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 156,
+        "share": 16.2
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 373,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 97,
+        "share": 26.0
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 80,
+        "share": 21.4
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 78,
+        "share": 20.9
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 1714,
+      "leaders": [
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 456,
+        "share": 26.6
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 417,
+        "share": 24.3
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 317,
+        "share": 18.5
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 786,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 248,
+        "share": 31.6
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 196,
+        "share": 24.9
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 131,
+        "share": 16.7
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 1133,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 310,
+        "share": 27.4
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 272,
+        "share": 24.0
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 217,
+        "share": 19.2
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 845,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 293,
+        "share": 34.7
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 178,
+        "share": 21.1
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 138,
+        "share": 16.3
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 804,
+      "leaders": [
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 206,
+        "share": 25.6
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 184,
+        "share": 22.9
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 141,
+        "share": 17.5
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 1288,
+      "leaders": [
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 331,
+        "share": 25.7
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 281,
+        "share": 21.8
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 213,
+        "share": 16.5
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 740,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 277,
+        "share": 37.4
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 134,
+        "share": 18.1
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 98,
+        "share": 13.2
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 1798,
+      "leaders": [
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 421,
+        "share": 23.4
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 381,
+        "share": 21.2
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 363,
+        "share": 20.2
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 637,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 174,
+        "share": 27.3
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 123,
+        "share": 19.3
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 84,
+        "share": 13.2
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 361,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 106,
+        "share": 29.4
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 87,
+        "share": 24.1
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 66,
+        "share": 18.3
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 450,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 144,
+        "share": 32.0
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 123,
+        "share": 27.3
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 74,
+        "share": 16.4
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 346,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 119,
+        "share": 34.4
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 88,
+        "share": 25.4
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 54,
+        "share": 15.6
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 487,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 146,
+        "share": 30.0
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 98,
+        "share": 20.1
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 67,
+        "share": 13.8
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 679,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 186,
+        "share": 27.4
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 136,
+        "share": 20.0
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 107,
+        "share": 15.8
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 1228,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 315,
+        "share": 25.7
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 314,
+        "share": 25.6
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 265,
+        "share": 21.6
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 1231,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 404,
+        "share": 32.8
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 297,
+        "share": 24.1
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 254,
+        "share": 20.6
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 1256,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 348,
+        "share": 27.7
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 235,
+        "share": 18.7
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 192,
+        "share": 15.3
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 576,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 182,
+        "share": 31.6
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 112,
+        "share": 19.4
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 101,
+        "share": 17.5
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 1465,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 370,
+        "share": 25.3
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 311,
+        "share": 21.2
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 285,
+        "share": 19.5
+       }
+      ]
+     },
+     {
+      "icb": "Z9B2Z",
+      "name": "NHS West and North London",
+      "items": 1392,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 417,
+        "share": 30.0
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 255,
+        "share": 18.3
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 232,
+        "share": 16.7
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": false,
+  "whyEmpty": null,
+  "count": 113,
+  "roundupsExcluded": 11,
+  "updates": [
+   {
+    "title": "#MedSafetyWeek (3-9 November 2025): A call to action to improve patient safety",
+    "url": "https://www.gov.uk/drug-safety-update/number-medsafetyweek-3-9-november-2025-a-call-to-action-to-improve-patient-safety",
+    "published": "2025-10-23",
+    "updated": "2025-10-23",
+    "summary": "The annual #MedSafetyWeek campaign takes place from 3 to 9 November 2025. This year’s campaign theme is ‘we can all help make medicines safer.’"
+   },
+   {
+    "title": "Paracetamol and pregnancy - reminder that taking paracetamol during pregnancy remains safe",
+    "url": "https://www.gov.uk/drug-safety-update/paracetamol-and-pregnancy-reminder-that-taking-paracetamol-during-pregnancy-remains-safe",
+    "published": "2025-09-23",
+    "updated": "2025-09-23",
+    "summary": "Patients should be reminded and reassured that there is no evidence that taking paracetamol during pregnancy causes autism in children. Paracetamol is recommended as the first-choice pain reliever for pregnant women, used at the lowest dose and for the shortest duration. It also acts as an antipyretic and is therefore used to treat fever."
+   },
+   {
+    "title": "Abrysvo▼ (Pfizer RSV vaccine) and Arexvy▼ (GSK RSV vaccine): be alert to a small risk of Guillain-Barré syndrome following vaccination in older adults",
+    "url": "https://www.gov.uk/drug-safety-update/abrysvov-pfizer-rsv-vaccine-and-arexvyv-gsk-rsv-vaccine-be-alert-to-a-small-risk-of-guillain-barre-syndrome-following-vaccination-in-older-adults",
+    "published": "2025-07-07",
+    "updated": "2025-07-07",
+    "summary": "There is a small increase in the risk of Guillain-Barré syndrome following vaccination with Abrysvo (Pfizer respiratory syncytial virus (RSV) vaccine) and Arexvy (GSK RSV vaccine) in adults aged 60 years and older. Healthcare professionals should advise all recipients of Abrysvo and Arexvy that they should be alert to signs and symptoms of Guillain-Barré syndrome and, if they occur, to seek immediate medical attention as it requires urgent treatment in hospital."
+   },
+   {
+    "title": "Valproate (Belvo, Convulex, Depakote, Dyzantil, Epilim, Epilim Chrono or Chronosphere, Episenta, Epival, and Syonell▼): updated safety and educational materials to support patient discussion on reproductive risks",
+    "url": "https://www.gov.uk/drug-safety-update/valproate-belvo-convulex-depakote-dyzantil-epilim-epilim-chrono-or-chronosphere-episenta-epival-and-syonellv-updated-safety-and-educational-materials-to-support-patient-discussion-on-reproductive-risks",
+    "published": "2025-06-10",
+    "updated": "2025-06-10",
+    "summary": "Updated safety and educational materials are now available to support the implementation of the regulatory measures announced in the November 2023 National Patient Safety Alert and the September 2024 Drug Safety Update. They also include previous updates to product information on the risk of low birth weight in children exposed to valproate during pregnancy."
+   },
+   {
+    "title": "Thiopurines and intrahepatic cholestasis of pregnancy",
+    "url": "https://www.gov.uk/drug-safety-update/thiopurines-and-intrahepatic-cholestasis-of-pregnancy",
+    "published": "2025-05-15",
+    "updated": "2025-05-15",
+    "summary": "Intrahepatic cholestasis of pregnancy (ICP) has been rarely reported in patients treated with azathioprine products and is believed to be a risk applicable to all drugs in the thiopurine class (azathioprine, mercaptopurine and tioguanine). Cholestasis of pregnancy associated with thiopurines tends to occur earlier in pregnancy than non drug-induced cholestasis of pregnancy, and elevated bile acid levels may not reduce with ursodeoxycholic acid."
+   },
+   {
+    "title": "Fezolinetant▼(Veoza): risk of liver injury; new recommendations to minimise risk",
+    "url": "https://www.gov.uk/drug-safety-update/fezolinetantv-veoza-risk-of-liver-injury-new-recommendations-to-minimise-risk",
+    "published": "2025-04-10",
+    "updated": "2025-04-10",
+    "summary": "Fezolinetant treatment is associated with a risk of drug induced liver injury. New recommendations have been introduced to minimise this risk. Liver function should be monitored before and during treatment in all patients taking fezolinetant. Fezolinetant should be avoided in patients with known liver disease or at a higher risk of liver disease."
+   },
+   {
+    "title": "Valproate (Belvo, Convulex, Depakote, Dyzantil, Epilim, Epilim Chrono or  Chronosphere, Episenta, Epival, and Syonell▼): review by  two specialists is required for initiating valproate but not for  male patients already taking valproate",
+    "url": "https://www.gov.uk/drug-safety-update/valproate-belvo-convulex-depakote-dyzantil-epilim-epilim-chrono-or-chronosphere-episenta-epival-and-syonellv-review-by-two-specialists-is-required-for-initiating-valproate-but-not-for-male-patients-already-taking-valproate",
+    "published": "2025-02-13",
+    "updated": "2025-02-13",
+    "summary": "Review by two specialists remains in place for patients initiating valproate under 55 years of age but the Commission on Human Medicines (CHM) has advised that it will not be required for men (or males) currently taking valproate. Three infographics have been developed to provide clarity regarding valproate prescribing."
+   },
+   {
+    "title": "Bromocriptine: monitor blood pressure when prescribing bromocriptine for prevention or inhibition of post-partum physiological lactation",
+    "url": "https://www.gov.uk/drug-safety-update/bromocriptine-monitor-blood-pressure-when-prescribing-bromocriptine-for-prevention-or-inhibition-of-post-partum-physiological-lactation",
+    "published": "2024-10-24",
+    "updated": "2024-10-24",
+    "summary": "A safety review has been conducted by the MHRA following a Yellow Card report concerning a patient who was taking bromocriptine. The review concluded that blood pressure monitoring of patients prescribed with this drug is essential especially during the first days of treatment."
+   }
+  ]
+ },
+ "drugTariffViiia": {
+  "effectiveMonth": "2026-09",
+  "latestPublishedMonth": "2026-10",
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-viii",
+  "whole": false,
+  "bnfFilter": [
+   "07.01",
+   "07.02",
+   "07.03",
+   "07.05"
+  ],
+  "lineCount": 47,
+  "categoryCounts": {
+   "C": 42,
+   "M": 3,
+   "A": 2
+  },
+  "fileLines": 3533,
+  "fileLinesWithoutBnf": 53,
+  "priceMin": 0.92,
+  "priceMax": 88.0,
+  "linesShown": 47,
+  "lines": [
+   {
+    "medicine": "Clotrimazole 500mg pessaries",
+    "pack": "1 pessary",
+    "category": "M",
+    "price": 7.09,
+    "bnf": "0702020F0AAAFAF"
+   },
+   {
+    "medicine": "Desogestrel 75microgram tablets",
+    "pack": "84 tablet",
+    "category": "M",
+    "price": 2.08,
+    "bnf": "0703021Q0AAAAAA"
+   },
+   {
+    "medicine": "Estradiol 10microgram pessaries",
+    "pack": "24 pessary",
+    "category": "M",
+    "price": 12.29,
+    "bnf": "0702010G0AAAGAG"
+   },
+   {
+    "medicine": "Clindamycin 2% vaginal cream",
+    "pack": "40 gram",
+    "category": "C",
+    "price": 10.86,
+    "bnf": "0702020E0AAAAAA"
+   },
+   {
+    "medicine": "Clotrimazole 10% cream and Clotrimazole 2% cream",
+    "pack": "1 pack",
+    "category": "C",
+    "price": 11.96,
+    "bnf": "0702020F0AAALAL"
+   },
+   {
+    "medicine": "Clotrimazole 10% vaginal cream",
+    "pack": "5 gram",
+    "category": "C",
+    "price": 8.36,
+    "bnf": "0702020F0AAAGAG"
+   },
+   {
+    "medicine": "Clotrimazole 100mg pessaries",
+    "pack": "6 pessary",
+    "category": "C",
+    "price": 3.85,
+    "bnf": "0702020F0AAADAD"
+   },
+   {
+    "medicine": "Clotrimazole 2% cream",
+    "pack": "20 gram",
+    "category": "C",
+    "price": 6.41,
+    "bnf": "0702020F0AAAJAJ"
+   },
+   {
+    "medicine": "Clotrimazole 200mg pessaries",
+    "pack": "3 pessary",
+    "category": "C",
+    "price": 3.41,
+    "bnf": "0702020F0AAAEAE"
+   },
+   {
+    "medicine": "Clotrimazole 500mg pessary and Clotrimazole 2% cream",
+    "pack": "1 pack",
+    "category": "C",
+    "price": 5.73,
+    "bnf": "0702020F0AAAKAK"
+   },
+   {
+    "medicine": "Dequalinium chloride 10mg vaginal tablets",
+    "pack": "6 tablet",
+    "category": "C",
+    "price": 6.95,
+    "bnf": "0702020Z0AAAAAA"
+   },
+   {
+    "medicine": "Drospirenone 3mg / Estetrol 14.2mg tablets",
+    "pack": "28 tablet",
+    "category": "C",
+    "price": 8.6,
+    "bnf": "0703010T0AAAAAA"
+   },
+   {
+    "medicine": "Drospirenone 4mg tablets",
+    "pack": "84 tablet",
+    "category": "C",
+    "price": 14.7,
+    "bnf": "0703021R0AAAAAA"
+   },
+   {
+    "medicine": "Estradiol 1.5mg / Nomegestrol 2.5mg tablets",
+    "pack": "84 tablet",
+    "category": "C",
+    "price": 19.8,
+    "bnf": "0703010S0AAAAAA"
+   },
+   {
+    "medicine": "Estradiol 7.5micrograms/24hours vaginal delivery system",
+    "pack": "1 device",
+    "category": "C",
+    "price": 31.42,
+    "bnf": "0702010G0AAAHAH"
+   },
+   {
+    "medicine": "Estriol 1mg/g vaginal cream with applicator",
+    "pack": "15 gram",
+    "category": "C",
+    "price": 5.45,
+    "bnf": "0702010F0AAAAAA"
+   },
+   {
+    "medicine": "Estriol 30microgram pessaries",
+    "pack": "24 pessary",
+    "category": "C",
+    "price": 13.38,
+    "bnf": "0702010F0AAAGAG"
+   },
+   {
+    "medicine": "Estriol 500microgram pessaries",
+    "pack": "15 pessary",
+    "category": "C",
+    "price": 5.45,
+    "bnf": "0702010F0AAABAB"
+   },
+   {
+    "medicine": "Estriol 50micrograms/g vaginal gel with applicator",
+    "pack": "30 gram",
+    "category": "C",
+    "price": 18.9,
+    "bnf": "0702010F0AAAFAF"
+   },
+   {
+    "medicine": "Ethinylestradiol 2.7mg / Etonogestrel 11.7mg vaginal delivery system",
+    "pack": "3 system",
+    "category": "C",
+    "price": 29.7,
+    "bnf": "0703011A0AAAAAA"
+   },
+   {
+    "medicine": "Ethinylestradiol 20microgram / Desogestrel 150microgram tablets",
+    "pack": "63 tablet",
+    "category": "C",
+    "price": 5.98,
+    "bnf": "0703010E0AAABAB"
+   },
+   {
+    "medicine": "Ethinylestradiol 20microgram / Drospirenone 3mg tablets",
+    "pack": "84 tablet",
+    "category": "C",
+    "price": 14.7,
+    "bnf": "0703010E0AAAFAF"
+   },
+   {
+    "medicine": "Ethinylestradiol 20microgram / Gestodene 75microgram tablets",
+    "pack": "63 tablet",
+    "category": "C",
+    "price": 8.85,
+    "bnf": "0703010E0AAACAC"
+   },
+   {
+    "medicine": "Ethinylestradiol 30microgram / Desogestrel 150microgram tablets",
+    "pack": "63 tablet",
+    "category": "C",
+    "price": 4.93,
+    "bnf": "0703010F0AAAAAA"
+   },
+   {
+    "medicine": "Ethinylestradiol 30microgram / Drospirenone 3mg tablets",
+    "pack": "63 tablet",
+    "category": "C",
+    "price": 14.7,
+    "bnf": "0703010F0AAAJAJ"
+   },
+   {
+    "medicine": "Ethinylestradiol 30microgram / Gestodene 75microgram tablets",
+    "pack": "63 tablet",
+    "category": "C",
+    "price": 6.73,
+    "bnf": "0703010F0AAAEAE"
+   },
+   {
+    "medicine": "Ethinylestradiol 30microgram / Levonorgestrel 150microgram tablets",
+    "pack": "63 tablet",
+    "category": "C",
+    "price": 2.82,
+    "bnf": "0703010F0AAACAC"
+   },
+   {
+    "medicine": "Ethinylestradiol 33.9micrograms/24hours / Norelgestromin 203micrograms/24hours transdermal patches",
+    "pack": "9 patch",
+    "category": "C",
+    "price": 19.51,
+    "bnf": "0703010E0AAAEAE"
+   },
+   {
+    "medicine": "Ethinylestradiol 35microgram / Norethisterone 1mg tablets",
+    "pack": "63 tablet",
+    "category": "C",
+    "price": 2.28,
+    "bnf": "0703010G0AAABAB"
+   },
+   {
+    "medicine": "Ethinylestradiol 35microgram / Norethisterone 500microgram tablets",
+    "pack": "63 tablet",
+    "category": "C",
+    "price": 1.99,
+    "bnf": "0703010G0AAAAAA"
+   },
+   {
+    "medicine": "Ethinylestradiol 35microgram / Norgestimate 250microgram tablets",
+    "pack": "63 tablet",
+    "category": "C",
+    "price": 4.65,
+    "bnf": "0703010G0AAACAC"
+   },
+   {
+    "medicine": "Etonogestrel 68mg implant",
+    "pack": "1 device",
+    "category": "C",
+    "price": 83.43,
+    "bnf": "0703022P0AAAAAA"
+   },
+   {
+    "medicine": "Fezolinetant 45mg tablets",
+    "pack": "28 tablet",
+    "category": "C",
+    "price": 44.8,
+    "bnf": "0705010A0AAAAAA"
+   },
+   {
+    "medicine": "Fluconazole 150mg capsule and Clotrimazole 2% cream",
+    "pack": "1 pack",
+    "category": "C",
+    "price": 11.07,
+    "bnf": "0702020F0AAANAN"
+   },
+   {
+    "medicine": "Levonorgestrel 13.5mg intrauterine device",
+    "pack": "1 device",
+    "category": "C",
+    "price": 69.22,
+    "bnf": "0703023L0AAABAB"
+   },
+   {
+    "medicine": "Levonorgestrel 19.5mg intrauterine device",
+    "pack": "1 device",
+    "category": "C",
+    "price": 76.0,
+    "bnf": "0703023L0AAACAC"
+   },
+   {
+    "medicine": "Levonorgestrel 20micrograms/24hours intrauterine device",
+    "pack": "1 device",
+    "category": "C",
+    "price": 88.0,
+    "bnf": "0703023L0AAAAAA"
+   },
+   {
+    "medicine": "Levonorgestrel 30microgram tablets",
+    "pack": "35 tablet",
+    "category": "C",
+    "price": 0.92,
+    "bnf": "0703021L0AAAAAA"
+   },
+   {
+    "medicine": "Medroxyprogesterone 104mg/0.65ml suspension for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 6.9,
+    "bnf": "0703022M0AAACAC"
+   },
+   {
+    "medicine": "Medroxyprogesterone 150mg/1ml suspension for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 6.01,
+    "bnf": "0703022M0AAABAB"
+   },
+   {
+    "medicine": "Metronidazole 0.75% vaginal gel",
+    "pack": "40 gram",
+    "category": "C",
+    "price": 4.31,
+    "bnf": "0702020X0AAAAAA"
+   },
+   {
+    "medicine": "Norethisterone 200mg/1ml solution for injection ampoules",
+    "pack": "1 ampoule",
+    "category": "C",
+    "price": 4.05,
+    "bnf": "0703022N0AAAAAA"
+   },
+   {
+    "medicine": "Norethisterone 350microgram tablets",
+    "pack": "84 tablet",
+    "category": "C",
+    "price": 2.1,
+    "bnf": "0703021N0AAAAAA"
+   },
+   {
+    "medicine": "Ospemifene 60mg tablets",
+    "pack": "28 tablet",
+    "category": "C",
+    "price": 39.5,
+    "bnf": "0702010M0AAAAAA"
+   },
+   {
+    "medicine": "Ulipristal 30mg tablets",
+    "pack": "1 tablet",
+    "category": "C",
+    "price": 14.05,
+    "bnf": "0703050B0AAAAAA"
+   },
+   {
+    "medicine": "Estriol 0.01% vaginal cream with applicator",
+    "pack": "1 pack",
+    "category": "A",
+    "price": 49.25,
+    "bnf": "0702010F0AAACAC"
+   },
+   {
+    "medicine": "Levonorgestrel 1.5mg tablets",
+    "pack": "1 tablet",
+    "category": "A",
+    "price": 1.78,
+    "bnf": "0703050A0AAABAB"
+   }
+  ]
  }
 }

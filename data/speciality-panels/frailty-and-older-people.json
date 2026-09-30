@@ -20,7 +20,12 @@
   "frameworkAwards": "2026-09-30T12:30:14+00:00",
   "openTenders": "30/09/2026",
   "drugTariff": "2026-09-30",
-  "localIntel": "2026-09-30"
+  "localIntel": "2026-09-30",
+  "supplierDirectory": "2026-09-30",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-09-30",
+  "drugTariffViiia": null,
+  "hospitalPrescribing": null
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -28,7 +33,11 @@
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. NHS Supply Chain has no framework for frailty, older people, geriatric medicine or falls, so the single framework below is not this speciality's buying route — it is the only part of it NHS Supply Chain runs. Most of this patch is bought by local authorities and integrated care boards through community equipment services, telecare contracts and care home frameworks, which is what the awards list shows and why almost every buyer there is a council. The equipment itself (hoists, profiling beds, pressure redistribution, wheelchairs, daily living aids) is bought through Aids for Daily Living, Pressure Area Care and Patient Handling, and Wheelchairs, Specialist Seating and Related Services: those are published on the Patient Moving and Handling page and are deliberately not repeated here. Being absent from the supplier list below is not evidence of absence from this market.",
   "awards": "Award-stage notices whose TITLE matches /\\b(frailty|frail elderly|elderly|geriatric|comprehensive geriatric|delirium|dementia|telecare|technology enabled care|electronic assistive technology|care alarms?|care technology|community equipment|social care equipment|independent living|intermediate care|virtual ward|hospital at home|urgent community response|reablement|discharge to assess|admission avoidance|care homes?|nursing care beds?|falls (?:prevention|management|risk|service|pathway|response))\\b/i and does not match /\\b(ligature)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 85144100 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
+  "directorySuppliers": "No supplier directory label maps to this speciality, so no directory-tagged supplier is listed. That is a gap in the directory's vocabulary, not a finding that no company sells here, and no neighbouring page's list is borrowed to fill it.",
+  "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
+  "mhraDsu": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "drugTariffViiia": null
  },
  "counts": {
   "frameworks": 1,
@@ -38,7 +47,14 @@
   "awardsMatched": 113,
   "awardsWithheldByBuyerCap": 0,
   "openTenders": 0,
-  "localIntel": 0
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 0,
+  "suppliersDirectoryTagged": 0,
+  "suppliersDirectoryOnOtherFrameworks": 0,
+  "suppliersDirectoryWithFrameworkNote": 0,
+  "gpMarkets": 0,
+  "mhraDsu": 0,
+  "drugTariffViiiaLines": 0
  },
  "frameworks": [
   {
@@ -81,7 +97,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Baywater Healthcare UK Ltd",
@@ -89,7 +107,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "DH2 Solutions Ltd",
@@ -97,7 +117,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Iansyst Ltd",
@@ -105,7 +127,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Jabbla UK Ltd",
@@ -113,7 +137,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Legrand Electric Ltd",
@@ -121,7 +147,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Liberator Ltd",
@@ -129,7 +157,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Lifeline 24",
@@ -137,7 +167,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Mounts & More Ltd",
@@ -145,7 +177,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Orbis Protect",
@@ -153,7 +187,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "PCByVoice",
@@ -161,7 +197,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Possum Ltd",
@@ -169,7 +207,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Relianace High -Tech Ltd",
@@ -177,7 +217,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Sensory Guru Ltd",
@@ -185,7 +227,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Skyguard Ltd T/A Peoplesafe",
@@ -193,7 +237,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Smartbox Assistive Technology",
@@ -201,7 +247,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Tobii Dynavox Ltd",
@@ -209,7 +257,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Total Mobile",
@@ -217,7 +267,9 @@
    "variants": [],
    "frameworks": [
     "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   }
  ],
  "awards": [
@@ -818,5 +870,31 @@
   "nations": "Scotland, Wales, Northern Ireland and Ireland",
   "policy": "Policy and demand signals",
   "data": "Data sources"
- }
+ },
+ "directorySuppliers": [],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": false,
+  "markets": [],
+  "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": true,
+  "whyEmpty": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "count": 0,
+  "roundupsExcluded": 0,
+  "updates": []
+ },
+ "drugTariffViiia": null
 }

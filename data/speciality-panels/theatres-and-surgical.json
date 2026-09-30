@@ -20,7 +20,12 @@
   "frameworkAwards": "2026-09-30T12:30:14+00:00",
   "openTenders": "30/09/2026",
   "drugTariff": "2026-09-30",
-  "localIntel": "2026-09-30"
+  "localIntel": "2026-09-30",
+  "supplierDirectory": "2026-09-30",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-09-30",
+  "drugTariffViiia": null,
+  "hospitalPrescribing": null
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -28,17 +33,28 @@
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This patch has no single framework and no single market-share figure: spend sits across at least thirteen separate NHS Supply Chain frameworks, each a different product category with its own buying cycle, and none publishes a unit share breakdown. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market. NHS Supply Chain is also only one route here: the award record below shows theatre consumables bought through NHS Wales Shared Services, National Procurement in Scotland, HealthTrust Europe, the Collaborative Procurement Partnership and trusts' own direct awards, none of which appears in the framework list above.",
   "awards": "Award-stage notices whose TITLE matches /\\b(theatres?|operating table|anaesthe\\w*|anesthe\\w*|airway|laryngoscop\\w*|laryngeal mask|endotracheal|tracheal tube|breathing (?:system|circuit)|catheter mount|sterile services|sterilis\\w*|steriliz\\w*|decontaminat\\w*|washer disinfector|tray wrap|surgical instrument\\w*|instrument set\\w*|scalpel|diatherm\\w*|electrosurg\\w*|suture\\w*|wound closure|surgical stapler\\w*|skin stapler\\w*|linear stapler\\w*|circular stapler\\w*|stapling device\\w*|tissue adhesive|skin adhesive|haemostat\\w*|hemostat\\w*|procedure pack\\w*|surgical drape\\w*|surgical gown\\w*|surgical glove\\w*|scrub suit\\w*|laparoscop\\w*|minimally invasive|trocar\\w*|robotic surger\\w*|surgical robot\\w*|perioperative|peri-operative|smoke evacuat\\w*|surgical light\\w*)\\b/i and does not match /\\b(lectures? theatre|road re-?surfac\\w*|water treatment|asbestos|positive airway pressure|cpap|medicines|coagulation products|theatres? ventilation|laminar flow)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33161 or 33162 or 33169 or 33171 or 33172 or 33191 or 3314112 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: mis, surgical, theatres). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 15 of the 17 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (10 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-09-30.",
+  "drugTariffViiia": null
  },
  "counts": {
   "frameworks": 13,
   "suppliers": 263,
   "suppliersUnresolved": 7,
   "awardsShown": 40,
-  "awardsMatched": 493,
+  "awardsMatched": 492,
   "awardsWithheldByBuyerCap": 0,
   "openTenders": 1,
-  "localIntel": 0
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 78,
+  "suppliersDirectoryTagged": 17,
+  "suppliersDirectoryOnOtherFrameworks": 12,
+  "suppliersDirectoryWithFrameworkNote": 15,
+  "gpMarkets": 0,
+  "mhraDsu": 106,
+  "drugTariffViiiaLines": 0
  },
  "frameworks": [
   {
@@ -666,7 +682,9 @@
     "Surgical Gloves",
     "Tray Wrap and Sterilisation Equipment",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "OscarTech UK",
@@ -684,7 +702,9 @@
     "Procedure Packs",
     "Surgical Instruments",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Fannin (UK) Limited",
@@ -701,7 +721,9 @@
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Procedure Packs",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Medtronic",
@@ -716,7 +738,9 @@
     "Operating Theatres Equipment and Related Accessories and Services",
     "Robotic Medical Equipment and Associated Accessories",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Olympus (KeyMed)",
@@ -732,7 +756,9 @@
     "Instrument Decontamination and Accessories",
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Steris",
@@ -748,7 +774,9 @@
     "Instrument Decontamination and Accessories",
     "Operating Theatres Equipment and Related Accessories and Services",
     "Tray Wrap and Sterilisation Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Aquilant Limited",
@@ -762,7 +790,9 @@
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Instruments",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Avicenna Surgical Limited",
@@ -773,7 +803,9 @@
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Procedure Packs",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "B. Braun Medical",
@@ -787,7 +819,9 @@
     "Procedure Packs",
     "Surgical Instruments",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Getinge",
@@ -800,7 +834,9 @@
     "Decontamination Capital Equipment, Associated Accessories and Services",
     "Instrument Decontamination and Accessories",
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Ideal Medical Solutions",
@@ -814,7 +850,9 @@
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Operating Theatres Equipment and Related Accessories and Services",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Johnson & Johnson MedTech",
@@ -828,7 +866,9 @@
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Operating Theatres Equipment and Related Accessories and Services",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Mölnlycke",
@@ -842,7 +882,9 @@
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Procedure Packs",
     "Surgical Gloves"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Stryker",
@@ -856,7 +898,9 @@
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Operating Theatres Equipment and Related Accessories and Services",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Unisurge International Limited",
@@ -870,7 +914,9 @@
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Procedure Packs",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Bolton Surgical Limited",
@@ -883,7 +929,9 @@
     "Electrosurgical Consumables and Related Accessories",
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Conmed UK Ltd",
@@ -896,7 +944,9 @@
     "Electrosurgical Consumables and Related Accessories",
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Creed Medical Ltd",
@@ -906,7 +956,9 @@
     "Instrument Decontamination and Accessories",
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Delta Surgical",
@@ -919,7 +971,9 @@
     "Electrosurgical Consumables and Related Accessories",
     "Procedure Packs",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Draeger Medical UK",
@@ -933,7 +987,9 @@
     "Airway Management Products and Associated Equipment",
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Erbe Medical UK Ltd",
@@ -946,7 +1002,9 @@
     "Electrosurgical Consumables and Related Accessories",
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "HC21 (UK) Ltd",
@@ -960,7 +1018,9 @@
     "Airway Management Products and Associated Equipment",
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Karl Storz UK",
@@ -973,7 +1033,9 @@
     "Airway Management Products and Associated Equipment",
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Kebomed UK Ltd",
@@ -987,7 +1049,9 @@
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Instruments",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "MedScience Distribution",
@@ -1000,7 +1064,9 @@
     "Airway Management Products and Associated Equipment",
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Procedure Packs"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "RB Medical Engineering Ltd",
@@ -1010,7 +1076,9 @@
     "Electrosurgical Consumables and Related Accessories",
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Richardson Healthcare",
@@ -1022,7 +1090,9 @@
     "Airway Management Products and Associated Equipment",
     "Procedure Packs",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Sela Medical UK Ltd",
@@ -1032,7 +1102,9 @@
     "Electrosurgical Consumables and Related Accessories",
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "SRA Developments",
@@ -1045,7 +1117,9 @@
     "Electrosurgical Consumables and Related Accessories",
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Starkstrom Limited",
@@ -1055,7 +1129,9 @@
     "Electrosurgical Consumables and Related Accessories",
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Surgical Holdings Limited",
@@ -1068,7 +1144,9 @@
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Operating Theatres Equipment and Related Accessories and Services",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "TFX Group Ltd (Teleflex Medical)",
@@ -1082,7 +1160,9 @@
     "Airway Management Products and Associated Equipment",
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Timesco Healthcare Ltd",
@@ -1092,7 +1172,9 @@
     "Airway Management Products and Associated Equipment",
     "Electrosurgical Consumables and Related Accessories",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Vernacare",
@@ -1105,7 +1187,9 @@
     "Procedure Packs",
     "Surgical Instruments",
     "Tray Wrap and Sterilisation Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Advanced Medical Solutions (AMS)",
@@ -1116,7 +1200,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Advanced Sterilization Products (UK) Limited",
@@ -1125,7 +1211,9 @@
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services",
     "Instrument Decontamination and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Athrodax Healthcare International Ltd",
@@ -1137,7 +1225,9 @@
    "frameworks": [
     "Airway Management Products and Associated Equipment",
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "BioSpectrum Ltd",
@@ -1146,7 +1236,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Boston Scientific",
@@ -1158,7 +1250,9 @@
    "frameworks": [
     "Airway Management Products and Associated Equipment",
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Cook Medical",
@@ -1169,7 +1263,9 @@
    "frameworks": [
     "Airway Management Products and Associated Equipment",
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Critical Healthcare",
@@ -1180,7 +1276,9 @@
    "frameworks": [
     "Electrosurgical Consumables and Related Accessories",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Ecolab",
@@ -1192,7 +1290,9 @@
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services",
     "Instrument Decontamination and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Elemental Healthcare Ltd",
@@ -1204,7 +1304,9 @@
    "frameworks": [
     "Electrosurgical Consumables and Related Accessories",
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Empire Medical UK Ltd",
@@ -1216,7 +1318,9 @@
    "frameworks": [
     "Electrosurgical Consumables and Related Accessories",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Eurosurgical Ltd",
@@ -1227,7 +1331,9 @@
    "frameworks": [
     "Electrosurgical Consumables and Related Accessories",
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Farla Medical",
@@ -1239,7 +1345,9 @@
    "frameworks": [
     "Procedure Packs",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Genmed Enterprises Ltd",
@@ -1248,7 +1356,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Procedure Packs"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "GS Medical Healthcare Ltd",
@@ -1260,7 +1370,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Healthcare 25 Ltd",
@@ -1272,7 +1384,9 @@
    "frameworks": [
     "Electrosurgical Consumables and Related Accessories",
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Healthium Medtech UK",
@@ -1284,7 +1398,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Henleys Medical Supplies Limited",
@@ -1293,7 +1409,9 @@
    "frameworks": [
     "Airway Management Products and Associated Equipment",
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Hospital Services Limited",
@@ -1302,7 +1420,9 @@
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services",
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "iM-MED Limited",
@@ -1314,7 +1434,9 @@
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services",
     "Instrument Decontamination and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "IMS Euro Ltd",
@@ -1326,7 +1448,9 @@
    "frameworks": [
     "Procedure Packs",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Judd Medical Ltd",
@@ -1338,7 +1462,9 @@
    "frameworks": [
     "Electrosurgical Consumables and Related Accessories",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "June Medical Ltd",
@@ -1350,7 +1476,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medecon Healthcare UK",
@@ -1362,7 +1490,9 @@
    "frameworks": [
     "Airway Management Products and Associated Equipment",
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Meril UK Pvt Ltd",
@@ -1374,7 +1504,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Novus Med Ltd",
@@ -1383,7 +1515,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "P3 Medical Ltd",
@@ -1395,7 +1529,9 @@
    "frameworks": [
     "Airway Management Products and Associated Equipment",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Penlon",
@@ -1406,7 +1542,9 @@
    "frameworks": [
     "Airway Management Products and Associated Equipment",
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Prosum Medical Ltd",
@@ -1415,7 +1553,9 @@
    "frameworks": [
     "Procedure Packs",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "ProSys International Ltd",
@@ -1426,7 +1566,9 @@
    "frameworks": [
     "Airway Management Products and Associated Equipment",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Reflex Medical Limited",
@@ -1438,7 +1580,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Richard Wolf UK",
@@ -1450,7 +1594,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Rocialle Healthcare",
@@ -1462,7 +1608,9 @@
    "frameworks": [
     "Procedure Packs",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Sheffmed Limited",
@@ -1473,7 +1621,9 @@
    "frameworks": [
     "Airway Management Products and Associated Equipment",
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Solventum (3M Health Care)",
@@ -1485,7 +1635,9 @@
    "frameworks": [
     "Electrosurgical Consumables and Related Accessories",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Toffeln Ltd",
@@ -1494,7 +1646,9 @@
    "frameworks": [
     "Electrosurgical Consumables and Related Accessories",
     "Procedure Packs"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Tristel Solutions Limited",
@@ -1503,7 +1657,9 @@
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services",
     "Instrument Decontamination and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Uniplex",
@@ -1514,7 +1670,9 @@
    "frameworks": [
     "Surgical Instruments",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Vygon (UK)",
@@ -1526,7 +1684,9 @@
    "frameworks": [
     "Airway Management Products and Associated Equipment",
     "Procedure Packs"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Wassenburg Medical",
@@ -1538,7 +1698,9 @@
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services",
     "Instrument Decontamination and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Winners First Trading Limited",
@@ -1550,7 +1712,9 @@
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories",
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "@SimulationMan Ltd",
@@ -1558,7 +1722,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Accrington Surgical Inst. Suppliers",
@@ -1566,7 +1732,9 @@
    "variants": [],
    "frameworks": [
     "Procedure Packs"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Accrington Surgical Instrument Suppliers Ltd",
@@ -1576,7 +1744,9 @@
    ],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Acime UK Ltd",
@@ -1584,7 +1754,9 @@
    "variants": [],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Advanced Medical Systems Ltd",
@@ -1592,7 +1764,9 @@
    "variants": [],
    "frameworks": [
     "Instrument Decontamination and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Albert Waeschle Ltd",
@@ -1600,7 +1774,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "ALXR Limited",
@@ -1610,7 +1786,9 @@
    ],
    "frameworks": [
     "Procedure Packs"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Ambu UK",
@@ -1620,7 +1798,9 @@
    ],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Amity International",
@@ -1628,7 +1808,9 @@
    "variants": [],
    "frameworks": [
     "Instrument Decontamination and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Andersen Caledonia Ltd",
@@ -1636,7 +1818,9 @@
    "variants": [],
    "frameworks": [
     "Procedure Packs"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Anetic Aid Ltd",
@@ -1646,7 +1830,9 @@
    ],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Ansell",
@@ -1656,7 +1842,9 @@
    ],
    "frameworks": [
     "Surgical Gloves"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Anser Medical",
@@ -1666,7 +1854,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Apple Star Corp Limited",
@@ -1676,7 +1866,9 @@
    ],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Applied Medical UK Ltd",
@@ -1684,7 +1876,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Aquilant Critical Care",
@@ -1692,7 +1886,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Arjo",
@@ -1702,7 +1898,9 @@
    ],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Armstrong Medical (Eakin Respiratory)",
@@ -1712,7 +1910,9 @@
    ],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Artivion UK Ltd",
@@ -1720,7 +1920,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Assut UK LTD",
@@ -1730,7 +1932,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Atom Medical Corporation UK ltd",
@@ -1738,7 +1942,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Atos Medical (UK)",
@@ -1746,7 +1952,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Avanos Medical UK Limited",
@@ -1754,7 +1962,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Avidity Science Limited",
@@ -1762,7 +1972,9 @@
    "variants": [],
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Bailey Instruments Ltd",
@@ -1770,7 +1982,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Bariatric Solutions International",
@@ -1778,7 +1992,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Baxter / Hillrom",
@@ -1788,7 +2004,9 @@
    ],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Baxter Healthcare Ltd",
@@ -1796,7 +2014,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Beaver Visitec International Sales Ltd",
@@ -1804,7 +2024,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Bender UK Ltd",
@@ -1812,7 +2034,9 @@
    "variants": [],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Blink Medical Limited",
@@ -1820,7 +2044,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "BMM Weston Limited",
@@ -1828,7 +2054,9 @@
    "variants": [],
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Brandon Medical Company Ltd",
@@ -1836,7 +2064,9 @@
    "variants": [],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Cardinal Health U.K. 432 Ltd",
@@ -1846,7 +2076,9 @@
    ],
    "frameworks": [
     "Surgical Gloves"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Carleton Medical",
@@ -1854,7 +2086,9 @@
    "variants": [],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Ccmed Ltd",
@@ -1862,7 +2096,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Central Medical Supplies",
@@ -1872,7 +2108,9 @@
    ],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Charter Kontron Limited",
@@ -1880,7 +2118,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Chemence Ltd",
@@ -1888,7 +2128,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Chemical Intelligence Limited",
@@ -1896,7 +2138,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "CJ Medical",
@@ -1904,7 +2148,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Clonallon Laboratories Limited",
@@ -1912,7 +2158,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "CMR Surgical",
@@ -1922,7 +2170,9 @@
    ],
    "frameworks": [
     "Robotic Medical Equipment and Associated Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Coloplast",
@@ -1932,7 +2182,9 @@
    ],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Creo Medical Limited",
@@ -1942,7 +2194,9 @@
    ],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Crest Medical Ltd",
@@ -1950,7 +2204,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Croyde Medical",
@@ -1960,7 +2216,9 @@
    ],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Cutting Edge Surgical Instruments Ltd",
@@ -1968,7 +2226,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "D.P. Medical Systems Limited",
@@ -1976,7 +2236,9 @@
    "variants": [],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Daniels Health (Sharpsmart)",
@@ -1986,7 +2248,9 @@
    ],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Decree Thermo",
@@ -1996,7 +2260,9 @@
    ],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Dekomed Limited",
@@ -2004,7 +2270,9 @@
    "variants": [],
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Dr Weigert UK Ltd",
@@ -2012,7 +2280,9 @@
    "variants": [],
    "frameworks": [
     "Instrument Decontamination and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "DTR Medical Ltd",
@@ -2022,7 +2292,9 @@
    ],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Eakin Surgical Limited",
@@ -2030,7 +2302,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Ebrington (NI) Limited",
@@ -2040,7 +2314,9 @@
    ],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Eden Medical (UK) Limited",
@@ -2048,7 +2324,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Envirogen Water Technologies Limited",
@@ -2056,7 +2334,9 @@
    "variants": [],
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Essity UK Limited",
@@ -2066,7 +2346,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "ESTS (GB)",
@@ -2076,7 +2358,9 @@
    ],
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Fairmont Medical Products Limited",
@@ -2084,7 +2368,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Felgains",
@@ -2094,7 +2380,9 @@
    ],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Ferno (UK) Limited",
@@ -2104,7 +2392,9 @@
    ],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Fisher & Paykel Healthcare",
@@ -2114,7 +2404,9 @@
    ],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Flexicare Medical",
@@ -2124,7 +2416,9 @@
    ],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Freelance Surgical Limited",
@@ -2132,7 +2426,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Fulbourn Medical",
@@ -2140,7 +2436,9 @@
    "variants": [],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "GBUK Group",
@@ -2150,7 +2448,9 @@
    ],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "GE HealthCare",
@@ -2160,7 +2460,9 @@
    ],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Gentell UK Ltd",
@@ -2168,7 +2470,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "GenX MediCare Ltd",
@@ -2178,7 +2482,9 @@
    ],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Globus (Shetland) Ltd",
@@ -2188,7 +2494,9 @@
    ],
    "frameworks": [
     "Surgical Gloves"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "GS Medical Healthcare Ltd (novating to GBUK Ltd)",
@@ -2196,7 +2504,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Gvs Filter Technology UK Ltd",
@@ -2204,7 +2514,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "H & R Healthcare Ltd",
@@ -2214,7 +2526,9 @@
    ],
    "frameworks": [
     "Procedure Packs"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Hamilton Medical UK",
@@ -2224,7 +2538,9 @@
    ],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Hamilton Sales And Service UK Ltd",
@@ -2232,7 +2548,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Harris-Jones Medical Ltd",
@@ -2240,7 +2558,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Health Edge Solutions Ltd",
@@ -2248,7 +2568,9 @@
    "variants": [],
    "frameworks": [
     "Tray Wrap and Sterilisation Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Henry Schein UK Holdings",
@@ -2258,7 +2580,9 @@
    ],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Hologic UK",
@@ -2268,7 +2592,9 @@
    ],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Howard Wright Europe",
@@ -2278,7 +2604,9 @@
    ],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Howorth Air Technology",
@@ -2286,7 +2614,9 @@
    "variants": [],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "i3medical",
@@ -2294,7 +2624,9 @@
    "variants": [],
    "frameworks": [
     "Instrument Decontamination and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "ICU Medical (incl. Smiths Medical)",
@@ -2304,7 +2636,9 @@
    ],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Ingles Ltd",
@@ -2314,7 +2648,9 @@
    ],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Insight Medical Products Limited",
@@ -2322,7 +2658,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Inspiration Healthcare",
@@ -2332,7 +2670,9 @@
    ],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Integra LifeSciences (Integra Neurosciences)",
@@ -2342,7 +2682,9 @@
    ],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Intersurgical",
@@ -2352,7 +2694,9 @@
    ],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Intuitive Surgical",
@@ -2362,7 +2706,9 @@
    ],
    "frameworks": [
     "Robotic Medical Equipment and Associated Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "IPS Converters Ltd",
@@ -2370,7 +2716,9 @@
    "variants": [],
    "frameworks": [
     "Tray Wrap and Sterilisation Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "ISOL8 Healthcare Limited",
@@ -2380,7 +2728,9 @@
    ],
    "frameworks": [
     "Procedure Packs"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "It’s Interventional Limited",
@@ -2390,7 +2740,9 @@
    ],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "J & M Medical",
@@ -2398,7 +2750,9 @@
    "variants": [],
    "frameworks": [
     "Electrosurgical Consumables and Related Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "KCI Medical Ltd (previously 3M United Kingdom PLC)",
@@ -2406,7 +2760,9 @@
    "variants": [],
    "frameworks": [
     "Tray Wrap and Sterilisation Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Kimal PLC",
@@ -2416,7 +2772,9 @@
    ],
    "frameworks": [
     "Procedure Packs"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Laprosurge Limited",
@@ -2424,7 +2782,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Lawmed Ltd",
@@ -2432,7 +2792,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Leanvation",
@@ -2440,7 +2802,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Gloves"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Lenience UK Ltd",
@@ -2448,7 +2812,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Lexington Medical UK Ltd",
@@ -2456,7 +2822,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "LINET UK",
@@ -2466,7 +2834,9 @@
    ],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "LocaMed Ltd",
@@ -2474,7 +2844,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "LTE Scientific Limited",
@@ -2482,7 +2854,9 @@
    "variants": [],
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Lubron UK Limited",
@@ -2492,7 +2866,9 @@
    ],
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Lynton Lasers",
@@ -2500,7 +2876,9 @@
    "variants": [],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Löwenstein Medical UK",
@@ -2510,7 +2888,9 @@
    ],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Marshall Products",
@@ -2518,7 +2898,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "MCT Lifesciences Ltd",
@@ -2528,7 +2910,9 @@
    ],
    "frameworks": [
     "Robotic Medical Equipment and Associated Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "MDI Medical Ltd",
@@ -2536,7 +2920,9 @@
    "variants": [],
    "frameworks": [
     "Instrument Decontamination and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "MEDACX Limited",
@@ -2544,7 +2930,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medasil Surgical Ltd",
@@ -2552,7 +2940,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Mediprema",
@@ -2560,7 +2950,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Mediq Healthcare UK Ltd",
@@ -2568,7 +2960,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Meditech Systems Ltd (Dorset)",
@@ -2576,7 +2970,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Meditrade UK Ltd",
@@ -2584,7 +2980,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Gloves"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Mercian Surgical Supply Company Limited",
@@ -2594,7 +2992,9 @@
    ],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Mermaid Medical Ltd",
@@ -2602,7 +3002,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Mieka Ltd",
@@ -2610,7 +3012,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Mindray UK",
@@ -2620,7 +3024,9 @@
    ],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Minitouch Ltd",
@@ -2628,7 +3034,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "MMM Medical Equipment UK Limited",
@@ -2636,7 +3044,9 @@
    "variants": [],
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "mOm Incubators Ltd",
@@ -2644,7 +3054,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Nanosonics",
@@ -2652,7 +3064,9 @@
    "variants": [],
    "frameworks": [
     "Instrument Decontamination and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Newmaw Medical Ltd",
@@ -2660,7 +3074,9 @@
    "variants": [],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Nihon Koden",
@@ -2670,7 +3086,9 @@
    ],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "NISSHA Medical Technologies",
@@ -2680,7 +3098,9 @@
    ],
    "frameworks": [
     "Electrosurgical Consumables and Related Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "NJ Devices Ltd t/a Ocean Med",
@@ -2690,7 +3110,9 @@
    ],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "O&M Halyard Uk Limited",
@@ -2698,7 +3120,9 @@
    "variants": [],
    "frameworks": [
     "Procedure Packs"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Ortus Technology Limited",
@@ -2706,7 +3130,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Owens and Minor Halyard Ltd",
@@ -2714,7 +3140,9 @@
    "variants": [],
    "frameworks": [
     "Tray Wrap and Sterilisation Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "P.W.Coole & Son Limited T/A Surgical Holdings",
@@ -2722,7 +3150,9 @@
    "variants": [],
    "frameworks": [
     "Electrosurgical Consumables and Related Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Pall Europe Limited",
@@ -2730,7 +3160,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Paramount Medical Solutions Ltd",
@@ -2738,7 +3170,9 @@
    "variants": [],
    "frameworks": [
     "Procedure Packs"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Partners for Endoscopy Limited",
@@ -2746,7 +3180,9 @@
    "variants": [],
    "frameworks": [
     "Instrument Decontamination and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Peacocks (Surgical and Medical Equipment) Limited",
@@ -2754,7 +3190,9 @@
    "variants": [],
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Peacocks Medical Group",
@@ -2762,7 +3200,9 @@
    "variants": [],
    "frameworks": [
     "Instrument Decontamination and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Pearsalls Ltd",
@@ -2770,7 +3210,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Pennamed Limited",
@@ -2778,7 +3220,9 @@
    "variants": [],
    "frameworks": [
     "Instrument Decontamination and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Pennine Healthcare (Ivor Shaw Ltd)",
@@ -2788,7 +3232,9 @@
    ],
    "frameworks": [
     "Procedure Packs"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Pentland Medical Ltd",
@@ -2796,7 +3242,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Philips",
@@ -2806,7 +3254,9 @@
    ],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Plasmic Healthsciences Uk Limited",
@@ -2814,7 +3264,9 @@
    "variants": [],
    "frameworks": [
     "Procedure Packs"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Platts & Nisbett Ltd",
@@ -2822,7 +3274,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Polyco",
@@ -2832,7 +3286,9 @@
    ],
    "frameworks": [
     "Surgical Gloves"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Proact Medical Ltd",
@@ -2840,7 +3296,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Procept Biorobotics",
@@ -2848,7 +3306,9 @@
    "variants": [],
    "frameworks": [
     "Robotic Medical Equipment and Associated Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Promed Limited",
@@ -2858,7 +3318,9 @@
    ],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Purple Surgical",
@@ -2868,7 +3330,9 @@
    ],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "R&D Surgical Ltd",
@@ -2876,7 +3340,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Reliance Medical",
@@ -2886,7 +3352,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Rudolf Riester GmbH",
@@ -2896,7 +3364,9 @@
    ],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Ryna Medical Uk Limited",
@@ -2904,7 +3374,9 @@
    "variants": [],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "SAI Medical Solutions Ltd",
@@ -2912,7 +3384,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Sai Quality Fruits And Veg Limited",
@@ -2920,7 +3394,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Scala Surgical Ltd",
@@ -2928,7 +3404,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Schulke & Mayr UK Ltd",
@@ -2936,7 +3414,9 @@
    "variants": [],
    "frameworks": [
     "Instrument Decontamination and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Schultz Medical (UK) Limited",
@@ -2944,7 +3424,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Scientific Medical Clinical Limited",
@@ -2952,7 +3434,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Scott Medical Ltd",
@@ -2960,7 +3444,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Semperit Investment",
@@ -2968,7 +3454,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Gloves"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Serchem Limited",
@@ -2976,7 +3464,9 @@
    "variants": [],
    "frameworks": [
     "Instrument Decontamination and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Soluvos Medical Ltd",
@@ -2986,7 +3476,9 @@
    ],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Steri Pod Limited",
@@ -2996,7 +3488,9 @@
    ],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Sterimed Medical Implants UK Ltd",
@@ -3004,7 +3498,9 @@
    "variants": [],
    "frameworks": [
     "Electrosurgical Consumables and Related Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Steris IMS Ltd",
@@ -3012,7 +3508,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Surgica Limited",
@@ -3020,7 +3518,9 @@
    "variants": [],
    "frameworks": [
     "Electrosurgical Consumables and Related Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Surgical Instrument Group Holdings Ltd",
@@ -3028,7 +3528,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Surtex Instruments Ltd",
@@ -3036,7 +3538,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Swann Morton",
@@ -3046,7 +3550,9 @@
    ],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Sychem",
@@ -3056,7 +3562,9 @@
    ],
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "T.J Smith & Nephew Ltd",
@@ -3064,7 +3572,9 @@
    "variants": [],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Terumo Aortic",
@@ -3074,7 +3584,9 @@
    ],
    "frameworks": [
     "Wound Closure"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Uniphar Medtech",
@@ -3082,7 +3594,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
@@ -3092,7 +3606,9 @@
    ],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Valley Northern Ltd",
@@ -3102,7 +3618,9 @@
    ],
    "frameworks": [
     "Surgical Instruments"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Vanguard AG",
@@ -3110,7 +3628,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Vascular Perspectives Ltd",
@@ -3118,7 +3638,9 @@
    "variants": [],
    "frameworks": [
     "Procedure Packs"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Venturis Medical Ltd",
@@ -3126,7 +3648,9 @@
    "variants": [],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Verathon Medical",
@@ -3134,7 +3658,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "VWS (UK) Ltd",
@@ -3144,7 +3670,9 @@
    ],
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Vyaire Medical Products Limited",
@@ -3154,7 +3682,9 @@
    ],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "W.L. Gore & Associates",
@@ -3164,7 +3694,9 @@
    ],
    "frameworks": [
     "Minimally Invasive Surgery, Related Equipment and Accessories"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Walters Medical Ltd",
@@ -3172,7 +3704,9 @@
    "variants": [],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Westfield Medical Ltd",
@@ -3180,7 +3714,9 @@
    "variants": [],
    "frameworks": [
     "Tray Wrap and Sterilisation Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "William Davies Care Limited",
@@ -3188,7 +3724,9 @@
    "variants": [],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Xograph Healthcare Ltd",
@@ -3198,7 +3736,9 @@
    ],
    "frameworks": [
     "Operating Theatres Equipment and Related Accessories and Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Zoll Medical UK Limited",
@@ -3208,7 +3748,9 @@
    ],
    "frameworks": [
     "Airway Management Products and Associated Equipment"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   }
  ],
  "awards": [
@@ -3357,21 +3899,6 @@
    "value": 91668,
    "periodEnd": "2027-09-21",
    "source": "tender-history"
-  },
-  {
-   "title": "BCU-ITT-62831 - Ysbyty Glan Clwyd Endoscopy Decontamination",
-   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
-   "supplier": "MPH Construction Ltd",
-   "date": "2026-09-22",
-   "url": "https://www.find-tender.service.gov.uk/Notice/089601-2026",
-   "value": null,
-   "periodEnd": null,
-   "cpv": [
-    "45000000"
-   ],
-   "isFramework": false,
-   "source": "framework-awards",
-   "cpvCorroborates": false
   },
   {
    "title": "Waiver - UHB_HGS - 1111 - PFE Medical - Decontamination Services",
@@ -3809,6 +4336,16 @@
    "isFramework": false,
    "source": "framework-awards",
    "cpvCorroborates": false
+  },
+  {
+   "title": "HRI - PROCEDURE PACKS CVC AND ARTERIAL",
+   "buyer": "HULL UNIVERSITY TEACHING HOSPITALS NHS TRUST",
+   "supplier": "VYGON UK",
+   "date": "2026-08-12",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/aa245832-a758-4e8b-8ea7-e10554b1e1b8",
+   "value": 51408,
+   "periodEnd": "2027-03-31",
+   "source": "tender-history"
   }
  ],
  "openTenders": [
@@ -3832,5 +4369,668 @@
   "nations": "Scotland, Wales, Northern Ireland and Ireland",
   "policy": "Policy and demand signals",
   "data": "Data sources"
- }
+ },
+ "directorySuppliers": [
+  {
+   "name": "365 Healthcare",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "365 Healthcare",
+   "seedLabels": [
+    "Theatres / surgical"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Intravenous Accessories and Pressure Monitoring Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Intravenous Accessories and Pressure Monitoring Accessories."
+  },
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "BD — Becton, Dickinson",
+   "seedLabels": [
+    "Surgery / mesh",
+    "Surgical haemostasis"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Advanced Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/advanced-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Bladder Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/bladder-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Blood Collection Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/blood-collection-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Brachytherapy Seeds and Associated Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/brachytherapy-seeds-and-associated-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Central Venous Catheters and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/central-venous-catheters-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Extension Sets and Lines",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/extension-sets-and-lines/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Infusion Pumps and Administration Sets and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/infusion-pumps-and-administration-sets-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Intravenous Accessories and Pressure Monitoring Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Intravenous Cannula and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-cannula-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/laboratory-diagnostics-point-of-care-testing-and-pathology/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Needlefree Connection Systems and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/needlefree-connection-systems-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Temperature Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-temperature-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Renal Replacement Therapies Services, Technologies and Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/renal-replacement-therapy-equipment-and-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Skin Cleansing, Disinfection and Hygiene",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/skin-cleansing-disinfection-and-hygiene/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Specimen Cabinets and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/specimen-cabinets-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Structural Heart and Ventricular Assist Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/structural-heart-and-ventricular-assist-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Mesh",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-mesh/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Syringes, Needles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Urology and Bowel Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/urology-and-bowel-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — IV Cannula",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS Supply Chain — Central Venous Catheters",
+     "url": "https://www.find-tender.service.gov.uk/Notice/001530-2025",
+     "source": "Find a Tender contract notice; dates and supplier count from NHS Supply Chain launch brief"
+    },
+    {
+     "name": "NHS Supply Chain — Syringes & Needles",
+     "url": "https://www.find-tender.service.gov.uk/Notice/002484-2026",
+     "source": "Find a Tender contract award notice"
+    },
+    {
+     "name": "NHS Supply Chain — Needle-free Connection Systems",
+     "url": "https://www.find-tender.service.gov.uk/Notice/074575-2025",
+     "source": "Find a Tender contract award notice; dates and supplier count from NHS Supply Chain launch brief"
+    },
+    {
+     "name": "NHS Supply Chain — Renal Replacement Therapies (2023/S 000-017117, to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on twenty NHS Supply Chain frameworks not counted as this speciality's: Advanced Wound Care; Bladder Scanners and Associated Options and Related Services; Blood Collection Devices; Brachytherapy Seeds and Associated Accessories; Central Venous Catheters and Associated Products; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Extension Sets and Lines; Infusion Pumps and Administration Sets and Associated Products; Intravenous Accessories and Pressure Monitoring Accessories; Intravenous Cannula and Associated Products; Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services; Needlefree Connection Systems and Associated Products; Patient Temperature Management; Renal Replacement Therapies Services, Technologies and Consumables; Skin Cleansing, Disinfection and Hygiene; Specimen Cabinets and Associated Options and Related Services; Structural Heart and Ventricular Assist Devices; Surgical Mesh; Syringes, Needles and Associated Products; Urology and Bowel Management. The Hub's supplier directory also records: NHS Supply Chain — IV Cannula; NHS Supply Chain — Central Venous Catheters; NHS Supply Chain — Syringes & Needles; NHS Supply Chain — Needle-free Connection Systems; NHS Supply Chain — Renal Replacement Therapies (2023/S 000-017117, to 2028); NHS SBS — SBS10142."
+  },
+  {
+   "name": "Brainlab Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Brainlab Ltd",
+   "seedLabels": [
+    "Theatres / surgical"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Mobile Image Intensifiers and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-image-intensifiers-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-ancillary-devices-incl-dosimetry-patient-positioning-and-qa-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Navigation Systems with Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-navigation-systems-with-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Mobile Image Intensifiers and Associated Options and Related Services; Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices; Surgical Navigation Systems with Associated Options and Related Services."
+  },
+  {
+   "name": "Central Management Catalogue Agency UK Ltd T/A CMCA(UK)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Central Management Catalogue Agency UK Ltd T/A CMCA(UK)",
+   "seedLabels": [
+    "Theatres / surgical"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Cleaning Equipment, Supplies and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cleaning-supplies-equipment-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Reusable Plastic Medical Hollowware",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/reusable-plastic-medical-hollowware/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Cleaning Equipment, Supplies and Associated Products; Reusable Plastic Medical Hollowware."
+  },
+  {
+   "name": "Chalice Medical Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Chalice Medical Ltd",
+   "seedLabels": [
+    "Theatres / surgical"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Perfusion Devices, Consumables and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/perfusion/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Perfusion Devices, Consumables and Associated Equipment."
+  },
+  {
+   "name": "Continuum Scotland Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Continuum Scotland Ltd",
+   "seedLabels": [
+    "Theatres / surgical"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Medical Hollowware",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-hollowware/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Medical Hollowware."
+  },
+  {
+   "name": "Interweave Textiles",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Interweave Textiles",
+   "seedLabels": [
+    "Theatres / surgical"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Pressure Area Care and Patient Handling",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-area-care-and-patient-handling/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Textiles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/textiles/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Pressure Area Care and Patient Handling; Textiles and Associated Products."
+  },
+  {
+   "name": "LivaNova UK Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "LivaNova UK Limited",
+   "seedLabels": [
+    "Theatres / surgical"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Neuromodulation Devices and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/neuromodulation-devices-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Perfusion Devices, Consumables and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/perfusion/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Neuromodulation Devices and Associated Products; Perfusion Devices, Consumables and Associated Equipment."
+  },
+  {
+   "name": "Praxis Medical Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Praxis Medical Ltd",
+   "seedLabels": [
+    "Theatres / surgical"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Catering Consumables and Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/catering-equipment-and-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Cleaning Equipment, Supplies and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cleaning-supplies-equipment-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Intravenous Cannula and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-cannula-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-gynaecology-and-sexual-health-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Medical Healthcare Furniture",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-healthcare-furniture/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Medical Hollowware",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-hollowware/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Orthotics, Podiatry and Immobilisation",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/orthoses-podiatry-and-immobilisation/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Physiotherapy and Occupational Therapy",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/physiotherapy-and-occupational-therapy/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Polymer Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/plastic-polymer-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pulse-oximetry-and-capnography-devices-and-support-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Vascular Therapy and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/vascular-therapy-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on eleven NHS Supply Chain frameworks not counted as this speciality's: Catering Consumables and Equipment; Cleaning Equipment, Supplies and Associated Products; Intravenous Cannula and Associated Products; Maternity, Obstetrics, Gynaecology and Sexual Health Products; Medical Healthcare Furniture; Medical Hollowware; Orthotics, Podiatry and Immobilisation; Physiotherapy and Occupational Therapy; Polymer Products; Pulse Oximetry, Capnography and Related Monitoring Technologies; Vascular Therapy and Associated Products."
+  },
+  {
+   "name": "Terumo UK",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Terumo UK",
+   "seedLabels": [
+    "Theatres / surgical"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Intravenous Cannula and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-cannula-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Perfusion Devices, Consumables and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/perfusion/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Syringes, Needles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Syringes & Needles",
+     "url": "https://www.find-tender.service.gov.uk/Notice/002484-2026",
+     "source": "Find a Tender contract award notice"
+    },
+    {
+     "name": "NHS Supply Chain (Surflo, FSB524)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on four NHS Supply Chain frameworks not counted as this speciality's: Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Intravenous Cannula and Associated Products; Perfusion Devices, Consumables and Associated Equipment; Syringes, Needles and Associated Products. The Hub's supplier directory also records: NHS Supply Chain — Syringes & Needles; NHS Supply Chain (Surflo, FSB524)."
+  },
+  {
+   "name": "Warwick SASCo Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Warwick SASCo Ltd",
+   "seedLabels": [
+    "Theatres / surgical"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Medical Hollowware",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-hollowware/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Reusable Plastic Medical Hollowware",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/reusable-plastic-medical-hollowware/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Medical Hollowware; Reusable Plastic Medical Hollowware."
+  },
+  {
+   "name": "Zimmer Biomet",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Zimmer Biomet",
+   "seedLabels": [
+    "Theatres / surgical"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Total Orthopaedic Solutions 3",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-orthopaedic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Total Orthopaedic Solutions 3."
+  },
+  {
+   "name": "A2B Healthcare",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "A2B Healthcare",
+   "seedLabels": [
+    "Theatres / surgical"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "Single Use Theatre Protective Wear and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/single-use-theatre-protective-wear/",
+     "source": "nhssc-brief"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: Single Use Theatre Protective Wear and Related Consumables."
+  },
+  {
+   "name": "Cairn Technology Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Cairn Technology Limited",
+   "seedLabels": [
+    "Theatres / surgical"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Chemence Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Chemence Medical",
+   "seedLabels": [
+    "Theatres / surgical"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Full Support Healthcare Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Full Support Healthcare Ltd",
+   "seedLabels": [
+    "Theatres / surgical"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "Single Use Theatre Protective Wear and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/single-use-theatre-protective-wear/",
+     "source": "nhssc-brief"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: Single Use Theatre Protective Wear and Related Consumables."
+  },
+  {
+   "name": "Semperit / Sempermed",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Semperit / Sempermed",
+   "seedLabels": [
+    "Theatre / surgical"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": false,
+  "markets": [],
+  "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": false,
+  "whyEmpty": null,
+  "count": 106,
+  "roundupsExcluded": 10,
+  "updates": [
+   {
+    "title": "Filters should be used during the administration of Parenteral Nutrition for patients in all care settings",
+    "url": "https://www.gov.uk/drug-safety-update/filters-should-be-used-during-the-administration-of-parenteral-nutrition-for-patients-in-all-care-settings",
+    "published": "2026-09-02",
+    "updated": "2026-09-02",
+    "summary": "Administration of parenteral nutrition without a filter has been associated with a number of adverse incidents including an embolism which resulted in a fatal outcome."
+   },
+   {
+    "title": "#MedSafetyWeek (3-9 November 2025): A call to action to improve patient safety",
+    "url": "https://www.gov.uk/drug-safety-update/number-medsafetyweek-3-9-november-2025-a-call-to-action-to-improve-patient-safety",
+    "published": "2025-10-23",
+    "updated": "2025-10-23",
+    "summary": "The annual #MedSafetyWeek campaign takes place from 3 to 9 November 2025. This year’s campaign theme is ‘we can all help make medicines safer.’"
+   },
+   {
+    "title": "Paracetamol and pregnancy - reminder that taking paracetamol during pregnancy remains safe",
+    "url": "https://www.gov.uk/drug-safety-update/paracetamol-and-pregnancy-reminder-that-taking-paracetamol-during-pregnancy-remains-safe",
+    "published": "2025-09-23",
+    "updated": "2025-09-23",
+    "summary": "Patients should be reminded and reassured that there is no evidence that taking paracetamol during pregnancy causes autism in children. Paracetamol is recommended as the first-choice pain reliever for pregnant women, used at the lowest dose and for the shortest duration. It also acts as an antipyretic and is therefore used to treat fever."
+   },
+   {
+    "title": "Abrysvo▼ (Pfizer RSV vaccine) and Arexvy▼ (GSK RSV vaccine): be alert to a small risk of Guillain-Barré syndrome following vaccination in older adults",
+    "url": "https://www.gov.uk/drug-safety-update/abrysvov-pfizer-rsv-vaccine-and-arexvyv-gsk-rsv-vaccine-be-alert-to-a-small-risk-of-guillain-barre-syndrome-following-vaccination-in-older-adults",
+    "published": "2025-07-07",
+    "updated": "2025-07-07",
+    "summary": "There is a small increase in the risk of Guillain-Barré syndrome following vaccination with Abrysvo (Pfizer respiratory syncytial virus (RSV) vaccine) and Arexvy (GSK RSV vaccine) in adults aged 60 years and older. Healthcare professionals should advise all recipients of Abrysvo and Arexvy that they should be alert to signs and symptoms of Guillain-Barré syndrome and, if they occur, to seek immediate medical attention as it requires urgent treatment in hospital."
+   },
+   {
+    "title": "Prolonged-release opioids: Removal of indication for relief of post-operative pain",
+    "url": "https://www.gov.uk/drug-safety-update/prolonged-release-opioids-removal-of-indication-for-relief-of-post-operative-pain",
+    "published": "2025-03-12",
+    "updated": "2025-03-12",
+    "summary": "The indication for the treatment of post-operative pain has been removed from the licences of all prolonged release opioids due to the increased risk of persistent post-operative opioid use (PPOU) and opioid-induced ventilatory impairment (OIVI)."
+   },
+   {
+    "title": "GLP-1 and dual GIP/GLP-1 receptor agonists: potential risk of pulmonary aspiration during general anaesthesia or deep sedation",
+    "url": "https://www.gov.uk/drug-safety-update/glp-1-and-dual-gip-slash-glp-1-receptor-agonists-potential-risk-of-pulmonary-aspiration-during-general-anaesthesia-or-deep-sedation",
+    "published": "2025-01-28",
+    "updated": "2025-01-28",
+    "summary": "Healthcare professionals should be aware of the potential risk of pulmonary aspiration in patients using GLP-1 or dual GIP/GLP-1 receptor agonists who undergo surgery or procedures with general anaesthesia or deep sedation."
+   },
+   {
+    "title": "Calcium chloride, calcium gluconate: potential risk of underdosing with calcium gluconate in severe hyperkalaemia",
+    "url": "https://www.gov.uk/drug-safety-update/calcium-chloride-calcium-gluconate-potential-risk-of-underdosing-with-calcium-gluconate-in-severe-hyperkalaemia",
+    "published": "2023-06-27",
+    "updated": "2023-06-27",
+    "summary": "Calcium salts (either calcium chloride or calcium gluconate) are used to stabilise the myocardium and prevent cardiac arrest in patients experiencing severe hyperkalaemia. However, the two salts are not equivalent in terms of calcium dose. Ensure the correct dose is administered to avoid underdosing of calcium. If treated sub-optimally, hyperkalaemia can be fatal."
+   },
+   {
+    "title": "Glucose solutions: recommendations to minimise the risks associated with the accidental use of glucose solutions instead of saline solutions in arterial lines",
+    "url": "https://www.gov.uk/drug-safety-update/glucose-solutions-recommendations-to-minimise-the-risks-associated-with-the-accidental-use-of-glucose-solutions-instead-of-saline-solutions-in-arterial-lines",
+    "published": "2023-05-25",
+    "updated": "2023-05-25",
+    "summary": "We remind healthcare professionals that accidental use of glucose-containing solutions as flush fluid for arterial lines may contaminate blood samples and result in falsely high glucose readings. This may lead to inappropriate insulin administration and subsequent hypoglycaemia. Healthcare professionals should use saline solutions to flush arterial lines and use pressure infusion bags with transparent windows to ensure that the fluid label is visible at all times."
+   }
+  ]
+ },
+ "drugTariffViiia": null
 }

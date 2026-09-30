@@ -20,7 +20,12 @@
   "frameworkAwards": "2026-09-30T12:30:14+00:00",
   "openTenders": "30/09/2026",
   "drugTariff": "2026-09-30",
-  "localIntel": "2026-09-30"
+  "localIntel": "2026-09-30",
+  "supplierDirectory": "2026-09-30",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-09-30",
+  "drugTariffViiia": null,
+  "hospitalPrescribing": null
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -28,7 +33,11 @@
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This is a framework membership list, not a market share and not the whole buying picture. The larger part of this patch is bought in the community on prescription, through NHSBSA Drug Tariff Part IX and the dispensing appliance contractors, a route with no NHS Supply Chain framework page at all; the Drug Tariff summary is where that route appears, and the page's Market intelligence section sizes the two populations separately. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market.",
   "awards": "Award-stage notices whose TITLE matches /\\b(continence|incontinen\\w*|urinary catheters?|urethral catheters?|indwelling catheters?|intermittent catheters?|foley|suprapubic|catheterisation|catheterization|urinary drainage|drainage bags?|leg bags?|night bags?|catheter valves?|catheter maintenance|urine meters?|urine collection|urine bags?|penile sheaths?|urinary sheaths?|uridome|stomas?|ostomy|colostomy|ileostomy|urostomy|bowel management|bowel care|faecal management|fecal management|anal irrigation|trans[- ]?anal irrigation|rectal irrigation|bladder washout|bladder irrigation|pelvic floor|continence pads?|absorbent pads?|pads and garments|commodes?|enuresis|nocturia)\\b/i and does not match /\\b(blood collection|catheterisation lab|surgical mesh)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "NHSBSA Drug Tariff Part IXB/IXC/IXB & IXC for the stated effective month, summarised. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's."
+  "drugTariff": "NHSBSA Drug Tariff Part IXB/IXC/IXB & IXC for the stated effective month, summarised. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: continence, ostomy). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 16 of the 22 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "mhraDsu": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "drugTariffViiia": null
  },
  "counts": {
   "frameworks": 2,
@@ -38,7 +47,14 @@
   "awardsMatched": 26,
   "awardsWithheldByBuyerCap": 0,
   "openTenders": 0,
-  "localIntel": 23
+  "localIntel": 23,
+  "suppliersFrameworkNamedAlsoTagged": 52,
+  "suppliersDirectoryTagged": 22,
+  "suppliersDirectoryOnOtherFrameworks": 13,
+  "suppliersDirectoryWithFrameworkNote": 16,
+  "gpMarkets": 2,
+  "mhraDsu": 0,
+  "drugTariffViiiaLines": 0
  },
  "frameworks": [
   {
@@ -150,7 +166,9 @@
    "frameworks": [
     "Disposable and Washable Continence Care",
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Essity UK Limited",
@@ -162,7 +180,9 @@
    "frameworks": [
     "Disposable and Washable Continence Care",
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "GBUK Group",
@@ -174,7 +194,9 @@
    "frameworks": [
     "Disposable and Washable Continence Care",
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "iMEDicare Ltd",
@@ -183,7 +205,9 @@
    "frameworks": [
     "Disposable and Washable Continence Care",
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Sharon Services (UK) Ltd",
@@ -195,7 +219,9 @@
    "frameworks": [
     "Disposable and Washable Continence Care",
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "AQLANE Medical BV",
@@ -203,7 +229,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Ardo medical Limited",
@@ -213,7 +241,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Astric Medical Ltd",
@@ -221,7 +251,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Attends Ltd",
@@ -229,7 +261,9 @@
    "variants": [],
    "frameworks": [
     "Disposable and Washable Continence Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "B. Braun Medical",
@@ -239,7 +273,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Baxter Healthcare Ltd",
@@ -249,7 +285,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "BD — Becton, Dickinson",
@@ -259,7 +297,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Beambridge Medical Ltd",
@@ -267,7 +307,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "C&P Medical Trading Ltd",
@@ -275,7 +317,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "CD Medical Ltd",
@@ -283,7 +327,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Class Medical Ltd",
@@ -291,7 +337,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "CliniMed",
@@ -301,7 +349,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Clinisupplies",
@@ -312,7 +362,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "CODAN Limited",
@@ -320,7 +372,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Coloplast",
@@ -330,7 +384,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Convatec",
@@ -340,7 +396,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Creo Medical Limited",
@@ -350,7 +408,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "E&E MEDICAL SUPPLIES LIMITED",
@@ -358,7 +418,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Eakin Ostomy (Pelican Healthcare)",
@@ -368,7 +430,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Fairmont Medical Products Limited",
@@ -376,7 +440,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Fannin (UK) Limited",
@@ -386,7 +452,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Flexicare Medical",
@@ -396,7 +464,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Forma-Care (UK) Ltd",
@@ -404,7 +474,9 @@
    "variants": [],
    "frameworks": [
     "Disposable and Washable Continence Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Fresenius Kabi Ltd",
@@ -412,7 +484,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "GenX MediCare Ltd",
@@ -420,7 +494,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Healthcare 25 Ltd",
@@ -428,7 +504,9 @@
    "variants": [],
    "frameworks": [
     "Disposable and Washable Continence Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Hollister",
@@ -438,7 +516,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Key Health Solutions",
@@ -446,7 +526,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Laborie Medical Technologies UK Ltd",
@@ -454,7 +536,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "LINC Medical",
@@ -464,7 +548,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Medicina Limited",
@@ -472,7 +558,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Mediplus Ltd",
@@ -480,7 +568,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Mediq Healthcare UK Ltd",
@@ -490,7 +580,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Meditrade UK Ltd",
@@ -498,7 +590,9 @@
    "variants": [],
    "frameworks": [
     "Disposable and Washable Continence Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Medline Industries",
@@ -508,7 +602,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Ontex Healthcare UK Ltd",
@@ -516,7 +612,9 @@
    "variants": [],
    "frameworks": [
     "Disposable and Washable Continence Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Optimum Medical",
@@ -526,7 +624,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "P&S Healthcare Ltd",
@@ -534,7 +634,9 @@
    "variants": [],
    "frameworks": [
     "Disposable and Washable Continence Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Paramount Medical Solutions Ltd",
@@ -542,7 +644,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Paul Hartmann (HARTMANN)",
@@ -552,7 +656,9 @@
    ],
    "frameworks": [
     "Disposable and Washable Continence Care"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Peak Medical Ltd",
@@ -560,7 +666,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Pennine Healthcare (Ivor Shaw Ltd)",
@@ -570,7 +678,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "ProSys International Ltd",
@@ -578,7 +688,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "RB Medical Engineering Ltd",
@@ -588,7 +700,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Redland embh Group Limited",
@@ -596,7 +710,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Rhodes Pharma Ltd",
@@ -604,7 +720,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Rocialle Healthcare",
@@ -614,7 +732,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Salts Healthcare",
@@ -624,7 +744,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Sinapi Biomedical UK",
@@ -632,7 +754,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Smith+Nephew",
@@ -642,7 +766,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Solventum (3M Health Care)",
@@ -652,7 +778,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "TFX Group Ltd (Teleflex Medical)",
@@ -662,7 +790,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Trion Pharma Limited",
@@ -670,7 +800,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "UNOQUIP GMBH",
@@ -678,7 +810,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Unora Healthcare Ltd (formerly Oakmed Ltd)",
@@ -688,7 +822,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Venture Healthcare Ltd",
@@ -696,7 +832,9 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Vernacare",
@@ -706,7 +844,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Wellspect",
@@ -716,7 +856,9 @@
    ],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   }
  ],
  "awards": [
@@ -808,7 +950,7 @@
   {
    "title": "Continence Goods and Services 2024",
    "buyer": "HealthTrust Europe LLP (HTE) acting on behalf of Mid and South Essex NHS Foundation Trust (\"MSE\")",
-   "supplier": "Abena UK Limited, Critical Healthcare Ltd, iMEDicare Ltd, Medline Industries Lim",
+   "supplier": "Abena UK Limited, Critical Healthcare Ltd, iMEDicare Ltd, Medline Industries Limited, Essity UK Limited, Vernacare International Limited, Ontex Healthcare UK Limited",
    "date": "2025-03-20",
    "url": "https://www.find-tender.service.gov.uk/Notice/010389-2025",
    "value": null,
@@ -818,7 +960,7 @@
   {
    "title": "Stoma Acute Patient",
    "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotland) (NSS)",
-   "supplier": "Alliance Pharmaceuticals, B. Braun Medical Limited, Bullen Healthcare, Clinimed ",
+   "supplier": "Alliance Pharmaceuticals, B. Braun Medical Limited, Bullen Healthcare, Clinimed Limited, Coloplast Lt, ConvaTec Ltd, Hollister Ltd, Oakmed Ltd, Peak Medical Ltd, Pelican Healthcare Ltd, Salts Healthcare Limited",
    "date": "2025-02-07",
    "url": "https://www.find-tender.service.gov.uk/Notice/004180-2025",
    "value": null,
@@ -898,7 +1040,7 @@
   {
    "title": "Stoma Acute Patient",
    "buyer": "National Services Scotland, National Procurement",
-   "supplier": "Clinimed Limited, Coloplast Ltd, ConvaTec Ltd, Hollister Ltd, Peak Medical Ltd, ",
+   "supplier": "Clinimed Limited, Coloplast Ltd, ConvaTec Ltd, Hollister Ltd, Peak Medical Ltd, Pelican Healthcare, Salts Healthcare Ltd, B. Braun Medical Ltd",
    "date": "2022-12-06",
    "url": "https://www.find-tender.service.gov.uk/Notice/034511-2022",
    "value": null,
@@ -908,7 +1050,7 @@
   {
    "title": "Urinary Catheters & Drainage Bags",
    "buyer": "National Services Scotland, National Procurement",
-   "supplier": "Coloplast Ltd, Mediplus Ltd, LINC Medical, Bard Limited, Teleflex, Clinisupplies",
+   "supplier": "Coloplast Ltd, Mediplus Ltd, LINC Medical, Bard Limited, Teleflex, Clinisupplies Ltd, Unomedical Ltd (A ConvaTec Company), GREAT BEAR HEALTHCARE, Flexicare Medical Ltd",
    "date": "2022-08-15",
    "url": "https://www.find-tender.service.gov.uk/Notice/022482-2022",
    "value": null,
@@ -968,7 +1110,7 @@
   {
    "title": "Framework for beds, mattresses and wheelchairs both services and products, continence home delivery services plus manage",
    "buyer": "NHS Shared Business Services Ltd (NHS SBS)",
-   "supplier": "ABENA UK LTD, Accora Ltd, Aidapt, AJ Mobility Ltd, Apollo Healthcare Technologie",
+   "supplier": "ABENA UK LTD, Accora Ltd, Aidapt, AJ Mobility Ltd, Apollo Healthcare Technologies Limited, Arjo UK Ltd, BES Healthcare Ltd, Care and Independence Ltd, CareFlex Ltd, Blatchford Limited, Direct Healthcare Group, Drive Devilbiss Healthcare Ltd, Essity UK Ltd, Etac Ltd, Frontier Therapeutics Ltd, Five Mobility Ltd, Harvest Healthcare Ltd, Healthcare Matters, Helping Hand Company, Herida Healthcare, Hill-Rom Ltd, Invacare Ltd, IQ Medical Ltd, James Leckey Design Ltd, Katnic Ltd, Linet UK Ltd, Lisclare Limited, Mangar International Ltd, Medequip Assistive Technology Limited, MEDSTROM LTD, NRS Healthcare, Ontex Healthcare UK Ltd, Opcare Ltd, OSKA Care Ltd, Otto Bock Healthcare PLC, Paul Hartmann Ltd, Peacocks Medical Group, Prism UK Medical Ltd, Renray Healthcare Ltd, Ross Auto Engineering Limited, Seating Matters, Select Medical LTD, Simplymed Ltd, Stryker UK LTD, Sumed International (UK) Ltd, Sunrise Medical Ltd, Talley Group Ltd, Trulife, Yorkshire Care Equipment",
    "date": "2021-12-07",
    "url": "https://www.contractsfinder.service.gov.uk/Notice/9e78acb0-779b-4aa4-962b-da71d26f46b9",
    "value": 591837,
@@ -998,7 +1140,7 @@
   {
    "title": "Disposable and Washable Continence Care and Associated Products",
    "buyer": "NHS Supply Chain Coordination",
-   "supplier": "Alpine Health Group Ltd, Abena UK Limited, Activ Medical Disposables, Attends, C",
+   "supplier": "Alpine Health Group Ltd, Abena UK Limited, Activ Medical Disposables, Attends, Capatex Ltd, Essity UK Ltd, forma-care (UK) Ltd, iMEDicare Ltd, MIP UK LTD, Ontex Healthcare UK Ltd, P&S Healthcare Ltd, PAUL HARTMANN Ltd, Good Baby UK Ltd, UK MEDICA",
    "date": "2021-03-21",
    "url": "https://www.contractsfinder.service.gov.uk/Notice/1e3488e8-b10c-4671-8f45-72e45a533531",
    "value": 395225000,
@@ -1008,7 +1150,7 @@
   {
    "title": "Urology, Bowel and Faecal Management",
    "buyer": "NHS SUPPLY CHAIN",
-   "supplier": "Abena UK Limited, Albyn Medical Ltd, Ardo Medical Ltd, Astric Medical Ltd, B. Br",
+   "supplier": "Abena UK Limited, Albyn Medical Ltd, Ardo Medical Ltd, Astric Medical Ltd, B. Braun, \"Bard Limited \", Baxter Healthcare Ltd, \"Beambridge Medical Ltd \", Becton, Dickinson U.K. Limited, Blue Box Medical Ltd, Bullen Healthcare, Cardinal Health UK 432 Limited, CliniMed, Clinisupplies Ltd, \"Codan Limited \", Coloplast Ltd, Convatec Limited, E&E Medical Supplies Ltd, Essity UK Ltd, Fairmont Medical Products Limited, Fannin UK Ltd, Flexicare Medical (previously Wymedical Ltd), Forte Medical Ltd, Fresenius Kabi, GBUK Ltd T/A GBUK Healthcare, Great Bear Healthcare Ltd, Hospital Services Limited, IMS Euro, Laborie Medical Technologies, L.IN.C. Medical Systems Ltd, Medical Devices Technologies International Ltd, Medicare Colgate Ltd, Mediplus Ltd, Optimum Medical Solutions, \"Peak Medical Ltd \", Pennine Healthcare, \"GENX Medicare Ltd \", \"Prosys International limited \", Redland Healthcare Limited, Richardson Healthcare Ltd, Rocket Medical Plc, Bunzl Retail & Healthcare Supplies Ltd T/A 365 Healthcare (S, T J Smith and Nephew Limited, T/A 'Smith & Nephew', Teleflex Group Ltd T/A Teleflex UK, Valley Northern Ltd, Vernacare Limited, Vygon (UK) Ltd, Warwick SASCo Ltd, Wellspect Healthcare, but a Division of Dentsply IH Ltd",
    "date": "2019-10-17",
    "url": "https://www.contractsfinder.service.gov.uk/Notice/1d1dec7b-f7e2-4fc8-bd57-2f3082e6878e",
    "value": 82680000,
@@ -1635,5 +1777,3004 @@
   "nations": "Scotland, Wales, Northern Ireland and Ireland",
   "policy": "Policy and demand signals",
   "data": "Data sources"
- }
+ },
+ "directorySuppliers": [
+  {
+   "name": "Axonics Modulation Technologies UK Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Axonics Modulation Technologies UK Limited",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Neuromodulation Devices and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/neuromodulation-devices-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Neuromodulation Devices and Associated Products."
+  },
+  {
+   "name": "Boston Scientific",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Boston Scientific",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Neuromodulation Devices and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/neuromodulation-devices-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Radiotherapy Treatment Systems and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-treatment-systems-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Implants for Men’s and Women’s Health",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-implants-for-mens-and-womens-health/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Mesh",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-mesh/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on seven NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Neuromodulation Devices and Associated Products; Operating Theatres Equipment and Related Accessories and Services; Radiotherapy Treatment Systems and Associated Options and Related Services; Surgical Implants for Men’s and Women’s Health; Surgical Mesh. The Hub's supplier directory also records: NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)."
+  },
+  {
+   "name": "Cook Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Cook Medical",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Operating Theatres Equipment and Related Accessories and Services. The Hub's supplier directory also records: NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)."
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Crest Medical Ltd",
+   "seedLabels": [
+    "Ostomy and stoma care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Advanced Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/advanced-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Blood Collection Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/blood-collection-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Cleaning Equipment, Supplies and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cleaning-supplies-equipment-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Enteral Feeding, Bile Bags and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/enteral-feeding-bile-bags-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Extension Sets and Lines",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/extension-sets-and-lines/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "External Defibrillation Devices and Related Services and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/external-defibrillation-devices-related-equipment-and-associated-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "General Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/general-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Infusion Pumps and Administration Sets and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/infusion-pumps-and-administration-sets-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-gynaecology-and-sexual-health-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Orthotics, Podiatry and Immobilisation",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/orthoses-podiatry-and-immobilisation/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Temperature Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-temperature-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Physiotherapy and Occupational Therapy",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/physiotherapy-and-occupational-therapy/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Skin Cleansing, Disinfection and Hygiene",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/skin-cleansing-disinfection-and-hygiene/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Syringes, Needles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Wound Closure",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/wound-closure/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on sixteen NHS Supply Chain frameworks not counted as this speciality's: Advanced Wound Care; Blood Collection Devices; Cleaning Equipment, Supplies and Associated Products; Enteral Feeding, Bile Bags and Associated Products; Extension Sets and Lines; External Defibrillation Devices and Related Services and Accessories; General Wound Care; Infusion Pumps and Administration Sets and Associated Products; Maternity, Obstetrics, Gynaecology and Sexual Health Products; Orthotics, Podiatry and Immobilisation; Patient Temperature Management; Physiotherapy and Occupational Therapy; Skin Cleansing, Disinfection and Hygiene; Syringes, Needles and Associated Products; Total Patient Assessment Device Solutions; Wound Closure."
+  },
+  {
+   "name": "De Smit Medical Systems Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "De Smit Medical Systems Limited",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Bladder Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/bladder-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Bladder Scanners and Associated Options and Related Services."
+  },
+  {
+   "name": "Ingenion Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Ingenion Medical",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Male Intra-Urethral Catheter with Magnet Control",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/male-intra-urethral-catheter-with-magnet-control/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Male Intra-Urethral Catheter with Magnet Control."
+  },
+  {
+   "name": "Interweave Textiles",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Interweave Textiles",
+   "seedLabels": [
+    "Continence / Urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Pressure Area Care and Patient Handling",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-area-care-and-patient-handling/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Textiles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/textiles/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Pressure Area Care and Patient Handling; Textiles and Associated Products."
+  },
+  {
+   "name": "Intuitive Surgical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Intuitive Surgical",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Robotic Medical Equipment and Associated Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/robotic-medical-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Robotic Medical Equipment",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Robotic Medical Equipment and Associated Accessories. The Hub's supplier directory also records: NHS Supply Chain — Robotic Medical Equipment."
+  },
+  {
+   "name": "Karl Storz UK",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Karl Storz UK",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Digital Diagnostic Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ear-nose-and-throat-ent-endoscopes-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Flexible Endoscopes and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/flexible-endoscopes-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Minimally Invasive Surgery, Related Equipment and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/minimally-invasive-surgery/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Rigid Endoscopy and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/rigid-endoscopy-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Navigation Systems with Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-navigation-systems-with-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Orthopaedic Solutions 3",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-orthopaedic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Flexible Endoscopes (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on ten NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Digital Diagnostic Solutions; Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Flexible Endoscopes and Associated Options and Related Services; Minimally Invasive Surgery, Related Equipment and Accessories; Operating Theatres Equipment and Related Accessories and Services; Rigid Endoscopy and Associated Options and Related Services; Surgical Navigation Systems with Associated Options and Related Services; Total Orthopaedic Solutions 3. The Hub's supplier directory also records: NHS Supply Chain — Flexible Endoscopes (to 2028)."
+  },
+  {
+   "name": "Olympus (KeyMed)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Olympus (KeyMed)",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Decontamination Capital Equipment, Associated Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/decontamination-capital-equipment-endoscopy-and-sterile-services-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Digital Diagnostic Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ear-nose-and-throat-ent-endoscopes-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrosurgical Consumables and Related Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrosurgical-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Flexible Endoscopes and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/flexible-endoscopes-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Instrument Decontamination and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/instrument-decontamination-and-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Minimally Invasive Surgery, Related Equipment and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/minimally-invasive-surgery/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Rigid Endoscopy and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/rigid-endoscopy-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Flexible Endoscopes (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS Supply Chain — Decontamination Capital (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on ten NHS Supply Chain frameworks not counted as this speciality's: Decontamination Capital Equipment, Associated Accessories and Services; Digital Diagnostic Solutions; Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services; Electrosurgical Consumables and Related Accessories; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Flexible Endoscopes and Associated Options and Related Services; Instrument Decontamination and Accessories; Minimally Invasive Surgery, Related Equipment and Accessories; Operating Theatres Equipment and Related Accessories and Services; Rigid Endoscopy and Associated Options and Related Services. The Hub's supplier directory also records: NHS Supply Chain — Flexible Endoscopes (to 2028); NHS Supply Chain — Decontamination Capital (to 2027)."
+  },
+  {
+   "name": "Pentax Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Pentax Medical",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ear-nose-and-throat-ent-endoscopes-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Flexible Endoscopes and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/flexible-endoscopes-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Rigid Endoscopy and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/rigid-endoscopy-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Flexible Endoscopes (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on four NHS Supply Chain frameworks not counted as this speciality's: Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Flexible Endoscopes and Associated Options and Related Services; Rigid Endoscopy and Associated Options and Related Services. The Hub's supplier directory also records: NHS Supply Chain — Flexible Endoscopes (to 2028)."
+  },
+  {
+   "name": "Polar Medical Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Polar Medical Ltd",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Neuromodulation Devices and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/neuromodulation-devices-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Neuromodulation Devices and Associated Products."
+  },
+  {
+   "name": "Richard Wolf UK",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Richard Wolf UK",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ear-nose-and-throat-ent-endoscopes-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Flexible Endoscopes and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/flexible-endoscopes-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Lithotripsy and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/lithotripsy-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Minimally Invasive Surgery, Related Equipment and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/minimally-invasive-surgery/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Rigid Endoscopy and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/rigid-endoscopy-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Flexible Endoscopes (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on seven NHS Supply Chain frameworks not counted as this speciality's: Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Flexible Endoscopes and Associated Options and Related Services; Lithotripsy and Associated Options and Related Services; Minimally Invasive Surgery, Related Equipment and Accessories; Operating Theatres Equipment and Related Accessories and Services; Rigid Endoscopy and Associated Options and Related Services. The Hub's supplier directory also records: NHS Supply Chain — Flexible Endoscopes (to 2028)."
+  },
+  {
+   "name": "Aspire Pharma",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Aspire Pharma",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS England — NHS National Generic Pharmaceuticals, Wave 16a",
+     "url": "https://www.find-tender.service.gov.uk/Notice/082784-2026",
+     "source": "Find a Tender contract award notice"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142; NHS England — NHS National Generic Pharmaceuticals, Wave 16a."
+  },
+  {
+   "name": "Bullen Healthcare",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Bullen Healthcare",
+   "seedLabels": [
+    "Continence / Urology",
+    "Ostomy and stoma care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "CUI International",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "CUI International",
+   "seedLabels": [
+    "Ostomy and stoma care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Dansac Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Dansac Ltd",
+   "seedLabels": [
+    "Ostomy and stoma care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Manfred Sauer UK Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Manfred Sauer UK Ltd",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Marlen Healthcare Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Marlen Healthcare Ltd",
+   "seedLabels": [
+    "Ostomy and stoma care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Qufora Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Qufora Ltd",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Trio Healthcare",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Trio Healthcare",
+   "seedLabels": [
+    "Ostomy and stoma care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "Drug Tariff Part IX",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: Drug Tariff Part IX."
+  },
+  {
+   "name": "Welland Medical Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Welland Medical Ltd",
+   "seedLabels": [
+    "Ostomy and stoma care"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": true,
+  "markets": [
+   {
+    "id": "continence",
+    "label": "Catheters, catheter maintenance and incontinence appliances: BNF 21.02, 21.13 and chapter 22",
+    "bnf": [
+     "21.02",
+     "21.13",
+     "chapter 22"
+    ],
+    "note": null,
+    "latestPeriod": "202607",
+    "baselinePeriod": "202507",
+    "items": 410692,
+    "cost": 25017517,
+    "items12m": 4495548,
+    "cost12m": 275741363,
+    "itemsYoY": 7.9,
+    "products": 1213,
+    "topNational": [
+     {
+      "code": "22600956002",
+      "label": "Prosys single use non-sterile drainable night drainage bag",
+      "generic": false,
+      "items": 28419,
+      "share": 6.9,
+      "cost": 298659,
+      "yoy": 0.6
+     },
+     {
+      "code": "21020000950",
+      "label": "Brillant AquaFlate all silicone catheter male",
+      "generic": false,
+      "items": 11095,
+      "share": 2.7,
+      "cost": 166004,
+      "yoy": 3.5
+     },
+     {
+      "code": "22500955013",
+      "label": "Prosys sterile leg bag with lever tap",
+      "generic": false,
+      "items": 7777,
+      "share": 1.9,
+      "cost": 240340,
+      "yoy": -2.4
+     },
+     {
+      "code": "22601006045",
+      "label": "Simpla Profile drainable night drainage bag with",
+      "generic": false,
+      "items": 7034,
+      "share": 1.7,
+      "cost": 193399,
+      "yoy": 2.8
+     },
+     {
+      "code": "22801008011",
+      "label": "Simpla G-Strap adult",
+      "generic": false,
+      "items": 6714,
+      "share": 1.6,
+      "cost": 116276,
+      "yoy": -3.7
+     },
+     {
+      "code": "22600956003",
+      "label": "Prosys sterile drainable night drainage bag with lever tap",
+      "generic": false,
+      "items": 6710,
+      "share": 1.6,
+      "cost": 120982,
+      "yoy": 8.3
+     },
+     {
+      "code": "21020001033",
+      "label": "Prosys all silicone catheter male",
+      "generic": false,
+      "items": 6479,
+      "share": 1.6,
+      "cost": 94727,
+      "yoy": 5.9
+     },
+     {
+      "code": "22602086003",
+      "label": "Libra GB3S drainable night drainage bag",
+      "generic": false,
+      "items": 6334,
+      "share": 1.5,
+      "cost": 123089,
+      "yoy": 20.2
+     },
+     {
+      "code": "22501005068",
+      "label": "Simpla Profile sterile leg bag",
+      "generic": false,
+      "items": 6299,
+      "share": 1.5,
+      "cost": 249929,
+      "yoy": 6.7
+     },
+     {
+      "code": "22500955012",
+      "label": "Prosys sterile leg bag with lever tap",
+      "generic": false,
+      "items": 5587,
+      "share": 1.4,
+      "cost": 172173,
+      "yoy": 3.4
+     }
+    ],
+    "icbLeaders": [
+     {
+      "icb": "QOX",
+      "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+      "items": 7207,
+      "leaders": [
+       {
+        "code": "22602086003",
+        "label": "Libra GB3S drainable night drainage bag",
+        "generic": false,
+        "items": 337,
+        "share": 4.7
+       },
+       {
+        "code": "22502085002",
+        "label": "Libra sterile leg bag long tube",
+        "generic": false,
+        "items": 289,
+        "share": 4.0
+       },
+       {
+        "code": "21020001458",
+        "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
+        "generic": false,
+        "items": 206,
+        "share": 2.9
+       }
+      ]
+     },
+     {
+      "icb": "QHL",
+      "name": "NHS Birmingham and Solihull",
+      "items": 8925,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 359,
+        "share": 4.0
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 326,
+        "share": 3.7
+       },
+       {
+        "code": "22501005068",
+        "label": "Simpla Profile sterile leg bag",
+        "generic": false,
+        "items": 325,
+        "share": 3.6
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 10893,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 957,
+        "share": 8.8
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 614,
+        "share": 5.6
+       },
+       {
+        "code": "22606156025",
+        "label": "LINC-Flo sterile drainable night drainage bag",
+        "generic": false,
+        "items": 461,
+        "share": 4.2
+       }
+      ]
+     },
+     {
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 7909,
+      "leaders": [
+       {
+        "code": "21020001458",
+        "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
+        "generic": false,
+        "items": 444,
+        "share": 5.6
+       },
+       {
+        "code": "22602086002",
+        "label": "Libra GB3 drainable night drainage bag",
+        "generic": false,
+        "items": 402,
+        "share": 5.1
+       },
+       {
+        "code": "22502085002",
+        "label": "Libra sterile leg bag long tube",
+        "generic": false,
+        "items": 378,
+        "share": 4.8
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 19722,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 1265,
+        "share": 6.4
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 723,
+        "share": 3.7
+       },
+       {
+        "code": "22601006045",
+        "label": "Simpla Profile drainable night drainage bag with",
+        "generic": false,
+        "items": 581,
+        "share": 2.9
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 22775,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 3111,
+        "share": 13.7
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 788,
+        "share": 3.5
+       },
+       {
+        "code": "22500955009",
+        "label": "Prosys sterile leg bag with slide tap",
+        "generic": false,
+        "items": 659,
+        "share": 2.9
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 5124,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 322,
+        "share": 6.3
+       },
+       {
+        "code": "22602086003",
+        "label": "Libra GB3S drainable night drainage bag",
+        "generic": false,
+        "items": 242,
+        "share": 4.7
+       },
+       {
+        "code": "22606156013",
+        "label": "Spirit One MT drainable night drainage bag",
+        "generic": false,
+        "items": 172,
+        "share": 3.4
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 7715,
+      "leaders": [
+       {
+        "code": "22606156025",
+        "label": "LINC-Flo sterile drainable night drainage bag",
+        "generic": false,
+        "items": 387,
+        "share": 5.0
+       },
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 386,
+        "share": 5.0
+       },
+       {
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
+        "generic": false,
+        "items": 267,
+        "share": 3.5
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 8145,
+      "leaders": [
+       {
+        "code": "22600956003",
+        "label": "Prosys sterile drainable night drainage bag with lever tap",
+        "generic": false,
+        "items": 580,
+        "share": 7.1
+       },
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 465,
+        "share": 5.7
+       },
+       {
+        "code": "22500955013",
+        "label": "Prosys sterile leg bag with lever tap",
+        "generic": false,
+        "items": 453,
+        "share": 5.6
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 12664,
+      "leaders": [
+       {
+        "code": "22602086003",
+        "label": "Libra GB3S drainable night drainage bag",
+        "generic": false,
+        "items": 711,
+        "share": 5.6
+       },
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 674,
+        "share": 5.3
+       },
+       {
+        "code": "22502085001",
+        "label": "Libra sterile leg bag short tube",
+        "generic": false,
+        "items": 482,
+        "share": 3.8
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 7391,
+      "leaders": [
+       {
+        "code": "22602086001",
+        "label": "Libra GB4 drainable night drainage bag",
+        "generic": false,
+        "items": 266,
+        "share": 3.6
+       },
+       {
+        "code": "22502085001",
+        "label": "Libra sterile leg bag short tube",
+        "generic": false,
+        "items": 248,
+        "share": 3.4
+       },
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 226,
+        "share": 3.1
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 10302,
+      "leaders": [
+       {
+        "code": "22801008011",
+        "label": "Simpla G-Strap adult",
+        "generic": false,
+        "items": 411,
+        "share": 4.0
+       },
+       {
+        "code": "22606156025",
+        "label": "LINC-Flo sterile drainable night drainage bag",
+        "generic": false,
+        "items": 336,
+        "share": 3.3
+       },
+       {
+        "code": "22601006045",
+        "label": "Simpla Profile drainable night drainage bag with",
+        "generic": false,
+        "items": 290,
+        "share": 2.8
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 4621,
+      "leaders": [
+       {
+        "code": "22606156001",
+        "label": "Ugo",
+        "generic": false,
+        "items": 319,
+        "share": 6.9
+       },
+       {
+        "code": "22506155003",
+        "label": "Ugo",
+        "generic": false,
+        "items": 179,
+        "share": 3.9
+       },
+       {
+        "code": "22606156006",
+        "label": "Ugo",
+        "generic": false,
+        "items": 178,
+        "share": 3.9
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 17698,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 2284,
+        "share": 12.9
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 934,
+        "share": 5.3
+       },
+       {
+        "code": "22500955013",
+        "label": "Prosys sterile leg bag with lever tap",
+        "generic": false,
+        "items": 522,
+        "share": 2.9
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 10759,
+      "leaders": [
+       {
+        "code": "22501755004",
+        "label": "Flexicare sterile leg bag long tube",
+        "generic": false,
+        "items": 577,
+        "share": 5.4
+       },
+       {
+        "code": "21020001550",
+        "label": "SpiritCare all slc cath+pfs for ball inflation & supplementary syrg for ball deflation male",
+        "generic": false,
+        "items": 555,
+        "share": 5.2
+       },
+       {
+        "code": "22600956003",
+        "label": "Prosys sterile drainable night drainage bag with lever tap",
+        "generic": false,
+        "items": 516,
+        "share": 4.8
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 7958,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 1648,
+        "share": 20.7
+       },
+       {
+        "code": "21020001378",
+        "label": "Prosys Vesica Community Catheterisation Pack",
+        "generic": false,
+        "items": 417,
+        "share": 5.2
+       },
+       {
+        "code": "22500955012",
+        "label": "Prosys sterile leg bag with lever tap",
+        "generic": false,
+        "items": 339,
+        "share": 4.3
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 15850,
+      "leaders": [
+       {
+        "code": "22606156013",
+        "label": "Spirit One MT drainable night drainage bag",
+        "generic": false,
+        "items": 877,
+        "share": 5.5
+       },
+       {
+        "code": "22500505054",
+        "label": "Spirit sterile leg bag",
+        "generic": false,
+        "items": 432,
+        "share": 2.7
+       },
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 386,
+        "share": 2.4
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 11396,
+      "leaders": [
+       {
+        "code": "22600956003",
+        "label": "Prosys sterile drainable night drainage bag with lever tap",
+        "generic": false,
+        "items": 544,
+        "share": 4.8
+       },
+       {
+        "code": "22601006045",
+        "label": "Simpla Profile drainable night drainage bag with",
+        "generic": false,
+        "items": 349,
+        "share": 3.1
+       },
+       {
+        "code": "22500955012",
+        "label": "Prosys sterile leg bag with lever tap",
+        "generic": false,
+        "items": 312,
+        "share": 2.7
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 15128,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 2336,
+        "share": 15.4
+       },
+       {
+        "code": "21020001149",
+        "label": "VaPro Pocket No Touch hydrophilic catheter male",
+        "generic": false,
+        "items": 551,
+        "share": 3.6
+       },
+       {
+        "code": "22500955013",
+        "label": "Prosys sterile leg bag with lever tap",
+        "generic": false,
+        "items": 527,
+        "share": 3.5
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 8791,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 1090,
+        "share": 12.4
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 357,
+        "share": 4.1
+       },
+       {
+        "code": "22500955009",
+        "label": "Prosys sterile leg bag with slide tap",
+        "generic": false,
+        "items": 299,
+        "share": 3.4
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 7730,
+      "leaders": [
+       {
+        "code": "22601006045",
+        "label": "Simpla Profile drainable night drainage bag with",
+        "generic": false,
+        "items": 523,
+        "share": 6.8
+       },
+       {
+        "code": "22501005068",
+        "label": "Simpla Profile sterile leg bag",
+        "generic": false,
+        "items": 467,
+        "share": 6.0
+       },
+       {
+        "code": "22801008011",
+        "label": "Simpla G-Strap adult",
+        "generic": false,
+        "items": 445,
+        "share": 5.8
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 16494,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 2041,
+        "share": 12.4
+       },
+       {
+        "code": "22500955013",
+        "label": "Prosys sterile leg bag with lever tap",
+        "generic": false,
+        "items": 524,
+        "share": 3.2
+       },
+       {
+        "code": "22500955012",
+        "label": "Prosys sterile leg bag with lever tap",
+        "generic": false,
+        "items": 504,
+        "share": 3.1
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 7665,
+      "leaders": [
+       {
+        "code": "22601006045",
+        "label": "Simpla Profile drainable night drainage bag with",
+        "generic": false,
+        "items": 363,
+        "share": 4.7
+       },
+       {
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
+        "generic": false,
+        "items": 290,
+        "share": 3.8
+       },
+       {
+        "code": "22501005068",
+        "label": "Simpla Profile sterile leg bag",
+        "generic": false,
+        "items": 273,
+        "share": 3.6
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 25585,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 2198,
+        "share": 8.6
+       },
+       {
+        "code": "22600956003",
+        "label": "Prosys sterile drainable night drainage bag with lever tap",
+        "generic": false,
+        "items": 859,
+        "share": 3.4
+       },
+       {
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
+        "generic": false,
+        "items": 734,
+        "share": 2.9
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 5544,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 346,
+        "share": 6.2
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 231,
+        "share": 4.2
+       },
+       {
+        "code": "21130000124",
+        "label": "Uro-Tainer Twin Suby G citric acid",
+        "generic": false,
+        "items": 185,
+        "share": 3.3
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 7277,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 329,
+        "share": 4.5
+       },
+       {
+        "code": "22502655016",
+        "label": "LINC-Flo sterile leg bag with lever tap",
+        "generic": false,
+        "items": 210,
+        "share": 2.9
+       },
+       {
+        "code": "22806208012",
+        "label": "CliniSure catheter retaining strap adult",
+        "generic": false,
+        "items": 201,
+        "share": 2.8
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 4650,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 810,
+        "share": 17.4
+       },
+       {
+        "code": "22500955013",
+        "label": "Prosys sterile leg bag with lever tap",
+        "generic": false,
+        "items": 229,
+        "share": 4.9
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 219,
+        "share": 4.7
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 5830,
+      "leaders": [
+       {
+        "code": "22606156013",
+        "label": "Spirit One MT drainable night drainage bag",
+        "generic": false,
+        "items": 311,
+        "share": 5.3
+       },
+       {
+        "code": "22606156001",
+        "label": "Ugo",
+        "generic": false,
+        "items": 240,
+        "share": 4.1
+       },
+       {
+        "code": "22050500501",
+        "label": "Flip-Flo sterile catheter valve",
+        "generic": false,
+        "items": 170,
+        "share": 2.9
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 8194,
+      "leaders": [
+       {
+        "code": "21130000124",
+        "label": "Uro-Tainer Twin Suby G citric acid",
+        "generic": false,
+        "items": 241,
+        "share": 2.9
+       },
+       {
+        "code": "22602086001",
+        "label": "Libra GB4 drainable night drainage bag",
+        "generic": false,
+        "items": 235,
+        "share": 2.9
+       },
+       {
+        "code": "22502085002",
+        "label": "Libra sterile leg bag long tube",
+        "generic": false,
+        "items": 226,
+        "share": 2.8
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 5774,
+      "leaders": [
+       {
+        "code": "22601006045",
+        "label": "Simpla Profile drainable night drainage bag with",
+        "generic": false,
+        "items": 213,
+        "share": 3.7
+       },
+       {
+        "code": "21130000124",
+        "label": "Uro-Tainer Twin Suby G citric acid",
+        "generic": false,
+        "items": 183,
+        "share": 3.2
+       },
+       {
+        "code": "22801008011",
+        "label": "Simpla G-Strap adult",
+        "generic": false,
+        "items": 176,
+        "share": 3.0
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 11440,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 434,
+        "share": 3.8
+       },
+       {
+        "code": "21020001249",
+        "label": "LoFric Primo catheter male non PVC",
+        "generic": false,
+        "items": 279,
+        "share": 2.4
+       },
+       {
+        "code": "22606156013",
+        "label": "Spirit One MT drainable night drainage bag",
+        "generic": false,
+        "items": 241,
+        "share": 2.1
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 11284,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 1555,
+        "share": 13.8
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 576,
+        "share": 5.1
+       },
+       {
+        "code": "22500955013",
+        "label": "Prosys sterile leg bag with lever tap",
+        "generic": false,
+        "items": 383,
+        "share": 3.4
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 23412,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 1007,
+        "share": 4.3
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 902,
+        "share": 3.9
+       },
+       {
+        "code": "22602086003",
+        "label": "Libra GB3S drainable night drainage bag",
+        "generic": false,
+        "items": 708,
+        "share": 3.0
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 15609,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 1603,
+        "share": 10.3
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 818,
+        "share": 5.2
+       },
+       {
+        "code": "22500955009",
+        "label": "Prosys sterile leg bag with slide tap",
+        "generic": false,
+        "items": 403,
+        "share": 2.6
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 17825,
+      "leaders": [
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 633,
+        "share": 3.6
+       },
+       {
+        "code": "22601006003",
+        "label": "Simpla S2 non-drainable night drainage bag",
+        "generic": false,
+        "items": 521,
+        "share": 2.9
+       },
+       {
+        "code": "22801008011",
+        "label": "Simpla G-Strap adult",
+        "generic": false,
+        "items": 509,
+        "share": 2.9
+       }
+      ]
+     },
+     {
+      "icb": "Z9B2Z",
+      "name": "NHS West and North London",
+      "items": 14702,
+      "leaders": [
+       {
+        "code": "22601006045",
+        "label": "Simpla Profile drainable night drainage bag with",
+        "generic": false,
+        "items": 517,
+        "share": 3.5
+       },
+       {
+        "code": "22501005068",
+        "label": "Simpla Profile sterile leg bag",
+        "generic": false,
+        "items": 379,
+        "share": 2.6
+       },
+       {
+        "code": "22602086001",
+        "label": "Libra GB4 drainable night drainage bag",
+        "generic": false,
+        "items": 363,
+        "share": 2.5
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "irrigation",
+    "label": "Anal irrigation systems: BNF 21.28",
+    "bnf": [
+     "21.28"
+    ],
+    "note": null,
+    "latestPeriod": "202607",
+    "baselinePeriod": "202507",
+    "items": 22244,
+    "cost": 4544032,
+    "items12m": 237319,
+    "cost12m": 47632786,
+    "itemsYoY": 14.0,
+    "products": 77,
+    "topNational": [
+     {
+      "code": "21280000172",
+      "label": "Peristeen Plus anal irrigation system accessory unit regular",
+      "generic": false,
+      "items": 3462,
+      "share": 15.6,
+      "cost": 960465,
+      "yoy": 4.8
+     },
+     {
+      "code": "21280000164",
+      "label": "Qufora IrriSedo MiniGo",
+      "generic": false,
+      "items": 2812,
+      "share": 12.6,
+      "cost": 614707,
+      "yoy": 21.2
+     },
+     {
+      "code": "21280000179",
+      "label": "Qufora IrriSedo Flow",
+      "generic": false,
+      "items": 1949,
+      "share": 8.8,
+      "cost": 575127,
+      "yoy": 23.5
+     },
+     {
+      "code": "21280000169",
+      "label": "Peristeen Plus anal irrigation system regular",
+      "generic": false,
+      "items": 1359,
+      "share": 6.1,
+      "cost": 123900,
+      "yoy": 25.7
+     },
+     {
+      "code": "21280000165",
+      "label": "Qufora IrriSedo MiniGo Flex",
+      "generic": false,
+      "items": 1213,
+      "share": 5.5,
+      "cost": 306414,
+      "yoy": 15.1
+     },
+     {
+      "code": "21280000174",
+      "label": "Peristeen Plus anal irrigation system rectal catheters regular",
+      "generic": false,
+      "items": 968,
+      "share": 4.4,
+      "cost": 234583,
+      "yoy": 0.1
+     },
+     {
+      "code": "21280000191",
+      "label": "Peristeen Light anal irrigation system with extension tube",
+      "generic": false,
+      "items": 909,
+      "share": 4.1,
+      "cost": 217679,
+      "yoy": null
+     },
+     {
+      "code": "21280000168",
+      "label": "Peristeen Plus anal irrigation system regular with toilet bag",
+      "generic": false,
+      "items": 848,
+      "share": 3.8,
+      "cost": 74564,
+      "yoy": -16.9
+     },
+     {
+      "code": "21280000109",
+      "label": "Qufora IrriSedo Cone System",
+      "generic": false,
+      "items": 798,
+      "share": 3.6,
+      "cost": 126177,
+      "yoy": -11.9
+     },
+     {
+      "code": "21280000134",
+      "label": "Qufora IrriSedo Mini System",
+      "generic": false,
+      "items": 612,
+      "share": 2.8,
+      "cost": 93392,
+      "yoy": -9.5
+     }
+    ],
+    "icbLeaders": [
+     {
+      "icb": "QOX",
+      "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+      "items": 267,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 53,
+        "share": 19.9
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 29,
+        "share": 10.9
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 26,
+        "share": 9.7
+       }
+      ]
+     },
+     {
+      "icb": "QHL",
+      "name": "NHS Birmingham and Solihull",
+      "items": 434,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 57,
+        "share": 13.1
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 38,
+        "share": 8.8
+       },
+       {
+        "code": "21280000191",
+        "label": "Peristeen Light anal irrigation system with extension tube",
+        "generic": false,
+        "items": 30,
+        "share": 6.9
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 500,
+      "leaders": [
+       {
+        "code": "21280000146",
+        "label": "Aquaflush Maxi - Lite System monthly set",
+        "generic": false,
+        "items": 52,
+        "share": 10.4
+       },
+       {
+        "code": "21280000147",
+        "label": "Aquaflush Cone Refill Pack standard cones",
+        "generic": false,
+        "items": 46,
+        "share": 9.2
+       },
+       {
+        "code": "21280000153",
+        "label": "Aquaflush Midi - Compact+ System monthly set",
+        "generic": false,
+        "items": 38,
+        "share": 7.6
+       }
+      ]
+     },
+     {
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 478,
+      "leaders": [
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 63,
+        "share": 13.2
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 62,
+        "share": 13.0
+       },
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 58,
+        "share": 12.1
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 1077,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 164,
+        "share": 15.2
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 118,
+        "share": 11.0
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 113,
+        "share": 10.5
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 1593,
+      "leaders": [
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 318,
+        "share": 20.0
+       },
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 236,
+        "share": 14.8
+       },
+       {
+        "code": "21280000165",
+        "label": "Qufora IrriSedo MiniGo Flex",
+        "generic": false,
+        "items": 147,
+        "share": 9.2
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 198,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 33,
+        "share": 16.7
+       },
+       {
+        "code": "21280000147",
+        "label": "Aquaflush Cone Refill Pack standard cones",
+        "generic": false,
+        "items": 16,
+        "share": 8.1
+       },
+       {
+        "code": "21280000169",
+        "label": "Peristeen Plus anal irrigation system regular",
+        "generic": false,
+        "items": 13,
+        "share": 6.6
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 367,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 78,
+        "share": 21.3
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 40,
+        "share": 10.9
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 35,
+        "share": 9.5
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 368,
+      "leaders": [
+       {
+        "code": "21280000109",
+        "label": "Qufora IrriSedo Cone System",
+        "generic": false,
+        "items": 39,
+        "share": 10.6
+       },
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 33,
+        "share": 9.0
+       },
+       {
+        "code": "21280000147",
+        "label": "Aquaflush Cone Refill Pack standard cones",
+        "generic": false,
+        "items": 27,
+        "share": 7.3
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 480,
+      "leaders": [
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 82,
+        "share": 17.1
+       },
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 44,
+        "share": 9.2
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 33,
+        "share": 6.9
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 339,
+      "leaders": [
+       {
+        "code": "21280000134",
+        "label": "Qufora IrriSedo Mini System",
+        "generic": false,
+        "items": 56,
+        "share": 16.5
+       },
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 51,
+        "share": 15.0
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 38,
+        "share": 11.2
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 756,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 134,
+        "share": 17.7
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 112,
+        "share": 14.8
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 74,
+        "share": 9.8
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 365,
+      "leaders": [
+       {
+        "code": "21280000165",
+        "label": "Qufora IrriSedo MiniGo Flex",
+        "generic": false,
+        "items": 53,
+        "share": 14.5
+       },
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 49,
+        "share": 13.4
+       },
+       {
+        "code": "21280000142",
+        "label": "Navina Consumable Set",
+        "generic": false,
+        "items": 42,
+        "share": 11.5
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 972,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 208,
+        "share": 21.4
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 110,
+        "share": 11.3
+       },
+       {
+        "code": "21280000174",
+        "label": "Peristeen Plus anal irrigation system rectal catheters regular",
+        "generic": false,
+        "items": 80,
+        "share": 8.2
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 509,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 120,
+        "share": 23.6
+       },
+       {
+        "code": "21280000169",
+        "label": "Peristeen Plus anal irrigation system regular",
+        "generic": false,
+        "items": 41,
+        "share": 8.1
+       },
+       {
+        "code": "21280000191",
+        "label": "Peristeen Light anal irrigation system with extension tube",
+        "generic": false,
+        "items": 35,
+        "share": 6.9
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 234,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 59,
+        "share": 25.2
+       },
+       {
+        "code": "21280000169",
+        "label": "Peristeen Plus anal irrigation system regular",
+        "generic": false,
+        "items": 16,
+        "share": 6.8
+       },
+       {
+        "code": "21280000168",
+        "label": "Peristeen Plus anal irrigation system regular with toilet bag",
+        "generic": false,
+        "items": 14,
+        "share": 6.0
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 677,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 108,
+        "share": 16.0
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 77,
+        "share": 11.4
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 53,
+        "share": 7.8
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 770,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 139,
+        "share": 18.1
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 113,
+        "share": 14.7
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 74,
+        "share": 9.6
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 521,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 152,
+        "share": 29.2
+       },
+       {
+        "code": "21280000169",
+        "label": "Peristeen Plus anal irrigation system regular",
+        "generic": false,
+        "items": 50,
+        "share": 9.6
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 44,
+        "share": 8.4
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 447,
+      "leaders": [
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 78,
+        "share": 17.4
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 74,
+        "share": 16.6
+       },
+       {
+        "code": "21280000191",
+        "label": "Peristeen Light anal irrigation system with extension tube",
+        "generic": false,
+        "items": 34,
+        "share": 7.6
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 260,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 36,
+        "share": 13.8
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 27,
+        "share": 10.4
+       },
+       {
+        "code": "21280000109",
+        "label": "Qufora IrriSedo Cone System",
+        "generic": false,
+        "items": 24,
+        "share": 9.2
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 628,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 157,
+        "share": 25.0
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 82,
+        "share": 13.1
+       },
+       {
+        "code": "21280000169",
+        "label": "Peristeen Plus anal irrigation system regular",
+        "generic": false,
+        "items": 41,
+        "share": 6.5
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 548,
+      "leaders": [
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 110,
+        "share": 20.1
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 78,
+        "share": 14.2
+       },
+       {
+        "code": "21280000165",
+        "label": "Qufora IrriSedo MiniGo Flex",
+        "generic": false,
+        "items": 78,
+        "share": 14.2
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 1783,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 310,
+        "share": 17.4
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 272,
+        "share": 15.3
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 247,
+        "share": 13.9
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 258,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 36,
+        "share": 14.0
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 28,
+        "share": 10.9
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 24,
+        "share": 9.3
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 254,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 29,
+        "share": 11.4
+       },
+       {
+        "code": "21280000109",
+        "label": "Qufora IrriSedo Cone System",
+        "generic": false,
+        "items": 25,
+        "share": 9.8
+       },
+       {
+        "code": "21280000147",
+        "label": "Aquaflush Cone Refill Pack standard cones",
+        "generic": false,
+        "items": 21,
+        "share": 8.3
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 178,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 28,
+        "share": 15.7
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 20,
+        "share": 11.2
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 18,
+        "share": 10.1
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 187,
+      "leaders": [
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 32,
+        "share": 17.1
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 27,
+        "share": 14.4
+       },
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 26,
+        "share": 13.9
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 780,
+      "leaders": [
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 113,
+        "share": 14.5
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 84,
+        "share": 10.8
+       },
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 80,
+        "share": 10.3
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 473,
+      "leaders": [
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 85,
+        "share": 18.0
+       },
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 46,
+        "share": 9.7
+       },
+       {
+        "code": "21280000165",
+        "label": "Qufora IrriSedo MiniGo Flex",
+        "generic": false,
+        "items": 35,
+        "share": 7.4
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 569,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 92,
+        "share": 16.2
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 83,
+        "share": 14.6
+       },
+       {
+        "code": "21280000109",
+        "label": "Qufora IrriSedo Cone System",
+        "generic": false,
+        "items": 55,
+        "share": 9.7
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 366,
+      "leaders": [
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 40,
+        "share": 10.9
+       },
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 35,
+        "share": 9.6
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 32,
+        "share": 8.7
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 955,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 130,
+        "share": 13.6
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 101,
+        "share": 10.6
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 86,
+        "share": 9.0
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 962,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 172,
+        "share": 17.9
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 145,
+        "share": 15.1
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 99,
+        "share": 10.3
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 1586,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 255,
+        "share": 16.1
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 165,
+        "share": 10.4
+       },
+       {
+        "code": "21280000165",
+        "label": "Qufora IrriSedo MiniGo Flex",
+        "generic": false,
+        "items": 142,
+        "share": 9.0
+       }
+      ]
+     },
+     {
+      "icb": "Z9B2Z",
+      "name": "NHS West and North London",
+      "items": 1054,
+      "leaders": [
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 158,
+        "share": 15.0
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 129,
+        "share": 12.2
+       },
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 121,
+        "share": 11.5
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": true,
+  "whyEmpty": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "count": 0,
+  "roundupsExcluded": 0,
+  "updates": []
+ },
+ "drugTariffViiia": null
 }

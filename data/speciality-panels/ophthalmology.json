@@ -20,7 +20,12 @@
   "frameworkAwards": "2026-09-30T12:30:14+00:00",
   "openTenders": "30/09/2026",
   "drugTariff": "2026-09-30",
-  "localIntel": "2026-09-30"
+  "localIntel": "2026-09-30",
+  "supplierDirectory": "2026-09-30",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-09-30",
+  "drugTariffViiia": "2026-09-30",
+  "hospitalPrescribing": null
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -28,7 +33,11 @@
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. This patch splits in two and only one half has a national route. The hospital half — intraocular lenses, viscoelastics, phaco and vitreoretinal capital, surgical packs, instruments, glaucoma stents and the anti-VEGF drugs, which are hospital-administered high-cost medicines — is bought on Complete Ophthalmology Solutions 3, on regional and national framework awards, or trust by trust, and that is what the frameworks, suppliers and awards above show. The community half is the ocular surface range in Drug Tariff Part IXA below, which is a different set of suppliers almost entirely and is prescribed rather than tendered. Being named on the framework is not evidence of volume, and being absent from it is not evidence of absence from the market: high street optometry, the General Ophthalmic Services contract and the independent-sector cataract providers who now hold a growing share of this speciality's activity buy outside NHS Supply Chain entirely and appear here only when they publish an award notice.",
   "awards": "Award-stage notices whose TITLE matches /\\b(ophthalm\\w*|ocular|intra-?ocular|intravitreal|vitreoretinal|vitrectomy|cataract|phaco\\w*|iol|eyesi|subretinal|retina|retinal|retinopath\\w*|macula|macular|glaucoma|tonomet\\w*|cornea|corneal|keratoplasty|keratoconus|keratomet\\w*|optometr\\w*|orthopt\\w*|slit lamp|fundus camera|optical coherence tomograph\\w*|optic nerve|eye|low vision|visual field\\w*|visual acuity|visual electrophysiolog\\w*|squint|strabismus|blepharo\\w*|oculoplast\\w*|lacrimal|punctal|ranibizumab|aflibercept|brolucizumab|faricimab|pegaptanib|verteporfin|spectacle\\w*|contact lens\\w*)\\b/i and does not match /\\b(eye protection|small animal|intravascular|prescription eye ?wear|eye tracking|acas eye care)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33122000 or 33731110 or 85121281 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, narrowed to the lines NHSBSA itself files under BNF 21.30, and then summarised. The BNF code is NHSBSA's own classification of each line and is used in preference to matching the product name, because a name cannot see a branded product: NHSBSA lists many brands as \"Generic <brand name>\", which says nothing about what the product is. A line published without a BNF code is counted only if its virtual medicinal product description matches /\\beye/i. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is some 56,800 lines, most of them dressings and elastic hosiery, which are the tissue viability page's. Every count and price below is taken from the lines selected. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's."
+  "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, narrowed to the lines NHSBSA itself files under BNF 21.30, and then summarised. The BNF code is NHSBSA's own classification of each line and is used in preference to matching the product name, because a name cannot see a branded product: NHSBSA lists many brands as \"Generic <brand name>\", which says nothing about what the product is. A line published without a BNF code is counted only if its virtual medicinal product description matches /\\beye/i. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,833 lines, most of them dressings and elastic hosiery, which are the tissue viability page's. Every count and price below is taken from the lines selected. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: ophthalmology). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 4 of the 5 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (12 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-09-30.",
+  "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-09: narrowed to the lines whose medicine NHSBSA prescribes under BNF chapter 11. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 53 of the 3,533 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
  },
  "counts": {
   "frameworks": 1,
@@ -38,7 +47,14 @@
   "awardsMatched": 162,
   "awardsWithheldByBuyerCap": 0,
   "openTenders": 0,
-  "localIntel": 0
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 42,
+  "suppliersDirectoryTagged": 5,
+  "suppliersDirectoryOnOtherFrameworks": 2,
+  "suppliersDirectoryWithFrameworkNote": 4,
+  "gpMarkets": 2,
+  "mhraDsu": 34,
+  "drugTariffViiiaLines": 129
  },
  "frameworks": [
   {
@@ -123,7 +139,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Albert Waeschle Ltd",
@@ -131,7 +149,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Alcon Eye Care UK",
@@ -141,7 +161,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Altomed Limited",
@@ -149,7 +171,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Andersen Caledonia Ltd",
@@ -159,7 +183,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Associated Optical Products",
@@ -167,7 +193,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Bausch & Lomb UK",
@@ -177,7 +205,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Beaver Visitec International Sales Ltd",
@@ -185,7 +215,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Birmingham Optical Group",
@@ -193,7 +225,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Blink Medical Limited",
@@ -203,7 +237,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "BVM Medical Ltd",
@@ -213,7 +249,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Carl Zeiss Ltd",
@@ -221,7 +259,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Clonallon Laboratories Limited",
@@ -231,7 +271,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Core Surgical Limited",
@@ -239,7 +281,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "D.O.R.C.",
@@ -249,7 +293,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Daybreak Medical Ltd",
@@ -257,7 +303,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "DTR Medical Ltd",
@@ -265,7 +313,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Duckworth & Kent Ltd",
@@ -273,7 +323,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "EziDrops Ltd",
@@ -281,7 +333,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Glaukos UK",
@@ -291,7 +345,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Grafton Optical Company Limited",
@@ -299,7 +355,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Hanson Instruments Ltd",
@@ -307,7 +365,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Heidelberg Engineering",
@@ -317,7 +377,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Innovant Healthcare Limited",
@@ -325,7 +387,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Instinctive Limited",
@@ -333,7 +397,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Johnson & Johnson Surgical Vision",
@@ -343,7 +409,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Joint Operations",
@@ -353,7 +421,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Leica Microsystems (UK)",
@@ -363,7 +433,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Lenstec (Barbados) Inc",
@@ -371,7 +443,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Litechnica Ltd",
@@ -379,7 +453,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Mainline Instruments Ltd",
@@ -387,7 +463,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "MedScience Distribution",
@@ -397,7 +475,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Meticuly INNOVATIONS Ltd",
@@ -405,7 +485,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Mölnlycke",
@@ -415,7 +497,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Optelec UK",
@@ -423,7 +507,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Optos",
@@ -433,7 +519,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "OscarTech UK",
@@ -443,7 +531,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "OSI INC. Ltd",
@@ -451,7 +541,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Rayner Intraocular Lenses",
@@ -459,7 +551,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "RB Medical Engineering Ltd",
@@ -467,7 +561,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Rudolf Riester GmbH",
@@ -475,7 +571,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Scope Ophthalmics",
@@ -483,7 +581,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Sense Medical Limited",
@@ -491,7 +591,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Sight Sciences UK Ltd",
@@ -499,7 +601,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Solventum (3M Health Care)",
@@ -509,7 +613,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Surgitrac Instruments UK Limited",
@@ -517,7 +623,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Topcon GB Medical",
@@ -527,7 +635,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
@@ -537,7 +647,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Unisurge International Limited",
@@ -547,7 +659,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Veni Vidi Medical Limited",
@@ -555,7 +669,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Vernacare",
@@ -565,7 +681,9 @@
    ],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Vision Matrix",
@@ -573,7 +691,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Vision Pharmaceuticals Ltd T/A Spectrum",
@@ -581,7 +701,9 @@
    "variants": [],
    "frameworks": [
     "Complete Ophthalmology Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   }
  ],
  "awards": [
@@ -1228,5 +1350,3102 @@
   "nations": "Scotland, Wales, Northern Ireland and Ireland",
   "policy": "Policy and demand signals",
   "data": "Data sources"
+ },
+ "directorySuppliers": [
+  {
+   "name": "Hospital Services Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Hospital Services Limited",
+   "seedLabels": [
+    "Ophthalmology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Decontamination Capital Equipment, Associated Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/decontamination-capital-equipment-endoscopy-and-sterile-services-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Digital Diagnostic Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Fluoroscopy and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/fluoroscopy-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Lithotripsy and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/lithotripsy-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Medical Healthcare Furniture",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-healthcare-furniture/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mobile Image Intensifiers and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-image-intensifiers-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mobile X-Ray Systems and Associated Option and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-x-ray-systems-and-associated-option-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Static X-Ray and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/static-x-ray-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Navigation Systems with Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-navigation-systems-with-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on ten NHS Supply Chain frameworks not counted as this speciality's: Decontamination Capital Equipment, Associated Accessories and Services; Digital Diagnostic Solutions; Fluoroscopy and Associated Options and Related Services; Lithotripsy and Associated Options and Related Services; Medical Healthcare Furniture; Mobile Image Intensifiers and Associated Options and Related Services; Mobile X-Ray Systems and Associated Option and Related Services; Operating Theatres Equipment and Related Accessories and Services; Static X-Ray and Associated Options and Related Services; Surgical Navigation Systems with Associated Options and Related Services."
+  },
+  {
+   "name": "Johnson & Johnson MedTech",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Johnson & Johnson MedTech",
+   "seedLabels": [
+    "Ophthalmology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Central Venous Catheters and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/central-venous-catheters-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrosurgical Consumables and Related Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrosurgical-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Minimally Invasive Surgery, Related Equipment and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/minimally-invasive-surgery/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Implants for Men’s and Women’s Health",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-implants-for-mens-and-womens-health/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Mesh",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-mesh/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Orthopaedic Solutions 3",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-orthopaedic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Wound Closure",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/wound-closure/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on nine NHS Supply Chain frameworks not counted as this speciality's: Central Venous Catheters and Associated Products; Electrosurgical Consumables and Related Accessories; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Minimally Invasive Surgery, Related Equipment and Accessories; Operating Theatres Equipment and Related Accessories and Services; Surgical Implants for Men’s and Women’s Health; Surgical Mesh; Total Orthopaedic Solutions 3; Wound Closure. The Hub's supplier directory also records: NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)."
+  },
+  {
+   "name": "Aspire Pharma",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Aspire Pharma",
+   "seedLabels": [
+    "Ophthalmology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS England — NHS National Generic Pharmaceuticals, Wave 16a",
+     "url": "https://www.find-tender.service.gov.uk/Notice/082784-2026",
+     "source": "Find a Tender contract award notice"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142; NHS England — NHS National Generic Pharmaceuticals, Wave 16a."
+  },
+  {
+   "name": "Beaver Visitec International",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Beaver Visitec International",
+   "seedLabels": [
+    "Ophthalmology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Network Medical Products Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Network Medical Products Ltd",
+   "seedLabels": [
+    "Ophthalmology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "Surgical Instruments",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-instruments/",
+     "source": "nhssc-brief"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: Surgical Instruments."
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": true,
+  "markets": [
+   {
+    "id": "eye",
+    "label": "Eye: BNF chapter 11",
+    "bnf": [
+     "chapter 11"
+    ],
+    "note": null,
+    "latestPeriod": "202607",
+    "baselinePeriod": "202507",
+    "items": 1409341,
+    "cost": 13778905,
+    "items12m": 15679749,
+    "cost12m": 154437764,
+    "itemsYoY": 2.2,
+    "products": 214,
+    "topNational": [
+     {
+      "code": "1106000L0AA",
+      "label": "Latanoprost",
+      "generic": true,
+      "items": 255348,
+      "share": 18.1,
+      "cost": 1419575,
+      "yoy": 6.5
+     },
+     {
+      "code": "1106000ABAA",
+      "label": "Dorzolamide",
+      "generic": true,
+      "items": 74889,
+      "share": 5.3,
+      "cost": 942749,
+      "yoy": 9.2
+     },
+     {
+      "code": "1103010C0AA",
+      "label": "Chloramphenicol",
+      "generic": true,
+      "items": 69466,
+      "share": 4.9,
+      "cost": 322198,
+      "yoy": 2.4
+     },
+     {
+      "code": "1106000ACAA",
+      "label": "Brinzolamide",
+      "generic": true,
+      "items": 65540,
+      "share": 4.7,
+      "cost": 189288,
+      "yoy": -4.1
+     },
+     {
+      "code": "1104020T0AA",
+      "label": "Sodium cromoglicate",
+      "generic": true,
+      "items": 63614,
+      "share": 4.5,
+      "cost": 139040,
+      "yoy": 3.9
+     },
+     {
+      "code": "1108010F0AA",
+      "label": "Hypromellose",
+      "generic": true,
+      "items": 63572,
+      "share": 4.5,
+      "cost": 216596,
+      "yoy": -7.4
+     },
+     {
+      "code": "1106000AFAA",
+      "label": "Bimatoprost",
+      "generic": true,
+      "items": 60801,
+      "share": 4.3,
+      "cost": 324312,
+      "yoy": -7.4
+     },
+     {
+      "code": "1106000L0BC",
+      "label": "Monopost",
+      "generic": false,
+      "items": 59398,
+      "share": 4.2,
+      "cost": 652747,
+      "yoy": 11.9
+     },
+     {
+      "code": "1106000AIAA",
+      "label": "Bimatoprost",
+      "generic": true,
+      "items": 57731,
+      "share": 4.1,
+      "cost": 520087,
+      "yoy": 0.7
+     },
+     {
+      "code": "1106000Z0AA",
+      "label": "Timolol",
+      "generic": true,
+      "items": 45163,
+      "share": 3.2,
+      "cost": 327034,
+      "yoy": 23.0
+     }
+    ],
+    "icbLeaders": [
+     {
+      "icb": "QOX",
+      "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+      "items": 22015,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 5001,
+        "share": 22.7
+       },
+       {
+        "code": "1106000ACAA",
+        "label": "Brinzolamide",
+        "generic": true,
+        "items": 1544,
+        "share": 7.0
+       },
+       {
+        "code": "1106000AIAA",
+        "label": "Bimatoprost",
+        "generic": true,
+        "items": 1481,
+        "share": 6.7
+       }
+      ]
+     },
+     {
+      "icb": "QHL",
+      "name": "NHS Birmingham and Solihull",
+      "items": 36189,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 5353,
+        "share": 14.8
+       },
+       {
+        "code": "1106000L0BC",
+        "label": "Monopost",
+        "generic": false,
+        "items": 3160,
+        "share": 8.7
+       },
+       {
+        "code": "1104020T0AA",
+        "label": "Sodium cromoglicate",
+        "generic": true,
+        "items": 3101,
+        "share": 8.6
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 31144,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 4931,
+        "share": 15.8
+       },
+       {
+        "code": "1106000L0BC",
+        "label": "Monopost",
+        "generic": false,
+        "items": 2613,
+        "share": 8.4
+       },
+       {
+        "code": "1108010F0AA",
+        "label": "Hypromellose",
+        "generic": true,
+        "items": 1977,
+        "share": 6.3
+       }
+      ]
+     },
+     {
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 18298,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 4911,
+        "share": 26.8
+       },
+       {
+        "code": "1106000ACAA",
+        "label": "Brinzolamide",
+        "generic": true,
+        "items": 1811,
+        "share": 9.9
+       },
+       {
+        "code": "1103010C0AA",
+        "label": "Chloramphenicol",
+        "generic": true,
+        "items": 829,
+        "share": 4.5
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 70196,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 11721,
+        "share": 16.7
+       },
+       {
+        "code": "1103010C0AA",
+        "label": "Chloramphenicol",
+        "generic": true,
+        "items": 3958,
+        "share": 5.6
+       },
+       {
+        "code": "1106000AFAA",
+        "label": "Bimatoprost",
+        "generic": true,
+        "items": 3823,
+        "share": 5.4
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 63899,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 10982,
+        "share": 17.2
+       },
+       {
+        "code": "1108010F0AA",
+        "label": "Hypromellose",
+        "generic": true,
+        "items": 5247,
+        "share": 8.2
+       },
+       {
+        "code": "1104020T0AA",
+        "label": "Sodium cromoglicate",
+        "generic": true,
+        "items": 3834,
+        "share": 6.0
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 19768,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 4084,
+        "share": 20.7
+       },
+       {
+        "code": "1106000AFAA",
+        "label": "Bimatoprost",
+        "generic": true,
+        "items": 1181,
+        "share": 6.0
+       },
+       {
+        "code": "1106000AIAA",
+        "label": "Bimatoprost",
+        "generic": true,
+        "items": 1161,
+        "share": 5.9
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 30880,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 4404,
+        "share": 14.3
+       },
+       {
+        "code": "1106000L0BC",
+        "label": "Monopost",
+        "generic": false,
+        "items": 2249,
+        "share": 7.3
+       },
+       {
+        "code": "1106000ABAA",
+        "label": "Dorzolamide",
+        "generic": true,
+        "items": 1783,
+        "share": 5.8
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 23187,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 4245,
+        "share": 18.3
+       },
+       {
+        "code": "1108010F0AA",
+        "label": "Hypromellose",
+        "generic": true,
+        "items": 1381,
+        "share": 6.0
+       },
+       {
+        "code": "1106000L0BC",
+        "label": "Monopost",
+        "generic": false,
+        "items": 1239,
+        "share": 5.3
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 37496,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 9194,
+        "share": 24.5
+       },
+       {
+        "code": "1108010F0AA",
+        "label": "Hypromellose",
+        "generic": true,
+        "items": 2356,
+        "share": 6.3
+       },
+       {
+        "code": "1108010B0BB",
+        "label": "Viscotears",
+        "generic": false,
+        "items": 2127,
+        "share": 5.7
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 23710,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 6762,
+        "share": 28.5
+       },
+       {
+        "code": "1106000ABAA",
+        "label": "Dorzolamide",
+        "generic": true,
+        "items": 1375,
+        "share": 5.8
+       },
+       {
+        "code": "1106000AIAA",
+        "label": "Bimatoprost",
+        "generic": true,
+        "items": 1210,
+        "share": 5.1
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 46735,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 9182,
+        "share": 19.6
+       },
+       {
+        "code": "1103010C0AA",
+        "label": "Chloramphenicol",
+        "generic": true,
+        "items": 2466,
+        "share": 5.3
+       },
+       {
+        "code": "1106000ABAA",
+        "label": "Dorzolamide",
+        "generic": true,
+        "items": 2442,
+        "share": 5.2
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 12433,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 2879,
+        "share": 23.2
+       },
+       {
+        "code": "1106000AIAA",
+        "label": "Bimatoprost",
+        "generic": true,
+        "items": 998,
+        "share": 8.0
+       },
+       {
+        "code": "1106000AFAA",
+        "label": "Bimatoprost",
+        "generic": true,
+        "items": 925,
+        "share": 7.4
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 72207,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 13254,
+        "share": 18.4
+       },
+       {
+        "code": "1108010F0AA",
+        "label": "Hypromellose",
+        "generic": true,
+        "items": 5366,
+        "share": 7.4
+       },
+       {
+        "code": "1104020T0AA",
+        "label": "Sodium cromoglicate",
+        "generic": true,
+        "items": 4670,
+        "share": 6.5
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 45253,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 9764,
+        "share": 21.6
+       },
+       {
+        "code": "1106000ABAA",
+        "label": "Dorzolamide",
+        "generic": true,
+        "items": 3645,
+        "share": 8.1
+       },
+       {
+        "code": "1106000L0BC",
+        "label": "Monopost",
+        "generic": false,
+        "items": 2292,
+        "share": 5.1
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 19794,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 3666,
+        "share": 18.5
+       },
+       {
+        "code": "1106000L0BC",
+        "label": "Monopost",
+        "generic": false,
+        "items": 1704,
+        "share": 8.6
+       },
+       {
+        "code": "1106000ACAA",
+        "label": "Brinzolamide",
+        "generic": true,
+        "items": 1326,
+        "share": 6.7
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 50840,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 10009,
+        "share": 19.7
+       },
+       {
+        "code": "1106000AFAA",
+        "label": "Bimatoprost",
+        "generic": true,
+        "items": 3614,
+        "share": 7.1
+       },
+       {
+        "code": "1106000ACAA",
+        "label": "Brinzolamide",
+        "generic": true,
+        "items": 2685,
+        "share": 5.3
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 42254,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 5276,
+        "share": 12.5
+       },
+       {
+        "code": "1106000L0BC",
+        "label": "Monopost",
+        "generic": false,
+        "items": 3410,
+        "share": 8.1
+       },
+       {
+        "code": "1106000ABAA",
+        "label": "Dorzolamide",
+        "generic": true,
+        "items": 2516,
+        "share": 6.0
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 47614,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 9012,
+        "share": 18.9
+       },
+       {
+        "code": "1106000L0BC",
+        "label": "Monopost",
+        "generic": false,
+        "items": 3058,
+        "share": 6.4
+       },
+       {
+        "code": "1106000ACAA",
+        "label": "Brinzolamide",
+        "generic": true,
+        "items": 2742,
+        "share": 5.8
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 29399,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 4914,
+        "share": 16.7
+       },
+       {
+        "code": "1106000L0BC",
+        "label": "Monopost",
+        "generic": false,
+        "items": 3127,
+        "share": 10.6
+       },
+       {
+        "code": "1106000ACAA",
+        "label": "Brinzolamide",
+        "generic": true,
+        "items": 1563,
+        "share": 5.3
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 24289,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 3644,
+        "share": 15.0
+       },
+       {
+        "code": "1106000ACAA",
+        "label": "Brinzolamide",
+        "generic": true,
+        "items": 1635,
+        "share": 6.7
+       },
+       {
+        "code": "1106000ABAA",
+        "label": "Dorzolamide",
+        "generic": true,
+        "items": 1243,
+        "share": 5.1
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 49078,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 9323,
+        "share": 19.0
+       },
+       {
+        "code": "1106000AFAA",
+        "label": "Bimatoprost",
+        "generic": true,
+        "items": 3747,
+        "share": 7.6
+       },
+       {
+        "code": "1106000ACAA",
+        "label": "Brinzolamide",
+        "generic": true,
+        "items": 3011,
+        "share": 6.1
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 48539,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 7265,
+        "share": 15.0
+       },
+       {
+        "code": "1104020T0AA",
+        "label": "Sodium cromoglicate",
+        "generic": true,
+        "items": 3681,
+        "share": 7.6
+       },
+       {
+        "code": "1104020Z0AA",
+        "label": "Olopatadine",
+        "generic": true,
+        "items": 3561,
+        "share": 7.3
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 83814,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 17027,
+        "share": 20.3
+       },
+       {
+        "code": "1108010B0AA",
+        "label": "Carbomer '980'",
+        "generic": true,
+        "items": 8642,
+        "share": 10.3
+       },
+       {
+        "code": "1108010F0AA",
+        "label": "Hypromellose",
+        "generic": true,
+        "items": 5101,
+        "share": 6.1
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 18803,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 3237,
+        "share": 17.2
+       },
+       {
+        "code": "1106000AIAA",
+        "label": "Bimatoprost",
+        "generic": true,
+        "items": 1487,
+        "share": 7.9
+       },
+       {
+        "code": "1106000L0BC",
+        "label": "Monopost",
+        "generic": false,
+        "items": 1363,
+        "share": 7.2
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 27140,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 5370,
+        "share": 19.8
+       },
+       {
+        "code": "1106000L0BC",
+        "label": "Monopost",
+        "generic": false,
+        "items": 1735,
+        "share": 6.4
+       },
+       {
+        "code": "1103010C0AA",
+        "label": "Chloramphenicol",
+        "generic": true,
+        "items": 1380,
+        "share": 5.1
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 13025,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 2298,
+        "share": 17.6
+       },
+       {
+        "code": "1106000L0BC",
+        "label": "Monopost",
+        "generic": false,
+        "items": 983,
+        "share": 7.5
+       },
+       {
+        "code": "1108010F0AA",
+        "label": "Hypromellose",
+        "generic": true,
+        "items": 669,
+        "share": 5.1
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 13912,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 3054,
+        "share": 22.0
+       },
+       {
+        "code": "1106000AFAA",
+        "label": "Bimatoprost",
+        "generic": true,
+        "items": 1148,
+        "share": 8.3
+       },
+       {
+        "code": "1106000AIAA",
+        "label": "Bimatoprost",
+        "generic": true,
+        "items": 1040,
+        "share": 7.5
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 34753,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 5424,
+        "share": 15.6
+       },
+       {
+        "code": "1106000ABAA",
+        "label": "Dorzolamide",
+        "generic": true,
+        "items": 2346,
+        "share": 6.8
+       },
+       {
+        "code": "1104020Z0AA",
+        "label": "Olopatadine",
+        "generic": true,
+        "items": 1912,
+        "share": 5.5
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 31960,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 5583,
+        "share": 17.5
+       },
+       {
+        "code": "1106000ABAA",
+        "label": "Dorzolamide",
+        "generic": true,
+        "items": 2022,
+        "share": 6.3
+       },
+       {
+        "code": "1103010C0AA",
+        "label": "Chloramphenicol",
+        "generic": true,
+        "items": 1811,
+        "share": 5.7
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 40249,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 7524,
+        "share": 18.7
+       },
+       {
+        "code": "1108010F0AA",
+        "label": "Hypromellose",
+        "generic": true,
+        "items": 2935,
+        "share": 7.3
+       },
+       {
+        "code": "1106000AIAA",
+        "label": "Bimatoprost",
+        "generic": true,
+        "items": 2572,
+        "share": 6.4
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 30537,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 5678,
+        "share": 18.6
+       },
+       {
+        "code": "1106000L0BC",
+        "label": "Monopost",
+        "generic": false,
+        "items": 2061,
+        "share": 6.7
+       },
+       {
+        "code": "1104020T0AA",
+        "label": "Sodium cromoglicate",
+        "generic": true,
+        "items": 1556,
+        "share": 5.1
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 68768,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 13332,
+        "share": 19.4
+       },
+       {
+        "code": "1106000ABAA",
+        "label": "Dorzolamide",
+        "generic": true,
+        "items": 4226,
+        "share": 6.1
+       },
+       {
+        "code": "1103010C0AA",
+        "label": "Chloramphenicol",
+        "generic": true,
+        "items": 3853,
+        "share": 5.6
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 49381,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 8586,
+        "share": 17.4
+       },
+       {
+        "code": "1106000ABAA",
+        "label": "Dorzolamide",
+        "generic": true,
+        "items": 3239,
+        "share": 6.6
+       },
+       {
+        "code": "1106000L0BC",
+        "label": "Monopost",
+        "generic": false,
+        "items": 2665,
+        "share": 5.4
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 50270,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 7062,
+        "share": 14.0
+       },
+       {
+        "code": "1106000AFAA",
+        "label": "Bimatoprost",
+        "generic": true,
+        "items": 3658,
+        "share": 7.3
+       },
+       {
+        "code": "1106000AIAA",
+        "label": "Bimatoprost",
+        "generic": true,
+        "items": 3307,
+        "share": 6.6
+       }
+      ]
+     },
+     {
+      "icb": "Z9B2Z",
+      "name": "NHS West and North London",
+      "items": 81033,
+      "leaders": [
+       {
+        "code": "1106000L0AA",
+        "label": "Latanoprost",
+        "generic": true,
+        "items": 11382,
+        "share": 14.0
+       },
+       {
+        "code": "1104020T0AA",
+        "label": "Sodium cromoglicate",
+        "generic": true,
+        "items": 5247,
+        "share": 6.5
+       },
+       {
+        "code": "1104020Z0AA",
+        "label": "Olopatadine",
+        "generic": true,
+        "items": 5030,
+        "share": 6.2
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "eye-products",
+    "label": "Eye products: BNF 21.30",
+    "bnf": [
+     "21.30"
+    ],
+    "note": null,
+    "latestPeriod": "202607",
+    "baselinePeriod": "202507",
+    "items": 851884,
+    "cost": 6184926,
+    "items12m": 9174899,
+    "cost12m": 66447290,
+    "itemsYoY": 8.3,
+    "products": 216,
+    "topNational": [
+     {
+      "code": "21300000111",
+      "label": "Hylo-Forte",
+      "generic": false,
+      "items": 128906,
+      "share": 15.1,
+      "cost": 1461808,
+      "yoy": 5.5
+     },
+     {
+      "code": "21300000182",
+      "label": "Thealoz Duo eye drops preservative free",
+      "generic": false,
+      "items": 75696,
+      "share": 8.9,
+      "cost": 839948,
+      "yoy": 20.1
+     },
+     {
+      "code": "21300000711",
+      "label": "Xailin Night eye ointment preservative free",
+      "generic": false,
+      "items": 65214,
+      "share": 7.7,
+      "cost": 234704,
+      "yoy": 15.1
+     },
+     {
+      "code": "21300000913",
+      "label": "Hylo Night eye ointment preservative free",
+      "generic": false,
+      "items": 59101,
+      "share": 6.9,
+      "cost": 203367,
+      "yoy": 2.4
+     },
+     {
+      "code": "21300000104",
+      "label": "Hylo-Tear",
+      "generic": false,
+      "items": 34710,
+      "share": 4.1,
+      "cost": 344833,
+      "yoy": -3.4
+     },
+     {
+      "code": "21300000702",
+      "label": "Clinitas Carbomer",
+      "generic": false,
+      "items": 32400,
+      "share": 3.8,
+      "cost": 66617,
+      "yoy": -1.6
+     },
+     {
+      "code": "21300000178",
+      "label": "Evolve HA",
+      "generic": false,
+      "items": 27662,
+      "share": 3.2,
+      "cost": 196374,
+      "yoy": -9.0
+     },
+     {
+      "code": "21300000926",
+      "label": "Eyeaze",
+      "generic": false,
+      "items": 27071,
+      "share": 3.2,
+      "cost": 122500,
+      "yoy": 17.7
+     },
+     {
+      "code": "21300000108",
+      "label": "Hyabak",
+      "generic": false,
+      "items": 15355,
+      "share": 1.8,
+      "cost": 151328,
+      "yoy": -5.7
+     },
+     {
+      "code": "21300000163",
+      "label": "HydraMed",
+      "generic": false,
+      "items": 14440,
+      "share": 1.7,
+      "cost": 96461,
+      "yoy": -6.8
+     }
+    ],
+    "icbLeaders": [
+     {
+      "icb": "QOX",
+      "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+      "items": 13894,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 1595,
+        "share": 11.5
+       },
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 1588,
+        "share": 11.4
+       },
+       {
+        "code": "21300000937",
+        "label": "AaproMel",
+        "generic": false,
+        "items": 966,
+        "share": 7.0
+       }
+      ]
+     },
+     {
+      "icb": "QHL",
+      "name": "NHS Birmingham and Solihull",
+      "items": 40344,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 6441,
+        "share": 16.0
+       },
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 5200,
+        "share": 12.9
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 3106,
+        "share": 7.7
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 27960,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 4384,
+        "share": 15.7
+       },
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 4062,
+        "share": 14.5
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 2754,
+        "share": 9.8
+       }
+      ]
+     },
+     {
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 8848,
+      "leaders": [
+       {
+        "code": "21300000931",
+        "label": "VIZhyal",
+        "generic": false,
+        "items": 1064,
+        "share": 12.0
+       },
+       {
+        "code": "21300000940",
+        "label": "ClinOptic HA",
+        "generic": false,
+        "items": 990,
+        "share": 11.2
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 904,
+        "share": 10.2
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 35638,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 4025,
+        "share": 11.3
+       },
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 3632,
+        "share": 10.2
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 2485,
+        "share": 7.0
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 43830,
+      "leaders": [
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 5405,
+        "share": 12.3
+       },
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 3804,
+        "share": 8.7
+       },
+       {
+        "code": "21300000913",
+        "label": "Hylo Night eye ointment preservative free",
+        "generic": false,
+        "items": 3629,
+        "share": 8.3
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 10392,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 2537,
+        "share": 24.4
+       },
+       {
+        "code": "21300000913",
+        "label": "Hylo Night eye ointment preservative free",
+        "generic": false,
+        "items": 912,
+        "share": 8.8
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 696,
+        "share": 6.7
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 22287,
+      "leaders": [
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 3006,
+        "share": 13.5
+       },
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 2100,
+        "share": 9.4
+       },
+       {
+        "code": "21300000163",
+        "label": "HydraMed",
+        "generic": false,
+        "items": 2012,
+        "share": 9.0
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 14259,
+      "leaders": [
+       {
+        "code": "21300000926",
+        "label": "Eyeaze",
+        "generic": false,
+        "items": 1657,
+        "share": 11.6
+       },
+       {
+        "code": "21300000702",
+        "label": "Clinitas Carbomer",
+        "generic": false,
+        "items": 1125,
+        "share": 7.9
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 1122,
+        "share": 7.9
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 19940,
+      "leaders": [
+       {
+        "code": "21300000933",
+        "label": "Xailin Plus HA",
+        "generic": false,
+        "items": 4471,
+        "share": 22.4
+       },
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 2625,
+        "share": 13.2
+       },
+       {
+        "code": "21300000913",
+        "label": "Hylo Night eye ointment preservative free",
+        "generic": false,
+        "items": 1997,
+        "share": 10.0
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 13752,
+      "leaders": [
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 3257,
+        "share": 23.7
+       },
+       {
+        "code": "21300000926",
+        "label": "Eyeaze",
+        "generic": false,
+        "items": 1526,
+        "share": 11.1
+       },
+       {
+        "code": "21300000163",
+        "label": "HydraMed",
+        "generic": false,
+        "items": 1266,
+        "share": 9.2
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 20809,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 2583,
+        "share": 12.4
+       },
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 1811,
+        "share": 8.7
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 1281,
+        "share": 6.2
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 6801,
+      "leaders": [
+       {
+        "code": "21300000933",
+        "label": "Xailin Plus HA",
+        "generic": false,
+        "items": 864,
+        "share": 12.7
+       },
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 827,
+        "share": 12.2
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 820,
+        "share": 12.1
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 54623,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 11792,
+        "share": 21.6
+       },
+       {
+        "code": "21300000926",
+        "label": "Eyeaze",
+        "generic": false,
+        "items": 5625,
+        "share": 10.3
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 4466,
+        "share": 8.2
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 24917,
+      "leaders": [
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 4346,
+        "share": 17.4
+       },
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 1896,
+        "share": 7.6
+       },
+       {
+        "code": "21300000913",
+        "label": "Hylo Night eye ointment preservative free",
+        "generic": false,
+        "items": 1708,
+        "share": 6.9
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 12817,
+      "leaders": [
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 2048,
+        "share": 16.0
+       },
+       {
+        "code": "21300000940",
+        "label": "ClinOptic HA",
+        "generic": false,
+        "items": 1590,
+        "share": 12.4
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 1059,
+        "share": 8.3
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 30478,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 6319,
+        "share": 20.7
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 2921,
+        "share": 9.6
+       },
+       {
+        "code": "21300000178",
+        "label": "Evolve HA",
+        "generic": false,
+        "items": 1781,
+        "share": 5.8
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 17184,
+      "leaders": [
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 3460,
+        "share": 20.1
+       },
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 1482,
+        "share": 8.6
+       },
+       {
+        "code": "21300000168",
+        "label": "Hy-Opti",
+        "generic": false,
+        "items": 1184,
+        "share": 6.9
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 24434,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 5703,
+        "share": 23.3
+       },
+       {
+        "code": "21300000178",
+        "label": "Evolve HA",
+        "generic": false,
+        "items": 2620,
+        "share": 10.7
+       },
+       {
+        "code": "21300000913",
+        "label": "Hylo Night eye ointment preservative free",
+        "generic": false,
+        "items": 1897,
+        "share": 7.8
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 22815,
+      "leaders": [
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 3076,
+        "share": 13.5
+       },
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 2833,
+        "share": 12.4
+       },
+       {
+        "code": "21300000931",
+        "label": "VIZhyal",
+        "generic": false,
+        "items": 2449,
+        "share": 10.7
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 11127,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 2932,
+        "share": 26.4
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 1069,
+        "share": 9.6
+       },
+       {
+        "code": "21300000913",
+        "label": "Hylo Night eye ointment preservative free",
+        "generic": false,
+        "items": 730,
+        "share": 6.6
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 30143,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 2866,
+        "share": 9.5
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 2594,
+        "share": 8.6
+       },
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 1968,
+        "share": 6.5
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 31517,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 7017,
+        "share": 22.3
+       },
+       {
+        "code": "21300000104",
+        "label": "Hylo-Tear",
+        "generic": false,
+        "items": 4548,
+        "share": 14.4
+       },
+       {
+        "code": "21300000913",
+        "label": "Hylo Night eye ointment preservative free",
+        "generic": false,
+        "items": 3583,
+        "share": 11.4
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 42837,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 10684,
+        "share": 24.9
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 5615,
+        "share": 13.1
+       },
+       {
+        "code": "21300000913",
+        "label": "Hylo Night eye ointment preservative free",
+        "generic": false,
+        "items": 4681,
+        "share": 10.9
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 11200,
+      "leaders": [
+       {
+        "code": "21300000702",
+        "label": "Clinitas Carbomer",
+        "generic": false,
+        "items": 963,
+        "share": 8.6
+       },
+       {
+        "code": "21300000926",
+        "label": "Eyeaze",
+        "generic": false,
+        "items": 795,
+        "share": 7.1
+       },
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 780,
+        "share": 7.0
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 16432,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 3283,
+        "share": 20.0
+       },
+       {
+        "code": "21300000926",
+        "label": "Eyeaze",
+        "generic": false,
+        "items": 2346,
+        "share": 14.3
+       },
+       {
+        "code": "21300000913",
+        "label": "Hylo Night eye ointment preservative free",
+        "generic": false,
+        "items": 1551,
+        "share": 9.4
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 6018,
+      "leaders": [
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 721,
+        "share": 12.0
+       },
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 668,
+        "share": 11.1
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 540,
+        "share": 9.0
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 6544,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 942,
+        "share": 14.4
+       },
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 530,
+        "share": 8.1
+       },
+       {
+        "code": "21300000913",
+        "label": "Hylo Night eye ointment preservative free",
+        "generic": false,
+        "items": 462,
+        "share": 7.1
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 15613,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 3356,
+        "share": 21.5
+       },
+       {
+        "code": "21300000104",
+        "label": "Hylo-Tear",
+        "generic": false,
+        "items": 2591,
+        "share": 16.6
+       },
+       {
+        "code": "21300000913",
+        "label": "Hylo Night eye ointment preservative free",
+        "generic": false,
+        "items": 1846,
+        "share": 11.8
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 16005,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 3420,
+        "share": 21.4
+       },
+       {
+        "code": "21300000104",
+        "label": "Hylo-Tear",
+        "generic": false,
+        "items": 2067,
+        "share": 12.9
+       },
+       {
+        "code": "21300000913",
+        "label": "Hylo Night eye ointment preservative free",
+        "generic": false,
+        "items": 1723,
+        "share": 10.8
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 22118,
+      "leaders": [
+       {
+        "code": "21300000178",
+        "label": "Evolve HA",
+        "generic": false,
+        "items": 2620,
+        "share": 11.8
+       },
+       {
+        "code": "21300000702",
+        "label": "Clinitas Carbomer",
+        "generic": false,
+        "items": 2193,
+        "share": 9.9
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 1766,
+        "share": 8.0
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 19318,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 4248,
+        "share": 22.0
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 2065,
+        "share": 10.7
+       },
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 2062,
+        "share": 10.7
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 33542,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 6105,
+        "share": 18.2
+       },
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 4183,
+        "share": 12.5
+       },
+       {
+        "code": "21300000913",
+        "label": "Hylo Night eye ointment preservative free",
+        "generic": false,
+        "items": 2230,
+        "share": 6.6
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 21045,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 2937,
+        "share": 14.0
+       },
+       {
+        "code": "21300000104",
+        "label": "Hylo-Tear",
+        "generic": false,
+        "items": 2017,
+        "share": 9.6
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 1935,
+        "share": 9.2
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 47841,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 10697,
+        "share": 22.4
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 4012,
+        "share": 8.4
+       },
+       {
+        "code": "21300000913",
+        "label": "Hylo Night eye ointment preservative free",
+        "generic": false,
+        "items": 3881,
+        "share": 8.1
+       }
+      ]
+     },
+     {
+      "icb": "Z9B2Z",
+      "name": "NHS West and North London",
+      "items": 54468,
+      "leaders": [
+       {
+        "code": "21300000926",
+        "label": "Eyeaze",
+        "generic": false,
+        "items": 6087,
+        "share": 11.2
+       },
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 5165,
+        "share": 9.5
+       },
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 4630,
+        "share": 8.5
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": false,
+  "whyEmpty": null,
+  "count": 34,
+  "roundupsExcluded": 12,
+  "updates": [
+   {
+    "title": "Semaglutide (Wegovy, Ozempic and Rybelsus): risk of Non-arteritic Anterior Ischemic Optic Neuropathy (NAION)",
+    "url": "https://www.gov.uk/drug-safety-update/semaglutide-wegovy-ozempic-and-rybelsus-risk-of-non-arteritic-anterior-ischemic-optic-neuropathy-naion",
+    "published": "2026-02-05",
+    "updated": "2026-02-05",
+    "summary": "Non-arteritic anterior ischemic optic neuropathy (NAION), a condition that can cause sudden deterioration in vision, usually in one eye at a time, has been very rarely reported in association with semaglutide in the treatment of type 2 diabetes, weight management and cardiovascular risk reduction. Patients reporting a sudden loss of vision (including partial loss) while on semaglutide treatment should be urgently referred for ophthalmological examination."
+   },
+   {
+    "title": "#MedSafetyWeek (3-9 November 2025): A call to action to improve patient safety",
+    "url": "https://www.gov.uk/drug-safety-update/number-medsafetyweek-3-9-november-2025-a-call-to-action-to-improve-patient-safety",
+    "published": "2025-10-23",
+    "updated": "2025-10-23",
+    "summary": "The annual #MedSafetyWeek campaign takes place from 3 to 9 November 2025. This year’s campaign theme is ‘we can all help make medicines safer.’"
+   },
+   {
+    "title": "Paracetamol and pregnancy - reminder that taking paracetamol during pregnancy remains safe",
+    "url": "https://www.gov.uk/drug-safety-update/paracetamol-and-pregnancy-reminder-that-taking-paracetamol-during-pregnancy-remains-safe",
+    "published": "2025-09-23",
+    "updated": "2025-09-23",
+    "summary": "Patients should be reminded and reassured that there is no evidence that taking paracetamol during pregnancy causes autism in children. Paracetamol is recommended as the first-choice pain reliever for pregnant women, used at the lowest dose and for the shortest duration. It also acts as an antipyretic and is therefore used to treat fever."
+   },
+   {
+    "title": "Epimax Ointment and Epimax Paraffin-Free Ointment: reports of ocular surface toxicity and ocular chemical injury",
+    "url": "https://www.gov.uk/drug-safety-update/epimax-ointment-and-epimax-paraffin-free-ointment-reports-of-ocular-surface-toxicity-and-ocular-chemical-injury",
+    "published": "2024-07-23",
+    "updated": "2024-07-23",
+    "summary": "Epimax Ointment and Epimax Paraffin-Free Ointment can harm the eyes if used on the face. Do not prescribe these ointments for use on the face. Tell patients to wash their hands and avoid touching their eyes after using these products."
+   },
+   {
+    "title": "Dupilumab (Dupixent▼): risk of ocular adverse reactions and need for prompt management",
+    "url": "https://www.gov.uk/drug-safety-update/dupilumab-dupixentv-risk-of-ocular-adverse-reactions-and-need-for-prompt-management",
+    "published": "2022-11-29",
+    "updated": "2022-11-29",
+    "summary": "Healthcare professionals prescribing dupilumab should be alert to the risks of ocular reactions. New onset or worsening ocular symptoms require prompt review. Referral for ophthalmological examination should be made as appropriate."
+   },
+   {
+    "title": "Brolucizumab (Beovu▼): risk of intraocular inflammation and retinal vascular occlusion increased with short dosing intervals",
+    "url": "https://www.gov.uk/drug-safety-update/brolucizumab-beovuv-risk-of-intraocular-inflammation-and-retinal-vascular-occlusion-increased-with-short-dosing-intervals",
+    "published": "2022-01-18",
+    "updated": "2022-01-18",
+    "summary": "Maintenance doses of brolucizumab (after the first 3 doses) should not be given at intervals of less than 8 weeks apart."
+   },
+   {
+    "title": "Chloramphenicol eye drops containing borax or boric acid buffers: use in children younger than 2 years",
+    "url": "https://www.gov.uk/drug-safety-update/chloramphenicol-eye-drops-containing-borax-or-boric-acid-buffers-use-in-children-younger-than-2-years",
+    "published": "2021-07-07",
+    "updated": "2021-07-07",
+    "summary": "Following a review of the available toxicological data and a calculation of daily exposure to boron from a typical dosing regimen, we have concluded that the balance between the benefits and risks of chloramphenicol eye drops containing borax or boric acid remains positive for children aged 0 to 2 years. Chloramphenicol eye drops can be safely administered to children aged 0 to 2 years where antibiotic eye drop treatment is indicated."
+   },
+   {
+    "title": "Systemically administered VEGF pathway inhibitors: risk of aneurysm and artery dissection",
+    "url": "https://www.gov.uk/drug-safety-update/systemically-administered-vegf-pathway-inhibitors-risk-of-aneurysm-and-artery-dissection",
+    "published": "2020-07-31",
+    "updated": "2020-07-31",
+    "summary": "Before initiating systemic vascular endothelial growth factor (VEGF) pathway inhibitors, carefully consider the risk of aneurysm and artery dissection in patients with risk factors. In patients who receive a systemic VEGF pathway inhibitor, reduce as far as possible any modifiable risk factors such as hypertension."
+   }
+  ]
+ },
+ "drugTariffViiia": {
+  "effectiveMonth": "2026-09",
+  "latestPublishedMonth": "2026-10",
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-viii",
+  "whole": false,
+  "bnfFilter": [
+   "chapter 11"
+  ],
+  "lineCount": 129,
+  "categoryCounts": {
+   "M": 18,
+   "C": 100,
+   "A": 11
+  },
+  "fileLines": 3533,
+  "fileLinesWithoutBnf": 53,
+  "priceMin": 1.42,
+  "priceMax": 6364.0,
+  "linesShown": 80,
+  "lines": [
+   {
+    "medicine": "Acetazolamide 250mg tablets",
+    "pack": "112 tablet",
+    "category": "M",
+    "price": 13.35,
+    "bnf": "1106000B0AAACAC"
+   },
+   {
+    "medicine": "Bimatoprost 100micrograms/ml eye drops",
+    "pack": "3 ml",
+    "category": "M",
+    "price": 2.86,
+    "bnf": "1106000AFAAABAB"
+   },
+   {
+    "medicine": "Bimatoprost 300micrograms/ml / Timolol 5mg/ml eye drops",
+    "pack": "3 ml",
+    "category": "M",
+    "price": 6.45,
+    "bnf": "1106000AIAAAAAA"
+   },
+   {
+    "medicine": "Bimatoprost 300micrograms/ml / Timolol 5mg/ml eye drops 0.4ml unit dose preservative free",
+    "pack": "30 unit dose",
+    "category": "M",
+    "price": 8.83,
+    "bnf": "1106000AIAAABAB"
+   },
+   {
+    "medicine": "Bimatoprost 300micrograms/ml eye drops 0.4ml unit dose preservative free",
+    "pack": "30 unit dose",
+    "category": "M",
+    "price": 7.47,
+    "bnf": "1106000AFAAACAC"
+   },
+   {
+    "medicine": "Brimonidine 0.2% eye drops",
+    "pack": "5 ml",
+    "category": "M",
+    "price": 1.66,
+    "bnf": "1106000AAAAAAAA"
+   },
+   {
+    "medicine": "Brinzolamide 10mg/ml / Timolol 5mg/ml eye drops",
+    "pack": "5 ml",
+    "category": "M",
+    "price": 4.2,
+    "bnf": "1106000AJAAAAAA"
+   },
+   {
+    "medicine": "Brinzolamide 10mg/ml eye drops",
+    "pack": "5 ml",
+    "category": "M",
+    "price": 2.28,
+    "bnf": "1106000ACAAAAAA"
+   },
+   {
+    "medicine": "Chloramphenicol 0.5% eye drops",
+    "pack": "10 ml",
+    "category": "M",
+    "price": 2.22,
+    "bnf": "1103010C0AAAAAA"
+   },
+   {
+    "medicine": "Chloramphenicol 1% eye ointment",
+    "pack": "4 gram",
+    "category": "M",
+    "price": 2.85,
+    "bnf": "1103010C0AAADAD"
+   },
+   {
+    "medicine": "Dorzolamide 20mg/ml / Timolol 5mg/ml eye drops",
+    "pack": "5 ml",
+    "category": "M",
+    "price": 2.97,
+    "bnf": "1106000ABAAAAAA"
+   },
+   {
+    "medicine": "Dorzolamide 20mg/ml eye drops",
+    "pack": "5 ml",
+    "category": "M",
+    "price": 2.42,
+    "bnf": "1106000P0AAAAAA"
+   },
+   {
+    "medicine": "Fusidic acid 1% modified-release eye drops",
+    "pack": "5 gram",
+    "category": "M",
+    "price": 38.95,
+    "bnf": "1103010H0AAAAAA"
+   },
+   {
+    "medicine": "Latanoprost 50micrograms/ml eye drops",
+    "pack": "2.5 ml",
+    "category": "M",
+    "price": 1.87,
+    "bnf": "1106000L0AAAAAA"
+   },
+   {
+    "medicine": "Olopatadine 1mg/ml eye drops",
+    "pack": "5 ml",
+    "category": "M",
+    "price": 2.91,
+    "bnf": "1104020Z0AAAAAA"
+   },
+   {
+    "medicine": "Sodium cromoglicate 2% eye drops",
+    "pack": "13.5 ml",
+    "category": "M",
+    "price": 1.99,
+    "bnf": "1104020T0AAAAAA"
+   },
+   {
+    "medicine": "Timolol 0.5% eye drops",
+    "pack": "5 ml",
+    "category": "M",
+    "price": 1.65,
+    "bnf": "1106000Z0AAABAB"
+   },
+   {
+    "medicine": "Travoprost 40micrograms/ml eye drops",
+    "pack": "2.5 ml",
+    "category": "M",
+    "price": 2.19,
+    "bnf": "1106000AEAAAAAA"
+   },
+   {
+    "medicine": "Acetylcysteine 5% eye drops",
+    "pack": "10 ml",
+    "category": "C",
+    "price": 80.95,
+    "bnf": "1108010C0AAADAD"
+   },
+   {
+    "medicine": "Aciclovir 30mg/g eye ointment",
+    "pack": "4.5 gram",
+    "category": "C",
+    "price": 45.0,
+    "bnf": "1103030C0AAAAAA"
+   },
+   {
+    "medicine": "Apraclonidine 1% eye drops 0.25ml unit dose preservative free",
+    "pack": "24 unit dose",
+    "category": "C",
+    "price": 110.69,
+    "bnf": "1108020J0AAAAAA"
+   },
+   {
+    "medicine": "Atropine 1% eye drops 0.5ml unit dose preservative free",
+    "pack": "20 unit dose",
+    "category": "C",
+    "price": 18.27,
+    "bnf": "1105000B0AAAJAJ"
+   },
+   {
+    "medicine": "Azithromycin 15mg/g eye drops 0.25g unit dose preservative free",
+    "pack": "6 unit dose",
+    "category": "C",
+    "price": 6.99,
+    "bnf": "1103010AIAAAAAA"
+   },
+   {
+    "medicine": "Betamethasone 0.1% ear/eye/nose drops",
+    "pack": "10 ml",
+    "category": "C",
+    "price": 2.32,
+    "bnf": "1104010D0AAAGAG"
+   },
+   {
+    "medicine": "Betaxolol 0.25% eye drops",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 2.66,
+    "bnf": "1106000I0AAABAB"
+   },
+   {
+    "medicine": "Betaxolol 0.25% eye drops 0.25ml unit dose preservative free",
+    "pack": "50 unit dose",
+    "category": "C",
+    "price": 13.77,
+    "bnf": "1106000I0AAACAC"
+   },
+   {
+    "medicine": "Betaxolol 0.5% eye drops",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 1.9,
+    "bnf": "1106000I0AAAAAA"
+   },
+   {
+    "medicine": "Bimatoprost 300micrograms/ml / Timolol 5mg/ml eye drops preservative free",
+    "pack": "3 ml",
+    "category": "C",
+    "price": 14.16,
+    "bnf": "1106000AIAAACAC"
+   },
+   {
+    "medicine": "Bimatoprost 300micrograms/ml eye drops preservative free",
+    "pack": "3 ml",
+    "category": "C",
+    "price": 9.79,
+    "bnf": "1106000AFAAADAD"
+   },
+   {
+    "medicine": "Brinzolamide 10mg/ml / Brimonidine 2mg/ml eye drops",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 9.23,
+    "bnf": "1106000ALAAAAAA"
+   },
+   {
+    "medicine": "Bromfenac 900micrograms/ml eye drops",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 8.5,
+    "bnf": "1108020AGAAAAAA"
+   },
+   {
+    "medicine": "Carbomer '980' 0.2% eye drops",
+    "pack": "10 gram",
+    "category": "C",
+    "price": 2.8,
+    "bnf": "1108010B0AAABAB"
+   },
+   {
+    "medicine": "Carbomer '980' 0.2% eye drops 0.6ml unit dose preservative free",
+    "pack": "30 unit dose",
+    "category": "C",
+    "price": 5.42,
+    "bnf": "1108010B0AAACAC"
+   },
+   {
+    "medicine": "Carbomer 974P 0.25% eye gel",
+    "pack": "10 gram",
+    "category": "C",
+    "price": 4.5,
+    "bnf": "1108010Z0AAAAAA"
+   },
+   {
+    "medicine": "Carmellose 0.5% eye drops 0.4ml unit dose preservative free",
+    "pack": "30 unit dose",
+    "category": "C",
+    "price": 4.8,
+    "bnf": "1108010D0AAADAD"
+   },
+   {
+    "medicine": "Carmellose 1% eye drops 0.4ml unit dose preservative free",
+    "pack": "30 unit dose",
+    "category": "C",
+    "price": 3.0,
+    "bnf": "1108010D0AAACAC"
+   },
+   {
+    "medicine": "Chloramphenicol 0.5% eye drops 0.5ml unit dose preservative free",
+    "pack": "20 unit dose",
+    "category": "C",
+    "price": 12.19,
+    "bnf": "1103010C0AAAGAG"
+   },
+   {
+    "medicine": "Chloramphenicol 0.5% eye drops preservative free",
+    "pack": "10 ml",
+    "category": "C",
+    "price": 10.12,
+    "bnf": "1103010C0AAAJAJ"
+   },
+   {
+    "medicine": "Ciclosporin 1mg/ml eye drops 0.3ml unit dose",
+    "pack": "30 unit dose",
+    "category": "C",
+    "price": 72.0,
+    "bnf": "1104020AEAAAAAA"
+   },
+   {
+    "medicine": "Ciclosporin 900micrograms/ml eye drops 0.25ml unit dose preservative free",
+    "pack": "60 unit dose",
+    "category": "C",
+    "price": 64.8,
+    "bnf": "1104020AEAAABAB"
+   },
+   {
+    "medicine": "Ciprofloxacin 0.3% eye drops",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 4.7,
+    "bnf": "1103010B0AAAAAA"
+   },
+   {
+    "medicine": "Cyclopentolate 0.5% eye drops",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 8.08,
+    "bnf": "1105000E0AAABAB"
+   },
+   {
+    "medicine": "Cyclopentolate 0.5% eye drops 0.5ml unit dose preservative free",
+    "pack": "20 unit dose",
+    "category": "C",
+    "price": 13.41,
+    "bnf": "1105000E0AAAEAE"
+   },
+   {
+    "medicine": "Cyclopentolate 1% eye drops",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 8.08,
+    "bnf": "1105000E0AAACAC"
+   },
+   {
+    "medicine": "Cyclopentolate 1% eye drops 0.5ml unit dose preservative free",
+    "pack": "20 unit dose",
+    "category": "C",
+    "price": 13.71,
+    "bnf": "1105000E0AAAFAF"
+   },
+   {
+    "medicine": "Dexamethasone 0.1% / Tobramycin 0.3% eye drops",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 5.37,
+    "bnf": "1104010I0AAAPAP"
+   },
+   {
+    "medicine": "Dexamethasone 0.1% eye drops",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 1.42,
+    "bnf": "1104010I0AAADAD"
+   },
+   {
+    "medicine": "Dexamethasone 0.1% eye drops 0.3ml unit dose preservative free",
+    "pack": "20 unit dose",
+    "category": "C",
+    "price": 5.53,
+    "bnf": "1104010I0AAAVAV"
+   },
+   {
+    "medicine": "Dexamethasone 0.1% eye drops 0.4ml unit dose preservative free",
+    "pack": "20 unit dose",
+    "category": "C",
+    "price": 11.53,
+    "bnf": "1104010I0AAATAT"
+   },
+   {
+    "medicine": "Dexamethasone 0.1% eye drops 0.5ml unit dose preservative free",
+    "pack": "20 unit dose",
+    "category": "C",
+    "price": 12.22,
+    "bnf": "1104010I0AAALAL"
+   },
+   {
+    "medicine": "Dexamethasone 0.1% eye drops preservative free",
+    "pack": "6 ml",
+    "category": "C",
+    "price": 9.75,
+    "bnf": "1104010I0AAAUAU"
+   },
+   {
+    "medicine": "Dexamethasone 1mg/ml / Levofloxacin 5mg/ml eye drops",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 8.3,
+    "bnf": "1104010I0AAAWAW"
+   },
+   {
+    "medicine": "Diclofenac 0.1% eye drops",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 6.68,
+    "bnf": "1108020A0AAACAC"
+   },
+   {
+    "medicine": "Diclofenac 0.1% eye drops 0.3ml unit dose preservative free",
+    "pack": "40 unit dose",
+    "category": "C",
+    "price": 32.0,
+    "bnf": "1108020A0AAAAAA"
+   },
+   {
+    "medicine": "Dorzolamide 20mg/ml / Timolol 5mg/ml eye drops 0.166ml unit dose preservative free",
+    "pack": "60 unit dose",
+    "category": "C",
+    "price": 21.44,
+    "bnf": "1106000ABAAADAD"
+   },
+   {
+    "medicine": "Dorzolamide 20mg/ml / Timolol 5mg/ml eye drops 0.2ml unit dose preservative free",
+    "pack": "60 unit dose",
+    "category": "C",
+    "price": 28.59,
+    "bnf": "1106000ABAAABAB"
+   },
+   {
+    "medicine": "Dorzolamide 20mg/ml / Timolol 5mg/ml eye drops preservative free",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 8.13,
+    "bnf": "1106000ABAAACAC"
+   },
+   {
+    "medicine": "Dorzolamide 20mg/ml eye drops 0.2ml unit dose preservative free",
+    "pack": "60 unit dose",
+    "category": "C",
+    "price": 24.18,
+    "bnf": "1106000P0AAABAB"
+   },
+   {
+    "medicine": "Dorzolamide 20mg/ml eye drops preservative free",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 7.08,
+    "bnf": "1106000P0AAACAC"
+   },
+   {
+    "medicine": "Epinastine 500micrograms/ml eye drops",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 9.9,
+    "bnf": "1104020ACAAAAAA"
+   },
+   {
+    "medicine": "Fluorescein 1% eye drops 0.5ml unit dose preservative free",
+    "pack": "20 unit dose",
+    "category": "C",
+    "price": 10.88,
+    "bnf": "1108020K0AAAAAA"
+   },
+   {
+    "medicine": "Fluorescein 2% eye drops 0.5ml unit dose preservative free",
+    "pack": "20 unit dose",
+    "category": "C",
+    "price": 11.08,
+    "bnf": "1108020K0AAABAB"
+   },
+   {
+    "medicine": "Fluorometholone 0.1% eye drops",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 1.71,
+    "bnf": "1104010K0AAAAAA"
+   },
+   {
+    "medicine": "Fluorometholone 0.1% eye drops",
+    "pack": "10 ml",
+    "category": "C",
+    "price": 2.95,
+    "bnf": "1104010K0AAAAAA"
+   },
+   {
+    "medicine": "Ganciclovir 0.15% eye gel",
+    "pack": "5 gram",
+    "category": "C",
+    "price": 19.99,
+    "bnf": "1103030W0AAAAAA"
+   },
+   {
+    "medicine": "Hydrocortisone sodium phosphate 3.35mg/ml eye drops 0.4ml unit dose preservative free",
+    "pack": "30 unit dose",
+    "category": "C",
+    "price": 10.99,
+    "bnf": "1103010ALAAAAAA"
+   },
+   {
+    "medicine": "Hyetellose 0.44% eye drops 0.5ml unit dose preservative free",
+    "pack": "20 unit dose",
+    "category": "C",
+    "price": 9.33,
+    "bnf": "1108010H0AAAAAA"
+   },
+   {
+    "medicine": "Idebenone 150mg tablets",
+    "pack": "180 tablet",
+    "category": "C",
+    "price": 6364.0,
+    "bnf": "1108030ABAAACAC"
+   },
+   {
+    "medicine": "Ketotifen 250micrograms/ml eye drops",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 7.8,
+    "bnf": "1104020Y0AAAAAA"
+   },
+   {
+    "medicine": "Ketotifen 250micrograms/ml eye drops 0.4ml unit dose preservative free",
+    "pack": "30 unit dose",
+    "category": "C",
+    "price": 6.95,
+    "bnf": "1104020Y0AAABAB"
+   },
+   {
+    "medicine": "Latanoprost 50micrograms/ml / Netarsudil 200micrograms/ml eye drops",
+    "pack": "2.5 ml",
+    "category": "C",
+    "price": 10.0,
+    "bnf": "1106000ANAAAAAA"
+   },
+   {
+    "medicine": "Latanoprost 50micrograms/ml / Timolol 5mg/ml eye drops 0.2ml unit dose preservative free",
+    "pack": "30 unit dose",
+    "category": "C",
+    "price": 13.49,
+    "bnf": "1106000ADAAABAB"
+   },
+   {
+    "medicine": "Latanoprost 50micrograms/ml / Timolol 5mg/ml eye drops preservative free",
+    "pack": "2.5 ml",
+    "category": "C",
+    "price": 13.49,
+    "bnf": "1106000ADAAACAC"
+   },
+   {
+    "medicine": "Latanoprost 50micrograms/ml eye drops 0.2ml unit dose preservative free",
+    "pack": "30 unit dose",
+    "category": "C",
+    "price": 8.49,
+    "bnf": "1106000L0AAABAB"
+   },
+   {
+    "medicine": "Latanoprost 50micrograms/ml eye drops 0.2ml unit dose preservative free",
+    "pack": "90 unit dose",
+    "category": "C",
+    "price": 25.47,
+    "bnf": "1106000L0AAABAB"
+   },
+   {
+    "medicine": "Latanoprost 50micrograms/ml eye drops preservative free",
+    "pack": "2.5 ml",
+    "category": "C",
+    "price": 7.99,
+    "bnf": "1106000L0AAACAC"
+   },
+   {
+    "medicine": "Levofloxacin 5mg/ml eye drops 0.3ml unit dose preservative free",
+    "pack": "30 unit dose",
+    "category": "C",
+    "price": 17.95,
+    "bnf": "1103010AGAAACAC"
+   },
+   {
+    "medicine": "Levofloxacin 5mg/ml eye drops preservative free",
+    "pack": "5 ml",
+    "category": "C",
+    "price": 13.46,
+    "bnf": "1103010AGAAADAD"
+   },
+   {
+    "medicine": "Lidocaine 4% / Fluorescein 0.25% eye drops 0.5ml unit dose preservative free",
+    "pack": "20 unit dose",
+    "category": "C",
+    "price": 13.74,
+    "bnf": "1107000N0AAAAAA"
+   },
+   {
+    "medicine": "Lodoxamide 0.1% eye drops",
+    "pack": "10 ml",
+    "category": "C",
+    "price": 5.21,
+    "bnf": "1104020M0AAAAAA"
+   }
+  ]
  }
 }

@@ -20,7 +20,12 @@
   "frameworkAwards": "2026-09-30T12:30:14+00:00",
   "openTenders": "30/09/2026",
   "drugTariff": "2026-09-30",
-  "localIntel": "2026-09-30"
+  "localIntel": "2026-09-30",
+  "supplierDirectory": "2026-09-30",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-09-30",
+  "drugTariffViiia": null,
+  "hospitalPrescribing": null
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -28,7 +33,11 @@
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. Total Orthopaedic Solutions 3 is the main NHS Supply Chain route for this patch and carries 101 named suppliers, but being named on it is evidence of a route, not of volume, and NHS Supply Chain is only one route. The award record below shows orthopaedic and trauma implants bought through NHS Wales Shared Services, National Procurement in Scotland, the Business Services Organisation in Northern Ireland and trusts' own direct awards, none of which appears in the framework list above. Surgical Navigation Systems is shared with neurosurgery and ENT. No unit or market-share split is published for any of it, and none is claimed here.",
   "awards": "Award-stage notices whose TITLE matches /\\b(orthopaedic\\w*|orthopedic\\w*|orthobiologic\\w*|trauma\\w*|tos3|arthroplast\\w*|joint replacement|hip\\b|knee\\b|shoulder\\b|elbow\\b|ankle\\b|spinal|spine\\b|scoliosis|vertebr\\w*|pedicle|interbody|kyphoplast\\w*|vertebroplast\\w*|discectom\\w*|laminectom\\w*|fractur\\w*|osteotom\\w*|osteosynthes\\w*|femur|acetabul\\w*|bone (?:cement|graft|substitute|prep|screw|anchor|plate|mill|void filler)|arthroscop\\w*|cruciate|meniscal|meniscus|external fixation|fixator|intramedullary|tourniquet\\w*|sagittal saw|pulse lavage|musculoskelet\\w*|limb reconstruction)\\b/i and does not match /\\b(medicines|spinal cord stimulat\\w*|epidural|fgm|sexual abuse|spinal muscular atrophy|orthotic\\w*|orthos[ei]s)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 331417 or 33183 or 85121283 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: ortho). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 4 of the 6 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (0 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-09-30.",
+  "drugTariffViiia": null
  },
  "counts": {
   "frameworks": 2,
@@ -38,7 +47,14 @@
   "awardsMatched": 167,
   "awardsWithheldByBuyerCap": 0,
   "openTenders": 0,
-  "localIntel": 0
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 84,
+  "suppliersDirectoryTagged": 6,
+  "suppliersDirectoryOnOtherFrameworks": 3,
+  "suppliersDirectoryWithFrameworkNote": 4,
+  "gpMarkets": 0,
+  "mhraDsu": 2,
+  "drugTariffViiiaLines": 0
  },
  "frameworks": [
   {
@@ -193,7 +209,9 @@
    "frameworks": [
     "Surgical Navigation Systems with Associated Options and Related Services",
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Medtronic",
@@ -205,7 +223,9 @@
    "frameworks": [
     "Surgical Navigation Systems with Associated Options and Related Services",
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Stryker",
@@ -216,7 +236,9 @@
    "frameworks": [
     "Surgical Navigation Systems with Associated Options and Related Services",
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "3D LifePrints UK Ltd",
@@ -224,7 +246,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "3D Metal Printing Ltd",
@@ -232,7 +256,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Acumed Ltd",
@@ -240,7 +266,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Adler Ortho UK Limited",
@@ -248,7 +276,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Advita Ortho UK Limited",
@@ -258,7 +288,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Anetic Aid Ltd",
@@ -266,7 +298,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Anika Therapeutics Ltd",
@@ -274,7 +308,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Arthrex",
@@ -284,7 +320,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Arthro Dynamik Ltd",
@@ -292,7 +330,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "B. Braun Medical",
@@ -302,7 +342,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Baxter Healthcare Ltd",
@@ -310,7 +352,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Biedermann Motech International LTD",
@@ -318,7 +362,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Biocomposites Ltd",
@@ -326,7 +372,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Biomet 3i UK, Ltd (ZimVie)",
@@ -334,7 +382,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Bioventus Cooperatief U.A",
@@ -342,7 +392,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Bonesupport",
@@ -350,7 +402,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Brainlab Ltd",
@@ -358,7 +412,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Navigation Systems with Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Braun and Company Limited",
@@ -366,7 +422,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Cenobiologics Ltd",
@@ -374,7 +432,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Conmed UK Ltd",
@@ -384,7 +444,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Contura Orthopaedics Ltd",
@@ -392,7 +454,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Corin",
@@ -402,7 +466,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "D.P. Medical Systems Limited",
@@ -412,7 +478,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "De Soutter Medical Ltd",
@@ -420,7 +488,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Delta Surgical",
@@ -430,7 +500,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Eakin Surgical Limited",
@@ -440,7 +512,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Edge Medical Ltd",
@@ -448,7 +522,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Eurospine",
@@ -456,7 +532,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Fannin (UK) Limited",
@@ -466,7 +544,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "FH Ortho Ltd",
@@ -474,7 +554,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Freelance Surgical Limited",
@@ -482,7 +564,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
@@ -490,7 +574,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "GenX MediCare Ltd",
@@ -500,7 +586,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Globus Medical UK Ltd",
@@ -508,7 +596,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Greenbone Spa",
@@ -516,7 +606,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "GS Medical Healthcare Ltd",
@@ -526,7 +618,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Heraeus Medical UK",
@@ -536,7 +630,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Hospital Innovations",
@@ -544,7 +640,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Hospital Services Limited",
@@ -552,7 +650,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Navigation Systems with Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Ideal Med",
@@ -560,7 +660,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "IGEA S.p.A. Branch UK",
@@ -568,7 +670,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "implantcast UK",
@@ -576,7 +680,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Innovate Orthopaedics Ltd",
@@ -584,7 +690,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Integra LifeSciences (Integra Neurosciences)",
@@ -594,7 +702,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Johnson & Johnson MedTech",
@@ -604,7 +714,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "joimax UK",
@@ -612,7 +724,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Joint Operations",
@@ -622,7 +736,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "JRI Orthopaedics Ltd",
@@ -630,7 +746,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Judd Medical Ltd",
@@ -638,7 +756,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Kaiser Medical Technology Ltd",
@@ -646,7 +766,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "KLS Martin UK Limited",
@@ -654,7 +776,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Lavender Medical",
@@ -662,7 +786,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Leda Orthopaedics Ltd",
@@ -670,7 +796,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Lima Orthopaedics UK Ltd",
@@ -678,7 +806,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Lindare Medical Ltd",
@@ -686,7 +816,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Link Orthopaedics UK Ltd",
@@ -694,7 +826,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "M.D.M Medical Ltd",
@@ -702,7 +836,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Macromed UK Ltd",
@@ -710,7 +846,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Marquardt UK",
@@ -718,7 +856,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Materialise",
@@ -726,7 +866,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "MatOrtho Ltd",
@@ -734,7 +876,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Medacta",
@@ -744,7 +888,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Medartis Ltd",
@@ -752,7 +898,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "MedScience Distribution",
@@ -762,7 +910,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Mercian Surgical Supply Company Limited",
@@ -770,7 +920,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Meril UK Pvt Ltd",
@@ -778,7 +930,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Metaphysis LLP",
@@ -786,7 +940,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Microport Scientific Ltd",
@@ -794,7 +950,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Mölnlycke",
@@ -804,7 +962,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Neptune Medical Limited",
@@ -812,7 +972,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "NSK United Kingdom Limited",
@@ -820,7 +982,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "NuVasive UK Ltd",
@@ -828,7 +992,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Open Medical Ltd",
@@ -836,7 +1002,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Ortho Solutions UK Ltd",
@@ -844,7 +1012,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "OrthoAccess Ltd",
@@ -852,7 +1022,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Orthofix Limited",
@@ -860,7 +1032,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Orthomotion Medical Ltd",
@@ -868,7 +1042,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Orthopediatrics EU Limited",
@@ -876,7 +1052,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Osteon Medical Ltd",
@@ -884,7 +1062,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Osteotec Ltd",
@@ -892,7 +1072,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Ovidius Medical Ltd",
@@ -900,7 +1082,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Ovidius Solutions Ltd",
@@ -908,7 +1092,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Paragon 28",
@@ -916,7 +1102,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Permedica UK Limited",
@@ -924,7 +1112,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Platts & Nisbett Ltd",
@@ -932,7 +1122,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Q Medical Technologies Ltd",
@@ -940,7 +1132,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Sectra Limited",
@@ -948,7 +1142,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Silony Medical Ltd",
@@ -956,7 +1152,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Smith+Nephew",
@@ -966,7 +1164,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Sovereign Medical",
@@ -974,7 +1174,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Spineart UK Ltd",
@@ -982,7 +1184,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Summit Medical UK",
@@ -992,7 +1196,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Surgalign UK Ltd (Formerly Pioneer Surgical Technology B.V. or RTI Surgical)",
@@ -1000,7 +1206,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Surgical Holdings Limited",
@@ -1010,7 +1218,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Surgical Instrument Group Holdings Ltd",
@@ -1020,7 +1230,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "Symbios",
@@ -1028,7 +1240,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "T.J.Smith and Nephew Limited",
@@ -1036,7 +1250,9 @@
    "variants": [],
    "frameworks": [
     "Surgical Navigation Systems with Associated Options and Related Services"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
   },
   {
    "name": "TRB Chemedica (UK) Ltd",
@@ -1044,7 +1260,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "United Orthopaedic Corporation UK Limited",
@@ -1052,7 +1270,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Venturis Medical Ltd",
@@ -1060,7 +1280,9 @@
    "variants": [],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   },
   {
    "name": "Zimmer Biomet",
@@ -1070,7 +1292,9 @@
    ],
    "frameworks": [
     "Total Orthopaedic Solutions 3"
-   ]
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
   }
  ],
  "awards": [
@@ -1524,7 +1748,7 @@
   {
    "title": "Purchase of Orthopaedic Spinal & Scoliosis Implants & Consumables",
    "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotland) (NSS)",
-   "supplier": "B Braun Medical Ltd, Globus Medical UK Ltd, Medtronic, Richard Wolf UK Ltd, Spin",
+   "supplier": "B Braun Medical Ltd, Globus Medical UK Ltd, Medtronic, Richard Wolf UK Ltd, Spineart UK Ltd, STRYKER, Venturis Medical, Osteon Medical, Silony Medical Ltd",
    "date": "2026-03-09",
    "url": "https://www.find-tender.service.gov.uk/Notice/020798-2026",
    "value": null,
@@ -1572,5 +1796,196 @@
   "nations": "Scotland, Wales, Northern Ireland and Ireland",
   "policy": "Policy and demand signals",
   "data": "Data sources"
- }
+ },
+ "directorySuppliers": [
+  {
+   "name": "Carrow Medical Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Carrow Medical Limited",
+   "seedLabels": [
+    "Orthopaedics / spine"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Surgical Mesh",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-mesh/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Surgical Mesh."
+  },
+  {
+   "name": "EOS Imaging",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "EOS Imaging",
+   "seedLabels": [
+    "Orthopaedics / spine"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Static X-Ray and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/static-x-ray-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Static X-Ray and Associated Options and Related Services."
+  },
+  {
+   "name": "Timesco Healthcare Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Timesco Healthcare Ltd",
+   "seedLabels": [
+    "Orthopaedics and trauma"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Central Venous Catheters and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/central-venous-catheters-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrosurgical Consumables and Related Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrosurgical-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-gynaecology-and-sexual-health-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pulse-oximetry-and-capnography-devices-and-support-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Instruments",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-instruments/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on eight NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Central Venous Catheters and Associated Products; Electrosurgical Consumables and Related Accessories; Maternity, Obstetrics, Gynaecology and Sexual Health Products; Pulse Oximetry, Capnography and Related Monitoring Technologies; Respiratory Solutions; Surgical Instruments; Total Patient Assessment Device Solutions."
+  },
+  {
+   "name": "DePuy Synthes (J&J MedTech)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "DePuy Synthes (J&J MedTech)",
+   "seedLabels": [
+    "Orthopaedics / spine"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Globus Medical (NuVasive UK)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Globus Medical (NuVasive UK)",
+   "seedLabels": [
+    "Orthopaedics / spine"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Thesis (LimbO)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Thesis (LimbO)",
+   "seedLabels": [
+    "Orthopaedics and trauma"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": false,
+  "markets": [],
+  "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-09-30",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": false,
+  "whyEmpty": null,
+  "count": 2,
+  "roundupsExcluded": 0,
+  "updates": [
+   {
+    "title": "#MedSafetyWeek (3-9 November 2025): A call to action to improve patient safety",
+    "url": "https://www.gov.uk/drug-safety-update/number-medsafetyweek-3-9-november-2025-a-call-to-action-to-improve-patient-safety",
+    "published": "2025-10-23",
+    "updated": "2025-10-23",
+    "summary": "The annual #MedSafetyWeek campaign takes place from 3 to 9 November 2025. This year’s campaign theme is ‘we can all help make medicines safer.’"
+   },
+   {
+    "title": "Paracetamol and pregnancy - reminder that taking paracetamol during pregnancy remains safe",
+    "url": "https://www.gov.uk/drug-safety-update/paracetamol-and-pregnancy-reminder-that-taking-paracetamol-during-pregnancy-remains-safe",
+    "published": "2025-09-23",
+    "updated": "2025-09-23",
+    "summary": "Patients should be reminded and reassured that there is no evidence that taking paracetamol during pregnancy causes autism in children. Paracetamol is recommended as the first-choice pain reliever for pregnant women, used at the lowest dose and for the shortest duration. It also acts as an antipyretic and is therefore used to treat fever."
+   }
+  ]
+ },
+ "drugTariffViiia": null
 }
