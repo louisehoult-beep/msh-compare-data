@@ -14,8 +14,8 @@
  "owner": "NHS Supply Chain",
  "rule": "A supplier is shown on a lot ONLY where the framework owner's own published source for that framework names it against that lot: the NHS Supply Chain contract launch brief's lot-by-lot supplier lists or supplier-by-lot table, the Product/Supplier Matrix spreadsheet attached to that brief (only where the sheet has an explicit lot axis, and only where the supplier has a mark or a product in that lot), or the Find a Tender contract award notice for that framework's own procurement. Nothing is inferred from product ranges, specialities or lot titles. Lots attach to the exact supplier string the brief uses; a source name attaches only where its normalised form (brief_names.clean + company_match.key) equals that brief name's, or both resolve to the same single Hub company under the seed's recorded aliases. Unmatched names are listed in `unresolved`, never guessed. Where the brief breaks a framework into lots but no source names who holds which, lotStatus is 'notPublished' and the report says so.",
  "counts": {
-  "published": 63,
-  "notPublished": 18,
+  "published": 64,
+  "notPublished": 17,
   "noLots": 41
  },
  "frameworks": {
@@ -10279,6 +10279,137 @@
   "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/instrument-decontamination-and-accessories/": {
    "name": "Instrument Decontamination and Accessories",
    "lotTitles": {
+    "Lot 1a": "Cleaning & Disinfection",
+    "Lot 1b": "Cleaning & Disinfection",
+    "Lot 2": "Endoscope Storage & Transportation"
+   },
+   "statedLotCount": 2,
+   "signals": [
+    "fts-award"
+   ],
+   "sources": [
+    {
+     "kind": "fts-award",
+     "url": "https://www.find-tender.service.gov.uk/Notice/035065-2022",
+     "label": "Find a Tender contract award notice 035065-2022",
+     "coversLots": [
+      "Lot 1a",
+      "Lot 1b",
+      "Lot 2"
+     ],
+     "suppliersWithLots": 19
+    }
+   ],
+   "unresolved": [
+    {
+     "name": "MB MedTech Ltd",
+     "lots": [
+      "Lot 1a"
+     ],
+     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
+     "source": "fts-award"
+    },
+    {
+     "name": "MDI Medical (N.I.) Limited",
+     "lots": [
+      "Lot 1a"
+     ],
+     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
+     "source": "fts-award"
+    }
+   ],
+   "lotsBySource": {
+    "fts-award": {
+     "Advanced Medical Systems Ltd": [
+      "Lot 1b",
+      "Lot 2"
+     ],
+     "Advanced Sterilization Products (UK) Limited": [
+      "Lot 2"
+     ],
+     "Amity International": [
+      "Lot 1a"
+     ],
+     "Creed Medical Ltd": [
+      "Lot 1a"
+     ],
+     "Dr Weigert UK Ltd": [
+      "Lot 1a"
+     ],
+     "Ecolab Ltd": [
+      "Lot 1a"
+     ],
+     "Getinge Limited": [
+      "Lot 1a",
+      "Lot 1b",
+      "Lot 2"
+     ],
+     "KeyMed (Medical and Industrial Equipment) Ltd": [
+      "Lot 1a"
+     ],
+     "Nanosonics": [
+      "Lot 1a",
+      "Lot 2"
+     ],
+     "Partners for Endoscopy Limited": [
+      "Lot 1a",
+      "Lot 1b",
+      "Lot 2"
+     ],
+     "Peacocks Medical Group": [
+      "Lot 1a"
+     ],
+     "Pennamed Limited": [
+      "Lot 1a",
+      "Lot 1b",
+      "Lot 2"
+     ],
+     "STERIS Solutions Limited": [
+      "Lot 1a",
+      "Lot 1b",
+      "Lot 2"
+     ],
+     "Schulke & Mayr UK Ltd": [
+      "Lot 1a"
+     ],
+     "Serchem Limited": [
+      "Lot 1a",
+      "Lot 1b"
+     ],
+     "Tristel Solutions Limited": [
+      "Lot 1a",
+      "Lot 2"
+     ],
+     "Wassenburg Medical": [
+      "Lot 1a",
+      "Lot 1b",
+      "Lot 2"
+     ],
+     "i3medical": [
+      "Lot 1a"
+     ],
+     "iM-MED Limited": [
+      "Lot 1a",
+      "Lot 1b",
+      "Lot 2"
+     ]
+    }
+   },
+   "namedAs": {
+    "Ecolab Ltd": [
+     "Ecolab Limited"
+    ],
+    "Nanosonics": [
+     "Nanosonics Europe Limited"
+    ],
+    "Wassenburg Medical": [
+     "Wassenburg Limited"
+    ],
+    "i3medical": [
+     "i3 Medical Limited"
+    ]
+   },
+   "briefLotTitles": {
     "Lot 1a": "Automated Disinfectants",
     "Lot 1b": "Other Disinfectants",
     "Lot 1c": "Automated Decontamination",
@@ -10290,16 +10421,90 @@
     "Lot 2b": "Packing, Sealing Systems and Associated Accessories",
     "Lot 2c": "Transportation, Storage Bags and Liners"
    },
-   "statedLotCount": 2,
-   "signals": [],
-   "sources": [],
-   "unresolved": [],
-   "lotsBySource": {},
-   "namedAs": {},
-   "supplierLots": {},
-   "status": "notPublished",
-   "suppliersWithoutLot": [],
-   "coversLots": null,
+   "supplierLots": {
+    "Advanced Medical Systems Ltd": [
+     "Lot 1b",
+     "Lot 2"
+    ],
+    "Advanced Sterilization Products (UK) Limited": [
+     "Lot 2"
+    ],
+    "Amity International": [
+     "Lot 1a"
+    ],
+    "Creed Medical Ltd": [
+     "Lot 1a"
+    ],
+    "Dr Weigert UK Ltd": [
+     "Lot 1a"
+    ],
+    "Ecolab Ltd": [
+     "Lot 1a"
+    ],
+    "Getinge Limited": [
+     "Lot 1a",
+     "Lot 1b",
+     "Lot 2"
+    ],
+    "KeyMed (Medical and Industrial Equipment) Ltd": [
+     "Lot 1a"
+    ],
+    "Nanosonics": [
+     "Lot 1a",
+     "Lot 2"
+    ],
+    "Partners for Endoscopy Limited": [
+     "Lot 1a",
+     "Lot 1b",
+     "Lot 2"
+    ],
+    "Peacocks Medical Group": [
+     "Lot 1a"
+    ],
+    "Pennamed Limited": [
+     "Lot 1a",
+     "Lot 1b",
+     "Lot 2"
+    ],
+    "STERIS Solutions Limited": [
+     "Lot 1a",
+     "Lot 1b",
+     "Lot 2"
+    ],
+    "Schulke & Mayr UK Ltd": [
+     "Lot 1a"
+    ],
+    "Serchem Limited": [
+     "Lot 1a",
+     "Lot 1b"
+    ],
+    "Tristel Solutions Limited": [
+     "Lot 1a",
+     "Lot 2"
+    ],
+    "Wassenburg Medical": [
+     "Lot 1a",
+     "Lot 1b",
+     "Lot 2"
+    ],
+    "i3medical": [
+     "Lot 1a"
+    ],
+    "iM-MED Limited": [
+     "Lot 1a",
+     "Lot 1b",
+     "Lot 2"
+    ]
+   },
+   "status": "published",
+   "suppliersWithoutLot": [
+    "MDI Medical Ltd"
+   ],
+   "coversLots": [
+    "Lot 1a",
+    "Lot 1b",
+    "Lot 2"
+   ],
    "lotsNotCovered": []
   },
   "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/insulin-pumps-and-associated-products/": {
@@ -16468,10 +16673,7 @@
    },
    "briefLotTitles": {
     "Lot 1": "A, B, C – High Volume Standard Polymer Aprons",
-    "Lot 2": "Low Volume Specialist Polymer Aprons",
-    "Lot 1a": "NHS Aprons",
-    "Lot 1b": "NHS Aprons",
-    "Lot 1c": "NHS Aprons"
+    "Lot 2": "Low Volume Specialist Polymer Aprons"
    },
    "supplierLots": {
     "GB UK Ltd": [

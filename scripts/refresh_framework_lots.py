@@ -470,9 +470,18 @@ def fts_award_releases(entry, lot_titles=None):
 
 def _lot_text(lid, title):
     """'Lot <id> - <title>' for an OCDS lot id, whether the notice writes the id
-    as '12' or as 'Lot 12'."""
+    as '12' or as 'Lot 12'.
+
+    Where the lot's own title opens with an explicit "Lot <label>" that differs
+    from the OCDS id, the title's label is the notice's own lot name and wins:
+    Instrument Decontamination's award (035065-2022) numbers its lots 1, 2, 3
+    but titles them "Lot 1A ...", "Lot 1B ...", "Lot 2 ...". The title is then
+    used as it stands, so the label is read from the notice, never renumbered."""
     lid = str(lid).strip()
     base = lid if lot_label(lid) else "Lot %s" % lid
+    own = lot_label(title)
+    if own and own != lot_label(base):
+        return str(title).strip()
     return "%s - %s" % (base, title) if title else base
 
 
@@ -664,14 +673,19 @@ def build_one(fw, h, to_company, cache, fts_releases, previous):
                     t = LOT_HEAD.sub("", t or "", count=1).strip(" :–—-") or None
                     if lab and t:
                         award_titles.setdefault(lab, t)
-            for l, t in award_titles.items():
-                if l not in rec["lotTitles"] or not rec["lotTitles"][l]:
-                    rec["lotTitles"][l] = t
+            # Decide the clash on the brief's own titles BEFORE filling any gap,
+            # so an award-only label (Instrument Decontamination's "Lot 2") is
+            # never written into the brief's scheme and briefLotTitles stays the
+            # brief's alone.
             clash = [l for l, t in award_titles.items()
                      if rec["lotTitles"].get(l) and _norm_title(rec["lotTitles"][l]) != _norm_title(t)]
             if clash:
                 rec["briefLotTitles"] = rec["lotTitles"]
                 rec["lotTitles"] = award_titles
+            else:
+                for l, t in award_titles.items():
+                    if l not in rec["lotTitles"] or not rec["lotTitles"][l]:
+                        rec["lotTitles"][l] = t
             nid = re.sub(r"^ocds-[a-z0-9]+-[a-z0-9]+-", "", ids[0])
             take("fts-award", "https://www.find-tender.service.gov.uk/Notice/%s" % nid,
                  "Find a Tender contract award notice %s" % ", ".join(

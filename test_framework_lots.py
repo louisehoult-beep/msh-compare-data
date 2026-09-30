@@ -154,6 +154,55 @@ class FindATender(unittest.TestCase):
         self.assertEqual(rec["status"], "published")
 
 
+    def test_award_lot_label_read_from_its_title(self):
+        # Instrument Decontamination and Accessories, award 035065-2022: OCDS lot
+        # ids 1, 2, 3 are titled "Lot 1A ...", "Lot 1B ...", "Lot 2 ...". The brief
+        # splits the framework into product-category lots 1a-1g and 2a-2c, a
+        # different scheme ("Automated Disinfectants" is not "Cleaning &
+        # Disinfection"). The card must show the award's three lots with the
+        # award's titles, and never mix in the brief's 1a-1g / 2a-2c.
+        brief = {"Lot 1a": "Automated Disinfectants", "Lot 1b": "Other Disinfectants",
+                 "Lot 1c": "Automated Decontamination", "Lot 1d": "Detergents",
+                 "Lot 1e": "Pre-Clean Kits and Associated Products",
+                 "Lot 1f": "Container for the Detachable Parts of an Endoscope",
+                 "Lot 1g": "Test Kits and Strips",
+                 "Lot 2a": "Mobile Units, Cabinets and Associated Accessories",
+                 "Lot 2b": "Packing, Sealing Systems and Associated Accessories",
+                 "Lot 2c": "Transportation, Storage Bags and Liners"}
+        entry = {"kind": "f03", "title": "Instrument Decontamination and Accessories",
+                 "releases": [{"id": "035065-2022", "title": "Instrument Decontamination and Accessories",
+                               "lots": [["1", "Lot 1A Cleaning & Disinfection"],
+                                        ["2", "Lot 1B Cleaning & Disinfection"],
+                                        ["3", "Lot 2 Endoscope Storage & Transportation"]],
+                               "awards": [[["1"], ["Ecolab Limited", "Getinge Limited"], "active", "a1"],
+                                          [["2"], ["Getinge Limited", "Wassenburg Medical"], "active", "a2"],
+                                          [["3"], ["Getinge Limited", "Wassenburg Medical"], "active", "a3"]]}]}
+        self.assertEqual(L._lot_text("1", "Lot 1A Cleaning & Disinfection"), "Lot 1A Cleaning & Disinfection")
+        self.assertEqual(L._lot_text("12", "Stoma Appliances"), "Lot 12 - Stoma Appliances")
+        got, ids = L.parse_fts_awards(L.fts_award_releases(entry, brief), brief)
+        self.assertEqual(got, {"Ecolab Limited": {"Lot 1a"},
+                               "Getinge Limited": {"Lot 1a", "Lot 1b", "Lot 2"},
+                               "Wassenburg Medical": {"Lot 1b", "Lot 2"}})
+        fw = {"name": "Instrument Decontamination and Accessories", "url": "u",
+              "reference": "2022/S 000-035065",
+              "suppliers": ["Ecolab Limited", "Getinge Limited", "Wassenburg Medical", "Other Ltd"]}
+        saved = (L.parse_lot_titles, L.stated_lot_count, L.parse_brief_lot_lists, L.matrix_links)
+        L.parse_lot_titles, L.stated_lot_count = (lambda h: dict(brief)), (lambda h: 2)
+        L.parse_brief_lot_lists, L.matrix_links = (lambda h: {}), (lambda h: [])
+        try:
+            rec = L.build_one(fw, "<brief>", lambda n: None, None, {"035065-2022": entry}, None)
+        finally:
+            L.parse_lot_titles, L.stated_lot_count, L.parse_brief_lot_lists, L.matrix_links = saved
+        self.assertEqual(rec["status"], "published")
+        self.assertEqual(rec["lotTitles"], {"Lot 1a": "Cleaning & Disinfection",
+                                            "Lot 1b": "Cleaning & Disinfection",
+                                            "Lot 2": "Endoscope Storage & Transportation"})
+        self.assertEqual(rec["briefLotTitles"]["Lot 1a"], "Automated Disinfectants")
+        self.assertNotIn("Lot 2", rec["briefLotTitles"])
+        self.assertEqual(rec["supplierLots"]["Getinge Limited"], ["Lot 1a", "Lot 1b", "Lot 2"])
+        self.assertEqual(rec["lotsNotCovered"], [])
+        self.assertEqual(rec["suppliersWithoutLot"], ["Other Ltd"])
+
 def run_gate(fw, lots_doc, js="function fwLotLine(){} lot not published by"):
     verify.fails.clear()
     verify.warns.clear()
