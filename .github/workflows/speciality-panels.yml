@@ -28,6 +28,9 @@ name: Speciality panels rebuild
 #   gp-prescribing        07:20 (15th-28th, monthly data) -> data/gp-prescribing/
 #     This one lands AFTER the rebuild, deliberately not waited for: a new NHSBSA
 #     month reaches the panels at the next morning's run, one day later.
+#   hospital-prescribing  17:40 (14th-28th, monthly data) -> data/hospital-prescribing/
+#     Added 30/09/2026. Runs the evening before, so a month NHSBSA publishes in
+#     the day is in the panels (dermatology secondary-care share) next morning.
 # Building before those would publish a panel set already a day behind, which is
 # the failure this workflow exists to end. Same reasoning as differentiator.yml's
 # "after every writer that feeds it".

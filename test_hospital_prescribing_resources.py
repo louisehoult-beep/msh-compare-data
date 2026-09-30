@@ -115,5 +115,48 @@ class RevisedMonths(unittest.TestCase):
                          "build() takes the last name as 'latest' and relies on this")
 
 
+class IfNew(unittest.TestCase):
+    """--if-new (the scheduled run, 30/09/2026) must rebuild on anything NHSBSA changed.
+
+    Comparing only the latest month, as the GP builder does, would have left May 2025
+    a gap for good: it arrived as 202505FINAL, three months after 202506.
+    """
+
+    def setUp(self):
+        self.mod = load()
+        self.res = [("202604", "u/04"), ("202605", "u/05"), ("202606", "u/06")]
+
+    def index(self, **over):
+        periods, files = self.mod.wanted_window(self.res, 3)
+        d = {"periods": periods, "missingPeriods": [], "sourceFiles": files}
+        d.update(over)
+        return d
+
+    def test_nothing_new_is_a_no_op(self):
+        self.assertTrue(self.mod.already_built(self.index(), self.res, 3))
+
+    def test_a_new_month_rebuilds(self):
+        idx = self.index()
+        self.res.append(("202607", "u/07"))
+        self.assertFalse(self.mod.already_built(idx, self.res, 3))
+
+    def test_a_revision_inside_the_window_rebuilds(self):
+        idx = self.index()
+        self.res[1] = ("202605", "u/05final")
+        self.assertFalse(self.mod.already_built(idx, self.res, 3))
+
+    def test_a_filled_gap_rebuilds_even_on_an_old_index(self):
+        """An index from before sourceFiles existed still notices a gap filling."""
+        idx = {"periods": ["202604", "202605", "202606"], "missingPeriods": ["202605"]}
+        self.assertFalse(self.mod.already_built(idx, self.res, 3))
+
+    def test_an_old_index_with_nothing_new_is_a_no_op(self):
+        idx = {"periods": ["202604", "202605", "202606"], "missingPeriods": []}
+        self.assertTrue(self.mod.already_built(idx, self.res, 3))
+
+    def test_no_index_rebuilds(self):
+        self.assertFalse(self.mod.already_built(None, self.res, 3))
+
+
 if __name__ == "__main__":
     unittest.main()

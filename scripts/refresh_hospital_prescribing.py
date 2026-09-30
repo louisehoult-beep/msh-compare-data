@@ -55,7 +55,9 @@ All four are published in index.json and rendered by app/hospital-prescribing.js
 Output: data/hospital-prescribing/index.json plus one shard per BNF chapter, so the
 browser fetches ~1 MB rather than the lot.
 
-Usage:  python3 scripts/refresh_hospital_prescribing.py [--months N] [--out DIR]
+Usage:  python3 scripts/refresh_hospital_prescribing.py [--months N] [--out DIR] [--if-new]
+
+Scheduled monthly by .github/workflows/hospital-prescribing.yml (added 30/09/2026).
 """
 
 import argparse
@@ -169,8 +171,39 @@ def collapse(series13, names13, n):
     return series, names, split_codes(pmap)
 
 
-def build(months, outdir, fetch=fetch, resources=resources):
-    res = resources()
+def wanted_window(res, months):
+    """(periods, {period: url}) that a build from `res` would cover."""
+    available = dict(res)
+    periods = calendar_back(res[-1][0], months)
+    return periods, {p: available[p] for p in periods if p in available}
+
+
+def already_built(index, res, months):
+    """True when a rebuild from `res` could not change what index.json covers.
+
+    Used by --if-new (the scheduled run). Three things make a rebuild worth doing:
+      - NHSBSA has published a month newer than the last one built;
+      - a month carried as a null gap has since been published;
+      - a month in the window has been republished as a revision (...FINAL), so
+        the file it should be read from has changed.
+    The last two are why this does not just compare the latest month, as the GP
+    builder does: May 2025 arrived as 202505FINAL three months late and would have
+    stayed a gap. `sourceFiles` records which file each month was read from; an
+    index built before it existed falls back to periods and gaps only.
+    """
+    if not index or not res:
+        return False
+    periods, files = wanted_window(res, months)
+    if index.get("periods") != periods:
+        return False
+    if "sourceFiles" in index:
+        return index["sourceFiles"] == files
+    return sorted(index.get("missingPeriods", [])) == sorted(p for p in periods if p not in files)
+
+
+def build(months, outdir, fetch=fetch, resources=resources, res=None):
+    if res is None:
+        res = resources()
     if not res:
         sys.exit("no CSV resources found in package %s" % PACKAGE)
 
@@ -338,6 +371,9 @@ def build(months, outdir, fetch=fetch, resources=resources):
         "minBaselineItems": MIN_BASELINE_ITEMS,
         "periods": periods,
         "missingPeriods": missing,
+        # Which NHSBSA file each month was read from, so --if-new can tell when a
+        # month in the window has been republished as a revision.
+        "sourceFiles": {p: u for p, u in window},
         "splitProducts": split,
         "trusts": trusts,
         "substances": catalogue,
@@ -354,10 +390,25 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--months", type=int, default=MONTHS)
     ap.add_argument("--out", default=os.path.join("data", "hospital-prescribing"))
+    ap.add_argument("--if-new", action="store_true",
+                    help="exit without rebuilding when NHSBSA has published nothing "
+                         "(no new month, no filled gap, no revision) since the build "
+                         "already in OUT/index.json")
     a = ap.parse_args()
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     os.chdir(root)
-    idx = build(a.months, a.out)
+    res = resources()
+    if a.if_new:
+        try:
+            with open(os.path.join(a.out, "index.json")) as f:
+                have = json.load(f)
+        except Exception:
+            have = None
+        if already_built(have, res, a.months):
+            print("nothing new: NHSBSA latest is %s, already built from the same files. "
+                  "Nothing to do." % res[-1][0])
+            return
+    idx = build(a.months, a.out, res=res)
     print("\nOK  %d substances across %d trusts, %s to %s"
           % (len(idx["substances"]), len(idx["trusts"]),
              idx["periods"][0], idx["periods"][-1]))
