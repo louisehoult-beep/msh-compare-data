@@ -13,24 +13,24 @@
  "_meta": {
   "what": "eClass -> Hub category (`cat`) map, so the Supply Disruption Tracker can gate its alternatives on category equality instead of word overlap.",
   "why": "differentiator.json's own rule: comparison is locked to a single category. An NHS Supply Chain suspended line carries an eClass, not a `cat` — this file is the bridge.",
-  "generated": "27/09/2026",
+  "generated": "30/09/2026",
   "generatedBy": "scripts/build_eclass_map.py",
-  "rule": "A mapped eClass's `cat` is the category with majority support among its own NPC->cat observations (data/npc-eclass.json), weighted 2x for a strong join (>=2 shared significant words between the Hub product name and the NHS Supply Chain description) and 1x for a weak one (exactly 1 shared word); a 0-word join carries no vote. HIGH confidence needs >=3 distinct NPCs on strong joins AND >=65%% weighted support AND >=3 distinct NPCs total. MEDIUM needs >=1 strong NPC or >=3 weak NPCs AND >=60%% weighted support AND >=2 distinct NPCs AND >=3 total observations for the eClass. Everything else is UNMAPPED and carries no `cat` — root rule 14: publishing nothing is the correct output when the evidence is thin. This is a STATISTICAL aggregation over real, sourced observations, not a guess from general knowledge of medical devices.",
+  "rule": "A mapped eClass's `cat` is the category with majority support among its own NPC->cat observations (data/npc-eclass.json), weighted 2x for a strong join (>=2 shared significant words between the Hub product name and the NHS Supply Chain description) and 1x for a weak one (exactly 1 shared word); a 0-word join carries no vote. HIGH confidence needs >=3 distinct NPCs on strong joins AND >=65%% weighted support AND >=3 distinct NPCs total. MEDIUM needs >=1 strong NPC or >=3 weak NPCs AND >=60%% weighted support AND >=2 distinct NPCs AND >=3 total observations for the eClass. Only observations made in the same NHS Supply Chain itemClass as the eClass's suspended lines vote (30/09/2026: FUQ pooled bowel-irrigation kits with ureteral stents), and each entry's `itemclass` is the only itemClass it may categorise. Everything else is UNMAPPED and carries no `cat` — root rule 14: publishing nothing is the correct output when the evidence is thin. This is a STATISTICAL aggregation over real, sourced observations, not a guess from general knowledge of medical devices.",
   "source": "data/npc-eclass.json (NPC->eClass live lookups, from scripts/resolve_npc_eclass.py, joined to differentiator.json's own `cat` on the same NPC) aggregated per eClass code found in <cloud-pipeline>/sdt-suspensions.json.",
   "vocabularyAuthority": "data/compare-suppliers.json — every `cat` this file writes is checked against that vocabulary before being written; none outside it is ever emitted.",
   "counts": {
-   "eclassInSuspensions": 155,
-   "eclassWithAnyObservation": 107,
-   "eclassMappedHigh": 19,
-   "eclassMappedMedium": 21,
-   "eclassMappedTotal": 40,
+   "eclassInSuspensions": 148,
+   "eclassWithAnyObservation": 100,
+   "eclassMappedHigh": 16,
+   "eclassMappedMedium": 17,
+   "eclassMappedTotal": 33,
    "eclassUnmapped": 115,
-   "suspendedLinesTotal": 986,
-   "suspendedLinesCoveredHigh": 102,
-   "suspendedLinesCoveredMedium": 219,
-   "suspendedLinesCoveredTotal": 321,
-   "suspendedLinesUncovered": 665,
-   "suspendedLinesCoveredPct": 32.6
+   "suspendedLinesTotal": 964,
+   "suspendedLinesCoveredHigh": 58,
+   "suspendedLinesCoveredMedium": 203,
+   "suspendedLinesCoveredTotal": 261,
+   "suspendedLinesUncovered": 703,
+   "suspendedLinesCoveredPct": 27.1
   },
   "thresholds": {
    "high": {
@@ -113,7 +113,7 @@
    "cat": "wound:iv",
    "confidence": "medium",
    "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 3,
+   "suspendedLines": 2,
    "evidence": {
     "strongNpcs": 1,
     "weakNpcs": 1,
@@ -144,7 +144,7 @@
    "cat": "wound:adv",
    "confidence": "high",
    "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 3,
+   "suspendedLines": 2,
    "evidence": {
     "strongNpcs": 21,
     "weakNpcs": 0,
@@ -189,7 +189,7 @@
    "cat": "wound:adv",
    "confidence": "high",
    "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 1,
+   "suspendedLines": 2,
    "evidence": {
     "strongNpcs": 24,
     "weakNpcs": 9,
@@ -223,7 +223,7 @@
    "cat": "nutrition:dev",
    "confidence": "medium",
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 99,
+   "suspendedLines": 97,
    "evidence": {
     "strongNpcs": 0,
     "weakNpcs": 9,
@@ -237,7 +237,7 @@
    "cat": "nutrition:dev",
    "confidence": "medium",
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 5,
+   "suspendedLines": 3,
    "evidence": {
     "strongNpcs": 0,
     "weakNpcs": 21,
@@ -261,23 +261,6 @@
     "runnerUp": null
    }
   },
-  "FBV": {
-   "cat": "ortho:implant",
-   "confidence": "medium",
-   "itemclass": "22- Medical Technology",
-   "suspendedLines": 8,
-   "evidence": {
-    "strongNpcs": 1,
-    "weakNpcs": 3,
-    "distinctNpcs": 4,
-    "supportShare": 0.833,
-    "totalObservations": 5,
-    "runnerUp": {
-     "cat": "mis:instruments",
-     "support": 1
-    }
-   }
-  },
   "FJK": {
    "cat": "monitoring:sens",
    "confidence": "medium",
@@ -293,20 +276,6 @@
      "cat": "cardiology:defib",
      "support": 2
     }
-   }
-  },
-  "FMG": {
-   "cat": "nutrition:dev",
-   "confidence": "medium",
-   "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 1,
-   "evidence": {
-    "strongNpcs": 0,
-    "weakNpcs": 3,
-    "distinctNpcs": 3,
-    "supportShare": 1.0,
-    "totalObservations": 3,
-    "runnerUp": null
    }
   },
   "FMT": {
@@ -344,7 +313,7 @@
    "cat": "ortho:implant",
    "confidence": "high",
    "itemclass": "22- Medical Technology",
-   "suspendedLines": 4,
+   "suspendedLines": 3,
    "evidence": {
     "strongNpcs": 3,
     "weakNpcs": 10,
@@ -437,7 +406,7 @@
    "cat": "oncology:abl",
    "confidence": "medium",
    "itemclass": "22- Medical Technology",
-   "suspendedLines": 22,
+   "suspendedLines": 21,
    "evidence": {
     "strongNpcs": 2,
     "weakNpcs": 1,
@@ -445,23 +414,6 @@
     "supportShare": 1.0,
     "totalObservations": 3,
     "runnerUp": null
-   }
-  },
-  "FTP": {
-   "cat": "theatres:glove",
-   "confidence": "medium",
-   "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 2,
-   "evidence": {
-    "strongNpcs": 22,
-    "weakNpcs": 0,
-    "distinctNpcs": 22,
-    "supportShare": 0.611,
-    "totalObservations": 36,
-    "runnerUp": {
-     "cat": "infection:nitrile",
-     "support": 16
-    }
    }
   },
   "FTT": {
@@ -492,40 +444,6 @@
     "runnerUp": null
    }
   },
-  "FUQ": {
-   "cat": "continence:bowel",
-   "confidence": "high",
-   "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 3,
-   "evidence": {
-    "strongNpcs": 7,
-    "weakNpcs": 0,
-    "distinctNpcs": 7,
-    "supportShare": 0.778,
-    "totalObservations": 10,
-    "runnerUp": {
-     "cat": "continence:urinal",
-     "support": 2
-    }
-   }
-  },
-  "FVA": {
-   "cat": "monitoring:sens",
-   "confidence": "high",
-   "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 38,
-   "evidence": {
-    "strongNpcs": 3,
-    "weakNpcs": 0,
-    "distinctNpcs": 3,
-    "supportShare": 0.857,
-    "totalObservations": 4,
-    "runnerUp": {
-     "cat": "vascular:cvc",
-     "support": 1
-    }
-   }
-  },
   "FVM": {
    "cat": "vascular:pivc",
    "confidence": "high",
@@ -552,19 +470,20 @@
     "strongNpcs": 1,
     "weakNpcs": 7,
     "distinctNpcs": 8,
-    "supportShare": 0.6,
-    "totalObservations": 13,
+    "supportShare": 0.643,
+    "totalObservations": 12,
     "runnerUp": {
      "cat": "vascular:conn",
      "support": 3
-    }
+    },
+    "crossItemclassVotesExcluded": 1
    }
   },
   "FXK": {
    "cat": "theatres:theatre",
    "confidence": "medium",
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 13,
+   "suspendedLines": 11,
    "evidence": {
     "strongNpcs": 1,
     "weakNpcs": 4,
@@ -574,45 +493,11 @@
     "runnerUp": null
    }
   },
-  "FXS": {
-   "cat": "wound:deb",
-   "confidence": "high",
-   "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 1,
-   "evidence": {
-    "strongNpcs": 18,
-    "weakNpcs": 0,
-    "distinctNpcs": 18,
-    "supportShare": 0.692,
-    "totalObservations": 28,
-    "runnerUp": {
-     "cat": "theatres:theatre",
-     "support": 13
-    }
-   }
-  },
-  "GTB": {
-   "cat": "rehab:bath",
-   "confidence": "medium",
-   "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 1,
-   "evidence": {
-    "strongNpcs": 0,
-    "weakNpcs": 3,
-    "distinctNpcs": 3,
-    "supportShare": 0.75,
-    "totalObservations": 4,
-    "runnerUp": {
-     "cat": "handling:mattress",
-     "support": 1
-    }
-   }
-  },
   "ICB": {
    "cat": "dental:cons",
    "confidence": "medium",
    "itemclass": "24- Diagnostics, Equipment and Services",
-   "suspendedLines": 2,
+   "suspendedLines": 1,
    "evidence": {
     "strongNpcs": 2,
     "weakNpcs": 3,
@@ -626,7 +511,7 @@
    "cat": "dental:cons",
    "confidence": "high",
    "itemclass": "24- Diagnostics, Equipment and Services",
-   "suspendedLines": 5,
+   "suspendedLines": 4,
    "evidence": {
     "strongNpcs": 9,
     "weakNpcs": 4,
@@ -656,28 +541,26 @@
     }
    }
   },
-  "MKJ": {
-   "cat": "facilities:clean",
+  "KBD": {
+   "cat": "bloodcoll:tube",
    "confidence": "medium",
-   "itemclass": "26- Facilities and Office Solutions",
-   "suspendedLines": 1,
+   "itemclass": "21- Medical and Surgical Consumables",
+   "suspendedLines": 6,
    "evidence": {
-    "strongNpcs": 1,
-    "weakNpcs": 1,
-    "distinctNpcs": 2,
-    "supportShare": 0.75,
-    "totalObservations": 3,
-    "runnerUp": {
-     "cat": "ssd:cssd",
-     "support": 1
-    }
+    "strongNpcs": 2,
+    "weakNpcs": 5,
+    "distinctNpcs": 7,
+    "supportShare": 1.0,
+    "totalObservations": 7,
+    "runnerUp": null,
+    "crossItemclassVotesExcluded": 10
    }
   }
  },
  "unmapped": {
   "BWC": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 5,
+   "suspendedLines": 6,
    "strongNpcs": 0,
    "weakNpcs": 1,
    "distinctNpcs": 1,
@@ -701,6 +584,12 @@
   },
   "BWZ": {
    "itemclass": "21- Medical and Surgical Consumables",
+   "suspendedLines": 1,
+   "reason": "no eClass->cat observations",
+   "totalObservations": 0
+  },
+  "CJZ": {
+   "itemclass": "26- Facilities and Office Solutions",
    "suspendedLines": 1,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
@@ -756,12 +645,6 @@
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
    "candidateCat": "orthotics:hosiery"
   },
-  "EGT": {
-   "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 6,
-   "reason": "no eClass->cat observations",
-   "totalObservations": 0
-  },
   "EHC": {
    "itemclass": "23- Rehabilitation and Community",
    "suspendedLines": 1,
@@ -809,7 +692,7 @@
   },
   "EMI": {
    "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 1,
+   "suspendedLines": 2,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
@@ -826,6 +709,12 @@
    "candidateCat": "wound:adv"
   },
   "ENI": {
+   "itemclass": "23- Rehabilitation and Community",
+   "suspendedLines": 1,
+   "reason": "no eClass->cat observations",
+   "totalObservations": 0
+  },
+  "ENK": {
    "itemclass": "23- Rehabilitation and Community",
    "suspendedLines": 1,
    "reason": "no eClass->cat observations",
@@ -849,20 +738,8 @@
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
-  "ESC": {
-   "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 1,
-   "reason": "no eClass->cat observations",
-   "totalObservations": 0
-  },
   "EVF": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 1,
-   "reason": "no eClass->cat observations",
-   "totalObservations": 0
-  },
-  "EVG": {
-   "itemclass": "24- Diagnostics, Equipment and Services",
    "suspendedLines": 1,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
@@ -888,30 +765,22 @@
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
    "candidateCat": "monitoring:sens"
   },
-  "FAD": {
-   "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 1,
-   "reason": "no eClass->cat observations",
-   "totalObservations": 0
-  },
   "FAL": {
-   "itemclass": "21- Medical and Surgical Consumables",
+   "itemclass": "22- Medical Technology",
    "suspendedLines": 1,
    "strongNpcs": 0,
    "weakNpcs": 1,
    "distinctNpcs": 1,
-   "supportShare": 0.5,
-   "totalObservations": 2,
-   "runnerUp": {
-    "cat": "nutrition:dev",
-    "support": 1
-   },
+   "supportShare": 1.0,
+   "totalObservations": 1,
+   "runnerUp": null,
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "endoscopy:access"
+   "candidateCat": "endoscopy:access",
+   "crossItemclassVotesExcluded": 1
   },
   "FAM": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 51,
+   "suspendedLines": 49,
    "strongNpcs": 0,
    "weakNpcs": 1,
    "distinctNpcs": 1,
@@ -927,9 +796,21 @@
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
+  "FAT": {
+   "itemclass": "21- Medical and Surgical Consumables",
+   "suspendedLines": 1,
+   "strongNpcs": 1,
+   "weakNpcs": 0,
+   "distinctNpcs": 1,
+   "supportShare": 1.0,
+   "totalObservations": 1,
+   "runnerUp": null,
+   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
+   "candidateCat": "nutrition:dev"
+  },
   "FBE": {
    "itemclass": "22- Medical Technology",
-   "suspendedLines": 31,
+   "suspendedLines": 15,
    "strongNpcs": 2,
    "weakNpcs": 0,
    "distinctNpcs": 2,
@@ -943,19 +824,35 @@
    "candidateCat": "endourology:stent"
   },
   "FBU": {
-   "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 11,
+   "itemclass": "22- Medical Technology",
+   "suspendedLines": 10,
    "strongNpcs": 1,
    "weakNpcs": 0,
    "distinctNpcs": 1,
-   "supportShare": 0.167,
-   "totalObservations": 7,
+   "supportShare": 0.333,
+   "totalObservations": 3,
    "runnerUp": {
     "cat": "oncology:abl",
     "support": 2
    },
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "endoscopy:uro"
+   "candidateCat": "endoscopy:uro",
+   "crossItemclassVotesExcluded": 4
+  },
+  "FBV": {
+   "itemclass": "22- Medical Technology",
+   "suspendedLines": 8,
+   "strongNpcs": 1,
+   "weakNpcs": 3,
+   "distinctNpcs": 4,
+   "supportShare": 0.833,
+   "totalObservations": 5,
+   "runnerUp": {
+    "cat": "mis:instruments",
+    "support": 1
+   },
+   "reason": "no suspended line under this code is the same kind of product as the evidence (no shared head noun) — see shares_head_noun()",
+   "candidateCat": "ortho:implant"
   },
   "FBX": {
    "itemclass": "22- Medical Technology",
@@ -970,38 +867,40 @@
    "candidateCat": "ortho:equip"
   },
   "FCB": {
-   "itemclass": "22- Medical Technology",
-   "suspendedLines": 49,
-   "strongNpcs": 1,
-   "weakNpcs": 0,
+   "itemclass": "21- Medical and Surgical Consumables",
+   "suspendedLines": 26,
+   "strongNpcs": 0,
+   "weakNpcs": 1,
    "distinctNpcs": 1,
-   "supportShare": 0.333,
-   "totalObservations": 5,
+   "supportShare": 0.5,
+   "totalObservations": 2,
    "runnerUp": {
-    "cat": "theatres:drain",
+    "cat": "vascular:cvc",
     "support": 1
    },
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "cardiology:equip"
+   "candidateCat": "theatres:drain",
+   "crossItemclassVotesExcluded": 3
   },
   "FCC": {
    "itemclass": "22- Medical Technology",
-   "suspendedLines": 55,
+   "suspendedLines": 49,
    "strongNpcs": 2,
    "weakNpcs": 0,
    "distinctNpcs": 2,
-   "supportShare": 0.444,
-   "totalObservations": 7,
+   "supportShare": 0.667,
+   "totalObservations": 4,
    "runnerUp": {
-    "cat": "mis:energy",
-    "support": 2
+    "cat": "endoscopy:access",
+    "support": 1
    },
-   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
+   "crossItemclassVotesExcluded": 3,
+   "reason": "no suspended line under this code is the same kind of product as the evidence (no shared head noun) — see shares_head_noun()",
    "candidateCat": "vascsurg:access"
   },
   "FCN": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 1,
+   "suspendedLines": 3,
    "strongNpcs": 1,
    "weakNpcs": 0,
    "distinctNpcs": 1,
@@ -1028,7 +927,7 @@
   },
   "FDA": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 4,
+   "suspendedLines": 5,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
@@ -1040,7 +939,7 @@
   },
   "FDK": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 3,
+   "suspendedLines": 4,
    "strongNpcs": 0,
    "weakNpcs": 1,
    "distinctNpcs": 1,
@@ -1070,13 +969,13 @@
   },
   "FEC": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 7,
+   "suspendedLines": 5,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
   "FED": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 13,
+   "suspendedLines": 14,
    "strongNpcs": 0,
    "weakNpcs": 1,
    "distinctNpcs": 1,
@@ -1091,18 +990,6 @@
    "suspendedLines": 6,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
-  },
-  "FET": {
-   "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 1,
-   "strongNpcs": 1,
-   "weakNpcs": 1,
-   "distinctNpcs": 2,
-   "supportShare": 1.0,
-   "totalObservations": 2,
-   "runnerUp": null,
-   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "theatres:drain"
   },
   "FFH": {
    "itemclass": "21- Medical and Surgical Consumables",
@@ -1133,7 +1020,7 @@
   },
   "FFR": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 1,
+   "suspendedLines": 2,
    "strongNpcs": 0,
    "weakNpcs": 1,
    "distinctNpcs": 1,
@@ -1145,7 +1032,7 @@
   },
   "FJB": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 1,
+   "suspendedLines": 3,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
@@ -1280,7 +1167,7 @@
   },
   "FNS": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 11,
+   "suspendedLines": 9,
    "strongNpcs": 1,
    "weakNpcs": 0,
    "distinctNpcs": 1,
@@ -1327,19 +1214,17 @@
    "candidateCat": "respiratory:resp"
   },
   "FPH": {
-   "itemclass": "21- Medical and Surgical Consumables",
+   "itemclass": "23- Rehabilitation and Community",
    "suspendedLines": 2,
    "strongNpcs": 0,
    "weakNpcs": 1,
    "distinctNpcs": 1,
-   "supportShare": 0.5,
-   "totalObservations": 2,
-   "runnerUp": {
-    "cat": "womens:gyn",
-    "support": 1
-   },
+   "supportShare": 1.0,
+   "totalObservations": 1,
+   "runnerUp": null,
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "neonatal:feed"
+   "candidateCat": "neonatal:feed",
+   "crossItemclassVotesExcluded": 1
   },
   "FQD": {
    "itemclass": "22- Medical Technology",
@@ -1484,7 +1369,7 @@
   },
   "FSH": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 5,
+   "suspendedLines": 4,
    "strongNpcs": 4,
    "weakNpcs": 1,
    "distinctNpcs": 5,
@@ -1530,9 +1415,32 @@
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
+  "FUQ": {
+   "itemclass": "22- Medical Technology",
+   "suspendedLines": 3,
+   "strongNpcs": 0,
+   "weakNpcs": 1,
+   "distinctNpcs": 1,
+   "supportShare": 0.5,
+   "totalObservations": 2,
+   "runnerUp": {
+    "cat": "endourology:stent",
+    "support": 1
+   },
+   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
+   "candidateCat": "endoscopy:uro",
+   "crossItemclassVotesExcluded": 8
+  },
+  "FVA": {
+   "itemclass": "22- Medical Technology",
+   "suspendedLines": 38,
+   "reason": "no eClass->cat observations",
+   "totalObservations": 0,
+   "crossItemclassVotesExcluded": 4
+  },
   "FVB": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 3,
+   "suspendedLines": 4,
    "strongNpcs": 17,
    "weakNpcs": 8,
    "distinctNpcs": 25,
@@ -1568,7 +1476,7 @@
   },
   "FVN": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 2,
+   "suspendedLines": 1,
    "strongNpcs": 6,
    "weakNpcs": 3,
    "distinctNpcs": 9,
@@ -1613,24 +1521,9 @@
   },
   "FWG": {
    "itemclass": "24- Diagnostics, Equipment and Services",
-   "suspendedLines": 2,
+   "suspendedLines": 1,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
-  },
-  "FWI": {
-   "itemclass": "24- Diagnostics, Equipment and Services",
-   "suspendedLines": 1,
-   "strongNpcs": 0,
-   "weakNpcs": 1,
-   "distinctNpcs": 1,
-   "supportShare": 0.5,
-   "totalObservations": 2,
-   "runnerUp": {
-    "cat": "renal:pd",
-    "support": 1
-   },
-   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "renal:hd"
   },
   "FXD": {
    "itemclass": "22- Medical Technology",
@@ -1738,19 +1631,11 @@
    "candidateCat": "orthotics:brace"
   },
   "GPC": {
-   "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 3,
-   "strongNpcs": 32,
-   "weakNpcs": 0,
-   "distinctNpcs": 32,
-   "supportShare": 0.582,
-   "totalObservations": 62,
-   "runnerUp": {
-    "cat": "ostomy:ileo",
-    "support": 16
-   },
-   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "ostomy:uro"
+   "itemclass": "21- Medical and Surgical Consumables",
+   "suspendedLines": 2,
+   "reason": "no eClass->cat observations",
+   "totalObservations": 0,
+   "crossItemclassVotesExcluded": 62
   },
   "HAG": {
    "itemclass": "24- Diagnostics, Equipment and Services",
@@ -1763,6 +1648,18 @@
    "runnerUp": null,
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
    "candidateCat": "pathology:histo"
+  },
+  "HDV": {
+   "itemclass": "26- Facilities and Office Solutions",
+   "suspendedLines": 1,
+   "strongNpcs": 0,
+   "weakNpcs": 1,
+   "distinctNpcs": 1,
+   "supportShare": 1.0,
+   "totalObservations": 1,
+   "runnerUp": null,
+   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
+   "candidateCat": "facilities:clean"
   },
   "IVA": {
    "itemclass": "22- Medical Technology",
@@ -1779,47 +1676,18 @@
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
    "candidateCat": "ophthalmology:glauc"
   },
-  "KBC": {
-   "itemclass": "24- Diagnostics, Equipment and Services",
+  "KCA": {
+   "itemclass": "21- Medical and Surgical Consumables",
    "suspendedLines": 1,
-   "strongNpcs": 1,
+   "strongNpcs": 0,
    "weakNpcs": 1,
-   "distinctNpcs": 2,
+   "distinctNpcs": 1,
    "supportShare": 1.0,
-   "totalObservations": 2,
+   "totalObservations": 1,
    "runnerUp": null,
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "pathology:consum"
-  },
-  "KBD": {
-   "itemclass": "24- Diagnostics, Equipment and Services",
-   "suspendedLines": 8,
-   "strongNpcs": 2,
-   "weakNpcs": 6,
-   "distinctNpcs": 8,
-   "supportShare": 0.455,
-   "totalObservations": 17,
-   "runnerUp": {
-    "cat": "pathology:consum",
-    "support": 10
-   },
-   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "bloodcoll:tube"
-  },
-  "KCA": {
-   "itemclass": "24- Diagnostics, Equipment and Services",
-   "suspendedLines": 2,
-   "strongNpcs": 2,
-   "weakNpcs": 9,
-   "distinctNpcs": 11,
-   "supportShare": 0.565,
-   "totalObservations": 18,
-   "runnerUp": {
-    "cat": "diabetes:strip",
-    "support": 5
-   },
-   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "pathology:poct"
+   "candidateCat": "nutrition:dev",
+   "crossItemclassVotesExcluded": 17
   },
   "KDU": {
    "itemclass": "24- Diagnostics, Equipment and Services",
@@ -1827,9 +1695,24 @@
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
+  "MKJ": {
+   "itemclass": "26- Facilities and Office Solutions",
+   "suspendedLines": 1,
+   "strongNpcs": 1,
+   "weakNpcs": 1,
+   "distinctNpcs": 2,
+   "supportShare": 0.75,
+   "totalObservations": 3,
+   "runnerUp": {
+    "cat": "ssd:cssd",
+    "support": 1
+   },
+   "reason": "no suspended line under this code is the same kind of product as the evidence (no shared head noun) — see shares_head_noun()",
+   "candidateCat": "facilities:clean"
+  },
   "VEB": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 11,
+   "suspendedLines": 12,
    "strongNpcs": 1,
    "weakNpcs": 0,
    "distinctNpcs": 1,
@@ -1895,7 +1778,8 @@
     "Theatre Cap Bouffant Green Single use"
    ],
    "reasoning": "All five suspended lines are disposable theatre caps (bouffant/tie-back); confirmed by an npc observation of the same eClass mapped to theatres:theatre.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "BWH": {
    "cat": "theatres:theatre",
@@ -1923,7 +1807,8 @@
     "Surgical gown Sterile Zonal Reinforced Large Extra Long Arthroscopy"
    ],
    "reasoning": "All 16 lines are isolation/surgical gowns (sterile and non-sterile); grouped with theatre apparel (caps/gowns) as theatres:theatre, consistent with BWC.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "BWZ": {
    "cat": "theatres:theatre",
@@ -1935,7 +1820,8 @@
     "Drape General Adhesive DRAPE ESSENTIAL SHEET W/ADHESIVE 196X150CM"
    ],
    "reasoning": "Single line is a general adhesive surgical drape, a core theatre consumable.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "DUA": {
    "cat": "renal:pd",
@@ -1951,7 +1837,8 @@
     "Fluids CAPD 19 2L LC2"
    ],
    "reasoning": "All nine lines are peritoneal dialysis fluids (CAPD/Balance fluid bags); npc observation for this eClass confirms renal:pd.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "24- Diagnostics, Equipment and Services"
   },
   "EAZ": {
    "cat": "ortho:trauma",
@@ -1964,7 +1851,8 @@
     "Undercast Padding Natural- Non-Sterile- 20cm x 2.75m"
    ],
    "reasoning": "Undercast padding used beneath plaster casts for fracture management, same clinical use as EAF (already mapped ortho:trauma).",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "23- Rehabilitation and Community"
   },
   "ECA": {
    "cat": "wound:comp",
@@ -1978,7 +1866,8 @@
     "Bandage compression 4 layer kit component - Type 2 Light support (Layer 2) 10cm x 4.5m latex free"
    ],
    "reasoning": "All three lines are compression bandages (type 2 light support, 4-layer kit component); npc observation confirms wound:comp.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "23- Rehabilitation and Community"
   },
   "EGB": {
    "cat": "vascular:vte",
@@ -1994,7 +1883,8 @@
     "Anti-embolism stocking Below knee Regular Large Open toe E-"
    ],
    "reasoning": "All seven suspended lines are 'Anti-embolism stocking' (TED hose) for VTE prophylaxis, not general compression hosiery; vascular:vte is the clinically precise fit even though the eClass's broader npc history also carries some general orthotics:hosiery products.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "23- Rehabilitation and Community"
   },
   "EGJ": {
    "cat": "ortho:trauma",
@@ -2020,7 +1910,8 @@
     "Tape medical adhesive plastic impermeable 7.5cm x 5m Transparant Latex free"
    ],
    "reasoning": "Medical adhesive fixation tape (plastic impermeable), same product type as EHO (mapped wound:fa on direct observation).",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "23- Rehabilitation and Community"
   },
   "EHO": {
    "cat": "wound:fa",
@@ -2044,7 +1935,8 @@
     "Wound Closure Strip 6mm x 75mm 6 per pouch"
    ],
    "reasoning": "Wound closure strips (Steri-strip type) are adhesive wound-closure/fixation products, same family as EHO/EHC.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "EMA": {
    "cat": "wound:adv",
@@ -2071,7 +1963,8 @@
     "Temporary Footwear Post-op post-trauma Shoe Small Universal Side Mens UK Shoe Sizes 3 to 4 Womens UK Shoe Sizes 2.5 to 3.5"
    ],
    "reasoning": "Temporary post-op/post-trauma footwear (surgical shoes) used in orthopaedic trauma/fracture recovery, all four sizes of one Procare product line.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "23- Rehabilitation and Community"
   },
   "ESB": {
    "cat": "ortho:trauma",
@@ -2121,7 +2014,8 @@
     "Dressing sheet water repellent sterile 50 x 50cm crepe sheet single wrap in peel pouch"
    ],
    "reasoning": "Sterile dressing towels/sheets used to build up the sterile field in theatre.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FAL": {
    "cat": "endoscopy:access",
@@ -2133,7 +2027,8 @@
     "Scope Accessories  - Accessories POLYPROPYLENE SUTURE"
    ],
    "reasoning": "Single suspended line (polypropylene suture scope accessory) is an exact description match to an npc observation of this same eClass already tagged endoscopy:access.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "22- Medical Technology"
   },
   "FAM": {
    "cat": "nutrition:dev",
@@ -2149,7 +2044,8 @@
     "Feeding Tube Gastrojejunal 18fg low profile 4.0cm stoma length 45cm jejunal length ENFit"
    ],
    "reasoning": "All 51 suspended lines are MIC-KEY gastrojejunal feeding tubes — a large, completely consistent enteral feeding device family.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FAR": {
    "cat": "nutrition:dev",
@@ -2161,7 +2057,8 @@
     "Feeding Tube Gastrostomy Balloon Retained 12fg ENFit connector including balloon syringe and lubricant"
    ],
    "reasoning": "Single line is a balloon-retained gastrostomy feeding tube, same family as FAM/FAT.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FAT": {
    "cat": "nutrition:dev",
@@ -2173,7 +2070,8 @@
     "Feeding Tube Nasojejunal 12fg 152cm polyurethane radiopaque regular centimeter markings unweighted 300cm 0.035 teflon coated flexible guidewire in dis"
    ],
    "reasoning": "Nasojejunal feeding tube; npc observation for this exact eClass confirms nutrition:dev with the identical product description.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FBH": {
    "cat": "cardiology:ecg",
@@ -2201,7 +2099,8 @@
     "SPT Burr legend 7cm 3mm ball diamond"
    ],
    "reasoning": "All 47 lines are orthopaedic power-tool consumables (saw blades, burrs, drills) used with bone-cutting equipment — a large, tightly consistent set.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "22- Medical Technology"
   },
   "FCN": {
    "cat": "theatres:electro",
@@ -2213,7 +2112,8 @@
     "Standard blade electrode disposable Insulated EDGE Coated 2.75inch"
    ],
    "reasoning": "Disposable insulated electrosurgical blade electrode; npc observation for this eClass confirms theatres:electro with a comparable electrosurgical product.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FDJ": {
    "cat": "anaesthesia:vent",
@@ -2238,7 +2138,8 @@
     "Facemask adult high-concentration non-rebreather 3-in-1 with safety vent 2.1m (7) o2 tubing NON RETURNABLE"
    ],
    "reasoning": "Adult non-rebreather oxygen mask with oxygen tubing — an oxygen therapy consumable.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FDU": {
    "cat": "respiratory:diag",
@@ -2250,7 +2151,8 @@
     "Spirometer volume incentive 2500ml without one-way valve 12/cs12/cs NON RETURNABLE"
    ],
    "reasoning": "Incentive spirometer (volume type) is a respiratory diagnostic/measurement device.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FEC": {
    "cat": "ent:intub",
@@ -2266,7 +2168,8 @@
     "Endotracheal Tube Standard uncuffed with murphy eye Oral/nasal radio opaque blue line sterile siliconised PVC ETT 3mm id"
    ],
    "reasoning": "All eight lines are endotracheal tubes (cuffed/uncuffed, standard/reinforced) — a consistent intubation-device set.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FED": {
    "cat": "ent:stoma",
@@ -2282,7 +2185,8 @@
     "Tracheostomy Tube with Adjustable Flange For difficult airways uncuffed id 8.0mm"
    ],
    "reasoning": "All 12 lines are tracheostomy tubes and percutaneous tracheostomy dilation kits; npc observation confirms ent:stoma.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FEE": {
    "cat": "ent:stoma",
@@ -2298,7 +2202,8 @@
     "Inner Cannula for Tracheostomy Tube Replacement id 7.0mm"
    ],
    "reasoning": "All seven lines are tracheostomy accessories (HME filter, percutaneous sets, inner cannulae) — same stoma-care family as FED.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FFH": {
    "cat": "anaesthesia:vent",
@@ -2310,7 +2215,8 @@
     "Breathing Circuit Manual Ventilation Tube for ABS with Bag Arm 0.9m Limb Includes 2 Liter Latex Free Manual Bag NON RETURABLE"
    ],
    "reasoning": "Manual ventilation breathing-circuit tube with bag arm; npc observation for a comparable Hamilton ventilator breathing circuit supports anaesthesia:vent.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FFR": {
    "cat": "respiratory:resp",
@@ -2323,7 +2229,8 @@
     "Heat moisture exchange Electrostatic filter with luer lock port and fixed elbow - adult 22m/15f connection greater than 9999% efficiency"
    ],
    "reasoning": "Both lines are heat-moisture-exchanger (HME) breathing filters; npc observation for this eClass is an exact match to respiratory:resp.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FJF": {
    "cat": "monitoring:gen",
@@ -2335,7 +2242,8 @@
     "Sphygmomanometer Digital ProBP blood pressure device NON RETURNABLE"
    ],
    "reasoning": "Digital sphygmomanometer (blood pressure measurement device) — a general patient-monitoring device, consistent with FJH (blood pressure cuffs, monitoring:gen).",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FJH": {
    "cat": "monitoring:gen",
@@ -2351,7 +2259,8 @@
     "Blood pressure cuff multi patient use Long adult one tube navy bayonet fitting 23-33cm with connector that conforms to ISO 803695"
    ],
    "reasoning": "All 39 lines are blood pressure cuffs across brands/sizes; npc observations for this eClass are strongest for monitoring:gen.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FJQ": {
    "cat": "monitoring:gen",
@@ -2363,7 +2272,8 @@
     "Thermometer Phase Change Single Use Clinical for Oral and Axillary only"
    ],
    "reasoning": "Single-use phase-change clinical thermometer — a general patient-monitoring consumable.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FKG": {
    "cat": "nutrition:dev",
@@ -2376,7 +2286,8 @@
     "Enteral Feeding Device Accessory 20fg dilator for use with 16fg MIC transgastric jejunal feeding tube and MIC key transgastric jejunal feeding tube (I"
    ],
    "reasoning": "Enteral feeding device dilator accessories for MIC/MIC-KEY tubes — same feeding-device family as FAM/FAR.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FKK": {
    "cat": "ent:intub",
@@ -2392,7 +2303,8 @@
     "Laryngeal Mask Airway air-Q SP3G Disposable Silicone w Gastric Access size 5"
    ],
    "reasoning": "All seven lines are airway-management devices — laryngeal mask airways and laryngoscope blade/handle sets — which are intubation devices (ent:intub), not endoscopy instruments despite the auto-candidate; observations for this eClass are split between endoscopy:endo and ent:intub, and the product descriptions clearly favour intubation.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FKL": {
    "cat": "ent:intub",
@@ -2407,7 +2319,8 @@
     "Laryngoscope Blade Single Use Fibre Optic Mac 4 Metal Max 90 Lever-Tip NON RETURNABLE"
    ],
    "reasoning": "All four lines are single-use laryngoscope blades/handles — consistent intubation devices, same family as FKK.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FMG": {
    "cat": "nutrition:dev",
@@ -2432,7 +2345,8 @@
     "Enteral Feeding Syringe 2.5ml purple - low dose - single use - winged - individually wrapped sterile - centered - ENFit connection"
    ],
    "reasoning": "Enteral feeding syringe; npc observations for this eClass split between nutrition:dev and nutrition:sets, both enteral-feeding-adjacent — following the established nutrition:dev pattern used for FAE/FAN/FAS.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FMK": {
    "cat": "vascular:gen",
@@ -2447,7 +2361,8 @@
     "Hypodermic Syringe 10ml Luer Lock 3 Piece Concentric Clear Sterile"
    ],
    "reasoning": "All four lines are general hypodermic syringes (3/5/10ml Luer lock); npc observations for this eClass confirm vascular:gen, matching the established pattern for general syringes/needles.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FNK": {
    "cat": "vascular:gen",
@@ -2459,7 +2374,8 @@
     "Safety Needle Vascular Access 22G x 15mm Huber Type with 25cm by 0.9mm Bore Polyurethane Extension and Clamp for Sitimplant"
    ],
    "reasoning": "Huber-type safety needle for implanted port (Sitimplant) vascular access; same general vascular-access-device family as FNL (mapped vascular:gen).",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FNL": {
    "cat": "vascular:gen",
@@ -2471,7 +2387,8 @@
     "Safety Hypodermic Needle 22G Black x 38mm (1.5 inch)"
    ],
    "reasoning": "Safety hypodermic needle; npc observation for this eClass confirms vascular:gen with a directly comparable needle product.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FNS": {
    "cat": "anaesthesia:reg",
@@ -2487,7 +2404,8 @@
     "NRFit Spinal Needle 25G x 119mm (4.685 inch) Quincke tip Sterile"
    ],
    "reasoning": "All ten lines are spinal needles (NRFit, various gauges) for regional/spinal anaesthesia; npc observation confirms anaesthesia:reg.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FNY": {
    "cat": "vascular:conn",
@@ -2502,7 +2420,8 @@
     "Needlefree extension set Y connector 3 way 2 x SmartSite valves F/luer 3 x S/C 0.2micron (+ve) filter L/22cm P/0.9ml Amber"
    ],
    "reasoning": "All four lines are needle-free IV extension sets/connectors/valves; npc observations for this eClass are strongest for vascular:conn.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FPH": {
    "cat": "womens:gyn",
@@ -2518,7 +2437,8 @@
     "Vaginal Speculum Cusco single use plastic nut and runner unbreakable sterile medium long blade 140mm x 35mm"
    ],
    "reasoning": "All seven lines are obstetric/gynaecological instruments (vacuum-assisted delivery device, amniocentesis needle, vaginal specula); npc observation confirms womens:gyn as the umbrella fit.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "23- Rehabilitation and Community"
   },
   "FPK": {
    "cat": "theatres:drain",
@@ -2544,7 +2464,8 @@
     "Other Accessories 2211EQF acc intrdcr valv 5pac fr8"
    ],
    "reasoning": "Boston Scientific cardiac-device accessories (introducer valve, mineral oil for lead insertion); npc observation for this eClass supports cardiology:equip.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "22- Medical Technology"
   },
   "FQE": {
    "cat": "cardiology:equip",
@@ -2556,7 +2477,8 @@
     "Catheter 1531EQF attain command"
    ],
    "reasoning": "Attain Command catheter is a Medtronic cardiac resynchronisation therapy lead-delivery catheter — a cardiac implant accessory.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "22- Medical Technology"
   },
   "FQH": {
    "cat": "audiology:acc",
@@ -2570,7 +2492,8 @@
     "Audio Implants Accessories and Consumables M T-Mic medium"
    ],
    "reasoning": "All three lines are T-Mic microphone accessories/consumables for a cochlear implant sound processor — external accessories rather than the implant itself, so audiology:acc fits better than the auto-candidate audiology:impl; observations for this eClass are evenly split between the two.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "22- Medical Technology"
   },
   "FRN": {
    "cat": "vascsurg:occl",
@@ -2583,7 +2506,8 @@
     "Coil - Non-Detachable (IR) 2mm/5mm (bx/5)"
    ],
    "reasoning": "Detachable and non-detachable embolisation coils (interventional radiology) are vessel-occlusion devices.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "22- Medical Technology"
   },
   "FRS": {
    "cat": "gastro:stent",
@@ -2599,7 +2523,8 @@
     "Plastic Stents - Biliary preloaded 7fr naviflex panc rx"
    ],
    "reasoning": "All five lines are biliary/pancreatic EUS and plastic stents; npc observation confirms gastro:stent.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "22- Medical Technology"
   },
   "FRZ": {
    "cat": "cardiology:equip",
@@ -2612,7 +2537,8 @@
     "Other Accessories Mineral Oil"
    ],
    "reasoning": "Pacemaker lead (Fineline II) plus a generic accessory for the same device family; npc observation confirms cardiology:equip.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "22- Medical Technology"
   },
   "FSG": {
    "cat": "mis:trocar",
@@ -2624,7 +2550,8 @@
     "Trocar Endo close"
    ],
    "reasoning": "Single line is an 'Endo Close' trocar-site fascial closure device — the vocabulary's explicit mis:trocar subtype is a closer fit than the auto-candidate mis:clips.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FSH": {
    "cat": "mis:energy",
@@ -2639,7 +2566,8 @@
     "Hook Endo Hiq+ a6282 hf electrode hook"
    ],
    "reasoning": "All four suspended lines are energy-device handpiece/electrode accessories (Thunderbeat ultrasonic/bipolar energy platform) — the actual product descriptions are unambiguously energy devices, not staplers, even though this eClass's broader npc history leans toward mis:staple.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FTC": {
    "cat": "infection:vinyl",
@@ -2655,7 +2583,8 @@
     "Examination Gloves Vinyl Pigmentised Powder Free Non Sterile Singles Medium"
    ],
    "reasoning": "All five lines are vinyl examination gloves (Unicare); npc observation confirms infection:vinyl.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FVC": {
    "cat": "womens:pelv",
@@ -2667,7 +2596,8 @@
     "Pessary Ring Flexible Vinyl 71mm Long term See IFU"
    ],
    "reasoning": "Vaginal pessary ring for pelvic organ prolapse — the vocabulary's pelvic-floor subtype (womens:pelv) is more precise than general gynae.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "23- Rehabilitation and Community"
   },
   "FVD": {
    "cat": "vascular:cvc",
@@ -2695,7 +2625,8 @@
     "Peripheral Intravenous Cannula Non-winged Pink 20G x 32mm FEP"
    ],
    "reasoning": "All seven lines are peripheral IV cannulae or cannulation packs; npc observations for this eClass are strongest for vascular:pivc.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FWA": {
    "cat": "renal:hd",
@@ -2708,7 +2639,8 @@
     "High Flux Dialysers Heparin grafted membrane 1.6m2 surface area"
    ],
    "reasoning": "Both lines are high-flux haemodialysers; npc observation confirms renal:hd.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "24- Diagnostics, Equipment and Services"
   },
   "FWC": {
    "cat": "renal:hd",
@@ -2720,7 +2652,8 @@
     "Acid Concentrates RENALYTE A231 6LSTACK"
    ],
    "reasoning": "Fresenius Renalyte acid concentrate — a haemodialysis consumable, same family as FWG.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "24- Diagnostics, Equipment and Services"
   },
   "FWF": {
    "cat": "renal:water",
@@ -2732,7 +2665,8 @@
     "Associated Products SALT TABLETS 10KG BAG AXAL"
    ],
    "reasoning": "Salt tablets used to regenerate the water-softener in a dialysis water-treatment system — this is a water-treatment consumable (renal:water), not a dialyser/HD consumable, despite the auto-candidate renal:hd.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "24- Diagnostics, Equipment and Services"
   },
   "FWG": {
    "cat": "renal:hd",
@@ -2745,7 +2679,8 @@
     "Acid Concentrates A453 renalyte acid concentrate x 6ltr 35 dilution"
    ],
    "reasoning": "Both lines are Fresenius Renalyte acid concentrate for haemodialysis, same as FWC.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "24- Diagnostics, Equipment and Services"
   },
   "FXK": {
    "cat": "theatres:theatre",
@@ -2761,7 +2696,8 @@
     "Suture non absorbable W8840 90cm prolene non-absorbable monofilament blue 4/0 20mm 1/2 circle cc double needle"
    ],
    "reasoning": "All 18 lines are surgical sutures (absorbable and non-absorbable, multiple brands); npc observation confirms theatres:theatre as the Hub's general theatre-consumable catch-all for sutures.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FXT": {
    "cat": "mis:staple",
@@ -2774,7 +2710,8 @@
     "Stapler Linear Reload Linear Cutter 55mm for NTLC55"
    ],
    "reasoning": "Both lines are surgical staplers (skin stapler and a laparoscopic linear-cutter reload) — mis:staple is the literal fit over the auto-candidate mis:clips.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "FXU": {
    "cat": "respiratory:diag",
@@ -2786,7 +2723,8 @@
     "Peak Flow Meter mouthpiece Adult single patient expiratory 1 way valve cardboard/plastic mouthpiece BOX OF 200 NOT INDIVIDUALLY WRAPPED non returnable"
    ],
    "reasoning": "Peak flow meter mouthpiece is a respiratory diagnostic accessory, not an aerosol-therapy item despite the auto-candidate respiratory:aero.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "GFA": {
    "cat": "audiology:acc",
@@ -2802,7 +2740,8 @@
     "Hearing Aid Accessory Plug-in cable 312 0.5m/R"
    ],
    "reasoning": "All 6 suspended lines are Phonak hearing-aid spare/accessory parts (battery doors, plug-in cables, hooks) — this is accessories & connectivity, not the diagnostic-equipment candidate the auto-mapper suggested from only 2 thin observations.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "22- Medical Technology"
   },
   "GFB": {
    "cat": "audiology:acc",
@@ -2815,7 +2754,8 @@
     "Hearing Aid Accessories Tamperproof battery door velvet black"
    ],
    "reasoning": "Both suspended lines are Phonak hearing-aid battery doors — spare accessory parts, matching the npc-eclass observations for this code (mostly audiology:acc entries: hooks, wireless CROS, ear tips).",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "22- Medical Technology"
   },
   "GFC": {
    "cat": "audiology:hear",
@@ -2830,7 +2770,8 @@
     "Hearing Aid Paediatric Sky M70-PR Blue Ocean"
    ],
    "reasoning": "All 8 lines are complete paediatric Phonak Sky hearing aids (worn BTE devices in different power/colour variants), not accessories — this is the worn-hearing-aid category, distinct from GFA/GFB's accessory parts under the same itemclass.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "22- Medical Technology"
   },
   "GFE": {
    "cat": "audiology:diag",
@@ -2842,7 +2783,8 @@
     "Auditory Brain Response Electrodes Ambu EL"
    ],
    "reasoning": "Single-line evidence: an electrode consumable used specifically for auditory brainstem response (ABR) testing, a diagnostic audiology procedure — closest fit is diagnostic equipment/consumables, no diabetes/general-electrode category exists in the vocabulary that fits better.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "22- Medical Technology"
   },
   "GLB": {
    "cat": "orthotics:spine",
@@ -2869,7 +2811,8 @@
     "Thumb Spica Procool Wrist/Thumb Support - XLarge Left"
    ],
    "reasoning": "All 4 suspended lines are wrist/thumb splints (thumb spica), which is upper-limb bracing (orthotics:upper) — overriding the auto-mapper's weak-evidence candidate of orthotics:brace (knee/calf/general limb), which does not fit a wrist/thumb product.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "23- Rehabilitation and Community"
   },
   "IVA": {
    "cat": "ophthalmology:cons",
@@ -2881,7 +2824,8 @@
     "Knife - keratome 3.2MM Sb S"
    ],
    "reasoning": "Single-line evidence, but the supplier is Alcon Eye Care and a keratome is a disposable blade used specifically to create corneal incisions in cataract/ophthalmic surgery — a surgical consumable specific to ophthalmology, not a general surgical knife.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "22- Medical Technology"
   },
   "KBC": {
    "cat": "pathology:consum",
@@ -2909,7 +2853,8 @@
     "Venous Tube Serum Vacuette 5ml Serum Gel 13 x 100mm Gold Gold Screw Cap"
    ],
    "reasoning": "6 of the 7 suspended lines are venous blood collection tubes (Vacuette/S-Monovette), a clean fit for bloodcoll:tube; the one outlier (a Copan transport swab) is a minority case not reflected in the category assignment.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "KCA": {
    "cat": "diabetes:strip",
@@ -2921,7 +2866,8 @@
     "Blood Glucose Test Strips For use with Nexus and Go Meter"
    ],
    "reasoning": "The single suspended line under this code is explicitly a blood glucose test strip (GlucoRx) — a direct match to diabetes:strip, even though the eClass code's wider npc observations span broader POCT/pathology use.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "24- Diagnostics, Equipment and Services"
   },
   "KFF": {
    "cat": "bloodcoll:set",
@@ -2961,7 +2907,8 @@
     "Banded Bag / Bonnet Shaped banded bag 91 x 76cm"
    ],
    "reasoning": "All 14 suspended lines are theatre drapes, incise films, probe covers, light-handle covers and fluid collection pouches — general theatre consumables (theatres:theatre); the auto-mapper's candidate (womens:mat) rested on a single outlier observation (one maternity drape) that does not represent this code's real product mix.",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "VLB": {
    "cat": "theatres:theatre",
@@ -2976,7 +2923,8 @@
     "Drape General Adhesive Head drape 180x250cm"
    ],
    "reasoning": "All 4 lines are surgical isolation/side/head drapes and instrument pouches — general theatre consumables, same category as VEB with no conflicting evidence (no npc observations exist for this code).",
-   "addedOn": "07/09/2026"
+   "addedOn": "07/09/2026",
+   "itemclass": "21- Medical and Surgical Consumables"
   },
   "VTU": {
    "cat": "handling:slide",

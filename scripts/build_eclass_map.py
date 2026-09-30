@@ -108,6 +108,7 @@ import collections
 import datetime
 import json
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -228,13 +229,118 @@ def decide(cat_buckets):
     return "unmapped", None, detail
 
 
+def suspended_itemclass(sdt_rows):
+    """eClass -> the itemClass its SUSPENDED lines sit in (the most common one
+    when they span several; ties broken alphabetically so the run is
+    deterministic)."""
+    per = collections.defaultdict(collections.Counter)
+    for r in sdt_rows:
+        if r.get("_eclass") and r.get("_itemclass"):
+            per[r["_eclass"]][r["_itemclass"]] += 1
+    return {ec: sorted(c.items(), key=lambda kv: (-kv[1], kv[0]))[0][0] for ec, c in per.items()}
+
+
+def same_itemclass_only(observations, sdt_rows):
+    """Keep only the observations made in the SAME NHS Supply Chain itemClass
+    as the suspended lines they will be used to categorise.
+
+    ADDED 30/09/2026 after a live QA found three Boston Scientific ureteral
+    stents (FUQ763, FUQ4380, FUQ4461) in the Tracker's Continence filter. One
+    eClass code is not one kind of product: FUQ holds bowel-irrigation kits
+    and a male external catheter under "23- Rehabilitation and Community" AND
+    ureteral stents and a prostatic urethral lift under "22- Medical
+    Technology". Every observation was pooled per code, so seven irrigation
+    kits outvoted the two urology observations and every FUQ line, stents
+    included, was published as continence:bowel. The same pooling filed 38
+    Boston Scientific guiding and drainage catheters (FVA, itemClass 22) as
+    monitoring sensors on the strength of three arterial-line observations
+    from itemClass 21.
+
+    An observation from another itemClass is evidence about a different
+    product family, so it carries no vote. Where that leaves too little
+    evidence the code is UNMAPPED — root rule 14, publishing nothing is the
+    correct output when the evidence is thin. Returns (kept, {eClass:
+    excluded-count}). An observation with no itemClass is excluded too: it
+    cannot be shown to be about the same family."""
+    target = suspended_itemclass(sdt_rows)
+    kept, excluded = [], collections.Counter()
+    for o in observations:
+        ec = o.get("eclass")
+        want = target.get(ec)
+        if want is None:
+            kept.append(o)          # code not in the suspensions — never mapped anyway
+        elif o.get("itemclass") == want:
+            kept.append(o)
+        else:
+            excluded[ec] += 1
+    return kept, dict(excluded)
+
+
+_HEAD_WORD = re.compile(r"[a-z]{3,}")
+
+
+def head_noun(desc):
+    """The first word of an NHS Supply Chain description's own heading — the
+    part before " - " where it has one ("Drills Burs Other - ..." -> "drills",
+    "Haemostasis - Ligation Clips ..." -> "haemostasis", "Belt product for
+    ..." -> "belt"). The catalogue writes the product noun first."""
+    w = _HEAD_WORD.findall(str(desc or "").lower().split(" - ")[0])
+    return w[0] if w else ""
+
+
+def shares_head_noun(suspended_descs, evidence_descs):
+    """True when at least one suspended line under the code opens with the same
+    product noun as at least one observation that voted for the winning cat.
+
+    ADDED 30/09/2026 with the itemClass scope. Scoping votes to one itemClass
+    removed the unrelated votes that had been keeping FCC unmapped, and its
+    two remaining observations (endoscopic banding ligators) then cleared
+    MEDIUM and would have filed 49 bone drills and saw blades as vascular
+    access. Evidence about a different product than every line it would
+    categorise is not evidence for those lines."""
+    heads = {head_noun(d) for d in evidence_descs} - {""}
+    return any(head_noun(d) in heads for d in suspended_descs)
+
+
+def stamp_inferred_itemclass(inferred, sdt_rows):
+    """Give every carried-over INFERRED entry the itemClass it was read from,
+    so sdt_match.py can refuse it for a line in a different family (30/09/2026).
+
+    An inferred code was proposed by reading the descriptions of the suspended
+    lines filed under it (`examples`). Its itemClass is therefore the itemClass
+    of those lines: the most common one among the rows whose description is one
+    of its examples, or, when no example is still suspended, the most common
+    itemClass of the code's current suspended lines. An entry that already
+    carries an itemClass keeps it. Mutates in place; returns how many were
+    stamped."""
+    by_code = collections.defaultdict(list)
+    for r in sdt_rows:
+        if r.get("_eclass") and r.get("_itemclass"):
+            by_code[r["_eclass"]].append(r)
+    stamped = 0
+    for code, ent in inferred.items():
+        if not isinstance(ent, dict) or ent.get("itemclass"):
+            continue
+        rows = by_code.get(code, [])
+        ex = set(ent.get("examples") or [])
+        pool = [r["_itemclass"] for r in rows if r.get("d") in ex] or [r["_itemclass"] for r in rows]
+        if not pool:
+            continue
+        c = collections.Counter(pool)
+        ent["itemclass"] = sorted(c.items(), key=lambda kv: (-kv[1], kv[0]))[0][0]
+        stamped += 1
+    return stamped
+
+
 def build(report_only=False):
     npce = load(NPC_ECLASS)
     vocab_doc = load(VOCAB_FILE)
     sdt = load(SDT_SUSPENSIONS)
 
     legal = legal_categories(vocab_doc)
+    sdt_rows = sdt.get("rows", [])
     observations = [o for o in npce.get("observations", []) if (o.get("overlap") or 0) >= 1]
+    observations, cross_itemclass = same_itemclass_only(observations, sdt_rows)
 
     by_eclass, itemclass_by_eclass, dropped_illegal = aggregate(observations, legal)
     if dropped_illegal:
@@ -247,22 +353,38 @@ def build(report_only=False):
         for eclass, npc, cat in dropped_illegal[:20]:
             print("  eClass=%s npc=%s cat=%r" % (eclass, npc, cat), file=sys.stderr)
 
-    sdt_rows = sdt.get("rows", [])
     eclass_line_counts = collections.Counter(r.get("_eclass") for r in sdt_rows if r.get("_eclass"))
     sdt_eclasses = set(eclass_line_counts)
 
+    sus_ic = suspended_itemclass(sdt_rows)
     mappings, unmapped = {}, {}
     for eclass in sorted(sdt_eclasses):
         cat_buckets = by_eclass.get(eclass, {})
         tier, winner, detail = decide(cat_buckets)
+        # The itemClass this entry is valid for. sdt_match.py refuses the
+        # entry's `cat` for a suspended line in any other itemClass (30/09/2026).
         ic_counter = itemclass_by_eclass.get(eclass)
-        itemclass = ic_counter.most_common(1)[0][0] if ic_counter else (
+        itemclass = sus_ic.get(eclass) or (ic_counter.most_common(1)[0][0] if ic_counter else None) or (
             # Fall back to whatever sdt-suspensions.json itself recorded for
             # this eClass when there was no observation to read it from.
             next((r["_itemclass"] for r in sdt_rows
                   if r.get("_eclass") == eclass and r.get("_itemclass")), None)
         )
-        lines = eclass_line_counts[eclass]
+        # Lines the entry can actually categorise: the ones in its own itemClass.
+        lines = sum(1 for r in sdt_rows
+                    if r.get("_eclass") == eclass and r.get("_itemclass") == itemclass) \
+            if itemclass else eclass_line_counts[eclass]
+        if cross_itemclass.get(eclass):
+            detail["crossItemclassVotesExcluded"] = cross_itemclass[eclass]
+        if tier != "unmapped" and not shares_head_noun(
+                [r.get("d", "") for r in sdt_rows
+                 if r.get("_eclass") == eclass and r.get("_itemclass") == itemclass],
+                [o.get("nhsscDesc", "") for o in observations
+                 if o.get("eclass") == eclass and o.get("cat") == winner]):
+            detail["reason"] = ("no suspended line under this code is the same kind of product "
+                                "as the evidence (no shared head noun) — see shares_head_noun()")
+            detail["candidateCat"] = winner
+            tier, winner = "unmapped", None
         if tier == "unmapped":
             unmapped[eclass] = {
                 "itemclass": itemclass,
@@ -361,7 +483,11 @@ def build(report_only=False):
                 "HIGH confidence needs >=3 distinct NPCs on strong joins AND >=65%% "
                 "weighted support AND >=3 distinct NPCs total. MEDIUM needs >=1 "
                 "strong NPC or >=3 weak NPCs AND >=60%% weighted support AND >=2 "
-                "distinct NPCs AND >=3 total observations for the eClass. Everything "
+                "distinct NPCs AND >=3 total observations for the eClass. Only "
+                "observations made in the same NHS Supply Chain itemClass as the "
+                "eClass's suspended lines vote (30/09/2026: FUQ pooled bowel-irrigation "
+                "kits with ureteral stents), and each entry's `itemclass` is the only "
+                "itemClass it may categorise. Everything "
                 "else is UNMAPPED and carries no `cat` — root rule 14: publishing "
                 "nothing is the correct output when the evidence is thin. This is a "
                 "STATISTICAL aggregation over real, sourced observations, not a "
@@ -413,6 +539,7 @@ def build(report_only=False):
                 previous = json.load(f)
             carried = previous.get("inferred")
             if carried:
+                stamp_inferred_itemclass(carried, sdt_rows)
                 doc["inferred"] = carried
                 doc["_meta"]["inferredCarriedOver"] = len(carried)
                 doc["_meta"]["inferredNote"] = (

@@ -16,7 +16,7 @@
   "generated": "07/09/2026",
   "rule": "One line, one decision, taken from that line's own NHS Supply Chain description. Every category is validated against the gated vocabulary in differentiator-category-map.json. A line whose description does not clearly belong to one category is REFUSED and listed below, never forced into the nearest bucket — publishing nothing is the correct output when the evidence is thin.",
   "precedence": "These win over data/eclass-category-map.json for the NPCs named here, because they are the more specific judgement.",
-  "categorised": 146,
+  "categorised": 149,
   "refused": 76
  },
  "lines": {
@@ -1041,6 +1041,30 @@
    "eclass": "VEP",
    "desc": "Wipe disinfectant moist 70% alcohol 2% chlorhexidine gluconate 18gsm 150mm x 133mm box of 100 individual sachets class IIa medical device",
    "reasoning": "Prevantics 2% CHG skin antiseptic wipe — matches observed Prevantics product under skin-prep:prep."
+  },
+  "FUQ763": {
+   "cat": "endourology:stent",
+   "confidence": "high",
+   "eclass": "FUQ",
+   "desc": "Ureteral Stent - Steerable Perc Plus 7Fr X 22Cm",
+   "reasoning": "NHS Supply Chain's own description names the product a ureteral stent (Boston Scientific, itemClass 22- Medical Technology). endourology:stent is the gated vocabulary's 'Ureteric stents & drainage'. Decided per line on 30/09/2026 after the FUQ eClass, which also holds bowel-irrigation kits under itemClass 23, was found filing these stents as continence:bowel.",
+   "addedOn": "30/09/2026"
+  },
+  "FUQ4380": {
+   "cat": "endourology:stent",
+   "confidence": "high",
+   "eclass": "FUQ",
+   "desc": "Ureteral Stent - with Guidewire TRIA FIRM 6X20 SH W SEN .035",
+   "reasoning": "NHS Supply Chain's own description names the product a ureteral stent (Boston Scientific, itemClass 22- Medical Technology). endourology:stent is the gated vocabulary's 'Ureteric stents & drainage'. Decided per line on 30/09/2026 after the FUQ eClass, which also holds bowel-irrigation kits under itemClass 23, was found filing these stents as continence:bowel.",
+   "addedOn": "30/09/2026"
+  },
+  "FUQ4461": {
+   "cat": "endourology:stent",
+   "confidence": "high",
+   "eclass": "FUQ",
+   "desc": "Ureteral Stent - with Guidewire TRIA FIRM 4.8X20 SH W SEN .035",
+   "reasoning": "NHS Supply Chain's own description names the product a ureteral stent (Boston Scientific, itemClass 22- Medical Technology). endourology:stent is the gated vocabulary's 'Ureteric stents & drainage'. Decided per line on 30/09/2026 after the FUQ eClass, which also holds bowel-irrigation kits under itemClass 23, was found filing these stents as continence:bowel.",
+   "addedOn": "30/09/2026"
   }
  },
  "refused": {

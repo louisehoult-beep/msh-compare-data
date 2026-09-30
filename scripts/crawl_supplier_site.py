@@ -1190,6 +1190,54 @@ def is_locator_leaf(slug):
     s = "-" + re.sub(r"[_\s]+", "-", (slug or "").lower()) + "-"
     return any("-%s-" % p in s for p in LOCATOR_LEAF_PHRASES)
 
+
+# A HELP PAGE IS NOT A PRODUCT (30/09/2026). wellspect.com files a FAQ and
+# instructions-for-use pages under each product's own path —
+# /products/bowel-products/navina-irrigation-systems/faq-navina/usage/,
+# .../faq-navina/medical-issue/, .../lofric-sense/instructions/instructions-
+# for-using-lofric-sense---tetraplegic-handling/ — and the crawl published
+# them as Wellspect bowel-irrigation "products" called "Usage", "Medical
+# Issue", "Instillation", "Disassembling Cleaning" and "Navina Smart Faq".
+# The Supply Disruption Tracker then offered them as 25 "alternatives" to a
+# Boston Scientific ureteral stent (QA, 30/09/2026). The test is a whole
+# path SEGMENT, at any depth: "faq"/"faqs" as a hyphen-delimited word of the
+# segment ("faq-navina", "navina-faq", "faqs"), or a segment that IS or
+# BEGINS "instructions". Never a word inside a longer word.
+_FAQ_SEGMENT = re.compile(r"(?:^|[-_])faqs?(?:[-_]|$)")
+HELP_SEGMENT_PREFIXES = ("instructions",)
+
+
+def is_help_segment(seg):
+    s = (seg or "").strip().lower()
+    if not s:
+        return False
+    if _FAQ_SEGMENT.search(s):
+        return True
+    return any(s == p or s.startswith(p + "-") for p in HELP_SEGMENT_PREFIXES)
+
+
+def is_non_product_url(url):
+    """True when a captured product's own source URL has one of the shapes
+    this crawler already refuses to read as a product: a help page (FAQ /
+    instructions), a download or brochure page, a locator page, the site's own
+    taxonomy index, or a furniture sub-page (specifications, case studies...).
+    One entry point so a consumer of already-captured records (sdt_match.py in
+    the pipeline repo) applies the SAME junk-shape rules the crawl does,
+    instead of keeping its own copy. A bare CMS record id as the LEAF is not
+    junk here: convatec.com files real products at a GUID leaf and the crawl
+    reads their name off the page (uuid_page_name) — it is a GUID as the
+    product NAME that is junk, and that is a name test, not a URL test."""
+    if not url:
+        return False
+    path = urllib.parse.urlparse(url).path if "://" in url else url
+    segs = [s for s in path.strip("/").split("/") if s]
+    if not segs:
+        return False
+    leaf = segs[-1]
+    if is_download_leaf(leaf) or is_locator_leaf(leaf) or leaf.lower() in TAXONOMY_INDEX_LEAVES:
+        return True
+    return any(is_help_segment(s) or s.lower() in PRODUCT_SUBPAGE_WORDS for s in segs)
+
 # A LITERAL "category" OR "catalog" PATH SEGMENT IS THE PLATFORM'S OWN FILING
 # WORD, NOT A DIVISION (05/09/2026) — see the comment where this is used, in
 # sitemap_products's division-naming step. Only these two exact, evidenced
@@ -2012,7 +2060,8 @@ def sitemap_products(domain, deadline=None, product_paths=None):
             furniture += 1
             continue
         leaf = rest[-1]
-        if is_download_leaf(leaf) or is_locator_leaf(leaf) or leaf.lower() in TAXONOMY_INDEX_LEAVES:
+        if (is_download_leaf(leaf) or is_locator_leaf(leaf) or leaf.lower() in TAXONOMY_INDEX_LEAVES
+                or any(is_help_segment(s) for s in rest)):
             non_product += 1
             continue
         if is_uuid_slug(leaf):

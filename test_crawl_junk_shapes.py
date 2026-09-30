@@ -306,5 +306,51 @@ class PublishGate(unittest.TestCase):
         self.assertFalse(verify._diff_site_chrome("A soft, sterile, non-woven pad dressing."))
 
 
+class HelpPagesAreNotProducts(unittest.TestCase):
+    """30/09/2026: wellspect.com's FAQ and instructions pages, filed under each
+    product's path, were published as bowel-irrigation "products" ("Usage",
+    "Medical Issue", "Navina Smart Faq") and offered on the Supply Disruption
+    Tracker as 25 alternatives to a ureteral stent."""
+    WS = "https://www.wellspect.com/products/bowel-products/navina-irrigation-systems/"
+
+    def test_faq_and_instructions_urls_are_non_product(self):
+        for leaf in ("faq-navina/usage/", "faq-navina/medical-issue/", "faq-navina/instillation/",
+                     "faq-navina/disassembling-cleaning/", "faq-navina/navina-smart-faq/"):
+            self.assertTrue(cs.is_non_product_url(self.WS + leaf), leaf)
+        self.assertTrue(cs.is_non_product_url(
+            "https://www.wellspect.com/products/bladder-products/lofric-elle/instructions/"))
+        self.assertTrue(cs.is_non_product_url(
+            "https://www.wellspect.com/products/bladder-products/lofric-sense/instructions/"
+            "instructions-for-using-lofric-sense---tetraplegic-handling/"))
+        self.assertTrue(cs.is_non_product_url("https://www.elekta.com/products/radiation-therapy/proknow-news/faqs/"))
+
+    def test_real_products_are_not_caught(self):
+        for u in (self.WS + "navina-smart/", self.WS + "navina-classic/",
+                  "https://www.wellspect.com/products/bowel-products/navina-mini/",
+                  # a real Convatec product at a GUID leaf, name read off the page
+                  "https://www.convatec.com/en-gb/products/advanced-wound-care/wound-type/"
+                  "pc-wound-open-surgical-wounds/1b845cb1-2f05-476d-bc85-e40feb9bb7a2",
+                  "https://example.test/products/instructional-video-camera",
+                  "https://example.test/products/fafaq-probe"):
+            self.assertFalse(cs.is_non_product_url(u), u)
+
+    def test_existing_shapes_route_through_the_same_entry_point(self):
+        self.assertTrue(cs.is_non_product_url(_u("products/wound-care/download-ons-wondassortimentsboekje")))
+        self.assertTrue(cs.is_non_product_url(_u("products/stoma-care/product-names")))
+        self.assertTrue(cs.is_non_product_url(_u("products/vbx/case-studies/severe-claudication")))
+
+    def test_crawl_drops_them(self):
+        base = "products/bowel-products/navina-irrigation-systems/"
+        real = [_u(base + "navina-%s" % c) for c in ("smart", "classic", "mini", "insert", "go",
+                                                      "plus", "one", "two", "three", "four")]
+        faq = [_u(base + "faq-navina/%s" % leaf) for leaf in ("usage", "medical-issue", "instillation")]
+        (res, err), _ = _crawl(real + faq + [_u(base + "faq-navina")])
+        self.assertIsNone(err)
+        names = {p["n"] for p in res["products"]}
+        for junk in ("Usage", "Medical Issue", "Instillation", "Faq Navina"):
+            self.assertNotIn(junk, names)
+        self.assertIn("Navina Smart", names)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
