@@ -199,6 +199,7 @@ class BlockedSource(unittest.TestCase):
              w.today, sys.argv) = saved
             os.unlink(tmp.name)
         self.assertEqual(len(doc["sourceErrors"]), 2)
+        self.assertEqual(sorted(doc["sourceErrorsToday"]), ["leaders", "statement"])
         self.assertFalse([e for e in doc["events"] if e["kind"] != "curated"])
         qop = next(i for i in doc["icbs"] if i["code"] == "QOP")
         self.assertEqual(qop["leaders"][1]["name"], "Ceo QOP")

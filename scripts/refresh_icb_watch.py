@@ -94,7 +94,6 @@ UA = {"User-Agent": ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKi
       "Accept": "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
       "Accept-Language": "en-GB,en;q=0.9"}
 
-EVENT_KEEP_DAYS = 180
 STALE_DAYS = 14
 
 # Role families a market-access or device rep cares about. Order matters: the
@@ -205,7 +204,29 @@ def _diag(raw):
     return "%d bytes, title %r" % (len(raw or ""), (title.group(1).strip()[:80] if title else None))
 
 
+def fetch_nhse(url):
+    """NHS England serves its HTML pages to GitHub's runners as a 1,999-byte bot
+    challenge (seen 30/09/2026), but its WordPress REST API answers normally, and
+    the pipeline already reads nhse_news that way. So ask the API for the page by
+    slug first and fall back to the HTML page. Used for the merger statement,
+    whose words are all in content.rendered."""
+    slug = url.rstrip("/").rsplit("/", 1)[-1]
+    try:
+        api = ("https://www.england.nhs.uk/wp-json/wp/v2/pages?slug=%s&_fields=link,content"
+               % slug)
+        for page in json.loads(fetch(api)):
+            if page.get("link", "").rstrip("/") == url.rstrip("/"):
+                return page["content"]["rendered"]
+    except Exception:                                            # noqa: BLE001
+        pass
+    return fetch(url)
+
+
 def nhse_leaders():
+    # The HTML page, not the REST API: the API's content.rendered carries the
+    # cluster table but not the per-ICB leaders list (checked 30/09/2026). From
+    # GitHub's runners this is a bot challenge and the stored leaders are kept;
+    # the Mac's nightly icb-watch-leaders job is what reads it.
     raw = fetch(NHSE_LEADERS)
     lines = page_lines(raw)
     updated = None
@@ -246,7 +267,7 @@ def nhse_leaders():
 
 # ---------------------------------------------------------------- 3. NHSE statement
 def nhse_statement():
-    raw = fetch(NHSE_AREA)
+    raw = fetch_nhse(NHSE_AREA)
     lines = page_lines(raw)
     keep = [ln for ln in lines if not ln.lower().startswith("outlines") and re.search(
         r"new ICBs were established|clustering arrangements|future decisions on ICB footprints|"
@@ -401,13 +422,13 @@ def main():
 
     prev = load_json(OUT, {})
     live, ended = ods_icbs()
-    errors = []
+    errors = {}
     try:
         leaders, leaders_updated = nhse_leaders()
         leaders_checked = iso(today())
     except (SourceUnavailable, OSError) as e:
         # Keep what is stored, keyed the same way, so nothing reads as a change.
-        errors.append("leaders: %s" % e)
+        errors["leaders"] = str(e)
         leaders = {norm_icb_name(i["name"]): {"leaders": i.get("leaders", []),
                                               "clusterNote": i.get("cluster")}
                    for i in prev.get("icbs", [])}
@@ -418,20 +439,36 @@ def main():
     try:
         statement = nhse_statement()
     except (SourceUnavailable, OSError) as e:
-        errors.append("statement: %s" % e)
+        errors["statement"] = str(e)
         statement = dict(prev.get("nationalStatement") or {})
         if not statement.get("text"):
             raise SystemExit("No stored merger statement to fall back on: %s" % e)
         statement["_kept"] = True
-    for e in errors:
-        print("icb-watch: kept stored values —", e)
+    for k, e in errors.items():
+        print("icb-watch: kept stored values — %s: %s" % (k, e))
     page_cfg = load_json(PAGES_CFG, {"icbs": {}})
     own = None if args.no_pages else own_site_people(page_cfg)
     curated = load_json(CURATED_CFG, {"events": []}).get("events", [])
     doc, new_count = build(prev, live, ended, leaders, leaders_updated, statement, own,
                            curated, today())
     doc["leadersCheckedOn"] = leaders_checked
-    doc["sourceErrors"] = errors
+    # Today's source problems, as a dict (configuration, not records).
+    doc["sourceErrorsToday"] = errors
+    # And a log that only ever grows: one entry per distinct problem, with the
+    # first and last day it was seen. It is a list of records to
+    # scripts/check_no_loss.py, so nothing in it is ever removed.
+    log = list(prev.get("sourceErrors") or [])
+    by_key = {x.get("id"): x for x in log if isinstance(x, dict)}
+    for src, msg in errors.items():
+        key = hashlib.sha256(("%s|%s" % (src, msg)).encode()).hexdigest()[:12]
+        if key in by_key:
+            by_key[key]["lastSeen"] = iso(today())
+        else:
+            entry = {"id": key, "source": src, "message": msg,
+                     "firstSeen": iso(today()), "lastSeen": iso(today())}
+            by_key[key] = entry
+            log.append(entry)
+    doc["sourceErrors"] = log
     with open(OUT, "w", encoding="utf-8") as fh:
         json.dump(doc, fh, ensure_ascii=False, indent=1)
         fh.write("\n")
@@ -586,9 +623,10 @@ def build(prev, live, ended, leaders, leaders_updated, statement, own, curated, 
     by_id = {e["id"]: e for e in events}
     for e in new_events:
         by_id.setdefault(e["id"], e)
-    cutoff = iso(t - dt.timedelta(days=EVENT_KEEP_DAYS))
-    events = sorted((e for e in by_id.values() if e["date"] >= cutoff),
-                    key=lambda e: (e["date"], e["id"]), reverse=True)
+    # Events are kept for good, never aged out. They are records (keyed by id) to
+    # scripts/check_no_loss.py, and a record is never dropped without a reason a
+    # person chose. The readers apply their own windows (Live Desk: 30 days).
+    events = sorted(by_id.values(), key=lambda e: (e["date"], e["id"]), reverse=True)
 
     # Clusters, from each ICB's own "Clustering with X ICB; and with Y ICB." note.
     # Partner names are matched EXACTLY after normalising. A substring match put
