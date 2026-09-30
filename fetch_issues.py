@@ -28,7 +28,20 @@ KEYWORDS = {
                  "extension set"],
     "continence": ["foley", "urinary catheter", "intermittent catheter", "urology",
                    "continence", "urine drainage", "sheath", "urethral",
-                   "catheter valve", "leg bag", "nephrostomy", "self-retaining catheter"],
+                   "catheter valve", "leg bag", "nephrostomy", "self-retaining catheter",
+                   # Absorbent containment, added 30/09/2026. Every term above is
+                   # urology, so an ICN about pads or pants never reached this
+                   # speciality: "Supply Issues Ontex UK Ltd Belted Pads (ICN
+                   # 3260)" carries no word from the list and would have landed
+                   # in 'unsorted'. Product-type PHRASES only, never bare "pad"
+                   # or "pads": the live ICN index carries Zoll "Defibrillation
+                   # Pads" (ICN 2947, 3351) and an Olympus "Tissue Pad" (ICN
+                   # 3209), which are not continence. Checked against all 226
+                   # notices on the ICN index, all stored items and 200 GOV.UK
+                   # alerts on 30/09/2026: only ICN 3260 matches.
+                   "belted pad", "shaped pad", "absorbent pad", "washable pad",
+                   "underpad", "pull up pant", "pull-up pant", "absorbent pant",
+                   "fixation pant"],
     # Brand names added 30/07/2026. Every chlorhexidine notice in the feed to
     # that date named a BRAND and never the molecule, so not one of them reached
     # this speciality: all five were filed elsewhere (four under product-match by
@@ -280,22 +293,112 @@ def gov_uk_alerts(log):
         log.append(f"gov.uk FAILED: {e}")
     return out
 
-def nhssc_notices(log):
-    """NHS Supply Chain customer notices (ICN) listing scrape."""
-    out = []
+# --- the whole ICN index, not just its first page, added 30/09/2026 ----------
+# Until today this read page 1 of the index and nothing else: about 17 notices,
+# ordered by LAST UPDATE. A notice reached the feed only if it happened to be on
+# page 1 on a morning the job ran. A long-running shortage that NHS Supply Chain
+# stops updating sinks down the index and is never seen again. ICN 3260 (Ontex
+# belted pads, 19 codes, three suspended, resolution 27/11/2026) was last updated
+# 24/06/2026, before this feed covered the index, and on 30/09/2026 sat on page
+# 10 of 15: live, and invisible to the Hub. So was ICN 3378 (Boston Scientific
+# cryo needles, extended lead times), on the same page.
+#
+# The index is 15 pages and ~226 notices. Page 1 is still admitted exactly as
+# before (everything recent). Deeper pages are read for ONE thing only: a notice
+# NHS Supply Chain itself types "Supply Disruption" and does not mark
+# "Resolved". That is an open shortage, which is what this feed exists for. Old
+# recalls and alerts on deep pages are one-off events from before this feed
+# existed; admitting them would put ~90 stale items in front of members at once.
+ICN_INDEX = "https://www.supplychain.nhs.uk/product-information/customer-notices/"
+ICN_MAX_PAGES = 40            # 15 today; a hard stop, not an expected depth
+ICN_DEEP_TYPES = {"supply disruption"}
+ICN_CLOSED_STATUSES = {"resolved", "closed", "withdrawn"}
+_ICN_LINK = re.compile(r'href="(https://www\.supplychain\.nhs\.uk/icn/([a-z0-9-]+)/)"[^>]*>([^<]*)<')
+
+
+def _icn_date(text):
+    """'24 June 2026' -> '2026-06-24', or '' if it does not parse."""
     try:
-        html = fetch("https://www.supplychain.nhs.uk/product-information/customer-notices/")
-        seen = set()
-        for m in re.finditer(r'href="(https://www\.supplychain\.nhs\.uk/icn/([a-z0-9-]+)/)"[^>]*>([^<]*)<', html):
-            url, slug, text = m.group(1), m.group(2), m.group(3).strip()
-            if url in seen:
+        return datetime.datetime.strptime(text.strip(), "%d %B %Y").date().isoformat()
+    except Exception:
+        return ""
+
+
+def parse_icn_index(html):
+    """One index page -> [{title,url,slug,date,status,type}]. Falls back to bare
+    links (no status/type/date) if NHS Supply Chain changes the card markup, so a
+    redesign degrades to the old page-1 behaviour instead of to nothing."""
+    import html as _h
+    rows, seen = [], set()
+    blocks = html.split('<div class="post-item">')[1:]
+    for blk in blocks:
+        m = _ICN_LINK.search(blk)
+        if not m or m.group(1) in seen:
+            continue
+        seen.add(m.group(1))
+        ref = re.search(r"Ref:\s*[^<]*</strong>\s*-\s*([^<]+)</small>", blk)
+        st = re.search(r"Status\s*<strong>([^<]*)</strong>", blk)
+        ty = re.search(r"Type\s*<strong>([^<]*)</strong>", blk)
+        rows.append({"title": _h.unescape(m.group(3).strip()), "url": m.group(1), "slug": m.group(2),
+                     "date": _icn_date(ref.group(1)) if ref else "",
+                     "status": (st.group(1).strip() if st else ""),
+                     "type": (ty.group(1).strip() if ty else "")})
+    if not blocks:
+        for m in _ICN_LINK.finditer(html):
+            if m.group(1) in seen:
                 continue
-            seen.add(url)
-            title = text if len(text) > 10 else slug.replace("-", " ").title()
-            out.append({"title": title, "url": url, "date": "", "hay": (title + " " + slug.replace("-", " ")).lower(), "src": "NHS Supply Chain ICN"})
-        log.append(f"nhssc icn: {len(out)} notices scanned")
+            seen.add(m.group(1))
+            rows.append({"title": _h.unescape(m.group(3).strip()), "url": m.group(1),
+                         "slug": m.group(2), "date": "", "status": "", "type": ""})
+    return rows
+
+
+def deep_admissible(row):
+    """A notice below page 1 is admitted only if it is an open supply disruption."""
+    return (row.get("type", "").strip().lower() in ICN_DEEP_TYPES
+            and row.get("status", "").strip().lower() not in ICN_CLOSED_STATUSES)
+
+
+def _icn_candidate(row):
+    title = row["title"] if len(row["title"]) > 10 else row["slug"].replace("-", " ").title()
+    return {"title": title, "url": row["url"], "date": row.get("date", ""),
+            "hay": (title + " " + row["slug"].replace("-", " ")).lower(),
+            "src": "NHS Supply Chain ICN"}
+
+
+def nhssc_notices(log, fetcher=None, max_pages=ICN_MAX_PAGES):
+    """NHS Supply Chain customer notices (ICN): page 1 in full, deeper pages for
+    open supply disruptions only. See the note above ICN_INDEX."""
+    fetcher = fetcher or fetch
+    out, seen = [], set()
+    try:
+        first = parse_icn_index(fetcher(ICN_INDEX))
     except Exception as e:
         log.append(f"nhssc icn FAILED: {e}")
+        return out
+    for r in first:
+        seen.add(r["url"])
+        out.append(_icn_candidate(r))
+    deep_read = deep_kept = pages = 0
+    for n in range(2, max_pages + 1):
+        try:
+            rows = parse_icn_index(fetcher(f"{ICN_INDEX}page/{n}/"))
+        except Exception as e:
+            # A deep page failing costs only the deep pages; page 1 still counts.
+            log.append(f"nhssc icn page {n} FAILED: {e} — deeper pages skipped this run")
+            break
+        fresh = [r for r in rows if r["url"] not in seen]
+        if not fresh:
+            break                       # past the last page (or a repeat of one)
+        pages += 1
+        for r in fresh:
+            seen.add(r["url"])
+            deep_read += 1
+            if deep_admissible(r):
+                deep_kept += 1
+                out.append(_icn_candidate(r))
+    log.append(f"nhssc icn: {len(first)} notices on page 1, {deep_read} on {pages} deeper "
+               f"page(s) of which {deep_kept} open supply disruption(s) considered")
     return out
 
 def main():
