@@ -112,6 +112,7 @@ RUN = [
     "test_company_press_story_links.py",
     "test_company_tiers.py",
     "test_coverage_ledger.py",
+    "test_crawl_fetch_behaviour.py",
     "test_crawl_junk_shapes.py",
     "test_crawl_site_concurrency.py",
     "test_dead_company_check.py",

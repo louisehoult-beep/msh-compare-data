@@ -410,6 +410,9 @@ def get(url, as_json=False, timeout=30):
         raise
 
 
+ROBOTS_RETRY_PAUSE = 3.0   # seconds before the single retry of a 403 on robots.txt (^o598)
+
+
 def allowed(domain, path="/"):
     """Honour robots.txt — and never hang on it.
 
@@ -421,7 +424,16 @@ def allowed(domain, path="/"):
     """
     rp = urllib.robotparser.RobotFileParser()
     try:
-        body, _ = get("https://%s/robots.txt" % domain, timeout=12)
+        try:
+            body, _ = get("https://%s/robots.txt" % domain, timeout=12)
+        except urllib.error.HTTPError as first:
+            # ^o598: ONE retry after a pause on a first 403. A 403 on robots.txt is
+            # often a rate-limit/bot-filter blip (Wordfence style) rather than a
+            # stated refusal. 401 and a REPEATED 403 still refuse, below.
+            if first.code != 403:
+                raise
+            time.sleep(ROBOTS_RETRY_PAUSE)
+            body, _ = get("https://%s/robots.txt" % domain, timeout=12)
     except urllib.error.HTTPError as e:
         # RobotFileParser.read() treats 401 and 403 as DISALLOW ALL, and it is
         # right to: a site that refuses to show its robots.txt is not inviting a
@@ -751,18 +763,10 @@ def pick_taxonomies(base, ptype, taxes):
     return hier or usable
 
 
-def _wp_read_type(base, ptype, taxes, deadline=None):
-    """Read one post type: its own category taxonomy, then its records.
-
-    Category ids are namespaced by post type. Two post types on the same site
-    carry two SEPARATE taxonomies (Joint Operations: `surgical` and `recovery`),
-    and their term ids start at 1 in both — merging them on the raw id would
-    file a surgical product under a recovery division.
-    """
-    read_taxes = pick_taxonomies(base, ptype, taxes)
-
+def _read_terms(base, ptype, taxes):
+    """Read every term of each taxonomy, namespaced `ptype:tax:id` (see _wp_read_type)."""
     cats = {}
-    for tax in read_taxes:
+    for tax in taxes:
         page = 1
         while page <= 10:
             try:
@@ -779,6 +783,72 @@ def _wp_read_type(base, ptype, taxes, deadline=None):
             if len(items) < 100:
                 break
             page += 1
+    return cats
+
+
+BRAND_FILED_SHARE = 0.5     # share of top-level category names that are brand-taxonomy names
+
+
+def _brand_taxonomy(taxes, read_taxes):
+    for t in taxes or []:
+        if "brand" in t.lower() and t not in read_taxes:
+            return t
+    return None
+
+
+def type_taxonomy(taxes):
+    """The site's own product-TYPE taxonomy: slug contains 'type', never `product_type`."""
+    for t in taxes or []:
+        tl = t.lower()
+        if "type" in tl and tl != "product_type" and t not in TAX_NOT_A_DIVISION:
+            return t
+    return None
+
+
+def _norm_term(s):
+    return re.sub(r"[^a-z0-9]+", "", re.sub(r"^\d+(?=[A-Za-z])", "", clean(s)).lower())
+
+
+def is_brand_filed(cats, brand_cats):
+    """True when most TOP-LEVEL terms of `cats` are terms of the brand taxonomy."""
+    tops = [c["name"] for c in cats.values() if not c["parent"]
+            and _norm_term(c["name"]) not in ("uncategorised", "uncategorized")]
+    brands = {_norm_term(c["name"]) for c in brand_cats.values()}
+    if len(tops) < 2 or not brands:
+        return False
+    hit = sum(1 for n in tops if _norm_term(n) in brands)
+    return hit >= 2 and hit / float(len(tops)) >= BRAND_FILED_SHARE
+
+
+def _wp_read_type(base, ptype, taxes, deadline=None):
+    """Read one post type: its own category taxonomy, then its records.
+
+    Category ids are namespaced by post type. Two post types on the same site
+    carry two SEPARATE taxonomies (Joint Operations: `surgical` and `recovery`),
+    and their term ids start at 1 in both — merging them on the raw id would
+    file a surgical product under a recovery division.
+    """
+    read_taxes = pick_taxonomies(base, ptype, taxes)
+
+    cats = _read_terms(base, ptype, read_taxes)
+
+    # ^o388: BRAND-FILED product_cat. Some sites (probomedical.co.uk) use product_cat
+    # as a manufacturer list (GE HealthCare, Philips, Mindray) and keep the real
+    # product-type filing in another taxonomy (prod_type). Detected on evidence:
+    # the site registers a brand taxonomy AND the top-level product_cat names
+    # are (mostly) that taxonomy's own term names. Swap in the site's type
+    # taxonomy; with none, leave the read as it is and only flag it.
+    brand_filed, swapped_to = False, None
+    if read_taxes and _brand_taxonomy(taxes, read_taxes):
+        btax = _brand_taxonomy(taxes, read_taxes)
+        brand_terms = _read_terms(base, ptype, [btax])
+        if is_brand_filed(cats, brand_terms):
+            brand_filed = True
+            ttax = type_taxonomy(taxes)
+            if ttax:
+                tcats = _read_terms(base, ptype, [ttax])
+                if tcats:
+                    read_taxes, cats, swapped_to = [ttax], tcats, ttax
 
     # THE SITE'S OWN DECLARED TOTAL, read from the first page's `X-WP-Total`
     # header. Without it a capped read is INVISIBLE: the run stops at MAX_PAGES
@@ -828,7 +898,8 @@ def _wp_read_type(base, ptype, taxes, deadline=None):
         page += 1
     else:
         capped = True                   # fell out of the loop still on full pages
-    return products, cats, {"declared": declared, "capped": capped}
+    return products, cats, {"declared": declared, "capped": capped,
+                            "brandFiled": brand_filed, "brandFiledSwappedTo": swapped_to}
 
 
 def wp_products(domain, deadline=None):
@@ -866,8 +937,13 @@ def wp_products(domain, deadline=None):
     # back, or when the page cap / time budget cut the walk short. Either way
     # the slice cannot support a claim about the whole range.
     partial = bool(capped) or (declared is not None and declared > len(products))
-    return {"products": products, "cats": cats, "postTypes": read,
-            "declaredTotal": declared, "partialRead": partial}, None
+    out = {"products": products, "cats": cats, "postTypes": read,
+           "declaredTotal": declared, "partialRead": partial}
+    if meta.get("brandFiled"):
+        out["brandFiled"] = True
+        if meta.get("brandFiledSwappedTo"):
+            out["brandFiledSwappedTo"] = meta["brandFiledSwappedTo"]
+    return out, None
 
 
 def top_level(cid, cats):
@@ -2554,6 +2630,22 @@ def wc_store_products(domain, deadline=None):
     }, None
 
 
+SITEMAP_PROBE_PATHS = ("/sitemap.xml", "/sitemap_index.xml", "/wp-sitemap.xml")
+
+
+def _serves_xml_sitemap(host):
+    """True when `host` serves an XML sitemap at one of the usual paths."""
+    for path in SITEMAP_PROBE_PATHS:
+        try:
+            body, _ = get("https://%s%s" % (host, path), timeout=12)
+        except Exception:
+            continue
+        head = (body or "").lstrip()[:600].lower()
+        if "<urlset" in head or "<sitemapindex" in head or (head.startswith("<?xml") and "sitemap" in head):
+            return True
+    return False
+
+
 def reachable_host(domain):
     """Return whichever of `domain` / `www.domain` actually answers, or None.
 
@@ -2575,17 +2667,25 @@ def reachable_host(domain):
     readable product range afterwards is untouched.
     """
     d = domain[4:] if domain.startswith("www.") else domain
+    # ^o564: PREFER a host that answers AND serves an XML sitemap. Some sites
+    # answer on both hosts but only one is the real site (crestmedical.co.uk:
+    # the bare host answers with a stub, www serves the sitemap with 875 products).
+    # Fall back to the FIRST answering host, which is the old behaviour.
+    first_answering = None
     for host in (d, "www." + d):
         try:
             get("https://%s/" % host, timeout=12)
-            return host
         except urllib.error.HTTPError:
             # An HTTP status means the host resolved and served TLS. That is
             # reachable; whether this particular path 404s is not the question.
-            return host
+            pass
         except Exception:
             continue
-    return None
+        if first_answering is None:
+            first_answering = host
+        if _serves_xml_sitemap(host):
+            return host
+    return first_answering
 
 
 def crawl(domain):
