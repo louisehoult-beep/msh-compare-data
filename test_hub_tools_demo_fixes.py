@@ -267,5 +267,38 @@ class CompanyReportMastheadNotAHeader(unittest.TestCase):
         self.assertIn("#1B3A5F 100%)!important;", self.src)
 
 
+
+class CompanyReportNeverHiddenByScrollReveal(unittest.TestCase):
+    """30/09/2026: every report body rendered blank for members. The site-wide
+    scroll-reveal snippet (WPCode 3108) tagged the whole .mcr-body, ~47,000px
+    tall, with .rv (opacity 0); its IntersectionObserver needs 5% of the
+    element on screen, ~2,350px, which no viewport shows, so it never
+    revealed. The report opts out in CSS and marks itself revealed in JS."""
+
+    def setUp(self):
+        self.src = read("app/company-report.js")
+
+    def test_css_opt_out_covers_inside_self_and_host(self):
+        self.assertIn(
+            "'.rv-on .mcr .rv,.rv-on .mcr.rv,.rv-on .rv:has(.mcr)"
+            "{opacity:1!important;transform:none!important;transition:none!important;}'",
+            self.src)
+
+    def test_opt_out_is_not_inside_a_media_query(self):
+        i = self.src.index("'.rv-on .mcr .rv,")
+        before = self.src[:i]
+        opens = before.count("'@media")
+        # every @media block opened before the rule has been closed by a lone '}'
+        self.assertEqual(opens, before.count("\n    '}',"))
+
+    def test_js_marks_report_revealed_after_render_and_at_load(self):
+        self.assertIn("function unhideFromReveal(root) {", self.src)
+        self.assertIn("if (s) groupClosedPanels(result);\n      unhideFromReveal(result);", self.src)
+        self.assertIn("window.addEventListener('load', function () { unhideFromReveal(result); });", self.src)
+
+    def test_no_mutation_observer_loop(self):
+        self.assertNotIn("new MutationObserver(", self.src)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -431,6 +431,21 @@
     '.mcr .mcr-part-t{font-size:15.5px;}',
     '}',
 
+    /* --- never hidden by the site-wide scroll reveal ------------------- */
+    /* 30/09/2026: every report body rendered BLANK for members. The Hub's
+       site-wide scroll-reveal snippet (WPCode 3108) tags tall content blocks
+       with .rv (opacity 0) and reveals them with an IntersectionObserver at
+       threshold 0.05. When the report is already in the DOM when that
+       snippet scans the page (same-day cached data resolves fast), the whole
+       .mcr-body is tagged as ONE block about 47,000px tall; 5% of that is
+       ~2,350px, which can never be on screen in one viewport, so it never
+       reveals. The report is a tool, not a marketing section, so it opts out
+       of the fade entirely: anything tagged inside it, the report root
+       itself, and any host block that contains it stay fully visible. Pure
+       CSS so it holds whichever of the two scripts runs first. See also
+       unhideFromReveal() for browsers without :has(). */
+    '.rv-on .mcr .rv,.rv-on .mcr.rv,.rv-on .rv:has(.mcr){opacity:1!important;transform:none!important;transition:none!important;}',
+
     /* --- print: the downloadable pack --------------------------------- */
     '@media print{',
     '.mcr .mcr-report{border:0;box-shadow:none;border-radius:0;max-width:none;}',
@@ -3114,6 +3129,22 @@
     }
   }
 
+  /* Belt to the CSS braces above (the .rv-on .mcr rules), for a browser
+     without :has(). The scroll-reveal snippet only ever ADDS classes, so
+     marking the report, every tagged block inside it and every tagged
+     ancestor as revealed ('rv-in') settles it without fighting the snippet
+     and without a MutationObserver (an observer that edits classList can
+     re-trigger itself). Called after each render and once more at load,
+     which covers the snippet scanning either before or after the report. */
+  function unhideFromReveal(root) {
+    if (!root || !root.querySelectorAll) return;
+    var tagged = root.querySelectorAll('.rv');
+    for (var i = 0; i < tagged.length; i++) tagged[i].classList.add('rv-in');
+    for (var el = root; el && el.classList; el = el.parentElement) {
+      if (el.classList.contains('rv')) el.classList.add('rv-in');
+    }
+  }
+
   /* Saves the same document the print pack shows as one self-contained HTML
      file: no pop-up, so a pop-up blocker cannot swallow it. */
   function downloadPack(sub, ctx) {
@@ -3338,6 +3369,7 @@
         '<div style="padding:14px 4px;font-size:13.5px;color:' + DIM + ';line-height:1.6;">No match for “' + esc(q) +
         '”. Coverage is the tracked-supplier set (' + all.length + ' indexed) — a company that is not here is <b>not yet indexed</b>, not “nothing found”.</div>';
       if (s) groupClosedPanels(result);
+      unhideFromReveal(result);
       var pk = document.getElementById('mcrPack');
       if (pk && s) pk.addEventListener('click', function () { openPack(s, ctx); });
       var dlb = document.getElementById('mcrDownload');
@@ -3351,6 +3383,11 @@
     });
 
     if (window.MSH_COMPANY_REPORT_OPEN) show(window.MSH_COMPANY_REPORT_OPEN);
+
+    /* The reveal snippet may scan the page after this report has rendered
+       (it runs at DOMContentLoaded); sweep once more when the page settles. */
+    if (document.readyState === 'complete') setTimeout(function () { unhideFromReveal(result); }, 0);
+    else window.addEventListener('load', function () { unhideFromReveal(result); });
 
     /* ?company= deep link, e.g. from the Live Desk's supplier-press panel
        (SPEC-live-desk-supplier-press-block.md §4). Resolved the same way a
