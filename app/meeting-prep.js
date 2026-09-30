@@ -41,6 +41,56 @@
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
 
+  /* company-match:start
+     Company finder (added 30/09/2026 after a live demo). The company picker is a
+     plain <select>, and a browser only jumps to an option whose text STARTS with
+     what you type, so "Hartmann" found nothing: the record is filed as
+     "Paul Hartmann (HARTMANN)". The finder box above the picker matches the
+     start of ANY word of the company's name or of any alias the seed already
+     holds (framework spellings, legal names, former names), after folding
+     accents to plain letters so "Molnlycke" finds "Mölnlycke". It is prefix
+     matching on whole words only, never fuzzy, so two different companies are
+     never merged: each record keeps its own row. */
+  var CM_FOLD = [
+    ['ø', 'o'], ['Ø', 'O'], ['ß', 'ss'],
+    ['æ', 'ae'], ['Æ', 'AE'], ['œ', 'oe'], ['Œ', 'OE'],
+    ['đ', 'd'], ['Đ', 'D'], ['ł', 'l'], ['Ł', 'L'],
+    ['ð', 'd'], ['Ð', 'D'], ['þ', 'th'], ['Þ', 'TH'],
+    ['ı', 'i']
+  ];
+  function cmClean(x){
+    var s = String(x == null ? '' : x), i;
+    for (i = 0; i < CM_FOLD.length; i++) s = s.split(CM_FOLD[i][0]).join(CM_FOLD[i][1]);
+    if (s.normalize) s = s.normalize('NFKD').replace(/[̀-ͯ]/g, '');
+    return s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+  function cmWords(s){
+    var seen = {}, out = [];
+    [s.name].concat(s.aliases || []).forEach(function(n){
+      cmClean(n).split(' ').forEach(function(w){ if (w && !seen[w]){ seen[w] = 1; out.push(w); } });
+    });
+    return out;
+  }
+  /* Every word the member typed must be the start of some word of the name or
+     an alias. An empty query matches everything. */
+  function companyMatches(s, query){
+    var q = cmClean(query);
+    if (!q) return true;
+    var words = s._cmWords || (s._cmWords = cmWords(s));
+    return q.split(' ').every(function(t){
+      return words.some(function(w){ return w.indexOf(t) === 0; });
+    });
+  }
+  /* True when the query is met by the company's own current name, not only by
+     an alias. Name hits are listed first; a company found only through a
+     former or legal name is listed under its own heading, so a firm that was
+     once called "Smith & Nephew Personal Hygiene" is never mistaken for
+     Smith+Nephew. */
+  function companyNameMatches(s, query){
+    return companyMatches({ name: s.name }, query);
+  }
+  /* company-match:end */
+
   /* How old is this profile? verifiedAt is written by the trust-profile refresh
      task each time it re-checks a trust against that trust's own board pages and
      current annual report. It is an ISO date; the Hub shows UK format. */
@@ -182,6 +232,12 @@
        map and the verified product tags, the same reconciliation the brief
        itself uses, so a lookup miss cannot masquerade as "nobody sells this". */
     var selCo = mkSelect('Your company', ['']);
+    var coFind = el('input', 'padding:8px 10px;border:1px solid ' + LINE + ';border-radius:8px;font-size:14px;background:#fff;color:' + INK + ';');
+    coFind.type = 'search';
+    coFind.placeholder = 'Type any part of the name';
+    coFind.setAttribute('aria-label', 'Find your company by any word of its name or a brand name');
+    coFind.autocomplete = 'off';
+    selCo.box.insertBefore(coFind, selCo.sel);
     function specIdOf(v){
       if (!v) return '';
       if (LABEL_TO_ID[v]) return LABEL_TO_ID[v];
@@ -205,30 +261,49 @@
     }
     function fillCompanies(){
       var spec = selSp.sel.value;
-      var scoped = suppliersIn(spec);
-      var cur = scoped.filter(function(s){ return s.curated; }).sort(byName).map(nm);
-      var oth = scoped.filter(function(s){ return !s.curated; }).sort(byName).map(nm);
+      var inSpec = suppliersIn(spec);
+      var query = coFind.value;
+      var scoped = inSpec.filter(function(s){ return companyMatches(s, query); });
+      var byOwn = cmClean(query) ? scoped.filter(function(s){ return companyNameMatches(s, query); }) : scoped;
+      var byAlias = cmClean(query) ? scoped.filter(function(s){ return byOwn.indexOf(s) === -1; }) : [];
+      var cur = byOwn.filter(function(s){ return s.curated; }).sort(byName).map(nm);
+      var oth = byOwn.filter(function(s){ return !s.curated; }).sort(byName).map(nm);
+      var als = byAlias.slice().sort(byName).map(nm);
       var opts = [''].concat(cur)
         .concat(oth.length && cur.length ? ['— other suppliers —'] : [])
-        .concat(oth);
+        .concat(oth)
+        .concat(als.length ? ['\u00a7Also traded or registered under that name:'] : [])
+        .concat(als);
       var keep = selCo.sel.value;
       selCo.sel.innerHTML = '';
       opts.forEach(function(o){
         var op = el('option');
+        /* A leading section sign marks a heading row added with the company
+           finder: shown without the marker, never selectable. */
+        if (o.charAt(0) === '\u00a7'){ op.value = ''; op.textContent = o.slice(1); op.disabled = true; selCo.sel.appendChild(op); return; }
         op.value = (o.indexOf('—') === 0 ? '' : o);
-        op.textContent = o || (scoped.length ? '— choose —' : '— none indexed in this speciality —');
+        op.textContent = o || (scoped.length
+          ? (cmClean(query) ? (scoped.length + ' matching, pick one') : '— choose —')
+          : (cmClean(query) ? 'No company matches that name' : '— none indexed in this speciality —'));
         if (o.indexOf('—') === 0) op.disabled = true;
         selCo.sel.appendChild(op);
       });
-      selCo.sel.value = (keep && cur.concat(oth).indexOf(keep) !== -1) ? keep : '';
+      selCo.sel.value = (keep && cur.concat(oth).concat(als).indexOf(keep) !== -1) ? keep : '';
+      /* One company answering to that name means the member has named their
+         company: pick it for them. */
+      if (cmClean(query)){
+        if (byOwn.length === 1) selCo.sel.value = byOwn[0].name;
+        else if (!byOwn.length && byAlias.length === 1) selCo.sel.value = byAlias[0].name;
+      }
       var lbl = selCo.box.querySelector('label');
       if (lbl) lbl.textContent = spec
-        ? ('Your company — ' + scoped.length + ' in this speciality')
+        ? ('Your company — ' + inSpec.length + ' in this speciality')
         : 'Your company';
       /* Losing the company must reset what hangs off it, or the product picker
          keeps offering the old firm's range under a new speciality. */
-      if (keep && selCo.sel.value !== keep) fillProducts();
+      if (selCo.sel.value !== keep) fillProducts();
     }
+    coFind.addEventListener('input', function(){ fillCompanies(); });
     // Product picker. Was missing entirely — product could only reach the brief
     // via hand-off from Product Comparison, so anyone starting here had no way
     // to say what they sell. Repopulates whenever the company changes.
@@ -351,6 +426,11 @@
          hand-off — arriving with the wrong company silently unset is worse
          than arriving unfiltered. */
       var opts = [].slice.call(selCo.sel.options).map(function(o){ return o.value; });
+      if (opts.indexOf(h.company) === -1 && coFind.value){
+        coFind.value = '';
+        fillCompanies();
+        opts = [].slice.call(selCo.sel.options).map(function(o){ return o.value; });
+      }
       if (opts.indexOf(h.company) === -1 && selSp.sel.value){
         selSp.sel.value = '';
         fillCompanies();

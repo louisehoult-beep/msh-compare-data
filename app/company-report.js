@@ -2925,7 +2925,8 @@
        rather than making them find it again in a picker. Added 18/08/2026 (Lou). */
     h += '<div style="display:flex;justify-content:flex-end;align-items:center;gap:12px;margin:14px 0 0;flex-wrap:wrap;">' +
       '<span style="font-size:11.5px;color:' + DIM + ';">Take it into the meeting:</span>' +
-      '<button id="mcrPack" class="mcr-btn">Download / print this report</button>' +
+      '<button id="mcrDownload" class="mcr-btn">Download this report</button>' +
+      '<button id="mcrPack" class="mcr-btn">Print or save as PDF</button>' +
       '<span style="font-size:11.5px;color:' + DIM + ';">Interviewing here:</span>' +
       '<a class="mcr-btn" style="text-decoration:none;display:inline-block;" href="/medical-sales-hub/interview-prep/?company=' +
       encodeURIComponent(sub.name || '') + '">Prepare for an interview with ' + esc(sub.name || 'this company') + '</a></div>';
@@ -2979,11 +2980,46 @@
     }).join('');
   }
 
+  /* EXPORT STAMP (30/09/2026). Asked for on a live demo: can the report be
+     exported? The pack could only be printed through a pop-up, and a blocked
+     pop-up did nothing at all. The downloaded file and the printed pack now
+     open with the same stamp: the date the file was made, the date each
+     source the report reads was captured (only where the data itself carries
+     one; a source with no date is left out, never given one), and the
+     ownership and database-right notice the data files already carry, read
+     from supplier-index.json's own _notice so the two can never drift. It adds
+     no claim about the company: the report below it is unchanged. */
+  function exportStamp(ctx, stamp) {
+    function when(label, v) { return v ? label + ' <b>' + esc(dateUK(v)) + '</b>' : ''; }
+    var cacheMeta = (ctx.cache && ctx.cache._meta) || {};
+    var dates = [
+      when('supplier index', ctx.asOf),
+      when('NHS Supply Chain catalogue refreshed', cacheMeta.refreshed),
+      when('framework briefs captured', ctx.fwDoc && ctx.fwDoc.dataAsOf),
+      when('Companies House records read', ctx.fin && ctx.fin.dataAsOf),
+      when('tender and contract awards', ctx.awards && ctx.awards.dataAsOf),
+      when('framework awards awaiting publication', ctx.pending && ctx.pending.dataAsOf)
+    ].filter(function (x) { return x; });
+    var n = ctx.notice || {};
+    var notice = [n.copyright, n.databaseRight, n.prohibited ? 'Not permitted: ' + n.prohibited : '']
+      .filter(function (x) { return x; }).map(esc).join(' ');
+    return '<div class="mcr-export-stamp" style="margin:0 0 14px;padding:12px 15px;background:#ffffff;border:1px solid #A8842C;' +
+      'border-left:4px solid #A8842C;border-radius:8px;font-size:12.5px;line-height:1.6;color:#0B1C33;">' +
+      '<div style="font-weight:700;font-size:13.5px;">Information correct at ' + esc(stamp) + ', from the sources named.</div>' +
+      (dates.length ? '<div style="margin-top:3px;">Data as of: ' + dates.join(' &middot; ') + '. Each panel below names its own source and, where the source gives one, its own date.</div>' : '') +
+      (notice ? '<div style="margin-top:6px;font-size:11.5px;color:#14304F;">' + notice +
+        (n.owner ? ' ' + esc(n.owner) + '.' : '') +
+        (n.terms ? ' Terms: <a href="' + esc(n.terms) + '" style="color:#14304F;">' + esc(n.terms) + '</a>' : '') +
+        (n.contact ? ' &middot; ' + esc(n.contact) : '') + '</div>' : '') +
+      '</div>';
+  }
+
   function buildPack(sub, ctx) {
     var today = new Date();
     var stamp = ('0' + today.getDate()).slice(-2) + '/' + ('0' + (today.getMonth() + 1)).slice(-2) + '/' + today.getFullYear();
     var d = deepFor(sub);
     var inner =
+      exportStamp(ctx, stamp) +
       '<article class="mcr-report" style="' + accentVars(sub) + '">' +
       masthead(sub, ctx, stamp) +
       '<div class="mcr-body">' +
@@ -3057,6 +3093,24 @@
         i++;
       }
     }
+  }
+
+  /* Saves the same document the print pack shows as one self-contained HTML
+     file: no pop-up, so a pop-up blocker cannot swallow it. */
+  function downloadPack(sub, ctx) {
+    var html = buildPack(sub, ctx);
+    var day = new Date().toISOString().slice(0, 10);
+    var slug = String(sub.name || 'company').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'company';
+    var name = slug + '-company-intelligence-report-' + day + '.html';
+    try {
+      var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) { window.navigator.msSaveOrOpenBlob(blob, name); return; }
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = name; a.style.display = 'none';
+      document.body.appendChild(a); a.click();
+      setTimeout(function () { URL.revokeObjectURL(url); if (a.parentNode) a.parentNode.removeChild(a); }, 1500);
+    } catch (e) { openPack(sub, ctx); }
   }
 
   function openPack(sub, ctx) {
@@ -3143,6 +3197,7 @@
       byName: byName,
       fwMap: fwMap,
       asOf: (index && index.dataAsOf) || '',
+      notice: (index && index._notice) || null,
       spec: specCtx(specMap, prodFile),
       prodFile: prodFile,
       fin: fin || null,
@@ -3266,6 +3321,8 @@
       if (s) groupClosedPanels(result);
       var pk = document.getElementById('mcrPack');
       if (pk && s) pk.addEventListener('click', function () { openPack(s, ctx); });
+      var dlb = document.getElementById('mcrDownload');
+      if (dlb && s) dlb.addEventListener('click', function () { downloadPack(s, ctx); });
     }
     input.addEventListener('change', function () { show(input.value); });
     input.addEventListener('keydown', function (e) { if (e.key === 'Enter') show(input.value); });

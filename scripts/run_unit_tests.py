@@ -92,8 +92,14 @@ ELSEWHERE = {
 # cannot drift from the workflow the way a copied-out snippet would. Offline,
 # ~7s, nearly all of it the loop's own `sleep 5`. RUN, not ELSEWHERE — it has no
 # workflow of its own.
+# test_hub_tools_demo_fixes.py (30/09/2026) holds the three fixes from the
+# HARTMANN demo: the "Help me prepare" company finder, the Product Comparison
+# brand-line split, and the company report download stamp. Offline, under a
+# second; the matcher case needs node, which ubuntu-latest has. RUN: it has no
+# workflow of its own.
 RUN = [
     "test_ask_passages.py",
+    "test_hub_tools_demo_fixes.py",
     "test_breadcrumb_division.py",
     "test_careers_jobpages.py",
     "test_careers_rotation.py",

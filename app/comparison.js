@@ -183,7 +183,7 @@
     // medicines-route etc.) — shown honestly instead of a dead-end lookup link.
     var NOTCAT = {}; var ncp = (nhssc && nhssc.notCatalogue) || {};
     for (var k2 in ncp){ NOTCAT[nk(k2)] = ncp[k2]; }
-    function detailFor(prod){ return CACHE[nk(prod.name)] || null; }
+    function detailFor(prod){ return prod._detail || CACHE[nk(prod.name)] || null; }
     function liveItem(d){ if (!d || !d.items || !d.items.length) return null; for (var i=0;i<d.items.length;i++){ if (!d.items[i].status) return d.items[i]; } return d.items[0]; }
     // The supplier's OWN product-page detail — keyed exactly as
     // scripts/crawl_supplier_product_detail.py writes it: "supplier|normalised name".
@@ -192,12 +192,114 @@
     // Flatten to a product index.
     var PRODUCTS = [];
     var seenProd = {};
+    /* ONE PRODUCT PER NHS SUPPLY CHAIN BRAND LINE (30/09/2026).
+       Found live on a demo to HARTMANN: Wound care, product type Dressing, and
+       their dressings were not in the list. A seed product is often a SEARCH
+       TERM that groups several brands ("Cosmopor range; Peha-soft nitrile
+       examination gloves", "Zetuvit Plus (super absorber); HydroClean Advance;
+       ..."), and the catalogue cache holds every line that term returned. The
+       tool treated the whole term as one product, so Cosmopor E, Cosmopor IV,
+       Atrauman Silicone and Atrauman Ag could never be picked, and a term that
+       mentioned gloves was typed "glove" and vanished from Dressing entirely.
+       HARTMANN's own site refuses automated reading, so there is no company
+       range to fall back on and the terms were all a rep ever saw.
+       Where the cache for a term holds two or more differently named brand
+       lines from THIS supplier, each brand line becomes its own product, named
+       exactly as NHS Supply Chain names it, typed from its own catalogue
+       description, and carrying only its own pack lines. Lines from any other
+       supplier the search happened to return are never attributed to this one.
+       Any part of the term the catalogue returned nothing for (Sorbalgon,
+       Peha-soft) stays listed under its own words, so nothing is dropped. */
+    var SUPSTOP = { ltd:1, limited:1, uk:1, plc:1, llp:1, inc:1, co:1, the:1, and:1, of:1, group:1, healthcare:1, health:1, care:1, medical:1, international:1, products:1, europe:1, gmbh:1, company:1 };
+    function supWords(x){
+      return String(x || '').toLowerCase().replace(/\([^)]*\)/g, ' ').replace(/[^a-z0-9]+/g, ' ').split(' ')
+        .filter(function(w){ return w.length > 1 && !SUPSTOP[w]; });
+    }
+    function lineIsSuppliers(item, s){
+      var mine = {};
+      [s.name].concat(s.aliases || []).forEach(function(n){ supWords(n).forEach(function(w){ mine[w] = 1; }); });
+      return supWords(item && item.supplier).some(function(w){ return mine[w]; });
+    }
+    function firstWord(x){
+      var w = String(x || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().split(' ')[0] || '';
+      return w.length >= 3 ? w : '';
+    }
+    function brandLines(entry, s){
+      var groups = {}, order = [];
+      ((entry && entry.items) || []).forEach(function(it){
+        if (!it || !it.name || !lineIsSuppliers(it, s)) return;
+        var key = String(it.name).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+        if (!key) return;
+        if (!groups[key]){ groups[key] = { name: it.name, items: [] }; order.push(key); }
+        /* Keep the most capitalised spelling NHSSC uses for the line. */
+        var caps = function(t){ return (String(t).match(/[A-Z]/g) || []).length; };
+        if (caps(it.name) > caps(groups[key].name)) groups[key].name = it.name;
+        groups[key].items.push(it);
+      });
+      return order.map(function(k){ return groups[k]; });
+    }
     suppliers.forEach(function(s){
+      var fw = (s.frameworks && s.frameworks[0] && s.frameworks[0].name) || '';
+      var fwD = (s.frameworks && s.frameworks[0] && s.frameworks[0].dates) || '';
+      var own = (s.products || []).map(function(p){ return typeof p === 'string' ? p : (p && p.name); }).filter(function(n){ return n; });
+      var ownFirst = {}; own.forEach(function(n){ var w = firstWord(n); if (w) ownFirst[w] = (ownFirst[w] || 0) + 1; });
+      function add(name, code, extra){
+        if (seenProd[s.name + '|' + nk(name)]) return;
+        seenProd[s.name + '|' + nk(name)] = 1;
+        var prod = { name: name, code: code || '', supplier: s.name, specs: s.specialities || [], framework: fw, fwDates: fwD, voice: s.voice, type: '' };
+        if (extra) for (var x in extra) prod[x] = extra[x];
+        prod.type = typeForProduct(name, prod._detail);
+        PRODUCTS.push(prod);
+        return prod;
+      }
       (s.products || []).forEach(function(p){
         var name = typeof p === 'string' ? p : (p && p.name);
         if (!name) return;
+        var entry = CACHE[nk(name)];
+        var lines = brandLines(entry, s);
+        /* Split when the catalogue returned two or more brand lines, or one brand
+           line for a term that names several products (";"). */
+        if (!(lines.length >= 2 || (lines.length === 1 && String(name).indexOf(';') !== -1))){ add(name, p && p.code); return; }
         seenProd[s.name + '|' + nk(name)] = 1;
-        PRODUCTS.push({ name: name, code: (p && p.code) || '', supplier: s.name, specs: s.specialities || [], framework: (s.frameworks && s.frameworks[0] && s.frameworks[0].name) || '', fwDates: (s.frameworks && s.frameworks[0] && s.frameworks[0].dates) || '', voice: s.voice, type: typeForProduct(name) });
+        var covered = {};
+        lines.forEach(function(g){
+          var gw = firstWord(g.name);
+          covered[gw] = 1;
+          var made = add(g.name, '', { _detail: { supplier: entry.supplier, query: entry.query, items: g.items }, catalogueLine: true, term: name });
+          /* Type. A brand line keeps the type the whole term had, as before,
+             whenever its own name or catalogue text bears that type out. Where
+             it does not (the Cosmopor lines of a term typed "glove" because it
+             also names Peha-soft gloves), the line takes the curated term's own
+             words for that brand, else the noun NHS Supply Chain opens every
+             one of its descriptions with ("Dressing adhesive island ..."),
+             else the term's type as before. A description that merely mentions
+             a type word somewhere is not enough: measured on the whole cache
+             that loose test re-typed 199 lines, many wrongly; the opening-noun
+             test re-types 40, each checked by eye on 30/09/2026. */
+          if (made){
+            var termT = typeForProduct(name);
+            var own = (g.name + ' ' + g.items.map(function(it){ return it.desc || ''; }).join(' ')).toLowerCase();
+            if (termT && own.indexOf(termT) !== -1){
+              made.type = termT;
+            } else {
+              var segT = '';
+              String(name).split(';').forEach(function(seg){ if (!segT && firstWord(seg) === gw) segT = typeOf(seg); });
+              var leads = {}, nLeads = 0, lead1 = '';
+              g.items.forEach(function(it){ var l = leadType(it.desc); if (!leads[l]){ leads[l] = 1; nLeads++; lead1 = l; } });
+              made.type = segT || ((nLeads === 1 && lead1) ? lead1 : '') || termT;
+            }
+          }
+        });
+        /* The rest of the term, in its own words. Skipped where another of
+           this supplier's own seed entries already starts with that word
+           (HydroClean Advance, HydroTac), so the list is not doubled. */
+        String(name).split(';').forEach(function(seg){
+          seg = seg.trim();
+          var w = firstWord(seg);
+          if (!seg || !w || covered[w]) return;
+          if (ownFirst[w] && firstWord(name) !== w) return;
+          add(seg, '', { term: name });
+        });
       });
     });
 
@@ -243,6 +345,12 @@
         });
       });
     })();
+    /* The longest product-type word a catalogue description OPENS with. */
+    function leadType(desc){
+      var d = String(desc || '').toLowerCase().replace(/^\s+/, ''), best = '';
+      for (var i = 0; i < TYPES.length; i++){ var t = TYPES[i].trim(); if (t && d.indexOf(t) === 0 && t.length > best.length) best = t; }
+      return best;
+    }
     function typeOf(n){ n = (n||'').toLowerCase(); for (var i=0;i<TYPES.length;i++){ if (n.indexOf(TYPES[i]) !== -1) return TYPES[i].trim(); } return ''; }
     // Type from the product name; if the name has no category word, fall back to the
     // real NHS Supply Chain catalogue description (e.g. "Intermittent Catheter…",
@@ -285,11 +393,11 @@
        02/09/2026. GENERIC_TYPE_OVERRIDE and CANNULA_DISQUALIFIERS moved to
        module scope 07/09/2026 so data/product-types.json can override them
        once fetched — see PTYPESURL above. */
-    function typeForProduct(name){
+    function typeForProduct(name, dGiven){
       var t = typeOf(name);
       var override = GENERIC_TYPE_OVERRIDE[t];
       if (override){
-        var d = CACHE[nk(name)];
+        var d = dGiven || CACHE[nk(name)];
         if (d && d.items){
           var allDesc = '';
           for (var i = 0; i < d.items.length; i++){ allDesc += ' ' + (d.items[i].desc || '').toLowerCase(); }
@@ -300,7 +408,7 @@
           if (!disqualified && allDesc.indexOf(override) !== -1) return override;
         }
       }
-      if (!t){ var d2 = CACHE[nk(name)]; if (d2 && d2.items){ for (var j = 0; j < d2.items.length && !t; j++){ t = typeOf(d2.items[j].desc || ''); } } }
+      if (!t){ var d2 = dGiven || CACHE[nk(name)]; if (d2 && d2.items){ for (var j = 0; j < d2.items.length && !t; j++){ t = typeOf(d2.items[j].desc || ''); } } }
       return t;
     }
     function kp(prod){ var m = KEYPOINTS[prod.supplier]; if (!m) return ''; var n = prod.name.toLowerCase(); for (var k in m){ if (n.indexOf(k) !== -1) return m[k]; } return ''; }
@@ -462,6 +570,9 @@
       if (!v) return null;
       var code = v.toUpperCase().replace(/[^A-Z0-9]/g, '');
       if (code.length >= 4 && /\d/.test(code)){
+        /* A brand line split out of a grouped term carries its own pack lines. */
+        var byLine = PRODUCTS.filter(function(p){ return p._detail && (p._detail.items || []).some(function(it){ return it.npc === code || it.mpc === code; }); })[0];
+        if (byLine) return byLine;
         for (var ck in cp){
           if ((cp[ck].items || []).some(function(it){ return it.npc === code || it.mpc === code; })){
             var m = PRODUCTS.filter(function(p){ return nk(p.name) === nk(ck); })[0];
@@ -961,7 +1072,7 @@
         // product name + its live catalogue description (e.g. Pahacel [ORC] ranks
         // Surgicel [ORC] above a flowable matrix), then cached detail, then speciality.
         function stems(p){
-          var d = CACHE[nk(p.name)];
+          var d = detailFor(p);
           var txt = p.name + ' ' + ((d && d.items && d.items[0] && d.items[0].desc) || '');
           var out = {}; (txt.toLowerCase().match(/[a-z]{5,}/g) || []).forEach(function(w){ out[w.slice(0, 8)] = 1; });
           return out;
@@ -1566,7 +1677,12 @@
         else if (/fibrin|thrombin/.test(txt)) a.material = 'biologic (fibrin/thrombin)';
         else if (/chitosan/.test(txt)) a.material = 'chitosan';
         if (/fibrillar/.test(txt)) a.form = 'fibrillar fabric';
-        else if (/knit|fabric/.test(txt)) a.form = 'knitted fabric';
+        /* "fabric" alone is not "knitted": Cosmopor E is catalogued as "non
+           woven fabric" and was being shown as knitted (30/09/2026). Say only
+           what the catalogue text says. */
+        else if (/knit/.test(txt)) a.form = 'knitted fabric';
+        else if (/non.?woven/.test(txt)) a.form = 'non-woven fabric';
+        else if (/fabric/.test(txt)) a.form = 'fabric';
         else if (/powder/.test(txt)) a.form = 'powder';
         else if (/matrix|applicator|flowable/.test(txt)) a.form = 'flowable matrix (applicator)';
         else if (/patch/.test(txt)) a.form = 'patch';
