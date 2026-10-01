@@ -27,6 +27,21 @@ name: Drug Tariff Parts IX and VIIIA (daily check, monthly source)
 # the file from scratch, which drops the _notice ownership block; without the re-stamp
 # the job would publish an unmarked file and break the next hand-push's gate.
 #
+# ⚠️ THE PRODUCT DOSSIERS MUST FOLLOW THE TARIFF (added 01/10/2026).
+# data/product-dossiers-{wound,respiratory,dermatology}.json copy Drug Tariff prices out
+# of the Part IX file, and test_product_dossiers.py (test_tariff_price_is_pounds,
+# test_dermatology_tariff_anchor) checks they still match. This job used to refresh the
+# tariff and leave the dossiers behind, so every new tariff month broke the pre-push unit
+# tests and blocked every land.sh push until someone rebuilt by hand (01/10, ed7aaaa).
+# scripts/rebuild_dossiers_for_tariff.py now rebuilds them, but ONLY when Part IX's
+# effectiveMonth or rows changed (the dossiers carry a `generated` timestamp, so a daily
+# rebuild would commit three big files every day for nothing), and runs the same
+# record-level check_no_loss.py that land.sh runs for hand pushes: a rebuild re-reads
+# differentiator.json too, and could drop records for reasons unrelated to the tariff.
+# On a loss the run fails and publishes nothing; the last good commit stays live.
+# test_product_dossiers.py runs in the publish gate (before the commit), so a mismatch
+# can never reach main from here.
+#
 # PART VIIIA ADDED 29/09/2026. refresh_drug_tariff_part_viiia.py writes
 # data/drug-tariff-part-viiia.json (medicines basic prices, category A/C/M/H) for
 # the speciality panels. Same publisher, same cadence, same gates. Its file names
@@ -73,6 +88,9 @@ jobs:
           python3 scripts/refresh_drug_tariff_part_viiia.py --out data/drug-tariff-part-viiia.json \
             ${{ github.event.inputs.month && format('--month {0}', github.event.inputs.month) || '' }}
 
+      - name: Rebuild product dossiers if the tariff changed
+        run: python3 scripts/rebuild_dossiers_for_tariff.py
+
       - name: Re-stamp the ownership notice and data markers
         run: python3 scripts/stamp_notice.py
 
@@ -99,11 +117,12 @@ jobs:
         run: |
           python3 scripts/prune_calendar.py
           bash scripts/gate.sh
+          python3 test_product_dossiers.py
       - name: Commit if changed
         run: |
           git config user.name "drug-tariff-bot"
           git config user.email "actions@github.com"
-          git add data/drug-tariff-part-ix.json data/drug-tariff-part-viiia.json
+          git add data/drug-tariff-part-ix.json data/drug-tariff-part-viiia.json data/product-dossiers-wound.json data/product-dossiers-respiratory.json data/product-dossiers-dermatology.json
           git diff --cached --quiet || git commit -m "Drug Tariff Parts IX and VIIIA $(date -u +%F)"
           pushed=0
           for attempt in 1 2 3; do
@@ -117,9 +136,11 @@ jobs:
             git reset --hard origin/main
             python3 scripts/refresh_drug_tariff_part_ix.py --out data/drug-tariff-part-ix.json
             python3 scripts/refresh_drug_tariff_part_viiia.py --out data/drug-tariff-part-viiia.json
+            python3 scripts/rebuild_dossiers_for_tariff.py || { echo "DOSSIER REBUILD REFUSED after re-fetch - refusing to push"; exit 1; }
             python3 scripts/stamp_notice.py
             bash scripts/gate.sh || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
-            git add data/drug-tariff-part-ix.json data/drug-tariff-part-viiia.json
+            python3 test_product_dossiers.py || { echo "DOSSIER TEST FAILED after re-fetch - refusing to push"; exit 1; }
+            git add data/drug-tariff-part-ix.json data/drug-tariff-part-viiia.json data/product-dossiers-wound.json data/product-dossiers-respiratory.json data/product-dossiers-dermatology.json
             git diff --cached --quiet || git commit -m "Drug Tariff Parts IX and VIIIA $(date -u +%F) (retry)"
             sleep 5
           done
