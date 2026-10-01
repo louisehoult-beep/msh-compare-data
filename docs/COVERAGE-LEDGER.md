@@ -64,7 +64,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 8 | 32.0% | 6 | 17 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 5 | 16 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 8 | 36.4% | 6 | 13 | STARTED |
-| Hand Hygiene and Associated Products and Services | infection | 21 | 2 | 9.5% | 13 | 11 | STARTED |
+| Hand Hygiene and Associated Products and Services | infection | 21 | 3 | 14.3% | 8 | 15 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 6 | 11 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 6 | 28.6% | 5 | 14 | STARTED |
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 7 | 35.0% | 9 | 6 | STARTED |
@@ -141,7 +141,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Reusable Plastic Medical Hollowware | — | 4 | 0 | 0.0% | 2 | 3 | UNMAPPED |
 | Obstetrics and Vinyl Pessaries | — | 3 | 0 | 0.0% | 3 | 0 | UNMAPPED |
 | Fresh Food DPS | — | 97 | 0 | 0.0% | 97 | 0 | OUT OF SCOPE |
-| Cleaning Equipment, Supplies and Associated Products | facilities | 60 | 7 | 11.7% | 43 | 11 | OUT OF SCOPE |
+| Cleaning Equipment, Supplies and Associated Products | facilities | 60 | 7 | 11.7% | 42 | 12 | OUT OF SCOPE |
 | Medical Healthcare Furniture | — | 51 | 0 | 0.0% | 45 | 9 | OUT OF SCOPE |
 | Beverages, Confectionary and Snacks | — | 44 | 0 | 0.0% | 42 | 2 | OUT OF SCOPE |
 | Textiles and Associated Products | workwear | 32 | 2 | 6.2% | 23 | 10 | OUT OF SCOPE |
@@ -151,7 +151,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Ambient Food | — | 27 | 0 | 0.0% | 26 | 1 | OUT OF SCOPE |
 | Multi Temperature Food Solutions | — | 27 | 0 | 0.0% | 27 | 0 | OUT OF SCOPE |
 | Environmental Decontamination | — | 22 | 0 | 0.0% | 19 | 4 | OUT OF SCOPE |
-| Catering Consumables and Equipment | — | 17 | 0 | 0.0% | 14 | 3 | OUT OF SCOPE |
+| Catering Consumables and Equipment | — | 17 | 0 | 0.0% | 13 | 4 | OUT OF SCOPE |
 | Paper Hygiene | — | 17 | 0 | 0.0% | 11 | 8 | OUT OF SCOPE |
 | Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging) | — | 16 | 0 | 0.0% | 13 | 3 | OUT OF SCOPE |
 | Office Supplies | — | 14 | 0 | 0.0% | 8 | 6 | OUT OF SCOPE |

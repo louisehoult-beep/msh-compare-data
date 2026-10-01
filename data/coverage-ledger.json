@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 37208,
-  "differentiator.json held": 50115
+  "differentiator.json published": 37223,
+  "differentiator.json held": 50123
  },
  "counts": {
   "frameworks": 122,
@@ -24,10 +24,10 @@
   "unmapped": 46,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 412,
-  "inScopeSuppliersNeedingCrawl": 266,
-  "inScopeSuppliersNeedingDomain": 244,
-  "suppliersRefused": 537,
+  "supplierNamesUnresolved": 409,
+  "inScopeSuppliersNeedingCrawl": 264,
+  "inScopeSuppliersNeedingDomain": 242,
+  "suppliersRefused": 541,
   "suppliersRefusedButPublishingElsewhere": 110,
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 1,
@@ -41,10 +41,6 @@
   ],
   [
    "Brake Bros Ltd",
-   3
-  ],
-  [
-   "Alliance Disposables Ltd",
    3
   ],
   [
@@ -1185,14 +1181,6 @@
   ],
   [
    "Your Choice Fruit & Vegetables T/A Your Choice Catering Supplies",
-   1
-  ],
-  [
-   "Bioguard Hygiene Solutions",
-   1
-  ],
-  [
-   "Ecohydra Technologies Ltd",
    1
   ],
   [
@@ -10007,8 +9995,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "11 June 2027",
    "suppliersAwarded": 21,
-   "suppliersPublished": 2,
-   "coverage": 9.5,
+   "suppliersPublished": 3,
+   "coverage": 14.3,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -10018,25 +10006,29 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "Abbliss Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "GDP Compliance Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "SC Johnson Ltd",
+     "supplier": "Ecohydra Technologies Ltd",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "Abbliss Ltd",
-    "GDP Compliance Ltd",
-    "SC Johnson Ltd"
+    "Ecohydra Technologies Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
+    {
+     "supplier": "Abbliss Ltd",
+     "domain": "giab.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-10-01",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Alliance Disposables Ltd",
+     "domain": "alliancenational.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-10-01",
+     "bucket": "refused"
+    },
     {
      "supplier": "Banner Group Limited",
      "domain": "www.banneruk.com",
@@ -10049,6 +10041,13 @@
      "domain": "endurocide.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Bioguard Hygiene Solutions",
+     "domain": "bioguardhygiene.co.uk",
+     "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-10-01",
      "bucket": "refused"
     },
     {
@@ -10077,6 +10076,13 @@
      "domain": "why.lyreco.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "SC Johnson Ltd",
+     "domain": "scjp.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-10-01",
      "bucket": "refused"
     },
     {
@@ -10118,19 +10124,21 @@
    "route": "NHSSC framework",
    "catsInScope": [
     "infection:air",
+    "infection:handhygiene",
     "infection:ppe"
    ],
    "actionable": {
-    "unresolvedNames": 3,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 7,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 1
    },
    "published": [
     "GAMA Healthcare",
+    "GDP Compliance Ltd",
     "Nine Group International"
    ],
    "publishedElsewhere": [
@@ -10145,24 +10153,22 @@
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Abbliss Ltd",
-    "GDP Compliance Ltd",
-    "SC Johnson Ltd"
+    "Ecohydra Technologies Ltd"
    ],
    "refused": [
+    "Abbliss Ltd",
+    "Alliance Disposables Ltd",
     "Banner Group Limited",
     "Biotechnics Ltd",
+    "Bioguard Hygiene Solutions",
     "Creed Medical Ltd",
     "Cuxson Gerrard & Company Limited",
     "Fenton Pharmaceuticals Limited",
-    "Lyreco UK Limited"
+    "Lyreco UK Limited",
+    "SC Johnson Ltd"
    ],
-   "unknown": [
-    "Alliance Disposables Ltd",
-    "Bioguard Hygiene Solutions",
-    "Ecohydra Technologies Ltd"
-   ],
-   "actionableTotal": 13,
+   "unknown": [],
+   "actionableTotal": 8,
    "blockedReason": null,
    "deferred": null
   },
@@ -19679,6 +19685,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Alliance Disposables Ltd",
+     "domain": "alliancenational.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-10-01",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Arrow County Supplies",
      "domain": "arrowcounty.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -19757,7 +19770,7 @@
     "facilities:washroom"
    ],
    "actionable": {
-    "unresolvedNames": 40,
+    "unresolvedNames": 39,
     "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
@@ -19785,6 +19798,7 @@
    ],
    "refused": [
     "2San Global",
+    "Alliance Disposables Ltd",
     "Arrow County Supplies",
     "Banner Group Limited",
     "Bates Office Services Ltd",
@@ -19797,7 +19811,6 @@
    ],
    "unknown": [
     "Ace Janitorial Supplies Ltd",
-    "Alliance Disposables Ltd",
     "Bauer Consultants Ltd",
     "Bunzl Catering",
     "Bunzl UK Ltd T/A Bunzl Cleaning and Hygiene Supplies",
@@ -19837,7 +19850,7 @@
     "Tennant UK",
     "Thomas Stoner Supplies Ltd"
    ],
-   "actionableTotal": 43,
+   "actionableTotal": 42,
    "blockedReason": null,
    "deferred": null
   },
@@ -20864,6 +20877,13 @@
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
+     "supplier": "Alliance Disposables Ltd",
+     "domain": "alliancenational.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-10-01",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Arrow County Supplies",
      "domain": "arrowcounty.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -20888,7 +20908,7 @@
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "actionable": {
-    "unresolvedNames": 13,
+    "unresolvedNames": 12,
     "publishedElsewhereNeedingCategory": 1,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
@@ -20904,12 +20924,12 @@
    "capturedNothingCounted": [],
    "notCrawled": [],
    "refused": [
+    "Alliance Disposables Ltd",
     "Arrow County Supplies",
     "Banner Group Limited",
     "Lyreco UK Limited"
    ],
    "unknown": [
-    "Alliance Disposables Ltd",
     "BGL Rieber Ltd",
     "Bunzl Catering",
     "Bunzl UK Ltd trading as Lockhart Catering Equipment",
@@ -20923,7 +20943,7 @@
     "RH Hall (Microwave) Limited",
     "Stephens Catering Equipment Co Ltd"
    ],
-   "actionableTotal": 14,
+   "actionableTotal": 13,
    "blockedReason": null,
    "deferred": null
   },
