@@ -38,7 +38,7 @@ the decision each waits on; delete the entry once that decision is made.
 
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
-| Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 33 | 27.0% | 66 | 36 | STARTED |
+| Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 33 | 27.0% | 66 | 37 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 34 | 33.7% | 10 | 69 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 23 | 36.5% | 19 | 30 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 9 | 42 | STARTED |
@@ -49,9 +49,9 @@ the decision each waits on; delete the entry once that decision is made.
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 7 | 44 | STARTED · DEFERRED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 11 | 30 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 26 | 49.1% | 14 | 28 | STARTED |
-| Surgical Instruments | surgical | 50 | 13 | 26.0% | 17 | 25 | STARTED |
+| Surgical Instruments | surgical | 50 | 13 | 26.0% | 17 | 26 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 12 | 27.9% | 12 | 27 | STARTED |
-| Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 12 | 32.4% | 6 | 27 | STARTED |
+| Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 13 | 35.1% | 5 | 28 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 12 | 32.4% | 17 | 17 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 12 | 34.3% | 6 | 23 | STARTED |
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 12 | 36.4% | 7 | 21 | STARTED |
@@ -95,12 +95,12 @@ the decision each waits on; delete the entry once that decision is made.
 | Male Intra-Urethral Catheter with Magnet Control | continence | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Non-Imaging Vibration Controlled Ultrasound System | ultrasound | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Airway Management Products and Associated Equipment | — | 54 | 0 | 0.0% | 38 | 28 | UNMAPPED |
-| Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 36 | 26 | UNMAPPED |
+| Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 36 | 27 | UNMAPPED |
 | Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 27 | 24 | UNMAPPED |
 | Wound Closure | — | 39 | 0 | 0.0% | 29 | 19 | UNMAPPED |
 | Procedure Packs | — | 29 | 0 | 0.0% | 17 | 18 | UNMAPPED |
 | Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics | — | 28 | 0 | 0.0% | 23 | 8 | UNMAPPED |
-| Pulse Oximetry, Capnography and Related Monitoring Technologies | — | 26 | 0 | 0.0% | 23 | 9 | UNMAPPED |
+| Pulse Oximetry, Capnography and Related Monitoring Technologies | — | 26 | 0 | 0.0% | 23 | 10 | UNMAPPED |
 | Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions | — | 25 | 0 | 0.0% | 16 | 11 | UNMAPPED |
 | Extension Sets and Lines | — | 23 | 0 | 0.0% | 18 | 11 | UNMAPPED |
 | Vascular Therapy and Associated Products | — | 23 | 0 | 0.0% | 19 | 10 | UNMAPPED |
