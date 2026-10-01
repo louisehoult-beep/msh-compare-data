@@ -25,7 +25,7 @@ Usage: python3 scripts/check_speciality_local_intel.py [--dry-run]
 Stdlib only. Exit 0 always (a check failure must not block the panel build);
 prints a summary so the workflow log shows what changed.
 """
-import json, os, sys, time, datetime, urllib.request, urllib.error, ssl
+import json, os, re, sys, time, datetime, html, urllib.request, urllib.error, ssl
 
 PATH = os.path.join("data", "speciality-local-intel.json")
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -44,6 +44,34 @@ def probe(url):
         return None
 
 
+def _norm(t):
+    t = re.sub(r"(?s)<(script|style).*?</\1>", " ", t)
+    t = re.sub(r"<[^>]+>", " ", t)
+    t = html.unescape(t).replace("\u2019", "'").replace("\u2018", "'")
+    t = t.replace("\u201c", '"').replace("\u201d", '"')
+    return re.sub(r"\s+", " ", t).strip().lower()
+
+
+def quote_state(item):
+    """found | missing | unchecked. A quote that has vanished from its page means the
+    source text changed since a human last read it: the item needs re-reading, not hiding.
+    Pages that refuse scripted fetches, or are not text (PDF, xlsx), are 'unchecked'."""
+    q = item.get("quote")
+    if not q:
+        return "n/a"
+    req = urllib.request.Request(item["url"], headers={"User-Agent": UA, "Accept": "text/html,*/*"})
+    try:
+        with urllib.request.urlopen(req, timeout=40, context=ssl.create_default_context()) as r:
+            if r.status != 200:  # 202 is a bot-challenge page, not the source
+                return "unchecked"
+            if "html" not in (r.headers.get("Content-Type") or "") and "json" not in (r.headers.get("Content-Type") or ""):
+                return "unchecked"
+            body = r.read(6_000_000).decode("utf-8", "replace")
+    except Exception:
+        return "unchecked"
+    return "found" if _norm(q) in _norm(body) else "missing"
+
+
 def check(item):
     url = item.get("checkUrl") or item.get("url")
     code = probe(url)
@@ -56,7 +84,10 @@ def check(item):
         status = "gone"
     else:
         status = "unreachable"
-    return {"date": datetime.date.today().isoformat(), "status": status, "http": code}
+    res = {"date": datetime.date.today().isoformat(), "status": status, "http": code}
+    if status == "ok":
+        res["quote"] = quote_state(item)
+    return res
 
 
 def main():
@@ -64,17 +95,24 @@ def main():
     with open(PATH, encoding="utf-8") as fh:
         doc = json.load(fh)
     tally = {"ok": 0, "gone": 0, "unreachable": 0}
+    missing = []
     for slug, items in doc["specialities"].items():
         for it in items:
             res = check(it)
             tally[res["status"]] += 1
             if res["status"] != "ok":
                 print("  %-12s %-38s %s (%s)" % (res["status"], slug, it["id"], res["http"]))
+            elif res.get("quote") == "missing":
+                missing.append("%s/%s" % (slug, it["id"]))
+                print("  QUOTE MISSING %-38s %s  <- source text changed; re-read it" % (slug, it["id"]))
             if not dry:
                 it["lastCheck"] = res
             time.sleep(1.5)  # Find a Tender allows about 12 quick requests
     print("speciality-local-intel: %d ok, %d gone (hidden), %d unreachable (kept)"
           % (tally["ok"], tally["gone"], tally["unreachable"]))
+    if missing:
+        print("speciality-local-intel: %d item(s) whose quoted source text has changed: %s"
+              % (len(missing), ", ".join(missing)))
     if not dry:
         with open(PATH, "w", encoding="utf-8") as fh:
             json.dump(doc, fh, indent=1, ensure_ascii=False)
