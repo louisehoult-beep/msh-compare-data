@@ -2080,9 +2080,10 @@ for notmine in ["Pressure Area Care and Patient Handling",
                 "Disposable and Washable Continence Care",
                 "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"]:
     check("not claimed from another page: %s" % notmine[:44], notmine not in panames)
-# The commercial fact this whole patch turns on this quarter.
+# The commercial fact this whole patch turns on. The brief moved the end date
+# from 30 September 2026 to 19 July 2027 (extension, re-read 01/10/2026).
 check("the framework expiry that the page leads on is carried",
-      any(f.get("ends") == "30 September 2026" for f in pa["frameworks"]))
+      any(f.get("ends") == "19 July 2027" for f in pa["frameworks"]))
 check("its NHS Supply Chain reference is carried",
       any(f.get("reference") == "Project_12 ITT_382" for f in pa["frameworks"]))
 # NHS Supply Chain states no supplier total on this brief. That must travel with the
@@ -4580,7 +4581,7 @@ if cc:
     # ever disagrees with the page, one of the two is wrong and it has to be looked
     # at, not smoothed over.
     _cc_ends = {f["name"][:24]: f.get("ends") for f in cc["frameworks"]}
-    for key, when in [("Infusion Pumps and Admin", "30 September 2026"),
+    for key, when in [("Infusion Pumps and Admin", "19 July 2027"),
                       ("Renal Replacement Therap", "27 March 2028"),
                       ("Patient Monitoring Equip", "7 June 2028"),
                       ("Anaesthesia Machines, Ve", "28 February 2029")]:
