@@ -64,7 +64,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 8 | 32.0% | 6 | 17 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 5 | 16 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 8 | 36.4% | 6 | 13 | STARTED |
-| Hand Hygiene and Associated Products and Services | infection | 21 | 3 | 14.3% | 8 | 15 | STARTED |
+| Hand Hygiene and Associated Products and Services | infection | 21 | 5 | 23.8% | 6 | 15 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 6 | 11 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 6 | 28.6% | 5 | 14 | STARTED |
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 7 | 35.0% | 9 | 6 | STARTED |
