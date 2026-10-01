@@ -100,6 +100,55 @@ def shown_is_matched_or_capped(counts):
     return counts["awardsShown"] == min(counts["awardsMatched"], B.AWARD_CAP)
 
 
+def tariff_slice(slug):
+    """The Part IX lines a speciality's rule selects, re-read here from the tariff
+    copy rather than through the builder, so a count check compares the panel with
+    its source.
+
+    Added 01/10/2026. These checks used to pin one month's figures (473 paediatric
+    lines, 3,108 urology, 8,218 stoma). NHSBSA republishes Part IX every month and
+    the October 2026 file moved seven of them at once, which blocked every push with
+    nothing wrong. Same lesson as ^o537: the count is data, the rule is the
+    invariant. The "fraction of the part" checks beside each one still catch a
+    filter that has stopped being applied.
+    """
+    import re
+    rule = B.SPECIALITY_RULES[slug]
+    doc = B.load("drug-tariff-part-ix.json")
+    ix = {k: i for i, k in enumerate(doc["schema"])}
+    rows = [r for r in doc["rows"] if r[ix["part"]] in tuple(rule.get("tariffParts") or ())]
+    fields = tuple(rule.get("tariffFields") or ("vmp",))
+    rx = re.compile(rule["tariffVmp"], re.I) if rule.get("tariffVmp") else None
+
+    def by_name(r):
+        return bool(rx.search(" ".join((r[ix[k]] or "") for k in fields)))
+
+    if rule.get("tariffBnf"):
+        # NHSBSA's BNF code decides; the name pattern only for a line with no code.
+        rows = [r for r in rows
+                if (r[ix["bnf"]].startswith(tuple(rule["tariffBnf"])) if r[ix["bnf"]]
+                    else (rx is not None and by_name(r)))]
+    elif rx is not None:
+        rows = [r for r in rows if by_name(r)]
+    return {
+        "rows": rows,
+        "lines": len(rows),
+        "vmps": len({r[ix["vmp"]] for r in rows}),
+        "suppliers": len({r[ix["supplier"]] for r in rows}),
+        "pence": [float(r[ix["price"]]) for r in rows
+                  if str(r[ix["price"]]).strip() not in ("", "None")],
+    }
+
+
+def tariff_counts_match(label, panel_dt, slug, *keys):
+    """One check per count, each against tariff_slice()'s own reading."""
+    want = tariff_slice(slug)
+    names = {"lines": "lineCount", "vmps": "vmpCount", "suppliers": "supplierCount"}
+    for k in keys:
+        check("%s: %s %s, as the tariff copy counts them" % (label, want[k], k),
+              panel_dt[names[k]] == want[k], "panel says %s" % panel_dt[names[k]])
+
+
 def load_panel(slug):
     p = os.path.join(HERE, "data", "speciality-panels", slug + ".json")
     if not os.path.exists(p):
@@ -3347,12 +3396,7 @@ _gy_ixa_all = len([r for r in B.load("drug-tariff-part-ix.json")["rows"] if r[0]
 check("the slice is a small fraction of Part IXA (%d of %d lines)"
       % (_gy_dt["lineCount"], _gy_ixa_all),
       _gy_dt["lineCount"] < _gy_ixa_all / 100)
-check("every counted line is a pessary line", _gy_dt["lineCount"] == 257,
-      "got %s" % _gy_dt["lineCount"])
-check("64 distinct virtual medicinal products, as the page states",
-      _gy_dt["vmpCount"] == 64, "got %s" % _gy_dt["vmpCount"])
-check("eight suppliers, as the page states",
-      _gy_dt["supplierCount"] == 8, "got %s" % _gy_dt["supplierCount"])
+tariff_counts_match("pessary", _gy_dt, GYNAE, "lines", "vmps", "suppliers")
 # The dressing and hosiery names that dominate Part IXA must never surface here.
 _gy_dt_names = " ".join(s["name"] for s in _gy_dt["topSuppliers"]).lower()
 for bad in ["juzo", "sigvaris", "molnlycke", "smith & nephew", "convatec"]:
@@ -3515,10 +3559,7 @@ _pd_dt = pd_["drugTariff"]
 check("three parts are claimed", _pd_dt["parts"] == ["IXA", "IXB", "IXC"])
 check("and they are narrowed by a stated product filter",
       _pd_dt["vmpFilter"] == "p[ae]ediatric|child|infant|junior")
-check("473 lines, the figure the page publishes", _pd_dt["lineCount"] == 473,
-      "got %s" % _pd_dt["lineCount"])
-check("52 suppliers list a paediatric-named line",
-      _pd_dt["supplierCount"] == 52, "got %s" % _pd_dt["supplierCount"])
+tariff_counts_match("paediatric-named", _pd_dt, PAEDS, "lines", "suppliers")
 # The whole of the three parts is 66,293 lines. If the slice ever approaches that,
 # the filter has stopped being applied and the entire dressings and stoma
 # catalogue is about to be published as paediatrics'.
@@ -3574,24 +3615,16 @@ _dt_ix = {k: i for i, k in enumerate(_dt_doc["schema"])}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
     if not _r.get("tariffParts"):
         continue
+    # Rebuilt first, like every other section here. Until 01/10/2026 this loop read
+    # the committed file, which ran before most of these panels are rebuilt further
+    # down, so a fresh tariff month failed dermatology against last month's panel.
+    subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"),
+                    _slug], check=True, capture_output=True)
     _pan = load_panel(_slug)
     _t = (_pan or {}).get("drugTariff")
     if not _t:
         continue
-    _rows = [r for r in _dt_doc["rows"] if r[_dt_ix["part"]] in tuple(_r["tariffParts"])]
-    _f = tuple(_r.get("tariffFields") or ("vmp",))
-    _rx2 = (__import__("re").compile(_r["tariffVmp"], __import__("re").I)
-            if _r.get("tariffVmp") else None)
-    _by_name = (lambda r: bool(_rx2.search(" ".join((r[_dt_ix[k]] or "") for k in _f))))
-    if _r.get("tariffBnf"):
-        # NHSBSA's BNF code decides; the name pattern only for a line with no code.
-        _rows = [r for r in _rows
-                 if (r[_dt_ix["bnf"]].startswith(tuple(_r["tariffBnf"])) if r[_dt_ix["bnf"]]
-                     else (_rx2 is not None and _by_name(r)))]
-    elif _rx2 is not None:
-        _rows = [r for r in _rows if _by_name(r)]
-    _raw = [float(r[_dt_ix["price"]]) for r in _rows
-            if str(r[_dt_ix["price"]]).strip() not in ("", "None")]
+    _raw = tariff_slice(_slug)["pence"]
     check("%s publishes the tariff range in pounds" % _slug,
           abs(_t["priceMax"] - round(max(_raw) / 100.0, 2)) < 0.005
           and abs(_t["priceMin"] - round(min(_raw) / 100.0, 2)) < 0.005,
@@ -3605,7 +3638,7 @@ for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
 
 # The tariff slicing must not have changed any panel that does not ask for it.
 # FIVE RULES SLICE A PART, and each is here because the part it slices is not its
-# speciality: gynaecology takes the 257 pessary lines out of Part IXA's 56,833,
+# speciality (line counts below are the September 2026 tariff's; they move monthly): gynaecology takes the 257 pessary lines out of Part IXA's 56,833,
 # paediatrics takes the 473 lines whose product or brand name says paediatric, child,
 # infant or junior out of Parts IXA, IXB and IXC, urology takes the 3,108 catheter,
 # urostomy and catheter-drainage lines out of the same three parts, respiratory
@@ -3918,11 +3951,7 @@ print("  the Drug Tariff slice is a slice, and the pleural catheter is not in it
 _ur_dt = ur["drugTariff"]
 check("three parts are claimed", _ur_dt["parts"] == ["IXA", "IXB", "IXC"])
 check("and narrowed by a stated product filter", bool(_ur_dt["vmpFilter"]))
-check("3,108 lines", _ur_dt["lineCount"] == 3108, "got %s" % _ur_dt["lineCount"])
-check("92 virtual medicinal products, every one of them read",
-      _ur_dt["vmpCount"] == 92, "got %s" % _ur_dt["vmpCount"])
-check("55 suppliers list a line on this patch",
-      _ur_dt["supplierCount"] == 55, "got %s" % _ur_dt["supplierCount"])
+tariff_counts_match("urology", _ur_dt, UROLOGY, "lines", "vmps", "suppliers")
 import re as _ur_re
 _ur_vrx = _ur_re.compile(_ur_rule["tariffVmp"], _ur_re.I)
 # THE ONE THAT MATTERS. Bare "catheter" over Part IXA returns 85 product families
@@ -4122,11 +4151,7 @@ print("  Part IXA is sliced, and a dressing is not a respiratory line")
 _rs_dt = rs["drugTariff"]
 check("one part is claimed", _rs_dt["parts"] == ["IXA"])
 check("and narrowed by a stated product filter", bool(_rs_dt["vmpFilter"]))
-check("608 lines", _rs_dt["lineCount"] == 608, "got %s" % _rs_dt["lineCount"])
-check("7 virtual medicinal products, every one of them read",
-      _rs_dt["vmpCount"] == 7, "got %s" % _rs_dt["vmpCount"])
-check("23 suppliers list a line on this patch",
-      _rs_dt["supplierCount"] == 23, "got %s" % _rs_dt["supplierCount"])
+tariff_counts_match("respiratory", _rs_dt, RESP, "lines", "vmps", "suppliers")
 import re as _rs_re
 _rs_vrx = _rs_re.compile(_rs_rule["tariffVmp"], _rs_re.I)
 # THE ONE THAT MATTERS. Bare "tracheostomy" over Part IXA also returns the
@@ -4715,10 +4740,7 @@ check("both still end 31 March 2028",
 print("  the Drug Tariff slice, and the ostomy range it must never eat")
 _en_t = en["drugTariff"]
 check("Part IXA only", _en_t["parts"] == ["IXA"])
-check("645 lines from 19 virtual products",
-      _en_t["lineCount"] == 645 and _en_t["vmpCount"] == 19,
-      "got %s lines / %s vmps" % (_en_t["lineCount"], _en_t["vmpCount"]))
-check("31 suppliers", _en_t["supplierCount"] == 31, "got %s" % _en_t["supplierCount"])
+tariff_counts_match("ENT", _en_t, ENT, "lines", "vmps", "suppliers")
 check("Severn Healthcare leads it",
       _en_t["topSuppliers"][0]["name"] == "Severn Healthcare Technologies Ltd")
 # Stoma caps were tested and refused: all 14 lines are Part IXC ostomy appliances
@@ -5153,7 +5175,7 @@ print("  Part IXC only — one part too many would rewrite the market")
 check("only IXC is claimed", tuple(_co_rule["tariffParts"]) == ("IXC",))
 _co_t = co["drugTariff"]
 check("the panel carries it", _co_t is not None and _co_t["parts"] == ["IXC"])
-check("8,218 stoma lines", _co_t["lineCount"] == 8218, "got %s" % _co_t["lineCount"])
+tariff_counts_match("stoma", _co_t, COLO, "lines")
 # 68 is the same supplier count the page's own market intelligence states for the
 # £433.5m a year England spend on Part IXC. If these ever diverge, one of the two
 # is out of date and the page must not keep publishing both.
