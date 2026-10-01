@@ -583,12 +583,37 @@ def cmd_send(args) -> int:
     counts = deliver(rows, new_by_slug, pywebpush_sender(priv),
                      on_gone=lambda r: store.delete(r["id"]))
     print("send: %s" % json.dumps(counts))
+    app_counts = send_app(store, new_by_slug)
+    if app_counts is not None:
+        counts["app"] = app_counts
 
     # State moves forward even if some sends failed: a failed push is a lost
     # buzz, a re-sent one is spam. The failure is in the log and the counts.
     next_state["lastSent"] = {"at": now_iso(), "items": total_new, **counts}
     save_state(next_state, args.state)
     return 0
+
+
+def send_app(store, new_by_slug, env=os.environ, log=print) -> dict | None:
+    """The same digest to the Live Desk app's devices (scripts/fcm_push.py).
+    None when FCM_SERVICE_ACCOUNT is not set. Never raises: a fault here must
+    not cost the web alerts their state update."""
+    raw = env.get("FCM_SERVICE_ACCOUNT", "").strip()
+    if not raw:
+        log("send: Live Desk app alerts not configured (no FCM_SERVICE_ACCOUNT) — skipped")
+        return None
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import fcm_push
+        rows = fcm_push.targets(store)
+        log("send: %d Live Desk app device(s) with access" % len(rows))
+        counts = deliver(rows, new_by_slug, fcm_push.sender(json.loads(raw)),
+                         on_gone=lambda r: fcm_push.forget(store, r["token"]), log=log)
+        log("send: app %s" % json.dumps(counts))
+        return counts
+    except Exception as exc:   # noqa: BLE001 — see docstring
+        log("send: Live Desk app alerts FAILED (%s) — web alerts unaffected" % str(exc)[:200])
+        return {"error": str(exc)[:200]}
 
 
 TEST_MESSAGE = {

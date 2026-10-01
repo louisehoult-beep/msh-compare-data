@@ -95,6 +95,8 @@ jobs:
           VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          # Live Desk app (scripts/fcm_push.py). Missing = app alerts skipped.
+          FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}
         run: |
           if [ "$DIAGNOSE" = "true" ]; then
             python3 scripts/push_alerts.py diagnose
