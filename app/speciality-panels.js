@@ -139,7 +139,7 @@
   function renderFrameworks(d) {
     if (!FW) { return; }
     var h = '';
-    var soon = 0, i, m;
+    var soon = 0, i, j, m;
     for (i = 0; i < d.frameworks.length; i++) {
       m = monthsTo(d.frameworks[i].ends);
       if (m !== null && m <= 12) { soon++; }
@@ -171,6 +171,20 @@
       h += '</td><td>' + esc(f.supplierCount === null || f.supplierCount === undefined ? 'not stated' : f.supplierCount) + '</td></tr>';
     }
     h += '</table></div>';
+    /* WHO IS ON EACH LOT (01/10/2026). Only for a framework whose owner publishes a
+       lot-by-lot supplier list; the builder (lot_split) carries nothing otherwise. */
+    for (i = 0; i < d.frameworks.length; i++) {
+      var fl = d.frameworks[i];
+      if (!fl.lots || !fl.lots.length) { continue; }
+      h += '<details class="sp-lots" style="margin:10px 0 0;"><summary style="cursor:pointer;font-weight:600;font-size:13.5px;">Who is on each lot: ' + esc(fl.name) + '</summary>';
+      h += '<p style="font-size:12.5px;line-height:1.55;margin:6px 0;">As named by ' + esc(fl.lotOwner || 'the framework owner') + '. Being named on a lot is a route to supply, not a share of it.</p>';
+      for (j = 0; j < fl.lots.length; j++) {
+        var lt = fl.lots[j];
+        h += '<div style="margin:0 0 8px;"><b>' + esc(lt.id) + (lt.title ? ': ' + esc(lt.title) : '') + '</b> <span style="opacity:.75;">(' + lt.suppliers.length + ')</span><br>' +
+             (lt.suppliers.length ? esc(lt.suppliers.join(', ')) : '<i>No supplier named against this lot.</i>') + '</div>';
+      }
+      h += '</details>';
+    }
     }
     h += '</div>';
 
@@ -231,8 +245,13 @@
       for (i = 0; i < d.awards.length; i++) {
         var a = d.awards[i];
         h += '<tr><td style="white-space:nowrap;">' + esc(a.date || '') + '</td>';
-        h += '<td>' + (a.url ? '<a href="' + esc(a.url) + '" target="_blank" rel="noopener">' + esc(a.title) + '</a>' : esc(a.title)) + '</td>';
-        h += '<td>' + esc(a.buyer || 'not stated') + '</td><td>' + esc(a.supplier || 'not named') + '</td></tr>';
+        h += '<td>' + (a.url ? '<a href="' + esc(a.url) + '" target="_blank" rel="noopener">' + esc(a.title) + '</a>' : esc(a.title));
+        /* A planning or tender notice is a buyer's intention, not an award (01/10/2026). */
+        if (a.stage === 'planning' || a.stage === 'tender') {
+          h += ' <span class="sp-chip" style="font-weight:600;">' + (a.stage === 'planning' ? 'Planning notice, not yet awarded' : 'Tender notice, not yet awarded') + '</span>';
+        }
+        h += '</td>';
+        h += '<td>' + esc(a.buyer || 'not stated') + '</td><td>' + esc(a.supplier || (a.stage === 'planning' || a.stage === 'tender' ? 'not yet awarded' : 'not named')) + '</td></tr>';
       }
       h += '</table></div>';
       if (d.counts.awardsMatched > d.awards.length) {
@@ -386,7 +405,9 @@
       }
       h += '</td><td>';
       for (j = 0; j < s.frameworks.length; j++) {
-        h += '<span class="sp-chip">' + esc(s.frameworks[j]) + '</span>';
+        var lotIds = s.lots && s.lots[s.frameworks[j]];
+        h += '<span class="sp-chip">' + esc(s.frameworks[j]) +
+             (lotIds && lotIds.length ? ' &middot; ' + esc(lotIds.map(function (x) { return x.replace(/^Lot /, ''); }).join(', ')) : '') + '</span>';
       }
       h += '</td></tr>';
     }

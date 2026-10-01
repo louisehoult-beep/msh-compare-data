@@ -31,12 +31,12 @@
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
   "frameworks": "NHS Supply Chain framework names matching /\\b(total orthopaedic solutions|surgical navigation)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. Total Orthopaedic Solutions 3 is the main NHS Supply Chain route for this patch and carries 101 named suppliers, but being named on it is evidence of a route, not of volume, and NHS Supply Chain is only one route. The award record below shows orthopaedic and trauma implants bought through NHS Wales Shared Services, National Procurement in Scotland, the Business Services Organisation in Northern Ireland and trusts' own direct awards, none of which appears in the framework list above. Surgical Navigation Systems is shared with neurosurgery and ENT. No unit or market-share split is published for any of it, and none is claimed here.",
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. Total Orthopaedic Solutions 3 is the main NHS Supply Chain route for this patch and carries 101 named suppliers, but being named on it is evidence of a route, not of volume, and NHS Supply Chain is only one route. The award record below shows orthopaedic and trauma implants bought through NHS Wales Shared Services, National Procurement in Scotland, the Business Services Organisation in Northern Ireland and trusts' own direct awards, none of which appears in the framework list above. Surgical Navigation Systems is shared with neurosurgery and ENT. No unit or market-share split is published for any of it, and none is claimed here.",
-  "awards": "Award-stage notices whose TITLE matches /\\b(orthopaedic\\w*|orthopedic\\w*|orthobiologic\\w*|trauma\\w*|tos3|arthroplast\\w*|joint replacement|hip\\b|knee\\b|shoulder\\b|elbow\\b|ankle\\b|spinal|spine\\b|scoliosis|vertebr\\w*|pedicle|interbody|kyphoplast\\w*|vertebroplast\\w*|discectom\\w*|laminectom\\w*|fractur\\w*|osteotom\\w*|osteosynthes\\w*|femur|acetabul\\w*|bone (?:cement|graft|substitute|prep|screw|anchor|plate|mill|void filler)|arthroscop\\w*|cruciate|meniscal|meniscus|external fixation|fixator|intramedullary|tourniquet\\w*|sagittal saw|pulse lavage|musculoskelet\\w*|limb reconstruction)\\b/i and does not match /\\b(medicines|spinal cord stimulat\\w*|epidural|fgm|sexual abuse|spinal muscular atrophy|orthotic\\w*|orthos[ei]s)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 331417 or 33183 or 85121283 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(orthopaedic\\w*|orthopedic\\w*|orthobiologic\\w*|trauma\\w*|tos3|arthroplast\\w*|joint replacement|hip\\b|knee\\b|shoulder\\b|elbow\\b|ankle\\b|spinal|spine\\b|scoliosis|vertebr\\w*|pedicle|interbody|kyphoplast\\w*|vertebroplast\\w*|discectom\\w*|laminectom\\w*|fractur\\w*|osteotom\\w*|osteosynthes\\w*|femur|acetabul\\w*|bone (?:cement|graft|substitute|prep|screw|anchor|plate|mill|void filler)|arthroscop\\w*|cruciate|meniscal|meniscus|external fixation|fixator|intramedullary|tourniquet\\w*|sagittal saw|pulse lavage|musculoskelet\\w*|limb reconstruction)\\b/i and does not match /\\b(medicines|spinal cord stimulat\\w*|epidural|fgm|sexual abuse|spinal muscular atrophy|orthotic\\w*|orthos[ei]s|manikins?|mannequins?|simulat\\w*)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 331417 or 33183 or 85121283 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: ortho). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 4 of the 6 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
   "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
-  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (0 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-09-30.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (0 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-09-30.",
   "drugTariffViiia": null
  },
  "counts": {
@@ -44,16 +44,17 @@
   "suppliers": 104,
   "suppliersUnresolved": 1,
   "awardsShown": 40,
-  "awardsMatched": 168,
+  "awardsMatched": 166,
   "awardsWithheldByBuyerCap": 0,
+  "awardsShownNotYetAwarded": 2,
   "openTenders": 0,
   "localIntel": 28,
-  "suppliersFrameworkNamedAlsoTagged": 84,
+  "suppliersFrameworkNamedAlsoTagged": 98,
   "suppliersDirectoryTagged": 6,
   "suppliersDirectoryOnOtherFrameworks": 3,
   "suppliersDirectoryWithFrameworkNote": 4,
   "gpMarkets": 0,
-  "mhraDsu": 2,
+  "mhraDsu": 0,
   "drugTariffViiiaLines": 0
  },
  "frameworks": [
@@ -196,7 +197,428 @@
     "Empire Medical UK",
     "One Surgical Ltd",
     "Total Ortho LLP"
-   ]
+   ],
+   "lots": [
+    {
+     "id": "Lot 1.1",
+     "title": "Hip Arthroplasty",
+     "suppliers": [
+      "Adler Ortho UK Limited",
+      "Braun Medical Limited",
+      "Corin Ltd",
+      "FH Ortho Ltd",
+      "Ideal Med",
+      "implantcast UK",
+      "Johnson & Johnson Medical Ltd",
+      "Joint Operations (UK) Ltd",
+      "JRI Orthopaedics Ltd",
+      "Lima Orthopaedics UK Ltd",
+      "Link Orthopaedics UK Ltd",
+      "MatOrtho Ltd",
+      "Medacta UK Limited",
+      "Meril UK Pvt Ltd",
+      "Microport Scientific Ltd",
+      "Osteotec Ltd",
+      "Permedica UK Limited",
+      "Smith & Nephew",
+      "Stryker UK Ltd",
+      "Symbios",
+      "United Orthopaedic Corporation UK Limited",
+      "Zimmer Biomet Limited"
+     ]
+    },
+    {
+     "id": "Lot 1.2",
+     "title": "Knee Arthroplasty",
+     "suppliers": [
+      "Adler Ortho UK Limited",
+      "Braun Medical Limited",
+      "Corin Ltd",
+      "FH Ortho Ltd",
+      "Ideal Med",
+      "implantcast UK",
+      "Johnson & Johnson Medical Ltd",
+      "Joint Operations (UK) Ltd",
+      "JRI Orthopaedics Ltd",
+      "Lima Orthopaedics UK Ltd",
+      "Link Orthopaedics UK Ltd",
+      "MatOrtho Ltd",
+      "Medacta UK Limited",
+      "Meril UK Pvt Ltd",
+      "Microport Scientific Ltd",
+      "Osteotec Ltd",
+      "Permedica UK Limited",
+      "Smith & Nephew",
+      "Stryker UK Ltd",
+      "United Orthopaedic Corporation UK Limited",
+      "Zimmer Biomet Limited"
+     ]
+    },
+    {
+     "id": "Lot 1.3",
+     "title": "Extremities Arthroplasty",
+     "suppliers": [
+      "Acumed Ltd",
+      "Adler Ortho UK Limited",
+      "Arthrex Ltd",
+      "Exactech UK Ltd",
+      "FH Ortho Ltd",
+      "Johnson & Johnson Medical Ltd",
+      "Joint Operations (UK) Ltd",
+      "JRI Orthopaedics Ltd",
+      "KLS Martin UK Limited",
+      "Lavender Medical",
+      "Leda Orthopaedics Ltd",
+      "Lima Orthopaedics UK Ltd",
+      "Link Orthopaedics UK Ltd",
+      "MatOrtho Ltd",
+      "Medacta UK Limited",
+      "Medartis Ltd",
+      "Osteotec Ltd",
+      "Paragon 28",
+      "Permedica UK Limited",
+      "Sovereign Medical",
+      "Stryker UK Ltd",
+      "Zimmer Biomet Limited"
+     ]
+    },
+    {
+     "id": "Lot 1.4",
+     "title": "Complex Arthroplasty",
+     "suppliers": [
+      "Adler Ortho UK Limited",
+      "Braun Medical Limited",
+      "Corin Ltd",
+      "Ideal Med",
+      "implantcast UK",
+      "Johnson & Johnson Medical Ltd",
+      "JRI Orthopaedics Ltd",
+      "Lima Orthopaedics UK Ltd",
+      "Link Orthopaedics UK Ltd",
+      "Medacta UK Limited",
+      "Meril UK Pvt Ltd",
+      "Osteotec Ltd",
+      "Permedica UK Limited",
+      "Smith & Nephew",
+      "Stryker UK Ltd",
+      "Summit Medical UK Ltd",
+      "United Orthopaedic Corporation UK Limited",
+      "Zimmer Biomet Limited"
+     ]
+    },
+    {
+     "id": "Lot 1.5",
+     "title": "Internal and External Fixation",
+     "suppliers": [
+      "Acumed Ltd",
+      "Adler Ortho UK Limited",
+      "Anika Therapeutics Ltd",
+      "Arthrex Ltd",
+      "De Soutter Medical Ltd",
+      "DP Medical Systems Ltd",
+      "FH Ortho Ltd",
+      "GS Medical Healthcare",
+      "Ideal Med",
+      "Johnson & Johnson Medical Ltd",
+      "Joint Operations (UK) Ltd",
+      "Judd Medical Ltd",
+      "KLS Martin UK Limited",
+      "Lavender Medical",
+      "Leda Orthopaedics Ltd",
+      "Marquardt UK",
+      "Medartis Ltd",
+      "Mercian Surgical Supply Company Limited",
+      "Meril UK Pvt Ltd",
+      "Metaphysis LLP",
+      "Ortho Solutions UK Ltd",
+      "Orthofix Limited",
+      "Orthomotion Medical Ltd",
+      "Orthopediatrics EU Limited",
+      "Osteon Medical Ltd",
+      "Osteotec Ltd",
+      "Paragon 28",
+      "Smith & Nephew",
+      "Sovereign Medical",
+      "Stryker UK Ltd",
+      "Surgical Holdings",
+      "Zimmer Biomet Limited"
+     ]
+    },
+    {
+     "id": "Lot 1.6",
+     "title": "Spine",
+     "suppliers": [
+      "Biedermann Motech International LTD",
+      "Biomet 3i UK, Ltd (ZimVie)",
+      "Braun Medical Limited",
+      "Edge Medical Ltd",
+      "Eurospine",
+      "Globus Medical UK Ltd",
+      "Integra LifeSciences",
+      "Johnson & Johnson Medical Ltd",
+      "joimax UK",
+      "Joint Operations (UK) Ltd",
+      "Lindare Medical Ltd",
+      "Macromed UK Ltd",
+      "Medtronic Limited",
+      "NuVasive UK Ltd",
+      "Orthofix Limited",
+      "Orthomotion Medical Ltd",
+      "Orthopediatrics EU Limited",
+      "Osteon Medical Ltd",
+      "Osteotec Ltd",
+      "Ovidius Medical Ltd",
+      "Q Medical Technologies Ltd",
+      "Silony Medical Ltd",
+      "Spineart UK Ltd",
+      "Stryker UK Ltd",
+      "Surgalign UK Ltd (Formerly Pioneer Surgical Technology B.V. or RTI Surgical)",
+      "Venturis Medical Ltd"
+     ]
+    },
+    {
+     "id": "Lot 1.7",
+     "title": "Arthroscopy and Fluid Management",
+     "suppliers": [
+      "Anika Therapeutics Ltd",
+      "Arthrex Ltd",
+      "Arthro Dynamik Ltd",
+      "ConMed UK Ltd",
+      "Corin Ltd",
+      "De Soutter Medical Ltd",
+      "Fannin UK Limited",
+      "Hospital Innovations",
+      "Innovate Orthopaedics Ltd",
+      "Johnson & Johnson Medical Ltd",
+      "Joint Operations (UK) Ltd",
+      "Karl Storz Endoscopy (UK) Ltd",
+      "Lavender Medical",
+      "Medacta UK Limited",
+      "OrthoAccess Ltd",
+      "Osteon Medical Ltd",
+      "Osteotec Ltd",
+      "Smith & Nephew",
+      "Stryker UK Ltd",
+      "Zimmer Biomet Limited"
+     ]
+    },
+    {
+     "id": "Lot 1.8",
+     "title": "Bone Preparation",
+     "suppliers": [
+      "De Soutter Medical Ltd",
+      "Eakin Surgical Ltd",
+      "Exactech UK Ltd",
+      "Fannin UK Limited",
+      "Heraeus Medical UK Ltd",
+      "implantcast UK",
+      "Johnson & Johnson Medical Ltd",
+      "Judd Medical Ltd",
+      "Kaiser Medical Technology Ltd",
+      "Lima Orthopaedics UK Ltd",
+      "Microport Scientific Ltd",
+      "Molnlycke Health Care Ltd",
+      "Orthofix Limited",
+      "Osteon Medical Ltd",
+      "Osteotec Ltd",
+      "Smith & Nephew",
+      "Stryker UK Ltd",
+      "Summit Medical UK Ltd",
+      "Zimmer Biomet Limited"
+     ]
+    },
+    {
+     "id": "Lot 1.9",
+     "title": "Power Tool Consumables",
+     "suppliers": [
+      "Arthrex Ltd",
+      "Braun Medical Limited",
+      "ConMed UK Ltd",
+      "De Soutter Medical Ltd",
+      "Delta Surgical Ltd",
+      "Exactech UK Ltd",
+      "Integra LifeSciences",
+      "Johnson & Johnson Medical Ltd",
+      "M.D.M Medical Ltd",
+      "MatOrtho Ltd",
+      "MedScience Distribution Ltd",
+      "Medtronic Limited",
+      "Mercian Surgical Supply Company Limited",
+      "NSK United Kingdom Limited",
+      "Ortho Solutions UK Ltd",
+      "Osteotec Ltd",
+      "Stryker UK Ltd",
+      "Surgical Instruments Group Holdings Ltd",
+      "Venturis Medical Ltd",
+      "Zimmer Biomet Limited"
+     ]
+    },
+    {
+     "id": "Lot 1.10",
+     "title": "Regenerative Technology",
+     "suppliers": [
+      "Acumed Ltd",
+      "Adler Ortho UK Limited",
+      "Arthrex Ltd",
+      "Baxter Healthcare Ltd",
+      "Biocomposites Ltd",
+      "Biomet 3i UK, Ltd (ZimVie)",
+      "Bonesupport",
+      "Cenobiologics Ltd",
+      "Contura Orthopaedics Ltd",
+      "Edge Medical Ltd",
+      "Exactech UK Ltd",
+      "Greenbone Spa",
+      "Hospital Innovations",
+      "Integra LifeSciences",
+      "Johnson & Johnson Medical Ltd",
+      "Joint Operations (UK) Ltd",
+      "JRI Orthopaedics Ltd",
+      "Macromed UK Ltd",
+      "Neptune Medical Limited",
+      "Osteon Medical Ltd",
+      "Osteotec Ltd",
+      "Ovidius Solutions Ltd",
+      "Paragon 28",
+      "Silony Medical Ltd",
+      "Smith & Nephew",
+      "Stryker UK Ltd",
+      "Surgalign UK Ltd (Formerly Pioneer Surgical Technology B.V. or RTI Surgical)",
+      "TRB Chemedica (UK) Ltd",
+      "Venturis Medical Ltd",
+      "Zimmer Biomet Limited"
+     ]
+    },
+    {
+     "id": "Lot 1.11",
+     "title": "Orthopaedic Additional Devices",
+     "suppliers": [
+      "Anetic Aid Ltd",
+      "Arthrex Ltd",
+      "Braun Medical Limited",
+      "De Soutter Medical Ltd",
+      "Delta Surgical Ltd",
+      "Edge Medical Ltd",
+      "Exactech UK Ltd",
+      "Freelance Surgical Limited",
+      "GenX MediCare",
+      "Johnson & Johnson Medical Ltd",
+      "joimax UK",
+      "Lavender Medical",
+      "Medacta UK Limited",
+      "MedScience Distribution Ltd",
+      "Medtronic Limited",
+      "Mercian Surgical Supply Company Limited",
+      "NSK United Kingdom Limited",
+      "NuVasive UK Ltd",
+      "OrthoAccess Ltd",
+      "Silony Medical Ltd",
+      "Smith & Nephew",
+      "Sovereign Medical",
+      "Stryker UK Ltd",
+      "Summit Medical UK Ltd",
+      "Venturis Medical Ltd",
+      "Zimmer Biomet Limited"
+     ]
+    },
+    {
+     "id": "Lot 1.12",
+     "title": "Custom and Customisable Implants",
+     "suppliers": [
+      "3D LifePrints UK Ltd",
+      "3D Metal Printing Ltd",
+      "Adler Ortho UK Limited",
+      "Hospital Innovations",
+      "Ideal Med",
+      "implantcast UK",
+      "Integra LifeSciences",
+      "Joint Operations (UK) Ltd",
+      "JRI Orthopaedics Ltd",
+      "KLS Martin UK Limited",
+      "Link Orthopaedics UK Ltd",
+      "Materialise",
+      "Medacta UK Limited",
+      "Ortho Solutions UK Ltd",
+      "Orthomotion Medical Ltd",
+      "Ovidius Medical Ltd",
+      "Ovidius Solutions Ltd",
+      "Permedica UK Limited",
+      "Stryker UK Ltd",
+      "Symbios"
+     ]
+    },
+    {
+     "id": "Lot 2",
+     "title": "Equipment",
+     "suppliers": [
+      "Anetic Aid Ltd",
+      "Arthrex Ltd",
+      "Bioventus Cooperatief U.A",
+      "Braun Medical Limited",
+      "ConMed UK Ltd",
+      "Corin Ltd",
+      "De Soutter Medical Ltd",
+      "Exactech UK Ltd",
+      "Freelance Surgical Limited",
+      "Globus Medical UK Ltd",
+      "Ideal Med",
+      "IGEA S.p.A. Branch UK",
+      "Johnson & Johnson Medical Ltd",
+      "joimax UK",
+      "JRI Orthopaedics Ltd",
+      "Kaiser Medical Technology Ltd",
+      "Karl Storz Endoscopy (UK) Ltd",
+      "Lima Orthopaedics UK Ltd",
+      "Macromed UK Ltd",
+      "MatOrtho Ltd",
+      "Medacta UK Limited",
+      "MedScience Distribution Ltd",
+      "Medtronic Limited",
+      "Mercian Surgical Supply Company Limited",
+      "NSK United Kingdom Limited",
+      "NuVasive UK Ltd",
+      "Orthofix Limited",
+      "Osteon Medical Ltd",
+      "Osteotec Ltd",
+      "Silony Medical Ltd",
+      "Smith & Nephew",
+      "Stryker UK Ltd",
+      "Summit Medical UK Ltd",
+      "Surgical Instruments Group Holdings Ltd",
+      "Venturis Medical Ltd",
+      "Zimmer Biomet Limited"
+     ]
+    },
+    {
+     "id": "Lot 3",
+     "title": "Services and Solutions",
+     "suppliers": [
+      "Acumed Ltd",
+      "Arthrex Ltd",
+      "Bioventus Cooperatief U.A",
+      "Braun Medical Limited",
+      "Corin Ltd",
+      "De Soutter Medical Ltd",
+      "Exactech UK Ltd",
+      "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
+      "Johnson & Johnson Medical Ltd",
+      "Karl Storz Endoscopy (UK) Ltd",
+      "Materialise",
+      "Medtronic Limited",
+      "Open Medical Ltd",
+      "Osteon Medical Ltd",
+      "Ovidius Medical Ltd",
+      "Sectra Limited",
+      "Silony Medical Ltd",
+      "Smith & Nephew",
+      "Stryker UK Ltd",
+      "Summit Medical UK Ltd",
+      "Surgical Instruments Group Holdings Ltd",
+      "Zimmer Biomet Limited"
+     ]
+    }
+   ],
+   "lotOwner": "NHS Supply Chain"
   }
  ],
  "suppliers": [
@@ -210,8 +632,15 @@
     "Surgical Navigation Systems with Associated Options and Related Services",
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.7",
+     "Lot 2",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
-   "directoryTagged": false
+   "directoryTagged": true
   },
   {
    "name": "Medtronic",
@@ -224,6 +653,15 @@
     "Surgical Navigation Systems with Associated Options and Related Services",
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.6",
+     "Lot 1.9",
+     "Lot 1.11",
+     "Lot 2",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -237,6 +675,24 @@
     "Surgical Navigation Systems with Associated Options and Related Services",
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.3",
+     "Lot 1.4",
+     "Lot 1.5",
+     "Lot 1.6",
+     "Lot 1.7",
+     "Lot 1.8",
+     "Lot 1.9",
+     "Lot 1.10",
+     "Lot 1.11",
+     "Lot 1.12",
+     "Lot 2",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -247,6 +703,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.12"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -257,6 +718,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.12"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -267,6 +733,14 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.3",
+     "Lot 1.5",
+     "Lot 1.10",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -277,6 +751,17 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.3",
+     "Lot 1.4",
+     "Lot 1.5",
+     "Lot 1.10",
+     "Lot 1.12"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -289,6 +774,17 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.3",
+     "Lot 1.8",
+     "Lot 1.9",
+     "Lot 1.10",
+     "Lot 1.11",
+     "Lot 2",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -299,6 +795,12 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.11",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -309,6 +811,12 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.5",
+     "Lot 1.7"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -321,6 +829,18 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.3",
+     "Lot 1.5",
+     "Lot 1.7",
+     "Lot 1.9",
+     "Lot 1.10",
+     "Lot 1.11",
+     "Lot 2",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -331,6 +851,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.7"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -343,8 +868,20 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.4",
+     "Lot 1.6",
+     "Lot 1.9",
+     "Lot 1.11",
+     "Lot 2",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
-   "directoryTagged": false
+   "directoryTagged": true
   },
   {
    "name": "Baxter Healthcare Ltd",
@@ -353,8 +890,13 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.10"
+    ]
+   },
    "provenance": "framework-named",
-   "directoryTagged": false
+   "directoryTagged": true
   },
   {
    "name": "Biedermann Motech International LTD",
@@ -363,6 +905,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.6"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -373,6 +920,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.10"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -383,8 +935,14 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.6",
+     "Lot 1.10"
+    ]
+   },
    "provenance": "framework-named",
-   "directoryTagged": false
+   "directoryTagged": true
   },
   {
    "name": "Bioventus Cooperatief U.A",
@@ -393,6 +951,12 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 2",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -403,6 +967,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.10"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -433,6 +1002,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.10"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -445,6 +1019,13 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.7",
+     "Lot 1.9",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -455,6 +1036,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.10"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -467,6 +1053,16 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.4",
+     "Lot 1.7",
+     "Lot 2",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -479,6 +1075,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.5"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": false
   },
@@ -489,6 +1090,17 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.5",
+     "Lot 1.7",
+     "Lot 1.8",
+     "Lot 1.9",
+     "Lot 1.11",
+     "Lot 2",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -501,8 +1113,14 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.9",
+     "Lot 1.11"
+    ]
+   },
    "provenance": "framework-named",
-   "directoryTagged": false
+   "directoryTagged": true
   },
   {
    "name": "Eakin Surgical Limited",
@@ -513,8 +1131,13 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.8"
+    ]
+   },
    "provenance": "framework-named",
-   "directoryTagged": false
+   "directoryTagged": true
   },
   {
    "name": "Edge Medical Ltd",
@@ -523,6 +1146,13 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.6",
+     "Lot 1.10",
+     "Lot 1.11"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -533,6 +1163,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.6"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -545,6 +1180,12 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.7",
+     "Lot 1.8"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -555,6 +1196,14 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.3",
+     "Lot 1.5"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -565,6 +1214,12 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.11",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -575,6 +1230,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -587,8 +1247,13 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.11"
+    ]
+   },
    "provenance": "framework-named",
-   "directoryTagged": false
+   "directoryTagged": true
   },
   {
    "name": "Globus Medical UK Ltd",
@@ -597,6 +1262,12 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.6",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -607,6 +1278,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.10"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -619,6 +1295,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.5"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": false
   },
@@ -631,6 +1312,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.8"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -641,6 +1327,13 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.7",
+     "Lot 1.10",
+     "Lot 1.12"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -661,6 +1354,16 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.4",
+     "Lot 1.5",
+     "Lot 1.12",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -671,6 +1374,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -681,6 +1389,15 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.4",
+     "Lot 1.8",
+     "Lot 1.12"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -691,6 +1408,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.7"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -703,8 +1425,16 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.6",
+     "Lot 1.9",
+     "Lot 1.10",
+     "Lot 1.12"
+    ]
+   },
    "provenance": "framework-named",
-   "directoryTagged": false
+   "directoryTagged": true
   },
   {
    "name": "Johnson & Johnson MedTech",
@@ -715,6 +1445,23 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.3",
+     "Lot 1.4",
+     "Lot 1.5",
+     "Lot 1.6",
+     "Lot 1.7",
+     "Lot 1.8",
+     "Lot 1.9",
+     "Lot 1.10",
+     "Lot 1.11",
+     "Lot 2",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -725,6 +1472,13 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.6",
+     "Lot 1.11",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -737,8 +1491,20 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.3",
+     "Lot 1.5",
+     "Lot 1.6",
+     "Lot 1.7",
+     "Lot 1.10",
+     "Lot 1.12"
+    ]
+   },
    "provenance": "framework-named",
-   "directoryTagged": false
+   "directoryTagged": true
   },
   {
    "name": "JRI Orthopaedics Ltd",
@@ -747,6 +1513,17 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.3",
+     "Lot 1.4",
+     "Lot 1.10",
+     "Lot 1.12",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -757,6 +1534,12 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.5",
+     "Lot 1.8"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -767,6 +1550,12 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.8",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -777,8 +1566,15 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.3",
+     "Lot 1.5",
+     "Lot 1.12"
+    ]
+   },
    "provenance": "framework-named",
-   "directoryTagged": false
+   "directoryTagged": true
   },
   {
    "name": "Lavender Medical",
@@ -787,6 +1583,14 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.3",
+     "Lot 1.5",
+     "Lot 1.7",
+     "Lot 1.11"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -797,6 +1601,12 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.3",
+     "Lot 1.5"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -807,6 +1617,16 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.3",
+     "Lot 1.4",
+     "Lot 1.8",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -817,6 +1637,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.6"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -827,6 +1652,15 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.3",
+     "Lot 1.4",
+     "Lot 1.12"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -837,6 +1671,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.9"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -847,6 +1686,13 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.6",
+     "Lot 1.10",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -857,6 +1703,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.5"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -867,6 +1718,12 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.12",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -877,6 +1734,15 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.3",
+     "Lot 1.9",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -889,6 +1755,18 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.3",
+     "Lot 1.4",
+     "Lot 1.7",
+     "Lot 1.11",
+     "Lot 1.12",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -899,6 +1777,12 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.3",
+     "Lot 1.5"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -911,8 +1795,15 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.9",
+     "Lot 1.11",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
-   "directoryTagged": false
+   "directoryTagged": true
   },
   {
    "name": "Mercian Surgical Supply Company Limited",
@@ -921,6 +1812,14 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.5",
+     "Lot 1.9",
+     "Lot 1.11",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -931,6 +1830,14 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.4",
+     "Lot 1.5"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -941,6 +1848,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.5"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -951,6 +1863,13 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.8"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -963,8 +1882,13 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.8"
+    ]
+   },
    "provenance": "framework-named",
-   "directoryTagged": false
+   "directoryTagged": true
   },
   {
    "name": "Neptune Medical Limited",
@@ -973,6 +1897,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.10"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -983,6 +1912,13 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.9",
+     "Lot 1.11",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -993,6 +1929,13 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.6",
+     "Lot 1.11",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1003,6 +1946,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1013,6 +1961,13 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.5",
+     "Lot 1.9",
+     "Lot 1.12"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1023,6 +1978,12 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.7",
+     "Lot 1.11"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1033,6 +1994,14 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.5",
+     "Lot 1.6",
+     "Lot 1.8",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1043,8 +2012,15 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.5",
+     "Lot 1.6",
+     "Lot 1.12"
+    ]
+   },
    "provenance": "framework-named",
-   "directoryTagged": false
+   "directoryTagged": true
   },
   {
    "name": "Orthopediatrics EU Limited",
@@ -1053,6 +2029,12 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.5",
+     "Lot 1.6"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1063,6 +2045,17 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.5",
+     "Lot 1.6",
+     "Lot 1.7",
+     "Lot 1.8",
+     "Lot 1.10",
+     "Lot 2",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1073,6 +2066,21 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.3",
+     "Lot 1.4",
+     "Lot 1.5",
+     "Lot 1.6",
+     "Lot 1.7",
+     "Lot 1.8",
+     "Lot 1.9",
+     "Lot 1.10",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1083,6 +2091,13 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.6",
+     "Lot 1.12",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1093,6 +2108,12 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.10",
+     "Lot 1.12"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1103,6 +2124,13 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.3",
+     "Lot 1.5",
+     "Lot 1.10"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1113,6 +2141,15 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.3",
+     "Lot 1.4",
+     "Lot 1.12"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1133,6 +2170,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.6"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1143,6 +2185,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1153,6 +2200,15 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.6",
+     "Lot 1.10",
+     "Lot 1.11",
+     "Lot 2",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1165,6 +2221,20 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.4",
+     "Lot 1.5",
+     "Lot 1.7",
+     "Lot 1.8",
+     "Lot 1.10",
+     "Lot 1.11",
+     "Lot 2",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1175,6 +2245,13 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.3",
+     "Lot 1.5",
+     "Lot 1.11"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1185,6 +2262,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.6"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1197,6 +2279,15 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.4",
+     "Lot 1.8",
+     "Lot 1.11",
+     "Lot 2",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1207,6 +2298,12 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.6",
+     "Lot 1.10"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1219,6 +2316,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.5"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": false
   },
@@ -1231,8 +2333,15 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.9",
+     "Lot 2",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
-   "directoryTagged": false
+   "directoryTagged": true
   },
   {
    "name": "Symbios",
@@ -1241,6 +2350,12 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.12"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1261,6 +2376,11 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.10"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1271,6 +2391,13 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.4"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1281,6 +2408,15 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.6",
+     "Lot 1.9",
+     "Lot 1.10",
+     "Lot 1.11",
+     "Lot 2"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   },
@@ -1293,6 +2429,22 @@
    "frameworks": [
     "Total Orthopaedic Solutions 3"
    ],
+   "lots": {
+    "Total Orthopaedic Solutions 3": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.3",
+     "Lot 1.4",
+     "Lot 1.5",
+     "Lot 1.7",
+     "Lot 1.8",
+     "Lot 1.9",
+     "Lot 1.10",
+     "Lot 1.11",
+     "Lot 2",
+     "Lot 3"
+    ]
+   },
    "provenance": "framework-named",
    "directoryTagged": true
   }
@@ -1310,6 +2462,7 @@
     "33192160"
    ],
    "isFramework": false,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": false
   },
@@ -1337,6 +2490,7 @@
     "51420000"
    ],
    "isFramework": false,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": true
   },
@@ -1363,6 +2517,7 @@
     "33183000"
    ],
    "isFramework": true,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": true
   },
@@ -1379,23 +2534,9 @@
     "33183000"
    ],
    "isFramework": true,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": true
-  },
-  {
-   "title": "Laerdal Trauma Manikin (Simulator)",
-   "buyer": "SWANSEA BAY UNIVERSITY HEALTH BOARD",
-   "supplier": "Laerdal Medical ",
-   "date": "2026-09-22",
-   "url": "https://www.find-tender.service.gov.uk/Notice/089482-2026",
-   "value": null,
-   "periodEnd": null,
-   "cpv": [
-    "39162200"
-   ],
-   "isFramework": false,
-   "source": "framework-awards",
-   "cpvCorroborates": false
   },
   {
    "title": "Knee Surgery consumables",
@@ -1420,6 +2561,7 @@
     "50420000"
    ],
    "isFramework": false,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": false
   },
@@ -1435,6 +2577,7 @@
     "85100000"
    ],
    "isFramework": false,
+   "stage": "tender",
    "source": "framework-awards",
    "cpvCorroborates": false
   },
@@ -1461,6 +2604,7 @@
     "85121283"
    ],
    "isFramework": true,
+   "stage": "planning",
    "source": "framework-awards",
    "cpvCorroborates": true
   },
@@ -1477,6 +2621,7 @@
     "85121283"
    ],
    "isFramework": false,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": true
   },
@@ -1492,6 +2637,7 @@
     "33184100"
    ],
    "isFramework": false,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": false
   },
@@ -1507,6 +2653,7 @@
     "85121283"
    ],
    "isFramework": false,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": true
   },
@@ -1522,6 +2669,7 @@
     "33183100"
    ],
    "isFramework": false,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": true
   },
@@ -1537,6 +2685,7 @@
     "85111000"
    ],
    "isFramework": false,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": false
   },
@@ -1788,6 +2937,16 @@
    "url": "https://www.contractsfinder.service.gov.uk/Notice/ae440271-a9c2-412f-b0de-154b8dda54d0",
    "value": 18723,
    "periodEnd": "2027-03-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Tivato 700 spine microscope",
+   "buyer": "Norfolk & Norwich University Hospital",
+   "supplier": "Carl Zeiss Ltd",
+   "date": "2026-01-26",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/f3a22c76-3d25-4625-b1e7-93830c103524",
+   "value": 144769,
+   "periodEnd": "2026-03-27",
    "source": "tender-history"
   }
  ],
@@ -2467,25 +3626,11 @@
   "dataAsOf": "2026-09-30",
   "sourcePage": "https://www.gov.uk/drug-safety-update",
   "noFacet": false,
-  "whyEmpty": null,
-  "count": 2,
+  "whyEmpty": "No Drug Safety Update is tagged specifically to this speciality; 2 sent to every area are left out.",
+  "count": 0,
   "roundupsExcluded": 0,
-  "updates": [
-   {
-    "title": "#MedSafetyWeek (3-9 November 2025): A call to action to improve patient safety",
-    "url": "https://www.gov.uk/drug-safety-update/number-medsafetyweek-3-9-november-2025-a-call-to-action-to-improve-patient-safety",
-    "published": "2025-10-23",
-    "updated": "2025-10-23",
-    "summary": "The annual #MedSafetyWeek campaign takes place from 3 to 9 November 2025. This year’s campaign theme is ‘we can all help make medicines safer.’"
-   },
-   {
-    "title": "Paracetamol and pregnancy - reminder that taking paracetamol during pregnancy remains safe",
-    "url": "https://www.gov.uk/drug-safety-update/paracetamol-and-pregnancy-reminder-that-taking-paracetamol-during-pregnancy-remains-safe",
-    "published": "2025-09-23",
-    "updated": "2025-09-23",
-    "summary": "Patients should be reminded and reassured that there is no evidence that taking paracetamol during pregnancy causes autism in children. Paracetamol is recommended as the first-choice pain reliever for pregnant women, used at the lowest dose and for the shortest duration. It also acts as an antipyretic and is therefore used to treat fever."
-   }
-  ]
+  "broadcastsExcluded": 2,
+  "updates": []
  },
  "drugTariffViiia": null
 }
