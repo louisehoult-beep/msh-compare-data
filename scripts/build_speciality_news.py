@@ -198,6 +198,13 @@ SOURCES = [
      "specialities": ["tissue-viability-and-wound-care"]},
     {"id": "ivteam", "name": "IVTeam", "url": "https://www.ivteam.com/feed/",
      "specialities": ["vascular-access-and-iv-therapy"]},
+    # Added 01/10/2026 for orthopaedics-and-trauma, the same edit as sources.py in the
+    # pipeline repo. Orthopaedic Product News is published by Barker Brooks
+    # Communications Ltd, Leeds (its own About and Contact pages, read 01/10/2026), so
+    # it is UK trade press. ORTHOWORLD and Ortho Spine News were fetched the same day
+    # and NOT added: their items are FDA clearances and US practices.
+    {"id": "opnews", "name": "Orthopaedic Product News (OPNews)", "url": "https://www.opnews.com/feed/",
+     "specialities": ["orthopaedics-and-trauma"]},
     {"id": "ips_infection", "name": "Infection Prevention Society", "url": "https://www.ips.uk.net/rss",
      "specialities": ["infection-prevention-and-control"]},
     {"id": "rcem_news", "name": "Royal College of Emergency Medicine", "url": "https://rcem.ac.uk/feed/",

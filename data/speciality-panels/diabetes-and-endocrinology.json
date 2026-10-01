@@ -13,18 +13,18 @@
  "slug": "diabetes-and-endocrinology",
  "label": "Diabetes and Endocrinology",
  "defined": true,
- "generated": "2026-09-30",
+ "generated": "2026-10-01",
  "dataAsOf": {
   "frameworks": "2026-09-22",
-  "tenderHistory": "2026-09-29",
-  "frameworkAwards": "2026-09-30T12:30:14+00:00",
-  "openTenders": "30/09/2026",
-  "drugTariff": "2026-09-30",
+  "tenderHistory": "2026-10-01",
+  "frameworkAwards": "2026-10-01T13:07:32+00:00",
+  "openTenders": "01/10/2026",
+  "drugTariff": "2026-10-01",
   "localIntel": "2026-09-30",
-  "supplierDirectory": "2026-09-30",
+  "supplierDirectory": "2026-10-01",
   "gpPrescribing": "2026-09-30",
   "mhraDsu": "2026-09-30",
-  "drugTariffViiia": "2026-09-30",
+  "drugTariffViiia": "2026-10-01",
   "hospitalPrescribing": "2026-09-30"
  },
  "rules": {
@@ -33,11 +33,11 @@
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. This patch has ONE NHS Supply Chain framework and it covers only half the market. Pumps, acute continuous glucose monitoring and the algorithms that join them are bought on framework 2025/S 000-4043, which expires on 31 May 2027. Community sensors and testing strips never touch it: they are prescribed on FP10 and reimbursed at the Drug Tariff Part IX listed price, which is a monthly reimbursement list and not a contract price. Quoting one as though it were the other is the single most common mistake on this patch. THE ENDOCRINOLOGY HALF OF THIS PAGE'S NAME HAS NO PROCUREMENT OF ITS OWN IN THIS DATA: no NHS Supply Chain framework name carries it, and every award title matching an endocrine or thyroid term turned out to be oncology, pharmacy or newborn screening, so the panel claims none of them. The insulin and GLP-1 medicines themselves - semaglutide, tirzepatide, the insulin analogues - are BNF Chapter 6 prescribing and appear in no framework and no Part IX line here; they are pharmacy's and obesity's. The awards list mixes service and product buys: ten of the 119 matched rows name a service, a programme or screening in their title - eye screening, community diabetes services and prevention programmes - and the rest name none. Two rows are named rather than hidden because the product is exactly what this patch sells even though the buyer is not a trust: a portable glucometer contract bought by Leidos Supply for defence, and the Northern Ireland insulin pen needle contract. Being named on the framework is not evidence of volume, and being absent from it is not evidence of absence from the market.",
   "awards": "Award-stage notices whose TITLE matches /\\b(diabet\\w*|insulin|glucose|glucometer|glycaem\\w*|glycem\\w*|hb\\s?a1c|cgm|continuous glucose|closed[- ]loop|ketone|hypoglyc\\w*|hyperglyc\\w*)\\b/i and does not match /\\bglucose\\s+\\d/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "NHSBSA Drug Tariff Part IXA/IXR for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /insulin|glucose|ketone|lancet|neuropathy sweat|diabetic/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,833 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's.",
+  "drugTariff": "NHSBSA Drug Tariff Part IXA/IXR for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /insulin|glucose|ketone|lancet|neuropathy sweat|diabetic/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,879 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's.",
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: diabetes). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 6 of the 10 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
   "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
-  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (26 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-09-30.",
-  "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-09: narrowed to the lines whose medicine NHSBSA prescribes under BNF 06.01 or 06.02. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 53 of the 3,533 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (26 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-09-30.",
+  "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF 06.01 or 06.02. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 53 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first.",
   "marketShare": "Computed at every build from NHSBSA data, not bought in and not estimated. PRIMARY CARE: every item dispensed in England against a GP practice prescription, English Prescribing Dataset with SNOMED code, for the BNF codes named on each market (21.48, 0601060D0), latest month 202607, with a 12-month total. SECONDARY CARE: NHS trust prescriptions dispensed in a community pharmacy (NHSBSA hospital prescribing dispensed in the community), the same BNF codes, 12 months; it is not in-hospital use, which NHSBSA publishes only by chemical substance and so cannot show a brand. DRUG TARIFF: every Part IX line NHSBSA files under the same BNF codes, in any part, counted in tariff lines per supplier, which measures what is listed and reimbursable, not what is sold. A BRAND is the first word of NHSBSA's product label, so the products of one range are counted together; a label that names its supplier in brackets stays on its own, and every generic is one row. Share is share of ITEMS, never company share: the data does not name the company, and one company can own several brands. A change on a year earlier is printed only where that month had at least 25 items. An ICB's share is the brand's items as a share of that ICB's whole market in the same month."
  },
  "counts": {
@@ -47,6 +47,7 @@
   "awardsShown": 40,
   "awardsMatched": 119,
   "awardsWithheldByBuyerCap": 0,
+  "awardsShownNotYetAwarded": 3,
   "openTenders": 0,
   "localIntel": 0,
   "suppliersFrameworkNamedAlsoTagged": 10,
@@ -54,8 +55,8 @@
   "suppliersDirectoryOnOtherFrameworks": 5,
   "suppliersDirectoryWithFrameworkNote": 6,
   "gpMarkets": 3,
-  "mhraDsu": 128,
-  "drugTariffViiiaLines": 149
+  "mhraDsu": 126,
+  "drugTariffViiiaLines": 150
  },
  "frameworks": [
   {
@@ -241,6 +242,7 @@
     "85000000"
    ],
    "isFramework": false,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": false
   },
@@ -257,6 +259,7 @@
     "33195100"
    ],
    "isFramework": false,
+   "stage": "planning",
    "source": "framework-awards",
    "cpvCorroborates": false
   },
@@ -275,6 +278,7 @@
     "85121282"
    ],
    "isFramework": false,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": false
   },
@@ -290,6 +294,7 @@
     "33195000"
    ],
    "isFramework": false,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": false
   },
@@ -305,6 +310,7 @@
     "85141200"
    ],
    "isFramework": false,
+   "stage": "tender",
    "source": "framework-awards",
    "cpvCorroborates": false
   },
@@ -327,6 +333,7 @@
     "98334000"
    ],
    "isFramework": true,
+   "stage": "tender",
    "source": "framework-awards",
    "cpvCorroborates": false
   },
@@ -342,6 +349,7 @@
     "85323000"
    ],
    "isFramework": false,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": false
   },
@@ -357,6 +365,7 @@
     "72000000"
    ],
    "isFramework": false,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": false
   },
@@ -681,8 +690,8 @@
   "bnfCount": null,
   "vmpFilter": "insulin|glucose|ketone|lancet|neuropathy sweat|diabetic",
   "vmpCount": 100,
-  "effectiveMonth": "2026-09",
-  "dataAsOf": "2026-09-30",
+  "effectiveMonth": "2026-10",
+  "dataAsOf": "2026-10-01",
   "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
   "lineCount": 434,
   "supplierCount": 63,
@@ -4398,8 +4407,9 @@
   "sourcePage": "https://www.gov.uk/drug-safety-update",
   "noFacet": false,
   "whyEmpty": null,
-  "count": 128,
+  "count": 126,
   "roundupsExcluded": 26,
+  "broadcastsExcluded": 2,
   "updates": [
    {
     "title": "Domperidone: new contraindication in patients with phaeochromocytoma due to the risk of severe hypertension",
@@ -4437,47 +4447,47 @@
     "summary": "There is a risk of patient harm arising through medication error during a transition period where the original and new formulation of Rybelsus ® tablets, which have different stated mg doses but are bioequivalent, will both be available on the market."
    },
    {
-    "title": "#MedSafetyWeek (3-9 November 2025): A call to action to improve patient safety",
-    "url": "https://www.gov.uk/drug-safety-update/number-medsafetyweek-3-9-november-2025-a-call-to-action-to-improve-patient-safety",
-    "published": "2025-10-23",
-    "updated": "2025-10-23",
-    "summary": "The annual #MedSafetyWeek campaign takes place from 3 to 9 November 2025. This year’s campaign theme is ‘we can all help make medicines safer.’"
-   },
-   {
-    "title": "Paracetamol and pregnancy - reminder that taking paracetamol during pregnancy remains safe",
-    "url": "https://www.gov.uk/drug-safety-update/paracetamol-and-pregnancy-reminder-that-taking-paracetamol-during-pregnancy-remains-safe",
-    "published": "2025-09-23",
-    "updated": "2025-09-23",
-    "summary": "Patients should be reminded and reassured that there is no evidence that taking paracetamol during pregnancy causes autism in children. Paracetamol is recommended as the first-choice pain reliever for pregnant women, used at the lowest dose and for the shortest duration. It also acts as an antipyretic and is therefore used to treat fever."
-   },
-   {
     "title": "GLP-1 and dual GIP/GLP-1 receptor agonists: potential risk of pulmonary aspiration during general anaesthesia or deep sedation",
     "url": "https://www.gov.uk/drug-safety-update/glp-1-and-dual-gip-slash-glp-1-receptor-agonists-potential-risk-of-pulmonary-aspiration-during-general-anaesthesia-or-deep-sedation",
     "published": "2025-01-28",
     "updated": "2025-01-28",
     "summary": "Healthcare professionals should be aware of the potential risk of pulmonary aspiration in patients using GLP-1 or dual GIP/GLP-1 receptor agonists who undergo surgery or procedures with general anaesthesia or deep sedation."
+   },
+   {
+    "title": "Insulin pumps and continuous glucose monitoring (CGM) equipment: guidance for users on reporting suspected adverse incidents and safety concerns to the MHRA’s Yellow Card scheme",
+    "url": "https://www.gov.uk/drug-safety-update/insulin-pumps-and-continuous-glucose-monitoring-cgm-equipment-guidance-for-users-on-reporting-suspected-adverse-incidents-and-safety-concerns-to-the-mhras-yellow-card-scheme",
+    "published": "2024-10-24",
+    "updated": "2024-10-24",
+    "summary": "We ask healthcare professionals to support new guidance for users of diabetes management equipment, their families, care givers and representatives."
+   },
+   {
+    "title": "GLP-1 receptor agonists: reminder of the potential side effects and to be aware of the potential for misuse",
+    "url": "https://www.gov.uk/drug-safety-update/glp-1-receptor-agonists-reminder-of-the-potential-side-effects-and-to-be-aware-of-the-potential-for-misuse",
+    "published": "2024-10-24",
+    "updated": "2024-10-24",
+    "summary": "Healthcare professionals are reminded to inform patients about the common and serious side effects associated with glucagon-like peptide-1 receptor agonists (GLP-1RAs)."
    }
   ]
  },
  "drugTariffViiia": {
-  "effectiveMonth": "2026-09",
+  "effectiveMonth": "2026-10",
   "latestPublishedMonth": "2026-10",
-  "dataAsOf": "2026-09-30",
+  "dataAsOf": "2026-10-01",
   "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-viii",
   "whole": false,
   "bnfFilter": [
    "06.01",
    "06.02"
   ],
-  "lineCount": 149,
+  "lineCount": 150,
   "categoryCounts": {
    "A": 21,
-   "C": 100,
+   "C": 101,
    "M": 28
   },
-  "fileLines": 3533,
+  "fileLines": 3534,
   "fileLinesWithoutBnf": 53,
-  "priceMin": 0.63,
+  "priceMin": 0.67,
   "priceMax": 330.0,
   "linesShown": 80,
   "lines": [
@@ -4485,196 +4495,196 @@
     "medicine": "Carbimazole 20mg tablets",
     "pack": "100 tablet",
     "category": "M",
-    "price": 2.1,
+    "price": 2.06,
     "bnf": "0602020D0AAABAB"
    },
    {
     "medicine": "Carbimazole 5mg tablets",
     "pack": "100 tablet",
     "category": "M",
-    "price": 1.48,
+    "price": 1.32,
     "bnf": "0602020D0AAAAAA"
    },
    {
     "medicine": "Dapagliflozin 10mg tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 2.33,
+    "price": 2.32,
     "bnf": "0601023AGAAABAB"
    },
    {
     "medicine": "Dapagliflozin 5mg tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 2.3,
+    "price": 2.67,
     "bnf": "0601023AGAAAAAA"
    },
    {
     "medicine": "Gliclazide 30mg modified-release tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 1.07,
+    "price": 1.08,
     "bnf": "0601021M0AAAMAM"
    },
    {
     "medicine": "Gliclazide 40mg tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 0.8,
+    "price": 0.99,
     "bnf": "0601021M0AAARAR"
    },
    {
     "medicine": "Gliclazide 80mg tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 0.76,
+    "price": 0.82,
     "bnf": "0601021M0AAAAAA"
    },
    {
     "medicine": "Glimepiride 1mg tablets",
     "pack": "30 tablet",
     "category": "M",
-    "price": 0.98,
+    "price": 1.09,
     "bnf": "0601021A0AAABAB"
    },
    {
     "medicine": "Glimepiride 2mg tablets",
     "pack": "30 tablet",
     "category": "M",
-    "price": 0.98,
+    "price": 1.09,
     "bnf": "0601021A0AAAAAA"
    },
    {
     "medicine": "Glimepiride 3mg tablets",
     "pack": "30 tablet",
     "category": "M",
-    "price": 1.03,
+    "price": 1.27,
     "bnf": "0601021A0AAACAC"
    },
    {
     "medicine": "Glimepiride 4mg tablets",
     "pack": "30 tablet",
     "category": "M",
-    "price": 1.24,
+    "price": 1.32,
     "bnf": "0601021A0AAADAD"
    },
    {
     "medicine": "Levothyroxine sodium 100microgram tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 0.72,
+    "price": 0.86,
     "bnf": "0602010V0AABZBZ"
    },
    {
     "medicine": "Levothyroxine sodium 12.5microgram tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 9.28,
+    "price": 10.87,
     "bnf": "0602010V0AAGHGH"
    },
    {
     "medicine": "Levothyroxine sodium 25microgram tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 0.78,
+    "price": 0.87,
     "bnf": "0602010V0AABWBW"
    },
    {
     "medicine": "Levothyroxine sodium 50microgram tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 0.72,
+    "price": 0.86,
     "bnf": "0602010V0AABXBX"
    },
    {
     "medicine": "Levothyroxine sodium 75microgram tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 1.76,
+    "price": 2.02,
     "bnf": "0602010V0AABYBY"
    },
    {
     "medicine": "Metformin 1g modified-release tablets",
     "pack": "56 tablet",
     "category": "M",
-    "price": 1.83,
+    "price": 2.26,
     "bnf": "0601022B0AAAVAV"
    },
    {
     "medicine": "Metformin 500mg modified-release tablets",
     "pack": "56 tablet",
     "category": "M",
-    "price": 1.45,
+    "price": 1.73,
     "bnf": "0601022B0AAASAS"
    },
    {
     "medicine": "Metformin 500mg tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 0.63,
+    "price": 0.67,
     "bnf": "0601022B0AAABAB"
    },
    {
     "medicine": "Metformin 500mg/5ml oral solution sugar free",
     "pack": "150 ml",
     "category": "M",
-    "price": 4.56,
+    "price": 6.58,
     "bnf": "0601022B0AAARAR"
    },
    {
     "medicine": "Metformin 850mg tablets",
     "pack": "56 tablet",
     "category": "M",
-    "price": 0.84,
+    "price": 1.02,
     "bnf": "0601022B0AAADAD"
    },
    {
     "medicine": "Pioglitazone 15mg tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 1.87,
+    "price": 1.78,
     "bnf": "0601023B0AAAAAA"
    },
    {
     "medicine": "Pioglitazone 30mg tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 2.22,
+    "price": 2.0,
     "bnf": "0601023B0AAABAB"
    },
    {
     "medicine": "Pioglitazone 45mg tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 9.76,
+    "price": 8.1,
     "bnf": "0601023B0AAACAC"
    },
    {
     "medicine": "Sitagliptin 100mg tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 2.03,
+    "price": 2.05,
     "bnf": "0601023X0AAAAAA"
    },
    {
     "medicine": "Sitagliptin 25mg tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 1.56,
+    "price": 1.48,
     "bnf": "0601023X0AAACAC"
    },
    {
     "medicine": "Sitagliptin 50mg / Metformin 1g tablets",
     "pack": "56 tablet",
     "category": "M",
-    "price": 3.68,
+    "price": 3.51,
     "bnf": "0601023ADAAAAAA"
    },
    {
     "medicine": "Sitagliptin 50mg tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 1.55,
+    "price": 1.72,
     "bnf": "0601023X0AAABAB"
    },
    {
@@ -5377,7 +5387,7 @@
      "scope": "Items prescribed by an NHS trust in England and dispensed in a community pharmacy. Not in-hospital usage, and not GP prescribing."
     },
     "tariff": {
-     "effectiveMonth": "2026-09",
+     "effectiveMonth": "2026-10",
      "lineCount": 10,
      "supplierCount": 8,
      "bnfFilter": [
@@ -6959,7 +6969,7 @@
      "scope": "Items prescribed by an NHS trust in England and dispensed in a community pharmacy. Not in-hospital usage, and not GP prescribing."
     },
     "tariff": {
-     "effectiveMonth": "2026-09",
+     "effectiveMonth": "2026-10",
      "lineCount": 74,
      "supplierCount": 33,
      "bnfFilter": [

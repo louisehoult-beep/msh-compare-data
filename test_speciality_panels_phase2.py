@@ -292,15 +292,77 @@ class MarketShare(unittest.TestCase):
         self.assertIn("d.marketShare", js)
 
 
+class OrthopaedicsLotsAndStages(unittest.TestCase):
+    """Added 01/10/2026 from the orthopaedics gap review."""
+
+    def test_a_planning_notice_is_labelled_not_presented_as_an_award(self):
+        p = panel("orthopaedics-and-trauma")
+        tos4 = [a for a in p["awards"] if a["title"] == "Total Orthopaedic Solutions 4"]
+        self.assertEqual(len(tos4), 1)
+        self.assertEqual(tos4[0]["stage"], "planning")
+        self.assertIsNone(tos4[0]["supplier"])
+        self.assertGreaterEqual(p["counts"]["awardsShownNotYetAwarded"], 1)
+
+    def test_notice_stage_from_tags(self):
+        self.assertEqual(B.notice_stage(["award", "contract"]), "award")
+        self.assertEqual(B.notice_stage(["awardUpdate", "contractUpdate"]), "award")
+        self.assertEqual(B.notice_stage(["planningUpdate"]), "planning")
+        self.assertEqual(B.notice_stage(["tender"]), "tender")
+        self.assertEqual(B.notice_stage(["planning", "tender"]), "tender")
+        self.assertIsNone(B.notice_stage(None))
+
+    def test_the_manikin_is_not_an_orthopaedic_award(self):
+        titles = [a["title"] for a in panel("orthopaedics-and-trauma")["awards"]]
+        self.assertFalse([t for t in titles if "manikin" in t.lower()])
+
+    def test_tos3_lot_lists_match_the_framework_data(self):
+        p = panel("orthopaedics-and-trauma")
+        fw = [f for f in p["frameworks"] if f["name"] == "Total Orthopaedic Solutions 3"][0]
+        by_id = {l["id"]: l for l in fw["lots"]}
+        self.assertIn("Lot 1.6", by_id)
+        self.assertEqual(by_id["Lot 1.6"]["title"], "Spine")
+        raw = [f for f in sources()["frameworks"]["frameworks"] if f["name"] == "Total Orthopaedic Solutions 3"][0]
+        want = sorted(n for n, lots in raw["supplierLots"].items()
+                      if "Lot 1.6" in lots and n in fw["suppliers"])
+        self.assertEqual(sorted(by_id["Lot 1.6"]["suppliers"]), want)
+        self.assertNotIn("Lot 1", by_id)          # the parent of the twelve sub-lots
+        ids = [l["id"] for l in fw["lots"]]
+        self.assertLess(ids.index("Lot 1.9"), ids.index("Lot 1.10"))   # numeric, not text, order
+
+    def test_a_supplier_row_says_which_lots(self):
+        p = panel("orthopaedics-and-trauma")
+        stryker = [s for s in p["suppliers"] if s["name"] == "Stryker"][0]
+        self.assertIn("Lot 1.1", stryker["lots"]["Total Orthopaedic Solutions 3"])
+
+    def test_lots_are_opt_in(self):
+        fw = panel("theatres-and-surgical")["frameworks"]
+        self.assertTrue(fw)
+        self.assertFalse([f for f in fw if "lots" in f])
+
+
 class MhraDsu(unittest.TestCase):
 
     def test_dermatology_slice_matches_the_feed(self):
         d = panel("dermatology")["mhraDsu"]
         doc = sources()["mhra_dsu"]
-        want = [u for u in doc["updates"] if "dermatology" in u["specialities"] and not u.get("roundup")]
+        want = [u for u in doc["updates"] if "dermatology" in u["specialities"] and not u.get("roundup")
+                and len(u.get("therapeuticAreas") or []) < 30]
         self.assertEqual(d["count"], len(want))
         self.assertEqual([u["url"] for u in d["updates"]], [u["url"] for u in want[:len(d["updates"])]])
         self.assertFalse(d["noFacet"])
+
+    def test_a_broadcast_update_is_not_shown_on_a_device_speciality(self):
+        """GOV.UK ticks 40 areas on #MedSafetyWeek and 35 on the paracetamol reminder;
+        neither is about orthopaedic implants (01/10/2026). The count is of GOV.UK's own
+        tags, so the rule can be checked against the feed."""
+        d = panel("orthopaedics-and-trauma")["mhraDsu"]
+        doc = sources()["mhra_dsu"]
+        wide = [u for u in doc["updates"] if "orthopaedics-and-trauma" in u["specialities"]
+                and not u.get("roundup") and len(u.get("therapeuticAreas") or []) >= 30]
+        self.assertGreaterEqual(len(wide), 2)
+        self.assertEqual(d["broadcastsExcluded"], len(wide))
+        shown = {u["url"] for u in d["updates"]}
+        self.assertFalse(shown & {u["url"] for u in wide})
 
     def test_no_facet_speciality_says_so_rather_than_showing_empty(self):
         doc = sources()["mhra_dsu"]

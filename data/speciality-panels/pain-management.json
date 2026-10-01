@@ -16,15 +16,15 @@
  "generated": "2026-10-01",
  "dataAsOf": {
   "frameworks": "2026-09-22",
-  "tenderHistory": "2026-09-29",
-  "frameworkAwards": "2026-09-30T12:30:14+00:00",
-  "openTenders": "30/09/2026",
-  "drugTariff": "2026-09-30",
+  "tenderHistory": "2026-10-01",
+  "frameworkAwards": "2026-10-01T13:07:32+00:00",
+  "openTenders": "01/10/2026",
+  "drugTariff": "2026-10-01",
   "localIntel": "2026-09-30",
-  "supplierDirectory": "2026-09-30",
+  "supplierDirectory": "2026-10-01",
   "gpPrescribing": "2026-09-30",
   "mhraDsu": "2026-09-30",
-  "drugTariffViiia": "2026-09-30",
+  "drugTariffViiia": "2026-10-01",
   "hospitalPrescribing": null
  },
  "rules": {
@@ -36,8 +36,8 @@
   "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
   "directorySuppliers": "No supplier directory label maps to this speciality, so no directory-tagged supplier is listed. That is a gap in the directory's vocabulary, not a finding that no company sells here, and no neighbouring page's list is borrowed to fill it.",
   "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
-  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (13 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-09-30.",
-  "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-09: narrowed to the lines whose medicine NHSBSA prescribes under BNF 04.07. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 53 of the 3,533 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (13 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-09-30.",
+  "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF 04.07. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 53 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
  },
  "counts": {
   "frameworks": 3,
@@ -46,15 +46,16 @@
   "awardsShown": 4,
   "awardsMatched": 4,
   "awardsWithheldByBuyerCap": 0,
+  "awardsShownNotYetAwarded": 0,
   "openTenders": 0,
-  "localIntel": 0,
+  "localIntel": 1,
   "suppliersFrameworkNamedAlsoTagged": 0,
   "suppliersDirectoryTagged": 0,
   "suppliersDirectoryOnOtherFrameworks": 0,
   "suppliersDirectoryWithFrameworkNote": 0,
   "gpMarkets": 1,
-  "mhraDsu": 84,
-  "drugTariffViiiaLines": 255
+  "mhraDsu": 82,
+  "drugTariffViiiaLines": 254
  },
  "frameworks": [
   {
@@ -1197,6 +1198,7 @@
     "85100000"
    ],
    "isFramework": false,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": false
   },
@@ -1213,6 +1215,7 @@
     "85100000"
    ],
    "isFramework": false,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": false
   },
@@ -1228,6 +1231,7 @@
     "85100000"
    ],
    "isFramework": false,
+   "stage": "award",
    "source": "framework-awards",
    "cpvCorroborates": false
   },
@@ -1244,7 +1248,22 @@
  ],
  "openTenders": [],
  "drugTariff": null,
- "localIntel": [],
+ "localIntel": [
+  {
+   "id": "pain-ons-msk-waits",
+   "group": "policy",
+   "kind": "Official statistics",
+   "nation": "England",
+   "org": "Office for National Statistics",
+   "title": "Musculoskeletal elective treatment waiting times and labour market outcomes, England: 2014 to 2025",
+   "date": "09/09/2026",
+   "fact": "Among working-age NHS patients having elective inpatient treatment for musculoskeletal (MSK) pain in England between April 2015 and March 2023, each extra four weeks of waiting reduced annual earnings by up to £487 (other joint disorders), £392 (other MSK conditions), £329 (back, neck and MSK pain) and £301 (osteoarthritis). ONS found no statistical evidence of a link between waiting time and later employment status or benefit receipt.",
+   "quote": "For patients with \"back, neck and MSK pain\", the largest reduction in annual earnings for each additional four weeks of waiting time was of £329, in the third year after treatment",
+   "use": "A cost-of-waiting figure for back, neck and MSK pain pathway conversations.",
+   "url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/musculoskeletalelectivetreatmentwaitingtimesandlabourmarketoutcomesengland/2014to2025",
+   "verifiedOn": "2026-10-01"
+  }
+ ],
  "localIntelGroups": {
   "routes": "National and framework routes",
   "local": "Who holds the contract where",
@@ -2392,8 +2411,9 @@
   "sourcePage": "https://www.gov.uk/drug-safety-update",
   "noFacet": false,
   "whyEmpty": null,
-  "count": 84,
+  "count": 82,
   "roundupsExcluded": 13,
+  "broadcastsExcluded": 2,
   "updates": [
    {
     "title": "Filters should be used during the administration of Parenteral Nutrition for patients in all care settings",
@@ -2408,20 +2428,6 @@
     "published": "2026-01-08",
     "updated": "2026-01-08",
     "summary": "The MHRA has reviewed the warnings regarding addiction, dependence, withdrawal, and tolerance for gabapentin, pregabalin, benzodiazepines, and z-drugs. The findings (detailed in the Public Assessment Report) were that it was necessary to strengthen these warnings in the product information and on packaging to better inform healthcare professionals and patients of these known risks."
-   },
-   {
-    "title": "#MedSafetyWeek (3-9 November 2025): A call to action to improve patient safety",
-    "url": "https://www.gov.uk/drug-safety-update/number-medsafetyweek-3-9-november-2025-a-call-to-action-to-improve-patient-safety",
-    "published": "2025-10-23",
-    "updated": "2025-10-23",
-    "summary": "The annual #MedSafetyWeek campaign takes place from 3 to 9 November 2025. This year’s campaign theme is ‘we can all help make medicines safer.’"
-   },
-   {
-    "title": "Paracetamol and pregnancy - reminder that taking paracetamol during pregnancy remains safe",
-    "url": "https://www.gov.uk/drug-safety-update/paracetamol-and-pregnancy-reminder-that-taking-paracetamol-during-pregnancy-remains-safe",
-    "published": "2025-09-23",
-    "updated": "2025-09-23",
-    "summary": "Patients should be reminded and reassured that there is no evidence that taking paracetamol during pregnancy causes autism in children. Paracetamol is recommended as the first-choice pain reliever for pregnant women, used at the lowest dose and for the shortest duration. It also acts as an antipyretic and is therefore used to treat fever."
    },
    {
     "title": "Prolonged-release opioids: Removal of indication for relief of post-operative pain",
@@ -2450,27 +2456,41 @@
     "published": "2023-07-24",
     "updated": "2023-07-24",
     "summary": "We have launched a public consultation on the proposal to reclassify codeine linctus to a prescription-only medicine."
+   },
+   {
+    "title": "Non-steroidal anti-inflammatory drugs (NSAIDs): potential risks following prolonged use after 20 weeks of pregnancy",
+    "url": "https://www.gov.uk/drug-safety-update/non-steroidal-anti-inflammatory-drugs-nsaids-potential-risks-following-prolonged-use-after-20-weeks-of-pregnancy",
+    "published": "2023-06-27",
+    "updated": "2023-06-27",
+    "summary": "We want to remind healthcare professionals that use of systemic (oral and injectable) NSAIDs such as ibuprofen, naproxen, and diclofenac is contraindicated in the last trimester of pregnancy (after 28 weeks of pregnancy)."
+   },
+   {
+    "title": "Pregabalin (Lyrica): findings of safety study on risks during pregnancy",
+    "url": "https://www.gov.uk/drug-safety-update/pregabalin-lyrica-findings-of-safety-study-on-risks-during-pregnancy",
+    "published": "2022-04-19",
+    "updated": "2022-04-19",
+    "summary": "A new study has suggested pregabalin may slightly increase the risk of major congenital malformations if used in pregnancy. Patients should continue to use effective contraception during treatment and avoid use in pregnancy unless clearly necessary."
    }
   ]
  },
  "drugTariffViiia": {
-  "effectiveMonth": "2026-09",
+  "effectiveMonth": "2026-10",
   "latestPublishedMonth": "2026-10",
-  "dataAsOf": "2026-09-30",
+  "dataAsOf": "2026-10-01",
   "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-viii",
   "whole": false,
   "bnfFilter": [
    "04.07"
   ],
-  "lineCount": 255,
+  "lineCount": 254,
   "categoryCounts": {
-   "A": 30,
+   "A": 29,
    "C": 185,
    "M": 40
   },
-  "fileLines": 3533,
+  "fileLines": 3534,
   "fileLinesWithoutBnf": 53,
-  "priceMin": 0.64,
+  "priceMin": 0.71,
   "priceMax": 450.0,
   "linesShown": 80,
   "lines": [
@@ -2478,119 +2498,119 @@
     "medicine": "Clonidine 25microgram tablets",
     "pack": "112 tablet",
     "category": "M",
-    "price": 4.67,
+    "price": 4.05,
     "bnf": "0407042F0AAAAAA"
    },
    {
     "medicine": "Co-codamol 15mg/500mg tablets",
     "pack": "100 tablet",
     "category": "M",
-    "price": 2.91,
+    "price": 3.63,
     "bnf": "0407010F0AAAKAK"
    },
    {
     "medicine": "Co-codamol 30mg/500mg capsules",
     "pack": "100 capsule",
     "category": "M",
-    "price": 6.12,
+    "price": 6.2,
     "bnf": "0407010F0AAADAD"
    },
    {
     "medicine": "Co-codamol 30mg/500mg effervescent tablets",
     "pack": "32 tablet",
     "category": "M",
-    "price": 2.49,
+    "price": 2.53,
     "bnf": "0407010F0AAAFAF"
    },
    {
     "medicine": "Co-codamol 30mg/500mg effervescent tablets",
     "pack": "100 tablet",
     "category": "M",
-    "price": 7.78,
+    "price": 7.91,
     "bnf": "0407010F0AAAFAF"
    },
    {
     "medicine": "Co-codamol 30mg/500mg tablets",
     "pack": "30 tablet",
     "category": "M",
-    "price": 2.42,
+    "price": 2.57,
     "bnf": "0407010F0AAAHAH"
    },
    {
     "medicine": "Co-codamol 30mg/500mg tablets",
     "pack": "100 tablet",
     "category": "M",
-    "price": 8.07,
+    "price": 8.57,
     "bnf": "0407010F0AAAHAH"
    },
    {
     "medicine": "Co-codamol 8mg/500mg effervescent tablets",
     "pack": "32 tablet",
     "category": "M",
-    "price": 2.46,
+    "price": 3.24,
     "bnf": "0407010F0AAACAC"
    },
    {
     "medicine": "Co-codamol 8mg/500mg effervescent tablets",
     "pack": "100 tablet",
     "category": "M",
-    "price": 7.69,
+    "price": 10.13,
     "bnf": "0407010F0AAACAC"
    },
    {
     "medicine": "Co-codamol 8mg/500mg tablets",
     "pack": "30 tablet",
     "category": "M",
-    "price": 1.12,
+    "price": 1.24,
     "bnf": "0407010F0AAAAAA"
    },
    {
     "medicine": "Co-codamol 8mg/500mg tablets",
     "pack": "100 tablet",
     "category": "M",
-    "price": 3.73,
+    "price": 4.13,
     "bnf": "0407010F0AAAAAA"
    },
    {
     "medicine": "Co-dydramol 10mg/500mg tablets",
     "pack": "30 tablet",
     "category": "M",
-    "price": 0.98,
+    "price": 1.03,
     "bnf": "0407010N0AAAAAA"
    },
    {
     "medicine": "Co-dydramol 10mg/500mg tablets",
     "pack": "100 tablet",
     "category": "M",
-    "price": 3.27,
+    "price": 3.43,
     "bnf": "0407010N0AAAAAA"
    },
    {
     "medicine": "Codeine 15mg tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 0.87,
+    "price": 0.95,
     "bnf": "0407020C0AAADAD"
    },
    {
     "medicine": "Codeine 15mg tablets",
     "pack": "100 tablet",
     "category": "M",
-    "price": 3.11,
+    "price": 3.39,
     "bnf": "0407020C0AAADAD"
    },
    {
     "medicine": "Codeine 30mg tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 1.02,
+    "price": 1.15,
     "bnf": "0407020C0AAAEAE"
    },
    {
     "medicine": "Codeine 30mg tablets",
     "pack": "100 tablet",
     "category": "M",
-    "price": 3.64,
+    "price": 4.11,
     "bnf": "0407020C0AAAEAE"
    },
    {
@@ -2611,147 +2631,147 @@
     "medicine": "Frovatriptan 2.5mg tablets",
     "pack": "6 tablet",
     "category": "M",
-    "price": 2.93,
+    "price": 2.79,
     "bnf": "0407041ABAAAAAA"
    },
    {
     "medicine": "Morphine sulfate 10mg/1ml solution for injection ampoules",
     "pack": "10 ampoule",
     "category": "M",
-    "price": 4.22,
+    "price": 2.88,
     "bnf": "0407020Q0AAABAB"
    },
    {
     "medicine": "Naratriptan 2.5mg tablets",
     "pack": "6 tablet",
     "category": "M",
-    "price": 1.27,
+    "price": 1.44,
     "bnf": "0407041M0AAAAAA"
    },
    {
     "medicine": "Naratriptan 2.5mg tablets",
     "pack": "12 tablet",
     "category": "M",
-    "price": 2.54,
+    "price": 2.88,
     "bnf": "0407041M0AAAAAA"
    },
    {
     "medicine": "Nefopam 30mg tablets",
     "pack": "90 tablet",
     "category": "M",
-    "price": 4.98,
+    "price": 3.73,
     "bnf": "0407010P0AAABAB"
    },
    {
     "medicine": "Oxycodone 5mg/5ml oral solution sugar free",
     "pack": "250 ml",
     "category": "M",
-    "price": 5.13,
+    "price": 5.36,
     "bnf": "0407020ADAAAAAA"
    },
    {
     "medicine": "Paracetamol 250mg/5ml oral suspension sugar free",
     "pack": "200 ml",
     "category": "M",
-    "price": 2.69,
+    "price": 3.53,
     "bnf": "0407010H0AABGBG"
    },
    {
     "medicine": "Paracetamol 500mg capsules",
     "pack": "32 capsule",
     "category": "M",
-    "price": 0.9,
+    "price": 0.95,
     "bnf": "0407010H0AAAAAA"
    },
    {
     "medicine": "Paracetamol 500mg capsules",
     "pack": "100 capsule",
     "category": "M",
-    "price": 2.81,
+    "price": 2.97,
     "bnf": "0407010H0AAAAAA"
    },
    {
     "medicine": "Paracetamol 500mg effervescent tablets",
     "pack": "100 tablet",
     "category": "M",
-    "price": 6.31,
+    "price": 6.4,
     "bnf": "0407010H0AADSDS"
    },
    {
     "medicine": "Paracetamol 500mg tablets",
     "pack": "32 tablet",
     "category": "M",
-    "price": 0.64,
+    "price": 0.71,
     "bnf": "0407010H0AAAMAM"
    },
    {
     "medicine": "Paracetamol 500mg tablets",
     "pack": "100 tablet",
     "category": "M",
-    "price": 2.0,
+    "price": 2.22,
     "bnf": "0407010H0AAAMAM"
    },
    {
     "medicine": "Pizotifen 1.5mg tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 1.81,
+    "price": 1.64,
     "bnf": "0407042Q0AAACAC"
    },
    {
     "medicine": "Pizotifen 500microgram tablets",
     "pack": "28 tablet",
     "category": "M",
-    "price": 1.06,
+    "price": 1.09,
     "bnf": "0407042Q0AAABAB"
    },
    {
     "medicine": "Rizatriptan 10mg orodispersible tablets sugar free",
     "pack": "3 tablet",
     "category": "M",
-    "price": 4.59,
+    "price": 4.16,
     "bnf": "0407041R0AAADAD"
    },
    {
     "medicine": "Rizatriptan 10mg tablets",
     "pack": "3 tablet",
     "category": "M",
-    "price": 5.53,
+    "price": 5.38,
     "bnf": "0407041R0AAABAB"
    },
    {
     "medicine": "Sumatriptan 100mg tablets",
     "pack": "6 tablet",
     "category": "M",
-    "price": 0.89,
+    "price": 2.1,
     "bnf": "0407041T0AAACAC"
    },
    {
     "medicine": "Sumatriptan 50mg tablets",
     "pack": "6 tablet",
     "category": "M",
-    "price": 0.79,
+    "price": 4.24,
     "bnf": "0407041T0AAAFAF"
    },
    {
     "medicine": "Tramadol 50mg capsules",
     "pack": "30 capsule",
     "category": "M",
-    "price": 0.86,
+    "price": 0.91,
     "bnf": "040702040AAAAAA"
    },
    {
     "medicine": "Tramadol 50mg capsules",
     "pack": "100 capsule",
     "category": "M",
-    "price": 2.87,
+    "price": 3.03,
     "bnf": "040702040AAAAAA"
    },
    {
     "medicine": "Zolmitriptan 2.5mg orodispersible tablets sugar free",
     "pack": "6 tablet",
     "category": "M",
-    "price": 3.14,
+    "price": 3.07,
     "bnf": "0407041Z0AAABAB"
    },
    {

@@ -671,6 +671,10 @@ SPECIALITY_RULES = {
     # a theatre buying orthopaedic power tools is buying both.
     "orthopaedics-and-trauma": {
         "label": "Orthopaedics and Trauma",
+        # Show who is on each Total Orthopaedic Solutions 3 lot (lot_split). Opt-in: the
+        # lot lists add about 56 KB to Theatres and Surgical, which would break the
+        # 200 KB slice limit, and other speciality owners have not asked for them.
+        "showLots": True,
         # Two NHSSC frameworks, matched on their distinctive names. Seven others in
         # frameworks.json carry an orthopaedic-sounding word and every one was checked
         # and left out:
@@ -764,7 +768,11 @@ SPECIALITY_RULES = {
             # 30/09/2026: "Beagle Orthopaedics Orthotic Consumables" (Norfolk and
             # Norwich, 25/09/2026) matched on the supplier's name. Orthotics are
             # rehabilitation's patch, which carries it; no other row is removed.
-            r"orthotic\w*|orthos[ei]s)\b"
+            r"orthotic\w*|orthos[ei]s|"
+            # 01/10/2026: "Laerdal Trauma Manikin (Simulator)" (Swansea Bay, 22/09/2026)
+            # matched on trauma. A training manikin is clinical education equipment,
+            # not an implant or a theatre consumable.
+            r"manikins?|mannequins?|simulat\w*)\b"
         ),
         # The three CPV families the matching notices actually carry, read off them
         # rather than assumed: 331417 orthopaedic supplies (fracture devices, pins and
@@ -8073,7 +8081,7 @@ def build_frameworks(rx, rule, fw_doc):
             suppliers = [s for s in suppliers if s.lower() not in want]
             count = len(suppliers)
             source = corr["why"]
-        out.append({
+        entry = {
             "name": f.get("name"),
             "url": f.get("url"),
             "reference": f.get("reference"),
@@ -8085,8 +8093,58 @@ def build_frameworks(rx, rule, fw_doc):
             "supplierSource": source,
             "suppliers": suppliers,
             "delisted": delisted,
-        })
+        }
+        lots = lot_split(f, suppliers) if rule.get("showLots") else []
+        if lots:
+            entry["lots"] = lots
+            entry["lotOwner"] = f.get("lotOwner")
+        out.append(entry)
     out.sort(key=lambda x: (x.get("name") or ""))
+    return out
+
+
+def _lot_key(lot_id):
+    """'Lot 1.10' sorts after 'Lot 1.9', and 'Lot 2' after 'Lot 1.12'."""
+    m = re.findall(r"\d+", lot_id or "")
+    return tuple(int(x) for x in m) or (10 ** 6,)
+
+
+def lot_split(f, suppliers):
+    """Who is on which lot of one framework, as the framework owner's own source states.
+
+    Added 01/10/2026 for the orthopaedics page: Total Orthopaedic Solutions 3 has 12
+    implant sub-lots plus Equipment and Services, and the data to say who is on
+    Lot 1.5 or 1.6 was already in frameworks.json (supplierLots, built by
+    refresh_framework_lots.py under its own rule: a supplier is on a lot only where
+    the owner's brief or matrix names it there). The panel just never carried it, so a
+    rep could not see the competitor set for the sub-lot they sell into.
+
+    Only suppliers still on the panel's list appear (a delisted name stays out), and
+    a framework with no lot data returns [], so nothing is invented for it. A lot
+    that carries a title but no named supplier is kept with an empty list rather than
+    dropped: "no supplier named" is a fact the reader can see.
+    """
+    sup_lots = f.get("supplierLots")
+    titles = f.get("lotTitles")
+    if not isinstance(sup_lots, dict) or not sup_lots or not isinstance(titles, dict):
+        return []
+    keep = set(suppliers)
+    by_lot = {}
+    for name, lots in sup_lots.items():
+        if name not in keep:
+            continue
+        for lot in lots or []:
+            by_lot.setdefault(lot, []).append(name)
+    out = []
+    for lot_id in sorted(set(titles) | set(by_lot), key=_lot_key):
+        # "Lot 1" is the parent of the twelve sub-lots, not a lot anyone is named on.
+        if lot_id in titles and not by_lot.get(lot_id) and re.search(r"sub lots?", titles[lot_id], re.I):
+            continue
+        out.append({
+            "id": lot_id,
+            "title": titles.get(lot_id),
+            "suppliers": sorted(by_lot.get(lot_id, []), key=str.lower),
+        })
     return out
 
 
@@ -8114,6 +8172,11 @@ def build_suppliers(frameworks, registry):
                 rec["variants"].append(s)
             if f["name"] not in rec["frameworks"]:
                 rec["frameworks"].append(f["name"])
+            for lot in f.get("lots") or []:
+                if s in lot["suppliers"]:
+                    ids = rec.setdefault("lots", {}).setdefault(f["name"], [])
+                    if lot["id"] not in ids:
+                        ids.append(lot["id"])
     for rec in by_key.values():
         rec["variants"].sort()
         # Only worth showing when NHSSC really did write it two ways.
@@ -8159,6 +8222,29 @@ EQUIPMENT_WORD = re.compile(
     r"\b(x-?ray|mri|ct|ultrasound|scanners?|fluoroscop\w*|gamma camera|macerators?|"
     r"equipment|devices?|systems?|machines?|robots?|monitors?|analysers?)\b", re.I)
 WORKS_CPV = ("45", "712", "7154")
+
+# WHICH STAGE A NOTICE IS AT (01/10/2026). framework-awards.json is every framework notice,
+# not only awards: Total Orthopaedic Solutions 4 (Find a Tender 081660-2026) is a
+# preliminary market engagement notice, tagged planningUpdate, with no supplier, no value
+# and no contract, and it sat in the orthopaedics list looking like an award. The rows
+# stay (the panel tests pin several of them as true positives, and a rep wants to see a
+# successor framework coming); what changes is that each now says what it is. A row
+# from tender-history.json carries no tags and gets no stage.
+PLANNING_TAGS = {"planning", "planningUpdate"}
+TENDER_TAGS = {"tender", "tenderUpdate"}
+
+
+def notice_stage(tags):
+    t = set(tags or [])
+    if not t:
+        return None
+    if t & {"award", "awardUpdate", "contract", "contractUpdate"}:
+        return "award"
+    if t & TENDER_TAGS:
+        return "tender"
+    if t & PLANNING_TAGS:
+        return "planning"
+    return "other"
 
 
 def is_works_award(row):
@@ -8226,6 +8312,7 @@ def matched_awards(rx, rule, th_doc, fa_doc):
             "periodEnd": None,
             "cpv": cpvs,
             "isFramework": a.get("is_framework"),
+            "stage": notice_stage(a.get("tag")),
             "source": "framework-awards",
             "cpvCorroborates": by_cpv,
         })
@@ -9216,11 +9303,24 @@ def market_share_rule(ms):
         % (", ".join(codes), p["latestPeriod"]))
 
 
+# A Drug Safety Update that GOV.UK tags to this many therapeutic areas or more is a message
+# to everyone. See build_mhra_dsu.
+DSU_BROADCAST_AREAS = 30
+
+
 def build_mhra_dsu(slug, dsu_doc, limit=8):
     if not dsu_doc:
         return None
     rows = [u for u in dsu_doc.get("updates") or [] if slug in (u.get("specialities") or [])]
-    main = [u for u in rows if not u.get("roundup")]
+    # A BROADCAST IS NOT ABOUT THIS SPECIALITY (01/10/2026). GOV.UK ticks almost every
+    # therapeutic area on a campaign or reminder meant for everyone: "#MedSafetyWeek"
+    # carries 40 of them and "Paracetamol and pregnancy" 35, and both landed on the
+    # orthopaedics panel, a device rep's page, and on every other panel. The next
+    # widest of the 865 non-roundup updates carries 24, so 30 separates the two cleanly.
+    # This is a count of GOV.UK's own tags, not a reading of the title.
+    broadcast = [u for u in rows if not u.get("roundup")
+                 and len(u.get("therapeuticAreas") or []) >= DSU_BROADCAST_AREAS]
+    main = [u for u in rows if not u.get("roundup") and u not in broadcast]
     no_facet = slug in (dsu_doc.get("panelsWithNoFacet") or [])
     return {
         "dataAsOf": dsu_doc.get("dataAsOf"),
@@ -9230,9 +9330,10 @@ def build_mhra_dsu(slug, dsu_doc, limit=8):
                      "therapeutic-area facet maps to this speciality. That is a fact "
                      "about how GOV.UK files them, not a finding that there are no "
                      "safety updates relevant to it.") if no_facet else (
-                     None if main else "No Drug Safety Update is tagged to this speciality."),
+                     None if main else ("No Drug Safety Update is tagged specifically to this speciality; %d sent to every area are left out." % len(broadcast) if broadcast else "No Drug Safety Update is tagged to this speciality.")),
         "count": len(main),
-        "roundupsExcluded": len(rows) - len(main),
+        "roundupsExcluded": len(rows) - len(main) - len(broadcast),
+        "broadcastsExcluded": len(broadcast),
         "updates": [{k: u.get(k) for k in ("title", "url", "published", "updated", "summary")}
                     for u in main[:limit]],
     }
@@ -9717,6 +9818,7 @@ def build(slug, sources):
             "awardsShown": len(awards),
             "awardsMatched": award_total,
             "awardsWithheldByBuyerCap": awards_withheld,
+            "awardsShownNotYetAwarded": sum(1 for a in awards if a.get("stage") in ("planning", "tender")),
             "openTenders": len(open_tenders),
             "localIntel": len(local_intel),
             "suppliersFrameworkNamedAlsoTagged": sum(1 for s in suppliers if s.get("directoryTagged")),
@@ -9802,10 +9904,13 @@ def dsu_rule(dsu):
         "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped "
         "to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only "
         "from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and "
-        "medicine recalls sent to healthcare professionals' roundup is left out (%s here). "
+        "medicine recalls sent to healthcare professionals' roundup is left out (%s here), and "
+        "so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message "
+        "to everyone rather than to this speciality (%s here). "
         "Newest first; the count is every tagged update in the archive, and the list shows the "
         "most recent. MHRA Drug Safety Update, GOV.UK, as at %s."
-        % ("{:,}".format(dsu.get("roundupsExcluded") or 0), dsu.get("dataAsOf")))
+        % ("{:,}".format(dsu.get("roundupsExcluded") or 0),
+           "{:,}".format(dsu.get("broadcastsExcluded") or 0), dsu.get("dataAsOf")))
 
 
 def viiia_rule(v):
