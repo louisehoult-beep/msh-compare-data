@@ -4616,7 +4616,8 @@ SPECIALITY_RULES = {
         "label": "Critical Care",
         # THE FOUR THE PAGE NAMES, AND ONLY THOSE. Each one's expiry date in
         # frameworks.json matches the gold date the page's own calendar already
-        # carries: Infusion Pumps 30 September 2026, Renal Replacement Therapies
+        # carries: Infusion Pumps 19 July 2027 (extended from 30 September 2026,
+        # brief re-read 01/10/2026), Renal Replacement Therapies
         # 27 March 2028, Patient Monitoring 7 June 2028, Anaesthesia Machines and
         # Ventilators 28 February 2029. Deliberately NOT here, though every one of
         # them is used on an intensive care unit:
@@ -4999,13 +5000,14 @@ SPECIALITY_RULES = {
         #     Neuroscience is tDCS for depression). The supplier panel is therefore
         #     the framework's field, not a pain market-share table.
         #   Infusion Pumps and Administration Sets and Associated Products
-        #     (Project_12 ITT_382, 3 October 2022 to 30 September 2026, 27
+        #     (Project_12 ITT_382, 3 October 2022 to 19 July 2027, 27
         #     suppliers, four lots). SHARED with critical care, palliative care and
         #     sepsis, all of which already claim it. It is here for the acute pain
         #     service: Lot 1 carries the patient-controlled analgesia pumps and
         #     Lot 4 the disposable elastomeric infusors used for continuous local
-        #     anaesthetic. Nineteen days from expiry at the time of writing, with
-        #     its 24-month extension already spent.
+        #     anaesthetic. Originally due to end 30 September 2026; the brief,
+        #     re-read 01/10/2026, now gives 19 July 2027 (58 months including a
+        #     24-month extension).
         #   Syringes, Needles and Associated Products (2026/S 000-002484, 52
         #     suppliers). SHARED, and shared very widely. It is here because the
         #     consumable under every diagnostic medial branch block, epidural and
@@ -5243,9 +5245,9 @@ SPECIALITY_RULES = {
         #     it as its own patch and is right to. It is here for the blood gas,
         #     lactate, blood culture and rapid molecular half of the sepsis pathway.
         #   Infusion Pumps and Administration Sets and Associated Products
-        #     (Project_12 ITT_382, 3 October 2022 to 30 September 2026, 27 suppliers).
-        #     SHARED with critical care and with palliative care. The nearest of the
-        #     four expiries and the reason this page has a live clock on it.
+        #     (Project_12 ITT_382, 3 October 2022 to 19 July 2027, 27 suppliers;
+        #     extended from 30 September 2026, brief re-read 01/10/2026).
+        #     SHARED with critical care and with palliative care.
         #   Intravenous Cannula and Associated Products (2022/S 000-005941, 27 March
         #     2023 to 31 March 2027, 21 suppliers).
         #   Pressure Infusers and Associated Products (2025/S 000-047797, started
