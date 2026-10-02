@@ -13,18 +13,18 @@
  "slug": "pain-management",
  "label": "Pain Management",
  "defined": true,
- "generated": "2026-10-01",
+ "generated": "2026-10-02",
  "dataAsOf": {
   "frameworks": "2026-09-22",
-  "tenderHistory": "2026-10-01",
-  "frameworkAwards": "2026-10-01T13:07:32+00:00",
-  "openTenders": "01/10/2026",
-  "drugTariff": "2026-10-01",
-  "localIntel": "2026-09-30",
+  "tenderHistory": "2026-10-02",
+  "frameworkAwards": "2026-10-02T12:29:10+00:00",
+  "openTenders": "02/10/2026",
+  "drugTariff": "2026-10-02",
+  "localIntel": "2026-10-02",
   "supplierDirectory": "2026-10-01",
   "gpPrescribing": "2026-09-30",
-  "mhraDsu": "2026-09-30",
-  "drugTariffViiia": "2026-10-01",
+  "mhraDsu": "2026-10-02",
+  "drugTariffViiia": "2026-10-02",
   "hospitalPrescribing": null
  },
  "rules": {
@@ -36,7 +36,7 @@
   "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
   "directorySuppliers": "No supplier directory label maps to this speciality, so no directory-tagged supplier is listed. That is a gap in the directory's vocabulary, not a finding that no company sells here, and no neighbouring page's list is borrowed to fill it.",
   "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
-  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (13 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-09-30.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (13 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-02.",
   "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF 04.07. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 53 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
  },
  "counts": {
@@ -1261,7 +1261,13 @@
    "quote": "For patients with \"back, neck and MSK pain\", the largest reduction in annual earnings for each additional four weeks of waiting time was of £329, in the third year after treatment",
    "use": "A cost-of-waiting figure for back, neck and MSK pain pathway conversations.",
    "url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/bulletins/musculoskeletalelectivetreatmentwaitingtimesandlabourmarketoutcomesengland/2014to2025",
-   "verifiedOn": "2026-10-01"
+   "verifiedOn": "2026-10-01",
+   "lastCheck": {
+    "date": "2026-10-02",
+    "status": "ok",
+    "http": 200,
+    "quote": "found"
+   }
   }
  ],
  "localIntelGroups": {
@@ -2407,7 +2413,7 @@
   ]
  },
  "mhraDsu": {
-  "dataAsOf": "2026-09-30",
+  "dataAsOf": "2026-10-02",
   "sourcePage": "https://www.gov.uk/drug-safety-update",
   "noFacet": false,
   "whyEmpty": null,
@@ -2476,7 +2482,7 @@
  "drugTariffViiia": {
   "effectiveMonth": "2026-10",
   "latestPublishedMonth": "2026-10",
-  "dataAsOf": "2026-10-01",
+  "dataAsOf": "2026-10-02",
   "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-viii",
   "whole": false,
   "bnfFilter": [
