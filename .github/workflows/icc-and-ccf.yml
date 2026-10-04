@@ -90,6 +90,8 @@ jobs:
       # The parser's own invariant gate: row separation, the rule-coverage floor,
       # symbol-font mapping, no-NPC-no-publish, and attribution on every matrix.
       - name: ICC grid invariants — nothing publishes if the parser regressed
+        env:
+          ICC_LIBRARY: ${{ runner.temp }}/icc-library
         run: python3 test_icc_matrix.py
 
       - name: Refresh the CCF accredited framework host list
