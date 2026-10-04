@@ -17,6 +17,7 @@ is the set of things that were easy to get wrong and silent when wrong:
 
     python3 test_speciality_news_pipeline_merge.py
 """
+import datetime
 import io
 import json
 import os
@@ -29,6 +30,11 @@ sys.path.insert(0, os.path.join(HERE, "scripts"))
 import build_speciality_news as N  # noqa: E402
 
 
+# Dates are relative to today: fixed ones age past the 31-day window and the
+# merge tests then fail on the calendar alone (they did on 04/10/2026).
+_D1 = (datetime.date.today() - datetime.timedelta(days=3)).isoformat()
+_D2 = (datetime.date.today() - datetime.timedelta(days=2)).isoformat()
+
 HANDOFF = {
     "generatedAt": "2026-09-16T17:43:12Z",
     "maxAgeDays": 60,
@@ -36,12 +42,12 @@ HANDOFF = {
     "specialities": {
         "urology": [
             {"id": "a1", "title": "A urology opportunity", "url": "https://example.com/u1",
-             "date": "2026-09-01", "summary": "Summary text.", "source_id": "cowork_intel",
+             "date": _D1, "summary": "Summary text.", "source_id": "cowork_intel",
              "category": "industry", "opportunity": True},
         ],
         "respiratory": [
             {"id": "b1", "title": "A respiratory item", "url": "https://example.com/r1",
-             "date": "2026-09-02", "summary": "More text.", "source_id": "cowork_intel",
+             "date": _D2, "summary": "More text.", "source_id": "cowork_intel",
              "category": "policy", "opportunity": False},
         ],
     },
@@ -71,7 +77,7 @@ class PipelineEntry(unittest.TestCase):
         # The renderer only understands link/published. A row that kept url/date
         # would render with a dead link and a blank date, and look like a feed bug.
         self.assertEqual(e["link"], "https://example.com/u1")
-        self.assertEqual(e["published"], "2026-09-01")
+        self.assertEqual(e["published"], _D1)
         self.assertNotIn("url", e)
         self.assertNotIn("date", e)
 
