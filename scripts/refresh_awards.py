@@ -252,8 +252,13 @@ def fetch_fts(days, max_pages=60):
         "updatedTo": now.strftime("%Y-%m-%dT23:59:59")})
     url = "%s?%s" % (FTS_API, qs)
     rows, pages, scanned, complete = [], 0, 0, True
+    failed = ""
     while url and pages < max_pages:
-        data = get(url)
+        try:
+            data = get(url)
+        except Exception as exc:  # network failure after get()'s own retries
+            failed, complete = "%s: %s" % (type(exc).__name__, exc), False
+            break
         releases = data.get("releases", [])
         scanned += len(releases)
         for rel in releases:
@@ -266,7 +271,10 @@ def fetch_fts(days, max_pages=60):
         complete = False
     note = ("Find a Tender: %d supplier row(s) from %d release(s) over %d page(s)"
             % (len(rows), scanned, pages))
-    if not complete:
+    if failed:
+        note += (" — ⚠️ THE FEED FAILED (%s) after %d page(s), so this window was "
+                 "NOT fully walked and awards are missing." % (failed, pages))
+    elif not complete:
         note += (" — ⚠️ STOPPED AT THE %d-PAGE GUARD before the window was exhausted, "
                  "so this window was NOT fully walked and awards are missing."
                  % max_pages)
@@ -281,8 +289,13 @@ def fetch_cf(days, max_pages=MAX_PAGES):
     cutoff = (dt.date.today() - dt.timedelta(days=days)).isoformat()
     url = "%s?size=100&stages=award" % CF_API
     rows, pages, scanned, reached = [], 0, 0, False
+    failed = ""
     while url and pages < max_pages:
-        data = get(url)
+        try:
+            data = get(url)
+        except Exception as exc:  # network failure after get()'s own retries
+            failed = "%s: %s" % (type(exc).__name__, exc)
+            break
         releases = data.get("releases", [])
         if not releases:
             reached = True
@@ -302,7 +315,10 @@ def fetch_cf(days, max_pages=MAX_PAGES):
             time.sleep(PAGE_SLEEP)
     note = ("Contracts Finder: %d supplier row(s) from %d release(s) over %d page(s), "
             "back to %s" % (len(rows), scanned, pages, cutoff))
-    if not reached:
+    if failed:
+        note += (" — ⚠️ THE FEED FAILED (%s) after %d page(s), so this window was "
+                 "NOT fully walked and awards are missing." % (failed, pages))
+    elif not reached:
         note += (" — ⚠️ STOPPED AT THE %d-PAGE GUARD before reaching the cutoff, so "
                  "this window was NOT fully walked and awards are missing." % max_pages)
     return rows, note, reached
