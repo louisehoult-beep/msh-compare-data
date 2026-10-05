@@ -10,7 +10,7 @@
   "ref": "ETH-D8F73B696",
   "contact": "contact@elevateandthrive.uk"
  },
- "dataAsOf": "2026-09-30",
+ "dataAsOf": "2026-10-05",
  "owner": "NHS Supply Chain",
  "rule": "A supplier is shown on a lot ONLY where the framework owner's own published source for that framework names it against that lot: the NHS Supply Chain contract launch brief's lot-by-lot supplier lists or supplier-by-lot table, the Product/Supplier Matrix spreadsheet attached to that brief (only where the sheet has an explicit lot axis, and only where the supplier has a mark or a product in that lot), or the Find a Tender contract award notice for that framework's own procurement. Nothing is inferred from product ranges, specialities or lot titles. Lots attach to the exact supplier string the brief uses; a source name attaches only where its normalised form (brief_names.clean + company_match.key) equals that brief name's, or both resolve to the same single Hub company under the seed's recorded aliases. Unmatched names are listed in `unresolved`, never guessed. Where the brief breaks a framework into lots but no source names who holds which, lotStatus is 'notPublished' and the report says so.",
  "counts": {
@@ -18176,8 +18176,8 @@
    "sources": [
     {
      "kind": "matrix",
-     "url": "https://azuksappnpdsa01.blob.core.windows.net/datashare/Product-Matrix-Renal-Replacement-Therapies-17-February-2026-DES.xlsx",
-     "label": "NHS Supply Chain product matrix (Product-Matrix-Renal-Replacement-Therapies-17-February-2026-DES.xlsx), attached to the brief",
+     "url": "https://azuksappnpdsa01.blob.core.windows.net/datashare/Product-Matrix-Renal-Replacement-Therapies-30-September-2026-DES.xlsx",
+     "label": "NHS Supply Chain product matrix (Product-Matrix-Renal-Replacement-Therapies-30-September-2026-DES.xlsx), attached to the brief",
      "coversLots": [
       "Lot 1.1",
       "Lot 1.2",
@@ -18186,16 +18186,14 @@
       "Lot 3"
      ],
      "suppliersWithLots": 24,
-     "date": "17 February 2026"
+     "date": "30 September 2026"
     }
    ],
    "unresolved": [
     {
-     "name": "Baxter Healthcare Ltd",
+     "name": "Healthcare 21 UK Ltd",
      "lots": [
       "Lot 1.1",
-      "Lot 1.2",
-      "Lot 1.3",
       "Lot 2"
      ],
      "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
@@ -18259,18 +18257,14 @@
      "Medical Access Ltd": [
       "Lot 1.1"
      ],
-     "Medtronic Limited": [
-      "Lot 1.1",
-      "Lot 2"
-     ],
-     "Nikkiso Belgium BV": [
-      "Lot 2"
-     ],
      "Nikkiso Europe GmbH": [
       "Lot 1.1"
      ],
      "Nipro Medical UK Ltd": [
       "Lot 1.1"
+     ],
+     "Norrdia UK Limited": [
+      "Lot 2"
      ],
      "TerumoBCT Europe NV": [
       "Lot 2"
@@ -18284,14 +18278,26 @@
      "Valiant Medical Ltd": [
       "Lot 1.1"
      ],
+     "Vantive Limited (formerly part of Baxter Healthcare Ltd)": [
+      "Lot 1.1",
+      "Lot 1.2",
+      "Lot 1.3",
+      "Lot 2"
+     ],
      "Xtra-Med": [
       "Lot 1.1"
      ]
     }
    },
    "namedAs": {
+    "Norrdia UK Limited": [
+     "Norrdia UK Ltd"
+    ],
     "TerumoBCT Europe NV": [
      "TerumoBCT"
+    ],
+    "Vantive Limited (formerly part of Baxter Healthcare Ltd)": [
+     "Vantive Ltd"
     ]
    },
    "supplierLots": {
@@ -18350,18 +18356,14 @@
     "Medical Access Ltd": [
      "Lot 1.1"
     ],
-    "Medtronic Limited": [
-     "Lot 1.1",
-     "Lot 2"
-    ],
-    "Nikkiso Belgium BV": [
-     "Lot 2"
-    ],
     "Nikkiso Europe GmbH": [
      "Lot 1.1"
     ],
     "Nipro Medical UK Ltd": [
      "Lot 1.1"
+    ],
+    "Norrdia UK Limited": [
+     "Lot 2"
     ],
     "TerumoBCT Europe NV": [
      "Lot 2"
@@ -18375,13 +18377,19 @@
     "Valiant Medical Ltd": [
      "Lot 1.1"
     ],
+    "Vantive Limited (formerly part of Baxter Healthcare Ltd)": [
+     "Lot 1.1",
+     "Lot 1.2",
+     "Lot 1.3",
+     "Lot 2"
+    ],
     "Xtra-Med": [
      "Lot 1.1"
     ]
    },
    "status": "published",
    "suppliersWithoutLot": [
-    "Vantive Limited (formerly part of Baxter Healthcare Ltd)"
+    "Healthcare 21 UK Ltd (formerly Medtronic Limited)"
    ],
    "coversLots": [
     "Lot 1.1",
@@ -19985,9 +19993,6 @@
      "Liberator Ltd": [
       "Lot 2"
      ],
-     "Lifeline 24": [
-      "Lot 5"
-     ],
      "Mounts & More Ltd": [
       "Lot 4"
      ],
@@ -20083,9 +20088,6 @@
     "Liberator Ltd": [
      "Lot 2"
     ],
-    "Lifeline 24": [
-     "Lot 5"
-    ],
     "Mounts & More Ltd": [
      "Lot 4"
     ],
@@ -20129,7 +20131,9 @@
     ]
    },
    "status": "published",
-   "suppliersWithoutLot": [],
+   "suppliersWithoutLot": [
+    "Lifeline24"
+   ],
    "coversLots": [
     "Lot 1",
     "Lot 2",
