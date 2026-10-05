@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 37224,
-  "differentiator.json held": 50122
+  "differentiator.json published": 37239,
+  "differentiator.json held": 50127
  },
  "counts": {
   "frameworks": 122,
@@ -28,7 +28,7 @@
   "inScopeSuppliersNeedingCrawl": 264,
   "inScopeSuppliersNeedingDomain": 242,
   "suppliersRefused": 542,
-  "suppliersRefusedButPublishingElsewhere": 111,
+  "suppliersRefusedButPublishingElsewhere": 112,
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 1,
   "blockedFrameworks": 2,
@@ -1679,8 +1679,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "11 March 2028",
    "suppliersAwarded": 122,
-   "suppliersPublished": 33,
-   "coverage": 27.0,
+   "suppliersPublished": 34,
+   "coverage": 27.9,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -1999,13 +1999,6 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Agilent Technologies UK",
-     "domain": "www.agilent.com",
-     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-09-25",
-     "bucket": "refused"
-    },
-    {
      "supplier": "Andrac Ltd",
      "domain": "www.andrac.com",
      "reason": "only 0 product records on the site's API \u2014 that is a landing page, not a catalogue; the WooCommerce Store API returned 4 product(s), too few to be a catalogue; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -2181,6 +2174,13 @@
      "bucket": "published"
     },
     {
+     "supplier": "Agilent Technologies UK",
+     "domain": "www.agilent.com",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-25",
+     "bucket": "published"
+    },
+    {
      "supplier": "Alpha Laboratories",
      "domain": "alphalabs.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -2263,6 +2263,7 @@
    "published": [
     "Abbott Diagnostics",
     "AFOS",
+    "Agilent Technologies UK",
     "Alpha Laboratories",
     "Apacor",
     "Appleton Woods",
@@ -2370,7 +2371,6 @@
    "refused": [
     "2San Global",
     "AB Scientific",
-    "Agilent Technologies UK",
     "Andrac Ltd",
     "Bio-Rad Laboratories UK",
     "CellPath",
@@ -3876,8 +3876,8 @@
    "category": "Medical Technology",
    "ends": "30 September 2027",
    "suppliersAwarded": 58,
-   "suppliersPublished": 19,
-   "coverage": 32.8,
+   "suppliersPublished": 20,
+   "coverage": 34.5,
    "nhsscCategory": "Medical Technology",
    "inScope": true,
    "outOfScopeReason": null,
@@ -4156,6 +4156,7 @@
     "endoscopy:endo",
     "endoscopy:uro",
     "endourology:laser",
+    "endourology:litho",
     "endourology:stent",
     "endourology:stone",
     "endourology:urodyn",
@@ -4169,7 +4170,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 10,
+    "publishedElsewhereNeedingCategory": 9,
     "heldNeedingCategory": 4,
     "capturedNothingCounted": 1,
     "duplicateOfCapturedSupplier": 0,
@@ -4188,6 +4189,7 @@
     "Creo Medical Limited",
     "GBUK Group",
     "It\u2019s Interventional Limited",
+    "Johnson & Johnson MedTech",
     "Laborie Medical Technologies UK Ltd",
     "Medtronic",
     "Omnimed Limited",
@@ -4200,7 +4202,6 @@
    "publishedElsewhere": [
     "Advanced Medical Systems Ltd",
     "Fannin (UK) Limited",
-    "Johnson & Johnson MedTech",
     "Kebomed UK Ltd",
     "Olympus (KeyMed)",
     "Macromed UK Ltd",
@@ -4247,7 +4248,7 @@
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)"
    ],
    "unknown": [],
-   "actionableTotal": 18,
+   "actionableTotal": 17,
    "blockedReason": null,
    "deferred": null
   },
