@@ -2683,10 +2683,14 @@ print("  the suppliers are the framework's own, resolved to one name per company
 # distributors that are the same firm.
 _rn_nik = [s for s in rn["suppliers"] if "Nikkiso" in s["name"]]
 check("Nikkiso appears exactly once", len(_rn_nik) == 1, str([s["name"] for s in _rn_nik]))
-check("Nikkiso shows both NHSSC spellings",
-      len(_rn_nik) == 1 and len(_rn_nik[0]["variants"]) == 2, str(_rn_nik))
-check("supplier count is the framework's 25 names less the one merge",
-      rn["counts"]["suppliers"] == 24, str(rn["counts"]["suppliers"]))
+# As of the 05/10/2026 rebuild NHS Supply Chain lists only "Nikkiso Europe GmbH"
+# (the Belgium BV name has gone), so there is nothing to merge: one spelling, and
+# the count is the framework's 25 names as listed. If the Belgium name returns the
+# merge returns with it and this should read two spellings and 24.
+check("Nikkiso shows the NHSSC spelling(s) it is listed under",
+      len(_rn_nik) == 1 and len(_rn_nik[0]["variants"]) >= 1, str(_rn_nik))
+check("supplier count is the framework's own 25 names, no merge needed",
+      rn["counts"]["suppliers"] == 25, str(rn["counts"]["suppliers"]))
 # Until 21/09/2026 this panel carried two names the registry could not resolve, and
 # the check here asserted >= 1 so the refusal could not be papered over. Both were
 # then resolved on evidence (e5c2bb9): the framework writes "Vantive Limited
