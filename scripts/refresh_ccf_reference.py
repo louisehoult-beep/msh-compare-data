@@ -137,7 +137,13 @@ def fetch(url: str, tries: int = 3) -> str | None:
         try:
             req = urllib.request.Request(url, headers={"User-Agent": UA})
             with urllib.request.urlopen(req, timeout=90) as r:
-                return r.read().decode("utf-8", errors="replace")
+                body = r.read().decode("utf-8", errors="replace")
+                if not body.strip():
+                    # An empty 200 is a different failure from a network error and
+                    # was reported as neither: say what came back.
+                    log("  EMPTY BODY: %s (HTTP %s, final URL %s)"
+                        % (url[:90], r.status, r.geturl()[:120]))
+                return body
         except (urllib.error.URLError, TimeoutError, OSError) as exc:
             if attempt == tries:
                 log("  FETCH FAILED: %s (%s)" % (url[:90], exc))
