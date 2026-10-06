@@ -468,6 +468,31 @@ def main() -> int:
     unlinked_entries = []
     if not args.no_unlinked:
         linked_names = {u.rsplit("/", 1)[-1] for u in seen}
+        # On a clean CI runner the library starts empty, so the unlinked documents
+        # the committed catalogue already records are not there to scan, and the
+        # run would drop them (54 categories instead of 68) and fail its own gate.
+        # Re-fetch each one from the blob URL the catalogue recorded, only if it is
+        # still served. Nothing is guessed: these are files already catalogued.
+        if not args.no_fetch:
+            try:
+                with open(os.path.join(DATA, "icc-catalogue.json")) as fh:
+                    held = json.load(fh).get("documents", [])
+            except (OSError, ValueError):
+                held = []
+            for d in held:
+                fn = d.get("filename") or ""
+                url = d.get("source_url") or ""
+                if (d.get("listing_status") != "unlinked" or not fn or not url
+                        or fn in linked_names
+                        or os.path.exists(os.path.join(LIBRARY, fn))):
+                    continue
+                if not url.startswith(BLOB_BASE) or not still_served(url):
+                    continue
+                blob = fetch(url, binary=True)
+                if blob:
+                    with open(os.path.join(LIBRARY, fn), "wb") as fh:
+                        fh.write(blob)
+                    time.sleep(0.4)
         for filename in sorted(os.listdir(LIBRARY)):
             if doc_type(filename) is None or filename in linked_names:
                 continue

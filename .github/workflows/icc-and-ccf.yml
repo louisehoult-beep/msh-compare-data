@@ -94,7 +94,16 @@ jobs:
           ICC_LIBRARY: ${{ runner.temp }}/icc-library
         run: python3 test_icc_matrix.py
 
+      # The CCF host list comes from england.nhs.uk, which can answer a runner
+      # with an empty HTTP 202. That must not stop the ICC matrices (already
+      # parsed and gated above) from being committed, and it must not be quietly
+      # ignored either: the step is allowed to fail here, the data is committed,
+      # and the final step turns the job red with the reason. The committed
+      # ccf-reference.json is left as it was when the fetch fails ("Nothing
+      # written").
       - name: Refresh the CCF accredited framework host list
+        id: ccf
+        continue-on-error: true
         run: python3 scripts/refresh_ccf_reference.py
 
       - name: Re-stamp the ownership notice and data markers
@@ -124,7 +133,7 @@ jobs:
             git fetch origin
             git reset --hard origin/main
             ICC_LIBRARY="${{ runner.temp }}/icc-library" python3 scripts/refresh_icc.py
-            python3 scripts/refresh_ccf_reference.py
+            python3 scripts/refresh_ccf_reference.py || echo "CCF refresh failed on retry; keeping the committed file (the final step reports it)"
             python3 scripts/stamp_notice.py
             bash scripts/gate.sh || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
             git add data/icc-catalogue.json data/icc-matrices.json data/ccf-reference.json
@@ -135,3 +144,9 @@ jobs:
             echo "could not push after 3 attempts - failing loudly rather than dropping the work"
             exit 1
           fi
+
+      - name: Fail loudly if the CCF reference could not be refreshed
+        if: steps.ccf.outcome == 'failure'
+        run: |
+          echo "::error::CCF reference refresh failed (see that step). ICC data was committed; data/ccf-reference.json is unchanged and is stale until this passes."
+          exit 1
