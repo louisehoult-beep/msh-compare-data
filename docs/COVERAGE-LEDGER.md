@@ -61,7 +61,7 @@ the decision each waits on; delete the entry once that decision is made.
 | General Wound Care | wound | 28 | 11 | 39.3% | 5 | 23 | STARTED |
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 10 | 37.0% | 7 | 17 | STARTED |
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 9 | 36.0% | 5 | 13 | STARTED |
-| Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 8 | 32.0% | 6 | 17 | STARTED |
+| Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 7 | 28.0% | 8 | 15 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 5 | 16 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 8 | 36.4% | 6 | 13 | STARTED |
 | Hand Hygiene and Associated Products and Services | infection | 21 | 5 | 23.8% | 6 | 15 | STARTED |
@@ -74,7 +74,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 7 | 9 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 7 | 38.9% | 1 | 13 | STARTED |
 | Patient Temperature Management | theatres | 18 | 8 | 44.4% | 6 | 9 | STARTED |
-| Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 6 | 33.3% | 3 | 10 | STARTED |
+| Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 5 | 27.8% | 4 | 10 | STARTED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
 | Clinical and Sharps Waste Management | infection | 14 | 4 | 28.6% | 4 | 11 | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | imaging, oncology | 13 | 4 | 30.8% | 1 | 9 | STARTED · DEFERRED |

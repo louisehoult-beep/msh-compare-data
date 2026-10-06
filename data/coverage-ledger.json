@@ -12,7 +12,7 @@
  },
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
-  "frameworks.json": "2026-09-22",
+  "frameworks.json": "2026-10-05",
   "differentiator.json published": 37239,
   "differentiator.json held": 50127
  },
@@ -24,7 +24,7 @@
   "unmapped": 46,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 409,
+  "supplierNamesUnresolved": 412,
   "inScopeSuppliersNeedingCrawl": 264,
   "inScopeSuppliersNeedingDomain": 242,
   "suppliersRefused": 542,
@@ -1524,6 +1524,14 @@
    1
   ],
   [
+   "Healthcare 21 UK Ltd (formerly Medtronic Limited)",
+   1
+  ],
+  [
+   "Norrdia UK Limited",
+   1
+  ],
+  [
    "Emmat Medical",
    1
   ],
@@ -1537,6 +1545,10 @@
   ],
   [
    "Apollo Medical Technologies Ltd",
+   1
+  ],
+  [
+   "Lifeline24",
    1
   ],
   [
@@ -9429,8 +9441,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "27 March 2028",
    "suppliersAwarded": 25,
-   "suppliersPublished": 8,
-   "coverage": 32.0,
+   "suppliersPublished": 7,
+   "coverage": 28.0,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -9522,13 +9534,6 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Nikkiso Medical",
-     "domain": "nikkisomedical.eu",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-09-21",
-     "bucket": "refused"
-    },
-    {
      "supplier": "Terumo BCT",
      "domain": "terumobct.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -9564,13 +9569,6 @@
      "bucket": "published"
     },
     {
-     "supplier": "Medtronic",
-     "domain": "medtronic.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-08",
-     "bucket": "published"
-    },
-    {
      "supplier": "Valiant Medical Ltd",
      "domain": "valiantmedical.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 1 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -9585,7 +9583,7 @@
     "renal:pd"
    ],
    "actionable": {
-    "unresolvedNames": 0,
+    "unresolvedNames": 2,
     "publishedElsewhereNeedingCategory": 3,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
@@ -9598,7 +9596,6 @@
     "Fresenius Medical Care UK",
     "Kimal PLC",
     "MedScience Distribution",
-    "Medtronic",
     "U-drain Ltd",
     "Valiant Medical Ltd",
     "Vantive"
@@ -9626,11 +9623,13 @@
     "Medica Advanced Technologies Ltd",
     "Medical Access Ltd",
     "Nikkiso Medical",
-    "Nikkiso Medical",
     "Terumo BCT"
    ],
-   "unknown": [],
-   "actionableTotal": 6,
+   "unknown": [
+    "Healthcare 21 UK Ltd (formerly Medtronic Limited)",
+    "Norrdia UK Limited"
+   ],
+   "actionableTotal": 8,
    "blockedReason": null,
    "deferred": null
   },
@@ -11612,8 +11611,8 @@
    "category": "Rehabilitation and Community",
    "ends": null,
    "suppliersAwarded": 18,
-   "suppliersPublished": 6,
-   "coverage": 33.3,
+   "suppliersPublished": 5,
+   "coverage": 27.8,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -11714,7 +11713,7 @@
     "digital:tec"
    ],
    "actionable": {
-    "unresolvedNames": 0,
+    "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 1,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
@@ -11725,7 +11724,6 @@
    "published": [
     "Abilia Ltd",
     "Liberator Ltd",
-    "Lifeline 24",
     "Possum Ltd",
     "Sensory Guru Ltd",
     "Skyguard Ltd T/A Peoplesafe"
@@ -11750,8 +11748,10 @@
     "Smartbox Assistive Technology",
     "Total Mobile"
    ],
-   "unknown": [],
-   "actionableTotal": 3,
+   "unknown": [
+    "Lifeline24"
+   ],
+   "actionableTotal": 4,
    "blockedReason": null,
    "deferred": null
   },
