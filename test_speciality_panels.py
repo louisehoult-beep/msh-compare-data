@@ -4282,8 +4282,14 @@ for good in ["Stroke Central Monitor",
 # (28/10/2022; the buyer name differs from the Find a Tender copy, so it is a separate
 # notice, not a republication). All three are thrombectomy or INR, this patch.
 # "Microtome ER System with flexible long stroke" matched too and is excluded by rule.
-check("exactly thirteen, and every one of them was read",
-      sk["counts"]["awardsMatched"] == 13, "got %s" % sk["counts"]["awardsMatched"])
+# FOURTEEN FROM 06/10/2026: "Provision of transport for stroke and suspected stroke
+# patients" (Somerset NHS Foundation Trust to Western Medical Services, 06/10/2026)
+# is the award notice for the tender already kept above as the 08/09/2026 Somerset
+# row (same buyer, same title, supplier then unnamed). Same contract, a stroke
+# patient transport service, so it is kept on this page. Read from the award feed
+# record (buyer, title, supplier, date); the notice itself was not opened.
+check("exactly fourteen, and every one of them was read",
+      sk["counts"]["awardsMatched"] == 14, "got %s" % sk["counts"]["awardsMatched"])
 check("the Norfolk and Suffolk community stroke service is one of them",
       any("enhanced community stroke services" in (a.get("title") or "").lower()
           for a in sk["awards"]))
