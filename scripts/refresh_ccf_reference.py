@@ -139,10 +139,16 @@ def fetch(url: str, tries: int = 3) -> str | None:
             with urllib.request.urlopen(req, timeout=90) as r:
                 body = r.read().decode("utf-8", errors="replace")
                 if not body.strip():
-                    # An empty 200 is a different failure from a network error and
-                    # was reported as neither: say what came back.
+                    # An empty reply is a different failure from a network error
+                    # and was reported as neither: say what came back. HTTP 202
+                    # with no body is "accepted, not ready", so it is retried
+                    # after a wait; anything else empty is not.
                     log("  EMPTY BODY: %s (HTTP %s, final URL %s)"
                         % (url[:90], r.status, r.geturl()[:120]))
+                    if r.status == 202 and attempt < tries:
+                        time.sleep(20 * attempt)
+                        continue
+                    return None
                 return body
         except (urllib.error.URLError, TimeoutError, OSError) as exc:
             if attempt == tries:
