@@ -94,7 +94,8 @@ def ascii_fold(s):
 def norm(s): return re.sub(r"[^a-z0-9]+", " ", ascii_fold(s).lower()).strip()
 def norm_co(s):
     n = norm(s)
-    return re.sub(r"\b(limited|ltd|plc|uk|u k|gmbh|inc|llc|llp|group|holdings|the)\b", " ", n).strip()
+    n = re.sub(r"\b(limited|ltd|plc|uk|u k|gmbh|inc|llc|llp|group|holdings|the)\b", " ", n)
+    return re.sub(r"\s+", " ", n).strip()
 
 def fetch(url, timeout=40):
     with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout) as r:
