@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-10-05",
-  "differentiator.json published": 37254,
-  "differentiator.json held": 50317
+  "differentiator.json published": 37284,
+  "differentiator.json held": 50319
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 408,
-  "inScopeSuppliersNeedingCrawl": 265,
-  "inScopeSuppliersNeedingDomain": 243,
-  "suppliersRefused": 542,
+  "inScopeSuppliersNeedingCrawl": 263,
+  "inScopeSuppliersNeedingDomain": 241,
+  "suppliersRefused": 543,
   "suppliersRefusedButPublishingElsewhere": 112,
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 1,
@@ -11594,8 +11594,8 @@
    "category": "Rehabilitation and Community",
    "ends": null,
    "suppliersAwarded": 18,
-   "suppliersPublished": 6,
-   "coverage": 33.3,
+   "suppliersPublished": 7,
+   "coverage": 38.9,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -11603,20 +11603,8 @@
    "speciality": [
     "digital"
    ],
-   "crawlWorklist": [
-    {
-     "supplier": "Jabbla UK Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Tobii Dynavox Ltd",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "Jabbla UK Ltd",
-    "Tobii Dynavox Ltd"
-   ],
+   "crawlWorklist": [],
+   "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
@@ -11631,6 +11619,13 @@
      "domain": "dh2solutions.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Jabbla UK Ltd",
+     "domain": "jabbla.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-10-07",
      "bucket": "refused"
     },
     {
@@ -11702,7 +11697,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 2
+    "needDomain": 0
    },
    "published": [
     "Abilia Ltd",
@@ -11710,20 +11705,19 @@
     "Lifeline 24",
     "Possum Ltd",
     "Sensory Guru Ltd",
-    "Skyguard Ltd T/A Peoplesafe"
+    "Skyguard Ltd T/A Peoplesafe",
+    "Tobii Dynavox Ltd"
    ],
    "publishedElsewhere": [
     "Iansyst Ltd"
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
-   "notCrawled": [
-    "Jabbla UK Ltd",
-    "Tobii Dynavox Ltd"
-   ],
+   "notCrawled": [],
    "refused": [
     "Baywater Healthcare UK Ltd",
     "DH2 Solutions Ltd",
+    "Jabbla UK Ltd",
     "Legrand Electric Ltd",
     "Mounts & More Ltd",
     "Orbis Protect",
@@ -11733,7 +11727,7 @@
     "Total Mobile"
    ],
    "unknown": [],
-   "actionableTotal": 3,
+   "actionableTotal": 1,
    "blockedReason": null,
    "deferred": null
   },

@@ -123,7 +123,7 @@ def main():
             e["hub"], e["why"], e["decidedIn"] = got[0], got[1], got[2]
             applied += 1
 
-    products = sum(e["products"] for e in doc["entries"] if e.get("hub"))
+    products = sum(e.get("products", 0) for e in doc["entries"] if e.get("hub"))
     doc["counts"]["mapped"] = sum(1 for e in doc["entries"] if e.get("hub"))
     doc["counts"]["productsMapped"] = products
 

@@ -117,8 +117,8 @@ def main():
     doc["counts"]["pairs"] = len(entries)
     doc["counts"]["mapped"] = sum(1 for e in entries if e.get("hub"))
     doc["counts"]["notTaxonomy"] = sum(1 for e in entries if e.get("notTaxonomy"))
-    doc["counts"]["products"] = sum(e["products"] for e in entries)
-    doc["counts"]["productsMapped"] = sum(e["products"] for e in entries if e.get("hub"))
+    doc["counts"]["products"] = sum(e.get("products", 0) for e in entries)
+    doc["counts"]["productsMapped"] = sum(e.get("products", 0) for e in entries if e.get("hub"))
 
     print("\nmap would be: %d pairs, %d mapped, %d products."
           % (doc["counts"]["pairs"], doc["counts"]["mapped"], doc["counts"]["products"]))
