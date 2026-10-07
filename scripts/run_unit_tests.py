@@ -98,6 +98,8 @@ ELSEWHERE = {
 # second; the matcher case needs node, which ubuntu-latest has. RUN: it has no
 # workflow of its own.
 RUN = [
+    # My Hub search modal mount in app/hub-search.js (my-hub task 9). Static, no network.
+    "test_hub_search_embed.py",
     # Added 30/09/2026 with scripts/refresh_icb_watch.py. Stdlib only, no network.
     "test_icb_watch.py",
     "test_ask_passages.py",
@@ -128,6 +130,7 @@ RUN = [
     # their verify.py checks. Offline, stdlib only, ~0.1s, writes nothing.
     "test_mhra_dsu_and_tariff_viiia.py",
     "test_my_hub_catalogue.py",
+    "test_my_hub_css.py",
     "test_nhssc_card.py",
     "test_numeric_id_division.py",
     "test_numeric_slug_detail.py",
@@ -155,6 +158,10 @@ RUN = [
     "test_supplier_index_framework_dedupe.py",
     "test_tariff_bnf_filter.py",
     "test_vocabulary_duplicates.py",
+    "test_whats_new.py",
+    "test_my_hub_logic.py",
+    "test_my_hub_ui.py",             # 2026-10, My Hub modules wired, copy rules
+    "test_my_hub_state.py",          # 2026-10, PHP snippet and browser client agree (php, node; skipped where absent)
 ]
 
 # A test that is red for a reason that is its own decision goes HERE, not out of

@@ -52,7 +52,12 @@
    * Both are bound here: whichever one the page shows is the one that works. */
   var MOUNT = document.getElementById('ethHubSearch');
   var MAST = document.querySelector('.msh .qsearch');
-  if (!MOUNT && !MAST) { return; }
+  /* THIRD PLACE (My Hub home screen, 2026-10). My Hub's search modal supplies
+   * [data-hub-search-embed] holding an input, and [data-hub-search-results]
+   * for the results, and loads this file when the modal first opens, after
+   * both exist. Same index, same ranking, same Ask the Hub card. */
+  var EMBED = document.querySelector('[data-hub-search-embed]');
+  if (!MOUNT && !MAST && !EMBED) { return; }
   var ROOT = document.documentElement;
   if (ROOT.getAttribute('data-eth-hubsearch') === 'v8') { return; }
   ROOT.setAttribute('data-eth-hubsearch', 'v8');
@@ -533,7 +538,7 @@
   }
 
   function planHtml(steps) {
-    var html = '<div style="padding:12px 14px 6px;color:' + GOLD + ';font-size:11px;letter-spacing:1.2px;' +
+    var html = '<div style="padding:12px 14px 6px;color:' + GOLD + ';font-size:12px;letter-spacing:1.2px;' +
                'font-weight:700;text-transform:uppercase;">Your plan for today</div>', i, s;
     for (i = 0; i < steps.length; i++) {
       s = steps[i];
@@ -596,7 +601,7 @@
   function cut(t, n) { t = String(t || ''); return t.length > n ? t.slice(0, n - 1).replace(/\s+\S*$/, '') + '\u2026' : t; }
 
   function quickHtml(name, spec) {
-    var head = '<div style="padding:12px 14px 6px;color:' + GOLD + ';font-size:11px;letter-spacing:1.2px;' +
+    var head = '<div style="padding:12px 14px 6px;color:' + GOLD + ';font-size:12px;letter-spacing:1.2px;' +
                'font-weight:700;text-transform:uppercase;">' + esc(name) + ' at a glance</div>';
     if (SUPS_FAILED) { return ''; }
     if (!SUPS) {
@@ -724,8 +729,8 @@
 
   var ASK_HEAD = '<div style="display:flex;align-items:center;gap:8px;padding:0 0 8px;">' +
     '<span style="padding:3px 7px;border-radius:5px;background:' + GOLD + ';color:' + NAVY + ';' +
-    'font-size:10.5px;font-weight:800;letter-spacing:.08em;">AI</span>' +
-    '<span style="color:' + GOLD + ';font-size:11px;letter-spacing:1.2px;font-weight:700;' +
+    'font-size:12px;font-weight:800;letter-spacing:.08em;">AI</span>' +
+    '<span style="color:' + GOLD + ';font-size:12px;letter-spacing:1.2px;font-weight:700;' +
     'text-transform:uppercase;">Ask the Hub</span></div>';
 
   function askBox(inner) {
@@ -772,7 +777,7 @@
         left = (ASK.data.covered ? ' ' : '') + ASK.data.left + (ASK.data.left === 1 ? ' question' : ' questions') + ' left today.';
       }
       inner = askAnswer(ASK.data) +
-              '<div style="color:' + DIM + ';font-size:11.5px;line-height:1.45;margin-top:8px;">' +
+              '<div style="color:' + DIM + ';font-size:12px;line-height:1.45;margin-top:8px;">' +
               (ASK.data.covered ? 'AI answer written only from Hub pages. Open the source before you rely on a point.' : '') +
               left + '</div>';
     } else {
@@ -864,7 +869,7 @@
     return '<a href="' + esc(href) + '" style="display:block;padding:11px 14px;color:' + TEXT + ';' +
            'text-decoration:none;border-top:1px solid ' + RULE + ';">' +
            '<span style="display:block;font-size:14px;font-weight:600;">' + esc(title) + '</span>' +
-           (kicker ? '<span style="display:block;color:' + GOLD + ';font-size:11px;font-weight:700;' +
+           (kicker ? '<span style="display:block;color:' + GOLD + ';font-size:12px;font-weight:700;' +
                      'letter-spacing:.8px;text-transform:uppercase;margin-top:3px;">' + esc(kicker) + '</span>' : '') +
            (body ? '<span style="display:block;color:#a8b3c4;font-size:12.5px;line-height:1.5;margin-top:4px;">' +
                    body + '</span>' : '') +
@@ -902,7 +907,7 @@
       return;
     }
 
-    html = top + '<div style="padding:8px 14px 4px;color:' + DIM + ';font-size:11px;letter-spacing:1.2px;' +
+    html = top + '<div style="padding:8px 14px 4px;color:' + DIM + ';font-size:12px;letter-spacing:1.2px;' +
            'font-weight:700;text-transform:uppercase;">' + res.length +
            (res.length === 1 ? ' match' : ' matches') + (steps ? ' to read next' : ' on the Hub') + '</div>';
 
@@ -1092,6 +1097,28 @@
   }
 
   if (MAST) { bindMast(MAST); }
+
+  /* My Hub's search modal. The results box sits inside the modal, so there is
+   * nothing to position; Enter opens the first plan step or match, as on the
+   * Live Desk. */
+  function bindEmbed(wrap) {
+    var eInput = wrap.querySelector('input');
+    var eBox = document.querySelector('[data-hub-search-results]');
+    if (!eInput || !eBox) { return; }
+    eBox.style.display = 'none';
+    function refresh() { use(eInput, eBox); render(); }
+    wireAsk(eInput, eBox, refresh);
+    eInput.addEventListener('focus', function () { use(eInput, eBox); load(); });
+    eInput.addEventListener('input', function () {
+      use(eInput, eBox); load();
+      if (timer) { clearTimeout(timer); }
+      timer = setTimeout(refresh, 90);
+    });
+    eInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); use(eInput, eBox); goFirst(eInput, eBox); }
+    });
+  }
+  if (EMBED) { bindEmbed(EMBED); }
 
   // Lets the page, or a test harness, supply the index directly.
   if (window.MSH_HUB_SEARCH_INDEX) {
