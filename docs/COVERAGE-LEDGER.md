@@ -52,7 +52,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 17 | 26 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 12 | 27.9% | 12 | 27 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 13 | 35.1% | 5 | 28 | STARTED |
-| Respiratory Solutions | respiratory | 37 | 12 | 32.4% | 17 | 17 | STARTED |
+| Respiratory Solutions | respiratory | 37 | 13 | 35.1% | 16 | 17 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 12 | 34.3% | 6 | 23 | STARTED |
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 12 | 36.4% | 7 | 21 | STARTED |
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | 13 | 12 | STARTED |

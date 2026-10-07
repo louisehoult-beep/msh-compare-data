@@ -79,7 +79,7 @@
   },
   {
    "framework": "Surgical Instruments",
-   "checkedOn": "2026-09-29",
+   "checkedOn": "2026-10-07",
    "coverageAtCheck": "26.0% (13/50)",
    "suppliersChecked": [
     "Decree Thermo",
@@ -99,10 +99,11 @@
     "Daniels Health (Sharpsmart)",
     "Sheffmed Limited",
     "Timesco Healthcare Ltd",
-    "Vernacare"
+    "Vernacare",
+    "It’s Interventional Limited"
    ],
-   "reason": "Re-confirmed after Decree Thermo's crawl status changed since the 23/09 check (a working domain, decreethermo.co.uk, was found and read on 27/09: a Wix storefront whose sitemap.xml lists no products sitemap -- still no product route, now bucketed 'refused' instead of 'needDomain'). All other 17 remaining actionable items unchanged since 23/09 and re-verified today: U.K. Medical Limited is registered at Companies House (01455141, Sheffield, SIC 64204 'distribution holding companies') but has no discoverable website by any search route, and its previously-tried domain uk-medical.co.uk still fails DNS resolution; Scientific Medical Clinical Limited (NI041931, Belfast) likewise has no discoverable website. Steris IMS Ltd's 69 held products remain decontamination/endoscopy-reprocessing equipment, not surgical hand instruments. The 14 publishedElsewhere suppliers' crawl dates (checked 26/08-20/09) predate this check and none has a newer crawl to re-read. No permitted route left on any of the 17.",
-   "wouldReopenIf": "U.K. Medical Limited or Scientific Medical Clinical Limited gets a working, confirmable website; any of the 14 publishedElsewhere/1 held supplier gets a new/changed crawl result revealing a real surgical-instrument line; or a new supplier is awarded on this framework."
+   "reason": "Re-confirmed after Decree Thermo's crawl status changed since the 23/09 check (a working domain, decreethermo.co.uk, was found and read on 27/09: a Wix storefront whose sitemap.xml lists no products sitemap -- still no product route, now bucketed 'refused' instead of 'needDomain'). All other 17 remaining actionable items unchanged since 23/09 and re-verified today: U.K. Medical Limited is registered at Companies House (01455141, Sheffield, SIC 64204 'distribution holding companies') but has no discoverable website by any search route, and its previously-tried domain uk-medical.co.uk still fails DNS resolution; Scientific Medical Clinical Limited (NI041931, Belfast) likewise has no discoverable website. Steris IMS Ltd's 69 held products remain decontamination/endoscopy-reprocessing equipment, not surgical hand instruments. The 14 publishedElsewhere suppliers' crawl dates (checked 26/08-20/09) predate this check and none has a newer crawl to re-read. No permitted route left on any of the 17. 07/10/2026 RE-CHECK: the supplier set changed (It’s Interventional Limited is now in the publishedElsewhere bucket and was not in the 29/09 list). Its own catalogue (itsinterventional.com, WordPress REST, read 15/08/2026, 32 products) files under Stenting, Drainage, Biopsy, Breast Solutions, Spine, Surgery (one product: Neoprobe gamma detection system), Neuroradiology & Vascular and an unlaunched 'Coming Soon' division. Every product is an interventional oncology, radiology, nuclear or vascular device, mapped already to oncology:stent, oncology:acc, ortho:cement, nuclear:probe and vascsurg:thrombectomy. None is a surgical:* hand instrument (bone, clamp, curette and the other in-scope surgical types), so there is no permitted route for this supplier to this framework. No permitted route left on any of the 19 suppliers checked.",
+   "wouldReopenIf": "U.K. Medical Limited or Scientific Medical Clinical Limited gets a working, confirmable website; any of the 14 publishedElsewhere/1 held supplier gets a new/changed crawl result revealing a real surgical-instrument line; or a new supplier is awarded on this framework.; or It’s Interventional Limited's own crawl changes to reveal a surgical hand-instrument line."
   },
   {
    "framework": "Examination Gloves",
@@ -134,8 +135,8 @@
   },
   {
    "framework": "Renal Replacement Therapies Services, Technologies and Consumables",
-   "checkedOn": "2026-09-24",
-   "coverageAtCheck": "32.0% (8/25), up from 28.0% (7/25) this run",
+   "checkedOn": "2026-10-07",
+   "coverageAtCheck": "32.0% (8/25)",
    "suppliersChecked": [
     "MedScience Distribution",
     "BD — Becton, Dickinson",
@@ -143,10 +144,11 @@
     "Acime UK Ltd",
     "VWS (UK) Ltd",
     "Nipro Medical UK Ltd",
-    "Xtra-Med"
+    "Xtra-Med",
+    "Norrdia UK Co., Ltd"
    ],
-   "reason": "Worked all 7 actionable items this run. MedScience Distribution published: its \"Fistula & Renal Procedure Packs – Sterile, Ready-to-Use Dialysis & Access Care Kits\" product, filed under a generic \"Dressing Packs\" division, is an unambiguous haemodialysis vascular-access pack and was added as a product-override -> renal:hd (scripts/_seed_medscience_renal_override_0924.py). The other 3 publishedElsewhereNeedingCategory suppliers (BD, LINC Medical, Acime UK Ltd) were checked product-by-product (54, 4 and 25 captured products respectively) and none carries a genuine renal/dialysis/CRRT/peritoneal item — BD's captured NHSSC-cache range is vascular/blood-transfusion/continence, LINC is drainage, Acime is furniture/rehab; correctly mapped elsewhere, nothing to move. VWS (UK) Ltd (heldNeedingCategory) crawls as a flat 53-product list of Veolia water-treatment process names (Actiflo, Anoxkaldnes MBBR, etc.) with no medical/dialysis indication in any product name — mixed-division-mapping policy applies, correctly held, no unambiguous product to promote even though renal:water exists as a category. The 2 needDomain suppliers were searched for a primary-source domain: Xtra-Med's own site (xtra-med.com) prints an address (Thorneycroft Farm, Kettleshulme) that does NOT match XTRA MED LIMITED's Companies House registered office (57 High Street, Rowley Regis) and no registration number anywhere on the site — domain-proof-tier policy near-miss, refused, same shape as Carleton Medical. Nipro Medical UK Ltd's only findable site (nipro-group.com, the global group site) prints no UK address or registration number on any page checked — no proof route. Neither domain recorded.",
-   "wouldReopenIf": "A new award changes the supplier list; VWS's captured range is re-crawled with different/more specific product names; a registration-number or matching-address proof surfaces for Nipro Medical UK Ltd or Xtra-Med; or BD/LINC/Acime are re-crawled with a wider product set that includes genuine renal items."
+   "reason": "Re-checked 07/10/2026: the supplier set changed since 24/09 (Norrdia UK Co., Ltd, seed record added 06/10/2026, is the new crawl-worklist item: notCrawled, no domain; Nipro Medical UK Ltd, Xtra-Med and VWS (UK) Ltd were already covered by the 24/09 record and are unchanged). Identity cannot be confirmed from a primary source for the UK entity the NHS Supply Chain brief names (\"Norrdia UK Limited\"): a Companies House name search returns no Norrdia UK entity, and norrdia.com identifies its operating company as NorrDia AB (Scheelevägen 17, Lund, Sweden), with no UK company name, registration number or registered office on the page. Crawling NorrDia AB's site would attach a Swedish parent's CRRT and dialysis range to a UK-named award, which the parent-subsidiary-award-credit policy forbids (data/identity-vocabulary-policy.json). This is the unconfirmable-awardee shape: publish the award unconfirmed with no company, domain or products attached. The other suppliers on the 24/09 list were not re-read today; that record stands for them. No permitted route left on Norrdia.",
+   "wouldReopenIf": "Norrdia UK Limited's own UK company number or registered office is confirmed from Companies House or the NHS Supply Chain brief; or a UK-entity domain that prints its registration number is found; or a new supplier is awarded on this framework."
   },
   {
    "framework": "Complete Ophthalmology Solutions 3",
