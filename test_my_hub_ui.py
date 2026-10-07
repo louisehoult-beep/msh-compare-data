@@ -19,7 +19,7 @@ import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 APP = os.path.join(HERE, "app")
-FILES = ["my-hub.js", "my-hub-feeds.js", "my-hub-overlays.js", "my-hub-logic.js", "hub-icons.js", "hub-account.js"]
+FILES = ["my-hub.js", "my-hub-feeds.js", "my-hub-overlays.js", "my-hub-logic.js", "hub-icons.js", "hub-account.js", "hub-chrome.js"]
 TARGETS = {"spec", "scope", "tools", "library", "briefing", "saved", "search", "how", "new"}
 
 
