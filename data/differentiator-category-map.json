@@ -375,11 +375,11 @@
   }
  },
  "counts": {
-  "pairs": 9210,
-  "mapped": 7820,
-  "notTaxonomy": 209,
-  "products": 101682,
-  "productsMapped": 69244
+  "pairs": 9253,
+  "mapped": 7824,
+  "notTaxonomy": 210,
+  "products": 102849,
+  "productsMapped": 69291
  },
  "entries": [
   {
@@ -151151,6 +151151,654 @@
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
    "why": "Individual product inside the Urology & Urogynecology division, which the existing (supplier, division) mapping files to endourology:urodyn (urodynamics diagnostic equipment -- correct for the NXT/Uroflowmeter examples that mapping was decided on). This one product is a transanal bowel irrigation system for faecal incontinence, not a urodynamics device: its own detail text (read from laborie.com/product/eclipse/, 08/09/2026) names 'Fecal Incontinence Treatment Pathway' and an 'Eclipse Fitting Guide'. continence:bowel ('Bowel / transanal irrigation') is an existing, gated type that fits it exactly. Added via the product-override tier (framework-coverage run, 08/10/2026) rather than widening the division's own hub to a list, because the division's other products (URGENT PC for overactive bladder, Macroplastique, Intelligent Cath-ID System, Sonesta chair range, Pelvic Floor Rehabilitation) are not bowel-control products and a list would have published all of them under continence:bowel too."
+  },
+  {
+   "supplier": "Crest Medical Ltd",
+   "division": "Uncategorised",
+   "products": 883,
+   "categories": [],
+   "examples": [
+    "Blue Dot Small First Aid Kit In Pouch",
+    "Blue Dot Medium Trauma Dressing",
+    "Blue Dot Large Trauma Dressing",
+    "Wallace Cameron 20 Person Hse Workplace First Aid Kit In Adulto Box"
+   ],
+   "hub": null,
+   "notTaxonomy": true,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "GV Health",
+   "division": "General Waste Segregation for Healthcare",
+   "products": 30,
+   "categories": [
+    "Clear Waste Bags",
+    "Black Waste Bags",
+    "General Waste Segregation for Healthcare",
+    "Coloured Waste Bags",
+    "Confidential Waste Bag"
+   ],
+   "examples": [
+    "Light Duty Clear Domestic Waste Bag – Small – Printed",
+    "Black Waste Refuse Bags",
+    "Medium Duty Domestic Black Waste Refuse Bag – Small – Printed",
+    "Medium Duty Black Domestic Waste Refuse Bag – Large – Printed"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "GAMA Healthcare",
+   "division": "Surface care",
+   "products": 27,
+   "categories": [
+    "Surface care"
+   ],
+   "examples": [
+    "Clinell Alcohol Wipes Large 150",
+    "Cleanall Everyday Cloths Blue",
+    "Cleanall Everyday Cloths Green",
+    "Cleanall Everyday Cloths Red"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "GAMA Healthcare",
+   "division": "Skin care",
+   "products": 25,
+   "categories": [
+    "Skin care"
+   ],
+   "examples": [
+    "Clinell 2% Chlorhexidine in 70% Alcohol Skin Wipes",
+    "Clinell Antimicrobial Hand Wipes 200",
+    "Clinell Antimicrobial Hand Wipes 100",
+    "Clinell Bed Bath Gloves 8"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "GV Health",
+   "division": "Specialist Bags",
+   "products": 24,
+   "categories": [
+    "Specialist Bags",
+    "Clinical & Offensive Waste Segregation for Healthcare",
+    "General Waste Segregation for Healthcare"
+   ],
+   "examples": [
+    "Patient Property Carrier Bags / Nappy Bags",
+    "Cytotoxic Bag",
+    "Laundry Bags",
+    "Paper Bags"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "GV Health",
+   "division": "Clinical Waste Bags",
+   "products": 23,
+   "categories": [
+    "Clinical & Offensive Waste Segregation for Healthcare"
+   ],
+   "examples": [
+    "Orange Clinical Waste Bags",
+    "Mattress Bags",
+    "Yellow Clinical Waste Bags",
+    "Medium Duty Orange Waste Bag – Large – Printed"
+   ],
+   "hub": "infection:sharps",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "every product is an orange or yellow NHS colour-coded clinical waste bag, printed and bulk-carriage variants included, the same colour-coding basis already used for this supplier's existing Orange/Yellow Clinical Waste Bags mappings",
+   "decidedIn": "GV Health - Phase E.json"
+  },
+  {
+   "supplier": "GV Health",
+   "division": "PPE",
+   "products": 19,
+   "categories": [
+    "Aprons, Gowns & Tabards"
+   ],
+   "examples": [
+    "Healthcare Aprons",
+    "Single-use (PE) Thumb-loop Gowns",
+    "Yellow Healthcare Apron",
+    "Green Healthcare Apron"
+   ],
+   "hub": "infection:ppe",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division is the supplier's own 'PPE' catalogue section; every product in it (Healthcare Aprons in multiple colours, disposable aprons, a single-use thumb-loop gown) is a disposable protective garment, matching the general-PPE line already recognised for this supplier's older Healthcare Aprons division",
+   "decidedIn": "GV Health - Phase E.json"
+  },
+  {
+   "supplier": "GV Health",
+   "division": "Spill Kits & Sorbents",
+   "products": 16,
+   "categories": [
+    "Biohazard Spill Kits",
+    "Spill Kits & Sorbents",
+    "Cytotoxic Spill Kits",
+    "Chemical Spill Kits"
+   ],
+   "examples": [
+    "Cytotoxic Spill Kit",
+    "Biohazard Spill Pack",
+    "Urine & Vomit Spill Pack",
+    "Cytotoxic Spill Pack"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "GV Health",
+   "division": "Disinfectants",
+   "products": 14,
+   "categories": [
+    "Disinfectants",
+    "Diluters & Diffusers"
+   ],
+   "examples": [
+    "SoChlor TAB 1.7g 200",
+    "SoChlor DST 1.7g 100",
+    "SoChlor DST 1.7g 200",
+    "SoChlor TAB 0.5g 80"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gardamed",
+   "division": "Thigh high",
+   "products": 12,
+   "categories": [
+    "Thigh high"
+   ],
+   "examples": [
+    "Micro Class 1 Thigh High",
+    "Micro Class 2 Thigh High",
+    "Strong Class 2 Thigh High",
+    "Comfort Class 1 Thigh High"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gardamed",
+   "division": "Socks & Below knee",
+   "products": 10,
+   "categories": [
+    "Socks & Below knee"
+   ],
+   "examples": [
+    "Micro Class 2 Below Knee",
+    "Gentleman Class 1 Below Knee",
+    "Gentleman Class 2 Below Knee",
+    "Comfort (cotton) Class 1 Below Knee"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "GAMA Healthcare",
+   "division": "Support products",
+   "products": 9,
+   "categories": [
+    "Support products"
+   ],
+   "examples": [
+    "Clinell Antimicrobial Hand Wipes Dispenser",
+    "Clinell Detergent Wipes Dispenser",
+    "Clinell Paper-based Indicator Notes",
+    "Clinell Indicator Tape"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gardamed",
+   "division": "Arm sleeves",
+   "products": 8,
+   "categories": [
+    "Arm sleeves"
+   ],
+   "examples": [
+    "Arm Sleeve Class 1 no mitten and body strap",
+    "Arm Sleeve Class 2 no mitten – silicone grip top",
+    "Arm Sleeve Class 1 no mitten – silcone grip top",
+    "Arm Sleeve Class 2 with mitten – silicone grip top"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gardamed",
+   "division": "Stocking Aids & Accessories",
+   "products": 7,
+   "categories": [
+    "Stocking Aids & Accessories"
+   ],
+   "examples": [
+    "Steve+® complete compression stocking aid",
+    "Steve+ EasyON",
+    "Gardamed Gloves",
+    "Gardaglide sock aid"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gardamed",
+   "division": "Travel socks",
+   "products": 6,
+   "categories": [
+    "Prevention"
+   ],
+   "examples": [
+    "Man Support Cotton 18",
+    "Lady Gloria 18 Below Knee – Medium Support – Sheer",
+    "Travel and Work socks 15-20mmHg – Unisex",
+    "Micro Made to Measure – Knee High – Closed Toe"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gardamed",
+   "division": "Tights",
+   "products": 6,
+   "categories": [
+    "Tights"
+   ],
+   "examples": [
+    "Micro Class 1 Tights",
+    "Micro Class 2 Tights",
+    "Lady Gloria 12 Tights – Mild Support",
+    "Lady Gloria 18 Tights – Medium Support"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "GV Health",
+   "division": "Clinical & Offensive Waste Segregation for Healthcare",
+   "products": 4,
+   "categories": [
+    "Clinical & Offensive Waste Segregation for Healthcare"
+   ],
+   "examples": [
+    "Medium Duty Yellow Clinical Waste Bag – Large – Printed",
+    "Medium Duty Yellow Clinical Waste Bag – Small – Printed",
+    "Heavy Duty Bulk Yellow Carriage Bag – Large – Printed. ADR 7.3.2.6.2 (c) for carriage of bulk",
+    "Heavy Duty Bulk Orange Carriage Bag – Large – Printed. ADR 7.3.2.6.2 (c) for carriage of bulk"
+   ],
+   "hub": "infection:sharps",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "every product is a yellow or orange NHS colour-coded clinical waste bag (standard and bulk-carriage variants), the same colour-coding basis already used for this supplier's other clinical-waste-bag divisions",
+   "decidedIn": "GV Health - Phase E.json"
+  },
+  {
+   "supplier": "Gardamed",
+   "division": "One leg with waist attachment",
+   "products": 4,
+   "categories": [
+    "One leg with waist attachment"
+   ],
+   "examples": [
+    "Strong Class 3 One Leg",
+    "Micro Class 1 One Leg",
+    "Micro Class 2 One Leg",
+    "Strong Class 2 One Leg"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gardamed",
+   "division": "Compression Garments",
+   "products": 4,
+   "categories": [
+    "Compression Garments"
+   ],
+   "examples": [
+    "Capri micro-massage compression leggings",
+    "Supersoft seamless support bralette",
+    "Supersoft shaping compression vest",
+    "Long sleeved shaping compression T-shirt"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gardamed",
+   "division": "Anti-Embolism Stockings",
+   "products": 4,
+   "categories": [
+    "Anti-Embolism Stockings"
+   ],
+   "examples": [
+    "Anti-Embofit18 below knee with grip",
+    "Anti-Embofit18 below knee",
+    "Anti-Embofit18 thigh high",
+    "Anti-Embofit18 thigh high with grip"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gardamed",
+   "division": "Leg ulcer kits",
+   "products": 3,
+   "categories": [
+    "Leg ulcer kits"
+   ],
+   "examples": [
+    "Ulcer Kit Pro 35",
+    "Liners 18mmHg",
+    "Liners 24mmHg"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gardamed",
+   "division": "Maternity tights",
+   "products": 3,
+   "categories": [
+    "Maternity tights"
+   ],
+   "examples": [
+    "Lady Gloria 18 Maternity Tights – Medium Support",
+    "Lady Gloria 12 Maternity Tights – Mild Support",
+    "Soft Class 1 Maternity Tights"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "GAMA Healthcare",
+   "division": "Patient Isolation",
+   "products": 3,
+   "categories": [
+    "Patient Isolation"
+   ],
+   "examples": [
+    "Rediair filters",
+    "Rediroom",
+    "Rediair"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "GV Health",
+   "division": "Aprons, Gowns & Tabards",
+   "products": 2,
+   "categories": [
+    "Aprons, Gowns & Tabards"
+   ],
+   "examples": [
+    "Tabards",
+    "Drug Round Tabards – Red – ‘Drug Round in Progress Do Not Disturb’"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "GV Health",
+   "division": "Life Protected Cleaner (LPC)",
+   "products": 2,
+   "categories": [
+    "Life Protected Cleaner (LPC)"
+   ],
+   "examples": [
+    "Life Protected Cleaner: Water-Soluble Sheets for Multi-Purpose Cleaning",
+    "Life Protected Cleaner – Spray Bottle"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gardamed",
+   "division": "Wound Care",
+   "products": 2,
+   "categories": [
+    "Wound Care",
+    "Leg ulcer kits"
+   ],
+   "examples": [
+    "1 Primary Wound Dressing®",
+    "Ulcer Kit Pro 40"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "GV Health",
+   "division": "Tags, Ties & Labels",
+   "products": 1,
+   "categories": [
+    "Tags, Ties & Labels"
+   ],
+   "examples": [
+    "Bag Ties with Serial Tags"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gardamed",
+   "division": "Prevention",
+   "products": 1,
+   "categories": [
+    "Prevention"
+   ],
+   "examples": [
+    "Happyven Fresh 150g"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "GAMA Healthcare",
+   "division": "Easy clean",
+   "products": 1,
+   "categories": [
+    "Easy clean"
+   ],
+   "examples": [
+    "Clinell Easyclean Commode"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "GAMA Healthcare",
+   "division": "Training",
+   "products": 1,
+   "categories": [
+    "Training"
+   ],
+   "examples": [
+    "Clinell EvaluClean™"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gemini Surgical UK",
+   "division": "Personal Hygiene",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Personal Hygiene"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gemini Surgical UK",
+   "division": "Surgical Instruments",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Surgical Instruments"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gemini Surgical UK",
+   "division": "Urology",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Urology"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gemini Surgical UK",
+   "division": "Urogynaecology",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Urogynaecology"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gemini Surgical UK",
+   "division": "PPE",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "PPE"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gemini Surgical UK",
+   "division": "Paediatric Health",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Paediatric Health"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gemini Surgical UK",
+   "division": "Cardiothorasic",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Cardiothorasic"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gemini Surgical UK",
+   "division": "Head & Neck Surgery",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Head & Neck Surgery"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gemini Surgical UK",
+   "division": "Women’s Health",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Women’s Health"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gemini Surgical UK",
+   "division": "General Surgery",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "General Surgery"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gemini Surgical UK",
+   "division": "Plastic & Cosmetic Surgery",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Plastic & Cosmetic Surgery"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Gemini Surgical UK",
+   "division": "ENT",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "ENT"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
   }
  ],
  "kinds": {

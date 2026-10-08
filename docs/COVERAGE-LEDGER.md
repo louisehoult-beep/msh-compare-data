@@ -40,10 +40,10 @@ the decision each waits on; delete the entry once that decision is made.
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 34 | 27.9% | 66 | 37 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 34 | 33.7% | 10 | 69 | STARTED |
-| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 23 | 36.5% | 19 | 30 | STARTED |
-| Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 9 | 42 | STARTED |
+| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 22 | 34.9% | 20 | 30 | STARTED |
+| Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 10 | 42 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 20 | 34.5% | 17 | 32 | STARTED |
-| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 21 | 36.8% | 12 | 32 | STARTED |
+| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 21 | 36.8% | 13 | 32 | STARTED |
 | Urology and Bowel Management | continence | 57 | 20 | 35.1% | 19 | 40 | STARTED |
 | Advanced Wound Care | wound | 56 | 20 | 35.7% | 12 | 42 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 7 | 45 | STARTED · DEFERRED |
@@ -54,7 +54,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 13 | 35.1% | 5 | 28 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 13 | 35.1% | 16 | 17 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 12 | 34.3% | 6 | 23 | STARTED |
-| Electrosurgical Consumables and Related Accessories | theatres | 33 | 12 | 36.4% | 7 | 21 | STARTED |
+| Electrosurgical Consumables and Related Accessories | theatres | 33 | 12 | 36.4% | 8 | 21 | STARTED |
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | 13 | 12 | STARTED |
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 10 | 32.3% | 6 | 22 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 11 | 37.9% | 7 | 23 | STARTED |
@@ -63,30 +63,30 @@ the decision each waits on; delete the entry once that decision is made.
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 9 | 36.0% | 5 | 14 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 8 | 32.0% | 7 | 15 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 5 | 16 | STARTED |
-| Physiotherapy and Occupational Therapy | rehab | 22 | 8 | 36.4% | 6 | 13 | STARTED |
+| Physiotherapy and Occupational Therapy | rehab | 22 | 7 | 31.8% | 7 | 13 | STARTED |
 | Hand Hygiene and Associated Products and Services | infection | 21 | 5 | 23.8% | 6 | 15 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 6 | 11 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 6 | 28.6% | 5 | 14 | STARTED |
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 7 | 35.0% | 9 | 7 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 7 | 36.8% | 7 | 11 | STARTED |
-| Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 10 | 52.6% | 6 | 10 | STARTED |
+| Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 9 | 47.4% | 7 | 10 | STARTED |
 | Examination Gloves | infection | 19 | 5 | 26.3% | 6 | 14 | STARTED |
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 7 | 9 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 7 | 38.9% | 1 | 13 | STARTED |
-| Patient Temperature Management | theatres | 18 | 8 | 44.4% | 6 | 9 | STARTED |
+| Patient Temperature Management | theatres | 18 | 7 | 38.9% | 7 | 9 | STARTED |
 | Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 7 | 38.9% | 1 | 11 | STARTED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
-| Clinical and Sharps Waste Management | infection | 14 | 4 | 28.6% | 4 | 11 | STARTED |
+| Clinical and Sharps Waste Management | infection | 14 | 4 | 28.6% | 4 | 12 | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | imaging, oncology | 13 | 4 | 30.8% | 1 | 9 | STARTED · DEFERRED |
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 5 | 38.5% | 3 | 7 | STARTED |
-| Disposable and Washable Continence Care | continence | 12 | 5 | 41.7% | 3 | 8 | STARTED |
+| Disposable and Washable Continence Care | continence | 12 | 5 | 41.7% | 4 | 8 | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 3 | 9 | STARTED |
 | Prosthetic Components and Associated Products | orthotics | 12 | 5 | 41.7% | 1 | 7 | STARTED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 4 | 6 | STARTED |
 | CT Scanners and Associated Options and Related Services | imaging | 8 | 2 | 25.0% | 3 | 7 | STARTED |
-| Polymer Aprons | infection | 8 | 2 | 25.0% | 1 | 7 | STARTED |
+| Polymer Aprons | infection | 8 | 2 | 25.0% | 1 | 8 | STARTED |
 | Contrast Injectors, Consumables and Associated Options and Related Services | imaging | 5 | 1 | 20.0% | 0 | 4 | STARTED · BLOCKED |
-| Polymer Products | infection | 5 | 2 | 40.0% | 3 | 1 | STARTED |
+| Polymer Products | infection | 5 | 2 | 40.0% | 3 | 2 | STARTED |
 | Reusable Clinical and Sharps Waste Management Service | infection | 3 | 1 | 33.3% | 0 | 2 | STARTED · BLOCKED |
 | Brachytherapy Seeds and Associated Accessories | oncology | 2 | 1 | 50.0% | 1 | 1 | STARTED |
 | Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services | ent | 7 | 0 | 0.0% | 3 | 5 | NOT STARTED |
@@ -141,7 +141,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Reusable Plastic Medical Hollowware | — | 4 | 0 | 0.0% | 2 | 3 | UNMAPPED |
 | Obstetrics and Vinyl Pessaries | — | 3 | 0 | 0.0% | 3 | 0 | UNMAPPED |
 | Fresh Food DPS | — | 97 | 0 | 0.0% | 97 | 0 | OUT OF SCOPE |
-| Cleaning Equipment, Supplies and Associated Products | facilities | 60 | 7 | 11.7% | 42 | 12 | OUT OF SCOPE |
+| Cleaning Equipment, Supplies and Associated Products | facilities | 60 | 5 | 8.3% | 44 | 13 | OUT OF SCOPE |
 | Medical Healthcare Furniture | — | 51 | 0 | 0.0% | 45 | 9 | OUT OF SCOPE |
 | Beverages, Confectionary and Snacks | — | 44 | 0 | 0.0% | 42 | 2 | OUT OF SCOPE |
 | Textiles and Associated Products | workwear | 32 | 2 | 6.2% | 23 | 10 | OUT OF SCOPE |

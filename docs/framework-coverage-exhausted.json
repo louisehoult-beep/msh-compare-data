@@ -69,12 +69,13 @@
   },
   {
    "framework": "Polymer Aprons",
-   "checkedOn": "2026-09-22",
-   "coverageAtCheck": "25.0% (2/8)",
+   "checkedOn": "2026-10-08",
+   "coverageAtCheck": "25.0% (2/8), up from 12.5% (1/8) this run",
    "suppliersChecked": [
-    "GBUK Group"
+    "GBUK Group",
+    "GV Health"
    ],
-   "reason": "The only actionable item left (1) is GBUK Group's stub record, already diagnosed as the GBUK Ltd/GBUK Group duplicate-identity merge (OUTSTANDING ^o333, 07/09/2026) — an identity decision reserved for Lou, not a crawl (the stub's own note already confirms gbukgroup.com returns 0 results for 'apron' and carries no PPE category, so crawling it would not even reach the awarded range). Polystar Plastics Ltd's separate stub/merge (^o334) is already bucketed 'published' and not counted in Left. No new investigation needed; this restates the existing escalation rather than re-deciding it.",
+   "reason": "Stale since 05/10/2026: GV Health was newly awarded on this framework that day (supplier-seed.json capturedOn 2026-10-05), which is exactly the 'new award' condition that makes an exhausted entry stale, so it was re-investigated rather than skipped. GV Health's own site (gvhealth.com) now refuses automated reading (robots.txt, checked 08/10/2026 -- its earlier successful WordPress-API capture of 141 products stands, nothing was lost), but that capture was already on record, uncategorised, because its crawled division names ('PPE', 'Clinical Waste Bags', etc.) are a newer, coarser scheme than the one this supplier's older category-map entries were keyed to, so the join silently failed and everything sat held. Mapped the 'PPE' division (19 products, all disposable healthcare aprons/a single-use gown, matching this supplier's own existing Healthcare Aprons -> infection:ppe precedent) to infection:ppe (data/differentiator-map-parts/GV Health - Phase E.json); GV Health now publishes on this framework. The only remaining actionable item is GBUK Group's stub record, unchanged and still diagnosed as the GBUK Ltd/GBUK Group duplicate-identity merge (OUTSTANDING ^o333, 07/09/2026) -- an identity decision reserved for Lou, not a crawl. Polystar Plastics Ltd's stub/merge (^o334) is already bucketed 'published' and not counted in Left. No permitted route left on GBUK Group.",
    "wouldReopenIf": "Lou rules on OUTSTANDING ^o333/^o334, or a new supplier is awarded on this framework, or GBUK Group's own crawl changes."
   },
   {
@@ -176,16 +177,17 @@
   },
   {
    "framework": "Clinical and Sharps Waste Management",
-   "checkedOn": "2026-09-25",
-   "coverageAtCheck": "28.6% (4/14)",
+   "checkedOn": "2026-10-08",
+   "coverageAtCheck": "28.6% (4/14), up from 21.4% (3/14) this run",
    "suppliersChecked": [
     "Cardinal Health U.K. 432 Ltd",
     "Fannin (UK) Limited",
     "Medline Industries",
-    "Vernacare"
+    "Vernacare",
+    "GV Health"
    ],
-   "reason": "All 14 suppliers accounted for: 4 published, 6 refused-crawl (British Bins Ltd, Central Medical Supplies, Inpress Precision Limited, Mauser UK Ltd, NeedleDock Ltd, Valley Northern Ltd — recorded refusals, not re-crawled per the brief's own rule), and the remaining 4 publishedElsewhere. Checked those 4 product-by-product against this framework's categories (infection:nitrile, infection:ppe, infection:sharps): Cardinal Health U.K. 432 Ltd's 36 NHSSC-stub products are sterile surgeons' surgical gloves (Protexis Latex/PI/Neoprene/Ortho lines — theatres:glove, not exam/nitrile gloves or sharps/PPE), plus ECG electrodes, VTE prophylaxis, drains, nutrition sets; Fannin (UK) Limited has 1 NHSSC-stub ECG item; Medline Industries has 1 NHSSC-stub respiratory item; Vernacare's 7 items are hygiene/CSSD/ENT/facilities-cleaning. None is a genuine sharps-waste-management item (bins, sharps containers, clinical waste bags/disposal). No permitted route left on any of the 14.",
-   "wouldReopenIf": "Any of the 4 publishedElsewhere suppliers gets a new/changed crawl result revealing a genuine sharps/PPE/nitrile-glove range, any of the 6 refused suppliers' refusal is reopened and a fresh crawl succeeds, or a new supplier is awarded on this framework."
+   "reason": "Stale since 05/10/2026: GV Health was newly awarded on this framework that day (supplier-seed.json capturedOn 2026-10-05), the 'new award' condition that makes an exhausted entry stale, so it was re-investigated. GV Health's own site now refuses automated reading (robots.txt, checked 08/10/2026), but an earlier capture of 141 products (WordPress REST API) was already on record, held uncategorised because its crawled division names are a newer, coarser scheme than this supplier's older category-map entries. Mapped 'Clinical Waste Bags' (23 products, all orange/yellow NHS colour-coded clinical waste bags and bulk-carriage variants of the same) and 'Clinical & Offensive Waste Segregation for Healthcare' (4 products, same colour-coding) to infection:sharps, matching this supplier's existing Orange/Yellow Clinical Waste Bags precedent (data/differentiator-map-parts/GV Health - Phase E.json); GV Health now publishes on this framework (3/14 -> 4/14). Left GV Health's other divisions (General Waste Segregation for Healthcare, Specialist Bags, Spill Kits & Sorbents, Disinfectants, Life Protected Cleaner, Tags/Ties/Labels, Uncategorised) unmapped this run: several mix genuinely clinical items (cytotoxic/offensive-waste bags, specimen bags) with generically-named ones (Office Bin Liners, Paper Bags, Compactor Bags) that are not unambiguous by product name alone, per the mixed-division-mapping policy guard -- a product-level pass, not done here. The other 4 suppliers (Cardinal Health U.K. 432 Ltd, Fannin (UK) Limited, Medline Industries, Vernacare) were not re-read today; the 25/09 finding stands for them (none is a genuine sharps-waste item). No permitted route left beyond GV Health's own remaining mixed divisions.",
+   "wouldReopenIf": "Any of the 4 unchanged publishedElsewhere suppliers gets a new/changed crawl result revealing a genuine sharps/PPE/nitrile-glove range, any of the 6 refused suppliers' refusal is reopened and a fresh crawl succeeds, GV Health's remaining mixed divisions get a product-level mapping pass, or a new supplier is awarded on this framework."
   },
   {
    "framework": "Electrosurgical Consumables and Related Accessories",
