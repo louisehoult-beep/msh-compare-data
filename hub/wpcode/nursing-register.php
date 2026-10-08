@@ -27,6 +27,15 @@
    An employer's "Request introduction" emails Lou. Nothing goes to the
    employer until Lou has checked with the nurse.
 
+   WEEKLY JOBS EMAIL (added 08/10/2026; the nurse ticks jobsEmail)
+   Monday 07:00 UK time. Reads data/supplier-careers.json from this repo, keeps
+   UK roles flagged commercial or clinical, places each in regions from its
+   title and location (msh_nr_job_regions), and emails each nurse the roles in
+   their region plus UK-wide ones they haven't been sent before. Nothing new,
+   no email. Sent in batches of MSH_NR_BATCH. Every email carries a one-click
+   unsubscribe link (?msh_nr_unsub=). User meta msh_nr_jobs_sent holds the
+   role URLs already emailed (newest 400).
+
    ROUTES (logged-in only, wp_rest nonce)
    GET    /wp-json/msh/v1/nurse-register         { options, profile, canBrowse, isAdmin }
    POST   /wp-json/msh/v1/nurse-register         save own profile, returns the same
@@ -44,6 +53,12 @@ if ( ! defined( 'MSH_NR_STALE_DAYS' ) ) {
 }
 if ( ! defined( 'MSH_NR_INTROS_PER_DAY' ) ) {
 	define( 'MSH_NR_INTROS_PER_DAY', 10 );
+}
+if ( ! defined( 'MSH_NR_BATCH' ) ) {
+	define( 'MSH_NR_BATCH', 40 );
+}
+if ( ! defined( 'MSH_NR_CAREERS_URL' ) ) {
+	define( 'MSH_NR_CAREERS_URL', 'https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/supplier-careers.json' );
 }
 
 if ( ! function_exists( 'msh_nr_options' ) ) {
@@ -265,6 +280,7 @@ if ( ! function_exists( 'msh_nr_clean' ) ) {
 				'driving'        => ! empty( $b['driving'] ) && true === $b['driving'],
 				'rightToWork'    => ! empty( $b['rightToWork'] ) && true === $b['rightToWork'],
 				'training'       => ! empty( $b['training'] ) && true === $b['training'],
+				'jobsEmail'      => ! empty( $b['jobsEmail'] ) && true === $b['jobsEmail'],
 				'bio'            => msh_nr_scrub( msh_nr_text( isset( $b['bio'] ) ? $b['bio'] : '', 600 ) ),
 				'nmcPin'         => $pin,
 				'nmcChecked'     => $checked,
@@ -311,6 +327,256 @@ if ( ! function_exists( 'msh_nr_public' ) ) {
 		return $out;
 	}
 }
+
+if ( ! function_exists( 'msh_nr_job_regions' ) ) {
+	/* The register regions a role sits in, from its title and location, or an
+	   empty list when it names none (shown as UK-wide). Two-word areas are
+	   matched first and taken out, so "North West" is not also "North".
+	   Head-office towns place a role where the company published it; a field
+	   role's territory usually sits in its title, which is read too. */
+	function msh_nr_job_regions( $title, $location ) {
+		$s = ' ' . strtolower( preg_replace( '/[^A-Za-z0-9]+/', ' ', (string) $title . ' ' . (string) $location ) ) . ' ';
+		$found = array();
+		$areas = array(
+			'north east' => array( 'north-east' ), 'north west' => array( 'north-west' ),
+			'south east' => array( 'south-east' ), 'south west' => array( 'south-west' ),
+			'east midlands' => array( 'east-midlands' ), 'west midlands' => array( 'west-midlands' ),
+			'east of england' => array( 'east-of-england' ), 'east anglia' => array( 'east-of-england' ),
+			'northern ireland' => array( 'northern-ireland' ), 'home counties' => array( 'south-east', 'east-of-england' ),
+		);
+		foreach ( $areas as $k => $rs ) {
+			if ( false !== strpos( $s, ' ' . $k . ' ' ) ) {
+				$found = array_merge( $found, $rs );
+				$s     = str_replace( ' ' . $k . ' ', ' ', $s );
+			}
+		}
+		$words = array(
+			'scotland' => 'scotland', 'glasgow' => 'scotland', 'edinburgh' => 'scotland', 'dundee' => 'scotland', 'aberdeen' => 'scotland', 'inverness' => 'scotland',
+			'wales' => 'wales', 'cardiff' => 'wales', 'swansea' => 'wales', 'newport' => 'wales', 'wrexham' => 'wales',
+			'belfast' => 'northern-ireland',
+			'london' => 'london', 'croydon' => 'london', 'romford' => 'london', 'rainham' => 'london', 'uxbridge' => 'london',
+			'kent' => 'south-east', 'surrey' => 'south-east', 'sussex' => 'south-east', 'berkshire' => 'south-east', 'hampshire' => 'south-east',
+			'oxford' => 'south-east', 'oxfordshire' => 'south-east', 'witney' => 'south-east', 'abingdon' => 'south-east', 'maidenhead' => 'south-east',
+			'reading' => 'south-east', 'crawley' => 'south-east', 'sittingbourne' => 'south-east', 'camberley' => 'south-east', 'watchmoor' => 'south-east',
+			'guildford' => 'south-east', 'brighton' => 'south-east', 'southampton' => 'south-east', 'portsmouth' => 'south-east', 'slough' => 'south-east',
+			'milton keynes' => 'south-east', 'buckinghamshire' => 'south-east', 'maidstone' => 'south-east', 'basingstoke' => 'south-east', 'woking' => 'south-east',
+			'bristol' => 'south-west', 'exeter' => 'south-west', 'plymouth' => 'south-west', 'devon' => 'south-west', 'cornwall' => 'south-west',
+			'somerset' => 'south-west', 'gloucester' => 'south-west', 'gloucestershire' => 'south-west', 'swindon' => 'south-west', 'dorset' => 'south-west',
+			'bournemouth' => 'south-west', 'bath' => 'south-west', 'wiltshire' => 'south-west', 'cheltenham' => 'south-west',
+			'essex' => 'east-of-england', 'suffolk' => 'east-of-england', 'norfolk' => 'east-of-england', 'cambridge' => 'east-of-england',
+			'cambridgeshire' => 'east-of-england', 'hertfordshire' => 'east-of-england', 'loughton' => 'east-of-england', 'chelmsford' => 'east-of-england',
+			'norwich' => 'east-of-england', 'ipswich' => 'east-of-england', 'luton' => 'east-of-england', 'bedford' => 'east-of-england',
+			'peterborough' => 'east-of-england', 'stevenage' => 'east-of-england', 'colchester' => 'east-of-england', 'welwyn' => 'east-of-england',
+			'birmingham' => 'west-midlands', 'solihull' => 'west-midlands', 'coventry' => 'west-midlands', 'wolverhampton' => 'west-midlands',
+			'stoke' => 'west-midlands', 'staffordshire' => 'west-midlands', 'worcester' => 'west-midlands', 'hereford' => 'west-midlands',
+			'shropshire' => 'west-midlands', 'warwickshire' => 'west-midlands', 'telford' => 'west-midlands',
+			'nottingham' => 'east-midlands', 'leicester' => 'east-midlands', 'derby' => 'east-midlands', 'lincoln' => 'east-midlands',
+			'northampton' => 'east-midlands', 'lincolnshire' => 'east-midlands', 'derbyshire' => 'east-midlands', 'nottinghamshire' => 'east-midlands',
+			'yorkshire' => 'yorkshire-humber', 'leeds' => 'yorkshire-humber', 'sheffield' => 'yorkshire-humber', 'bradford' => 'yorkshire-humber',
+			'york' => 'yorkshire-humber', 'hull' => 'yorkshire-humber', 'wakefield' => 'yorkshire-humber', 'humber' => 'yorkshire-humber', 'doncaster' => 'yorkshire-humber',
+			'manchester' => 'north-west', 'liverpool' => 'north-west', 'lancashire' => 'north-west', 'cheshire' => 'north-west', 'preston' => 'north-west',
+			'cumbria' => 'north-west', 'chester' => 'north-west', 'warrington' => 'north-west', 'bolton' => 'north-west', 'stockport' => 'north-west',
+			'newcastle' => 'north-east', 'sunderland' => 'north-east', 'durham' => 'north-east', 'teesside' => 'north-east', 'middlesbrough' => 'north-east',
+			'northumberland' => 'north-east', 'gateshead' => 'north-east',
+		);
+		foreach ( $words as $k => $r ) {
+			if ( false !== strpos( $s, ' ' . $k . ' ' ) ) {
+				$found[] = $r;
+			}
+		}
+		/* Broad halves a territory title often uses. Only when nothing more
+		   precise matched, so "Leeds, North" stays Yorkshire. */
+		if ( ! $found ) {
+			if ( preg_match( '/ north /', $s ) ) {
+				$found = array( 'north-east', 'north-west', 'yorkshire-humber' );
+			} elseif ( preg_match( '/ (midlands|central) /', $s ) ) {
+				$found = array( 'east-midlands', 'west-midlands' );
+			}
+		}
+		return array_values( array_unique( $found ) );
+	}
+}
+
+if ( ! function_exists( 'msh_nr_digest_jobs' ) ) {
+	/* The roles for one nurse's weekly email from supplier-careers.json.
+	   Returns array( 'local' => [...], 'national' => [...] ), each role
+	   array( title, company, location, url ), unsent ones only. */
+	function msh_nr_digest_jobs( $feed, $region, $sent ) {
+		$out  = array( 'local' => array(), 'national' => array() );
+		$sent = is_array( $sent ) ? array_flip( $sent ) : array();
+		if ( ! is_array( $feed ) || empty( $feed['suppliers'] ) || ! is_array( $feed['suppliers'] ) ) {
+			return $out;
+		}
+		$seen = array();
+		foreach ( $feed['suppliers'] as $sup ) {
+			if ( ! is_array( $sup ) || empty( $sup['roles'] ) || ! is_array( $sup['roles'] ) ) {
+				continue;
+			}
+			foreach ( $sup['roles'] as $r ) {
+				if ( ! is_array( $r ) || empty( $r['url'] ) || ! is_string( $r['url'] ) || empty( $r['title'] ) ) {
+					continue;
+				}
+				if ( isset( $r['uk'] ) && false === $r['uk'] ) {
+					continue;
+				}
+				if ( empty( $r['commercial'] ) && empty( $r['clinical'] ) ) {
+					continue;
+				}
+				if ( ! preg_match( '#^https://#', $r['url'] ) || isset( $sent[ $r['url'] ] ) || isset( $seen[ $r['url'] ] ) ) {
+					continue;
+				}
+				$seen[ $r['url'] ] = true;
+				$loc  = isset( $r['location'] ) && is_string( $r['location'] ) ? $r['location'] : '';
+				$job  = array( 'title' => (string) $r['title'], 'company' => isset( $sup['name'] ) ? (string) $sup['name'] : '', 'location' => $loc, 'url' => $r['url'] );
+				$regs = msh_nr_job_regions( $r['title'], $loc );
+				if ( ! $regs ) {
+					$out['national'][] = $job;
+				} elseif ( in_array( $region, $regs, true ) ) {
+					$out['local'][] = $job;
+				}
+			}
+		}
+		return $out;
+	}
+}
+
+if ( ! function_exists( 'msh_nr_digest_email' ) ) {
+	/* Subject and HTML body of one weekly email, or null when there is
+	   nothing to send. $links: array( careers, register, unsub ) absolute URLs. */
+	function msh_nr_digest_email( $first, $regionLabel, $jobs, $links ) {
+		$local = array_slice( $jobs['local'], 0, 12 );
+		$nat   = array_slice( $jobs['national'], 0, 6 );
+		if ( ! $local && ! $nat ) {
+			return null;
+		}
+		$e    = function ( $s ) { return htmlspecialchars( (string) $s, ENT_QUOTES, 'UTF-8' ); };
+		$list = function ( $rows ) use ( $e ) {
+			$h = '';
+			foreach ( $rows as $j ) {
+				$h .= '<tr><td style="padding:10px 0;border-bottom:1px solid #E6E2D8">'
+					. '<a href="' . $e( $j['url'] ) . '" style="color:#14304F;font-weight:600;text-decoration:none">' . $e( $j['title'] ) . '</a><br>'
+					. '<span style="color:#5A6676;font-size:13px">' . $e( $j['company'] ) . ( '' !== $j['location'] ? ' &middot; ' . $e( $j['location'] ) : '' ) . '</span></td></tr>';
+			}
+			return '<table role="presentation" width="100%" cellpadding="0" cellspacing="0">' . $h . '</table>';
+		};
+		$n    = count( $local );
+		$subj = $n ? ( $n . ' new role' . ( 1 === $n ? '' : 's' ) . ' in ' . $regionLabel . ' this week' ) : 'New UK-wide roles this week';
+		$h    = '<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.5;color:#1C2633;max-width:600px">'
+			. '<p>Hi' . ( '' !== $first ? ' ' . $e( $first ) : '' ) . ',</p>'
+			. '<p>Here are this week\'s new roles from the companies\' own careers pages.</p>';
+		if ( $local ) {
+			$h .= '<h2 style="font-size:17px;color:#14304F;margin:24px 0 4px">In ' . $e( $regionLabel ) . '</h2>' . $list( $local );
+		}
+		if ( $nat ) {
+			$h .= '<h2 style="font-size:17px;color:#14304F;margin:24px 0 4px">UK-wide or several locations</h2>' . $list( $nat );
+		}
+		$h .= '<p style="margin-top:24px"><a href="' . $e( $links['careers'] ) . '" style="color:#14304F">See every role on the Career Centre</a><br>'
+			. '<a href="' . $e( $links['register'] ) . '" style="color:#14304F">Update your register profile</a></p>'
+			. '<p style="color:#5A6676;font-size:12px;margin-top:24px">You get this because you asked for a weekly jobs email on the Nursing Register. '
+			. '<a href="' . $e( $links['unsub'] ) . '" style="color:#5A6676">Stop these emails</a>.</p></div>';
+		return array( 'subject' => $subj, 'html' => $h );
+	}
+}
+
+if ( ! function_exists( 'msh_nr_unsub_token' ) ) {
+	function msh_nr_unsub_token( $uid ) {
+		return substr( hash_hmac( 'sha256', 'nr-unsub|' . (int) $uid, wp_salt( 'auth' ) ), 0, 32 );
+	}
+}
+
+if ( ! function_exists( 'msh_nr_jobs_batch' ) ) {
+	/* One batch of the weekly email. Schedules the next batch itself. */
+	function msh_nr_jobs_batch() {
+		$feed = get_transient( 'msh_nr_jobs_feed' );
+		if ( ! is_array( $feed ) ) {
+			$r = wp_remote_get( MSH_NR_CAREERS_URL, array( 'timeout' => 30 ) );
+			if ( is_wp_error( $r ) || 200 !== (int) wp_remote_retrieve_response_code( $r ) ) {
+				return;
+			}
+			$feed = json_decode( wp_remote_retrieve_body( $r ), true );
+			if ( ! is_array( $feed ) ) {
+				return;
+			}
+			set_transient( 'msh_nr_jobs_feed', $feed, 6 * HOUR_IN_SECONDS );
+		}
+		$o      = msh_nr_options();
+		$cursor = (int) get_option( 'msh_nr_jobs_cursor', 0 );
+		$ids    = get_users( array( 'meta_key' => 'msh_nurse_ref', 'fields' => 'ID', 'orderby' => 'ID', 'order' => 'ASC', 'number' => MSH_NR_BATCH, 'offset' => $cursor ) );
+		$links  = array(
+			'careers'  => home_url( '/medical-sales-hub/careers/' ),
+			'register' => home_url( '/medical-sales-hub/nursing-register/' ),
+		);
+		foreach ( $ids as $id ) {
+			$p = get_user_meta( $id, 'msh_nurse_register', true );
+			if ( ! is_array( $p ) || empty( $p['jobsEmail'] ) || empty( $p['region'] ) || ! isset( $o['regions'][ $p['region'] ] ) ) {
+				continue;
+			}
+			$sent = get_user_meta( $id, 'msh_nr_jobs_sent', true );
+			$sent = is_array( $sent ) ? $sent : array();
+			$jobs = msh_nr_digest_jobs( $feed, $p['region'], $sent );
+			$u    = get_userdata( $id );
+			if ( ! $u ) {
+				continue;
+			}
+			$links['unsub'] = add_query_arg( array( 'msh_nr_unsub' => $id, 't' => msh_nr_unsub_token( $id ) ), home_url( '/' ) );
+			$mail = msh_nr_digest_email( (string) $u->first_name, $o['regions'][ $p['region'] ], $jobs, $links );
+			if ( null === $mail ) {
+				continue;
+			}
+			$ok = wp_mail( $u->user_email, $mail['subject'], $mail['html'], array(
+				'Content-Type: text/html; charset=UTF-8',
+				'List-Unsubscribe: <' . $links['unsub'] . '>',
+			) );
+			if ( $ok ) {
+				foreach ( array_merge( array_slice( $jobs['local'], 0, 12 ), array_slice( $jobs['national'], 0, 6 ) ) as $j ) {
+					array_unshift( $sent, $j['url'] );
+				}
+				update_user_meta( $id, 'msh_nr_jobs_sent', array_slice( array_values( array_unique( $sent ) ), 0, 400 ) );
+			}
+		}
+		if ( count( $ids ) === MSH_NR_BATCH ) {
+			update_option( 'msh_nr_jobs_cursor', $cursor + MSH_NR_BATCH, false );
+			wp_schedule_single_event( time() + 120, 'msh_nr_jobs_batch' );
+		} else {
+			update_option( 'msh_nr_jobs_cursor', 0, false );
+			delete_transient( 'msh_nr_jobs_feed' );
+		}
+	}
+}
+
+add_action( 'msh_nr_jobs_batch', 'msh_nr_jobs_batch' );
+add_action( 'msh_nr_jobs_week', function () {
+	update_option( 'msh_nr_jobs_cursor', 0, false );
+	delete_transient( 'msh_nr_jobs_feed' );
+	msh_nr_jobs_batch();
+} );
+
+/* Weekly, from the next Monday 07:00 UK time. */
+add_action( 'init', function () {
+	if ( wp_next_scheduled( 'msh_nr_jobs_week' ) ) {
+		return;
+	}
+	$next = new DateTime( 'next monday 07:00', new DateTimeZone( 'Europe/London' ) );
+	wp_schedule_event( $next->getTimestamp(), 'weekly', 'msh_nr_jobs_week' );
+} );
+
+/* One-click unsubscribe from the weekly email. The token proves the link
+   came from an email sent to that member; no login needed. */
+add_action( 'init', function () {
+	if ( empty( $_GET['msh_nr_unsub'] ) || empty( $_GET['t'] ) ) {
+		return;
+	}
+	$uid = (int) $_GET['msh_nr_unsub'];
+	if ( $uid <= 0 || ! hash_equals( msh_nr_unsub_token( $uid ), (string) $_GET['t'] ) ) {
+		wp_die( 'That link has expired or is not complete. Log in and untick the weekly jobs email on your Nursing Register profile instead.', 'Nursing Register', array( 'response' => 400 ) );
+	}
+	$p = get_user_meta( $uid, 'msh_nurse_register', true );
+	if ( is_array( $p ) ) {
+		$p['jobsEmail'] = false;
+		update_user_meta( $uid, 'msh_nurse_register', $p );
+	}
+	wp_die( 'Done. You won\'t get the weekly jobs email any more. Your register profile is unchanged.', 'Nursing Register', array( 'response' => 200 ) );
+}, 1 );
 
 if ( ! function_exists( 'msh_nr_can_browse' ) ) {
 	function msh_nr_can_browse() {

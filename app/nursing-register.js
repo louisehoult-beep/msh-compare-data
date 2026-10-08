@@ -16,7 +16,7 @@
 
   var API = '/wp-json/msh/v1/nurse-register';
   var LISTS = ['registration', 'sectors', 'specialities', 'clinicalSkills', 'qualifications', 'transferable', 'roles'];
-  var FLAGS = ['relocate', 'driving', 'rightToWork', 'training'];
+  var FLAGS = ['relocate', 'driving', 'rightToWork', 'training', 'jobsEmail'];
   var WHY = {
     region: 'Choose the region you live in.',
     registration: 'Tick at least one part of the NMC register.',
@@ -27,6 +27,24 @@
     phone: 'Check the phone number.',
     consent: 'Tick the consent box to make your profile visible to employers.'
   };
+
+  /* Marketing copy (Lou, 08/10/2026): register once, be found by recruiters
+     and employers without signing up with several agencies, and get the
+     Clinical Hub's careers resources. Links are live Hub pages (checked
+     08/10/2026). */
+  var PITCH = 'Register once and let recruiters and employers find you. No signing up with five different agencies, no telling your story over and over. Add your experience and skills, choose who can see you, and get new roles in your area in your inbox every Monday.';
+  var RESOURCES = '<div class="res"><p class="sub">Your free careers resources</p><div class="chips">'
+    + [['Jobs', '/medical-sales-hub/clinical-jobs/'], ['Your CV', '/medical-sales-hub/clinical-cv/'],
+      ['Clinical to commercial routes', '/medical-sales-hub/clinical-to-commercial-routes/'], ['Career Centre', '/medical-sales-hub/careers/'],
+      ['Revalidation portfolio', '/medical-sales-hub/clinical-portfolio/'], ['Resources', '/medical-sales-hub/clinical-resources/']]
+      .map(function (l) { return '<a class="chip" href="' + l[1] + '">' + l[0] + '</a>'; }).join('') + '</div></div>';
+  var LANDING = '<div class="nr"><h1>Join the Nursing Register</h1>'
+    + '<p class="lede">' + PITCH + '</p>'
+    + '<ul class="pitch"><li><strong>One profile, seen by recruiters and employers.</strong> Your region, specialities and skills, in one place they can search.</li>'
+    + '<li><strong>New roles in your area every Monday.</strong> Straight from the companies\' own careers pages, not recycled agency adverts.</li>'
+    + '<li><strong>The best nursing careers resources, free.</strong> Jobs, CV help, your revalidation portfolio and the real routes from clinical into industry.</li>'
+    + '<li><strong>You stay in control.</strong> Hide or delete your profile, or stop the emails, any time.</li></ul>'
+    + '<div class="actions"><a class="btn" href="/register/">Register free</a><a class="btn ghost" href="/login/">I already have an account</a></div></div>';
 
   /* ---------- pure ---------- */
   function esc(s) {
@@ -133,6 +151,8 @@
     + '.nr .chip{background:#EEF2F7;color:#14304F;border-radius:999px;padding:3px 10px;font-size:12.5px}'
     + '.nr .chip.skill{background:#F3EFE4;color:#5B4A1E}.nr .chip.ok{background:#E6F2EA;color:#1D5631}.nr .chip.warn{background:#FBEAEA;color:#8A1F22}'
     + '.nr .sub{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#5A6676;margin:8px 0 0}'
+    + '.nr .res{margin:0 0 24px}.nr .res a.chip{text-decoration:none}.nr a.btn{display:inline-block;text-decoration:none}'
+    + '.nr ul.pitch{padding-left:20px;max-width:720px;margin:0 0 24px}.nr ul.pitch li{margin:0 0 10px}'
     + '@media (max-width:600px){.nr h1{font-size:26px}.nr fieldset{padding:14px}}';
 
   function ticks(k, chosen) {
@@ -203,6 +223,8 @@
       '<div class="row"><label>NMC PIN<input type="text" name="nmcPin" maxlength="10" placeholder="12A3456E" value="' + esc(p.nmcPin) + '"></label>'
       + '<label>Phone<input type="tel" name="phone" maxlength="20" value="' + esc(p.phone) + '"></label>'
       + '<label>LinkedIn<input type="url" name="linkedin" maxlength="160" placeholder="https://www.linkedin.com/in/..." value="' + esc(p.linkedin) + '"></label></div>', 'private');
+    h += fs('Weekly jobs email', 'Every Monday: new roles in your region from the companies\' own careers pages. Nothing new, no email.',
+      flag('jobsEmail', p.jobsEmail, '<strong>Send me the weekly jobs email</strong> for my region. I can stop it from any email.'));
     h += fs('Who can see you', '',
       flag('consent', !!p.consentAt, 'I agree that Elevate &amp; Thrive may show this profile, without my name or contact details, to employers it has approved, and contact me when an employer asks to be introduced. Nothing identifying goes to an employer until I say yes. I can hide or delete it at any time.')
       + flag('visible', p.visible, '<strong>Make my profile visible to employers</strong>')
@@ -395,7 +417,7 @@
   function render(note) {
     var h = '<div class="nr"><h1>Nursing Register</h1>';
     if (S.tab === 'me') {
-      h += '<p class="lede">Thinking about moving from the ward into medical sales or a clinical specialist role? Add your experience and skills here. Approved employers can find you by area, speciality and skill, but they never see your name or contact details. When someone wants to talk to you, we ask you first.</p>';
+      h += '<p class="lede">' + PITCH + '</p>' + RESOURCES;
     }
     if (S.canBrowse) {
       h += '<div class="tabs" role="tablist"><button type="button" role="tab" data-tab="me" aria-selected="' + (S.tab === 'me') + '">My profile</button>'
@@ -421,7 +443,7 @@
 
   api('GET', '').then(function (r) {
     if (r.status === 401 || r.status === 403) {
-      mount.innerHTML = '<div class="nr"><h1>Nursing Register</h1><p class="lede">Log in to your Hub account to join the register.</p></div>';
+      mount.innerHTML = LANDING;
       return;
     }
     if (!r.ok || !r.body || !r.body.options) { throw new Error('nurse-register ' + r.status); }

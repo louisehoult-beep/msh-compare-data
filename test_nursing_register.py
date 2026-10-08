@@ -35,6 +35,9 @@ foreach ($cases as $c) {
   elseif ($fn === 'public') { $out[] = msh_nr_public($a[0], $a[1]); }
   elseif ($fn === 'scrub') { $out[] = msh_nr_scrub($a[0]); }
   elseif ($fn === 'options') { $out[] = msh_nr_options(); }
+  elseif ($fn === 'regions') { $out[] = msh_nr_job_regions($a[0], $a[1]); }
+  elseif ($fn === 'digest') { $out[] = msh_nr_digest_jobs($a[0], $a[1], $a[2]); }
+  elseif ($fn === 'email') { $out[] = msh_nr_digest_email($a[0], $a[1], $a[2], $a[3]); }
 }
 echo json_encode($out);
 """
@@ -162,6 +165,67 @@ class Snippet(unittest.TestCase):
         )
         self.assertEqual(got[:3], [None, None, None])
         self.assertIsNotNone(got[3], "exactly a year old is still shown")
+
+    def test_jobs_email_is_strict_opt_in(self):
+        self.assertTrue(self.clean(dict(GOOD, jobsEmail=True))["profile"]["jobsEmail"])
+        self.assertFalse(self.clean(dict(GOOD, jobsEmail="yes"))["profile"]["jobsEmail"])
+        self.assertFalse(self.clean(GOOD)["profile"]["jobsEmail"])
+
+    def test_job_regions(self):
+        # Real titles and locations from data/supplier-careers.json, 08/10/2026.
+        cases = [
+            ("Territory Manager Endovascular (Scotland)", "3 Locations", ["scotland"]),
+            ("Territory Manager Endovascular (London & South East)", "2 Locations", ["south-east", "london"]),
+            ("Territory Manager Radiofrequency Ablation (RF) - South West", "4 Locations", ["south-west"]),
+            ("Business Development Manager Rapid Diagnostics - North West", "6 Locations", ["north-west"]),
+            ("Clinical Specialist NMD - North", "4 Locations", ["north-east", "north-west", "yorkshire-humber"]),
+            ("Key Account Manager Cardiometabolics Field based Central Region", "United Kingdom - Maidenhead", ["south-east"]),
+            ("Territory Manager, Structural Heart; Field Based Midlands", "United Kingdom > Solihull : Remote", ["west-midlands"]),
+            ("Business Development Manager - Essex & Suffolk", "Remote - England", ["east-of-england"]),
+            ("Clinical Solution Specialist- Medical Physicist", "Crawley", ["south-east"]),
+            ("Territory Manager TAVI, Structural Heart - Central UK", "7 Locations", ["east-midlands", "west-midlands"]),
+            ("Product Specialist", "United Kingdom - Remote", []),
+            ("Sales Rep", "Manchester", ["north-west"]),
+        ]
+        got = self.call(*[("regions", [t, l]) for t, l, _ in cases])
+        for (t, l, want), g in zip(cases, got):
+            self.assertEqual(sorted(g), sorted(want), t + " | " + l)
+
+    def test_digest_picks_region_national_and_skips_sent(self):
+        feed = {"suppliers": [
+            {"name": "A", "roles": [
+                {"title": "Territory Manager (Scotland)", "location": "", "uk": True, "url": "https://a/1", "commercial": True, "clinical": False},
+                {"title": "Clinical Specialist - South West", "location": "", "uk": True, "url": "https://a/2", "commercial": False, "clinical": True},
+                {"title": "Product Specialist", "location": "Remote", "uk": None, "url": "https://a/3", "commercial": True, "clinical": False},
+                {"title": "Data Analyst (Scotland)", "location": "", "uk": True, "url": "https://a/4", "commercial": False, "clinical": False},
+                {"title": "Sales Rep", "location": "Paris", "uk": False, "url": "https://a/5", "commercial": True, "clinical": False},
+                {"title": "Account Manager (Scotland)", "location": "", "uk": True, "url": "https://a/6", "commercial": True, "clinical": False},
+                {"title": "Bad", "location": "", "uk": True, "url": "javascript:x", "commercial": True, "clinical": False},
+            ]},
+            {"name": "B", "refused": "no roles"},
+        ]}
+        got = self.call(("digest", [feed, "scotland", ["https://a/6"]]), ("digest", [None, "scotland", []]))
+        self.assertEqual([j["url"] for j in got[0]["local"]], ["https://a/1"])
+        self.assertEqual([j["url"] for j in got[0]["national"]], ["https://a/3"])
+        self.assertEqual(got[0]["local"][0]["company"], "A")
+        self.assertEqual(got[1], {"local": [], "national": []})
+
+    def test_digest_email(self):
+        links = {"careers": "https://h/careers/", "register": "https://h/reg/", "unsub": "https://h/?msh_nr_unsub=5&t=abc"}
+        job = {"title": "<b>TM</b>", "company": "A & B", "location": "Leeds", "url": "https://a/1"}
+        got = self.call(
+            ("email", ["Jane", "Yorkshire and the Humber", {"local": [job], "national": []}, links]),
+            ("email", ["", "London", {"local": [], "national": [job, job]}, links]),
+            ("email", ["Jane", "London", {"local": [], "national": []}, links]),
+        )
+        self.assertEqual(got[0]["subject"], "1 new role in Yorkshire and the Humber this week")
+        self.assertIn("Hi Jane,", got[0]["html"])
+        self.assertIn("&lt;b&gt;TM&lt;/b&gt;", got[0]["html"])
+        self.assertIn("A &amp; B", got[0]["html"])
+        self.assertIn("msh_nr_unsub=5&amp;t=abc", got[0]["html"])
+        self.assertEqual(got[1]["subject"], "New UK-wide roles this week")
+        self.assertIn("<p>Hi,</p>", got[1]["html"])
+        self.assertIsNone(got[2], "nothing new, no email")
 
     def test_option_ids_are_slugs(self):
         opts = self.call(("options", []))[0]
