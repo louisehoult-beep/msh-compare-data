@@ -101,6 +101,7 @@ RUN = [
     # My Hub search modal mount in app/hub-search.js (my-hub task 9). Static, no network.
     "test_hub_search_embed.py",
     "test_hub_chrome.py",                # 2026-10, nav icons and page bar; 1331 loader is ASCII
+    "test_nursing_register.py",          # 2026-10, Nursing Register snippet rules and page filters
     # Added 30/09/2026 with scripts/refresh_icb_watch.py. Stdlib only, no network.
     "test_icb_watch.py",
     "test_ask_passages.py",
