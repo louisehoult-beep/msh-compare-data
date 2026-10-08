@@ -22,6 +22,9 @@
      employer view from msh_nr_public(). No name, email, phone, NMC PIN or
      LinkedIn. Only profiles the nurse has made visible, with consent, and
      confirmed in the last MSH_NR_STALE_DAYS days.
+   * Where the nurse has also ticked the separate share consent
+     (shareContact, dated shareAt), employers and admins get their name,
+     email, phone and LinkedIn too (msh_nr_contact). Never the NMC PIN.
    * An admin also gets the private fields, to check the NMC PIN and make
      introductions.
    An employer's "Request introduction" emails Lou. Nothing goes to the
@@ -281,6 +284,8 @@ if ( ! function_exists( 'msh_nr_clean' ) ) {
 				'rightToWork'    => ! empty( $b['rightToWork'] ) && true === $b['rightToWork'],
 				'training'       => ! empty( $b['training'] ) && true === $b['training'],
 				'jobsEmail'      => ! empty( $b['jobsEmail'] ) && true === $b['jobsEmail'],
+				'shareContact'   => ! empty( $b['shareContact'] ) && true === $b['shareContact'],
+				'shareAt'        => ( ! empty( $b['shareContact'] ) && true === $b['shareContact'] ) ? ( ( ! empty( $old['shareAt'] ) && ! empty( $old['shareContact'] ) ) ? $old['shareAt'] : $today ) : '',
 				'bio'            => msh_nr_scrub( msh_nr_text( isset( $b['bio'] ) ? $b['bio'] : '', 600 ) ),
 				'nmcPin'         => $pin,
 				'nmcChecked'     => $checked,
@@ -325,6 +330,24 @@ if ( ! function_exists( 'msh_nr_public' ) ) {
 		$out['yearsQualified'] = max( 0, (int) substr( $today, 0, 4 ) - (int) $p['qualYear'] );
 		$out['nmcChecked']     = ! empty( $p['nmcChecked'] ) ? $p['nmcChecked'] : '';
 		return $out;
+	}
+}
+
+if ( ! function_exists( 'msh_nr_contact' ) ) {
+	/* Contact details a recruiter or employer may see, or null. Only when the
+	   nurse has ticked the separate share consent (Lou, 08/10/2026: "get
+	   permission to share"), which records shareAt. Never the NMC PIN. Call
+	   only for a profile msh_nr_public() already shows. */
+	function msh_nr_contact( $p, $name, $email ) {
+		if ( ! is_array( $p ) || empty( $p['shareContact'] ) || true !== $p['shareContact'] || empty( $p['shareAt'] ) ) {
+			return null;
+		}
+		return array(
+			'name'     => (string) $name,
+			'email'    => (string) $email,
+			'phone'    => isset( $p['phone'] ) ? (string) $p['phone'] : '',
+			'linkedin' => isset( $p['linkedin'] ) ? (string) $p['linkedin'] : '',
+		);
 	}
 }
 
@@ -504,7 +527,7 @@ if ( ! function_exists( 'msh_nr_jobs_batch' ) ) {
 		$ids    = get_users( array( 'meta_key' => 'msh_nurse_ref', 'fields' => 'ID', 'orderby' => 'ID', 'order' => 'ASC', 'number' => MSH_NR_BATCH, 'offset' => $cursor ) );
 		$links  = array(
 			'careers'  => home_url( '/medical-sales-hub/careers/' ),
-			'register' => home_url( '/medical-sales-hub/nursing-register/' ),
+			'register' => home_url( '/clinical-hub/nursing-register/' ),
 		);
 		foreach ( $ids as $id ) {
 			$p = get_user_meta( $id, 'msh_nurse_register', true );
@@ -692,8 +715,14 @@ add_action( 'rest_api_init', function () {
 					$pub = msh_nr_public( array_merge( $p, array( 'visible' => true, 'consentAt' => 'x', 'updated' => $today ) ), $today );
 					$pub['hidden'] = true;
 				}
+				$u = get_userdata( $id );
+				if ( empty( $pub['hidden'] ) ) {
+					$c = msh_nr_contact( $p, $u ? $u->display_name : '', $u ? $u->user_email : '' );
+					if ( null !== $c ) {
+						$pub['contact'] = $c;
+					}
+				}
 				if ( $isAdmin ) {
-					$u              = get_userdata( $id );
 					$pub['private'] = array(
 						'name'     => $u ? $u->display_name : '',
 						'email'    => $u ? $u->user_email : '',

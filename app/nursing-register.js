@@ -228,7 +228,8 @@
     h += fs('Weekly jobs email', 'Every Monday: new roles in your region from the companies\' own careers pages. Nothing new, no email.',
       flag('jobsEmail', p.jobsEmail, '<strong>Send me the weekly jobs email</strong> for my region. I can stop it from any email.'));
     h += fs('Who can see you', '',
-      flag('consent', !!p.consentAt, 'I agree that Elevate &amp; Thrive may show this profile, without my name or contact details, to employers it has approved, and contact me when an employer asks to be introduced. Nothing identifying goes to an employer until I say yes. I can hide or delete it at any time.')
+      flag('consent', !!p.consentAt, 'I agree that Elevate &amp; Thrive may show this profile, without my name or contact details, to recruiters and employers it has approved, and contact me when one asks to be introduced. I can hide or delete it at any time.')
+      + flag('shareContact', p.shareContact, '<strong>Let recruiters contact me directly.</strong> I agree that Elevate &amp; Thrive may share my name, email, phone number and LinkedIn with the recruiters and employers it has approved, so they can contact me about roles. My NMC PIN is never shared. I can untick this at any time.')
       + flag('visible', p.visible, '<strong>Make my profile visible to employers</strong>')
       + '<p class="hint" style="margin-top:10px">Profiles not confirmed for a year are hidden automatically.</p>');
     h += '<div class="actions"><button class="btn" type="submit">Save my profile</button>'
@@ -245,7 +246,7 @@
     LISTS.forEach(function (k) {
       b[k] = Array.prototype.slice.call(form.querySelectorAll('input[name="' + k + '"]:checked')).map(function (i) { return i.value; });
     });
-    FLAGS.concat(['consent', 'visible']).forEach(function (n) { b[n] = !!(form.elements[n] && form.elements[n].checked); });
+    FLAGS.concat(['consent', 'shareContact', 'visible']).forEach(function (n) { b[n] = !!(form.elements[n] && form.elements[n].checked); });
     return b;
   }
 
@@ -332,7 +333,13 @@
           + '<button class="btn ghost" type="button" data-verify="' + (p.nmcChecked ? '0' : '1') + '">' + (p.nmcChecked ? 'Clear NMC check' : 'Mark NMC PIN checked') + '</button></div>' : '')
         + '</div>';
     }
-    if (!p.hidden) {
+    if (p.contact) {
+      var c = p.contact;
+      h += '<div class="msg ok" style="margin-top:12px"><strong>Happy to be contacted directly.</strong> ' + esc(c.name)
+        + ' · <a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a>'
+        + (c.phone ? ' · ' + esc(c.phone) : '')
+        + (c.linkedin ? ' · <a href="' + esc(c.linkedin) + '" target="_blank" rel="noopener">LinkedIn</a>' : '') + '</div>';
+    } else if (!p.hidden) {
       h += '<div class="actions"><button class="btn" type="button" data-intro>Request introduction</button></div>';
     }
     return h + '</div>';
@@ -345,7 +352,7 @@
     Object.keys(S.options.clinicalSkills).forEach(function (k) { skillOpts[k] = S.options.clinicalSkills[k]; });
     Object.keys(S.options.qualifications).forEach(function (k) { skillOpts[k] = S.options.qualifications[k]; });
     S.options._skills = skillOpts;
-    var h = '<p class="lede">Every nurse here has chosen to be seen. You won\'t see names or contact details: ask for an introduction and we\'ll check with the nurse first, then put you in touch.</p>'
+    var h = '<p class="lede">Every nurse here has chosen to be seen. Where a nurse has agreed to direct contact, their details are on their card. For everyone else, ask for an introduction and we\'ll check with the nurse first, then put you in touch.</p>'
       + '<div class="filters">'
       + select('regions', 'region', f.region, 'Any region')
       + select('specialities', 'speciality', f.speciality, 'Any speciality')

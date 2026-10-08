@@ -35,6 +35,7 @@ foreach ($cases as $c) {
   elseif ($fn === 'public') { $out[] = msh_nr_public($a[0], $a[1]); }
   elseif ($fn === 'scrub') { $out[] = msh_nr_scrub($a[0]); }
   elseif ($fn === 'options') { $out[] = msh_nr_options(); }
+  elseif ($fn === 'contact') { $out[] = msh_nr_contact($a[0], $a[1], $a[2]); }
   elseif ($fn === 'regions') { $out[] = msh_nr_job_regions($a[0], $a[1]); }
   elseif ($fn === 'digest') { $out[] = msh_nr_digest_jobs($a[0], $a[1], $a[2]); }
   elseif ($fn === 'email') { $out[] = msh_nr_digest_email($a[0], $a[1], $a[2], $a[3]); }
@@ -165,6 +166,26 @@ class Snippet(unittest.TestCase):
         )
         self.assertEqual(got[:3], [None, None, None])
         self.assertIsNotNone(got[3], "exactly a year old is still shown")
+
+    def test_contact_shared_only_with_separate_consent(self):
+        shared = self.clean(dict(GOOD, shareContact=True))["profile"]
+        self.assertEqual(shared["shareAt"], TODAY)
+        not_shared = self.clean(GOOD)["profile"]
+        loose = self.clean(dict(GOOD, shareContact="yes"))["profile"]
+        got = self.call(("contact", [shared, "Jane Nurse", "jane@example.org"]),
+                        ("contact", [not_shared, "Jane Nurse", "jane@example.org"]),
+                        ("contact", [loose, "Jane Nurse", "jane@example.org"]))
+        self.assertEqual(got[0], {"name": "Jane Nurse", "email": "jane@example.org",
+                                  "phone": "07700 900123", "linkedin": "https://www.linkedin.com/in/jane-nurse"})
+        self.assertNotIn("12A3456E", json.dumps(got[0]))
+        self.assertEqual(got[1:], [None, None])
+        # Share date kept on re-save, reset after unticking.
+        again = self.clean(dict(GOOD, shareContact=True), old=dict(shared, shareAt="2026-01-01"))["profile"]
+        self.assertEqual(again["shareAt"], "2026-01-01")
+        self.assertEqual(self.clean(GOOD, old=shared)["profile"]["shareAt"], "")
+        # The flag itself never reaches the employer view.
+        pub = self.call(("public", [shared, TODAY]))[0]
+        self.assertNotIn("shareContact", pub)
 
     def test_jobs_email_is_strict_opt_in(self):
         self.assertTrue(self.clean(dict(GOOD, jobsEmail=True))["profile"]["jobsEmail"])
