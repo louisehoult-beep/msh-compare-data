@@ -30,10 +30,11 @@
 
   /* Marketing copy (Lou, 08/10/2026): register once, be found by recruiters
      and employers without signing up with several agencies, and get the
-     Clinical Hub's careers resources. Links are live Hub pages (checked
-     08/10/2026). */
+     Clinical Hub's careers resources. Only NHS nurses join free (Lou,
+     08/10/2026), so "free" is said of them alone. Links are live Hub pages
+     (checked 08/10/2026). */
   var PITCH = 'Register once and let recruiters and employers find you. No signing up with five different agencies, no telling your story over and over. Add your experience and skills, choose who can see you, and get new roles in your area in your inbox every Monday.';
-  var RESOURCES = '<div class="res"><p class="sub">Your free careers resources</p><div class="chips">'
+  var RESOURCES = '<div class="res"><p class="sub">Your careers resources</p><div class="chips">'
     + [['Jobs', '/medical-sales-hub/clinical-jobs/'], ['Your CV', '/medical-sales-hub/clinical-cv/'],
       ['Clinical to commercial routes', '/medical-sales-hub/clinical-to-commercial-routes/'], ['Career Centre', '/medical-sales-hub/careers/'],
       ['Revalidation portfolio', '/medical-sales-hub/clinical-portfolio/'], ['Resources', '/medical-sales-hub/clinical-resources/']]
@@ -42,9 +43,10 @@
     + '<p class="lede">' + PITCH + '</p>'
     + '<ul class="pitch"><li><strong>One profile, seen by recruiters and employers.</strong> Your region, specialities and skills, in one place they can search.</li>'
     + '<li><strong>New roles in your area every Monday.</strong> Straight from the companies\' own careers pages, not recycled agency adverts.</li>'
-    + '<li><strong>The best nursing careers resources, free.</strong> Jobs, CV help, your revalidation portfolio and the real routes from clinical into industry.</li>'
+    + '<li><strong>The best nursing careers resources in one place.</strong> Jobs, CV help, your revalidation portfolio and the real routes from clinical into industry.</li>'
     + '<li><strong>You stay in control.</strong> Hide or delete your profile, or stop the emails, any time.</li></ul>'
-    + '<div class="actions"><a class="btn" href="/register/">Register free</a><a class="btn ghost" href="/login/">I already have an account</a></div></div>';
+    + '<p class="lede"><strong>Free for NHS nurses.</strong></p>'
+    + '<div class="actions"><a class="btn" href="/register/">Join the register</a><a class="btn ghost" href="/login/">I already have an account</a></div></div>';
 
   /* ---------- pure ---------- */
   function esc(s) {
