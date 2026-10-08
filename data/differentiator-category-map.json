@@ -151137,6 +151137,20 @@
    "hub": null,
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Laborie Medical Technologies UK Ltd",
+   "division": "Eclipse™ System for Bowel Control",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Eclipse™ System for Bowel Control"
+   ],
+   "hub": "continence:bowel",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Individual product inside the Urology & Urogynecology division, which the existing (supplier, division) mapping files to endourology:urodyn (urodynamics diagnostic equipment -- correct for the NXT/Uroflowmeter examples that mapping was decided on). This one product is a transanal bowel irrigation system for faecal incontinence, not a urodynamics device: its own detail text (read from laborie.com/product/eclipse/, 08/09/2026) names 'Fecal Incontinence Treatment Pathway' and an 'Eclipse Fitting Guide'. continence:bowel ('Bowel / transanal irrigation') is an existing, gated type that fits it exactly. Added via the product-override tier (framework-coverage run, 08/10/2026) rather than widening the division's own hub to a list, because the division's other products (URGENT PC for overactive bladder, Macroplastique, Intelligent Cath-ID System, Sonesta chair range, Pelvic Floor Rehabilitation) are not bowel-control products and a list would have published all of them under continence:bowel too."
   }
  ],
  "kinds": {

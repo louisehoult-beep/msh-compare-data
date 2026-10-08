@@ -44,7 +44,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 9 | 42 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 20 | 34.5% | 17 | 32 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 21 | 36.8% | 12 | 32 | STARTED |
-| Urology and Bowel Management | continence | 57 | 19 | 33.3% | 20 | 40 | STARTED |
+| Urology and Bowel Management | continence | 57 | 20 | 35.1% | 19 | 40 | STARTED |
 | Advanced Wound Care | wound | 56 | 20 | 35.7% | 12 | 42 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 7 | 45 | STARTED · DEFERRED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 11 | 31 | STARTED |
