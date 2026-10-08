@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-10-06",
+ "lastRun": "2026-10-08",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -540,7 +540,23 @@
   "Jiraffe (Jenx)",
   "Johnson & Johnson Surgical Vision",
   "Lenus Health",
-  "LINET UK"
+  "LINET UK",
+  "Mindray UK",
+  "Permobil UK",
+  "Semperit Investment",
+  "Semperit / Sempermed",
+  "Skin Analytics",
+  "Nervecentre",
+  "MED-EL",
+  "Medtronic",
+  "Vertec Scientific",
+  "W.L. Gore & Associates",
+  "Luscii",
+  "Qure.ai",
+  "Tortus",
+  "Newton’s Tree",
+  "Seating Matters",
+  "Penumbra"
  ],
  "refusals": [
   {
@@ -1542,6 +1558,41 @@
    "name": "LINET UK",
    "reason": "Own site read on 06/10/2026 shows only a parent-group or differently-named entity (VARTA AG / LINET Group SE / Johnson & Johnson Vision / AG form); adding it would breach the no parent/subsidiary alias rule or risk another company's name.",
    "date": "2026-10-06"
+  },
+  {
+   "name": "Mindray UK",
+   "reason": "Only the global parent site (Shenzhen Mindray Bio-Medical Electronics Co., Ltd) was readable; no UK-entity name form seen on a named source. Parent name not aliased.",
+   "date": "2026-10-08"
+  },
+  {
+   "name": "Permobil UK",
+   "reason": "Own UK site shows only 'Permobil'; single token is not the whole canonical name 'Permobil UK', so not usable. No other form seen.",
+   "date": "2026-10-08"
+  },
+  {
+   "name": "Semperit Investment",
+   "reason": "Holding-entity name; no own-site or source form beyond the display name seen. Parent/brand names not aliased.",
+   "date": "2026-10-08"
+  },
+  {
+   "name": "Semperit / Sempermed",
+   "reason": "sempermed.com no longer resolves to Semperit's site (redirects to an unrelated host); no verifiable form seen.",
+   "date": "2026-10-08"
+  },
+  {
+   "name": "Skin Analytics",
+   "reason": "Own site shows only 'Skin Analytics'; no legal-entity form displayed and Companies House not searchable in this run.",
+   "date": "2026-10-08"
+  },
+  {
+   "name": "Nervecentre",
+   "reason": "nervecentre.com is a parked for-sale domain; no own-site source readable. Nothing verified.",
+   "date": "2026-10-08"
+  },
+  {
+   "name": "Tortus",
+   "reason": "'Tortus AI' seen on own site footer but adding it makes verify.py's company-press check fail: a published press item matched on 'tortus' would no longer match the rule's recorded evidence. Alias withheld, not the gate loosened; revisit with the press record.",
+   "date": "2026-10-08"
   }
  ],
  "sources": {
