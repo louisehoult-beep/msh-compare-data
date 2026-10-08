@@ -25,10 +25,10 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 408,
-  "inScopeSuppliersNeedingCrawl": 263,
+  "inScopeSuppliersNeedingCrawl": 262,
   "inScopeSuppliersNeedingDomain": 241,
-  "suppliersRefused": 543,
-  "suppliersRefusedButPublishingElsewhere": 112,
+  "suppliersRefused": 546,
+  "suppliersRefusedButPublishingElsewhere": 115,
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 1,
   "blockedFrameworks": 2,
@@ -5726,6 +5726,13 @@
      "reason": "the site's WordPress API returned HTTP 401; the WooCommerce Store API returned HTTP 401; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-30",
      "bucket": "published"
+    },
+    {
+     "supplier": "Getinge",
+     "domain": "www.getinge.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-10-08",
+     "bucket": "published"
     }
    ],
    "route": "NHSSC framework",
@@ -5831,10 +5838,6 @@
     "ophthalmology"
    ],
    "crawlWorklist": [
-    {
-     "supplier": "Altomed Limited",
-     "domain": "altomed.com"
-    },
     {
      "supplier": "Johnson & Johnson Surgical Vision",
      "domain": "jnjvisionpro.com"
@@ -6044,6 +6047,13 @@
      "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue",
      "checked": "2026-08-26",
      "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Altomed Limited",
+     "domain": "altomed.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-10-08",
+     "bucket": "heldOnly"
     },
     {
      "supplier": "Alcon Eye Care UK",
@@ -6348,6 +6358,13 @@
      "domain": null,
      "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
      "checked": "2026-09-07",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Howard Wright Europe",
+     "domain": "howardwright.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-10-08",
      "bucket": "published"
     },
     {
@@ -6952,6 +6969,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Howard Wright Europe",
+     "domain": "howardwright.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-10-08",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Olympus (KeyMed)",
      "domain": "www.olympus.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
@@ -6963,6 +6987,13 @@
      "domain": "www.draeger.com",
      "reason": "neither www.draeger.com nor www.www.draeger.com answered \u2014 the domain does not resolve or serves no usable certificate",
      "checked": "2026-08-31",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Getinge",
+     "domain": "www.getinge.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-10-08",
      "bucket": "published"
     },
     {
@@ -9342,6 +9373,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Getinge",
+     "domain": "www.getinge.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-10-08",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Philips",
      "domain": "www.philips.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -10588,6 +10626,13 @@
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-31",
      "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Getinge",
+     "domain": "www.getinge.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-10-08",
+     "bucket": "published"
     },
     {
      "supplier": "Peacocks (Surgical and Medical Equipment) Limited",
@@ -16240,6 +16285,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Getinge",
+     "domain": "www.getinge.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-10-08",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Olympus (KeyMed)",
      "domain": "www.olympus.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
@@ -18128,6 +18180,13 @@
      "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-13",
      "bucket": "refused"
+    },
+    {
+     "supplier": "Getinge",
+     "domain": "www.getinge.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-10-08",
+     "bucket": "publishedElsewhere"
     },
     {
      "supplier": "LivaNova UK Limited",
@@ -20724,10 +20783,6 @@
    "speciality": [],
    "crawlWorklist": [
     {
-     "supplier": "I3 Membrane GMBH",
-     "domain": "i3membrane.com"
-    },
-    {
      "supplier": "Airbon Ltd, trading as Smart Air UK",
      "domain": null
     },
@@ -20824,6 +20879,13 @@
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-08-31",
      "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "I3 Membrane GMBH",
+     "domain": "i3membrane.com",
+     "reason": "only 2 product records on the site's API \u2014 that is a landing page, not a catalogue; the WooCommerce Store API returned 2 product(s), too few to be a catalogue; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-10-08",
+     "bucket": "heldOnly"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
