@@ -67,6 +67,11 @@
       '.msh .sp-li-u{font-size:12.5px;margin-top:6px;}',
       '.msh .sp-li-u b{color:var(--navy);}',
       '.msh .sp-li-m{font-size:11px;color:var(--dim);margin-top:7px;}',
+      /* The card is always light (var(--panel)), but a page may seat the panel in a dark band
+         whose own rule colours its text light: Patient Handling's `.msh #suppliers-frameworks
+         .inner p` (1,2,1) beat `.msh .sp-li p` and left the fact text near-white on white
+         (08/10/2026). An id plus three classes (1,3,1) keeps card text dark wherever it sits. */
+      '.msh #msh-spec-frameworks .sp-sec .sp-li, .msh #msh-spec-frameworks .sp-sec .sp-li p, .msh #msh-spec-frameworks .sp-sec .sp-li-u{color:var(--ink);}',
       '.msh .sp-prov{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:2px 7px;border-radius:99px;margin:0 6px 0 0;vertical-align:1px;}',
       '.msh .sp-prov-fw{background:var(--navy);color:#fff;}',
       '.msh .sp-prov-dir{background:var(--panel2);color:var(--dim);border:1px solid var(--border);}',
