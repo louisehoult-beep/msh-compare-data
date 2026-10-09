@@ -56,7 +56,9 @@
      (page 3791) where the speciality has a built band; falls back to the
      original generic evidence sentence for every speciality that doesn't. */
   function evidenceChip(p){
-    var bandId=EVIDENCE_BAND[p.s];var lib=bandId?EVLIB[bandId]:null;
+    /* p.eb (09/10/2026): a product whose evidence belongs to another speciality's band, e.g. pressure-relieving
+        mattresses filed under Moving and handling but judged on pressure-ulcer harm. */
+     var bandId=(p.eb&&EVIDENCE_BAND[p.eb])||EVIDENCE_BAND[p.s];var lib=bandId?EVLIB[bandId]:null;
     if(!lib||!lib.rows||!lib.rows.length){
       var ev=EVID[p.t]||EVID.con;
       return '<div class="mst__chip"><h4>Evidence to lead with</h4><p>'+ev+'.</p><p class="mst__chiplink"><a href="https://www.nice.org.uk/guidance" target="_blank" rel="noopener">NICE guidance</a> &middot; <a href="https://gettingitrightfirsttime.co.uk/" target="_blank" rel="noopener">GIRFT</a></p></div>';
