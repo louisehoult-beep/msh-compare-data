@@ -1,0 +1,160 @@
+name: Daily compare-tab + supplier-index refresh
+on:
+  schedule:
+    - cron: "15 3 * * *"   # daily 03:15 UTC
+  workflow_dispatch:
+# ⚠️ ADDED 26/07/2026. All three writers push to this one repo on overlapping
+# schedules and none of them had a concurrency group, so a long job could lose a
+# race it had already done the work for. On 26/07 the weekly refresh ran for 49
+# minutes, then its push was REJECTED ("fetch first") because daily-contacts.yml
+# landed at 07:56 inside that window. Three files of computed NHSSC cache and
+# trust-directory data were discarded and the trust directory did not refresh
+# that week. This group serialises the writers so they queue instead of racing.
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Fetch and merge (append-only)
+        run: python3 fetch_issues.py
+      - name: Rebuild supplier index (curated seed + medical awards + recalls)
+        run: python3 build_supplier_index.py
+      # build_supplier_index.py rebuilds its output from scratch, so it drops the
+      # ownership notice every run. This repo is PUBLIC and the Hub's page
+      # watermark never touches these files, so the notice is the only thing on a
+      # copy that says who owns it. Re-stamp before the gate; the gate then
+      # refuses to publish anything unmarked.
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+      # ⚠️ ADDED 26/07/2026. This workflow was the ONE writer of the three that
+      # committed to this repo without running the gate first, while
+      # weekly-refresh.yml and daily-contacts.yml both did. A push here is a live
+      # publish to paying members on Med Sales Tools within seconds — there is no
+      # staging step and no review — so an ungated daily writer is exactly the hole
+      # that let 145 false NHS job changes reach members in July. Root CLAUDE.md
+      # rule 13. If this step fails, the data is wrong: fix the data, never loosen
+      # the check to make the push go through.
+      # The Rep's Briefing's "What moved on the Hub" section (18/08/2026). Written
+      # HERE and not in the pipeline repo because it is computed from THIS repo's
+      # commit history, which only exists on this checkout (fetch-depth: 0). It
+      # compares the last committed week against the data this run just built, so
+      # it must come after the build and BEFORE the gate — a file that reaches a
+      # member-facing email is published output and goes through verify.py like
+      # everything else. Nothing here is a fresh claim: every line is a difference
+      # between two committed states of our own data.
+      - name: Weekly change summary for the Rep's Briefing
+        run: python3 scripts/change_report.py --since 7d --brief state/whats-moved-7d.json > /dev/null
+
+      # The output is teed so the failure alert below can quote the actual FAIL
+      # line. PIPESTATUS, not the pipeline's exit code: `| tee` would otherwise
+      # report tee's success and let a failed gate through, which is the one
+      # thing this step exists to prevent.
+      - name: Publish gate — nothing commits until this passes
+        run: |
+          python3 scripts/prune_calendar.py
+          set -o pipefail
+          bash scripts/gate.sh 2>&1 | tee /tmp/gate.log
+      - name: Commit if changed
+        run: |
+          git config user.name "compare-refresh-bot"
+          git config user.email "actions@github.com"
+          git add data state
+          git diff --cached --quiet || git commit -m "Daily refresh $(date -u +%F)"
+          # ⚠️ ADDED 26/07/2026. A bare `git push` here silently threw away completed
+          # work whenever another writer landed first. Retry on rebase, and RE-RUN
+          # THE GATE after any rebase: the rebase combines this run's data with
+          # another writer's, and that combination has not been gated yet. Root
+          # CLAUDE.md rule 13 - if the gate fails, the data is wrong, so refuse to
+          # push rather than loosening anything.
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first). Rebasing and re-running the gate, attempt $attempt of 5."
+            # -X theirs: during a REBASE ours/theirs are inverted, so this means "this run's
+            # freshly regenerated file wins any conflicting hunk", while the other writer's
+            # non-conflicting changes are kept. Without it a conflict stops the rebase and
+            # the whole run's work is thrown away (11/08/2026, company-intelligence #2).
+            git pull --rebase -X theirs --autostash
+            bash scripts/gate.sh || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 5 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi
+      - name: Phone alert if new items (ntfy)
+        run: |
+          N=$(python3 -c "import json;print(len(json.load(open('state/last_run.json'))['added']))" 2>/dev/null || echo 0)
+          if [ "$N" -gt 0 ]; then
+            curl -s -H "Title: Medical Sales Hub - Compare tab" -H "Priority: default" -H "Tags: mag" \
+              -d "$N new item(s) auto-detected on the Compare tab. Claude will draft the rep lines by 07:10; check them on your dashboard or the Med Sales Tools page." \
+              ntfy.sh/eth-hub-lou-4437
+          fi
+      # ⚠️ REWRITTEN 11/08/2026. The old version of this step said only "the daily
+      # compare-tab refresh failed" and nothing else. It fired on 08, 09, 10 and
+      # 11/08 with the identical single cause ('Stryker UK' resolving to no
+      # supplier record) and nobody acted, because nothing in the alert said what
+      # had broken or that it had broken before. The Compare tab served 07/08 data
+      # to paying members for four days while looking current.
+      #
+      # A failed refresh publishes nothing wrong — the gate sees to that — so the
+      # damage here is never bad data, it is SILENT STALENESS. That is what this
+      # alert has to convey: what broke, how long the data has been frozen, and
+      # whether this is the first night or the fourth.
+      - name: Phone alert on failure (ntfy)
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          API="repos/${GITHUB_REPOSITORY}/actions/workflows/refresh.yml/runs"
+
+          # WHAT broke. The gate's own words, not a paraphrase.
+          REASON=$(grep -E '^FAIL' /tmp/gate.log 2>/dev/null | head -2 | cut -c1-300)
+          if [ -n "$REASON" ]; then
+            # The gate ran and rejected the data. Nothing was committed.
+            STATE="Nothing wrong was published, the gate blocked the commit. The Compare tab and Supplier Search are FROZEN at that date while still looking current to members."
+          else
+            # No FAIL line means the gate never reached a verdict, so do NOT claim
+            # it blocked anything: the fetch, the index rebuild or the push died.
+            # An alert that states the wrong cause is worse than a vague one.
+            REASON="The publish gate produced no FAIL line, so the job died BEFORE or OUTSIDE it (fetch, index rebuild, or push)."
+            STATE="Whether anything committed is unknown from this alert. Check the run log, and check whether the last commit is today's."
+          fi
+
+          # HOW STALE. The last green run is the moment the live data stopped moving.
+          LAST_OK=$(gh api "${API}?status=success&per_page=1" \
+                      --jq '.workflow_runs[0].updated_at // empty' 2>/dev/null || true)
+          [ -z "$LAST_OK" ] && LAST_OK="unknown"
+
+          # IS THIS A PATTERN. One failure is a blip; two in a row is a system
+          # that is down and staying down until someone reads a log.
+          PREV=$(gh api "${API}?status=completed&per_page=1" \
+                   --jq '.workflow_runs[0].conclusion // empty' 2>/dev/null || true)
+          if [ "$PREV" = "failure" ]; then
+            TITLE="Med Sales Hub - refresh FAILED AGAIN, data is STALE"
+            PRIORITY="urgent"
+          else
+            TITLE="Med Sales Hub - refresh FAILED (first night)"
+            PRIORITY="high"
+          fi
+
+          # Built with printf, not a multi-line string literal: every line of a
+          # `run: |` block must stay indented, and an unindented continuation
+          # silently ends the YAML block scalar and breaks the whole workflow.
+          BODY=$(printf '%s\n\nLive data last refreshed: %s\n%s\nRun: github.com/%s/actions/runs/%s\n' \
+                   "$REASON" "$LAST_OK" "$STATE" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID")
+
+          curl -s -H "Title: ${TITLE}" -H "Priority: ${PRIORITY}" -H "Tags: warning" \
+            -d "${BODY}" ntfy.sh/eth-hub-lou-4437

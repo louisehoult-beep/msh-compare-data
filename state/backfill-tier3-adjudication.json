@@ -1,0 +1,3914 @@
+{
+ "_what": "Tier 3 of the supplier seed backfill: the 581 companies named on exactly ONE clinical NHS Supply Chain framework and held in no Hub supplier section. Source: Product-Build/market-intelligence/SEED-BACKFILL-WORKLIST.md, regenerated after tiers 1 and 2 landed.",
+ "_when": "2026-08-14",
+ "_rule": "Companies House was searched by name for each. A NAME SEARCH IS NOT A CONFIRMATION - per docs/COMPANY-REPORT-METHOD.md a company number is only 'confirmed' via route 1 (an anchored number curated into the record) or route 2 (the number the company publishes on its own site). So no number here is written to `companyNumber`. Where the registered name matches exactly and the company is active, the result is recorded as a CANDIDATE, carrying its own status and date, for confirm_company_numbers.py to prove or discard later. The verified fact in every record created from this file is the framework award, nothing else.",
+ "_verdicts": {
+  "candidate": "Registered name matches the awarded name exactly and the company is active. Recorded as a candidate number, never as a confirmed one.",
+  "probable": "A plausible single match that is not an exact name match. Recorded as a candidate and flagged for route 2.",
+  "unresolved": "No defensible match. Companies House returned nothing close, or several equally plausible companies. No number recorded. This is the correct output, not a failure.",
+  "foreign": "Not a UK-registered company, so no Companies House record is expected to exist. Recorded with no number and a note saying so.",
+  "alias": "Not a separate supplier - another spelling of a company already in this list. Becomes an alias, never its own record.",
+  "excluded": "Not a company name at all - a table header, a website address or an unexpanded abbreviation captured by the frameworks parser. No record is created, and the parser is what should be fixed."
+ },
+ "_howDecided": "UNLIKE TIERS 1 AND 2, THIS TIER WAS NOT ADJUDICATED COMPANY BY COMPANY. 581 individual judgements is not work anybody did, and claiming it would be a lie. Every verdict here comes from a fixed rule set, applied mechanically, and stated here so it can be checked and re-run:\n\n  R1 EXCLUDED    the string is not a company name (table header, URL, bare abbreviation).\n  R2 FOREIGN     a non-UK legal form ends the name (GmbH, A/S, ApS, B.V., S.p.A., Oy, AB and the like) and is not followed by Ltd or Limited. No UK number is attached even where a similarly-named UK company exists, because it is a different legal person. \"Valmy SAS Ltd\" is a UK company and does not trip this.\n  R3 CANDIDATE   exactly ONE Companies House company normalises to the same name AND is active. Normalisation strips case, punctuation, & versus and, and legal or territory suffixes only.\n  R4 UNRESOLVED  exactly one exact match, but it is NOT active. The status is recorded and the name flagged for a human. A company that is not trading must never be published as a live supplier.\n  R5 UNRESOLVED  two or more ACTIVE exact matches. Never resolved by picking the first.\n  R6 UNRESOLVED  no exact match at all.\n  R7 ALIAS       two names on this list resolving to the same registered number are one business; the fuller spelling keeps the record.\n  R8 ALIAS       two names on this list that differ only in spelling or legal form are one supplier, whatever their verdict. R7 alone only deduped records that got a number, so \"Nagor Ltd\" and \"Nagor Limited\" each became a record carrying the other's name as an alias - which verify.py rejects, because alias lookup is first-wins and the wrong record then answers for that name. R8's normalisation is stricter than R3's: case, punctuation and trailing legal form only, so \"Smith Medical Ltd\" and \"Smith Medical Group Ltd\" stay two records.\n\nThe rules are deliberately biased toward UNRESOLVED, which records the framework award and no company number. 218 of 581 landed there. For a long tail full of trading names and one-product suppliers that is the honest output, not a failure to try harder.",
+ "_tradingStatusFindings": "14 companies are an exact name match to a company that is dissolved, in liquidation or otherwise not active. Each is unresolved with its status in `why`. These are the rule-8 findings worth a human eye, and the reason R4 exists as a rule separate from R6.",
+ "companies": [
+  {
+   "name": "3D LifePrints UK Ltd",
+   "verdict": "candidate",
+   "number": "09514155",
+   "registered": "3D LIFEPRINTS UK LTD",
+   "status": "active",
+   "incorporated": "2015-03-27"
+  },
+  {
+   "name": "3D Metal Printing Ltd",
+   "verdict": "candidate",
+   "number": "09033118",
+   "registered": "3D METAL PRINTING LTD",
+   "status": "active",
+   "incorporated": "2014-05-09"
+  },
+  {
+   "name": "@SimulationMan Ltd",
+   "verdict": "candidate",
+   "number": "12391166",
+   "registered": "@SIMULATIONMAN LTD",
+   "status": "active",
+   "incorporated": "2020-01-08"
+  },
+  {
+   "name": "A2B Healthcare",
+   "verdict": "candidate",
+   "number": "15743489",
+   "registered": "A2B HEALTHCARE LTD",
+   "status": "active",
+   "incorporated": "2024-05-26"
+  },
+  {
+   "name": "Aayan Medical Imaging Limited",
+   "verdict": "candidate",
+   "number": "06547415",
+   "registered": "AAYAN MEDICAL IMAGING LIMITED",
+   "status": "active",
+   "incorporated": "2008-03-28"
+  },
+  {
+   "name": "Abbliss Ltd",
+   "verdict": "candidate",
+   "number": "05398140",
+   "registered": "ABBLISS LIMITED",
+   "status": "active",
+   "incorporated": "2005-03-18"
+  },
+  {
+   "name": "Abilia Ltd",
+   "verdict": "candidate",
+   "number": "01149346",
+   "registered": "ABILIA LTD",
+   "status": "active",
+   "incorporated": "1973-12-04"
+  },
+  {
+   "name": "Abiomed Ltd",
+   "verdict": "candidate",
+   "number": "06441950",
+   "registered": "ABIOMED, LTD.",
+   "status": "active",
+   "incorporated": "2007-11-30"
+  },
+  {
+   "name": "Absorbest AB",
+   "verdict": "foreign",
+   "why": "The name carries a non-UK legal form, so no Companies House record is expected for the awarded entity. Any similarly-named UK company is a different legal person and is not recorded here."
+  },
+  {
+   "name": "Accrington Surgical",
+   "verdict": "unresolved",
+   "why": "ACCRINGTON SURGICAL LTD (06046644) is an exact name match but its status is 'dissolved', not active. A company that is not trading must not be recorded as a live supplier, so no number is attached. TRADING STATUS TO CHECK BY HAND."
+  },
+  {
+   "name": "Accrington Surgical Inst. Suppliers",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ACCRINGTON SURGICAL INSTRUMENT SUPPLIERS LIMITED."
+  },
+  {
+   "name": "Accrington Surgical Instrument Suppliers Ltd",
+   "verdict": "candidate",
+   "number": "05980916",
+   "registered": "ACCRINGTON SURGICAL INSTRUMENT SUPPLIERS LIMITED",
+   "status": "active",
+   "incorporated": "2006-10-27"
+  },
+  {
+   "name": "Acumed Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ACUMED LTD."
+  },
+  {
+   "name": "Acurable Limited",
+   "verdict": "candidate",
+   "number": "10310661",
+   "registered": "ACURABLE LIMITED",
+   "status": "active",
+   "incorporated": "2016-08-03"
+  },
+  {
+   "name": "Acurable Ltd",
+   "verdict": "alias",
+   "aliasOf": "Acurable Limited",
+   "why": "Resolves to the same registered company (10310661) as 'Acurable Limited', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "Adler Ortho UK Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ADLER ORTHO U.K. LIMITED."
+  },
+  {
+   "name": "Aero Healthcare Ltd",
+   "verdict": "candidate",
+   "number": "06760143",
+   "registered": "AERO HEALTHCARE LTD",
+   "status": "active",
+   "incorporated": "2008-11-27"
+  },
+  {
+   "name": "Agito Medical A/S",
+   "verdict": "foreign",
+   "why": "The name carries a non-UK legal form, so no Companies House record is expected for the awarded entity. Any similarly-named UK company is a different legal person and is not recorded here."
+  },
+  {
+   "name": "Aidapt Bathrooms Ltd",
+   "verdict": "candidate",
+   "number": "02464054",
+   "registered": "AIDAPT BATHROOMS LIMITED",
+   "status": "active",
+   "incorporated": "1990-01-26"
+  },
+  {
+   "name": "Aidence",
+   "verdict": "candidate",
+   "number": "13057524",
+   "registered": "AIDENCE UK LTD",
+   "status": "active",
+   "incorporated": "2020-12-02"
+  },
+  {
+   "name": "Aidoc Medical Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: AAA MEDICAL LIMITED."
+  },
+  {
+   "name": "Airbon Ltd, trading as Smart Air UK",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: AIRBON LTD."
+  },
+  {
+   "name": "Alcado Limited",
+   "verdict": "candidate",
+   "number": "07446966",
+   "registered": "ALCADO LIMITED",
+   "status": "active",
+   "incorporated": "2010-11-22"
+  },
+  {
+   "name": "Alivecor Ltd",
+   "verdict": "candidate",
+   "number": "08476285",
+   "registered": "ALIVECOR LIMITED",
+   "status": "active",
+   "incorporated": "2013-04-05"
+  },
+  {
+   "name": "Altomed Limited",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (ALTOMED LIMITED 01243526; ALTOMED GROUP HOLDINGS LIMITED 16972791). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "AMG Medtech Ltd",
+   "verdict": "candidate",
+   "number": "12826540",
+   "registered": "AMG MEDTECH LIMITED",
+   "status": "active",
+   "incorporated": "2020-08-20"
+  },
+  {
+   "name": "Amoena UK Ltd",
+   "verdict": "candidate",
+   "number": "02325990",
+   "registered": "AMOENA (UK) LIMITED",
+   "status": "active",
+   "incorporated": "1988-12-07"
+  },
+  {
+   "name": "Amparo Prosthetics Ltd",
+   "verdict": "candidate",
+   "number": "13724212",
+   "registered": "AMPARO PROSTHETICS LTD",
+   "status": "active",
+   "incorporated": "2021-11-04"
+  },
+  {
+   "name": "AmRay UK",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: AMRAY GROUP LIMITED."
+  },
+  {
+   "name": "Andersen Caledonia",
+   "verdict": "alias",
+   "aliasOf": "Andersen Caledonia Ltd",
+   "why": "Resolves to the same registered company (SC171308) as 'Andersen Caledonia Ltd', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "Andersen Caledonia Ltd",
+   "verdict": "candidate",
+   "number": "SC171308",
+   "registered": "ANDERSEN CALEDONIA LIMITED",
+   "status": "active",
+   "incorporated": "1997-01-14"
+  },
+  {
+   "name": "Anika Therapeutics Ltd",
+   "verdict": "candidate",
+   "number": "11936143",
+   "registered": "ANIKA THERAPEUTICS LIMITED",
+   "status": "active",
+   "incorporated": "2019-04-09"
+  },
+  {
+   "name": "Anita UK Ltd",
+   "verdict": "candidate",
+   "number": "02908318",
+   "registered": "ANITA UK LIMITED",
+   "status": "active",
+   "incorporated": "1994-03-14"
+  },
+  {
+   "name": "APC Cardiovascular Ltd",
+   "verdict": "candidate",
+   "number": "02423606",
+   "registered": "APC CARDIOVASCULAR LIMITED",
+   "status": "active",
+   "incorporated": "1989-09-18"
+  },
+  {
+   "name": "Apos Medical UK Ltd",
+   "verdict": "candidate",
+   "number": "07405164",
+   "registered": "APOS MEDICAL UK LIMITED",
+   "status": "active",
+   "incorporated": "2010-10-12"
+  },
+  {
+   "name": "Apple Star Corp Limited",
+   "verdict": "candidate",
+   "number": "11016418",
+   "registered": "APPLE   STAR   CORP LTD",
+   "status": "active",
+   "incorporated": "2017-10-17"
+  },
+  {
+   "name": "APR Medtech Limited",
+   "verdict": "candidate",
+   "number": "09161476",
+   "registered": "APR MEDTECH LIMITED",
+   "status": "active",
+   "incorporated": "2014-08-05"
+  },
+  {
+   "name": "Aptvision Limited",
+   "verdict": "candidate",
+   "number": "10186242",
+   "registered": "APTVISION LIMITED",
+   "status": "active",
+   "incorporated": "2016-05-18"
+  },
+  {
+   "name": "AQLANE Medical BV",
+   "verdict": "foreign",
+   "why": "The name carries a non-UK legal form, so no Companies House record is expected for the awarded entity. Any similarly-named UK company is a different legal person and is not recorded here."
+  },
+  {
+   "name": "Aquilant Critical Care",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ACUTE & CRITICAL CARE EDUCATION LTD."
+  },
+  {
+   "name": "Aquilant Ltd Bd Bas Critical",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: AQUILANT LIMITED."
+  },
+  {
+   "name": "Architectural Wallsz (International) Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ARCHITECTURAL WALLSZ (INTERNATIONAL) LIMITED."
+  },
+  {
+   "name": "Arcomedical Infusion Ltd",
+   "verdict": "candidate",
+   "number": "02723545",
+   "registered": "ARCOMEDICAL INFUSION LIMITED",
+   "status": "active",
+   "incorporated": "1992-06-17"
+  },
+  {
+   "name": "Arden Orthotics Ltd",
+   "verdict": "candidate",
+   "number": "03365493",
+   "registered": "ARDEN ORTHOTICS LIMITED",
+   "status": "active",
+   "incorporated": "1997-05-06"
+  },
+  {
+   "name": "Ardo medical Limited",
+   "verdict": "candidate",
+   "number": "05419332",
+   "registered": "ARDO MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2005-04-08"
+  },
+  {
+   "name": "Ardo Medical Ltd",
+   "verdict": "alias",
+   "aliasOf": "Ardo medical Limited",
+   "why": "Resolves to the same registered company (05419332) as 'Ardo medical Limited', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "Arjo Hunteligh UK Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ARJO UK LIMITED."
+  },
+  {
+   "name": "Arthro Dynamik Ltd",
+   "verdict": "candidate",
+   "number": "08479540",
+   "registered": "ARTHRO DYNAMIK LTD",
+   "status": "active",
+   "incorporated": "2013-04-09"
+  },
+  {
+   "name": "Artivion UK Ltd",
+   "verdict": "candidate",
+   "number": "03837138",
+   "registered": "ARTIVION UK LTD",
+   "status": "active",
+   "incorporated": "1999-09-02"
+  },
+  {
+   "name": "Artivion UK Ltd (CryoLife Europa, Ltd)",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ARTIVION UK LTD."
+  },
+  {
+   "name": "Associated Optical Products",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ASSOCIATED DENTAL PRODUCTS LIMITED."
+  },
+  {
+   "name": "Assut UK LTD",
+   "verdict": "candidate",
+   "number": "05338676",
+   "registered": "ASSUT UK LIMITED",
+   "status": "active",
+   "incorporated": "2005-01-21"
+  },
+  {
+   "name": "Assut UK Ltd",
+   "verdict": "alias",
+   "aliasOf": "Assut UK LTD",
+   "why": "Resolves to the same registered company (05338676) as 'Assut UK LTD', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "Astric Medical Ltd",
+   "verdict": "candidate",
+   "number": "07184648",
+   "registered": "ASTRIC MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2010-03-10"
+  },
+  {
+   "name": "Atom Medical Corporation UK ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ATOM MEDICAL CORPORATION UK LIMITED."
+  },
+  {
+   "name": "Atos Medical (UK)",
+   "verdict": "candidate",
+   "number": "04206141",
+   "registered": "ATOS MEDICAL UK LIMITED",
+   "status": "active",
+   "incorporated": "2001-04-26"
+  },
+  {
+   "name": "Audit Data",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: AUDIT DATA HUB LTD."
+  },
+  {
+   "name": "Avidity Science Limited",
+   "verdict": "candidate",
+   "number": "03482000",
+   "registered": "AVIDITY SCIENCE LIMITED",
+   "status": "active",
+   "incorporated": "1997-12-16"
+  },
+  {
+   "name": "B.N.O.S Meditech Ltd",
+   "verdict": "candidate",
+   "number": "02368331",
+   "registered": "B.N.O.S. MEDITECH LIMITED",
+   "status": "active",
+   "incorporated": "1989-04-04"
+  },
+  {
+   "name": "Babease Limited",
+   "verdict": "unresolved",
+   "why": "BABEASE LIMITED (07473497) is an exact name match but its status is 'dissolved', not active. A company that is not trading must not be recorded as a live supplier, so no number is attached. TRADING STATUS TO CHECK BY HAND."
+  },
+  {
+   "name": "Bailey Instruments",
+   "verdict": "alias",
+   "aliasOf": "Bailey Instruments Ltd",
+   "why": "Resolves to the same registered company (02332419) as 'Bailey Instruments Ltd', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "Bailey Instruments Ltd",
+   "verdict": "candidate",
+   "number": "02332419",
+   "registered": "BAILEY INSTRUMENTS LTD",
+   "status": "active",
+   "incorporated": "1989-01-03"
+  },
+  {
+   "name": "Bar Code Data Ltd",
+   "verdict": "candidate",
+   "number": "02463305",
+   "registered": "BAR CODE DATA LIMITED",
+   "status": "active",
+   "incorporated": "1990-01-25"
+  },
+  {
+   "name": "Bayer Public Limited Company",
+   "verdict": "candidate",
+   "number": "00935048",
+   "registered": "BAYER PUBLIC LIMITED COMPANY",
+   "status": "active",
+   "incorporated": "1968-07-08"
+  },
+  {
+   "name": "Beagle Orthopaedic Ltd",
+   "verdict": "candidate",
+   "number": "06593518",
+   "registered": "BEAGLE ORTHOPAEDIC LIMITED",
+   "status": "active",
+   "incorporated": "2008-05-14"
+  },
+  {
+   "name": "Becton Dickinson Uk Ltd Ed Wokingham",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: BECTON DICKINSON (CME) U.K. LIMITED."
+  },
+  {
+   "name": "Becton Dickinson Uk Ltd Stock Oxford",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: BECTON DICKINSON (CME) U.K. LIMITED."
+  },
+  {
+   "name": "Bender UK Ltd",
+   "verdict": "candidate",
+   "number": "03294339",
+   "registered": "BENDER UK LIMITED",
+   "status": "active",
+   "incorporated": "1996-12-18"
+  },
+  {
+   "name": "Benefoot UK Ltd trading as BeneCare Medical",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ESA (UK) TRADING AS ARDAKAN FLAT GLASS LTD.."
+  },
+  {
+   "name": "Benmor Medical",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: BENMOR MEDICAL (UK) LIMITED."
+  },
+  {
+   "name": "Berry BPI Recycled Products",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: EVOLVE RECYCLED PRODUCTS LTD."
+  },
+  {
+   "name": "Bespoke Prosthetics Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: BESPOKE PROSTHETICS & ORTHOTICS LTD."
+  },
+  {
+   "name": "Bidfood Direct",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: BIDFOOD LIMITED."
+  },
+  {
+   "name": "Biedermann Motech International LTD",
+   "verdict": "candidate",
+   "number": "09466785",
+   "registered": "BIEDERMANN MOTECH INTERNATIONAL LIMITED",
+   "status": "active",
+   "incorporated": "2015-03-03"
+  },
+  {
+   "name": "Biocomposites Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (BIOCOMPOSITES LIMITED 03291943; BIOCOMPOSITES INTERNATIONAL LIMITED 14189110; BIOCOMPOSITES (UK) LIMITED 03854291). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Bioguard Hygiene Solutions",
+   "verdict": "unresolved",
+   "why": "BIOGUARD HYGIENE SOLUTIONS LIMITED (04709907) is an exact name match but its status is 'dissolved', not active. A company that is not trading must not be recorded as a live supplier, so no number is attached. TRADING STATUS TO CHECK BY HAND."
+  },
+  {
+   "name": "Biomet 3i UK, Ltd (ZimVie)",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ZIMVIE UK LIMITED."
+  },
+  {
+   "name": "Bioventus Cooperatief U.A",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: OPZOON (NL) TECHNOLOGY COOPERATIEF U.A.."
+  },
+  {
+   "name": "Birmingham Optical Group",
+   "verdict": "candidate",
+   "number": "01038848",
+   "registered": "BIRMINGHAM OPTICAL GROUP LIMITED",
+   "status": "active",
+   "incorporated": "1972-01-19"
+  },
+  {
+   "name": "Birmingham Orthotic Services",
+   "verdict": "candidate",
+   "number": "12086348",
+   "registered": "BIRMINGHAM ORTHOTIC SERVICES LTD",
+   "status": "active",
+   "incorporated": "2019-07-04"
+  },
+  {
+   "name": "Blink Medical",
+   "verdict": "alias",
+   "aliasOf": "Blink Medical Limited",
+   "why": "Resolves to the same registered company (05084548) as 'Blink Medical Limited', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "Blink Medical Limited",
+   "verdict": "candidate",
+   "number": "05084548",
+   "registered": "BLINK MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2004-03-25"
+  },
+  {
+   "name": "Blink Medical Ltd",
+   "verdict": "alias",
+   "aliasOf": "Blink Medical Limited",
+   "why": "Resolves to the same registered company (05084548) as 'Blink Medical Limited', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "BNP Paribas Leasing Solutions Limited",
+   "verdict": "candidate",
+   "number": "00901225",
+   "registered": "BNP PARIBAS LEASING SOLUTIONS LIMITED",
+   "status": "active",
+   "incorporated": "1967-03-17"
+  },
+  {
+   "name": "Bodywise (UK) Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (BODYWISE (UK) LIMITED 02379973; BODYWISE LIMITED 01490051). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Bonesupport",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: BONE SUPPORT UK LTD."
+  },
+  {
+   "name": "Bracco UK Limited",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (BRACCO UK LIMITED 04087007; BRACCO GB LIMITED 04126589). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Brandon Medical Company Ltd",
+   "verdict": "candidate",
+   "number": "02827189",
+   "registered": "BRANDON MEDICAL COMPANY LIMITED",
+   "status": "active",
+   "incorporated": "1993-06-15"
+  },
+  {
+   "name": "Bray Group Limited",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (BRAY GROUP LIMITED 01396401; BRAY GROUP HOLDINGS LIMITED 16325930). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Bray Group Ltd (Bray Healthcare)",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: BRAY CONSTRUCTION CO. LTD.."
+  },
+  {
+   "name": "Breas Medical Ltd",
+   "verdict": "candidate",
+   "number": "07190611",
+   "registered": "BREAS MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2010-03-16"
+  },
+  {
+   "name": "Brenmoor Ltd",
+   "verdict": "candidate",
+   "number": "05445872",
+   "registered": "BRENMOOR LTD",
+   "status": "active",
+   "incorporated": "2005-05-06"
+  },
+  {
+   "name": "Bridea Medical B.V",
+   "verdict": "foreign",
+   "why": "The name carries a non-UK legal form, so no Companies House record is expected for the awarded entity. Any similarly-named UK company is a different legal person and is not recorded here."
+  },
+  {
+   "name": "Bridgehead Software",
+   "verdict": "candidate",
+   "number": "02962777",
+   "registered": "BRIDGEHEAD SOFTWARE LIMITED",
+   "status": "active",
+   "incorporated": "1994-08-26"
+  },
+  {
+   "name": "Brighthedge Ltd T/A Summit Medical and Scientific",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ALOEALOE MEDICAL AND SCIENTIFIC WRITING LTD."
+  },
+  {
+   "name": "Broomwell Healthwatch",
+   "verdict": "candidate",
+   "number": "05203203",
+   "registered": "BROOMWELL HEALTHWATCH LIMITED",
+   "status": "active",
+   "incorporated": "2004-08-11"
+  },
+  {
+   "name": "BXT Accelyon Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ACCELYON LTD."
+  },
+  {
+   "name": "BXTAccelyon",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (BXTACCELYON LIMITED 08252168; BXTACCELYON GROUP LIMITED 17307376). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "C&S Footwear Adaptions Ltd",
+   "verdict": "candidate",
+   "number": "04438620",
+   "registered": "C & S FOOTWEAR ADAPTIONS LIMITED",
+   "status": "active",
+   "incorporated": "2002-05-14"
+  },
+  {
+   "name": "Cairn Technology Limited",
+   "verdict": "candidate",
+   "number": "03715724",
+   "registered": "CAIRN TECHNOLOGY LIMITED",
+   "status": "active",
+   "incorporated": "1999-02-18"
+  },
+  {
+   "name": "Cambridge Heartwear",
+   "verdict": "candidate",
+   "number": "09370927",
+   "registered": "CAMBRIDGE HEARTWEAR LIMITED",
+   "status": "active",
+   "incorporated": "2014-12-31"
+  },
+  {
+   "name": "Canonbury Products Limited",
+   "verdict": "candidate",
+   "number": "01703228",
+   "registered": "CANONBURY PRODUCTS LIMITED",
+   "status": "active",
+   "incorporated": "1983-03-01"
+  },
+  {
+   "name": "CardioScan Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: CARDIOSCAN LTD."
+  },
+  {
+   "name": "Cargo Services Far East Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: FAR EAST CARGO LINE LIMITED."
+  },
+  {
+   "name": "Carleton Medical",
+   "verdict": "candidate",
+   "number": "06614929",
+   "registered": "CARLETON MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2008-06-09"
+  },
+  {
+   "name": "Carrow Medical Limited",
+   "verdict": "candidate",
+   "number": "07374783",
+   "registered": "CARROW MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2010-09-14"
+  },
+  {
+   "name": "Cavagna Group UK",
+   "verdict": "candidate",
+   "number": "03400444",
+   "registered": "CAVAGNA GROUP UK LIMITED",
+   "status": "active",
+   "incorporated": "1997-07-08"
+  },
+  {
+   "name": "Ccmed Ltd",
+   "verdict": "candidate",
+   "number": "04028039",
+   "registered": "CCMED LIMITED",
+   "status": "active",
+   "incorporated": "2000-07-06"
+  },
+  {
+   "name": "Ceannaire Medical",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: AAA MEDICAL LIMITED."
+  },
+  {
+   "name": "Cefndy Healthcare",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: CEFNDY ENABLES LTD."
+  },
+  {
+   "name": "Cenobiologics Ltd",
+   "verdict": "candidate",
+   "number": "07528157",
+   "registered": "CENOBIOLOGICS LTD",
+   "status": "active",
+   "incorporated": "2011-02-14"
+  },
+  {
+   "name": "Central Management Catalogue Agency UK Ltd T/A CMCA(UK)",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: CENTRAL MANAGEMENT CATALOGUE AGENCY (UK) LIMITED."
+  },
+  {
+   "name": "CGM Lab",
+   "verdict": "unresolved",
+   "why": "CGM LAB LIMITED (06007624) is an exact name match but its status is 'dissolved', not active. A company that is not trading must not be recorded as a live supplier, so no number is attached. TRADING STATUS TO CHECK BY HAND."
+  },
+  {
+   "name": "Chalice Medical Ltd",
+   "verdict": "candidate",
+   "number": "03625972",
+   "registered": "CHALICE MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "1998-09-03"
+  },
+  {
+   "name": "Chaneco",
+   "verdict": "candidate",
+   "number": "11511502",
+   "registered": "CHANECO LIMITED",
+   "status": "active",
+   "incorporated": "2018-08-10"
+  },
+  {
+   "name": "Charter Kontron Limited",
+   "verdict": "candidate",
+   "number": "03698371",
+   "registered": "CHARTER-KONTRON LIMITED",
+   "status": "active",
+   "incorporated": "1999-01-20"
+  },
+  {
+   "name": "Chemical Intelligence Limited",
+   "verdict": "candidate",
+   "number": "08187340",
+   "registered": "CHEMICAL INTELLIGENCE LIMITED",
+   "status": "active",
+   "incorporated": "2012-08-22"
+  },
+  {
+   "name": "CHG Meridian UK Limited",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (CHG-MERIDIAN UK LIMITED 01276016; CHG-MERIDIAN (HOLDINGS) UK LIMITED 04040776). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Chiltern Invadex (UK) Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: CHILTERN INVADEX (UK) LIMITED."
+  },
+  {
+   "name": "Circle Cardiovascular Imaging UK Ltd",
+   "verdict": "candidate",
+   "number": "09441230",
+   "registered": "CIRCLE CARDIOVASCULAR IMAGING UK LTD",
+   "status": "active",
+   "incorporated": "2015-02-16"
+  },
+  {
+   "name": "CK Facilities Management Ltd",
+   "verdict": "candidate",
+   "number": "04155293",
+   "registered": "CK FACILITIES MANAGEMENT LTD",
+   "status": "active",
+   "incorporated": "2001-02-07"
+  },
+  {
+   "name": "Clarity Pharma",
+   "verdict": "candidate",
+   "number": "03657934",
+   "registered": "CLARITY PHARMA LTD",
+   "status": "active",
+   "incorporated": "1998-10-28"
+  },
+  {
+   "name": "ClearHeal LTD",
+   "verdict": "candidate",
+   "number": "14267061",
+   "registered": "CLEARHEAL LTD",
+   "status": "active",
+   "incorporated": "2022-08-01"
+  },
+  {
+   "name": "Clinisys Solutions Limited",
+   "verdict": "candidate",
+   "number": "03477318",
+   "registered": "CLINISYS SOLUTIONS LIMITED",
+   "status": "active",
+   "incorporated": "1997-12-08"
+  },
+  {
+   "name": "Clonallon Laboratories",
+   "verdict": "alias",
+   "aliasOf": "Clonallon Laboratories Limited",
+   "why": "Resolves to the same registered company (NI037892) as 'Clonallon Laboratories Limited', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "Clonallon Laboratories Limited",
+   "verdict": "candidate",
+   "number": "NI037892",
+   "registered": "CLONALLON LABORATORIES LTD",
+   "status": "active",
+   "incorporated": "2000-02-11"
+  },
+  {
+   "name": "Compleo Health Limited",
+   "verdict": "candidate",
+   "number": "13226032",
+   "registered": "COMPLEO HEALTH LIMITED",
+   "status": "active",
+   "incorporated": "2021-02-25"
+  },
+  {
+   "name": "Consolor Ltd",
+   "verdict": "candidate",
+   "number": "05811150",
+   "registered": "CONSOLOR LIMITED",
+   "status": "active",
+   "incorporated": "2006-05-09"
+  },
+  {
+   "name": "Continuum Scotland Ltd",
+   "verdict": "candidate",
+   "number": "SC177228",
+   "registered": "CONTINUUM (SCOTLAND) LIMITED",
+   "status": "active",
+   "incorporated": "1997-07-14"
+  },
+  {
+   "name": "Contura Orthopaedics Ltd",
+   "verdict": "candidate",
+   "number": "13119470",
+   "registered": "CONTURA ORTHOPAEDICS LIMITED",
+   "status": "active",
+   "incorporated": "2021-01-07"
+  },
+  {
+   "name": "Corcym UK (Holding) Ltd",
+   "verdict": "candidate",
+   "number": "13139307",
+   "registered": "CORCYM UK (HOLDING) LIMITED",
+   "status": "active",
+   "incorporated": "2021-01-18"
+  },
+  {
+   "name": "CorMed-DX",
+   "verdict": "candidate",
+   "number": "14129431",
+   "registered": "CORMED-DX LTD",
+   "status": "active",
+   "incorporated": "2022-05-24"
+  },
+  {
+   "name": "Cortrium ApS",
+   "verdict": "foreign",
+   "why": "The name carries a non-UK legal form, so no Companies House record is expected for the awarded entity. Any similarly-named UK company is a different legal person and is not recorded here."
+  },
+  {
+   "name": "Cosium Healthcare",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: COSIUM UK LIMITED."
+  },
+  {
+   "name": "crxcompression.com",
+   "verdict": "excluded",
+   "why": "A website address captured where the supplier name should be, on Vascular Therapy and Associated Products. The supplier is real; the string is not its name. Excluded from the backfill and reported upstream: scripts/refresh_frameworks.py is what should stop capturing it."
+  },
+  {
+   "name": "D S Medical",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: D S MEDICAL (DERBY) LIMITED."
+  },
+  {
+   "name": "Dacey LTD",
+   "verdict": "candidate",
+   "number": "02100725",
+   "registered": "DACEY LTD",
+   "status": "active",
+   "incorporated": "1987-02-17"
+  },
+  {
+   "name": "Dakota Integrated Solutions Limited",
+   "verdict": "candidate",
+   "number": "04466919",
+   "registered": "DAKOTA INTEGRATED SOLUTIONS LIMITED",
+   "status": "active",
+   "incorporated": "2002-06-21"
+  },
+  {
+   "name": "Danone Nutricia Early Life Nutrition",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: EARLY LIFE NUTRITION NETWORK."
+  },
+  {
+   "name": "Daro Group Limited",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (DARO GROUP LIMITED 06492282; DARO GROUP INTERNATIONAL LIMITED 04010490; DARO LIMITED 01718891). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Datesand Group",
+   "verdict": "candidate",
+   "number": "01488697",
+   "registered": "DATESAND LIMITED",
+   "status": "active",
+   "incorporated": "1980-04-01"
+  },
+  {
+   "name": "Dawsongroup Finance Limited",
+   "verdict": "candidate",
+   "number": "03345518",
+   "registered": "DAWSONGROUP FINANCE LIMITED",
+   "status": "active",
+   "incorporated": "1997-04-04"
+  },
+  {
+   "name": "Daybreak Medical Ltd",
+   "verdict": "candidate",
+   "number": "SC459517",
+   "registered": "DAYBREAK MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2013-09-19"
+  },
+  {
+   "name": "Daylong Direct",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: DAYLONG LIMITED."
+  },
+  {
+   "name": "DCL Hearing Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: D C L HEARING LIMITED."
+  },
+  {
+   "name": "DDC Dolphin Limited",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (DDC DOLPHIN LIMITED 02643023; DDC DOLPHIN HOLDINGS LIMITED 08065650; DDC DOLPHIN INTERNATIONAL LIMITED 08067203). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "De Lage Landen Leasing Limited",
+   "verdict": "candidate",
+   "number": "02380043",
+   "registered": "DE LAGE LANDEN LEASING LIMITED",
+   "status": "active",
+   "incorporated": "1989-05-04"
+  },
+  {
+   "name": "De Smit Medical Systems Limited",
+   "verdict": "candidate",
+   "number": "06585345",
+   "registered": "DE SMIT MEDICAL SYSTEMS LIMITED",
+   "status": "active",
+   "incorporated": "2008-05-06"
+  },
+  {
+   "name": "De Soutter Medical Ltd",
+   "verdict": "candidate",
+   "number": "03164365",
+   "registered": "DE SOUTTER MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "1996-02-26"
+  },
+  {
+   "name": "Decree Thermo",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: DECLARE AND DECREE PVT LTD."
+  },
+  {
+   "name": "DGT Services Ltd",
+   "verdict": "candidate",
+   "number": "03519531",
+   "registered": "DGT SERVICES LIMITED",
+   "status": "active",
+   "incorporated": "1998-02-27"
+  },
+  {
+   "name": "DH2 Solutions Ltd",
+   "verdict": "candidate",
+   "number": "08808540",
+   "registered": "DH2 SOLUTIONS LTD",
+   "status": "active",
+   "incorporated": "2013-12-10"
+  },
+  {
+   "name": "Dpek Healthcare Ltd",
+   "verdict": "candidate",
+   "number": "08584474",
+   "registered": "DPEK HEALTHCARE LTD.",
+   "status": "active",
+   "incorporated": "2013-06-25"
+  },
+  {
+   "name": "DTR Medical",
+   "verdict": "alias",
+   "aliasOf": "DTR Medical Ltd",
+   "why": "Resolves to the same registered company (04394278) as 'DTR Medical Ltd', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "DTR Medical Ltd",
+   "verdict": "candidate",
+   "number": "04394278",
+   "registered": "DTR MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2002-03-14"
+  },
+  {
+   "name": "Duckworth & Kent Ltd",
+   "verdict": "candidate",
+   "number": "00620074",
+   "registered": "DUCKWORTH AND KENT LIMITED",
+   "status": "active",
+   "incorporated": "1959-01-30"
+  },
+  {
+   "name": "Durbin Plc",
+   "verdict": "candidate",
+   "number": "03626868",
+   "registered": "DURBIN PLC",
+   "status": "active",
+   "incorporated": "1998-09-04"
+  },
+  {
+   "name": "Dynamic Metrics Ltd",
+   "verdict": "candidate",
+   "number": "10589334",
+   "registered": "DYNAMIC METRICS LIMITED",
+   "status": "active",
+   "incorporated": "2017-01-30"
+  },
+  {
+   "name": "E&E MEDICAL SUPPLIES LIMITED",
+   "verdict": "candidate",
+   "number": "09990249",
+   "registered": "E&E MEDICAL SUPPLIES LTD",
+   "status": "active",
+   "incorporated": "2016-02-05"
+  },
+  {
+   "name": "Ebrington (NI) Limited",
+   "verdict": "candidate",
+   "number": "NI604898",
+   "registered": "EBRINGTON (NI) LTD",
+   "status": "active",
+   "incorporated": "2010-10-27"
+  },
+  {
+   "name": "Ebrington (Ni) Ltd",
+   "verdict": "alias",
+   "aliasOf": "Ebrington (NI) Limited",
+   "why": "Resolves to the same registered company (NI604898) as 'Ebrington (NI) Limited', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "Echosens",
+   "verdict": "candidate",
+   "number": "11945055",
+   "registered": "ECHOSENS UK LIMITED",
+   "status": "active",
+   "incorporated": "2019-04-13"
+  },
+  {
+   "name": "Ecohydra Technologies Ltd",
+   "verdict": "unresolved",
+   "why": "ECOHYDRA TECHNOLOGIES LIMITED (05248154) is an exact name match but its status is 'liquidation', not active. A company that is not trading must not be recorded as a live supplier, so no number is attached. TRADING STATUS TO CHECK BY HAND."
+  },
+  {
+   "name": "Eden Medical",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (EDEN MEDICAL LIMITED SC363425; EDEN MEDICAL (UK) LIMITED SC345525). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Eden Medical (UK) Limited",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (EDEN MEDICAL (UK) LIMITED SC345525; EDEN MEDICAL LIMITED SC363425). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Edge Medical Ltd",
+   "verdict": "candidate",
+   "number": "07884317",
+   "registered": "EDGE MEDICAL LTD",
+   "status": "active",
+   "incorporated": "2011-12-16"
+  },
+  {
+   "name": "Electro Spyres Healthcare Limited",
+   "verdict": "candidate",
+   "number": "12378357",
+   "registered": "ELECTRO SPYRES HEALTHCARE LTD",
+   "status": "active",
+   "incorporated": "2019-12-27"
+  },
+  {
+   "name": "embecta UK Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: EMBECTA U.K. LIMITED."
+  },
+  {
+   "name": "Emmat Medical",
+   "verdict": "alias",
+   "aliasOf": "Emmat Medical Ltd",
+   "why": "The same name as 'Emmat Medical Ltd', which the briefs also name, differing only in spelling or legal form. One supplier, not two. Merged by rule R8."
+  },
+  {
+   "name": "Emmat Medical Ltd",
+   "verdict": "unresolved",
+   "why": "EMMAT MEDICAL LIMITED (03621176) is an exact name match but its status is 'dissolved', not active. A company that is not trading must not be recorded as a live supplier, so no number is attached. TRADING STATUS TO CHECK BY HAND."
+  },
+  {
+   "name": "Enable Access Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (ENABLE ACCESS LIMITED 10945974; ENABLE ACCESS (HOLDINGS) LIMITED 09094707). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Endosoft Limited",
+   "verdict": "candidate",
+   "number": "05980793",
+   "registered": "ENDOSOFT LIMITED",
+   "status": "active",
+   "incorporated": "2006-10-27"
+  },
+  {
+   "name": "Energizer Group Ltd",
+   "verdict": "candidate",
+   "number": "03937798",
+   "registered": "ENERGIZER GROUP LIMITED",
+   "status": "active",
+   "incorporated": "2000-02-25"
+  },
+  {
+   "name": "Enteral Access Technologies Ltd (previously named on the framework as Nasogastric Feeding Solutions Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ENTERAL ACCESS TECHNOLOGIES LTD."
+  },
+  {
+   "name": "Envirogen Water Technologies Limited",
+   "verdict": "candidate",
+   "number": "03289389",
+   "registered": "ENVIROGEN WATER TECHNOLOGIES LIMITED",
+   "status": "active",
+   "incorporated": "1996-12-09"
+  },
+  {
+   "name": "EOS Imaging",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: AMC EOS LIMITED."
+  },
+  {
+   "name": "Ergea UK and Ireland Limited (Althea UK and Ireland Limited)",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ERGEA UK AND IRELAND LIMITED."
+  },
+  {
+   "name": "Espere Healthcare Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ESPERE LEADERSHIP LIMITED."
+  },
+  {
+   "name": "Espère Healthcare Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: A.A.A.D HEALTHCARE LIMITED."
+  },
+  {
+   "name": "Essential Healthcare Solutions (UK) Ltd",
+   "verdict": "candidate",
+   "number": "04991941",
+   "registered": "ESSENTIAL HEALTHCARE SOLUTIONS (UK) LIMITED",
+   "status": "active",
+   "incorporated": "2003-12-11"
+  },
+  {
+   "name": "Essity UK Ltd - Health & Medical Solutions",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: HEALTH & MEDICAL INTELLIGENT SOLUTIONS GROUP LTD."
+  },
+  {
+   "name": "Essity UK TENA Heath & Medical",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ESSITY HOLDING UK LIMITED."
+  },
+  {
+   "name": "Euro Packaging Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: EURO PACKAGING UK LIMITED."
+  },
+  {
+   "name": "Europlaz Technologies Ltd",
+   "verdict": "candidate",
+   "number": "04046384",
+   "registered": "EUROPLAZ TECHNOLOGIES LTD",
+   "status": "active",
+   "incorporated": "2000-08-03"
+  },
+  {
+   "name": "Eurospine",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words."
+  },
+  {
+   "name": "ExpHand Prosthetics Ltd",
+   "verdict": "candidate",
+   "number": "11443633",
+   "registered": "EXPHAND PROSTHETICS LIMITED",
+   "status": "active",
+   "incorporated": "2018-07-02"
+  },
+  {
+   "name": "Express Diagnostics Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: EXPRESS DIAGNOSTICS LIMITED."
+  },
+  {
+   "name": "EyeTech International Ltd",
+   "verdict": "candidate",
+   "number": "04991848",
+   "registered": "EYETECH LTD",
+   "status": "active",
+   "incorporated": "2003-12-10"
+  },
+  {
+   "name": "EziDrops Ltd",
+   "verdict": "candidate",
+   "number": "11896998",
+   "registered": "EZIDROPS LTD",
+   "status": "active",
+   "incorporated": "2019-03-21"
+  },
+  {
+   "name": "Far From Surgical Solutions",
+   "verdict": "candidate",
+   "number": "12333908",
+   "registered": "FAR FROM SURGICAL SOLUTIONS LTD",
+   "status": "active",
+   "incorporated": "2019-11-26"
+  },
+  {
+   "name": "Feedback Medical Limited",
+   "verdict": "candidate",
+   "number": "04025026",
+   "registered": "FEEDBACK MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2000-07-03"
+  },
+  {
+   "name": "FH Ortho Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: AAA ALEX FH LTD."
+  },
+  {
+   "name": "Finsen Technologies Limited",
+   "verdict": "candidate",
+   "number": "08260223",
+   "registered": "FINSEN TECHNOLOGIES LIMITED",
+   "status": "active",
+   "incorporated": "2012-10-19"
+  },
+  {
+   "name": "Firstkind Ltd",
+   "verdict": "candidate",
+   "number": "07161626",
+   "registered": "FIRSTKIND LTD",
+   "status": "active",
+   "incorporated": "2010-02-18"
+  },
+  {
+   "name": "Fleischhacker GmbH & Co. KG",
+   "verdict": "foreign",
+   "why": "The name carries a non-UK legal form, so no Companies House record is expected for the awarded entity. Any similarly-named UK company is a different legal person and is not recorded here."
+  },
+  {
+   "name": "Footlabs Ltd",
+   "verdict": "candidate",
+   "number": "06670099",
+   "registered": "FOOTLABS LIMITED",
+   "status": "active",
+   "incorporated": "2008-08-12"
+  },
+  {
+   "name": "FormAL Group Ltd",
+   "verdict": "candidate",
+   "number": "16963839",
+   "registered": "FORMAL GROUP HOLDINGS LTD",
+   "status": "active",
+   "incorporated": "2026-01-14"
+  },
+  {
+   "name": "Fulbourn Medical",
+   "verdict": "candidate",
+   "number": "02764966",
+   "registered": "FULBOURN MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "1992-11-16"
+  },
+  {
+   "name": "Full Support Healthcare Ltd",
+   "verdict": "candidate",
+   "number": "04370473",
+   "registered": "FULL SUPPORT HEALTHCARE LIMITED",
+   "status": "active",
+   "incorporated": "2002-02-08"
+  },
+  {
+   "name": "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: HEALTH & SAFETY WORKS LIMITED."
+  },
+  {
+   "name": "G S Medical",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: G.S. MEDICAL SOLUTIONS LIMITED."
+  },
+  {
+   "name": "GAP Medical Solutions Ltd",
+   "verdict": "candidate",
+   "number": "14916247",
+   "registered": "GAP MEDICAL SOLUTIONS LIMITED",
+   "status": "active",
+   "incorporated": "2023-06-05"
+  },
+  {
+   "name": "Gardamed Ltd - Mego Afek",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: GARDAMED LIMITED."
+  },
+  {
+   "name": "Gce Group Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: GCE-GROUP B.V LTD."
+  },
+  {
+   "name": "GDP Compliance Ltd",
+   "verdict": "candidate",
+   "number": "11082753",
+   "registered": "GDP COMPLIANCE LTD",
+   "status": "active",
+   "incorporated": "2017-11-27"
+  },
+  {
+   "name": "GE Capital Equipment Finance",
+   "verdict": "unresolved",
+   "why": "GE CAPITAL EQUIPMENT FINANCE HOLDINGS (02069687) is an exact name match but its status is 'dissolved', not active. A company that is not trading must not be recorded as a live supplier, so no number is attached. TRADING STATUS TO CHECK BY HAND."
+  },
+  {
+   "name": "Gen X Medicare",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: GENX MEDICARE LTD."
+  },
+  {
+   "name": "Gener8 Spaces Ltd",
+   "verdict": "candidate",
+   "number": "08901944",
+   "registered": "GENER8 SPACES LIMITED",
+   "status": "active",
+   "incorporated": "2014-02-19"
+  },
+  {
+   "name": "GI UK Medical Ltd (Duomed)",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: DUOMED MEDICAL UK LIMITED."
+  },
+  {
+   "name": "Global Life Sciences Solutions Operations UK Ltd",
+   "verdict": "candidate",
+   "number": "12063780",
+   "registered": "GLOBAL LIFE SCIENCES SOLUTIONS OPERATIONS UK LTD",
+   "status": "active",
+   "incorporated": "2019-06-21"
+  },
+  {
+   "name": "GM Instruments",
+   "verdict": "candidate",
+   "number": "SC135969",
+   "registered": "GM INSTRUMENTS LIMITED",
+   "status": "active",
+   "incorporated": "1992-01-16"
+  },
+  {
+   "name": "Grafton Optical Company Limited",
+   "verdict": "candidate",
+   "number": "00527806",
+   "registered": "GRAFTON OPTICAL COMPANY LIMITED",
+   "status": "active",
+   "incorporated": "1954-01-07"
+  },
+  {
+   "name": "Greenbone Spa",
+   "verdict": "foreign",
+   "why": "The name carries a non-UK legal form, so no Companies House record is expected for the awarded entity. Any similarly-named UK company is a different legal person and is not recorded here."
+  },
+  {
+   "name": "Griffiths and Neilson Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: S J NEILSON SAWMILL AND BIO-MASS LIMITED."
+  },
+  {
+   "name": "Grosvenor Contracts London Ltd",
+   "verdict": "candidate",
+   "number": "04240366",
+   "registered": "GROSVENOR CONTRACTS (LONDON) LIMITED",
+   "status": "active",
+   "incorporated": "2001-06-25"
+  },
+  {
+   "name": "GTA (UK) Ltd",
+   "verdict": "candidate",
+   "number": "04343192",
+   "registered": "GTA (UK) LTD",
+   "status": "active",
+   "incorporated": "2001-12-19"
+  },
+  {
+   "name": "Guerbet Laboratories Limited",
+   "verdict": "candidate",
+   "number": "02940474",
+   "registered": "GUERBET LABORATORIES LIMITED",
+   "status": "active",
+   "incorporated": "1994-06-20"
+  },
+  {
+   "name": "Guymark",
+   "verdict": "candidate",
+   "number": "03934847",
+   "registered": "GUYMARK UK LIMITED",
+   "status": "active",
+   "incorporated": "2000-02-28"
+  },
+  {
+   "name": "Gvs Filter Technology UK Ltd",
+   "verdict": "candidate",
+   "number": "02647901",
+   "registered": "GVS FILTER TECHNOLOGY UK LTD",
+   "status": "active",
+   "incorporated": "1991-09-23"
+  },
+  {
+   "name": "H4 Medical Ltd",
+   "verdict": "candidate",
+   "number": "07142354",
+   "registered": "H4 MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2010-02-02"
+  },
+  {
+   "name": "Hamilton Sales And Service UK Ltd",
+   "verdict": "candidate",
+   "number": "02188200",
+   "registered": "HAMILTON SALES & SERVICE UK LTD",
+   "status": "active",
+   "incorporated": "1987-11-03"
+  },
+  {
+   "name": "Hanson Instruments Ltd",
+   "verdict": "candidate",
+   "number": "04645761",
+   "registered": "HANSON INSTRUMENTS LIMITED",
+   "status": "active",
+   "incorporated": "2003-01-23"
+  },
+  {
+   "name": "HD Clinical Ltd",
+   "verdict": "candidate",
+   "number": "05436117",
+   "registered": "HD CLINICAL LIMITED",
+   "status": "active",
+   "incorporated": "2005-04-26"
+  },
+  {
+   "name": "Health Edge Solutions Ltd",
+   "verdict": "candidate",
+   "number": "03244013",
+   "registered": "HEALTH EDGE SOLUTIONS LIMITED",
+   "status": "active",
+   "incorporated": "1996-08-30"
+  },
+  {
+   "name": "Health Net Connections Ltd",
+   "verdict": "candidate",
+   "number": "06777778",
+   "registered": "HEALTH NET CONNECTIONS LIMITED",
+   "status": "active",
+   "incorporated": "2008-12-21"
+  },
+  {
+   "name": "Heartflow UK Ltd",
+   "verdict": "candidate",
+   "number": "16939933",
+   "registered": "HEARTFLOW LTD",
+   "status": "active",
+   "incorporated": "2026-01-02"
+  },
+  {
+   "name": "Helapet Ltd",
+   "verdict": "candidate",
+   "number": "01787363",
+   "registered": "HELAPET LIMITED",
+   "status": "active",
+   "incorporated": "1984-01-31"
+  },
+  {
+   "name": "Henry Schein UK Holdaigs Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: HENRY SCHEIN ONE UK LIMITED."
+  },
+  {
+   "name": "Henry Schien Medical",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: HENRY CUNNINGHAM MEDICAL LTD."
+  },
+  {
+   "name": "Hermes Medical Solutions Ltd",
+   "verdict": "candidate",
+   "number": "02044915",
+   "registered": "HERMES MEDICAL SOLUTIONS LIMITED",
+   "status": "active",
+   "incorporated": "1986-08-08"
+  },
+  {
+   "name": "Hexarad",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: HEXARAD GROUP LIMITED."
+  },
+  {
+   "name": "Hill-rom - now part of Baxter",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ALAN BAXTER PARTNERSHIP LLP."
+  },
+  {
+   "name": "HiPP UK Ltd",
+   "verdict": "candidate",
+   "number": "04498995",
+   "registered": "HIPP UK LIMITED",
+   "status": "active",
+   "incorporated": "2002-07-30"
+  },
+  {
+   "name": "HistoSonics",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words."
+  },
+  {
+   "name": "Hitachi Medical Systems UK Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: HITACHI RAIL SYSTEMS FRANCE UK BRANCH."
+  },
+  {
+   "name": "Hospital Innovations",
+   "verdict": "candidate",
+   "number": "04261709",
+   "registered": "HOSPITAL INNOVATIONS LIMITED",
+   "status": "active",
+   "incorporated": "2001-07-31"
+  },
+  {
+   "name": "Howorth Air Technology",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: HOWORTH AIR TECHNOLOGY LIMITED."
+  },
+  {
+   "name": "Hugh Steeper Limited",
+   "verdict": "candidate",
+   "number": "00173865",
+   "registered": "HUGH STEEPER LIMITED",
+   "status": "active",
+   "incorporated": "1921-03-23"
+  },
+  {
+   "name": "Hugh Steeper Ltd",
+   "verdict": "alias",
+   "aliasOf": "Hugh Steeper Limited",
+   "why": "Resolves to the same registered company (00173865) as 'Hugh Steeper Limited', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "Hugh Steeper T/A Steeper",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: HUGH STEEPER LIMITED."
+  },
+  {
+   "name": "Hygenica",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: HYGENICA LIMITED."
+  },
+  {
+   "name": "Hygiene Pro Clean Ltd",
+   "verdict": "candidate",
+   "number": "10220371",
+   "registered": "HYGIENE PRO CLEAN LIMITED",
+   "status": "active",
+   "incorporated": "2016-06-08"
+  },
+  {
+   "name": "I3 Membrane GMBH",
+   "verdict": "foreign",
+   "why": "The name carries a non-UK legal form, so no Companies House record is expected for the awarded entity. Any similarly-named UK company is a different legal person and is not recorded here. Companies House does return I3 MEMBRANE LTD (16584266), which is NOT assumed to be the same company."
+  },
+  {
+   "name": "Iansyst Ltd",
+   "verdict": "candidate",
+   "number": "01723151",
+   "registered": "IANSYST LIMITED",
+   "status": "active",
+   "incorporated": "1983-05-13"
+  },
+  {
+   "name": "Icentia Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ICENTIA LIMITED."
+  },
+  {
+   "name": "Ideal Med",
+   "verdict": "candidate",
+   "number": "07368683",
+   "registered": "IDEAL MED LIMITED",
+   "status": "active",
+   "incorporated": "2010-09-07"
+  },
+  {
+   "name": "IM Med Limited",
+   "verdict": "alias",
+   "aliasOf": "iM-MED Limited",
+   "why": "The same name as 'iM-MED Limited', which the briefs also name, differing only in spelling or legal form. One supplier, not two. Merged by rule R8."
+  },
+  {
+   "name": "iM-MED Limited",
+   "verdict": "candidate",
+   "number": "10314966",
+   "registered": "IM MED LTD",
+   "status": "active",
+   "incorporated": "2016-08-05"
+  },
+  {
+   "name": "Imaging First Ltd",
+   "verdict": "candidate",
+   "number": "07896665",
+   "registered": "IMAGING FIRST LIMITED",
+   "status": "active",
+   "incorporated": "2012-01-04"
+  },
+  {
+   "name": "Imperartive Training",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: AAA.AMBULANCE3 TRAINING ACADEMY LTD."
+  },
+  {
+   "name": "Independent Physiological Diagnostics Ltd",
+   "verdict": "candidate",
+   "number": "11950087",
+   "registered": "INDEPENDENT PHYSIOLOGICAL DIAGNOSTICS LTD",
+   "status": "active",
+   "incorporated": "2019-04-16"
+  },
+  {
+   "name": "InferVision UK Ltd",
+   "verdict": "candidate",
+   "number": "13555165",
+   "registered": "INFERVISION UK LTD",
+   "status": "active",
+   "incorporated": "2021-08-09"
+  },
+  {
+   "name": "Infinitt Europe GbmH",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: INFINITT EUROPE GMBH."
+  },
+  {
+   "name": "Infutech Ltd",
+   "verdict": "candidate",
+   "number": "06188392",
+   "registered": "INFUTECH LIMITED",
+   "status": "active",
+   "incorporated": "2007-03-28"
+  },
+  {
+   "name": "Ingenion Medical",
+   "verdict": "candidate",
+   "number": "08664089",
+   "registered": "INGENION MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2013-08-27"
+  },
+  {
+   "name": "inHeart S.A.S",
+   "verdict": "foreign",
+   "why": "The name carries a non-UK legal form, so no Companies House record is expected for the awarded entity. Any similarly-named UK company is a different legal person and is not recorded here."
+  },
+  {
+   "name": "Inivos UK Limited",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (INIVOS UK LIMITED 14137664; INIVOS LIMITED 07183575). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Innotec Hygiene Solutions Ltd",
+   "verdict": "candidate",
+   "number": "07884687",
+   "registered": "INNOTEC HYGIENE SOLUTIONS LTD",
+   "status": "active",
+   "incorporated": "2011-12-16"
+  },
+  {
+   "name": "Innova Nanojet Technologies Ltd",
+   "verdict": "candidate",
+   "number": "SC743004",
+   "registered": "INNOVA NANOJET TECHNOLOGIES, LTD.",
+   "status": "active",
+   "incorporated": "2022-08-31"
+  },
+  {
+   "name": "Innovant Healthcare Limited",
+   "verdict": "candidate",
+   "number": "13822330",
+   "registered": "INNOVANT HEALTHCARE LIMITED",
+   "status": "active",
+   "incorporated": "2021-12-30"
+  },
+  {
+   "name": "Innovate Orthopaedics Ltd",
+   "verdict": "candidate",
+   "number": "09203933",
+   "registered": "INNOVATE ORTHOPAEDICS LIMITED",
+   "status": "active",
+   "incorporated": "2014-09-04"
+  },
+  {
+   "name": "Insight Medical Products Limited",
+   "verdict": "candidate",
+   "number": "03949101",
+   "registered": "INSIGHT MEDICAL PRODUCTS LIMITED",
+   "status": "active",
+   "incorporated": "2000-03-16"
+  },
+  {
+   "name": "Instinctive Limited",
+   "verdict": "candidate",
+   "number": "02616259",
+   "registered": "INSTINCTIVE LIMITED",
+   "status": "active",
+   "incorporated": "1991-05-31"
+  },
+  {
+   "name": "Intelerad Medical Systems",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: INTELERAD UK LTD."
+  },
+  {
+   "name": "Intermedical (UK) Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (INTERMEDICAL (UK) LTD 03456073; INTERMEDICAL UK HOLDINGS LIMITED 15171234; INTERMEDICAL LIMITED 14740709). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Intermedical (Uk) Ltd",
+   "verdict": "alias",
+   "aliasOf": "Intermedical (UK) Ltd",
+   "why": "The same name as 'Intermedical (UK) Ltd', which the briefs also name, differing only in spelling or legal form. One supplier, not two. Merged by rule R8."
+  },
+  {
+   "name": "Intermedical UK Ltd",
+   "verdict": "alias",
+   "aliasOf": "Intermedical (UK) Ltd",
+   "why": "The same name as 'Intermedical (UK) Ltd', which the briefs also name, differing only in spelling or legal form. One supplier, not two. Merged by rule R8."
+  },
+  {
+   "name": "Intersystems",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: INTERSYSTEMS CORPORATION."
+  },
+  {
+   "name": "Intus Healthcare",
+   "verdict": "candidate",
+   "number": "05269182",
+   "registered": "INTUS HEALTHCARE LTD",
+   "status": "active",
+   "incorporated": "2004-10-25"
+  },
+  {
+   "name": "IPS Converters Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: I P S CONVERTERS LIMITED."
+  },
+  {
+   "name": "iRhythm Technologies Ltd",
+   "verdict": "candidate",
+   "number": "10055682",
+   "registered": "IRHYTHM TECHNOLOGIES LTD.",
+   "status": "active",
+   "incorporated": "2016-03-10"
+  },
+  {
+   "name": "Iskus Health Ltd - Distributor for Theya Healthcare",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ISKUS HEALTH UK LTD."
+  },
+  {
+   "name": "J Heinz Foods UK Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: H.J. HEINZ FOODS UK LIMITED."
+  },
+  {
+   "name": "Jabbla UK Ltd",
+   "verdict": "candidate",
+   "number": "06251446",
+   "registered": "JABBLA UK LIMITED",
+   "status": "active",
+   "incorporated": "2007-05-17"
+  },
+  {
+   "name": "Jaeger Medical UK Limited",
+   "verdict": "candidate",
+   "number": "01939558",
+   "registered": "JAEGER MEDICAL UK LIMITED",
+   "status": "active",
+   "incorporated": "1985-08-15"
+  },
+  {
+   "name": "joimax UK",
+   "verdict": "candidate",
+   "number": "14588946",
+   "registered": "JOIMAX UK LTD",
+   "status": "active",
+   "incorporated": "2023-01-12"
+  },
+  {
+   "name": "Kaiser Medical Technology Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (KAISER MEDICAL TECHNOLOGY LIMITED 06703471; KAISER MEDICAL TECHNOLOGY EUROPE LIMITED 12825582). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Ken Hall Ltd",
+   "verdict": "candidate",
+   "number": "00867455",
+   "registered": "KEN HALL LIMITED",
+   "status": "active",
+   "incorporated": "1965-12-23"
+  },
+  {
+   "name": "Kettering Surgical Appliances",
+   "verdict": "candidate",
+   "number": "01019458",
+   "registered": "KETTERING SURGICAL APPLIANCES LIMITED",
+   "status": "active",
+   "incorporated": "1971-08-02"
+  },
+  {
+   "name": "Key Health Solutions",
+   "verdict": "candidate",
+   "number": "05856852",
+   "registered": "KEY HEALTH SOLUTIONS LTD",
+   "status": "active",
+   "incorporated": "2006-06-23"
+  },
+  {
+   "name": "Kimal PLC Stock",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: KIMAL PLC."
+  },
+  {
+   "name": "Kimal Renal Care",
+   "verdict": "unresolved",
+   "why": "KIMAL RENAL CARE LIMITED (06839033) is an exact name match but its status is 'dissolved', not active. A company that is not trading must not be recorded as a live supplier, so no number is attached. TRADING STATUS TO CHECK BY HAND."
+  },
+  {
+   "name": "Kimberly Clark",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (KIMBERLY - CLARK LIMITED 00308676; KIMBERLY-CLARK EMEA HOLDINGS LTD 10065051; KIMBERLY-CLARK EUROPE LIMITED 04060641). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Kinetic Medical Devices Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ADLISC MEDICAL DEVICES PRIVATE LIMITED."
+  },
+  {
+   "name": "Koalaa Ltd",
+   "verdict": "candidate",
+   "number": "12494525",
+   "registered": "KOALAA LIMITED",
+   "status": "active",
+   "incorporated": "2020-03-03"
+  },
+  {
+   "name": "Koolpak Ltd",
+   "verdict": "candidate",
+   "number": "02808528",
+   "registered": "KOOLPAK LIMITED",
+   "status": "active",
+   "incorporated": "1993-04-13"
+  },
+  {
+   "name": "Laerdal Medical Ltd",
+   "verdict": "candidate",
+   "number": "01744966",
+   "registered": "LAERDAL MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "1983-08-09"
+  },
+  {
+   "name": "Langham Gordon Ellis",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: GORDON ELLIS & CO.."
+  },
+  {
+   "name": "Lavender Medical",
+   "verdict": "candidate",
+   "number": "06828106",
+   "registered": "LAVENDER MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2009-02-24"
+  },
+  {
+   "name": "Leanvation",
+   "verdict": "candidate",
+   "number": "07316310",
+   "registered": "LEANVATION LTD",
+   "status": "active",
+   "incorporated": "2010-07-15"
+  },
+  {
+   "name": "Leda Orthopaedics Ltd",
+   "verdict": "candidate",
+   "number": "08730490",
+   "registered": "LEDA ORTHOPAEDICS LIMITED",
+   "status": "active",
+   "incorporated": "2013-10-14"
+  },
+  {
+   "name": "Legrand Electric Ltd",
+   "verdict": "candidate",
+   "number": "00115834",
+   "registered": "LEGRAND ELECTRIC LIMITED",
+   "status": "active",
+   "incorporated": "1911-05-16"
+  },
+  {
+   "name": "Lenience UK Ltd",
+   "verdict": "candidate",
+   "number": "12545155",
+   "registered": "LENIENCE UK LTD",
+   "status": "active",
+   "incorporated": "2020-04-02"
+  },
+  {
+   "name": "Lenstec (Barbados) Inc",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: LENSTEC (BARBADOS) INC.."
+  },
+  {
+   "name": "Liberator Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (LIBERATOR LIMITED 02590367; LIBERATOR GROUP LIMITED 16025986). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "LifeSignals Europe Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: AAA COMPLIANCE EUROPE LTD."
+  },
+  {
+   "name": "Lil-Lets UK Limited",
+   "verdict": "candidate",
+   "number": "00548990",
+   "registered": "LIL-LETS UK LTD",
+   "status": "active",
+   "incorporated": "1955-05-11"
+  },
+  {
+   "name": "Lima Orthopaedics UK Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: GLOBAL ORTHOPAEDICS (UK) LIMITED."
+  },
+  {
+   "name": "Lindare Medical Ltd",
+   "verdict": "candidate",
+   "number": "03596334",
+   "registered": "LINDARE MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "1998-07-10"
+  },
+  {
+   "name": "Litechnica Ltd",
+   "verdict": "candidate",
+   "number": "01312151",
+   "registered": "LITECHNICA LIMITED",
+   "status": "active",
+   "incorporated": "1977-05-03"
+  },
+  {
+   "name": "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: LIVE BY LULU LIMITED."
+  },
+  {
+   "name": "Love Medical",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (LOVE MEDICAL LIMITED 06558818; LOVE MEDICAL GROUP LIMITED 08872156). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Lowenstein Medical UK Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: LOWENSTEIN GROUP LIMITED."
+  },
+  {
+   "name": "LTC Healthcare (Leeds Trading Company)",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: LTC HEALTHCARE LIMITED."
+  },
+  {
+   "name": "Lucida Medical Ltd",
+   "verdict": "candidate",
+   "number": "12320979",
+   "registered": "LUCIDA MEDICAL LTD",
+   "status": "active",
+   "incorporated": "2019-11-19"
+  },
+  {
+   "name": "Lynton Lasers",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (LYNTON LASERS LIMITED 02956199; LYNTON LASERS GROUP LTD 07450465). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "M.D.M Medical Ltd",
+   "verdict": "unresolved",
+   "why": "M.D.M. MEDICAL LIMITED (02649184) is an exact name match but its status is 'liquidation', not active. A company that is not trading must not be recorded as a live supplier, so no number is attached. TRADING STATUS TO CHECK BY HAND."
+  },
+  {
+   "name": "MAG Orthotics Limited",
+   "verdict": "candidate",
+   "number": "05032201",
+   "registered": "MAG ORTHOTICS LIMITED",
+   "status": "active",
+   "incorporated": "2004-02-02"
+  },
+  {
+   "name": "Magentus Software Limited",
+   "verdict": "candidate",
+   "number": "08746973",
+   "registered": "MAGENTUS SOFTWARE LIMITED",
+   "status": "active",
+   "incorporated": "2013-10-24"
+  },
+  {
+   "name": "MAM UK Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: MAM (UK) LIMITED."
+  },
+  {
+   "name": "Marlux Medical",
+   "verdict": "candidate",
+   "number": "03577009",
+   "registered": "MARLUX MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "1998-06-05"
+  },
+  {
+   "name": "Marquardt UK",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: MARQUARDT U.K. LIMITED."
+  },
+  {
+   "name": "Marsden Weighing Machine Co Ltd",
+   "verdict": "candidate",
+   "number": "01014815",
+   "registered": "MARSDEN WEIGHING MACHINE GROUP LIMITED",
+   "status": "active",
+   "incorporated": "1971-06-18"
+  },
+  {
+   "name": "Martek Lifecare",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: CC MARTEK LIMITED."
+  },
+  {
+   "name": "Materialise",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (MATERIALISE LTD 14501444; MATERIALISE GROUP LTD 14822091). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "MC Tissue",
+   "verdict": "candidate",
+   "number": "16313653",
+   "registered": "MC TISSUE UK LIMITED",
+   "status": "active",
+   "incorporated": "2025-03-13"
+  },
+  {
+   "name": "MDI Medical Ltd",
+   "verdict": "unresolved",
+   "why": "MDI MEDICAL LIMITED (OE032148) is an exact name match but its status is 'registered', not active. A company that is not trading must not be recorded as a live supplier, so no number is attached. TRADING STATUS TO CHECK BY HAND."
+  },
+  {
+   "name": "Med Imaging Healthcare Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: MED IMAGING HEALTHCARE LIMITED."
+  },
+  {
+   "name": "Med Imaging Healthcare Ltd",
+   "verdict": "alias",
+   "aliasOf": "Med Imaging Healthcare Limited",
+   "why": "The same name as 'Med Imaging Healthcare Limited', which the briefs also name, differing only in spelling or legal form. One supplier, not two. Merged by rule R8."
+  },
+  {
+   "name": "Med Matters Ltd",
+   "verdict": "candidate",
+   "number": "07773448",
+   "registered": "MED MATTERS LTD",
+   "status": "active",
+   "incorporated": "2011-09-14"
+  },
+  {
+   "name": "MEDACX Limited",
+   "verdict": "candidate",
+   "number": "05547813",
+   "registered": "MEDACX LIMITED",
+   "status": "active",
+   "incorporated": "2005-08-26"
+  },
+  {
+   "name": "Medartis Ltd",
+   "verdict": "candidate",
+   "number": "04604437",
+   "registered": "MEDARTIS LIMITED",
+   "status": "active",
+   "incorporated": "2002-11-29"
+  },
+  {
+   "name": "Medasil Surgical Ltd",
+   "verdict": "candidate",
+   "number": "01173261",
+   "registered": "MEDASIL SURGICAL LIMITED",
+   "status": "active",
+   "incorporated": "1974-06-10"
+  },
+  {
+   "name": "Medequip Assisstive Technology Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: MEDEQUIP ASSISTIVE TECHNOLOGY LIMITED."
+  },
+  {
+   "name": "Medezine Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (MEDEZINE LIMITED 02349827; MEDEZINE HOLDINGS LTD 09196257). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Medfac UK Ltd",
+   "verdict": "candidate",
+   "number": "08608060",
+   "registered": "MEDFAC UK LTD",
+   "status": "active",
+   "incorporated": "2013-07-12"
+  },
+  {
+   "name": "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: KINETEC MEDICAL PRODUCTS UK LIMITED."
+  },
+  {
+   "name": "Medica Advanced Technologies Ltd",
+   "verdict": "candidate",
+   "number": "14440401",
+   "registered": "MEDICA ADVANCED TECHNOLOGIES LIMITED",
+   "status": "active",
+   "incorporated": "2022-10-25"
+  },
+  {
+   "name": "Medicom Healthpro Ltd",
+   "verdict": "candidate",
+   "number": "12650877",
+   "registered": "MEDICOM HEALTHPRO LIMITED",
+   "status": "active",
+   "incorporated": "2020-06-08"
+  },
+  {
+   "name": "Medinox (London) Limited",
+   "verdict": "candidate",
+   "number": "11149212",
+   "registered": "MEDINOX (LONDON) LIMITED",
+   "status": "active",
+   "incorporated": "2018-01-15"
+  },
+  {
+   "name": "Mediprema",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words."
+  },
+  {
+   "name": "Mediq Healthcare Uk Limited Ex Bunzl Hea",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: MEDIQ HEALTHCARE UK LIMITED."
+  },
+  {
+   "name": "Medscience",
+   "verdict": "candidate",
+   "number": "10699410",
+   "registered": "MEDSCIENCE GROUP LTD",
+   "status": "active",
+   "incorporated": "2017-03-30"
+  },
+  {
+   "name": "Meglio Ltd",
+   "verdict": "candidate",
+   "number": "09971786",
+   "registered": "MEGLIO LIMITED",
+   "status": "active",
+   "incorporated": "2016-01-27"
+  },
+  {
+   "name": "Mercian Surgical Supply Co Limited",
+   "verdict": "alias",
+   "aliasOf": "Mercian Surgical Supply Company Limited",
+   "why": "Resolves to the same registered company (00933463) as 'Mercian Surgical Supply Company Limited', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "Mercian Surgical Supply Company Limited",
+   "verdict": "candidate",
+   "number": "00933463",
+   "registered": "MERCIAN SURGICAL SUPPLY CO. LIMITED",
+   "status": "active",
+   "incorporated": "1968-06-10"
+  },
+  {
+   "name": "Metaphysis LLP",
+   "verdict": "candidate",
+   "number": "OC387134",
+   "registered": "METAPHYSIS LLP",
+   "status": "active",
+   "incorporated": "2013-08-08"
+  },
+  {
+   "name": "Meticuly INNOVATIONS Ltd",
+   "verdict": "candidate",
+   "number": "13771048",
+   "registered": "METICULY INNOVATIONS LTD",
+   "status": "active",
+   "incorporated": "2021-11-29"
+  },
+  {
+   "name": "Metsa",
+   "verdict": "candidate",
+   "number": "17185037",
+   "registered": "METSA LTD",
+   "status": "active",
+   "incorporated": "2026-04-27"
+  },
+  {
+   "name": "Micrima Limited",
+   "verdict": "candidate",
+   "number": "05616345",
+   "registered": "MICRIMA LIMITED",
+   "status": "active",
+   "incorporated": "2005-11-08"
+  },
+  {
+   "name": "Mieka Ltd",
+   "verdict": "candidate",
+   "number": "13157225",
+   "registered": "MIEKA LTD",
+   "status": "active",
+   "incorporated": "2021-01-25"
+  },
+  {
+   "name": "Minerva Laboratories Ltd",
+   "verdict": "candidate",
+   "number": "00246797",
+   "registered": "MINERVA LABORATORIES LIMITED",
+   "status": "active",
+   "incorporated": "1930-03-25"
+  },
+  {
+   "name": "Mirada Medical",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (MIRADA MEDICAL LIMITED 06515901; MIRADA MEDICAL GROUP LIMITED 13986137). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "mOm Incubators Ltd",
+   "verdict": "candidate",
+   "number": "09297498",
+   "registered": "MOM INCUBATORS LTD.",
+   "status": "active",
+   "incorporated": "2014-11-05"
+  },
+  {
+   "name": "Motiva Implants UK Limited",
+   "verdict": "candidate",
+   "number": "11493223",
+   "registered": "MOTIVA IMPLANTS UK LIMITED",
+   "status": "active",
+   "incorporated": "2018-07-31"
+  },
+  {
+   "name": "Moulded Fibre Products Limited",
+   "verdict": "candidate",
+   "number": "07990183",
+   "registered": "MOULDED FIBRE PRODUCTS LIMITED",
+   "status": "active",
+   "incorporated": "2012-03-14"
+  },
+  {
+   "name": "Mounts & More Ltd",
+   "verdict": "candidate",
+   "number": "05194042",
+   "registered": "MOUNTS & MORE LTD",
+   "status": "active",
+   "incorporated": "2004-07-30"
+  },
+  {
+   "name": "Murray Surgical Limited",
+   "verdict": "candidate",
+   "number": "08993132",
+   "registered": "MURRAY SURGICAL LIMITED",
+   "status": "active",
+   "incorporated": "2014-04-11"
+  },
+  {
+   "name": "Nagor Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: NAGOR LIMITED."
+  },
+  {
+   "name": "Nagor Ltd",
+   "verdict": "alias",
+   "aliasOf": "Nagor Limited",
+   "why": "The same name as 'Nagor Limited', which the briefs also name, differing only in spelling or legal form. One supplier, not two. Merged by rule R8."
+  },
+  {
+   "name": "Neo-Innovations UK Ltd",
+   "verdict": "candidate",
+   "number": "07882638",
+   "registered": "NEO-INNOVATIONS UK LIMITED",
+   "status": "active",
+   "incorporated": "2011-12-14"
+  },
+  {
+   "name": "Neon Diagnostics Ltd",
+   "verdict": "candidate",
+   "number": "07617834",
+   "registered": "NEON DIAGNOSTICS LTD",
+   "status": "active",
+   "incorporated": "2011-04-28"
+  },
+  {
+   "name": "Neoventa Medical Limited",
+   "verdict": "candidate",
+   "number": "06715366",
+   "registered": "NEOVENTA MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2008-10-03"
+  },
+  {
+   "name": "Neoventa Medical Ltd",
+   "verdict": "alias",
+   "aliasOf": "Neoventa Medical Limited",
+   "why": "Resolves to the same registered company (06715366) as 'Neoventa Medical Limited', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "Neptune Medical Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: NEPTUNE MEDICAL LIMITED."
+  },
+  {
+   "name": "Network Medical Products Ltd",
+   "verdict": "candidate",
+   "number": "03209576",
+   "registered": "NETWORK MEDICAL PRODUCTS LIMITED",
+   "status": "active",
+   "incorporated": "1996-06-07"
+  },
+  {
+   "name": "Neurogen Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: NEUROGEN LIMITED."
+  },
+  {
+   "name": "Newell Brands",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: NEWELL BRANDS DISTRIBUTION LLC."
+  },
+  {
+   "name": "Newmaw Medical Ltd",
+   "verdict": "candidate",
+   "number": "07899163",
+   "registered": "NEWMAW MEDICAL LTD",
+   "status": "active",
+   "incorporated": "2012-01-05"
+  },
+  {
+   "name": "Newtons Medical Supplies Ltd",
+   "verdict": "candidate",
+   "number": "09684317",
+   "registered": "NEWTONS MEDICAL SUPPLIES LTD",
+   "status": "active",
+   "incorporated": "2015-07-14"
+  },
+  {
+   "name": "Nihon Koden",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: KODEN DIGITAL LIMITED."
+  },
+  {
+   "name": "NISSHA Medical Technologis Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: NISSHA MEDICAL TECHNOLOGIES LTD."
+  },
+  {
+   "name": "NJ Devices Ltd t/a Ocean Med",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: MEDICAL DEVICES SCOTLAND T/A MEDICAL DEVICES UK LTD."
+  },
+  {
+   "name": "Nobisco",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (NOBISCO LIMITED 01945617; NOBISCO HOLDINGS LIMITED 08329094). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Normanby Laboratory Services Ltd",
+   "verdict": "candidate",
+   "number": "06048489",
+   "registered": "NORMANBY LABORATORY SERVICES LIMITED",
+   "status": "active",
+   "incorporated": "2007-01-11"
+  },
+  {
+   "name": "Northumbria Healthcare Facilities Management",
+   "verdict": "candidate",
+   "number": "07913048",
+   "registered": "NORTHUMBRIA HEALTHCARE FACILITIES MANAGEMENT LIMITED",
+   "status": "active",
+   "incorporated": "2012-01-17"
+  },
+  {
+   "name": "Northwood",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: NORTHWOOD (ABERDEEN) LIMITED."
+  },
+  {
+   "name": "Nottingham Rehab Limited (Trading as NRS Healthcare)",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: NRS (NOTTINGHAM) LIMITED."
+  },
+  {
+   "name": "Nowus Healthcare",
+   "verdict": "candidate",
+   "number": "14475654",
+   "registered": "NOWUS HEALTHCARE LTD",
+   "status": "active",
+   "incorporated": "2022-11-10"
+  },
+  {
+   "name": "NSK United Kingdom Limited",
+   "verdict": "candidate",
+   "number": "06042707",
+   "registered": "NSK UNITED KINGDOM LIMITED",
+   "status": "active",
+   "incorporated": "2007-01-05"
+  },
+  {
+   "name": "Numed Healthcare",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: NUMED HEALTHCARE LIMITED."
+  },
+  {
+   "name": "Numed Holdings Ltd (T/A Numed Healthcare)",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: NUMED HEALTHCARE LIMITED."
+  },
+  {
+   "name": "OncoSem UK Limited",
+   "verdict": "candidate",
+   "number": "14413695",
+   "registered": "ONCOSEM UK LIMITED",
+   "status": "active",
+   "incorporated": "2022-10-12"
+  },
+  {
+   "name": "Opal Health",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: OPAL HEALTH LTD."
+  },
+  {
+   "name": "Opalion",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (OPALION LIMITED 01574983; OPALION HOLDINGS LIMITED 15913035). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Open Medical Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (OPEN MEDICAL LTD 08620208; OPEN MEDICAL HOLDINGS LIMITED 10909544). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Operating Room Systems Ltd",
+   "verdict": "unresolved",
+   "why": "OPERATING ROOM SYSTEMS LIMITED (NI614082) is an exact name match but its status is 'dissolved', not active. A company that is not trading must not be recorded as a live supplier, so no number is attached. TRADING STATUS TO CHECK BY HAND."
+  },
+  {
+   "name": "Optelec UK",
+   "verdict": "candidate",
+   "number": "01970594",
+   "registered": "OPTELEC LIMITED",
+   "status": "active",
+   "incorporated": "1985-12-12"
+  },
+  {
+   "name": "Optima Medical Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (OPTIMA MEDICAL LIMITED 03737869; OPTIMA MEDICAL GROUP LTD 17197890). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Orbis Protect",
+   "verdict": "candidate",
+   "number": "02476859",
+   "registered": "ORBIS PROTECT LIMITED",
+   "status": "active",
+   "incorporated": "1990-03-05"
+  },
+  {
+   "name": "Origio Limited",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (ORIGIO LIMITED 03221787; ORIGIO GROUP LTD 16147429). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Orion Medical Supplies",
+   "verdict": "candidate",
+   "number": "08181275",
+   "registered": "ORION MEDICAL SUPPLIES LTD",
+   "status": "active",
+   "incorporated": "2012-08-16"
+  },
+  {
+   "name": "Orn Health",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ORNEL HEALTH LIMITED."
+  },
+  {
+   "name": "ORN International T/A Spectra Corporate",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: SPECTRA INTERNATIONAL, LLC."
+  },
+  {
+   "name": "OrthoAccess Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ORTHOACCESS LTD."
+  },
+  {
+   "name": "Orthoeurope Ltd",
+   "verdict": "candidate",
+   "number": "02432148",
+   "registered": "ORTHOEUROPE LIMITED",
+   "status": "active",
+   "incorporated": "1989-10-13"
+  },
+  {
+   "name": "Orthofix Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ORTHOFIX LIMITED."
+  },
+  {
+   "name": "Orthopediatrics EU Limited",
+   "verdict": "candidate",
+   "number": "10642293",
+   "registered": "ORTHOPEDIATRICS EU LIMITED",
+   "status": "active",
+   "incorporated": "2017-02-28"
+  },
+  {
+   "name": "Ortivus",
+   "verdict": "candidate",
+   "number": "03558696",
+   "registered": "ORTIVUS UK LIMITED",
+   "status": "active",
+   "incorporated": "1998-05-06"
+  },
+  {
+   "name": "Oscar Tech UK Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: OSCARI TECH LIMITED."
+  },
+  {
+   "name": "OSI INC. Ltd",
+   "verdict": "candidate",
+   "number": "11611660",
+   "registered": "OSI INC. LTD",
+   "status": "active",
+   "incorporated": "2018-10-09"
+  },
+  {
+   "name": "Ossur UK Limited",
+   "verdict": "candidate",
+   "number": "02559193",
+   "registered": "OSSUR UK LIMITED",
+   "status": "active",
+   "incorporated": "1990-11-16"
+  },
+  {
+   "name": "Osteon Medical Ltd",
+   "verdict": "candidate",
+   "number": "10916177",
+   "registered": "OSTEON MEDICAL LTD",
+   "status": "active",
+   "incorporated": "2017-08-15"
+  },
+  {
+   "name": "Osteotec Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (OSTEOTEC LIMITED 02809824; OSTEOTEC EUROPE LTD 12122678; OSTEOTEC HOLDINGS LIMITED 11743749). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Oswell Penda Pharmaceutical Ltd",
+   "verdict": "candidate",
+   "number": "11146087",
+   "registered": "OSWELL PENDA PHARMACEUTICAL LTD",
+   "status": "active",
+   "incorporated": "2018-01-11"
+  },
+  {
+   "name": "Ovidius Medical Ltd",
+   "verdict": "candidate",
+   "number": "10054904",
+   "registered": "OVIDIUS MEDICAL LTD",
+   "status": "active",
+   "incorporated": "2016-03-10"
+  },
+  {
+   "name": "Ovidius Solutions Ltd",
+   "verdict": "candidate",
+   "number": "11640816",
+   "registered": "OVIDIUS SOLUTIONS LTD",
+   "status": "active",
+   "incorporated": "2018-10-24"
+  },
+  {
+   "name": "Owens and Minor Halyard Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: AFRICAN AND MINORITY FAMILIES SUPPORT SERVICES (AFRIFASS) CIC."
+  },
+  {
+   "name": "P.W.Coole & Son Limited T/A Surgical Holdings",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: G. T. HEWETT & SON LIMITED,."
+  },
+  {
+   "name": "Pajunk UK Medical Products Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: PAJUNK U.K. MEDICAL PRODUCTS LIMITED."
+  },
+  {
+   "name": "PAL International Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (PAL INTERNATIONAL LIMITED 03272370; PAL INTERNATIONAL GROUP LTD 14323014; PAL INTERNATIONAL HOLDINGS LIMITED 14290031). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Pall Europe Limited",
+   "verdict": "candidate",
+   "number": "07211681",
+   "registered": "PALL EUROPE LIMITED",
+   "status": "active",
+   "incorporated": "2010-04-01"
+  },
+  {
+   "name": "PALL Europe Ltd",
+   "verdict": "alias",
+   "aliasOf": "Pall Europe Limited",
+   "why": "Resolves to the same registered company (07211681) as 'Pall Europe Limited', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "Panaz Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (PANAZ LIMITED 01944865; PANAZ GROUP LTD 16042140; PANAZ HOLDINGS LIMITED 06697759). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Paragon 28",
+   "verdict": "candidate",
+   "number": "14270653",
+   "registered": "PARAGON 28 UK, LTD",
+   "status": "active",
+   "incorporated": "2022-08-02"
+  },
+  {
+   "name": "Paramount Packaging (UK) Limited",
+   "verdict": "candidate",
+   "number": "08204189",
+   "registered": "PARAMOUNT PACKAGING (UK) LIMITED",
+   "status": "active",
+   "incorporated": "2012-09-06"
+  },
+  {
+   "name": "Parburch Medical Developments Ltd",
+   "verdict": "candidate",
+   "number": "01797802",
+   "registered": "PARBURCH MEDICAL DEVELOPMENTS LIMITED",
+   "status": "active",
+   "incorporated": "1984-03-07"
+  },
+  {
+   "name": "Parc Global Supplies",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: PARC SUPPLIES LTD."
+  },
+  {
+   "name": "PCByVoice",
+   "verdict": "candidate",
+   "number": "07251002",
+   "registered": "PCBYVOICE LTD",
+   "status": "active",
+   "incorporated": "2010-05-12"
+  },
+  {
+   "name": "PD Neurotechnology Ltd",
+   "verdict": "candidate",
+   "number": "09801981",
+   "registered": "PD NEUROTECHNOLOGY LIMITED",
+   "status": "active",
+   "incorporated": "2015-09-30"
+  },
+  {
+   "name": "Peak Medical Ltd",
+   "verdict": "candidate",
+   "number": "05703827",
+   "registered": "PEAK MEDICAL LTD",
+   "status": "active",
+   "incorporated": "2006-02-09"
+  },
+  {
+   "name": "Pearsalls Ltd",
+   "verdict": "candidate",
+   "number": "03851227",
+   "registered": "PEARSALLS LIMITED",
+   "status": "active",
+   "incorporated": "1999-09-30"
+  },
+  {
+   "name": "Pelvic Relief",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ADORE YOUR PELVIC FLOOR LIMITED."
+  },
+  {
+   "name": "Pentland Medical Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (PENTLAND MEDICAL LTD. SC223422; PENTLAND MEDICAL HOLDINGS LTD 10091944). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Performance Health Interntional",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ALFA INTERNTIONAL LTD."
+  },
+  {
+   "name": "PFF Plastics",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: PFF LIMITED."
+  },
+  {
+   "name": "Philips Healthcare / Philips Respironics",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: PHILIPS HEALTHCARE INFORMATICS LIMITED."
+  },
+  {
+   "name": "Philips Respironics",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: RESPIRONICS LTD."
+  },
+  {
+   "name": "Phoenix Dosimetry Ltd",
+   "verdict": "candidate",
+   "number": "08521146",
+   "registered": "PHOENIX DOSIMETRY LTD",
+   "status": "active",
+   "incorporated": "2013-05-09"
+  },
+  {
+   "name": "Phonak/Sonova UK",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: AAA ADVANCED DRIVERS UK LTD."
+  },
+  {
+   "name": "Physiolab Technologies Limited",
+   "verdict": "candidate",
+   "number": "06430772",
+   "registered": "PHYSIOLAB TECHNOLOGIES LIMITED",
+   "status": "active",
+   "incorporated": "2007-11-19"
+  },
+  {
+   "name": "Piedro Ltd",
+   "verdict": "candidate",
+   "number": "04354646",
+   "registered": "PIEDRO LTD",
+   "status": "active",
+   "incorporated": "2002-01-17"
+  },
+  {
+   "name": "Pioneer Medical Europe Limited",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (PIONEER MEDICAL EUROPE LIMITED 07182977; PIONEER MEDICAL UK LTD 07724917). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Plasmic Healthsciences Uk Limited",
+   "verdict": "candidate",
+   "number": "08849652",
+   "registered": "PLASMIC HEALTHSCIENCES UK LTD",
+   "status": "active",
+   "incorporated": "2014-01-17"
+  },
+  {
+   "name": "PMS (Instruments) Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: P.M.S. (INSTRUMENTS) LIMITED."
+  },
+  {
+   "name": "Podopro UK Ltd",
+   "verdict": "candidate",
+   "number": "07753479",
+   "registered": "PODOPRO UK LTD",
+   "status": "active",
+   "incorporated": "2011-08-25"
+  },
+  {
+   "name": "Polyco",
+   "verdict": "candidate",
+   "number": "06916369",
+   "registered": "POLYCO LIMITED",
+   "status": "active",
+   "incorporated": "2009-05-27"
+  },
+  {
+   "name": "Polystar",
+   "verdict": "candidate",
+   "number": "SC347440",
+   "registered": "POLYSTAR LIMITED",
+   "status": "active",
+   "incorporated": "2008-08-22"
+  },
+  {
+   "name": "Polystar Plastics Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (POLYSTAR PLASTICS LIMITED 02690339; POLYSTAR PLASTICS (HOLDINGS) LIMITED 08495431). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Possum Ltd",
+   "verdict": "candidate",
+   "number": "00711047",
+   "registered": "POSSUM LIMITED",
+   "status": "active",
+   "incorporated": "1961-12-19"
+  },
+  {
+   "name": "Precision Dynamics Corporation",
+   "verdict": "candidate",
+   "number": "16743691",
+   "registered": "PRECISION DYNAMICS LTD",
+   "status": "active",
+   "incorporated": "2025-09-25"
+  },
+  {
+   "name": "Prestige Health Footwear Ltd",
+   "verdict": "candidate",
+   "number": "11036077",
+   "registered": "PRESTIGE HEALTH FOOTWEAR LTD",
+   "status": "active",
+   "incorporated": "2017-10-27"
+  },
+  {
+   "name": "Pro Health Solutions Limited",
+   "verdict": "candidate",
+   "number": "12576961",
+   "registered": "PRO HEALTH SOLUTIONS LTD",
+   "status": "active",
+   "incorporated": "2020-04-28"
+  },
+  {
+   "name": "Procept Biorobotics",
+   "verdict": "candidate",
+   "number": "11107764",
+   "registered": "PROCEPT BIOROBOTICS UK, LTD",
+   "status": "active",
+   "incorporated": "2017-12-12"
+  },
+  {
+   "name": "Procotech Limited",
+   "verdict": "candidate",
+   "number": "05543851",
+   "registered": "PROCOTECH LTD",
+   "status": "active",
+   "incorporated": "2005-08-23"
+  },
+  {
+   "name": "PTW-UK Ltd",
+   "verdict": "candidate",
+   "number": "06719581",
+   "registered": "PTW-UK LIMITED",
+   "status": "active",
+   "incorporated": "2008-10-09"
+  },
+  {
+   "name": "Qualasept Ltd t/a Bath ASU",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: QUALASEPT LIMITED."
+  },
+  {
+   "name": "R B Medical",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: R B MEDICAL CONSULTING LTD."
+  },
+  {
+   "name": "R Link Ltd",
+   "verdict": "candidate",
+   "number": "07004640",
+   "registered": "R LINK LIMITED",
+   "status": "active",
+   "incorporated": "2009-08-29"
+  },
+  {
+   "name": "Radiobotics ApS",
+   "verdict": "foreign",
+   "why": "The name carries a non-UK legal form, so no Companies House record is expected for the awarded entity. Any similarly-named UK company is a different legal person and is not recorded here. Companies House does return RADIOBOTICS LIMITED (15203869), which is NOT assumed to be the same company."
+  },
+  {
+   "name": "Raysearch UK Ltd",
+   "verdict": "candidate",
+   "number": "08579149",
+   "registered": "RAYSEARCH UK LIMITED",
+   "status": "active",
+   "incorporated": "2013-06-21"
+  },
+  {
+   "name": "Redland embh Group Limited",
+   "verdict": "candidate",
+   "number": "02901810",
+   "registered": "REDLAND EMBH GROUP LIMITED",
+   "status": "active",
+   "incorporated": "1994-02-23"
+  },
+  {
+   "name": "Regent’s Park Healthcare",
+   "verdict": "candidate",
+   "number": "08983623",
+   "registered": "REGENT'S PARK HEALTHCARE LIMITED",
+   "status": "active",
+   "incorporated": "2014-04-07"
+  },
+  {
+   "name": "Relianace High -Tech Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: AAA HEALTHCARE HIGH STREET LTD."
+  },
+  {
+   "name": "Remserve Medical Supplies Ltd",
+   "verdict": "candidate",
+   "number": "08231922",
+   "registered": "REMSERVE MEDICAL SUPPLIES LIMITED",
+   "status": "active",
+   "incorporated": "2012-09-27"
+  },
+  {
+   "name": "Repton Medical Ltd",
+   "verdict": "candidate",
+   "number": "04748467",
+   "registered": "REPTON MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2003-04-29"
+  },
+  {
+   "name": "Robinsons Healthcare",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: AMR ROBINSONS LTD."
+  },
+  {
+   "name": "Rocamed France",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ADDIS FRANCE LIMITED."
+  },
+  {
+   "name": "Rock Compliance Limited",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (ROCK COMPLIANCE LIMITED 02902353; ROCK COMPLIANCE HOLDINGS LIMITED 11000891). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Room Twelve Limited",
+   "verdict": "candidate",
+   "number": "09045822",
+   "registered": "ROOM TWELVE LTD",
+   "status": "active",
+   "incorporated": "2014-05-19"
+  },
+  {
+   "name": "Rosenfield Health Tech Ltd",
+   "verdict": "candidate",
+   "number": "14681808",
+   "registered": "ROSENFIELD HEALTH TECH LTD",
+   "status": "active",
+   "incorporated": "2023-02-22"
+  },
+  {
+   "name": "Ross Auto Engineering Limited",
+   "verdict": "candidate",
+   "number": "00469301",
+   "registered": "ROSS AUTO ENGINEERING LIMITED",
+   "status": "active",
+   "incorporated": "1949-06-03"
+  },
+  {
+   "name": "Ryna Medical Uk Limited",
+   "verdict": "candidate",
+   "number": "06800377",
+   "registered": "RYNA MEDICAL UK LIMITED",
+   "status": "active",
+   "incorporated": "2009-01-23"
+  },
+  {
+   "name": "S-Med Ltd",
+   "verdict": "candidate",
+   "number": "04378105",
+   "registered": "S-MED LIMITED",
+   "status": "active",
+   "incorporated": "2002-02-20"
+  },
+  {
+   "name": "SAI Medical Solutions Ltd",
+   "verdict": "candidate",
+   "number": "12347370",
+   "registered": "SAI MEDICAL SOLUTIONS LTD",
+   "status": "active",
+   "incorporated": "2019-12-04"
+  },
+  {
+   "name": "Sai Medical Solutions Ltd",
+   "verdict": "alias",
+   "aliasOf": "SAI Medical Solutions Ltd",
+   "why": "Resolves to the same registered company (12347370) as 'SAI Medical Solutions Ltd', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "Sai Quality Fruits And Veg Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: HIGH QUALITY FRUITS & VEGETABLES LIMITED."
+  },
+  {
+   "name": "Salter Labs UK Ltd",
+   "verdict": "candidate",
+   "number": "08927162",
+   "registered": "SALTER LABS UK LIMITED",
+   "status": "active",
+   "incorporated": "2014-03-06"
+  },
+  {
+   "name": "SC Johnson Ltd",
+   "verdict": "candidate",
+   "number": "04166155",
+   "registered": "SC JOHNSON LTD",
+   "status": "active",
+   "incorporated": "2001-02-22"
+  },
+  {
+   "name": "Scala Surgical Ltd",
+   "verdict": "candidate",
+   "number": "05596879",
+   "registered": "SCALA SURGICAL LIMITED",
+   "status": "active",
+   "incorporated": "2005-10-19"
+  },
+  {
+   "name": "Schottlander",
+   "verdict": "candidate",
+   "number": "02633400",
+   "registered": "SCHOTTLANDER LIMITED",
+   "status": "active",
+   "incorporated": "1991-07-30"
+  },
+  {
+   "name": "Schuco International (London) Ltd",
+   "verdict": "candidate",
+   "number": "00592183",
+   "registered": "SCHUCO INTERNATIONAL (LONDON) LIMITED",
+   "status": "active",
+   "incorporated": "1957-10-18"
+  },
+  {
+   "name": "Scope Ophthalmics",
+   "verdict": "candidate",
+   "number": "07883194",
+   "registered": "SCOPE OPHTHALMICS LIMITED",
+   "status": "active",
+   "incorporated": "2011-12-15"
+  },
+  {
+   "name": "Scotmas Biosecurity Limited",
+   "verdict": "candidate",
+   "number": "SC658016",
+   "registered": "SCOTMAS BIOSECURITY LIMITED",
+   "status": "active",
+   "incorporated": "2020-03-23"
+  },
+  {
+   "name": "Seca Ltd",
+   "verdict": "candidate",
+   "number": "01430864",
+   "registered": "SECA LIMITED",
+   "status": "active",
+   "incorporated": "1979-06-19"
+  },
+  {
+   "name": "SECA UK Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: SECA LIGHTING (UK) LIMITED."
+  },
+  {
+   "name": "Sefam Medical Ltd",
+   "verdict": "candidate",
+   "number": "13500192",
+   "registered": "SEFAM MEDICAL LTD",
+   "status": "active",
+   "incorporated": "2021-07-08"
+  },
+  {
+   "name": "Sense Medical Limited",
+   "verdict": "candidate",
+   "number": "09160959",
+   "registered": "SENSE MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2014-08-05"
+  },
+  {
+   "name": "Sensory Guru Ltd",
+   "verdict": "candidate",
+   "number": "07052009",
+   "registered": "SENSORY GURU LIMITED",
+   "status": "active",
+   "incorporated": "2009-10-21"
+  },
+  {
+   "name": "Sentec Medical Ltd",
+   "verdict": "candidate",
+   "number": "12131261",
+   "registered": "SENTEC MEDICAL LTD",
+   "status": "active",
+   "incorporated": "2019-07-31"
+  },
+  {
+   "name": "Siemens Financial Services",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: SIEMENS FINANCIAL SERVICES LIMITED."
+  },
+  {
+   "name": "Sight Sciences UK Ltd",
+   "verdict": "candidate",
+   "number": "13094159",
+   "registered": "SIGHT SCIENCES UK, LTD",
+   "status": "active",
+   "incorporated": "2020-12-21"
+  },
+  {
+   "name": "Sigvaris Britain Ltd",
+   "verdict": "candidate",
+   "number": "02724989",
+   "registered": "SIGVARIS BRITAIN LIMITED",
+   "status": "active",
+   "incorporated": "1992-06-23"
+  },
+  {
+   "name": "Silimed UK Limited",
+   "verdict": "candidate",
+   "number": "15167834",
+   "registered": "SILIMED UK LIMITED",
+   "status": "active",
+   "incorporated": "2023-09-27"
+  },
+  {
+   "name": "Silony Medical Ltd",
+   "verdict": "candidate",
+   "number": "09046815",
+   "registered": "SILONY MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2014-05-19"
+  },
+  {
+   "name": "Sim & Skills Ltd",
+   "verdict": "candidate",
+   "number": "13016933",
+   "registered": "SIM & SKILLS LIMITED",
+   "status": "active",
+   "incorporated": "2020-11-13"
+  },
+  {
+   "name": "SIM&CURE",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words."
+  },
+  {
+   "name": "Simulaids Ltd",
+   "verdict": "candidate",
+   "number": "04084350",
+   "registered": "SIMULAIDS LTD",
+   "status": "active",
+   "incorporated": "2000-10-05"
+  },
+  {
+   "name": "Simulation Man",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ADVANCED MEDICAL SIMULATION ONLINE LIMITED."
+  },
+  {
+   "name": "Sir Jacob Behrens",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: SIR JACOB BEHRENS & SONS,LIMITED."
+  },
+  {
+   "name": "SISK Healthcare (UK) Ltd trading as Cardiac Services",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: PRIVATE PREGNANCY ULTRASOUND SERVICES LTD TRADING AS EXPECTANCY SCANNING STUDIOS LTD."
+  },
+  {
+   "name": "Siva Tec Limited",
+   "verdict": "candidate",
+   "number": "03375139",
+   "registered": "SIVA TEC LIMITED",
+   "status": "active",
+   "incorporated": "1997-05-22"
+  },
+  {
+   "name": "Sivantos Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: SIVANTOS PTE LTD."
+  },
+  {
+   "name": "Skyguard Ltd T/A Peoplesafe",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: PEOPLESAFE LIMITED."
+  },
+  {
+   "name": "Slik-Pak Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (SLIK-PAK LIMITED 02684337; SLIK-PAK HOLDINGS LIMITED 12340944). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Smartbox Assistive Technology",
+   "verdict": "candidate",
+   "number": "05541084",
+   "registered": "SMARTBOX ASSISTIVE TECHNOLOGY LIMITED",
+   "status": "active",
+   "incorporated": "2005-08-19"
+  },
+  {
+   "name": "Societe Generale Equipment Finance Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: SOCIETE GENERALE OVERSEAS FINANCE LTD."
+  },
+  {
+   "name": "Sofidel",
+   "verdict": "candidate",
+   "number": "02245657",
+   "registered": "SOFIDEL UK LIMITED",
+   "status": "active",
+   "incorporated": "1988-04-19"
+  },
+  {
+   "name": "Sol Komfort Interiors Ltd",
+   "verdict": "candidate",
+   "number": "08811658",
+   "registered": "SOL KOMFORT INTERIORS LIMITED",
+   "status": "active",
+   "incorporated": "2013-12-12"
+  },
+  {
+   "name": "Soliton IT Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: SOLITON IT LIMITED."
+  },
+  {
+   "name": "Solutions Asset Finance Limited",
+   "verdict": "candidate",
+   "number": "06022920",
+   "registered": "SOLUTIONS ASSET FINANCE LIMITED",
+   "status": "active",
+   "incorporated": "2006-12-08"
+  },
+  {
+   "name": "Soluvos Medical Ltd",
+   "verdict": "candidate",
+   "number": "10982713",
+   "registered": "SOLUVOS MEDICAL LTD",
+   "status": "active",
+   "incorporated": "2017-09-26"
+  },
+  {
+   "name": "SomnoMed UK",
+   "verdict": "candidate",
+   "number": "09145517",
+   "registered": "SOMNOMED UK LIMITED",
+   "status": "active",
+   "incorporated": "2014-07-24"
+  },
+  {
+   "name": "Sonic Labs",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: PARALLEL SONIC LABS LIMITED."
+  },
+  {
+   "name": "Source Medical",
+   "verdict": "candidate",
+   "number": "08742795",
+   "registered": "SOURCE MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2013-10-22"
+  },
+  {
+   "name": "Southgate Group Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (SOUTHGATE GROUP LIMITED 16176074; SOUTHGATE GROUP HOLDINGS LIMITED 17385984). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Sovereign Medical",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (SOVEREIGN MEDICAL LIMITED 04027264; SOVEREIGN MEDICAL GROUP LIMITED 14132012). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Sovereign Surgical LPP",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: SOVEREIGN SURGICAL LLP."
+  },
+  {
+   "name": "SP Services (UK) Ltd",
+   "verdict": "candidate",
+   "number": "03424705",
+   "registered": "SP SERVICES (UK) LIMITED",
+   "status": "active",
+   "incorporated": "1997-08-26"
+  },
+  {
+   "name": "SP Services Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: SP SERVICES & CONSULTANCY LTD."
+  },
+  {
+   "name": "Spectrum Medical Limited",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (SPECTRUM MEDICAL LIMITED 05956962; SPECTRUM MEDICAL GROUP LIMITED 09762837). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Spineart UK Ltd",
+   "verdict": "candidate",
+   "number": "08328402",
+   "registered": "SPINEART (UK) LTD",
+   "status": "active",
+   "incorporated": "2012-12-12"
+  },
+  {
+   "name": "Splice Cast Ltd t/a Eureka Physiocare",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: EUREKA PHYSIOCARE LTD."
+  },
+  {
+   "name": "Starkey Laboratories Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: STARKEY LABORATORIES LIMITED."
+  },
+  {
+   "name": "Steri Pod Limited",
+   "verdict": "candidate",
+   "number": "06333932",
+   "registered": "STERI - POD LIMITED",
+   "status": "active",
+   "incorporated": "2007-08-06"
+  },
+  {
+   "name": "Steris Instrument Management Services",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: INSTRUMENT MANAGEMENT SERVICES LTD."
+  },
+  {
+   "name": "Stowood Scientific Instruments",
+   "verdict": "candidate",
+   "number": "05195952",
+   "registered": "STOWOOD SCIENTIFIC INSTRUMENTS LTD",
+   "status": "active",
+   "incorporated": "2004-08-03"
+  },
+  {
+   "name": "Super B Plus Group Ltd",
+   "verdict": "candidate",
+   "number": "13357848",
+   "registered": "SUPER B PLUS GROUP LTD",
+   "status": "active",
+   "incorporated": "2021-04-26"
+  },
+  {
+   "name": "Suppliers",
+   "verdict": "excluded",
+   "why": "A table header captured as a supplier row when the Finance Solutions brief was parsed. Not a company. Excluded from the backfill and reported upstream: scripts/refresh_frameworks.py is what should stop capturing it."
+  },
+  {
+   "name": "Surgalign UK Ltd (Formerly Pioneer Surgical Technology B.V. or RTI Surgical)",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: BASINGSTOKE SURGICAL TECHNOLOGY LTD.."
+  },
+  {
+   "name": "Surgitrac Instruments UK Limited",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (SURGITRAC INSTRUMENTS UK LIMITED 03005986; SURGITRAC INSTRUMENTS GROUP LIMITED 10257962). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Surtex Instruments Ltd",
+   "verdict": "candidate",
+   "number": "07035724",
+   "registered": "SURTEX INSTRUMENTS LTD.",
+   "status": "active",
+   "incorporated": "2009-09-30"
+  },
+  {
+   "name": "Swann Morton",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (SWANN-MORTON LIMITED 00696744; SWANN-MORTON (EUROPE) LIMITED 02534519). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Sxwell UK Limited",
+   "verdict": "candidate",
+   "number": "02033980",
+   "registered": "SXWELL UK LTD",
+   "status": "active",
+   "incorporated": "1986-07-04"
+  },
+  {
+   "name": "Symbios",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: SYMBIOS CAPITAL LTD."
+  },
+  {
+   "name": "SynApps Solutions Ltd",
+   "verdict": "candidate",
+   "number": "04770224",
+   "registered": "SYNAPPS SOLUTIONS LIMITED",
+   "status": "active",
+   "incorporated": "2003-05-19"
+  },
+  {
+   "name": "Synectics Medical T/A SynMed",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: SYNECTICS MEDICAL LIMITED."
+  },
+  {
+   "name": "Syringa Wholesale Distributor",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: A. N. SUPPLIES (WHOLESALE ELECTRICAL DISTRIBUTORS) LIMITED."
+  },
+  {
+   "name": "System C Healthcare Ltd",
+   "verdict": "candidate",
+   "number": "01754990",
+   "registered": "SYSTEM C HEALTHCARE LIMITED",
+   "status": "active",
+   "incorporated": "1983-09-21"
+  },
+  {
+   "name": "T-Safe UK Ltd",
+   "verdict": "candidate",
+   "number": "NI650371",
+   "registered": "T-SAFE UK LTD",
+   "status": "active",
+   "incorporated": "2018-01-18"
+  },
+  {
+   "name": "Tamaki Group",
+   "verdict": "candidate",
+   "number": "15411109",
+   "registered": "TAMAKI LTD",
+   "status": "active",
+   "incorporated": "2024-01-15"
+  },
+  {
+   "name": "TBG Solutions Limited",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (TBG SOLUTIONS LIMITED 04262737; TBG GROUP SOLUTIONS LIMITED 08923106). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Techmed Charts UK Limited",
+   "verdict": "candidate",
+   "number": "08115717",
+   "registered": "TECHMED CHARTS UK LIMITED",
+   "status": "active",
+   "incorporated": "2012-06-22"
+  },
+  {
+   "name": "Technomed Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: TECHNOMED LIMITED."
+  },
+  {
+   "name": "TELA Bio Ltd",
+   "verdict": "candidate",
+   "number": "11425433",
+   "registered": "TELA BIO, LIMITED",
+   "status": "active",
+   "incorporated": "2018-06-20"
+  },
+  {
+   "name": "TENDERCARE LTD",
+   "verdict": "candidate",
+   "number": "03529108",
+   "registered": "TENDERCARE LIMITED",
+   "status": "active",
+   "incorporated": "1998-03-17"
+  },
+  {
+   "name": "TerraMed Limited",
+   "verdict": "candidate",
+   "number": "15484367",
+   "registered": "TERRAMED LIMITED",
+   "status": "active",
+   "incorporated": "2024-02-12"
+  },
+  {
+   "name": "Terramed Limited",
+   "verdict": "alias",
+   "aliasOf": "TerraMed Limited",
+   "why": "Resolves to the same registered company (15484367) as 'TerraMed Limited', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "TerraMed Ltd",
+   "verdict": "alias",
+   "aliasOf": "TerraMed Limited",
+   "why": "Resolves to the same registered company (15484367) as 'TerraMed Limited', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "TFX Group Ltd trading as Teleflex Medical",
+   "verdict": "alias",
+   "aliasOf": "TFX Group Ltd, trading as Teleflex Medical",
+   "why": "The same name as 'TFX Group Ltd, trading as Teleflex Medical', which the briefs also name, differing only in spelling or legal form. One supplier, not two. Merged by rule R8."
+  },
+  {
+   "name": "TFX Group Ltd, trading as Teleflex Medical",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: EZEC MEDICAL TRANSPORT SERVICES - TRADING AS EMED GROUP LIMITED."
+  },
+  {
+   "name": "The Barcode Warehouse Limited",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (THE BARCODE WAREHOUSE LIMITED 03842666; THE BARCODE WAREHOUSE GROUP LIMITED 13225094). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "The Better Sleep Clinic",
+   "verdict": "candidate",
+   "number": "OC437823",
+   "registered": "THE BETTER SLEEP CLINIC LLP",
+   "status": "active",
+   "incorporated": "2021-06-09"
+  },
+  {
+   "name": "The Global Development Partnership Limited",
+   "verdict": "candidate",
+   "number": "11042487",
+   "registered": "THE GLOBAL DEVELOPMENT PARTNERSHIP LIMITED",
+   "status": "active",
+   "incorporated": "2017-11-01"
+  },
+  {
+   "name": "Thera Trainer UK Ltd",
+   "verdict": "candidate",
+   "number": "06447049",
+   "registered": "THERA-TRAINER UK LTD",
+   "status": "active",
+   "incorporated": "2007-12-06"
+  },
+  {
+   "name": "TidalSense",
+   "verdict": "candidate",
+   "number": "08500211",
+   "registered": "TIDALSENSE LIMITED",
+   "status": "active",
+   "incorporated": "2013-04-23"
+  },
+  {
+   "name": "Tobii Dynavox Ltd",
+   "verdict": "candidate",
+   "number": "05091720",
+   "registered": "TOBII DYNAVOX LIMITED",
+   "status": "active",
+   "incorporated": "2004-04-02"
+  },
+  {
+   "name": "Total Mobile",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: TOTAL MOBILE MECHANICS LTD."
+  },
+  {
+   "name": "Total Ortho LLP",
+   "verdict": "unresolved",
+   "why": "TOTAL ORTHO LLP (OC426182) is an exact name match but its status is 'dissolved', not active. A company that is not trading must not be recorded as a live supplier, so no number is attached. TRADING STATUS TO CHECK BY HAND."
+  },
+  {
+   "name": "TP Leasing Limited",
+   "verdict": "candidate",
+   "number": "08767792",
+   "registered": "TP LEASING LIMITED",
+   "status": "active",
+   "incorporated": "2013-11-08"
+  },
+  {
+   "name": "TRB Chemedica (UK) Ltd",
+   "verdict": "candidate",
+   "number": "04327806",
+   "registered": "TRB CHEMEDICA (UK) LIMITED",
+   "status": "active",
+   "incorporated": "2001-11-23"
+  },
+  {
+   "name": "Trimedika Ltd",
+   "verdict": "candidate",
+   "number": "NI636113",
+   "registered": "TRIMEDIKA LIMITED",
+   "status": "active",
+   "incorporated": "2016-02-01"
+  },
+  {
+   "name": "Triple Point Lease Partners",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: TRIPLE POINT NAVIGATOR PARTNERS LLP."
+  },
+  {
+   "name": "TSC Endovision",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ENDOVISION LTD."
+  },
+  {
+   "name": "UKR",
+   "verdict": "excluded",
+   "why": "Three letters with no expansion anywhere in the Paper Hygiene brief. Not usable as a company name. Excluded from the backfill and reported upstream: scripts/refresh_frameworks.py is what should stop capturing it."
+  },
+  {
+   "name": "UNEEG Medical UK Ltd",
+   "verdict": "candidate",
+   "number": "13050610",
+   "registered": "UNEEG MEDICAL UK LTD.",
+   "status": "active",
+   "incorporated": "2020-11-30"
+  },
+  {
+   "name": "Uniphar Medtech UK Limited T/A Cardiac Services",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: UNIPHAR MEDTECH HOLDINGS UK LIMITED."
+  },
+  {
+   "name": "United Imaging Health Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: UNITED IMAGING HEALTHCARE GB LIMITED."
+  },
+  {
+   "name": "United Orthopaedic Corporation UK Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: AFRICA UNITED CORPORATION LTD."
+  },
+  {
+   "name": "Universal Aids",
+   "verdict": "candidate",
+   "number": "00886885",
+   "registered": "UNIVERSAL AIDS LIMITED",
+   "status": "active",
+   "incorporated": "1966-09-01"
+  },
+  {
+   "name": "UNOQUIP GMBH",
+   "verdict": "foreign",
+   "why": "The name carries a non-UK legal form, so no Companies House record is expected for the awarded entity. Any similarly-named UK company is a different legal person and is not recorded here. Companies House does return UNOQUIP GMBH (FC041057), which is NOT assumed to be the same company."
+  },
+  {
+   "name": "Uvisan Limited",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (UVISAN LIMITED 13625972; UVISAN HOLDINGS LIMITED 14346357). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Vannin Healthcare Global Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: VANNIN HEALTHCARE INTERNATIONAL LIMITED."
+  },
+  {
+   "name": "Vapotherm UK Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: VAPOTHERM UK LTD."
+  },
+  {
+   "name": "Varta Microbattery GmbH",
+   "verdict": "foreign",
+   "why": "The name carries a non-UK legal form, so no Companies House record is expected for the awarded entity. Any similarly-named UK company is a different legal person and is not recorded here. Companies House does return VARTA MICROBATTERY GMBH (FC025059), which is NOT assumed to be the same company."
+  },
+  {
+   "name": "Vascular Perspectives Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (VASCULAR PERSPECTIVES LIMITED 04858052; VASCULAR PERSPECTIVES HOLDINGS LIMITED 09662357). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Vector Consumer",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (VECTOR CONSUMER LIMITED 12422871; VECTOR CONSUMER EUROPE LIMITED NI680769). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Veni Vidi Medical Limited",
+   "verdict": "candidate",
+   "number": "06970399",
+   "registered": "VENI VIDI MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "2009-07-23"
+  },
+  {
+   "name": "Venture Healthcare Ltd",
+   "verdict": "candidate",
+   "number": "09579278",
+   "registered": "VENTURE HEALTHCARE LTD",
+   "status": "active",
+   "incorporated": "2015-05-07"
+  },
+  {
+   "name": "Viamed Ltd",
+   "verdict": "candidate",
+   "number": "01291765",
+   "registered": "VIAMED LIMITED",
+   "status": "active",
+   "incorporated": "1976-12-22"
+  },
+  {
+   "name": "Viewray,Inc",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words."
+  },
+  {
+   "name": "Viomedex Ltd",
+   "verdict": "candidate",
+   "number": "01310102",
+   "registered": "VIOMEDEX LIMITED",
+   "status": "active",
+   "incorporated": "1977-04-22"
+  },
+  {
+   "name": "Vision Matrix",
+   "verdict": "candidate",
+   "number": "03152261",
+   "registered": "VISION MATRIX LIMITED",
+   "status": "active",
+   "incorporated": "1996-01-29"
+  },
+  {
+   "name": "Vision Pharmaceuticals Ltd T/A Spectrum",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: VISION PHARMACEUTICALS LTD."
+  },
+  {
+   "name": "Viveca Biomed Ltd",
+   "verdict": "candidate",
+   "number": "10707038",
+   "registered": "VIVECA BIOMED LIMITED",
+   "status": "active",
+   "incorporated": "2017-04-04"
+  },
+  {
+   "name": "VTM (UK) Limited",
+   "verdict": "candidate",
+   "number": "06318441",
+   "registered": "VTM (UK) LIMITED",
+   "status": "active",
+   "incorporated": "2007-07-19"
+  },
+  {
+   "name": "Wardray Premise Limited",
+   "verdict": "candidate",
+   "number": "00347881",
+   "registered": "WARDRAY PREMISE LIMITED",
+   "status": "active",
+   "incorporated": "1938-12-31"
+  },
+  {
+   "name": "Warwick Sasco",
+   "verdict": "alias",
+   "aliasOf": "Warwick SASCo Ltd",
+   "why": "Resolves to the same registered company (01574591) as 'Warwick SASCo Ltd', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "Warwick SASCo Ltd",
+   "verdict": "candidate",
+   "number": "01574591",
+   "registered": "WARWICK SASCO LIMITED",
+   "status": "active",
+   "incorporated": "1981-07-15"
+  },
+  {
+   "name": "Wel Medical",
+   "verdict": "alias",
+   "aliasOf": "Wel Medical Ltd",
+   "why": "Resolves to the same registered company (05714397) as 'Wel Medical Ltd', which the briefs also name. One business, two spellings."
+  },
+  {
+   "name": "Wel Medical Ltd",
+   "verdict": "candidate",
+   "number": "05714397",
+   "registered": "WEL MEDICAL LTD",
+   "status": "active",
+   "incorporated": "2006-02-20"
+  },
+  {
+   "name": "Westfield Medical Ltd",
+   "verdict": "candidate",
+   "number": "02769324",
+   "registered": "WESTFIELD MEDICAL LIMITED",
+   "status": "active",
+   "incorporated": "1992-11-30"
+  },
+  {
+   "name": "WHEELSHARE (LONDON) LTD",
+   "verdict": "candidate",
+   "number": "14227325",
+   "registered": "WHEELSHARE (LONDON) LTD",
+   "status": "active",
+   "incorporated": "2022-07-12"
+  },
+  {
+   "name": "Wiliams Medical Supplies Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: AAA MEDICAL SUPPLIES LTD."
+  },
+  {
+   "name": "Willingsford Limited",
+   "verdict": "candidate",
+   "number": "07462271",
+   "registered": "WILLINGSFORD LIMITED",
+   "status": "active",
+   "incorporated": "2010-12-07"
+  },
+  {
+   "name": "Womanzone UK Ltd",
+   "verdict": "candidate",
+   "number": "08229436",
+   "registered": "WOMANZONE (UK) LTD",
+   "status": "active",
+   "incorporated": "2012-09-26"
+  },
+  {
+   "name": "WSR Medical Solutions Ltd",
+   "verdict": "candidate",
+   "number": "09366606",
+   "registered": "WSR MEDICAL SOLUTIONS LIMITED",
+   "status": "active",
+   "incorporated": "2014-12-24"
+  },
+  {
+   "name": "Xiel Ltd",
+   "verdict": "candidate",
+   "number": "11875702",
+   "registered": "XIEL LTD",
+   "status": "active",
+   "incorporated": "2019-03-12"
+  },
+  {
+   "name": "Xtra-Med",
+   "verdict": "candidate",
+   "number": "05968756",
+   "registered": "XTRA MED LIMITED",
+   "status": "active",
+   "incorporated": "2006-10-16"
+  },
+  {
+   "name": "XVIVO",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: XVIVOSOL LIMITED."
+  },
+  {
+   "name": "Zebra Technologies",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ZEBRA TECHNOLOGIES EUROPE LIMITED."
+  }
+ ]
+}

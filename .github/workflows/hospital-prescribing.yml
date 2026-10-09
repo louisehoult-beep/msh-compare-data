@@ -1,0 +1,112 @@
+name: Hospital prescribing by trust (NHSBSA, monthly source)
+
+# WHY THIS WORKFLOW EXISTS (added 30/09/2026, Lou approved in chat)
+#
+# data/hospital-prescribing/ (index.json + one shard per BNF chapter) is built by
+# scripts/refresh_hospital_prescribing.py from NHSBSA's "Hospital Prescribing
+# Dispensed in the Community" dataset. Until today nothing ran it on a schedule:
+# it was refreshed by hand (18/08, 18/09, 30/09/2026). The Hospital Prescribing
+# tool reads it, and so does build_speciality_panels.py (HPData) for the
+# "secondary care" column of the dermatology market-share view, so every month
+# nobody remembered, both went a month staler. The GP sibling
+# (gp-prescribing.yml) already had a schedule; this is the same pattern.
+#
+# TIMING. Checked on opendata.nhsbsa.net (CKAN package_show, resource `created`)
+# on 30/09/2026: every monthly file from 202412 to 202607 was published between
+# the 14th and the 23rd of the month, about seven weeks after the month ends
+# (202607 on 21/09/2026, 202606 on 21/08, 202605 on 22/07, 202604 on 23/06), at
+# anything from 06:36 to 15:51 UTC. The one revision in that span,
+# 202505FINAL, landed on 14/08/2025. So the job runs daily on the 14th to the
+# 28th at 17:40 UTC, after the day's publication window: a file NHSBSA posts
+# that afternoon is built the same evening, and the 07:00 speciality-panels.yml
+# rebuild carries it onto the Hub the next morning.
+#
+# `--if-new` makes a day with nothing new a no-op in a second or two. It rebuilds
+# when a newer month appears, when a month carried as a gap is published, or
+# when a month in the 13-month window is republished as a revision (index.json
+# `sourceFiles` records which file each month was read from). Comparing only the
+# latest month, as the GP builder does, would have missed 202505FINAL.
+#
+# GATES. verify.py (via gate.sh, like every other writer) checks the periods are
+# well formed and in order, the trend floor is the one the script runs, and the
+# shards agree with the index. Nothing commits until it passes, and a failed
+# run leaves the last good build live.
+
+on:
+  schedule:
+    # 17:40 UTC, days 14-28: after NHSBSA's publication window and the 17:00
+    # differentiator run, before the next morning's 07:00 panels rebuild.
+    - cron: "40 17 14-28 * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Rebuild even if NHSBSA has published nothing new (yes/no)"
+        required: false
+        default: "no"
+
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  hospital-prescribing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Build hospital prescribing by trust
+        run: |
+          if [ "${{ github.event.inputs.force }}" = "yes" ]; then
+            python3 scripts/refresh_hospital_prescribing.py
+          else
+            python3 scripts/refresh_hospital_prescribing.py --if-new
+          fi
+
+      - name: Publish gate — the same one every other writer runs
+        run: bash scripts/gate.sh
+
+      - name: Commit and push
+        run: |
+          git config user.name "hub-bot"
+          git config user.email "contact@elevateandthrive.uk"
+          git add data/hospital-prescribing/
+          if git diff --cached --quiet; then
+            echo "no change to commit"
+            exit 0
+          fi
+          latest=$(python3 -c "import json;print(json.load(open('data/hospital-prescribing/index.json'))['periods'][-1])")
+          git commit -m "Hospital prescribing by trust to $latest ($(date -u +%F))"
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (attempt $attempt), rebasing and re-gating"
+            git fetch origin
+            git rebase origin/main
+            bash scripts/gate.sh || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
+            sleep 5
+          done
+          if [ "$pushed" != "1" ]; then
+            echo "could not push after 5 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi
+
+      - name: Phone alert if the refresh failed (ntfy)
+        if: failure()
+        run: |
+          curl -s -H "Title: Medical Sales Hub - HOSPITAL PRESCRIBING DID NOT REFRESH" -H "Priority: default" -H "Tags: warning" \
+            -d "The monthly hospital prescribing refresh failed. The Hub keeps serving the last good build, so nothing is wrong on the page - but the Hospital Prescribing tool and the dermatology secondary-care share stay a month behind until it goes green. github.com/louisehoult-beep/msh-compare-data/actions" \
+            ntfy.sh/eth-hub-lou-4437

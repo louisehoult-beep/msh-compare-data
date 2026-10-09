@@ -1,0 +1,77 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "ref": "ETH-DB4C1294E",
+  "contact": "contact@elevateandthrive.uk"
+ },
+ "rule": "A framework listed here is STILL counted honestly in the ledger — its coverage %, its Left count and its supplier buckets are untouched. The ONLY effect is that build_coverage_ledger.py leaves it out of the 'Lowest-coverage STARTED frameworks that still have work left' pick list, so differentiator-framework-coverage stops re-selecting a framework whose entire remaining Left is waiting on a decision only Lou can make. A deferral fires ONLY while every actionable supplier on that framework appears in its 'suppliers' list: the moment a new awarded supplier, a new unresolved name or a new held range appears, the deferral stops applying and the framework returns to the pick list on its own. Remove the entry once its decision is made.",
+ "deferrals": [
+  {
+   "framework": "Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices",
+   "reason": "All three remaining suppliers need a routing or identity ruling from Lou, not crawl or mapping work. Xiel Ltd's Radiotherapy division is filed imaging:mobile, outside oncology's catsInScope (^o460); Medical Imaging Systems (MIS Healthcare) has its Imaging (55 products) and Veterinary (14) divisions still unmapped to Hub vocabulary (^o320) — the duplicate seed record was merged on 17/09/2026 (7429856) and its Ultrasound division now maps to ultrasound:cart/ultrasound:port; Promedics Orthopaedics Ltd publishes only orthopaedic bracing, correctly held (^o434).",
+   "queuedIn": "02-Elevate-and-Thrive/Hub/identity-vocab-decision-queue.md",
+   "decisionRef": "^o411",
+   "suppliers": [
+    "Medical Imaging Systems (MIS Healthcare)",
+    "Promedics Orthopaedics Ltd",
+    "Xiel Ltd"
+   ],
+   "addedOn": "2026-09-14",
+   "addedBecause": "^o465 — the framework-coverage picker selected this framework on 10/09, 11/09 and 13/09 and each run re-confirmed zero movement, because there is no permitted route left that does not start with Lou's ruling."
+  }
+ ],
+ "exclusionsRule": "Suppliers Lou has ruled are NOT a coverage target on a framework. An exclusion IS the decision (a deferral only waits on one). Effect: the named suppliers leave Left and the pick list in build_coverage_ledger.py and are listed under excludedByRuling; they stay in Awarded, in supplier-seed.json and in whatever they publish. An entry applies ONLY to the suppliers it names, so a newly awarded supplier on the same framework is not excluded by an earlier ruling. Policy shapes: general-purpose-computing-not-assistive-technology in data/identity-vocabulary-policy.json (Iansyst); the rest are scope rulings recorded in the entry.",
+ "exclusions": [
+  {
+   "framework": "Digital Diagnostic Solutions",
+   "wholeFramework": true,
+   "decisionRef": "^o268",
+   "ruledOn": "2026-10-09",
+   "ruledBy": "Louise Hoult",
+   "reason": "Lou ruled 09/10/2026 that this framework is NOT a coverage target any more. Its 7 remaining suppliers already publish ranges elsewhere in the Differentiator and nothing they sell is clinical IT software or hardware under digital:hw/sw (confirmed 18/09/2026 against 36 NHSSC-cache catalogue terms), so the ceiling is structural. Nothing is deleted or re-categorised.",
+   "suppliers": [
+    "Draeger Medical UK",
+    "Haemonetics",
+    "Leica Microsystems (UK)",
+    "Olympus (KeyMed)",
+    "Philips",
+    "Roche Diagnostics UK",
+    "Siemens Healthineers"
+   ]
+  },
+  {
+   "framework": "Ultrasound Scanners and Associated Options and Related Services",
+   "decisionRef": "^o617",
+   "ruledOn": "2026-10-09",
+   "ruledBy": "Louise Hoult",
+   "reason": "Lou ruled 09/10/2026, same mechanism as ^o268. These 5 suppliers have no ultrasound product on any crawlable catalogue or in NHS Supply Chain's catalogue (Celtic SMR was the only resolvable one, 23.8% to 28.6%). They stay awarded and keep whatever they publish elsewhere.",
+   "suppliers": [
+    "BioSpectrum Ltd",
+    "Hologic UK",
+    "Philips",
+    "ProSys International Ltd",
+    "Siemens Healthineers"
+   ]
+  },
+  {
+   "framework": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+   "decisionRef": "^o632",
+   "ruledOn": "2026-10-09",
+   "ruledBy": "Louise Hoult",
+   "reason": "Lou ruled 09/10/2026: Iansyst Ltd's 13 DSA computing products (MacBook and other Apple, HP, Lenovo, Eizo lines) are general-purpose computing sold as DSA upgrades, not assistive technology. They stay published under IT & computer equipment (it:hw) and leave the TEC coverage target. Tobii Dynavox Ltd (^o631): Lou ruled 09/10/2026: parent-catalogue products held; excluded from TEC target.",
+   "suppliers": [
+    "Iansyst Ltd",
+    "Tobii Dynavox Ltd"
+   ],
+   "supplierRefs": {
+    "Tobii Dynavox Ltd": "^o631"
+   }
+  }
+ ]
+}

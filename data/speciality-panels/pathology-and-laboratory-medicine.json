@@ -1,0 +1,2826 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "pathology-and-laboratory-medicine",
+ "label": "Pathology and Laboratory Medicine",
+ "defined": true,
+ "generated": "2026-10-09",
+ "dataAsOf": {
+  "frameworks": "2026-10-05",
+  "tenderHistory": "2026-10-09",
+  "frameworkAwards": "2026-10-09T13:11:59+00:00",
+  "openTenders": "09/10/2026",
+  "drugTariff": "2026-10-09",
+  "localIntel": "2026-10-09",
+  "supplierDirectory": "2026-10-07",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-10-09",
+  "drugTariffViiia": null,
+  "hospitalPrescribing": null
+ },
+ "rules": {
+  "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
+  "frameworks": "NHS Supply Chain framework names matching /\\b(laboratory diagnostics|blood collection devices)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. WHAT THE COUNTS BELOW DO AND DO NOT COVER. The 122 suppliers on Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services are the names NHS Supply Chain lists across seven lots (122, matching the total the brief states). They are not 122 competitors for any one piece of business: on the product matrix as read for this rule, no supplier is on all seven lots, only Roche Diagnostics and VWR International are on six, and 71 of its 122 names are on exactly one lot. Lot 7, Outsourcing, was never awarded at all, so no supplier below is a route to a managed pathology service through this agreement. This panel carries no lot-by-lot split because the product matrix is not part of this dataset; page 2827 sets the lot structure out in full. Three NHS Supply Chain frameworks that carry a genuine laboratory strand are counted elsewhere and named in the rule rather than dropped: Digital Diagnostic Solutions, whose 54 suppliers mix laboratory information systems and digital pathology with about twenty radiology and imaging-AI firms and which publishes no supplier-by-lot split, is left to the radiology and imaging page; Specimen Cabinets is specimen radiography, an X-ray framework, despite its name; and the cardiac, audiological and sleep diagnostics frameworks belong to their own specialities. The awards list is filtered on contract titles, so it shows what a buyer chose to call a purchase. Two rows in it are histology service contracts bought by Police and Crime Commissioners rather than by the NHS. They are kept, and the buyer is named on each row, because coronial histopathology is the same discipline bought from the same laboratories; forensic DNA profiling, which is not, is excluded. Several rows are academic buyers — Queen's University Belfast, the London School of Hygiene and Tropical Medicine, the Liverpool School of Tropical Medicine — kept on the same test: the product is a clinical diagnostic one and the buyer is stated. Research-only single-cell and spatial biology platforms are excluded, whoever bought them.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. WHAT THE COUNTS BELOW DO AND DO NOT COVER. The 122 suppliers on Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services are the names NHS Supply Chain lists across seven lots (122, matching the total the brief states). They are not 122 competitors for any one piece of business: on the product matrix as read for this rule, no supplier is on all seven lots, only Roche Diagnostics and VWR International are on six, and 71 of its 122 names are on exactly one lot. Lot 7, Outsourcing, was never awarded at all, so no supplier below is a route to a managed pathology service through this agreement. This panel carries no lot-by-lot split because the product matrix is not part of this dataset; page 2827 sets the lot structure out in full. Three NHS Supply Chain frameworks that carry a genuine laboratory strand are counted elsewhere and named in the rule rather than dropped: Digital Diagnostic Solutions, whose 54 suppliers mix laboratory information systems and digital pathology with about twenty radiology and imaging-AI firms and which publishes no supplier-by-lot split, is left to the radiology and imaging page; Specimen Cabinets is specimen radiography, an X-ray framework, despite its name; and the cardiac, audiological and sleep diagnostics frameworks belong to their own specialities. The awards list is filtered on contract titles, so it shows what a buyer chose to call a purchase. Two rows in it are histology service contracts bought by Police and Crime Commissioners rather than by the NHS. They are kept, and the buyer is named on each row, because coronial histopathology is the same discipline bought from the same laboratories; forensic DNA profiling, which is not, is excluded. Several rows are academic buyers — Queen's University Belfast, the London School of Hygiene and Tropical Medicine, the Liverpool School of Tropical Medicine — kept on the same test: the product is a clinical diagnostic one and the buyer is stated. Research-only single-cell and spatial biology platforms are excluded, whoever bought them.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(patholog\\w*|histolog\\w*|cytolog\\w*|immunohistochem\\w*|microbiolog\\w*|biochem\\w*|haematolog\\w*|hematolog\\w*|immunolog\\w*|virolog\\w*|serolog\\w*|toxicolog\\w*|mycolog\\w*|parasitolog\\w*|blood scienc\\w*|reagents?|assays?|analys(?:er|ers|or|ors)|laboratory (?:medicine|diagnostic\\w*)|blood collection|phlebotom\\w*|venepunctur\\w*|venipunctur\\w*|vacutainer|specimen (?:bags?|containers?|transport|collection|pots?|tubes?|reception)|transport of human tissue\\w*|point[- ]of[- ]care|\\bPOCT\\b|\\bPCR\\b|next generation sequencing|\\bNGS\\b|sequencing|genomic\\w*|nucleic acid|genotyping|\\bRCI\\b|mycobacteria\\w*|bacterial id\\b|bacteria testing|susceptibility testing|antimicrobial susceptib\\w*|antimicrobial diffusion disc\\w*|cytogenetic\\w*|exome|molecular (?:diagnostic\\w*|patholog\\w*|test\\w*)|\\bacgh\\b|slide scanner|digital patholog\\w*|cryostat|microtome|tissue processor|(?:auto)?stainers?|\\bLIMS\\b|laboratory information (?:management )?system\\w*|transfusion|blood group\\w*|red cell|blood bank|newborn screening|bloodspot|blood[- ]spot|genetic screening|bowel screening|cervical screening|cervical cytolog\\w*|bacterial screening|\\bFIT kits?\\b|faecal immunochemical|culture media|blood culture|swabs?|agar|blood gas|coagulation|haemostasis|hemostasis|immunoassay|\\bELISA\\b|mass spectrom\\w*|flow cytometr\\w*|\\bHLA\\b|tissue typing|histocompatib\\w*|urinalys\\w*|urine (?:collection|culture|specimen|sample)\\w*|in vitro diagnostic\\w*|test kits?|testing kits?)\\b/i and does not match /(veterinar\\w*|\\bAFBI\\b|DAERA|animal and plant health|boot swab|\\bBVD\\b|milk samples|johne|spongiform|nhs pathologist|\\bFSNI\\b|10x genomics|chromium instrument|spatial genomics|single[- ]cell|nextseq sequencing consumables|molecular biology reagents|label reagents|biomarker assay|tissue culture|cooling system|visual field|ocular analys\\w*|electrosurgical|cut & coagulation|quanti[- ]?tray|coliert|colilert|water treatment|fleming fund|endoscopy|point of care ultrasound|\\bpocus\\b|haemostatic|hemostatic|bovigam|vettb|cervids?|cattle|bovine|\\bdiva\\b|\\bcefas\\w*|x[- ]?ray fluorescence|laser induced breakdown|drug driving)/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33696 or 85145 or 851118 or 38434 or 2493125 or 33124130 or 33141625 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: bloodcoll, pathology). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 7 of the 9 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (0 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (1 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-09.",
+  "drugTariffViiia": null
+ },
+ "counts": {
+  "frameworks": 2,
+  "suppliers": 132,
+  "suppliersUnresolved": 0,
+  "awardsShown": 40,
+  "awardsMatched": 499,
+  "awardsWithheldByBuyerCap": 0,
+  "awardsShownNotYetAwarded": 14,
+  "openTenders": 2,
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 128,
+  "suppliersDirectoryTagged": 9,
+  "suppliersDirectoryOnOtherFrameworks": 7,
+  "suppliersDirectoryWithFrameworkNote": 7,
+  "gpMarkets": 0,
+  "mhraDsu": 0,
+  "drugTariffViiiaLines": 0
+ },
+ "frameworks": [
+  {
+   "name": "Blood Collection Devices",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/blood-collection-devices/",
+   "reference": "2024/S 000-033791",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "13 October 2025",
+   "ends": "12 October 2027",
+   "supplierCount": 19,
+   "supplierSource": "count verified against the page's own stated total (19)",
+   "suppliers": [
+    "Balmung Medical Handel GmbH",
+    "Becton, Dickinson U.K. Limited",
+    "Cambridge Sensors Ltd",
+    "Crest Medical Ltd",
+    "GBUK Ltd",
+    "Greiner Bio-One Ltd",
+    "Iskus Health UK Limited",
+    "ISOL8 Healthcare Ltd",
+    "Nipro Medical Europe",
+    "Owen Mumford Ltd",
+    "Prosum Medical Ltd",
+    "Radiometer Ltd",
+    "Reflex Medical Limited",
+    "Reliance Medical Ltd",
+    "RPG Medical Limited",
+    "Sarstedt Ltd",
+    "Siemens Healthcare Diagnostics Limited",
+    "Smiths Medical International Ltd",
+    "Vygon (UK) Ltd"
+   ],
+   "delisted": [
+    "IMS Euro Ltd",
+    "Sol Millenium Medical UK Ltd",
+    "Sterilab Services."
+   ]
+  },
+  {
+   "name": "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/laboratory-diagnostics-point-of-care-testing-and-pathology/",
+   "reference": "2023/S 000-028831",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct, Stocked, eDirect",
+   "starts": "12 March 2024",
+   "ends": "11 March 2028",
+   "supplierCount": 122,
+   "supplierSource": "count verified against the page's own stated total (122)",
+   "suppliers": [
+    "1 Stop Medical Supplies LTD",
+    "2San Global Limited",
+    "Menarini Diagnostics",
+    "Abbott Laboratories Limited",
+    "Abbott Rapid Diagnostics Limited",
+    "Abbott Toxicology Ltd",
+    "AB Scientific Limited",
+    "Advanced Global Health Ltd",
+    "AESKU.UK LIMITED",
+    "AFOS LIMITED",
+    "Agilent Technologies LDA UK Ltd",
+    "Alpha Laboratories Ltd",
+    "Andrac Ltd",
+    "Apacor Ltd",
+    "Appleton Woods Ltd",
+    "AttoLife Ltd (formerly Anglia DNA)",
+    "Barber of Sheffield Ltd",
+    "Beckman Coulter United Kingdom Limited",
+    "Becton, Dickinson U.K. Limited",
+    "BHA Medical Limited",
+    "BHR Pharmaceuticals Ltd",
+    "bioMerieux UK Ltd",
+    "Bio-Packaging Ltd",
+    "Bio-Rad Laboratories Limited",
+    "Bruker UK Ltd",
+    "CellPath Ltd",
+    "Cepheid",
+    "Chirus Limited",
+    "Clinical Design Technologies LTD",
+    "Coolmed Ltd",
+    "Craven & Co",
+    "Critical Healthcare Ltd",
+    "Denward Manufacturing Ltd",
+    "DGP Intelsius LTD",
+    "Diagnostica Stago UK Ltd",
+    "DiaSorin Ltd",
+    "Digostics",
+    "Don Whitley Scientific Ltd",
+    "DWK Life Sciences Ltd",
+    "E&O Laboratories Ltd",
+    "Edinburgh Genetics Limited",
+    "ELITech UK LTD",
+    "Epredia",
+    "ESTS(GB)Ltd",
+    "Ethicheck Ltd",
+    "EUROIMMUN UK",
+    "Exact Sciences UK Ltd",
+    "Fisher Scientific UK LTD",
+    "FUJIFILM UK Ltd",
+    "Genetic Signatures",
+    "Genmed Ltd",
+    "Glen Dimplex Home Appliances",
+    "Greiner Bio-One Ltd",
+    "Grifols UK",
+    "Haemonetics Ltd",
+    "Haier Biomedical",
+    "Hawksley & Sons",
+    "Helena Biosciences",
+    "Henry Schein UK Holdings Ltd",
+    "Hologic Ltd",
+    "Home Health (UK) Ltd",
+    "HORIBA UK Limited",
+    "Hygeco",
+    "IBG Immucor Ltd",
+    "Illumina Cambridge Ltd",
+    "International Scientific Supplies Ltd",
+    "Kinetik Medical Devices Ltd",
+    "Labcold Ltd",
+    "Launch Diagnostics Ltd",
+    "LEEC Ltd",
+    "Leica Microsystems (UK) Ltd",
+    "Life Technologies Ltd",
+    "LTE Scientific Limited",
+    "LumiraDx Ltd",
+    "Mast Group Ltd",
+    "Matrix Diagnostics Limited",
+    "Medecon Healthcare UK Ltd",
+    "Medical Wire & Equipment Co (Bath) Ltd",
+    "Medline Scientific Limited",
+    "MedScience Distribution Ltd",
+    "Mornington 2000LLP Trading as Sterilab Services",
+    "Msoft Esolutions Ltd",
+    "nal von minden",
+    "Nova Biomedical",
+    "Ortho Clinical Diagnostics/Quidel",
+    "OscarTech UK Ltd",
+    "Oxford Biosystems Ltd",
+    "Pasante Healthcare",
+    "Revvity formerly PerkinElmer LAS (UK) Limited",
+    "pfm medical UK Ltd",
+    "PHC Europe B.V",
+    "Pisces Scientific Ltd",
+    "Pro-Lab",
+    "Promega UK Ltd",
+    "QIAGEN LTD",
+    "R & L Slaughter Ltd",
+    "Radiometer Ltd",
+    "Randox Laboratories Ltd",
+    "Roche Diagnostics Ltd",
+    "Sakura Finetek UK Ltd",
+    "Sarstedt Ltd",
+    "Scientific Laboratory Supplies Ltd",
+    "SciQuip Ltd",
+    "Sebia UK Ltd",
+    "Serosep UK",
+    "Siemens Healthcare Diagnostics Limited",
+    "Solmedia Ltd",
+    "SureScreen Diagnostics Limited",
+    "Sychem Limited",
+    "SYRINGA UK LTD",
+    "Sysmex UK",
+    "Thermo Electron LED GmbH",
+    "Thermo Electron Manufacturing Ltd t/a Thermo Fisher Scientific",
+    "Thermo Fisher Diagnostics Ltd",
+    "Thriva",
+    "Twist Bioscience",
+    "Una Health Ltd",
+    "Valley Northern Ltd",
+    "VWR International Ltd",
+    "Werfen Limited",
+    "Williams Medical Supplies Limited",
+    "Wolf Laboratories Limited"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Becton, Dickinson U.K. Limited"
+   ],
+   "frameworks": [
+    "Blood Collection Devices",
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Greiner Bio-One Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices",
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Radiometer UK",
+   "resolved": true,
+   "variants": [
+    "Radiometer Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices",
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Sarstedt Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices",
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Siemens Healthineers",
+   "resolved": true,
+   "variants": [
+    "Siemens Healthcare Diagnostics Limited"
+   ],
+   "frameworks": [
+    "Blood Collection Devices",
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "1 Stop Medical Supplies",
+   "resolved": true,
+   "variants": [
+    "1 Stop Medical Supplies LTD"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "2San Global",
+   "resolved": true,
+   "variants": [
+    "2San Global Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "A. Menarini Diagnostics Ltd",
+   "resolved": true,
+   "variants": [
+    "Menarini Diagnostics"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "AB Scientific",
+   "resolved": true,
+   "variants": [
+    "AB Scientific Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Abbott Diagnostics",
+   "resolved": true,
+   "variants": [
+    "Abbott Rapid Diagnostics Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Abbott Laboratories Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Abbott Toxicology",
+   "resolved": true,
+   "variants": [
+    "Abbott Toxicology Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Advanced Global Health",
+   "resolved": true,
+   "variants": [
+    "Advanced Global Health Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "AESKU.UK",
+   "resolved": true,
+   "variants": [
+    "AESKU.UK LIMITED"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "AFOS",
+   "resolved": true,
+   "variants": [
+    "AFOS LIMITED"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Agilent Technologies UK",
+   "resolved": true,
+   "variants": [
+    "Agilent Technologies LDA UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Alpha Laboratories",
+   "resolved": true,
+   "variants": [
+    "Alpha Laboratories Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Andrac Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Apacor",
+   "resolved": true,
+   "variants": [
+    "Apacor Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Appleton Woods",
+   "resolved": true,
+   "variants": [
+    "Appleton Woods Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "AttoLife",
+   "resolved": true,
+   "variants": [
+    "AttoLife Ltd (formerly Anglia DNA)"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Balmung Medical Handel GmbH",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Barber of Sheffield",
+   "resolved": true,
+   "variants": [
+    "Barber of Sheffield Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Beckman Coulter",
+   "resolved": true,
+   "variants": [
+    "Beckman Coulter United Kingdom Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "BHA Medical",
+   "resolved": true,
+   "variants": [
+    "BHA Medical Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "BHR Pharmaceuticals",
+   "resolved": true,
+   "variants": [
+    "BHR Pharmaceuticals Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Bio-Packaging",
+   "resolved": true,
+   "variants": [
+    "Bio-Packaging Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Bio-Rad Laboratories UK",
+   "resolved": true,
+   "variants": [
+    "Bio-Rad Laboratories Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "bioMérieux UK",
+   "resolved": true,
+   "variants": [
+    "bioMerieux UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Bruker UK",
+   "resolved": true,
+   "variants": [
+    "Bruker UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Cambridge Sensors Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "CellPath",
+   "resolved": true,
+   "variants": [
+    "CellPath Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Cepheid",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Chirus",
+   "resolved": true,
+   "variants": [
+    "Chirus Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Clinical Design Technologies",
+   "resolved": true,
+   "variants": [
+    "Clinical Design Technologies LTD"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Coolmed",
+   "resolved": true,
+   "variants": [
+    "Coolmed Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Craven & Co",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Critical Healthcare",
+   "resolved": true,
+   "variants": [
+    "Critical Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Denward Manufacturing",
+   "resolved": true,
+   "variants": [
+    "Denward Manufacturing Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "DGP Intelsius",
+   "resolved": true,
+   "variants": [
+    "DGP Intelsius LTD"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Diagnostica Stago UK",
+   "resolved": true,
+   "variants": [
+    "Diagnostica Stago UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "DiaSorin",
+   "resolved": true,
+   "variants": [
+    "DiaSorin Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Digostics",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Don Whitley Scientific",
+   "resolved": true,
+   "variants": [
+    "Don Whitley Scientific Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "DWK Life Sciences",
+   "resolved": true,
+   "variants": [
+    "DWK Life Sciences Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "E&O Laboratories",
+   "resolved": true,
+   "variants": [
+    "E&O Laboratories Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Edinburgh Genetics",
+   "resolved": true,
+   "variants": [
+    "Edinburgh Genetics Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "ELITech UK",
+   "resolved": true,
+   "variants": [
+    "ELITech UK LTD"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Epredia",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "ESTS (GB)",
+   "resolved": true,
+   "variants": [
+    "ESTS(GB)Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Ethicheck",
+   "resolved": true,
+   "variants": [
+    "Ethicheck Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "EUROIMMUN UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Exact Sciences UK",
+   "resolved": true,
+   "variants": [
+    "Exact Sciences UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Fujifilm Healthcare UK",
+   "resolved": true,
+   "variants": [
+    "FUJIFILM UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GBUK Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Genetic Signatures",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Genmed",
+   "resolved": true,
+   "variants": [
+    "Genmed Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Glen Dimplex Home Appliances",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Grifols UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Grifols UK"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Haemonetics",
+   "resolved": true,
+   "variants": [
+    "Haemonetics Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Haier Biomedical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Hawksley & Sons",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Helena Biosciences",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Henry Schein UK Holdings",
+   "resolved": true,
+   "variants": [
+    "Henry Schein UK Holdings Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Hologic UK",
+   "resolved": true,
+   "variants": [
+    "Hologic Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Home Health (UK)",
+   "resolved": true,
+   "variants": [
+    "Home Health (UK) Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "HORIBA UK",
+   "resolved": true,
+   "variants": [
+    "HORIBA UK Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Hygeco",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "ICU Medical (incl. Smiths Medical)",
+   "resolved": true,
+   "variants": [
+    "Smiths Medical International Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Illumina UK",
+   "resolved": true,
+   "variants": [
+    "Illumina Cambridge Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Immucor (IBG Immucor)",
+   "resolved": true,
+   "variants": [
+    "IBG Immucor Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "International Scientific Supplies",
+   "resolved": true,
+   "variants": [
+    "International Scientific Supplies Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Iskus Health UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "ISOL8 Healthcare Limited",
+   "resolved": true,
+   "variants": [
+    "ISOL8 Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Kinetik Medical Devices",
+   "resolved": true,
+   "variants": [
+    "Kinetik Medical Devices Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Labcold",
+   "resolved": true,
+   "variants": [
+    "Labcold Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Launch Diagnostics",
+   "resolved": true,
+   "variants": [
+    "Launch Diagnostics Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "LEEC",
+   "resolved": true,
+   "variants": [
+    "LEEC Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Leica Microsystems (UK)",
+   "resolved": true,
+   "variants": [
+    "Leica Microsystems (UK) Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "LTE Scientific Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "LumiraDx",
+   "resolved": true,
+   "variants": [
+    "LumiraDx Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Mast Group",
+   "resolved": true,
+   "variants": [
+    "Mast Group Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Matrix Diagnostics",
+   "resolved": true,
+   "variants": [
+    "Matrix Diagnostics Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Medecon Healthcare UK",
+   "resolved": true,
+   "variants": [
+    "Medecon Healthcare UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Medical Wire & Equipment (MWE)",
+   "resolved": true,
+   "variants": [
+    "Medical Wire & Equipment Co (Bath) Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Medline Scientific",
+   "resolved": true,
+   "variants": [
+    "Medline Scientific Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "MedScience Distribution",
+   "resolved": true,
+   "variants": [
+    "MedScience Distribution Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Msoft eSolutions",
+   "resolved": true,
+   "variants": [
+    "Msoft Esolutions Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "nal von minden",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Nipro Medical Europe",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Nova Biomedical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "OscarTech UK",
+   "resolved": true,
+   "variants": [
+    "OscarTech UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Owen Mumford",
+   "resolved": true,
+   "variants": [
+    "Owen Mumford Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Oxford Biosystems",
+   "resolved": true,
+   "variants": [
+    "Oxford Biosystems Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Pasante Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "pfm medical UK",
+   "resolved": true,
+   "variants": [
+    "pfm medical UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "PHC Europe / PHCbi",
+   "resolved": true,
+   "variants": [
+    "PHC Europe B.V"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Pisces Scientific",
+   "resolved": true,
+   "variants": [
+    "Pisces Scientific Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Pro-Lab Diagnostics",
+   "resolved": true,
+   "variants": [
+    "Pro-Lab"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Promega UK",
+   "resolved": true,
+   "variants": [
+    "Promega UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Prosum Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "QIAGEN UK",
+   "resolved": true,
+   "variants": [
+    "QIAGEN LTD"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "QuidelOrtho (Ortho Clinical Diagnostics UK)",
+   "resolved": true,
+   "variants": [
+    "Ortho Clinical Diagnostics/Quidel"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "R&L Slaughter",
+   "resolved": true,
+   "variants": [
+    "R & L Slaughter Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Randox Laboratories",
+   "resolved": true,
+   "variants": [
+    "Randox Laboratories Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Reflex Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Reliance Medical",
+   "resolved": true,
+   "variants": [
+    "Reliance Medical Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Revvity (formerly PerkinElmer)",
+   "resolved": true,
+   "variants": [
+    "Revvity formerly PerkinElmer LAS (UK) Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Roche Diagnostics UK",
+   "resolved": true,
+   "variants": [
+    "Roche Diagnostics Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "RPG Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Sakura Finetek UK",
+   "resolved": true,
+   "variants": [
+    "Sakura Finetek UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Scientific Laboratory Supplies (SLS)",
+   "resolved": true,
+   "variants": [
+    "Scientific Laboratory Supplies Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "SciQuip",
+   "resolved": true,
+   "variants": [
+    "SciQuip Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Sebia UK",
+   "resolved": true,
+   "variants": [
+    "Sebia UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Serosep UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Solmedia Laboratory Supplies",
+   "resolved": true,
+   "variants": [
+    "Solmedia Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Sterilab Services",
+   "resolved": true,
+   "variants": [
+    "Mornington 2000LLP Trading as Sterilab Services"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "SureScreen Diagnostics",
+   "resolved": true,
+   "variants": [
+    "SureScreen Diagnostics Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Sychem",
+   "resolved": true,
+   "variants": [
+    "Sychem Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Syringa UK",
+   "resolved": true,
+   "variants": [
+    "SYRINGA UK LTD"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Sysmex UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Thermo Fisher Scientific UK",
+   "resolved": true,
+   "variants": [
+    "Fisher Scientific UK LTD",
+    "Life Technologies Ltd",
+    "Thermo Electron LED GmbH",
+    "Thermo Electron Manufacturing Ltd t/a Thermo Fisher Scientific",
+    "Thermo Fisher Diagnostics Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Thriva",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Twist Bioscience",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Una Health",
+   "resolved": true,
+   "variants": [
+    "Una Health Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Valley Northern Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "VWR International (Avantor)",
+   "resolved": true,
+   "variants": [
+    "VWR International Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Vygon (UK)",
+   "resolved": true,
+   "variants": [
+    "Vygon (UK) Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Werfen (Instrumentation Laboratory) UK",
+   "resolved": true,
+   "variants": [
+    "Werfen Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Williams Medical Supplies",
+   "resolved": true,
+   "variants": [
+    "Williams Medical Supplies Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Wolf Laboratories",
+   "resolved": true,
+   "variants": [
+    "Wolf Laboratories Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  }
+ ],
+ "awards": [
+  {
+   "title": "Microbiology Services Managed Service Contract",
+   "buyer": "Lothian Health Board",
+   "supplier": null,
+   "date": "2026-10-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095482-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71900000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of Pathology Testing Services",
+   "buyer": "Queen Victoria Hospital NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-10-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095434-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111800"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Provision of Pathology Testing Services",
+   "buyer": "Queen Victoria Hospital NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-10-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095433-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111800"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Insourcing of Bowel Screening Service",
+   "buyer": "Swansea Bay University Health Board",
+   "supplier": "Medinet Clinical Services Ltd",
+   "date": "2026-10-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095333-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121200"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "CA18303 - Supply of PTH Analyser Consumables to UHDB",
+   "buyer": "University Hospitals of Derby and Burton NHS Foundation Trust",
+   "supplier": "NBCL BV",
+   "date": "2026-10-07",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/c58f0219-3ddb-4ce1-a42a-ea2f1b7171fc",
+   "value": 60000,
+   "periodEnd": "2027-07-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of CleanCap Reagent AG 3OMe 100 μmole & Reagent AU 100 μmole",
+   "buyer": "CENTRE FOR PROCESS INNOVATION LIMITED",
+   "supplier": "TRILINK BIOTECHNOLOGIES, LLC",
+   "date": "2026-10-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094758-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33696300",
+    "33696500"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Pathology Managed Service Contract for Microbiology",
+   "buyer": "University Hospitals Dorset NHS Foundation Trust",
+   "supplier": "Biomerieux",
+   "date": "2026-10-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094245-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33696000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Westminster City Council P81 - Toxicology Services for the Coroner",
+   "buyer": "Westminster City Council",
+   "supplier": "Sheffield Teaching Hospital NHS Foundation Trust",
+   "date": "2026-10-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094177-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71620000",
+    "85111800",
+    "85111810",
+    "85148000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Pathology Courier Services",
+   "buyer": "University Hospitals Dorset NHS Foundation Trust",
+   "supplier": "City Sprint (UK) Limited",
+   "date": "2026-10-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094148-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111800"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Pathology Managed Equipment Service (MES) – South 4 Pathology Network",
+   "buyer": "Oxford University Hospitals NHS Trust",
+   "supplier": null,
+   "date": "2026-10-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094146-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000",
+    "33124100",
+    "33124110",
+    "33124130",
+    "33696300",
+    "33696500",
+    "38434000",
+    "38434550",
+    "38434560",
+    "38434570",
+    "38434580",
+    "50421000",
+    "51430000",
+    "71900000",
+    "72267100",
+    "72268000",
+    "72511000",
+    "79418000"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "WBS-FTS-64245 Haematology Testing System",
+   "buyer": "Velindre University NHS Trust",
+   "supplier": null,
+   "date": "2026-10-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094438-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "38434570"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "260114 - The Supply, Delivery, Installation, Commissioning and Maintenance of a High-Resolution Digital Pathology Scanner, including ancillary/consumables Items.",
+   "buyer": "Queen's University Belfast",
+   "supplier": "Leica Microsystems UK Ltd",
+   "date": "2026-10-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093951-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000",
+    "33110000",
+    "38520000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Curated literature based database of germline human genomic variants database",
+   "buyer": "NHS England",
+   "supplier": null,
+   "date": "2026-10-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093928-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "72320000"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Purchase of Reagents",
+   "buyer": "University Of Edinburgh",
+   "supplier": "10x Genomics",
+   "date": "2026-10-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093218-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Consumables - Specimen Transport",
+   "buyer": "University Hospitals of Leicester NHS Trust",
+   "supplier": "DX Network Services Limited",
+   "date": "2026-10-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092812-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33910000",
+    "85111800"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "OUTSOURCING OF HISTOLOGY SAMPLES FOR PROCESSING AND OR REPORTING",
+   "buyer": "Swansea Bay University Health Board",
+   "supplier": "Cyted UK Ltd",
+   "date": "2026-09-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092541-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111800"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "CDC Phlebotomy Service",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-09-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091826-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111000"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "PHW-DCO-61028 Sexual health Testing Reagent Rental at Singleton",
+   "buyer": "Public Health Wales NHS Trust",
+   "supplier": "ROCHE DIAGNOSTICS LIMITED",
+   "date": "2026-09-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091701-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71900000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Contract for the provision of Domiciliary Phlebotomy service in Waltham Forest",
+   "buyer": "North East London NHS Foundation Trust",
+   "supplier": "WF Federated GP Network Limited",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091373-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85146000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Primary Blood Grouping Analyser & Associated Consumables",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "supplier": "Beckman Coulter Ltd",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091236-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000",
+    "50421000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "UHB Immunology Managed Service",
+   "buyer": "University Hospitals Birmingham NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-09-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091049-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71900000"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "LSL/MED/0212 - The Supply and Support of Blood Bank Centrifuge Devices",
+   "buyer": "LEIDOS SUPPLY, LIMITED",
+   "supplier": "BIO-RAD LABORATORIES LIMITED",
+   "date": "2026-09-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090441-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33141300",
+    "33141510",
+    "33696100",
+    "33696200",
+    "38434520",
+    "38434550",
+    "42930000",
+    "42931000",
+    "42931100",
+    "42931120",
+    "42931130",
+    "42931140",
+    "85111810"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Evacuated Blood Collection Systems",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "supplier": null,
+   "date": "2026-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089948-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000",
+    "33141300",
+    "33141320",
+    "33141900"
+   ],
+   "isFramework": true,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Pathology Products",
+   "buyer": "The Shrewsbury and Telford Hospital NHS Trust",
+   "supplier": "Jones & Brooks Ltd",
+   "date": "2026-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090202-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "22820000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "BWC Genetics LIMS Pre-Market Engagement",
+   "buyer": "Birmingham Women's and Children's NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090141-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "48000000"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Waiver - BWC_RQ3 - 06822 - Nonacus Ltd  - Reagents",
+   "buyer": "Birmingham Women's and Children's NHS Foundation Trust",
+   "supplier": "Nonacus Ltd",
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089716-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33696200"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Contracts for Innovation Cymru - Modernising the Bowel Screening Pathway in Wales",
+   "buyer": "Betsi Cadwaladr University Health Board",
+   "supplier": null,
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089557-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000",
+    "48000000",
+    "73000000",
+    "79310000",
+    "85000000",
+    "98000000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Notice: OUH - Blood Transfusion Analysers MS - Tender Notice",
+   "buyer": "Oxford University Hospitals NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-09-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/088789-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33124110",
+    "33696100",
+    "38434000",
+    "38434520",
+    "85111800",
+    "85111810"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "YAS 147 2026_27 (DA FW) Point of Care Test Equipment and Associated Products",
+   "buyer": "YORKSHIRE AMBULANCE SERVICE NHS TRUST",
+   "supplier": "Critical Healthcare Limited",
+   "date": "2026-09-17",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/37a5dacc-4bc7-4ba5-9e99-b3e98dc04f5f",
+   "value": 140310,
+   "periodEnd": "2027-09-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Microbiology Referrals - GOSH",
+   "buyer": "Gateshead Health NHS Foundation Trust",
+   "supplier": "Great Ormond Street Hospital for Children",
+   "date": "2026-09-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/088106-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85145000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "PCR Assay Testing",
+   "buyer": "Aneurin Bevan University Health Board",
+   "supplier": "SEROSEP UK LIMITED",
+   "date": "2026-09-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/088013-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111800"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Maintenance; XEVO - Pathology Forensic Toxicology Lab PW035",
+   "buyer": "University Hospitals of Leicester NHS Trust",
+   "supplier": "Waters Limited",
+   "date": "2026-09-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/088245-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000",
+    "50420000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Biochemistry Referrals - Royal Devon University NHSFT",
+   "buyer": "Gateshead Health NHS Foundation Trust",
+   "supplier": "Royal Devon University Healthcare NHSFT",
+   "date": "2026-09-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087620-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85145000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Purchase of respiratory testing kits for 26-27",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "supplier": "CEPHEID UK LIMITED",
+   "date": "2026-09-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087162-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33696500"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Pathology services",
+   "buyer": "Kent County Council",
+   "supplier": "Dr M Koslowski",
+   "date": "2026-09-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086969-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111800"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Agency Pathology",
+   "buyer": "Kent County Council",
+   "supplier": "Triple West Medical Limited",
+   "date": "2026-09-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086918-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111800"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "PHW-ITT-63328 Provision of Microbiological Safety Cabinets",
+   "buyer": "Public Health Wales NHS Trust",
+   "supplier": null,
+   "date": "2026-09-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086233-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "38000000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Histology Services",
+   "buyer": "The Police & Crime Commissioner for Sussex",
+   "supplier": "Forensic Access Ltd",
+   "date": "2026-09-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086174-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111800"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Histology Services",
+   "buyer": "The Police and Crime Commissioner for Surrey",
+   "supplier": "Forensic Access Ltd",
+   "date": "2026-09-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086171-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111800"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Supply of HLA Sequencing Systems",
+   "buyer": "NHS Blood and Transplant",
+   "supplier": null,
+   "date": "2026-09-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086306-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000",
+    "33140000"
+   ],
+   "isFramework": true,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  }
+ ],
+ "openTenders": [
+  {
+   "title": "Evacuated Blood Collection Systems",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "status": "active",
+   "stage": "open tender",
+   "closingDate": "2026-10-23T11:00:00+01:00",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089948-2026",
+   "value": 20000000,
+   "source": "Find a Tender"
+  },
+  {
+   "title": "Red Cell Reagents",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "status": "planning",
+   "stage": "preliminary market engagement / planning",
+   "closingDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/084514-2026",
+   "value": null,
+   "source": "Find a Tender"
+  }
+ ],
+ "drugTariff": null,
+ "localIntel": [],
+ "localIntelGroups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
+ },
+ "directorySuppliers": [
+  {
+   "name": "Brenmoor Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Brenmoor Ltd",
+   "seedLabels": [
+    "Blood collection / phlebotomy"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Printable Patient Identification Wristbands and Associated Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/printable-patient-identification-wristbands-and-associated-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Printable Patient Identification Wristbands and Associated Accessories."
+  },
+  {
+   "name": "Datesand Group",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Datesand Group",
+   "seedLabels": [
+    "Biosciences"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Medical Pulp, Macerators and Support Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-pulp-products-macerators-for-pulping-patient-waste-pump-stations/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Medical Pulp, Macerators and Support Products."
+  },
+  {
+   "name": "GE HealthCare",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "GE HealthCare",
+   "seedLabels": [
+    "Pathology / diagnostics"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/anaesthesia-machines-ventilator-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/angiography-hybrid-theatres-capital-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Bladder Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/bladder-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Bone Densitometers, Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/bone-densitometers-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "CT Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ct-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cardiac-and-pulmonary-diagnostics-and-exercise-stress-testing-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Digital Diagnostic Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Fluoroscopy and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/fluoroscopy-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Magnetic Resonance Imaging Scanners and Associated Option and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/magnetic-resonance-imaging-scanners-and-associated-option-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mammography Imaging Systems and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mammography-imaging-systems-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mobile Image Intensifiers and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-image-intensifiers-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mobile X-Ray Systems and Associated Option and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-x-ray-systems-and-associated-option-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-monitoring-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pulse-oximetry-and-capnography-devices-and-support-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Static X-Ray and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/static-x-ray-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Ultrasound Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ultrasound-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Anaesthesia Machines & Ventilators (to 2029)",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS Supply Chain — Imaging Capital CT/MRI/X-ray (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS Supply Chain — Patient Monitoring (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on nineteen NHS Supply Chain frameworks not counted as this speciality's: Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services; Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services; Bladder Scanners and Associated Options and Related Services; Bone Densitometers, Associated Options and Related Services; CT Scanners and Associated Options and Related Services; Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions; Digital Diagnostic Solutions; Electrodes, Ultrasound Gels, Defibrillation and Related Consumables; Fluoroscopy and Associated Options and Related Services; Magnetic Resonance Imaging Scanners and Associated Option and Related Services; Mammography Imaging Systems and Associated Options and Related Services; Mobile Image Intensifiers and Associated Options and Related Services; Mobile X-Ray Systems and Associated Option and Related Services; Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services; Pulse Oximetry, Capnography and Related Monitoring Technologies; Respiratory Solutions; Static X-Ray and Associated Options and Related Services; Total Patient Assessment Device Solutions; Ultrasound Scanners and Associated Options and Related Services. The Hub's supplier directory also records: NHS Supply Chain — Anaesthesia Machines & Ventilators (to 2029); NHS Supply Chain — Imaging Capital CT/MRI/X-ray (to 2028); NHS Supply Chain — Patient Monitoring (to 2028)."
+  },
+  {
+   "name": "GV Health",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "GV Health",
+   "seedLabels": [
+    "Pathology and laboratory"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Cleaning Equipment, Supplies and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cleaning-supplies-equipment-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Clinical and Sharps Waste Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/clinical-and-sharps-waste-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Polymer Aprons",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/polymer-aprons/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Polymer Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/plastic-polymer-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on four NHS Supply Chain frameworks not counted as this speciality's: Cleaning Equipment, Supplies and Associated Products; Clinical and Sharps Waste Management; Polymer Aprons; Polymer Products."
+  },
+  {
+   "name": "Huntleigh",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Huntleigh",
+   "seedLabels": [
+    "Pathology and laboratory"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Digital Diagnostic Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-gynaecology-and-sexual-health-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Orthotics, Podiatry and Immobilisation",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/orthoses-podiatry-and-immobilisation/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-monitoring-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on four NHS Supply Chain frameworks not counted as this speciality's: Digital Diagnostic Solutions; Maternity, Obstetrics, Gynaecology and Sexual Health Products; Orthotics, Podiatry and Immobilisation; Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services. The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Nipro Medical UK Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Nipro Medical UK Ltd",
+   "seedLabels": [
+    "Blood collection / phlebotomy"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Renal Replacement Therapies Services, Technologies and Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/renal-replacement-therapy-equipment-and-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Renal Replacement Therapies Services, Technologies and Consumables."
+  },
+  {
+   "name": "Prospect Diagnostics Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Prospect Diagnostics Ltd",
+   "seedLabels": [
+    "Pathology and laboratory"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Syringes, Needles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Syringes, Needles and Associated Products; Total Patient Assessment Device Solutions."
+  },
+  {
+   "name": "Altona Diagnostics UK Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Altona Diagnostics UK Limited",
+   "seedLabels": [
+    "Pathology / molecular"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Evident Europe GmbH — UK Branch",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Evident Europe GmbH — UK Branch",
+   "seedLabels": [
+    "Pathology and laboratory"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": false,
+  "markets": [],
+  "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-10-09",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": false,
+  "whyEmpty": "No Drug Safety Update is tagged specifically to this speciality; 1 sent to every area are left out.",
+  "count": 0,
+  "roundupsExcluded": 0,
+  "broadcastsExcluded": 1,
+  "updates": []
+ },
+ "drugTariffViiia": null
+}

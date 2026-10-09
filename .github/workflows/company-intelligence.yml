@@ -1,0 +1,239 @@
+name: Company intelligence (frameworks + Companies House + accounts)
+
+# Keeps the Company Report's sourced layers current, laptop-independent:
+#  - data/frameworks.json          — every NHS Supply Chain framework and the FULL
+#                                    awarded-supplier list on each, read from NHSSC's
+#                                    own contract launch briefs. This is what the
+#                                    report's framework list AND its competitor panels
+#                                    are built from, so a stale copy is a wrong answer
+#                                    with a confident face.
+#  - data/supplier-index.json      — the sourced framework rows backfilled into the
+#    data/supplier-seed.json         arrays every other Hub surface already reads, so
+#                                    the directory, Meeting Prep and the comparison
+#                                    tools cannot disagree with the report.
+#  - data/company-financials.json  — Companies House profile, accounts category and
+#                                    officers for every confirmed supplier, then
+#                                    turnover and headcount read out of the tagged
+#                                    (iXBRL) filed accounts.
+#  - data/company-awards.json      — tender and contract awards from the two statutory
+#                                    OCDS feeds, matched to Hub companies under the
+#                                    exact-only rule in scripts/company_match.py. This
+#                                    is the report's sections 13-14; before 14/08/2026
+#                                    they had no data source at all and award data
+#                                    existed only as rows typed onto a WordPress page.
+#  - data/pending-awards.json      — NHS Supply Chain framework awards that are public
+#                                    on Find a Tender but not yet on NHSSC's own contract
+#                                    launch brief, so data/frameworks.json has nothing
+#                                    for them yet. Retired automatically, by name AND
+#                                    start date, the run after NHSSC's own brief lands —
+#                                    see scripts/refresh_pending_awards.py. Added
+#                                    25/08/2026 after Lou flagged the Intravenous
+#                                    Cannula and Associated Products award (starts
+#                                    01/04/2027) missing from Mediq Healthcare UK's
+#                                    Company Report despite being on Live Desk.
+#
+# ⚠️ REQUIRES the repository secret COMPANIES_HOUSE_KEY (REST key, live data, free
+# from developer.company-information.service.gov.uk). WITHOUT IT the Companies House
+# steps are SKIPPED, not failed — the framework capture still runs and still publishes,
+# because it needs no key. The run log says plainly which half ran.
+
+on:
+  schedule:
+    - cron: "10 3 * * 1"     # Mondays 03:10 UTC, before the Monday morning tasks
+  workflow_dispatch: {}
+
+# Same reason as weekly-refresh.yml: every writer in this repo shares one branch, and
+# on 26/07/2026 a 49-minute job lost its push to a writer that landed inside its window.
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    # Job level ON PURPOSE. A step's own `env:` block is not in scope for that
+    # step's `if:`, so the skip condition below would have been evaluated against
+    # an empty value and the Companies House steps would have skipped even with
+    # the secret set.
+    env:
+      COMPANIES_HOUSE_KEY: ${{ secrets.COMPANIES_HOUSE_KEY }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      # Needs no API key: NHS Supply Chain publishes the briefs openly.
+      - name: Refresh frameworks from NHS Supply Chain contract launch briefs
+        run: python3 scripts/refresh_frameworks.py
+
+      # Lou's standing rule, 30/09/2026: every framework card shows the company's
+      # lot(s), read from the owner's own source, or says the owner does not
+      # publish it. Re-reads each brief's lot lists and attached matrix; Find a
+      # Tender award reads are carried forward from data/framework-lots.json.
+      - name: Refresh framework lots (briefs + attached matrices)
+        run: |
+          python3 -m pip install --quiet openpyxl
+          python3 scripts/refresh_framework_lots.py
+
+      - name: Backfill sourced frameworks into the index and seed
+        run: python3 scripts/backfill_index_frameworks.py
+
+      # MUST run immediately after the backfill above. `productCategories` is DERIVED
+      # from frameworks[], and that step is the only thing that rewrites frameworks[]
+      # from the fresh capture — so this is the moment the derivation is stale. It
+      # re-derives from what the briefs now say, which is how the layer GAINS a
+      # category when NHS Supply Chain adds a supplier to a framework rather than
+      # only losing one when it drops them. Idempotent, and it only ever replaces
+      # rows carrying its own generatedBy marker, so curated entries are untouched.
+      # Nothing had re-derived these since the one-off backfill of 24/08/2026.
+      - name: Re-derive product categories from the refreshed frameworks
+        run: python3 scripts/backfill_product_categories.py
+
+      # Belt and braces, because the two mechanisms cover different populations and
+      # the gap is real: the re-derivation above only runs for suppliers whose
+      # `products` array is empty, and 5 suppliers (Abbott Diagnostics, BD, Essity,
+      # Kimal, RB Medical Engineering) carry generated categories AND curated
+      # products. A delisting on one of those is invisible to it. The pruning inside
+      # backfill_index_frameworks.py catches those; this proves it still catches only
+      # those, and never a curated category or a supplier the capture simply did not
+      # cover. Added 15/09/2026, after NHS Supply Chain took J & M Medical off the
+      # Textiles brief (2025/S 000-048142) and the orphaned "Facilities and Office
+      # Solutions" category failed the publish gate on every run for three days.
+      - name: Prove no derived category outlives its framework
+        run: python3 test_orphaned_product_categories.py
+
+      # MUST run after the frameworks refresh above: it checks pending awards
+      # against the FRESH data/frameworks.json to retire anything NHSSC has
+      # now published its own brief for, in the same run that captured it.
+      - name: Pending NHS Supply Chain framework awards, not yet on NHSSC's own brief
+        run: python3 scripts/refresh_pending_awards.py
+
+      # Needs no API key either: both award feeds are public. 8 days against a
+      # Monday job is a deliberate one-day overlap, so a notice published while
+      # the job is mid-run is picked up the following week rather than lost —
+      # rows de-dup on the notice link plus the supplier named on it.
+      - name: Tender and contract awards, matched to Hub companies
+        run: python3 scripts/refresh_awards.py --days 8
+
+      - name: Companies House — profiles, accounts categories and officers
+        if: ${{ env.COMPANIES_HOUSE_KEY != '' }}
+        run: python3 scripts/refresh_companies_house.py
+
+      # Turnover and headcount live inside the filed accounts, not on the profile
+      # API. Only the tagged (iXBRL) filings are read; PDF-only filings yield null
+      # and say so, because identifying a turnover line on a PDF by position is a
+      # guess and a wrong turnover against a named company is the 24/07/2026 error.
+      - name: Companies House — turnover and headcount from the filed accounts
+        if: ${{ env.COMPANIES_HOUSE_KEY != '' }}
+        run: python3 scripts/extract_accounts_figures.py --filings 3
+
+      - name: Say so if the Companies House half was skipped
+        if: ${{ env.COMPANIES_HOUSE_KEY == '' }}
+        run: |
+          echo "::warning::COMPANIES_HOUSE_KEY is not set, so company profiles, officers,"
+          echo "::warning::turnover and headcount were NOT refreshed this run. The framework"
+          echo "::warning::capture did run. Add the secret in Settings > Secrets and variables"
+          echo "::warning::> Actions to enable the rest."
+
+      # This repo is PUBLIC and the Hub's page watermark never reaches these files,
+      # so the notice inside them is the only thing on a copy that says who owns it.
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+
+      - name: Publish gate — nothing commits until this passes
+        run: |
+          python3 scripts/prune_calendar.py
+          bash scripts/gate.sh
+      - name: Commit updates
+        run: |
+          git config user.name "hub-bot"
+          git config user.email "contact@elevateandthrive.uk"
+          git add data/frameworks.json data/framework-lots.json data/company-financials.json \
+                  data/company-awards.json data/pending-awards.json \
+                  data/supplier-index.json data/supplier-seed.json
+          git diff --cached --quiet || git commit -m "company intelligence: frameworks + awards + Companies House $(date -u +'%F')"
+          # Same retry-and-re-gate pattern as weekly-refresh.yml. A rebase COMBINES
+          # this run's data with another writer's, and that combination has not been
+          # gated — so the gate runs again. Root rule 13: if the gate fails the data
+          # is wrong, so refuse to push rather than loosening anything.
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first). Re-fetching and re-merging, attempt $attempt of 5."
+            # Do NOT use `-X theirs` here. On 15/09/2026 it silently discarded
+            # curated additions (Ovidius links) that a concurrent session had just
+            # landed — the hub-bot had read the seed before those landed, and `-X
+            # theirs` chose the hub-bot's stale version over the fresh one on main.
+            # (11/08/2026 context: that run used `-X theirs` on a full rebase, which
+            # is now moot because the rebase below only applies to files other than
+            # supplier-seed.json.)
+            #
+            # For supplier-seed.json specifically: fetch the latest origin/main,
+            # then let scripts/merge_seed_on_retry.py produce a proper field-level
+            # merge (CI-owned fields from HEAD; curated fields preserved from
+            # origin/main; new suppliers from either side kept). This is the fix for
+            # the ^o96/^o478 class of data-loss bug on this file.
+            git fetch origin
+            python3 scripts/merge_seed_on_retry.py || { echo "SEED MERGE FAILED - refusing to push"; exit 1; }
+            # merge_seed_on_retry.py writes the merged seed into the WORKING TREE, and
+            # it has to be COMMITTED before the rebase, not just staged. `git add` on
+            # its own leaves the index dirty and git rebase then refuses outright
+            # ("cannot rebase: Your index contains uncommitted changes"). That is how
+            # the 21/09/2026 08:49 run died after an hour of real work, and it would
+            # have taken every retry with it. Amend rather than add a second commit:
+            # this run is one commit, and the merged seed belongs in it.
+            merged_seed="${RUNNER_TEMP:-/tmp}/merged-supplier-seed.json"
+            cp data/supplier-seed.json "$merged_seed"
+            git add data/supplier-seed.json
+            if ! git diff --cached --quiet; then
+              if [ "$(git rev-list --count origin/main..HEAD)" -gt 0 ]; then
+                git commit --amend --no-edit
+              else
+                git commit -m "company intelligence: seed merge $(date -u +'%F')"
+              fi
+            fi
+            # Rebase everything else onto origin/main without a strategy flag —
+            # if another file conflicts we want a loud failure, not a silent wrong merge.
+            if ! git rebase origin/main; then
+              # supplier-seed.json is the one file already merged properly, field by
+              # field, against the origin/main we fetched seconds ago. Our commit's
+              # diff for it is written against the OLD seed, so git will conflict on
+              # it whenever a peer touched it too — and on a single-line JSON file
+              # that is every time. If it is the ONLY file in conflict, the merge we
+              # just computed is by construction the right answer, so take it. Any
+              # other conflicting file is a real one and still stops the run.
+              conflicts="$(git diff --name-only --diff-filter=U)"
+              if [ "$conflicts" = "data/supplier-seed.json" ]; then
+                echo "seed-only rebase conflict - taking the field-level merge computed against this origin/main"
+                cp "$merged_seed" data/supplier-seed.json
+                git add data/supplier-seed.json
+                if ! GIT_EDITOR=true git rebase --continue; then
+                  echo "REBASE could not continue after the seed merge - refusing to push."
+                  git rebase --abort 2>/dev/null || true
+                  exit 1
+                fi
+              else
+                echo "REBASE CONFLICT on a non-seed file - refusing to push. Abort and re-run."
+                echo "conflicting files: $conflicts"
+                git rebase --abort 2>/dev/null || true
+                exit 1
+              fi
+            fi
+            bash scripts/gate.sh || { echo "GATE FAILED after merge/rebase - refusing to push"; exit 1; }
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 5 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi

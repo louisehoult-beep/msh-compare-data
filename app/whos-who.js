@@ -1,0 +1,50 @@
+/* Medical Sales Intelligence Hub — "Who's who: what we can name, and what you have to earn"
+   Git-served, same pattern as mst-logic.js / comptab.js. Edit data/whos-who.html
+   in this repo, never in wp-admin.
+
+   Mounts into #msh-whoswho. Built 20/07/2026 from the Stakeholder Mapper's own
+   role library (17 roles in app/mst-logic.js) plus the real-names research of the
+   same date. Every availability verdict is traced to a primary source.
+
+   Why it exists: the mapper tells a rep which roles decide a purchase, but says
+   nothing about whether those people can actually be identified. Across ODS, CQC,
+   CIPS, the royal colleges, trust board papers and FOI, filtered over 20,000+
+   named individuals: procurement 3, IPC 1, MDSO 1, Category Manager 0. The roles
+   that decide device purchases are precisely the ones no register lists. */
+(function(){
+  var MOUNT_ID = 'msh-whoswho';
+  var SRC = 'https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/whos-who.html';
+
+  function mount(){
+    var m = document.getElementById(MOUNT_ID);
+    if (!m) return false;
+    // Cache-buster changes once a day, not on every page view — see
+    // 17/08/2026 note in hub-search.js.
+    fetch(SRC + '?cb=' + new Date().toISOString().slice(0, 10))
+      .then(function(r){ if (!r.ok) throw new Error(r.status); return r.text(); })
+      .then(function(html){ m.innerHTML = html; })
+      .catch(function(){
+        m.innerHTML = '<div style="font-family:Inter,system-ui,sans-serif;color:#8a6d00;'
+          + 'padding:14px;">The who&rsquo;s-who name map is temporarily unavailable — '
+          + 'please try again shortly.</div>';
+      });
+    return true;
+  }
+
+  // The ICB watch (app/icb-watch.js, 30/09/2026) rides on this loader: page 884
+  // already fetches this file from git, so the ICB panel needs no wp-admin edit.
+  // It places its own mount in section 2 and is a no-op on any other page.
+  if (/nhs-structure-map/.test(location.pathname) || document.getElementById('msh-icbwatch')) {
+    fetch('https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/app/icb-watch.js?cb='
+          + new Date().toISOString().slice(0, 10))
+      .then(function(r){ return r.text(); })
+      .then(function(t){ (new Function(t))(); })
+      .catch(function(){});
+  }
+
+  if (!mount()){
+    // Mount point may not be parsed yet depending on block order.
+    var tries = 0;
+    var t = setInterval(function(){ if (mount() || ++tries > 40) clearInterval(t); }, 120);
+  }
+})();

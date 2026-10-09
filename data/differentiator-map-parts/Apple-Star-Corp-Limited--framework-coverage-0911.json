@@ -1,0 +1,15 @@
+{"supplier": "Apple Star Corp Limited",
+ "decisions": [
+   {"division": "Surgical Scissors",
+    "hub": "surgical:scissor",
+    "why": "all 9 examples are named scissor types (Bonn Iris, Biemer Vein, Bergmann Bandage, Bellucci Micro, BeeBee Crown, Beckmann Nasal, Barraquer Iris, Aston SuperCut Facelift, Adventitia Micro) — scissors"},
+   {"division": "Needle Holders & Passers",
+    "hub": "surgical:needle",
+    "why": "all 6 examples are named needle holders (Collier, Castroviejo Micro, Bozeman, Barraquer-Troutman Micro, Barraquer Micro, Arruga Micro) — needle holders & suture passers"},
+   {"division": "General Instruments",
+    "hub": "surgical:scissor",
+    "why": "single product, Iris Scissor — same item type already mapped under this supplier's own Surgical Scissors division"},
+   {"division": "Sets",
+    "hub": ["surgical:scissor", "surgical:knife", "surgical:suction"],
+    "why": "the division's own 7 examples are individual loose instruments, not procedure kits: Iris Scissor and Operating Scissors are scissors, Scalpel Handle No 7/No 4/Bard Parker No 3 are scalpel handles, and Yankauer Suction Tube is a suction tube — three distinct instrument types genuinely present, not a guess"}
+ ]}

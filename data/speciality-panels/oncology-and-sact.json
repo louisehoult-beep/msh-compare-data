@@ -1,0 +1,3795 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "oncology-and-sact",
+ "label": "Oncology and SACT",
+ "defined": true,
+ "generated": "2026-10-09",
+ "dataAsOf": {
+  "frameworks": "2026-10-05",
+  "tenderHistory": "2026-10-09",
+  "frameworkAwards": "2026-10-09T13:11:59+00:00",
+  "openTenders": "09/10/2026",
+  "drugTariff": "2026-10-09",
+  "localIntel": "2026-10-09",
+  "supplierDirectory": "2026-10-07",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-10-09",
+  "drugTariffViiia": "2026-10-09",
+  "hospitalPrescribing": null
+ },
+ "rules": {
+  "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
+  "frameworks": "NHS Supply Chain framework names matching /\\b(oncology ablation|infusion pumps and administration sets)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN, AND IT IS THE WHOLE POINT OF THIS PATCH. There is no NHS Supply Chain framework for a cytotoxic or a chemotherapy product, and the drug itself does not travel this way at all: it moves through NICE technology appraisal, the Cancer Drugs Fund, NHS England specialised commissioning and regional medicines procurement, none of which has an NHS Supply Chain framework page. The two agreements below are general ones that a cancer service buys THROUGH, not cancer agreements. Infusion Pumps, Administration Sets and Associated Products is the whole hospital's pump and giving-set route, counted on the critical care, palliative care and vascular access pages too. Endoscopy, Endourology and Oncology Ablation Consumables is the only agreement in the catalogue whose name carries the word oncology, and it carries it for tumour ablation devices; NHS Supply Chain publishes no lot breakdown for it, so all 58 of its suppliers are listed and most of them sell endoscopy rather than anything a chemotherapy day unit or an aseptic unit buys. Radiotherapy is not counted here either: its three NHS Supply Chain frameworks and Brachytherapy Seeds are a different treatment modality, which this page's own demand section treats as a different service, and no radiotherapy speciality page exists yet to hold them. A supplier named below is therefore a supplier on an agreement cancer services buy through, never a measure of anyone's oncology business.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN, AND IT IS THE WHOLE POINT OF THIS PATCH. There is no NHS Supply Chain framework for a cytotoxic or a chemotherapy product, and the drug itself does not travel this way at all: it moves through NICE technology appraisal, the Cancer Drugs Fund, NHS England specialised commissioning and regional medicines procurement, none of which has an NHS Supply Chain framework page. The two agreements below are general ones that a cancer service buys THROUGH, not cancer agreements. Infusion Pumps, Administration Sets and Associated Products is the whole hospital's pump and giving-set route, counted on the critical care, palliative care and vascular access pages too. Endoscopy, Endourology and Oncology Ablation Consumables is the only agreement in the catalogue whose name carries the word oncology, and it carries it for tumour ablation devices; NHS Supply Chain publishes no lot breakdown for it, so all 58 of its suppliers are listed and most of them sell endoscopy rather than anything a chemotherapy day unit or an aseptic unit buys. Radiotherapy is not counted here either: its three NHS Supply Chain frameworks and Brachytherapy Seeds are a different treatment modality, which this page's own demand section treats as a different service, and no radiotherapy speciality page exists yet to hold them. A supplier named below is therefore a supplier on an agreement cancer services buy through, never a measure of anyone's oncology business.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(chemotherap\\w*|cytotoxics?|sact|anti-?cancer|cancer medicines?|cancer drugs?|cancer treatments?|cancer therap\\w*|cancer care|oncology (?:generics?|ablation|medicines?|drugs?|pharmac\\w*|day unit|consumables?)|scalp cooling|cold caps?|dose band\\w*)\\b/i. NO EXCLUSION LIST IS APPLIED, because every notice this pattern matched was read one by one and all of them are this speciality. The loose terms that would have needed excluding were refused from the pattern above instead of admitted and then argued with. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: oncology). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 16 of the 17 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (32 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-09.",
+  "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF chapter 8. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 53 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
+ },
+ "counts": {
+  "frameworks": 2,
+  "suppliers": 80,
+  "suppliersUnresolved": 0,
+  "awardsShown": 28,
+  "awardsMatched": 28,
+  "awardsWithheldByBuyerCap": 0,
+  "awardsShownNotYetAwarded": 1,
+  "openTenders": 0,
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 7,
+  "suppliersDirectoryTagged": 17,
+  "suppliersDirectoryOnOtherFrameworks": 16,
+  "suppliersDirectoryWithFrameworkNote": 16,
+  "gpMarkets": 1,
+  "mhraDsu": 206,
+  "drugTariffViiiaLines": 103
+ },
+ "frameworks": [
+  {
+   "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+   "reference": "2024/S 000-029975",
+   "category": "Medical Technology",
+   "supplyRoute": "eDirect",
+   "starts": "1 October 2025",
+   "ends": "30 September 2027",
+   "supplierCount": 58,
+   "supplierSource": "count verified against the page's own stated total (58)",
+   "suppliers": [
+    "Advanced Medical Systems Ltd",
+    "Ambu Limited",
+    "APR Medtech Limited",
+    "Aquilant Endoscopy Ltd",
+    "Aquilant Limited",
+    "Argon Medical Devices UK Ltd",
+    "Becton, Dickinson UK Limited",
+    "BioSpectrum Ltd",
+    "Boston Scientific Ltd",
+    "BVM Medical Ltd",
+    "CJ Medical",
+    "Coloplast Ltd",
+    "ConMed UK Ltd",
+    "Cook (UK) Ltd",
+    "Creo Medical Limited",
+    "Erbe Medical UK Ltd",
+    "Fairmont Medical Products Limited",
+    "Fannin UK Limited",
+    "GAP Medical Solutions Ltd",
+    "GBUK Ltd",
+    "GenX MediCare",
+    "GI UK Medical Ltd (Duomed)",
+    "GTA (UK) Ltd",
+    "H4 Medical Ltd",
+    "HistoSonics",
+    "IGEA S.p.A. Branch UK",
+    "Ingles Ltd",
+    "It’s Interventional Limited",
+    "Johnson & Johnson Medical Ltd",
+    "Karl Storz Endoscopy (UK) Ltd",
+    "Kebomed UK Ltd",
+    "KeyMed (Medical and Industrial Equipment) Ltd",
+    "Laborie Medical Technologies Ltd",
+    "Leib Medical Ltd",
+    "Macromed UK Ltd",
+    "MCT Lifesciences Ltd",
+    "Medtronic Limited",
+    "Merit Medical UK Ltd",
+    "Micro-Tech (UK) Ltd",
+    "Newtons Medical Supplies Ltd",
+    "Novus Med Ltd",
+    "Omnimed Limited",
+    "Partners for Endoscopy Limited",
+    "Penlon Limited",
+    "Pennamed Limited",
+    "Pentax UK Limited",
+    "Promed Limited",
+    "RB Medical Engineering Ltd",
+    "Richard Wolf UK Ltd",
+    "Rocamed France",
+    "Steris Solutions Limited",
+    "Synectics Medical T/A SynMed",
+    "Terumo UK Ltd",
+    "TFX Group Ltd T/A Teleflex Medical",
+    "TSC Endovision",
+    "Uniphar Medtech T/A Synapse Medical",
+    "Uniplex UK Ltd",
+    "Varian Medical Systems"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Infusion Pumps and Administration Sets and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/infusion-pumps-and-administration-sets-and-associated-products/",
+   "reference": "Project_12 ITT_382",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "3 October 2022",
+   "ends": "19 July 2027",
+   "supplierCount": 27,
+   "supplierSource": "no stated count on the page; 27 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "ALXR LIMITED",
+    "Arcomedical Infusion Ltd",
+    "Avanos Medical UK Limited",
+    "B. Braun Medical Limited",
+    "Baxter Healthcare Ltd",
+    "Becton, Dickinson U.K. Limited",
+    "BMS Critical Care",
+    "Braun and Company Limited",
+    "BECTON DICKINSON (CME) U.K. LIMITED",
+    "Bunzl Retail & Healthcare Supplies Ltd",
+    "CODAN Limited",
+    "Crest Medical Limited",
+    "Eitan Medical UK Ltd",
+    "Fannin UK Limited",
+    "Fresenius Kabi",
+    "GBUK",
+    "GenX MediCare",
+    "ICU UK Medical Ltd",
+    "Inspiration Healthcare Limited",
+    "Prosum Medical Ltd",
+    "Qualasept Ltd t/a Bath ASU",
+    "Reliance Medical Ltd",
+    "RPG Medical Limited",
+    "Smiths Medical International Ltd",
+    "Spirit Medical Ltd",
+    "TLB Medical Supplies",
+    "Vygon Uk Ltd"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Becton, Dickinson U.K. Limited",
+    "Becton, Dickinson UK Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GBUK",
+    "GBUK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "GenX MediCare Ltd",
+   "resolved": true,
+   "variants": [
+    "GenX MediCare"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Advanced Medical Systems Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "ALXR Limited",
+   "resolved": true,
+   "variants": [
+    "ALXR LIMITED"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Ambu UK",
+   "resolved": true,
+   "variants": [
+    "Ambu Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "APR Medtech Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Aquilant Endoscopy Limited",
+   "resolved": true,
+   "variants": [
+    "Aquilant Endoscopy Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Aquilant Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Arcomedical Infusion Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Argon Medical Devices UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Avanos Medical UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "B. Braun Medical",
+   "resolved": true,
+   "variants": [
+    "B. Braun Medical Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Baxter Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "BECTON DICKINSON (CME) U.K. LIMITED",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "BioSpectrum Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "BMS Critical Care Ltd",
+   "resolved": true,
+   "variants": [
+    "BMS Critical Care"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Boston Scientific",
+   "resolved": true,
+   "variants": [
+    "Boston Scientific Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Braun and Company Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "BVM Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "CJ Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "CODAN Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Coloplast",
+   "resolved": true,
+   "variants": [
+    "Coloplast Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Conmed UK Ltd",
+   "resolved": true,
+   "variants": [
+    "ConMed UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Cook Medical",
+   "resolved": true,
+   "variants": [
+    "Cook (UK) Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Creo Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "variants": [
+    "Crest Medical Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Eitan Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Erbe Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Fairmont Medical Products Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Fresenius Kabi Ltd",
+   "resolved": true,
+   "variants": [
+    "Fresenius Kabi"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "GAP Medical Solutions Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "GI UK Medical Ltd (Duomed)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "GTA (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "H4 Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "HistoSonics",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "ICU Medical (incl. Smiths Medical)",
+   "resolved": true,
+   "variants": [
+    "ICU UK Medical Ltd",
+    "Smiths Medical International Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "IGEA S.p.A. Branch UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Ingles Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Inspiration Healthcare",
+   "resolved": true,
+   "variants": [
+    "Inspiration Healthcare Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "It’s Interventional Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Johnson & Johnson MedTech",
+   "resolved": true,
+   "variants": [
+    "Johnson & Johnson Medical Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Karl Storz UK",
+   "resolved": true,
+   "variants": [
+    "Karl Storz Endoscopy (UK) Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Kebomed UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Laborie Medical Technologies UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Laborie Medical Technologies Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Leib Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Macromed UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "MCT Lifesciences Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Bunzl Retail & Healthcare Supplies Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Medtronic",
+   "resolved": true,
+   "variants": [
+    "Medtronic Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Merit Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Micro-Tech (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Newtons Medical Supplies Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Novus Med Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Olympus (KeyMed)",
+   "resolved": true,
+   "variants": [
+    "KeyMed (Medical and Industrial Equipment) Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Omnimed Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Partners for Endoscopy Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Penlon",
+   "resolved": true,
+   "variants": [
+    "Penlon Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Pennamed Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Pentax Medical",
+   "resolved": true,
+   "variants": [
+    "Pentax UK Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Promed Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Prosum Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Qualasept Ltd t/a Bath ASU",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "RB Medical Engineering Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Reliance Medical",
+   "resolved": true,
+   "variants": [
+    "Reliance Medical Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Richard Wolf UK",
+   "resolved": true,
+   "variants": [
+    "Richard Wolf UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Rocamed France",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "RPG Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Spirit Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Steris",
+   "resolved": true,
+   "variants": [
+    "Steris Solutions Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Synectics Medical T/A SynMed",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Terumo UK",
+   "resolved": true,
+   "variants": [
+    "Terumo UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "TFX Group Ltd (Teleflex Medical)",
+   "resolved": true,
+   "variants": [
+    "TFX Group Ltd T/A Teleflex Medical"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "TLB Medical Supplies",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "TSC Endovision",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+   "resolved": true,
+   "variants": [
+    "Uniphar Medtech T/A Synapse Medical"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Uniplex",
+   "resolved": true,
+   "variants": [
+    "Uniplex UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Varian (Siemens Healthineers)",
+   "resolved": true,
+   "variants": [
+    "Varian Medical Systems"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Vygon (UK)",
+   "resolved": true,
+   "variants": [
+    "Vygon Uk Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  }
+ ],
+ "awards": [
+  {
+   "title": "Framework for the Provision of Dose Banded Products & Patient Specific Chemotherapy Services",
+   "buyer": "University Hospitals of Derby and Burton NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-10-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094865-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33600000"
+   ],
+   "isFramework": true,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Cancer Care Services in Cheshire and Merseyside",
+   "buyer": "NHS CHESHIRE AND MERSEYSIDE INTEGRATED CARE BOARD",
+   "supplier": "The Clatterbridge Cancer Centre NHS Foundation Trust",
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075713-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Framework Agreement for the Provision of Dose Banded Chemotherapy Services",
+   "buyer": "East Midlands Pharmacy Collaborative",
+   "supplier": "ITH Pharma, Baxter Healthcare Ltd, Qualasept Ltd t/a Bath ASU",
+   "date": "2026-06-22",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/2b799a57-5a9f-4ffd-8637-c86691a4412e",
+   "value": 9000000,
+   "periodEnd": "2027-06-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Oncology Ablation Consumables",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "Boston Scientific Limited",
+   "date": "2026-06-05",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/e1fc5e53-1b31-4aaf-8743-30c12227be2d",
+   "value": 1324732,
+   "periodEnd": "2026-09-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Endoscopy, Endourology & Oncology Ablation Consumables & Associated Products",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "ADVANCED MEDICAL SYSTEMS LTD., AMBU LIMITED, APR MEDTECH LIMITED, AQUILANT ENDOSCOPY LIMITED, AQUILANT LIMITED, BECTON, DICKINSON U.K. LIMITED, BIOSPECTRUM LIMITED, BOSTON SCIENTIFIC LIMITED, BVM MEDICAL LIMITED, C J MEDICAL LIMITED, CONMED UK LTD, COOK (UK) LIMITED, CREO MEDICAL LIMITED, CREO MEDICAL UK LIMITED, DUOMED MEDICAL UK LIMITED, ERBE MEDICAL UK LTD, FAIRMONT MEDICAL PRODUCTS LIMITED, FANNIN (UK) LIMITED, GAP MEDICAL SOLUTIONS LIMITED, GTA (UK) LTD, H4 MEDICAL LIMITED, IT'S INTERVENTIONAL LIMITED, KEYMED (MEDICAL & INDUSTRIAL EQUIPMENT) LIMITED, LABORIE MEDICAL TECHNOLOGIES UK, LEIB MEDICAL LTD, MACROMED (UK) LIMITED, MEDTRONIC LIMITED, MERIT MEDICAL UK LIMITED, MICRO-TECH (U.K.) LTD, NEWTONS MEDICAL SUPPLIES LTD, OMNIMED LIMITED, PARTNERS FOR ENDOSCOPY LIMITED, PENLON LIMITED, PENNAMED LIMITED, PENTAX U.K. LIMITED, RICHARD WOLF UK LIMITED, STERIS SOLUTIONS LIMITED, SYNECTICS MEDICAL LIMITED, TSC LIFESCIENCES LIMITED, UNIPLEX (U.K.) LIMITED",
+   "date": "2025-07-31",
+   "url": "https://www.find-tender.service.gov.uk/Notice/044733-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Aseptics Medicines (Including Cytotoxics)",
+   "buyer": "Velindre NHS Trust, NHS Wales Shared Services Partnership — Procurement Services (on behalf of All Wales LHB's and Trusts)",
+   "supplier": "Accord-UK",
+   "date": "2025-07-31",
+   "url": "https://www.find-tender.service.gov.uk/Notice/044954-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP39724 Generic and Biosimilar Cancer Medicines",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotland) (NSS)",
+   "supplier": "Accord-UK Ltd",
+   "date": "2025-02-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/007352-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Endoscopy, Endourology & Oncology Ablation Consumables & Associated Products",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "ADVANCED MEDICAL SYSTEMS LTD., AMBU LIMITED, APR MEDTECH LIMITED, AQUILANT ENDOSCOPY LIMITED, AQUILANT LIMITED, ARGON MEDICAL DEVICES UK LTD, BECTON, DICKINSON U.K. LIMITED, BIOSPECTRUM LIMITED, BOSTON SCIENTIFIC LIMITED, BVM MEDICAL LIMITED, C J MEDICAL LIMITED, COLOPLAST LIMITED, CONMED UK LTD, COOK (UK) LIMITED, CREO MEDICAL LIMITED, CREO MEDICAL UK LIMITED, DUOMED MEDICAL UK LIMITED, ERBE MEDICAL UK LTD, FAIRMONT MEDICAL PRODUCTS LIMITED, FANNIN (UK) LIMITED, GAP MEDICAL SOLUTIONS LIMITED, GBUK LTD, GENX MEDICARE LTD, GTA (UK) LTD, H4 MEDICAL LIMITED, HISTOSONICS, IGEA S.P.A, INGLES MEDICAL LIMITED, IT&apos;S INTERVENTIONAL LIMITED, JOHNSON & JOHNSON MEDICAL LIMITED, KARL STORZ ENDOSCOPY (UK) LIMITED, KEBOMED UK LTD., KEYMED (MEDICAL & INDUSTRIAL EQUIPMENT) LIMITED, LABORIE MEDICAL TECHNOLOGIES UK, LEIB MEDICAL LTD, MACROMED (UK) LIMITED, MCT LIFESCIENCES LTD, MEDICAL IMAGING SYSTEMS LIMITED, MEDTRONIC LIMITED, MERIT MEDICAL UK LIMITED, MICRO-TECH (U.K.) LTD, NEWTONS MEDICAL SUPPLIES LTD, NOVUS MED LTD, OMNIMED LIMITED, PARTNERS FOR ENDOSCOPY LIMITED, PENLON LIMITED, PENNAMED LIMITED, PENTAX U.K. LIMITED, PROMED LIMITED, RB MEDICAL ENGINEERING LIMITED, RICHARD WOLF UK LIMITED, ROCAMED FRANCE, STERIS SOLUTIONS LIMITED, SYNECTICS MEDICAL LIMITED, TERUMO UK LIMITED, TFX GROUP LIMITED, TSC LIFESCIENCES LIMITED, UNIPHAR MEDTECH LTD T/A M.E.D. SURGICAL, UNIPLEX (U.K.) LIMITED, VARIAN MEDICAL SYSTEMS UK LIMITED",
+   "date": "2025-02-03",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/1d5b0c28-65c9-4853-a543-b7bec2ffc97f",
+   "value": 426000000,
+   "periodEnd": "2027-09-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Chemotherapy Cold Caps",
+   "buyer": "NHS Wales Shared Services Partnership",
+   "supplier": "Paxman Coolers Ltd",
+   "date": "2024-12-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/041550-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Chemotherapy Cold Caps",
+   "buyer": "NHS Wales Shared Services Partnership",
+   "supplier": "Paxman Coolers Ltd",
+   "date": "2024-12-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/039802-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Aseptically Prepared Systemic Anti-Cancer Treatment (SACT)",
+   "buyer": "Velindre NHS Trust, NHS Wales Shared Services Partnership - Procurement Services (on behalf of All Wales LHB's and Trusts)",
+   "supplier": "Qualasept Ltd t/a Bath ASU",
+   "date": "2024-08-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/025276-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of Scalp Cooling System",
+   "buyer": "Kings College Hospital - KFM",
+   "supplier": "PAXMAN COOLERS LIMITED",
+   "date": "2024-03-21",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/79480420-0c02-4e91-91ea-7b988f6efb53",
+   "value": 41376,
+   "periodEnd": "2024-04-19",
+   "source": "tender-history"
+  },
+  {
+   "title": "NHS Framework Agreement for Aseptically Prepared Cytotoxic Medicines and Monoclonal Antibodies for the Treatment of Canc",
+   "buyer": "NHS England",
+   "supplier": "ITH Pharma, Qualasept Ltd t/a Bath ASU, Sciensus Pharma Services Limited, Baxter Healthcare Ltd, LloydsPharmacy Clinical Homecare, Quantum Pharmaceutical",
+   "date": "2024-03-11",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/5b2ed894-865e-46a1-9251-f9f8b92b6a85",
+   "value": 608000000,
+   "periodEnd": "2028-03-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Scalp Cooling System",
+   "buyer": "United Lincolnshire Hospitals NHS Trust",
+   "supplier": "PAXMAN COOLERS LIMITED",
+   "date": "2024-01-08",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/32fc50c0-ca64-42fd-82ed-51cd3df33ceb",
+   "value": 58444,
+   "periodEnd": "2030-01-07",
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase, Service and Maintenance of a Three Scalp Cooling System",
+   "buyer": "The Dudley Group NHS Foundation Trust",
+   "supplier": "PAXMAN COOLERS LIMITED",
+   "date": "2023-07-05",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/443ec4ff-6251-4880-87b1-3a9d56daa114",
+   "value": 60000,
+   "periodEnd": "2028-06-29",
+   "source": "tender-history"
+  },
+  {
+   "title": "Generic and Biosimilar Cancer Medicines",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotland) (\"the Authority\")",
+   "supplier": "Accord-UK Ltd",
+   "date": "2023-04-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/011419-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Scalp Cooling System",
+   "buyer": "ST HELENS & KNOWSLEY TEACHING HOSPITALS NHS TRUST",
+   "supplier": "Paxman Cooler's Ltd",
+   "date": "2023-03-08",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/fe2b8387-fbbf-47b5-bc73-f94ccf8879f2",
+   "value": 36256,
+   "periodEnd": "2023-03-09",
+   "source": "tender-history"
+  },
+  {
+   "title": "The Supply of Patient-Specific Cytotoxic and Adjuvant Products",
+   "buyer": "The Hillingdon Hospitals Nhs Foundation Trust",
+   "supplier": "BAXTER HEALTHCARE LIMITED",
+   "date": "2022-08-15",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/e2cac4d4-b457-4750-8d64-b78c0742b87c",
+   "value": 5681055,
+   "periodEnd": "2025-07-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Scalp Cooling System",
+   "buyer": "The Queen Elizabeth Hospital King's Lynn Nhs Foundation Trust",
+   "supplier": "Paxman Coolers Limited",
+   "date": "2022-08-02",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/5d5e29bb-6861-499c-bd66-c8186c06c63e",
+   "value": 9975,
+   "periodEnd": "2022-08-03",
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of dose banded compounded chemotherapy",
+   "buyer": "Berkshire Healthcare NHS Foundation Trust",
+   "supplier": "Quantum Pharmaceutical Ltd, Qualasept Ltd, t/a Bath ASU, Portsmouth Hospital NHS Trust, ITH Pharma Ltd, Baxter Healthcare Ltd",
+   "date": "2022-04-08",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/92a6d86e-6be5-476d-84fc-6165ab9f2152",
+   "value": 2905765,
+   "periodEnd": "2024-02-29",
+   "source": "tender-history"
+  },
+  {
+   "title": "COLD CAP MACHINE AND CONSUMABLES",
+   "buyer": "HULL UNIVERSITY TEACHING HOSPITALS NHS TRUST",
+   "supplier": "Paxman Coolers Ltd",
+   "date": "2022-02-23",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/04e8532c-1538-4ffe-96b5-059fe54c6783",
+   "value": 11445,
+   "periodEnd": "2022-03-24",
+   "source": "tender-history"
+  },
+  {
+   "title": "PSCS2 230V COLD CAP MACHINE AND CONSUMABLES",
+   "buyer": "HULL ROYAL INFIRMARY",
+   "supplier": "PAXMAN COOLERS LTD",
+   "date": "2021-12-03",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/e9eb06b8-ca52-4e13-9809-5d563ab48d3a",
+   "value": 11445,
+   "periodEnd": "2021-12-04",
+   "source": "tender-history"
+  },
+  {
+   "title": "PSCS2 230V COLD CAP MACHINE PLUS CONSUMABLES DUAL MACHINE",
+   "buyer": "HULL ROYAL INFIRMARY",
+   "supplier": "PAXMAN COOLERS LTD",
+   "date": "2021-08-09",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/6d517c76-5b66-4d15-a0d0-6826a6223257",
+   "value": 11445,
+   "periodEnd": "2021-08-10",
+   "source": "tender-history"
+  },
+  {
+   "title": "Oncology Generic Medicines - Additions",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotland) (\"NSS\")",
+   "supplier": "Dr Reddy's Laboratories (UK) Ltd, Novartis Pharmaceuticals UK Ltd, Accord Healthcare Ltd",
+   "date": "2021-06-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/014174-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "National Framework Agreement for the supply of Aseptically Prepared Cytotoxic Medicines and Monoclonal Antibodies – Nort",
+   "buyer": "The NHS Commissioning Board (operating under the name of NHS England)",
+   "supplier": "Qualasept Ltd t/a Bath ASU",
+   "date": "2021-04-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/009177-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Aseptically Prepared Cytotoxic Medicines and Monoclonal Antibodies - North of England of",
+   "buyer": "NHS England",
+   "supplier": "Baxter Healthcare Ltd",
+   "date": "2021-03-18",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/1dbe7ccb-e920-403c-9381-e89663a1b878",
+   "value": 40700000,
+   "periodEnd": "2022-03-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Oncology Generics Medicines",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotland) (\"the Authority\")",
+   "supplier": "Waverley Pharma Europe Limited",
+   "date": "2021-02-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/002350-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Framework for the Provision to Supply Dose Banded Chemotherapy Services",
+   "buyer": "East Midlands Procurement Portal",
+   "supplier": "Baxter Healthcare Ltd, Qualasept Ltd, ITH Pharma Limited",
+   "date": "2017-06-09",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/1756e1a0-0ddf-48cf-bd36-57729297cac8",
+   "value": 3500000,
+   "periodEnd": "2022-05-31",
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null,
+ "localIntel": [],
+ "localIntelGroups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
+ },
+ "directorySuppliers": [
+  {
+   "name": "Accuray UK",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Accuray UK",
+   "seedLabels": [
+    "Oncology / radiotherapy"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Radiotherapy Treatment Systems and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-treatment-systems-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Radiotherapy Treatment Systems",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Radiotherapy Treatment Systems and Associated Options and Related Services. The Hub's supplier directory also records: NHS Supply Chain — Radiotherapy Treatment Systems."
+  },
+  {
+   "name": "Brainlab Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Brainlab Ltd",
+   "seedLabels": [
+    "Oncology / radiotherapy"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Mobile Image Intensifiers and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-image-intensifiers-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-ancillary-devices-incl-dosimetry-patient-positioning-and-qa-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Navigation Systems with Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-navigation-systems-with-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Mobile Image Intensifiers and Associated Options and Related Services; Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices; Surgical Navigation Systems with Associated Options and Related Services."
+  },
+  {
+   "name": "Convatec",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Convatec",
+   "seedLabels": [
+    "Oncology and infusion"
+   ],
+   "via": [
+    "speciality-map.json canonical label"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Advanced Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/advanced-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Negative Pressure Wound Therapy",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/negative-pressure-wound-therapy/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Urology and Bowel Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/urology-and-bowel-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "Drug Tariff Part IX",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Advanced Wound Care; Negative Pressure Wound Therapy; Urology and Bowel Management. The Hub's supplier directory also records: Drug Tariff Part IX; NHS SBS — SBS10142."
+  },
+  {
+   "name": "Eckert & Ziegler BEBIG",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Eckert & Ziegler BEBIG",
+   "seedLabels": [
+    "Oncology / radiotherapy"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Radiotherapy Treatment Systems and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-treatment-systems-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Radiotherapy Treatment Systems",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Radiotherapy Treatment Systems and Associated Options and Related Services. The Hub's supplier directory also records: NHS Supply Chain — Radiotherapy Treatment Systems."
+  },
+  {
+   "name": "Elekta",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Elekta",
+   "seedLabels": [
+    "Oncology / radiotherapy"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-ancillary-devices-incl-dosimetry-patient-positioning-and-qa-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Radiotherapy IT Solutions and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-it-solutions-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Radiotherapy Treatment Systems and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-treatment-systems-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Radiotherapy Treatment Systems",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices; Radiotherapy IT Solutions and Associated Options and Related Services; Radiotherapy Treatment Systems and Associated Options and Related Services. The Hub's supplier directory also records: NHS Supply Chain — Radiotherapy Treatment Systems."
+  },
+  {
+   "name": "Oncology Imaging Systems (OIS)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Oncology Imaging Systems (OIS)",
+   "seedLabels": [
+    "Oncology / radiotherapy"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-ancillary-devices-incl-dosimetry-patient-positioning-and-qa-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Radiotherapy Treatment Systems and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-treatment-systems-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Radiotherapy Treatment Systems",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices; Radiotherapy Treatment Systems and Associated Options and Related Services. The Hub's supplier directory also records: NHS Supply Chain — Radiotherapy Treatment Systems."
+  },
+  {
+   "name": "Oncology Systems Ltd (OSL)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Oncology Systems Ltd (OSL)",
+   "seedLabels": [
+    "Oncology / radiotherapy"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-ancillary-devices-incl-dosimetry-patient-positioning-and-qa-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Radiotherapy IT Solutions and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-it-solutions-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Radiotherapy Treatment Systems and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-treatment-systems-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Radiotherapy Treatment Systems",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices; Radiotherapy IT Solutions and Associated Options and Related Services; Radiotherapy Treatment Systems and Associated Options and Related Services. The Hub's supplier directory also records: NHS Supply Chain — Radiotherapy Treatment Systems."
+  },
+  {
+   "name": "OncoSem UK Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "OncoSem UK Limited",
+   "seedLabels": [
+    "Oncology and radiotherapy"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Needlefree Connection Systems and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/needlefree-connection-systems-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Needlefree Connection Systems and Associated Products."
+  },
+  {
+   "name": "Philips",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Philips",
+   "seedLabels": [
+    "Oncology and infusion"
+   ],
+   "via": [
+    "speciality-map.json canonical label"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/anaesthesia-machines-ventilator-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/angiography-hybrid-theatres-capital-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "CT Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ct-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cardiac-and-pulmonary-diagnostics-and-exercise-stress-testing-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Digital Diagnostic Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "External Defibrillation Devices and Related Services and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/external-defibrillation-devices-related-equipment-and-associated-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Finance Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/finance-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Fluoroscopy and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/fluoroscopy-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Magnetic Resonance Imaging Scanners and Associated Option and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/magnetic-resonance-imaging-scanners-and-associated-option-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Medical Chart Paper and Ultrasound Film",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-chart-paper-and-ultrasound-film/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mobile Image Intensifiers and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-image-intensifiers-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mobile X-Ray Systems and Associated Option and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-x-ray-systems-and-associated-option-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Nuclear Medicine Imaging and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/nuclear-medicine-imaging-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-monitoring-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pulse-oximetry-and-capnography-devices-and-support-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Radiotherapy IT Solutions and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-it-solutions-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Static X-Ray and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/static-x-ray-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Ultrasound Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ultrasound-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Anaesthesia Machines & Ventilators (to 2029)",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS Supply Chain — Imaging Capital CT/MRI/X-ray (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS Supply Chain — Patient Monitoring (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on twenty NHS Supply Chain frameworks not counted as this speciality's: Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services; Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services; CT Scanners and Associated Options and Related Services; Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions; Digital Diagnostic Solutions; Electrodes, Ultrasound Gels, Defibrillation and Related Consumables; External Defibrillation Devices and Related Services and Accessories; Finance Solutions; Fluoroscopy and Associated Options and Related Services; Magnetic Resonance Imaging Scanners and Associated Option and Related Services; Medical Chart Paper and Ultrasound Film; Mobile Image Intensifiers and Associated Options and Related Services; Mobile X-Ray Systems and Associated Option and Related Services; Nuclear Medicine Imaging and Associated Options and Related Services; Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services; Pulse Oximetry, Capnography and Related Monitoring Technologies; Radiotherapy IT Solutions and Associated Options and Related Services; Static X-Ray and Associated Options and Related Services; Total Patient Assessment Device Solutions; Ultrasound Scanners and Associated Options and Related Services. The Hub's supplier directory also records: NHS Supply Chain — Anaesthesia Machines & Ventilators (to 2029); NHS Supply Chain — Imaging Capital CT/MRI/X-ray (to 2028); NHS Supply Chain — Patient Monitoring (to 2028)."
+  },
+  {
+   "name": "Phoenix Dosimetry Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Phoenix Dosimetry Ltd",
+   "seedLabels": [
+    "Oncology / radiotherapy"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-ancillary-devices-incl-dosimetry-patient-positioning-and-qa-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices."
+  },
+  {
+   "name": "QIAGEN UK",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "QIAGEN UK",
+   "seedLabels": [
+    "Oncology and infusion"
+   ],
+   "via": [
+    "speciality-map.json canonical label"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/laboratory-diagnostics-point-of-care-testing-and-pathology/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Laboratory Diagnostics, POCT & Pathology (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services. The Hub's supplier directory also records: NHS Supply Chain — Laboratory Diagnostics, POCT & Pathology (to 2028)."
+  },
+  {
+   "name": "Siemens Healthineers",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Siemens Healthineers",
+   "seedLabels": [
+    "Oncology and infusion"
+   ],
+   "via": [
+    "speciality-map.json canonical label"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/angiography-hybrid-theatres-capital-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Blood Collection Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/blood-collection-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "CT Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ct-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Digital Diagnostic Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Fluoroscopy and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/fluoroscopy-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/laboratory-diagnostics-point-of-care-testing-and-pathology/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Magnetic Resonance Imaging Scanners and Associated Option and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/magnetic-resonance-imaging-scanners-and-associated-option-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mammography Imaging Systems and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mammography-imaging-systems-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mobile Image Intensifiers and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-image-intensifiers-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mobile X-Ray Systems and Associated Option and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-x-ray-systems-and-associated-option-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Static X-Ray and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/static-x-ray-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Ultrasound Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ultrasound-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Laboratory Diagnostics, POCT & Pathology (2023/S 000-028831, to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on twelve NHS Supply Chain frameworks not counted as this speciality's: Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services; Blood Collection Devices; CT Scanners and Associated Options and Related Services; Digital Diagnostic Solutions; Fluoroscopy and Associated Options and Related Services; Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services; Magnetic Resonance Imaging Scanners and Associated Option and Related Services; Mammography Imaging Systems and Associated Options and Related Services; Mobile Image Intensifiers and Associated Options and Related Services; Mobile X-Ray Systems and Associated Option and Related Services; Static X-Ray and Associated Options and Related Services; Ultrasound Scanners and Associated Options and Related Services. The Hub's supplier directory also records: NHS Supply Chain — Laboratory Diagnostics, POCT & Pathology (2023/S 000-028831, to 2028)."
+  },
+  {
+   "name": "Sirtex Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Sirtex Medical",
+   "seedLabels": [
+    "Oncology / radiotherapy"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Radiotherapy Treatment Systems and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-treatment-systems-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Radiotherapy Treatment Systems",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Radiotherapy Treatment Systems and Associated Options and Related Services. The Hub's supplier directory also records: NHS Supply Chain — Radiotherapy Treatment Systems."
+  },
+  {
+   "name": "Vertec Scientific",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Vertec Scientific",
+   "seedLabels": [
+    "Oncology / radiotherapy"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Bone Densitometers, Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/bone-densitometers-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mobile Image Intensifiers and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-image-intensifiers-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-ancillary-devices-incl-dosimetry-patient-positioning-and-qa-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Radiotherapy Treatment Systems and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-treatment-systems-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Ultrasound Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ultrasound-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Radiotherapy Treatment Systems",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on five NHS Supply Chain frameworks not counted as this speciality's: Bone Densitometers, Associated Options and Related Services; Mobile Image Intensifiers and Associated Options and Related Services; Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices; Radiotherapy Treatment Systems and Associated Options and Related Services; Ultrasound Scanners and Associated Options and Related Services. The Hub's supplier directory also records: NHS Supply Chain — Radiotherapy Treatment Systems."
+  },
+  {
+   "name": "Vision RT Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Vision RT Ltd",
+   "seedLabels": [
+    "Oncology / radiotherapy"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-ancillary-devices-incl-dosimetry-patient-positioning-and-qa-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices."
+  },
+  {
+   "name": "Xstrahl",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Xstrahl",
+   "seedLabels": [
+    "Oncology / radiotherapy"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Radiotherapy Treatment Systems and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-treatment-systems-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Radiotherapy Treatment Systems",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Radiotherapy Treatment Systems and Associated Options and Related Services. The Hub's supplier directory also records: NHS Supply Chain — Radiotherapy Treatment Systems."
+  },
+  {
+   "name": "Micrel Medical Devices",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Micrel Medical Devices",
+   "seedLabels": [
+    "Oncology and infusion"
+   ],
+   "via": [
+    "speciality-map.json canonical label"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": true,
+  "markets": [
+   {
+    "id": "onc",
+    "label": "Malignant disease and immunosuppression: BNF chapter 8",
+    "bnf": [
+     "chapter 8"
+    ],
+    "note": null,
+    "latestPeriod": "202607",
+    "baselinePeriod": "202507",
+    "items": 418840,
+    "cost": 15074180,
+    "items12m": 4694417,
+    "cost12m": 167996577,
+    "itemsYoY": 4.7,
+    "products": 89,
+    "topNational": [
+     {
+      "code": "0803041L0AA",
+      "label": "Letrozole",
+      "generic": true,
+      "items": 115351,
+      "share": 27.5,
+      "cost": 277265,
+      "yoy": 6.5
+     },
+     {
+      "code": "0802010G0AA",
+      "label": "Azathioprine",
+      "generic": true,
+      "items": 53695,
+      "share": 12.8,
+      "cost": 155233,
+      "yoy": -5.4
+     },
+     {
+      "code": "0803041B0AA",
+      "label": "Anastrozole",
+      "generic": true,
+      "items": 43788,
+      "share": 10.5,
+      "cost": 49047,
+      "yoy": -0.4
+     },
+     {
+      "code": "0803041S0AA",
+      "label": "Tamoxifen",
+      "generic": true,
+      "items": 41616,
+      "share": 9.9,
+      "cost": 302089,
+      "yoy": -4.2
+     },
+     {
+      "code": "0802010M0AA",
+      "label": "Mycophenolate mofetil",
+      "generic": true,
+      "items": 20615,
+      "share": 4.9,
+      "cost": 251612,
+      "yoy": 8.4
+     },
+     {
+      "code": "0803041C0AA",
+      "label": "Exemestane",
+      "generic": true,
+      "items": 16610,
+      "share": 4.0,
+      "cost": 75731,
+      "yoy": 6.8
+     },
+     {
+      "code": "0803042N0BB",
+      "label": "Prostap",
+      "generic": false,
+      "items": 15972,
+      "share": 3.8,
+      "cost": 2969744,
+      "yoy": -4.9
+     },
+     {
+      "code": "0803042K0BB",
+      "label": "Zoladex LA",
+      "generic": false,
+      "items": 14754,
+      "share": 3.5,
+      "cost": 2366274,
+      "yoy": -3.5
+     },
+     {
+      "code": "0803042A0AA",
+      "label": "Bicalutamide",
+      "generic": true,
+      "items": 12440,
+      "share": 3.0,
+      "cost": 45682,
+      "yoy": -15.5
+     },
+     {
+      "code": "0801030H0AA",
+      "label": "Fluorouracil",
+      "generic": true,
+      "items": 12109,
+      "share": 2.9,
+      "cost": 359327,
+      "yoy": 245.8
+     }
+    ],
+    "icbLeaders": [
+     {
+      "icb": "QOX",
+      "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+      "items": 8135,
+      "leaders": [
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 1458,
+        "share": 17.9
+       },
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 1384,
+        "share": 17.0
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 1072,
+        "share": 13.2
+       }
+      ]
+     },
+     {
+      "icb": "QHL",
+      "name": "NHS Birmingham and Solihull",
+      "items": 6400,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 1576,
+        "share": 24.6
+       },
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 1088,
+        "share": 17.0
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 650,
+        "share": 10.2
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 6695,
+      "leaders": [
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 1481,
+        "share": 22.1
+       },
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 1176,
+        "share": 17.6
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 1015,
+        "share": 15.2
+       }
+      ]
+     },
+     {
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 6123,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 1885,
+        "share": 30.8
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 968,
+        "share": 15.8
+       },
+       {
+        "code": "0803041C0AA",
+        "label": "Exemestane",
+        "generic": true,
+        "items": 398,
+        "share": 6.5
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 24672,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 6013,
+        "share": 24.4
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 3986,
+        "share": 16.2
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 2610,
+        "share": 10.6
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 18300,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 6211,
+        "share": 33.9
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 2163,
+        "share": 11.8
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 1984,
+        "share": 10.8
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 5077,
+      "leaders": [
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 1078,
+        "share": 21.2
+       },
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 736,
+        "share": 14.5
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 534,
+        "share": 10.5
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 7005,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 2370,
+        "share": 33.8
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 999,
+        "share": 14.3
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 693,
+        "share": 9.9
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 6735,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 1709,
+        "share": 25.4
+       },
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 1157,
+        "share": 17.2
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 741,
+        "share": 11.0
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 9510,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 2031,
+        "share": 21.4
+       },
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 1537,
+        "share": 16.2
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 904,
+        "share": 9.5
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 7341,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 1485,
+        "share": 20.2
+       },
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 895,
+        "share": 12.2
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 593,
+        "share": 8.1
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 16010,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 4540,
+        "share": 28.4
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 2451,
+        "share": 15.3
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 1613,
+        "share": 10.1
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 5996,
+      "leaders": [
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 1280,
+        "share": 21.3
+       },
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 928,
+        "share": 15.5
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 690,
+        "share": 11.5
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 17627,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 7060,
+        "share": 40.1
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 2123,
+        "share": 12.0
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 2023,
+        "share": 11.5
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 16136,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 3430,
+        "share": 21.3
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 1953,
+        "share": 12.1
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 1810,
+        "share": 11.2
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 6729,
+      "leaders": [
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 1697,
+        "share": 25.2
+       },
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 804,
+        "share": 11.9
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 747,
+        "share": 11.1
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 17524,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 3408,
+        "share": 19.4
+       },
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 2733,
+        "share": 15.6
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 2287,
+        "share": 13.1
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 14256,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 4244,
+        "share": 29.8
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 1998,
+        "share": 14.0
+       },
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 1335,
+        "share": 9.4
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 13761,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 5308,
+        "share": 38.6
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 1481,
+        "share": 10.8
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 1362,
+        "share": 9.9
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 7937,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 2153,
+        "share": 27.1
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 1238,
+        "share": 15.6
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 1027,
+        "share": 12.9
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 8185,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 2511,
+        "share": 30.7
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 1167,
+        "share": 14.3
+       },
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 734,
+        "share": 9.0
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 19200,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 4217,
+        "share": 22.0
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 3207,
+        "share": 16.7
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 2158,
+        "share": 11.2
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 9426,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 3314,
+        "share": 35.2
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 1484,
+        "share": 15.7
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 818,
+        "share": 8.7
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 25938,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 10089,
+        "share": 38.9
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 2658,
+        "share": 10.2
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 2533,
+        "share": 9.8
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 6534,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 1720,
+        "share": 26.3
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 1064,
+        "share": 16.3
+       },
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 972,
+        "share": 14.9
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 6311,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 1533,
+        "share": 24.3
+       },
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 1466,
+        "share": 23.2
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 1041,
+        "share": 16.5
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 3714,
+      "leaders": [
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 884,
+        "share": 23.8
+       },
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 715,
+        "share": 19.3
+       },
+       {
+        "code": "0803042N0BB",
+        "label": "Prostap",
+        "generic": false,
+        "items": 345,
+        "share": 9.3
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 4933,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 1323,
+        "share": 26.8
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 522,
+        "share": 10.6
+       },
+       {
+        "code": "0803042X0AA",
+        "label": "Relugolix",
+        "generic": true,
+        "items": 514,
+        "share": 10.4
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 9020,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 2893,
+        "share": 32.1
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 1006,
+        "share": 11.2
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 901,
+        "share": 10.0
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 8405,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 3385,
+        "share": 40.3
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 1154,
+        "share": 13.7
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 858,
+        "share": 10.2
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 10493,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 4624,
+        "share": 44.1
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 1206,
+        "share": 11.5
+       },
+       {
+        "code": "0803042N0BB",
+        "label": "Prostap",
+        "generic": false,
+        "items": 687,
+        "share": 6.5
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 7645,
+      "leaders": [
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 2215,
+        "share": 29.0
+       },
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 1419,
+        "share": 18.6
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 918,
+        "share": 12.0
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 22706,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 6703,
+        "share": 29.5
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 2608,
+        "share": 11.5
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 2567,
+        "share": 11.3
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 16910,
+      "leaders": [
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 3307,
+        "share": 19.6
+       },
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 2987,
+        "share": 17.7
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 2187,
+        "share": 12.9
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 19057,
+      "leaders": [
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 3390,
+        "share": 17.8
+       },
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 3200,
+        "share": 16.8
+       },
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 3175,
+        "share": 16.7
+       }
+      ]
+     },
+     {
+      "icb": "Z9B2Z",
+      "name": "NHS West and North London",
+      "items": 18333,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 6290,
+        "share": 34.3
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 2528,
+        "share": 13.8
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 2278,
+        "share": 12.4
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-10-09",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": false,
+  "whyEmpty": null,
+  "count": 206,
+  "roundupsExcluded": 32,
+  "broadcastsExcluded": 2,
+  "updates": [
+   {
+    "title": "Filters should be used during the administration of Parenteral Nutrition for patients in all care settings",
+    "url": "https://www.gov.uk/drug-safety-update/filters-should-be-used-during-the-administration-of-parenteral-nutrition-for-patients-in-all-care-settings",
+    "published": "2026-09-02",
+    "updated": "2026-09-02",
+    "summary": "Administration of parenteral nutrition without a filter has been associated with a number of adverse incidents including an embolism which resulted in a fatal outcome."
+   },
+   {
+    "title": "Domperidone: new contraindication in patients with phaeochromocytoma due to the risk of severe hypertension",
+    "url": "https://www.gov.uk/drug-safety-update/domperidone-new-contraindication-in-patients-with-phaeochromocytoma-due-to-the-risk-of-severe-hypertension",
+    "published": "2026-07-21",
+    "updated": "2026-07-21",
+    "summary": "The product information has been updated for all domperidone products, to include a contraindication for patients with confirmed or suspected phaeochromocytoma (a rare tumour of the adrenal gland), due to the risk of episodes of severe hypertension."
+   },
+   {
+    "title": "Thiopurines and intrahepatic cholestasis of pregnancy",
+    "url": "https://www.gov.uk/drug-safety-update/thiopurines-and-intrahepatic-cholestasis-of-pregnancy",
+    "published": "2025-05-15",
+    "updated": "2025-05-15",
+    "summary": "Intrahepatic cholestasis of pregnancy (ICP) has been rarely reported in patients treated with azathioprine products and is believed to be a risk applicable to all drugs in the thiopurine class (azathioprine, mercaptopurine and tioguanine). Cholestasis of pregnancy associated with thiopurines tends to occur earlier in pregnancy than non drug-induced cholestasis of pregnancy, and elevated bile acid levels may not reduce with ursodeoxycholic acid."
+   },
+   {
+    "title": "Yellow Card Biobank: call to contribute to study of genetic links to side effects",
+    "url": "https://www.gov.uk/drug-safety-update/yellow-card-biobank-call-to-contribute-to-study-of-genetic-links-to-side-effects",
+    "published": "2024-08-21",
+    "updated": "2024-08-21",
+    "summary": "Support this initiative to explore whether there is a genetic basis of side effects associated with direct-acting oral anticoagulants (DOACs) and allopurinol."
+   },
+   {
+    "title": "Warfarin: be alert to the risk of drug interactions with tramadol",
+    "url": "https://www.gov.uk/drug-safety-update/warfarin-be-alert-to-the-risk-of-drug-interactions-with-tramadol",
+    "published": "2024-06-20",
+    "updated": "2024-06-20",
+    "summary": "Taking warfarin and tramadol together can cause harmful drug interactions, which can raise the International Normalised Ratio (INR), and result in severe bruising and bleeding, which in some patients could be fatal."
+   },
+   {
+    "title": "Pseudoephedrine: very rare risk of posterior reversible encephalopathy syndrome (PRES) and reversible cerebral vasoconstriction syndrome (RCVS)",
+    "url": "https://www.gov.uk/drug-safety-update/pseudoephedrine-very-rare-risk-of-posterior-reversible-encephalopathy-syndrome-pres-and-reversible-cerebral-vasoconstriction-syndrome-rcvs",
+    "published": "2024-02-20",
+    "updated": "2024-02-20",
+    "summary": "There have been very rare reports of posterior reversible encephalopathy syndrome (PRES) and reversible cerebral vasoconstriction syndrome (RCVS) with pseudoephedrine."
+   },
+   {
+    "title": "Methotrexate: advise patients to take precautions in the sun to avoid photosensitivity reactions",
+    "url": "https://www.gov.uk/drug-safety-update/methotrexate-advise-patients-to-take-precautions-in-the-sun-to-avoid-photosensitivity-reactions",
+    "published": "2023-08-30",
+    "updated": "2023-08-30",
+    "summary": "Photosensitivity reactions are known side effects of methotrexate treatment and can be severe. Patients should be advised to take precautions to protect their skin in the sun."
+   },
+   {
+    "title": "Hyoscine hydrobromide patches (Scopoderm 1.5mg Patch or Scopoderm TTS Patch): risk of anticholinergic side effects, including hyperthermia",
+    "url": "https://www.gov.uk/drug-safety-update/hyoscine-hydrobromide-patches-scopoderm-1-dot-5mg-patch-or-scopoderm-tts-patch-risk-of-anticholinergic-side-effects-including-hyperthermia",
+    "published": "2023-07-24",
+    "updated": "2023-07-24",
+    "summary": "There have been a small number of reports of serious and life-threatening anticholinergic side effects associated with hyoscine hydrobromide patches, particularly when used outside the licence. Healthcare professionals, patients, parents and carers should be aware of the signs and symptoms of serious side effects and the need to seek medical help if they occur."
+   }
+  ]
+ },
+ "drugTariffViiia": {
+  "effectiveMonth": "2026-10",
+  "latestPublishedMonth": "2026-10",
+  "dataAsOf": "2026-10-09",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-viii",
+  "whole": false,
+  "bnfFilter": [
+   "chapter 8"
+  ],
+  "lineCount": 103,
+  "categoryCounts": {
+   "M": 9,
+   "C": 89,
+   "A": 5
+  },
+  "fileLines": 3534,
+  "fileLinesWithoutBnf": 53,
+  "priceMin": 1.06,
+  "priceMax": 998.41,
+  "linesShown": 80,
+  "lines": [
+   {
+    "medicine": "Anastrozole 1mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.06,
+    "bnf": "0803041B0AAAAAA"
+   },
+   {
+    "medicine": "Azathioprine 25mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.3,
+    "bnf": "0802010G0AAADAD"
+   },
+   {
+    "medicine": "Azathioprine 50mg tablets",
+    "pack": "56 tablet",
+    "category": "M",
+    "price": 1.74,
+    "bnf": "0802010G0AAAEAE"
+   },
+   {
+    "medicine": "Bicalutamide 150mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 3.57,
+    "bnf": "0803042A0AAABAB"
+   },
+   {
+    "medicine": "Bicalutamide 50mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 2.27,
+    "bnf": "0803042A0AAAAAA"
+   },
+   {
+    "medicine": "Exemestane 25mg tablets",
+    "pack": "30 tablet",
+    "category": "M",
+    "price": 4.27,
+    "bnf": "0803041C0AAAAAA"
+   },
+   {
+    "medicine": "Letrozole 2.5mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 2.14,
+    "bnf": "0803041L0AAAAAA"
+   },
+   {
+    "medicine": "Mycophenolate mofetil 500mg tablets",
+    "pack": "50 tablet",
+    "category": "M",
+    "price": 6.06,
+    "bnf": "0802010M0AAABAB"
+   },
+   {
+    "medicine": "Tamoxifen 20mg tablets",
+    "pack": "30 tablet",
+    "category": "M",
+    "price": 2.59,
+    "bnf": "0803041S0AAABAB"
+   },
+   {
+    "medicine": "Azathioprine 10mg/ml oral suspension sugar free",
+    "pack": "200 ml",
+    "category": "C",
+    "price": 250.0,
+    "bnf": "0802010G0AACPCP"
+   },
+   {
+    "medicine": "Calcium folinate 15mg tablets",
+    "pack": "10 tablet",
+    "category": "C",
+    "price": 37.85,
+    "bnf": "0801000I0AAAHAH"
+   },
+   {
+    "medicine": "Calcium folinate 15mg tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 85.74,
+    "bnf": "0801000I0AAAHAH"
+   },
+   {
+    "medicine": "Capecitabine 500mg tablets",
+    "pack": "120 tablet",
+    "category": "C",
+    "price": 225.72,
+    "bnf": "0801030V0AAAAAA"
+   },
+   {
+    "medicine": "Ciclosporin 100mg capsules",
+    "pack": "30 capsule",
+    "category": "C",
+    "price": 68.28,
+    "bnf": "0802020G0AAADAD"
+   },
+   {
+    "medicine": "Ciclosporin 100mg/ml oral solution sugar free",
+    "pack": "50 ml",
+    "category": "C",
+    "price": 102.3,
+    "bnf": "0802020G0AAAGAG"
+   },
+   {
+    "medicine": "Ciclosporin 10mg capsules",
+    "pack": "60 capsule",
+    "category": "C",
+    "price": 18.25,
+    "bnf": "0802020G0AAAHAH"
+   },
+   {
+    "medicine": "Ciclosporin 25mg capsules",
+    "pack": "30 capsule",
+    "category": "C",
+    "price": 18.37,
+    "bnf": "0802020G0AAACAC"
+   },
+   {
+    "medicine": "Ciclosporin 50mg capsules",
+    "pack": "30 capsule",
+    "category": "C",
+    "price": 35.97,
+    "bnf": "0802020G0AAAFAF"
+   },
+   {
+    "medicine": "Cyproterone 100mg tablets",
+    "pack": "84 tablet",
+    "category": "C",
+    "price": 132.57,
+    "bnf": "0803042E0AAABAB"
+   },
+   {
+    "medicine": "Degarelix 80mg powder and solvent for solution for injection vials",
+    "pack": "1 vial",
+    "category": "C",
+    "price": 79.9,
+    "bnf": "0803042R0AAAAAA"
+   },
+   {
+    "medicine": "Diethylstilbestrol 1mg tablets",
+    "pack": "28 tablet",
+    "category": "C",
+    "price": 209.95,
+    "bnf": "0803010K0AAAKAK"
+   },
+   {
+    "medicine": "Dimethyl fumarate 120mg gastro-resistant tablets",
+    "pack": "90 tablet",
+    "category": "C",
+    "price": 190.8,
+    "bnf": "0802040AKAAADAD"
+   },
+   {
+    "medicine": "Dimethyl fumarate 120mg gastro-resistant tablets",
+    "pack": "180 tablet",
+    "category": "C",
+    "price": 381.6,
+    "bnf": "0802040AKAAADAD"
+   },
+   {
+    "medicine": "Dimethyl fumarate 30mg gastro-resistant tablets",
+    "pack": "42 tablet",
+    "category": "C",
+    "price": 89.04,
+    "bnf": "0802040AKAAACAC"
+   },
+   {
+    "medicine": "Fluorouracil 4% cream",
+    "pack": "20 gram",
+    "category": "C",
+    "price": 28.0,
+    "bnf": "0801030H0AABLBL"
+   },
+   {
+    "medicine": "Flutamide 250mg tablets",
+    "pack": "84 tablet",
+    "category": "C",
+    "price": 167.88,
+    "bnf": "0803042H0AAAAAA"
+   },
+   {
+    "medicine": "Fulvestrant 250mg/5ml solution for injection pre-filled syringes",
+    "pack": "2 pre-filled disposable injection",
+    "category": "C",
+    "price": 522.41,
+    "bnf": "0803041AAAAAAAA"
+   },
+   {
+    "medicine": "Goserelin 10.8mg implant pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 235.0,
+    "bnf": "0803042K0AAABAB"
+   },
+   {
+    "medicine": "Goserelin 3.6mg implant pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 94.5,
+    "bnf": "0803042K0AAAAAA"
+   },
+   {
+    "medicine": "Hydroxycarbamide 500mg/5ml oral solution sugar free",
+    "pack": "150 ml",
+    "category": "C",
+    "price": 250.0,
+    "bnf": "0801050P0AAAEAE"
+   },
+   {
+    "medicine": "Lanreotide 120mg/0.5ml solution for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 937.0,
+    "bnf": "0803043P0AAADAD"
+   },
+   {
+    "medicine": "Lanreotide 60mg/0.5ml solution for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 551.0,
+    "bnf": "0803043P0AAAEAE"
+   },
+   {
+    "medicine": "Lanreotide 90mg/0.5ml solution for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 736.0,
+    "bnf": "0803043P0AAAFAF"
+   },
+   {
+    "medicine": "Leuprorelin 1.88mg powder and solvent for prolonged-release suspension for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 60.0,
+    "bnf": "0803042N0AAAGAG"
+   },
+   {
+    "medicine": "Leuprorelin 11.25mg implant pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 75.0,
+    "bnf": "0803042N0AAAFAF"
+   },
+   {
+    "medicine": "Leuprorelin 11.25mg powder and solvent for prolonged-release suspension for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 225.72,
+    "bnf": "0803042N0AAADAD"
+   },
+   {
+    "medicine": "Leuprorelin 3.75mg powder and solvent for prolonged-release suspension for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 75.24,
+    "bnf": "0803042N0AAACAC"
+   },
+   {
+    "medicine": "Medroxyprogesterone 100mg tablets",
+    "pack": "100 tablet",
+    "category": "C",
+    "price": 49.94,
+    "bnf": "0803020H0AAACAC"
+   },
+   {
+    "medicine": "Medroxyprogesterone 200mg tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 29.65,
+    "bnf": "0803020H0AAADAD"
+   },
+   {
+    "medicine": "Medroxyprogesterone 400mg tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 58.67,
+    "bnf": "0803020H0AAAFAF"
+   },
+   {
+    "medicine": "Megestrol 160mg tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 19.52,
+    "bnf": "0803020L0AAABAB"
+   },
+   {
+    "medicine": "Mercaptopurine 20mg/ml oral suspension",
+    "pack": "100 ml",
+    "category": "C",
+    "price": 170.0,
+    "bnf": "0801030L0AAAQAQ"
+   },
+   {
+    "medicine": "Methotrexate 10mg/0.4ml solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 13.77,
+    "bnf": "0801030P0AAFNFN"
+   },
+   {
+    "medicine": "Methotrexate 10mg/0.4ml solution for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 13.77,
+    "bnf": "0801030P0AAFHFH"
+   },
+   {
+    "medicine": "Methotrexate 12.5mg/0.5ml solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 14.85,
+    "bnf": "0801030P0AAFPFP"
+   },
+   {
+    "medicine": "Methotrexate 12.5mg/0.5ml solution for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 14.85,
+    "bnf": "0801030P0AAFJFJ"
+   },
+   {
+    "medicine": "Methotrexate 15mg/0.6ml solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 14.92,
+    "bnf": "0801030P0AAFQFQ"
+   },
+   {
+    "medicine": "Methotrexate 15mg/0.6ml solution for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 14.92,
+    "bnf": "0801030P0AAFKFK"
+   },
+   {
+    "medicine": "Methotrexate 17.5mg/0.7ml solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 15.75,
+    "bnf": "0801030P0AAFRFR"
+   },
+   {
+    "medicine": "Methotrexate 17.5mg/0.7ml solution for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 15.75,
+    "bnf": "0801030P0AAFLFL"
+   },
+   {
+    "medicine": "Methotrexate 20mg/0.8ml solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 16.06,
+    "bnf": "0801030P0AAFSFS"
+   },
+   {
+    "medicine": "Methotrexate 20mg/0.8ml solution for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 16.06,
+    "bnf": "0801030P0AAFEFE"
+   },
+   {
+    "medicine": "Methotrexate 22.5mg/0.9ml solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 16.61,
+    "bnf": "0801030P0AAFTFT"
+   },
+   {
+    "medicine": "Methotrexate 22.5mg/0.9ml solution for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 16.61,
+    "bnf": "0801030P0AAFFFF"
+   },
+   {
+    "medicine": "Methotrexate 25mg/1ml solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 16.64,
+    "bnf": "0801030P0AAFUFU"
+   },
+   {
+    "medicine": "Methotrexate 25mg/1ml solution for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 16.64,
+    "bnf": "0801030P0AAFGFG"
+   },
+   {
+    "medicine": "Methotrexate 7.5mg/0.3ml solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 13.37,
+    "bnf": "0801030P0AAFMFM"
+   },
+   {
+    "medicine": "Methotrexate 7.5mg/0.3ml solution for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 13.37,
+    "bnf": "0801030P0AAFIFI"
+   },
+   {
+    "medicine": "Mitotane 500mg tablets",
+    "pack": "100 tablet",
+    "category": "C",
+    "price": 780.08,
+    "bnf": "0801050R0AAAAAA"
+   },
+   {
+    "medicine": "Mycophenolate mofetil 1g/5ml oral suspension sugar free",
+    "pack": "160 ml",
+    "category": "C",
+    "price": 115.16,
+    "bnf": "0802010M0AAAJAJ"
+   },
+   {
+    "medicine": "Mycophenolic acid 180mg gastro-resistant tablets",
+    "pack": "120 tablet",
+    "category": "C",
+    "price": 96.72,
+    "bnf": "0802010N0AAAAAA"
+   },
+   {
+    "medicine": "Mycophenolic acid 360mg gastro-resistant tablets",
+    "pack": "120 tablet",
+    "category": "C",
+    "price": 193.43,
+    "bnf": "0802010N0AAABAB"
+   },
+   {
+    "medicine": "Octreotide 100micrograms/1ml solution for injection ampoules",
+    "pack": "5 ampoule",
+    "category": "C",
+    "price": 27.97,
+    "bnf": "0803043N0AAABAB"
+   },
+   {
+    "medicine": "Octreotide 100micrograms/1ml solution for injection pre-filled syringes",
+    "pack": "5 pre-filled disposable injection",
+    "category": "C",
+    "price": 55.0,
+    "bnf": "0803043N0AAAPAP"
+   },
+   {
+    "medicine": "Octreotide 100micrograms/1ml solution for injection vials",
+    "pack": "5 vial",
+    "category": "C",
+    "price": 32.65,
+    "bnf": "0803043N0AAALAL"
+   },
+   {
+    "medicine": "Octreotide 10mg powder and solvent for suspension for injection vials",
+    "pack": "1 vial",
+    "category": "C",
+    "price": 549.71,
+    "bnf": "0803043N0AAAEAE"
+   },
+   {
+    "medicine": "Octreotide 20mg powder and solvent for suspension for injection vials",
+    "pack": "1 vial",
+    "category": "C",
+    "price": 799.33,
+    "bnf": "0803043N0AAAGAG"
+   },
+   {
+    "medicine": "Octreotide 30mg powder and solvent for suspension for injection vials",
+    "pack": "1 vial",
+    "category": "C",
+    "price": 998.41,
+    "bnf": "0803043N0AAAFAF"
+   },
+   {
+    "medicine": "Octreotide 500micrograms/1ml solution for injection ampoules",
+    "pack": "5 ampoule",
+    "category": "C",
+    "price": 135.47,
+    "bnf": "0803043N0AAACAC"
+   },
+   {
+    "medicine": "Octreotide 500micrograms/1ml solution for injection pre-filled syringes",
+    "pack": "5 pre-filled disposable injection",
+    "category": "C",
+    "price": 250.0,
+    "bnf": "0803043N0AAAQAQ"
+   },
+   {
+    "medicine": "Octreotide 500micrograms/1ml solution for injection vials",
+    "pack": "5 vial",
+    "category": "C",
+    "price": 158.25,
+    "bnf": "0803043N0AAAMAM"
+   },
+   {
+    "medicine": "Octreotide 50micrograms/1ml solution for injection ampoules",
+    "pack": "5 ampoule",
+    "category": "C",
+    "price": 14.87,
+    "bnf": "0803043N0AAAAAA"
+   },
+   {
+    "medicine": "Octreotide 50micrograms/1ml solution for injection pre-filled syringes",
+    "pack": "5 pre-filled disposable injection",
+    "category": "C",
+    "price": 35.0,
+    "bnf": "0803043N0AAANAN"
+   },
+   {
+    "medicine": "Relugolix 120mg tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 87.45,
+    "bnf": "0803042X0AAAAAA"
+   },
+   {
+    "medicine": "Sirolimus 1mg tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 86.49,
+    "bnf": "0802020U0AAADAD"
+   },
+   {
+    "medicine": "Sirolimus 1mg/ml oral solution sugar free",
+    "pack": "60 ml",
+    "category": "C",
+    "price": 162.41,
+    "bnf": "0802020U0AAACAC"
+   },
+   {
+    "medicine": "Sirolimus 2mg tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 172.98,
+    "bnf": "0802020U0AAAEAE"
+   },
+   {
+    "medicine": "Sirolimus 2mg/g gel",
+    "pack": "10 gram",
+    "category": "C",
+    "price": 340.0,
+    "bnf": "0802020U0AAAGAG"
+   },
+   {
+    "medicine": "Sirolimus 500microgram tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 69.0,
+    "bnf": "0802020U0AAAFAF"
+   },
+   {
+    "medicine": "Tacrolimus 1mg capsules",
+    "pack": "50 capsule",
+    "category": "C",
+    "price": 80.28,
+    "bnf": "0802020T0AAABAB"
+   }
+  ]
+ }
+}

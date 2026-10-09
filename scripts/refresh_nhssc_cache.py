@@ -1,0 +1,297 @@
+#!/usr/bin/env python3
+"""Weekly MERGE-PRESERVING refresh of data/nhssc-cache.json from the public
+NHS Supply Chain pilot catalogue.
+
+Rules (why this never degrades the cache):
+- For a product ALREADY in the cache: retry its stored, previously-successful
+  query first, and accept cards whose supplier matches the PREVIOUSLY VERIFIED
+  catalogue supplier (self-consistent) — this preserves entity-corrected finds
+  (e.g. GBUK products listed under GS MEDICAL HEALTHCARE LTD).
+- For a NEW seed product: strict name + seed-supplier matching (never guess).
+- A product whose re-scrape finds nothing KEEPS its previous entry (codes
+  rarely vanish; a stale status beats losing 200 verified products).
+- A product whose re-scrape finds lines MERGES them into its previous entry by
+  NPC (merge_items): fresh values win for a line seen again, and a previously
+  cached line this week's page did not return is carried forward, not dropped.
+- Cards are read by field through scripts/nhssc_card.py, never by position.
+- The agent-verified notCatalogue map is preserved, minus any product that now
+  has live codes.
+- The "NPC:<code>" entries written by scripts/seed_nhssc_from_icc_npc.py are
+  carried forward untouched. This script joins by product NAME and never
+  produces one, so rebuilding `products` from its own results alone would
+  delete them all (it did, 13/09/2026 — see the note beside the guard in
+  main()). The never-shrink guard measures the name-keyed rows only.
+Runs in GitHub Actions (Playwright chromium). ~30–40 min for ~900 products.
+"""
+import argparse, json, re, asyncio, time
+from nhssc_card import EXTRACT_JS, parse_card
+# playwright is imported inside main(), not here, so merge_items() and the other
+# pure helpers can be imported by test_refresh_nhssc_cache.py in the unit-test
+# job, which has no browser installed.
+
+SEED_PATH = "data/supplier-seed.json"
+CACHE_PATH = "data/nhssc-cache.json"
+CONC = 5
+STOP = {'ltd','limited','group','medical','healthcare','health','uk','plc','corp','company',
+        'international','systems','solutions','products','device','devices','stock','edirect'}
+# NHSSC's catalogue holds unrelated business units under the same brand root
+# (e.g. "Bunzl Healthcare" vs "BUNZL CATERING SUPPLIES" — one Bunzl entity,
+# two different lines of goods). Because STOP strips generic words like
+# "healthcare", a supplier name that reduces to just its brand root (e.g.
+# "Bunzl") can wrongly token-match a card from a different business line of
+# the same brand. If a card's supplier name carries one of these category
+# words and that same word does NOT appear anywhere in the job's own
+# declared supplier name/aliases, the card is a different business unit and
+# must never be accepted, no matter how the brand-root tokens overlap.
+OFF_CATEGORY = {'catering','retail','workwear','laundry','print','printing','office',
+                 'stationery','textile','uniform','hospitality','packaging','vending'}
+
+def off_category_mismatch(job_supplier_raw, card_supplier):
+    job_words = set(re.findall(r'[a-z0-9]+', (job_supplier_raw or '').lower()))
+    card_words = set(re.findall(r'[a-z0-9]+', (card_supplier or '').lower()))
+    bad = (card_words & OFF_CATEGORY) - job_words
+    return bool(bad)
+
+def norm(*strs):
+    s = ' '.join(x for x in strs if x)
+    return set(w for w in re.findall(r'[a-z0-9]{4,}', s.lower()) if w not in STOP)
+
+def candidates(name):
+    c = re.sub(r'\(.*', '', name).replace('/', ' ')
+    c = re.sub(r'[^A-Za-z0-9 ]', ' ', c)
+    w = [x for x in c.split() if x]
+    out = ([' '.join(w[:2])] if len(w) >= 2 else []) + ([w[0]] if w else []) or [name.strip()]
+    seen, uniq = set(), []
+    for q in out:
+        if q.lower() not in seen: seen.add(q.lower()); uniq.append(q)
+    return uniq
+
+def merge_items(prev_items, fresh_items):
+    """A term's refreshed item list: every fresh card, then every previously
+    cached line the fresh search did not return, deduplicated by NPC.
+
+    Replaces the old rule (28/09/2026), which kept the previous list only when
+    it was LONGER than the fresh one and otherwise replaced it wholesale. A
+    search page's result set shifts week to week, so a same-sized or larger
+    fresh set still dropped lines that were never delisted: EKH112 (Biatain
+    Contact), ELA451 (Biatain Silicone) and ELA838 (ActivHeal) all fell out
+    that way and had to be re-added by hand. A line not returned this week is
+    not proof it has gone, so it is carried forward; a line that IS returned
+    takes this week's values (status, pack, image) because they are newer.
+    An item with no NPC cannot be matched, so it is kept as it was.
+    """
+    out, seen = [], set()
+    for it in fresh_items or []:
+        k = (it.get('npc') or '').strip()
+        if k:
+            if k in seen:
+                continue
+            seen.add(k)
+        out.append(it)
+    for it in prev_items or []:
+        k = (it.get('npc') or '').strip()
+        if k and k in seen:
+            continue
+        if k:
+            seen.add(k)
+        out.append(it)
+    return out
+
+def name_ok(key, card_name):
+    qn = re.sub(r'[^a-z0-9]', '', re.sub(r'\(.*', '', key).lower())
+    cn = re.sub(r'[^a-z0-9]', '', (card_name or '').lower())
+    return bool(qn and cn and (qn in cn or cn in qn)) or bool(norm(key) & norm(card_name or ''))
+
+async def worker(browser, batch, results, counter, total):
+    ctx = await browser.new_context(viewport={'width':1200,'height':900})
+    page = await ctx.new_page()
+    try:
+        await page.goto('https://pilot.supplychain.nhs.uk/search?query=gauze', timeout=15000, wait_until='domcontentloaded')
+        await page.wait_for_selector('div.cardWrapper', timeout=12000)
+    except Exception: pass
+    for job in batch:
+        prev = job.get('prev')
+        # A previously-cached entry only counts as "verified" for self-consistency
+        # if its own supplier name doesn't itself trip the off-category guard —
+        # otherwise a bad match from a past run (e.g. catering goods cached
+        # against a healthcare-only supplier) re-confirms itself forever.
+        prev_is_sound = bool(prev and prev.get('items') and
+                              not off_category_mismatch(job['supplierRaw'], prev['items'][0]['supplier']))
+        queries = ([prev['query']] if prev and prev.get('query') else []) + candidates(job['key'])
+        prev_sup_tokens = norm(prev['items'][0]['supplier']) if prev_is_sound else set()
+        found, used_q = [], ''
+        seen_q = set()
+        for q in queries:
+            if q.lower() in seen_q: continue
+            seen_q.add(q.lower())
+            try:
+                await page.goto('https://pilot.supplychain.nhs.uk/search?query=' + q.replace(' ','%20'),
+                                timeout=15000, wait_until='domcontentloaded')
+                try: await page.wait_for_selector('div.cardWrapper', timeout=6000)
+                except Exception: pass
+                await page.wait_for_timeout(300)
+                cards = await page.evaluate(EXTRACT_JS)
+            except Exception: cards = []
+            if not cards: continue
+            for c in cards:
+                p = parse_card(c)
+                if not p or not p['npc'] or not name_ok(job['key'], p['name']): continue
+                if off_category_mismatch(job['supplierRaw'], p['supplier']): continue
+                sup_hit = bool(job['supTokens'] & norm(p['supplier'])) or bool(prev_sup_tokens & norm(p['supplier']))
+                if sup_hit: found.append(p)
+            if found: used_q = q; break
+        if found:
+            seen, keep = set(), []
+            for p in sorted(found, key=lambda x: (1 if x['status'] else 0)):
+                if p['npc'] in seen: continue
+                seen.add(p['npc']); keep.append(p)
+            # NEVER SHRINK AN ENTRY. supplier-deep-capture writes supplier-scoped
+            # captures into the same file (hundreds of rows for one brand term),
+            # and truncating those here would silently throw the deep work away
+            # every Monday. Same principle as the 0.8x abort below: a refresh may
+            # add, it may not degrade.
+            #
+            # CAP RAISED 6 -> 60, 28/08/2026. The cap truncates cards ALREADY
+            # scraped from the one search-results page this job loads, so raising
+            # it costs no extra request and no extra runtime — it only stops us
+            # discarding catalogue lines we had already fetched and verified.
+            #
+            # THE EVIDENCE THE CAP WAS BINDING, measured on the cache before the
+            # change: 824 terms held 4,991 items, and **504 of those 824 terms
+            # (61%) sat at exactly 6**. A real catalogue distribution tails off
+            # smoothly; a spike of 504 terms landing on precisely the cap value
+            # is the signature of truncation, not of the catalogue running out.
+            # (The two entries at 134 and 1,062 items are supplier-deep-capture's
+            # supplier-scoped writes, which the never-shrink guard below keeps.)
+            # The NHS Supply Chain catalogue is the buyer's own authoritative
+            # list and the only route this repo has to the manufacturers whose
+            # own sites forbid crawling (Coloplast, Smith+Nephew, B.Braun,
+            # Hartmann and 97 others), so discarding their lines was the single
+            # biggest self-inflicted coverage gap in the Differentiator.
+            NHSSC_ITEM_CAP = 60
+            fresh_items = keep[:NHSSC_ITEM_CAP]
+            # MERGE BY NPC, never compare counts (28/09/2026) — see merge_items().
+            # The cap above limits what one search page adds, not what the
+            # term keeps: a merged list may exceed it, same as never-shrink.
+            items = merge_items(prev.get('items') if prev_is_sound else [], fresh_items)
+            results[job['key']] = {'supplier': job['supplier'], 'query': used_q, 'items': items}
+        elif prev_is_sound:
+            results[job['key']] = prev  # keep the verified previous entry
+        # else: nothing found this run, and the previously-cached entry itself
+        # fails the off-category guard (e.g. it was a wrong-business-line
+        # match). Drop it rather than re-carrying known-bad data forward —
+        # it falls through to notCatalogue in main(), an honest empty state.
+        counter[0] += 1
+        if counter[0] % 50 == 0:
+            print("%d/%d | %d in cache" % (counter[0], total, len(results)), flush=True)
+    await ctx.close()
+
+async def main(supplier_filter=None):
+    """supplier_filter: optional set of exact supplier names (as they appear in
+    data/supplier-seed.json's `name` field) to search ONLY those suppliers'
+    already-seeded product names, instead of the full weekly sweep. Added
+    15/09/2026 after importing this module's helper functions (candidates(),
+    name_ok(), etc.) for a targeted 5-supplier search re-triggered the entire
+    2,283-job full sweep — this module had `asyncio.run(main())` at module
+    level with no `if __name__ == "__main__":` guard, so any import ran it.
+    That run was killed before its single end-of-run write, so nothing was
+    lost, but the risk was real: run this file with --supplier instead of
+    importing its internals for a scoped job.
+    """
+    seed = json.load(open(SEED_PATH))
+    old = json.load(open(CACHE_PATH))
+    oldp = old.get('products', {})
+    jobs, seen, scoped_keys = [], set(), set()
+    for s in seed.get('suppliers', []):
+        if supplier_filter and s.get('name', '') not in supplier_filter:
+            continue
+        toks = norm(s.get('name',''), *(s.get('aliases',[]) or []))
+        supplier_raw = ' '.join([s.get('name','')] + (s.get('aliases',[]) or []))
+        for p in s.get('products', []):
+            n = (p if isinstance(p, str) else p.get('name','')).strip()
+            if not n or n.lower() in seen: continue
+            seen.add(n.lower())
+            scoped_keys.add(n)
+            jobs.append({'key': n, 'supplier': s.get('name',''), 'supplierRaw': supplier_raw,
+                         'supTokens': toks, 'prev': oldp.get(n)})
+    print("jobs:", len(jobs), "| previously cached:", len(oldp))
+    if supplier_filter and not jobs:
+        print("no seeded product name(s) for the given supplier(s) — nothing to search. "
+              "Add product names to data/supplier-seed.json first.")
+        return
+    results, counter = {}, [0]
+    from playwright.async_api import async_playwright
+    shards = [jobs[i::CONC] for i in range(CONC)]
+    async with async_playwright() as pw:
+        b = await pw.chromium.launch(headless=True)
+        await asyncio.gather(*[worker(b, sh, results, counter, len(jobs)) for sh in shards])
+        await b.close()
+
+    if supplier_filter:
+        # SCOPED RUN: only ever touch the searched suppliers' own product-name
+        # keys. Merge into the existing cache rather than rebuilding `products`
+        # from `results` alone — `results` here holds nothing for the other
+        # ~1,700+ suppliers, and the full-sweep logic below would read that as
+        # a catastrophic shrink (or, worse without the guard below, silently
+        # wipe the rest of the cache). A scoped miss does NOT delete a
+        # previously-found row for the same key.
+        merged = dict(oldp)
+        for k in scoped_keys:
+            if k in results:
+                merged[k] = results[k]
+        notcat = dict(old.get('notCatalogue') or {})
+        for k in scoped_keys:
+            if k in results:
+                notcat.pop(k, None)
+            else:
+                notcat[k] = notcat.get(k, {'checked': time.strftime('%d/%m/%Y')})
+        meta = dict(old.get('_meta') or {})
+        meta['lastScopedRefresh'] = {'suppliers': sorted(supplier_filter),
+                                      'when': time.strftime('%d/%m/%Y'),
+                                      'searched': len(jobs), 'matched': len(results)}
+        json.dump({'_meta': meta, 'products': merged, 'notCatalogue': notcat}, open(CACHE_PATH, 'w'))
+        print("SCOPED DONE: %d of %d searched product name(s) matched in the pilot catalogue"
+              % (len(results), len(jobs)))
+        return
+    # TWO NAMESPACES LIVE IN `products`, AND THIS SCRIPT ONLY OWNS ONE (^o366,
+    # 13/09/2026). scripts/seed_nhssc_from_icc_npc.py joins the ICC matrices to
+    # the pilot catalogue by NPC CODE and writes its matches under keys of the
+    # form "NPC:<code>" — a namespace this script never produces, because it
+    # searches by product NAME. Rebuilding `products` from `results` alone
+    # therefore DELETED all 923 of them: the 13/09/2026 weekly run reached 843
+    # name matches against a cache of 1,761 and the never-shrink guard below
+    # aborted the whole job. The guard was right and is not the thing to change
+    # — it was comparing this script's name-search output against a total that
+    # includes 923 rows it was never going to produce. So: carry the NPC:
+    # namespace forward untouched (the same never-shrink rule that script's own
+    # docstring states), and measure the guard against like for like.
+    carried = {k: v for k, v in oldp.items() if k.startswith('NPC:')}
+    oldname = {k: v for k, v in oldp.items() if not k.startswith('NPC:')}
+    if len(results) < 0.8 * len(oldname):
+        raise SystemExit("ABORT: refresh produced %d name-matched products vs %d previously — refusing to shrink the cache." % (len(results), len(oldname)))
+    # notCatalogue is the name-search route's own honest empty state, so it is
+    # resolved against the name-keyed results only, before the carried rows join.
+    notcat = {k: v for k, v in (old.get('notCatalogue') or {}).items() if k.lower() not in {r.lower() for r in results}}
+    matched = len(results)
+    results.update(carried)   # keys cannot collide: "NPC:XXXNNNNN" is never a product name
+    # Anything else the ICC seed (or a future writer) recorded in _meta belongs
+    # to that writer, not to this run. Keep it rather than rebuilding _meta from
+    # scratch and silently dropping icc_npc_seed_refreshed/_matched.
+    meta = dict(old.get('_meta') or {})
+    meta.update({'source': 'pilot.supplychain.nhs.uk', 'refreshed': time.strftime('%d/%m/%Y'),
+                 'matched': matched, 'npcCarried': len(carried), 'notCatalogue': len(notcat)})
+    out = {'_meta': meta, 'products': results, 'notCatalogue': notcat}
+    json.dump(out, open(CACHE_PATH, 'w'))
+    imgs = sum(1 for v in results.values() if any(i.get('img') for i in v['items']))
+    print("DONE: %d products (%d name-matched this run, %d NPC: rows carried, %d with images) | %d not-catalogue preserved"
+          % (len(results), matched, len(carried), imgs, len(notcat)))
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--supplier", action="append",
+                     help="Exact supplier name (as in data/supplier-seed.json's `name` field) "
+                          "to search only that supplier's own seeded product names, instead of "
+                          "the full weekly sweep. Repeatable for more than one supplier.")
+    args = ap.parse_args()
+    asyncio.run(main(supplier_filter=set(args.supplier) if args.supplier else None))

@@ -1,0 +1,216 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "ref": "ETH-DDFBF24FB",
+  "contact": "contact@elevateandthrive.uk"
+ },
+ "generated": "2026-09-20",
+ "purpose": "Standing policy for the recurring SHAPES of identity and vocabulary ambiguity, so that one ruling from Lou answers every future case of that shape instead of each company arriving as a fresh question. Answers the finding of the Operating Model Review (18/09/2026) that ~44 of 135 open items were a human standing in for a missing rule. company-match-overrides.json remains the per-company exception layer BELOW this: this file says what to do with a SHAPE, that file records a decision about one named COMPANY.",
+ "rule": "Before any task escalates an identity or vocabulary question to Lou, it MUST check this file for a policy whose shape matches. If one matches, apply it and do not escalate. Escalate ONLY when the fact pattern matches no policy here, and then escalate the SHAPE ('should a division of a dissolved parent credit anywhere?'), never the single company. A new policy is added only by Lou's ruling, dated, with the pack it was decided in. A policy is never widened to make an awkward case fit: if it does not match, it does not apply, and that is the signal to ask for a new one. Every policy below carries a guard naming what it must never be used to do; the guard outranks the ruling.",
+ "decidedOn": "2026-09-20",
+ "decidedBy": "Louise Hoult",
+ "decidedIn": "02-Elevate-and-Thrive/Hub/company-aliases/IDENTITY-DECISION-PACK-2026-09-20.md",
+ "policies": {
+  "parent-subsidiary-award-credit": {
+   "title": "Award credits to the entity NHS Supply Chain names; financials attach to the legal entity",
+   "shape": "The awarding source (NHS Supply Chain brief, Find a Tender notice, framework document) names one entity, and the product range, the trading operation or the seed record sits under a different but related entity: a parent, a group, a division, a trading name, or an alternate spelling of the same name.",
+   "ruling": "These are two different facts about two different things and they are recorded separately. (a) The AWARD credits to the entity exactly as the awarding source names it, because that is the published fact about the award and the Hub must not assert an attribution its source does not make. (b) Company FINANCIALS, Companies House data, officers and registered office attach to the specific UK legal entity they actually describe, never to the named parent by inheritance. Clause (c), which would have recorded the related entity as an alias, was DROPPED by Lou's ruling on 28/09/2026 (^o569): the two records stay separate and each is already findable by its own name.",
+   "guard": "Never merge two companies into one record on the strength of this policy. It routes an award; it does not link an alias and does not assert that two legal entities are the same company. Two companies sharing a name is not evidence; two sharing a registration number is. Never publish a parent's financials against a UK subsidiary's award, or the reverse. Never add the related entity to `aliases` in supplier-seed.json under this policy: `aliases` DRIVES AWARD ROUTING (backfill_seed_from_frameworks.py attaches every framework whose brief names the company or one of its aliases), so aliasing would re-route the related entity's awards and contradict clause (a). Clause (c) was suspended 20/09/2026 for this reason and dropped 28/09/2026 (^o569); there is no search-only alias field and none is to be created under this policy.",
+   "appliesTo": [
+    "^o523",
+    "^o527",
+    "^o286",
+    "^o528",
+    "^o529",
+    "^o560",
+    "^o540",
+    "^o190"
+   ],
+   "workedExample": "NHS Supply Chain names the Insulin Pumps/CGM awardee 'Abbott Laboratories Ltd'. The FreeStyle Libre range sits under Abbott Diabetes Care. The award credits to Abbott Laboratories Ltd as named; Abbott Diabetes Care stays a separate record, findable under its own name, with no alias linking the two; any financials shown are those of the specific entity they were filed by, and are labelled with that entity's name and number.",
+   "decidedOn": "2026-09-20",
+   "amendedOn": "2026-09-28",
+   "amendment": "Clause (c) dropped by Lou's ruling (^o569), adopting the 20/09 decision pack's recommendation. Checked 28/09/2026: 'Abbott Diabetes Care' and 'Abbott Laboratories Limited' each appear as their own entry in data/hub-search-index.json."
+  },
+  "domain-proof-tier": {
+   "title": "A registered-office address match is documentary proof of a supplier's own site",
+   "shape": "A website is plainly the named supplier's own site, but does not print the UK entity's company registration number anywhere, so the strong domain-proof bar refuses it. Characteristically a UK arm of a named global parent.",
+   "ruling": "Accept a SECOND proof tier: the site displays a registered office address that matches the Companies House record for that entity. This is documentary evidence read off two independent sources, not an inference from branding, and it ranks below an on-site registration number but above a name match. Record which tier proved the domain, so the basis of every accepted domain stays auditable. THIRD TIER (ruled 09/10/2026, ^o621): a first-party link from the company's own site to its own entry in a compliance register (for example TISCreport) that names the Companies House number, where Companies House confirms that number belongs to the entity (or its recorded former name). Ranks below the address tier. FOURTH TIER (ruled 09/10/2026, ^o630): a first-party former-name statement on the company's own site that matches the Companies House name history of the entity (for example \"Previously named X\" where Companies House records the rename and its date), accepted even where the trading address differs from the registered office. Record which tier proved each domain.",
+   "guard": "An address match proves the site belongs to that entity. It does not prove the entity holds the award, does not license a name-based merge, and never substitutes for a registration number where one is actually printed. A trading address that is not the registered office does not satisfy this; neither does a shared serviced-office address used by many companies, which must be treated as no proof at all. The third tier requires the link to be on the company's own site and the number to be confirmed at Companies House; a register entry reached from anywhere else, or a number Companies House does not tie to the entity, is not proof. The fourth tier requires BOTH the on-site statement and a matching dated Companies House name history; a former-name claim alone is not proof.",
+   "appliesTo": [
+    "^o487",
+    "^o363",
+    "^o621",
+    "^o630"
+   ],
+   "workedExample": "FUJIFILM Sonosite's UK site prints no company number but shows a registered office matching its Companies House record. Domain accepted at tier 2, recorded as address-proved. Globus Medical, NuVasive, Kaiser Medical and Hitachi Medical Systems are the same shape.",
+   "decidedOn": "2026-09-20",
+   "amendedOn": "2026-10-09",
+   "amendment": "Third tier (first-party compliance-register link) added by Lou 09/10/2026 (^o621); fourth tier (first-party former-name statement matching Companies House name history) added 09/10/2026 (^o630)."
+  },
+  "unconfirmable-awardee": {
+   "title": "Publish the award under the name as given, with no company record attached",
+   "shape": "An awarding source names a supplier, the award itself is fully verified, but the named string cannot be resolved to a confirmable company by any route.",
+   "ruling": "Publish the award, carrying the supplier name EXACTLY as the awarding source writes it, explicitly marked as an unconfirmed supplier. Attach no company number, no financials, no domain and no logo. The award is a verified fact from a named source and withholding it makes the Hub silently incomplete about something it knows; the identity is not verified and must not be implied.",
+   "guard": "Never attach a best-guess company to an unconfirmed name, however obvious the reading looks. 'Ingles Ltd' is not linked to 'Ingles Medical Limited' on similarity. The unconfirmed marker must be visible to the member, not held only in the data: a member must never be able to mistake an unconfirmed string for a resolved company.",
+   "appliesTo": [
+    "^o525",
+    "^o256",
+    "^o546",
+    "^o547",
+    "^o557"
+   ],
+   "workedExample": "NHS Supply Chain's Operating Theatres brief names 'Ingles Ltd'. No search confirms it as 'Ingles Medical Limited' (08650170). The award publishes as 'Ingles Ltd', marked unconfirmed, with no company record. If the identity is later proved, the record is completed then.",
+   "decidedOn": "2026-09-20"
+  },
+  "vocabulary-gap": {
+   "title": "Add the category type when a real range genuinely fits nothing",
+   "shape": "A confirmed, real product range maps to no existing Hub category type, so it is held and never reaches a member, and the nearest existing type would be actively wrong.",
+   "ruling": "Add the category type without escalating. The new type is named from the framework's own language or the supplier's own language, never invented from scratch, and the addition is logged with the range that prompted it and the source of the name. This is a standing authority: no per-case ruling is required.",
+   "guard": "Never invent a type to absorb one odd product. Never rename, merge or re-scope an existing type under this policy, which is add-only. Never add a type that duplicates one already present under a different word: check the existing vocabulary first and extend it rather than forking it. If the range itself is unconfirmed, this policy does not apply, because the gap is in the evidence, not the vocabulary.",
+   "appliesTo": [
+    "^o460",
+    "^o451",
+    "^o303",
+    "^o552",
+    "^o556",
+    "^o563",
+    "^o285",
+    "^o320",
+    "^o405",
+    "^o423",
+    "^o434",
+    "^o475"
+   ],
+   "workedExample": "Oncology's vocabulary holds only 'acc' and 'radio', so Radiotherapy positioning and dosimetry-QA hardware fits nothing, although the framework is itself named for it. The types are added using the framework's own wording, and the addition is logged.",
+   "decidedOn": "2026-09-20"
+  },
+  "mixed-division-mapping": {
+   "title": "Map a mixed division at product level, hold what is ambiguous",
+   "shape": "A supplier files its whole catalogue under one flat division spanning several specialities, so no division-level mapping can be correct for all of it.",
+   "ruling": "Never blanket-map a mixed division to a single speciality. Map at PRODUCT level wherever the product's own name unambiguously identifies its speciality, and hold the remainder unmapped. Partial coverage of a mixed division is the correct output; the held remainder is reported as held, not as missing.",
+   "guard": "'Unambiguous' means the product name alone identifies the speciality, without inference from the supplier's other products or from which framework the award sits on. A dominant-speciality assumption is never sufficient. Where a product name is a bare SKU, a URL slug or a numeric id, it is by definition ambiguous and is held.",
+   "appliesTo": [
+    "^o516",
+    "^o488",
+    "^o561",
+    "^o257",
+    "^o550",
+    "^o437",
+    "^o459"
+   ],
+   "workedExample": "Salter Labs UK Ltd holds 409 products in one division mixing genuine ECG and gel items with wound-care, respiratory and electrosurgery. The ECG items whose names say so are mapped to cardiology at product level; everything else is held, and the held count is reported.",
+   "decidedOn": "2026-09-20"
+  },
+  "nav-labels-are-not-products": {
+   "title": "A navigation label, category page or URL id is never a product",
+   "shape": "A crawl returns entries that are the site's own navigation or taxonomy rather than its catalogue: section names such as 'Urology', 'PPE', 'ENT', sub-category labels such as 'Surgical Gloves', or all-digit URL record ids standing in as product or division names.",
+   "ruling": "These are never published as products or as division names. A capture whose entries are predominantly navigation is treated as a FAILED capture, not a thin one: it is held, the supplier is reported as needing a real product path, and nothing from it reaches a member view. An all-digits path segment is an identifier, not a name, and is never used as a label.",
+   "guard": "This policy holds data back and can never be used to publish anything, so it needs no ruling from Lou and is recorded here as an engineering default rather than a business decision. It must not be used to justify deleting a capture: the capture is held for recrawl, not discarded.",
+   "appliesTo": [
+    "^o521",
+    "^o534",
+    "^o562",
+    "^o289",
+    "^o564"
+   ],
+   "workedExample": "Healthcare 25 Ltd's twelve 'products' are the site's own nav labels, and Crest Medical holds 872 of 872 URL record ids as division names, which members saw rendered as '518234'. Both are failed captures: held, reported, queued for a real product-path crawl.",
+   "decidedOn": "2026-09-20",
+   "decidedBy": "Engineering default, not a Lou ruling"
+  },
+  "duplicate-product-same-supplier-site": {
+   "title": "Same product, two URLs on the same supplier's site — keep the canonical one, drop the duplicate",
+   "shape": "A supplier's own-site crawl captures the same product NAME twice under the same supplier, because two different URLs on that supplier's own site resolve to the same product (a genuine catalogue/division page, and a second location — commonly the crawler's generic 'Uncategorised' catch-all bucket, a redirect, or a cross-listed nav path).",
+   "ruling": "Treat the two captures as ONE product, not two. Keep the copy filed under the more specific, genuinely-named division — the one that reflects the supplier's own real site structure — and drop the copy filed under the generic/artefact bucket (typically 'Uncategorised', or any division this policy file's own nav-labels-are-not-products policy would flag). Where neither copy sits in an artefact bucket and both are equally specific, keep the one with the more complete product detail (description/features/image) and record which was dropped and why. This is a standing authority: no per-case escalation is required.",
+   "guard": "Never used to silently drop a product that is NOT a genuine duplicate — the match is on IDENTICAL product name under the SAME supplier only; two different products that merely share a word are not this shape. Never used to prefer a generic bucket over a named division: 'Uncategorised' (or any nav-artefact division) is dropped in favour of the real one, never the reverse. The category/mapping decision itself is untouched by this policy — it only decides which physical capture survives, not what category it publishes under.",
+   "appliesTo": [
+    "^o576"
+   ],
+   "workedExample": "Sela Medical UK Ltd's own site returns 'Glutack' twice: once filed under the genuine 'Surgical Division' page, once filed under the crawler's generic 'Uncategorised' bucket (a known crawler artefact, per the nav-labels-are-not-products policy). Both resolve to the same atraumatic mesh-fixation device already mapped to mis:instruments. The 'Uncategorised' capture is dropped; the 'Surgical Division' capture is the one that publishes.",
+   "decidedOn": "2026-09-21"
+  },
+  "shared-careers-site-role-attribution": {
+   "title": "A role on a careers site shared by several supplier records is shown once, not once per record",
+   "shape": "Several supplier records — typically sibling legal entities or divisions of one group — resolve to the SAME careers site or applicant tracking board, so the careers collector reads the same role URLs under each record and the hiring signal repeats every role once per record (four Abbott records on one Abbott Workday board: each of 67 UK roles collected four times, 279 'UK roles' where there were 78).",
+   "ruling": "Each distinct role URL is counted and shown ONCE. It is attributed to one record chosen deterministically: (1) the record whose own verified domain is the careers site's domain; otherwise (2) the group's parent/umbrella record — the record every other member's own ownership evidence names; otherwise (3) the lowest record in stable order (the seed carries no numeric supplier id, so the record name, case-folded, is the tie-break). The other records do not repeat the role: a record left with none of its own states no count and names the record its roles are held under; a record with some roles of its own keeps only those. Applied by scripts/refresh_supplier_careers.py on every run, and enforced by verify.py check_supplier_careers(), which refuses any role URL held under more than one supplier. This is a standing authority: no per-case escalation is required.",
+   "guard": "Never used to merge, alias or de-list the supplier records themselves — they stay separate records with their own frameworks and identities; only the role attribution is de-duplicated (Policy parent-subsidiary-award-credit and the no-aliasing ruling of 28/09/2026 are untouched). Never used to show a record that gave its roles away as having zero roles: it states no count and says where the roles are held. Never used to credit a parent group's careers board to a company whose own identity the ATS account does not carry — the Acumed/Marmon tenant guard still applies first. The match is on the identical role URL only; two roles that merely share a title are not this shape. Choosing the holding record is presentation, not a finding about which entity employs the person.",
+   "appliesTo": [
+    "^o190"
+   ],
+   "workedExample": "Abbott Diabetes Care, Abbott Diagnostics, Abbott Laboratories Limited and Abbott Medical U.K. Ltd all reach the Abbott Workday board (atsAccount 'abbott', careers site www.abbott.com). None carries abbott.com as its own domain and no seed record is marked as the group's parent, so tier 3 applies: all 67 UK roles are held once under Abbott Diabetes Care, and the other three records state no count and name Abbott Diabetes Care. data/supplier-careers.json went from 279 UK role rows to 78, one per distinct role URL.",
+   "decidedOn": "2026-09-28",
+   "decidedBy": "Louise Hoult, in chat 28/09/2026 (\"make rule so not shown 4 times, only once\")"
+  },
+  "dissolved-awardee-successor-uncertain": {
+   "title": "A dissolved awardee stays credited as named; no live company inherits it without a transfer document",
+   "shape": "An awarding source names a supplier that Companies House shows as DISSOLVED. A live company with a related name exists, or the dissolved company's website still trades, and it is not documented whether the product range or the award transferred.",
+   "ruling": "The award stays credited to the dissolved entity exactly as the source names it, marked \"dissolved\" with the Companies House dissolution date. No live company is credited with it, and no product record is re-attributed, unless one of three documents says the business transferred: a Companies House filing naming the transfer, the live company's own site stating in its own words that it acquired that range or business, or a published notice from the awarding body. A dissolved company's product record that reaches no member view is held, not deleted, so the data survives if a successor is later confirmed.",
+   "guard": "Name similarity is never evidence of succession, however obvious the reading looks. A still-trading website is not evidence either: a dissolved company's domain can be kept running by anyone. Never used to delete a record.",
+   "appliesTo": [
+    "^o600",
+    "^o204"
+   ],
+   "workedExample": "KIMAL RENAL CARE LIMITED (06839033, dissolved 28/11/2025) is named on the Maternity framework brief; Kimal PLC is a separate live company. The award is held against the dissolved entity unless a transfer document is found.",
+   "decidedOn": "2026-10-09",
+   "decidedBy": "Louise Hoult",
+   "decidedIn": "02-Elevate-and-Thrive/Hub/company-aliases/IDENTITY-DECISION-PACK-2026-09-23.md"
+  },
+  "self-stated-company-number-conflict": {
+   "title": "A self-stated company number that Companies House contradicts is no proof at all",
+   "shape": "A supplier's own website prints a Companies House number, and that number resolves to a different company, or to a company at the same address whose name does not match.",
+   "ruling": "A self-stated number that Companies House contradicts is not used as the entity's number, not used as weak evidence, and not \"corrected\" to the number a name search suggests. The record carries companyNumber: unconfirmed with a note quoting the number the site prints and what Companies House returns for it, so the conflict is visible and auditable. The award, if any, is then handled under unconfirmable-awardee.",
+   "guard": "Never resolve the conflict by picking the more plausible of the two companies. A conflict with a live company at the same registered address is the higher-stakes case and stays escalated as a single line naming the two numbers; it is the one sub-case this ruling does not decide.",
+   "appliesTo": [
+    "^o474"
+   ],
+   "workedExample": "Accoson (AC Cossor & Son (Surgical) Ltd) prints \"Company registration no. 135969\"; that matches neither Cossor Companies House record, and SC135969 is GM INSTRUMENTS LIMITED at the same postcode. No number is written; the conflict is noted. The same-address live-company sub-case stays escalated as one line.",
+   "decidedOn": "2026-10-09",
+   "decidedBy": "Louise Hoult",
+   "decidedIn": "02-Elevate-and-Thrive/Hub/company-aliases/IDENTITY-DECISION-PACK-2026-09-23.md"
+  },
+  "cross-border-sibling-domain-attribution": {
+   "title": "A foreign-arm site is not attributed to the UK entity unless the site itself proves it",
+   "shape": "The only web presence found for a UK supplier entity is a same-brand domain registered in another country (an .ie, .de, .com run by a foreign arm), and nothing on that site names the UK entity.",
+   "ruling": "A foreign-ccTLD or foreign-arm site is attributed to the UK entity only when the site itself proves it under domain-proof-tier: the UK company number printed on the site, or the UK registered office address printed on the site and matching Companies House. Otherwise the UK entity has no confirmed domain, its catalogue is not crawled from the foreign site, and the foreign site is recorded as \"related brand site, not attributed\" so nobody re-investigates it.",
+   "guard": "Shared branding, a shared logo, or a group \"our companies\" page listing the UK arm by name is not attribution of the catalogue. Never used to seed or crawl a site into a UK record.",
+   "appliesTo": [
+    "^o287"
+   ],
+   "workedExample": "GS Medical Healthcare Ltd (10425778, Selby) carries gsmedical.ie as its only site link. Nothing there names the UK entity, so it is not crawled into the UK record and is noted as a related brand site, not attributed.",
+   "decidedOn": "2026-10-09",
+   "decidedBy": "Louise Hoult",
+   "decidedIn": "02-Elevate-and-Thrive/Hub/company-aliases/IDENTITY-DECISION-PACK-2026-09-23.md"
+  },
+  "no-parent-catalogue-credit-to-uk-subsidiary": {
+   "title": "A UK subsidiary publishes only products an award or NHS Supply Chain lists, never its foreign parent's global catalogue",
+   "shape": "A UK subsidiary's only website is its foreign parent's global site (which names the parent, not the UK entity), and the question is whether the UK record may publish the parent's catalogue.",
+   "ruling": "HOLD. The UK record publishes a product only once the framework award or NHS Supply Chain's own catalogue lists that product for the UK entity. The parent's global catalogue is not published under the UK subsidiary.",
+   "guard": "Never used to merge or alias the subsidiary with its parent, and never to hide an award that is verified. Complements parent-subsidiary-award-credit, which routes the award; this governs the product range.",
+   "appliesTo": [
+    "^o631"
+   ],
+   "workedExample": "Tobii Dynavox Ltd (05091720): tobiidynavox.com is the group's global site naming Dynavox Group AB, Stockholm. No global catalogue product is published under the UK record unless the framework award or NHSSC lists it.",
+   "decidedOn": "2026-10-09",
+   "decidedBy": "Louise Hoult",
+   "decidedIn": "02-Elevate-and-Thrive/Hub/company-aliases/IDENTITY-DECISION-PACK-2026-09-23.md"
+  },
+  "general-purpose-computing-not-assistive-technology": {
+   "title": "General-purpose computing sold as a DSA upgrade is not assistive technology",
+   "shape": "A supplier on an assistive technology framework sells general-purpose computers or accessories (laptops, tablets, phones) as Disabled Students' Allowance (DSA) upgrades.",
+   "ruling": "Such products are kept under IT & computer equipment and are excluded from the assistive technology (digital:tec) category and from that framework's coverage target. Assistive-technology products proper (software, specialist hardware) are mapped as normal.",
+   "guard": "Never used to exclude a product whose own name or description says it is assistive or adapted. Never used to delete a captured product: it stays published under its computing category.",
+   "appliesTo": [
+    "^o632"
+   ],
+   "workedExample": "Iansyst Ltd's 13 \"DSA Mac Upgrades\" products (MacBook and other Apple lines) stay under IT & computer equipment and leave the TEC coverage target.",
+   "decidedOn": "2026-10-09",
+   "decidedBy": "Louise Hoult",
+   "decidedIn": "02-Elevate-and-Thrive/Hub/company-aliases/IDENTITY-DECISION-PACK-2026-09-23.md"
+  }
+ }
+}

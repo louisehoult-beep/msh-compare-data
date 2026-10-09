@@ -1,0 +1,2995 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "haematology-and-patient-blood-management",
+ "label": "Haematology and Patient Blood Management",
+ "defined": true,
+ "generated": "2026-10-09",
+ "dataAsOf": {
+  "frameworks": "2026-10-05",
+  "tenderHistory": "2026-10-09",
+  "frameworkAwards": "2026-10-09T13:11:59+00:00",
+  "openTenders": "09/10/2026",
+  "drugTariff": "2026-10-09",
+  "localIntel": "2026-10-09",
+  "supplierDirectory": "2026-10-07",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-10-09",
+  "drugTariffViiia": "2026-10-09",
+  "hospitalPrescribing": null
+ },
+ "rules": {
+  "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
+  "frameworks": "NHS Supply Chain framework names matching /\\b(blood collection devices|pressure infusers)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. There is no NHS Supply Chain haematology framework. The page's Buying route section names seven agreements written for other categories that each carry a slice of this patch, and the Frameworks tab below claims two of them. Blood Collection Devices and Pressure Infusers and Associated Products are claimed because each is wholly this patch. Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services (122 suppliers) and Vascular Therapy and Associated Products (23 suppliers) are NOT claimed: this patch is one lot of seven on the first and three lots of ten on the second, neither publishes a supplier-by-lot split in this dataset, and claiming either whole would put genomics, digital pathology or compression hosiery firms under a haematology Suppliers heading. Perfusion Devices, Consumables and Associated Equipment is not claimed either: cardiopulmonary bypass and ECMO are the cardiology and cardiac surgery page's. TWO OF THE SEVEN ARE NOT IN THE HUB'S FRAMEWORK DATASET AT ALL, and one of them matters. Suction, Wound Drainage, Autologous Blood Systems and Related Consumables (302060/1487175) is the only national route to cell salvage, and Blood Draw Tools and Accessories (2024/S 000-009366) carries the tourniquets and blood lancets. Neither is among the 122 framework records the Hub holds, so their suppliers are not counted below. Their own award notices do appear in the awards list, because awards are matched on the title of the notice and not on framework membership. BLOOD COMPONENTS ARE NOT PROCURED AT ALL and no framework will ever show them. Red cells, platelets, fresh frozen plasma, cryoprecipitate, granulocytes and buffy coats are manufactured and issued by NHS Blood and Transplant and invoiced to hospitals against a national price list reissued annually. There is no tender, no competitive field and no expiry date, so the largest single line of spend on this patch is structurally invisible to every panel below. The page's Market intelligence section carries the price list instead. ONE COMPANY APPEARS TWICE IN THE SUPPLIER LIST BELOW AND IS NOT YET MERGED. NHS Supply Chain names \"GBUK Ltd\" on Blood Collection Devices and \"GB UK Ltd\" on Pressure Infusers, and they are the same Yorkshire company: no company called GB UK Ltd or GB UK Limited exists on the active Companies House register, searched 09/09/2026, and the Hub's own record for the second spelling already carries gbukgroup.com as its website. The Hub's supplier seed still holds them as two records, so the count below reads 25 where 24 companies stand. Merging them changes the Compare tab as well as this panel and is being done as its own change rather than folded into this one. Read them as one supplier. THE AWARDS LIST IS WIDER THAN THE TWO CLINICAL PATHWAYS THE PAGE WALKS THROUGH. It also counts the blood services' own contracts — donor eligibility, bone marrow and stem cell donor work, apheresis, component manufacture and storage — and the inherited bleeding and haemoglobin disorders: haemophilia and von Willebrand factor, sickle cell and thalassaemia. Those are this speciality by name and no other Hub page would hold them. Haemato-oncology is not counted here; the page's own Related specialities line routes it to Oncology and SACT. TWO AWARDS ARE MIXED CONTRACTS and are kept because their own titles say so, with the full title shown on the row. The Procurement and Logistics Service's Evacuated Blood Collection Systems and Urine Collection Systems buys phlebotomy and specimen tubes together, and its urine half belongs to the continence page. The BSO's Blood and Fluid Warming Systems buys blood warming and general fluid warming on one notice. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. There is no NHS Supply Chain haematology framework. The page's Buying route section names seven agreements written for other categories that each carry a slice of this patch, and the Frameworks tab below claims two of them. Blood Collection Devices and Pressure Infusers and Associated Products are claimed because each is wholly this patch. Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services (122 suppliers) and Vascular Therapy and Associated Products (23 suppliers) are NOT claimed: this patch is one lot of seven on the first and three lots of ten on the second, neither publishes a supplier-by-lot split in this dataset, and claiming either whole would put genomics, digital pathology or compression hosiery firms under a haematology Suppliers heading. Perfusion Devices, Consumables and Associated Equipment is not claimed either: cardiopulmonary bypass and ECMO are the cardiology and cardiac surgery page's. TWO OF THE SEVEN ARE NOT IN THE HUB'S FRAMEWORK DATASET AT ALL, and one of them matters. Suction, Wound Drainage, Autologous Blood Systems and Related Consumables (302060/1487175) is the only national route to cell salvage, and Blood Draw Tools and Accessories (2024/S 000-009366) carries the tourniquets and blood lancets. Neither is among the 122 framework records the Hub holds, so their suppliers are not counted below. Their own award notices do appear in the awards list, because awards are matched on the title of the notice and not on framework membership. BLOOD COMPONENTS ARE NOT PROCURED AT ALL and no framework will ever show them. Red cells, platelets, fresh frozen plasma, cryoprecipitate, granulocytes and buffy coats are manufactured and issued by NHS Blood and Transplant and invoiced to hospitals against a national price list reissued annually. There is no tender, no competitive field and no expiry date, so the largest single line of spend on this patch is structurally invisible to every panel below. The page's Market intelligence section carries the price list instead. ONE COMPANY APPEARS TWICE IN THE SUPPLIER LIST BELOW AND IS NOT YET MERGED. NHS Supply Chain names \"GBUK Ltd\" on Blood Collection Devices and \"GB UK Ltd\" on Pressure Infusers, and they are the same Yorkshire company: no company called GB UK Ltd or GB UK Limited exists on the active Companies House register, searched 09/09/2026, and the Hub's own record for the second spelling already carries gbukgroup.com as its website. The Hub's supplier seed still holds them as two records, so the count below reads 25 where 24 companies stand. Merging them changes the Compare tab as well as this panel and is being done as its own change rather than folded into this one. Read them as one supplier. THE AWARDS LIST IS WIDER THAN THE TWO CLINICAL PATHWAYS THE PAGE WALKS THROUGH. It also counts the blood services' own contracts — donor eligibility, bone marrow and stem cell donor work, apheresis, component manufacture and storage — and the inherited bleeding and haemoglobin disorders: haemophilia and von Willebrand factor, sickle cell and thalassaemia. Those are this speciality by name and no other Hub page would hold them. Haemato-oncology is not counted here; the page's own Related specialities line routes it to Oncology and SACT. TWO AWARDS ARE MIXED CONTRACTS and are kept because their own titles say so, with the full title shown on the row. The Procurement and Logistics Service's Evacuated Blood Collection Systems and Urine Collection Systems buys phlebotomy and specimen tubes together, and its urine half belongs to the continence page. The BSO's Blood and Fluid Warming Systems buys blood warming and general fluid warming on one notice. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(transfus\\w*|h(?:ae|e)matolog\\w*|immunoh(?:ae|e)matolog\\w*|h(?:ae|e)moglobin\\w*|h(?:ae|e)moglobinopath\\w*|an(?:ae|e)mia|patient blood management|blood component\\w*|blood product\\w*|blood bank\\w*|blood group\\w*|blood pack\\w*|blood collection|blood culture collection|blood cell separator\\w*|blood lancet\\w*|blood warm\\w*|blood and plasma|blood don\\w*|blood disorder\\w*|blood service\\w*|blood fridge\\w*|blood tracking|cord blood|whole blood|red cell\\w*|platelet\\w*|cryoprecipitat\\w*|granulocyte\\w*|buffy coat\\w*|fresh frozen plasma|dried plasma|plasma component\\w*|plasma exchange|plasma fractionation|plasma storage|plasma[\\s/]*(?:blast[\\s/]*)?freezer|\\w*pheresis\\w*|bone marrow don\\w*|stem cell don\\w*|\\bRhD\\b|cell salvage|autologous blood|autotransfus\\w*|tranexamic|viscoelastic\\w*|thromboelast\\w*|\\bTEG\\b|\\bROTEM\\b|sonoclot|h(?:ae|e)mostasis|rapid infuser\\w*|pressure infuser\\w*|major h(?:ae|e)morrhage|anti[- ]?embolism|intermittent pneumatic compression|venous thromboembol\\w*|\\bVTE\\b|deep vein thromb\\w*|\\bDVT\\b|pulmonary embolism|thromboprophylax\\w*|thrombophilia|h(?:ae|e)mophil\\w*|von willebrand|sickle cell|thalass\\w*)\\b/i and does not match /\\b(intraocular|phaco\\w*)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 336961 or 336962 or 3843452 or 3843457 or 3314150 or 8511181 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: bloodtx). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 11 of the 11 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (18 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-09.",
+  "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF 09.01. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 53 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
+ },
+ "counts": {
+  "frameworks": 2,
+  "suppliers": 25,
+  "suppliersUnresolved": 0,
+  "awardsShown": 40,
+  "awardsMatched": 132,
+  "awardsWithheldByBuyerCap": 0,
+  "awardsShownNotYetAwarded": 9,
+  "openTenders": 2,
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 1,
+  "suppliersDirectoryTagged": 11,
+  "suppliersDirectoryOnOtherFrameworks": 11,
+  "suppliersDirectoryWithFrameworkNote": 11,
+  "gpMarkets": 1,
+  "mhraDsu": 90,
+  "drugTariffViiiaLines": 67
+ },
+ "frameworks": [
+  {
+   "name": "Blood Collection Devices",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/blood-collection-devices/",
+   "reference": "2024/S 000-033791",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "13 October 2025",
+   "ends": "12 October 2027",
+   "supplierCount": 19,
+   "supplierSource": "count verified against the page's own stated total (19)",
+   "suppliers": [
+    "Balmung Medical Handel GmbH",
+    "Becton, Dickinson U.K. Limited",
+    "Cambridge Sensors Ltd",
+    "Crest Medical Ltd",
+    "GBUK Ltd",
+    "Greiner Bio-One Ltd",
+    "Iskus Health UK Limited",
+    "ISOL8 Healthcare Ltd",
+    "Nipro Medical Europe",
+    "Owen Mumford Ltd",
+    "Prosum Medical Ltd",
+    "Radiometer Ltd",
+    "Reflex Medical Limited",
+    "Reliance Medical Ltd",
+    "RPG Medical Limited",
+    "Sarstedt Ltd",
+    "Siemens Healthcare Diagnostics Limited",
+    "Smiths Medical International Ltd",
+    "Vygon (UK) Ltd"
+   ],
+   "delisted": [
+    "IMS Euro Ltd",
+    "Sol Millenium Medical UK Ltd",
+    "Sterilab Services."
+   ]
+  },
+  {
+   "name": "Pressure Infusers and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-infusers-and-associated-products/",
+   "reference": "2025/S 000-047797",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "1 September 2026",
+   "ends": null,
+   "supplierCount": 8,
+   "supplierSource": "no stated count on the page; 8 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Fannin UK Ltd",
+    "GB UK Ltd",
+    "Merit Medical UK Ltd",
+    "Proact Medical Ltd",
+    "Reflex Medical Ltd",
+    "Salter Labs UK Ltd",
+    "Sharon Services UK Ltd",
+    "TerraMed Ltd"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GB UK Ltd",
+    "GBUK Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices",
+    "Pressure Infusers and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Reflex Medical Limited",
+   "resolved": true,
+   "variants": [
+    "Reflex Medical Limited",
+    "Reflex Medical Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices",
+    "Pressure Infusers and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Balmung Medical Handel GmbH",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Becton, Dickinson U.K. Limited"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Cambridge Sensors Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Ltd"
+   ],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Greiner Bio-One Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "ICU Medical (incl. Smiths Medical)",
+   "resolved": true,
+   "variants": [
+    "Smiths Medical International Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Iskus Health UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "ISOL8 Healthcare Limited",
+   "resolved": true,
+   "variants": [
+    "ISOL8 Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Merit Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Nipro Medical Europe",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Owen Mumford",
+   "resolved": true,
+   "variants": [
+    "Owen Mumford Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Proact Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Prosum Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Radiometer UK",
+   "resolved": true,
+   "variants": [
+    "Radiometer Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Reliance Medical",
+   "resolved": true,
+   "variants": [
+    "Reliance Medical Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "RPG Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Salter Labs UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Sarstedt Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Sharon Services (UK) Ltd",
+   "resolved": true,
+   "variants": [
+    "Sharon Services UK Ltd"
+   ],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Siemens Healthineers",
+   "resolved": true,
+   "variants": [
+    "Siemens Healthcare Diagnostics Limited"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "TerraMed Limited",
+   "resolved": true,
+   "variants": [
+    "TerraMed Ltd"
+   ],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Vygon (UK)",
+   "resolved": true,
+   "variants": [
+    "Vygon (UK) Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  }
+ ],
+ "awards": [
+  {
+   "title": "WBS-FTS-64245 Haematology Testing System",
+   "buyer": "Velindre University NHS Trust",
+   "supplier": null,
+   "date": "2026-10-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094438-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "38434570"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "WBS-FTS-59249-Provision of a Scanning and Archiving Service for Welsh Blood Service",
+   "buyer": "Velindre University NHS Trust",
+   "supplier": "Pearl Scan",
+   "date": "2026-10-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093691-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "79995100"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Primary Blood Grouping Analyser & Associated Consumables",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "supplier": "Beckman Coulter Ltd",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091236-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000",
+    "50421000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "LSL/MED/0212 - The Supply and Support of Blood Bank Centrifuge Devices",
+   "buyer": "LEIDOS SUPPLY, LIMITED",
+   "supplier": "BIO-RAD LABORATORIES LIMITED",
+   "date": "2026-09-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090441-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33141300",
+    "33141510",
+    "33696100",
+    "33696200",
+    "38434520",
+    "38434550",
+    "42930000",
+    "42931000",
+    "42931100",
+    "42931120",
+    "42931130",
+    "42931140",
+    "85111810"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Evacuated Blood Collection Systems",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "supplier": null,
+   "date": "2026-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089948-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000",
+    "33141300",
+    "33141320",
+    "33141900"
+   ],
+   "isFramework": true,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "WBS-ITT-63315-MAINTENANCE, SERVICE AND CALIBRATION OF PIPETTES WITHIN WELSH BLOOD SERVICE TRUST",
+   "buyer": "Velindre University NHS Trust",
+   "supplier": null,
+   "date": "2026-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090248-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "38000000",
+    "50000000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Repair and Maintenance of Existing Blood Component Transport Containers",
+   "buyer": "NHS Blood and Transplant",
+   "supplier": "va-Q-tec Thermal Solutions GmbH",
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089683-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "34221000",
+    "50000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Notice: OUH - Blood Transfusion Analysers MS - Tender Notice",
+   "buyer": "Oxford University Hospitals NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-09-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/088789-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33124110",
+    "33696100",
+    "38434000",
+    "38434520",
+    "85111800",
+    "85111810"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "TEG Manager Software Service Contract",
+   "buyer": "MERSEY AND WEST LANCASHIRE TEACHING HOSPITALS NHS TRUST",
+   "supplier": "HAEMONETICS LIMITED",
+   "date": "2026-09-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087666-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "72267000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Maintenance of Blood Transfusion Systems",
+   "buyer": "Aneurin Bevan University Health Board",
+   "supplier": "Haemonetics Limited",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084264-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Maintenance of Blood Transfusion Systems",
+   "buyer": "Aneurin Bevan University Health Board",
+   "supplier": "Haemonetics Limited",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084261-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Red Cell Reagents",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "supplier": null,
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084514-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33696100",
+    "33696200"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "WBS-FTS-63787 Replacement of Rapid Plasma/Blast Freezer Equipment",
+   "buyer": "Velindre University NHS Trust",
+   "supplier": null,
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083935-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000",
+    "38000000",
+    "39711124"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Welsh Blood Service Bone Marrow Doner Service",
+   "buyer": "Welsh Blood Service (hosted by Velindre University NHS Trust)",
+   "supplier": "ALCURA UK LTD",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082485-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Blood Donor eligibility and risk assessment support",
+   "buyer": "Welsh Blood Service (Velindre University NHS Trust)",
+   "supplier": null,
+   "date": "2026-08-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082255-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "75100000"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Supply & Maintenance of Platelet Agitator and Incubator equipment",
+   "buyer": "NHS Blood and Transplant",
+   "supplier": null,
+   "date": "2026-08-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081832-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Sickle Cell and Thalassemia lab clinical support 2027",
+   "buyer": "NHS England",
+   "supplier": "Oxford University Hospitals NHS FT",
+   "date": "2026-08-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081313-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71900000",
+    "85100000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Rapid Infuser Blood/IV Infusion Pump",
+   "buyer": "UNIVERSITY HOSPITALS OF DERBY AND BURTON NHS FOUNDATION TRUST",
+   "supplier": "BELMONT MEDICAL TECHNOLOGIES LTD",
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078960-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33194110"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Automated Immunohaematology System",
+   "buyer": "Regional Business Services Organisation, Procurement and Logistics Service",
+   "supplier": null,
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077321-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33127000",
+    "33141500",
+    "33696100",
+    "33696200",
+    "33696500",
+    "38434000",
+    "38434520"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Service Maintenance of Cell Salvage Equipment with an additional console Plus for 9 months",
+   "buyer": "HULL UNIVERSITY TEACHING HOSPITALS NHS TRUST",
+   "supplier": "LIVANOVA UK LIMITED",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077180-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Platelet Incubator for CGH",
+   "buyer": "Gloucestershire Hospitals NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-08-11",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/42da351d-2767-452b-8595-cce50b8eb88c",
+   "value": 6240,
+   "periodEnd": "2027-06-24",
+   "source": "tender-history"
+  },
+  {
+   "title": "2526-087-STA-WBS Medical Evaluation of Prospective Stem Cell Donors",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": "Bone Marrow Donor Registry",
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075595-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111810"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Maintenance of Apheresis Machines",
+   "buyer": "NOTTINGHAM UNIVERSITY HOSPITALS NHS TRUST",
+   "supplier": "TERUMO BCT LTD.",
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075579-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50420000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "NHSSC Led Mini Competition for Safety Finger Lancets Via Lot 2 Blood Lancets of the Blood Draw Tools and Accessories Fra",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "Balmung Medical Handel GmbH",
+   "date": "2026-07-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/072009-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "WSFT - Pathology - Hemostasis Management TEG 65 Analyser",
+   "buyer": "West Suffolk NHS Foundation Trust",
+   "supplier": "Haemonetics Limited",
+   "date": "2026-07-09",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/0c6455be-a858-4235-9e7c-c54c188eaa3a",
+   "value": 30000,
+   "periodEnd": "2027-03-17",
+   "source": "tender-history"
+  },
+  {
+   "title": "Blood Collection NPM Agreement",
+   "buyer": "Gloucestershire Health and Care NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-06-04",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/13224ac0-14d8-4b33-aa56-a51801b35996",
+   "value": 1432,
+   "periodEnd": "2029-10-12",
+   "source": "tender-history"
+  },
+  {
+   "title": "Blood Collection NPM Agreement",
+   "buyer": "Gloucestershire Hospitals NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-06-04",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/6f2dd5ee-b950-424d-9b48-776285b2d27f",
+   "value": 48190,
+   "periodEnd": "2027-10-12",
+   "source": "tender-history"
+  },
+  {
+   "title": "Blood Collection NPM Agreement",
+   "buyer": "Gloucestershire Hospitals Subsidiary Company Limited",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-06-04",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/b9c8ec5d-9601-4e73-bae1-b8deb58722f8",
+   "value": 124656,
+   "periodEnd": "2029-10-12",
+   "source": "tender-history"
+  },
+  {
+   "title": "KBX: maintenance - blood transfusion refrigeration",
+   "buyer": "University Hospitals Sussex NHS Foundation Trust",
+   "supplier": "Labcold Limited",
+   "date": "2026-06-04",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/cf2e3658-6b56-4063-a6b0-bdb467232575",
+   "value": 67575,
+   "periodEnd": "2029-01-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "6534- 26 Royal Free TEG 6S Analyser Reference Number: 2023/S 000-001309",
+   "buyer": "Partners Procurement Service",
+   "supplier": "Haemonetics Ltd",
+   "date": "2026-03-09",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/554a749e-a1ca-45b0-93e8-ba76b0ee8b68",
+   "value": 300000,
+   "periodEnd": "2026-03-10",
+   "source": "tender-history"
+  },
+  {
+   "title": "TEG 6 Machine",
+   "buyer": "The Christie NHS Foundation Trust",
+   "supplier": "Haemonetics Limited",
+   "date": "2026-02-28",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/de3092ed-5145-4bed-962b-b948ed6a2815",
+   "value": 26700,
+   "periodEnd": "2026-03-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Haemonetics Cell Salvage Consumables",
+   "buyer": "University Hospitals Sussex NHS Foundation Trust",
+   "supplier": "Haemonetics Limited",
+   "date": "2026-01-07",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/f1e1f40e-11b3-4f3e-9727-33313c2625f3",
+   "value": 638092,
+   "periodEnd": "2027-01-07",
+   "source": "tender-history"
+  },
+  {
+   "title": "FTS - Blood Collection Devices",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "Balmung Medical Handel GmbH, Becton, Dickinson U.K. Limited, Cambridge Sensors Ltd, Crest Medical Ltd, GBUK Limited, Greiner Bio-One Ltd, Iskus Health UK Limited, ISOL8 Healthcare Limited, Nipro Medical Europe, Owen Mumford Ltd, Prosum Medical Ltd, Radiometer Ltd, Reflex Medical Limited, Reliance Medical Ltd, RPG Medical Limited, Sarstedt Ltd (QBE), Siemens Healthcare Diagnostics Limited, ICU Medical International Limited, VYGON (U.K.) LIMITED",
+   "date": "2025-08-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/051658-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Blood Collection Devices",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "Balmung Medical Handel GmbH, Becton, Dickinson U.K. Limited, Cambridge Sensors Ltd, Crest Medical Ltd, GBUK Ltd, Greiner Bio-One Ltd, Iskus Health UK Limited, ISOL8 Healthcare Ltd, Nipro Medical Europe, Owen Mumford Ltd, Prosum Medical Ltd, Radiometer Ltd, Reflex Medical Limited, Reliance Medical Ltd, RPG Medical Limited, Sarstedt Ltd (QBE), Siemens Healthcare Diagnostics Limited, ICU Medical International Limited, Vygon (UK) Ltd",
+   "date": "2025-08-14",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/a9160469-9d63-44e7-a436-811fa30e932a",
+   "value": 244000000,
+   "periodEnd": "2027-10-12",
+   "source": "tender-history"
+  },
+  {
+   "title": "UK Derived & Manufactured Dried Plasma Component",
+   "buyer": "NHS Blood and Transplant",
+   "supplier": "Velico Medical",
+   "date": "2025-06-26",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/fe1666ba-a269-4b94-a536-c129f0a3e66b",
+   "value": 1620000,
+   "periodEnd": "2027-03-05",
+   "source": "tender-history"
+  },
+  {
+   "title": "Suction Consumables, Wound Drainage, Autologous Blood Systems and Related Accessories",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "Cardinal Health U.K. 432 Limited, Flexicare Medical Ltd, GBUK Ltd, Intersurgical Ltd, Iskus Health UK Limited, Ivor Shaw Ltd trading as Pennine Healthcare, Mediq Healthcare UK Ltd, Medline Industries Ltd, Proact Medical Ltd, Reflex Medical Limited, Richardson Healthcare Ltd, Salter Labs UK Limited, Stryker UK Ltd, Vygon (UK) Ltd, WESTBOURNE MEDICAL LIMITED, William Davies Care Limited",
+   "date": "2025-06-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/030577-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Plasmapheresis Collection Systems",
+   "buyer": "Scottish National Blood Transfusion Service",
+   "supplier": "Fresenius Kabi",
+   "date": "2025-06-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/029198-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "CF-Suction Consumables, Wound Drainage, Autologous Blood Systems and Related Accessories",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "Cardinal Health U.K. 432 Limited, Aquilant Limited, BVM Medical Limited, Cook (UK) Limited, Athrodax Healthcare International Limited, Diagnostica Stago UK Ltd, Drive Devilbiss Healthcare Limited, Eschmann Technologies Ltd, Fannin (UK) Limited, Flexicare Medical Limited, Fresenius Kabi Limited, GBUK Ltd, Haemonetics Limited, Intersurgical Limited, Iskus Health Limited, Ivor Shaw Limited, Johnson & Johnson Medical Limited, Livanova UK Limited, Medasil Surgical Limited, Medela UK Limited, Mediq Healthcare UK Limited, Medline Industries Limited, Medtronic Limited, Ortus Technology Limited, P.W.Coole & Son Limited, Paramount Medical Solutions Limited, PFM Medical UK Limited, Proact Medical Limited, Reflex Medical Limited, Reliance Medical Ltd, Richardson Healthcare Limited, Rocket Medical PLC, Salter Labs UK Limited, Sinapi Biomedical UK Ltd, Stryker UK Limited, Summit Medical UK Limited, Timesco Healthcare Limited, Uniphar Medtech UK Limited, Vygon (UK) Limited, Westbourne Medical Limited, William Davies Care Limited",
+   "date": "2025-04-29",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/7738d4ff-9177-4348-b1b7-b92ffa259092",
+   "value": 188400000,
+   "periodEnd": "2027-09-06",
+   "source": "tender-history"
+  },
+  {
+   "title": "Blood Collection Safety Sets",
+   "buyer": "Royal Berkshire NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2025-04-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/014120-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Donation and Patient Testing - Automated Red Cell Immunohaematology",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "MEDICAL SUPPLY CO. LTD",
+   "date": "2025-02-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/005671-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [
+  {
+   "title": "Evacuated Blood Collection Systems",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "status": "active",
+   "stage": "open tender",
+   "closingDate": "2026-10-23T11:00:00+01:00",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089948-2026",
+   "value": 20000000,
+   "source": "Find a Tender"
+  },
+  {
+   "title": "Red Cell Reagents",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "status": "planning",
+   "stage": "preliminary market engagement / planning",
+   "closingDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/084514-2026",
+   "value": null,
+   "source": "Find a Tender"
+  }
+ ],
+ "drugTariff": null,
+ "localIntel": [],
+ "localIntelGroups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
+ },
+ "directorySuppliers": [
+  {
+   "name": "Abbott Diagnostics",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Abbott Diagnostics",
+   "seedLabels": [
+    "Blood and transfusion"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/laboratory-diagnostics-point-of-care-testing-and-pathology/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Laboratory Diagnostics, POCT & Pathology (2023/S 000-028831, to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services. The Hub's supplier directory also records: NHS Supply Chain — Laboratory Diagnostics, POCT & Pathology (2023/S 000-028831, to 2028)."
+  },
+  {
+   "name": "BECTON DICKINSON (CME) U.K. LIMITED",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "BECTON DICKINSON (CME) U.K. LIMITED",
+   "seedLabels": [
+    "Blood and transfusion"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Infusion Pumps and Administration Sets and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/infusion-pumps-and-administration-sets-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Infusion Pumps and Administration Sets and Associated Products."
+  },
+  {
+   "name": "Bio-Rad Laboratories UK",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Bio-Rad Laboratories UK",
+   "seedLabels": [
+    "Blood and transfusion"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/laboratory-diagnostics-point-of-care-testing-and-pathology/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Laboratory Diagnostics, POCT & Pathology (2023/S 000-028831, to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services. The Hub's supplier directory also records: NHS Supply Chain — Laboratory Diagnostics, POCT & Pathology (2023/S 000-028831, to 2028)."
+  },
+  {
+   "name": "Convatec",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Convatec",
+   "seedLabels": [
+    "Blood and transfusion"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Advanced Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/advanced-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Negative Pressure Wound Therapy",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/negative-pressure-wound-therapy/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Urology and Bowel Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/urology-and-bowel-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "Drug Tariff Part IX",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Advanced Wound Care; Negative Pressure Wound Therapy; Urology and Bowel Management. The Hub's supplier directory also records: Drug Tariff Part IX; NHS SBS — SBS10142."
+  },
+  {
+   "name": "Grifols UK Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Grifols UK Ltd",
+   "seedLabels": [
+    "Blood management / apheresis"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/laboratory-diagnostics-point-of-care-testing-and-pathology/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services."
+  },
+  {
+   "name": "Haemonetics",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Haemonetics",
+   "seedLabels": [
+    "Blood management / apheresis"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Digital Diagnostic Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/laboratory-diagnostics-point-of-care-testing-and-pathology/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Digital Diagnostic Solutions; Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services."
+  },
+  {
+   "name": "Haier Biomedical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Haier Biomedical",
+   "seedLabels": [
+    "Blood and transfusion"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/laboratory-diagnostics-point-of-care-testing-and-pathology/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Pathology Framework 2024–2028",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services. The Hub's supplier directory also records: NHS Supply Chain — Pathology Framework 2024–2028."
+  },
+  {
+   "name": "PHC Europe / PHCbi",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "PHC Europe / PHCbi",
+   "seedLabels": [
+    "Blood and transfusion"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/laboratory-diagnostics-point-of-care-testing-and-pathology/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain / SBS — lab cold storage",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services. The Hub's supplier directory also records: NHS Supply Chain / SBS — lab cold storage."
+  },
+  {
+   "name": "QuidelOrtho (Ortho Clinical Diagnostics UK)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "QuidelOrtho (Ortho Clinical Diagnostics UK)",
+   "seedLabels": [
+    "Pathology / transfusion"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/laboratory-diagnostics-point-of-care-testing-and-pathology/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Laboratory Diagnostics, POCT & Pathology (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services. The Hub's supplier directory also records: NHS Supply Chain — Laboratory Diagnostics, POCT & Pathology (to 2028)."
+  },
+  {
+   "name": "Terumo BCT",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Terumo BCT",
+   "seedLabels": [
+    "Blood and transfusion"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Renal Replacement Therapies Services, Technologies and Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/renal-replacement-therapy-equipment-and-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Renal Replacement Therapies (2023/S 000-017117, to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Renal Replacement Therapies Services, Technologies and Consumables. The Hub's supplier directory also records: NHS Supply Chain — Renal Replacement Therapies (2023/S 000-017117, to 2028)."
+  },
+  {
+   "name": "Werfen (Instrumentation Laboratory) UK",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Werfen (Instrumentation Laboratory) UK",
+   "seedLabels": [
+    "Blood and transfusion"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/laboratory-diagnostics-point-of-care-testing-and-pathology/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Laboratory Diagnostics, POCT & Pathology (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services. The Hub's supplier directory also records: NHS Supply Chain — Laboratory Diagnostics, POCT & Pathology (to 2028)."
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": true,
+  "markets": [
+   {
+    "id": "anaemia",
+    "label": "Anaemias and other blood disorders: BNF 9.1",
+    "bnf": [
+     "09.01"
+    ],
+    "note": null,
+    "latestPeriod": "202607",
+    "baselinePeriod": "202507",
+    "items": 2189552,
+    "cost": 5197646,
+    "items12m": 25215392,
+    "cost12m": 51545175,
+    "itemsYoY": -3.3,
+    "products": 68,
+    "topNational": [
+     {
+      "code": "0901020G0AA",
+      "label": "Folic acid",
+      "generic": true,
+      "items": 686397,
+      "share": 31.3,
+      "cost": 557311,
+      "yoy": -21.1
+     },
+     {
+      "code": "0901011F0AA",
+      "label": "Ferrous fumarate",
+      "generic": true,
+      "items": 510374,
+      "share": 23.3,
+      "cost": 751425,
+      "yoy": 7.3
+     },
+     {
+      "code": "0901011P0AA",
+      "label": "Ferrous sulfate",
+      "generic": true,
+      "items": 369701,
+      "share": 16.9,
+      "cost": 510322,
+      "yoy": 6.0
+     },
+     {
+      "code": "0901020N0AA",
+      "label": "Hydroxocobalamin",
+      "generic": true,
+      "items": 301680,
+      "share": 13.8,
+      "cost": 785256,
+      "yoy": 4.7
+     },
+     {
+      "code": "0901020D0AA",
+      "label": "Cyanocobalamin",
+      "generic": true,
+      "items": 229084,
+      "share": 10.5,
+      "cost": 1586957,
+      "yoy": 19.8
+     },
+     {
+      "code": "0901011H0AA",
+      "label": "Ferrous gluconate",
+      "generic": true,
+      "items": 25001,
+      "share": 1.1,
+      "cost": 206930,
+      "yoy": 0.1
+     },
+     {
+      "code": "0901011W0AA",
+      "label": "Sodium feredetate (iron",
+      "generic": true,
+      "items": 16256,
+      "share": 0.7,
+      "cost": 210425,
+      "yoy": 12.4
+     },
+     {
+      "code": "0901020D0BK",
+      "label": "CyanocoB12",
+      "generic": false,
+      "items": 15552,
+      "share": 0.7,
+      "cost": 44365,
+      "yoy": 2.3
+     },
+     {
+      "code": "0901020D0BI",
+      "label": "CyanocoMinn",
+      "generic": false,
+      "items": 14773,
+      "share": 0.7,
+      "cost": 48563,
+      "yoy": -15.8
+     },
+     {
+      "code": "0901020D0BL",
+      "label": "Orobalin",
+      "generic": false,
+      "items": 6642,
+      "share": 0.3,
+      "cost": 82586,
+      "yoy": 31.3
+     }
+    ],
+    "icbLeaders": [
+     {
+      "icb": "QOX",
+      "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+      "items": 42590,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 9914,
+        "share": 23.3
+       },
+       {
+        "code": "0901020D0AA",
+        "label": "Cyanocobalamin",
+        "generic": true,
+        "items": 8840,
+        "share": 20.8
+       },
+       {
+        "code": "0901020N0AA",
+        "label": "Hydroxocobalamin",
+        "generic": true,
+        "items": 8297,
+        "share": 19.5
+       }
+      ]
+     },
+     {
+      "icb": "QHL",
+      "name": "NHS Birmingham and Solihull",
+      "items": 48857,
+      "leaders": [
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 13371,
+        "share": 27.4
+       },
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 11424,
+        "share": 23.4
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 8143,
+        "share": 16.7
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 55562,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 13466,
+        "share": 24.2
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 10793,
+        "share": 19.4
+       },
+       {
+        "code": "0901020D0AA",
+        "label": "Cyanocobalamin",
+        "generic": true,
+        "items": 10628,
+        "share": 19.1
+       }
+      ]
+     },
+     {
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 32260,
+      "leaders": [
+       {
+        "code": "0901020D0AA",
+        "label": "Cyanocobalamin",
+        "generic": true,
+        "items": 7838,
+        "share": 24.3
+       },
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 7577,
+        "share": 23.5
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 5367,
+        "share": 16.6
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 99552,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 34671,
+        "share": 34.8
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 23310,
+        "share": 23.4
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 16841,
+        "share": 16.9
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 119068,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 39883,
+        "share": 33.5
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 26665,
+        "share": 22.4
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 19741,
+        "share": 16.6
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 25930,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 8611,
+        "share": 33.2
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 6008,
+        "share": 23.2
+       },
+       {
+        "code": "0901020N0AA",
+        "label": "Hydroxocobalamin",
+        "generic": true,
+        "items": 3957,
+        "share": 15.3
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 43654,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 14439,
+        "share": 33.1
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 12402,
+        "share": 28.4
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 5599,
+        "share": 12.8
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 34151,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 13350,
+        "share": 39.1
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 11364,
+        "share": 33.3
+       },
+       {
+        "code": "0901020N0AA",
+        "label": "Hydroxocobalamin",
+        "generic": true,
+        "items": 6820,
+        "share": 20.0
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 49823,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 21656,
+        "share": 43.5
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 9022,
+        "share": 18.1
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 6791,
+        "share": 13.6
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 27476,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 10763,
+        "share": 39.2
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 7901,
+        "share": 28.8
+       },
+       {
+        "code": "0901020N0AA",
+        "label": "Hydroxocobalamin",
+        "generic": true,
+        "items": 4274,
+        "share": 15.6
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 59070,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 17527,
+        "share": 29.7
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 13586,
+        "share": 23.0
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 12441,
+        "share": 21.1
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 23573,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 7211,
+        "share": 30.6
+       },
+       {
+        "code": "0901020N0AA",
+        "label": "Hydroxocobalamin",
+        "generic": true,
+        "items": 4339,
+        "share": 18.4
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 4223,
+        "share": 17.9
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 107472,
+      "leaders": [
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 31270,
+        "share": 29.1
+       },
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 30169,
+        "share": 28.1
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 17840,
+        "share": 16.6
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 74025,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 23339,
+        "share": 31.5
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 20235,
+        "share": 27.3
+       },
+       {
+        "code": "0901020N0AA",
+        "label": "Hydroxocobalamin",
+        "generic": true,
+        "items": 14335,
+        "share": 19.4
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 26256,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 7839,
+        "share": 29.9
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 6639,
+        "share": 25.3
+       },
+       {
+        "code": "0901020N0AA",
+        "label": "Hydroxocobalamin",
+        "generic": true,
+        "items": 5913,
+        "share": 22.5
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 84297,
+      "leaders": [
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 23992,
+        "share": 28.5
+       },
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 22285,
+        "share": 26.4
+       },
+       {
+        "code": "0901020D0AA",
+        "label": "Cyanocobalamin",
+        "generic": true,
+        "items": 14749,
+        "share": 17.5
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 73187,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 21757,
+        "share": 29.7
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 14711,
+        "share": 20.1
+       },
+       {
+        "code": "0901020N0AA",
+        "label": "Hydroxocobalamin",
+        "generic": true,
+        "items": 13872,
+        "share": 19.0
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 64686,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 17567,
+        "share": 27.2
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 16238,
+        "share": 25.1
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 11820,
+        "share": 18.3
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 38134,
+      "leaders": [
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 13136,
+        "share": 34.4
+       },
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 10176,
+        "share": 26.7
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 7192,
+        "share": 18.9
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 42799,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 11835,
+        "share": 27.7
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 10996,
+        "share": 25.7
+       },
+       {
+        "code": "0901020D0AA",
+        "label": "Cyanocobalamin",
+        "generic": true,
+        "items": 7570,
+        "share": 17.7
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 68769,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 26537,
+        "share": 38.6
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 16375,
+        "share": 23.8
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 10111,
+        "share": 14.7
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 86593,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 31914,
+        "share": 36.9
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 31258,
+        "share": 36.1
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 9134,
+        "share": 10.5
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 159440,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 46491,
+        "share": 29.2
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 39460,
+        "share": 24.7
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 32263,
+        "share": 20.2
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 26239,
+      "leaders": [
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 9955,
+        "share": 37.9
+       },
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 9221,
+        "share": 35.1
+       },
+       {
+        "code": "0901020N0AA",
+        "label": "Hydroxocobalamin",
+        "generic": true,
+        "items": 3299,
+        "share": 12.6
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 41662,
+      "leaders": [
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 14013,
+        "share": 33.6
+       },
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 13150,
+        "share": 31.6
+       },
+       {
+        "code": "0901020N0AA",
+        "label": "Hydroxocobalamin",
+        "generic": true,
+        "items": 6544,
+        "share": 15.7
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 16488,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 5513,
+        "share": 33.4
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 4203,
+        "share": 25.5
+       },
+       {
+        "code": "0901020D0AA",
+        "label": "Cyanocobalamin",
+        "generic": true,
+        "items": 2303,
+        "share": 14.0
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 23104,
+      "leaders": [
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 6448,
+        "share": 27.9
+       },
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 4798,
+        "share": 20.8
+       },
+       {
+        "code": "0901020N0AA",
+        "label": "Hydroxocobalamin",
+        "generic": true,
+        "items": 4654,
+        "share": 20.1
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 46167,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 15784,
+        "share": 34.2
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 10004,
+        "share": 21.7
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 9342,
+        "share": 20.2
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 47067,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 16305,
+        "share": 34.6
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 15354,
+        "share": 32.6
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 6148,
+        "share": 13.1
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 69678,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 26761,
+        "share": 38.4
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 13333,
+        "share": 19.1
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 11774,
+        "share": 16.9
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 45723,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 13619,
+        "share": 29.8
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 10908,
+        "share": 23.9
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 7573,
+        "share": 16.6
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 88272,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 27311,
+        "share": 30.9
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 19536,
+        "share": 22.1
+       },
+       {
+        "code": "0901020N0AA",
+        "label": "Hydroxocobalamin",
+        "generic": true,
+        "items": 15060,
+        "share": 17.1
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 77216,
+      "leaders": [
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 25303,
+        "share": 32.8
+       },
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 24386,
+        "share": 31.6
+       },
+       {
+        "code": "0901020N0AA",
+        "label": "Hydroxocobalamin",
+        "generic": true,
+        "items": 11331,
+        "share": 14.7
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 103547,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 31360,
+        "share": 30.3
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 27678,
+        "share": 26.7
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 18860,
+        "share": 18.2
+       }
+      ]
+     },
+     {
+      "icb": "Z9B2Z",
+      "name": "NHS West and North London",
+      "items": 117085,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 37738,
+        "share": 32.2
+       },
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 34088,
+        "share": 29.1
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 14274,
+        "share": 12.2
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-10-09",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": false,
+  "whyEmpty": null,
+  "count": 90,
+  "roundupsExcluded": 18,
+  "broadcastsExcluded": 2,
+  "updates": [
+   {
+    "title": "Filters should be used during the administration of Parenteral Nutrition for patients in all care settings",
+    "url": "https://www.gov.uk/drug-safety-update/filters-should-be-used-during-the-administration-of-parenteral-nutrition-for-patients-in-all-care-settings",
+    "published": "2026-09-02",
+    "updated": "2026-09-02",
+    "summary": "Administration of parenteral nutrition without a filter has been associated with a number of adverse incidents including an embolism which resulted in a fatal outcome."
+   },
+   {
+    "title": "Domperidone: new contraindication in patients with phaeochromocytoma due to the risk of severe hypertension",
+    "url": "https://www.gov.uk/drug-safety-update/domperidone-new-contraindication-in-patients-with-phaeochromocytoma-due-to-the-risk-of-severe-hypertension",
+    "published": "2026-07-21",
+    "updated": "2026-07-21",
+    "summary": "The product information has been updated for all domperidone products, to include a contraindication for patients with confirmed or suspected phaeochromocytoma (a rare tumour of the adrenal gland), due to the risk of episodes of severe hypertension."
+   },
+   {
+    "title": "Thiopurines and intrahepatic cholestasis of pregnancy",
+    "url": "https://www.gov.uk/drug-safety-update/thiopurines-and-intrahepatic-cholestasis-of-pregnancy",
+    "published": "2025-05-15",
+    "updated": "2025-05-15",
+    "summary": "Intrahepatic cholestasis of pregnancy (ICP) has been rarely reported in patients treated with azathioprine products and is believed to be a risk applicable to all drugs in the thiopurine class (azathioprine, mercaptopurine and tioguanine). Cholestasis of pregnancy associated with thiopurines tends to occur earlier in pregnancy than non drug-induced cholestasis of pregnancy, and elevated bile acid levels may not reduce with ursodeoxycholic acid."
+   },
+   {
+    "title": "Yellow Card Biobank: call to contribute to study of genetic links to side effects",
+    "url": "https://www.gov.uk/drug-safety-update/yellow-card-biobank-call-to-contribute-to-study-of-genetic-links-to-side-effects",
+    "published": "2024-08-21",
+    "updated": "2024-08-21",
+    "summary": "Support this initiative to explore whether there is a genetic basis of side effects associated with direct-acting oral anticoagulants (DOACs) and allopurinol."
+   },
+   {
+    "title": "Warfarin: be alert to the risk of drug interactions with tramadol",
+    "url": "https://www.gov.uk/drug-safety-update/warfarin-be-alert-to-the-risk-of-drug-interactions-with-tramadol",
+    "published": "2024-06-20",
+    "updated": "2024-06-20",
+    "summary": "Taking warfarin and tramadol together can cause harmful drug interactions, which can raise the International Normalised Ratio (INR), and result in severe bruising and bleeding, which in some patients could be fatal."
+   },
+   {
+    "title": "Pseudoephedrine: very rare risk of posterior reversible encephalopathy syndrome (PRES) and reversible cerebral vasoconstriction syndrome (RCVS)",
+    "url": "https://www.gov.uk/drug-safety-update/pseudoephedrine-very-rare-risk-of-posterior-reversible-encephalopathy-syndrome-pres-and-reversible-cerebral-vasoconstriction-syndrome-rcvs",
+    "published": "2024-02-20",
+    "updated": "2024-02-20",
+    "summary": "There have been very rare reports of posterior reversible encephalopathy syndrome (PRES) and reversible cerebral vasoconstriction syndrome (RCVS) with pseudoephedrine."
+   },
+   {
+    "title": "Venetoclax (Venclyxto▼): updated recommendations on tumour lysis syndrome (TLS)",
+    "url": "https://www.gov.uk/drug-safety-update/venetoclax-venclyxtov-updated-recommendations-on-tumour-lysis-syndrome-tls",
+    "published": "2021-12-10",
+    "updated": "2021-12-10",
+    "summary": "Fatal cases of tumour lysis syndrome (TLS) have been reported, some occurring in patients with chronic lymphocytic leukaemia receiving the lowest venetoclax dose used in the dose-titration schedule. For all patients, it is important to strictly adhere to the dose-titration schedule and to the measures to minimise the risk of TLS as outlined in the updated Summary of Product Characteristics (SmPC)."
+   },
+   {
+    "title": "Letters and drug alerts sent to healthcare professionals in November 2020",
+    "url": "https://www.gov.uk/drug-safety-update/letters-and-drug-alerts-sent-to-healthcare-professionals-in-november-2020",
+    "published": "2020-12-17",
+    "updated": "2020-12-17",
+    "summary": "A summary of letters and drug alerts recently sent to healthcare professionals."
+   }
+  ]
+ },
+ "drugTariffViiia": {
+  "effectiveMonth": "2026-10",
+  "latestPublishedMonth": "2026-10",
+  "dataAsOf": "2026-10-09",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-viii",
+  "whole": false,
+  "bnfFilter": [
+   "09.01"
+  ],
+  "lineCount": 67,
+  "categoryCounts": {
+   "C": 59,
+   "M": 5,
+   "A": 3
+  },
+  "fileLines": 3534,
+  "fileLinesWithoutBnf": 53,
+  "priceMin": 0.74,
+  "priceMax": 2310.0,
+  "linesShown": 67,
+  "lines": [
+   {
+    "medicine": "Cyanocobalamin 50microgram tablets",
+    "pack": "50 tablet",
+    "category": "M",
+    "price": 2.71,
+    "bnf": "0901020D0AAAEAE"
+   },
+   {
+    "medicine": "Ferrous gluconate 300mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 6.63,
+    "bnf": "0901011H0AAAAAA"
+   },
+   {
+    "medicine": "Ferrous sulfate 200mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.01,
+    "bnf": "0901011P0AAACAC"
+   },
+   {
+    "medicine": "Folic acid 5mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.74,
+    "bnf": "0901020G0AAAGAG"
+   },
+   {
+    "medicine": "Hydroxocobalamin 1mg/1ml solution for injection ampoules",
+    "pack": "5 ampoule",
+    "category": "M",
+    "price": 9.71,
+    "bnf": "0901020N0AAABAB"
+   },
+   {
+    "medicine": "Anagrelide 500microgram capsules",
+    "pack": "100 capsule",
+    "category": "C",
+    "price": 249.99,
+    "bnf": "0901040A0AAAAAA"
+   },
+   {
+    "medicine": "Cyanocobalamin 1mg tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 9.99,
+    "bnf": "0901020D0AAAFAF"
+   },
+   {
+    "medicine": "Darbepoetin alfa 100micrograms/0.5ml solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 146.81,
+    "bnf": "0901030J0AAASAS"
+   },
+   {
+    "medicine": "Darbepoetin alfa 100micrograms/0.5ml solution for injection pre-filled syringes",
+    "pack": "4 pre-filled disposable injection",
+    "category": "C",
+    "price": 587.24,
+    "bnf": "0901030J0AAAGAG"
+   },
+   {
+    "medicine": "Darbepoetin alfa 10micrograms/0.4ml solution for injection pre-filled syringes",
+    "pack": "4 pre-filled disposable injection",
+    "category": "C",
+    "price": 58.72,
+    "bnf": "0901030J0AAAHAH"
+   },
+   {
+    "medicine": "Darbepoetin alfa 150micrograms/0.3ml solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 220.22,
+    "bnf": "0901030J0AAATAT"
+   },
+   {
+    "medicine": "Darbepoetin alfa 150micrograms/0.3ml solution for injection pre-filled syringes",
+    "pack": "4 pre-filled disposable injection",
+    "category": "C",
+    "price": 880.86,
+    "bnf": "0901030J0AAAIAI"
+   },
+   {
+    "medicine": "Darbepoetin alfa 20micrograms/0.5ml solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 29.36,
+    "bnf": "0901030J0AAANAN"
+   },
+   {
+    "medicine": "Darbepoetin alfa 20micrograms/0.5ml solution for injection pre-filled syringes",
+    "pack": "4 pre-filled disposable injection",
+    "category": "C",
+    "price": 117.45,
+    "bnf": "0901030J0AAAEAE"
+   },
+   {
+    "medicine": "Darbepoetin alfa 300micrograms/0.6ml solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 440.43,
+    "bnf": "0901030J0AAAUAU"
+   },
+   {
+    "medicine": "Darbepoetin alfa 30micrograms/0.3ml solution for injection pre-filled syringes",
+    "pack": "4 pre-filled disposable injection",
+    "category": "C",
+    "price": 176.17,
+    "bnf": "0901030J0AAAFAF"
+   },
+   {
+    "medicine": "Darbepoetin alfa 40micrograms/0.4ml solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 58.72,
+    "bnf": "0901030J0AAAPAP"
+   },
+   {
+    "medicine": "Darbepoetin alfa 40micrograms/0.4ml solution for injection pre-filled syringes",
+    "pack": "4 pre-filled disposable injection",
+    "category": "C",
+    "price": 234.9,
+    "bnf": "0901030J0AAACAC"
+   },
+   {
+    "medicine": "Darbepoetin alfa 500micrograms/1ml solution for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 734.05,
+    "bnf": "0901030J0AAALAL"
+   },
+   {
+    "medicine": "Darbepoetin alfa 50micrograms/0.5ml solution for injection pre-filled syringes",
+    "pack": "4 pre-filled disposable injection",
+    "category": "C",
+    "price": 293.62,
+    "bnf": "0901030J0AAAAAA"
+   },
+   {
+    "medicine": "Darbepoetin alfa 60micrograms/0.3ml solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 88.09,
+    "bnf": "0901030J0AAAQAQ"
+   },
+   {
+    "medicine": "Darbepoetin alfa 60micrograms/0.3ml solution for injection pre-filled syringes",
+    "pack": "4 pre-filled disposable injection",
+    "category": "C",
+    "price": 352.35,
+    "bnf": "0901030J0AAABAB"
+   },
+   {
+    "medicine": "Darbepoetin alfa 80micrograms/0.4ml solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 117.45,
+    "bnf": "0901030J0AAARAR"
+   },
+   {
+    "medicine": "Darbepoetin alfa 80micrograms/0.4ml solution for injection pre-filled syringes",
+    "pack": "4 pre-filled disposable injection",
+    "category": "C",
+    "price": 469.79,
+    "bnf": "0901030J0AAAJAJ"
+   },
+   {
+    "medicine": "Deferasirox 360mg tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 504.0,
+    "bnf": "0901030K0AAAFAF"
+   },
+   {
+    "medicine": "Deferasirox 90mg tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 126.0,
+    "bnf": "0901030K0AAADAD"
+   },
+   {
+    "medicine": "Eltrombopag 25mg tablets",
+    "pack": "28 tablet",
+    "category": "C",
+    "price": 770.0,
+    "bnf": "0901040C0AAAAAA"
+   },
+   {
+    "medicine": "Eltrombopag 50mg tablets",
+    "pack": "28 tablet",
+    "category": "C",
+    "price": 1540.0,
+    "bnf": "0901040C0AAABAB"
+   },
+   {
+    "medicine": "Eltrombopag 75mg tablets",
+    "pack": "28 tablet",
+    "category": "C",
+    "price": 2310.0,
+    "bnf": "0901040C0AAACAC"
+   },
+   {
+    "medicine": "Epoetin alfa 10,000units/1ml solution for injection pre-filled syringes",
+    "pack": "6 pre-filled disposable injection",
+    "category": "C",
+    "price": 331.85,
+    "bnf": "0901030D0AAALAL"
+   },
+   {
+    "medicine": "Epoetin alfa 4,000units/0.4ml solution for injection pre-filled syringes",
+    "pack": "6 pre-filled disposable injection",
+    "category": "C",
+    "price": 132.74,
+    "bnf": "0901030D0AAAKAK"
+   },
+   {
+    "medicine": "Epoetin alfa 40,000units/1ml solution for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 265.48,
+    "bnf": "0901030D0AAAUAU"
+   },
+   {
+    "medicine": "Epoetin alfa 6,000units/0.6ml solution for injection pre-filled syringes",
+    "pack": "6 pre-filled disposable injection",
+    "category": "C",
+    "price": 199.11,
+    "bnf": "0901030D0AAANAN"
+   },
+   {
+    "medicine": "Epoetin beta 10,000units/0.6ml solution for injection pre-filled syringes",
+    "pack": "6 pre-filled disposable injection",
+    "category": "C",
+    "price": 420.85,
+    "bnf": "0901030E0AAATAT"
+   },
+   {
+    "medicine": "Epoetin beta 3,000units/0.3ml solution for injection pre-filled syringes",
+    "pack": "6 pre-filled disposable injection",
+    "category": "C",
+    "price": 126.25,
+    "bnf": "0901030E0AAARAR"
+   },
+   {
+    "medicine": "Epoetin beta 30,000units/0.6ml solution for injection pre-filled syringes",
+    "pack": "4 pre-filled disposable injection",
+    "category": "C",
+    "price": 841.71,
+    "bnf": "0901030E0AAAYAY"
+   },
+   {
+    "medicine": "Epoetin beta 4,000units/0.3ml solution for injection pre-filled syringes",
+    "pack": "6 pre-filled disposable injection",
+    "category": "C",
+    "price": 168.34,
+    "bnf": "0901030E0AAAUAU"
+   },
+   {
+    "medicine": "Epoetin beta 5,000units/0.3ml solution for injection pre-filled syringes",
+    "pack": "6 pre-filled disposable injection",
+    "category": "C",
+    "price": 210.42,
+    "bnf": "0901030E0AAASAS"
+   },
+   {
+    "medicine": "Epoetin beta 500units/0.3ml solution for injection pre-filled syringes",
+    "pack": "6 pre-filled disposable injection",
+    "category": "C",
+    "price": 21.05,
+    "bnf": "0901030E0AAANAN"
+   },
+   {
+    "medicine": "Epoetin beta 6,000units/0.3ml solution for injection pre-filled syringes",
+    "pack": "6 pre-filled disposable injection",
+    "category": "C",
+    "price": 252.5,
+    "bnf": "0901030E0AAAVAV"
+   },
+   {
+    "medicine": "Epoetin zeta 10,000units/1ml solution for injection pre-filled syringes",
+    "pack": "6 pre-filled disposable injection",
+    "category": "C",
+    "price": 288.48,
+    "bnf": "0901030Q0AAAHAH"
+   },
+   {
+    "medicine": "Epoetin zeta 30,000units/0.75ml solution for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 144.25,
+    "bnf": "0901030Q0AAAKAK"
+   },
+   {
+    "medicine": "Epoetin zeta 8,000units/0.8ml solution for injection pre-filled syringes",
+    "pack": "6 pre-filled disposable injection",
+    "category": "C",
+    "price": 230.79,
+    "bnf": "0901030Q0AAAGAG"
+   },
+   {
+    "medicine": "Ferric maltol (iron 30mg) capsules",
+    "pack": "56 capsule",
+    "category": "C",
+    "price": 47.6,
+    "bnf": "0901011Y0AAAAAA"
+   },
+   {
+    "medicine": "Ferrous fumarate 140mg/5ml oral solution",
+    "pack": "200 ml",
+    "category": "C",
+    "price": 3.92,
+    "bnf": "0901011F0AAACAC"
+   },
+   {
+    "medicine": "Ferrous fumarate 140mg/5ml oral solution sugar free",
+    "pack": "300 ml",
+    "category": "C",
+    "price": 5.33,
+    "bnf": "0901011F0AAAIAI"
+   },
+   {
+    "medicine": "Ferrous fumarate 305mg capsules",
+    "pack": "100 capsule",
+    "category": "C",
+    "price": 5.0,
+    "bnf": "0901011F0AAAHAH"
+   },
+   {
+    "medicine": "Ferrous fumarate 322mg tablets",
+    "pack": "28 tablet",
+    "category": "C",
+    "price": 1.0,
+    "bnf": "0901011F0AAALAL"
+   },
+   {
+    "medicine": "Ferrous sulfate 125mg/ml oral drops sugar free",
+    "pack": "15 ml",
+    "category": "C",
+    "price": 30.0,
+    "bnf": "0901011P0AACJCJ"
+   },
+   {
+    "medicine": "Ferrous sulfate 325mg / Folic acid 350microgram modified-release tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 2.64,
+    "bnf": "0901011Q0AAAJAJ"
+   },
+   {
+    "medicine": "Ferrous sulfate 325mg modified-release tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 2.58,
+    "bnf": "0901011P0AAAKAK"
+   },
+   {
+    "medicine": "Filgrastim 30million units/0.5ml solution for injection pre-filled syringes",
+    "pack": "5 pre-filled disposable injection",
+    "category": "C",
+    "price": 250.75,
+    "bnf": "0901060I0AAALAL"
+   },
+   {
+    "medicine": "Filgrastim 30million units/1ml solution for injection vials",
+    "pack": "5 vial",
+    "category": "C",
+    "price": 263.52,
+    "bnf": "0901060I0AAAAAA"
+   },
+   {
+    "medicine": "Folic acid 2.5mg/5ml oral solution sugar free",
+    "pack": "150 ml",
+    "category": "C",
+    "price": 9.16,
+    "bnf": "0901020G0AACICI"
+   },
+   {
+    "medicine": "Hydroxycarbamide 100mg tablets",
+    "pack": "60 tablet",
+    "category": "C",
+    "price": 100.0,
+    "bnf": "0901030R0AAABAB"
+   },
+   {
+    "medicine": "Hydroxycarbamide 1g tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 500.0,
+    "bnf": "0901030R0AAAAAA"
+   },
+   {
+    "medicine": "Iron dextran 100mg/2ml solution for injection ampoules",
+    "pack": "5 ampoule",
+    "category": "C",
+    "price": 39.85,
+    "bnf": "0901012K0AAAAAA"
+   },
+   {
+    "medicine": "Iron dextran 500mg/10ml solution for injection ampoules",
+    "pack": "2 ampoule",
+    "category": "C",
+    "price": 79.7,
+    "bnf": "0901012K0AAAEAE"
+   },
+   {
+    "medicine": "Iron sucrose 100mg/5ml solution for injection vials",
+    "pack": "5 vial",
+    "category": "C",
+    "price": 51.2,
+    "bnf": "0901012I0AAABAB"
+   },
+   {
+    "medicine": "Roxadustat 100mg tablets",
+    "pack": "12 tablet",
+    "category": "C",
+    "price": 296.21,
+    "bnf": "0901030U0AAADAD"
+   },
+   {
+    "medicine": "Roxadustat 20mg tablets",
+    "pack": "12 tablet",
+    "category": "C",
+    "price": 59.24,
+    "bnf": "0901030U0AAAAAA"
+   },
+   {
+    "medicine": "Roxadustat 50mg tablets",
+    "pack": "12 tablet",
+    "category": "C",
+    "price": 148.11,
+    "bnf": "0901030U0AAABAB"
+   },
+   {
+    "medicine": "Roxadustat 70mg tablets",
+    "pack": "12 tablet",
+    "category": "C",
+    "price": 207.35,
+    "bnf": "0901030U0AAACAC"
+   },
+   {
+    "medicine": "Sodium feredetate (iron 27.5mg/5ml) oral solution sugar free",
+    "pack": "500 ml",
+    "category": "C",
+    "price": 14.95,
+    "bnf": "0901011W0AAAAAA"
+   },
+   {
+    "medicine": "Ferrous fumarate 210mg tablets",
+    "pack": "84 tablet",
+    "category": "A",
+    "price": 3.45,
+    "bnf": "0901011F0AAAEAE"
+   },
+   {
+    "medicine": "Folic acid 400microgram tablets",
+    "pack": "90 tablet",
+    "category": "A",
+    "price": 8.94,
+    "bnf": "0901020G0AABFBF"
+   },
+   {
+    "medicine": "Folic acid 5mg/5ml oral solution sugar free",
+    "pack": "150 ml",
+    "category": "A",
+    "price": 87.96,
+    "bnf": "0901020G0AAA3A3"
+   }
+  ]
+ }
+}
