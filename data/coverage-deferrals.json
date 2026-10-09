@@ -24,12 +24,17 @@
    ],
    "addedOn": "2026-09-14",
    "addedBecause": "^o465 — the framework-coverage picker selected this framework on 10/09, 11/09 and 13/09 and each run re-confirmed zero movement, because there is no permitted route left that does not start with Lou's ruling."
-  },
+  }
+ ],
+ "exclusionsRule": "Suppliers Lou has ruled are NOT a coverage target on a framework. An exclusion IS the decision (a deferral only waits on one). Effect: the named suppliers leave Left and the pick list in build_coverage_ledger.py and are listed under excludedByRuling; they stay in Awarded, in supplier-seed.json and in whatever they publish. An entry applies ONLY to the suppliers it names, so a newly awarded supplier on the same framework is not excluded by an earlier ruling. Policy shapes: general-purpose-computing-not-assistive-technology in data/identity-vocabulary-policy.json (Iansyst); the rest are scope rulings recorded in the entry.",
+ "exclusions": [
   {
    "framework": "Digital Diagnostic Solutions",
-   "reason": "All 7 remaining suppliers (Draeger Medical UK, Haemonetics, Olympus (KeyMed), Leica Microsystems (UK), Philips, Roche Diagnostics UK, Siemens Healthineers) already publish ranges elsewhere in the Differentiator, but nothing under digital:hw/sw -- confirmed again this run by reading every one of their NHSSC-cache catalogue lines under this framework (36 terms across the 7): ECG electrodes, anaesthetic facemasks, CPAP/NIV consumables, a cardiology pressure-guidewire console, POC glucose/coagulation/blood-gas test strips, lab analysers (cobas, Atellica), microscopy histology accessories and an energy handpiece -- none of it clinical IT software or hardware by the Hub's own digital:hw/sw definitions. Forcing any of it into digital:hw/sw would be inventing a category the evidence does not support. This is the same structural ceiling identity-vocab-decision-queue.md #4 already closed as 'nothing left here for Lou' on the identity/tie question; what remains open is the coverage-target policy question in OUTSTANDING ^o268 -- whether Lou wants this framework kept as an active coverage target at all, or accepted at its structural ceiling.",
-   "queuedIn": "02-Elevate-and-Thrive/Hub/identity-vocab-decision-queue.md",
+   "wholeFramework": true,
    "decisionRef": "^o268",
+   "ruledOn": "2026-10-09",
+   "ruledBy": "Louise Hoult",
+   "reason": "Lou ruled 09/10/2026 that this framework is NOT a coverage target any more. Its 7 remaining suppliers already publish ranges elsewhere in the Differentiator and nothing they sell is clinical IT software or hardware under digital:hw/sw (confirmed 18/09/2026 against 36 NHSSC-cache catalogue terms), so the ceiling is structural. Nothing is deleted or re-categorised.",
    "suppliers": [
     "Draeger Medical UK",
     "Haemonetics",
@@ -38,9 +43,31 @@
     "Philips",
     "Roche Diagnostics UK",
     "Siemens Healthineers"
-   ],
-   "addedOn": "2026-09-18",
-   "addedBecause": "^o268/^o303 -- the framework-coverage picker has selected this framework as the lowest-coverage STARTED framework on multiple runs (11.1% on 06/09, re-confirmed 20.4% on 18/09) and every run confirms the same zero-movement structural ceiling; the brief itself (docs/framework-coverage-brief.md) cites this exact framework as the worked example of 'a low coverage % is not evidence of neglect'. Deferred so the picker stops re-selecting a framework whose entire remaining Left is a policy call, not crawl or mapping work."
+   ]
+  },
+  {
+   "framework": "Ultrasound Scanners and Associated Options and Related Services",
+   "decisionRef": "^o617",
+   "ruledOn": "2026-10-09",
+   "ruledBy": "Louise Hoult",
+   "reason": "Lou ruled 09/10/2026, same mechanism as ^o268. These 5 suppliers have no ultrasound product on any crawlable catalogue or in NHS Supply Chain's catalogue (Celtic SMR was the only resolvable one, 23.8% to 28.6%). They stay awarded and keep whatever they publish elsewhere.",
+   "suppliers": [
+    "BioSpectrum Ltd",
+    "Hologic UK",
+    "Philips",
+    "ProSys International Ltd",
+    "Siemens Healthineers"
+   ]
+  },
+  {
+   "framework": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+   "decisionRef": "^o632",
+   "ruledOn": "2026-10-09",
+   "ruledBy": "Louise Hoult",
+   "reason": "Lou ruled 09/10/2026: Iansyst Ltd's 13 DSA computing products (MacBook and other Apple, HP, Lenovo, Eizo lines) are general-purpose computing sold as DSA upgrades, not assistive technology. They stay published under IT & computer equipment (it:hw) and leave the TEC coverage target.",
+   "suppliers": [
+    "Iansyst Ltd"
+   ]
   }
  ]
 }

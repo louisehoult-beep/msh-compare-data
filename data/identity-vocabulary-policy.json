@@ -40,14 +40,18 @@
   "domain-proof-tier": {
    "title": "A registered-office address match is documentary proof of a supplier's own site",
    "shape": "A website is plainly the named supplier's own site, but does not print the UK entity's company registration number anywhere, so the strong domain-proof bar refuses it. Characteristically a UK arm of a named global parent.",
-   "ruling": "Accept a SECOND proof tier: the site displays a registered office address that matches the Companies House record for that entity. This is documentary evidence read off two independent sources, not an inference from branding, and it ranks below an on-site registration number but above a name match. Record which tier proved the domain, so the basis of every accepted domain stays auditable.",
-   "guard": "An address match proves the site belongs to that entity. It does not prove the entity holds the award, does not license a name-based merge, and never substitutes for a registration number where one is actually printed. A trading address that is not the registered office does not satisfy this; neither does a shared serviced-office address used by many companies, which must be treated as no proof at all.",
+   "ruling": "Accept a SECOND proof tier: the site displays a registered office address that matches the Companies House record for that entity. This is documentary evidence read off two independent sources, not an inference from branding, and it ranks below an on-site registration number but above a name match. Record which tier proved the domain, so the basis of every accepted domain stays auditable. THIRD TIER (ruled 09/10/2026, ^o621): a first-party link from the company's own site to its own entry in a compliance register (for example TISCreport) that names the Companies House number, where Companies House confirms that number belongs to the entity (or its recorded former name). Ranks below the address tier. FOURTH TIER (ruled 09/10/2026, ^o630): a first-party former-name statement on the company's own site that matches the Companies House name history of the entity (for example \"Previously named X\" where Companies House records the rename and its date), accepted even where the trading address differs from the registered office. Record which tier proved each domain.",
+   "guard": "An address match proves the site belongs to that entity. It does not prove the entity holds the award, does not license a name-based merge, and never substitutes for a registration number where one is actually printed. A trading address that is not the registered office does not satisfy this; neither does a shared serviced-office address used by many companies, which must be treated as no proof at all. The third tier requires the link to be on the company's own site and the number to be confirmed at Companies House; a register entry reached from anywhere else, or a number Companies House does not tie to the entity, is not proof. The fourth tier requires BOTH the on-site statement and a matching dated Companies House name history; a former-name claim alone is not proof.",
    "appliesTo": [
     "^o487",
-    "^o363"
+    "^o363",
+    "^o621",
+    "^o630"
    ],
    "workedExample": "FUJIFILM Sonosite's UK site prints no company number but shows a registered office matching its Companies House record. Domain accepted at tier 2, recorded as address-proved. Globus Medical, NuVasive, Kaiser Medical and Hitachi Medical Systems are the same shape.",
-   "decidedOn": "2026-09-20"
+   "decidedOn": "2026-09-20",
+   "amendedOn": "2026-10-09",
+   "amendment": "Third tier (first-party compliance-register link) added by Lou 09/10/2026 (^o621); fourth tier (first-party former-name statement matching Companies House name history) added 09/10/2026 (^o630)."
   },
   "unconfirmable-awardee": {
    "title": "Publish the award under the name as given, with no company record attached",
@@ -141,6 +145,72 @@
    "workedExample": "Abbott Diabetes Care, Abbott Diagnostics, Abbott Laboratories Limited and Abbott Medical U.K. Ltd all reach the Abbott Workday board (atsAccount 'abbott', careers site www.abbott.com). None carries abbott.com as its own domain and no seed record is marked as the group's parent, so tier 3 applies: all 67 UK roles are held once under Abbott Diabetes Care, and the other three records state no count and name Abbott Diabetes Care. data/supplier-careers.json went from 279 UK role rows to 78, one per distinct role URL.",
    "decidedOn": "2026-09-28",
    "decidedBy": "Louise Hoult, in chat 28/09/2026 (\"make rule so not shown 4 times, only once\")"
+  },
+  "dissolved-awardee-successor-uncertain": {
+   "title": "A dissolved awardee stays credited as named; no live company inherits it without a transfer document",
+   "shape": "An awarding source names a supplier that Companies House shows as DISSOLVED. A live company with a related name exists, or the dissolved company's website still trades, and it is not documented whether the product range or the award transferred.",
+   "ruling": "The award stays credited to the dissolved entity exactly as the source names it, marked \"dissolved\" with the Companies House dissolution date. No live company is credited with it, and no product record is re-attributed, unless one of three documents says the business transferred: a Companies House filing naming the transfer, the live company's own site stating in its own words that it acquired that range or business, or a published notice from the awarding body. A dissolved company's product record that reaches no member view is held, not deleted, so the data survives if a successor is later confirmed.",
+   "guard": "Name similarity is never evidence of succession, however obvious the reading looks. A still-trading website is not evidence either: a dissolved company's domain can be kept running by anyone. Never used to delete a record.",
+   "appliesTo": [
+    "^o600",
+    "^o204"
+   ],
+   "workedExample": "KIMAL RENAL CARE LIMITED (06839033, dissolved 28/11/2025) is named on the Maternity framework brief; Kimal PLC is a separate live company. The award is held against the dissolved entity unless a transfer document is found.",
+   "decidedOn": "2026-10-09",
+   "decidedBy": "Louise Hoult",
+   "decidedIn": "02-Elevate-and-Thrive/Hub/company-aliases/IDENTITY-DECISION-PACK-2026-09-23.md"
+  },
+  "self-stated-company-number-conflict": {
+   "title": "A self-stated company number that Companies House contradicts is no proof at all",
+   "shape": "A supplier's own website prints a Companies House number, and that number resolves to a different company, or to a company at the same address whose name does not match.",
+   "ruling": "A self-stated number that Companies House contradicts is not used as the entity's number, not used as weak evidence, and not \"corrected\" to the number a name search suggests. The record carries companyNumber: unconfirmed with a note quoting the number the site prints and what Companies House returns for it, so the conflict is visible and auditable. The award, if any, is then handled under unconfirmable-awardee.",
+   "guard": "Never resolve the conflict by picking the more plausible of the two companies. A conflict with a live company at the same registered address is the higher-stakes case and stays escalated as a single line naming the two numbers; it is the one sub-case this ruling does not decide.",
+   "appliesTo": [
+    "^o474"
+   ],
+   "workedExample": "Accoson (AC Cossor & Son (Surgical) Ltd) prints \"Company registration no. 135969\"; that matches neither Cossor Companies House record, and SC135969 is GM INSTRUMENTS LIMITED at the same postcode. No number is written; the conflict is noted. The same-address live-company sub-case stays escalated as one line.",
+   "decidedOn": "2026-10-09",
+   "decidedBy": "Louise Hoult",
+   "decidedIn": "02-Elevate-and-Thrive/Hub/company-aliases/IDENTITY-DECISION-PACK-2026-09-23.md"
+  },
+  "cross-border-sibling-domain-attribution": {
+   "title": "A foreign-arm site is not attributed to the UK entity unless the site itself proves it",
+   "shape": "The only web presence found for a UK supplier entity is a same-brand domain registered in another country (an .ie, .de, .com run by a foreign arm), and nothing on that site names the UK entity.",
+   "ruling": "A foreign-ccTLD or foreign-arm site is attributed to the UK entity only when the site itself proves it under domain-proof-tier: the UK company number printed on the site, or the UK registered office address printed on the site and matching Companies House. Otherwise the UK entity has no confirmed domain, its catalogue is not crawled from the foreign site, and the foreign site is recorded as \"related brand site, not attributed\" so nobody re-investigates it.",
+   "guard": "Shared branding, a shared logo, or a group \"our companies\" page listing the UK arm by name is not attribution of the catalogue. Never used to seed or crawl a site into a UK record.",
+   "appliesTo": [
+    "^o287"
+   ],
+   "workedExample": "GS Medical Healthcare Ltd (10425778, Selby) carries gsmedical.ie as its only site link. Nothing there names the UK entity, so it is not crawled into the UK record and is noted as a related brand site, not attributed.",
+   "decidedOn": "2026-10-09",
+   "decidedBy": "Louise Hoult",
+   "decidedIn": "02-Elevate-and-Thrive/Hub/company-aliases/IDENTITY-DECISION-PACK-2026-09-23.md"
+  },
+  "no-parent-catalogue-credit-to-uk-subsidiary": {
+   "title": "A UK subsidiary publishes only products an award or NHS Supply Chain lists, never its foreign parent's global catalogue",
+   "shape": "A UK subsidiary's only website is its foreign parent's global site (which names the parent, not the UK entity), and the question is whether the UK record may publish the parent's catalogue.",
+   "ruling": "HOLD. The UK record publishes a product only once the framework award or NHS Supply Chain's own catalogue lists that product for the UK entity. The parent's global catalogue is not published under the UK subsidiary.",
+   "guard": "Never used to merge or alias the subsidiary with its parent, and never to hide an award that is verified. Complements parent-subsidiary-award-credit, which routes the award; this governs the product range.",
+   "appliesTo": [
+    "^o631"
+   ],
+   "workedExample": "Tobii Dynavox Ltd (05091720): tobiidynavox.com is the group's global site naming Dynavox Group AB, Stockholm. No global catalogue product is published under the UK record unless the framework award or NHSSC lists it.",
+   "decidedOn": "2026-10-09",
+   "decidedBy": "Louise Hoult",
+   "decidedIn": "02-Elevate-and-Thrive/Hub/company-aliases/IDENTITY-DECISION-PACK-2026-09-23.md"
+  },
+  "general-purpose-computing-not-assistive-technology": {
+   "title": "General-purpose computing sold as a DSA upgrade is not assistive technology",
+   "shape": "A supplier on an assistive technology framework sells general-purpose computers or accessories (laptops, tablets, phones) as Disabled Students' Allowance (DSA) upgrades.",
+   "ruling": "Such products are kept under IT & computer equipment and are excluded from the assistive technology (digital:tec) category and from that framework's coverage target. Assistive-technology products proper (software, specialist hardware) are mapped as normal.",
+   "guard": "Never used to exclude a product whose own name or description says it is assistive or adapted. Never used to delete a captured product: it stays published under its computing category.",
+   "appliesTo": [
+    "^o632"
+   ],
+   "workedExample": "Iansyst Ltd's 13 \"DSA Mac Upgrades\" products (MacBook and other Apple lines) stay under IT & computer equipment and leave the TEC coverage target.",
+   "decidedOn": "2026-10-09",
+   "decidedBy": "Louise Hoult",
+   "decidedIn": "02-Elevate-and-Thrive/Hub/company-aliases/IDENTITY-DECISION-PACK-2026-09-23.md"
   }
  }
 }

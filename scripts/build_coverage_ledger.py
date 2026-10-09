@@ -72,6 +72,14 @@ name is counted as `duplicateOfCapturedSupplier` and kept out of crawlWorklist:
 crawling it files the same range twice under two names, which is what happened
 to "GB UK Ltd" beside "GBUK Group" on gbukgroup.com.
 
+AN EXCLUDED SUPPLIER LEAVES THE TARGET, NOT THE RECORD (added 09/10/2026, ^o268,
+^o617, ^o632). `data/coverage-deferrals.json` (its `exclusions` key) names suppliers Lou has ruled are
+not a coverage target on a framework (no product in the framework's class on any
+crawlable catalogue or NHSSC; or general-purpose computing that is not assistive
+technology). They stay in Awarded, in the seed and in whatever they publish; they
+leave Left and the pick list and are reported in `excludedByRuling`. The entry
+applies only to the suppliers it names.
+
 A framework is DONE only when every awarded supplier is published with a
 category. Anything else is named, counted and left as work — never rounded up.
 
@@ -127,6 +135,30 @@ def load_deferrals():
         raw = json.load(f)
     return {d["framework"]: d for d in raw.get("deferrals", [])
             if d.get("framework") and d.get("suppliers") and d.get("reason")}
+
+
+def load_exclusions():
+    """Suppliers Lou has ruled are NOT a coverage target on a framework.
+
+    Added 09/10/2026 (^o268, ^o617, ^o632). Returns {framework name: entry}.
+    An absent or malformed file means nothing is excluded.
+
+    Different from a deferral: a deferral waits on a decision; an exclusion IS
+    the decision. The named suppliers stay in `suppliersAwarded` and stay in the
+    framework's data (nothing is deleted, nothing is un-published); they leave
+    the Left count and the pick list, and are listed in `excludedByRuling` with
+    the ruling that put them there. The entry applies ONLY to the suppliers it
+    names, so a new awarded supplier on the same framework is not excluded by a
+    ruling that predates it.
+    """
+    path = os.path.join(DATA, "coverage-deferrals.json")  # `exclusions` key
+    if not os.path.exists(path):
+        return {}
+    with open(path) as f:
+        raw = json.load(f)
+    return {d["framework"]: d for d in raw.get("exclusions", [])
+            if d.get("framework") and d.get("suppliers") and d.get("reason")
+            and d.get("decisionRef") and d.get("ruledOn")}
 
 
 def deferral_for(row, deferrals):
@@ -288,6 +320,7 @@ def main():
         if d:
             domains[key] = d
 
+    exclusions = load_exclusions()
     rows, unresolved = [], collections.Counter()
     for f in fw.get("frameworks", []):
         sups = f.get("suppliers") or []
@@ -319,6 +352,20 @@ def main():
                 buckets["capturedNothingCounted"].append(canon)
             else:
                 buckets["notCrawled"].append(canon)
+        # RULED OUT OF THE TARGET (09/10/2026; ^o268, ^o617, ^o632). Only the
+        # suppliers the ruling names, and only out of the buckets that count as
+        # Left. A published or a refused supplier is untouched: an exclusion
+        # removes work from the target, never a fact from the record.
+        excl = exclusions.get(f.get("name"))
+        excludedByRuling = []
+        if excl:
+            named = set(excl["suppliers"])
+            for b in ("unknown", "publishedElsewhere", "heldOnly",
+                      "capturedNothingCounted", "notCrawled"):
+                keep = []
+                for n in buckets[b]:
+                    (excludedByRuling if n in named else keep).append(n)
+                buckets[b] = keep
         total = len(sups)
         done = len(buckets["published"])
 
@@ -365,6 +412,16 @@ def main():
                       "DONE" if total and done == total else
                       "STARTED" if done else "NOT STARTED"),
             "speciality": specKeys,
+            "excludedByRuling": ([{"supplier": n, "decisionRef": excl["decisionRef"],
+                                   "ruledOn": excl["ruledOn"]}
+                                  for n in sorted(excludedByRuling)]
+                                 if excludedByRuling else []),
+            # Awarded suppliers less those ruled out of the target. Coverage above
+            # stays measured against ALL awarded suppliers; this is the second
+            # figure, so neither is rounded into the other.
+            "targetSuppliers": total - len(excludedByRuling),
+            "coverageOfTarget": (round(100.0 * done / (total - len(excludedByRuling)), 1)
+                                 if total - len(excludedByRuling) else 0.0),
             # A supplier with a recorded crawl refusal NEVER appears here, even
             # when it also has held products from an earlier capture. Added
             # 06/09/2026 with the heldBySupplier fix above: that fix correctly
@@ -472,6 +529,7 @@ def main():
         # reach for those frameworks; the refusal test is kept as well so the
         # sentence below can never report "(0 recorded refusal(s))".
         rows[-1]["blockedReason"] = None if left or not buckets["refused"] or \
+            excludedByRuling or \
             rows[-1]["state"] in ("DONE", "OUT OF SCOPE", "UNMAPPED") else (
             "every awarded supplier not yet published has been read and refused "
             "(%d recorded refusal(s)) — no permitted route left to the rest of "
@@ -535,6 +593,8 @@ def main():
                 w["supplier"] for r in rows if r["inScope"]
                 for w in r["duplicateOfCapturedSupplier"]}),
             "blockedFrameworks": sum(1 for r in rows if r["blockedReason"]),
+            "frameworksWithExclusions": sum(1 for r in rows if r["excludedByRuling"]),
+            "suppliersExcludedByRuling": sum(len(r["excludedByRuling"]) for r in rows),
             "deferredFrameworks": sum(1 for r in rows if r["deferred"]),
         },
         "unresolvedSupplierNames": unresolved.most_common(),
@@ -578,7 +638,10 @@ def main():
           "counted here, but every supplier in it is waiting on a ruling only Lou can",
           "give, so `differentiator-framework-coverage` skips them when it picks a",
           "framework to work. They are listed in `data/coverage-deferrals.json` with",
-          "the decision each waits on; delete the entry once that decision is made.", "",
+          "the decision each waits on; delete the entry once that decision is made.",
+          f"**{c['suppliersExcludedByRuling']} supplier(s) on {c['frameworksWithExclusions']} framework(s) are EXCLUDED** — "
+          "Lou ruled they are not a coverage target (`data/coverage-deferrals.json`, `exclusions`).",
+          "They stay in Awarded and in every record; they leave Left and the pick list.", "",
           "| Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |",
           "|---|---|---|---|---|---|---|---|"]
     for r in rows:
@@ -587,7 +650,9 @@ def main():
             r["suppliersAwarded"], r["suppliersPublished"],
             r["coverage"], r["actionableTotal"], len(r["refusedSuppliers"]),
             r["state"] + (" · BLOCKED" if r["blockedReason"] else "")
-            + (" · DEFERRED" if r["deferred"] else "")))
+            + (" · DEFERRED" if r["deferred"] else "")
+            + (" · %d EXCLUDED" % len(r["excludedByRuling"])
+               if r["excludedByRuling"] else "")))
     with open(os.path.join(REPO, "docs", "COVERAGE-LEDGER.md"), "w") as f:
         f.write("\n".join(md) + "\n")
 
