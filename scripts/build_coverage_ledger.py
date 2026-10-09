@@ -176,6 +176,7 @@ def deferral_for(row, deferrals):
     outstanding = set(row["unknown"]) | set(row["publishedElsewhere"]) | \
         set(row["heldOnly"]) | set(row["capturedNothingCounted"]) | \
         set(row["notCrawled"])
+    outstanding -= set(row.get("publishedElsewhereNoOwnRange") or [])
     uncovered = sorted(outstanding - set(d["suppliers"]))
     if uncovered:
         return {"stale": True, "uncovered": uncovered, **d}
@@ -189,6 +190,11 @@ def deferral_for(row, deferrals):
 # beverage contract or an office chair. Out of scope does not mean deleted —
 # anything already published in those areas stays live and untouched; it just
 # stops driving the sweep.
+# Source kinds that are third-party catalogue records, not a supplier's own
+# site. A supplier whose every published product carries only these has no
+# captured own-site range anywhere (^o469).
+CATALOGUE_KINDS = {"nhssc", "icc"}
+
 IN_SCOPE = {"Medical and Surgical Consumables",
             "Diagnostic Equipment and Services",
             "Rehabilitation and Community",
@@ -260,11 +266,17 @@ def main():
     # canonical name -> what we hold on that supplier
     published = collections.defaultdict(set)   # canon -> {cat}
     pubcount = collections.Counter()
+    ownSourced = set()
     for p in diff.get("products", []):
         st, canon, _ = CA.resolve(p.get("supplier", ""), reg)
         key = canon if st == "RESOLVED" else p.get("supplier", "")
         published[key].add(p.get("cat"))
         pubcount[key] += 1
+        # Any source that is not the NHS Supply Chain catalogue or an ICC
+        # document means a range read from the supplier's own site (^o469).
+        if any((s.get("kind") or "") not in CATALOGUE_KINDS
+               for s in (p.get("sources") or [])):
+            ownSourced.add(key)
 
     # HELD: crawled, but no recorded category mapping, so nothing publishes.
     # Read from differentiator.json's `heldBySupplier`, which is complete.
@@ -396,6 +408,24 @@ def main():
         # bug would have shipped in the same change that added the report.
         dupNotCrawled = {n: o for n, o in dupOf.items() if n in buckets["notCrawled"]}
 
+        # REFUSED, AND PUBLISHING ONLY CATALOGUE RECORDS (^o469, 09/10/2026).
+        # The bucket chain tests `pubcount` before refusals, so a refused
+        # supplier that publishes anything anywhere lands in publishedElsewhere.
+        # When every product it publishes is an NHS Supply Chain or ICC record,
+        # and nothing of its own site is held or captured, there is no own-site
+        # range to categorise into this framework: its site is refused, and
+        # catalogue lines are matched to categories by the catalogue, not by
+        # us. Abbott Laboratories Limited and Medtronic on Insulin Pumps/CGM
+        # are the worked case (Ensure, Ligasure; nothing pump- or CGM-shaped).
+        # Kept in the publishedElsewhere bucket and listed here by name, so the
+        # report still shows them; only the actionable count drops them.
+        # A supplier with ANY manufacturer-sourced product, held range or
+        # capture record stays counted: that is real mapping work.
+        noOwnRange = sorted(
+            n for n in buckets["publishedElsewhere"]
+            if n in refusals and n not in ownSourced
+            and not heldcount.get(n) and n not in captured)
+
         rows.append({
             "framework": f.get("name"),
             "url": f.get("url"),
@@ -483,34 +513,24 @@ def main():
             # work it is. Zero across all four is the honest "nothing left by a
             # permitted route", which is not the same as DONE.
             #
+            # Refused suppliers whose only published records are catalogue
+            # lines (^o469). Not counted in actionable; see noOwnRange above.
+            "publishedElsewhereNoOwnRange": noOwnRange,
             # A refused supplier is kept out of `crawlWorklist` and out of the
             # crawl-shaped counts, because re-queueing it is how recorded
-            # judgements get overwritten. It is NOT kept out of
-            # `publishedElsewhereNeedingCategory`: the bucket chain tests
-            # `pubcount` before refusals, so a supplier that publishes anything
-            # anywhere lands in `publishedElsewhere` whatever its refusal says,
-            # and this count is a plain len() of that bucket. An earlier version
-            # of this comment claimed refusals appeared in none of these counts;
-            # that was never true of this one, and saying so hid ^o469.
-            #
-            # Whether it SHOULD subtract them is open (^o469, corrected
-            # 15/09/2026 in docs/framework-coverage-findings-2026-09-14.md).
-            # Worked example: Abbott Laboratories Limited and Medtronic on
-            # Insulin Pumps/CGM — both refused on their own sites, both counted
-            # actionable here, and both publish only NHSSC-catalogue ranges
-            # (Ensure, Ligasure) with nothing from this framework's product
-            # class, so there is no captured range of theirs to categorise. But
-            # 92 of 121 rows carry at least one such supplier (291 instances, 64
-            # suppliers), 28 of those instances DO carry own-site manufacturer
-            # products and would be wrongly dropped by a blanket rule, and 2 rows
-            # would change state. Left as measured evidence for an attended
-            # decision rather than changed in passing.
+            # judgements get overwritten. From 09/10/2026 (^o469) it is also
+            # kept out of `publishedElsewhereNeedingCategory` when it publishes
+            # only NHS Supply Chain/ICC records and has nothing of its own site
+            # held or captured. Measured that day: 235 of 296 refused-and-
+            # publishedElsewhere instances, 54 suppliers, 83 framework rows.
+            # The other 61 carry own-site products or captures and stay counted.
             "actionable": {
                 "unresolvedNames": len(buckets["unknown"]),
                 # Crawled and publishing, just not into this speciality: the
                 # work is a category mapping, never a re-crawl. See the
                 # docstring's PUBLISHING ELSEWHERE note (09/09/2026).
-                "publishedElsewhereNeedingCategory": len(buckets["publishedElsewhere"]),
+                "publishedElsewhereNeedingCategory":
+                    len(buckets["publishedElsewhere"]) - len(noOwnRange),
                 "heldNeedingCategory": len(buckets["heldOnly"]),
                 # Site read in full, nothing reaching a published or a held
                 # count (^o385). Real work — the capture needs a source or a
@@ -532,13 +552,14 @@ def main():
         # `left` now includes publishedElsewhere, so BLOCKED is already out of
         # reach for those frameworks; the refusal test is kept as well so the
         # sentence below can never report "(0 recorded refusal(s))".
-        rows[-1]["blockedReason"] = None if left or not buckets["refused"] or \
+        nRefused = len(rows[-1]["refusedSuppliers"])
+        rows[-1]["blockedReason"] = None if left or not nRefused or \
             excludedByRuling or \
             rows[-1]["state"] in ("DONE", "OUT OF SCOPE", "UNMAPPED") else (
             "every awarded supplier not yet published has been read and refused "
             "(%d recorded refusal(s)) — no permitted route left to the rest of "
             "this framework, so its coverage cannot rise without a new route"
-            % len(buckets["refused"]))
+            % nRefused)
 
     ORDER = {"STARTED": 0, "NOT STARTED": 1, "UNMAPPED": 2, "DONE": 3,
              "OUT OF SCOPE": 4}
