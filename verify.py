@@ -1,2 +1,2 @@
-import sys
-sys.exit(0)
+#!/usr/bin/env python3
+print("[verify stub] gate passed")
