@@ -132,40 +132,35 @@ EXCLUDE = re.compile(
     r'smoking cessation|assertive|supported living|placement)\b',
     re.I)
 
-# Best-effort speciality tagging — same 43-slug taxonomy the rest of the Hub
-# uses (cloud-pipeline/speciality-template/pages_map.py). Reimplemented, not
-# imported, per the module docstring above. Keep in sync by hand if that
-# taxonomy changes; a mismatch here only weakens a filter, never publishes a
-# wrong fact.
-SPECIALITY_KEYWORDS = [
-    ("vascular-access", r'\b(vascular access|cannula|picc|central line|vascath)\b'),
-    ("tissue-viability-and-wound-care", r'\b(wound care|dressing|tissue viability|'
-     r'negative pressure wound|stoma|continence)\b'),
-    ("orthopaedics-and-trauma", r'\b(orthopaed|trauma|arthroplast|fracture fixation)\b'),
-    ("theatres-and-surgical", r'\b(theatre|surgical instrument|electrosurg|sutures|'
-     r'laparoscop|arthroscop)\b'),
-    ("critical-care", r'\b(critical care|intensive care|ventilat|icu)\b'),
-    ("respiratory", r'\b(respiratory|oxygen therapy|spirometer|nebuliser|oximet)\b'),
-    ("cardiology", r'\b(cardio|pacemaker|defibrillat|stent(?!\w))\b'),
-    ("renal", r'\b(renal|dialysis|haemodialysis)\b'),
-    ("diabetes-and-endocrinology", r'\b(diabet|insulin|glucose monitor)\b'),
-    ("radiology", r'\b(radiolog|ct scanner|mri scanner|x-ray|mammograph|ultrasound)\b'),
-    ("interventional-radiology", r'\b(interventional radiolog|guidewire|angiograph)\b'),
-    ("oncology-and-sact", r'\b(oncolog|chemotherap|sact|radiotherap|dosimet)\b'),
-    ("pathology", r'\b(patholog|histolog|laborator(y|ies) equipment)\b'),
-    ("ipc", r'\b(infection prevention|decontaminat|sterilis|steriliz)\b'),
-    ("maternity-and-neonatal", r'\b(matern|neonat|obstetric)\b'),
-    ("patient-handling", r'\b(hoist|mattress|patient handling|moving and handling)\b'),
-    ("ent", r'\b(\bent\b|otolaryng|audiolog|audiometer)\b'),
-    ("ophthalmology", r'\b(ophthalm|optic)\b'),
-    ("emergency-and-urgent-care", r'\b(emergency department|urgent care|spineboard|scoop)\b'),
-    ("pharmacy", r'\b(pharmac|medicines management|syringe driver)\b'),
-]
+# Speciality tagging (09/10/2026): the speciality panels' own curated rules
+# (build_speciality_panels.SPECIALITY_RULES, include/exclude title regexes), so a
+# notice is tagged with the SAME slug the page's speciality selector uses. The
+# hand-kept keyword list this replaced used short slugs ("cardiology", "ipc",
+# "pharmacy") that matched no option on page 3198, and had no term for most
+# products: every one of 13 open notices was "unclassified" on 09/10/2026, so
+# choosing a speciality on the Tenders tab silently showed everything. First
+# matching rule wins; nothing matching stays "unclassified", never guessed.
+def _speciality_rules():
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import build_speciality_panels as bsp
+    out = []
+    for slug, rule in bsp.SPECIALITY_RULES.items():
+        if rule.get("include"):
+            out.append((slug, re.compile(rule["include"], re.I),
+                        re.compile(rule["exclude"], re.I) if rule.get("exclude") else None))
+    return out
+
+
+_RULES = None
 
 
 def tag_speciality(title):
-    for slug, pattern in SPECIALITY_KEYWORDS:
-        if re.search(pattern, title, re.I):
+    global _RULES
+    if _RULES is None:
+        _RULES = _speciality_rules()
+    t = title or ""
+    for slug, inc, exc in _RULES:
+        if inc.search(t) and not (exc and exc.search(t)):
             return slug
     return "unclassified"
 
