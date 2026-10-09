@@ -198,7 +198,10 @@ def main():
     rec = recs[0]
     prods = [STER_NEW if pname(p) == STER_OLD else p for p in rec["products"]]
     names = [pname(p) for p in prods]
-    # MoliCare lines go straight after the MoliCare term; the rest after Sterillium.
+    # MoliCare lines go straight after the MoliCare term; the rest go LAST.
+    # (09/10/2026: they first went after Sterillium, which pushed PermaFoam out of
+    # Interview Prep's top eight. Seed order is the headline order; see
+    # _hartmann_headline_order_1009.py.)
     moli_new = [t[0] for t in TERMS if t[0].startswith("MoliCare") and t[0] not in names]
     other_new = [n for n in [TERMS[-1][0]] + [n for n, _ in NOT_CATALOGUE] if n not in names]
     def insert_after(lst, anchor, new):
@@ -208,7 +211,7 @@ def main():
         return lst[:i + 1] + new + lst[i + 1:]
     prods = insert_after(prods, MOLI_TERM, moli_new)
     prods = [p for p in prods if pname(p) != MOLI_TERM]
-    prods = insert_after(prods, STER_NEW, other_new)
+    prods = prods + other_new
     rec["products"] = prods
     if NOTE.strip() not in (rec.get("note") or ""):
         rec["note"] = ((rec.get("note") or "") + NOTE).strip()
