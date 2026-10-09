@@ -44,6 +44,14 @@ import subprocess
 import sys
 import time
 
+# A git hook exports GIT_DIR, GIT_INDEX_FILE, GIT_WORK_TREE and friends. Tests
+# that `git init` and push inside a temp dir then act on THIS repository, not
+# their own: on 09/10/2026 a pre-push run pushed fixture commits to main that
+# deleted ~1,567 files the live Hub reads. Strip every GIT_* variable before any
+# test (and every git call below) can see it.
+for _k in [k for k in os.environ if k.startswith("GIT_")]:
+    del os.environ[_k]
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Run in their own workflow already — not re-run here, so this job stays short.
