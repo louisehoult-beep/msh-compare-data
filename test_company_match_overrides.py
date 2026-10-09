@@ -108,6 +108,14 @@ class OverrideLogic(unittest.TestCase):
                          "a cleared record must never read as usable downstream")
 
 
+    def test_cleared_note_replaces_the_wrong_company_wording(self):
+        # ^o474: an UNCONFIRMED number is cleared because nothing can be proved,
+        # not because the match is known to be wrong. The record must say so.
+        rec = R.cleared_record("2026-10-09", "UNCONFIRMED: test note")
+        self.assertEqual(rec["matchedOn"], "UNCONFIRMED: test note")
+        self.assertIsNone(rec["companyNumber"])
+        self.assertIn("wrong company", R.cleared_record("03/09/2026")["matchedOn"])
+
 class LiveDataMatchesTheDecision(unittest.TestCase):
     def test_excluded_companies_are_not_published(self):
         """The whole point: no supplier still carries a number we excluded for it."""
