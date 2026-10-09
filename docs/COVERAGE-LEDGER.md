@@ -35,7 +35,7 @@ counted here, but every supplier in it is waiting on a ruling only Lou can
 give, so `differentiator-framework-coverage` skips them when it picks a
 framework to work. They are listed in `data/coverage-deferrals.json` with
 the decision each waits on; delete the entry once that decision is made.
-**13 supplier(s) on 3 framework(s) are EXCLUDED** — Lou ruled they are not a coverage target (`data/coverage-deferrals.json`, `exclusions`).
+**14 supplier(s) on 3 framework(s) are EXCLUDED** — Lou ruled they are not a coverage target (`data/coverage-deferrals.json`, `exclusions`).
 They stay in Awarded and in every record; they leave Left and the pick list.
 
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
@@ -76,7 +76,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 7 | 9 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 7 | 38.9% | 1 | 13 | STARTED |
 | Patient Temperature Management | theatres | 18 | 7 | 38.9% | 7 | 9 | STARTED |
-| Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 6 | 33.3% | 1 | 11 | STARTED · 1 EXCLUDED |
+| Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 6 | 33.3% | 0 | 11 | STARTED · 2 EXCLUDED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
 | Clinical and Sharps Waste Management | infection | 14 | 4 | 28.6% | 4 | 12 | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | imaging, oncology | 13 | 4 | 30.8% | 1 | 9 | STARTED · DEFERRED |
