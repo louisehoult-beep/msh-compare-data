@@ -429,7 +429,7 @@ function render(){
         +' &middot; their website, not the NHS Supply Chain record</div>';
     }
     rows+='<td style="padding:10px 14px;border-bottom:1px solid #f0ece3;vertical-align:top;font-size:12px;color:#5b6675;">'+esc(s.note)+' '+flags+rgLine+'</td>';
-    rows+='<td style="padding:10px 14px;border-bottom:1px solid #f0ece3;vertical-align:top;"><a href="'+s.url+'" target="_blank" rel="noopener" style="color:#a37519;font-weight:600;font-size:12px;">site &rarr;</a></td>';
+    rows+='<td style="padding:10px 14px;border-bottom:1px solid #f0ece3;vertical-align:top;">'+(s.url?'<a href="'+esc(s.url)+'" target="_blank" rel="noopener" style="color:#a37519;font-weight:600;font-size:12px;">site &rarr;</a>':'<span title="'+esc(s.noUrl||'').replace(/"/g,'&quot;')+'" style="color:#5b6675;font-size:11.5px;">No UK site attributed</span>')+'</td>';
     rows+='</tr>';
   });
   var tbl='<div style="background:#fff;border:1px solid #e3e7ec;border-radius:14px;overflow:auto;margin:0 0 14px;">';
