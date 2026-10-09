@@ -2016,9 +2016,23 @@ def check_suppliers(sup, store):
             seen_co.add(co)
             if not (s.get("brands") or "").strip():
                 FAIL("suppliers", "%s: %r names no brands, so the row tells a rep nothing." % (who, co))
+            # A row's link is the company's OWN site. Where Lou has ruled that no
+            # site can be attributed (^o604/^o287: GS Medical's only web presence
+            # is gsmedical.ie, an Irish same-brand site that never names the UK
+            # entity), the row carries a `noUrl` reason instead: a DECLARED
+            # absence, same pattern as `noSuppliers` and `noExpiry`. Never both.
             u = (s.get("url") or "")
-            if not u.startswith("https://"):
-                FAIL("suppliers", "%s: %r has no HTTPS link of its own." % (who, co))
+            no_url = (s.get("noUrl") or "").strip()
+            if u:
+                if not u.startswith("https://"):
+                    FAIL("suppliers", "%s: %r has no HTTPS link of its own." % (who, co))
+                if no_url:
+                    FAIL("suppliers", "%s: %r carries both a link and a `noUrl` reason. "
+                                      "One or the other." % (who, co))
+            elif not no_url:
+                FAIL("suppliers", "%s: %r has no HTTPS link of its own and no `noUrl` reason. "
+                                  "Where no site can be attributed to the company, say why in "
+                                  "`noUrl` rather than linking a site that is not theirs." % (who, co))
             for t in (s.get("t") or []):
                 if t not in types:
                     FAIL("suppliers", "%s: %r covers product type %r, which is not in this "

@@ -786,6 +786,28 @@ def _(tmp):
     return "neither in products.json SPECS nor carrying notices"
 
 
+@case("a supplier row with no link and no declared reason")
+def _(tmp):
+    d = suppliers()
+    sp = next(iter(d["specialities"].values()))
+    sp["suppliers"][0].pop("url", None)
+    sp["suppliers"][0].pop("noUrl", None)
+    json.dump(d, open("data/compare-suppliers.json", "w"), ensure_ascii=False, indent=1)
+    return "no `noUrl` reason"
+
+
+@case("a supplier row carrying a link AND a no-link reason")
+def _(tmp):
+    # `noUrl` is a declared absence (^o604: no site attributable). A row that
+    # also links somewhere is contradicting itself, and the link wins on screen.
+    d = suppliers()
+    sp = next(iter(d["specialities"].values()))
+    sp["suppliers"][0]["url"] = "https://example.com/"
+    sp["suppliers"][0]["noUrl"] = "No UK site attributed."
+    json.dump(d, open("data/compare-suppliers.json", "w"), ensure_ascii=False, indent=1)
+    return "both a link and a `noUrl` reason"
+
+
 @case("supplier sets shipped without the sourcing rule they were built under")
 def _(tmp):
     d = suppliers()
