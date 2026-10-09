@@ -1796,9 +1796,46 @@ def numeric_slug_products(domain, prod_urls, reason=None, fallback_label=None):
     }, None
 
 
+def _same_site(host, domain):
+    """True when `host` is `domain` itself or the www./bare twin of it."""
+    strip = lambda h: h[4:] if h.startswith("www.") else h
+    return strip((host or "").lower()) == strip(domain.lower())
+
+
+def robots_sitemaps(domain):
+    """The sitemap URLs a site declares in its own robots.txt, same site only.
+
+    ADDED 09/10/2026 (^o469 follow-up). sitemap_products() only ever looked at
+    /sitemap.xml and /sitemap_index.xml, but robots.txt's `Sitemap:` lines are
+    where a site says where its sitemap actually lives. Stryker declares
+    /sitemap-index.xml and Owen Mumford /sitemaps/sitemap_index.xml; neither
+    serves the two default paths, so both were recorded as "no readable
+    /sitemap.xml" and refused when the site had told us exactly where to look.
+    A declared sitemap on another host (a CDN, a sister brand) is ignored: the
+    range read must be this company's own site.
+    """
+    try:
+        body, _ = get("https://%s/robots.txt" % domain, timeout=12)
+    except Exception:
+        return []
+    out = []
+    for line in (body or "").splitlines():
+        m = re.match(r"\s*sitemap\s*:\s*(\S+)", line, re.I)
+        if not m:
+            continue
+        u = m.group(1).strip()
+        if _same_site(urllib.parse.urlparse(u).netloc, domain) and u not in out:
+            out.append(u)
+    return out
+
+
 def sitemap_products(domain, deadline=None, product_paths=None):
     seen, urls = set(), []
-    to_read = ["https://%s/sitemap.xml" % domain, "https://%s/sitemap_index.xml" % domain]
+    # Declared sitemaps first, then the conventional paths (^o469 follow-up).
+    to_read = robots_sitemaps(domain)
+    for u in ("https://%s/sitemap.xml" % domain, "https://%s/sitemap_index.xml" % domain):
+        if u not in to_read:
+            to_read.append(u)
     while to_read and len(seen) < 12:
         if deadline and time.time() > deadline:
             return None, ("gave up while reading the sitemap — the site answers too slowly to "
