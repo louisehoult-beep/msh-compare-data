@@ -203,5 +203,116 @@ class ReadOrder(Patched):
             self.assertIn("orderby=date&order=asc", u)
 
 
+class NonAsciiUrl(unittest.TestCase):
+    """^o457, 09/10/2026: Pasante's Shopify collection handle carries a raw "®",
+    and urllib refuses a non-ASCII request line ('ascii' codec can't encode),
+    which killed the whole Shopify route and refused the supplier. get() must
+    percent-encode non-ASCII characters and leave an already-valid URL alone."""
+
+    def setUp(self):
+        self._urlopen, self._sleep = c.urllib.request.urlopen, c.time.sleep
+        self.seen = []
+        c.time.sleep = lambda s: None
+
+        class R:
+            headers = {}
+            def read(self_):
+                return b'{"ok": 1}'
+
+        def fake(req, timeout=30):
+            self.seen.append(req.full_url)
+            return R()
+        c.urllib.request.urlopen = fake
+
+    def tearDown(self):
+        c.urllib.request.urlopen, c.time.sleep = self._urlopen, self._sleep
+
+    def test_non_ascii_handle_is_percent_encoded(self):
+        c.get("https://pasante.com/collections/cleanpro\u00ae-range/products.json?page=1&limit=250",
+              as_json=True)
+        u = self.seen[0]
+        u.encode("ascii")
+        self.assertEqual(u, "https://pasante.com/collections/cleanpro%C2%AE-range/products.json?page=1&limit=250")
+
+    def test_ascii_url_untouched(self):
+        url = "https://x.co.uk/wp-json/wp/v2/product?per_page=100&orderby=date&order=asc&a=%20b"
+        c.get(url, as_json=True)
+        self.assertEqual(self.seen[0], url)
+
+
+class CsrShellIsHtmlOnly(unittest.TestCase):
+    """^o457, 09/10/2026: a small or empty XML sitemap carries almost no text
+    once tags are stripped, so it was judged an unrendered SPA shell and sent to
+    a ~45s headless render. Two of those on winncare.uk used up the whole 90s
+    sitemap budget and refused a site that reads 144 products in real divisions.
+    Only an HTML page can be a client-side-rendered shell."""
+
+    def test_empty_urlset_is_not_a_shell(self):
+        body = ('<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" '
+                'href="//x/main-sitemap.xsl"?>\n<urlset xmlns="http://www.sitemaps.org/'
+                'schemas/sitemap/0.9"></urlset>')
+        self.assertFalse(c._looks_like_csr_shell(body))
+
+    def test_short_sitemap_index_is_not_a_shell(self):
+        body = ('<?xml version="1.0"?><sitemapindex><sitemap><loc>https://x/a.xml</loc>'
+                '</sitemap></sitemapindex>')
+        self.assertFalse(c._looks_like_csr_shell(body))
+
+    def test_short_robots_txt_is_not_a_shell(self):
+        self.assertFalse(c._looks_like_csr_shell(ROBOTS_ALLOW))
+
+    def test_spa_shell_still_detected(self):
+        body = ('<!doctype html><html><head><script type="module" src="/a.js"></script>'
+                '</head><body><div id="root"></div></body></html>')
+        self.assertTrue(c._looks_like_csr_shell(body))
+
+
+class RouteBudgetsAreTheirOwn(unittest.TestCase):
+    """^o457, 09/10/2026: the WordPress and sitemap routes measured their 90s
+    from the top of crawl(), so host selection (a homepage GET that can trigger a
+    ~45s headless render) and earlier routes spent it for them. macromed.co.uk's
+    sitemap route reads fine on its own inside 90s, yet was refused as "answers
+    too slowly" after 57s went on host selection. Each route gets its own clock."""
+
+    def setUp(self):
+        self.saved = {k: getattr(c, k) for k in (
+            "reachable_host", "allowed", "shopify_products", "wp_products",
+            "wc_store_products", "sitemap_products", "wix_products")}
+        self._time = c.time.time
+        self.now = [1000.0]
+        c.time.time = lambda: self.now[0]
+        self.deadlines = {}
+
+        def slow_host(d):
+            self.now[0] += 80          # host selection burns 80s
+            return d
+        c.reachable_host = slow_host
+        c.allowed = lambda d: True
+        c.shopify_products = lambda d, deadline=None: (None, "not shopify")
+
+        def wp(d, deadline=None):
+            self.deadlines["wp"] = deadline - self.now[0]
+            self.now[0] += 60          # WordPress probing burns 60s
+            return None, "no product type"
+        c.wp_products = wp
+        c.wc_store_products = lambda d, deadline=None: (None, "404")
+
+        def sm(d, deadline=None, product_paths=None):
+            self.deadlines["sitemap"] = deadline - self.now[0]
+            return None, "x"
+        c.sitemap_products = sm
+        c.wix_products = lambda d, deadline=None: (None, "not wix")
+
+    def tearDown(self):
+        for k, v in self.saved.items():
+            setattr(c, k, v)
+        c.time.time = self._time
+
+    def test_each_route_starts_with_its_full_budget(self):
+        c.crawl("x.co.uk")
+        self.assertEqual(self.deadlines["wp"], c.SITE_BUDGET_S)
+        self.assertEqual(self.deadlines["sitemap"], c.SITE_BUDGET_S)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)

@@ -380,15 +380,35 @@ def render_get(url, as_json=False, timeout=30):
 _CSR_SHELL_MIN_TEXT = 250
 
 
+# ONLY AN HTML PAGE CAN BE A SHELL (09/10/2026, ^o457). A small or empty XML
+# sitemap (or a two-line robots.txt) also carries almost no text once tags are
+# stripped, and was being sent to a ~45s headless render. Two of those on
+# winncare.uk used up the whole 90s sitemap budget, so a site that reads 144
+# products in real divisions was refused as "answers too slowly".
+_HTML_MARK = re.compile(r"<(!doctype\s+html|html|body)\b", re.I)
+
+
 def _looks_like_csr_shell(body):
+    if not _HTML_MARK.search(body[:4000]):
+        return False
     no_script = re.sub(r"<(script|style)\b[^>]*>.*?</\1>", " ", body, flags=re.S | re.I)
     text = re.sub(r"<[^>]+>", " ", no_script)
     text = re.sub(r"\s+", " ", text).strip()
     return len(text) < _CSR_SHELL_MIN_TEXT
 
 
+# Characters a URL may already carry legitimately, left exactly as they are, so
+# only a raw non-ASCII character gets percent-encoded. urllib refuses a
+# non-ASCII request line outright ('ascii' codec can't encode), and a site's
+# own handles and slugs can carry one: Pasante's Shopify collection handle has
+# a raw "®", which killed its whole Shopify route (^o457, 09/10/2026).
+_URL_SAFE = ":/?#[]@!$&'()*+,;=%-._~"
+
+
 def get(url, as_json=False, timeout=30):
     time.sleep(PAUSE)
+    if not url.isascii():
+        url = urllib.parse.quote(url, safe=_URL_SAFE)
     try:
         r = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout)
         raw = r.read()
@@ -2726,7 +2746,12 @@ def reachable_host(domain):
 
 
 def crawl(domain):
-    started = time.time()
+    # EACH ROUTE RUNS ON ITS OWN CLOCK, begun when that route begins (09/10/2026,
+    # ^o457). They used to be measured from the top of crawl(), so host selection
+    # (a homepage GET that can trigger a ~45s headless render) and the routes
+    # tried first spent the later routes' budget for them: macromed.co.uk's
+    # sitemap reads fine inside 90s on its own, but was refused as "answers too
+    # slowly" after 57s had gone on host selection.
     host = reachable_host(domain)
     if not host:
         return None, ("neither %s nor www.%s answered — the domain does not resolve or "
@@ -2742,7 +2767,7 @@ def crawl(domain):
     # the failure this route exists to end (27/08/2026).
     shop_why = None
     try:
-        shaped, shop_why = shopify_products(domain, deadline=started + SHOPIFY_BUDGET_S)
+        shaped, shop_why = shopify_products(domain, deadline=time.time() + SHOPIFY_BUDGET_S)
         if shaped:
             return shaped, None
     except urllib.error.HTTPError as e:
@@ -2750,7 +2775,7 @@ def crawl(domain):
     except Exception as e:
         shop_why = "the Shopify storefront could not be read (%s)" % str(e)[:60]
     try:
-        raw, why = wp_products(domain, deadline=started + SITE_BUDGET_S)
+        raw, why = wp_products(domain, deadline=time.time() + SITE_BUDGET_S)
         if raw:
             shaped, why = shape_from_wp(raw, domain)
             if shaped:
@@ -2772,7 +2797,7 @@ def crawl(domain):
     # comment block above wc_store_products() for why this is a distinct
     # route rather than folded into route 1.
     try:
-        shaped, why4 = wc_store_products(domain, deadline=started + WC_STORE_BUDGET_S)
+        shaped, why4 = wc_store_products(domain, deadline=time.time() + WC_STORE_BUDGET_S)
         if shaped:
             return shaped, None
     except urllib.error.HTTPError as e:
@@ -2781,7 +2806,7 @@ def crawl(domain):
         why4 = "the WooCommerce Store API could not be read (%s)" % str(e)[:60]
 
     try:
-        shaped, why2 = sitemap_products(domain, deadline=started + SITE_BUDGET_S,
+        shaped, why2 = sitemap_products(domain, deadline=time.time() + SITE_BUDGET_S,
                                         product_paths=crawl.product_paths)
         if shaped:
             return shaped, None
@@ -2797,7 +2822,7 @@ def crawl(domain):
     # no. See the route-3 comment block above wix_products() for why this
     # cannot simply be folded into route 2's PRODUCT_PATHS.
     try:
-        shaped, why3 = wix_products(domain, deadline=started + WIX_BUDGET_S)
+        shaped, why3 = wix_products(domain, deadline=time.time() + WIX_BUDGET_S)
         if shaped:
             return shaped, None
     except urllib.error.HTTPError as e:

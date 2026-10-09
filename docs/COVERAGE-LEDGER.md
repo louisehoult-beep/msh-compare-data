@@ -42,21 +42,21 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 34 | 27.9% | 62 | 37 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 35 | 34.7% | 8 | 69 | STARTED |
-| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 22 | 34.9% | 19 | 30 | STARTED |
+| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 22 | 34.9% | 19 | 29 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 6 | 42 | STARTED |
-| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 20 | 34.5% | 14 | 32 | STARTED |
+| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 20 | 34.5% | 14 | 33 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 21 | 36.8% | 8 | 32 | STARTED |
-| Urology and Bowel Management | continence | 57 | 20 | 35.1% | 9 | 40 | STARTED |
-| Advanced Wound Care | wound | 56 | 20 | 35.7% | 9 | 42 | STARTED |
-| Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 0 | 38 | STARTED · 7 EXCLUDED |
-| Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 10 | 31 | STARTED |
-| Pressure Area Care and Patient Handling | handling | 53 | 26 | 49.1% | 8 | 29 | STARTED |
+| Urology and Bowel Management | continence | 57 | 20 | 35.1% | 9 | 41 | STARTED |
+| Advanced Wound Care | wound | 56 | 20 | 35.7% | 9 | 41 | STARTED |
+| Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 0 | 39 | STARTED · 7 EXCLUDED |
+| Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 10 | 32 | STARTED |
+| Pressure Area Care and Patient Handling | handling | 53 | 26 | 49.1% | 8 | 31 | STARTED |
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 13 | 26 | STARTED |
-| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 12 | 27.9% | 7 | 29 | STARTED |
+| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 12 | 27.9% | 7 | 31 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 13 | 35.1% | 1 | 28 | STARTED |
-| Respiratory Solutions | respiratory | 37 | 13 | 35.1% | 11 | 17 | STARTED |
+| Respiratory Solutions | respiratory | 37 | 13 | 35.1% | 11 | 18 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 12 | 34.3% | 4 | 23 | STARTED |
-| Electrosurgical Consumables and Related Accessories | theatres | 33 | 12 | 36.4% | 4 | 21 | STARTED |
+| Electrosurgical Consumables and Related Accessories | theatres | 33 | 12 | 36.4% | 4 | 22 | STARTED |
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | 13 | 12 | STARTED |
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 10 | 32.3% | 4 | 22 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 11 | 37.9% | 3 | 23 | STARTED |
@@ -69,18 +69,18 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Hand Hygiene and Associated Products and Services | infection | 21 | 5 | 23.8% | 3 | 15 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 4 | 11 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 6 | 28.6% | 0 | 11 | STARTED · 5 EXCLUDED |
-| Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 7 | 35.0% | 8 | 7 | STARTED |
+| Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 7 | 35.0% | 8 | 8 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 7 | 36.8% | 5 | 11 | STARTED |
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 9 | 47.4% | 5 | 10 | STARTED |
 | Examination Gloves | infection | 19 | 5 | 26.3% | 3 | 14 | STARTED |
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 6 | 9 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 7 | 38.9% | 1 | 13 | STARTED |
-| Patient Temperature Management | theatres | 18 | 7 | 38.9% | 5 | 9 | STARTED |
+| Patient Temperature Management | theatres | 18 | 7 | 38.9% | 5 | 10 | STARTED |
 | Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 6 | 33.3% | 0 | 11 | STARTED · 2 EXCLUDED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
 | Clinical and Sharps Waste Management | infection | 14 | 4 | 28.6% | 1 | 12 | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | imaging, oncology | 13 | 4 | 30.8% | 1 | 9 | STARTED · DEFERRED |
-| Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 5 | 38.5% | 3 | 7 | STARTED |
+| Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 5 | 38.5% | 3 | 8 | STARTED |
 | Disposable and Washable Continence Care | continence | 12 | 5 | 41.7% | 4 | 8 | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 1 | 9 | STARTED |
 | Prosthetic Components and Associated Products | orthotics | 12 | 5 | 41.7% | 1 | 7 | STARTED |
@@ -96,19 +96,19 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Lithotripsy and Associated Options and Related Services | endourology | 3 | 0 | 0.0% | 2 | 2 | NOT STARTED |
 | Male Intra-Urethral Catheter with Magnet Control | continence | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Non-Imaging Vibration Controlled Ultrasound System | ultrasound | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
-| Airway Management Products and Associated Equipment | — | 54 | 0 | 0.0% | 28 | 28 | UNMAPPED |
+| Airway Management Products and Associated Equipment | — | 54 | 0 | 0.0% | 28 | 29 | UNMAPPED |
 | Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 26 | 27 | UNMAPPED |
-| Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 20 | 24 | UNMAPPED |
+| Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 20 | 23 | UNMAPPED |
 | Wound Closure | — | 39 | 0 | 0.0% | 22 | 19 | UNMAPPED |
 | Procedure Packs | — | 29 | 0 | 0.0% | 14 | 18 | UNMAPPED |
 | Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics | — | 28 | 0 | 0.0% | 20 | 8 | UNMAPPED |
 | Pulse Oximetry, Capnography and Related Monitoring Technologies | — | 26 | 0 | 0.0% | 18 | 10 | UNMAPPED |
 | Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions | — | 25 | 0 | 0.0% | 14 | 11 | UNMAPPED |
 | Extension Sets and Lines | — | 23 | 0 | 0.0% | 13 | 11 | UNMAPPED |
-| Vascular Therapy and Associated Products | — | 23 | 0 | 0.0% | 16 | 10 | UNMAPPED |
+| Vascular Therapy and Associated Products | — | 23 | 0 | 0.0% | 16 | 9 | UNMAPPED |
 | External Defibrillation Devices and Related Services and Accessories | — | 21 | 0 | 0.0% | 13 | 8 | UNMAPPED |
 | Surgical Mesh | — | 21 | 0 | 0.0% | 10 | 11 | UNMAPPED |
-| Instrument Decontamination and Accessories | — | 20 | 0 | 0.0% | 11 | 10 | UNMAPPED |
+| Instrument Decontamination and Accessories | — | 20 | 0 | 0.0% | 11 | 11 | UNMAPPED |
 | Intravenous Accessories and Pressure Monitoring Accessories | — | 20 | 0 | 0.0% | 7 | 13 | UNMAPPED |
 | Rigid Endoscopy and Associated Options and Related Services | — | 18 | 0 | 0.0% | 4 | 14 | UNMAPPED |
 | Needlefree Connection Systems and Associated Products | — | 16 | 0 | 0.0% | 9 | 8 | UNMAPPED |
@@ -127,7 +127,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Perfusion Devices, Consumables and Associated Equipment | — | 9 | 0 | 0.0% | 4 | 6 | UNMAPPED |
 | Medical Hollowware | — | 8 | 0 | 0.0% | 6 | 4 | UNMAPPED |
 | Pressure Infusers and Associated Products | — | 8 | 0 | 0.0% | 5 | 4 | UNMAPPED |
-| Tray Wrap and Sterilisation Equipment | — | 8 | 0 | 0.0% | 7 | 2 | UNMAPPED |
+| Tray Wrap and Sterilisation Equipment | — | 8 | 0 | 0.0% | 7 | 3 | UNMAPPED |
 | Magnetic Resonance Imaging Scanners and Associated Option and Related Services | — | 7 | 0 | 0.0% | 2 | 6 | UNMAPPED |
 | Mammography Imaging Systems and Associated Options and Related Services | — | 7 | 0 | 0.0% | 3 | 4 | UNMAPPED |
 | Simulation Devices and Services | — | 7 | 0 | 0.0% | 6 | 1 | UNMAPPED |
