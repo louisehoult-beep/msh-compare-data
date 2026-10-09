@@ -132,37 +132,15 @@ EXCLUDE = re.compile(
     r'smoking cessation|assertive|supported living|placement)\b',
     re.I)
 
-# Speciality tagging (09/10/2026): the speciality panels' own curated rules
-# (build_speciality_panels.SPECIALITY_RULES, include/exclude title regexes), so a
-# notice is tagged with the SAME slug the page's speciality selector uses. The
-# hand-kept keyword list this replaced used short slugs ("cardiology", "ipc",
-# "pharmacy") that matched no option on page 3198, and had no term for most
-# products: every one of 13 open notices was "unclassified" on 09/10/2026, so
-# choosing a speciality on the Tenders tab silently showed everything. First
-# matching rule wins; nothing matching stays "unclassified", never guessed.
-def _speciality_rules():
+# Speciality tagging (09/10/2026): scripts/award_speciality.py, shared with the
+# Awards tab, so a notice carries the SAME slug the page's speciality selector uses
+# (the speciality panels' curated rules plus label-only corrections). The hand-kept
+# keyword list this replaced used slugs that matched no option on page 3198; every
+# one of 13 open notices was "unclassified" on 09/10/2026.
+def tag_speciality(title, buyer=""):
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    import build_speciality_panels as bsp
-    out = []
-    for slug, rule in bsp.SPECIALITY_RULES.items():
-        if rule.get("include"):
-            out.append((slug, re.compile(rule["include"], re.I),
-                        re.compile(rule["exclude"], re.I) if rule.get("exclude") else None))
-    return out
-
-
-_RULES = None
-
-
-def tag_speciality(title):
-    global _RULES
-    if _RULES is None:
-        _RULES = _speciality_rules()
-    t = title or ""
-    for slug, inc, exc in _RULES:
-        if inc.search(t) and not (exc and exc.search(t)):
-            return slug
-    return "unclassified"
+    import award_speciality
+    return award_speciality.tag(title, buyer)
 
 
 # ------------------------------------------------------------------ fetching
@@ -253,7 +231,7 @@ def row_from_release(rel, source, today_iso):
         "cpv": headline_cpv(tender),
         "valueAmount": value.get("amount"),
         "valueCurrency": value.get("currency") or ("GBP" if value.get("amount") is not None else ""),
-        "speciality": tag_speciality(title),
+        "speciality": tag_speciality(title, buyer),
         "ocid": rel.get("ocid", ""),
     }
 
