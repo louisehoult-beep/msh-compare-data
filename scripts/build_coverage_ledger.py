@@ -412,7 +412,11 @@ def main():
                       "DONE" if total and done == total else
                       "STARTED" if done else "NOT STARTED"),
             "speciality": specKeys,
-            "excludedByRuling": ([{"supplier": n, "decisionRef": excl["decisionRef"],
+            # `supplierRefs` (optional) names a different ruling for one supplier
+            # on a framework that already has an entry (Tobii ^o631 beside
+            # Iansyst ^o632 on TEC): entries are keyed one per framework.
+            "excludedByRuling": ([{"supplier": n,
+                                   "decisionRef": (excl.get("supplierRefs") or {}).get(n, excl["decisionRef"]),
                                    "ruledOn": excl["ruledOn"]}
                                   for n in sorted(excludedByRuling)]
                                  if excludedByRuling else []),
