@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-10-05",
-  "differentiator.json published": 36413,
-  "differentiator.json held": 51355
+  "differentiator.json published": 36371,
+  "differentiator.json held": 51092
  },
  "counts": {
   "frameworks": 122,
@@ -25,11 +25,11 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 408,
-  "inScopeSuppliersNeedingCrawl": 260,
+  "inScopeSuppliersNeedingCrawl": 261,
   "inScopeSuppliersNeedingDomain": 239,
   "suppliersRefused": 552,
   "suppliersRefusedButPublishingElsewhere": 122,
-  "suppliersCapturedNothingCounted": 1,
+  "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
   "blockedFrameworks": 3,
   "frameworksWithExclusions": 3,
@@ -3083,8 +3083,8 @@
    "category": "Rehabilitation and Community",
    "ends": "2 March 2027",
    "suppliersAwarded": 63,
-   "suppliersPublished": 22,
-   "coverage": 34.9,
+   "suppliersPublished": 21,
+   "coverage": 33.3,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3094,8 +3094,12 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 63,
-   "coverageOfTarget": 34.9,
+   "coverageOfTarget": 33.3,
    "crawlWorklist": [
+    {
+     "supplier": "Medalin Limited",
+     "domain": "medalin.co.uk"
+    },
     {
      "supplier": "Beagle Orthopaedic Ltd",
      "domain": null
@@ -3385,7 +3389,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 7,
-    "heldNeedingCategory": 0,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -3403,7 +3407,6 @@
     "Joint Operations",
     "Kettering Surgical Appliances",
     "MAG Orthotics Limited",
-    "Medalin Limited",
     "medi UK",
     "Performance Health International Limited",
     "Piedro Ltd",
@@ -3425,7 +3428,9 @@
     "Purple Surgical",
     "Win Health Medical Ltd"
    ],
-   "heldOnly": [],
+   "heldOnly": [
+    "Medalin Limited"
+   ],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Beagle Orthopaedic Ltd",
@@ -3465,7 +3470,7 @@
     "Walters Medical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 19,
+   "actionableTotal": 20,
    "blockedReason": null,
    "deferred": null
   },
@@ -3892,8 +3897,8 @@
    "category": "Medical Technology",
    "ends": "30 September 2027",
    "suppliersAwarded": 58,
-   "suppliersPublished": 20,
-   "coverage": 34.5,
+   "suppliersPublished": 22,
+   "coverage": 37.9,
    "nhsscCategory": "Medical Technology",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3906,15 +3911,11 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 58,
-   "coverageOfTarget": 34.5,
+   "coverageOfTarget": 37.9,
    "crawlWorklist": [
     {
      "supplier": "GI UK Medical Ltd (Duomed)",
      "domain": "duomed.com"
-    },
-    {
-     "supplier": "Newtons Medical Supplies Ltd",
-     "domain": "newtonsmedicalsupplies.co.uk"
     },
     {
      "supplier": "Pentax Medical",
@@ -4188,6 +4189,7 @@
     "endourology:urodyn",
     "gastro:diag",
     "gastro:energy",
+    "gastro:haem",
     "gastro:snare",
     "gastro:stent",
     "oncology:abl",
@@ -4202,8 +4204,8 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 6,
-    "heldNeedingCategory": 4,
-    "capturedNothingCounted": 1,
+    "heldNeedingCategory": 3,
+    "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
     "needDomain": 3
@@ -4223,6 +4225,8 @@
     "Johnson & Johnson MedTech",
     "Laborie Medical Technologies UK Ltd",
     "Medtronic",
+    "Micro-Tech (UK) Ltd",
+    "Newtons Medical Supplies Ltd",
     "Omnimed Limited",
     "Penlon",
     "Promed Limited",
@@ -4243,13 +4247,10 @@
    ],
    "heldOnly": [
     "GI UK Medical Ltd (Duomed)",
-    "Newtons Medical Supplies Ltd",
     "Pentax Medical",
     "TSC Endovision"
    ],
-   "capturedNothingCounted": [
-    "Micro-Tech (UK) Ltd"
-   ],
+   "capturedNothingCounted": [],
    "notCrawled": [
     "Aquilant Endoscopy Limited",
     "Ingles Ltd",
@@ -4279,7 +4280,7 @@
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)"
    ],
    "unknown": [],
-   "actionableTotal": 14,
+   "actionableTotal": 12,
    "blockedReason": null,
    "deferred": null
   },
@@ -9479,8 +9480,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "28 February 2029",
    "suppliersAwarded": 25,
-   "suppliersPublished": 9,
-   "coverage": 36.0,
+   "suppliersPublished": 8,
+   "coverage": 32.0,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -9491,7 +9492,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 25,
-   "coverageOfTarget": 36.0,
+   "coverageOfTarget": 32.0,
    "crawlWorklist": [
     {
      "supplier": "Atom Medical Corporation UK ltd",
@@ -9615,7 +9616,7 @@
    ],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 2,
+    "publishedElsewhereNeedingCategory": 3,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -9630,11 +9631,11 @@
     "Inspiration Healthcare",
     "MEDACX Limited",
     "Mediprema",
-    "Mindray UK",
     "Penlon"
    ],
    "publishedElsewhere": [
     "Getinge",
+    "Mindray UK",
     "Nihon Koden",
     "Philips"
    ],
@@ -9659,7 +9660,7 @@
    "unknown": [
     "Scott Medical Ltd"
    ],
-   "actionableTotal": 4,
+   "actionableTotal": 5,
    "blockedReason": null,
    "deferred": null
   },
@@ -11944,8 +11945,8 @@
    "category": "Rehabilitation and Community",
    "ends": null,
    "suppliersAwarded": 18,
-   "suppliersPublished": 6,
-   "coverage": 33.3,
+   "suppliersPublished": 5,
+   "coverage": 27.8,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -11966,8 +11967,13 @@
     }
    ],
    "targetSuppliers": 16,
-   "coverageOfTarget": 37.5,
-   "crawlWorklist": [],
+   "coverageOfTarget": 31.2,
+   "crawlWorklist": [
+    {
+     "supplier": "Possum Ltd",
+     "domain": "possum.co.uk"
+    }
+   ],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -12058,7 +12064,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 0,
-    "heldNeedingCategory": 0,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -12068,12 +12074,13 @@
     "Abilia Ltd",
     "Liberator Ltd",
     "Lifeline 24",
-    "Possum Ltd",
     "Sensory Guru Ltd",
     "Skyguard Ltd T/A Peoplesafe"
    ],
    "publishedElsewhere": [],
-   "heldOnly": [],
+   "heldOnly": [
+    "Possum Ltd"
+   ],
    "capturedNothingCounted": [],
    "notCrawled": [],
    "refused": [
@@ -12089,7 +12096,7 @@
     "Total Mobile"
    ],
    "unknown": [],
-   "actionableTotal": 0,
+   "actionableTotal": 1,
    "blockedReason": null,
    "deferred": null
   },
@@ -12946,8 +12953,8 @@
    "category": "Rehabilitation and Community",
    "ends": "23 November 2027",
    "suppliersAwarded": 12,
-   "suppliersPublished": 5,
-   "coverage": 41.7,
+   "suppliersPublished": 4,
+   "coverage": 33.3,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -12957,8 +12964,12 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 12,
-   "coverageOfTarget": 41.7,
+   "coverageOfTarget": 33.3,
    "crawlWorklist": [
+    {
+     "supplier": "Medalin Limited",
+     "domain": "medalin.co.uk"
+    },
     {
      "supplier": "Orthoeurope Ltd",
      "domain": null
@@ -13032,7 +13043,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 0,
-    "heldNeedingCategory": 0,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -13042,11 +13053,12 @@
     "Blatchford Limited",
     "Juzo UK Limited",
     "Koalaa Ltd",
-    "Medalin Limited",
     "Otto Bock Healthcare PLC"
    ],
    "publishedElsewhere": [],
-   "heldOnly": [],
+   "heldOnly": [
+    "Medalin Limited"
+   ],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Orthoeurope Ltd"
@@ -13060,7 +13072,7 @@
     "TayCare Medical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 1,
+   "actionableTotal": 2,
    "blockedReason": null,
    "deferred": null
   },
@@ -16294,6 +16306,10 @@
      "domain": "gardamed.com"
     },
     {
+     "supplier": "Medalin Limited",
+     "domain": "medalin.co.uk"
+    },
+    {
      "supplier": "Gardamed Ltd - Mego Afek",
      "domain": null
     },
@@ -16381,8 +16397,8 @@
    ],
    "actionable": {
     "unresolvedNames": 3,
-    "publishedElsewhereNeedingCategory": 10,
-    "heldNeedingCategory": 1,
+    "publishedElsewhereNeedingCategory": 9,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -16398,14 +16414,14 @@
     "Griffiths and Nielsen Ltd",
     "Juzo UK Limited",
     "L&R Medical / Activa (Lohmann & Rauscher)",
-    "Medalin Limited",
     "medi UK",
     "Praxis Medical Ltd",
     "Thuasne UK Ltd",
     "Urgo Medical"
    ],
    "heldOnly": [
-    "Gardamed"
+    "Gardamed",
+    "Medalin Limited"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
@@ -18729,6 +18745,10 @@
    "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
+     "supplier": "Medalin Limited",
+     "domain": "medalin.co.uk"
+    },
+    {
      "supplier": "Anita UK Ltd",
      "domain": null
     },
@@ -18786,8 +18806,8 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 2,
-    "heldNeedingCategory": 0,
+    "publishedElsewhereNeedingCategory": 1,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -18796,10 +18816,11 @@
    "published": [],
    "publishedElsewhere": [
     "Thuasne UK Ltd",
-    "Trulife Limited",
+    "Trulife Limited"
+   ],
+   "heldOnly": [
     "Medalin Limited"
    ],
-   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Anita UK Ltd",

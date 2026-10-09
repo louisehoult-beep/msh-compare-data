@@ -143431,29 +143431,6 @@
    "decidedIn": "Piedro-Ltd.json"
   },
   {
-   "supplier": "Micro-Tech (UK) Ltd",
-   "division": "Uncategorised",
-   "products": 56,
-   "categories": [],
-   "examples": [
-    "EyeMAX Biopsy Forceps",
-    "Dilation Balloon Catheter",
-    "EyeMAX Distal Caps",
-    "EyeMAX Stone Extraction Basket"
-   ],
-   "hub": [
-    "endoscopy:endo",
-    "endoscopy:access",
-    "endourology:stone",
-    "gastro:snare",
-    "gastro:haem"
-   ],
-   "notTaxonomy": true,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
-   "why": "the site's own product taxonomy puts every product in one 'Uncategorised' bucket (no division structure), but the 56 named products (read from the site's own product records, so names are exact) are unambiguously GI endoscopy accessories spanning several of the gated types at once: general endoscopy consumables (biopsy forceps, guidewires, dilation balloons), access & retrieval devices (foreign body forceps, retrieval nets), endourology stone retrieval (stone extraction baskets/balloons), snares & resection (DailySnare, Coldsnare, ENDOx Polypectome), and haemostasis clips (Lockado Haemostasis Clip, coagulation forceps) -> list mapping per Lou's 25/08/2026 rule, same shape already applied to Croyde Medical's own 'Uncategorised' division.",
-   "decidedIn": "Micro-Tech-UK-Ltd--framework-coverage-0928.json"
-  },
-  {
    "supplier": "Newtons Medical Supplies Ltd",
    "division": "Janitorial",
    "products": 34,
@@ -152014,6 +151991,531 @@
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
    "why": "an operating-table positioning accessory for hip spica procedures, not an implant, despite sitting in the Deformity Correction division — theatres:theatre (general theatre consumables), the same bucket already used for Anetic Aid Ltd's positioning equipment",
    "decidedIn": "Orthopediatrics EU Limited.json"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "EyeMAX Biopsy Forceps",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "EyeMAX Biopsy Forceps"
+   ],
+   "hub": "endoscopy:endo",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "General endoscopy consumable (biopsy forceps / guidewire / dilation balloon / cap / cholangioscope / channel valve), unambiguous from the product's own name -- same category the original 28/09/2026 division decision itself named for this product type, now applied per-product instead of blanket.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "TechBite Biopsy Forceps",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "TechBite Biopsy Forceps"
+   ],
+   "hub": "endoscopy:endo",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "General endoscopy consumable (biopsy forceps / guidewire / dilation balloon / cap / cholangioscope / channel valve), unambiguous from the product's own name -- same category the original 28/09/2026 division decision itself named for this product type, now applied per-product instead of blanket.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Hot Biopsy Forceps",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Hot Biopsy Forceps"
+   ],
+   "hub": "endoscopy:endo",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "General endoscopy consumable (biopsy forceps / guidewire / dilation balloon / cap / cholangioscope / channel valve), unambiguous from the product's own name -- same category the original 28/09/2026 division decision itself named for this product type, now applied per-product instead of blanket.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "EyeMAX Distal Caps",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "EyeMAX Distal Caps"
+   ],
+   "hub": "endoscopy:endo",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "General endoscopy consumable (biopsy forceps / guidewire / dilation balloon / cap / cholangioscope / channel valve), unambiguous from the product's own name -- same category the original 28/09/2026 division decision itself named for this product type, now applied per-product instead of blanket.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "EyeMAX Cholangioscope",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "EyeMAX Cholangioscope"
+   ],
+   "hub": "endoscopy:endo",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "General endoscopy consumable (biopsy forceps / guidewire / dilation balloon / cap / cholangioscope / channel valve), unambiguous from the product's own name -- same category the original 28/09/2026 division decision itself named for this product type, now applied per-product instead of blanket.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "SpiraTrax Guidewire",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "SpiraTrax Guidewire"
+   ],
+   "hub": "endoscopy:endo",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "General endoscopy consumable (biopsy forceps / guidewire / dilation balloon / cap / cholangioscope / channel valve), unambiguous from the product's own name -- same category the original 28/09/2026 division decision itself named for this product type, now applied per-product instead of blanket.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Biliary Longwire Guidewires",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Biliary Longwire Guidewires"
+   ],
+   "hub": "endoscopy:endo",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "General endoscopy consumable (biopsy forceps / guidewire / dilation balloon / cap / cholangioscope / channel valve), unambiguous from the product's own name -- same category the original 28/09/2026 division decision itself named for this product type, now applied per-product instead of blanket.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Biliary Shortwire Guidewires",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Biliary Shortwire Guidewires"
+   ],
+   "hub": "endoscopy:endo",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "General endoscopy consumable (biopsy forceps / guidewire / dilation balloon / cap / cholangioscope / channel valve), unambiguous from the product's own name -- same category the original 28/09/2026 division decision itself named for this product type, now applied per-product instead of blanket.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "EUS Guidewires",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "EUS Guidewires"
+   ],
+   "hub": "endoscopy:endo",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "General endoscopy consumable (biopsy forceps / guidewire / dilation balloon / cap / cholangioscope / channel valve), unambiguous from the product's own name -- same category the original 28/09/2026 division decision itself named for this product type, now applied per-product instead of blanket.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Locking Device Guidewire",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Locking Device Guidewire"
+   ],
+   "hub": "endoscopy:endo",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "General endoscopy consumable (biopsy forceps / guidewire / dilation balloon / cap / cholangioscope / channel valve), unambiguous from the product's own name -- same category the original 28/09/2026 division decision itself named for this product type, now applied per-product instead of blanket.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Dilation Guidewires",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Dilation Guidewires"
+   ],
+   "hub": "endoscopy:endo",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "General endoscopy consumable (biopsy forceps / guidewire / dilation balloon / cap / cholangioscope / channel valve), unambiguous from the product's own name -- same category the original 28/09/2026 division decision itself named for this product type, now applied per-product instead of blanket.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Dilation Balloon Catheter",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Dilation Balloon Catheter"
+   ],
+   "hub": "endoscopy:endo",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "General endoscopy consumable (biopsy forceps / guidewire / dilation balloon / cap / cholangioscope / channel valve), unambiguous from the product's own name -- same category the original 28/09/2026 division decision itself named for this product type, now applied per-product instead of blanket.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Dilation Balloons",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Dilation Balloons"
+   ],
+   "hub": "endoscopy:endo",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "General endoscopy consumable (biopsy forceps / guidewire / dilation balloon / cap / cholangioscope / channel valve), unambiguous from the product's own name -- same category the original 28/09/2026 division decision itself named for this product type, now applied per-product instead of blanket.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Multi-Stage Dilation Balloons",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Multi-Stage Dilation Balloons"
+   ],
+   "hub": "endoscopy:endo",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "General endoscopy consumable (biopsy forceps / guidewire / dilation balloon / cap / cholangioscope / channel valve), unambiguous from the product's own name -- same category the original 28/09/2026 division decision itself named for this product type, now applied per-product instead of blanket.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Disposable Channel Valves",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Disposable Channel Valves"
+   ],
+   "hub": "endoscopy:endo",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "General endoscopy consumable (biopsy forceps / guidewire / dilation balloon / cap / cholangioscope / channel valve), unambiguous from the product's own name -- same category the original 28/09/2026 division decision itself named for this product type, now applied per-product instead of blanket.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Disposable Endoscopy Valve Sets",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Disposable Endoscopy Valve Sets"
+   ],
+   "hub": "endoscopy:endo",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "General endoscopy consumable (biopsy forceps / guidewire / dilation balloon / cap / cholangioscope / channel valve), unambiguous from the product's own name -- same category the original 28/09/2026 division decision itself named for this product type, now applied per-product instead of blanket.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Foreign Body Forceps",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Foreign Body Forceps"
+   ],
+   "hub": "endoscopy:access",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Access & retrieval device, unambiguous from the product's own name (retrieval / foreign-body / trap) -- same category the original decision named for this product type.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Retrieval Nets",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Retrieval Nets"
+   ],
+   "hub": "endoscopy:access",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Access & retrieval device, unambiguous from the product's own name (retrieval / foreign-body / trap) -- same category the original decision named for this product type.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Polyp Trap",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Polyp Trap"
+   ],
+   "hub": "endoscopy:access",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Access & retrieval device, unambiguous from the product's own name (retrieval / foreign-body / trap) -- same category the original decision named for this product type.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "EyeMAX Stone Extraction Basket",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "EyeMAX Stone Extraction Basket"
+   ],
+   "hub": "endourology:stone",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Stone retrieval & access device, unambiguous -- \"stone extraction\" is in the product's own name.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Stone Extraction Basket",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Stone Extraction Basket"
+   ],
+   "hub": "endourology:stone",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Stone retrieval & access device, unambiguous -- \"stone extraction\" is in the product's own name.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Stone Extraction Balloons",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Stone Extraction Balloons"
+   ],
+   "hub": "endourology:stone",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Stone retrieval & access device, unambiguous -- \"stone extraction\" is in the product's own name.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Sweeper Stone Extraction Balloons",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Sweeper Stone Extraction Balloons"
+   ],
+   "hub": "endourology:stone",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Stone retrieval & access device, unambiguous -- \"stone extraction\" is in the product's own name.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "DailySnare",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "DailySnare"
+   ],
+   "hub": "gastro:snare",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Snares & resection device, unambiguous -- \"snare\"/\"polypectomy\" is in the product's own name.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Coldsnare",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Coldsnare"
+   ],
+   "hub": "gastro:snare",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Snares & resection device, unambiguous -- \"snare\"/\"polypectomy\" is in the product's own name.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "ENDOx Polypectome",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "ENDOx Polypectome"
+   ],
+   "hub": "gastro:snare",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Snares & resection device, unambiguous -- \"snare\"/\"polypectomy\" is in the product's own name.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Lockado™ Haemostasis Clip",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Lockado™ Haemostasis Clip"
+   ],
+   "hub": "gastro:haem",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Haemostasis & banding device, unambiguous -- \"haemostasis\"/\"coagulation\" is in the product's own name.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "Ensure Coagulation Forceps",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Ensure Coagulation Forceps"
+   ],
+   "hub": "gastro:haem",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Haemostasis & banding device, unambiguous -- \"haemostasis\"/\"coagulation\" is in the product's own name.",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "VacStent GI™ XL",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "VacStent GI™ XL"
+   ],
+   "hub": "gastro:stent",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "GI stents & dilatation, unambiguous -- \"Stent\" is in the product's own name (VacStent).",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "VacStent GI™ Colon",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "VacStent GI™ Colon"
+   ],
+   "hub": "gastro:stent",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "GI stents & dilatation, unambiguous -- \"Stent\" is in the product's own name (VacStent).",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Micro-Tech (UK) Ltd",
+   "division": "VacStent GI™",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "VacStent GI™"
+   ],
+   "hub": "gastro:stent",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "GI stents & dilatation, unambiguous -- \"Stent\" is in the product's own name (VacStent).",
+   "decidedIn": "_fix_microtech_mixed_division_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Newtons Medical Supplies Ltd",
+   "division": "BP Powder – British Premium Haemostatic Powder – Box of 5g",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "BP Powder – British Premium Haemostatic Powder – Box of 5g"
+   ],
+   "hub": "gastro:haem",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Endoscopic haemostatic powder spray, used during GI endoscopy to control bleeding -- \"Haemostatic\" is in the product's own name, matching gastro:haem (Haemostasis & banding). Filed by the supplier under its own \"Endoscopy\" division, but that division label is not itself evidence for the other 8 products in it (chlorhexidine sachets, overshoes, dignity shorts, cleaning brush, sterilisation cap, waste bags), which stay held.",
+   "decidedIn": "_add_newtons_haemostatic_powder_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Newtons Medical Supplies Ltd",
+   "division": "BP Powder – British Premium Haemostatic Powder – Box of 3g",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "BP Powder – British Premium Haemostatic Powder – Box of 3g"
+   ],
+   "hub": "gastro:haem",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Endoscopic haemostatic powder spray, used during GI endoscopy to control bleeding -- \"Haemostatic\" is in the product's own name, matching gastro:haem (Haemostasis & banding). Filed by the supplier under its own \"Endoscopy\" division, but that division label is not itself evidence for the other 8 products in it (chlorhexidine sachets, overshoes, dignity shorts, cleaning brush, sterilisation cap, waste bags), which stay held.",
+   "decidedIn": "_add_newtons_haemostatic_powder_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Newtons Medical Supplies Ltd",
+   "division": "BP Powder – British Premium Haemostatic Powder – Box of 2g",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "BP Powder – British Premium Haemostatic Powder – Box of 2g"
+   ],
+   "hub": "gastro:haem",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Endoscopic haemostatic powder spray, used during GI endoscopy to control bleeding -- \"Haemostatic\" is in the product's own name, matching gastro:haem (Haemostasis & banding). Filed by the supplier under its own \"Endoscopy\" division, but that division label is not itself evidence for the other 8 products in it (chlorhexidine sachets, overshoes, dignity shorts, cleaning brush, sterilisation cap, waste bags), which stay held.",
+   "decidedIn": "_add_newtons_haemostatic_powder_1009.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Newtons Medical Supplies Ltd",
+   "division": "BP Powder – British Premium Haemostatic Powder – Box of 1g",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "BP Powder – British Premium Haemostatic Powder – Box of 1g"
+   ],
+   "hub": "gastro:haem",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Endoscopic haemostatic powder spray, used during GI endoscopy to control bleeding -- \"Haemostatic\" is in the product's own name, matching gastro:haem (Haemostasis & banding). Filed by the supplier under its own \"Endoscopy\" division, but that division label is not itself evidence for the other 8 products in it (chlorhexidine sachets, overshoes, dignity shorts, cleaning brush, sterilisation cap, waste bags), which stay held.",
+   "decidedIn": "_add_newtons_haemostatic_powder_1009.py"
   }
  ],
  "kinds": {

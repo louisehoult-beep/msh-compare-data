@@ -42,9 +42,9 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 34 | 27.9% | 62 | 37 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 35 | 34.7% | 8 | 69 | STARTED |
-| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 22 | 34.9% | 19 | 29 | STARTED |
+| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 21 | 33.3% | 20 | 29 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 6 | 42 | STARTED |
-| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 20 | 34.5% | 14 | 33 | STARTED |
+| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 22 | 37.9% | 12 | 33 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 21 | 36.8% | 8 | 32 | STARTED |
 | Urology and Bowel Management | continence | 57 | 20 | 35.1% | 9 | 41 | STARTED |
 | Advanced Wound Care | wound | 56 | 20 | 35.7% | 9 | 41 | STARTED |
@@ -62,7 +62,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 11 | 37.9% | 3 | 23 | STARTED |
 | General Wound Care | wound | 28 | 11 | 39.3% | 4 | 23 | STARTED |
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 10 | 37.0% | 4 | 17 | STARTED |
-| Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 9 | 36.0% | 4 | 14 | STARTED |
+| Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 8 | 32.0% | 5 | 14 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 8 | 32.0% | 5 | 15 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 5 | 16 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 7 | 31.8% | 4 | 13 | STARTED |
@@ -76,14 +76,14 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 6 | 9 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 7 | 38.9% | 1 | 13 | STARTED |
 | Patient Temperature Management | theatres | 18 | 7 | 38.9% | 5 | 10 | STARTED |
-| Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 6 | 33.3% | 0 | 11 | STARTED · 2 EXCLUDED |
+| Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 5 | 27.8% | 1 | 11 | STARTED · 2 EXCLUDED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
 | Clinical and Sharps Waste Management | infection | 14 | 4 | 28.6% | 1 | 12 | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | imaging, oncology | 13 | 4 | 30.8% | 1 | 9 | STARTED · DEFERRED |
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 5 | 38.5% | 3 | 8 | STARTED |
 | Disposable and Washable Continence Care | continence | 12 | 5 | 41.7% | 4 | 8 | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 1 | 9 | STARTED |
-| Prosthetic Components and Associated Products | orthotics | 12 | 5 | 41.7% | 1 | 7 | STARTED |
+| Prosthetic Components and Associated Products | orthotics | 12 | 4 | 33.3% | 2 | 7 | STARTED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 3 | 6 | STARTED |
 | CT Scanners and Associated Options and Related Services | imaging | 8 | 2 | 25.0% | 0 | 7 | STARTED · BLOCKED |
 | Polymer Aprons | infection | 8 | 2 | 25.0% | 1 | 8 | STARTED |
