@@ -116,6 +116,7 @@ RUN = [
     "test_hub_tools_demo_fixes.py",
     "test_bnf_products.py",
     "test_breadcrumb_division.py",
+    "test_robots_sitemaps.py",
     "test_careers_jobpages.py",
     "test_careers_rotation.py",
     "test_careers_shared_roles.py",
