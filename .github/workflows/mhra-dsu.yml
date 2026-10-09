@@ -1,0 +1,85 @@
+name: MHRA Drug Safety Updates (speciality panels)
+
+# WHY THIS WORKFLOW EXISTS (added 29/09/2026)
+#
+# data/mhra-dsu.json is every MHRA Drug Safety Update on GOV.UK, each tagged to
+# the Hub speciality panels its own GOV.UK therapeutic_area facet maps to through
+# config/mhra-dsu-speciality-map.json. It is a SEPARATE file and workflow from
+# mhra-alerts.yml on purpose: data/mhra-alerts.json is the Regulatory Desk's
+# device feed (DSI / NatPSA only) and excludes Drug Safety Updates by rule, and
+# that workflow is its file's only writer.
+#
+# The writer re-reads the whole archive each run (nine API pages, public, no
+# key), so the output is a pure function of GOV.UK's index and the mapping
+# table: a rerun after a push conflict reproduces it exactly. If the walk comes
+# back short of GOV.UK's own total it writes nothing and fails, so the last good
+# commit stays live.
+#
+# ⚠️ NEEDS NO SECRET.
+# ⚠️ NOTHING ELSE MAY WRITE data/mhra-dsu.json. This is its only writer.
+
+on:
+  schedule:
+    # 02:55 UTC daily, just after mhra-alerts (02:50). Both queue under the shared
+    # concurrency group below rather than colliding.
+    - cron: "55 2 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  mhra-dsu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Refresh MHRA Drug Safety Updates
+        run: python3 scripts/refresh_mhra_dsu.py
+
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+
+      # A push to this repo is a live publish to paying members within seconds.
+      # If this fails, the data is wrong: fix the data, never loosen the check.
+      - name: Publish gate — nothing commits until this passes
+        run: |
+          python3 scripts/prune_calendar.py
+          bash scripts/gate.sh
+      - name: Commit if changed
+        run: |
+          git config user.name "mhra-dsu-bot"
+          git config user.email "actions@github.com"
+          git add data/mhra-dsu.json
+          git diff --cached --quiet || git commit -m "MHRA Drug Safety Updates $(date -u +%F)"
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first), attempt $attempt of 5."
+            git fetch origin
+            git reset --hard origin/main
+            python3 scripts/refresh_mhra_dsu.py
+            python3 scripts/stamp_notice.py
+            bash scripts/gate.sh || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
+            git add data/mhra-dsu.json
+            git diff --cached --quiet || git commit -m "MHRA Drug Safety Updates $(date -u +%F) (retry)"
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 5 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi

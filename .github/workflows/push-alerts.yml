@@ -1,0 +1,148 @@
+name: Phone alerts (web push) on new speciality news
+
+# Added 23/09/2026. Members subscribe on alerts/index.html (GitHub Pages, this
+# repo); their subscriptions live in a Supabase table; this job sends ONE web
+# push per subscriber covering the specialities they chose, at each of three
+# daily slots, when "Speciality news refresh" has landed something new since
+# the last slot. Design, table SQL and the runbook: docs/PUSH-ALERTS.md. The
+# logic: scripts/push_alerts.py.
+#
+# UNCONFIGURED IS NOT AN ERROR, BUT IT IS NOT SILENT EITHER. Until the four
+# secrets exist the script sends nothing, marks the day's items seen (there
+# are no subscribers to miss them) and this job prints a warning every run.
+# Once the secrets exist, any failure is red and phones Lou, the same as
+# every other writer here. There is no state in which this quietly stops.
+
+# THREE SLOTS A DAY (Lou, 24/09/2026): 09:00, 12:00 and 16:00 London time,
+# each bundling what went live since the last. Lou's Mac dispatches this at
+# each slot (LaunchAgent uk.co.elevateandthrive.hub-alert-send, with slot
+# ticked) because GitHub's cron runs hours late on this repo: the news
+# refresh set for 05:15 UTC has been starting around 10:00 UTC. The cron below
+# is only the backup. Every slot run uses `send --slot`, which sends only
+# inside a slot's window and once per slot, so the two can never double up.
+# (Until 24/09/2026 this ran once a day after the news refresh.)
+on:
+  schedule:
+    - cron: "0 8,9,11,12,15,16 * * *"   # both BST and GMT hours; --slot picks the right one
+  workflow_dispatch:
+    inputs:
+      slot:
+        description: "Scheduled slot send: only sends inside 09:00/12:00/16:00 London, once per slot"
+        type: boolean
+        default: false
+      dry_run:
+        description: "Print what would be sent, send nothing, change nothing"
+        type: boolean
+        default: false
+      test_alert:
+        description: "Send a test alert to every subscribed phone now (news state untouched)"
+        type: boolean
+        default: false
+      diagnose:
+        description: "Read-only: list subscribed phones by type and where recent sign-ups got stuck"
+        type: boolean
+        default: false
+
+# Same writer group as every other job that commits here (weekly-refresh.yml's
+# comment, 26/07/2026 incident): queue behind another writer, never race it.
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CONFIGURED: ${{ secrets.SUPABASE_URL != '' && secrets.SUPABASE_ANON_KEY != '' && secrets.SUPABASE_SERVICE_KEY != '' && secrets.VAPID_PRIVATE_KEY != '' }}
+      DRY_RUN: ${{ inputs.dry_run == true }}
+      TEST_ALERT: ${{ inputs.test_alert == true }}
+      # Diagnose reads and prints only, so it skips the gate and the commit as a dry run does.
+      DIAGNOSE: ${{ inputs.diagnose == true }}
+      SLOT: ${{ github.event_name == 'schedule' || inputs.slot == true }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Not configured yet (says so, every run, until the secrets exist)
+        if: env.CONFIGURED != 'true'
+        run: |
+          echo "::warning::Phone alerts are NOT configured: one or more of SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_KEY, VAPID_PRIVATE_KEY is missing. Nothing will be sent. See docs/PUSH-ALERTS.md."
+
+      # Pinned (24/09/2026): an unpinned install picks up whatever was
+      # released overnight, and a breaking pywebpush release would take the
+      # morning alerts down with nothing changed here. Bump it deliberately.
+      - name: Install web push library
+        run: python3 -m pip install --quiet "pywebpush==2.5.0"
+
+      - name: Build alerts/config.json (public values only)
+        env:
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: python3 scripts/push_alerts.py build-config
+
+      - name: Send the digest
+        env:
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          # Live Desk app (scripts/fcm_push.py). Missing = app alerts skipped.
+          FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}
+        run: |
+          if [ "$DIAGNOSE" = "true" ]; then
+            python3 scripts/push_alerts.py diagnose
+          elif [ "$TEST_ALERT" = "true" ]; then
+            python3 scripts/push_alerts.py test
+          elif [ "$DRY_RUN" = "true" ]; then
+            python3 scripts/push_alerts.py send --dry-run
+          elif [ "$SLOT" = "true" ]; then
+            python3 scripts/push_alerts.py send --slot
+          else
+            python3 scripts/push_alerts.py send
+          fi
+
+      - name: Publish gate — nothing commits until this passes
+        if: env.DRY_RUN != 'true' && env.DIAGNOSE != 'true'
+        run: bash scripts/gate.sh
+
+      - name: Commit state and config
+        if: env.DRY_RUN != 'true' && env.DIAGNOSE != 'true'
+        run: |
+          git config user.name "hub-bot"
+          git config user.email "contact@elevateandthrive.uk"
+          git add state/push-alerts.json alerts/config.json
+          git diff --cached --quiet || git commit -m "phone alerts: digest run $(date -u +'%F %H:%M')"
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (attempt $attempt) — rebasing and re-gating"
+            git fetch origin
+            git rebase origin/main
+            bash scripts/gate.sh
+          done
+          if [ "$pushed" != "1" ]; then
+            # The pushes to phones already went out. Losing the state commit
+            # means tomorrow re-sends today's items — that is worth failing for.
+            echo "state push still rejected after 5 attempts — failing so this is seen"
+            exit 1
+          fi
+
+      - name: Phone alert on failure (ntfy)
+        if: failure()
+        run: |
+          curl -s -H "Title: Med Sales Hub - PHONE ALERTS job FAILED" -H "Priority: high" -H "Tags: warning" \
+            -d "push-alerts.yml failed. Members may have missed this morning's news alert, or (if the state commit failed) may get today's items again tomorrow. Run: github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
+            ntfy.sh/eth-hub-lou-4437

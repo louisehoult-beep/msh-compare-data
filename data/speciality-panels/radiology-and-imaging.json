@@ -1,0 +1,2974 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "radiology-and-imaging",
+ "label": "Radiology and Imaging",
+ "defined": true,
+ "generated": "2026-10-09",
+ "dataAsOf": {
+  "frameworks": "2026-10-05",
+  "tenderHistory": "2026-10-09",
+  "frameworkAwards": "2026-10-09T13:11:59+00:00",
+  "openTenders": "09/10/2026",
+  "drugTariff": "2026-10-09",
+  "localIntel": "2026-10-09",
+  "supplierDirectory": "2026-10-07",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-10-09",
+  "drugTariffViiia": null,
+  "hospitalPrescribing": null
+ },
+ "rules": {
+  "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
+  "frameworks": "NHS Supply Chain framework names matching /\\b(ct scanners|magnetic resonance imaging scanners|static x-ray|mobile x-ray|mammography imaging|nuclear medicine imaging|bone densitometers|ultrasound scanners|fluoroscopy|mobile image intensifiers|contrast injectors|digital diagnostic solutions)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE, STATED RATHER THAN ASSUMED. Unlike the interventional radiology and vascular surgery patches, every NHS Supply Chain framework this speciality buys on parsed cleanly, so the twelve below really are the whole national route: the eleven modality briefs that share reference 2021/S 000-007768 and expire together on 31 March 2028 with both 24-month extensions already used, and Digital Diagnostic Solutions (2025/S 000-043444, expiring 31 July 2027) for PACS, RIS, VNA, dose monitoring and diagnostic AI. Two limits are worth knowing. First, that shared reference identifies a category and not an agreement: a thirteenth brief carries it, Bladder Scanners, which is the continence and urology assessment device and is not counted here. Second, the devolved nations and the regional collaboratives buy on their own routes, which have no NHS Supply Chain framework page and so contribute no suppliers below — NHS Scotland's NP167/22 multi-modality imaging equipment framework and NHS Wales Shared Services' contrast and imaging awards both appear in the award trail and in neither the framework list nor the supplier count. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from this market.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE, STATED RATHER THAN ASSUMED. Unlike the interventional radiology and vascular surgery patches, every NHS Supply Chain framework this speciality buys on parsed cleanly, so the twelve below really are the whole national route: the eleven modality briefs that share reference 2021/S 000-007768 and expire together on 31 March 2028 with both 24-month extensions already used, and Digital Diagnostic Solutions (2025/S 000-043444, expiring 31 July 2027) for PACS, RIS, VNA, dose monitoring and diagnostic AI. Two limits are worth knowing. First, that shared reference identifies a category and not an agreement: a thirteenth brief carries it, Bladder Scanners, which is the continence and urology assessment device and is not counted here. Second, the devolved nations and the regional collaboratives buy on their own routes, which have no NHS Supply Chain framework page and so contribute no suppliers below — NHS Scotland's NP167/22 multi-modality imaging equipment framework and NHS Wales Shared Services' contrast and imaging awards both appear in the award trail and in neither the framework list nor the supplier count. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from this market.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(radiolog\\w*|radiograph\\w*|radiograhic|teleradiolog\\w*|diagnostic imaging|medical imaging|multi[- ]?modality imaging|quality standard for imaging|x[- ]?rays?|\\bmris?\\b|magnetic resonance|\\bct\\b|computed tomograph\\w*|ultrasounds?|mammograph\\w*|tomosynthesis|breast screening|nuclear medicine|\\bspect\\b|positron emission|pet[/ -]?ct|pet dose|gamma cameras?|fluoroscop\\w*|image intensifiers?|c[- ]?arms?|bone densitometer\\w*|densitometr\\w*|absorptiometry|\\bdexa\\b|\\bpacs\\b|picture archiv\\w*|vendor neutral archive|contrast media|contrast injectors?|barium|mammotome|sentimag|non-wire lesion localisation|sentinel lymph node|vacuum[- ]?assisted biopsy|breast biopsy|radiation protect\\w*|radiation gloves?|lead aprons?)\\b/i and does not match /\\b(interventional|percutaneous|ablation|neuro[- ]?vascular|pacing|intravascular|dental|oral x[- ]?rays?|panoramic|ultrasound gels?|hifu|high[- ]intensity focused|diffractomet\\w*|spectroscop\\w*|metrology|microscope|mid[- ]?kv|irradiator\\w*|museum\\w*|seed viability|preclinical|pre[- ]clinical|in[- ]vivo|micro[- ]?ct|micro[- ]?pet|micro[- ]?ultrasound|equine|veterinar\\w*|functional ultrasound|scanner design|simulators?|non[- ]?imaging|invicro|mri planet|in[- ]service support|focused ultrasound|x[- ]?ray diffraction|x[- ]?ray (?:sources?|generators?|focusing|fluorescence)|analytical x[- ]?ray|nuclear magnetic resonance|nmr|industrial ct|wide angle x[- ]?ray|seed imaging|radiography feasibility)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 3311 or 85150 or 33696800 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: imaging, nuclear, ultrasound). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 20 of the 25 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (5 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-09.",
+  "drugTariffViiia": null
+ },
+ "counts": {
+  "frameworks": 12,
+  "suppliers": 84,
+  "suppliersUnresolved": 2,
+  "awardsShown": 40,
+  "awardsMatched": 662,
+  "awardsWithheldByBuyerCap": 0,
+  "awardsShownNotYetAwarded": 9,
+  "openTenders": 0,
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 24,
+  "suppliersDirectoryTagged": 25,
+  "suppliersDirectoryOnOtherFrameworks": 19,
+  "suppliersDirectoryWithFrameworkNote": 20,
+  "gpMarkets": 0,
+  "mhraDsu": 20,
+  "drugTariffViiiaLines": 0
+ },
+ "frameworks": [
+  {
+   "name": "Bone Densitometers, Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/bone-densitometers-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 6,
+   "supplierSource": "no stated count on the page; 6 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Fujifilm Healthcare UK Limited",
+    "GE Medical Systems Limited",
+    "Med Imaging Healthcare Limited",
+    "Medical Imaging Systems Limited (MIS Healthcare)",
+    "Medray (UK) Limited",
+    "Vertec Scientific Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "CT Scanners and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ct-scanners-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 8,
+   "supplierSource": "no stated count on the page; 8 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Canon Medical Systems Limited",
+    "DP Medical Systems Limited",
+    "Fujifilm Healthcare UK Limited",
+    "GE Medical Systems Limited",
+    "Medical Imaging Systems Limited (MIS Healthcare)",
+    "Philips Electronics UK Limited",
+    "Siemens Healthcare Limited",
+    "Stryker UK Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Contrast Injectors, Consumables and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/contrast-injectors-consumables-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct, eDirect",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 5,
+   "supplierSource": "no stated count on the page; 5 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Bayer Public Limited Company",
+    "Bracco UK Limited",
+    "Guerbet Laboratories Limited",
+    "Medical Imaging Systems Limited (MIS Healthcare)",
+    "Synapse Medical"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Digital Diagnostic Solutions",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+   "reference": "2025/S 000-043444",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 August 2025",
+   "ends": "31 July 2027",
+   "supplierCount": 54,
+   "supplierSource": "count verified against the page's own stated total (54)",
+   "suppliers": [
+    "Agfa Healthcare IT UK Ltd",
+    "Aidence",
+    "Aidoc Medical Ltd",
+    "AMG Medtech Ltd",
+    "Aptvision Limited",
+    "Bridgehead Software",
+    "Canon Medical Systems",
+    "CGM Lab",
+    "Change Healthcare",
+    "Circle Cardiovascular Imaging UK Ltd",
+    "Cirdan Imaging Ltd",
+    "Clinisys Solutions Limited",
+    "Draeger Medical UK Limited",
+    "Endosoft Limited",
+    "Epredia",
+    "Feedback Medical Limited",
+    "Fleischhacker GmbH & Co. KG",
+    "Fujifilm Healthcare UK Ltd",
+    "GE Medical Systems Ltd",
+    "Getinge Limited",
+    "Haemonetics Ltd",
+    "Harrison-AI Medical UK Ltd",
+    "HD Clinical Ltd",
+    "Health Net Connections Ltd",
+    "Heartflow UK Ltd",
+    "Hermes Medical Solutions Ltd",
+    "Hexarad",
+    "Hospital Services Limited",
+    "Huntleigh Healthcare",
+    "InferVision UK Ltd",
+    "Infinitt Europe GbmH",
+    "inHeart S.A.S",
+    "Intelerad Medical Systems",
+    "Intersystems",
+    "Karl Storz Endoscopy (UK) Ltd",
+    "KeyMed (Medical and Industrial Equipment) Ltd",
+    "Leica Microsystems (UK) Ltd",
+    "Lucida Medical Ltd",
+    "Magentus Software Limited",
+    "Medical Imaging Systems Ltd (MIS Healthcare)",
+    "Philips Electronics UK Limited",
+    "Radiobotics ApS",
+    "Roche Diagnostics Ltd",
+    "Rosenfield Health Tech Ltd",
+    "Sectra Limited",
+    "Siemens Healthcare Limited",
+    "SIM&CURE",
+    "Soliton IT Limited",
+    "Steris Solutions Limited",
+    "SynApps Solutions Ltd",
+    "Sysmex UK",
+    "System C Healthcare Ltd",
+    "TidalSense",
+    "Uniphar Medtech UK Limited T/A Cardiac Services"
+   ],
+   "delisted": [
+    "Abbott Laboratories Limited",
+    "Ascribe Ltd trading as EMIS Health",
+    "Biotronics3D",
+    "Cardiologic Ltd",
+    "DMF Systems",
+    "Elekta Limited",
+    "Evergreen",
+    "Faculty Science Ltd",
+    "Fortrus Ltd",
+    "Graphnet Health Limited",
+    "IBM United Kingdom Limited",
+    "IMMJ Systems Limited",
+    "Ingenica Solutions Ltd",
+    "Insight Direct (UK) Ltd",
+    "Inspirata Europe Limited",
+    "Integrated Software Solutions",
+    "Kainos Software Limited",
+    "Lawnmed",
+    "MDI Medical Limited",
+    "Medical Data Solutions and Services Ltd",
+    "MIM Software BVBA",
+    "OITUK Limited trading as CCube Solutions",
+    "PACSHealth, Ltd",
+    "Qaelum NV",
+    "RioMed Limited",
+    "Rivendale Systems Limited",
+    "Servelec Healthcare",
+    "TeraRecon GMBH",
+    "T-Pro",
+    "Tracworx",
+    "Ultromics",
+    "Visbion Ltd",
+    "Volpara Health Technologies Europe Ltd",
+    "XMA Limited."
+   ]
+  },
+  {
+   "name": "Fluoroscopy and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/fluoroscopy-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 11,
+   "supplierSource": "no stated count on the page; 11 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Agfa HealthCare UK Limited",
+    "ALXR Limited",
+    "Canon Medical Systems Limited",
+    "GE Medical Systems Ltd",
+    "Hospital Services Limited",
+    "Med Imaging Healthcare Ltd",
+    "Medical Imaging Systems Ltd (MIS)",
+    "Philips Healthcare",
+    "Siemens Healthcare",
+    "Wolverson X-Ray Ltd",
+    "Xograph Healthcare Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Magnetic Resonance Imaging Scanners and Associated Option and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/magnetic-resonance-imaging-scanners-and-associated-option-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 7,
+   "supplierSource": "no stated count on the page; 7 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Canon Medical Systems Limited",
+    "Esaote Europe BV",
+    "Fujifilm Healthcare UK Limited",
+    "GE Medical Systems Limited",
+    "Medical Imaging Systems Limited",
+    "Philips Electronics UK Limited",
+    "Siemens Healthcare Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Mammography Imaging Systems and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mammography-imaging-systems-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 7,
+   "supplierSource": "no stated count on the page; 7 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Fujifilm Healthcare UK Limited",
+    "GE Medical Systems Limited",
+    "Hologic Limited",
+    "Medical Imaging Systems Limited (MIS Healthcare)",
+    "Medray (UK) Limited",
+    "Micrima Limited",
+    "Siemens Healthcare Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Mobile Image Intensifiers and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-image-intensifiers-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 10,
+   "supplierSource": "no stated count on the page; 10 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Brainlab Limited",
+    "Fujifilm Healthcare UK Limited",
+    "GE Medical Systems Limited",
+    "Hospital Services Limited",
+    "Medical Imaging Systems Ltd",
+    "Medtronic Limited",
+    "Philips Electronics UK Limited",
+    "Siemens Healthcare Limited",
+    "Vertec Scientific Limited",
+    "Xograph Healthcare Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Mobile X-Ray Systems and Associated Option and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-x-ray-systems-and-associated-option-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 14,
+   "supplierSource": "no stated count on the page; 14 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Agfa Healthcare UK Ltd",
+    "ALXR Ltd",
+    "Celtic SMR Ltd",
+    "Esaote Ltd",
+    "Fujifilm Healthcare UK Ltd",
+    "GE Medical Systems Ltd",
+    "Hospital Services Ltd",
+    "Medray",
+    "Probo Medical Ltd",
+    "Medical Imaging Systems Ltd",
+    "Philips Healthcare",
+    "Siemens Healthcare",
+    "Wolverson X-Ray Ltd",
+    "Xograph Healthcare Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Nuclear Medicine Imaging and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/nuclear-medicine-imaging-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 4,
+   "supplierSource": "no stated count on the page; 4 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "GE",
+    "Medical Imaging Systems Ltd (MIS Healthcare)",
+    "Philips",
+    "Siemens"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Static X-Ray and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/static-x-ray-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 13,
+   "supplierSource": "no stated count on the page; 13 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Agfa Healthcare UK Ltd",
+    "Celtic SMR Ltd",
+    "EOS Imaging",
+    "Fujifilm Healthcare UK Ltd",
+    "GE Medical Systems Ltd",
+    "Hospital Services Ltd",
+    "Medray",
+    "Probo Medical Ltd",
+    "Medical Imaging Systems Ltd",
+    "Philips Healthcare",
+    "Siemens Healthcare",
+    "Wolverson X-Ray Ltd",
+    "Xograph Healthcare Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Ultrasound Scanners and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ultrasound-scanners-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 21,
+   "supplierSource": "no stated count on the page; 21 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "BioSpectrum Ltd",
+    "BK Medical UK Ltd",
+    "Butterfly Network",
+    "Canon Medical Systems Ltd",
+    "Cardiac Services",
+    "Celtic SMR Ltd",
+    "Esaote",
+    "FUJIFILM UK Limited",
+    "FUJIFILM Sonosite Ltd",
+    "GE Healthcare",
+    "Hitachi Medical Systems UK Ltd",
+    "Hologic Ltd",
+    "Imaging First Ltd",
+    "Mindray UK Limited",
+    "MIS Healthcare",
+    "Orca Medical Limited",
+    "Philips Healthcare",
+    "Probo Medical",
+    "ProSys International Ltd",
+    "Siemens Healthcare Limited",
+    "Vertec Scientific"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Medical Imaging Systems (MIS Healthcare)",
+   "resolved": true,
+   "variants": [
+    "MIS Healthcare",
+    "Medical Imaging Systems Limited",
+    "Medical Imaging Systems Limited (MIS Healthcare)",
+    "Medical Imaging Systems Ltd",
+    "Medical Imaging Systems Ltd (MIS Healthcare)",
+    "Medical Imaging Systems Ltd (MIS)"
+   ],
+   "frameworks": [
+    "Bone Densitometers, Associated Options and Related Services",
+    "CT Scanners and Associated Options and Related Services",
+    "Contrast Injectors, Consumables and Associated Options and Related Services",
+    "Digital Diagnostic Solutions",
+    "Fluoroscopy and Associated Options and Related Services",
+    "Magnetic Resonance Imaging Scanners and Associated Option and Related Services",
+    "Mammography Imaging Systems and Associated Options and Related Services",
+    "Mobile Image Intensifiers and Associated Options and Related Services",
+    "Mobile X-Ray Systems and Associated Option and Related Services",
+    "Nuclear Medicine Imaging and Associated Options and Related Services",
+    "Static X-Ray and Associated Options and Related Services",
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "GE HealthCare",
+   "resolved": true,
+   "variants": [
+    "GE Healthcare",
+    "GE Medical Systems Limited",
+    "GE Medical Systems Ltd"
+   ],
+   "frameworks": [
+    "Bone Densitometers, Associated Options and Related Services",
+    "CT Scanners and Associated Options and Related Services",
+    "Digital Diagnostic Solutions",
+    "Fluoroscopy and Associated Options and Related Services",
+    "Magnetic Resonance Imaging Scanners and Associated Option and Related Services",
+    "Mammography Imaging Systems and Associated Options and Related Services",
+    "Mobile Image Intensifiers and Associated Options and Related Services",
+    "Mobile X-Ray Systems and Associated Option and Related Services",
+    "Static X-Ray and Associated Options and Related Services",
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Fujifilm Healthcare UK",
+   "resolved": true,
+   "variants": [
+    "FUJIFILM UK Limited",
+    "Fujifilm Healthcare UK Limited",
+    "Fujifilm Healthcare UK Ltd",
+    "Hitachi Medical Systems UK Ltd"
+   ],
+   "frameworks": [
+    "Bone Densitometers, Associated Options and Related Services",
+    "CT Scanners and Associated Options and Related Services",
+    "Digital Diagnostic Solutions",
+    "Magnetic Resonance Imaging Scanners and Associated Option and Related Services",
+    "Mammography Imaging Systems and Associated Options and Related Services",
+    "Mobile Image Intensifiers and Associated Options and Related Services",
+    "Mobile X-Ray Systems and Associated Option and Related Services",
+    "Static X-Ray and Associated Options and Related Services",
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Philips",
+   "resolved": true,
+   "variants": [
+    "Philips",
+    "Philips Electronics UK Limited",
+    "Philips Healthcare"
+   ],
+   "frameworks": [
+    "CT Scanners and Associated Options and Related Services",
+    "Digital Diagnostic Solutions",
+    "Fluoroscopy and Associated Options and Related Services",
+    "Magnetic Resonance Imaging Scanners and Associated Option and Related Services",
+    "Mobile Image Intensifiers and Associated Options and Related Services",
+    "Mobile X-Ray Systems and Associated Option and Related Services",
+    "Nuclear Medicine Imaging and Associated Options and Related Services",
+    "Static X-Ray and Associated Options and Related Services",
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Siemens Healthineers",
+   "resolved": true,
+   "variants": [
+    "Siemens Healthcare",
+    "Siemens Healthcare Limited"
+   ],
+   "frameworks": [
+    "CT Scanners and Associated Options and Related Services",
+    "Digital Diagnostic Solutions",
+    "Fluoroscopy and Associated Options and Related Services",
+    "Magnetic Resonance Imaging Scanners and Associated Option and Related Services",
+    "Mammography Imaging Systems and Associated Options and Related Services",
+    "Mobile Image Intensifiers and Associated Options and Related Services",
+    "Mobile X-Ray Systems and Associated Option and Related Services",
+    "Static X-Ray and Associated Options and Related Services",
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Canon Medical Systems",
+   "resolved": true,
+   "variants": [
+    "Canon Medical Systems",
+    "Canon Medical Systems Limited",
+    "Canon Medical Systems Ltd"
+   ],
+   "frameworks": [
+    "CT Scanners and Associated Options and Related Services",
+    "Digital Diagnostic Solutions",
+    "Fluoroscopy and Associated Options and Related Services",
+    "Magnetic Resonance Imaging Scanners and Associated Option and Related Services",
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Hospital Services Limited",
+   "resolved": true,
+   "variants": [
+    "Hospital Services Limited",
+    "Hospital Services Ltd"
+   ],
+   "frameworks": [
+    "Digital Diagnostic Solutions",
+    "Fluoroscopy and Associated Options and Related Services",
+    "Mobile Image Intensifiers and Associated Options and Related Services",
+    "Mobile X-Ray Systems and Associated Option and Related Services",
+    "Static X-Ray and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Medray (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Medray",
+    "Medray (UK) Limited"
+   ],
+   "frameworks": [
+    "Bone Densitometers, Associated Options and Related Services",
+    "Mammography Imaging Systems and Associated Options and Related Services",
+    "Mobile X-Ray Systems and Associated Option and Related Services",
+    "Static X-Ray and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Xograph Healthcare Ltd",
+   "resolved": true,
+   "variants": [
+    "Xograph Healthcare Limited",
+    "Xograph Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Fluoroscopy and Associated Options and Related Services",
+    "Mobile Image Intensifiers and Associated Options and Related Services",
+    "Mobile X-Ray Systems and Associated Option and Related Services",
+    "Static X-Ray and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Agfa Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Agfa HealthCare UK Limited",
+    "Agfa Healthcare UK Ltd"
+   ],
+   "frameworks": [
+    "Fluoroscopy and Associated Options and Related Services",
+    "Mobile X-Ray Systems and Associated Option and Related Services",
+    "Static X-Ray and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Celtic SMR Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Mobile X-Ray Systems and Associated Option and Related Services",
+    "Static X-Ray and Associated Options and Related Services",
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Esaote",
+   "resolved": true,
+   "variants": [
+    "Esaote",
+    "Esaote Europe BV",
+    "Esaote Ltd"
+   ],
+   "frameworks": [
+    "Magnetic Resonance Imaging Scanners and Associated Option and Related Services",
+    "Mobile X-Ray Systems and Associated Option and Related Services",
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Probo Medical (formerly MIUS)",
+   "resolved": true,
+   "variants": [
+    "Probo Medical",
+    "Probo Medical Ltd"
+   ],
+   "frameworks": [
+    "Mobile X-Ray Systems and Associated Option and Related Services",
+    "Static X-Ray and Associated Options and Related Services",
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+   "resolved": true,
+   "variants": [
+    "Cardiac Services",
+    "Synapse Medical",
+    "Uniphar Medtech UK Limited T/A Cardiac Services"
+   ],
+   "frameworks": [
+    "Contrast Injectors, Consumables and Associated Options and Related Services",
+    "Digital Diagnostic Solutions",
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Vertec Scientific",
+   "resolved": true,
+   "variants": [
+    "Vertec Scientific",
+    "Vertec Scientific Limited"
+   ],
+   "frameworks": [
+    "Bone Densitometers, Associated Options and Related Services",
+    "Mobile Image Intensifiers and Associated Options and Related Services",
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Wolverson X-ray Ltd",
+   "resolved": true,
+   "variants": [
+    "Wolverson X-Ray Ltd"
+   ],
+   "frameworks": [
+    "Fluoroscopy and Associated Options and Related Services",
+    "Mobile X-Ray Systems and Associated Option and Related Services",
+    "Static X-Ray and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "ALXR Limited",
+   "resolved": true,
+   "variants": [
+    "ALXR Limited",
+    "ALXR Ltd"
+   ],
+   "frameworks": [
+    "Fluoroscopy and Associated Options and Related Services",
+    "Mobile X-Ray Systems and Associated Option and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Hologic UK",
+   "resolved": true,
+   "variants": [
+    "Hologic Limited",
+    "Hologic Ltd"
+   ],
+   "frameworks": [
+    "Mammography Imaging Systems and Associated Options and Related Services",
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Med Imaging Healthcare Limited",
+   "resolved": true,
+   "variants": [
+    "Med Imaging Healthcare Limited",
+    "Med Imaging Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Bone Densitometers, Associated Options and Related Services",
+    "Fluoroscopy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Agfa Healthcare IT UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Aidence",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Aidoc Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "AMG Medtech Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Aptvision Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Bayer",
+   "resolved": true,
+   "variants": [
+    "Bayer Public Limited Company"
+   ],
+   "frameworks": [
+    "Contrast Injectors, Consumables and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "BioSpectrum Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "BK Medical UK",
+   "resolved": true,
+   "variants": [
+    "BK Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Bracco UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Contrast Injectors, Consumables and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Brainlab Ltd",
+   "resolved": true,
+   "variants": [
+    "Brainlab Limited"
+   ],
+   "frameworks": [
+    "Mobile Image Intensifiers and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Bridgehead Software",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Butterfly Network",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "CGM LAB Belgium",
+   "resolved": true,
+   "variants": [
+    "CGM Lab"
+   ],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Change Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Circle Cardiovascular Imaging UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Cirdan Imaging Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Clinisys Solutions Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "D.P. Medical Systems Limited",
+   "resolved": true,
+   "variants": [
+    "DP Medical Systems Limited"
+   ],
+   "frameworks": [
+    "CT Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Draeger Medical UK",
+   "resolved": true,
+   "variants": [
+    "Draeger Medical UK Limited"
+   ],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Endosoft Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "EOS Imaging",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Static X-Ray and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Epredia",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Feedback Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Fleischhacker GmbH & Co. KG",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "FUJIFILM Sonosite Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "GE",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Nuclear Medicine Imaging and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Getinge",
+   "resolved": true,
+   "variants": [
+    "Getinge Limited"
+   ],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Guerbet Laboratories Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Contrast Injectors, Consumables and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Haemonetics",
+   "resolved": true,
+   "variants": [
+    "Haemonetics Ltd"
+   ],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Harrison-AI Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "HD Clinical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Health Net Connections Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Heartflow UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Hermes Medical Solutions Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Hexarad",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Huntleigh",
+   "resolved": true,
+   "variants": [
+    "Huntleigh Healthcare"
+   ],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Imaging First Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "InferVision UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Infinitt Europe GbmH",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "inHeart S.A.S",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Intelerad Medical Systems",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Intersystems",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Karl Storz UK",
+   "resolved": true,
+   "variants": [
+    "Karl Storz Endoscopy (UK) Ltd"
+   ],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Leica Microsystems (UK)",
+   "resolved": true,
+   "variants": [
+    "Leica Microsystems (UK) Ltd"
+   ],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Lucida Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Magentus Software Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Medtronic",
+   "resolved": true,
+   "variants": [
+    "Medtronic Limited"
+   ],
+   "frameworks": [
+    "Mobile Image Intensifiers and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Micrima Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Mammography Imaging Systems and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Mindray UK",
+   "resolved": true,
+   "variants": [
+    "Mindray UK Limited"
+   ],
+   "frameworks": [
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Olympus (KeyMed)",
+   "resolved": true,
+   "variants": [
+    "KeyMed (Medical and Industrial Equipment) Ltd"
+   ],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Orca Medical Ltd",
+   "resolved": true,
+   "variants": [
+    "Orca Medical Limited"
+   ],
+   "frameworks": [
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "ProSys International Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Ultrasound Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Radiobotics ApS",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Roche Diagnostics UK",
+   "resolved": true,
+   "variants": [
+    "Roche Diagnostics Ltd"
+   ],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Rosenfield Health Tech Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Sectra Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Siemens",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Nuclear Medicine Imaging and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "SIM&CURE",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Soliton IT Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Steris",
+   "resolved": true,
+   "variants": [
+    "Steris Solutions Limited"
+   ],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Stryker",
+   "resolved": true,
+   "variants": [
+    "Stryker UK Limited"
+   ],
+   "frameworks": [
+    "CT Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "SynApps Solutions Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Sysmex UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "System C",
+   "resolved": true,
+   "variants": [
+    "System C Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "TidalSense",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Digital Diagnostic Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  }
+ ],
+ "awards": [
+  {
+   "title": "Teleradiology Reporting Services",
+   "buyer": "COUNTY DURHAM AND DARLINGTON NHS FOUNDATION TRUST",
+   "supplier": null,
+   "date": "2026-10-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095506-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85148000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Purchase of two X-Ray Detectors at Scunthorpe General Hospital",
+   "buyer": "Northern Lincolnshire and Goole NHS Foundation Trust",
+   "supplier": "Medical Imaging Systems (MIS)",
+   "date": "2026-10-08",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/db63cf0e-f542-4969-b7fd-b3397f3e166f",
+   "value": 96000,
+   "periodEnd": "2026-10-09",
+   "source": "tender-history"
+  },
+  {
+   "title": "EEAST - Chemical, Biological, Radiological, and Nuclear (CBRN) suits (26-T04a)",
+   "buyer": "East of England Ambulance Service NHS Trust",
+   "supplier": "Respirex International Ltd, Draeger Safety UK Ltd",
+   "date": "2026-10-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095398-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "35113410"
+   ],
+   "isFramework": true,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "MRI injectors",
+   "buyer": "Gloucestershire Hospitals NHS Foundation Trust",
+   "supplier": "Bayer plc",
+   "date": "2026-10-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095247-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50421000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "WSFT - EBME - Ultrasound Quality Assurance",
+   "buyer": "West Suffolk NHS Foundation Trust",
+   "supplier": "Multi-Medix Ltd",
+   "date": "2026-10-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094576-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "60171000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "MRI Solution for Zomba Central Hospital, Malawi",
+   "buyer": "CARDIFF UNIVERSITY",
+   "supplier": "PACIFIC DIAGNOSTICS LIMITED",
+   "date": "2026-10-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094888-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33113000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "PET-CT Radiopharmaceuticals ",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": null,
+   "date": "2026-10-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094370-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33124210"
+   ],
+   "isFramework": true,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "MRI – PET Scanner Chiller Replacement",
+   "buyer": "Manchester University NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-10-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094012-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45000000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Replacement X-Ray Tube",
+   "buyer": "LIVERPOOL HEART AND CHEST HOSPITAL NHS FOUNDATION TRUST",
+   "supplier": "SIEMENS HEALTHCARE LIMITED",
+   "date": "2026-10-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093133-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50421200"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Replacement X-Ray Tube",
+   "buyer": "LIVERPOOL HEART AND CHEST HOSPITAL NHS FOUNDATION TRUST",
+   "supplier": "PHILIPS ELECTRONICS UK LIMITED",
+   "date": "2026-10-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093113-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50421200"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Insourced Breast USC One-Stop Triple Assessment and Symptomatic Breast Radiology",
+   "buyer": "Hull University Teaching Hospitals NHS Trust",
+   "supplier": null,
+   "date": "2026-10-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093514-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111100",
+    "85121200",
+    "85148000",
+    "85150000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "RFL- Samsung  V5 Ultrasound Framework ref 2021/S 000-007768",
+   "buyer": "Royal Free NHS Foundation Trust",
+   "supplier": "Medical Imaging Systems (MIS)",
+   "date": "2026-10-01",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/dd4b8c71-0c22-4828-8a5d-d16736c06053",
+   "value": 33594,
+   "periodEnd": "2026-10-01",
+   "source": "tender-history"
+  },
+  {
+   "title": "Specialist Radiology Reporting Services",
+   "buyer": "Royal National Orthopaedic Hospital NHS Trust",
+   "supplier": "Stanmore Orthopaedic Imaging Solutions LLP",
+   "date": "2026-10-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092951-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000",
+    "85150000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Auto-injectors for PET-CT Service",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotland) (NSS)",
+   "supplier": "Bayer Plc",
+   "date": "2026-09-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092236-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "KGH-ULTRASOUND BRONCHOSCOPE MAINTENANCE",
+   "buyer": "Kettering General Hospital NHS Foundation Trust",
+   "supplier": "Ergea UK and Ireland Limited",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091256-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50421000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Breast Screening Service",
+   "buyer": "NORTH CHESHIRE & MERSEY NHS FOUNDATION TRUST",
+   "supplier": "Mersey West Lancashire Teaching Hospital NHS Trust",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091546-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85110000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Insourced MRI Medical Imaging Services - NLAG",
+   "buyer": "Northern Lincolnshire and Goole NHS Foundation Trust",
+   "supplier": "Diagnostic Healthcare Limited",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091536-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85150000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "5 year Service/Maintenance - Mobile Breast Screening Dolly, Kylie and Olivia",
+   "buyer": "University Hospitals Sussex NHS Foundation Trust",
+   "supplier": "Lynton Trailers",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091456-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50421000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "YAS 130 2026_27 (DA FW) Butterfly Ultrasound",
+   "buyer": "Yorkshire Ambulance Service",
+   "supplier": "BFLY Operations Inc. DBA Butterfly Network",
+   "date": "2026-09-25",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/cbf6fd98-373f-4502-9ea2-9041e22309cf",
+   "value": 16269,
+   "periodEnd": "2031-09-09",
+   "source": "tender-history"
+  },
+  {
+   "title": "The procurement of CT Injectors",
+   "buyer": "Velindre University NHS Trust",
+   "supplier": "Bayer plc",
+   "date": "2026-09-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090842-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "The procurement of MRI Injectors",
+   "buyer": "Velindre University NHS Trust",
+   "supplier": "GUERBET LABORATORIES LIMITED",
+   "date": "2026-09-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090852-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "BCU-FCONC-64275 Provision of an MRI Service at HMP Berwyn",
+   "buyer": "Betsi Cadwaladr Health Board",
+   "supplier": "INHEALTH LIMITED",
+   "date": "2026-09-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090889-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85150000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Provision of Service Preventative Maintenance and Extended Warranty of WHBence Mobile Breast Screening Units.",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "supplier": "W.H. BENCE (COACHWORKS) LIMITED",
+   "date": "2026-09-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091071-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50100000",
+    "50421000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Maintenance of Hologic mammography equipment - SFT",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "supplier": "hologic",
+   "date": "2026-09-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091163-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50421000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "BCU-ITT-64112 - Bryn Beryl and Dolgellau Hospitals X-Ray Room Replacements",
+   "buyer": "Betsi Cadwaladr University Health Board",
+   "supplier": null,
+   "date": "2026-09-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091024-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45000000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Maintenance of Ultrasound",
+   "buyer": "YORK AND SCARBOROUGH TEACHING HOSPITALS NHS FOUNDATION TRUST",
+   "supplier": "Modality Group Ltd",
+   "date": "2026-09-24",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/2108b300-52ab-4d8f-a49c-8ec41341e086",
+   "value": 14147,
+   "periodEnd": "2027-09-17",
+   "source": "tender-history"
+  },
+  {
+   "title": "Maintenance of Samsung Digital Radiology System",
+   "buyer": "YORK AND SCARBOROUGH TEACHING HOSPITALS NHS FOUNDATION TRUST",
+   "supplier": "Medical Imaging Systems",
+   "date": "2026-09-24",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/8393458e-68ed-4a7c-a7a2-89f89d02e82d",
+   "value": 18052,
+   "periodEnd": "2027-06-28",
+   "source": "tender-history"
+  },
+  {
+   "title": "Maintenance of Voluson Expert20 and Ultrasound",
+   "buyer": "YORK AND SCARBOROUGH TEACHING HOSPITALS NHS FOUNDATION TRUST",
+   "supplier": "GE Medical Systems Ltd",
+   "date": "2026-09-24",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/cb942d03-c8b4-4322-b8d8-804908f6c6ee",
+   "value": 54016,
+   "periodEnd": "2031-06-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "BCU-DCO-63882 - CAPITAL PURCHASE OF MRI ANAESTHETIC MACHINE",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": "DRAEGER MEDICAL UK LIMITED",
+   "date": "2026-09-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090500-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Chemical, Biological, Radiological & Nuclear (CBRN) Training Video Production",
+   "buyer": "NHS England",
+   "supplier": "Tinker Taylor Limited",
+   "date": "2026-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090251-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of additional Helium for MRI 1",
+   "buyer": "Royal United Hospitals Bath NHS Foundation Trust",
+   "supplier": "Siemens Healthcare Limited",
+   "date": "2026-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090160-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50420000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "BCU-ITT-64113 - WMH ED X-Ray Rooms 1 and 2",
+   "buyer": "Betsi Cadwaladr University Health Board",
+   "supplier": null,
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089476-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45000000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "UKRI-6365 Benchtop MRI System",
+   "buyer": "UK Research & Innovation (UKRI)",
+   "supplier": null,
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089855-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33113000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "BCU-ITT-63899 - Mold Community Hospital X-Ray Room Replacement",
+   "buyer": "Betsi Cadwaladr University Health Board",
+   "supplier": null,
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089834-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45000000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "RFL  Sonosite Ultrasound Framework ref  2021/S 000-007768",
+   "buyer": "Royal Free NHS Trust",
+   "supplier": "FUJIFILM Healthcare UK Limited",
+   "date": "2026-09-21",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/7653c180-3122-4c6a-a667-d3d6b6528937",
+   "value": 36278,
+   "periodEnd": "2026-10-01",
+   "source": "tender-history"
+  },
+  {
+   "title": "Maintenance - Mobile Breast Screening Dolly, Kylie and Olivia",
+   "buyer": "University Hospitals Sussex NHS Foundation Trust",
+   "supplier": "Lynton Trailers",
+   "date": "2026-09-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089042-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50421200"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Ultrasound Film Print Packs",
+   "buyer": "The Shrewsbury and Telford Hospital NHS Trust",
+   "supplier": null,
+   "date": "2026-09-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/088948-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "NNUH/Cora Health Norwich Clinic 26/27 - Provision of Ultrasound",
+   "buyer": "Norfolk and Norwich University Hospitals NHS Foundation Trust",
+   "supplier": "Cora Health Diagnostics Ltd",
+   "date": "2026-09-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087731-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85150000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Sentimag Gen 3 system",
+   "buyer": "Norfolk and Norwich University Hospitals NHS Foundation Trust",
+   "supplier": "Hologic Limited",
+   "date": "2026-09-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087104-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "WPL05328 - Outsourced Radiology Reporting",
+   "buyer": "UNIVERSITY HOSPITAL SOUTHAMPTON NHS FOUNDATION TRUST",
+   "supplier": "AxonMedical Ltd, DMC Imaging Ltd, Medica Reporting Limited",
+   "date": "2026-09-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087408-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85150000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null,
+ "localIntel": [],
+ "localIntelGroups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
+ },
+ "directorySuppliers": [
+  {
+   "name": "Agito Medical A/S",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Agito Medical A/S",
+   "seedLabels": [
+    "Diagnostics and imaging"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/angiography-hybrid-theatres-capital-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services."
+  },
+  {
+   "name": "Aquilant Endoscopy Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Aquilant Endoscopy Limited",
+   "seedLabels": [
+    "Diagnostics and imaging"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ear-nose-and-throat-ent-endoscopes-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products."
+  },
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "BD — Becton, Dickinson",
+   "seedLabels": [
+    "Biopsy"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Advanced Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/advanced-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Bladder Scanners and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/bladder-scanners-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Blood Collection Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/blood-collection-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Brachytherapy Seeds and Associated Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/brachytherapy-seeds-and-associated-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Central Venous Catheters and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/central-venous-catheters-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Extension Sets and Lines",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/extension-sets-and-lines/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Infusion Pumps and Administration Sets and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/infusion-pumps-and-administration-sets-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Intravenous Accessories and Pressure Monitoring Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Intravenous Cannula and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-cannula-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/laboratory-diagnostics-point-of-care-testing-and-pathology/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Needlefree Connection Systems and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/needlefree-connection-systems-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Temperature Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-temperature-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Renal Replacement Therapies Services, Technologies and Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/renal-replacement-therapy-equipment-and-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Skin Cleansing, Disinfection and Hygiene",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/skin-cleansing-disinfection-and-hygiene/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Specimen Cabinets and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/specimen-cabinets-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Structural Heart and Ventricular Assist Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/structural-heart-and-ventricular-assist-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Mesh",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-mesh/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Syringes, Needles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Urology and Bowel Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/urology-and-bowel-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — IV Cannula",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS Supply Chain — Central Venous Catheters",
+     "url": "https://www.find-tender.service.gov.uk/Notice/001530-2025",
+     "source": "Find a Tender contract notice; dates and supplier count from NHS Supply Chain launch brief"
+    },
+    {
+     "name": "NHS Supply Chain — Syringes & Needles",
+     "url": "https://www.find-tender.service.gov.uk/Notice/002484-2026",
+     "source": "Find a Tender contract award notice"
+    },
+    {
+     "name": "NHS Supply Chain — Needle-free Connection Systems",
+     "url": "https://www.find-tender.service.gov.uk/Notice/074575-2025",
+     "source": "Find a Tender contract award notice; dates and supplier count from NHS Supply Chain launch brief"
+    },
+    {
+     "name": "NHS Supply Chain — Renal Replacement Therapies (2023/S 000-017117, to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on twenty NHS Supply Chain frameworks not counted as this speciality's: Advanced Wound Care; Bladder Scanners and Associated Options and Related Services; Blood Collection Devices; Brachytherapy Seeds and Associated Accessories; Central Venous Catheters and Associated Products; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Extension Sets and Lines; Infusion Pumps and Administration Sets and Associated Products; Intravenous Accessories and Pressure Monitoring Accessories; Intravenous Cannula and Associated Products; Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services; Needlefree Connection Systems and Associated Products; Patient Temperature Management; Renal Replacement Therapies Services, Technologies and Consumables; Skin Cleansing, Disinfection and Hygiene; Specimen Cabinets and Associated Options and Related Services; Structural Heart and Ventricular Assist Devices; Surgical Mesh; Syringes, Needles and Associated Products; Urology and Bowel Management. The Hub's supplier directory also records: NHS Supply Chain — IV Cannula; NHS Supply Chain — Central Venous Catheters; NHS Supply Chain — Syringes & Needles; NHS Supply Chain — Needle-free Connection Systems; NHS Supply Chain — Renal Replacement Therapies (2023/S 000-017117, to 2028); NHS SBS — SBS10142."
+  },
+  {
+   "name": "British Heart Foundation",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "British Heart Foundation",
+   "seedLabels": [
+    "Ultrasound"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "External Defibrillation Devices and Related Services and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/external-defibrillation-devices-related-equipment-and-associated-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Electrodes, Ultrasound Gels, Defibrillation and Related Consumables; External Defibrillation Devices and Related Services and Accessories."
+  },
+  {
+   "name": "Carl Zeiss Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Carl Zeiss Ltd",
+   "seedLabels": [
+    "Imaging / capital"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Complete Ophthalmology Solutions 3",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ophthalmology-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Radiotherapy Treatment Systems and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-treatment-systems-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Complete Ophthalmology Solutions 3; Radiotherapy Treatment Systems and Associated Options and Related Services."
+  },
+  {
+   "name": "Compleo Health Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Compleo Health Limited",
+   "seedLabels": [
+    "Diagnostics and imaging"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/angiography-hybrid-theatres-capital-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services."
+  },
+  {
+   "name": "Cook Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Cook Medical",
+   "seedLabels": [
+    "Diagnostics and imaging"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Operating Theatres Equipment and Related Accessories and Services. The Hub's supplier directory also records: NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)."
+  },
+  {
+   "name": "Ebrington (NI) Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Ebrington (NI) Limited",
+   "seedLabels": [
+    "Ultrasound"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Electrodes, Ultrasound Gels, Defibrillation and Related Consumables."
+  },
+  {
+   "name": "Echosens",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Echosens",
+   "seedLabels": [
+    "Ultrasound"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Non-Imaging Vibration Controlled Ultrasound System",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/non-imaging-vibration-controlled-ultrasound-system/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Non-Imaging Vibration Controlled Ultrasound System."
+  },
+  {
+   "name": "Electro Spyres Healthcare Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Electro Spyres Healthcare Limited",
+   "seedLabels": [
+    "Ultrasound"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Electrodes, Ultrasound Gels, Defibrillation and Related Consumables."
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Fannin (UK) Limited",
+   "seedLabels": [
+    "Ultrasound"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Central Venous Catheters and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/central-venous-catheters-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Clinical and Sharps Waste Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/clinical-and-sharps-waste-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrosurgical Consumables and Related Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrosurgical-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Extension Sets and Lines",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/extension-sets-and-lines/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "General Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/general-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Infusion Pumps and Administration Sets and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/infusion-pumps-and-administration-sets-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Intravenous Accessories and Pressure Monitoring Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Intravenous Cannula and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-cannula-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Minimally Invasive Surgery, Related Equipment and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/minimally-invasive-surgery/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Needlefree Connection Systems and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/needlefree-connection-systems-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pressure Area Care and Patient Handling",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-area-care-and-patient-handling/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pressure Infusers and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-infusers-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Procedure Packs",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/custom-procedure-packs/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Skin Cleansing, Disinfection and Hygiene",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/skin-cleansing-disinfection-and-hygiene/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Instruments",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-instruments/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Syringes, Needles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Textiles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/textiles/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Orthopaedic Solutions 3",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-orthopaedic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Urology and Bowel Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/urology-and-bowel-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on twenty-three NHS Supply Chain frameworks not counted as this speciality's: Airway Management Products and Associated Equipment; Central Venous Catheters and Associated Products; Clinical and Sharps Waste Management; Electrodes, Ultrasound Gels, Defibrillation and Related Consumables; Electrosurgical Consumables and Related Accessories; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Extension Sets and Lines; General Wound Care; Infusion Pumps and Administration Sets and Associated Products; Intravenous Accessories and Pressure Monitoring Accessories; Intravenous Cannula and Associated Products; Minimally Invasive Surgery, Related Equipment and Accessories; Needlefree Connection Systems and Associated Products; Pressure Area Care and Patient Handling; Pressure Infusers and Associated Products; Procedure Packs; Respiratory Solutions; Skin Cleansing, Disinfection and Hygiene; Surgical Instruments; Syringes, Needles and Associated Products; Textiles and Associated Products; Total Orthopaedic Solutions 3; Urology and Bowel Management."
+  },
+  {
+   "name": "Henleys Medical Supplies Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Henleys Medical Supplies Limited",
+   "seedLabels": [
+    "Ultrasound"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Aids for Daily Living",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/walking-aids-and-simple-aids-for-daily-living/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Airway Management Products and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/anaesthesia-machines-ventilator-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-gynaecology-and-sexual-health-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pulse-oximetry-and-capnography-devices-and-support-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Syringes, Needles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on nine NHS Supply Chain frameworks not counted as this speciality's: Aids for Daily Living; Airway Management Products and Associated Equipment; Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services; Electrodes, Ultrasound Gels, Defibrillation and Related Consumables; Maternity, Obstetrics, Gynaecology and Sexual Health Products; Pulse Oximetry, Capnography and Related Monitoring Technologies; Respiratory Solutions; Syringes, Needles and Associated Products; Total Patient Assessment Device Solutions."
+  },
+  {
+   "name": "It’s Interventional Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "It’s Interventional Limited",
+   "seedLabels": [
+    "Nuclear medicine & radiation safety"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Instruments",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-instruments/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Syringes, Needles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Surgical Instruments; Syringes, Needles and Associated Products."
+  },
+  {
+   "name": "Neoventa Medical Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Neoventa Medical Limited",
+   "seedLabels": [
+    "Ultrasound"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-monitoring-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Electrodes, Ultrasound Gels, Defibrillation and Related Consumables; Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services."
+  },
+  {
+   "name": "Ortus Technology Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Ortus Technology Limited",
+   "seedLabels": [
+    "Ultrasound"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/anaesthesia-machines-ventilator-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services; Electrodes, Ultrasound Gels, Defibrillation and Related Consumables."
+  },
+  {
+   "name": "Schiller UK Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Schiller UK Limited",
+   "seedLabels": [
+    "Ultrasound"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cardiac-and-pulmonary-diagnostics-and-exercise-stress-testing-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "External Defibrillation Devices and Related Services and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/external-defibrillation-devices-related-equipment-and-associated-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-monitoring-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Respiratory Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on five NHS Supply Chain frameworks not counted as this speciality's: Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions; Electrodes, Ultrasound Gels, Defibrillation and Related Consumables; External Defibrillation Devices and Related Services and Accessories; Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services; Respiratory Solutions."
+  },
+  {
+   "name": "SP Services (UK) Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "SP Services (UK) Ltd",
+   "seedLabels": [
+    "Ultrasound"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "General Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/general-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Electrodes, Ultrasound Gels, Defibrillation and Related Consumables; General Wound Care."
+  },
+  {
+   "name": "Techmed Charts UK Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Techmed Charts UK Limited",
+   "seedLabels": [
+    "Ultrasound"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Electrodes, Ultrasound Gels, Defibrillation and Related Consumables."
+  },
+  {
+   "name": "Xiel Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Xiel Ltd",
+   "seedLabels": [
+    "Diagnostics and imaging",
+    "Nuclear medicine & radiation safety"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-ancillary-devices-incl-dosimetry-patient-positioning-and-qa-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices."
+  },
+  {
+   "name": "Alliance Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Alliance Medical",
+   "seedLabels": [
+    "Diagnostics and imaging"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Annalise.ai (Harrison.ai)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Annalise.ai (Harrison.ai)",
+   "seedLabels": [
+    "Radiology AI"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Brainomix",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Brainomix",
+   "seedLabels": [
+    "Stroke AI"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Cordis",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Cordis",
+   "seedLabels": [
+    "Diagnostics and imaging"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)."
+  },
+  {
+   "name": "Kheiron Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Kheiron Medical",
+   "seedLabels": [
+    "Breast screening AI"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Qure.ai",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Qure.ai",
+   "seedLabels": [
+    "Radiology AI"
+   ],
+   "via": [
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": false,
+  "markets": [],
+  "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-10-09",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": false,
+  "whyEmpty": null,
+  "count": 20,
+  "roundupsExcluded": 5,
+  "broadcastsExcluded": 2,
+  "updates": [
+   {
+    "title": "Letters and drug alerts sent to healthcare professionals in April 2020",
+    "url": "https://www.gov.uk/drug-safety-update/letters-and-drug-alerts-sent-to-healthcare-professionals-in-april-2020",
+    "published": "2020-05-21",
+    "updated": "2020-05-21",
+    "summary": "A summary of letters and drug alerts recently sent to healthcare professionals."
+   },
+   {
+    "title": "Letters and drug alerts sent to healthcare professionals in February 2020",
+    "url": "https://www.gov.uk/drug-safety-update/letters-and-drug-alerts-sent-to-healthcare-professionals-in-february-2020",
+    "published": "2020-03-18",
+    "updated": "2020-03-18",
+    "summary": "Letters were sent on Typhim Vi vaccines, Mepact (mifamurtide), and Xeljanz (tofacitinib) and an alert issued to recall Emerade 150 microgram adrenaline pens."
+   },
+   {
+    "title": "Letters and drug alerts sent to healthcare professionals in June 2019",
+    "url": "https://www.gov.uk/drug-safety-update/letters-and-drug-alerts-sent-to-healthcare-professionals-in-june-2019",
+    "published": "2019-07-17",
+    "updated": "2019-07-17",
+    "summary": "Letters were sent about Myocrisin (sodium aurothiomalate), Cerliponase alfa (Brineura▼), Darzalex▼(daratumumab), retinoids▼, and febuxostat (Adenuric). A recall alert was issued for medicines that were taken out of the regulated medicines supply chain during distribution. Other alerts were issued about paracetamol tablets, docetaxel injection, Baxter potassium-chloride-containing intravenous infusions, and Emerade adrenaline auto-injectors."
+   },
+   {
+    "title": "Medical Device Alerts issued in March 2019",
+    "url": "https://www.gov.uk/drug-safety-update/medical-device-alerts-issued-in-march-2019",
+    "published": "2019-04-16",
+    "updated": "2019-04-16",
+    "summary": "Alerts were issued about Pagewriter Cardiographs and Efficia Monitors and Fresenius 5008 & 5008S haemodialysis machines."
+   },
+   {
+    "title": "Fluoroquinolone antibiotics: new restrictions and precautions for use due to very rare reports of disabling and potentially long-lasting or irreversible side effects",
+    "url": "https://www.gov.uk/drug-safety-update/fluoroquinolone-antibiotics-new-restrictions-and-precautions-for-use-due-to-very-rare-reports-of-disabling-and-potentially-long-lasting-or-irreversible-side-effects",
+    "published": "2019-03-21",
+    "updated": "2019-03-21",
+    "summary": "Disabling, long-lasting or potentially irreversible adverse reactions affecting musculoskeletal and nervous systems have been reported very rarely with fluoroquinolone antibiotics. Fluoroquinolone treatment should be discontinued at the first signs of a serious adverse reaction, including tendon pain or inflammation."
+   },
+   {
+    "title": "Medicines taken during pregnancy: please report suspected adverse drug reactions, including in the baby or child, on a Yellow Card",
+    "url": "https://www.gov.uk/drug-safety-update/medicines-taken-during-pregnancy-please-report-suspected-adverse-drug-reactions-including-in-the-baby-or-child-on-a-yellow-card",
+    "published": "2018-07-17",
+    "updated": "2018-07-17",
+    "summary": "Report to the Yellow Card Scheme suspected adverse reactions associated with medicines taken during pregnancy experienced by women or the baby or child. Obstetricians and midwives have a particularly important role in providing data about pregnancy outcomes – your reports are essential to improving understanding of the safety of medicines for women and children."
+   },
+   {
+    "title": "Letters sent to healthcare professionals in May 2018",
+    "url": "https://www.gov.uk/drug-safety-update/letters-sent-to-healthcare-professionals-in-may-2018",
+    "published": "2018-06-22",
+    "updated": "2018-06-22",
+    "summary": "Letters were sent about azithromycin, Lynparza▼(Olaparib), Xgeva▼ (denosumab), Lymphoseek (tilmanocept), ReoPro (abciximab) and dolutegravir; you still have time to complete a quick survey to tell us your views on the way medicines safety issues are communicated."
+   },
+   {
+    "title": "Gadolinium-containing contrast agents: Omniscan and iv Magnevist no longer authorised, MultiHance and Primovist for use only in liver imaging",
+    "url": "https://www.gov.uk/drug-safety-update/gadolinium-containing-contrast-agents-omniscan-and-iv-magnevist-no-longer-authorised-multihance-and-primovist-for-use-only-in-liver-imaging",
+    "published": "2018-02-06",
+    "updated": "2018-02-06",
+    "summary": "Omniscan and intravenous Magnevist are now no longer authorised for use and a product recall of any existing unexpired stock is underway."
+   }
+  ]
+ },
+ "drugTariffViiia": null
+}

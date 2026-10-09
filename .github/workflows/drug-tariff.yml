@@ -1,0 +1,150 @@
+name: Drug Tariff Parts IX and VIIIA (daily check, monthly source)
+
+# WHY THIS WORKFLOW EXISTS (added 02/09/2026)
+#
+# NHSBSA publishes the Part IX appliance reimbursement list monthly, ahead of its
+# effective month. Lou asked for it to be trackable/searchable on the Hub's
+# Frameworks/Awards/Tenders page (page 3198) without a hand rebuild each time — this
+# job refreshes data/drug-tariff-part-ix.json, which the page fetches client-side from
+# this repo's raw.githubusercontent.com URL (same pattern as data/open-tenders.json).
+#
+# Runs DAILY (changed 02/09/2026, Lou's request) even though NHSBSA only publishes
+# Part IX once a month — the daily run is a cheap check, not a rebuild: if nothing has
+# changed the sanity gate still passes and the commit step is a no-op (git diff --quiet
+# finds no change), so a daily schedule costs nothing extra and catches a new month's
+# file the day it appears rather than waiting up to a month. A failed run does not lose
+# data — the last successful commit stays live until the next one succeeds.
+#
+# ⚠️ TWO GATES, BOTH REQUIRED. A scoped sanity check first (valid JSON, required keys,
+# row count not implausibly low — NHSBSA's file has run 60,000-66,000+ rows, so anything
+# under 50,000 fails loudly rather than silently publishing a truncated fetch), then the
+# repo-wide verify.py that every other writer workflow runs. An earlier draft of this
+# file skipped verify.py on the assumption it only understood the other data models —
+# wrong: verify.py checks EVERY file in data/, and it was verify.py that caught this
+# file shipping without its marker ref.
+#
+# ⚠️ stamp_notice.py MUST run after the refresh. refresh_drug_tariff_part_ix.py rebuilds
+# the file from scratch, which drops the _notice ownership block; without the re-stamp
+# the job would publish an unmarked file and break the next hand-push's gate.
+#
+# ⚠️ THE PRODUCT DOSSIERS MUST FOLLOW THE TARIFF (added 01/10/2026).
+# data/product-dossiers-{wound,respiratory,dermatology}.json copy Drug Tariff prices out
+# of the Part IX file, and test_product_dossiers.py (test_tariff_price_is_pounds,
+# test_dermatology_tariff_anchor) checks they still match. This job used to refresh the
+# tariff and leave the dossiers behind, so every new tariff month broke the pre-push unit
+# tests and blocked every land.sh push until someone rebuilt by hand (01/10, ed7aaaa).
+# scripts/rebuild_dossiers_for_tariff.py now rebuilds them, but ONLY when Part IX's
+# effectiveMonth or rows changed (the dossiers carry a `generated` timestamp, so a daily
+# rebuild would commit three big files every day for nothing), and runs the same
+# record-level check_no_loss.py that land.sh runs for hand pushes: a rebuild re-reads
+# differentiator.json too, and could drop records for reasons unrelated to the tariff.
+# On a loss the run fails and publishes nothing; the last good commit stays live.
+# test_product_dossiers.py runs in the publish gate (before the commit), so a mismatch
+# can never reach main from here.
+#
+# PART VIIIA ADDED 29/09/2026. refresh_drug_tariff_part_viiia.py writes
+# data/drug-tariff-part-viiia.json (medicines basic prices, category A/C/M/H) for
+# the speciality panels. Same publisher, same cadence, same gates. Its file names
+# on NHSBSA's Part VIII page are irregular, so it reads the link off the index
+# page rather than building one. The month input applies to both parts.
+
+on:
+  schedule:
+    # 06:40 UTC daily — clear of the 06:10 framework-awards run, before the working day.
+    - cron: "40 6 * * *"
+  workflow_dispatch:
+    inputs:
+      month:
+        description: "Effective month to fetch, YYYY-MM (default: current month)"
+        required: false
+        default: ""
+
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  drug-tariff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Fetch and convert current Part IX
+        run: |
+          python3 scripts/refresh_drug_tariff_part_ix.py --out data/drug-tariff-part-ix.json \
+            ${{ github.event.inputs.month && format('--month {0}', github.event.inputs.month) || '' }}
+
+      - name: Fetch and convert current Part VIIIA
+        run: |
+          python3 scripts/refresh_drug_tariff_part_viiia.py --out data/drug-tariff-part-viiia.json \
+            ${{ github.event.inputs.month && format('--month {0}', github.event.inputs.month) || '' }}
+
+      - name: Rebuild product dossiers if the tariff changed
+        run: python3 scripts/rebuild_dossiers_for_tariff.py
+
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+
+      - name: Sanity gate — nothing commits until this passes
+        run: |
+          python3 -c "
+          import json, sys
+          d = json.load(open('data/drug-tariff-part-ix.json'))
+          assert d.get('schema') == ['part','supplier','vmp','amp','size','qty','uom','price','bnf'], 'schema drifted'
+          n = d.get('rowCount', 0)
+          assert n == len(d.get('rows', [])), 'rowCount does not match rows length'
+          assert n >= 50000, 'row count %d implausibly low for a Part IX file — refusing to publish' % n
+          assert sum(1 for r in d['rows'] if r[8]) >= 0.95 * n, 'BNF codes missing from most rows — the speciality panels classify by them'
+          print('gate passed:', n, 'rows,', d.get('effectiveMonth'))
+          v = json.load(open('data/drug-tariff-part-viiia.json'))
+          assert v.get('schema') == ['medicine','packSize','unit','category','price','vmpSnomed'], 'VIIIA schema drifted'
+          m = v.get('rowCount', 0)
+          assert m == len(v.get('rows', [])), 'VIIIA rowCount does not match rows length'
+          assert m >= 3000, 'VIIIA row count %d implausibly low - refusing to publish' % m
+          print('VIIIA gate passed:', m, 'rows,', v.get('effectiveMonth'))
+          "
+
+      - name: Publish gate — the same one every other writer runs
+        run: |
+          python3 scripts/prune_calendar.py
+          bash scripts/gate.sh
+          python3 test_product_dossiers.py
+      - name: Commit if changed
+        run: |
+          git config user.name "drug-tariff-bot"
+          git config user.email "actions@github.com"
+          git add data/drug-tariff-part-ix.json data/drug-tariff-part-viiia.json data/product-dossiers-wound.json data/product-dossiers-respiratory.json data/product-dossiers-dermatology.json
+          git diff --cached --quiet || git commit -m "Drug Tariff Parts IX and VIIIA $(date -u +%F)"
+          pushed=0
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first), attempt $attempt of 3."
+            git fetch origin
+            git reset --hard origin/main
+            python3 scripts/refresh_drug_tariff_part_ix.py --out data/drug-tariff-part-ix.json
+            python3 scripts/refresh_drug_tariff_part_viiia.py --out data/drug-tariff-part-viiia.json
+            python3 scripts/rebuild_dossiers_for_tariff.py || { echo "DOSSIER REBUILD REFUSED after re-fetch - refusing to push"; exit 1; }
+            python3 scripts/stamp_notice.py
+            bash scripts/gate.sh || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
+            python3 test_product_dossiers.py || { echo "DOSSIER TEST FAILED after re-fetch - refusing to push"; exit 1; }
+            git add data/drug-tariff-part-ix.json data/drug-tariff-part-viiia.json data/product-dossiers-wound.json data/product-dossiers-respiratory.json data/product-dossiers-dermatology.json
+            git diff --cached --quiet || git commit -m "Drug Tariff Parts IX and VIIIA $(date -u +%F) (retry)"
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 3 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi

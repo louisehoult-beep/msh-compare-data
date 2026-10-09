@@ -1,0 +1,1309 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "capital-estates-watch",
+ "label": "Capital and Estates Watch",
+ "defined": true,
+ "generated": "2026-10-09",
+ "dataAsOf": {
+  "frameworks": "2026-10-05",
+  "tenderHistory": "2026-10-09",
+  "frameworkAwards": "2026-10-09T13:11:59+00:00",
+  "openTenders": "09/10/2026",
+  "drugTariff": "2026-10-09",
+  "localIntel": "2026-10-09",
+  "supplierDirectory": "2026-10-07",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-10-09",
+  "drugTariffViiia": null,
+  "hospitalPrescribing": null
+ },
+ "rules": {
+  "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
+  "frameworks": "NHS Supply Chain framework names matching /(batteries, lighting, tools)/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. Read this panel differently from every other speciality's. NHS Supply Chain barely reaches this patch: it has exactly one agreement here, for batteries, lighting, tools, FM consumables and EV charging, and it buys none of the plant, works or construction the rest of the page is about. The real routes are Government Commercial Agency agreements RM6267 CWAS2 / NHS ProCure23 and RM6088 CWAS, which both expire on 31 March 2027 with all contracts awarded by that date; NHS Shared Business Services Hard Facilities Management 3, awarded 1 September 2026 with 28 lots and 185 suppliers, running from 20 October 2026; NHS SBS Public Sector Construction Works 2, still only a planned procurement notice with its tender delayed to mid-to-late November 2026; the New Hospital Programme's own Hospital 2.0 Alliance of ten construction firms; and, increasingly, dynamic markets opened by individual trusts under the Procurement Act 2023, which admit new suppliers at any time. None of those five is an NHS Supply Chain framework, so none appears in the Frameworks list above however large it is. One award row below is not NHS at all: “16_26 Flooring (Supply, Fit and Refurbishment)” was bought by Leicestershire County Council and is left in rather than blinding the rule to the word “flooring”, which NHS trusts also buy.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. Read this panel differently from every other speciality's. NHS Supply Chain barely reaches this patch: it has exactly one agreement here, for batteries, lighting, tools, FM consumables and EV charging, and it buys none of the plant, works or construction the rest of the page is about. The real routes are Government Commercial Agency agreements RM6267 CWAS2 / NHS ProCure23 and RM6088 CWAS, which both expire on 31 March 2027 with all contracts awarded by that date; NHS Shared Business Services Hard Facilities Management 3, awarded 1 September 2026 with 28 lots and 185 suppliers, running from 20 October 2026; NHS SBS Public Sector Construction Works 2, still only a planned procurement notice with its tender delayed to mid-to-late November 2026; the New Hospital Programme's own Hospital 2.0 Alliance of ten construction firms; and, increasingly, dynamic markets opened by individual trusts under the Procurement Act 2023, which admit new suppliers at any time. None of those five is an NHS Supply Chain framework, so none appears in the Frameworks list above however large it is. One award row below is not NHS at all: “16_26 Flooring (Supply, Fit and Refurbishment)” was bought by Leicestershire County Council and is left in rather than blinding the rule to the word “flooring”, which NHS trusts also buy.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(backlog maintenance|estates?|capital works?|refurbishment|refurbish\\w*|ventilation|air handling|boiler|chiller|electrical infrastructure|fire (?:safety|alarm|compartmentation|stopping|damper)|roof\\w*|water (?:hygiene|safety|treatment)|legionella|decarbonisation|heat pump|modular (?:building|ward|theatre)|demolition|asbestos|RAAC|hard fm|soft fm|facilities management|building management system|lift replacement|standby generator|medical gas|construction works?|new build|main contractor|design and build)\\b/i and does not match /\\b(wheelchair (?:maintenance|servicing|repairs?)|equipment refurbishment|non[- ]?invasive ventilation|graduate management training)\\b/i. Four titles matched the include and are excluded by name, each read in full on 11 September 2026: a wheelchair maintenance and refurbishment contract (rehabilitation's patch, while a wheelchair LIFT stays here because it is estates), an Olympus endoscopy stack refurbishment at NHS Grampian, an NHS Supply Chain non-invasive ventilation and CPAP framework (respiratory - the one place where “ventilation” means a machine breathing for a patient rather than air handling), and the NHS Graduate Management Training Scheme engineering stream. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: facilities). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 11 of the 11 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
+  "mhraDsu": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "drugTariffViiia": null
+ },
+ "counts": {
+  "frameworks": 1,
+  "suppliers": 16,
+  "suppliersUnresolved": 13,
+  "awardsShown": 40,
+  "awardsMatched": 143,
+  "awardsWithheldByBuyerCap": 0,
+  "awardsShownNotYetAwarded": 11,
+  "openTenders": 0,
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 0,
+  "suppliersDirectoryTagged": 11,
+  "suppliersDirectoryOnOtherFrameworks": 10,
+  "suppliersDirectoryWithFrameworkNote": 11,
+  "gpMarkets": 0,
+  "mhraDsu": 0,
+  "drugTariffViiiaLines": 0
+ },
+ "frameworks": [
+  {
+   "name": "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/lighting-tools-and-facilities-management-consumables/",
+   "reference": "2025/S 000-049694",
+   "category": "Facilities and Office Solutions",
+   "supplyRoute": "Direct, Stocked, eDirect",
+   "starts": "9 February 2026",
+   "ends": "8 February 2030",
+   "supplierCount": 16,
+   "supplierSource": "count verified against the page's own stated total (16)",
+   "suppliers": [
+    "Banner",
+    "Bates Office Services Ltd",
+    "City Electrical Factors Ltd",
+    "Denchi Group Ltd",
+    "E.On Drive Solutions Uk Ltd",
+    "Edmundson Electrical Limited",
+    "Luceco Uk Limited",
+    "Lyreco Uk Ltd",
+    "Mer Fleet Services Limited",
+    "RS Components Limited",
+    "Screwfix Direct Limited",
+    "TW Engineering Co. Ltd",
+    "UK Electric Ltd T/A H-Squared",
+    "Upergy",
+    "Vev Services Limited",
+    "Yesss Electrical"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Banner Group Limited",
+   "resolved": true,
+   "variants": [
+    "Banner"
+   ],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Bates Office Services Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "City Electrical Factors Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Denchi Group Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "E.On Drive Solutions Uk Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Edmundson Electrical Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Luceco Uk Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Lyreco UK Limited",
+   "resolved": true,
+   "variants": [
+    "Lyreco Uk Ltd"
+   ],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Mer Fleet Services Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "RS Components Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Screwfix Direct Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "TW Engineering Co. Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "UK Electric Ltd T/A H-Squared",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Upergy",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Vev Services Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Yesss Electrical",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  }
+ ],
+ "awards": [
+  {
+   "title": "Fire Alarm Inspections University Hospital Llandough and Community Sites",
+   "buyer": "Cardiff and Vale University Health Board",
+   "supplier": "Morris Line Engineering Limited",
+   "date": "2026-10-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095473-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50710000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Langley Clinic Decarbonisation of Heating System",
+   "buyer": "NHS Property Services Limited",
+   "supplier": "Amspec Limited",
+   "date": "2026-10-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095606-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45331000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Estates Relocation Phase 2",
+   "buyer": "North East London NHS Foundation Trust",
+   "supplier": "JAMES ROOFING & CONSTRUCTION LTD",
+   "date": "2026-10-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095584-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45324000",
+    "45421100",
+    "45421146"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "The Willows Fire Alarm",
+   "buyer": "NHS Property Services Limited",
+   "supplier": "Amspec Limited",
+   "date": "2026-10-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095504-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45312100"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "V00726 - Fire Alarm Maintenance",
+   "buyer": "NHS Golden Jubilee",
+   "supplier": "ADT Fire & Security",
+   "date": "2026-10-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095202-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "75251110"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Cleveland Health Centre - Left-hand Lift Replacement",
+   "buyer": "NHS Property Services Limited",
+   "supplier": "UK LIFT AND ESCALATOR COMPANY LTD",
+   "date": "2026-10-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095431-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45313100"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Princess of Wales - Ward 19 and 20 Refurbishment",
+   "buyer": "Cwm Taf Morgannwg University Health Board",
+   "supplier": "2D BUILDING CONTRACTORS LTD",
+   "date": "2026-10-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094653-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "R/WP – 26/27 – Completion and Delivery of National Legionella Risk Assessment on",
+   "buyer": "NHS Blood and Transplant",
+   "supplier": "HYDROP ECS",
+   "date": "2026-10-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094715-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45232430",
+    "90711100"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of Building Management System (BMS)",
+   "buyer": "The Clatterbridge Cancer Centre NHS Foundation Trust",
+   "supplier": "CONSORTIA INTEGRATED SERVICES LTD",
+   "date": "2026-10-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094700-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "51611100"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Fire Alarm Contract",
+   "buyer": "NHS Property Services Limited",
+   "supplier": "Static Systems Group Ltd",
+   "date": "2026-10-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094615-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45312100"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Boiler & Mechanical Specialist Remedials, Minor Works and New Installations",
+   "buyer": "KENT COMMUNITY HEALTH NHS FOUNDATION TRUST",
+   "supplier": null,
+   "date": "2026-10-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094857-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "42160000",
+    "45351000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Cleveland Health Centre - Right-hand Lift Replacement",
+   "buyer": "NHS Property Services Limited",
+   "supplier": "UK LIFT AND ESCALATOR COMPANY LTD",
+   "date": "2026-10-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094801-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45313100"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "MRI – PET Scanner Chiller Replacement",
+   "buyer": "Manchester University NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-10-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094012-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45000000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "AC Install and Additional Boiler Work at Banbury HC",
+   "buyer": "NHS Property Services Limited",
+   "supplier": "SMS Environmental Limited",
+   "date": "2026-10-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093895-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45331000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Vale house refurbishment works and remodelling Cheshire and Wirral Partnership NHS Foundation Trust",
+   "buyer": "CHESHIRE AND WIRRAL PARTNERSHIP NHS FOUNDATION TRUST",
+   "supplier": "John Turner Construction Group Ltd",
+   "date": "2026-10-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093283-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45210000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Supply & Installation of Protec Replacement Fire Alarm Equipment at University Hospital of Wales",
+   "buyer": "Cardiff and Vale University Health Board",
+   "supplier": "PROTEC FIRE DETECTION PUBLIC LIMITED COMPANY",
+   "date": "2026-10-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093472-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "31625100",
+    "31625200"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "QEHKL240 Fire Compartmentation Works",
+   "buyer": "The Queen Elizabeth Hospital King's Lynn NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-10-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093434-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45343100",
+    "71315000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Parkstone House Fire Compartmentation",
+   "buyer": "University Hospitals Dorset NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-10-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092797-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45210000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Annual verification of ventilation systems",
+   "buyer": "Royal United Hospitals Bath NHS Foundation Trust",
+   "supplier": "PSMG Healthcare",
+   "date": "2026-10-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092737-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71315410"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "MAINTENANCE OF GENT / HONEYWELL FIRE ALARM SYSTEMS",
+   "buyer": "HULL UNIVERSITY TEACHING HOSPITALS NHS TRUST",
+   "supplier": "HESIS LIMITED",
+   "date": "2026-10-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092906-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "BCU-ITT-64247 - SBCU Boiler Replacement -YG",
+   "buyer": "Betsi Cadwaladr University Health Board",
+   "supplier": null,
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091385-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "42160000",
+    "45000000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Preliminary Market Engagement Questionnaire Medical Gas and Gas Driven Vacuum Equipment",
+   "buyer": "Business Services Organisation Procurement and Logistics Service",
+   "supplier": null,
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091378-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000",
+    "33100000",
+    "38420000",
+    "38421110"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Maintenance for Building Management System (BMS) for Maidstone Hospital 2027",
+   "buyer": "Maidstone and Tunbridge Wells NHS Trust",
+   "supplier": null,
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091309-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50421000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Maintenance Building Management System (BMS) for Maidstone Hospital 2027",
+   "buyer": "Maidstone and Tunbridge Wells NHS Trust",
+   "supplier": null,
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091298-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50421000"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Conway Road Decarbonisation & Drainage at Conway Road Health Centre",
+   "buyer": "NHS Property Services Limited",
+   "supplier": "NU Construction Ltd",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091595-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45210000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Sneinton Health Centre – Roof Replacement (including Structural Works)",
+   "buyer": "NHS Property Services Limited",
+   "supplier": "Integral Roofing and Maintenance Services Ltd",
+   "date": "2026-09-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091196-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45261910"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "ENHT - Critical work-Fire Doors replacement, Boiler Pumps, external roof repair",
+   "buyer": "East and North Hertfordshire Teaching NHS Trust",
+   "supplier": "RYDON MAINTENANCE LTD",
+   "date": "2026-09-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090949-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "79993000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "BCU-ITT-63595 - WREXHAM MAELOR HOSPITAL PHARMACY BOILER REPLACEMENT",
+   "buyer": "Betsi Cadwaladr University Health Board",
+   "supplier": null,
+   "date": "2026-09-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090486-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45000000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "BCU-ITT-63452 - ABERGELE CLINIC ROOF UPGRADE",
+   "buyer": "Betsi Cadwaladr University Health Board",
+   "supplier": null,
+   "date": "2026-09-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090767-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45000000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Servicing and Maintenance of Medical Gas Pipeline Systems (MGPS) at Nottingham City Hospital",
+   "buyer": "Nottingham University Hospital NHS Trust",
+   "supplier": "C A Services (NI) Limited",
+   "date": "2026-09-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090745-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50710000",
+    "50712000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "ENHT - Legionella Compliance Services",
+   "buyer": "East and North Hertfordshire Teaching NHS Trust",
+   "supplier": "Churchill Environmental Services Limited",
+   "date": "2026-09-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090667-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71630000",
+    "90733000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Roofing Upgrade Works",
+   "buyer": "NHS Property Services Limited",
+   "supplier": "Cambridge Flat Roofing Company Ltd",
+   "date": "2026-09-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090653-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45210000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Ince Clinic Roof & Compartmentation",
+   "buyer": "NHS Property Services Limited",
+   "supplier": "Amspec Limited",
+   "date": "2026-09-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090649-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45260000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "EEAST – Welwyn Garden City Ambulance Roof (26-T12)",
+   "buyer": "East of England Ambulance Service NHS Trust",
+   "supplier": "Axel Group Ltd",
+   "date": "2026-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089900-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45453100"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of Maintenance of Woodchip Biomass Boiler",
+   "buyer": "Hywel Dda University Health Board",
+   "supplier": null,
+   "date": "2026-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090134-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Roof Replacement",
+   "buyer": "NHS Property Services Limited",
+   "supplier": "Integral Roofing and Maintenance Services Ltd",
+   "date": "2026-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090298-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45260000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of a Six Facet Condition Survey across the Nottingham University Hospitals NHS Trust’s Estate",
+   "buyer": "Nottingham University Hospital NHS Trust",
+   "supplier": "Bellrock (Assets & Compliance) Consulting Ltd",
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089598-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71315000",
+    "71315300",
+    "71631300"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "PAHT - UCV Theatres Ventilation & Laminar Flow Maintenance",
+   "buyer": "The Princess Alexandra Hospital NHS Trust",
+   "supplier": "Medical Air Technology Facilities Management Limited",
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089576-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71315410"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Specialist E&F Consultancy Support (Hard & Soft FM)",
+   "buyer": "North Cumbria Integrated Care NHS Foundation Trust",
+   "supplier": "CURRIE and BROWN UK LIMITED",
+   "date": "2026-09-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089045-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "79993100"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": ": IP5 Rooftop Solar Photovoltaic (PV) and Battery Energy Storage  System Development",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": "OVE ARUP & PARTNERS LIMITED",
+   "date": "2026-09-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/088990-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71311300"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null,
+ "localIntel": [],
+ "localIntelGroups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
+ },
+ "directorySuppliers": [
+  {
+   "name": "Agile Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Agile Medical",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Medical Healthcare Furniture",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-healthcare-furniture/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pressure Area Care and Patient Handling",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-area-care-and-patient-handling/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Medical Healthcare Furniture; Pressure Area Care and Patient Handling."
+  },
+  {
+   "name": "CK Facilities Management Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "CK Facilities Management Ltd",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Environmental Decontamination",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/environmental-decontamination/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Environmental Decontamination."
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Crest Medical Ltd",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Advanced Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/advanced-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Blood Collection Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/blood-collection-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Cleaning Equipment, Supplies and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cleaning-supplies-equipment-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Enteral Feeding, Bile Bags and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/enteral-feeding-bile-bags-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Extension Sets and Lines",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/extension-sets-and-lines/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "External Defibrillation Devices and Related Services and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/external-defibrillation-devices-related-equipment-and-associated-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "General Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/general-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Infusion Pumps and Administration Sets and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/infusion-pumps-and-administration-sets-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-gynaecology-and-sexual-health-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Orthotics, Podiatry and Immobilisation",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/orthoses-podiatry-and-immobilisation/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Temperature Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-temperature-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Physiotherapy and Occupational Therapy",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/physiotherapy-and-occupational-therapy/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Skin Cleansing, Disinfection and Hygiene",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/skin-cleansing-disinfection-and-hygiene/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Syringes, Needles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Wound Closure",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/wound-closure/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on sixteen NHS Supply Chain frameworks not counted as this speciality's: Advanced Wound Care; Blood Collection Devices; Cleaning Equipment, Supplies and Associated Products; Enteral Feeding, Bile Bags and Associated Products; Extension Sets and Lines; External Defibrillation Devices and Related Services and Accessories; General Wound Care; Infusion Pumps and Administration Sets and Associated Products; Maternity, Obstetrics, Gynaecology and Sexual Health Products; Orthotics, Podiatry and Immobilisation; Patient Temperature Management; Physiotherapy and Occupational Therapy; Skin Cleansing, Disinfection and Hygiene; Syringes, Needles and Associated Products; Total Patient Assessment Device Solutions; Wound Closure."
+  },
+  {
+   "name": "Gailarde Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Gailarde Ltd",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Curtains, Blinds and Associated Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/curtains-and-blinds/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Textiles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/textiles/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Curtains, Blinds and Associated Services; Textiles and Associated Products."
+  },
+  {
+   "name": "Grosvenor Contracts London Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Grosvenor Contracts London Ltd",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Curtains, Blinds and Associated Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/curtains-and-blinds/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Office and Outdoor Furniture",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/office-furniture/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Curtains, Blinds and Associated Services; Office and Outdoor Furniture."
+  },
+  {
+   "name": "GV Health",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "GV Health",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Cleaning Equipment, Supplies and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cleaning-supplies-equipment-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Clinical and Sharps Waste Management",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/clinical-and-sharps-waste-management/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Polymer Aprons",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/polymer-aprons/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Polymer Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/plastic-polymer-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on four NHS Supply Chain frameworks not counted as this speciality's: Cleaning Equipment, Supplies and Associated Products; Clinical and Sharps Waste Management; Polymer Aprons; Polymer Products."
+  },
+  {
+   "name": "HC Innovations",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "HC Innovations",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Paper Hygiene",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/paper-hygiene-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Wipes for Surface Cleaning and Disinfection",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/wipes-for-surface-cleaning-and-disinfection/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Paper Hygiene; Wipes for Surface Cleaning and Disinfection."
+  },
+  {
+   "name": "Interweave Textiles",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Interweave Textiles",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Pressure Area Care and Patient Handling",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-area-care-and-patient-handling/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Textiles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/textiles/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Pressure Area Care and Patient Handling; Textiles and Associated Products."
+  },
+  {
+   "name": "Serchem Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Serchem Limited",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Instrument Decontamination and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/instrument-decontamination-and-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Instrument Decontamination and Accessories."
+  },
+  {
+   "name": "Tristel Solutions Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Tristel Solutions Limited",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Cleaning Equipment, Supplies and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cleaning-supplies-equipment-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Decontamination Capital Equipment, Associated Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/decontamination-capital-equipment-endoscopy-and-sterile-services-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Instrument Decontamination and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/instrument-decontamination-and-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on three NHS Supply Chain frameworks not counted as this speciality's: Cleaning Equipment, Supplies and Associated Products; Decontamination Capital Equipment, Associated Accessories and Services; Instrument Decontamination and Accessories."
+  },
+  {
+   "name": "Northumbria Healthcare Facilities Management",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Northumbria Healthcare Facilities Management",
+   "seedLabels": [
+    "Facilities, cleaning & estates"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "Single Use Theatre Protective Wear and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/single-use-theatre-protective-wear/",
+     "source": "nhssc-brief"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: Single Use Theatre Protective Wear and Related Consumables."
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": false,
+  "markets": [],
+  "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-10-09",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": true,
+  "whyEmpty": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "count": 0,
+  "roundupsExcluded": 0,
+  "broadcastsExcluded": 0,
+  "updates": []
+ },
+ "drugTariffViiia": null
+}

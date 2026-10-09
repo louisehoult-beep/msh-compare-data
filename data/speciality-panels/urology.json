@@ -1,0 +1,5658 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "urology",
+ "label": "Urology",
+ "defined": true,
+ "generated": "2026-10-09",
+ "dataAsOf": {
+  "frameworks": "2026-10-05",
+  "tenderHistory": "2026-10-09",
+  "frameworkAwards": "2026-10-09T13:11:59+00:00",
+  "openTenders": "09/10/2026",
+  "drugTariff": "2026-10-09",
+  "localIntel": "2026-10-09",
+  "supplierDirectory": "2026-10-07",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-10-09",
+  "drugTariffViiia": "2026-10-09",
+  "hospitalPrescribing": null
+ },
+ "rules": {
+  "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
+  "frameworks": "NHS Supply Chain framework names matching /\\b(urology and bowel|endourology|intra-urethral|lithotripsy|bladder scanners|brachytherapy seeds|rigid endoscopy|flexible endoscopes|surgical implants for men)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the nine agreements above, Rigid Endoscopy and Flexible Endoscopes, are capital routes shared with other specialities, and their suppliers are endoscope manufacturers rather than urology houses; three more, Urology and Bowel Management, Surgical Implants for Men's and Women's Health and Brachytherapy Seeds, are shared with continence, gynaecology and oncology. Being named on a framework is not evidence of volume on this patch, and being absent from one is not evidence of absence from the market. One agreement the page carries is missing here for a data reason rather than a judgement: Maintenance, Repair and Calibration of Medical Equipment, which names urodynamics and lithotripsy equipment among the estates it maintains, is not one of the 122 framework names the Hub's crawler holds, so it cannot be claimed. Five of the nine agreements share one procurement reference, 2021/S 000-007768, and all of them end on 31 March 2028 — that reference wraps NHS Supply Chain's whole diagnostic capital portfolio and 22 of the 122 framework records the Hub holds carry it, so its expiry is not a urology event. Finally, the larger half of the catheter economy is bought in the community on prescription through NHSBSA Drug Tariff Part IX and the dispensing appliance contractors, a route with no NHS Supply Chain framework page at all; the Drug Tariff summary is where it appears.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the nine agreements above, Rigid Endoscopy and Flexible Endoscopes, are capital routes shared with other specialities, and their suppliers are endoscope manufacturers rather than urology houses; three more, Urology and Bowel Management, Surgical Implants for Men's and Women's Health and Brachytherapy Seeds, are shared with continence, gynaecology and oncology. Being named on a framework is not evidence of volume on this patch, and being absent from one is not evidence of absence from the market. One agreement the page carries is missing here for a data reason rather than a judgement: Maintenance, Repair and Calibration of Medical Equipment, which names urodynamics and lithotripsy equipment among the estates it maintains, is not one of the 122 framework names the Hub's crawler holds, so it cannot be claimed. Five of the nine agreements share one procurement reference, 2021/S 000-007768, and all of them end on 31 March 2028 — that reference wraps NHS Supply Chain's whole diagnostic capital portfolio and 22 of the 122 framework records the Hub holds carry it, so its expiry is not a urology event. Finally, the larger half of the catheter economy is bought in the community on prescription through NHSBSA Drug Tariff Part IX and the dispensing appliance contractors, a route with no NHS Supply Chain framework page at all; the Drug Tariff summary is where it appears.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(urolog\\w*|endourolog\\w*|prostat\\w*|transurethral|turp|turbt|holep|cystoscop\\w*|ureterosc\\w*|nephroscop\\w*|resectoscop\\w*|urodynam\\w*|uroflow\\w*|lithotrip\\w*|eswl|pcnl|ureter\\w*|urethr\\w*|nephrostom\\w*|nephrolithotom\\w*|penile|testicular|orchidectom\\w*|orchidopex\\w*|vasectomy|varicocele|circumcision|erectile dysfunction|holmium|thulium|green ?light laser|brachytherapy seeds?|urinary catheters?|urostom\\w*|bladder scanner\\w*|bladder cancer|bladder tumou?r|overactive bladder|neurogenic bladder|bladder washout|bladder irrigation|bladder instillation|urine meters?|urine flow)\\b/i and does not match /\\b(intravascular)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33125 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "NHSBSA Drug Tariff Part IXA/IXB/IXC for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /\\b(nelaton|foley|dilatation catheter|reusable catheter|catheterisation packs?|catheter (?:disposable|retaining|safety|securement|maintenance|valves?)|urinar\\w*|urostom\\w*|uridome|suprapubic|penile sheaths?|incontinence sheaths?|leg bags?|night bags?|bladder (?:infusion|irrigat\\w*|washout)|urine (?:meters?|bags?))\\b/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,879 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: continence, endourology). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 13 of the 15 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (9 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-09.",
+  "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF 07.04. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 53 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
+ },
+ "counts": {
+  "frameworks": 9,
+  "suppliers": 125,
+  "suppliersUnresolved": 3,
+  "awardsShown": 40,
+  "awardsMatched": 133,
+  "awardsWithheldByBuyerCap": 0,
+  "awardsShownNotYetAwarded": 3,
+  "openTenders": 1,
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 53,
+  "suppliersDirectoryTagged": 15,
+  "suppliersDirectoryOnOtherFrameworks": 11,
+  "suppliersDirectoryWithFrameworkNote": 13,
+  "gpMarkets": 2,
+  "mhraDsu": 77,
+  "drugTariffViiiaLines": 75
+ },
+ "frameworks": [
+  {
+   "name": "Bladder Scanners and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/bladder-scanners-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 11,
+   "supplierSource": "no stated count on the page; 11 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Bard Limited",
+    "BioSpectrum Ltd",
+    "Butterfly Network",
+    "Creo Medical UK Ltd (previously known as Albyn Medical Ltd)",
+    "De Smit Medical Systems Limited",
+    "FUJIFILM UK Ltd",
+    "GE Healthcare",
+    "SISK Healthcare (UK) Ltd trading as Cardiac Services",
+    "Source Medical",
+    "Verathon Medical",
+    "Win Health Medical Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Brachytherapy Seeds and Associated Accessories",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/brachytherapy-seeds-and-associated-accessories/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct, eDirect",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 2,
+   "supplierSource": "no stated count on the page; 2 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Becton, Dickinson U.K. Limited",
+    "BXT Accelyon Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+   "reference": "2024/S 000-029975",
+   "category": "Medical Technology",
+   "supplyRoute": "eDirect",
+   "starts": "1 October 2025",
+   "ends": "30 September 2027",
+   "supplierCount": 58,
+   "supplierSource": "count verified against the page's own stated total (58)",
+   "suppliers": [
+    "Advanced Medical Systems Ltd",
+    "Ambu Limited",
+    "APR Medtech Limited",
+    "Aquilant Endoscopy Ltd",
+    "Aquilant Limited",
+    "Argon Medical Devices UK Ltd",
+    "Becton, Dickinson UK Limited",
+    "BioSpectrum Ltd",
+    "Boston Scientific Ltd",
+    "BVM Medical Ltd",
+    "CJ Medical",
+    "Coloplast Ltd",
+    "ConMed UK Ltd",
+    "Cook (UK) Ltd",
+    "Creo Medical Limited",
+    "Erbe Medical UK Ltd",
+    "Fairmont Medical Products Limited",
+    "Fannin UK Limited",
+    "GAP Medical Solutions Ltd",
+    "GBUK Ltd",
+    "GenX MediCare",
+    "GI UK Medical Ltd (Duomed)",
+    "GTA (UK) Ltd",
+    "H4 Medical Ltd",
+    "HistoSonics",
+    "IGEA S.p.A. Branch UK",
+    "Ingles Ltd",
+    "It’s Interventional Limited",
+    "Johnson & Johnson Medical Ltd",
+    "Karl Storz Endoscopy (UK) Ltd",
+    "Kebomed UK Ltd",
+    "KeyMed (Medical and Industrial Equipment) Ltd",
+    "Laborie Medical Technologies Ltd",
+    "Leib Medical Ltd",
+    "Macromed UK Ltd",
+    "MCT Lifesciences Ltd",
+    "Medtronic Limited",
+    "Merit Medical UK Ltd",
+    "Micro-Tech (UK) Ltd",
+    "Newtons Medical Supplies Ltd",
+    "Novus Med Ltd",
+    "Omnimed Limited",
+    "Partners for Endoscopy Limited",
+    "Penlon Limited",
+    "Pennamed Limited",
+    "Pentax UK Limited",
+    "Promed Limited",
+    "RB Medical Engineering Ltd",
+    "Richard Wolf UK Ltd",
+    "Rocamed France",
+    "Steris Solutions Limited",
+    "Synectics Medical T/A SynMed",
+    "Terumo UK Ltd",
+    "TFX Group Ltd T/A Teleflex Medical",
+    "TSC Endovision",
+    "Uniphar Medtech T/A Synapse Medical",
+    "Uniplex UK Ltd",
+    "Varian Medical Systems"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Flexible Endoscopes and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/flexible-endoscopes-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 5,
+   "supplierSource": "no stated count on the page; 5 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "FUJIFILM Healthcare UK Limited",
+    "Karl Storz Endoscopy UK Ltd",
+    "Olympus KeyMed",
+    "Pentax Medical",
+    "Richard Wolf UK Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Lithotripsy and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/lithotripsy-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 3,
+   "supplierSource": "no stated count on the page; 3 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Hospital Services Limited",
+    "Richard Wolf UK Ltd",
+    "Storz Medical UK"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Male Intra-Urethral Catheter with Magnet Control",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/male-intra-urethral-catheter-with-magnet-control/",
+   "reference": "2026/S 000-013783",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "eDirect",
+   "starts": "30 March 2026",
+   "ends": "22 February 2027",
+   "supplierCount": 1,
+   "supplierSource": "no stated count on the page; 1 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Ingenion Medical"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Rigid Endoscopy and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/rigid-endoscopy-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct, eDirect",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 18,
+   "supplierSource": "no stated count on the page; 18 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Aquilant Ltd",
+    "Arthrex Limited",
+    "B. Braun Medical Limited",
+    "Conmed UK Limited",
+    "DP Medical",
+    "Emmat Medical",
+    "G S Medical",
+    "Karl Storz Endoscopy (UK) Limited",
+    "LiteOptics Limited",
+    "Locamed Limited",
+    "Medtronic Limited",
+    "Novus Med",
+    "Olympus KeyMed",
+    "Pentax UK Limited",
+    "RB Medical Engineering Limited",
+    "Richard Wolf UK Limited",
+    "Smith and Nephew",
+    "Stryker UK Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Surgical Implants for Men’s and Women’s Health",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-implants-for-mens-and-womens-health/",
+   "reference": "2025/S 000-025202",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2026",
+   "ends": "31 March 2028",
+   "supplierCount": 6,
+   "supplierSource": "no stated count on the page; 9 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Boston Scientific Ltd",
+    "Coloplast Ltd",
+    "iMEDicare Ltd",
+    "Johnson & Johnson Medical Ltd",
+    "Q Medical Technologies Ltd",
+    "Silimed UK Limited"
+   ],
+   "delisted": [
+    "Eurosurgical Limited",
+    "Motiva Implants UK Limited",
+    "Nagor Limited."
+   ]
+  },
+  {
+   "name": "Urology and Bowel Management",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/urology-and-bowel-management/",
+   "reference": "2023/S 000-011173",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "21 February 2024",
+   "ends": "20 February 2028",
+   "supplierCount": 57,
+   "supplierSource": "count verified against the page's own stated total (57)",
+   "suppliers": [
+    "Abena UK Limited",
+    "AQLANE Medical BV",
+    "Ardo Medical Ltd",
+    "Astric Medical Ltd",
+    "B Braun Medical Ltd",
+    "Baxter Healthcare Limited",
+    "Beambridge Medical Ltd",
+    "Becton Dickinson UK Ltd Woking",
+    "C&P Medical Trading Ltd",
+    "CD Medical Ltd",
+    "Class Medical Ltd",
+    "CliniMed Ltd",
+    "Clinisupplies GB Limited",
+    "Clinisupplies Ltd",
+    "CODAN Limited",
+    "Coloplast Limited",
+    "Convatec Ltd",
+    "Creo Medical UK Ltd",
+    "E&E MEDICAL SUPPLIES LIMITED",
+    "Essity UK TENA Heath & Medical",
+    "Fairmont Medical Products Limited",
+    "Fannin UK Ltd",
+    "Flexicare Medical Ltd",
+    "Fresenius Kabi Ltd",
+    "GBUK Healthcare",
+    "GenX MediCare Ltd",
+    "Hollister Ltd",
+    "iMEDicare Ltd",
+    "KCI Medical Limited (3m)",
+    "Key Health Solutions",
+    "Laborie Medical Technologies UK Ltd",
+    "LINC Medical Systems Ltd",
+    "Medicina Limited",
+    "Mediplus Ltd",
+    "Mediq Healthcare",
+    "Medline Industries Ltd",
+    "Oakmed Ltd",
+    "Optimum Medical Solutions Ltd",
+    "Paramount Medical Solutions Ltd",
+    "Peak Medical Ltd",
+    "Pelican Healthcare Limited",
+    "Pennine Healthcare",
+    "ProSys International Ltd",
+    "RB Medical",
+    "Redland embh Group Limited",
+    "Rhodes Pharma Ltd",
+    "Rocialle Healthcare Limited",
+    "Salts Healthcare (Ostomy)",
+    "Sharon services (UK) Ltd",
+    "Smith & Nephew Healthcare Ltd",
+    "Teleflex Medical UK",
+    "Trion Pharma Limited",
+    "UNOQUIP GMBH",
+    "Venture Healthcare Ltd",
+    "Vernacare International Limited",
+    "Wellspect Limited",
+    "Sinapi Biomedical UK"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Bard Limited",
+    "Becton Dickinson UK Ltd Woking",
+    "Becton, Dickinson U.K. Limited",
+    "Becton, Dickinson UK Limited"
+   ],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services",
+    "Brachytherapy Seeds and Associated Accessories",
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Richard Wolf UK",
+   "resolved": true,
+   "variants": [
+    "Richard Wolf UK Limited",
+    "Richard Wolf UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Flexible Endoscopes and Associated Options and Related Services",
+    "Lithotripsy and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Coloplast",
+   "resolved": true,
+   "variants": [
+    "Coloplast Limited",
+    "Coloplast Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Surgical Implants for Men’s and Women’s Health",
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Karl Storz UK",
+   "resolved": true,
+   "variants": [
+    "Karl Storz Endoscopy (UK) Limited",
+    "Karl Storz Endoscopy (UK) Ltd",
+    "Karl Storz Endoscopy UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Flexible Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Olympus (KeyMed)",
+   "resolved": true,
+   "variants": [
+    "KeyMed (Medical and Industrial Equipment) Ltd",
+    "Olympus KeyMed"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Flexible Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Pentax Medical",
+   "resolved": true,
+   "variants": [
+    "Pentax Medical",
+    "Pentax UK Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Flexible Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "RB Medical Engineering Ltd",
+   "resolved": true,
+   "variants": [
+    "RB Medical",
+    "RB Medical Engineering Limited",
+    "RB Medical Engineering Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Rigid Endoscopy and Associated Options and Related Services",
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Aquilant Limited",
+   "resolved": true,
+   "variants": [
+    "Aquilant Limited",
+    "Aquilant Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "B. Braun Medical",
+   "resolved": true,
+   "variants": [
+    "B Braun Medical Ltd",
+    "B. Braun Medical Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services",
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "BioSpectrum Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services",
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Boston Scientific",
+   "resolved": true,
+   "variants": [
+    "Boston Scientific Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Surgical Implants for Men’s and Women’s Health"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Conmed UK Ltd",
+   "resolved": true,
+   "variants": [
+    "ConMed UK Ltd",
+    "Conmed UK Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Creo Medical Limited",
+   "resolved": true,
+   "variants": [
+    "Creo Medical Limited",
+    "Creo Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Fairmont Medical Products Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Limited",
+    "Fannin UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Fujifilm Healthcare UK",
+   "resolved": true,
+   "variants": [
+    "FUJIFILM Healthcare UK Limited",
+    "FUJIFILM UK Ltd"
+   ],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services",
+    "Flexible Endoscopes and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GBUK Healthcare",
+    "GBUK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "GenX MediCare Ltd",
+   "resolved": true,
+   "variants": [
+    "GenX MediCare",
+    "GenX MediCare Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "iMEDicare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Surgical Implants for Men’s and Women’s Health",
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Johnson & Johnson MedTech",
+   "resolved": true,
+   "variants": [
+    "Johnson & Johnson Medical Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Surgical Implants for Men’s and Women’s Health"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Laborie Medical Technologies UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Laborie Medical Technologies Ltd",
+    "Laborie Medical Technologies UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Medtronic",
+   "resolved": true,
+   "variants": [
+    "Medtronic Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Novus Med Ltd",
+   "resolved": true,
+   "variants": [
+    "Novus Med",
+    "Novus Med Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Smith+Nephew",
+   "resolved": true,
+   "variants": [
+    "Smith & Nephew Healthcare Ltd",
+    "Smith and Nephew"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services",
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "TFX Group Ltd (Teleflex Medical)",
+   "resolved": true,
+   "variants": [
+    "TFX Group Ltd T/A Teleflex Medical",
+    "Teleflex Medical UK"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+   "resolved": true,
+   "variants": [
+    "SISK Healthcare (UK) Ltd trading as Cardiac Services",
+    "Uniphar Medtech T/A Synapse Medical"
+   ],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services",
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Abena UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Advanced Medical Systems Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Ambu UK",
+   "resolved": true,
+   "variants": [
+    "Ambu Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "APR Medtech Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "AQLANE Medical BV",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Aquilant Endoscopy Limited",
+   "resolved": true,
+   "variants": [
+    "Aquilant Endoscopy Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Ardo medical Limited",
+   "resolved": true,
+   "variants": [
+    "Ardo Medical Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Argon Medical Devices UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Arthrex",
+   "resolved": true,
+   "variants": [
+    "Arthrex Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Astric Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Baxter Healthcare Ltd",
+   "resolved": true,
+   "variants": [
+    "Baxter Healthcare Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Beambridge Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Butterfly Network",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "BVM Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "BXTAccelyon Ltd",
+   "resolved": true,
+   "variants": [
+    "BXT Accelyon Ltd"
+   ],
+   "frameworks": [
+    "Brachytherapy Seeds and Associated Accessories"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "C&P Medical Trading Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "CD Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "CJ Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Class Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "CliniMed",
+   "resolved": true,
+   "variants": [
+    "CliniMed Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Clinisupplies",
+   "resolved": true,
+   "variants": [
+    "Clinisupplies GB Limited",
+    "Clinisupplies Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "CODAN Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Convatec",
+   "resolved": true,
+   "variants": [
+    "Convatec Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Cook Medical",
+   "resolved": true,
+   "variants": [
+    "Cook (UK) Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Creo Medical UK Ltd (previously known as Albyn Medical Ltd)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "D.P. Medical Systems Limited",
+   "resolved": true,
+   "variants": [
+    "DP Medical"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "De Smit Medical Systems Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "E&E MEDICAL SUPPLIES LIMITED",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Eakin Ostomy (Pelican Healthcare)",
+   "resolved": true,
+   "variants": [
+    "Pelican Healthcare Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Emmat Medical",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Erbe Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Essity UK Limited",
+   "resolved": true,
+   "variants": [
+    "Essity UK TENA Heath & Medical"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Flexicare Medical",
+   "resolved": true,
+   "variants": [
+    "Flexicare Medical Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Fresenius Kabi Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "G S Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "GAP Medical Solutions Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "GE HealthCare",
+   "resolved": true,
+   "variants": [
+    "GE Healthcare"
+   ],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "GI UK Medical Ltd (Duomed)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "GTA (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "H4 Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "HistoSonics",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Hollister",
+   "resolved": true,
+   "variants": [
+    "Hollister Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Hospital Services Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Lithotripsy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "IGEA S.p.A. Branch UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Ingenion Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Male Intra-Urethral Catheter with Magnet Control"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Ingles Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "It’s Interventional Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Kebomed UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Key Health Solutions",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Leib Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "LINC Medical",
+   "resolved": true,
+   "variants": [
+    "LINC Medical Systems Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "LiteOptics",
+   "resolved": true,
+   "variants": [
+    "LiteOptics Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "LocaMed Ltd",
+   "resolved": true,
+   "variants": [
+    "Locamed Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Macromed UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "MCT Lifesciences Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Medicina Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Mediplus Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Mediq Healthcare"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Medline Industries",
+   "resolved": true,
+   "variants": [
+    "Medline Industries Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Merit Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Micro-Tech (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Newtons Medical Supplies Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Omnimed Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Optimum Medical",
+   "resolved": true,
+   "variants": [
+    "Optimum Medical Solutions Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Paramount Medical Solutions Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Partners for Endoscopy Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Peak Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Penlon",
+   "resolved": true,
+   "variants": [
+    "Penlon Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Pennamed Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Pennine Healthcare (Ivor Shaw Ltd)",
+   "resolved": true,
+   "variants": [
+    "Pennine Healthcare"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Promed Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "ProSys International Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Q Medical Technologies Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Surgical Implants for Men’s and Women’s Health"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Redland embh Group Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Rhodes Pharma Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Rocamed France",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Rocialle Healthcare",
+   "resolved": true,
+   "variants": [
+    "Rocialle Healthcare Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Salts Healthcare",
+   "resolved": true,
+   "variants": [
+    "Salts Healthcare (Ostomy)"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Sharon Services (UK) Ltd",
+   "resolved": true,
+   "variants": [
+    "Sharon services (UK) Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Silimed UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Surgical Implants for Men’s and Women’s Health"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Sinapi Biomedical UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Solventum (3M Health Care)",
+   "resolved": true,
+   "variants": [
+    "KCI Medical Limited (3m)"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Source Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Steris",
+   "resolved": true,
+   "variants": [
+    "Steris Solutions Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Storz Medical UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Lithotripsy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Stryker",
+   "resolved": true,
+   "variants": [
+    "Stryker UK Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Synectics Medical T/A SynMed",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Terumo UK",
+   "resolved": true,
+   "variants": [
+    "Terumo UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Trion Pharma Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "TSC Endovision",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Uniplex",
+   "resolved": true,
+   "variants": [
+    "Uniplex UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "UNOQUIP GMBH",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Unora Healthcare Ltd (formerly Oakmed Ltd)",
+   "resolved": true,
+   "variants": [
+    "Oakmed Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Varian (Siemens Healthineers)",
+   "resolved": true,
+   "variants": [
+    "Varian Medical Systems"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Venture Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Verathon Medical",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Vernacare",
+   "resolved": true,
+   "variants": [
+    "Vernacare International Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Wellspect",
+   "resolved": true,
+   "variants": [
+    "Wellspect Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Win Health Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  }
+ ],
+ "awards": [
+  {
+   "title": "BCU-FCONC-64313 - Urology Diagnostic - Insourcing",
+   "buyer": "Betsi Cadwaladr University Health Board",
+   "supplier": "ID MEDICAL GROUP LIMITED",
+   "date": "2026-10-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093379-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121292",
+    "85150000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Clinical Pods for Urology",
+   "buyer": "University Hospitals of Leicester NHS Trust",
+   "supplier": "Oliveti Group Ltd",
+   "date": "2026-10-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092967-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "CAPITAL PURCHASE OF UROLOGY LASER, GA-0008700 – MOSES PULSE 120H 50HZ 32A",
+   "buyer": "SWANSEA BAY UNIVERSITY HEALTH BOARD",
+   "supplier": "Boston Scientific Limited",
+   "date": "2026-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090254-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33125000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NP69327 Endourology Consumables",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "supplier": null,
+   "date": "2026-09-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089026-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000",
+    "33141200"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Urology Daycase Outsourcing",
+   "buyer": "Gateshead Health NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-09-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/088736-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121292"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "GPwSI - Vasectomy Service",
+   "buyer": "NHS NORTH EAST AND NORTH CUMBRIA INTEGRATED CARE BOARD",
+   "supplier": "Brampton Medical Practice",
+   "date": "2026-09-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086348-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Vasectomy Service for NHS Black Country ICB",
+   "buyer": "NHS Black Country Integrated Care Board",
+   "supplier": null,
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085667-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "WSFT - Theatres - EBME - Lithotripter Maintenance",
+   "buyer": "West Suffolk NHS Foundation Trust",
+   "supplier": "Boston Scientific Limited",
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083904-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50420000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "WSFT - EBME - Holmium Pulse POS maintenance",
+   "buyer": "West Suffolk NHS Foundation Trust",
+   "supplier": "Boston Scientific",
+   "date": "2026-08-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080021-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50420000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Advanced Urology Bootcamp February 2027",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "BRIDGE COMMUNITY CHURCH",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079268-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "80000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "NH2659 Urology Cystoscopy Surveillance Service",
+   "buyer": "Northumbria Healthcare NHS Foundation Trust",
+   "supplier": "Tyneside Surgical Services Limited",
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079022-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121200"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "WPL06900 - Urology and OMFS Insourcing",
+   "buyer": "UNIVERSITY HOSPITAL SOUTHAMPTON NHS FOUNDATION TRUST",
+   "supplier": "18 Week Support Limited",
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078403-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111100"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Maintenance of Continuous Renal Replacement Therapy & Urology Equipment",
+   "buyer": "Regional Business Services Organisation Procurement and Logistics",
+   "supplier": "Vantive Limited, Creo Medical UK Ltd",
+   "date": "2026-08-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078238-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000",
+    "33125000",
+    "33181000",
+    "50000000",
+    "50400000",
+    "50420000",
+    "50430000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "C455465 - Lithotriptor",
+   "buyer": "Bradford Teaching Hospitals NHS Foundation Trust",
+   "supplier": "Storz Medical (UK) Limited",
+   "date": "2026-08-11",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/dfacaaad-080a-459d-b792-9cc5da89c99b",
+   "value": 290000,
+   "periodEnd": "2026-05-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Green Light Laser",
+   "buyer": "Frimley Health NHS Foundation Trust",
+   "supplier": "Boston Scientific Ltd.",
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076201-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Auriga XL & Holmium Pulse 120 Service Agreement",
+   "buyer": "MERSEY AND WEST LANCASHIRE TEACHING HOSPITALS NHS TRUST",
+   "supplier": "BOSTON SCIENTIFIC LIMITED",
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076148-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "ESNEFT3207 Urodynamics",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "Laborie Medical Technologies UK",
+   "date": "2026-08-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075431-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Bladder Scanners",
+   "buyer": "Northumbria Healthcare Facilities Management",
+   "supplier": "Verathon Medical (UK) Ltd",
+   "date": "2026-07-30",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/208b8c20-dd66-4867-bc15-b40cc5b289a3",
+   "value": 258563,
+   "periodEnd": "2026-08-17",
+   "source": "tender-history"
+  },
+  {
+   "title": "Bladder Scanner Purchase",
+   "buyer": "Swansea Bay University HealthBoard",
+   "supplier": "VERATHON MEDICAL (UK) LTD",
+   "date": "2026-06-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/057131-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Prostatic Ablation Devices",
+   "buyer": "University Hospitals of Leicester NHS Trust",
+   "supplier": "Boston Scientific Limited",
+   "date": "2026-06-02",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/d2bf0c5f-e160-481f-be46-7ce7287cf682",
+   "value": 683030,
+   "periodEnd": "2029-05-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of Urodynamic System",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "Laborie Medical Technologies UK",
+   "date": "2026-03-26",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/ed6fc3b9-84e1-4cd1-9765-ef8e784fc088",
+   "value": 47955,
+   "periodEnd": "2031-05-03",
+   "source": "tender-history"
+  },
+  {
+   "title": "C434328 - Bladder Scanners x 4",
+   "buyer": "Bradford Teaching Hospitals NHS Foundation Trust",
+   "supplier": "Verathon Medical (UK) Ltd",
+   "date": "2026-03-25",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/e48d54fa-2a1b-4110-beac-0e2c36809126",
+   "value": 32177,
+   "periodEnd": "2026-04-22",
+   "source": "tender-history"
+  },
+  {
+   "title": "6561-26 RFL - 4 X CUBEscan BioCon-1100 Bladder Scanners, Ref 2021/S 000-007768",
+   "buyer": "Partners Procurement Service",
+   "supplier": "De Smit Medical Systems Ltd",
+   "date": "2026-03-24",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/bd5cb0bd-7105-4486-87a2-0036b692a23c",
+   "value": 47950,
+   "periodEnd": "2026-03-26",
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of Bladder Scanners with seven year extended warranty",
+   "buyer": "SW YORKSHIRE PARTNERSHIP NHS FT, Stores & Distribution",
+   "supplier": "De Smit Medical Systems Limited",
+   "date": "2026-03-18",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/85336c0e-a410-4f6f-a7c7-0f58ba1247b6",
+   "value": 24945,
+   "periodEnd": "2033-03-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "CA17361 - LEA5867-RFL(NM)-Shawbrook Lithotripsy",
+   "buyer": "Partners Procurement Service (PPS)",
+   "supplier": "Shawbrook Asset Finance",
+   "date": "2026-03-11",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/56906cde-6f24-4393-8d07-58ab62db5399",
+   "value": 35321,
+   "periodEnd": "2026-07-29",
+   "source": "tender-history"
+  },
+  {
+   "title": "Boston Scientific Holmium Laser",
+   "buyer": "Hull University Teaching Hospitals NHS Foundation Trust",
+   "supplier": "Boston Scientific Limited",
+   "date": "2026-03-03",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/67ab75a3-06eb-41b0-9cb5-a07b30f48ade",
+   "value": 95000,
+   "periodEnd": "2026-03-03",
+   "source": "tender-history"
+  },
+  {
+   "title": "Surgical Urology Lasers for Lincoln & GDH Theatres",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust DO NOT USE",
+   "supplier": "novus med Ltd",
+   "date": "2026-02-26",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/92a9c263-8696-47dc-9d99-3c3ce07e245f",
+   "value": 131696,
+   "periodEnd": "2026-04-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Radiopharmaceuticals Treatment of Prostate Cancer (Xofigo)",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "supplier": "Bayer Public Limited Company",
+   "date": "2026-01-27",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/c2e4b524-eeed-48f4-9002-d198f4c863da",
+   "value": 105600,
+   "periodEnd": "2027-12-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Resectoscopes for TURBT Service",
+   "buyer": "Northumbria Healthcare NHS Foundation Trust",
+   "supplier": "OLYMPUS KEYMED GROUP LIMITED",
+   "date": "2026-01-26",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/7d437b9e-8b79-4393-bd69-8bbf913c9ef1",
+   "value": 34140,
+   "periodEnd": "2026-02-27",
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of cystoscope",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "Karl Storz Endoscopy (UK) Limited",
+   "date": "2026-01-19",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/397481f2-6c08-4f0a-8092-0cb9e06bfb50",
+   "value": 18348,
+   "periodEnd": "2031-02-19",
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Bladder Scanners",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "supplier": "De Smit Medical Systems Limited",
+   "date": "2026-01-06",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/ba32f311-7e84-4a0f-804e-1662f96ab980",
+   "value": 27980,
+   "periodEnd": "2026-02-06",
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Bladder Scanners",
+   "buyer": "Lincolnshire Community and Hospitals NHS Group",
+   "supplier": "De Smit Medical Systems Limited",
+   "date": "2026-01-06",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/bef4ff74-0c85-4a5a-9e2a-19073090a19d",
+   "value": 27980,
+   "periodEnd": "2026-02-06",
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of Ureteroscope",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "Karl Storz Endoscopy (UK) Limited",
+   "date": "2025-12-22",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/4d5a697a-6420-4eed-a6d3-a1651f8e0de2",
+   "value": 19543,
+   "periodEnd": "2031-02-28",
+   "source": "tender-history"
+  },
+  {
+   "title": "Contract for the provision of Endourology Consumables",
+   "buyer": "Nottingham University Hospital NHS Trust",
+   "supplier": "Cook (UK) Limited",
+   "date": "2025-12-16",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/0a432e3d-e10c-47a1-9e75-e1e3b9ba01ee",
+   "value": 792643,
+   "periodEnd": "2029-09-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "i10 Bladder Scanner",
+   "buyer": "Northumbria Healthcare NHS Foundation Trust",
+   "supplier": "Verathon Medical (UK) Ltd",
+   "date": "2025-12-16",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/349491d7-b539-4b82-9b08-93e3bd7b0e33",
+   "value": 33575,
+   "periodEnd": "2025-12-23",
+   "source": "tender-history"
+  },
+  {
+   "title": "Endourology Consumables",
+   "buyer": "Nottingham University Hospital NHS Trust",
+   "supplier": "OLYMPUS KEYMED GROUP LIMITED",
+   "date": "2025-12-14",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/425e7eca-f05a-49f3-aebf-b11e9f283421",
+   "value": 565192,
+   "periodEnd": "2027-09-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Stryker Operon Operating Table for Urology Theatres",
+   "buyer": "HULL UNIVERSITY TEACHING HOSPITALS NHS TRUST",
+   "supplier": "Stryker UK Limited",
+   "date": "2025-11-26",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/4c6a6e3b-9998-4dc9-8fce-ebbd9853440b",
+   "value": 35829,
+   "periodEnd": "2025-11-27",
+   "source": "tender-history"
+  },
+  {
+   "title": "Maintenance contract of bladder scanner",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "Verathon Medical (UK) Ltd",
+   "date": "2025-11-26",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/771fb7f8-17e4-49d2-85a0-f153005fa272",
+   "value": 2378,
+   "periodEnd": "2027-05-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Maintenance contract for bladder scanner",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "Verathon Medical (UK) Ltd",
+   "date": "2025-11-18",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/b01b4e98-438d-44c6-bee3-3e4dda653235",
+   "value": 2264,
+   "periodEnd": "2027-05-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of Ureteroscope",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "Karl Storz Endoscopy (UK) Limited",
+   "date": "2025-10-16",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/5eae00b0-4157-4a23-8554-93f96290ced9",
+   "value": 25994,
+   "periodEnd": "2030-11-30",
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [
+  {
+   "title": "NP69327 Endourology Consumables",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "status": "planning",
+   "stage": "preliminary market engagement / planning",
+   "closingDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/089026-2026",
+   "value": 9700000,
+   "source": "Find a Tender"
+  }
+ ],
+ "drugTariff": {
+  "parts": [
+   "IXA",
+   "IXB",
+   "IXC"
+  ],
+  "bnfFilter": null,
+  "bnfCount": null,
+  "vmpFilter": "\\b(nelaton|foley|dilatation catheter|reusable catheter|catheterisation packs?|catheter (?:disposable|retaining|safety|securement|maintenance|valves?)|urinar\\w*|urostom\\w*|uridome|suprapubic|penile sheaths?|incontinence sheaths?|leg bags?|night bags?|bladder (?:infusion|irrigat\\w*|washout)|urine (?:meters?|bags?))\\b",
+  "vmpCount": 92,
+  "effectiveMonth": "2026-10",
+  "dataAsOf": "2026-10-09",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
+  "lineCount": 3167,
+  "supplierCount": 56,
+  "topSuppliers": [
+   {
+    "name": "Coloplast Ltd",
+    "lines": 285
+   },
+   {
+    "name": "Bard Ltd",
+    "lines": 239
+   },
+   {
+    "name": "Teleflex",
+    "lines": 218
+   },
+   {
+    "name": "Hollister Ltd",
+    "lines": 214
+   },
+   {
+    "name": "Charles S Bullen Stomacare Ltd",
+    "lines": 143
+   },
+   {
+    "name": "Flexicare Medical Ltd",
+    "lines": 139
+   },
+   {
+    "name": "LINC Medical Systems Ltd",
+    "lines": 132
+   },
+   {
+    "name": "Wellspect HealthCare",
+    "lines": 114
+   },
+   {
+    "name": "B.Braun Medical Ltd",
+    "lines": 113
+   },
+   {
+    "name": "Marlen Healthcare Ltd",
+    "lines": 110
+   },
+   {
+    "name": "Manfred Sauer UK Ltd",
+    "lines": 109
+   },
+   {
+    "name": "Clinisupplies Ltd",
+    "lines": 96
+   },
+   {
+    "name": "ConvaTec Ltd",
+    "lines": 95
+   },
+   {
+    "name": "Salts Healthcare",
+    "lines": 91
+   },
+   {
+    "name": "Unora Healthcare Ltd",
+    "lines": 82
+   },
+   {
+    "name": "Peak Medical Ltd",
+    "lines": 68
+   },
+   {
+    "name": "Optimum Medical Solutions Ltd",
+    "lines": 66
+   },
+   {
+    "name": "Welland Medical Ltd",
+    "lines": 65
+   },
+   {
+    "name": "Hunter Urology Ltd",
+    "lines": 61
+   },
+   {
+    "name": "Jade-Euro-Med",
+    "lines": 61
+   }
+  ],
+  "priceMin": 0.4,
+  "priceMax": 469.0
+ },
+ "localIntel": [],
+ "localIntelGroups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
+ },
+ "directorySuppliers": [
+  {
+   "name": "Attends Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Attends Ltd",
+   "seedLabels": [
+    "Continence / Urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Disposable and Washable Continence Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/disposable-and-washable-continence-care-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Textiles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/textiles/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Disposable and Washable Continence Care; Textiles and Associated Products."
+  },
+  {
+   "name": "Axonics Modulation Technologies UK Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Axonics Modulation Technologies UK Limited",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Neuromodulation Devices and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/neuromodulation-devices-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Neuromodulation Devices and Associated Products."
+  },
+  {
+   "name": "Forma-Care (UK) Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Forma-Care (UK) Ltd",
+   "seedLabels": [
+    "Continence / Urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Disposable and Washable Continence Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/disposable-and-washable-continence-care-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Disposable and Washable Continence Care."
+  },
+  {
+   "name": "Healthcare 25 Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Healthcare 25 Ltd",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Disposable and Washable Continence Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/disposable-and-washable-continence-care-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrosurgical Consumables and Related Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrosurgical-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-gynaecology-and-sexual-health-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Minimally Invasive Surgery, Related Equipment and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/minimally-invasive-surgery/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on four NHS Supply Chain frameworks not counted as this speciality's: Disposable and Washable Continence Care; Electrosurgical Consumables and Related Accessories; Maternity, Obstetrics, Gynaecology and Sexual Health Products; Minimally Invasive Surgery, Related Equipment and Accessories."
+  },
+  {
+   "name": "Interweave Textiles",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Interweave Textiles",
+   "seedLabels": [
+    "Continence / Urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Pressure Area Care and Patient Handling",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-area-care-and-patient-handling/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Textiles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/textiles/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on two NHS Supply Chain frameworks not counted as this speciality's: Pressure Area Care and Patient Handling; Textiles and Associated Products."
+  },
+  {
+   "name": "Intuitive Surgical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Intuitive Surgical",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Robotic Medical Equipment and Associated Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/robotic-medical-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Robotic Medical Equipment",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Robotic Medical Equipment and Associated Accessories. The Hub's supplier directory also records: NHS Supply Chain — Robotic Medical Equipment."
+  },
+  {
+   "name": "Meditrade UK Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Meditrade UK Ltd",
+   "seedLabels": [
+    "Continence / Urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Disposable and Washable Continence Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/disposable-and-washable-continence-care-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Examination Gloves",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/examination-gloves/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "General Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/general-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Paper Hygiene",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/paper-hygiene-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Gloves",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-gloves/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Syringes, Needles and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on seven NHS Supply Chain frameworks not counted as this speciality's: Disposable and Washable Continence Care; Electrodes, Ultrasound Gels, Defibrillation and Related Consumables; Examination Gloves; General Wound Care; Paper Hygiene; Surgical Gloves; Syringes, Needles and Associated Products."
+  },
+  {
+   "name": "Ontex Healthcare UK Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Ontex Healthcare UK Ltd",
+   "seedLabels": [
+    "Continence / Urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Disposable and Washable Continence Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/disposable-and-washable-continence-care-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Disposable and Washable Continence Care."
+  },
+  {
+   "name": "P&S Healthcare Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "P&S Healthcare Ltd",
+   "seedLabels": [
+    "Continence / Urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Disposable and Washable Continence Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/disposable-and-washable-continence-care-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Disposable and Washable Continence Care."
+  },
+  {
+   "name": "Paul Hartmann (HARTMANN)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Paul Hartmann (HARTMANN)",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Advanced Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/advanced-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Disposable and Washable Continence Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/disposable-and-washable-continence-care-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "General Wound Care",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/general-wound-care/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Hand Hygiene and Associated Products and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/hand-hygiene-and-associated-products-and-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on four NHS Supply Chain frameworks not counted as this speciality's: Advanced Wound Care; Disposable and Washable Continence Care; General Wound Care; Hand Hygiene and Associated Products and Services."
+  },
+  {
+   "name": "Polar Medical Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Polar Medical Ltd",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Neuromodulation Devices and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/neuromodulation-devices-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Neuromodulation Devices and Associated Products."
+  },
+  {
+   "name": "Aspire Pharma",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Aspire Pharma",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS England — NHS National Generic Pharmaceuticals, Wave 16a",
+     "url": "https://www.find-tender.service.gov.uk/Notice/082784-2026",
+     "source": "Find a Tender contract award notice"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142; NHS England — NHS National Generic Pharmaceuticals, Wave 16a."
+  },
+  {
+   "name": "Bullen Healthcare",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Bullen Healthcare",
+   "seedLabels": [
+    "Continence / Urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+  },
+  {
+   "name": "Manfred Sauer UK Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Manfred Sauer UK Ltd",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  },
+  {
+   "name": "Qufora Ltd",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Qufora Ltd",
+   "seedLabels": [
+    "Continence & urology"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": true,
+  "markets": [
+   {
+    "id": "gu",
+    "label": "Drugs for genito-urinary disorders: BNF 7.4",
+    "bnf": [
+     "07.04"
+    ],
+    "note": null,
+    "latestPeriod": "202607",
+    "baselinePeriod": "202507",
+    "items": 2299671,
+    "cost": 15124401,
+    "items12m": 25777941,
+    "cost12m": 162492354,
+    "itemsYoY": 4.6,
+    "products": 89,
+    "topNational": [
+     {
+      "code": "0704010U0AA",
+      "label": "Tamsulosin",
+      "generic": true,
+      "items": 888456,
+      "share": 38.6,
+      "cost": 896249,
+      "yoy": 3.6
+     },
+     {
+      "code": "0704020ABAA",
+      "label": "Solifenacin",
+      "generic": true,
+      "items": 316983,
+      "share": 13.8,
+      "cost": 407360,
+      "yoy": 5.2
+     },
+     {
+      "code": "0704050Z0AA",
+      "label": "Sildenafil",
+      "generic": true,
+      "items": 293123,
+      "share": 12.7,
+      "cost": 302858,
+      "yoy": -1.1
+     },
+     {
+      "code": "0704020AEAA",
+      "label": "Mirabegron",
+      "generic": true,
+      "items": 287113,
+      "share": 12.5,
+      "cost": 7358106,
+      "yoy": 9.2
+     },
+     {
+      "code": "0704050R0AA",
+      "label": "Tadalafil",
+      "generic": true,
+      "items": 121619,
+      "share": 5.3,
+      "cost": 241156,
+      "yoy": 16.0
+     },
+     {
+      "code": "0704020J0AA",
+      "label": "Oxybutynin",
+      "generic": true,
+      "items": 107016,
+      "share": 4.7,
+      "cost": 1382086,
+      "yoy": -7.0
+     },
+     {
+      "code": "0704020N0AA",
+      "label": "Tolterodine",
+      "generic": true,
+      "items": 60302,
+      "share": 2.6,
+      "cost": 643954,
+      "yoy": -13.4
+     },
+     {
+      "code": "0704020AFAA",
+      "label": "Vibegron",
+      "generic": true,
+      "items": 37893,
+      "share": 1.6,
+      "cost": 934418,
+      "yoy": 941.3
+     },
+     {
+      "code": "0704020AAAA",
+      "label": "Duloxetine",
+      "generic": true,
+      "items": 35911,
+      "share": 1.6,
+      "cost": 108560,
+      "yoy": 15.9
+     },
+     {
+      "code": "0704010A0AA",
+      "label": "Alfuzosin",
+      "generic": true,
+      "items": 35066,
+      "share": 1.5,
+      "cost": 430002,
+      "yoy": 5.4
+     }
+    ],
+    "icbLeaders": [
+     {
+      "icb": "QOX",
+      "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+      "items": 37855,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 15556,
+        "share": 41.1
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 6345,
+        "share": 16.8
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 4754,
+        "share": 12.6
+       }
+      ]
+     },
+     {
+      "icb": "QHL",
+      "name": "NHS Birmingham and Solihull",
+      "items": 44120,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 13487,
+        "share": 30.6
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 8630,
+        "share": 19.6
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 6676,
+        "share": 15.1
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 41901,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 14015,
+        "share": 33.4
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 7355,
+        "share": 17.6
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 6101,
+        "share": 14.6
+       }
+      ]
+     },
+     {
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 27132,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 10664,
+        "share": 39.3
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 4317,
+        "share": 15.9
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 3546,
+        "share": 13.1
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 114223,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 49405,
+        "share": 43.3
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 13883,
+        "share": 12.2
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 13345,
+        "share": 11.7
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 117828,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 42997,
+        "share": 36.5
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 16746,
+        "share": 14.2
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 16442,
+        "share": 14.0
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 27528,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 12276,
+        "share": 44.6
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 3725,
+        "share": 13.5
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 3271,
+        "share": 11.9
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 37768,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 14848,
+        "share": 39.3
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 5371,
+        "share": 14.2
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 4674,
+        "share": 12.4
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 37106,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 13884,
+        "share": 37.4
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 5949,
+        "share": 16.0
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 5828,
+        "share": 15.7
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 51391,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 20913,
+        "share": 40.7
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 7102,
+        "share": 13.8
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 6246,
+        "share": 12.2
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 34797,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 14764,
+        "share": 42.4
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 5047,
+        "share": 14.5
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 4825,
+        "share": 13.9
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 72385,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 30330,
+        "share": 41.9
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 9334,
+        "share": 12.9
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 9206,
+        "share": 12.7
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 30168,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 12695,
+        "share": 42.1
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 4162,
+        "share": 13.8
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 3681,
+        "share": 12.2
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 121310,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 43486,
+        "share": 35.8
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 16647,
+        "share": 13.7
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 15387,
+        "share": 12.7
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 72329,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 28380,
+        "share": 39.2
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 10177,
+        "share": 14.1
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 8943,
+        "share": 12.4
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 31210,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 12558,
+        "share": 40.2
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 4370,
+        "share": 14.0
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 4063,
+        "share": 13.0
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 87210,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 35497,
+        "share": 40.7
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 11623,
+        "share": 13.3
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 11061,
+        "share": 12.7
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 71565,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 28459,
+        "share": 39.8
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 10493,
+        "share": 14.7
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 9730,
+        "share": 13.6
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 78581,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 29097,
+        "share": 37.0
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 11305,
+        "share": 14.4
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 10392,
+        "share": 13.2
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 41481,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 16507,
+        "share": 39.8
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 5515,
+        "share": 13.3
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 5258,
+        "share": 12.7
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 48632,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 20321,
+        "share": 41.8
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 7145,
+        "share": 14.7
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 6068,
+        "share": 12.5
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 89271,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 39341,
+        "share": 44.1
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 11557,
+        "share": 12.9
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 10358,
+        "share": 11.6
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 71130,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 26895,
+        "share": 37.8
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 10451,
+        "share": 14.7
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 8440,
+        "share": 11.9
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 168718,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 61605,
+        "share": 36.5
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 24587,
+        "share": 14.6
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 22341,
+        "share": 13.2
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 33573,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 13079,
+        "share": 39.0
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 5581,
+        "share": 16.6
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 4813,
+        "share": 14.3
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 45450,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 16012,
+        "share": 35.2
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 7495,
+        "share": 16.5
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 6626,
+        "share": 14.6
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 19692,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 7663,
+        "share": 38.9
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 2649,
+        "share": 13.5
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 2629,
+        "share": 13.4
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 21584,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 9540,
+        "share": 44.2
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 2845,
+        "share": 13.2
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 2681,
+        "share": 12.4
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 51419,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 17593,
+        "share": 34.2
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 8363,
+        "share": 16.3
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 7859,
+        "share": 15.3
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 46690,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 18839,
+        "share": 40.3
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 6680,
+        "share": 14.3
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 6465,
+        "share": 13.8
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 71488,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 23217,
+        "share": 32.5
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 13295,
+        "share": 18.6
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 9863,
+        "share": 13.8
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 47629,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 19946,
+        "share": 41.9
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 6857,
+        "share": 14.4
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 5797,
+        "share": 12.2
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 101089,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 42028,
+        "share": 41.6
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 13759,
+        "share": 13.6
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 12475,
+        "share": 12.3
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 70718,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 29506,
+        "share": 41.7
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 10072,
+        "share": 14.2
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 8851,
+        "share": 12.5
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 103554,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 33726,
+        "share": 32.6
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 17079,
+        "share": 16.5
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 13757,
+        "share": 13.3
+       }
+      ]
+     },
+     {
+      "icb": "Z9B2Z",
+      "name": "NHS West and North London",
+      "items": 131103,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 49317,
+        "share": 37.6
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 20498,
+        "share": 15.6
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 18694,
+        "share": 14.3
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "catheters",
+    "label": "Catheters and catheter maintenance: BNF 21.02 and 21.13",
+    "bnf": [
+     "21.02",
+     "21.13"
+    ],
+    "note": null,
+    "latestPeriod": "202607",
+    "baselinePeriod": "202507",
+    "items": 161766,
+    "cost": 18867767,
+    "items12m": 1770795,
+    "cost12m": 208093409,
+    "itemsYoY": 8.6,
+    "products": 400,
+    "topNational": [
+     {
+      "code": "21020000950",
+      "label": "Brillant AquaFlate all silicone catheter male",
+      "generic": false,
+      "items": 11095,
+      "share": 6.9,
+      "cost": 166004,
+      "yoy": 3.5
+     },
+     {
+      "code": "21020001033",
+      "label": "Prosys all silicone catheter male",
+      "generic": false,
+      "items": 6479,
+      "share": 4.0,
+      "cost": 94727,
+      "yoy": 5.9
+     },
+     {
+      "code": "21130000124",
+      "label": "Uro-Tainer Twin Suby G citric acid",
+      "generic": false,
+      "items": 5522,
+      "share": 3.4,
+      "cost": 272521,
+      "yoy": 3.2
+     },
+     {
+      "code": "21130000104",
+      "label": "OptiFlo S saline",
+      "generic": false,
+      "items": 5505,
+      "share": 3.4,
+      "cost": 167101,
+      "yoy": 12.1
+     },
+     {
+      "code": "21020001196",
+      "label": "SpeediCath Compact catheter male one size",
+      "generic": false,
+      "items": 4493,
+      "share": 2.8,
+      "cost": 1143619,
+      "yoy": -0.2
+     },
+     {
+      "code": "21020001458",
+      "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
+      "generic": false,
+      "items": 4353,
+      "share": 2.7,
+      "cost": 72694,
+      "yoy": 43.0
+     },
+     {
+      "code": "21020001149",
+      "label": "VaPro Pocket No Touch hydrophilic catheter male",
+      "generic": false,
+      "items": 4282,
+      "share": 2.6,
+      "cost": 878328,
+      "yoy": 6.8
+     },
+     {
+      "code": "21020001560",
+      "label": "Prosys all silicone open ended catheter male",
+      "generic": false,
+      "items": 4220,
+      "share": 2.6,
+      "cost": 67584,
+      "yoy": 17.1
+     },
+     {
+      "code": "21020001408",
+      "label": "LoFric Origo catheter male",
+      "generic": false,
+      "items": 3836,
+      "share": 2.4,
+      "cost": 778490,
+      "yoy": -11.8
+     },
+     {
+      "code": "21130000110",
+      "label": "Uro-Tainer sodium chloride",
+      "generic": false,
+      "items": 3265,
+      "share": 2.0,
+      "cost": 132773,
+      "yoy": -6.1
+     }
+    ],
+    "icbLeaders": [
+     {
+      "icb": "QOX",
+      "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+      "items": 2862,
+      "leaders": [
+       {
+        "code": "21020001458",
+        "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
+        "generic": false,
+        "items": 206,
+        "share": 7.2
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 132,
+        "share": 4.6
+       },
+       {
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
+        "generic": false,
+        "items": 108,
+        "share": 3.8
+       }
+      ]
+     },
+     {
+      "icb": "QHL",
+      "name": "NHS Birmingham and Solihull",
+      "items": 3431,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 326,
+        "share": 9.5
+       },
+       {
+        "code": "21020001458",
+        "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
+        "generic": false,
+        "items": 206,
+        "share": 6.0
+       },
+       {
+        "code": "21020001374",
+        "label": "Prosys Vesica Community Catheterisation Pack LT",
+        "generic": false,
+        "items": 150,
+        "share": 4.4
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 3998,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 614,
+        "share": 15.4
+       },
+       {
+        "code": "21130000124",
+        "label": "Uro-Tainer Twin Suby G citric acid",
+        "generic": false,
+        "items": 229,
+        "share": 5.7
+       },
+       {
+        "code": "21130000110",
+        "label": "Uro-Tainer sodium chloride",
+        "generic": false,
+        "items": 174,
+        "share": 4.4
+       }
+      ]
+     },
+     {
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 3139,
+      "leaders": [
+       {
+        "code": "21020001458",
+        "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
+        "generic": false,
+        "items": 444,
+        "share": 14.1
+       },
+       {
+        "code": "21020001408",
+        "label": "LoFric Origo catheter male",
+        "generic": false,
+        "items": 226,
+        "share": 7.2
+       },
+       {
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
+        "generic": false,
+        "items": 202,
+        "share": 6.4
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 7738,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 723,
+        "share": 9.3
+       },
+       {
+        "code": "21020000960",
+        "label": "Sympacath AquaFlate hydrogel coated latex catheter male",
+        "generic": false,
+        "items": 383,
+        "share": 4.9
+       },
+       {
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
+        "generic": false,
+        "items": 305,
+        "share": 3.9
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 9114,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 788,
+        "share": 8.6
+       },
+       {
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
+        "generic": false,
+        "items": 406,
+        "share": 4.5
+       },
+       {
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
+        "generic": false,
+        "items": 352,
+        "share": 3.9
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 1876,
+      "leaders": [
+       {
+        "code": "21020001408",
+        "label": "LoFric Origo catheter male",
+        "generic": false,
+        "items": 105,
+        "share": 5.6
+       },
+       {
+        "code": "21020001254",
+        "label": "LoFric Sense hydrophilic catheter female",
+        "generic": false,
+        "items": 94,
+        "share": 5.0
+       },
+       {
+        "code": "21020000781",
+        "label": "Biocath Comprehensive Care Foley Tray catheter male medium",
+        "generic": false,
+        "items": 88,
+        "share": 4.7
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 2879,
+      "leaders": [
+       {
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
+        "generic": false,
+        "items": 267,
+        "share": 9.3
+       },
+       {
+        "code": "21130000110",
+        "label": "Uro-Tainer sodium chloride",
+        "generic": false,
+        "items": 216,
+        "share": 7.5
+       },
+       {
+        "code": "21020001560",
+        "label": "Prosys all silicone open ended catheter male",
+        "generic": false,
+        "items": 210,
+        "share": 7.3
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 3323,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 346,
+        "share": 10.4
+       },
+       {
+        "code": "21130000124",
+        "label": "Uro-Tainer Twin Suby G citric acid",
+        "generic": false,
+        "items": 159,
+        "share": 4.8
+       },
+       {
+        "code": "21020001560",
+        "label": "Prosys all silicone open ended catheter male",
+        "generic": false,
+        "items": 131,
+        "share": 3.9
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 4577,
+      "leaders": [
+       {
+        "code": "21020001458",
+        "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
+        "generic": false,
+        "items": 267,
+        "share": 5.8
+       },
+       {
+        "code": "21020000781",
+        "label": "Biocath Comprehensive Care Foley Tray catheter male medium",
+        "generic": false,
+        "items": 230,
+        "share": 5.0
+       },
+       {
+        "code": "21020001408",
+        "label": "LoFric Origo catheter male",
+        "generic": false,
+        "items": 183,
+        "share": 4.0
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 2918,
+      "leaders": [
+       {
+        "code": "21020001561",
+        "label": "iQ Cath hydrophilic catheter with sleeve male",
+        "generic": false,
+        "items": 206,
+        "share": 7.1
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 190,
+        "share": 6.5
+       },
+       {
+        "code": "21130000124",
+        "label": "Uro-Tainer Twin Suby G citric acid",
+        "generic": false,
+        "items": 178,
+        "share": 6.1
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 4315,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 277,
+        "share": 6.4
+       },
+       {
+        "code": "21020001196",
+        "label": "SpeediCath Compact catheter male one size",
+        "generic": false,
+        "items": 270,
+        "share": 6.3
+       },
+       {
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
+        "generic": false,
+        "items": 164,
+        "share": 3.8
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 1879,
+      "leaders": [
+       {
+        "code": "21020000781",
+        "label": "Biocath Comprehensive Care Foley Tray catheter male medium",
+        "generic": false,
+        "items": 91,
+        "share": 4.8
+       },
+       {
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
+        "generic": false,
+        "items": 83,
+        "share": 4.4
+       },
+       {
+        "code": "21020001196",
+        "label": "SpeediCath Compact catheter male one size",
+        "generic": false,
+        "items": 83,
+        "share": 4.4
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 6644,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 934,
+        "share": 14.1
+       },
+       {
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
+        "generic": false,
+        "items": 245,
+        "share": 3.7
+       },
+       {
+        "code": "21020001149",
+        "label": "VaPro Pocket No Touch hydrophilic catheter male",
+        "generic": false,
+        "items": 242,
+        "share": 3.6
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 4636,
+      "leaders": [
+       {
+        "code": "21020001550",
+        "label": "SpiritCare all slc cath+pfs for ball inflation & supplementary syrg for ball deflation male",
+        "generic": false,
+        "items": 555,
+        "share": 12.0
+       },
+       {
+        "code": "21020001560",
+        "label": "Prosys all silicone open ended catheter male",
+        "generic": false,
+        "items": 355,
+        "share": 7.7
+       },
+       {
+        "code": "21020001149",
+        "label": "VaPro Pocket No Touch hydrophilic catheter male",
+        "generic": false,
+        "items": 183,
+        "share": 3.9
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 3151,
+      "leaders": [
+       {
+        "code": "21020001378",
+        "label": "Prosys Vesica Community Catheterisation Pack",
+        "generic": false,
+        "items": 417,
+        "share": 13.2
+       },
+       {
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
+        "generic": false,
+        "items": 314,
+        "share": 10.0
+       },
+       {
+        "code": "21020001408",
+        "label": "LoFric Origo catheter male",
+        "generic": false,
+        "items": 262,
+        "share": 8.3
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 5963,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 245,
+        "share": 4.1
+       },
+       {
+        "code": "21020001149",
+        "label": "VaPro Pocket No Touch hydrophilic catheter male",
+        "generic": false,
+        "items": 204,
+        "share": 3.4
+       },
+       {
+        "code": "21020000960",
+        "label": "Sympacath AquaFlate hydrogel coated latex catheter male",
+        "generic": false,
+        "items": 181,
+        "share": 3.0
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 4970,
+      "leaders": [
+       {
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
+        "generic": false,
+        "items": 287,
+        "share": 5.8
+       },
+       {
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
+        "generic": false,
+        "items": 270,
+        "share": 5.4
+       },
+       {
+        "code": "21020001196",
+        "label": "SpeediCath Compact catheter male one size",
+        "generic": false,
+        "items": 265,
+        "share": 5.3
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 5984,
+      "leaders": [
+       {
+        "code": "21020001149",
+        "label": "VaPro Pocket No Touch hydrophilic catheter male",
+        "generic": false,
+        "items": 551,
+        "share": 9.2
+       },
+       {
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
+        "generic": false,
+        "items": 510,
+        "share": 8.5
+       },
+       {
+        "code": "21020000960",
+        "label": "Sympacath AquaFlate hydrogel coated latex catheter male",
+        "generic": false,
+        "items": 380,
+        "share": 6.4
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 3370,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 357,
+        "share": 10.6
+       },
+       {
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
+        "generic": false,
+        "items": 243,
+        "share": 7.2
+       },
+       {
+        "code": "21020001196",
+        "label": "SpeediCath Compact catheter male one size",
+        "generic": false,
+        "items": 171,
+        "share": 5.1
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 2906,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 347,
+        "share": 11.9
+       },
+       {
+        "code": "21020001196",
+        "label": "SpeediCath Compact catheter male one size",
+        "generic": false,
+        "items": 146,
+        "share": 5.0
+       },
+       {
+        "code": "21130000124",
+        "label": "Uro-Tainer Twin Suby G citric acid",
+        "generic": false,
+        "items": 132,
+        "share": 4.5
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 6473,
+      "leaders": [
+       {
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
+        "generic": false,
+        "items": 485,
+        "share": 7.5
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 394,
+        "share": 6.1
+       },
+       {
+        "code": "21020001196",
+        "label": "SpeediCath Compact catheter male one size",
+        "generic": false,
+        "items": 317,
+        "share": 4.9
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 3562,
+      "leaders": [
+       {
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
+        "generic": false,
+        "items": 290,
+        "share": 8.1
+       },
+       {
+        "code": "21130000124",
+        "label": "Uro-Tainer Twin Suby G citric acid",
+        "generic": false,
+        "items": 170,
+        "share": 4.8
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 135,
+        "share": 3.8
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 10533,
+      "leaders": [
+       {
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
+        "generic": false,
+        "items": 734,
+        "share": 7.0
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 496,
+        "share": 4.7
+       },
+       {
+        "code": "21130000124",
+        "label": "Uro-Tainer Twin Suby G citric acid",
+        "generic": false,
+        "items": 472,
+        "share": 4.5
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 2116,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 231,
+        "share": 10.9
+       },
+       {
+        "code": "21130000124",
+        "label": "Uro-Tainer Twin Suby G citric acid",
+        "generic": false,
+        "items": 185,
+        "share": 8.7
+       },
+       {
+        "code": "21020001586",
+        "label": "Luja catheter male",
+        "generic": false,
+        "items": 108,
+        "share": 5.1
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 2783,
+      "leaders": [
+       {
+        "code": "21020001560",
+        "label": "Prosys all silicone open ended catheter male",
+        "generic": false,
+        "items": 192,
+        "share": 6.9
+       },
+       {
+        "code": "21020001593",
+        "label": "2 way foy all slc cath+glyc filled syrg for inflation & empty syrg for deflation male 12Ch-24Ch",
+        "generic": false,
+        "items": 167,
+        "share": 6.0
+       },
+       {
+        "code": "21130000124",
+        "label": "Uro-Tainer Twin Suby G citric acid",
+        "generic": false,
+        "items": 167,
+        "share": 6.0
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 1682,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 219,
+        "share": 13.0
+       },
+       {
+        "code": "21020001196",
+        "label": "SpeediCath Compact catheter male one size",
+        "generic": false,
+        "items": 187,
+        "share": 11.1
+       },
+       {
+        "code": "21020001481",
+        "label": "SpeediCath Flex catheter male",
+        "generic": false,
+        "items": 87,
+        "share": 5.2
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 2139,
+      "leaders": [
+       {
+        "code": "21020001408",
+        "label": "LoFric Origo catheter male",
+        "generic": false,
+        "items": 150,
+        "share": 7.0
+       },
+       {
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
+        "generic": false,
+        "items": 113,
+        "share": 5.3
+       },
+       {
+        "code": "21130000124",
+        "label": "Uro-Tainer Twin Suby G citric acid",
+        "generic": false,
+        "items": 78,
+        "share": 3.6
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 3567,
+      "leaders": [
+       {
+        "code": "21130000124",
+        "label": "Uro-Tainer Twin Suby G citric acid",
+        "generic": false,
+        "items": 241,
+        "share": 6.8
+       },
+       {
+        "code": "21020001458",
+        "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
+        "generic": false,
+        "items": 193,
+        "share": 5.4
+       },
+       {
+        "code": "21130100014",
+        "label": "Curion CuriFlush sodium chloride",
+        "generic": false,
+        "items": 145,
+        "share": 4.1
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 2547,
+      "leaders": [
+       {
+        "code": "21130000124",
+        "label": "Uro-Tainer Twin Suby G citric acid",
+        "generic": false,
+        "items": 183,
+        "share": 7.2
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 150,
+        "share": 5.9
+       },
+       {
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
+        "generic": false,
+        "items": 123,
+        "share": 4.8
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 5022,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 434,
+        "share": 8.6
+       },
+       {
+        "code": "21020001249",
+        "label": "LoFric Primo catheter male non PVC",
+        "generic": false,
+        "items": 279,
+        "share": 5.6
+       },
+       {
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
+        "generic": false,
+        "items": 231,
+        "share": 4.6
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 3782,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 576,
+        "share": 15.2
+       },
+       {
+        "code": "21020001149",
+        "label": "VaPro Pocket No Touch hydrophilic catheter male",
+        "generic": false,
+        "items": 237,
+        "share": 6.3
+       },
+       {
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
+        "generic": false,
+        "items": 145,
+        "share": 3.8
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 8894,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 902,
+        "share": 10.1
+       },
+       {
+        "code": "21020001196",
+        "label": "SpeediCath Compact catheter male one size",
+        "generic": false,
+        "items": 378,
+        "share": 4.3
+       },
+       {
+        "code": "21020001458",
+        "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
+        "generic": false,
+        "items": 338,
+        "share": 3.8
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 5645,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 818,
+        "share": 14.5
+       },
+       {
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
+        "generic": false,
+        "items": 265,
+        "share": 4.7
+       },
+       {
+        "code": "21020001528",
+        "label": "Ugopro Catheterisation Procedure Pack",
+        "generic": false,
+        "items": 260,
+        "share": 4.6
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 6681,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 431,
+        "share": 6.5
+       },
+       {
+        "code": "21020001458",
+        "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
+        "generic": false,
+        "items": 281,
+        "share": 4.2
+       },
+       {
+        "code": "21020001196",
+        "label": "SpeediCath Compact catheter male one size",
+        "generic": false,
+        "items": 223,
+        "share": 3.3
+       }
+      ]
+     },
+     {
+      "icb": "Z9B2Z",
+      "name": "NHS West and North London",
+      "items": 6371,
+      "leaders": [
+       {
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
+        "generic": false,
+        "items": 342,
+        "share": 5.4
+       },
+       {
+        "code": "21130000124",
+        "label": "Uro-Tainer Twin Suby G citric acid",
+        "generic": false,
+        "items": 340,
+        "share": 5.3
+       },
+       {
+        "code": "21020001458",
+        "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
+        "generic": false,
+        "items": 306,
+        "share": 4.8
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-10-09",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": false,
+  "whyEmpty": null,
+  "count": 77,
+  "roundupsExcluded": 9,
+  "broadcastsExcluded": 2,
+  "updates": [
+   {
+    "title": "Botulinum toxin type A products: updated warnings regarding risk of iatrogenic botulism",
+    "url": "https://www.gov.uk/drug-safety-update/botulinum-toxin-type-a-products-updated-warnings-regarding-risk-of-iatrogenic-botulism",
+    "published": "2026-07-15",
+    "updated": "2026-07-15",
+    "summary": "Cases of iatrogenic botulism have been reported following the therapeutic or cosmetic use of botulinum toxin containing products where the toxin’s effect extends beyond the area of treatment. Patients should seek immediate medical advice if they experience signs and symptoms."
+   },
+   {
+    "title": "ACE-inhibitors: Be aware of the distinction between bradykinin- and histamine-mediated angioedema, as treatment strategies differ significantly",
+    "url": "https://www.gov.uk/drug-safety-update/ace-inhibitors-be-aware-of-the-distinction-between-bradykinin-and-histamine-mediated-angioedema-as-treatment-strategies-differ-significantly",
+    "published": "2026-06-16",
+    "updated": "2026-06-16",
+    "summary": "Healthcare professionals should be aware of the potential for delayed onset of angioedema and the distinction between bradykinin- and histamine-mediated cases, as treatment strategies differ significantly and bradykinin-mediated angioedema does not respond to standard treatment."
+   },
+   {
+    "title": "Finasteride and Dutasteride – updated safety warnings for psychiatric side effects and sexual dysfunction",
+    "url": "https://www.gov.uk/drug-safety-update/finasteride-and-dutasteride-updated-safety-warnings-for-psychiatric-side-effects-and-sexual-dysfunction",
+    "published": "2026-05-11",
+    "updated": "2026-05-11",
+    "summary": "The MHRA has reviewed the evidence for finasteride and dutasteride and the risk of suicidal thoughts and behaviours and has recommended further measures to minimise this risk."
+   },
+   {
+    "title": "Yellow Card Biobank: call to contribute to study of genetic links to side effects",
+    "url": "https://www.gov.uk/drug-safety-update/yellow-card-biobank-call-to-contribute-to-study-of-genetic-links-to-side-effects",
+    "published": "2024-08-21",
+    "updated": "2024-08-21",
+    "summary": "Support this initiative to explore whether there is a genetic basis of side effects associated with direct-acting oral anticoagulants (DOACs) and allopurinol."
+   },
+   {
+    "title": "Finasteride: reminder of the risk psychiatric side effects and of sexual side effects (which may persist after discontinuation of treatment)",
+    "url": "https://www.gov.uk/drug-safety-update/finasteride-reminder-of-the-risk-psychiatric-side-effects-and-of-sexual-side-effects-which-may-persist-after-discontinuation-of-treatment",
+    "published": "2024-04-29",
+    "updated": "2024-04-29",
+    "summary": "A patient alert card is being introduced for men taking finasteride to help raise awareness of the risk of psychiatric side effects and sexual dysfunction, including the potential for sexual dysfunction to persist after treatment has stopped. Healthcare professionals are reminded to monitor patients for both psychiatric and sexual side effects."
+   },
+   {
+    "title": "Nitrofurantoin: reminder of the risks of pulmonary and hepatic adverse drug reactions",
+    "url": "https://www.gov.uk/drug-safety-update/nitrofurantoin-reminder-of-the-risks-of-pulmonary-and-hepatic-adverse-drug-reactions",
+    "published": "2023-04-26",
+    "updated": "2023-04-26",
+    "summary": "Healthcare professionals prescribing nitrofurantoin should be alert to the risks of pulmonary and hepatic adverse drug reactions and advise patients to be vigilant for the signs and symptoms in need of further investigation."
+   },
+   {
+    "title": "Xaqua (metolazone) 5mg tablets: exercise caution when switching patients between metolazone preparations",
+    "url": "https://www.gov.uk/drug-safety-update/xaqua-metolazone-5mg-tablets-exercise-caution-when-switching-patients-between-metolazone-preparations",
+    "published": "2023-01-25",
+    "updated": "2023-01-25",
+    "summary": "Prescribers and dispensers should use caution if switching patients between different metolazone preparations as the rate and extent of absorption of metolazone are formulation dependent. This can impact the bioavailability of the product. Follow good practice in prescribing medicines by considering the licensed formulation (Xaqua) in preference to unlicensed imported metolazone preparations in new patients. The product information for Xaqua has been updated to clarify that references to comparative bioavailability with other metolazone products relate specifically to Metenix and not to any other metolazone preparations."
+   },
+   {
+    "title": "Letters and drug alerts sent to healthcare professionals in February 2021",
+    "url": "https://www.gov.uk/drug-safety-update/letters-and-drug-alerts-sent-to-healthcare-professionals-in-february-2021",
+    "published": "2021-03-24",
+    "updated": "2021-03-24",
+    "summary": "A summary of letters and drug alerts recently sent to healthcare professionals."
+   }
+  ]
+ },
+ "drugTariffViiia": {
+  "effectiveMonth": "2026-10",
+  "latestPublishedMonth": "2026-10",
+  "dataAsOf": "2026-10-09",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-viii",
+  "whole": false,
+  "bnfFilter": [
+   "07.04"
+  ],
+  "lineCount": 75,
+  "categoryCounts": {
+   "H": 1,
+   "M": 19,
+   "C": 41,
+   "A": 14
+  },
+  "fileLines": 3534,
+  "fileLinesWithoutBnf": 53,
+  "priceMin": 0.66,
+  "priceMax": 182.53,
+  "linesShown": 75,
+  "lines": [
+   {
+    "medicine": "Alfuzosin 2.5mg tablets",
+    "pack": "60 tablet",
+    "category": "M",
+    "price": 8.27,
+    "bnf": "0704010A0AAAAAA"
+   },
+   {
+    "medicine": "Duloxetine 20mg gastro-resistant capsules",
+    "pack": "28 capsule",
+    "category": "M",
+    "price": 2.49,
+    "bnf": "0704020AAAAAAAA"
+   },
+   {
+    "medicine": "Duloxetine 40mg gastro-resistant capsules",
+    "pack": "56 capsule",
+    "category": "M",
+    "price": 2.55,
+    "bnf": "0704020AAAAABAB"
+   },
+   {
+    "medicine": "Fesoterodine 4mg modified-release tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 8.16,
+    "bnf": "0704020ADAAAAAA"
+   },
+   {
+    "medicine": "Fesoterodine 8mg modified-release tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 8.27,
+    "bnf": "0704020ADAAABAB"
+   },
+   {
+    "medicine": "Oxybutynin 10mg modified-release tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 32.07,
+    "bnf": "0704020J0AAATAT"
+   },
+   {
+    "medicine": "Oxybutynin 5mg modified-release tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 15.45,
+    "bnf": "0704020J0AAASAS"
+   },
+   {
+    "medicine": "Sildenafil 100mg tablets",
+    "pack": "4 tablet",
+    "category": "M",
+    "price": 0.71,
+    "bnf": "0704050Z0AAACAC"
+   },
+   {
+    "medicine": "Sildenafil 25mg tablets",
+    "pack": "4 tablet",
+    "category": "M",
+    "price": 0.73,
+    "bnf": "0704050Z0AAABAB"
+   },
+   {
+    "medicine": "Sildenafil 50mg tablets",
+    "pack": "4 tablet",
+    "category": "M",
+    "price": 0.66,
+    "bnf": "0704050Z0AAAAAA"
+   },
+   {
+    "medicine": "Solifenacin 10mg tablets",
+    "pack": "30 tablet",
+    "category": "M",
+    "price": 1.2,
+    "bnf": "0704020ABAAABAB"
+   },
+   {
+    "medicine": "Solifenacin 5mg tablets",
+    "pack": "30 tablet",
+    "category": "M",
+    "price": 1.04,
+    "bnf": "0704020ABAAAAAA"
+   },
+   {
+    "medicine": "Tadalafil 10mg tablets",
+    "pack": "4 tablet",
+    "category": "M",
+    "price": 0.85,
+    "bnf": "0704050R0AAAAAA"
+   },
+   {
+    "medicine": "Tadalafil 20mg tablets",
+    "pack": "4 tablet",
+    "category": "M",
+    "price": 0.82,
+    "bnf": "0704050R0AAABAB"
+   },
+   {
+    "medicine": "Tadalafil 5mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 2.08,
+    "bnf": "0704050R0AAADAD"
+   },
+   {
+    "medicine": "Tamsulosin 400microgram / Dutasteride 500microgram capsules",
+    "pack": "30 capsule",
+    "category": "M",
+    "price": 4.35,
+    "bnf": "0704010V0AAAAAA"
+   },
+   {
+    "medicine": "Tamsulosin 400microgram modified-release capsules",
+    "pack": "30 capsule",
+    "category": "M",
+    "price": 1.17,
+    "bnf": "0704010U0AAAAAA"
+   },
+   {
+    "medicine": "Tolterodine 1mg tablets",
+    "pack": "56 tablet",
+    "category": "M",
+    "price": 12.8,
+    "bnf": "0704020N0AAAAAA"
+   },
+   {
+    "medicine": "Tolterodine 2mg tablets",
+    "pack": "56 tablet",
+    "category": "M",
+    "price": 12.96,
+    "bnf": "0704020N0AAABAB"
+   },
+   {
+    "medicine": "Alprostadil 10microgram powder and solvent for solution for injection cartridges with device",
+    "pack": "2 cartridge",
+    "category": "C",
+    "price": 35.55,
+    "bnf": "0704050B0AABMBM"
+   },
+   {
+    "medicine": "Alprostadil 10microgram powder and solvent for solution for injection pre-filled disposable devices",
+    "pack": "2 pre-filled disposable injection",
+    "category": "C",
+    "price": 14.7,
+    "bnf": "0704050B0AABJBJ"
+   },
+   {
+    "medicine": "Alprostadil 10microgram powder and solvent for solution for injection vials",
+    "pack": "1 vial",
+    "category": "C",
+    "price": 9.24,
+    "bnf": "0704050B0AAAIAI"
+   },
+   {
+    "medicine": "Alprostadil 1mg urethral sticks",
+    "pack": "1 applicator",
+    "category": "C",
+    "price": 11.56,
+    "bnf": "0704050B0AABBBB"
+   },
+   {
+    "medicine": "Alprostadil 20microgram powder and solvent for solution for injection cartridges with device",
+    "pack": "2 cartridge",
+    "category": "C",
+    "price": 35.55,
+    "bnf": "0704050B0AABLBL"
+   },
+   {
+    "medicine": "Alprostadil 20microgram powder and solvent for solution for injection pre-filled disposable devices",
+    "pack": "2 pre-filled disposable injection",
+    "category": "C",
+    "price": 19.0,
+    "bnf": "0704050B0AABKBK"
+   },
+   {
+    "medicine": "Alprostadil 20microgram powder and solvent for solution for injection vials",
+    "pack": "1 vial",
+    "category": "C",
+    "price": 11.94,
+    "bnf": "0704050B0AAAAAA"
+   },
+   {
+    "medicine": "Alprostadil 3mg/g cream",
+    "pack": "4 applicator",
+    "category": "C",
+    "price": 40.0,
+    "bnf": "0704050B0AABPBP"
+   },
+   {
+    "medicine": "Alprostadil 40microgram powder and solvent for solution for injection cartridges with device",
+    "pack": "2 cartridge",
+    "category": "C",
+    "price": 35.55,
+    "bnf": "0704050B0AABNBN"
+   },
+   {
+    "medicine": "Alprostadil 500microgram urethral sticks",
+    "pack": "1 applicator",
+    "category": "C",
+    "price": 11.3,
+    "bnf": "0704050B0AABABA"
+   },
+   {
+    "medicine": "Avanafil 100mg tablets",
+    "pack": "4 tablet",
+    "category": "C",
+    "price": 14.08,
+    "bnf": "0704050ACAAABAB"
+   },
+   {
+    "medicine": "Avanafil 100mg tablets",
+    "pack": "8 tablet",
+    "category": "C",
+    "price": 26.26,
+    "bnf": "0704050ACAAABAB"
+   },
+   {
+    "medicine": "Avanafil 200mg tablets",
+    "pack": "4 tablet",
+    "category": "C",
+    "price": 21.9,
+    "bnf": "0704050ACAAACAC"
+   },
+   {
+    "medicine": "Avanafil 200mg tablets",
+    "pack": "8 tablet",
+    "category": "C",
+    "price": 39.4,
+    "bnf": "0704050ACAAACAC"
+   },
+   {
+    "medicine": "Avanafil 50mg tablets",
+    "pack": "4 tablet",
+    "category": "C",
+    "price": 10.94,
+    "bnf": "0704050ACAAAAAA"
+   },
+   {
+    "medicine": "Avanafil 50mg tablets",
+    "pack": "8 tablet",
+    "category": "C",
+    "price": 19.7,
+    "bnf": "0704050ACAAAAAA"
+   },
+   {
+    "medicine": "Bethanechol chloride 10mg tablets",
+    "pack": "100 tablet",
+    "category": "C",
+    "price": 18.51,
+    "bnf": "0704010C0AAAAAA"
+   },
+   {
+    "medicine": "Bethanechol chloride 25mg tablets",
+    "pack": "100 tablet",
+    "category": "C",
+    "price": 27.26,
+    "bnf": "0704010C0AAABAB"
+   },
+   {
+    "medicine": "Dapoxetine 60mg tablets",
+    "pack": "3 tablet",
+    "category": "C",
+    "price": 19.12,
+    "bnf": "0704060A0AAABAB"
+   },
+   {
+    "medicine": "Dapoxetine 60mg tablets",
+    "pack": "6 tablet",
+    "category": "C",
+    "price": 34.42,
+    "bnf": "0704060A0AAABAB"
+   },
+   {
+    "medicine": "Darifenacin 15mg modified-release tablets",
+    "pack": "28 tablet",
+    "category": "C",
+    "price": 25.48,
+    "bnf": "0704020ACAAABAB"
+   },
+   {
+    "medicine": "Darifenacin 7.5mg modified-release tablets",
+    "pack": "28 tablet",
+    "category": "C",
+    "price": 25.48,
+    "bnf": "0704020ACAAAAAA"
+   },
+   {
+    "medicine": "Flavoxate 200mg tablets",
+    "pack": "90 tablet",
+    "category": "C",
+    "price": 11.67,
+    "bnf": "0704020G0AAACAC"
+   },
+   {
+    "medicine": "Mirabegron 25mg modified-release tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 29.0,
+    "bnf": "0704020AEAAAAAA"
+   },
+   {
+    "medicine": "Mirabegron 50mg modified-release tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 29.0,
+    "bnf": "0704020AEAAABAB"
+   },
+   {
+    "medicine": "Oxybutynin 3.9mg/24hours transdermal patches",
+    "pack": "8 patch",
+    "category": "C",
+    "price": 27.2,
+    "bnf": "0704020J0AAAUAU"
+   },
+   {
+    "medicine": "Phentolamine 2mg/0.35ml / Aviptadil 25micrograms/0.35ml solution for injection ampoules",
+    "pack": "5 ampoule",
+    "category": "C",
+    "price": 61.23,
+    "bnf": "0704050ADAAAAAA"
+   },
+   {
+    "medicine": "Potassium citrate 1.5g / Citric acid 250mg effervescent tablets sugar free",
+    "pack": "12 tablet",
+    "category": "C",
+    "price": 6.29,
+    "bnf": "0704030G0AAACAC"
+   },
+   {
+    "medicine": "Potassium citrate 3g granules for oral solution sachets sugar free",
+    "pack": "6 sachet",
+    "category": "C",
+    "price": 5.25,
+    "bnf": "0704030G0AAAIAI"
+   },
+   {
+    "medicine": "Propiverine 30mg modified-release capsules",
+    "pack": "28 capsule",
+    "category": "C",
+    "price": 24.45,
+    "bnf": "0704020P0AAABAB"
+   },
+   {
+    "medicine": "Propiverine 45mg modified-release capsules",
+    "pack": "28 capsule",
+    "category": "C",
+    "price": 27.9,
+    "bnf": "0704020P0AAADAD"
+   },
+   {
+    "medicine": "Sodium citrate 4g granules for oral solution sachets",
+    "pack": "6 sachet",
+    "category": "C",
+    "price": 3.16,
+    "bnf": "0704030J0AAAIAI"
+   },
+   {
+    "medicine": "Sodium citrate 4g oral powder sachets",
+    "pack": "6 sachet",
+    "category": "C",
+    "price": 2.31,
+    "bnf": "0704030J0AAAHAH"
+   },
+   {
+    "medicine": "Solifenacin 1mg/ml oral suspension sugar free",
+    "pack": "150 ml",
+    "category": "C",
+    "price": 27.62,
+    "bnf": "0704020ABAAAFAF"
+   },
+   {
+    "medicine": "Solifenacin 5mg/5ml oral solution sugar free",
+    "pack": "150 ml",
+    "category": "C",
+    "price": 182.53,
+    "bnf": "0704020ABAAAGAG"
+   },
+   {
+    "medicine": "Tamsulosin 400microgram modified-release tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 10.47,
+    "bnf": "0704010U0AAABAB"
+   },
+   {
+    "medicine": "Tolterodine 2mg modified-release capsules",
+    "pack": "28 capsule",
+    "category": "C",
+    "price": 11.6,
+    "bnf": "0704020N0AAAIAI"
+   },
+   {
+    "medicine": "Tolterodine 4mg modified-release capsules",
+    "pack": "28 capsule",
+    "category": "C",
+    "price": 12.89,
+    "bnf": "0704020N0AAACAC"
+   },
+   {
+    "medicine": "Trospium chloride 60mg modified-release capsules",
+    "pack": "28 capsule",
+    "category": "C",
+    "price": 23.05,
+    "bnf": "0704020Z0AAADAD"
+   },
+   {
+    "medicine": "Vardenafil 5mg tablets",
+    "pack": "4 tablet",
+    "category": "C",
+    "price": 7.49,
+    "bnf": "0704050AAAAAAAA"
+   },
+   {
+    "medicine": "Vibegron 75mg tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 26.68,
+    "bnf": "0704020AFAAAAAA"
+   },
+   {
+    "medicine": "Dapoxetine 30mg tablets",
+    "pack": "3 tablet",
+    "category": "A",
+    "price": 18.61,
+    "bnf": "0704060A0AAAAAA"
+   },
+   {
+    "medicine": "Dapoxetine 30mg tablets",
+    "pack": "6 tablet",
+    "category": "A",
+    "price": 37.23,
+    "bnf": "0704060A0AAAAAA"
+   },
+   {
+    "medicine": "Indoramin 20mg tablets",
+    "pack": "60 tablet",
+    "category": "A",
+    "price": 28.97,
+    "bnf": "0704010M0AAAAAA"
+   },
+   {
+    "medicine": "Oxybutynin 2.5mg tablets",
+    "pack": "56 tablet",
+    "category": "A",
+    "price": 5.42,
+    "bnf": "0704020J0AAAAAA"
+   },
+   {
+    "medicine": "Oxybutynin 2.5mg/5ml oral solution sugar free",
+    "pack": "150 ml",
+    "category": "A",
+    "price": 94.99,
+    "bnf": "0704020J0AAAFAF"
+   },
+   {
+    "medicine": "Oxybutynin 5mg tablets",
+    "pack": "56 tablet",
+    "category": "A",
+    "price": 8.29,
+    "bnf": "0704020J0AAACAC"
+   },
+   {
+    "medicine": "Oxybutynin 5mg/5ml oral solution sugar free",
+    "pack": "150 ml",
+    "category": "A",
+    "price": 89.78,
+    "bnf": "0704020J0AAAGAG"
+   },
+   {
+    "medicine": "Potassium citrate mixture",
+    "pack": "200 ml",
+    "category": "A",
+    "price": 3.91,
+    "bnf": "0704030G0AAAAAA"
+   },
+   {
+    "medicine": "Propiverine 15mg tablets",
+    "pack": "56 tablet",
+    "category": "A",
+    "price": 36.18,
+    "bnf": "0704020P0AAAAAA"
+   },
+   {
+    "medicine": "Solifenacin 6mg / Tamsulosin 400microgram modified-release tablets",
+    "pack": "30 tablet",
+    "category": "A",
+    "price": 13.32,
+    "bnf": "0704010W0AAAAAA"
+   },
+   {
+    "medicine": "Tadalafil 2.5mg tablets",
+    "pack": "28 tablet",
+    "category": "A",
+    "price": 16.26,
+    "bnf": "0704050R0AAACAC"
+   },
+   {
+    "medicine": "Trospium chloride 20mg tablets",
+    "pack": "60 tablet",
+    "category": "A",
+    "price": 19.82,
+    "bnf": "0704020Z0AAAAAA"
+   },
+   {
+    "medicine": "Vardenafil 10mg tablets",
+    "pack": "4 tablet",
+    "category": "A",
+    "price": 8.11,
+    "bnf": "0704050AAAAABAB"
+   },
+   {
+    "medicine": "Vardenafil 20mg tablets",
+    "pack": "4 tablet",
+    "category": "A",
+    "price": 9.19,
+    "bnf": "0704050AAAAACAC"
+   },
+   {
+    "medicine": "Alfuzosin 10mg modified-release tablets",
+    "pack": "30 tablet",
+    "category": "H",
+    "price": 14.83,
+    "bnf": "0704010A0AAADAD"
+   }
+  ]
+ }
+}

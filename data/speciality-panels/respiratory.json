@@ -1,0 +1,5660 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "respiratory",
+ "label": "Respiratory",
+ "defined": true,
+ "generated": "2026-10-09",
+ "dataAsOf": {
+  "frameworks": "2026-10-05",
+  "tenderHistory": "2026-10-09",
+  "frameworkAwards": "2026-10-09T13:11:59+00:00",
+  "openTenders": "09/10/2026",
+  "drugTariff": "2026-10-09",
+  "localIntel": "2026-10-09",
+  "supplierDirectory": "2026-10-07",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-10-09",
+  "drugTariffViiia": "2026-10-09",
+  "hospitalPrescribing": null
+ },
+ "rules": {
+  "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
+  "frameworks": "NHS Supply Chain framework names matching /\\b(respiratory solutions|non invasive ventilation|airway management|anaesthesia machines)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the four agreements above are shared routes rather than respiratory ones: Airway Management Products is categorised by NHS Supply Chain under Medical and Surgical Consumables and is claimed by theatres and surgical, and Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems is claimed by theatres and surgical and by maternity and neonatal, with this page claiming only the ventilator half. Being named on a framework is not evidence of volume on this patch, and being absent from one is not evidence of absence from the market. The supplier list is built from the four frameworks, so it counts airway and anaesthesia houses alongside respiratory ones; overlap is the better guide to who is really on this patch. In the list below, suppliers on all four frameworks: 1; on three: 5. Home oxygen is the largest gap and it is a real one: it is bought through regional Home Oxygen Service contracts, not through any national NHS Supply Chain framework, so it appears in awards and tenders and nowhere else. The community medicines half of this patch — the larger half by money — is FP10 prescribing under BNF Chapter 3 and has no framework and no Drug Tariff Part IX presence at all.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the four agreements above are shared routes rather than respiratory ones: Airway Management Products is categorised by NHS Supply Chain under Medical and Surgical Consumables and is claimed by theatres and surgical, and Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems is claimed by theatres and surgical and by maternity and neonatal, with this page claiming only the ventilator half. Being named on a framework is not evidence of volume on this patch, and being absent from one is not evidence of absence from the market. The supplier list is built from the four frameworks, so it counts airway and anaesthesia houses alongside respiratory ones; overlap is the better guide to who is really on this patch. In the list below, suppliers on all four frameworks: 1; on three: 5. Home oxygen is the largest gap and it is a real one: it is bought through regional Home Oxygen Service contracts, not through any national NHS Supply Chain framework, so it appears in awards and tenders and nowhere else. The community medicines half of this patch — the larger half by money — is FP10 prescribing under BNF Chapter 3 and has no framework and no Drug Tariff Part IX presence at all.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(respirator\\w*|pulmonary function\\w*|pulmonary diagnostic\\w*|pulmonary rehabilitation|lung function|lung volume|asthma|copd|chronic obstructive pulmonary|bronchoscop\\w*|bronchodilat\\w*|bronchiectasis|spirometr\\w*|spirometer\\w*|peak flow|feno|fractional exhaled nitric oxide|nitric oxide|oxygen|nebulis\\w*|nebuliz\\w*|inhaler\\w*|ventilator\\w*|(?:non-?invasive|mechanical|home|nasal|neonatal|infant|patient|jet|transport|critical care) ventilation|cpap|bipap|continuous positive airway pressure|sleep (?:apnoea|apnea|therapy|monitoring|diagnostic\\w*|stud\\w*)|apnoea|apnea|polysomnograph\\w*|airway\\w*|intubat\\w*|laryngoscop\\w*|tracheostom\\w*|tracheotom\\w*|tracheal|endotracheal|breathing circuit\\w*|breathing system\\w*|cystic fibrosis|pleural|chest drain\\w*|pneumothorax|pneumonia|cough assist|high[- ]flow nasal)\\b/i and does not match /\\b(hyperbaric|epoc devices?|newborn screening)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33157 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /peak flow meter|tracheostomy (?:breathing aid|tube holder|cleaning device)|tracheostomy and laryngectomy protector/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,879 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: respiratory). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 11 of the 12 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (16 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-09.",
+  "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF chapter 3. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 53 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
+ },
+ "counts": {
+  "frameworks": 4,
+  "suppliers": 108,
+  "suppliersUnresolved": 2,
+  "awardsShown": 40,
+  "awardsMatched": 196,
+  "awardsWithheldByBuyerCap": 0,
+  "awardsShownNotYetAwarded": 8,
+  "openTenders": 0,
+  "localIntel": 0,
+  "suppliersFrameworkNamedAlsoTagged": 43,
+  "suppliersDirectoryTagged": 12,
+  "suppliersDirectoryOnOtherFrameworks": 9,
+  "suppliersDirectoryWithFrameworkNote": 11,
+  "gpMarkets": 2,
+  "mhraDsu": 98,
+  "drugTariffViiiaLines": 179
+ },
+ "frameworks": [
+  {
+   "name": "Airway Management Products and Associated Equipment",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+   "reference": "2023/S 000-005729",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "22 July 2024",
+   "ends": "21 July 2028",
+   "supplierCount": 54,
+   "supplierSource": "count verified against the page's own stated total (54)",
+   "suppliers": [
+    "Albert Waeschle Ltd",
+    "Ambu UK Ltd",
+    "Aquilant Critical Care",
+    "Armstrong Medical Ltd",
+    "Athrodax Healthcare International Ltd",
+    "Atos Medical (UK)",
+    "Avanos Medical UK Limited",
+    "Avicenna Surgical Limited",
+    "Boston Scientific Ltd",
+    "Cardiac Services UK Ltd",
+    "Ccmed Ltd",
+    "Chemical Intelligence Limited",
+    "Cook (UK) Ltd",
+    "Creo Medical UK Ltd",
+    "Draeger Medical",
+    "Ebrington (Ni) Ltd",
+    "Eden Medical (UK) Limited",
+    "Fannin UK Ltd",
+    "Fisher & Paykel Healthcare Ltd",
+    "Flexicare Medical Ltd",
+    "Freelance Surgical Limited",
+    "Genx Medicare Ltd",
+    "Gvs Filter Technology UK Ltd",
+    "Hamilton Sales And Service UK Ltd",
+    "Healthcare 21 UK Ltd",
+    "Henleys Medical Supplies Limited",
+    "Insight Medical Products Limited",
+    "Intersurgical Ltd",
+    "Karl Storz Endoscopy (UK) Ltd",
+    "Marshall Products",
+    "Medasil Surgical Ltd",
+    "Medecon Healthcare UK Limited",
+    "Meditech Systems Ltd (Dorset)",
+    "Medline Industries Ltd",
+    "Medscience Distribution Ltd",
+    "Oscartech UK Ltd",
+    "P3 Medical Limited",
+    "Pall Europe Limited",
+    "Penlon Limited",
+    "Pentland Medical Ltd",
+    "Proact Medical Ltd",
+    "Prosys International Ltd",
+    "Richardson Healthcare Ltd",
+    "Rudolf Riester Gmbh",
+    "Sai Quality Fruits And Veg Limited",
+    "Sheffmed Ltd",
+    "Smiths Medical",
+    "Teleflex Medical (Rusch & Pilling Weck)",
+    "Timesco Healthcare Ltd",
+    "Verathon Medical",
+    "Vyaire Medical Products Ltd",
+    "Vygon UK Ltd",
+    "William Davies Care Limited",
+    "Zoll Medical UK Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/anaesthesia-machines-ventilator-equipment-and-related-accessories/",
+   "reference": "2026/S 000-008108",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "2 March 2026",
+   "ends": "28 February 2029",
+   "supplierCount": 25,
+   "supplierSource": "count verified against the page's own stated total (25)",
+   "suppliers": [
+    "Aquilant Limited",
+    "Athrodax Healthcare International Limited",
+    "Atom Medical Corporation UK ltd",
+    "Central Medical Supplies Limited",
+    "Charter Kontron Limited",
+    "Croyde Medical Ltd",
+    "Draeger Medical UK Limited",
+    "GE Medical Systems Ltd",
+    "Getinge Limited",
+    "Hamilton Medical UK Ltd",
+    "Henleys Medical Supplies Limited",
+    "Inspiration Healthcare Ltd",
+    "Loewenstein Medical UK Ltd",
+    "MEDACX Limited",
+    "Mediprema",
+    "Mieka Ltd",
+    "Mindray UK Limited",
+    "mOm Incubators Ltd",
+    "Nihon Kohden UK Ltd",
+    "Ortus Technology Limited",
+    "Penlon Limited",
+    "Philips Electronics UK Limited",
+    "Scott Medical Ltd",
+    "@SimulationMan Ltd",
+    "Walters Medical Ltd"
+   ],
+   "delisted": [
+    "BNOS Meditech Limited",
+    "Dot Medical",
+    "QED Medical Systems Ltd",
+    "Safeguard Medical Technologies",
+    "SLE Ltd",
+    "Vyaire Medical Products Limited",
+    "Zoll Medical."
+   ]
+  },
+  {
+   "name": "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/non-invasive-ventilation-sleep-therapy-cpap-sleep-monitoring-diagnostics/",
+   "reference": "2025/S 000-023362",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Direct, Stocked, eDirect",
+   "starts": "29 September 2025",
+   "ends": "28 September 2027",
+   "supplierCount": 28,
+   "supplierSource": "count verified against the page's own stated total (28)",
+   "suppliers": [
+    "Acurable Ltd",
+    "Armstrong Medical Ltd",
+    "Baywater Healthcare UK Ltd",
+    "Breas Medical Ltd",
+    "Cavagna Group UK",
+    "Draeger Medical",
+    "Fisher & Paykel Healthcare Ltd",
+    "Flexicare Medical Ltd",
+    "Independent Physiological Diagnostics Ltd",
+    "Intermedical UK Ltd",
+    "Intersurgical Ltd",
+    "Intus Healthcare",
+    "Lowenstein Medical UK Ltd",
+    "Medicina Ltd",
+    "Nihon Kohden UK Ltd",
+    "Nowus Healthcare",
+    "Philips Healthcare / Philips Respironics",
+    "Radiometer Ltd",
+    "Reflex Medical Ltd",
+    "Remserve Medical Supplies Ltd",
+    "ResMed UK Ltd",
+    "Sefam Medical Ltd",
+    "S-Med Ltd",
+    "SomnoMed UK",
+    "Stowood Scientific Instruments",
+    "The Better Sleep Clinic",
+    "Vapotherm UK Ltd",
+    "ZOLL Medical UK Ltd"
+   ],
+   "delisted": [
+    "Air Liquide UK Ltd",
+    "Aquilant Ltd",
+    "Arcadia14 Medical Supplies UK Ltd",
+    "Dolby Medical Home Respiratory Care Ltd",
+    "Genx Medicare Ltd",
+    "Meditech Systems Ltd",
+    "Proact Medical Ltd",
+    "Salter Labs UK T/A Airlife",
+    "Signifier Medical Technologies Limited"
+   ]
+  },
+  {
+   "name": "Respiratory Solutions",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+   "reference": null,
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "1 August 2022",
+   "ends": "15 June 2027",
+   "supplierCount": 37,
+   "supplierSource": "no stated count on the page; 37 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Air Liquide Healthcare Limited",
+    "Ambu UK Ltd",
+    "Aquilant Ltd Bd Bas Critical",
+    "Armstrong Medical Ltd",
+    "B.N.O.S Meditech Ltd",
+    "Draeger Medical",
+    "Eden Medical",
+    "Fannin Uk Ltd",
+    "Fisher & Paykel Healthcare Ltd",
+    "Flexicare Medical Ltd",
+    "Gce Group Ltd",
+    "Ge Medical Systems Ltd",
+    "Genx Medicare Ltd",
+    "Hamilton Medical Uk Ltd",
+    "Healthcare 21 Uk Ltd",
+    "Henleys Medical Supplies Limited",
+    "Inspiration Healthcare Limited",
+    "Intermedical (Uk) Ltd",
+    "Intersurgical Ltd",
+    "Kinetik Medical Devices Ltd",
+    "Marshall Products",
+    "Mediq Healthcare Uk Limited Ex Bunzl Hea",
+    "Meditech Systems Ltd (Dorset)",
+    "Medline Industries Ltd",
+    "Numed Healthcare",
+    "Pari Medical Ltd",
+    "Pennine Healthcare All Routes",
+    "Proact Medical Ltd",
+    "Prosys International Ltd",
+    "Philips Respironics",
+    "Salter Labs Uk T/A Airlife",
+    "Schiller Uk Ltd",
+    "Icu Medical International Limited",
+    "Syringa Wholesale Distributor",
+    "Teleflex Medical (Rusch & Pilling Weck)",
+    "Timesco Healthcare Ltd",
+    "Vitalograph Ltd"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Draeger Medical UK",
+   "resolved": true,
+   "variants": [
+    "Draeger Medical",
+    "Draeger Medical UK Limited"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Armstrong Medical (Eakin Respiratory)",
+   "resolved": true,
+   "variants": [
+    "Armstrong Medical Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Fisher & Paykel Healthcare",
+   "resolved": true,
+   "variants": [
+    "Fisher & Paykel Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Flexicare Medical",
+   "resolved": true,
+   "variants": [
+    "Flexicare Medical Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Henleys Medical Supplies Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Intersurgical",
+   "resolved": true,
+   "variants": [
+    "Intersurgical Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Ambu UK",
+   "resolved": true,
+   "variants": [
+    "Ambu UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Aquilant Critical Care",
+   "resolved": true,
+   "variants": [
+    "Aquilant Critical Care",
+    "Aquilant Ltd Bd Bas Critical"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Athrodax Healthcare International Ltd",
+   "resolved": true,
+   "variants": [
+    "Athrodax Healthcare International Limited",
+    "Athrodax Healthcare International Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Eden Medical (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Eden Medical",
+    "Eden Medical (UK) Limited"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Ltd",
+    "Fannin Uk Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "GE HealthCare",
+   "resolved": true,
+   "variants": [
+    "GE Medical Systems Ltd",
+    "Ge Medical Systems Ltd"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "GenX MediCare Ltd",
+   "resolved": true,
+   "variants": [
+    "Genx Medicare Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Hamilton Medical UK",
+   "resolved": true,
+   "variants": [
+    "Hamilton Medical UK Ltd",
+    "Hamilton Medical Uk Ltd"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "HC21 (UK) Ltd",
+   "resolved": true,
+   "variants": [
+    "Healthcare 21 UK Ltd",
+    "Healthcare 21 Uk Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "ICU Medical (incl. Smiths Medical)",
+   "resolved": true,
+   "variants": [
+    "Icu Medical International Limited",
+    "Smiths Medical"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Inspiration Healthcare",
+   "resolved": true,
+   "variants": [
+    "Inspiration Healthcare Limited",
+    "Inspiration Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Intermedical (UK) Ltd",
+   "resolved": true,
+   "variants": [
+    "Intermedical (Uk) Ltd",
+    "Intermedical UK Ltd"
+   ],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Löwenstein Medical UK",
+   "resolved": true,
+   "variants": [
+    "Loewenstein Medical UK Ltd",
+    "Lowenstein Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Marshall Products",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Meditech Systems Ltd (Dorset)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Medline Industries",
+   "resolved": true,
+   "variants": [
+    "Medline Industries Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Nihon Koden",
+   "resolved": true,
+   "variants": [
+    "Nihon Kohden UK Ltd"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Penlon",
+   "resolved": true,
+   "variants": [
+    "Penlon Limited"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Proact Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "ProSys International Ltd",
+   "resolved": true,
+   "variants": [
+    "Prosys International Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "TFX Group Ltd (Teleflex Medical)",
+   "resolved": true,
+   "variants": [
+    "Teleflex Medical (Rusch & Pilling Weck)"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Timesco Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Zoll Medical UK Limited",
+   "resolved": true,
+   "variants": [
+    "ZOLL Medical UK Ltd",
+    "Zoll Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "@SimulationMan Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Acurable Limited",
+   "resolved": true,
+   "variants": [
+    "Acurable Ltd"
+   ],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Air Liquide Healthcare Ltd",
+   "resolved": true,
+   "variants": [
+    "Air Liquide Healthcare Limited"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Albert Waeschle Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Aquilant Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Atom Medical Corporation UK ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Atos Medical (UK)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Avanos Medical UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Avicenna Surgical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "B.N.O.S Meditech Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Baywater Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Boston Scientific",
+   "resolved": true,
+   "variants": [
+    "Boston Scientific Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Breas Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Cavagna Group UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Ccmed Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Central Medical Supplies",
+   "resolved": true,
+   "variants": [
+    "Central Medical Supplies Limited"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Charter Kontron Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Chemical Intelligence Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Cook Medical",
+   "resolved": true,
+   "variants": [
+    "Cook (UK) Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Creo Medical Limited",
+   "resolved": true,
+   "variants": [
+    "Creo Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Croyde Medical",
+   "resolved": true,
+   "variants": [
+    "Croyde Medical Ltd"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Ebrington (NI) Limited",
+   "resolved": true,
+   "variants": [
+    "Ebrington (Ni) Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Freelance Surgical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Gce Group Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Getinge",
+   "resolved": true,
+   "variants": [
+    "Getinge Limited"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Gvs Filter Technology UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Hamilton Sales And Service UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Independent Physiological Diagnostics Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Insight Medical Products Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Intus Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Karl Storz UK",
+   "resolved": true,
+   "variants": [
+    "Karl Storz Endoscopy (UK) Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Kinetik Medical Devices",
+   "resolved": true,
+   "variants": [
+    "Kinetik Medical Devices Ltd"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "MEDACX Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Medasil Surgical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Medecon Healthcare UK",
+   "resolved": true,
+   "variants": [
+    "Medecon Healthcare UK Limited"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Medicina Limited",
+   "resolved": true,
+   "variants": [
+    "Medicina Ltd"
+   ],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Mediprema",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Mediq Healthcare Uk Limited Ex Bunzl Hea"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "MedScience Distribution",
+   "resolved": true,
+   "variants": [
+    "Medscience Distribution Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Mieka Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Mindray UK",
+   "resolved": true,
+   "variants": [
+    "Mindray UK Limited"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "mOm Incubators Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Nowus Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Numed Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Ortus Technology Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "OscarTech UK",
+   "resolved": true,
+   "variants": [
+    "Oscartech UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "P3 Medical Ltd",
+   "resolved": true,
+   "variants": [
+    "P3 Medical Limited"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Pall Europe Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Pari Medical",
+   "resolved": true,
+   "variants": [
+    "Pari Medical Ltd"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Pennine Healthcare (Ivor Shaw Ltd)",
+   "resolved": true,
+   "variants": [
+    "Pennine Healthcare All Routes"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Pentland Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Philips",
+   "resolved": true,
+   "variants": [
+    "Philips Electronics UK Limited"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Philips Healthcare / Philips Respironics",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Philips Respironics",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Radiometer UK",
+   "resolved": true,
+   "variants": [
+    "Radiometer Ltd"
+   ],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Reflex Medical Limited",
+   "resolved": true,
+   "variants": [
+    "Reflex Medical Ltd"
+   ],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Remserve Medical Supplies Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "ResMed",
+   "resolved": true,
+   "variants": [
+    "ResMed UK Ltd"
+   ],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Richardson Healthcare",
+   "resolved": true,
+   "variants": [
+    "Richardson Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Rudolf Riester GmbH",
+   "resolved": true,
+   "variants": [
+    "Rudolf Riester Gmbh"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "S-Med Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Sai Quality Fruits And Veg Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Salter Labs UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Salter Labs Uk T/A Airlife"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Schiller UK Limited",
+   "resolved": true,
+   "variants": [
+    "Schiller Uk Ltd"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Scott Medical Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Sefam Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Sheffmed Limited",
+   "resolved": true,
+   "variants": [
+    "Sheffmed Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "SomnoMed UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Stowood Scientific Instruments",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Syringa Wholesale Distributor",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "The Better Sleep Clinic",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+   "resolved": true,
+   "variants": [
+    "Cardiac Services UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Vapotherm UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Verathon Medical",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Vitalograph",
+   "resolved": true,
+   "variants": [
+    "Vitalograph Ltd"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Vyaire Medical Products Limited",
+   "resolved": true,
+   "variants": [
+    "Vyaire Medical Products Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Vygon (UK)",
+   "resolved": true,
+   "variants": [
+    "Vygon UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
+   "name": "Walters Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "William Davies Care Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  }
+ ],
+ "awards": [
+  {
+   "title": "Monsoon IV Double Jet Ventilator",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "supplier": "INSPIRATION HEALTHCARE LIMITED",
+   "date": "2026-10-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093977-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "42520000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Sleep Diagnostic Kits",
+   "buyer": "LIVERPOOL HEART AND CHEST HOSPITAL NHS FOUNDATION TRUST",
+   "supplier": "ZOLL MEDICAL UK LIMITED",
+   "date": "2026-10-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093098-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33124100"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Request for manufacturer technical training on Draeger Ventilators",
+   "buyer": "NORTH CHESHIRE & MERSEY NHS FOUNDATION TRUST",
+   "supplier": "DRAEGER MEDICAL UK LIMITED",
+   "date": "2026-10-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092719-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "80531200"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "supply of medical oxygen and other medical gases",
+   "buyer": "LIVERPOOL HEART AND CHEST HOSPITAL NHS FOUNDATION TRUST",
+   "supplier": "BOC LIMITED",
+   "date": "2026-10-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092950-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "24111500"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Non-Invasive respiratory equipment and consumables",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "Resmed",
+   "date": "2026-09-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092269-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "SEL ICB (Bexley) Primary Care Acute Respiratory Infection (ARI) Hub",
+   "buyer": "NHS South East London Integrated Care Board",
+   "supplier": null,
+   "date": "2026-09-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092197-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "MR1 Ventilators",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "supplier": "HAMILTON MEDICAL UK LTD",
+   "date": "2026-09-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092159-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "39714100"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "AIRWAY MANAGEMENT",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": null,
+   "date": "2026-09-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091799-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000"
+   ],
+   "isFramework": true,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "KGH-ULTRASOUND BRONCHOSCOPE MAINTENANCE",
+   "buyer": "Kettering General Hospital NHS Foundation Trust",
+   "supplier": "Ergea UK and Ireland Limited",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091256-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50421000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Purchase of Polysomnography",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "Optima Medical Limited",
+   "date": "2026-09-25",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/3966259e-ab72-4028-af4f-d7457e3770fd",
+   "value": 47646,
+   "periodEnd": "2031-10-26",
+   "source": "tender-history"
+  },
+  {
+   "title": "Oxygen Delivery Device consumables",
+   "buyer": "Bradford Teaching Hospitals NHS Foundation Trust",
+   "supplier": "Fisher & Paykel Healthcare Limited",
+   "date": "2026-09-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/088995-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Video Laryngoscope Pricing Agreement",
+   "buyer": "Norfolk and Norwich University Hospitals NHS Foundation Trust",
+   "supplier": "Ambu Limited",
+   "date": "2026-09-18",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/6d9de1f6-af49-45a8-ad81-e727ec107fbf",
+   "value": 615092,
+   "periodEnd": "2029-09-01",
+   "source": "tender-history"
+  },
+  {
+   "title": "QHM-2025-7449 Spirometry, Minor Surgery",
+   "buyer": "NHS NORTH EAST AND NORTH CUMBRIA INTEGRATED CARE BOARD",
+   "supplier": "ELM ALLIANCE",
+   "date": "2026-09-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087618-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "QHM-2025-7390 Integrated Diabetes Service, Spirometry",
+   "buyer": "NHS NORTH EAST AND NORTH CUMBRIA INTEGRATED CARE BOARD",
+   "supplier": "PRIMARY HEALTHCARE DARLINGTON LTD",
+   "date": "2026-09-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087606-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Purchase of Polysomnography System",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "S-Med Ltd",
+   "date": "2026-09-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087773-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Purchase of respiratory testing kits for 26-27",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "supplier": "CEPHEID UK LIMITED",
+   "date": "2026-09-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087162-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33696500"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "QHM-2025-1566 Spirometry",
+   "buyer": "NHS NORTH EAST AND NORTH CUMBRIA INTEGRATED CARE BOARD",
+   "supplier": "HARTLEPOOL & STOCKTON HEALTH LTD",
+   "date": "2026-09-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087197-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "The Supply of Flow-I Ventilator Consumables",
+   "buyer": "University Hospitals of North Midlands NHS Trust",
+   "supplier": null,
+   "date": "2026-09-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087365-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "39714100"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Laryngoscope Blades & Associated Consumables",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": null,
+   "date": "2026-09-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086900-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000"
+   ],
+   "isFramework": true,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Replacement of 2x Thoracic  Bronchoscopes",
+   "buyer": "Nottingham University Hospitals NHS Trust",
+   "supplier": "OLYMPUS KEYMED GROUP LIMITED",
+   "date": "2026-09-07",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/7d440bd6-2b8f-4e36-8e6b-9950fb63c444",
+   "value": 67116,
+   "periodEnd": "2026-09-07",
+   "source": "tender-history"
+  },
+  {
+   "title": "Preliminary Market Engagement Questionnaire - Intubating Devices",
+   "buyer": "Business Services Organisation Procurement and Logistics Service",
+   "supplier": null,
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083999-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "North Cumbria Acute Respiratory Infection Services",
+   "buyer": "NHS NORTH EAST AND NORTH CUMBRIA INTEGRATED CARE BOARD",
+   "supplier": "Primary Care Collaborative North Cumbria Limited",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083612-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85140000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Pulmonary Function Testing Equipment (Maintenance of) PS5002/25",
+   "buyer": "Swansea Bay University Health Board",
+   "supplier": "Jaeger Medical Uk Limited",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082791-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Supply of Critical Care Ventilators and Associated Support Services (Dräger Evita V800)",
+   "buyer": "Cwm Taf Morgannwg University Health Board",
+   "supplier": "DRAEGER MEDICAL UK LIMITED",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082738-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "39714100"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Maintenance of Infant Ventilators",
+   "buyer": "Hywel Dda University Health Board",
+   "supplier": "Inspiration Healthcare",
+   "date": "2026-08-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081504-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Maintenance of Specialist Cardio, Respiratory and Physiology Systems and Medical Training Equipment",
+   "buyer": "Regional Business Services Organisation Procurement and Logistics Service",
+   "supplier": "Sword Medical Ltd, Uniphar Medtech UK Ltd T/A Cardiac Services",
+   "date": "2026-08-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079976-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33112330",
+    "33112340",
+    "33121000",
+    "33123000",
+    "33123230",
+    "33170000",
+    "33172000",
+    "33172200",
+    "39162200",
+    "50000000",
+    "50420000",
+    "50800000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+   "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+   "supplier": "Cambridge Heartwear Limited, Cardiac Services, Cortrium ApS, Fukuda Denshi UK Ltd, GE HealthCare, Intermedical (UK) Ltd, Love Medical Limited, Mindray (UK) Limited, Numed Healthcare, Philips Electronics UK Limited, Schiller UK Ltd, Seca Limited, Spacelabs Healthcare Limited, Walters Medical Limited, Welch Allyn (U.K.) Limited, Williams Medical Supplies Limited, Broomwell Healthwatch Limited, Cardioscan Ltd, Express Diagnostics Limited, Icentia Limited, iRhythm Technologies Ltd, LifeSignals Europe Ltd, Technomed Limited, Jaeger Medical UK Limited, Medical Graphics UK Ltd",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079245-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000",
+    "33121000",
+    "33121500",
+    "33123200",
+    "33124100",
+    "33190000"
+   ],
+   "isFramework": true,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Airway Management Products and Associated Equipment",
+   "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+   "supplier": null,
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079242-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33157000",
+    "33157400",
+    "33162100",
+    "33171100",
+    "33171210",
+    "33172100",
+    "33190000"
+   ],
+   "isFramework": true,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Northumberland Acute Respiratory Infection Service (Winter Pressures)",
+   "buyer": "NHS NORTH EAST AND NORTH CUMBRIA INTEGRATED CARE BOARD",
+   "supplier": null,
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079167-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85140000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Patient Monitors, Anaesthetics Machines, Ventilators & ECG",
+   "buyer": "The Common Services Agency (more commonly known as Public Delivery Services Scotland) ( PSD Scotland )",
+   "supplier": "AC Cossor & Son (Surgical) Ltd, Air Liquide Healthcare Ltd, Aquilant Ltd, Armstrong Medical Ltd., Cardiac Services, Dot Medical Ltd, Draeger Medical UK Limited, EDAN Medical (UK) Ltd, Eden Medical (UK) Limited, Fukuda Denshi UK, GE Healthcare, Getinge Limited, Loewenstein Medical Uk Ltd, Masimo UK, Mindray UK Ltd, Nihon Kohden UK Ltd, Ortus Technology Ltd, Philips Electronics UK Limited, Pro Health Solutions Limited, Vapotherm UK Ltd, Welch Allyn UK LTD, ZOLL Medical UK Ltd, Inspiration healthcare, Dot Medical Limited, Loewenstein Medical UK Ltd, Masimo, Nihon Kohden, ZOLL Medical ltd",
+   "date": "2026-08-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078154-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000",
+    "33195000",
+    "33661100",
+    "39714100"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Non-Invasive CPAP Ventilators",
+   "buyer": "Gloucestershire Hospitals NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-08-11",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/c4c051cf-2e78-4ac6-a1e0-9b436e7956fd",
+   "value": 109999,
+   "periodEnd": "2027-06-22",
+   "source": "tender-history"
+  },
+  {
+   "title": "Preliminary Market Engagement for Consumables for Continuous Positive Airway Pressure (CPAP) and Adaptive Support Ventilation (ASV) Machines",
+   "buyer": "Business Services Organisation Procurement and Logistics Services",
+   "supplier": null,
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076235-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000",
+    "33100000",
+    "33140000",
+    "33157000",
+    "33157100",
+    "33157400"
+   ],
+   "isFramework": true,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NENC ICB Central Acute Respiratory Infection Service (Temporary/Winter Pressures) Most Suitable Provider Process",
+   "buyer": "NHS NORTH EAST AND NORTH CUMBRIA INTEGRATED CARE BOARD",
+   "supplier": "Durham Dales Health Federation, Chester le Street Health Limited, Central Durham GP Providers, Derwentside Healthcare Ltd, South Durham GP CIC Federation, Sunderland GP Alliance, South Tyneside West PCN",
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075852-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85140000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Capital Purchase of Hamilton T1 Transport Ventilator",
+   "buyer": "Hywel Dda University Local Health Board",
+   "supplier": "HAMILTON MEDICAL UK LTD",
+   "date": "2026-08-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075099-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ED C-MAC Video Laryngoscope",
+   "buyer": "Gloucestershire Hospitals NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-08-05",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/c41ef013-8c79-4f36-a6b2-48c8e2184cd1",
+   "value": 12031,
+   "periodEnd": "2027-03-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Respiratory Therapy Consumables & Ventilator Consumables & Accessories",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": "HEADINGTON MEDICAL TECHNOLOGY LTD, CAVAGNA GROUP UK LIMITED, INTUS HEALTHCARE LTD, PHILIPS ELECTRONICS UK LIMITED, INTERSURGICAL LIMITED, DRAEGER MEDICAL UK LIMITED, Aquilant Ltd, DRIVE DEVILBISS HEALTHCARE LIMITED, Fisher & Paykel Healthcare, Loewenstein Medical UK Ltd, Medicina, Nihon Kohden UK, NOWUS HEALTHCARE LTD, Remserve Medical Supplies Ltd, Sefam Medical Ltd",
+   "date": "2026-07-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/069368-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Oxygen Therapy & Inhalation",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": "FLEXICARE MEDICAL LIMITED",
+   "date": "2026-07-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/063132-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Robotic Bronchoscopy System",
+   "buyer": "NHS Golden Jubilee",
+   "supplier": "Intuitive Surgical Limited",
+   "date": "2026-06-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/057127-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ESNEFT3212 Purchase of Sleep Study Equipment",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "S-Med Limited",
+   "date": "2026-05-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/043568-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ESNEFT3113 Purchase of Video Laryngoscopes",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "Verathon Medical (UK) Ltd",
+   "date": "2026-03-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/025848-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": {
+  "parts": [
+   "IXA"
+  ],
+  "bnfFilter": null,
+  "bnfCount": null,
+  "vmpFilter": "peak flow meter|tracheostomy (?:breathing aid|tube holder|cleaning device)|tracheostomy and laryngectomy protector",
+  "vmpCount": 7,
+  "effectiveMonth": "2026-10",
+  "dataAsOf": "2026-10-09",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
+  "lineCount": 606,
+  "supplierCount": 23,
+  "topSuppliers": [
+   {
+    "name": "Severn Healthcare Technologies Ltd",
+    "lines": 211
+   },
+   {
+    "name": "Atos Medical AB",
+    "lines": 168
+   },
+   {
+    "name": "Healthcare 21",
+    "lines": 71
+   },
+   {
+    "name": "Smiths Medical International Ltd",
+    "lines": 52
+   },
+   {
+    "name": "Sheffmed Ltd",
+    "lines": 31
+   },
+   {
+    "name": "Insight Medical Products Ltd",
+    "lines": 15
+   },
+   {
+    "name": "Advancis Medical",
+    "lines": 10
+   },
+   {
+    "name": "JLJ Healthcare Ltd",
+    "lines": 6
+   },
+   {
+    "name": "Kapitex Healthcare Ltd",
+    "lines": 6
+   },
+   {
+    "name": "CCMed Ltd",
+    "lines": 5
+   },
+   {
+    "name": "Clement Clarke International Ltd",
+    "lines": 5
+   },
+   {
+    "name": "Teleflex",
+    "lines": 4
+   },
+   {
+    "name": "nSpire Health Ltd",
+    "lines": 4
+   },
+   {
+    "name": "Vitalograph Ltd",
+    "lines": 3
+   },
+   {
+    "name": "Essential-Healthcare Ltd",
+    "lines": 2
+   },
+   {
+    "name": "Generic Unspec",
+    "lines": 2
+   },
+   {
+    "name": "Medicareplus International Ltd",
+    "lines": 2
+   },
+   {
+    "name": "Micro Medical Ltd",
+    "lines": 2
+   },
+   {
+    "name": "Syringa UK Ltd",
+    "lines": 2
+   },
+   {
+    "name": "TriOn Pharma Ltd",
+    "lines": 2
+   }
+  ],
+  "priceMin": 0.38,
+  "priceMax": 174.18
+ },
+ "localIntel": [],
+ "localIntelGroups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
+ },
+ "directorySuppliers": [
+  {
+   "name": "Baxter / Hillrom",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Baxter / Hillrom",
+   "seedLabels": [
+    "Respiratory / anaesthesia",
+    "Respiratory"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cardiac-and-pulmonary-diagnostics-and-exercise-stress-testing-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-monitoring-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pressure Area Care and Patient Handling",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-area-care-and-patient-handling/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Pressure Area Care & Patient Handling (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS Supply Chain — Patient Monitoring (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on five NHS Supply Chain frameworks not counted as this speciality's: Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions; Operating Theatres Equipment and Related Accessories and Services; Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services; Pressure Area Care and Patient Handling; Total Patient Assessment Device Solutions. The Hub's supplier directory also records: NHS Supply Chain — Pressure Area Care & Patient Handling (to 2028); NHS Supply Chain — Patient Monitoring (to 2028)."
+  },
+  {
+   "name": "Drive DeVilbiss Healthcare UK",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Drive DeVilbiss Healthcare UK",
+   "seedLabels": [
+    "Respiratory"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Aids for Daily Living",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/walking-aids-and-simple-aids-for-daily-living/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Medical Healthcare Furniture",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-healthcare-furniture/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pressure Area Care and Patient Handling",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-area-care-and-patient-handling/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pulse-oximetry-and-capnography-devices-and-support-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Patient Assessment Device Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Pressure Area Care & Patient Handling (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on five NHS Supply Chain frameworks not counted as this speciality's: Aids for Daily Living; Medical Healthcare Furniture; Pressure Area Care and Patient Handling; Pulse Oximetry, Capnography and Related Monitoring Technologies; Total Patient Assessment Device Solutions. The Hub's supplier directory also records: NHS Supply Chain — Pressure Area Care & Patient Handling (to 2028)."
+  },
+  {
+   "name": "Inspire Medical Systems",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Inspire Medical Systems",
+   "seedLabels": [
+    "Respiratory"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Neuromodulation Devices and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/neuromodulation-devices-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Neuromodulation Devices and Associated Products."
+  },
+  {
+   "name": "Intuitive Surgical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Intuitive Surgical",
+   "seedLabels": [
+    "Respiratory"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Robotic Medical Equipment and Associated Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/robotic-medical-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Robotic Medical Equipment",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Robotic Medical Equipment and Associated Accessories. The Hub's supplier directory also records: NHS Supply Chain — Robotic Medical Equipment."
+  },
+  {
+   "name": "Johnson & Johnson MedTech",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Johnson & Johnson MedTech",
+   "seedLabels": [
+    "Respiratory"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Central Venous Catheters and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/central-venous-catheters-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrosurgical Consumables and Related Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrosurgical-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Minimally Invasive Surgery, Related Equipment and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/minimally-invasive-surgery/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Implants for Men’s and Women’s Health",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-implants-for-mens-and-womens-health/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Mesh",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-mesh/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Orthopaedic Solutions 3",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-orthopaedic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Wound Closure",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/wound-closure/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on nine NHS Supply Chain frameworks not counted as this speciality's: Central Venous Catheters and Associated Products; Electrosurgical Consumables and Related Accessories; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Minimally Invasive Surgery, Related Equipment and Accessories; Operating Theatres Equipment and Related Accessories and Services; Surgical Implants for Men’s and Women’s Health; Surgical Mesh; Total Orthopaedic Solutions 3; Wound Closure. The Hub's supplier directory also records: NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)."
+  },
+  {
+   "name": "Love Medical",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Love Medical",
+   "seedLabels": [
+    "Respiratory"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cardiac-and-pulmonary-diagnostics-and-exercise-stress-testing-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions."
+  },
+  {
+   "name": "Medtronic",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Medtronic",
+   "seedLabels": [
+    "Respiratory"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/angiography-hybrid-theatres-capital-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrosurgical Consumables and Related Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrosurgical-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/insulin-pumps-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Minimally Invasive Surgery, Related Equipment and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/minimally-invasive-surgery/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Mobile Image Intensifiers and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-image-intensifiers-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Neuromodulation Devices and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/neuromodulation-devices-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-monitoring-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Perfusion Devices, Consumables and Associated Equipment",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/perfusion/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pulse-oximetry-and-capnography-devices-and-support-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Rigid Endoscopy and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/rigid-endoscopy-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Robotic Medical Equipment and Associated Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/robotic-medical-equipment/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Structural Heart and Ventricular Assist Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/structural-heart-and-ventricular-assist-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Mesh",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-mesh/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Surgical Navigation Systems with Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-navigation-systems-with-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Total Orthopaedic Solutions 3",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-orthopaedic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Transcatheter Heart Valve Repair, Replacement and Associated Devices",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/transcatheter-heart-valve-repair-replacement-and-associated-devices/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Wound Closure",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/wound-closure/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on nineteen NHS Supply Chain frameworks not counted as this speciality's: Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services; Electrosurgical Consumables and Related Accessories; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products; Minimally Invasive Surgery, Related Equipment and Accessories; Mobile Image Intensifiers and Associated Options and Related Services; Neuromodulation Devices and Associated Products; Operating Theatres Equipment and Related Accessories and Services; Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services; Perfusion Devices, Consumables and Associated Equipment; Pulse Oximetry, Capnography and Related Monitoring Technologies; Rigid Endoscopy and Associated Options and Related Services; Robotic Medical Equipment and Associated Accessories; Structural Heart and Ventricular Assist Devices; Surgical Mesh; Surgical Navigation Systems with Associated Options and Related Services; Total Orthopaedic Solutions 3; Transcatheter Heart Valve Repair, Replacement and Associated Devices; Wound Closure. The Hub's supplier directory also records: NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027)."
+  },
+  {
+   "name": "Nyxoah SA",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Nyxoah SA",
+   "seedLabels": [
+    "Respiratory"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Neuromodulation Devices and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/neuromodulation-devices-and-associated-products/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [],
+   "frameworkNote": "Named on an NHS Supply Chain framework not counted as this speciality's: Neuromodulation Devices and Associated Products."
+  },
+  {
+   "name": "Olympus (KeyMed)",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Olympus (KeyMed)",
+   "seedLabels": [
+    "Respiratory"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [
+    {
+     "name": "Decontamination Capital Equipment, Associated Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/decontamination-capital-equipment-endoscopy-and-sterile-services-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Digital Diagnostic Solutions",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ear-nose-and-throat-ent-endoscopes-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Electrosurgical Consumables and Related Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrosurgical-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Flexible Endoscopes and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/flexible-endoscopes-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Instrument Decontamination and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/instrument-decontamination-and-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Minimally Invasive Surgery, Related Equipment and Accessories",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/minimally-invasive-surgery/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Operating Theatres Equipment and Related Accessories and Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
+     "source": "NHS Supply Chain contract launch brief"
+    },
+    {
+     "name": "Rigid Endoscopy and Associated Options and Related Services",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/rigid-endoscopy-and-associated-options-and-related-services/",
+     "source": "NHS Supply Chain contract launch brief"
+    }
+   ],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Flexible Endoscopes (to 2028)",
+     "url": null,
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS Supply Chain — Decontamination Capital (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "Named on ten NHS Supply Chain frameworks not counted as this speciality's: Decontamination Capital Equipment, Associated Accessories and Services; Digital Diagnostic Solutions; Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services; Electrosurgical Consumables and Related Accessories; Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Flexible Endoscopes and Associated Options and Related Services; Instrument Decontamination and Accessories; Minimally Invasive Surgery, Related Equipment and Accessories; Operating Theatres Equipment and Related Accessories and Services; Rigid Endoscopy and Associated Options and Related Services. The Hub's supplier directory also records: NHS Supply Chain — Flexible Endoscopes (to 2028); NHS Supply Chain — Decontamination Capital (to 2027)."
+  },
+  {
+   "name": "Aspire Pharma",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Aspire Pharma",
+   "seedLabels": [
+    "Respiratory"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS SBS — SBS10142",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
+     "source": "supplier directory"
+    },
+    {
+     "name": "NHS England — NHS National Generic Pharmaceuticals, Wave 16a",
+     "url": "https://www.find-tender.service.gov.uk/Notice/082784-2026",
+     "source": "Find a Tender contract award notice"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142; NHS England — NHS National Generic Pharmaceuticals, Wave 16a."
+  },
+  {
+   "name": "Brainomix",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Brainomix",
+   "seedLabels": [
+    "Respiratory"
+   ],
+   "via": [
+    "speciality-label-map.json"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [
+    {
+     "name": "NHS Supply Chain — Digital Diagnostic Solutions (to 2027)",
+     "url": null,
+     "source": "supplier directory"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: NHS Supply Chain — Digital Diagnostic Solutions (to 2027)."
+  },
+  {
+   "name": "Chiesi Limited",
+   "resolved": true,
+   "provenance": "directory-tagged",
+   "directoryName": "Chiesi Limited",
+   "seedLabels": [
+    "Respiratory / anaesthesia",
+    "Respiratory"
+   ],
+   "via": [
+    "speciality-label-map.json",
+    "speciality-map.json supplierSpecialityMap"
+   ],
+   "otherFrameworks": [],
+   "directoryFrameworks": [],
+   "frameworkNote": null
+  }
+ ],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": true,
+  "markets": [
+   {
+    "id": "resp",
+    "label": "Respiratory system: BNF chapter 3",
+    "bnf": [
+     "chapter 3"
+    ],
+    "note": null,
+    "latestPeriod": "202607",
+    "baselinePeriod": "202507",
+    "items": 6526449,
+    "cost": 107311043,
+    "items12m": 74460629,
+    "cost12m": 1212217171,
+    "itemsYoY": -0.9,
+    "products": 200,
+    "topNational": [
+     {
+      "code": "0304010E0AA",
+      "label": "Fexofenadine",
+      "generic": true,
+      "items": 762458,
+      "share": 11.7,
+      "cost": 2293259,
+      "yoy": 13.6
+     },
+     {
+      "code": "0301011R0BI",
+      "label": "Salamol",
+      "generic": false,
+      "items": 564611,
+      "share": 8.7,
+      "cost": 1027933,
+      "yoy": -9.8
+     },
+     {
+      "code": "0303020G0AA",
+      "label": "Montelukast",
+      "generic": true,
+      "items": 430331,
+      "share": 6.6,
+      "cost": 359409,
+      "yoy": 0.8
+     },
+     {
+      "code": "0307000J0AA",
+      "label": "Carbocisteine",
+      "generic": true,
+      "items": 364155,
+      "share": 5.6,
+      "cost": 1621074,
+      "yoy": 4.5
+     },
+     {
+      "code": "0302000AABB",
+      "label": "Trimbow",
+      "generic": false,
+      "items": 350470,
+      "share": 5.4,
+      "cost": 17178143,
+      "yoy": 11.0
+     },
+     {
+      "code": "0301011R0AA",
+      "label": "Salbutamol",
+      "generic": true,
+      "items": 342890,
+      "share": 5.3,
+      "cost": 1947998,
+      "yoy": -25.2
+     },
+     {
+      "code": "0304010I0AA",
+      "label": "Cetirizine",
+      "generic": true,
+      "items": 325744,
+      "share": 5.0,
+      "cost": 496154,
+      "yoy": -1.3
+     },
+     {
+      "code": "0302000ABBC",
+      "label": "Fostair",
+      "generic": false,
+      "items": 321957,
+      "share": 4.9,
+      "cost": 11696073,
+      "yoy": null
+     },
+     {
+      "code": "0302000K0BD",
+      "label": "Symbicort",
+      "generic": false,
+      "items": 290119,
+      "share": 4.4,
+      "cost": 10229202,
+      "yoy": 22.9
+     },
+     {
+      "code": "0304010W0AA",
+      "label": "Promethazine hydrochloride",
+      "generic": true,
+      "items": 226538,
+      "share": 3.5,
+      "cost": 365128,
+      "yoy": 8.5
+     }
+    ],
+    "icbLeaders": [
+     {
+      "icb": "QOX",
+      "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+      "items": 94398,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 11303,
+        "share": 12.0
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 8079,
+        "share": 8.6
+       },
+       {
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 7184,
+        "share": 7.6
+       }
+      ]
+     },
+     {
+      "icb": "QHL",
+      "name": "NHS Birmingham and Solihull",
+      "items": 168802,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 15989,
+        "share": 9.5
+       },
+       {
+        "code": "0301011R0BE",
+        "label": "Ventolin",
+        "generic": false,
+        "items": 10992,
+        "share": 6.5
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 10799,
+        "share": 6.4
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 157866,
+      "leaders": [
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 14894,
+        "share": 9.4
+       },
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 12500,
+        "share": 7.9
+       },
+       {
+        "code": "0307000J0AA",
+        "label": "Carbocisteine",
+        "generic": true,
+        "items": 10488,
+        "share": 6.6
+       }
+      ]
+     },
+     {
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 79805,
+      "leaders": [
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 9262,
+        "share": 11.6
+       },
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 7418,
+        "share": 9.3
+       },
+       {
+        "code": "0307000J0AA",
+        "label": "Carbocisteine",
+        "generic": true,
+        "items": 4850,
+        "share": 6.1
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 315405,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 40675,
+        "share": 12.9
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 25845,
+        "share": 8.2
+       },
+       {
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 20740,
+        "share": 6.6
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 376007,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 44890,
+        "share": 11.9
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 42620,
+        "share": 11.3
+       },
+       {
+        "code": "0302000AABB",
+        "label": "Trimbow",
+        "generic": false,
+        "items": 24524,
+        "share": 6.5
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 81262,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 7783,
+        "share": 9.6
+       },
+       {
+        "code": "0302000ABBC",
+        "label": "Fostair",
+        "generic": false,
+        "items": 5792,
+        "share": 7.1
+       },
+       {
+        "code": "0301011R0AA",
+        "label": "Salbutamol",
+        "generic": true,
+        "items": 5331,
+        "share": 6.6
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 113129,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 14493,
+        "share": 12.8
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 8464,
+        "share": 7.5
+       },
+       {
+        "code": "0302000ABBC",
+        "label": "Fostair",
+        "generic": false,
+        "items": 8462,
+        "share": 7.5
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 122767,
+      "leaders": [
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 16422,
+        "share": 13.4
+       },
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 10690,
+        "share": 8.7
+       },
+       {
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 9984,
+        "share": 8.1
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 147551,
+      "leaders": [
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 14692,
+        "share": 10.0
+       },
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 10238,
+        "share": 6.9
+       },
+       {
+        "code": "0307000J0AA",
+        "label": "Carbocisteine",
+        "generic": true,
+        "items": 10203,
+        "share": 6.9
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 86482,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 11536,
+        "share": 13.3
+       },
+       {
+        "code": "0301011R0AA",
+        "label": "Salbutamol",
+        "generic": true,
+        "items": 6520,
+        "share": 7.5
+       },
+       {
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 5066,
+        "share": 5.9
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 215276,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 26339,
+        "share": 12.2
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 20281,
+        "share": 9.4
+       },
+       {
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 14119,
+        "share": 6.6
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 64281,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 6903,
+        "share": 10.7
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 6035,
+        "share": 9.4
+       },
+       {
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 6008,
+        "share": 9.3
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 409212,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 43860,
+        "share": 10.7
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 32588,
+        "share": 8.0
+       },
+       {
+        "code": "0301011R0AA",
+        "label": "Salbutamol",
+        "generic": true,
+        "items": 28755,
+        "share": 7.0
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 202045,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 27625,
+        "share": 13.7
+       },
+       {
+        "code": "0302000K0BD",
+        "label": "Symbicort",
+        "generic": false,
+        "items": 13997,
+        "share": 6.9
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 13024,
+        "share": 6.4
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 80995,
+      "leaders": [
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 8543,
+        "share": 10.5
+       },
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 6905,
+        "share": 8.5
+       },
+       {
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 5482,
+        "share": 6.8
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 237105,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 31716,
+        "share": 13.4
+       },
+       {
+        "code": "0301011R0AA",
+        "label": "Salbutamol",
+        "generic": true,
+        "items": 17065,
+        "share": 7.2
+       },
+       {
+        "code": "0302000AABB",
+        "label": "Trimbow",
+        "generic": false,
+        "items": 16936,
+        "share": 7.1
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 199247,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 22877,
+        "share": 11.5
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 20218,
+        "share": 10.1
+       },
+       {
+        "code": "0302000ABBC",
+        "label": "Fostair",
+        "generic": false,
+        "items": 13514,
+        "share": 6.8
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 234097,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 26750,
+        "share": 11.4
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 25419,
+        "share": 10.9
+       },
+       {
+        "code": "0302000ABBC",
+        "label": "Fostair",
+        "generic": false,
+        "items": 17058,
+        "share": 7.3
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 120584,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 17728,
+        "share": 14.7
+       },
+       {
+        "code": "0302000ABBC",
+        "label": "Fostair",
+        "generic": false,
+        "items": 11447,
+        "share": 9.5
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 10094,
+        "share": 8.4
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 125615,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 16526,
+        "share": 13.2
+       },
+       {
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 10886,
+        "share": 8.7
+       },
+       {
+        "code": "0301011R0AA",
+        "label": "Salbutamol",
+        "generic": true,
+        "items": 10239,
+        "share": 8.2
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 230467,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 33702,
+        "share": 14.6
+       },
+       {
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 18148,
+        "share": 7.9
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 17289,
+        "share": 7.5
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 185878,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 26138,
+        "share": 14.1
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 18052,
+        "share": 9.7
+       },
+       {
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 13479,
+        "share": 7.3
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 453416,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 46308,
+        "share": 10.2
+       },
+       {
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 35978,
+        "share": 7.9
+       },
+       {
+        "code": "0307000J0AA",
+        "label": "Carbocisteine",
+        "generic": true,
+        "items": 34309,
+        "share": 7.6
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 91043,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 9938,
+        "share": 10.9
+       },
+       {
+        "code": "0302000K0BI",
+        "label": "Fobumix Easyhaler",
+        "generic": false,
+        "items": 8388,
+        "share": 9.2
+       },
+       {
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 7999,
+        "share": 8.8
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 142459,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 15614,
+        "share": 11.0
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 14267,
+        "share": 10.0
+       },
+       {
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 8483,
+        "share": 6.0
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 56485,
+      "leaders": [
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 6599,
+        "share": 11.7
+       },
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 6347,
+        "share": 11.2
+       },
+       {
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 4407,
+        "share": 7.8
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 56713,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 5761,
+        "share": 10.2
+       },
+       {
+        "code": "0302000K0BI",
+        "label": "Fobumix Easyhaler",
+        "generic": false,
+        "items": 4123,
+        "share": 7.3
+       },
+       {
+        "code": "0302000AABB",
+        "label": "Trimbow",
+        "generic": false,
+        "items": 3930,
+        "share": 6.9
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 130892,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 15982,
+        "share": 12.2
+       },
+       {
+        "code": "0302000ABBC",
+        "label": "Fostair",
+        "generic": false,
+        "items": 11187,
+        "share": 8.5
+       },
+       {
+        "code": "0301011R0AA",
+        "label": "Salbutamol",
+        "generic": true,
+        "items": 11024,
+        "share": 8.4
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 117683,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 15923,
+        "share": 13.5
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 13337,
+        "share": 11.3
+       },
+       {
+        "code": "0307000J0AA",
+        "label": "Carbocisteine",
+        "generic": true,
+        "items": 9301,
+        "share": 7.9
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 222312,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 25783,
+        "share": 11.6
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 23045,
+        "share": 10.4
+       },
+       {
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 15450,
+        "share": 6.9
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 158271,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 16987,
+        "share": 10.7
+       },
+       {
+        "code": "0302000ABBC",
+        "label": "Fostair",
+        "generic": false,
+        "items": 15729,
+        "share": 9.9
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 14249,
+        "share": 9.0
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 269893,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 35729,
+        "share": 13.2
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 24264,
+        "share": 9.0
+       },
+       {
+        "code": "0307000J0AA",
+        "label": "Carbocisteine",
+        "generic": true,
+        "items": 16052,
+        "share": 5.9
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 190781,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 23090,
+        "share": 12.1
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 21080,
+        "share": 11.0
+       },
+       {
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 11644,
+        "share": 6.1
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 308615,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 33058,
+        "share": 10.7
+       },
+       {
+        "code": "0301011R0AA",
+        "label": "Salbutamol",
+        "generic": true,
+        "items": 25566,
+        "share": 8.3
+       },
+       {
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 23261,
+        "share": 7.5
+       }
+      ]
+     },
+     {
+      "icb": "Z9B2Z",
+      "name": "NHS West and North London",
+      "items": 279161,
+      "leaders": [
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 37242,
+        "share": 13.3
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 31278,
+        "share": 11.2
+       },
+       {
+        "code": "0304010I0AA",
+        "label": "Cetirizine",
+        "generic": true,
+        "items": 19820,
+        "share": 7.1
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "resp-devices",
+    "label": "Peak flow meters and inhalation solutions: BNF 21.12 and 21.32",
+    "bnf": [
+     "21.12",
+     "21.32"
+    ],
+    "note": null,
+    "latestPeriod": "202607",
+    "baselinePeriod": "202507",
+    "items": 26981,
+    "cost": 307854,
+    "items12m": 342274,
+    "cost12m": 3625965,
+    "itemsYoY": -8.0,
+    "products": 47,
+    "topNational": [
+     {
+      "code": "21120000163",
+      "label": "1 Easy peak flow meter standard range",
+      "generic": false,
+      "items": 4389,
+      "share": 16.3,
+      "cost": 16926,
+      "yoy": -21.9
+     },
+     {
+      "code": "21120000130",
+      "label": "Mini-Wright peak flow meter standard range",
+      "generic": false,
+      "items": 3284,
+      "share": 12.2,
+      "cost": 22304,
+      "yoy": -24.0
+     },
+     {
+      "code": "21120000161",
+      "label": "Medi peak flow meter standard range",
+      "generic": false,
+      "items": 2480,
+      "share": 9.2,
+      "cost": 10273,
+      "yoy": -23.7
+     },
+     {
+      "code": "21320000101",
+      "label": "Nebusal",
+      "generic": false,
+      "items": 1605,
+      "share": 5.9,
+      "cost": 42538,
+      "yoy": -1.7
+     },
+     {
+      "code": "21320000102",
+      "label": "MucoClear",
+      "generic": false,
+      "items": 1569,
+      "share": 5.8,
+      "cost": 51402,
+      "yoy": 9.0
+     },
+     {
+      "code": "21120000132",
+      "label": "AirZone peak flow meter standard range",
+      "generic": false,
+      "items": 1505,
+      "share": 5.6,
+      "cost": 5717,
+      "yoy": 15.9
+     },
+     {
+      "code": "21120000120",
+      "label": "Peak flow meter standard range",
+      "generic": false,
+      "items": 1371,
+      "share": 5.1,
+      "cost": 5293,
+      "yoy": 17.5
+     },
+     {
+      "code": "21320000105",
+      "label": "Respi-Clear",
+      "generic": false,
+      "items": 1327,
+      "share": 4.9,
+      "cost": 17889,
+      "yoy": 16.4
+     },
+     {
+      "code": "21120000164",
+      "label": "1 Easy peak flow meter low range",
+      "generic": false,
+      "items": 980,
+      "share": 3.6,
+      "cost": 5341,
+      "yoy": 1.0
+     },
+     {
+      "code": "21120000131",
+      "label": "Mini-Wright peak flow meter low range",
+      "generic": false,
+      "items": 967,
+      "share": 3.6,
+      "cost": 6633,
+      "yoy": -7.6
+     }
+    ],
+    "icbLeaders": [
+     {
+      "icb": "QOX",
+      "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+      "items": 379,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 88,
+        "share": 23.2
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 51,
+        "share": 13.5
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 41,
+        "share": 10.8
+       }
+      ]
+     },
+     {
+      "icb": "QHL",
+      "name": "NHS Birmingham and Solihull",
+      "items": 809,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 159,
+        "share": 19.7
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 150,
+        "share": 18.5
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 71,
+        "share": 8.8
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 601,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 166,
+        "share": 27.6
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 70,
+        "share": 11.6
+       },
+       {
+        "code": "21320000102",
+        "label": "MucoClear",
+        "generic": false,
+        "items": 62,
+        "share": 10.3
+       }
+      ]
+     },
+     {
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 356,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 60,
+        "share": 16.9
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 50,
+        "share": 14.0
+       },
+       {
+        "code": "21120000164",
+        "label": "1 Easy peak flow meter low range",
+        "generic": false,
+        "items": 37,
+        "share": 10.4
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 1511,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 265,
+        "share": 17.5
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 155,
+        "share": 10.3
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 126,
+        "share": 8.3
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 1540,
+      "leaders": [
+       {
+        "code": "21320000105",
+        "label": "Respi-Clear",
+        "generic": false,
+        "items": 316,
+        "share": 20.5
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 127,
+        "share": 8.2
+       },
+       {
+        "code": "21320000100",
+        "label": "MucoClear",
+        "generic": false,
+        "items": 114,
+        "share": 7.4
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 261,
+      "leaders": [
+       {
+        "code": "21320000101",
+        "label": "Nebusal",
+        "generic": false,
+        "items": 47,
+        "share": 18.0
+       },
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 30,
+        "share": 11.5
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 30,
+        "share": 11.5
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 364,
+      "leaders": [
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 59,
+        "share": 16.2
+       },
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 54,
+        "share": 14.8
+       },
+       {
+        "code": "21120000132",
+        "label": "AirZone peak flow meter standard range",
+        "generic": false,
+        "items": 39,
+        "share": 10.7
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 418,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 100,
+        "share": 23.9
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 85,
+        "share": 20.3
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 31,
+        "share": 7.4
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 839,
+      "leaders": [
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 91,
+        "share": 10.8
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 86,
+        "share": 10.3
+       },
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 74,
+        "share": 8.8
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 301,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 94,
+        "share": 31.2
+       },
+       {
+        "code": "21120000132",
+        "label": "AirZone peak flow meter standard range",
+        "generic": false,
+        "items": 28,
+        "share": 9.3
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 27,
+        "share": 9.0
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 1278,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 266,
+        "share": 20.8
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 202,
+        "share": 15.8
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 109,
+        "share": 8.5
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 233,
+      "leaders": [
+       {
+        "code": "21120000120",
+        "label": "Peak flow meter standard range",
+        "generic": false,
+        "items": 44,
+        "share": 18.9
+       },
+       {
+        "code": "21320000105",
+        "label": "Respi-Clear",
+        "generic": false,
+        "items": 29,
+        "share": 12.4
+       },
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 20,
+        "share": 8.6
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 1917,
+      "leaders": [
+       {
+        "code": "21320000101",
+        "label": "Nebusal",
+        "generic": false,
+        "items": 373,
+        "share": 19.5
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 193,
+        "share": 10.1
+       },
+       {
+        "code": "21320000102",
+        "label": "MucoClear",
+        "generic": false,
+        "items": 152,
+        "share": 7.9
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 946,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 178,
+        "share": 18.8
+       },
+       {
+        "code": "21320000108",
+        "label": "Salineb",
+        "generic": false,
+        "items": 87,
+        "share": 9.2
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 86,
+        "share": 9.1
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 303,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 68,
+        "share": 22.4
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 50,
+        "share": 16.5
+       },
+       {
+        "code": "21120000120",
+        "label": "Peak flow meter standard range",
+        "generic": false,
+        "items": 47,
+        "share": 15.5
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 490,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 123,
+        "share": 25.1
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 67,
+        "share": 13.7
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 55,
+        "share": 11.2
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 709,
+      "leaders": [
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 152,
+        "share": 21.4
+       },
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 102,
+        "share": 14.4
+       },
+       {
+        "code": "21320000102",
+        "label": "MucoClear",
+        "generic": false,
+        "items": 60,
+        "share": 8.5
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 894,
+      "leaders": [
+       {
+        "code": "21320000101",
+        "label": "Nebusal",
+        "generic": false,
+        "items": 104,
+        "share": 11.6
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 95,
+        "share": 10.6
+       },
+       {
+        "code": "21320000102",
+        "label": "MucoClear",
+        "generic": false,
+        "items": 73,
+        "share": 8.2
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 293,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 46,
+        "share": 15.7
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 34,
+        "share": 11.6
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 32,
+        "share": 10.9
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 313,
+      "leaders": [
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 68,
+        "share": 21.7
+       },
+       {
+        "code": "21120000120",
+        "label": "Peak flow meter standard range",
+        "generic": false,
+        "items": 39,
+        "share": 12.5
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 34,
+        "share": 10.9
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 905,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 231,
+        "share": 25.5
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 110,
+        "share": 12.2
+       },
+       {
+        "code": "21120000120",
+        "label": "Peak flow meter standard range",
+        "generic": false,
+        "items": 75,
+        "share": 8.3
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 1131,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 239,
+        "share": 21.1
+       },
+       {
+        "code": "21320000102",
+        "label": "MucoClear",
+        "generic": false,
+        "items": 160,
+        "share": 14.1
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 158,
+        "share": 14.0
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 1213,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 196,
+        "share": 16.2
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 149,
+        "share": 12.3
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 141,
+        "share": 11.6
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 710,
+      "leaders": [
+       {
+        "code": "21320000105",
+        "label": "Respi-Clear",
+        "generic": false,
+        "items": 392,
+        "share": 55.2
+       },
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 83,
+        "share": 11.7
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 38,
+        "share": 5.4
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 728,
+      "leaders": [
+       {
+        "code": "21320000114",
+        "label": "PulmoClear",
+        "generic": false,
+        "items": 165,
+        "share": 22.7
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 101,
+        "share": 13.9
+       },
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 95,
+        "share": 13.0
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 330,
+      "leaders": [
+       {
+        "code": "21120000120",
+        "label": "Peak flow meter standard range",
+        "generic": false,
+        "items": 50,
+        "share": 15.2
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 48,
+        "share": 14.5
+       },
+       {
+        "code": "21320000101",
+        "label": "Nebusal",
+        "generic": false,
+        "items": 37,
+        "share": 11.2
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 144,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 24,
+        "share": 16.7
+       },
+       {
+        "code": "21120000120",
+        "label": "Peak flow meter standard range",
+        "generic": false,
+        "items": 19,
+        "share": 13.2
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 16,
+        "share": 11.1
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 806,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 159,
+        "share": 19.7
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 128,
+        "share": 15.9
+       },
+       {
+        "code": "21320000102",
+        "label": "MucoClear",
+        "generic": false,
+        "items": 119,
+        "share": 14.8
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 637,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 131,
+        "share": 20.6
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 81,
+        "share": 12.7
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 74,
+        "share": 11.6
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 560,
+      "leaders": [
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 107,
+        "share": 19.1
+       },
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 85,
+        "share": 15.2
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 79,
+        "share": 14.1
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 676,
+      "leaders": [
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 84,
+        "share": 12.4
+       },
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 80,
+        "share": 11.8
+       },
+       {
+        "code": "21320000111",
+        "label": "PulmoClear",
+        "generic": false,
+        "items": 68,
+        "share": 10.1
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 1167,
+      "leaders": [
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 195,
+        "share": 16.7
+       },
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 182,
+        "share": 15.6
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 107,
+        "share": 9.2
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 779,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 200,
+        "share": 25.7
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 101,
+        "share": 13.0
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 91,
+        "share": 11.7
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 951,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 164,
+        "share": 17.2
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 149,
+        "share": 15.7
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 125,
+        "share": 13.1
+       }
+      ]
+     },
+     {
+      "icb": "Z9B2Z",
+      "name": "NHS West and North London",
+      "items": 1482,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 267,
+        "share": 18.0
+       },
+       {
+        "code": "21120000145",
+        "label": "Vitalograph peak flow meter standard range",
+        "generic": false,
+        "items": 195,
+        "share": 13.2
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 158,
+        "share": 10.7
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-10-09",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": false,
+  "whyEmpty": null,
+  "count": 98,
+  "roundupsExcluded": 16,
+  "broadcastsExcluded": 2,
+  "updates": [
+   {
+    "title": "Nasal decongestant sprays and drops containing xylometazoline hydrochloride / oxymetazoline hydrochloride: increased risk of rebound congestion, rhinitis medicamentosa, and tachyphylaxis with overuse",
+    "url": "https://www.gov.uk/drug-safety-update/nasal-decongestant-sprays-and-drops-containing-xylometazoline-hydrochloride-slash-oxymetazoline-hydrochloride-increased-risk-of-rebound-congestion-rhinitis-medicamentosa-and-tachyphylaxis-with-overuse",
+    "published": "2026-04-30",
+    "updated": "2026-04-30",
+    "summary": "There have been reports of worsening nasal congestion (rebound congestion) when the effects of nasal decongestant sprays or drops containing xylometazoline hydrochloride and oxymetazoline hydrochloride, wear off."
+   },
+   {
+    "title": "Abrysvo▼ (Pfizer RSV vaccine) and Arexvy▼ (GSK RSV vaccine): be alert to a small risk of Guillain-Barré syndrome following vaccination in older adults",
+    "url": "https://www.gov.uk/drug-safety-update/abrysvov-pfizer-rsv-vaccine-and-arexvyv-gsk-rsv-vaccine-be-alert-to-a-small-risk-of-guillain-barre-syndrome-following-vaccination-in-older-adults",
+    "published": "2025-07-07",
+    "updated": "2025-07-07",
+    "summary": "There is a small increase in the risk of Guillain-Barré syndrome following vaccination with Abrysvo (Pfizer respiratory syncytial virus (RSV) vaccine) and Arexvy (GSK RSV vaccine) in adults aged 60 years and older. Healthcare professionals should advise all recipients of Abrysvo and Arexvy that they should be alert to signs and symptoms of Guillain-Barré syndrome and, if they occur, to seek immediate medical attention as it requires urgent treatment in hospital."
+   },
+   {
+    "title": "Kaftrio▼ (Ivacaftor, tezacaftor, elexacaftor): risk of psychological side effects",
+    "url": "https://www.gov.uk/drug-safety-update/kaftriov-ivacaftor-tezacaftor-elexacaftor-risk-of-psychological-side-effects",
+    "published": "2025-05-07",
+    "updated": "2025-05-07",
+    "summary": "Psychological side effects such as anxiety, low mood, sleep disturbance, poor concentration, and forgetfulness have been infrequently reported in people with cystic fibrosis treated with Kaftrio. Healthcare professionals should advise patients and their caregivers that, while the risk is small, they should be alert to changes in mood and behaviour and, if they occur, to seek medical advice as soon as possible."
+   },
+   {
+    "title": "Short-acting beta 2 agonists (SABA) (salbutamol and terbutaline): reminder of the risks from overuse in asthma and to be aware of changes in the SABA prescribing guidelines",
+    "url": "https://www.gov.uk/drug-safety-update/short-acting-beta-2-agonists-saba-salbutamol-and-terbutaline-reminder-of-the-risks-from-overuse-in-asthma-and-to-be-aware-of-changes-in-the-saba-prescribing-guidelines",
+    "published": "2025-04-24",
+    "updated": "2025-04-24",
+    "summary": "Healthcare professionals and patients are reminded of the risk of severe asthma attacks and increased mortality associated with overuse of SABA with or without anti-inflammatory maintenance therapy in patients with asthma. Healthcare professionals should be aware of the change in guidance that no longer recommends prescribing SABA without an inhaled corticosteroid."
+   },
+   {
+    "title": "Montelukast: reminder of the risk of neuropsychiatric reactions",
+    "url": "https://www.gov.uk/drug-safety-update/montelukast-reminder-of-the-risk-of-neuropsychiatric-reactions",
+    "published": "2024-04-29",
+    "updated": "2024-04-29",
+    "summary": "Healthcare professionals prescribing montelukast should be alert to the risk of neuropsychiatric reactions in all patients including children and adolescents. Reported neuropsychiatric reactions include sleep disorders, hallucinations, anxiety and depression, as well as changes in behaviour and mood. Healthcare professionals should advise patients and their caregivers to be alert to these risks and seek medical advice as soon as possible if neuropsychiatric reactions occur."
+   },
+   {
+    "title": "Pseudoephedrine: very rare risk of posterior reversible encephalopathy syndrome (PRES) and reversible cerebral vasoconstriction syndrome (RCVS)",
+    "url": "https://www.gov.uk/drug-safety-update/pseudoephedrine-very-rare-risk-of-posterior-reversible-encephalopathy-syndrome-pres-and-reversible-cerebral-vasoconstriction-syndrome-rcvs",
+    "published": "2024-02-20",
+    "updated": "2024-02-20",
+    "summary": "There have been very rare reports of posterior reversible encephalopathy syndrome (PRES) and reversible cerebral vasoconstriction syndrome (RCVS) with pseudoephedrine."
+   },
+   {
+    "title": "Codeine linctus (codeine oral solutions): reclassification to prescription-only medicine",
+    "url": "https://www.gov.uk/drug-safety-update/codeine-linctus-codeine-oral-solutions-reclassification-to-prescription-only-medicine",
+    "published": "2024-02-20",
+    "updated": "2024-02-20",
+    "summary": "Advice for healthcare professionals on the reclassification of codeine linctus to a prescription-only medicine (POM), following a public consultation."
+   },
+   {
+    "title": "Nirmatrelvir, ritonavir (Paxlovid▼): be alert to the risk of drug interactions with ritonavir",
+    "url": "https://www.gov.uk/drug-safety-update/nirmatrelvir-ritonavir-paxlovidv-be-alert-to-the-risk-of-drug-interactions-with-ritonavir",
+    "published": "2023-11-23",
+    "updated": "2023-11-23",
+    "summary": "There is a risk of harmful drug interactions with the ritonavir component of the COVID-19 treatment Paxlovid▼ due to its inhibition of the enzyme CYP3A, which metabolises many commonly used drugs. Prescribers should obtain a detailed patient history of current medications before prescribing Paxlovid, checking the Paxlovid product information for known and potential drug interactions."
+   }
+  ]
+ },
+ "drugTariffViiia": {
+  "effectiveMonth": "2026-10",
+  "latestPublishedMonth": "2026-10",
+  "dataAsOf": "2026-10-09",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-viii",
+  "whole": false,
+  "bnfFilter": [
+   "chapter 3"
+  ],
+  "lineCount": 179,
+  "categoryCounts": {
+   "C": 145,
+   "A": 19,
+   "M": 14,
+   "H": 1
+  },
+  "fileLines": 3534,
+  "fileLinesWithoutBnf": 53,
+  "priceMin": 0.76,
+  "priceMax": 496.43,
+  "linesShown": 80,
+  "lines": [
+   {
+    "medicine": "Carbocisteine 375mg capsules",
+    "pack": "120 capsule",
+    "category": "M",
+    "price": 2.84,
+    "bnf": "0307000J0AAAAAA"
+   },
+   {
+    "medicine": "Cetirizine 10mg tablets",
+    "pack": "30 tablet",
+    "category": "M",
+    "price": 0.81,
+    "bnf": "0304010I0AAAAAA"
+   },
+   {
+    "medicine": "Cetirizine 1mg/ml oral solution sugar free",
+    "pack": "200 ml",
+    "category": "M",
+    "price": 2.83,
+    "bnf": "0304010I0AAABAB"
+   },
+   {
+    "medicine": "Chlorphenamine 4mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.89,
+    "bnf": "0304010G0AAACAC"
+   },
+   {
+    "medicine": "Desloratadine 5mg tablets",
+    "pack": "30 tablet",
+    "category": "M",
+    "price": 1.59,
+    "bnf": "0304010ABAAAAAA"
+   },
+   {
+    "medicine": "Fexofenadine 120mg tablets",
+    "pack": "30 tablet",
+    "category": "M",
+    "price": 1.17,
+    "bnf": "0304010E0AAAAAA"
+   },
+   {
+    "medicine": "Fexofenadine 180mg tablets",
+    "pack": "30 tablet",
+    "category": "M",
+    "price": 2.64,
+    "bnf": "0304010E0AAABAB"
+   },
+   {
+    "medicine": "Hydroxyzine 25mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.07,
+    "bnf": "0304010J0AAACAC"
+   },
+   {
+    "medicine": "Loratadine 10mg tablets",
+    "pack": "30 tablet",
+    "category": "M",
+    "price": 0.76,
+    "bnf": "0304010D0AAAAAA"
+   },
+   {
+    "medicine": "Montelukast 10mg tablets",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 0.94,
+    "bnf": "0303020G0AAABAB"
+   },
+   {
+    "medicine": "Montelukast 4mg chewable tablets sugar free",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.01,
+    "bnf": "0303020G0AAACAC"
+   },
+   {
+    "medicine": "Montelukast 5mg chewable tablets sugar free",
+    "pack": "28 tablet",
+    "category": "M",
+    "price": 1.04,
+    "bnf": "0303020G0AAAAAA"
+   },
+   {
+    "medicine": "Promethazine hydrochloride 10mg tablets",
+    "pack": "56 tablet",
+    "category": "M",
+    "price": 1.71,
+    "bnf": "0304010W0AAADAD"
+   },
+   {
+    "medicine": "Promethazine hydrochloride 25mg tablets",
+    "pack": "56 tablet",
+    "category": "M",
+    "price": 2.32,
+    "bnf": "0304010W0AAALAL"
+   },
+   {
+    "medicine": "Acetylcysteine 200mg oral powder sachets sugar free",
+    "pack": "30 sachet",
+    "category": "C",
+    "price": 112.5,
+    "bnf": "0307000C0AAAQAQ"
+   },
+   {
+    "medicine": "Acetylcysteine 600mg capsules",
+    "pack": "30 capsule",
+    "category": "C",
+    "price": 85.0,
+    "bnf": "0307000C0AAAKAK"
+   },
+   {
+    "medicine": "Acetylcysteine 600mg effervescent tablets sugar free",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 5.5,
+    "bnf": "0307000C0AAARAR"
+   },
+   {
+    "medicine": "Aclidinium bromide 375micrograms/dose dry powder inhaler",
+    "pack": "60 dose",
+    "category": "C",
+    "price": 32.5,
+    "bnf": "0301020R0AAAAAA"
+   },
+   {
+    "medicine": "Aclidinium bromide 396micrograms/dose / Formoterol 11.8micrograms/dose dry powder inhaler",
+    "pack": "60 dose",
+    "category": "C",
+    "price": 32.5,
+    "bnf": "0301040V0AAAAAA"
+   },
+   {
+    "medicine": "Acrivastine 8mg capsules",
+    "pack": "12 capsule",
+    "category": "C",
+    "price": 3.52,
+    "bnf": "0304010A0AAAAAA"
+   },
+   {
+    "medicine": "Adrenaline (base) 10mg/10ml (1 in 1,000) solution for injection ampoules",
+    "pack": "10 ampoule",
+    "category": "C",
+    "price": 172.76,
+    "bnf": "0304030C0AABDBD"
+   },
+   {
+    "medicine": "Adrenaline (base) 150micrograms/0.15ml (1 in 1,000) solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 60.69,
+    "bnf": "0304030C0AABFBF"
+   },
+   {
+    "medicine": "Adrenaline (base) 150micrograms/0.3ml (1 in 2,000) solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 60.69,
+    "bnf": "0304030C0AAA2A2"
+   },
+   {
+    "medicine": "Adrenaline (base) 150micrograms/0.3ml (1 in 2,000) solution for injection pre-filled disposable devices",
+    "pack": "2 pre-filled disposable injection",
+    "category": "C",
+    "price": 121.38,
+    "bnf": "0304030C0AAA2A2"
+   },
+   {
+    "medicine": "Adrenaline (base) 1mg/1ml (1 in 1,000) solution for injection ampoules",
+    "pack": "10 ampoule",
+    "category": "C",
+    "price": 11.81,
+    "bnf": "0304030C0AAABAB"
+   },
+   {
+    "medicine": "Adrenaline (base) 1mg/1ml (1 in 1,000) solution for injection pre-filled syringes",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 15.77,
+    "bnf": "0304030C0AAAYAY"
+   },
+   {
+    "medicine": "Adrenaline (base) 300micrograms/0.3ml (1 in 1,000) solution for injection pre-filled disposable devices",
+    "pack": "1 pre-filled disposable injection",
+    "category": "C",
+    "price": 60.69,
+    "bnf": "0304030C0AAA3A3"
+   },
+   {
+    "medicine": "Adrenaline (base) 500micrograms/0.5ml (1 in 1,000) solution for injection ampoules",
+    "pack": "10 ampoule",
+    "category": "C",
+    "price": 364.07,
+    "bnf": "0304030C0AAAFAF"
+   },
+   {
+    "medicine": "Adrenaline (base) 5mg/5ml (1 in 1,000) solution for injection ampoules",
+    "pack": "10 ampoule",
+    "category": "C",
+    "price": 211.89,
+    "bnf": "0304030C0AAAXAX"
+   },
+   {
+    "medicine": "Alimemazine 10mg/5ml oral solution sugar free",
+    "pack": "100 ml",
+    "category": "C",
+    "price": 204.11,
+    "bnf": "0304010Y0AABDBD"
+   },
+   {
+    "medicine": "Alimemazine 30mg/5ml oral solution",
+    "pack": "100 ml",
+    "category": "C",
+    "price": 231.63,
+    "bnf": "0304010Y0AAACAC"
+   },
+   {
+    "medicine": "Alimemazine 30mg/5ml oral solution sugar free",
+    "pack": "100 ml",
+    "category": "C",
+    "price": 230.0,
+    "bnf": "0304010Y0AABBBB"
+   },
+   {
+    "medicine": "Alimemazine 7.5mg/5ml oral solution",
+    "pack": "100 ml",
+    "category": "C",
+    "price": 135.0,
+    "bnf": "0304010Y0AAABAB"
+   },
+   {
+    "medicine": "Alimemazine 7.5mg/5ml oral solution sugar free",
+    "pack": "100 ml",
+    "category": "C",
+    "price": 168.0,
+    "bnf": "0304010Y0AABCBC"
+   },
+   {
+    "medicine": "Aminophylline 250mg/10ml solution for injection ampoules",
+    "pack": "10 ampoule",
+    "category": "C",
+    "price": 15.0,
+    "bnf": "0301030B0AAABAB"
+   },
+   {
+    "medicine": "Beclometasone 100micrograms/dose / Formoterol 6micrograms/dose dry powder inhaler",
+    "pack": "120 dose",
+    "category": "C",
+    "price": 29.32,
+    "bnf": "0302000ABAAAAAA"
+   },
+   {
+    "medicine": "Beclometasone 100micrograms/dose / Formoterol 6micrograms/dose inhaler CFC free",
+    "pack": "120 dose",
+    "category": "C",
+    "price": 29.32,
+    "bnf": "0302000ABAAABAB"
+   },
+   {
+    "medicine": "Beclometasone 100micrograms/dose breath actuated inhaler CFC free",
+    "pack": "200 dose",
+    "category": "C",
+    "price": 17.21,
+    "bnf": "0302000C0AABHBH"
+   },
+   {
+    "medicine": "Beclometasone 100micrograms/dose inhaler CFC free",
+    "pack": "200 dose",
+    "category": "C",
+    "price": 7.42,
+    "bnf": "0302000C0AABFBF"
+   },
+   {
+    "medicine": "Beclometasone 200micrograms/dose / Formoterol 6micrograms/dose dry powder inhaler",
+    "pack": "120 dose",
+    "category": "C",
+    "price": 29.32,
+    "bnf": "0302000ABAAACAC"
+   },
+   {
+    "medicine": "Beclometasone 200micrograms/dose / Formoterol 6micrograms/dose inhaler CFC free",
+    "pack": "120 dose",
+    "category": "C",
+    "price": 29.32,
+    "bnf": "0302000ABAAADAD"
+   },
+   {
+    "medicine": "Beclometasone 200micrograms/dose dry powder inhaler",
+    "pack": "200 dose",
+    "category": "C",
+    "price": 14.93,
+    "bnf": "0302000C0AABUBU"
+   },
+   {
+    "medicine": "Beclometasone 200micrograms/dose inhaler CFC free",
+    "pack": "200 dose",
+    "category": "C",
+    "price": 16.17,
+    "bnf": "0302000C0AABVBV"
+   },
+   {
+    "medicine": "Beclometasone 250micrograms/dose inhaler CFC free",
+    "pack": "200 dose",
+    "category": "C",
+    "price": 16.29,
+    "bnf": "0302000C0AABWBW"
+   },
+   {
+    "medicine": "Beclometasone 50micrograms/dose breath actuated inhaler CFC free",
+    "pack": "200 dose",
+    "category": "C",
+    "price": 7.87,
+    "bnf": "0302000C0AABGBG"
+   },
+   {
+    "medicine": "Beclometasone 50micrograms/dose inhaler CFC free",
+    "pack": "200 dose",
+    "category": "C",
+    "price": 3.7,
+    "bnf": "0302000C0AABEBE"
+   },
+   {
+    "medicine": "Bilastine 20mg tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 6.0,
+    "bnf": "0304010AFAAAAAA"
+   },
+   {
+    "medicine": "Budesonide 100micrograms/dose / Formoterol 3micrograms/dose inhaler CFC free",
+    "pack": "120 dose",
+    "category": "C",
+    "price": 14.0,
+    "bnf": "0302000K0AABCBC"
+   },
+   {
+    "medicine": "Budesonide 100micrograms/dose / Formoterol 6micrograms/dose dry powder inhaler",
+    "pack": "120 dose",
+    "category": "C",
+    "price": 28.0,
+    "bnf": "0302000K0AAALAL"
+   },
+   {
+    "medicine": "Budesonide 100micrograms/dose dry powder inhaler",
+    "pack": "200 dose",
+    "category": "C",
+    "price": 14.25,
+    "bnf": "0302000K0AAAKAK"
+   },
+   {
+    "medicine": "Budesonide 1mg/2ml nebuliser suspension unit dose ampoules",
+    "pack": "20 unit dose",
+    "category": "C",
+    "price": 45.6,
+    "bnf": "0302000K0AABEBE"
+   },
+   {
+    "medicine": "Budesonide 200micrograms/dose / Formoterol 6micrograms/dose dry powder inhaler",
+    "pack": "120 dose",
+    "category": "C",
+    "price": 28.0,
+    "bnf": "0302000K0AAAMAM"
+   },
+   {
+    "medicine": "Budesonide 200micrograms/dose / Formoterol 6micrograms/dose inhaler CFC free",
+    "pack": "120 dose",
+    "category": "C",
+    "price": 28.0,
+    "bnf": "0302000K0AABBBB"
+   },
+   {
+    "medicine": "Budesonide 200micrograms/dose dry powder inhalation cartridge",
+    "pack": "100 dose",
+    "category": "C",
+    "price": 9.59,
+    "bnf": "0302000K0AAAWAW"
+   },
+   {
+    "medicine": "Budesonide 200micrograms/dose dry powder inhalation cartridge with device",
+    "pack": "100 dose",
+    "category": "C",
+    "price": 14.86,
+    "bnf": "0302000K0AAAVAV"
+   },
+   {
+    "medicine": "Budesonide 200micrograms/dose dry powder inhaler",
+    "pack": "100 dose",
+    "category": "C",
+    "price": 14.25,
+    "bnf": "0302000K0AAAGAG"
+   },
+   {
+    "medicine": "Budesonide 400micrograms/dose / Formoterol 12micrograms/dose dry powder inhaler",
+    "pack": "60 dose",
+    "category": "C",
+    "price": 28.0,
+    "bnf": "0302000K0AAAUAU"
+   },
+   {
+    "medicine": "Budesonide 400micrograms/dose dry powder inhaler",
+    "pack": "50 dose",
+    "category": "C",
+    "price": 14.25,
+    "bnf": "0302000K0AAAHAH"
+   },
+   {
+    "medicine": "Budesonide 500micrograms/2ml nebuliser suspension unit dose ampoules",
+    "pack": "20 unit dose",
+    "category": "C",
+    "price": 30.12,
+    "bnf": "0302000K0AABDBD"
+   },
+   {
+    "medicine": "Carbocisteine 250mg/5ml oral solution",
+    "pack": "300 ml",
+    "category": "C",
+    "price": 7.55,
+    "bnf": "0307000J0AAACAC"
+   },
+   {
+    "medicine": "Carbocisteine 750mg capsules",
+    "pack": "60 capsule",
+    "category": "C",
+    "price": 18.98,
+    "bnf": "0307000J0AAAJAJ"
+   },
+   {
+    "medicine": "Carbocisteine 750mg/5ml oral solution sugar free",
+    "pack": "100 ml",
+    "category": "C",
+    "price": 20.94,
+    "bnf": "0307000J0AAAIAI"
+   },
+   {
+    "medicine": "Carbocisteine 750mg/5ml oral solution sugar free",
+    "pack": "200 ml",
+    "category": "C",
+    "price": 40.74,
+    "bnf": "0307000J0AAAIAI"
+   },
+   {
+    "medicine": "Chlorphenamine 10mg/1ml solution for injection ampoules",
+    "pack": "5 ampoule",
+    "category": "C",
+    "price": 25.49,
+    "bnf": "0304010G0AAAAAA"
+   },
+   {
+    "medicine": "Chlorphenamine 2mg/5ml oral solution",
+    "pack": "150 ml",
+    "category": "C",
+    "price": 4.05,
+    "bnf": "0304010G0AAABAB"
+   },
+   {
+    "medicine": "Chlorphenamine 2mg/5ml oral solution sugar free",
+    "pack": "150 ml",
+    "category": "C",
+    "price": 31.58,
+    "bnf": "0304010G0AAAPAP"
+   },
+   {
+    "medicine": "Ciclesonide 160micrograms/dose inhaler CFC free",
+    "pack": "120 dose",
+    "category": "C",
+    "price": 38.62,
+    "bnf": "0302000U0AAABAB"
+   },
+   {
+    "medicine": "Ciclesonide 80micrograms/dose inhaler CFC free",
+    "pack": "120 dose",
+    "category": "C",
+    "price": 32.83,
+    "bnf": "0302000U0AAAAAA"
+   },
+   {
+    "medicine": "Codeine 15mg/5ml linctus",
+    "pack": "200 ml",
+    "category": "C",
+    "price": 19.5,
+    "bnf": "0309010C0AAAAAA"
+   },
+   {
+    "medicine": "Cyproheptadine 4mg tablets",
+    "pack": "30 tablet",
+    "category": "C",
+    "price": 5.99,
+    "bnf": "0304010K0AAABAB"
+   },
+   {
+    "medicine": "Desloratadine 2.5mg/5ml oral solution sugar free",
+    "pack": "100 ml",
+    "category": "C",
+    "price": 6.77,
+    "bnf": "0304010ABAAADAD"
+   },
+   {
+    "medicine": "Desloratadine 2.5mg/5ml oral solution sugar free",
+    "pack": "150 ml",
+    "category": "C",
+    "price": 10.15,
+    "bnf": "0304010ABAAADAD"
+   },
+   {
+    "medicine": "Dextromethorphan 7.5mg/5ml oral solution sugar free",
+    "pack": "100 ml",
+    "category": "C",
+    "price": 3.56,
+    "bnf": "0309010L0AAAQAQ"
+   },
+   {
+    "medicine": "Diphenhydramine 10mg/5ml oral solution",
+    "pack": "150 ml",
+    "category": "C",
+    "price": 26.0,
+    "bnf": "0304010N0AAAKAK"
+   },
+   {
+    "medicine": "Dornase alfa 2.5mg/2.5ml nebuliser liquid ampoules",
+    "pack": "30 ampoule",
+    "category": "C",
+    "price": 496.43,
+    "bnf": "0307000K0AAAAAA"
+   },
+   {
+    "medicine": "Ephedrine hydrochloride 15mg tablets",
+    "pack": "28 tablet",
+    "category": "C",
+    "price": 125.0,
+    "bnf": "0301012F0AAAAAA"
+   },
+   {
+    "medicine": "Ephedrine hydrochloride 30mg tablets",
+    "pack": "28 tablet",
+    "category": "C",
+    "price": 180.0,
+    "bnf": "0301012F0AAABAB"
+   },
+   {
+    "medicine": "Erdosteine 300mg capsules",
+    "pack": "20 capsule",
+    "category": "C",
+    "price": 5.0,
+    "bnf": "0307000Q0AAAAAA"
+   },
+   {
+    "medicine": "Fexofenadine 30mg tablets",
+    "pack": "60 tablet",
+    "category": "C",
+    "price": 5.46,
+    "bnf": "0304010E0AAACAC"
+   },
+   {
+    "medicine": "Fluticasone 125micrograms/dose / Formoterol 5micrograms/dose inhaler CFC free",
+    "pack": "120 dose",
+    "category": "C",
+    "price": 28.0,
+    "bnf": "0302000N0AABJBJ"
+   }
+  ]
+ }
+}

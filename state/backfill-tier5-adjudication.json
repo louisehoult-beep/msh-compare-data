@@ -1,0 +1,192 @@
+{
+  "_what": "Tier 5: the 22 companies data/coverage-ledger.json lists as unresolvedSupplierNames on the Minimally Invasive Surgery, Related Equipment and Accessories (mis) framework — named on NHS Supply Chain's own contract launch brief for that framework and held in no Hub supplier section. Source: data/coverage-ledger.json, frameworks entry for 'Minimally Invasive Surgery, Related Equipment and Accessories', actionable.unresolvedNames / unknown[].",
+  "_when": "2026-09-07",
+  "_rule": "Companies House's public search (find-and-update.company-information.service.gov.uk — no API key available to this session; COMPANIES_HOUSE_KEY is a GitHub Actions secret only, not present locally) was searched by name for each. A NAME SEARCH IS NOT A CONFIRMATION - per docs/COMPANY-REPORT-METHOD.md a company number is only 'confirmed' via route 1 (an anchored number curated into the record) or route 2 (the number the company publishes on its own site). So no number here is written to `companyNumber`. Where the registered name matches the awarded name exactly (after stripping case, punctuation, & versus and, and legal or territory suffixes only — never scope words like International/Holdings/Group, which mark a genuinely different entity) and the company is active, the result is recorded as a CANDIDATE, carrying its own status and date, for confirm_company_numbers.py to prove or discard later. Anything less exact is PROBABLE. The verified fact in every record created from this file is the framework award, nothing else.",
+  "_verdicts": {
+    "candidate": "Registered name matches the awarded name exactly (case/punctuation/&-and/legal-or-territory-suffix only) and the company is active. Recorded as a candidate number, never as a confirmed one.",
+    "probable": "A plausible single active match that is not an exact name match. Recorded as a candidate and flagged for route 2.",
+    "unresolved": "No defensible match. Companies House returned nothing close, or several equally plausible companies.",
+    "foreign": "Not a UK-registered company, so no Companies House record is expected to exist."
+  },
+  "companies": [
+    {
+      "name": "Applied Medical UK Ltd",
+      "verdict": "candidate",
+      "number": "06126148",
+      "registered": "APPLIED MEDICAL UK LIMITED",
+      "status": "active",
+      "incorporated": "2007-02-23"
+    },
+    {
+      "name": "Bariatric Solutions International",
+      "verdict": "probable",
+      "number": "14890948",
+      "registered": "BARIATRIC SOLUTIONS UK LIMITED",
+      "status": "active",
+      "incorporated": "2023-05-24",
+      "why": "The awarded name says 'International'; the only plausible active UK company found is 'Bariatric Solutions UK Limited'. International versus UK is a genuine wording difference, not a bare legal or territory suffix, so this is not an exact match. A real, recently-incorporated company with a matching core name, but route 2 before any number is asserted."
+    },
+    {
+      "name": "Erbe Medical UK Ltd",
+      "verdict": "candidate",
+      "number": "03184850",
+      "registered": "ERBE MEDICAL UK LIMITED",
+      "status": "active",
+      "incorporated": "1996-04-12"
+    },
+    {
+      "name": "Fairmont Medical Products Limited",
+      "verdict": "candidate",
+      "number": "09630918",
+      "registered": "FAIRMONT MEDICAL PRODUCTS LIMITED",
+      "status": "active",
+      "incorporated": "2015-06-09"
+    },
+    {
+      "name": "Genmed Enterprises Ltd",
+      "verdict": "candidate",
+      "number": "10715490",
+      "registered": "GENMED ENTERPRISES UK LTD",
+      "status": "active",
+      "incorporated": "2017-04-07",
+      "why": "GENMED ENTERPRISES INTERNATIONAL LTD (12992754, active, incorporated 2020-11-03) also exists and shares the same core words, but 'International' is a scope word the awarded name does not carry, so it is not equally plausible. GENMED ENTERPRISES UK LTD matches after stripping only the UK territory suffix."
+    },
+    {
+      "name": "Harris-Jones Medical Ltd",
+      "verdict": "candidate",
+      "number": "09241417",
+      "registered": "HARRIS-JONES MEDICAL LIMITED",
+      "status": "active",
+      "incorporated": "2014-09-30"
+    },
+    {
+      "name": "Ideal Medical Solutions",
+      "verdict": "candidate",
+      "number": "07777751",
+      "registered": "IDEAL MEDICAL SOLUTIONS LTD",
+      "status": "active",
+      "incorporated": "2011-09-19"
+    },
+    {
+      "name": "Laprosurge Limited",
+      "verdict": "candidate",
+      "number": "02046470",
+      "registered": "LAPROSURGE LIMITED",
+      "status": "active",
+      "incorporated": "1986-08-13"
+    },
+    {
+      "name": "Lawmed Ltd",
+      "verdict": "candidate",
+      "number": "03928724",
+      "registered": "LAWMED LTD",
+      "status": "active",
+      "incorporated": "2000-02-18"
+    },
+    {
+      "name": "Lexington Medical UK Ltd",
+      "verdict": "candidate",
+      "number": "14771423",
+      "registered": "LEXINGTON MEDICAL UK LTD",
+      "status": "active",
+      "incorporated": "2023-03-31"
+    },
+    {
+      "name": "LocaMed Ltd",
+      "verdict": "candidate",
+      "number": "04068070",
+      "registered": "LOCAMED LIMITED",
+      "status": "active",
+      "incorporated": "2000-09-08"
+    },
+    {
+      "name": "Mermaid Medical Ltd",
+      "verdict": "candidate",
+      "number": "07637052",
+      "registered": "MERMAID MEDICAL LIMITED",
+      "status": "active",
+      "incorporated": "2011-05-17"
+    },
+    {
+      "name": "Minitouch Ltd",
+      "verdict": "candidate",
+      "number": "07933081",
+      "registered": "MINITOUCH LTD",
+      "status": "active",
+      "incorporated": "2012-02-02"
+    },
+    {
+      "name": "Novus Med Ltd",
+      "verdict": "candidate",
+      "number": "10242963",
+      "registered": "NOVUS MED LTD",
+      "status": "active",
+      "incorporated": "2016-06-21",
+      "why": "NOVUS MED HOLDINGS LTD (16263849, incorporated 2025-02-19, after this framework was awarded) also exists and shares the same core words, but 'Holdings' marks a different, likely parent, entity that the awarded name does not name. NOVUS MED LTD matches exactly."
+    },
+    {
+      "name": "Schultz Medical (UK) Limited",
+      "verdict": "candidate",
+      "number": "08853263",
+      "registered": "SCHULTZ MEDICAL (UK) LTD",
+      "status": "active",
+      "incorporated": "2014-01-20"
+    },
+    {
+      "name": "Sela Medical UK Ltd",
+      "verdict": "probable",
+      "number": "07416808",
+      "registered": "SELAMEDICAL UK LIMITED",
+      "status": "active",
+      "incorporated": "2010-10-22",
+      "why": "Registered with no space between 'Sela' and 'Medical'. The only plausible active match, and a common Companies House spelling quirk, but not an exact string match. Route 2 before any number is asserted."
+    },
+    {
+      "name": "SRA Developments",
+      "verdict": "candidate",
+      "number": "01385171",
+      "registered": "SRA DEVELOPMENTS LIMITED",
+      "status": "active",
+      "incorporated": "1978-08-22"
+    },
+    {
+      "name": "Starkstrom Limited",
+      "verdict": "candidate",
+      "number": "01013256",
+      "registered": "STARKSTROM LIMITED",
+      "status": "active",
+      "incorporated": "1971-06-03",
+      "why": "STARKSTROM GROUP LIMITED (05771013) also shares the core word, but it is dissolved (27/02/2024) and carries 'Group', which the awarded name does not — excluded on both counts."
+    },
+    {
+      "name": "Uniphar Medtech",
+      "verdict": "candidate",
+      "number": "NI018037",
+      "registered": "UNIPHAR MEDTECH UK LIMITED",
+      "status": "active",
+      "incorporated": "1984-12-14",
+      "why": "UNIPHAR MEDTECH HOLDINGS UK LIMITED (NI040976, active) also exists and shares the same core words, but 'Holdings' marks a different, likely parent, entity that the awarded name does not name. Northern Ireland company number (NI-prefixed), still a UK Companies House registration."
+    },
+    {
+      "name": "Vanguard AG",
+      "verdict": "foreign",
+      "why": "AG (Aktiengesellschaft) is a Swiss, German or Austrian legal form, not followed by Ltd or Limited, so no UK Companies House record is expected for this entity. No plausibly related UK company turned up in the search results either (closest hits — Vanguard Agencies Limited, Vanguard Estate Agents Limited — share only the word 'Vanguard' and are unrelated business types)."
+    },
+    {
+      "name": "Venturis Medical Ltd",
+      "verdict": "candidate",
+      "number": "11322060",
+      "registered": "VENTURIS MEDICAL LTD",
+      "status": "active",
+      "incorporated": "2018-04-20"
+    },
+    {
+      "name": "Winners First Trading Limited",
+      "verdict": "candidate",
+      "number": "14407269",
+      "registered": "WINNERS FIRST TRADING LIMITED",
+      "status": "active",
+      "incorporated": "2022-10-10"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>uk.co.elevateandthrive.hub-news-refresh</string>
+
+    <!-- Refreshes the speciality news 45 minutes before each alert slot, so each alert carries what has just gone live.
+         Hub phone alerts go at 09:00, 12:00 and 16:00 London time (Lou, 24/09/2026).
+         GitHub's own cron runs hours late on msh-compare-data, so this Mac drives
+         the timing and GitHub's cron is only the backup. launchd uses the Mac's
+         local clock, so BST and GMT look after themselves; a slot missed while
+         the Mac slept runs on wake. Source of truth: msh-compare-data
+         ops/launchagents/, runbook docs/PUSH-ALERTS.md ("The three slots"). -->
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>-c</string>
+        <string>echo "$(date '+%F %T') uk.co.elevateandthrive.hub-news-refresh" &gt;&gt; "$HOME/Library/Logs/hub-alert-slots.log"; gh workflow run speciality-news.yml -R louisehoult-beep/msh-compare-data &gt;&gt; "$HOME/Library/Logs/hub-alert-slots.log" 2&gt;&amp;1</string>
+    </array>
+
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict><key>Hour</key><integer>8</integer><key>Minute</key><integer>15</integer></dict>
+        <dict><key>Hour</key><integer>11</integer><key>Minute</key><integer>15</integer></dict>
+        <dict><key>Hour</key><integer>15</integer><key>Minute</key><integer>15</integer></dict>
+    </array>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+</dict>
+</plist>

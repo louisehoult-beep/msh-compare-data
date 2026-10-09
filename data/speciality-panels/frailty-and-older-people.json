@@ -1,0 +1,985 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "frailty-and-older-people",
+ "label": "Frailty and Older People",
+ "defined": true,
+ "generated": "2026-10-09",
+ "dataAsOf": {
+  "frameworks": "2026-10-05",
+  "tenderHistory": "2026-10-09",
+  "frameworkAwards": "2026-10-09T13:11:59+00:00",
+  "openTenders": "09/10/2026",
+  "drugTariff": "2026-10-09",
+  "localIntel": "2026-10-09",
+  "supplierDirectory": "2026-10-07",
+  "gpPrescribing": "2026-09-30",
+  "mhraDsu": "2026-10-09",
+  "drugTariffViiia": null,
+  "hospitalPrescribing": null
+ },
+ "rules": {
+  "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
+  "frameworks": "NHS Supply Chain framework names matching /\\btechnology enabled care\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. NHS Supply Chain has no framework for frailty, older people, geriatric medicine or falls, so the single framework below is not this speciality's buying route — it is the only part of it NHS Supply Chain runs. Most of this patch is bought by local authorities and integrated care boards through community equipment services, telecare contracts and care home frameworks, which is what the awards list shows and why almost every buyer there is a council. The equipment itself (hoists, profiling beds, pressure redistribution, wheelchairs, daily living aids) is bought through Aids for Daily Living, Pressure Area Care and Patient Handling, and Wheelchairs, Specialist Seating and Related Services: those are published on the Patient Moving and Handling page and are deliberately not repeated here. Being absent from the supplier list below is not evidence of absence from this market.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. NHS Supply Chain has no framework for frailty, older people, geriatric medicine or falls, so the single framework below is not this speciality's buying route — it is the only part of it NHS Supply Chain runs. Most of this patch is bought by local authorities and integrated care boards through community equipment services, telecare contracts and care home frameworks, which is what the awards list shows and why almost every buyer there is a council. The equipment itself (hoists, profiling beds, pressure redistribution, wheelchairs, daily living aids) is bought through Aids for Daily Living, Pressure Area Care and Patient Handling, and Wheelchairs, Specialist Seating and Related Services: those are published on the Patient Moving and Handling page and are deliberately not repeated here. Being absent from the supplier list below is not evidence of absence from this market.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(frailty|frail elderly|elderly|geriatric|comprehensive geriatric|delirium|dementia|telecare|technology enabled care|electronic assistive technology|care alarms?|care technology|community equipment|social care equipment|independent living|intermediate care|virtual ward|hospital at home|urgent community response|reablement|discharge to assess|admission avoidance|care homes?|nursing care beds?|falls (?:prevention|management|risk|service|pathway|response))\\b/i and does not match /\\b(ligature)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 85144100 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
+  "directorySuppliers": "No supplier directory label maps to this speciality, so no directory-tagged supplier is listed. That is a gap in the directory's vocabulary, not a finding that no company sells here, and no neighbouring page's list is borrowed to fill it.",
+  "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
+  "mhraDsu": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "drugTariffViiia": null
+ },
+ "counts": {
+  "frameworks": 1,
+  "suppliers": 18,
+  "suppliersUnresolved": 0,
+  "awardsShown": 40,
+  "awardsMatched": 118,
+  "awardsWithheldByBuyerCap": 0,
+  "awardsShownNotYetAwarded": 15,
+  "openTenders": 0,
+  "localIntel": 1,
+  "suppliersFrameworkNamedAlsoTagged": 0,
+  "suppliersDirectoryTagged": 0,
+  "suppliersDirectoryOnOtherFrameworks": 0,
+  "suppliersDirectoryWithFrameworkNote": 0,
+  "gpMarkets": 0,
+  "mhraDsu": 0,
+  "drugTariffViiiaLines": 0
+ },
+ "frameworks": [
+  {
+   "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+   "reference": "2021/S 000-031857",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Direct",
+   "starts": "1 September 2022",
+   "ends": null,
+   "supplierCount": 18,
+   "supplierSource": "count verified against the page's own stated total (18)",
+   "suppliers": [
+    "Abilia Ltd",
+    "Baywater Healthcare UK Ltd",
+    "DH2 Solutions Ltd",
+    "Iansyst Ltd",
+    "Jabbla UK Ltd",
+    "Legrand Electric Ltd",
+    "Liberator Ltd",
+    "Lifeline24",
+    "Mounts & More Ltd",
+    "Orbis Protect",
+    "PCByVoice",
+    "Possum Ltd",
+    "Relianace High -Tech Ltd",
+    "Sensory Guru Ltd",
+    "Smartbox Assistive Technology",
+    "Skyguard Ltd T/A Peoplesafe",
+    "Tobii Dynavox Ltd",
+    "Total Mobile"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Abilia Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Baywater Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "DH2 Solutions Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Iansyst Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Jabbla UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Legrand Electric Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Liberator Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Lifeline 24",
+   "resolved": true,
+   "variants": [
+    "Lifeline24"
+   ],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Mounts & More Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Orbis Protect",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "PCByVoice",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Possum Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Relianace High -Tech Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Sensory Guru Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Skyguard Ltd T/A Peoplesafe",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Smartbox Assistive Technology",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Tobii Dynavox Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  },
+  {
+   "name": "Total Mobile",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": false
+  }
+ ],
+ "awards": [
+  {
+   "title": "Framework for the Supply and Installation of Accessibility Equipment and Independent Living Adaptations",
+   "buyer": "SUNDERLAND CARE AND SUPPORT LIMITED",
+   "supplier": null,
+   "date": "2026-10-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095176-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33196200",
+    "34953000",
+    "42416100",
+    "42416300",
+    "44115600",
+    "44411000",
+    "45313100",
+    "45330000",
+    "45450000",
+    "51511100"
+   ],
+   "isFramework": true,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Falls Prevention Service",
+   "buyer": "West Sussex County Council",
+   "supplier": null,
+   "date": "2026-10-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095131-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Dementia Post Diagnosis Support Service",
+   "buyer": "London Borough of Bromley",
+   "supplier": null,
+   "date": "2026-10-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094674-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000",
+    "85300000"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Delivery of a Greater Manchester-wide Young Onset Dementia Admiral Nurse",
+   "buyer": "Rochdale Borough Council",
+   "supplier": "Northern Care Alliance NHS Foundation Trust",
+   "date": "2026-10-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094291-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85141200"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Care Homes - Matron Services",
+   "buyer": "Leicestershire County Council",
+   "supplier": "LEICESTERSHIRE PARTNERSHIP NHS TRUST",
+   "date": "2026-10-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093783-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85141200"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Intermediate Care Ward Conquest",
+   "buyer": "East Sussex Healthcare NHS Trust",
+   "supplier": "HASTINGS INTEGRATED FAMILY HEALTHCARE GP FEDERATION",
+   "date": "2026-10-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093738-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Technology Enabled Care",
+   "buyer": "Norfolk County Council",
+   "supplier": null,
+   "date": "2026-10-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093499-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000",
+    "85000000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Stop Smoking and Falls Prevention Strength & Balance Services",
+   "buyer": "Lincolnshire County Council",
+   "supplier": null,
+   "date": "2026-10-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093361-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Residential, respite and nursing care beds",
+   "buyer": "Comhairle nan Eilean Siar",
+   "supplier": null,
+   "date": "2026-10-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092824-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85144100"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Leicestershire Care Technology Service",
+   "buyer": "Leicestershire County Council",
+   "supplier": "Taking Care Personal Alarms Limited",
+   "date": "2026-09-29",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/a81d6e46-0fc6-4564-9e4a-2a3fcba7c296",
+   "value": 3073535,
+   "periodEnd": "2028-11-14",
+   "source": "tender-history"
+  },
+  {
+   "title": "Nursing & Dementia Nursing and Hotel Service at Heathlands Care Centre",
+   "buyer": "Bracknell Forest Borough Council",
+   "supplier": "Aura Bracknell Consultancy Limited",
+   "date": "2026-09-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090461-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85144100",
+    "85310000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Falls Prevention and Detection Products, Systems and Support Services",
+   "buyer": "COUNTESS OF CHESTER HOSPITAL NHS FOUNDATION TRUST",
+   "supplier": "Adaptive Care Solutions Ltd, Ascom UK Ltd, CANARY CARE GLOBAL LIMITED, GAIT AND MOTION TECHNOLOGY LTD, LIFESPAN MEDICAL LTD, MEDEQUIP ASSISTIVE TECHNOLOGY LIMITED, S&E Caretrade, Verso Vision Oy",
+   "date": "2026-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090275-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000",
+    "33190000"
+   ],
+   "isFramework": true,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Care Home for Adults with Learning Disabilities",
+   "buyer": "West Lothian Council",
+   "supplier": "Livingston Homereach",
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089510-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85144100"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Proactive Care (Berkshire West) - Frailty",
+   "buyer": "BERKSHIRE HEALTHCARE NHS FOUNDATION TRUST",
+   "supplier": null,
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089435-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Community Equipment Services",
+   "buyer": "Lancashire County Council",
+   "supplier": "MILLBROOK HEALTHCARE LTD",
+   "date": "2026-09-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/088475-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000",
+    "85000000"
+   ],
+   "isFramework": true,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "BHCC - NK - Care Homes within Brighton and Hove - (Round 6) April 2026",
+   "buyer": "Brighton and Hove City Council",
+   "supplier": "EVANS CARE LIMITED",
+   "date": "2026-09-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/088167-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85144100",
+    "85311000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Telecare Monitoring and Out of Hours Telephony Provision Project",
+   "buyer": "Newcastle City Council",
+   "supplier": null,
+   "date": "2026-09-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087416-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "79510000",
+    "85100000",
+    "85300000"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Technology Enabled Care Service (TEC)",
+   "buyer": "Lincolnshire County Council",
+   "supplier": "LIVITY LIFE LIMITED",
+   "date": "2026-09-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087065-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000",
+    "50000000",
+    "85000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "QHM-2026-3136 Fit as a Fiddle - Exercise for the Elderly",
+   "buyer": "NHS NORTH EAST AND NORTH CUMBRIA INTEGRATED CARE BOARD",
+   "supplier": "Age UK North Tyneside",
+   "date": "2026-09-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086325-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Virtual Wards/Hospital at Home: Digitally Enabled Healthcare Services",
+   "buyer": "Leeds and York Partnership NHS Foundation Trust, trading as North of England NHS Commercial Procurement Collaborative (\"NOE CPC\")",
+   "supplier": null,
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085645-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111200",
+    "85111700",
+    "85111800",
+    "85121231",
+    "85121232",
+    "85121252",
+    "85121291",
+    "85141000",
+    "85141200",
+    "85141210",
+    "85142100",
+    "85145000",
+    "85150000",
+    "85312500",
+    "85323000"
+   ],
+   "isFramework": true,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Framework of Community Equipment Suppliers",
+   "buyer": "Herefordshire Council",
+   "supplier": null,
+   "date": "2026-09-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085440-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000"
+   ],
+   "isFramework": true,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Reablement Care Service",
+   "buyer": "London Borough of Enfield",
+   "supplier": null,
+   "date": "2026-09-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084808-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Bromley Out of Hours Primary Care Home Visiting (OOHPCHV) Service",
+   "buyer": "NHS South East London Integrated Care Board",
+   "supplier": null,
+   "date": "2026-09-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084801-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of Falls Prevention, Rehabilitation and Recovery Services",
+   "buyer": "COUNTESS OF CHESTER HOSPITAL NHS FOUNDATION TRUST",
+   "supplier": "HOMELINK HEALTHCARE LIMITED",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083646-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Contract for the Provision of FaME - Falls Management Exercise Programme",
+   "buyer": "Gateshead Borough Council",
+   "supplier": "Gateshead Older People's Assembly",
+   "date": "2026-08-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081619-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Telecare Alarm Receiving Centre and Customer Management System",
+   "buyer": "Portsmouth City Council",
+   "supplier": null,
+   "date": "2026-08-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080987-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33195000",
+    "35121700",
+    "48000000",
+    "79510000"
+   ],
+   "isFramework": false,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Supplies for Care Homes",
+   "buyer": "Halton Borough Council",
+   "supplier": "NEWLYN Healthcare",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079259-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "North Yorkshire Adult Social Care - Thriving Care Homes Framework",
+   "buyer": "The North Yorkshire Council",
+   "supplier": null,
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079211-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85000000",
+    "85144100"
+   ],
+   "isFramework": true,
+   "stage": "planning",
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Plymouth Adults' Care Home Framework (Reopening 2)",
+   "buyer": "Plymouth City Council",
+   "supplier": null,
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078485-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000",
+    "85300000"
+   ],
+   "isFramework": true,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Step Up/Step Down Intermediate Care Bed Provision (Pocklington)",
+   "buyer": "NHS HUMBER AND NORTH YORKSHIRE INTEGRATED CARE BOARD",
+   "supplier": "Paragon Healthcare York Limited",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077311-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85323000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "BCU-FTS-60443- Service, Maintenance and Calibration of Community Equipment across Betsi Cadwaladr University Health Board, Flintshire County Council and Denbighshire County",
+   "buyer": "Betsi Cadwaladr University Health Board",
+   "supplier": "Drive Medical Limited",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077360-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50400000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Integrated Community Equipment Services & Minor Adaptations Services",
+   "buyer": "Oldham Metropolitan Borough Council",
+   "supplier": "MEDEQUIP ASSISTIVE TECHNOLOGY LIMITED, SRD BUILDING SERVICES LTD, 24-7 Locks Secure Horizon Ltd",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077078-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33190000",
+    "50000000",
+    "85140000",
+    "85323000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "HAC6143 Community Equipment Purchases",
+   "buyer": "Tower Hamlets",
+   "supplier": "Enabled Living Healthcare Limited",
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076621-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33196000",
+    "50421000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Plymouth Home-Based Intermediate Care",
+   "buyer": "NHS DEVON INTEGRATED CARE BOARD",
+   "supplier": "Nurseplus and Carer Plus UK Limited",
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075996-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85323000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "HomeLink Healthcare NNUH Virtual Ward Service",
+   "buyer": "Norfolk and Norwich University Hospitals NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075587-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Calls offs from Dynamic Purchasing System for Telecare Goods and Services Q4 2025/26",
+   "buyer": "DERBY CITY COUNCIL",
+   "supplier": "Legrand Electric Ltd",
+   "date": "2026-05-06",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/5b29ea1f-bd19-4dd2-bc4d-00a04cdc8b6b",
+   "value": 85680,
+   "periodEnd": "2026-03-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase and award of contract for Tracking Hoists to support Community Equipment Service",
+   "buyer": "Cumberland Council",
+   "supplier": "Direct Health Care Group",
+   "date": "2025-10-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/063467-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Mole Valley District Council Telecare Devices 25-27",
+   "buyer": "Mole Valley District Council",
+   "supplier": "Chiptech International Limited",
+   "date": "2025-09-01",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/15ee2e44-81a2-40b7-bbab-7d6b86ad503c",
+   "value": 563000,
+   "periodEnd": "2027-08-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Technologies for Independent Living -Telecare Equipment",
+   "buyer": "Dudley Metropolitan Borough Council",
+   "supplier": "LEGRAND ELECTRIC LIMITED",
+   "date": "2025-08-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/052542-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Ad Hoc Care Technology",
+   "buyer": "Isle of Wight Council",
+   "supplier": "TeleAlarm",
+   "date": "2025-04-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/015372-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null,
+ "localIntel": [
+  {
+   "id": "frail-ons-deaths-2025",
+   "group": "policy",
+   "kind": "Official statistics",
+   "nation": "England and Wales",
+   "org": "Office for National Statistics",
+   "title": "Deaths registered in England and Wales: 2025",
+   "date": "25/09/2026",
+   "fact": "570,988 deaths were registered in England and Wales in 2025, 0.4% more than in 2024. Dementia and Alzheimer's disease was the leading cause, with 72,272 deaths (12.7% of all deaths): 16.5% of female deaths and 9.1% of male deaths. The age-standardised mortality rate was 913 per 100,000, the lowest since the series began in 1994. The North East had the highest age-standardised rates in England for both males (1,189) and females (880).",
+   "quote": "Dementia and Alzheimer's disease continued to be the leading cause of death in England and Wales, with 72,272 deaths registered (12.7% of all deaths)",
+   "use": "Scale of dementia as the leading cause of death, and where mortality is highest, for older-people and care-setting conversations.",
+   "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/bulletins/deathsregistrationsummarytables/2025",
+   "verifiedOn": "2026-10-01",
+   "lastCheck": {
+    "date": "2026-10-09",
+    "status": "ok",
+    "http": 200,
+    "quote": "found"
+   }
+  }
+ ],
+ "localIntelGroups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
+ },
+ "directorySuppliers": [],
+ "gpPrescribing": {
+  "generatedOn": "2026-09-30",
+  "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
+  "periods": [
+   "202507",
+   "202607"
+  ],
+  "minBaselineItems": 25,
+  "defined": false,
+  "markets": [],
+  "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
+ },
+ "mhraDsu": {
+  "dataAsOf": "2026-10-09",
+  "sourcePage": "https://www.gov.uk/drug-safety-update",
+  "noFacet": true,
+  "whyEmpty": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
+  "count": 0,
+  "roundupsExcluded": 0,
+  "broadcastsExcluded": 0,
+  "updates": []
+ },
+ "drugTariffViiia": null
+}
