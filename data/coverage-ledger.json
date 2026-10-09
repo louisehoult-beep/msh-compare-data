@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-10-05",
-  "differentiator.json published": 36443,
-  "differentiator.json held": 51325
+  "differentiator.json published": 36413,
+  "differentiator.json held": 51355
  },
  "counts": {
   "frameworks": 122,
@@ -25,14 +25,16 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 408,
-  "inScopeSuppliersNeedingCrawl": 261,
-  "inScopeSuppliersNeedingDomain": 240,
+  "inScopeSuppliersNeedingCrawl": 262,
+  "inScopeSuppliersNeedingDomain": 239,
   "suppliersRefused": 547,
   "suppliersRefusedButPublishingElsewhere": 117,
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 1,
   "blockedFrameworks": 2,
-  "deferredFrameworks": 2
+  "frameworksWithExclusions": 3,
+  "suppliersExcludedByRuling": 13,
+  "deferredFrameworks": 1
  },
  "unresolvedSupplierNames": [
   [
@@ -1684,6 +1686,9 @@
    "speciality": [
     "pathology"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 122,
+   "coverageOfTarget": 27.9,
    "crawlWorklist": [
     {
      "supplier": "1 Stop Medical Supplies",
@@ -2408,6 +2413,9 @@
    "speciality": [
     "ortho"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 101,
+   "coverageOfTarget": 34.7,
    "crawlWorklist": [
     {
      "supplier": "Advita Ortho UK Limited",
@@ -2419,7 +2427,7 @@
     },
     {
      "supplier": "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
-     "domain": null
+     "domain": "myrecovery.com"
     },
     {
      "supplier": "M.D.M Medical Ltd",
@@ -2435,7 +2443,6 @@
     }
    ],
    "domainsMissing": [
-    "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
     "M.D.M Medical Ltd",
     "Permedica UK Limited",
     "Surgalign UK Ltd (Formerly Pioneer Surgical Technology B.V. or RTI Surgical)"
@@ -2941,8 +2948,8 @@
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 0,
-    "needDomain": 4
+    "crawlable": 1,
+    "needDomain": 3
    },
    "published": [
     "Acumed Ltd",
@@ -3076,6 +3083,9 @@
    "speciality": [
     "orthotics"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 63,
+   "coverageOfTarget": 34.9,
    "crawlWorklist": [
     {
      "supplier": "Beagle Orthopaedic Ltd",
@@ -3469,6 +3479,9 @@
    "speciality": [
     "mis"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 60,
+   "coverageOfTarget": 30.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -3880,6 +3893,9 @@
     "endourology",
     "oncology"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 58,
+   "coverageOfTarget": 34.5,
    "crawlWorklist": [
     {
      "supplier": "GI UK Medical Ltd (Duomed)",
@@ -4259,6 +4275,9 @@
    "speciality": [
     "womens"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 57,
+   "coverageOfTarget": 36.8,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -4593,6 +4612,9 @@
    "speciality": [
     "continence"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 57,
+   "coverageOfTarget": 35.1,
    "crawlWorklist": [
     {
      "supplier": "Redland embh Group Limited",
@@ -4992,6 +5014,9 @@
    "speciality": [
     "wound"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 56,
+   "coverageOfTarget": 35.7,
    "crawlWorklist": [
     {
      "supplier": "ClearHeal LTD",
@@ -5412,6 +5437,45 @@
    "speciality": [
     "digital"
    ],
+   "excludedByRuling": [
+    {
+     "supplier": "Draeger Medical UK",
+     "decisionRef": "^o268",
+     "ruledOn": "2026-10-09"
+    },
+    {
+     "supplier": "Haemonetics",
+     "decisionRef": "^o268",
+     "ruledOn": "2026-10-09"
+    },
+    {
+     "supplier": "Leica Microsystems (UK)",
+     "decisionRef": "^o268",
+     "ruledOn": "2026-10-09"
+    },
+    {
+     "supplier": "Olympus (KeyMed)",
+     "decisionRef": "^o268",
+     "ruledOn": "2026-10-09"
+    },
+    {
+     "supplier": "Philips",
+     "decisionRef": "^o268",
+     "ruledOn": "2026-10-09"
+    },
+    {
+     "supplier": "Roche Diagnostics UK",
+     "decisionRef": "^o268",
+     "ruledOn": "2026-10-09"
+    },
+    {
+     "supplier": "Siemens Healthineers",
+     "decisionRef": "^o268",
+     "ruledOn": "2026-10-09"
+    }
+   ],
+   "targetSuppliers": 47,
+   "coverageOfTarget": 23.4,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -5669,55 +5733,6 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Draeger Medical UK",
-     "domain": "www.draeger.com",
-     "reason": "neither www.draeger.com nor www.www.draeger.com answered \u2014 the domain does not resolve or serves no usable certificate",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Haemonetics",
-     "domain": "www.haemonetics.com",
-     "reason": "the site's WordPress API returned HTTP 500; the WooCommerce Store API returned HTTP 500; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Olympus (KeyMed)",
-     "domain": "www.olympus.co.uk",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Leica Microsystems (UK)",
-     "domain": "www.leica-microsystems.com",
-     "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Roche Diagnostics UK",
-     "domain": "diagnostics.roche.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Siemens Healthineers",
-     "domain": "www.siemens-healthineers.com",
-     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-20",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Canon Medical Systems",
      "domain": "uk.medical.canon",
      "reason": "the site's WordPress API returned HTTP 401; the WooCommerce Store API returned HTTP 401; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -5739,7 +5754,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 7,
+    "publishedElsewhereNeedingCategory": 0,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -5759,15 +5774,7 @@
     "Sysmex UK",
     "System C"
    ],
-   "publishedElsewhere": [
-    "Draeger Medical UK",
-    "Haemonetics",
-    "Olympus (KeyMed)",
-    "Leica Microsystems (UK)",
-    "Philips",
-    "Roche Diagnostics UK",
-    "Siemens Healthineers"
-   ],
+   "publishedElsewhere": [],
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [],
@@ -5810,14 +5817,9 @@
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)"
    ],
    "unknown": [],
-   "actionableTotal": 7,
+   "actionableTotal": 0,
    "blockedReason": null,
-   "deferred": {
-    "reason": "All 7 remaining suppliers (Draeger Medical UK, Haemonetics, Olympus (KeyMed), Leica Microsystems (UK), Philips, Roche Diagnostics UK, Siemens Healthineers) already publish ranges elsewhere in the Differentiator, but nothing under digital:hw/sw -- confirmed again this run by reading every one of their NHSSC-cache catalogue lines under this framework (36 terms across the 7): ECG electrodes, anaesthetic facemasks, CPAP/NIV consumables, a cardiology pressure-guidewire console, POC glucose/coagulation/blood-gas test strips, lab analysers (cobas, Atellica), microscopy histology accessories and an energy handpiece -- none of it clinical IT software or hardware by the Hub's own digital:hw/sw definitions. Forcing any of it into digital:hw/sw would be inventing a category the evidence does not support. This is the same structural ceiling identity-vocab-decision-queue.md #4 already closed as 'nothing left here for Lou' on the identity/tie question; what remains open is the coverage-target policy question in OUTSTANDING ^o268 -- whether Lou wants this framework kept as an active coverage target at all, or accepted at its structural ceiling.",
-    "queuedIn": "02-Elevate-and-Thrive/Hub/identity-vocab-decision-queue.md",
-    "decisionRef": "^o268",
-    "addedOn": "2026-09-18"
-   }
+   "deferred": null
   },
   {
    "framework": "Complete Ophthalmology Solutions 3",
@@ -5834,6 +5836,9 @@
    "speciality": [
     "ophthalmology"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 53,
+   "coverageOfTarget": 34.0,
    "crawlWorklist": [
     {
      "supplier": "Johnson & Johnson Surgical Vision",
@@ -6169,6 +6174,9 @@
    "speciality": [
     "handling"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 53,
+   "coverageOfTarget": 49.1,
    "crawlWorklist": [
     {
      "supplier": "Apollo Healthcare Technologies",
@@ -6490,6 +6498,9 @@
    "speciality": [
     "surgical"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 50,
+   "coverageOfTarget": 26.0,
    "crawlWorklist": [
     {
      "supplier": "Steris IMS Ltd",
@@ -6793,6 +6804,9 @@
    "speciality": [
     "theatres"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 43,
+   "coverageOfTarget": 27.9,
    "crawlWorklist": [
     {
      "supplier": "Ingles Ltd",
@@ -7098,6 +7112,9 @@
    "speciality": [
     "cardiology"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 37,
+   "coverageOfTarget": 35.1,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -7384,6 +7401,9 @@
    "speciality": [
     "respiratory"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 37,
+   "coverageOfTarget": 35.1,
    "crawlWorklist": [
     {
      "supplier": "Marshall Products",
@@ -7622,6 +7642,9 @@
    "speciality": [
     "monitoring"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 35,
+   "coverageOfTarget": 34.3,
    "crawlWorklist": [
     {
      "supplier": "Pro Health Solutions Limited",
@@ -7876,6 +7899,9 @@
    "speciality": [
     "theatres"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 33,
+   "coverageOfTarget": 36.4,
    "crawlWorklist": [
     {
      "supplier": "Sterimed Medical Implants UK Ltd",
@@ -8123,6 +8149,9 @@
    "speciality": [
     "rehab"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 31,
+   "coverageOfTarget": 41.9,
    "crawlWorklist": [
     {
      "supplier": "Benmor Medical",
@@ -8339,6 +8368,9 @@
    "speciality": [
     "rehab"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 31,
+   "coverageOfTarget": 32.3,
    "crawlWorklist": [
     {
      "supplier": "Aayan Medical Imaging Limited",
@@ -8584,6 +8616,9 @@
    "speciality": [
     "skin-prep"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 29,
+   "coverageOfTarget": 37.9,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -8824,6 +8859,9 @@
    "speciality": [
     "wound"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 28,
+   "coverageOfTarget": 39.3,
    "crawlWorklist": [
     {
      "supplier": "Mediworld Ltd",
@@ -9077,6 +9115,9 @@
    "speciality": [
     "bloodtx"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 27,
+   "coverageOfTarget": 37.0,
    "crawlWorklist": [
     {
      "supplier": "Arcomedical Infusion Ltd",
@@ -9282,6 +9323,9 @@
     "anaesthesia",
     "neonatal"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 25,
+   "coverageOfTarget": 36.0,
    "crawlWorklist": [
     {
      "supplier": "Atom Medical Corporation UK ltd",
@@ -9465,6 +9509,9 @@
    "speciality": [
     "renal"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 25,
+   "coverageOfTarget": 32.0,
    "crawlWorklist": [
     {
      "supplier": "VWS (UK) Ltd",
@@ -9667,6 +9714,9 @@
    "speciality": [
     "neuro"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 23,
+   "coverageOfTarget": 52.2,
    "crawlWorklist": [
     {
      "supplier": "Far From Surgical Solutions",
@@ -9872,6 +9922,9 @@
    "speciality": [
     "rehab"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 22,
+   "coverageOfTarget": 31.8,
    "crawlWorklist": [
     {
      "supplier": "Phoenix Medical Ltd",
@@ -10043,6 +10096,9 @@
    "speciality": [
     "infection"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 21,
+   "coverageOfTarget": 23.8,
    "crawlWorklist": [
     {
      "supplier": "Ecohydra Technologies Ltd",
@@ -10226,6 +10282,9 @@
    "speciality": [
     "vascular"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 21,
+   "coverageOfTarget": 47.6,
    "crawlWorklist": [
     {
      "supplier": "Unomedical Ltd",
@@ -10385,6 +10444,35 @@
    "speciality": [
     "ultrasound"
    ],
+   "excludedByRuling": [
+    {
+     "supplier": "BioSpectrum Ltd",
+     "decisionRef": "^o617",
+     "ruledOn": "2026-10-09"
+    },
+    {
+     "supplier": "Hologic UK",
+     "decisionRef": "^o617",
+     "ruledOn": "2026-10-09"
+    },
+    {
+     "supplier": "Philips",
+     "decisionRef": "^o617",
+     "ruledOn": "2026-10-09"
+    },
+    {
+     "supplier": "ProSys International Ltd",
+     "decisionRef": "^o617",
+     "ruledOn": "2026-10-09"
+    },
+    {
+     "supplier": "Siemens Healthineers",
+     "decisionRef": "^o617",
+     "ruledOn": "2026-10-09"
+    }
+   ],
+   "targetSuppliers": 16,
+   "coverageOfTarget": 37.5,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -10460,27 +10548,6 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "ProSys International Ltd",
-     "domain": "www.prosysinternational.co.uk",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-09-07",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Siemens Healthineers",
-     "domain": "www.siemens-healthineers.com",
-     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-20",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Canon Medical Systems",
      "domain": "uk.medical.canon",
      "reason": "the site's WordPress API returned HTTP 401; the WooCommerce Store API returned HTTP 401; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -10497,7 +10564,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 5,
+    "publishedElsewhereNeedingCategory": 0,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -10512,13 +10579,7 @@
     "Orca Medical Ltd",
     "Probo Medical (formerly MIUS)"
    ],
-   "publishedElsewhere": [
-    "BioSpectrum Ltd",
-    "Hologic UK",
-    "Philips",
-    "ProSys International Ltd",
-    "Siemens Healthineers"
-   ],
+   "publishedElsewhere": [],
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [],
@@ -10535,7 +10596,7 @@
     "Vertec Scientific"
    ],
    "unknown": [],
-   "actionableTotal": 5,
+   "actionableTotal": 0,
    "blockedReason": null,
    "deferred": null
   },
@@ -10554,6 +10615,9 @@
    "speciality": [
     "ssd"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 20,
+   "coverageOfTarget": 35.0,
    "crawlWorklist": [
     {
      "supplier": "VWS (UK) Ltd",
@@ -10706,6 +10770,9 @@
    "speciality": [
     "bloodcoll"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 19,
+   "coverageOfTarget": 36.8,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -10853,6 +10920,9 @@
    "speciality": [
     "nutrition"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 19,
+   "coverageOfTarget": 47.4,
    "crawlWorklist": [
     {
      "supplier": "Enteral Access Technologies Ltd (previously named on the framework as Nasogastric Feeding Solutions Ltd",
@@ -11005,6 +11075,9 @@
    "speciality": [
     "infection"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 19,
+   "coverageOfTarget": 26.3,
    "crawlWorklist": [
     {
      "supplier": "Globus (Shetland) Ltd",
@@ -11186,6 +11259,9 @@
    "speciality": [
     "vascular"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 18,
+   "coverageOfTarget": 38.9,
    "crawlWorklist": [
     {
      "supplier": "Headington Medical Technology Ltd",
@@ -11337,6 +11413,9 @@
    "speciality": [
     "neonatal"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 18,
+   "coverageOfTarget": 38.9,
    "crawlWorklist": [
     {
      "supplier": "Babease Limited",
@@ -11503,6 +11582,9 @@
    "speciality": [
     "theatres"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 18,
+   "coverageOfTarget": 38.9,
    "crawlWorklist": [
     {
      "supplier": "Vyaire Medical Products Limited",
@@ -11635,8 +11717,8 @@
    "category": "Rehabilitation and Community",
    "ends": null,
    "suppliersAwarded": 18,
-   "suppliersPublished": 7,
-   "coverage": 38.9,
+   "suppliersPublished": 6,
+   "coverage": 33.3,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -11644,7 +11726,21 @@
    "speciality": [
     "digital"
    ],
-   "crawlWorklist": [],
+   "excludedByRuling": [
+    {
+     "supplier": "Iansyst Ltd",
+     "decisionRef": "^o632",
+     "ruledOn": "2026-10-09"
+    }
+   ],
+   "targetSuppliers": 17,
+   "coverageOfTarget": 35.3,
+   "crawlWorklist": [
+    {
+     "supplier": "Tobii Dynavox Ltd",
+     "domain": "uk.tobiidynavox.com"
+    }
+   ],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -11733,8 +11829,8 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 1,
-    "heldNeedingCategory": 0,
+    "publishedElsewhereNeedingCategory": 0,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -11746,13 +11842,12 @@
     "Lifeline 24",
     "Possum Ltd",
     "Sensory Guru Ltd",
-    "Skyguard Ltd T/A Peoplesafe",
+    "Skyguard Ltd T/A Peoplesafe"
+   ],
+   "publishedElsewhere": [],
+   "heldOnly": [
     "Tobii Dynavox Ltd"
    ],
-   "publishedElsewhere": [
-    "Iansyst Ltd"
-   ],
-   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [],
    "refused": [
@@ -11787,6 +11882,9 @@
    "speciality": [
     "audiology"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 15,
+   "coverageOfTarget": 60.0,
    "crawlWorklist": [
     {
      "supplier": "Amplivox",
@@ -11918,6 +12016,9 @@
    "speciality": [
     "infection"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 14,
+   "coverageOfTarget": 28.6,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -12066,6 +12167,9 @@
     "imaging",
     "oncology"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 13,
+   "coverageOfTarget": 30.8,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -12206,6 +12310,9 @@
    "speciality": [
     "oncology"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 13,
+   "coverageOfTarget": 38.5,
    "crawlWorklist": [
     {
      "supplier": "Accuray UK",
@@ -12336,6 +12443,9 @@
    "speciality": [
     "continence"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 12,
+   "coverageOfTarget": 41.7,
    "crawlWorklist": [
     {
      "supplier": "Forma-Care (UK) Ltd",
@@ -12473,6 +12583,9 @@
    "speciality": [
     "diabetes"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 12,
+   "coverageOfTarget": 16.7,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -12596,6 +12709,9 @@
    "speciality": [
     "orthotics"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 12,
+   "coverageOfTarget": 41.7,
    "crawlWorklist": [
     {
      "supplier": "Orthoeurope Ltd",
@@ -12716,6 +12832,9 @@
    "speciality": [
     "theatres"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 9,
+   "coverageOfTarget": 33.3,
    "crawlWorklist": [
     {
      "supplier": "Globus (Shetland) Ltd",
@@ -12834,6 +12953,9 @@
    "speciality": [
     "imaging"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 8,
+   "coverageOfTarget": 25.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -12945,6 +13067,9 @@
    "speciality": [
     "infection"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 8,
+   "coverageOfTarget": 25.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -13057,6 +13182,9 @@
    "speciality": [
     "imaging"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 5,
+   "coverageOfTarget": 20.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -13143,6 +13271,9 @@
    "speciality": [
     "infection"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 5,
+   "coverageOfTarget": 40.0,
    "crawlWorklist": [
     {
      "supplier": "Berry BPI Recycled Products",
@@ -13222,6 +13353,9 @@
    "speciality": [
     "infection"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 3,
+   "coverageOfTarget": 33.3,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -13285,6 +13419,9 @@
    "speciality": [
     "oncology"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 2,
+   "coverageOfTarget": 50.0,
    "crawlWorklist": [
     {
      "supplier": "BXTAccelyon Ltd",
@@ -13347,6 +13484,9 @@
    "speciality": [
     "ent"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 7,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Pentax Medical",
@@ -13446,6 +13586,9 @@
    "speciality": [
     "nuclear"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 4,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -13501,6 +13644,9 @@
    "speciality": [
     "endourology"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 3,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -13562,6 +13708,9 @@
    "speciality": [
     "continence"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 1,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Ingenion Medical",
@@ -13612,6 +13761,9 @@
    "speciality": [
     "ultrasound"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 1,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Echosens",
@@ -13660,6 +13812,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 54,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Marshall Products",
@@ -13995,6 +14150,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 52,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "BXTAccelyon Ltd",
@@ -14317,6 +14475,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 40,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Seca Ltd",
@@ -14606,6 +14767,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 39,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Artivion UK Ltd",
@@ -14855,6 +15019,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 29,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Accrington Surgical Inst. Suppliers",
@@ -15075,6 +15242,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 28,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Sefam Medical Ltd",
@@ -15258,6 +15428,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 26,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Kinetic Medical Devices Ltd",
@@ -15415,6 +15588,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 25,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Numed Healthcare",
@@ -15611,6 +15787,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 23,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Europlaz Technologies Ltd",
@@ -15771,6 +15950,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 23,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Gardamed",
@@ -15925,6 +16107,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 21,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "BHA Medical",
@@ -16083,6 +16268,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 21,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Assut UK LTD",
@@ -16246,6 +16434,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 20,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Advanced Sterilization Products (UK) Limited",
@@ -16396,6 +16587,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 20,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -16549,6 +16743,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 18,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Pentax Medical",
@@ -16721,6 +16918,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 16,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Super B Plus Group Ltd",
@@ -16848,6 +17048,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 14,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Agito Medical A/S",
@@ -16977,6 +17180,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 14,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -17103,6 +17309,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 13,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Sivantos Limited",
@@ -17217,6 +17426,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 13,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -17335,6 +17547,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 13,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -17440,6 +17655,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 12,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "CHG Meridian UK Limited",
@@ -17556,6 +17774,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 11,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "De Smit Medical Systems Limited",
@@ -17658,6 +17879,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 11,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Med Imaging Healthcare Limited",
@@ -17775,6 +17999,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 11,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -17850,6 +18077,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 10,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -17958,6 +18188,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 10,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Artivion UK Ltd",
@@ -18070,6 +18303,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 9,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Anita UK Ltd",
@@ -18169,6 +18405,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 9,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Spectrum Medical Limited",
@@ -18275,6 +18514,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 8,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Continuum Scotland Ltd",
@@ -18367,6 +18609,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 8,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -18445,6 +18690,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 8,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Health Edge Solutions Ltd",
@@ -18532,6 +18780,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 7,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -18623,6 +18874,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 7,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Micrima Limited",
@@ -18708,6 +18962,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 7,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Gener8 Spaces Ltd",
@@ -18792,6 +19049,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 6,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Med Imaging Healthcare Limited",
@@ -18876,6 +19136,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 6,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [
@@ -18959,6 +19222,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 6,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Silimed UK Limited",
@@ -19036,6 +19302,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 6,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -19113,6 +19382,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 5,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Pentax Medical",
@@ -19194,6 +19466,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 5,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -19269,6 +19544,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 5,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Raysearch UK Ltd",
@@ -19343,6 +19621,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 5,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Procept Biorobotics",
@@ -19426,6 +19707,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 5,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -19494,6 +19778,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 4,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Warwick SASCo Ltd",
@@ -19569,6 +19856,9 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 3,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Origio Limited",
@@ -19620,6 +19910,9 @@
    "outOfScopeReason": "NHS Supply Chain catering category \u2014 not a medical device market",
    "state": "OUT OF SCOPE",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 97,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -19759,6 +20052,9 @@
    "speciality": [
     "facilities"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 60,
+   "coverageOfTarget": 8.3,
    "crawlWorklist": [
     {
      "supplier": "Parc Global Supplies",
@@ -19966,6 +20262,9 @@
    "outOfScopeReason": "estates, catering and office supply \u2014 outside the Hub's medical sales audience",
    "state": "OUT OF SCOPE",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 51,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Wealden Rehab",
@@ -20141,6 +20440,9 @@
    "outOfScopeReason": "NHS Supply Chain catering category \u2014 not a medical device market",
    "state": "OUT OF SCOPE",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 44,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -20243,6 +20545,9 @@
    "speciality": [
     "workwear"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 32,
+   "coverageOfTarget": 6.2,
    "crawlWorklist": [
     {
      "supplier": "Valmy SAS Ltd",
@@ -20400,6 +20705,9 @@
    "outOfScopeReason": "NHS Supply Chain catering category \u2014 not a medical device market",
    "state": "OUT OF SCOPE",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 31,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -20480,6 +20788,9 @@
    "outOfScopeReason": "NHS Supply Chain catering category \u2014 not a medical device market",
    "state": "OUT OF SCOPE",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 29,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -20549,6 +20860,9 @@
    "outOfScopeReason": "estates, catering and office supply \u2014 outside the Hub's medical sales audience",
    "state": "OUT OF SCOPE",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 28,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -20661,6 +20975,9 @@
    "outOfScopeReason": "NHS Supply Chain catering category \u2014 not a medical device market",
    "state": "OUT OF SCOPE",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 27,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -20738,6 +21055,9 @@
    "outOfScopeReason": "NHS Supply Chain catering category \u2014 not a medical device market",
    "state": "OUT OF SCOPE",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 27,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -20805,6 +21125,9 @@
    "outOfScopeReason": "estates, catering and office supply \u2014 outside the Hub's medical sales audience",
    "state": "OUT OF SCOPE",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 22,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Airbon Ltd, trading as Smart Air UK",
@@ -20974,6 +21297,9 @@
    "outOfScopeReason": "estates, catering and office supply \u2014 outside the Hub's medical sales audience",
    "state": "OUT OF SCOPE",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 17,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -21062,6 +21388,9 @@
    "outOfScopeReason": "estates, catering and office supply \u2014 outside the Hub's medical sales audience",
    "state": "OUT OF SCOPE",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 17,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "MC Tissue",
@@ -21211,6 +21540,9 @@
    "outOfScopeReason": "estates, catering and office supply \u2014 outside the Hub's medical sales audience",
    "state": "OUT OF SCOPE",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 16,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -21290,6 +21622,9 @@
    "outOfScopeReason": "estates, catering and office supply \u2014 outside the Hub's medical sales audience",
    "state": "OUT OF SCOPE",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 14,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Zebra Technologies",
@@ -21396,6 +21731,9 @@
    "outOfScopeReason": "estates, catering and office supply \u2014 outside the Hub's medical sales audience",
    "state": "OUT OF SCOPE",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 11,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Moulded Fibre Products Limited",
@@ -21509,6 +21847,9 @@
    "outOfScopeReason": "estates, catering and office supply \u2014 outside the Hub's medical sales audience",
    "state": "OUT OF SCOPE",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 10,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Hygenica",
@@ -21613,6 +21954,9 @@
    "outOfScopeReason": "estates, catering and office supply \u2014 outside the Hub's medical sales audience",
    "state": "OUT OF SCOPE",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 8,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Precision Dynamics Corporation",
@@ -21705,6 +22049,9 @@
    "speciality": [
     "workwear"
    ],
+   "excludedByRuling": [],
+   "targetSuppliers": 2,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -21747,6 +22094,9 @@
    "outOfScopeReason": "NHS Supply Chain catering category \u2014 not a medical device market",
    "state": "OUT OF SCOPE",
    "speciality": [],
+   "excludedByRuling": [],
+   "targetSuppliers": 1,
+   "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
      "supplier": "Bidfood Direct",

@@ -431,7 +431,10 @@ MERGES_APPLIED_2026_08_27 = [
      "Lou approved merging both this and the (already-applied) Mediq pair on 18/08/2026."),
 ]
 
-MERGES = [
+# ALREADY APPLIED (confirmed 09/10/2026: neither dropped name is a live record
+# any more, moved here from MERGES because the dry run died on 'named in MERGES
+# but not found in the seed').
+MERGES_APPLIED_2026_09_11 = [
     ("RB Medical Engineering Ltd", ["R B Medical"], None,
      "One company, two spellings, no shared company number to match on: "
      "Companies House holds no company called 'R B Medical' at all, only "
@@ -460,6 +463,22 @@ MERGES = [
      "STERIS's service-division brand, not a separate company. Same evidence "
      "shape as the Becton Dickinson depot fold - no register number, entity "
      "evidence instead. Verified 11/09/2026, feeds OUTSTANDING ^o219."),
+]
+
+# ALREADY APPLIED 09/10/2026 (^o618, Lou ruled "yes" the same day). Kept as an
+# applied group so main() asserts the fold stays intact.
+MERGES_APPLIED_2026_10_09 = [
+    ("Thesis Technology Products Ltd", ["Thesis (LimbO)"], "02894920",
+     "One company, two seed records. Both carry limboproducts.co.uk; the survivor's "
+     "domain is proved by registered-office address against Companies House "
+     "THESIS TECHNOLOGY PRODUCTS LIMITED (02894920), trading as LimbO Products "
+     "(domain-proof-tier, 23/09/2026). 'Thesis (LimbO)' was an UNVERIFIED record carried "
+     "from the Hub's retired supplier directory (06/08/2026). Both crawls hold the "
+     "identical 62-product catalogue. Lou ruled 09/10/2026 (^o618): keep Thesis "
+     "Technology Products Ltd as canonical and merge LimbO into it."),
+]
+
+MERGES = [
 ]
 
 # Same company number, deliberately NOT merged. Each needs a decision that is
@@ -737,7 +756,8 @@ def main(argv):
             + MERGES_APPLIED_2026_08_21 + MERGES_APPLIED_2026_08_21B
             + MERGES_APPLIED_2026_08_21C + MERGES_APPLIED_2026_08_24
             + MERGES_APPLIED_2026_08_25 + MERGES_APPLIED_2026_08_25B
-            + MERGES_APPLIED_2026_08_25C + MERGES_APPLIED_2026_08_27):
+            + MERGES_APPLIED_2026_08_25C + MERGES_APPLIED_2026_08_27
+            + MERGES_APPLIED_2026_09_11 + MERGES_APPLIED_2026_10_09):
         keep = by_name.get(keep_name)
         if keep is None:
             undone.append("%s: survivor missing" % keep_name)

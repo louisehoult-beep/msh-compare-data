@@ -30,11 +30,13 @@ the two facts are separate, and the refusal used to be invisible for any
 supplier publishing anything anywhere.
 **2 framework(s) have nothing left by a permitted route** —
 low coverage there means exhausted, not neglected.
-**2 framework(s) are DEFERRED** — their Left is real and
+**1 framework(s) are DEFERRED** — their Left is real and
 counted here, but every supplier in it is waiting on a ruling only Lou can
 give, so `differentiator-framework-coverage` skips them when it picks a
 framework to work. They are listed in `data/coverage-deferrals.json` with
 the decision each waits on; delete the entry once that decision is made.
+**13 supplier(s) on 3 framework(s) are EXCLUDED** — Lou ruled they are not a coverage target (`data/coverage-deferrals.json`, `exclusions`).
+They stay in Awarded and in every record; they leave Left and the pick list.
 
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
@@ -46,7 +48,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 21 | 36.8% | 13 | 32 | STARTED |
 | Urology and Bowel Management | continence | 57 | 20 | 35.1% | 19 | 40 | STARTED |
 | Advanced Wound Care | wound | 56 | 20 | 35.7% | 12 | 42 | STARTED |
-| Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 7 | 45 | STARTED · DEFERRED |
+| Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 0 | 38 | STARTED · 7 EXCLUDED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 11 | 31 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 26 | 49.1% | 14 | 29 | STARTED |
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 17 | 26 | STARTED |
@@ -66,7 +68,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Physiotherapy and Occupational Therapy | rehab | 22 | 7 | 31.8% | 7 | 13 | STARTED |
 | Hand Hygiene and Associated Products and Services | infection | 21 | 5 | 23.8% | 6 | 15 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 6 | 11 | STARTED |
-| Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 6 | 28.6% | 5 | 14 | STARTED |
+| Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 6 | 28.6% | 0 | 11 | STARTED · 5 EXCLUDED |
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 7 | 35.0% | 9 | 7 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 7 | 36.8% | 7 | 11 | STARTED |
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 9 | 47.4% | 7 | 10 | STARTED |
@@ -74,7 +76,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 7 | 9 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 7 | 38.9% | 1 | 13 | STARTED |
 | Patient Temperature Management | theatres | 18 | 7 | 38.9% | 7 | 9 | STARTED |
-| Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 7 | 38.9% | 1 | 11 | STARTED |
+| Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 6 | 33.3% | 1 | 11 | STARTED · 1 EXCLUDED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
 | Clinical and Sharps Waste Management | infection | 14 | 4 | 28.6% | 4 | 12 | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | imaging, oncology | 13 | 4 | 30.8% | 1 | 9 | STARTED · DEFERRED |
