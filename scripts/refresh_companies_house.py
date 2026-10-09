@@ -566,7 +566,7 @@ def override_for(supplier, overrides):
     return excluded, correct
 
 
-def cleared_record(decided_on=None):
+def cleared_record(decided_on=None, note=None):
     """The honest empty state: a record that carries no company at all.
 
     Every register-derived field is null, so the report renders nothing rather
@@ -577,10 +577,14 @@ def cleared_record(decided_on=None):
     return {
         "companyNumber": None, "registeredName": None,
         "matchConfidence": "probable",
-        "matchedOn": ("no company is attached to this supplier. The previous match was cleared on %s "
-                      "as the wrong company. Nothing is asserted here until "
-                      "a match is confirmed against two independent sources."
-                      % (decided_on or "03/09/2026",)),
+        # `note` is the override's `clearedNote` (added 09/10/2026, ^o474): used
+        # where "the wrong company" is not what was decided. An UNCONFIRMED number
+        # under self-stated-company-number-conflict is cleared because nothing can
+        # be proved, not because the match is known to be wrong.
+        "matchedOn": note or ("no company is attached to this supplier. The previous match was cleared on %s "
+                              "as the wrong company. Nothing is asserted here until "
+                              "a match is confirmed against two independent sources."
+                              % (decided_on or "03/09/2026",)),
         "status": None, "incorporated": None, "sic": None,
         "accountsCategory": None, "accountsCategoryRaw": None,
         "accountsCategoryNote": None, "accountsMadeUpTo": None,
@@ -1076,8 +1080,8 @@ def main():
                 # the record: absence renders as "not yet fetched", which is a
                 # different and untrue statement, and a record that vanishes
                 # cannot be seen to be deliberately empty.
-                companies[supplier["name"]] = cleared_record(
-                    (overrides.get(supplier["name"]) or {}).get("decidedOn"))
+                ov = overrides.get(supplier["name"]) or {}
+                companies[supplier["name"]] = cleared_record(ov.get("decidedOn"), ov.get("clearedNote"))
             continue
         entry = record_for(supplier, number, from_record, key)
         if not entry:
