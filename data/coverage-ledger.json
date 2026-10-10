@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-10-05",
-  "differentiator.json published": 36371,
-  "differentiator.json held": 51092
+  "differentiator.json published": 36549,
+  "differentiator.json held": 51551
  },
  "counts": {
   "frameworks": 122,
@@ -25,10 +25,10 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 408,
-  "inScopeSuppliersNeedingCrawl": 261,
+  "inScopeSuppliersNeedingCrawl": 260,
   "inScopeSuppliersNeedingDomain": 239,
-  "suppliersRefused": 552,
-  "suppliersRefusedButPublishingElsewhere": 122,
+  "suppliersRefused": 551,
+  "suppliersRefusedButPublishingElsewhere": 121,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
   "blockedFrameworks": 3,
@@ -4866,13 +4866,6 @@
      "reason": "the site's WordPress API could not be read (<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate ); the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-26",
      "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Abena UK Limited",
-     "domain": "www.abena.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "published"
     },
     {
      "supplier": "B. Braun Medical",
@@ -11358,13 +11351,6 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Abena UK Limited",
-     "domain": "www.abena.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Medline Industries",
      "domain": "medline.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -11409,13 +11395,12 @@
     "infection:vinyl"
    ],
    "publishedElsewhereNoOwnRange": [
-    "Abena UK Limited",
     "Medline Industries",
     "Reliance Medical"
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 1,
+    "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -11453,7 +11438,7 @@
     "Supermax Healthcare"
    ],
    "unknown": [],
-   "actionableTotal": 3,
+   "actionableTotal": 4,
    "blockedReason": null,
    "deferred": null
   },
@@ -11945,8 +11930,8 @@
    "category": "Rehabilitation and Community",
    "ends": null,
    "suppliersAwarded": 18,
-   "suppliersPublished": 5,
-   "coverage": 27.8,
+   "suppliersPublished": 6,
+   "coverage": 33.3,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -11967,13 +11952,8 @@
     }
    ],
    "targetSuppliers": 16,
-   "coverageOfTarget": 31.2,
-   "crawlWorklist": [
-    {
-     "supplier": "Possum Ltd",
-     "domain": "possum.co.uk"
-    }
-   ],
+   "coverageOfTarget": 37.5,
+   "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -12064,7 +12044,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 0,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -12074,13 +12054,12 @@
     "Abilia Ltd",
     "Liberator Ltd",
     "Lifeline 24",
+    "Possum Ltd",
     "Sensory Guru Ltd",
     "Skyguard Ltd T/A Peoplesafe"
    ],
    "publishedElsewhere": [],
-   "heldOnly": [
-    "Possum Ltd"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [],
    "refused": [
@@ -12096,7 +12075,7 @@
     "Total Mobile"
    ],
    "unknown": [],
-   "actionableTotal": 1,
+   "actionableTotal": 0,
    "blockedReason": null,
    "deferred": null
   },
@@ -12742,13 +12721,6 @@
      "reason": "the sitemap's product-path URLs are the site's clinical speciality navigation, not a product list \u2014 all 12 captured names are category headings (Personal Hygiene, Surgical Instruments, Urology, Urogynaecology, PPE, Paediatric Health, Cardiothoracic, Head & Neck Surgery, ENT, Women's Health, General Surgery, Plastic & Cosmetic Surgery) with no product beneath them in the capture, so publishing them would state 12 products where the capture read none; RE-CHECKED 28/09/2026 (^o289): there is no real product path to re-crawl against. The site's own sitemap index (Yoast) carries only post, page, events and category sitemaps; its WordPress REST API exposes no product post type; and every /products/<speciality>/ page is a category page listing product-line headings as text (e.g. /products/urology/: Monopolar Resectoscopes, Bipolar Resectoscopes, Cystoscopy Instruments) with no individual product URLs beneath them. The 12 nav-label rows held under the range key 'Gemini Surgical UK' were therefore removed from supplier-products.json, supplier-product-detail.json and the differentiator category map on 28/09/2026: since 'Gemini Surgical UK' became an alias of Healthcare 25 Ltd (18/09/2026, ^o535) that key matched a live index record, so the failed capture was no longer safely held. The 12 labels are preserved in this refusal. Re-crawl only if the site gains product-level pages.",
      "checked": "2026-09-28",
      "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Abena UK Limited",
-     "domain": "www.abena.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "published"
     },
     {
      "supplier": "Essity UK Limited",
@@ -21993,13 +21965,6 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Abena UK Limited",
-     "domain": "www.abena.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Essity UK Limited",
      "domain": "medical.essity.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
@@ -22009,12 +21974,10 @@
    ],
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
-   "publishedElsewhereNoOwnRange": [
-    "Abena UK Limited"
-   ],
+   "publishedElsewhereNoOwnRange": [],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 3,
+    "publishedElsewhereNeedingCategory": 4,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -22049,7 +22012,7 @@
    "unknown": [
     "UKR"
    ],
-   "actionableTotal": 10,
+   "actionableTotal": 11,
    "blockedReason": null,
    "deferred": null
   },

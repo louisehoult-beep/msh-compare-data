@@ -46,7 +46,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 6 | 42 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 22 | 37.9% | 12 | 33 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 21 | 36.8% | 8 | 32 | STARTED |
-| Urology and Bowel Management | continence | 57 | 20 | 35.1% | 9 | 41 | STARTED |
+| Urology and Bowel Management | continence | 57 | 20 | 35.1% | 9 | 40 | STARTED |
 | Advanced Wound Care | wound | 56 | 20 | 35.7% | 9 | 41 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 0 | 39 | STARTED · 7 EXCLUDED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 10 | 32 | STARTED |
@@ -72,16 +72,16 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 7 | 35.0% | 8 | 8 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 7 | 36.8% | 5 | 11 | STARTED |
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 9 | 47.4% | 5 | 10 | STARTED |
-| Examination Gloves | infection | 19 | 5 | 26.3% | 3 | 14 | STARTED |
+| Examination Gloves | infection | 19 | 5 | 26.3% | 4 | 13 | STARTED |
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 6 | 9 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 7 | 38.9% | 1 | 13 | STARTED |
 | Patient Temperature Management | theatres | 18 | 7 | 38.9% | 5 | 10 | STARTED |
-| Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 5 | 27.8% | 1 | 11 | STARTED · 2 EXCLUDED |
+| Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 6 | 33.3% | 0 | 11 | STARTED · 2 EXCLUDED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
 | Clinical and Sharps Waste Management | infection | 14 | 4 | 28.6% | 1 | 12 | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | imaging, oncology | 13 | 4 | 30.8% | 1 | 9 | STARTED · DEFERRED |
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 5 | 38.5% | 3 | 8 | STARTED |
-| Disposable and Washable Continence Care | continence | 12 | 5 | 41.7% | 4 | 8 | STARTED |
+| Disposable and Washable Continence Care | continence | 12 | 5 | 41.7% | 4 | 7 | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 1 | 9 | STARTED |
 | Prosthetic Components and Associated Products | orthotics | 12 | 4 | 33.3% | 2 | 7 | STARTED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 3 | 6 | STARTED |
@@ -154,7 +154,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Multi Temperature Food Solutions | — | 27 | 0 | 0.0% | 27 | 0 | OUT OF SCOPE |
 | Environmental Decontamination | — | 22 | 0 | 0.0% | 18 | 5 | OUT OF SCOPE |
 | Catering Consumables and Equipment | — | 17 | 0 | 0.0% | 13 | 4 | OUT OF SCOPE |
-| Paper Hygiene | — | 17 | 0 | 0.0% | 10 | 8 | OUT OF SCOPE |
+| Paper Hygiene | — | 17 | 0 | 0.0% | 11 | 7 | OUT OF SCOPE |
 | Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging) | — | 16 | 0 | 0.0% | 13 | 3 | OUT OF SCOPE |
 | Office Supplies | — | 14 | 0 | 0.0% | 8 | 6 | OUT OF SCOPE |
 | Medical Pulp, Macerators and Support Products | — | 11 | 0 | 0.0% | 6 | 6 | OUT OF SCOPE |
