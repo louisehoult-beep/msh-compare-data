@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-10-05",
-  "differentiator.json published": 36549,
-  "differentiator.json held": 51551
+  "differentiator.json published": 36617,
+  "differentiator.json held": 51507
  },
  "counts": {
   "frameworks": 122,
@@ -24,9 +24,9 @@
   "unmapped": 46,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 408,
-  "inScopeSuppliersNeedingCrawl": 259,
-  "inScopeSuppliersNeedingDomain": 239,
+  "supplierNamesUnresolved": 407,
+  "inScopeSuppliersNeedingCrawl": 260,
+  "inScopeSuppliersNeedingDomain": 240,
   "suppliersRefused": 552,
   "suppliersRefusedButPublishingElsewhere": 121,
   "suppliersCapturedNothingCounted": 0,
@@ -219,10 +219,6 @@
   ],
   [
    "Weetabix Limited",
-   1
-  ],
-  [
-   "Scott Medical Ltd",
    1
   ],
   [
@@ -9476,8 +9472,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "28 February 2029",
    "suppliersAwarded": 25,
-   "suppliersPublished": 8,
-   "coverage": 32.0,
+   "suppliersPublished": 9,
+   "coverage": 36.0,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -9488,15 +9484,20 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 25,
-   "coverageOfTarget": 32.0,
+   "coverageOfTarget": 36.0,
    "crawlWorklist": [
     {
      "supplier": "Atom Medical Corporation UK ltd",
      "domain": null
+    },
+    {
+     "supplier": "Scott Medical Ltd",
+     "domain": null
     }
    ],
    "domainsMissing": [
-    "Atom Medical Corporation UK ltd"
+    "Atom Medical Corporation UK ltd",
+    "Scott Medical Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -9611,13 +9612,13 @@
     "Philips"
    ],
    "actionable": {
-    "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 3,
+    "unresolvedNames": 0,
+    "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 1
+    "needDomain": 2
    },
    "published": [
     "Croyde Medical",
@@ -9627,18 +9628,19 @@
     "Inspiration Healthcare",
     "MEDACX Limited",
     "Mediprema",
+    "Mindray UK",
     "Penlon"
    ],
    "publishedElsewhere": [
     "Getinge",
-    "Mindray UK",
     "Nihon Koden",
     "Philips"
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Atom Medical Corporation UK ltd"
+    "Atom Medical Corporation UK ltd",
+    "Scott Medical Ltd"
    ],
    "refused": [
     "Aquilant Limited",
@@ -9653,10 +9655,8 @@
     "@SimulationMan Ltd",
     "Walters Medical Ltd"
    ],
-   "unknown": [
-    "Scott Medical Ltd"
-   ],
-   "actionableTotal": 5,
+   "unknown": [],
+   "actionableTotal": 4,
    "blockedReason": null,
    "deferred": null
   },
