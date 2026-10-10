@@ -42,7 +42,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 34 | 27.9% | 62 | 37 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 35 | 34.7% | 7 | 70 | STARTED |
-| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 21 | 33.3% | 20 | 29 | STARTED |
+| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 22 | 34.9% | 19 | 29 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 6 | 42 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 22 | 37.9% | 12 | 33 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 21 | 36.8% | 8 | 32 | STARTED |
@@ -83,7 +83,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 5 | 38.5% | 3 | 8 | STARTED |
 | Disposable and Washable Continence Care | continence | 12 | 5 | 41.7% | 4 | 7 | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 1 | 9 | STARTED |
-| Prosthetic Components and Associated Products | orthotics | 12 | 4 | 33.3% | 2 | 7 | STARTED |
+| Prosthetic Components and Associated Products | orthotics | 12 | 5 | 41.7% | 1 | 7 | STARTED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 3 | 6 | STARTED |
 | CT Scanners and Associated Options and Related Services | imaging | 8 | 2 | 25.0% | 0 | 7 | STARTED · BLOCKED |
 | Polymer Aprons | infection | 8 | 2 | 25.0% | 1 | 8 | STARTED |
