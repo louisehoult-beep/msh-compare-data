@@ -49,7 +49,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Urology and Bowel Management | continence | 57 | 20 | 35.1% | 9 | 40 | STARTED |
 | Advanced Wound Care | wound | 56 | 20 | 35.7% | 9 | 41 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 0 | 39 | STARTED · 7 EXCLUDED |
-| Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 10 | 32 | STARTED |
+| Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 19 | 35.8% | 9 | 32 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 26 | 49.1% | 8 | 31 | STARTED |
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 13 | 26 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 12 | 27.9% | 7 | 31 | STARTED |
