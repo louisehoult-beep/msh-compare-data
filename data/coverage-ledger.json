@@ -27,8 +27,8 @@
   "supplierNamesUnresolved": 407,
   "inScopeSuppliersNeedingCrawl": 258,
   "inScopeSuppliersNeedingDomain": 239,
-  "suppliersRefused": 552,
-  "suppliersRefusedButPublishingElsewhere": 121,
+  "suppliersRefused": 551,
+  "suppliersRefusedButPublishingElsewhere": 120,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
   "blockedFrameworks": 3,
@@ -6351,13 +6351,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Baxter / Hillrom",
-     "domain": "hillrom.co.uk",
-     "reason": "verified 15/09/2026 this is not a crawler-side parsing bug: hillrom.co.uk 301-redirects to www.hillrom.co.uk, which 301-redirects again to hillrom.baxter.eu (the actual current Hillrom site, confirmed by curl -L) \u2014 a Drupal 10 site, not WordPress, so /wp-json/wp/v2/types returns that page's HTML and the crawler's JSON parse correctly fails on it (reproduced: 'Expecting value: line 3 column 1 (char 4)'). hillrom.baxter.eu's own sitemap.xml (1,284,294 bytes, checked directly) carries only 2 URLs under /product-category or /products/ across its whole EN-GB section \u2014 too few to call a catalogue by this crawler's own bar. A genuine no-catalogue site, not a bug or a block.",
-     "checked": "2026-09-15",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Medline Industries",
      "domain": "medline.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -6468,7 +6461,6 @@
     "handling:sling"
    ],
    "publishedElsewhereNoOwnRange": [
-    "Baxter / Hillrom",
     "Fannin (UK) Limited",
     "Medline Industries",
     "Performance Health International Limited",
@@ -6477,7 +6469,7 @@
    ],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 5,
+    "publishedElsewhereNeedingCategory": 6,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -6549,7 +6541,7 @@
    "unknown": [
     "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)"
    ],
-   "actionableTotal": 8,
+   "actionableTotal": 9,
    "blockedReason": null,
    "deferred": null
   },
@@ -7049,13 +7041,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Baxter / Hillrom",
-     "domain": "hillrom.co.uk",
-     "reason": "verified 15/09/2026 this is not a crawler-side parsing bug: hillrom.co.uk 301-redirects to www.hillrom.co.uk, which 301-redirects again to hillrom.baxter.eu (the actual current Hillrom site, confirmed by curl -L) \u2014 a Drupal 10 site, not WordPress, so /wp-json/wp/v2/types returns that page's HTML and the crawler's JSON parse correctly fails on it (reproduced: 'Expecting value: line 3 column 1 (char 4)'). hillrom.baxter.eu's own sitemap.xml (1,284,294 bytes, checked directly) carries only 2 URLs under /product-category or /products/ across its whole EN-GB section \u2014 too few to call a catalogue by this crawler's own bar. A genuine no-catalogue site, not a bug or a block.",
-     "checked": "2026-09-15",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Howard Wright Europe",
      "domain": "howardwright.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -7121,7 +7106,6 @@
     "theatres:warm"
    ],
    "publishedElsewhereNoOwnRange": [
-    "Baxter / Hillrom",
     "Boston Scientific",
     "Coloplast",
     "Cook Medical",
@@ -7129,7 +7113,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 6,
+    "publishedElsewhereNeedingCategory": 7,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -7190,7 +7174,7 @@
     "Xograph Healthcare Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 7,
+   "actionableTotal": 8,
    "blockedReason": null,
    "deferred": null
   },
@@ -7921,13 +7905,6 @@
      "domain": "medtronic.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-08",
-     "bucket": "published"
-    },
-    {
-     "supplier": "Baxter / Hillrom",
-     "domain": "hillrom.co.uk",
-     "reason": "verified 15/09/2026 this is not a crawler-side parsing bug: hillrom.co.uk 301-redirects to www.hillrom.co.uk, which 301-redirects again to hillrom.baxter.eu (the actual current Hillrom site, confirmed by curl -L) \u2014 a Drupal 10 site, not WordPress, so /wp-json/wp/v2/types returns that page's HTML and the crawler's JSON parse correctly fails on it (reproduced: 'Expecting value: line 3 column 1 (char 4)'). hillrom.baxter.eu's own sitemap.xml (1,284,294 bytes, checked directly) carries only 2 URLs under /product-category or /products/ across its whole EN-GB section \u2014 too few to call a catalogue by this crawler's own bar. A genuine no-catalogue site, not a bug or a block.",
-     "checked": "2026-09-15",
      "bucket": "published"
     }
    ],
@@ -14939,19 +14916,11 @@
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
      "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Baxter / Hillrom",
-     "domain": "hillrom.co.uk",
-     "reason": "verified 15/09/2026 this is not a crawler-side parsing bug: hillrom.co.uk 301-redirects to www.hillrom.co.uk, which 301-redirects again to hillrom.baxter.eu (the actual current Hillrom site, confirmed by curl -L) \u2014 a Drupal 10 site, not WordPress, so /wp-json/wp/v2/types returns that page's HTML and the crawler's JSON parse correctly fails on it (reproduced: 'Expecting value: line 3 column 1 (char 4)'). hillrom.baxter.eu's own sitemap.xml (1,284,294 bytes, checked directly) carries only 2 URLs under /product-category or /products/ across its whole EN-GB section \u2014 too few to call a catalogue by this crawler's own bar. A genuine no-catalogue site, not a bug or a block.",
-     "checked": "2026-09-15",
-     "bucket": "publishedElsewhere"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "publishedElsewhereNoOwnRange": [
-    "Baxter / Hillrom",
     "Cardinal Health U.K. 432 Ltd",
     "Draeger Medical UK",
     "Mediq Healthcare UK Ltd",
@@ -14961,7 +14930,7 @@
    ],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 12,
+    "publishedElsewhereNeedingCategory": 13,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -15020,7 +14989,7 @@
    "unknown": [
     "KCI Medical Ltd (3M)"
    ],
-   "actionableTotal": 20,
+   "actionableTotal": 21,
    "blockedReason": null,
    "deferred": null
   },
@@ -16010,24 +15979,16 @@
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-08-31",
      "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Baxter / Hillrom",
-     "domain": "hillrom.co.uk",
-     "reason": "verified 15/09/2026 this is not a crawler-side parsing bug: hillrom.co.uk 301-redirects to www.hillrom.co.uk, which 301-redirects again to hillrom.baxter.eu (the actual current Hillrom site, confirmed by curl -L) \u2014 a Drupal 10 site, not WordPress, so /wp-json/wp/v2/types returns that page's HTML and the crawler's JSON parse correctly fails on it (reproduced: 'Expecting value: line 3 column 1 (char 4)'). hillrom.baxter.eu's own sitemap.xml (1,284,294 bytes, checked directly) carries only 2 URLs under /product-category or /products/ across its whole EN-GB section \u2014 too few to call a catalogue by this crawler's own bar. A genuine no-catalogue site, not a bug or a block.",
-     "checked": "2026-09-15",
-     "bucket": "publishedElsewhere"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "publishedElsewhereNoOwnRange": [
-    "Baxter / Hillrom",
     "Philips"
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 4,
+    "publishedElsewhereNeedingCategory": 5,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -16070,7 +16031,7 @@
     "Williams Medical Supplies"
    ],
    "unknown": [],
-   "actionableTotal": 14,
+   "actionableTotal": 15,
    "blockedReason": null,
    "deferred": null
   },

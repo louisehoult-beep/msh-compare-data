@@ -50,12 +50,12 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Advanced Wound Care | wound | 56 | 20 | 35.7% | 9 | 41 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 0 | 39 | STARTED · 7 EXCLUDED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 19 | 35.8% | 9 | 32 | STARTED |
-| Pressure Area Care and Patient Handling | handling | 53 | 26 | 49.1% | 8 | 31 | STARTED |
+| Pressure Area Care and Patient Handling | handling | 53 | 26 | 49.1% | 9 | 30 | STARTED |
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 13 | 26 | STARTED |
-| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 12 | 27.9% | 7 | 31 | STARTED |
+| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 12 | 27.9% | 8 | 30 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 13 | 35.1% | 1 | 28 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 13 | 35.1% | 11 | 18 | STARTED |
-| Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 13 | 37.1% | 3 | 23 | STARTED |
+| Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 13 | 37.1% | 3 | 22 | STARTED |
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 12 | 36.4% | 4 | 22 | STARTED |
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | 13 | 12 | STARTED |
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 10 | 32.3% | 4 | 22 | STARTED |
@@ -98,12 +98,12 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Non-Imaging Vibration Controlled Ultrasound System | ultrasound | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Airway Management Products and Associated Equipment | — | 54 | 0 | 0.0% | 28 | 29 | UNMAPPED |
 | Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 26 | 27 | UNMAPPED |
-| Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 20 | 23 | UNMAPPED |
+| Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 21 | 22 | UNMAPPED |
 | Wound Closure | — | 39 | 0 | 0.0% | 22 | 19 | UNMAPPED |
 | Procedure Packs | — | 29 | 0 | 0.0% | 14 | 18 | UNMAPPED |
 | Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics | — | 28 | 0 | 0.0% | 20 | 8 | UNMAPPED |
 | Pulse Oximetry, Capnography and Related Monitoring Technologies | — | 26 | 0 | 0.0% | 18 | 10 | UNMAPPED |
-| Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions | — | 25 | 0 | 0.0% | 14 | 11 | UNMAPPED |
+| Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions | — | 25 | 0 | 0.0% | 15 | 10 | UNMAPPED |
 | Extension Sets and Lines | — | 23 | 0 | 0.0% | 13 | 11 | UNMAPPED |
 | Vascular Therapy and Associated Products | — | 23 | 0 | 0.0% | 16 | 9 | UNMAPPED |
 | External Defibrillation Devices and Related Services and Accessories | — | 21 | 0 | 0.0% | 13 | 8 | UNMAPPED |
