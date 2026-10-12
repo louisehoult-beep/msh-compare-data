@@ -12,9 +12,9 @@
  },
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
-  "frameworks.json": "2026-10-05",
+  "frameworks.json": "2026-10-12",
   "differentiator.json published": 36664,
-  "differentiator.json held": 51470
+  "differentiator.json held": 51885
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 407,
-  "inScopeSuppliersNeedingCrawl": 258,
-  "inScopeSuppliersNeedingDomain": 239,
-  "suppliersRefused": 551,
+  "inScopeSuppliersNeedingCrawl": 256,
+  "inScopeSuppliersNeedingDomain": 237,
+  "suppliersRefused": 553,
   "suppliersRefusedButPublishingElsewhere": 120,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
@@ -3095,6 +3095,10 @@
    "coverageOfTarget": 34.9,
    "crawlWorklist": [
     {
+     "supplier": "Chaneco",
+     "domain": null
+    },
+    {
      "supplier": "Beagle Orthopaedic Ltd",
      "domain": null
     },
@@ -3107,14 +3111,6 @@
      "domain": null
     },
     {
-     "supplier": "Chaneco",
-     "domain": null
-    },
-    {
-     "supplier": "Dacey LTD",
-     "domain": null
-    },
-    {
      "supplier": "Dynamic Metrics Ltd",
      "domain": null
     },
@@ -3124,10 +3120,6 @@
     },
     {
      "supplier": "Firefly Orthoses NI Limited",
-     "domain": null
-    },
-    {
-     "supplier": "Ken Hall Ltd",
      "domain": null
     },
     {
@@ -3148,10 +3140,8 @@
     "Benefoot UK Ltd trading as BeneCare Medical",
     "Canonbury Products Limited",
     "Chaneco",
-    "Dacey LTD",
     "Dynamic Metrics Ltd",
     "Firefly Orthoses NI Limited",
-    "Ken Hall Ltd",
     "Medezine Ltd",
     "Medfac UK Ltd",
     "Podopro UK Ltd",
@@ -3230,6 +3220,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Dacey LTD",
+     "domain": "dacey.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-10-12",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Daylong Direct",
      "domain": "daylongdirect.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 1 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -3262,6 +3259,13 @@
      "domain": "solventum.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-26",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Ken Hall Ltd",
+     "domain": "kenhall.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-10-12",
      "bucket": "refused"
     },
     {
@@ -3383,11 +3387,11 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 7,
-    "heldNeedingCategory": 0,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 12
+    "needDomain": 9
    },
    "published": [
     "Allard Support UK Limited",
@@ -3423,18 +3427,17 @@
     "Purple Surgical",
     "Win Health Medical Ltd"
    ],
-   "heldOnly": [],
+   "heldOnly": [
+    "Chaneco"
+   ],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Beagle Orthopaedic Ltd",
     "Benefoot UK Ltd trading as BeneCare Medical",
     "Canonbury Products Limited",
-    "Chaneco",
-    "Dacey LTD",
     "Dynamic Metrics Ltd",
     "Podopro UK Ltd",
     "Firefly Orthoses NI Limited",
-    "Ken Hall Ltd",
     "Medezine Ltd",
     "Medfac UK Ltd",
     "Prestige Health Footwear Ltd"
@@ -3450,11 +3453,13 @@
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
     "Critical Healthcare",
     "Cuxson Gerrard & Company Limited",
+    "Dacey LTD",
     "Daylong Direct",
     "Eureka Physiocare Ltd",
     "Fenton Pharmaceuticals Limited",
     "Hugh Steeper Limited",
     "Solventum (3M Health Care)",
+    "Ken Hall Ltd",
     "\u00d6ssur UK",
     "Repton Medical Ltd",
     "Steroplast Healthcare Ltd",
@@ -3463,7 +3468,7 @@
     "Walters Medical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 19,
+   "actionableTotal": 17,
    "blockedReason": null,
    "deferred": null
   },
@@ -13913,7 +13918,7 @@
    "framework": "Male Intra-Urethral Catheter with Magnet Control",
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/male-intra-urethral-catheter-with-magnet-control/",
    "category": "Medical and Surgical Consumables",
-   "ends": "22 February 2027",
+   "ends": "29 March 2028",
    "suppliersAwarded": 1,
    "suppliersPublished": 0,
    "coverage": 0.0,
@@ -13967,7 +13972,7 @@
    "framework": "Non-Imaging Vibration Controlled Ultrasound System",
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/non-imaging-vibration-controlled-ultrasound-system/",
    "category": "Diagnostic Equipment and Services",
-   "ends": "30 November 2026",
+   "ends": "30 November 2027",
    "suppliersAwarded": 1,
    "suppliersPublished": 0,
    "coverage": 0.0,
