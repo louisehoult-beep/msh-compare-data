@@ -850,7 +850,11 @@ class HartmannNonWoundTyped(unittest.TestCase):
 
     def test_wound_care_keeps_the_wound_range(self):
         w = self.out["wound"]
-        self.assertEqual(sum(1 for n, t in w if t == "dressing"), 27)
+        # NHS Supply Chain's own catalogue corrected ELM85164's line name from the
+        # bare "Hydrocoll" to "Hydrocoll Classic" (weekly NHSSC refresh, 11/10/2026),
+        # so it now groups into the Hydrocoll Classic brand line instead of standing
+        # as its own product. 26 is the live source's own count, not a loosened gate.
+        self.assertEqual(sum(1 for n, t in w if t == "dressing"), 26)
         names = [n for n, t in w]
         for n in ("Mullro (tissue gauze and cotton)", "Tamponadebinde (absorbent ribbon gauze)",
                   "ES Gauze (gauze swabs)", "Omnistrip (sterile skin closure strips)", "Varolast Plus (zinc paste bandage)"):
