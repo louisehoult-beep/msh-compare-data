@@ -163,6 +163,9 @@ SOURCES = [
      "specialities": ["cardiology-and-cardiac-surgery"]},
     {"id": "interventional_news", "name": "Interventional News", "url": "https://interventionalnews.com/feed/",
      "specialities": ["interventional-radiology"]},
+    # Added 13/10/2026, synced from cloud-pipeline/sources.py commit 234eb13 (direct /feed/, not /rss).
+    {"id": "auntminnie_europe", "name": "AuntMinnieEurope", "url": "https://www.auntminnieeurope.com/feed/",
+     "specialities": ["radiology-and-imaging"]},
     {"id": "jowc_toc", "name": "Journal of Wound Care (contents)",
      "url": "https://www.magonlinelibrary.com/action/showFeed?jc=jowc&type=etoc&feed=rss",
      "specialities": ["tissue-viability-and-wound-care"]},
