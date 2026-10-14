@@ -46,11 +46,10 @@
     + '<li><strong>Check it and add what\'s missing.</strong> Untick anything that\'s wrong, and tick anything you\'ve done that isn\'t on your CV. Most nurses have done far more than their CV says.</li>'
     + '<li><strong>Choose who sees you, then submit.</strong> Approved recruiters and employers can find you by region, speciality and skill. You decide whether they see your contact details, and whether you want new roles in your area emailed every Monday.</li>'
     + '<li><strong>Get your careers pack.</strong> When you submit, we email you a copy of your choices, and you can download Beyond the Bedside, our encyclopedia of nursing careers.</li></ol>';
-  /* For recruiters and employers (Lou, 14/10/2026): browsing is a paid
-     Hub Employer subscription, approved by Lou. A recruiter who already uses
-     the Hub has it added to their account; nothing else about it changes.
-     No price on the page: pricing is by enquiry. */
-  var RECRUITERS = '<div class="msg info"><strong>Recruiter or employer?</strong> A Hub Employer subscription lets you search the register by region, speciality and skill, and ask us to introduce you to a nurse. If you already use the Hub, it\'s an add-on to your account. Email <a href="mailto:louisehoult@elevateandthrive.uk?subject=Hub%20Employer%20subscription">louisehoult@elevateandthrive.uk</a> for pricing.</div>';
+  /* For recruiters and employers (Lou, 14/10/2026): browsing is the paid
+     Hub Employer plan (5167), which includes the Hub, bought at
+     /hub-employer/. Hub members are moved across by Lou. */
+  var RECRUITERS = '<div class="msg info"><strong>Recruiter or employer?</strong> Hub Employer gives you the Medical Sales Hub plus the Nursing Register: search nurses by region, speciality and skill, and ask us to introduce you. <a href="/hub-employer/">Become a Hub Employer</a>. Already on the Hub? Email <a href="mailto:louisehoult@elevateandthrive.uk?subject=Hub%20Employer%20subscription">louisehoult@elevateandthrive.uk</a> and we\'ll move you across.</div>';
   var LANDING = '<div class="nr"><h1>Join the Nursing Register</h1>'
     + '<p class="lede">' + PITCH + '</p>'
     + '<p class="sub">How it works</p>' + HOW
