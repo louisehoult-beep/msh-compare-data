@@ -460,5 +460,17 @@ process.stdout.write(JSON.stringify([P.daysLeft('2025-10-08', '2026-10-08', 365)
         self.assertEqual(self.node(script), [0, 358, None, "&lt;img src=x onerror=&quot;a&quot;&gt;&amp;&#39;"])
 
 
+class DeleteRoute(unittest.TestCase):
+    """The privacy notice promises deleting a profile removes everything held
+    for the register, so the DELETE route must clear every user-meta key."""
+
+    def test_delete_clears_all_register_meta(self):
+        src = open(PHP_SNIPPET, encoding="utf-8").read()
+        i = src.index("'methods'             => 'DELETE'")
+        block = src[i:i + 700]
+        for key in ("msh_nurse_register", "msh_nurse_ref", "msh_nr_jobs_sent"):
+            self.assertIn("delete_user_meta( $uid, '%s' )" % key, block)
+
+
 if __name__ == "__main__":
     unittest.main()

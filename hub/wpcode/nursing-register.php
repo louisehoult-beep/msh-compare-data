@@ -1279,6 +1279,9 @@ add_action( 'rest_api_init', function () {
 				$uid = get_current_user_id();
 				delete_user_meta( $uid, 'msh_nurse_register' );
 				delete_user_meta( $uid, 'msh_nurse_ref' );
+				/* The list of role links already emailed goes too: the privacy
+				   notice says deleting removes everything held for the register. */
+				delete_user_meta( $uid, 'msh_nr_jobs_sent' );
 				return msh_nr_payload( $uid );
 			},
 		),
