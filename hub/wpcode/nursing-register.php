@@ -294,7 +294,7 @@ if ( ! function_exists( 'msh_nr_cv_terms' ) ) {
 				'practice-assessor' => array( 'practice assessor', 'practice supervisor', 'mentor', 'mentorship' ),
 				'teaching-qual' => array( 'pgce', 'teaching qualification', 'teaching certificate', 'ptlls', 'aet', 'award in education and training' ),
 				'als' => array( 'als', 'advanced life support' ),
-				'epls' => array( 'epls', 'pils', 'paediatric life support' ),
+				'epls' => array( 'epls', 'pils', 'paediatric life support', 'paediatric immediate life support', 'european paediatric advanced life support', 'european paediatric life support' ),
 				'nls' => array( 'nls', 'newborn life support' ),
 				'trauma' => array( 'atnc', 'tncc', 'trauma nursing' ),
 			),
@@ -329,14 +329,22 @@ if ( ! function_exists( 'msh_nr_cv_suggest' ) ) {
 		$o    = msh_nr_options();
 		$t    = msh_nr_cv_terms();
 		$flat = ' ' . trim( preg_replace( '/[^a-z0-9]+/', ' ', strtolower( (string) $text ) ) ) . ' ';
+		/* Names that only look like a field or speciality: every nurse's CV
+		   says "Nursing and Midwifery Council", and a life support course is a
+		   qualification, not paediatric or neonatal experience (seen on Lou's
+		   CV, 14/10/2026). Taken out before field, sector and speciality are
+		   read; qualifications still see them. */
+		$noise = '/ (?:nursing (?:and )?midwifery council|royal college of midwives|(?:european )?(?:paediatric|newborn) (?:immediate |advanced )?life support) /';
+		$plain = preg_replace( $noise, '  ', preg_replace( $noise, '  ', $flat ) );
 		$out  = array();
 		foreach ( array( 'registration', 'sectors', 'specialities', 'clinicalSkills', 'qualifications', 'transferable' ) as $k ) {
 			$out[ $k ] = array();
+			$in        = in_array( $k, array( 'registration', 'sectors', 'specialities' ), true ) ? $plain : $flat;
 			foreach ( $o[ $k ] as $id => $label ) {
 				$terms = isset( $t[ $k ][ $id ] ) ? $t[ $k ][ $id ] : array( $label );
 				foreach ( $terms as $term ) {
 					$term = trim( preg_replace( '/[^a-z0-9]+/', ' ', strtolower( $term ) ) );
-					if ( '' !== $term && false !== strpos( $flat, ' ' . $term . ' ' ) ) {
+					if ( '' !== $term && false !== strpos( $in, ' ' . $term . ' ' ) ) {
 						$out[ $k ][] = (string) $id;
 						break;
 					}

@@ -222,6 +222,21 @@ class Snippet(unittest.TestCase):
         self.assertEqual(empty["qualYear"], None)
         self.assertEqual(empty["band"], "")
         self.assertEqual(empty["specialities"], [])
+        # The regulator's name and a life support course are not midwifery,
+        # paediatric or neonatal experience; the course still counts as a
+        # qualification (Lou's CV, 14/10/2026).
+        n = self.call(("cv", ["Nursing and Midwifery Council (NMC) Registered Nurse. ALS | ILS | Paediatric Life Support. "
+                              "Newborn Life Support. Ward sister, children's ward.", 2026]))[0]
+        self.assertNotIn("midwife", n["registration"])
+        self.assertNotIn("neonatal", n["specialities"])
+        self.assertIn("paediatrics", n["specialities"], "children's ward is still read")
+        self.assertIn("epls", n["qualifications"])
+        self.assertIn("nls", n["qualifications"])
+        n2 = self.call(("cv", ["Nursing and Midwifery Council. Paediatric Immediate Life Support.", 2026]))[0]
+        self.assertEqual(n2["registration"], [])
+        self.assertNotIn("paediatrics", n2["specialities"])
+        self.assertIn("epls", n2["qualifications"])
+        self.assertIn("midwife", self.call(("cv", ["Registered Midwife, delivery suite.", 2026]))[0]["registration"])
         # A future year is never the year qualified.
         self.assertIsNone(self.call(("cv", ["Registered nurse, qualified 2031. " * 10, 2026]))[0]["qualYear"])
 
