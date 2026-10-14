@@ -41,8 +41,13 @@
 
    ROUTES (logged-in only, wp_rest nonce)
    GET    /wp-json/msh/v1/nurse-register         { options, profile, canBrowse, isAdmin }
-   POST   /wp-json/msh/v1/nurse-register         save own profile, returns the same
+   POST   /wp-json/msh/v1/nurse-register         save own profile, returns the same plus
+                                                 emailed; emails the nurse a copy of their
+                                                 choices (msh_nr_summary_email)
    DELETE /wp-json/msh/v1/nurse-register         delete own profile
+   POST   /wp-json/msh/v1/nurse-register/cv      { text } -> suggested ticks (msh_nr_cv_suggest).
+                                                 The page reads the CV file in the browser and
+                                                 sends only its text; nothing is stored.
    GET    /wp-json/msh/v1/nurse-register/browse  { profiles: [...] }      employers, admins
    POST   /wp-json/msh/v1/nurse-register/intro   { ref, message }         employers, admins
    POST   /wp-json/msh/v1/nurse-register/verify  { ref, checked }         admins
@@ -148,6 +153,276 @@ if ( ! function_exists( 'msh_nr_options' ) ) {
 				'6-months' => 'Within six months', 'exploring' => 'Exploring, no rush',
 			),
 		);
+	}
+}
+
+if ( ! function_exists( 'msh_nr_career_links' ) ) {
+	/* Careers links shown after a nurse submits and in their confirmation
+	   email (Lou, 14/10/2026). Every URL checked live on the Hub 14/10/2026;
+	   the encyclopedia is WordPress media item 4913 (second edition). */
+	function msh_nr_career_links() {
+		return array(
+			array( 'label' => 'Download: Beyond the Bedside, An Encyclopedia of Nursing Careers', 'url' => '/wp-content/uploads/2026/10/Beyond-the-Bedside-An-Encyclopedia-of-Nursing-Careers-2nd-Edition.pdf', 'main' => true ),
+			array( 'label' => 'Career Centre: live roles', 'url' => '/medical-sales-hub/careers/', 'main' => true ),
+			array( 'label' => 'Clinical to commercial routes', 'url' => '/medical-sales-hub/clinical-to-commercial-routes/', 'main' => false ),
+			array( 'label' => 'Your CV', 'url' => '/medical-sales-hub/clinical-cv/', 'main' => false ),
+			array( 'label' => 'Clinical jobs and recruiters', 'url' => '/medical-sales-hub/clinical-jobs/', 'main' => false ),
+			array( 'label' => 'Clinical resources', 'url' => '/medical-sales-hub/clinical-resources/', 'main' => false ),
+			array( 'label' => 'Revalidation portfolio', 'url' => '/medical-sales-hub/clinical-portfolio/', 'main' => false ),
+		);
+	}
+}
+
+if ( ! function_exists( 'msh_nr_cv_terms' ) ) {
+	/* Words and phrases in a CV that mean an option applies. Lower case;
+	   matched on whole words after punctuation is flattened. An option with
+	   no entry here is matched on its own label. Edit alongside the tick
+	   lists in msh_nr_options(). */
+	function msh_nr_cv_terms() {
+		return array(
+			'registration' => array(
+				'adult' => array( 'rgn', 'adult nursing', 'adult nurse', 'registered general nurse', 'adult field' ),
+				'child' => array( 'rscn', 'children s nursing', 'childrens nursing', 'child nursing', 'children s nurse', 'paediatric nurse', 'child field', 'rnc' ),
+				'mental-health' => array( 'rmn', 'mental health nursing', 'mental health nurse', 'registered mental health nurse' ),
+				'learning-disability' => array( 'rnld', 'learning disability nursing', 'learning disabilities nursing', 'learning disability nurse' ),
+				'midwife' => array( 'midwife', 'midwifery', 'rm' ),
+				'nursing-associate' => array( 'nursing associate' ),
+				'scphn' => array( 'scphn', 'health visitor', 'school nurse', 'specialist community public health' ),
+			),
+			'sectors' => array(
+				'nhs-acute' => array( 'nhs foundation trust', 'university hospital', 'university hospitals', 'teaching hospitals', 'general hospital', 'acute trust', 'royal infirmary' ),
+				'nhs-community' => array( 'community trust', 'community services', 'community health', 'district nurse', 'district nursing' ),
+				'primary-care' => array( 'gp practice', 'gp surgery', 'medical centre', 'health centre', 'primary care', 'practice nurse' ),
+				'mental-health-trust' => array( 'mental health trust', 'partnership nhs foundation trust' ),
+				'independent-hospital' => array( 'spire', 'nuffield health', 'bmi healthcare', 'circle health', 'ramsay health', 'hca healthcare', 'independent hospital', 'private hospital' ),
+				'care-home' => array( 'care home', 'nursing home', 'residential home' ),
+				'hospice' => array( 'hospice' ),
+				'industry' => array( 'clinical specialist', 'territory manager', 'account manager', 'medical device', 'medtech', 'pharmaceutical' ),
+				'education' => array( 'lecturer', 'senior lecturer', 'lecturer practitioner' ),
+				'armed-forces' => array( 'qaranc', 'royal navy', 'raf', 'british army', 'armed forces' ),
+			),
+			'specialities' => array(
+				'acute-medicine' => array( 'acute medicine', 'acute medical unit', 'amu', 'general medicine', 'medical ward' ),
+				'general-surgery' => array( 'general surgery', 'surgical ward', 'surgical nurse' ),
+				'theatres' => array( 'theatre', 'theatres', 'perioperative', 'operating department', 'scrub nurse' ),
+				'critical-care' => array( 'critical care', 'intensive care', 'icu', 'itu', 'hdu', 'high dependency' ),
+				'emergency' => array( 'emergency department', 'a e', 'accident and emergency', 'urgent care', 'emergency nurse' ),
+				'cardiology' => array( 'cardiology', 'cardiac', 'coronary care', 'ccu', 'cardiothoracic' ),
+				'respiratory' => array( 'respiratory', 'copd', 'asthma nurse' ),
+				'renal' => array( 'renal', 'dialysis', 'nephrology' ),
+				'oncology' => array( 'oncology', 'cancer', 'chemotherapy', 'sact' ),
+				'haematology' => array( 'haematology' ),
+				'diabetes' => array( 'diabetes', 'endocrinology', 'endocrine' ),
+				'gastro' => array( 'gastroenterology', 'gastro', 'colorectal', 'endoscopy' ),
+				'stoma' => array( 'stoma', 'stoma care', 'ostomy' ),
+				'urology' => array( 'urology' ),
+				'continence' => array( 'continence', 'bladder and bowel', 'incontinence' ),
+				'tissue-viability' => array( 'tissue viability', 'wound care', 'wound management' ),
+				'vascular' => array( 'vascular surgery', 'vascular nurse' ),
+				'vascular-access' => array( 'vascular access', 'iv therapy', 'intravenous therapy', 'picc' ),
+				'orthopaedics' => array( 'orthopaedic', 'orthopaedics', 'trauma and orthopaedics' ),
+				'neurology' => array( 'neurology', 'neurosurgery', 'neurosciences' ),
+				'stroke' => array( 'stroke' ),
+				'ent' => array( 'ent', 'ear nose and throat' ),
+				'ophthalmology' => array( 'ophthalmology', 'ophthalmic', 'eye unit' ),
+				'plastics-burns' => array( 'plastic surgery', 'plastics', 'burns' ),
+				'dermatology' => array( 'dermatology' ),
+				'gynaecology' => array( 'gynaecology', 'women s health', 'womens health' ),
+				'maternity' => array( 'maternity', 'labour ward', 'antenatal', 'postnatal' ),
+				'neonatal' => array( 'neonatal', 'nicu', 'scbu' ),
+				'paediatrics' => array( 'paediatric', 'paediatrics', 'children s ward' ),
+				'older-people' => array( 'older people', 'elderly care', 'care of the elderly', 'frailty', 'geriatric' ),
+				'palliative' => array( 'palliative', 'end of life' ),
+				'mental-health' => array( 'mental health', 'psychiatric' ),
+				'learning-disability' => array( 'learning disability', 'learning disabilities' ),
+				'infection-prevention' => array( 'infection prevention', 'infection control', 'ipc' ),
+				'pain' => array( 'pain management', 'pain team', 'acute pain', 'chronic pain' ),
+				'nutrition' => array( 'nutrition', 'nutrition nurse' ),
+				'radiology' => array( 'radiology', 'interventional radiology', 'imaging' ),
+				'community' => array( 'district nurse', 'district nursing', 'community nurse', 'community nursing' ),
+				'practice-nursing' => array( 'practice nurse', 'practice nursing' ),
+				'clinical-education' => array( 'clinical educator', 'practice educator', 'practice development', 'clinical education' ),
+				'research' => array( 'research nurse', 'clinical research', 'clinical trials' ),
+				'moving-handling' => array( 'moving and handling', 'manual handling' ),
+				'sepsis' => array( 'sepsis', 'deteriorating patient', 'outreach team' ),
+			),
+			'clinicalSkills' => array(
+				'wound-assessment' => array( 'wound assessment', 'dressing selection', 'wound care' ),
+				'npwt' => array( 'npwt', 'negative pressure', 'vac therapy', 'topical negative pressure' ),
+				'compression' => array( 'compression therapy', 'compression bandaging', 'doppler', 'abpi', 'leg ulcer' ),
+				'pressure-ulcer' => array( 'pressure ulcer', 'pressure injury', 'pressure area', 'pressure relieving' ),
+				'stoma-care' => array( 'stoma care', 'stoma appliance', 'stoma' ),
+				'catheterisation' => array( 'catheterisation', 'catheterization', 'catheter insertion' ),
+				'continence-assessment' => array( 'continence assessment', 'continence products' ),
+				'cannulation' => array( 'cannulation', 'cannulate' ),
+				'venepuncture' => array( 'venepuncture', 'phlebotomy' ),
+				'picc-midline' => array( 'picc', 'midline' ),
+				'central-lines' => array( 'central line', 'central venous', 'cvad', 'hickman', 'port a cath' ),
+				'iv-pumps' => array( 'iv therapy', 'iv drug', 'iv medication', 'infusion pump', 'intravenous' ),
+				'transfusion' => array( 'blood transfusion', 'transfusion' ),
+				'sact' => array( 'chemotherapy administration', 'sact', 'chemotherapy' ),
+				'enteral-feeding' => array( 'enteral feeding', 'ng tube', 'nasogastric', 'peg feeding', 'peg' ),
+				'tracheostomy' => array( 'tracheostomy' ),
+				'niv' => array( 'niv', 'non invasive ventilation', 'cpap', 'bipap' ),
+				'ventilation' => array( 'invasive ventilation', 'mechanical ventilation', 'ventilated patients' ),
+				'abg' => array( 'arterial blood gas', 'abg', 'abgs' ),
+				'ecg' => array( 'ecg', 'ecgs', '12 lead' ),
+				'haemodynamic' => array( 'haemodynamic', 'arterial line', 'cardiac output monitoring' ),
+				'insulin-pumps' => array( 'insulin pump', 'insulin pumps', 'cgm', 'continuous glucose' ),
+				'anticoagulation' => array( 'anticoagulation', 'warfarin' ),
+				'dialysis' => array( 'haemodialysis', 'peritoneal dialysis', 'dialysis' ),
+				'scrub' => array( 'scrub', 'scrub nurse', 'scrub practitioner' ),
+				'anaesthetics' => array( 'anaesthetic nurse', 'anaesthetic practitioner', 'anaesthetics' ),
+				'recovery' => array( 'recovery nurse', 'post anaesthetic', 'pacu', 'recovery room' ),
+				'endoscopy-assist' => array( 'endoscopy', 'decontamination' ),
+				'cath-lab' => array( 'cath lab', 'catheter laboratory', 'catheter lab' ),
+				'poct' => array( 'point of care testing', 'poct' ),
+				'infection-audit' => array( 'outbreak', 'ipc audit', 'infection control audit' ),
+				'moving-handling-equipment' => array( 'hoist', 'moving and handling equipment', 'manual handling equipment' ),
+				'neonatal-care' => array( 'nicu', 'neonatal intensive care' ),
+				'triage' => array( 'triage' ),
+				'falls' => array( 'falls prevention', 'falls' ),
+			),
+			'qualifications' => array(
+				'nmp' => array( 'v300', 'non medical prescriber', 'non medical prescribing', 'independent prescriber', 'nmp' ),
+				'v150' => array( 'v100', 'v150', 'community prescriber', 'community practitioner prescriber' ),
+				'acp' => array( 'advanced clinical practitioner', 'advanced nurse practitioner', 'anp', 'acp' ),
+				'cns' => array( 'clinical nurse specialist', 'cns', 'nurse specialist' ),
+				'masters' => array( 'msc', 'master s', 'masters', 'mres' ),
+				'degree' => array( 'bsc', 'ba hons', 'bn', 'bachelor', 'degree' ),
+				'pg-specialist' => array( 'pgdip', 'pgcert', 'postgraduate diploma', 'postgraduate certificate', 'post graduate' ),
+				'practice-assessor' => array( 'practice assessor', 'practice supervisor', 'mentor', 'mentorship' ),
+				'teaching-qual' => array( 'pgce', 'teaching qualification', 'teaching certificate', 'ptlls', 'aet', 'award in education and training' ),
+				'als' => array( 'als', 'advanced life support' ),
+				'epls' => array( 'epls', 'pils', 'paediatric life support' ),
+				'nls' => array( 'nls', 'newborn life support' ),
+				'trauma' => array( 'atnc', 'tncc', 'trauma nursing' ),
+			),
+			'transferable' => array(
+				'teaching' => array( 'teaching', 'taught', 'in service training', 'training sessions', 'delivered training', 'educator' ),
+				'presenting' => array( 'presented', 'presenting', 'presentation', 'poster' ),
+				'link-nurse' => array( 'link nurse', 'champion' ),
+				'product-evaluation' => array( 'product evaluation', 'product evaluations', 'product trial', 'product trials', 'evaluated products' ),
+				'procurement' => array( 'procurement', 'product selection', 'tender', 'tendering' ),
+				'formulary' => array( 'formulary' ),
+				'audit' => array( 'audit', 'audits', 'quality improvement' ),
+				'guidelines' => array( 'guideline', 'guidelines', 'policy', 'policies', 'protocol', 'protocols', 'sop' ),
+				'project-lead' => array( 'project', 'led the', 'service improvement', 'service development', 'implemented' ),
+				'budget' => array( 'budget', 'budgets' ),
+				'stakeholders' => array( 'stakeholder', 'stakeholders', 'consultants', 'multidisciplinary', 'mdt' ),
+				'industry-contact' => array( 'company representative', 'company reps', 'industry partners', 'industry' ),
+				'business-case' => array( 'business case', 'business cases' ),
+				'digital' => array( 'epr', 'electronic patient record', 'systmone', 'emis', 'cerner', 'epic', 'lorenzo' ),
+			),
+			'roles' => array(),
+		);
+	}
+}
+
+if ( ! function_exists( 'msh_nr_cv_suggest' ) ) {
+	/* What a CV's text suggests for the form, to pre-tick before the nurse
+	   checks it. Nothing is stored: the page sends the text, gets this back,
+	   and only what the nurse then saves is kept. $year is this year.
+	   Returns lists of option ids, plus qualYear, band, region and nmcPin
+	   where found ('' / null when not). */
+	function msh_nr_cv_suggest( $text, $year ) {
+		$o    = msh_nr_options();
+		$t    = msh_nr_cv_terms();
+		$flat = ' ' . trim( preg_replace( '/[^a-z0-9]+/', ' ', strtolower( (string) $text ) ) ) . ' ';
+		$out  = array();
+		foreach ( array( 'registration', 'sectors', 'specialities', 'clinicalSkills', 'qualifications', 'transferable' ) as $k ) {
+			$out[ $k ] = array();
+			foreach ( $o[ $k ] as $id => $label ) {
+				$terms = isset( $t[ $k ][ $id ] ) ? $t[ $k ][ $id ] : array( $label );
+				foreach ( $terms as $term ) {
+					$term = trim( preg_replace( '/[^a-z0-9]+/', ' ', strtolower( $term ) ) );
+					if ( '' !== $term && false !== strpos( $flat, ' ' . $term . ' ' ) ) {
+						$out[ $k ][] = (string) $id;
+						break;
+					}
+				}
+			}
+		}
+		/* Year qualified: the earliest year written next to qualifying or
+		   registering, never one in the future or before 1960. */
+		$raw   = strtolower( (string) $text );
+		$years = array();
+		if ( preg_match_all( '/(?:qualified|registered|registration|graduated|rgn|rmn|rnld|rscn)[^0-9\n]{0,40}((?:19|20)\d\d)/', $raw, $m ) ) {
+			$years = array_merge( $years, $m[1] );
+		}
+		if ( preg_match_all( '/((?:19|20)\d\d)[^0-9\n]{0,20}(?:qualified|registered as|nmc registration)/', $raw, $m ) ) {
+			$years = array_merge( $years, $m[1] );
+		}
+		$years = array_filter( array_map( 'intval', $years ), function ( $y ) use ( $year ) { return $y >= 1960 && $y <= $year; } );
+		$out['qualYear'] = $years ? min( $years ) : null;
+		/* Band: the first one written, as CVs list the latest job first. */
+		$out['band'] = '';
+		if ( preg_match( '/\bband\s*(5|6|7|8\s*[abcd]|9)\b/', $raw, $m ) ) {
+			$b           = str_replace( ' ', '', $m[1] );
+			$out['band'] = in_array( $b, array( '8c', '8d', '9' ), true ) ? '8c' : $b;
+		}
+		/* Region: from the top of the CV, where the address sits, only when
+		   it points at exactly one region. */
+		$regs          = msh_nr_job_regions( substr( (string) $text, 0, 500 ), '' );
+		$out['region'] = 1 === count( $regs ) ? $regs[0] : '';
+		$out['nmcPin'] = preg_match( '/\b(\d{2}[A-Z]\d{4}[A-Z])\b/', (string) $text, $m ) ? $m[1] : '';
+		return $out;
+	}
+}
+
+if ( ! function_exists( 'msh_nr_summary_email' ) ) {
+	/* The confirmation a nurse gets each time they save: every choice they
+	   made, who can see it, and the careers links. No NMC PIN or phone
+	   number in it. $home: the site's address with no trailing slash. */
+	function msh_nr_summary_email( $first, $p, $home ) {
+		$o  = msh_nr_options();
+		$e  = function ( $s ) { return htmlspecialchars( (string) $s, ENT_QUOTES, 'UTF-8' ); };
+		$ls = function ( $k ) use ( $o, $p ) {
+			$out = array();
+			foreach ( ( isset( $p[ $k ] ) && is_array( $p[ $k ] ) ) ? $p[ $k ] : array() as $id ) {
+				if ( isset( $o[ $k ][ $id ] ) ) {
+					$out[] = $o[ $k ][ $id ];
+				}
+			}
+			return $out ? implode( ', ', $out ) : 'None ticked';
+		};
+		$one  = function ( $k, $v ) use ( $o ) { return ( '' !== (string) $v && isset( $o[ $k ][ $v ] ) ) ? $o[ $k ][ $v ] : 'Not given'; };
+		$yes  = function ( $v ) { return $v ? 'Yes' : 'No'; };
+		$rows = array(
+			'Your reference' => $p['ref'],
+			'Region'         => $one( 'regions', $p['region'] ) . ( '' !== $p['area'] ? ', ' . $p['area'] : '' ),
+			'Travel'         => $one( 'travel', $p['travel'] ) . ( $p['relocate'] ? '. Would relocate' : '' ),
+			'Registration'   => $ls( 'registration' ),
+			'Year qualified' => $p['qualYear'],
+			'Band'           => $one( 'bands', $p['band'] ),
+			'Current role'   => '' !== $p['currentRole'] ? $p['currentRole'] : 'Not given',
+			'Worked in'      => $ls( 'sectors' ),
+			'Specialities'   => $ls( 'specialities' ),
+			'Clinical skills' => $ls( 'clinicalSkills' ),
+			'Qualifications' => $ls( 'qualifications' ),
+			'Transferable skills' => $ls( 'transferable' ),
+			'Roles wanted'   => $ls( 'roles' ),
+			'Could start'    => $one( 'availability', $p['availability'] ),
+			'Driving licence' => $yes( $p['driving'] ),
+			'Right to work in the UK' => $yes( $p['rightToWork'] ),
+			'NMC PIN'        => '' !== $p['nmcPin'] ? 'Given (kept private)' : 'Not given',
+			'Visible to employers' => $yes( $p['visible'] ),
+			'Recruiters may contact you directly' => $yes( ! empty( $p['shareContact'] ) ),
+			'Weekly jobs email' => $yes( ! empty( $p['jobsEmail'] ) ),
+		);
+		$h = '<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.5;color:#1C2633;max-width:600px">'
+			. '<p>Hi' . ( '' !== (string) $first ? ' ' . $e( $first ) : '' ) . ',</p>'
+			. '<p>Thank you, your Nursing Register profile is saved. Here is what you told us, so you have a copy.</p>'
+			. '<table role="presentation" cellpadding="6" cellspacing="0" style="border-collapse:collapse;width:100%">';
+		foreach ( $rows as $k => $v ) {
+			$h .= '<tr><td style="border-bottom:1px solid #E6E2D8;color:#5A6676;vertical-align:top;width:38%">' . $e( $k ) . '</td><td style="border-bottom:1px solid #E6E2D8">' . $e( $v ) . '</td></tr>';
+		}
+		$h .= '</table><p style="margin-top:20px"><strong>Next steps for your career</strong></p><ul>';
+		foreach ( msh_nr_career_links() as $l ) {
+			$h .= '<li><a href="' . $e( $home . $l['url'] ) . '" style="color:#14304F">' . $e( $l['label'] ) . '</a></li>';
+		}
+		$h .= '</ul><p>To change anything, or to hide or delete your profile, go to <a href="' . $e( $home . '/clinical-hub/nursing-register/' ) . '" style="color:#14304F">your register profile</a>.</p></div>';
+		return array( 'subject' => 'Your Nursing Register profile is saved (' . $p['ref'] . ')', 'html' => $h );
 	}
 }
 
@@ -642,6 +917,7 @@ if ( ! function_exists( 'msh_nr_payload' ) ) {
 			'canBrowse' => msh_nr_can_browse(),
 			'isAdmin'   => current_user_can( 'manage_options' ),
 			'staleDays' => MSH_NR_STALE_DAYS,
+			'links'     => msh_nr_career_links(),
 		);
 	}
 }
@@ -681,7 +957,14 @@ add_action( 'rest_api_init', function () {
 				}
 				update_user_meta( $uid, 'msh_nurse_register', $r['profile'] );
 				update_user_meta( $uid, 'msh_nurse_ref', $r['profile']['ref'] );
-				return msh_nr_payload( $uid );
+				/* A copy of their choices, so they know it went through
+				   (Lou, 14/10/2026). A failed email never fails the save. */
+				$u    = get_userdata( $uid );
+				$mail = msh_nr_summary_email( $u ? $u->first_name : '', $r['profile'], untrailingslashit( home_url() ) );
+				$sent = $u ? wp_mail( $u->user_email, $mail['subject'], $mail['html'], array( 'Content-Type: text/html; charset=UTF-8' ) ) : false;
+				$out  = msh_nr_payload( $uid );
+				$out['emailed'] = (bool) $sent;
+				return $out;
 			},
 		),
 		array(
@@ -694,6 +977,22 @@ add_action( 'rest_api_init', function () {
 				return msh_nr_payload( $uid );
 			},
 		),
+	) );
+
+	/* CV text in, suggested ticks out. The page reads the file in the
+	   browser and sends only its text; nothing here is stored or logged. */
+	register_rest_route( 'msh/v1', '/nurse-register/cv', array(
+		'methods'             => 'POST',
+		'permission_callback' => $logged_in,
+		'callback'            => function ( WP_REST_Request $req ) {
+			$b    = $req->get_json_params();
+			$text = ( is_array( $b ) && isset( $b['text'] ) && is_string( $b['text'] ) ) ? substr( $b['text'], 0, 60000 ) : '';
+			if ( strlen( trim( $text ) ) < 200 ) {
+				return new WP_Error( 'msh_nr_cv_empty', 'no readable text', array( 'status' => 400 ) );
+			}
+			nocache_headers();
+			return msh_nr_cv_suggest( $text, (int) wp_date( 'Y' ) );
+		},
 	) );
 
 	register_rest_route( 'msh/v1', '/nurse-register/browse', array(

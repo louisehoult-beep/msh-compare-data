@@ -39,8 +39,16 @@
       ['Clinical to commercial routes', '/medical-sales-hub/clinical-to-commercial-routes/'], ['Career Centre', '/medical-sales-hub/careers/'],
       ['Revalidation portfolio', '/medical-sales-hub/clinical-portfolio/'], ['Resources', '/medical-sales-hub/clinical-resources/']]
       .map(function (l) { return '<a class="chip" href="' + l[1] + '">' + l[0] + '</a>'; }).join('') + '</div></div>';
+  /* How it works (Lou, 14/10/2026: explain better what it does; read the CV
+     rather than relying on the nurse to type everything). */
+  var HOW = '<ol class="how">'
+    + '<li><strong>Add your CV.</strong> We read it and fill in your registration, specialities, skills and qualifications for you. Your CV file is read on your device and isn\'t stored.</li>'
+    + '<li><strong>Check it and add what\'s missing.</strong> Untick anything that\'s wrong, and tick anything you\'ve done that isn\'t on your CV. Most nurses have done far more than their CV says.</li>'
+    + '<li><strong>Choose who sees you, then submit.</strong> Approved recruiters and employers can find you by region, speciality and skill. You decide whether they see your contact details, and whether you want new roles in your area emailed every Monday.</li>'
+    + '<li><strong>Get your careers pack.</strong> When you submit, we email you a copy of your choices, and you can download Beyond the Bedside, our encyclopedia of nursing careers.</li></ol>';
   var LANDING = '<div class="nr"><h1>Join the Nursing Register</h1>'
     + '<p class="lede">' + PITCH + '</p>'
+    + '<p class="sub">How it works</p>' + HOW
     + '<ul class="pitch"><li><strong>One profile, seen by recruiters and employers.</strong> Your region, specialities and skills, in one place they can search.</li>'
     + '<li><strong>New roles in your area every Monday.</strong> Straight from the companies\' own careers pages, not recycled agency adverts.</li>'
     + '<li><strong>The best nursing careers resources in one place.</strong> Jobs, CV help, your revalidation portfolio and the real routes from clinical into industry.</li>'
@@ -95,7 +103,34 @@
     return staleDays - Math.floor((b - a) / 86400000);
   }
 
-  var pure = { esc: esc, filter: filter, daysLeft: daysLeft };
+  /* What the CV suggests, added to what the nurse already has. Never
+     removes a tick or overwrites a field they filled in. Returns the merged
+     profile, the ids the CV added (to highlight) and how many things it
+     filled in. */
+  var CV_LISTS = ['registration', 'sectors', 'specialities', 'clinicalSkills', 'qualifications', 'transferable'];
+  var CV_FIELDS = ['qualYear', 'band', 'region', 'nmcPin'];
+  function mergeSuggest(cur, s) {
+    var p = {}, added = {}, n = 0;
+    Object.keys(cur || {}).forEach(function (k) { p[k] = cur[k]; });
+    s = s || {};
+    CV_LISTS.forEach(function (k) {
+      var mine = Array.isArray(p[k]) ? p[k].slice() : [];
+      added[k] = [];
+      (Array.isArray(s[k]) ? s[k] : []).forEach(function (id) {
+        if (mine.indexOf(id) === -1) { mine.push(id); added[k].push(id); n++; }
+      });
+      p[k] = mine;
+    });
+    CV_FIELDS.forEach(function (k) {
+      var v = s[k];
+      if (v !== null && v !== undefined && v !== '' && (p[k] === undefined || p[k] === null || p[k] === '')) {
+        p[k] = v; added[k] = true; n++;
+      }
+    });
+    return { profile: p, added: added, count: n };
+  }
+
+  var pure = { esc: esc, filter: filter, daysLeft: daysLeft, mergeSuggest: mergeSuggest };
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = { _pure: pure };
     return;
@@ -155,12 +190,17 @@
     + '.nr .sub{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#5A6676;margin:8px 0 0}'
     + '.nr .res{margin:0 0 24px}.nr .res a.chip{text-decoration:none}.nr a.btn{display:inline-block;text-decoration:none}'
     + '.nr ul.pitch{padding-left:20px;max-width:720px;margin:0 0 24px}.nr ul.pitch li{margin:0 0 10px}'
+    + '.nr ol.how{padding-left:22px;max-width:760px;margin:6px 0 24px}.nr ol.how li{margin:0 0 10px}'
+    + '.nr .cv{background:#FFFBEA;border-color:#E9D9A6}.nr .cv input[type=file]{margin:6px 0 4px}'
+    + '.nr .ticks label.fromcv,.nr label.fromcv{background:#FFF1BF;border-radius:6px;padding:2px 4px;margin:-2px -4px}'
+    + '.nr .done{margin-top:20px}.nr .done a.chip{text-decoration:none}.nr .done .links{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 8px}'
     + '@media (max-width:600px){.nr h1{font-size:26px}.nr fieldset{padding:14px}}';
 
   function ticks(k, chosen) {
     var o = S.options[k] || {}, h = '<div class="ticks">';
     Object.keys(o).forEach(function (id) {
-      h += '<label><input type="checkbox" name="' + k + '" value="' + esc(id) + '"' + (has(chosen, id) ? ' checked' : '') + '><span>' + esc(o[id]) + '</span></label>';
+      var cv = S.fromCv && has(S.fromCv[k], id);
+      h += '<label' + (cv ? ' class="fromcv" title="Found in your CV"' : '') + '><input type="checkbox" name="' + k + '" value="' + esc(id) + '"' + (has(chosen, id) ? ' checked' : '') + '><span>' + esc(o[id]) + '</span></label>';
     });
     return h + '</div>';
   }
@@ -187,17 +227,20 @@
     if (left !== null && left <= 0) {
       return '<div class="msg bad">Your profile <strong>' + esc(p.ref) + '</strong> has been hidden because it hasn\'t been confirmed for a year. Check it and save to show it again.</div>';
     }
-    var h = '<div class="msg ok">Your profile <strong>' + esc(p.ref) + '</strong> is visible to approved employers, without your name or contact details.';
+    var h = '<div class="msg ok">Your profile <strong>' + esc(p.ref) + '</strong> is visible to approved employers'
+      + (p.shareContact ? ', with your contact details so they can get in touch directly.' : ', without your name or contact details.');
     if (left !== null && left <= 30) { h += ' It drops off in ' + left + ' day' + (left === 1 ? '' : 's') + ' unless you save it again.'; }
     return h + '</div>';
   }
 
   function drawMe(note) {
-    var p = S.profile || {};
+    var p = S.draft || S.profile || {};
     var yr = new Date().getFullYear();
-    var h = note || '';
-    h += statusBox(S.profile);
+    var h = statusBox(S.profile);
     h += '<form id="nr-form" novalidate>';
+    h += fs('Start with your CV', 'Upload your CV as a PDF or Word file and we\'ll fill in as much as we can. It\'s read on your device to find your skills and experience. The file itself isn\'t uploaded or kept.',
+      '<input type="file" id="nr-cv" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document">'
+      + '<p class="hint" id="nr-cv-status" aria-live="polite">' + (S.cvNote || 'No CV? No problem, just fill in the form below.') + '</p>', 'cv');
     h += fs('Where you are', 'Employers see your region and the area you give here. Put a county or nearest city, never your address.',
       '<div class="row"><label>Region' + select('regions', 'region', p.region, 'Choose your region') + '</label>'
       + '<label>Area<input type="text" name="area" maxlength="60" placeholder="e.g. Leeds, or North Yorkshire" value="' + esc(p.area) + '"></label>'
@@ -234,7 +277,67 @@
       + '<p class="hint" style="margin-top:10px">Profiles not confirmed for a year are hidden automatically.</p>');
     h += '<div class="actions"><button class="btn" type="submit">Save my profile</button>'
       + (S.profile ? '<button class="btn danger" type="button" id="nr-delete">Delete my profile</button>' : '') + '</div></form>';
+    h += '<div id="nr-done" class="done">' + (note || '') + '</div>';
     return h;
+  }
+
+  /* Shown under the Save button once a profile is submitted (Lou,
+     14/10/2026): confirmation, the email copy, the encyclopedia download,
+     the Career Centre and other careers links. Links come from the server. */
+  function doneBox(emailed) {
+    var links = S.links || [];
+    var h = '<div class="msg ok"><strong>Thank you, your profile is submitted.</strong> '
+      + (emailed ? 'We\'ve emailed a copy of your choices to you.' : 'We couldn\'t send the confirmation email just now, but your profile is saved.') + '</div>'
+      + '<p class="sub">Your next steps</p><div class="links">';
+    links.filter(function (l) { return l.main; }).forEach(function (l) {
+      h += '<a class="btn" href="' + esc(l.url) + '"' + (/\.pdf$/i.test(l.url) ? ' download' : '') + '>' + esc(l.label) + '</a>';
+    });
+    h += '</div><div class="chips">';
+    links.filter(function (l) { return !l.main; }).forEach(function (l) {
+      h += '<a class="chip" href="' + esc(l.url) + '">' + esc(l.label) + '</a>';
+    });
+    return h + '</div>';
+  }
+
+  /* ---------- CV reading ---------- */
+  var LIBS = {
+    pdf: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
+    pdfWorker: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js',
+    docx: 'https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js'
+  };
+  function loadScript(src) {
+    return new Promise(function (ok, bad) {
+      if (doc.querySelector('script[src="' + src + '"]')) { ok(); return; }
+      var s = doc.createElement('script');
+      s.src = src; s.onload = function () { ok(); }; s.onerror = function () { bad(new Error('load ' + src)); };
+      doc.head.appendChild(s);
+    });
+  }
+  function cvText(file) {
+    var name = (file.name || '').toLowerCase();
+    return file.arrayBuffer().then(function (buf) {
+      if (/\.docx$/.test(name)) {
+        return loadScript(LIBS.docx).then(function () {
+          return root.mammoth.extractRawText({ arrayBuffer: buf }).then(function (r) { return r.value || ''; });
+        });
+      }
+      if (/\.pdf$/.test(name) || file.type === 'application/pdf') {
+        return loadScript(LIBS.pdf).then(function () {
+          var lib = root.pdfjsLib;
+          lib.GlobalWorkerOptions.workerSrc = LIBS.pdfWorker;
+          return lib.getDocument({ data: buf }).promise.then(function (pdf) {
+            var pages = [];
+            for (var i = 1; i <= Math.min(pdf.numPages, 12); i++) {
+              pages.push(pdf.getPage(i).then(function (pg) { return pg.getTextContent(); }).then(function (c) {
+                return c.items.map(function (it) { return it.str; }).join(' ');
+              }));
+            }
+            return Promise.all(pages).then(function (t) { return t.join('\n'); });
+          });
+        });
+      }
+      throw new Error('type');
+    });
   }
 
   function readForm(form) {
@@ -255,6 +358,32 @@
     var bio = form.elements.bio, count = doc.getElementById('nr-count');
     function n() { count.textContent = (600 - bio.value.length) + ' characters left'; }
     bio.addEventListener('input', n); n();
+    var cvIn = doc.getElementById('nr-cv'), cvSay = doc.getElementById('nr-cv-status');
+    cvIn.addEventListener('change', function () {
+      var f = cvIn.files && cvIn.files[0];
+      if (!f) { return; }
+      if (f.size > 15 * 1024 * 1024) { cvSay.textContent = 'That file is too big. Try a PDF or Word file under 15 MB.'; return; }
+      cvSay.textContent = 'Reading your CV...';
+      cvText(f).then(function (text) {
+        if (String(text).replace(/\s+/g, '').length < 150) { throw new Error('empty'); }
+        return api('POST', '/cv', { text: text });
+      }).then(function (r) {
+        if (!r.ok) { throw new Error('cv ' + r.status); }
+        var m = mergeSuggest(readForm(form), r.body);
+        S.draft = m.profile; S.fromCv = m.added;
+        S.cvNote = m.count
+          ? '<strong>We\'ve filled in ' + m.count + ' thing' + (m.count === 1 ? '' : 's') + ' from your CV</strong>, highlighted in yellow. Check each one and untick anything that\'s wrong. Then go through the lists and tick anything you\'ve done that isn\'t on your CV.'
+          : 'We read your CV but couldn\'t match anything to the lists below. Please tick what applies to you.';
+        render();
+        var at = doc.getElementById('nr-cv-status');
+        if (at) { at.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+      }).catch(function (e) {
+        cvSay.textContent = (e && e.message === 'empty')
+          ? 'We couldn\'t read any text in that file. It may be a scanned image. Please fill in the form below instead.'
+          : (e && e.message === 'type') ? 'Please choose a PDF or a Word (.docx) file.'
+          : 'Sorry, we couldn\'t read that CV just now. Please fill in the form below instead.';
+      });
+    });
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var btn = form.querySelector('button[type=submit]');
@@ -262,7 +391,10 @@
       api('POST', '', readForm(form)).then(function (r) {
         if (r.ok) {
           take(r.body);
-          render('<div class="msg ok">Saved.</div>');
+          S.draft = null; S.fromCv = null; S.cvNote = '';
+          render(doneBox(!!r.body.emailed));
+          var done = doc.getElementById('nr-done');
+          if (done) { done.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
         } else {
           var why = r.body && r.body.data && r.body.data.field;
           btn.disabled = false; btn.textContent = 'Save my profile';
@@ -420,13 +552,13 @@
 
   function take(b) {
     S.options = b.options; S.profile = b.profile; S.canBrowse = !!b.canBrowse; S.isAdmin = !!b.isAdmin;
-    S.staleDays = b.staleDays || 365;
+    S.staleDays = b.staleDays || 365; S.links = Array.isArray(b.links) ? b.links : [];
   }
 
   function render(note) {
     var h = '<div class="nr"><h1>Nursing Register</h1>';
     if (S.tab === 'me') {
-      h += '<p class="lede">' + PITCH + '</p>' + RESOURCES;
+      h += '<p class="lede">' + PITCH + '</p>' + (S.profile ? '' : '<p class="sub">How it works</p>' + HOW) + RESOURCES;
     }
     if (S.canBrowse) {
       h += '<div class="tabs" role="tablist"><button type="button" role="tab" data-tab="me" aria-selected="' + (S.tab === 'me') + '">My profile</button>'

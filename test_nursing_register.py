@@ -35,6 +35,9 @@ foreach ($cases as $c) {
   elseif ($fn === 'public') { $out[] = msh_nr_public($a[0], $a[1]); }
   elseif ($fn === 'scrub') { $out[] = msh_nr_scrub($a[0]); }
   elseif ($fn === 'options') { $out[] = msh_nr_options(); }
+  elseif ($fn === 'cv') { $out[] = msh_nr_cv_suggest($a[0], $a[1]); }
+  elseif ($fn === 'summary') { $out[] = msh_nr_summary_email($a[0], $a[1], $a[2]); }
+  elseif ($fn === 'links') { $out[] = msh_nr_career_links(); }
   elseif ($fn === 'contact') { $out[] = msh_nr_contact($a[0], $a[1], $a[2]); }
   elseif ($fn === 'regions') { $out[] = msh_nr_job_regions($a[0], $a[1]); }
   elseif ($fn === 'digest') { $out[] = msh_nr_digest_jobs($a[0], $a[1], $a[2]); }
@@ -187,6 +190,62 @@ class Snippet(unittest.TestCase):
         pub = self.call(("public", [shared, TODAY]))[0]
         self.assertNotIn("shareContact", pub)
 
+    CV = """Jane Example RGN
+    14 Park Road, Leeds, LS6 1AA
+    NMC PIN 12A3456E
+
+    Tissue Viability Nurse Specialist, Band 7, Leeds Teaching Hospitals NHS Trust, 2019 to present.
+    Lead the trust wound care formulary and product evaluations. Teach NPWT and compression bandaging,
+    including Doppler ABPI. Link nurse for pressure ulcer prevention. Ran audits and wrote guidelines.
+
+    Staff Nurse, Band 5, Vascular surgery ward, 2012 to 2016. Cannulation and venepuncture.
+
+    Education: BSc (Hons) Adult Nursing, University of Leeds, qualified 2012.
+    Non-Medical Prescribing V300, 2020. ALS.
+    """
+
+    def test_cv_suggest(self):
+        s = self.call(("cv", [self.CV, 2026]), ("cv", ["nothing useful here", 2026]))
+        got, empty = s
+        self.assertEqual(got["registration"], ["adult"])
+        for k, ids in {"specialities": ["tissue-viability", "vascular"],
+                       "clinicalSkills": ["wound-assessment", "npwt", "compression", "pressure-ulcer", "cannulation", "venepuncture"],
+                       "qualifications": ["nmp", "degree", "als"],
+                       "transferable": ["teaching", "link-nurse", "product-evaluation", "formulary", "audit", "guidelines"]}.items():
+            for i in ids:
+                self.assertIn(i, got[k], k + " " + i)
+        self.assertIn("nhs-acute", got["sectors"])
+        self.assertEqual(got["qualYear"], 2012)
+        self.assertEqual(got["band"], "7", "the first band written is the latest job")
+        self.assertEqual(got["region"], "yorkshire-humber")
+        self.assertEqual(got["nmcPin"], "12A3456E")
+        self.assertEqual(empty["qualYear"], None)
+        self.assertEqual(empty["band"], "")
+        self.assertEqual(empty["specialities"], [])
+        # A future year is never the year qualified.
+        self.assertIsNone(self.call(("cv", ["Registered nurse, qualified 2031. " * 10, 2026]))[0]["qualYear"])
+
+    def test_summary_email(self):
+        p = self.clean(dict(GOOD, shareContact=True, jobsEmail=True))["profile"]
+        m = self.call(("summary", ["Jane", p, "https://hub.example"]))[0]
+        self.assertEqual(m["subject"], "Your Nursing Register profile is saved (NR-ABC234)")
+        h = m["html"]
+        for want in ("Hi Jane,", "Yorkshire and the Humber, Leeds", "Tissue viability and wound care", "Given (kept private)",
+                     "Recruiters may contact you directly</td><td style=\"border-bottom:1px solid #E6E2D8\">Yes",
+                     "https://hub.example/wp-content/uploads/2026/10/Beyond-the-Bedside-An-Encyclopedia-of-Nursing-Careers-2nd-Edition.pdf",
+                     "https://hub.example/medical-sales-hub/careers/", "https://hub.example/clinical-hub/nursing-register/"):
+            self.assertIn(want, h)
+        self.assertNotIn("12A3456E", h)
+        self.assertNotIn("900123", h)
+
+    def test_career_links(self):
+        links = self.call(("links", []))[0]
+        self.assertEqual([l["main"] for l in links[:2]], [True, True])
+        self.assertTrue(links[0]["url"].endswith("Encyclopedia-of-Nursing-Careers-2nd-Edition.pdf"))
+        self.assertEqual(links[1]["url"], "/medical-sales-hub/careers/")
+        for l in links:
+            self.assertRegex(l["url"], r"^/[A-Za-z0-9/_.-]+$")
+
     def test_jobs_email_is_strict_opt_in(self):
         self.assertTrue(self.clean(dict(GOOD, jobsEmail=True))["profile"]["jobsEmail"])
         self.assertFalse(self.clean(dict(GOOD, jobsEmail="yes"))["profile"]["jobsEmail"])
@@ -286,6 +345,17 @@ process.stdout.write(JSON.stringify(fs.map(f => P.filter(people, f, opts).map(p 
         got = self.node(script, json.dumps([people, opts, filters]))
         self.assertEqual(got, [["NR-A", "NR-B"], ["NR-A", "NR-C"], ["NR-B"], ["NR-A"], ["NR-B"], ["NR-A"],
                                ["NR-B", "NR-C"], ["NR-B"], ["NR-A"], ["NR-A", "NR-B", "NR-C"]])
+
+    def test_cv_merge_adds_never_removes(self):
+        script = r"""
+const P = require(process.argv[1])._pure;
+const cur = { specialities: ['renal'], clinicalSkills: [], qualYear: '2010', band: '', region: '' };
+const s = { specialities: ['renal', 'stoma'], clinicalSkills: ['npwt'], registration: ['adult'], qualYear: 2012, band: '6', region: 'london', nmcPin: '' };
+const m = P.mergeSuggest(cur, s);
+process.stdout.write(JSON.stringify([m.profile.specialities, m.profile.clinicalSkills, m.profile.registration,
+  m.profile.qualYear, m.profile.band, m.profile.region, m.added.specialities, m.count, P.mergeSuggest({}, null).count]));
+"""
+        self.assertEqual(self.node(script), [["renal", "stoma"], ["npwt"], ["adult"], "2010", "6", "london", ["stoma"], 5, 0])
 
     def test_days_left_and_escaping(self):
         script = r"""
