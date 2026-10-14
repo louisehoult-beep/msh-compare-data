@@ -141,7 +141,7 @@
   var mount = doc.getElementById('msh-nursing-register');
   if (!mount) { return; }
 
-  var S = { options: null, profile: null, canBrowse: false, isAdmin: false, staleDays: 365, tab: 'me', browse: null, f: {} };
+  var S = { options: null, profile: null, canBrowse: false, isAdmin: false, staleDays: 365, tab: 'me', browse: null, f: {}, learn: [], learnLists: [] };
 
   function nonce() { return root.mshRestNonce || root.mshPrefsNonce || ''; }
   function api(method, path, body) {
@@ -448,14 +448,15 @@
     if (p.hidden) { badges += '<span class="chip warn">Hidden from employers</span>'; }
 
     var h = '<div class="card" data-ref="' + esc(p.ref) + '"><h3>' + esc(p.ref) + (p.currentRole ? ': ' + esc(p.currentRole) : '') + '</h3>'
-      + '<p class="meta">' + esc(meta.join(' · ')) + '<br>' + esc(where.join(' · ')) + '</p>'
+      + '<p class="meta">' + esc(meta.join(' · ')) + '<br>' + esc(where.join(' · '))
+      + (p.updated ? '<br><span class="hint">Profile updated ' + esc(p.updated) + '</span>' : '') + '</p>'
       + (badges ? '<div class="chips">' + badges + '</div>' : '')
       + '<p class="sub">Specialities</p>' + chips('specialities')
       + ((p.clinicalSkills || []).length || (p.qualifications || []).length ? '<p class="sub">Clinical skills and qualifications</p>' + chips('clinicalSkills', 'skill') + chips('qualifications', 'skill') : '')
       + ((p.transferable || []).length ? '<p class="sub">Transferable skills</p>' + chips('transferable', 'skill') : '')
       + ((p.roles || []).length ? '<p class="sub">Looking for</p>' + chips('roles') : '')
       + (p.bio ? '<p style="margin:10px 0 0">' + esc(p.bio) + '</p>' : '');
-    if (S.isAdmin && p.private) {
+    if (S.isAdmin && !S.preview && p.private) {
       var q = p.private;
       h += '<div class="msg info" style="margin-top:12px"><strong>Admin only.</strong> ' + esc(q.name) + ' · ' + esc(q.email)
         + (q.phone ? ' · ' + esc(q.phone) : '') + '<br>NMC PIN: ' + esc(q.nmcPin || 'not given')
@@ -484,7 +485,8 @@
     Object.keys(S.options.clinicalSkills).forEach(function (k) { skillOpts[k] = S.options.clinicalSkills[k]; });
     Object.keys(S.options.qualifications).forEach(function (k) { skillOpts[k] = S.options.qualifications[k]; });
     S.options._skills = skillOpts;
-    var h = '<p class="lede">Every nurse here has chosen to be seen. Where a nurse has agreed to direct contact, their details are on their card. For everyone else, ask for an introduction and we\'ll check with the nurse first, then put you in touch.</p>'
+    var h = (S.isAdmin ? '<div class="msg info">' + flag('preview', S.preview, '<strong>Preview as a recruiter.</strong> Shows exactly what an approved recruiter or employer sees: no admin details, no hidden profiles.') + '</div>' : '')
+      + '<p class="lede">Every nurse here has chosen to be seen. Where a nurse has agreed to direct contact, their details are on their card. For everyone else, ask for an introduction and we\'ll check with the nurse first, then put you in touch.</p>'
       + '<div class="filters">'
       + select('regions', 'region', f.region, 'Any region')
       + select('specialities', 'speciality', f.speciality, 'Any speciality')
@@ -493,13 +495,16 @@
       + select('availability', 'availability', f.availability, 'Any start date')
       + '<input type="number" name="minYears" min="0" max="60" placeholder="Min. years qualified" value="' + esc(f.minYears) + '">'
       + '<input type="text" name="text" placeholder="Search" value="' + esc(f.text) + '"></div>';
-    var list = filter(S.browse, f, S.options);
-    h += '<p class="hint">' + list.length + ' of ' + S.browse.length + ' nurse' + (S.browse.length === 1 ? '' : 's') + '</p>';
+    var all = S.preview ? S.browse.filter(function (p) { return !p.hidden; }) : S.browse;
+    var list = filter(all, f, S.options);
+    h += '<p class="hint">' + list.length + ' of ' + all.length + ' nurse' + (all.length === 1 ? '' : 's') + '</p>';
     h += list.length ? list.map(card).join('') : '<p>No one matches those filters yet.</p>';
     return h;
   }
 
   function wireBrowse() {
+    var pv = mount.querySelector('input[name=preview]');
+    if (pv) { pv.addEventListener('change', function () { S.preview = pv.checked; render(); }); }
     var box = mount.querySelector('.filters');
     if (box) {
       box.addEventListener('change', onFilter);
@@ -543,6 +548,44 @@
     });
   }
 
+  /* Suggested additions (admins): nursing phrases two or more CVs mention
+     that no tick list covers. Lou adds one to a list, or dismisses it. */
+  var LIST_NAMES = { specialities: 'Specialities', clinicalSkills: 'Clinical skills', qualifications: 'Qualifications and courses', transferable: 'Skills that carry into industry', roles: 'Roles' };
+  function guessList(phrase) {
+    if (/(nurse|practitioner|specialist|sister|manager|lead)$/.test(phrase)) { return 'roles'; }
+    if (/(therapy|therapies|insertion|monitoring|screening|assessment)$/.test(phrase)) { return 'clinicalSkills'; }
+    return 'specialities';
+  }
+  function drawLearn() {
+    var rows = S.learn || [];
+    var h = '<p class="lede">When two or more nurses\' CVs mention a skill, speciality or job type that isn\'t on the lists, it shows here. Add it and it appears on the form straight away, and CVs are matched against it from then on. Only the phrase is counted, never who it came from.</p>';
+    if (!rows.length) { return h + '<p>Nothing new to review. You\'ll get an email when something comes up.</p>'; }
+    rows.forEach(function (r, i) {
+      var guess = guessList(r.phrase);
+      h += '<div class="card" data-i="' + i + '"><h3>' + esc(r.phrase) + '</h3><p class="meta">In ' + r.n + ' CVs' + (r.first ? ' since ' + esc(r.first) : '') + '</p>'
+        + '<div class="row"><label>Add to<select name="list">' + (S.learnLists || []).map(function (k) {
+          return '<option value="' + k + '"' + (k === guess ? ' selected' : '') + '>' + esc(LIST_NAMES[k] || k) + '</option>';
+        }).join('') + '</select></label>'
+        + '<label>Show it as<input type="text" name="label" maxlength="80" value="' + esc(r.phrase.charAt(0).toUpperCase() + r.phrase.slice(1)) + '"></label></div>'
+        + '<div class="actions"><button class="btn" type="button" data-learn="add">Add to the list</button><button class="btn ghost" type="button" data-learn="dismiss">Not needed</button><span class="hint"></span></div></div>';
+    });
+    return h;
+  }
+  function wireLearn() {
+    mount.querySelectorAll('[data-learn]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var c = b.closest('.card'), r = S.learn[+c.getAttribute('data-i')];
+        var body = { phrase: r.phrase, action: b.getAttribute('data-learn'), list: c.querySelector('select[name=list]').value, label: c.querySelector('input[name=label]').value };
+        c.querySelectorAll('button').forEach(function (x) { x.disabled = true; });
+        api('POST', '/learn', body).then(function (res) {
+          if (res.ok) { take(res.body); render(); return; }
+          c.querySelectorAll('button').forEach(function (x) { x.disabled = false; });
+          c.querySelector('.hint').textContent = 'That didn\'t save. Please try again.';
+        });
+      });
+    });
+  }
+
   function loadBrowse() {
     api('GET', '/browse').then(function (r) {
       S.browse = r.ok && r.body && Array.isArray(r.body.profiles) ? r.body.profiles : [];
@@ -553,6 +596,7 @@
   function take(b) {
     S.options = b.options; S.profile = b.profile; S.canBrowse = !!b.canBrowse; S.isAdmin = !!b.isAdmin;
     S.staleDays = b.staleDays || 365; S.links = Array.isArray(b.links) ? b.links : [];
+    S.learn = Array.isArray(b.learn) ? b.learn : []; S.learnLists = Array.isArray(b.learnLists) ? b.learnLists : [];
   }
 
   function render(note) {
@@ -560,11 +604,16 @@
     if (S.tab === 'me') {
       h += '<p class="lede">' + PITCH + '</p>' + (S.profile ? '' : '<p class="sub">How it works</p>' + HOW) + RESOURCES;
     }
+    /* A recruiter or employer with no nurse profile of their own only needs
+       Browse, so the nurse form's tab isn't shown to them. */
+    var recruiterOnly = S.canBrowse && !S.isAdmin && !S.profile;
     if (S.canBrowse) {
-      h += '<div class="tabs" role="tablist"><button type="button" role="tab" data-tab="me" aria-selected="' + (S.tab === 'me') + '">My profile</button>'
-        + '<button type="button" role="tab" data-tab="browse" aria-selected="' + (S.tab === 'browse') + '">Browse nurses</button></div>';
+      h += '<div class="tabs" role="tablist">' + (recruiterOnly ? '' : '<button type="button" role="tab" data-tab="me" aria-selected="' + (S.tab === 'me') + '">My profile</button>')
+        + '<button type="button" role="tab" data-tab="browse" aria-selected="' + (S.tab === 'browse') + '">Browse nurses</button>'
+        + (S.isAdmin ? '<button type="button" role="tab" data-tab="learn" aria-selected="' + (S.tab === 'learn') + '">Suggested additions' + (S.learn.length ? ' (' + S.learn.length + ')' : '') + '</button>' : '')
+        + '</div>';
     }
-    h += (S.tab === 'browse' ? drawBrowse() : drawMe(note)) + '</div>';
+    h += (S.tab === 'browse' ? drawBrowse() : S.tab === 'learn' ? drawLearn() : drawMe(note)) + '</div>';
     mount.innerHTML = h;
     mount.querySelectorAll('[data-tab]').forEach(function (b) {
       b.addEventListener('click', function () {
@@ -573,7 +622,7 @@
         render();
       });
     });
-    if (S.tab === 'browse') { wireBrowse(); } else { wireMe(); }
+    if (S.tab === 'browse') { wireBrowse(); } else if (S.tab === 'learn') { wireLearn(); } else { wireMe(); }
   }
 
   if (!doc.getElementById('msh-nr-css')) {
@@ -589,6 +638,7 @@
     }
     if (!r.ok || !r.body || !r.body.options) { throw new Error('nurse-register ' + r.status); }
     take(r.body);
+    if (S.canBrowse && !S.isAdmin && !S.profile) { S.tab = 'browse'; loadBrowse(); }
     render();
   }).catch(function () {
     mount.innerHTML = '<div class="nr"><h1>Nursing Register</h1><p class="lede">The register is unavailable just now. Please try again shortly.</p></div>';

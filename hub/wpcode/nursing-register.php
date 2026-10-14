@@ -69,8 +69,10 @@ if ( ! defined( 'MSH_NR_CAREERS_URL' ) ) {
 	define( 'MSH_NR_CAREERS_URL', 'https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/supplier-careers.json' );
 }
 
-if ( ! function_exists( 'msh_nr_options' ) ) {
-	function msh_nr_options() {
+if ( ! function_exists( 'msh_nr_base_options' ) ) {
+	/* The built-in tick lists. Lou can add to the skill and role lists from
+	   the register page (msh_nr_extra_options); msh_nr_options() is both. */
+	function msh_nr_base_options() {
 		return array(
 			'regions' => array(
 				'north-east' => 'North East', 'north-west' => 'North West', 'yorkshire-humber' => 'Yorkshire and the Humber',
@@ -153,6 +155,143 @@ if ( ! function_exists( 'msh_nr_options' ) ) {
 				'6-months' => 'Within six months', 'exploring' => 'Exploring, no rush',
 			),
 		);
+	}
+}
+
+if ( ! defined( 'MSH_NR_LEARN_LISTS' ) ) {
+	/* The lists Lou can add to from CV suggestions. */
+	define( 'MSH_NR_LEARN_LISTS', 'specialities,clinicalSkills,qualifications,transferable,roles' );
+}
+
+if ( ! function_exists( 'msh_nr_merge_extra' ) ) {
+	/* Built-in lists plus Lou's additions. $extra: list => (id => label).
+	   Only learnable lists, only ids starting x-, never replacing a
+	   built-in id. Pure, so it is tested. */
+	function msh_nr_merge_extra( $base, $extra ) {
+		if ( ! is_array( $extra ) ) {
+			return $base;
+		}
+		foreach ( explode( ',', MSH_NR_LEARN_LISTS ) as $k ) {
+			if ( empty( $extra[ $k ] ) || ! is_array( $extra[ $k ] ) ) {
+				continue;
+			}
+			foreach ( $extra[ $k ] as $id => $label ) {
+				if ( is_string( $id ) && preg_match( '/^x-[a-z0-9-]{2,60}$/', $id ) && is_string( $label ) && '' !== trim( $label ) && ! isset( $base[ $k ][ $id ] ) ) {
+					$base[ $k ][ $id ] = trim( $label );
+				}
+			}
+		}
+		return $base;
+	}
+}
+
+if ( ! function_exists( 'msh_nr_options' ) ) {
+	function msh_nr_options() {
+		$extra = function_exists( 'get_option' ) ? get_option( 'msh_nr_extra_options', array() ) : array();
+		return msh_nr_merge_extra( msh_nr_base_options(), $extra );
+	}
+}
+
+if ( ! function_exists( 'msh_nr_cv_unlisted' ) ) {
+	/* Nursing skills and job types a CV mentions that no tick list covers,
+	   for Lou to consider adding (Lou, 14/10/2026: "if 2 candidates have the
+	   same clinical skill or job type that's not listed, prompt me").
+	   Only short phrases ending in a nursing word (nurse, practitioner,
+	   therapy, care, clinic...) are picked up, so names, addresses and
+	   employers are not. $known: lower-case phrases already covered.
+	   Returns unique lower-case phrases, at most 40. */
+	function msh_nr_cv_unlisted( $text, $known ) {
+		/* One sentence, line or list item at a time, so a phrase never runs
+		   across "ALS. Lymphoedema nurse". */
+		$flat = '';
+		foreach ( preg_split( '/[.\n\r;:,()\/|]+/', strtolower( (string) $text ) ) as $seg ) {
+			$seg = trim( preg_replace( '/[^a-z0-9]+/', ' ', $seg ) );
+			if ( '' !== $seg ) {
+				$flat .= ' ' . $seg . ' |';
+			}
+		}
+		$heads = 'nurse specialist|nurse practitioner|nurse|practitioner|specialist|therapy|therapies|care|clinic|clinics|assessment|management|service|services|unit|insertion|monitoring|screening';
+		$stop  = array( 'and', 'or', 'of', 'the', 'a', 'an', 'in', 'for', 'to', 'with', 'on', 'at', 'as', 'my', 'our', 'their', 'i', 'we', 'was', 'were', 'is', 'staff', 'senior', 'junior', 'lead', 'head', 'charge', 'registered', 'qualified', 'band', 'patient', 'patients', 'nhs', 'trust', 'hospital', 'hospitals', 'ward', 'general', 'high', 'quality', 'person', 'centred', 'centered', 'holistic', 'direct', 'clinical', 'specialist', 'nurse', 'nursing', 'care', 'team', 'service', 'services', 'level', 'new', 'local', 'all', 'daily', 'safe', 'effective', 'excellent', 'good', 'best', 'whole', 'own', 'other', 'various', 'including', 'provide', 'provided', 'providing', 'deliver', 'delivered', 'delivering', 'manage', 'managed', 'managing', 'experience', 'experienced', 'skills', 'skill' );
+		$stop  = array_flip( $stop );
+		$known = array_flip( is_array( $known ) ? $known : array() );
+		$out   = array();
+		/* The words before the head are never "nurse", "practitioner" or
+		   "specialist" themselves, so "lymphoedema nurse specialist" is one
+		   phrase, not "lymphoedema specialist". */
+		if ( ! preg_match_all( '/ ((?:(?!(?:nurse|practitioner|specialist) )[a-z]{3,20} ){1,2})(' . $heads . ')(?= )/', $flat, $m, PREG_SET_ORDER ) ) {
+			return array();
+		}
+		foreach ( $m as $hit ) {
+			$words = array_values( array_filter( explode( ' ', trim( $hit[1] ) ), function ( $w ) use ( $stop ) { return ! isset( $stop[ $w ] ); } ) );
+			if ( ! $words ) {
+				continue;
+			}
+			$phrase = implode( ' ', $words ) . ' ' . $hit[2];
+			$core   = implode( ' ', $words );
+			if ( isset( $known[ $phrase ] ) || isset( $known[ $core ] ) ) {
+				continue;
+			}
+			$out[ $phrase ] = true;
+			if ( count( $out ) >= 40 ) {
+				break;
+			}
+		}
+		return array_keys( $out );
+	}
+}
+
+if ( ! function_exists( 'msh_nr_known_phrases' ) ) {
+	/* Every phrase the tick lists and CV terms already cover, lower case. */
+	function msh_nr_known_phrases() {
+		$known = array();
+		foreach ( msh_nr_options() as $list ) {
+			foreach ( $list as $label ) {
+				foreach ( preg_split( '/\s*(?:,| and | or |\(|\))\s*/', strtolower( $label ) ) as $part ) {
+					$part = trim( preg_replace( '/[^a-z0-9]+/', ' ', $part ) );
+					if ( '' !== $part ) {
+						$known[] = $part;
+					}
+				}
+			}
+		}
+		foreach ( msh_nr_cv_terms() as $list ) {
+			foreach ( $list as $terms ) {
+				foreach ( $terms as $t ) {
+					$known[] = trim( preg_replace( '/[^a-z0-9]+/', ' ', strtolower( $t ) ) );
+				}
+			}
+		}
+		return array_values( array_unique( $known ) );
+	}
+}
+
+if ( ! function_exists( 'msh_nr_learn_tally' ) ) {
+	/* Adds one CV's unlisted phrases to the running tally and says which
+	   just reached $at CVs. $tally: phrase => array( n, first, notified ).
+	   Phrases Lou dismissed ($dismissed) are never counted again. Pure. */
+	function msh_nr_learn_tally( $tally, $phrases, $dismissed, $today, $at ) {
+		$tally     = is_array( $tally ) ? $tally : array();
+		$dismissed = array_flip( is_array( $dismissed ) ? $dismissed : array() );
+		$reached   = array();
+		foreach ( array_unique( (array) $phrases ) as $p ) {
+			if ( ! is_string( $p ) || isset( $dismissed[ $p ] ) ) {
+				continue;
+			}
+			if ( ! isset( $tally[ $p ] ) ) {
+				$tally[ $p ] = array( 'n' => 0, 'first' => $today, 'notified' => false );
+			}
+			$tally[ $p ]['n']++;
+			if ( $tally[ $p ]['n'] >= $at && ! $tally[ $p ]['notified'] ) {
+				$tally[ $p ]['notified'] = true;
+				$reached[]               = $p;
+			}
+		}
+		/* Keep it small: the 500 most-seen phrases. */
+		if ( count( $tally ) > 500 ) {
+			uasort( $tally, function ( $a, $b ) { return $b['n'] - $a['n']; } );
+			$tally = array_slice( $tally, 0, 500, true );
+		}
+		return array( 'tally' => $tally, 'reached' => $reached );
 	}
 }
 
@@ -910,8 +1049,8 @@ if ( ! function_exists( 'msh_nr_user_by_ref' ) ) {
 
 if ( ! function_exists( 'msh_nr_payload' ) ) {
 	function msh_nr_payload( $uid ) {
-		$p = get_user_meta( $uid, 'msh_nurse_register', true );
-		return array(
+		$p   = get_user_meta( $uid, 'msh_nurse_register', true );
+		$out = array(
 			'options'   => msh_nr_options(),
 			'profile'   => is_array( $p ) ? $p : null,
 			'canBrowse' => msh_nr_can_browse(),
@@ -919,6 +1058,64 @@ if ( ! function_exists( 'msh_nr_payload' ) ) {
 			'staleDays' => MSH_NR_STALE_DAYS,
 			'links'     => msh_nr_career_links(),
 		);
+		if ( $out['isAdmin'] ) {
+			$out['learn']      = msh_nr_learn_pending( get_option( 'msh_nr_learn_tally', array() ), 2 );
+			$out['learnLists'] = explode( ',', MSH_NR_LEARN_LISTS );
+		}
+		return $out;
+	}
+}
+
+if ( ! function_exists( 'msh_nr_learn_pending' ) ) {
+	/* Phrases seen in at least $at CVs and not yet added or dismissed,
+	   most-seen first. Pure. */
+	function msh_nr_learn_pending( $tally, $at ) {
+		$out = array();
+		foreach ( is_array( $tally ) ? $tally : array() as $p => $t ) {
+			if ( is_array( $t ) && isset( $t['n'] ) && $t['n'] >= $at ) {
+				$out[] = array( 'phrase' => (string) $p, 'n' => (int) $t['n'], 'first' => isset( $t['first'] ) ? $t['first'] : '' );
+			}
+		}
+		usort( $out, function ( $a, $b ) { return $b['n'] - $a['n']; } );
+		return array_slice( $out, 0, 50 );
+	}
+}
+
+if ( ! function_exists( 'msh_nr_learn_apply' ) ) {
+	/* Lou's decision on one suggested phrase. Returns the new extra lists,
+	   tally and dismissed list, or array( 'error' => why ). Adding uses
+	   Lou's label (or the phrase) and an x- id; either way the phrase leaves
+	   the tally and joins dismissed so it is never suggested again. Pure. */
+	function msh_nr_learn_apply( $extra, $tally, $dismissed, $b ) {
+		$extra     = is_array( $extra ) ? $extra : array();
+		$tally     = is_array( $tally ) ? $tally : array();
+		$dismissed = is_array( $dismissed ) ? $dismissed : array();
+		$phrase    = isset( $b['phrase'] ) && is_string( $b['phrase'] ) ? $b['phrase'] : '';
+		if ( '' === $phrase || ! isset( $tally[ $phrase ] ) ) {
+			return array( 'error' => 'phrase' );
+		}
+		$action = isset( $b['action'] ) ? $b['action'] : '';
+		if ( 'add' === $action ) {
+			$list = isset( $b['list'] ) ? $b['list'] : '';
+			if ( ! in_array( $list, explode( ',', MSH_NR_LEARN_LISTS ), true ) ) {
+				return array( 'error' => 'list' );
+			}
+			$label = isset( $b['label'] ) && is_string( $b['label'] ) ? trim( preg_replace( '/\s+/', ' ', strip_tags( $b['label'] ) ) ) : '';
+			$label = '' !== $label ? mb_substr( $label, 0, 80 ) : ucfirst( $phrase );
+			$id    = 'x-' . trim( substr( preg_replace( '/[^a-z0-9]+/', '-', strtolower( $label ) ), 0, 60 ), '-' );
+			if ( strlen( $id ) < 4 ) {
+				return array( 'error' => 'label' );
+			}
+			if ( ! isset( $extra[ $list ] ) || ! is_array( $extra[ $list ] ) ) {
+				$extra[ $list ] = array();
+			}
+			$extra[ $list ][ $id ] = $label;
+		} elseif ( 'dismiss' !== $action ) {
+			return array( 'error' => 'action' );
+		}
+		unset( $tally[ $phrase ] );
+		$dismissed[] = $phrase;
+		return array( 'extra' => $extra, 'tally' => $tally, 'dismissed' => array_values( array_unique( $dismissed ) ) );
 	}
 }
 
@@ -991,7 +1188,48 @@ add_action( 'rest_api_init', function () {
 				return new WP_Error( 'msh_nr_cv_empty', 'no readable text', array( 'status' => 400 ) );
 			}
 			nocache_headers();
+			/* Learning: count nursing phrases no list covers, across CVs,
+			   with no link to who sent them. Two CVs → email Lou once. */
+			$learn = msh_nr_learn_tally(
+				get_option( 'msh_nr_learn_tally', array() ),
+				msh_nr_cv_unlisted( $text, msh_nr_known_phrases() ),
+				get_option( 'msh_nr_learn_dismissed', array() ),
+				wp_date( 'Y-m-d' ),
+				2
+			);
+			update_option( 'msh_nr_learn_tally', $learn['tally'], false );
+			if ( $learn['reached'] ) {
+				$list = '';
+				foreach ( $learn['reached'] as $p ) {
+					$list .= '* ' . $p . "\n";
+				}
+				wp_mail( get_option( 'admin_email' ), 'Nursing Register: add to the tick lists?',
+					"Two or more nurses' CVs mention something that isn't on the Nursing Register tick lists:\n\n" . $list
+					. "\nTo add it to a list, or dismiss it, open the register and look under Suggested additions:\n"
+					. home_url( '/clinical-hub/nursing-register/' ) . "\n" );
+			}
 			return msh_nr_cv_suggest( $text, (int) wp_date( 'Y' ) );
+		},
+	) );
+
+	/* Lou adds a suggested phrase to a tick list, or dismisses it. */
+	register_rest_route( 'msh/v1', '/nurse-register/learn', array(
+		'methods'             => 'POST',
+		'permission_callback' => $admin,
+		'callback'            => function ( WP_REST_Request $req ) {
+			$r = msh_nr_learn_apply(
+				get_option( 'msh_nr_extra_options', array() ),
+				get_option( 'msh_nr_learn_tally', array() ),
+				get_option( 'msh_nr_learn_dismissed', array() ),
+				(array) $req->get_json_params()
+			);
+			if ( isset( $r['error'] ) ) {
+				return new WP_Error( 'msh_nr_learn_' . $r['error'], $r['error'], array( 'status' => 400 ) );
+			}
+			update_option( 'msh_nr_extra_options', $r['extra'], false );
+			update_option( 'msh_nr_learn_tally', $r['tally'], false );
+			update_option( 'msh_nr_learn_dismissed', $r['dismissed'], false );
+			return msh_nr_payload( get_current_user_id() );
 		},
 	) );
 
