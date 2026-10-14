@@ -46,6 +46,10 @@
     + '<li><strong>Check it and add what\'s missing.</strong> Untick anything that\'s wrong, and tick anything you\'ve done that isn\'t on your CV. Most nurses have done far more than their CV says.</li>'
     + '<li><strong>Choose who sees you, then submit.</strong> Approved recruiters and employers can find you by region, speciality and skill. You decide whether they see your contact details, and whether you want new roles in your area emailed every Monday.</li>'
     + '<li><strong>Get your careers pack.</strong> When you submit, we email you a copy of your choices, and you can download Beyond the Bedside, our encyclopedia of nursing careers.</li></ol>';
+  /* For recruiters and employers (Lou, 14/10/2026): browsing is the paid
+     Hub Employer plan (5167), which includes the Hub, bought at
+     /hub-employer/. Hub members are moved across by Lou. */
+  var RECRUITERS = '<div class="msg info"><strong>Recruiter or employer?</strong> Hub Employer gives you the Medical Sales Hub plus the Nursing Register: search nurses by region, speciality and skill, and ask us to introduce you. <a href="/hub-employer/">Become a Hub Employer</a>. Already on the Hub? Email <a href="mailto:louisehoult@elevateandthrive.uk?subject=Hub%20Employer%20subscription">louisehoult@elevateandthrive.uk</a> and we\'ll move you across.</div>';
   var LANDING = '<div class="nr"><h1>Join the Nursing Register</h1>'
     + '<p class="lede">' + PITCH + '</p>'
     + '<p class="sub">How it works</p>' + HOW
@@ -54,7 +58,8 @@
     + '<li><strong>The best nursing careers resources in one place.</strong> Jobs, CV help, your revalidation portfolio and the real routes from clinical into industry.</li>'
     + '<li><strong>You stay in control.</strong> Hide or delete your profile, or stop the emails, any time.</li></ul>'
     + '<p class="lede"><strong>Free for NHS nurses.</strong></p>'
-    + '<div class="actions"><a class="btn" href="/register/">Join the register</a><a class="btn ghost" href="/login/">I already have an account</a></div></div>';
+    + '<div class="actions"><a class="btn" href="/register/">Join the register</a><a class="btn ghost" href="/login/">I already have an account</a></div>'
+    + RECRUITERS + '</div>';
 
   /* ---------- pure ---------- */
   function esc(s) {
@@ -564,7 +569,7 @@
       h += '<div class="tabs" role="tablist"><button type="button" role="tab" data-tab="me" aria-selected="' + (S.tab === 'me') + '">My profile</button>'
         + '<button type="button" role="tab" data-tab="browse" aria-selected="' + (S.tab === 'browse') + '">Browse nurses</button></div>';
     }
-    h += (S.tab === 'browse' ? drawBrowse() : drawMe(note)) + '</div>';
+    h += (S.tab === 'browse' ? drawBrowse() : drawMe(note)) + (S.canBrowse ? '' : RECRUITERS) + '</div>';
     mount.innerHTML = h;
     mount.querySelectorAll('[data-tab]').forEach(function (b) {
       b.addEventListener('click', function () {
