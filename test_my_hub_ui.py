@@ -77,7 +77,7 @@ class MyHubUi(unittest.TestCase):
         # Nothing unseen: the bar button still opens the recent entries read-only.
         self.assertIn("No new changes since your last visit", page)
         # Ruling F13: the "tell us what you need" path ships with stage 4.
-        self.assertNotIn("tell us what you need", page.lower())
+        self.assertIn("tell us what you need", page.lower())
 
     def test_copy_has_no_dashes_or_medtech(self):
         for f in FILES:

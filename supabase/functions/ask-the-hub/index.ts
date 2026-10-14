@@ -24,6 +24,7 @@
 
 import Anthropic from "npm:@anthropic-ai/sdk@0.128.0";
 import { hmac, verifyPass } from "./pass.ts";
+import { cleanNeed, needQuestion } from "./need.ts";
 
 const ORIGINS = [
   "https://medsalesintelligencehub.co.uk",
@@ -140,11 +141,27 @@ Deno.serve(async (req) => {
   if (req.method !== "POST") return reply(origin, 405, { error: "method" });
   if (origin === null || !ORIGINS.includes(origin)) return reply(origin, 403, { error: "origin" });
 
-  let body: { q?: unknown; pass?: unknown };
+  let body: { q?: unknown; pass?: unknown; need?: unknown };
   try { body = await req.json(); } catch { return reply(origin, 400, { error: "bad request" }); }
 
   const member = await verifyPass(body.pass, Deno.env.get("ASK_PASS_SECRET") || "");
   if (member === null) return reply(origin, 401, { error: "login", message: "Please log in to the Hub again, then ask." });
+
+  // "Tell us what you need" (My Hub, 2026-10): a request, not a question.
+  // Same pass check and the same daily cap as a question, then it goes where
+  // an unanswered question goes (ask_gaps and one email). No AI call.
+  if (body.need !== undefined) {
+    const need = cleanNeed(body.need);
+    if (need === null) {
+      return reply(origin, 400, { error: "length", message: "Tell us what you need in 4 to 400 characters." });
+    }
+    const leftN = await rpc<number>("ask_take", { p_member: "wp:" + member, p_cap: DAILY_CAP, p_global: GLOBAL_CAP });
+    if (leftN < 0) {
+      return reply(origin, 429, { error: "cap", message: "You've reached today's limit for Ask the Hub. It resets at midnight." });
+    }
+    await recordGap(needQuestion(need), member);
+    return reply(origin, 200, { received: true, left: leftN });
+  }
 
   const q = typeof body.q === "string" ? body.q.replace(/\s+/g, " ").trim() : "";
   if (q.length < 4 || q.length > 400) {

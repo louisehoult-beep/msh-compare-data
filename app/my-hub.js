@@ -285,7 +285,7 @@
       + '<section class="card saved" id="mx-saved" aria-labelledby="mx-sv-t"></section>'
       + '<section class="brief on-dark" id="mx-brief" aria-labelledby="mx-br-t"></section></aside></div></div></div>'
       + '<footer class="mx-foot"><div class="wrap"><span>Medical Sales Intelligence Hub, by Elevate &amp; Thrive</span>'
-      + '<span><a href="/medical-sales-hub/ask/">Ask the Desk</a></span></div></footer>'
+      + '<span><a href="/medical-sales-hub/ask/">Ask the Desk</a>, or tell us what you need from Search</span></div></footer>'
       + '<nav class="tabbar" aria-label="Quick actions"><button type="button" aria-current="page" data-act="top">' + M.svg('home') + 'Home</button>'
       + '<button type="button" data-open="m-tools">' + M.svg('grid') + 'Tools</button><button type="button" data-act="library">' + M.svg('book') + 'Library</button>'
       + '<button type="button" data-open="m-brief">' + M.svg('mail') + 'Briefing</button><button type="button" data-open="m-search">' + M.svg('search') + 'Search</button></nav>'

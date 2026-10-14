@@ -698,6 +698,7 @@
 
   function ask(q, redraw) {
     if (ASK.state === 'loading') { return; }
+    if (NEED.state === 'sent') { NEED = { open: false, state: '', msg: '', text: '' }; }
     ASK = { q: q, state: 'loading', data: null, msg: '' };
     redraw();
     getPass()
@@ -736,6 +737,73 @@
   function askBox(inner) {
     return '<div style="margin:10px 14px;padding:12px 13px;border:1px solid ' + GOLD + ';border-radius:8px;' +
            'background:rgba(196,155,92,.08);color:' + TEXT + ';">' + ASK_HEAD + inner + '</div>';
+  }
+
+  /* TELL US WHAT YOU NEED (My Hub home screen, 2026-10, spec item 9). Under
+   * every Ask the Hub card: a member can send a request in their own words.
+   * It goes to the same place as a question the Hub could not answer: the
+   * ask-the-hub function records it in ask_gaps and emails it once to the
+   * site admin address through the WordPress snippet. No AI call is made for
+   * a request, and it counts as one of the member's questions for the day. */
+  var NEED = { open: false, state: '', msg: '', text: '' };
+
+  function needHtml() {
+    var rule = 'margin-top:10px;padding-top:9px;border-top:1px solid ' + RULE + ';';
+    if (NEED.state === 'sent') {
+      return '<div role="status" style="' + rule + 'font-size:13px;line-height:1.5;">Thanks. Your request is with the Hub team.</div>';
+    }
+    if (!NEED.open) {
+      return '<button type="button" data-need-open="1" style="display:block;width:100%;text-align:left;cursor:pointer;' + rule +
+             'padding-left:0;padding-right:0;padding-bottom:0;border-left:0;border-right:0;border-bottom:0;background:none;color:' + GOLD + ';' +
+             'font-family:inherit;font-size:13px;font-weight:700;">Not what you need? Tell us what you need \u2192</button>';
+    }
+    return '<div style="' + rule + '">' +
+      '<label for="msh-need-t" style="display:block;font-size:12.5px;color:#a8b3c4;margin-bottom:6px;">' +
+      'What should the Hub cover? The Hub team reads every request.</label>' +
+      '<textarea id="msh-need-t" data-need-text="1" rows="3" maxlength="400" style="display:block;width:100%;box-sizing:border-box;' +
+      'border-radius:6px;border:1px solid ' + LINE + ';background:' + PANEL + ';color:' + TEXT + ';font-family:inherit;' +
+      'font-size:13.5px;line-height:1.45;padding:8px;">' + esc(NEED.text) + '</textarea>' +
+      (NEED.state === 'error' ? '<div role="alert" style="font-size:12.5px;color:#F3E4E1;margin-top:6px;">' + esc(NEED.msg) + '</div>' : '') +
+      '<button type="button" data-need-send="1"' + (NEED.state === 'sending' ? ' disabled' : '') +
+      ' style="margin-top:8px;padding:7px 14px;border-radius:6px;border:0;background:' + GOLD + ';color:' + NAVY + ';' +
+      'font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;">' +
+      (NEED.state === 'sending' ? 'Sending\u2026' : 'Send to the Hub team') + '</button></div>';
+  }
+
+  function sendNeed(redraw) {
+    var t = String(NEED.text || '').replace(/\s+/g, ' ').trim();
+    if (t.length < 4) {
+      NEED.state = 'error'; NEED.msg = 'Tell us a little more: at least four characters.'; redraw();
+      setTimeout(function () { var ta = document.querySelector('[data-need-text]'); if (ta) { ta.focus(); } }, 30);
+      return;
+    }
+    if (NEED.state === 'sending') { return; }
+    NEED.state = 'sending'; redraw();
+    getPass()
+      .then(function (pass) {
+        return fetch(ASK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ need: t, pass: pass })
+        }).then(function (r) {
+          return r.json().catch(function () { return {}; }).then(function (j) {
+            if (r.status === 401) { PASS = null; }
+            if (!r.ok) {
+              var e = new Error('need');
+              e.msg = j.message || 'That didn\u2019t send. Try again in a minute.';
+              throw e;
+            }
+            return j;
+          });
+        });
+      })
+      .then(function () { NEED.state = 'sent'; NEED.text = ''; NEED.open = false; redraw(); })
+      .catch(function (e) {
+        NEED.state = 'error';
+        NEED.msg = e.msg || 'That didn\u2019t send. Check your connection and try again.';
+        redraw();
+        setTimeout(function () { var ta = document.querySelector('[data-need-text]'); if (ta) { ta.focus(); } }, 30);
+      });
   }
 
   function askAnswer(d) {
@@ -787,7 +855,7 @@
               '<span style="display:block;color:#a8b3c4;font-size:12px;line-height:1.45;margin-top:2px;">' +
               'A written answer from Hub pages only, with the source linked on every point.</span></button>';
     }
-    return askBox(inner);
+    return askBox(inner + needHtml());
   }
 
   // One listener per results box. innerHTML is redrawn on every keystroke, so
@@ -796,6 +864,20 @@
     b.addEventListener('click', function (e) {
       var t = e.target;
       while (t && t !== b) {
+        if (t.getAttribute && t.getAttribute('data-need-open')) {
+          e.preventDefault();
+          use(i, b);
+          NEED.open = true; NEED.state = '';
+          redraw();
+          setTimeout(function () { var ta = b.querySelector('[data-need-text]'); if (ta) { ta.focus(); } }, 30);
+          return;
+        }
+        if (t.getAttribute && t.getAttribute('data-need-send')) {
+          e.preventDefault();
+          use(i, b);
+          sendNeed(redraw);
+          return;
+        }
         if (t.getAttribute && t.getAttribute('data-ask')) {
           e.preventDefault();
           use(i, b);
@@ -805,6 +887,11 @@
         }
         t = t.parentNode;
       }
+    });
+    // The request box is redrawn with the results, so keep what was typed.
+    b.addEventListener('input', function (e) {
+      var t = e.target;
+      if (t.getAttribute && t.getAttribute('data-need-text')) { NEED.text = t.value; }
     });
   }
 
