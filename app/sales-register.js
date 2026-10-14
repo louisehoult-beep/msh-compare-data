@@ -51,7 +51,7 @@
   ];
   var RECRUITERS = '<div class="sr-recruit"><div><p class="sr-eyebrow dark">For recruiters and employers</p>'
     + '<p>A Hub Employer subscription lets you search the register by region, level, role, therapy area and customer, and ask us to introduce you. One subscription covers this register and the Nursing Register. If you already use the Hub, it\'s an add-on to your account.</p></div>'
-    + '<a class="sr-btn ghost" href="mailto:louisehoult@elevateandthrive.uk?subject=Hub%20Employer%20subscription">Email for pricing</a></div>';
+    + '<a class="sr-btn ghost" href="/hub-employer/">Become a Hub Employer</a></div>';
 
   /* ---------- pure ---------- */
   function esc(s) {

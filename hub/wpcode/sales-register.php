@@ -26,8 +26,9 @@
      LinkedIn or current employer. Only profiles made visible, with consent,
      confirmed in the last MSH_SR_STALE_DAYS days. The Hub Employer access
      is the SAME one the Nursing Register uses (role msh_employer, or the
-     "Hub Employer" tick on the user screen, meta msh_nr_employer): one paid
-     Hub Employer subscription covers both registers.
+     "Hub Employer" tick on the user screen, meta msh_nr_employer, or a live
+     Hub Employer plan 5167): msh_nr_can_browse() from the Nursing Register
+     snippet decides. One paid Hub Employer subscription covers both registers.
    * With the separate share consent (shareContact, dated shareAt), Hub
      Employers also get name, email, phone, LinkedIn and current employer.
    An employer's "Request introduction" emails Lou. Nothing goes to the
@@ -1089,6 +1090,12 @@ if ( ! function_exists( 'msh_sr_employer_access' ) ) {
 
 if ( ! function_exists( 'msh_sr_can_browse' ) ) {
 	function msh_sr_can_browse() {
+		/* The Nursing Register snippet (4919) owns Hub Employer access: admin,
+		   role msh_employer, the Hub Employer tick, or a live Hub Employer
+		   plan (5167). One subscription opens both registers. */
+		if ( function_exists( 'msh_nr_can_browse' ) && msh_nr_can_browse() ) {
+			return true;
+		}
 		$uid = get_current_user_id();
 		return msh_sr_employer_access( current_user_can( 'manage_options' ),
 			current_user_can( 'msh_view_nurse_register' ) || current_user_can( 'msh_view_sales_register' ),
