@@ -39,6 +39,11 @@ foreach ($cases as $c) {
   elseif ($fn === 'cv') { $out[] = msh_nr_cv_suggest($a[0], $a[1]); }
   elseif ($fn === 'summary') { $out[] = msh_nr_summary_email($a[0], $a[1], $a[2]); }
   elseif ($fn === 'links') { $out[] = msh_nr_career_links(); }
+  elseif ($fn === 'unlisted') { $out[] = msh_nr_cv_unlisted($a[0], msh_nr_known_phrases()); }
+  elseif ($fn === 'tally') { $out[] = msh_nr_learn_tally($a[0], $a[1], $a[2], $a[3], $a[4]); }
+  elseif ($fn === 'pending') { $out[] = msh_nr_learn_pending($a[0], $a[1]); }
+  elseif ($fn === 'apply') { $out[] = msh_nr_learn_apply($a[0], $a[1], $a[2], $a[3]); }
+  elseif ($fn === 'merge') { $out[] = msh_nr_merge_extra(msh_nr_base_options(), $a[0]); }
   elseif ($fn === 'contact') { $out[] = msh_nr_contact($a[0], $a[1], $a[2]); }
   elseif ($fn === 'regions') { $out[] = msh_nr_job_regions($a[0], $a[1]); }
   elseif ($fn === 'digest') { $out[] = msh_nr_digest_jobs($a[0], $a[1], $a[2]); }
@@ -243,6 +248,53 @@ class Snippet(unittest.TestCase):
         self.assertIn("midwife", self.call(("cv", ["Registered Midwife, delivery suite.", 2026]))[0]["registration"])
         # A future year is never the year qualified.
         self.assertIsNone(self.call(("cv", ["Registered nurse, qualified 2031. " * 10, 2026]))[0]["qualYear"])
+
+    def test_cv_unlisted_finds_new_nursing_phrases_only(self):
+        cv = self.CV + """
+        Lymphoedema nurse specialist, 2016 to 2019. Ran the sexual health clinic.
+        Wound care and tissue viability (already on the lists). Jane Smith, Leeds Road.
+        Excellent patient care. Staff nurse.
+        """
+        got = self.call(("unlisted", [cv]))[0]
+        self.assertIn("lymphoedema nurse specialist", got)
+        self.assertIn("sexual health clinic", got)
+        for listed in ("tissue viability nurse specialist", "wound care", "staff nurse", "excellent care", "patient care"):
+            self.assertNotIn(listed, got)
+        for word in ("jane", "smith", "leeds"):
+            self.assertFalse(any(word in g for g in got), word)
+
+    def test_learning_prompts_at_two_cvs_once(self):
+        a = self.call(("tally", [{}, ["lymphoedema nurse", "sexual health clinic"], [], TODAY, 2]))[0]
+        self.assertEqual(a["reached"], [])
+        b = self.call(("tally", [a["tally"], ["lymphoedema nurse", "lymphoedema nurse"], [], TODAY, 2]))[0]
+        self.assertEqual(b["reached"], ["lymphoedema nurse"], "counted once per CV, prompted at two")
+        c = self.call(("tally", [b["tally"], ["lymphoedema nurse"], [], TODAY, 2]))[0]
+        self.assertEqual(c["reached"], [], "prompted only once")
+        d = self.call(("tally", [c["tally"], ["sexual health clinic"], ["sexual health clinic"], TODAY, 2]))[0]
+        self.assertEqual(d["tally"]["sexual health clinic"]["n"], 1, "dismissed phrases are not counted")
+        pend = self.call(("pending", [c["tally"], 2]))[0]
+        self.assertEqual([p["phrase"] for p in pend], ["lymphoedema nurse"])
+        self.assertEqual(pend[0]["n"], 3)
+
+    def test_learning_add_and_dismiss(self):
+        tally = {"lymphoedema nurse": {"n": 2, "first": TODAY, "notified": True},
+                 "sexual health clinic": {"n": 2, "first": TODAY, "notified": True}}
+        add = self.call(("apply", [{}, tally, [], {"phrase": "lymphoedema nurse", "action": "add", "list": "roles", "label": "Lymphoedema nurse <b>"}]))[0]
+        self.assertEqual(add["extra"], {"roles": {"x-lymphoedema-nurse": "Lymphoedema nurse"}})
+        self.assertNotIn("lymphoedema nurse", add["tally"])
+        self.assertEqual(add["dismissed"], ["lymphoedema nurse"])
+        dis = self.call(("apply", [add["extra"], add["tally"], add["dismissed"], {"phrase": "sexual health clinic", "action": "dismiss"}]))[0]
+        self.assertEqual(dis["extra"], add["extra"])
+        self.assertEqual(dis["tally"], [])
+        bad = self.call(("apply", [{}, tally, [], {"phrase": "lymphoedema nurse", "action": "add", "list": "regions"}]),
+                        ("apply", [{}, tally, [], {"phrase": "not suggested", "action": "add", "list": "roles"}]))
+        self.assertEqual(bad, [{"error": "list"}, {"error": "phrase"}])
+        merged = self.call(("merge", [{"roles": {"x-lymphoedema-nurse": "Lymphoedema nurse", "clinical-specialist": "Hijack", "bad id": "x"},
+                                       "regions": {"x-mars": "Mars"}}]))[0]
+        self.assertEqual(merged["roles"]["x-lymphoedema-nurse"], "Lymphoedema nurse")
+        self.assertEqual(merged["roles"]["clinical-specialist"], "Clinical specialist", "built-ins never replaced")
+        self.assertNotIn("bad id", merged["roles"])
+        self.assertNotIn("x-mars", merged["regions"], "only learnable lists")
 
     def test_employer_access(self):
         # Admin, the Hub Employer role, or the add-on tick on a Hub member.
