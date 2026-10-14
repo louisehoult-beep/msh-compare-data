@@ -282,6 +282,47 @@ SOURCES = [
     # UK nursing news across every speciality: keyword slice only, like BJN.
     {"id": "nursing_times", "name": "Nursing Times", "url": "https://www.nursingtimes.net/feed/",
      "specialities": [], "paged": True},
+    # Added 14/10/2026 (second pass, Lou: "find for the 4 now"): audiology, colorectal/GI,
+    # critical care and patient handling each held two items or fewer in 31 days
+    # (scripts/check_speciality_news_coverage.py). Each feed fetched 14/10/2026 with items inside
+    # the last month. Rejected the same day: NDCS, ACPGBI, British Society of Gastroenterology,
+    # Bowel Cancer UK, Crohn's & Colitis UK, Intensive Care Society, BACCN, National Back Exchange
+    # (no feed, 404); Guts UK (feed empty); ICNARC (last item 18/04/2024); Care Home Professional,
+    # Homecare Insight (403 to this user agent); Alimentary Pharmacology & Therapeutics and
+    # Anaesthesia/BJA (90+ items a month of international research, would bury the UK news).
+    # Patient handling has no specialist feed anywhere found: its route is MHRA below.
+    {"id": "bsa_audiology", "name": "British Society of Audiology", "url": "https://www.thebsa.org.uk/feed/",
+     "specialities": ["audiology-and-hearing"]},
+    {"id": "baa_audiology", "name": "British Academy of Audiology", "url": "https://www.baaudiology.org/feed/",
+     "specialities": ["audiology-and-hearing"]},
+    {"id": "rnid", "name": "RNID", "url": "https://rnid.org.uk/feed/",
+     "specialities": ["audiology-and-hearing"]},
+    {"id": "tinnitus_uk", "name": "Tinnitus UK", "url": "https://tinnitus.org.uk/feed/",
+     "specialities": ["audiology-and-hearing"]},
+    {"id": "int_j_audiology", "name": "International Journal of Audiology",
+     "url": "https://www.tandfonline.com/feed/rss/iija20",
+     "specialities": ["audiology-and-hearing"]},
+    {"id": "colorectal_disease", "name": "Colorectal Disease",
+     "url": "https://onlinelibrary.wiley.com/feed/14631318/most-recent",
+     "specialities": ["colorectal-gi-and-endoscopy"]},
+    {"id": "gasn_toc", "name": "Gastrointestinal Nursing (contents)",
+     "url": "https://www.magonlinelibrary.com/action/showFeed?jc=gasn&type=etoc&feed=rss",
+     "specialities": ["colorectal-gi-and-endoscopy"]},
+    {"id": "liver_uk", "name": "Liver UK", "url": "https://britishlivertrust.org.uk/feed/",
+     "specialities": ["colorectal-gi-and-endoscopy"]},
+    {"id": "jics", "name": "Journal of the Intensive Care Society (online first)",
+     "url": "https://journals.sagepub.com/action/showFeed?ui=0&mi=ehikzz&ai=2b4&jc=inc&type=axatoc&feed=rss",
+     "specialities": ["critical-care"]},
+    {"id": "nursing_crit_care", "name": "Nursing in Critical Care",
+     "url": "https://onlinelibrary.wiley.com/feed/14785153/most-recent",
+     "specialities": ["critical-care"]},
+    {"id": "ficm", "name": "Faculty of Intensive Care Medicine", "url": "https://www.ficm.ac.uk/rss.xml",
+     "specialities": ["critical-care"]},
+    # MHRA alerts, recalls and safety information (GOV.UK atom): keyword slice only, so each alert
+    # reaches only the page its headline names. Carries the 16/09/2026 National Patient Safety Alert
+    # on patient hoists and slings, which no feed had put on Patient Handling.
+    {"id": "mhra_alerts", "name": "MHRA alerts and recalls", "url": "https://www.gov.uk/drug-device-alerts.atom",
+     "specialities": []},
 ]
 
 
