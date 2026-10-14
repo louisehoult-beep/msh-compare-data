@@ -1063,8 +1063,8 @@ def record_capture(products_store, supplier, name, entry):
         "sourceUrl": entry["sourceUrl"],
         "capturedDate": time.strftime("%Y-%m-%d"),
         "parsed": entry["parsed"],
-        "description": redact_text(entry.get("description") or ""),
-        "features": [redact_text(f) for f in (entry.get("features") or [])],
+        "description": redact_text(entry.get("description") or "", published_by=supplier),
+        "features": [redact_text(f, published_by=supplier) for f in (entry.get("features") or [])],
         "image": entry.get("image") or None,
     }
 

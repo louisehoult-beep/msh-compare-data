@@ -116,7 +116,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from redact_personal import redact_text  # public repo: no named individual's email in a summary (14/10/2026, FICM posts)
+from redact_personal import redact_text  # public repo: an email stays only attributed to its publisher (14/10/2026)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -350,7 +350,20 @@ SUMMARY_MAX = 320
 JOB_TITLE = re.compile(r"^\s*(job advert|vacancy)\b", re.I)
 
 
-def clip_summary(s, limit=SUMMARY_MAX):
+def clip_summary(s, limit=SUMMARY_MAX, published_by=None):
+    """Clip, then deal with any named person's email in what is left.
+
+    With published_by (the feed's own name: the organisation that published the
+    post), an email stays and the summary ends with that attribution and the
+    data protection statement; without it, the email is withheld. Clipping
+    first means the note is never cut off and never names an email the clip
+    already dropped."""
+    if not published_by:
+        return _clip(redact_text(s or ""), limit)
+    return redact_text(_clip(s, limit), published_by=published_by)
+
+
+def _clip(s, limit=SUMMARY_MAX):
     """Shorten a summary without cutting a word in half.
 
     Until 24/09/2026 every summary was sliced at a flat 220 characters, so most
@@ -360,7 +373,6 @@ def clip_summary(s, limit=SUMMARY_MAX):
     the last full sentence, else on the last whole word plus an ellipsis.
     Several feeds hand over an excerpt already cut mid-word, under the limit,
     so a summary with no closing punctuation is tidied whatever its length."""
-    s = redact_text(s or "")
     s = re.sub(r"\s*The post .{0,200}? appeared first on .*$", "", s or "", flags=re.I | re.S)
     s = re.sub(r"\s*(\[(…|\.\.\.)\]|\[\s*\]|…)\s*$", "", s).strip()
     if len(s) <= limit and (not s or re.search(r"[.!?\u201d\"\u2019')\]]$", s)):
@@ -468,7 +480,7 @@ def parse_feed(raw_bytes, source_name):
             summary = strip_tags(_child_text(it, "description", "summary"))
             if title and link:
                 items.append({"title": title, "link": link,
-                              "published": dt.isoformat() if dt else None, "summary": clip_summary(summary)})
+                              "published": dt.isoformat() if dt else None, "summary": clip_summary(summary, published_by=source_name)})
         elif tag == "entry":
             title = strip_tags(_child_text(it, "title"))
             link = ""
@@ -481,7 +493,7 @@ def parse_feed(raw_bytes, source_name):
             summary = strip_tags(_child_text(it, "summary", "content"))
             if title and link:
                 items.append({"title": title, "link": link,
-                          "published": dt.isoformat() if dt else None, "summary": clip_summary(summary)})
+                          "published": dt.isoformat() if dt else None, "summary": clip_summary(summary, published_by=source_name)})
     return items
 
 

@@ -263,8 +263,8 @@ def main():
             base_row = {
                 "supplier": co, "name": name, "domain": domain,
                 "division": div, "mfrCategory": p.get("category"),
-                "detail": ({"description": redact_text(d.get("description")),
-                            "features": [redact_text(f) for f in (d.get("features") or [])] if d.get("features") is not None else None,
+                "detail": ({"description": redact_text(d.get("description"), published_by=co),
+                            "features": [redact_text(f, published_by=co) for f in (d.get("features") or [])] if d.get("features") is not None else None,
                             "image": d.get("image")} if d else None),
                 "nhssc": n_items or None,
                 "nhsscRange": matched_range,
