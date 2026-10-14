@@ -244,6 +244,44 @@ SOURCES = [
     {"id": "bjon_toc", "name": "British Journal of Nursing (contents)",
      "url": "https://www.magonlinelibrary.com/action/showFeed?jc=bjon&type=etoc&feed=rss",
      "specialities": []},
+    # Added 14/10/2026: ENT, haematology, pain and plastics/burns had held no
+    # item all month — their keyword rules existed but no feed read here ever
+    # carried those topics. Each feed below was fetched on 14/10/2026 and had
+    # items dated inside the last week (British Journal of Pain's online-first
+    # feed is slower; European Journal of Pain carries the volume). Rejected
+    # the same day: ENT UK, BAHNO, BAPRAS, British Society for Haematology,
+    # NHS Blood and Transplant, British Pain Society (no feed, 404 or an HTML
+    # page); Faculty of Pain Medicine (403 to this user agent); Pain UK (last
+    # post 10/03/2026); British Burn Association (last post 28/11/2023);
+    # Anthony Nolan (feed is volunteer FAQ pages, not news).
+    {"id": "clin_otolaryngology", "name": "Clinical Otolaryngology",
+     "url": "https://onlinelibrary.wiley.com/feed/17494486/most-recent",
+     "specialities": ["ent-and-head-and-neck"]},
+    {"id": "bjoms", "name": "British Journal of Oral and Maxillofacial Surgery",
+     "url": "https://www.bjoms.com/current.rss",
+     "specialities": ["ent-and-head-and-neck"]},
+    {"id": "shot_uk", "name": "Serious Hazards of Transfusion (SHOT)", "url": "https://www.shotuk.org/feed/",
+     "specialities": ["haematology-and-patient-blood-management"]},
+    {"id": "sickle_cell_society", "name": "Sickle Cell Society", "url": "https://www.sicklecellsociety.org/feed/",
+     "specialities": ["haematology-and-patient-blood-management"]},
+    {"id": "bjh", "name": "British Journal of Haematology",
+     "url": "https://onlinelibrary.wiley.com/feed/13652141/most-recent",
+     "specialities": ["haematology-and-patient-blood-management"]},
+    {"id": "transfusion_medicine", "name": "Transfusion Medicine",
+     "url": "https://onlinelibrary.wiley.com/feed/13653148/most-recent",
+     "specialities": ["haematology-and-patient-blood-management"]},
+    {"id": "bjpain_online", "name": "British Journal of Pain (online first)",
+     "url": "https://journals.sagepub.com/action/showFeed?ui=0&mi=ehikzz&ai=2b4&jc=bjpa&type=axatoc&feed=rss",
+     "specialities": ["pain-management"]},
+    {"id": "eur_j_pain", "name": "European Journal of Pain",
+     "url": "https://onlinelibrary.wiley.com/feed/15322149/most-recent",
+     "specialities": ["pain-management"]},
+    {"id": "jpras", "name": "Journal of Plastic, Reconstructive & Aesthetic Surgery",
+     "url": "https://www.jprasurg.com/current.rss",
+     "specialities": ["plastics-burns-and-reconstruction"]},
+    # UK nursing news across every speciality: keyword slice only, like BJN.
+    {"id": "nursing_times", "name": "Nursing Times", "url": "https://www.nursingtimes.net/feed/",
+     "specialities": [], "paged": True},
 ]
 
 
