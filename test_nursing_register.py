@@ -25,6 +25,7 @@ JS_PAGE = os.path.join(HERE, "app", "nursing-register.js")
 
 PHP_STUBS = r"""
 function add_action() {}
+function add_filter() {}
 """
 PHP_RUN = r"""
 $cases = json_decode($argv[1], true);
@@ -46,6 +47,9 @@ foreach ($cases as $c) {
   elseif ($fn === 'contact') { $out[] = msh_nr_contact($a[0], $a[1], $a[2]); }
   elseif ($fn === 'regions') { $out[] = msh_nr_job_regions($a[0], $a[1]); }
   elseif ($fn === 'digest') { $out[] = msh_nr_digest_jobs($a[0], $a[1], $a[2]); }
+  elseif ($fn === 'live') { $out[] = msh_nr_plan_live($a[0], $a[1], $a[2]); }
+  elseif ($fn === 'hub') { $out[] = msh_nr_counts_as_hub($a[0], $a[1], $a[2], $a[3], $a[4], $a[5]); }
+  elseif ($fn === 'access') { $out[] = msh_nr_employer_access($a[0], $a[1], $a[2]); }
   elseif ($fn === 'email') { $out[] = msh_nr_digest_email($a[0], $a[1], $a[2], $a[3]); }
 }
 echo json_encode($out);
@@ -227,6 +231,21 @@ class Snippet(unittest.TestCase):
         self.assertEqual(empty["qualYear"], None)
         self.assertEqual(empty["band"], "")
         self.assertEqual(empty["specialities"], [])
+        # The regulator's name and a life support course are not midwifery,
+        # paediatric or neonatal experience; the course still counts as a
+        # qualification (Lou's CV, 14/10/2026).
+        n = self.call(("cv", ["Nursing and Midwifery Council (NMC) Registered Nurse. ALS | ILS | Paediatric Life Support. "
+                              "Newborn Life Support. Ward sister, children's ward.", 2026]))[0]
+        self.assertNotIn("midwife", n["registration"])
+        self.assertNotIn("neonatal", n["specialities"])
+        self.assertIn("paediatrics", n["specialities"], "children's ward is still read")
+        self.assertIn("epls", n["qualifications"])
+        self.assertIn("nls", n["qualifications"])
+        n2 = self.call(("cv", ["Nursing and Midwifery Council. Paediatric Immediate Life Support.", 2026]))[0]
+        self.assertEqual(n2["registration"], [])
+        self.assertNotIn("paediatrics", n2["specialities"])
+        self.assertIn("epls", n2["qualifications"])
+        self.assertIn("midwife", self.call(("cv", ["Registered Midwife, delivery suite.", 2026]))[0]["registration"])
         # A future year is never the year qualified.
         self.assertIsNone(self.call(("cv", ["Registered nurse, qualified 2031. " * 10, 2026]))[0]["qualYear"])
 
@@ -276,6 +295,29 @@ class Snippet(unittest.TestCase):
         self.assertEqual(merged["roles"]["clinical-specialist"], "Clinical specialist", "built-ins never replaced")
         self.assertNotIn("bad id", merged["roles"])
         self.assertNotIn("x-mars", merged["regions"], "only learnable lists")
+
+    def test_employer_access(self):
+        # Admin, the Hub Employer role, or the add-on tick on a Hub member.
+        got = self.call(("access", [True, False, ""]), ("access", [False, True, ""]), ("access", [False, False, "1"]),
+                        ("access", [False, False, ""]), ("access", [False, False, "0"]), ("access", [False, False, None]))
+        self.assertEqual(got, [True, True, True, False, False, False])
+
+    def test_employer_plan(self):
+        now = 1792000000  # 2026-10
+        live = {"subscription_plan_id": "999", "status": "active", "expiration_date": "2026-11-30 00:00:00"}
+        gone = dict(live, expiration_date="2026-09-01 00:00:00")
+        cancelled = dict(live, status="canceled")
+        pending = dict(live, status="pending")
+        other = dict(live, subscription_plan_id="691")
+        got = self.call(("live", [[live], 999, now]), ("live", [[gone], 999, now]), ("live", [[cancelled], 999, now]),
+                        ("live", [[pending], 999, now]), ("live", [[other], 999, now]), ("live", [[], 999, now]))
+        self.assertEqual(got, [True, False, True, False, False, False])
+        # Counts as Hub Member Monthly only on pages that allow 691, only while live.
+        hub = [690, 691, 692, 694, 930]
+        got = self.call(("hub", [False, hub, [live], 999, 691, now]), ("hub", [False, [4783], [live], 999, 691, now]),
+                        ("hub", [False, [], [live], 999, 691, now]), ("hub", [False, hub, [gone], 999, 691, now]),
+                        ("hub", [False, hub, [live], 0, 691, now]), ("hub", [True, [4783], [], 999, 691, now]))
+        self.assertEqual(got, [True, False, False, False, False, True])
 
     def test_summary_email(self):
         p = self.clean(dict(GOOD, shareContact=True, jobsEmail=True))["profile"]

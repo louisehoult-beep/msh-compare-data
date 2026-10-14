@@ -115,6 +115,9 @@ import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from redact_personal import redact_text  # public repo: no named individual's email in a summary (14/10/2026, FICM posts)
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 OUT_DIR = os.path.join(ROOT, "data", "speciality-news")
@@ -244,6 +247,86 @@ SOURCES = [
     {"id": "bjon_toc", "name": "British Journal of Nursing (contents)",
      "url": "https://www.magonlinelibrary.com/action/showFeed?jc=bjon&type=etoc&feed=rss",
      "specialities": []},
+    # Added 14/10/2026: ENT, haematology, pain and plastics/burns had held no
+    # item all month — their keyword rules existed but no feed read here ever
+    # carried those topics. Each feed below was fetched on 14/10/2026 and had
+    # items dated inside the last week (British Journal of Pain's online-first
+    # feed is slower; European Journal of Pain carries the volume). Rejected
+    # the same day: ENT UK, BAHNO, BAPRAS, British Society for Haematology,
+    # NHS Blood and Transplant, British Pain Society (no feed, 404 or an HTML
+    # page); Faculty of Pain Medicine (403 to this user agent); Pain UK (last
+    # post 10/03/2026); British Burn Association (last post 28/11/2023);
+    # Anthony Nolan (feed is volunteer FAQ pages, not news).
+    {"id": "clin_otolaryngology", "name": "Clinical Otolaryngology",
+     "url": "https://onlinelibrary.wiley.com/feed/17494486/most-recent",
+     "specialities": ["ent-and-head-and-neck"]},
+    {"id": "bjoms", "name": "British Journal of Oral and Maxillofacial Surgery",
+     "url": "https://www.bjoms.com/current.rss",
+     "specialities": ["ent-and-head-and-neck"]},
+    {"id": "shot_uk", "name": "Serious Hazards of Transfusion (SHOT)", "url": "https://www.shotuk.org/feed/",
+     "specialities": ["haematology-and-patient-blood-management"]},
+    {"id": "sickle_cell_society", "name": "Sickle Cell Society", "url": "https://www.sicklecellsociety.org/feed/",
+     "specialities": ["haematology-and-patient-blood-management"]},
+    {"id": "bjh", "name": "British Journal of Haematology",
+     "url": "https://onlinelibrary.wiley.com/feed/13652141/most-recent",
+     "specialities": ["haematology-and-patient-blood-management"]},
+    {"id": "transfusion_medicine", "name": "Transfusion Medicine",
+     "url": "https://onlinelibrary.wiley.com/feed/13653148/most-recent",
+     "specialities": ["haematology-and-patient-blood-management"]},
+    {"id": "bjpain_online", "name": "British Journal of Pain (online first)",
+     "url": "https://journals.sagepub.com/action/showFeed?ui=0&mi=ehikzz&ai=2b4&jc=bjpa&type=axatoc&feed=rss",
+     "specialities": ["pain-management"]},
+    {"id": "eur_j_pain", "name": "European Journal of Pain",
+     "url": "https://onlinelibrary.wiley.com/feed/15322149/most-recent",
+     "specialities": ["pain-management"]},
+    {"id": "jpras", "name": "Journal of Plastic, Reconstructive & Aesthetic Surgery",
+     "url": "https://www.jprasurg.com/current.rss",
+     "specialities": ["plastics-burns-and-reconstruction"]},
+    # UK nursing news across every speciality: keyword slice only, like BJN.
+    {"id": "nursing_times", "name": "Nursing Times", "url": "https://www.nursingtimes.net/feed/",
+     "specialities": [], "paged": True},
+    # Added 14/10/2026 (second pass, Lou: "find for the 4 now"): audiology, colorectal/GI,
+    # critical care and patient handling each held two items or fewer in 31 days
+    # (scripts/check_speciality_news_coverage.py). Each feed fetched 14/10/2026 with items inside
+    # the last month. Rejected the same day: NDCS, ACPGBI, British Society of Gastroenterology,
+    # Bowel Cancer UK, Crohn's & Colitis UK, Intensive Care Society, BACCN, National Back Exchange
+    # (no feed, 404); Guts UK (feed empty); ICNARC (last item 18/04/2024); Care Home Professional,
+    # Homecare Insight (403 to this user agent); Alimentary Pharmacology & Therapeutics and
+    # Anaesthesia/BJA (90+ items a month of international research, would bury the UK news).
+    # Faculty of Intensive Care Medicine (ficm.ac.uk/rss.xml) was added and taken out the same day: its
+    # items are committee vacancies, council elections and course adverts, and two carried staff email
+    # addresses, which failed verify.py's personal-contact gate.
+    # Patient handling has no specialist feed anywhere found: its route is MHRA below.
+    {"id": "bsa_audiology", "name": "British Society of Audiology", "url": "https://www.thebsa.org.uk/feed/",
+     "specialities": ["audiology-and-hearing"]},
+    {"id": "baa_audiology", "name": "British Academy of Audiology", "url": "https://www.baaudiology.org/feed/",
+     "specialities": ["audiology-and-hearing"]},
+    {"id": "rnid", "name": "RNID", "url": "https://rnid.org.uk/feed/",
+     "specialities": ["audiology-and-hearing"]},
+    {"id": "tinnitus_uk", "name": "Tinnitus UK", "url": "https://tinnitus.org.uk/feed/",
+     "specialities": ["audiology-and-hearing"]},
+    {"id": "int_j_audiology", "name": "International Journal of Audiology",
+     "url": "https://www.tandfonline.com/feed/rss/iija20",
+     "specialities": ["audiology-and-hearing"]},
+    {"id": "colorectal_disease", "name": "Colorectal Disease",
+     "url": "https://onlinelibrary.wiley.com/feed/14631318/most-recent",
+     "specialities": ["colorectal-gi-and-endoscopy"]},
+    {"id": "gasn_toc", "name": "Gastrointestinal Nursing (contents)",
+     "url": "https://www.magonlinelibrary.com/action/showFeed?jc=gasn&type=etoc&feed=rss",
+     "specialities": ["colorectal-gi-and-endoscopy"]},
+    {"id": "liver_uk", "name": "Liver UK", "url": "https://britishlivertrust.org.uk/feed/",
+     "specialities": ["colorectal-gi-and-endoscopy"]},
+    {"id": "jics", "name": "Journal of the Intensive Care Society (online first)",
+     "url": "https://journals.sagepub.com/action/showFeed?ui=0&mi=ehikzz&ai=2b4&jc=inc&type=axatoc&feed=rss",
+     "specialities": ["critical-care"]},
+    {"id": "nursing_crit_care", "name": "Nursing in Critical Care",
+     "url": "https://onlinelibrary.wiley.com/feed/14785153/most-recent",
+     "specialities": ["critical-care"]},
+    # MHRA alerts, recalls and safety information (GOV.UK atom): keyword slice only, so each alert
+    # reaches only the page its headline names. Carries the 16/09/2026 National Patient Safety Alert
+    # on patient hoists and slings, which no feed had put on Patient Handling.
+    {"id": "mhra_alerts", "name": "MHRA alerts and recalls", "url": "https://www.gov.uk/drug-device-alerts.atom",
+     "specialities": []},
 ]
 
 
@@ -265,6 +348,7 @@ def clip_summary(s, limit=SUMMARY_MAX):
     the last full sentence, else on the last whole word plus an ellipsis.
     Several feeds hand over an excerpt already cut mid-word, under the limit,
     so a summary with no closing punctuation is tidied whatever its length."""
+    s = redact_text(s or "")
     s = re.sub(r"\s*The post .{0,200}? appeared first on .*$", "", s or "", flags=re.I | re.S)
     s = re.sub(r"\s*(\[(…|\.\.\.)\]|\[\s*\]|…)\s*$", "", s).strip()
     if len(s) <= limit and (not s or re.search(r"[.!?\u201d\"\u2019')\]]$", s)):

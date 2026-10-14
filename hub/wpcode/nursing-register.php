@@ -18,7 +18,8 @@
 
    WHO SEES WHAT
    * The nurse: their whole profile.
-   * An employer (role msh_employer, given by Lou in Users) or an admin: the
+   * A Hub Employer (role msh_employer, or the Hub Employer tick on a Hub
+     member's user screen, both given by Lou in Users) or an admin: the
      employer view from msh_nr_public(). No name, email, phone, NMC PIN or
      LinkedIn. Only profiles the nurse has made visible, with consent, and
      confirmed in the last MSH_NR_STALE_DAYS days.
@@ -61,6 +62,17 @@ if ( ! defined( 'MSH_NR_STALE_DAYS' ) ) {
 }
 if ( ! defined( 'MSH_NR_INTROS_PER_DAY' ) ) {
 	define( 'MSH_NR_INTROS_PER_DAY', 10 );
+}
+/* The paid Hub Employer plan (Paid Member Subscriptions; Lou 14/10/2026:
+   Hub alone is Hub Member Monthly, Hub with register access is this plan).
+   Plan 5167 "Hub Employer — Monthly", created 14/10/2026 as an upgrade of
+   Hub Member Monthly; sign-up page /hub-employer/. MSH_NR_HUB_PLAN is the
+   plan it counts as on Hub pages. */
+if ( ! defined( 'MSH_NR_EMPLOYER_PLAN' ) ) {
+	define( 'MSH_NR_EMPLOYER_PLAN', 5167 );
+}
+if ( ! defined( 'MSH_NR_HUB_PLAN' ) ) {
+	define( 'MSH_NR_HUB_PLAN', 691 );
 }
 if ( ! defined( 'MSH_NR_BATCH' ) ) {
 	define( 'MSH_NR_BATCH', 40 );
@@ -433,7 +445,7 @@ if ( ! function_exists( 'msh_nr_cv_terms' ) ) {
 				'practice-assessor' => array( 'practice assessor', 'practice supervisor', 'mentor', 'mentorship' ),
 				'teaching-qual' => array( 'pgce', 'teaching qualification', 'teaching certificate', 'ptlls', 'aet', 'award in education and training' ),
 				'als' => array( 'als', 'advanced life support' ),
-				'epls' => array( 'epls', 'pils', 'paediatric life support' ),
+				'epls' => array( 'epls', 'pils', 'paediatric life support', 'paediatric immediate life support', 'european paediatric advanced life support', 'european paediatric life support' ),
 				'nls' => array( 'nls', 'newborn life support' ),
 				'trauma' => array( 'atnc', 'tncc', 'trauma nursing' ),
 			),
@@ -468,14 +480,22 @@ if ( ! function_exists( 'msh_nr_cv_suggest' ) ) {
 		$o    = msh_nr_options();
 		$t    = msh_nr_cv_terms();
 		$flat = ' ' . trim( preg_replace( '/[^a-z0-9]+/', ' ', strtolower( (string) $text ) ) ) . ' ';
+		/* Names that only look like a field or speciality: every nurse's CV
+		   says "Nursing and Midwifery Council", and a life support course is a
+		   qualification, not paediatric or neonatal experience (seen on Lou's
+		   CV, 14/10/2026). Taken out before field, sector and speciality are
+		   read; qualifications still see them. */
+		$noise = '/ (?:nursing (?:and )?midwifery council|royal college of midwives|(?:european )?(?:paediatric|newborn) (?:immediate |advanced )?life support) /';
+		$plain = preg_replace( $noise, '  ', preg_replace( $noise, '  ', $flat ) );
 		$out  = array();
 		foreach ( array( 'registration', 'sectors', 'specialities', 'clinicalSkills', 'qualifications', 'transferable' ) as $k ) {
 			$out[ $k ] = array();
+			$in        = in_array( $k, array( 'registration', 'sectors', 'specialities' ), true ) ? $plain : $flat;
 			foreach ( $o[ $k ] as $id => $label ) {
 				$terms = isset( $t[ $k ][ $id ] ) ? $t[ $k ][ $id ] : array( $label );
 				foreach ( $terms as $term ) {
 					$term = trim( preg_replace( '/[^a-z0-9]+/', ' ', strtolower( $term ) ) );
-					if ( '' !== $term && false !== strpos( $flat, ' ' . $term . ' ' ) ) {
+					if ( '' !== $term && false !== strpos( $in, ' ' . $term . ' ' ) ) {
 						$out[ $k ][] = (string) $id;
 						break;
 					}
@@ -1017,7 +1037,59 @@ add_action( 'init', function () {
 
 if ( ! function_exists( 'msh_nr_can_browse' ) ) {
 	function msh_nr_can_browse() {
-		return current_user_can( 'manage_options' ) || current_user_can( 'msh_view_nurse_register' );
+		$uid = get_current_user_id();
+		return msh_nr_employer_access( current_user_can( 'manage_options' ), current_user_can( 'msh_view_nurse_register' ),
+			$uid ? get_user_meta( $uid, 'msh_nr_employer', true ) : '' ) || msh_nr_has_employer_plan( $uid );
+	}
+}
+
+if ( ! function_exists( 'msh_nr_has_employer_plan' ) ) {
+	/* An active (or cancelled but not yet expired) Hub Employer subscription. */
+	function msh_nr_has_employer_plan( $uid ) {
+		if ( ! $uid || ! MSH_NR_EMPLOYER_PLAN || ! function_exists( 'pms_get_member_subscriptions' ) ) {
+			return false;
+		}
+		return msh_nr_plan_live( pms_get_member_subscriptions( array( 'user_id' => $uid ) ), MSH_NR_EMPLOYER_PLAN, time() );
+	}
+}
+
+if ( ! function_exists( 'msh_nr_plan_live' ) ) {
+	/* Same test Paid Member Subscriptions uses in pms_is_member(): the plan,
+	   status active or canceled, and not past its expiry date. */
+	function msh_nr_plan_live( $subs, $plan, $now ) {
+		foreach ( (array) $subs as $s ) {
+			$s = (object) $s;
+			if ( (int) $s->subscription_plan_id !== (int) $plan || ! in_array( $s->status, array( 'active', 'canceled' ), true ) ) {
+				continue;
+			}
+			if ( empty( $s->expiration_date ) || $now <= strtotime( $s->expiration_date ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+}
+
+if ( ! function_exists( 'msh_nr_counts_as_hub' ) ) {
+	/* Hub with register access includes the Hub: wherever a page lets Hub
+	   Member Monthly in, an active Hub Employer subscription gets in too, so
+	   no Hub page needs a sixth tick. Never widens a page that doesn't allow
+	   Hub Member Monthly (training, Intelligence Reports). */
+	function msh_nr_counts_as_hub( $is, $plans, $subs, $employerPlan, $hubPlan, $now ) {
+		if ( $is || ! $employerPlan || empty( $plans ) || ! in_array( (int) $hubPlan, array_map( 'intval', (array) $plans ), true ) ) {
+			return (bool) $is;
+		}
+		return msh_nr_plan_live( $subs, $employerPlan, $now );
+	}
+}
+
+if ( ! function_exists( 'msh_nr_employer_access' ) ) {
+	/* Who may browse the register: an admin, a Hub Employer by role, or a
+	   Hub member Lou has ticked as a Hub Employer on their user screen (the
+	   add-on for recruiters who already use the Hub, Lou 14/10/2026). The
+	   tick never changes their role or plan. */
+	function msh_nr_employer_access( $isAdmin, $hasCap, $meta ) {
+		return (bool) $isAdmin || (bool) $hasCap || '1' === (string) $meta;
 	}
 }
 
@@ -1119,11 +1191,47 @@ if ( ! function_exists( 'msh_nr_learn_apply' ) ) {
 	}
 }
 
-/* Employers get their own role, given by Lou in Users > Edit. They can read
-   the Hub and browse the register, nothing else. */
+/* Hub Employers browse the register. Two ways in, both set by Lou in
+   Users > Edit:
+   * A recruiter who already uses the Hub keeps their role and plan, and Lou
+     ticks "Hub Employer" in the Nursing Register section (user meta
+     msh_nr_employer). It is an add-on, nothing else about them changes.
+   * An employer with no Hub membership gets the role "Hub Employer"
+     (msh_employer): read the Hub and browse the register, nothing else. */
 add_action( 'init', function () {
 	if ( ! get_role( 'msh_employer' ) ) {
 		add_role( 'msh_employer', 'Hub Employer', array( 'read' => true, 'msh_view_nurse_register' => true ) );
+	}
+} );
+
+add_filter( 'pms_is_member', function ( $is, $uid, $plans, $subs ) {
+	return msh_nr_counts_as_hub( $is, $plans, $subs, MSH_NR_EMPLOYER_PLAN, MSH_NR_HUB_PLAN, time() );
+}, 10, 4 );
+
+add_action( 'edit_user_profile', function ( $user ) {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+	$on     = '1' === (string) get_user_meta( $user->ID, 'msh_nr_employer', true );
+	$byRole = in_array( 'msh_employer', (array) $user->roles, true );
+	$byPlan = msh_nr_has_employer_plan( $user->ID );
+	echo '<h2>Nursing Register</h2><table class="form-table" role="presentation"><tr><th scope="row">Hub Employer</th><td>'
+		. '<label><input type="checkbox" name="msh_nr_employer" value="1"' . checked( $on, true, false ) . '> '
+		. 'Can browse the Nursing Register and ask for introductions</label>'
+		. '<p class="description">An add-on: their role and Hub plan stay as they are. '
+		. ( $byPlan ? 'They already have it through a paid Hub Employer subscription. ' : '' )
+		. ( $byRole ? 'They already have it through the Hub Employer role.' : 'Paying customers get it from the Hub Employer plan; tick this only for access you have agreed outside the plan.' )
+		. '</p></td></tr></table>';
+} );
+
+add_action( 'edit_user_profile_update', function ( $uid ) {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+	if ( ! empty( $_POST['msh_nr_employer'] ) ) {
+		update_user_meta( $uid, 'msh_nr_employer', '1' );
+	} else {
+		delete_user_meta( $uid, 'msh_nr_employer' );
 	}
 } );
 
