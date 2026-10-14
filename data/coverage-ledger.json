@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-10-12",
-  "differentiator.json published": 36842,
-  "differentiator.json held": 51707
+  "differentiator.json published": 36872,
+  "differentiator.json held": 51713
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 407,
-  "inScopeSuppliersNeedingCrawl": 254,
-  "inScopeSuppliersNeedingDomain": 236,
-  "suppliersRefused": 553,
+  "inScopeSuppliersNeedingCrawl": 250,
+  "inScopeSuppliersNeedingDomain": 232,
+  "suppliersRefused": 556,
   "suppliersRefusedButPublishingElsewhere": 120,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
@@ -1775,10 +1775,6 @@
      "domain": null
     },
     {
-     "supplier": "ESTS (GB)",
-     "domain": null
-    },
-    {
      "supplier": "Ethicheck",
      "domain": null
     },
@@ -1941,7 +1937,6 @@
     "Digostics",
     "E&O Laboratories",
     "ELITech UK",
-    "ESTS (GB)",
     "Edinburgh Genetics",
     "Ethicheck",
     "Exact Sciences UK",
@@ -2028,6 +2023,13 @@
      "domain": "www.dwscientific.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-25",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "ESTS (GB)",
+     "domain": "autoclave.uk.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-10-14",
      "bucket": "refused"
     },
     {
@@ -2261,7 +2263,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 58
+    "needDomain": 57
    },
    "published": [
     "Abbott Diagnostics",
@@ -2334,7 +2336,6 @@
     "E&O Laboratories",
     "Edinburgh Genetics",
     "ELITech UK",
-    "ESTS (GB)",
     "Ethicheck",
     "Exact Sciences UK",
     "Genetic Signatures",
@@ -2379,6 +2380,7 @@
     "CellPath",
     "Critical Healthcare",
     "Don Whitley Scientific",
+    "ESTS (GB)",
     "EUROIMMUN UK",
     "Fujifilm Healthcare UK",
     "Grifols UK Ltd",
@@ -2396,7 +2398,7 @@
     "Wolf Laboratories"
    ],
    "unknown": [],
-   "actionableTotal": 62,
+   "actionableTotal": 61,
    "blockedReason": null,
    "deferred": null
   },
@@ -10754,8 +10756,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "18 February 2027",
    "suppliersAwarded": 20,
-   "suppliersPublished": 7,
-   "coverage": 35.0,
+   "suppliersPublished": 8,
+   "coverage": 40.0,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -10765,7 +10767,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 20,
-   "coverageOfTarget": 35.0,
+   "coverageOfTarget": 40.0,
    "crawlWorklist": [
     {
      "supplier": "VWS (UK) Ltd",
@@ -10774,33 +10776,20 @@
     {
      "supplier": "Advanced Sterilization Products (UK) Limited",
      "domain": null
-    },
-    {
-     "supplier": "Avidity Science Limited",
-     "domain": null
-    },
-    {
-     "supplier": "Envirogen Water Technologies Limited",
-     "domain": null
-    },
-    {
-     "supplier": "ESTS (GB)",
-     "domain": null
-    },
-    {
-     "supplier": "MMM Medical Equipment UK Limited",
-     "domain": null
     }
    ],
    "domainsMissing": [
-    "Advanced Sterilization Products (UK) Limited",
-    "Avidity Science Limited",
-    "ESTS (GB)",
-    "Envirogen Water Technologies Limited",
-    "MMM Medical Equipment UK Limited"
+    "Advanced Sterilization Products (UK) Limited"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
+    {
+     "supplier": "Avidity Science Limited",
+     "domain": "avidityscience.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 2 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-10-14",
+     "bucket": "refused"
+    },
     {
      "supplier": "BMM Weston Limited",
      "domain": "bmmweston.com",
@@ -10813,6 +10802,20 @@
      "domain": "www.dekomed.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the sitemap carries 1 product URLs, too few to call a catalogue",
      "checked": "2026-08-25",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Envirogen Water Technologies Limited",
+     "domain": "envirogengroup.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-10-14",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "ESTS (GB)",
+     "domain": "autoclave.uk.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-10-14",
      "bucket": "refused"
     },
     {
@@ -10875,11 +10878,12 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 5
+    "needDomain": 1
    },
    "published": [
     "Ecolab",
     "Getinge",
+    "MMM Medical Equipment UK Limited",
     "Peacocks (Surgical and Medical Equipment) Limited",
     "Steris",
     "Sychem",
@@ -10896,20 +10900,19 @@
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Advanced Sterilization Products (UK) Limited",
-    "Avidity Science Limited",
-    "Envirogen Water Technologies Limited",
-    "ESTS (GB)",
-    "MMM Medical Equipment UK Limited"
+    "Advanced Sterilization Products (UK) Limited"
    ],
    "refused": [
+    "Avidity Science Limited",
     "BMM Weston Limited",
     "Dekomed Limited",
+    "Envirogen Water Technologies Limited",
+    "ESTS (GB)",
     "iM-MED Limited",
     "Lubron UK Limited"
    ],
    "unknown": [],
-   "actionableTotal": 8,
+   "actionableTotal": 4,
    "blockedReason": null,
    "deferred": null
   },

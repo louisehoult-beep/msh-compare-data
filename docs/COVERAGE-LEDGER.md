@@ -40,7 +40,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
-| Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 34 | 27.9% | 62 | 37 | STARTED |
+| Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 34 | 27.9% | 61 | 38 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 36 | 35.6% | 6 | 70 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 23 | 36.5% | 16 | 31 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 6 | 42 | STARTED |
@@ -69,7 +69,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Hand Hygiene and Associated Products and Services | infection | 21 | 5 | 23.8% | 3 | 15 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 4 | 11 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 6 | 28.6% | 0 | 11 | STARTED · 5 EXCLUDED |
-| Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 7 | 35.0% | 8 | 8 | STARTED |
+| Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 8 | 40.0% | 4 | 11 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 7 | 36.8% | 5 | 11 | STARTED |
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 9 | 47.4% | 5 | 10 | STARTED |
 | Examination Gloves | infection | 19 | 5 | 26.3% | 4 | 13 | STARTED |
