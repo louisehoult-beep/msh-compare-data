@@ -115,6 +115,9 @@ import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from redact_personal import redact_text  # public repo: no named individual's email in a summary (14/10/2026, FICM posts)
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 OUT_DIR = os.path.join(ROOT, "data", "speciality-news")
@@ -290,6 +293,9 @@ SOURCES = [
     # (no feed, 404); Guts UK (feed empty); ICNARC (last item 18/04/2024); Care Home Professional,
     # Homecare Insight (403 to this user agent); Alimentary Pharmacology & Therapeutics and
     # Anaesthesia/BJA (90+ items a month of international research, would bury the UK news).
+    # Faculty of Intensive Care Medicine (ficm.ac.uk/rss.xml) was added and taken out the same day: its
+    # items are committee vacancies, council elections and course adverts, and two carried staff email
+    # addresses, which failed verify.py's personal-contact gate.
     # Patient handling has no specialist feed anywhere found: its route is MHRA below.
     {"id": "bsa_audiology", "name": "British Society of Audiology", "url": "https://www.thebsa.org.uk/feed/",
      "specialities": ["audiology-and-hearing"]},
@@ -315,8 +321,6 @@ SOURCES = [
      "specialities": ["critical-care"]},
     {"id": "nursing_crit_care", "name": "Nursing in Critical Care",
      "url": "https://onlinelibrary.wiley.com/feed/14785153/most-recent",
-     "specialities": ["critical-care"]},
-    {"id": "ficm", "name": "Faculty of Intensive Care Medicine", "url": "https://www.ficm.ac.uk/rss.xml",
      "specialities": ["critical-care"]},
     # MHRA alerts, recalls and safety information (GOV.UK atom): keyword slice only, so each alert
     # reaches only the page its headline names. Carries the 16/09/2026 National Patient Safety Alert
@@ -344,6 +348,7 @@ def clip_summary(s, limit=SUMMARY_MAX):
     the last full sentence, else on the last whole word plus an ellipsis.
     Several feeds hand over an excerpt already cut mid-word, under the limit,
     so a summary with no closing punctuation is tidied whatever its length."""
+    s = redact_text(s or "")
     s = re.sub(r"\s*The post .{0,200}? appeared first on .*$", "", s or "", flags=re.I | re.S)
     s = re.sub(r"\s*(\[(…|\.\.\.)\]|\[\s*\]|…)\s*$", "", s).strip()
     if len(s) <= limit and (not s or re.search(r"[.!?\u201d\"\u2019')\]]$", s)):
