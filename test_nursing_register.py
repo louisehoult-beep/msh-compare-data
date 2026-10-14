@@ -41,6 +41,7 @@ foreach ($cases as $c) {
   elseif ($fn === 'contact') { $out[] = msh_nr_contact($a[0], $a[1], $a[2]); }
   elseif ($fn === 'regions') { $out[] = msh_nr_job_regions($a[0], $a[1]); }
   elseif ($fn === 'digest') { $out[] = msh_nr_digest_jobs($a[0], $a[1], $a[2]); }
+  elseif ($fn === 'access') { $out[] = msh_nr_employer_access($a[0], $a[1], $a[2]); }
   elseif ($fn === 'email') { $out[] = msh_nr_digest_email($a[0], $a[1], $a[2], $a[3]); }
 }
 echo json_encode($out);
@@ -239,6 +240,12 @@ class Snippet(unittest.TestCase):
         self.assertIn("midwife", self.call(("cv", ["Registered Midwife, delivery suite.", 2026]))[0]["registration"])
         # A future year is never the year qualified.
         self.assertIsNone(self.call(("cv", ["Registered nurse, qualified 2031. " * 10, 2026]))[0]["qualYear"])
+
+    def test_employer_access(self):
+        # Admin, the Hub Employer role, or the add-on tick on a Hub member.
+        got = self.call(("access", [True, False, ""]), ("access", [False, True, ""]), ("access", [False, False, "1"]),
+                        ("access", [False, False, ""]), ("access", [False, False, "0"]), ("access", [False, False, None]))
+        self.assertEqual(got, [True, True, True, False, False, False])
 
     def test_summary_email(self):
         p = self.clean(dict(GOOD, shareContact=True, jobsEmail=True))["profile"]
