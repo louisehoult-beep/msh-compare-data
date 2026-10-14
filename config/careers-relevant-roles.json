@@ -33,41 +33,134 @@
   "\\badmin assistant\\b"
  ],
  "categories": [
-  {"key": "key-account", "label": "Key account manager",
-   "patterns": ["\\bkey account\\b", "\\bkam\\b",
-                "\\b(strategic|national) accounts? (manager|director|lead)\\b"]},
-  {"key": "clinical-product-specialist", "label": "Clinical, application and product specialist",
-   "patterns": ["\\bclinical (sales |account )?specialists?\\b",
-                "\\bclinical applications?\\b",
-                "\\bapplications? (specialists?|scientists?|engineers?)\\b",
-                "\\bproduct specialists?\\b"]},
-  {"key": "sales-specialist", "label": "Sales specialist",
-   "patterns": ["\\bsales specialists?\\b", "\\bspecialist sales\\b"]},
-  {"key": "business-development", "label": "Business development",
-   "patterns": ["\\bbusiness development\\b", "\\bbdm\\b", "\\bnew business\\b"]},
-  {"key": "market-access", "label": "Market access",
-   "patterns": ["\\bmarket access\\b", "\\bvalue (and|&) access\\b", "\\breimbursement\\b"]},
-  {"key": "tenders-bids", "label": "Tenders, bids and contracts",
-   "patterns": ["\\btenders?\\b", "\\bbids?\\b",
-                "\\bcontracts? (manager|lead|specialist|executive)\\b"]},
-  {"key": "customer-success-clinical-support", "label": "Customer success and clinical support",
-   "patterns": ["\\bcustomer success\\b",
-                "\\bclinical support\\b",
-                "\\bclinical educators?\\b",
-                "\\bclinical (nurse )?advis(e|o)rs?\\b",
-                "\\bclinical trainers?\\b"]},
-  {"key": "territory-account", "label": "Territory and account manager",
-   "patterns": ["\\bterritory\\b", "\\barea sales (manager|executive)\\b",
-                "\\baccount managers?\\b"]},
-  {"key": "sales-management", "label": "Sales manager and director",
-   "patterns": ["\\bsales (manager|director|lead|leader)s?\\b",
-                "\\bhead of (sales|commercial)\\b",
-                "\\bcommercial (manager|director|lead)s?\\b",
-                "\\b(vp|vice president),? (of )?sales\\b"]},
-  {"key": "sales-rep", "label": "Sales representative and executive",
-   "patterns": ["\\bsales (representative|rep|executive|consultant|associate|engineer)s?\\b",
-                "\\bmedical (sales )?representatives?\\b",
-                "\\baccount executives?\\b",
-                "\\bfield sales\\b", "\\binside sales\\b"]}
- ]
+  {
+   "key": "key-account",
+   "label": "Key account manager",
+   "patterns": [
+    "\\bkey account\\b",
+    "\\bkam\\b",
+    "\\b(strategic|national) accounts? (manager|director|lead)\\b"
+   ]
+  },
+  {
+   "key": "clinical-product-specialist",
+   "label": "Clinical, application and product specialist",
+   "patterns": [
+    "\\bclinical (sales |account |development |solutions? )?specialists?\\b",
+    "\\bclinical applications?\\b",
+    "\\bapplications? (specialists?|scientists?|engineers?)\\b",
+    "\\bproduct specialists?\\b",
+    "\\bfield clinical (engineers?|specialists?)\\b"
+   ]
+  },
+  {
+   "key": "sales-specialist",
+   "label": "Sales specialist",
+   "patterns": [
+    "\\bsales( \\w+)? specialists?\\b",
+    "\\bspecialist sales\\b"
+   ]
+  },
+  {
+   "key": "business-development",
+   "label": "Business development",
+   "patterns": [
+    "\\bbusiness development\\b",
+    "\\bbdm\\b",
+    "\\bnew business\\b"
+   ]
+  },
+  {
+   "key": "market-access",
+   "label": "Market access",
+   "patterns": [
+    "\\bmarket access\\b",
+    "\\bvalue (and|&) access\\b",
+    "\\breimbursement\\b"
+   ]
+  },
+  {
+   "key": "tenders-bids",
+   "label": "Tenders, bids and contracts",
+   "patterns": [
+    "\\btenders?\\b",
+    "\\bbids?\\b",
+    "\\bcontracts? (manager|lead|specialist|executive)\\b"
+   ]
+  },
+  {
+   "key": "customer-success-clinical-support",
+   "label": "Customer success, clinical support and nurse advisor",
+   "patterns": [
+    "\\bcustomer success\\b",
+    "\\bclinical support\\b",
+    "\\bclinical (nurse )?advis(e|o)rs?\\b",
+    "\\bnurse (advis(e|o)rs?|educators?|specialists?|consultants?)\\b",
+    "\\b(homecare|home care|field[- ]based) nurses?\\b"
+   ]
+  },
+  {
+   "key": "medical-affairs",
+   "label": "Medical science liaison and medical affairs",
+   "patterns": [
+    "\\bmedical science liaisons?\\b",
+    "\\bmsls?\\b",
+    "\\bmedical affairs (manager|advis(e|o)r|lead|specialist)s?\\b"
+   ]
+  },
+  {
+   "key": "training-education",
+   "label": "Trainer and clinical educator",
+   "patterns": [
+    "\\btrainers?\\b",
+    "\\bclinical educators?\\b",
+    "\\beducation (specialist|manager|lead|consultant)s?\\b",
+    "\\btraining (manager|specialist|lead|consultant)s?\\b"
+   ]
+  },
+  {
+   "key": "product-marketing",
+   "label": "Product, brand and marketing manager",
+   "patterns": [
+    "\\bproduct (manager|marketing|owner|director)s?\\b",
+    "\\bbrand (manager|lead|director)s?\\b",
+    "\\bportfolio (manager|lead)s?\\b",
+    "\\bmarketing (manager|executive|lead|director|specialist)s?\\b"
+   ]
+  },
+  {
+   "key": "territory-account",
+   "label": "Territory and account manager",
+   "patterns": [
+    "\\bterritory\\b",
+    "\\barea sales (manager|executive)\\b",
+    "\\baccount managers?\\b"
+   ]
+  },
+  {
+   "key": "sales-management",
+   "label": "Sales manager and director",
+   "patterns": [
+    "\\bsales (manager|director|lead|leader)s?\\b",
+    "\\bhead of (sales|commercial)\\b",
+    "\\bcommercial (manager|director|lead)s?\\b",
+    "\\b(vp|vice president),? (of )?sales\\b",
+    "\\bcountry (manager|director)s?\\b",
+    "\\bregional business managers?\\b",
+    "\\bbusiness unit (manager|director|lead)s?\\b"
+   ]
+  },
+  {
+   "key": "sales-rep",
+   "label": "Sales representative and executive",
+   "patterns": [
+    "\\bsales (representative|rep|executive|consultant|associate|engineer)s?\\b",
+    "\\bmedical (sales )?representatives?\\b",
+    "\\baccount executives?\\b",
+    "\\bfield sales\\b",
+    "\\binside sales\\b"
+   ]
+  }
+ ],
+ "_widened": "14/10/2026 (Lou: 'product managers, trainers, nurse advisors in medical companies too'): added medical affairs/MSL, trainer and clinical educator, product and marketing manager; widened clinical specialist, nurse advisor, sales specialist and sales management patterns."
 }

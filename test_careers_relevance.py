@@ -68,6 +68,24 @@ IN = {
     "Customer Success Manager - Digital Health": "customer-success-clinical-support",
     "Clinical Support Specialist - Critical Care": "customer-success-clinical-support",
     "Clinical Nurse Advisor - Continence": "customer-success-clinical-support",
+    # Widened 14/10/2026 (Lou: product managers, trainers, nurse advisors too).
+    # Real titles from the file on 14/10/2026 first, then common UK titles.
+    "Clinical Development Specialist Electrophysiology London/South East UK":
+        "clinical-product-specialist",
+    "Sales Spine Specialist - East Anglia": "sales-specialist",
+    "Country Manager Heart Failure UK & Ireland": "sales-management",
+    "Regional Business Manager North UK & Ireland": "sales-management",
+    "Specialist Technical Trainer": "training-education",
+    "Marketing Manager (Reimbursed)": "product-marketing",
+    "Trade Marketing Manager": "product-marketing",
+    "Nurse Advisor - Stoma Care": "customer-success-clinical-support",
+    "Homecare Nurse - Field Based": "customer-success-clinical-support",
+    "Field Clinical Engineer - Cardiac": "clinical-product-specialist",
+    "Medical Science Liaison - Oncology": "medical-affairs",
+    "Clinical Educator - Wound Care": "training-education",
+    "Sales Trainer": "training-education",
+    "Product Manager - Surgical": "product-marketing",
+    "Brand Manager, Respiratory": "product-marketing",
 }
 
 OUT = [
