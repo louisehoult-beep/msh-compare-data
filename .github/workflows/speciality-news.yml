@@ -37,7 +37,10 @@ permissions:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # 20 -> 40, 14/10/2026: the publish gate alone takes ~11 minutes and the build ~3 more after the
+    # 14/10 feed additions, so one rejected push (rebase + re-gate) overran 20 and the run was
+    # cancelled with its commit unpushed (run 38550098651).
+    timeout-minutes: 40
     steps:
       # ref: main, not the default (the dispatch sha). A run queued behind
       # another writer in the concurrency group otherwise builds on the sha it
