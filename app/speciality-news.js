@@ -34,6 +34,14 @@
    for why this exists as a repo separate from cloud-pipeline. */
 (function () {
   var PAGE_ITEMS = 6;
+  // Lou, 14/10/2026: news "doesn't disappear but stays on the speciality
+  // pages until out of date, maybe a month". The file already holds a rolling
+  // month (build_speciality_news.py MAX_AGE_DAYS, 31); the page now shows all
+  // of it: the first PAGE_ITEMS open, the rest behind "Show all". Anything
+  // dated more than MAX_AGE_DAYS ago is dropped here too, so a stalled
+  // refresh can never leave stale news on a page. Undated and future-dated
+  // items (events) are kept, as the builder decides those.
+  var MAX_AGE_DAYS = 31;
   var BASE = 'https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/speciality-news/';
   var mounts = document.querySelectorAll('[data-speciality-news]');
   if (!mounts.length) { return; }
@@ -53,7 +61,11 @@
       '.msh .news-opp{display:inline-block;margin-right:6px;padding:1px 6px;border-radius:3px;',
       'background:#E0BE8E;color:#0B1C33;font-size:9px;font-weight:800;letter-spacing:1px;',
       'text-transform:uppercase;vertical-align:1px;}',
-      '.msh .news-opp.news-job{background:#F3E4E1;color:#7A4A44;border:1px solid #e3c3bd;}'
+      '.msh .news-opp.news-job{background:#F3E4E1;color:#7A4A44;border:1px solid #e3c3bd;}',
+      '.msh .news-more[hidden]{display:none;}',
+      '.msh .news-more-btn{display:inline-block;margin-top:8px;padding:6px 12px;border:1px solid var(--border);',
+      'border-radius:4px;background:transparent;color:inherit;font:inherit;font-size:12px;font-weight:700;cursor:pointer;}',
+      '.msh .news-more-btn:hover,.msh .news-more-btn:focus-visible{border-color:#A8842C;}'
     ].join('');
     document.head.appendChild(st);
   }
@@ -85,18 +97,25 @@
     return (sp > 40 ? s.slice(0, sp) : s).replace(/[\s,;:–-]+$/, '') + '…';
   }
 
+  function inDate(it) {
+    if (!it.published) { return true; }
+    var d = new Date(it.published);
+    if (isNaN(d.getTime())) { return true; }
+    return (Date.now() - d.getTime()) <= MAX_AGE_DAYS * 86400000;
+  }
+
   function render(mount, doc) {
-    // The file holds a rolling month for My Hub (30/09/2026); a speciality
-    // page's band stays at its six, opportunities first as the file orders them.
-    var items = ((doc && doc.items) || []).slice(0, PAGE_ITEMS);
+    // The whole rolling month, opportunities first as the file orders them.
+    var items = ((doc && doc.items) || []).filter(inDate);
     if (!items.length) { return; }   // additive only — nothing to add, so add nothing
     css();
     var body = '';
+    var more = '';
     var anyVerified = false;
     for (var i = 0; i < items.length; i++) {
       var it = items[i];
       if (it.verified) { anyVerified = true; }
-      body += '<div class="news-item">'
+      var html = '<div class="news-item">'
         + '<div class="news-date">' + esc(fmtDate(it.published)) + '</div>'
         + '<div>'
         + '<div class="news-t">'
@@ -106,6 +125,12 @@
         + (it.summary ? '<div class="news-b">' + esc(tidy(it.summary)) + '</div>' : '')
         + '<div class="news-src">' + esc(it.source) + '</div>'
         + '</div></div>';
+      if (i < PAGE_ITEMS) { body += html; } else { more += html; }
+    }
+    if (more) {
+      body += '<div class="news-more" hidden>' + more + '</div>'
+        + '<button type="button" class="news-more-btn" aria-expanded="false">'
+        + 'Show all ' + items.length + ' from the last month</button>';
     }
     // Lou, 16/09/2026: drop the "not individually checked" caveat — every item
     // already carries its source on its own line, which is what a reader needs
@@ -118,6 +143,16 @@
       + '<div class="news-live-lbl">' + label + '</div>'
       + body + '</div>';
     mount.insertAdjacentHTML('afterbegin', wrapper);
+    var btn = mount.querySelector('.news-live-wrap .news-more-btn');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        var box = mount.querySelector('.news-live-wrap .news-more');
+        var open = box.hasAttribute('hidden');
+        if (open) { box.removeAttribute('hidden'); } else { box.setAttribute('hidden', ''); }
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.textContent = open ? 'Show fewer' : 'Show all ' + items.length + ' from the last month';
+      });
+    }
   }
 
   for (var m = 0; m < mounts.length; m++) {
