@@ -1217,7 +1217,7 @@ add_action( 'edit_user_profile', function ( $user ) {
 	$byPlan = msh_nr_has_employer_plan( $user->ID );
 	echo '<h2>Nursing Register</h2><table class="form-table" role="presentation"><tr><th scope="row">Hub Employer</th><td>'
 		. '<label><input type="checkbox" name="msh_nr_employer" value="1"' . checked( $on, true, false ) . '> '
-		. 'Can browse the Nursing Register and ask for introductions</label>'
+		. 'Can browse the Nursing Register and the Medical Sales Register, and ask for introductions</label>'
 		. '<p class="description">An add-on: their role and Hub plan stay as they are. '
 		. ( $byPlan ? 'They already have it through a paid Hub Employer subscription. ' : '' )
 		. ( $byRole ? 'They already have it through the Hub Employer role.' : 'Paying customers get it from the Hub Employer plan; tick this only for access you have agreed outside the plan.' )

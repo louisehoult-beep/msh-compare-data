@@ -47,9 +47,10 @@
     + '<li><strong>Choose who sees you, then submit.</strong> Approved recruiters and employers can find you by region, speciality and skill. You decide whether they see your contact details, and whether you want new roles in your area emailed every Monday.</li>'
     + '<li><strong>Get your careers pack.</strong> When you submit, we email you a copy of your choices, and you can download Beyond the Bedside, our encyclopedia of nursing careers.</li></ol>';
   /* For recruiters and employers (Lou, 14/10/2026): browsing is the paid
-     Hub Employer plan (5167), which includes the Hub, bought at
-     /hub-employer/. Hub members are moved across by Lou. */
-  var RECRUITERS = '<div class="msg info"><strong>Recruiter or employer?</strong> Hub Employer gives you the Medical Sales Hub plus the Nursing Register: search nurses by region, speciality and skill, and ask us to introduce you. <a href="/hub-employer/">Become a Hub Employer</a>. Already on the Hub? Email <a href="mailto:louisehoult@elevateandthrive.uk?subject=Hub%20Employer%20subscription">louisehoult@elevateandthrive.uk</a> and we\'ll move you across.</div>';
+     Hub Employer plan (5167), which includes the Hub and both registers
+     (Nursing and Medical Sales), bought at /hub-employer/. Hub members are
+     moved across by Lou. */
+  var RECRUITERS = '<div class="msg info"><strong>Recruiter or employer?</strong> Hub Employer gives you the Medical Sales Hub plus both registers: search nurses here by region, speciality and skill, and medical sales professionals on the <a href="/medical-sales-register/">Medical Sales Register</a>, and ask us to introduce you. <a href="/hub-employer/">Become a Hub Employer</a>. Already on the Hub? Email <a href="mailto:louisehoult@elevateandthrive.uk?subject=Hub%20Employer%20subscription">louisehoult@elevateandthrive.uk</a> and we\'ll move you across.</div>';
   var LANDING = '<div class="nr"><h1>Join the Nursing Register</h1>'
     + '<p class="lede">' + PITCH + '</p>'
     + '<p class="sub">How it works</p>' + HOW
