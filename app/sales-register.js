@@ -184,6 +184,10 @@
     + '.sr-hero:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,transparent,#E0BE8E,transparent)}'
     + '.sr-eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#E0BE8E;margin:0 0 14px}.sr-eyebrow.dark{color:#14304F}'
     + '.sr h1{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:48px;line-height:1.08;margin:0 0 18px;color:#FFFFFF;max-width:760px}'
+    /* The theme colours headings navy with a stronger selector (seen live 14/10/2026). */
+    + '#msh-sales-register .sr-hero h1{color:#FFFFFF!important}#msh-sales-register .sr h2,#msh-sales-register .sr h3,#msh-sales-register .sr legend{color:#14304F!important}'
+    /* Full width on the default page template (rule 10): the page body's .msh carries alignfull. */
+    + '.msh.alignfull{max-width:none!important}'
     + '.sr-hero .lede{font-size:18px;color:#DBE3EE;max-width:680px;margin:0 0 28px}'
     + '.sr-btn{display:inline-block;background:#E0BE8E;color:#0B1C33;border:0;border-radius:6px;padding:13px 26px;font:700 15px Inter,Arial,sans-serif;cursor:pointer;text-decoration:none;letter-spacing:.01em}'
     + '.sr-btn:hover{background:#EDE7DC}.sr-btn.ghost{background:transparent;color:#14304F;border:1.5px solid #14304F}.sr-btn.ghost:hover{background:#14304F;color:#FFFFFF}'
