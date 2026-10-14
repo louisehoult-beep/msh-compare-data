@@ -327,6 +327,18 @@ SOURCES = [
     # on patient hoists and slings, which no feed had put on Patient Handling.
     {"id": "mhra_alerts", "name": "MHRA alerts and recalls", "url": "https://www.gov.uk/drug-device-alerts.atom",
      "specialities": []},
+    # Added 14/10/2026 for patient handling (Lou: "find the source for patient handling too"). Both are
+    # UK trade sources for the moving-and-handling and community equipment market, and both are broad
+    # (THIIS also covers stairlifts, wheelchairs and travel), so keyword slice only, never a whole-feed
+    # tag. Fetched 14/10/2026: THIIS 70 items in 31 days, BHTA 20. Their patient-handling hits that day:
+    # the MHRA hoist alert, a Community Equipment Loan Service contract award, a community equipment
+    # service tender, a tilt-in-space care chair, an under-mattress safety mat, a postural care relaunch.
+    # Not added: Arjo (investor-relations feed, half in Swedish), Prism Medical UK (one post a month),
+    # AT Today (last post 01/10/2025), NAEP (403), Etac, Sunrise Medical, Invacare, Winncare (no feed).
+    {"id": "thiis", "name": "THIIS Magazine", "url": "https://www.thiis.co.uk/feed/",
+     "specialities": [], "paged": True},
+    {"id": "bhta", "name": "British Healthcare Trades Association", "url": "https://www.bhta.com/feed/",
+     "specialities": [], "paged": True},
 ]
 
 
