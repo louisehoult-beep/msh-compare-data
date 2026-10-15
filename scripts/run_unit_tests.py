@@ -181,6 +181,12 @@ RUN = [
     # the Hub). Stdlib only, offline, no fetches, 0.006s. Registered here,
     # GitHub-actions-triage, 15/10/2026.
     "test_crawl_held_shapes.py",
+    # Added by 892080fb (^o635 round 2, 15/10/2026) alongside the Otto Bock/
+    # Optimum re-crawl fixes, but arrived unregistered and stopped this job
+    # dead (publish gate and gate self-test green throughout, so no bad data
+    # reached the Hub). Stdlib only, offline (every fetch is a fixture),
+    # 0.076s. Registered here, GitHub-actions-triage, 15/10/2026.
+    "test_crawl_round2_shapes.py",
 ]
 
 # A test that is red for a reason that is its own decision goes HERE, not out of
