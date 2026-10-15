@@ -4288,8 +4288,14 @@ for good in ["Stroke Central Monitor",
 # row (same buyer, same title, supplier then unnamed). Same contract, a stroke
 # patient transport service, so it is kept on this page. Read from the award feed
 # record (buyer, title, supplier, date); the notice itself was not opened.
-check("exactly fourteen, and every one of them was read",
-      sk["counts"]["awardsMatched"] == 14, "got %s" % sk["counts"]["awardsMatched"])
+# FIFTEEN FROM 15/10/2026: "PSR (Direct Award .A.) UHL Stroke Services 26-28"
+# (Leicestershire Partnership NHS Trust to University Hospitals of Leicester NHS
+# Trust, dated 14/10/2026, Find a Tender notice 097198-2026, framework-awards feed)
+# is a direct award of stroke services and belongs on this page. Read from the
+# award feed record (buyer, title, supplier, date); the notice itself was not
+# opened.
+check("exactly fifteen, and every one of them was read",
+      sk["counts"]["awardsMatched"] == 15, "got %s" % sk["counts"]["awardsMatched"])
 check("the Norfolk and Suffolk community stroke service is one of them",
       any("enhanced community stroke services" in (a.get("title") or "").lower()
           for a in sk["awards"]))
