@@ -223,14 +223,20 @@ def main() -> int:
         if not ref:
             continue
         name = r.get("Name", "").strip()
-        desc = redact_text(r.get("Description", "").strip())
+        authority = r.get("Contracting Authority", "").strip()
+        # 14/10/2026: an email the authority published in its own notice stays,
+        # attributed to it (redact_personal.published_note). Clipped to 1,200
+        # first so the note is never cut off; classify() reads the notice text
+        # without the note.
+        raw_desc = r.get("Description", "").strip()[:1200]
+        desc = redact_text(raw_desc, published_by=authority or None)
         route = r.get("Procurement Route", "").strip()
-        labels = classify(name, desc, route)
+        labels = classify(name, redact_text(raw_desc), route)
         rec = {
             "ref": ref,
             "name": name,
-            "authority": r.get("Contracting Authority", "").strip(),
-            "description": desc[:1200],
+            "authority": authority,
+            "description": desc,
             "category": r.get("Category", "").strip(),
             "procurement_route": route,
             "opens": parse_uk_date(r.get("Open On (dd/mm/yyyy)", "")),

@@ -562,7 +562,7 @@ def main() -> int:
                 log("  MATRIX  %-42s %3d products, %2d columns"
                     % (label[:42], len(parsed["products"]), len(parsed["columns"])))
         else:
-            summary = redact_text(pdf_text(dest, limit=4000))
+            summary = redact_text(pdf_text(dest, limit=4000), published_by="NHS Supply Chain")
             entry["summary"] = summary
             entry["has_text"] = bool(summary)
 

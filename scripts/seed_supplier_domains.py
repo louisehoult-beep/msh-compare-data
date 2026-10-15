@@ -676,9 +676,10 @@ def try_supplier(rec, ch_number, max_candidates):
                                           try_supplier.accept_name,
                                           try_supplier.allow_foreign)
             if kind:
+                dom = re.sub(r"^https?://", "", final).split("/")[0]
                 return {"name": name, "proof": kind, "foundBy": how,
-                        "domain": re.sub(r"^https?://", "", final).split("/")[0],
-                        "url": url, "evidence": redact_text(ev),
+                        "domain": dom,
+                        "url": url, "evidence": redact_text(ev, published_by=dom),
                         "companyNumber": num,
                         "checked": dt.date.today().isoformat()}
             tried.append((d, ev))

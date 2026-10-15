@@ -36,6 +36,18 @@ Two entry points, and one gate:
   redact_obj(obj)                              walk a JSON structure in place
   find_person_emails(text)                     what verify.py fails on
 
+ALREADY-PUBLISHED EMAILS ARE KEPT, ATTRIBUTED (Lou, 14/10/2026: "if the emails
+are already published they can be included with note to say published by
+whoever already and gdpr statement"). A generator that knows which organisation
+published the text it is copying passes `published_by=`. A person-shaped email
+in that text then stays, and the field ends with one note naming the publisher
+plus the data protection statement (PUBLISHED_NOTE). The gate fails only an
+email in a string that carries no such note. Where the publisher is not known
+for certain (hand-written trust profiles, the supplier index's mixed sources,
+Hub intelligence rows) nothing is passed and the email is withheld as before.
+A phone number that sits right after a kept email is still withheld: the
+ruling covered emails.
+
 Replacement wording is deliberately visible ("[contact details withheld]")
 rather than silent deletion: a member reading "Site visits should be arranged
 with [contact details withheld]" knows there IS a named route and goes to the
@@ -181,12 +193,67 @@ def _phone_unless_labelled_id(m):
     return m.group(0) if _ID_LABEL_RE.search(before) else "[phone withheld]"
 
 
-def redact_text(text, strip_all_phones: bool = False):
+# The data controller and contact are read from the Hub's own privacy page
+# (medsalesintelligencehub.co.uk/privacy-policy/, 14/10/2026). Change them here
+# only after re-reading that page.
+PUBLISHED_MARKER = "Contact details as published by "
+DATA_PROTECTION = ("Data protection: reproduced by Elevate and Thrive Ltd for professional "
+                   "contact about this item only. Anyone named can ask for their details to be "
+                   "removed at contact@elevateandthrive.uk.")
+
+
+def published_note(published_by: str) -> str:
+    return "[%s%s. %s]" % (PUBLISHED_MARKER, published_by.strip().rstrip("."), DATA_PROTECTION)
+
+
+def is_attributed(text) -> bool:
+    return isinstance(text, str) and PUBLISHED_MARKER in text
+
+
+# A phone right after a person's email that is being kept.
+_KEPT_EMAIL_PHONE_RE = re.compile(
+    r"(?P<email>" + EMAIL_RE.pattern + r")(?P<sep>[,;:/ ]{0,4}(?:tel(?:ephone)?\.?:?\s*|phone:?\s*|on\s+)?)"
+    r"(?P<phone>" + PHONE_RE.pattern + r")",
+    re.I,
+)
+
+
+def unattributed_person_emails(obj) -> list[str]:
+    """Person-shaped emails in any string of a JSON structure (or plain text)
+    that carries no PUBLISHED_MARKER. What verify.py fails on."""
+    found = set()
+
+    def walk(o):
+        if isinstance(o, dict):
+            for v in o.values():
+                walk(v)
+        elif isinstance(o, list):
+            for v in o:
+                walk(v)
+        elif isinstance(o, str) and "@" in o and not is_attributed(o):
+            found.update(find_person_emails(o))
+    walk(obj)
+    return sorted(found, key=str.lower)
+
+
+def redact_text(text, strip_all_phones: bool = False, published_by: str | None = None):
     """Remove person-shaped emails (and the phone that follows one). With
     strip_all_phones, every phone number goes too — use for text that is
-    about one named person, such as a trust profile people[].note."""
+    about one named person, such as a trust profile people[].note. With
+    published_by (the organisation that published this text), emails are kept
+    and the text ends with published_note(published_by) instead."""
     if not isinstance(text, str) or "@" not in text and not strip_all_phones:
         return text
+    if is_attributed(text) and not strip_all_phones:
+        return text   # already kept and attributed by the generator that wrote it
+    if published_by and find_person_emails(text):
+        def _keep(m):
+            return m.group("email") + m.group("sep") + (
+                "[phone withheld]" if is_person_email(m.group("email")) else m.group("phone"))
+        out = _KEPT_EMAIL_PHONE_RE.sub(_keep, text)
+        if strip_all_phones:
+            out = PHONE_RE.sub(_phone_unless_labelled_id, out)
+        return out.rstrip() + " " + published_note(published_by)
 
     def _sub(m):
         return "[email withheld]" if is_person_email(m.group(0)) else m.group(0)

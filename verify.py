@@ -828,7 +828,7 @@ def check_no_person_contact_details():
     push. Fix the generator, never the gate."""
     sys.path.insert(0, os.path.join(REPO_DIR, "scripts"))
     try:
-        from redact_personal import find_person_emails
+        from redact_personal import find_person_emails, unattributed_person_emails
     except Exception as e:  # pragma: no cover
         FAIL("personal-contact", "cannot import scripts/redact_personal.py (%s) — the gate "
                                  "cannot confirm no named individual's address is about to "
@@ -841,15 +841,25 @@ def check_no_person_contact_details():
     for rel in tracked:
         try:
             with open(os.path.join(REPO_DIR, rel), encoding="utf-8", errors="replace") as fh:
-                hits = find_person_emails(fh.read())
+                raw = fh.read()
         except OSError:
             continue
+        # 14/10/2026 (Lou): an email the publishing organisation itself made
+        # public may stay, if its field carries redact_personal.published_note()
+        # (publisher named + data protection statement). Only unattributed
+        # addresses fail.
+        try:
+            hits = unattributed_person_emails(json.loads(raw))
+        except ValueError:
+            hits = find_person_emails(raw)
         if hits:
             FAIL("personal-contact",
-                 "%s carries %d person-shaped email address(es) (%s%s). This repo is "
-                 "public: a named individual's contact details do not go in it. Run "
-                 "the text through scripts/redact_personal.py in the generator that "
-                 "wrote this file, then regenerate."
+                 "%s carries %d person-shaped email address(es) (%s%s) with no "
+                 "'published by' note. This repo is public: a named individual's email "
+                 "goes in only when the organisation that published it is named beside it. "
+                 "Pass the text through scripts/redact_personal.py redact_text(..., "
+                 "published_by=<organisation>) in the generator that wrote this file, or "
+                 "without published_by to withhold it, then regenerate."
                  % (rel, len(hits), ", ".join(hits[:4]), ", …" if len(hits) > 4 else ""))
 
 

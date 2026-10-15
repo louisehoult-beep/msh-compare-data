@@ -251,7 +251,7 @@ def main():
             "label": "Company website",
             "url": "https://" + r["domain"],
             "source": "Proved %s by registration number on %s: %s" % (
-                r["domain"], r["checked"], redact_text(r["evidence"]))})
+                r["domain"], r["checked"], redact_text(r["evidence"], published_by=r["domain"]))})
         n += 1
     # Keep whatever format the file already has — read the bytes, never assert
     # them. This hardcoded minified-on-one-line until 21/09/2026, by which time

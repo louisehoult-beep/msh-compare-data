@@ -16,7 +16,8 @@ import sys
 import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "scripts"))
-from redact_personal import redact_obj, redact_text  # noqa: E402
+from redact_personal import (redact_obj, redact_text, unattributed_person_emails,  # noqa: E402
+                             PUBLISHED_MARKER, DATA_PROTECTION)
 
 
 class LabelledIdentifiersSurvive(unittest.TestCase):
@@ -55,6 +56,42 @@ class RealPhonesStillGo(unittest.TestCase):
         out = redact_text(s)
         self.assertNotIn("07584538719", out)
         self.assertNotIn("ann.hamed", out)
+
+
+
+class PublishedEmailsKeptAndAttributed(unittest.TestCase):
+    """14/10/2026, Lou: an email the organisation itself published may stay,
+    with a note naming the publisher and a data protection statement."""
+    TEXT = "Site visits: jane.smith@leedsth.nhs.uk, 0113 243 3144, or procurement@leedsth.nhs.uk."
+
+    def test_kept_with_publisher_and_statement(self):
+        out = redact_text(self.TEXT, published_by="Leeds Teaching Hospitals NHS Trust")
+        self.assertIn("jane.smith@leedsth.nhs.uk", out)
+        self.assertIn(PUBLISHED_MARKER + "Leeds Teaching Hospitals NHS Trust.", out)
+        self.assertIn(DATA_PROTECTION, out)
+        self.assertNotIn("3144", out)            # the ruling covered emails, not phones
+        self.assertIn("procurement@leedsth.nhs.uk", out)
+
+    def test_no_publisher_still_withheld(self):
+        out = redact_text(self.TEXT)
+        self.assertNotIn("jane.smith", out)
+        self.assertNotIn(PUBLISHED_MARKER, out)
+
+    def test_no_person_email_no_note(self):
+        s = "Contact procurement@leedsth.nhs.uk."
+        self.assertEqual(redact_text(s, published_by="Leeds"), s)
+
+    def test_later_blanket_pass_keeps_attributed_text(self):
+        # build_supplier_index.py runs redact_obj over everything as a last pass.
+        kept = redact_text(self.TEXT, published_by="Leeds Teaching Hospitals NHS Trust")
+        doc = {"suppliers": [{"note": kept}]}
+        self.assertEqual(redact_obj(doc)["suppliers"][0]["note"], kept)
+
+    def test_gate_fails_only_unattributed(self):
+        kept = redact_text(self.TEXT, published_by="Leeds Teaching Hospitals NHS Trust")
+        self.assertEqual(unattributed_person_emails({"a": kept}), [])
+        self.assertEqual(unattributed_person_emails({"a": kept, "b": self.TEXT}),
+                         ["jane.smith@leedsth.nhs.uk"])
 
 
 if __name__ == "__main__":
