@@ -112,11 +112,42 @@ def test_worker_uses_the_merge():
           "worker() still compares item counts")
 
 
+
+def test_later_brands_get_their_own_search():
+    """^o355: a combined label's later brands are each searched, never only the first."""
+    seg = R.brand_segments("Venovo / Covera (venous stents)")
+    check(seg == [(["Covera"], "Covera")], "Covera not searched: %r" % (seg,))
+    seg = R.brand_segments("cobas pro / 5800 / 6800 / 8800")
+    check([q for q, _ in seg] == [["cobas 5800"], ["cobas 6800"], ["cobas 8800"]],
+          "bare model numbers must carry the first brand's word: %r" % (seg,))
+    check(R.brand_segments("RayOne Trifocal / RayOne Trifocal Toric") == [],
+          "a segment the first query already covers must not be searched again")
+    check(R.brand_segments("Biatain Silicone") == [], "a single-brand term has no later brands")
+    seg = R.brand_segments("Qora bowel/stoma range / BioPlus+ Barrier Film Wipe — NHS-Supply-Chain-confirmed")
+    check([b for _, b in seg] == ["BioPlus+"], "an unspaced slash is not a brand break: %r" % (seg,))
+    seg = R.brand_segments("Agilia / Volumat infusion pump administration sets; CATSmart intra-operative autotransfusion system")
+    check([b for _, b in seg] == ["Volumat", "CATSmart"], "a semicolon separates brands: %r" % (seg,))
+
+
+def test_later_brand_cards_must_carry_the_brand():
+    check(R.segment_name_ok("Covera", "COVERA PLUS VASCULAR COVERED STENT"), "Covera card rejected")
+    check(R.segment_name_ok("Safety-Lok", "BD Safety-Lok blood collection set"), "hyphenated brand rejected")
+    check(not R.segment_name_ok("Covera", "VENOVO VENOUS STENT"), "a card without the brand was accepted")
+
+
+def test_worker_searches_later_brands():
+    src = inspect.getsource(R.worker)
+    check("brand_segments(" in src and "segment_name_ok(" in src,
+          "worker() does not search a combined label's later brands")
+
 for fn in (test_same_size_fresh_set_keeps_the_line_it_did_not_return,
            test_larger_fresh_set_keeps_the_line_it_did_not_return,
            test_smaller_fresh_set_still_takes_its_new_values,
            test_no_duplicates_and_npc_less_rows_kept,
-           test_worker_uses_the_merge):
+           test_worker_uses_the_merge,
+           test_later_brands_get_their_own_search,
+           test_later_brand_cards_must_carry_the_brand,
+           test_worker_searches_later_brands):
     try:
         fn()
     except Exception as exc:                                        # noqa: BLE001

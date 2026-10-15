@@ -66,6 +66,61 @@ def candidates(name):
         if q.lower() not in seen: seen.add(q.lower()); uniq.append(q)
     return uniq
 
+def brand_segments(name):
+    """The later brands of a combined seed label, each as its own search text.
+
+    ^o355 (15/10/2026). A seed term written "Venovo / Covera (venous stents)"
+    was only ever searched as its first brand: candidates() turns "/" into a
+    space and keeps the first two words, and the worker stopped at the first
+    query that found a card. 99 curated terms carried 131 later brands that
+    had never been asked for (Covera, Vanguard, Corail, Pangea...).
+
+    Returns (queries, brand_word) pairs for the label's segments AFTER the
+    first, split on " / " (spaced, so "bowel/stoma" stays one phrase) and ";", with parentheticals and any trailing
+    " — note" removed. The first segment is not returned: it is still searched
+    exactly as before, through the previous query and candidates(), so
+    nothing that matched before changes. A segment whose first word the first
+    segment already starts with ("RayOne Trifocal / RayOne Trifocal Toric") is
+    dropped, because the first query already covers it. A bare number
+    ("cobas pro / 5800") is searched with the first brand's first word in
+    front of it ("cobas 5800"). queries follow candidates(): first two words,
+    then the first word alone. brand_word is the segment's own first word
+    ("Safety-Lok" whole), which a card found by those queries must carry in
+    its name.
+    """
+    if '/' not in name and ';' not in name:
+        return []
+    body = re.sub(r'\([^)]*\)', ' ', name)
+    body = re.sub(r'\(.*', ' ', body)            # an unclosed parenthetical
+    parts = re.split(r'\s+/\s+|\s*;\s*', body)
+    parts = [re.split(r'\s+[\u2014\u2013]\s+|\s+-\s+', x)[0].strip(' ,.') for x in parts]
+    parts = [x for x in parts if x]
+    if len(parts) < 2:
+        return []
+    def words(x):
+        return [t for t in re.sub(r'[^A-Za-z0-9+ ]', ' ', x).split() if t]
+    head = words(parts[0])
+    out, seen = [], {head[0].lower()} if head else set()
+    for seg in parts[1:]:
+        w = words(seg)
+        if not w or w[0].lower() in seen:
+            continue
+        seen.add(w[0].lower())
+        if w[0].isdigit() and head:
+            qs = [head[0] + ' ' + w[0]]
+        else:
+            qs = ([' '.join(w[:2])] if len(w) >= 2 else []) + [w[0]]
+        out.append((qs, seg.split()[0]))
+    return out
+
+def segment_name_ok(brand_word, card_name):
+    """A card found by a later brand's own query must carry that brand's word
+    in its name. Stricter than name_ok() on the whole label, which would let
+    any card sharing one generic word ("wound", "dressings") through."""
+    k = re.sub(r'[^a-z0-9]', '', (brand_word or '').lower())
+    cn = re.sub(r'[^a-z0-9]', '', (card_name or '').lower())
+    return bool(k and cn and k in cn)
+
 def merge_items(prev_items, fresh_items):
     """A term's refreshed item list: every fresh card, then every previously
     cached line the fresh search did not return, deduplicated by NPC.
@@ -121,25 +176,46 @@ async def worker(browser, batch, results, counter, total):
         prev_sup_tokens = norm(prev['items'][0]['supplier']) if prev_is_sound else set()
         found, used_q = [], ''
         seen_q = set()
-        for q in queries:
-            if q.lower() in seen_q: continue
-            seen_q.add(q.lower())
+
+        async def search(q):
             try:
                 await page.goto('https://pilot.supplychain.nhs.uk/search?query=' + q.replace(' ','%20'),
                                 timeout=15000, wait_until='domcontentloaded')
                 try: await page.wait_for_selector('div.cardWrapper', timeout=6000)
                 except Exception: pass
                 await page.wait_for_timeout(300)
-                cards = await page.evaluate(EXTRACT_JS)
-            except Exception: cards = []
+                return await page.evaluate(EXTRACT_JS)
+            except Exception: return []
+
+        def accept(p, ok_name):
+            if not p or not p['npc'] or not ok_name(p['name']): return False
+            if off_category_mismatch(job['supplierRaw'], p['supplier']): return False
+            return bool(job['supTokens'] & norm(p['supplier'])) or bool(prev_sup_tokens & norm(p['supplier']))
+
+        for q in queries:
+            if q.lower() in seen_q: continue
+            seen_q.add(q.lower())
+            cards = await search(q)
             if not cards: continue
             for c in cards:
                 p = parse_card(c)
-                if not p or not p['npc'] or not name_ok(job['key'], p['name']): continue
-                if off_category_mismatch(job['supplierRaw'], p['supplier']): continue
-                sup_hit = bool(job['supTokens'] & norm(p['supplier'])) or bool(prev_sup_tokens & norm(p['supplier']))
-                if sup_hit: found.append(p)
+                if accept(p, lambda n: name_ok(job['key'], n)): found.append(p)
             if found: used_q = q; break
+        # ^o355: every later brand in a combined label gets its own search, and
+        # its hits are merged into the same term. Before 15/10/2026 the loop
+        # above was the whole search, so "Venovo / Covera" never asked for Covera.
+        searches_hit = 1 if found else 0
+        for seg_qs, brand_word in brand_segments(job['key']):
+            for q in seg_qs:
+                if q.lower() in seen_q: continue
+                seen_q.add(q.lower())
+                cards = await search(q)
+                hit = [p for p in (parse_card(c) for c in cards or [])
+                       if accept(p, lambda n, bw=brand_word: segment_name_ok(bw, n))]
+                if hit:
+                    found.extend(hit); searches_hit += 1
+                    if not used_q: used_q = q
+                    break
         if found:
             seen, keep = set(), []
             for p in sorted(found, key=lambda x: (1 if x['status'] else 0)):
@@ -169,7 +245,9 @@ async def worker(browser, batch, results, counter, total):
             # Hartmann and 97 others), so discarding their lines was the single
             # biggest self-inflicted coverage gap in the Differentiator.
             NHSSC_ITEM_CAP = 60
-            fresh_items = keep[:NHSSC_ITEM_CAP]
+            # The cap is per search page, so a combined label whose later brands
+            # were searched too (^o355) keeps up to the cap from each page.
+            fresh_items = keep[:NHSSC_ITEM_CAP * max(1, searches_hit)]
             # MERGE BY NPC, never compare counts (28/09/2026) — see merge_items().
             # The cap above limits what one search page adds, not what the
             # term keeps: a merged list may exceed it, same as never-shrink.

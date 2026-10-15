@@ -36,7 +36,10 @@ permissions:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    # 90 -> 120, 15/10/2026 (^o355): the NHSSC step now also searches every later
+    # brand of a combined seed label (up to ~950 extra searches, ~15 min). Runs
+    # took 50-60 min before; this keeps the headroom, it does not skip any check.
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v5
         with:
