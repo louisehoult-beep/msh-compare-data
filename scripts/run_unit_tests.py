@@ -175,6 +175,12 @@ RUN = [
     "test_my_hub_logic.py",
     "test_my_hub_ui.py",             # 2026-10, My Hub modules wired, copy rules
     "test_my_hub_state.py",          # 2026-10, PHP snippet and browser client agree (php, node; skipped where absent)
+    # Added by 748ae43d (^o635, 15/10/2026) with scripts/crawl_supplier_site.py's
+    # tidy_capture() fix, but arrived unregistered and stopped this job dead
+    # (publish gate and gate self-test green throughout, so no bad data reached
+    # the Hub). Stdlib only, offline, no fetches, 0.006s. Registered here,
+    # GitHub-actions-triage, 15/10/2026.
+    "test_crawl_held_shapes.py",
 ]
 
 # A test that is red for a reason that is its own decision goes HERE, not out of
