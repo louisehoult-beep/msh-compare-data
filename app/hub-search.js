@@ -456,7 +456,7 @@
     ['digital', '/medical-sales-hub/digital-and-medical-it/', 'Digital and Medical IT'],
     ['sepsis', '/medical-sales-hub/sepsis-and-the-deteriorating-patient/', 'Sepsis and the Deteriorating Patient'],
     ['frailty', '/medical-sales-hub/frailty-and-older-people/', 'Frailty and Older People'],
-    ['falls', '/medical-sales-hub/fall-prevention-medical-sales-market-insights/', 'Fall Prevention'],
+    ['falls', '/medical-sales-hub/frailty-and-older-people/', 'Frailty and Older People'],
     ['emergency', '/medical-sales-hub/emergency-and-urgent-care/', 'Emergency and Urgent Care'],
     ['mental health', '/medical-sales-hub/mental-health/', 'Mental Health'],
     ['palliative', '/medical-sales-hub/palliative-and-end-of-life-care/', 'Palliative and End-of-Life Care'],

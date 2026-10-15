@@ -113,7 +113,7 @@ class MyHubIconsBandsProfiles(unittest.TestCase):
                 self.assertIn(r, self.byid[pid]["profiles"], "%s starter %s is not in the %s nav" % (r, pid, r))
 
 
-EXTRA_TOOL_PAGES = {"/critecocare-tool-example/"}
+EXTRA_TOOL_PAGES = set()  # CritEcoCare demo page 2045 retired 15/10/2026
 TOOLS_12B = {
     "tool-supplier-search": ("Supplier Search", "/medical-sales-hub/med-sales-tools/#view-compare"),
     "tool-compare-product": ("Compare Your Product", "/medical-sales-hub/med-sales-tools/#view-compare"),
@@ -122,12 +122,10 @@ TOOLS_12B = {
     "tool-value-case-calculator": ("Value Case Calculator", "/medical-sales-hub/med-sales-tools/#view-value"),
     "tool-wound-savings-calculator": ("Wound Care Savings Calculator", "/medical-sales-hub/med-sales-tools/#view-value"),
     "tool-carbon-calculator": ("Sustainability (Carbon) Calculator", "/medical-sales-hub/med-sales-tools/#view-value"),
-    "tool-sustainability-comparison": ("Sustainability Comparison Tool", "/critecocare-tool-example/"),
 }
 SPECIALITY_TAGGED = {
     "tool-wound-savings-calculator": ["tissue-viability-and-wound-care"],
     "intelligence-feed": ["theatres-and-surgical"],
-    "fall-prevention-medical-sales-market-insights": ["frailty-and-older-people"],
     "pharmaceutical-sales": ["pharmacy-and-medicines"],
 }
 

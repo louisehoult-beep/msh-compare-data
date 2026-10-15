@@ -135,7 +135,7 @@ class MyHubUi(unittest.TestCase):
             self.assertIn(id_, wide["tools"], id_)
         narrow = self._tool_lists({"renal": 1}, True)
         self.assertIn("tool-supplier-search", narrow["tools"], "general tools stay")
-        for id_ in ("tool-wound-savings-calculator", "intelligence-feed", "pharmaceutical-sales", "fall-prevention-medical-sales-market-insights"):
+        for id_ in ("tool-wound-savings-calculator", "intelligence-feed", "pharmaceutical-sales"):
             self.assertNotIn(id_, narrow["tools"], id_)
         hit = self._tool_lists({"tissue-viability-and-wound-care": 1}, True)
         self.assertIn("tool-wound-savings-calculator", hit["tools"])
