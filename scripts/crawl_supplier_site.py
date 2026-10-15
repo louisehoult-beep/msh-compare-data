@@ -1259,6 +1259,7 @@ _EMPTY_WORDS = {"new", "ons", "le", "la", "d", "de", "our", "the", "here", "page
 
 
 UK_LOCALE_SEGMENTS = {"en-gb", "en_gb", "en-uk", "uk", "gb"}
+_LOCALE_SEGMENT_RE = re.compile(r"/[a-z]{2}[-_][a-z]{2}/", re.I)
 
 
 def is_download_leaf(slug):
@@ -1428,6 +1429,45 @@ def _h1_kicker_division(body):
     return kicker
 
 
+SENTENCE_H1_WORDS = 6
+
+
+def _title_product_name(body):
+    """The page <title> (or og:title) with the trailing " | Site Name" removed,
+    or None. Only the part before the first " | ", " - " or en/em dash separator
+    is the page's own name."""
+    m = re.search(r"<title[^>]*>(.*?)</title>", body, re.S | re.I)
+    t = clean(m.group(1)) if m else None
+    if not t:
+        m = re.search(r'<meta[^>]+property=["\']og:title["\'][^>]*content=["\']([^"\']*)', body, re.I)
+        t = clean(m.group(1)) if m else None
+    if not t:
+        return None
+    t = re.split(r"\s+[|\u2013\u2014\u00b7]\s+|\s+-\s+", t)[0].strip()
+    return t or None
+
+
+def _sentence_h1_or_title(h1, body):
+    """A heading of SENTENCE_H1_WORDS or more words is a marketing tagline, not
+    a product name (medical.sectra.com, 15/10/2026: <h1>Print your orthopaedic
+    cases in 3D</h1> on the page titled "Sectra 3D Print | Sectra Medical").
+    Where the page's own <title> gives a name with fewer words, that is the
+    name; otherwise the heading stays, so a site whose titles are no better is
+    unchanged."""
+    if len(h1.split()) < SENTENCE_H1_WORDS:
+        return h1
+    t = _title_product_name(body)
+    if t and len(t.split()) < len(h1.split()) and t.lower() != h1.lower():
+        # A long heading that CONTAINS the title's name is a product name with its
+        # descriptor ("AQUACEL Ribbon Dressing with Strengthening Fibre", title
+        # "AQUACEL Ribbon Dressing"), not a tagline: keep it.
+        key = lambda x: re.sub(r"[^a-z0-9]+", "", re.sub(r"[\u00ae\u2122\u00a9]", "", x.lower()))
+        if key(t) in key(h1):
+            return h1
+        return t
+    return h1
+
+
 def _page_title(body):
     """Real product name from a numeric-slug page's own record — schema.org
     markup first, then a bare <h1>, then <title> (stripped of a trailing
@@ -1453,12 +1493,12 @@ def _page_title(body):
     # kicker is the site's category and _h1_kicker_division reads it separately.
     _, rest = _h1_kicker(body)
     if rest:
-        return rest
+        return _sentence_h1_or_title(rest, body)
     m = re.search(r"<h1[^>]*>(.*?)</h1>", body, re.S)
     if m:
         t = clean(m.group(1))
         if t:
-            return t
+            return _sentence_h1_or_title(t, body)
     m = re.search(r"<title>(.*?)</title>", body, re.S)
     if not m:
         return None
@@ -1849,8 +1889,12 @@ def robots_sitemaps(domain):
     return out
 
 
+BLOG_PATH_SEGMENTS = {"blog", "news", "press", "press-releases", "newsroom"}
+
+
 def sitemap_products(domain, deadline=None, product_paths=None):
     seen, urls = set(), []
+    blog_post_urls, product_sitemap_urls = set(), set()
     # Declared sitemaps first, then the conventional paths (^o469 follow-up).
     to_read = robots_sitemaps(domain)
     for u in ("https://%s/sitemap.xml" % domain, "https://%s/sitemap_index.xml" % domain):
@@ -1908,13 +1952,47 @@ def sitemap_products(domain, deadline=None, product_paths=None):
             candidates.sort(key=lambda l: (
                 0 if any("/%s/" % seg in l.lower() for seg in UK_LOCALE_SEGMENTS) else 1,
                 0 if "product" in l.lower() else 1))
+            # A LOCALE INDEX WITH A UK ENTRY: READ THE UK ONE, NOT SEVEN OTHER MARKETS
+            # (15/10/2026). ottobock.com's index lists ~50 per-market sitemaps
+            # (/it-it/, /fr-ca/, /en-us/ ...); the first 8 read included Italian and
+            # French ones, which mixed other languages' product names and
+            # divisions into the UK range (1064 products, 135 divisions). Where a
+            # UK-locale sitemap is in the index, the other locale-prefixed ones
+            # are not read. Unprefixed sub-sitemaps are kept.
+            uk_cands = [l for l in candidates
+                        if any("/%s/" % seg in l.lower() for seg in UK_LOCALE_SEGMENTS)]
+            if uk_cands:
+                candidates = [l for l in candidates
+                              if l in uk_cands or not _LOCALE_SEGMENT_RE.search(l)]
             to_read.extend(candidates[:8])
             continue
         urls.extend(locs)
+        sname = urllib.parse.urlparse(u).path.rsplit("/", 1)[-1].lower()
+        if re.match(r"post-sitemap\d*\.xml$", sname):
+            blog_post_urls.update(locs)
+        elif "product" in sname:
+            product_sitemap_urls.update(locs)
 
     segs = tuple(product_paths) if product_paths else PRODUCT_PATHS
     pat = r"/(%s)/" % "|".join(re.escape(x) for x in segs)
     prod = [u for u in urls if re.search(pat, u, re.I)]
+
+    # BLOG POSTS ARE NOT PRODUCTS (15/10/2026). optimummedical.co.uk publishes its
+    # blog posts at /products/<slug>/ (a WordPress permalink choice), so the
+    # path cannot tell a post from a product: 46 of its 86 captured "products"
+    # were posts ("Earth Day 2023 - Optimum Medical"). Two structural tests, no
+    # name-guessing: (1) a URL listed ONLY in WordPress's core `post-sitemap.xml`
+    # is a blog post, and is dropped when the site also has a sitemap of its own
+    # named for products with at least MIN_PRODUCTS URLs; (2) a URL with a
+    # /blog/, /news/ or /press/ path segment is dropped.
+    before = len(prod)
+    if len(product_sitemap_urls) >= MIN_PRODUCTS:
+        prod = [u for u in prod if u not in blog_post_urls or u in product_sitemap_urls]
+    prod = [u for u in prod
+            if not (set(urllib.parse.urlparse(u).path.lower().strip("/").split("/")) & BLOG_PATH_SEGMENTS)]
+    if len(prod) < before:
+        print("      dropped %d blog post / news URL(s) that sit under the product path"
+              % (before - len(prod)), flush=True)
 
     # THE SAME URL CAN BE LISTED MORE THAN ONCE IN THE SITEMAP ITSELF
     # (05/09/2026). Not a locale variant — the literal, identical URL
@@ -2033,6 +2111,19 @@ def sitemap_products(domain, deadline=None, product_paths=None):
         paths = [([], rest, u) for pre, rest, u in uk]
         print("      kept the UK-prefixed catalogue (%d URLs) over the site's unprefixed "
               "one, which is another market's" % len(paths), flush=True)
+    elif uk and len({tuple(pre) for pre, _, _ in paths}) > 1:
+        # No unprefixed catalogue, but SEVERAL locale prefixes, one of them UK
+        # (ottobock.com, 15/10/2026: /en-gb/product/, /it-it/product/,
+        # /fr-fr/product/ ...). Same reasoning as the branch above: this Hub is
+        # for UK members, so the UK-prefixed catalogue is kept and every other
+        # market's copy is the duplicate. A site with one prefix, or none that
+        # is UK, is unchanged.
+        dropped_locale = len(paths) - len(uk)
+        paths = [([], rest, u) for pre, rest, u in uk]
+        print("      kept the UK-locale catalogue (%d URLs); dropped %d URL(s) under other "
+              "locale prefixes, which are other markets' copies" % (len(paths), dropped_locale),
+              flush=True)
+        dropped_locale = 0
     elif has_root:
         kept = [(pre, rest, u) for pre, rest, u in paths if not pre]
         dropped_locale = len(paths) - len(kept)
