@@ -2833,6 +2833,94 @@ def crawl(domain):
     return None, "%s; %s; %s; %s" % (why, why4, why2, why3)
 
 
+# THREE SHAPES THAT HELD TEN RE-CRAWLS ON 09/10/2026 (^o635, fixed 15/10/2026).
+# Measured on fresh captures, 15/10/2026, not assumed:
+#   1. THE BREADCRUMB'S LAST CRUMB IS THE PRODUCT ITSELF. pdi-intl.com,
+#      macromed.co.uk and wellandmedical.com print "Home > Products > <product>",
+#      so the per-page route read each product as its own division: PDI 32
+#      products in 32 divisions, Macromed 44 in 44, Welland 47 in 43. One
+#      division per product is not a filing structure, and printing it as one
+#      claims a grouping the company never made.
+#   2. FAQ QUESTIONS READ AS PRODUCTS. vitalograph.com files FAQ pages under its
+#      product path ("Are Eco BVFs suitable for spirometers ...?").
+#   3. FORM-CONFIRMATION PAGES READ AS PRODUCTS. omnipod.com: two records named
+#      "Thanks".
+# tidy_capture() applies all three to ANY route's result before the distinct-name
+# test in main(). It drops nothing that names a product: a division equal to its
+# own product name becomes "Uncategorised" (the honest flat state, as Lou ruled
+# 25/08/2026), and only question-form names and the exact confirmation-page
+# titles below are removed.
+_CONFIRMATION_PAGE_NAMES = {"thanks", "thank you", "thankyou", "thank-you"}
+ONE_DIVISION_PER_PRODUCT_RATIO = 0.8
+
+
+def _div_key(s):
+    s = re.sub(r"[\u00ae\u2122\u00a9]", "", str(s or "")).lower()
+    s = re.sub(r"[^a-z0-9]+", "", s)
+    return s[:-1] if s.endswith("s") else s
+
+
+def is_junk_product_name(n):
+    t = str(n or "").strip()
+    return t.endswith("?") or t.lower().strip(" !.") in _CONFIRMATION_PAGE_NAMES
+
+
+def tidy_capture(shaped):
+    """Returns (shaped, notes). shaped is changed in place; notes say what changed."""
+    if not shaped:
+        return shaped, []
+    rows = shaped.get("products") or []
+    notes = []
+    kept = [p for p in rows if not is_junk_product_name(p.get("n"))]
+    if len(kept) != len(rows):
+        notes.append("%d FAQ question or form-confirmation page(s) dropped" % (len(rows) - len(kept)))
+    self_div = 0
+    for p in kept:
+        d = p.get("division") or "Uncategorised"
+        if d != "Uncategorised" and (_div_key(d) == _div_key(p.get("n"))
+                                     or (len(_div_key(d)) >= 6 and (_div_key(d) in _div_key(p.get("n"))
+                                                                    or _div_key(p.get("n")) in _div_key(d)))):
+            p["division"] = "Uncategorised"
+            self_div += 1
+    if self_div:
+        notes.append("%d product(s) whose breadcrumb division was the product's own name filed as "
+                     "unsorted" % self_div)
+    real = {p.get("division") for p in kept if (p.get("division") or "Uncategorised") != "Uncategorised"}
+    # When most of the range named itself as its own division, the site's
+    # breadcrumb is "Home > <product>" throughout, and the few left over are the
+    # same shape with slightly different wording (Wassenburg's crumb "WD4200
+    # Toploader endoscope washer-disinfector" on the page "WD4200 Toploader
+    # endoscope reprocessor"). Those are not a structure either.
+    if real and self_div * 2 >= len(kept):
+        for p in kept:
+            p["division"] = "Uncategorised"
+        notes.append("the rest filed as unsorted too, because the site's breadcrumb names the "
+                     "product, not a division")
+        real = set()
+    if len(kept) >= 10 and len(real) >= ONE_DIVISION_PER_PRODUCT_RATIO * len(kept):
+        for p in kept:
+            p["division"] = "Uncategorised"
+        notes.append("%d divisions for %d products is one per product, not a filing structure, "
+                     "so the range is shown flat" % (len(real), len(kept)))
+    if not notes:
+        return shaped, notes
+    counts = {}
+    for p in kept:
+        d = p.get("division") or "Uncategorised"
+        counts[d] = counts.get(d, 0) + 1
+    shaped["products"] = kept
+    shaped["divisions"] = [{"name": k, "products": v}
+                           for k, v in sorted(counts.items(), key=lambda kv: -kv[1])]
+    uncat = counts.get("Uncategorised", 0)
+    has = any(k != "Uncategorised" for k in counts) and uncat * 2 <= len(kept)
+    shaped["hasDivisions"] = has
+    if not has:
+        shaped["structure"] = "No division structure found — listed as one flat range."
+    shaped["captureCaveat"] = (shaped.get("captureCaveat") or "").rstrip() + \
+        " Tidied after reading: " + "; ".join(notes) + "."
+    return shaped, notes
+
+
 def domain_for(rec):
     for l in (rec.get("links") or []):
         u = l.get("url") if isinstance(l, dict) else l
@@ -3038,6 +3126,11 @@ def main():
                 save(doc)
             continue
         shaped, why = crawl(domain)
+        shaped, tidy_notes = tidy_capture(shaped)
+        if tidy_notes:
+            print("      " + "; ".join(tidy_notes), flush=True)
+        if shaped and len(shaped.get("products") or []) < MIN_PRODUCTS:
+            shaped, why = None, "fewer than %d products left once FAQ and confirmation pages were dropped" % MIN_PRODUCTS
         if shaped:
             # DISTINCT NAMES, NOT ROW COUNT, ARE WHAT MAKES A CATALOGUE.
             # Every route already refuses a capture with fewer than MIN_PRODUCTS
