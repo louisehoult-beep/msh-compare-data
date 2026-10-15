@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-10-12",
-  "differentiator.json published": 36872,
-  "differentiator.json held": 51713
+  "differentiator.json published": 36881,
+  "differentiator.json held": 51758
  },
  "counts": {
   "frameworks": 122,
@@ -27,8 +27,8 @@
   "supplierNamesUnresolved": 407,
   "inScopeSuppliersNeedingCrawl": 250,
   "inScopeSuppliersNeedingDomain": 232,
-  "suppliersRefused": 556,
-  "suppliersRefusedButPublishingElsewhere": 120,
+  "suppliersRefused": 555,
+  "suppliersRefusedButPublishingElsewhere": 119,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
   "blockedFrameworks": 3,
@@ -4132,13 +4132,6 @@
      "bucket": "published"
     },
     {
-     "supplier": "Creo Medical Limited",
-     "domain": "www.creomedical.com",
-     "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "published"
-    },
-    {
      "supplier": "GBUK Group",
      "domain": null,
      "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
@@ -4774,10 +4767,10 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Creo Medical Limited",
-     "domain": "www.creomedical.com",
-     "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
+     "supplier": "CD Medical Ltd",
+     "domain": "cdmedical.co.uk",
+     "reason": "the site's WordPress API could not be read (<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate ); the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-26",
      "bucket": "publishedElsewhere"
     },
     {
@@ -4849,13 +4842,6 @@
      "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue",
      "checked": "2026-08-26",
      "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "CD Medical Ltd",
-     "domain": "cdmedical.co.uk",
-     "reason": "the site's WordPress API could not be read (<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate ); the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-26",
-     "bucket": "heldOnly"
     },
     {
      "supplier": "B. Braun Medical",
@@ -4939,7 +4925,6 @@
     "continence:urinal"
    ],
    "publishedElsewhereNoOwnRange": [
-    "Creo Medical Limited",
     "Eakin Ostomy (Pelican Healthcare)",
     "Fannin (UK) Limited",
     "Fresenius Kabi Ltd",
@@ -4952,8 +4937,8 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 7,
-    "heldNeedingCategory": 1,
+    "publishedElsewhereNeedingCategory": 9,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -4982,6 +4967,7 @@
     "Wellspect"
    ],
    "publishedElsewhere": [
+    "CD Medical Ltd",
     "CODAN Limited",
     "Creo Medical Limited",
     "Fannin (UK) Limited",
@@ -5000,9 +4986,7 @@
     "Trion Pharma Limited",
     "Vernacare"
    ],
-   "heldOnly": [
-    "CD Medical Ltd"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Redland embh Group Limited"
@@ -5028,7 +5012,7 @@
     "Sinapi Biomedical UK"
    ],
    "unknown": [],
-   "actionableTotal": 9,
+   "actionableTotal": 10,
    "blockedReason": null,
    "deferred": null
   },
@@ -5038,8 +5022,8 @@
    "category": "Rehabilitation and Community",
    "ends": "31 August 2027",
    "suppliersAwarded": 56,
-   "suppliersPublished": 20,
-   "coverage": 35.7,
+   "suppliersPublished": 21,
+   "coverage": 37.5,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -5049,7 +5033,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 56,
-   "coverageOfTarget": 35.7,
+   "coverageOfTarget": 37.5,
    "crawlWorklist": [
     {
      "supplier": "ClearHeal LTD",
@@ -5268,17 +5252,17 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "CD Medical Ltd",
-     "domain": "cdmedical.co.uk",
-     "reason": "the site's WordPress API could not be read (<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate ); the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-26",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "B. Braun Medical",
      "domain": "bbraun.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-08",
+     "bucket": "published"
+    },
+    {
+     "supplier": "CD Medical Ltd",
+     "domain": "cdmedical.co.uk",
+     "reason": "the site's WordPress API could not be read (<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate ); the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-26",
      "bucket": "published"
     },
     {
@@ -5375,7 +5359,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 5,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -5385,6 +5369,7 @@
     "Advanced Medical Solutions (AMS)",
     "B. Braun Medical",
     "Advancis Medical (Brightwake)",
+    "CD Medical Ltd",
     "Clinisupplies",
     "Coloplast",
     "Convatec",
@@ -5413,9 +5398,7 @@
     "Trion Pharma Limited",
     "Vernacare"
    ],
-   "heldOnly": [
-    "CD Medical Ltd"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
     "ClearHeal LTD",
@@ -5449,7 +5432,7 @@
     "Willingsford Limited"
    ],
    "unknown": [],
-   "actionableTotal": 9,
+   "actionableTotal": 8,
    "blockedReason": null,
    "deferred": null
   },
@@ -14198,13 +14181,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Creo Medical Limited",
-     "domain": "www.creomedical.com",
-     "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Draeger Medical UK",
      "domain": "www.draeger.com",
      "reason": "neither www.draeger.com nor www.www.draeger.com answered \u2014 the domain does not resolve or serves no usable certificate",
@@ -14280,7 +14256,6 @@
    "publishedElsewhereNoOwnRange": [
     "Boston Scientific",
     "Cook Medical",
-    "Creo Medical Limited",
     "Draeger Medical UK",
     "Fannin (UK) Limited",
     "Fisher & Paykel Healthcare",
@@ -14291,7 +14266,7 @@
    ],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 18,
+    "publishedElsewhereNeedingCategory": 19,
     "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -14364,7 +14339,7 @@
    "unknown": [
     "Verathon Medical"
    ],
-   "actionableTotal": 28,
+   "actionableTotal": 29,
    "blockedReason": null,
    "deferred": null
   },

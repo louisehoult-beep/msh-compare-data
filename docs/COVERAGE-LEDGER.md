@@ -44,10 +44,10 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Total Orthopaedic Solutions 3 | ortho | 101 | 36 | 35.6% | 6 | 70 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 23 | 36.5% | 16 | 31 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 6 | 42 | STARTED |
-| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 22 | 37.9% | 12 | 33 | STARTED |
+| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 22 | 37.9% | 12 | 32 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 21 | 36.8% | 8 | 32 | STARTED |
-| Urology and Bowel Management | continence | 57 | 20 | 35.1% | 9 | 40 | STARTED |
-| Advanced Wound Care | wound | 56 | 20 | 35.7% | 9 | 41 | STARTED |
+| Urology and Bowel Management | continence | 57 | 20 | 35.1% | 10 | 39 | STARTED |
+| Advanced Wound Care | wound | 56 | 21 | 37.5% | 8 | 41 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 0 | 39 | STARTED · 7 EXCLUDED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 19 | 35.8% | 9 | 32 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 26 | 49.1% | 9 | 30 | STARTED |
@@ -96,7 +96,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Lithotripsy and Associated Options and Related Services | endourology | 3 | 0 | 0.0% | 2 | 2 | NOT STARTED |
 | Male Intra-Urethral Catheter with Magnet Control | continence | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Non-Imaging Vibration Controlled Ultrasound System | ultrasound | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
-| Airway Management Products and Associated Equipment | — | 54 | 0 | 0.0% | 28 | 29 | UNMAPPED |
+| Airway Management Products and Associated Equipment | — | 54 | 0 | 0.0% | 29 | 28 | UNMAPPED |
 | Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 26 | 27 | UNMAPPED |
 | Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 21 | 22 | UNMAPPED |
 | Wound Closure | — | 39 | 0 | 0.0% | 22 | 19 | UNMAPPED |
