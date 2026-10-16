@@ -59,6 +59,8 @@ REFS = {
     "awareness-days.json":              "ETH-D230F035D",
     "atamis-opportunities.json":   "ETH-D629A8641",
     "ccf-reference.json":          "ETH-DD23F2D04",
+    "board-papers-news.json":      "ETH-D443BA294",
+    "board-papers-seen.json":      "ETH-D3AD87423",
     "framework-awards.json":       "ETH-D423207D9",
     "icc-catalogue.json":          "ETH-DEE6CE6C8",
     "icc-matrices.json":           "ETH-D1989FDFE",
