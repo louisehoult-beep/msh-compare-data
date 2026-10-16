@@ -50,7 +50,11 @@ if ( ! function_exists( 'msh_myhub_landing_decide' ) ) {
 			return array( false, 'escape-param' );
 		}
 		$host = strtolower( (string) parse_url( isset( $r['referer'] ) ? (string) $r['referer'] : '', PHP_URL_HOST ) );
-		if ( '' !== $host && in_array( $host, (array) $r['hub_hosts'], true ) ) {
+		$path = strtolower( (string) parse_url( isset( $r['referer'] ) ? (string) $r['referer'] : '', PHP_URL_PATH ) );
+		/* A login is not a click inside the Hub: a member who has just signed in on
+		   the Hub's own login page carries a Hub referrer and must still land on My Hub. */
+		$is_login = ( 0 === strpos( $path, '/login' ) || 0 === strpos( $path, '/sso-bridge' ) || 0 === strpos( $path, '/wp-login' ) );
+		if ( '' !== $host && in_array( $host, (array) $r['hub_hosts'], true ) && ! $is_login ) {
 			return array( false, 'came-from-hub' );
 		}
 		if ( isset( $r['cookie_day'], $r['today'] ) && '' !== (string) $r['today'] && (string) $r['cookie_day'] === (string) $r['today'] ) {
@@ -75,10 +79,14 @@ if ( ! function_exists( 'msh_myhub_is_hub_member' ) ) {
 		if ( ! function_exists( 'pms_get_member_subscriptions' ) ) {
 			return false;
 		}
+		/* Administrators (Lou) have no Hub plan but are Hub members for this purpose. */
+		if ( user_can( $user_id, 'manage_options' ) ) {
+			return true;
+		}
 		/* Identical to snippet 3902 (hub-subscriber-home-redirect.php). 954 (Hub
 		   Trial) is withdrawn and gone; kept only so the two lists stay the same.
-		   Hub Employer 5167 is deliberately not here, as in 3902. */
-		$hub_plans = array( 690, 691, 692, 694, 930, 954 );
+		   Hub Employer 5167 is included here (it opens the Hub, 14/10/2026) so the Hub's front door lands them on My Hub. */
+		$hub_plans = array( 690, 691, 692, 694, 930, 954, 5167 );
 		$subs      = pms_get_member_subscriptions( array( 'user_id' => $user_id ) );
 		if ( ! is_array( $subs ) ) {
 			return false;

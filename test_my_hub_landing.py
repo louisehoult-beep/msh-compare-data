@@ -48,6 +48,7 @@ TABLE = [
     ("Live Desk link inside the Hub", {"referer": "https://medsalesintelligencehub.co.uk/medical-sales-hub/my-hub/"}, [False, "came-from-hub"]),
     ("inside the Hub on www", {"referer": "https://WWW.medsalesintelligencehub.co.uk/x/"}, [False, "came-from-hub"]),
     ("a look-alike host is not the Hub", {"referer": "https://medsalesintelligencehub.co.uk.evil.example/"}, [True, "send-to-my-hub"]),
+    ("just logged in on the Hub login page", {"referer": "https://medsalesintelligencehub.co.uk/login/"}, [True, "send-to-my-hub"]),
     ("already sent today", {"cookie_day": "2026-10-01"}, [False, "already-today"]),
     ("sent yesterday, so again today", {"cookie_day": "2026-09-30"}, [True, "send-to-my-hub"]),
     ("escape hatch ?desk=1", {"escape": True}, [False, "escape-param"]),
