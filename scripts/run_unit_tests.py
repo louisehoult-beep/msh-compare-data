@@ -165,6 +165,7 @@ RUN = [
     "test_speciality_news_keywords.py",
     "test_speciality_panels.py",
     "test_tariff_moves.py",              # 16/10/2026, Drug Tariff month-on-month price moves
+    "test_discontinued_on_formulary.py",  # 16/10/2026, discontinued lines still named on formularies
     "test_speciality_panels_phase2.py",  # 29/09/2026, in-memory build, writes nothing
     "test_stale_brief_rows.py",
     "test_awards_history.py",

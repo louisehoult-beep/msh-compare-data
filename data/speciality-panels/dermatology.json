@@ -39,6 +39,7 @@
   "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (5 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-16.",
   "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF chapter 13. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 53 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first.",
   "drugTariffMoves": "Compares this panel's own Drug Tariff slice (the lines described under drugTariff) for 2026-10 with the same slice for 2026-09, both published by NHSBSA. A line is the same line when supplier, product name, pack size, quantity and unit of measure all match; it has moved when its reimbursement price differs. Percentages are the change from last month's price, rounded to one decimal place. A line listed this month and not last is shown as new, and a line listed last month and not this month is shown as no longer listed: NHSBSA's list does not say why, so neither is described as launched or discontinued. 0 line(s) whose key appears more than once in a month are left out of the comparison rather than guessed at. This is the Drug Tariff reimbursement price, not the price a supplier charges a pharmacy or a hospital, and a month with no moves is an honest result. The previous month is kept in data/tariff-snapshots.json by the daily tariff refresh, because the Part IX file itself holds only the current month.",
+  "discontinuedOnFormulary": "A product is called discontinued only where the NHS Dictionary of Medicines and Devices (dm+d) browser says so for its own record, with the pack discontinued dates it prints. A formulary is listed only where its own document or page, read on the date shown, still names that product; the line is quoted as printed. Three kinds of listing are kept apart: listed as a recommended or ranked product, listed as a less cost-effective option, and named as non-formulary. The last is not a recommendation; it is shown because the discontinued name is still on the live page. Whether the product is in the Drug Tariff is checked against the Part IX file for 2026-10 when the panel is built. A formulary document that is not in the list was not read or does not name the product; its absence is not a finding. Retail availability is not covered: dm+d records NHS supply, and a product can still be sold elsewhere. Organisation, document, date and link come from the local sources listed under Local intelligence, so an entry whose source link has gone is withheld here as well.",
   "marketShare": "Computed at every build from NHSBSA data, not bought in and not estimated. PRIMARY CARE: every item dispensed in England against a GP practice prescription, English Prescribing Dataset with SNOMED code, for the BNF codes named on each market (13.02.01, 21.22), latest month 202607, with a 12-month total. SECONDARY CARE: NHS trust prescriptions dispensed in a community pharmacy (NHSBSA hospital prescribing dispensed in the community), the same BNF codes, 12 months; it is not in-hospital use, which NHSBSA publishes only by chemical substance and so cannot show a brand. DRUG TARIFF: every Part IX line NHSBSA files under the same BNF codes, in any part, counted in tariff lines per supplier, which measures what is listed and reimbursable, not what is sold. A BRAND is the first word of NHSBSA's product label, so the products of one range are counted together; a label that names its supplier in brackets stays on its own, and every generic is one row. Share is share of ITEMS, never company share: the data does not name the company, and one company can own several brands. A change on a year earlier is printed only where that month had at least 25 items. An ICB's share is the brand's items as a share of that ICB's whole market in the same month."
  },
  "counts": {
@@ -674,6 +675,395 @@
    }
   ],
   "dropped": []
+ },
+ "discontinuedOnFormulary": {
+  "readOn": "2026-10-16",
+  "products": [
+   {
+    "id": "qv-5-skin-lotion",
+    "name": "QV 5% skin lotion",
+    "kind": "Emollient lotion",
+    "vmp": "White soft paraffin 5% lotion",
+    "dmd": {
+     "status": "Discontinued",
+     "availability": "Not available",
+     "licensingAuthority": "Devices",
+     "packs": [
+      {
+       "size": "500 ml",
+       "discontinued": "2025-06-01",
+       "url": "https://dmd-browser.nhsbsa.nhs.uk/ampp/view/78642"
+      },
+      {
+       "size": "250 ml",
+       "discontinued": "2024-03-01",
+       "url": "https://dmd-browser.nhsbsa.nhs.uk/ampp/view/52073"
+      }
+     ],
+     "url": "https://dmd-browser.nhsbsa.nhs.uk/amp/view/40771",
+     "readOn": "2026-10-16",
+     "reimbursement": "Not allowed (not in Drug Tariff), as printed on both pack records"
+    },
+    "partIxListed": false,
+    "partIxMonth": "2026-10",
+    "counts": {
+     "recommended": 10,
+     "less-cost-effective": 3,
+     "non-formulary": 1
+    },
+    "formularies": 14
+   },
+   {
+    "id": "qv-85-09-bath-oil",
+    "name": "QV 85.09% bath oil",
+    "kind": "Emollient bath oil",
+    "vmp": "Liquid paraffin light 85.09% bath oil",
+    "dmd": {
+     "status": "Discontinued",
+     "availability": "Not available",
+     "licensingAuthority": "Devices",
+     "packs": [
+      {
+       "size": "500 ml",
+       "discontinued": "2024-03-01",
+       "url": "https://dmd-browser.nhsbsa.nhs.uk/ampp/view/52092"
+      },
+      {
+       "size": "250 ml",
+       "discontinued": "2024-03-01",
+       "url": "https://dmd-browser.nhsbsa.nhs.uk/ampp/view/78980"
+      }
+     ],
+     "url": "https://dmd-browser.nhsbsa.nhs.uk/amp/view/40786",
+     "readOn": "2026-10-16",
+     "reimbursement": "Not allowed (not in Drug Tariff), as printed on the pack records"
+    },
+    "partIxListed": false,
+    "partIxMonth": "2026-10",
+    "counts": {
+     "recommended": 2,
+     "less-cost-effective": 0,
+     "non-formulary": 8
+    },
+    "formularies": 10
+   }
+  ],
+  "listings": [
+   {
+    "product": "qv-5-skin-lotion",
+    "status": "recommended",
+    "position": "Second line, for use only if a lanolin-free lotion is needed",
+    "line": "QV ® (Skin lotion) Formulary Second line ONLY FOR USE if lanolin free lotion is needed NB to locate on Systmone search 'QV 5'",
+    "readOn": "2026-10-16",
+    "org": "Bath and North East Somerset, Swindon and Wiltshire ICB",
+    "nation": "England",
+    "document": "BSW Formulary: 13.02.01 Emollients",
+    "documentDate": "Emollient table approved by BSW APC October 2023, updated August 2024",
+    "reviewDate": "Table review August 2026, passed",
+    "url": "https://bswformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100"
+   },
+   {
+    "product": "qv-5-skin-lotion",
+    "status": "recommended",
+    "position": "Listed under light emollients",
+    "line": "QV Skin Lotion (white soft paraffin 5%) 500ml pump",
+    "readOn": "2026-10-16",
+    "org": "Buckinghamshire, Oxfordshire and Berkshire West ICB",
+    "nation": "England",
+    "document": "BOB ICB Emollient Guideline, version 1.0",
+    "documentDate": "Approved by BOB APC January 2024",
+    "reviewDate": "Next review January 2027",
+    "url": "https://www.oxfordhealthformulary.nhs.uk/docs/BOB%20ICB%20Emollient%20Guideline.pdf"
+   },
+   {
+    "product": "qv-5-skin-lotion",
+    "status": "recommended",
+    "position": "Formulary, Emollient lotion (Light)",
+    "line": "Emollient lotion (Light) Formulary Paraffin-containing Cetraben 200ml, 500ml E45 200ml, 500ml Diprobase 300ml QV 5% 250ml, 500ml",
+    "readOn": "2026-10-16",
+    "org": "Cheshire and Merseyside ICB",
+    "nation": "England",
+    "document": "Cheshire and Merseyside Formulary: 13.02.01 Emollients",
+    "documentDate": "Review date not filled in on the page",
+    "reviewDate": null,
+    "url": "https://www.cheshireandmerseysideformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100"
+   },
+   {
+    "product": "qv-5-skin-lotion",
+    "status": "recommended",
+    "position": "First choice (light emollients)",
+    "line": "Light emollients / Formulary / First choices / Zero AQS cream / QV lotion",
+    "readOn": "2026-10-16",
+    "org": "Greater Manchester (GMMMG formulary)",
+    "nation": "England",
+    "document": "Greater Manchester Formulary: 13.02.01 Emollients",
+    "documentDate": "No approval date printed (costs cited from Drug Tariff and MIMS, February 2015)",
+    "reviewDate": null,
+    "url": "https://www.greatermanchesterformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100"
+   },
+   {
+    "product": "qv-5-skin-lotion",
+    "status": "recommended",
+    "position": "Ranked 1 under Lotions",
+    "line": "1 QV skin lotion WSP 5% 500ml",
+    "readOn": "2026-10-16",
+    "org": "Herefordshire and Worcestershire ICB",
+    "nation": "England",
+    "document": "HW Emollient Prescribing Guidelines v2.2.1",
+    "documentDate": "Updated August 2026 (MPC approved extension); original approved August 2020",
+    "reviewDate": "Review date September 2028",
+    "url": "https://www.hwics.org.uk/application/files/3117/8643/6982/HW_Emollient_Prescribing_Guidelines_v2.2.1_11082026.pdf"
+   },
+   {
+    "product": "qv-5-skin-lotion",
+    "status": "recommended",
+    "position": "First Choice",
+    "line": "QV® Lotion First Choice Active ingredient: White Soft Paraffin",
+    "readOn": "2026-10-16",
+    "org": "NHS Grampian",
+    "nation": "Scotland",
+    "document": "Grampian Area Formulary: 13.02.01 Emollients",
+    "documentDate": "No date printed",
+    "reviewDate": null,
+    "url": "https://www.grampianformulary.scot.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100&Expanded=0"
+   },
+   {
+    "product": "qv-5-skin-lotion",
+    "status": "recommended",
+    "position": "Formulary, restricted to lanolin-free need",
+    "line": "QV skin lotion (ONLY FOR USE IF lanolin free lotion is needed.) Formulary",
+    "readOn": "2026-10-16",
+    "org": "Shropshire, Telford and Wrekin ICB",
+    "nation": "England",
+    "document": "Shropshire and Telford Formulary: 13.02.01 Emollients",
+    "documentDate": "No date printed",
+    "reviewDate": null,
+    "url": "https://www.shropshireandtelfordformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100"
+   },
+   {
+    "product": "qv-5-skin-lotion",
+    "status": "recommended",
+    "position": "Preferred product, Table 4 Lotions",
+    "line": "QV® Lotion 500ml = £5.32 WSP 5% May be suitable for OTC purchase",
+    "readOn": "2026-10-16",
+    "org": "South East London ICB",
+    "nation": "England",
+    "document": "South East London Emollient Guidance for Adults and Children",
+    "documentDate": "Approval date May 2023",
+    "reviewDate": "Review date May 2025, passed",
+    "url": "https://www.selondonics.org/wp-content/uploads/dlm_uploads/Emollient-Guideline-SEL-FINAL-May-2023-v2.pdf"
+   },
+   {
+    "product": "qv-5-skin-lotion",
+    "status": "recommended",
+    "position": "2nd line",
+    "line": "2nd Line QV® skin lotion £5.47 Petrolatum",
+    "readOn": "2026-10-16",
+    "org": "South Yorkshire ICB, Barnsley place",
+    "nation": "England",
+    "document": "Barnsley emollient formulary choices guidance",
+    "documentDate": "Ratified by Barnsley APC 11/10/2023; minor updates October 2024 and September 2025",
+    "reviewDate": "Review due October 2026",
+    "url": "https://mot.southyorkshire.icb.nhs.uk/barnsley/files/Barnsley%20Guideline%20Emollient%20Formulary%20Choices.pdf"
+   },
+   {
+    "product": "qv-5-skin-lotion",
+    "status": "recommended",
+    "position": "1st line",
+    "line": "1st line QV® skin lotion £5.51 Petrolatum",
+    "readOn": "2026-10-16",
+    "org": "South Yorkshire ICB, Sheffield place",
+    "nation": "England",
+    "document": "Sheffield skin formulary choices: Abbreviated guide to emollients used in primary care",
+    "documentDate": "Approved by Formulary Subgroup and Area Prescribing Group January 2023",
+    "reviewDate": "Review date January 2026, passed",
+    "url": "https://mot.southyorkshire.icb.nhs.uk/sheffield/files/Sheffield%20Formulary%20Skin%20-%20Abbreviated%20guide%20to%20emollients.pdf"
+   },
+   {
+    "product": "qv-5-skin-lotion",
+    "status": "less-cost-effective",
+    "position": "Least cost-effective column",
+    "line": "QV Lotion (5% WSP) 250ml=£3.38; 500ml=£5.47",
+    "readOn": "2026-10-16",
+    "org": "Kent and Medway ICB",
+    "nation": "England",
+    "document": "Emollient Prescribing Guidance for Adults and Children",
+    "documentDate": "Approved by IMOC October 2023",
+    "reviewDate": "Review date October 2025, passed",
+    "url": "https://www.kentandmedwayformulary.nhs.uk/media/1963/km-emollient-prescribing-guidance-for-adults-children.pdf"
+   },
+   {
+    "product": "qv-5-skin-lotion",
+    "status": "less-cost-effective",
+    "position": "Similar less cost-effective brands column, against E45 lotion",
+    "line": "Cetraben® lotion, QV® skin lotion.",
+    "readOn": "2026-10-16",
+    "org": "Somerset ICB",
+    "nation": "England",
+    "document": "Dermatology Emollient Quick Reference Guide",
+    "documentDate": "Updated May 2024",
+    "reviewDate": "No review date printed",
+    "url": "https://nhssomerset.nhs.uk/wp-content/uploads/sites/2/Emollient-Guidance-May2024.pdf"
+   },
+   {
+    "product": "qv-5-skin-lotion",
+    "status": "less-cost-effective",
+    "position": "Least cost-effective column",
+    "line": "QV lotion* (5% WSP) 250mL=£3.38; 500mL=£5.47",
+    "readOn": "2026-10-16",
+    "org": "Surrey Heartlands ICB",
+    "nation": "England",
+    "document": "Surrey Heartlands APC Emollient Prescribing Guidelines (September 2025 update)",
+    "documentDate": "Agreed by Surrey Heartlands APC September 2025",
+    "reviewDate": "Review date August 2028",
+    "url": "https://surrey.res.services/PAD/Content/Documents/2/PAD/20250909_Emollients%20full%20guideline.pdf"
+   },
+   {
+    "product": "qv-5-skin-lotion",
+    "status": "non-formulary",
+    "position": "Non Formulary",
+    "line": "QV 5%® skin lotion Non Formulary",
+    "readOn": "2026-10-16",
+    "org": "Mid and South Essex",
+    "nation": "England",
+    "document": "Mid and South Essex Formulary: 13.02.01 Emollients",
+    "documentDate": "Entries in line with the MSEMOC December 2023 formulary review",
+    "reviewDate": null,
+    "url": "https://www.midandsouthessexformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100"
+   },
+   {
+    "product": "qv-85-09-bath-oil",
+    "status": "recommended",
+    "position": "Formulary, bath additive section carrying NHS England's not-routinely-prescribed note",
+    "line": "Formulary NHS England has identified these products as items that should not be routinely prescribed in primary care. ... Bath Additive Balneum Bath Oil ... QV oil",
+    "readOn": "2026-10-16",
+    "org": "Cheshire and Merseyside ICB",
+    "nation": "England",
+    "document": "Cheshire and Merseyside Formulary: 13.02.01 Emollients",
+    "documentDate": "Review date not filled in on the page",
+    "reviewDate": null,
+    "url": "https://www.cheshireandmerseysideformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100"
+   },
+   {
+    "product": "qv-85-09-bath-oil",
+    "status": "recommended",
+    "position": "Formulary, bath oils section carrying NHS England's not-routinely-prescribed note",
+    "line": "Bath oils/ additives/ shower preparations and washes Formulary ... QV ® bath oil",
+    "readOn": "2026-10-16",
+    "org": "Humber and North Yorkshire ICB",
+    "nation": "England",
+    "document": "Humber and North Yorkshire Formulary: 13.02.01 Emollients",
+    "documentDate": "No date printed",
+    "reviewDate": null,
+    "url": "https://www.humberandnorthyorkshireformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100"
+   },
+   {
+    "product": "qv-85-09-bath-oil",
+    "status": "non-formulary",
+    "position": "Non Formulary",
+    "line": "Emollient Bath Additive (QV®) Non Formulary",
+    "readOn": "2026-10-16",
+    "org": "Bath and North East Somerset, Swindon and Wiltshire ICB",
+    "nation": "England",
+    "document": "BSW Formulary: 13.02.01 Emollients",
+    "documentDate": "Emollient table approved by BSW APC October 2023, updated August 2024",
+    "reviewDate": "Table review August 2026, passed",
+    "url": "https://bswformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100"
+   },
+   {
+    "product": "qv-85-09-bath-oil",
+    "status": "non-formulary",
+    "position": "Non Formulary",
+    "line": "Emollient Bath Additive (QV®) Non Formulary",
+    "readOn": "2026-10-16",
+    "org": "Birmingham and Solihull ICB",
+    "nation": "England",
+    "document": "BSol Formulary: 13.02.01 Emollients",
+    "documentDate": "No date printed",
+    "reviewDate": null,
+    "url": "https://www.birminghamandsurroundsformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100"
+   },
+   {
+    "product": "qv-85-09-bath-oil",
+    "status": "non-formulary",
+    "position": "Non Formulary",
+    "line": "QV® (Emollient Bath Additive) Non Formulary Bath oil.",
+    "readOn": "2026-10-16",
+    "org": "Cambridgeshire and Peterborough",
+    "nation": "England",
+    "document": "Cambridgeshire and Peterborough Formulary: 13.02 Emollients",
+    "documentDate": "No date printed",
+    "reviewDate": null,
+    "url": "https://www.cambridgeshireandpeterboroughformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02&SubSectionID=A100"
+   },
+   {
+    "product": "qv-85-09-bath-oil",
+    "status": "non-formulary",
+    "position": "Non Formulary",
+    "line": "Emollient Bath Additive (QV®) Non Formulary",
+    "readOn": "2026-10-16",
+    "org": "Dorset ICB",
+    "nation": "England",
+    "document": "Dorset Formulary: 13.02.01 Emollients",
+    "documentDate": "No date printed; linked first-line emollient PDF V2, March 2021",
+    "reviewDate": null,
+    "url": "https://www.dorsetformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100"
+   },
+   {
+    "product": "qv-85-09-bath-oil",
+    "status": "non-formulary",
+    "position": "Non Formulary",
+    "line": "Emollient Bath Additive (QV®) Non Formulary",
+    "readOn": "2026-10-16",
+    "org": "Frimley (joint formulary)",
+    "nation": "England",
+    "document": "Frimley Joint Formulary: 13.02.01 Emollients",
+    "documentDate": "No date printed",
+    "reviewDate": null,
+    "url": "https://www.frimleyhealthformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100"
+   },
+   {
+    "product": "qv-85-09-bath-oil",
+    "status": "non-formulary",
+    "position": "Non Formulary",
+    "line": "Emollient Bath Additive (QV®) Non Formulary",
+    "readOn": "2026-10-16",
+    "org": "Mid and South Essex",
+    "nation": "England",
+    "document": "Mid and South Essex Formulary: 13.02.01 Emollients",
+    "documentDate": "Entries in line with the MSEMOC December 2023 formulary review",
+    "reviewDate": null,
+    "url": "https://www.midandsouthessexformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100"
+   },
+   {
+    "product": "qv-85-09-bath-oil",
+    "status": "non-formulary",
+    "position": "Non Formulary",
+    "line": "QV® bath oil Non Formulary",
+    "readOn": "2026-10-16",
+    "org": "North Central London",
+    "nation": "England",
+    "document": "NCL Joint Formulary: 13.02.01 Emollients",
+    "documentDate": "No date printed",
+    "reviewDate": null,
+    "url": "https://www.ncl-jointformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100"
+   },
+   {
+    "product": "qv-85-09-bath-oil",
+    "status": "non-formulary",
+    "position": "Non Formulary",
+    "line": "QV Bath Additive Non Formulary",
+    "readOn": "2026-10-16",
+    "org": "Suffolk and North East Essex (Ipswich and East Suffolk formulary)",
+    "nation": "England",
+    "document": "Ipswich and East Suffolk Formulary: 13.02.01 Emollients",
+    "documentDate": "No date printed",
+    "reviewDate": null,
+    "url": "https://www.ipswichandeastsuffolkformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100"
+   }
+  ],
+  "formularyCount": 21,
+  "listingsDropped": 0
  },
  "localIntel": [
   {

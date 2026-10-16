@@ -170,6 +170,8 @@ REFS = {
     "speciality-panels/urology.json": "ETH-DBA511983",
     "speciality-panels/vascular-access-and-iv-therapy.json": "ETH-D5B68A39E",
     "speciality-panels/vascular-surgery-and-pad.json": "ETH-DE417B27A",
+    # Added 16/10/2026: discontinued product lines still named on formularies.
+    "discontinued-on-formulary.json":  "ETH-D32716FBD",
 }
 
 

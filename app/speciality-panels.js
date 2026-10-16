@@ -331,6 +331,41 @@
       h += '</div>';
     }
 
+    /* DISCONTINUED LINES STILL ON FORMULARIES (16/10/2026). Only panels with entries in
+       data/discontinued-on-formulary.json carry d.discontinuedOnFormulary. */
+    if (d.discontinuedOnFormulary) {
+      var df = d.discontinuedOnFormulary;
+      var dmy = function (iso) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || ''); return m ? m[3] + '/' + m[2] + '/' + m[1] : (iso || ''); };
+      var STAT = { 'recommended': 'Recommended or ranked', 'less-cost-effective': 'Listed as less cost-effective', 'non-formulary': 'Named as non-formulary' };
+      h += '<div class="sp-sec"><h3 class="sub-h3">Discontinued lines still on formularies</h3>';
+      h += '<p style="font-size:13px;line-height:1.6;margin:0 0 10px;">Products the NHS Dictionary of Medicines and Devices (dm+d) records as discontinued, that a formulary document still names. Each line is quoted as printed, as read on ' + esc(dmy(df.readOn)) + '.</p>';
+      for (var pi = 0; pi < df.products.length; pi++) {
+        var pr = df.products[pi], pk = [];
+        for (var ki = 0; ki < pr.dmd.packs.length; ki++) {
+          pk.push(esc(pr.dmd.packs[ki].size) + ' discontinued ' + esc(dmy(pr.dmd.packs[ki].discontinued)));
+        }
+        h += '<h4 style="margin:14px 0 6px;font-size:15px;">' + esc(pr.name) + '</h4>';
+        h += '<div class="sp-tiles">';
+        h += '<div class="sp-tile"><b>' + n(pr.formularies) + '</b><span>Formularies naming it</span></div>';
+        h += '<div class="sp-tile"><b>' + n(pr.counts.recommended) + '</b><span>Recommended or ranked</span></div>';
+        h += '<div class="sp-tile"><b>' + n(pr.counts['less-cost-effective']) + '</b><span>Less cost-effective</span></div>';
+        h += '<div class="sp-tile"><b>' + n(pr.counts['non-formulary']) + '</b><span>Named as non-formulary</span></div>';
+        h += '</div>';
+        h += '<div class="sp-meta">dm+d: <a href="' + esc(pr.dmd.url) + '" target="_blank" rel="noopener">' + esc(pr.dmd.status) + ', ' + esc(pr.dmd.availability.toLowerCase()) + '</a>; ' + pk.join('; ') + '. ' +
+             (pr.partIxListed ? 'Listed in Drug Tariff Part IX ' + esc(pr.partIxMonth) + '.' : 'Not listed in Drug Tariff Part IX ' + esc(pr.partIxMonth) + '.') + '</div>';
+        h += '<details class="sp-more"><summary>Show the formularies that name it</summary><div class="sp-scroll"><table class="sp-tbl"><tr><th>Formulary</th><th>Position</th><th>Line as printed</th><th>Document and review</th></tr>';
+        for (i = 0; i < df.listings.length; i++) {
+          var L = df.listings[i];
+          if (L.product !== pr.id) { continue; }
+          h += '<tr><td><a href="' + esc(L.url) + '" target="_blank" rel="noopener">' + esc(L.org) + '</a></td><td><b>' + esc(STAT[L.status] || L.status) + '</b><br>' + esc(L.position) +
+               '</td><td>' + esc(L.line) + '</td><td>' + esc(L.document || '') + (L.documentDate ? '<br>' + esc(L.documentDate) : '') + (L.reviewDate ? '<br>' + esc(L.reviewDate) : '') + '</td></tr>';
+        }
+        h += '</table></div></details>';
+      }
+      h += '<div class="sp-meta">Retail availability is not covered: dm+d records NHS supply. A formulary not listed here was not read or does not name the product.</div>';
+      h += '</div>';
+    }
+
     /* DRUG TARIFF PART VIIIA — generic medicine basic prices, sliced by NHSBSA's own
        BNF classification of each line. */
     if (d.drugTariffViiia) {
@@ -416,7 +451,7 @@
          ' &middot; Drug Tariff as at ' + esc(d.dataAsOf.drugTariff || 'not stated') +
          (d.dataAsOf.gpPrescribing ? ' &middot; GP prescribing built ' + esc(d.dataAsOf.gpPrescribing) : '') +
          (d.dataAsOf.mhraDsu ? ' &middot; MHRA as at ' + esc(d.dataAsOf.mhraDsu) : '') + '.</div>';
-    h += ruleBlock(d.rules, ['frameworks', 'awards', 'openTenders', 'drugTariff', 'drugTariffMoves', 'drugTariffViiia', 'gpPrescribing', 'mhraDsu', 'localIntel']);
+    h += ruleBlock(d.rules, ['frameworks', 'awards', 'openTenders', 'drugTariff', 'drugTariffMoves', 'discontinuedOnFormulary', 'drugTariffViiia', 'gpPrescribing', 'mhraDsu', 'localIntel']);
     FW.innerHTML = h;
   }
 

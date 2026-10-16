@@ -8533,6 +8533,77 @@ def tariff_moves_rule(m):
             m["currentMonth"], m["previousMonth"], m["ambiguousCount"]))
 
 
+def build_discontinued_on_formulary(slug, doc, local_intel, dt_doc):
+    """Formulary entries that still name a product dm+d records as discontinued (16/10/2026).
+
+    Fed by the speciality's own local-intel formulary items, not a second list of
+    organisations: each listing in data/discontinued-on-formulary.json names an item id,
+    and the organisation, document, date and link come from that item. An item that the
+    local-intel build has withheld (its source gone) therefore drops its listing here
+    too, and a listing whose item no longer exists is dropped rather than shown bare.
+    Nothing here is inferred from names: the listing, its quoted line and the dm+d
+    status are each curated and carry the date they were read.
+
+    Whether a product is in the Drug Tariff is checked against the Hub's own Part IX
+    file at build time, never stored, because it is a fact with a shelf life.
+    """
+    entries = ((doc or {}).get("specialities") or {}).get(slug) or []
+    if not entries:
+        return None
+    items = {it["id"]: it for it in local_intel}
+    prods = {p["id"]: p for p in doc.get("products") or []}
+    ix = {k: i for i, k in enumerate(dt_doc["schema"])}
+    listed_amps = {(r[ix["amp"]] or "").strip().lower() for r in dt_doc["rows"]}
+    order = {"recommended": 0, "less-cost-effective": 1, "non-formulary": 2}
+    listings, dropped = [], 0
+    for e in entries:
+        it, pr = items.get(e["item"]), prods.get(e["product"])
+        if not it or not pr:
+            dropped += 1
+            continue
+        listings.append({
+            "product": e["product"], "status": e["status"], "position": e["position"],
+            "line": e["line"], "readOn": e["readOn"], "org": it["org"], "nation": it.get("nation"),
+            "document": it.get("title"), "documentDate": it.get("date"), "reviewDate": it.get("ends"),
+            "url": it["url"],
+        })
+    if not listings:
+        return None
+    listings.sort(key=lambda l: (l["product"], order[l["status"]], l["org"]))
+    used = sorted({l["product"] for l in listings})
+    products = []
+    for pid in used:
+        pr = dict(prods[pid])
+        pr["partIxListed"] = pr.pop("partIx")["amp"].lower() in listed_amps
+        pr["partIxMonth"] = dt_doc.get("effectiveMonth")
+        pr["counts"] = {s: sum(1 for l in listings if l["product"] == pid and l["status"] == s) for s in order}
+        pr["formularies"] = len({l["org"] for l in listings if l["product"] == pid})
+        products.append(pr)
+    return {"readOn": doc.get("readOn"), "products": products, "listings": listings,
+            "formularyCount": len({l["org"] for l in listings}), "listingsDropped": dropped}
+
+
+def discontinued_rule(block):
+    if not block:
+        return None
+    return (
+        "A product is called discontinued only where the NHS Dictionary of Medicines and "
+        "Devices (dm+d) browser says so for its own record, with the pack discontinued dates "
+        "it prints. A formulary is listed only where its own document or page, read on the "
+        "date shown, still names that product; the line is quoted as printed. Three kinds of "
+        "listing are kept apart: listed as a recommended or ranked product, listed as a less "
+        "cost-effective option, and named as non-formulary. The last is not a recommendation; "
+        "it is shown because the discontinued name is still on the live page. "
+        "Whether the product is in the Drug Tariff is checked against the Part IX file for "
+        "[[month]] when the panel is built. "
+        "A formulary document that is not in the list was not read or does not name the "
+        "product; its absence is not a finding. Retail availability is not covered: dm+d "
+        "records NHS supply, and a product can still be sold elsewhere. Organisation, "
+        "document, date and link come from the local sources listed under Local intelligence, "
+        "so an entry whose source link has gone is withheld here as well.".replace(
+            "[[month]]", block["products"][0].get("partIxMonth") or "the current month"))
+
+
 def tariff_rows(rule, dt_doc):
     """The Part IX lines a rule selects. build_tariff summarises them; render_counts
     reads the same rows, so a count in rule text and the summary cannot disagree."""
@@ -9782,6 +9853,7 @@ def build(slug, sources):
     tariff = build_tariff(rule, dt_doc)
     tariff_moves = build_tariff_moves(slug, rule, dt_doc, sources.get("tariff_snapshots"))
     local_intel = build_local_intel(slug, sources.get("local_intel") or {})
+    disc = build_discontinued_on_formulary(slug, sources.get("discontinued"), local_intel, dt_doc)
     gp = build_gp_prescribing(slug, sources.get("gp"))
     dsu = build_mhra_dsu(slug, sources.get("mhra_dsu"))
     viiia = build_viiia(slug, rule, sources.get("tariff_viiia"))
@@ -9947,6 +10019,7 @@ def build(slug, sources):
             "mhraDsu": dsu_rule(dsu),
             "drugTariffViiia": viiia_rule(viiia),
             "drugTariffMoves": tariff_moves_rule(tariff_moves),
+            "discontinuedOnFormulary": discontinued_rule(disc),
             "marketShare": market_share_rule(market_share),
         },
         "counts": {
@@ -9973,6 +10046,7 @@ def build(slug, sources):
         "openTenders": open_tenders,
         "drugTariff": tariff,
         "drugTariffMoves": tariff_moves,
+        "discontinuedOnFormulary": disc,
         "localIntel": local_intel,
         "localIntelGroups": (sources.get("local_intel") or {}).get("groups") or {},
         "directorySuppliers": directory,
@@ -9987,6 +10061,9 @@ def build(slug, sources):
     if not tariff_moves:
         del doc["drugTariffMoves"]
         del doc["rules"]["drugTariffMoves"]
+    if not disc:
+        del doc["discontinuedOnFormulary"]
+        del doc["rules"]["discontinuedOnFormulary"]
     check_money(slug, doc["rules"])
     return doc
 
@@ -10147,7 +10224,8 @@ def load_sources():
     sources["gp"] = GPData(os.path.join(DATA, "gp-prescribing"))
     sources["hp"] = HPData(os.path.join(DATA, "hospital-prescribing"))
     for key, name in (("mhra_dsu", "mhra-dsu.json"), ("tariff_viiia", "drug-tariff-part-viiia.json"),
-                      ("tariff_snapshots", "tariff-snapshots.json")):
+                      ("tariff_snapshots", "tariff-snapshots.json"),
+                      ("discontinued", "discontinued-on-formulary.json")):
         path = os.path.join(DATA, name)
         sources[key] = load(name) if os.path.exists(path) else None
     return sources
