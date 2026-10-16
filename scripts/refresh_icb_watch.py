@@ -80,6 +80,7 @@ from refresh_trusts import ICB as ICB_REGION          # noqa: E402  code -> (nam
 OUT = os.path.join(REPO, "data", "icb-watch.json")
 PAGES_CFG = os.path.join(REPO, "config", "icb-leadership-sources.json")
 CURATED_CFG = os.path.join(REPO, "config", "icb-watch-curated.json")
+CLUSTER_WATCH = os.path.join(REPO, "data", "cluster-watch.json")
 
 ODS_LIST = ("https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations"
             "?PrimaryRoleId=RO261&Limit=1000")
@@ -452,6 +453,7 @@ def main():
     doc, new_count = build(prev, live, ended, leaders, leaders_updated, statement, own,
                            curated, today())
     doc["leadersCheckedOn"] = leaders_checked
+    merge_cluster_events(doc, load_json(CLUSTER_WATCH, {}))
     # Today's source problems, as a dict (configuration, not records).
     doc["sourceErrorsToday"] = errors
     # And a log that only ever grows: one entry per distinct problem, with the
@@ -479,6 +481,20 @@ def main():
           "%d ICBs, %d events (%d new this run), %d pending"
           % (len(icbs_out), len(doc["clusters"]), n_exec, n_med, len(doc["events"]),
              new_count, len(doc["pending"])))
+
+
+def merge_cluster_events(doc, cw):
+    """Fold the cluster watch's events (scripts/refresh_cluster_watch.py, 16/10/2026) into
+    the event list so the structure page and the Live Desk carry them with no change of
+    their own. Kind "cluster". Added by id, never removed; an event naming an ICB that is
+    not live is left out rather than published against a code verify.py would refuse."""
+    live = {i["code"] for i in doc.get("icbs", [])}
+    by_id = {e["id"]: e for e in doc.get("events", [])}
+    for e in cw.get("events", []):
+        if e.get("kind") != "cluster" or e.get("icb") not in live:
+            continue
+        by_id.setdefault(e["id"], e)
+    doc["events"] = sorted(by_id.values(), key=lambda e: (e["date"], e["id"]), reverse=True)
 
 
 def build(prev, live, ended, leaders, leaders_updated, statement, own, curated, t):

@@ -424,7 +424,7 @@ def check_trust_map(tm):
 # about NAMED ICB executives, so the same two failures the 24/07/2026 moves
 # incident taught are refused here: a claim about a named person without a
 # source, and a "change" that was not derived from a stored earlier state.
-ICB_EVENT_KINDS = {"leadership", "legal-end", "new-icb", "national", "curated"}
+ICB_EVENT_KINDS = {"leadership", "legal-end", "new-icb", "national", "curated", "cluster"}
 
 
 def check_icb_watch(doc, today_iso=None):

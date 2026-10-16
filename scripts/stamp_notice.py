@@ -172,6 +172,8 @@ REFS = {
     "speciality-panels/vascular-surgery-and-pad.json": "ETH-DE417B27A",
     # Added 16/10/2026: discontinued product lines still named on formularies.
     "discontinued-on-formulary.json":  "ETH-D32716FBD",
+    # Added 16/10/2026: ICB cluster watch (new minutes, changed Skin chapter pages).
+    "cluster-watch.json":              "ETH-D47111DC3",
 }
 
 

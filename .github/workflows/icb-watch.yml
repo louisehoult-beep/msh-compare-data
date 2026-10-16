@@ -52,7 +52,15 @@ jobs:
           python-version: "3.12"
 
       - name: Unit tests for the ICB watch
-        run: python3 test_icb_watch.py
+        run: |
+          python3 test_icb_watch.py
+          python3 test_cluster_watch.py
+
+      - name: Read what each ICB cluster has published (minutes, Skin chapter pages)
+        # Before the ICB refresh, which folds data/cluster-watch.json events into
+        # data/icb-watch.json. A failed read keeps the stored state and never reads
+        # as a removal, so this step does not fail the job on a source outage.
+        run: python3 scripts/refresh_cluster_watch.py
 
       - name: Refresh ICB count, clusters, leaders and events
         run: python3 scripts/refresh_icb_watch.py
@@ -69,7 +77,7 @@ jobs:
         run: |
           git config user.name "icb-watch-bot"
           git config user.email "actions@github.com"
-          git add data/icb-watch.json
+          git add data/icb-watch.json data/cluster-watch.json
           git diff --cached --quiet || git commit -m "ICB watch $(date -u +%F)"
           pushed=0
           for attempt in 1 2 3 4 5; do
@@ -81,10 +89,11 @@ jobs:
             echo "push rejected (another writer landed first), attempt $attempt of 5."
             git fetch origin
             git reset --hard origin/main
+            python3 scripts/refresh_cluster_watch.py
             python3 scripts/refresh_icb_watch.py
             python3 scripts/stamp_notice.py
             bash scripts/gate.sh || { echo "GATE FAILED after re-run - refusing to push"; exit 1; }
-            git add data/icb-watch.json
+            git add data/icb-watch.json data/cluster-watch.json
             git diff --cached --quiet || git commit -m "ICB watch $(date -u +%F) (retry)"
             sleep 5
           done

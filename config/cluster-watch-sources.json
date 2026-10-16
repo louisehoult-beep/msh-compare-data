@@ -1,0 +1,98 @@
+{
+  "note": "Where each ICB cluster publishes the two things the cluster watch reads: its formulary Skin chapter (BNF chapter 13) and its medicines committee minutes or, where none is public, the nearest published list. Read by scripts/refresh_cluster_watch.py. Every URL was opened and read on the date in readOn. A source that is not listed is not watched, and the cluster's notWatched entry says why. Add, never back-date.",
+  "readOn": "2026-10-16",
+  "clusters": [
+    {
+      "id": "bsol-black-country",
+      "name": "Birmingham and Solihull with Black Country",
+      "icbs": [
+        "QHL",
+        "QUA"
+      ],
+      "sources": [
+        {
+          "id": "bsol-imoc-minutes",
+          "icb": "QHL",
+          "label": "Birmingham and Solihull Integrated Medicines Optimisation Committee (IMOC) minutes",
+          "kind": "doclib",
+          "url": "https://birminghamandsurroundsformulary.nhs.uk/docs/default.asp?DocLib=APM&Sort=B",
+          "itemPattern": "IMOC Minutes",
+          "what": "minutes"
+        },
+        {
+          "id": "bc-imog-minutes",
+          "icb": "QUA",
+          "label": "Black Country Integrated Medicines Optimisation Group (IMOG) minutes",
+          "kind": "doclib",
+          "url": "https://www.blackcountryformulary.nhs.uk/docs/default.asp?DocLib=102&Sort=D",
+          "itemPattern": "Minutes",
+          "what": "minutes"
+        },
+        {
+          "id": "bsol-skin-13-02-01",
+          "icb": "QHL",
+          "label": "Birmingham and Solihull formulary, Skin chapter 13.2.1 Emollients",
+          "kind": "chapter",
+          "url": "https://www.birminghamandsurroundsformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
+          "what": "chapter",
+          "partnerNames": [
+            "Black Country"
+          ]
+        },
+        {
+          "id": "bc-skin-13-02-01",
+          "icb": "QUA",
+          "label": "Black Country formulary, Skin chapter 13.2.1 Emollients",
+          "kind": "chapter",
+          "url": "https://www.blackcountryformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
+          "what": "chapter",
+          "partnerNames": [
+            "Birmingham and Solihull"
+          ]
+        }
+      ],
+      "notWatched": []
+    },
+    {
+      "id": "coventry-warwickshire-herefordshire-worcestershire",
+      "name": "Coventry and Warwickshire with Herefordshire and Worcestershire",
+      "icbs": [
+        "QWU",
+        "QGH"
+      ],
+      "sources": [
+        {
+          "id": "cw-apc-revisions",
+          "icb": "QWU",
+          "label": "Coventry and Warwickshire Area Prescribing Committee formulary revisions log",
+          "kind": "dirlist",
+          "url": "https://www.covwarkformulary.nhs.uk/docs/admin/revisions/",
+          "what": "revisions"
+        },
+        {
+          "id": "hw-dermatology-guidance",
+          "icb": "QGH",
+          "label": "Herefordshire and Worcestershire ICB dermatology prescribing guidance list",
+          "kind": "linklist",
+          "url": "https://herefordshireandworcestershire.icb.nhs.uk/documents/clinical-and-prescribing-policies-guidance-and-pathways/dermatology",
+          "linkPattern": "download_file",
+          "what": "guidance"
+        }
+      ],
+      "notWatched": [
+        {
+          "what": "Coventry and Warwickshire Area Prescribing Committee minutes",
+          "reason": "No public minutes listing was found on the formulary site, the ICB site or by search on 16/10/2026. The formulary's own revisions log is watched instead; it records formulary changes, not committee decisions."
+        },
+        {
+          "what": "Herefordshire and Worcestershire Medicines Prescribing Committee minutes",
+          "reason": "The ICB's meetings pages list board and partnership papers only; no medicines committee minutes were found on 16/10/2026. The dermatology guidance list is watched instead."
+        },
+        {
+          "what": "Coventry and Warwickshire formulary Skin chapter page",
+          "reason": "The 13.2.1 page returned an error to a scripted request on 16/10/2026, so no fingerprint can be stored."
+        }
+      ]
+    }
+  ]
+}

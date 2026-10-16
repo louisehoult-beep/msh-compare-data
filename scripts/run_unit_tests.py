@@ -114,6 +114,7 @@ RUN = [
     "test_sales_register.py",            # 2026-10, Medical Sales Register snippet rules, job typing, page filters
     # Added 30/09/2026 with scripts/refresh_icb_watch.py. Stdlib only, no network.
     "test_icb_watch.py",
+    "test_cluster_watch.py",             # 16/10/2026, ICB cluster watch (minutes, Skin chapter pages)
     "test_ask_passages.py",
     "test_hub_tools_demo_fixes.py",
     "test_bnf_products.py",
