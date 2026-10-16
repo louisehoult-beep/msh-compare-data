@@ -45,8 +45,8 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 23 | 36.5% | 16 | 31 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 6 | 42 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 22 | 37.9% | 12 | 32 | STARTED |
-| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 21 | 36.8% | 8 | 32 | STARTED |
-| Urology and Bowel Management | continence | 57 | 20 | 35.1% | 10 | 39 | STARTED |
+| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 20 | 35.1% | 9 | 32 | STARTED |
+| Urology and Bowel Management | continence | 57 | 20 | 35.1% | 11 | 38 | STARTED |
 | Advanced Wound Care | wound | 56 | 21 | 37.5% | 8 | 41 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 0 | 39 | STARTED · 7 EXCLUDED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 19 | 35.8% | 9 | 32 | STARTED |
@@ -61,7 +61,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 10 | 32.3% | 4 | 22 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 11 | 37.9% | 3 | 23 | STARTED |
 | General Wound Care | wound | 28 | 11 | 39.3% | 4 | 23 | STARTED |
-| Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 10 | 37.0% | 4 | 17 | STARTED |
+| Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 10 | 37.0% | 4 | 16 | STARTED |
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 9 | 36.0% | 4 | 14 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 8 | 32.0% | 5 | 15 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 5 | 16 | STARTED |
@@ -69,9 +69,9 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Hand Hygiene and Associated Products and Services | infection | 21 | 5 | 23.8% | 3 | 15 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 4 | 11 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 6 | 28.6% | 0 | 11 | STARTED · 5 EXCLUDED |
-| Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 8 | 40.0% | 4 | 11 | STARTED |
+| Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 9 | 45.0% | 3 | 11 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 7 | 36.8% | 5 | 11 | STARTED |
-| Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 9 | 47.4% | 5 | 10 | STARTED |
+| Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 9 | 47.4% | 5 | 9 | STARTED |
 | Examination Gloves | infection | 19 | 5 | 26.3% | 4 | 13 | STARTED |
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 6 | 9 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 7 | 38.9% | 1 | 13 | STARTED |
@@ -82,7 +82,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | imaging, oncology | 13 | 4 | 30.8% | 1 | 9 | STARTED · DEFERRED |
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 5 | 38.5% | 3 | 8 | STARTED |
 | Disposable and Washable Continence Care | continence | 12 | 5 | 41.7% | 4 | 7 | STARTED |
-| Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 1 | 10 | STARTED |
+| Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 1 | 8.3% | 1 | 10 | STARTED |
 | Prosthetic Components and Associated Products | orthotics | 12 | 5 | 41.7% | 1 | 7 | STARTED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 3 | 6 | STARTED |
 | CT Scanners and Associated Options and Related Services | imaging | 8 | 2 | 25.0% | 0 | 7 | STARTED · BLOCKED |
@@ -104,12 +104,12 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics | — | 28 | 0 | 0.0% | 20 | 8 | UNMAPPED |
 | Pulse Oximetry, Capnography and Related Monitoring Technologies | — | 26 | 0 | 0.0% | 18 | 10 | UNMAPPED |
 | Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions | — | 25 | 0 | 0.0% | 15 | 10 | UNMAPPED |
-| Extension Sets and Lines | — | 23 | 0 | 0.0% | 13 | 11 | UNMAPPED |
+| Extension Sets and Lines | — | 23 | 0 | 0.0% | 14 | 10 | UNMAPPED |
 | Vascular Therapy and Associated Products | — | 23 | 0 | 0.0% | 16 | 9 | UNMAPPED |
 | External Defibrillation Devices and Related Services and Accessories | — | 21 | 0 | 0.0% | 13 | 8 | UNMAPPED |
 | Surgical Mesh | — | 21 | 0 | 0.0% | 10 | 11 | UNMAPPED |
 | Instrument Decontamination and Accessories | — | 20 | 0 | 0.0% | 11 | 11 | UNMAPPED |
-| Intravenous Accessories and Pressure Monitoring Accessories | — | 20 | 0 | 0.0% | 7 | 13 | UNMAPPED |
+| Intravenous Accessories and Pressure Monitoring Accessories | — | 20 | 0 | 0.0% | 8 | 12 | UNMAPPED |
 | Rigid Endoscopy and Associated Options and Related Services | — | 18 | 0 | 0.0% | 4 | 14 | UNMAPPED |
 | Needlefree Connection Systems and Associated Products | — | 16 | 0 | 0.0% | 9 | 8 | UNMAPPED |
 | Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services | — | 14 | 0 | 0.0% | 8 | 7 | UNMAPPED |
