@@ -945,6 +945,41 @@ def check_mhra_dsu(doc):
         FAIL("mhra-dsu", "counts.bySpeciality does not equal the rows")
 
 
+def check_framework_dates_in_panels():
+    """One framework, one expiry date, and no unnamed expiry dates (16/10/2026).
+
+    Hub page 2802's calendar note gave the compression framework's expiry as
+    "February 2028" and, two sentences on, an unnamed "confirmed 26 Feb 2027
+    expiry" that belongs to the IC/IR framework. Nothing flagged it. The rules
+    live in scripts/framework_date_guard.py; this runs them over the prose of
+    every speciality panel. Live-page text is checked with
+    `python3 scripts/framework_date_guard.py <file.html>` before publishing."""
+    import glob
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "framework_date_guard", os.path.join("scripts", "framework_date_guard.py"))
+    guard = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(guard)
+    fws = guard.load_frameworks()
+
+    def strings(o):
+        if isinstance(o, str):
+            yield o
+        elif isinstance(o, dict):
+            for v in o.values():
+                yield from strings(v)
+        elif isinstance(o, list):
+            for v in o:
+                yield from strings(v)
+
+    for path in sorted(glob.glob(os.path.join("data", "speciality-panels", "*.json"))):
+        with open(path, encoding="utf-8") as f:
+            doc = json.load(f)
+        for text in strings(doc):
+            for problem in guard.check_text("<p>" + text + "</p>", fws):
+                FAIL("framework-dates", "%s: %s" % (os.path.basename(path), problem))
+
+
 def check_drug_tariff_viiia(doc):
     if doc is None:
         return
@@ -6801,6 +6836,7 @@ def main():
     check_product_types(load("product-types.json"))
     check_mhra_dsu(load("mhra-dsu.json"))
     check_drug_tariff_viiia(load("drug-tariff-part-viiia.json"))
+    check_framework_dates_in_panels()
 
     suppress = set()
     sup = load("suppressed-notices.json") or {}
