@@ -38,6 +38,20 @@ class Guard(unittest.TestCase):
         p = "<p>Vascular Therapy and Associated Products (2023/S 000-012286) started 28 Feb 2024 and live to 27 Feb 2028.</p>"
         self.assertEqual(g.check_text(p, FW), [])
 
+    def test_descriptive_name_is_enough(self):
+        p = "<p>The enteral feeding framework expires 13 July 2027. The infant feeding framework expires 28 February 2028.</p>"
+        self.assertEqual(g.check_text(p, FW), [])
+
+    def test_unnamed_expiries_in_different_years_fail(self):
+        p = ("<p>The current framework expires 26 Feb 2027. "
+             "The successor framework's first term ends 26 Feb 2030.</p>")
+        self.assertTrue(g.check_text(p, FW))
+
+    def test_sweep_never_prints_page_text(self):
+        import sweep_hub_framework_dates as sw
+        out = sw.short("2023/S000-012286 expiry given as '26 February 2027' but frameworks.json says 27/2/2028: SECRET PAGE TEXT")
+        self.assertNotIn("SECRET", out)
+
     def test_real_frameworks_load(self):
         self.assertTrue(any(f["ref"] == "2023/S000-012286" and f["end"] == (27, 2, 2028)
                             for f in g.load_frameworks()))

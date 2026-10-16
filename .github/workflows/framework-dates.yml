@@ -1,0 +1,38 @@
+name: Framework dates guard
+
+# Added 16/10/2026. Page 2802's calendar note blurred two frameworks' expiry dates
+# and nothing noticed. Lou: no manual checks. This reads every Hub page every day
+# and fails (GitHub failure email + phone alert) if a page states a framework's
+# expiry that disagrees with data/frameworks.json, or gives expiry dates in
+# different years without saying which framework each belongs to.
+# Read-only: it commits nothing, so it needs no place in the writer queue.
+# Rules: scripts/framework_date_guard.py. Baseline: data/framework-date-guard-baseline.json.
+
+on:
+  schedule:
+    - cron: "10 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Sweep every Hub page
+        id: sweep
+        env:
+          WPCOM_TOKEN: ${{ secrets.WPCOM_TOKEN }}
+        run: python3 scripts/sweep_hub_framework_dates.py
+      - name: Phone alert if a page contradicts the framework data (ntfy)
+        if: failure()
+        run: |
+          curl -s -H "Title: Medical Sales Hub - framework date problem on a page" -H "Priority: default" -H "Tags: warning" \
+            -d "A Hub page states a framework expiry that disagrees with the data or does not say which framework it means. Details in the run log: github.com/louisehoult-beep/msh-compare-data/actions" \
+            ntfy.sh/eth-hub-lou-4437

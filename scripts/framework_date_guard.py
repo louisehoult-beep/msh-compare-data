@@ -35,6 +35,7 @@ DATE = re.compile(r"\b(?:(\d{1,2})(?:st|nd|rd|th)?\s+)?(Jan|Feb|Mar|Apr|May|Jun|
 CUE = re.compile(r"(?i)\b(expires?|expired|expiry|expiring|ends?|ending|live to|runs? to|to|until|by)\b")
 STRONG_CUE = re.compile(r"(?i)\b(expires?|expiry|expiring|ends?|ending|live to|runs? to)\b")
 CODE = re.compile(r"\b[A-Z]{2,}\d+\b")  # TOS3, SBS10142: a named framework shorthand
+GENERIC = re.compile(r"(?i)\b(the|its|this|that|an?|current|incumbent|successor|confirmed)\s+(current |incumbent |successor |confirmed |old |new |existing )?(framework|agreement|contract|successor|expiry)('s)?\b")
 REF = re.compile(r"\b20\d\d/S\s?000-\d{5,6}\b")
 
 
@@ -67,21 +68,32 @@ def visible_paragraphs(raw):
 
 
 def sentences(par):
-    return [s for s in re.split(r"(?<=[.;!?])\s+(?=[A-Z\"'])", par) if s.strip()]
+    return [s for s in re.split(r"(?<=[.!?])\s+(?=[A-Z\"'])|;\s+", par) if s.strip()]
+
+
+START_WORDS = re.compile(r"(?i)\b(start|starts|started|starting|begin|begins|since|from|go-?live|live from|replaced|changed|published|deadline|closes|closed|notice|awarded|dated|updated|read|on)\b[^.;]{0,14}$")
+CUE_BEFORE = re.compile(r"(?i)\b(expires?|expiry|expiring|ends?|ending|ended|live to|runs? to|running to)\b[\s:(]*(?:on|in|by)?[\s:(]*$")
+CUE_AFTER = re.compile(r"(?i)^[\s,)]*\b(is|are)?\s*(a |the )?(device-buying-route )?\b(expiry|expires|ends|end date)\b")
 
 
 def expiry_dates(sentence):
-    """Dates tied to an expiry cue: cue within 25 chars before or 60 after, and the
-    date is not a start date ("started 28 Feb 2024", "estimated start (27 Feb 2027)")."""
+    """Dates tied to an expiry: a cue directly before ("expires on 27 Feb 2028",
+    "live to 27 Feb 2028") or directly after ("27 Feb 2028 expiry"), and not a
+    start, go-live, deadline or notice date."""
     found = []
     for m in DATE.finditer(sentence):
-        before = sentence[max(0, m.start() - 25):m.start()]
-        after = sentence[m.end():m.end() + 60]
-        if re.search(r"(?i)\b(start|starts|started|starting|begin|begins|from)\b[^.;]{0,12}$", before):
+        before = sentence[max(0, m.start() - 30):m.start()]
+        after = sentence[m.end():m.end() + 30]
+        if not (CUE_BEFORE.search(before) or CUE_AFTER.search(after)):
             continue
-        if STRONG_CUE.search(before) or STRONG_CUE.search(after):
-            d = int(m.group(1)) if m.group(1) else None
-            found.append((d, MONTHS[m.group(2).lower()[:3]], int(m.group(3)), m.group(0)))
+        # "started 28 Feb 2024 and live to 27 Feb 2028": the cue is directly before
+        # the second date, so this only rejects a date that is itself a start.
+        if START_WORDS.search(before) and not CUE_BEFORE.search(before):
+            continue
+        if int(m.group(3)) < 2026:
+            continue
+        d = int(m.group(1)) if m.group(1) else None
+        found.append((d, MONTHS[m.group(2).lower()[:3]], int(m.group(3)), m.group(0)))
     return found
 
 
@@ -91,6 +103,19 @@ def names_in(sentence, fws):
     low = sentence.lower()
     hits += [f for f in fws if f["name"] and f["name"].lower() in low and f not in hits]
     return hits, bool(REF.search(sentence.replace("\u00a0", " ")) or CODE.search(sentence))
+
+
+def _same_date(got, want):
+    """Month-year only when either side has no day; otherwise within a day (a brief
+    saying 'starts 28 Feb' where the data says the 27th is the same period)."""
+    import datetime
+    (gd, gm, gy), (wd, wm, wy) = got, want
+    if gd is None or wd is None:
+        return (gm, gy) == (wm, wy)
+    try:
+        return abs(datetime.date(gy, gm, gd).toordinal() - datetime.date(wy, wm, wd).toordinal()) <= 1
+    except ValueError:
+        return False
 
 
 def check_text(raw, fws=None):
@@ -104,13 +129,20 @@ def check_text(raw, fws=None):
                 continue
             hits, has_ref = names_in(s, fws)
             per_sentence.append((s, dates, hits, has_ref))
-            # Rule 1: only when exactly one known framework is named in the sentence.
+            # Rule 1: a date belongs to the nearest framework named BEFORE it in the
+            # sentence, and only when exactly one framework is named.
             if len(hits) == 1:
                 want = hits[0]["end"]
+                pos = min([s.replace(" ", "").find(hits[0]["ref"]) if hits[0]["ref"] in s.replace(" ", "") else 10**9,
+                           s.lower().find(hits[0]["name"].lower()) if hits[0]["name"] and hits[0]["name"].lower() in s.lower() else 10**9])
                 for d, mth, yr, txt in dates:
-                    if (mth, yr) != (want[1], want[2]) or (d and want[0] and d != want[0]):
-                        problems.append("%s expiry given as %r but frameworks.json says %s: %s"
-                                        % (hits[0]["ref"], txt, "%s/%s/%s" % want, s[:140]))
+                    at = s.find(txt)
+                    if at < pos or re.search(r"(?i)framework|agreement", re.sub(re.escape(hits[0]['name']), '', s[pos:at], flags=re.I)):
+                        continue
+                    if _same_date((d, mth, yr), want):
+                        continue
+                    problems.append("%s expiry given as %r but frameworks.json says %s: %s"
+                                    % (hits[0]["ref"], txt, "%s/%s/%s" % want, s[:140]))
         # Rule 2
         years = {yr for _, ds, _, _ in per_sentence for _, _, yr, _ in ds}
         if len(years) >= 2:
@@ -119,7 +151,7 @@ def check_text(raw, fws=None):
                 h, r = names_in(s, fws)
                 named_so_far = named_so_far or bool(h) or r
                 dates = expiry_dates(s)
-                if dates and not named_so_far:
+                if dates and not named_so_far and GENERIC.search(s):
                     problems.append("expiry date %r sits in a paragraph with expiries in other years "
                                     "but names no framework: %s" % (dates[0][3], s[:140]))
     return problems
