@@ -51,7 +51,10 @@
   var BUYING_CENTRE={'NHS Derby and Derbyshire ICB':'DLN','NHS Lincolnshire ICB':'DLN','NHS Nottingham and Nottinghamshire ICB':'DLN'};
   var BUYING_CENTRE_NOTE='Meets as a Board in Common with Derby and Derbyshire, Lincolnshire and Nottingham and Nottinghamshire ICBs — three legal entities, one shared executive team. Work them as one account, not three.';
 
-  function fwFor(p){return FW[p.s]||{fam:'NHS Supply Chain framework',cat:'https://www.supplychain.nhs.uk/'};}
+  /* p.fw (16/10/2026): a product whose live framework is not its speciality's family. Laparoscopic /
+     robotic consumables sit under Theatres, but buy through the Minimally Invasive Surgery framework,
+     not Theatre & Surgical Consumables; the speciality-level line sent reps to the wrong route. */
+  function fwFor(p){return p.fw||FW[p.s]||{fam:'NHS Supply Chain framework',cat:'https://www.supplychain.nhs.uk/'};}
   /* Evidence chip: real, verified citations from the Clinical Evidence Library
      (page 3791) where the speciality has a built band; falls back to the
      original generic evidence sentence for every speciality that doesn't. */
@@ -76,7 +79,7 @@
     c+='<a class="mst__evmore" href="'+libUrl+'" target="_blank" rel="noopener">See the full evidence library &rarr;</a></div>';
     return c;
   }
-  function renderIntel(p,s){var fw=fwFor(p);var pri=PRIORITY[p.s]||'NHS productivity & GIRFT';var h='';h+='<div class="mst__chip"><h4>Route to market &middot; framework</h4><p>'+fw.fam+'.</p><p class="mst__chiplink"><a href="'+fw.cat+'" target="_blank" rel="noopener">NHS Supply Chain category</a> &middot; <a href="/medical-sales-hub/frameworks/">Frameworks hub (live)</a> &middot; new tech: <a href="https://innovation.nhs.uk/" target="_blank" rel="noopener">NHS Innovation Service</a> &rarr; Supply Chain URN &rarr; Innovation DPS</p></div>';h+=evidenceChip(p);h+='<div class="mst__chip"><h4>National priority hook</h4><p>'+pri+'.</p></div>';$('m-intel').innerHTML=h;}
+  function renderIntel(p,s){var fw=fwFor(p);var pri=PRIORITY[p.s]||'NHS productivity & GIRFT';var h='';h+='<div class="mst__chip"><h4>Route to market &middot; framework</h4><p>'+fw.fam+'.</p><p class="mst__chiplink"><a href="'+fw.cat+'" target="_blank" rel="noopener">'+(fw.lab||'NHS Supply Chain category')+'</a> &middot; <a href="/medical-sales-hub/frameworks/">Frameworks hub (live)</a> &middot; new tech: <a href="https://innovation.nhs.uk/" target="_blank" rel="noopener">NHS Innovation Service</a> &rarr; Supply Chain URN &rarr; Innovation DPS</p></div>';h+=evidenceChip(p);h+='<div class="mst__chip"><h4>National priority hook</h4><p>'+pri+'.</p></div>';$('m-intel').innerHTML=h;}
   /* Patient handling runs a different route to every other speciality, and running the
      generic six-step cycle on it is what made the category read wrong to reviewers.
      The order below is the one used in practice: the manual handling lead is approached

@@ -704,15 +704,39 @@ def build_one(fw, h, to_company, cache, fts_releases, previous):
                         if t and not rec["lotTitles"].get(l):
                             rec["lotTitles"][l] = t
                     rec["signals"].append("fts-award")
-                    rec["sources"].append(s)
-                    rec["unresolved"].extend(u for u in previous.get("unresolved") or []
-                                             if u.get("source") == "fts-award")
                     for b, v in prev_lots.items():
                         if b in (fw.get("suppliers") or []):
                             lots.setdefault(b, set()).update(v)
                             rec["lotsBySource"].setdefault("fts-award", {})[b] = sorted(v, key=lot_sort_key)
                             if (previous.get("namedAs") or {}).get(b):
                                 rec["namedAs"][b] = previous["namedAs"][b]
+                    # Re-match the award names left unresolved last time against
+                    # TODAY's seed aliases. Carrying them forward verbatim meant an
+                    # alias added since (Genmed Enterprises International Ltd,
+                    # 16/10/2026) could never attach its lots without a full
+                    # re-read of the award feed.
+                    old_unres = [u for u in previous.get("unresolved") or []
+                                 if u.get("source") == "fts-award"]
+                    retry = {u["name"]: set(u.get("lots") or []) for u in old_unres if u.get("name")}
+                    spelled = {}
+                    got, still = attach_names(retry, fw.get("suppliers") or [], to_company, spelled) \
+                        if retry else ({}, [])
+                    for b, v in got.items():
+                        lots.setdefault(b, set()).update(v)
+                        mine = rec["lotsBySource"].setdefault("fts-award", {}).setdefault(b, [])
+                        rec["lotsBySource"]["fts-award"][b] = sorted(set(mine) | set(v), key=lot_sort_key)
+                    for b, names in spelled.items():
+                        other = sorted(n for n in names if n != b)
+                        if other:
+                            rec["namedAs"][b] = sorted(set(rec["namedAs"].get(b) or []) | set(other))
+                    for u in still:
+                        u["source"] = "fts-award"
+                    rec["unresolved"].extend(still)
+                    rec["unresolved"].extend(u for u in old_unres if not u.get("name"))
+                    s = dict(s)
+                    if "suppliersWithLots" in s:
+                        s["suppliersWithLots"] = len(rec["lotsBySource"].get("fts-award") or {})
+                    rec["sources"].append(s)
 
     rec["supplierLots"] = {b: sorted(v, key=lot_sort_key) for b, v in sorted(lots.items())}
     if rec["supplierLots"]:

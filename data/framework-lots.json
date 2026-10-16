@@ -10,7 +10,7 @@
   "ref": "ETH-D8F73B696",
   "contact": "contact@elevateandthrive.uk"
  },
- "dataAsOf": "2026-10-12",
+ "dataAsOf": "2026-10-16",
  "owner": "NHS Supply Chain",
  "rule": "A supplier is shown on a lot ONLY where the framework owner's own published source for that framework names it against that lot: the NHS Supply Chain contract launch brief's lot-by-lot supplier lists or supplier-by-lot table, the Product/Supplier Matrix spreadsheet attached to that brief (only where the sheet has an explicit lot axis, and only where the supplier has a mark or a product in that lot), or the Find a Tender contract award notice for that framework's own procurement. Nothing is inferred from product ranges, specialities or lot titles. Lots attach to the exact supplier string the brief uses; a source name attaches only where its normalised form (brief_names.clean + company_match.key) equals that brief name's, or both resolve to the same single Hub company under the seed's recorded aliases. Unmatched names are listed in `unresolved`, never guessed. Where the brief breaks a framework into lots but no source names who holds which, lotStatus is 'notPublished' and the report says so.",
  "counts": {
@@ -12369,28 +12369,10 @@
       "Lot 7",
       "Lot 8"
      ],
-     "suppliersWithLots": 57
+     "suppliersWithLots": 59
     }
    ],
    "unresolved": [
-    {
-     "name": "Advanced Medial Solutions Limited",
-     "lots": [
-      "Lot 3"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "Genmed Enterprises International Ltd",
-     "lots": [
-      "Lot 4",
-      "Lot 5",
-      "Lot 7"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
     {
      "name": "Vanguard Medical Devices Ltd",
      "lots": [
@@ -12678,6 +12660,14 @@
       "Lot 3",
       "Lot 4",
       "Lot 5"
+     ],
+     "Advanced Medical Solutions Ltd": [
+      "Lot 3"
+     ],
+     "Genmed Enterprises Ltd": [
+      "Lot 4",
+      "Lot 5",
+      "Lot 7"
      ]
     }
    },
@@ -12799,6 +12789,12 @@
     ],
     "W.L. Gore & Associates (UK) Ltd": [
      "W.L. Gore and Associates (U.K.) Limited"
+    ],
+    "Advanced Medical Solutions Ltd": [
+     "Advanced Medial Solutions Limited"
+    ],
+    "Genmed Enterprises Ltd": [
+     "Genmed Enterprises International Ltd"
     ]
    },
    "briefLotTitles": {
@@ -12812,6 +12808,9 @@
     "Lot 8": "Maintenance of Minimally Invasive Surgery Instruments and Equipment"
    },
    "supplierLots": {
+    "Advanced Medical Solutions Ltd": [
+     "Lot 3"
+    ],
     "Applied Medical UK Ltd": [
      "Lot 1",
      "Lot 2",
@@ -12887,6 +12886,11 @@
     "GS Medical Healthcare": [
      "Lot 4",
      "Lot 6"
+    ],
+    "Genmed Enterprises Ltd": [
+     "Lot 4",
+     "Lot 5",
+     "Lot 7"
     ],
     "HC21 (UK) Ltd": [
      "Lot 4",
@@ -13092,8 +13096,6 @@
    },
    "status": "published",
    "suppliersWithoutLot": [
-    "Advanced Medical Solutions Ltd",
-    "Genmed Enterprises Ltd",
     "Vanguard AG"
    ],
    "coversLots": [

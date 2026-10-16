@@ -259,7 +259,7 @@ function buildPane(){
   h+='<label class="mst__lab">3 &middot; Product type<select class="mst__sel" id="cp-type"></select></label>';
   h+='</div>';
   h+='<div id="cp-route"></div><div id="cp-table"></div><div id="cp-dacs"></div><div id="cp-issues"></div>';
-  h+='<div class="mst__note">Supplier sets are the key players for each product type, not the full framework award list (the continence framework alone has 57 suppliers). Brands, framework presence and issues verified against the linked sources on 17/07/2026. For anything time-critical, check the NHS Supply Chain <a href="https://www.supplychain.nhs.uk/icn/" target="_blank" rel="noopener">important customer notices</a> and <a href="https://www.gov.uk/drug-device-alerts" target="_blank" rel="noopener">MHRA alerts</a> directly.</div>';
+  h+='<div class="mst__note">Most supplier sets are the key players for each product type, not the full framework award list (the continence framework alone has 57 suppliers); where the route note above says every framework supplier is listed, the table is the whole award. Brands, framework presence and issues verified against the linked sources on 17/07/2026. For anything time-critical, check the NHS Supply Chain <a href="https://www.supplychain.nhs.uk/icn/" target="_blank" rel="noopener">important customer notices</a> and <a href="https://www.gov.uk/drug-device-alerts" target="_blank" rel="noopener">MHRA alerts</a> directly.</div>';
   sec.innerHTML=h;
   return sec;
 }

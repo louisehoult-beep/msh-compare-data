@@ -153,6 +153,33 @@ class FindATender(unittest.TestCase):
         self.assertEqual(rec["supplierLots"], {"Hollister Limited": ["Lot 12"]})
         self.assertEqual(rec["status"], "published")
 
+    def test_carried_forward_unresolved_rematched_against_new_alias(self):
+        # 16/10/2026, Minimally Invasive Surgery: "Genmed Enterprises International
+        # Ltd" sat in `unresolved` on the award. Adding the seed alias did nothing,
+        # because the carry-forward branch copied unresolved names verbatim instead
+        # of re-matching them, so Lot 4/5/7 stayed one short.
+        fw = {"name": "MIS", "url": "u", "reference": "2026/S 000-061906",
+              "suppliers": ["Applied Medical UK Ltd", "Genmed Enterprises Ltd", "Vanguard AG"]}
+        prev = {"lotTitles": {"Lot 4": "Instruments", "Lot 2": "Energy"},
+                "sources": [{"kind": "fts-award", "url": "x", "label": "award",
+                             "coversLots": ["Lot 2", "Lot 4"], "suppliersWithLots": 1}],
+                "lotsBySource": {"fts-award": {"Applied Medical UK Ltd": ["Lot 4"]}},
+                "unresolved": [
+                    {"name": "Genmed Enterprises International Ltd", "lots": ["Lot 4", "Lot 5"],
+                     "reason": "r", "source": "fts-award"},
+                    {"name": "Vanguard Medical Devices Ltd", "lots": ["Lot 2"],
+                     "reason": "r", "source": "fts-award"}]}
+        alias = {"genmed enterprises international ltd": "Genmed Enterprises Ltd",
+                 "genmed enterprises ltd": "Genmed Enterprises Ltd"}
+        rec = L.build_one(fw, "", lambda n: alias.get(n.lower()), None, None, prev)
+        self.assertEqual(rec["supplierLots"]["Genmed Enterprises Ltd"], ["Lot 4", "Lot 5"])
+        self.assertEqual(rec["namedAs"]["Genmed Enterprises Ltd"], ["Genmed Enterprises International Ltd"])
+        self.assertEqual([u["name"] for u in rec["unresolved"]], ["Vanguard Medical Devices Ltd"])
+        self.assertEqual(rec["unresolved"][0]["source"], "fts-award")
+        self.assertEqual(rec["sources"][0]["suppliersWithLots"], 2)
+        self.assertEqual(prev["sources"][0]["suppliersWithLots"], 1)
+        self.assertEqual(rec["suppliersWithoutLot"], ["Vanguard AG"])
+
 
     def test_award_lot_label_read_from_its_title(self):
         # Instrument Decontamination and Accessories, award 035065-2022: OCDS lot
