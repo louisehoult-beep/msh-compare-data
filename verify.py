@@ -2177,6 +2177,25 @@ def check_notice():
             FAIL("notice", "data/%s is missing its ownership notice, or it has drifted. "
                            "Run: python3 scripts/stamp_notice.py" % name)
 
+    # Speciality panels sit one level down and carry their own per-file refs.
+    pdir = os.path.join(DATA, "speciality-panels")
+    if os.path.isdir(pdir):
+        for name in sorted(os.listdir(pdir)):
+            if not name.endswith(".json"):
+                continue
+            key = "speciality-panels/" + name
+            doc = load(key)
+            if not isinstance(doc, dict):
+                continue
+            if key not in stamp_notice.REFS:
+                FAIL("notice", "data/%s has no marker ref. Mint one with "
+                               "`python3 scripts/stamp_notice.py --mint %s` and add it to "
+                               "REFS before publishing this file." % (key, name))
+                continue
+            if doc.get("_notice") != stamp_notice.notice_for(key):
+                FAIL("notice", "data/%s is missing its ownership notice, or it has drifted. "
+                               "Run: python3 scripts/stamp_notice.py" % key)
+
 
 # --------------------------------------------------------------------------
 # 8. COMPANY REPORT — Companies House facts, and the two claims that are DERIVED

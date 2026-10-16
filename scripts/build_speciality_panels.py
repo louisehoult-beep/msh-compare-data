@@ -9738,12 +9738,26 @@ def check_absent_frameworks(slug, rule, fw_doc):
                 % (slug, want))
 
 
+def _panel_notice(slug):
+    import stamp_notice
+    key = "speciality-panels/%s.json" % slug
+    if key not in stamp_notice.REFS:
+        # A slug with no minted ref still builds (tests build in memory), but the file
+        # carries no ref and verify.py's notice check fails it until one is minted:
+        #   python3 scripts/stamp_notice.py --mint <slug>.json  (then add it to REFS)
+        notice = stamp_notice.notice_for("identity-vocabulary-policy.json")
+        notice.pop("ref", None)
+        notice["markerRef"] = "Not yet minted for %s." % key
+        return notice
+    return stamp_notice.notice_for(key)
+
+
 def build(slug, sources):
     rule = SPECIALITY_RULES.get(slug)
     generated = datetime.date.today().isoformat()
     if not rule:
         return {
-            "_notice": sources["notice"],
+            "_notice": _panel_notice(slug),
             "slug": slug,
             "defined": False,
             "generated": generated,
@@ -9783,7 +9797,7 @@ def build(slug, sources):
     qualify = (lambda text: R(text + " " + note) if note else R(text))
 
     doc = {
-        "_notice": sources["notice"],
+        "_notice": _panel_notice(slug),
         "slug": slug,
         "label": rule["label"],
         "defined": True,
@@ -10118,16 +10132,9 @@ def load_sources():
                   for items in (li.get("specialities") or {}).values() for it in items]
         li["checkedOn"] = max([c for c in checks if c] or [None]) if any(checks) else None
         sources["local_intel"] = li
-    # The licence and database-right wording is the house notice, carried verbatim.
-    # The `ref` is NOT: a marker ref identifies one file, and reusing another file's
-    # would defeat the traceability it exists for. stamp_notice.py only walks
-    # data/*.json, so nothing mints one for a file in a subdirectory yet. Say so in
-    # the file rather than shipping a borrowed marker.
-    notice = dict(sources["open_tenders"]["_notice"])
-    notice.pop("ref", None)
-    notice["markerRef"] = ("Not yet minted. This file sits in data/speciality-panels/ and "
-                           "scripts/stamp_notice.py walks only data/*.json.")
-    sources["notice"] = notice
+    # The licence and database-right wording is the house notice. The marker ref is
+    # per file (scripts/stamp_notice.py REFS, keyed "speciality-panels/<slug>.json"),
+    # so build() takes the whole notice from _panel_notice() and nothing is borrowed.
     sources["registry"] = company_alias.load_registry()
     # Phase 2 sources. Each is optional in the sense that a missing file yields no
     # section rather than a crash, and the panel says which sections it carries.

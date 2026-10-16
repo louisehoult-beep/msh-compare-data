@@ -153,7 +153,19 @@ def main():
     # checked first, ahead of both the division match and the old fallback.
     product_override = {(e["supplier"], e["division"]): e["hub"]
                          for e in cmap.get("entries", [])
-                         if e.get("kind") == "product-override" and e.get("hub")}
+                         if e.get("kind") == "product-override" and e.get("hub")
+                         and not e.get("npc")}
+
+    # kind="product-override" entries may also carry an "npc". Added 16/10/2026
+    # (^o627): NHS Supply Chain can give two unrelated items the SAME catalogue name
+    # (Siemens Healthineers' "EPOC" is both a capillary blood tube, HHH85221, and a BGEM
+    # test card, HHH85175), and the NHSSC loop below keeps one row per (supplier, name),
+    # so the second was dropped and the first took the term's category. An npc-keyed
+    # override names ONE item by its NPC, applies only to it, and lets it stand as its own
+    # row beside a same-named sibling. Opt-in: no entry without an npc changes.
+    npc_override = {(e["supplier"], str(e["npc"])): e["hub"]
+                    for e in cmap.get("entries", [])
+                    if e.get("kind") == "product-override" and e.get("hub") and e.get("npc")}
 
     # Every legal category, so a mapping cannot invent one.
     legal = {"%s:%s" % (s, t) for s, v in vocab.items()
@@ -384,7 +396,10 @@ def main():
         mapped_cats = nhssc_map.get((norm(co), norm(term)))
         for it in rec.get("items") or []:
             name = it.get("name") or term
+            npc_ov = npc_override.get((co, str(it.get("npc") or "")))
             k = (norm(co), norm(name))
+            if npc_ov:
+                k = k + (str(it.get("npc")),)  # a named item stands apart from a same-name sibling
             if k in already_published_keys:
                 continue
             already_published_keys.add(k)  # one row per (supplier, NHSSC name)
@@ -437,7 +452,7 @@ def main():
             # nothing populates it except an entry explicitly tagged
             # product-override, so no existing row can change unless named.
             item_cats = mapped_cats
-            ov = product_override.get((co, name))
+            ov = npc_ov or product_override.get((co, name))
             if ov:
                 item_cats = ov if isinstance(ov, list) else [ov]
             if item_cats:
@@ -582,9 +597,11 @@ def main():
     comparable = {c: n for c, n in bycat.items() if n >= 2}
 
     # See heldBySupplier below: the complete per-supplier held count.
-    held_by_supplier = collections.Counter()
-    for (co, _div), n in hcount.items():
-        held_by_supplier[co] += n
+    # Counted from the complete `held` list, every reason. It used to sum `hcount`,
+    # which is only incremented on the no-recorded-mapping branch, so a supplier whose
+    # products were held for "no source" (Vernacare: 98 of 117) or an illegal category
+    # showed only the no-mapping share (^o622, fixed 16/10/2026).
+    held_by_supplier = collections.Counter(h["supplier"] for h in held)
 
     doc = {
         "_notice": "GENERATED. Do not edit by hand — run "

@@ -3091,6 +3091,65 @@ def claim_out_file(path):
     return lock
 
 
+# Ranges on a supplier's site that belong to a DIFFERENT business from the entity named
+# in the award, so a crawl must never record them under it (^o591, 16/10/2026).
+# jnjvisionpro.com is Johnson & Johnson's professional-vision site: it carries the
+# ACUVUE contact-lens range (Johnson & Johnson Vision Care) beside the surgical
+# portfolio. The award on NHS Supply Chain's Complete Ophthalmology Solutions 3 is
+# to Johnson & Johnson Surgical Vision, so only the surgical range belongs here.
+OUT_OF_SCOPE_RANGES = {
+    "Johnson & Johnson Surgical Vision": re.compile(
+        r"acuvue|lens parameters|parametry [cč]o[cč]ek|kontaktl|kontaktn[ií] [cč]o[cč]ky", re.I),
+}
+
+
+def drop_out_of_scope_ranges(name, shaped):
+    """Remove products (and any division left empty) whose name or division matches the
+    supplier's recorded out-of-scope pattern. Mutates and returns `shaped`."""
+    pat = OUT_OF_SCOPE_RANGES.get(name)
+    if not pat:
+        return shaped
+    keep = [p for p in shaped.get("products") or []
+            if not pat.search(p.get("n") or "") and not pat.search(p.get("division") or "")]
+    shaped["products"] = keep
+    counts = {}
+    for p in keep:
+        counts[p.get("division")] = counts.get(p.get("division"), 0) + 1
+    shaped["divisions"] = [dict(d, products=counts[d["name"]])
+                           for d in shaped.get("divisions") or [] if d.get("name") in counts]
+    return shaped
+
+
+def carry_manual_products(existing, shaped):
+    """Keep hand-captured products across a re-crawl (^o524, 16/10/2026).
+
+    A product read by hand from the supplier's own page (manual product capture
+    route) sits in the supplier's record with a "manualCapture" block naming its
+    source URL and date. The crawl replaces the whole record, which used to wipe
+    such a product the next time the supplier was crawled (Urathon's Yuwell
+    Anytime CGM sits on a microsite outside the /product/ catalogue the crawler
+    reads). Carry each one forward unless the crawl now finds the same product,
+    and keep its division counted. Mutates and returns `shaped`."""
+    have = {(p.get("n") or "").strip().lower() for p in shaped.get("products") or []}
+    divisions = shaped.setdefault("divisions", [])
+    for prod in (existing or {}).get("products") or []:
+        if not prod.get("manualCapture"):
+            continue
+        key = (prod.get("n") or "").strip().lower()
+        if not key or key in have:
+            continue
+        shaped.setdefault("products", []).append(dict(prod))
+        have.add(key)
+        div = prod.get("division")
+        for d in divisions:
+            if d.get("name") == div:
+                d["products"] = d.get("products", 0) + 1
+                break
+        else:
+            divisions.append({"name": div, "products": 1})
+    return shaped
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--supplier")
@@ -3294,6 +3353,8 @@ def main():
         for k in ("aliases", "companyNo", "notSold", "tubesNote", "domainWarning"):
             if k in existing:
                 shaped[k] = existing[k]
+        drop_out_of_scope_ranges(name, shaped)
+        carry_manual_products(existing, shaped)
         doc["suppliers"][name] = shaped
         done += 1
         print("  OK %-30s %d products, %d divisions (%s)"

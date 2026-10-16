@@ -188,6 +188,8 @@ RUN = [
     # reached the Hub). Stdlib only, offline (every fetch is a fixture),
     # 0.076s. Registered here, GitHub-actions-triage, 15/10/2026.
     "test_crawl_round2_shapes.py",
+    # Added 16/10/2026 (^o524): hand-captured products survive a re-crawl.
+    "test_crawl_manual_carry.py",
 ]
 
 # A test that is red for a reason that is its own decision goes HERE, not out of
