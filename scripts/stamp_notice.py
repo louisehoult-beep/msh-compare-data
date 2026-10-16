@@ -122,6 +122,8 @@ REFS = {
     # Part VIIIA. Minted with `stamp_notice.py --mint`.
     "mhra-dsu.json":                   "ETH-D761DEE34",
     "drug-tariff-part-viiia.json":     "ETH-D8AEA63D7",
+    # Added 16/10/2026: previous-month Drug Tariff slices for price-move alerts.
+    "tariff-snapshots.json":           "ETH-DA65B1CB0",
 }
 
 

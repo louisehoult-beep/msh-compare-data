@@ -27,6 +27,13 @@ name: Drug Tariff Parts IX and VIIIA (daily check, monthly source)
 # the file from scratch, which drops the _notice ownership block; without the re-stamp
 # the job would publish an unmarked file and break the next hand-push's gate.
 #
+# ⚠️ THE PREVIOUS MONTH IS KEPT HERE (added 16/10/2026). Part IX holds one month and the
+# refresh overwrites it, so month-on-month price moves (speciality panel `drugTariffMoves`)
+# need last month stored somewhere durable. scripts/tariff_snapshots.py appends each
+# month's per-speciality slice to data/tariff-snapshots.json straight after the refresh;
+# build_speciality_panels.py (07:00 run) diffs the live month against the latest earlier
+# snapshot. Git history is not relied on.
+#
 # ⚠️ THE PRODUCT DOSSIERS MUST FOLLOW THE TARIFF (added 01/10/2026).
 # data/product-dossiers-{wound,respiratory,dermatology}.json copy Drug Tariff prices out
 # of the Part IX file, and test_product_dossiers.py (test_tariff_price_is_pounds,
@@ -88,6 +95,12 @@ jobs:
           python3 scripts/refresh_drug_tariff_part_viiia.py --out data/drug-tariff-part-viiia.json \
             ${{ github.event.inputs.month && format('--month {0}', github.event.inputs.month) || '' }}
 
+      - name: Keep this month's slice so next month can show price moves
+        # The refresh above overwrote last month's file. data/tariff-snapshots.json holds
+        # each opted-in speciality's slice per month (last 4), written ONLY here, so the
+        # previous month survives. Idempotent within a month; earlier months untouched.
+        run: python3 scripts/tariff_snapshots.py
+
       - name: Rebuild product dossiers if the tariff changed
         run: python3 scripts/rebuild_dossiers_for_tariff.py
 
@@ -122,7 +135,7 @@ jobs:
         run: |
           git config user.name "drug-tariff-bot"
           git config user.email "actions@github.com"
-          git add data/drug-tariff-part-ix.json data/drug-tariff-part-viiia.json data/product-dossiers-wound.json data/product-dossiers-respiratory.json data/product-dossiers-dermatology.json
+          git add data/drug-tariff-part-ix.json data/drug-tariff-part-viiia.json data/tariff-snapshots.json data/product-dossiers-wound.json data/product-dossiers-respiratory.json data/product-dossiers-dermatology.json
           git diff --cached --quiet || git commit -m "Drug Tariff Parts IX and VIIIA $(date -u +%F)"
           pushed=0
           for attempt in 1 2 3; do
@@ -136,11 +149,12 @@ jobs:
             git reset --hard origin/main
             python3 scripts/refresh_drug_tariff_part_ix.py --out data/drug-tariff-part-ix.json
             python3 scripts/refresh_drug_tariff_part_viiia.py --out data/drug-tariff-part-viiia.json
+            python3 scripts/tariff_snapshots.py
             python3 scripts/rebuild_dossiers_for_tariff.py || { echo "DOSSIER REBUILD REFUSED after re-fetch - refusing to push"; exit 1; }
             python3 scripts/stamp_notice.py
             bash scripts/gate.sh || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
             python3 test_product_dossiers.py || { echo "DOSSIER TEST FAILED after re-fetch - refusing to push"; exit 1; }
-            git add data/drug-tariff-part-ix.json data/drug-tariff-part-viiia.json data/product-dossiers-wound.json data/product-dossiers-respiratory.json data/product-dossiers-dermatology.json
+            git add data/drug-tariff-part-ix.json data/drug-tariff-part-viiia.json data/tariff-snapshots.json data/product-dossiers-wound.json data/product-dossiers-respiratory.json data/product-dossiers-dermatology.json
             git diff --cached --quiet || git commit -m "Drug Tariff Parts IX and VIIIA $(date -u +%F) (retry)"
             sleep 5
           done

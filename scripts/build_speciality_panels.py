@@ -6498,6 +6498,9 @@ SPECIALITY_RULES = {
         # diabetic foot creams alongside the heel and callus lines already counted.
         "tariffBnf": ("2122",),
         "tariffParts": ("IXA",),
+        # Month-on-month price moves: scripts/tariff_snapshots.py keeps each month's
+        # slice of this rule in data/tariff-snapshots.json (16/10/2026).
+        "tariffMoves": True,
         "tariffVmp": (
             r"emollient|emulsifying wax|"
             r"(?:white|yellow) soft paraffin|liquid paraffin|paraffin-free|"
@@ -8411,6 +8414,125 @@ def build_tariff(rule, dt_doc):
     return summarise_tariff(rows, ix, parts, bnf_prefixes, vmp_pattern, dt_doc)
 
 
+def build_tariff_moves(slug, rule, dt_doc, snaps):
+    """Month-on-month Drug Tariff price moves for this speciality's own slice (16/10/2026).
+
+    Compares the CURRENT slice (read live from the Part IX file, the same rows
+    build_tariff summarises) with the most recent EARLIER month held in
+    data/tariff-snapshots.json, which scripts/tariff_snapshots.py keeps because the
+    refresh overwrites the Part IX file. A line is matched on supplier, product name,
+    pack size, quantity and unit of measure, the five fields that make a Part IX line
+    the same line next month; anything else (price, BNF code) is what is being compared.
+
+    Three outcomes per line and nothing inferred: price changed, line new this month,
+    line no longer listed. A line that is no longer listed is NOT called discontinued:
+    NHSBSA's list says only that it is not on this month's tariff. Returns None, so the
+    panel shows nothing, when the speciality does not opt in or no earlier month exists.
+    """
+    if not rule.get("tariffMoves") or not snaps:
+        return None
+    months = ((snaps.get("slices") or {}).get(slug) or {}).get("months") or {}
+    cur_month = dt_doc.get("effectiveMonth")
+    earlier = sorted(m for m in months if m < (cur_month or ""))
+    if not earlier:
+        return None
+    prev_month = earlier[-1]
+    ix = {k: i for i, k in enumerate(dt_doc["schema"])}
+    sch = {k: i for i, k in enumerate(snaps["schema"])}
+    KEY = ("supplier", "amp", "size", "qty", "uom")
+
+    def key_cur(r):
+        return tuple(r[ix[f]] for f in KEY)
+
+    def key_prev(r):
+        return tuple(r[sch[f]] for f in KEY)
+
+    cur = {}
+    for r in tariff_rows(rule, dt_doc):
+        cur.setdefault(key_cur(r), []).append(float(r[ix["price"]]))
+    prev = {}
+    for r in months[prev_month]["rows"]:
+        prev.setdefault(key_prev(r), []).append(float(r[sch["price"]]))
+    # Duplicate keys cannot be compared one-to-one; refuse to guess which is which.
+    ambiguous = sorted(k for k in set(cur) | set(prev)
+                       if len(cur.get(k, [])) > 1 or len(prev.get(k, [])) > 1)
+
+    def line(k, old, new):
+        out = {"supplier": k[0], "product": k[1], "size": k[2], "qty": k[3], "uom": k[4]}
+        if old is not None:
+            out["was"] = round(old / 100.0, 2)
+        if new is not None:
+            out["now"] = round(new / 100.0, 2)
+        if old and new:
+            out["pct"] = round((new - old) / old * 100.0, 1)
+        return out
+
+    moves, added, dropped, unchanged = [], [], [], 0
+    for k in sorted(set(cur) | set(prev)):
+        if k in ambiguous:
+            continue
+        if k in cur and k in prev:
+            if cur[k][0] != prev[k][0]:
+                moves.append(line(k, prev[k][0], cur[k][0]))
+            else:
+                unchanged += 1
+        elif k in cur:
+            added.append(line(k, None, cur[k][0]))
+        else:
+            dropped.append(line(k, prev[k][0], None))
+    moves.sort(key=lambda m: (-abs(m["pct"]), m["supplier"], m["product"]))
+    by_sup = {}
+    for m in moves:
+        b = by_sup.setdefault(m["supplier"], {"name": m["supplier"], "up": 0, "down": 0, "pcts": []})
+        b["up" if m["pct"] > 0 else "down"] += 1
+        b["pcts"].append(m["pct"])
+    suppliers = [{"name": b["name"], "up": b["up"], "down": b["down"],
+                  "minPct": min(b["pcts"]), "maxPct": max(b["pcts"])}
+                 for b in sorted(by_sup.values(), key=lambda b: (-(b["up"] + b["down"]), b["name"]))]
+    return {
+        "currentMonth": cur_month,
+        "previousMonth": prev_month,
+        "previousDataAsOf": months[prev_month].get("dataAsOf"),
+        "dataAsOf": dt_doc.get("dataAsOf"),
+        "sourcePage": dt_doc.get("sourcePage"),
+        "linesCompared": unchanged + len(moves),
+        "unchanged": unchanged,
+        "movedCount": len(moves),
+        "upCount": sum(1 for m in moves if m["pct"] > 0),
+        "downCount": sum(1 for m in moves if m["pct"] < 0),
+        "addedCount": len(added),
+        "droppedCount": len(dropped),
+        "ambiguousCount": len(ambiguous),
+        "suppliers": suppliers,
+        "moves": moves[:60],
+        "added": added[:30],
+        "dropped": dropped[:30],
+    }
+
+
+def tariff_moves_rule(m):
+    """The rule text for the price-move block: what was compared, what counts as a
+    move, and what the block does not claim."""
+    if not m:
+        return None
+    return (
+        "Compares this panel's own Drug Tariff slice (the lines described under "
+        "drugTariff) for %s with the same slice for %s, both published by NHSBSA. "
+        "A line is the same line when supplier, product name, pack size, quantity and "
+        "unit of measure all match; it has moved when its reimbursement price differs. "
+        "Percentages are the change from last month's price, rounded to one decimal "
+        "place. A line listed this month and not last is shown as new, and a line "
+        "listed last month and not this month is shown as no longer listed: NHSBSA's "
+        "list does not say why, so neither is described as launched or discontinued. "
+        "%d line(s) whose key appears more than once in a month are left out of the "
+        "comparison rather than guessed at. This is the Drug Tariff reimbursement "
+        "price, not the price a supplier charges a pharmacy or a hospital, and a "
+        "month with no moves is an honest result. The previous month is kept in "
+        "data/tariff-snapshots.json by the daily tariff refresh, because the Part IX "
+        "file itself holds only the current month." % (
+            m["currentMonth"], m["previousMonth"], m["ambiguousCount"]))
+
+
 def tariff_rows(rule, dt_doc):
     """The Part IX lines a rule selects. build_tariff summarises them; render_counts
     reads the same rows, so a count in rule text and the summary cannot disagree."""
@@ -9644,6 +9766,7 @@ def build(slug, sources):
     awards, award_total, awards_withheld = cap_awards(rule, matched)
     open_tenders = build_open_tenders(rx, slug, ot_doc)
     tariff = build_tariff(rule, dt_doc)
+    tariff_moves = build_tariff_moves(slug, rule, dt_doc, sources.get("tariff_snapshots"))
     local_intel = build_local_intel(slug, sources.get("local_intel") or {})
     gp = build_gp_prescribing(slug, sources.get("gp"))
     dsu = build_mhra_dsu(slug, sources.get("mhra_dsu"))
@@ -9809,6 +9932,7 @@ def build(slug, sources):
             "gpPrescribing": gp_rule(gp),
             "mhraDsu": dsu_rule(dsu),
             "drugTariffViiia": viiia_rule(viiia),
+            "drugTariffMoves": tariff_moves_rule(tariff_moves),
             "marketShare": market_share_rule(market_share),
         },
         "counts": {
@@ -9834,6 +9958,7 @@ def build(slug, sources):
         "awards": awards,
         "openTenders": open_tenders,
         "drugTariff": tariff,
+        "drugTariffMoves": tariff_moves,
         "localIntel": local_intel,
         "localIntelGroups": (sources.get("local_intel") or {}).get("groups") or {},
         "directorySuppliers": directory,
@@ -9845,6 +9970,9 @@ def build(slug, sources):
     if not market_share:
         del doc["marketShare"]
         del doc["rules"]["marketShare"]
+    if not tariff_moves:
+        del doc["drugTariffMoves"]
+        del doc["rules"]["drugTariffMoves"]
     check_money(slug, doc["rules"])
     return doc
 
@@ -10011,7 +10139,8 @@ def load_sources():
                                                    load("speciality-map.json"))
     sources["gp"] = GPData(os.path.join(DATA, "gp-prescribing"))
     sources["hp"] = HPData(os.path.join(DATA, "hospital-prescribing"))
-    for key, name in (("mhra_dsu", "mhra-dsu.json"), ("tariff_viiia", "drug-tariff-part-viiia.json")):
+    for key, name in (("mhra_dsu", "mhra-dsu.json"), ("tariff_viiia", "drug-tariff-part-viiia.json"),
+                      ("tariff_snapshots", "tariff-snapshots.json")):
         path = os.path.join(DATA, name)
         sources[key] = load(name) if os.path.exists(path) else None
     return sources

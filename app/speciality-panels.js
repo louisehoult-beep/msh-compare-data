@@ -283,6 +283,54 @@
       h += '</div>';
     }
 
+    /* DRUG TARIFF PRICE MOVES — this month against last month, same slice (16/10/2026).
+       Only panels whose rule opts in carry d.drugTariffMoves. */
+    if (d.drugTariffMoves) {
+      var tm = d.drugTariffMoves;
+      var pen = function (v) { return '&pound;' + Number(v).toFixed(2); };
+      var sgn = function (v) { return (v > 0 ? '+' : '') + v.toFixed(1) + '%'; };
+      var pack = function (m) { return (m.qty ? m.qty + ' ' : '') + (m.uom || '') + (m.size ? ' ' + m.size : ''); };
+      h += '<div class="sp-sec"><h3 class="sub-h3">Drug Tariff price moves: ' + esc(tm.previousMonth) + ' to ' + esc(tm.currentMonth) + '</h3>';
+      h += '<div class="sp-tiles">';
+      h += '<div class="sp-tile"><b>' + n(tm.movedCount) + '</b><span>Lines changed price</span></div>';
+      h += '<div class="sp-tile"><b>' + n(tm.upCount) + ' up, ' + n(tm.downCount) + ' down</b><span>Direction</span></div>';
+      h += '<div class="sp-tile"><b>' + n(tm.unchanged) + '</b><span>Lines unchanged</span></div>';
+      h += '<div class="sp-tile"><b>' + n(tm.addedCount) + ' new, ' + n(tm.droppedCount) + ' gone</b><span>Lines listed or no longer listed</span></div>';
+      h += '</div>';
+      if (!tm.movedCount) {
+        h += '<div class="empty-state">No line on this patch changed price between ' + esc(tm.previousMonth) + ' and ' + esc(tm.currentMonth) + '.</div>';
+      } else {
+        h += '<p style="font-size:13px;line-height:1.6;margin:0 0 10px;">Who moved:</p><div>';
+        for (i = 0; i < tm.suppliers.length; i++) {
+          var sp = tm.suppliers[i];
+          h += '<span class="sp-chip">' + esc(sp.name) + ' &middot; ' + (sp.up + sp.down) + ' line' + ((sp.up + sp.down) === 1 ? '' : 's') +
+               ' &middot; ' + sgn(sp.minPct) + (sp.minPct !== sp.maxPct ? ' to ' + sgn(sp.maxPct) : '') + '</span>';
+        }
+        h += '</div>';
+        h += '<details class="sp-more"><summary>Show ' + tm.moves.length + (tm.movedCount > tm.moves.length ? ' of ' + n(tm.movedCount) : '') + ' lines that moved, largest first</summary>';
+        h += '<div class="sp-scroll"><table class="sp-tbl"><tr><th>Supplier</th><th>Product</th><th>Pack</th><th class="sp-num">Was</th><th class="sp-num">Now</th><th class="sp-num">Change</th></tr>';
+        for (i = 0; i < tm.moves.length; i++) {
+          var mv = tm.moves[i];
+          h += '<tr><td>' + esc(mv.supplier) + '</td><td>' + esc(mv.product) + '</td><td>' + esc(pack(mv)) + '</td><td class="sp-num">' + pen(mv.was) +
+               '</td><td class="sp-num">' + pen(mv.now) + '</td><td class="sp-num">' + sgn(mv.pct) + '</td></tr>';
+        }
+        h += '</table></div></details>';
+      }
+      var extra = [['New on the tariff this month', tm.added], ['Not on this month\'s tariff', tm.dropped]];
+      for (var xi = 0; xi < extra.length; xi++) {
+        if (extra[xi][1].length) {
+          h += '<details class="sp-more"><summary>' + extra[xi][0] + ' (' + extra[xi][1].length + ')</summary><div class="sp-scroll"><table class="sp-tbl"><tr><th>Supplier</th><th>Product</th><th>Pack</th><th class="sp-num">Price</th></tr>';
+          for (i = 0; i < extra[xi][1].length; i++) {
+            var ex = extra[xi][1][i];
+            h += '<tr><td>' + esc(ex.supplier) + '</td><td>' + esc(ex.product) + '</td><td>' + esc(pack(ex)) + '</td><td class="sp-num">' + pen(ex.now != null ? ex.now : ex.was) + '</td></tr>';
+          }
+          h += '</table></div></details>';
+        }
+      }
+      h += '<div class="sp-meta">Drug Tariff reimbursement prices, not what a supplier charges. ' + esc(tm.previousMonth) + ' file as at ' + esc(tm.previousDataAsOf || 'not stated') + '; ' + esc(tm.currentMonth) + ' file as at ' + esc(tm.dataAsOf || 'not stated') + '.</div>';
+      h += '</div>';
+    }
+
     /* DRUG TARIFF PART VIIIA — generic medicine basic prices, sliced by NHSBSA's own
        BNF classification of each line. */
     if (d.drugTariffViiia) {
@@ -368,7 +416,7 @@
          ' &middot; Drug Tariff as at ' + esc(d.dataAsOf.drugTariff || 'not stated') +
          (d.dataAsOf.gpPrescribing ? ' &middot; GP prescribing built ' + esc(d.dataAsOf.gpPrescribing) : '') +
          (d.dataAsOf.mhraDsu ? ' &middot; MHRA as at ' + esc(d.dataAsOf.mhraDsu) : '') + '.</div>';
-    h += ruleBlock(d.rules, ['frameworks', 'awards', 'openTenders', 'drugTariff', 'drugTariffViiia', 'gpPrescribing', 'mhraDsu', 'localIntel']);
+    h += ruleBlock(d.rules, ['frameworks', 'awards', 'openTenders', 'drugTariff', 'drugTariffMoves', 'drugTariffViiia', 'gpPrescribing', 'mhraDsu', 'localIntel']);
     FW.innerHTML = h;
   }
 
