@@ -5,7 +5,7 @@ Added 16/10/2026 after page 2802's calendar note blurred two frameworks' expiry
 dates. Lou's rule: no manual checks. This runs from GitHub Actions
 (.github/workflows/framework-dates.yml) every day and on demand, reads every Hub
 page through the WordPress.com API (token WPCOM_TOKEN, read only) and fails the
-run on any finding that is not already in data/framework-date-guard-baseline.json.
+run on any finding that is not already in scripts/framework-date-guard-baseline.json.
 
 The baseline is a ratchet: findings that existed when the guard was introduced
 are recorded (as hashes, never page text, because this repo is public) so the
@@ -29,7 +29,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import framework_date_guard as guard  # noqa: E402
 
-BASELINE = os.path.join(HERE, "..", "data", "framework-date-guard-baseline.json")
+BASELINE = os.path.join(HERE, "framework-date-guard-baseline.json")
 API = "https://public-api.wordpress.com/wp/v2/sites/254135288/pages"
 MIN_PAGES = 100   # the Hub has ~150; far fewer means the read failed, not that all is well
 
