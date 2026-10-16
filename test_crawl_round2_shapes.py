@@ -132,5 +132,20 @@ class InsuletIsARecordedRefusal(unittest.TestCase):
         self.assertNotIn("Thanks", names)
 
 
+
+class TitleFirstIsOptIn(unittest.TestCase):
+    """medical.sectra.com's headings are taglines on every page; its <title> is the name."""
+    PAGE = ("<html><head><title>Sectra Amplifier Services | Sectra Medical</title></head>"
+            "<body><h1>AI adoption made easy</h1></body></html>")
+
+    def test_title_first_gives_the_title_name(self):
+        self.assertEqual(cs._page_title(self.PAGE, title_first=True), "Sectra Amplifier Services")
+
+    def test_default_read_is_unchanged_for_every_other_site(self):
+        self.assertEqual(cs._page_title(self.PAGE), "AI adoption made easy")
+
+    def test_only_sectra_is_opted_in(self):
+        self.assertEqual(cs.TITLE_NAMED_DOMAINS, frozenset({"medical.sectra.com"}))
+
 if __name__ == "__main__":
     unittest.main()

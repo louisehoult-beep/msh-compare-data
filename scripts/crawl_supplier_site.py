@@ -1468,7 +1468,16 @@ def _sentence_h1_or_title(h1, body):
     return h1
 
 
-def _page_title(body):
+# Domains whose <h1> is a marketing tagline on every product page while the
+# page <title> ("Sectra 3D Print | Sectra Medical") is the product's name. Opt-in
+# by domain, because a title-first read cannot be proven harmless for another
+# site without re-reading its pages: this changes no other supplier's names by
+# construction (medical.sectra.com, 16/10/2026: 35 of 35 titles are product
+# names, 12 headings are taglines even after the sentence rule).
+TITLE_NAMED_DOMAINS = frozenset({"medical.sectra.com"})
+
+
+def _page_title(body, title_first=False):
     """Real product name from a numeric-slug page's own record — schema.org
     markup first, then a bare <h1>, then <title> (stripped of a trailing
     " . Company Name Ltd" tail, which only the <title> element carries).
@@ -1487,6 +1496,10 @@ def _page_title(body):
     m = re.search(r'itemprop=["\']name["\'][^>]*>(.*?)<', body, re.S)
     if m:
         t = clean(m.group(1))
+        if t:
+            return t
+    if title_first:
+        t = _title_product_name(body)
         if t:
             return t
     # A two-part <h1> (kicker + product) gives up the product half only; the
@@ -1769,7 +1782,7 @@ def numeric_slug_products(domain, prod_urls, reason=None, fallback_label=None):
         except Exception:
             body, name = None, None
         else:
-            name = _page_title(body)
+            name = _page_title(body, title_first=domain in TITLE_NAMED_DOMAINS)
         division = _breadcrumb_division(body, domain) if (name and body) else None
         if not division and name and body:
             # No breadcrumb trail of any kind on this site, but the <h1> itself

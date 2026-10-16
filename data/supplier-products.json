@@ -204509,41 +204509,79 @@
   },
   "Sectra Limited": {
    "domain": "medical.sectra.com",
-   "verified": "2026-08-25",
-   "source": "medical.sectra.com XML sitemap, read this run",
-   "structureFrom": "sitemap",
-   "hasDivisions": false,
+   "verified": "2026-10-16",
+   "source": "medical.sectra.com, each product's own page read this run",
+   "structureFrom": "sitemap products, each page's own name and breadcrumb division (per-page fallback)",
+   "partialRead": false,
+   "hasDivisions": true,
    "landingPagesDropped": 0,
+   "furniturePagesDropped": 0,
    "duplicateUrlsDropped": 0,
-   "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 0 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation. the sitemap's product URLs are flat, so they carry no division structure — shown as one unsorted list, not the company's own filed grouping.",
-   "structure": "No division structure found in the URLs — listed as one flat range.",
    "droppedCategoryPages": 0,
-   "filingRule": "Read from the sitemap, so product NAMES come from URL slugs. the sitemap's product URLs are flat, so they carry no division structure — shown as one unsorted list, not the company's own filed grouping — every item is listed by name below rather than grouped, because a flat list is honest and a fabricated grouping would not be.",
+   "captureCaveat": "Names and divisions are read from each product's own page — schema.org product markup for the name, the page's own breadcrumb trail for the division — because the product URLs carry no path segment between the product-path segment and the product's own slug for this route to read a division from. 0 of 35 page(s) could not be read and fall back to their URL slug. Tidied after reading: 10 product(s) whose breadcrumb division was the product's own name filed as unsorted.",
+   "structure": "The company's own division for each product, read from its own breadcrumb trail.",
+   "filingRule": "Grouping MIRRORS the manufacturer's own filing, read from each product's own breadcrumb trail because the site's URLs carry no division segment of their own.",
    "divisions": [
     {
      "name": "Uncategorised",
-     "products": 33
+     "products": 11
+    },
+    {
+     "name": "Enterprise platform",
+     "products": 8
+    },
+    {
+     "name": "Radiology imaging",
+     "products": 5
+    },
+    {
+     "name": "Radiology AI",
+     "products": 3
+    },
+    {
+     "name": "Orthopaedics",
+     "products": 2
+    },
+    {
+     "name": "AI in medical imaging",
+     "products": 2
+    },
+    {
+     "name": "Enterprise imaging",
+     "products": 1
+    },
+    {
+     "name": "Share and collaborate",
+     "products": 1
+    },
+    {
+     "name": "Cardiology imaging",
+     "products": 1
+    },
+    {
+     "name": "Medical education",
+     "products": 1
     }
    ],
    "products": [
     {
-     "n": "Sectra Vna",
-     "division": "Uncategorised",
+     "n": "Sectra VNA for enterprise imaging strategies",
+     "division": "Enterprise platform",
      "category": ""
     },
     {
-     "n": "Sectra Clinical Applications",
-     "division": "Uncategorised",
+     "n": "Sectra Clinical Applications integrated in Sectra PACS",
+     "division": "Enterprise platform",
      "category": ""
     },
     {
      "n": "Sectra 3D Print",
-     "division": "Uncategorised",
+     "division": "Orthopaedics",
      "category": ""
     },
     {
      "n": "Sectra One Cloud Storage",
-     "division": "Uncategorised",
+     "division": "Enterprise imaging",
      "category": ""
     },
     {
@@ -204552,142 +204590,152 @@
      "category": ""
     },
     {
-     "n": "Sectra Breast Imaging Pacs Ris",
+     "n": "Sectra Breast Imaging PACS and RIS",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Sectra 3D Spine",
+     "n": "Sectra 3D Spine for orthopaedics",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Sectra 3D Joint Replacement",
+     "n": "Sectra 3D Joint Replacement for orthopaedics",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Msk Radiology",
-     "division": "Uncategorised",
+     "n": "MSK radiology",
+     "division": "Radiology imaging",
      "category": ""
     },
     {
      "n": "Sectra 3D Trauma",
-     "division": "Uncategorised",
+     "division": "Orthopaedics",
      "category": ""
     },
     {
      "n": "Sectra Amplifier Marketplace",
-     "division": "Uncategorised",
+     "division": "AI in medical imaging",
      "category": ""
     },
     {
      "n": "Sectra Image Exchange Portal",
+     "division": "Share and collaborate",
+     "category": ""
+    },
+    {
+     "n": "Sectra 2D Planning System for orthopaedics",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Sectra 2D Planning System",
+     "n": "Sectra Table for medical education",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Sectra Table",
+     "n": "Ophthalmology imaging",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Sectra Digital Pathology Solution",
+     "n": "Sectra Anatomical Linking integrated in Sectra PACS",
+     "division": "Enterprise platform",
+     "category": ""
+    },
+    {
+     "n": "Sectra 3D Core integrated in Sectra PACS",
+     "division": "Enterprise platform",
+     "category": ""
+    },
+    {
+     "n": "Sectra Lesion Tracking integrated in Sectra PACS",
+     "division": "Enterprise platform",
+     "category": ""
+    },
+    {
+     "n": "Sectra Vessel Analysis integrated in Sectra PACS",
+     "division": "Enterprise platform",
+     "category": ""
+    },
+    {
+     "n": "Sectra NM Fusion integrated in Sectra PACS",
+     "division": "Enterprise platform",
+     "category": ""
+    },
+    {
+     "n": "Sectra professional services",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Sectra Ophthalmology Imaging",
+     "n": "Sectra UniView universal viewer for enterprise imaging strategies",
+     "division": "Enterprise platform",
+     "category": ""
+    },
+    {
+     "n": "Sectra Enterprise Imaging for Cardiology",
+     "division": "Cardiology imaging",
+     "category": ""
+    },
+    {
+     "n": "Sectra Enterprise Imaging software as a service: Sectra One Cloud",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Sectra Anatomical Linking",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "3D Core",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Sectra Lesion Tracking",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Sectra Vessel Analysis",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Sectra Nm Fusion",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Sectra Professional Services",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Sectra Ids7",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Sectra Uniview",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Sectra Cardiology Solution",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Sectra One Cloud",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Sectra Ctma",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Sectra Ima",
+     "n": "Sectra Implant Movement Analysis (Implant Movement Analysis) for orthopaedics",
      "division": "Uncategorised",
      "category": ""
     },
     {
      "n": "Sectra Education Portal",
-     "division": "Uncategorised",
+     "division": "Medical education",
      "category": ""
     },
     {
      "n": "Sectra Reporting",
-     "division": "Uncategorised",
+     "division": "Radiology imaging",
      "category": ""
     },
     {
-     "n": "Powerscribe 360 End Of Life Planning",
-     "division": "Uncategorised",
+     "n": "PowerScribe 360 End-Of-Life Planning",
+     "division": "Radiology imaging",
      "category": ""
     },
     {
-     "n": "Sectra Dosetrack",
-     "division": "Uncategorised",
+     "n": "Sectra DoseTrack",
+     "division": "Radiology imaging",
      "category": ""
     },
     {
      "n": "Sectra Amplifier Services",
+     "division": "AI in medical imaging",
+     "category": ""
+    },
+    {
+     "n": "Sectra IDS7",
+     "division": "Radiology imaging",
+     "category": ""
+    },
+    {
+     "n": "Chest X-ray AI",
+     "division": "Radiology AI",
+     "category": ""
+    },
+    {
+     "n": "MSK AI",
+     "division": "Radiology AI",
+     "category": ""
+    },
+    {
+     "n": "CT Chest AI",
+     "division": "Radiology AI",
+     "category": ""
+    },
+    {
+     "n": "Sectra CT-based Micromotion Analysis (CTMA) for orthopaedics",
      "division": "Uncategorised",
      "category": ""
     }
