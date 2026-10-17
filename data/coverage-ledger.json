@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-10-12",
-  "differentiator.json published": 37003,
-  "differentiator.json held": 51478
+  "differentiator.json published": 37007,
+  "differentiator.json held": 51572
  },
  "counts": {
   "frameworks": 122,
@@ -27,8 +27,8 @@
   "supplierNamesUnresolved": 407,
   "inScopeSuppliersNeedingCrawl": 251,
   "inScopeSuppliersNeedingDomain": 233,
-  "suppliersRefused": 555,
-  "suppliersRefusedButPublishingElsewhere": 169,
+  "suppliersRefused": 554,
+  "suppliersRefusedButPublishingElsewhere": 168,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
   "blockedFrameworks": 2,
@@ -4267,8 +4267,8 @@
    "category": "Rehabilitation and Community",
    "ends": "30 June 2027",
    "suppliersAwarded": 57,
-   "suppliersPublished": 20,
-   "coverage": 35.1,
+   "suppliersPublished": 23,
+   "coverage": 40.4,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -4278,7 +4278,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 57,
-   "coverageOfTarget": 35.1,
+   "coverageOfTarget": 40.4,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -4389,24 +4389,10 @@
      "bucket": "refused"
     },
     {
-     "supplier": "B. Braun Medical",
-     "domain": "bbraun.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-08",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "GBUK Group",
      "domain": null,
      "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
      "checked": "2026-09-07",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Mediq Healthcare UK Ltd",
-     "domain": "www.mediq.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
      "bucket": "publishedElsewhere"
     },
     {
@@ -4501,9 +4487,23 @@
      "bucket": "heldOnly"
     },
     {
+     "supplier": "B. Braun Medical",
+     "domain": "bbraun.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-08",
+     "bucket": "published"
+    },
+    {
      "supplier": "Medicare Colgate Ltd (Sterifeed)",
      "domain": "www.sterifeed.com",
      "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-08-31",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Mediq Healthcare UK Ltd",
+     "domain": "www.mediq.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
      "bucket": "published"
     }
@@ -4523,7 +4523,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 11,
+    "publishedElsewhereNeedingCategory": 8,
     "heldNeedingCategory": 9,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -4532,17 +4532,20 @@
    },
    "published": [
     "Argon Medical Devices UK Ltd",
+    "B. Braun Medical",
     "Bodywise (UK) Ltd",
     "Bridea Medical B.V",
     "Croyde Medical",
     "Pelvic Relief",
     "Farla Medical",
+    "Huntleigh",
     "iMEDicare Ltd",
     "Kimal PLC",
     "Laborie Medical Technologies UK Ltd",
     "Medela",
     "Medicare Colgate Ltd (Sterifeed)",
     "Mediplus Ltd",
+    "Mediq Healthcare UK Ltd",
     "Organon UK",
     "Pasante Healthcare",
     "Pioneer Medical Europe Limited",
@@ -4553,12 +4556,9 @@
     "Medichill UK Ltd"
    ],
    "publishedElsewhere": [
-    "B. Braun Medical",
     "Crest Medical Ltd",
     "GBUK Group",
     "Henleys Medical Supplies Limited",
-    "Huntleigh",
-    "Mediq Healthcare UK Ltd",
     "Optimum Medical",
     "Owen Mumford",
     "Reliance Medical",
@@ -4598,7 +4598,7 @@
     "Viomedex Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 20,
+   "actionableTotal": 17,
    "blockedReason": null,
    "deferred": null
   },
@@ -4713,13 +4713,6 @@
      "domain": "fannin.eu",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-08",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Hollister",
-     "domain": "www.hollister.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-25",
      "bucket": "publishedElsewhere"
     },
     {
@@ -4909,12 +4902,11 @@
     "continence:urinal"
    ],
    "publishedElsewhereNoOwnRange": [
-    "Hollister",
     "Rhodes Pharma Ltd"
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 16,
+    "publishedElsewhereNeedingCategory": 17,
     "heldNeedingCategory": 8,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -4990,7 +4982,7 @@
     "Sinapi Biomedical UK"
    ],
    "unknown": [],
-   "actionableTotal": 25,
+   "actionableTotal": 26,
    "blockedReason": null,
    "deferred": null
   },

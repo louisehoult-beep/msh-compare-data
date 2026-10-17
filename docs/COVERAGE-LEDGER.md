@@ -45,8 +45,8 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 23 | 36.5% | 23 | 31 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 23 | 42 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 22 | 37.9% | 18 | 32 | STARTED |
-| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 20 | 35.1% | 20 | 32 | STARTED |
-| Urology and Bowel Management | continence | 57 | 20 | 35.1% | 25 | 38 | STARTED |
+| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 23 | 40.4% | 17 | 32 | STARTED |
+| Urology and Bowel Management | continence | 57 | 20 | 35.1% | 26 | 37 | STARTED |
 | Advanced Wound Care | wound | 56 | 21 | 37.5% | 18 | 41 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 1 | 39 | STARTED · 7 EXCLUDED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 15 | 32 | STARTED |
