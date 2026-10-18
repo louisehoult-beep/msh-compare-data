@@ -54,33 +54,42 @@ SINGLE_LINE_SEPARATORS = (COMPACT, SPACED)
 
 
 class Format:
-    """How a JSON file is laid out on disk: indent, separators, trailing newline."""
+    """How a JSON file is laid out on disk: indent, separators, trailing newline,
+    and whether non-ASCII characters are escaped (\\uXXXX) or written literally."""
 
-    def __init__(self, indent, trailing_newline, separators=None):
+    def __init__(self, indent, trailing_newline, separators=None, ensure_ascii=False):
         self.indent = indent                      # None == single line
         self.trailing_newline = trailing_newline
         # Only meaningful when indent is None; json.dumps fixes the separators
         # itself once an indent is given.
         self.separators = separators or COMPACT
+        # Added 18/10/2026 (`^o640` fallout): a writer that bypassed write_like
+        # and used plain json.dump() left the file ascii-escaped. Detection has
+        # to carry this, or every later write_like() call makes a whole-file
+        # diff (every accented/£/© character re-escaped or de-escaped).
+        self.ensure_ascii = ensure_ascii
 
     def __repr__(self):
         if self.indent is None:
             shape = MINIFIED if self.separators == COMPACT else "single line, spaced"
         else:
             shape = "indent=%d" % self.indent
-        return "%s%s" % (shape, ", trailing newline" if self.trailing_newline else ", no trailing newline")
+        ascii_note = ", ascii-escaped" if self.ensure_ascii else ""
+        return "%s%s%s" % (shape, ascii_note,
+                            ", trailing newline" if self.trailing_newline else ", no trailing newline")
 
     def __eq__(self, other):
         return (isinstance(other, Format)
                 and self.indent == other.indent
                 and self.trailing_newline == other.trailing_newline
-                and self.separators == other.separators)
+                and self.separators == other.separators
+                and self.ensure_ascii == other.ensure_ascii)
 
     def dumps(self, doc):
         if self.indent is None:
-            text = json.dumps(doc, ensure_ascii=False, separators=self.separators)
+            text = json.dumps(doc, ensure_ascii=self.ensure_ascii, separators=self.separators)
         else:
-            text = json.dumps(doc, ensure_ascii=False, indent=self.indent)
+            text = json.dumps(doc, ensure_ascii=self.ensure_ascii, indent=self.indent)
         return (text + "\n" if self.trailing_newline else text).encode("utf-8")
 
 
@@ -134,9 +143,16 @@ def dumps_like(doc, raw):
     byte for byte — i.e. the detection is proven, not merely plausible."""
     fmt = detect(raw)
     try:
-        round_trips = fmt.dumps(json.loads(raw.decode("utf-8"))) == raw
+        parsed = json.loads(raw.decode("utf-8"))
     except ValueError:
-        round_trips = False
+        return fmt.dumps(doc), fmt, False
+    round_trips = fmt.dumps(parsed) == raw
+    if not round_trips:
+        # Same indent/trailing-newline/separators, but ascii-escaped — proven,
+        # not guessed, same way _single_line_separators proves its candidates.
+        escaped = Format(fmt.indent, fmt.trailing_newline, fmt.separators, ensure_ascii=True)
+        if escaped.dumps(parsed) == raw:
+            fmt, round_trips = escaped, True
     return fmt.dumps(doc), fmt, round_trips
 
 
