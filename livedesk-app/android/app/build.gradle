@@ -8,7 +8,8 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         // Codemagic passes -PversionCode=<build number>; local builds use 1.
-        versionCode (project.findProperty("versionCode") ?: "1").toInteger()
+        def vcProp = project.findProperty("versionCode")
+        versionCode(vcProp ? Integer.parseInt(vcProp.toString()) : 1)
         versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {

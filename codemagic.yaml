@@ -92,7 +92,7 @@ workflows:
       - name: Build app bundle
         script: |
           cd android
-          ./gradlew bundleRelease -PversionCode=$PROJECT_BUILD_NUMBER
+          ./gradlew bundleRelease --stacktrace -PversionCode=${PROJECT_BUILD_NUMBER:-1}
     artifacts:
       - android/app/build/outputs/bundle/release/*.aab
     publishing:
