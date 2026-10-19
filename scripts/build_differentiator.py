@@ -69,6 +69,17 @@ def tokens(s):
     return frozenset(w for w in norm(s).split() if w not in JOINERS)
 
 
+def nhssc_terms_mapped_first(nhssc, nhssc_map):
+    """NHSSC (term, record) pairs with recorded (supplier, term) map entries
+    first. The (supplier, NHSSC name) dedup claims a name for whichever term is
+    read first; a cache refresh can add a second, unmapped term carrying the
+    same catalogue name (Olympus Thunderbeat, ^o641), so mapped terms must win.
+    Stable otherwise: cache order is kept within each group."""
+    items = list((nhssc.get("products") or {}).items())
+    return sorted(items, key=lambda kv: (norm(kv[1].get("supplier")), norm(kv[0]))
+                  not in nhssc_map)
+
+
 def main():
     own = load("data/supplier-products.json")["suppliers"]
     detail = load("data/supplier-product-detail.json")["products"]
@@ -389,7 +400,7 @@ def main():
 
     nhssc_added, nhssc_held = 0, 0
     nhssc_from_map = 0
-    for term, rec in (nhssc.get("products") or {}).items():
+    for term, rec in nhssc_terms_mapped_first(nhssc, nhssc_map):
         co = rec.get("supplier")
         if not co:
             continue

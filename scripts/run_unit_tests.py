@@ -133,6 +133,7 @@ RUN = [
     "test_crawl_junk_shapes.py",
     "test_crawl_site_concurrency.py",
     "test_dead_company_check.py",
+    "test_differentiator_mapped_terms_first.py",
     "test_eclass_itemclass_scope.py",
     "test_fetch_issues_icn_depth.py",
     "test_framework_lots.py",
