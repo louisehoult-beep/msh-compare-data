@@ -80,12 +80,11 @@
         },
         {
             "framework": "Surgical Instruments",
-            "checkedOn": "2026-10-07",
+            "checkedOn": "2026-10-19",
             "coverageAtCheck": "26.0% (13/50)",
             "suppliersChecked": [
                 "Decree Thermo",
                 "Scientific Medical Clinical Limited",
-                "U.K. Medical Limited",
                 "Steris IMS Ltd",
                 "Avicenna Surgical Limited",
                 "B. Braun Medical",
@@ -101,10 +100,16 @@
                 "Sheffmed Limited",
                 "Timesco Healthcare Ltd",
                 "Vernacare",
-                "It’s Interventional Limited"
+                "It’s Interventional Limited",
+                "Aquilant Limited",
+                "Creed Medical Ltd",
+                "RB Medical Engineering Ltd",
+                "Rocialle Healthcare",
+                "Surgical Holdings Limited",
+                "Unisurge International Limited"
             ],
-            "reason": "Re-confirmed after Decree Thermo's crawl status changed since the 23/09 check (a working domain, decreethermo.co.uk, was found and read on 27/09: a Wix storefront whose sitemap.xml lists no products sitemap -- still no product route, now bucketed 'refused' instead of 'needDomain'). All other 17 remaining actionable items unchanged since 23/09 and re-verified today: U.K. Medical Limited is registered at Companies House (01455141, Sheffield, SIC 64204 'distribution holding companies') but has no discoverable website by any search route, and its previously-tried domain uk-medical.co.uk still fails DNS resolution; Scientific Medical Clinical Limited (NI041931, Belfast) likewise has no discoverable website. Steris IMS Ltd's 69 held products remain decontamination/endoscopy-reprocessing equipment, not surgical hand instruments. The 14 publishedElsewhere suppliers' crawl dates (checked 26/08-20/09) predate this check and none has a newer crawl to re-read. No permitted route left on any of the 17. 07/10/2026 RE-CHECK: the supplier set changed (It’s Interventional Limited is now in the publishedElsewhere bucket and was not in the 29/09 list). Its own catalogue (itsinterventional.com, WordPress REST, read 15/08/2026, 32 products) files under Stenting, Drainage, Biopsy, Breast Solutions, Spine, Surgery (one product: Neoprobe gamma detection system), Neuroradiology & Vascular and an unlaunched 'Coming Soon' division. Every product is an interventional oncology, radiology, nuclear or vascular device, mapped already to oncology:stent, oncology:acc, ortho:cement, nuclear:probe and vascsurg:thrombectomy. None is a surgical:* hand instrument (bone, clamp, curette and the other in-scope surgical types), so there is no permitted route for this supplier to this framework. No permitted route left on any of the 19 suppliers checked.",
-            "wouldReopenIf": "U.K. Medical Limited or Scientific Medical Clinical Limited gets a working, confirmable website; any of the 14 publishedElsewhere/1 held supplier gets a new/changed crawl result revealing a real surgical-instrument line; or a new supplier is awarded on this framework.; or It’s Interventional Limited's own crawl changes to reveal a surgical hand-instrument line."
+            "reason": "19/10/2026 RE-CHECK: backfill_seed_from_frameworks.py attached this framework's award to six suppliers on 12/10/2026 that were not on the 07/10 check -- Aquilant Limited, Creed Medical Ltd, RB Medical Engineering Ltd, Rocialle Healthcare, Surgical Holdings Limited and Unisurge International Limited -- which is exactly the 'new award' condition that makes an exhausted entry stale, so all six were investigated rather than skipped. Each already carries its own recorded crawl refusal from before the 07/10 check, inside the 90-day TTL, and each was re-verified today with no permitted route: Aquilant Limited's known domain (aquilantservices.com) does not resolve (checked 20/09); Creed Medical Ltd's site (creedhealth.co.uk) exposes no WordPress/WooCommerce product API and its sitemap carries no product URLs (checked 11/09); RB Medical Engineering Ltd's site (rbmedical.co.uk) is blocked by robots.txt (checked 11/09); Rocialle Healthcare's site (rociallehealthcare.com) was re-attempted today (crawl_supplier_site.py refused it again on the recorded 05/09 result: no readable WordPress/WooCommerce API, no product sitemap); Surgical Holdings Limited's own domain (surgicalholdings.co.uk) was confirmed today as its genuine site (its page footer address matches Companies House's registered office for 03090951, domain-proof-tier address match) but was re-attempted today and refused again on the recorded 20/09 result (no WordPress/WooCommerce API, no product sitemap) -- its existing 4 held products are curated NHS-Supply-Chain-confirmed entries, not a crawl result, and nothing on the site itself is machine-readable; Unisurge International Limited's WooCommerce taxonomy (checked 06/09) captures the company's own range navigation (Orthopaedic, Ophthalmic, Cardio Thoracic, etc.) rather than real products, which is the nav-labels-are-not-products shape -- correctly held, not published, no ruling needed. All other items unchanged since the 07/10 check and still exhausted for the reasons recorded then. No permitted route left on any of the 24 suppliers checked.",
+            "wouldReopenIf": "Any of the six newly-checked suppliers gets a working, confirmable domain or a changed crawl result revealing a real surgical-instrument line; U.K. Medical Limited or Scientific Medical Clinical Limited gets a working, confirmable website; any of the 17 other remaining publishedElsewhere/held suppliers gets a new/changed crawl result revealing a real surgical-instrument line; or a new supplier is awarded on this framework."
         },
         {
             "framework": "Examination Gloves",
