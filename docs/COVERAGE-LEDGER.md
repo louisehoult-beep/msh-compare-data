@@ -83,7 +83,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 5 | 38.5% | 3 | 8 | STARTED |
 | Disposable and Washable Continence Care | continence | 12 | 5 | 41.7% | 4 | 7 | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 2 | 10 | STARTED |
-| Prosthetic Components and Associated Products | orthotics | 12 | 5 | 41.7% | 2 | 7 | STARTED |
+| Prosthetic Components and Associated Products | orthotics | 12 | 5 | 41.7% | 1 | 8 | STARTED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 4 | 6 | STARTED |
 | CT Scanners and Associated Options and Related Services | imaging | 8 | 2 | 25.0% | 4 | 7 | STARTED |
 | Polymer Aprons | infection | 8 | 2 | 25.0% | 1 | 8 | STARTED |
