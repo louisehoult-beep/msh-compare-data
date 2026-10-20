@@ -10065,7 +10065,7 @@ def build(slug, sources):
         del doc["discontinuedOnFormulary"]
         del doc["rules"]["discontinuedOnFormulary"]
     lane = build_digital_lane(slug, sources.get("digital_lane"), sources.get("trust_digital"),
-                              sources.get("gates_watch"))
+                              sources.get("gates_watch"), sources)
     if lane:
         doc["digitalLane"] = lane
         doc["rules"]["digitalLane"] = lane["rule"]
@@ -10085,7 +10085,7 @@ DIGITAL_LANE_SLUG = "digital-and-medical-it"
 DIGITAL_LANE_AWARDS_SHOWN = 15
 
 
-def build_digital_lane(slug, lane_doc, fdp_doc, gates_doc=None):
+def build_digital_lane(slug, lane_doc, fdp_doc, gates_doc=None, sources=None):
     if slug != DIGITAL_LANE_SLUG or not lane_doc:
         return None
     clin = lambda rows: [r for r in rows or [] if r.get("clinical")]
@@ -10116,6 +10116,7 @@ def build_digital_lane(slug, lane_doc, fdp_doc, gates_doc=None):
                                                "latestChange", "changedSinceLastRun", "status")}
                       for p in gates_doc["pages"] if p.get("lastUpdated")],
         }
+    out.update(build_digital_extras(sources or {}))
     if fdp_doc and fdp_doc.get("headline"):
         out["fdp"] = {
             "headline": fdp_doc["headline"],
@@ -10124,6 +10125,65 @@ def build_digital_lane(slug, lane_doc, fdp_doc, gates_doc=None):
             "sourceNextUpdate": fdp_doc.get("sourceNextUpdate"),
             "url": (fdp_doc.get("sourceUrls") or {}).get("live"),
             "countsAgree": all(c.get("agrees") for c in fdp_doc.get("countCheck") or []),
+        }
+    return out
+
+
+def build_digital_extras(sources):
+    """Day 2 sources for the digital page (20/10/2026), each from its own file and each
+    carrying its own rule. Supplier names on GCA lots are counted, never listed: they
+    are the agency's spelling and not alias-resolved."""
+    out = {}
+    fw = sources.get("digital_frameworks")
+    if fw and fw.get("frameworks"):
+        out["frameworks"] = {
+            "rule": fw.get("rule"), "dataAsOf": fw.get("dataAsOf"),
+            "items": [{
+                "name": f.get("name"), "reference": f.get("reference"), "owner": f.get("owner"),
+                "url": f.get("url"), "status": f.get("status"), "starts": f.get("starts"),
+                "ends": f.get("ends"), "term": f.get("term"),
+                "estimatedValue": ("\u00a3{:,} excluding VAT, the notice's own estimate".format(
+                    int((f.get("estimatedValue") or {}).get("amountExVat")))
+                    if (f.get("estimatedValue") or {}).get("amountExVat") else None),
+                "lots": [{"lot": l.get("lot"), "name": l.get("name"),
+                          "suppliers": len(l["suppliers"]) if isinstance(l.get("suppliers"), list) else None}
+                         for l in f.get("lots") or []],
+                "notVerified": f.get("notVerified") or [],
+            } for f in fw["frameworks"]],
+        }
+    ai = sources.get("ai_airlock")
+    if ai and ai.get("phases"):
+        out["airlock"] = {
+            "rule": ai.get("rule"), "dataAsOf": ai.get("dataAsOf"),
+            "phases": [{"phase": ph.get("phase"), "sourceUrl": ph.get("sourceUrl"),
+                        "pageUpdated": ph.get("pageUpdated"), "status": ph.get("status"),
+                        "note": ph.get("note"),
+                        "members": [{k: m.get(k) for k in ("company", "product", "theme", "status")}
+                                    for m in ph.get("members") or []]}
+                       for ph in ai["phases"]],
+        }
+    ds = sources.get("dspt")
+    if ds:
+        out["dspt"] = {
+            "defined": ds.get("defined", True), "checked": ds.get("checked"),
+            "sourceUrl": ds.get("sourceUrl"), "reuseBasis": ds.get("reuseBasis"),
+            "note": ds.get("note"), "whyEmpty": ds.get("whyEmpty"),
+            "matched": [{"name": x.get("name"), "status": x.get("dsptStatus"),
+                         "statusDate": x.get("statusDate")} for x in ds.get("suppliers") or []
+                        if x.get("dsptStatus")],
+            "unmatched": len(ds.get("unmatched") or []),
+        }
+    iw = sources.get("icb_watch")
+    if iw and iw.get("icbs"):
+        dig = [i.get("digital") or {} for i in iw["icbs"]]
+        out["icbDigital"] = {
+            "icbs": len(dig),
+            "published": sum(1 for d in dig if d.get("published") is True),
+            "notFound": sum(1 for d in dig if d.get("published") is False),
+            "unread": sum(1 for d in dig if d.get("published") is None),
+            "named": [{"icb": i.get("name"), "titles": (i.get("digital") or {}).get("titles"),
+                       "source": ((i.get("digital") or {}).get("sources") or [None])[0]}
+                      for i in iw["icbs"] if (i.get("digital") or {}).get("published") is True],
         }
     return out
 
@@ -10288,7 +10348,11 @@ def load_sources():
                       ("discontinued", "discontinued-on-formulary.json"),
                       ("digital_lane", "digital-lane.json"),
                       ("trust_digital", "trust-digital-profile.json"),
-                      ("gates_watch", "gates-watch.json")):
+                      ("gates_watch", "gates-watch.json"),
+                      ("digital_frameworks", "digital-frameworks.json"),
+                      ("ai_airlock", "ai-airlock-cohorts.json"),
+                      ("dspt", "dspt-supplier-check.json"),
+                      ("icb_watch", "icb-watch.json")):
         path = os.path.join(DATA, name)
         sources[key] = load(name) if os.path.exists(path) else None
     return sources
