@@ -93,6 +93,9 @@ jobs:
       # only losing one when it drops them. Idempotent, and it only ever replaces
       # rows carrying its own generatedBy marker, so curated entries are untouched.
       # Nothing had re-derived these since the one-off backfill of 24/08/2026.
+      - name: Backfill digital framework lots (Technology Services 4 and others) into the index and seed
+        run: python3 scripts/backfill_digital_frameworks.py
+
       - name: Re-derive product categories from the refreshed frameworks
         run: python3 scripts/backfill_product_categories.py
 
