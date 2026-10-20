@@ -34,6 +34,7 @@ then verify.py.
 import datetime
 import json
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -54,6 +55,12 @@ def uk_date(iso):
     except ValueError:
         return None
     return "%d %s %d" % (d.day, d.strftime("%B"), d.year)
+
+
+def lot_order(kv):
+    """Lot "3a" sorts after lot "3" and before lot "4"."""
+    m = re.match(r"(\d+)(.*)", str(kv[0]))
+    return (int(m.group(1)), m.group(2)) if m else (10 ** 6, str(kv[0]))
 
 
 def memberships(doc, index):
@@ -79,7 +86,7 @@ def memberships(doc, index):
         start, end = uk_date(fw.get("starts")), uk_date(fw.get("ends"))
         for company, m in per_company.items():
             lots = [{"lot": k, "name": v} for k, v in
-                    sorted(m["lots"].items(), key=lambda kv: (len(kv[0]), kv[0]))]
+                    sorted(m["lots"].items(), key=lot_order)]
             named = ", ".join("\"%s\"" % n for n in sorted(m["names"]))
             lot_text = ("on lot%s %s" % ("s" if len(lots) > 1 else "",
                                          ", ".join(l["lot"] for l in lots))) if lots else "on no named lot"
