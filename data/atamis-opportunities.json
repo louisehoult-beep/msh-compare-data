@@ -12,18 +12,18 @@
  },
  "source": "Atamis Health Family public opportunity search",
  "source_url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects",
- "generated": "2026-10-19T05:24:34+00:00",
+ "generated": "2026-10-20T21:10:48+00:00",
  "access_note": "One request per day. The endpoint returns the whole result set in a single response, so this is the least burdensome access pattern available. See the script docstring for the robots.txt / OGL position.",
  "field_caveat": "The public Atamis data carries NO supplier name, NO contract value, NO CPV code and NO contract end date. Those fields exist in Atamis but are behind supplier login. Contract end dates come from Find a Tender: see data/framework-awards.json.",
- "classification_rule": "pre_market_engagement: title or description matches market engagement, pre-engagement, expression of interest, EOI, soft market, market sounding, prior information, request for information or RFI. framework_further_competition: the title, description or Procurement Route matches further competition, mini-competition, call-off or framework mini/further. A record may carry both labels or neither. Procurement Route is the unnamed ninth CSV column, recovered by this script.",
+ "classification_rule": "pre_market_engagement: title or description matches market engagement, pre-engagement, expression of interest, EOI, soft market, market sounding, prior information, request for information or RFI. framework_further_competition: the title, description or Procurement Route matches further competition, mini-competition, call-off or framework mini/further. digital: the Atamis Category is a software, information systems or IT services category (the stand-in for CPV 48/72, since Atamis carries no CPV), or the title names a clinical digital system; digital_clinical: the title test alone. Both rules are in scripts/digital_lane_rules.py. PME (pre-market engagement) counts as pre_market_engagement from 20/10/2026. A record may carry several labels or none. Procurement Route is the unnamed ninth CSV column, recovered by this script.",
  "counts": {
-  "total_held": 5341,
-  "live_on_last_run": 5329,
-  "new_this_run": 0,
-  "newly_delisted_this_run": 0,
-  "pre_market_engagement": 856,
-  "framework_further_competition": 277,
-  "distinct_authorities": 281,
+  "total_held": 5366,
+  "live_on_last_run": 5352,
+  "new_this_run": 25,
+  "newly_delisted_this_run": 2,
+  "pre_market_engagement": 882,
+  "framework_further_competition": 281,
+  "distinct_authorities": 282,
   "broken_rows_skipped": 297
  },
  "opportunities": [
@@ -40,6 +40,241 @@
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C233948",
    "first_seen": "2026-08-28"
+  },
+  {
+   "ref": "C475340",
+   "name": "Personal Dosimetry Service",
+   "authority": "Leeds Teaching Hospitals NHS Trust",
+   "description": "Open tender for a personal dosimetry service for Leeds Teaching Hospitals NHS Trust.",
+   "category": "Radiation protection services",
+   "procurement_route": "PA23 Open Procedure",
+   "opens": "2026-11-16",
+   "deadline": "2026-11-26",
+   "time_remaining": "> 1 month",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C475340",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C484825",
+   "name": "Employee Assist Programme",
+   "authority": "Greater Manchester Mental Health NHS Foundation Trust",
+   "description": "Greater Manchester Mental Health is competiting for its Employee Assist Programme under Occupational Health & Related Services DPS RM6296 under Public Contract Regulations 2015",
+   "category": "Staff Services",
+   "procurement_route": "",
+   "opens": "2026-10-20",
+   "deadline": "2026-11-26",
+   "time_remaining": "> 1 month",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484825",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C484754",
+   "name": "Epistaxis Device",
+   "authority": "The Shrewsbury and Telford Hospital NHS Trust",
+   "description": "Epistaxis Device",
+   "category": "Medical Consumables",
+   "procurement_route": "Below Threshold - 3 Quotes",
+   "opens": "2026-10-20",
+   "deadline": "2026-10-27",
+   "time_remaining": "< 1 week",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484754",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C484751",
+   "name": "Birmingham Women's and Children's Catering Outsourcing",
+   "authority": "Birmingham Women's and Children's NHS Foundation Trust",
+   "description": "BWC is seeking a catering partner to help deliver outstanding experiences for patients, families, visitors and staff across Birmingham Children's Hospital (BCH) and Birmingham Women's Hospital (BWH). The Authority is looking for a long-term partner that shares its commitment to improving health outcomes, reducing inequalities and delivering meaningful social value through every aspect of service delivery.",
+   "category": "Catering",
+   "procurement_route": "PA23 Competitive Flexible Procedure",
+   "opens": "2026-10-20",
+   "deadline": "2026-12-01",
+   "time_remaining": "> 1 month",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484751",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C484400",
+   "name": "MEH - eQMS",
+   "authority": "Moorfields Eye Hospital NHS Foundation Trust",
+   "description": "Electronic Quality Management System (eQMS) – Moorfields Reading Centre / R&D Directorate",
+   "category": "System management software",
+   "procurement_route": "",
+   "opens": "2026-10-20",
+   "deadline": "2026-11-03",
+   "time_remaining": "< 2 weeks",
+   "labels": [
+    "digital"
+   ],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484400",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C483903",
+   "name": "WNL CIP Programme Director  - Consultancy DPS",
+   "authority": "Community Health Partnerships Limited",
+   "description": "Procurement of a Programme Director to lead and coordinate the West and North London Community Integration Programme (CIP), overseeing programme delivery, stakeholder engagement, implementation of key workstreams and associated reporting and governance.\r\n\r\nThe requirement will be competed through a mini- competition under Community Health Partnerships established Consultancy Dynamic Purchasing System (DPS), Programme Management Category, in accordance with the Public Contracts Regulations 2015.",
+   "category": "Estates Services",
+   "procurement_route": "Dynamic Purchasing System Call-Off Contract",
+   "opens": "2026-10-20",
+   "deadline": "2026-10-30",
+   "time_remaining": "< 2 weeks",
+   "labels": [
+    "framework_further_competition"
+   ],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C483903",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C476248",
+   "name": "The Provision of Equipping Consultancy Services",
+   "authority": "Frimley Health NHS Foundation Trust",
+   "description": "Appointment of an equipping consultant to deliver equipment planning for the new acute hospital at Frimley Park Hospital, from RIBA Stage 2 to Stage 3, with an option to extend into Stage 4. This includes the equipping strategy, Master Equipment Schedule, design integration and equipment cost planning to support the Outline Business Case.",
+   "category": "Consultancy",
+   "procurement_route": "PA23 Open Procedure",
+   "opens": "2026-10-20",
+   "deadline": "2026-11-16",
+   "time_remaining": "< 1 month",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C476248",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C474782",
+   "name": "Pharmaceutical Dispensing Services including the Supply and Delivery of Medicine",
+   "authority": "Lincolnshire Partnership NHS Foundation Trust",
+   "description": "Pharmacy Services",
+   "category": "Pharmacy Services",
+   "procurement_route": "",
+   "opens": "2026-10-20",
+   "deadline": "2026-12-04",
+   "time_remaining": "> 1 month",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C474782",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C472898",
+   "name": "Non Clinical Integrated Crisis Model",
+   "authority": "Tees, Esk and Wear Valleys NHS Foundation Trust",
+   "description": "Non Clinical Integrated Crisis Model",
+   "category": "Care and treatment Mental Health - Counselling",
+   "procurement_route": "PSR Competitive Process",
+   "opens": "2026-10-20",
+   "deadline": "2026-10-20",
+   "time_remaining": "Closed",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C472898",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C484439",
+   "name": "NHFT Integrated Sexual Health Electronic Patient Record (EPR) PME",
+   "authority": "Northamptonshire Healthcare NHS Foundation Trust",
+   "description": "Procurement of software that is specifically designed to support Sexual Health services and aligns with the requirements of the British Association for Sexual Health and HIV (BASHH).",
+   "category": "Screening Sexual Health - Genitourinary medicine",
+   "procurement_route": "PA23 Open Procedure",
+   "opens": "2026-10-19",
+   "deadline": "2026-10-30",
+   "time_remaining": "< 2 weeks",
+   "labels": [
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
+   ],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484439",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C484361",
+   "name": "Scheduled Gas boiler services",
+   "authority": "Maidstone and Tunbridge Wells NHS Trust",
+   "description": "gas boiler services",
+   "category": "Boiler maintenance service",
+   "procurement_route": "",
+   "opens": "2026-10-19",
+   "deadline": "2026-11-16",
+   "time_remaining": "< 1 month",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484361",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C484350",
+   "name": "DGT Helipad Design and Construction",
+   "authority": "Dartford and Gravesham NHS Trust",
+   "description": "DGT will be issuing an open tender in accordance with the Procurement Act 2023 for the design and construction to upgrade the existing helipad at Darent Valley Hospital to achieve compliance with CAP 1264 and all other relevant statutory and regulatory requirements, as determined through detailed site surveys, design development, and technical assessment.",
+   "category": "Minor Works",
+   "procurement_route": "PA23 Below Threshold Open Competition",
+   "opens": "2026-10-19",
+   "deadline": "2026-11-16",
+   "time_remaining": "< 1 month",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484350",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C484348",
+   "name": "Real-Time Location System Preliminary Market Engagement Notice",
+   "authority": "Leeds Teaching Hospitals NHS Trust",
+   "description": "Leeds Teaching Hospitals NHS Trust (LTHT) intends to undertake a Preliminary Market Engagement (PME) exercise in relation to a potential requirement for a Real-Time Location System (RTLS)",
+   "category": "IT Managed / Outsourced Services - Unclassified",
+   "procurement_route": "PA23 Open Procedure",
+   "opens": "2026-10-19",
+   "deadline": "2032-10-13",
+   "time_remaining": "> 1 month",
+   "labels": [
+    "pre_market_engagement",
+    "digital"
+   ],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484348",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C484333",
+   "name": "Boiler Chemical and softener service Contract",
+   "authority": "Maidstone and Tunbridge Wells NHS Trust",
+   "description": "Boiler chemical and softener service contract for MGH, KMOC, KMMS and CDC",
+   "category": "Service Contracts",
+   "procurement_route": "",
+   "opens": "2026-10-19",
+   "deadline": "2026-11-16",
+   "time_remaining": "< 1 month",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484333",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C484327",
+   "name": "ESTH - Lift maintenance PPM & Reactive",
+   "authority": "Epsom and St Helier University Hospitals NHS Trust",
+   "description": "Lift maintenance PPM and reactive for ESTH",
+   "category": "Engineering Services Lift Maintenance & Automatic Door Maintenance",
+   "procurement_route": "PA23 Open Procedure",
+   "opens": "2026-10-19",
+   "deadline": "2026-11-18",
+   "time_remaining": "< 1 month",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484327",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C482655",
+   "name": "Boiler Replacement Programme",
+   "authority": "Derbyshire Support and Facilities Services Limited",
+   "description": "Boiler Replacement Programme. The works comprise the phased replacement of three existing hot water boilers within the Chesterfield Royal Hospital boiler house. The programme is to be delivered over four years, completing by 31/03/2030, replacing one boiler per project phase to reduce operational disruption and maintain resilience of heating and hot water services to the hospital estate.",
+   "category": "Boiler installation or adjustment or maintenance or repair services",
+   "procurement_route": "PA23 Open Procedure",
+   "opens": "2026-10-19",
+   "deadline": "2026-11-13",
+   "time_remaining": "< 1 month",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C482655",
+   "first_seen": "2026-10-20"
   },
   {
    "ref": "C474576",
@@ -59,6 +294,97 @@
    "delisted_on": "2026-10-06"
   },
   {
+   "ref": "C474254",
+   "name": "WorkWell Health Coaches Humber & North Yorkshire",
+   "authority": "NHS Humber and North Yorkshire Integrated Care Board",
+   "description": "Health Coaches to keep people in work or help them to return to work",
+   "category": "Health Promotion Activities",
+   "procurement_route": "",
+   "opens": "2026-10-19",
+   "deadline": "2026-10-23",
+   "time_remaining": "< 1 week",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C474254",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C472732",
+   "name": "CPRD Feasibility Tool",
+   "authority": "Medicines and Healthcare Products Regulatory Agency",
+   "description": "The requirement is for a white-labelled feasibility and population analytics platform, deployed within CPRD-managed Microsoft Azure infrastructure and operating exclusively against CPRD datasets formatted in the OMOP Common Data Model. The proposed solution must natively support the OMOP Common Data Model and should not require material restructuring, remodelling or transformation of CPRD OMOP datasets to operate. The platform must enable CPRD staff and CPRD-approved external client to conduct self-service feasibility studies and descriptive epidemiological analyses without requiring supplier intervention",
+   "category": "IT software package",
+   "procurement_route": "PA23 Competitive Flexible Procedure",
+   "opens": "2026-10-19",
+   "deadline": "2026-11-19",
+   "time_remaining": "< 1 month",
+   "labels": [
+    "digital"
+   ],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C472732",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C472053",
+   "name": "Building Minor Works",
+   "authority": "Derbyshire Support and Facilities Services Limited",
+   "description": "Building Minor Works",
+   "category": "Building & Engineering Services",
+   "procurement_route": "PCR 2015 Framework - Further Competition",
+   "opens": "2026-10-19",
+   "deadline": "2026-11-13",
+   "time_remaining": "< 1 month",
+   "labels": [
+    "framework_further_competition"
+   ],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C472053",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C470975",
+   "name": "Grounds & Gardens",
+   "authority": "Greater Manchester Mental Health NHS Foundation Trust",
+   "description": "Provision of Grounds and Gardens Maintenance Services via the SBS10501 Grounds Maintenance and Associated Services Framework, Lot 1.\r\n\r\nOnly suppliers appointed to Lot 1 of the framework that responded to the Trust’s Expression of Interest are eligible to participate in this further competition.",
+   "category": "Grounds maintenance services",
+   "procurement_route": "PCR 2015 Framework - Further Competition",
+   "opens": "2026-10-19",
+   "deadline": null,
+   "time_remaining": "> 1 month",
+   "labels": [
+    "pre_market_engagement",
+    "framework_further_competition"
+   ],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C470975",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C461206",
+   "name": "Effect of probiotics on Campylobacter colonisation within broiler gut",
+   "authority": "Food Standards Agency",
+   "description": "We are seeking to commission a study to assess the effectiveness of a range of probiotics on reducing or delaying Campylobacter colonisation in the gut of broiler flocks.The proposed project will include an initial review of the literature followed by a field trial within broiler farms to assess whether commercially available probiotic formulations can reduce or delay Campylobacter colonisation in broiler flocks under commercial UK farming conditions and whether any reductions translate into lower contamination of poultry carcasses at processing. It will also assess potential co-benefits for producers, including impacts on bird welfare, flock health and production performance (incentives to encourage broiler farms to participate). The researchers will deliver a research programme that includes product screening and selection, commercial farm recruitment and field trials, laboratory and biomarker analyses, and statistical modelling and reporting. The study will generate robust evidence on the effectiveness, practicality and scalability of probiotic interventions in real-world poultry production systems, helping to inform future policy strategies to reduce Campylobacter foodborne ill",
+   "category": "Research",
+   "procurement_route": "PA23 Open Procedure",
+   "opens": "2026-10-19",
+   "deadline": "2026-11-30",
+   "time_remaining": "> 1 month",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C461206",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C425767",
+   "name": "Preventative and Reactive Fire Alarm And Associated Systems Maintenance",
+   "authority": "Northumbria Healthcare Facilities Management",
+   "description": "Contract for the Maintenance and Repairs of Fire Alarm Systems and associated systems at Northumbria Healthcare Buildings and Sites",
+   "category": "Fire alarm maintenance or monitoring",
+   "procurement_route": "PA23 Open Procedure",
+   "opens": "2026-10-19",
+   "deadline": "2026-11-27",
+   "time_remaining": "> 1 month",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C425767",
+   "first_seen": "2026-10-20"
+  },
+  {
    "ref": "C484015",
    "name": "Neighbourhood COPD Risk Stratification Project - PCN Collaboration",
    "authority": "Hull University Teaching Hospitals NHS Trust",
@@ -67,7 +393,7 @@
    "procurement_route": "PSR Most Suitable Provider",
    "opens": "2026-10-16",
    "deadline": "2026-11-02",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484015",
    "first_seen": "2026-10-17"
@@ -98,7 +424,8 @@
    "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C477522",
-   "first_seen": "2026-10-17"
+   "first_seen": "2026-10-17",
+   "delisted_on": "2026-10-20"
   },
   {
    "ref": "C475245",
@@ -141,7 +468,8 @@
    "deadline": "2026-10-30",
    "time_remaining": "< 2 weeks",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C473207",
    "first_seen": "2026-10-15"
@@ -159,6 +487,22 @@
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C468358",
    "first_seen": "2026-10-17"
+  },
+  {
+   "ref": "C440968",
+   "name": "C440968 Supply of Linen ONLY",
+   "authority": "2Gether Support Solutions Limited",
+   "description": "Linen",
+   "category": "Textile Materials",
+   "procurement_route": "PA23 Framework - Further Competition",
+   "opens": "2026-10-16",
+   "deadline": "2026-11-11",
+   "time_remaining": "< 1 month",
+   "labels": [
+    "framework_further_competition"
+   ],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C440968",
+   "first_seen": "2026-10-20"
   },
   {
    "ref": "C483312",
@@ -255,7 +599,7 @@
    "procurement_route": "Dynamic Purchasing System Call-Off Contract",
    "opens": "2026-10-14",
    "deadline": "2026-11-02",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [
     "pre_market_engagement",
     "framework_further_competition"
@@ -271,8 +615,8 @@
    "category": "Multifunction machines",
    "procurement_route": "",
    "opens": "2026-10-14",
-   "deadline": "2026-10-28",
-   "time_remaining": "< 2 weeks",
+   "deadline": "2026-11-11",
+   "time_remaining": "< 1 month",
    "labels": [
     "pre_market_engagement"
    ],
@@ -292,6 +636,20 @@
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C477447",
    "first_seen": "2026-10-15"
+  },
+  {
+   "ref": "C476296",
+   "name": "Mechanical and Electrical Consultant Tender",
+   "authority": "University Hospitals of North Midlands NHS Trust",
+   "description": "The Contracting Authority seeks to appoint a suitably qualified and experienced Mechanical and Electrical (M&E) Consultant(s) to provide professional engineering services across a diverse portfolio of healthcare capital, maintenance, refurbishment, infrastructure, and service improvement projects",
+   "category": "",
+   "procurement_route": "",
+   "opens": "2026-10-14",
+   "deadline": "2026-11-23",
+   "time_remaining": "> 1 month",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C476296",
+   "first_seen": "2026-10-20"
   },
   {
    "ref": "C476066",
@@ -430,7 +788,7 @@
    "procurement_route": "PA23 Below Threshold Open Competition",
    "opens": "2026-10-12",
    "deadline": "2026-11-03",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C477440",
    "first_seen": "2026-10-13"
@@ -475,7 +833,7 @@
    "procurement_route": "",
    "opens": "2026-10-12",
    "deadline": "2026-11-02",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [
     "pre_market_engagement"
    ],
@@ -706,7 +1064,7 @@
    "procurement_route": "",
    "opens": "2026-10-09",
    "deadline": "2026-10-26",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [
     "pre_market_engagement"
    ],
@@ -722,7 +1080,7 @@
    "procurement_route": "PA23 Framework - Further Competition",
    "opens": "2026-10-09",
    "deadline": "2026-10-22",
-   "time_remaining": "< 1 week",
+   "time_remaining": "< 2 days",
    "labels": [
     "framework_further_competition"
    ],
@@ -752,7 +1110,7 @@
    "procurement_route": "PA23 Competitive Flexible Procedure",
    "opens": "2026-10-09",
    "deadline": "2026-11-18",
-   "time_remaining": "> 1 month",
+   "time_remaining": "< 1 month",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C472190",
    "first_seen": "2026-10-10"
@@ -782,7 +1140,7 @@
    "procurement_route": "PA23 Framework - Further Competition",
    "opens": "2026-10-08",
    "deadline": "2026-10-19",
-   "time_remaining": "< 6 hours",
+   "time_remaining": "Closed",
    "labels": [
     "framework_further_competition"
    ],
@@ -896,7 +1254,7 @@
    "procurement_route": "PSR Most Suitable Provider",
    "opens": "2026-10-07",
    "deadline": "2026-10-22",
-   "time_remaining": "< 1 week",
+   "time_remaining": "< 2 days",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C475253",
    "first_seen": "2026-10-08"
@@ -940,7 +1298,7 @@
    "procurement_route": "",
    "opens": "2026-10-06",
    "deadline": "2026-11-02",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C474878",
    "first_seen": "2026-10-07"
@@ -954,7 +1312,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-10-06",
    "deadline": "2026-10-19",
-   "time_remaining": "< 12 hours",
+   "time_remaining": "Closed",
    "labels": [
     "pre_market_engagement"
    ],
@@ -986,7 +1344,7 @@
    "procurement_route": "",
    "opens": "2026-10-05",
    "deadline": "2026-10-20",
-   "time_remaining": "< 1 day",
+   "time_remaining": "Closed",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C474514",
    "first_seen": "2026-10-06"
@@ -1000,7 +1358,7 @@
    "procurement_route": "PA23 Below Threshold Open Competition",
    "opens": "2026-10-05",
    "deadline": "2026-10-19",
-   "time_remaining": "< 6 hours",
+   "time_remaining": "Closed",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C474322",
    "first_seen": "2026-10-07"
@@ -1058,7 +1416,9 @@
    "opens": "2026-10-05",
    "deadline": "2026-10-30",
    "time_remaining": "< 2 weeks",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C472830",
    "first_seen": "2026-10-02"
   },
@@ -1084,10 +1444,11 @@
    "category": "Information technology services",
    "procurement_route": "PCR 2015 Framework - Further Competition",
    "opens": "2026-10-05",
-   "deadline": "2026-10-20",
-   "time_remaining": "< 2 days",
+   "deadline": "2026-10-23",
+   "time_remaining": "< 1 week",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C470833",
    "first_seen": "2026-10-08"
@@ -1115,7 +1476,7 @@
    "procurement_route": "PA23 Framework - Further Competition",
    "opens": "2026-10-05",
    "deadline": "2026-11-02",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [
     "pre_market_engagement",
     "framework_further_competition"
@@ -1132,7 +1493,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-10-02",
    "deadline": "2026-11-02",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C475248",
    "first_seen": "2026-10-03"
@@ -1146,8 +1507,11 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-10-02",
    "deadline": "2026-11-02",
-   "time_remaining": "< 1 month",
-   "labels": [],
+   "time_remaining": "< 2 weeks",
+   "labels": [
+    "pre_market_engagement",
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C475227",
    "first_seen": "2026-10-03"
   },
@@ -1160,7 +1524,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-10-02",
    "deadline": "2026-10-19",
-   "time_remaining": "< 6 hours",
+   "time_remaining": "Closed",
    "labels": [
     "pre_market_engagement"
    ],
@@ -1176,8 +1540,10 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-10-02",
    "deadline": "2026-11-02",
-   "time_remaining": "< 1 month",
-   "labels": [],
+   "time_remaining": "< 2 weeks",
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C475200",
    "first_seen": "2026-10-03"
   },
@@ -1190,7 +1556,7 @@
    "procurement_route": "PA23 Below Threshold Open Competition",
    "opens": "2026-10-02",
    "deadline": "2026-11-03",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C475194",
    "first_seen": "2026-10-03"
@@ -1248,7 +1614,7 @@
    "procurement_route": "PA23 Below Threshold Open Competition",
    "opens": "2026-10-02",
    "deadline": "2026-11-02",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C473868",
    "first_seen": "2026-10-03"
@@ -1280,7 +1646,8 @@
    "deadline": "2026-11-06",
    "time_remaining": "< 1 month",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C470902",
    "first_seen": "2026-10-03"
@@ -1307,8 +1674,8 @@
    "category": "Internal Repairs and Maintenance",
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-10-01",
-   "deadline": "2026-10-22",
-   "time_remaining": "< 1 week",
+   "deadline": "2026-10-28",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C474720",
    "first_seen": "2026-10-02"
@@ -1322,7 +1689,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-10-01",
    "deadline": "2026-10-26",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C474624",
    "first_seen": "2026-10-06"
@@ -1420,8 +1787,11 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-09-30",
    "deadline": "2026-10-21",
-   "time_remaining": "< 1 week",
-   "labels": [],
+   "time_remaining": "< 1 day",
+   "labels": [
+    "pre_market_engagement",
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C474581",
    "first_seen": "2026-10-02"
   },
@@ -1537,7 +1907,10 @@
    "opens": "2026-09-29",
    "deadline": "2026-10-30",
    "time_remaining": "< 2 weeks",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C472308",
    "first_seen": "2026-09-30"
   },
@@ -1550,7 +1923,7 @@
    "procurement_route": "PSR Most Suitable Provider",
    "opens": "2026-09-29",
    "deadline": "2026-10-20",
-   "time_remaining": "< 2 days",
+   "time_remaining": "Closed",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C465187",
    "first_seen": "2026-09-30"
@@ -1578,7 +1951,7 @@
    "procurement_route": "PCR 2015 Framework - Further Competition",
    "opens": "2026-09-29",
    "deadline": "2026-10-26",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [
     "framework_further_competition"
    ],
@@ -1622,7 +1995,7 @@
    "procurement_route": "Dynamic Purchasing System Call-Off Contract",
    "opens": "2026-09-28",
    "deadline": "2026-10-20",
-   "time_remaining": "< 1 day",
+   "time_remaining": "Closed",
    "labels": [
     "framework_further_competition"
    ],
@@ -1638,7 +2011,7 @@
    "procurement_route": "PSR Competitive Process",
    "opens": "2026-09-25",
    "deadline": "2026-10-27",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C471686",
    "first_seen": "2026-09-26"
@@ -1652,7 +2025,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-09-25",
    "deadline": "2026-10-21",
-   "time_remaining": "< 1 week",
+   "time_remaining": "< 1 day",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C466995",
    "first_seen": "2026-09-26"
@@ -1667,7 +2040,10 @@
    "opens": "2026-09-24",
    "deadline": "2026-10-15",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement",
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C473492",
    "first_seen": "2026-09-25"
   },
@@ -1680,7 +2056,7 @@
    "procurement_route": "",
    "opens": "2026-09-24",
    "deadline": "2026-10-21",
-   "time_remaining": "< 1 week",
+   "time_remaining": "< 1 day",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C471945",
    "first_seen": "2026-09-29"
@@ -1724,10 +2100,12 @@
    "procurement_route": "PA23 Framework - Further Competition",
    "opens": "2026-09-23",
    "deadline": "2026-10-21",
-   "time_remaining": "< 1 week",
+   "time_remaining": "< 1 day",
    "labels": [
     "pre_market_engagement",
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C473168",
    "first_seen": "2026-09-24"
@@ -1740,7 +2118,7 @@
    "category": "Professional Services Other",
    "procurement_route": "PA23 Competitive Flexible Procedure",
    "opens": "2026-09-23",
-   "deadline": "2026-10-31",
+   "deadline": "2026-10-30",
    "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C468510",
@@ -1755,7 +2133,7 @@
    "procurement_route": "PCR 2015 Framework - Further Competition",
    "opens": "2026-09-23",
    "deadline": "2026-10-19",
-   "time_remaining": "< 6 hours",
+   "time_remaining": "Closed",
    "labels": [
     "framework_further_competition"
    ],
@@ -1771,7 +2149,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-09-23",
    "deadline": "2026-10-22",
-   "time_remaining": "< 1 week",
+   "time_remaining": "< 2 days",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C461547",
    "first_seen": "2026-09-24"
@@ -1785,7 +2163,7 @@
    "procurement_route": "PSR Competitive Process",
    "opens": "2026-09-23",
    "deadline": "2026-10-21",
-   "time_remaining": "< 1 week",
+   "time_remaining": "< 1 day",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C458602",
    "first_seen": "2026-08-28"
@@ -1799,7 +2177,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-09-23",
    "deadline": "2026-10-26",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C413033",
    "first_seen": "2026-09-24"
@@ -1871,7 +2249,7 @@
    "procurement_route": "PSR Competitive Process",
    "opens": "2026-09-22",
    "deadline": "2026-10-21",
-   "time_remaining": "< 1 week",
+   "time_remaining": "< 1 day",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C464695",
    "first_seen": "2026-09-24"
@@ -1900,7 +2278,10 @@
    "opens": "2026-09-22",
    "deadline": "2026-10-23",
    "time_remaining": "< 1 week",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C396579",
    "first_seen": "2026-09-23"
   },
@@ -1969,7 +2350,7 @@
    "procurement_route": "PA23 Below Threshold Open Competition",
    "opens": "2026-09-21",
    "deadline": "2026-10-19",
-   "time_remaining": "< 12 hours",
+   "time_remaining": "Closed",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C460844",
    "first_seen": "2026-09-22"
@@ -1983,7 +2364,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-09-21",
    "deadline": "2026-11-02",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C448040",
    "first_seen": "2026-09-18"
@@ -2055,7 +2436,8 @@
    "deadline": "2026-10-16",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C471985",
    "first_seen": "2026-09-19"
@@ -2069,7 +2451,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-09-18",
    "deadline": "2026-10-21",
-   "time_remaining": "< 1 week",
+   "time_remaining": "< 1 day",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C471854",
    "first_seen": "2026-09-19"
@@ -2116,7 +2498,9 @@
    "opens": "2026-09-18",
    "deadline": "2026-10-02",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C468784",
    "first_seen": "2026-09-19"
   },
@@ -2248,7 +2632,9 @@
    "opens": "2026-09-16",
    "deadline": "2026-10-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C470143",
    "first_seen": "2026-09-17"
   },
@@ -2333,7 +2719,7 @@
    "procurement_route": "PSR Competitive Process",
    "opens": "2026-09-15",
    "deadline": "2026-10-19",
-   "time_remaining": "< 6 hours",
+   "time_remaining": "Closed",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C468162",
    "first_seen": "2026-09-14"
@@ -2503,8 +2889,10 @@
    "procurement_route": "PA23 Competitive Flexible Procedure",
    "opens": "2026-09-11",
    "deadline": "2026-10-27",
-   "time_remaining": "< 2 weeks",
-   "labels": [],
+   "time_remaining": "< 1 week",
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C471212",
    "first_seen": "2026-09-12"
   },
@@ -2563,7 +2951,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-09-11",
    "deadline": "2026-10-20",
-   "time_remaining": "< 2 days",
+   "time_remaining": "Closed",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C470053",
    "first_seen": "2026-09-12"
@@ -2679,7 +3067,7 @@
    "procurement_route": "PA23 Competitive Flexible Procedure",
    "opens": "2026-09-11",
    "deadline": "2026-10-21",
-   "time_remaining": "< 1 week",
+   "time_remaining": "< 1 day",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C385722",
    "first_seen": "2026-09-12"
@@ -2693,7 +3081,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-09-10",
    "deadline": "2026-10-27",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C471004",
    "first_seen": "2026-09-11"
@@ -2713,6 +3101,20 @@
    "first_seen": "2026-09-11"
   },
   {
+   "ref": "C470315",
+   "name": "2073 - NECS - Duende ID Server",
+   "authority": "NHS North of England Commissioning Support Unit (hosted by NHS England)",
+   "description": "The primary outcome of this procurement is to ensure continuity of critical identity management processes for key developed systems provided by NECS.",
+   "category": "",
+   "procurement_route": "PA23 Below Threshold - Limited Competition",
+   "opens": "2026-09-10",
+   "deadline": "2026-09-18",
+   "time_remaining": "Closed",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C470315",
+   "first_seen": "2026-10-20"
+  },
+  {
    "ref": "C452919",
    "name": "UHB Workforce Management Systems",
    "authority": "University Hospitals Birmingham NHS Foundation Trust",
@@ -2722,7 +3124,9 @@
    "opens": "2026-09-10",
    "deadline": "2026-10-15",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C452919",
    "first_seen": "2026-09-11"
   },
@@ -2807,7 +3211,9 @@
    "opens": "2026-09-09",
    "deadline": "2026-10-01",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C470657",
    "first_seen": "2026-09-10"
   },
@@ -2879,7 +3285,9 @@
    "opens": "2026-09-09",
    "deadline": "2026-10-01",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C468392",
    "first_seen": "2026-09-10"
   },
@@ -2892,7 +3300,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-09-09",
    "deadline": "2026-10-19",
-   "time_remaining": "< 12 hours",
+   "time_remaining": "Closed",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C468021",
    "first_seen": "2026-09-17"
@@ -2924,6 +3332,20 @@
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C467846",
    "first_seen": "2026-09-10"
+  },
+  {
+   "ref": "C454711",
+   "name": "DGT Helipad Design and Construction",
+   "authority": "Dartford and Gravesham NHS Trust",
+   "description": "DGT will be issuing an open tender in accordance with the Procurement Act 2023 for the design and construction to upgrade the existing helipad at Darent Valley Hospital to achieve compliance with CAP 1264 and all other relevant statutory and regulatory requirements, as determined through detailed site surveys, design development, and technical assessment.",
+   "category": "Minor Works",
+   "procurement_route": "PA23 Below Threshold Open Competition",
+   "opens": "2026-09-09",
+   "deadline": "2026-10-09",
+   "time_remaining": "Closed",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C454711",
+   "first_seen": "2026-08-28"
   },
   {
    "ref": "C448758",
@@ -3037,7 +3459,9 @@
    "opens": "2026-09-08",
    "deadline": "2026-10-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C426158",
    "first_seen": "2026-09-09"
   },
@@ -3177,7 +3601,9 @@
    "opens": "2026-09-04",
    "deadline": "2026-09-29",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C464968",
    "first_seen": "2026-09-05"
   },
@@ -3489,7 +3915,9 @@
    "opens": "2026-08-31",
    "deadline": "2026-09-07",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C467312",
    "first_seen": "2026-08-28"
   },
@@ -3504,7 +3932,9 @@
    "deadline": "2026-09-25",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C471397",
    "first_seen": "2026-09-18"
@@ -3760,7 +4190,8 @@
    "time_remaining": "Closed",
    "labels": [
     "pre_market_engagement",
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C468163",
    "first_seen": "2026-08-28"
@@ -3844,7 +4275,7 @@
    "procurement_route": "PSR Competitive Process",
    "opens": "2026-08-26",
    "deadline": "2026-10-19",
-   "time_remaining": "< 6 hours",
+   "time_remaining": "Closed",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C447639",
    "first_seen": "2026-08-28"
@@ -4022,7 +4453,9 @@
    "deadline": "2026-10-01",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C467704",
    "first_seen": "2026-08-28"
@@ -4268,7 +4701,7 @@
    "procurement_route": "",
    "opens": "2026-08-17",
    "deadline": "2026-10-19",
-   "time_remaining": "< 6 hours",
+   "time_remaining": "Closed",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C472727",
    "first_seen": "2026-09-22"
@@ -4500,7 +4933,7 @@
    "procurement_route": "PA23 Light Touch Regime",
    "opens": "2026-08-13",
    "deadline": "2026-10-19",
-   "time_remaining": "< 12 hours",
+   "time_remaining": "Closed",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C464915",
    "first_seen": "2026-08-28"
@@ -4543,7 +4976,10 @@
    "opens": "2026-08-13",
    "deadline": "2026-09-10",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement",
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C464645",
    "first_seen": "2026-08-28"
   },
@@ -4759,7 +5195,9 @@
    "opens": "2026-08-11",
    "deadline": "2026-09-01",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C463905",
    "first_seen": "2026-08-28"
   },
@@ -4845,7 +5283,9 @@
    "opens": "2026-08-11",
    "deadline": "2026-09-29",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C445452",
    "first_seen": "2026-08-28"
   },
@@ -4873,7 +5313,9 @@
    "opens": "2026-08-10",
    "deadline": "2026-09-25",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C463938",
    "first_seen": "2026-08-28"
   },
@@ -5029,7 +5471,9 @@
    "opens": "2026-08-07",
    "deadline": "2026-08-18",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C463835",
    "first_seen": "2026-08-28"
   },
@@ -5351,7 +5795,10 @@
    "opens": "2026-08-04",
    "deadline": "2026-09-01",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C462709",
    "first_seen": "2026-08-28"
   },
@@ -5409,7 +5856,10 @@
    "opens": "2026-08-04",
    "deadline": "2026-09-02",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C431747",
    "first_seen": "2026-08-28"
   },
@@ -5527,7 +5977,9 @@
    "opens": "2026-08-03",
    "deadline": "2026-10-05",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C456906",
    "first_seen": "2026-08-28"
   },
@@ -5557,7 +6009,9 @@
    "opens": "2026-07-31",
    "deadline": "2026-08-25",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C462428",
    "first_seen": "2026-08-28"
   },
@@ -5866,7 +6320,9 @@
    "deadline": "2026-09-08",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C459818",
    "first_seen": "2026-08-28"
@@ -5909,7 +6365,9 @@
    "opens": "2026-07-27",
    "deadline": "2026-08-21",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C461397",
    "first_seen": "2026-08-28"
   },
@@ -6071,7 +6529,9 @@
    "opens": "2026-07-23",
    "deadline": "2026-08-04",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C460950",
    "first_seen": "2026-08-28"
   },
@@ -6287,7 +6747,9 @@
    "opens": "2026-07-20",
    "deadline": "2026-08-26",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C458639",
    "first_seen": "2026-08-28"
   },
@@ -6588,7 +7050,8 @@
    "deadline": "2026-08-07",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C459051",
    "first_seen": "2026-08-28"
@@ -6776,7 +7239,8 @@
    "deadline": "2026-07-29",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C458147",
    "first_seen": "2026-08-28"
@@ -6792,7 +7256,8 @@
    "deadline": "2026-08-14",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C439911",
    "first_seen": "2026-08-28"
@@ -6865,7 +7330,9 @@
    "opens": "2026-07-10",
    "deadline": "2026-08-13",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C452515",
    "first_seen": "2026-08-28"
   },
@@ -6894,7 +7361,8 @@
    "deadline": "2026-07-17",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C447982",
    "first_seen": "2026-08-28"
@@ -6937,7 +7405,9 @@
    "opens": "2026-07-09",
    "deadline": "2026-08-03",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C453902",
    "first_seen": "2026-08-28"
   },
@@ -7105,7 +7575,10 @@
    "opens": "2026-07-06",
    "deadline": "2026-07-31",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C457283",
    "first_seen": "2026-08-28"
   },
@@ -7133,7 +7606,10 @@
    "opens": "2026-07-06",
    "deadline": "2026-07-31",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C457242",
    "first_seen": "2026-08-28"
   },
@@ -7236,7 +7712,9 @@
    "deadline": "2026-07-29",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C456872",
    "first_seen": "2026-08-28"
@@ -7460,7 +7938,8 @@
    "deadline": "2026-07-27",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C454850",
    "first_seen": "2026-08-28"
@@ -7710,7 +8189,9 @@
    "opens": "2026-06-24",
    "deadline": "2026-07-15",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C455268",
    "first_seen": "2026-08-28"
   },
@@ -7724,7 +8205,9 @@
    "opens": "2026-06-24",
    "deadline": "2026-07-10",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C455247",
    "first_seen": "2026-08-28"
   },
@@ -7901,8 +8384,10 @@
    "procurement_route": "PA23 Competitive Flexible Procedure",
    "opens": "2026-06-23",
    "deadline": "2026-10-21",
-   "time_remaining": "< 1 week",
-   "labels": [],
+   "time_remaining": "< 1 day",
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C451956",
    "first_seen": "2026-08-28"
   },
@@ -7917,7 +8402,8 @@
    "deadline": "2026-07-08",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C430318",
    "first_seen": "2026-08-28"
@@ -7936,20 +8422,6 @@
     "framework_further_competition"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C454863",
-   "first_seen": "2026-08-28"
-  },
-  {
-   "ref": "C454711",
-   "name": "DGT Helipad Design and Construction",
-   "authority": "Dartford and Gravesham NHS Trust",
-   "description": "DGT will be issuing an open tender in accordance with the Procurement Act 2023 for the design and construction to upgrade the existing helipad at Darent Valley Hospital to achieve compliance with CAP 1264 and all other relevant statutory and regulatory requirements, as determined through detailed site surveys, design development, and technical assessment.",
-   "category": "Minor Works",
-   "procurement_route": "PA23 Below Threshold Open Competition",
-   "opens": "2026-06-22",
-   "deadline": "2026-07-02",
-   "time_remaining": "Closed",
-   "labels": [],
-   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C454711",
    "first_seen": "2026-08-28"
   },
   {
@@ -8018,7 +8490,9 @@
    "opens": "2026-06-22",
    "deadline": "2026-07-29",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C451809",
    "first_seen": "2026-08-28"
   },
@@ -8032,7 +8506,9 @@
    "opens": "2026-06-22",
    "deadline": "2026-07-16",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C451468",
    "first_seen": "2026-08-28"
   },
@@ -8090,7 +8566,9 @@
    "opens": "2026-06-22",
    "deadline": "2026-07-17",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C437355",
    "first_seen": "2026-08-28"
   },
@@ -8174,7 +8652,9 @@
    "opens": "2026-06-19",
    "deadline": "2026-07-20",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C444509",
    "first_seen": "2026-08-28"
   },
@@ -8246,7 +8726,11 @@
    "opens": "2026-06-18",
    "deadline": "2026-07-10",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C454092",
    "first_seen": "2026-08-28"
   },
@@ -8454,7 +8938,9 @@
    "opens": "2026-06-16",
    "deadline": "2026-08-10",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C452749",
    "first_seen": "2026-08-28"
   },
@@ -8585,7 +9071,8 @@
    "deadline": "2026-06-19",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C453016",
    "first_seen": "2026-08-28"
@@ -8672,7 +9159,9 @@
    "opens": "2026-06-12",
    "deadline": "2026-07-13",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C435523",
    "first_seen": "2026-08-28"
   },
@@ -8830,7 +9319,9 @@
    "opens": "2026-06-10",
    "deadline": "2026-07-07",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C443774",
    "first_seen": "2026-08-28"
   },
@@ -8917,7 +9408,8 @@
    "deadline": "2026-06-24",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C452048",
    "first_seen": "2026-08-28"
@@ -8992,7 +9484,10 @@
    "opens": "2026-06-08",
    "deadline": "2026-06-19",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement",
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C452016",
    "first_seen": "2026-08-28"
   },
@@ -9065,7 +9560,9 @@
    "deadline": "2026-06-19",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C450588",
    "first_seen": "2026-08-28"
@@ -9155,7 +9652,9 @@
    "deadline": "2026-07-06",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C451248",
    "first_seen": "2026-08-28"
@@ -9229,7 +9728,9 @@
    "deadline": "2026-08-19",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C451729",
    "first_seen": "2026-08-28"
@@ -9245,7 +9746,9 @@
    "deadline": "2026-06-25",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C451688",
    "first_seen": "2026-08-28"
@@ -9507,7 +10010,8 @@
    "deadline": "2026-07-17",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C450830",
    "first_seen": "2026-08-28"
@@ -10057,7 +10561,9 @@
    "opens": "2026-05-22",
    "deadline": "2026-06-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C449323",
    "first_seen": "2026-08-28"
   },
@@ -10276,7 +10782,9 @@
    "deadline": "2026-06-03",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C448338",
    "first_seen": "2026-08-28"
@@ -10492,7 +11000,8 @@
    "deadline": "2026-06-09",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C450196",
    "first_seen": "2026-08-28"
@@ -10610,7 +11119,9 @@
    "opens": "2026-05-14",
    "deadline": "2026-05-22",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C447022",
    "first_seen": "2026-08-28"
   },
@@ -10694,7 +11205,9 @@
    "opens": "2026-05-13",
    "deadline": "2026-06-18",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C446538",
    "first_seen": "2026-08-28"
   },
@@ -10837,7 +11350,8 @@
    "deadline": "2026-05-26",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C443360",
    "first_seen": "2026-08-28"
@@ -11038,7 +11552,8 @@
    "time_remaining": "Closed",
    "labels": [
     "pre_market_engagement",
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C442081",
    "first_seen": "2026-08-28"
@@ -11661,7 +12176,8 @@
    "deadline": "2026-06-01",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C421057",
    "first_seen": "2026-08-28"
@@ -11962,7 +12478,9 @@
    "opens": "2026-04-20",
    "deadline": "2026-05-15",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C428718",
    "first_seen": "2026-08-28"
   },
@@ -12005,7 +12523,9 @@
    "deadline": "2026-05-18",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C442591",
    "first_seen": "2026-08-28"
@@ -12342,7 +12862,8 @@
    "deadline": "2026-05-15",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C439595",
    "first_seen": "2026-08-28"
@@ -12609,7 +13130,10 @@
    "opens": "2026-04-10",
    "deadline": "2026-05-11",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C420803",
    "first_seen": "2026-08-28"
   },
@@ -12750,7 +13274,8 @@
    "deadline": "2026-04-24",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C436804",
    "first_seen": "2026-08-28"
@@ -12837,7 +13362,9 @@
    "opens": "2026-04-02",
    "deadline": "2026-04-24",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C436583",
    "first_seen": "2026-08-28"
   },
@@ -12880,7 +13407,8 @@
    "deadline": "2026-07-07",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C454566",
    "first_seen": "2026-08-28"
@@ -12923,7 +13451,9 @@
    "opens": "2026-04-01",
    "deadline": "2026-04-27",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C435983",
    "first_seen": "2026-08-28"
   },
@@ -13385,7 +13915,9 @@
    "deadline": "2026-04-24",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C432964",
    "first_seen": "2026-08-28"
@@ -13441,7 +13973,7 @@
    "procurement_route": "Below Threshold - 3 Quotes",
    "opens": "2026-03-24",
    "deadline": "2026-03-31",
-   "time_remaining": "Closed",
+   "time_remaining": "Cancelled",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C433992",
    "first_seen": "2026-08-28"
@@ -13500,7 +14032,10 @@
    "opens": "2026-03-23",
    "deadline": "2026-04-17",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement",
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C433916",
    "first_seen": "2026-08-28"
   },
@@ -13528,7 +14063,9 @@
    "opens": "2026-03-20",
    "deadline": "2026-04-30",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C432298",
    "first_seen": "2026-08-28"
   },
@@ -13559,7 +14096,9 @@
    "opens": "2026-03-20",
    "deadline": "2026-04-20",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C431899",
    "first_seen": "2026-08-28"
   },
@@ -13587,7 +14126,10 @@
    "opens": "2026-03-20",
    "deadline": "2026-04-20",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C428688",
    "first_seen": "2026-08-28"
   },
@@ -14046,7 +14588,8 @@
    "deadline": "2026-04-02",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C431252",
    "first_seen": "2026-08-28"
@@ -14062,7 +14605,8 @@
    "deadline": "2026-06-01",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C426747",
    "first_seen": "2026-08-28"
@@ -14414,7 +14958,8 @@
    "deadline": "2026-04-17",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C429685",
    "first_seen": "2026-08-28"
@@ -14558,7 +15103,9 @@
    "deadline": "2026-03-20",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C428735",
    "first_seen": "2026-08-28"
@@ -14616,7 +15163,8 @@
    "deadline": "2026-03-31",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C428345",
    "first_seen": "2026-08-28"
@@ -14691,7 +15239,9 @@
    "opens": "2026-03-02",
    "deadline": "2026-04-01",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C427911",
    "first_seen": "2026-08-28"
   },
@@ -14705,7 +15255,9 @@
    "opens": "2026-03-02",
    "deadline": "2026-04-24",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C427867",
    "first_seen": "2026-08-28"
   },
@@ -14922,7 +15474,8 @@
    "deadline": "2026-03-26",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C427098",
    "first_seen": "2026-08-28"
@@ -14952,7 +15505,8 @@
    "deadline": "2026-04-13",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C425233",
    "first_seen": "2026-08-28"
@@ -14981,7 +15535,9 @@
    "opens": "2026-02-26",
    "deadline": "2026-03-10",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C423204",
    "first_seen": "2026-08-28"
   },
@@ -15009,7 +15565,9 @@
    "opens": "2026-02-26",
    "deadline": "2026-04-29",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C395081",
    "first_seen": "2026-08-28"
   },
@@ -15373,7 +15931,9 @@
    "opens": "2026-02-17",
    "deadline": "2026-03-19",
    "time_remaining": "Cancelled",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C421196",
    "first_seen": "2026-08-28"
   },
@@ -15658,7 +16218,8 @@
    "deadline": "2026-02-25",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C417999",
    "first_seen": "2026-08-28"
@@ -15950,7 +16511,9 @@
    "deadline": "2026-02-23",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C422202",
    "first_seen": "2026-08-28"
@@ -16122,7 +16685,8 @@
    "deadline": "2026-02-20",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C419858",
    "first_seen": "2026-08-28"
@@ -16138,7 +16702,8 @@
    "deadline": "2026-03-03",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C419390",
    "first_seen": "2026-08-28"
@@ -16181,7 +16746,10 @@
    "opens": "2026-02-04",
    "deadline": "2026-04-30",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement",
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C421098",
    "first_seen": "2026-08-28"
   },
@@ -16195,7 +16763,9 @@
    "opens": "2026-02-04",
    "deadline": "2026-03-02",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C420743",
    "first_seen": "2026-08-28"
   },
@@ -16252,7 +16822,9 @@
    "deadline": "2026-03-05",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C421233",
    "first_seen": "2026-08-28"
@@ -16282,7 +16854,8 @@
    "deadline": "2026-02-24",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C420762",
    "first_seen": "2026-08-28"
@@ -16353,7 +16926,10 @@
    "opens": "2026-02-03",
    "deadline": "2029-12-14",
    "time_remaining": "> 1 month",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C378603",
    "first_seen": "2026-08-28"
   },
@@ -16527,7 +17103,10 @@
    "opens": "2026-01-30",
    "deadline": "2026-02-27",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C419845",
    "first_seen": "2026-08-28"
   },
@@ -16613,7 +17192,9 @@
    "opens": "2026-01-30",
    "deadline": "2026-03-09",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C409773",
    "first_seen": "2026-08-28"
   },
@@ -17125,7 +17706,9 @@
    "opens": "2026-01-22",
    "deadline": "2026-01-30",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C417634",
    "first_seen": "2026-08-28"
   },
@@ -17253,7 +17836,9 @@
    "opens": "2026-01-21",
    "deadline": "2026-02-03",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C415572",
    "first_seen": "2026-08-28"
   },
@@ -17457,7 +18042,9 @@
    "opens": "2026-01-19",
    "deadline": "2026-02-25",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C415621",
    "first_seen": "2026-08-28"
   },
@@ -17545,7 +18132,10 @@
    "opens": "2026-01-16",
    "deadline": "2026-01-29",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C415746",
    "first_seen": "2026-08-28"
   },
@@ -17673,7 +18263,9 @@
    "opens": "2026-01-15",
    "deadline": "2026-02-02",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C415567",
    "first_seen": "2026-08-28"
   },
@@ -17961,7 +18553,9 @@
    "opens": "2026-01-13",
    "deadline": "2026-01-27",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C413315",
    "first_seen": "2026-08-28"
   },
@@ -18018,7 +18612,8 @@
    "deadline": "2026-01-30",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C410584",
    "first_seen": "2026-08-28"
@@ -18290,7 +18885,8 @@
    "deadline": "2026-01-26",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C413360",
    "first_seen": "2026-08-28"
@@ -18349,7 +18945,9 @@
    "opens": "2026-01-08",
    "deadline": "2026-03-09",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C410678",
    "first_seen": "2026-08-28"
   },
@@ -18867,7 +19465,9 @@
    "opens": "2025-12-23",
    "deadline": "2026-01-21",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C408629",
    "first_seen": "2026-08-28"
   },
@@ -18895,7 +19495,10 @@
    "opens": "2025-12-22",
    "deadline": "2025-12-22",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C409323",
    "first_seen": "2026-08-28"
   },
@@ -18909,7 +19512,9 @@
    "opens": "2025-12-22",
    "deadline": "2026-01-23",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C409236",
    "first_seen": "2026-08-28"
   },
@@ -18998,7 +19603,9 @@
    "deadline": "2026-01-23",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C409021",
    "first_seen": "2026-08-28"
@@ -19058,7 +19665,9 @@
    "deadline": "2026-02-03",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C408848",
    "first_seen": "2026-08-28"
@@ -19470,7 +20079,9 @@
    "opens": "2025-12-16",
    "deadline": "2026-01-16",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C407843",
    "first_seen": "2026-08-28"
   },
@@ -19640,7 +20251,9 @@
    "opens": "2025-12-15",
    "deadline": "2026-01-22",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C406402",
    "first_seen": "2026-08-28"
   },
@@ -19683,7 +20296,8 @@
    "deadline": "2026-02-06",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C405090",
    "first_seen": "2026-08-28"
@@ -19966,7 +20580,9 @@
    "opens": "2025-12-10",
    "deadline": "2026-01-09",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C406973",
    "first_seen": "2026-08-28"
   },
@@ -20056,7 +20672,9 @@
    "opens": "2025-12-10",
    "deadline": "2027-02-25",
    "time_remaining": "> 1 month",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C406662",
    "first_seen": "2026-08-28"
   },
@@ -20128,7 +20746,9 @@
    "opens": "2025-12-09",
    "deadline": "2026-04-02",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C429440",
    "first_seen": "2026-08-28"
   },
@@ -20221,7 +20841,8 @@
    "deadline": "2026-01-06",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C399253",
    "first_seen": "2026-08-28"
@@ -20320,7 +20941,9 @@
    "opens": "2025-12-08",
    "deadline": "2026-01-16",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C403144",
    "first_seen": "2026-08-28"
   },
@@ -20418,7 +21041,10 @@
    "opens": "2025-12-05",
    "deadline": "2025-12-22",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C405933",
    "first_seen": "2026-08-28"
   },
@@ -20588,7 +21214,10 @@
    "opens": "2025-12-03",
    "deadline": "2025-12-17",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement",
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C405392",
    "first_seen": "2026-08-28"
   },
@@ -20635,7 +21264,8 @@
    "deadline": "2025-12-19",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C403019",
    "first_seen": "2026-08-28"
@@ -20840,7 +21470,10 @@
    "opens": "2025-12-01",
    "deadline": "2026-01-14",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C404312",
    "first_seen": "2026-08-28"
   },
@@ -20959,7 +21592,9 @@
    "opens": "2025-11-28",
    "deadline": "2025-12-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C404596",
    "first_seen": "2026-08-28"
   },
@@ -21017,7 +21652,10 @@
    "opens": "2025-11-28",
    "deadline": "2025-12-15",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C404002",
    "first_seen": "2026-08-28"
   },
@@ -21594,7 +22232,8 @@
    "deadline": "2026-01-06",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C403319",
    "first_seen": "2026-08-28"
@@ -21638,7 +22277,8 @@
    "deadline": "2025-12-19",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C402293",
    "first_seen": "2026-08-28"
@@ -21654,7 +22294,8 @@
    "deadline": "2025-12-05",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C400548",
    "first_seen": "2026-08-28"
@@ -21884,7 +22525,8 @@
    "deadline": "2025-11-28",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C402143",
    "first_seen": "2026-08-28"
@@ -21942,7 +22584,8 @@
    "deadline": "2025-12-17",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C390630",
    "first_seen": "2026-08-28"
@@ -22115,7 +22758,9 @@
    "opens": "2025-11-17",
    "deadline": "2025-12-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C401306",
    "first_seen": "2026-08-28"
   },
@@ -22417,7 +23062,9 @@
    "opens": "2025-11-12",
    "deadline": "2025-12-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C401045",
    "first_seen": "2026-08-28"
   },
@@ -22593,7 +23240,9 @@
    "opens": "2025-11-12",
    "deadline": "2025-12-16",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C368616",
    "first_seen": "2026-08-28"
   },
@@ -22734,7 +23383,8 @@
    "deadline": "2025-11-21",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C400358",
    "first_seen": "2026-08-28"
@@ -22750,7 +23400,8 @@
    "deadline": "2025-11-26",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C400350",
    "first_seen": "2026-08-28"
@@ -22881,7 +23532,9 @@
    "opens": "2025-11-10",
    "deadline": "2025-12-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C393441",
    "first_seen": "2026-08-28"
   },
@@ -22895,7 +23548,9 @@
    "opens": "2025-11-10",
    "deadline": "2025-12-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C387685",
    "first_seen": "2026-08-28"
   },
@@ -23183,7 +23838,10 @@
    "opens": "2025-11-05",
    "deadline": "2025-11-18",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C399360",
    "first_seen": "2026-08-28"
   },
@@ -23313,7 +23971,10 @@
    "opens": "2025-11-04",
    "deadline": "2025-11-17",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C398936",
    "first_seen": "2026-08-28"
   },
@@ -23469,7 +24130,9 @@
    "opens": "2025-10-31",
    "deadline": "2025-11-14",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C398634",
    "first_seen": "2026-08-28"
   },
@@ -23483,7 +24146,9 @@
    "opens": "2025-10-31",
    "deadline": "2025-11-14",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C398624",
    "first_seen": "2026-08-28"
   },
@@ -23674,7 +24339,8 @@
    "deadline": "2025-11-13",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C397073",
    "first_seen": "2026-08-28"
@@ -23990,7 +24656,8 @@
    "deadline": "2025-11-21",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C397038",
    "first_seen": "2026-08-28"
@@ -24495,7 +25162,9 @@
    "opens": "2025-10-20",
    "deadline": "2025-11-14",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C396216",
    "first_seen": "2026-08-28"
   },
@@ -24509,7 +25178,10 @@
    "opens": "2025-10-20",
    "deadline": "2025-11-10",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C396207",
    "first_seen": "2026-08-28"
   },
@@ -24611,7 +25283,9 @@
    "opens": "2025-10-20",
    "deadline": "2025-11-14",
    "time_remaining": "Cancelled",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C396021",
    "first_seen": "2026-08-28"
   },
@@ -24668,7 +25342,8 @@
    "deadline": "2025-11-14",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C394211",
    "first_seen": "2026-08-28"
@@ -25107,7 +25782,9 @@
    "opens": "2025-10-15",
    "deadline": "2025-11-05",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C393299",
    "first_seen": "2026-08-28"
   },
@@ -25180,7 +25857,8 @@
    "deadline": "2025-11-03",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C391981",
    "first_seen": "2026-08-28"
@@ -25209,7 +25887,10 @@
    "opens": "2025-10-14",
    "deadline": "2025-11-04",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C388898",
    "first_seen": "2026-08-28"
   },
@@ -25238,7 +25919,8 @@
    "deadline": "2025-11-10",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C394688",
    "first_seen": "2026-08-28"
@@ -25337,7 +26019,9 @@
    "opens": "2025-10-13",
    "deadline": "2025-10-31",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C367037",
    "first_seen": "2026-08-28"
   },
@@ -25466,7 +26150,8 @@
    "deadline": "2025-10-25",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C393924",
    "first_seen": "2026-08-28"
@@ -25671,7 +26356,9 @@
    "opens": "2025-10-08",
    "deadline": "2025-11-09",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C377945",
    "first_seen": "2026-08-28"
   },
@@ -25816,7 +26503,8 @@
    "deadline": "2025-10-21",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C393202",
    "first_seen": "2026-08-28"
@@ -26022,7 +26710,8 @@
    "deadline": "2025-10-23",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C392798",
    "first_seen": "2026-08-28"
@@ -26421,7 +27110,9 @@
    "opens": "2025-09-30",
    "deadline": "2025-12-02",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C388016",
    "first_seen": "2026-08-28"
   },
@@ -26561,7 +27252,9 @@
    "opens": "2025-09-29",
    "deadline": "2025-10-27",
    "time_remaining": "Cancelled",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C390950",
    "first_seen": "2026-08-28"
   },
@@ -27077,7 +27770,8 @@
    "deadline": "2025-10-02",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C390116",
    "first_seen": "2026-08-28"
@@ -27366,7 +28060,10 @@
    "opens": "2025-09-17",
    "deadline": "2025-10-10",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C381386",
    "first_seen": "2026-08-28"
   },
@@ -27606,7 +28303,9 @@
    "opens": "2025-09-12",
    "deadline": "2025-09-27",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C388910",
    "first_seen": "2026-08-28"
   },
@@ -27650,7 +28349,10 @@
    "opens": "2025-09-12",
    "deadline": "2025-10-02",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C388394",
    "first_seen": "2026-08-28"
   },
@@ -28100,7 +28802,9 @@
    "opens": "2025-09-08",
    "deadline": "2025-10-13",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C353618",
    "first_seen": "2026-08-28"
   },
@@ -28144,7 +28848,10 @@
    "opens": "2025-09-05",
    "deadline": "2025-09-22",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C387379",
    "first_seen": "2026-08-28"
   },
@@ -28404,7 +29111,9 @@
    "opens": "2025-09-02",
    "deadline": "2025-09-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C376788",
    "first_seen": "2026-08-28"
   },
@@ -28572,7 +29281,9 @@
    "opens": "2025-08-29",
    "deadline": "2025-09-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C385669",
    "first_seen": "2026-08-28"
   },
@@ -28632,7 +29343,9 @@
    "opens": "2025-08-29",
    "deadline": "2025-09-24",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C385309",
    "first_seen": "2026-08-28"
   },
@@ -28674,7 +29387,9 @@
    "opens": "2025-08-29",
    "deadline": "2025-10-27",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C377486",
    "first_seen": "2026-08-28"
   },
@@ -28733,7 +29448,9 @@
    "deadline": "2025-09-12",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C385161",
    "first_seen": "2026-08-28"
@@ -29107,7 +29824,8 @@
    "deadline": "2025-09-12",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C378415",
    "first_seen": "2026-08-28"
@@ -29122,7 +29840,9 @@
    "opens": "2025-08-22",
    "deadline": "2025-09-18",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C377769",
    "first_seen": "2026-08-28"
   },
@@ -29350,7 +30070,9 @@
    "opens": "2025-08-20",
    "deadline": "2025-09-18",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C384669",
    "first_seen": "2026-08-28"
   },
@@ -29565,7 +30287,9 @@
    "deadline": "2025-09-08",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C383985",
    "first_seen": "2026-08-28"
@@ -29671,7 +30395,8 @@
    "deadline": "2025-09-19",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C382547",
    "first_seen": "2026-08-28"
@@ -29891,7 +30616,8 @@
    "deadline": "2025-10-20",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C382267",
    "first_seen": "2026-08-28"
@@ -30411,7 +31137,8 @@
    "deadline": "2025-08-18",
    "time_remaining": "Cancelled",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C381352",
    "first_seen": "2026-08-28"
@@ -30738,7 +31465,10 @@
    "opens": "2025-08-04",
    "deadline": "2025-08-20",
    "time_remaining": "Cancelled",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C379439",
    "first_seen": "2026-08-28"
   },
@@ -30840,7 +31570,10 @@
    "opens": "2025-08-01",
    "deadline": "2025-08-14",
    "time_remaining": "Cancelled",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C379407",
    "first_seen": "2026-08-28"
   },
@@ -30871,7 +31604,9 @@
    "deadline": "2025-08-22",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C378804",
    "first_seen": "2026-08-28"
@@ -31111,7 +31846,9 @@
    "deadline": "2025-08-08",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C361880",
    "first_seen": "2026-08-28"
@@ -31386,7 +32123,9 @@
    "opens": "2025-07-28",
    "deadline": "2025-08-11",
    "time_remaining": "Cancelled",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C377757",
    "first_seen": "2026-08-28"
   },
@@ -31984,7 +32723,9 @@
    "opens": "2025-07-18",
    "deadline": "2025-08-18",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C375403",
    "first_seen": "2026-08-28"
   },
@@ -32041,7 +32782,8 @@
    "deadline": "2025-08-15",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C376110",
    "first_seen": "2026-08-28"
@@ -32070,7 +32812,10 @@
    "opens": "2025-07-17",
    "deadline": "2025-08-08",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C375763",
    "first_seen": "2026-08-28"
   },
@@ -32589,7 +33334,9 @@
    "deadline": "2025-07-31",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C374664",
    "first_seen": "2026-08-28"
@@ -32662,7 +33409,9 @@
    "opens": "2025-07-09",
    "deadline": "2025-08-27",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C343164",
    "first_seen": "2026-08-28"
   },
@@ -32762,7 +33511,9 @@
    "opens": "2025-07-07",
    "deadline": "2025-08-01",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C374559",
    "first_seen": "2026-08-28"
   },
@@ -32776,7 +33527,9 @@
    "opens": "2025-07-07",
    "deadline": "2025-08-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C374150",
    "first_seen": "2026-08-28"
   },
@@ -32791,7 +33544,8 @@
    "deadline": "2025-07-11",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C373935",
    "first_seen": "2026-08-28"
@@ -32990,7 +33744,9 @@
    "opens": "2025-07-04",
    "deadline": "2025-07-25",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C364028",
    "first_seen": "2026-08-28"
   },
@@ -33077,7 +33833,8 @@
    "deadline": "2025-07-23",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C372360",
    "first_seen": "2026-08-28"
@@ -33296,7 +34053,9 @@
    "opens": "2025-07-01",
    "deadline": "2025-09-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C366854",
    "first_seen": "2026-08-28"
   },
@@ -33693,7 +34452,8 @@
    "deadline": "2027-07-25",
    "time_remaining": "> 1 month",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C357296",
    "first_seen": "2026-08-28"
@@ -33782,7 +34542,9 @@
    "opens": "2025-06-24",
    "deadline": "2025-07-25",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C368834",
    "first_seen": "2026-08-28"
   },
@@ -33855,7 +34617,8 @@
    "deadline": "2025-07-18",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C366782",
    "first_seen": "2026-08-28"
@@ -33942,7 +34705,9 @@
    "opens": "2025-06-20",
    "deadline": "2025-07-30",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C361857",
    "first_seen": "2026-08-28"
   },
@@ -33998,7 +34763,9 @@
    "opens": "2025-06-19",
    "deadline": "2025-08-08",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C366077",
    "first_seen": "2026-08-28"
   },
@@ -34144,7 +34911,10 @@
    "opens": "2025-06-17",
    "deadline": "2025-08-20",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C380992",
    "first_seen": "2026-08-28"
   },
@@ -34233,7 +35003,8 @@
    "deadline": "2025-07-04",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C364138",
    "first_seen": "2026-08-28"
@@ -34277,7 +35048,8 @@
    "deadline": "2025-07-01",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C369526",
    "first_seen": "2026-08-28"
@@ -34894,7 +35666,9 @@
    "opens": "2025-06-06",
    "deadline": "2025-08-07",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C366840",
    "first_seen": "2026-08-28"
   },
@@ -34966,7 +35740,10 @@
    "opens": "2025-06-05",
    "deadline": "2025-09-10",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C370031",
    "first_seen": "2026-08-28"
   },
@@ -35008,7 +35785,9 @@
    "opens": "2025-06-05",
    "deadline": "2025-06-26",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C366780",
    "first_seen": "2026-08-28"
   },
@@ -35167,7 +35946,9 @@
    "opens": "2025-06-04",
    "deadline": "2025-06-20",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C363463",
    "first_seen": "2026-08-28"
   },
@@ -35281,7 +36062,9 @@
    "opens": "2025-06-03",
    "deadline": "2025-06-17",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C363044",
    "first_seen": "2026-08-28"
   },
@@ -35323,7 +36106,10 @@
    "opens": "2025-06-02",
    "deadline": "2025-10-21",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C391119",
    "first_seen": "2026-08-28"
   },
@@ -35351,7 +36137,9 @@
    "opens": "2025-06-02",
    "deadline": "2025-06-09",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C365703",
    "first_seen": "2026-08-28"
   },
@@ -35449,7 +36237,9 @@
    "opens": "2025-05-30",
    "deadline": "2025-06-13",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C366233",
    "first_seen": "2026-08-28"
   },
@@ -35852,7 +36642,7 @@
    "procurement_route": "PCR 2015 Framework - Further Competition",
    "opens": "2025-05-26",
    "deadline": "2025-06-10",
-   "time_remaining": "Closed",
+   "time_remaining": "Cancelled",
    "labels": [
     "framework_further_competition"
    ],
@@ -35870,7 +36660,9 @@
    "deadline": "2025-06-04",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C358009",
    "first_seen": "2026-08-28"
@@ -35928,7 +36720,8 @@
    "deadline": "2025-06-11",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C343055",
    "first_seen": "2026-08-28"
@@ -36043,7 +36836,9 @@
    "opens": "2025-05-22",
    "deadline": "2025-06-02",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C358059",
    "first_seen": "2026-08-28"
   },
@@ -36236,7 +37031,8 @@
    "deadline": "2025-06-13",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C362728",
    "first_seen": "2026-08-28"
@@ -36692,7 +37488,8 @@
    "deadline": "2025-05-29",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C358810",
    "first_seen": "2026-08-28"
@@ -36849,7 +37646,9 @@
    "opens": "2025-05-09",
    "deadline": "2025-06-06",
    "time_remaining": "Cancelled",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C341781",
    "first_seen": "2026-08-28"
   },
@@ -36921,7 +37720,9 @@
    "opens": "2025-05-08",
    "deadline": "2025-05-26",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C317696",
    "first_seen": "2026-08-28"
   },
@@ -37090,7 +37891,8 @@
    "deadline": "2025-05-14",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C358055",
    "first_seen": "2026-08-28"
@@ -37220,7 +38022,9 @@
    "deadline": "2025-06-20",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C356639",
    "first_seen": "2026-08-28"
@@ -37535,7 +38339,9 @@
    "opens": "2025-04-29",
    "deadline": "2025-05-08",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C356622",
    "first_seen": "2026-08-28"
   },
@@ -37633,7 +38439,10 @@
    "opens": "2025-04-28",
    "deadline": "2025-06-05",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C354870",
    "first_seen": "2026-08-28"
   },
@@ -37941,7 +38750,9 @@
    "opens": "2025-04-22",
    "deadline": "2025-05-27",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C343749",
    "first_seen": "2026-08-28"
   },
@@ -38040,7 +38851,8 @@
    "deadline": "2025-05-06",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C355036",
    "first_seen": "2026-08-28"
@@ -38329,7 +39141,9 @@
    "opens": "2025-04-14",
    "deadline": "2025-05-22",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C340906",
    "first_seen": "2026-08-28"
   },
@@ -38357,7 +39171,10 @@
    "opens": "2025-04-11",
    "deadline": "2026-06-15",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C441805",
    "first_seen": "2026-08-28"
   },
@@ -38725,7 +39542,9 @@
    "opens": "2025-04-08",
    "deadline": "2025-05-09",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C352600",
    "first_seen": "2026-08-28"
   },
@@ -38740,7 +39559,9 @@
    "deadline": "2025-05-13",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C352502",
    "first_seen": "2026-08-28"
@@ -38799,7 +39620,9 @@
    "opens": "2025-04-07",
    "deadline": "2025-04-14",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C352296",
    "first_seen": "2026-08-28"
   },
@@ -38857,7 +39680,9 @@
    "opens": "2025-04-07",
    "deadline": "2025-07-11",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C339660",
    "first_seen": "2026-08-28"
   },
@@ -38928,7 +39753,8 @@
    "deadline": "2025-04-25",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C351845",
    "first_seen": "2026-08-28"
@@ -39062,7 +39888,8 @@
    "deadline": "2025-04-21",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C349093",
    "first_seen": "2026-08-28"
@@ -39135,7 +39962,9 @@
    "opens": "2025-04-02",
    "deadline": "2025-04-16",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C350439",
    "first_seen": "2026-08-28"
   },
@@ -39238,7 +40067,8 @@
    "deadline": "2025-04-29",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C346965",
    "first_seen": "2026-08-28"
@@ -39325,7 +40155,9 @@
    "opens": "2025-03-28",
    "deadline": "2025-04-25",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C350249",
    "first_seen": "2026-08-28"
   },
@@ -39691,7 +40523,9 @@
    "opens": "2025-03-20",
    "deadline": "2025-04-22",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C343002",
    "first_seen": "2026-08-28"
   },
@@ -40001,7 +40835,10 @@
    "opens": "2025-03-13",
    "deadline": "2025-03-28",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C346896",
    "first_seen": "2026-08-28"
   },
@@ -40129,7 +40966,9 @@
    "opens": "2025-03-12",
    "deadline": "2025-03-21",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C346413",
    "first_seen": "2026-08-28"
   },
@@ -40289,7 +41128,9 @@
    "opens": "2025-03-10",
    "deadline": "2025-04-25",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C342338",
    "first_seen": "2026-08-28"
   },
@@ -40405,7 +41246,9 @@
    "opens": "2025-03-06",
    "deadline": "2025-03-18",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C343847",
    "first_seen": "2026-08-28"
   },
@@ -41067,7 +41910,10 @@
    "opens": "2025-02-21",
    "deadline": "2025-03-31",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "pre_market_engagement",
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C341035",
    "first_seen": "2026-08-28"
   },
@@ -41095,7 +41941,9 @@
    "opens": "2025-02-21",
    "deadline": "2025-03-21",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C341005",
    "first_seen": "2026-08-28"
   },
@@ -41165,7 +42013,9 @@
    "opens": "2025-02-21",
    "deadline": "2025-05-06",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C340904",
    "first_seen": "2026-08-28"
   },
@@ -41578,7 +42428,10 @@
    "opens": "2025-02-20",
    "deadline": "2025-04-04",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C339798",
    "first_seen": "2026-08-28"
   },
@@ -41718,7 +42571,9 @@
    "opens": "2025-02-20",
    "deadline": "2025-04-07",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C298235",
    "first_seen": "2026-08-28"
   },
@@ -41830,7 +42685,9 @@
    "opens": "2025-02-19",
    "deadline": "2025-04-29",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C330316",
    "first_seen": "2026-08-28"
   },
@@ -41872,7 +42729,10 @@
    "opens": "2025-02-18",
    "deadline": "2025-03-20",
    "time_remaining": "Cancelled",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C339947",
    "first_seen": "2026-08-28"
   },
@@ -42070,7 +42930,10 @@
    "opens": "2025-02-17",
    "deadline": "2025-03-17",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C337736",
    "first_seen": "2026-08-28"
   },
@@ -42113,7 +42976,9 @@
    "deadline": "2025-02-27",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C332549",
    "first_seen": "2026-08-28"
@@ -42227,7 +43092,8 @@
    "deadline": "2025-03-10",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C338643",
    "first_seen": "2026-08-28"
@@ -42386,7 +43252,9 @@
    "opens": "2025-02-13",
    "deadline": "2025-03-19",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C338026",
    "first_seen": "2026-08-28"
   },
@@ -42414,7 +43282,9 @@
    "opens": "2025-02-13",
    "deadline": "2025-03-03",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C334628",
    "first_seen": "2026-08-28"
   },
@@ -42484,7 +43354,9 @@
    "opens": "2025-02-12",
    "deadline": "2025-02-26",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C338570",
    "first_seen": "2026-08-28"
   },
@@ -42642,7 +43514,9 @@
    "opens": "2025-02-10",
    "deadline": "2025-03-13",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C338151",
    "first_seen": "2026-08-28"
   },
@@ -42656,7 +43530,9 @@
    "opens": "2025-02-10",
    "deadline": "2025-03-13",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C338142",
    "first_seen": "2026-08-28"
   },
@@ -42830,7 +43706,9 @@
    "opens": "2025-02-07",
    "deadline": "2025-03-10",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C334819",
    "first_seen": "2026-08-28"
   },
@@ -43036,7 +43914,10 @@
    "opens": "2025-02-05",
    "deadline": "2025-03-07",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C337239",
    "first_seen": "2026-08-28"
   },
@@ -43162,7 +44043,9 @@
    "opens": "2025-02-04",
    "deadline": "2025-02-21",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C333460",
    "first_seen": "2026-08-28"
   },
@@ -43476,7 +44359,9 @@
    "opens": "2025-01-31",
    "deadline": "2025-03-03",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C324858",
    "first_seen": "2026-08-28"
   },
@@ -43909,7 +44794,8 @@
    "deadline": "2025-03-24",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C331058",
    "first_seen": "2026-08-28"
@@ -44013,7 +44899,9 @@
    "deadline": "2025-01-31",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C333635",
    "first_seen": "2026-08-28"
@@ -44073,7 +44961,8 @@
    "deadline": "2025-01-31",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C332228",
    "first_seen": "2026-08-28"
@@ -44316,7 +45205,9 @@
    "opens": "2025-01-21",
    "deadline": "2025-01-22",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C331918",
    "first_seen": "2026-08-28"
   },
@@ -44374,7 +45265,9 @@
    "opens": "2025-01-21",
    "deadline": "2025-02-25",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C327093",
    "first_seen": "2026-08-28"
   },
@@ -44417,7 +45310,8 @@
    "deadline": "2025-02-06",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C331680",
    "first_seen": "2026-08-28"
@@ -44478,7 +45372,10 @@
    "opens": "2025-01-20",
    "deadline": "2025-02-28",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C329968",
    "first_seen": "2026-08-28"
   },
@@ -44507,7 +45404,8 @@
    "deadline": "2025-02-28",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C285516",
    "first_seen": "2026-08-28"
@@ -44664,7 +45562,9 @@
    "opens": "2025-01-17",
    "deadline": "2025-02-14",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C324926",
    "first_seen": "2026-08-28"
   },
@@ -45103,7 +46003,8 @@
    "deadline": "2025-03-05",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C326959",
    "first_seen": "2026-08-28"
@@ -45246,7 +46147,9 @@
    "opens": "2025-01-09",
    "deadline": "2025-02-10",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C327044",
    "first_seen": "2026-08-28"
   },
@@ -45288,7 +46191,9 @@
    "opens": "2025-01-08",
    "deadline": "2025-02-07",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C329401",
    "first_seen": "2026-08-28"
   },
@@ -45303,7 +46208,8 @@
    "deadline": "2025-02-07",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C329127",
    "first_seen": "2026-08-28"
@@ -45546,7 +46452,10 @@
    "opens": "2025-01-04",
    "deadline": "2025-02-06",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C333540",
    "first_seen": "2026-08-28"
   },
@@ -45673,7 +46582,9 @@
    "deadline": "2025-01-10",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C327541",
    "first_seen": "2026-08-28"
@@ -46324,7 +47235,9 @@
    "opens": "2024-12-13",
    "deadline": "2025-01-10",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C325511",
    "first_seen": "2026-08-28"
   },
@@ -46582,7 +47495,9 @@
    "opens": "2024-12-11",
    "deadline": "2025-01-24",
    "time_remaining": "Cancelled",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C325153",
    "first_seen": "2026-08-28"
   },
@@ -46786,7 +47701,9 @@
    "opens": "2024-12-09",
    "deadline": "2024-12-13",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C324634",
    "first_seen": "2026-08-28"
   },
@@ -47109,7 +48026,8 @@
    "deadline": "2024-12-19",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C324069",
    "first_seen": "2026-08-28"
@@ -47209,7 +48127,9 @@
    "deadline": "2024-12-31",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C307536",
    "first_seen": "2026-08-28"
@@ -47339,7 +48259,8 @@
    "deadline": "2025-01-27",
    "time_remaining": "Cancelled",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C322502",
    "first_seen": "2026-08-28"
@@ -47410,7 +48331,9 @@
    "opens": "2024-12-03",
    "deadline": "2025-02-05",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C323062",
    "first_seen": "2026-08-28"
   },
@@ -47811,7 +48734,9 @@
    "deadline": "2025-01-07",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C322778",
    "first_seen": "2026-08-28"
@@ -47954,7 +48879,9 @@
    "opens": "2024-11-27",
    "deadline": "2025-01-08",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C318762",
    "first_seen": "2026-08-28"
   },
@@ -47982,7 +48909,9 @@
    "opens": "2024-11-26",
    "deadline": "2025-01-17",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C323361",
    "first_seen": "2026-08-28"
   },
@@ -48280,7 +49209,9 @@
    "opens": "2024-11-22",
    "deadline": "2024-12-05",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C320899",
    "first_seen": "2026-08-28"
   },
@@ -48308,7 +49239,10 @@
    "opens": "2024-11-22",
    "deadline": "2024-12-23",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C312766",
    "first_seen": "2026-08-28"
   },
@@ -48574,7 +49508,10 @@
    "opens": "2024-11-20",
    "deadline": "2024-12-20",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C320933",
    "first_seen": "2026-08-28"
   },
@@ -48988,7 +49925,9 @@
    "opens": "2024-11-14",
    "deadline": "2024-11-29",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C319967",
    "first_seen": "2026-08-28"
   },
@@ -50057,7 +50996,8 @@
    "deadline": "2024-11-07",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C311775",
    "first_seen": "2026-08-28"
@@ -50173,7 +51113,9 @@
    "deadline": "2024-11-26",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C316830",
    "first_seen": "2026-08-28"
@@ -50556,7 +51498,10 @@
    "opens": "2024-10-24",
    "deadline": "2024-12-09",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C315080",
    "first_seen": "2026-08-28"
   },
@@ -50857,7 +51802,9 @@
    "deadline": "2024-11-15",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C315025",
    "first_seen": "2026-08-28"
@@ -51130,7 +52077,9 @@
    "opens": "2024-10-18",
    "deadline": "2025-11-10",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C395914",
    "first_seen": "2026-08-28"
   },
@@ -51293,7 +52242,8 @@
    "deadline": "2024-11-26",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C311932",
    "first_seen": "2026-08-28"
@@ -51308,7 +52258,9 @@
    "opens": "2024-10-18",
    "deadline": "2024-12-13",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C309338",
    "first_seen": "2026-08-28"
   },
@@ -51494,7 +52446,10 @@
    "opens": "2024-10-15",
    "deadline": "2024-10-25",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C313034",
    "first_seen": "2026-08-28"
   },
@@ -51508,7 +52463,9 @@
    "opens": "2024-10-14",
    "deadline": "2024-10-14",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C312701",
    "first_seen": "2026-08-28"
   },
@@ -51567,7 +52524,8 @@
    "deadline": "2024-10-24",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C311376",
    "first_seen": "2026-08-28"
@@ -51654,7 +52612,10 @@
    "opens": "2024-10-11",
    "deadline": "2024-10-25",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C310162",
    "first_seen": "2026-08-28"
   },
@@ -51815,7 +52776,8 @@
    "deadline": "2024-10-30",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C311967",
    "first_seen": "2026-08-28"
@@ -51917,7 +52879,8 @@
    "deadline": "2025-01-24",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C329480",
    "first_seen": "2026-08-28"
@@ -52161,7 +53124,8 @@
    "deadline": "2024-10-25",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C308563",
    "first_seen": "2026-08-28"
@@ -52400,7 +53364,9 @@
    "opens": "2024-10-03",
    "deadline": "2024-10-29",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C311017",
    "first_seen": "2026-08-28"
   },
@@ -52428,7 +53394,10 @@
    "opens": "2024-10-03",
    "deadline": "2024-11-01",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C308941",
    "first_seen": "2026-08-28"
   },
@@ -52457,7 +53426,8 @@
    "deadline": "2024-11-13",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C310906",
    "first_seen": "2026-08-28"
@@ -52614,7 +53584,9 @@
    "opens": "2024-10-01",
    "deadline": "2024-10-31",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C289924",
    "first_seen": "2026-08-28"
   },
@@ -52786,7 +53758,8 @@
    "deadline": "2024-10-04",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C309280",
    "first_seen": "2026-08-28"
@@ -52929,7 +53902,9 @@
    "opens": "2024-09-25",
    "deadline": "2024-10-02",
    "time_remaining": "Cancelled",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C291755",
    "first_seen": "2026-08-28"
   },
@@ -53004,7 +53979,8 @@
    "deadline": "2024-10-25",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C308330",
    "first_seen": "2026-08-28"
@@ -53047,7 +54023,9 @@
    "opens": "2024-09-24",
    "deadline": "2024-09-25",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C305014",
    "first_seen": "2026-08-28"
   },
@@ -53248,7 +54226,8 @@
    "deadline": "2024-10-11",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C307938",
    "first_seen": "2026-08-28"
@@ -53361,7 +54340,9 @@
    "opens": "2024-09-18",
    "deadline": "2024-10-16",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C307786",
    "first_seen": "2026-08-28"
   },
@@ -53547,7 +54528,10 @@
    "opens": "2024-09-17",
    "deadline": "2024-10-17",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C304501",
    "first_seen": "2026-08-28"
   },
@@ -53936,7 +54920,8 @@
    "deadline": "2024-09-25",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C305480",
    "first_seen": "2026-08-28"
@@ -53981,7 +54966,9 @@
    "opens": "2024-09-10",
    "deadline": "2024-09-16",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C305972",
    "first_seen": "2026-08-28"
   },
@@ -54225,7 +55212,10 @@
    "opens": "2024-09-06",
    "deadline": "2024-10-07",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C302450",
    "first_seen": "2026-08-28"
   },
@@ -54395,7 +55385,9 @@
    "opens": "2024-09-04",
    "deadline": "2024-10-25",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C303878",
    "first_seen": "2026-08-28"
   },
@@ -54820,7 +55812,8 @@
    "deadline": "2024-10-03",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C303786",
    "first_seen": "2026-08-28"
@@ -54963,7 +55956,9 @@
    "opens": "2024-08-28",
    "deadline": "2024-08-28",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C285034",
    "first_seen": "2026-08-28"
   },
@@ -55133,7 +56128,9 @@
    "opens": "2024-08-23",
    "deadline": "2024-11-10",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C293267",
    "first_seen": "2026-08-28"
   },
@@ -55189,7 +56186,9 @@
    "opens": "2024-08-22",
    "deadline": "2024-09-20",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C299958",
    "first_seen": "2026-08-28"
   },
@@ -55275,7 +56274,10 @@
    "opens": "2024-08-21",
    "deadline": "2024-09-19",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C302555",
    "first_seen": "2026-08-28"
   },
@@ -55334,7 +56336,8 @@
    "deadline": "2024-09-20",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C302547",
    "first_seen": "2026-08-28"
@@ -55508,7 +56511,8 @@
    "deadline": "2024-09-13",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C302382",
    "first_seen": "2026-08-28"
@@ -56047,7 +57051,9 @@
    "opens": "2024-08-12",
    "deadline": "2024-09-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C283073",
    "first_seen": "2026-08-28"
   },
@@ -56062,7 +57068,8 @@
    "deadline": "2024-09-04",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C300819",
    "first_seen": "2026-08-28"
@@ -56091,7 +57098,9 @@
    "opens": "2024-08-09",
    "deadline": "2024-08-13",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C300607",
    "first_seen": "2026-08-28"
   },
@@ -56250,7 +57259,8 @@
    "deadline": "2024-08-30",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C300229",
    "first_seen": "2026-08-28"
@@ -56355,7 +57365,9 @@
    "opens": "2024-08-06",
    "deadline": "2024-09-06",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C300102",
    "first_seen": "2026-08-28"
   },
@@ -56448,7 +57460,8 @@
    "deadline": "2024-08-07",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C227021",
    "first_seen": "2026-08-28"
@@ -56535,7 +57548,9 @@
    "opens": "2024-08-05",
    "deadline": "2024-09-04",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C298809",
    "first_seen": "2026-08-28"
   },
@@ -56822,7 +57837,8 @@
    "deadline": "2024-09-12",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C299483",
    "first_seen": "2026-08-28"
@@ -56851,7 +57867,10 @@
    "opens": "2024-08-01",
    "deadline": "2024-09-02",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C299088",
    "first_seen": "2026-08-28"
   },
@@ -57037,7 +58056,9 @@
    "opens": "2024-07-31",
    "deadline": "2024-09-02",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C291394",
    "first_seen": "2026-08-28"
   },
@@ -57442,7 +58463,8 @@
    "deadline": "2024-08-09",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C298202",
    "first_seen": "2026-08-28"
@@ -57883,7 +58905,9 @@
    "opens": "2024-07-24",
    "deadline": "2024-09-03",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C289257",
    "first_seen": "2026-08-28"
   },
@@ -58227,7 +59251,10 @@
    "opens": "2024-07-19",
    "deadline": "2024-08-19",
    "time_remaining": "Cancelled",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C297509",
    "first_seen": "2026-08-28"
   },
@@ -58241,7 +59268,9 @@
    "opens": "2024-07-19",
    "deadline": "2024-08-19",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C296888",
    "first_seen": "2026-08-28"
   },
@@ -58341,7 +59370,9 @@
    "opens": "2024-07-18",
    "deadline": "2024-07-29",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C297225",
    "first_seen": "2026-08-28"
   },
@@ -58429,7 +59460,9 @@
    "opens": "2024-07-17",
    "deadline": "2024-08-16",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C297302",
    "first_seen": "2026-08-28"
   },
@@ -58986,7 +60019,8 @@
    "deadline": "2024-07-17",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C295790",
    "first_seen": "2026-08-28"
@@ -59189,7 +60223,9 @@
    "opens": "2024-07-10",
    "deadline": "2024-07-24",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C290484",
    "first_seen": "2026-08-28"
   },
@@ -59246,7 +60282,8 @@
    "deadline": "2024-07-24",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C295595",
    "first_seen": "2026-08-28"
@@ -59349,7 +60386,9 @@
    "opens": "2024-07-08",
    "deadline": "2024-07-15",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C295584",
    "first_seen": "2026-08-28"
   },
@@ -59567,7 +60606,9 @@
    "opens": "2024-07-05",
    "deadline": "2024-07-22",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C294123",
    "first_seen": "2026-08-28"
   },
@@ -59598,7 +60639,8 @@
    "deadline": "2024-07-17",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C293570",
    "first_seen": "2026-08-28"
@@ -59659,7 +60701,9 @@
    "opens": "2024-07-05",
    "deadline": "2024-08-23",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C234517",
    "first_seen": "2026-08-28"
   },
@@ -59673,7 +60717,9 @@
    "opens": "2024-07-05",
    "deadline": "2024-08-23",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C234500",
    "first_seen": "2026-08-28"
   },
@@ -59787,7 +60833,9 @@
    "opens": "2024-07-03",
    "deadline": "2024-07-23",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C290263",
    "first_seen": "2026-08-28"
   },
@@ -59942,7 +60990,8 @@
    "deadline": "2024-07-29",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C293872",
    "first_seen": "2026-08-28"
@@ -60367,7 +61416,9 @@
    "opens": "2024-06-20",
    "deadline": "2024-07-22",
    "time_remaining": "Cancelled",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C292766",
    "first_seen": "2026-08-28"
   },
@@ -60397,7 +61448,9 @@
    "opens": "2024-06-20",
    "deadline": "2024-07-26",
    "time_remaining": "Cancelled",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C292342",
    "first_seen": "2026-08-28"
   },
@@ -60700,7 +61753,9 @@
    "deadline": "2024-07-11",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C288989",
    "first_seen": "2026-08-28"
@@ -60759,7 +61814,9 @@
    "opens": "2024-06-14",
    "deadline": "2024-06-27",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C291777",
    "first_seen": "2026-08-28"
   },
@@ -60816,7 +61873,8 @@
    "deadline": "2024-07-15",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C291763",
    "first_seen": "2026-08-28"
@@ -61315,7 +62373,9 @@
    "opens": "2024-06-03",
    "deadline": "2024-09-27",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C286277",
    "first_seen": "2026-08-28"
   },
@@ -61589,7 +62649,9 @@
    "opens": "2024-05-28",
    "deadline": "2024-07-01",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C288096",
    "first_seen": "2026-08-28"
   },
@@ -61659,7 +62721,9 @@
    "opens": "2024-05-24",
    "deadline": "2024-06-24",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C287474",
    "first_seen": "2026-08-28"
   },
@@ -61733,7 +62797,9 @@
    "opens": "2024-05-24",
    "deadline": "2024-06-06",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C286261",
    "first_seen": "2026-08-28"
   },
@@ -61761,7 +62827,10 @@
    "opens": "2024-05-24",
    "deadline": "2024-07-11",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C256645",
    "first_seen": "2026-08-28"
   },
@@ -61889,7 +62958,10 @@
    "opens": "2024-05-22",
    "deadline": "2024-07-01",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C283821",
    "first_seen": "2026-08-28"
   },
@@ -61903,7 +62975,9 @@
    "opens": "2024-05-22",
    "deadline": "2024-07-03",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C283676",
    "first_seen": "2026-08-28"
   },
@@ -62181,7 +63255,9 @@
    "opens": "2024-05-17",
    "deadline": "2024-06-17",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C286015",
    "first_seen": "2026-08-28"
   },
@@ -62238,7 +63314,8 @@
    "deadline": "2024-06-03",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C285759",
    "first_seen": "2026-08-28"
@@ -62467,7 +63544,9 @@
    "opens": "2024-05-15",
    "deadline": "2024-06-17",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C285378",
    "first_seen": "2026-08-28"
   },
@@ -62581,7 +63660,9 @@
    "opens": "2024-05-14",
    "deadline": "2024-06-03",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C285354",
    "first_seen": "2026-08-28"
   },
@@ -62859,7 +63940,9 @@
    "opens": "2024-05-13",
    "deadline": "2024-07-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C264484",
    "first_seen": "2026-08-28"
   },
@@ -62933,7 +64016,9 @@
    "opens": "2024-05-10",
    "deadline": "2024-06-11",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C283610",
    "first_seen": "2026-08-28"
   },
@@ -63178,7 +64263,8 @@
    "deadline": "2024-05-24",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C283355",
    "first_seen": "2026-08-28"
@@ -63455,7 +64541,9 @@
    "opens": "2024-05-01",
    "deadline": "2024-05-28",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C267736",
    "first_seen": "2026-08-28"
   },
@@ -63469,7 +64557,10 @@
    "opens": "2024-04-30",
    "deadline": "2024-05-31",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C282751",
    "first_seen": "2026-08-28"
   },
@@ -63675,7 +64766,9 @@
    "opens": "2024-04-29",
    "deadline": "2024-05-30",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C262065",
    "first_seen": "2026-08-28"
   },
@@ -63749,7 +64842,10 @@
    "opens": "2024-04-26",
    "deadline": "2024-05-08",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C235566",
    "first_seen": "2026-08-28"
   },
@@ -64065,7 +65161,10 @@
    "opens": "2024-04-19",
    "deadline": "2024-05-31",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C267574",
    "first_seen": "2026-08-28"
   },
@@ -64206,7 +65305,8 @@
    "deadline": "2024-05-15",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C266067",
    "first_seen": "2026-08-28"
@@ -64221,7 +65321,9 @@
    "opens": "2024-04-17",
    "deadline": "2024-05-07",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C267195",
    "first_seen": "2026-08-28"
   },
@@ -64583,7 +65685,10 @@
    "opens": "2024-04-10",
    "deadline": "2024-05-10",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C262135",
    "first_seen": "2026-08-28"
   },
@@ -64853,7 +65958,9 @@
    "opens": "2024-04-04",
    "deadline": "2024-05-07",
    "time_remaining": "Cancelled",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C252570",
    "first_seen": "2026-08-28"
   },
@@ -64897,7 +66004,9 @@
    "opens": "2024-04-03",
    "deadline": "2024-05-07",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C261285",
    "first_seen": "2026-08-28"
   },
@@ -65037,7 +66146,9 @@
    "opens": "2024-04-02",
    "deadline": "2024-05-01",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C191551",
    "first_seen": "2026-08-28"
   },
@@ -65094,7 +66205,8 @@
    "deadline": "2024-04-10",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C259776",
    "first_seen": "2026-08-28"
@@ -65109,7 +66221,9 @@
    "opens": "2024-03-28",
    "deadline": "2024-04-08",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C259727",
    "first_seen": "2026-08-28"
   },
@@ -65168,7 +66282,8 @@
    "deadline": "2024-08-19",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C299462",
    "first_seen": "2026-08-28"
@@ -65997,7 +67112,10 @@
    "opens": "2024-03-13",
    "deadline": "2024-05-08",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C254343",
    "first_seen": "2026-08-28"
   },
@@ -66070,7 +67188,9 @@
    "deadline": "2024-03-25",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C253969",
    "first_seen": "2026-08-28"
@@ -66211,7 +67331,9 @@
    "opens": "2024-03-08",
    "deadline": "2024-03-22",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C253556",
    "first_seen": "2026-08-28"
   },
@@ -66269,7 +67391,9 @@
    "opens": "2024-03-08",
    "deadline": "2024-04-10",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C247636",
    "first_seen": "2026-08-28"
   },
@@ -66451,7 +67575,9 @@
    "opens": "2024-03-04",
    "deadline": "2024-03-13",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C252287",
    "first_seen": "2026-08-28"
   },
@@ -66676,7 +67802,8 @@
    "deadline": "2024-03-15",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C251424",
    "first_seen": "2026-08-28"
@@ -67000,7 +68127,8 @@
    "deadline": "2024-03-07",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C246681",
    "first_seen": "2026-08-28"
@@ -67128,7 +68256,8 @@
    "deadline": "2024-03-04",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C249737",
    "first_seen": "2026-08-28"
@@ -67431,7 +68560,9 @@
    "opens": "2024-02-23",
    "deadline": "2024-03-14",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C119784",
    "first_seen": "2026-08-28"
   },
@@ -67459,7 +68590,9 @@
    "opens": "2024-02-22",
    "deadline": "2024-03-13",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C249136",
    "first_seen": "2026-08-28"
   },
@@ -67515,7 +68648,9 @@
    "opens": "2024-02-21",
    "deadline": "2024-03-01",
    "time_remaining": "Cancelled",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C248760",
    "first_seen": "2026-08-28"
   },
@@ -67529,7 +68664,9 @@
    "opens": "2024-02-21",
    "deadline": "2024-03-08",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C248748",
    "first_seen": "2026-08-28"
   },
@@ -67907,7 +69044,9 @@
    "opens": "2024-02-16",
    "deadline": "2024-03-22",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C247322",
    "first_seen": "2026-08-28"
   },
@@ -68122,7 +69261,8 @@
    "deadline": "2024-02-28",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C246140",
    "first_seen": "2026-08-28"
@@ -68349,7 +69489,9 @@
    "opens": "2024-02-12",
    "deadline": "2024-04-09",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C244252",
    "first_seen": "2026-08-28"
   },
@@ -68563,7 +69705,9 @@
    "opens": "2024-02-06",
    "deadline": "2024-02-20",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C245608",
    "first_seen": "2026-08-28"
   },
@@ -68747,7 +69891,9 @@
    "opens": "2024-02-02",
    "deadline": "2024-03-11",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C245200",
    "first_seen": "2026-08-28"
   },
@@ -68819,7 +69965,9 @@
    "opens": "2024-02-01",
    "deadline": "2024-03-04",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C245144",
    "first_seen": "2026-08-28"
   },
@@ -68848,7 +69996,9 @@
    "deadline": "2024-02-16",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C244625",
    "first_seen": "2026-08-28"
@@ -69035,7 +70185,9 @@
    "opens": "2024-01-30",
    "deadline": "2024-03-05",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C244228",
    "first_seen": "2026-08-28"
   },
@@ -69152,7 +70304,8 @@
    "deadline": "2024-02-23",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C241791",
    "first_seen": "2026-08-28"
@@ -69227,7 +70380,9 @@
    "opens": "2024-01-29",
    "deadline": "2024-03-19",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C235251",
    "first_seen": "2026-08-28"
   },
@@ -69483,7 +70638,10 @@
    "opens": "2024-01-24",
    "deadline": "2024-04-08",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C248245",
    "first_seen": "2026-08-28"
   },
@@ -69637,7 +70795,9 @@
    "opens": "2024-01-23",
    "deadline": "2024-02-07",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C238458",
    "first_seen": "2026-08-28"
   },
@@ -69998,7 +71158,8 @@
    "deadline": "2024-02-02",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C194448",
    "first_seen": "2026-08-28"
@@ -70027,7 +71188,9 @@
    "opens": "2024-01-17",
    "deadline": "2024-02-27",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C236971",
    "first_seen": "2026-08-28"
   },
@@ -70248,7 +71411,8 @@
    "deadline": "2024-02-16",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C235660",
    "first_seen": "2026-08-28"
@@ -70705,7 +71869,9 @@
    "opens": "2024-01-09",
    "deadline": "2024-06-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C285327",
    "first_seen": "2026-08-28"
   },
@@ -70719,7 +71885,9 @@
    "opens": "2024-01-09",
    "deadline": "2024-02-09",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C233407",
    "first_seen": "2026-08-28"
   },
@@ -70761,7 +71929,9 @@
    "opens": "2024-01-08",
    "deadline": "2024-02-08",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C234481",
    "first_seen": "2026-08-28"
   },
@@ -70949,7 +72119,9 @@
    "opens": "2024-01-03",
    "deadline": "2024-01-17",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C233953",
    "first_seen": "2026-08-28"
   },
@@ -71025,7 +72197,9 @@
    "deadline": "2024-01-31",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C233506",
    "first_seen": "2026-08-28"
@@ -71055,7 +72229,8 @@
    "deadline": "2024-01-22",
    "time_remaining": "Cancelled",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C226479",
    "first_seen": "2026-08-28"
@@ -71128,7 +72303,9 @@
    "opens": "2023-12-27",
    "deadline": "2024-02-02",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C233307",
    "first_seen": "2026-08-28"
   },
@@ -71143,7 +72320,8 @@
    "deadline": "2024-01-12",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C228494",
    "first_seen": "2026-08-28"
@@ -71307,7 +72485,9 @@
    "deadline": "2024-01-04",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C229876",
    "first_seen": "2026-08-28"
@@ -71367,7 +72547,8 @@
    "deadline": "2024-02-05",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C233027",
    "first_seen": "2026-08-28"
@@ -71580,7 +72761,10 @@
    "opens": "2023-12-18",
    "deadline": "2024-01-23",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C231948",
    "first_seen": "2026-08-28"
   },
@@ -71811,7 +72995,8 @@
    "deadline": "2024-01-08",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C231329",
    "first_seen": "2026-08-28"
@@ -72195,7 +73380,8 @@
    "deadline": "2024-01-08",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C229731",
    "first_seen": "2026-08-28"
@@ -72422,7 +73608,10 @@
    "opens": "2023-12-05",
    "deadline": "2023-12-20",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C229251",
    "first_seen": "2026-08-28"
   },
@@ -72576,7 +73765,9 @@
    "opens": "2023-12-01",
    "deadline": "2023-12-18",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C229392",
    "first_seen": "2026-08-28"
   },
@@ -72706,7 +73897,10 @@
    "opens": "2023-11-30",
    "deadline": "2023-12-08",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C228811",
    "first_seen": "2026-08-28"
   },
@@ -73202,7 +74396,9 @@
    "opens": "2023-11-22",
    "deadline": "2023-12-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C227971",
    "first_seen": "2026-08-28"
   },
@@ -73360,7 +74556,10 @@
    "opens": "2023-11-21",
    "deadline": "2023-12-22",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C227293",
    "first_seen": "2026-08-28"
   },
@@ -73647,7 +74846,8 @@
    "deadline": "2024-01-09",
    "time_remaining": "Closed",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C152883",
    "first_seen": "2026-08-28"
@@ -73721,7 +74921,9 @@
    "deadline": "2023-12-01",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C221491",
    "first_seen": "2026-08-28"
@@ -73908,7 +75110,9 @@
    "opens": "2023-11-15",
    "deadline": "2029-02-16",
    "time_remaining": "> 1 month",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C213984",
    "first_seen": "2026-08-28"
   },
@@ -74022,7 +75226,9 @@
    "opens": "2023-11-14",
    "deadline": "2028-03-27",
    "time_remaining": "> 1 month",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C187117",
    "first_seen": "2026-08-28"
   },
@@ -74095,7 +75301,8 @@
    "deadline": "2023-12-01",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C226330",
    "first_seen": "2026-08-28"
@@ -74438,7 +75645,10 @@
    "opens": "2023-11-09",
    "deadline": "2023-12-15",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C221819",
    "first_seen": "2026-08-28"
   },
@@ -74862,7 +76072,9 @@
    "opens": "2023-11-03",
    "deadline": "2023-12-06",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C220680",
    "first_seen": "2026-08-28"
   },
@@ -74876,7 +76088,9 @@
    "opens": "2023-11-03",
    "deadline": "2023-12-04",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C220568",
    "first_seen": "2026-08-28"
   },
@@ -74932,7 +76146,9 @@
    "opens": "2023-11-02",
    "deadline": "2023-12-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C215699",
    "first_seen": "2026-08-28"
   },
@@ -75031,7 +76247,8 @@
    "deadline": "2023-12-01",
    "time_remaining": "Closed",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C220884",
    "first_seen": "2026-08-28"
@@ -75473,7 +76690,8 @@
    "deadline": "2023-10-24",
    "time_remaining": "> 1 month",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C215924",
    "first_seen": "2026-08-28"
@@ -75586,7 +76804,10 @@
    "opens": "2023-09-29",
    "deadline": "2023-12-04",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C214025",
    "first_seen": "2026-08-28"
   },
@@ -75600,7 +76821,9 @@
    "opens": "2023-09-28",
    "deadline": "2024-01-23",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C188206",
    "first_seen": "2026-08-28"
   },
@@ -75889,7 +77112,8 @@
    "deadline": "2027-03-31",
    "time_remaining": "> 1 month",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C136210",
    "first_seen": "2026-08-28"
@@ -76250,7 +77474,10 @@
    "opens": "2020-10-08",
    "deadline": "2029-02-23",
    "time_remaining": "> 1 month",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C25647",
    "first_seen": "2026-08-28"
   },
@@ -76308,7 +77535,10 @@
    "opens": "2019-12-02",
    "deadline": "2029-02-23",
    "time_remaining": "> 1 month",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C25811",
    "first_seen": "2026-08-28"
   },
@@ -76412,7 +77642,8 @@
     "framework_further_competition"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C471242",
-   "first_seen": "2026-10-09"
+   "first_seen": "2026-10-09",
+   "delisted_on": "2026-10-20"
   },
   {
    "ref": "C460029",
@@ -76424,7 +77655,9 @@
    "opens": null,
    "deadline": null,
    "time_remaining": "> 1 month",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C460029",
    "first_seen": "2026-08-28"
   },
@@ -76513,7 +77746,8 @@
    "deadline": null,
    "time_remaining": "> 1 month",
    "labels": [
-    "framework_further_competition"
+    "framework_further_competition",
+    "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C441080",
    "first_seen": "2026-08-28"
@@ -76570,7 +77804,9 @@
    "opens": null,
    "deadline": "2026-02-25",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C424107",
    "first_seen": "2026-08-28"
   },
@@ -76670,7 +77906,10 @@
    "opens": null,
    "deadline": null,
    "time_remaining": "and prospective 'case finding' solution\".  Case finding involves better identifying individuals who may have specific health conditions",
-   "labels": [],
+   "labels": [
+    "digital",
+    "digital_clinical"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C378213",
    "first_seen": "2026-08-28"
   },
@@ -76773,7 +78012,9 @@
    "deadline": null,
    "time_remaining": "and asylum seeker detention centres). This event will enable potential bidders to better understand the Authorities requirements",
    "labels": [
-    "pre_market_engagement"
+    "pre_market_engagement",
+    "digital",
+    "digital_clinical"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C299572",
    "first_seen": "2026-08-28"
@@ -76788,7 +78029,9 @@
    "opens": null,
    "deadline": "2024-07-12",
    "time_remaining": "Closed",
-   "labels": [],
+   "labels": [
+    "digital"
+   ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C292983",
    "first_seen": "2026-08-28"
   },
