@@ -134,6 +134,11 @@ class DigitalLeaders(unittest.TestCase):
         self.assertEqual(w.role_family("Chief Clinical Officer"), "nursing")
         self.assertEqual(w.role_family("Executive Director of Strategy, Digital and Commissioning, "
                                        "NHS Norfolk and Suffolk Integrated Care Board"), "digital")
+        self.assertEqual(w.role_family("Chief Clinical Informatics Officer"), "digital")
+        self.assertEqual(w.role_family("Deputy Medical Director and Chief Clinical Informatics "
+                                       "Officer for primary care."), "digital")
+        self.assertEqual(w.extract_people(["Chief Finance Officer: Alastair Groom"])[0]["name"],
+                         "Alastair Groom")
         self.assertIsNone(w.role_family("Deputy Chief Digital Officer"))
         self.assertIsNone(w.role_family("Chief Digital Officer of Some Hospital Trust"))
         self.assertIsNone(w.role_family("Director of Digital, Sirona care & health"))
