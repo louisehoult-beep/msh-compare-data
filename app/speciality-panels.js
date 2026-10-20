@@ -244,7 +244,7 @@
         for (i = 0; i < dl.awards.length; i++) {
           var aw = dl.awards[i];
           h += dlRow(aw.title + (aw.stage && aw.stage !== 'award' ? ' (' + aw.stage + ')' : ''), aw.url,
-                     aw.buyer + (aw.suppliers && aw.suppliers.length ? ' \u2192 ' + aw.suppliers.slice(0, 3).join(', ') + (aw.suppliers.length > 3 ? ' and ' + (aw.suppliers.length - 3) + ' more' : '') : ''),
+                     aw.buyer,
                      aw.published);
         }
         h += '</table></div>';

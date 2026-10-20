@@ -10100,7 +10100,11 @@ def build_digital_lane(slug, lane_doc, fdp_doc):
         "counts": lane_doc.get("counts") or {},
         "openNotices": clin(lane_doc.get("openNotices")),
         "marketEngagement": clin(lane_doc.get("marketEngagement")),
-        "awards": awards[:DIGITAL_LANE_AWARDS_SHOWN],
+        # Supplier names stay in data/digital-lane.json only: they are the notice's
+        # own spelling, not resolved through the alias registry, so they do not reach
+        # a page (verification standard rule 10).
+        "awards": [{k: v for k, v in r.items() if k != "suppliers"}
+                   for r in awards[:DIGITAL_LANE_AWARDS_SHOWN]],
         "awardsClinicalTotal": len(awards),
     }
     if fdp_doc and fdp_doc.get("headline"):
