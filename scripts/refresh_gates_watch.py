@@ -34,6 +34,9 @@ import sys
 import time
 import urllib.request
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from redact_personal import redact_text  # noqa: E402
+
 OUT_PATH = "data/gates-watch.json"
 UA = {"User-Agent": "Elevate-and-Thrive-Hub/1.0 (Medical Sales Intelligence Hub; contact@elevateandthrive.uk)"}
 
@@ -81,7 +84,7 @@ def get(url, timeout=30, tries=2):
             time.sleep(4)
 
 
-def read_govuk(path, fetch=get):
+def read_govuk(path, fetch=get, owner=None):
     d = json.loads(fetch("https://www.gov.uk/api/content" + path))
     hist = sorted(((d.get("details") or {}).get("change_history") or []),
                   key=lambda c: c.get("public_timestamp") or "", reverse=True)
@@ -89,9 +92,11 @@ def read_govuk(path, fetch=get):
         "title": d.get("title"),
         "url": "https://www.gov.uk" + path,
         "lastUpdated": (d.get("public_updated_at") or "")[:10] or None,
-        "latestChange": (hist[0].get("note") or "").strip() if hist else None,
+        # Notes can carry a published contact address: kept only with its publisher named.
+        "latestChange": redact_text((hist[0].get("note") or "").strip(), published_by=owner) if hist else None,
         "recentChanges": [{"date": (c.get("public_timestamp") or "")[:10],
-                           "note": (c.get("note") or "").strip()} for c in hist[:5]],
+                           "note": redact_text((c.get("note") or "").strip(), published_by=owner)}
+                          for c in hist[:5]],
     }
 
 
@@ -118,7 +123,7 @@ def build(previous, today, fetch=get):
     for pid, gate, owner, kind, where in WATCH:
         old = prev.get(pid) or {}
         try:
-            got = read_govuk(where, fetch) if kind == "govuk" else read_nhsd(where, fetch)
+            got = read_govuk(where, fetch, owner) if kind == "govuk" else read_nhsd(where, fetch)
             row = {"id": pid, "gate": gate, "owner": owner, "status": "ok", "checkedOn": today, **got}
             if not row["lastUpdated"]:
                 row["status"] = "no date found"
