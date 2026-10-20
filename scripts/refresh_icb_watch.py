@@ -32,7 +32,10 @@ FOUR SOURCES, EACH READ FOR THE ONE THING IT IS AUTHORITATIVE ON
 4. Each ICB's own leadership/board page (config/icb-leadership-sources.json)
    — named executives by title, in particular the medicines lead (chief
    pharmacist / chief pharmacy officer / director of medicines optimisation),
-   the chief medical officer and the chief executive. Only person–title pairs
+   the chief medical officer, the chief executive and (from 20/10/2026) the
+   digital leader: chief information officer, chief clinical / nursing / medical
+   information officer, chief digital (and information) officer, chief data
+   officer, director of digital / information / technology. Only person–title pairs
    read off the page are stored; nothing is inferred.
 
 PLUS curated, human-verified events (config/icb-watch-curated.json) for facts
@@ -50,6 +53,19 @@ different days (the first sighting is held in `pending`). A role that simply
 stops being found (page redesign, fetch failure) is NEVER reported as a
 departure — it is kept as last seen and flagged `stale` after 14 days. The
 first ever run stores a baseline and emits no leadership events at all.
+
+DIGITAL LEADERS (20/10/2026). Family "digital" goes through exactly the same path
+as every other own-site role: person-title pairs read off the page, a new holder
+held in `pending` until read on a second day, a vanished role kept and flagged
+stale. These are the same public board pages and the same named-executive gate
+(verify.check_icb_watch: https source and title on every name) as the medicines
+lead and chief medical officer, so no new class of personal data is added; this is
+not the trust-contacts file. Each ICB also carries `digital`: {published, titles,
+sources, readOn}. published is True only when a NAMED digital leader was read, False
+only when EVERY configured page was read cleanly this run and none carried one
+(a statement about the pages read, not a claim the ICB has no such role), and
+None when the pages were not read or any failed. `listedWithoutHolder` holds a
+digital title seen with no name beside it. Carries no name.
 
 Nothing here carries an email address or phone number (verify.py's
 personal-contact gate would refuse it). Names and job titles of ICB board
@@ -104,14 +120,22 @@ ROLE_FAMILIES = [
     ("medicines", re.compile(
         r"chief pharmac|pharmacy officer|director of (medicines|pharmacy)|"
         r"medicines optimisation|medicines management|director of medicines", re.I)),
+    # Digital leaders (20/10/2026). Before "nursing" so "Chief Clinical Information
+    # Officer" is not taken for a chief clinical (quality) officer.
+    ("digital", re.compile(
+        r"chief (\w+ ){0,3}?(information|digital|data|technology)\b|"
+        r"director of (digital|information|data|IT\b|technology)|"
+        r"director of [\w ,]{0,40}\b(digital|information|technology)\b|"
+        r"(digital|information|technology)( (and|&) \w+)? director|digital (transformation )?officer|"
+        r"\b(CIO|CCIO|CNIO|CMIO|CDIO|CDO)\b", re.I)),
     ("cmo", re.compile(r"chief medical officer|\bmedical director\b|\(medical\)", re.I)),
     ("ceo", re.compile(r"chief executive", re.I)),
     ("cfo", re.compile(r"chief financ\w*( and [\w ]+)? officer|director of finance", re.I)),
     ("nursing", re.compile(r"chief nurs|director of nursing|chief (clinical|quality)", re.I)),
     ("chair", re.compile(r"^(interim |acting )?chair(man|woman|person)?$", re.I)),
 ]
-OWN_SITE_FAMILIES = {"medicines", "cmo", "cfo", "nursing"}
-ROLE_LABEL = {"medicines": "Medicines lead", "cmo": "Medical leadership",
+OWN_SITE_FAMILIES = {"medicines", "cmo", "cfo", "nursing", "digital"}
+ROLE_LABEL = {"medicines": "Medicines lead", "digital": "Digital and information lead", "cmo": "Medical leadership",
               "ceo": "Chief executive", "cfo": "Chief finance officer",
               "nursing": "Chief nurse / clinical and quality", "chair": "Chair"}
 NOT_HOLDER = re.compile(r"\b(deputy|associate|assistant|interim deputy|support(s|ing)?|"
@@ -121,7 +145,8 @@ NOT_HOLDER = re.compile(r"\b(deputy|associate|assistant|interim deputy|support(s
 # at University Hospitals Birmingham"). They sit on the ICB board but do not run
 # the ICB, so they are not the ICB's executive and never raise an ICB event.
 PARTNER = re.compile(r"\b(at|of)\s+(?!the ICB\b|Medicines\b|Pharmacy\b|Finance\b|Nursing\b|"
-                     r"Strategy\b|Clinical\b|Primary Care\b|Medicines and\b)|Trust\b|Council\b|"
+                     r"Strategy\b|Clinical\b|Primary Care\b|Medicines and\b|Digital\b|Information\b|Data\b|"
+                     r"Technology\b|IT\b)|Trust\b|Council\b|"
                      r"Foundation\b|Practice\b|Partnership\b|University\b|Hospital", re.I)
 HONORIFIC = r"(?:(?:Dr|Prof(?:essor)?|Mr|Mrs|Ms|Miss|Sir|Dame|Cllr|Councillor)\.?\s+)?"
 NAMEPART = r"[A-ZÀ-ÖØ-Þ][a-zà-öø-ÿA-ZÀ-ÖØ-Þ'’\-]+"
@@ -130,7 +155,8 @@ PERSON_RE = re.compile(r"^" + HONORIFIC + NAMEPART + r"(?:\s+" + NAMEPART + r"){
 NOT_A_NAME = re.compile(r"\b(Chief|Director|Officer|Board|Committee|Member|Members|Executive|"
                         r"Integrated|Care|NHS|Council|Trust|Partnership|Primary|Clinical|"
                         r"Medical|Nursing|Finance|Strategy|Team|Our|Meet|About|Read|More|"
-                        r"Chair|Vice|Non|Partner|Governance|Leadership|Health|System)\b")
+                        r"Chair|Vice|Non|Partner|Governance|Leadership|Health|System|Digital|Information|"
+                        r"Data|Technology)\b")
 
 
 def today():
@@ -286,7 +312,7 @@ def nhse_statement():
 # ---------------------------------------------------------------- 4. ICB own pages
 OWN_ORG_SUFFIX = re.compile(r"ICB|Integrated Care Board|Directorate|Director|Officer|Medicines|"
                             r"Clinical|Policy|Quality|Nursing|Medical|Finance|Interim|Acting|"
-                            r"Accountable|Joint|Pharmacy|Primary Care|\(", re.I)
+                            r"Accountable|Joint|Pharmacy|Primary Care|Digital|Information|Data|Technology|\(", re.I)
 
 
 def role_family(title):
@@ -373,7 +399,15 @@ def own_site_people(cfg):
 
     def one(code, url):
         try:
-            return code, url, extract_people(page_lines(fetch(url))), None
+            lines = page_lines(fetch(url))
+            people = extract_people(lines)
+            # A digital title listed with no holder beside it (e.g. a clinical
+            # leadership page naming the role as a responsibility) is recorded as
+            # "listed, not named" so absence of a name is not read as absence of the role.
+            named = {p["title"] for p in people if p["family"] == "digital"}
+            mention = sorted({ln for ln in lines if len(ln) <= 80 and ln not in named
+                              and role_family(ln) == "digital" and not looks_like_person(ln)})
+            return code, url, (people, mention), None
         except Exception as e:                                   # noqa: BLE001
             return code, url, None, "%s" % e.__class__.__name__
 
@@ -381,11 +415,13 @@ def own_site_people(cfg):
             for p in spec.get("pages", [])]
     with concurrent.futures.ThreadPoolExecutor(6) as ex:
         for code, url, people, err in ex.map(lambda a: one(*a), jobs):
-            r = results.setdefault(code, {"people": [], "errors": [], "urls": []})
+            r = results.setdefault(code, {"people": [], "errors": [], "urls": [], "digitalListed": []})
             r["urls"].append(url)
             if err:
                 r["errors"].append({"url": url, "error": err})
             else:
+                people, mention = people
+                r["digitalListed"].extend(mention)
                 for p in people:
                     p["url"] = url
                     r["people"].append(p)
@@ -477,9 +513,11 @@ def main():
     icbs_out = doc["icbs"]
     n_exec = sum(len(i["execs"]) for i in icbs_out)
     n_med = sum(1 for i in icbs_out if any(e["family"] == "medicines" for e in i["execs"]))
+    n_dig = sum(1 for i in icbs_out if (i.get("digital") or {}).get("published"))
     print("icb-watch: %d live ICBs, %d clusters, %d executives read, medicines lead named for "
-          "%d ICBs, %d events (%d new this run), %d pending"
-          % (len(icbs_out), len(doc["clusters"]), n_exec, n_med, len(doc["events"]),
+          "%d ICBs, digital leader published by %d, %d events (%d new this run), %d pending"
+          % (len(icbs_out), len(doc["clusters"]), n_exec, n_med, n_dig,
+             len(doc["events"]),
              new_count, len(doc["pending"])))
 
 
@@ -495,6 +533,23 @@ def merge_cluster_events(doc, cw):
             continue
         by_id.setdefault(e["id"], e)
     doc["events"] = sorted(by_id.values(), key=lambda e: (e["date"], e["id"]), reverse=True)
+
+
+def digital_summary(rec, o, prev_digital, tiso):
+    """Whether the ICB publishes a digital leader on the pages read. No names."""
+    held = [e for e in rec["execs"] if e["family"] == "digital" and not e.get("stale")]
+    if held:
+        return {"published": True, "titles": sorted({e["title"] for e in held}),
+                "sources": sorted({e["url"] for e in held}), "readOn": tiso if o else
+                (prev_digital or {}).get("readOn")}
+    clean = o is not None and o["urls"] and not o["errors"]
+    if clean:
+        return {"published": False, "titles": [],
+                "listedWithoutHolder": sorted(set(o.get("digitalListed") or [])),
+                "sources": sorted(o["urls"]), "readOn": tiso}
+    if prev_digital:
+        return prev_digital
+    return {"published": None, "titles": [], "sources": [], "readOn": None}
 
 
 def build(prev, live, ended, leaders, leaders_updated, statement, own, curated, t):
@@ -612,6 +667,7 @@ def build(prev, live, ended, leaders, leaders_updated, statement, own, curated, 
             rec["execs"] = sorted(seen_now.values(),
                                   key=lambda e: ([f for f, _ in ROLE_FAMILIES].index(e["family"]),
                                                  e["name"]))
+        rec["digital"] = digital_summary(rec, o, p.get("digital"), tiso)
         icbs_out.append(rec)
 
     # National statement change.
