@@ -261,6 +261,57 @@
         }
         h += '</table></div><div class="sp-meta">The owner\'s own date and change note, read ' + esc(dl.gates.dataAsOf || '') + '. Nothing is summarised.</div>';
       }
+      if (dl.frameworks && dl.frameworks.items && dl.frameworks.items.length) {
+        h += '<div class="sp-li-g">Digital buying routes: live and coming frameworks</div>';
+        for (i = 0; i < dl.frameworks.items.length; i++) {
+          var fx = dl.frameworks.items[i], lotsTxt = [];
+          for (var lj = 0; lj < (fx.lots || []).length; lj++) {
+            var lt = fx.lots[lj];
+            lotsTxt.push('Lot ' + esc(lt.lot) + (lt.name ? ' ' + esc(lt.name) : '') + (lt.suppliers !== null && lt.suppliers !== undefined ? ' (' + n(lt.suppliers) + ' suppliers)' : ''));
+          }
+          h += '<div class="sp-li"><div class="sp-li-h"><div class="sp-li-t"><a href="' + esc(fx.url) + '" target="_blank" rel="noopener">' + esc(fx.name) + '</a> (' + esc(fx.reference) + ')</div>' +
+               '<div class="sp-li-d">' + (fx.status === 'coming' ? '<b>Coming</b> &middot; ' : '') + esc(fx.starts || 'start not stated') + ' to ' + esc(fx.ends || 'not stated') + '</div></div>';
+          h += '<div class="sp-li-o">' + esc(fx.owner) + (fx.estimatedValue ? ' &middot; ' + esc(fx.estimatedValue) : '') + '</div>';
+          if (lotsTxt.length) { h += '<p style="font-size:13px;">' + lotsTxt.join('; ') + '</p>'; }
+          if (fx.status === 'coming') { h += '<p style="font-size:13px;">No supplier list exists until the award is published.</p>'; }
+          if (fx.notVerified && fx.notVerified.length) { h += '<div class="sp-li-m">Not verified: ' + esc(fx.notVerified.map(function (x) { return typeof x === 'string' ? x : (x.item || x.what || JSON.stringify(x)); }).join(' ')) + '</div>'; }
+          h += '</div>';
+        }
+      }
+      if (dl.airlock && dl.airlock.phases) {
+        h += '<div class="sp-li-g">MHRA AI Airlock cohorts</div>';
+        for (i = 0; i < dl.airlock.phases.length; i++) {
+          var ph = dl.airlock.phases[i];
+          h += '<p style="font-size:13px;margin:8px 0 4px;"><b>' + esc(ph.phase) + '</b>' + (ph.status ? ' &middot; ' + esc(ph.status) : '') +
+               (ph.sourceUrl ? ' &middot; <a href="' + esc(ph.sourceUrl) + '" target="_blank" rel="noopener">MHRA page</a>' + (ph.pageUpdated ? ', updated ' + esc(ph.pageUpdated) : '') : '') + '</p>';
+          if (!ph.members.length) { h += '<div class="empty-state">' + esc(ph.note || 'No cohort has been announced for this phase.') + '</div>'; continue; }
+          h += '<div class="sp-scroll"><table class="sp-tbl"><tr><th>As named by the MHRA</th><th>Regulatory theme</th></tr>';
+          for (var mj = 0; mj < ph.members.length; mj++) {
+            var mm = ph.members[mj];
+            h += '<tr><td>' + esc([mm.company, mm.product && mm.product !== mm.company ? mm.product : ''].filter(Boolean).join(': ') || 'not named') + (mm.status && mm.status !== 'participating' ? ' (' + esc(mm.status) + ')' : '') + '</td><td>' + esc(mm.theme || '') + '</td></tr>';
+          }
+          h += '</table></div>';
+        }
+      }
+      if (dl.dspt) {
+        h += '<div class="sp-li-g">Data Security and Protection Toolkit (DSPT) status, digital-tagged suppliers</div>';
+        if (dl.dspt.defined === false || !dl.dspt.matched.length) {
+          h += '<div class="empty-state">' + esc(dl.dspt.whyEmpty || 'No digital-tagged supplier matched a published DSPT record by exact name.') + '</div>';
+        } else {
+          h += '<div class="sp-scroll"><table class="sp-tbl"><tr><th>Supplier</th><th>Status as published</th><th>Published</th></tr>';
+          for (i = 0; i < dl.dspt.matched.length; i++) { var dx = dl.dspt.matched[i]; h += '<tr><td>' + esc(dx.name) + '</td><td>' + esc(dx.status) + '</td><td>' + esc(dx.statusDate || '') + '</td></tr>'; }
+          h += '</table></div><div class="sp-meta">' + n(dl.dspt.matched.length) + ' matched by exact name; ' + n(dl.dspt.unmatched) + ' digital-tagged suppliers had no exact-name record, which says nothing about their status. Source: <a href="' + esc(dl.dspt.sourceUrl) + '" target="_blank" rel="noopener">DSPT organisation search</a>, read ' + esc(dl.dspt.checked || '') + '.</div>';
+        }
+      }
+      if (dl.icbDigital) {
+        var idg = dl.icbDigital;
+        h += '<div class="sp-li-g">Integrated care board (ICB) digital leaders</div>';
+        h += '<p style="font-size:13px;line-height:1.6;margin:0;">' + n(idg.published) + ' of ' + n(idg.icbs) + ' ICBs name a digital leader on the leadership pages the Hub reads; ' + n(idg.notFound) + ' do not on those pages, which is not the same as having no such role; ' + n(idg.unread) + ' pages could not be read this time.</p>';
+        for (i = 0; i < (idg.named || []).length; i++) {
+          var nm = idg.named[i];
+          h += '<p style="font-size:13px;margin:4px 0 0;">' + esc(nm.icb) + ': ' + esc((nm.titles || []).join('; ')) + (nm.source ? ' (<a href="' + esc(nm.source) + '" target="_blank" rel="noopener">source</a>)' : '') + '</p>';
+        }
+      }
       if (dl.fdp && dl.fdp.headline) {
         var fh = dl.fdp.headline;
         h += '<div class="sp-li-g">NHS Federated Data Platform</div>';
