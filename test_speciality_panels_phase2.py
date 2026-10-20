@@ -299,7 +299,9 @@ class OrthopaedicsLotsAndStages(unittest.TestCase):
         p = panel("orthopaedics-and-trauma")
         tos4 = [a for a in p["awards"] if a["title"] == "Total Orthopaedic Solutions 4"]
         self.assertEqual(len(tos4), 1)
-        self.assertEqual(tos4[0]["stage"], "planning")
+        # Planning on 01/10/2026; Find a Tender moved it to the tender stage by
+        # 20/10/2026. Either way it is not yet an award, which is the claim tested.
+        self.assertIn(tos4[0]["stage"], ("planning", "tender"))
         self.assertIsNone(tos4[0]["supplier"])
         self.assertGreaterEqual(p["counts"]["awardsShownNotYetAwarded"], 1)
 
