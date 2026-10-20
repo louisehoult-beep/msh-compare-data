@@ -56,13 +56,13 @@ jobs:
       - name: Refresh the Federated Data Platform profile (Mondays, or on demand)
         run: |
           if [ "$(date -u +%u)" = "1" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            python3 scripts/refresh_fdp_live.py || echo "Federated Data Platform: source unreadable or layout changed, file kept"
+            python3 scripts/refresh_fdp_live.py || echo "Federated Data Platform: england.nhs.uk blocks GitHub runners (HTTP 202, empty body, 20/10/2026), file kept; refresh it from a Mac"
             # Weekly owner-page sources (20/10/2026). Each fails without writing if its
             # source cannot be read, so a bad Monday keeps last week's file.
             python3 scripts/refresh_digital_frameworks.py || echo "digital frameworks: source unreadable, file kept"
             python3 scripts/refresh_ai_airlock.py || echo "AI Airlock: source unreadable, file kept"
             python3 scripts/refresh_dspt_suppliers.py || echo "DSPT: source unreadable or terms changed, file kept"
-            python3 scripts/refresh_digital_sources.py || echo "digital sources (NHS App partners, Digital Maturity Assessment): source unreadable, file kept"
+            python3 scripts/refresh_digital_sources.py || echo "digital sources: digital.nhs.uk blocks GitHub runners (HTTP 403, 20/10/2026), file kept; refresh it from a Mac"
           else
             echo "not Monday: Federated Data Platform profile left as it is"
           fi

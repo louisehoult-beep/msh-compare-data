@@ -202,7 +202,12 @@ def main(argv=None):
     os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     with open(MAP_PATH, encoding="utf-8") as fh:
         trust_map = json.load(fh)
-    doc = build(get(UPTAKE_URL), get(LIVE_URL), get(SIGNUP_URL), trust_map, dt.date.today())
+    try:
+        pages = (get(UPTAKE_URL), get(LIVE_URL), get(SIGNUP_URL))
+    except Exception as e:  # noqa: BLE001
+        print("ABORT: source not readable from this host, file kept: %s" % e)
+        return 1
+    doc = build(pages[0], pages[1], pages[2], trust_map, dt.date.today())
     bad = [c for c in doc["countCheck"] if not c["agrees"]]
     for c in doc["countCheck"]:
         print("  %-15s listed %s, headline %s%s" % (c["list"], c["listed"], c["headline"],
