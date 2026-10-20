@@ -10,7 +10,7 @@
   "ref": "ETH-DB4D6B772",
   "contact": "contact@elevateandthrive.uk"
  },
- "dataAsOf": "2026-10-12",
+ "dataAsOf": "2026-10-20",
  "source": "NHS Supply Chain Contract Launch Briefs (https://www.supplychain.nhs.uk/product-information/contract-launch-briefs/), each framework's own page, fetched this run.",
  "rule": "A supplier appears under a framework here ONLY because that framework's own NHS Supply Chain brief names it. Nothing is inferred from product ranges, specialities or catalogue categories. Frameworks whose brief could not be parsed are listed in `unparsed` with the reason and are NOT silently dropped.",
  "briefsSeen": 140,
@@ -1428,7 +1428,88 @@
    ],
    "supplierSource": "count verified against the page's own stated total (25)",
    "supplierCount": 25,
-   "supplierLots": null,
+   "supplierLots": {
+    "Aquilant Limited": [
+     "Lot 2"
+    ],
+    "Athrodax Healthcare International Limited": [
+     "Lot 4"
+    ],
+    "Atom Medical Corporation UK ltd": [
+     "Lot 3"
+    ],
+    "Central Medical Supplies Limited": [
+     "Lot 3"
+    ],
+    "Charter Kontron Limited": [
+     "Lot 3"
+    ],
+    "Croyde Medical Ltd": [
+     "Lot 3"
+    ],
+    "Draeger Medical UK Limited": [
+     "Lot 1",
+     "Lot 2",
+     "Lot 3"
+    ],
+    "GE Medical Systems Ltd": [
+     "Lot 1",
+     "Lot 3"
+    ],
+    "Getinge Limited": [
+     "Lot 1",
+     "Lot 2"
+    ],
+    "Hamilton Medical UK Ltd": [
+     "Lot 2"
+    ],
+    "Henleys Medical Supplies Limited": [
+     "Lot 2"
+    ],
+    "Inspiration Healthcare Ltd": [
+     "Lot 2",
+     "Lot 3"
+    ],
+    "Loewenstein Medical UK Ltd": [
+     "Lot 1",
+     "Lot 2"
+    ],
+    "MEDACX Limited": [
+     "Lot 2"
+    ],
+    "Mediprema": [
+     "Lot 3"
+    ],
+    "Mieka Ltd": [
+     "Lot 3"
+    ],
+    "Mindray UK Limited": [
+     "Lot 1",
+     "Lot 2"
+    ],
+    "Nihon Kohden UK Ltd": [
+     "Lot 2"
+    ],
+    "Ortus Technology Limited": [
+     "Lot 2"
+    ],
+    "Penlon Limited": [
+     "Lot 1"
+    ],
+    "Philips Electronics UK Limited": [
+     "Lot 2"
+    ],
+    "Scott Medical Ltd": [
+     "Lot 4"
+    ],
+    "Walters Medical Ltd": [
+     "Lot 2",
+     "Lot 3"
+    ],
+    "mOm Incubators Ltd": [
+     "Lot 3"
+    ]
+   },
    "delisted": [
     "BNOS Meditech Limited",
     "Dot Medical",
@@ -1445,10 +1526,27 @@
     "Lot 3": "Neonatal Equipment and Related Accessories and Services",
     "Lot 4": "Adult and Paediatric Phototherapy Devices and Related Accessories and Services"
    },
-   "lotStatus": "notPublished",
-   "lotSources": null,
+   "lotStatus": "published",
+   "lotSources": [
+    {
+     "kind": "matrix",
+     "url": "https://azuksappnpdsa01.blob.core.windows.net/datashare/Product-Matrix-Anaesthesia-Machines-Ventilator-Equipment-and-Related-Accessories-04-September-2026-DES.xlsx",
+     "label": "NHS Supply Chain product matrix (Product-Matrix-Anaesthesia-Machines-Ventilator-Equipment-and-Related-Accessories-04-September-2026-DES.xlsx), attached to the brief",
+     "coversLots": [
+      "Lot 1",
+      "Lot 2",
+      "Lot 3",
+      "Lot 4"
+     ],
+     "date": "04 September 2026"
+    }
+   ],
    "lotsNotCovered": null,
-   "lotNamedAs": null,
+   "lotNamedAs": {
+    "Henleys Medical Supplies Limited": [
+     "Henleys Medical Suppliers Limited"
+    ]
+   },
    "statedLotCount": 4,
    "lotOwner": "NHS Supply Chain"
   },
@@ -12609,7 +12707,7 @@
    "reference": "2023/S 000-011885",
    "supplyRoute": "Stocked, eDirect",
    "starts": "4 March 2024",
-   "ends": "4 March 2028",
+   "ends": "1 March 2028",
    "suppliers": [
     "Albert Waeschle Ltd",
     "Drive DeVilbiss Healthcare Ltd",
@@ -17236,5 +17334,5 @@
   }
  ],
  "lotRule": "A supplier is shown on a lot ONLY where the framework owner's own published source for that framework names it against that lot: the NHS Supply Chain contract launch brief's lot-by-lot supplier lists or supplier-by-lot table, the Product/Supplier Matrix spreadsheet attached to that brief (only where the sheet has an explicit lot axis, and only where the supplier has a mark or a product in that lot), or the Find a Tender contract award notice for that framework's own procurement. Nothing is inferred from product ranges, specialities or lot titles. Lots attach to the exact supplier string the brief uses; a source name attaches only where its normalised form (brief_names.clean + company_match.key) equals that brief name's, or both resolve to the same single Hub company under the seed's recorded aliases. Unmatched names are listed in `unresolved`, never guessed. Where the brief breaks a framework into lots but no source names who holds which, lotStatus is 'notPublished' and the report says so.",
- "lotsAsOf": "2026-10-16"
+ "lotsAsOf": "2026-10-20"
 }
