@@ -294,11 +294,15 @@ def build(fetcher=fetch, today="2026-10-20", previous=None):
                 old["staleNote"] = ("Source could not be read on %s (%s); this block is last week's, "
                                     "verified %s." % (today, e, old.get("verifiedOn")))
                 doc[key] = old
-    if "nhsApp" not in doc and "dma" not in doc:
+    if len(problems) == 2:
+        # Nothing could be read this run (e.g. GitHub's runners are blocked by digital.nhs.uk):
+        # keep the file exactly as it is rather than rewriting last week's blocks with a flag.
         raise RuntimeError("; ".join(problems))
     doc["notAdded"] = [dict(x, checkedOn="2026-10-20") for x in NOT_ADDED]
     if problems:
-        doc["readProblems"] = problems
+        # A single string, not a list: a list would be a collection that the landing lane's
+        # no-loss check sees shrink on the next clean run and refuses.
+        doc["readProblems"] = "; ".join(problems)
     return doc
 
 
@@ -326,8 +330,8 @@ def main(argv=None):
         print("NHS App rows:", len(doc["nhsApp"]["rows"]), [p["rows"] for p in doc["nhsApp"]["pages"]])
     if "dma" in doc:
         print("DMA providers:", len(doc["dma"]["providers"]), "ICBs:", len(doc["dma"]["icbs"]))
-    for p in doc.get("readProblems", []):
-        print("PROBLEM:", p)
+    if doc.get("readProblems"):
+        print("PROBLEM:", doc["readProblems"])
     return 0
 
 
