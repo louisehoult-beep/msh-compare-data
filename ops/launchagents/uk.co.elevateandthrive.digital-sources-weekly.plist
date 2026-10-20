@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>uk.co.elevateandthrive.digital-sources-weekly</string>
+
+    <!-- Weekly Mac refresh of the two digital sources GitHub's runners cannot read:
+         digital.nhs.uk (NHS App partners, Digital Maturity Assessment) answers them 403 and
+         england.nhs.uk (Federated Data Platform lists) answers them 202 with an empty body.
+         Monday 07:10 local time; RunAtLoad also fires it at login/wake, and the script itself
+         decides whether a run is due (Monday with no success today, or none in 7 days).
+         Works in a throwaway clone under ~/.claude/msh-work, never the OneDrive checkout, and
+         lands through land.sh. The script is read from the local mirror's main each run.
+         Source of truth: msh-compare-data ops/launchagents/. No Claude involved. -->
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>-c</string>
+        <string>mkdir -p "$HOME/.claude/state" "$HOME/Library/Logs"; M="$HOME/.claude/msh-mirror/msh-compare-data.git"; git -C "$M" fetch --quiet https://github.com/louisehoult-beep/msh-compare-data.git main:main 2&gt;&gt;"$HOME/Library/Logs/digital-sources-weekly.log"; git -C "$M" show main:ops/launchagents/digital-sources-weekly.sh &gt; "$HOME/.claude/state/digital-sources-weekly.sh" 2&gt;&gt;"$HOME/Library/Logs/digital-sources-weekly.log" &amp;&amp; /bin/bash "$HOME/.claude/state/digital-sources-weekly.sh"</string>
+    </array>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Weekday</key><integer>1</integer>
+        <key>Hour</key><integer>7</integer>
+        <key>Minute</key><integer>10</integer>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+</dict>
+</plist>
