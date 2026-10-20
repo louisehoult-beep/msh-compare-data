@@ -3460,6 +3460,32 @@ AWARD_ABSOLUTE = re.compile(
     re.I)
 
 
+def check_no_uk_entity(seed, fin):
+    """`ukEntity: {"state": "none"}` on a seed record (added 20/10/2026) says the
+    company's own site names a non-UK legal entity and Companies House holds none.
+    It must carry its evidence and date, and the published Companies House record
+    for that supplier must attach no company: a number beside "no UK company" is
+    two statements that cannot both be true."""
+    companies = ((fin or {}).get("companies") or {}) if isinstance(fin, dict) else {}
+    for s in ((seed or {}).get("suppliers") or []):
+        u = s.get("ukEntity") if isinstance(s, dict) else None
+        if u is None:
+            continue
+        name = s.get("name")
+        if not isinstance(u, dict) or u.get("state") != "none":
+            FAIL("company-report", "%r carries a ukEntity that is not {\"state\": \"none\", ...}; "
+                                   "no other state is defined." % name)
+            continue
+        if not str(u.get("evidence") or "").strip() or not as_date(u.get("checkedOn")):
+            FAIL("company-report", "%r says it has no UK company but gives no evidence or no "
+                                   "checkedOn date. A negative is a claim too." % name)
+        rec = companies.get(name) or {}
+        if rec.get("companyNumber"):
+            FAIL("company-report", "%r is recorded as having no UK company, yet "
+                                   "company-financials.json attaches %s (%s)."
+                 % (name, rec.get("companyNumber"), rec.get("registeredName")))
+
+
 def check_company_awards(doc, seed, report_js):
     """data/company-awards.json, and the source that renders it."""
     if doc is None and not (report_js or "").strip():
@@ -7028,6 +7054,7 @@ def main():
     # The award index. Every published match is re-derived from the same module
     # the writer used, so the file and the rule cannot drift apart unnoticed.
     check_company_awards(load("company-awards.json"), load("supplier-seed.json"), report_js)
+    check_no_uk_entity(load("supplier-seed.json"), load("company-financials.json"))
     # NHS Supply Chain framework awards public on Find a Tender but not yet on
     # NHSSC's own contract launch brief. Every match AND every supersede
     # decision is re-derived from the same module the writer used.

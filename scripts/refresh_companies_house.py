@@ -522,6 +522,17 @@ def website_proof(supplier):
     return {"number": number, "url": proof["url"], "checkedOn": proof.get("checkedOn")}
 
 
+def no_uk_entity(supplier):
+    """The reader-facing reason, or None. Refused without evidence and a date."""
+    u = supplier.get("ukEntity")
+    if not isinstance(u, dict) or u.get("state") != "none":
+        return None
+    if not str(u.get("evidence") or "").strip() or not str(u.get("checkedOn") or "").strip():
+        log("  %s: ignoring a ukEntity 'none' with no evidence or date" % supplier["name"])
+        return None
+    return ("No UK registered company: %s Checked %s." % (u["evidence"].rstrip(), u["checkedOn"]))
+
+
 def load_overrides():
     """Curated per-supplier match overrides, or an empty map. Answers ^o96.
 
@@ -1051,6 +1062,14 @@ def main():
     for i, (supplier, (number, why, source)) in enumerate(with_number, 1):
         if why:
             log("  %s: %s" % (supplier["name"], why))
+        # "No UK entity" (added 20/10/2026): the company's own site names a non-UK
+        # legal entity and Companies House holds none. Recorded on the seed with its
+        # evidence; written as the cleared state with that evidence as the reason,
+        # and NO name search, which on a foreign name can only find a namesake.
+        nue = no_uk_entity(supplier)
+        if nue:
+            companies[supplier["name"]] = cleared_record(None, nue)
+            continue
         excluded, corrected = override_for(supplier, overrides)
         from_record = source if number else None
 
