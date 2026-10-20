@@ -44,8 +44,15 @@ on:
 # Same reason as every other writer in this repo: they share one branch, and a
 # push landing mid-window elsewhere has previously cost a writer its work.
 # Serialise rather than race.
+# CONCURRENCY CHANGED 20/10/2026. This job used to share the group "msh-compare-data-writer"
+# with every other writer. GitHub keeps ONE pending run per group and cancels an older pending run
+# the moment a newer one queues, so under that group this schedule was cancelled in about a second
+# on 13, 15, 16, 17, 19 and 20 October without ever starting. This job writes only its own data
+# file(s) and its push step already re-fetches and re-applies on a rejected push, so it has its
+# own group and cannot be starved. The job timeout was also raised: the publish gate alone takes
+# 6 to 15 minutes, and the 20/10/2026 05:24 run was cancelled by its timeout during the gate.
 concurrency:
-  group: msh-compare-data-writer
+  group: msh-writer-mhra-alerts
   cancel-in-progress: false
 permissions:
   contents: write
@@ -53,7 +60,7 @@ permissions:
 jobs:
   mhra-alerts:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v5
         with:

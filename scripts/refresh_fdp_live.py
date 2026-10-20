@@ -52,7 +52,14 @@ def get(url, tries=2, timeout=40):
     for attempt in range(1, tries + 1):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout) as r:
-                return r.read().decode("utf-8", "replace")
+                body = r.read().decode("utf-8", "replace")
+                if len(body) < 2000:
+                    # NHS England's host answers some non-browser clients (GitHub's runners
+                    # on 20/10/2026) with HTTP 202 and an empty body. That is a block, not a
+                    # page: say so instead of parsing it as an empty list.
+                    raise RuntimeError("HTTP %s with a %d byte body from %s (blocked, not a page)"
+                                       % (getattr(r, "status", "?"), len(body), url))
+                return body
         except Exception:
             if attempt == tries:
                 raise

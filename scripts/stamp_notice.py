@@ -72,6 +72,7 @@ REFS = {
     "trust-digital-profile.json": "ETH-D20F5DF46",
     "gates-watch.json":         "ETH-DD13317EF",
     "digital-frameworks.json":  "ETH-D1AA304A7",
+    "digital-sources.json":     "ETH-DA95CE0DB",
     "ai-airlock-cohorts.json":  "ETH-DB8BA56A4",
     "drug-tariff-part-ix.json": "ETH-D090550F8",
     "tender-history.json":      "ETH-D12B82708",
