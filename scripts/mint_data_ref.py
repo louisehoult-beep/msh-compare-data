@@ -75,8 +75,12 @@ SCHEMES = {
 
 
 def find_scheme(s, refs):
+    # Speciality panel refs are keyed "speciality-panels/<slug>.json" but hashed
+    # on the bare file name (stamp_notice.py, 16/10/2026), so the key's folder is
+    # dropped before hashing. Without this no scheme reproduced the 43 panel refs
+    # and no new data file could be minted at all (found 20/10/2026).
     for name, fn in SCHEMES.items():
-        if all("ETH-D" + fn(s, f)[:8].upper() == r for f, r in refs.items()):
+        if all("ETH-D" + fn(s, f.split("/")[-1])[:8].upper() == r for f, r in refs.items()):
             return name, fn
     return None, None
 

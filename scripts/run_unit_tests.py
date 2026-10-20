@@ -109,6 +109,7 @@ RUN = [
     # My Hub search modal mount in app/hub-search.js (my-hub task 9). Static, no network.
     "test_hub_search_embed.py",
     "test_digital_lane.py",              # 20/10/2026, digital health lane + Federated Data Platform profile
+    "test_company_digital_awards.py",    # 20/10/2026, digital awards layer (own file, exact-only match)
     "test_digital_frameworks.py",        # 20/10/2026, GCA Technology Services 4, G-Cloud 15, coming NHS digital frameworks
     "test_ai_airlock.py",                # 20/10/2026, MHRA AI Airlock cohorts
     "test_dspt_supplier_check.py",       # 20/10/2026, DSPT status for digital-tagged suppliers
