@@ -119,6 +119,61 @@ class Extraction(unittest.TestCase):
         self.assertIsNone(w.role_family("Deputy Chief Medical Officer"))
 
 
+DIG_A = {"name": "Pat Example", "title": "Chief Clinical Information Officer", "family": "digital"}
+DIG_B = {"name": "Robin Sample", "title": "Chief Clinical Information Officer", "family": "digital"}
+
+
+class DigitalLeaders(unittest.TestCase):
+    def test_titles_recognised(self):
+        for t in ("Chief Information Officer", "Chief Clinical Information Officer",
+                  "Chief Digital and Information Officer", "Chief Digital Officer",
+                  "Director of Digital", "Director of Strategy and Digital",
+                  "Chief Nursing Information Officer", "Chief Data Officer"):
+            self.assertEqual(w.role_family(t), "digital", t)
+        # Not swallowed by the nursing family, deputies and partners still excluded.
+        self.assertEqual(w.role_family("Chief Clinical Officer"), "nursing")
+        self.assertEqual(w.role_family("Executive Director of Strategy, Digital and Commissioning, "
+                                       "NHS Norfolk and Suffolk Integrated Care Board"), "digital")
+        self.assertIsNone(w.role_family("Deputy Chief Digital Officer"))
+        self.assertIsNone(w.role_family("Chief Digital Officer of Some Hospital Trust"))
+        self.assertIsNone(w.role_family("Director of Digital, Sirona care & health"))
+
+    def test_extracted_from_cards(self):
+        got = w.extract_people(["Pat Example", "Chief Clinical Information Officer",
+                                "Digital and Information"])
+        self.assertEqual([(p["name"], p["family"]) for p in got], [("Pat Example", "digital")])
+
+    def test_summary_published_true_false_none(self):
+        doc = run({}, D1, own=own_with("QHL", [DIG_A]))
+        q = {i["code"]: i for i in doc["icbs"]}
+        self.assertTrue(q["QHL"]["digital"]["published"])
+        self.assertEqual(q["QHL"]["digital"]["readOn"], "2026-09-28")
+        self.assertNotIn("Pat Example", str(q["QHL"]["digital"]))
+        none_read = run({}, D1, own=own_with("QUA", [PHARM_A]))
+        self.assertIs({i["code"]: i for i in none_read["icbs"]}["QUA"]["digital"]["published"], False)
+        self.assertIsNone({i["code"]: i for i in none_read["icbs"]}["QHL"]["digital"]["published"])
+        failed = {"QUA": {"people": [], "urls": ["https://x.nhs.uk/b"],
+                          "errors": [{"url": "https://x.nhs.uk/b", "error": "URLError"}]}}
+        self.assertIsNone({i["code"]: i for i in run({}, D1, own=failed)["icbs"]}["QUA"]
+                          ["digital"]["published"], "a failed read must not read as 'no digital role'")
+
+    def test_new_holder_needs_a_second_day_and_vanishing_is_no_departure(self):
+        base = run({}, D1, own=own_with("QHL", [DIG_A]))
+        day2 = run(copy.deepcopy(base), D2, own=own_with("QHL", [DIG_B]))
+        self.assertFalse([e for e in day2["events"] if e["kind"] == "leadership"])
+        day3 = run(copy.deepcopy(day2), D3, own=own_with("QHL", [DIG_B]))
+        evs = [e for e in day3["events"] if e["kind"] == "leadership"]
+        self.assertEqual(len(evs), 1)
+        self.assertEqual(evs[0]["role"], "digital")
+        v.fails[:] = []
+        v.check_icb_watch(day3, today_iso="2026-09-30")
+        self.assertEqual(v.fails, [])
+        gone = run(copy.deepcopy(base), dt.date(2026, 10, 30), own=own_with("QHL", []))
+        self.assertFalse(gone["events"])
+        q = {i["code"]: i for i in gone["icbs"]}["QHL"]
+        self.assertTrue(any(e["family"] == "digital" and e.get("stale") for e in q["execs"]))
+
+
 class ChangeDetection(unittest.TestCase):
     def test_first_run_is_a_baseline_with_no_leadership_events(self):
         doc = run({}, D1, own=own_with("QHL", [PHARM_A]))
