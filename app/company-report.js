@@ -1713,7 +1713,15 @@
        were cleared a wrong company name and number published to members while
        only the figures were withheld. */
     if (!rec.companyNumber && !rec.registeredName) {
-      return sec(TITLE, gap('No company is attached to this supplier. A previous match was cleared as the wrong company, and nothing is shown here until a match is confirmed against two independent sources. This is a deliberate blank, not a coverage gap.'));
+      /* Not every empty record is a cleared wrong match. Since 20/10/2026 a record
+         also carries "No UK registered company: <evidence>" (a foreign supplier),
+         and an override's own clearedNote can give a different reason. Print the
+         record's own reason when it is not the wrong-company default, rather than
+         telling a member a match was wrong when there never was one. */
+      var why = String(rec.matchedOn || '');
+      return sec(TITLE, gap(why && !/wrong company/i.test(why)
+        ? 'No company is attached to this supplier. ' + esc(why) + ' This is a deliberate blank, not a coverage gap.'
+        : 'No company is attached to this supplier. A previous match was cleared as the wrong company, and nothing is shown here until a match is confirmed against two independent sources. This is a deliberate blank, not a coverage gap.'));
     }
 
     var probable = isProbable(rec);
@@ -1797,14 +1805,8 @@
     var body = '';
     if (probable) {
       body += '<div style="margin:0 0 9px;padding:8px 11px;background:#f7ecdc;border-left:3px solid #b98a2e;border-radius:0 7px 7px 0;font-size:12px;color:#6b5518;line-height:1.55;">' +
-        /* A cleared record carries no company at all (an excluded wrong match, or
-           "no UK registered company" since 20/10/2026), so it is not a probable
-           match of anything and must not be called one. */
-        (rec.companyNumber
-          ? '<b>IDENTITY NOT CONFIRMED.</b> This is a probable match only — ' + esc(rec.matchedOn || 'matched by name search') +
-            ' Register facts are shown for orientation; no figure is carried and this company is excluded from the field filing profile below.'
-          : '<b>NO UK COMPANY ATTACHED.</b> ' + esc(rec.matchedOn || '') +
-            ' No register facts or figures are shown, and this company is excluded from the field filing profile below.') + '</div>';
+        '<b>IDENTITY NOT CONFIRMED.</b> This is a probable match only — ' + esc(rec.matchedOn || 'matched by name search') +
+        ' Register facts are shown for orientation; no figure is carried and this company is excluded from the field filing profile below.</div>';
     } else if (corroborated) {
       /* The labelled basis line, ABOVE the register facts, per root rule 14 —
          a reader must be able to judge the attachment before reading it as
