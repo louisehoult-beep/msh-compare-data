@@ -290,6 +290,7 @@ def fetch_cf(days, max_pages=MAX_PAGES):
     url = "%s?size=100&stages=award" % CF_API
     rows, pages, scanned, reached = [], 0, 0, False
     failed = ""
+    no_cursor = False
     while url and pages < max_pages:
         try:
             data = get(url)
@@ -313,11 +314,22 @@ def fetch_cf(days, max_pages=MAX_PAGES):
         url = (data.get("links") or {}).get("next")
         if url:
             time.sleep(PAGE_SLEEP)
+        else:
+            no_cursor = True
     note = ("Contracts Finder: %d supplier row(s) from %d release(s) over %d page(s), "
             "back to %s" % (len(rows), scanned, pages, cutoff))
     if failed:
         note += (" — ⚠️ THE FEED FAILED (%s) after %d page(s), so this window was "
                  "NOT fully walked and awards are missing." % (failed, pages))
+    elif not reached and no_cursor:
+        # Fixed 20/10/2026. This case used to fall through to the guard message
+        # below, so a feed that simply stopped handing back a next cursor after
+        # 7 pages was published as "STOPPED AT THE 40-PAGE GUARD". The guard was
+        # never the cause (measured 20/10/2026: about one page per day, so 40
+        # pages covers about 40 days against an 8-day window).
+        note += (" — ⚠️ THE FEED RETURNED NO NEXT CURSOR after %d page(s), before "
+                 "reaching the cutoff, so this window was NOT fully walked and awards "
+                 "are missing." % pages)
     elif not reached:
         note += (" — ⚠️ STOPPED AT THE %d-PAGE GUARD before reaching the cutoff, so "
                  "this window was NOT fully walked and awards are missing." % max_pages)
