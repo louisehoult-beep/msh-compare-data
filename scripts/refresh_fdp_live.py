@@ -52,7 +52,14 @@ def get(url, tries=2, timeout=40):
     for attempt in range(1, tries + 1):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout) as r:
-                return r.read().decode("utf-8", "replace")
+                body = r.read().decode("utf-8", "replace")
+                if len(body) < 2000:
+                    # NHS England's host answers some non-browser clients (GitHub's runners
+                    # on 20/10/2026) with HTTP 202 and an empty body. That is a block, not a
+                    # page: say so instead of parsing it as an empty list.
+                    raise RuntimeError("HTTP %s with a %d byte body from %s (blocked, not a page)"
+                                       % (getattr(r, "status", "?"), len(body), url))
+                return body
         except Exception:
             if attempt == tries:
                 raise
@@ -195,7 +202,12 @@ def main(argv=None):
     os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     with open(MAP_PATH, encoding="utf-8") as fh:
         trust_map = json.load(fh)
-    doc = build(get(UPTAKE_URL), get(LIVE_URL), get(SIGNUP_URL), trust_map, dt.date.today())
+    try:
+        pages = (get(UPTAKE_URL), get(LIVE_URL), get(SIGNUP_URL))
+    except Exception as e:  # noqa: BLE001
+        print("ABORT: source not readable from this host, file kept: %s" % e)
+        return 1
+    doc = build(pages[0], pages[1], pages[2], trust_map, dt.date.today())
     bad = [c for c in doc["countCheck"] if not c["agrees"]]
     for c in doc["countCheck"]:
         print("  %-15s listed %s, headline %s%s" % (c["list"], c["listed"], c["headline"],
