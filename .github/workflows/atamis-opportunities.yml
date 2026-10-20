@@ -38,6 +38,9 @@ on:
     - cron: "50 0 * * *"
   workflow_dispatch:
 
+# TIMEOUT RAISED 20/10/2026. The 20/10/2026 05:24 run was cancelled by its own 20-minute job
+# timeout, during the publish gate (which alone takes 6 to 15 minutes), so it never reached the
+# commit step. The shared writer group was not the cause here and is unchanged.
 concurrency:
   group: msh-compare-data-writer
   cancel-in-progress: false
@@ -47,7 +50,7 @@ permissions:
 jobs:
   atamis:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v5
         with:

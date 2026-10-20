@@ -50,7 +50,7 @@ RULE = ("Every fact read at the named primary source on verifiedOn, else 'Not ve
         "with what would settle it. Supplier lists hold company names only; no contact "
         "person, email, phone or address is ever stored. suppliers null means no list was read.")
 SOURCE = ("gca.gov.uk agreement pages and lot-supplier CSV exports; "
-          "find-tender.service.gov.uk OCDS API")
+          "find-tender.service.gov.uk OCDS API; sbs.nhs.uk framework pages")
 
 
 # ------------------------------------------------------------------ fetching
@@ -336,6 +336,191 @@ def build_coming(fetcher, notice_id, name, owner_hint, today):
     return entry
 
 
+# ------------------------------------------------------------------ added 20/10/2026 (second pass)
+# NHS Shared Business Services (SBS) framework pages and Find a Tender award / planning
+# notices for the digital frameworks scoped in "Hub health tech intelligence gap".
+
+SBS = "https://www.sbs.nhs.uk/services/framework-agreements/"
+MONTHS = "January|February|March|April|May|June|July|August|September|October|November|December"
+
+
+def long_date(s):
+    """'01 October 2025' or '9 January 2023' -> ISO."""
+    import datetime as _dt
+    try:
+        return _dt.datetime.strptime(s.strip(), "%d %B %Y").strftime("%Y-%m-%d")
+    except ValueError:
+        return None
+
+
+def parse_sbs_page(page_html):
+    """Reference, active dates and the extension option, as the SBS page states them."""
+    txt = text_of(page_html)
+    ref = re.search(r"Framework Agreement Reference:\s*(SBS\d+)", txt)
+    m = re.search(r"What dates is the framework agreement active\?\s*\n\s*(\d{1,2} (?:%s) \d{4})\s*[\u2013-]\s*(\d{1,2} (?:%s) \d{4})(?:\s*\n\s*\(([^)\n]+)\))?" % (MONTHS, MONTHS), txt)
+    return {
+        "reference": ref.group(1) if ref else None,
+        "starts": long_date(m.group(1)) if m else None,
+        "ends": long_date(m.group(2)) if m else None,
+        "option": m.group(3).strip() if m and m.group(3) else None,
+        "dateLine": re.sub(r"\s+", " ", m.group(0).split("?", 1)[1]).strip() if m else None,
+    }
+
+
+def award_suppliers(pkg):
+    """{lot id: sorted company names} from the award notice, names exactly as published."""
+    r = pkg["releases"][0]
+    out = {}
+    for a in r.get("awards", []):
+        for lot in a.get("relatedLots") or ["1"]:
+            for s in a.get("suppliers") or []:
+                n = (s.get("name") or "").strip()
+                if n:
+                    out.setdefault(str(lot), set()).add(n)
+    return {k: sorted(v, key=str.casefold) for k, v in out.items()}
+
+
+def build_award(fetcher, notice_id, name, owner, today, sbs_slug=None, extra_nv=(), url=None):
+    nv = list(extra_nv)
+    pkg = json.loads(fetcher(FTS_API + notice_id))
+    r = pkg["releases"][0]
+    p = parse_ocds(pkg, notice_id)
+    sup = award_suppliers(pkg)
+    page = None
+    if sbs_slug:
+        page = parse_sbs_page(fetcher(SBS + sbs_slug + "/"))
+    lots = []
+    lot_ids = [str(l["lot"]) for l in p["lots"]] or sorted(sup)
+    for lid in sorted(set(lot_ids) | set(sup)):
+        names = sup.get(lid)
+        meta = next((l for l in p["lots"] if str(l["lot"]) == lid), {})
+        lots.append({"lot": lid, "name": meta.get("name"), "note": None,
+                     "suppliers": names, "supplierCount": len(names) if names else None})
+    allnames = sorted({n for v in sup.values() for n in v}, key=str.casefold)
+    contract_val = None
+    for c in r.get("contracts") or []:
+        if c.get("value"):
+            contract_val = ocds_money(c["value"])
+            break
+    if page and page["starts"]:
+        starts, ends = page["starts"], page["ends"]
+    else:
+        starts = ends = None
+        nv.append("Framework start and end dates are not stated in the award notice. Settled by "
+                  "the framework owner's page or the framework agreement documents.")
+    entry = {
+        "name": name,
+        "reference": (page or {}).get("reference") or "Find a Tender notice " + notice_id,
+        "owner": p["buyer"] or owner,
+        "url": url or (SBS + sbs_slug + "/" if sbs_slug else p["url"]),
+        "status": "live",
+        "starts": starts,
+        "ends": ends,
+        "lots": lots,
+        "suppliers": allnames or None,
+        "noticeTitle": p["title"],
+        "noticeStatus": p["status"],
+        "noticeUrl": p["url"],
+        "noticeTag": p["noticeTag"],
+        "noticeReleaseDate": p["publishedRelease"],
+        "procedure": p["procedure"],
+        "estimatedValue": contract_val,
+        "verifiedOn": today,
+        "sourceQuote": (page or {}).get("dateLine"),
+        "notVerified": nv,
+    }
+    if page and page.get("option"):
+        entry["extensionOption"] = page["option"]
+    nv.append("Supplier names are as published in the award notice (a trading name or former "
+              "name may appear); not alias-resolved to Hub companies here.")
+    return entry
+
+
+def build_sbs_page_only(fetcher, slug, name, today, extra_nv=()):
+    nv = list(extra_nv)
+    page_html = fetcher(SBS + slug + "/")
+    pg = parse_sbs_page(page_html)
+    if not pg["reference"] or not pg["starts"]:
+        raise RuntimeError("SBS page %s: reference or dates not found" % slug)
+    nv.append("Supplier list not read: the SBS page lists suppliers behind its own supplier tab "
+              "and no award notice was read for this framework. Settled by the SBS supplier "
+              "details or the award notice.")
+    return {
+        "name": name,
+        "reference": pg["reference"],
+        "owner": "NHS Shared Business Services (NHS SBS)",
+        "url": SBS + slug + "/",
+        "status": "live",
+        "starts": pg["starts"],
+        "ends": pg["ends"],
+        "extensionOption": pg["option"],
+        "lots": [],
+        "suppliers": None,
+        "verifiedOn": today,
+        "sourceQuote": pg["dateLine"],
+        "notVerified": nv,
+    }
+
+
+def build_extras(fetcher, today):
+    """Each extra is independent: one that cannot be read is listed under notAdded with the
+    reason, never guessed, and never stops the core four writing."""
+    entries, not_added = [], []
+
+    def attempt(label, url, fn):
+        try:
+            entries.append(fn())
+        except Exception as e:  # noqa: BLE001
+            not_added.append({"source": label, "url": url, "checkedOn": today,
+                              "reason": "Could not be read on this run (%s). Nothing recorded; "
+                                        "settled by re-running when the source is reachable." % e})
+
+    attempt("NHS SBS Technology Enabled Care Services 2 (SBS10144)", SBS + "technology-enabled-care-services-2/",
+            lambda: build_sbs_page_only(fetcher, "technology-enabled-care-services-2",
+                                        "Technology Enabled Care Services 2", today))
+    def tecs3():
+        e = build_coming(fetcher, "050041-2025", "Technology Enabled Care Services 3 (SBS10529)",
+                         "NHS Shared Business Services Limited", today)
+        e["reference"] = "SBS10529 (Find a Tender notice 050041-2025)"
+        e["noticeStatus"] = "planning (preliminary market engagement only)"
+        e["notVerified"].insert(0, "Only a preliminary market engagement notice exists; no tender "
+                                   "notice had been found on Find a Tender on the read date. The "
+                                   "SBS bidder webinar page says the tender is due to launch soon. "
+                                   "Settled by the tender notice once published.")
+        return e
+    attempt("NHS SBS Technology Enabled Care Services 3 (SBS10529)", FTS_NOTICE + "050041-2025", tecs3)
+    attempt("NHS SBS Digital Workplace Solutions 2 (SBS10510)", SBS + "digital-workplace-solutions/",
+            lambda: build_award(fetcher, "074808-2025", "Digital Workplace Solutions 2", "NHS Shared Business Services Limited",
+                                today, "digital-workplace-solutions"))
+    attempt("NHS SBS Tech Devices (SBS10515)", SBS + "tech-devices-link-4/",
+            lambda: build_sbs_page_only(fetcher, "tech-devices-link-4", "Tech Devices", today))
+    attempt("NHS SBS Digital Health Advisory (SBS10225)", SBS + "digital-health-advisory/",
+            lambda: build_sbs_page_only(fetcher, "digital-health-advisory", "Digital Health Advisory", today))
+    attempt("HealthTrust Europe Digital Pathology 2024 Framework", FTS_NOTICE + "058054-2026",
+            lambda: build_award(fetcher, "058054-2026", "Digital Pathology 2024 Framework (HealthTrust Europe)",
+                                "HealthTrust Europe LLP", today, None,
+                                ["Value is the contract value stated in the award notice, not a spend figure."]))
+    # Conflict check, computed from what was read: the TECS 3 notice states when the existing
+    # TECS framework expires; the TECS 2 page states its own end date. If they differ, say so.
+    by = {e["name"]: e for e in entries}
+    t2, t3 = by.get("Technology Enabled Care Services 2"), by.get("Technology Enabled Care Services 3 (SBS10529)")
+    if t2 and t3:
+        try:
+            raw = fetcher(FTS_API + "050041-2025")
+            m = re.search(r"existing TECS framework is due to expire on (\d{2}/\d{2}/\d{4})", raw)
+            notice_end = uk_date(m.group(1)) if m else None
+            if notice_end and t2.get("ends") and notice_end != t2["ends"]:
+                msg = ("Notice 050041-2025 says the existing TECS framework is due to expire on %s; "
+                       "the SBS TECS 2 page states an end date of %s. The two disagree, both are "
+                       "recorded as read, and the end date is Not verified. Settled by NHS SBS "
+                       "confirming the TECS 2 expiry." % (notice_end, t2["ends"]))
+                t2["notVerified"].append(msg)
+                t3["notVerified"].append(msg)
+        except Exception:  # noqa: BLE001 - the conflict note is a bonus, not a gate
+            pass
+    return entries, not_added
+
+
 def build(fetcher=fetch, today="2026-10-20"):
     entries = [
         build_ts4(fetcher, today),
@@ -345,8 +530,10 @@ def build(fetcher=fetch, today="2026-10-20"):
         build_coming(fetcher, "094419-2026", "Digital Primary Care (GP IT) Open Framework",
                      "NHS England", today),
     ]
+    extra, not_added = build_extras(fetcher, today)
+    entries.extend(extra)
     return {"rule": RULE, "source": SOURCE, "generated": today, "dataAsOf": today,
-            "frameworks": entries}
+            "frameworks": entries, "notAdded": not_added}
 
 
 def counts(doc):

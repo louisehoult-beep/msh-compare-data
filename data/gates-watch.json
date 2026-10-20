@@ -16,7 +16,7 @@
  "rule": "Each row is one owner page for a health tech gate. lastUpdated is the owner's own date: GOV.UK's public_updated_at from its content API, or the 'Last edited' line on an NHS England Digital page. latestChange is the owner's own change note, verbatim, where the owner publishes one. changedSinceLastRun is true when that date moved since the previous run. Nothing is summarised or interpreted.",
  "counts": {
   "pages": 10,
-  "ok": 10,
+  "ok": 8,
   "changedSinceLastRun": 0
  },
  "pages": [
@@ -144,7 +144,7 @@
    "id": "dtac",
    "gate": "Assurance",
    "owner": "NHS England",
-   "status": "ok",
+   "status": "unreachable",
    "checkedOn": "2026-10-20",
    "title": "Digital Technology Assessment Criteria (DTAC) guidance for buyers and suppliers",
    "url": "https://digital.nhs.uk/services/digital-technology-assessment-criteria-dtac",
@@ -152,7 +152,8 @@
    "latestChange": null,
    "recentChanges": [],
    "changedSinceLastRun": false,
-   "previousLastUpdated": null
+   "previousLastUpdated": null,
+   "error": "HTTP Error 403: Forbidden"
   },
   {
    "id": "ai-commission-recommendations",
@@ -266,7 +267,7 @@
    "id": "clinical-safety",
    "gate": "Clinical safety",
    "owner": "NHS England",
-   "status": "ok",
+   "status": "unreachable",
    "checkedOn": "2026-10-20",
    "title": "Clinical risk management standards",
    "url": "https://digital.nhs.uk/services/clinical-safety/clinical-risk-management-standards",
@@ -274,7 +275,8 @@
    "latestChange": null,
    "recentChanges": [],
    "changedSinceLastRun": false,
-   "previousLastUpdated": null
+   "previousLastUpdated": null,
+   "error": "HTTP Error 403: Forbidden"
   }
  ]
 }

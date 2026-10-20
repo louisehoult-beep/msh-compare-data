@@ -123,9 +123,9 @@ ROLE_FAMILIES = [
     # Digital leaders (20/10/2026). Before "nursing" so "Chief Clinical Information
     # Officer" is not taken for a chief clinical (quality) officer.
     ("digital", re.compile(
-        r"chief (\w+ ){0,3}?(information|digital|data|technology)\b|"
-        r"director of (digital|information|data|IT\b|technology)|"
-        r"director of [\w ,]{0,40}\b(digital|information|technology)\b|"
+        r"chief (\w+ ){0,3}?(information|informatics|digital|data|technology)\b|"
+        r"director of (digital|information|informatics|data|IT\b|technology)|"
+        r"director of [\w ,]{0,40}\b(digital|information|informatics|technology)\b|"
         r"(digital|information|technology)( (and|&) \w+)? director|digital (transformation )?officer|"
         r"\b(CIO|CCIO|CNIO|CMIO|CDIO|CDO)\b", re.I)),
     ("cmo", re.compile(r"chief medical officer|\bmedical director\b|\(medical\)", re.I)),
@@ -134,6 +134,7 @@ ROLE_FAMILIES = [
     ("nursing", re.compile(r"chief nurs|director of nursing|chief (clinical|quality)", re.I)),
     ("chair", re.compile(r"^(interim |acting )?chair(man|woman|person)?$", re.I)),
 ]
+ROLE_FAMILIES_DIGITAL = dict(ROLE_FAMILIES)["digital"]
 OWN_SITE_FAMILIES = {"medicines", "cmo", "cfo", "nursing", "digital"}
 ROLE_LABEL = {"medicines": "Medicines lead", "digital": "Digital and information lead", "cmo": "Medical leadership",
               "ceo": "Chief executive", "cfo": "Chief finance officer",
@@ -316,7 +317,16 @@ OWN_ORG_SUFFIX = re.compile(r"ICB|Integrated Care Board|Directorate|Director|Off
 
 
 def role_family(title):
-    if NOT_HOLDER.search(title) or PARTNER.search(title):
+    if NOT_HOLDER.search(title):
+        # "Deputy Medical Director and Chief Clinical Informatics Officer for
+        # primary care" (Lincolnshire): the deputy word qualifies the first role
+        # only. A digital role stands on its own if one segment names it cleanly.
+        for seg in re.split(r"\s+and\s+|,|;|/", title):
+            if (seg.strip() and not NOT_HOLDER.search(seg) and not PARTNER.search(seg)
+                    and ROLE_FAMILIES_DIGITAL.search(seg)):
+                return "digital"
+        return None
+    if PARTNER.search(title):
         return None
     # "Chief Executive, Sirona care & health" / "Chief Executive, G DOC": a
     # partner member whose own organisation follows the comma.
@@ -347,6 +357,13 @@ def extract_people(lines):
     found, pairs = [], []
     for i, ln in enumerate(lines):
         if len(ln) > 160:
+            continue
+        # "Chief Finance Officer: Alastair Groom" (Hampshire and Isle of Wight):
+        # the title first, a colon, then the holder.
+        m = re.match(r"^(.{6,110}?):\s+(" + HONORIFIC + NAMEPART + r"(?:\s+" + NAMEPART + r"){1,3}"
+                     + POSTNOM + r")$", ln)
+        if m and looks_like_person(m.group(2)) and role_family(m.group(1)):
+            found.append((m.group(2).strip(), m.group(1).strip()))
             continue
         # "Nominated ICB Executive: Rosi Shepherd – Chief ..." — drop the label.
         one = re.sub(r"^[A-Z][\w ]{2,40}:\s+", "", ln)

@@ -23,16 +23,24 @@
   "note": "Only award notices the digital lane has read are here. Most NHS digital money moves as framework call-offs, which publish no notice of their own, so an empty section says what this index holds, not what a company has won.",
   "laneCoverage": {
    "complete": true,
-   "window": null,
+   "window": {
+    "from": "2026-10-12",
+    "to": "2026-10-20",
+    "days": 8,
+    "run": "2026-10-20"
+   },
    "notes": [
-    "--offline: no notice feed fetched this run; open notices carried from the previous run."
+    "Find a Tender (tender stage): 0 digital lane notice(s) from 64 release(s) over 1 page(s)",
+    "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-12",
+    "Find a Tender (planning stage): 0 digital lane notice(s) from 33 release(s) over 1 page(s)",
+    "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-12"
    ]
   }
  },
  "counts": {
-  "companies": 42,
-  "awardRows": 58,
-  "unmatched": 127,
+  "companies": 43,
+  "awardRows": 59,
+  "unmatched": 130,
   "ambiguous": 0,
   "alreadyInMedicalFeed": 0
  },
@@ -650,6 +658,29 @@
     "noticeSupplierCount": 1,
     "company": "HealthRota",
     "matchedOn": "\"healthrota limited\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   }
+  ],
+  "Heidi Health": [
+   {
+    "title": "Ambient Voice Technology Interim Agreement",
+    "buyer": "The Shrewsbury and Telford Hospital NHS Trust",
+    "date": "2026-10-19",
+    "url": "https://www.find-tender.service.gov.uk/Notice/098627-2026",
+    "ocid": "ocds-h6vhtk-078b16",
+    "source": "Find a Tender",
+    "valueAmount": 111636.2,
+    "valueCurrency": "GBP",
+    "periodEnd": "2027-10-11",
+    "isFramework": false,
+    "digitalCpv": [
+     "48180000"
+    ],
+    "clinical": true,
+    "lane": "digital",
+    "noticeSupplierName": "Heidi Health Ltd",
+    "noticeSupplierCount": 1,
+    "company": "Heidi Health",
+    "matchedOn": "the notice names \"Heidi Health Ltd\", which normalises to \"heidi health\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ],
   "Henry Schein One UK": [
@@ -1362,6 +1393,66 @@
   ]
  },
  "unmatched": [
+  {
+   "title": "Rubrik Portfolio Renewal",
+   "buyer": "Hywel Dda University Health Board",
+   "date": "2026-10-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/098668-2026",
+   "ocid": "ocds-h6vhtk-078b2c",
+   "source": "Find a Tender",
+   "valueAmount": 2386529.2,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Softcat Plc",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"softcat\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Cyber Data Platform build FY26/27",
+   "buyer": "NHS England",
+   "date": "2026-10-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/098632-2026",
+   "ocid": "ocds-h6vhtk-078b18",
+   "source": "Find a Tender",
+   "valueAmount": 110500.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-09-30",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "ITHEALTH U.K. LTD",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"ithealth\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Engagement Platform",
+   "buyer": "NHS DEVON INTEGRATED CARE BOARD",
+   "date": "2026-10-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/098588-2026",
+   "ocid": "ocds-h6vhtk-078b00",
+   "source": "Find a Tender",
+   "valueAmount": 90833,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-09-30",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "GRANICUS-FIRMSTEP LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"granicus firmstep\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
   {
    "title": "Renewal of Licences",
    "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",

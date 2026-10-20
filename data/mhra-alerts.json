@@ -10,8 +10,8 @@
   "ref": "ETH-D9D253BB8",
   "contact": "contact@elevateandthrive.uk"
  },
- "dataAsOf": "18/10/2026",
- "generated": "2026-10-18",
+ "dataAsOf": "20/10/2026",
+ "generated": "2026-10-20",
  "source": "MHRA device safety alerts, gov.uk drug-device-alerts feed, Open Government Licence v3",
  "sourceUrl": "https://www.gov.uk/drug-device-alerts",
  "scopeRule": "Individual DSI-numbered Device Safety Information alerts and NatPSA-numbered National Patient Safety Alerts only. Medicines recalls/defect notices are drug batch issues, not devices, and are excluded. The weekly 'Field Safety Notices: X to Y' digest pages are NOT walked into their individual manufacturer notices in this version — that page lists many separate FSNs inside one body, a materially bigger parsing job than this file does. This is a stated coverage gap, not a claim of completeness.",
@@ -19,10 +19,10 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-10-10",
-   "to": "2026-10-18",
+   "from": "2026-10-12",
+   "to": "2026-10-20",
    "days": 8,
-   "run": "2026-10-18"
+   "run": "2026-10-20"
   },
   "note": "Alerts indexed from the two allowed alert types over the window listed. An absence here is a statement about this index, never about a supplier."
  },
@@ -32,8 +32,10 @@
    "device-safety-information": 10,
    "national-patient-safety": 2
   },
-  "withCompanyResolved": 4
+  "withCompanyResolved": 4,
+  "softwareAi": 0
  },
+ "softwareAiRule": "softwareAi is true when the alert's own title or description names software, firmware, an app, an algorithm, artificial intelligence (AI), machine learning, software as a medical device (SaMD), cyber security, an interface or a display error. It is a flag on the alert's own words, not a judgement about the device.",
  "alerts": [
   {
    "title": "Continuous renal replacement therapy (CRRT): Consider delayed administration of concurrent echinocandins, such as caspofungin, to reduce the risk of adsorption onto new polyacrylonitrile (PAN)-based filter membranes DSI/2026/014",
@@ -54,7 +56,8 @@
    "company": null,
    "companyMatch": "unresolved: Continuous renal replacement therapy (CRRT)",
    "description": "Continuous renal replacement therapy (CRRT) is used for managing severe acute kidney injury and fluid overload. Published evidence has shown that caspofungin can bind to polyacrylonitrile (PAN)-based membranes used in CRRT which may result in ineffective antifungal treatment.",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "Nova Biomedical StatStrip ketone test strips: risk of disruption to blood ketone testing due to quality-control failures and supply interruption DSI/2026/013",
@@ -71,7 +74,8 @@
    "company": "Nova Biomedical",
    "companyMatch": "resolved 'Nova Biomedical': \"nova biomedical\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped.",
    "description": "Nova Biomedical has identified quality issues affecting specified lots of StatStrip ketone test strips. The affected lots have been associated with quality-control (QC) failures and Nova Biomedical has initiated a recall, advising that these lots should not be used.",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "Radiofrequency (RF) Safety Considerations for Wireless Cardiotocography (CTG) Monitoring Systems (DSI/2026/012)",
@@ -86,7 +90,8 @@
    "company": null,
    "companyMatch": "unresolved: Radiofrequency (RF) Safety Considerations for Wireless Cardiotocography (CTG) Monitoring Systems",
    "description": "The MHRA has conducted a review into the use of wireless cardiotocography (CTG) systems that use radiofrequency (RF) telemetry channels. Signal crossover, erroneous CTG traces and signal dropouts have been identified as patient safety risks associated with these devices.",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "National Patient Safety Alert: Patient hoists and slings (all types): risk of death and serious harm from falls (NatPSA/2026/005/MHRA)",
@@ -110,7 +115,8 @@
    "company": null,
    "companyMatch": "unresolved: Patient hoists and slings (all types)",
    "description": "Fatal and serious harm continues to occur when patients fall from hoists or slings during transfers and repositioning. A review of recent incidents with a fatal outcome and wider surveillance data shows an average of two deaths per year since 2015.",
-   "play": "A National Patient Safety Alert — the more serious tier, with a mandated trust response and deadline. Check whether the affected trusts on your patch have logged their compliance yet; this is the kind of gap a rep can help close."
+   "play": "A National Patient Safety Alert — the more serious tier, with a mandated trust response and deadline. Check whether the affected trusts on your patch have logged their compliance yet; this is the kind of gap a rep can help close.",
+   "softwareAi": false
   },
   {
    "title": "Filters should be used during the administration of Parenteral Nutrition for patients in all care settings DSI/2026/011",
@@ -135,7 +141,8 @@
    "company": null,
    "companyMatch": "unresolved: Filters should be used during the administration of Parenteral Nutrition for patients in all care settings DSI/2026/011",
    "description": "Administration of parenteral nutrition without a filter has been associated with a number of adverse incidents including an embolism which resulted in a fatal outcome.",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "Cobalt-chrome modular neck hip replacements: risk of metal-wear effects and revision surgery (DSI/2026/010)",
@@ -150,7 +157,8 @@
    "company": null,
    "companyMatch": "unresolved: Cobalt-chrome modular neck hip replacements",
    "description": "An MHRA investigation has found increased risks of wear and corrosion associated with multiple cobalt-chrome (Co-Cr) modular neck hip stem components, including a potential increased occurrence of revision surgery due to adverse local tissue reaction (ALTR).",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "NGPod pH testing device: quarantine and dispose of all devices (DSI/2026/009)",
@@ -167,7 +175,8 @@
    "company": "NGPod Global Ltd",
    "companyMatch": "resolved 'NGPod': the notice names \"NGPod\", which normalises to \"ngpod\" — exactly the normalised form of this company's own name or a recorded alias.",
    "description": "The NGPod handheld device and NGPod sensor, used to test pH to aid the placement of nasogastric tubes, is being withdrawn from the UK market. The manufacturer has ceased trading in the UK. Users should quarantine all remaining stock and dispose of all NGPod devices.",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "Rectal catheters sold for personal use (gas and colic relievers): Do not use in infants, including for the treatment of colic, gas-related discomfort or constipation  (DSI/2026/008)",
@@ -183,7 +192,8 @@
    "company": null,
    "companyMatch": "unresolved: Rectal catheters sold for personal use (gas and colic relievers)",
    "description": "Do not use rectal catheters sold for personal use (gas and colic relievers) in infants, including for colic, gas-related discomfort or constipation. Stop using these products immediately and dispose of any unused devices.",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "National Patient Safety Alert: ResMed Astral 100 and 150 Ventilators: Potential for Patient Harm due to Unexpected Interruption of Ventilation Therapy (NatPSA/2026/004/MHRA)",
@@ -203,7 +213,8 @@
    "company": "ResMed",
    "companyMatch": "resolved 'ResMed': the notice names \"ResMed\", which normalises to \"resmed\" — exactly the normalised form of this company's own name or a recorded alias.",
    "description": "ResMed has issued a Field Safety Notice regarding Astral 100 and 150 ventilators and associated Printed Circuit Board Assembly spare parts manufactured prior to October 2024. A fault in the device can cause unexpected interruption of ventilation therapy.",
-   "play": "A National Patient Safety Alert — the more serious tier, with a mandated trust response and deadline. Check whether the affected trusts on your patch have logged their compliance yet; this is the kind of gap a rep can help close."
+   "play": "A National Patient Safety Alert — the more serious tier, with a mandated trust response and deadline. Check whether the affected trusts on your patch have logged their compliance yet; this is the kind of gap a rep can help close.",
+   "softwareAi": false
   },
   {
    "title": "Devices supplied without valid UKCA/CE conformity markings or certification: remove from use and place in quarantine  (DSI/2026/007)",
@@ -225,7 +236,8 @@
    "company": null,
    "companyMatch": "unresolved: Devices supplied without valid UKCA/CE conformity markings or certification",
    "description": "The MHRA has become aware of a number of medical devices being supplied on the UK market that do not comply with the requirements of the UK Medical Device Regulations 2002 (UK MDR 2002) or with the EU Medical Devices Regulation (EU) 2017/745 (EU MDR).",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "Belzer UW® Cold Storage Solution and Belzer MPS® (UW Machine Perfusion Solution): manufactured by Carnamedica (UKRP: Bridge to Life): Updated advice on the contamination of fluid DSI/2026/006 (update to DSI/2023/005)",
@@ -251,7 +263,8 @@
    "company": null,
    "companyMatch": "unresolved: Belzer UW® Cold Storage Solution and Belzer MPS® (UW Machine Perfusion Solution)",
    "description": "The MHRA is providing an update on defects previously identified with Belzer solutions for the preservation of donated organs.  This DSI replaces advice in DSI/2023/005.",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "Dräger Atlan Anaesthesia workstations: risk of ventilator failure (DSI/2026/005)",
@@ -268,7 +281,8 @@
    "company": "Draeger Medical UK",
    "companyMatch": "resolved 'Dräger': the notice names \"Dräger\", which normalises to \"dr ger\" — exactly the normalised form of this company's own name or a recorded alias.",
    "description": "In April 2026, Dräger issued a follow-up Field Safety Notice expanding the number of Atlan Anaesthesia workstation devices affected by a manufacturing defect that may result in mechanical ventilation failure.",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   }
  ],
  "_rows": [
@@ -291,7 +305,8 @@
    "company": null,
    "companyMatch": "unresolved: Continuous renal replacement therapy (CRRT)",
    "description": "Continuous renal replacement therapy (CRRT) is used for managing severe acute kidney injury and fluid overload. Published evidence has shown that caspofungin can bind to polyacrylonitrile (PAN)-based membranes used in CRRT which may result in ineffective antifungal treatment.",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "Nova Biomedical StatStrip ketone test strips: risk of disruption to blood ketone testing due to quality-control failures and supply interruption DSI/2026/013",
@@ -308,7 +323,8 @@
    "company": "Nova Biomedical",
    "companyMatch": "resolved 'Nova Biomedical': \"nova biomedical\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped.",
    "description": "Nova Biomedical has identified quality issues affecting specified lots of StatStrip ketone test strips. The affected lots have been associated with quality-control (QC) failures and Nova Biomedical has initiated a recall, advising that these lots should not be used.",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "Radiofrequency (RF) Safety Considerations for Wireless Cardiotocography (CTG) Monitoring Systems (DSI/2026/012)",
@@ -323,7 +339,8 @@
    "company": null,
    "companyMatch": "unresolved: Radiofrequency (RF) Safety Considerations for Wireless Cardiotocography (CTG) Monitoring Systems",
    "description": "The MHRA has conducted a review into the use of wireless cardiotocography (CTG) systems that use radiofrequency (RF) telemetry channels. Signal crossover, erroneous CTG traces and signal dropouts have been identified as patient safety risks associated with these devices.",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "National Patient Safety Alert: Patient hoists and slings (all types): risk of death and serious harm from falls (NatPSA/2026/005/MHRA)",
@@ -347,7 +364,8 @@
    "company": null,
    "companyMatch": "unresolved: Patient hoists and slings (all types)",
    "description": "Fatal and serious harm continues to occur when patients fall from hoists or slings during transfers and repositioning. A review of recent incidents with a fatal outcome and wider surveillance data shows an average of two deaths per year since 2015.",
-   "play": "A National Patient Safety Alert — the more serious tier, with a mandated trust response and deadline. Check whether the affected trusts on your patch have logged their compliance yet; this is the kind of gap a rep can help close."
+   "play": "A National Patient Safety Alert — the more serious tier, with a mandated trust response and deadline. Check whether the affected trusts on your patch have logged their compliance yet; this is the kind of gap a rep can help close.",
+   "softwareAi": false
   },
   {
    "title": "Filters should be used during the administration of Parenteral Nutrition for patients in all care settings DSI/2026/011",
@@ -372,7 +390,8 @@
    "company": null,
    "companyMatch": "unresolved: Filters should be used during the administration of Parenteral Nutrition for patients in all care settings DSI/2026/011",
    "description": "Administration of parenteral nutrition without a filter has been associated with a number of adverse incidents including an embolism which resulted in a fatal outcome.",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "Cobalt-chrome modular neck hip replacements: risk of metal-wear effects and revision surgery (DSI/2026/010)",
@@ -387,7 +406,8 @@
    "company": null,
    "companyMatch": "unresolved: Cobalt-chrome modular neck hip replacements",
    "description": "An MHRA investigation has found increased risks of wear and corrosion associated with multiple cobalt-chrome (Co-Cr) modular neck hip stem components, including a potential increased occurrence of revision surgery due to adverse local tissue reaction (ALTR).",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "NGPod pH testing device: quarantine and dispose of all devices (DSI/2026/009)",
@@ -404,7 +424,8 @@
    "company": "NGPod Global Ltd",
    "companyMatch": "resolved 'NGPod': the notice names \"NGPod\", which normalises to \"ngpod\" — exactly the normalised form of this company's own name or a recorded alias.",
    "description": "The NGPod handheld device and NGPod sensor, used to test pH to aid the placement of nasogastric tubes, is being withdrawn from the UK market. The manufacturer has ceased trading in the UK. Users should quarantine all remaining stock and dispose of all NGPod devices.",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "Rectal catheters sold for personal use (gas and colic relievers): Do not use in infants, including for the treatment of colic, gas-related discomfort or constipation  (DSI/2026/008)",
@@ -420,7 +441,8 @@
    "company": null,
    "companyMatch": "unresolved: Rectal catheters sold for personal use (gas and colic relievers)",
    "description": "Do not use rectal catheters sold for personal use (gas and colic relievers) in infants, including for colic, gas-related discomfort or constipation. Stop using these products immediately and dispose of any unused devices.",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "National Patient Safety Alert: ResMed Astral 100 and 150 Ventilators: Potential for Patient Harm due to Unexpected Interruption of Ventilation Therapy (NatPSA/2026/004/MHRA)",
@@ -440,7 +462,8 @@
    "company": "ResMed",
    "companyMatch": "resolved 'ResMed': the notice names \"ResMed\", which normalises to \"resmed\" — exactly the normalised form of this company's own name or a recorded alias.",
    "description": "ResMed has issued a Field Safety Notice regarding Astral 100 and 150 ventilators and associated Printed Circuit Board Assembly spare parts manufactured prior to October 2024. A fault in the device can cause unexpected interruption of ventilation therapy.",
-   "play": "A National Patient Safety Alert — the more serious tier, with a mandated trust response and deadline. Check whether the affected trusts on your patch have logged their compliance yet; this is the kind of gap a rep can help close."
+   "play": "A National Patient Safety Alert — the more serious tier, with a mandated trust response and deadline. Check whether the affected trusts on your patch have logged their compliance yet; this is the kind of gap a rep can help close.",
+   "softwareAi": false
   },
   {
    "title": "Devices supplied without valid UKCA/CE conformity markings or certification: remove from use and place in quarantine  (DSI/2026/007)",
@@ -462,7 +485,8 @@
    "company": null,
    "companyMatch": "unresolved: Devices supplied without valid UKCA/CE conformity markings or certification",
    "description": "The MHRA has become aware of a number of medical devices being supplied on the UK market that do not comply with the requirements of the UK Medical Device Regulations 2002 (UK MDR 2002) or with the EU Medical Devices Regulation (EU) 2017/745 (EU MDR).",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "Belzer UW® Cold Storage Solution and Belzer MPS® (UW Machine Perfusion Solution): manufactured by Carnamedica (UKRP: Bridge to Life): Updated advice on the contamination of fluid DSI/2026/006 (update to DSI/2023/005)",
@@ -488,7 +512,8 @@
    "company": null,
    "companyMatch": "unresolved: Belzer UW® Cold Storage Solution and Belzer MPS® (UW Machine Perfusion Solution)",
    "description": "The MHRA is providing an update on defects previously identified with Belzer solutions for the preservation of donated organs.  This DSI replaces advice in DSI/2023/005.",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   },
   {
    "title": "Dräger Atlan Anaesthesia workstations: risk of ventilator failure (DSI/2026/005)",
@@ -505,7 +530,8 @@
    "company": "Draeger Medical UK",
    "companyMatch": "resolved 'Dräger': the notice names \"Dräger\", which normalises to \"dr ger\" — exactly the normalised form of this company's own name or a recorded alias.",
    "description": "In April 2026, Dräger issued a follow-up Field Safety Notice expanding the number of Atlan Anaesthesia workstation devices affected by a manufacturing defect that may result in mechanical ventilation failure.",
-   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week."
+   "play": "An active MHRA device safety action. Check whether your accounts still hold or use this device — if it's yours, that's a proactive account-protection call; if it's a competitor's, this is a live switching conversation this week.",
+   "softwareAi": false
   }
  ],
  "windows": [
@@ -778,6 +804,12 @@
    "to": "2026-10-18",
    "days": 8,
    "run": "2026-10-18"
+  },
+  {
+   "from": "2026-10-12",
+   "to": "2026-10-20",
+   "days": 8,
+   "run": "2026-10-20"
   }
  ]
 }

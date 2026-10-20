@@ -192,5 +192,65 @@ class Build(unittest.TestCase):
             rdf.build(fake_fetch(fail=("find-tender",)), "2026-10-20")
 
 
+SBS_PAGE = """<html><body><main><h1>Digital Workplace Solutions 2</h1>
+<p>Framework Agreement Reference: SBS10510</p>
+<h3> What dates is the framework agreement active? </h3>
+<p>01 October 2025 \u2013 30 September 2028</p>
+<p>(with an option to extend for up to 12 months)</p>
+<h3> Who can take advantage of the framework agreement? </h3></main></body></html>"""
+
+SBS_PAGE_SHORT = """<html><body><main>
+<p>Framework Agreement Reference: SBS10225</p>
+<h3> What dates is the framework agreement active? </h3>
+<p>25 March 2024 \u2013 24 March 2028</p>
+<h3> Who can take advantage? </h3></main></body></html>"""
+
+OCDS_AWARD = {"releases": [{
+    "id": "074808-2025", "date": "2025-11-18T14:17:04Z", "tag": ["award", "contract"],
+    "buyer": {"name": "NHS Shared Business Services Limited"},
+    "tender": {"title": "Digital Workplace Solutions 2", "status": "complete",
+               "description": "Award.", "procurementMethodDetails": "Open procedure",
+               "lots": [{"id": "1"}]},
+    "awards": [{"relatedLots": ["1"], "suppliers": [{"name": "Zed Ltd"}, {"name": "Alpha plc"}]},
+               {"relatedLots": ["1"], "suppliers": [{"name": "Alpha plc"}]}],
+    "contracts": [{"value": {"amount": 2500000000, "currency": "GBP"}}]}]}
+
+
+class Extras(unittest.TestCase):
+    def test_sbs_page_dates_and_option(self):
+        p = rdf.parse_sbs_page(SBS_PAGE)
+        self.assertEqual((p["reference"], p["starts"], p["ends"]), ("SBS10510", "2025-10-01", "2028-09-30"))
+        self.assertEqual(p["option"], "with an option to extend for up to 12 months")
+        q = rdf.parse_sbs_page(SBS_PAGE_SHORT)
+        self.assertEqual((q["starts"], q["ends"], q["option"]), ("2024-03-25", "2028-03-24", None))
+
+    def test_award_suppliers_dedupe_names_only(self):
+        self.assertEqual(rdf.award_suppliers(OCDS_AWARD), {"1": ["Alpha plc", "Zed Ltd"]})
+
+    def test_award_entry(self):
+        def f(url):
+            if "074808-2025" in url:
+                return json.dumps(OCDS_AWARD)
+            return SBS_PAGE
+        e = rdf.build_award(f, "074808-2025", "Digital Workplace Solutions 2", "x", "2026-10-20",
+                            "digital-workplace-solutions")
+        self.assertEqual((e["status"], e["reference"], e["starts"], e["ends"]), ("live", "SBS10510", "2025-10-01", "2028-09-30"))
+        self.assertEqual(e["suppliers"], ["Alpha plc", "Zed Ltd"])
+        self.assertEqual(e["estimatedValue"]["amountExVat"], 2500000000)
+
+    def test_award_without_page_dates_says_not_verified(self):
+        e = rdf.build_award(lambda u: json.dumps(OCDS_AWARD), "074808-2025", "x", "y", "2026-10-20")
+        self.assertIsNone(e["starts"])
+        self.assertTrue(any("not stated" in n for n in e["notVerified"]))
+
+    def test_unreadable_extra_is_listed_not_guessed(self):
+        def f(url):
+            raise RuntimeError("boom")
+        entries, not_added = rdf.build_extras(f, "2026-10-20")
+        self.assertEqual(entries, [])
+        self.assertEqual(len(not_added), 6)
+        self.assertTrue(all("Nothing recorded" in n["reason"] for n in not_added))
+
+
 if __name__ == "__main__":
     unittest.main()
