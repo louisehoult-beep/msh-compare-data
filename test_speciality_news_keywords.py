@@ -178,6 +178,46 @@ class RealHeadlines(unittest.TestCase):
                          slugs_for("Intensive care admissions fall", "Newborn admissions halved."))
 
 
+
+class DigitalHealthWidening(unittest.TestCase):
+    """The digital rule widened 20/10/2026 (Hub health tech intelligence gap,
+    build plan "This week"): DTAC, DCB0129, DCB0160, SaMD, virtual ward, remote
+    monitoring, G-Cloud, ambient voice, Federated Data Platform. Headlines are
+    real notice and news titles already held in this repo's data files on
+    20/10/2026 (framework-awards, company-awards, company-press, board papers)."""
+
+    DIGITAL = "digital-and-medical-it"
+    ROUTES = [
+        "DTAC Standard Harmonisation for Medical Device Regulation",
+        "X-on Health and TORTUS AI confirmed for NHS England ambient voice tech registry",
+        "NHS England wants evidence from ambient voice deployments before wider rollout",
+        "The Provision of Virtual Wards for NHS NW London ICB",
+        "HomeLink Healthcare NNUH Virtual Ward Service",
+        "Provision of Remote Patient Monitoring",
+        "1725 Remote Monitoring for NHS Lincolnshire Integrated Care Board",
+        "Barts Health continues to roll out ambient voice technology",
+    ]
+
+    def test_new_terms_route_to_digital(self):
+        for t in self.ROUTES:
+            with self.subTest(t=t):
+                self.assertIn(self.DIGITAL, slugs_for(t))
+
+    def test_each_named_term_compiles_and_matches(self):
+        # One synthetic phrase per term, so a term that silently stops matching
+        # (a typo in the JSON escape) fails here rather than emptying the panel.
+        for t in ["Suppliers face new DTAC form", "DCB0129 review opens", "DCB 0160 review opens",
+                  "MHRA guidance on SaMD", "Software as a medical device rules change",
+                  "G-Cloud 15 goes live", "FDP reaches more trusts",
+                  "Federated Data Platform rollout continues"]:
+            with self.subTest(t=t):
+                self.assertIn(self.DIGITAL, slugs_for(t))
+
+    def test_case_scoped_acronyms_stay_case_scoped(self):
+        # "samd" or "dtac" in lower case is not the acronym.
+        self.assertNotIn(self.DIGITAL, slugs_for("Samd and dtac are not acronyms here"))
+
+
 def _item(title, days_ago=1, link=None, **kw):
     when = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=days_ago)
     it = {"title": title, "link": link or "https://example.com/%s" % abs(hash(title)),

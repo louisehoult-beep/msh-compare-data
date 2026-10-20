@@ -190,10 +190,16 @@ def cf_guid(release_id):
     return re.sub(r"-\d+$", "", release_id or "")
 
 
-def row_from_release(rel, source, today_iso):
+def row_from_release(rel, source, today_iso, keep=None):
+    """keep(tender, title, buyer) -> bool overrides the medical rule. Only the
+    digital lane (scripts/refresh_digital_lane.py) passes one; this file's own
+    output always uses relevant() unchanged."""
     tender = rel.get("tender") or {}
     title = (tender.get("title") or "").strip()
-    if not relevant(tender, title):
+    if keep is None:
+        if not relevant(tender, title):
+            return None
+    elif not keep(tender, title, ((rel.get("buyer") or {}).get("name") or "").strip()):
         return None
     status = (tender.get("status") or "").strip().lower()
     if status not in OPEN_STATUSES:
@@ -236,7 +242,7 @@ def row_from_release(rel, source, today_iso):
     }
 
 
-def fetch_fts(days, today_iso, max_pages=MAX_PAGES, stage="tender"):
+def fetch_fts(days, today_iso, max_pages=MAX_PAGES, stage="tender", keep=None):
     """One pass over ONE OCDS stage.
 
     Called once per stage (see fetch_fts_all). The two statutory feeds disagree
@@ -262,7 +268,7 @@ def fetch_fts(days, today_iso, max_pages=MAX_PAGES, stage="tender"):
         releases = data.get("releases", [])
         scanned += len(releases)
         for rel in releases:
-            row = row_from_release(rel, "Find a Tender", today_iso)
+            row = row_from_release(rel, "Find a Tender", today_iso, keep)
             if row:
                 rows.append(row)
         pages += 1
@@ -279,7 +285,7 @@ def fetch_fts(days, today_iso, max_pages=MAX_PAGES, stage="tender"):
     return rows, note, complete
 
 
-def fetch_cf(days, today_iso, max_pages=CF_MAX_PAGES, stage="tender"):
+def fetch_cf(days, today_iso, max_pages=CF_MAX_PAGES, stage="tender", keep=None):
     """One pass over ONE OCDS stage — see fetch_fts's docstring for why."""
     cutoff = (dt.date.today() - dt.timedelta(days=days)).isoformat()
     url = "%s?size=100&stages=%s" % (CF_API, stage)
@@ -297,7 +303,7 @@ def fetch_cf(days, today_iso, max_pages=CF_MAX_PAGES, stage="tender"):
             if rdate and rdate < cutoff:
                 reached = True
                 continue
-            row = row_from_release(rel, "Contracts Finder", today_iso)
+            row = row_from_release(rel, "Contracts Finder", today_iso, keep)
             if row:
                 rows.append(row)
         if reached:

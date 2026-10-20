@@ -74,6 +74,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 # nhs.net address. This repo is public, so the address is withheld at capture
 # (29/09/2026); the role and organisation stay, and the notice URL is kept.
 from redact_personal import redact_text
+import digital_lane_rules
 OUT = os.path.join(DATA, "atamis-opportunities.json")
 OUT_LIVE = os.path.join(DATA, "atamis-opportunities-live.json")
 
@@ -89,7 +90,8 @@ EXPECTED_HEADER = [
 # (root CLAUDE.md rule 14).
 PRE_MARKET_RE = re.compile(
     r"\b(market engagement|pre-?engagement|expression of interest|\bEOI\b|"
-    r"soft market|market sounding|prior information|request for information|\bRFI\b)\b",
+    r"soft market|market sounding|prior information|request for information|\bRFI\b|"
+    r"(?-i:PME))\b",
     re.I,
 )
 FURTHER_COMP_RE = re.compile(
@@ -136,14 +138,23 @@ def parse_uk_date(v: str) -> str | None:
         return None
 
 
-def classify(name: str, desc: str, route: str = "") -> list[str]:
-    """Label an opportunity. A record can carry more than one label."""
+def classify(name: str, desc: str, route: str = "", category: str = "") -> list[str]:
+    """Label an opportunity. A record can carry more than one label.
+
+    digital (20/10/2026): Atamis carries no CPV code, so its own Category text
+    stands in for CPV 48/72, or the title names a clinical digital system. The
+    rule lives in scripts/digital_lane_rules.py, shared with the digital lane
+    (data/digital-lane.json). digital_clinical marks the title test alone."""
     blob = " ".join([name or "", desc or "", route or ""])
     labels = []
     if PRE_MARKET_RE.search(blob):
         labels.append("pre_market_engagement")
     if FURTHER_COMP_RE.search(blob):
         labels.append("framework_further_competition")
+    if digital_lane_rules.digital_category(category) or digital_lane_rules.clinical(name):
+        labels.append("digital")
+    if digital_lane_rules.clinical(name):
+        labels.append("digital_clinical")
     return labels
 
 
@@ -231,7 +242,7 @@ def main() -> int:
         raw_desc = r.get("Description", "").strip()[:1200]
         desc = redact_text(raw_desc, published_by=authority or None)
         route = r.get("Procurement Route", "").strip()
-        labels = classify(name, redact_text(raw_desc), route)
+        labels = classify(name, redact_text(raw_desc), route, r.get("Category", "").strip())
         rec = {
             "ref": ref,
             "name": name,
@@ -311,7 +322,13 @@ def main() -> int:
             "prior information, request for information or RFI. "
             "framework_further_competition: the title, description or Procurement Route "
             "matches further competition, mini-competition, call-off or framework "
-            "mini/further. A record may carry both labels or neither. Procurement "
+            "mini/further. digital: the Atamis Category is a software, information "
+            "systems or IT services category (the stand-in for CPV 48/72, since Atamis "
+            "carries no CPV), or the title names a clinical digital system; "
+            "digital_clinical: the title test alone. Both rules are in "
+            "scripts/digital_lane_rules.py. PME (pre-market engagement) counts as "
+            "pre_market_engagement from 20/10/2026. "
+            "A record may carry several labels or none. Procurement "
             "Route is the unnamed ninth CSV column, recovered by this script."
         ),
         "counts": {

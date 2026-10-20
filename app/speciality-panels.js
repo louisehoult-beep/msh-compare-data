@@ -208,6 +208,59 @@
     }
     h += '</div>';
 
+    /* DIGITAL BUYING SIGNALS (20/10/2026) — the digital page only. NHS-buyer notices
+       with a software or IT services Common Procurement Vocabulary (CPV) code, from
+       data/digital-lane.json, clinical rows only; the builder chooses the rows, this
+       only draws them. Absent on every other speciality. */
+    if (d.digitalLane) {
+      var dl = d.digitalLane, dc = dl.counts || {};
+      var dlRow = function (title, url, who, when) {
+        return '<tr><td>' + (url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(title) + '</a>' : esc(title)) +
+               '</td><td>' + esc(who || '') + '</td><td>' + esc(when || 'not stated') + '</td></tr>';
+      };
+      h += '<div class="sp-sec"><h3 class="sub-h3">Digital buying signals</h3>';
+      h += '<p style="font-size:13px;line-height:1.6;margin:0 0 4px;">NHS buyers\' software and IT notices, narrowed to the ones that name a clinical system or a regulated digital product. Payroll, finance and office software is held in the lane but not shown.</p>';
+      h += '<div class="sp-li-g">Open now</div>';
+      if (!dl.openNotices.length) {
+        h += '<div class="empty-state">No clinical digital notice from an NHS buyer is open for bidding today. ' + n(dc.openNotices || 0) + ' NHS software or IT notice(s) are open, none naming a clinical system. Checked against the live feeds, not left blank.</div>';
+      } else {
+        h += '<div class="sp-scroll"><table class="sp-tbl"><tr><th>Notice</th><th>Buyer</th><th>Closes</th></tr>';
+        for (i = 0; i < dl.openNotices.length; i++) { var on = dl.openNotices[i]; h += dlRow(on.title, on.url, on.buyer, on.closingDate ? on.closingDate.slice(0, 10) : ''); }
+        h += '</table></div>';
+      }
+      h += '<div class="sp-li-g">Market engagement and further competitions</div>';
+      if (!dl.marketEngagement.length) {
+        h += '<div class="empty-state">No clinical digital market engagement or further competition is open on the NHS eCommercial system today. ' + n(dc.marketEngagement || 0) + ' software or IT row(s) are open there, none naming a clinical system.</div>';
+      } else {
+        h += '<div class="sp-scroll"><table class="sp-tbl"><tr><th>Opportunity</th><th>Authority</th><th>Responses by</th></tr>';
+        for (i = 0; i < dl.marketEngagement.length; i++) { var me = dl.marketEngagement[i]; h += dlRow(me.title, me.url, me.authority, me.deadline); }
+        h += '</table></div>';
+      }
+      h += '<div class="sp-li-g">Recent clinical digital notices and awards</div>';
+      if (!dl.awards.length) {
+        h += '<div class="empty-state">No clinical digital notice from an NHS buyer is held yet.</div>';
+      } else {
+        h += '<div class="sp-scroll"><table class="sp-tbl"><tr><th>Notice</th><th>Buyer</th><th>Published</th></tr>';
+        for (i = 0; i < dl.awards.length; i++) {
+          var aw = dl.awards[i];
+          h += dlRow(aw.title + (aw.stage && aw.stage !== 'award' ? ' (' + aw.stage + ')' : ''), aw.url,
+                     aw.buyer + (aw.suppliers && aw.suppliers.length ? ' \u2192 ' + aw.suppliers.slice(0, 3).join(', ') + (aw.suppliers.length > 3 ? ' and ' + (aw.suppliers.length - 3) + ' more' : '') : ''),
+                     aw.published);
+        }
+        h += '</table></div>';
+        h += '<div class="sp-meta">' + n(dl.awards.length) + ' most recent of ' + n(dl.awardsClinicalTotal) + ' clinical rows, out of ' + n(dc.awards || 0) + ' NHS software and IT notices held.</div>';
+      }
+      if (dl.fdp && dl.fdp.headline) {
+        var fh = dl.fdp.headline;
+        h += '<div class="sp-li-g">NHS Federated Data Platform</div>';
+        h += '<p style="font-size:13px;line-height:1.6;margin:0;">' + n(fh.trustsLive) + ' NHS trusts and ' + n(fh.icbsLive) + ' integrated care boards (ICBs) live; ' +
+             n(fh.trustsSignedUp) + ' trusts signed up, as at ' + esc(dl.fdp.sourceAsAt || 'not stated') + '. NHS England updated these figures on ' + esc(dl.fdp.sourceUpdatedOn || 'a date not stated') +
+             (dl.fdp.sourceNextUpdate ? ', next update ' + esc(dl.fdp.sourceNextUpdate) : '') + '. ' +
+             (dl.fdp.url ? '<a href="' + esc(dl.fdp.url) + '" target="_blank" rel="noopener">NHS England\'s list of live organisations</a>.' : '') + '</p>';
+      }
+      h += '</div>';
+    }
+
     /* LOCAL CONTRACTS, FORMULARIES AND POLICY — hand-curated from primary sources in
        data/speciality-local-intel.json. Every item names its source and the date it
        was read; an item whose link check found the source gone is withheld by the
@@ -451,7 +504,7 @@
          ' &middot; Drug Tariff as at ' + esc(d.dataAsOf.drugTariff || 'not stated') +
          (d.dataAsOf.gpPrescribing ? ' &middot; GP prescribing built ' + esc(d.dataAsOf.gpPrescribing) : '') +
          (d.dataAsOf.mhraDsu ? ' &middot; MHRA as at ' + esc(d.dataAsOf.mhraDsu) : '') + '.</div>';
-    h += ruleBlock(d.rules, ['frameworks', 'awards', 'openTenders', 'drugTariff', 'drugTariffMoves', 'discontinuedOnFormulary', 'drugTariffViiia', 'gpPrescribing', 'mhraDsu', 'localIntel']);
+    h += ruleBlock(d.rules, ['frameworks', 'awards', 'openTenders', 'digitalLane', 'drugTariff', 'drugTariffMoves', 'discontinuedOnFormulary', 'drugTariffViiia', 'gpPrescribing', 'mhraDsu', 'localIntel']);
     FW.innerHTML = h;
   }
 

@@ -1,0 +1,1897 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "ref": "ETH-D20F5DF46",
+  "contact": "contact@elevateandthrive.uk"
+ },
+ "generated": "2026-10-20",
+ "dataAsOf": "20/10/2026",
+ "source": "NHS England, NHS Federated Data Platform uptake and benefits, Open Government Licence v3",
+ "sourceUrls": {
+  "uptake": "https://www.england.nhs.uk/digitaltechnology/nhs-federated-data-platform/impact/fdp-uptake-and-benefits/",
+  "live": "https://www.england.nhs.uk/digitaltechnology/nhs-federated-data-platform/impact/fdp-uptake-and-benefits/nhs-trusts-live-with-nhs-fdp/",
+  "signUp": "https://www.england.nhs.uk/digitaltechnology/nhs-federated-data-platform/impact/fdp-uptake-and-benefits/sign-up/"
+ },
+ "sourceUpdatedOn": "25 September 2026",
+ "sourceAsAt": "end of August 2026",
+ "sourceNextUpdate": "December 2026",
+ "rule": "fdpLive: the trust's name appears on NHS England's list of NHS trusts live with the NHS Federated Data Platform. fdpSignedUp: it appears on the list of organisations that have signed a Memorandum of Understanding (MOU) to join. Names are joined to data/trust-map.json (NHS ODS) by exact match after normalising case, apostrophes and '&'; nothing is fuzzy matched, and a name that does not join is listed under unmatched (most are trusts renamed or merged since NHS England wrote the list; joining them needs the ODS successor record, so they are left unjoined). false means 'not on the list on the date read', a statement about the list and not about the trust.",
+ "headline": {
+  "trustsLive": 142,
+  "icbsLive": 35,
+  "trustsSignedUp": 170,
+  "icbsSignedUp": 35
+ },
+ "countCheck": [
+  {
+   "list": "trustsLive",
+   "listed": 142,
+   "headline": 142,
+   "agrees": true
+  },
+  {
+   "list": "icbsLive",
+   "listed": 35,
+   "headline": 35,
+   "agrees": true
+  },
+  {
+   "list": "trustsSignedUp",
+   "listed": 170,
+   "headline": 170,
+   "agrees": true
+  },
+  {
+   "list": "icbsSignedUp",
+   "listed": 35,
+   "headline": 35,
+   "agrees": true
+  }
+ ],
+ "counts": {
+  "trustsInMap": 205,
+  "trustsLiveJoined": 136,
+  "trustsSignedUpJoined": 159,
+  "unmatched": 12,
+  "icbsLive": 35
+ },
+ "unmatched": [
+  "East and North Hertfordshire NHS Trust",
+  "Epsom and St Helier University NHS Foundation Trust",
+  "Kent And Medway NHS and Social Care Partnership Trust",
+  "Kingston Hospital NHS Foundation Trust",
+  "Midlands Partnership NHS Foundation Trust",
+  "Norfolk Community Health and Care NHS Trust",
+  "North Bristol NHS Trust",
+  "Portsmouth Hospitals University National Health Service Trust",
+  "Royal Surrey County Hospital NHS Foundation Trust",
+  "United Lincolnshire Hospitals NHS Trust",
+  "University Hospitals Bristol and Weston NHS Foundation Trust",
+  "Wrightington, Wigan and Leigh NHS Foundation Trust"
+ ],
+ "trusts": [
+  {
+   "code": "RCF",
+   "name": "Airedale NHS Foundation Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RBS",
+   "name": "Alder Hey Children's NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RTK",
+   "name": "Ashford and St Peter's Hospitals NHS Foundation Trust",
+   "icb": "S9B9J",
+   "icbName": "Surrey and Sussex",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RVN",
+   "name": "Avon and Wiltshire Mental Health Partnership NHS Trust",
+   "icb": "QUY",
+   "icbName": "Bristol, North Somerset and South Gloucestershire",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RF4",
+   "name": "Barking, Havering and Redbridge University Hospitals NHS Trust",
+   "icb": "QMF",
+   "icbName": "North East London",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RFF",
+   "name": "Barnsley Hospital NHS Foundation Trust",
+   "icb": "QF7",
+   "icbName": "South Yorkshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "R1H",
+   "name": "Barts Health NHS Trust",
+   "icb": "QMF",
+   "icbName": "North East London",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RC9",
+   "name": "Bedfordshire Hospitals NHS Foundation Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RWX",
+   "name": "Berkshire Healthcare NHS Foundation Trust",
+   "icb": "S0E4D",
+   "icbName": "Thames Valley",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RYW",
+   "name": "Birmingham Community Healthcare NHS Foundation Trust",
+   "icb": "QHL",
+   "icbName": "Birmingham and Solihull",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RQ3",
+   "name": "Birmingham Women's and Children's NHS Foundation Trust",
+   "icb": "QHL",
+   "icbName": "Birmingham and Solihull",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RXT",
+   "name": "Birmingham and Solihull Mental Health NHS Foundation Trust",
+   "icb": "QHL",
+   "icbName": "Birmingham and Solihull",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "TAJ",
+   "name": "Black Country Healthcare NHS Foundation Trust",
+   "icb": "QUA",
+   "icbName": "Black Country",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RXL",
+   "name": "Blackpool Teaching Hospitals NHS Foundation Trust",
+   "icb": "QE1",
+   "icbName": "Lancashire and South Cumbria",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RMC",
+   "name": "Bolton NHS Foundation Trust",
+   "icb": "QOP",
+   "icbName": "Greater Manchester",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "TAD",
+   "name": "Bradford District Care NHS Foundation Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RAE",
+   "name": "Bradford Teaching Hospitals NHS Foundation Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RA7",
+   "name": "Bristol NHS Foundation Trust",
+   "icb": "QUY",
+   "icbName": "Bristol, North Somerset and South Gloucestershire",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RXQ",
+   "name": "Buckinghamshire Healthcare NHS Trust",
+   "icb": "S0E4D",
+   "icbName": "Thames Valley",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RWY",
+   "name": "Calderdale and Huddersfield NHS Foundation Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RGT",
+   "name": "Cambridge University Hospitals NHS Foundation Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RT1",
+   "name": "Cambridgeshire and Peterborough NHS Foundation Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RYX",
+   "name": "Central London Community Healthcare NHS Trust",
+   "icb": "QWE",
+   "icbName": "South West London",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RV3",
+   "name": "Central and North West London NHS Foundation Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RQM",
+   "name": "Chelsea and Westminster Hospital NHS Foundation Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RXA",
+   "name": "Cheshire and Wirral Partnership NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RFS",
+   "name": "Chesterfield Royal Hospital NHS Foundation Trust",
+   "icb": "QJ2",
+   "icbName": "Derby and Derbyshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RJ8",
+   "name": "Cornwall Partnership NHS Foundation Trust",
+   "icb": "QT6",
+   "icbName": "Cornwall and The Isles of Scilly",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RJR",
+   "name": "Countess of Chester Hospital NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RXP",
+   "name": "County Durham and Darlington NHS Foundation Trust",
+   "icb": "QHM",
+   "icbName": "North East and North Cumbria",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RYG",
+   "name": "Coventry and Warwickshire Partnership NHS Trust",
+   "icb": "QWU",
+   "icbName": "Coventry and Warwickshire",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RJ6",
+   "name": "Croydon Health Services NHS Trust",
+   "icb": "QWE",
+   "icbName": "South West London",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RX4",
+   "name": "Cumbria, Northumberland, Tyne and Wear NHS Foundation Trust",
+   "icb": "QHM",
+   "icbName": "North East and North Cumbria",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RN7",
+   "name": "Dartford and Gravesham NHS Trust",
+   "icb": "QKS",
+   "icbName": "Kent and Medway",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RY8",
+   "name": "Derbyshire Community Health Services NHS Foundation Trust",
+   "icb": "QJ2",
+   "icbName": "Derby and Derbyshire",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RXM",
+   "name": "Derbyshire Healthcare NHS Foundation Trust",
+   "icb": "QJ2",
+   "icbName": "Derby and Derbyshire",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RWV",
+   "name": "Devon Partnership NHS Trust",
+   "icb": "QJK",
+   "icbName": "Devon",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RP5",
+   "name": "Doncaster and Bassetlaw Teaching Hospitals NHS Foundation Trust",
+   "icb": "QF7",
+   "icbName": "South Yorkshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RBD",
+   "name": "Dorset County Hospital NHS Foundation Trust",
+   "icb": "QVV",
+   "icbName": "Dorset",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RDY",
+   "name": "Dorset Healthcare University NHS Foundation Trust",
+   "icb": "QVV",
+   "icbName": "Dorset",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RJN",
+   "name": "East Cheshire NHS Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RVV",
+   "name": "East Kent Hospitals University NHS Foundation Trust",
+   "icb": "QKS",
+   "icbName": "Kent and Medway",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RXR",
+   "name": "East Lancashire Hospitals NHS Trust",
+   "icb": "QE1",
+   "icbName": "Lancashire and South Cumbria",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RWK",
+   "name": "East London NHS Foundation Trust",
+   "icb": "QMF",
+   "icbName": "North East London",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RX9",
+   "name": "East Midlands Ambulance Service NHS Trust",
+   "icb": "QOQ",
+   "icbName": "Humber and North Yorkshire",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RDE",
+   "name": "East Suffolk and North Essex NHS Foundation Trust",
+   "icb": "T6Y0W",
+   "icbName": "Norfolk and Suffolk",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RXC",
+   "name": "East Sussex Healthcare NHS Trust",
+   "icb": "S9B9J",
+   "icbName": "Surrey and Sussex",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RWH",
+   "name": "East and North Hertfordshire Teaching NHS Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RYC",
+   "name": "East of England Ambulance Service NHS Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RY3",
+   "name": "East of England Community Health and Care NHS Trust",
+   "icb": "T6Y0W",
+   "icbName": "Norfolk and Suffolk",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RVR",
+   "name": "Epsom and St Helier University Hospitals NHS Trust",
+   "icb": "QWE",
+   "icbName": "South West London",
+   "fdpLive": true,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "R1L",
+   "name": "Essex Partnership University NHS Foundation Trust",
+   "icb": "D7T5G",
+   "icbName": "Essex",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RDU",
+   "name": "Frimley Health NHS Foundation Trust",
+   "icb": "S0E4D",
+   "icbName": "Thames Valley",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RR7",
+   "name": "Gateshead Health NHS Foundation Trust",
+   "icb": "QHM",
+   "icbName": "North East and North Cumbria",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RLT",
+   "name": "George Eliot Hospital NHS Trust",
+   "icb": "QWU",
+   "icbName": "Coventry and Warwickshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RTQ",
+   "name": "Gloucestershire Health and Care NHS Foundation Trust",
+   "icb": "QR1",
+   "icbName": "Gloucestershire",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RTE",
+   "name": "Gloucestershire Hospitals NHS Foundation Trust",
+   "icb": "QR1",
+   "icbName": "Gloucestershire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RP4",
+   "name": "Great Ormond Street Hospital For Children NHS Foundation Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RN3",
+   "name": "Great Western Hospitals NHS Foundation Trust",
+   "icb": "QOX",
+   "icbName": "Bath and North East Somerset, Swindon and Wiltshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RXV",
+   "name": "Greater Manchester Mental Health NHS Foundation Trust",
+   "icb": "QOP",
+   "icbName": "Greater Manchester",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RJ1",
+   "name": "Guy's and St Thomas' NHS Foundation Trust",
+   "icb": "QKK",
+   "icbName": "South East London",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RN5",
+   "name": "Hampshire Hospitals NHS Foundation Trust",
+   "icb": "QRL",
+   "icbName": "Hampshire and Isle of Wight",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RW1",
+   "name": "Hampshire and Isle of Wight Healthcare NHS Foundation Trust",
+   "icb": "QRL",
+   "icbName": "Hampshire and Isle of Wight",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RCD",
+   "name": "Harrogate and District NHS Foundation Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "R1A",
+   "name": "Herefordshire and Worcestershire Health and Care NHS Trust",
+   "icb": "QGH",
+   "icbName": "Herefordshire and Worcestershire",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RY4",
+   "name": "Hertfordshire Community NHS Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RWR",
+   "name": "Hertfordshire Partnership University NHS Foundation Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RQX",
+   "name": "Homerton Healthcare NHS Foundation Trust",
+   "icb": "QMF",
+   "icbName": "North East London",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RWA",
+   "name": "Hull University Teaching Hospitals NHS Trust",
+   "icb": "QOQ",
+   "icbName": "Humber and North Yorkshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RV9",
+   "name": "Humber Teaching NHS Foundation Trust",
+   "icb": "QOQ",
+   "icbName": "Humber and North Yorkshire",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RYJ",
+   "name": "Imperial College Healthcare NHS Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "R1F",
+   "name": "Isle of Wight NHS Trust",
+   "icb": "QRL",
+   "icbName": "Hampshire and Isle of Wight",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RGP",
+   "name": "James Paget University Hospitals NHS Foundation Trust",
+   "icb": "T6Y0W",
+   "icbName": "Norfolk and Suffolk",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RYY",
+   "name": "Kent Community Health NHS Foundation Trust",
+   "icb": "QKS",
+   "icbName": "Kent and Medway",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RXY",
+   "name": "Kent and Medway Mental Health NHS Trust",
+   "icb": "QKS",
+   "icbName": "Kent and Medway",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RNQ",
+   "name": "Kettering General Hospital NHS Foundation Trust",
+   "icb": "QPM",
+   "icbName": "Northamptonshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RJZ",
+   "name": "King's College Hospital NHS Foundation Trust",
+   "icb": "QKK",
+   "icbName": "South East London",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RAX",
+   "name": "Kingston and Richmond NHS Foundation Trust",
+   "icb": "QWE",
+   "icbName": "South West London",
+   "fdpLive": true,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RW5",
+   "name": "Lancashire & South Cumbria NHS Foundation Trust",
+   "icb": "QE1",
+   "icbName": "Lancashire and South Cumbria",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RXN",
+   "name": "Lancashire Teaching Hospitals NHS Foundation Trust",
+   "icb": "QE1",
+   "icbName": "Lancashire and South Cumbria",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RY6",
+   "name": "Leeds Community Healthcare NHS Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RR8",
+   "name": "Leeds Teaching Hospitals NHS Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RGD",
+   "name": "Leeds and York Partnership NHS Foundation Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RT5",
+   "name": "Leicestershire Partnership NHS Trust",
+   "icb": "QK1",
+   "icbName": "Leicester, Leicestershire and Rutland",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RJ2",
+   "name": "Lewisham and Greenwich NHS Trust",
+   "icb": "QKK",
+   "icbName": "South East London",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RY5",
+   "name": "Lincolnshire Community Health Services NHS Trust",
+   "icb": "QJM",
+   "icbName": "Lincolnshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RP7",
+   "name": "Lincolnshire Partnership NHS Foundation Trust",
+   "icb": "QJM",
+   "icbName": "Lincolnshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RBQ",
+   "name": "Liverpool Heart and Chest Hospital NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "REM",
+   "name": "Liverpool University Hospitals NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "REP",
+   "name": "Liverpool Women's NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RRU",
+   "name": "London Ambulance Service NHS Trust",
+   "icb": "QKK",
+   "icbName": "South East London",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "R1K",
+   "name": "London North West University Healthcare NHS Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RWF",
+   "name": "Maidstone and Tunbridge Wells NHS Trust",
+   "icb": "QKS",
+   "icbName": "Kent and Medway",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "R0A",
+   "name": "Manchester University NHS Foundation Trust",
+   "icb": "QOP",
+   "icbName": "Greater Manchester",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RPA",
+   "name": "Medway NHS Foundation Trust",
+   "icb": "QKS",
+   "icbName": "Kent and Medway",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RW4",
+   "name": "Mersey Care NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RBN",
+   "name": "Mersey and West Lancashire Teaching Hospitals NHS Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RBT",
+   "name": "Mid Cheshire Hospitals NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RXF",
+   "name": "Mid Yorkshire Teaching NHS Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RAJ",
+   "name": "Mid and South Essex NHS Foundation Trust",
+   "icb": "D7T5G",
+   "icbName": "Essex",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RRE",
+   "name": "Midlands Partnership University NHS Foundation Trust",
+   "icb": "QNC",
+   "icbName": "Staffordshire and Stoke-on-Trent",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RD8",
+   "name": "Milton Keynes University Hospital NHS Foundation Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RP6",
+   "name": "Moorfields Eye Hospital NHS Foundation Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RM1",
+   "name": "Norfolk and Norwich University Hospitals NHS Foundation Trust",
+   "icb": "T6Y0W",
+   "icbName": "Norfolk and Suffolk",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RMY",
+   "name": "Norfolk and Suffolk NHS Foundation Trust",
+   "icb": "T6Y0W",
+   "icbName": "Norfolk and Suffolk",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RWW",
+   "name": "North Cheshire and Mersey NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RNN",
+   "name": "North Cumbria Integrated Care NHS Foundation Trust",
+   "icb": "QHM",
+   "icbName": "North East and North Cumbria",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RX6",
+   "name": "North East Ambulance Service NHS Foundation Trust",
+   "icb": "QHM",
+   "icbName": "North East and North Cumbria",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RAT",
+   "name": "North East London NHS Foundation Trust",
+   "icb": "QMF",
+   "icbName": "North East London",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "G6V2S",
+   "name": "North London NHS Foundation Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RLY",
+   "name": "North Staffordshire Combined Healthcare NHS Trust",
+   "icb": "QNC",
+   "icbName": "Staffordshire and Stoke-on-Trent",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RVW",
+   "name": "North Tees and Hartlepool NHS Foundation Trust",
+   "icb": "QHM",
+   "icbName": "North East and North Cumbria",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RX7",
+   "name": "North West Ambulance Service NHS Trust",
+   "icb": "QE1",
+   "icbName": "Lancashire and South Cumbria",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RGN",
+   "name": "North West Anglia NHS Foundation Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RNS",
+   "name": "Northampton General Hospital NHS Trust",
+   "icb": "QPM",
+   "icbName": "Northamptonshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RP1",
+   "name": "Northamptonshire Healthcare NHS Foundation Trust",
+   "icb": "QPM",
+   "icbName": "Northamptonshire",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RM3",
+   "name": "Northern Care Alliance NHS Foundation Trust",
+   "icb": "QOP",
+   "icbName": "Greater Manchester",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RJL",
+   "name": "Northern Lincolnshire and Goole NHS Foundation Trust",
+   "icb": "QOQ",
+   "icbName": "Humber and North Yorkshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RTF",
+   "name": "Northumbria Healthcare NHS Foundation Trust",
+   "icb": "QHM",
+   "icbName": "North East and North Cumbria",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RX1",
+   "name": "Nottingham University Hospitals NHS Trust",
+   "icb": "QT1",
+   "icbName": "Nottingham and Nottinghamshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RHA",
+   "name": "Nottinghamshire Healthcare NHS Foundation Trust",
+   "icb": "QT1",
+   "icbName": "Nottingham and Nottinghamshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RNU",
+   "name": "Oxford Health NHS Foundation Trust",
+   "icb": "S0E4D",
+   "icbName": "Thames Valley",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RTH",
+   "name": "Oxford University Hospitals NHS Foundation Trust",
+   "icb": "S0E4D",
+   "icbName": "Thames Valley",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RPG",
+   "name": "Oxleas NHS Foundation Trust",
+   "icb": "QKK",
+   "icbName": "South East London",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RT2",
+   "name": "Pennine Care NHS Foundation Trust",
+   "icb": "QOP",
+   "icbName": "Greater Manchester",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RHU",
+   "name": "Portsmouth Hospitals University NHS Trust",
+   "icb": "QRL",
+   "icbName": "Hampshire and Isle of Wight",
+   "fdpLive": true,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RYT",
+   "name": "Public Health Wales NHS Trust",
+   "icb": null,
+   "icbName": null,
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RPC",
+   "name": "Queen Victoria Hospital NHS Foundation Trust",
+   "icb": "S9B9J",
+   "icbName": "Surrey and Sussex",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RXE",
+   "name": "Rotherham Doncaster and South Humber NHS Foundation Trust",
+   "icb": "QOQ",
+   "icbName": "Humber and North Yorkshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RHW",
+   "name": "Royal Berkshire NHS Foundation Trust",
+   "icb": "S0E4D",
+   "icbName": "Thames Valley",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "REF",
+   "name": "Royal Cornwall Hospitals NHS Trust",
+   "icb": "QT6",
+   "icbName": "Cornwall and The Isles of Scilly",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RH8",
+   "name": "Royal Devon University Healthcare NHS Foundation Trust",
+   "icb": "QJK",
+   "icbName": "Devon",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RAL",
+   "name": "Royal Free London NHS Foundation Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RAN",
+   "name": "Royal National Orthopaedic Hospital NHS Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RGM",
+   "name": "Royal Papworth Hospital NHS Foundation Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RA2",
+   "name": "Royal Surrey NHS Foundation Trust",
+   "icb": "S9B9J",
+   "icbName": "Surrey and Sussex",
+   "fdpLive": true,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RD1",
+   "name": "Royal United Hospitals Bath NHS Foundation Trust",
+   "icb": "QOX",
+   "icbName": "Bath and North East Somerset, Swindon and Wiltshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RNZ",
+   "name": "Salisbury NHS Foundation Trust",
+   "icb": "QOX",
+   "icbName": "Bath and North East Somerset, Swindon and Wiltshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RXK",
+   "name": "Sandwell and West Birmingham Hospitals NHS Trust",
+   "icb": "QUA",
+   "icbName": "Black Country",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RCU",
+   "name": "Sheffield Children's NHS Foundation Trust",
+   "icb": "QF7",
+   "icbName": "South Yorkshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "TAH",
+   "name": "Sheffield Health Partnership University NHS Foundation Trust",
+   "icb": "QF7",
+   "icbName": "South Yorkshire",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RHQ",
+   "name": "Sheffield Teaching Hospitals NHS Foundation Trust",
+   "icb": "QF7",
+   "icbName": "South Yorkshire",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RK5",
+   "name": "Sherwood Forest Hospitals NHS Foundation Trust",
+   "icb": "QT1",
+   "icbName": "Nottingham and Nottinghamshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "R1D",
+   "name": "Shropshire Community Health NHS Trust",
+   "icb": "QOC",
+   "icbName": "Shropshire, Telford and Wrekin",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RH5",
+   "name": "Somerset NHS Foundation Trust",
+   "icb": "QSL",
+   "icbName": "Somerset",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RYE",
+   "name": "South Central Ambulance Service NHS Foundation Trust",
+   "icb": "QRL",
+   "icbName": "Hampshire and Isle of Wight",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RYD",
+   "name": "South East Coast Ambulance Service NHS Foundation Trust",
+   "icb": "QKS",
+   "icbName": "Kent and Medway",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RV5",
+   "name": "South London and Maudsley NHS Foundation Trust",
+   "icb": "QKK",
+   "icbName": "South East London",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RTR",
+   "name": "South Tees Hospitals NHS Foundation Trust",
+   "icb": "QOQ",
+   "icbName": "Humber and North Yorkshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "R0B",
+   "name": "South Tyneside and Sunderland NHS Foundation Trust",
+   "icb": "QHM",
+   "icbName": "North East and North Cumbria",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RJC",
+   "name": "South Warwickshire University NHS Foundation Trust",
+   "icb": "QWU",
+   "icbName": "Coventry and Warwickshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RQY",
+   "name": "South West London and St George's Mental Health NHS Trust",
+   "icb": "QWE",
+   "icbName": "South West London",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RXG",
+   "name": "South West Yorkshire Partnership Teaching NHS Foundation Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RYF",
+   "name": "South Western Ambulance Service NHS Foundation Trust",
+   "icb": "QT6",
+   "icbName": "Cornwall and The Isles of Scilly",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RJ7",
+   "name": "St George's University Hospitals NHS Foundation Trust",
+   "icb": "QWE",
+   "icbName": "South West London",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RWJ",
+   "name": "Stockport NHS Foundation Trust",
+   "icb": "QOP",
+   "icbName": "Greater Manchester",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RXX",
+   "name": "Surrey and Borders Partnership NHS Foundation Trust",
+   "icb": "S9B9J",
+   "icbName": "Surrey and Sussex",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RTP",
+   "name": "Surrey and Sussex Healthcare NHS Trust",
+   "icb": "S9B9J",
+   "icbName": "Surrey and Sussex",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RDR",
+   "name": "Sussex Community NHS Foundation Trust",
+   "icb": "S9B9J",
+   "icbName": "Surrey and Sussex",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RX2",
+   "name": "Sussex Partnership NHS Foundation Trust",
+   "icb": "S9B9J",
+   "icbName": "Surrey and Sussex",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RMP",
+   "name": "Tameside and Glossop Integrated Care NHS Foundation Trust",
+   "icb": "QOP",
+   "icbName": "Greater Manchester",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RX3",
+   "name": "Tees, Esk and Wear Valleys NHS Foundation Trust",
+   "icb": "QOQ",
+   "icbName": "Humber and North Yorkshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RBV",
+   "name": "The Christie NHS Foundation Trust",
+   "icb": "QOP",
+   "icbName": "Greater Manchester",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "REN",
+   "name": "The Clatterbridge Cancer Centre NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RNA",
+   "name": "The Dudley Group NHS Foundation Trust",
+   "icb": "QUA",
+   "icbName": "Black Country",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RAS",
+   "name": "The Hillingdon Hospitals NHS Foundation Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RTD",
+   "name": "The Newcastle Upon Tyne Hospitals NHS Foundation Trust",
+   "icb": "QHM",
+   "icbName": "North East and North Cumbria",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "K0N6A",
+   "name": "The Online NHS Trust",
+   "icb": "QKK",
+   "icbName": "South East London",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RQW",
+   "name": "The Princess Alexandra Hospital NHS Trust",
+   "icb": "D7T5G",
+   "icbName": "Essex",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RCX",
+   "name": "The Queen Elizabeth Hospital, King's Lynn, NHS Foundation Trust",
+   "icb": "T6Y0W",
+   "icbName": "Norfolk and Suffolk",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RL1",
+   "name": "The Robert Jones and Agnes Hunt Orthopaedic Hospital NHS Foundation Trust",
+   "icb": "QOC",
+   "icbName": "Shropshire, Telford and Wrekin",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RFR",
+   "name": "The Rotherham NHS Foundation Trust",
+   "icb": "QF7",
+   "icbName": "South Yorkshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RPY",
+   "name": "The Royal Marsden NHS Foundation Trust",
+   "icb": "QWE",
+   "icbName": "South West London",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RRJ",
+   "name": "The Royal Orthopaedic Hospital NHS Foundation Trust",
+   "icb": "QHL",
+   "icbName": "Birmingham and Solihull",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RL4",
+   "name": "The Royal Wolverhampton NHS Trust",
+   "icb": "QUA",
+   "icbName": "Black Country",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RXW",
+   "name": "The Shrewsbury and Telford Hospital NHS Trust",
+   "icb": "QOC",
+   "icbName": "Shropshire, Telford and Wrekin",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RET",
+   "name": "The Walton Centre NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RA9",
+   "name": "Torbay and South Devon NHS Foundation Trust",
+   "icb": "QJK",
+   "icbName": "Devon",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RWD",
+   "name": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "icb": "QJM",
+   "icbName": "Lincolnshire",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RRV",
+   "name": "University College London Hospitals NHS Foundation Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RHM",
+   "name": "University Hospital Southampton NHS Foundation Trust",
+   "icb": "QRL",
+   "icbName": "Hampshire and Isle of Wight",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RRK",
+   "name": "University Hospitals Birmingham NHS Foundation Trust",
+   "icb": "QHL",
+   "icbName": "Birmingham and Solihull",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RKB",
+   "name": "University Hospitals Coventry and Warwickshire NHS Trust",
+   "icb": "QWU",
+   "icbName": "Coventry and Warwickshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "R0D",
+   "name": "University Hospitals Dorset NHS Foundation Trust",
+   "icb": "QVV",
+   "icbName": "Dorset",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RK9",
+   "name": "University Hospitals Plymouth NHS Trust",
+   "icb": "QT6",
+   "icbName": "Cornwall and The Isles of Scilly",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RYR",
+   "name": "University Hospitals Sussex NHS Foundation Trust",
+   "icb": "S9B9J",
+   "icbName": "Surrey and Sussex",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RTG",
+   "name": "University Hospitals of Derby and Burton NHS Foundation Trust",
+   "icb": "QNC",
+   "icbName": "Staffordshire and Stoke-on-Trent",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RWE",
+   "name": "University Hospitals of Leicester NHS Trust",
+   "icb": "QK1",
+   "icbName": "Leicester, Leicestershire and Rutland",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RTX",
+   "name": "University Hospitals of Morecambe Bay NHS Foundation Trust",
+   "icb": "QE1",
+   "icbName": "Lancashire and South Cumbria",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RJE",
+   "name": "University Hospitals of North Midlands NHS Trust",
+   "icb": "QNC",
+   "icbName": "Staffordshire and Stoke-on-Trent",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RQF",
+   "name": "Velindre NHS Trust",
+   "icb": null,
+   "icbName": null,
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RBK",
+   "name": "Walsall Healthcare NHS Trust",
+   "icb": "QUA",
+   "icbName": "Black Country",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RT4",
+   "name": "Welsh Ambulance Services NHS Trust",
+   "icb": null,
+   "icbName": null,
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RWG",
+   "name": "West Hertfordshire Teaching Hospitals NHS Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RKL",
+   "name": "West London NHS Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RYA",
+   "name": "West Midlands Ambulance Service University NHS Foundation Trust",
+   "icb": "QNC",
+   "icbName": "Staffordshire and Stoke-on-Trent",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RGR",
+   "name": "West Suffolk NHS Foundation Trust",
+   "icb": "T6Y0W",
+   "icbName": "Norfolk and Suffolk",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RKE",
+   "name": "Whittington Health NHS Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "fdpLive": false,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RY7",
+   "name": "Wirral Community Health and Care NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RBL",
+   "name": "Wirral University Teaching Hospital NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RWP",
+   "name": "Worcestershire Acute Hospitals NHS Trust",
+   "icb": "QGH",
+   "icbName": "Herefordshire and Worcestershire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RRF",
+   "name": "Wrightington, Wigan and Leigh Teaching Hospitals NHS Foundation Trust",
+   "icb": "QOP",
+   "icbName": "Greater Manchester",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  },
+  {
+   "code": "RLQ",
+   "name": "Wye Valley NHS Trust",
+   "icb": "QGH",
+   "icbName": "Herefordshire and Worcestershire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RCB",
+   "name": "York and Scarborough Teaching Hospitals NHS Foundation Trust",
+   "icb": "QOQ",
+   "icbName": "Humber and North Yorkshire",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "code": "RX8",
+   "name": "Yorkshire Ambulance Service NHS Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "fdpLive": false,
+   "fdpSignedUp": false
+  }
+ ],
+ "icbs": [
+  {
+   "name": "NHS Bath and North East Somerset, Swindon And Wiltshire ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Birmingham and Solihull ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Black Country ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Bristol, North Somerset and South Gloucestershire ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Central East ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Cheshire and Merseyside ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Cornwall and the Isles of Scilly ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Coventry and Warwickshire ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Derby and Derbyshire ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Devon ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Dorset ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Essex ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Gloucestershire ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Hampshire and Isle of Wight ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Herefordshire and Worcestershire ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Humber and North Yorkshire ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Kent and Medway ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Lancashire and South Cumbria ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Leicester Leicestershire and Rutland ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Lincolnshire ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Norfolk and Suffolk ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS North East London ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS North East and North Cumbria ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Northamptonshire ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Nottingham and Nottinghamshire ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Shropshire, Telford and Wrekin ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Somerset ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS South East London ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS South West London ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS South Yorkshire ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Staffordshire and Stoke-on-Trent ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Surrey and Sussex ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS Thames Valley ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS West Yorkshire ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  },
+  {
+   "name": "NHS West and North London ICB",
+   "fdpLive": true,
+   "fdpSignedUp": true
+  }
+ ]
+}

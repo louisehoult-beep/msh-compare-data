@@ -66,6 +66,8 @@ REFS = {
     "icc-matrices.json":           "ETH-D1989FDFE",
     "company-match-overrides.json":     "ETH-DFD14F6D7",
     "open-tenders.json":        "ETH-DCEFAF9C5",
+    "digital-lane.json":        "ETH-D1785F3EE",
+    "trust-digital-profile.json": "ETH-D20F5DF46",
     "drug-tariff-part-ix.json": "ETH-D090550F8",
     "tender-history.json":      "ETH-D12B82708",
     "mhra-alerts.json":         "ETH-D9D253BB8",

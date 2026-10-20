@@ -6784,6 +6784,88 @@ def check_notice_citations(files_or_sentences):
              % (path, hit.group(1), s.strip()[:170]))
 
 
+def check_digital_lane(lane, company_awards, open_tenders):
+    """data/digital-lane.json (20/10/2026): NHS-buyer software and IT notices in their
+    own file. Every row must pass the lane rule it states, the clinical flag must be
+    the stated title test and nothing else, and the CPV 33 medical feeds must carry no
+    lane row (the lane was built beside them so they would not regress)."""
+    for name, doc, key in (("company-awards.json", company_awards, None),
+                           ("open-tenders.json", open_tenders, "notices")):
+        rows = []
+        if isinstance(doc, dict):
+            rows = doc.get(key) if key else (doc.get("awards") or doc.get("_rows") or [])
+        if any(isinstance(r, dict) and r.get("lane") == "digital" for r in rows or []):
+            FAIL("digital-lane", "%s carries a row tagged lane=digital. The digital lane "
+                                 "writes only data/digital-lane.json." % name)
+    if lane is None:
+        return
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "scripts"))
+    import digital_lane_rules as R
+    if lane.get("lane") != "digital":
+        FAIL("digital-lane", "digital-lane.json has no lane=digital marker.")
+    for field in ("laneRule", "clinicalRule", "scopeNote"):
+        if not lane.get(field):
+            FAIL("digital-lane", "digital-lane.json has no `%s`: the rule travels with "
+                                 "the data." % field)
+    today = datetime.date.today().isoformat()
+    for section in ("awards", "openNotices"):
+        for r in lane.get(section) or []:
+            cpvs = r.get("digitalCpv") or ([r["cpv"]] if r.get("cpv") else [])
+            if r.get("lane") != "digital":
+                FAIL("digital-lane", "%s row %r is not tagged lane=digital." % (section, r.get("title")))
+            if not R.in_lane(r.get("buyer"), cpvs):
+                FAIL("digital-lane", "%s row %r (%s, CPV %s) fails the lane rule: an NHS buyer "
+                                     "AND a CPV 48 or 72." % (section, r.get("title"),
+                                                               r.get("buyer"), cpvs))
+            if bool(r.get("clinical")) != R.clinical(r.get("title")):
+                FAIL("digital-lane", "%s row %r: clinical flag does not match the stated "
+                                     "title test." % (section, r.get("title")))
+    for r in lane.get("openNotices") or []:
+        cd = (r.get("closingDate") or "")[:10]
+        if cd and cd < today:
+            WARN("digital-lane", "open notice %r closed %s and is still listed; the next "
+                                 "refresh drops it." % (r.get("title"), cd))
+    for r in lane.get("marketEngagement") or []:
+        if r.get("lane") != "digital" or not r.get("labels"):
+            FAIL("digital-lane", "market engagement row %r has no lane tag or no "
+                                 "engagement label." % r.get("title"))
+        if bool(r.get("clinical")) != R.clinical(r.get("title")):
+            FAIL("digital-lane", "market engagement row %r: clinical flag does not match "
+                                 "the stated title test." % r.get("title"))
+    c = lane.get("counts") or {}
+    for key, section in (("awards", "awards"), ("openNotices", "openNotices"),
+                         ("marketEngagement", "marketEngagement")):
+        if c.get(key) != len(lane.get(section) or []):
+            FAIL("digital-lane", "counts.%s is %s but the file holds %d rows."
+                 % (key, c.get(key), len(lane.get(section) or [])))
+
+
+def check_trust_digital_profile(doc, trust_map):
+    """data/trust-digital-profile.json (20/10/2026): NHS Federated Data Platform status
+    per trust, read from NHS England's own lists and joined to the ODS trust map by
+    exact name. A trust code the map does not hold is a FAIL; a list length that
+    disagrees with NHS England's own headline is a WARN, because both are the
+    source's own words and neither is corrected here."""
+    if doc is None:
+        return
+    for field in ("rule", "sourceUrls", "sourceUpdatedOn", "headline", "countCheck"):
+        if not doc.get(field):
+            FAIL("trust-digital", "trust-digital-profile.json has no `%s`." % field)
+    codes = {t.get("code") for t in (trust_map or {}).get("trusts") or []}
+    for t in doc.get("trusts") or []:
+        if codes and t.get("code") not in codes:
+            FAIL("trust-digital", "%s (%s) is not in trust-map.json." % (t.get("name"), t.get("code")))
+    for chk in doc.get("countCheck") or []:
+        if not chk.get("agrees"):
+            WARN("trust-digital", "%s: NHS England lists %s but its headline says %s."
+                 % (chk.get("list"), chk.get("listed"), chk.get("headline")))
+    live = sum(1 for t in doc.get("trusts") or [] if t.get("fdpLive"))
+    head = (doc.get("headline") or {}).get("trustsLive")
+    if head is not None and live > head:
+        FAIL("trust-digital", "%d trusts joined as live, more than NHS England's headline "
+                              "of %d: a join is wrong." % (live, head))
+
+
 def main():
     offline = "--offline" in sys.argv
     as_json = "--json" in sys.argv
@@ -6920,6 +7002,9 @@ def main():
     # discipline has to be enforced, and the built join, where the risk is an
     # invented Hub link.
     check_awareness(load("awareness-days.json"))
+    check_digital_lane(load("digital-lane.json"), load("company-awards.json"),
+                       load("open-tenders.json"))
+    check_trust_digital_profile(load("trust-digital-profile.json"), load("trust-map.json"))
     check_calendar(load("hub-calendar.json"))
     # Supplier hiring signal, read from each company's own careers page. Optional
     # like the layers above — no file means it is not built. Built, every check
