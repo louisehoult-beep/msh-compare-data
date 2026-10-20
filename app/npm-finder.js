@@ -73,7 +73,7 @@
     var cats = d.categories || [];
     var g = d.guidance || {};
     var h = '<style>' + CSS + '</style><div class="npmf">'
-      + '<h3>National Pricing Matrix (NPM) Finder</h3>'
+      + '<h3>All National Pricing Matrix (NPM) categories</h3>'
       + '<p class="npmf-sub">Every framework category where NHS Supply Chain offers a National Pricing Matrix (NPM), with the framework it sits on. Find the product area here, then ask your Hospital Care Team to take you through the NPM.</p>'
       + '<div class="npmf-stats">'
       + '<div class="npmf-stat"><b>' + cats.length + '</b><span>NPM categories</span></div>'

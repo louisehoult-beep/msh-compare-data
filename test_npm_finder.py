@@ -90,6 +90,7 @@ class Brief(unittest.TestCase):
 class Gate(unittest.TestCase):
     def setUp(self):
         v.fails[:] = []
+        v.warns[:] = []
         self.fw = {"frameworks": FRAMEWORKS}
         self.doc = {
             "categoryCount": 15, "matchedCount": 1,
@@ -101,6 +102,9 @@ class Gate(unittest.TestCase):
     def fails(self):
         return [m for c, m in v.fails if c == "npm-finder"]
 
+    def warns(self):
+        return [m for c, m in v.warns if c == "npm-finder"]
+
     def test_clean_passes(self):
         v.check_npm_finder(self.doc, self.fw)
         self.assertEqual(self.fails(), [])
@@ -111,17 +115,19 @@ class Gate(unittest.TestCase):
         v.check_npm_finder(d, self.fw)
         self.assertTrue(any("supplier list" in m for m in self.fails()))
 
-    def test_join_to_unpublished_framework_refused(self):
+    def test_join_to_unpublished_framework_warns_never_blocks(self):
         d = copy.deepcopy(self.doc)
         d["categories"][0]["framework"]["name"] = "Expired Framework"
         v.check_npm_finder(d, self.fw)
-        self.assertTrue(any("not a live framework" in m for m in self.fails()))
+        self.assertEqual(self.fails(), [])
+        self.assertTrue(any("not a live framework" in m for m in self.warns()))
 
-    def test_drifted_dates_refused(self):
+    def test_drifted_dates_warn_never_block(self):
         d = copy.deepcopy(self.doc)
         d["categories"][0]["framework"]["ends"] = "31 August 2029"
         v.check_npm_finder(d, self.fw)
-        self.assertTrue(any("dates" in m for m in self.fails()))
+        self.assertEqual(self.fails(), [])
+        self.assertTrue(any("dates" in m for m in self.warns()))
 
     def test_counts_must_agree(self):
         d = copy.deepcopy(self.doc)

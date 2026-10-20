@@ -432,7 +432,8 @@ def check_npm_finder(doc, fwdoc):
 
     Three things must hold, or a member sees a wrong route to a discount:
     every category joined to a framework is joined to a LIVE framework the Hub
-    publishes, with the same dates; no category carries a supplier list (which
+    publishes, with the same dates (WARN only: other workflows write
+    frameworks.json and must not be blocked by this file); no category carries a supplier list (which
     suppliers offer an NPM is not public, so the file must not claim to know);
     and the published counts agree with the rows.
     """
@@ -460,12 +461,15 @@ def check_npm_finder(doc, fwdoc):
         if not fw:
             continue
         ref = live.get(fw.get("name"))
+        # WARN, not FAIL: data/frameworks.json has five other writers, and a
+        # framework expiring there must never block their publish. The weekly
+        # refresh re-joins and clears the warning.
         if ref is None:
-            FAIL("npm-finder", "%s is joined to '%s', which is not a live framework in "
+            WARN("npm-finder", "%s is joined to '%s', which is not a live framework in "
                                "data/frameworks.json. Re-run scripts/refresh_npm_finder.py."
                  % (c.get("category"), fw.get("name")))
         elif (ref.get("starts"), ref.get("ends")) != (fw.get("starts"), fw.get("ends")):
-            FAIL("npm-finder", "%s shows framework dates %s to %s but data/frameworks.json says "
+            WARN("npm-finder", "%s shows framework dates %s to %s but data/frameworks.json says "
                                "%s to %s. Re-run scripts/refresh_npm_finder.py."
                  % (c.get("category"), fw.get("starts"), fw.get("ends"),
                     ref.get("starts"), ref.get("ends")))

@@ -88,6 +88,13 @@ jobs:
       - name: Cache the procurement calendar
         run: python3 scripts/refresh_nhssc_procurement_calendar.py
 
+      # NPM Finder (added 20/10/2026). Its own guards may refuse a run (page
+      # redesigned, category count collapsed); that keeps last week's file and
+      # must never stop the launch briefs publishing, hence continue-on-error.
+      - name: NPM Finder
+        continue-on-error: true
+        run: python3 scripts/refresh_npm_finder.py
+
       - name: Re-stamp the ownership notice and data markers
         run: python3 scripts/stamp_notice.py
 
@@ -102,8 +109,8 @@ jobs:
         run: |
           git config user.name "launch-briefs-bot"
           git config user.email "actions@github.com"
-          git add data/nhssc-launch-briefs.json data/nhssc-procurement-calendar.json
-          git diff --cached --quiet || git commit -m "NHSSC launch briefs + procurement calendar $(date -u +%F)"
+          git add data/nhssc-launch-briefs.json data/nhssc-procurement-calendar.json data/npm-finder.json
+          git diff --cached --quiet || git commit -m "NHSSC launch briefs + procurement calendar + NPM Finder $(date -u +%F)"
           pushed=0
           for attempt in 1 2 3; do
             if git push; then
@@ -120,9 +127,10 @@ jobs:
             git reset --hard origin/main
             python3 scripts/refresh_nhssc_launch_briefs.py
             python3 scripts/refresh_nhssc_procurement_calendar.py
+            python3 scripts/refresh_npm_finder.py || echo "NPM Finder refused on retry; keeping the published file"
             python3 scripts/stamp_notice.py
             bash scripts/gate.sh || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
-            git add data/nhssc-launch-briefs.json data/nhssc-procurement-calendar.json
+            git add data/nhssc-launch-briefs.json data/nhssc-procurement-calendar.json data/npm-finder.json
             git diff --cached --quiet || git commit -m "NHSSC launch briefs + procurement calendar $(date -u +%F) (retry)"
             sleep 5
           done
