@@ -1,0 +1,201 @@
+<!-- DRAFT, NOT PUBLISHED. WordPress draft page 5712 (parent 675), saved 20/10/2026. Source for a "Health tech into the NHS" landing page on the Medical
+     Sales Hub (child of page 675 per E&T rule 7). Drafted 20/10/2026 from the Hub health tech
+     intelligence gap report, build plan "This week".
+     Every fact below was read at its owner's page on 20/10/2026; the source list at the foot
+     names each one. Facts with a shelf life (dates, counts, the AI Airlock webinar) must be
+     re-read at source on the day this is published, or removed.
+     Abbreviations are spelled out at first use (rule 12): check with
+       python3 "02-Elevate-and-Thrive/Hub/abbreviation_check.py" --file <this file>
+     No price is quoted: Hub pricing is read from /join-the-hub/ at the time, never stored. -->
+<!-- wp:html -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Jost:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+.htn{--navy:#0B1C33;--deep:#14304F;--gold:#A8842C;--lgold:#E0BE8E;--warm:#EDE7DC;--steel:#DBE3EE;--ink:#1D2733;--muted:#4A5563;--line:#D5DCE5;--wine:#4A1526;
+  font-family:'Inter',system-ui,sans-serif;font-size:16.5px;line-height:1.75;color:var(--ink);}
+.htn *{box-sizing:border-box;}
+.htn .fw{width:100vw;position:relative;left:50%;margin-left:-50vw;}
+.htn .col{max-width:1080px;margin:0 auto;padding:0 40px;}
+.htn section{padding:72px 0;}
+.htn h1,.htn h2,.htn h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;margin:0;}
+.htn h2{font-size:clamp(28px,3vw,38px);line-height:1.15;color:var(--navy);margin:0 0 16px;}
+.htn h3{font-size:clamp(20px,2vw,24px);line-height:1.25;color:var(--navy);margin:0 0 8px;}
+.htn p{margin:0 0 16px;}
+.htn p:last-child{margin-bottom:0;}
+.htn a{color:var(--deep);text-decoration:underline;text-decoration-color:rgba(20,48,79,.35);text-underline-offset:3px;}
+.htn .eyebrow{font-family:'Jost',sans-serif;font-weight:700;font-size:12px;letter-spacing:2.2px;text-transform:uppercase;color:var(--navy);margin:0 0 12px;}
+.htn .rule{width:64px;height:3px;background:var(--gold);border:0;margin:0 0 22px;}
+/* hero: the photo at full strength, shading only behind the text */
+.htn .hero{background:url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/07/3-hospital-corridor.jpg?w=1800') center/cover no-repeat;padding:96px 0;}
+.htn .panel{background:rgba(11,28,51,.88);max-width:660px;padding:40px 40px 36px;border-left:3px solid var(--lgold);}
+.htn .hero .eyebrow{color:var(--lgold);}
+.htn .hero h1{font-weight:300;font-size:clamp(40px,5vw,62px);line-height:1.05;color:#FFFFFF;margin:0 0 18px;}
+.htn .hero p{color:var(--steel);font-size:clamp(16.5px,1.5vw,19px);}
+.htn .hero .meta{font-family:'Jost',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--lgold);margin:18px 0 0;}
+/* gates */
+.htn .gates{background:#FFFFFF;}
+.htn .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:30px;}
+.htn .card{background:#FFFFFF;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:10px;padding:28px 28px 24px;}
+.htn .num{font-family:'Jost',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;color:var(--navy);text-transform:uppercase;margin:0 0 8px;}
+.htn .src{font-size:13.5px;color:var(--muted);margin:10px 0 0;}
+.htn q{font-style:italic;quotes:"\201C" "\201D";}
+/* wine band */
+.htn .wine{background:var(--wine);color:var(--warm);}
+.htn .wine h2,.htn .wine h3{color:#FFFFFF;}
+.htn .wine .eyebrow{color:var(--lgold);}
+.htn .wine a{color:var(--lgold);text-decoration-color:rgba(224,190,142,.5);}
+.htn .wine .src{color:var(--steel);}
+.htn .two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px;margin-top:26px;}
+/* digital band: the pattern at full strength, shading only behind the text */
+.htn .routes{background:url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/10/live-desk-theme-digital.jpg?w=1800') center/cover no-repeat;}
+.htn .routes .panel{max-width:780px;}
+.htn .routes .two{grid-template-columns:1fr;gap:26px;}
+.htn .routes h2,.htn .routes h3{color:#FFFFFF;}
+.htn .routes .eyebrow{color:var(--lgold);}
+.htn .routes p{color:var(--steel);}
+.htn .routes a{color:var(--lgold);text-decoration-color:rgba(224,190,142,.5);}
+.htn .routes .src{color:var(--steel);}
+/* hub band */
+.htn .hub{background:var(--warm);}
+.htn .hub ul{margin:0 0 20px;padding:0 0 0 20px;}
+.htn .hub li{margin:0 0 8px;}
+.htn .hub li::marker{color:var(--navy);}
+.htn .btn{display:inline-block;background:var(--navy);color:#FFFFFF;font-family:'Jost',sans-serif;font-weight:600;font-size:14px;letter-spacing:1.2px;text-transform:uppercase;text-decoration:none;padding:15px 28px;border-radius:4px;}
+.htn .btn:hover{background:var(--deep);}
+/* sources */
+.htn .sources{background:#FFFFFF;}
+.htn .sources ol{margin:0;padding:0 0 0 22px;font-size:14px;color:var(--muted);}
+.htn .sources li{margin:0 0 6px;}
+@media (max-width:760px){
+  .htn .col{padding:0 20px;}
+  .htn section{padding:52px 0;}
+  .htn .hero{padding:56px 0;}
+  .htn .panel{padding:28px 22px 24px;}
+  .htn .grid,.htn .two{grid-template-columns:1fr;}
+}
+</style>
+<div class="htn">
+
+<section class="fw hero"><div class="col"><div class="panel">
+<p class="eyebrow">Medical Sales Hub &middot; Digital health and artificial intelligence (AI)</p>
+<h1>Health tech into the NHS</h1>
+<p>A digital product meets a run of gates before an NHS buyer can say yes: regulation, clinical safety, data protection, evidence and a buying route. Each gate below is linked to the body that owns it, and each fact was read at that body's own page.</p>
+<p class="meta">Every source read 20 October 2026</p>
+</div></div></section>
+
+<section class="fw gates"><div class="col">
+<p class="eyebrow">The gates, in order</p>
+<hr class="rule">
+<h2>What a product needs before an NHS buyer can say yes</h2>
+<div class="grid">
+
+<div class="card">
+<p class="num">Gate 1 &middot; Regulation</p>
+<h3>Registration with the Medicines and Healthcare products Regulatory Agency (MHRA)</h3>
+<p>The MHRA states that all medical devices, including in vitro diagnostic devices, <q>must be registered with the MHRA before they can be placed on the market in Great Britain</q>. A manufacturer based outside the UK must appoint a single UK Responsible Person, who then registers its devices.</p>
+<p class="src">Source: MHRA, <a href="https://www.gov.uk/guidance/register-medical-devices-to-place-on-the-market" target="_blank" rel="noopener">Register medical devices to place on the market</a>, last updated 16 October 2026.</p>
+</div>
+
+<div class="card">
+<p class="num">Gate 1 &middot; Regulation</p>
+<h3>CE marking: accepted in Great Britain for now</h3>
+<p>The MHRA's guidance says Conformité Européenne (CE) marked devices may be placed on the Great Britain market until either 30 June 2028 or 30 June 2030, depending on the type of device and the European Union legislation it complies with. The same page says the government will consult on indefinite recognition of CE marked medical devices.</p>
+<p class="src">Source: MHRA, <a href="https://www.gov.uk/guidance/regulating-medical-devices-in-the-uk" target="_blank" rel="noopener">Regulating medical devices in the UK</a>, last updated 20 February 2026.</p>
+</div>
+
+<div class="card">
+<p class="num">Gate 2 &middot; Clinical safety</p>
+<h3>DCB0129 for manufacturers, DCB0160 for the NHS body deploying</h3>
+<p>NHS England's clinical risk management standards: DCB0129, Clinical Risk Management: its Application in the Manufacture of Health IT Systems, and DCB0160, which covers the deploying health organisation. The page states that <q>Compliance with DCB0129 and DCB0160 is mandatory under the Health and Social care Act 2012</q>.</p>
+<p class="src">Source: NHS England Digital, <a href="https://digital.nhs.uk/services/clinical-safety/clinical-risk-management-standards" target="_blank" rel="noopener">Clinical risk management standards</a>, last edited 11 October 2024.</p>
+</div>
+
+<div class="card">
+<p class="num">Gate 3 &middot; Assurance</p>
+<h3>Digital Technology Assessment Criteria (DTAC)</h3>
+<p>DTAC covers clinical safety, data protection, technical security, interoperability, and usability and accessibility. NHS England's refreshed form has a 25% reduction in questions, and the page states that <q>The previous version of the DTAC form should not be used from 6 April 2026 onwards.</q></p>
+<p class="src">Source: NHS England Digital, <a href="https://digital.nhs.uk/services/digital-technology-assessment-criteria-dtac" target="_blank" rel="noopener">Digital Technology Assessment Criteria</a>, last edited 21 September 2026.</p>
+</div>
+
+<div class="card">
+<p class="num">Gate 4 &middot; Data protection</p>
+<h3>Data Security and Protection Toolkit (DSPT)</h3>
+<p>An online self-assessment against the National Data Guardian's 10 data security standards. The toolkit's own page states that <q>All organisations that have access to NHS patient data and systems must use this toolkit</q> to provide assurance on data security.</p>
+<p class="src">Source: <a href="https://www.dsptoolkit.nhs.uk/" target="_blank" rel="noopener">Data Security and Protection Toolkit</a> home page.</p>
+</div>
+
+<div class="card">
+<p class="num">Gate 5 &middot; Evidence</p>
+<h3>National Institute for Health and Care Excellence (NICE) HealthTech guidance</h3>
+<p>NICE's HealthTech guidance evaluates digital technologies, diagnostics and medical devices, including AI. Its National HealthTech Access Programme, developed with the Department of Health and Social Care, NHS England, the MHRA and the Office for Life Sciences, will evaluate a small number of technologies; those recommended for NHS use will receive national NHS funding, similar to medicines.</p>
+<p class="src">Source: NICE, <a href="https://www.nice.org.uk/what-nice-does/our-guidance/about-healthtech-guidance" target="_blank" rel="noopener">About HealthTech guidance</a>.</p>
+</div>
+
+</div>
+</div></section>
+
+<section class="fw wine"><div class="col">
+<p class="eyebrow">What is changing</p>
+<h2>The rules for AI-enabled devices are being rewritten</h2>
+<div class="two">
+<div>
+<h3>All 44 recommendations accepted</h3>
+<p>On 6 October 2026 the government confirmed it will accept all 44 recommendations of the National Commission into the Regulation of AI in Healthcare. The MHRA is committed to issue draft guidance by December 2026 on a new approach to managing changes to AI-enabled medical devices, and will begin next year by consulting on how to qualify and classify AI-enabled devices.</p>
+<p class="src">Source: <a href="https://www.gov.uk/government/news/government-backs-recommendations-of-nhs-doctors-led-ai-commission" target="_blank" rel="noopener">Government backs recommendations of NHS doctors-led AI Commission</a>, GOV.UK, 6 October 2026.</p>
+</div>
+<div>
+<h3>AI Airlock, phase 3</h3>
+<p>The MHRA's regulatory sandbox for AI-enabled medical devices opened its third phase on 6 October 2026, with applications through the form on its page. Its second phase completed in May 2026 with 7 innovators across 3 regulatory challenges.</p>
+<p class="src">Source: MHRA, <a href="https://www.gov.uk/government/collections/ai-airlock-a-regulatory-sandbox-for-ai-enabled-medical-devices" target="_blank" rel="noopener">AI Airlock: a regulatory sandbox for AI-enabled medical devices</a>, last updated 6 October 2026.</p>
+</div>
+</div>
+</div></section>
+
+<section class="fw routes"><div class="col"><div class="panel">
+<p class="eyebrow">Buying routes and adoption</p>
+<h2>Where digital is bought, and who is already live</h2>
+<div class="two">
+<div>
+<h3>G-Cloud 15 (RM1557.15)</h3>
+<p>The Government Commercial Agency (GCA) agreement for cloud hosting, software and support, open to health among other sectors. Its page lists a start date of 6 August 2026 and an end date of 5 February 2028, and says G-Cloud 15 will run for 4 years from 6 August 2026, reopening after 18 months and again after 36 months. Crown Commercial Service became the GCA on 1 April 2026.</p>
+<p class="src">Source: GCA, <a href="https://www.gca.gov.uk/agreements/RM1557.15" target="_blank" rel="noopener">G-Cloud 15</a>.</p>
+</div>
+<div>
+<h3>NHS Federated Data Platform (FDP)</h3>
+<p>NHS England reports 142 NHS trusts live on the platform and 35 integrated care boards (ICBs) with a tenant, as at the end of August 2026, with 170 trusts signed up. It updated these figures on 25 September 2026; the next update is due in December 2026.</p>
+<p class="src">Source: NHS England, <a href="https://www.england.nhs.uk/digitaltechnology/nhs-federated-data-platform/impact/fdp-uptake-and-benefits/" target="_blank" rel="noopener">NHS Federated Data Platform uptake and benefits</a>.</p>
+</div>
+</div>
+</div></div></section>
+
+<section class="fw hub"><div class="col">
+<p class="eyebrow">Inside the Hub</p>
+<hr class="rule">
+<h2>The Digital health and AI page, for members</h2>
+<p>The Hub's Digital health and AI speciality page brings these gates together with live buying data, refreshed daily from the official notice feeds:</p>
+<ul>
+<li>NHS buyers' software and IT notices that name a clinical system or a regulated digital product, with market engagement and further competitions as they open.</li>
+<li>Dated policy items, each read at its source, such as the DTAC refresh and the AI Commission response.</li>
+<li>Trust-level adoption of the NHS Federated Data Platform, from NHS England's own lists.</li>
+<li>Digital health news, filtered to the terms buyers use: DTAC, DCB0129, DCB0160, software as a medical device, virtual wards, remote monitoring, G-Cloud and ambient voice technology.</li>
+</ul>
+<a class="btn" href="https://medsalesintelligencehub.co.uk/join-the-hub/">Join the Hub</a>
+</div></section>
+
+<section class="fw sources"><div class="col">
+<p class="eyebrow">Sources, all read 20 October 2026</p>
+<ol>
+<li>MHRA, Register medical devices to place on the market. gov.uk/guidance/register-medical-devices-to-place-on-the-market</li>
+<li>MHRA, Regulating medical devices in the UK. gov.uk/guidance/regulating-medical-devices-in-the-uk</li>
+<li>NHS England Digital, Clinical risk management standards. digital.nhs.uk/services/clinical-safety/clinical-risk-management-standards</li>
+<li>NHS England Digital, Digital Technology Assessment Criteria. digital.nhs.uk/services/digital-technology-assessment-criteria-dtac</li>
+<li>Data Security and Protection Toolkit. dsptoolkit.nhs.uk</li>
+<li>NICE, About HealthTech guidance. nice.org.uk/what-nice-does/our-guidance/about-healthtech-guidance</li>
+<li>GOV.UK, Government backs recommendations of NHS doctors-led AI Commission, 6 October 2026.</li>
+<li>MHRA, AI Airlock collection page. gov.uk/government/collections/ai-airlock-a-regulatory-sandbox-for-ai-enabled-medical-devices</li>
+<li>GCA, G-Cloud 15 (RM1557.15). gca.gov.uk/agreements/RM1557.15</li>
+<li>NHS England, NHS Federated Data Platform uptake and benefits, and its lists of live and signed-up organisations.</li>
+</ol>
+</div></section>
+
+</div>
+<!-- /wp:html -->
