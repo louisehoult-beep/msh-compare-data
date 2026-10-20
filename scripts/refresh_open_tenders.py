@@ -313,7 +313,13 @@ def fetch_cf(days, today_iso, max_pages=CF_MAX_PAGES, stage="tender", keep=None)
             time.sleep(PAGE_SLEEP)
     note = ("Contracts Finder (%s stage): %d open notice(s) from %d release(s) over "
             "%d page(s), back to %s" % (stage, len(rows), scanned, pages, cutoff))
-    if not reached:
+    if not reached and pages < max_pages:
+        # Fixed 20/10/2026: the walk also ends when the feed hands back no next
+        # cursor, and that was being published as the page guard.
+        note += (" — ⚠️ THE FEED RETURNED NO NEXT CURSOR after %d page(s), before "
+                 "reaching the cutoff, so this window was NOT fully walked and notices "
+                 "are missing." % pages)
+    elif not reached:
         note += (" — ⚠️ STOPPED AT THE %d-PAGE GUARD before reaching the cutoff, so "
                  "this window was NOT fully walked and notices are missing." % max_pages)
     return rows, note, reached
