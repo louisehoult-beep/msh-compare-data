@@ -1,0 +1,26 @@
+name: tmp diag (delete before merge)
+on:
+  push:
+    branches: [claude/digital-sources]
+jobs:
+  d:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: probe
+        run: |
+          UA="Elevate-and-Thrive-Hub/1.0 (Medical Sales Intelligence Hub; contact@elevateandthrive.uk)"
+          for u in \
+            https://www.england.nhs.uk/digitaltechnology/nhs-federated-data-platform/impact/fdp-uptake-and-benefits/nhs-trusts-live-with-nhs-fdp/ \
+            https://transform.england.nhs.uk/ai-lab/ai-lab-programmes/ai-in-imaging/ai-diagnostic-fund \
+            https://digital.nhs.uk/services/nhs-app/how-to-integrate-with-the-nhs-app/nhs-app-integrated-partners-and-services/nhs-app-integrated-live-partners-and-services \
+            https://www.sbs.nhs.uk/services/framework-agreements/digital-workplace-solutions/ \
+            https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/074808-2025 ; do
+            echo "== $u"
+            curl -sS -m 40 -A "$UA" -o /tmp/o.html -w "http=%{http_code} size=%{size_download}\n" "$u" || true
+            grep -o "<title>[^<]*" /tmp/o.html | head -1
+            head -c 300 /tmp/o.html | tr '\n' ' '; echo
+            grep -c "<main" /tmp/o.html || true
+          done
+          curl -sS -m 40 -A "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126 Safari/537.36" -o /tmp/o2.html -w "browserUA http=%{http_code} size=%{size_download}\n" https://www.england.nhs.uk/digitaltechnology/nhs-federated-data-platform/impact/fdp-uptake-and-benefits/nhs-trusts-live-with-nhs-fdp/ || true
+          grep -o "<title>[^<]*" /tmp/o2.html | head -1; grep -c "<li" /tmp/o2.html || true
