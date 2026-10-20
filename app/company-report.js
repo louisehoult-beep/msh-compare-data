@@ -1797,8 +1797,14 @@
     var body = '';
     if (probable) {
       body += '<div style="margin:0 0 9px;padding:8px 11px;background:#f7ecdc;border-left:3px solid #b98a2e;border-radius:0 7px 7px 0;font-size:12px;color:#6b5518;line-height:1.55;">' +
-        '<b>IDENTITY NOT CONFIRMED.</b> This is a probable match only — ' + esc(rec.matchedOn || 'matched by name search') +
-        ' Register facts are shown for orientation; no figure is carried and this company is excluded from the field filing profile below.</div>';
+        /* A cleared record carries no company at all (an excluded wrong match, or
+           "no UK registered company" since 20/10/2026), so it is not a probable
+           match of anything and must not be called one. */
+        (rec.companyNumber
+          ? '<b>IDENTITY NOT CONFIRMED.</b> This is a probable match only — ' + esc(rec.matchedOn || 'matched by name search') +
+            ' Register facts are shown for orientation; no figure is carried and this company is excluded from the field filing profile below.'
+          : '<b>NO UK COMPANY ATTACHED.</b> ' + esc(rec.matchedOn || '') +
+            ' No register facts or figures are shown, and this company is excluded from the field filing profile below.') + '</div>';
     } else if (corroborated) {
       /* The labelled basis line, ABOVE the register facts, per root rule 14 —
          a reader must be able to judge the attachment before reading it as
