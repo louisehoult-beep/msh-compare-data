@@ -47,6 +47,9 @@ jobs:
       - name: Refresh the digital lane
         run: python3 scripts/refresh_digital_lane.py --days "${{ github.event.inputs.days || 8 }}"
 
+      - name: Attach digital-lane awards to Hub companies (own file, never company-awards.json)
+        run: python3 scripts/refresh_company_digital_awards.py
+
       - name: Refresh the Gates Tracker (owner page change dates)
         run: python3 scripts/refresh_gates_watch.py
 
@@ -74,7 +77,7 @@ jobs:
         run: |
           git config user.name "digital-lane-bot"
           git config user.email "actions@github.com"
-          git add data/digital-lane.json data/trust-digital-profile.json data/gates-watch.json data/digital-frameworks.json data/ai-airlock-cohorts.json data/dspt-supplier-check.json
+          git add data/digital-lane.json data/company-digital-awards.json data/trust-digital-profile.json data/gates-watch.json data/digital-frameworks.json data/ai-airlock-cohorts.json data/dspt-supplier-check.json
           git diff --cached --quiet || git commit -m "Digital lane $(date -u +%F)"
           pushed=0
           for attempt in 1 2 3; do
@@ -87,9 +90,10 @@ jobs:
             git fetch origin
             git reset --hard origin/main
             python3 scripts/refresh_digital_lane.py --days "${{ github.event.inputs.days || 8 }}"
+            python3 scripts/refresh_company_digital_awards.py
             python3 scripts/stamp_notice.py
             bash scripts/gate.sh || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
-            git add data/digital-lane.json data/trust-digital-profile.json data/gates-watch.json data/digital-frameworks.json data/ai-airlock-cohorts.json data/dspt-supplier-check.json
+            git add data/digital-lane.json data/company-digital-awards.json data/trust-digital-profile.json data/gates-watch.json data/digital-frameworks.json data/ai-airlock-cohorts.json data/dspt-supplier-check.json
             git diff --cached --quiet || git commit -m "Digital lane $(date -u +%F) (retry)"
             sleep 5
           done

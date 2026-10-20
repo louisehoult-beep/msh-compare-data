@@ -56,6 +56,14 @@
      claim that no award exists. */
   var PENDING = BASE + 'data/pending-awards.json' + CB;
 
+  /* Twelfth fetch, added 20/10/2026. Software and IT award notices (CPV 48 and
+     72, NHS buyers) from the Hub's digital lane, matched to companies by the same
+     exact-only rule as the medical feed — scripts/refresh_company_digital_awards.py.
+     Kept apart from AWARDS on purpose: that feed is CPV 33 only, and a payroll
+     licence must never read as a device award. Optional like the rest: if it does
+     not load, its section says so rather than reading as an empty company. */
+  var DIGITAL_AWARDS = BASE + 'data/company-digital-awards.json' + CB;
+
   /* Ninth fetch. Brand marks, fetched ONCE at build time from each company's
      own website by scripts/refresh_logos.py and stored in this repository under
      assets/logos/. The marks themselves are served from the same host as every
@@ -2777,6 +2785,29 @@
       rows.map(awardRow).join(''));
   }
 
+  /* Software and IT notices, from data/company-digital-awards.json. Drawn with
+     the same row as the medical feed, under its own heading and its own rule, so
+     the two are never added together in a reader's head. */
+  function digitalSection(sub, ctx) {
+    var title = 'Software and IT notices';
+    var doc = ctx.digitalAwards;
+    if (!doc || !doc.companies) {
+      return sec(title, gap('Not captured for this company yet — the software and IT notice index has not loaded, so this panel has nothing to report either way.'));
+    }
+    var rows = doc.companies[sub.name] || [];
+    if (!rows.length) {
+      return sec(title, gap('Not captured for this company yet. This index holds only the software and IT award notices (CPV 48 and 72) that NHS buyers published and the Hub\'s digital lane has read, and nothing in it names this company. Most NHS digital buying is a framework call-off that publishes no notice of its own, so this says what the index holds, not what the company has won.'));
+    }
+    var clinical = rows.filter(function (a) { return a.clinical; }).length;
+    return sec(title, rule(esc(doc.sectionRule || '') +
+        '<br><br><b>How this company was identified:</b> ' + esc(doc.matchRule || '') +
+        (doc.coverage && doc.coverage.note ? '<br><br><b>Coverage is incomplete.</b> ' + esc(doc.coverage.note) : '')) +
+      '<div style="font-size:12px;color:' + DIM + ';margin:0 0 8px;">' +
+      rows.length + ' software or IT notice(s) in the index name this company' +
+      (clinical ? ', ' + clinical + ' of them for a clinical system by the notice title' : '') + '.</div>' +
+      rows.map(awardRow).join(''));
+  }
+
   function panelAwards(sub, ctx) {
     var all = awardsFor(sub, ctx) || [];
     var tender = all.filter(function (a) { return a.section === 'tender-awards'; });
@@ -2797,6 +2828,7 @@
       'Above-threshold procurements are published on Find a Tender.');
     h += awardSection('Contract awards', contract, ctx,
       'Below-threshold procurements are published on Contracts Finder.');
+    h += digitalSection(sub, ctx);
 
     /* §15–16 of the page standard. No source exists for either, and a dropped
        heading would leave a member unable to tell "we hold nothing" from
@@ -3315,7 +3347,7 @@
     return { byCat: byCat, bySupplierKey: bySupplierKey };
   }
 
-  function boot(index, seed, specMap, prodFile, fin, cache, fwDoc, awards, logoDoc, diffDoc, pendingDoc) {
+  function boot(index, seed, specMap, prodFile, fin, cache, fwDoc, awards, logoDoc, diffDoc, pendingDoc, digitalDoc) {
     /* Brand marks, by company name. Held at module scope rather than passed
        through ctx because logoImg() and brandOf() are called from the print
        pack as well as the on-page card, and threading a ninth argument through
@@ -3353,6 +3385,7 @@
       fwDoc: fwDoc || null,
       fwByKey: fwIndex(fwDoc),
       awards: awards || null,
+      digitalAwards: digitalDoc || null,
       pending: pendingDoc || null,
       diffDoc: diffDoc || null,
       diff: diffIndex(diffDoc),
@@ -3513,7 +3546,7 @@
   if (window.MSH_COMPANY_REPORT_DATA) {
     var P = window.MSH_COMPANY_REPORT_DATA;
     boot(P.index, P.seed, P.specMap, P.products, P.financials, P.nhssc, P.frameworks,
-         P.awards, P.logos, P.differentiator, P.pending);
+         P.awards, P.logos, P.differentiator, P.pending, P.digitalAwards);
     return;
   }
 
@@ -3534,8 +3567,9 @@
     fetch(AWARDS).then(function (r) { return r.json(); }).catch(function () { return null; }),
     fetch(LOGOS).then(function (r) { return r.json(); }).catch(function () { return null; }),
     fetch(DIFF).then(function (r) { return r.json(); }).catch(function () { return null; }),
-    fetch(PENDING).then(function (r) { return r.json(); }).catch(function () { return null; })
-  ]).then(function (res) { boot(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9], res[10]); })
+    fetch(PENDING).then(function (r) { return r.json(); }).catch(function () { return null; }),
+    fetch(DIGITAL_AWARDS).then(function (r) { return r.json(); }).catch(function () { return null; })
+  ]).then(function (res) { boot(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9], res[10], res[11]); })
     .catch(function () {
       MOUNT.innerHTML = '<div class="mcr"><div class="mcr-card mcr-card--empty">' +
         '<div class="mcr-card-t">Company intelligence report</div>' +

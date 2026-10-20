@@ -63,6 +63,7 @@ REFS = {
     "board-papers-news.json":      "ETH-D443BA294",
     "board-papers-seen.json":      "ETH-D3AD87423",
     "framework-awards.json":       "ETH-D423207D9",
+    "company-digital-awards.json":                                     "ETH-D4F987882",
     "icc-catalogue.json":          "ETH-DEE6CE6C8",
     "icc-matrices.json":           "ETH-D1989FDFE",
     "company-match-overrides.json":     "ETH-DFD14F6D7",

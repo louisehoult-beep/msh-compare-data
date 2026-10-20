@@ -6914,6 +6914,122 @@ def check_digital_lane(lane, company_awards, open_tenders):
                  % (key, c.get(key), len(lane.get(section) or [])))
 
 
+def check_company_digital_awards(doc, seed, lane, company_awards, report_js):
+    """data/company-digital-awards.json (20/10/2026): digital-lane award notices
+    attached to Hub companies, in their own file and their own report section.
+
+    It is the ONLY place a lane award may reach a company. company-awards.json keeps
+    its CPV 33 rule and its own ban (check_digital_lane), and this check keeps the
+    two apart in the other direction: every row here must be a lane row, every
+    match is re-derived with scripts/company_match.py exactly as the medical feed's
+    are, and no notice may be published against the same company in both files."""
+    if doc is None:
+        if "company-digital-awards.json" in (report_js or ""):
+            WARN("digital-awards", "app/company-report.js reads company-digital-awards.json "
+                                   "but the file is not in data/. The section will say the "
+                                   "index has not loaded.")
+        return
+    try:
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "scripts"))
+        import company_match
+    except Exception as exc:
+        FAIL("digital-awards", "cannot import scripts/company_match.py (%s), so no published "
+                               "digital award match can be re-derived. Do not push." % exc)
+        return
+    if doc.get("lane") != "digital":
+        FAIL("digital-awards", "company-digital-awards.json has no lane=digital marker.")
+    if doc.get("matchRule") != company_match.RULE:
+        FAIL("digital-awards", "the matchRule printed in company-digital-awards.json is not the "
+                               "rule scripts/company_match.py applies. Re-run "
+                               "scripts/refresh_company_digital_awards.py.")
+    for field in ("sectionRule", "laneRule", "clinicalRule", "source"):
+        if not str(doc.get(field) or "").strip():
+            FAIL("digital-awards", "company-digital-awards.json carries no `%s`: the rule "
+                                   "travels with the data." % field)
+    gen = as_date(doc.get("generated"))
+    if gen and gen > today():
+        FAIL("digital-awards", "company-digital-awards.json says it was generated on %s, which "
+                               "has not happened yet." % doc.get("generated"))
+
+    seed_names = {s.get("name") for s in ((seed or {}).get("suppliers") or []) if s.get("name")}
+    index = company_match.build_index(seed or {"suppliers": []})
+    lane_urls = {a.get("url") for a in ((lane or {}).get("awards") or []) if a.get("url")}
+    medical = set()
+    for company, rows in ((company_awards or {}).get("companies") or {}).items():
+        for r in rows or []:
+            medical.add((company, r.get("url")))
+
+    companies = doc.get("companies") or {}
+    rows_seen, not_in_lane = 0, []
+    for company, rows in sorted(companies.items()):
+        if seed_names and company not in seed_names:
+            FAIL("digital-awards", "company-digital-awards.json attaches award(s) to %r, which "
+                                   "is not a supplier record in data/supplier-seed.json."
+                                   % company)
+        for row in rows or []:
+            rows_seen += 1
+            supplier = row.get("noticeSupplierName") or ""
+            got, state, _ = company_match.resolve(supplier, index)
+            if state != "confirmed" or got != company:
+                FAIL("digital-awards", "the notice naming %r is published against %r, but "
+                                       "re-resolving the name gives %s (%s). Re-run "
+                                       "scripts/refresh_company_digital_awards.py."
+                                       % (supplier, company, repr(got) if got else "no company",
+                                          state))
+            if row.get("lane") != "digital":
+                FAIL("digital-awards", "a row published against %r (%r) is not tagged "
+                                       "lane=digital." % (company, row.get("title")))
+            if not any(str(c).startswith(("48", "72")) for c in row.get("digitalCpv") or []):
+                FAIL("digital-awards", "a row published against %r (%r) carries no CPV 48 or 72 "
+                                       "code, so it is not a software or IT notice."
+                                       % (company, row.get("title")))
+            url = str(row.get("url") or "")
+            if not url.startswith("http"):
+                FAIL("digital-awards", "a row published against %r carries no notice URL."
+                                       % company)
+            elif url not in lane_urls:
+                not_in_lane.append(url)
+            d = as_date(row.get("date"))
+            if not d:
+                FAIL("digital-awards", "a row published against %r carries no usable date (%r)."
+                                       % (company, row.get("date")))
+            elif d > today():
+                FAIL("digital-awards", "a row published against %r is dated %s, which has not "
+                                       "happened yet." % (company, row.get("date")))
+            amount = row.get("valueAmount")
+            if amount is not None and (isinstance(amount, bool)
+                                       or not isinstance(amount, (int, float)) or amount == 0):
+                FAIL("digital-awards", "a row published against %r carries value %r. A notice "
+                                       "with no value gives null, never 0 or text."
+                                       % (company, amount))
+            if (company, url) in medical:
+                FAIL("digital-awards", "%r is published against %r in BOTH company-awards.json "
+                                       "and company-digital-awards.json, so the report would "
+                                       "count one notice twice." % (url, company))
+    if not_in_lane:
+        # Carried forward on purpose (append-only): the lane walk has moved on. Not a
+        # fault, but say how many so a collapse of the lane file is visible.
+        WARN("digital-awards", "%d published digital award row(s) are no longer in "
+                               "digital-lane.json and are carried forward (e.g. %s)."
+                               % (len(not_in_lane), not_in_lane[0]))
+    stale = []
+    for row in (doc.get("unmatched") or []) + (doc.get("ambiguous") or []):
+        got, state, _ = company_match.resolve(row.get("noticeSupplierName") or "", index)
+        if state == "confirmed":
+            stale.append((row.get("noticeSupplierName"), got))
+    if stale:
+        WARN("digital-awards", "%d quarantined digital award(s) now resolve to a Hub company "
+                               "(e.g. %r -> %r). Run scripts/refresh_company_digital_awards.py."
+                               % (len(stale), stale[0][0], stale[0][1]))
+    counts = doc.get("counts") or {}
+    for label, actual in (("companies", len(companies)), ("awardRows", rows_seen),
+                          ("unmatched", len(doc.get("unmatched") or [])),
+                          ("ambiguous", len(doc.get("ambiguous") or []))):
+        if counts.get(label) != actual:
+            FAIL("digital-awards", "counts.%s is %r but the file holds %d."
+                 % (label, counts.get(label), actual))
+
+
 def check_trust_digital_profile(doc, trust_map):
     """data/trust-digital-profile.json (20/10/2026): NHS Federated Data Platform status
     per trust, read from NHS England's own lists and joined to the ODS trust map by
@@ -7098,6 +7214,8 @@ def main():
     check_awareness(load("awareness-days.json"))
     check_digital_lane(load("digital-lane.json"), load("company-awards.json"),
                        load("open-tenders.json"))
+    check_company_digital_awards(load("company-digital-awards.json"), load("supplier-seed.json"),
+                                 load("digital-lane.json"), load("company-awards.json"), report_js)
     check_trust_digital_profile(load("trust-digital-profile.json"), load("trust-map.json"))
     check_gates_watch(load("gates-watch.json"))
     check_calendar(load("hub-calendar.json"))
