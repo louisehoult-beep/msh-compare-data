@@ -149,6 +149,7 @@ RUN = [
     # their verify.py checks. Offline, stdlib only, ~0.1s, writes nothing.
     "test_mhra_dsu_and_tariff_viiia.py",
     "test_my_hub_catalogue.py",
+    "test_npm_finder.py",
     "test_my_hub_css.py",
     "test_nhssc_card.py",
     "test_numeric_id_division.py",

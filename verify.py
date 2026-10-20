@@ -427,6 +427,54 @@ def check_trust_map(tm):
 ICB_EVENT_KINDS = {"leadership", "legal-end", "new-icb", "national", "curated", "cluster"}
 
 
+def check_npm_finder(doc, fwdoc):
+    """NPM Finder (data/npm-finder.json, scripts/refresh_npm_finder.py).
+
+    Three things must hold, or a member sees a wrong route to a discount:
+    every category joined to a framework is joined to a LIVE framework the Hub
+    publishes, with the same dates (WARN only: other workflows write
+    frameworks.json and must not be blocked by this file); no category carries a supplier list (which
+    suppliers offer an NPM is not public, so the file must not claim to know);
+    and the published counts agree with the rows.
+    """
+    if doc is None:
+        WARN("npm-finder", "data/npm-finder.json is missing; the NPM Finder page shows its "
+                           "unavailable message.")
+        return
+    cats = doc.get("categories") or []
+    if len(cats) < 15:
+        FAIL("npm-finder", "only %d NPM categories; the refresh guard should have refused "
+                           "this. Do not publish a partial list." % len(cats))
+    if doc.get("categoryCount") != len(cats):
+        FAIL("npm-finder", "categoryCount %r does not match %d rows." % (doc.get("categoryCount"), len(cats)))
+    matched = [c for c in cats if c.get("framework")]
+    if doc.get("matchedCount") != len(matched):
+        FAIL("npm-finder", "matchedCount %r does not match %d matched rows."
+             % (doc.get("matchedCount"), len(matched)))
+    live = {f.get("name"): f for f in (fwdoc or {}).get("frameworks", []) if f.get("name")}
+    for c in cats:
+        if "suppliers" in c or "suppliers" in (c.get("framework") or {}):
+            FAIL("npm-finder", "%s carries a supplier list. Which suppliers offer an NPM is "
+                               "behind NHS Supply Chain's login; the Finder must not claim it."
+                 % c.get("category"))
+        fw = c.get("framework")
+        if not fw:
+            continue
+        ref = live.get(fw.get("name"))
+        # WARN, not FAIL: data/frameworks.json has five other writers, and a
+        # framework expiring there must never block their publish. The weekly
+        # refresh re-joins and clears the warning.
+        if ref is None:
+            WARN("npm-finder", "%s is joined to '%s', which is not a live framework in "
+                               "data/frameworks.json. Re-run scripts/refresh_npm_finder.py."
+                 % (c.get("category"), fw.get("name")))
+        elif (ref.get("starts"), ref.get("ends")) != (fw.get("starts"), fw.get("ends")):
+            WARN("npm-finder", "%s shows framework dates %s to %s but data/frameworks.json says "
+                               "%s to %s. Re-run scripts/refresh_npm_finder.py."
+                 % (c.get("category"), fw.get("starts"), fw.get("ends"),
+                    ref.get("starts"), ref.get("ends")))
+
+
 def check_icb_watch(doc, today_iso=None):
     today_iso = today_iso or today().isoformat()
     if doc is None:
@@ -6924,6 +6972,7 @@ def main():
 
     trust_codes = check_trust_map(load("trust-map.json"))
     check_icb_watch(load("icb-watch.json"))
+    check_npm_finder(load("npm-finder.json"), load("frameworks.json"))
     n = check_contacts(load("trust-contacts.json"), trust_codes, blocked, retention) or 0
     check_tags(load("trust-contacts.json"), load("products.json"))
     check_moves(load("people-moves.json"), trust_codes, blocked,

@@ -182,6 +182,8 @@ REFS = {
     "discontinued-on-formulary.json":  "ETH-D32716FBD",
     # Added 16/10/2026: ICB cluster watch (new minutes, changed Skin chapter pages).
     "cluster-watch.json":              "ETH-D47111DC3",
+    # Added 20/10/2026: NHS Supply Chain National Pricing Matrix finder.
+    "npm-finder.json":                 "ETH-DAD6FDB5B",
 }
 
 
