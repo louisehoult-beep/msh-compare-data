@@ -1346,6 +1346,29 @@
         (f.source === 'nhssc-brief' || /supplychain\.nhs\.uk\/product-information\/contract-launch-brief\//.test(f.url)));
     });
 
+    /* National digital frameworks (20/10/2026, scripts/backfill_digital_frameworks.py).
+       These rows are READ from the framework owner's own published supplier list,
+       lot by lot, so they are not hand-tracked and must not sit under that
+       heading. They get their own sourced group, with the lots the list names. */
+    var digitalFw = curated.filter(function (f) { return f && f.source === 'digital-frameworks'; });
+    curated = curated.filter(function (f) { return !(f && f.source === 'digital-frameworks'); });
+    if (digitalFw.length) {
+      body += '<div style="font-size:12.5px;font-weight:700;color:' + INK + ';margin:14px 0 4px;">National digital frameworks</div>' +
+        '<div style="font-size:11.5px;color:' + DIM + ';margin:0 0 6px;">Read from the framework owner&rsquo;s own published supplier list, lot by lot. A place on a national framework is a route to buy, not a contract.</div>' +
+        '<div class="mcr-fw-grid">' + digitalFw.map(function (f) {
+          var lots = (f.lots || []).map(function (l) { return 'Lot ' + esc(l.lot) + ' ' + esc(l.name || ''); }).join('; ');
+          return '<div style="padding:8px 0;border-bottom:1px solid #f0ece3;font-size:13.5px;line-height:1.55;"><b>' + esc(f.name) + '</b>' +
+            '<br><span style="font-size:12.5px;color:#37485a;">' +
+            (f.owner ? esc(f.owner) + ' &middot; ' : '') + (f.reference ? 'ref ' + esc(f.reference) + ' &middot; ' : '') +
+            esc(f.dates || '') + '</span>' +
+            (lots ? '<br><span class="mcr-fw-lot" style="font-size:12.5px;color:#37485a;"><b style="color:' + INK + ';">Lots:</b> ' + lots + '</span>' : '') +
+            '<br><span style="font-size:12.5px;color:' + DIM + ';">' + (f.supplierCount ? esc(String(f.supplierCount)) + ' suppliers on this framework &middot; ' : '') +
+            'list read ' + esc(dateUK(f.capturedOn || '')) +
+            (f.url ? ' &middot; <a href="' + esc(f.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">framework owner&rsquo;s page &#8599;</a>' : '') +
+            '</span></div>';
+        }).join('') + '</div>';
+    }
+
     if (curated.length) {
       body += '<div style="font-size:12.5px;font-weight:700;color:' + INK + ';margin:14px 0 4px;">Also tracked by hand</div>' +
         '<div style="font-size:11.5px;color:' + DIM + ';margin:0 0 6px;">Tender-watch notes: re-tender values, award criteria and award dates, which the launch briefs do not carry. Curated, not read from a brief.</div>' +
