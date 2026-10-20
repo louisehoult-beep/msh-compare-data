@@ -47,6 +47,20 @@ class Build(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             rds.build(f, "2026-10-20")
 
+    def test_all_blocks_failed_raises_even_with_previous(self):
+        def f(url, **k):
+            raise RuntimeError("blocked")
+        prev = {"dma": {"verifiedOn": "2026-10-13"}, "nhsApp": {"verifiedOn": "2026-10-13"}}
+        with self.assertRaises(RuntimeError):
+            rds.build(f, "2026-10-20", prev)
+
+    def test_all_blocks_failed_raises_even_with_previous(self):
+        def f(url, **k):
+            raise RuntimeError("blocked")
+        prev = {"dma": {"verifiedOn": "2026-10-13"}, "nhsApp": {"verifiedOn": "2026-10-13"}}
+        with self.assertRaises(RuntimeError):
+            rds.build(f, "2026-10-20", prev)
+
     def test_failed_block_keeps_previous_and_flags(self):
         def f(url, **k):
             if "digital-maturity" in url:
