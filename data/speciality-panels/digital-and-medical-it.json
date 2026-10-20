@@ -11,21 +11,22 @@
   "contact": "contact@elevateandthrive.uk"
  },
  "slug": "digital-and-medical-it",
- "label": "Digital and Medical IT",
+ "label": "Digital health and AI",
  "defined": true,
- "generated": "2026-10-14",
+ "generated": "2026-10-20",
  "dataAsOf": {
   "frameworks": "2026-10-12",
-  "tenderHistory": "2026-10-13",
-  "frameworkAwards": "2026-10-14T11:43:51+00:00",
-  "openTenders": "14/10/2026",
-  "drugTariff": "2026-10-14",
-  "localIntel": "2026-10-14",
-  "supplierDirectory": "2026-10-10",
+  "tenderHistory": "2026-10-20",
+  "frameworkAwards": "2026-10-19T12:59:50+00:00",
+  "openTenders": "18/10/2026",
+  "drugTariff": "2026-10-19",
+  "localIntel": "2026-10-20",
+  "supplierDirectory": "2026-10-16",
   "gpPrescribing": "2026-09-30",
-  "mhraDsu": "2026-10-13",
+  "mhraDsu": "2026-10-19",
   "drugTariffViiia": null,
-  "hospitalPrescribing": null
+  "hospitalPrescribing": null,
+  "digitalLane": "20/10/2026"
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -37,7 +38,8 @@
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: digital, it). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 14 of the 33 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
   "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
   "mhraDsu": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
-  "drugTariffViiia": null
+  "drugTariffViiia": null,
+  "digitalLane": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction. CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only. A call-off under a framework is not a notice, and most digital money in the NHS moves as framework call-offs, capital business cases and G-Cloud awards without competition. This lane is therefore a floor, not a census: an absence here says nothing about the buyer or the market. Contract values, where shown, are the notice's own and are not summed across rows. Shown here: the clinical rows only, up to 15 awards and every open notice and market engagement row. The full lane, with the rows left out, is data/digital-lane.json."
  },
  "counts": {
   "frameworks": 2,
@@ -48,14 +50,15 @@
   "awardsWithheldByBuyerCap": 0,
   "awardsShownNotYetAwarded": 2,
   "openTenders": 0,
-  "localIntel": 0,
+  "localIntel": 3,
   "suppliersFrameworkNamedAlsoTagged": 39,
   "suppliersDirectoryTagged": 33,
   "suppliersDirectoryOnOtherFrameworks": 9,
   "suppliersDirectoryWithFrameworkNote": 14,
   "gpMarkets": 0,
   "mhraDsu": 0,
-  "drugTariffViiiaLines": 0
+  "drugTariffViiiaLines": 0,
+  "digitalLaneShown": 15
  },
  "frameworks": [
   {
@@ -989,7 +992,69 @@
  ],
  "openTenders": [],
  "drugTariff": null,
- "localIntel": [],
+ "localIntel": [
+  {
+   "id": "dig-ai-airlock-p3",
+   "group": "policy",
+   "kind": "Regulatory sandbox",
+   "nation": "Great Britain",
+   "org": "Medicines and Healthcare products Regulatory Agency (MHRA)",
+   "title": "AI Airlock Phase 3: call for applications open",
+   "date": "06/10/2026",
+   "fact": "The MHRA's regulatory sandbox for artificial intelligence (AI)-enabled medical devices opened its third phase on 6 October 2026, with applications made through the Phase 3 application form on the page. No closing date is given on the page. Phase 2 completed in May 2026 with 7 innovators across 3 regulatory challenges. The government response of the same day gives an applicant webinar on 22 October.",
+   "quote": "The MHRA announced on 6th October 2026 the launch of the third phase of the AI Airlock.",
+   "use": "The named route for an AI-enabled device maker to test a regulatory question with the regulator before market. Cohort members named on the MHRA's cohort pages are companies with an active regulatory conversation.",
+   "url": "https://www.gov.uk/government/collections/ai-airlock-a-regulatory-sandbox-for-ai-enabled-medical-devices",
+   "verifiedOn": "2026-10-20",
+   "lastCheck": {
+    "date": "2026-10-20",
+    "status": "ok",
+    "http": 200,
+    "quote": "found"
+   }
+  },
+  {
+   "id": "dig-dtac-refresh",
+   "group": "policy",
+   "kind": "National assurance standard",
+   "nation": "England",
+   "org": "NHS England",
+   "title": "Digital Technology Assessment Criteria (DTAC): refreshed form; previous form retired from 6 April 2026",
+   "date": "06/04/2026",
+   "fact": "NHS England's refreshed DTAC form has a 25% reduction in questions and is de-duplicated with the Data Security and Protection Toolkit (DSPT) and the pre-acquisition questionnaire. The page states the previous version of the form should not be used from 6 April 2026 onwards. DTAC covers clinical safety, data protection, technical security, interoperability, and usability and accessibility. Page last edited 21 September 2026.",
+   "quote": "The previous version of the DTAC form should not be used from 6 April 2026 onwards.",
+   "use": "The assurance form an NHS buyer in England asks a digital health supplier to complete. A supplier still sending the pre-April 2026 form is sending one the owner has retired.",
+   "url": "https://digital.nhs.uk/services/digital-technology-assessment-criteria-dtac",
+   "verifiedOn": "2026-10-20",
+   "lastCheck": {
+    "date": "2026-10-20",
+    "status": "ok",
+    "http": 200,
+    "quote": "found"
+   }
+  },
+  {
+   "id": "dig-ai-commission-response",
+   "group": "policy",
+   "kind": "Government response",
+   "nation": "UK",
+   "org": "Medicines and Healthcare products Regulatory Agency (MHRA) and ministers",
+   "title": "Government accepts all 44 recommendations of the National Commission into the Regulation of AI in Healthcare",
+   "date": "06/10/2026",
+   "ends": "Draft guidance by December 2026",
+   "fact": "On 6 October 2026 the government confirmed it will accept all 44 recommendations of the National Commission into the Regulation of AI in Healthcare (published 10 September). The MHRA is committed to issue draft guidance by December 2026 on a new approach to managing changes to artificial intelligence (AI)-enabled medical devices, and will begin next year by consulting on how to qualify and classify AI-enabled devices.",
+   "quote": "confirmed it will accept all 44 recommendations made by the National Commission into the Regulation of AI in Healthcare",
+   "use": "The dated regulatory timetable for AI-enabled devices: draft change-management guidance by December 2026, then a qualification and classification consultation.",
+   "url": "https://www.gov.uk/government/news/government-backs-recommendations-of-nhs-doctors-led-ai-commission",
+   "verifiedOn": "2026-10-20",
+   "lastCheck": {
+    "date": "2026-10-20",
+    "status": "ok",
+    "http": 200,
+    "quote": "found"
+   }
+  }
+ ],
  "localIntelGroups": {
   "routes": "National and framework routes",
   "local": "Who holds the contract where",
@@ -1008,7 +1073,7 @@
     "Digital and medical IT"
    ],
    "via": [
-    "speciality-map.json canonical label"
+    "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [
     {
@@ -1065,7 +1130,7 @@
     "Digital and medical IT"
    ],
    "via": [
-    "speciality-map.json canonical label"
+    "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [
     {
@@ -1107,7 +1172,7 @@
     "Digital and medical IT"
    ],
    "via": [
-    "speciality-map.json canonical label"
+    "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [
     {
@@ -1202,7 +1267,7 @@
     "Digital and medical IT"
    ],
    "via": [
-    "speciality-map.json canonical label"
+    "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [
     {
@@ -1341,7 +1406,7 @@
     "Digital and medical IT"
    ],
    "via": [
-    "speciality-map.json canonical label"
+    "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
    "directoryFrameworks": [
@@ -1378,7 +1443,7 @@
     "Digital and medical IT"
    ],
    "via": [
-    "speciality-map.json canonical label"
+    "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
    "directoryFrameworks": [
@@ -1431,7 +1496,7 @@
     "Digital and medical IT"
    ],
    "via": [
-    "speciality-map.json canonical label"
+    "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
    "directoryFrameworks": [
@@ -1500,7 +1565,7 @@
     "Digital and medical IT"
    ],
    "via": [
-    "speciality-map.json canonical label"
+    "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
    "directoryFrameworks": [
@@ -1569,7 +1634,7 @@
     "Digital and medical IT"
    ],
    "via": [
-    "speciality-map.json canonical label"
+    "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
    "directoryFrameworks": [
@@ -1646,7 +1711,7 @@
   "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
  },
  "mhraDsu": {
-  "dataAsOf": "2026-10-13",
+  "dataAsOf": "2026-10-19",
   "sourcePage": "https://www.gov.uk/drug-safety-update",
   "noFacet": true,
   "whyEmpty": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
@@ -1655,5 +1720,392 @@
   "broadcastsExcluded": 0,
   "updates": []
  },
- "drugTariffViiia": null
+ "drugTariffViiia": null,
+ "digitalLane": {
+  "dataAsOf": "20/10/2026",
+  "rule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction. CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only. A call-off under a framework is not a notice, and most digital money in the NHS moves as framework call-offs, capital business cases and G-Cloud awards without competition. This lane is therefore a floor, not a census: an absence here says nothing about the buyer or the market. Contract values, where shown, are the notice's own and are not summed across rows. Shown here: the clinical rows only, up to 15 awards and every open notice and market engagement row. The full lane, with the rows left out, is data/digital-lane.json.",
+  "counts": {
+   "awards": 258,
+   "awardsClinical": 30,
+   "openNotices": 1,
+   "openNoticesClinical": 0,
+   "marketEngagement": 2,
+   "marketEngagementClinical": 0
+  },
+  "openNotices": [],
+  "marketEngagement": [],
+  "awards": [
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "planning",
+    "title": "Endoscopy Management Systems for the Peninsula Endoscopy Network",
+    "buyer": "ROYAL DEVON UNIVERSITY HEALTHCARE NHS FOUNDATION TRUST",
+    "published": "2026-10-16",
+    "isFramework": false,
+    "contractEnd": null,
+    "value": null,
+    "digitalCpv": [
+     "48814000",
+     "72261000",
+     "72263000",
+     "72267000",
+     "72268000",
+     "72322000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/098017-2026",
+    "ocid": "ocds-h6vhtk-0787ec"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "award",
+    "title": "AI enabled Ambient Voice Technology(AVT)",
+    "buyer": "Surrey and Borders Partnership NHS Foundation Trust",
+    "published": "2026-10-16",
+    "isFramework": false,
+    "contractEnd": null,
+    "value": null,
+    "digitalCpv": [
+     "48180000",
+     "72212314"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/098221-2026",
+    "ocid": "ocds-h6vhtk-078a2d"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "award",
+    "title": "AVT Benefits Evaluation Partner",
+    "buyer": "Surrey and Borders Partnership NHS Foundation Trust",
+    "published": "2026-10-16",
+    "isFramework": true,
+    "contractEnd": null,
+    "value": null,
+    "digitalCpv": [
+     "72000000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/097966-2026",
+    "ocid": "ocds-h6vhtk-07898e"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "award",
+    "title": "WHHT - Endoscopy Management System (EMS)",
+    "buyer": "West Hertfordshire Teaching Hospitals NHS Trust",
+    "published": "2026-10-15",
+    "isFramework": false,
+    "contractEnd": "2028-11-21",
+    "value": 84000.0,
+    "digitalCpv": [
+     "72260000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/097462-2026",
+    "ocid": "ocds-h6vhtk-078881"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "award",
+    "title": "Chest X-Ray Artificial Intelligence Solution and Radiology AI Platform",
+    "buyer": "SOMERSET NHS FOUNDATION TRUST",
+    "published": "2026-10-14",
+    "isFramework": false,
+    "contractEnd": null,
+    "value": null,
+    "digitalCpv": [
+     "72250000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/096998-2026",
+    "ocid": "ocds-h6vhtk-078788"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "award",
+    "title": "Infrastructure Specialist Service EPR",
+    "buyer": "The Christie NHS Foundation Trust",
+    "published": "2026-10-13",
+    "isFramework": false,
+    "contractEnd": "2027-03-31",
+    "value": 68908.0,
+    "digitalCpv": [
+     "72266000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/096595-2026",
+    "ocid": "ocds-h6vhtk-0786a9"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "award",
+    "title": "Video Consultation Platform",
+    "buyer": "Cardiff and Vale University Health Board",
+    "published": "2026-10-06",
+    "isFramework": false,
+    "contractEnd": "2029-12-31",
+    "value": 300000.0,
+    "digitalCpv": [
+     "72211000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/094368-2026",
+    "ocid": "ocds-h6vhtk-05d17e"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "planning",
+    "title": "Digital Primary Care Open Framework",
+    "buyer": "NHS England",
+    "published": "2026-10-06",
+    "isFramework": true,
+    "contractEnd": null,
+    "value": null,
+    "digitalCpv": [
+     "48180000",
+     "48311000",
+     "72263000",
+     "72300000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/094419-2026",
+    "ocid": "ocds-h6vhtk-050c1e"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "planning",
+    "title": "AI Overlay for the Existing Avaya Elite Telephony Platform",
+    "buyer": "North East Ambulance Service NHS Foundation Trust",
+    "published": "2026-09-29",
+    "isFramework": false,
+    "contractEnd": null,
+    "value": null,
+    "digitalCpv": [
+     "48000000",
+     "72000000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/091997-2026",
+    "ocid": "ocds-h6vhtk-077cc4"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "award",
+    "title": "Provision of an AI Powered Documentation Tool",
+    "buyer": "NHS SOMERSET INTEGRATED CARE BOARD",
+    "published": "2026-09-28",
+    "isFramework": false,
+    "contractEnd": null,
+    "value": null,
+    "digitalCpv": [
+     "48000000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/091306-2026",
+    "ocid": "ocds-h6vhtk-077b41"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "award",
+    "title": "Artificial intelligence platform.",
+    "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+    "published": "2026-09-23",
+    "isFramework": false,
+    "contractEnd": "2027-09-22",
+    "value": 15000,
+    "digitalCpv": [
+     "72000000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/089884-2026",
+    "ocid": "ocds-h6vhtk-07780b"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "planning",
+    "title": "BWC Genetics LIMS Pre-Market Engagement",
+    "buyer": "Birmingham Women's and Children's NHS Foundation Trust",
+    "published": "2026-09-23",
+    "isFramework": false,
+    "contractEnd": null,
+    "value": null,
+    "digitalCpv": [
+     "48000000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/090141-2026",
+    "ocid": "ocds-h6vhtk-07789f"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "tender",
+    "title": "NECTAR Electronic Patient Record",
+    "buyer": "The Newcastle Upon Tyne Hospitals NHS Foundation Trust",
+    "published": "2026-09-22",
+    "isFramework": false,
+    "contractEnd": null,
+    "value": null,
+    "digitalCpv": [
+     "48814200"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/089704-2026",
+    "ocid": "ocds-h6vhtk-05d14b"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "planning",
+    "title": "NWL APG Ambient Voice Technology",
+    "buyer": "Imperial College Healthcare NHS Trust",
+    "published": "2026-09-17",
+    "isFramework": false,
+    "contractEnd": null,
+    "value": null,
+    "digitalCpv": [
+     "48000000",
+     "72212314"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/088063-2026",
+    "ocid": "ocds-h6vhtk-077413"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "award",
+    "title": "ENHT - Radiology AI Autocontouring",
+    "buyer": "East and North Hertfordshire Teaching NHS Trust",
+    "published": "2026-09-11",
+    "isFramework": false,
+    "contractEnd": "2028-07-31",
+    "value": 63168.0,
+    "digitalCpv": [
+     "48180000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/086414-2026",
+    "ocid": "ocds-h6vhtk-06f814"
+   }
+  ],
+  "awardsClinicalTotal": 30,
+  "gates": {
+   "rule": "Each row is one owner page for a health tech gate. lastUpdated is the owner's own date: GOV.UK's public_updated_at from its content API, or the 'Last edited' line on an NHS England Digital page. latestChange is the owner's own change note, verbatim, where the owner publishes one. changedSinceLastRun is true when that date moved since the previous run. Nothing is summarised or interpreted.",
+   "dataAsOf": "20/10/2026",
+   "pages": [
+    {
+     "gate": "Regulation",
+     "owner": "Medicines and Healthcare products Regulatory Agency (MHRA)",
+     "title": "Register medical devices to place on the market",
+     "url": "https://www.gov.uk/guidance/register-medical-devices-to-place-on-the-market",
+     "lastUpdated": "2026-10-16",
+     "latestChange": "Updated 'Fees' section with 2026/2027 annual fees information.",
+     "changedSinceLastRun": false,
+     "status": "ok"
+    },
+    {
+     "gate": "Regulation",
+     "owner": "Medicines and Healthcare products Regulatory Agency (MHRA)",
+     "title": "AI Airlock: a regulatory sandbox for AI enabled Medical Devices",
+     "url": "https://www.gov.uk/government/collections/ai-airlock-a-regulatory-sandbox-for-ai-enabled-medical-devices",
+     "lastUpdated": "2026-10-06",
+     "latestChange": "Page updated to provide details on the launch of phase 3 and call for applications",
+     "changedSinceLastRun": false,
+     "status": "ok"
+    },
+    {
+     "gate": "Regulation",
+     "owner": "Department of Health and Social Care and the MHRA",
+     "title": "Government backs recommendations of NHS doctors-led AI Commission",
+     "url": "https://www.gov.uk/government/news/government-backs-recommendations-of-nhs-doctors-led-ai-commission",
+     "lastUpdated": "2026-10-06",
+     "latestChange": "Updated to reflect the ten priority areas outlined in the response (previously stated as nine).",
+     "changedSinceLastRun": false,
+     "status": "ok"
+    },
+    {
+     "gate": "Regulation",
+     "owner": "Medicines and Healthcare products Regulatory Agency (MHRA)",
+     "title": "Good machine learning practice for medical device development",
+     "url": "https://www.gov.uk/government/publications/good-machine-learning-practice-for-medical-device-development-guiding-principles",
+     "lastUpdated": "2026-10-05",
+     "latestChange": "Updated MHRA contact email from: software@mhra.gov.uk to info@mhra.gov.uk [Contact details as published by Medicines and Healthcare products Regulatory Agency (MHRA). Data protection: reproduced by Elevate and Thrive Ltd for professional contact about this item only. Anyone named can ask for their details to be removed at contact@elevateandthrive.uk.]",
+     "changedSinceLastRun": false,
+     "status": "ok"
+    },
+    {
+     "gate": "Assurance",
+     "owner": "NHS England",
+     "title": "Digital Technology Assessment Criteria (DTAC) guidance for buyers and suppliers",
+     "url": "https://digital.nhs.uk/services/digital-technology-assessment-criteria-dtac",
+     "lastUpdated": "2026-09-21",
+     "latestChange": null,
+     "changedSinceLastRun": false,
+     "status": "ok"
+    },
+    {
+     "gate": "Regulation",
+     "owner": "National Commission into the Regulation of AI in Healthcare",
+     "title": "National Commission into the Regulation of AI in Healthcare: Recommendations for a future regulatory framework",
+     "url": "https://www.gov.uk/government/publications/national-commission-into-the-regulation-of-ai-in-healthcare-recommendations-for-a-future-regulatory-framework",
+     "lastUpdated": "2026-09-10",
+     "latestChange": "First published.",
+     "changedSinceLastRun": false,
+     "status": "ok"
+    },
+    {
+     "gate": "Regulation",
+     "owner": "Medicines and Healthcare products Regulatory Agency (MHRA)",
+     "title": "Ambient voice technology-enabled products",
+     "url": "https://www.gov.uk/government/publications/ambient-voice-technology-enabled-products",
+     "lastUpdated": "2026-07-29",
+     "latestChange": "First published.",
+     "changedSinceLastRun": false,
+     "status": "ok"
+    },
+    {
+     "gate": "Regulation",
+     "owner": "Medicines and Healthcare products Regulatory Agency (MHRA)",
+     "title": "Regulating medical devices in the UK",
+     "url": "https://www.gov.uk/guidance/regulating-medical-devices-in-the-uk",
+     "lastUpdated": "2026-02-20",
+     "latestChange": "Updates to Regulation of medical devices in Northern Ireland.\r\n\r\nRemoval of text duplicated on other guidance pages.",
+     "changedSinceLastRun": false,
+     "status": "ok"
+    },
+    {
+     "gate": "Regulation",
+     "owner": "Medicines and Healthcare products Regulatory Agency (MHRA)",
+     "title": "Medical devices: software and artificial intelligence (AI)",
+     "url": "https://www.gov.uk/government/publications/software-and-artificial-intelligence-ai-as-a-medical-device",
+     "lastUpdated": "2025-02-03",
+     "latestChange": "Added link to guidance on digital mental health technology: qualification and classification.",
+     "changedSinceLastRun": false,
+     "status": "ok"
+    },
+    {
+     "gate": "Clinical safety",
+     "owner": "NHS England",
+     "title": "Clinical risk management standards",
+     "url": "https://digital.nhs.uk/services/clinical-safety/clinical-risk-management-standards",
+     "lastUpdated": "2024-10-11",
+     "latestChange": null,
+     "changedSinceLastRun": false,
+     "status": "ok"
+    }
+   ]
+  },
+  "fdp": {
+   "headline": {
+    "trustsLive": 142,
+    "icbsLive": 35,
+    "trustsSignedUp": 170,
+    "icbsSignedUp": 35
+   },
+   "sourceUpdatedOn": "25 September 2026",
+   "sourceAsAt": "end of August 2026",
+   "sourceNextUpdate": "December 2026",
+   "url": "https://www.england.nhs.uk/digitaltechnology/nhs-federated-data-platform/impact/fdp-uptake-and-benefits/nhs-trusts-live-with-nhs-fdp/",
+   "countsAgree": true
+  }
+ }
 }

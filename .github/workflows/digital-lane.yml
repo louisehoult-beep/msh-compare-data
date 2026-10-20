@@ -1,0 +1,94 @@
+name: Digital health lane and Federated Data Platform profile (daily)
+
+# ADDED 20/10/2026 (Hub health tech intelligence gap, build plan "Next 30 days").
+#
+# scripts/refresh_digital_lane.py writes data/digital-lane.json: NHS-buyer notices
+# with a CPV 48 or 72 (software, IT services), from framework-awards.json (06:10),
+# a live tender/planning pass over Find a Tender and Contracts Finder, and the Atamis
+# live file (00:50). It never writes company-awards.json or open-tenders.json; their
+# CPV 33 medical rule is unchanged. verify.py check_digital_lane() enforces both.
+#
+# scripts/refresh_fdp_live.py writes data/trust-digital-profile.json from NHS
+# England's Federated Data Platform lists. The source updates quarterly, so it runs
+# on Mondays only; a run on an unchanged page rewrites the same rows.
+#
+# 06:35 UTC: after framework-awards (06:10) and open-tenders (06:25), before
+# speciality-panels (07:00), which reads both files into the digital page.
+
+on:
+  schedule:
+    - cron: "35 6 * * *"
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Lookback window in days for open notices (default 8)"
+        required: false
+        default: "8"
+
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  digital-lane:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Refresh the digital lane
+        run: python3 scripts/refresh_digital_lane.py --days "${{ github.event.inputs.days || 8 }}"
+
+      - name: Refresh the Gates Tracker (owner page change dates)
+        run: python3 scripts/refresh_gates_watch.py
+
+      - name: Refresh the Federated Data Platform profile (Mondays, or on demand)
+        run: |
+          if [ "$(date -u +%u)" = "1" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            python3 scripts/refresh_fdp_live.py
+          else
+            echo "not Monday: Federated Data Platform profile left as it is"
+          fi
+
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+
+      - name: Publish gate — nothing commits until this passes
+        run: |
+          python3 scripts/prune_calendar.py
+          bash scripts/gate.sh
+      - name: Commit if changed
+        run: |
+          git config user.name "digital-lane-bot"
+          git config user.email "actions@github.com"
+          git add data/digital-lane.json data/trust-digital-profile.json data/gates-watch.json
+          git diff --cached --quiet || git commit -m "Digital lane $(date -u +%F)"
+          pushed=0
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first), attempt $attempt of 3."
+            git fetch origin
+            git reset --hard origin/main
+            python3 scripts/refresh_digital_lane.py --days "${{ github.event.inputs.days || 8 }}"
+            python3 scripts/stamp_notice.py
+            bash scripts/gate.sh || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
+            git add data/digital-lane.json data/trust-digital-profile.json data/gates-watch.json
+            git diff --cached --quiet || git commit -m "Digital lane $(date -u +%F) (retry)"
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 3 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi

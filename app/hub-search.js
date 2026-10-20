@@ -453,7 +453,7 @@
     ['audiology', '/medical-sales-hub/audiology-and-hearing/', 'Audiology and Hearing'],
     ['gp', '/medical-sales-hub/primary-care-and-general-practice/', 'Primary Care and General Practice'],
     ['primary care', '/medical-sales-hub/primary-care-and-general-practice/', 'Primary Care and General Practice'],
-    ['digital', '/medical-sales-hub/digital-and-medical-it/', 'Digital and Medical IT'],
+    ['digital', '/medical-sales-hub/digital-and-medical-it/', 'Digital health and AI'],
     ['sepsis', '/medical-sales-hub/sepsis-and-the-deteriorating-patient/', 'Sepsis and the Deteriorating Patient'],
     ['frailty', '/medical-sales-hub/frailty-and-older-people/', 'Frailty and Older People'],
     ['falls', '/medical-sales-hub/fall-prevention-medical-sales-market-insights/', 'Fall Prevention'],

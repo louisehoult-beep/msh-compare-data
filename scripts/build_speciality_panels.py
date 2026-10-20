@@ -7094,7 +7094,7 @@ SPECIALITY_RULES = {
     },
 
     "digital-and-medical-it": {
-        "label": "Digital and Medical IT",
+        "label": "Digital health and AI",
         # WRITTEN 11/09/2026, alongside the page-2919 build. This is the LAST of the
         # 43 specialities to get a rule, and it is deliberately the narrowest in the
         # file, because "digital" and "IT" are the two most promiscuous words in the
@@ -10064,8 +10064,68 @@ def build(slug, sources):
     if not disc:
         del doc["discontinuedOnFormulary"]
         del doc["rules"]["discontinuedOnFormulary"]
+    lane = build_digital_lane(slug, sources.get("digital_lane"), sources.get("trust_digital"),
+                              sources.get("gates_watch"))
+    if lane:
+        doc["digitalLane"] = lane
+        doc["rules"]["digitalLane"] = lane["rule"]
+        doc["counts"]["digitalLaneShown"] = (len(lane["openNotices"]) + len(lane["marketEngagement"])
+                                             + len(lane["awards"]))
+        doc["dataAsOf"]["digitalLane"] = lane["dataAsOf"]
     check_money(slug, doc["rules"])
     return doc
+
+
+# DIGITAL LANE (20/10/2026). data/digital-lane.json holds every NHS-buyer notice with
+# a CPV 48 or 72 (scripts/digital_lane_rules.py); this page shows the CLINICAL rows
+# only, because the lane also holds payroll, HR and office software. The medical
+# award and tender feeds above are untouched by it. The Federated Data Platform
+# count comes from data/trust-digital-profile.json (NHS England's own lists).
+DIGITAL_LANE_SLUG = "digital-and-medical-it"
+DIGITAL_LANE_AWARDS_SHOWN = 15
+
+
+def build_digital_lane(slug, lane_doc, fdp_doc, gates_doc=None):
+    if slug != DIGITAL_LANE_SLUG or not lane_doc:
+        return None
+    clin = lambda rows: [r for r in rows or [] if r.get("clinical")]
+    awards = clin(lane_doc.get("awards"))
+    out = {
+        "dataAsOf": lane_doc.get("dataAsOf"),
+        "rule": (
+            "%s %s %s Shown here: the clinical rows only, up to %d awards and every open "
+            "notice and market engagement row. The full lane, with the rows left out, is "
+            "data/digital-lane.json." % (
+                lane_doc.get("laneRule") or "", lane_doc.get("clinicalRule") or "",
+                lane_doc.get("scopeNote") or "", DIGITAL_LANE_AWARDS_SHOWN)),
+        "counts": lane_doc.get("counts") or {},
+        "openNotices": clin(lane_doc.get("openNotices")),
+        "marketEngagement": clin(lane_doc.get("marketEngagement")),
+        # Supplier names stay in data/digital-lane.json only: they are the notice's
+        # own spelling, not resolved through the alias registry, so they do not reach
+        # a page (verification standard rule 10).
+        "awards": [{k: v for k, v in r.items() if k != "suppliers"}
+                   for r in awards[:DIGITAL_LANE_AWARDS_SHOWN]],
+        "awardsClinicalTotal": len(awards),
+    }
+    if gates_doc and gates_doc.get("pages"):
+        out["gates"] = {
+            "rule": gates_doc.get("rule"),
+            "dataAsOf": gates_doc.get("dataAsOf"),
+            "pages": [{k: p.get(k) for k in ("gate", "owner", "title", "url", "lastUpdated",
+                                               "latestChange", "changedSinceLastRun", "status")}
+                      for p in gates_doc["pages"] if p.get("lastUpdated")],
+        }
+    if fdp_doc and fdp_doc.get("headline"):
+        out["fdp"] = {
+            "headline": fdp_doc["headline"],
+            "sourceUpdatedOn": fdp_doc.get("sourceUpdatedOn"),
+            "sourceAsAt": fdp_doc.get("sourceAsAt"),
+            "sourceNextUpdate": fdp_doc.get("sourceNextUpdate"),
+            "url": (fdp_doc.get("sourceUrls") or {}).get("live"),
+            "countsAgree": all(c.get("agrees") for c in fdp_doc.get("countCheck") or []),
+        }
+    return out
 
 
 def directory_rule(slug, directory):
@@ -10225,7 +10285,10 @@ def load_sources():
     sources["hp"] = HPData(os.path.join(DATA, "hospital-prescribing"))
     for key, name in (("mhra_dsu", "mhra-dsu.json"), ("tariff_viiia", "drug-tariff-part-viiia.json"),
                       ("tariff_snapshots", "tariff-snapshots.json"),
-                      ("discontinued", "discontinued-on-formulary.json")):
+                      ("discontinued", "discontinued-on-formulary.json"),
+                      ("digital_lane", "digital-lane.json"),
+                      ("trust_digital", "trust-digital-profile.json"),
+                      ("gates_watch", "gates-watch.json")):
         path = os.path.join(DATA, name)
         sources[key] = load(name) if os.path.exists(path) else None
     return sources
