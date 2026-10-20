@@ -1,0 +1,3870 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "ref": "ETH-D4F987882",
+  "contact": "contact@elevateandthrive.uk"
+ },
+ "lane": "digital",
+ "dataAsOf": "20/10/2026",
+ "generated": "2026-10-20",
+ "source": "Find a Tender and Contracts Finder award notices in the Hub's digital lane (data/digital-lane.json), Open Government Licence v3.",
+ "sectionRule": "Software and IT notices only. Each row is one supplier named on one Find a Tender or Contracts Finder award notice that an NHS buyer classified under a Common Procurement Vocabulary (CPV) code beginning 48 (software packages and information systems) or 72 (IT services). Those codes cover payroll, finance and office systems as much as clinical ones, so a row is not a claim of health technology. A row is counted as clinical only where the notice title names a clinical system. Medical device awards (CPV division 33) appear in the award sections above and are never repeated here.",
+ "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
+ "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
+ "matchRule": "A supplier named on an award notice is attached to a Hub company only where the notice's name, normalised, is EXACTLY a normalised form of that company's own name or one of its recorded aliases. Normalisation lower-cases, turns & into and, drops punctuation, and strips trailing legal-form words (Ltd, Limited, plc, LLP, Inc, GmbH, BV, A/S, AB, Oy, Pty) and trailing territory words (UK, GB, England, Ireland, Europe, EMEA). Nothing else is stripped and there is no fuzzy, substring or edit-distance matching. A name matching two different companies, or none, is quarantined unpublished — it is a question for a human, never a best guess. One name is tried before that stripping: a notice name that a company holds verbatim, as its own name or a recorded alias, resolves to that company. This is narrower than the rule above, never wider, and it exists so two real companies whose names differ only by a territory word are told apart rather than quarantined against each other.",
+ "coverage": {
+  "complete": false,
+  "note": "Only award notices the digital lane has read are here. Most NHS digital money moves as framework call-offs, which publish no notice of their own, so an empty section says what this index holds, not what a company has won.",
+  "laneCoverage": {
+   "complete": true,
+   "window": null,
+   "notes": [
+    "--offline: no notice feed fetched this run; open notices carried from the previous run."
+   ]
+  }
+ },
+ "counts": {
+  "companies": 21,
+  "awardRows": 27,
+  "unmatched": 158,
+  "ambiguous": 0,
+  "alreadyInMedicalFeed": 0
+ },
+ "companies": {
+  "Accurx": [
+   {
+    "title": "AI enabled Ambient Voice Technology(AVT)",
+    "buyer": "Surrey and Borders Partnership NHS Foundation Trust",
+    "date": "2026-10-16",
+    "url": "https://www.find-tender.service.gov.uk/Notice/098221-2026",
+    "ocid": "ocds-h6vhtk-078a2d",
+    "source": "Find a Tender",
+    "valueAmount": null,
+    "valueCurrency": null,
+    "periodEnd": null,
+    "isFramework": false,
+    "digitalCpv": [
+     "48180000",
+     "72212314"
+    ],
+    "clinical": true,
+    "lane": "digital",
+    "noticeSupplierName": "AccuRx Limited",
+    "noticeSupplierCount": 1,
+    "company": "Accurx",
+    "matchedOn": "the notice names \"AccuRx Limited\", which normalises to \"accurx\" — exactly the normalised form of this company's own name or a recorded alias."
+   },
+   {
+    "title": "Ambient Voice Technology - Pilot",
+    "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+    "date": "2026-08-18",
+    "url": "https://www.find-tender.service.gov.uk/Notice/078335-2026",
+    "ocid": "ocds-h6vhtk-06e61b",
+    "source": "Find a Tender",
+    "valueAmount": 25000.0,
+    "valueCurrency": "GBP",
+    "periodEnd": "2027-03-31",
+    "isFramework": false,
+    "digitalCpv": [
+     "72268000"
+    ],
+    "clinical": true,
+    "lane": "digital",
+    "noticeSupplierName": "Accurx Ltd",
+    "noticeSupplierCount": 1,
+    "company": "Accurx",
+    "matchedOn": "the notice names \"Accurx Ltd\", which normalises to \"accurx\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
+  "Change Healthcare": [
+   {
+    "title": "Medcon Horizon Cardiology System",
+    "buyer": "SOMERSET NHS FOUNDATION TRUST",
+    "date": "2026-08-12",
+    "url": "https://www.find-tender.service.gov.uk/Notice/076569-2026",
+    "ocid": "ocds-h6vhtk-06e220",
+    "source": "Find a Tender",
+    "valueAmount": 44217.56,
+    "valueCurrency": "GBP",
+    "periodEnd": null,
+    "isFramework": false,
+    "digitalCpv": [
+     "72250000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "Change Healthcare UK Holdings Ltd",
+    "noticeSupplierCount": 1,
+    "company": "Change Healthcare",
+    "matchedOn": "\"change healthcare uk holdings ltd\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   }
+  ],
+  "Clinisys Solutions Limited": [
+   {
+    "title": "CoPath  Support and maintenance contract",
+    "buyer": "Leeds Teaching Hospitals NHS Trust",
+    "date": "2026-10-09",
+    "url": "https://www.find-tender.service.gov.uk/Notice/095783-2026",
+    "ocid": "ocds-h6vhtk-078504",
+    "source": "Find a Tender",
+    "valueAmount": null,
+    "valueCurrency": null,
+    "periodEnd": null,
+    "isFramework": false,
+    "digitalCpv": [
+     "48000000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "Clinisys Solution Limited",
+    "noticeSupplierCount": 1,
+    "company": "Clinisys Solutions Limited",
+    "matchedOn": "\"clinisys solution limited\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   }
+  ],
+  "Endosoft Limited": [
+   {
+    "title": "Workstation Licences and Cables",
+    "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+    "date": "2026-08-12",
+    "url": "https://www.find-tender.service.gov.uk/Notice/076753-2026",
+    "ocid": "ocds-h6vhtk-06e289",
+    "source": "Find a Tender",
+    "valueAmount": 28700.0,
+    "valueCurrency": "GBP",
+    "periodEnd": "2027-07-14",
+    "isFramework": false,
+    "digitalCpv": [
+     "48000000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "Endosoft Ltd",
+    "noticeSupplierCount": 1,
+    "company": "Endosoft Limited",
+    "matchedOn": "\"endosoft ltd\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   }
+  ],
+  "HD Clinical Ltd": [
+   {
+    "title": "Endoscopy Software Support System",
+    "buyer": "MID CHESHIRE HOSPITALS NHS FOUNDATION TRUST",
+    "date": "2026-10-01",
+    "url": "https://www.find-tender.service.gov.uk/Notice/092914-2026",
+    "ocid": "ocds-h6vhtk-077ec7",
+    "source": "Find a Tender",
+    "valueAmount": 18629.0,
+    "valueCurrency": "GBP",
+    "periodEnd": "2027-06-30",
+    "isFramework": false,
+    "digitalCpv": [
+     "72261000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "HD CLINICAL LIMITED",
+    "noticeSupplierCount": 1,
+    "company": "HD Clinical Ltd",
+    "matchedOn": "the notice names \"HD CLINICAL LIMITED\", which normalises to \"hd clinical\" — exactly the normalised form of this company's own name or a recorded alias."
+   },
+   {
+    "title": "Bidirectional interface",
+    "buyer": "MEDWAY NHS FOUNDATION TRUST",
+    "date": "2026-09-24",
+    "url": "https://www.find-tender.service.gov.uk/Notice/090432-2026",
+    "ocid": "ocds-h6vhtk-07793e",
+    "source": "Find a Tender",
+    "valueAmount": 17750,
+    "valueCurrency": "GBP",
+    "periodEnd": "2026-09-24",
+    "isFramework": false,
+    "digitalCpv": [
+     "72000000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "HD CLINICAL LIMITED",
+    "noticeSupplierCount": 1,
+    "company": "HD Clinical Ltd",
+    "matchedOn": "the notice names \"HD CLINICAL LIMITED\", which normalises to \"hd clinical\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
+  "Haemonetics": [
+   {
+    "title": "TEG Manager Software Service Contract",
+    "buyer": "MERSEY AND WEST LANCASHIRE TEACHING HOSPITALS NHS TRUST",
+    "date": "2026-09-16",
+    "url": "https://www.find-tender.service.gov.uk/Notice/087666-2026",
+    "ocid": "ocds-h6vhtk-06faed",
+    "source": "Find a Tender",
+    "valueAmount": 16005,
+    "valueCurrency": "GBP",
+    "periodEnd": "2029-07-31",
+    "isFramework": false,
+    "digitalCpv": [
+     "72267000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "HAEMONETICS LIMITED",
+    "noticeSupplierCount": 1,
+    "company": "Haemonetics",
+    "matchedOn": "the notice names \"HAEMONETICS LIMITED\", which normalises to \"haemonetics\" — exactly the normalised form of this company's own name or a recorded alias."
+   },
+   {
+    "title": "Annual BloodTrack Service",
+    "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+    "date": "2026-08-10",
+    "url": "https://www.find-tender.service.gov.uk/Notice/075550-2026",
+    "ocid": "ocds-h6vhtk-06dfb5",
+    "source": "Find a Tender",
+    "valueAmount": 23155,
+    "valueCurrency": "GBP",
+    "periodEnd": "2027-08-09",
+    "isFramework": false,
+    "digitalCpv": [
+     "72267000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "HAEMONETICS LIMITED",
+    "noticeSupplierCount": 1,
+    "company": "Haemonetics",
+    "matchedOn": "the notice names \"HAEMONETICS LIMITED\", which normalises to \"haemonetics\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
+  "Harrison-AI Medical UK Ltd": [
+   {
+    "title": "Chest X-Ray Artificial Intelligence Solution and Radiology AI Platform",
+    "buyer": "SOMERSET NHS FOUNDATION TRUST",
+    "date": "2026-10-14",
+    "url": "https://www.find-tender.service.gov.uk/Notice/096998-2026",
+    "ocid": "ocds-h6vhtk-078788",
+    "source": "Find a Tender",
+    "valueAmount": null,
+    "valueCurrency": null,
+    "periodEnd": null,
+    "isFramework": false,
+    "digitalCpv": [
+     "72250000"
+    ],
+    "clinical": true,
+    "lane": "digital",
+    "noticeSupplierName": "HARRISON-AI MEDICAL UK LTD",
+    "noticeSupplierCount": 1,
+    "company": "Harrison-AI Medical UK Ltd",
+    "matchedOn": "\"harrison ai medical uk ltd\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   }
+  ],
+  "Health Edge Solutions Ltd": [
+   {
+    "title": "Provision of Decontamination Services Department - Traceability System",
+    "buyer": "Manchester University NHS Foundation Trust",
+    "date": "2026-09-25",
+    "url": "https://www.find-tender.service.gov.uk/Notice/091193-2026",
+    "ocid": "ocds-h6vhtk-06cd02",
+    "source": "Find a Tender",
+    "valueAmount": 131750.0,
+    "valueCurrency": "GBP",
+    "periodEnd": "2030-03-30",
+    "isFramework": false,
+    "digitalCpv": [
+     "48000000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "Health Edge Solutions",
+    "noticeSupplierCount": 1,
+    "company": "Health Edge Solutions Ltd",
+    "matchedOn": "the notice names \"Health Edge Solutions\", which normalises to \"health edge solutions\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
+  "Hospital Services Limited": [
+   {
+    "title": "1. Pulse MDT software",
+    "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+    "date": "2026-09-29",
+    "url": "https://www.find-tender.service.gov.uk/Notice/091660-2026",
+    "ocid": "ocds-h6vhtk-077c04",
+    "source": "Find a Tender",
+    "valueAmount": 48858.99,
+    "valueCurrency": "GBP",
+    "periodEnd": "2027-09-28",
+    "isFramework": false,
+    "digitalCpv": [
+     "48000000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "HOSPITAL SERVICES LIMITED",
+    "noticeSupplierCount": 1,
+    "company": "Hospital Services Limited",
+    "matchedOn": "\"hospital services limited\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   },
+   {
+    "title": "Pulse MDT software",
+    "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+    "date": "2026-09-28",
+    "url": "https://www.find-tender.service.gov.uk/Notice/091295-2026",
+    "ocid": "ocds-h6vhtk-077b39",
+    "source": "Find a Tender",
+    "valueAmount": 48858.99,
+    "valueCurrency": "GBP",
+    "periodEnd": "2027-09-27",
+    "isFramework": false,
+    "digitalCpv": [
+     "48000000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "HOSPITAL SERVICES LIMITED",
+    "noticeSupplierCount": 1,
+    "company": "Hospital Services Limited",
+    "matchedOn": "\"hospital services limited\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   }
+  ],
+  "Insight Direct": [
+   {
+    "title": "CRM Platform (Donor and Session Programme)",
+    "buyer": "NHS Blood and Transplant",
+    "date": "2026-08-20",
+    "url": "https://www.find-tender.service.gov.uk/Notice/079365-2026",
+    "ocid": "ocds-h6vhtk-066fef",
+    "source": "Find a Tender",
+    "valueAmount": null,
+    "valueCurrency": null,
+    "periodEnd": null,
+    "isFramework": true,
+    "digitalCpv": [
+     "48000000",
+     "48445000",
+     "48517000",
+     "72268000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "INSIGHT DIRECT (UK) LTD",
+    "noticeSupplierCount": 3,
+    "company": "Insight Direct",
+    "matchedOn": "the notice names \"INSIGHT DIRECT (UK) LTD\", which normalises to \"insight direct\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
+  "Intersystems": [
+   {
+    "title": "Provision of Healthshare Health Connect Enterprise System",
+    "buyer": "SOMERSET NHS FOUNDATION TRUST",
+    "date": "2026-10-07",
+    "url": "https://www.find-tender.service.gov.uk/Notice/094762-2026",
+    "ocid": "ocds-h6vhtk-0782bc",
+    "source": "Find a Tender",
+    "valueAmount": 184815,
+    "valueCurrency": "GBP",
+    "periodEnd": null,
+    "isFramework": false,
+    "digitalCpv": [
+     "48000000",
+     "72000000",
+     "72700000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "Intersystems",
+    "noticeSupplierCount": 1,
+    "company": "Intersystems",
+    "matchedOn": "\"intersystems\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   }
+  ],
+  "Oncology Imaging Systems (OIS)": [
+   {
+    "title": "Radformation Software Bundle - Digital Delivery",
+    "buyer": "The Christie NHS Foundation Trust",
+    "date": "2026-08-13",
+    "url": "https://www.find-tender.service.gov.uk/Notice/077323-2026",
+    "ocid": "ocds-h6vhtk-06e3c7",
+    "source": "Find a Tender",
+    "valueAmount": 23882.0,
+    "valueCurrency": "GBP",
+    "periodEnd": "2027-06-14",
+    "isFramework": false,
+    "digitalCpv": [
+     "48517000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "Oncology Imaging Systems Limited",
+    "noticeSupplierCount": 1,
+    "company": "Oncology Imaging Systems (OIS)",
+    "matchedOn": "the notice names \"Oncology Imaging Systems Limited\", which normalises to \"oncology imaging systems\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
+  "Philips": [
+   {
+    "title": "One-Off PACS Interface Integration Project",
+    "buyer": "SOMERSET NHS FOUNDATION TRUST",
+    "date": "2026-09-02",
+    "url": "https://www.find-tender.service.gov.uk/Notice/083203-2026",
+    "ocid": "ocds-h6vhtk-06f0ad",
+    "source": "Find a Tender",
+    "valueAmount": 40067.0,
+    "valueCurrency": "GBP",
+    "periodEnd": "2027-03-02",
+    "isFramework": false,
+    "digitalCpv": [
+     "72250000"
+    ],
+    "clinical": true,
+    "lane": "digital",
+    "noticeSupplierName": "PHILIPS ELECTRONICS UK LIMITED",
+    "noticeSupplierCount": 1,
+    "company": "Philips",
+    "matchedOn": "\"philips electronics uk limited\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   }
+  ],
+  "Raysearch UK Ltd": [
+   {
+    "title": "RayStation Service Contract",
+    "buyer": "The Clatterbridge Cancer Centre NHS Foundation Trust",
+    "date": "2026-10-02",
+    "url": "https://www.find-tender.service.gov.uk/Notice/093160-2026",
+    "ocid": "ocds-h6vhtk-077f51",
+    "source": "Find a Tender",
+    "valueAmount": 58692,
+    "valueCurrency": "GBP",
+    "periodEnd": "2027-07-06",
+    "isFramework": false,
+    "digitalCpv": [
+     "72267000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "RAYSEARCH UK LIMITED",
+    "noticeSupplierCount": 1,
+    "company": "Raysearch UK Ltd",
+    "matchedOn": "\"raysearch uk limited\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   }
+  ],
+  "Schiller UK Limited": [
+   {
+    "title": "POS trustwide - schiller - ECG server interface 5 year maintenance",
+    "buyer": "Mid and South Essex NHS Foundation Trust",
+    "date": "2026-10-02",
+    "url": "https://www.find-tender.service.gov.uk/Notice/093296-2026",
+    "ocid": "ocds-h6vhtk-077f9d",
+    "source": "Find a Tender",
+    "valueAmount": 45000.0,
+    "valueCurrency": "GBP",
+    "periodEnd": "2031-03-31",
+    "isFramework": false,
+    "digitalCpv": [
+     "72261000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "Schiller UK Ltd",
+    "noticeSupplierCount": 1,
+    "company": "Schiller UK Limited",
+    "matchedOn": "\"schiller uk ltd\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   }
+  ],
+  "Sectra Limited": [
+   {
+    "title": "WHHT - Image Exchange Portal (IEP)",
+    "buyer": "West Hertfordshire Teaching Hospitals NHS Trust",
+    "date": "2026-09-23",
+    "url": "https://www.find-tender.service.gov.uk/Notice/090037-2026",
+    "ocid": "ocds-h6vhtk-077864",
+    "source": "Find a Tender",
+    "valueAmount": 21560.0,
+    "valueCurrency": "GBP",
+    "periodEnd": "2027-04-26",
+    "isFramework": false,
+    "digitalCpv": [
+     "72260000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "Sectra Limited",
+    "noticeSupplierCount": 1,
+    "company": "Sectra Limited",
+    "matchedOn": "\"sectra limited\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   }
+  ],
+  "Siemens Healthineers": [
+   {
+    "title": "Siemens Atellica Middleware",
+    "buyer": "COUNTESS OF CHESTER HOSPITAL NHS FOUNDATION TRUST",
+    "date": "2026-09-03",
+    "url": "https://www.find-tender.service.gov.uk/Notice/083308-2026",
+    "ocid": "ocds-h6vhtk-06f0e9",
+    "source": "Find a Tender",
+    "valueAmount": 32429.74,
+    "valueCurrency": "GBP",
+    "periodEnd": "2026-07-23",
+    "isFramework": false,
+    "digitalCpv": [
+     "48218000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "SIEMENS HEALTHCARE LIMITED",
+    "noticeSupplierCount": 1,
+    "company": "Siemens Healthineers",
+    "matchedOn": "\"siemens healthcare limited\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   }
+  ],
+  "Spacelabs Healthcare Ltd": [
+   {
+    "title": "Spacelabs Lifescreen Pro Licence Contract",
+    "buyer": "Gateshead Health NHS Foundation Trust",
+    "date": "2026-10-08",
+    "url": "https://www.find-tender.service.gov.uk/Notice/095377-2026",
+    "ocid": "ocds-h6vhtk-078421",
+    "source": "Find a Tender",
+    "valueAmount": 34000,
+    "valueCurrency": "GBP",
+    "periodEnd": "2031-10-09",
+    "isFramework": false,
+    "digitalCpv": [
+     "48180000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "SPACELABS HEALTHCARE LIMITED",
+    "noticeSupplierCount": 1,
+    "company": "Spacelabs Healthcare Ltd",
+    "matchedOn": "\"spacelabs healthcare limited\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   },
+   {
+    "title": "Support and Maintenance for Spacelabs Sentinel",
+    "buyer": "Gateshead Health NHS Foundation Trust",
+    "date": "2026-09-29",
+    "url": "https://www.find-tender.service.gov.uk/Notice/091886-2026",
+    "ocid": "ocds-h6vhtk-077c7c",
+    "source": "Find a Tender",
+    "valueAmount": 15511.8,
+    "valueCurrency": "GBP",
+    "periodEnd": "2031-09-30",
+    "isFramework": false,
+    "digitalCpv": [
+     "72261000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "SPACELABS HEALTHCARE LIMITED",
+    "noticeSupplierCount": 1,
+    "company": "Spacelabs Healthcare Ltd",
+    "matchedOn": "\"spacelabs healthcare limited\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   }
+  ],
+  "System C": [
+   {
+    "title": "WellSky system upgrade",
+    "buyer": "NORTH CHESHIRE & MERSEY NHS FOUNDATION TRUST",
+    "date": "2026-09-22",
+    "url": "https://www.find-tender.service.gov.uk/Notice/089439-2026",
+    "ocid": "ocds-h6vhtk-07770e",
+    "source": "Find a Tender",
+    "valueAmount": 16960,
+    "valueCurrency": "GBP",
+    "periodEnd": "2027-03-31",
+    "isFramework": false,
+    "digitalCpv": [
+     "72540000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "SYSTEM C HEALTHCARE LIMITED",
+    "noticeSupplierCount": 1,
+    "company": "System C",
+    "matchedOn": "\"system c healthcare limited\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   }
+  ],
+  "Tortus": [
+   {
+    "title": "Tortus Ambient Voice Technology",
+    "buyer": "SOMERSET NHS FOUNDATION TRUST",
+    "date": "2026-09-01",
+    "url": "https://www.find-tender.service.gov.uk/Notice/082596-2026",
+    "ocid": "ocds-h6vhtk-06ef6d",
+    "source": "Find a Tender",
+    "valueAmount": 360000.0,
+    "valueCurrency": "GBP",
+    "periodEnd": null,
+    "isFramework": false,
+    "digitalCpv": [
+     "72250000"
+    ],
+    "clinical": true,
+    "lane": "digital",
+    "noticeSupplierName": "Tortus AI Ltd",
+    "noticeSupplierCount": 1,
+    "company": "Tortus",
+    "matchedOn": "\"tortus ai ltd\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   }
+  ],
+  "Xiel Ltd": [
+   {
+    "title": "Artificial intelligence platform.",
+    "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+    "date": "2026-09-23",
+    "url": "https://www.find-tender.service.gov.uk/Notice/089884-2026",
+    "ocid": "ocds-h6vhtk-07780b",
+    "source": "Find a Tender",
+    "valueAmount": 15000,
+    "valueCurrency": "GBP",
+    "periodEnd": "2027-09-22",
+    "isFramework": false,
+    "digitalCpv": [
+     "72000000"
+    ],
+    "clinical": true,
+    "lane": "digital",
+    "noticeSupplierName": "XIEL LTD",
+    "noticeSupplierCount": 1,
+    "company": "Xiel Ltd",
+    "matchedOn": "\"xiel ltd\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   },
+   {
+    "title": "ENHT - Radiology AI Autocontouring",
+    "buyer": "East and North Hertfordshire Teaching NHS Trust",
+    "date": "2026-09-11",
+    "url": "https://www.find-tender.service.gov.uk/Notice/086414-2026",
+    "ocid": "ocds-h6vhtk-06f814",
+    "source": "Find a Tender",
+    "valueAmount": 63168.0,
+    "valueCurrency": "GBP",
+    "periodEnd": "2028-07-31",
+    "isFramework": false,
+    "digitalCpv": [
+     "48180000"
+    ],
+    "clinical": true,
+    "lane": "digital",
+    "noticeSupplierName": "Xiel Ltd",
+    "noticeSupplierCount": 1,
+    "company": "Xiel Ltd",
+    "matchedOn": "\"xiel ltd\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   }
+  ]
+ },
+ "unmatched": [
+  {
+   "title": "Patient Communication and Translation Aid (CardMedic)",
+   "buyer": "Homerton University Hospital NHS Foundation Trust",
+   "date": "2026-10-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/098367-2026",
+   "ocid": "ocds-h6vhtk-078a80",
+   "source": "Find a Tender",
+   "valueAmount": 35200.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2028-06-30",
+   "isFramework": false,
+   "digitalCpv": [
+    "48740000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "CARD MEDIC LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"card medic\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Provision of the current Civica CCM catering platform.",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "date": "2026-10-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/098296-2026",
+   "ocid": "ocds-h6vhtk-078a5a",
+   "source": "Find a Tender",
+   "valueAmount": 49930,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-10-18",
+   "isFramework": false,
+   "digitalCpv": [
+    "72212110"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "CIVICA UK LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"civica\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Renewal of Licences",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "date": "2026-10-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/098293-2026",
+   "ocid": "ocds-h6vhtk-078a58",
+   "source": "Find a Tender",
+   "valueAmount": 56000,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-01-18",
+   "isFramework": false,
+   "digitalCpv": [
+    "48218000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Eviden Technology Services Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"eviden technology services\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "GM E-Portfolio",
+   "buyer": "The Christie NHS Foundation Trust",
+   "date": "2026-10-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/098030-2026",
+   "ocid": "ocds-h6vhtk-0789ac",
+   "source": "Find a Tender",
+   "valueAmount": 87000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72212517"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Gas Mark 8 Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"gas mark 8\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "AVT Benefits Evaluation Partner",
+   "buyer": "Surrey and Borders Partnership NHS Foundation Trust",
+   "date": "2026-10-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/097966-2026",
+   "ocid": "ocds-h6vhtk-07898e",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": true,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": true,
+   "lane": "digital",
+   "noticeSupplierName": "Private Public Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"private public\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Cloud License Renewal",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "date": "2026-10-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/097736-2026",
+   "ocid": "ocds-h6vhtk-078916",
+   "source": "Find a Tender",
+   "valueAmount": 12967.47,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-10-15",
+   "isFramework": false,
+   "digitalCpv": [
+    "48218000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "BUSINESS DATA QUALITY LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"business data quality\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Annual Licence",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "date": "2026-10-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/097720-2026",
+   "ocid": "ocds-h6vhtk-07890c",
+   "source": "Find a Tender",
+   "valueAmount": 12485,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-10-15",
+   "isFramework": false,
+   "digitalCpv": [
+    "48218000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "INTEGRA (E-QUIP) LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"integra e quip\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Healthset Data Migration Specialist",
+   "buyer": "University Hospitals Dorset NHS Foundation Trust",
+   "date": "2026-10-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/097601-2026",
+   "ocid": "ocds-h6vhtk-0788c9",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72263000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "The Black Fallow Company",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"the black fallow company\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "WHHT - Endoscopy Management System (EMS)",
+   "buyer": "West Hertfordshire Teaching Hospitals NHS Trust",
+   "date": "2026-10-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/097462-2026",
+   "ocid": "ocds-h6vhtk-078881",
+   "source": "Find a Tender",
+   "valueAmount": 84000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2028-11-21",
+   "isFramework": false,
+   "digitalCpv": [
+    "72260000"
+   ],
+   "clinical": true,
+   "lane": "digital",
+   "noticeSupplierName": "Medilogik Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"medilogik\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Annual license renewal",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "date": "2026-10-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/097295-2026",
+   "ocid": "ocds-h6vhtk-078826",
+   "source": "Find a Tender",
+   "valueAmount": 12000,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-01-14",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "RX-INFO LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"rx info\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Robotic Process Automation (RPA) Services",
+   "buyer": "NHS Lanarkshire (Scotland)",
+   "date": "2026-10-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/097236-2026",
+   "ocid": "ocds-h6vhtk-078804",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "ROBIQUITY LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"robiquity\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Learning Management System",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "date": "2026-10-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/096865-2026",
+   "ocid": "ocds-h6vhtk-078739",
+   "source": "Find a Tender",
+   "valueAmount": 46310.0,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72250000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Think Associates Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"think associates\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Cerebral Palsy Integrated Database",
+   "buyer": "NHS England",
+   "date": "2026-10-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/096834-2026",
+   "ocid": "ocds-h6vhtk-06ba9a",
+   "source": "Find a Tender",
+   "valueAmount": 59474.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72310000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "University of Dundee",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"university of dundee\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Provision of DocuSign eSignature Transaction Management (7000 envelopes) for SCW",
+   "buyer": "NHS South, Central and West Commissioning Support Unit (hosted by NHS England)",
+   "date": "2026-10-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/096827-2026",
+   "ocid": "ocds-h6vhtk-078720",
+   "source": "Find a Tender",
+   "valueAmount": 26803.98,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-09-24",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "XMA Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"xma\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Infrastructure Specialist Service EPR",
+   "buyer": "The Christie NHS Foundation Trust",
+   "date": "2026-10-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/096595-2026",
+   "ocid": "ocds-h6vhtk-0786a9",
+   "source": "Find a Tender",
+   "valueAmount": 68908.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72266000"
+   ],
+   "clinical": true,
+   "lane": "digital",
+   "noticeSupplierName": "Max20 Project Solutions Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"max20 project solutions\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "NAC License",
+   "buyer": "The Rotherham NHS Foundation Trust",
+   "date": "2026-10-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/096553-2026",
+   "ocid": "ocds-h6vhtk-07868d",
+   "source": "Find a Tender",
+   "valueAmount": 12469.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "48218000",
+    "48517000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "CharterHouse Voice and Data LTD.",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"charterhouse voice and data\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "PHW-FTS-62385 LUNG CANCER SCREENING WALES: PARTICIPANT ADMINISTRATION SYSTEM",
+   "buyer": "Public Health Wales NHS Trust",
+   "date": "2026-10-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/096164-2026",
+   "ocid": "ocds-h6vhtk-05953a",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48180000",
+    "48814000",
+    "48814200",
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Nelson+ B.V",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"nelson b v\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Medical Erostering Software Solution",
+   "buyer": "The Rotherham NHS Foundation Trust",
+   "date": "2026-10-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/096159-2026",
+   "ocid": "ocds-h6vhtk-06d8fd",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "48180000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "HealthRota Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"healthrota\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Referapatient for zolgensma for spinal muscular atrophy",
+   "buyer": "NHS England",
+   "date": "2026-10-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095904-2026",
+   "ocid": "ocds-h6vhtk-06e12d",
+   "source": "Find a Tender",
+   "valueAmount": 18224.25,
+   "valueCurrency": "GBP",
+   "periodEnd": "2026-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000",
+    "72268000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Bloomsbury Health",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"bloomsbury health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Pancreatic Cancer Primary Care Case-Finding Pilot baseline data collection",
+   "buyer": "NHS England",
+   "date": "2026-10-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095465-2026",
+   "ocid": "ocds-h6vhtk-07844b",
+   "source": "Find a Tender",
+   "valueAmount": 40000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2030-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72314000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "University of Oxford",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"university of oxford\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "SQL Clone Subscription",
+   "buyer": "The Christie NHS Foundation Trust",
+   "date": "2026-10-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/095087-2026",
+   "ocid": "ocds-h6vhtk-07837e",
+   "source": "Find a Tender",
+   "valueAmount": 28935.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-08-20",
+   "isFramework": false,
+   "digitalCpv": [
+    "48611000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Red Gate Software Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"red gate software\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "PHW-FTS-63449 Review of Violence Monitoring Data Portal - Public Health Wales",
+   "buyer": "Public Health Wales NHS Trust",
+   "date": "2026-10-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094910-2026",
+   "ocid": "ocds-h6vhtk-06d759",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Pixel Fusion Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"pixel fusion\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "GP IT and Corporate IT Support for NHS Thames Valley Integrated Care Board",
+   "buyer": "NHS THAMES VALLEY INTEGRATED CARE BOARD",
+   "date": "2026-10-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094608-2026",
+   "ocid": "ocds-h6vhtk-07825d",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "TRUSTED TECHNOLOGY PARTNERSHIP LTD",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"trusted technology partnership\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Birthrate Plus Workforce Planning",
+   "buyer": "UNIVERSITY HOSPITALS OF DERBY AND BURTON NHS FOUNDATION TRUST",
+   "date": "2026-10-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094384-2026",
+   "ocid": "ocds-h6vhtk-0781ea",
+   "source": "Find a Tender",
+   "valueAmount": 12000,
+   "valueCurrency": "GBP",
+   "periodEnd": "2026-10-01",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "BIRTHRATE PLUS ASSOCIATES LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"birthrate plus associates\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Video Consultation Platform",
+   "buyer": "Cardiff and Vale University Health Board",
+   "date": "2026-10-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094368-2026",
+   "ocid": "ocds-h6vhtk-05d17e",
+   "source": "Find a Tender",
+   "valueAmount": 300000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-12-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72211000"
+   ],
+   "clinical": true,
+   "lane": "digital",
+   "noticeSupplierName": "Involve Visual Collaboration",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"involve visual collaboration\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "PAHT - Room & Desk Booking - Software",
+   "buyer": "The Princess Alexandra Hospital NHS Trust",
+   "date": "2026-10-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/094229-2026",
+   "ocid": "ocds-h6vhtk-078199",
+   "source": "Find a Tender",
+   "valueAmount": 34325.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-05-01",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Hubstar Systems Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"hubstar systems\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Provision of Anaesthetic Management Software",
+   "buyer": "Queen Victoria Hospital NHS Foundation Trust",
+   "date": "2026-10-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093941-2026",
+   "ocid": "ocds-h6vhtk-06df93",
+   "source": "Find a Tender",
+   "valueAmount": 234599.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-09-10",
+   "isFramework": false,
+   "digitalCpv": [
+    "72267100"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "SAFER SLEEP LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"safer sleep\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Provision of HealthRoster Optima UK bundle",
+   "buyer": "North Cumbria Integrated Care NHS Foundation Trust",
+   "date": "2026-10-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093662-2026",
+   "ocid": "ocds-h6vhtk-07806c",
+   "source": "Find a Tender",
+   "valueAmount": 951526.0,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "48450000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Softcat plc",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"softcat\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Provision of Caretrack Licensing, CHS Data Management  Service, D-RAR (Digital R",
+   "buyer": "NHS Dorset Integrated Care Board",
+   "date": "2026-10-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093658-2026",
+   "ocid": "ocds-h6vhtk-068692",
+   "source": "Find a Tender",
+   "valueAmount": 231000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-08-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Vertergi Group Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"vertergi group\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Centricity Server, Autodialler, Pilot Licences, & ACCR Support",
+   "buyer": "Yorkshire Ambulance Service NHS Trust",
+   "date": "2026-10-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093389-2026",
+   "ocid": "ocds-h6vhtk-077fd1",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "72000000",
+    "72261000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "SSS PUBLIC SAFETY LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"sss public safety\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Totara (Learn and Perform) Learning Management System",
+   "buyer": "Yorkshire Ambulance Service NHS Trust",
+   "date": "2026-10-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093374-2026",
+   "ocid": "ocds-h6vhtk-077fc6",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48517000",
+    "72261000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Think Learning",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"think learning\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Mass Communication Tool",
+   "buyer": "Yorkshire Ambulance Service NHS Trust",
+   "date": "2026-10-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093369-2026",
+   "ocid": "ocds-h6vhtk-077fc3",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72261000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Softcat plc",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"softcat\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Fotoware Medical Photography Software",
+   "buyer": "BUCKINGHAMSHIRE HEALTHCARE NHS TRUST",
+   "date": "2026-10-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/093345-2026",
+   "ocid": "ocds-h6vhtk-077fb8",
+   "source": "Find a Tender",
+   "valueAmount": 190786,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72212517"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Medialogix Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"medialogix\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Palo Alto Networks",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "date": "2026-10-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092988-2026",
+   "ocid": "ocds-h6vhtk-077ef5",
+   "source": "Find a Tender",
+   "valueAmount": 76627,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48200000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "CDW Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"cdw\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Sophos Anti-Virus",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "date": "2026-10-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092841-2026",
+   "ocid": "ocds-h6vhtk-077ea1",
+   "source": "Find a Tender",
+   "valueAmount": 45500,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "48200000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "CDW Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"cdw\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Collaboration Licences",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "date": "2026-10-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092802-2026",
+   "ocid": "ocds-h6vhtk-077e8b",
+   "source": "Find a Tender",
+   "valueAmount": 102023,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "48200000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "CDW Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"cdw\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Contact Centre Platform",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "date": "2026-10-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092746-2026",
+   "ocid": "ocds-h6vhtk-0779fd",
+   "source": "Find a Tender",
+   "valueAmount": 532594.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-09-24",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Netcall Technology Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"netcall technology\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "eOpas Subscription & Hosting",
+   "buyer": "MID CHESHIRE HOSPITALS NHS FOUNDATION TRUST",
+   "date": "2026-10-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092707-2026",
+   "ocid": "ocds-h6vhtk-077e52",
+   "source": "Find a Tender",
+   "valueAmount": 32835.81,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-06-24",
+   "isFramework": false,
+   "digitalCpv": [
+    "72200000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "CIVICA UK LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"civica\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "NOM6692 Easy Reporting System",
+   "buyer": "University Hospitals of North Midlands NHS Trust",
+   "date": "2026-10-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092619-2026",
+   "ocid": "ocds-h6vhtk-077e2a",
+   "source": "Find a Tender",
+   "valueAmount": 65097.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-09-30",
+   "isFramework": false,
+   "digitalCpv": [
+    "72267000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Giltbyte Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"giltbyte\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "PR BHFT 0825",
+   "buyer": "Berkshire Healthcare NHS Foundation Trust",
+   "date": "2026-09-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092060-2026",
+   "ocid": "ocds-h6vhtk-077ce7",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72261000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "LocumTap Limited trading as Patchwork Health",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"locumtap limited trading as patchwork health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "UK Rehabilitation Outcomes Collective (UKROC)",
+   "buyer": "NHS England",
+   "date": "2026-09-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/092020-2026",
+   "ocid": "ocds-h6vhtk-06cd1b",
+   "source": "Find a Tender",
+   "valueAmount": 378698.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72310000",
+    "72320000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "LONDON NORTH WEST UNIVERSITY HEALTHCARE NHS TRUST",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"london north west university healthcare nhs trust\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Windows 10 Extended Security 2026 Per Device - Licence",
+   "buyer": "COUNTESS OF CHESTER HOSPITAL NHS FOUNDATION TRUST",
+   "date": "2026-09-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091876-2026",
+   "ocid": "ocds-h6vhtk-077c76",
+   "source": "Find a Tender",
+   "valueAmount": 13780.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2026-09-24",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "PHOENIX SOFTWARE LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"phoenix software\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "SWISH Online Sexual Health Services",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "date": "2026-09-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091844-2026",
+   "ocid": "ocds-h6vhtk-077c64",
+   "source": "Find a Tender",
+   "valueAmount": 630000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72212220"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Preventx Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"preventx\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Provision of Dental Clinical Software",
+   "buyer": "East of England Community Health and Care NHS Trust",
+   "date": "2026-09-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091715-2026",
+   "ocid": "ocds-h6vhtk-077c22",
+   "source": "Find a Tender",
+   "valueAmount": 197760,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "48100000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "HENRY SCHEIN ONE UK Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"henry schein one\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "WHHT -  CPD and Apprenticeship Staff Development Hub",
+   "buyer": "West Hertfordshire Teaching Hospitals NHS Trust",
+   "date": "2026-09-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091696-2026",
+   "ocid": "ocds-h6vhtk-077c17",
+   "source": "Find a Tender",
+   "valueAmount": 31121.64,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-08-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "48517000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Moore-Wilson New Media LTD.",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"moore wilson new media\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "ESTH - ER Tracker",
+   "buyer": "Epsom and St Helier University Hospitals NHS Trust",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091599-2026",
+   "ocid": "ocds-h6vhtk-077be3",
+   "source": "Find a Tender",
+   "valueAmount": 91334.77,
+   "valueCurrency": "GBP",
+   "periodEnd": "2028-09-09",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "48450000",
+    "48517000",
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Allocate Software Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"allocate software\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Wolters Kluwer -UTD (Up to Date) Software",
+   "buyer": "Mid and South Essex NHS Foundation Trust",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091510-2026",
+   "ocid": "ocds-h6vhtk-06eb55",
+   "source": "Find a Tender",
+   "valueAmount": 368690.3,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-02-28",
+   "isFramework": false,
+   "digitalCpv": [
+    "48160000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "WOLTERS KLUWER HEALTH (MEDICAL RESEARCH) LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"wolters kluwer health medical research\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "WHHT - Design and Development of Private Patient Website",
+   "buyer": "West Hertfordshire Teaching Hospitals NHS Trust",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091455-2026",
+   "ocid": "ocds-h6vhtk-077b92",
+   "source": "Find a Tender",
+   "valueAmount": 12220.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-07-16",
+   "isFramework": false,
+   "digitalCpv": [
+    "72260000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Frank Design Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"frank design\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Oracle ERP Solution",
+   "buyer": "Sandwell and West Birmingham Hospitals NHS Trust",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091401-2026",
+   "ocid": "ocds-h6vhtk-077b79",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48400000",
+    "48443000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Oracle Corporation UK Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"oracle\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Transform Productivity Centre Package Subscription Annual Fee",
+   "buyer": "Liverpool University Hospitals NHS Foundation Trust",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091400-2026",
+   "ocid": "ocds-h6vhtk-077b78",
+   "source": "Find a Tender",
+   "valueAmount": 20230.93,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-04-23",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Bottomline Technologies Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"bottomline technologies\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Strategic Support Agreement – DSPT/ CAF Testing",
+   "buyer": "Liverpool University Hospitals NHS Foundation Trust",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091344-2026",
+   "ocid": "ocds-h6vhtk-077b56",
+   "source": "Find a Tender",
+   "valueAmount": 42500.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-12-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72222000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Sapphire Technologies Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"sapphire technologies\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Provision of an AI Powered Documentation Tool",
+   "buyer": "NHS SOMERSET INTEGRATED CARE BOARD",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091306-2026",
+   "ocid": "ocds-h6vhtk-077b41",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": true,
+   "lane": "digital",
+   "noticeSupplierName": "BEAM UP LTD",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"beam up\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "NGH - E-Quip core professional medical Asset",
+   "buyer": "Northampton General Hospital NHS Trust",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091267-2026",
+   "ocid": "ocds-h6vhtk-077b27",
+   "source": "Find a Tender",
+   "valueAmount": 12435.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-10-13",
+   "isFramework": false,
+   "digitalCpv": [
+    "48218000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Integra (E-QUIP) Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"integra e quip\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Electronic Catering Information System",
+   "buyer": "Lancashire Teaching Hospitals NHS Foundation Trust",
+   "date": "2026-09-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091032-2026",
+   "ocid": "ocds-h6vhtk-06f691",
+   "source": "Find a Tender",
+   "valueAmount": 367248.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2031-01-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "72222300"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "SYNBIOTIX LTD",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"synbiotix\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "NNUH PROMS",
+   "buyer": "Norfolk and Norwich University Hospitals NHS Foundation Trust",
+   "date": "2026-09-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090917-2026",
+   "ocid": "ocds-h6vhtk-077a57",
+   "source": "Find a Tender",
+   "valueAmount": 15400.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-05-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72310000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Quality Health Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"quality health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "C&H Talking Therapies PCMIS",
+   "buyer": "Homerton University Hospital NHS Foundation Trust",
+   "date": "2026-09-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090806-2026",
+   "ocid": "ocds-h6vhtk-077a15",
+   "source": "Find a Tender",
+   "valueAmount": 18340.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "48781000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "PCMIS Health Technologies Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"pcmis health technologies\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Medical Revalidation software",
+   "buyer": "St George's University Hospitals NHS Foundation Trust",
+   "date": "2026-09-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090681-2026",
+   "ocid": "ocds-h6vhtk-06fa15",
+   "source": "Find a Tender",
+   "valueAmount": 131978.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2028-08-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "48517000",
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Locum Tap",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"locum tap\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Discourse Enterprise Licence",
+   "buyer": "NHS England",
+   "date": "2026-09-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090362-2026",
+   "ocid": "ocds-h6vhtk-077911",
+   "source": "Find a Tender",
+   "valueAmount": 35329.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-08-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Discourse",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"discourse\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "TELEPATH EXTENSION",
+   "buyer": "Cwm Taff Morgannwg Universty Health Board",
+   "date": "2026-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090227-2026",
+   "ocid": "ocds-h6vhtk-077836",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72320000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Dedalus DH OPCO UK Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"dedalus dh opco\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "BCU-FTS-61955 YGC DATACENTRE PROJECT ",
+   "buyer": "BETSI CADWALADR UNIVERSITY HEALTH BOARD",
+   "date": "2026-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090094-2026",
+   "ocid": "ocds-h6vhtk-065b4a",
+   "source": "Find a Tender",
+   "valueAmount": 456923.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2026-10-01",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Secure IT Environment Ltd ",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"secure it environment\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "BCU-FTS-61954 YG DATACENTRE PROJECT ",
+   "buyer": "Betsi Cadwaladr University Health Board",
+   "date": "2026-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090086-2026",
+   "ocid": "ocds-h6vhtk-065b4b",
+   "source": "Find a Tender",
+   "valueAmount": 423253.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2026-10-01",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Secure IT Environment Ltd ",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"secure it environment\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "WHHT - MS Azure Hosting Platform for Equip",
+   "buyer": "West Hertfordshire Teaching Hospitals NHS Trust",
+   "date": "2026-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/090057-2026",
+   "ocid": "ocds-h6vhtk-077870",
+   "source": "Find a Tender",
+   "valueAmount": 23820.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-06-04",
+   "isFramework": false,
+   "digitalCpv": [
+    "72260000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Purcell Radio Systems Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"purcell radio systems\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "ALLTWEN FRANKING MACHINE",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089672-2026",
+   "ocid": "ocds-h6vhtk-07779a",
+   "source": "Find a Tender",
+   "valueAmount": 122820,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": true,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "QUADIENT UK LIMITED",
+   "noticeSupplierCount": 2,
+   "reason": "no Hub company's name or recorded alias normalises to \"quadient\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "ALLTWEN FRANKING MACHINE",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089672-2026",
+   "ocid": "ocds-h6vhtk-07779a",
+   "source": "Find a Tender",
+   "valueAmount": 122820,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": true,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Quadient UK",
+   "noticeSupplierCount": 2,
+   "reason": "no Hub company's name or recorded alias normalises to \"quadient\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "ESNEFT3327 Liberty Converse CX (Digital & Voice Edition)",
+   "buyer": "EAST SUFFOLK AND NORTH ESSEX NHS FOUNDATION TRUST",
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089627-2026",
+   "ocid": "ocds-h6vhtk-077780",
+   "source": "Find a Tender",
+   "valueAmount": 205416,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Netcall Technology Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"netcall technology\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Door Access Control System",
+   "buyer": "East Midlands Ambulance Service NHS Trust",
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089599-2026",
+   "ocid": "ocds-h6vhtk-06b8dd",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48517000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "I2C Systems Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"i2c systems\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "finance ledger system,",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089463-2026",
+   "ocid": "ocds-h6vhtk-07771d",
+   "source": "Find a Tender",
+   "valueAmount": 26076.5,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-09-21",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "NORTHUMBRIA HEALTHCARE NHS FOUNDATION TRUST",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"northumbria healthcare nhs foundation trust\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "New finance ledger system,",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089455-2026",
+   "ocid": "ocds-h6vhtk-077717",
+   "source": "Find a Tender",
+   "valueAmount": 26076.5,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-09-21",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "NORTHUMBRIA HEALTHCARE NHS FOUNDATION TRUST",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"northumbria healthcare nhs foundation trust\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "New finance ledger system",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089407-2026",
+   "ocid": "ocds-h6vhtk-077701",
+   "source": "Find a Tender",
+   "valueAmount": 26076.5,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-09-21",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "NORTHUMBRIA HEALTHCARE NHS FOUNDATION TRUST",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"northumbria healthcare nhs foundation trust\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "NHP Health Care Planning Tool SaaS Licence",
+   "buyer": "NHS England",
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089406-2026",
+   "ocid": "ocds-h6vhtk-06ea83",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48311100",
+    "48613000",
+    "48810000",
+    "72268000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "dRofus AS",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"drofus\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "finance ledger system,",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "date": "2026-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089396-2026",
+   "ocid": "ocds-h6vhtk-0776fc",
+   "source": "Find a Tender",
+   "valueAmount": 26076.5,
+   "valueCurrency": "GBP",
+   "periodEnd": "2026-12-21",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "NORTHUMBRIA HEALTHCARE NHS FOUNDATION TRUST",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"northumbria healthcare nhs foundation trust\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Child Health Information Services - North East and Cumbria, and Yorkshire and Humber",
+   "buyer": "NHS ENGLAND",
+   "date": "2026-09-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089353-2026",
+   "ocid": "ocds-h6vhtk-05eb43",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48814400"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "PROVIDE COMMUNITY INTEREST COMPANY",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"provide community interest company\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Waiver - UHB_HGS - 1139 - Static Systems Group - Nurse Call systems",
+   "buyer": "University Hospitals Birmingham NHS Foundation Trust",
+   "date": "2026-09-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089099-2026",
+   "ocid": "ocds-h6vhtk-077653",
+   "source": "Find a Tender",
+   "valueAmount": 44475.74,
+   "valueCurrency": "GBP",
+   "periodEnd": "2026-08-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72253200"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Static Systems Group",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"static systems group\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "WHHT - Solarwinds Software - IT infrastructure monitoring software",
+   "buyer": "West Hertfordshire Teaching Hospitals NHS Trust",
+   "date": "2026-09-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089044-2026",
+   "ocid": "ocds-h6vhtk-077636",
+   "source": "Find a Tender",
+   "valueAmount": 34181.42,
+   "valueCurrency": "GBP",
+   "periodEnd": "2028-12-04",
+   "isFramework": false,
+   "digitalCpv": [
+    "72260000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Prosperon Networks Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"prosperon networks\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "REVIEW AND FURTHER DEVELOPMENT OF WEBSITES TO WORK ON ADVERSE CHILDHOOD EXPERIENCES, CRIMINAL JUSTICE AND VIOLENCE PREVENTION  ",
+   "buyer": "Public Health Wales NHS Trust",
+   "date": "2026-09-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/089029-2026",
+   "ocid": "ocds-h6vhtk-06b797",
+   "source": "Find a Tender",
+   "valueAmount": 56000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Thornacre",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"thornacre\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Qlik Annual Maintenance Renewal 26/27",
+   "buyer": "Mid and South Essex NHS Foundation Trust",
+   "date": "2026-09-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/088774-2026",
+   "ocid": "ocds-h6vhtk-0775a1",
+   "source": "Find a Tender",
+   "valueAmount": 26867.1,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-08-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "IQVIA LTD",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"iqvia\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "RW10200 - Candidate Management System",
+   "buyer": "Hampshire and isle of Wight Healthcare NHS Foundation Trust",
+   "date": "2026-09-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/088767-2026",
+   "ocid": "ocds-h6vhtk-07759d",
+   "source": "Find a Tender",
+   "valueAmount": 59029,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-07-24",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Oleeo Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"oleeo\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "CPIT System Integration to NHSE RAVS",
+   "buyer": "NHS ENGLAND",
+   "date": "2026-09-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/088423-2026",
+   "ocid": "ocds-h6vhtk-067b3b",
+   "source": "Find a Tender",
+   "valueAmount": 94101,
+   "valueCurrency": "GBP",
+   "periodEnd": "2026-09-01",
+   "isFramework": false,
+   "digitalCpv": [
+    "48180000",
+    "48311000",
+    "48814400",
+    "72300000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "EGTON MEDICAL INFORMATION SYSTEMS LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"egton medical information systems\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Certero ITSM SAAS Asset Management",
+   "buyer": "Birmingham Community Healthcare NHS Foundation Trust",
+   "date": "2026-09-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/088300-2026",
+   "ocid": "ocds-h6vhtk-077499",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48517000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Certero Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"certero\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "LAB software subscription.",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "date": "2026-09-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/088118-2026",
+   "ocid": "ocds-h6vhtk-077430",
+   "source": "Find a Tender",
+   "valueAmount": 22664.36,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-09-16",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "STEMSOFT Software Inc. (STEMCELL Technologies)",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"stemsoft software inc stemcell technologies\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "GCloud 14 Block - Clinical Virtual Desktop Infrastructure for General Practices",
+   "buyer": "NHS KENT AND MEDWAY INTEGRATED CARE BOARD",
+   "date": "2026-09-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087750-2026",
+   "ocid": "ocds-h6vhtk-05ed70",
+   "source": "Find a Tender",
+   "valueAmount": 106800,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72260000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Block Solutions Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"block solutions\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Gcloud 13 Iplato Platform",
+   "buyer": "NHS KENT AND MEDWAY INTEGRATED CARE BOARD",
+   "date": "2026-09-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087725-2026",
+   "ocid": "ocds-h6vhtk-05ed9d",
+   "source": "Find a Tender",
+   "valueAmount": 603026.7,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "iPlato Healthcare Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"iplato healthcare\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Gcloud 14 iPlato Messaging Subscription",
+   "buyer": "NHS KENT AND MEDWAY INTEGRATED CARE BOARD",
+   "date": "2026-09-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087708-2026",
+   "ocid": "ocds-h6vhtk-05ee32",
+   "source": "Find a Tender",
+   "valueAmount": 1809080.1,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "iPlato Healthcare Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"iplato healthcare\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Website Development & Hosting",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "date": "2026-09-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087097-2026",
+   "ocid": "ocds-h6vhtk-06f9a3",
+   "source": "Find a Tender",
+   "valueAmount": 78380.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2032-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Frank Design Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"frank design\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Anonymous Reporting Platform",
+   "buyer": "University Hospitals of Leicester NHS Trust",
+   "date": "2026-09-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086739-2026",
+   "ocid": "ocds-h6vhtk-06f8d5",
+   "source": "Find a Tender",
+   "valueAmount": 28000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-02-09",
+   "isFramework": false,
+   "digitalCpv": [
+    "48517000",
+    "72261000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Cultureshift Communication Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"cultureshift communication\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Ulysees System Safeguard Service",
+   "buyer": "NHS SURREY AND SUSSEX INTEGRATED CARE BOARD",
+   "date": "2026-09-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086275-2026",
+   "ocid": "ocds-h6vhtk-06f7c0",
+   "source": "Find a Tender",
+   "valueAmount": 30275.94,
+   "valueCurrency": "GBP",
+   "periodEnd": "2028-06-30",
+   "isFramework": false,
+   "digitalCpv": [
+    "72268000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "ULYSSES (2000) LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"ulysses 2000\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "NHSR_415 Behavioural Assessment Services",
+   "buyer": "NHS Litigation Authority",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086143-2026",
+   "ocid": "ocds-h6vhtk-069afc",
+   "source": "Find a Tender",
+   "valueAmount": 1022760.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2030-09-13",
+   "isFramework": false,
+   "digitalCpv": [
+    "72221000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Work Psychology Group",
+   "noticeSupplierCount": 3,
+   "reason": "no Hub company's name or recorded alias normalises to \"work psychology group\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "NHSR_415 Behavioural Assessment Services",
+   "buyer": "NHS Litigation Authority",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086143-2026",
+   "ocid": "ocds-h6vhtk-069afc",
+   "source": "Find a Tender",
+   "valueAmount": 1022760.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2030-09-13",
+   "isFramework": false,
+   "digitalCpv": [
+    "72221000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Edgecumbe Consulting Group Limited",
+   "noticeSupplierCount": 3,
+   "reason": "no Hub company's name or recorded alias normalises to \"edgecumbe consulting group\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "NHSR_415 Behavioural Assessment Services",
+   "buyer": "NHS Litigation Authority",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086143-2026",
+   "ocid": "ocds-h6vhtk-069afc",
+   "source": "Find a Tender",
+   "valueAmount": 1022760.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2030-09-13",
+   "isFramework": false,
+   "digitalCpv": [
+    "72221000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Work Psychology Hub",
+   "noticeSupplierCount": 3,
+   "reason": "no Hub company's name or recorded alias normalises to \"work psychology hub\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Medical Revalidation Software",
+   "buyer": "Epsom and St Helier University Hospitals NHS Trust",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086113-2026",
+   "ocid": "ocds-h6vhtk-06f764",
+   "source": "Find a Tender",
+   "valueAmount": 67666.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2028-05-30",
+   "isFramework": false,
+   "digitalCpv": [
+    "48517000",
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "SARD JV Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"sard jv\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "CHS - Medical Revalidation",
+   "buyer": "Croydon Health Services NHS Trust",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086098-2026",
+   "ocid": "ocds-h6vhtk-06f759",
+   "source": "Find a Tender",
+   "valueAmount": 36264.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-11-14",
+   "isFramework": false,
+   "digitalCpv": [
+    "48517000",
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "SARD JV Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"sard jv\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Integrated Screening Outcomes Surveillance Service (ISOSS)",
+   "buyer": "NHS England",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086019-2026",
+   "ocid": "ocds-h6vhtk-06c613",
+   "source": "Find a Tender",
+   "valueAmount": 204167.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72316000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "University College London",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"university college london\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "PSBA – CLOUD CONNECT",
+   "buyer": "Cardiff and Vale University Health Board",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085926-2026",
+   "ocid": "ocds-h6vhtk-06f6e8",
+   "source": "Find a Tender",
+   "valueAmount": 543675.47,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72720000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "British Telecommunications LTD",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"british telecommunications\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "ELFS - Finance & eProcurement System",
+   "buyer": "Lancashire Teaching Hospitals NHS Foundation Trust",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085790-2026",
+   "ocid": "ocds-h6vhtk-06f697",
+   "source": "Find a Tender",
+   "valueAmount": 1188050.0,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48440000",
+    "48442000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Advanced Health and Care",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"advanced health and care\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "ATOS Infrastructure Platform",
+   "buyer": "MEDWAY NHS FOUNDATION TRUST",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085751-2026",
+   "ocid": "ocds-h6vhtk-06f67b",
+   "source": "Find a Tender",
+   "valueAmount": 415000,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-09-30",
+   "isFramework": false,
+   "digitalCpv": [
+    "72212780"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "ATOS IT SERVICES UK LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"atos it services\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Cito Core Electronic Document Management Solution (EDMS)",
+   "buyer": "MEDWAY NHS FOUNDATION TRUST",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085729-2026",
+   "ocid": "ocds-h6vhtk-06f66e",
+   "source": "Find a Tender",
+   "valueAmount": 200000,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-09-12",
+   "isFramework": false,
+   "digitalCpv": [
+    "72212780"
+   ],
+   "clinical": true,
+   "lane": "digital",
+   "noticeSupplierName": "CIVICA UK LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"civica\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Primary Care Virtual Licences",
+   "buyer": "NHS England",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085615-2026",
+   "ocid": "ocds-h6vhtk-06f62a",
+   "source": "Find a Tender",
+   "valueAmount": 19940.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2028-08-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72212218"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "IRIS-Connect Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"iris connect\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "CPC Drive - Vehicle Leasing and Salary Sacrifice Scheme",
+   "buyer": "Leeds and York Partnership NHS Foundation Trust, trading as North of England NHS Commercial Procurement Collaborative (\"NOE CPC\")",
+   "date": "2026-09-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085007-2026",
+   "ocid": "ocds-h6vhtk-02dd6e",
+   "source": "Find a Tender",
+   "valueAmount": 650000001.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "72260000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Tuskerdirect Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"tuskerdirect\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Integration Engine and Technical Expertise",
+   "buyer": "Liverpool University Hospitals NHS Foundation Trust",
+   "date": "2026-09-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084847-2026",
+   "ocid": "ocds-h6vhtk-06f471",
+   "source": "Find a Tender",
+   "valueAmount": 32972.66,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-08-27",
+   "isFramework": false,
+   "digitalCpv": [
+    "72261000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Interoperability Health (UK) Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"interoperability health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "ndependent Assessment & Assurance of 62-Day Standard",
+   "buyer": "The Christie NHS Foundation Trust",
+   "date": "2026-09-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084764-2026",
+   "ocid": "ocds-h6vhtk-06f446",
+   "source": "Find a Tender",
+   "valueAmount": 76900.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2026-06-08",
+   "isFramework": false,
+   "digitalCpv": [
+    "72224000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "The Public Service Consultants Limited T/A The PSC",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"the public service consultants limited t a the psc\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "License management",
+   "buyer": "The Walton Centre NHS Foundation Trust",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084443-2026",
+   "ocid": "ocds-h6vhtk-06f38f",
+   "source": "Find a Tender",
+   "valueAmount": 12658.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-10-06",
+   "isFramework": false,
+   "digitalCpv": [
+    "72212218"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "AFD Software Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"afd software\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Refine Annual Licence",
+   "buyer": "MERSEY AND WEST LANCASHIRE TEACHING HOSPITALS NHS TRUST",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084407-2026",
+   "ocid": "ocds-h6vhtk-06f37c",
+   "source": "Find a Tender",
+   "valueAmount": 16000,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-08-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "72260000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "RX-INFO LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"rx info\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Warehouse File Tracking Software",
+   "buyer": "NHS Business Services Authority",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084292-2026",
+   "ocid": "ocds-h6vhtk-06497a",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "72212420"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Asset Workflows Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"asset workflows\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "EPR - Testing Delivery Service",
+   "buyer": "MEDWAY NHS FOUNDATION TRUST",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084177-2026",
+   "ocid": "ocds-h6vhtk-06e071",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48800000"
+   ],
+   "clinical": true,
+   "lane": "digital",
+   "noticeSupplierName": "Health Systems Support Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"health systems support\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "EPR Clinical Safety Support",
+   "buyer": "Lincolnshire Community Health Services NHS Trust",
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084109-2026",
+   "ocid": "ocds-h6vhtk-06f2cf",
+   "source": "Find a Tender",
+   "valueAmount": 15000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2026-11-30",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": true,
+   "lane": "digital",
+   "noticeSupplierName": "Apira Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"apira\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "he Referapatient pPlatform is a web-based regional referral management system",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083743-2026",
+   "ocid": "ocds-h6vhtk-06f1e3",
+   "source": "Find a Tender",
+   "valueAmount": 12816.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-09-03",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "BLOOMSBURY HEALTH LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"bloomsbury health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "PSR Direct Award C - QbTest ADHD Management System",
+   "buyer": "KENT COMMUNITY HEALTH NHS FOUNDATION TRUST",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083679-2026",
+   "ocid": "ocds-h6vhtk-06f1bb",
+   "source": "Find a Tender",
+   "valueAmount": 173750.0,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48100000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Qbtech Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"qbtech\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Level 4 Escalation Support",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083615-2026",
+   "ocid": "ocds-h6vhtk-06f149",
+   "source": "Find a Tender",
+   "valueAmount": 825000,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72221000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "GRANT THORNTON",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"grant thornton\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "CSOC Secure File Transfer Platform",
+   "buyer": "NHS England",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083435-2026",
+   "ocid": "ocds-h6vhtk-06f133",
+   "source": "Find a Tender",
+   "valueAmount": 20810.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-07-12",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Hexiosec Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"hexiosec\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Support services for the EPR - Sunrise 22.1",
+   "buyer": "LIVERPOOL HEART AND CHEST HOSPITAL NHS FOUNDATION TRUST",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083433-2026",
+   "ocid": "ocds-h6vhtk-06ce77",
+   "source": "Find a Tender",
+   "valueAmount": 984366.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-08-07",
+   "isFramework": false,
+   "digitalCpv": [
+    "72600000"
+   ],
+   "clinical": true,
+   "lane": "digital",
+   "noticeSupplierName": "ALTERA HEALTHCARE (IT) UK LTD",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"altera healthcare it\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "OPAS-G2 Occupational Health Software Solution",
+   "buyer": "Sussex Community NHS Foundation Trust",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083356-2026",
+   "ocid": "ocds-h6vhtk-030b82",
+   "source": "Find a Tender",
+   "valueAmount": 180386.97,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48517000",
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "CIVICA UK LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"civica\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Waiver - ROH - 000025283 - Dynamic Business Services Ltd  -  LMS Hosting Renewal",
+   "buyer": "The Royal Orthopaedic Hospital NHS Foundation Trust",
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083165-2026",
+   "ocid": "ocds-h6vhtk-06f097",
+   "source": "Find a Tender",
+   "valueAmount": 12750.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2026-08-14",
+   "isFramework": false,
+   "digitalCpv": [
+    "72261000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Dynamic Business Services Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"dynamic business services\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Primary Care Workforce Intelligence System Performers List Implementation",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083163-2026",
+   "ocid": "ocds-h6vhtk-06f095",
+   "source": "Find a Tender",
+   "valueAmount": 269165.0,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72227000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Bluewave Technology UK Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"bluewave technology\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "PAHT - EOLAS Medical Subscription",
+   "buyer": "The Princess Alexandra Hospital NHS Trust",
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082992-2026",
+   "ocid": "ocds-h6vhtk-06f03f",
+   "source": "Find a Tender",
+   "valueAmount": 13500.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-06-30",
+   "isFramework": false,
+   "digitalCpv": [
+    "48517000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Eolas Medical Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"eolas medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Clinical database National Intestinal Failure Registry",
+   "buyer": "NHS England",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082747-2026",
+   "ocid": "ocds-h6vhtk-06b8ce",
+   "source": "Find a Tender",
+   "valueAmount": 61020.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72310000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "The British Association for Parenteral and Enteral Nutrition (BAPEN)",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"the british association for parenteral and enteral nutrition bapen\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Gov Notify Service Usage",
+   "buyer": "The Christie NHS Foundation Trust",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082713-2026",
+   "ocid": "ocds-h6vhtk-06efa5",
+   "source": "Find a Tender",
+   "valueAmount": 42175.38,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-07-01",
+   "isFramework": false,
+   "digitalCpv": [
+    "72416000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Department for Science, Innovation & Technology",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"department for science innovation and technology\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "DIRECT INSTANT PAY",
+   "buyer": "Cwm Taf Morgannwg University Health Board",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082674-2026",
+   "ocid": "ocds-h6vhtk-060d46",
+   "source": "Find a Tender",
+   "valueAmount": 50000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-02-28",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Allocate Software Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"allocate software\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Project Portfolio Management System",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082629-2026",
+   "ocid": "ocds-h6vhtk-06093f",
+   "source": "Find a Tender",
+   "valueAmount": 231000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2028-10-28",
+   "isFramework": false,
+   "digitalCpv": [
+    "48810000",
+    "72250000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "TMI SYSTEMS LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"tmi systems\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "BlueTeq Medicines Optimisation",
+   "buyer": "Cwm Taf Morgannwg University Health Board",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082580-2026",
+   "ocid": "ocds-h6vhtk-0688b7",
+   "source": "Find a Tender",
+   "valueAmount": 88000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2028-05-07",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Blueteq",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"blueteq\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Carepartner Mental Health Clinical System",
+   "buyer": "Cwm Taf Morgannwg University Health Board",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082550-2026",
+   "ocid": "ocds-h6vhtk-05d91d",
+   "source": "Find a Tender",
+   "valueAmount": 35383.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2026-12-11",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": true,
+   "lane": "digital",
+   "noticeSupplierName": "Imosphere Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"imosphere\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Building Management Systems Community Sites",
+   "buyer": "Cwm Taf Morgannwg University Health Board",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082545-2026",
+   "ocid": "ocds-h6vhtk-05dbf5",
+   "source": "Find a Tender",
+   "valueAmount": 156667.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2026-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "48420000",
+    "72212420"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Honeywell Building Solutions",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"honeywell building solutions\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "BCU-DIR-63508 - TELEPATH LICENSES AND MAINTENANCE",
+   "buyer": "Betsi Cadwaladr University Health Board",
+   "date": "2026-08-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082186-2026",
+   "ocid": "ocds-h6vhtk-06ee8b",
+   "source": "Find a Tender",
+   "valueAmount": 28000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Dedalus",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"dedalus\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "BestPathway Hosting",
+   "buyer": "NHS KENT AND MEDWAY INTEGRATED CARE BOARD",
+   "date": "2026-08-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081760-2026",
+   "ocid": "ocds-h6vhtk-06ed95",
+   "source": "Find a Tender",
+   "valueAmount": 31689,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-09-30",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "DXS International Plc",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"dxs international\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "software licence support",
+   "buyer": "LIVERPOOL HEART AND CHEST HOSPITAL NHS FOUNDATION TRUST",
+   "date": "2026-08-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081651-2026",
+   "ocid": "ocds-h6vhtk-06ed54",
+   "source": "Find a Tender",
+   "valueAmount": 12098.64,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-08-13",
+   "isFramework": false,
+   "digitalCpv": [
+    "72261000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "TRUSTMARQUE SOLUTIONS LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"trustmarque solutions\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Rheumatology Cellma Licences",
+   "buyer": "Cwm Taf Morgannwg University Health Board",
+   "date": "2026-08-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081141-2026",
+   "ocid": "ocds-h6vhtk-06ec28",
+   "source": "Find a Tender",
+   "valueAmount": 35676.1,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72268000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "RIOMED LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"riomed\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Red Circle Prescribe & Predict analytics",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "date": "2026-08-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080774-2026",
+   "ocid": "ocds-h6vhtk-06eb65",
+   "source": "Find a Tender",
+   "valueAmount": 50000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72246000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "RED CIRCLE HEALTHCARE ADVISORY LTD",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"red circle healthcare advisory\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Cleft Registry and Audit Network (CRANE)",
+   "buyer": "NHS England",
+   "date": "2026-08-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080670-2026",
+   "ocid": "ocds-h6vhtk-06bb5c",
+   "source": "Find a Tender",
+   "valueAmount": 426428.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72310000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "The Royal College of Surgeons of England",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"the royal college of surgeons of\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Virtual Environment Rehabilitation Assistant (VERA) support",
+   "buyer": "The Walton Centre NHS Foundation Trust",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079563-2026",
+   "ocid": "ocds-h6vhtk-06e8da",
+   "source": "Find a Tender",
+   "valueAmount": 12000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "48218000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Citrus Suite Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"citrus suite\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Microsoft Server Cloud Enrolment Agreement",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079415-2026",
+   "ocid": "ocds-h6vhtk-06e881",
+   "source": "Find a Tender",
+   "valueAmount": 2750000,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Phoenix Software Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"phoenix software\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Theseus Platform for the management of Public Health Wales National Exercise Referrals Scheme (NERS)",
+   "buyer": "Public Health Wales NHS Trust",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079370-2026",
+   "ocid": "ocds-h6vhtk-06e2a2",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Cyber Media",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"cyber media\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "CRM Platform (Donor and Session Programme)",
+   "buyer": "NHS Blood and Transplant",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079365-2026",
+   "ocid": "ocds-h6vhtk-066fef",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": true,
+   "digitalCpv": [
+    "48000000",
+    "48445000",
+    "48517000",
+    "72268000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Pegasystems Limited",
+   "noticeSupplierCount": 3,
+   "reason": "no Hub company's name or recorded alias normalises to \"pegasystems\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "CRM Platform (Donor and Session Programme)",
+   "buyer": "NHS Blood and Transplant",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079365-2026",
+   "ocid": "ocds-h6vhtk-066fef",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": true,
+   "digitalCpv": [
+    "48000000",
+    "48445000",
+    "48517000",
+    "72268000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Portaltech Reply Limited",
+   "noticeSupplierCount": 3,
+   "reason": "no Hub company's name or recorded alias normalises to \"portaltech reply\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Dragon Medical 1 Licences",
+   "buyer": "Imperial College Healthcare NHS Trust",
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078834-2026",
+   "ocid": "ocds-h6vhtk-06e734",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72212218"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "FREEDOM OF SPEECH LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"freedom of speech\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Healthset System Implementation and Deployment",
+   "buyer": "University Hospitals Dorset NHS Foundation Trust",
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078775-2026",
+   "ocid": "ocds-h6vhtk-06e714",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72263000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "The Black Fallow Company",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"the black fallow company\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Digital Health Transformation service - HWB01 Health Forms set up and maintenance",
+   "buyer": "DERBYSHIRE COMMUNITY HEALTH SERVICES NHS FOUNDATION TRUST",
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078561-2026",
+   "ocid": "ocds-h6vhtk-06e694",
+   "source": "Find a Tender",
+   "valueAmount": 12000,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-07-13",
+   "isFramework": false,
+   "digitalCpv": [
+    "48180000"
+   ],
+   "clinical": true,
+   "lane": "digital",
+   "noticeSupplierName": "LEICESTERSHIRE PARTNERSHIP NHS TRUST",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"leicestershire partnership nhs trust\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "DILIGENT BOARDBOOKS LICENCE  RENEWAL",
+   "buyer": "DERBYSHIRE COMMUNITY HEALTH SERVICES NHS FOUNDATION TRUST",
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078460-2026",
+   "ocid": "ocds-h6vhtk-06e666",
+   "source": "Find a Tender",
+   "valueAmount": 18313,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-08-15",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "DILIGENT BOARDBOOKS LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"diligent boardbooks\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Facilities Management Software",
+   "buyer": "CORNWALL PARTNERSHIP NHS FOUNDATION TRUST",
+   "date": "2026-08-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077506-2026",
+   "ocid": "ocds-h6vhtk-06e430",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "BESA PUBLICATIONS LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"besa publications\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Solarwinds Network Maintenance",
+   "buyer": "Surrey and Borders Partnership NHS Foundation Trust",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077351-2026",
+   "ocid": "ocds-h6vhtk-06e3d8",
+   "source": "Find a Tender",
+   "valueAmount": 21448.35,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-08-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "LOOP1 UK LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"loop1\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "PLAN Accreditation",
+   "buyer": "Kent and Medway Mental Health NHS Trust",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077314-2026",
+   "ocid": "ocds-h6vhtk-06e3c0",
+   "source": "Find a Tender",
+   "valueAmount": 10845.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-08-07",
+   "isFramework": false,
+   "digitalCpv": [
+    "72212180"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Royal College of Psychiatry",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"royal college of psychiatry\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Waiver - UHB_QEH - 12003 - Rotamap Ltd  - Online Rostering Systems Renewal",
+   "buyer": "University Hospitals Birmingham NHS Foundation Trust",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077238-2026",
+   "ocid": "ocds-h6vhtk-06e398",
+   "source": "Find a Tender",
+   "valueAmount": 10595.1,
+   "valueCurrency": "GBP",
+   "periodEnd": "2026-09-30",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Rotamap Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"rotamap\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Ambient Voice Technology",
+   "buyer": "LIVERPOOL HEART AND CHEST HOSPITAL NHS FOUNDATION TRUST",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077112-2026",
+   "ocid": "ocds-h6vhtk-06e359",
+   "source": "Find a Tender",
+   "valueAmount": 16901.57,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72212314"
+   ],
+   "clinical": true,
+   "lane": "digital",
+   "noticeSupplierName": "EASTERN ACADEMIC HEALTH SCIENCE NETWORK",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"eastern academic health science network\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "On-going maintenance Hub & Spoke dispensing registration – BSA 2026/2027",
+   "buyer": "NHS England",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077026-2026",
+   "ocid": "ocds-h6vhtk-06e32b",
+   "source": "Find a Tender",
+   "valueAmount": 12000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72267100"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "NHS BSA",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"nhs bsa\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Flagsmith 12 Month Trial",
+   "buyer": "NHS England",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077009-2026",
+   "ocid": "ocds-h6vhtk-06e320",
+   "source": "Find a Tender",
+   "valueAmount": 19568.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-02-09",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Bullet Train Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"bullet train\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Convergence HSCN Circuits",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076723-2026",
+   "ocid": "ocds-h6vhtk-06e27d",
+   "source": "Find a Tender",
+   "valueAmount": 41629.62,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-07-13",
+   "isFramework": false,
+   "digitalCpv": [
+    "72212210"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "CONVERGENCE (GROUP NETWORKS) LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"convergence group networks\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "C The Signs Earlier Cancer Detection Platform",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076594-2026",
+   "ocid": "ocds-h6vhtk-06e235",
+   "source": "Find a Tender",
+   "valueAmount": 489000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72250000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "C The Signs",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"c the signs\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Diabetic Eye Screening Data Collection & Management",
+   "buyer": "NHS England",
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076518-2026",
+   "ocid": "ocds-h6vhtk-06e203",
+   "source": "Find a Tender",
+   "valueAmount": 86873.57,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "QUICKSILVA LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"quicksilva\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "3 Year Corporate Membership to CIISec",
+   "buyer": "NHS England",
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076510-2026",
+   "ocid": "ocds-h6vhtk-06e200",
+   "source": "Find a Tender",
+   "valueAmount": 21392.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-07-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Chartered Institute of Information Security",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"chartered institute of information security\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Procurement of a Computer Aided Facilities Management (CAFM) System",
+   "buyer": "The Rotherham NHS Foundation Trust",
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076204-2026",
+   "ocid": "ocds-h6vhtk-06011a",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "48420000",
+    "72514000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Tabs FM LTD",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"tabs fm\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Work Force Management Solution",
+   "buyer": "NHS Business Services Authority",
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076193-2026",
+   "ocid": "ocds-h6vhtk-06e140",
+   "source": "Find a Tender",
+   "valueAmount": 2958346.52,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48517000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Verint Systems UK Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"verint systems\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "NHS Leadership Academy Single Sign On EXT 26/27",
+   "buyer": "NHS England",
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076175-2026",
+   "ocid": "ocds-h6vhtk-06e130",
+   "source": "Find a Tender",
+   "valueAmount": 57902.33,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000",
+    "72268000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Okta",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"okta\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "C463272 - Waiver for Disk Replacement Part and Support",
+   "buyer": "Bradford Teaching Hospitals NHS Foundation Trust",
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075991-2026",
+   "ocid": "ocds-h6vhtk-06e0c3",
+   "source": "Find a Tender",
+   "valueAmount": 15821.28,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-08-05",
+   "isFramework": false,
+   "digitalCpv": [
+    "72261000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Park Place Technologies Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"park place technologies\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Sophos Intercept X Advanced",
+   "buyer": "SOUTH WESTERN AMBULANCE SERVICE NHS FOUNDATION TRUST",
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075971-2026",
+   "ocid": "ocds-h6vhtk-06e0b8",
+   "source": "Find a Tender",
+   "valueAmount": 21525.88,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-08-11",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "CYBERLAB SECURITY LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"cyberlab security\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "EPR - Specialist Delivery Service",
+   "buyer": "MEDWAY NHS FOUNDATION TRUST",
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075846-2026",
+   "ocid": "ocds-h6vhtk-06e06a",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48800000"
+   ],
+   "clinical": true,
+   "lane": "digital",
+   "noticeSupplierName": "CLOUD 21 LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"cloud 21\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "TRFT - Location Asset management/ Smart hospital",
+   "buyer": "The Rotherham NHS Foundation Trust",
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075737-2026",
+   "ocid": "ocds-h6vhtk-06e026",
+   "source": "Find a Tender",
+   "valueAmount": 148000.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-05-14",
+   "isFramework": false,
+   "digitalCpv": [
+    "72150000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Floki Health LTD",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"floki health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Interviews, coaching and preparation support package",
+   "buyer": "HUMBER TEACHING NHS FOUNDATION TRUST",
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075671-2026",
+   "ocid": "ocds-h6vhtk-06dffc",
+   "source": "Find a Tender",
+   "valueAmount": 12500,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "72225000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "quality governance solutions ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"quality governance solutions\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Enterprise Agreement",
+   "buyer": "Aneurin Bevan University Health Board",
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075592-2026",
+   "ocid": "ocds-h6vhtk-06dfcc",
+   "source": "Find a Tender",
+   "valueAmount": 2148374,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48218000",
+    "72261000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "CDW Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"cdw\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Technical support",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075531-2026",
+   "ocid": "ocds-h6vhtk-06dfa4",
+   "source": "Find a Tender",
+   "valueAmount": 29725.52,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-08-09",
+   "isFramework": false,
+   "digitalCpv": [
+    "72600000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "CHUBB FIRE & SECURITY LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"chubb fire and security\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Clinical Interpretation & Reporting",
+   "buyer": "Great Ormond Street Hospital for Children NHS Foundation Trust",
+   "date": "2026-08-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075477-2026",
+   "ocid": "ocds-h6vhtk-06df86",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48814400"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Congenica Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"congenica\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  }
+ ],
+ "ambiguous": []
+}
