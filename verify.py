@@ -6866,6 +6866,24 @@ def check_trust_digital_profile(doc, trust_map):
                               "of %d: a join is wrong." % (live, head))
 
 
+def check_gates_watch(doc):
+    """data/gates-watch.json (20/10/2026): owner page change dates for the health tech
+    gates. Every row must name its owner and link the owner's own page; a date must
+    be an ISO date the owner published, never blank on an ok row."""
+    if doc is None:
+        return
+    if not doc.get("rule"):
+        FAIL("gates-watch", "gates-watch.json has no `rule`.")
+    for p in doc.get("pages") or []:
+        if not (p.get("owner") and (p.get("url") or "").startswith("https://")):
+            FAIL("gates-watch", "%s: no owner or no https source link." % p.get("id"))
+        if p.get("status") == "ok" and not re.match(r"^\d{4}-\d{2}-\d{2}$", p.get("lastUpdated") or ""):
+            FAIL("gates-watch", "%s: status ok but no owner date." % p.get("id"))
+        if p.get("status") == "unreachable":
+            WARN("gates-watch", "%s: owner page unreachable on the last run; last good reading kept."
+                 % p.get("id"))
+
+
 def main():
     offline = "--offline" in sys.argv
     as_json = "--json" in sys.argv
@@ -7005,6 +7023,7 @@ def main():
     check_digital_lane(load("digital-lane.json"), load("company-awards.json"),
                        load("open-tenders.json"))
     check_trust_digital_profile(load("trust-digital-profile.json"), load("trust-map.json"))
+    check_gates_watch(load("gates-watch.json"))
     check_calendar(load("hub-calendar.json"))
     # Supplier hiring signal, read from each company's own careers page. Optional
     # like the layers above — no file means it is not built. Built, every check

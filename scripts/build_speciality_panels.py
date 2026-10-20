@@ -10064,7 +10064,8 @@ def build(slug, sources):
     if not disc:
         del doc["discontinuedOnFormulary"]
         del doc["rules"]["discontinuedOnFormulary"]
-    lane = build_digital_lane(slug, sources.get("digital_lane"), sources.get("trust_digital"))
+    lane = build_digital_lane(slug, sources.get("digital_lane"), sources.get("trust_digital"),
+                              sources.get("gates_watch"))
     if lane:
         doc["digitalLane"] = lane
         doc["rules"]["digitalLane"] = lane["rule"]
@@ -10084,7 +10085,7 @@ DIGITAL_LANE_SLUG = "digital-and-medical-it"
 DIGITAL_LANE_AWARDS_SHOWN = 15
 
 
-def build_digital_lane(slug, lane_doc, fdp_doc):
+def build_digital_lane(slug, lane_doc, fdp_doc, gates_doc=None):
     if slug != DIGITAL_LANE_SLUG or not lane_doc:
         return None
     clin = lambda rows: [r for r in rows or [] if r.get("clinical")]
@@ -10107,6 +10108,14 @@ def build_digital_lane(slug, lane_doc, fdp_doc):
                    for r in awards[:DIGITAL_LANE_AWARDS_SHOWN]],
         "awardsClinicalTotal": len(awards),
     }
+    if gates_doc and gates_doc.get("pages"):
+        out["gates"] = {
+            "rule": gates_doc.get("rule"),
+            "dataAsOf": gates_doc.get("dataAsOf"),
+            "pages": [{k: p.get(k) for k in ("gate", "owner", "title", "url", "lastUpdated",
+                                               "latestChange", "changedSinceLastRun", "status")}
+                      for p in gates_doc["pages"] if p.get("lastUpdated")],
+        }
     if fdp_doc and fdp_doc.get("headline"):
         out["fdp"] = {
             "headline": fdp_doc["headline"],
@@ -10278,7 +10287,8 @@ def load_sources():
                       ("tariff_snapshots", "tariff-snapshots.json"),
                       ("discontinued", "discontinued-on-formulary.json"),
                       ("digital_lane", "digital-lane.json"),
-                      ("trust_digital", "trust-digital-profile.json")):
+                      ("trust_digital", "trust-digital-profile.json"),
+                      ("gates_watch", "gates-watch.json")):
         path = os.path.join(DATA, name)
         sources[key] = load(name) if os.path.exists(path) else None
     return sources

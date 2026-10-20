@@ -250,6 +250,17 @@
         h += '</table></div>';
         h += '<div class="sp-meta">' + n(dl.awards.length) + ' most recent of ' + n(dl.awardsClinicalTotal) + ' clinical rows, out of ' + n(dc.awards || 0) + ' NHS software and IT notices held.</div>';
       }
+      if (dl.gates && dl.gates.pages && dl.gates.pages.length) {
+        h += '<div class="sp-li-g">Gates tracker: when each owner last changed its page</div>';
+        h += '<div class="sp-scroll"><table class="sp-tbl"><tr><th>Gate page</th><th>Owner</th><th>Last changed</th></tr>';
+        for (i = 0; i < dl.gates.pages.length; i++) {
+          var gp = dl.gates.pages[i];
+          h += '<tr><td><a href="' + esc(gp.url) + '" target="_blank" rel="noopener">' + esc(gp.title || gp.url) + '</a>' +
+               (gp.latestChange ? '<div class="sp-li-d">' + esc(gp.latestChange) + '</div>' : '') + '</td><td>' + esc(gp.owner) +
+               '</td><td>' + esc(gp.lastUpdated) + (gp.changedSinceLastRun ? ' <b>(new)</b>' : '') + '</td></tr>';
+        }
+        h += '</table></div><div class="sp-meta">The owner\'s own date and change note, read ' + esc(dl.gates.dataAsOf || '') + '. Nothing is summarised.</div>';
+      }
       if (dl.fdp && dl.fdp.headline) {
         var fh = dl.fdp.headline;
         h += '<div class="sp-li-g">NHS Federated Data Platform</div>';

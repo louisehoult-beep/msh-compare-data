@@ -168,6 +168,46 @@ class Fdp(unittest.TestCase):
         self.assertEqual(self.doc["icbs"], [{"name": "NHS Devon ICB", "fdpLive": True, "fdpSignedUp": True}])
 
 
+class GatesWatch(unittest.TestCase):
+
+    def test_reads_owner_dates_and_flags_changes(self):
+        import refresh_gates_watch as G
+        gov = json.dumps({"title": "T", "public_updated_at": "2026-10-16T15:15:46+01:00",
+                          "details": {"change_history": [
+                              {"note": "old", "public_timestamp": "2026-01-01T00:00:00Z"},
+                              {"note": "Fees updated", "public_timestamp": "2026-10-16T14:15:46Z"}]}})
+        nhsd = "<title>DTAC - NHS England Digital</title><p>Last edited: 21 September 2026 2:02 pm</p>"
+        fetch = lambda url: nhsd if "digital.nhs.uk" in url else gov
+        prev = {"pages": [{"id": "dtac", "lastUpdated": "2026-04-01"}]}
+        doc = G.build(prev, "2026-10-20", fetch=fetch)
+        by = {p["id"]: p for p in doc["pages"]}
+        self.assertEqual(by["mhra-registration"]["lastUpdated"], "2026-10-16")
+        self.assertEqual(by["mhra-registration"]["latestChange"], "Fees updated")
+        self.assertEqual(by["dtac"]["lastUpdated"], "2026-09-21")
+        self.assertTrue(by["dtac"]["changedSinceLastRun"])
+        self.assertFalse(by["mhra-registration"]["changedSinceLastRun"])
+
+    def test_unreachable_keeps_last_good_reading(self):
+        import refresh_gates_watch as G
+        def boom(url):
+            raise OSError("down")
+        prev = {"pages": [{"id": "dtac", "lastUpdated": "2026-09-21", "owner": "NHS England",
+                           "url": "https://digital.nhs.uk/x", "status": "ok"}]}
+        doc = G.build(prev, "2026-10-20", fetch=boom)
+        d = {p["id"]: p for p in doc["pages"]}["dtac"]
+        self.assertEqual((d["status"], d["lastUpdated"]), ("unreachable", "2026-09-21"))
+
+
+class MhraSoftwareFlag(unittest.TestCase):
+
+    def test_flag_reads_the_alerts_own_words(self):
+        import refresh_mhra_alerts as M
+        self.assertTrue(M.software_ai({"title": "Infusion pumps: software error may stop infusion"}))
+        self.assertTrue(M.software_ai({"title": "X", "description": "An AI algorithm may misclassify"}))
+        self.assertFalse(M.software_ai({"title": "Hoist sling: stitching may fail"}))
+        self.assertFalse(M.software_ai({"title": "Maintenance of devices"}))   # 'ai' inside a word
+
+
 class StoredFiles(unittest.TestCase):
     """The committed files pass their own stated rules."""
 

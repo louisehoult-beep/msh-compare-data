@@ -47,6 +47,9 @@ jobs:
       - name: Refresh the digital lane
         run: python3 scripts/refresh_digital_lane.py --days "${{ github.event.inputs.days || 8 }}"
 
+      - name: Refresh the Gates Tracker (owner page change dates)
+        run: python3 scripts/refresh_gates_watch.py
+
       - name: Refresh the Federated Data Platform profile (Mondays, or on demand)
         run: |
           if [ "$(date -u +%u)" = "1" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -66,7 +69,7 @@ jobs:
         run: |
           git config user.name "digital-lane-bot"
           git config user.email "actions@github.com"
-          git add data/digital-lane.json data/trust-digital-profile.json
+          git add data/digital-lane.json data/trust-digital-profile.json data/gates-watch.json
           git diff --cached --quiet || git commit -m "Digital lane $(date -u +%F)"
           pushed=0
           for attempt in 1 2 3; do
@@ -81,7 +84,7 @@ jobs:
             python3 scripts/refresh_digital_lane.py --days "${{ github.event.inputs.days || 8 }}"
             python3 scripts/stamp_notice.py
             bash scripts/gate.sh || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
-            git add data/digital-lane.json data/trust-digital-profile.json
+            git add data/digital-lane.json data/trust-digital-profile.json data/gates-watch.json
             git diff --cached --quiet || git commit -m "Digital lane $(date -u +%F) (retry)"
             sleep 5
           done

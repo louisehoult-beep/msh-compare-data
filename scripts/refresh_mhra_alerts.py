@@ -264,6 +264,24 @@ def dedup_key(row):
     return row.get("url", "")
 
 
+# SOFTWARE AND AI FLAG (20/10/2026, Hub health tech intelligence gap, Gates Tracker
+# row). The feed's scope is unchanged; each alert is flagged when its own title or
+# description names software, firmware, an app, an algorithm, AI or machine learning,
+# so the Digital health and AI page can show the alerts that are about software.
+SOFTWARE_AI_RE = re.compile(
+    r"(?<![\w-])(software|firmware|apps?|algorithms?|(?-i:AI)|artificial intelligence|"
+    r"machine learning|(?-i:SaMD)|cyber ?security|interface|display (?:error|fault)s?)(?![\w-])", re.I)
+SOFTWARE_AI_RULE = (
+    "softwareAi is true when the alert's own title or description names software, firmware, "
+    "an app, an algorithm, artificial intelligence (AI), machine learning, software as a medical "
+    "device (SaMD), cyber security, an interface or a display error. It is a flag on the "
+    "alert's own words, not a judgement about the device.")
+
+
+def software_ai(row):
+    return bool(SOFTWARE_AI_RE.search("%s %s" % (row.get("title") or "", row.get("description") or "")))
+
+
 def assemble(rows, existing, window, complete, today):
     kept = {}
     for row in (existing or {}).get("_rows", []):
@@ -272,6 +290,8 @@ def assemble(rows, existing, window, complete, today):
         kept[dedup_key(row)] = row
 
     ordered = sorted(kept.values(), key=lambda r: r.get("issuedDate") or "", reverse=True)
+    for row in ordered:
+        row["softwareAi"] = software_ai(row)
 
     by_type = {}
     for row in ordered:
@@ -312,7 +332,9 @@ def assemble(rows, existing, window, complete, today):
             "alerts": len(ordered),
             "byAlertType": by_type,
             "withCompanyResolved": companies,
+            "softwareAi": sum(1 for r in ordered if r.get("softwareAi")),
         },
+        "softwareAiRule": SOFTWARE_AI_RULE,
         "alerts": ordered,
         "_rows": ordered,
     }
