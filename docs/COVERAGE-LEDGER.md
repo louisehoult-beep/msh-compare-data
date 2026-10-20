@@ -44,19 +44,19 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Total Orthopaedic Solutions 3 | ortho | 101 | 36 | 35.6% | 13 | 70 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 24 | 38.1% | 22 | 31 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 23 | 42 | STARTED |
-| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 22 | 37.9% | 19 | 32 | STARTED |
+| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 22 | 37.9% | 18 | 32 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 23 | 40.4% | 16 | 32 | STARTED |
 | Urology and Bowel Management | continence | 57 | 20 | 35.1% | 26 | 37 | STARTED |
 | Advanced Wound Care | wound | 56 | 21 | 37.5% | 17 | 41 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 1 | 39 | STARTED · 7 EXCLUDED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 14 | 32 | STARTED |
-| Pressure Area Care and Patient Handling | handling | 53 | 26 | 49.1% | 16 | 30 | STARTED |
+| Pressure Area Care and Patient Handling | handling | 53 | 27 | 50.9% | 15 | 30 | STARTED |
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 21 | 26 | STARTED |
-| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 12 | 27.9% | 15 | 30 | STARTED |
+| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 12 | 27.9% | 14 | 30 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 15 | 40.5% | 6 | 28 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 16 | 43.2% | 16 | 18 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 13 | 37.1% | 8 | 22 | STARTED |
-| Electrosurgical Consumables and Related Accessories | theatres | 33 | 12 | 36.4% | 14 | 22 | STARTED |
+| Electrosurgical Consumables and Related Accessories | theatres | 33 | 12 | 36.4% | 13 | 22 | STARTED |
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | 14 | 12 | STARTED |
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 10 | 32.3% | 5 | 22 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 11 | 37.9% | 7 | 23 | STARTED |
@@ -69,7 +69,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Hand Hygiene and Associated Products and Services | infection | 21 | 6 | 28.6% | 5 | 15 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 7 | 11 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 6 | 28.6% | 1 | 11 | STARTED · 5 EXCLUDED |
-| Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 9 | 45.0% | 4 | 11 | STARTED |
+| Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 9 | 45.0% | 3 | 11 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 9 | 47.4% | 7 | 11 | STARTED |
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 9 | 47.4% | 8 | 9 | STARTED |
 | Examination Gloves | infection | 19 | 5 | 26.3% | 5 | 13 | STARTED |
@@ -91,7 +91,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Polymer Products | infection | 5 | 2 | 40.0% | 3 | 2 | STARTED |
 | Reusable Clinical and Sharps Waste Management Service | infection | 3 | 1 | 33.3% | 0 | 2 | STARTED · BLOCKED |
 | Brachytherapy Seeds and Associated Accessories | oncology | 2 | 1 | 50.0% | 1 | 1 | STARTED |
-| Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services | ent | 7 | 0 | 0.0% | 4 | 5 | NOT STARTED |
+| Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services | ent | 7 | 0 | 0.0% | 3 | 5 | NOT STARTED |
 | Nuclear Medicine Imaging and Associated Options and Related Services | nuclear | 4 | 0 | 0.0% | 4 | 1 | NOT STARTED |
 | Lithotripsy and Associated Options and Related Services | endourology | 3 | 0 | 0.0% | 2 | 2 | NOT STARTED |
 | Male Intra-Urethral Catheter with Magnet Control | continence | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
@@ -108,9 +108,9 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Vascular Therapy and Associated Products | — | 23 | 0 | 0.0% | 19 | 9 | UNMAPPED |
 | External Defibrillation Devices and Related Services and Accessories | — | 21 | 0 | 0.0% | 15 | 8 | UNMAPPED |
 | Surgical Mesh | — | 21 | 0 | 0.0% | 16 | 11 | UNMAPPED |
-| Instrument Decontamination and Accessories | — | 20 | 0 | 0.0% | 13 | 11 | UNMAPPED |
+| Instrument Decontamination and Accessories | — | 20 | 0 | 0.0% | 12 | 11 | UNMAPPED |
 | Intravenous Accessories and Pressure Monitoring Accessories | — | 20 | 0 | 0.0% | 14 | 12 | UNMAPPED |
-| Rigid Endoscopy and Associated Options and Related Services | — | 18 | 0 | 0.0% | 13 | 14 | UNMAPPED |
+| Rigid Endoscopy and Associated Options and Related Services | — | 18 | 0 | 0.0% | 12 | 14 | UNMAPPED |
 | Needlefree Connection Systems and Associated Products | — | 16 | 0 | 0.0% | 16 | 8 | UNMAPPED |
 | Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services | — | 14 | 0 | 0.0% | 11 | 7 | UNMAPPED |
 | Mobile X-Ray Systems and Associated Option and Related Services | — | 14 | 0 | 0.0% | 6 | 10 | UNMAPPED |
@@ -135,7 +135,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Negative Pressure Wound Therapy | — | 6 | 0 | 0.0% | 5 | 4 | UNMAPPED |
 | Surgical Implants for Men’s and Women’s Health | — | 6 | 0 | 0.0% | 5 | 3 | UNMAPPED |
 | Surgical Navigation Systems with Associated Options and Related Services | — | 6 | 0 | 0.0% | 4 | 4 | UNMAPPED |
-| Flexible Endoscopes and Associated Options and Related Services | — | 5 | 0 | 0.0% | 2 | 4 | UNMAPPED |
+| Flexible Endoscopes and Associated Options and Related Services | — | 5 | 0 | 0.0% | 1 | 4 | UNMAPPED |
 | Medical Chart Paper and Ultrasound Film | — | 5 | 0 | 0.0% | 3 | 4 | UNMAPPED |
 | Radiotherapy IT Solutions and Associated Options and Related Services | — | 5 | 0 | 0.0% | 4 | 2 | UNMAPPED |
 | Robotic Medical Equipment and Associated Accessories | — | 5 | 0 | 0.0% | 2 | 4 | UNMAPPED |
