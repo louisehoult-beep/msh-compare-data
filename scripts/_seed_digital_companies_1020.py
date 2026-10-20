@@ -65,8 +65,8 @@ def proof(number, url, evidence):
 
 def new(name, aliases, spec, site, why, *, proof_=None, route1=None):
     """A new seed record. `route1` = (number, registered name, entity URL, quote)."""
-    note = ("Added %s (health tech company-intel audit). %s Products and frameworks not "
-            "yet captured." % ("20/10/2026", why))
+    note = ("Added %s (health tech company-intel audit). %s Product range not captured: the company's own site publishes no "
+            "product catalogue the Hub can read (checked 20/10/2026)." % ("20/10/2026", why))
     if route1:
         num, reg, url, quote = route1
         note += (" Companies House %s %s, active, read 20/10/2026; the company's own page %s "
