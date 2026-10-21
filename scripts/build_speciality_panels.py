@@ -10182,9 +10182,21 @@ def build_digital_extras(sources):
             "notFound": sum(1 for d in dig if d.get("published") is False),
             "unread": sum(1 for d in dig if d.get("published") is None),
             "named": [{"icb": i.get("name"), "titles": (i.get("digital") or {}).get("titles"),
+                       "people": [{"name": e.get("name"), "title": e.get("title")}
+                                  for e in i.get("execs") or [] if e.get("family") == "digital"
+                                  and not e.get("stale")],
                        "source": ((i.get("digital") or {}).get("sources") or [None])[0]}
                       for i in iw["icbs"] if (i.get("digital") or {}).get("published") is True],
+            # Lou, 21/10/2026: the most recent digital lead the ICB's own papers
+            # named, starred and dated, never shown as current.
+            "dated": [{"icb": i.get("name"), "name": d.get("name"), "title": d.get("title"),
+                       "document": d.get("document"), "docDate": d.get("docDate"),
+                       "source": d.get("source")}
+                      for i in iw["icbs"] for d in [(i.get("digital") or {}).get("dated") or {}]
+                      if d.get("name") and (i.get("digital") or {}).get("published") is not True],
         }
+        out["icbDigital"]["none"] = (out["icbDigital"]["icbs"] - out["icbDigital"]["published"]
+                                     - len(out["icbDigital"]["dated"]))
     return out
 
 

@@ -305,11 +305,21 @@
       }
       if (dl.icbDigital) {
         var idg = dl.icbDigital;
+        var ddmy = function (iso) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || ''); return m ? m[3] + '/' + m[2] + '/' + m[1] : (iso || ''); };
+        var idated = idg.dated || [];
         h += '<div class="sp-li-g">Integrated care board (ICB) digital leaders</div>';
-        h += '<p style="font-size:13px;line-height:1.6;margin:0;">' + n(idg.published) + ' of ' + n(idg.icbs) + ' ICBs name a digital leader on the leadership pages the Hub reads; ' + n(idg.notFound) + ' do not on those pages, which is not the same as having no such role; ' + n(idg.unread) + ' pages could not be read this time.</p>';
+        h += '<p style="font-size:13px;line-height:1.6;margin:0;">' + n(idg.published) + ' of ' + n(idg.icbs) + ' ICBs name a current digital leader on the leadership pages the Hub reads' +
+             (idg.dated ? '; ' + n(idated.length) + ' more named one only in older board papers or news (starred*, not confirmed current); ' + n(idg.none) + ' name none in anything the Hub found from 2022 onwards, which is not the same as having no such role.' :
+              '; ' + n(idg.notFound) + ' do not on those pages, which is not the same as having no such role; ' + n(idg.unread) + ' pages could not be read this time.') + '</p>';
         for (i = 0; i < (idg.named || []).length; i++) {
           var nm = idg.named[i];
-          h += '<p style="font-size:13px;margin:4px 0 0;">' + esc(nm.icb) + ': ' + esc((nm.titles || []).join('; ')) + (nm.source ? ' (<a href="' + esc(nm.source) + '" target="_blank" rel="noopener">source</a>)' : '') + '</p>';
+          var who = (nm.people || []).map(function (p) { return esc(p.name) + ', ' + esc(p.title); }).join('; ') || esc((nm.titles || []).join('; '));
+          h += '<p style="font-size:13px;margin:4px 0 0;">' + esc(nm.icb) + ': ' + who + (nm.source ? ' (<a href="' + esc(nm.source) + '" target="_blank" rel="noopener">source</a>)' : '') + '</p>';
+        }
+        for (i = 0; i < idated.length; i++) {
+          var dd = idated[i];
+          h += '<p style="font-size:13px;margin:4px 0 0;">' + esc(dd.icb) + ': ' + esc(dd.name) + ', ' + esc(dd.title) + '*' +
+               '<br><span style="font-size:12px;">*Listed in <a href="' + esc(dd.source) + '" target="_blank" rel="noopener">' + esc(dd.document) + '</a> dated ' + esc(ddmy(dd.docDate)) + '. Not confirmed current; check before contacting.</span></p>';
         }
       }
       if (dl.fdp && dl.fdp.headline) {

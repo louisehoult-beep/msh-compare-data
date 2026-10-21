@@ -337,5 +337,69 @@ class Gate(unittest.TestCase):
         self.assertIn("future date", self.fails())
 
 
+DATED_CFG = {"icbs": {
+    "QUA": {"name": "Sam Older", "title": "Chief Digital and Information Officer",
+            "source": "https://example.icb.nhs.uk/papers/board-2024-07.pdf",
+            "document": "ICB Board minutes, 4 July 2024", "docDate": "2024-07-04",
+            "verifiedOn": "2026-10-21", "quote": "Sam Older, Chief Digital and Information Officer"},
+    "QHL": {"name": "Old Holder", "title": "Chief Information Officer",
+            "source": "https://example.icb.nhs.uk/papers/2023.pdf",
+            "document": "Board pack, March 2023", "docDate": "2023-03-01", "verifiedOn": "2026-10-21"},
+    "QOP": {"name": "Too Old", "title": "Chief Information Officer",
+            "source": "https://example.icb.nhs.uk/papers/2021.pdf",
+            "document": "CCG paper, 2021", "docDate": "2021-06-01", "verifiedOn": "2026-10-21"}}}
+
+
+class DatedDigitalLeads(unittest.TestCase):
+    """Lou, 21/10/2026: an ICB with no current digital lead shows the most recent one
+    its own papers named, starred and dated; never as current, never an event."""
+
+    def doc(self):
+        d = run({}, D1, own=own_with("QHL", [DIG_A]))
+        w.attach_dated_digital(d, DATED_CFG)
+        return {i["code"]: i for i in d["icbs"]}, d
+
+    def test_dated_attached_only_where_no_current_lead(self):
+        q, _ = self.doc()
+        self.assertEqual(q["QUA"]["digital"]["dated"]["name"], "Sam Older")
+        self.assertIsNot(q["QUA"]["digital"].get("published"), True)
+        # QHL publishes a current lead: the dated name is never shown beside it.
+        self.assertNotIn("dated", q["QHL"]["digital"])
+        # Before 2022: left blank.
+        self.assertNotIn("dated", q["QOP"]["digital"])
+
+    def test_dated_is_never_an_executive_or_an_event(self):
+        q, d = self.doc()
+        self.assertFalse([e for e in q["QUA"]["execs"] if e["name"] == "Sam Older"])
+        self.assertFalse([e for e in d["events"] if "Sam Older" in str(e)])
+
+    def test_gate_checks_dated_entries(self):
+        q, d = self.doc()
+        v.fails[:] = []
+        v.check_icb_watch(d, today_iso="2026-10-21")
+        self.assertEqual(" ".join(m for _, m in v.fails if "dated" in m), "")
+        q["QUA"]["digital"]["dated"]["docDate"] = "2019-01-01"
+        q["QUA"]["digital"]["dated"]["source"] = "http://insecure"
+        v.fails[:] = []
+        v.check_icb_watch(d, today_iso="2026-10-21")
+        msg = " ".join(m for _, m in v.fails)
+        self.assertIn("from 2022 onwards", msg)
+        self.assertIn("no https source", msg)
+        q["QHL"]["digital"]["dated"] = dict(DATED_CFG["icbs"]["QHL"])
+        v.fails[:] = []
+        v.check_icb_watch(d, today_iso="2026-10-21")
+        self.assertIn("only the current one may show", " ".join(m for _, m in v.fails))
+
+    def test_panel_lists_current_names_and_starred_dated(self):
+        import build_speciality_panels as bp
+        _, d = self.doc()
+        out = bp.build_digital_extras({"icb_watch": d})["icbDigital"]
+        self.assertEqual(out["published"], 1)
+        self.assertEqual(out["named"][0]["people"][0]["name"], "Pat Example")
+        self.assertEqual([x["name"] for x in out["dated"]], ["Sam Older"])
+        self.assertEqual(out["dated"][0]["docDate"], "2024-07-04")
+        self.assertEqual(out["none"], out["icbs"] - 2)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)
