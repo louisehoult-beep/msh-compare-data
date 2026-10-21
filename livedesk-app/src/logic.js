@@ -80,3 +80,20 @@ export function deskTheme(panel) {
   for (const [re, t] of THEMES) if (re.test(k)) return t;
   return { c: 'other', img: 'generic', icon: 'pulse' };
 }
+
+/** Stories for the swipe cards at the top of the Desk: lead rows first, then new
+ *  rows, then each desk's first row, one list with no repeats, at most max.
+ *  Each comes back with the panel it sits in. */
+export function topStories(panels, max = 8) {
+  const out = []; const seen = new Set();
+  const add = (p, r) => {
+    const k = r.url + '|' + r.title;
+    if (seen.has(k) || out.length >= max) return;
+    seen.add(k); out.push({ panel: p, row: r });
+  };
+  const rowsOf = (p) => (p.rows || []).filter((r) => r.kind !== 'note');
+  panels.forEach((p) => rowsOf(p).filter((r) => r.lead).forEach((r) => add(p, r)));
+  panels.forEach((p) => rowsOf(p).filter((r) => r.new).forEach((r) => add(p, r)));
+  panels.forEach((p) => { const r = rowsOf(p)[0]; if (r) add(p, r); });
+  return out;
+}
