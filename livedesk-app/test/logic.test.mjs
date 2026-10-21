@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { deskTheme, filterFeed, itemsFromNotification, newCount, passFromLink, safeUrl, shortDate, stamp } from '../src/logic.js';
+import { deskTheme, filterFeed, topStories, itemsFromNotification, newCount, passFromLink, safeUrl, shortDate, stamp } from '../src/logic.js';
 
 const FEED = { panels: [
   { key: 'MHRA ALERTS', rows: [
@@ -42,4 +42,13 @@ test('desk look per panel', () => {
   assert.equal(deskTheme({ title: 'TENDERS & PROCUREMENT' }).img, 'procurement');
   assert.equal(deskTheme({ title: 'NICE GUIDANCE — NEW' }).c, 'nice');
   assert.equal(deskTheme({ title: 'Something else' }).c, 'other');
+});
+
+test('top stories: lead, then new, then one per desk, no repeats', () => {
+  const panels = [
+    { title: 'A', rows: [{ title: 'a1', url: 'u1' }, { title: 'a2', url: 'u2', new: true }] },
+    { title: 'B', rows: [{ kind: 'note', title: 'n' }, { title: 'b1', url: 'u3', lead: true }] },
+  ];
+  assert.deepEqual(topStories(panels).map((s) => s.row.title), ['b1', 'a2', 'a1']);
+  assert.equal(topStories(panels, 2).length, 2);
 });

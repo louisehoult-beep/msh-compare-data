@@ -21,7 +21,7 @@ import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { Purchases } from '@revenuecat/purchases-capacitor';
 import { CONFIG } from './config.js';
 import {
-  deskTheme, filterFeed, itemsFromNotification, newCount, passFromLink, safeUrl, shortDate, stamp,
+  deskTheme, filterFeed, itemsFromNotification, topStories, newCount, passFromLink, safeUrl, shortDate, stamp,
 } from './logic.js';
 
 const NATIVE = Capacitor.isNativePlatform();
@@ -58,6 +58,8 @@ const S = {
   busy: '',
   packages: null,
   note: '',
+  focus: null,        // index of the one desk shown, or null for all
+  openDesks: {},      // desk index -> showing every row
 };
 
 // ---------------------------------------------------------------- helpers
@@ -339,16 +341,31 @@ function viewAccess() {
   </main>`;
 }
 
-function rowHtml(r) {
+const SHOW = 3; // rows per desk before "Show all"
+
+function storyCard({ panel, row }) {
+  const th = deskTheme(panel);
+  return `<a class="story" data-open="${esc(row.url)}" style="--c:var(--c-${th.c});--img:url(img/live-desk-theme-${th.img}.jpg)">
+    <span class="wm">${svg(th.icon)}</span>
+    <span class="story-top"><span class="ico sm">${svg(th.icon)}</span><span class="story-desk">${esc(shortTitle(panel.title))}</span>${row.new ? '<span class="chip new">NEW</span>' : ''}</span>
+    <span class="story-t">${esc(row.title)}</span>
+    <span class="story-meta">${row.badge ? `<span class="badge">${esc(row.badge)}</span>` : ''}${esc(shortDate(row.date))}${row.date ? ' · ' : ''}Read more ›</span>
+  </a>`;
+}
+
+function deskRow(r, th) {
   if (r.kind === 'note') return `<li class="note-row">${esc(r.title)}</li>`;
   const members = r.kind === 'story' && r.members && r.members.length
     ? `<div class="members">${r.members.map((m, i) => `<a data-open="${esc(m.url)}">${i + 1}. ${esc(m.title || 'Notice')}</a>`).join('')}</div>` : '';
-  return `<li class="${r.new ? 'is-new' : ''}${r.lead ? ' is-lead' : ''}">
-    <div class="meta">${r.lead ? '<span class="chip lead">TOP STORY</span>' : ''}${r.new ? '<span class="chip new">NEW</span>' : ''}<span class="d">${esc(shortDate(r.date))}</span></div>
-    <a class="t" data-open="${esc(r.url)}">${esc(r.title)}</a>
-    ${r.badge ? `<div class="badge">${esc(r.badge)}</div>` : ''}
-    ${r.use ? `<div class="use">Use it: ${esc(r.use)}</div>` : ''}
-    ${members}
+  return `<li class="row${r.new ? ' is-new' : ''}">
+    <span class="ico sm">${svg(th.icon)}</span>
+    <div class="row-body">
+      <div class="meta">${r.new ? '<span class="chip new">NEW</span>' : ''}<span class="d">${esc(shortDate(r.date))}</span></div>
+      <a class="t" data-open="${esc(r.url)}">${esc(r.title)}</a>
+      ${r.badge ? `<div class="badge">${esc(r.badge)}</div>` : ''}
+      ${r.use ? `<div class="use">Use it: ${esc(r.use)}</div>` : ''}
+      ${members}
+    </div>
   </li>`;
 }
 
@@ -356,38 +373,57 @@ function viewDesk() {
   if (!S.feed) {
     return `<main class="pad"><p class="lead">${S.feedFrom === null ? 'No connection, and nothing saved on this phone yet. Try again when you are online.' : 'Loading the Live Desk...'}</p><button id="refresh" class="btn">Try again</button></main>`;
   }
-  const panels = filterFeed(S.feed, S.mine ? S.chosen : []);
+  const all = filterFeed(S.feed, S.mine ? S.chosen : []);
+  if (S.focus !== null && !all[S.focus]) S.focus = null;
+  const panels = S.focus === null ? all : [all[S.focus]];
   const ticks = (S.feed.ticker || []).map((t) => `<a class="tick" data-open="${esc(t.url)}"><span class="tag">${esc(t.tag)}</span>${t.badge ? `<b>${esc(t.badge)}</b> ` : ''}${esc(t.title)}</a>`).join('');
   // The track holds the items twice so the marquee loops without a gap; speed follows length.
   const ticker = ticks ? `<div class="ticker" aria-label="Latest"><div class="ticker-track" style="--dur:${Math.max(30, (S.feed.ticker || []).length * 7)}s">${ticks}${ticks}</div></div>` : '';
-  const stats = panels.map((p, i) => {
-    const th = deskTheme(p); const n = (p.rows || []).filter((r) => r.new).length;
-    return `<a class="stat" data-jump="p${i}" style="--c:var(--c-${th.c})"><b>${n || (p.rows || []).filter((r) => r.kind !== 'note').length}</b><span>${esc(shortTitle(p.title))}<small>${n ? 'new' : 'on the desk'}</small></span></a>`;
+
+  const tiles = all.map((p, i) => {
+    const th = deskTheme(p); const rows = (p.rows || []).filter((r) => r.kind !== 'note');
+    const n = rows.filter((r) => r.new).length;
+    return `<button class="tile${S.focus === i ? ' on' : ''}" data-focus="${i}" style="--c:var(--c-${th.c})">
+      <span class="ico">${svg(th.icon)}</span>
+      <span class="tile-t">${esc(shortTitle(p.title))}</span>
+      <span class="tile-n">${rows.length} on the desk${n ? ` · <b>${n} new</b>` : ''}</span>
+    </button>`;
   }).join('');
-  const body = panels.length ? panels.map((p, i) => {
-    const th = deskTheme(p); const n = (p.rows || []).filter((r) => r.new).length;
-    const items = (p.rows || []).filter((r) => r.kind !== 'note').length;
+
+  const stories = topStories(panels, 8);
+  const carousel = stories.length ? `<div class="sec-h"><h2>${S.focus === null ? 'Top stories' : 'Latest'}</h2><span class="small">Swipe ›</span></div>
+    <div class="stories">${stories.map(storyCard).join('')}</div>` : '';
+
+  const body = panels.length ? panels.map((p) => {
+    const i = all.indexOf(p); const th = deskTheme(p);
+    const rows = p.rows || []; const open = S.focus !== null || S.openDesks[i];
+    const shown = open ? rows : rows.slice(0, SHOW);
+    const more = rows.filter((r) => r.kind !== 'note').length - shown.filter((r) => r.kind !== 'note').length;
     return `<section class="panel" id="p${i}" style="--c:var(--c-${th.c})">
-      <div class="band" style="--img:url(img/live-desk-theme-${th.img}.jpg)"><span class="ico">${svg(th.icon)}</span><div><h2>${esc(p.title)}</h2><div class="pn">${items} item${items === 1 ? '' : 's'}${n ? ` · <b>${n} new</b>` : ''}</div></div></div>
-      <ul>${p.rows.map(rowHtml).join('')}</ul></section>`;
+      <div class="band" style="--img:url(img/live-desk-theme-${th.img}.jpg)"><span class="ico">${svg(th.icon)}</span><div><h2>${esc(p.title)}</h2></div></div>
+      <ul>${shown.map((r) => deskRow(r, th)).join('')}</ul>
+      ${more > 0 ? `<button class="more" data-more="${i}">Show all ${rows.filter((r) => r.kind !== 'note').length} ›</button>` : ''}
+    </section>`;
   }).join('')
     : '<p class="empty">Nothing in your specialities on the desk right now. Switch to All to see everything.</p>';
-  const nc = newCount(panels);
+  const nc = newCount(all);
   return `${ticker}
-    ${stats ? `<div class="stats">${stats}</div>` : ''}
     <div class="filter">
       <button class="seg ${S.mine ? '' : 'on'}" data-mine="0">All</button>
       <button class="seg ${S.mine ? 'on' : ''}" data-mine="1">My specialities${S.chosen.length ? ` (${S.chosen.length})` : ''}</button>
       <span class="count${nc ? '' : ' zero'}">${nc} new</span>
     </div>
     ${S.mine && !S.chosen.length ? '<p class="pad small">Pick your specialities in the Alerts tab.</p>' : ''}
+    ${carousel}
+    ${tiles ? `<div class="sec-h"><h2>On the desk</h2>${S.focus !== null ? '<button class="link inline" data-focus="all">Show every desk</button>' : ''}</div><div class="tiles">${tiles}</div>` : ''}
     <main>${body}</main>`;
 }
 
 // "NICE GUIDANCE — NEW" -> "NICE guidance" for the stat chips.
 function shortTitle(t) {
   const s = String(t || '').split(/\s+[—–-]\s+/)[0].trim();
-  const t2 = s.toLowerCase().replace(/\b(mhra|nice|nhs|dhsc|icb|uk)\b/g, (m) => m.toUpperCase());
+  const t2 = s.toLowerCase().replace(/\b(mhra|nice|nhs|dhsc|icb|uk)\b/g, (m) => m.toUpperCase())
+    .replace(/\b(england|scotland|wales|ireland)\b/g, (m) => m.charAt(0).toUpperCase() + m.slice(1));
   return t2.charAt(0).toUpperCase() + t2.slice(1);
 }
 
@@ -444,9 +480,17 @@ $app.addEventListener('click', async (e) => {
   const el = e.target.closest('button, a, [data-open]');
   if (!el) return;
   if (el.dataset.open !== undefined) { e.preventDefault(); open(el.dataset.open); return; }
+  if (el.dataset.focus !== undefined) {
+    const f = el.dataset.focus === 'all' || S.focus === Number(el.dataset.focus) ? null : Number(el.dataset.focus);
+    S.focus = f; render();
+    const t = f === null ? null : document.querySelector('.stories');
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+  if (el.dataset.more !== undefined) { S.openDesks[el.dataset.more] = true; render(); return; }
   if (el.dataset.jump) { const t = document.getElementById(el.dataset.jump); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
   if (el.dataset.tab) { S.tab = el.dataset.tab; S.note = ''; render(); window.scrollTo(0, 0); return; }
-  if (el.dataset.mine !== undefined) { S.mine = el.dataset.mine === '1'; await store.set('mine', S.mine ? '1' : '0'); render(); return; }
+  if (el.dataset.mine !== undefined) { S.mine = el.dataset.mine === '1'; S.focus = null; await store.set('mine', S.mine ? '1' : '0'); render(); return; }
   if (el.dataset.plan) { subscribe(el.dataset.plan); return; }
   switch (el.id) {
     case 'send': {
