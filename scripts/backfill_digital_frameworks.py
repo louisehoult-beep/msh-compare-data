@@ -21,6 +21,8 @@ WHAT IT DOES, AND WHAT IT REFUSES TO DO
 - Each row carries `source: "digital-frameworks"`, the owner's URL, the
   reference, the dates, the lots the list names the supplier on and the date the
   list was read, so a reader can tell it from a curated row.
+- Skips a framework a curated row on the same supplier already carries (same
+  reference), so a hand-read row that names the lot is not shown twice.
 - NEVER touches a row it did not write. Re-running replaces only its own rows
   (matched on source + framework name), so it is idempotent, and a supplier the
   list no longer names loses the row.
@@ -116,7 +118,11 @@ def apply(path, rows_by_company):
     for s in doc.get("suppliers") or []:
         fws = s.get("frameworks") or []
         keep = [f for f in fws if not (isinstance(f, dict) and f.get("source") == SOURCE)]
-        mine = rows_by_company.get(s.get("name"), [])
+        # A curated row for the same framework (read by hand at the supplier's own
+        # service page, so it can name the lot) wins; never show the framework twice.
+        curated = {f.get("reference") for f in keep if isinstance(f, dict) and f.get("reference")}
+        mine = [r for r in rows_by_company.get(s.get("name"), [])
+                if r.get("reference") not in curated]
         old = [f for f in fws if isinstance(f, dict) and f.get("source") == SOURCE]
         if old == mine:
             continue
