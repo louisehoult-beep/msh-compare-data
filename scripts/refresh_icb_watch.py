@@ -96,6 +96,7 @@ from refresh_trusts import ICB as ICB_REGION          # noqa: E402  code -> (nam
 OUT = os.path.join(REPO, "data", "icb-watch.json")
 PAGES_CFG = os.path.join(REPO, "config", "icb-leadership-sources.json")
 CURATED_CFG = os.path.join(REPO, "config", "icb-watch-curated.json")
+DATED_CFG = os.path.join(REPO, "config", "icb-digital-dated.json")
 CLUSTER_WATCH = os.path.join(REPO, "data", "cluster-watch.json")
 
 ODS_LIST = ("https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations"
@@ -521,6 +522,7 @@ def main():
     doc, new_count = build(prev, live, ended, leaders, leaders_updated, statement, own,
                            curated, today())
     doc["leadersCheckedOn"] = leaders_checked
+    attach_dated_digital(doc, load_json(DATED_CFG, {"icbs": {}}))
     merge_cluster_events(doc, load_json(CLUSTER_WATCH, {}))
     # Today's source problems, as a dict (configuration, not records).
     doc["sourceErrorsToday"] = errors
@@ -582,6 +584,28 @@ def digital_summary(rec, o, prev_digital, tiso):
     if prev_digital:
         return prev_digital
     return {"published": None, "titles": [], "sources": [], "readOn": None}
+
+
+DATED_FIELDS = ("name", "title", "source", "document", "docDate", "verifiedOn")
+
+
+def attach_dated_digital(doc, cfg):
+    """Lou's ruling, 21/10/2026: where an ICB names no digital lead on a current
+    page, show the most recent one its OWN board papers or news named (2022 on),
+    starred and dated, never as current. These come from config/icb-digital-dated.json
+    (each read by hand from the named document) and sit under digital.dated only:
+    never in execs, so they can never raise a leadership event. An ICB that does
+    publish a current digital lead shows that one and no dated name."""
+    for rec in doc.get("icbs") or []:
+        dig = rec.get("digital")
+        if dig is None:
+            continue
+        dig.pop("dated", None)
+        if dig.get("published") is True:
+            continue
+        d = (cfg.get("icbs") or {}).get(rec.get("code"))
+        if d and all(d.get(k) for k in DATED_FIELDS) and d["docDate"] >= "2022-01-01":
+            dig["dated"] = {k: d[k] for k in DATED_FIELDS}
 
 
 def build(prev, live, ended, leaders, leaders_updated, statement, own, curated, t):

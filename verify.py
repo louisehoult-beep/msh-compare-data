@@ -521,6 +521,23 @@ def check_icb_watch(doc, today_iso=None):
             if not str(e.get("url", "")).startswith("https://"):
                 FAIL("icb-watch", "%s: %r is named as %r with no https source."
                      % (who, e.get("name"), e.get("title")))
+        dated = (i.get("digital") or {}).get("dated")
+        if dated:
+            # A dated digital lead (Lou, 21/10/2026) is shown starred with its
+            # document and date; it must say where and when it was read, and an
+            # ICB with a current named lead never also carries a dated one.
+            if (i.get("digital") or {}).get("published") is True:
+                FAIL("icb-watch", "%s publishes a current digital lead but also carries a dated "
+                                  "one; only the current one may show." % who)
+            if not str(dated.get("source", "")).startswith("https://") or not dated.get("document"):
+                FAIL("icb-watch", "%s: dated digital lead %r has no https source or no document "
+                                  "name." % (who, dated.get("name")))
+            dd = str(dated.get("docDate") or "")
+            if not as_date(dd) or dd < "2022-01-01" or dd > today_iso:
+                FAIL("icb-watch", "%s: dated digital lead %r has document date %r; it must be a "
+                                  "real date from 2022 onwards." % (who, dated.get("name"), dd))
+            if not dated.get("name") or not dated.get("title") or not dated.get("verifiedOn"):
+                FAIL("icb-watch", "%s: dated digital lead has no name, title or verifiedOn." % who)
     for ev in doc.get("events") or []:
         tag = (ev.get("headline") or "")[:70]
         if ev.get("kind") not in ICB_EVENT_KINDS:
