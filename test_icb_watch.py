@@ -118,6 +118,34 @@ class Extraction(unittest.TestCase):
     def test_deputy_is_not_the_role_holder(self):
         self.assertIsNone(w.role_family("Deputy Chief Medical Officer"))
 
+    # 21/10/2026: three layouts that read as zero executives before.
+    def test_card_header_heading_is_kept(self):
+        # Surrey and Sussex / Northamptonshire put each card's heading inside
+        # its own <header>; only a site banner <header> is dropped.
+        raw = ('<header class="site"><a href="/">Home</a><a href="/x">Chief Finance Officer</a></header>'
+               '<article><header class="item-headline"><h3>Allison Cannon, Chief Nursing Officer</h3>'
+               '</header><p>Allison qualified as a nurse in 1992.</p></article>')
+        lines = w.page_lines(raw)
+        self.assertIn("Allison Cannon, Chief Nursing Officer", lines)
+        self.assertNotIn("Home", lines)
+        self.assertEqual([(p["name"], p["family"]) for p in w.extract_people(lines)],
+                         [("Allison Cannon", "nursing")])
+
+    def test_name_colon_title(self):
+        # West and North London: "Jo Sauvage: Chief Medical Officer".
+        got = w.extract_people(["Dr Jo Sauvage: Chief Medical Officer"])
+        self.assertEqual([(p["name"], p["family"]) for p in got], [("Dr Jo Sauvage", "cmo")])
+
+    def test_own_icb_name_after_comma_is_not_a_partner(self):
+        # Greater Manchester: "Chief Finance Officer, NHS Greater Manchester".
+        self.assertEqual(w.role_family("Chief Finance Officer, NHS Greater Manchester"), "cfo")
+        self.assertIsNone(w.role_family("Chief Executive, Example NHS Foundation Trust"))
+        lines = ["NHS Greater Manchester Management Team",
+                 "Chief Finance Officer, NHS Greater Manchester", "Kathy Roe",
+                 "Chief Strategy Officer, NHS Greater Manchester", "Pat Example"]
+        self.assertEqual([(p["name"], p["family"]) for p in w.extract_people(lines)],
+                         [("Kathy Roe", "cfo")])
+
 
 DIG_A = {"name": "Pat Example", "title": "Chief Clinical Information Officer", "family": "digital"}
 DIG_B = {"name": "Robin Sample", "title": "Chief Clinical Information Officer", "family": "digital"}

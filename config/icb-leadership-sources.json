@@ -1,6 +1,6 @@
 {
- "note": "Each ICB's own public page(s) naming its board and executives, read daily by scripts/refresh_icb_watch.py. Found and checked HTTP 200 with named people on 30/09/2026. A page that moves is recorded as a fetch error on the ICB (never as a departure); fix the URL here. QT6 (Cornwall and Isles of Scilly) serves a bot challenge to scripts intermittently (30/09/2026); a challenge page yields no names, which is kept as 'nothing read', never as a departure. 20/10/2026: link-crawl and sitemap sweep of every ICB's own domain for board, executive and digital pages; only pages that loaded and listed roles were kept (QE1, QJM, QKK gained one to two pages each). The other 33 ICBs' own sites held no further distinct leadership pages; digital leaders are mostly not on board pages.",
- "checkedOn": "2026-10-20",
+ "note": "Each ICB's own public page(s) naming its board and executives, read daily by scripts/refresh_icb_watch.py. Found and checked HTTP 200 with named people on 30/09/2026. A page that moves is recorded as a fetch error on the ICB (never as a departure); fix the URL here. QT6 (Cornwall and Isles of Scilly) serves a bot challenge to scripts intermittently (30/09/2026); a challenge page yields no names, which is kept as 'nothing read', never as a departure. 20/10/2026: link-crawl and sitemap sweep of every ICB's own domain for board, executive and digital pages; only pages that loaded and listed roles were kept (QE1, QJM, QKK gained one to two pages each). The other 33 ICBs' own sites held no further distinct leadership pages; digital leaders are mostly not on board pages. 21/10/2026: re-swept every ICB's sitemap and home-page links (938 candidate pages read) plus targeted searches of each ICB's own domain for a digital lead (CIO, CDIO, CCIO, director of digital/informatics). Outside Essex, Lincolnshire and Norfolk and Suffolk, no ICB names a current digital lead on a standing page of its own site: names found elsewhere were in board papers or appointment news from 2022 to 2024 (Dorset, South East London, South West London, North East London, Cheshire and Merseyside, North East and North Cumbria, Thames Valley), which are not current and are not used. Humber and North Yorkshire names one only in its 2025-26 annual-report page, a year-end record, not used. QE1 and QUA served a hosting 'suspended' page (403) on 21/10/2026 and QT6 a captcha, so those three were not read that day; stored values are kept. QWE: the board list is paged and the executive directors sit on ?page_no=2 (added 21/10/2026).",
+ "checkedOn": "2026-10-21",
  "icbs": {
   "D7T5G": {
    "pages": [
@@ -266,6 +266,10 @@
    "pages": [
     {
      "url": "https://www.southwestlondon.icb.nhs.uk/about/board/board-members/",
+     "kind": "board"
+    },
+    {
+     "url": "https://www.southwestlondon.icb.nhs.uk/about/board/board-members/?page_no=2",
      "kind": "board"
     }
    ]
