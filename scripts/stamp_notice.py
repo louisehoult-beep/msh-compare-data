@@ -93,6 +93,7 @@ REFS = {
     "differentiator-category-map.json": "ETH-D01E00B2A",
     "differentiator.json":          "ETH-D29A49944",
     "frameworks.json":         "ETH-DB4D6B772",
+    "framework-directory-extra.json": "ETH-D332ABFEE",
     "formulary-positions.json":         "ETH-D4BDA1D46",
     "hub-calendar.json":                "ETH-DB8887BA0",
     "hub-search-index.json":   "ETH-D50A4C4E3",
