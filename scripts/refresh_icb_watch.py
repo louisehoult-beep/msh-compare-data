@@ -176,7 +176,13 @@ def fetch(url, timeout=40):
 
 def page_lines(raw):
     """HTML -> list of visible text lines (block elements become breaks)."""
-    t = re.sub(r"(?is)<(script|style|noscript|svg|nav|footer|header)\b.*?</\1>", " ", raw)
+    t = re.sub(r"(?is)<(script|style|noscript|svg|nav|footer)\b.*?</\1>", " ", raw)
+    # A site banner <header> is dropped, but a card's own <header> holding its
+    # heading is kept: "<header class="item-headline"><h3>Allison Cannon, Chief
+    # Nursing Officer</h3></header>" (Surrey and Sussex, Northamptonshire).
+    t = re.sub(r"(?is)<header\b.*?</header>",
+               lambda m: m.group(0) if (re.search(r"<h[1-6]\b", m.group(0), re.I)
+                                        and len(m.group(0)) < 1500) else " ", t)
     t = re.sub(r"(?i)<br\s*/?>|</(p|div|li|h[1-6]|td|tr|dt|dd|span|a|strong|b)>", "\n", t)
     t = re.sub(r"<[^>]+>", " ", t)
     t = html.unescape(t).replace("\xa0", " ")
@@ -332,7 +338,9 @@ def role_family(title):
     # partner member whose own organisation follows the comma.
     if "," in title:
         suffix = title.split(",", 1)[1].strip()
-        if suffix and not OWN_ORG_SUFFIX.search(suffix):
+        # "Chief Finance Officer, NHS Greater Manchester": the ICB's own name
+        # (a trust's "NHS Foundation Trust" is caught by PARTNER above).
+        if suffix and not OWN_ORG_SUFFIX.search(suffix) and not re.match(r"NHS\b", suffix):
             return None
     fams = [fam for fam, rx in ROLE_FAMILIES if rx.search(title)]
     # "Chair and Chief Executive Officer" is a section heading, not a job title.
@@ -364,6 +372,13 @@ def extract_people(lines):
                      + POSTNOM + r")$", ln)
         if m and looks_like_person(m.group(2)) and role_family(m.group(1)):
             found.append((m.group(2).strip(), m.group(1).strip()))
+            continue
+        # "Jo Sauvage: Chief Medical Officer" (West and North London): the holder
+        # first, a colon, then the title.
+        m = re.match(r"^(" + HONORIFIC + NAMEPART + r"(?:\s+" + NAMEPART + r"){1,3}" + POSTNOM
+                     + r"):\s+(.{6,110})$", ln)
+        if m and looks_like_person(m.group(1)) and role_family(m.group(2)):
+            found.append((m.group(1).strip(), m.group(2).strip()))
             continue
         # "Nominated ICB Executive: Rosi Shepherd – Chief ..." — drop the label.
         one = re.sub(r"^[A-Z][\w ]{2,40}:\s+", "", ln)
