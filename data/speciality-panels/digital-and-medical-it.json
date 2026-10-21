@@ -17,16 +17,16 @@
  "dataAsOf": {
   "frameworks": "2026-10-20",
   "tenderHistory": "2026-10-21",
-  "frameworkAwards": "2026-10-20T11:27:19+00:00",
-  "openTenders": "20/10/2026",
-  "drugTariff": "2026-10-20",
+  "frameworkAwards": "2026-10-21T11:40:37+00:00",
+  "openTenders": "21/10/2026",
+  "drugTariff": "2026-10-21",
   "localIntel": "2026-10-21",
   "supplierDirectory": "2026-10-21",
   "gpPrescribing": "2026-09-30",
   "mhraDsu": "2026-10-19",
   "drugTariffViiia": null,
   "hospitalPrescribing": null,
-  "digitalLane": "20/10/2026"
+  "digitalLane": "21/10/2026"
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -2169,10 +2169,10 @@
  },
  "drugTariffViiia": null,
  "digitalLane": {
-  "dataAsOf": "20/10/2026",
+  "dataAsOf": "21/10/2026",
   "rule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction. CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only. A call-off under a framework is not a notice, and most digital money in the NHS moves as framework call-offs, capital business cases and G-Cloud awards without competition. This lane is therefore a floor, not a census: an absence here says nothing about the buyer or the market. Contract values, where shown, are the notice's own and are not summed across rows. Shown here: the clinical rows only, up to 15 awards and every open notice and market engagement row. The full lane, with the rows left out, is data/digital-lane.json.",
   "counts": {
-   "awards": 264,
+   "awards": 270,
    "awardsClinical": 32,
    "openNotices": 1,
    "openNoticesClinical": 0,
@@ -2437,7 +2437,7 @@
   "awardsClinicalTotal": 32,
   "gates": {
    "rule": "Each row is one owner page for a health tech gate. lastUpdated is the owner's own date: GOV.UK's public_updated_at from its content API, or the 'Last edited' line on an NHS England Digital page. latestChange is the owner's own change note, verbatim, where the owner publishes one. changedSinceLastRun is true when that date moved since the previous run. Nothing is summarised or interpreted.",
-   "dataAsOf": "20/10/2026",
+   "dataAsOf": "21/10/2026",
    "pages": [
     {
      "gate": "Regulation",

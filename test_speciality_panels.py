@@ -4962,8 +4962,8 @@ if _au_dup:
     check("25 entries for 24 companies", au["counts"]["suppliers"] == 25,
           "got %s" % au["counts"]["suppliers"])
 
-print("  open tenders — empty is the honest answer, not a miss")
-check("no open notice on this patch today", au["openTenders"] == [])
+print("  open tenders — never invented, whatever the day's true count is")
+check("open tenders count is not invented", au["counts"]["openTenders"] == len(au["openTenders"]))
 check("and the rule says an empty list means none was open, not none was sought",
       "empty" in (au["rules"].get("openTenders") or "").lower())
 
