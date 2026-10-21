@@ -13,15 +13,15 @@
  "slug": "digital-and-medical-it",
  "label": "Digital health and AI",
  "defined": true,
- "generated": "2026-10-20",
+ "generated": "2026-10-21",
  "dataAsOf": {
   "frameworks": "2026-10-20",
-  "tenderHistory": "2026-10-20",
+  "tenderHistory": "2026-10-21",
   "frameworkAwards": "2026-10-20T11:27:19+00:00",
   "openTenders": "20/10/2026",
   "drugTariff": "2026-10-20",
-  "localIntel": "2026-10-20",
-  "supplierDirectory": "2026-10-20",
+  "localIntel": "2026-10-21",
+  "supplierDirectory": "2026-10-21",
   "gpPrescribing": "2026-09-30",
   "mhraDsu": "2026-10-19",
   "drugTariffViiia": null,
@@ -2172,8 +2172,8 @@
   "dataAsOf": "20/10/2026",
   "rule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction. CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only. A call-off under a framework is not a notice, and most digital money in the NHS moves as framework call-offs, capital business cases and G-Cloud awards without competition. This lane is therefore a floor, not a census: an absence here says nothing about the buyer or the market. Contract values, where shown, are the notice's own and are not summed across rows. Shown here: the clinical rows only, up to 15 awards and every open notice and market engagement row. The full lane, with the rows left out, is data/digital-lane.json.",
   "counts": {
-   "awards": 258,
-   "awardsClinical": 30,
+   "awards": 264,
+   "awardsClinical": 32,
    "openNotices": 1,
    "openNoticesClinical": 0,
    "marketEngagement": 2,
@@ -2182,6 +2182,39 @@
   "openNotices": [],
   "marketEngagement": [],
   "awards": [
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "award",
+    "title": "Ambient Voice Technology Interim Agreement",
+    "buyer": "The Shrewsbury and Telford Hospital NHS Trust",
+    "published": "2026-10-19",
+    "isFramework": false,
+    "contractEnd": "2027-10-11",
+    "value": 111636.2,
+    "digitalCpv": [
+     "48180000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/098627-2026",
+    "ocid": "ocds-h6vhtk-078b16"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "planning",
+    "title": "NHFT Integrated Sexual Health Electronic Patient Record (EPR) Pre-Market Engagement",
+    "buyer": "Northamptonshire Healthcare NHS Foundation Trust",
+    "published": "2026-10-19",
+    "isFramework": false,
+    "contractEnd": null,
+    "value": null,
+    "digitalCpv": [
+     "48000000",
+     "48180000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/098571-2026",
+    "ocid": "ocds-h6vhtk-078af2"
+   },
    {
     "lane": "digital",
     "clinical": true,
@@ -2399,42 +2432,9 @@
     ],
     "url": "https://www.find-tender.service.gov.uk/Notice/089704-2026",
     "ocid": "ocds-h6vhtk-05d14b"
-   },
-   {
-    "lane": "digital",
-    "clinical": true,
-    "stage": "planning",
-    "title": "NWL APG Ambient Voice Technology",
-    "buyer": "Imperial College Healthcare NHS Trust",
-    "published": "2026-09-17",
-    "isFramework": false,
-    "contractEnd": null,
-    "value": null,
-    "digitalCpv": [
-     "48000000",
-     "72212314"
-    ],
-    "url": "https://www.find-tender.service.gov.uk/Notice/088063-2026",
-    "ocid": "ocds-h6vhtk-077413"
-   },
-   {
-    "lane": "digital",
-    "clinical": true,
-    "stage": "award",
-    "title": "ENHT - Radiology AI Autocontouring",
-    "buyer": "East and North Hertfordshire Teaching NHS Trust",
-    "published": "2026-09-11",
-    "isFramework": false,
-    "contractEnd": "2028-07-31",
-    "value": 63168.0,
-    "digitalCpv": [
-     "48180000"
-    ],
-    "url": "https://www.find-tender.service.gov.uk/Notice/086414-2026",
-    "ocid": "ocds-h6vhtk-06f814"
    }
   ],
-  "awardsClinicalTotal": 30,
+  "awardsClinicalTotal": 32,
   "gates": {
    "rule": "Each row is one owner page for a health tech gate. lastUpdated is the owner's own date: GOV.UK's public_updated_at from its content API, or the 'Last edited' line on an NHS England Digital page. latestChange is the owner's own change note, verbatim, where the owner publishes one. changedSinceLastRun is true when that date moved since the previous run. Nothing is summarised or interpreted.",
    "dataAsOf": "20/10/2026",
@@ -2487,7 +2487,7 @@
      "lastUpdated": "2026-09-21",
      "latestChange": null,
      "changedSinceLastRun": false,
-     "status": "ok"
+     "status": "unreachable"
     },
     {
      "gate": "Regulation",
@@ -2537,7 +2537,7 @@
      "lastUpdated": "2024-10-11",
      "latestChange": null,
      "changedSinceLastRun": false,
-     "status": "ok"
+     "status": "unreachable"
     }
    ]
   },
@@ -2737,6 +2737,140 @@
       "No supplier list exists yet: framework not awarded. Settled by the award notice (UK6/UK7) on Find a Tender once published.",
       "All dates and values are as stated in the notice; the notice itself says they are subject to change. Settled by the later tender/award notice."
      ]
+    },
+    {
+     "name": "Technology Enabled Care Services 2",
+     "reference": "SBS10144",
+     "owner": "NHS Shared Business Services (NHS SBS)",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/technology-enabled-care-services-2/",
+     "status": "live",
+     "starts": "2023-01-09",
+     "ends": "2027-10-10",
+     "term": null,
+     "estimatedValue": null,
+     "lots": [],
+     "notVerified": [
+      "Supplier list not read: the SBS page lists suppliers behind its own supplier tab and no award notice was read for this framework. Settled by the SBS supplier details or the award notice.",
+      "Notice 050041-2025 says the existing TECS framework is due to expire on 2027-01-08; the SBS TECS 2 page states an end date of 2027-10-10. The two disagree, both are recorded as read, and the end date is Not verified. Settled by NHS SBS confirming the TECS 2 expiry."
+     ]
+    },
+    {
+     "name": "Technology Enabled Care Services 3 (SBS10529)",
+     "reference": "SBS10529 (Find a Tender notice 050041-2025)",
+     "owner": "NHS Shared Business Services Limited",
+     "url": "https://www.find-tender.service.gov.uk/Notice/050041-2025",
+     "status": "coming",
+     "starts": "2027-04-06",
+     "ends": "2029-04-05",
+     "term": null,
+     "estimatedValue": "£100,000,000 excluding VAT, the notice's own estimate",
+     "lots": [
+      {
+       "lot": "1",
+       "name": null,
+       "suppliers": null
+      }
+     ],
+     "notVerified": [
+      "Only a preliminary market engagement notice exists; no tender notice had been found on Find a Tender on the read date. The SBS bidder webinar page says the tender is due to launch soon. Settled by the tender notice once published.",
+      "No supplier list exists yet: framework not awarded. Settled by the award notice (UK6/UK7) on Find a Tender once published.",
+      "All dates and values are as stated in the notice; the notice itself says they are subject to change. Settled by the later tender/award notice.",
+      "Notice 050041-2025 says the existing TECS framework is due to expire on 2027-01-08; the SBS TECS 2 page states an end date of 2027-10-10. The two disagree, both are recorded as read, and the end date is Not verified. Settled by NHS SBS confirming the TECS 2 expiry."
+     ]
+    },
+    {
+     "name": "Digital Workplace Solutions 2",
+     "reference": "SBS10510",
+     "owner": "NHS Shared Business Services Limited",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/digital-workplace-solutions/",
+     "status": "live",
+     "starts": "2025-10-01",
+     "ends": "2028-09-30",
+     "term": null,
+     "estimatedValue": "£2,500,000,000 excluding VAT, the notice's own estimate",
+     "lots": [
+      {
+       "lot": "1",
+       "name": null,
+       "suppliers": 44
+      }
+     ],
+     "notVerified": [
+      "Supplier names are as published in the award notice (a trading name or former name may appear); not alias-resolved to Hub companies here."
+     ]
+    },
+    {
+     "name": "Tech Devices",
+     "reference": "SBS10515",
+     "owner": "NHS Shared Business Services (NHS SBS)",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/tech-devices-link-4/",
+     "status": "live",
+     "starts": "2025-04-01",
+     "ends": "2028-03-31",
+     "term": null,
+     "estimatedValue": null,
+     "lots": [],
+     "notVerified": [
+      "Supplier list not read: the SBS page lists suppliers behind its own supplier tab and no award notice was read for this framework. Settled by the SBS supplier details or the award notice."
+     ]
+    },
+    {
+     "name": "Digital Health Advisory",
+     "reference": "SBS10225",
+     "owner": "NHS Shared Business Services (NHS SBS)",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/digital-health-advisory/",
+     "status": "live",
+     "starts": "2024-03-25",
+     "ends": "2028-03-24",
+     "term": null,
+     "estimatedValue": null,
+     "lots": [],
+     "notVerified": [
+      "Supplier list not read: the SBS page lists suppliers behind its own supplier tab and no award notice was read for this framework. Settled by the SBS supplier details or the award notice."
+     ]
+    },
+    {
+     "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
+     "reference": "Find a Tender notice 058054-2026",
+     "owner": "HealthTrust Europe LLP (HTE) acting on behalf of Mid South Essex NHS Foundation Trust",
+     "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
+     "status": "live",
+     "starts": null,
+     "ends": null,
+     "term": null,
+     "estimatedValue": "£100,000,000 excluding VAT, the notice's own estimate",
+     "lots": [
+      {
+       "lot": "Lot 1",
+       "name": "Digital Pathology Equipment",
+       "suppliers": 14
+      },
+      {
+       "lot": "Lot 2",
+       "name": "Gross Imaging",
+       "suppliers": 2
+      },
+      {
+       "lot": "Lot 3",
+       "name": "Digital Pathology Software",
+       "suppliers": 21
+      },
+      {
+       "lot": "Lot 4",
+       "name": "Digital Pathology End to End Solution",
+       "suppliers": 12
+      },
+      {
+       "lot": "Lot 5",
+       "name": "Microscope Cameras and Clinical Microscopes",
+       "suppliers": 5
+      }
+     ],
+     "notVerified": [
+      "Value is the contract value stated in the award notice, not a spend figure.",
+      "Framework start and end dates are not stated in the award notice. Settled by the framework owner's page or the framework agreement documents.",
+      "Supplier names are as published in the award notice (a trading name or former name may appear); not alias-resolved to Hub companies here."
+     ]
     }
    ]
   },
@@ -2926,16 +3060,55 @@
      "name": "SynApps Solutions Ltd",
      "status": "2025-26 (version 8) - Standards exceeded",
      "statusDate": "17 June 2026"
+    },
+    {
+     "name": "Netcall",
+     "status": "2025-26 (version 8) - Standards exceeded",
+     "statusDate": "30 June 2026"
+    },
+    {
+     "name": "Patchwork Health",
+     "status": "2025-26 (version 8) - Standards exceeded",
+     "statusDate": "29 June 2026"
+    },
+    {
+     "name": "Medilogik",
+     "status": "2025-26 (version 8) - Standards exceeded",
+     "statusDate": "10 March 2026"
+    },
+    {
+     "name": "Medwise AI",
+     "status": "2024-25 (version 7) - Standards met",
+     "statusDate": "30 June 2025"
+    },
+    {
+     "name": "Rapid Health",
+     "status": "2025-26 (version 8) - Standards met",
+     "statusDate": "26 June 2026"
     }
    ],
-   "unmatched": 55
+   "unmatched": 68
   },
   "icbDigital": {
    "icbs": 36,
-   "published": 1,
-   "notFound": 35,
+   "published": 3,
+   "notFound": 33,
    "unread": 0,
    "named": [
+    {
+     "icb": "NHS Essex Integrated Care Board",
+     "titles": [
+      "Chief Clinical Information Officer"
+     ],
+     "source": "https://www.essex.icb.nhs.uk/about/icb/clinical-leadership-governance/our-clinical-leaders/"
+    },
+    {
+     "icb": "NHS Lincolnshire Integrated Care Board",
+     "titles": [
+      "Deputy Medical Director and Chief Clinical Informatics Officer for primary care."
+     ],
+     "source": "https://lincolnshire.icb.nhs.uk/clinical-and-care-directorate/ccd-meet-the-team/"
+    },
     {
      "icb": "NHS Norfolk and Suffolk Integrated Care Board",
      "titles": [
