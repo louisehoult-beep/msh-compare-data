@@ -459,7 +459,7 @@
         for (var ki = 0; ki < pr.dmd.packs.length; ki++) {
           pk.push(esc(pr.dmd.packs[ki].size) + ' discontinued ' + esc(dmy(pr.dmd.packs[ki].discontinued)));
         }
-        h += '<h4 style="margin:14px 0 6px;font-size:15px;">' + esc(pr.name) + '</h4>';
+        h += '<h4 style="margin:14px 0 6px;font-size:15px;color:inherit;">' + esc(pr.name) + '</h4>';
         h += '<div class="sp-tiles">';
         h += '<div class="sp-tile"><b>' + n(pr.formularies) + '</b><span>Formularies naming it</span></div>';
         h += '<div class="sp-tile"><b>' + n(pr.counts.recommended) + '</b><span>Recommended or ranked</span></div>';
