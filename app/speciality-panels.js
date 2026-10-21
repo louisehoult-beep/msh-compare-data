@@ -580,6 +580,63 @@
     FW.innerHTML = h;
   }
 
+  /* HEALTH TECH COMPANY DIRECTORY (Lou, 21/10/2026) — the digital page only. Every
+     Hub company record that is digital by a recorded fact (digital directory label,
+     a digital framework's own supplier list, or an NHS buyer's software or IT award
+     naming it exactly). Built in build_speciality_panels.py; each row opens the
+     company report, which carries the products and sources. */
+  function companyDirectory(d) {
+    var co = d.digitalLane && d.digitalLane.companies;
+    if (!co) { return ''; }
+    var c = co.counts || {}, h = '', i, j, r;
+    h += '<h3 id="health-tech-companies" style="margin:26px 0 6px;">Health tech company directory</h3>';
+    if (!co.items || !co.items.length) {
+      return h + '<div class="empty-state">No company record in the Hub\'s supplier directory is digital by a recorded fact today.</div>';
+    }
+    h += '<p style="font-size:13.5px;line-height:1.65;margin:0 0 10px;">' + n(c.companies) + ' health tech and digital companies with a Hub company report: ' +
+         n(c.onDigitalFramework) + ' on a digital framework\'s published supplier list, ' + n(c.withDigitalAwards) +
+         ' named on an NHS buyer\'s software or IT award notice, ' + n(c.withProducts) + ' with products on record. Open a name for the full company report.</p>';
+    h += '<input class="sp-find" id="sp-co-find" type="search" placeholder="Find a company, framework or label..." autocomplete="off">';
+    h += '<div class="sp-scroll"><table class="sp-tbl" id="sp-co-tbl"><tr><th>Company</th><th>Digital frameworks</th><th>NHS software and IT awards</th><th>Products</th></tr>';
+    for (i = 0; i < co.items.length; i++) {
+      r = co.items[i];
+      var fw = [], find = [r.name].concat(r.labels || []);
+      for (j = 0; j < (r.frameworks || []).length; j++) {
+        var f = r.frameworks[j];
+        find.push(f.name);
+        fw.push('<span class="sp-chip">' + (f.url ? '<a href="' + esc(f.url) + '" target="_blank" rel="noopener">' + esc(f.name) + '</a>' : esc(f.name)) +
+                (f.lots && f.lots.length ? ' &middot; lot ' + esc(f.lots.join(', ')) : '') + '</span>');
+      }
+      h += '<tr data-n="' + esc(find.join(' ').toLowerCase()) + '"><td style="font-weight:600;"><a href="' + esc(r.report) + '">' + esc(r.name) + '</a>' +
+           (r.labels && r.labels.length ? '<div class="sp-alt">Filed under: ' + esc(r.labels.join(', ')) + '</div>' : '') + '</td>' +
+           '<td>' + (fw.length ? fw.join(' ') : '<span class="sp-note">None on record</span>') + '</td>' +
+           '<td>' + (r.digitalAwards ? n(r.digitalAwards) + (r.clinicalAwards ? ' (' + n(r.clinicalAwards) + ' clinical)' : '') +
+                     (r.latestAward ? '<div class="sp-alt">latest ' + esc(r.latestAward) + '</div>' : '') : '<span class="sp-note">None in the lane</span>') + '</td>' +
+           '<td>' + (r.products ? n(r.products) : '<span class="sp-note">Not captured</span>') + '</td></tr>';
+    }
+    h += '</table></div><div class="sp-meta" id="sp-co-count"></div>';
+    h += '<div class="sp-meta">' + esc(co.rule || '') + (co.dataAsOf ? ' Data as of ' + esc(String(co.dataAsOf).slice(0, 10)) + '.' : '') + '</div>';
+    return h;
+  }
+
+  function wireCompanyDirectory() {
+    var box = document.getElementById('sp-co-find');
+    if (!box) { return; }
+    var rows = document.querySelectorAll('#sp-co-tbl tr[data-n]');
+    var count = document.getElementById('sp-co-count');
+    function apply() {
+      var q = box.value.trim().toLowerCase(), shown = 0;
+      for (var k = 0; k < rows.length; k++) {
+        var hit = !q || rows[k].getAttribute('data-n').indexOf(q) !== -1;
+        rows[k].style.display = hit ? '' : 'none';
+        if (hit) { shown++; }
+      }
+      count.textContent = q ? shown + ' of ' + rows.length + ' companies match "' + box.value.trim() + '".' : rows.length + ' companies.';
+    }
+    box.addEventListener('input', apply);
+    apply();
+  }
+
   function renderSuppliers(d) {
     if (!SUP) { return; }
     var h = '';
@@ -596,7 +653,9 @@
            (dir.length ? ' The companies the Hub\'s supplier directory files under this speciality are listed below, labelled directory-tagged, with any other framework they are on named against them.' : ' The awarded contracts on the previous tab do name who won them.') + '</div>';
       if (!dir.length) {
         h += ruleBlock(d.rules, ['suppliers', 'directorySuppliers']);
+        h += companyDirectory(d);
         SUP.innerHTML = h;
+        wireCompanyDirectory();
         return;
       }
     } else {
@@ -647,7 +706,9 @@
     h += '</table></div>';
     h += '<div class="sp-meta" id="sp-count"></div>';
     h += ruleBlock(d.rules, ['suppliers', 'directorySuppliers']);
+    h += companyDirectory(d);
     SUP.innerHTML = h;
+    wireCompanyDirectory();
 
     var box = document.getElementById('sp-find');
     var rows = SUP.querySelectorAll('#sp-suptbl tr[data-n]');

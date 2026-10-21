@@ -35,7 +35,7 @@
   "awards": "Award-stage notices whose TITLE matches /\\b(electronic patient record|EPR|electronic health record|patient administration system|clinical systems?|electronic prescrib\\w*|ePMA|electronic document management|EDMS|EDRM|e-?observations?|cyber ?security|cyber essentials|interoperab\\w*|clinical decision support|digital dictation|speech recognition|health information exchange|electronic staff record|digital diagnostic solutions)\\b/i. NO EXCLUSION LIST IS APPLIED, because every notice this pattern matched was read one by one and all of them are this speciality. The loose terms that would have needed excluding were refused from the pattern above instead of admitted and then argued with. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
-  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: digital, it). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 15 of the 61 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: digital, it). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 43 of the 61 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
   "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
   "mhraDsu": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
   "drugTariffViiia": null,
@@ -54,7 +54,7 @@
   "suppliersFrameworkNamedAlsoTagged": 39,
   "suppliersDirectoryTagged": 61,
   "suppliersDirectoryOnOtherFrameworks": 9,
-  "suppliersDirectoryWithFrameworkNote": 15,
+  "suppliersDirectoryWithFrameworkNote": 43,
   "gpMarkets": 0,
   "mhraDsu": 0,
   "drugTariffViiiaLines": 0,
@@ -1314,8 +1314,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Alcidion",
@@ -1330,8 +1336,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Allocate Software",
@@ -1360,8 +1372,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Annalise.ai (Harrison.ai)",
@@ -1391,8 +1409,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Brainomix",
@@ -1422,8 +1446,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "CardMedic",
@@ -1437,8 +1467,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Citrus Suite",
@@ -1452,8 +1488,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Civica",
@@ -1472,9 +1514,14 @@
      "name": "Technology Services 4",
      "url": "https://www.gca.gov.uk/agreements/RM6190",
      "source": "digital-frameworks"
+    },
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
     }
    ],
-   "frameworkNote": "The Hub's supplier directory also records: Technology Services 4."
+   "frameworkNote": "The Hub's supplier directory also records: Technology Services 4; G-Cloud 15."
   },
   {
    "name": "Current Health",
@@ -1535,8 +1582,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "DrDoctor",
@@ -1551,8 +1604,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "eKare",
@@ -1587,8 +1646,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Feebris",
@@ -1603,8 +1668,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Floki Health",
@@ -1670,8 +1741,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Henry Schein One UK",
@@ -1716,8 +1793,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Insight Direct",
@@ -1741,9 +1824,19 @@
      "name": "Technology Services 4",
      "url": "https://www.gca.gov.uk/agreements/RM6190",
      "source": "digital-frameworks"
+    },
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    },
+    {
+     "name": "Digital Workplace Solutions 2",
+     "url": "https://www.sbs.nhs.uk/services/framework-agreements/digital-workplace-solutions/",
+     "source": "digital-frameworks"
     }
    ],
-   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142; Technology Services 4."
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142; Technology Services 4; G-Cloud 15; Digital Workplace Solutions 2."
   },
   {
    "name": "iPlato",
@@ -1757,8 +1850,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Kheiron Medical",
@@ -1804,8 +1903,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Luscii",
@@ -1820,8 +1925,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "MDSAS",
@@ -1840,9 +1951,14 @@
      "name": "NHS SBS — SBS10142",
      "url": "https://www.sbs.nhs.uk/services/framework-agreements/advanced-wound-care-and-lymphoedema-products-and-services/",
      "source": "supplier directory"
+    },
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
     }
    ],
-   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142."
+   "frameworkNote": "The Hub's supplier directory also records: NHS SBS — SBS10142; G-Cloud 15."
   },
   {
    "name": "Medilogik",
@@ -1856,8 +1972,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/471752239996157",
+     "source": "Digital Marketplace service page"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Medwise AI",
@@ -1902,8 +2024,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Newton’s Tree",
@@ -1918,8 +2046,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "OneAdvanced (Advanced Health and Care)",
@@ -1933,8 +2067,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Ortus-iHealth",
@@ -1948,8 +2088,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Oxford Heartbeat",
@@ -1978,8 +2124,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Patients Know Best",
@@ -1994,8 +2146,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Pioneer Wound Telehealth",
@@ -2046,8 +2204,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Rotamap",
@@ -2061,8 +2225,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Rx-Info",
@@ -2091,8 +2261,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Skin Analytics",
@@ -2122,8 +2298,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   },
   {
    "name": "Tortus",
@@ -2138,8 +2320,14 @@
     "speciality-map.json supplierSpecialityMap"
    ],
    "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
+   "directoryFrameworks": [
+    {
+     "name": "G-Cloud 15",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+     "source": "digital-frameworks"
+    }
+   ],
+   "frameworkNote": "The Hub's supplier directory also records: G-Cloud 15."
   }
  ],
  "gpPrescribing": {
@@ -2645,7 +2833,7 @@
       }
      ],
      "notVerified": [
-      "Supplier list not verified: https://www.gca.gov.uk/suppliers lists no G-Cloud 15 suppliers (only earlier G-Cloud lots at read time) and the agreement page has no supplier export. Settled by the G-Cloud 15 supplier list on the Digital Marketplace / GCA once published.",
+      "Supplier list read 21/10/2026 from the Digital Marketplace G-Cloud 15 supplier A to Z (https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud-15/suppliers), company names only, 2836 suppliers. The A to Z does not say which lot each supplier holds, so every lot's list stays null; a supplier's lot is shown only where its own service page was read. The agreement facts above were read at gca.gov.uk on 20/10/2026; gca.gov.uk redirected to its 'unavailable' page on 21/10/2026, so they were not re-read.",
       "Agreement end 05/02/2028 (page header) and 'run for 4 years from 6 August 2026, reopening after 18 months and again after 36 months' (page text) are both recorded verbatim and not resolved. Settled by the framework award form."
      ]
     },
@@ -3354,6 +3542,2742 @@
     }
    ],
    "none": 6
+  },
+  "companies": {
+   "dataAsOf": "2026-10-21T08:35:47.084579Z",
+   "counts": {
+    "companies": 146,
+    "onDigitalFramework": 119,
+    "withDigitalAwards": 43,
+    "withProducts": 45
+   },
+   "rule": "Every company record in the Hub's supplier directory that is digital by a recorded fact: filed under a digital speciality label, named on a digital framework's own published supplier list as held on its record (NHS Supply Chain, Government Commercial Agency (GCA), NHS Shared Business Services (SBS) or HealthTrust Europe), or named exactly on an NHS buyer's software or IT award notice. A framework place is not a contract and an award count is not spend. Products are counted from the company record; the company report lists them with their sources. Companies on a framework's list that have no Hub company record are not listed here, so this is not a census of the market.",
+   "items": [
+    {
+     "name": "Insight Direct",
+     "report": "/medical-sales-hub/company-report/?company=Insight%20Direct",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Technology Services 4",
+       "url": "https://www.gca.gov.uk/agreements/RM6190",
+       "lots": [
+        "1",
+        "2",
+        "3",
+        "3a",
+        "4",
+        "4a",
+        "5",
+        "5a",
+        "6"
+       ]
+      },
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      },
+      {
+       "name": "Digital Workplace Solutions 2",
+       "url": "https://www.sbs.nhs.uk/services/framework-agreements/digital-workplace-solutions/",
+       "lots": [
+        "1"
+       ]
+      }
+     ],
+     "digitalAwards": 5,
+     "clinicalAwards": 4,
+     "latestAward": "2026-08-20",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Philips",
+     "report": "/medical-sales-hub/company-report/?company=Philips",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      },
+      {
+       "name": "Radiotherapy IT Solutions and Associated Options and Related Services",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-it-solutions-and-associated-options-and-related-services/",
+       "lots": []
+      },
+      {
+       "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
+       "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
+       "lots": [
+        "1",
+        "3",
+        "4"
+       ]
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 1,
+     "latestAward": "2026-09-02",
+     "products": 18,
+     "companyNumber": null
+    },
+    {
+     "name": "Civica",
+     "report": "/medical-sales-hub/company-report/?company=Civica",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Technology Services 4",
+       "url": "https://www.gca.gov.uk/agreements/RM6190",
+       "lots": [
+        "1",
+        "2",
+        "5",
+        "5a"
+       ]
+      },
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 4,
+     "clinicalAwards": 1,
+     "latestAward": "2026-10-19",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Hospital Services Limited",
+     "report": "/medical-sales-hub/company-report/?company=Hospital%20Services%20Limited",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      },
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 2,
+     "clinicalAwards": 0,
+     "latestAward": "2026-09-29",
+     "products": 1,
+     "companyNumber": null
+    },
+    {
+     "name": "Sectra Limited",
+     "report": "/medical-sales-hub/company-report/?company=Sectra%20Limited",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      },
+      {
+       "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
+       "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
+       "lots": [
+        "1",
+        "3",
+        "4"
+       ]
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-09-23",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Siemens Healthineers",
+     "report": "/medical-sales-hub/company-report/?company=Siemens%20Healthineers",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      },
+      {
+       "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
+       "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
+       "lots": [
+        "3"
+       ]
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-09-03",
+     "products": 15,
+     "companyNumber": null
+    },
+    {
+     "name": "System C",
+     "report": "/medical-sales-hub/company-report/?company=System%20C",
+     "labels": [
+      "Digital health / AI",
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      },
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-09-22",
+     "products": 8,
+     "companyNumber": null
+    },
+    {
+     "name": "SynApps Solutions Ltd",
+     "report": "/medical-sales-hub/company-report/?company=SynApps%20Solutions%20Ltd",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      },
+      {
+       "name": "Technology Services 4",
+       "url": "https://www.gca.gov.uk/agreements/RM6190",
+       "lots": [
+        "1",
+        "5",
+        "5a"
+       ]
+      },
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "HD Clinical Ltd",
+     "report": "/medical-sales-hub/company-report/?company=HD%20Clinical%20Ltd",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 10,
+     "clinicalAwards": 1,
+     "latestAward": "2026-10-01",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Endosoft Limited",
+     "report": "/medical-sales-hub/company-report/?company=Endosoft%20Limited",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 8,
+     "clinicalAwards": 0,
+     "latestAward": "2026-08-12",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Medilogik",
+     "report": "/medical-sales-hub/company-report/?company=Medilogik",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/471752239996157",
+       "lots": [
+        "2b"
+       ]
+      }
+     ],
+     "digitalAwards": 7,
+     "clinicalAwards": 4,
+     "latestAward": "2026-10-15",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Accurx",
+     "report": "/medical-sales-hub/company-report/?company=Accurx",
+     "labels": [
+      "Digital health / AI",
+      "Clinical comms / ambient AI"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 2,
+     "clinicalAwards": 2,
+     "latestAward": "2026-10-16",
+     "products": 5,
+     "companyNumber": null
+    },
+    {
+     "name": "Haemonetics",
+     "report": "/medical-sales-hub/company-report/?company=Haemonetics",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 2,
+     "clinicalAwards": 0,
+     "latestAward": "2026-09-16",
+     "products": 3,
+     "companyNumber": null
+    },
+    {
+     "name": "iPlato",
+     "report": "/medical-sales-hub/company-report/?company=iPlato",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 2,
+     "clinicalAwards": 0,
+     "latestAward": "2026-09-16",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Netcall",
+     "report": "/medical-sales-hub/company-report/?company=Netcall",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 2,
+     "clinicalAwards": 0,
+     "latestAward": "2026-10-01",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Patchwork Health",
+     "report": "/medical-sales-hub/company-report/?company=Patchwork%20Health",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 2,
+     "clinicalAwards": 0,
+     "latestAward": "2026-09-29",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "SARD JV",
+     "report": "/medical-sales-hub/company-report/?company=SARD%20JV",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 2,
+     "clinicalAwards": 0,
+     "latestAward": "2026-09-10",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Altera Digital Health",
+     "report": "/medical-sales-hub/company-report/?company=Altera%20Digital%20Health",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 1,
+     "latestAward": "2026-09-03",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Blueteq",
+     "report": "/medical-sales-hub/company-report/?company=Blueteq",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-09-01",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "C the Signs",
+     "report": "/medical-sales-hub/company-report/?company=C%20the%20Signs",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-08-12",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "CardMedic",
+     "report": "/medical-sales-hub/company-report/?company=CardMedic",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-10-19",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Change Healthcare",
+     "report": "/medical-sales-hub/company-report/?company=Change%20Healthcare",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-08-12",
+     "products": 0,
+     "companyNumber": "08722174"
+    },
+    {
+     "name": "Citrus Suite",
+     "report": "/medical-sales-hub/company-report/?company=Citrus%20Suite",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-08-20",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Clinisys Solutions Limited",
+     "report": "/medical-sales-hub/company-report/?company=Clinisys%20Solutions%20Limited",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-10-09",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "EMIS (Enlivio Health)",
+     "report": "/medical-sales-hub/company-report/?company=EMIS%20%28Enlivio%20Health%29",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-09-17",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Harrison-AI Medical UK Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Harrison-AI%20Medical%20UK%20Ltd",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 1,
+     "latestAward": "2026-10-14",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Heidi Health",
+     "report": "/medical-sales-hub/company-report/?company=Heidi%20Health",
+     "labels": [
+      "Digital health / AI",
+      "Ambient AI scribe"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 1,
+     "latestAward": "2026-10-19",
+     "products": 2,
+     "companyNumber": null
+    },
+    {
+     "name": "Imosphere",
+     "report": "/medical-sales-hub/company-report/?company=Imosphere",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 1,
+     "latestAward": "2026-09-01",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Intersystems",
+     "report": "/medical-sales-hub/company-report/?company=Intersystems",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-10-07",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "OneAdvanced (Advanced Health and Care)",
+     "report": "/medical-sales-hub/company-report/?company=OneAdvanced%20%28Advanced%20Health%20and%20Care%29",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-09-10",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Raysearch UK Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Raysearch%20UK%20Ltd",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Radiotherapy IT Solutions and Associated Options and Related Services",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-it-solutions-and-associated-options-and-related-services/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-10-02",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Rotamap",
+     "report": "/medical-sales-hub/company-report/?company=Rotamap",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-08-13",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Tortus",
+     "report": "/medical-sales-hub/company-report/?company=Tortus",
+     "labels": [
+      "Digital health / AI",
+      "Ambient AI scribe"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 1,
+     "latestAward": "2026-09-01",
+     "products": 3,
+     "companyNumber": null
+    },
+    {
+     "name": "Agfa Healthcare IT UK Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Agfa%20Healthcare%20IT%20UK%20Ltd",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      },
+      {
+       "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
+       "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
+       "lots": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+       ]
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Cirdan Imaging Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Cirdan%20Imaging%20Ltd",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      },
+      {
+       "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
+       "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
+       "lots": [
+        "2",
+        "3"
+       ]
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Feedback Medical Limited",
+     "report": "/medical-sales-hub/company-report/?company=Feedback%20Medical%20Limited",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      },
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Fujifilm Healthcare UK",
+     "report": "/medical-sales-hub/company-report/?company=Fujifilm%20Healthcare%20UK",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      },
+      {
+       "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
+       "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
+       "lots": [
+        "1",
+        "3",
+        "4"
+       ]
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 4,
+     "companyNumber": null
+    },
+    {
+     "name": "GE HealthCare",
+     "report": "/medical-sales-hub/company-report/?company=GE%20HealthCare",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      },
+      {
+       "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
+       "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
+       "lots": [
+        "1",
+        "3",
+        "4"
+       ]
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 15,
+     "companyNumber": null
+    },
+    {
+     "name": "Infinitt Europe GbmH",
+     "report": "/medical-sales-hub/company-report/?company=Infinitt%20Europe%20GbmH",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      },
+      {
+       "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
+       "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
+       "lots": [
+        "3"
+       ]
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Leica Microsystems (UK)",
+     "report": "/medical-sales-hub/company-report/?company=Leica%20Microsystems%20%28UK%29",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      },
+      {
+       "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
+       "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
+       "lots": [
+        "1",
+        "3",
+        "4",
+        "5"
+       ]
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 1,
+     "companyNumber": null
+    },
+    {
+     "name": "Lucida Medical Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Lucida%20Medical%20Ltd",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      },
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Magentus Software Limited",
+     "report": "/medical-sales-hub/company-report/?company=Magentus%20Software%20Limited",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      },
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Orbis Protect",
+     "report": "/medical-sales-hub/company-report/?company=Orbis%20Protect",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      },
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Relianace High -Tech Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Relianace%20High%20-Tech%20Ltd",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      },
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": "02025063"
+    },
+    {
+     "name": "Roche Diagnostics UK",
+     "report": "/medical-sales-hub/company-report/?company=Roche%20Diagnostics%20UK",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      },
+      {
+       "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
+       "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
+       "lots": [
+        "1",
+        "3",
+        "4"
+       ]
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 17,
+     "companyNumber": null
+    },
+    {
+     "name": "Skyguard Ltd T/A Peoplesafe",
+     "report": "/medical-sales-hub/company-report/?company=Skyguard%20Ltd%20T%2FA%20Peoplesafe",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      },
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Sysmex UK",
+     "report": "/medical-sales-hub/company-report/?company=Sysmex%20UK",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      },
+      {
+       "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
+       "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
+       "lots": [
+        "1",
+        "3",
+        "4"
+       ]
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 3,
+     "companyNumber": null
+    },
+    {
+     "name": "Allocate Software",
+     "report": "/medical-sales-hub/company-report/?company=Allocate%20Software",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [],
+     "digitalAwards": 2,
+     "clinicalAwards": 0,
+     "latestAward": "2026-09-28",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Dedalus",
+     "report": "/medical-sales-hub/company-report/?company=Dedalus",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [],
+     "digitalAwards": 2,
+     "clinicalAwards": 0,
+     "latestAward": "2026-09-23",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Rx-Info",
+     "report": "/medical-sales-hub/company-report/?company=Rx-Info",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [],
+     "digitalAwards": 2,
+     "clinicalAwards": 0,
+     "latestAward": "2026-10-15",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Spacelabs Healthcare Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Spacelabs%20Healthcare%20Ltd",
+     "labels": [],
+     "frameworks": [],
+     "digitalAwards": 2,
+     "clinicalAwards": 0,
+     "latestAward": "2026-10-08",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Xiel Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Xiel%20Ltd",
+     "labels": [],
+     "frameworks": [],
+     "digitalAwards": 2,
+     "clinicalAwards": 2,
+     "latestAward": "2026-09-23",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Floki Health",
+     "report": "/medical-sales-hub/company-report/?company=Floki%20Health",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-08-10",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Health Edge Solutions Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Health%20Edge%20Solutions%20Ltd",
+     "labels": [],
+     "frameworks": [],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-09-25",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "HealthRota",
+     "report": "/medical-sales-hub/company-report/?company=HealthRota",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-10-12",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Henry Schein One UK",
+     "report": "/medical-sales-hub/company-report/?company=Henry%20Schein%20One%20UK",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-09-29",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Oncology Imaging Systems (OIS)",
+     "report": "/medical-sales-hub/company-report/?company=Oncology%20Imaging%20Systems%20%28OIS%29",
+     "labels": [],
+     "frameworks": [],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-08-13",
+     "products": 5,
+     "companyNumber": null
+    },
+    {
+     "name": "Schiller UK Limited",
+     "report": "/medical-sales-hub/company-report/?company=Schiller%20UK%20Limited",
+     "labels": [],
+     "frameworks": [],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-10-02",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Abilia Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Abilia%20Ltd",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Agilent Technologies UK",
+     "report": "/medical-sales-hub/company-report/?company=Agilent%20Technologies%20UK",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
+       "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
+       "lots": [
+        "1",
+        "3",
+        "4"
+       ]
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Aidence",
+     "report": "/medical-sales-hub/company-report/?company=Aidence",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Aidoc Medical Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Aidoc%20Medical%20Ltd",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Alcidion",
+     "report": "/medical-sales-hub/company-report/?company=Alcidion",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 8,
+     "companyNumber": null
+    },
+    {
+     "name": "AMG Medtech Ltd",
+     "report": "/medical-sales-hub/company-report/?company=AMG%20Medtech%20Ltd",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Annalise.ai (Harrison.ai)",
+     "report": "/medical-sales-hub/company-report/?company=Annalise.ai%20%28Harrison.ai%29",
+     "labels": [
+      "Digital health / AI",
+      "Radiology AI"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": null,
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 2,
+     "companyNumber": null
+    },
+    {
+     "name": "Aptvision Limited",
+     "report": "/medical-sales-hub/company-report/?company=Aptvision%20Limited",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Baywater Healthcare UK Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Baywater%20Healthcare%20UK%20Ltd",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Brainomix",
+     "report": "/medical-sales-hub/company-report/?company=Brainomix",
+     "labels": [
+      "Digital health / AI",
+      "Stroke AI"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": null,
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 6,
+     "companyNumber": null
+    },
+    {
+     "name": "Bridgehead Software",
+     "report": "/medical-sales-hub/company-report/?company=Bridgehead%20Software",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Canon Medical Systems",
+     "report": "/medical-sales-hub/company-report/?company=Canon%20Medical%20Systems",
+     "labels": [
+      "Digital health and clinical software"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 7,
+     "companyNumber": null
+    },
+    {
+     "name": "CardioScan Ltd",
+     "report": "/medical-sales-hub/company-report/?company=CardioScan%20Ltd",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "CGM LAB Belgium",
+     "report": "/medical-sales-hub/company-report/?company=CGM%20LAB%20Belgium",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Circle Cardiovascular Imaging UK Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Circle%20Cardiovascular%20Imaging%20UK%20Ltd",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "DH2 Solutions Ltd",
+     "report": "/medical-sales-hub/company-report/?company=DH2%20Solutions%20Ltd",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Doccla",
+     "report": "/medical-sales-hub/company-report/?company=Doccla",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 5,
+     "companyNumber": null
+    },
+    {
+     "name": "Draeger Medical UK",
+     "report": "/medical-sales-hub/company-report/?company=Draeger%20Medical%20UK",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 19,
+     "companyNumber": null
+    },
+    {
+     "name": "DrDoctor",
+     "report": "/medical-sales-hub/company-report/?company=DrDoctor",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 6,
+     "companyNumber": null
+    },
+    {
+     "name": "Elekta",
+     "report": "/medical-sales-hub/company-report/?company=Elekta",
+     "labels": [
+      "Digital health and clinical software"
+     ],
+     "frameworks": [
+      {
+       "name": "Radiotherapy IT Solutions and Associated Options and Related Services",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-it-solutions-and-associated-options-and-related-services/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 4,
+     "companyNumber": null
+    },
+    {
+     "name": "Epredia",
+     "report": "/medical-sales-hub/company-report/?company=Epredia",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 1,
+     "companyNumber": null
+    },
+    {
+     "name": "Evident Europe GmbH — UK Branch",
+     "report": "/medical-sales-hub/company-report/?company=Evident%20Europe%20GmbH%20%E2%80%94%20UK%20Branch",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
+       "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
+       "lots": [
+        "1",
+        "5"
+       ]
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 1,
+     "companyNumber": "BR024128"
+    },
+    {
+     "name": "EyeTech International Ltd",
+     "report": "/medical-sales-hub/company-report/?company=EyeTech%20International%20Ltd",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Feebris",
+     "report": "/medical-sales-hub/company-report/?company=Feebris",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 4,
+     "companyNumber": null
+    },
+    {
+     "name": "Fleischhacker GmbH & Co. KG",
+     "report": "/medical-sales-hub/company-report/?company=Fleischhacker%20GmbH%20%26%20Co.%20KG",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Getinge",
+     "report": "/medical-sales-hub/company-report/?company=Getinge",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 6,
+     "companyNumber": null
+    },
+    {
+     "name": "Health Net Connections Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Health%20Net%20Connections%20Ltd",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Heartflow UK Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Heartflow%20UK%20Ltd",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Hermes Medical Solutions Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Hermes%20Medical%20Solutions%20Ltd",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Hexarad",
+     "report": "/medical-sales-hub/company-report/?company=Hexarad",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Huntleigh",
+     "report": "/medical-sales-hub/company-report/?company=Huntleigh",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Iansyst Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Iansyst%20Ltd",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "InferVision UK Ltd",
+     "report": "/medical-sales-hub/company-report/?company=InferVision%20UK%20Ltd",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "inHeart S.A.S",
+     "report": "/medical-sales-hub/company-report/?company=inHeart%20S.A.S",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Intelerad Medical Systems",
+     "report": "/medical-sales-hub/company-report/?company=Intelerad%20Medical%20Systems",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Jabbla UK Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Jabbla%20UK%20Ltd",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Karl Storz UK",
+     "report": "/medical-sales-hub/company-report/?company=Karl%20Storz%20UK",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 12,
+     "companyNumber": null
+    },
+    {
+     "name": "Kheiron Medical",
+     "report": "/medical-sales-hub/company-report/?company=Kheiron%20Medical",
+     "labels": [
+      "Digital health / AI",
+      "Breast screening AI"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": null,
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 1,
+     "companyNumber": null
+    },
+    {
+     "name": "Legrand Electric Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Legrand%20Electric%20Ltd",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Liberator Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Liberator%20Ltd",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Lifeline 24",
+     "report": "/medical-sales-hub/company-report/?company=Lifeline%2024",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Limbic",
+     "report": "/medical-sales-hub/company-report/?company=Limbic",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Luscii",
+     "report": "/medical-sales-hub/company-report/?company=Luscii",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 3,
+     "companyNumber": null
+    },
+    {
+     "name": "MDSAS",
+     "report": "/medical-sales-hub/company-report/?company=MDSAS",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Medical Imaging Systems (MIS Healthcare)",
+     "report": "/medical-sales-hub/company-report/?company=Medical%20Imaging%20Systems%20%28MIS%20Healthcare%29",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 1,
+     "companyNumber": null
+    },
+    {
+     "name": "Medtronic",
+     "report": "/medical-sales-hub/company-report/?company=Medtronic",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 38,
+     "companyNumber": null
+    },
+    {
+     "name": "Mounts & More Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Mounts%20%26%20More%20Ltd",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Newton’s Tree",
+     "report": "/medical-sales-hub/company-report/?company=Newton%E2%80%99s%20Tree",
+     "labels": [
+      "Digital health / AI",
+      "AI governance"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 1,
+     "companyNumber": null
+    },
+    {
+     "name": "Olympus (KeyMed)",
+     "report": "/medical-sales-hub/company-report/?company=Olympus%20%28KeyMed%29",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 17,
+     "companyNumber": null
+    },
+    {
+     "name": "Oncology Systems Ltd (OSL)",
+     "report": "/medical-sales-hub/company-report/?company=Oncology%20Systems%20Ltd%20%28OSL%29",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Radiotherapy IT Solutions and Associated Options and Related Services",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-it-solutions-and-associated-options-and-related-services/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 7,
+     "companyNumber": null
+    },
+    {
+     "name": "Open Medical Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Open%20Medical%20Ltd",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Ortivus",
+     "report": "/medical-sales-hub/company-report/?company=Ortivus",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Ortus-iHealth",
+     "report": "/medical-sales-hub/company-report/?company=Ortus-iHealth",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Patients Know Best",
+     "report": "/medical-sales-hub/company-report/?company=Patients%20Know%20Best",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 2,
+     "companyNumber": null
+    },
+    {
+     "name": "PCByVoice",
+     "report": "/medical-sales-hub/company-report/?company=PCByVoice",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Possum Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Possum%20Ltd",
+     "labels": [
+      "Digital health and clinical software"
+     ],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Qure.ai",
+     "report": "/medical-sales-hub/company-report/?company=Qure.ai",
+     "labels": [
+      "Digital health / AI",
+      "Radiology AI"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": null,
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 5,
+     "companyNumber": null
+    },
+    {
+     "name": "Radiobotics ApS",
+     "report": "/medical-sales-hub/company-report/?company=Radiobotics%20ApS",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Rapid Health",
+     "report": "/medical-sales-hub/company-report/?company=Rapid%20Health",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Rosenfield Health Tech Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Rosenfield%20Health%20Tech%20Ltd",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Sensory Guru Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Sensory%20Guru%20Ltd",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "SIM&CURE",
+     "report": "/medical-sales-hub/company-report/?company=SIM%26CURE",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Skin Analytics",
+     "report": "/medical-sales-hub/company-report/?company=Skin%20Analytics",
+     "labels": [
+      "Digital health / AI",
+      "Dermatology AI"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": null,
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 2,
+     "companyNumber": null
+    },
+    {
+     "name": "Smartbox Assistive Technology",
+     "report": "/medical-sales-hub/company-report/?company=Smartbox%20Assistive%20Technology",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Soliton IT Limited",
+     "report": "/medical-sales-hub/company-report/?company=Soliton%20IT%20Limited",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Steris",
+     "report": "/medical-sales-hub/company-report/?company=Steris",
+     "labels": [
+      "Digital health and clinical software"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 9,
+     "companyNumber": null
+    },
+    {
+     "name": "Streets Heaver",
+     "report": "/medical-sales-hub/company-report/?company=Streets%20Heaver",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "TidalSense",
+     "report": "/medical-sales-hub/company-report/?company=TidalSense",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Tobii Dynavox Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Tobii%20Dynavox%20Ltd",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Total Mobile",
+     "report": "/medical-sales-hub/company-report/?company=Total%20Mobile",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+     "report": "/medical-sales-hub/company-report/?company=Uniphar%20Medtech%20UK%20Ltd%20%28Cardiac%20Services%20%2F%20Synapse%20Medical%29",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": "NI018037"
+    },
+    {
+     "name": "Varian (Siemens Healthineers)",
+     "report": "/medical-sales-hub/company-report/?company=Varian%20%28Siemens%20Healthineers%29",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Radiotherapy IT Solutions and Associated Options and Related Services",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-it-solutions-and-associated-options-and-related-services/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 5,
+     "companyNumber": null
+    },
+    {
+     "name": "Agfa Healthcare UK Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Agfa%20Healthcare%20UK%20Ltd",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Agile Medical",
+     "report": "/medical-sales-hub/company-report/?company=Agile%20Medical",
+     "labels": [
+      "Digital health and clinical software"
+     ],
+     "frameworks": [],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Bender UK Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Bender%20UK%20Ltd",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Current Health",
+     "report": "/medical-sales-hub/company-report/?company=Current%20Health",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 1,
+     "companyNumber": null
+    },
+    {
+     "name": "Cyted",
+     "report": "/medical-sales-hub/company-report/?company=Cyted",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Dakota Integrated Solutions Limited",
+     "report": "/medical-sales-hub/company-report/?company=Dakota%20Integrated%20Solutions%20Limited",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "eKare",
+     "report": "/medical-sales-hub/company-report/?company=eKare",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Glooko Ltd",
+     "report": "/medical-sales-hub/company-report/?company=Glooko%20Ltd",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 2,
+     "companyNumber": null
+    },
+    {
+     "name": "Healthy.io",
+     "report": "/medical-sales-hub/company-report/?company=Healthy.io",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Huma",
+     "report": "/medical-sales-hub/company-report/?company=Huma",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 7,
+     "companyNumber": null
+    },
+    {
+     "name": "Lenus Health",
+     "report": "/medical-sales-hub/company-report/?company=Lenus%20Health",
+     "labels": [
+      "Digital health / AI",
+      "Predictive AI"
+     ],
+     "frameworks": [],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 5,
+     "companyNumber": null
+    },
+    {
+     "name": "Medwise AI",
+     "report": "/medical-sales-hub/company-report/?company=Medwise%20AI",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Nervecentre",
+     "report": "/medical-sales-hub/company-report/?company=Nervecentre",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 5,
+     "companyNumber": null
+    },
+    {
+     "name": "Oxford Heartbeat",
+     "report": "/medical-sales-hub/company-report/?company=Oxford%20Heartbeat",
+     "labels": [
+      "Digital health / AI"
+     ],
+     "frameworks": [],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Pioneer Wound Telehealth",
+     "report": "/medical-sales-hub/company-report/?company=Pioneer%20Wound%20Telehealth",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Vantive",
+     "report": "/medical-sales-hub/company-report/?company=Vantive",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [],
+     "digitalAwards": 0,
+     "clinicalAwards": 0,
+     "latestAward": null,
+     "products": 4,
+     "companyNumber": null
+    }
+   ]
   },
   "fdp": {
    "headline": {
