@@ -21,7 +21,7 @@ import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { Purchases } from '@revenuecat/purchases-capacitor';
 import { CONFIG } from './config.js';
 import {
-  filterFeed, itemsFromNotification, newCount, passFromLink, safeUrl, shortDate, stamp,
+  deskTheme, filterFeed, itemsFromNotification, newCount, passFromLink, safeUrl, shortDate, stamp,
 } from './logic.js';
 
 const NATIVE = Capacitor.isNativePlatform();
@@ -247,14 +247,53 @@ async function deleteAccount() {
 }
 
 // ---------------------------------------------------------------- views
+const ICONS = {
+  shield: '<path d="M12 2.5l8 3v6.2c0 5-3.4 9-8 10.3-4.6-1.3-8-5.3-8-10.3V5.5z"/><path d="M12 8v5"/><path d="M12 16.5h.01"/>',
+  box: '<path d="M3 7.5l9-4.5 9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5l9 4.5 9-4.5"/><path d="M12 12v9"/>',
+  doc: '<path d="M6 2.5h8l4 4v15H6z"/><path d="M14 2.5v4h4"/><path d="M9 11h6M9 14.5h6M9 18h4"/>',
+  bars: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  pillar: '<path d="M3 9l9-5.5L21 9"/><path d="M5 9v9M9.5 9v9M14.5 9v9M19 9v9"/><path d="M3 21h18"/>',
+  globe: '<circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19"/><path d="M12 2.5c2.6 2.6 3.9 5.8 3.9 9.5s-1.3 6.9-3.9 9.5c-2.6-2.6-3.9-5.8-3.9-9.5S9.4 5.1 12 2.5z"/>',
+  pulse: '<path d="M2 12h4l3-7 4 14 3-7h6"/>',
+  desk: '<rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18M8 13h8M8 16.5h5"/>',
+  bell: '<path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/>',
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-4 4.3-6 8-6s6.8 2 8 6"/>',
+};
+const svg = (name) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ''}</svg>`;
+
 function header(sub) {
-  return `<header class="top"><div class="brand">LIVE <span>DESK</span></div>${sub ? `<div class="sub">${sub}</div>` : ''}</header>`;
+  return `<header class="top"><div class="eyebrow">Medical Sales Intelligence Hub</div><div class="brand">THE LIVE <span>DESK</span></div>${sub ? `<div class="sub">${sub}</div>` : ''}</header>`;
+}
+
+// UK time for the masthead clock, ticking once a second without a re-render.
+function londonNow() {
+  const d = new Date();
+  const t = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(d);
+  const day = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', weekday: 'long', day: 'numeric', month: 'long' }).format(d);
+  return { t, day };
+}
+setInterval(() => {
+  const el = document.getElementById('clock');
+  if (el) el.firstChild.nodeValue = londonNow().t;
+}, 1000);
+
+function deskHeader() {
+  const now = londonNow();
+  const live = S.feedFrom === 'live';
+  const asOf = S.feed ? stamp(S.feed.as_of) : '';
+  return `<header class="top tall">
+    <div class="eyebrow">Medical Sales Intelligence Hub</div>
+    <div class="brand">THE LIVE <span>DESK</span></div>
+    <div class="clockrow"><span class="clock" id="clock">${now.t}<small>LONDON</small></span><span class="today">${esc(now.day)}</span></div>
+    <div class="live${live ? '' : ' off'}"><span class="dot"></span>${asOf ? `${live ? 'Updated' : 'Offline: last update'} ${esc(asOf)}` : 'Loading'} · <button id="refresh" class="link inline">Refresh</button></div>
+  </header>`;
 }
 
 function viewSignIn() {
   const sent = !!S.pendingEmail;
-  return `${header('UK medtech and NHS market intelligence, live')}
+  return `<header class="top tall signin-hero"><div class="eyebrow">Medical Sales Intelligence Hub</div><div class="brand">THE LIVE <span>DESK</span></div><div class="sub">UK medtech and NHS market intelligence, live</div></header>
   <main class="pad">
+    ${sent ? '' : `<ul class="perks"><li>MHRA alerts, recalls and supply notices</li><li>NICE guidance, tenders and NHS policy</li><li>Alerts at 9am, 12 noon and 4pm</li></ul>`}
     <h1>${sent ? 'Enter your code' : 'Sign in'}</h1>
     <p class="lead">${sent ? `We sent a 6-digit code to <b>${esc(S.pendingEmail)}</b>.` : 'Enter your email and we will send you a sign-in code. No password needed.'}</p>
     ${sent
@@ -282,7 +321,7 @@ function viewAccess() {
   return `${header()}
   <main class="pad">
     <h1>${relink ? 'Reconnect your Hub membership' : 'Get the Live Desk'}</h1>
-    <section class="card">
+    <section class="card feature">
       <h2>Hub member?</h2>
       <p>${relink ? 'Your Hub connection needs a quick monthly check.' : 'The Live Desk app is included in Hub membership.'} Connect once and you are in.</p>
       <button id="hub" class="btn">${relink ? 'Reconnect' : 'Connect my Hub membership'}</button>
@@ -318,18 +357,38 @@ function viewDesk() {
     return `<main class="pad"><p class="lead">${S.feedFrom === null ? 'No connection, and nothing saved on this phone yet. Try again when you are online.' : 'Loading the Live Desk...'}</p><button id="refresh" class="btn">Try again</button></main>`;
   }
   const panels = filterFeed(S.feed, S.mine ? S.chosen : []);
-  const ticker = (S.feed.ticker || []).map((t) => `<a class="tick" data-open="${esc(t.url)}"><span class="tag">${esc(t.tag)}</span>${t.badge ? `<b>${esc(t.badge)}</b> ` : ''}${esc(t.title)}</a>`).join('');
-  const body = panels.length ? panels.map((p) => `<section class="panel"><h2>${esc(p.title)}</h2><ul>${p.rows.map(rowHtml).join('')}</ul></section>`).join('')
-    : '<p class="lead">Nothing in your specialities on the desk right now. Switch to All to see everything.</p>';
-  return `<div class="asof">${S.feedFrom === 'cache' ? 'Offline: last update ' : 'Updated '}${esc(stamp(S.feed.as_of))} <button id="refresh" class="link inline">Refresh</button></div>
-    ${ticker ? `<div class="ticker">${ticker}</div>` : ''}
+  const ticks = (S.feed.ticker || []).map((t) => `<a class="tick" data-open="${esc(t.url)}"><span class="tag">${esc(t.tag)}</span>${t.badge ? `<b>${esc(t.badge)}</b> ` : ''}${esc(t.title)}</a>`).join('');
+  // The track holds the items twice so the marquee loops without a gap; speed follows length.
+  const ticker = ticks ? `<div class="ticker" aria-label="Latest"><div class="ticker-track" style="--dur:${Math.max(30, (S.feed.ticker || []).length * 7)}s">${ticks}${ticks}</div></div>` : '';
+  const stats = panels.map((p, i) => {
+    const th = deskTheme(p); const n = (p.rows || []).filter((r) => r.new).length;
+    return `<a class="stat" data-jump="p${i}" style="--c:var(--c-${th.c})"><b>${n || (p.rows || []).filter((r) => r.kind !== 'note').length}</b><span>${esc(shortTitle(p.title))}<small>${n ? 'new' : 'on the desk'}</small></span></a>`;
+  }).join('');
+  const body = panels.length ? panels.map((p, i) => {
+    const th = deskTheme(p); const n = (p.rows || []).filter((r) => r.new).length;
+    const items = (p.rows || []).filter((r) => r.kind !== 'note').length;
+    return `<section class="panel" id="p${i}" style="--c:var(--c-${th.c})">
+      <div class="band" style="--img:url(img/live-desk-theme-${th.img}.jpg)"><span class="ico">${svg(th.icon)}</span><div><h2>${esc(p.title)}</h2><div class="pn">${items} item${items === 1 ? '' : 's'}${n ? ` · <b>${n} new</b>` : ''}</div></div></div>
+      <ul>${p.rows.map(rowHtml).join('')}</ul></section>`;
+  }).join('')
+    : '<p class="empty">Nothing in your specialities on the desk right now. Switch to All to see everything.</p>';
+  const nc = newCount(panels);
+  return `${ticker}
+    ${stats ? `<div class="stats">${stats}</div>` : ''}
     <div class="filter">
       <button class="seg ${S.mine ? '' : 'on'}" data-mine="0">All</button>
       <button class="seg ${S.mine ? 'on' : ''}" data-mine="1">My specialities${S.chosen.length ? ` (${S.chosen.length})` : ''}</button>
-      <span class="count">${newCount(panels)} new</span>
+      <span class="count${nc ? '' : ' zero'}">${nc} new</span>
     </div>
     ${S.mine && !S.chosen.length ? '<p class="pad small">Pick your specialities in the Alerts tab.</p>' : ''}
     <main>${body}</main>`;
+}
+
+// "NICE GUIDANCE — NEW" -> "NICE guidance" for the stat chips.
+function shortTitle(t) {
+  const s = String(t || '').split(/\s+[—–-]\s+/)[0].trim();
+  const t2 = s.toLowerCase().replace(/\b(mhra|nice|nhs|dhsc|icb|uk)\b/g, (m) => m.toUpperCase());
+  return t2.charAt(0).toUpperCase() + t2.slice(1);
 }
 
 function viewAlerts() {
@@ -337,10 +396,11 @@ function viewAlerts() {
   const boxes = CONFIG.specialities.map((s) => `<label class="spec"><input type="checkbox" value="${esc(s.slug)}" ${S.chosen.includes(s.slug) ? 'checked' : ''}> ${esc(s.label)}</label>`).join('');
   return `<main class="pad">
     <h1>Alerts</h1>
-    <p class="lead">At 9am, 12 noon and 4pm, only when something new lands in your specialities.</p>
+    <p class="lead">Only when something new lands in your specialities.</p>
+    <div class="times"><span><small>MORNING</small>9am</span><span><small>MIDDAY</small>12 noon</span><span><small>AFTERNOON</small>4pm</span></div>
     <label class="toggle"><input id="alerts" type="checkbox" ${S.alertsOn ? 'checked' : ''}> Alerts on</label>
     ${items.length ? `<section class="card"><h2>Latest alert</h2><ul class="plain">${items.map((i) => `<li><a data-open="${esc(i.u)}">${esc(i.t)}</a>${i.sp ? `<span class="small"> ${esc(i.sp)}</span>` : ''}</li>`).join('')}</ul></section>` : ''}
-    <h2>Your specialities</h2>
+    <h2 style="margin-top:20px">Your specialities</h2>
     <p class="small">None ticked means every speciality.</p>
     <div class="specs">${boxes}</div>
     ${S.note ? `<p class="note">${esc(S.note)}</p>` : ''}
@@ -366,8 +426,8 @@ function viewAccount() {
 }
 
 function tabs() {
-  const t = (k, l) => `<button class="tab ${S.tab === k ? 'on' : ''}" data-tab="${k}">${l}</button>`;
-  return `<nav class="tabs">${t('desk', 'Desk')}${t('alerts', 'Alerts')}${t('account', 'Account')}</nav>`;
+  const t = (k, l, i) => `<button class="tab ${S.tab === k ? 'on' : ''}" data-tab="${k}">${svg(i)}${l}</button>`;
+  return `<nav class="tabs">${t('desk', 'Desk', 'desk')}${t('alerts', 'Alerts', 'bell')}${t('account', 'Account', 'user')}</nav>`;
 }
 
 function render() {
@@ -375,7 +435,7 @@ function render() {
   if (S.busy) html = `${header()}<main class="pad center"><div class="spinner"></div><p>${esc(S.busy)}</p></main>`;
   else if (!S.user) html = viewSignIn();
   else if (!S.status || !S.status.access) html = viewAccess();
-  else html = header() + ({ desk: viewDesk, alerts: viewAlerts, account: viewAccount }[S.tab])() + tabs();
+  else html = (S.tab === 'desk' ? deskHeader() : header()) + ({ desk: viewDesk, alerts: viewAlerts, account: viewAccount }[S.tab])() + tabs();
   $app.innerHTML = html;
 }
 
@@ -384,6 +444,7 @@ $app.addEventListener('click', async (e) => {
   const el = e.target.closest('button, a, [data-open]');
   if (!el) return;
   if (el.dataset.open !== undefined) { e.preventDefault(); open(el.dataset.open); return; }
+  if (el.dataset.jump) { const t = document.getElementById(el.dataset.jump); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
   if (el.dataset.tab) { S.tab = el.dataset.tab; S.note = ''; render(); window.scrollTo(0, 0); return; }
   if (el.dataset.mine !== undefined) { S.mine = el.dataset.mine === '1'; await store.set('mine', S.mine ? '1' : '0'); render(); return; }
   if (el.dataset.plan) { subscribe(el.dataset.plan); return; }

@@ -64,3 +64,19 @@ export function itemsFromNotification(data) {
     return [];
   }
 }
+
+/** Look for a desk panel, from its key or title: colour token, photo band, icon name.
+ *  Mirrors the colour per desk on the Hub's Live Desk page. */
+const THEMES = [
+  [/MHRA|ALERT|RECALL|SAFETY|FIELD/, { c: 'alert', img: 'policy', icon: 'shield' }],
+  [/SUPPLY|AVAILAB|SHORTAGE|DISCONTINU/, { c: 'supply', img: 'generic', icon: 'box' }],
+  [/NICE|GUIDANCE|GUIDELINE/, { c: 'nice', img: 'respiratory', icon: 'doc' }],
+  [/TENDER|PROCURE|FRAMEWORK|AWARD|CONTRACT/, { c: 'tender', img: 'procurement', icon: 'bars' }],
+  [/NHS|DHSC|POLICY|ICB|GOVERN/, { c: 'nhs', img: 'policy', icon: 'pillar' }],
+  [/INDUSTRY|WIRE|NEWS|DIGITAL|TECH/, { c: 'wire', img: 'digital', icon: 'globe' }],
+];
+export function deskTheme(panel) {
+  const k = String(((panel && (panel.key || '')) + ' ' + ((panel && panel.title) || ''))).toUpperCase();
+  for (const [re, t] of THEMES) if (re.test(k)) return t;
+  return { c: 'other', img: 'generic', icon: 'pulse' };
+}

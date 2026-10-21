@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { filterFeed, itemsFromNotification, newCount, passFromLink, safeUrl, shortDate, stamp } from '../src/logic.js';
+import { deskTheme, filterFeed, itemsFromNotification, newCount, passFromLink, safeUrl, shortDate, stamp } from '../src/logic.js';
 
 const FEED = { panels: [
   { key: 'MHRA ALERTS', rows: [
@@ -35,4 +35,11 @@ test('safe urls and notification items', () => {
   assert.equal(safeUrl('https://x.org'), 'https://x.org');
   assert.deepEqual(itemsFromNotification({ items: '[{"t":"x","u":"https://a"}]' }), [{ t: 'x', u: 'https://a' }]);
   assert.deepEqual(itemsFromNotification({ items: '{bad' }), []);
+});
+
+test('desk look per panel', () => {
+  assert.equal(deskTheme({ key: 'MHRA ALERTS' }).c, 'alert');
+  assert.equal(deskTheme({ title: 'TENDERS & PROCUREMENT' }).img, 'procurement');
+  assert.equal(deskTheme({ title: 'NICE GUIDANCE — NEW' }).c, 'nice');
+  assert.equal(deskTheme({ title: 'Something else' }).c, 'other');
 });
