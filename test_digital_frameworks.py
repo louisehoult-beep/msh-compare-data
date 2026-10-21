@@ -47,6 +47,15 @@ GC_PAGE = """<html><body><main>
 
 SUPPLIERS_NO_GC15 = "<html>G-Cloud 14 Lot 4 (RM1557.14L4)</html>"
 
+AZ_A1 = """<div class="app-search-result"><h2 class="govuk-heading-s">
+<a class="govuk-link" href="/g-cloud-15/supplier/1">ALPHA CLOUD LTD</a></h2>
+<p>Description that is never stored. Call jane@alpha.example</p></div>
+<div class="app-search-result"><h2 class="govuk-heading-s">
+<a class="govuk-link" href="/g-cloud-15/supplier/2">A&amp;B HEALTH LIMITED</a></h2></div>
+<a class="govuk-link govuk-pagination__link" href="/g-cloud-15/suppliers?page=2&amp;prefix=A" rel="next">"""
+AZ_A2 = """<a class="govuk-link" href="/g-cloud-15/supplier/3">AZURE CARE LTD</a>"""
+AZ_M = """<a class="govuk-link" href="/g-cloud-15/supplier/4">MEDILOGIK LIMITED</a>"""
+
 OCDS_AI = {"releases": [{
     "id": "050314-2026", "date": "2026-05-28T13:23:29+01:00", "tag": ["tenderUpdate"],
     "buyer": {"name": "NHS Shared Business Services Limited"},
@@ -96,6 +105,14 @@ def fake_fetch(fail=()):
             return GC_PAGE
         if url.endswith("/suppliers"):
             return SUPPLIERS_NO_GC15
+        if "/g-cloud-15/suppliers?" in url:
+            if url.endswith("page=2&prefix=A"):
+                return AZ_A2
+            if url.endswith("prefix=A"):
+                return AZ_A1
+            if url.endswith("prefix=M"):
+                return AZ_M
+            return "<html>no suppliers under this letter</html>"
         if url.endswith("050314-2026"):
             return json.dumps(OCDS_AI)
         if url.endswith("094419-2026"):
@@ -167,10 +184,20 @@ class Build(unittest.TestCase):
         self.assertIsNone(ts4["suppliers"])
         self.assertTrue(any("Lot 3a supplier list not verified" in n for n in ts4["notVerified"]))
 
-    def test_gcloud15_verbatim_term_and_null_suppliers(self):
+    def test_gcloud15_verbatim_term_and_az_suppliers(self):
         g = self.by["RM1557.15"]
         self.assertEqual((g["starts"], g["ends"]), ("2026-08-06", "2028-02-05"))
         self.assertIn("reopening after 18 months and again after 36 months", g["term"])
+        self.assertEqual(g["suppliers"],
+                         ["A&B HEALTH LIMITED", "ALPHA CLOUD LTD", "AZURE CARE LTD",
+                          "MEDILOGIK LIMITED"])
+        # The A to Z gives no lots, so no lot list is claimed.
+        self.assertTrue(all(l["suppliers"] is None for l in g["lots"]))
+        self.assertTrue(any("does not say which lot" in n for n in g["notVerified"]))
+
+    def test_gcloud15_az_failure_gives_null_and_note(self):
+        doc = rdf.build(fake_fetch(fail=("prefix=M",)), "2026-10-20")
+        g = {e["reference"]: e for e in doc["frameworks"]}["RM1557.15"]
         self.assertIsNone(g["suppliers"])
         self.assertTrue(any("Supplier list not verified" in n for n in g["notVerified"]))
 
@@ -186,6 +213,14 @@ class Build(unittest.TestCase):
         self.assertEqual(gp["futureNoticeDate"], "2026-11-09")
         self.assertEqual((gp["starts"], gp["ends"]), ("2027-09-20", "2030-09-19"))
         self.assertEqual(gp["sourceQuote"], "Framework go-live is expected in Q3 2027.")
+
+    def test_unavailable_gca_page_raises_so_main_does_not_write(self):
+        f = fake_fetch()
+
+        def outage(url):
+            return "<html>Service unavailable</html>" if "gca.gov.uk/agreements" in url else f(url)
+        with self.assertRaises(RuntimeError):
+            rdf.build(outage, "2026-10-20")
 
     def test_total_failure_raises_so_main_does_not_write(self):
         with self.assertRaises(RuntimeError):

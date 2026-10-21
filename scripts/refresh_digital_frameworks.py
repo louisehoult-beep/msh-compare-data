@@ -5,7 +5,9 @@ refresh_digital_frameworks.py - build data/digital-frameworks.json.
 Digital / technology frameworks a medical-sales rep may meet:
   live    Technology Services 4 (RM6190) and G-Cloud 15 (RM1557.15), Government
           Commercial Agency (GCA, formerly Crown Commercial Service, renamed
-          1 April 2026), read from gca.gov.uk.
+          1 April 2026), read from gca.gov.uk. The G-Cloud 15 supplier list
+          is the Digital Marketplace supplier A to Z (company names only; the
+          A to Z does not give lots, so G-Cloud 15 lot lists stay null).
   coming  Healthcare AI Solutions (NHS Shared Business Services, notice
           050314-2026) and the Digital Primary Care / GP IT open framework
           (NHS England, notice 094419-2026), read from the Find a Tender OCDS API.
@@ -40,7 +42,10 @@ OUT = os.path.join(ROOT, "data", "digital-frameworks.json")
 GCA = "https://www.gca.gov.uk"
 TS4_URL = GCA + "/agreements/RM6190"
 GC15_URL = GCA + "/agreements/RM1557.15"
-SUPPLIERS_URL = GCA + "/suppliers"
+DM = "https://www.applytosupply.digitalmarketplace.service.gov.uk"
+GC15_AZ = DM + "/g-cloud-15/suppliers"
+AZ_PREFIXES = [chr(c) for c in range(ord("A"), ord("Z") + 1)] + ["other"]
+AZ_MAX_PAGES = 40
 FTS_API = "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/"
 FTS_NOTICE = "https://www.find-tender.service.gov.uk/Notice/"
 UA = "Mozilla/5.0 (compatible; msh-compare-data digital-frameworks)"
@@ -91,6 +96,10 @@ def meta_field(txt, label):
 
 def parse_agreement_header(page_html):
     txt = text_of(page_html)
+    if not meta_field(txt, "Agreement number"):
+        # gca.gov.uk answers an outage with a redirect to an "unavailable" page, which
+        # reads as an empty agreement. Fail the run rather than overwrite good data.
+        raise RuntimeError("agreement page has no 'Agreement number' (site unavailable?)")
     return {
         "reference": meta_field(txt, "Agreement number"),
         "start": uk_date(meta_field(txt, "Start date") or ""),
@@ -142,6 +151,36 @@ def parse_supplier_csv(csv_text):
         if n:
             names.append(n)
     return sorted(set(names), key=str.casefold)
+
+
+def parse_dm_az(page_html):
+    """One page of a Digital Marketplace supplier A to Z: (company names, next href).
+    Only the supplier link text is read. The description under each name and the
+    supplier's own page (which carries a contact person, phone and email) are never
+    read or stored."""
+    names = [html.unescape(re.sub(r"\s+", " ", m)).strip() for m in
+             re.findall(r'<a class="govuk-link" href="/g-cloud-15/supplier/\d+">([^<]+)</a>',
+                        page_html)]
+    m = re.search(r'href="([^"]+)"\s+rel="next"', page_html)
+    return [n for n in names if n], (html.unescape(m.group(1)) if m else None)
+
+
+def read_gc15_az(fetcher):
+    """Every name on the G-Cloud 15 supplier A to Z, all prefixes and pages."""
+    names = set()
+    for prefix in AZ_PREFIXES:
+        url = "%s?prefix=%s" % (GC15_AZ, prefix)
+        for _ in range(AZ_MAX_PAGES):
+            got, nxt = parse_dm_az(fetcher(url))
+            names.update(got)
+            if not nxt:
+                break
+            url = DM + nxt
+        else:
+            raise RuntimeError("prefix %s ran past %d pages" % (prefix, AZ_MAX_PAGES))
+    if not names:
+        raise RuntimeError("the A to Z gave no supplier names")
+    return sorted(names, key=str.casefold)
 
 
 def ocds_money(v):
@@ -261,17 +300,15 @@ def build_gc15(fetcher, today):
         l["supplierCount"] = None
     suppliers = None
     try:
-        sup = fetcher(SUPPLIERS_URL)
-        if re.search(r"G-Cloud 15|RM1557\.15", sup):
-            nv.append("The GCA suppliers page mentions G-Cloud 15 but no export was parsed; "
-                      "settled by reading the G-Cloud 15 supplier list from the Digital Marketplace.")
-        else:
-            nv.append("Supplier list not verified: %s lists no G-Cloud 15 suppliers (only earlier "
-                      "G-Cloud lots at read time) and the agreement page has no supplier export. "
-                      "Settled by the G-Cloud 15 supplier list on the Digital Marketplace / GCA "
-                      "once published." % SUPPLIERS_URL)
+        suppliers = read_gc15_az(fetcher)
+        nv.append("Supplier list read from the Digital Marketplace G-Cloud 15 supplier A to Z "
+                  "(%s), company names only, %d suppliers. The A to Z does not say which lot "
+                  "each supplier holds, so every lot's list stays null; a supplier's lot is "
+                  "shown only where its own service page was read." % (GC15_AZ, len(suppliers)))
     except Exception as e:  # noqa: BLE001
-        nv.append("Supplier list not verified (%s unreachable: %s)." % (SUPPLIERS_URL, e))
+        nv.append("Supplier list not verified: the Digital Marketplace G-Cloud 15 supplier A to Z "
+                  "(%s) could not be read in full (%s). Settled by re-running when it is "
+                  "reachable." % (GC15_AZ, e))
     nv.append("Agreement end 05/02/2028 (page header) and 'run for 4 years from 6 August 2026, "
               "reopening after 18 months and again after 36 months' (page text) are both "
               "recorded verbatim and not resolved. Settled by the framework award form.")
