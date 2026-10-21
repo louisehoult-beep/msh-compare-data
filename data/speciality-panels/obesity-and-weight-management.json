@@ -22,7 +22,7 @@
   "drugTariff": "2026-10-21",
   "localIntel": "2026-10-21",
   "supplierDirectory": "2026-10-21",
-  "gpPrescribing": "2026-09-30",
+  "gpPrescribing": "2026-10-21",
   "mhraDsu": "2026-10-19",
   "drugTariffViiia": "2026-10-21",
   "hospitalPrescribing": null
@@ -35,7 +35,7 @@
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
   "directorySuppliers": "No supplier directory label maps to this speciality, so no directory-tagged supplier is listed. That is a gap in the directory's vocabulary, not a finding that no company sells here, and no neighbouring page's list is borrowed to fill it.",
-  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202608) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "mhraDsu": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
   "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF 04.05 or 0601023AZ or 0601023AW or 0601023AB. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 51 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
  },
@@ -549,14 +549,14 @@
  },
  "directorySuppliers": [],
  "gpPrescribing": {
-  "generatedOn": "2026-09-30",
+  "generatedOn": "2026-10-21",
   "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
   "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
   "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
   "periods": [
-   "202507",
-   "202607"
+   "202508",
+   "202608"
   ],
   "minBaselineItems": 25,
   "defined": true,
@@ -568,32 +568,32 @@
      "04.05"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 53480,
-    "cost": 866521,
-    "items12m": 559214,
-    "cost12m": 8739828,
-    "itemsYoY": 0.3,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 47978,
+    "cost": 786599,
+    "items12m": 560395,
+    "cost12m": 8637626,
+    "itemsYoY": 2.5,
     "products": 5,
     "topNational": [
      {
       "code": "0405010P0AA",
       "label": "Orlistat",
       "generic": true,
-      "items": 53280,
-      "share": 99.6,
-      "cost": 859302,
-      "yoy": 0.1
+      "items": 47823,
+      "share": 99.7,
+      "cost": 781303,
+      "yoy": 2.4
      },
      {
       "code": "0405010P0BB",
       "label": "Xenical",
       "generic": false,
-      "items": 190,
-      "share": 0.4,
-      "cost": 6500,
-      "yoy": 104.3
+      "items": 144,
+      "share": 0.3,
+      "cost": 4650,
+      "yoy": 51.6
      },
      {
       "code": "0405020U0AA",
@@ -601,25 +601,25 @@
       "generic": true,
       "items": 5,
       "share": 0.0,
-      "cost": 451,
-      "yoy": null
-     },
-     {
-      "code": "0405020U0BB",
-      "label": "Mysimba",
-      "generic": false,
-      "items": 3,
-      "share": 0.0,
-      "cost": 208,
+      "cost": 416,
       "yoy": null
      },
      {
       "code": "0405010P0BC",
       "label": "Alli",
       "generic": false,
+      "items": 4,
+      "share": 0.0,
+      "cost": 91,
+      "yoy": null
+     },
+     {
+      "code": "0405020U0BB",
+      "label": "Mysimba",
+      "generic": false,
       "items": 2,
       "share": 0.0,
-      "cost": 60,
+      "cost": 139,
       "yoy": null
      },
      {
@@ -636,13 +636,13 @@
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 591,
+      "items": 516,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 591,
+        "items": 516,
         "share": 100.0
        }
       ]
@@ -650,42 +650,42 @@
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 2079,
+      "items": 1790,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 2070,
-        "share": 99.6
+        "items": 1789,
+        "share": 99.9
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
-        "items": 9,
-        "share": 0.4
+        "items": 1,
+        "share": 0.1
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 2249,
+      "items": 2060,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 2233,
-        "share": 99.3
+        "items": 2049,
+        "share": 99.5
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
-        "items": 15,
-        "share": 0.7
+        "items": 10,
+        "share": 0.5
        },
        {
         "code": "0405020U0BB",
@@ -699,13 +699,13 @@
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 394,
+      "items": 351,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 394,
+        "items": 351,
         "share": 100.0
        }
       ]
@@ -713,90 +713,104 @@
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 2113,
+      "items": 1976,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 2112,
-        "share": 100.0
+        "items": 1974,
+        "share": 99.9
+       },
+       {
+        "code": "0405020U0AA",
+        "label": "Naltrexone",
+        "generic": true,
+        "items": 1,
+        "share": 0.1
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
         "items": 1,
-        "share": 0.0
+        "share": 0.1
        }
       ]
      },
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 3376,
+      "items": 3079,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 3366,
-        "share": 99.7
+        "items": 3072,
+        "share": 99.8
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
-        "items": 10,
-        "share": 0.3
+        "items": 7,
+        "share": 0.2
        }
       ]
      },
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 543,
+      "items": 481,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 543,
-        "share": 100.0
+        "items": 476,
+        "share": 99.0
+       },
+       {
+        "code": "0405010P0BB",
+        "label": "Xenical",
+        "generic": false,
+        "items": 5,
+        "share": 1.0
        }
       ]
      },
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 1463,
+      "items": 1265,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 1452,
-        "share": 99.2
+        "items": 1256,
+        "share": 99.3
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
-        "items": 11,
-        "share": 0.8
+        "items": 9,
+        "share": 0.7
        }
       ]
      },
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 1008,
+      "items": 862,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 1005,
+        "items": 859,
         "share": 99.7
        },
        {
@@ -811,13 +825,13 @@
      {
       "icb": "QJK",
       "name": "NHS Devon",
-      "items": 726,
+      "items": 676,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 725,
+        "items": 675,
         "share": 99.9
        },
        {
@@ -832,13 +846,13 @@
      {
       "icb": "QVV",
       "name": "NHS Dorset",
-      "items": 593,
+      "items": 563,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 593,
+        "items": 563,
         "share": 100.0
        }
       ]
@@ -846,55 +860,55 @@
      {
       "icb": "D7T5G",
       "name": "NHS Essex",
-      "items": 1347,
+      "items": 1196,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 1343,
-        "share": 99.7
+        "items": 1195,
+        "share": 99.9
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
-        "items": 4,
-        "share": 0.3
+        "items": 1,
+        "share": 0.1
        }
       ]
      },
      {
       "icb": "QR1",
       "name": "NHS Gloucestershire",
-      "items": 288,
+      "items": 257,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 286,
-        "share": 99.3
+        "items": 256,
+        "share": 99.6
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
-        "items": 2,
-        "share": 0.7
+        "items": 1,
+        "share": 0.4
        }
       ]
      },
      {
       "icb": "QOP",
       "name": "NHS Greater Manchester",
-      "items": 3730,
+      "items": 3373,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 3720,
+        "items": 3363,
         "share": 99.7
        },
        {
@@ -909,21 +923,21 @@
      {
       "icb": "QRL",
       "name": "NHS Hampshire and Isle of Wight",
-      "items": 1039,
+      "items": 965,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 1030,
-        "share": 99.1
+        "items": 954,
+        "share": 98.9
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
-        "items": 8,
-        "share": 0.8
+        "items": 10,
+        "share": 1.0
        },
        {
         "code": "0405010P0BC",
@@ -937,13 +951,13 @@
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 750,
+      "items": 663,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 750,
+        "items": 663,
         "share": 100.0
        }
       ]
@@ -951,49 +965,35 @@
      {
       "icb": "QOQ",
       "name": "NHS Humber and North Yorkshire",
-      "items": 2206,
+      "items": 1997,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 2186,
-        "share": 99.1
+        "items": 1978,
+        "share": 99.0
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
         "items": 19,
-        "share": 0.9
-       },
-       {
-        "code": "0405020U0BB",
-        "label": "Mysimba",
-        "generic": false,
-        "items": 1,
-        "share": 0.0
+        "share": 1.0
        }
       ]
      },
      {
       "icb": "QKS",
       "name": "NHS Kent and Medway",
-      "items": 1491,
+      "items": 1360,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 1487,
-        "share": 99.7
-       },
-       {
-        "code": "0405010P0BB",
-        "label": "Xenical",
-        "generic": false,
-        "items": 3,
-        "share": 0.2
+        "items": 1359,
+        "share": 99.9
        },
        {
         "code": "0405020U0AA",
@@ -1007,41 +1007,34 @@
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 2193,
+      "items": 1867,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 2191,
+        "items": 1866,
         "share": 99.9
-       },
-       {
-        "code": "0405020U0AA",
-        "label": "Naltrexone",
-        "generic": true,
-        "items": 1,
-        "share": 0.0
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
         "items": 1,
-        "share": 0.0
+        "share": 0.1
        }
       ]
      },
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 1198,
+      "items": 1100,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 1196,
+        "items": 1098,
         "share": 99.8
        },
        {
@@ -1056,42 +1049,49 @@
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 1223,
+      "items": 1080,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 1212,
-        "share": 99.1
+        "items": 1071,
+        "share": 99.2
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
-        "items": 11,
-        "share": 0.9
+        "items": 8,
+        "share": 0.7
+       },
+       {
+        "code": "0405010P0BC",
+        "label": "Alli",
+        "generic": false,
+        "items": 1,
+        "share": 0.1
        }
       ]
      },
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 1410,
+      "items": 1280,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 1398,
-        "share": 99.1
+        "items": 1276,
+        "share": 99.7
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
-        "items": 11,
-        "share": 0.8
+        "items": 3,
+        "share": 0.2
        },
        {
         "code": "0405010P0BC",
@@ -1105,49 +1105,49 @@
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 1915,
+      "items": 1730,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 1908,
-        "share": 99.6
+        "items": 1724,
+        "share": 99.7
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
-        "items": 7,
-        "share": 0.4
+        "items": 6,
+        "share": 0.3
        }
       ]
      },
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 4370,
+      "items": 3939,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 4362,
-        "share": 99.8
+        "items": 3924,
+        "share": 99.6
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
-        "items": 7,
-        "share": 0.2
+        "items": 13,
+        "share": 0.3
        },
        {
         "code": "0405020U0AA",
         "label": "Naltrexone",
         "generic": true,
-        "items": 1,
-        "share": 0.0
+        "items": 2,
+        "share": 0.1
        }
       ]
      },
@@ -1160,35 +1160,49 @@
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 43,
-        "share": 100.0
+        "items": 42,
+        "share": 97.7
+       },
+       {
+        "code": "0405010P0BB",
+        "label": "Xenical",
+        "generic": false,
+        "items": 1,
+        "share": 2.3
        }
       ]
      },
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 256,
+      "items": 240,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 256,
-        "share": 100.0
+        "items": 238,
+        "share": 99.2
+       },
+       {
+        "code": "0405010P0BB",
+        "label": "Xenical",
+        "generic": false,
+        "items": 2,
+        "share": 0.8
        }
       ]
      },
      {
       "icb": "QOC",
       "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 312,
+      "items": 314,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 312,
+        "items": 314,
         "share": 100.0
        }
       ]
@@ -1196,13 +1210,13 @@
      {
       "icb": "QSL",
       "name": "NHS Somerset",
-      "items": 451,
+      "items": 405,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 451,
+        "items": 405,
         "share": 100.0
        }
       ]
@@ -1210,34 +1224,34 @@
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 1319,
+      "items": 1143,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 1311,
-        "share": 99.4
+        "items": 1139,
+        "share": 99.7
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
-        "items": 8,
-        "share": 0.6
+        "items": 4,
+        "share": 0.3
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 1247,
+      "items": 1065,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 1247,
+        "items": 1065,
         "share": 100.0
        }
       ]
@@ -1245,55 +1259,34 @@
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 2177,
+      "items": 2000,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 2173,
-        "share": 99.8
+        "items": 1999,
+        "share": 100.0
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
-        "items": 4,
-        "share": 0.2
+        "items": 1,
+        "share": 0.1
        }
       ]
      },
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 1667,
+      "items": 1550,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 1661,
-        "share": 99.6
-       },
-       {
-        "code": "0405010P0BB",
-        "label": "Xenical",
-        "generic": false,
-        "items": 6,
-        "share": 0.4
-       }
-      ]
-     },
-     {
-      "icb": "S9B9J",
-      "name": "NHS Surrey and Sussex",
-      "items": 1523,
-      "leaders": [
-       {
-        "code": "0405010P0AA",
-        "label": "Orlistat",
-        "generic": true,
-        "items": 1518,
+        "items": 1545,
         "share": 99.7
        },
        {
@@ -1306,20 +1299,27 @@
       ]
      },
      {
-      "icb": "S0E4D",
-      "name": "NHS Thames Valley",
-      "items": 1089,
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 1351,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 1088,
-        "share": 99.9
+        "items": 1347,
+        "share": 99.7
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
+        "generic": false,
+        "items": 3,
+        "share": 0.2
+       },
+       {
+        "code": "0405010P0BC",
+        "label": "Alli",
         "generic": false,
         "items": 1,
         "share": 0.1
@@ -1327,51 +1327,65 @@
       ]
      },
      {
-      "icb": "QWO",
-      "name": "NHS West Yorkshire",
-      "items": 1994,
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 971,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 1984,
+        "items": 966,
         "share": 99.5
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
-        "items": 9,
+        "items": 5,
         "share": 0.5
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 1786,
+      "leaders": [
+       {
+        "code": "0405010P0AA",
+        "label": "Orlistat",
+        "generic": true,
+        "items": 1782,
+        "share": 99.8
        },
        {
-        "code": "0405020U0AA",
-        "label": "Naltrexone",
-        "generic": true,
-        "items": 1,
-        "share": 0.1
+        "code": "0405010P0BB",
+        "label": "Xenical",
+        "generic": false,
+        "items": 4,
+        "share": 0.2
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 3103,
+      "items": 2679,
       "leaders": [
        {
         "code": "0405010P0AA",
         "label": "Orlistat",
         "generic": true,
-        "items": 3079,
-        "share": 99.2
+        "items": 2669,
+        "share": 99.6
        },
        {
         "code": "0405010P0BB",
         "label": "Xenical",
         "generic": false,
-        "items": 22,
-        "share": 0.7
+        "items": 8,
+        "share": 0.3
        },
        {
         "code": "0405020U0BB",
@@ -1393,1083 +1407,1083 @@
      "0601023AB"
     ],
     "note": "NHSBSA files these under drugs used in diabetes. This figure is every indication together; the dataset cannot split weight management from type 2 diabetes.",
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 523632,
-    "cost": 98744734,
-    "items12m": 5158365,
-    "cost12m": 928257686,
-    "itemsYoY": 37.9,
-    "products": 13,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 488417,
+    "cost": 94993269,
+    "items12m": 5317027,
+    "cost12m": 990469399,
+    "itemsYoY": 48.1,
+    "products": 14,
     "topNational": [
      {
       "code": "0601023AZBB",
       "label": "Mounjaro KwikPen",
       "generic": false,
-      "items": 248902,
-      "share": 47.5,
-      "cost": 57107000,
-      "yoy": 43.5
+      "items": 230392,
+      "share": 47.2,
+      "cost": 52931008,
+      "yoy": 59.5
      },
      {
       "code": "0601023AZAA",
       "label": "Tirzepatide",
       "generic": true,
-      "items": 118695,
-      "share": 22.7,
-      "cost": 28469979,
-      "yoy": 67.8
+      "items": 111860,
+      "share": 22.9,
+      "cost": 26903898,
+      "yoy": 86.2
      },
      {
       "code": "0601023AWBB",
       "label": "Ozempic",
       "generic": false,
-      "items": 69301,
-      "share": 13.2,
-      "cost": 5722103,
-      "yoy": 59.0
+      "items": 65161,
+      "share": 13.3,
+      "cost": 5379114,
+      "yoy": 58.2
      },
      {
       "code": "0601023AWBC",
       "label": "Rybelsus",
       "generic": false,
-      "items": 53651,
-      "share": 10.2,
-      "cost": 4494843,
-      "yoy": 3.7
+      "items": 48885,
+      "share": 10.0,
+      "cost": 6202736,
+      "yoy": 3.8
      },
      {
       "code": "0601023AWAA",
       "label": "Semaglutide",
       "generic": true,
-      "items": 30305,
-      "share": 5.8,
-      "cost": 2695895,
-      "yoy": -21.2
+      "items": 29451,
+      "share": 6.0,
+      "cost": 3331131,
+      "yoy": -15.9
      },
      {
       "code": "0601023AWBD",
       "label": "Wegovy FlexTouch",
       "generic": false,
-      "items": 1191,
-      "share": 0.2,
-      "cost": 135653,
-      "yoy": 90.9
+      "items": 1260,
+      "share": 0.3,
+      "cost": 144441,
+      "yoy": 105.9
      },
      {
       "code": "0601023ABBE",
       "label": "Zegluxen",
       "generic": false,
-      "items": 805,
-      "share": 0.2,
-      "cost": 56439,
-      "yoy": 167.4
+      "items": 684,
+      "share": 0.1,
+      "cost": 46497,
+      "yoy": 56.9
      },
      {
       "code": "0601023ABAA",
       "label": "Liraglutide",
       "generic": true,
-      "items": 634,
+      "items": 586,
       "share": 0.1,
-      "cost": 46085,
-      "yoy": -7.7
+      "cost": 41428,
+      "yoy": -12.4
      },
      {
       "code": "0601023ABBF",
       "label": "Diavic",
       "generic": false,
-      "items": 72,
+      "items": 78,
       "share": 0.0,
-      "cost": 4647,
-      "yoy": -28.7
+      "cost": 5629,
+      "yoy": -21.2
      },
      {
       "code": "0601023ABBC",
       "label": "Saxenda",
       "generic": false,
-      "items": 38,
+      "items": 19,
       "share": 0.0,
-      "cost": 8686,
-      "yoy": 2.7
+      "cost": 3471,
+      "yoy": -51.3
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 10034,
+      "items": 9236,
       "leaders": [
        {
         "code": "0601023AZBB",
         "label": "Mounjaro KwikPen",
         "generic": false,
-        "items": 6645,
-        "share": 66.2
+        "items": 5975,
+        "share": 64.7
        },
        {
         "code": "0601023AWBB",
         "label": "Ozempic",
         "generic": false,
-        "items": 2377,
-        "share": 23.7
+        "items": 2342,
+        "share": 25.4
        },
        {
         "code": "0601023AWBC",
         "label": "Rybelsus",
         "generic": false,
-        "items": 615,
-        "share": 6.1
+        "items": 535,
+        "share": 5.8
        }
       ]
      },
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 13046,
+      "items": 11872,
       "leaders": [
        {
         "code": "0601023AZBB",
         "label": "Mounjaro KwikPen",
         "generic": false,
-        "items": 9495,
-        "share": 72.8
-       },
-       {
-        "code": "0601023AWBC",
-        "label": "Rybelsus",
-        "generic": false,
-        "items": 1054,
-        "share": 8.1
+        "items": 8534,
+        "share": 71.9
        },
        {
         "code": "0601023AWBB",
         "label": "Ozempic",
         "generic": false,
-        "items": 1014,
-        "share": 7.8
+        "items": 984,
+        "share": 8.3
+       },
+       {
+        "code": "0601023AWAA",
+        "label": "Semaglutide",
+        "generic": true,
+        "items": 951,
+        "share": 8.0
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 15381,
+      "items": 13983,
       "leaders": [
        {
         "code": "0601023AZBB",
         "label": "Mounjaro KwikPen",
         "generic": false,
-        "items": 9250,
-        "share": 60.1
+        "items": 8364,
+        "share": 59.8
        },
        {
         "code": "0601023AZAA",
         "label": "Tirzepatide",
         "generic": true,
-        "items": 2358,
-        "share": 15.3
+        "items": 2187,
+        "share": 15.6
        },
        {
         "code": "0601023AWBC",
         "label": "Rybelsus",
         "generic": false,
-        "items": 1635,
-        "share": 10.6
+        "items": 1452,
+        "share": 10.4
        }
       ]
      },
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 7429,
+      "items": 6958,
       "leaders": [
        {
         "code": "0601023AZAA",
         "label": "Tirzepatide",
         "generic": true,
-        "items": 3906,
-        "share": 52.6
+        "items": 3650,
+        "share": 52.5
        },
        {
         "code": "0601023AZBB",
         "label": "Mounjaro KwikPen",
         "generic": false,
-        "items": 1978,
-        "share": 26.6
-       },
-       {
-        "code": "0601023AWAA",
-        "label": "Semaglutide",
-        "generic": true,
-        "items": 987,
-        "share": 13.3
-       }
-      ]
-     },
-     {
-      "icb": "S1Y5D",
-      "name": "NHS Central East",
-      "items": 25442,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 12263,
-        "share": 48.2
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 5835,
-        "share": 22.9
-       },
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 3694,
-        "share": 14.5
-       }
-      ]
-     },
-     {
-      "icb": "QYG",
-      "name": "NHS Cheshire and Merseyside",
-      "items": 23894,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 7629,
-        "share": 31.9
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 5357,
-        "share": 22.4
-       },
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 4201,
-        "share": 17.6
-       }
-      ]
-     },
-     {
-      "icb": "QT6",
-      "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 7073,
-      "leaders": [
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 3581,
-        "share": 50.6
-       },
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 2629,
-        "share": 37.2
-       },
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 604,
-        "share": 8.5
-       }
-      ]
-     },
-     {
-      "icb": "QWU",
-      "name": "NHS Coventry and Warwickshire",
-      "items": 9152,
-      "leaders": [
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 3283,
-        "share": 35.9
-       },
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 2737,
-        "share": 29.9
-       },
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 1436,
-        "share": 15.7
-       }
-      ]
-     },
-     {
-      "icb": "QJ2",
-      "name": "NHS Derby and Derbyshire",
-      "items": 6929,
-      "leaders": [
-       {
-        "code": "0601023AWBC",
-        "label": "Rybelsus",
-        "generic": false,
-        "items": 1733,
-        "share": 25.0
-       },
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 1691,
-        "share": 24.4
-       },
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 1657,
-        "share": 23.9
-       }
-      ]
-     },
-     {
-      "icb": "QJK",
-      "name": "NHS Devon",
-      "items": 10299,
-      "leaders": [
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 4672,
-        "share": 45.4
-       },
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 2343,
-        "share": 22.7
-       },
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 2192,
-        "share": 21.3
-       }
-      ]
-     },
-     {
-      "icb": "QVV",
-      "name": "NHS Dorset",
-      "items": 4364,
-      "leaders": [
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 1809,
-        "share": 41.5
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 1488,
-        "share": 34.1
-       },
-       {
-        "code": "0601023AWAA",
-        "label": "Semaglutide",
-        "generic": true,
-        "items": 611,
-        "share": 14.0
-       }
-      ]
-     },
-     {
-      "icb": "D7T5G",
-      "name": "NHS Essex",
-      "items": 18041,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 8871,
-        "share": 49.2
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 5154,
-        "share": 28.6
-       },
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 2232,
-        "share": 12.4
-       }
-      ]
-     },
-     {
-      "icb": "QR1",
-      "name": "NHS Gloucestershire",
-      "items": 6103,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 2896,
-        "share": 47.5
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 1697,
-        "share": 27.8
-       },
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 848,
-        "share": 13.9
-       }
-      ]
-     },
-     {
-      "icb": "QOP",
-      "name": "NHS Greater Manchester",
-      "items": 30448,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 10684,
-        "share": 35.1
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 7809,
-        "share": 25.6
-       },
-       {
-        "code": "0601023AWBC",
-        "label": "Rybelsus",
-        "generic": false,
-        "items": 4410,
-        "share": 14.5
-       }
-      ]
-     },
-     {
-      "icb": "QRL",
-      "name": "NHS Hampshire and Isle of Wight",
-      "items": 19301,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 12059,
-        "share": 62.5
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 3251,
-        "share": 16.8
-       },
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 1994,
-        "share": 10.3
-       }
-      ]
-     },
-     {
-      "icb": "QGH",
-      "name": "NHS Herefordshire and Worcestershire",
-      "items": 9121,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 6346,
-        "share": 69.6
-       },
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 1431,
-        "share": 15.7
-       },
-       {
-        "code": "0601023AWBC",
-        "label": "Rybelsus",
-        "generic": false,
-        "items": 1012,
-        "share": 11.1
-       }
-      ]
-     },
-     {
-      "icb": "QOQ",
-      "name": "NHS Humber and North Yorkshire",
-      "items": 20504,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 10163,
-        "share": 49.6
-       },
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 4254,
-        "share": 20.7
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 2998,
-        "share": 14.6
-       }
-      ]
-     },
-     {
-      "icb": "QKS",
-      "name": "NHS Kent and Medway",
-      "items": 20836,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 12688,
-        "share": 60.9
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 3535,
-        "share": 17.0
-       },
-       {
-        "code": "0601023AWAA",
-        "label": "Semaglutide",
-        "generic": true,
-        "items": 1955,
-        "share": 9.4
-       }
-      ]
-     },
-     {
-      "icb": "QE1",
-      "name": "NHS Lancashire and South Cumbria",
-      "items": 17707,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 7708,
-        "share": 43.5
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 3600,
-        "share": 20.3
-       },
-       {
-        "code": "0601023AWBC",
-        "label": "Rybelsus",
-        "generic": false,
-        "items": 2962,
-        "share": 16.7
-       }
-      ]
-     },
-     {
-      "icb": "QK1",
-      "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 15168,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 8735,
-        "share": 57.6
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 2172,
-        "share": 14.3
-       },
-       {
-        "code": "0601023AWBC",
-        "label": "Rybelsus",
-        "generic": false,
-        "items": 1847,
-        "share": 12.2
-       }
-      ]
-     },
-     {
-      "icb": "QJM",
-      "name": "NHS Lincolnshire",
-      "items": 9996,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 5992,
-        "share": 59.9
-       },
-       {
-        "code": "0601023AWBC",
-        "label": "Rybelsus",
-        "generic": false,
-        "items": 1457,
-        "share": 14.6
-       },
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 1241,
-        "share": 12.4
-       }
-      ]
-     },
-     {
-      "icb": "T6Y0W",
-      "name": "NHS Norfolk and Suffolk",
-      "items": 15669,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 7828,
-        "share": 50.0
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 3476,
-        "share": 22.2
-       },
-       {
-        "code": "0601023AWBC",
-        "label": "Rybelsus",
-        "generic": false,
-        "items": 2537,
-        "share": 16.2
-       }
-      ]
-     },
-     {
-      "icb": "QMF",
-      "name": "NHS North East London",
-      "items": 14055,
-      "leaders": [
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 5590,
-        "share": 39.8
-       },
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 4193,
-        "share": 29.8
-       },
-       {
-        "code": "0601023AWAA",
-        "label": "Semaglutide",
-        "generic": true,
-        "items": 2768,
-        "share": 19.7
-       }
-      ]
-     },
-     {
-      "icb": "QHM",
-      "name": "NHS North East and North Cumbria",
-      "items": 33913,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 18343,
-        "share": 54.1
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 5419,
-        "share": 16.0
-       },
-       {
-        "code": "0601023AWBC",
-        "label": "Rybelsus",
-        "generic": false,
-        "items": 5047,
-        "share": 14.9
-       }
-      ]
-     },
-     {
-      "icb": "QPM",
-      "name": "NHS Northamptonshire",
-      "items": 10166,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 5684,
-        "share": 55.9
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 2593,
-        "share": 25.5
-       },
-       {
-        "code": "0601023AWBC",
-        "label": "Rybelsus",
-        "generic": false,
-        "items": 1035,
-        "share": 10.2
-       }
-      ]
-     },
-     {
-      "icb": "QT1",
-      "name": "NHS Nottingham and Nottinghamshire",
-      "items": 8759,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 5237,
-        "share": 59.8
-       },
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 1916,
-        "share": 21.9
-       },
-       {
-        "code": "0601023AWBC",
-        "label": "Rybelsus",
-        "generic": false,
-        "items": 1004,
-        "share": 11.5
-       }
-      ]
-     },
-     {
-      "icb": "QOC",
-      "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 5239,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 1916,
-        "share": 36.6
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 1113,
-        "share": 21.2
-       },
-       {
-        "code": "0601023AWAA",
-        "label": "Semaglutide",
-        "generic": true,
-        "items": 921,
-        "share": 17.6
-       }
-      ]
-     },
-     {
-      "icb": "QSL",
-      "name": "NHS Somerset",
-      "items": 6135,
-      "leaders": [
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 2927,
-        "share": 47.7
-       },
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 1582,
+        "items": 1796,
         "share": 25.8
        },
        {
         "code": "0601023AWAA",
         "label": "Semaglutide",
         "generic": true,
-        "items": 868,
-        "share": 14.1
+        "items": 908,
+        "share": 13.0
        }
       ]
      },
      {
-      "icb": "QKK",
-      "name": "NHS South East London",
-      "items": 9554,
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 23889,
       "leaders": [
        {
         "code": "0601023AZBB",
         "label": "Mounjaro KwikPen",
         "generic": false,
-        "items": 3593,
-        "share": 37.6
+        "items": 11526,
+        "share": 48.2
        },
        {
         "code": "0601023AZAA",
         "label": "Tirzepatide",
         "generic": true,
-        "items": 3345,
-        "share": 35.0
-       },
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 1028,
-        "share": 10.8
-       }
-      ]
-     },
-     {
-      "icb": "QWE",
-      "name": "NHS South West London",
-      "items": 9042,
-      "leaders": [
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 4276,
-        "share": 47.3
-       },
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 3340,
-        "share": 36.9
-       },
-       {
-        "code": "0601023AWAA",
-        "label": "Semaglutide",
-        "generic": true,
-        "items": 705,
-        "share": 7.8
-       }
-      ]
-     },
-     {
-      "icb": "QF7",
-      "name": "NHS South Yorkshire",
-      "items": 14610,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 8273,
-        "share": 56.6
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 2778,
-        "share": 19.0
-       },
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 1632,
-        "share": 11.2
-       }
-      ]
-     },
-     {
-      "icb": "QNC",
-      "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 7729,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 3829,
-        "share": 49.5
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 1543,
-        "share": 20.0
-       },
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 1069,
-        "share": 13.8
-       }
-      ]
-     },
-     {
-      "icb": "S9B9J",
-      "name": "NHS Surrey and Sussex",
-      "items": 25039,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 13556,
-        "share": 54.1
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 6179,
-        "share": 24.7
-       },
-       {
-        "code": "0601023AWBB",
-        "label": "Ozempic",
-        "generic": false,
-        "items": 2790,
-        "share": 11.1
-       }
-      ]
-     },
-     {
-      "icb": "S0E4D",
-      "name": "NHS Thames Valley",
-      "items": 17525,
-      "leaders": [
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 7944,
-        "share": 45.3
-       },
-       {
-        "code": "0601023AZAA",
-        "label": "Tirzepatide",
-        "generic": true,
-        "items": 4077,
+        "items": 5571,
         "share": 23.3
        },
        {
         "code": "0601023AWBB",
         "label": "Ozempic",
         "generic": false,
-        "items": 2483,
-        "share": 14.2
+        "items": 3363,
+        "share": 14.1
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 22073,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 7033,
+        "share": 31.9
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 5027,
+        "share": 22.8
+       },
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 3911,
+        "share": 17.7
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 6558,
+      "leaders": [
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 3332,
+        "share": 50.8
+       },
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 2399,
+        "share": 36.6
+       },
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 599,
+        "share": 9.1
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 8455,
+      "leaders": [
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 3018,
+        "share": 35.7
+       },
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 2426,
+        "share": 28.7
+       },
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 1357,
+        "share": 16.0
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 6282,
+      "leaders": [
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 1591,
+        "share": 25.3
+       },
+       {
+        "code": "0601023AWBC",
+        "label": "Rybelsus",
+        "generic": false,
+        "items": 1511,
+        "share": 24.1
+       },
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 1491,
+        "share": 23.7
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 9767,
+      "leaders": [
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 4457,
+        "share": 45.6
+       },
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 2226,
+        "share": 22.8
+       },
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 2011,
+        "share": 20.6
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 4300,
+      "leaders": [
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 1786,
+        "share": 41.5
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 1394,
+        "share": 32.4
+       },
+       {
+        "code": "0601023AWAA",
+        "label": "Semaglutide",
+        "generic": true,
+        "items": 622,
+        "share": 14.5
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 16994,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 8373,
+        "share": 49.3
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 4812,
+        "share": 28.3
+       },
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 2029,
+        "share": 11.9
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 5717,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 2753,
+        "share": 48.2
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 1554,
+        "share": 27.2
+       },
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 833,
+        "share": 14.6
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 28175,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 9763,
+        "share": 34.7
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 7350,
+        "share": 26.1
+       },
+       {
+        "code": "0601023AWBC",
+        "label": "Rybelsus",
+        "generic": false,
+        "items": 4068,
+        "share": 14.4
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 18122,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 11213,
+        "share": 61.9
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 3000,
+        "share": 16.6
+       },
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 1964,
+        "share": 10.8
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 8428,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 5831,
+        "share": 69.2
+       },
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 1340,
+        "share": 15.9
+       },
+       {
+        "code": "0601023AWBC",
+        "label": "Rybelsus",
+        "generic": false,
+        "items": 919,
+        "share": 10.9
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 19036,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 9388,
+        "share": 49.3
+       },
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 3941,
+        "share": 20.7
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 2831,
+        "share": 14.9
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 19488,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 11837,
+        "share": 60.7
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 3258,
+        "share": 16.7
+       },
+       {
+        "code": "0601023AWAA",
+        "label": "Semaglutide",
+        "generic": true,
+        "items": 1794,
+        "share": 9.2
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 16053,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 6988,
+        "share": 43.5
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 3303,
+        "share": 20.6
+       },
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 2595,
+        "share": 16.2
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 14292,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 8251,
+        "share": 57.7
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 2051,
+        "share": 14.4
+       },
+       {
+        "code": "0601023AWBC",
+        "label": "Rybelsus",
+        "generic": false,
+        "items": 1701,
+        "share": 11.9
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 9672,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 5697,
+        "share": 58.9
+       },
+       {
+        "code": "0601023AWBC",
+        "label": "Rybelsus",
+        "generic": false,
+        "items": 1358,
+        "share": 14.0
+       },
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 1158,
+        "share": 12.0
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 15021,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 7424,
+        "share": 49.4
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 3276,
+        "share": 21.8
+       },
+       {
+        "code": "0601023AWBC",
+        "label": "Rybelsus",
+        "generic": false,
+        "items": 2368,
+        "share": 15.8
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 13268,
+      "leaders": [
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 5303,
+        "share": 40.0
+       },
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 3798,
+        "share": 28.6
+       },
+       {
+        "code": "0601023AWAA",
+        "label": "Semaglutide",
+        "generic": true,
+        "items": 2683,
+        "share": 20.2
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 32187,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 17259,
+        "share": 53.6
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 5312,
+        "share": 16.5
+       },
+       {
+        "code": "0601023AWBC",
+        "label": "Rybelsus",
+        "generic": false,
+        "items": 4539,
+        "share": 14.1
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 9311,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 5109,
+        "share": 54.9
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 2468,
+        "share": 26.5
+       },
+       {
+        "code": "0601023AWBC",
+        "label": "Rybelsus",
+        "generic": false,
+        "items": 966,
+        "share": 10.4
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 8114,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 4792,
+        "share": 59.1
+       },
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 1804,
+        "share": 22.2
+       },
+       {
+        "code": "0601023AWBC",
+        "label": "Rybelsus",
+        "generic": false,
+        "items": 926,
+        "share": 11.4
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 4983,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 1799,
+        "share": 36.1
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 1055,
+        "share": 21.2
+       },
+       {
+        "code": "0601023AWAA",
+        "label": "Semaglutide",
+        "generic": true,
+        "items": 933,
+        "share": 18.7
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 5724,
+      "leaders": [
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 2741,
+        "share": 47.9
+       },
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 1433,
+        "share": 25.0
+       },
+       {
+        "code": "0601023AWAA",
+        "label": "Semaglutide",
+        "generic": true,
+        "items": 830,
+        "share": 14.5
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 8763,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 3289,
+        "share": 37.5
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 3125,
+        "share": 35.7
+       },
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 956,
+        "share": 10.9
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 8552,
+      "leaders": [
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 4023,
+        "share": 47.0
+       },
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 3095,
+        "share": 36.2
+       },
+       {
+        "code": "0601023AWAA",
+        "label": "Semaglutide",
+        "generic": true,
+        "items": 653,
+        "share": 7.6
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 13397,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 7650,
+        "share": 57.1
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 2505,
+        "share": 18.7
+       },
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 1511,
+        "share": 11.3
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 7267,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 3644,
+        "share": 50.1
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 1445,
+        "share": 19.9
+       },
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 972,
+        "share": 13.4
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 23504,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 12608,
+        "share": 53.6
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 5970,
+        "share": 25.4
+       },
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 2655,
+        "share": 11.3
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 16580,
+      "leaders": [
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 7425,
+        "share": 44.8
+       },
+       {
+        "code": "0601023AZAA",
+        "label": "Tirzepatide",
+        "generic": true,
+        "items": 4019,
+        "share": 24.2
+       },
+       {
+        "code": "0601023AWBB",
+        "label": "Ozempic",
+        "generic": false,
+        "items": 2292,
+        "share": 13.8
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 20588,
+      "items": 18927,
       "leaders": [
        {
         "code": "0601023AZBB",
         "label": "Mounjaro KwikPen",
         "generic": false,
-        "items": 10929,
-        "share": 53.1
+        "items": 10009,
+        "share": 52.9
        },
        {
         "code": "0601023AWBC",
         "label": "Rybelsus",
         "generic": false,
-        "items": 3449,
-        "share": 16.8
+        "items": 3064,
+        "share": 16.2
        },
        {
         "code": "0601023AZAA",
         "label": "Tirzepatide",
         "generic": true,
-        "items": 3156,
+        "items": 2892,
         "share": 15.3
        }
       ]
@@ -2477,28 +2491,28 @@
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 25312,
+      "items": 23408,
       "leaders": [
        {
         "code": "0601023AZBB",
         "label": "Mounjaro KwikPen",
         "generic": false,
-        "items": 9528,
-        "share": 37.6
+        "items": 8835,
+        "share": 37.7
        },
        {
         "code": "0601023AZAA",
         "label": "Tirzepatide",
         "generic": true,
-        "items": 7783,
-        "share": 30.7
+        "items": 7306,
+        "share": 31.2
        },
        {
         "code": "0601023AWBB",
         "label": "Ozempic",
         "generic": false,
-        "items": 3422,
-        "share": 13.5
+        "items": 3068,
+        "share": 13.1
        }
       ]
      }

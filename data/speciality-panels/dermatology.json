@@ -22,7 +22,7 @@
   "drugTariff": "2026-10-21",
   "localIntel": "2026-10-21",
   "supplierDirectory": "2026-10-21",
-  "gpPrescribing": "2026-09-30",
+  "gpPrescribing": "2026-10-21",
   "mhraDsu": "2026-10-19",
   "drugTariffViiia": "2026-10-21",
   "hospitalPrescribing": "2026-09-30"
@@ -35,12 +35,12 @@
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, narrowed to the lines NHSBSA itself files under BNF 21.22, and then summarised. The BNF code is NHSBSA's own classification of each line and is used in preference to matching the product name, because a name cannot see a branded product: NHSBSA lists many brands as \"Generic <brand name>\", which says nothing about what the product is. A line published without a BNF code is counted only if its virtual medicinal product description matches /emollient|emulsifying wax|(?:white|yellow) soft paraffin|liquid paraffin|paraffin-free|\\burea \\d|lauromacrogols|eczema|dry skin balm|heel balm|hand balm|skin balm|callus removing/i. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,879 lines, most of them dressings and elastic hosiery, which are the tissue viability page's. Every count and price below is taken from the lines selected. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's.",
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: dermatology). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 8 of the 17 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
-  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202608) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (5 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-19.",
   "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF chapter 13. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 51 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first.",
   "drugTariffMoves": "Compares this panel's own Drug Tariff slice (the lines described under drugTariff) for 2026-10 with the same slice for 2026-09, both published by NHSBSA. A line is the same line when supplier, product name, pack size, quantity and unit of measure all match; it has moved when its reimbursement price differs. Percentages are the change from last month's price, rounded to one decimal place. A line listed this month and not last is shown as new, and a line listed last month and not this month is shown as no longer listed: NHSBSA's list does not say why, so neither is described as launched or discontinued. 0 line(s) whose key appears more than once in a month are left out of the comparison rather than guessed at. This is the Drug Tariff reimbursement price, not the price a supplier charges a pharmacy or a hospital, and a month with no moves is an honest result. The previous month is kept in data/tariff-snapshots.json by the daily tariff refresh, because the Part IX file itself holds only the current month.",
   "discontinuedOnFormulary": "A product is called discontinued only where the NHS Dictionary of Medicines and Devices (dm+d) browser says so for its own record, with the pack discontinued dates it prints. A formulary is listed only where its own document or page, read on the date shown, still names that product; the line is quoted as printed. Three kinds of listing are kept apart: listed as a recommended or ranked product, listed as a less cost-effective option, and named as non-formulary. The last is not a recommendation; it is shown because the discontinued name is still on the live page. Whether the product is in the Drug Tariff is checked against the Part IX file for 2026-10 when the panel is built. A formulary document that is not in the list was not read or does not name the product; its absence is not a finding. Retail availability is not covered: dm+d records NHS supply, and a product can still be sold elsewhere. Organisation, document, date and link come from the local sources listed under Local intelligence, so an entry whose source link has gone is withheld here as well.",
-  "marketShare": "Computed at every build from NHSBSA data, not bought in and not estimated. PRIMARY CARE: every item dispensed in England against a GP practice prescription, English Prescribing Dataset with SNOMED code, for the BNF codes named on each market (13.02.01, 21.22), latest month 202607, with a 12-month total. SECONDARY CARE: NHS trust prescriptions dispensed in a community pharmacy (NHSBSA hospital prescribing dispensed in the community), the same BNF codes, 12 months; it is not in-hospital use, which NHSBSA publishes only by chemical substance and so cannot show a brand. DRUG TARIFF: every Part IX line NHSBSA files under the same BNF codes, in any part, counted in tariff lines per supplier, which measures what is listed and reimbursable, not what is sold. A BRAND is the first word of NHSBSA's product label, so the products of one range are counted together; a label that names its supplier in brackets stays on its own, and every generic is one row. Share is share of ITEMS, never company share: the data does not name the company, and one company can own several brands. A change on a year earlier is printed only where that month had at least 25 items. An ICB's share is the brand's items as a share of that ICB's whole market in the same month."
+  "marketShare": "Computed at every build from NHSBSA data, not bought in and not estimated. PRIMARY CARE: every item dispensed in England against a GP practice prescription, English Prescribing Dataset with SNOMED code, for the BNF codes named on each market (13.02.01, 21.22), latest month 202608, with a 12-month total. SECONDARY CARE: NHS trust prescriptions dispensed in a community pharmacy (NHSBSA hospital prescribing dispensed in the community), the same BNF codes, 12 months; it is not in-hospital use, which NHSBSA publishes only by chemical substance and so cannot show a brand. DRUG TARIFF: every Part IX line NHSBSA files under the same BNF codes, in any part, counted in tariff lines per supplier, which measures what is listed and reimbursable, not what is sold. A BRAND is the first word of NHSBSA's product label, so the products of one range are counted together; a label that names its supplier in brackets stays on its own, and every generic is one row. Share is share of ITEMS, never company share: the data does not name the company, and one company can own several brands. A change on a year earlier is printed only where that month had at least 25 items. An ICB's share is the brand's items as a share of that ICB's whole market in the same month."
  },
  "counts": {
   "frameworks": 0,
@@ -1116,7 +1116,7 @@
    "url": "https://www.covwarkformulary.nhs.uk/docs/chapter05/RD005-CW%20Emollient%20PPL.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "unchecked"
@@ -1140,7 +1140,7 @@
    "url": "https://www.oxfordhealthformulary.nhs.uk/docs/BOB%20ICB%20Emollient%20Guideline.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "unchecked"
@@ -1164,7 +1164,7 @@
    "url": "https://mot.southyorkshire.icb.nhs.uk/sheffield/files/Sheffield%20Formulary%20Skin%20-%20Abbreviated%20guide%20to%20emollients.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "unchecked"
@@ -1185,7 +1185,7 @@
    "url": "https://remedy.bnssg.icb.nhs.uk/media/gg3mw21j/emollients-table-2025-v22-final.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "unreachable",
     "http": 403
    }
@@ -1208,7 +1208,7 @@
    "url": "https://remedy.bnssg.icb.nhs.uk/media/6115/emollients-table-v93-final.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "unreachable",
     "http": 403
    }
@@ -1231,7 +1231,7 @@
    "url": "https://primarycare.northeastlondon.icb.nhs.uk/wp-content/uploads/2025/07/NHS-NEL-Emollient-Guidelines-v1.1-December-2024.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "unchecked"
@@ -1255,7 +1255,7 @@
    "url": "https://mot.southyorkshire.icb.nhs.uk/barnsley/files/Barnsley%20Guideline%20Emollient%20Formulary%20Choices.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "unchecked"
@@ -1275,7 +1275,7 @@
    "url": "https://mot.southyorkshire.icb.nhs.uk/rotherham/files/Rotherham%20Guideline%20Emollient.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1298,7 +1298,7 @@
    "url": "https://www.greatermanchesterformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1321,7 +1321,7 @@
    "url": "https://www.humberandnorthyorkshireformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1343,7 +1343,7 @@
    "url": "https://www.northeastnorthcumbriaformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1365,7 +1365,7 @@
    "url": "https://www.cheshireandmerseysideformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1384,7 +1384,7 @@
    "url": "https://www.lancashireandsouthcumbriaformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1404,7 +1404,7 @@
    "url": "https://www.wyicsapc.co.uk/wp-content/uploads/2024/09/Emollient-Prescribing-Guidelines-July-2024-FINAL-v2.0.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "unreachable",
     "http": 403
    }
@@ -1426,7 +1426,7 @@
    "url": "https://www.leedsformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1446,7 +1446,7 @@
    "url": "https://www.nottsapc.nhs.uk/media/mp0pgkls/emollient-formulary.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1466,7 +1466,7 @@
    "url": "https://lincolnshire-pacef.nhs.uk/download_file/1484/323",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1485,7 +1485,7 @@
    "url": "https://www.leicestershireformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1507,7 +1507,7 @@
    "url": "https://www.birminghamandsurroundsformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1526,7 +1526,7 @@
    "url": "https://www.blackcountryformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1549,7 +1549,7 @@
    "url": "https://www.hwics.org.uk/application/files/3117/8643/6982/HW_Emollient_Prescribing_Guidelines_v2.2.1_11082026.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1572,7 +1572,7 @@
    "url": "https://www.shropshireandtelfordformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1596,7 +1596,7 @@
    "url": "https://www.staffordshireandstokeontrentformulary.nhs.uk/docs/files/Emollient%20Formulary%20Choices%20Guideline%20v1%20November%202025.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "unchecked"
@@ -1618,7 +1618,7 @@
    "url": "https://www.bedsformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1640,7 +1640,7 @@
    "url": "https://www.cambridgeshireandpeterboroughformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1660,7 +1660,7 @@
    "url": "https://www.hweclinicalguidance.nhs.uk/all-clinical-areas-documents/download?cid=3871&checksum=551cb238f4895024b98d1943b708de7c",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "unreachable",
     "http": 403
    }
@@ -1682,7 +1682,7 @@
    "url": "https://www.midandsouthessexformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1706,7 +1706,7 @@
    "url": "https://nwknowledgenow.nhs.uk/wp-content/uploads/2026/03/Emollient-pathway-v1.4-March-2026.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "unchecked"
@@ -1728,7 +1728,7 @@
    "url": "https://www.ipswichandeastsuffolkformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1750,7 +1750,7 @@
    "url": "https://www.ncl-jointformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1774,7 +1774,7 @@
    "url": "https://www.selondonics.org/wp-content/uploads/dlm_uploads/Emollient-Guideline-SEL-FINAL-May-2023-v2.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "unchecked"
@@ -1793,7 +1793,7 @@
    "url": "https://www.swljointmedicinesformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1816,7 +1816,7 @@
    "url": "https://www.kentandmedwayformulary.nhs.uk/media/1963/km-emollient-prescribing-guidance-for-adults-children.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1839,7 +1839,7 @@
    "url": "https://www.sussexformulary.nhs.uk/therapeutic-sections/13-skin/131-dry-and-scaling-skin-disorders/",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1862,7 +1862,7 @@
    "url": "https://surrey.res.services/PAD/Content/Documents/2/PAD/20250909_Emollients%20full%20guideline.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1884,7 +1884,7 @@
    "url": "https://www.frimleyhealthformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1907,7 +1907,7 @@
    "url": "https://www.hiowformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1929,7 +1929,7 @@
    "url": "https://www.dorsetformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1953,7 +1953,7 @@
    "url": "https://bswformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1976,7 +1976,7 @@
    "url": "https://nhssomerset.nhs.uk/wp-content/uploads/sites/2/Emollient-Guidance-May2024.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1995,7 +1995,7 @@
    "url": "https://northeast.devonformularyguidance.nhs.uk/formulary/chapters/13-skin/13-2-emollient-and-barrier-preparations/13-2-1-emollients",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -2015,7 +2015,7 @@
    "url": "https://www.eclipsesolutions.org/UploadedFiles/902_Emollient%20prescribing%20guidelines%20V10.3.pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -2038,7 +2038,7 @@
    "url": "https://www.gloshospitals.nhs.uk/documents/8335/Emollient_Formulary..pdf",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -2061,7 +2061,7 @@
    "url": "https://formulary.nhs.scot/east/skin/skin-conditions/eczema/",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -2083,7 +2083,7 @@
    "url": "https://formulary.nhs.scot/west/skin/skin-conditions/eczema/",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -2105,7 +2105,7 @@
    "url": "https://www.grampianformulary.scot.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100&Expanded=0",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -2124,7 +2124,7 @@
    "url": "https://niformulary.hscni.net/formulary/13-0-skin/13-2-emollients-and-barrier-preparations/13-2-1-emollients/",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -2144,7 +2144,7 @@
    "url": "https://pthb.nhs.wales/services/pharmacy-and-medicines-management/professionals/prescribing-guidelines/files/pthb-emollient-guidelines-for-adults-and-children1/",
    "verifiedOn": "2026-09-29",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -2629,14 +2629,14 @@
   }
  ],
  "gpPrescribing": {
-  "generatedOn": "2026-09-30",
+  "generatedOn": "2026-10-21",
   "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
   "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
   "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
   "periods": [
-   "202507",
-   "202607"
+   "202508",
+   "202608"
   ],
   "minBaselineItems": 25,
   "defined": true,
@@ -2649,271 +2649,271 @@
      "21.22"
     ],
     "note": "Most prescribed emollients are now coded to 21.22 (Appliances), not 13.02. Both are counted; 13.02.02 barrier preparations are not.",
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 1469500,
-    "cost": 9580306,
-    "items12m": 16529542,
-    "cost12m": 106616127,
-    "itemsYoY": 2.7,
-    "products": 173,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 1286896,
+    "cost": 8374297,
+    "items12m": 16547424,
+    "cost12m": 106772275,
+    "itemsYoY": 1.4,
+    "products": 170,
     "topNational": [
      {
       "code": "130201000BBIC",
       "label": "Dermol",
       "generic": false,
-      "items": 215440,
-      "share": 14.7,
-      "cost": 1524706,
-      "yoy": 7.4
+      "items": 188206,
+      "share": 14.6,
+      "cost": 1333281,
+      "yoy": 4.9
      },
      {
       "code": "21220000241",
       "label": "Epimax original cream",
       "generic": false,
-      "items": 151425,
-      "share": 10.3,
-      "cost": 408535,
-      "yoy": 7.0
+      "items": 134398,
+      "share": 10.4,
+      "cost": 362677,
+      "yoy": 5.2
      },
      {
       "code": "21220000233",
       "label": "Cetraben cream",
       "generic": false,
-      "items": 118849,
-      "share": 8.1,
-      "cost": 852363,
-      "yoy": 2.3
+      "items": 103144,
+      "share": 8.0,
+      "cost": 740649,
+      "yoy": 0.8
      },
      {
       "code": "21220000214",
       "label": "Zerobase",
       "generic": false,
-      "items": 74673,
+      "items": 66115,
       "share": 5.1,
-      "cost": 434684,
-      "yoy": -5.0
+      "cost": 383261,
+      "yoy": -4.4
      },
      {
       "code": "21220000205",
       "label": "Hydromol ointment",
       "generic": false,
-      "items": 65855,
-      "share": 4.5,
-      "cost": 424952,
-      "yoy": 5.3
+      "items": 56621,
+      "share": 4.4,
+      "cost": 363925,
+      "yoy": 2.2
      },
      {
       "code": "130201000BBJG",
       "label": "Doublebase gel",
       "generic": false,
-      "items": 47447,
+      "items": 41291,
       "share": 3.2,
-      "cost": 337030,
-      "yoy": -5.9
+      "cost": 296936,
+      "yoy": -7.0
      },
      {
       "code": "21220000284",
       "label": "Epimax excetra cream",
       "generic": false,
-      "items": 44816,
-      "share": 3.0,
-      "cost": 155023,
-      "yoy": 7.7
+      "items": 39383,
+      "share": 3.1,
+      "cost": 136939,
+      "yoy": 6.3
      },
      {
       "code": "130201000BBCJ",
       "label": "Aveeno cream",
       "generic": false,
-      "items": 40644,
-      "share": 2.8,
-      "cost": 408629,
-      "yoy": -9.5
+      "items": 34853,
+      "share": 2.7,
+      "cost": 347678,
+      "yoy": -11.3
      },
      {
       "code": "130201000BBKF",
       "label": "Dermol cream",
       "generic": false,
-      "items": 36371,
+      "items": 32157,
       "share": 2.5,
-      "cost": 274452,
-      "yoy": -2.1
+      "cost": 242833,
+      "yoy": -3.4
      },
      {
       "code": "21220000101",
       "label": "Epaderm cream",
       "generic": false,
-      "items": 34885,
-      "share": 2.4,
-      "cost": 288645,
-      "yoy": 3.7
+      "items": 30035,
+      "share": 2.3,
+      "cost": 249838,
+      "yoy": 1.3
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 22264,
+      "items": 19463,
       "leaders": [
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 6754,
-        "share": 30.3
+        "items": 5930,
+        "share": 30.5
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 3337,
-        "share": 15.0
+        "items": 2839,
+        "share": 14.6
        },
        {
         "code": "21220000205",
         "label": "Hydromol ointment",
         "generic": false,
-        "items": 1499,
-        "share": 6.7
+        "items": 1215,
+        "share": 6.2
        }
       ]
      },
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 69692,
+      "items": 58892,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 13898,
+        "items": 11741,
         "share": 19.9
        },
        {
         "code": "21220000233",
         "label": "Cetraben cream",
         "generic": false,
-        "items": 5359,
-        "share": 7.7
+        "items": 4318,
+        "share": 7.3
        },
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 4321,
-        "share": 6.2
+        "items": 3478,
+        "share": 5.9
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 46920,
+      "items": 40548,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 8839,
+        "items": 7611,
         "share": 18.8
        },
        {
         "code": "21220000233",
         "label": "Cetraben cream",
         "generic": false,
-        "items": 6954,
-        "share": 14.8
+        "items": 6167,
+        "share": 15.2
        },
        {
         "code": "21220000126",
         "label": "AproDerm emollient cream",
         "generic": false,
-        "items": 2140,
-        "share": 4.6
+        "items": 1991,
+        "share": 4.9
        }
       ]
      },
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 19412,
+      "items": 16935,
       "leaders": [
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 4590,
-        "share": 23.6
+        "items": 4007,
+        "share": 23.7
        },
        {
         "code": "21220000284",
         "label": "Epimax excetra cream",
         "generic": false,
-        "items": 2243,
-        "share": 11.6
+        "items": 1981,
+        "share": 11.7
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 1801,
-        "share": 9.3
+        "items": 1507,
+        "share": 8.9
        }
       ]
      },
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 63765,
+      "items": 56105,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 10389,
-        "share": 16.3
+        "items": 9111,
+        "share": 16.2
        },
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 8118,
-        "share": 12.7
+        "items": 7252,
+        "share": 12.9
        },
        {
         "code": "21220000233",
         "label": "Cetraben cream",
         "generic": false,
-        "items": 7302,
-        "share": 11.5
+        "items": 6352,
+        "share": 11.3
        }
       ]
      },
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 81438,
+      "items": 70372,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 17741,
-        "share": 21.8
+        "items": 15295,
+        "share": 21.7
        },
        {
         "code": "21220000126",
         "label": "AproDerm emollient cream",
         "generic": false,
-        "items": 7104,
-        "share": 8.7
+        "items": 6292,
+        "share": 8.9
        },
        {
-        "code": "21220000233",
-        "label": "Cetraben cream",
+        "code": "21220000241",
+        "label": "Epimax original cream",
         "generic": false,
-        "items": 4267,
+        "items": 3671,
         "share": 5.2
        }
       ]
@@ -2921,55 +2921,55 @@
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 15419,
+      "items": 13267,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 2212,
-        "share": 14.3
+        "items": 1998,
+        "share": 15.1
        },
        {
         "code": "21220000233",
         "label": "Cetraben cream",
         "generic": false,
-        "items": 1637,
-        "share": 10.6
+        "items": 1358,
+        "share": 10.2
        },
        {
-        "code": "21220000214",
-        "label": "Zerobase",
+        "code": "21220000241",
+        "label": "Epimax original cream",
         "generic": false,
-        "items": 1591,
-        "share": 10.3
+        "items": 1337,
+        "share": 10.1
        }
       ]
      },
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 27254,
+      "items": 24248,
       "leaders": [
        {
         "code": "21220000233",
         "label": "Cetraben cream",
         "generic": false,
-        "items": 6619,
-        "share": 24.3
+        "items": 5965,
+        "share": 24.6
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 3184,
-        "share": 11.7
+        "items": 2880,
+        "share": 11.9
        },
        {
         "code": "21220000205",
         "label": "Hydromol ointment",
         "generic": false,
-        "items": 1941,
+        "items": 1710,
         "share": 7.1
        }
       ]
@@ -2977,167 +2977,167 @@
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 27462,
+      "items": 24228,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 3826,
-        "share": 13.9
+        "items": 3413,
+        "share": 14.1
        },
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 3330,
-        "share": 12.1
+        "items": 3051,
+        "share": 12.6
        },
        {
         "code": "21220000214",
         "label": "Zerobase",
         "generic": false,
-        "items": 2783,
-        "share": 10.1
+        "items": 2414,
+        "share": 10.0
        }
       ]
      },
      {
       "icb": "QJK",
       "name": "NHS Devon",
-      "items": 30730,
+      "items": 27907,
       "leaders": [
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 7248,
-        "share": 23.6
+        "items": 6671,
+        "share": 23.9
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 4268,
-        "share": 13.9
+        "items": 3777,
+        "share": 13.5
        },
        {
         "code": "21220000233",
         "label": "Cetraben cream",
         "generic": false,
-        "items": 2124,
-        "share": 6.9
+        "items": 2023,
+        "share": 7.2
        }
       ]
      },
      {
       "icb": "QVV",
       "name": "NHS Dorset",
-      "items": 19821,
+      "items": 17434,
       "leaders": [
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 4785,
-        "share": 24.1
+        "items": 4419,
+        "share": 25.3
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 2942,
-        "share": 14.8
+        "items": 2532,
+        "share": 14.5
        },
        {
         "code": "21220000233",
         "label": "Cetraben cream",
         "generic": false,
-        "items": 1801,
-        "share": 9.1
+        "items": 1491,
+        "share": 8.6
        }
       ]
      },
      {
       "icb": "D7T5G",
       "name": "NHS Essex",
-      "items": 32670,
+      "items": 29572,
       "leaders": [
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 6976,
-        "share": 21.4
-       },
-       {
-        "code": "130201000BBIC",
-        "label": "Dermol",
-        "generic": false,
-        "items": 3806,
-        "share": 11.6
-       },
-       {
-        "code": "21220000233",
-        "label": "Cetraben cream",
-        "generic": false,
-        "items": 1742,
-        "share": 5.3
-       }
-      ]
-     },
-     {
-      "icb": "QR1",
-      "name": "NHS Gloucestershire",
-      "items": 9604,
-      "leaders": [
-       {
-        "code": "21220000241",
-        "label": "Epimax original cream",
-        "generic": false,
-        "items": 2092,
+        "items": 6452,
         "share": 21.8
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 668,
-        "share": 7.0
+        "items": 3417,
+        "share": 11.6
+       },
+       {
+        "code": "21220000233",
+        "label": "Cetraben cream",
+        "generic": false,
+        "items": 1607,
+        "share": 5.4
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 8537,
+      "leaders": [
+       {
+        "code": "21220000241",
+        "label": "Epimax original cream",
+        "generic": false,
+        "items": 1882,
+        "share": 22.0
+       },
+       {
+        "code": "130201000BBIC",
+        "label": "Dermol",
+        "generic": false,
+        "items": 567,
+        "share": 6.6
        },
        {
         "code": "21220000214",
         "label": "Zerobase",
         "generic": false,
-        "items": 429,
-        "share": 4.5
+        "items": 437,
+        "share": 5.1
        }
       ]
      },
      {
       "icb": "QOP",
       "name": "NHS Greater Manchester",
-      "items": 95551,
+      "items": 82459,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 16679,
-        "share": 17.5
+        "items": 14356,
+        "share": 17.4
        },
        {
         "code": "21220000233",
         "label": "Cetraben cream",
         "generic": false,
-        "items": 8679,
-        "share": 9.1
+        "items": 7171,
+        "share": 8.7
        },
        {
         "code": "130201000BBJG",
         "label": "Doublebase gel",
         "generic": false,
-        "items": 7241,
+        "items": 6260,
         "share": 7.6
        }
       ]
@@ -3145,83 +3145,83 @@
      {
       "icb": "QRL",
       "name": "NHS Hampshire and Isle of Wight",
-      "items": 44983,
+      "items": 39160,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 5238,
-        "share": 11.6
+        "items": 4574,
+        "share": 11.7
        },
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 4474,
-        "share": 9.9
+        "items": 3931,
+        "share": 10.0
        },
        {
-        "code": "21220000204",
-        "label": "Zeroderm ointment",
+        "code": "21220000214",
+        "label": "Zerobase",
         "generic": false,
-        "items": 3693,
-        "share": 8.2
+        "items": 3181,
+        "share": 8.1
        }
       ]
      },
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 18273,
+      "items": 16321,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 3260,
-        "share": 17.8
+        "items": 2922,
+        "share": 17.9
        },
        {
         "code": "21220000284",
         "label": "Epimax excetra cream",
         "generic": false,
-        "items": 1689,
-        "share": 9.2
+        "items": 1598,
+        "share": 9.8
        },
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 1609,
-        "share": 8.8
+        "items": 1485,
+        "share": 9.1
        }
       ]
      },
      {
       "icb": "QOQ",
       "name": "NHS Humber and North Yorkshire",
-      "items": 42244,
+      "items": 37023,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 5883,
-        "share": 13.9
+        "items": 5284,
+        "share": 14.3
        },
        {
         "code": "21220000214",
         "label": "Zerobase",
         "generic": false,
-        "items": 4933,
-        "share": 11.7
+        "items": 4419,
+        "share": 11.9
        },
        {
-        "code": "21220000101",
-        "label": "Epaderm cream",
+        "code": "21220000233",
+        "label": "Cetraben cream",
         "generic": false,
-        "items": 2603,
+        "items": 2300,
         "share": 6.2
        }
       ]
@@ -3229,27 +3229,27 @@
      {
       "icb": "QKS",
       "name": "NHS Kent and Medway",
-      "items": 32388,
+      "items": 28539,
       "leaders": [
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 6544,
-        "share": 20.2
+        "items": 6009,
+        "share": 21.1
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 4045,
+        "items": 3561,
         "share": 12.5
        },
        {
-        "code": "21220000321",
-        "label": "Epimax moisturising cream",
+        "code": "21220000233",
+        "label": "Cetraben cream",
         "generic": false,
-        "items": 1317,
+        "items": 1172,
         "share": 4.1
        }
       ]
@@ -3257,55 +3257,55 @@
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 41531,
+      "items": 35565,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 5961,
-        "share": 14.4
+        "items": 5197,
+        "share": 14.6
        },
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 4897,
-        "share": 11.8
+        "items": 4288,
+        "share": 12.1
        },
        {
         "code": "21220000284",
         "label": "Epimax excetra cream",
         "generic": false,
-        "items": 2905,
-        "share": 7.0
+        "items": 2361,
+        "share": 6.6
        }
       ]
      },
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 34951,
+      "items": 31658,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 7079,
-        "share": 20.3
+        "items": 6501,
+        "share": 20.5
        },
        {
         "code": "21220000214",
         "label": "Zerobase",
         "generic": false,
-        "items": 4162,
-        "share": 11.9
+        "items": 3658,
+        "share": 11.6
        },
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 3232,
+        "items": 2919,
         "share": 9.2
        }
       ]
@@ -3313,83 +3313,83 @@
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 20832,
+      "items": 18679,
       "leaders": [
        {
         "code": "21220000233",
         "label": "Cetraben cream",
         "generic": false,
-        "items": 5716,
-        "share": 27.4
+        "items": 4999,
+        "share": 26.8
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 4509,
-        "share": 21.6
+        "items": 4170,
+        "share": 22.3
        },
        {
-        "code": "130201000BBKF",
-        "label": "Dermol cream",
+        "code": "21220000214",
+        "label": "Zerobase",
         "generic": false,
-        "items": 822,
-        "share": 3.9
+        "items": 715,
+        "share": 3.8
        }
       ]
      },
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 42106,
+      "items": 37651,
       "leaders": [
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 7748,
-        "share": 18.4
+        "items": 6820,
+        "share": 18.1
        },
        {
         "code": "21220000214",
         "label": "Zerobase",
         "generic": false,
-        "items": 6881,
-        "share": 16.3
+        "items": 6226,
+        "share": 16.5
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 6257,
-        "share": 14.9
+        "items": 5449,
+        "share": 14.5
        }
       ]
      },
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 74403,
+      "items": 66187,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 7515,
-        "share": 10.1
+        "items": 6644,
+        "share": 10.0
        },
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 4950,
-        "share": 6.7
+        "items": 4324,
+        "share": 6.5
        },
        {
         "code": "21220000233",
         "label": "Cetraben cream",
         "generic": false,
-        "items": 4644,
+        "items": 4079,
         "share": 6.2
        }
       ]
@@ -3397,55 +3397,55 @@
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 69426,
+      "items": 59848,
       "leaders": [
        {
         "code": "21220000205",
         "label": "Hydromol ointment",
         "generic": false,
-        "items": 12776,
+        "items": 10988,
         "share": 18.4
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 10877,
+        "items": 9384,
         "share": 15.7
        },
        {
         "code": "21220000214",
         "label": "Zerobase",
         "generic": false,
-        "items": 5852,
-        "share": 8.4
+        "items": 5175,
+        "share": 8.6
        }
       ]
      },
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 13754,
+      "items": 12151,
       "leaders": [
        {
         "code": "21220000214",
         "label": "Zerobase",
         "generic": false,
-        "items": 2776,
-        "share": 20.2
+        "items": 2589,
+        "share": 21.3
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 1804,
-        "share": 13.1
+        "items": 1456,
+        "share": 12.0
        },
        {
         "code": "21220000204",
         "label": "Zeroderm ointment",
         "generic": false,
-        "items": 793,
+        "items": 706,
         "share": 5.8
        }
       ]
@@ -3453,195 +3453,195 @@
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 32223,
+      "items": 28128,
       "leaders": [
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 4245,
-        "share": 13.2
+        "items": 3653,
+        "share": 13.0
        },
        {
         "code": "21220000214",
         "label": "Zerobase",
         "generic": false,
-        "items": 4009,
-        "share": 12.4
+        "items": 3622,
+        "share": 12.9
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 3073,
-        "share": 9.5
+        "items": 2694,
+        "share": 9.6
        }
       ]
      },
      {
       "icb": "QOC",
       "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 11272,
+      "items": 10287,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 1680,
-        "share": 14.9
+        "items": 1566,
+        "share": 15.2
        },
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 1162,
-        "share": 10.3
+        "items": 1052,
+        "share": 10.2
        },
        {
         "code": "21220000126",
         "label": "AproDerm emollient cream",
         "generic": false,
-        "items": 972,
-        "share": 8.6
+        "items": 968,
+        "share": 9.4
        }
       ]
      },
      {
       "icb": "QSL",
       "name": "NHS Somerset",
-      "items": 11792,
+      "items": 10401,
       "leaders": [
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 3644,
-        "share": 30.9
+        "items": 3276,
+        "share": 31.5
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 1094,
-        "share": 9.3
+        "items": 890,
+        "share": 8.6
        },
        {
         "code": "21220000300",
         "label": "Epimax oatmeal cream",
         "generic": false,
-        "items": 878,
-        "share": 7.4
+        "items": 705,
+        "share": 6.8
        }
       ]
      },
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 35900,
+      "items": 31889,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 3995,
-        "share": 11.1
+        "items": 3560,
+        "share": 11.2
        },
        {
         "code": "21220000205",
         "label": "Hydromol ointment",
         "generic": false,
-        "items": 3614,
-        "share": 10.1
+        "items": 3109,
+        "share": 9.7
        },
        {
         "code": "21220000233",
         "label": "Cetraben cream",
         "generic": false,
-        "items": 2666,
-        "share": 7.4
+        "items": 2303,
+        "share": 7.2
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 33572,
+      "items": 29528,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 4813,
+        "items": 4213,
         "share": 14.3
        },
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 3611,
-        "share": 10.8
+        "items": 3360,
+        "share": 11.4
        },
        {
         "code": "21220000284",
         "label": "Epimax excetra cream",
         "generic": false,
-        "items": 2216,
-        "share": 6.6
+        "items": 1920,
+        "share": 6.5
        }
       ]
      },
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 41631,
+      "items": 35641,
       "leaders": [
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 6488,
-        "share": 15.6
+        "items": 5598,
+        "share": 15.7
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 4366,
+        "items": 3756,
         "share": 10.5
        },
        {
         "code": "21220000233",
         "label": "Cetraben cream",
         "generic": false,
-        "items": 3254,
-        "share": 7.8
+        "items": 2747,
+        "share": 7.7
        }
       ]
      },
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 28501,
+      "items": 25214,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 5687,
-        "share": 20.0
+        "items": 5161,
+        "share": 20.5
        },
        {
         "code": "21220000233",
         "label": "Cetraben cream",
         "generic": false,
-        "items": 2979,
-        "share": 10.5
+        "items": 2661,
+        "share": 10.6
        },
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 1713,
+        "items": 1508,
         "share": 6.0
        }
       ]
@@ -3649,27 +3649,27 @@
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 54201,
+      "items": 47765,
       "leaders": [
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 8580,
-        "share": 15.8
+        "items": 7439,
+        "share": 15.6
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 7151,
-        "share": 13.2
+        "items": 6254,
+        "share": 13.1
        },
        {
         "code": "21220000233",
         "label": "Cetraben cream",
         "generic": false,
-        "items": 4539,
+        "items": 3990,
         "share": 8.4
        }
       ]
@@ -3677,84 +3677,84 @@
      {
       "icb": "S0E4D",
       "name": "NHS Thames Valley",
-      "items": 47720,
+      "items": 42476,
       "leaders": [
        {
         "code": "21220000284",
         "label": "Epimax excetra cream",
         "generic": false,
-        "items": 7692,
+        "items": 6844,
         "share": 16.1
        },
        {
         "code": "21220000233",
         "label": "Cetraben cream",
         "generic": false,
-        "items": 5873,
-        "share": 12.3
+        "items": 5174,
+        "share": 12.2
        },
        {
-        "code": "130201000BBIC",
-        "label": "Dermol",
+        "code": "21220000241",
+        "label": "Epimax original cream",
         "generic": false,
-        "items": 5482,
-        "share": 11.5
+        "items": 4811,
+        "share": 11.3
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 75108,
+      "items": 64989,
       "leaders": [
        {
         "code": "21220000214",
         "label": "Zerobase",
         "generic": false,
-        "items": 7422,
+        "items": 6438,
+        "share": 9.9
+       },
+       {
+        "code": "130201000BBIC",
+        "label": "Dermol",
+        "generic": false,
+        "items": 6427,
         "share": 9.9
        },
        {
         "code": "21220000233",
         "label": "Cetraben cream",
         "generic": false,
-        "items": 7290,
-        "share": 9.7
-       },
-       {
-        "code": "130201000BBIC",
-        "label": "Dermol",
-        "generic": false,
-        "items": 7173,
-        "share": 9.6
+        "items": 6150,
+        "share": 9.5
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 100402,
+      "items": 87619,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 14876,
-        "share": 14.8
+        "items": 12696,
+        "share": 14.5
        },
        {
         "code": "21220000241",
         "label": "Epimax original cream",
         "generic": false,
-        "items": 11444,
-        "share": 11.4
+        "items": 10197,
+        "share": 11.6
        },
        {
         "code": "21220000284",
         "label": "Epimax excetra cream",
         "generic": false,
-        "items": 9303,
-        "share": 9.3
+        "items": 8058,
+        "share": 9.2
        }
       ]
      }
@@ -3767,607 +3767,607 @@
      "chapter 13"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 2358057,
-    "cost": 25631867,
-    "items12m": 26606948,
-    "cost12m": 295225694,
-    "itemsYoY": -0.4,
-    "products": 403,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 2035749,
+    "cost": 22347677,
+    "items12m": 26540818,
+    "cost12m": 293357619,
+    "itemsYoY": -3.1,
+    "products": 401,
     "topNational": [
      {
       "code": "1304000V0AA",
       "label": "Hydrocortisone",
       "generic": true,
-      "items": 236505,
-      "share": 10.0,
-      "cost": 1434367,
-      "yoy": 0.6
+      "items": 192931,
+      "share": 9.5,
+      "cost": 1167409,
+      "yoy": -5.9
      },
      {
       "code": "130201000BBIC",
       "label": "Dermol",
       "generic": false,
-      "items": 215440,
-      "share": 9.1,
-      "cost": 1524706,
-      "yoy": 7.4
+      "items": 188206,
+      "share": 9.2,
+      "cost": 1333281,
+      "yoy": 4.9
      },
      {
       "code": "1304000F0AA",
       "label": "Betamethasone valerate",
       "generic": true,
-      "items": 198731,
+      "items": 170698,
       "share": 8.4,
-      "cost": 976818,
-      "yoy": 0.3
+      "cost": 842841,
+      "yoy": -2.4
      },
      {
       "code": "1310012F0AA",
       "label": "Fusidic acid",
       "generic": true,
-      "items": 92557,
+      "items": 79737,
       "share": 3.9,
-      "cost": 231133,
-      "yoy": 3.4
+      "cost": 198811,
+      "yoy": 1.7
      },
      {
       "code": "1304000H0AA",
       "label": "Clobetasone",
       "generic": true,
-      "items": 83657,
-      "share": 3.5,
-      "cost": 460552,
-      "yoy": 2.8
+      "items": 69140,
+      "share": 3.4,
+      "cost": 390800,
+      "yoy": -0.6
      },
      {
       "code": "1304000Y0AA",
       "label": "Mometasone",
       "generic": true,
-      "items": 68786,
+      "items": 59161,
       "share": 2.9,
-      "cost": 558640,
-      "yoy": -1.2
+      "cost": 480287,
+      "yoy": -1.4
      },
      {
       "code": "1310020H0AA",
       "label": "Clotrimazole",
       "generic": true,
-      "items": 63375,
+      "items": 55108,
       "share": 2.7,
-      "cost": 130966,
-      "yoy": -5.5
+      "cost": 114170,
+      "yoy": -8.6
      },
      {
       "code": "1304000G0AA",
       "label": "Clobetasol",
       "generic": true,
-      "items": 57579,
-      "share": 2.4,
-      "cost": 367503,
-      "yoy": 2.5
+      "items": 50279,
+      "share": 2.5,
+      "cost": 328251,
+      "yoy": 0.4
      },
      {
       "code": "1309000I0AA",
       "label": "Ketoconazole",
       "generic": true,
-      "items": 52538,
-      "share": 2.2,
-      "cost": 292865,
-      "yoy": -1.5
+      "items": 46338,
+      "share": 2.3,
+      "cost": 258507,
+      "yoy": -4.5
      },
      {
       "code": "1305020D0AA",
       "label": "Calcipotriol",
       "generic": true,
-      "items": 47747,
+      "items": 41698,
       "share": 2.0,
-      "cost": 2067073,
-      "yoy": -8.6
+      "cost": 1816226,
+      "yoy": -10.8
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 32462,
+      "items": 27343,
       "leaders": [
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 3510,
-        "share": 10.8
-       },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 3337,
-        "share": 10.3
+        "items": 2839,
+        "share": 10.4
+       },
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 2777,
+        "share": 10.2
        },
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 3083,
-        "share": 9.5
+        "items": 2536,
+        "share": 9.3
        }
       ]
      },
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 96090,
+      "items": 80434,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 13898,
-        "share": 14.5
+        "items": 11741,
+        "share": 14.6
        },
        {
         "code": "1304000V0AA",
         "label": "Hydrocortisone",
         "generic": true,
-        "items": 8931,
-        "share": 9.3
+        "items": 7243,
+        "share": 9.0
        },
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 6932,
-        "share": 7.2
+        "items": 5662,
+        "share": 7.0
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 63490,
+      "items": 54650,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 8839,
+        "items": 7611,
         "share": 13.9
        },
        {
         "code": "1304000V0AA",
         "label": "Hydrocortisone",
         "generic": true,
-        "items": 6382,
-        "share": 10.1
+        "items": 5074,
+        "share": 9.3
        },
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 4319,
-        "share": 6.8
+        "items": 3826,
+        "share": 7.0
        }
       ]
      },
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 29823,
+      "items": 25773,
       "leaders": [
        {
         "code": "1304000V0AA",
         "label": "Hydrocortisone",
         "generic": true,
-        "items": 3367,
-        "share": 11.3
+        "items": 2825,
+        "share": 11.0
        },
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 2952,
-        "share": 9.9
-       },
-       {
-        "code": "130201000BBIC",
-        "label": "Dermol",
-        "generic": false,
-        "items": 1801,
-        "share": 6.0
-       }
-      ]
-     },
-     {
-      "icb": "S1Y5D",
-      "name": "NHS Central East",
-      "items": 113588,
-      "leaders": [
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 11386,
+        "items": 2581,
         "share": 10.0
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 10389,
-        "share": 9.1
-       },
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 9624,
-        "share": 8.5
+        "items": 1507,
+        "share": 5.8
        }
       ]
      },
      {
-      "icb": "QYG",
-      "name": "NHS Cheshire and Merseyside",
-      "items": 137606,
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 98234,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 17741,
-        "share": 12.9
-       },
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 12319,
-        "share": 9.0
-       },
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 10212,
-        "share": 7.4
-       }
-      ]
-     },
-     {
-      "icb": "QT6",
-      "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 25257,
-      "leaders": [
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 2353,
+        "items": 9111,
         "share": 9.3
        },
        {
         "code": "1304000V0AA",
         "label": "Hydrocortisone",
         "generic": true,
-        "items": 2265,
-        "share": 9.0
+        "items": 9021,
+        "share": 9.2
        },
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 8155,
+        "share": 8.3
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 118277,
+      "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 2212,
+        "items": 15295,
+        "share": 12.9
+       },
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 10399,
         "share": 8.8
+       },
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 8493,
+        "share": 7.2
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 21602,
+      "leaders": [
+       {
+        "code": "130201000BBIC",
+        "label": "Dermol",
+        "generic": false,
+        "items": 1998,
+        "share": 9.2
+       },
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 1905,
+        "share": 8.8
+       },
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 1779,
+        "share": 8.2
        }
       ]
      },
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 40702,
+      "items": 35446,
       "leaders": [
        {
         "code": "1304000V0AA",
         "label": "Hydrocortisone",
         "generic": true,
-        "items": 4183,
-        "share": 10.3
-       },
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 3375,
-        "share": 8.3
-       },
-       {
-        "code": "130201000BBIC",
-        "label": "Dermol",
-        "generic": false,
-        "items": 3184,
-        "share": 7.8
-       }
-      ]
-     },
-     {
-      "icb": "QJ2",
-      "name": "NHS Derby and Derbyshire",
-      "items": 39577,
-      "leaders": [
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 4599,
-        "share": 11.6
-       },
-       {
-        "code": "130201000BBIC",
-        "label": "Dermol",
-        "generic": false,
-        "items": 3826,
-        "share": 9.7
-       },
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 3647,
-        "share": 9.2
-       }
-      ]
-     },
-     {
-      "icb": "QJK",
-      "name": "NHS Devon",
-      "items": 50025,
-      "leaders": [
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 4333,
-        "share": 8.7
-       },
-       {
-        "code": "130201000BBIC",
-        "label": "Dermol",
-        "generic": false,
-        "items": 4268,
-        "share": 8.5
-       },
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 4148,
-        "share": 8.3
-       }
-      ]
-     },
-     {
-      "icb": "QVV",
-      "name": "NHS Dorset",
-      "items": 30604,
-      "leaders": [
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 3140,
-        "share": 10.3
-       },
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 3093,
-        "share": 10.1
-       },
-       {
-        "code": "130201000BBIC",
-        "label": "Dermol",
-        "generic": false,
-        "items": 2942,
-        "share": 9.6
-       }
-      ]
-     },
-     {
-      "icb": "D7T5G",
-      "name": "NHS Essex",
-      "items": 60184,
-      "leaders": [
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 6419,
-        "share": 10.7
-       },
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 5948,
-        "share": 9.9
-       },
-       {
-        "code": "130201000BBIC",
-        "label": "Dermol",
-        "generic": false,
-        "items": 3806,
-        "share": 6.3
-       }
-      ]
-     },
-     {
-      "icb": "QR1",
-      "name": "NHS Gloucestershire",
-      "items": 18653,
-      "leaders": [
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 2502,
-        "share": 13.4
-       },
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 1637,
-        "share": 8.8
-       },
-       {
-        "code": "1304000Y0AA",
-        "label": "Mometasone",
-        "generic": true,
-        "items": 918,
-        "share": 4.9
-       }
-      ]
-     },
-     {
-      "icb": "QOP",
-      "name": "NHS Greater Manchester",
-      "items": 155795,
-      "leaders": [
-       {
-        "code": "130201000BBIC",
-        "label": "Dermol",
-        "generic": false,
-        "items": 16679,
-        "share": 10.7
-       },
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 16177,
-        "share": 10.4
-       },
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 9497,
-        "share": 6.1
-       }
-      ]
-     },
-     {
-      "icb": "QRL",
-      "name": "NHS Hampshire and Isle of Wight",
-      "items": 68816,
-      "leaders": [
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 7311,
-        "share": 10.6
-       },
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 6119,
-        "share": 8.9
-       },
-       {
-        "code": "130201000BBIC",
-        "label": "Dermol",
-        "generic": false,
-        "items": 5238,
-        "share": 7.6
-       }
-      ]
-     },
-     {
-      "icb": "QGH",
-      "name": "NHS Herefordshire and Worcestershire",
-      "items": 28157,
-      "leaders": [
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 3458,
-        "share": 12.3
-       },
-       {
-        "code": "130201000BBIC",
-        "label": "Dermol",
-        "generic": false,
-        "items": 3260,
-        "share": 11.6
-       },
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 2861,
-        "share": 10.2
-       }
-      ]
-     },
-     {
-      "icb": "QOQ",
-      "name": "NHS Humber and North Yorkshire",
-      "items": 70084,
-      "leaders": [
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 6943,
-        "share": 9.9
-       },
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 6679,
-        "share": 9.5
-       },
-       {
-        "code": "130201000BBIC",
-        "label": "Dermol",
-        "generic": false,
-        "items": 5883,
-        "share": 8.4
-       }
-      ]
-     },
-     {
-      "icb": "QKS",
-      "name": "NHS Kent and Medway",
-      "items": 56920,
-      "leaders": [
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 5331,
+        "items": 3344,
         "share": 9.4
        },
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 5024,
+        "items": 2906,
+        "share": 8.2
+       },
+       {
+        "code": "130201000BBIC",
+        "label": "Dermol",
+        "generic": false,
+        "items": 2880,
+        "share": 8.1
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 34098,
+      "leaders": [
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 3904,
+        "share": 11.4
+       },
+       {
+        "code": "130201000BBIC",
+        "label": "Dermol",
+        "generic": false,
+        "items": 3413,
+        "share": 10.0
+       },
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 3117,
+        "share": 9.1
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 43007,
+      "leaders": [
+       {
+        "code": "130201000BBIC",
+        "label": "Dermol",
+        "generic": false,
+        "items": 3777,
+        "share": 8.8
+       },
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 3565,
+        "share": 8.3
+       },
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 3496,
+        "share": 8.1
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 26062,
+      "leaders": [
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 2715,
+        "share": 10.4
+       },
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 2546,
+        "share": 9.8
+       },
+       {
+        "code": "130201000BBIC",
+        "label": "Dermol",
+        "generic": false,
+        "items": 2532,
+        "share": 9.7
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 53229,
+      "leaders": [
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 5347,
+        "share": 10.0
+       },
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 5218,
+        "share": 9.8
+       },
+       {
+        "code": "130201000BBIC",
+        "label": "Dermol",
+        "generic": false,
+        "items": 3417,
+        "share": 6.4
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 16340,
+      "leaders": [
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 2061,
+        "share": 12.6
+       },
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 1364,
+        "share": 8.3
+       },
+       {
+        "code": "1304000Y0AA",
+        "label": "Mometasone",
+        "generic": true,
+        "items": 814,
+        "share": 5.0
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 133976,
+      "leaders": [
+       {
+        "code": "130201000BBIC",
+        "label": "Dermol",
+        "generic": false,
+        "items": 14356,
+        "share": 10.7
+       },
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 13243,
+        "share": 9.9
+       },
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 8260,
+        "share": 6.2
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 58882,
+      "leaders": [
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 5693,
+        "share": 9.7
+       },
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 5245,
+        "share": 8.9
+       },
+       {
+        "code": "130201000BBIC",
+        "label": "Dermol",
+        "generic": false,
+        "items": 4574,
+        "share": 7.8
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 24275,
+      "leaders": [
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 2932,
+        "share": 12.1
+       },
+       {
+        "code": "130201000BBIC",
+        "label": "Dermol",
+        "generic": false,
+        "items": 2922,
+        "share": 12.0
+       },
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 2363,
+        "share": 9.7
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 60834,
+      "leaders": [
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 5807,
+        "share": 9.5
+       },
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 5449,
+        "share": 9.0
+       },
+       {
+        "code": "130201000BBIC",
+        "label": "Dermol",
+        "generic": false,
+        "items": 5284,
+        "share": 8.7
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 50219,
+      "leaders": [
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 4537,
+        "share": 9.0
+       },
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 4443,
         "share": 8.8
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 4045,
+        "items": 3561,
         "share": 7.1
        }
       ]
@@ -4375,83 +4375,83 @@
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 74819,
+      "items": 64275,
       "leaders": [
        {
         "code": "1304000V0AA",
         "label": "Hydrocortisone",
         "generic": true,
-        "items": 7684,
-        "share": 10.3
+        "items": 6427,
+        "share": 10.0
        },
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 6025,
-        "share": 8.1
+        "items": 5290,
+        "share": 8.2
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 5961,
-        "share": 8.0
+        "items": 5197,
+        "share": 8.1
        }
       ]
      },
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 47880,
+      "items": 42912,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 7079,
-        "share": 14.8
+        "items": 6501,
+        "share": 15.1
        },
        {
         "code": "1304000V0AA",
         "label": "Hydrocortisone",
         "generic": true,
-        "items": 4841,
-        "share": 10.1
+        "items": 4042,
+        "share": 9.4
        },
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 3222,
-        "share": 6.7
+        "items": 2819,
+        "share": 6.6
        }
       ]
      },
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 32111,
+      "items": 28635,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 4509,
-        "share": 14.0
+        "items": 4170,
+        "share": 14.6
        },
        {
         "code": "1304000V0AA",
         "label": "Hydrocortisone",
         "generic": true,
-        "items": 3108,
-        "share": 9.7
+        "items": 2597,
+        "share": 9.1
        },
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 2670,
+        "items": 2375,
         "share": 8.3
        }
       ]
@@ -4459,251 +4459,251 @@
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 62415,
+      "items": 54408,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 6257,
+        "items": 5449,
         "share": 10.0
        },
        {
         "code": "1304000V0AA",
         "label": "Hydrocortisone",
         "generic": true,
-        "items": 6251,
-        "share": 10.0
+        "items": 5285,
+        "share": 9.7
        },
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 5814,
-        "share": 9.3
+        "items": 5028,
+        "share": 9.2
        }
       ]
      },
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 99068,
+      "items": 86148,
       "leaders": [
        {
         "code": "1304000V0AA",
         "label": "Hydrocortisone",
         "generic": true,
-        "items": 8696,
-        "share": 8.8
-       },
-       {
-        "code": "130201000BBIC",
-        "label": "Dermol",
-        "generic": false,
-        "items": 7515,
-        "share": 7.6
-       },
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 7057,
-        "share": 7.1
-       }
-      ]
-     },
-     {
-      "icb": "QHM",
-      "name": "NHS North East and North Cumbria",
-      "items": 132420,
-      "leaders": [
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 16407,
-        "share": 12.4
-       },
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 15340,
-        "share": 11.6
-       },
-       {
-        "code": "130201000BBIC",
-        "label": "Dermol",
-        "generic": false,
-        "items": 10877,
-        "share": 8.2
-       }
-      ]
-     },
-     {
-      "icb": "QPM",
-      "name": "NHS Northamptonshire",
-      "items": 25628,
-      "leaders": [
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 2984,
-        "share": 11.6
-       },
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 2389,
-        "share": 9.3
-       },
-       {
-        "code": "130201000BBIC",
-        "label": "Dermol",
-        "generic": false,
-        "items": 1804,
-        "share": 7.0
-       }
-      ]
-     },
-     {
-      "icb": "QT1",
-      "name": "NHS Nottingham and Nottinghamshire",
-      "items": 44234,
-      "leaders": [
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 5123,
-        "share": 11.6
-       },
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 3531,
+        "items": 6852,
         "share": 8.0
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 3073,
-        "share": 6.9
-       }
-      ]
-     },
-     {
-      "icb": "QOC",
-      "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 18006,
-      "leaders": [
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 1829,
-        "share": 10.2
-       },
-       {
-        "code": "130201000BBIC",
-        "label": "Dermol",
-        "generic": false,
-        "items": 1680,
-        "share": 9.3
+        "items": 6644,
+        "share": 7.7
        },
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 1264,
+        "items": 6031,
         "share": 7.0
        }
       ]
      },
      {
-      "icb": "QSL",
-      "name": "NHS Somerset",
-      "items": 18064,
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 115287,
+      "leaders": [
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 14088,
+        "share": 12.2
+       },
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 12804,
+        "share": 11.1
+       },
+       {
+        "code": "130201000BBIC",
+        "label": "Dermol",
+        "generic": false,
+        "items": 9384,
+        "share": 8.1
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 22174,
       "leaders": [
        {
         "code": "1304000V0AA",
         "label": "Hydrocortisone",
         "generic": true,
-        "items": 1946,
+        "items": 2464,
+        "share": 11.1
+       },
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 1989,
+        "share": 9.0
+       },
+       {
+        "code": "130201000BBIC",
+        "label": "Dermol",
+        "generic": false,
+        "items": 1456,
+        "share": 6.6
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 38088,
+      "leaders": [
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 4102,
         "share": 10.8
        },
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 1705,
-        "share": 9.4
+        "items": 3073,
+        "share": 8.1
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 1094,
-        "share": 6.1
+        "items": 2694,
+        "share": 7.1
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 15945,
+      "leaders": [
+       {
+        "code": "130201000BBIC",
+        "label": "Dermol",
+        "generic": false,
+        "items": 1566,
+        "share": 9.8
+       },
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 1518,
+        "share": 9.5
+       },
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 1174,
+        "share": 7.4
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 15581,
+      "leaders": [
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 1583,
+        "share": 10.2
+       },
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 1516,
+        "share": 9.7
+       },
+       {
+        "code": "130201000BBIC",
+        "label": "Dermol",
+        "generic": false,
+        "items": 890,
+        "share": 5.7
        }
       ]
      },
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 59807,
+      "items": 51987,
       "leaders": [
        {
         "code": "1304000V0AA",
         "label": "Hydrocortisone",
         "generic": true,
-        "items": 5722,
-        "share": 9.6
+        "items": 4633,
+        "share": 8.9
        },
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 5240,
+        "items": 4569,
         "share": 8.8
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 3995,
-        "share": 6.7
+        "items": 3560,
+        "share": 6.8
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 56653,
+      "items": 49729,
       "leaders": [
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 5613,
-        "share": 9.9
-       },
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 5148,
+        "items": 4504,
         "share": 9.1
+       },
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 4413,
+        "share": 8.9
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 4813,
+        "items": 4213,
         "share": 8.5
        }
       ]
@@ -4711,168 +4711,168 @@
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 65607,
+      "items": 55512,
       "leaders": [
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 7038,
-        "share": 10.7
+        "items": 5859,
+        "share": 10.6
        },
        {
         "code": "1304000V0AA",
         "label": "Hydrocortisone",
         "generic": true,
-        "items": 6320,
-        "share": 9.6
+        "items": 5076,
+        "share": 9.1
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 4366,
-        "share": 6.7
+        "items": 3756,
+        "share": 6.8
        }
       ]
      },
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 47411,
+      "items": 41609,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 5687,
-        "share": 12.0
-       },
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 4625,
-        "share": 9.8
+        "items": 5161,
+        "share": 12.4
        },
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 4502,
+        "items": 3961,
         "share": 9.5
+       },
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 3775,
+        "share": 9.1
        }
       ]
      },
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 101658,
+      "items": 88197,
       "leaders": [
        {
         "code": "1304000V0AA",
         "label": "Hydrocortisone",
         "generic": true,
-        "items": 10056,
-        "share": 9.9
-       },
-       {
-        "code": "1304000F0AA",
-        "label": "Betamethasone valerate",
-        "generic": true,
-        "items": 9264,
-        "share": 9.1
-       },
-       {
-        "code": "130201000BBIC",
-        "label": "Dermol",
-        "generic": false,
-        "items": 7151,
-        "share": 7.0
-       }
-      ]
-     },
-     {
-      "icb": "S0E4D",
-      "name": "NHS Thames Valley",
-      "items": 79154,
-      "leaders": [
-       {
-        "code": "1304000V0AA",
-        "label": "Hydrocortisone",
-        "generic": true,
-        "items": 7464,
+        "items": 8326,
         "share": 9.4
        },
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 6521,
-        "share": 8.2
+        "items": 8082,
+        "share": 9.2
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 5482,
-        "share": 6.9
+        "items": 6254,
+        "share": 7.1
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 67425,
+      "leaders": [
+       {
+        "code": "1304000V0AA",
+        "label": "Hydrocortisone",
+        "generic": true,
+        "items": 6093,
+        "share": 9.0
+       },
+       {
+        "code": "1304000F0AA",
+        "label": "Betamethasone valerate",
+        "generic": true,
+        "items": 5688,
+        "share": 8.4
+       },
+       {
+        "code": "130201000BBIC",
+        "label": "Dermol",
+        "generic": false,
+        "items": 4769,
+        "share": 7.1
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 115206,
+      "items": 99354,
       "leaders": [
        {
         "code": "1304000V0AA",
         "label": "Hydrocortisone",
         "generic": true,
-        "items": 12693,
-        "share": 11.0
+        "items": 10464,
+        "share": 10.5
        },
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 7631,
-        "share": 6.6
+        "items": 6782,
+        "share": 6.8
        },
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 7173,
-        "share": 6.2
+        "items": 6427,
+        "share": 6.5
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 159217,
+      "items": 134972,
       "leaders": [
        {
         "code": "130201000BBIC",
         "label": "Dermol",
         "generic": false,
-        "items": 14876,
-        "share": 9.3
+        "items": 12696,
+        "share": 9.4
        },
        {
         "code": "1304000V0AA",
         "label": "Hydrocortisone",
         "generic": true,
-        "items": 14445,
-        "share": 9.1
+        "items": 11275,
+        "share": 8.4
        },
        {
         "code": "1304000F0AA",
         "label": "Betamethasone valerate",
         "generic": true,
-        "items": 10838,
-        "share": 6.8
+        "items": 9089,
+        "share": 6.7
        }
       ]
      }
@@ -5541,13 +5541,13 @@
     ],
     "primary": {
      "basis": "items",
-     "latestPeriod": "202607",
+     "latestPeriod": "202608",
      "window12m": [
-      "202508",
-      "202607"
+      "202509",
+      "202608"
      ],
-     "items": 1469500,
-     "items12m": 16529542,
+     "items": 1286896,
+     "items12m": 16547424,
      "brandCount": 99,
      "topN": 12,
      "brands": [
@@ -5561,43 +5561,43 @@
         "Epimax oatmeal cream",
         "Epimax moisturising cream"
        ],
-       "items": 300233,
-       "share": 20.4,
-       "cost": 923348,
-       "items12m": 3337659,
-       "share12m": 20.2,
-       "yoy": 9.2,
+       "items": 265699,
+       "share": 20.6,
+       "cost": 817845,
+       "items12m": 3355639,
+       "share12m": 20.3,
+       "yoy": 7.3,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 28017,
-         "shareOfIcb": 27.9
+         "items": 24644,
+         "shareOfIcb": 28.1
         },
         {
          "icb": "S0E4D",
          "name": "NHS Thames Valley",
-         "items": 16482,
-         "shareOfIcb": 34.5
-        },
-        {
-         "icb": "S9B9J",
-         "name": "NHS Surrey and Sussex",
-         "items": 14622,
-         "shareOfIcb": 27.0
+         "items": 15045,
+         "shareOfIcb": 35.4
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 14412,
+         "items": 12696,
          "shareOfIcb": 22.6
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 12681,
+         "shareOfIcb": 26.5
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 14368,
-         "shareOfIcb": 19.3
+         "items": 12502,
+         "shareOfIcb": 18.9
         }
        ]
       },
@@ -5609,42 +5609,42 @@
         "Dermol cream",
         "Dermol Wash cutaneous emulsion"
        ],
-       "items": 276382,
+       "items": 241542,
        "share": 18.8,
-       "cost": 1957780,
-       "items12m": 3046915,
+       "cost": 1713388,
+       "items12m": 3052292,
        "share12m": 18.4,
-       "yoy": 4.6,
+       "yoy": 2.3,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 23402,
-         "shareOfIcb": 28.7
+         "items": 20119,
+         "shareOfIcb": 28.6
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 20373,
-         "shareOfIcb": 21.3
+         "items": 17619,
+         "shareOfIcb": 21.4
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 17546,
-         "shareOfIcb": 17.5
+         "items": 15039,
+         "shareOfIcb": 17.2
         },
         {
          "icb": "QHL",
          "name": "NHS Birmingham and Solihull",
-         "items": 17441,
-         "shareOfIcb": 25.0
+         "items": 14678,
+         "shareOfIcb": 24.9
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 14504,
+         "items": 12538,
          "shareOfIcb": 20.9
         }
        ]
@@ -5658,43 +5658,43 @@
         "Cetraben lotion",
         "Cetraben emollient"
        ],
-       "items": 140250,
+       "items": 121613,
        "share": 9.5,
-       "cost": 991630,
-       "items12m": 1586527,
+       "cost": 860137,
+       "items12m": 1589310,
        "share12m": 9.6,
-       "yoy": 3.3,
+       "yoy": 2.3,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 10003,
-         "shareOfIcb": 10.5
+         "items": 8255,
+         "shareOfIcb": 10.0
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 9105,
+         "items": 7955,
          "shareOfIcb": 9.1
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 8819,
-         "shareOfIcb": 13.8
+         "items": 7661,
+         "shareOfIcb": 13.7
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 8776,
-         "shareOfIcb": 11.7
+         "items": 7479,
+         "shareOfIcb": 11.5
         },
         {
          "icb": "QUA",
          "name": "NHS Black Country",
-         "items": 7745,
-         "shareOfIcb": 16.5
+         "items": 6849,
+         "shareOfIcb": 16.9
         }
        ]
       },
@@ -5708,43 +5708,43 @@
         "Hydromol Intensive",
         "Hydromol Relief cream"
        ],
-       "items": 88638,
-       "share": 6.0,
-       "cost": 667187,
-       "items12m": 1019507,
+       "items": 76508,
+       "share": 5.9,
+       "cost": 575854,
+       "items12m": 1020701,
        "share12m": 6.2,
-       "yoy": 4.8,
+       "yoy": 1.6,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 14972,
+         "items": 12898,
          "shareOfIcb": 21.6
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 8138,
-         "shareOfIcb": 8.5
-        },
-        {
-         "icb": "QWO",
-         "name": "NHS West Yorkshire",
-         "items": 4762,
-         "shareOfIcb": 6.3
+         "items": 7067,
+         "shareOfIcb": 8.6
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 4760,
+         "items": 4063,
          "shareOfIcb": 5.8
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 4053,
+         "shareOfIcb": 6.2
         },
         {
          "icb": "QKK",
          "name": "NHS South East London",
-         "items": 4525,
-         "shareOfIcb": 12.6
+         "items": 3925,
+         "shareOfIcb": 12.3
         }
        ]
       },
@@ -5754,43 +5754,43 @@
        "products": [
         "Zerobase"
        ],
-       "items": 74673,
+       "items": 66115,
        "share": 5.1,
-       "cost": 434684,
-       "items12m": 872737,
+       "cost": 383261,
+       "items12m": 869677,
        "share12m": 5.3,
-       "yoy": -5.0,
+       "yoy": -4.4,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 7422,
+         "items": 6438,
          "shareOfIcb": 9.9
         },
         {
          "icb": "T6Y0W",
          "name": "NHS Norfolk and Suffolk",
-         "items": 6881,
-         "shareOfIcb": 16.3
+         "items": 6226,
+         "shareOfIcb": 16.5
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 5852,
-         "shareOfIcb": 8.4
+         "items": 5175,
+         "shareOfIcb": 8.6
         },
         {
          "icb": "QOQ",
          "name": "NHS Humber and North Yorkshire",
-         "items": 4933,
-         "shareOfIcb": 11.7
+         "items": 4419,
+         "shareOfIcb": 11.9
         },
         {
          "icb": "QK1",
          "name": "NHS Leicester, Leicestershire and Rutland",
-         "items": 4162,
-         "shareOfIcb": 11.9
+         "items": 3658,
+         "shareOfIcb": 11.6
         }
        ]
       },
@@ -5804,43 +5804,43 @@
         "AproDerm gel",
         "AproDerm emollient starter pack"
        ],
-       "items": 73741,
+       "items": 64426,
        "share": 5.0,
-       "cost": 413618,
-       "items12m": 792835,
+       "cost": 361032,
+       "items12m": 800330,
        "share12m": 4.8,
-       "yoy": 14.9,
+       "yoy": 13.2,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 12530,
-         "shareOfIcb": 15.4
+         "items": 11101,
+         "shareOfIcb": 15.8
         },
         {
          "icb": "QHL",
          "name": "NHS Birmingham and Solihull",
-         "items": 9370,
-         "shareOfIcb": 13.4
+         "items": 8095,
+         "shareOfIcb": 13.7
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 6021,
-         "shareOfIcb": 8.1
+         "items": 5281,
+         "shareOfIcb": 8.0
         },
         {
          "icb": "QUA",
          "name": "NHS Black Country",
-         "items": 5087,
-         "shareOfIcb": 10.8
+         "items": 4629,
+         "shareOfIcb": 11.4
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 4905,
-         "shareOfIcb": 6.5
+         "items": 4147,
+         "shareOfIcb": 6.4
         }
        ]
       },
@@ -5853,43 +5853,43 @@
         "Epaderm Junior cream",
         "Epaderm Junior ointment"
        ],
-       "items": 61842,
-       "share": 4.2,
-       "cost": 505893,
-       "items12m": 707372,
+       "items": 52662,
+       "share": 4.1,
+       "cost": 433674,
+       "items12m": 706990,
        "share12m": 4.3,
-       "yoy": 3.3,
+       "yoy": -0.7,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 5156,
-         "shareOfIcb": 5.4
+         "items": 4275,
+         "shareOfIcb": 5.2
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 4821,
-         "shareOfIcb": 4.8
+         "items": 4070,
+         "shareOfIcb": 4.6
         },
         {
          "icb": "S9B9J",
          "name": "NHS Surrey and Sussex",
-         "items": 3663,
-         "shareOfIcb": 6.8
+         "items": 3133,
+         "shareOfIcb": 6.6
         },
         {
          "icb": "QHL",
          "name": "NHS Birmingham and Solihull",
-         "items": 3457,
-         "shareOfIcb": 5.0
+         "items": 2857,
+         "shareOfIcb": 4.9
         },
         {
          "icb": "QOQ",
          "name": "NHS Humber and North Yorkshire",
-         "items": 3444,
-         "shareOfIcb": 8.2
+         "items": 2833,
+         "shareOfIcb": 7.7
         }
        ]
       },
@@ -5898,48 +5898,48 @@
        "generic": false,
        "products": [
         "Doublebase gel",
-        "Doublebase Once gel",
         "Doublebase Dayleve gel",
+        "Doublebase Once gel",
         "Doublebase emollient shower gel",
         "Doublebase emollient wash gel"
        ],
-       "items": 57578,
+       "items": 50142,
        "share": 3.9,
-       "cost": 417484,
-       "items12m": 662761,
+       "cost": 367026,
+       "items12m": 659548,
        "share12m": 4.0,
-       "yoy": -5.1,
+       "yoy": -6.0,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 8446,
+         "items": 7276,
          "shareOfIcb": 8.8
         },
         {
          "icb": "QHL",
          "name": "NHS Birmingham and Solihull",
-         "items": 3485,
+         "items": 2970,
          "shareOfIcb": 5.0
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 3336,
-         "shareOfIcb": 4.1
+         "items": 2850,
+         "shareOfIcb": 4.0
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 3152,
-         "shareOfIcb": 4.2
+         "items": 2798,
+         "shareOfIcb": 4.3
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 3110,
-         "shareOfIcb": 4.5
+         "items": 2595,
+         "shareOfIcb": 4.3
         }
        ]
       },
@@ -5953,43 +5953,43 @@
         "Aveeno moisturising creamy oil",
         "Aveeno lotion"
        ],
-       "items": 45911,
+       "items": 39403,
        "share": 3.1,
-       "cost": 455233,
-       "items12m": 535715,
+       "cost": 387468,
+       "items12m": 531245,
        "share12m": 3.2,
-       "yoy": -8.7,
+       "yoy": -10.2,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 4887,
-         "shareOfIcb": 5.1
+         "items": 4284,
+         "shareOfIcb": 5.2
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 4761,
-         "shareOfIcb": 6.3
+         "items": 4199,
+         "shareOfIcb": 6.5
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 4110,
-         "shareOfIcb": 5.0
+         "items": 3321,
+         "shareOfIcb": 4.7
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 3383,
-         "shareOfIcb": 4.9
+         "items": 2833,
+         "shareOfIcb": 4.7
         },
         {
          "icb": "QHL",
          "name": "NHS Birmingham and Solihull",
-         "items": 3149,
-         "shareOfIcb": 4.5
+         "items": 2498,
+         "shareOfIcb": 4.2
         }
        ]
       },
@@ -6003,43 +6003,43 @@
         "E45 emollient wash cream",
         "E45 emollient bath oil"
        ],
-       "items": 43550,
+       "items": 38526,
        "share": 3.0,
-       "cost": 512456,
-       "items12m": 494449,
+       "cost": 453818,
+       "items12m": 493214,
        "share12m": 3.0,
-       "yoy": -1.6,
+       "yoy": -3.1,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 4382,
-         "shareOfIcb": 4.6
+         "items": 3865,
+         "shareOfIcb": 4.7
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 3284,
+         "items": 2929,
          "shareOfIcb": 3.3
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 3219,
-         "shareOfIcb": 4.3
+         "items": 2849,
+         "shareOfIcb": 4.4
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 3205,
-         "shareOfIcb": 3.9
+         "items": 2809,
+         "shareOfIcb": 4.0
         },
         {
-         "icb": "QHM",
-         "name": "NHS North East and North Cumbria",
-         "items": 2412,
-         "shareOfIcb": 3.5
+         "icb": "QMF",
+         "name": "NHS North East London",
+         "items": 2239,
+         "shareOfIcb": 3.4
         }
        ]
       },
@@ -6051,42 +6051,42 @@
         "Flexitol Skin Balm",
         "Flexitol Hand Balm"
        ],
-       "items": 33712,
-       "share": 2.3,
-       "cost": 250343,
-       "items12m": 359701,
+       "items": 30483,
+       "share": 2.4,
+       "cost": 229110,
+       "items12m": 361374,
        "share12m": 2.2,
-       "yoy": 4.0,
+       "yoy": 5.8,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 2778,
+         "items": 2435,
          "shareOfIcb": 3.7
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 2544,
-         "shareOfIcb": 2.5
+         "items": 2277,
+         "shareOfIcb": 2.6
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 2379,
+         "items": 2044,
          "shareOfIcb": 2.9
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 2071,
-         "shareOfIcb": 2.2
+         "items": 1958,
+         "shareOfIcb": 2.4
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 1982,
+         "items": 1804,
          "shareOfIcb": 2.7
         }
        ]
@@ -6097,91 +6097,43 @@
        "products": [
         "Zeroderm ointment"
        ],
-       "items": 32657,
+       "items": 28316,
        "share": 2.2,
-       "cost": 152981,
-       "items12m": 388781,
+       "cost": 132175,
+       "items12m": 389663,
        "share12m": 2.4,
-       "yoy": -3.7,
+       "yoy": 3.2,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QRL",
          "name": "NHS Hampshire and Isle of Wight",
-         "items": 3693,
-         "shareOfIcb": 8.2
+         "items": 3143,
+         "shareOfIcb": 8.0
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 2538,
+         "items": 2261,
          "shareOfIcb": 3.4
         },
         {
          "icb": "QK1",
          "name": "NHS Leicester, Leicestershire and Rutland",
-         "items": 1957,
-         "shareOfIcb": 5.6
+         "items": 1815,
+         "shareOfIcb": 5.7
         },
         {
          "icb": "QHL",
          "name": "NHS Birmingham and Solihull",
-         "items": 1859,
-         "shareOfIcb": 2.7
-        },
-        {
-         "icb": "Z9B2Z",
-         "name": "NHS West and North London",
-         "items": 1628,
-         "shareOfIcb": 1.6
-        }
-       ]
-      },
-      {
-       "brand": "QV",
-       "generic": false,
-       "products": [
-        "QV cream",
-        "QV Gentle wash",
-        "QV Intensive ointment"
-       ],
-       "items": 27546,
-       "share": 1.9,
-       "cost": 190408,
-       "items12m": 296071,
-       "share12m": 1.8,
-       "yoy": 7.2,
-       "icbsPrescribing": 36,
-       "topIcbs": [
-        {
-         "icb": "QMF",
-         "name": "NHS North East London",
-         "items": 3268,
-         "shareOfIcb": 4.4
-        },
-        {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 3093,
-         "shareOfIcb": 3.2
-        },
-        {
-         "icb": "QWU",
-         "name": "NHS Coventry and Warwickshire",
-         "items": 2538,
-         "shareOfIcb": 9.3
-        },
-        {
-         "icb": "QWO",
-         "name": "NHS West Yorkshire",
-         "items": 1958,
-         "shareOfIcb": 2.6
-        },
-        {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 1776,
+         "items": 1636,
          "shareOfIcb": 2.8
+        },
+        {
+         "icb": "QKK",
+         "name": "NHS South East London",
+         "items": 1420,
+         "shareOfIcb": 4.5
         }
        ]
       },
@@ -6194,43 +6146,91 @@
         "Balneum Plus bath oil",
         "Balneum"
        ],
-       "items": 26648,
-       "share": 1.8,
-       "cost": 371674,
-       "items12m": 297061,
+       "items": 23970,
+       "share": 1.9,
+       "cost": 333467,
+       "items12m": 297462,
        "share12m": 1.8,
-       "yoy": 2.6,
+       "yoy": 1.7,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 2524,
-         "shareOfIcb": 3.1
+         "items": 2308,
+         "shareOfIcb": 3.3
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 1942,
-         "shareOfIcb": 1.9
+         "items": 1791,
+         "shareOfIcb": 2.0
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 1709,
-         "shareOfIcb": 1.8
+         "items": 1528,
+         "shareOfIcb": 1.9
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 1693,
+         "items": 1465,
          "shareOfIcb": 2.3
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 1341,
-         "shareOfIcb": 2.1
+         "items": 1227,
+         "shareOfIcb": 2.2
+        }
+       ]
+      },
+      {
+       "brand": "QV",
+       "generic": false,
+       "products": [
+        "QV cream",
+        "QV Gentle wash",
+        "QV Intensive ointment"
+       ],
+       "items": 23585,
+       "share": 1.8,
+       "cost": 162346,
+       "items12m": 296971,
+       "share12m": 1.8,
+       "yoy": 4.0,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QMF",
+         "name": "NHS North East London",
+         "items": 2799,
+         "shareOfIcb": 4.2
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 2726,
+         "shareOfIcb": 3.3
+        },
+        {
+         "icb": "QWU",
+         "name": "NHS Coventry and Warwickshire",
+         "items": 2243,
+         "shareOfIcb": 9.3
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 1633,
+         "shareOfIcb": 2.5
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 1515,
+         "shareOfIcb": 2.7
         }
        ]
       },
@@ -6244,43 +6244,43 @@
         "White soft paraffin",
         "Liquid paraffin light"
        ],
-       "items": 23271,
+       "items": 20653,
        "share": 1.6,
-       "cost": 252530,
-       "items12m": 308077,
-       "share12m": 1.9,
-       "yoy": -32.9,
+       "cost": 216701,
+       "items12m": 297484,
+       "share12m": 1.8,
+       "yoy": -33.9,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 2602,
+         "items": 2306,
          "shareOfIcb": 3.5
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 2530,
-         "shareOfIcb": 2.5
+         "items": 2118,
+         "shareOfIcb": 2.4
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 1488,
+         "items": 1303,
          "shareOfIcb": 1.6
         },
         {
          "icb": "QKK",
          "name": "NHS South East London",
-         "items": 1407,
-         "shareOfIcb": 3.9
+         "items": 1290,
+         "shareOfIcb": 4.0
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 1124,
-         "shareOfIcb": 1.4
+         "items": 1039,
+         "shareOfIcb": 1.5
         }
        ]
       },
@@ -6290,43 +6290,43 @@
        "products": [
         "Zerocream"
        ],
-       "items": 23036,
+       "items": 20208,
        "share": 1.6,
-       "cost": 103797,
-       "items12m": 271738,
+       "cost": 90368,
+       "items12m": 270004,
        "share12m": 1.6,
-       "yoy": -6.2,
+       "yoy": -7.9,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 3107,
-         "shareOfIcb": 3.1
+         "items": 2663,
+         "shareOfIcb": 3.0
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 2348,
+         "items": 2093,
          "shareOfIcb": 3.2
         },
         {
          "icb": "QRL",
          "name": "NHS Hampshire and Isle of Wight",
-         "items": 1795,
-         "shareOfIcb": 4.0
+         "items": 1498,
+         "shareOfIcb": 3.8
         },
         {
          "icb": "QUA",
          "name": "NHS Black Country",
-         "items": 1320,
+         "items": 1143,
          "shareOfIcb": 2.8
         },
         {
          "icb": "QHL",
          "name": "NHS Birmingham and Solihull",
-         "items": 1247,
-         "shareOfIcb": 1.8
+         "items": 1130,
+         "shareOfIcb": 1.9
         }
        ]
       },
@@ -6339,43 +6339,43 @@
         "Oilatum Plus bath additive",
         "Oilatum Junior cream"
        ],
-       "items": 21195,
+       "items": 17750,
        "share": 1.4,
-       "cost": 199256,
-       "items12m": 257305,
-       "share12m": 1.6,
-       "yoy": -12.1,
+       "cost": 166567,
+       "items12m": 254713,
+       "share12m": 1.5,
+       "yoy": -12.7,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 2077,
-         "shareOfIcb": 2.2
+         "items": 1700,
+         "shareOfIcb": 2.1
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 1681,
-         "shareOfIcb": 2.2
+         "items": 1360,
+         "shareOfIcb": 2.1
         },
         {
          "icb": "QHL",
          "name": "NHS Birmingham and Solihull",
-         "items": 1601,
-         "shareOfIcb": 2.3
-        },
-        {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 1473,
-         "shareOfIcb": 1.8
+         "items": 1314,
+         "shareOfIcb": 2.2
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 1466,
-         "shareOfIcb": 2.0
+         "items": 1289,
+         "shareOfIcb": 1.9
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 1119,
+         "shareOfIcb": 1.6
         }
        ]
       },
@@ -6385,43 +6385,43 @@
        "products": [
         "Zerodouble gel"
        ],
-       "items": 14920,
+       "items": 12849,
        "share": 1.0,
-       "cost": 83449,
-       "items12m": 172309,
+       "cost": 72691,
+       "items12m": 170587,
        "share12m": 1.0,
-       "yoy": -9.5,
+       "yoy": -11.8,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 1699,
+         "items": 1429,
          "shareOfIcb": 2.4
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 1318,
-         "shareOfIcb": 2.1
+         "items": 1104,
+         "shareOfIcb": 2.0
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 1135,
-         "shareOfIcb": 1.5
+         "items": 1049,
+         "shareOfIcb": 1.6
         },
         {
          "icb": "QUA",
          "name": "NHS Black Country",
-         "items": 1037,
-         "shareOfIcb": 2.2
+         "items": 833,
+         "shareOfIcb": 2.1
         },
         {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 790,
-         "shareOfIcb": 0.8
+         "icb": "QPM",
+         "name": "NHS Northamptonshire",
+         "items": 684,
+         "shareOfIcb": 5.6
         }
        ]
       },
@@ -6431,43 +6431,43 @@
        "products": [
         "Zeroveen cream"
        ],
-       "items": 13448,
+       "items": 11704,
        "share": 0.9,
-       "cost": 88163,
-       "items12m": 154801,
+       "cost": 76690,
+       "items12m": 154168,
        "share12m": 0.9,
-       "yoy": -10.3,
+       "yoy": -5.1,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 1590,
+         "items": 1350,
          "shareOfIcb": 2.3
-        },
-        {
-         "icb": "QF7",
-         "name": "NHS South Yorkshire",
-         "items": 1062,
-         "shareOfIcb": 2.6
         },
         {
          "icb": "QRL",
          "name": "NHS Hampshire and Isle of Wight",
-         "items": 1050,
-         "shareOfIcb": 2.3
+         "items": 929,
+         "shareOfIcb": 2.4
+        },
+        {
+         "icb": "QF7",
+         "name": "NHS South Yorkshire",
+         "items": 862,
+         "shareOfIcb": 2.4
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 835,
+         "items": 691,
          "shareOfIcb": 1.1
         },
         {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 769,
-         "shareOfIcb": 0.8
+         "icb": "QKS",
+         "name": "NHS Kent and Medway",
+         "items": 681,
+         "shareOfIcb": 2.4
         }
        ]
       },
@@ -6479,43 +6479,43 @@
         "Dermatonics Dry Skin Balm",
         "Dermatonics Once Callus Removing Balm"
        ],
-       "items": 11857,
+       "items": 10716,
        "share": 0.8,
-       "cost": 76822,
-       "items12m": 127607,
+       "cost": 70437,
+       "items12m": 127970,
        "share12m": 0.8,
-       "yoy": 3.9,
+       "yoy": 3.5,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 1642,
-         "shareOfIcb": 1.6
+         "items": 1479,
+         "shareOfIcb": 1.7
         },
         {
          "icb": "QHL",
          "name": "NHS Birmingham and Solihull",
-         "items": 1266,
-         "shareOfIcb": 1.8
+         "items": 1153,
+         "shareOfIcb": 2.0
         },
         {
          "icb": "QOX",
          "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-         "items": 850,
-         "shareOfIcb": 3.8
+         "items": 763,
+         "shareOfIcb": 3.9
         },
         {
          "icb": "QUA",
          "name": "NHS Black Country",
-         "items": 832,
-         "shareOfIcb": 1.8
+         "items": 690,
+         "shareOfIcb": 1.7
         },
         {
          "icb": "T6Y0W",
          "name": "NHS Norfolk and Suffolk",
-         "items": 707,
-         "shareOfIcb": 1.7
+         "items": 606,
+         "shareOfIcb": 1.6
         }
        ]
       },
@@ -6525,42 +6525,42 @@
        "products": [
         "ZeroAQS emollient cream"
        ],
-       "items": 11660,
+       "items": 10404,
        "share": 0.8,
-       "cost": 41308,
-       "items12m": 137928,
+       "cost": 36544,
+       "items12m": 137205,
        "share12m": 0.8,
-       "yoy": -7.3,
+       "yoy": -6.5,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 2638,
-         "shareOfIcb": 2.6
+         "items": 2382,
+         "shareOfIcb": 2.7
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 1840,
+         "items": 1631,
          "shareOfIcb": 2.5
         },
         {
          "icb": "QKK",
          "name": "NHS South East London",
-         "items": 995,
+         "items": 901,
          "shareOfIcb": 2.8
         },
         {
          "icb": "QWE",
          "name": "NHS South West London",
-         "items": 585,
-         "shareOfIcb": 1.7
+         "items": 544,
+         "shareOfIcb": 1.8
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 573,
+         "items": 518,
          "shareOfIcb": 0.9
         }
        ]
@@ -6571,43 +6571,89 @@
        "products": [
         "Adex gel"
        ],
-       "items": 10439,
+       "items": 8972,
        "share": 0.7,
-       "cost": 65864,
-       "items12m": 110202,
+       "cost": 57159,
+       "items12m": 111187,
        "share12m": 0.7,
-       "yoy": 17.5,
+       "yoy": 12.3,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 1220,
+         "items": 1041,
          "shareOfIcb": 1.3
-        },
-        {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 644,
-         "shareOfIcb": 0.8
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 628,
-         "shareOfIcb": 0.8
+         "items": 591,
+         "shareOfIcb": 0.9
         },
         {
-         "icb": "QE1",
-         "name": "NHS Lancashire and South Cumbria",
-         "items": 615,
-         "shareOfIcb": 1.5
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 560,
+         "shareOfIcb": 0.8
         },
         {
          "icb": "T6Y0W",
          "name": "NHS Norfolk and Suffolk",
-         "items": 578,
-         "shareOfIcb": 1.4
+         "items": 551,
+         "shareOfIcb": 1.5
+        },
+        {
+         "icb": "QE1",
+         "name": "NHS Lancashire and South Cumbria",
+         "items": 544,
+         "shareOfIcb": 1.5
+        }
+       ]
+      },
+      {
+       "brand": "Fifty:50",
+       "generic": false,
+       "products": [
+        "Fifty:50 ointment"
+       ],
+       "items": 8081,
+       "share": 0.6,
+       "cost": 33763,
+       "items12m": 86626,
+       "share12m": 0.5,
+       "yoy": 114.7,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QMF",
+         "name": "NHS North East London",
+         "items": 1066,
+         "shareOfIcb": 1.6
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 1041,
+         "shareOfIcb": 1.2
+        },
+        {
+         "icb": "QWE",
+         "name": "NHS South West London",
+         "items": 689,
+         "shareOfIcb": 2.3
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 643,
+         "shareOfIcb": 1.1
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 449,
+         "shareOfIcb": 0.5
         }
        ]
       },
@@ -6618,89 +6664,43 @@
         "Diprobase Advanced Eczema cream",
         "Diprobase ointment"
        ],
-       "items": 9118,
+       "items": 7731,
        "share": 0.6,
-       "cost": 73995,
-       "items12m": 104301,
+       "cost": 63293,
+       "items12m": 103329,
        "share12m": 0.6,
-       "yoy": -6.9,
+       "yoy": -11.2,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 936,
-         "shareOfIcb": 1.0
+         "items": 772,
+         "shareOfIcb": 0.9
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 874,
+         "items": 750,
          "shareOfIcb": 0.9
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 762,
+         "items": 653,
          "shareOfIcb": 1.0
         },
         {
          "icb": "QWE",
          "name": "NHS South West London",
-         "items": 516,
-         "shareOfIcb": 1.5
-        },
-        {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 512,
-         "shareOfIcb": 0.6
-        }
-       ]
-      },
-      {
-       "brand": "Fifty:50",
-       "generic": false,
-       "products": [
-        "Fifty:50 ointment"
-       ],
-       "items": 8935,
-       "share": 0.6,
-       "cost": 37238,
-       "items12m": 82308,
-       "share12m": 0.5,
-       "yoy": 117.9,
-       "icbsPrescribing": 36,
-       "topIcbs": [
-        {
-         "icb": "Z9B2Z",
-         "name": "NHS West and North London",
-         "items": 1121,
-         "shareOfIcb": 1.1
+         "items": 427,
+         "shareOfIcb": 1.4
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 1118,
-         "shareOfIcb": 1.5
-        },
-        {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 709,
-         "shareOfIcb": 1.1
-        },
-        {
-         "icb": "QWE",
-         "name": "NHS South West London",
-         "items": 697,
-         "shareOfIcb": 2.1
-        },
-        {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 518,
-         "shareOfIcb": 0.5
+         "items": 420,
+         "shareOfIcb": 0.6
         }
        ]
       },
@@ -6711,43 +6711,89 @@
         "Aquamax cream",
         "Aquamax wash"
        ],
-       "items": 6391,
+       "items": 5615,
        "share": 0.4,
-       "cost": 26839,
-       "items12m": 77316,
+       "cost": 23232,
+       "items12m": 76705,
        "share12m": 0.5,
-       "yoy": -7.4,
+       "yoy": -9.8,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "S9B9J",
          "name": "NHS Surrey and Sussex",
-         "items": 1630,
-         "shareOfIcb": 3.0
+         "items": 1480,
+         "shareOfIcb": 3.1
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 696,
+         "items": 621,
          "shareOfIcb": 0.7
         },
         {
          "icb": "QWU",
          "name": "NHS Coventry and Warwickshire",
-         "items": 399,
-         "shareOfIcb": 1.5
-        },
-        {
-         "icb": "D7T5G",
-         "name": "NHS Essex",
-         "items": 385,
-         "shareOfIcb": 1.2
+         "items": 351,
+         "shareOfIcb": 1.4
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 375,
+         "items": 350,
          "shareOfIcb": 0.5
+        },
+        {
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 313,
+         "shareOfIcb": 1.1
+        }
+       ]
+      },
+      {
+       "brand": "Imuderm",
+       "generic": false,
+       "products": [
+        "imuDERM emollient"
+       ],
+       "items": 3705,
+       "share": 0.3,
+       "cost": 25515,
+       "items12m": 39467,
+       "share12m": 0.2,
+       "yoy": 20.0,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 741,
+         "shareOfIcb": 1.7
+        },
+        {
+         "icb": "QMF",
+         "name": "NHS North East London",
+         "items": 716,
+         "shareOfIcb": 1.1
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 370,
+         "shareOfIcb": 0.8
+        },
+        {
+         "icb": "T6Y0W",
+         "name": "NHS Norfolk and Suffolk",
+         "items": 277,
+         "shareOfIcb": 0.7
+        },
+        {
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 189,
+         "shareOfIcb": 0.6
         }
        ]
       },
@@ -6757,90 +6803,43 @@
        "products": [
         "Emollin aerosol spray"
        ],
-       "items": 3758,
+       "items": 3332,
        "share": 0.3,
-       "cost": 40309,
-       "items12m": 41660,
+       "cost": 35459,
+       "items12m": 41772,
        "share12m": 0.3,
-       "yoy": -0.3,
+       "yoy": 3.5,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QK1",
          "name": "NHS Leicester, Leicestershire and Rutland",
-         "items": 384,
+         "items": 358,
          "shareOfIcb": 1.1
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 291,
+         "items": 255,
          "shareOfIcb": 0.3
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 254,
-         "shareOfIcb": 0.3
+         "items": 248,
+         "shareOfIcb": 0.4
         },
         {
          "icb": "QKS",
          "name": "NHS Kent and Medway",
-         "items": 234,
+         "items": 201,
          "shareOfIcb": 0.7
         },
         {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 227,
-         "shareOfIcb": 0.2
-        }
-       ]
-      },
-      {
-       "brand": "Imuderm",
-       "generic": false,
-       "products": [
-        "imuDERM emollient",
-        "Imuderm cream"
-       ],
-       "items": 3451,
-       "share": 0.2,
-       "cost": 23487,
-       "items12m": 38849,
-       "share12m": 0.2,
-       "yoy": 5.4,
-       "icbsPrescribing": 36,
-       "topIcbs": [
-        {
-         "icb": "QMF",
-         "name": "NHS North East London",
-         "items": 666,
-         "shareOfIcb": 0.9
-        },
-        {
-         "icb": "S0E4D",
-         "name": "NHS Thames Valley",
-         "items": 634,
-         "shareOfIcb": 1.3
-        },
-        {
-         "icb": "S9B9J",
-         "name": "NHS Surrey and Sussex",
-         "items": 372,
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 197,
          "shareOfIcb": 0.7
-        },
-        {
-         "icb": "T6Y0W",
-         "name": "NHS Norfolk and Suffolk",
-         "items": 208,
-         "shareOfIcb": 0.5
-        },
-        {
-         "icb": "QT1",
-         "name": "NHS Nottingham and Nottinghamshire",
-         "items": 198,
-         "shareOfIcb": 0.6
         }
        ]
       },
@@ -6853,42 +6852,42 @@
         "Eucerin AntiREDNESS soothing care cream",
         "Eucerin AntiREDNESS concealing day cream SPF25"
        ],
-       "items": 3325,
+       "items": 2882,
        "share": 0.2,
-       "cost": 64394,
-       "items12m": 38354,
+       "cost": 52260,
+       "items12m": 38035,
        "share12m": 0.2,
-       "yoy": -6.1,
+       "yoy": -10.0,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 418,
+         "items": 364,
          "shareOfIcb": 0.4
         },
         {
          "icb": "QHL",
          "name": "NHS Birmingham and Solihull",
-         "items": 252,
-         "shareOfIcb": 0.4
+         "items": 194,
+         "shareOfIcb": 0.3
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 206,
+         "items": 183,
          "shareOfIcb": 0.3
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 185,
+         "items": 160,
          "shareOfIcb": 0.2
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 156,
+         "items": 141,
          "shareOfIcb": 0.2
         }
        ]
@@ -6900,43 +6899,43 @@
         "GlucoRx Allpresan diabetic foam cream Intensive",
         "GlucoRx Allpresan diabetic foam cream Basic"
        ],
-       "items": 2517,
+       "items": 2319,
        "share": 0.2,
-       "cost": 19127,
-       "items12m": 27700,
+       "cost": 17899,
+       "items12m": 27797,
        "share12m": 0.2,
-       "yoy": 4.9,
+       "yoy": 4.4,
        "icbsPrescribing": 35,
        "topIcbs": [
         {
          "icb": "QRL",
          "name": "NHS Hampshire and Isle of Wight",
-         "items": 445,
+         "items": 393,
          "shareOfIcb": 1.0
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 253,
-         "shareOfIcb": 0.3
+         "items": 259,
+         "shareOfIcb": 0.4
         },
         {
          "icb": "QVV",
          "name": "NHS Dorset",
-         "items": 248,
-         "shareOfIcb": 1.3
+         "items": 198,
+         "shareOfIcb": 1.1
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 204,
-         "shareOfIcb": 0.3
+         "items": 172,
+         "shareOfIcb": 0.2
         },
         {
          "icb": "QK1",
          "name": "NHS Leicester, Leicestershire and Rutland",
-         "items": 135,
-         "shareOfIcb": 0.4
+         "items": 160,
+         "shareOfIcb": 0.5
         }
        ]
       },
@@ -6946,42 +6945,42 @@
        "products": [
         "Ultrabase cream"
        ],
-       "items": 2243,
-       "share": 0.2,
-       "cost": 17095,
-       "items12m": 26167,
+       "items": 1930,
+       "share": 0.1,
+       "cost": 14863,
+       "items12m": 25884,
        "share12m": 0.2,
-       "yoy": -8.9,
+       "yoy": -12.8,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 417,
+         "items": 349,
          "shareOfIcb": 0.4
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 346,
+         "items": 289,
          "shareOfIcb": 0.4
-        },
-        {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 255,
-         "shareOfIcb": 0.3
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 238,
+         "items": 209,
+         "shareOfIcb": 0.3
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 199,
          "shareOfIcb": 0.3
         },
         {
          "icb": "QOQ",
          "name": "NHS Humber and North Yorkshire",
-         "items": 170,
+         "items": 145,
          "shareOfIcb": 0.4
         }
        ]
@@ -6989,8 +6988,8 @@
      ],
      "otherBrands": {
       "count": 69,
-      "items": 16575,
-      "share": 1.1
+      "items": 15055,
+      "share": 1.2
      }
     },
     "secondary": {

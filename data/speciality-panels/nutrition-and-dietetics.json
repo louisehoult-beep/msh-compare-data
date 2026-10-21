@@ -22,7 +22,7 @@
   "drugTariff": "2026-10-21",
   "localIntel": "2026-10-21",
   "supplierDirectory": "2026-10-21",
-  "gpPrescribing": "2026-09-30",
+  "gpPrescribing": "2026-10-21",
   "mhraDsu": "2026-10-19",
   "drugTariffViiia": null,
   "hospitalPrescribing": null
@@ -35,7 +35,7 @@
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: nutrition). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 7 of the 8 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
-  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202608) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (8 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (1 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-19.",
   "drugTariffViiia": null
  },
@@ -1331,14 +1331,14 @@
   }
  ],
  "gpPrescribing": {
-  "generatedOn": "2026-09-30",
+  "generatedOn": "2026-10-21",
   "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
   "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
   "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
   "periods": [
-   "202507",
-   "202607"
+   "202508",
+   "202608"
   ],
   "minBaselineItems": 25,
   "defined": true,
@@ -1351,271 +1351,271 @@
      "09.14"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 629318,
-    "cost": 55405835,
-    "items12m": 7132934,
-    "cost12m": 624398094,
-    "itemsYoY": -3.7,
-    "products": 508,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 570128,
+    "cost": 49693763,
+    "items12m": 7127839,
+    "cost12m": 624622672,
+    "itemsYoY": -0.9,
+    "products": 497,
     "topNational": [
      {
       "code": "0913011W0BB",
       "label": "Fortisip Compact Protein liquid",
       "generic": false,
-      "items": 36233,
-      "share": 5.8,
-      "cost": 3484423,
-      "yoy": -1.6
+      "items": 32643,
+      "share": 5.7,
+      "cost": 3160494,
+      "yoy": -0.0
      },
      {
       "code": "0913011V0BD",
       "label": "Fortisip Compact liquid",
       "generic": false,
-      "items": 33095,
-      "share": 5.3,
-      "cost": 1967990,
-      "yoy": -10.9
+      "items": 29423,
+      "share": 5.2,
+      "cost": 1756795,
+      "yoy": -9.7
      },
      {
       "code": "0913011N0BE",
       "label": "Ensure Plus milkshake style liquid",
       "generic": false,
-      "items": 30171,
+      "items": 27304,
       "share": 4.8,
-      "cost": 1341326,
-      "yoy": -9.1
+      "cost": 1213588,
+      "yoy": -8.0
      },
      {
       "code": "0913011V0BC",
       "label": "Ensure Compact liquid",
       "generic": false,
-      "items": 27976,
-      "share": 4.4,
-      "cost": 1851354,
-      "yoy": -4.4
+      "items": 25447,
+      "share": 4.5,
+      "cost": 1690888,
+      "yoy": -2.0
      },
      {
       "code": "0913011N0BF",
       "label": "Fortisip Bottle",
       "generic": false,
-      "items": 26474,
+      "items": 23889,
       "share": 4.2,
-      "cost": 1300214,
-      "yoy": -7.3
+      "cost": 1163902,
+      "yoy": -5.2
      },
      {
       "code": "0913011C0BB",
       "label": "Aymes Shake powder",
       "generic": false,
-      "items": 25019,
-      "share": 4.0,
-      "cost": 484842,
-      "yoy": -5.7
+      "items": 23345,
+      "share": 4.1,
+      "cost": 454771,
+      "yoy": -3.4
      },
      {
       "code": "0913161A0BC",
       "label": "Nutilis Clear powder",
       "generic": false,
-      "items": 17665,
+      "items": 15705,
       "share": 2.8,
-      "cost": 561733,
-      "yoy": -1.8
+      "cost": 506794,
+      "yoy": -3.8
      },
      {
       "code": "0913161A0BE",
       "label": "Resource ThickenUp Clear powder",
       "generic": false,
-      "items": 16296,
+      "items": 14750,
       "share": 2.6,
-      "cost": 684339,
-      "yoy": -4.1
-     },
-     {
-      "code": "0913101A0BD",
-      "label": "Aptamil Pepti",
-      "generic": false,
-      "items": 15472,
-      "share": 2.5,
-      "cost": 1094222,
-      "yoy": -3.3
+      "cost": 610781,
+      "yoy": -2.5
      },
      {
       "code": "0913011N0BB",
       "label": "Altraplen Energy liquid",
       "generic": false,
-      "items": 15161,
-      "share": 2.4,
-      "cost": 458821,
-      "yoy": 26.3
+      "items": 14405,
+      "share": 2.5,
+      "cost": 426631,
+      "yoy": 28.2
+     },
+     {
+      "code": "0913101A0BD",
+      "label": "Aptamil Pepti",
+      "generic": false,
+      "items": 14308,
+      "share": 2.5,
+      "cost": 1004487,
+      "yoy": -3.4
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 10084,
+      "items": 9450,
       "leaders": [
        {
         "code": "0913011V0BD",
         "label": "Fortisip Compact liquid",
         "generic": false,
-        "items": 740,
-        "share": 7.3
+        "items": 774,
+        "share": 8.2
        },
        {
         "code": "0913011N0BB",
         "label": "Altraplen Energy liquid",
         "generic": false,
-        "items": 669,
-        "share": 6.6
+        "items": 636,
+        "share": 6.7
        },
        {
         "code": "0913011X0BC",
         "label": "Altraplen Compact Daily liquid",
         "generic": false,
-        "items": 614,
-        "share": 6.1
+        "items": 589,
+        "share": 6.2
        }
       ]
      },
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 26993,
+      "items": 23560,
       "leaders": [
        {
         "code": "0913011W0BB",
         "label": "Fortisip Compact Protein liquid",
         "generic": false,
-        "items": 3713,
-        "share": 13.8
+        "items": 3356,
+        "share": 14.2
        },
        {
         "code": "0913011V0BD",
         "label": "Fortisip Compact liquid",
         "generic": false,
-        "items": 3640,
-        "share": 13.5
+        "items": 2907,
+        "share": 12.3
        },
        {
         "code": "0913011N0BF",
         "label": "Fortisip Bottle",
         "generic": false,
-        "items": 3044,
-        "share": 11.3
+        "items": 2701,
+        "share": 11.5
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 21777,
+      "items": 19775,
       "leaders": [
        {
         "code": "0913011N0BF",
         "label": "Fortisip Bottle",
         "generic": false,
-        "items": 3912,
-        "share": 18.0
+        "items": 3588,
+        "share": 18.1
        },
        {
         "code": "0913011W0BB",
         "label": "Fortisip Compact Protein liquid",
         "generic": false,
-        "items": 1685,
-        "share": 7.7
+        "items": 1662,
+        "share": 8.4
        },
        {
         "code": "0913011V0BD",
         "label": "Fortisip Compact liquid",
         "generic": false,
-        "items": 1640,
-        "share": 7.5
+        "items": 1536,
+        "share": 7.8
        }
       ]
      },
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 8017,
+      "items": 7334,
       "leaders": [
-       {
-        "code": "0913011V0BD",
-        "label": "Fortisip Compact liquid",
-        "generic": false,
-        "items": 907,
-        "share": 11.3
-       },
        {
         "code": "0913011N0BB",
         "label": "Altraplen Energy liquid",
         "generic": false,
-        "items": 829,
-        "share": 10.3
+        "items": 810,
+        "share": 11.0
+       },
+       {
+        "code": "0913011V0BD",
+        "label": "Fortisip Compact liquid",
+        "generic": false,
+        "items": 761,
+        "share": 10.4
        },
        {
         "code": "0913011X0BC",
         "label": "Altraplen Compact Daily liquid",
         "generic": false,
-        "items": 510,
-        "share": 6.4
+        "items": 555,
+        "share": 7.6
        }
       ]
      },
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 20736,
+      "items": 18643,
       "leaders": [
        {
         "code": "0913161A0BE",
         "label": "Resource ThickenUp Clear powder",
         "generic": false,
-        "items": 1527,
-        "share": 7.4
+        "items": 1390,
+        "share": 7.5
        },
        {
         "code": "0913011W0BB",
         "label": "Fortisip Compact Protein liquid",
         "generic": false,
-        "items": 991,
-        "share": 4.8
+        "items": 803,
+        "share": 4.3
        },
        {
-        "code": "0913101A0BC",
-        "label": "SMA Althera powder",
+        "code": "0913011V0BD",
+        "label": "Fortisip Compact liquid",
         "generic": false,
-        "items": 912,
-        "share": 4.4
+        "items": 797,
+        "share": 4.3
        }
       ]
      },
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 42421,
+      "items": 38612,
       "leaders": [
        {
         "code": "0913011N0BE",
         "label": "Ensure Plus milkshake style liquid",
         "generic": false,
-        "items": 10135,
-        "share": 23.9
+        "items": 8796,
+        "share": 22.8
        },
        {
         "code": "0913011V0BC",
         "label": "Ensure Compact liquid",
         "generic": false,
-        "items": 4777,
-        "share": 11.3
+        "items": 4251,
+        "share": 11.0
        },
        {
         "code": "0913161A0BC",
         "label": "Nutilis Clear powder",
         "generic": false,
-        "items": 1602,
+        "items": 1470,
         "share": 3.8
        }
       ]
@@ -1623,167 +1623,167 @@
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 5953,
+      "items": 5386,
       "leaders": [
        {
         "code": "0913011C0BF",
         "label": "Foodlink Complete powder",
         "generic": false,
-        "items": 588,
-        "share": 9.9
+        "items": 576,
+        "share": 10.7
        },
        {
         "code": "0913011N0BB",
         "label": "Altraplen Energy liquid",
         "generic": false,
-        "items": 540,
-        "share": 9.1
+        "items": 484,
+        "share": 9.0
        },
        {
         "code": "0913011N0BE",
         "label": "Ensure Plus milkshake style liquid",
         "generic": false,
-        "items": 504,
-        "share": 8.5
+        "items": 433,
+        "share": 8.0
        }
       ]
      },
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 11270,
+      "items": 10269,
       "leaders": [
        {
         "code": "0913011N0BF",
         "label": "Fortisip Bottle",
         "generic": false,
-        "items": 1832,
-        "share": 16.3
+        "items": 1650,
+        "share": 16.1
        },
        {
         "code": "0913011W0BB",
         "label": "Fortisip Compact Protein liquid",
         "generic": false,
-        "items": 1126,
-        "share": 10.0
+        "items": 1003,
+        "share": 9.8
        },
        {
         "code": "0913011V0BD",
         "label": "Fortisip Compact liquid",
         "generic": false,
-        "items": 750,
-        "share": 6.7
+        "items": 733,
+        "share": 7.1
        }
       ]
      },
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 10600,
+      "items": 9444,
       "leaders": [
        {
         "code": "0913011V0BD",
         "label": "Fortisip Compact liquid",
         "generic": false,
-        "items": 1009,
-        "share": 9.5
+        "items": 883,
+        "share": 9.3
        },
        {
         "code": "0913161A0BC",
         "label": "Nutilis Clear powder",
         "generic": false,
         "items": 767,
-        "share": 7.2
+        "share": 8.1
        },
        {
         "code": "0913011N0BF",
         "label": "Fortisip Bottle",
         "generic": false,
-        "items": 633,
-        "share": 6.0
+        "items": 525,
+        "share": 5.6
        }
       ]
      },
      {
       "icb": "QJK",
       "name": "NHS Devon",
-      "items": 13630,
+      "items": 12679,
       "leaders": [
        {
         "code": "0913011N0BE",
         "label": "Ensure Plus milkshake style liquid",
         "generic": false,
-        "items": 1643,
-        "share": 12.1
+        "items": 1611,
+        "share": 12.7
        },
        {
         "code": "0913011V0BC",
         "label": "Ensure Compact liquid",
         "generic": false,
-        "items": 1365,
-        "share": 10.0
+        "items": 1249,
+        "share": 9.9
        },
        {
         "code": "0913011C0BF",
         "label": "Foodlink Complete powder",
         "generic": false,
-        "items": 979,
-        "share": 7.2
+        "items": 944,
+        "share": 7.4
        }
       ]
      },
      {
       "icb": "QVV",
       "name": "NHS Dorset",
-      "items": 8254,
+      "items": 7379,
       "leaders": [
        {
         "code": "0913011V0BD",
         "label": "Fortisip Compact liquid",
         "generic": false,
-        "items": 823,
-        "share": 10.0
-       },
-       {
-        "code": "0913011S0BF",
-        "label": "Fresubin",
-        "generic": false,
-        "items": 509,
-        "share": 6.2
+        "items": 678,
+        "share": 9.2
        },
        {
         "code": "0913011W0BC",
         "label": "Fresubin Pro Compact drink",
         "generic": false,
-        "items": 444,
-        "share": 5.4
+        "items": 479,
+        "share": 6.5
+       },
+       {
+        "code": "0913011S0BF",
+        "label": "Fresubin",
+        "generic": false,
+        "items": 403,
+        "share": 5.5
        }
       ]
      },
      {
       "icb": "D7T5G",
       "name": "NHS Essex",
-      "items": 19009,
+      "items": 17402,
       "leaders": [
        {
         "code": "0913011C0BB",
         "label": "Aymes Shake powder",
         "generic": false,
-        "items": 1554,
-        "share": 8.2
+        "items": 1387,
+        "share": 8.0
        },
        {
         "code": "0913011W0BB",
         "label": "Fortisip Compact Protein liquid",
         "generic": false,
-        "items": 1291,
+        "items": 1185,
         "share": 6.8
        },
        {
         "code": "0913011V0BD",
         "label": "Fortisip Compact liquid",
         "generic": false,
-        "items": 931,
+        "items": 849,
         "share": 4.9
        }
       ]
@@ -1791,55 +1791,55 @@
      {
       "icb": "QR1",
       "name": "NHS Gloucestershire",
-      "items": 3552,
+      "items": 3152,
       "leaders": [
        {
         "code": "0913161A0BC",
         "label": "Nutilis Clear powder",
         "generic": false,
-        "items": 301,
-        "share": 8.5
+        "items": 256,
+        "share": 8.1
        },
        {
         "code": "0913011C0BF",
         "label": "Foodlink Complete powder",
         "generic": false,
-        "items": 257,
-        "share": 7.2
+        "items": 229,
+        "share": 7.3
        },
        {
         "code": "0913541B0BB",
         "label": "Lift Fast Acting Glucose Shot liquid",
         "generic": false,
-        "items": 230,
-        "share": 6.5
+        "items": 179,
+        "share": 5.7
        }
       ]
      },
      {
       "icb": "QOP",
       "name": "NHS Greater Manchester",
-      "items": 42933,
+      "items": 38711,
       "leaders": [
        {
         "code": "0913011V0BC",
         "label": "Ensure Compact liquid",
         "generic": false,
-        "items": 3934,
+        "items": 3572,
         "share": 9.2
        },
        {
         "code": "0913011N0BE",
         "label": "Ensure Plus milkshake style liquid",
         "generic": false,
-        "items": 2896,
+        "items": 2580,
         "share": 6.7
        },
        {
         "code": "0913011N0BF",
         "label": "Fortisip Bottle",
         "generic": false,
-        "items": 2509,
+        "items": 2234,
         "share": 5.8
        }
       ]
@@ -1847,27 +1847,27 @@
      {
       "icb": "QRL",
       "name": "NHS Hampshire and Isle of Wight",
-      "items": 18546,
+      "items": 16367,
       "leaders": [
        {
         "code": "0913011N0BB",
         "label": "Altraplen Energy liquid",
         "generic": false,
-        "items": 1862,
-        "share": 10.0
+        "items": 1705,
+        "share": 10.4
        },
        {
         "code": "0913011C0BB",
         "label": "Aymes Shake powder",
         "generic": false,
-        "items": 1458,
-        "share": 7.9
+        "items": 1272,
+        "share": 7.8
        },
        {
         "code": "0913011V0BD",
         "label": "Fortisip Compact liquid",
         "generic": false,
-        "items": 1415,
+        "items": 1238,
         "share": 7.6
        }
       ]
@@ -1875,251 +1875,251 @@
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 8260,
+      "items": 8191,
       "leaders": [
        {
         "code": "0913011C0BB",
         "label": "Aymes Shake powder",
         "generic": false,
-        "items": 1012,
-        "share": 12.3
+        "items": 965,
+        "share": 11.8
        },
        {
         "code": "0913161A0BE",
         "label": "Resource ThickenUp Clear powder",
         "generic": false,
-        "items": 654,
-        "share": 7.9
+        "items": 673,
+        "share": 8.2
        },
        {
         "code": "0913011W0BB",
         "label": "Fortisip Compact Protein liquid",
         "generic": false,
-        "items": 447,
-        "share": 5.4
+        "items": 483,
+        "share": 5.9
        }
       ]
      },
      {
       "icb": "QOQ",
       "name": "NHS Humber and North Yorkshire",
-      "items": 23928,
+      "items": 21536,
       "leaders": [
        {
         "code": "0913011W0BB",
         "label": "Fortisip Compact Protein liquid",
         "generic": false,
-        "items": 2954,
-        "share": 12.3
+        "items": 2633,
+        "share": 12.2
        },
        {
         "code": "0913011V0BD",
         "label": "Fortisip Compact liquid",
         "generic": false,
-        "items": 2089,
+        "items": 1869,
         "share": 8.7
        },
        {
         "code": "0913541B0BB",
         "label": "Lift Fast Acting Glucose Shot liquid",
         "generic": false,
-        "items": 1053,
-        "share": 4.4
+        "items": 875,
+        "share": 4.1
        }
       ]
      },
      {
       "icb": "QKS",
       "name": "NHS Kent and Medway",
-      "items": 20921,
+      "items": 18670,
       "leaders": [
        {
         "code": "0913011V0BC",
         "label": "Ensure Compact liquid",
         "generic": false,
-        "items": 2367,
-        "share": 11.3
+        "items": 2091,
+        "share": 11.2
        },
        {
         "code": "0913011C0BB",
         "label": "Aymes Shake powder",
         "generic": false,
-        "items": 1428,
-        "share": 6.8
+        "items": 1324,
+        "share": 7.1
        },
        {
         "code": "0913011N0BE",
         "label": "Ensure Plus milkshake style liquid",
         "generic": false,
-        "items": 1230,
-        "share": 5.9
+        "items": 1064,
+        "share": 5.7
        }
       ]
      },
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 21678,
+      "items": 19082,
       "leaders": [
        {
         "code": "0913011V0BC",
         "label": "Ensure Compact liquid",
         "generic": false,
-        "items": 2359,
-        "share": 10.9
+        "items": 2095,
+        "share": 11.0
        },
        {
         "code": "0913011N0BE",
         "label": "Ensure Plus milkshake style liquid",
         "generic": false,
-        "items": 1435,
-        "share": 6.6
+        "items": 1226,
+        "share": 6.4
        },
        {
-        "code": "0913101A0BD",
-        "label": "Aptamil Pepti",
+        "code": "0913011N0BG",
+        "label": "Fresubin Energy liquid",
         "generic": false,
-        "items": 840,
-        "share": 3.9
+        "items": 696,
+        "share": 3.6
        }
       ]
      },
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 13834,
+      "items": 12627,
       "leaders": [
-       {
-        "code": "0913011W0BB",
-        "label": "Fortisip Compact Protein liquid",
-        "generic": false,
-        "items": 2150,
-        "share": 15.5
-       },
        {
         "code": "0913011V0BD",
         "label": "Fortisip Compact liquid",
         "generic": false,
-        "items": 2142,
-        "share": 15.5
+        "items": 1981,
+        "share": 15.7
+       },
+       {
+        "code": "0913011W0BB",
+        "label": "Fortisip Compact Protein liquid",
+        "generic": false,
+        "items": 1876,
+        "share": 14.9
        },
        {
         "code": "0913011N0BF",
         "label": "Fortisip Bottle",
         "generic": false,
-        "items": 690,
-        "share": 5.0
+        "items": 605,
+        "share": 4.8
        }
       ]
      },
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 10587,
+      "items": 9797,
       "leaders": [
        {
         "code": "0913011S0BF",
         "label": "Fresubin",
         "generic": false,
-        "items": 1729,
-        "share": 16.3
+        "items": 1627,
+        "share": 16.6
        },
        {
         "code": "0913011J0BF",
         "label": "Fresubin",
         "generic": false,
-        "items": 699,
-        "share": 6.6
+        "items": 589,
+        "share": 6.0
        },
        {
         "code": "0913011N0BE",
         "label": "Ensure Plus milkshake style liquid",
         "generic": false,
         "items": 566,
-        "share": 5.3
+        "share": 5.8
        }
       ]
      },
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 18913,
+      "items": 17228,
       "leaders": [
        {
         "code": "0913161A0BC",
         "label": "Nutilis Clear powder",
         "generic": false,
-        "items": 1628,
-        "share": 8.6
+        "items": 1445,
+        "share": 8.4
        },
        {
         "code": "0913011S0BF",
         "label": "Fresubin",
         "generic": false,
-        "items": 1075,
+        "items": 981,
         "share": 5.7
        },
        {
         "code": "0913011C0BB",
         "label": "Aymes Shake powder",
         "generic": false,
-        "items": 1000,
-        "share": 5.3
+        "items": 966,
+        "share": 5.6
        }
       ]
      },
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 20280,
+      "items": 18880,
       "leaders": [
-       {
-        "code": "0913541B0BB",
-        "label": "Lift Fast Acting Glucose Shot liquid",
-        "generic": false,
-        "items": 1077,
-        "share": 5.3
-       },
        {
         "code": "0913011C0BB",
         "label": "Aymes Shake powder",
         "generic": false,
-        "items": 1003,
-        "share": 4.9
+        "items": 1075,
+        "share": 5.7
+       },
+       {
+        "code": "0913541B0BB",
+        "label": "Lift Fast Acting Glucose Shot liquid",
+        "generic": false,
+        "items": 887,
+        "share": 4.7
        },
        {
         "code": "0913011W0BB",
         "label": "Fortisip Compact Protein liquid",
         "generic": false,
-        "items": 918,
-        "share": 4.5
+        "items": 840,
+        "share": 4.4
        }
       ]
      },
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 42013,
+      "items": 37365,
       "leaders": [
        {
         "code": "0913011W0BB",
         "label": "Fortisip Compact Protein liquid",
         "generic": false,
-        "items": 6342,
-        "share": 15.1
+        "items": 5420,
+        "share": 14.5
        },
        {
         "code": "0913011V0BD",
         "label": "Fortisip Compact liquid",
         "generic": false,
-        "items": 4072,
-        "share": 9.7
+        "items": 3525,
+        "share": 9.4
        },
        {
         "code": "0913011M0BE",
         "label": "Fortijuce liquid",
         "generic": false,
-        "items": 1986,
+        "items": 1767,
         "share": 4.7
        }
       ]
@@ -2127,139 +2127,139 @@
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 6139,
+      "items": 5486,
       "leaders": [
        {
         "code": "0913161A0BC",
         "label": "Nutilis Clear powder",
         "generic": false,
-        "items": 632,
-        "share": 10.3
+        "items": 550,
+        "share": 10.0
        },
        {
         "code": "0913011V0BC",
         "label": "Ensure Compact liquid",
         "generic": false,
-        "items": 465,
-        "share": 7.6
+        "items": 384,
+        "share": 7.0
        },
        {
         "code": "0913011X0BC",
         "label": "Altraplen Compact Daily liquid",
         "generic": false,
-        "items": 383,
-        "share": 6.2
+        "items": 372,
+        "share": 6.8
        }
       ]
      },
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 13374,
+      "items": 12552,
       "leaders": [
        {
         "code": "0913011C0BB",
         "label": "Aymes Shake powder",
         "generic": false,
-        "items": 1566,
-        "share": 11.7
+        "items": 1523,
+        "share": 12.1
        },
        {
         "code": "0913011V0BD",
         "label": "Fortisip Compact liquid",
         "generic": false,
-        "items": 1280,
-        "share": 9.6
+        "items": 1122,
+        "share": 8.9
        },
        {
         "code": "0913011W0BB",
         "label": "Fortisip Compact Protein liquid",
         "generic": false,
-        "items": 1067,
-        "share": 8.0
+        "items": 973,
+        "share": 7.8
        }
       ]
      },
      {
       "icb": "QOC",
       "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 5870,
+      "items": 5930,
       "leaders": [
        {
         "code": "0913011V0BC",
         "label": "Ensure Compact liquid",
         "generic": false,
-        "items": 972,
+        "items": 982,
         "share": 16.6
        },
        {
         "code": "0913011N0BE",
         "label": "Ensure Plus milkshake style liquid",
         "generic": false,
-        "items": 819,
-        "share": 14.0
+        "items": 892,
+        "share": 15.0
        },
        {
         "code": "0913161A0BC",
         "label": "Nutilis Clear powder",
         "generic": false,
-        "items": 344,
-        "share": 5.9
+        "items": 361,
+        "share": 6.1
        }
       ]
      },
      {
       "icb": "QSL",
       "name": "NHS Somerset",
-      "items": 4421,
+      "items": 4115,
       "leaders": [
        {
         "code": "0913011N0BG",
         "label": "Fresubin Energy liquid",
         "generic": false,
-        "items": 418,
-        "share": 9.5
+        "items": 478,
+        "share": 11.6
        },
        {
         "code": "0913011N0BF",
         "label": "Fortisip Bottle",
         "generic": false,
-        "items": 370,
-        "share": 8.4
+        "items": 324,
+        "share": 7.9
        },
        {
         "code": "0913011V0BD",
         "label": "Fortisip Compact liquid",
         "generic": false,
-        "items": 310,
-        "share": 7.0
+        "items": 278,
+        "share": 6.8
        }
       ]
      },
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 11638,
+      "items": 10708,
       "leaders": [
-       {
-        "code": "0913011N0BB",
-        "label": "Altraplen Energy liquid",
-        "generic": false,
-        "items": 873,
-        "share": 7.5
-       },
        {
         "code": "0913011X0BC",
         "label": "Altraplen Compact Daily liquid",
         "generic": false,
-        "items": 860,
-        "share": 7.4
+        "items": 809,
+        "share": 7.6
+       },
+       {
+        "code": "0913011N0BB",
+        "label": "Altraplen Energy liquid",
+        "generic": false,
+        "items": 799,
+        "share": 7.5
        },
        {
         "code": "0913011C0BB",
         "label": "Aymes Shake powder",
         "generic": false,
-        "items": 775,
+        "items": 714,
         "share": 6.7
        }
       ]
@@ -2267,55 +2267,55 @@
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 11196,
+      "items": 10482,
       "leaders": [
        {
         "code": "0913011C0BF",
         "label": "Foodlink Complete powder",
         "generic": false,
-        "items": 1247,
-        "share": 11.1
+        "items": 1224,
+        "share": 11.7
        },
        {
         "code": "0913011N0BF",
         "label": "Fortisip Bottle",
         "generic": false,
-        "items": 664,
-        "share": 5.9
+        "items": 547,
+        "share": 5.2
        },
        {
         "code": "0913161A0BE",
         "label": "Resource ThickenUp Clear powder",
         "generic": false,
-        "items": 570,
-        "share": 5.1
+        "items": 499,
+        "share": 4.8
        }
       ]
      },
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 11463,
+      "items": 10282,
       "leaders": [
        {
         "code": "0913541B0BB",
         "label": "Lift Fast Acting Glucose Shot liquid",
         "generic": false,
-        "items": 794,
+        "items": 706,
         "share": 6.9
        },
        {
-        "code": "0913161A0BC",
-        "label": "Nutilis Clear powder",
+        "code": "0913011V0BC",
+        "label": "Ensure Compact liquid",
         "generic": false,
-        "items": 694,
-        "share": 6.1
+        "items": 611,
+        "share": 5.9
        },
        {
-        "code": "0913011V0BD",
-        "label": "Fortisip Compact liquid",
+        "code": "0913011C0BB",
+        "label": "Aymes Shake powder",
         "generic": false,
-        "items": 659,
+        "items": 591,
         "share": 5.7
        }
       ]
@@ -2323,83 +2323,83 @@
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 14462,
+      "items": 13111,
       "leaders": [
        {
         "code": "0913011V0BC",
         "label": "Ensure Compact liquid",
         "generic": false,
-        "items": 1769,
+        "items": 1605,
         "share": 12.2
        },
        {
         "code": "0913011N0BE",
         "label": "Ensure Plus milkshake style liquid",
         "generic": false,
-        "items": 1450,
-        "share": 10.0
+        "items": 1259,
+        "share": 9.6
        },
        {
         "code": "0913161A0BC",
         "label": "Nutilis Clear powder",
         "generic": false,
-        "items": 1239,
-        "share": 8.6
+        "items": 1101,
+        "share": 8.4
        }
       ]
      },
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 27739,
+      "items": 24885,
       "leaders": [
        {
         "code": "0913011V0BD",
         "label": "Fortisip Compact liquid",
         "generic": false,
-        "items": 2149,
-        "share": 7.7
-       },
-       {
-        "code": "0913011C0BB",
-        "label": "Aymes Shake powder",
-        "generic": false,
-        "items": 1932,
-        "share": 7.0
-       },
-       {
-        "code": "0913011W0BB",
-        "label": "Fortisip Compact Protein liquid",
-        "generic": false,
-        "items": 1504,
-        "share": 5.4
-       }
-      ]
-     },
-     {
-      "icb": "S0E4D",
-      "name": "NHS Thames Valley",
-      "items": 16816,
-      "leaders": [
-       {
-        "code": "0913161A0BE",
-        "label": "Resource ThickenUp Clear powder",
-        "generic": false,
-        "items": 1225,
+        "items": 1827,
         "share": 7.3
        },
        {
         "code": "0913011C0BB",
         "label": "Aymes Shake powder",
         "generic": false,
-        "items": 984,
-        "share": 5.9
+        "items": 1666,
+        "share": 6.7
+       },
+       {
+        "code": "0913011W0BB",
+        "label": "Fortisip Compact Protein liquid",
+        "generic": false,
+        "items": 1369,
+        "share": 5.5
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 15695,
+      "leaders": [
+       {
+        "code": "0913161A0BE",
+        "label": "Resource ThickenUp Clear powder",
+        "generic": false,
+        "items": 1111,
+        "share": 7.1
+       },
+       {
+        "code": "0913011C0BB",
+        "label": "Aymes Shake powder",
+        "generic": false,
+        "items": 1002,
+        "share": 6.4
        },
        {
         "code": "0913101A0BD",
         "label": "Aptamil Pepti",
         "generic": false,
-        "items": 730,
+        "items": 671,
         "share": 4.3
        }
       ]
@@ -2407,27 +2407,27 @@
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 33572,
+      "items": 29544,
       "leaders": [
        {
         "code": "0913011W0BB",
         "label": "Fortisip Compact Protein liquid",
         "generic": false,
-        "items": 2124,
-        "share": 6.3
+        "items": 1939,
+        "share": 6.6
        },
        {
         "code": "0913011C0BB",
         "label": "Aymes Shake powder",
         "generic": false,
-        "items": 1718,
-        "share": 5.1
+        "items": 1522,
+        "share": 5.2
        },
        {
         "code": "0913011N0BC",
         "label": "Aymes Actagain",
         "generic": false,
-        "items": 1631,
+        "items": 1460,
         "share": 4.9
        }
       ]
@@ -2435,28 +2435,28 @@
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 28266,
+      "items": 25715,
       "leaders": [
        {
         "code": "0913011V0BC",
         "label": "Ensure Compact liquid",
         "generic": false,
-        "items": 2407,
-        "share": 8.5
+        "items": 2320,
+        "share": 9.0
        },
        {
         "code": "0913011N0BE",
         "label": "Ensure Plus milkshake style liquid",
         "generic": false,
-        "items": 2145,
-        "share": 7.6
+        "items": 2031,
+        "share": 7.9
        },
        {
         "code": "0913011N0BB",
         "label": "Altraplen Energy liquid",
         "generic": false,
-        "items": 1755,
-        "share": 6.2
+        "items": 1580,
+        "share": 6.1
        }
       ]
      }

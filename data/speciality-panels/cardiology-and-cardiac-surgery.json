@@ -22,7 +22,7 @@
   "drugTariff": "2026-10-21",
   "localIntel": "2026-10-21",
   "supplierDirectory": "2026-10-21",
-  "gpPrescribing": "2026-09-30",
+  "gpPrescribing": "2026-10-21",
   "mhraDsu": "2026-10-19",
   "drugTariffViiia": "2026-10-21",
   "hospitalPrescribing": null
@@ -35,7 +35,7 @@
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: cardiology). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 15 of the 15 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
-  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202608) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (23 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-19.",
   "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF chapter 2. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 51 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
  },
@@ -1409,10 +1409,10 @@
    "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/bulletins/deathsregistrationsummarytables/2025",
    "verifiedOn": "2026-10-01",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
-    "quote": "found"
+    "quote": "unchecked"
    }
   }
  ],
@@ -2047,14 +2047,14 @@
   }
  ],
  "gpPrescribing": {
-  "generatedOn": "2026-09-30",
+  "generatedOn": "2026-10-21",
   "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
   "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
   "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
   "periods": [
-   "202507",
-   "202607"
+   "202508",
+   "202608"
   ],
   "minBaselineItems": 25,
   "defined": true,
@@ -2066,131 +2066,131 @@
      "chapter 2"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 35257489,
-    "cost": 123573973,
-    "items12m": 396008041,
-    "cost12m": 1187547593,
-    "itemsYoY": 3.8,
-    "products": 343,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 31934760,
+    "cost": 109837375,
+    "items12m": 396595358,
+    "cost12m": 1209298618,
+    "itemsYoY": 1.9,
+    "products": 351,
     "topNational": [
      {
       "code": "0212000B0AA",
       "label": "Atorvastatin",
       "generic": true,
-      "items": 7074298,
+      "items": 6433428,
       "share": 20.1,
-      "cost": 6210533,
-      "yoy": 5.2
+      "cost": 5594829,
+      "yoy": 3.2
      },
      {
       "code": "0206020A0AA",
       "label": "Amlodipine",
       "generic": true,
-      "items": 3654410,
-      "share": 10.4,
-      "cost": 2905541,
-      "yoy": 2.8
+      "items": 3298874,
+      "share": 10.3,
+      "cost": 2621369,
+      "yoy": 0.8
      },
      {
       "code": "0205051R0AA",
       "label": "Ramipril",
       "generic": true,
-      "items": 3243868,
-      "share": 9.2,
-      "cost": 12462167,
-      "yoy": 2.9
+      "items": 2921634,
+      "share": 9.1,
+      "cost": 12543345,
+      "yoy": 0.6
      },
      {
       "code": "0204000H0AA",
       "label": "Bisoprolol",
       "generic": true,
-      "items": 2807460,
+      "items": 2547833,
       "share": 8.0,
-      "cost": 5985711,
-      "yoy": 3.9
+      "cost": 4630645,
+      "yoy": 1.8
      },
      {
       "code": "0209000A0AA",
       "label": "Aspirin",
       "generic": true,
-      "items": 1787286,
+      "items": 1619109,
       "share": 5.1,
-      "cost": 5115285,
-      "yoy": 1.2
+      "cost": 4316189,
+      "yoy": -0.6
      },
      {
       "code": "0205052N0AA",
       "label": "Losartan",
       "generic": true,
-      "items": 1263632,
+      "items": 1147893,
       "share": 3.6,
-      "cost": 1014493,
-      "yoy": 7.8
+      "cost": 925622,
+      "yoy": 5.8
      },
      {
       "code": "0209000C0AA",
       "label": "Clopidogrel",
       "generic": true,
-      "items": 1093627,
+      "items": 996020,
       "share": 3.1,
-      "cost": 889318,
-      "yoy": 3.4
+      "cost": 799729,
+      "yoy": 1.9
      },
      {
       "code": "0208020Z0AA",
       "label": "Apixaban",
       "generic": true,
-      "items": 1076839,
+      "items": 989481,
       "share": 3.1,
-      "cost": 1891961,
-      "yoy": 15.7
+      "cost": 2432263,
+      "yoy": 13.9
      },
      {
       "code": "0202020L0AA",
       "label": "Furosemide",
       "generic": true,
-      "items": 1006107,
-      "share": 2.9,
-      "cost": 860091,
-      "yoy": -0.2
+      "items": 899582,
+      "share": 2.8,
+      "cost": 766703,
+      "yoy": -2.2
      },
      {
       "code": "0205052C0AA",
       "label": "Candesartan",
       "generic": true,
-      "items": 822311,
+      "items": 744715,
       "share": 2.3,
-      "cost": 3451980,
-      "yoy": 7.2
+      "cost": 3309759,
+      "yoy": 5.0
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 579188,
+      "items": 521462,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 119263,
+        "items": 107431,
         "share": 20.6
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 58915,
-        "share": 10.2
+        "items": 52259,
+        "share": 10.0
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 50444,
+        "items": 45501,
         "share": 8.7
        }
       ]
@@ -2198,55 +2198,55 @@
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 660637,
+      "items": 585555,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 137388,
-        "share": 20.8
+        "items": 122287,
+        "share": 20.9
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 72229,
+        "items": 63544,
         "share": 10.9
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 60820,
-        "share": 9.2
+        "items": 53336,
+        "share": 9.1
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 713942,
+      "items": 634744,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 144363,
-        "share": 20.2
+        "items": 128584,
+        "share": 20.3
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 68471,
-        "share": 9.6
+        "items": 60466,
+        "share": 9.5
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 67970,
+        "items": 60302,
         "share": 9.5
        }
       ]
@@ -2254,83 +2254,83 @@
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 427431,
+      "items": 386044,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 85761,
-        "share": 20.1
+        "items": 78106,
+        "share": 20.2
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 45048,
+        "items": 40536,
         "share": 10.5
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 43343,
-        "share": 10.1
+        "items": 38555,
+        "share": 10.0
        }
       ]
      },
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 1791692,
+      "items": 1611388,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 359581,
-        "share": 20.1
+        "items": 325107,
+        "share": 20.2
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 190176,
-        "share": 10.6
+        "items": 169755,
+        "share": 10.5
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 150557,
-        "share": 8.4
+        "items": 134294,
+        "share": 8.3
        }
       ]
      },
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 1728303,
+      "items": 1550872,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 331891,
-        "share": 19.2
+        "items": 299363,
+        "share": 19.3
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 170409,
-        "share": 9.9
+        "items": 152609,
+        "share": 9.8
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 162644,
+        "items": 145674,
         "share": 9.4
        }
       ]
@@ -2338,27 +2338,27 @@
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 435256,
+      "items": 395461,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 87235,
-        "share": 20.0
+        "items": 79590,
+        "share": 20.1
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 41427,
+        "items": 37429,
         "share": 9.5
        },
        {
         "code": "0204000H0AA",
         "label": "Bisoprolol",
         "generic": true,
-        "items": 36723,
+        "items": 33356,
         "share": 8.4
        }
       ]
@@ -2366,55 +2366,55 @@
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 614628,
+      "items": 557009,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 126124,
-        "share": 20.5
+        "items": 114715,
+        "share": 20.6
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 70272,
+        "items": 63352,
         "share": 11.4
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 57017,
-        "share": 9.3
+        "items": 51305,
+        "share": 9.2
        }
       ]
      },
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 616752,
+      "items": 545308,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 119801,
-        "share": 19.4
+        "items": 106682,
+        "share": 19.6
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 68791,
-        "share": 11.2
+        "items": 60378,
+        "share": 11.1
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 65928,
+        "items": 58616,
         "share": 10.7
        }
       ]
@@ -2422,55 +2422,55 @@
      {
       "icb": "QJK",
       "name": "NHS Devon",
-      "items": 787294,
+      "items": 713014,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 161228,
-        "share": 20.5
+        "items": 146850,
+        "share": 20.6
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 73839,
+        "items": 66764,
         "share": 9.4
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 73392,
-        "share": 9.3
+        "items": 66703,
+        "share": 9.4
        }
       ]
      },
      {
       "icb": "QVV",
       "name": "NHS Dorset",
-      "items": 490388,
+      "items": 442254,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 93520,
-        "share": 19.1
+        "items": 84944,
+        "share": 19.2
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 47608,
-        "share": 9.7
+        "items": 42470,
+        "share": 9.6
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 45831,
+        "items": 41134,
         "share": 9.3
        }
       ]
@@ -2478,27 +2478,27 @@
      {
       "icb": "D7T5G",
       "name": "NHS Essex",
-      "items": 1179730,
+      "items": 1075078,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 236629,
-        "share": 20.1
+        "items": 216890,
+        "share": 20.2
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 129659,
+        "items": 117980,
         "share": 11.0
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 109488,
+        "items": 99459,
         "share": 9.3
        }
       ]
@@ -2506,27 +2506,27 @@
      {
       "icb": "QR1",
       "name": "NHS Gloucestershire",
-      "items": 433465,
+      "items": 399215,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 84485,
+        "items": 78039,
         "share": 19.5
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 43002,
+        "items": 39410,
         "share": 9.9
        },
        {
         "code": "0204000H0AA",
         "label": "Bisoprolol",
         "generic": true,
-        "items": 37288,
+        "items": 34403,
         "share": 8.6
        }
       ]
@@ -2534,27 +2534,27 @@
      {
       "icb": "QOP",
       "name": "NHS Greater Manchester",
-      "items": 1806713,
+      "items": 1629516,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 360878,
-        "share": 20.0
+        "items": 326740,
+        "share": 20.1
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 185134,
+        "items": 166137,
         "share": 10.2
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 149583,
+        "items": 134849,
         "share": 8.3
        }
       ]
@@ -2562,27 +2562,27 @@
      {
       "icb": "QRL",
       "name": "NHS Hampshire and Isle of Wight",
-      "items": 1030316,
+      "items": 936783,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 188942,
-        "share": 18.3
+        "items": 172742,
+        "share": 18.4
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 113277,
-        "share": 11.0
+        "items": 101726,
+        "share": 10.9
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 100059,
+        "items": 90570,
         "share": 9.7
        }
       ]
@@ -2590,55 +2590,55 @@
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 469519,
+      "items": 432215,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 89049,
+        "items": 82254,
         "share": 19.0
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 46403,
-        "share": 9.9
+        "items": 42251,
+        "share": 9.8
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 45604,
-        "share": 9.7
+        "items": 42215,
+        "share": 9.8
        }
       ]
      },
      {
       "icb": "QOQ",
       "name": "NHS Humber and North Yorkshire",
-      "items": 1342144,
+      "items": 1208847,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 262263,
-        "share": 19.5
+        "items": 237478,
+        "share": 19.6
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 138389,
+        "items": 124356,
         "share": 10.3
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 127822,
+        "items": 114593,
         "share": 9.5
        }
       ]
@@ -2646,27 +2646,27 @@
      {
       "icb": "QKS",
       "name": "NHS Kent and Medway",
-      "items": 1039359,
+      "items": 943367,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 200242,
-        "share": 19.3
+        "items": 183631,
+        "share": 19.5
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 107233,
+        "items": 97007,
         "share": 10.3
        },
        {
         "code": "0204000H0AA",
         "label": "Bisoprolol",
         "generic": true,
-        "items": 81124,
+        "items": 73575,
         "share": 7.8
        }
       ]
@@ -2674,27 +2674,27 @@
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 1248634,
+      "items": 1116943,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 236319,
-        "share": 18.9
+        "items": 211769,
+        "share": 19.0
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 131622,
+        "items": 117654,
         "share": 10.5
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 126623,
+        "items": 113141,
         "share": 10.1
        }
       ]
@@ -2702,27 +2702,27 @@
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 738485,
+      "items": 677123,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 156869,
-        "share": 21.2
+        "items": 144488,
+        "share": 21.3
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 84170,
+        "items": 77289,
         "share": 11.4
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 72630,
+        "items": 66660,
         "share": 9.8
        }
       ]
@@ -2730,27 +2730,27 @@
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 770566,
+      "items": 703713,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 148677,
-        "share": 19.3
+        "items": 136739,
+        "share": 19.4
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 78310,
+        "items": 71592,
         "share": 10.2
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 77680,
+        "items": 70956,
         "share": 10.1
        }
       ]
@@ -2758,83 +2758,83 @@
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 1285111,
+      "items": 1169198,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 254061,
+        "items": 231882,
         "share": 19.8
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 117668,
-        "share": 9.2
+        "items": 106861,
+        "share": 9.1
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 106555,
-        "share": 8.3
+        "items": 96113,
+        "share": 8.2
        }
       ]
      },
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 1088981,
+      "items": 999670,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 245234,
+        "items": 224522,
         "share": 22.5
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 134117,
+        "items": 122888,
         "share": 12.3
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 104047,
-        "share": 9.6
+        "items": 94925,
+        "share": 9.5
        }
       ]
      },
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 2662869,
+      "items": 2438461,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 558782,
+        "items": 512472,
         "share": 21.0
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 253356,
+        "items": 231508,
         "share": 9.5
        },
        {
         "code": "0204000H0AA",
         "label": "Bisoprolol",
         "generic": true,
-        "items": 217224,
+        "items": 199246,
         "share": 8.2
        }
       ]
@@ -2842,111 +2842,111 @@
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 561694,
+      "items": 502723,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 117772,
+        "items": 105765,
         "share": 21.0
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 69911,
+        "items": 62484,
         "share": 12.4
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 69113,
-        "share": 12.3
+        "items": 61540,
+        "share": 12.2
        }
       ]
      },
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 750151,
+      "items": 673357,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 151193,
+        "items": 135971,
         "share": 20.2
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 86005,
-        "share": 11.5
+        "items": 76797,
+        "share": 11.4
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 83161,
-        "share": 11.1
+        "items": 74371,
+        "share": 11.0
        }
       ]
      },
      {
       "icb": "QOC",
       "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 289253,
+      "items": 266931,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 58131,
-        "share": 20.1
+        "items": 54348,
+        "share": 20.4
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 33288,
+        "items": 30604,
         "share": 11.5
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 27067,
-        "share": 9.4
+        "items": 24822,
+        "share": 9.3
        }
       ]
      },
      {
       "icb": "QSL",
       "name": "NHS Somerset",
-      "items": 330051,
+      "items": 302289,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 62344,
-        "share": 18.9
+        "items": 57428,
+        "share": 19.0
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 37184,
+        "items": 34086,
         "share": 11.3
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 33595,
+        "items": 30849,
         "share": 10.2
        }
       ]
@@ -2954,83 +2954,83 @@
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 753307,
+      "items": 698247,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 156192,
-        "share": 20.7
+        "items": 145355,
+        "share": 20.8
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 90496,
-        "share": 12.0
+        "items": 82994,
+        "share": 11.9
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 66127,
-        "share": 8.8
+        "items": 60521,
+        "share": 8.7
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 717803,
+      "items": 655203,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 139313,
+        "items": 127083,
         "share": 19.4
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 80313,
-        "share": 11.2
+        "items": 72955,
+        "share": 11.1
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 68476,
-        "share": 9.5
+        "items": 61555,
+        "share": 9.4
        }
       ]
      },
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 1109551,
+      "items": 994187,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 221434,
+        "items": 199305,
         "share": 20.0
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 120582,
-        "share": 10.9
+        "items": 107849,
+        "share": 10.8
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 110930,
+        "items": 99745,
         "share": 10.0
        }
       ]
@@ -3038,140 +3038,140 @@
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 760538,
+      "items": 690195,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 146481,
+        "items": 133408,
         "share": 19.3
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 85359,
+        "items": 76976,
         "share": 11.2
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 75702,
-        "share": 10.0
+        "items": 68150,
+        "share": 9.9
        }
       ]
      },
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 1498552,
+      "items": 1367749,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 296015,
-        "share": 19.8
+        "items": 272464,
+        "share": 19.9
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 148258,
+        "items": 134785,
         "share": 9.9
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 130760,
-        "share": 8.7
+        "items": 118077,
+        "share": 8.6
        }
       ]
      },
      {
       "icb": "S0E4D",
       "name": "NHS Thames Valley",
-      "items": 1079439,
+      "items": 970579,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 221980,
-        "share": 20.6
+        "items": 201208,
+        "share": 20.7
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 115863,
+        "items": 103872,
         "share": 10.7
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 92323,
-        "share": 8.6
+        "items": 82461,
+        "share": 8.5
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 1603500,
+      "items": 1441334,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 323304,
+        "items": 291075,
         "share": 20.2
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 158075,
+        "items": 142004,
         "share": 9.9
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 149992,
-        "share": 9.4
+        "items": 134558,
+        "share": 9.3
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 1861488,
+      "items": 1698222,
       "leaders": [
        {
         "code": "0212000B0AA",
         "label": "Atorvastatin",
         "generic": true,
-        "items": 391455,
+        "items": 356661,
         "share": 21.0
        },
        {
         "code": "0206020A0AA",
         "label": "Amlodipine",
         "generic": true,
-        "items": 211219,
+        "items": 191213,
         "share": 11.3
        },
        {
         "code": "0205051R0AA",
         "label": "Ramipril",
         "generic": true,
-        "items": 152730,
-        "share": 8.2
+        "items": 138385,
+        "share": 8.1
        }
       ]
      }

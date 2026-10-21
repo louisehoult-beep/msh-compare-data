@@ -22,7 +22,7 @@
   "drugTariff": "2026-10-21",
   "localIntel": "2026-10-21",
   "supplierDirectory": "2026-10-21",
-  "gpPrescribing": "2026-09-30",
+  "gpPrescribing": "2026-10-21",
   "mhraDsu": "2026-10-19",
   "drugTariffViiia": "2026-10-21",
   "hospitalPrescribing": null
@@ -35,7 +35,7 @@
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /pessar/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,879 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's.",
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: womens). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 10 of the 12 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
-  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202608) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (11 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-19.",
   "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF 07.01 or 07.02 or 07.03 or 07.05. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 51 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
  },
@@ -3036,14 +3036,14 @@
   }
  ],
  "gpPrescribing": {
-  "generatedOn": "2026-09-30",
+  "generatedOn": "2026-10-21",
   "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
   "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
   "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
   "periods": [
-   "202507",
-   "202607"
+   "202508",
+   "202608"
   ],
   "minBaselineItems": 25,
   "defined": true,
@@ -3058,383 +3058,383 @@
      "07.05"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 933673,
-    "cost": 10347936,
-    "items12m": 10508069,
-    "cost12m": 115141773,
-    "itemsYoY": 1.4,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 836750,
+    "cost": 9292850,
+    "items12m": 10510528,
+    "cost12m": 115647136,
+    "itemsYoY": 0.3,
     "products": 103,
     "topNational": [
      {
       "code": "0702010F0AA",
       "label": "Estriol",
       "generic": true,
-      "items": 186675,
-      "share": 20.0,
-      "cost": 2568084,
-      "yoy": 32.6
+      "items": 171675,
+      "share": 20.5,
+      "cost": 2335808,
+      "yoy": 28.7
      },
      {
       "code": "0703021Q0AA",
       "label": "Desogestrel",
       "generic": true,
-      "items": 175685,
-      "share": 18.8,
-      "cost": 393985,
-      "yoy": -10.4
+      "items": 153116,
+      "share": 18.3,
+      "cost": 341777,
+      "yoy": -11.4
      },
      {
       "code": "0702010G0AA",
       "label": "Estradiol",
       "generic": true,
-      "items": 136067,
-      "share": 14.6,
-      "cost": 1457779,
-      "yoy": 22.9
+      "items": 125558,
+      "share": 15.0,
+      "cost": 1341786,
+      "yoy": 21.1
      },
      {
       "code": "0702020F0AA",
       "label": "Clotrimazole",
       "generic": true,
-      "items": 66125,
-      "share": 7.1,
-      "cost": 894492,
-      "yoy": -4.7
+      "items": 58684,
+      "share": 7.0,
+      "cost": 782147,
+      "yoy": -8.2
      },
      {
       "code": "0703010F0BP",
       "label": "Rigevidon tablets",
       "generic": false,
-      "items": 47985,
-      "share": 5.1,
-      "cost": 126333,
-      "yoy": -19.6
+      "items": 41601,
+      "share": 5.0,
+      "cost": 110097,
+      "yoy": -20.4
      },
      {
       "code": "0703022M0BB",
       "label": "Depo-Provera",
       "generic": false,
-      "items": 45628,
-      "share": 4.9,
-      "cost": 256930,
-      "yoy": -3.9
+      "items": 38838,
+      "share": 4.6,
+      "cost": 218622,
+      "yoy": -11.1
      },
      {
       "code": "0702010G0BC",
       "label": "Vagifem",
       "generic": false,
-      "items": 40210,
-      "share": 4.3,
-      "cost": 614936,
-      "yoy": 3.2
-     },
-     {
-      "code": "0703010F0BE",
-      "label": "Microgynon",
-      "generic": false,
-      "items": 21710,
-      "share": 2.3,
-      "cost": 83345,
-      "yoy": -20.0
+      "items": 36804,
+      "share": 4.4,
+      "cost": 565308,
+      "yoy": 1.8
      },
      {
       "code": "0702010G0BF",
       "label": "Vagirux",
       "generic": false,
-      "items": 20686,
-      "share": 2.2,
-      "cost": 237698,
-      "yoy": -18.1
+      "items": 21499,
+      "share": 2.6,
+      "cost": 247378,
+      "yoy": -3.8
+     },
+     {
+      "code": "0703010F0BE",
+      "label": "Microgynon",
+      "generic": false,
+      "items": 18828,
+      "share": 2.3,
+      "cost": 72844,
+      "yoy": -19.6
      },
      {
       "code": "0703010F0AA",
       "label": "Ethinylestradiol",
       "generic": true,
-      "items": 15897,
-      "share": 1.7,
-      "cost": 122986,
-      "yoy": -10.8
+      "items": 13565,
+      "share": 1.6,
+      "cost": 104325,
+      "yoy": -14.7
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 17634,
+      "items": 15808,
       "leaders": [
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 3640,
-        "share": 20.6
+        "items": 3333,
+        "share": 21.1
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 3309,
-        "share": 18.8
+        "items": 2943,
+        "share": 18.6
        },
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 3100,
-        "share": 17.6
+        "items": 2744,
+        "share": 17.4
        }
       ]
      },
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 16910,
+      "items": 14734,
       "leaders": [
        {
         "code": "0702020F0AA",
         "label": "Clotrimazole",
         "generic": true,
-        "items": 3112,
-        "share": 18.4
+        "items": 2794,
+        "share": 19.0
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 2847,
-        "share": 16.8
+        "items": 2495,
+        "share": 16.9
        },
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 2618,
-        "share": 15.5
+        "items": 2224,
+        "share": 15.1
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 14825,
+      "items": 13037,
       "leaders": [
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 3306,
-        "share": 22.3
+        "items": 2785,
+        "share": 21.4
        },
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 2255,
-        "share": 15.2
+        "items": 2074,
+        "share": 15.9
        },
        {
         "code": "0702020F0AA",
         "label": "Clotrimazole",
         "generic": true,
-        "items": 1835,
-        "share": 12.4
+        "items": 1643,
+        "share": 12.6
        }
       ]
      },
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 16506,
-      "leaders": [
-       {
-        "code": "0703021Q0AA",
-        "label": "Desogestrel",
-        "generic": true,
-        "items": 3256,
-        "share": 19.7
-       },
-       {
-        "code": "0702010F0AA",
-        "label": "Estriol",
-        "generic": true,
-        "items": 3008,
-        "share": 18.2
-       },
-       {
-        "code": "0702010G0AA",
-        "label": "Estradiol",
-        "generic": true,
-        "items": 2802,
-        "share": 17.0
-       }
-      ]
-     },
-     {
-      "icb": "S1Y5D",
-      "name": "NHS Central East",
-      "items": 48311,
+      "items": 14603,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 9451,
-        "share": 19.6
-       },
-       {
-        "code": "0703021Q0AA",
-        "label": "Desogestrel",
-        "generic": true,
-        "items": 7949,
-        "share": 16.5
-       },
-       {
-        "code": "0702010G0AA",
-        "label": "Estradiol",
-        "generic": true,
-        "items": 7315,
-        "share": 15.1
-       }
-      ]
-     },
-     {
-      "icb": "QYG",
-      "name": "NHS Cheshire and Merseyside",
-      "items": 43101,
-      "leaders": [
-       {
-        "code": "0702010F0AA",
-        "label": "Estriol",
-        "generic": true,
-        "items": 8271,
+        "items": 2800,
         "share": 19.2
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 8084,
-        "share": 18.8
+        "items": 2770,
+        "share": 19.0
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 6393,
-        "share": 14.8
+        "items": 2526,
+        "share": 17.3
+       }
+      ]
+     },
+     {
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 43123,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 8681,
+        "share": 20.1
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 7076,
+        "share": 16.4
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 6785,
+        "share": 15.7
+       }
+      ]
+     },
+     {
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 38756,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 7613,
+        "share": 19.6
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 6912,
+        "share": 17.8
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 6032,
+        "share": 15.6
        }
       ]
      },
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 14367,
+      "items": 12950,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 3466,
-        "share": 24.1
+        "items": 3224,
+        "share": 24.9
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 2527,
-        "share": 17.6
+        "items": 2189,
+        "share": 16.9
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 2314,
-        "share": 16.1
+        "items": 2159,
+        "share": 16.7
        }
       ]
      },
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 16337,
+      "items": 14870,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 3212,
+        "items": 2926,
         "share": 19.7
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 3162,
+        "items": 2878,
         "share": 19.4
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 2067,
-        "share": 12.7
+        "items": 1937,
+        "share": 13.0
        }
       ]
      },
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 20461,
+      "items": 17882,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 4987,
-        "share": 24.4
+        "items": 4539,
+        "share": 25.4
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 4526,
-        "share": 22.1
+        "items": 3708,
+        "share": 20.7
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 3120,
-        "share": 15.2
+        "items": 2902,
+        "share": 16.2
        }
       ]
      },
      {
       "icb": "QJK",
       "name": "NHS Devon",
-      "items": 25568,
+      "items": 23117,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 5866,
-        "share": 22.9
+        "items": 5339,
+        "share": 23.1
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 4808,
-        "share": 18.8
+        "items": 4173,
+        "share": 18.1
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 3779,
+        "items": 3432,
         "share": 14.8
        }
       ]
@@ -3442,279 +3442,279 @@
      {
       "icb": "QVV",
       "name": "NHS Dorset",
-      "items": 16144,
+      "items": 14447,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 3752,
-        "share": 23.2
+        "items": 3376,
+        "share": 23.4
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 3620,
-        "share": 22.4
+        "items": 3308,
+        "share": 22.9
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 3145,
-        "share": 19.5
+        "items": 2672,
+        "share": 18.5
        }
       ]
      },
      {
       "icb": "D7T5G",
       "name": "NHS Essex",
-      "items": 31320,
+      "items": 28543,
       "leaders": [
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 6011,
-        "share": 19.2
-       },
-       {
-        "code": "0702010G0AA",
-        "label": "Estradiol",
-        "generic": true,
-        "items": 4668,
-        "share": 14.9
-       },
-       {
-        "code": "0702010F0AA",
-        "label": "Estriol",
-        "generic": true,
-        "items": 4154,
-        "share": 13.3
-       }
-      ]
-     },
-     {
-      "icb": "QR1",
-      "name": "NHS Gloucestershire",
-      "items": 14192,
-      "leaders": [
-       {
-        "code": "0703021Q0AA",
-        "label": "Desogestrel",
-        "generic": true,
-        "items": 2844,
-        "share": 20.0
-       },
-       {
-        "code": "0702010F0AA",
-        "label": "Estriol",
-        "generic": true,
-        "items": 2670,
+        "items": 5355,
         "share": 18.8
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 2546,
-        "share": 17.9
+        "items": 4318,
+        "share": 15.1
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 3907,
+        "share": 13.7
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 12883,
+      "leaders": [
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 2520,
+        "share": 19.6
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 2485,
+        "share": 19.3
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 2348,
+        "share": 18.2
        }
       ]
      },
      {
       "icb": "QOP",
       "name": "NHS Greater Manchester",
-      "items": 45006,
+      "items": 39742,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 7833,
-        "share": 17.4
+        "items": 7274,
+        "share": 18.3
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 7685,
-        "share": 17.1
+        "items": 6684,
+        "share": 16.8
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 4969,
-        "share": 11.0
+        "items": 4569,
+        "share": 11.5
        }
       ]
      },
      {
       "icb": "QRL",
       "name": "NHS Hampshire and Isle of Wight",
-      "items": 36657,
+      "items": 33242,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 7499,
+        "items": 6818,
         "share": 20.5
-       },
-       {
-        "code": "0703021Q0AA",
-        "label": "Desogestrel",
-        "generic": true,
-        "items": 6181,
-        "share": 16.9
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 5820,
-        "share": 15.9
+        "items": 5498,
+        "share": 16.5
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 5346,
+        "share": 16.1
        }
       ]
      },
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 16544,
+      "items": 14993,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 4418,
-        "share": 26.7
+        "items": 4131,
+        "share": 27.6
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 3410,
-        "share": 20.6
-       },
-       {
-        "code": "0702010G0AA",
-        "label": "Estradiol",
-        "generic": true,
-        "items": 2627,
-        "share": 15.9
-       }
-      ]
-     },
-     {
-      "icb": "QOQ",
-      "name": "NHS Humber and North Yorkshire",
-      "items": 35218,
-      "leaders": [
-       {
-        "code": "0702010F0AA",
-        "label": "Estriol",
-        "generic": true,
-        "items": 7820,
-        "share": 22.2
-       },
-       {
-        "code": "0703021Q0AA",
-        "label": "Desogestrel",
-        "generic": true,
-        "items": 7143,
-        "share": 20.3
-       },
-       {
-        "code": "0702010G0AA",
-        "label": "Estradiol",
-        "generic": true,
-        "items": 3965,
-        "share": 11.3
-       }
-      ]
-     },
-     {
-      "icb": "QKS",
-      "name": "NHS Kent and Medway",
-      "items": 29136,
-      "leaders": [
-       {
-        "code": "0703021Q0AA",
-        "label": "Desogestrel",
-        "generic": true,
-        "items": 5891,
-        "share": 20.2
-       },
-       {
-        "code": "0702010F0AA",
-        "label": "Estriol",
-        "generic": true,
-        "items": 4403,
-        "share": 15.1
-       },
-       {
-        "code": "0702010G0AA",
-        "label": "Estradiol",
-        "generic": true,
-        "items": 3903,
-        "share": 13.4
-       }
-      ]
-     },
-     {
-      "icb": "QE1",
-      "name": "NHS Lancashire and South Cumbria",
-      "items": 27160,
-      "leaders": [
-       {
-        "code": "0702010F0AA",
-        "label": "Estriol",
-        "generic": true,
-        "items": 5907,
-        "share": 21.7
-       },
-       {
-        "code": "0703021Q0AA",
-        "label": "Desogestrel",
-        "generic": true,
-        "items": 5419,
+        "items": 2995,
         "share": 20.0
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 4172,
-        "share": 15.4
+        "items": 2339,
+        "share": 15.6
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 31870,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 7092,
+        "share": 22.3
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 6220,
+        "share": 19.5
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 3631,
+        "share": 11.4
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 26261,
+      "leaders": [
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 5385,
+        "share": 20.5
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 4194,
+        "share": 16.0
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 3583,
+        "share": 13.6
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 24951,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 5488,
+        "share": 22.0
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 4811,
+        "share": 19.3
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 3902,
+        "share": 15.6
        }
       ]
      },
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 14806,
+      "items": 14072,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 3281,
-        "share": 22.2
-       },
-       {
-        "code": "0703021Q0AA",
-        "label": "Desogestrel",
-        "generic": true,
-        "items": 2266,
-        "share": 15.3
+        "items": 3209,
+        "share": 22.8
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 2257,
+        "items": 2170,
+        "share": 15.4
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 2138,
         "share": 15.2
        }
       ]
@@ -3722,448 +3722,448 @@
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 17221,
+      "items": 15561,
       "leaders": [
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 4128,
-        "share": 24.0
+        "items": 3636,
+        "share": 23.4
        },
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 3329,
-        "share": 19.3
+        "items": 3038,
+        "share": 19.5
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 2051,
-        "share": 11.9
+        "items": 1885,
+        "share": 12.1
        }
       ]
      },
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 42023,
+      "items": 38318,
       "leaders": [
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 8829,
+        "items": 8048,
         "share": 21.0
        },
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 7893,
-        "share": 18.8
+        "items": 7101,
+        "share": 18.5
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 6650,
-        "share": 15.8
+        "items": 6271,
+        "share": 16.4
        }
       ]
      },
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 18030,
+      "items": 16135,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 3553,
-        "share": 19.7
+        "items": 3229,
+        "share": 20.0
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 3155,
-        "share": 17.5
+        "items": 2796,
+        "share": 17.3
        },
        {
         "code": "0702020F0AA",
         "label": "Clotrimazole",
         "generic": true,
-        "items": 2854,
-        "share": 15.8
+        "items": 2490,
+        "share": 15.4
        }
       ]
      },
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 52841,
+      "items": 46981,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 9823,
-        "share": 18.6
+        "items": 9327,
+        "share": 19.9
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 9819,
-        "share": 18.6
+        "items": 8564,
+        "share": 18.2
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 8741,
-        "share": 16.5
+        "items": 7860,
+        "share": 16.7
        }
       ]
      },
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 14023,
+      "items": 12539,
       "leaders": [
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 3454,
-        "share": 24.6
+        "items": 2979,
+        "share": 23.8
        },
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 2989,
-        "share": 21.3
+        "items": 2713,
+        "share": 21.6
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 2024,
-        "share": 14.4
+        "items": 1907,
+        "share": 15.2
        }
       ]
      },
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 20330,
+      "items": 17864,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 4420,
-        "share": 21.7
+        "items": 4052,
+        "share": 22.7
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 4031,
-        "share": 19.8
+        "items": 3472,
+        "share": 19.4
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 3543,
-        "share": 17.4
+        "items": 3261,
+        "share": 18.3
        }
       ]
      },
      {
       "icb": "QOC",
       "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 8991,
+      "items": 7795,
       "leaders": [
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 1863,
-        "share": 20.7
+        "items": 1548,
+        "share": 19.9
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 1554,
-        "share": 17.3
+        "items": 1446,
+        "share": 18.6
        },
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 1388,
-        "share": 15.4
+        "items": 1220,
+        "share": 15.7
        }
       ]
      },
      {
       "icb": "QSL",
       "name": "NHS Somerset",
-      "items": 12290,
+      "items": 11286,
       "leaders": [
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 2843,
-        "share": 23.1
+        "items": 2527,
+        "share": 22.4
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 2376,
-        "share": 19.3
+        "items": 2337,
+        "share": 20.7
        },
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 2193,
-        "share": 17.8
+        "items": 2061,
+        "share": 18.3
        }
       ]
      },
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 20162,
+      "items": 17851,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 5295,
-        "share": 26.3
+        "items": 4657,
+        "share": 26.1
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 2835,
-        "share": 14.1
+        "items": 2453,
+        "share": 13.7
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 2112,
-        "share": 10.5
+        "items": 1950,
+        "share": 10.9
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 19364,
+      "items": 17226,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 3918,
-        "share": 20.2
+        "items": 3465,
+        "share": 20.1
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 3106,
-        "share": 16.0
+        "items": 2663,
+        "share": 15.5
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 2702,
-        "share": 14.0
+        "items": 2563,
+        "share": 14.9
        }
       ]
      },
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 23273,
+      "items": 20508,
       "leaders": [
-       {
-        "code": "0703021Q0AA",
-        "label": "Desogestrel",
-        "generic": true,
-        "items": 5292,
-        "share": 22.7
-       },
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 5189,
-        "share": 22.3
+        "items": 4783,
+        "share": 23.3
        },
        {
-        "code": "0702020F0AA",
-        "label": "Clotrimazole",
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
         "generic": true,
-        "items": 1943,
-        "share": 8.3
+        "items": 4485,
+        "share": 21.9
+       },
+       {
+        "code": "0703022M0BB",
+        "label": "Depo-Provera",
+        "generic": false,
+        "items": 1805,
+        "share": 8.8
        }
       ]
      },
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 18081,
+      "items": 16211,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 4106,
-        "share": 22.7
+        "items": 3874,
+        "share": 23.9
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 3703,
-        "share": 20.5
-       },
-       {
-        "code": "0702010G0AA",
-        "label": "Estradiol",
-        "generic": true,
-        "items": 2865,
-        "share": 15.8
-       }
-      ]
-     },
-     {
-      "icb": "S9B9J",
-      "name": "NHS Surrey and Sussex",
-      "items": 52989,
-      "leaders": [
-       {
-        "code": "0702010F0AA",
-        "label": "Estriol",
-        "generic": true,
-        "items": 11404,
-        "share": 21.5
-       },
-       {
-        "code": "0702010G0AA",
-        "label": "Estradiol",
-        "generic": true,
-        "items": 10343,
-        "share": 19.5
-       },
-       {
-        "code": "0703021Q0AA",
-        "label": "Desogestrel",
-        "generic": true,
-        "items": 8447,
-        "share": 15.9
-       }
-      ]
-     },
-     {
-      "icb": "S0E4D",
-      "name": "NHS Thames Valley",
-      "items": 39656,
-      "leaders": [
-       {
-        "code": "0703021Q0AA",
-        "label": "Desogestrel",
-        "generic": true,
-        "items": 8524,
-        "share": 21.5
-       },
-       {
-        "code": "0702010F0AA",
-        "label": "Estriol",
-        "generic": true,
-        "items": 7597,
+        "items": 3109,
         "share": 19.2
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 6204,
-        "share": 15.6
+        "items": 2593,
+        "share": 16.0
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 47994,
+      "leaders": [
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 10830,
+        "share": 22.6
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 9522,
+        "share": 19.8
+       },
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 7405,
+        "share": 15.4
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 35495,
+      "leaders": [
+       {
+        "code": "0703021Q0AA",
+        "label": "Desogestrel",
+        "generic": true,
+        "items": 7351,
+        "share": 20.7
+       },
+       {
+        "code": "0702010F0AA",
+        "label": "Estriol",
+        "generic": true,
+        "items": 6992,
+        "share": 19.7
+       },
+       {
+        "code": "0702010G0AA",
+        "label": "Estradiol",
+        "generic": true,
+        "items": 5764,
+        "share": 16.2
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 36166,
+      "items": 31538,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 6555,
-        "share": 18.1
+        "items": 5978,
+        "share": 19.0
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 6260,
-        "share": 17.3
+        "items": 5164,
+        "share": 16.4
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 4994,
-        "share": 13.8
+        "items": 4376,
+        "share": 13.9
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 37934,
+      "items": 33470,
       "leaders": [
        {
         "code": "0702010F0AA",
         "label": "Estriol",
         "generic": true,
-        "items": 9040,
-        "share": 23.8
+        "items": 8206,
+        "share": 24.5
        },
        {
         "code": "0703021Q0AA",
         "label": "Desogestrel",
         "generic": true,
-        "items": 5618,
-        "share": 14.8
+        "items": 4848,
+        "share": 14.5
        },
        {
         "code": "0702010G0AA",
         "label": "Estradiol",
         "generic": true,
-        "items": 4898,
-        "share": 12.9
+        "items": 4342,
+        "share": 13.0
        }
       ]
      }
@@ -4176,271 +4176,271 @@
      "21.23"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 33045,
-    "cost": 296646,
-    "items12m": 354529,
-    "cost12m": 3203777,
-    "itemsYoY": 10.3,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 30133,
+    "cost": 272750,
+    "items12m": 357468,
+    "cost12m": 3234944,
+    "itemsYoY": 10.8,
     "products": 18,
     "topNational": [
      {
       "code": "21230000119",
       "label": "YES VM vaginal moisturiser tube",
       "generic": false,
-      "items": 8411,
-      "share": 25.5,
-      "cost": 59773,
-      "yoy": 24.7
+      "items": 7626,
+      "share": 25.3,
+      "cost": 54603,
+      "yoy": 21.6
      },
      {
       "code": "21230000105",
       "label": "ReplensMD vaginal moisturiser tube",
       "generic": false,
-      "items": 7536,
-      "share": 22.8,
-      "cost": 55577,
-      "yoy": 10.7
+      "items": 6767,
+      "share": 22.5,
+      "cost": 51066,
+      "yoy": 13.0
      },
      {
       "code": "21230000100",
       "label": "ReplensMD vaginal moisturiser unit dose",
       "generic": false,
-      "items": 6433,
-      "share": 19.5,
-      "cost": 83176,
-      "yoy": -6.9
+      "items": 5827,
+      "share": 19.3,
+      "cost": 75043,
+      "yoy": -8.1
      },
      {
       "code": "21230000118",
       "label": "YES VM vaginal moisturiser pre-filled applicators",
       "generic": false,
-      "items": 4452,
-      "share": 13.5,
-      "cost": 48821,
-      "yoy": 17.5
+      "items": 4132,
+      "share": 13.7,
+      "cost": 45708,
+      "yoy": 16.1
      },
      {
       "code": "21230000117",
       "label": "YES WB water based vaginal lubricant tube",
       "generic": false,
-      "items": 1877,
-      "share": 5.7,
-      "cost": 14394,
-      "yoy": 18.2
+      "items": 1741,
+      "share": 5.8,
+      "cost": 13490,
+      "yoy": 25.5
      },
      {
       "code": "21230000112",
       "label": "Hyalofemme vaginal moisturiser",
       "generic": false,
-      "items": 1722,
+      "items": 1579,
       "share": 5.2,
-      "cost": 10695,
-      "yoy": 13.7
+      "cost": 9965,
+      "yoy": 17.9
      },
      {
       "code": "21230000116",
       "label": "YES WB water-based vaginal lubricant pre-filled applicator",
       "generic": false,
-      "items": 954,
-      "share": 2.9,
-      "cost": 9019,
-      "yoy": 7.4
+      "items": 955,
+      "share": 3.2,
+      "cost": 9001,
+      "yoy": 19.7
      },
      {
       "code": "21230000110",
       "label": "Sylk vaginal moisturiser",
       "generic": false,
-      "items": 512,
+      "items": 461,
       "share": 1.5,
-      "cost": 3048,
-      "yoy": -26.6
+      "cost": 2736,
+      "yoy": -24.1
      },
      {
       "code": "21230000115",
       "label": "Regelle vaginal moisturiser",
       "generic": false,
-      "items": 474,
+      "items": 424,
       "share": 1.4,
-      "cost": 4987,
-      "yoy": 2.6
+      "cost": 4612,
+      "yoy": 4.2
      },
      {
       "code": "21230000122",
       "label": "Vagisil Internal Hydrating gel",
       "generic": false,
-      "items": 324,
-      "share": 1.0,
-      "cost": 3296,
-      "yoy": 11.0
+      "items": 281,
+      "share": 0.9,
+      "cost": 2757,
+      "yoy": 5.2
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 626,
+      "items": 609,
       "leaders": [
        {
         "code": "21230000119",
         "label": "YES VM vaginal moisturiser tube",
         "generic": false,
-        "items": 194,
-        "share": 31.0
+        "items": 175,
+        "share": 28.7
        },
        {
         "code": "21230000118",
         "label": "YES VM vaginal moisturiser pre-filled applicators",
         "generic": false,
-        "items": 123,
-        "share": 19.6
+        "items": 130,
+        "share": 21.3
        },
        {
         "code": "21230000100",
         "label": "ReplensMD vaginal moisturiser unit dose",
         "generic": false,
-        "items": 105,
-        "share": 16.8
+        "items": 115,
+        "share": 18.9
        }
       ]
      },
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 1068,
+      "items": 896,
       "leaders": [
        {
         "code": "21230000119",
         "label": "YES VM vaginal moisturiser tube",
         "generic": false,
-        "items": 309,
-        "share": 28.9
+        "items": 247,
+        "share": 27.6
        },
        {
         "code": "21230000105",
         "label": "ReplensMD vaginal moisturiser tube",
         "generic": false,
-        "items": 299,
-        "share": 28.0
+        "items": 241,
+        "share": 26.9
        },
        {
         "code": "21230000100",
         "label": "ReplensMD vaginal moisturiser unit dose",
         "generic": false,
-        "items": 170,
-        "share": 15.9
+        "items": 164,
+        "share": 18.3
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 869,
+      "items": 749,
       "leaders": [
        {
         "code": "21230000105",
         "label": "ReplensMD vaginal moisturiser tube",
         "generic": false,
-        "items": 265,
-        "share": 30.5
+        "items": 250,
+        "share": 33.4
        },
        {
         "code": "21230000119",
         "label": "YES VM vaginal moisturiser tube",
         "generic": false,
-        "items": 198,
-        "share": 22.8
+        "items": 161,
+        "share": 21.5
        },
        {
         "code": "21230000100",
         "label": "ReplensMD vaginal moisturiser unit dose",
         "generic": false,
-        "items": 169,
-        "share": 19.4
+        "items": 122,
+        "share": 16.3
        }
       ]
      },
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 553,
+      "items": 454,
       "leaders": [
        {
         "code": "21230000119",
         "label": "YES VM vaginal moisturiser tube",
         "generic": false,
-        "items": 237,
-        "share": 42.9
+        "items": 189,
+        "share": 41.6
        },
        {
         "code": "21230000105",
         "label": "ReplensMD vaginal moisturiser tube",
         "generic": false,
-        "items": 91,
-        "share": 16.5
+        "items": 71,
+        "share": 15.6
        },
        {
         "code": "21230000118",
         "label": "YES VM vaginal moisturiser pre-filled applicators",
         "generic": false,
-        "items": 76,
-        "share": 13.7
+        "items": 71,
+        "share": 15.6
        }
       ]
      },
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 1167,
+      "items": 1062,
       "leaders": [
        {
         "code": "21230000100",
         "label": "ReplensMD vaginal moisturiser unit dose",
         "generic": false,
-        "items": 276,
-        "share": 23.7
-       },
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 255,
-        "share": 21.9
+        "items": 246,
+        "share": 23.2
        },
        {
         "code": "21230000105",
         "label": "ReplensMD vaginal moisturiser tube",
         "generic": false,
-        "items": 222,
-        "share": 19.0
+        "items": 232,
+        "share": 21.8
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 205,
+        "share": 19.3
        }
       ]
      },
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 2354,
+      "items": 2163,
       "leaders": [
        {
         "code": "21230000119",
         "label": "YES VM vaginal moisturiser tube",
         "generic": false,
-        "items": 712,
-        "share": 30.2
+        "items": 670,
+        "share": 31.0
        },
        {
         "code": "21230000105",
         "label": "ReplensMD vaginal moisturiser tube",
         "generic": false,
-        "items": 653,
-        "share": 27.7
+        "items": 586,
+        "share": 27.1
        },
        {
         "code": "21230000100",
         "label": "ReplensMD vaginal moisturiser unit dose",
         "generic": false,
-        "items": 335,
+        "items": 308,
         "share": 14.2
        }
       ]
@@ -4448,55 +4448,55 @@
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 601,
+      "items": 538,
       "leaders": [
        {
         "code": "21230000119",
         "label": "YES VM vaginal moisturiser tube",
         "generic": false,
-        "items": 189,
-        "share": 31.4
+        "items": 159,
+        "share": 29.6
        },
        {
         "code": "21230000118",
         "label": "YES VM vaginal moisturiser pre-filled applicators",
         "generic": false,
-        "items": 113,
-        "share": 18.8
+        "items": 110,
+        "share": 20.4
        },
        {
         "code": "21230000100",
         "label": "ReplensMD vaginal moisturiser unit dose",
         "generic": false,
-        "items": 111,
-        "share": 18.5
+        "items": 107,
+        "share": 19.9
        }
       ]
      },
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 161,
+      "items": 146,
       "leaders": [
        {
         "code": "21230000105",
         "label": "ReplensMD vaginal moisturiser tube",
         "generic": false,
-        "items": 47,
-        "share": 29.2
+        "items": 39,
+        "share": 26.7
        },
        {
         "code": "21230000100",
         "label": "ReplensMD vaginal moisturiser unit dose",
         "generic": false,
-        "items": 40,
-        "share": 24.8
+        "items": 35,
+        "share": 24.0
        },
        {
         "code": "21230000119",
         "label": "YES VM vaginal moisturiser tube",
         "generic": false,
-        "items": 22,
+        "items": 20,
         "share": 13.7
        }
       ]
@@ -4504,784 +4504,784 @@
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 601,
+      "items": 537,
       "leaders": [
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 144,
-        "share": 24.0
-       },
        {
         "code": "21230000100",
         "label": "ReplensMD vaginal moisturiser unit dose",
         "generic": false,
-        "items": 143,
-        "share": 23.8
+        "items": 150,
+        "share": 27.9
        },
        {
         "code": "21230000105",
         "label": "ReplensMD vaginal moisturiser tube",
         "generic": false,
-        "items": 137,
-        "share": 22.8
+        "items": 132,
+        "share": 24.6
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 123,
+        "share": 22.9
        }
       ]
      },
      {
       "icb": "QJK",
       "name": "NHS Devon",
-      "items": 1049,
+      "items": 1047,
       "leaders": [
        {
         "code": "21230000119",
         "label": "YES VM vaginal moisturiser tube",
         "generic": false,
-        "items": 384,
-        "share": 36.6
+        "items": 400,
+        "share": 38.2
        },
        {
         "code": "21230000100",
         "label": "ReplensMD vaginal moisturiser unit dose",
         "generic": false,
-        "items": 188,
-        "share": 17.9
+        "items": 177,
+        "share": 16.9
        },
        {
         "code": "21230000118",
         "label": "YES VM vaginal moisturiser pre-filled applicators",
         "generic": false,
-        "items": 185,
-        "share": 17.6
+        "items": 166,
+        "share": 15.9
        }
       ]
      },
      {
       "icb": "QVV",
       "name": "NHS Dorset",
-      "items": 357,
+      "items": 307,
       "leaders": [
        {
         "code": "21230000100",
         "label": "ReplensMD vaginal moisturiser unit dose",
         "generic": false,
-        "items": 97,
-        "share": 27.2
-       },
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 92,
-        "share": 25.8
-       },
-       {
-        "code": "21230000118",
-        "label": "YES VM vaginal moisturiser pre-filled applicators",
-        "generic": false,
-        "items": 68,
-        "share": 19.0
-       }
-      ]
-     },
-     {
-      "icb": "D7T5G",
-      "name": "NHS Essex",
-      "items": 452,
-      "leaders": [
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 100,
-        "share": 22.1
-       },
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 91,
-        "share": 20.1
-       },
-       {
-        "code": "21230000105",
-        "label": "ReplensMD vaginal moisturiser tube",
-        "generic": false,
-        "items": 77,
-        "share": 17.0
-       }
-      ]
-     },
-     {
-      "icb": "QR1",
-      "name": "NHS Gloucestershire",
-      "items": 363,
-      "leaders": [
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 115,
-        "share": 31.7
-       },
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 84,
-        "share": 23.1
-       },
-       {
-        "code": "21230000118",
-        "label": "YES VM vaginal moisturiser pre-filled applicators",
-        "generic": false,
-        "items": 51,
-        "share": 14.0
-       }
-      ]
-     },
-     {
-      "icb": "QOP",
-      "name": "NHS Greater Manchester",
-      "items": 2271,
-      "leaders": [
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 658,
-        "share": 29.0
-       },
-       {
-        "code": "21230000105",
-        "label": "ReplensMD vaginal moisturiser tube",
-        "generic": false,
-        "items": 624,
-        "share": 27.5
-       },
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 325,
-        "share": 14.3
-       }
-      ]
-     },
-     {
-      "icb": "QRL",
-      "name": "NHS Hampshire and Isle of Wight",
-      "items": 964,
-      "leaders": [
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 273,
-        "share": 28.3
-       },
-       {
-        "code": "21230000105",
-        "label": "ReplensMD vaginal moisturiser tube",
-        "generic": false,
-        "items": 183,
-        "share": 19.0
-       },
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 156,
-        "share": 16.2
-       }
-      ]
-     },
-     {
-      "icb": "QGH",
-      "name": "NHS Herefordshire and Worcestershire",
-      "items": 373,
-      "leaders": [
-       {
-        "code": "21230000105",
-        "label": "ReplensMD vaginal moisturiser tube",
-        "generic": false,
-        "items": 97,
-        "share": 26.0
-       },
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 80,
-        "share": 21.4
+        "items": 94,
+        "share": 30.6
        },
        {
         "code": "21230000119",
         "label": "YES VM vaginal moisturiser tube",
         "generic": false,
         "items": 78,
-        "share": 20.9
-       }
-      ]
-     },
-     {
-      "icb": "QOQ",
-      "name": "NHS Humber and North Yorkshire",
-      "items": 1714,
-      "leaders": [
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 456,
-        "share": 26.6
-       },
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 417,
-        "share": 24.3
-       },
-       {
-        "code": "21230000105",
-        "label": "ReplensMD vaginal moisturiser tube",
-        "generic": false,
-        "items": 317,
-        "share": 18.5
-       }
-      ]
-     },
-     {
-      "icb": "QKS",
-      "name": "NHS Kent and Medway",
-      "items": 786,
-      "leaders": [
-       {
-        "code": "21230000105",
-        "label": "ReplensMD vaginal moisturiser tube",
-        "generic": false,
-        "items": 248,
-        "share": 31.6
-       },
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 196,
-        "share": 24.9
-       },
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 131,
-        "share": 16.7
-       }
-      ]
-     },
-     {
-      "icb": "QE1",
-      "name": "NHS Lancashire and South Cumbria",
-      "items": 1133,
-      "leaders": [
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 310,
-        "share": 27.4
-       },
-       {
-        "code": "21230000105",
-        "label": "ReplensMD vaginal moisturiser tube",
-        "generic": false,
-        "items": 272,
-        "share": 24.0
-       },
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 217,
-        "share": 19.2
-       }
-      ]
-     },
-     {
-      "icb": "QK1",
-      "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 845,
-      "leaders": [
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 293,
-        "share": 34.7
-       },
-       {
-        "code": "21230000118",
-        "label": "YES VM vaginal moisturiser pre-filled applicators",
-        "generic": false,
-        "items": 178,
-        "share": 21.1
-       },
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 138,
-        "share": 16.3
-       }
-      ]
-     },
-     {
-      "icb": "QJM",
-      "name": "NHS Lincolnshire",
-      "items": 804,
-      "leaders": [
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 206,
-        "share": 25.6
-       },
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 184,
-        "share": 22.9
-       },
-       {
-        "code": "21230000118",
-        "label": "YES VM vaginal moisturiser pre-filled applicators",
-        "generic": false,
-        "items": 141,
-        "share": 17.5
-       }
-      ]
-     },
-     {
-      "icb": "T6Y0W",
-      "name": "NHS Norfolk and Suffolk",
-      "items": 1288,
-      "leaders": [
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 331,
-        "share": 25.7
-       },
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 281,
-        "share": 21.8
-       },
-       {
-        "code": "21230000118",
-        "label": "YES VM vaginal moisturiser pre-filled applicators",
-        "generic": false,
-        "items": 213,
-        "share": 16.5
-       }
-      ]
-     },
-     {
-      "icb": "QMF",
-      "name": "NHS North East London",
-      "items": 740,
-      "leaders": [
-       {
-        "code": "21230000105",
-        "label": "ReplensMD vaginal moisturiser tube",
-        "generic": false,
-        "items": 277,
-        "share": 37.4
-       },
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 134,
-        "share": 18.1
-       },
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 98,
-        "share": 13.2
-       }
-      ]
-     },
-     {
-      "icb": "QHM",
-      "name": "NHS North East and North Cumbria",
-      "items": 1798,
-      "leaders": [
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 421,
-        "share": 23.4
-       },
-       {
-        "code": "21230000105",
-        "label": "ReplensMD vaginal moisturiser tube",
-        "generic": false,
-        "items": 381,
-        "share": 21.2
-       },
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 363,
-        "share": 20.2
-       }
-      ]
-     },
-     {
-      "icb": "QPM",
-      "name": "NHS Northamptonshire",
-      "items": 637,
-      "leaders": [
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 174,
-        "share": 27.3
-       },
-       {
-        "code": "21230000118",
-        "label": "YES VM vaginal moisturiser pre-filled applicators",
-        "generic": false,
-        "items": 123,
-        "share": 19.3
-       },
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 84,
-        "share": 13.2
-       }
-      ]
-     },
-     {
-      "icb": "QT1",
-      "name": "NHS Nottingham and Nottinghamshire",
-      "items": 361,
-      "leaders": [
-       {
-        "code": "21230000105",
-        "label": "ReplensMD vaginal moisturiser tube",
-        "generic": false,
-        "items": 106,
-        "share": 29.4
-       },
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 87,
-        "share": 24.1
-       },
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 66,
-        "share": 18.3
-       }
-      ]
-     },
-     {
-      "icb": "QOC",
-      "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 450,
-      "leaders": [
-       {
-        "code": "21230000105",
-        "label": "ReplensMD vaginal moisturiser tube",
-        "generic": false,
-        "items": 144,
-        "share": 32.0
-       },
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 123,
-        "share": 27.3
-       },
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 74,
-        "share": 16.4
-       }
-      ]
-     },
-     {
-      "icb": "QSL",
-      "name": "NHS Somerset",
-      "items": 346,
-      "leaders": [
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 119,
-        "share": 34.4
-       },
-       {
-        "code": "21230000118",
-        "label": "YES VM vaginal moisturiser pre-filled applicators",
-        "generic": false,
-        "items": 88,
         "share": 25.4
        },
        {
-        "code": "21230000105",
-        "label": "ReplensMD vaginal moisturiser tube",
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
         "generic": false,
-        "items": 54,
-        "share": 15.6
+        "items": 49,
+        "share": 16.0
        }
       ]
      },
      {
-      "icb": "QKK",
-      "name": "NHS South East London",
-      "items": 487,
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 437,
       "leaders": [
        {
-        "code": "21230000105",
-        "label": "ReplensMD vaginal moisturiser tube",
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
         "generic": false,
-        "items": 146,
-        "share": 30.0
+        "items": 111,
+        "share": 25.4
        },
        {
         "code": "21230000119",
         "label": "YES VM vaginal moisturiser tube",
         "generic": false,
-        "items": 98,
-        "share": 20.1
+        "items": 74,
+        "share": 16.9
        },
        {
         "code": "21230000118",
         "label": "YES VM vaginal moisturiser pre-filled applicators",
         "generic": false,
-        "items": 67,
-        "share": 13.8
+        "items": 71,
+        "share": 16.2
        }
       ]
      },
      {
-      "icb": "QWE",
-      "name": "NHS South West London",
-      "items": 679,
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 298,
       "leaders": [
-       {
-        "code": "21230000105",
-        "label": "ReplensMD vaginal moisturiser tube",
-        "generic": false,
-        "items": 186,
-        "share": 27.4
-       },
        {
         "code": "21230000119",
         "label": "YES VM vaginal moisturiser tube",
         "generic": false,
-        "items": 136,
-        "share": 20.0
+        "items": 73,
+        "share": 24.5
        },
        {
         "code": "21230000100",
         "label": "ReplensMD vaginal moisturiser unit dose",
         "generic": false,
-        "items": 107,
-        "share": 15.8
+        "items": 66,
+        "share": 22.1
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 42,
+        "share": 14.1
        }
       ]
      },
      {
-      "icb": "QF7",
-      "name": "NHS South Yorkshire",
-      "items": 1228,
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 2034,
       "leaders": [
        {
         "code": "21230000119",
         "label": "YES VM vaginal moisturiser tube",
         "generic": false,
-        "items": 315,
-        "share": 25.7
-       },
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 314,
-        "share": 25.6
-       },
-       {
-        "code": "21230000105",
-        "label": "ReplensMD vaginal moisturiser tube",
-        "generic": false,
-        "items": 265,
-        "share": 21.6
-       }
-      ]
-     },
-     {
-      "icb": "QNC",
-      "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 1231,
-      "leaders": [
-       {
-        "code": "21230000105",
-        "label": "ReplensMD vaginal moisturiser tube",
-        "generic": false,
-        "items": 404,
-        "share": 32.8
-       },
-       {
-        "code": "21230000100",
-        "label": "ReplensMD vaginal moisturiser unit dose",
-        "generic": false,
-        "items": 297,
-        "share": 24.1
-       },
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 254,
-        "share": 20.6
-       }
-      ]
-     },
-     {
-      "icb": "S9B9J",
-      "name": "NHS Surrey and Sussex",
-      "items": 1256,
-      "leaders": [
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 348,
+        "items": 564,
         "share": 27.7
        },
        {
         "code": "21230000105",
         "label": "ReplensMD vaginal moisturiser tube",
         "generic": false,
-        "items": 235,
-        "share": 18.7
+        "items": 525,
+        "share": 25.8
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 327,
+        "share": 16.1
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 899,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 256,
+        "share": 28.5
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 154,
+        "share": 17.1
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 148,
+        "share": 16.5
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 312,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 90,
+        "share": 28.8
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 69,
+        "share": 22.1
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 68,
+        "share": 21.8
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 1543,
+      "leaders": [
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 406,
+        "share": 26.3
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 365,
+        "share": 23.7
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 282,
+        "share": 18.3
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 720,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 227,
+        "share": 31.5
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 149,
+        "share": 20.7
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 133,
+        "share": 18.5
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 1018,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 273,
+        "share": 26.8
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 239,
+        "share": 23.5
        },
        {
         "code": "21230000100",
         "label": "ReplensMD vaginal moisturiser unit dose",
         "generic": false,
         "items": 192,
-        "share": 15.3
+        "share": 18.9
+       }
+      ]
+     },
+     {
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 849,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 316,
+        "share": 37.2
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 178,
+        "share": 21.0
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 127,
+        "share": 15.0
+       }
+      ]
+     },
+     {
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 719,
+      "leaders": [
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 171,
+        "share": 23.8
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 166,
+        "share": 23.1
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 145,
+        "share": 20.2
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 1143,
+      "leaders": [
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 282,
+        "share": 24.7
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 262,
+        "share": 22.9
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 183,
+        "share": 16.0
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 682,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 238,
+        "share": 34.9
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 140,
+        "share": 20.5
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 100,
+        "share": 14.7
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 1634,
+      "leaders": [
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 353,
+        "share": 21.6
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 330,
+        "share": 20.2
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 329,
+        "share": 20.1
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 584,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 144,
+        "share": 24.7
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 119,
+        "share": 20.4
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 79,
+        "share": 13.5
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 308,
+      "leaders": [
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 79,
+        "share": 25.6
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 72,
+        "share": 23.4
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 69,
+        "share": 22.4
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 407,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 111,
+        "share": 27.3
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 99,
+        "share": 24.3
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 71,
+        "share": 17.4
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 341,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 112,
+        "share": 32.8
+       },
+       {
+        "code": "21230000118",
+        "label": "YES VM vaginal moisturiser pre-filled applicators",
+        "generic": false,
+        "items": 78,
+        "share": 22.9
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 61,
+        "share": 17.9
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 416,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 118,
+        "share": 28.4
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 91,
+        "share": 21.9
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 56,
+        "share": 13.5
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 613,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 162,
+        "share": 26.4
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 108,
+        "share": 17.6
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 96,
+        "share": 15.7
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 1187,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 316,
+        "share": 26.6
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 282,
+        "share": 23.8
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 271,
+        "share": 22.8
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 1097,
+      "leaders": [
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 356,
+        "share": 32.5
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 262,
+        "share": 23.9
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 221,
+        "share": 20.1
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 1158,
+      "leaders": [
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 335,
+        "share": 28.9
+       },
+       {
+        "code": "21230000105",
+        "label": "ReplensMD vaginal moisturiser tube",
+        "generic": false,
+        "items": 198,
+        "share": 17.1
+       },
+       {
+        "code": "21230000100",
+        "label": "ReplensMD vaginal moisturiser unit dose",
+        "generic": false,
+        "items": 191,
+        "share": 16.5
        }
       ]
      },
      {
       "icb": "S0E4D",
       "name": "NHS Thames Valley",
-      "items": 576,
+      "items": 552,
       "leaders": [
        {
         "code": "21230000105",
         "label": "ReplensMD vaginal moisturiser tube",
         "generic": false,
-        "items": 182,
-        "share": 31.6
-       },
-       {
-        "code": "21230000119",
-        "label": "YES VM vaginal moisturiser tube",
-        "generic": false,
-        "items": 112,
-        "share": 19.4
+        "items": 158,
+        "share": 28.6
        },
        {
         "code": "21230000100",
         "label": "ReplensMD vaginal moisturiser unit dose",
         "generic": false,
-        "items": 101,
-        "share": 17.5
+        "items": 98,
+        "share": 17.8
+       },
+       {
+        "code": "21230000119",
+        "label": "YES VM vaginal moisturiser tube",
+        "generic": false,
+        "items": 95,
+        "share": 17.2
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 1465,
+      "items": 1400,
       "leaders": [
        {
         "code": "21230000119",
         "label": "YES VM vaginal moisturiser tube",
         "generic": false,
-        "items": 370,
-        "share": 25.3
+        "items": 394,
+        "share": 28.1
        },
        {
         "code": "21230000100",
         "label": "ReplensMD vaginal moisturiser unit dose",
         "generic": false,
-        "items": 311,
-        "share": 21.2
+        "items": 281,
+        "share": 20.1
        },
        {
         "code": "21230000105",
         "label": "ReplensMD vaginal moisturiser tube",
         "generic": false,
-        "items": 285,
-        "share": 19.5
+        "items": 272,
+        "share": 19.4
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 1392,
+      "items": 1273,
       "leaders": [
        {
         "code": "21230000105",
         "label": "ReplensMD vaginal moisturiser tube",
         "generic": false,
-        "items": 417,
-        "share": 30.0
+        "items": 383,
+        "share": 30.1
        },
        {
         "code": "21230000100",
         "label": "ReplensMD vaginal moisturiser unit dose",
         "generic": false,
-        "items": 255,
-        "share": 18.3
+        "items": 228,
+        "share": 17.9
        },
        {
         "code": "21230000119",
         "label": "YES VM vaginal moisturiser tube",
         "generic": false,
-        "items": 232,
-        "share": 16.7
+        "items": 225,
+        "share": 17.7
        }
       ]
      }

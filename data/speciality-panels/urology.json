@@ -22,7 +22,7 @@
   "drugTariff": "2026-10-21",
   "localIntel": "2026-10-21",
   "supplierDirectory": "2026-10-21",
-  "gpPrescribing": "2026-09-30",
+  "gpPrescribing": "2026-10-21",
   "mhraDsu": "2026-10-19",
   "drugTariffViiia": "2026-10-21",
   "hospitalPrescribing": null
@@ -35,7 +35,7 @@
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "NHSBSA Drug Tariff Part IXA/IXB/IXC for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /\\b(nelaton|foley|dilatation catheter|reusable catheter|catheterisation packs?|catheter (?:disposable|retaining|safety|securement|maintenance|valves?)|urinar\\w*|urostom\\w*|uridome|suprapubic|penile sheaths?|incontinence sheaths?|leg bags?|night bags?|bladder (?:infusion|irrigat\\w*|washout)|urine (?:meters?|bags?))\\b/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,879 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's.",
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: continence, endourology). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 13 of the 15 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
-  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202608) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (9 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-19.",
   "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF 07.04. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 51 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
  },
@@ -2795,14 +2795,14 @@
   }
  ],
  "gpPrescribing": {
-  "generatedOn": "2026-09-30",
+  "generatedOn": "2026-10-21",
   "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
   "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
   "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
   "periods": [
-   "202507",
-   "202607"
+   "202508",
+   "202608"
   ],
   "minBaselineItems": 25,
   "defined": true,
@@ -2814,215 +2814,215 @@
      "07.04"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 2299671,
-    "cost": 15124401,
-    "items12m": 25777941,
-    "cost12m": 162492354,
-    "itemsYoY": 4.6,
-    "products": 89,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 2093924,
+    "cost": 13816114,
+    "items12m": 25837873,
+    "cost12m": 164083325,
+    "itemsYoY": 2.9,
+    "products": 92,
     "topNational": [
      {
       "code": "0704010U0AA",
       "label": "Tamsulosin",
       "generic": true,
-      "items": 888456,
+      "items": 808949,
       "share": 38.6,
-      "cost": 896249,
-      "yoy": 3.6
+      "cost": 813029,
+      "yoy": 1.7
      },
      {
       "code": "0704020ABAA",
       "label": "Solifenacin",
       "generic": true,
-      "items": 316983,
-      "share": 13.8,
-      "cost": 407360,
-      "yoy": 5.2
+      "items": 285359,
+      "share": 13.6,
+      "cost": 367478,
+      "yoy": 2.7
      },
      {
       "code": "0704050Z0AA",
       "label": "Sildenafil",
       "generic": true,
-      "items": 293123,
-      "share": 12.7,
-      "cost": 302858,
-      "yoy": -1.1
+      "items": 267126,
+      "share": 12.8,
+      "cost": 277147,
+      "yoy": -2.6
      },
      {
       "code": "0704020AEAA",
       "label": "Mirabegron",
       "generic": true,
-      "items": 287113,
+      "items": 261511,
       "share": 12.5,
-      "cost": 7358106,
-      "yoy": 9.2
+      "cost": 6663513,
+      "yoy": 6.4
      },
      {
       "code": "0704050R0AA",
       "label": "Tadalafil",
       "generic": true,
-      "items": 121619,
-      "share": 5.3,
-      "cost": 241156,
-      "yoy": 16.0
+      "items": 112214,
+      "share": 5.4,
+      "cost": 219826,
+      "yoy": 14.9
      },
      {
       "code": "0704020J0AA",
       "label": "Oxybutynin",
       "generic": true,
-      "items": 107016,
+      "items": 97821,
       "share": 4.7,
-      "cost": 1382086,
-      "yoy": -7.0
+      "cost": 1270635,
+      "yoy": -4.9
      },
      {
       "code": "0704020N0AA",
       "label": "Tolterodine",
       "generic": true,
-      "items": 60302,
+      "items": 53863,
       "share": 2.6,
-      "cost": 643954,
-      "yoy": -13.4
+      "cost": 571026,
+      "yoy": -14.4
      },
      {
       "code": "0704020AFAA",
       "label": "Vibegron",
       "generic": true,
-      "items": 37893,
-      "share": 1.6,
-      "cost": 934418,
-      "yoy": 941.3
+      "items": 38018,
+      "share": 1.8,
+      "cost": 930956,
+      "yoy": 792.4
      },
      {
       "code": "0704020AAAA",
       "label": "Duloxetine",
       "generic": true,
-      "items": 35911,
+      "items": 32529,
       "share": 1.6,
-      "cost": 108560,
-      "yoy": 15.9
+      "cost": 96883,
+      "yoy": 12.1
      },
      {
       "code": "0704010A0AA",
       "label": "Alfuzosin",
       "generic": true,
-      "items": 35066,
+      "items": 31370,
       "share": 1.5,
-      "cost": 430002,
-      "yoy": 5.4
+      "cost": 379885,
+      "yoy": 1.7
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 37855,
+      "items": 34209,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 15556,
-        "share": 41.1
+        "items": 14079,
+        "share": 41.2
        },
        {
         "code": "0704020AEAA",
         "label": "Mirabegron",
         "generic": true,
-        "items": 6345,
-        "share": 16.8
+        "items": 5834,
+        "share": 17.1
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 4754,
-        "share": 12.6
+        "items": 4168,
+        "share": 12.2
        }
       ]
      },
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 44120,
+      "items": 39394,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 13487,
-        "share": 30.6
+        "items": 12163,
+        "share": 30.9
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 8630,
-        "share": 19.6
+        "items": 7692,
+        "share": 19.5
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 6676,
-        "share": 15.1
+        "items": 5984,
+        "share": 15.2
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 41901,
+      "items": 37651,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 14015,
-        "share": 33.4
+        "items": 12681,
+        "share": 33.7
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 7355,
-        "share": 17.6
+        "items": 6540,
+        "share": 17.4
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 6101,
-        "share": 14.6
+        "items": 5403,
+        "share": 14.4
        }
       ]
      },
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 27132,
+      "items": 24464,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 10664,
-        "share": 39.3
+        "items": 9643,
+        "share": 39.4
        },
        {
         "code": "0704020AEAA",
         "label": "Mirabegron",
         "generic": true,
-        "items": 4317,
-        "share": 15.9
+        "items": 3945,
+        "share": 16.1
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 3546,
+        "items": 3203,
         "share": 13.1
        }
       ]
@@ -3030,83 +3030,83 @@
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 114223,
+      "items": 103072,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 49405,
-        "share": 43.3
+        "items": 44489,
+        "share": 43.2
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 13883,
-        "share": 12.2
+        "items": 12723,
+        "share": 12.3
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 13345,
-        "share": 11.7
+        "items": 11951,
+        "share": 11.6
        }
       ]
      },
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 117828,
+      "items": 106082,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 42997,
-        "share": 36.5
+        "items": 38814,
+        "share": 36.6
        },
        {
         "code": "0704020AEAA",
         "label": "Mirabegron",
         "generic": true,
-        "items": 16746,
+        "items": 15080,
         "share": 14.2
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 16442,
-        "share": 14.0
+        "items": 14653,
+        "share": 13.8
        }
       ]
      },
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 27528,
+      "items": 25283,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 12276,
-        "share": 44.6
+        "items": 11351,
+        "share": 44.9
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 3725,
-        "share": 13.5
+        "items": 3354,
+        "share": 13.3
        },
        {
         "code": "0704020AEAA",
         "label": "Mirabegron",
         "generic": true,
-        "items": 3271,
+        "items": 3014,
         "share": 11.9
        }
       ]
@@ -3114,251 +3114,251 @@
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 37768,
+      "items": 34465,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 14848,
-        "share": 39.3
+        "items": 13698,
+        "share": 39.7
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 5371,
-        "share": 14.2
+        "items": 4768,
+        "share": 13.8
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 4674,
-        "share": 12.4
+        "items": 4172,
+        "share": 12.1
        }
       ]
      },
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 37106,
+      "items": 32916,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 13884,
-        "share": 37.4
+        "items": 12365,
+        "share": 37.6
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 5949,
-        "share": 16.0
+        "items": 5439,
+        "share": 16.5
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 5828,
-        "share": 15.7
+        "items": 5067,
+        "share": 15.4
        }
       ]
      },
      {
       "icb": "QJK",
       "name": "NHS Devon",
-      "items": 51391,
+      "items": 46627,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 20913,
-        "share": 40.7
+        "items": 19060,
+        "share": 40.9
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 7102,
-        "share": 13.8
-       },
-       {
-        "code": "0704020AEAA",
-        "label": "Mirabegron",
-        "generic": true,
-        "items": 6246,
-        "share": 12.2
-       }
-      ]
-     },
-     {
-      "icb": "QVV",
-      "name": "NHS Dorset",
-      "items": 34797,
-      "leaders": [
-       {
-        "code": "0704010U0AA",
-        "label": "Tamsulosin",
-        "generic": true,
-        "items": 14764,
-        "share": 42.4
-       },
-       {
-        "code": "0704020ABAA",
-        "label": "Solifenacin",
-        "generic": true,
-        "items": 5047,
-        "share": 14.5
-       },
-       {
-        "code": "0704050Z0AA",
-        "label": "Sildenafil",
-        "generic": true,
-        "items": 4825,
-        "share": 13.9
-       }
-      ]
-     },
-     {
-      "icb": "D7T5G",
-      "name": "NHS Essex",
-      "items": 72385,
-      "leaders": [
-       {
-        "code": "0704010U0AA",
-        "label": "Tamsulosin",
-        "generic": true,
-        "items": 30330,
-        "share": 41.9
-       },
-       {
-        "code": "0704050Z0AA",
-        "label": "Sildenafil",
-        "generic": true,
-        "items": 9334,
-        "share": 12.9
-       },
-       {
-        "code": "0704020ABAA",
-        "label": "Solifenacin",
-        "generic": true,
-        "items": 9206,
-        "share": 12.7
-       }
-      ]
-     },
-     {
-      "icb": "QR1",
-      "name": "NHS Gloucestershire",
-      "items": 30168,
-      "leaders": [
-       {
-        "code": "0704010U0AA",
-        "label": "Tamsulosin",
-        "generic": true,
-        "items": 12695,
-        "share": 42.1
-       },
-       {
-        "code": "0704020ABAA",
-        "label": "Solifenacin",
-        "generic": true,
-        "items": 4162,
-        "share": 13.8
-       },
-       {
-        "code": "0704020AEAA",
-        "label": "Mirabegron",
-        "generic": true,
-        "items": 3681,
-        "share": 12.2
-       }
-      ]
-     },
-     {
-      "icb": "QOP",
-      "name": "NHS Greater Manchester",
-      "items": 121310,
-      "leaders": [
-       {
-        "code": "0704010U0AA",
-        "label": "Tamsulosin",
-        "generic": true,
-        "items": 43486,
-        "share": 35.8
-       },
-       {
-        "code": "0704050Z0AA",
-        "label": "Sildenafil",
-        "generic": true,
-        "items": 16647,
-        "share": 13.7
-       },
-       {
-        "code": "0704020AEAA",
-        "label": "Mirabegron",
-        "generic": true,
-        "items": 15387,
-        "share": 12.7
-       }
-      ]
-     },
-     {
-      "icb": "QRL",
-      "name": "NHS Hampshire and Isle of Wight",
-      "items": 72329,
-      "leaders": [
-       {
-        "code": "0704010U0AA",
-        "label": "Tamsulosin",
-        "generic": true,
-        "items": 28380,
-        "share": 39.2
-       },
-       {
-        "code": "0704020ABAA",
-        "label": "Solifenacin",
-        "generic": true,
-        "items": 10177,
+        "items": 6564,
         "share": 14.1
        },
        {
         "code": "0704020AEAA",
         "label": "Mirabegron",
         "generic": true,
-        "items": 8943,
-        "share": 12.4
+        "items": 5637,
+        "share": 12.1
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 31540,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 13411,
+        "share": 42.5
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 4453,
+        "share": 14.1
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 4438,
+        "share": 14.1
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 66146,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 27844,
+        "share": 42.1
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 8571,
+        "share": 13.0
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 8338,
+        "share": 12.6
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 27599,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 11717,
+        "share": 42.5
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 3779,
+        "share": 13.7
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 3334,
+        "share": 12.1
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 110022,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 39175,
+        "share": 35.6
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 15273,
+        "share": 13.9
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 14065,
+        "share": 12.8
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 65940,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 25765,
+        "share": 39.1
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 9013,
+        "share": 13.7
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 8235,
+        "share": 12.5
        }
       ]
      },
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 31210,
+      "items": 28708,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 12558,
-        "share": 40.2
+        "items": 11519,
+        "share": 40.1
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 4370,
-        "share": 14.0
+        "items": 4036,
+        "share": 14.1
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 4063,
+        "items": 3729,
         "share": 13.0
        }
       ]
@@ -3366,83 +3366,83 @@
      {
       "icb": "QOQ",
       "name": "NHS Humber and North Yorkshire",
-      "items": 87210,
+      "items": 78778,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 35497,
-        "share": 40.7
+        "items": 31938,
+        "share": 40.5
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 11623,
+        "items": 10489,
         "share": 13.3
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 11061,
-        "share": 12.7
+        "items": 9930,
+        "share": 12.6
        }
       ]
      },
      {
       "icb": "QKS",
       "name": "NHS Kent and Medway",
-      "items": 71565,
+      "items": 65614,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 28459,
-        "share": 39.8
+        "items": 26157,
+        "share": 39.9
        },
        {
         "code": "0704020AEAA",
         "label": "Mirabegron",
         "generic": true,
-        "items": 10493,
-        "share": 14.7
+        "items": 9780,
+        "share": 14.9
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 9730,
-        "share": 13.6
+        "items": 8738,
+        "share": 13.3
        }
       ]
      },
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 78581,
+      "items": 71235,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 29097,
+        "items": 26347,
         "share": 37.0
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 11305,
-        "share": 14.4
+        "items": 10108,
+        "share": 14.2
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 10392,
+        "items": 9425,
         "share": 13.2
        }
       ]
@@ -3450,391 +3450,391 @@
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 41481,
+      "items": 38214,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 16507,
-        "share": 39.8
+        "items": 15015,
+        "share": 39.3
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 5515,
-        "share": 13.3
+        "items": 5054,
+        "share": 13.2
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 5258,
-        "share": 12.7
+        "items": 4815,
+        "share": 12.6
        }
       ]
      },
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 48632,
+      "items": 44807,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 20321,
-        "share": 41.8
+        "items": 18625,
+        "share": 41.6
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 7145,
-        "share": 14.7
+        "items": 6668,
+        "share": 14.9
        },
        {
         "code": "0704020AEAA",
         "label": "Mirabegron",
         "generic": true,
-        "items": 6068,
-        "share": 12.5
+        "items": 5486,
+        "share": 12.2
        }
       ]
      },
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 89271,
+      "items": 81777,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 39341,
-        "share": 44.1
-       },
-       {
-        "code": "0704050Z0AA",
-        "label": "Sildenafil",
-        "generic": true,
-        "items": 11557,
-        "share": 12.9
-       },
-       {
-        "code": "0704020ABAA",
-        "label": "Solifenacin",
-        "generic": true,
-        "items": 10358,
-        "share": 11.6
-       }
-      ]
-     },
-     {
-      "icb": "QMF",
-      "name": "NHS North East London",
-      "items": 71130,
-      "leaders": [
-       {
-        "code": "0704010U0AA",
-        "label": "Tamsulosin",
-        "generic": true,
-        "items": 26895,
-        "share": 37.8
-       },
-       {
-        "code": "0704020ABAA",
-        "label": "Solifenacin",
-        "generic": true,
-        "items": 10451,
-        "share": 14.7
-       },
-       {
-        "code": "0704050Z0AA",
-        "label": "Sildenafil",
-        "generic": true,
-        "items": 8440,
-        "share": 11.9
-       }
-      ]
-     },
-     {
-      "icb": "QHM",
-      "name": "NHS North East and North Cumbria",
-      "items": 168718,
-      "leaders": [
-       {
-        "code": "0704010U0AA",
-        "label": "Tamsulosin",
-        "generic": true,
-        "items": 61605,
-        "share": 36.5
-       },
-       {
-        "code": "0704020ABAA",
-        "label": "Solifenacin",
-        "generic": true,
-        "items": 24587,
-        "share": 14.6
-       },
-       {
-        "code": "0704020AEAA",
-        "label": "Mirabegron",
-        "generic": true,
-        "items": 22341,
-        "share": 13.2
-       }
-      ]
-     },
-     {
-      "icb": "QPM",
-      "name": "NHS Northamptonshire",
-      "items": 33573,
-      "leaders": [
-       {
-        "code": "0704010U0AA",
-        "label": "Tamsulosin",
-        "generic": true,
-        "items": 13079,
-        "share": 39.0
-       },
-       {
-        "code": "0704020ABAA",
-        "label": "Solifenacin",
-        "generic": true,
-        "items": 5581,
-        "share": 16.6
-       },
-       {
-        "code": "0704050Z0AA",
-        "label": "Sildenafil",
-        "generic": true,
-        "items": 4813,
-        "share": 14.3
-       }
-      ]
-     },
-     {
-      "icb": "QT1",
-      "name": "NHS Nottingham and Nottinghamshire",
-      "items": 45450,
-      "leaders": [
-       {
-        "code": "0704010U0AA",
-        "label": "Tamsulosin",
-        "generic": true,
-        "items": 16012,
-        "share": 35.2
-       },
-       {
-        "code": "0704050Z0AA",
-        "label": "Sildenafil",
-        "generic": true,
-        "items": 7495,
-        "share": 16.5
-       },
-       {
-        "code": "0704020ABAA",
-        "label": "Solifenacin",
-        "generic": true,
-        "items": 6626,
-        "share": 14.6
-       }
-      ]
-     },
-     {
-      "icb": "QOC",
-      "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 19692,
-      "leaders": [
-       {
-        "code": "0704010U0AA",
-        "label": "Tamsulosin",
-        "generic": true,
-        "items": 7663,
-        "share": 38.9
-       },
-       {
-        "code": "0704020ABAA",
-        "label": "Solifenacin",
-        "generic": true,
-        "items": 2649,
-        "share": 13.5
-       },
-       {
-        "code": "0704050Z0AA",
-        "label": "Sildenafil",
-        "generic": true,
-        "items": 2629,
-        "share": 13.4
-       }
-      ]
-     },
-     {
-      "icb": "QSL",
-      "name": "NHS Somerset",
-      "items": 21584,
-      "leaders": [
-       {
-        "code": "0704010U0AA",
-        "label": "Tamsulosin",
-        "generic": true,
-        "items": 9540,
+        "items": 36106,
         "share": 44.2
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 2845,
-        "share": 13.2
+        "items": 10505,
+        "share": 12.8
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 9304,
+        "share": 11.4
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 66321,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 25274,
+        "share": 38.1
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 9705,
+        "share": 14.6
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 7840,
+        "share": 11.8
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 155178,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 56552,
+        "share": 36.4
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 22430,
+        "share": 14.5
        },
        {
         "code": "0704020AEAA",
         "label": "Mirabegron",
         "generic": true,
-        "items": 2681,
-        "share": 12.4
+        "items": 20641,
+        "share": 13.3
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 29925,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 11574,
+        "share": 38.7
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 4879,
+        "share": 16.3
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 4496,
+        "share": 15.0
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 41198,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 14575,
+        "share": 35.4
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 6753,
+        "share": 16.4
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 5917,
+        "share": 14.4
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 18131,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 7096,
+        "share": 39.1
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 2413,
+        "share": 13.3
+       },
+       {
+        "code": "0704020ABAA",
+        "label": "Solifenacin",
+        "generic": true,
+        "items": 2372,
+        "share": 13.1
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 19644,
+      "leaders": [
+       {
+        "code": "0704010U0AA",
+        "label": "Tamsulosin",
+        "generic": true,
+        "items": 8670,
+        "share": 44.1
+       },
+       {
+        "code": "0704050Z0AA",
+        "label": "Sildenafil",
+        "generic": true,
+        "items": 2610,
+        "share": 13.3
+       },
+       {
+        "code": "0704020AEAA",
+        "label": "Mirabegron",
+        "generic": true,
+        "items": 2410,
+        "share": 12.3
        }
       ]
      },
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 51419,
+      "items": 47799,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 17593,
+        "items": 16348,
         "share": 34.2
        },
        {
         "code": "0704020AEAA",
         "label": "Mirabegron",
         "generic": true,
-        "items": 8363,
-        "share": 16.3
+        "items": 7858,
+        "share": 16.4
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 7859,
-        "share": 15.3
+        "items": 7220,
+        "share": 15.1
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 46690,
+      "items": 42507,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 18839,
-        "share": 40.3
+        "items": 17013,
+        "share": 40.0
        },
        {
         "code": "0704020AEAA",
         "label": "Mirabegron",
         "generic": true,
-        "items": 6680,
+        "items": 6081,
         "share": 14.3
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 6465,
-        "share": 13.8
+        "items": 5966,
+        "share": 14.0
        }
       ]
      },
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 71488,
+      "items": 64640,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 23217,
-        "share": 32.5
+        "items": 21053,
+        "share": 32.6
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 13295,
-        "share": 18.6
+        "items": 11761,
+        "share": 18.2
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 9863,
-        "share": 13.8
+        "items": 8982,
+        "share": 13.9
        }
       ]
      },
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 47629,
+      "items": 43570,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 19946,
-        "share": 41.9
+        "items": 18200,
+        "share": 41.8
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 6857,
-        "share": 14.4
+        "items": 6243,
+        "share": 14.3
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 5797,
-        "share": 12.2
+        "items": 5403,
+        "share": 12.4
        }
       ]
      },
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 101089,
+      "items": 92608,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 42028,
-        "share": 41.6
+        "items": 38400,
+        "share": 41.5
        },
        {
         "code": "0704020AEAA",
         "label": "Mirabegron",
         "generic": true,
-        "items": 13759,
-        "share": 13.6
+        "items": 12491,
+        "share": 13.5
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 12475,
+        "items": 11367,
         "share": 12.3
        }
       ]
@@ -3842,55 +3842,55 @@
      {
       "icb": "S0E4D",
       "name": "NHS Thames Valley",
-      "items": 70718,
+      "items": 64041,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 29506,
-        "share": 41.7
+        "items": 26647,
+        "share": 41.6
        },
        {
         "code": "0704020AEAA",
         "label": "Mirabegron",
         "generic": true,
-        "items": 10072,
-        "share": 14.2
+        "items": 9004,
+        "share": 14.1
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 8851,
-        "share": 12.5
+        "items": 8121,
+        "share": 12.7
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 103554,
+      "items": 93499,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 33726,
-        "share": 32.6
+        "items": 30284,
+        "share": 32.4
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 17079,
-        "share": 16.5
+        "items": 15338,
+        "share": 16.4
        },
        {
         "code": "0704050Z0AA",
         "label": "Sildenafil",
         "generic": true,
-        "items": 13757,
+        "items": 12401,
         "share": 13.3
        }
       ]
@@ -3898,28 +3898,28 @@
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 131103,
+      "items": 120283,
       "leaders": [
        {
         "code": "0704010U0AA",
         "label": "Tamsulosin",
         "generic": true,
-        "items": 49317,
-        "share": 37.6
+        "items": 45287,
+        "share": 37.7
        },
        {
         "code": "0704020AEAA",
         "label": "Mirabegron",
         "generic": true,
-        "items": 20498,
-        "share": 15.6
+        "items": 19019,
+        "share": 15.8
        },
        {
         "code": "0704020ABAA",
         "label": "Solifenacin",
         "generic": true,
-        "items": 18694,
-        "share": 14.3
+        "items": 16982,
+        "share": 14.1
        }
       ]
      }
@@ -3933,635 +3933,635 @@
      "21.13"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 161766,
-    "cost": 18867767,
-    "items12m": 1770795,
-    "cost12m": 208093409,
-    "itemsYoY": 8.6,
-    "products": 400,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 146526,
+    "cost": 17160548,
+    "items12m": 1781392,
+    "cost12m": 208939238,
+    "itemsYoY": 7.8,
+    "products": 392,
     "topNational": [
      {
       "code": "21020000950",
       "label": "Brillant AquaFlate all silicone catheter male",
       "generic": false,
-      "items": 11095,
-      "share": 6.9,
-      "cost": 166004,
-      "yoy": 3.5
+      "items": 10015,
+      "share": 6.8,
+      "cost": 146121,
+      "yoy": 17.8
      },
      {
       "code": "21020001033",
       "label": "Prosys all silicone catheter male",
       "generic": false,
-      "items": 6479,
-      "share": 4.0,
-      "cost": 94727,
-      "yoy": 5.9
+      "items": 5696,
+      "share": 3.9,
+      "cost": 83016,
+      "yoy": -2.8
      },
      {
       "code": "21130000124",
       "label": "Uro-Tainer Twin Suby G citric acid",
       "generic": false,
-      "items": 5522,
+      "items": 5016,
       "share": 3.4,
-      "cost": 272521,
-      "yoy": 3.2
+      "cost": 253852,
+      "yoy": -0.4
      },
      {
       "code": "21130000104",
       "label": "OptiFlo S saline",
       "generic": false,
-      "items": 5505,
+      "items": 5002,
       "share": 3.4,
-      "cost": 167101,
-      "yoy": 12.1
+      "cost": 154056,
+      "yoy": 10.5
      },
      {
       "code": "21020001196",
       "label": "SpeediCath Compact catheter male one size",
       "generic": false,
-      "items": 4493,
-      "share": 2.8,
-      "cost": 1143619,
-      "yoy": -0.2
-     },
-     {
-      "code": "21020001458",
-      "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
-      "generic": false,
-      "items": 4353,
+      "items": 4016,
       "share": 2.7,
-      "cost": 72694,
-      "yoy": 43.0
-     },
-     {
-      "code": "21020001149",
-      "label": "VaPro Pocket No Touch hydrophilic catheter male",
-      "generic": false,
-      "items": 4282,
-      "share": 2.6,
-      "cost": 878328,
-      "yoy": 6.8
+      "cost": 1015113,
+      "yoy": -8.8
      },
      {
       "code": "21020001560",
       "label": "Prosys all silicone open ended catheter male",
       "generic": false,
-      "items": 4220,
+      "items": 3983,
+      "share": 2.7,
+      "cost": 65041,
+      "yoy": 19.0
+     },
+     {
+      "code": "21020001149",
+      "label": "VaPro Pocket No Touch hydrophilic catheter male",
+      "generic": false,
+      "items": 3926,
+      "share": 2.7,
+      "cost": 792387,
+      "yoy": 9.8
+     },
+     {
+      "code": "21020001458",
+      "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
+      "generic": false,
+      "items": 3774,
       "share": 2.6,
-      "cost": 67584,
-      "yoy": 17.1
+      "cost": 62011,
+      "yoy": 55.6
      },
      {
       "code": "21020001408",
       "label": "LoFric Origo catheter male",
       "generic": false,
-      "items": 3836,
-      "share": 2.4,
-      "cost": 778490,
-      "yoy": -11.8
+      "items": 3716,
+      "share": 2.5,
+      "cost": 770921,
+      "yoy": -3.1
      },
      {
-      "code": "21130000110",
-      "label": "Uro-Tainer sodium chloride",
+      "code": "21020001378",
+      "label": "Prosys Vesica Community Catheterisation Pack",
       "generic": false,
-      "items": 3265,
-      "share": 2.0,
-      "cost": 132773,
-      "yoy": -6.1
+      "items": 3510,
+      "share": 2.4,
+      "cost": 84076,
+      "yoy": 326.0
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 2862,
+      "items": 2429,
       "leaders": [
        {
         "code": "21020001458",
         "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
         "generic": false,
-        "items": 206,
-        "share": 7.2
+        "items": 150,
+        "share": 6.2
+       },
+       {
+        "code": "21020001378",
+        "label": "Prosys Vesica Community Catheterisation Pack",
+        "generic": false,
+        "items": 126,
+        "share": 5.2
        },
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 132,
-        "share": 4.6
-       },
-       {
-        "code": "21130000104",
-        "label": "OptiFlo S saline",
-        "generic": false,
-        "items": 108,
-        "share": 3.8
+        "items": 101,
+        "share": 4.2
        }
       ]
      },
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 3431,
+      "items": 3075,
       "leaders": [
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 326,
-        "share": 9.5
+        "items": 306,
+        "share": 10.0
        },
        {
         "code": "21020001458",
         "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
         "generic": false,
-        "items": 206,
+        "items": 184,
         "share": 6.0
        },
        {
-        "code": "21020001374",
-        "label": "Prosys Vesica Community Catheterisation Pack LT",
+        "code": "21020001378",
+        "label": "Prosys Vesica Community Catheterisation Pack",
         "generic": false,
-        "items": 150,
-        "share": 4.4
+        "items": 164,
+        "share": 5.3
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 3998,
+      "items": 3618,
       "leaders": [
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 614,
-        "share": 15.4
+        "items": 536,
+        "share": 14.8
        },
        {
         "code": "21130000124",
         "label": "Uro-Tainer Twin Suby G citric acid",
         "generic": false,
-        "items": 229,
-        "share": 5.7
+        "items": 188,
+        "share": 5.2
        },
        {
         "code": "21130000110",
         "label": "Uro-Tainer sodium chloride",
         "generic": false,
-        "items": 174,
-        "share": 4.4
+        "items": 156,
+        "share": 4.3
        }
       ]
      },
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 3139,
+      "items": 2799,
       "leaders": [
        {
         "code": "21020001458",
         "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
         "generic": false,
-        "items": 444,
-        "share": 14.1
+        "items": 417,
+        "share": 14.9
        },
        {
         "code": "21020001408",
         "label": "LoFric Origo catheter male",
         "generic": false,
-        "items": 226,
-        "share": 7.2
+        "items": 230,
+        "share": 8.2
        },
        {
         "code": "21130000104",
         "label": "OptiFlo S saline",
         "generic": false,
-        "items": 202,
-        "share": 6.4
+        "items": 176,
+        "share": 6.3
        }
       ]
      },
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 7738,
+      "items": 6893,
       "leaders": [
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 723,
-        "share": 9.3
+        "items": 673,
+        "share": 9.8
        },
        {
         "code": "21020000960",
         "label": "Sympacath AquaFlate hydrogel coated latex catheter male",
         "generic": false,
-        "items": 383,
-        "share": 4.9
+        "items": 328,
+        "share": 4.8
        },
        {
         "code": "21130000104",
         "label": "OptiFlo S saline",
         "generic": false,
-        "items": 305,
-        "share": 3.9
+        "items": 290,
+        "share": 4.2
        }
       ]
      },
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 9114,
+      "items": 8097,
       "leaders": [
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 788,
-        "share": 8.6
+        "items": 721,
+        "share": 8.9
        },
        {
         "code": "21020001033",
         "label": "Prosys all silicone catheter male",
         "generic": false,
-        "items": 406,
-        "share": 4.5
+        "items": 350,
+        "share": 4.3
        },
        {
         "code": "21130000104",
         "label": "OptiFlo S saline",
         "generic": false,
-        "items": 352,
-        "share": 3.9
+        "items": 343,
+        "share": 4.2
        }
       ]
      },
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 1876,
+      "items": 1628,
       "leaders": [
        {
-        "code": "21020001408",
-        "label": "LoFric Origo catheter male",
+        "code": "21020001378",
+        "label": "Prosys Vesica Community Catheterisation Pack",
         "generic": false,
-        "items": 105,
-        "share": 5.6
+        "items": 101,
+        "share": 6.2
        },
        {
         "code": "21020001254",
         "label": "LoFric Sense hydrophilic catheter female",
         "generic": false,
         "items": 94,
-        "share": 5.0
+        "share": 5.8
        },
        {
-        "code": "21020000781",
-        "label": "Biocath Comprehensive Care Foley Tray catheter male medium",
+        "code": "21020001408",
+        "label": "LoFric Origo catheter male",
         "generic": false,
-        "items": 88,
-        "share": 4.7
+        "items": 87,
+        "share": 5.3
        }
       ]
      },
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 2879,
+      "items": 2545,
       "leaders": [
        {
         "code": "21020001033",
         "label": "Prosys all silicone catheter male",
         "generic": false,
-        "items": 267,
-        "share": 9.3
+        "items": 214,
+        "share": 8.4
        },
        {
         "code": "21130000110",
         "label": "Uro-Tainer sodium chloride",
         "generic": false,
-        "items": 216,
-        "share": 7.5
+        "items": 203,
+        "share": 8.0
        },
        {
         "code": "21020001560",
         "label": "Prosys all silicone open ended catheter male",
         "generic": false,
-        "items": 210,
-        "share": 7.3
+        "items": 164,
+        "share": 6.4
        }
       ]
      },
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 3323,
+      "items": 2914,
       "leaders": [
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 346,
-        "share": 10.4
+        "items": 273,
+        "share": 9.4
        },
        {
         "code": "21130000124",
         "label": "Uro-Tainer Twin Suby G citric acid",
         "generic": false,
-        "items": 159,
-        "share": 4.8
+        "items": 116,
+        "share": 4.0
        },
        {
-        "code": "21020001560",
-        "label": "Prosys all silicone open ended catheter male",
+        "code": "21020000309",
+        "label": "LoFric catheter male non PVC",
         "generic": false,
-        "items": 131,
-        "share": 3.9
+        "items": 93,
+        "share": 3.2
        }
       ]
      },
      {
       "icb": "QJK",
       "name": "NHS Devon",
-      "items": 4577,
+      "items": 4131,
       "leaders": [
+       {
+        "code": "21020001378",
+        "label": "Prosys Vesica Community Catheterisation Pack",
+        "generic": false,
+        "items": 243,
+        "share": 5.9
+       },
        {
         "code": "21020001458",
         "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
         "generic": false,
-        "items": 267,
-        "share": 5.8
+        "items": 222,
+        "share": 5.4
        },
        {
         "code": "21020000781",
         "label": "Biocath Comprehensive Care Foley Tray catheter male medium",
         "generic": false,
-        "items": 230,
-        "share": 5.0
-       },
-       {
-        "code": "21020001408",
-        "label": "LoFric Origo catheter male",
-        "generic": false,
-        "items": 183,
-        "share": 4.0
+        "items": 198,
+        "share": 4.8
        }
       ]
      },
      {
       "icb": "QVV",
       "name": "NHS Dorset",
-      "items": 2918,
+      "items": 2632,
       "leaders": [
        {
         "code": "21020001561",
         "label": "iQ Cath hydrophilic catheter with sleeve male",
         "generic": false,
-        "items": 206,
-        "share": 7.1
-       },
-       {
-        "code": "21020000950",
-        "label": "Brillant AquaFlate all silicone catheter male",
-        "generic": false,
-        "items": 190,
-        "share": 6.5
+        "items": 201,
+        "share": 7.6
        },
        {
         "code": "21130000124",
         "label": "Uro-Tainer Twin Suby G citric acid",
         "generic": false,
-        "items": 178,
-        "share": 6.1
+        "items": 182,
+        "share": 6.9
+       },
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 174,
+        "share": 6.6
        }
       ]
      },
      {
       "icb": "D7T5G",
       "name": "NHS Essex",
-      "items": 4315,
+      "items": 3882,
       "leaders": [
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 277,
-        "share": 6.4
-       },
-       {
-        "code": "21020001196",
-        "label": "SpeediCath Compact catheter male one size",
-        "generic": false,
-        "items": 270,
-        "share": 6.3
-       },
-       {
-        "code": "21130000104",
-        "label": "OptiFlo S saline",
-        "generic": false,
-        "items": 164,
-        "share": 3.8
-       }
-      ]
-     },
-     {
-      "icb": "QR1",
-      "name": "NHS Gloucestershire",
-      "items": 1879,
-      "leaders": [
-       {
-        "code": "21020000781",
-        "label": "Biocath Comprehensive Care Foley Tray catheter male medium",
-        "generic": false,
-        "items": 91,
-        "share": 4.8
-       },
-       {
-        "code": "21130000104",
-        "label": "OptiFlo S saline",
-        "generic": false,
-        "items": 83,
-        "share": 4.4
-       },
-       {
-        "code": "21020001196",
-        "label": "SpeediCath Compact catheter male one size",
-        "generic": false,
-        "items": 83,
-        "share": 4.4
-       }
-      ]
-     },
-     {
-      "icb": "QOP",
-      "name": "NHS Greater Manchester",
-      "items": 6644,
-      "leaders": [
-       {
-        "code": "21020000950",
-        "label": "Brillant AquaFlate all silicone catheter male",
-        "generic": false,
-        "items": 934,
-        "share": 14.1
-       },
-       {
-        "code": "21020001033",
-        "label": "Prosys all silicone catheter male",
-        "generic": false,
-        "items": 245,
-        "share": 3.7
-       },
-       {
-        "code": "21020001149",
-        "label": "VaPro Pocket No Touch hydrophilic catheter male",
-        "generic": false,
-        "items": 242,
-        "share": 3.6
-       }
-      ]
-     },
-     {
-      "icb": "QRL",
-      "name": "NHS Hampshire and Isle of Wight",
-      "items": 4636,
-      "leaders": [
-       {
-        "code": "21020001550",
-        "label": "SpiritCare all slc cath+pfs for ball inflation & supplementary syrg for ball deflation male",
-        "generic": false,
-        "items": 555,
-        "share": 12.0
-       },
-       {
-        "code": "21020001560",
-        "label": "Prosys all silicone open ended catheter male",
-        "generic": false,
-        "items": 355,
-        "share": 7.7
-       },
-       {
-        "code": "21020001149",
-        "label": "VaPro Pocket No Touch hydrophilic catheter male",
-        "generic": false,
-        "items": 183,
-        "share": 3.9
-       }
-      ]
-     },
-     {
-      "icb": "QGH",
-      "name": "NHS Herefordshire and Worcestershire",
-      "items": 3151,
-      "leaders": [
-       {
-        "code": "21020001378",
-        "label": "Prosys Vesica Community Catheterisation Pack",
-        "generic": false,
-        "items": 417,
-        "share": 13.2
-       },
-       {
-        "code": "21020001033",
-        "label": "Prosys all silicone catheter male",
-        "generic": false,
-        "items": 314,
-        "share": 10.0
-       },
-       {
-        "code": "21020001408",
-        "label": "LoFric Origo catheter male",
-        "generic": false,
-        "items": 262,
-        "share": 8.3
-       }
-      ]
-     },
-     {
-      "icb": "QOQ",
-      "name": "NHS Humber and North Yorkshire",
-      "items": 5963,
-      "leaders": [
-       {
-        "code": "21020000950",
-        "label": "Brillant AquaFlate all silicone catheter male",
-        "generic": false,
-        "items": 245,
-        "share": 4.1
-       },
-       {
-        "code": "21020001149",
-        "label": "VaPro Pocket No Touch hydrophilic catheter male",
-        "generic": false,
-        "items": 204,
-        "share": 3.4
-       },
-       {
-        "code": "21020000960",
-        "label": "Sympacath AquaFlate hydrogel coated latex catheter male",
-        "generic": false,
-        "items": 181,
-        "share": 3.0
-       }
-      ]
-     },
-     {
-      "icb": "QKS",
-      "name": "NHS Kent and Medway",
-      "items": 4970,
-      "leaders": [
-       {
-        "code": "21130000104",
-        "label": "OptiFlo S saline",
-        "generic": false,
-        "items": 287,
-        "share": 5.8
-       },
-       {
-        "code": "21020001033",
-        "label": "Prosys all silicone catheter male",
-        "generic": false,
-        "items": 270,
-        "share": 5.4
+        "items": 274,
+        "share": 7.1
        },
        {
         "code": "21020001196",
         "label": "SpeediCath Compact catheter male one size",
         "generic": false,
         "items": 265,
-        "share": 5.3
+        "share": 6.8
+       },
+       {
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
+        "generic": false,
+        "items": 160,
+        "share": 4.1
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 1833,
+      "leaders": [
+       {
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
+        "generic": false,
+        "items": 84,
+        "share": 4.6
+       },
+       {
+        "code": "21020001196",
+        "label": "SpeediCath Compact catheter male one size",
+        "generic": false,
+        "items": 78,
+        "share": 4.3
+       },
+       {
+        "code": "21020000782",
+        "label": "Biocath Comprehensive Care Foley Tray catheter male large",
+        "generic": false,
+        "items": 76,
+        "share": 4.1
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 5939,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 863,
+        "share": 14.5
+       },
+       {
+        "code": "21020001149",
+        "label": "VaPro Pocket No Touch hydrophilic catheter male",
+        "generic": false,
+        "items": 219,
+        "share": 3.7
+       },
+       {
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
+        "generic": false,
+        "items": 201,
+        "share": 3.4
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 4342,
+      "leaders": [
+       {
+        "code": "21020001550",
+        "label": "SpiritCare all slc cath+pfs for ball inflation & supplementary syrg for ball deflation male",
+        "generic": false,
+        "items": 595,
+        "share": 13.7
+       },
+       {
+        "code": "21020001560",
+        "label": "Prosys all silicone open ended catheter male",
+        "generic": false,
+        "items": 351,
+        "share": 8.1
+       },
+       {
+        "code": "21020001155",
+        "label": "VaPro No Touch catheter male",
+        "generic": false,
+        "items": 143,
+        "share": 3.3
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 3144,
+      "leaders": [
+       {
+        "code": "21020001378",
+        "label": "Prosys Vesica Community Catheterisation Pack",
+        "generic": false,
+        "items": 550,
+        "share": 17.5
+       },
+       {
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
+        "generic": false,
+        "items": 289,
+        "share": 9.2
+       },
+       {
+        "code": "21020001408",
+        "label": "LoFric Origo catheter male",
+        "generic": false,
+        "items": 237,
+        "share": 7.5
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 5382,
+      "leaders": [
+       {
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
+        "generic": false,
+        "items": 214,
+        "share": 4.0
+       },
+       {
+        "code": "21020001149",
+        "label": "VaPro Pocket No Touch hydrophilic catheter male",
+        "generic": false,
+        "items": 214,
+        "share": 4.0
+       },
+       {
+        "code": "21020001408",
+        "label": "LoFric Origo catheter male",
+        "generic": false,
+        "items": 192,
+        "share": 3.6
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 4513,
+      "leaders": [
+       {
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
+        "generic": false,
+        "items": 263,
+        "share": 5.8
+       },
+       {
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
+        "generic": false,
+        "items": 248,
+        "share": 5.5
+       },
+       {
+        "code": "21020001196",
+        "label": "SpeediCath Compact catheter male one size",
+        "generic": false,
+        "items": 227,
+        "share": 5.0
        }
       ]
      },
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 5984,
+      "items": 5627,
       "leaders": [
-       {
-        "code": "21020001149",
-        "label": "VaPro Pocket No Touch hydrophilic catheter male",
-        "generic": false,
-        "items": 551,
-        "share": 9.2
-       },
        {
         "code": "21020001033",
         "label": "Prosys all silicone catheter male",
         "generic": false,
-        "items": 510,
-        "share": 8.5
+        "items": 547,
+        "share": 9.7
+       },
+       {
+        "code": "21020001149",
+        "label": "VaPro Pocket No Touch hydrophilic catheter male",
+        "generic": false,
+        "items": 520,
+        "share": 9.2
        },
        {
         "code": "21020000960",
         "label": "Sympacath AquaFlate hydrogel coated latex catheter male",
         "generic": false,
-        "items": 380,
+        "items": 360,
         "share": 6.4
        }
       ]
@@ -4569,27 +4569,27 @@
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 3370,
+      "items": 3044,
       "leaders": [
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 357,
-        "share": 10.6
+        "items": 269,
+        "share": 8.8
        },
        {
         "code": "21130000104",
         "label": "OptiFlo S saline",
         "generic": false,
-        "items": 243,
-        "share": 7.2
+        "items": 241,
+        "share": 7.9
        },
        {
         "code": "21020001196",
         "label": "SpeediCath Compact catheter male one size",
         "generic": false,
-        "items": 171,
+        "items": 156,
         "share": 5.1
        }
       ]
@@ -4597,223 +4597,223 @@
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 2906,
+      "items": 2646,
       "leaders": [
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 347,
-        "share": 11.9
-       },
-       {
-        "code": "21020001196",
-        "label": "SpeediCath Compact catheter male one size",
-        "generic": false,
-        "items": 146,
-        "share": 5.0
+        "items": 280,
+        "share": 10.6
        },
        {
         "code": "21130000124",
         "label": "Uro-Tainer Twin Suby G citric acid",
         "generic": false,
-        "items": 132,
-        "share": 4.5
+        "items": 135,
+        "share": 5.1
+       },
+       {
+        "code": "21020001196",
+        "label": "SpeediCath Compact catheter male one size",
+        "generic": false,
+        "items": 129,
+        "share": 4.9
        }
       ]
      },
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 6473,
+      "items": 5930,
       "leaders": [
        {
         "code": "21020001033",
         "label": "Prosys all silicone catheter male",
         "generic": false,
-        "items": 485,
+        "items": 447,
         "share": 7.5
        },
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 394,
-        "share": 6.1
+        "items": 378,
+        "share": 6.4
        },
        {
         "code": "21020001196",
         "label": "SpeediCath Compact catheter male one size",
         "generic": false,
-        "items": 317,
-        "share": 4.9
+        "items": 267,
+        "share": 4.5
        }
       ]
      },
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 3562,
+      "items": 3292,
       "leaders": [
        {
         "code": "21130000104",
         "label": "OptiFlo S saline",
         "generic": false,
-        "items": 290,
-        "share": 8.1
+        "items": 250,
+        "share": 7.6
        },
        {
         "code": "21130000124",
         "label": "Uro-Tainer Twin Suby G citric acid",
         "generic": false,
-        "items": 170,
-        "share": 4.8
+        "items": 160,
+        "share": 4.9
        },
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 135,
-        "share": 3.8
+        "items": 127,
+        "share": 3.9
        }
       ]
      },
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 10533,
+      "items": 9305,
       "leaders": [
        {
         "code": "21020001033",
         "label": "Prosys all silicone catheter male",
         "generic": false,
-        "items": 734,
-        "share": 7.0
+        "items": 618,
+        "share": 6.6
        },
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 496,
-        "share": 4.7
+        "items": 451,
+        "share": 4.8
        },
        {
         "code": "21130000124",
         "label": "Uro-Tainer Twin Suby G citric acid",
         "generic": false,
-        "items": 472,
-        "share": 4.5
+        "items": 390,
+        "share": 4.2
        }
       ]
      },
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 2116,
+      "items": 1962,
       "leaders": [
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 231,
-        "share": 10.9
+        "items": 198,
+        "share": 10.1
        },
        {
         "code": "21130000124",
         "label": "Uro-Tainer Twin Suby G citric acid",
         "generic": false,
-        "items": 185,
-        "share": 8.7
+        "items": 163,
+        "share": 8.3
        },
        {
         "code": "21020001586",
         "label": "Luja catheter male",
         "generic": false,
-        "items": 108,
-        "share": 5.1
+        "items": 113,
+        "share": 5.8
        }
       ]
      },
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 2783,
+      "items": 2485,
       "leaders": [
        {
         "code": "21020001560",
         "label": "Prosys all silicone open ended catheter male",
         "generic": false,
-        "items": 192,
-        "share": 6.9
+        "items": 153,
+        "share": 6.2
        },
        {
         "code": "21020001593",
         "label": "2 way foy all slc cath+glyc filled syrg for inflation & empty syrg for deflation male 12Ch-24Ch",
         "generic": false,
-        "items": 167,
+        "items": 150,
         "share": 6.0
        },
        {
         "code": "21130000124",
         "label": "Uro-Tainer Twin Suby G citric acid",
         "generic": false,
-        "items": 167,
-        "share": 6.0
+        "items": 137,
+        "share": 5.5
        }
       ]
      },
      {
       "icb": "QOC",
       "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 1682,
+      "items": 1579,
       "leaders": [
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 219,
-        "share": 13.0
+        "items": 213,
+        "share": 13.5
        },
        {
         "code": "21020001196",
         "label": "SpeediCath Compact catheter male one size",
         "generic": false,
-        "items": 187,
-        "share": 11.1
+        "items": 168,
+        "share": 10.6
        },
        {
-        "code": "21020001481",
-        "label": "SpeediCath Flex catheter male",
+        "code": "21130000110",
+        "label": "Uro-Tainer sodium chloride",
         "generic": false,
         "items": 87,
-        "share": 5.2
+        "share": 5.5
        }
       ]
      },
      {
       "icb": "QSL",
       "name": "NHS Somerset",
-      "items": 2139,
+      "items": 1922,
       "leaders": [
        {
         "code": "21020001408",
         "label": "LoFric Origo catheter male",
         "generic": false,
-        "items": 150,
-        "share": 7.0
+        "items": 140,
+        "share": 7.3
        },
        {
         "code": "21130000104",
         "label": "OptiFlo S saline",
         "generic": false,
-        "items": 113,
-        "share": 5.3
+        "items": 100,
+        "share": 5.2
        },
        {
-        "code": "21130000124",
-        "label": "Uro-Tainer Twin Suby G citric acid",
+        "code": "21130000100",
+        "label": "OptiFlo G citric acid",
         "generic": false,
-        "items": 78,
+        "items": 69,
         "share": 3.6
        }
       ]
@@ -4821,139 +4821,139 @@
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 3567,
+      "items": 3061,
       "leaders": [
        {
         "code": "21130000124",
         "label": "Uro-Tainer Twin Suby G citric acid",
         "generic": false,
-        "items": 241,
+        "items": 208,
         "share": 6.8
        },
        {
         "code": "21020001458",
         "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
         "generic": false,
-        "items": 193,
-        "share": 5.4
+        "items": 153,
+        "share": 5.0
        },
        {
-        "code": "21130100014",
-        "label": "Curion CuriFlush sodium chloride",
+        "code": "21020001378",
+        "label": "Prosys Vesica Community Catheterisation Pack",
         "generic": false,
-        "items": 145,
-        "share": 4.1
+        "items": 147,
+        "share": 4.8
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 2547,
+      "items": 2251,
       "leaders": [
        {
         "code": "21130000124",
         "label": "Uro-Tainer Twin Suby G citric acid",
         "generic": false,
-        "items": 183,
-        "share": 7.2
+        "items": 167,
+        "share": 7.4
        },
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 150,
-        "share": 5.9
+        "items": 136,
+        "share": 6.0
        },
        {
         "code": "21130000104",
         "label": "OptiFlo S saline",
         "generic": false,
-        "items": 123,
-        "share": 4.8
+        "items": 117,
+        "share": 5.2
        }
       ]
      },
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 5022,
+      "items": 4731,
       "leaders": [
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 434,
-        "share": 8.6
+        "items": 410,
+        "share": 8.7
        },
        {
         "code": "21020001249",
         "label": "LoFric Primo catheter male non PVC",
         "generic": false,
-        "items": 279,
-        "share": 5.6
+        "items": 287,
+        "share": 6.1
        },
        {
-        "code": "21020001033",
-        "label": "Prosys all silicone catheter male",
+        "code": "21130000124",
+        "label": "Uro-Tainer Twin Suby G citric acid",
         "generic": false,
-        "items": 231,
-        "share": 4.6
+        "items": 189,
+        "share": 4.0
        }
       ]
      },
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 3782,
+      "items": 3306,
       "leaders": [
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 576,
-        "share": 15.2
+        "items": 496,
+        "share": 15.0
        },
        {
         "code": "21020001149",
         "label": "VaPro Pocket No Touch hydrophilic catheter male",
         "generic": false,
-        "items": 237,
-        "share": 6.3
+        "items": 201,
+        "share": 6.1
        },
        {
         "code": "21020001033",
         "label": "Prosys all silicone catheter male",
         "generic": false,
-        "items": 145,
-        "share": 3.8
+        "items": 153,
+        "share": 4.6
        }
       ]
      },
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 8894,
+      "items": 8335,
       "leaders": [
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 902,
-        "share": 10.1
+        "items": 824,
+        "share": 9.9
        },
        {
         "code": "21020001196",
         "label": "SpeediCath Compact catheter male one size",
         "generic": false,
-        "items": 378,
+        "items": 355,
         "share": 4.3
        },
        {
         "code": "21020001458",
         "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
         "generic": false,
-        "items": 338,
+        "items": 319,
         "share": 3.8
        }
       ]
@@ -4961,84 +4961,84 @@
      {
       "icb": "S0E4D",
       "name": "NHS Thames Valley",
-      "items": 5645,
+      "items": 4931,
       "leaders": [
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 818,
-        "share": 14.5
-       },
-       {
-        "code": "21020001033",
-        "label": "Prosys all silicone catheter male",
-        "generic": false,
-        "items": 265,
-        "share": 4.7
+        "items": 699,
+        "share": 14.2
        },
        {
         "code": "21020001528",
         "label": "Ugopro Catheterisation Procedure Pack",
         "generic": false,
-        "items": 260,
-        "share": 4.6
+        "items": 267,
+        "share": 5.4
+       },
+       {
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
+        "generic": false,
+        "items": 207,
+        "share": 4.2
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 6681,
+      "items": 6251,
       "leaders": [
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
         "items": 431,
-        "share": 6.5
+        "share": 6.9
        },
        {
         "code": "21020001458",
         "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
         "generic": false,
-        "items": 281,
-        "share": 4.2
+        "items": 308,
+        "share": 4.9
        },
        {
-        "code": "21020001196",
-        "label": "SpeediCath Compact catheter male one size",
+        "code": "21020001408",
+        "label": "LoFric Origo catheter male",
         "generic": false,
-        "items": 223,
-        "share": 3.3
+        "items": 198,
+        "share": 3.2
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 6371,
+      "items": 5606,
       "leaders": [
        {
         "code": "21130000104",
         "label": "OptiFlo S saline",
         "generic": false,
-        "items": 342,
-        "share": 5.4
+        "items": 313,
+        "share": 5.6
        },
        {
         "code": "21130000124",
         "label": "Uro-Tainer Twin Suby G citric acid",
         "generic": false,
-        "items": 340,
-        "share": 5.3
+        "items": 268,
+        "share": 4.8
        },
        {
         "code": "21020001458",
         "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
         "generic": false,
-        "items": 306,
-        "share": 4.8
+        "items": 236,
+        "share": 4.2
        }
       ]
      }

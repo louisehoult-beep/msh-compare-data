@@ -22,7 +22,7 @@
   "drugTariff": "2026-10-21",
   "localIntel": "2026-10-21",
   "supplierDirectory": "2026-10-21",
-  "gpPrescribing": "2026-09-30",
+  "gpPrescribing": "2026-10-21",
   "mhraDsu": "2026-10-19",
   "drugTariffViiia": "2026-10-21",
   "hospitalPrescribing": null
@@ -35,7 +35,7 @@
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: bloodtx). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 11 of the 11 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
-  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202608) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (18 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-19.",
   "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF 09.01. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 51 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
  },
@@ -1301,14 +1301,14 @@
   }
  ],
  "gpPrescribing": {
-  "generatedOn": "2026-09-30",
+  "generatedOn": "2026-10-21",
   "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
   "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
   "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
   "periods": [
-   "202507",
-   "202607"
+   "202508",
+   "202608"
   ],
   "minBaselineItems": 25,
   "defined": true,
@@ -1320,747 +1320,747 @@
      "09.01"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 2189552,
-    "cost": 5197646,
-    "items12m": 25215392,
-    "cost12m": 51545175,
-    "itemsYoY": -3.3,
-    "products": 68,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 1978753,
+    "cost": 4688352,
+    "items12m": 25113014,
+    "cost12m": 52085549,
+    "itemsYoY": -4.9,
+    "products": 67,
     "topNational": [
      {
       "code": "0901020G0AA",
       "label": "Folic acid",
       "generic": true,
-      "items": 686397,
-      "share": 31.3,
-      "cost": 557311,
-      "yoy": -21.1
+      "items": 613868,
+      "share": 31.0,
+      "cost": 487203,
+      "yoy": -22.9
      },
      {
       "code": "0901011F0AA",
       "label": "Ferrous fumarate",
       "generic": true,
-      "items": 510374,
-      "share": 23.3,
-      "cost": 751425,
-      "yoy": 7.3
+      "items": 458035,
+      "share": 23.1,
+      "cost": 665459,
+      "yoy": 5.8
      },
      {
       "code": "0901011P0AA",
       "label": "Ferrous sulfate",
       "generic": true,
-      "items": 369701,
-      "share": 16.9,
-      "cost": 510322,
-      "yoy": 6.0
+      "items": 332374,
+      "share": 16.8,
+      "cost": 454738,
+      "yoy": 5.1
      },
      {
       "code": "0901020N0AA",
       "label": "Hydroxocobalamin",
       "generic": true,
-      "items": 301680,
-      "share": 13.8,
-      "cost": 785256,
-      "yoy": 4.7
+      "items": 280089,
+      "share": 14.2,
+      "cost": 725304,
+      "yoy": 2.2
      },
      {
       "code": "0901020D0AA",
       "label": "Cyanocobalamin",
       "generic": true,
-      "items": 229084,
-      "share": 10.5,
-      "cost": 1586957,
-      "yoy": 19.8
+      "items": 210459,
+      "share": 10.6,
+      "cost": 1448257,
+      "yoy": 17.2
      },
      {
       "code": "0901011H0AA",
       "label": "Ferrous gluconate",
       "generic": true,
-      "items": 25001,
-      "share": 1.1,
-      "cost": 206930,
-      "yoy": 0.1
+      "items": 23375,
+      "share": 1.2,
+      "cost": 192539,
+      "yoy": 3.2
      },
      {
       "code": "0901011W0AA",
       "label": "Sodium feredetate (iron",
       "generic": true,
-      "items": 16256,
+      "items": 14600,
       "share": 0.7,
-      "cost": 210425,
-      "yoy": 12.4
+      "cost": 187472,
+      "yoy": 16.8
      },
      {
       "code": "0901020D0BK",
       "label": "CyanocoB12",
       "generic": false,
-      "items": 15552,
+      "items": 14071,
       "share": 0.7,
-      "cost": 44365,
-      "yoy": 2.3
+      "cost": 39370,
+      "yoy": -1.9
      },
      {
       "code": "0901020D0BI",
       "label": "CyanocoMinn",
       "generic": false,
-      "items": 14773,
+      "items": 13275,
       "share": 0.7,
-      "cost": 48563,
-      "yoy": -15.8
+      "cost": 43302,
+      "yoy": -17.2
      },
      {
       "code": "0901020D0BL",
       "label": "Orobalin",
       "generic": false,
-      "items": 6642,
+      "items": 6074,
       "share": 0.3,
-      "cost": 82586,
-      "yoy": 31.3
+      "cost": 74077,
+      "yoy": 27.4
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 42590,
+      "items": 38308,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 9914,
-        "share": 23.3
+        "items": 9017,
+        "share": 23.5
        },
        {
         "code": "0901020D0AA",
         "label": "Cyanocobalamin",
         "generic": true,
-        "items": 8840,
-        "share": 20.8
+        "items": 8087,
+        "share": 21.1
        },
        {
-        "code": "0901020N0AA",
-        "label": "Hydroxocobalamin",
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
         "generic": true,
-        "items": 8297,
-        "share": 19.5
+        "items": 7444,
+        "share": 19.4
        }
       ]
      },
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 48857,
+      "items": 42698,
       "leaders": [
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 13371,
-        "share": 27.4
+        "items": 11979,
+        "share": 28.1
        },
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 11424,
-        "share": 23.4
+        "items": 9794,
+        "share": 22.9
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 8143,
-        "share": 16.7
+        "items": 7299,
+        "share": 17.1
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 55562,
+      "items": 49454,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 13466,
-        "share": 24.2
-       },
-       {
-        "code": "0901011P0AA",
-        "label": "Ferrous sulfate",
-        "generic": true,
-        "items": 10793,
-        "share": 19.4
+        "items": 11859,
+        "share": 24.0
        },
        {
         "code": "0901020D0AA",
         "label": "Cyanocobalamin",
         "generic": true,
-        "items": 10628,
-        "share": 19.1
+        "items": 9626,
+        "share": 19.5
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 9605,
+        "share": 19.4
        }
       ]
      },
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 32260,
+      "items": 29286,
       "leaders": [
        {
         "code": "0901020D0AA",
         "label": "Cyanocobalamin",
         "generic": true,
-        "items": 7838,
-        "share": 24.3
+        "items": 7077,
+        "share": 24.2
        },
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 7577,
+        "items": 6883,
         "share": 23.5
        },
        {
-        "code": "0901011F0AA",
-        "label": "Ferrous fumarate",
+        "code": "0901020N0AA",
+        "label": "Hydroxocobalamin",
         "generic": true,
-        "items": 5367,
-        "share": 16.6
+        "items": 4967,
+        "share": 17.0
        }
       ]
      },
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 99552,
+      "items": 88725,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 34671,
-        "share": 34.8
+        "items": 30805,
+        "share": 34.7
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 23310,
-        "share": 23.4
+        "items": 20987,
+        "share": 23.7
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 16841,
-        "share": 16.9
+        "items": 14795,
+        "share": 16.7
        }
       ]
      },
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 119068,
+      "items": 106787,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 39883,
-        "share": 33.5
+        "items": 35125,
+        "share": 32.9
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 26665,
-        "share": 22.4
+        "items": 23801,
+        "share": 22.3
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 19741,
-        "share": 16.6
+        "items": 17614,
+        "share": 16.5
        }
       ]
      },
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 25930,
+      "items": 23333,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 8611,
-        "share": 33.2
+        "items": 7640,
+        "share": 32.7
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 6008,
-        "share": 23.2
+        "items": 5501,
+        "share": 23.6
        },
        {
         "code": "0901020N0AA",
         "label": "Hydroxocobalamin",
         "generic": true,
-        "items": 3957,
-        "share": 15.3
+        "items": 3436,
+        "share": 14.7
        }
       ]
      },
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 43654,
+      "items": 39314,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 14439,
-        "share": 33.1
+        "items": 12714,
+        "share": 32.3
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 12402,
-        "share": 28.4
+        "items": 11035,
+        "share": 28.1
        },
        {
-        "code": "0901011P0AA",
-        "label": "Ferrous sulfate",
+        "code": "0901020N0AA",
+        "label": "Hydroxocobalamin",
         "generic": true,
-        "items": 5599,
-        "share": 12.8
+        "items": 5061,
+        "share": 12.9
        }
       ]
      },
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 34151,
+      "items": 30785,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 13350,
-        "share": 39.1
+        "items": 11552,
+        "share": 37.5
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 11364,
-        "share": 33.3
+        "items": 10073,
+        "share": 32.7
        },
        {
         "code": "0901020N0AA",
         "label": "Hydroxocobalamin",
         "generic": true,
-        "items": 6820,
-        "share": 20.0
+        "items": 6726,
+        "share": 21.8
        }
       ]
      },
      {
       "icb": "QJK",
       "name": "NHS Devon",
-      "items": 49823,
+      "items": 45533,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 21656,
-        "share": 43.5
+        "items": 19657,
+        "share": 43.2
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 9022,
-        "share": 18.1
+        "items": 8068,
+        "share": 17.7
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 6791,
-        "share": 13.6
+        "items": 6159,
+        "share": 13.5
        }
       ]
      },
      {
       "icb": "QVV",
       "name": "NHS Dorset",
-      "items": 27476,
+      "items": 25229,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 10763,
-        "share": 39.2
+        "items": 9492,
+        "share": 37.6
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 7901,
-        "share": 28.8
+        "items": 7131,
+        "share": 28.3
        },
        {
         "code": "0901020N0AA",
         "label": "Hydroxocobalamin",
         "generic": true,
-        "items": 4274,
-        "share": 15.6
+        "items": 4489,
+        "share": 17.8
        }
       ]
      },
      {
       "icb": "D7T5G",
       "name": "NHS Essex",
-      "items": 59070,
+      "items": 55091,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 17527,
-        "share": 29.7
+        "items": 15898,
+        "share": 28.9
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 13586,
-        "share": 23.0
+        "items": 12302,
+        "share": 22.3
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 12441,
-        "share": 21.1
+        "items": 11344,
+        "share": 20.6
        }
       ]
      },
      {
       "icb": "QR1",
       "name": "NHS Gloucestershire",
-      "items": 23573,
+      "items": 21294,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 7211,
-        "share": 30.6
-       },
-       {
-        "code": "0901020N0AA",
-        "label": "Hydroxocobalamin",
-        "generic": true,
-        "items": 4339,
-        "share": 18.4
+        "items": 6717,
+        "share": 31.5
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 4223,
-        "share": 17.9
+        "items": 3839,
+        "share": 18.0
+       },
+       {
+        "code": "0901020N0AA",
+        "label": "Hydroxocobalamin",
+        "generic": true,
+        "items": 3604,
+        "share": 16.9
        }
       ]
      },
      {
       "icb": "QOP",
       "name": "NHS Greater Manchester",
-      "items": 107472,
+      "items": 96499,
       "leaders": [
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 31270,
-        "share": 29.1
+        "items": 27729,
+        "share": 28.7
        },
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 30169,
-        "share": 28.1
+        "items": 26643,
+        "share": 27.6
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 17840,
-        "share": 16.6
+        "items": 16355,
+        "share": 16.9
        }
       ]
      },
      {
       "icb": "QRL",
       "name": "NHS Hampshire and Isle of Wight",
-      "items": 74025,
+      "items": 66538,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 23339,
-        "share": 31.5
+        "items": 20820,
+        "share": 31.3
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 20235,
-        "share": 27.3
+        "items": 18595,
+        "share": 27.9
        },
        {
         "code": "0901020N0AA",
         "label": "Hydroxocobalamin",
         "generic": true,
-        "items": 14335,
-        "share": 19.4
+        "items": 12415,
+        "share": 18.7
        }
       ]
      },
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 26256,
+      "items": 24039,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 7839,
-        "share": 29.9
-       },
-       {
-        "code": "0901011P0AA",
-        "label": "Ferrous sulfate",
-        "generic": true,
-        "items": 6639,
-        "share": 25.3
-       },
-       {
-        "code": "0901020N0AA",
-        "label": "Hydroxocobalamin",
-        "generic": true,
-        "items": 5913,
-        "share": 22.5
-       }
-      ]
-     },
-     {
-      "icb": "QOQ",
-      "name": "NHS Humber and North Yorkshire",
-      "items": 84297,
-      "leaders": [
-       {
-        "code": "0901011F0AA",
-        "label": "Ferrous fumarate",
-        "generic": true,
-        "items": 23992,
-        "share": 28.5
-       },
-       {
-        "code": "0901020G0AA",
-        "label": "Folic acid",
-        "generic": true,
-        "items": 22285,
-        "share": 26.4
-       },
-       {
-        "code": "0901020D0AA",
-        "label": "Cyanocobalamin",
-        "generic": true,
-        "items": 14749,
-        "share": 17.5
-       }
-      ]
-     },
-     {
-      "icb": "QKS",
-      "name": "NHS Kent and Medway",
-      "items": 73187,
-      "leaders": [
-       {
-        "code": "0901020G0AA",
-        "label": "Folic acid",
-        "generic": true,
-        "items": 21757,
+        "items": 7139,
         "share": 29.7
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 14711,
-        "share": 20.1
+        "items": 6245,
+        "share": 26.0
        },
        {
         "code": "0901020N0AA",
         "label": "Hydroxocobalamin",
         "generic": true,
-        "items": 13872,
-        "share": 19.0
+        "items": 5445,
+        "share": 22.7
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 75119,
+      "leaders": [
+       {
+        "code": "0901011F0AA",
+        "label": "Ferrous fumarate",
+        "generic": true,
+        "items": 21277,
+        "share": 28.3
+       },
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 19747,
+        "share": 26.3
+       },
+       {
+        "code": "0901020D0AA",
+        "label": "Cyanocobalamin",
+        "generic": true,
+        "items": 13607,
+        "share": 18.1
+       }
+      ]
+     },
+     {
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 66705,
+      "leaders": [
+       {
+        "code": "0901020G0AA",
+        "label": "Folic acid",
+        "generic": true,
+        "items": 19601,
+        "share": 29.4
+       },
+       {
+        "code": "0901011P0AA",
+        "label": "Ferrous sulfate",
+        "generic": true,
+        "items": 13468,
+        "share": 20.2
+       },
+       {
+        "code": "0901020N0AA",
+        "label": "Hydroxocobalamin",
+        "generic": true,
+        "items": 12482,
+        "share": 18.7
        }
       ]
      },
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 64686,
+      "items": 58795,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 17567,
-        "share": 27.2
+        "items": 15490,
+        "share": 26.3
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 16238,
-        "share": 25.1
+        "items": 14535,
+        "share": 24.7
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 11820,
-        "share": 18.3
+        "items": 10396,
+        "share": 17.7
        }
       ]
      },
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 38134,
+      "items": 35245,
       "leaders": [
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 13136,
-        "share": 34.4
+        "items": 12023,
+        "share": 34.1
        },
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 10176,
-        "share": 26.7
+        "items": 9173,
+        "share": 26.0
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 7192,
-        "share": 18.9
+        "items": 6510,
+        "share": 18.5
        }
       ]
      },
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 42799,
+      "items": 38951,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 11835,
-        "share": 27.7
+        "items": 10680,
+        "share": 27.4
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 10996,
+        "items": 10020,
         "share": 25.7
        },
        {
         "code": "0901020D0AA",
         "label": "Cyanocobalamin",
         "generic": true,
-        "items": 7570,
-        "share": 17.7
+        "items": 6926,
+        "share": 17.8
        }
       ]
      },
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 68769,
+      "items": 61981,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 26537,
-        "share": 38.6
+        "items": 23958,
+        "share": 38.7
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 16375,
+        "items": 14753,
         "share": 23.8
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 10111,
-        "share": 14.7
+        "items": 9166,
+        "share": 14.8
        }
       ]
      },
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 86593,
+      "items": 79411,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 31914,
+        "items": 29335,
         "share": 36.9
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 31258,
-        "share": 36.1
+        "items": 28090,
+        "share": 35.4
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 9134,
+        "items": 8364,
         "share": 10.5
        }
       ]
@@ -2068,139 +2068,139 @@
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 159440,
+      "items": 144097,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 46491,
-        "share": 29.2
+        "items": 41568,
+        "share": 28.8
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 39460,
-        "share": 24.7
+        "items": 35210,
+        "share": 24.4
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 32263,
-        "share": 20.2
+        "items": 28877,
+        "share": 20.0
        }
       ]
      },
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 26239,
+      "items": 23327,
       "leaders": [
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 9955,
-        "share": 37.9
+        "items": 8904,
+        "share": 38.2
        },
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 9221,
+        "items": 8180,
         "share": 35.1
        },
        {
         "code": "0901020N0AA",
         "label": "Hydroxocobalamin",
         "generic": true,
-        "items": 3299,
-        "share": 12.6
+        "items": 2857,
+        "share": 12.2
        }
       ]
      },
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 41662,
+      "items": 38036,
       "leaders": [
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 14013,
-        "share": 33.6
+        "items": 12471,
+        "share": 32.8
        },
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 13150,
-        "share": 31.6
+        "items": 11719,
+        "share": 30.8
        },
        {
         "code": "0901020N0AA",
         "label": "Hydroxocobalamin",
         "generic": true,
-        "items": 6544,
-        "share": 15.7
+        "items": 6522,
+        "share": 17.1
        }
       ]
      },
      {
       "icb": "QOC",
       "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 16488,
+      "items": 15249,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 5513,
-        "share": 33.4
+        "items": 5012,
+        "share": 32.9
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 4203,
-        "share": 25.5
+        "items": 3870,
+        "share": 25.4
        },
        {
         "code": "0901020D0AA",
         "label": "Cyanocobalamin",
         "generic": true,
-        "items": 2303,
-        "share": 14.0
+        "items": 2197,
+        "share": 14.4
        }
       ]
      },
      {
       "icb": "QSL",
       "name": "NHS Somerset",
-      "items": 23104,
+      "items": 20964,
       "leaders": [
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 6448,
-        "share": 27.9
+        "items": 5682,
+        "share": 27.1
        },
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 4798,
-        "share": 20.8
+        "items": 4418,
+        "share": 21.1
        },
        {
         "code": "0901020N0AA",
         "label": "Hydroxocobalamin",
         "generic": true,
-        "items": 4654,
+        "items": 4206,
         "share": 20.1
        }
       ]
@@ -2208,83 +2208,83 @@
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 46167,
+      "items": 43016,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 15784,
-        "share": 34.2
+        "items": 14640,
+        "share": 34.0
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 10004,
-        "share": 21.7
+        "items": 9098,
+        "share": 21.2
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 9342,
-        "share": 20.2
+        "items": 8652,
+        "share": 20.1
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 47067,
+      "items": 42658,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 16305,
-        "share": 34.6
+        "items": 15008,
+        "share": 35.2
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 15354,
-        "share": 32.6
+        "items": 13959,
+        "share": 32.7
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 6148,
-        "share": 13.1
+        "items": 5299,
+        "share": 12.4
        }
       ]
      },
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 69678,
+      "items": 61904,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 26761,
-        "share": 38.4
+        "items": 23106,
+        "share": 37.3
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 13333,
-        "share": 19.1
+        "items": 11741,
+        "share": 19.0
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 11774,
+        "items": 10489,
         "share": 16.9
        }
       ]
@@ -2292,140 +2292,140 @@
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 45723,
+      "items": 41055,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 13619,
-        "share": 29.8
+        "items": 12301,
+        "share": 30.0
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 10908,
-        "share": 23.9
+        "items": 9512,
+        "share": 23.2
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 7573,
-        "share": 16.6
+        "items": 7009,
+        "share": 17.1
        }
       ]
      },
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 88272,
+      "items": 79285,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 27311,
-        "share": 30.9
+        "items": 24565,
+        "share": 31.0
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 19536,
+        "items": 17535,
         "share": 22.1
        },
        {
         "code": "0901020N0AA",
         "label": "Hydroxocobalamin",
         "generic": true,
-        "items": 15060,
-        "share": 17.1
+        "items": 13215,
+        "share": 16.7
        }
       ]
      },
      {
       "icb": "S0E4D",
       "name": "NHS Thames Valley",
-      "items": 77216,
+      "items": 69057,
       "leaders": [
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 25303,
-        "share": 32.8
+        "items": 22095,
+        "share": 32.0
        },
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 24386,
-        "share": 31.6
+        "items": 21401,
+        "share": 31.0
        },
        {
         "code": "0901020N0AA",
         "label": "Hydroxocobalamin",
         "generic": true,
-        "items": 11331,
-        "share": 14.7
+        "items": 10643,
+        "share": 15.4
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 103547,
+      "items": 92997,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 31360,
-        "share": 30.3
+        "items": 27798,
+        "share": 29.9
        },
        {
         "code": "0901011P0AA",
         "label": "Ferrous sulfate",
         "generic": true,
-        "items": 27678,
-        "share": 26.7
+        "items": 24914,
+        "share": 26.8
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 18860,
-        "share": 18.2
+        "items": 16861,
+        "share": 18.1
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 117085,
+      "items": 107920,
       "leaders": [
        {
         "code": "0901020G0AA",
         "label": "Folic acid",
         "generic": true,
-        "items": 37738,
-        "share": 32.2
+        "items": 34373,
+        "share": 31.9
        },
        {
         "code": "0901011F0AA",
         "label": "Ferrous fumarate",
         "generic": true,
-        "items": 34088,
-        "share": 29.1
+        "items": 31030,
+        "share": 28.8
        },
        {
-        "code": "0901011P0AA",
-        "label": "Ferrous sulfate",
+        "code": "0901020D0AA",
+        "label": "Cyanocobalamin",
         "generic": true,
-        "items": 14274,
-        "share": 12.2
+        "items": 13438,
+        "share": 12.5
        }
       ]
      }

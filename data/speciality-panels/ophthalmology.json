@@ -22,7 +22,7 @@
   "drugTariff": "2026-10-21",
   "localIntel": "2026-10-21",
   "supplierDirectory": "2026-10-21",
-  "gpPrescribing": "2026-09-30",
+  "gpPrescribing": "2026-10-21",
   "mhraDsu": "2026-10-19",
   "drugTariffViiia": "2026-10-21",
   "hospitalPrescribing": null
@@ -35,7 +35,7 @@
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, narrowed to the lines NHSBSA itself files under BNF 21.30, and then summarised. The BNF code is NHSBSA's own classification of each line and is used in preference to matching the product name, because a name cannot see a branded product: NHSBSA lists many brands as \"Generic <brand name>\", which says nothing about what the product is. A line published without a BNF code is counted only if its virtual medicinal product description matches /\\beye/i. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,879 lines, most of them dressings and elastic hosiery, which are the tissue viability page's. Every count and price below is taken from the lines selected. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's.",
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: ophthalmology). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 4 of the 5 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
-  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202608) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (12 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-19.",
   "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF chapter 11. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 51 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
  },
@@ -1649,14 +1649,14 @@
   }
  ],
  "gpPrescribing": {
-  "generatedOn": "2026-09-30",
+  "generatedOn": "2026-10-21",
   "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
   "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
   "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
   "periods": [
-   "202507",
-   "202607"
+   "202508",
+   "202608"
   ],
   "minBaselineItems": 25,
   "defined": true,
@@ -1668,131 +1668,131 @@
      "chapter 11"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 1409341,
-    "cost": 13778905,
-    "items12m": 15679749,
-    "cost12m": 154437764,
-    "itemsYoY": 2.2,
-    "products": 214,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 1242666,
+    "cost": 12250801,
+    "items12m": 15693276,
+    "cost12m": 153977747,
+    "itemsYoY": 1.1,
+    "products": 210,
     "topNational": [
      {
       "code": "1106000L0AA",
       "label": "Latanoprost",
       "generic": true,
-      "items": 255348,
-      "share": 18.1,
-      "cost": 1419575,
-      "yoy": 6.5
+      "items": 232109,
+      "share": 18.7,
+      "cost": 1292574,
+      "yoy": 5.1
      },
      {
       "code": "1106000ABAA",
       "label": "Dorzolamide",
       "generic": true,
-      "items": 74889,
-      "share": 5.3,
-      "cost": 942749,
-      "yoy": 9.2
-     },
-     {
-      "code": "1103010C0AA",
-      "label": "Chloramphenicol",
-      "generic": true,
-      "items": 69466,
-      "share": 4.9,
-      "cost": 322198,
-      "yoy": 2.4
+      "items": 68100,
+      "share": 5.5,
+      "cost": 854004,
+      "yoy": 7.9
      },
      {
       "code": "1106000ACAA",
       "label": "Brinzolamide",
       "generic": true,
-      "items": 65540,
+      "items": 58981,
       "share": 4.7,
-      "cost": 189288,
-      "yoy": -4.1
-     },
-     {
-      "code": "1104020T0AA",
-      "label": "Sodium cromoglicate",
-      "generic": true,
-      "items": 63614,
-      "share": 4.5,
-      "cost": 139040,
-      "yoy": 3.9
+      "cost": 170573,
+      "yoy": -5.4
      },
      {
       "code": "1108010F0AA",
       "label": "Hypromellose",
       "generic": true,
-      "items": 63572,
-      "share": 4.5,
-      "cost": 216596,
-      "yoy": -7.4
-     },
-     {
-      "code": "1106000AFAA",
-      "label": "Bimatoprost",
-      "generic": true,
-      "items": 60801,
-      "share": 4.3,
-      "cost": 324312,
-      "yoy": -7.4
+      "items": 58829,
+      "share": 4.7,
+      "cost": 195024,
+      "yoy": 7.0
      },
      {
       "code": "1106000L0BC",
       "label": "Monopost",
       "generic": false,
-      "items": 59398,
-      "share": 4.2,
-      "cost": 652747,
-      "yoy": 11.9
+      "items": 54870,
+      "share": 4.4,
+      "cost": 599494,
+      "yoy": 11.4
+     },
+     {
+      "code": "1106000AFAA",
+      "label": "Bimatoprost",
+      "generic": true,
+      "items": 54635,
+      "share": 4.4,
+      "cost": 291953,
+      "yoy": -9.1
+     },
+     {
+      "code": "1103010C0AA",
+      "label": "Chloramphenicol",
+      "generic": true,
+      "items": 53751,
+      "share": 4.3,
+      "cost": 234920,
+      "yoy": -3.7
      },
      {
       "code": "1106000AIAA",
       "label": "Bimatoprost",
       "generic": true,
-      "items": 57731,
-      "share": 4.1,
-      "cost": 520087,
-      "yoy": 0.7
+      "items": 52650,
+      "share": 4.2,
+      "cost": 447343,
+      "yoy": -0.0
+     },
+     {
+      "code": "1104020T0AA",
+      "label": "Sodium cromoglicate",
+      "generic": true,
+      "items": 43575,
+      "share": 3.5,
+      "cost": 97611,
+      "yoy": -0.4
      },
      {
       "code": "1106000Z0AA",
       "label": "Timolol",
       "generic": true,
-      "items": 45163,
-      "share": 3.2,
-      "cost": 327034,
-      "yoy": 23.0
+      "items": 41310,
+      "share": 3.3,
+      "cost": 299643,
+      "yoy": 22.7
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 22015,
+      "items": 19397,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 5001,
-        "share": 22.7
+        "items": 4544,
+        "share": 23.4
        },
        {
         "code": "1106000ACAA",
         "label": "Brinzolamide",
         "generic": true,
-        "items": 1544,
-        "share": 7.0
+        "items": 1394,
+        "share": 7.2
        },
        {
         "code": "1106000AIAA",
         "label": "Bimatoprost",
         "generic": true,
-        "items": 1481,
+        "items": 1307,
         "share": 6.7
        }
       ]
@@ -1800,251 +1800,251 @@
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 36189,
+      "items": 30115,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 5353,
-        "share": 14.8
+        "items": 4681,
+        "share": 15.5
        },
        {
         "code": "1106000L0BC",
         "label": "Monopost",
         "generic": false,
-        "items": 3160,
-        "share": 8.7
+        "items": 2825,
+        "share": 9.4
        },
        {
         "code": "1104020T0AA",
         "label": "Sodium cromoglicate",
         "generic": true,
-        "items": 3101,
-        "share": 8.6
+        "items": 1982,
+        "share": 6.6
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 31144,
+      "items": 26890,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 4931,
-        "share": 15.8
+        "items": 4439,
+        "share": 16.5
        },
        {
         "code": "1106000L0BC",
         "label": "Monopost",
         "generic": false,
-        "items": 2613,
-        "share": 8.4
+        "items": 2359,
+        "share": 8.8
        },
        {
         "code": "1108010F0AA",
         "label": "Hypromellose",
         "generic": true,
-        "items": 1977,
-        "share": 6.3
+        "items": 1863,
+        "share": 6.9
        }
       ]
      },
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 18298,
+      "items": 16019,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 4911,
-        "share": 26.8
+        "items": 4437,
+        "share": 27.7
        },
        {
         "code": "1106000ACAA",
         "label": "Brinzolamide",
         "generic": true,
-        "items": 1811,
-        "share": 9.9
+        "items": 1626,
+        "share": 10.2
        },
        {
-        "code": "1103010C0AA",
-        "label": "Chloramphenicol",
+        "code": "1106000ABAA",
+        "label": "Dorzolamide",
         "generic": true,
-        "items": 829,
-        "share": 4.5
+        "items": 771,
+        "share": 4.8
        }
       ]
      },
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 70196,
+      "items": 62258,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 11721,
-        "share": 16.7
-       },
-       {
-        "code": "1103010C0AA",
-        "label": "Chloramphenicol",
-        "generic": true,
-        "items": 3958,
-        "share": 5.6
+        "items": 10663,
+        "share": 17.1
        },
        {
         "code": "1106000AFAA",
         "label": "Bimatoprost",
         "generic": true,
-        "items": 3823,
-        "share": 5.4
+        "items": 3455,
+        "share": 5.5
+       },
+       {
+        "code": "1106000ABAA",
+        "label": "Dorzolamide",
+        "generic": true,
+        "items": 3050,
+        "share": 4.9
        }
       ]
      },
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 63899,
+      "items": 55560,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 10982,
-        "share": 17.2
+        "items": 9849,
+        "share": 17.7
        },
        {
         "code": "1108010F0AA",
         "label": "Hypromellose",
         "generic": true,
-        "items": 5247,
+        "items": 4532,
         "share": 8.2
        },
        {
-        "code": "1104020T0AA",
-        "label": "Sodium cromoglicate",
+        "code": "1106000ACAA",
+        "label": "Brinzolamide",
         "generic": true,
-        "items": 3834,
-        "share": 6.0
+        "items": 3025,
+        "share": 5.4
        }
       ]
      },
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 19768,
+      "items": 17608,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 4084,
-        "share": 20.7
-       },
-       {
-        "code": "1106000AFAA",
-        "label": "Bimatoprost",
-        "generic": true,
-        "items": 1181,
-        "share": 6.0
+        "items": 3699,
+        "share": 21.0
        },
        {
         "code": "1106000AIAA",
         "label": "Bimatoprost",
         "generic": true,
-        "items": 1161,
-        "share": 5.9
+        "items": 1088,
+        "share": 6.2
+       },
+       {
+        "code": "1106000ACAA",
+        "label": "Brinzolamide",
+        "generic": true,
+        "items": 1061,
+        "share": 6.0
        }
       ]
      },
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 30880,
+      "items": 27328,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 4404,
-        "share": 14.3
+        "items": 4008,
+        "share": 14.7
        },
        {
         "code": "1106000L0BC",
         "label": "Monopost",
         "generic": false,
-        "items": 2249,
-        "share": 7.3
+        "items": 2088,
+        "share": 7.6
        },
        {
         "code": "1106000ABAA",
         "label": "Dorzolamide",
         "generic": true,
-        "items": 1783,
-        "share": 5.8
+        "items": 1625,
+        "share": 5.9
        }
       ]
      },
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 23187,
+      "items": 20415,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 4245,
-        "share": 18.3
+        "items": 3720,
+        "share": 18.2
        },
        {
         "code": "1108010F0AA",
         "label": "Hypromellose",
         "generic": true,
-        "items": 1381,
-        "share": 6.0
+        "items": 1330,
+        "share": 6.5
        },
        {
-        "code": "1106000L0BC",
-        "label": "Monopost",
-        "generic": false,
-        "items": 1239,
-        "share": 5.3
+        "code": "1106000ABAA",
+        "label": "Dorzolamide",
+        "generic": true,
+        "items": 1132,
+        "share": 5.5
        }
       ]
      },
      {
       "icb": "QJK",
       "name": "NHS Devon",
-      "items": 37496,
+      "items": 33641,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 9194,
-        "share": 24.5
+        "items": 8480,
+        "share": 25.2
        },
        {
         "code": "1108010F0AA",
         "label": "Hypromellose",
         "generic": true,
-        "items": 2356,
-        "share": 6.3
+        "items": 2289,
+        "share": 6.8
        },
        {
         "code": "1108010B0BB",
         "label": "Viscotears",
         "generic": false,
-        "items": 2127,
+        "items": 1903,
         "share": 5.7
        }
       ]
@@ -2052,223 +2052,223 @@
      {
       "icb": "QVV",
       "name": "NHS Dorset",
-      "items": 23710,
+      "items": 21101,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 6762,
-        "share": 28.5
+        "items": 6098,
+        "share": 28.9
        },
        {
         "code": "1106000ABAA",
         "label": "Dorzolamide",
         "generic": true,
-        "items": 1375,
-        "share": 5.8
+        "items": 1241,
+        "share": 5.9
        },
        {
         "code": "1106000AIAA",
         "label": "Bimatoprost",
         "generic": true,
-        "items": 1210,
-        "share": 5.1
+        "items": 1132,
+        "share": 5.4
        }
       ]
      },
      {
       "icb": "D7T5G",
       "name": "NHS Essex",
-      "items": 46735,
+      "items": 42113,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 9182,
-        "share": 19.6
+        "items": 8409,
+        "share": 20.0
        },
        {
-        "code": "1103010C0AA",
-        "label": "Chloramphenicol",
+        "code": "1106000AFAA",
+        "label": "Bimatoprost",
         "generic": true,
-        "items": 2466,
+        "items": 2228,
         "share": 5.3
        },
        {
         "code": "1106000ABAA",
         "label": "Dorzolamide",
         "generic": true,
-        "items": 2442,
-        "share": 5.2
+        "items": 2216,
+        "share": 5.3
        }
       ]
      },
      {
       "icb": "QR1",
       "name": "NHS Gloucestershire",
-      "items": 12433,
+      "items": 11184,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 2879,
-        "share": 23.2
+        "items": 2648,
+        "share": 23.7
        },
        {
         "code": "1106000AIAA",
         "label": "Bimatoprost",
         "generic": true,
-        "items": 998,
-        "share": 8.0
+        "items": 906,
+        "share": 8.1
        },
        {
         "code": "1106000AFAA",
         "label": "Bimatoprost",
         "generic": true,
-        "items": 925,
-        "share": 7.4
+        "items": 838,
+        "share": 7.5
        }
       ]
      },
      {
       "icb": "QOP",
       "name": "NHS Greater Manchester",
-      "items": 72207,
+      "items": 63010,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 13254,
-        "share": 18.4
+        "items": 12038,
+        "share": 19.1
        },
        {
         "code": "1108010F0AA",
         "label": "Hypromellose",
         "generic": true,
-        "items": 5366,
-        "share": 7.4
+        "items": 4982,
+        "share": 7.9
        },
        {
-        "code": "1104020T0AA",
-        "label": "Sodium cromoglicate",
+        "code": "1106000ABAA",
+        "label": "Dorzolamide",
         "generic": true,
-        "items": 4670,
-        "share": 6.5
+        "items": 3388,
+        "share": 5.4
        }
       ]
      },
      {
       "icb": "QRL",
       "name": "NHS Hampshire and Isle of Wight",
-      "items": 45253,
+      "items": 39632,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 9764,
-        "share": 21.6
+        "items": 8771,
+        "share": 22.1
        },
        {
         "code": "1106000ABAA",
         "label": "Dorzolamide",
         "generic": true,
-        "items": 3645,
-        "share": 8.1
+        "items": 3282,
+        "share": 8.3
        },
        {
         "code": "1106000L0BC",
         "label": "Monopost",
         "generic": false,
-        "items": 2292,
-        "share": 5.1
+        "items": 2111,
+        "share": 5.3
        }
       ]
      },
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 19794,
+      "items": 17756,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 3666,
+        "items": 3276,
         "share": 18.5
        },
        {
         "code": "1106000L0BC",
         "label": "Monopost",
         "generic": false,
-        "items": 1704,
-        "share": 8.6
+        "items": 1617,
+        "share": 9.1
        },
        {
         "code": "1106000ACAA",
         "label": "Brinzolamide",
         "generic": true,
-        "items": 1326,
-        "share": 6.7
+        "items": 1229,
+        "share": 6.9
        }
       ]
      },
      {
       "icb": "QOQ",
       "name": "NHS Humber and North Yorkshire",
-      "items": 50840,
+      "items": 45071,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 10009,
-        "share": 19.7
+        "items": 8991,
+        "share": 19.9
        },
        {
         "code": "1106000AFAA",
         "label": "Bimatoprost",
         "generic": true,
-        "items": 3614,
-        "share": 7.1
+        "items": 3350,
+        "share": 7.4
        },
        {
         "code": "1106000ACAA",
         "label": "Brinzolamide",
         "generic": true,
-        "items": 2685,
-        "share": 5.3
+        "items": 2412,
+        "share": 5.4
        }
       ]
      },
      {
       "icb": "QKS",
       "name": "NHS Kent and Medway",
-      "items": 42254,
+      "items": 37447,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 5276,
-        "share": 12.5
+        "items": 4856,
+        "share": 13.0
        },
        {
         "code": "1106000L0BC",
         "label": "Monopost",
         "generic": false,
-        "items": 3410,
-        "share": 8.1
+        "items": 3136,
+        "share": 8.4
        },
        {
         "code": "1106000ABAA",
         "label": "Dorzolamide",
         "generic": true,
-        "items": 2516,
+        "items": 2251,
         "share": 6.0
        }
       ]
@@ -2276,27 +2276,27 @@
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 47614,
+      "items": 42252,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 9012,
-        "share": 18.9
+        "items": 8100,
+        "share": 19.2
        },
        {
         "code": "1106000L0BC",
         "label": "Monopost",
         "generic": false,
-        "items": 3058,
-        "share": 6.4
+        "items": 2746,
+        "share": 6.5
        },
        {
         "code": "1106000ACAA",
         "label": "Brinzolamide",
         "generic": true,
-        "items": 2742,
+        "items": 2469,
         "share": 5.8
        }
       ]
@@ -2304,167 +2304,167 @@
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 29399,
+      "items": 26559,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 4914,
-        "share": 16.7
+        "items": 4457,
+        "share": 16.8
        },
        {
         "code": "1106000L0BC",
         "label": "Monopost",
         "generic": false,
-        "items": 3127,
-        "share": 10.6
+        "items": 2899,
+        "share": 10.9
        },
        {
         "code": "1106000ACAA",
         "label": "Brinzolamide",
         "generic": true,
-        "items": 1563,
-        "share": 5.3
+        "items": 1461,
+        "share": 5.5
        }
       ]
      },
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 24289,
+      "items": 21590,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 3644,
-        "share": 15.0
+        "items": 3342,
+        "share": 15.5
        },
        {
         "code": "1106000ACAA",
         "label": "Brinzolamide",
         "generic": true,
-        "items": 1635,
-        "share": 6.7
+        "items": 1504,
+        "share": 7.0
        },
        {
         "code": "1106000ABAA",
         "label": "Dorzolamide",
         "generic": true,
-        "items": 1243,
-        "share": 5.1
+        "items": 1127,
+        "share": 5.2
        }
       ]
      },
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 49078,
+      "items": 43962,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 9323,
-        "share": 19.0
+        "items": 8500,
+        "share": 19.3
        },
        {
         "code": "1106000AFAA",
         "label": "Bimatoprost",
         "generic": true,
-        "items": 3747,
+        "items": 3331,
         "share": 7.6
        },
        {
         "code": "1106000ACAA",
         "label": "Brinzolamide",
         "generic": true,
-        "items": 3011,
-        "share": 6.1
+        "items": 2773,
+        "share": 6.3
        }
       ]
      },
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 48539,
+      "items": 42870,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 7265,
-        "share": 15.0
+        "items": 6729,
+        "share": 15.7
+       },
+       {
+        "code": "1108010F0AA",
+        "label": "Hypromellose",
+        "generic": true,
+        "items": 3157,
+        "share": 7.4
        },
        {
         "code": "1104020T0AA",
         "label": "Sodium cromoglicate",
         "generic": true,
-        "items": 3681,
-        "share": 7.6
-       },
-       {
-        "code": "1104020Z0AA",
-        "label": "Olopatadine",
-        "generic": true,
-        "items": 3561,
-        "share": 7.3
+        "items": 2812,
+        "share": 6.6
        }
       ]
      },
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 83814,
+      "items": 74772,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 17027,
-        "share": 20.3
+        "items": 15632,
+        "share": 20.9
        },
        {
         "code": "1108010B0AA",
         "label": "Carbomer '980'",
         "generic": true,
-        "items": 8642,
+        "items": 7699,
         "share": 10.3
        },
        {
         "code": "1108010F0AA",
         "label": "Hypromellose",
         "generic": true,
-        "items": 5101,
-        "share": 6.1
+        "items": 4717,
+        "share": 6.3
        }
       ]
      },
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 18803,
+      "items": 16622,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 3237,
-        "share": 17.2
+        "items": 2931,
+        "share": 17.6
        },
        {
         "code": "1106000AIAA",
         "label": "Bimatoprost",
         "generic": true,
-        "items": 1487,
-        "share": 7.9
+        "items": 1340,
+        "share": 8.1
        },
        {
         "code": "1106000L0BC",
         "label": "Monopost",
         "generic": false,
-        "items": 1363,
+        "items": 1204,
         "share": 7.2
        }
       ]
@@ -2472,308 +2472,308 @@
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 27140,
+      "items": 23673,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 5370,
-        "share": 19.8
+        "items": 4737,
+        "share": 20.0
        },
        {
         "code": "1106000L0BC",
         "label": "Monopost",
         "generic": false,
-        "items": 1735,
-        "share": 6.4
+        "items": 1579,
+        "share": 6.7
        },
        {
-        "code": "1103010C0AA",
-        "label": "Chloramphenicol",
+        "code": "1106000ABAA",
+        "label": "Dorzolamide",
         "generic": true,
-        "items": 1380,
-        "share": 5.1
+        "items": 1173,
+        "share": 5.0
        }
       ]
      },
      {
       "icb": "QOC",
       "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 13025,
+      "items": 11919,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 2298,
-        "share": 17.6
+        "items": 2195,
+        "share": 18.4
        },
        {
         "code": "1106000L0BC",
         "label": "Monopost",
         "generic": false,
-        "items": 983,
-        "share": 7.5
+        "items": 956,
+        "share": 8.0
        },
        {
         "code": "1108010F0AA",
         "label": "Hypromellose",
         "generic": true,
-        "items": 669,
-        "share": 5.1
+        "items": 798,
+        "share": 6.7
        }
       ]
      },
      {
       "icb": "QSL",
       "name": "NHS Somerset",
-      "items": 13912,
+      "items": 12469,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 3054,
-        "share": 22.0
+        "items": 2792,
+        "share": 22.4
        },
        {
         "code": "1106000AFAA",
         "label": "Bimatoprost",
         "generic": true,
-        "items": 1148,
-        "share": 8.3
+        "items": 1109,
+        "share": 8.9
        },
        {
         "code": "1106000AIAA",
         "label": "Bimatoprost",
         "generic": true,
-        "items": 1040,
-        "share": 7.5
+        "items": 901,
+        "share": 7.2
        }
       ]
      },
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 34753,
+      "items": 30869,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 5424,
-        "share": 15.6
+        "items": 5064,
+        "share": 16.4
        },
        {
         "code": "1106000ABAA",
         "label": "Dorzolamide",
         "generic": true,
-        "items": 2346,
-        "share": 6.8
+        "items": 2148,
+        "share": 7.0
        },
        {
-        "code": "1104020Z0AA",
-        "label": "Olopatadine",
+        "code": "1103010C0AA",
+        "label": "Chloramphenicol",
         "generic": true,
-        "items": 1912,
-        "share": 5.5
+        "items": 1421,
+        "share": 4.6
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 31960,
+      "items": 28261,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 5583,
-        "share": 17.5
+        "items": 5350,
+        "share": 18.9
        },
        {
         "code": "1106000ABAA",
         "label": "Dorzolamide",
         "generic": true,
-        "items": 2022,
-        "share": 6.3
+        "items": 1887,
+        "share": 6.7
        },
        {
         "code": "1103010C0AA",
         "label": "Chloramphenicol",
         "generic": true,
-        "items": 1811,
-        "share": 5.7
+        "items": 1412,
+        "share": 5.0
        }
       ]
      },
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 40249,
+      "items": 34964,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 7524,
-        "share": 18.7
+        "items": 6690,
+        "share": 19.1
        },
        {
         "code": "1108010F0AA",
         "label": "Hypromellose",
         "generic": true,
-        "items": 2935,
-        "share": 7.3
+        "items": 2772,
+        "share": 7.9
        },
        {
         "code": "1106000AIAA",
         "label": "Bimatoprost",
         "generic": true,
-        "items": 2572,
-        "share": 6.4
+        "items": 2306,
+        "share": 6.6
        }
       ]
      },
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 30537,
+      "items": 27121,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 5678,
+        "items": 5042,
         "share": 18.6
        },
        {
         "code": "1106000L0BC",
         "label": "Monopost",
         "generic": false,
-        "items": 2061,
-        "share": 6.7
+        "items": 1909,
+        "share": 7.0
        },
        {
-        "code": "1104020T0AA",
-        "label": "Sodium cromoglicate",
+        "code": "1108010F0AA",
+        "label": "Hypromellose",
         "generic": true,
-        "items": 1556,
-        "share": 5.1
+        "items": 1461,
+        "share": 5.4
        }
       ]
      },
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 68768,
+      "items": 61128,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 13332,
-        "share": 19.4
+        "items": 12135,
+        "share": 19.9
        },
        {
         "code": "1106000ABAA",
         "label": "Dorzolamide",
         "generic": true,
-        "items": 4226,
-        "share": 6.1
+        "items": 3907,
+        "share": 6.4
        },
        {
         "code": "1103010C0AA",
         "label": "Chloramphenicol",
         "generic": true,
-        "items": 3853,
-        "share": 5.6
+        "items": 3107,
+        "share": 5.1
        }
       ]
      },
      {
       "icb": "S0E4D",
       "name": "NHS Thames Valley",
-      "items": 49381,
+      "items": 43436,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 8586,
-        "share": 17.4
+        "items": 7905,
+        "share": 18.2
        },
        {
         "code": "1106000ABAA",
         "label": "Dorzolamide",
         "generic": true,
-        "items": 3239,
-        "share": 6.6
+        "items": 2931,
+        "share": 6.7
        },
        {
         "code": "1106000L0BC",
         "label": "Monopost",
         "generic": false,
-        "items": 2665,
-        "share": 5.4
+        "items": 2460,
+        "share": 5.7
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 50270,
+      "items": 43001,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 7062,
-        "share": 14.0
+        "items": 6399,
+        "share": 14.9
        },
        {
         "code": "1106000AFAA",
         "label": "Bimatoprost",
         "generic": true,
-        "items": 3658,
+        "items": 3145,
         "share": 7.3
        },
        {
         "code": "1106000AIAA",
         "label": "Bimatoprost",
         "generic": true,
-        "items": 3307,
-        "share": 6.6
+        "items": 2886,
+        "share": 6.7
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 81033,
+      "items": 70232,
       "leaders": [
        {
         "code": "1106000L0AA",
         "label": "Latanoprost",
         "generic": true,
-        "items": 11382,
-        "share": 14.0
+        "items": 10490,
+        "share": 14.9
        },
        {
-        "code": "1104020T0AA",
-        "label": "Sodium cromoglicate",
+        "code": "1106000ABAA",
+        "label": "Dorzolamide",
         "generic": true,
-        "items": 5247,
-        "share": 6.5
+        "items": 4394,
+        "share": 6.3
        },
        {
-        "code": "1104020Z0AA",
-        "label": "Olopatadine",
+        "code": "1108010F0AA",
+        "label": "Hypromellose",
         "generic": true,
-        "items": 5030,
-        "share": 6.2
+        "items": 3946,
+        "share": 5.6
        }
       ]
      }
@@ -2786,187 +2786,187 @@
      "21.30"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 851884,
-    "cost": 6184926,
-    "items12m": 9174899,
-    "cost12m": 66447290,
-    "itemsYoY": 8.3,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 764706,
+    "cost": 5584214,
+    "items12m": 9220929,
+    "cost12m": 66822450,
+    "itemsYoY": 6.4,
     "products": 216,
     "topNational": [
      {
       "code": "21300000111",
       "label": "Hylo-Forte",
       "generic": false,
-      "items": 128906,
-      "share": 15.1,
-      "cost": 1461808,
-      "yoy": 5.5
+      "items": 115068,
+      "share": 15.0,
+      "cost": 1304503,
+      "yoy": 3.9
      },
      {
       "code": "21300000182",
       "label": "Thealoz Duo eye drops preservative free",
       "generic": false,
-      "items": 75696,
-      "share": 8.9,
-      "cost": 839948,
-      "yoy": 20.1
+      "items": 68774,
+      "share": 9.0,
+      "cost": 764493,
+      "yoy": 17.0
      },
      {
       "code": "21300000711",
       "label": "Xailin Night eye ointment preservative free",
       "generic": false,
-      "items": 65214,
-      "share": 7.7,
-      "cost": 234704,
-      "yoy": 15.1
+      "items": 58418,
+      "share": 7.6,
+      "cost": 211321,
+      "yoy": 10.4
      },
      {
       "code": "21300000913",
       "label": "Hylo Night eye ointment preservative free",
       "generic": false,
-      "items": 59101,
-      "share": 6.9,
-      "cost": 203367,
-      "yoy": 2.4
+      "items": 53266,
+      "share": 7.0,
+      "cost": 183688,
+      "yoy": 7.6
      },
      {
       "code": "21300000104",
       "label": "Hylo-Tear",
       "generic": false,
-      "items": 34710,
-      "share": 4.1,
-      "cost": 344833,
-      "yoy": -3.4
+      "items": 30880,
+      "share": 4.0,
+      "cost": 308295,
+      "yoy": -5.7
      },
      {
       "code": "21300000702",
       "label": "Clinitas Carbomer",
       "generic": false,
-      "items": 32400,
+      "items": 28760,
       "share": 3.8,
-      "cost": 66617,
-      "yoy": -1.6
+      "cost": 59026,
+      "yoy": -4.5
      },
      {
       "code": "21300000178",
       "label": "Evolve HA",
       "generic": false,
-      "items": 27662,
+      "items": 24770,
       "share": 3.2,
-      "cost": 196374,
-      "yoy": -9.0
+      "cost": 175258,
+      "yoy": -9.5
      },
      {
       "code": "21300000926",
       "label": "Eyeaze",
       "generic": false,
-      "items": 27071,
+      "items": 24299,
       "share": 3.2,
-      "cost": 122500,
-      "yoy": 17.7
+      "cost": 110338,
+      "yoy": 14.0
      },
      {
       "code": "21300000108",
       "label": "Hyabak",
       "generic": false,
-      "items": 15355,
+      "items": 13464,
       "share": 1.8,
-      "cost": 151328,
-      "yoy": -5.7
+      "cost": 132692,
+      "yoy": -9.9
      },
      {
       "code": "21300000163",
       "label": "HydraMed",
       "generic": false,
-      "items": 14440,
+      "items": 12812,
       "share": 1.7,
-      "cost": 96461,
-      "yoy": -6.8
+      "cost": 85275,
+      "yoy": -8.5
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 13894,
+      "items": 12334,
       "leaders": [
-       {
-        "code": "21300000111",
-        "label": "Hylo-Forte",
-        "generic": false,
-        "items": 1595,
-        "share": 11.5
-       },
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 1588,
-        "share": 11.4
+        "items": 1462,
+        "share": 11.9
+       },
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 1369,
+        "share": 11.1
        },
        {
         "code": "21300000937",
         "label": "AaproMel",
         "generic": false,
-        "items": 966,
-        "share": 7.0
+        "items": 871,
+        "share": 7.1
        }
       ]
      },
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 40344,
+      "items": 34708,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 6441,
-        "share": 16.0
-       },
-       {
-        "code": "21300000182",
-        "label": "Thealoz Duo eye drops preservative free",
-        "generic": false,
-        "items": 5200,
-        "share": 12.9
-       },
-       {
-        "code": "21300000711",
-        "label": "Xailin Night eye ointment preservative free",
-        "generic": false,
-        "items": 3106,
-        "share": 7.7
-       }
-      ]
-     },
-     {
-      "icb": "QUA",
-      "name": "NHS Black Country",
-      "items": 27960,
-      "leaders": [
-       {
-        "code": "21300000111",
-        "label": "Hylo-Forte",
-        "generic": false,
-        "items": 4384,
+        "items": 5458,
         "share": 15.7
        },
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 4062,
-        "share": 14.5
+        "items": 4520,
+        "share": 13.0
        },
        {
         "code": "21300000711",
         "label": "Xailin Night eye ointment preservative free",
         "generic": false,
-        "items": 2754,
+        "items": 2649,
+        "share": 7.6
+       }
+      ]
+     },
+     {
+      "icb": "QUA",
+      "name": "NHS Black Country",
+      "items": 25041,
+      "leaders": [
+       {
+        "code": "21300000111",
+        "label": "Hylo-Forte",
+        "generic": false,
+        "items": 3933,
+        "share": 15.7
+       },
+       {
+        "code": "21300000182",
+        "label": "Thealoz Duo eye drops preservative free",
+        "generic": false,
+        "items": 3609,
+        "share": 14.4
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 2448,
         "share": 9.8
        }
       ]
@@ -2974,55 +2974,55 @@
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 8848,
+      "items": 7809,
       "leaders": [
        {
         "code": "21300000931",
         "label": "VIZhyal",
         "generic": false,
-        "items": 1064,
-        "share": 12.0
+        "items": 942,
+        "share": 12.1
        },
        {
         "code": "21300000940",
         "label": "ClinOptic HA",
         "generic": false,
-        "items": 990,
-        "share": 11.2
+        "items": 904,
+        "share": 11.6
        },
        {
         "code": "21300000711",
         "label": "Xailin Night eye ointment preservative free",
         "generic": false,
-        "items": 904,
-        "share": 10.2
+        "items": 785,
+        "share": 10.1
        }
       ]
      },
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 35638,
+      "items": 32194,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 4025,
-        "share": 11.3
+        "items": 3608,
+        "share": 11.2
        },
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 3632,
-        "share": 10.2
+        "items": 3472,
+        "share": 10.8
        },
        {
-        "code": "21300000711",
-        "label": "Xailin Night eye ointment preservative free",
+        "code": "21300000913",
+        "label": "Hylo Night eye ointment preservative free",
         "generic": false,
-        "items": 2485,
+        "items": 2262,
         "share": 7.0
        }
       ]
@@ -3030,27 +3030,27 @@
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 43830,
+      "items": 39433,
       "leaders": [
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 5405,
-        "share": 12.3
+        "items": 4809,
+        "share": 12.2
        },
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 3804,
-        "share": 8.7
+        "items": 3381,
+        "share": 8.6
        },
        {
         "code": "21300000913",
         "label": "Hylo Night eye ointment preservative free",
         "generic": false,
-        "items": 3629,
+        "items": 3289,
         "share": 8.3
        }
       ]
@@ -3058,27 +3058,27 @@
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 10392,
+      "items": 9309,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 2537,
-        "share": 24.4
+        "items": 2349,
+        "share": 25.2
        },
        {
         "code": "21300000913",
         "label": "Hylo Night eye ointment preservative free",
         "generic": false,
-        "items": 912,
+        "items": 815,
         "share": 8.8
        },
        {
         "code": "21300000711",
         "label": "Xailin Night eye ointment preservative free",
         "generic": false,
-        "items": 696,
+        "items": 627,
         "share": 6.7
        }
       ]
@@ -3086,195 +3086,195 @@
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 22287,
+      "items": 20209,
       "leaders": [
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 3006,
-        "share": 13.5
+        "items": 2697,
+        "share": 13.3
        },
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 2100,
-        "share": 9.4
+        "items": 1886,
+        "share": 9.3
        },
        {
         "code": "21300000163",
         "label": "HydraMed",
         "generic": false,
-        "items": 2012,
-        "share": 9.0
+        "items": 1754,
+        "share": 8.7
        }
       ]
      },
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 14259,
+      "items": 12524,
       "leaders": [
        {
         "code": "21300000926",
         "label": "Eyeaze",
         "generic": false,
-        "items": 1657,
-        "share": 11.6
-       },
-       {
-        "code": "21300000702",
-        "label": "Clinitas Carbomer",
-        "generic": false,
-        "items": 1125,
-        "share": 7.9
+        "items": 1470,
+        "share": 11.7
        },
        {
         "code": "21300000711",
         "label": "Xailin Night eye ointment preservative free",
         "generic": false,
-        "items": 1122,
-        "share": 7.9
+        "items": 947,
+        "share": 7.6
+       },
+       {
+        "code": "21300000702",
+        "label": "Clinitas Carbomer",
+        "generic": false,
+        "items": 934,
+        "share": 7.5
        }
       ]
      },
      {
       "icb": "QJK",
       "name": "NHS Devon",
-      "items": 19940,
+      "items": 17827,
       "leaders": [
        {
         "code": "21300000933",
         "label": "Xailin Plus HA",
         "generic": false,
-        "items": 4471,
-        "share": 22.4
+        "items": 4029,
+        "share": 22.6
        },
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 2625,
-        "share": 13.2
+        "items": 2392,
+        "share": 13.4
        },
        {
         "code": "21300000913",
         "label": "Hylo Night eye ointment preservative free",
         "generic": false,
-        "items": 1997,
-        "share": 10.0
+        "items": 1718,
+        "share": 9.6
        }
       ]
      },
      {
       "icb": "QVV",
       "name": "NHS Dorset",
-      "items": 13752,
+      "items": 12307,
       "leaders": [
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 3257,
-        "share": 23.7
+        "items": 2970,
+        "share": 24.1
        },
        {
         "code": "21300000926",
         "label": "Eyeaze",
         "generic": false,
-        "items": 1526,
-        "share": 11.1
+        "items": 1409,
+        "share": 11.4
        },
        {
         "code": "21300000163",
         "label": "HydraMed",
         "generic": false,
-        "items": 1266,
-        "share": 9.2
+        "items": 1176,
+        "share": 9.6
        }
       ]
      },
      {
       "icb": "D7T5G",
       "name": "NHS Essex",
-      "items": 20809,
+      "items": 18849,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 2583,
+        "items": 2339,
         "share": 12.4
        },
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 1811,
+        "items": 1643,
         "share": 8.7
        },
        {
         "code": "21300000711",
         "label": "Xailin Night eye ointment preservative free",
         "generic": false,
-        "items": 1281,
-        "share": 6.2
+        "items": 1110,
+        "share": 5.9
        }
       ]
      },
      {
       "icb": "QR1",
       "name": "NHS Gloucestershire",
-      "items": 6801,
+      "items": 6234,
       "leaders": [
        {
         "code": "21300000933",
         "label": "Xailin Plus HA",
         "generic": false,
-        "items": 864,
-        "share": 12.7
+        "items": 782,
+        "share": 12.5
        },
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 827,
-        "share": 12.2
+        "items": 777,
+        "share": 12.5
        },
        {
         "code": "21300000711",
         "label": "Xailin Night eye ointment preservative free",
         "generic": false,
-        "items": 820,
-        "share": 12.1
+        "items": 749,
+        "share": 12.0
        }
       ]
      },
      {
       "icb": "QOP",
       "name": "NHS Greater Manchester",
-      "items": 54623,
+      "items": 49236,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 11792,
-        "share": 21.6
+        "items": 10550,
+        "share": 21.4
        },
        {
         "code": "21300000926",
         "label": "Eyeaze",
         "generic": false,
-        "items": 5625,
-        "share": 10.3
+        "items": 4826,
+        "share": 9.8
        },
        {
         "code": "21300000711",
         "label": "Xailin Night eye ointment preservative free",
         "generic": false,
-        "items": 4466,
+        "items": 4056,
         "share": 8.2
        }
       ]
@@ -3282,167 +3282,167 @@
      {
       "icb": "QRL",
       "name": "NHS Hampshire and Isle of Wight",
-      "items": 24917,
+      "items": 21997,
       "leaders": [
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 4346,
+        "items": 3831,
         "share": 17.4
        },
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 1896,
-        "share": 7.6
+        "items": 1646,
+        "share": 7.5
        },
        {
         "code": "21300000913",
         "label": "Hylo Night eye ointment preservative free",
         "generic": false,
-        "items": 1708,
-        "share": 6.9
+        "items": 1475,
+        "share": 6.7
        }
       ]
      },
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 12817,
+      "items": 11686,
       "leaders": [
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 2048,
-        "share": 16.0
+        "items": 1893,
+        "share": 16.2
        },
        {
         "code": "21300000940",
         "label": "ClinOptic HA",
         "generic": false,
-        "items": 1590,
-        "share": 12.4
+        "items": 1241,
+        "share": 10.6
        },
        {
-        "code": "21300000711",
-        "label": "Xailin Night eye ointment preservative free",
+        "code": "21300000933",
+        "label": "Xailin Plus HA",
         "generic": false,
-        "items": 1059,
-        "share": 8.3
+        "items": 936,
+        "share": 8.0
        }
       ]
      },
      {
       "icb": "QOQ",
       "name": "NHS Humber and North Yorkshire",
-      "items": 30478,
+      "items": 27234,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 6319,
+        "items": 5640,
         "share": 20.7
        },
        {
         "code": "21300000711",
         "label": "Xailin Night eye ointment preservative free",
         "generic": false,
-        "items": 2921,
-        "share": 9.6
+        "items": 2596,
+        "share": 9.5
        },
        {
         "code": "21300000178",
         "label": "Evolve HA",
         "generic": false,
-        "items": 1781,
-        "share": 5.8
+        "items": 1564,
+        "share": 5.7
        }
       ]
      },
      {
       "icb": "QKS",
       "name": "NHS Kent and Medway",
-      "items": 17184,
+      "items": 15571,
       "leaders": [
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 3460,
+        "items": 3135,
         "share": 20.1
        },
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 1482,
+        "items": 1335,
         "share": 8.6
        },
        {
         "code": "21300000168",
         "label": "Hy-Opti",
         "generic": false,
-        "items": 1184,
-        "share": 6.9
+        "items": 1094,
+        "share": 7.0
        }
       ]
      },
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 24434,
+      "items": 21846,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 5703,
-        "share": 23.3
+        "items": 5057,
+        "share": 23.1
        },
        {
         "code": "21300000178",
         "label": "Evolve HA",
         "generic": false,
-        "items": 2620,
+        "items": 2328,
         "share": 10.7
        },
        {
         "code": "21300000913",
         "label": "Hylo Night eye ointment preservative free",
         "generic": false,
-        "items": 1897,
-        "share": 7.8
+        "items": 1721,
+        "share": 7.9
        }
       ]
      },
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 22815,
+      "items": 21144,
       "leaders": [
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 3076,
-        "share": 13.5
+        "items": 2755,
+        "share": 13.0
        },
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 2833,
-        "share": 12.4
+        "items": 2654,
+        "share": 12.6
        },
        {
         "code": "21300000931",
         "label": "VIZhyal",
         "generic": false,
-        "items": 2449,
+        "items": 2259,
         "share": 10.7
        }
       ]
@@ -3450,111 +3450,111 @@
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 11127,
+      "items": 10334,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 2932,
-        "share": 26.4
+        "items": 2661,
+        "share": 25.7
        },
        {
         "code": "21300000711",
         "label": "Xailin Night eye ointment preservative free",
         "generic": false,
-        "items": 1069,
-        "share": 9.6
+        "items": 1011,
+        "share": 9.8
        },
        {
         "code": "21300000913",
         "label": "Hylo Night eye ointment preservative free",
         "generic": false,
-        "items": 730,
-        "share": 6.6
+        "items": 705,
+        "share": 6.8
        }
       ]
      },
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 30143,
+      "items": 26907,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 2866,
+        "items": 2567,
         "share": 9.5
        },
        {
         "code": "21300000711",
         "label": "Xailin Night eye ointment preservative free",
         "generic": false,
-        "items": 2594,
-        "share": 8.6
+        "items": 2333,
+        "share": 8.7
        },
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 1968,
-        "share": 6.5
+        "items": 1804,
+        "share": 6.7
        }
       ]
      },
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 31517,
+      "items": 29018,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 7017,
-        "share": 22.3
+        "items": 6514,
+        "share": 22.4
        },
        {
         "code": "21300000104",
         "label": "Hylo-Tear",
         "generic": false,
-        "items": 4548,
-        "share": 14.4
+        "items": 4105,
+        "share": 14.1
        },
        {
         "code": "21300000913",
         "label": "Hylo Night eye ointment preservative free",
         "generic": false,
-        "items": 3583,
-        "share": 11.4
+        "items": 3291,
+        "share": 11.3
        }
       ]
      },
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 42837,
+      "items": 38455,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 10684,
-        "share": 24.9
+        "items": 9484,
+        "share": 24.7
        },
        {
         "code": "21300000711",
         "label": "Xailin Night eye ointment preservative free",
         "generic": false,
-        "items": 5615,
-        "share": 13.1
+        "items": 4960,
+        "share": 12.9
        },
        {
         "code": "21300000913",
         "label": "Hylo Night eye ointment preservative free",
         "generic": false,
-        "items": 4681,
+        "items": 4188,
         "share": 10.9
        }
       ]
@@ -3562,307 +3562,307 @@
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 11200,
+      "items": 10002,
       "leaders": [
        {
         "code": "21300000702",
         "label": "Clinitas Carbomer",
         "generic": false,
-        "items": 963,
-        "share": 8.6
-       },
-       {
-        "code": "21300000926",
-        "label": "Eyeaze",
-        "generic": false,
-        "items": 795,
-        "share": 7.1
+        "items": 847,
+        "share": 8.5
        },
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 780,
-        "share": 7.0
+        "items": 732,
+        "share": 7.3
+       },
+       {
+        "code": "21300000926",
+        "label": "Eyeaze",
+        "generic": false,
+        "items": 688,
+        "share": 6.9
        }
       ]
      },
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 16432,
+      "items": 14649,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 3283,
-        "share": 20.0
+        "items": 2815,
+        "share": 19.2
        },
        {
         "code": "21300000926",
         "label": "Eyeaze",
         "generic": false,
-        "items": 2346,
-        "share": 14.3
+        "items": 2115,
+        "share": 14.4
        },
        {
-        "code": "21300000913",
-        "label": "Hylo Night eye ointment preservative free",
+        "code": "21300000937",
+        "label": "AaproMel",
         "generic": false,
-        "items": 1551,
-        "share": 9.4
+        "items": 1387,
+        "share": 9.5
        }
       ]
      },
      {
       "icb": "QOC",
       "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 6018,
+      "items": 5527,
       "leaders": [
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 721,
-        "share": 12.0
+        "items": 657,
+        "share": 11.9
        },
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 668,
-        "share": 11.1
+        "items": 586,
+        "share": 10.6
        },
        {
         "code": "21300000711",
         "label": "Xailin Night eye ointment preservative free",
         "generic": false,
-        "items": 540,
-        "share": 9.0
+        "items": 535,
+        "share": 9.7
        }
       ]
      },
      {
       "icb": "QSL",
       "name": "NHS Somerset",
-      "items": 6544,
+      "items": 5901,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 942,
-        "share": 14.4
+        "items": 835,
+        "share": 14.2
        },
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 530,
-        "share": 8.1
+        "items": 467,
+        "share": 7.9
        },
        {
         "code": "21300000913",
         "label": "Hylo Night eye ointment preservative free",
         "generic": false,
-        "items": 462,
-        "share": 7.1
+        "items": 409,
+        "share": 6.9
        }
       ]
      },
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 15613,
+      "items": 13899,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 3356,
-        "share": 21.5
+        "items": 2910,
+        "share": 20.9
        },
        {
         "code": "21300000104",
         "label": "Hylo-Tear",
         "generic": false,
-        "items": 2591,
-        "share": 16.6
+        "items": 2285,
+        "share": 16.4
        },
        {
         "code": "21300000913",
         "label": "Hylo Night eye ointment preservative free",
         "generic": false,
-        "items": 1846,
-        "share": 11.8
+        "items": 1681,
+        "share": 12.1
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 16005,
+      "items": 14456,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 3420,
-        "share": 21.4
+        "items": 3063,
+        "share": 21.2
        },
        {
         "code": "21300000104",
         "label": "Hylo-Tear",
         "generic": false,
-        "items": 2067,
-        "share": 12.9
+        "items": 1901,
+        "share": 13.2
        },
        {
         "code": "21300000913",
         "label": "Hylo Night eye ointment preservative free",
         "generic": false,
-        "items": 1723,
-        "share": 10.8
+        "items": 1552,
+        "share": 10.7
        }
       ]
      },
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 22118,
+      "items": 19687,
       "leaders": [
        {
         "code": "21300000178",
         "label": "Evolve HA",
         "generic": false,
-        "items": 2620,
-        "share": 11.8
+        "items": 2356,
+        "share": 12.0
        },
        {
         "code": "21300000702",
         "label": "Clinitas Carbomer",
         "generic": false,
-        "items": 2193,
+        "items": 1941,
         "share": 9.9
        },
        {
         "code": "21300000711",
         "label": "Xailin Night eye ointment preservative free",
         "generic": false,
-        "items": 1766,
-        "share": 8.0
+        "items": 1563,
+        "share": 7.9
        }
       ]
      },
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 19318,
+      "items": 17535,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 4248,
-        "share": 22.0
-       },
-       {
-        "code": "21300000711",
-        "label": "Xailin Night eye ointment preservative free",
-        "generic": false,
-        "items": 2065,
-        "share": 10.7
+        "items": 3771,
+        "share": 21.5
        },
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 2062,
+        "items": 1877,
         "share": 10.7
+       },
+       {
+        "code": "21300000711",
+        "label": "Xailin Night eye ointment preservative free",
+        "generic": false,
+        "items": 1863,
+        "share": 10.6
        }
       ]
      },
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 33542,
+      "items": 30563,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 6105,
+        "items": 5560,
         "share": 18.2
        },
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 4183,
-        "share": 12.5
+        "items": 3946,
+        "share": 12.9
        },
        {
         "code": "21300000913",
         "label": "Hylo Night eye ointment preservative free",
         "generic": false,
-        "items": 2230,
-        "share": 6.6
+        "items": 1998,
+        "share": 6.5
        }
       ]
      },
      {
       "icb": "S0E4D",
       "name": "NHS Thames Valley",
-      "items": 21045,
+      "items": 18913,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 2937,
-        "share": 14.0
+        "items": 2665,
+        "share": 14.1
        },
        {
         "code": "21300000104",
         "label": "Hylo-Tear",
         "generic": false,
-        "items": 2017,
+        "items": 1814,
         "share": 9.6
        },
        {
         "code": "21300000711",
         "label": "Xailin Night eye ointment preservative free",
         "generic": false,
-        "items": 1935,
-        "share": 9.2
+        "items": 1637,
+        "share": 8.7
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 47841,
+      "items": 42301,
       "leaders": [
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 10697,
-        "share": 22.4
+        "items": 9453,
+        "share": 22.3
        },
        {
         "code": "21300000711",
         "label": "Xailin Night eye ointment preservative free",
         "generic": false,
-        "items": 4012,
+        "items": 3572,
         "share": 8.4
        },
        {
         "code": "21300000913",
         "label": "Hylo Night eye ointment preservative free",
         "generic": false,
-        "items": 3881,
+        "items": 3436,
         "share": 8.1
        }
       ]
@@ -3870,27 +3870,27 @@
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 54468,
+      "items": 48991,
       "leaders": [
        {
         "code": "21300000926",
         "label": "Eyeaze",
         "generic": false,
-        "items": 6087,
-        "share": 11.2
+        "items": 5544,
+        "share": 11.3
        },
        {
         "code": "21300000182",
         "label": "Thealoz Duo eye drops preservative free",
         "generic": false,
-        "items": 5165,
-        "share": 9.5
+        "items": 4732,
+        "share": 9.7
        },
        {
         "code": "21300000111",
         "label": "Hylo-Forte",
         "generic": false,
-        "items": 4630,
+        "items": 4179,
         "share": 8.5
        }
       ]

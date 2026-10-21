@@ -22,7 +22,7 @@
   "drugTariff": "2026-10-21",
   "localIntel": "2026-10-21",
   "supplierDirectory": "2026-10-21",
-  "gpPrescribing": "2026-09-30",
+  "gpPrescribing": "2026-10-21",
   "mhraDsu": "2026-10-19",
   "drugTariffViiia": "2026-10-21",
   "hospitalPrescribing": null
@@ -35,7 +35,7 @@
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
   "directorySuppliers": "No supplier directory label maps to this speciality, so no directory-tagged supplier is listed. That is a gap in the directory's vocabulary, not a finding that no company sells here, and no neighbouring page's list is borrowed to fill it.",
-  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202608) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (15 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (1 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-19.",
   "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF 04.01 or 04.02 or 04.03 or 04.04. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 51 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
  },
@@ -718,14 +718,14 @@
  },
  "directorySuppliers": [],
  "gpPrescribing": {
-  "generatedOn": "2026-09-30",
+  "generatedOn": "2026-10-21",
   "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
   "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
   "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
   "periods": [
-   "202507",
-   "202607"
+   "202508",
+   "202608"
   ],
   "minBaselineItems": 25,
   "defined": true,
@@ -740,187 +740,187 @@
      "04.04"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 11342821,
-    "cost": 57234285,
-    "items12m": 127496847,
-    "cost12m": 613832108,
-    "itemsYoY": 4.4,
-    "products": 210,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 10292108,
+    "cost": 52912334,
+    "items12m": 127791081,
+    "cost12m": 621599644,
+    "itemsYoY": 2.9,
+    "products": 209,
     "topNational": [
      {
       "code": "0403030Q0AA",
       "label": "Sertraline",
       "generic": true,
-      "items": 2331343,
-      "share": 20.6,
-      "cost": 4271016,
-      "yoy": 5.4
+      "items": 2108234,
+      "share": 20.5,
+      "cost": 4061797,
+      "yoy": 4.0
      },
      {
       "code": "0403010B0AA",
       "label": "Amitriptyline",
       "generic": true,
-      "items": 1456111,
+      "items": 1317568,
       "share": 12.8,
-      "cost": 1354317,
-      "yoy": 2.0
+      "cost": 1221073,
+      "yoy": 0.2
      },
      {
       "code": "0403040X0AA",
       "label": "Mirtazapine",
       "generic": true,
-      "items": 1232025,
+      "items": 1119388,
       "share": 10.9,
-      "cost": 1734562,
-      "yoy": 4.4
+      "cost": 1572110,
+      "yoy": 3.0
      },
      {
       "code": "0403030D0AA",
       "label": "Citalopram",
       "generic": true,
-      "items": 1100919,
-      "share": 9.7,
-      "cost": 1074373,
-      "yoy": -2.5
+      "items": 992925,
+      "share": 9.6,
+      "cost": 965187,
+      "yoy": -4.0
      },
      {
       "code": "0403030E0AA",
       "label": "Fluoxetine",
       "generic": true,
-      "items": 667977,
+      "items": 604654,
       "share": 5.9,
-      "cost": 1243724,
-      "yoy": 1.6
+      "cost": 1143842,
+      "yoy": 0.5
      },
      {
       "code": "0403040Y0AA",
       "label": "Duloxetine",
       "generic": true,
-      "items": 492710,
-      "share": 4.3,
-      "cost": 1443350,
-      "yoy": 13.1
+      "items": 452228,
+      "share": 4.4,
+      "cost": 1306088,
+      "yoy": 11.6
      },
      {
       "code": "0403040W0AA",
       "label": "Venlafaxine",
       "generic": true,
-      "items": 481829,
-      "share": 4.2,
-      "cost": 2725537,
-      "yoy": 5.3
+      "items": 440073,
+      "share": 4.3,
+      "cost": 2512747,
+      "yoy": 3.8
      },
      {
       "code": "0402010ABAA",
       "label": "Quetiapine",
       "generic": true,
-      "items": 373928,
+      "items": 340924,
       "share": 3.3,
-      "cost": 3436392,
-      "yoy": 7.3
+      "cost": 3196863,
+      "yoy": 5.0
      },
      {
       "code": "0401010Z0AA",
       "label": "Zopiclone",
       "generic": true,
-      "items": 325757,
+      "items": 298779,
       "share": 2.9,
-      "cost": 162476,
-      "yoy": -6.5
+      "cost": 147754,
+      "yoy": -7.6
      },
      {
       "code": "0401020K0AA",
       "label": "Diazepam",
       "generic": true,
-      "items": 310366,
+      "items": 281405,
       "share": 2.7,
-      "cost": 512509,
-      "yoy": -5.0
+      "cost": 574028,
+      "yoy": -6.4
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 185412,
+      "items": 169150,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 34628,
-        "share": 18.7
+        "items": 31307,
+        "share": 18.5
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 22887,
-        "share": 12.3
+        "items": 20510,
+        "share": 12.1
        },
        {
         "code": "0403030D0AA",
         "label": "Citalopram",
         "generic": true,
-        "items": 19097,
-        "share": 10.3
+        "items": 17234,
+        "share": 10.2
        }
       ]
      },
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 234152,
+      "items": 207543,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 48656,
-        "share": 20.8
+        "items": 43034,
+        "share": 20.7
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 29685,
-        "share": 12.7
+        "items": 26112,
+        "share": 12.6
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 28444,
-        "share": 12.1
+        "items": 25420,
+        "share": 12.2
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 237357,
+      "items": 211812,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 50906,
-        "share": 21.4
+        "items": 45113,
+        "share": 21.3
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 30602,
+        "items": 27382,
         "share": 12.9
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 25110,
+        "items": 22526,
         "share": 10.6
        }
       ]
@@ -928,27 +928,27 @@
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 157468,
+      "items": 143421,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 33354,
-        "share": 21.2
+        "items": 30544,
+        "share": 21.3
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 19932,
+        "items": 18258,
         "share": 12.7
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 19068,
+        "items": 17371,
         "share": 12.1
        }
       ]
@@ -956,139 +956,139 @@
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 536946,
+      "items": 485123,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 114588,
-        "share": 21.3
+        "items": 103727,
+        "share": 21.4
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 74640,
-        "share": 13.9
+        "items": 66954,
+        "share": 13.8
        },
        {
         "code": "0403030D0AA",
         "label": "Citalopram",
         "generic": true,
-        "items": 63506,
-        "share": 11.8
+        "items": 56786,
+        "share": 11.7
        }
       ]
      },
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 651930,
+      "items": 586434,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 139721,
+        "items": 125655,
         "share": 21.4
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 81362,
-        "share": 12.5
+        "items": 72888,
+        "share": 12.4
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 65596,
-        "share": 10.1
+        "items": 58853,
+        "share": 10.0
        }
       ]
      },
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 140941,
+      "items": 127068,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 25229,
-        "share": 17.9
+        "items": 22818,
+        "share": 18.0
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 19545,
+        "items": 17617,
         "share": 13.9
        },
        {
         "code": "0403030D0AA",
         "label": "Citalopram",
         "generic": true,
-        "items": 15603,
-        "share": 11.1
+        "items": 14015,
+        "share": 11.0
        }
       ]
      },
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 197900,
+      "items": 178528,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 42043,
+        "items": 37928,
         "share": 21.2
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 25821,
-        "share": 13.0
+        "items": 23414,
+        "share": 13.1
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 19230,
-        "share": 9.7
+        "items": 17113,
+        "share": 9.6
        }
       ]
      },
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 227403,
+      "items": 200968,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 47393,
+        "items": 41859,
         "share": 20.8
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 30872,
+        "items": 27239,
         "share": 13.6
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 22447,
+        "items": 19860,
         "share": 9.9
        }
       ]
@@ -1096,27 +1096,27 @@
      {
       "icb": "QJK",
       "name": "NHS Devon",
-      "items": 257336,
+      "items": 233485,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 48786,
-        "share": 19.0
+        "items": 44026,
+        "share": 18.9
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 34718,
-        "share": 13.5
+        "items": 31078,
+        "share": 13.3
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 27465,
+        "items": 24957,
         "share": 10.7
        }
       ]
@@ -1124,27 +1124,27 @@
      {
       "icb": "QVV",
       "name": "NHS Dorset",
-      "items": 148846,
+      "items": 135182,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 28498,
-        "share": 19.1
+        "items": 25723,
+        "share": 19.0
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 22763,
-        "share": 15.3
+        "items": 20494,
+        "share": 15.2
        },
        {
         "code": "0403030D0AA",
         "label": "Citalopram",
         "generic": true,
-        "items": 16205,
+        "items": 14711,
         "share": 10.9
        }
       ]
@@ -1152,55 +1152,55 @@
      {
       "icb": "D7T5G",
       "name": "NHS Essex",
-      "items": 387797,
+      "items": 354096,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 76677,
-        "share": 19.8
+        "items": 69828,
+        "share": 19.7
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 50360,
+        "items": 46191,
         "share": 13.0
        },
        {
         "code": "0403030D0AA",
         "label": "Citalopram",
         "generic": true,
-        "items": 47666,
-        "share": 12.3
+        "items": 43183,
+        "share": 12.2
        }
       ]
      },
      {
       "icb": "QR1",
       "name": "NHS Gloucestershire",
-      "items": 142383,
+      "items": 131313,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 26697,
-        "share": 18.8
+        "items": 24994,
+        "share": 19.0
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 18440,
-        "share": 13.0
+        "items": 16834,
+        "share": 12.8
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 16391,
+        "items": 15069,
         "share": 11.5
        }
       ]
@@ -1208,27 +1208,27 @@
      {
       "icb": "QOP",
       "name": "NHS Greater Manchester",
-      "items": 653925,
+      "items": 591657,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 140094,
-        "share": 21.4
+        "items": 125947,
+        "share": 21.3
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 85755,
+        "items": 77293,
         "share": 13.1
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 79128,
+        "items": 71598,
         "share": 12.1
        }
       ]
@@ -1236,139 +1236,139 @@
      {
       "icb": "QRL",
       "name": "NHS Hampshire and Isle of Wight",
-      "items": 386760,
+      "items": 351106,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 79612,
-        "share": 20.6
+        "items": 71981,
+        "share": 20.5
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 48964,
-        "share": 12.7
+        "items": 44387,
+        "share": 12.6
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 40899,
-        "share": 10.6
+        "items": 36758,
+        "share": 10.5
        }
       ]
      },
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 158315,
+      "items": 145217,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 31530,
+        "items": 28963,
         "share": 19.9
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 21417,
-        "share": 13.5
+        "items": 19341,
+        "share": 13.3
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 14947,
-        "share": 9.4
+        "items": 13750,
+        "share": 9.5
        }
       ]
      },
      {
       "icb": "QOQ",
       "name": "NHS Humber and North Yorkshire",
-      "items": 362465,
+      "items": 326875,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 84168,
-        "share": 23.2
+        "items": 75640,
+        "share": 23.1
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 58567,
-        "share": 16.2
+        "items": 52502,
+        "share": 16.1
        },
        {
         "code": "0403030D0AA",
         "label": "Citalopram",
         "generic": true,
-        "items": 40441,
-        "share": 11.2
+        "items": 36020,
+        "share": 11.0
        }
       ]
      },
      {
       "icb": "QKS",
       "name": "NHS Kent and Medway",
-      "items": 342343,
+      "items": 313731,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 67866,
-        "share": 19.8
+        "items": 61513,
+        "share": 19.6
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 40448,
+        "items": 37047,
         "share": 11.8
        },
        {
         "code": "0403030D0AA",
         "label": "Citalopram",
         "generic": true,
-        "items": 38112,
-        "share": 11.1
+        "items": 34352,
+        "share": 10.9
        }
       ]
      },
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 377874,
+      "items": 339349,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 81412,
-        "share": 21.5
+        "items": 73154,
+        "share": 21.6
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 53808,
+        "items": 48303,
         "share": 14.2
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 47700,
+        "items": 42697,
         "share": 12.6
        }
       ]
@@ -1376,55 +1376,55 @@
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 214662,
+      "items": 197365,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 44332,
-        "share": 20.7
+        "items": 40064,
+        "share": 20.3
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 27401,
+        "items": 25286,
         "share": 12.8
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 22530,
-        "share": 10.5
+        "items": 20879,
+        "share": 10.6
        }
       ]
      },
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 217601,
+      "items": 200262,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 39916,
-        "share": 18.3
+        "items": 36902,
+        "share": 18.4
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 30192,
-        "share": 13.9
+        "items": 27975,
+        "share": 14.0
        },
        {
         "code": "0403030D0AA",
         "label": "Citalopram",
         "generic": true,
-        "items": 24448,
+        "items": 22450,
         "share": 11.2
        }
       ]
@@ -1432,55 +1432,55 @@
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 426356,
+      "items": 390161,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 81517,
-        "share": 19.1
+        "items": 74773,
+        "share": 19.2
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 56044,
+        "items": 51306,
         "share": 13.1
        },
        {
         "code": "0403030D0AA",
         "label": "Citalopram",
         "generic": true,
-        "items": 51044,
-        "share": 12.0
+        "items": 46347,
+        "share": 11.9
        }
       ]
      },
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 295323,
+      "items": 271168,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 56331,
-        "share": 19.1
+        "items": 51268,
+        "share": 18.9
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 37213,
+        "items": 34229,
         "share": 12.6
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 33368,
+        "items": 30646,
         "share": 11.3
        }
       ]
@@ -1488,83 +1488,83 @@
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 882618,
+      "items": 805677,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 183132,
+        "items": 166617,
         "share": 20.7
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 114606,
+        "items": 105128,
         "share": 13.0
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 112722,
-        "share": 12.8
+        "items": 102443,
+        "share": 12.7
        }
       ]
      },
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 162213,
+      "items": 145393,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 36731,
-        "share": 22.6
+        "items": 32938,
+        "share": 22.7
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 21758,
-        "share": 13.4
+        "items": 19577,
+        "share": 13.5
        },
        {
         "code": "0403030D0AA",
         "label": "Citalopram",
         "generic": true,
-        "items": 17177,
-        "share": 10.6
+        "items": 15270,
+        "share": 10.5
        }
       ]
      },
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 235537,
+      "items": 211740,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 52988,
-        "share": 22.5
+        "items": 47342,
+        "share": 22.4
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 37711,
-        "share": 16.0
+        "items": 33680,
+        "share": 15.9
        },
        {
         "code": "0403030D0AA",
         "label": "Citalopram",
         "generic": true,
-        "items": 25465,
+        "items": 22824,
         "share": 10.8
        }
       ]
@@ -1572,27 +1572,27 @@
      {
       "icb": "QOC",
       "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 91277,
+      "items": 84187,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 18730,
+        "items": 17222,
         "share": 20.5
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 13078,
-        "share": 14.3
+        "items": 11950,
+        "share": 14.2
        },
        {
         "code": "0403030D0AA",
         "label": "Citalopram",
         "generic": true,
-        "items": 9512,
+        "items": 8778,
         "share": 10.4
        }
       ]
@@ -1600,27 +1600,27 @@
      {
       "icb": "QSL",
       "name": "NHS Somerset",
-      "items": 98429,
+      "items": 91037,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 17743,
-        "share": 18.0
+        "items": 16527,
+        "share": 18.2
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 15254,
-        "share": 15.5
+        "items": 14036,
+        "share": 15.4
        },
        {
         "code": "0403030D0AA",
         "label": "Citalopram",
         "generic": true,
-        "items": 12690,
+        "items": 11709,
         "share": 12.9
        }
       ]
@@ -1628,224 +1628,224 @@
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 230785,
+      "items": 212432,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 45683,
-        "share": 19.8
+        "items": 41380,
+        "share": 19.5
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 25860,
-        "share": 11.2
+        "items": 23955,
+        "share": 11.3
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 25091,
-        "share": 10.9
+        "items": 22961,
+        "share": 10.8
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 215870,
+      "items": 198202,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 44372,
-        "share": 20.6
+        "items": 40652,
+        "share": 20.5
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 23704,
+        "items": 21794,
         "share": 11.0
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 21084,
-        "share": 9.8
+        "items": 19584,
+        "share": 9.9
        }
       ]
      },
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 350040,
+      "items": 312391,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 75554,
-        "share": 21.6
+        "items": 67733,
+        "share": 21.7
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 58414,
-        "share": 16.7
+        "items": 52359,
+        "share": 16.8
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 38534,
-        "share": 11.0
+        "items": 34600,
+        "share": 11.1
        }
       ]
      },
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 219311,
+      "items": 199374,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 51339,
-        "share": 23.4
+        "items": 46377,
+        "share": 23.3
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 30806,
-        "share": 14.0
+        "items": 28166,
+        "share": 14.1
        },
        {
         "code": "0403030D0AA",
         "label": "Citalopram",
         "generic": true,
-        "items": 25708,
-        "share": 11.7
+        "items": 23428,
+        "share": 11.8
        }
       ]
      },
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 523586,
+      "items": 476134,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 98968,
-        "share": 18.9
+        "items": 89724,
+        "share": 18.8
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 54166,
-        "share": 10.3
+        "items": 49499,
+        "share": 10.4
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 52012,
-        "share": 9.9
+        "items": 47449,
+        "share": 10.0
        }
       ]
      },
      {
       "icb": "S0E4D",
       "name": "NHS Thames Valley",
-      "items": 323387,
+      "items": 292537,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 71543,
+        "items": 64561,
         "share": 22.1
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 39110,
-        "share": 12.1
+        "items": 35045,
+        "share": 12.0
        },
        {
         "code": "0403030D0AA",
         "label": "Citalopram",
         "generic": true,
-        "items": 32056,
-        "share": 9.9
+        "items": 28658,
+        "share": 9.8
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 505761,
+      "items": 456810,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 110430,
+        "items": 99575,
         "share": 21.8
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 73675,
-        "share": 14.6
+        "items": 66227,
+        "share": 14.5
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 59811,
-        "share": 11.8
+        "items": 54138,
+        "share": 11.9
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 560662,
+      "items": 513412,
       "leaders": [
        {
         "code": "0403030Q0AA",
         "label": "Sertraline",
         "generic": true,
-        "items": 100093,
-        "share": 17.9
+        "items": 90750,
+        "share": 17.7
        },
        {
         "code": "0403040X0AA",
         "label": "Mirtazapine",
         "generic": true,
-        "items": 63992,
-        "share": 11.4
+        "items": 58933,
+        "share": 11.5
        },
        {
         "code": "0403010B0AA",
         "label": "Amitriptyline",
         "generic": true,
-        "items": 55536,
-        "share": 9.9
+        "items": 50146,
+        "share": 9.8
        }
       ]
      }

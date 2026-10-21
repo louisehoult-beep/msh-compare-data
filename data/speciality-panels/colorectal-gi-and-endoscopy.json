@@ -22,7 +22,7 @@
   "drugTariff": "2026-10-21",
   "localIntel": "2026-10-21",
   "supplierDirectory": "2026-10-21",
-  "gpPrescribing": "2026-09-30",
+  "gpPrescribing": "2026-10-21",
   "mhraDsu": "2026-10-19",
   "drugTariffViiia": "2026-10-21",
   "hospitalPrescribing": "2026-09-30"
@@ -35,10 +35,10 @@
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "NHSBSA Drug Tariff Part IXC for the stated effective month, summarised. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's.",
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: endoscopy, gastro, ostomy). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 4 of the 8 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
-  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202608) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (11 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-19.",
   "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF chapter 1. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 51 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first.",
-  "marketShare": "Computed at every build from NHSBSA data, not bought in and not estimated. PRIMARY CARE: every item dispensed in England against a GP practice prescription, English Prescribing Dataset with SNOMED code, for the BNF codes named on each market (23.35, 23.60, 23.94, 23.96), latest month 202607, with a 12-month total. SECONDARY CARE: NHS trust prescriptions dispensed in a community pharmacy (NHSBSA hospital prescribing dispensed in the community), the same BNF codes, 12 months; it is not in-hospital use, which NHSBSA publishes only by chemical substance and so cannot show a brand. DRUG TARIFF: every Part IX line NHSBSA files under the same BNF codes, in any part, counted in tariff lines per supplier, which measures what is listed and reimbursable, not what is sold. A BRAND is the first word of NHSBSA's product label, so the products of one range are counted together; a label that names its supplier in brackets stays on its own, and every generic is one row. Share is share of ITEMS, never company share: the data does not name the company, and one company can own several brands. A change on a year earlier is printed only where that month had at least 25 items. An ICB's share is the brand's items as a share of that ICB's whole market in the same month."
+  "marketShare": "Computed at every build from NHSBSA data, not bought in and not estimated. PRIMARY CARE: every item dispensed in England against a GP practice prescription, English Prescribing Dataset with SNOMED code, for the BNF codes named on each market (23.35, 23.60, 23.94, 23.96), latest month 202608, with a 12-month total. SECONDARY CARE: NHS trust prescriptions dispensed in a community pharmacy (NHSBSA hospital prescribing dispensed in the community), the same BNF codes, 12 months; it is not in-hospital use, which NHSBSA publishes only by chemical substance and so cannot show a brand. DRUG TARIFF: every Part IX line NHSBSA files under the same BNF codes, in any part, counted in tariff lines per supplier, which measures what is listed and reimbursable, not what is sold. A BRAND is the first word of NHSBSA's product label, so the products of one range are counted together; a label that names its supplier in brackets stays on its own, and every generic is one row. Share is share of ITEMS, never company share: the data does not name the company, and one company can own several brands. A change on a year earlier is printed only where that month had at least 25 items. An ICB's share is the brand's items as a share of that ICB's whole market in the same month."
  },
  "counts": {
   "frameworks": 5,
@@ -2748,14 +2748,14 @@
   }
  ],
  "gpPrescribing": {
-  "generatedOn": "2026-09-30",
+  "generatedOn": "2026-10-21",
   "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
   "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
   "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
   "periods": [
-   "202507",
-   "202607"
+   "202508",
+   "202608"
   ],
   "minBaselineItems": 25,
   "defined": true,
@@ -2767,131 +2767,131 @@
      "chapter 23"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 736618,
-    "cost": 39720244,
-    "items12m": 8017501,
-    "cost12m": 433480967,
-    "itemsYoY": 6.8,
-    "products": 4690,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 658439,
+    "cost": 35536946,
+    "items12m": 8045006,
+    "cost12m": 435090742,
+    "itemsYoY": 4.4,
+    "products": 4534,
     "topNational": [
      {
       "code": "23803068001",
       "label": "Medi Derma-S barrier cream",
       "generic": false,
-      "items": 123968,
-      "share": 16.8,
-      "cost": 773113,
-      "yoy": 19.6
-     },
-     {
-      "code": "23803108011",
-      "label": "Cavilon Durable barrier cream",
-      "generic": false,
-      "items": 35957,
-      "share": 4.9,
-      "cost": 255266,
-      "yoy": 4.7
+      "items": 110972,
+      "share": 16.9,
+      "cost": 712725,
+      "yoy": 13.3
      },
      {
       "code": "23804708007",
       "label": "Proshield Plus skin protective",
       "generic": false,
-      "items": 35096,
+      "items": 31965,
+      "share": 4.9,
+      "cost": 407289,
+      "yoy": -4.7
+     },
+     {
+      "code": "23803108011",
+      "label": "Cavilon Durable barrier cream",
+      "generic": false,
+      "items": 31821,
       "share": 4.8,
-      "cost": 445353,
-      "yoy": -5.8
+      "cost": 228888,
+      "yoy": -0.1
      },
      {
       "code": "23153931500",
       "label": "StoCare Remove medical adhesive remover spray",
       "generic": false,
-      "items": 20274,
-      "share": 2.8,
-      "cost": 300161,
-      "yoy": 20.7
+      "items": 18096,
+      "share": 2.7,
+      "cost": 269661,
+      "yoy": 16.5
      },
      {
       "code": "23806558001",
       "label": "AproDerm barrier cream",
       "generic": false,
-      "items": 20222,
+      "items": 18094,
       "share": 2.7,
-      "cost": 136690,
-      "yoy": 29.5
+      "cost": 123767,
+      "yoy": 18.5
      },
      {
       "code": "23803068010",
       "label": "Medi Derma-Pro skin protectant ointment",
       "generic": false,
-      "items": 16448,
-      "share": 2.2,
-      "cost": 161606,
-      "yoy": 19.9
+      "items": 14851,
+      "share": 2.3,
+      "cost": 149989,
+      "yoy": 17.2
      },
      {
       "code": "23804708006",
       "label": "Proshield Foam & Spray skin cleanser",
       "generic": false,
-      "items": 15603,
-      "share": 2.1,
-      "cost": 127017,
-      "yoy": -5.0
+      "items": 14267,
+      "share": 2.2,
+      "cost": 116675,
+      "yoy": -2.2
      },
      {
       "code": "23150701505",
       "label": "Dansac EasiSpray adhesive remover",
       "generic": false,
-      "items": 14534,
+      "items": 13081,
       "share": 2.0,
-      "cost": 332066,
-      "yoy": 0.4
+      "cost": 298242,
+      "yoy": -0.1
      },
      {
       "code": "23051009001",
       "label": "Brava elastic tape",
       "generic": false,
-      "items": 12752,
+      "items": 11510,
       "share": 1.7,
-      "cost": 565702,
-      "yoy": 9.7
+      "cost": 506549,
+      "yoy": 5.8
      },
      {
       "code": "23803068009",
       "label": "Medi Derma-Pro Foam & Spray incontinence cleanser",
       "generic": false,
-      "items": 12261,
+      "items": 11020,
       "share": 1.7,
-      "cost": 84884,
-      "yoy": 21.5
+      "cost": 78782,
+      "yoy": 18.8
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 11977,
+      "items": 10371,
       "leaders": [
        {
         "code": "23803108011",
         "label": "Cavilon Durable barrier cream",
         "generic": false,
-        "items": 2377,
-        "share": 19.8
+        "items": 2092,
+        "share": 20.2
        },
        {
         "code": "23806558001",
         "label": "AproDerm barrier cream",
         "generic": false,
-        "items": 2314,
-        "share": 19.3
+        "items": 2062,
+        "share": 19.9
        },
        {
         "code": "23803378008",
         "label": "Guard Non Sting barrier film sachets",
         "generic": false,
-        "items": 289,
+        "items": 246,
         "share": 2.4
        }
       ]
@@ -2899,335 +2899,335 @@
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 20982,
+      "items": 19404,
       "leaders": [
        {
         "code": "23804708007",
         "label": "Proshield Plus skin protective",
         "generic": false,
-        "items": 3915,
-        "share": 18.7
+        "items": 3690,
+        "share": 19.0
        },
        {
         "code": "23803108011",
         "label": "Cavilon Durable barrier cream",
         "generic": false,
-        "items": 3464,
-        "share": 16.5
+        "items": 2980,
+        "share": 15.4
        },
        {
         "code": "23804708006",
         "label": "Proshield Foam & Spray skin cleanser",
         "generic": false,
-        "items": 2233,
-        "share": 10.6
+        "items": 2204,
+        "share": 11.4
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 17873,
+      "items": 15656,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 2589,
+        "items": 2269,
         "share": 14.5
-       },
-       {
-        "code": "23803108011",
-        "label": "Cavilon Durable barrier cream",
-        "generic": false,
-        "items": 1676,
-        "share": 9.4
        },
        {
         "code": "23804708007",
         "label": "Proshield Plus skin protective",
         "generic": false,
-        "items": 1448,
-        "share": 8.1
+        "items": 1334,
+        "share": 8.5
+       },
+       {
+        "code": "23803108011",
+        "label": "Cavilon Durable barrier cream",
+        "generic": false,
+        "items": 1286,
+        "share": 8.2
        }
       ]
      },
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 7534,
+      "items": 7005,
       "leaders": [
        {
         "code": "23153931500",
         "label": "StoCare Remove medical adhesive remover spray",
         "generic": false,
-        "items": 1064,
-        "share": 14.1
+        "items": 958,
+        "share": 13.7
        },
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 1026,
-        "share": 13.6
+        "items": 948,
+        "share": 13.5
        },
        {
         "code": "23803068010",
         "label": "Medi Derma-Pro skin protectant ointment",
         "generic": false,
-        "items": 334,
-        "share": 4.4
+        "items": 269,
+        "share": 3.8
        }
       ]
      },
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 35507,
+      "items": 30959,
       "leaders": [
-       {
-        "code": "23803068001",
-        "label": "Medi Derma-S barrier cream",
-        "generic": false,
-        "items": 4636,
-        "share": 13.1
-       },
        {
         "code": "23803108011",
         "label": "Cavilon Durable barrier cream",
         "generic": false,
-        "items": 4365,
-        "share": 12.3
+        "items": 3932,
+        "share": 12.7
+       },
+       {
+        "code": "23803068001",
+        "label": "Medi Derma-S barrier cream",
+        "generic": false,
+        "items": 3907,
+        "share": 12.6
        },
        {
         "code": "23153931500",
         "label": "StoCare Remove medical adhesive remover spray",
         "generic": false,
-        "items": 1951,
-        "share": 5.5
+        "items": 1722,
+        "share": 5.6
        }
       ]
      },
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 44889,
+      "items": 39818,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 8093,
-        "share": 18.0
+        "items": 7132,
+        "share": 17.9
        },
        {
         "code": "23153931500",
         "label": "StoCare Remove medical adhesive remover spray",
         "generic": false,
-        "items": 2495,
-        "share": 5.6
-       },
-       {
-        "code": "23803108011",
-        "label": "Cavilon Durable barrier cream",
-        "generic": false,
-        "items": 2451,
-        "share": 5.5
-       }
-      ]
-     },
-     {
-      "icb": "QT6",
-      "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 8443,
-      "leaders": [
-       {
-        "code": "23803068001",
-        "label": "Medi Derma-S barrier cream",
-        "generic": false,
-        "items": 1789,
-        "share": 21.2
-       },
-       {
-        "code": "23153931500",
-        "label": "StoCare Remove medical adhesive remover spray",
-        "generic": false,
-        "items": 693,
-        "share": 8.2
-       },
-       {
-        "code": "23803108011",
-        "label": "Cavilon Durable barrier cream",
-        "generic": false,
-        "items": 230,
-        "share": 2.7
-       }
-      ]
-     },
-     {
-      "icb": "QWU",
-      "name": "NHS Coventry and Warwickshire",
-      "items": 14452,
-      "leaders": [
-       {
-        "code": "23803068001",
-        "label": "Medi Derma-S barrier cream",
-        "generic": false,
-        "items": 3116,
-        "share": 21.6
-       },
-       {
-        "code": "23804708007",
-        "label": "Proshield Plus skin protective",
-        "generic": false,
-        "items": 1250,
-        "share": 8.6
-       },
-       {
-        "code": "23150701505",
-        "label": "Dansac EasiSpray adhesive remover",
-        "generic": false,
-        "items": 854,
-        "share": 5.9
-       }
-      ]
-     },
-     {
-      "icb": "QJ2",
-      "name": "NHS Derby and Derbyshire",
-      "items": 15627,
-      "leaders": [
-       {
-        "code": "23803068001",
-        "label": "Medi Derma-S barrier cream",
-        "generic": false,
-        "items": 4336,
-        "share": 27.7
-       },
-       {
-        "code": "23051009001",
-        "label": "Brava elastic tape",
-        "generic": false,
-        "items": 477,
-        "share": 3.1
-       },
-       {
-        "code": "23154101508",
-        "label": "Salts adhesive remover spray",
-        "generic": false,
-        "items": 409,
-        "share": 2.6
-       }
-      ]
-     },
-     {
-      "icb": "QJK",
-      "name": "NHS Devon",
-      "items": 21403,
-      "leaders": [
-       {
-        "code": "23803068001",
-        "label": "Medi Derma-S barrier cream",
-        "generic": false,
-        "items": 6246,
-        "share": 29.2
-       },
-       {
-        "code": "23153931500",
-        "label": "StoCare Remove medical adhesive remover spray",
-        "generic": false,
-        "items": 1086,
-        "share": 5.1
-       },
-       {
-        "code": "23803068004",
-        "label": "Medi Derma-S non-sting barrier film foam",
-        "generic": false,
-        "items": 976,
-        "share": 4.6
-       }
-      ]
-     },
-     {
-      "icb": "QVV",
-      "name": "NHS Dorset",
-      "items": 12895,
-      "leaders": [
-       {
-        "code": "23803068001",
-        "label": "Medi Derma-S barrier cream",
-        "generic": false,
-        "items": 4120,
-        "share": 32.0
-       },
-       {
-        "code": "23800778000",
-        "label": "Cutimed Protect cream",
-        "generic": false,
-        "items": 853,
-        "share": 6.6
-       },
-       {
-        "code": "23803068008",
-        "label": "Medi Derma-S non-sting medical barrier film pump spray",
-        "generic": false,
-        "items": 612,
-        "share": 4.7
-       }
-      ]
-     },
-     {
-      "icb": "D7T5G",
-      "name": "NHS Essex",
-      "items": 22470,
-      "leaders": [
-       {
-        "code": "23803068001",
-        "label": "Medi Derma-S barrier cream",
-        "generic": false,
-        "items": 3067,
-        "share": 13.6
-       },
-       {
-        "code": "23803108011",
-        "label": "Cavilon Durable barrier cream",
-        "generic": false,
-        "items": 1254,
+        "items": 2215,
         "share": 5.6
        },
        {
         "code": "23806558001",
         "label": "AproDerm barrier cream",
         "generic": false,
-        "items": 1122,
+        "items": 2129,
+        "share": 5.3
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 7893,
+      "leaders": [
+       {
+        "code": "23803068001",
+        "label": "Medi Derma-S barrier cream",
+        "generic": false,
+        "items": 1549,
+        "share": 19.6
+       },
+       {
+        "code": "23153931500",
+        "label": "StoCare Remove medical adhesive remover spray",
+        "generic": false,
+        "items": 620,
+        "share": 7.9
+       },
+       {
+        "code": "23803108011",
+        "label": "Cavilon Durable barrier cream",
+        "generic": false,
+        "items": 235,
+        "share": 3.0
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 12823,
+      "leaders": [
+       {
+        "code": "23803068001",
+        "label": "Medi Derma-S barrier cream",
+        "generic": false,
+        "items": 2710,
+        "share": 21.1
+       },
+       {
+        "code": "23804708007",
+        "label": "Proshield Plus skin protective",
+        "generic": false,
+        "items": 1130,
+        "share": 8.8
+       },
+       {
+        "code": "23150701505",
+        "label": "Dansac EasiSpray adhesive remover",
+        "generic": false,
+        "items": 763,
+        "share": 6.0
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 14503,
+      "leaders": [
+       {
+        "code": "23803068001",
+        "label": "Medi Derma-S barrier cream",
+        "generic": false,
+        "items": 4031,
+        "share": 27.8
+       },
+       {
+        "code": "23051009001",
+        "label": "Brava elastic tape",
+        "generic": false,
+        "items": 436,
+        "share": 3.0
+       },
+       {
+        "code": "23154101508",
+        "label": "Salts adhesive remover spray",
+        "generic": false,
+        "items": 362,
+        "share": 2.5
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 19509,
+      "leaders": [
+       {
+        "code": "23803068001",
+        "label": "Medi Derma-S barrier cream",
+        "generic": false,
+        "items": 5911,
+        "share": 30.3
+       },
+       {
+        "code": "23803068004",
+        "label": "Medi Derma-S non-sting barrier film foam",
+        "generic": false,
+        "items": 966,
         "share": 5.0
+       },
+       {
+        "code": "23153931500",
+        "label": "StoCare Remove medical adhesive remover spray",
+        "generic": false,
+        "items": 913,
+        "share": 4.7
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 11622,
+      "leaders": [
+       {
+        "code": "23803068001",
+        "label": "Medi Derma-S barrier cream",
+        "generic": false,
+        "items": 3590,
+        "share": 30.9
+       },
+       {
+        "code": "23800778000",
+        "label": "Cutimed Protect cream",
+        "generic": false,
+        "items": 731,
+        "share": 6.3
+       },
+       {
+        "code": "23803068008",
+        "label": "Medi Derma-S non-sting medical barrier film pump spray",
+        "generic": false,
+        "items": 565,
+        "share": 4.9
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 20624,
+      "leaders": [
+       {
+        "code": "23803068001",
+        "label": "Medi Derma-S barrier cream",
+        "generic": false,
+        "items": 2782,
+        "share": 13.5
+       },
+       {
+        "code": "23803108011",
+        "label": "Cavilon Durable barrier cream",
+        "generic": false,
+        "items": 1218,
+        "share": 5.9
+       },
+       {
+        "code": "23806558001",
+        "label": "AproDerm barrier cream",
+        "generic": false,
+        "items": 1105,
+        "share": 5.4
        }
       ]
      },
      {
       "icb": "QR1",
       "name": "NHS Gloucestershire",
-      "items": 9489,
+      "items": 8397,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 2104,
-        "share": 22.2
-       },
-       {
-        "code": "23803108011",
-        "label": "Cavilon Durable barrier cream",
-        "generic": false,
-        "items": 456,
-        "share": 4.8
+        "items": 1833,
+        "share": 21.8
        },
        {
         "code": "23803068004",
         "label": "Medi Derma-S non-sting barrier film foam",
         "generic": false,
-        "items": 439,
+        "items": 406,
+        "share": 4.8
+       },
+       {
+        "code": "23803108011",
+        "label": "Cavilon Durable barrier cream",
+        "generic": false,
+        "items": 387,
         "share": 4.6
        }
       ]
@@ -3235,644 +3235,644 @@
      {
       "icb": "QOP",
       "name": "NHS Greater Manchester",
-      "items": 35796,
+      "items": 31862,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 5653,
-        "share": 15.8
+        "items": 5138,
+        "share": 16.1
        },
        {
         "code": "23150701505",
         "label": "Dansac EasiSpray adhesive remover",
         "generic": false,
-        "items": 1689,
+        "items": 1487,
         "share": 4.7
        },
        {
         "code": "23803108011",
         "label": "Cavilon Durable barrier cream",
         "generic": false,
-        "items": 1590,
-        "share": 4.4
+        "items": 1363,
+        "share": 4.3
        }
       ]
      },
      {
       "icb": "QRL",
       "name": "NHS Hampshire and Isle of Wight",
-      "items": 25860,
+      "items": 22174,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 6521,
-        "share": 25.2
+        "items": 5522,
+        "share": 24.9
        },
        {
         "code": "23800908010",
         "label": "LBF barrier cream",
         "generic": false,
-        "items": 1408,
-        "share": 5.4
+        "items": 1099,
+        "share": 5.0
        },
        {
         "code": "23804708007",
         "label": "Proshield Plus skin protective",
         "generic": false,
-        "items": 1105,
-        "share": 4.3
+        "items": 933,
+        "share": 4.2
        }
       ]
      },
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 12792,
+      "items": 11923,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 3559,
-        "share": 27.8
+        "items": 3292,
+        "share": 27.6
        },
        {
         "code": "23155901501",
         "label": "Offmore adhesive remover spray",
         "generic": false,
-        "items": 679,
-        "share": 5.3
+        "items": 619,
+        "share": 5.2
        },
        {
         "code": "23803108011",
         "label": "Cavilon Durable barrier cream",
         "generic": false,
-        "items": 574,
-        "share": 4.5
+        "items": 499,
+        "share": 4.2
        }
       ]
      },
      {
       "icb": "QOQ",
       "name": "NHS Humber and North Yorkshire",
-      "items": 25067,
+      "items": 22085,
       "leaders": [
        {
         "code": "23804708007",
         "label": "Proshield Plus skin protective",
         "generic": false,
-        "items": 2153,
-        "share": 8.6
+        "items": 1988,
+        "share": 9.0
        },
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 1986,
-        "share": 7.9
+        "items": 1729,
+        "share": 7.8
        },
        {
         "code": "23803108011",
         "label": "Cavilon Durable barrier cream",
         "generic": false,
-        "items": 1338,
-        "share": 5.3
+        "items": 1114,
+        "share": 5.0
        }
       ]
      },
      {
       "icb": "QKS",
       "name": "NHS Kent and Medway",
-      "items": 22411,
+      "items": 19941,
       "leaders": [
        {
         "code": "23804708007",
         "label": "Proshield Plus skin protective",
         "generic": false,
-        "items": 3499,
-        "share": 15.6
-       },
-       {
-        "code": "23803108011",
-        "label": "Cavilon Durable barrier cream",
-        "generic": false,
-        "items": 2323,
-        "share": 10.4
+        "items": 3212,
+        "share": 16.1
        },
        {
         "code": "23153931500",
         "label": "StoCare Remove medical adhesive remover spray",
         "generic": false,
-        "items": 2274,
-        "share": 10.1
+        "items": 2053,
+        "share": 10.3
+       },
+       {
+        "code": "23803108011",
+        "label": "Cavilon Durable barrier cream",
+        "generic": false,
+        "items": 2000,
+        "share": 10.0
        }
       ]
      },
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 25008,
+      "items": 22352,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 5745,
-        "share": 23.0
+        "items": 5111,
+        "share": 22.9
        },
        {
         "code": "23150701505",
         "label": "Dansac EasiSpray adhesive remover",
         "generic": false,
-        "items": 871,
+        "items": 786,
         "share": 3.5
        },
        {
         "code": "23803068010",
         "label": "Medi Derma-Pro skin protectant ointment",
         "generic": false,
-        "items": 586,
-        "share": 2.3
+        "items": 501,
+        "share": 2.2
        }
       ]
      },
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 15451,
+      "items": 13160,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 2330,
-        "share": 15.1
+        "items": 2243,
+        "share": 17.0
        },
        {
         "code": "23803108011",
         "label": "Cavilon Durable barrier cream",
         "generic": false,
-        "items": 1402,
-        "share": 9.1
+        "items": 1247,
+        "share": 9.5
        },
        {
         "code": "23150901507",
         "label": "CliniPeel No Sting medical adhesive remover aerosol",
         "generic": false,
-        "items": 1190,
-        "share": 7.7
+        "items": 998,
+        "share": 7.6
        }
       ]
      },
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 15764,
+      "items": 14357,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 1768,
+        "items": 1605,
         "share": 11.2
        },
        {
         "code": "23803108011",
         "label": "Cavilon Durable barrier cream",
         "generic": false,
-        "items": 1687,
-        "share": 10.7
+        "items": 1553,
+        "share": 10.8
        },
        {
         "code": "23804708007",
         "label": "Proshield Plus skin protective",
         "generic": false,
-        "items": 896,
-        "share": 5.7
+        "items": 759,
+        "share": 5.3
        }
       ]
      },
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 25951,
+      "items": 23369,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 9386,
-        "share": 36.2
+        "items": 8491,
+        "share": 36.3
        },
        {
         "code": "23153361516",
         "label": "Lift Plus",
         "generic": false,
-        "items": 973,
-        "share": 3.7
+        "items": 924,
+        "share": 4.0
        },
        {
         "code": "23153931500",
         "label": "StoCare Remove medical adhesive remover spray",
         "generic": false,
-        "items": 661,
-        "share": 2.5
+        "items": 513,
+        "share": 2.2
        }
       ]
      },
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 13696,
+      "items": 12296,
       "leaders": [
        {
         "code": "23804708007",
         "label": "Proshield Plus skin protective",
         "generic": false,
-        "items": 1359,
-        "share": 9.9
+        "items": 1297,
+        "share": 10.5
        },
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 1294,
-        "share": 9.4
+        "items": 1237,
+        "share": 10.1
        },
        {
         "code": "23803108011",
         "label": "Cavilon Durable barrier cream",
         "generic": false,
-        "items": 717,
-        "share": 5.2
+        "items": 704,
+        "share": 5.7
        }
       ]
      },
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 41811,
+      "items": 37865,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 2942,
+        "items": 2653,
         "share": 7.0
        },
        {
         "code": "23803108011",
         "label": "Cavilon Durable barrier cream",
         "generic": false,
-        "items": 1939,
-        "share": 4.6
+        "items": 1764,
+        "share": 4.7
        },
        {
         "code": "23804708007",
         "label": "Proshield Plus skin protective",
         "generic": false,
-        "items": 1777,
-        "share": 4.3
+        "items": 1597,
+        "share": 4.2
        }
       ]
      },
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 9520,
+      "items": 8241,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 1456,
-        "share": 15.3
+        "items": 1361,
+        "share": 16.5
        },
        {
         "code": "23804708007",
         "label": "Proshield Plus skin protective",
         "generic": false,
-        "items": 662,
-        "share": 7.0
+        "items": 569,
+        "share": 6.9
        },
        {
         "code": "23153931500",
         "label": "StoCare Remove medical adhesive remover spray",
         "generic": false,
-        "items": 409,
-        "share": 4.3
+        "items": 365,
+        "share": 4.4
        }
       ]
      },
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 16390,
+      "items": 15322,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 4796,
-        "share": 29.3
+        "items": 4565,
+        "share": 29.8
        },
        {
         "code": "23150101504",
         "label": "Adapt No-Sting medical adhesive remover aerosol",
         "generic": false,
-        "items": 1018,
-        "share": 6.2
+        "items": 922,
+        "share": 6.0
        },
        {
         "code": "23803068004",
         "label": "Medi Derma-S non-sting barrier film foam",
         "generic": false,
-        "items": 443,
-        "share": 2.7
+        "items": 399,
+        "share": 2.6
        }
       ]
      },
      {
       "icb": "QOC",
       "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 8222,
+      "items": 7484,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 1473,
-        "share": 17.9
+        "items": 1330,
+        "share": 17.8
        },
        {
         "code": "23806558001",
         "label": "AproDerm barrier cream",
         "generic": false,
-        "items": 969,
-        "share": 11.8
+        "items": 932,
+        "share": 12.5
        },
        {
         "code": "23803068009",
         "label": "Medi Derma-Pro Foam & Spray incontinence cleanser",
         "generic": false,
-        "items": 391,
-        "share": 4.8
+        "items": 345,
+        "share": 4.6
        }
       ]
      },
      {
       "icb": "QSL",
       "name": "NHS Somerset",
-      "items": 8311,
+      "items": 7498,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 2132,
-        "share": 25.7
+        "items": 1952,
+        "share": 26.0
        },
        {
         "code": "23803068010",
         "label": "Medi Derma-Pro skin protectant ointment",
         "generic": false,
-        "items": 585,
-        "share": 7.0
+        "items": 496,
+        "share": 6.6
        },
        {
         "code": "23803068009",
         "label": "Medi Derma-Pro Foam & Spray incontinence cleanser",
         "generic": false,
-        "items": 364,
-        "share": 4.4
+        "items": 304,
+        "share": 4.1
        }
       ]
      },
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 16660,
+      "items": 14337,
       "leaders": [
        {
         "code": "23804708007",
         "label": "Proshield Plus skin protective",
         "generic": false,
-        "items": 2815,
-        "share": 16.9
+        "items": 2561,
+        "share": 17.9
        },
        {
         "code": "23806558001",
         "label": "AproDerm barrier cream",
         "generic": false,
-        "items": 1535,
-        "share": 9.2
+        "items": 1369,
+        "share": 9.5
        },
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 906,
-        "share": 5.4
+        "items": 811,
+        "share": 5.7
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 14097,
+      "items": 12336,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 3050,
-        "share": 21.6
+        "items": 2730,
+        "share": 22.1
        },
        {
         "code": "23803068010",
         "label": "Medi Derma-Pro skin protectant ointment",
         "generic": false,
-        "items": 2134,
+        "items": 1865,
         "share": 15.1
        },
        {
         "code": "23804708007",
         "label": "Proshield Plus skin protective",
         "generic": false,
-        "items": 529,
-        "share": 3.8
+        "items": 494,
+        "share": 4.0
        }
       ]
      },
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 19977,
+      "items": 17533,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 4431,
-        "share": 22.2
+        "items": 3686,
+        "share": 21.0
        },
        {
         "code": "23803068010",
         "label": "Medi Derma-Pro skin protectant ointment",
         "generic": false,
-        "items": 1291,
-        "share": 6.5
+        "items": 1119,
+        "share": 6.4
        },
        {
         "code": "23803068009",
         "label": "Medi Derma-Pro Foam & Spray incontinence cleanser",
         "generic": false,
-        "items": 930,
-        "share": 4.7
+        "items": 813,
+        "share": 4.6
        }
       ]
      },
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 18165,
+      "items": 16576,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 4481,
-        "share": 24.7
+        "items": 4014,
+        "share": 24.2
        },
        {
         "code": "23800298005",
         "label": "Sorbaderm barrier cream",
         "generic": false,
-        "items": 638,
+        "items": 588,
         "share": 3.5
        },
        {
         "code": "23803068008",
         "label": "Medi Derma-S non-sting medical barrier film pump spray",
         "generic": false,
-        "items": 416,
-        "share": 2.3
+        "items": 411,
+        "share": 2.5
        }
       ]
      },
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 33514,
+      "items": 29708,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 5075,
-        "share": 15.1
+        "items": 4229,
+        "share": 14.2
        },
        {
         "code": "23806558002",
         "label": "Derma Protective Plus skin protectant",
         "generic": false,
-        "items": 3192,
-        "share": 9.5
+        "items": 2893,
+        "share": 9.7
        },
        {
         "code": "23804708007",
         "label": "Proshield Plus skin protective",
         "generic": false,
-        "items": 1337,
-        "share": 4.0
+        "items": 1243,
+        "share": 4.2
        }
       ]
      },
      {
       "icb": "S0E4D",
       "name": "NHS Thames Valley",
-      "items": 24327,
+      "items": 21999,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 6211,
-        "share": 25.5
-       },
-       {
-        "code": "23804708007",
-        "label": "Proshield Plus skin protective",
-        "generic": false,
-        "items": 929,
-        "share": 3.8
+        "items": 5871,
+        "share": 26.7
        },
        {
         "code": "23803068010",
         "label": "Medi Derma-Pro skin protectant ointment",
         "generic": false,
-        "items": 915,
-        "share": 3.8
+        "items": 945,
+        "share": 4.3
+       },
+       {
+        "code": "23804708007",
+        "label": "Proshield Plus skin protective",
+        "generic": false,
+        "items": 856,
+        "share": 3.9
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 32418,
+      "items": 29216,
       "leaders": [
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 3977,
-        "share": 12.3
+        "items": 3455,
+        "share": 11.8
        },
        {
         "code": "23803068010",
         "label": "Medi Derma-Pro skin protectant ointment",
         "generic": false,
-        "items": 2103,
-        "share": 6.5
+        "items": 1832,
+        "share": 6.3
        },
        {
         "code": "23803108011",
         "label": "Cavilon Durable barrier cream",
         "generic": false,
-        "items": 1966,
-        "share": 6.1
+        "items": 1750,
+        "share": 6.0
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 31443,
+      "items": 27797,
       "leaders": [
        {
         "code": "23806558001",
         "label": "AproDerm barrier cream",
         "generic": false,
-        "items": 4470,
-        "share": 14.2
+        "items": 3983,
+        "share": 14.3
        },
        {
         "code": "23804708007",
         "label": "Proshield Plus skin protective",
         "generic": false,
-        "items": 3636,
-        "share": 11.6
+        "items": 3310,
+        "share": 11.9
        },
        {
         "code": "23803068001",
         "label": "Medi Derma-S barrier cream",
         "generic": false,
-        "items": 1664,
-        "share": 5.3
+        "items": 1425,
+        "share": 5.1
        }
       ]
      }
@@ -3885,131 +3885,131 @@
      "chapter 1"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 10688968,
-    "cost": 59768788,
-    "items12m": 121218446,
-    "cost12m": 674428728,
-    "itemsYoY": 2.1,
-    "products": 224,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 9684155,
+    "cost": 54994958,
+    "items12m": 121273398,
+    "cost12m": 674104838,
+    "itemsYoY": 0.6,
+    "products": 228,
     "topNational": [
      {
       "code": "0103050L0AA",
       "label": "Lansoprazole",
       "generic": true,
-      "items": 3362016,
+      "items": 3048429,
       "share": 31.5,
-      "cost": 3549987,
-      "yoy": 2.5
+      "cost": 3195662,
+      "yoy": 0.7
      },
      {
       "code": "0103050P0AA",
       "label": "Omeprazole",
       "generic": true,
-      "items": 3021915,
-      "share": 28.3,
-      "cost": 8066158,
-      "yoy": -2.6
+      "items": 2731432,
+      "share": 28.2,
+      "cost": 7414878,
+      "yoy": -4.2
      },
      {
       "code": "0103010H0AA",
       "label": "Famotidine",
       "generic": true,
-      "items": 473752,
-      "share": 4.4,
-      "cost": 610134,
-      "yoy": 27.6
+      "items": 437735,
+      "share": 4.5,
+      "cost": 557901,
+      "yoy": 25.3
      },
      {
       "code": "0106020M0AA",
       "label": "Senna",
       "generic": true,
-      "items": 430088,
+      "items": 391973,
       "share": 4.0,
-      "cost": 366410,
-      "yoy": 6.0
+      "cost": 458695,
+      "yoy": 4.5
      },
      {
       "code": "0106040M0BC",
       "label": "Laxido Orange oral powder sachets sugar free",
       "generic": false,
-      "items": 282919,
-      "share": 2.6,
-      "cost": 2516992,
-      "yoy": 5.2
+      "items": 266585,
+      "share": 2.8,
+      "cost": 2358803,
+      "yoy": 9.4
      },
      {
       "code": "0106040M0AA",
       "label": "Macrogol compound oral powder sachets NPF sugar free",
       "generic": true,
-      "items": 267928,
+      "items": 245151,
       "share": 2.5,
-      "cost": 2998300,
-      "yoy": 14.9
+      "cost": 2740525,
+      "yoy": 13.8
      },
      {
       "code": "0106020I0AA",
       "label": "Docusate",
       "generic": true,
-      "items": 259355,
+      "items": 234447,
       "share": 2.4,
-      "cost": 2211112,
-      "yoy": 5.6
+      "cost": 1983898,
+      "yoy": 3.1
      },
      {
       "code": "0103050E0AA",
       "label": "Esomeprazole",
       "generic": true,
-      "items": 250740,
+      "items": 226833,
       "share": 2.3,
-      "cost": 781245,
-      "yoy": 1.7
+      "cost": 858309,
+      "yoy": 0.6
      },
      {
       "code": "0106040G0AA",
       "label": "Lactulose",
       "generic": true,
-      "items": 220194,
-      "share": 2.1,
-      "cost": 1618760,
-      "yoy": 2.3
+      "items": 197733,
+      "share": 2.0,
+      "cost": 1150467,
+      "yoy": 0.7
      },
      {
       "code": "0101021B0BE",
       "label": "Gaviscon Advance oral susp peppermint (Reckitt Benckiser)",
       "generic": false,
-      "items": 199990,
+      "items": 179376,
       "share": 1.9,
-      "cost": 2165236,
-      "yoy": 0.0
+      "cost": 2013642,
+      "yoy": -2.6
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 174721,
+      "items": 156724,
       "leaders": [
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 67831,
+        "items": 60800,
         "share": 38.8
        },
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 39915,
-        "share": 22.8
+        "items": 35891,
+        "share": 22.9
        },
        {
         "code": "0103010H0AA",
         "label": "Famotidine",
         "generic": true,
-        "items": 9460,
+        "items": 8523,
         "share": 5.4
        }
       ]
@@ -4017,55 +4017,55 @@
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 230177,
+      "items": 202752,
       "leaders": [
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 73317,
-        "share": 31.9
+        "items": 65082,
+        "share": 32.1
        },
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 49229,
+        "items": 43417,
         "share": 21.4
        },
        {
         "code": "0106020M0AA",
         "label": "Senna",
         "generic": true,
-        "items": 15389,
-        "share": 6.7
+        "items": 13463,
+        "share": 6.6
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 209126,
+      "items": 186266,
       "leaders": [
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 83052,
+        "items": 73889,
         "share": 39.7
        },
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 41910,
-        "share": 20.0
+        "items": 37457,
+        "share": 20.1
        },
        {
         "code": "0106020M0AA",
         "label": "Senna",
         "generic": true,
-        "items": 8722,
+        "items": 7744,
         "share": 4.2
        }
       ]
@@ -4073,83 +4073,83 @@
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 132349,
+      "items": 120737,
       "leaders": [
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 49776,
-        "share": 37.6
+        "items": 45164,
+        "share": 37.4
        },
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 27089,
+        "items": 24791,
         "share": 20.5
        },
        {
         "code": "0106020M0AA",
         "label": "Senna",
         "generic": true,
-        "items": 5995,
-        "share": 4.5
+        "items": 5363,
+        "share": 4.4
        }
       ]
      },
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 505170,
+      "items": 455699,
       "leaders": [
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 167136,
-        "share": 33.1
+        "items": 149065,
+        "share": 32.7
        },
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 135379,
-        "share": 26.8
+        "items": 122376,
+        "share": 26.9
        },
        {
         "code": "0103010H0AA",
         "label": "Famotidine",
         "generic": true,
-        "items": 28038,
-        "share": 5.6
+        "items": 25782,
+        "share": 5.7
        }
       ]
      },
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 590422,
+      "items": 529601,
       "leaders": [
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 167478,
-        "share": 28.4
+        "items": 150899,
+        "share": 28.5
        },
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 166714,
+        "items": 149190,
         "share": 28.2
        },
        {
         "code": "0106020M0AA",
         "label": "Senna",
         "generic": true,
-        "items": 24856,
+        "items": 22260,
         "share": 4.2
        }
       ]
@@ -4157,391 +4157,391 @@
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 129472,
+      "items": 117072,
       "leaders": [
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 56261,
+        "items": 50941,
         "share": 43.5
        },
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 24050,
+        "items": 21735,
         "share": 18.6
        },
        {
         "code": "0103010H0AA",
         "label": "Famotidine",
         "generic": true,
-        "items": 8158,
-        "share": 6.3
+        "items": 7455,
+        "share": 6.4
        }
       ]
      },
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 181976,
+      "items": 164432,
       "leaders": [
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 68101,
-        "share": 37.4
+        "items": 61257,
+        "share": 37.3
        },
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 40037,
-        "share": 22.0
+        "items": 36595,
+        "share": 22.3
        },
        {
         "code": "0106020M0AA",
         "label": "Senna",
         "generic": true,
-        "items": 8652,
-        "share": 4.8
+        "items": 7619,
+        "share": 4.6
        }
       ]
      },
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 210771,
+      "items": 186378,
       "leaders": [
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 74232,
+        "items": 65599,
         "share": 35.2
        },
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 49638,
+        "items": 44025,
         "share": 23.6
        },
        {
         "code": "0103010H0AA",
         "label": "Famotidine",
         "generic": true,
-        "items": 8208,
-        "share": 3.9
+        "items": 7489,
+        "share": 4.0
        }
       ]
      },
      {
       "icb": "QJK",
       "name": "NHS Devon",
-      "items": 235384,
+      "items": 214581,
       "leaders": [
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 88704,
-        "share": 37.7
-       },
-       {
-        "code": "0103050L0AA",
-        "label": "Lansoprazole",
-        "generic": true,
-        "items": 52512,
-        "share": 22.3
-       },
-       {
-        "code": "0106040M0BC",
-        "label": "Laxido Orange oral powder sachets sugar free",
-        "generic": false,
-        "items": 10492,
-        "share": 4.5
-       }
-      ]
-     },
-     {
-      "icb": "QVV",
-      "name": "NHS Dorset",
-      "items": 144721,
-      "leaders": [
-       {
-        "code": "0103050P0AA",
-        "label": "Omeprazole",
-        "generic": true,
-        "items": 50993,
-        "share": 35.2
-       },
-       {
-        "code": "0103050L0AA",
-        "label": "Lansoprazole",
-        "generic": true,
-        "items": 36458,
-        "share": 25.2
-       },
-       {
-        "code": "0106040M0AA",
-        "label": "Macrogol compound oral powder sachets NPF sugar free",
-        "generic": true,
-        "items": 8464,
-        "share": 5.8
-       }
-      ]
-     },
-     {
-      "icb": "D7T5G",
-      "name": "NHS Essex",
-      "items": 316825,
-      "leaders": [
-       {
-        "code": "0103050L0AA",
-        "label": "Lansoprazole",
-        "generic": true,
-        "items": 112958,
-        "share": 35.7
-       },
-       {
-        "code": "0103050P0AA",
-        "label": "Omeprazole",
-        "generic": true,
-        "items": 89389,
-        "share": 28.2
-       },
-       {
-        "code": "0106040M0BC",
-        "label": "Laxido Orange oral powder sachets sugar free",
-        "generic": false,
-        "items": 13415,
-        "share": 4.2
-       }
-      ]
-     },
-     {
-      "icb": "QR1",
-      "name": "NHS Gloucestershire",
-      "items": 122192,
-      "leaders": [
-       {
-        "code": "0103050P0AA",
-        "label": "Omeprazole",
-        "generic": true,
-        "items": 45176,
-        "share": 37.0
-       },
-       {
-        "code": "0103050L0AA",
-        "label": "Lansoprazole",
-        "generic": true,
-        "items": 28586,
-        "share": 23.4
-       },
-       {
-        "code": "0106020I0AA",
-        "label": "Docusate",
-        "generic": true,
-        "items": 8544,
-        "share": 7.0
-       }
-      ]
-     },
-     {
-      "icb": "QOP",
-      "name": "NHS Greater Manchester",
-      "items": 613209,
-      "leaders": [
-       {
-        "code": "0103050P0AA",
-        "label": "Omeprazole",
-        "generic": true,
-        "items": 205668,
-        "share": 33.5
-       },
-       {
-        "code": "0103050L0AA",
-        "label": "Lansoprazole",
-        "generic": true,
-        "items": 150458,
-        "share": 24.5
-       },
-       {
-        "code": "0103010H0AA",
-        "label": "Famotidine",
-        "generic": true,
-        "items": 30563,
-        "share": 5.0
-       }
-      ]
-     },
-     {
-      "icb": "QRL",
-      "name": "NHS Hampshire and Isle of Wight",
-      "items": 328279,
-      "leaders": [
-       {
-        "code": "0103050P0AA",
-        "label": "Omeprazole",
-        "generic": true,
-        "items": 123437,
+        "items": 80677,
         "share": 37.6
        },
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 68225,
-        "share": 20.8
+        "items": 47823,
+        "share": 22.3
+       },
+       {
+        "code": "0106040M0BC",
+        "label": "Laxido Orange oral powder sachets sugar free",
+        "generic": false,
+        "items": 9775,
+        "share": 4.6
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 130926,
+      "leaders": [
+       {
+        "code": "0103050P0AA",
+        "label": "Omeprazole",
+        "generic": true,
+        "items": 46157,
+        "share": 35.3
+       },
+       {
+        "code": "0103050L0AA",
+        "label": "Lansoprazole",
+        "generic": true,
+        "items": 32912,
+        "share": 25.1
+       },
+       {
+        "code": "0106040M0AA",
+        "label": "Macrogol compound oral powder sachets NPF sugar free",
+        "generic": true,
+        "items": 7752,
+        "share": 5.9
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 290578,
+      "leaders": [
+       {
+        "code": "0103050L0AA",
+        "label": "Lansoprazole",
+        "generic": true,
+        "items": 103283,
+        "share": 35.5
+       },
+       {
+        "code": "0103050P0AA",
+        "label": "Omeprazole",
+        "generic": true,
+        "items": 81448,
+        "share": 28.0
+       },
+       {
+        "code": "0106040M0BC",
+        "label": "Laxido Orange oral powder sachets sugar free",
+        "generic": false,
+        "items": 12855,
+        "share": 4.4
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 112467,
+      "leaders": [
+       {
+        "code": "0103050P0AA",
+        "label": "Omeprazole",
+        "generic": true,
+        "items": 41171,
+        "share": 36.6
+       },
+       {
+        "code": "0103050L0AA",
+        "label": "Lansoprazole",
+        "generic": true,
+        "items": 25893,
+        "share": 23.0
+       },
+       {
+        "code": "0106020I0AA",
+        "label": "Docusate",
+        "generic": true,
+        "items": 8005,
+        "share": 7.1
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 555968,
+      "leaders": [
+       {
+        "code": "0103050P0AA",
+        "label": "Omeprazole",
+        "generic": true,
+        "items": 185434,
+        "share": 33.4
+       },
+       {
+        "code": "0103050L0AA",
+        "label": "Lansoprazole",
+        "generic": true,
+        "items": 136607,
+        "share": 24.6
        },
        {
         "code": "0103010H0AA",
         "label": "Famotidine",
         "generic": true,
-        "items": 16633,
+        "items": 28350,
         "share": 5.1
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 298104,
+      "leaders": [
+       {
+        "code": "0103050P0AA",
+        "label": "Omeprazole",
+        "generic": true,
+        "items": 112609,
+        "share": 37.8
+       },
+       {
+        "code": "0103050L0AA",
+        "label": "Lansoprazole",
+        "generic": true,
+        "items": 62477,
+        "share": 21.0
+       },
+       {
+        "code": "0103010H0AA",
+        "label": "Famotidine",
+        "generic": true,
+        "items": 15535,
+        "share": 5.2
        }
       ]
      },
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 140820,
+      "items": 129105,
       "leaders": [
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 47878,
-        "share": 34.0
+        "items": 43492,
+        "share": 33.7
        },
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 33702,
-        "share": 23.9
+        "items": 31021,
+        "share": 24.0
        },
        {
         "code": "0103010H0AA",
         "label": "Famotidine",
         "generic": true,
-        "items": 5929,
-        "share": 4.2
+        "items": 5561,
+        "share": 4.3
        }
       ]
      },
      {
       "icb": "QOQ",
       "name": "NHS Humber and North Yorkshire",
-      "items": 399621,
+      "items": 360703,
       "leaders": [
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 164011,
+        "items": 148003,
         "share": 41.0
        },
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 82534,
-        "share": 20.7
+        "items": 74310,
+        "share": 20.6
        },
        {
         "code": "0106040M0BC",
         "label": "Laxido Orange oral powder sachets sugar free",
         "generic": false,
-        "items": 18536,
-        "share": 4.6
+        "items": 17142,
+        "share": 4.8
        }
       ]
      },
      {
       "icb": "QKS",
       "name": "NHS Kent and Medway",
-      "items": 295542,
+      "items": 269152,
       "leaders": [
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 103725,
+        "items": 94449,
         "share": 35.1
        },
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 79205,
-        "share": 26.8
+        "items": 71839,
+        "share": 26.7
        },
        {
         "code": "0103010H0AA",
         "label": "Famotidine",
         "generic": true,
-        "items": 12562,
-        "share": 4.3
+        "items": 11818,
+        "share": 4.4
        }
       ]
      },
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 371238,
+      "items": 331833,
       "leaders": [
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 122123,
-        "share": 32.9
+        "items": 109501,
+        "share": 33.0
        },
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 112461,
+        "items": 100486,
         "share": 30.3
        },
        {
         "code": "0103010H0AA",
         "label": "Famotidine",
         "generic": true,
-        "items": 14921,
-        "share": 4.0
+        "items": 13534,
+        "share": 4.1
        }
       ]
      },
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 201107,
+      "items": 183775,
       "leaders": [
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 93076,
-        "share": 46.3
+        "items": 84856,
+        "share": 46.2
        },
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 26514,
-        "share": 13.2
+        "items": 24113,
+        "share": 13.1
        },
        {
         "code": "0103050E0AA",
         "label": "Esomeprazole",
         "generic": true,
-        "items": 8772,
+        "items": 8056,
         "share": 4.4
        }
       ]
@@ -4549,27 +4549,27 @@
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 214022,
+      "items": 196466,
       "leaders": [
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 66232,
-        "share": 30.9
+        "items": 60861,
+        "share": 31.0
        },
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 65988,
-        "share": 30.8
+        "items": 60152,
+        "share": 30.6
        },
        {
         "code": "0106020M0AA",
         "label": "Senna",
         "generic": true,
-        "items": 7697,
+        "items": 7035,
         "share": 3.6
        }
       ]
@@ -4577,55 +4577,55 @@
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 381012,
+      "items": 346679,
       "leaders": [
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 129569,
+        "items": 117828,
         "share": 34.0
        },
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 100260,
+        "items": 91121,
         "share": 26.3
        },
        {
         "code": "0103010H0AA",
         "label": "Famotidine",
         "generic": true,
-        "items": 19360,
-        "share": 5.1
+        "items": 18075,
+        "share": 5.2
        }
       ]
      },
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 312283,
+      "items": 287504,
       "leaders": [
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 123858,
-        "share": 39.7
+        "items": 114730,
+        "share": 39.9
        },
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 63010,
-        "share": 20.2
+        "items": 57290,
+        "share": 19.9
        },
        {
         "code": "0106020M0AA",
         "label": "Senna",
         "generic": true,
-        "items": 18272,
+        "items": 16899,
         "share": 5.9
        }
       ]
@@ -4633,195 +4633,195 @@
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 834309,
+      "items": 761707,
       "leaders": [
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 362178,
-        "share": 43.4
+        "items": 331287,
+        "share": 43.5
        },
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 165088,
+        "items": 150833,
         "share": 19.8
        },
        {
         "code": "0106020I0AA",
         "label": "Docusate",
         "generic": true,
-        "items": 36440,
-        "share": 4.4
+        "items": 32611,
+        "share": 4.3
        }
       ]
      },
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 147619,
+      "items": 132207,
       "leaders": [
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 49345,
+        "items": 44144,
         "share": 33.4
        },
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 44839,
-        "share": 30.4
+        "items": 40001,
+        "share": 30.3
        },
        {
-        "code": "0106040M0BC",
-        "label": "Laxido Orange oral powder sachets sugar free",
-        "generic": false,
-        "items": 6815,
-        "share": 4.6
+        "code": "0103010H0AA",
+        "label": "Famotidine",
+        "generic": true,
+        "items": 6241,
+        "share": 4.7
        }
       ]
      },
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 241017,
+      "items": 216729,
       "leaders": [
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 92265,
-        "share": 38.3
+        "items": 82704,
+        "share": 38.2
        },
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 49778,
-        "share": 20.7
+        "items": 44315,
+        "share": 20.4
        },
        {
         "code": "0106020I0AA",
         "label": "Docusate",
         "generic": true,
-        "items": 10026,
-        "share": 4.2
+        "items": 8889,
+        "share": 4.1
        }
       ]
      },
      {
       "icb": "QOC",
       "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 87030,
+      "items": 80537,
       "leaders": [
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 32525,
-        "share": 37.4
+        "items": 30312,
+        "share": 37.6
        },
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 19814,
-        "share": 22.8
+        "items": 18195,
+        "share": 22.6
        },
        {
         "code": "0103010H0AA",
         "label": "Famotidine",
         "generic": true,
-        "items": 4692,
-        "share": 5.4
+        "items": 4409,
+        "share": 5.5
        }
       ]
      },
      {
       "icb": "QSL",
       "name": "NHS Somerset",
-      "items": 103835,
+      "items": 95062,
       "leaders": [
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 44327,
+        "items": 40558,
         "share": 42.7
        },
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 20131,
-        "share": 19.4
+        "items": 18293,
+        "share": 19.2
        },
        {
         "code": "0103010H0AA",
         "label": "Famotidine",
         "generic": true,
-        "items": 4199,
-        "share": 4.0
+        "items": 3891,
+        "share": 4.1
        }
       ]
      },
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 215359,
+      "items": 200483,
       "leaders": [
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 72575,
-        "share": 33.7
+        "items": 66765,
+        "share": 33.3
        },
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 52456,
-        "share": 24.4
+        "items": 49552,
+        "share": 24.7
        },
        {
         "code": "0103010H0AA",
         "label": "Famotidine",
         "generic": true,
-        "items": 12236,
-        "share": 5.7
+        "items": 11848,
+        "share": 5.9
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 209119,
+      "items": 191546,
       "leaders": [
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 68358,
-        "share": 32.7
+        "items": 62289,
+        "share": 32.5
        },
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 55072,
+        "items": 50349,
         "share": 26.3
        },
        {
         "code": "0103010H0AA",
         "label": "Famotidine",
         "generic": true,
-        "items": 14365,
+        "items": 13193,
         "share": 6.9
        }
       ]
@@ -4829,27 +4829,27 @@
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 366165,
+      "items": 327840,
       "leaders": [
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 137584,
-        "share": 37.6
+        "items": 123575,
+        "share": 37.7
        },
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 67528,
+        "items": 60408,
         "share": 18.4
        },
        {
         "code": "0103010H0AA",
         "label": "Famotidine",
         "generic": true,
-        "items": 19471,
+        "items": 17504,
         "share": 5.3
        }
       ]
@@ -4857,27 +4857,27 @@
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 232291,
+      "items": 210963,
       "leaders": [
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 74095,
-        "share": 31.9
+        "items": 66707,
+        "share": 31.6
        },
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 65649,
-        "share": 28.3
+        "items": 60356,
+        "share": 28.6
        },
        {
         "code": "0103010H0AA",
         "label": "Famotidine",
         "generic": true,
-        "items": 11759,
+        "items": 10761,
         "share": 5.1
        }
       ]
@@ -4885,112 +4885,112 @@
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 455860,
+      "items": 413830,
       "leaders": [
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 140982,
+        "items": 128051,
         "share": 30.9
        },
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 124472,
+        "items": 112947,
         "share": 27.3
        },
        {
         "code": "0103010H0AA",
         "label": "Famotidine",
         "generic": true,
-        "items": 26912,
-        "share": 5.9
+        "items": 24628,
+        "share": 6.0
        }
       ]
      },
      {
       "icb": "S0E4D",
       "name": "NHS Thames Valley",
-      "items": 303470,
+      "items": 273044,
       "leaders": [
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 104992,
-        "share": 34.6
+        "items": 93846,
+        "share": 34.4
        },
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 79079,
-        "share": 26.1
+        "items": 70826,
+        "share": 25.9
        },
        {
         "code": "0103010H0AA",
         "label": "Famotidine",
         "generic": true,
-        "items": 15866,
-        "share": 5.2
+        "items": 14682,
+        "share": 5.4
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 519368,
+      "items": 466816,
       "leaders": [
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 222656,
-        "share": 42.9
+        "items": 200654,
+        "share": 43.0
        },
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 79343,
+        "items": 71192,
         "share": 15.3
        },
        {
         "code": "0106020M0AA",
         "label": "Senna",
         "generic": true,
-        "items": 23415,
-        "share": 4.5
+        "items": 21447,
+        "share": 4.6
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 532185,
+      "items": 485111,
       "leaders": [
        {
         "code": "0103050L0AA",
         "label": "Lansoprazole",
         "generic": true,
-        "items": 165966,
-        "share": 31.2
+        "items": 151620,
+        "share": 31.3
        },
        {
         "code": "0103050P0AA",
         "label": "Omeprazole",
         "generic": true,
-        "items": 144505,
-        "share": 27.2
+        "items": 131015,
+        "share": 27.0
        },
        {
         "code": "0106020M0AA",
         "label": "Senna",
         "generic": true,
-        "items": 35233,
-        "share": 6.6
+        "items": 32523,
+        "share": 6.7
        }
       ]
      }
@@ -5662,14 +5662,14 @@
     ],
     "primary": {
      "basis": "items",
-     "latestPeriod": "202607",
+     "latestPeriod": "202608",
      "window12m": [
-      "202508",
-      "202607"
+      "202509",
+      "202608"
      ],
-     "items": 149798,
-     "items12m": 1650047,
-     "brandCount": 51,
+     "items": 133674,
+     "items12m": 1652632,
+     "brandCount": 50,
      "topN": 12,
      "brands": [
       {
@@ -5682,43 +5682,43 @@
         "SenSura Mio colostomy bag with filter, midi",
         "SenSura Mio light convex ileostomy bag with filter, maxi"
        ],
-       "items": 54449,
-       "share": 36.3,
-       "cost": 9745310,
-       "items12m": 586224,
-       "share12m": 35.5,
-       "yoy": 10.1,
+       "items": 49080,
+       "share": 36.7,
+       "cost": 8796130,
+       "items12m": 588331,
+       "share12m": 35.6,
+       "yoy": 4.5,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 3745,
-         "shareOfIcb": 36.2
+         "items": 3342,
+         "shareOfIcb": 35.8
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 3415,
-         "shareOfIcb": 38.2
+         "items": 3112,
+         "shareOfIcb": 38.8
         },
         {
          "icb": "S9B9J",
          "name": "NHS Surrey and Sussex",
-         "items": 2879,
-         "shareOfIcb": 39.7
+         "items": 2583,
+         "shareOfIcb": 40.0
         },
         {
          "icb": "T6Y0W",
          "name": "NHS Norfolk and Suffolk",
-         "items": 2408,
-         "shareOfIcb": 43.8
+         "items": 2172,
+         "shareOfIcb": 43.7
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 2393,
-         "shareOfIcb": 32.2
+         "items": 2162,
+         "shareOfIcb": 33.0
         }
        ]
       },
@@ -5732,43 +5732,43 @@
         "Confidence BE soft convex colostomy bag with filter and overlap, standard",
         "Confidence Natural soft convex ileostomy bag with filter and overlap, standard"
        ],
-       "items": 21566,
+       "items": 19231,
        "share": 14.4,
-       "cost": 3875841,
-       "items12m": 237564,
+       "cost": 3472472,
+       "items12m": 237907,
        "share12m": 14.4,
-       "yoy": 1.4,
+       "yoy": 1.8,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 1631,
-         "shareOfIcb": 18.2
+         "items": 1491,
+         "shareOfIcb": 18.6
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 1602,
-         "shareOfIcb": 21.2
+         "items": 1441,
+         "shareOfIcb": 21.1
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 1329,
-         "shareOfIcb": 12.9
+         "items": 1276,
+         "shareOfIcb": 13.7
         },
         {
          "icb": "S0E4D",
          "name": "NHS Thames Valley",
-         "items": 1134,
-         "shareOfIcb": 22.3
+         "items": 973,
+         "shareOfIcb": 22.7
         },
         {
          "icb": "QOQ",
          "name": "NHS Humber and North Yorkshire",
-         "items": 1075,
-         "shareOfIcb": 17.9
+         "items": 917,
+         "shareOfIcb": 17.5
         }
        ]
       },
@@ -5778,47 +5778,47 @@
        "products": [
         "NovaLife TRE",
         "NovaLife",
-        "NovaLife TRE soft convex urostomy bag",
         "NovaLife TRE soft convex ileostomy bag maxi",
+        "NovaLife TRE soft convex urostomy bag",
         "NovaLife TRE soft convex urostomy bag with viewing option"
        ],
-       "items": 19491,
-       "share": 13.0,
-       "cost": 4117153,
-       "items12m": 210146,
-       "share12m": 12.7,
-       "yoy": 13.1,
+       "items": 17446,
+       "share": 13.1,
+       "cost": 3690994,
+       "items12m": 211691,
+       "share12m": 12.8,
+       "yoy": 9.7,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 1739,
-         "shareOfIcb": 22.7
+         "items": 1592,
+         "shareOfIcb": 23.2
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 1567,
-         "shareOfIcb": 21.1
+         "items": 1431,
+         "shareOfIcb": 21.8
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 1456,
-         "shareOfIcb": 19.3
+         "items": 1295,
+         "shareOfIcb": 19.0
+        },
+        {
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 1081,
+         "shareOfIcb": 25.5
         },
         {
          "icb": "QKS",
          "name": "NHS Kent and Medway",
-         "items": 1242,
-         "shareOfIcb": 26.1
-        },
-        {
-         "icb": "S9B9J",
-         "name": "NHS Surrey and Sussex",
-         "items": 1208,
-         "shareOfIcb": 16.7
+         "items": 1074,
+         "shareOfIcb": 25.0
         }
        ]
       },
@@ -5832,43 +5832,43 @@
         "Moderma Flex colostomy bag with filter and CeraPlus skin barrier, midi",
         "Moderma Flex convex urostomy bag with CeraPlus skin barrier"
        ],
-       "items": 10826,
+       "items": 9572,
        "share": 7.2,
-       "cost": 2322052,
-       "items12m": 122842,
+       "cost": 2075047,
+       "items12m": 122762,
        "share12m": 7.4,
-       "yoy": 2.4,
+       "yoy": -0.8,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
-         "icb": "QKK",
-         "name": "NHS South East London",
-         "items": 855,
-         "shareOfIcb": 29.9
-        },
-        {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 836,
+         "items": 749,
          "shareOfIcb": 10.9
         },
         {
          "icb": "S9B9J",
          "name": "NHS Surrey and Sussex",
-         "items": 794,
-         "shareOfIcb": 10.9
+         "items": 719,
+         "shareOfIcb": 11.1
+        },
+        {
+         "icb": "QKK",
+         "name": "NHS South East London",
+         "items": 693,
+         "shareOfIcb": 28.6
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 755,
-         "shareOfIcb": 10.0
+         "items": 655,
+         "shareOfIcb": 9.6
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 664,
-         "shareOfIcb": 8.9
+         "items": 544,
+         "shareOfIcb": 8.3
         }
        ]
       },
@@ -5878,47 +5878,97 @@
        "products": [
         "Welland Aura Plus ileostomy bag midi",
         "Welland Aura Plus colostomy bag midi",
-        "Welland Aura ileostomy bag midi",
         "Welland Aura colostomy bag midi",
+        "Welland Aura ileostomy bag midi",
         "Welland Aura Plus ileostomy bag maxi"
        ],
-       "items": 8670,
-       "share": 5.8,
-       "cost": 1821602,
-       "items12m": 98038,
+       "items": 7586,
+       "share": 5.7,
+       "cost": 1573170,
+       "items12m": 97989,
        "share12m": 5.9,
-       "yoy": 0.6,
+       "yoy": -0.6,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QK1",
          "name": "NHS Leicester, Leicestershire and Rutland",
-         "items": 1875,
-         "shareOfIcb": 56.2
+         "items": 1513,
+         "shareOfIcb": 55.9
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 1478,
-         "shareOfIcb": 14.3
+         "items": 1326,
+         "shareOfIcb": 14.2
         },
         {
          "icb": "QWU",
          "name": "NHS Coventry and Warwickshire",
-         "items": 512,
-         "shareOfIcb": 18.1
-        },
-        {
-         "icb": "S0E4D",
-         "name": "NHS Thames Valley",
-         "items": 475,
-         "shareOfIcb": 9.3
+         "items": 487,
+         "shareOfIcb": 19.4
         },
         {
          "icb": "QKK",
          "name": "NHS South East London",
-         "items": 468,
-         "shareOfIcb": 16.3
+         "items": 426,
+         "shareOfIcb": 17.6
+        },
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 358,
+         "shareOfIcb": 8.3
+        }
+       ]
+      },
+      {
+       "brand": "Nova",
+       "generic": false,
+       "products": [
+        "Nova",
+        "Nova colostomy bag clear",
+        "Nova colostomy bag opaque",
+        "Nova Maxi colostomy bag clear",
+        "Nova Infant ileostomy bag"
+       ],
+       "items": 6469,
+       "share": 4.8,
+       "cost": 1081324,
+       "items12m": 85746,
+       "share12m": 5.2,
+       "yoy": -11.9,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 487,
+         "shareOfIcb": 7.1
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 461,
+         "shareOfIcb": 6.7
+        },
+        {
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 449,
+         "shareOfIcb": 10.6
+        },
+        {
+         "icb": "QE1",
+         "name": "NHS Lancashire and South Cumbria",
+         "items": 436,
+         "shareOfIcb": 8.7
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 435,
+         "shareOfIcb": 4.7
         }
        ]
       },
@@ -5932,143 +5982,43 @@
         "Pelican ModaVi ileostomy bag with filter, medium",
         "Pelican ModaVi colostomy bag with filter, medium"
        ],
-       "items": 7352,
-       "share": 4.9,
-       "cost": 1383537,
-       "items12m": 82144,
+       "items": 6260,
+       "share": 4.7,
+       "cost": 1170469,
+       "items12m": 81877,
        "share12m": 5.0,
-       "yoy": 1.9,
+       "yoy": -4.1,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 493,
-         "shareOfIcb": 5.5
-        },
-        {
-         "icb": "QOQ",
-         "name": "NHS Humber and North Yorkshire",
-         "items": 424,
-         "shareOfIcb": 7.0
+         "items": 408,
+         "shareOfIcb": 5.1
         },
         {
          "icb": "QE1",
          "name": "NHS Lancashire and South Cumbria",
-         "items": 405,
-         "shareOfIcb": 7.3
+         "items": 400,
+         "shareOfIcb": 8.0
         },
         {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 388,
-         "shareOfIcb": 5.1
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 355,
+         "shareOfIcb": 6.8
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 358,
-         "shareOfIcb": 4.8
-        }
-       ]
-      },
-      {
-       "brand": "Nova",
-       "generic": false,
-       "products": [
-        "Nova",
-        "Nova colostomy bag clear",
-        "Nova colostomy bag opaque",
-        "Nova Maxi colostomy bag clear",
-        "Nova Maxi colostomy bag opaque"
-       ],
-       "items": 7318,
-       "share": 4.9,
-       "cost": 1215319,
-       "items12m": 86616,
-       "share12m": 5.2,
-       "yoy": -12.0,
-       "icbsPrescribing": 36,
-       "topIcbs": [
-        {
-         "icb": "D7T5G",
-         "name": "NHS Essex",
-         "items": 553,
-         "shareOfIcb": 11.8
-        },
-        {
-         "icb": "QWO",
-         "name": "NHS West Yorkshire",
-         "items": 536,
-         "shareOfIcb": 7.1
-        },
-        {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 509,
-         "shareOfIcb": 6.7
-        },
-        {
-         "icb": "QE1",
-         "name": "NHS Lancashire and South Cumbria",
-         "items": 476,
-         "shareOfIcb": 8.5
-        },
-        {
-         "icb": "QHM",
-         "name": "NHS North East and North Cumbria",
-         "items": 472,
-         "shareOfIcb": 4.6
-        }
-       ]
-      },
-      {
-       "brand": "Option",
-       "generic": false,
-       "products": [
-        "Option Alginate soft convex ileostomy bag with filter and soft touch closure",
-        "Option soft convex ileostomy bag with filter and soft touch closure",
-        "Option Alginate ileostomy bag with filter and soft touch closure",
-        "Option Alginate colostomy bag with filter, standard",
-        "Option Primo colostomy bag with filter and soft covering to both sides"
-       ],
-       "items": 4033,
-       "share": 2.7,
-       "cost": 826273,
-       "items12m": 41179,
-       "share12m": 2.5,
-       "yoy": 24.8,
-       "icbsPrescribing": 36,
-       "topIcbs": [
-        {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 511,
-         "shareOfIcb": 5.7
-        },
-        {
-         "icb": "QE1",
-         "name": "NHS Lancashire and South Cumbria",
-         "items": 480,
-         "shareOfIcb": 8.6
-        },
-        {
-         "icb": "QWO",
-         "name": "NHS West Yorkshire",
-         "items": 353,
-         "shareOfIcb": 4.7
-        },
-        {
-         "icb": "QOQ",
-         "name": "NHS Humber and North Yorkshire",
-         "items": 270,
-         "shareOfIcb": 4.5
-        },
-        {
-         "icb": "S0E4D",
-         "name": "NHS Thames Valley",
-         "items": 248,
+         "items": 319,
          "shareOfIcb": 4.9
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 303,
+         "shareOfIcb": 4.4
         }
        ]
       },
@@ -6082,43 +6032,93 @@
         "Combihesive Natura two piece ostomy system ileostomy bag small",
         "Combihesive Natura two piece ostomy system urostomy bag with Accuseal tap, standard"
        ],
-       "items": 3750,
-       "share": 2.5,
-       "cost": 359003,
-       "items12m": 44342,
+       "items": 3443,
+       "share": 2.6,
+       "cost": 324733,
+       "items12m": 44081,
        "share12m": 2.7,
-       "yoy": -11.8,
+       "yoy": -7.0,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
-         "icb": "QHM",
-         "name": "NHS North East and North Cumbria",
-         "items": 336,
-         "shareOfIcb": 3.3
-        },
-        {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 334,
-         "shareOfIcb": 3.7
+         "items": 310,
+         "shareOfIcb": 3.9
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 274,
+         "shareOfIcb": 2.9
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 205,
-         "shareOfIcb": 2.7
+         "items": 179,
+         "shareOfIcb": 2.6
         },
         {
          "icb": "S9B9J",
          "name": "NHS Surrey and Sussex",
-         "items": 196,
-         "shareOfIcb": 2.7
+         "items": 165,
+         "shareOfIcb": 2.6
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 173,
+         "items": 150,
          "shareOfIcb": 2.3
+        }
+       ]
+      },
+      {
+       "brand": "Option",
+       "generic": false,
+       "products": [
+        "Option Alginate soft convex ileostomy bag with filter and soft touch closure",
+        "Option soft convex ileostomy bag with filter and soft touch closure",
+        "Option Alginate colostomy bag with filter, standard",
+        "Option Alginate ileostomy bag with filter and soft touch closure",
+        "Option Primo colostomy bag with filter and soft covering to both sides"
+       ],
+       "items": 3348,
+       "share": 2.5,
+       "cost": 693884,
+       "items12m": 41516,
+       "share12m": 2.5,
+       "yoy": 11.2,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QE1",
+         "name": "NHS Lancashire and South Cumbria",
+         "items": 417,
+         "shareOfIcb": 8.3
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 397,
+         "shareOfIcb": 4.9
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 310,
+         "shareOfIcb": 4.5
+        },
+        {
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 232,
+         "shareOfIcb": 4.4
+        },
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 194,
+         "shareOfIcb": 4.5
         }
        ]
       },
@@ -6132,43 +6132,43 @@
         "Esteem+ colostomy bag standard",
         "Esteem+ ileostomy bag with filter and InvisiClose outlet, standard"
        ],
-       "items": 3314,
-       "share": 2.2,
-       "cost": 643553,
-       "items12m": 37157,
+       "items": 3212,
+       "share": 2.4,
+       "cost": 634076,
+       "items12m": 37415,
        "share12m": 2.3,
-       "yoy": 6.1,
+       "yoy": 8.7,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 223,
-         "shareOfIcb": 2.5
+         "items": 218,
+         "shareOfIcb": 2.7
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
          "items": 203,
-         "shareOfIcb": 2.0
-        },
-        {
-         "icb": "S9B9J",
-         "name": "NHS Surrey and Sussex",
-         "items": 186,
-         "shareOfIcb": 2.6
+         "shareOfIcb": 2.2
         },
         {
          "icb": "QJK",
          "name": "NHS Devon",
-         "items": 184,
-         "shareOfIcb": 4.7
+         "items": 188,
+         "shareOfIcb": 5.4
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 174,
+         "shareOfIcb": 2.7
         },
         {
          "icb": "S0E4D",
          "name": "NHS Thames Valley",
-         "items": 169,
-         "shareOfIcb": 3.3
+         "items": 151,
+         "shareOfIcb": 3.5
         }
        ]
       },
@@ -6178,43 +6178,43 @@
        "products": [
         "Conform"
        ],
-       "items": 3008,
+       "items": 2693,
        "share": 2.0,
-       "cost": 292059,
-       "items12m": 35235,
+       "cost": 257490,
+       "items12m": 35166,
        "share12m": 2.1,
-       "yoy": -7.0,
+       "yoy": -2.5,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 438,
-         "shareOfIcb": 5.8
+         "items": 424,
+         "shareOfIcb": 6.2
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 277,
-         "shareOfIcb": 2.7
-        },
-        {
-         "icb": "QF7",
-         "name": "NHS South Yorkshire",
-         "items": 216,
-         "shareOfIcb": 5.0
+         "items": 258,
+         "shareOfIcb": 2.8
         },
         {
          "icb": "S0E4D",
          "name": "NHS Thames Valley",
-         "items": 187,
-         "shareOfIcb": 3.7
+         "items": 186,
+         "shareOfIcb": 4.3
         },
         {
          "icb": "S9B9J",
          "name": "NHS Surrey and Sussex",
-         "items": 160,
-         "shareOfIcb": 2.2
+         "items": 166,
+         "shareOfIcb": 2.6
+        },
+        {
+         "icb": "QF7",
+         "name": "NHS South Yorkshire",
+         "items": 146,
+         "shareOfIcb": 3.7
         }
        ]
       },
@@ -6225,46 +6225,46 @@
         "Assura Post-Op ileostomy bag clear",
         "Assura two piece ostomy system baseplate",
         "Assura Inspire ileostomy bag with filter and Hide-Away outlet, maxi opaque",
-        "Assura urostomy bag maxi clear",
-        "Assura Inspire ileostomy bag with filter and Hide-Away outlet, midi opaque"
+        "Assura Inspire ileostomy bag with filter and Hide-Away outlet, midi opaque",
+        "Assura Inspire colostomy bag with filter, maxi soft cover"
        ],
-       "items": 2403,
+       "items": 2188,
        "share": 1.6,
-       "cost": 381156,
-       "items12m": 28598,
+       "cost": 351218,
+       "items12m": 28359,
        "share12m": 1.7,
-       "yoy": -11.6,
+       "yoy": -9.8,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 267,
-         "shareOfIcb": 3.5
-        },
-        {
-         "icb": "QE1",
-         "name": "NHS Lancashire and South Cumbria",
-         "items": 199,
-         "shareOfIcb": 3.6
+         "items": 263,
+         "shareOfIcb": 3.8
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 197,
-         "shareOfIcb": 2.2
+         "items": 189,
+         "shareOfIcb": 2.4
         },
         {
-         "icb": "S9B9J",
-         "name": "NHS Surrey and Sussex",
-         "items": 121,
-         "shareOfIcb": 1.7
+         "icb": "QE1",
+         "name": "NHS Lancashire and South Cumbria",
+         "items": 133,
+         "shareOfIcb": 2.6
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 107,
+         "items": 98,
          "shareOfIcb": 1.0
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 90,
+         "shareOfIcb": 1.4
         }
        ]
       },
@@ -6278,43 +6278,43 @@
         "Natura+ two piece ostomy system ileostomy bag + filter, window and InvisiClose outlet, standard",
         "Natura two piece ostomy system accordion flange, durahesive"
        ],
-       "items": 827,
+       "items": 771,
        "share": 0.6,
-       "cost": 89257,
-       "items12m": 9740,
+       "cost": 80598,
+       "items12m": 9699,
        "share12m": 0.6,
-       "yoy": -12.2,
+       "yoy": -5.0,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 63,
-         "shareOfIcb": 0.7
-        },
-        {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 53,
-         "shareOfIcb": 0.5
-        },
-        {
-         "icb": "T6Y0W",
-         "name": "NHS Norfolk and Suffolk",
-         "items": 49,
-         "shareOfIcb": 0.9
-        },
-        {
-         "icb": "QWO",
-         "name": "NHS West Yorkshire",
-         "items": 42,
+         "items": 56,
          "shareOfIcb": 0.6
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 40,
+         "items": 48,
+         "shareOfIcb": 0.7
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 43,
+         "shareOfIcb": 0.7
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 39,
          "shareOfIcb": 0.5
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 38,
+         "shareOfIcb": 0.6
         }
        ]
       },
@@ -6324,47 +6324,47 @@
        "products": [
         "Softima Uro Silk urostomy bag",
         "Softima Uro Silk convex urostomy bag",
+        "Softima Key two piece ostomy system convex baseplate",
         "Softima Active Convex urostomy bag midi",
-        "Softima High Flow ileostomy bag with filter transparent",
-        "Softima Key two piece ostomy system convex baseplate"
+        "Softima High Flow ileostomy bag with filter transparent"
        ],
-       "items": 502,
+       "items": 405,
        "share": 0.3,
-       "cost": 92458,
-       "items12m": 4908,
+       "cost": 72238,
+       "items12m": 4920,
        "share12m": 0.3,
-       "yoy": 29.0,
-       "icbsPrescribing": 34,
+       "yoy": 3.1,
+       "icbsPrescribing": 33,
        "topIcbs": [
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 164,
-         "shareOfIcb": 1.6
+         "items": 132,
+         "shareOfIcb": 1.4
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 85,
-         "shareOfIcb": 1.1
+         "items": 66,
+         "shareOfIcb": 1.0
         },
         {
          "icb": "QOQ",
          "name": "NHS Humber and North Yorkshire",
-         "items": 38,
+         "items": 32,
          "shareOfIcb": 0.6
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 29,
-         "shareOfIcb": 0.3
+         "items": 20,
+         "shareOfIcb": 0.2
         },
         {
          "icb": "D7T5G",
          "name": "NHS Essex",
-         "items": 16,
-         "shareOfIcb": 0.3
+         "items": 19,
+         "shareOfIcb": 0.4
         }
        ]
       },
@@ -6378,43 +6378,43 @@
         "Ileomate soft convex ileostomy bag with filter and split cover, medium",
         "Ileomate soft convex ileostomy bag with filter and split cover, extra large"
        ],
-       "items": 351,
+       "items": 299,
        "share": 0.2,
-       "cost": 61814,
-       "items12m": 3952,
+       "cost": 54242,
+       "items12m": 3944,
        "share12m": 0.2,
-       "yoy": 4.5,
-       "icbsPrescribing": 34,
+       "yoy": -2.6,
+       "icbsPrescribing": 31,
        "topIcbs": [
         {
          "icb": "QOX",
          "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-         "items": 57,
+         "items": 48,
          "shareOfIcb": 2.4
         },
         {
          "icb": "QRL",
          "name": "NHS Hampshire and Isle of Wight",
-         "items": 36,
-         "shareOfIcb": 0.8
-        },
-        {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 24,
-         "shareOfIcb": 0.3
-        },
-        {
-         "icb": "QGH",
-         "name": "NHS Herefordshire and Worcestershire",
-         "items": 19,
+         "items": 29,
          "shareOfIcb": 0.7
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 19,
+         "items": 17,
          "shareOfIcb": 0.2
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 16,
+         "shareOfIcb": 0.2
+        },
+        {
+         "icb": "QGH",
+         "name": "NHS Herefordshire and Worcestershire",
+         "items": 15,
+         "shareOfIcb": 0.6
         }
        ]
       },
@@ -6427,93 +6427,43 @@
         "Protea Vital colostomy bag with filter, medium",
         "Protea Vital ileostomy bag with filter, medium"
        ],
-       "items": 349,
+       "items": 292,
        "share": 0.2,
-       "cost": 55519,
-       "items12m": 3909,
+       "cost": 47491,
+       "items12m": 3846,
        "share12m": 0.2,
-       "yoy": -10.5,
-       "icbsPrescribing": 28,
+       "yoy": -17.7,
+       "icbsPrescribing": 24,
        "topIcbs": [
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 236,
+         "items": 205,
          "shareOfIcb": 2.6
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 32,
+         "items": 23,
          "shareOfIcb": 0.4
-        },
-        {
-         "icb": "QWO",
-         "name": "NHS West Yorkshire",
-         "items": 13,
-         "shareOfIcb": 0.2
         },
         {
          "icb": "T6Y0W",
          "name": "NHS Norfolk and Suffolk",
-         "items": 10,
+         "items": 9,
          "shareOfIcb": 0.2
         },
-        {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 7,
-         "shareOfIcb": 0.1
-        }
-       ]
-      },
-      {
-       "brand": "Harmony",
-       "generic": false,
-       "products": [
-        "Harmony Duo two piece ostomy system standard wafer with Flexifit",
-        "Harmony Duo two piece ostomy system colostomy bag with filter, standard",
-        "Harmony Duo two piece ostomy system standard convex wafer with Flexifit",
-        "Harmony Duo two piece ostomy system ileostomy bag with filter, standard",
-        "Harmony Duo two piece ostomy system colostomy bag with filter, large"
-       ],
-       "items": 259,
-       "share": 0.2,
-       "cost": 31460,
-       "items12m": 2884,
-       "share12m": 0.2,
-       "yoy": -4.8,
-       "icbsPrescribing": 32,
-       "topIcbs": [
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 21,
-         "shareOfIcb": 0.3
-        },
-        {
-         "icb": "QOQ",
-         "name": "NHS Humber and North Yorkshire",
-         "items": 19,
-         "shareOfIcb": 0.3
-        },
-        {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 19,
-         "shareOfIcb": 0.2
-        },
-        {
-         "icb": "QJK",
-         "name": "NHS Devon",
-         "items": 17,
-         "shareOfIcb": 0.4
+         "items": 7,
+         "shareOfIcb": 0.1
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 16,
-         "shareOfIcb": 0.2
+         "items": 5,
+         "shareOfIcb": 0.1
         }
        ]
       },
@@ -6527,31 +6477,25 @@
         "Biotrol Softima Key two piece ostomy system colostomy bag with filter",
         "Biotrol Softima colostomy bag with filter"
        ],
-       "items": 253,
+       "items": 237,
        "share": 0.2,
-       "cost": 39570,
-       "items12m": 2911,
+       "cost": 35671,
+       "items12m": 2915,
        "share12m": 0.2,
-       "yoy": 3.7,
-       "icbsPrescribing": 26,
+       "yoy": 1.7,
+       "icbsPrescribing": 27,
        "topIcbs": [
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 146,
-         "shareOfIcb": 1.9
+         "items": 139,
+         "shareOfIcb": 2.0
         },
         {
          "icb": "QOQ",
          "name": "NHS Humber and North Yorkshire",
-         "items": 17,
+         "items": 18,
          "shareOfIcb": 0.3
-        },
-        {
-         "icb": "D7T5G",
-         "name": "NHS Essex",
-         "items": 11,
-         "shareOfIcb": 0.2
         },
         {
          "icb": "QHM",
@@ -6560,10 +6504,66 @@
          "shareOfIcb": 0.1
         },
         {
-         "icb": "T6Y0W",
-         "name": "NHS Norfolk and Suffolk",
-         "items": 9,
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 8,
          "shareOfIcb": 0.2
+        },
+        {
+         "icb": "QWU",
+         "name": "NHS Coventry and Warwickshire",
+         "items": 7,
+         "shareOfIcb": 0.3
+        }
+       ]
+      },
+      {
+       "brand": "Harmony",
+       "generic": false,
+       "products": [
+        "Harmony Duo two piece ostomy system standard wafer with Flexifit",
+        "Harmony Duo two piece ostomy system standard convex wafer with Flexifit",
+        "Harmony Duo two piece ostomy system colostomy bag with filter, standard",
+        "Harmony Duo two piece ostomy system ileostomy bag with filter, standard",
+        "Harmony Duo two piece ostomy system colostomy bag with filter, large"
+       ],
+       "items": 210,
+       "share": 0.2,
+       "cost": 26947,
+       "items12m": 2832,
+       "share12m": 0.2,
+       "yoy": -19.8,
+       "icbsPrescribing": 32,
+       "topIcbs": [
+        {
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 21,
+         "shareOfIcb": 0.4
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 17,
+         "shareOfIcb": 0.2
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 16,
+         "shareOfIcb": 0.4
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 14,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 12,
+         "shareOfIcb": 0.1
         }
        ]
       },
@@ -6575,41 +6575,41 @@
        ],
        "items": 173,
        "share": 0.1,
-       "cost": 19591,
-       "items12m": 2115,
+       "cost": 17850,
+       "items12m": 2102,
        "share12m": 0.1,
-       "yoy": -8.0,
-       "icbsPrescribing": 25,
+       "yoy": -7.0,
+       "icbsPrescribing": 24,
        "topIcbs": [
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 38,
-         "shareOfIcb": 0.5
+         "items": 55,
+         "shareOfIcb": 0.8
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 16,
+         "shareOfIcb": 0.2
         },
         {
          "icb": "QRL",
          "name": "NHS Hampshire and Isle of Wight",
-         "items": 16,
+         "items": 12,
          "shareOfIcb": 0.3
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 14,
-         "shareOfIcb": 0.3
-        },
-        {
-         "icb": "S0E4D",
-         "name": "NHS Thames Valley",
          "items": 12,
-         "shareOfIcb": 0.2
+         "shareOfIcb": 0.3
         },
         {
          "icb": "QKK",
          "name": "NHS South East London",
-         "items": 11,
-         "shareOfIcb": 0.4
+         "items": 8,
+         "shareOfIcb": 0.3
         }
        ]
       },
@@ -6620,43 +6620,43 @@
         "Ileodress ileostomy bag standard",
         "Ileodress ileostomy bag small"
        ],
-       "items": 130,
+       "items": 122,
        "share": 0.1,
-       "cost": 15564,
-       "items12m": 1530,
+       "cost": 13937,
+       "items12m": 1540,
        "share12m": 0.1,
-       "yoy": -15.6,
+       "yoy": 8.9,
        "icbsPrescribing": 32,
        "topIcbs": [
         {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 12,
-         "shareOfIcb": 0.1
+         "icb": "QE1",
+         "name": "NHS Lancashire and South Cumbria",
+         "items": 11,
+         "shareOfIcb": 0.2
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 9,
+         "items": 10,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 10,
          "shareOfIcb": 0.1
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 9,
-         "shareOfIcb": 0.1
-        },
-        {
-         "icb": "S9B9J",
-         "name": "NHS Surrey and Sussex",
          "items": 8,
          "shareOfIcb": 0.1
         },
         {
-         "icb": "QGH",
-         "name": "NHS Herefordshire and Worcestershire",
-         "items": 7,
-         "shareOfIcb": 0.3
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 8,
+         "shareOfIcb": 0.2
         }
        ]
       },
@@ -6665,45 +6665,44 @@
        "generic": false,
        "products": [
         "Impression C urostomy bag",
-        "Impression C colostomy bag with filter",
-        "Impression urostomy bag"
+        "Impression C colostomy bag with filter"
        ],
-       "items": 111,
+       "items": 92,
        "share": 0.1,
-       "cost": 20197,
-       "items12m": 1283,
+       "cost": 15710,
+       "items12m": 1253,
        "share12m": 0.1,
-       "yoy": -31.9,
-       "icbsPrescribing": 31,
+       "yoy": -24.6,
+       "icbsPrescribing": 28,
        "topIcbs": [
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 13,
-         "shareOfIcb": 0.2
-        },
-        {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 9,
-         "shareOfIcb": 0.1
+         "items": 18,
+         "shareOfIcb": 0.3
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
+         "items": 8,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
          "items": 7,
          "shareOfIcb": 0.1
         },
         {
          "icb": "QJ2",
          "name": "NHS Derby and Derbyshire",
-         "items": 7,
+         "items": 6,
          "shareOfIcb": 0.2
         },
         {
-         "icb": "T6Y0W",
-         "name": "NHS Norfolk and Suffolk",
-         "items": 6,
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 5,
          "shareOfIcb": 0.1
         }
        ]
@@ -6713,48 +6712,48 @@
        "generic": false,
        "products": [
         "Colomate oval soft convex colostomy bag with filter and split cover, large",
-        "Colomate soft convex colostomy bag with filter and split cover, large",
         "Colomate soft convex colostomy bag with filter and split cover, medium/large",
+        "Colomate soft convex colostomy bag with filter and split cover, large",
         "Colomate oval soft convex colostomy bag with filter and split cover, extra large",
-        "Colomate colostomy bag with filter, anatomical medium/large starter hole"
+        "Colomate colostomy bag with filter, medium"
        ],
-       "items": 107,
+       "items": 85,
        "share": 0.1,
-       "cost": 25866,
-       "items12m": 1122,
+       "cost": 21691,
+       "items12m": 1128,
        "share12m": 0.1,
-       "yoy": 18.9,
+       "yoy": 7.6,
        "icbsPrescribing": 24,
        "topIcbs": [
         {
-         "icb": "QOX",
-         "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-         "items": 15,
-         "shareOfIcb": 0.6
-        },
-        {
          "icb": "QWU",
          "name": "NHS Coventry and Warwickshire",
-         "items": 15,
-         "shareOfIcb": 0.5
+         "items": 10,
+         "shareOfIcb": 0.4
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 14,
-         "shareOfIcb": 0.2
+         "items": 10,
+         "shareOfIcb": 0.1
         },
         {
          "icb": "QRL",
          "name": "NHS Hampshire and Isle of Wight",
-         "items": 11,
+         "items": 9,
          "shareOfIcb": 0.2
         },
         {
-         "icb": "QJK",
-         "name": "NHS Devon",
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
          "items": 8,
          "shareOfIcb": 0.2
+        },
+        {
+         "icb": "QOX",
+         "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+         "items": 8,
+         "shareOfIcb": 0.4
         }
        ]
       },
@@ -6764,45 +6763,45 @@
        "products": [
         "Uromate soft convex urostomy bag large",
         "Uromate oval soft convex urostomy bag large",
-        "Uromate urostomy bag large",
         "Uromate urostomy bag medium",
-        "Uromate urostomy bag with split cover, large"
+        "Uromate urostomy bag large",
+        "Uromate urostomy/fistula bag extra small"
        ],
-       "items": 101,
+       "items": 83,
        "share": 0.1,
-       "cost": 23157,
-       "items12m": 1081,
+       "cost": 19563,
+       "items12m": 1076,
        "share12m": 0.1,
-       "yoy": 12.2,
-       "icbsPrescribing": 23,
+       "yoy": -5.7,
+       "icbsPrescribing": 21,
        "topIcbs": [
         {
          "icb": "QOQ",
          "name": "NHS Humber and North Yorkshire",
-         "items": 26,
-         "shareOfIcb": 0.4
-        },
-        {
-         "icb": "QOX",
-         "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-         "items": 11,
+         "items": 25,
          "shareOfIcb": 0.5
         },
         {
          "icb": "QRL",
          "name": "NHS Hampshire and Isle of Wight",
-         "items": 10,
+         "items": 9,
          "shareOfIcb": 0.2
         },
         {
-         "icb": "QE1",
-         "name": "NHS Lancashire and South Cumbria",
-         "items": 5,
-         "shareOfIcb": 0.1
+         "icb": "QOX",
+         "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+         "items": 8,
+         "shareOfIcb": 0.4
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
+         "items": 5,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
          "items": 5,
          "shareOfIcb": 0.1
         }
@@ -6814,42 +6813,42 @@
        "products": [
         "Compact urostomy bag"
        ],
-       "items": 70,
+       "items": 53,
        "share": 0.0,
-       "cost": 13964,
-       "items12m": 823,
+       "cost": 9883,
+       "items12m": 802,
        "share12m": 0.0,
-       "yoy": -15.7,
-       "icbsPrescribing": 22,
+       "yoy": -28.4,
+       "icbsPrescribing": 23,
        "topIcbs": [
-        {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 17,
-         "shareOfIcb": 0.2
-        },
-        {
-         "icb": "QE1",
-         "name": "NHS Lancashire and South Cumbria",
-         "items": 7,
-         "shareOfIcb": 0.1
-        },
-        {
-         "icb": "QKK",
-         "name": "NHS South East London",
-         "items": 7,
-         "shareOfIcb": 0.2
-        },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 5,
-         "shareOfIcb": 0.0
+         "items": 6,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 6,
+         "shareOfIcb": 0.1
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
          "items": 5,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QKK",
+         "name": "NHS South East London",
+         "items": 4,
+         "shareOfIcb": 0.2
+        },
+        {
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
+         "items": 4,
          "shareOfIcb": 0.1
         }
        ]
@@ -6861,43 +6860,43 @@
         "Silkura colostomy bag with filter, midi",
         "Silkura ileostomy bag with filter, midi"
        ],
-       "items": 63,
+       "items": 53,
        "share": 0.0,
-       "cost": 10689,
-       "items12m": 104,
+       "cost": 11024,
+       "items12m": 157,
        "share12m": 0.0,
        "yoy": null,
-       "icbsPrescribing": 24,
+       "icbsPrescribing": 22,
        "topIcbs": [
         {
-         "icb": "QHM",
-         "name": "NHS North East and North Cumbria",
-         "items": 6,
-         "shareOfIcb": 0.1
-        },
-        {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 6,
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 7,
          "shareOfIcb": 0.1
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 5,
+         "items": 6,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QE1",
+         "name": "NHS Lancashire and South Cumbria",
+         "items": 4,
          "shareOfIcb": 0.1
         },
         {
          "icb": "QJ2",
          "name": "NHS Derby and Derbyshire",
-         "items": 4,
+         "items": 3,
          "shareOfIcb": 0.1
         },
         {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 4,
-         "shareOfIcb": 0.1
+         "icb": "QSL",
+         "name": "NHS Somerset",
+         "items": 3,
+         "shareOfIcb": 0.2
         }
        ]
       },
@@ -6911,41 +6910,41 @@
         "Pouchkins urostomy bag paediatric",
         "Pouchkins two piece ostomy system flange"
        ],
-       "items": 59,
+       "items": 49,
        "share": 0.0,
-       "cost": 9476,
-       "items12m": 640,
+       "cost": 6801,
+       "items12m": 639,
        "share12m": 0.0,
-       "yoy": -10.6,
-       "icbsPrescribing": 20,
+       "yoy": -2.0,
+       "icbsPrescribing": 18,
        "topIcbs": [
-        {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 9,
-         "shareOfIcb": 0.1
-        },
-        {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 7,
-         "shareOfIcb": 0.1
-        },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 6,
+         "items": 7,
+         "shareOfIcb": 0.2
+        },
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 5,
          "shareOfIcb": 0.1
         },
         {
-         "icb": "QGH",
-         "name": "NHS Herefordshire and Worcestershire",
+         "icb": "QMF",
+         "name": "NHS North East London",
          "items": 4,
          "shareOfIcb": 0.2
         },
         {
-         "icb": "QOQ",
-         "name": "NHS Humber and North Yorkshire",
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 4,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
          "items": 4,
          "shareOfIcb": 0.1
         }
@@ -6955,37 +6954,117 @@
        "brand": "Combimate",
        "generic": false,
        "products": [
-        "Combimate SuperFlex two piece ostomy system",
         "Combimate two piece ostomy system colostomy bag with filter, large",
+        "Combimate SuperFlex two piece ostomy system",
         "Combimate two piece ostomy system ileostomy bag with filter, large",
-        "Combimate Supersoft two piece ostomy system shallow convex flange",
-        "Combimate two piece ostomy system ileostomy bag with filter, medium"
+        "Combimate Supersoft two piece ostomy system",
+        "Combimate Supersoft two piece ostomy system deep convex flange"
        ],
-       "items": 50,
+       "items": 42,
        "share": 0.0,
-       "cost": 5905,
-       "items12m": 633,
+       "cost": 6571,
+       "items12m": 624,
        "share12m": 0.0,
-       "yoy": -21.9,
+       "yoy": -17.6,
        "icbsPrescribing": 15,
        "topIcbs": [
         {
-         "icb": "QVV",
-         "name": "NHS Dorset",
-         "items": 10,
-         "shareOfIcb": 0.4
-        },
-        {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
+         "icb": "QJK",
+         "name": "NHS Devon",
          "items": 6,
-         "shareOfIcb": 0.1
+         "shareOfIcb": 0.2
         },
         {
-         "icb": "QKS",
-         "name": "NHS Kent and Medway",
+         "icb": "QOX",
+         "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+         "items": 6,
+         "shareOfIcb": 0.3
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
          "items": 5,
          "shareOfIcb": 0.1
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 5,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QVV",
+         "name": "NHS Dorset",
+         "items": 4,
+         "shareOfIcb": 0.2
+        }
+       ]
+      },
+      {
+       "brand": "Conseal",
+       "generic": false,
+       "products": [
+        "Conseal colostomy plug"
+       ],
+       "items": 39,
+       "share": 0.0,
+       "cost": 4627,
+       "items12m": 53,
+       "share12m": 0.0,
+       "yoy": null,
+       "icbsPrescribing": 19,
+       "topIcbs": [
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 4,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 3,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QJK",
+         "name": "NHS Devon",
+         "items": 3,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QKK",
+         "name": "NHS South East London",
+         "items": 3,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QWE",
+         "name": "NHS South West London",
+         "items": 3,
+         "shareOfIcb": 0.2
+        }
+       ]
+      },
+      {
+       "brand": "Trio",
+       "generic": false,
+       "products": [
+        "Trio Genii with Sil2 silicone flange colostomy bag with filter, midi"
+       ],
+       "items": 32,
+       "share": 0.0,
+       "cost": 7609,
+       "items12m": 670,
+       "share12m": 0.0,
+       "yoy": -41.8,
+       "icbsPrescribing": 16,
+       "topIcbs": [
+        {
+         "icb": "QNC",
+         "name": "NHS Staffordshire and Stoke-on-trent",
+         "items": 5,
+         "shareOfIcb": 0.2
         },
         {
          "icb": "QJK",
@@ -6994,10 +7073,22 @@
          "shareOfIcb": 0.1
         },
         {
-         "icb": "QWU",
-         "name": "NHS Coventry and Warwickshire",
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
          "items": 4,
          "shareOfIcb": 0.1
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 3,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QE1",
+         "name": "NHS Lancashire and South Cumbria",
+         "items": 2,
+         "shareOfIcb": 0.0
         }
        ]
       },
@@ -7008,134 +7099,41 @@
         "Urodress urostomy bag standard",
         "Urodress deep convex urostomy bag standard"
        ],
-       "items": 43,
+       "items": 31,
        "share": 0.0,
-       "cost": 7779,
-       "items12m": 441,
+       "cost": 6341,
+       "items12m": 428,
        "share12m": 0.0,
-       "yoy": 16.2,
-       "icbsPrescribing": 17,
+       "yoy": -29.5,
+       "icbsPrescribing": 15,
        "topIcbs": [
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 8,
+         "items": 5,
          "shareOfIcb": 0.1
         },
         {
-         "icb": "S9B9J",
-         "name": "NHS Surrey and Sussex",
-         "items": 7,
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 4,
          "shareOfIcb": 0.1
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 5,
-         "shareOfIcb": 0.1
-        },
-        {
-         "icb": "QJM",
-         "name": "NHS Lincolnshire",
-         "items": 3,
-         "shareOfIcb": 0.1
-        },
-        {
-         "icb": "QUA",
-         "name": "NHS Black Country",
-         "items": 3,
-         "shareOfIcb": 0.1
-        }
-       ]
-      },
-      {
-       "brand": "Trio",
-       "generic": false,
-       "products": [
-        "Trio Genii with Sil2 silicone flange colostomy bag with filter, midi"
-       ],
-       "items": 39,
-       "share": 0.0,
-       "cost": 8722,
-       "items12m": 693,
-       "share12m": 0.0,
-       "yoy": -46.6,
-       "icbsPrescribing": 20,
-       "topIcbs": [
-        {
-         "icb": "QNC",
-         "name": "NHS Staffordshire and Stoke-on-trent",
-         "items": 6,
-         "shareOfIcb": 0.2
-        },
-        {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 4,
-         "shareOfIcb": 0.1
-        },
-        {
-         "icb": "QJ2",
-         "name": "NHS Derby and Derbyshire",
-         "items": 3,
-         "shareOfIcb": 0.1
-        },
-        {
-         "icb": "QJK",
-         "name": "NHS Devon",
-         "items": 3,
-         "shareOfIcb": 0.1
-        },
-        {
-         "icb": "QK1",
-         "name": "NHS Leicester, Leicestershire and Rutland",
-         "items": 2,
-         "shareOfIcb": 0.1
-        }
-       ]
-      },
-      {
-       "brand": "Coloplast",
-       "generic": false,
-       "products": [
-        "Coloplast Micro-bag two piece ostomy system urostomy bag",
-        "Coloplast Minicap two piece ostomy system urostomy bag opaque"
-       ],
-       "items": 28,
-       "share": 0.0,
-       "cost": 3035,
-       "items12m": 198,
-       "share12m": 0.0,
-       "yoy": null,
-       "icbsPrescribing": 17,
-       "topIcbs": [
-        {
-         "icb": "QF7",
-         "name": "NHS South Yorkshire",
-         "items": 4,
-         "shareOfIcb": 0.1
-        },
-        {
-         "icb": "QJM",
-         "name": "NHS Lincolnshire",
-         "items": 4,
-         "shareOfIcb": 0.1
-        },
-        {
-         "icb": "QOQ",
-         "name": "NHS Humber and North Yorkshire",
          "items": 3,
          "shareOfIcb": 0.0
         },
         {
-         "icb": "QOX",
-         "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-         "items": 2,
-         "shareOfIcb": 0.1
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 3,
+         "shareOfIcb": 0.0
         },
         {
-         "icb": "QT1",
-         "name": "NHS Nottingham and Nottinghamshire",
+         "icb": "QJM",
+         "name": "NHS Lincolnshire",
          "items": 2,
          "shareOfIcb": 0.1
         }
@@ -7143,8 +7141,8 @@
       }
      ],
      "otherBrands": {
-      "count": 21,
-      "items": 103,
+      "count": 20,
+      "items": 78,
       "share": 0.1
      }
     },

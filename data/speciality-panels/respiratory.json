@@ -22,7 +22,7 @@
   "drugTariff": "2026-10-21",
   "localIntel": "2026-10-21",
   "supplierDirectory": "2026-10-21",
-  "gpPrescribing": "2026-09-30",
+  "gpPrescribing": "2026-10-21",
   "mhraDsu": "2026-10-19",
   "drugTariffViiia": "2026-10-21",
   "hospitalPrescribing": null
@@ -35,7 +35,7 @@
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /peak flow meter|tracheostomy (?:breathing aid|tube holder|cleaning device)|tracheostomy and laryngectomy protector/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,879 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's.",
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: respiratory). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 11 of the 12 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
-  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202608) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (16 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-19.",
   "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF chapter 3. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 51 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
  },
@@ -2817,14 +2817,14 @@
   }
  ],
  "gpPrescribing": {
-  "generatedOn": "2026-09-30",
+  "generatedOn": "2026-10-21",
   "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
   "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
   "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
   "periods": [
-   "202507",
-   "202607"
+   "202508",
+   "202608"
   ],
   "minBaselineItems": 25,
   "defined": true,
@@ -2836,131 +2836,131 @@
      "chapter 3"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 6526449,
-    "cost": 107311043,
-    "items12m": 74460629,
-    "cost12m": 1212217171,
-    "itemsYoY": -0.9,
-    "products": 200,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 5695366,
+    "cost": 95587332,
+    "items12m": 74270333,
+    "cost12m": 1212456481,
+    "itemsYoY": -3.2,
+    "products": 196,
     "topNational": [
      {
       "code": "0304010E0AA",
       "label": "Fexofenadine",
       "generic": true,
-      "items": 762458,
-      "share": 11.7,
-      "cost": 2293259,
-      "yoy": 13.6
+      "items": 629280,
+      "share": 11.0,
+      "cost": 2283073,
+      "yoy": 10.6
      },
      {
       "code": "0301011R0BI",
       "label": "Salamol",
       "generic": false,
-      "items": 564611,
-      "share": 8.7,
-      "cost": 1027933,
-      "yoy": -9.8
+      "items": 483897,
+      "share": 8.5,
+      "cost": 881742,
+      "yoy": -12.9
      },
      {
       "code": "0303020G0AA",
       "label": "Montelukast",
       "generic": true,
-      "items": 430331,
-      "share": 6.6,
-      "cost": 359409,
-      "yoy": 0.8
+      "items": 384597,
+      "share": 6.8,
+      "cost": 317218,
+      "yoy": -0.5
      },
      {
       "code": "0307000J0AA",
       "label": "Carbocisteine",
       "generic": true,
-      "items": 364155,
-      "share": 5.6,
-      "cost": 1621074,
-      "yoy": 4.5
+      "items": 331124,
+      "share": 5.8,
+      "cost": 1457982,
+      "yoy": 3.0
      },
      {
       "code": "0302000AABB",
       "label": "Trimbow",
       "generic": false,
-      "items": 350470,
-      "share": 5.4,
-      "cost": 17178143,
-      "yoy": 11.0
+      "items": 316563,
+      "share": 5.6,
+      "cost": 15501363,
+      "yoy": 8.1
      },
      {
       "code": "0301011R0AA",
       "label": "Salbutamol",
       "generic": true,
-      "items": 342890,
-      "share": 5.3,
-      "cost": 1947998,
-      "yoy": -25.2
-     },
-     {
-      "code": "0304010I0AA",
-      "label": "Cetirizine",
-      "generic": true,
-      "items": 325744,
-      "share": 5.0,
-      "cost": 496154,
-      "yoy": -1.3
+      "items": 292637,
+      "share": 5.1,
+      "cost": 1737179,
+      "yoy": -27.2
      },
      {
       "code": "0302000ABBC",
       "label": "Fostair",
       "generic": false,
-      "items": 321957,
-      "share": 4.9,
-      "cost": 11696073,
+      "items": 282804,
+      "share": 5.0,
+      "cost": 10273037,
       "yoy": null
+     },
+     {
+      "code": "0304010I0AA",
+      "label": "Cetirizine",
+      "generic": true,
+      "items": 272397,
+      "share": 4.8,
+      "cost": 379790,
+      "yoy": -4.4
      },
      {
       "code": "0302000K0BD",
       "label": "Symbicort",
       "generic": false,
-      "items": 290119,
-      "share": 4.4,
-      "cost": 10229202,
-      "yoy": 22.9
+      "items": 256962,
+      "share": 4.5,
+      "cost": 9062063,
+      "yoy": 18.8
      },
      {
       "code": "0304010W0AA",
       "label": "Promethazine hydrochloride",
       "generic": true,
-      "items": 226538,
-      "share": 3.5,
-      "cost": 365128,
-      "yoy": 8.5
+      "items": 207613,
+      "share": 3.6,
+      "cost": 532426,
+      "yoy": 6.1
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 94398,
+      "items": 81690,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 11303,
-        "share": 12.0
+        "items": 9228,
+        "share": 11.3
        },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 8079,
-        "share": 8.6
+        "items": 6745,
+        "share": 8.3
        },
        {
         "code": "0303020G0AA",
         "label": "Montelukast",
         "generic": true,
-        "items": 7184,
+        "items": 6200,
         "share": 7.6
        }
       ]
@@ -2968,27 +2968,27 @@
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 168802,
+      "items": 143202,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 15989,
-        "share": 9.5
+        "items": 12406,
+        "share": 8.7
        },
        {
         "code": "0301011R0BE",
         "label": "Ventolin",
         "generic": false,
-        "items": 10992,
+        "items": 9290,
         "share": 6.5
        },
        {
-        "code": "0301011R0BI",
-        "label": "Salamol",
-        "generic": false,
-        "items": 10799,
+        "code": "0303020G0AA",
+        "label": "Montelukast",
+        "generic": true,
+        "items": 9193,
         "share": 6.4
        }
       ]
@@ -2996,83 +2996,83 @@
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 157866,
+      "items": 135770,
       "leaders": [
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 14894,
-        "share": 9.4
+        "items": 12415,
+        "share": 9.1
        },
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 12500,
-        "share": 7.9
+        "items": 10037,
+        "share": 7.4
        },
        {
         "code": "0307000J0AA",
         "label": "Carbocisteine",
         "generic": true,
-        "items": 10488,
-        "share": 6.6
+        "items": 9378,
+        "share": 6.9
        }
       ]
      },
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 79805,
+      "items": 69187,
       "leaders": [
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 9262,
-        "share": 11.6
+        "items": 7865,
+        "share": 11.4
        },
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 7418,
-        "share": 9.3
+        "items": 6134,
+        "share": 8.9
        },
        {
         "code": "0307000J0AA",
         "label": "Carbocisteine",
         "generic": true,
-        "items": 4850,
-        "share": 6.1
+        "items": 4449,
+        "share": 6.4
        }
       ]
      },
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 315405,
+      "items": 273390,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 40675,
-        "share": 12.9
+        "items": 33252,
+        "share": 12.2
        },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 25845,
-        "share": 8.2
+        "items": 22044,
+        "share": 8.1
        },
        {
         "code": "0303020G0AA",
         "label": "Montelukast",
         "generic": true,
-        "items": 20740,
+        "items": 18179,
         "share": 6.6
        }
       ]
@@ -3080,55 +3080,55 @@
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 376007,
+      "items": 326438,
       "leaders": [
-       {
-        "code": "0304010E0AA",
-        "label": "Fexofenadine",
-        "generic": true,
-        "items": 44890,
-        "share": 11.9
-       },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 42620,
-        "share": 11.3
+        "items": 36576,
+        "share": 11.2
+       },
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 36417,
+        "share": 11.2
        },
        {
         "code": "0302000AABB",
         "label": "Trimbow",
         "generic": false,
-        "items": 24524,
-        "share": 6.5
+        "items": 21945,
+        "share": 6.7
        }
       ]
      },
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 81262,
+      "items": 71373,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 7783,
-        "share": 9.6
+        "items": 6469,
+        "share": 9.1
        },
        {
         "code": "0302000ABBC",
         "label": "Fostair",
         "generic": false,
-        "items": 5792,
-        "share": 7.1
+        "items": 5110,
+        "share": 7.2
        },
        {
-        "code": "0301011R0AA",
-        "label": "Salbutamol",
-        "generic": true,
-        "items": 5331,
+        "code": "0302000AABB",
+        "label": "Trimbow",
+        "generic": false,
+        "items": 4683,
         "share": 6.6
        }
       ]
@@ -3136,27 +3136,27 @@
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 113129,
+      "items": 96968,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 14493,
-        "share": 12.8
-       },
-       {
-        "code": "0301011R0BI",
-        "label": "Salamol",
-        "generic": false,
-        "items": 8464,
-        "share": 7.5
+        "items": 11489,
+        "share": 11.8
        },
        {
         "code": "0302000ABBC",
         "label": "Fostair",
         "generic": false,
-        "items": 8462,
+        "items": 7432,
+        "share": 7.7
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 7292,
         "share": 7.5
        }
       ]
@@ -3164,27 +3164,27 @@
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 122767,
+      "items": 104873,
       "leaders": [
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 16422,
-        "share": 13.4
-       },
-       {
-        "code": "0304010E0AA",
-        "label": "Fexofenadine",
-        "generic": true,
-        "items": 10690,
-        "share": 8.7
+        "items": 13832,
+        "share": 13.2
        },
        {
         "code": "0303020G0AA",
         "label": "Montelukast",
         "generic": true,
-        "items": 9984,
+        "items": 8609,
+        "share": 8.2
+       },
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 8547,
         "share": 8.1
        }
       ]
@@ -3192,503 +3192,503 @@
      {
       "icb": "QJK",
       "name": "NHS Devon",
-      "items": 147551,
+      "items": 129099,
       "leaders": [
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 14692,
-        "share": 10.0
-       },
-       {
-        "code": "0304010E0AA",
-        "label": "Fexofenadine",
-        "generic": true,
-        "items": 10238,
-        "share": 6.9
+        "items": 12417,
+        "share": 9.6
        },
        {
         "code": "0307000J0AA",
         "label": "Carbocisteine",
         "generic": true,
-        "items": 10203,
-        "share": 6.9
+        "items": 9281,
+        "share": 7.2
+       },
+       {
+        "code": "0304010E0AA",
+        "label": "Fexofenadine",
+        "generic": true,
+        "items": 8606,
+        "share": 6.7
        }
       ]
      },
      {
       "icb": "QVV",
       "name": "NHS Dorset",
-      "items": 86482,
+      "items": 75572,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 11536,
-        "share": 13.3
+        "items": 9604,
+        "share": 12.7
        },
        {
         "code": "0301011R0AA",
         "label": "Salbutamol",
         "generic": true,
-        "items": 6520,
-        "share": 7.5
+        "items": 5597,
+        "share": 7.4
        },
        {
-        "code": "0303020G0AA",
-        "label": "Montelukast",
-        "generic": true,
-        "items": 5066,
-        "share": 5.9
+        "code": "0302000ABBE",
+        "label": "Proxor",
+        "generic": false,
+        "items": 4732,
+        "share": 6.3
        }
       ]
      },
      {
       "icb": "D7T5G",
       "name": "NHS Essex",
-      "items": 215276,
+      "items": 190290,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 26339,
-        "share": 12.2
+        "items": 22274,
+        "share": 11.7
        },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 20281,
-        "share": 9.4
+        "items": 17537,
+        "share": 9.2
        },
        {
-        "code": "0303020G0AA",
-        "label": "Montelukast",
+        "code": "0304010W0AA",
+        "label": "Promethazine hydrochloride",
         "generic": true,
-        "items": 14119,
-        "share": 6.6
+        "items": 12691,
+        "share": 6.7
        }
       ]
      },
      {
       "icb": "QR1",
       "name": "NHS Gloucestershire",
-      "items": 64281,
+      "items": 57217,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 6903,
-        "share": 10.7
-       },
-       {
-        "code": "0301011R0BI",
-        "label": "Salamol",
-        "generic": false,
-        "items": 6035,
-        "share": 9.4
+        "items": 5770,
+        "share": 10.1
        },
        {
         "code": "0303020G0AA",
         "label": "Montelukast",
         "generic": true,
-        "items": 6008,
-        "share": 9.3
+        "items": 5619,
+        "share": 9.8
+       },
+       {
+        "code": "0301011R0BI",
+        "label": "Salamol",
+        "generic": false,
+        "items": 5131,
+        "share": 9.0
        }
       ]
      },
      {
       "icb": "QOP",
       "name": "NHS Greater Manchester",
-      "items": 409212,
+      "items": 357015,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 43860,
-        "share": 10.7
+        "items": 35886,
+        "share": 10.1
        },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 32588,
-        "share": 8.0
+        "items": 28203,
+        "share": 7.9
        },
        {
         "code": "0301011R0AA",
         "label": "Salbutamol",
         "generic": true,
-        "items": 28755,
-        "share": 7.0
+        "items": 24670,
+        "share": 6.9
        }
       ]
      },
      {
       "icb": "QRL",
       "name": "NHS Hampshire and Isle of Wight",
-      "items": 202045,
+      "items": 175302,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 27625,
-        "share": 13.7
+        "items": 23001,
+        "share": 13.1
        },
        {
         "code": "0302000K0BD",
         "label": "Symbicort",
         "generic": false,
-        "items": 13997,
-        "share": 6.9
+        "items": 12374,
+        "share": 7.1
        },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 13024,
-        "share": 6.4
+        "items": 11058,
+        "share": 6.3
        }
       ]
      },
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 80995,
+      "items": 70865,
       "leaders": [
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 8543,
-        "share": 10.5
+        "items": 7301,
+        "share": 10.3
        },
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 6905,
-        "share": 8.5
+        "items": 5887,
+        "share": 8.3
        },
        {
         "code": "0303020G0AA",
         "label": "Montelukast",
         "generic": true,
-        "items": 5482,
-        "share": 6.8
+        "items": 4885,
+        "share": 6.9
        }
       ]
      },
      {
       "icb": "QOQ",
       "name": "NHS Humber and North Yorkshire",
-      "items": 237105,
+      "items": 206877,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 31716,
-        "share": 13.4
-       },
-       {
-        "code": "0301011R0AA",
-        "label": "Salbutamol",
-        "generic": true,
-        "items": 17065,
-        "share": 7.2
+        "items": 26286,
+        "share": 12.7
        },
        {
         "code": "0302000AABB",
         "label": "Trimbow",
         "generic": false,
-        "items": 16936,
-        "share": 7.1
+        "items": 15200,
+        "share": 7.3
+       },
+       {
+        "code": "0301011R0AA",
+        "label": "Salbutamol",
+        "generic": true,
+        "items": 14363,
+        "share": 6.9
        }
       ]
      },
      {
       "icb": "QKS",
       "name": "NHS Kent and Medway",
-      "items": 199247,
+      "items": 174400,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 22877,
-        "share": 11.5
+        "items": 18918,
+        "share": 10.8
        },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 20218,
-        "share": 10.1
+        "items": 17750,
+        "share": 10.2
        },
        {
-        "code": "0302000ABBC",
-        "label": "Fostair",
-        "generic": false,
-        "items": 13514,
-        "share": 6.8
+        "code": "0304010W0AA",
+        "label": "Promethazine hydrochloride",
+        "generic": true,
+        "items": 12282,
+        "share": 7.0
        }
       ]
      },
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 234097,
+      "items": 202686,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 26750,
-        "share": 11.4
+        "items": 22534,
+        "share": 11.1
        },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 25419,
-        "share": 10.9
+        "items": 21656,
+        "share": 10.7
        },
        {
         "code": "0302000ABBC",
         "label": "Fostair",
         "generic": false,
-        "items": 17058,
-        "share": 7.3
+        "items": 14472,
+        "share": 7.1
        }
       ]
      },
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 120584,
+      "items": 106704,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 17728,
-        "share": 14.7
+        "items": 14869,
+        "share": 13.9
        },
        {
         "code": "0302000ABBC",
         "label": "Fostair",
         "generic": false,
-        "items": 11447,
-        "share": 9.5
+        "items": 10242,
+        "share": 9.6
        },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 10094,
-        "share": 8.4
+        "items": 8802,
+        "share": 8.2
        }
       ]
      },
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 125615,
+      "items": 112926,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 16526,
-        "share": 13.2
+        "items": 14416,
+        "share": 12.8
        },
        {
         "code": "0303020G0AA",
         "label": "Montelukast",
         "generic": true,
-        "items": 10886,
-        "share": 8.7
+        "items": 9894,
+        "share": 8.8
        },
        {
         "code": "0301011R0AA",
         "label": "Salbutamol",
         "generic": true,
-        "items": 10239,
-        "share": 8.2
+        "items": 8788,
+        "share": 7.8
        }
       ]
      },
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 230467,
+      "items": 204740,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 33702,
-        "share": 14.6
+        "items": 29067,
+        "share": 14.2
        },
        {
         "code": "0303020G0AA",
         "label": "Montelukast",
         "generic": true,
-        "items": 18148,
-        "share": 7.9
+        "items": 16355,
+        "share": 8.0
        },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 17289,
-        "share": 7.5
+        "items": 14984,
+        "share": 7.3
        }
       ]
      },
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 185878,
+      "items": 164118,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 26138,
-        "share": 14.1
+        "items": 21799,
+        "share": 13.3
        },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 18052,
-        "share": 9.7
+        "items": 15779,
+        "share": 9.6
        },
        {
         "code": "0303020G0AA",
         "label": "Montelukast",
         "generic": true,
-        "items": 13479,
-        "share": 7.3
+        "items": 12308,
+        "share": 7.5
        }
       ]
      },
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 453416,
+      "items": 401690,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 46308,
-        "share": 10.2
+        "items": 38771,
+        "share": 9.7
        },
        {
         "code": "0303020G0AA",
         "label": "Montelukast",
         "generic": true,
-        "items": 35978,
-        "share": 7.9
+        "items": 33004,
+        "share": 8.2
        },
        {
         "code": "0307000J0AA",
         "label": "Carbocisteine",
         "generic": true,
-        "items": 34309,
-        "share": 7.6
+        "items": 31535,
+        "share": 7.9
        }
       ]
      },
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 91043,
+      "items": 79410,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 9938,
-        "share": 10.9
+        "items": 8351,
+        "share": 10.5
        },
        {
         "code": "0302000K0BI",
         "label": "Fobumix Easyhaler",
         "generic": false,
-        "items": 8388,
-        "share": 9.2
+        "items": 7507,
+        "share": 9.5
        },
        {
         "code": "0303020G0AA",
         "label": "Montelukast",
         "generic": true,
-        "items": 7999,
-        "share": 8.8
+        "items": 7080,
+        "share": 8.9
        }
       ]
      },
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 142459,
+      "items": 124126,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 15614,
-        "share": 11.0
+        "items": 12928,
+        "share": 10.4
        },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 14267,
-        "share": 10.0
+        "items": 12200,
+        "share": 9.8
        },
        {
-        "code": "0303020G0AA",
-        "label": "Montelukast",
-        "generic": true,
-        "items": 8483,
-        "share": 6.0
+        "code": "0302000AABB",
+        "label": "Trimbow",
+        "generic": false,
+        "items": 7538,
+        "share": 6.1
        }
       ]
      },
      {
       "icb": "QOC",
       "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 56485,
+      "items": 49867,
       "leaders": [
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 6599,
-        "share": 11.7
+        "items": 5650,
+        "share": 11.3
        },
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 6347,
-        "share": 11.2
+        "items": 5327,
+        "share": 10.7
        },
        {
         "code": "0303020G0AA",
         "label": "Montelukast",
         "generic": true,
-        "items": 4407,
+        "items": 3870,
         "share": 7.8
        }
       ]
@@ -3696,252 +3696,252 @@
      {
       "icb": "QSL",
       "name": "NHS Somerset",
-      "items": 56713,
+      "items": 49793,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 5761,
-        "share": 10.2
+        "items": 4814,
+        "share": 9.7
        },
        {
         "code": "0302000K0BI",
         "label": "Fobumix Easyhaler",
         "generic": false,
-        "items": 4123,
-        "share": 7.3
+        "items": 3740,
+        "share": 7.5
        },
        {
         "code": "0302000AABB",
         "label": "Trimbow",
         "generic": false,
-        "items": 3930,
-        "share": 6.9
+        "items": 3580,
+        "share": 7.2
        }
       ]
      },
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 130892,
+      "items": 114626,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 15982,
-        "share": 12.2
+        "items": 13047,
+        "share": 11.4
        },
        {
         "code": "0302000ABBC",
         "label": "Fostair",
         "generic": false,
-        "items": 11187,
-        "share": 8.5
+        "items": 9913,
+        "share": 8.6
        },
        {
         "code": "0301011R0AA",
         "label": "Salbutamol",
         "generic": true,
-        "items": 11024,
-        "share": 8.4
+        "items": 9250,
+        "share": 8.1
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 117683,
+      "items": 103843,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 15923,
-        "share": 13.5
+        "items": 13057,
+        "share": 12.6
        },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 13337,
-        "share": 11.3
+        "items": 11415,
+        "share": 11.0
        },
        {
         "code": "0307000J0AA",
         "label": "Carbocisteine",
         "generic": true,
-        "items": 9301,
-        "share": 7.9
+        "items": 8689,
+        "share": 8.4
        }
       ]
      },
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 222312,
+      "items": 193241,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 25783,
-        "share": 11.6
+        "items": 21371,
+        "share": 11.1
        },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 23045,
-        "share": 10.4
+        "items": 19735,
+        "share": 10.2
        },
        {
         "code": "0303020G0AA",
         "label": "Montelukast",
         "generic": true,
-        "items": 15450,
-        "share": 6.9
+        "items": 13892,
+        "share": 7.2
        }
       ]
      },
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 158271,
+      "items": 139051,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 16987,
-        "share": 10.7
+        "items": 14100,
+        "share": 10.1
        },
        {
         "code": "0302000ABBC",
         "label": "Fostair",
         "generic": false,
-        "items": 15729,
-        "share": 9.9
+        "items": 14062,
+        "share": 10.1
        },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 14249,
-        "share": 9.0
+        "items": 12196,
+        "share": 8.8
        }
       ]
      },
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 269893,
+      "items": 235520,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 35729,
-        "share": 13.2
+        "items": 29451,
+        "share": 12.5
        },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 24264,
-        "share": 9.0
+        "items": 20615,
+        "share": 8.8
        },
        {
         "code": "0307000J0AA",
         "label": "Carbocisteine",
         "generic": true,
-        "items": 16052,
-        "share": 5.9
+        "items": 14431,
+        "share": 6.1
        }
       ]
      },
      {
       "icb": "S0E4D",
       "name": "NHS Thames Valley",
-      "items": 190781,
+      "items": 165294,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 23090,
-        "share": 12.1
+        "items": 18687,
+        "share": 11.3
        },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 21080,
-        "share": 11.0
+        "items": 17873,
+        "share": 10.8
        },
        {
         "code": "0303020G0AA",
         "label": "Montelukast",
         "generic": true,
-        "items": 11644,
-        "share": 6.1
+        "items": 10396,
+        "share": 6.3
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 308615,
+      "items": 267134,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 33058,
-        "share": 10.7
+        "items": 26724,
+        "share": 10.0
        },
        {
         "code": "0301011R0AA",
         "label": "Salbutamol",
         "generic": true,
-        "items": 25566,
-        "share": 8.3
+        "items": 21505,
+        "share": 8.1
        },
        {
         "code": "0303020G0AA",
         "label": "Montelukast",
         "generic": true,
-        "items": 23261,
-        "share": 7.5
+        "items": 20543,
+        "share": 7.7
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 279161,
+      "items": 240707,
       "leaders": [
        {
         "code": "0304010E0AA",
         "label": "Fexofenadine",
         "generic": true,
-        "items": 37242,
-        "share": 13.3
+        "items": 29658,
+        "share": 12.3
        },
        {
         "code": "0301011R0BI",
         "label": "Salamol",
         "generic": false,
-        "items": 31278,
-        "share": 11.2
+        "items": 26200,
+        "share": 10.9
        },
        {
         "code": "0304010I0AA",
         "label": "Cetirizine",
         "generic": true,
-        "items": 19820,
-        "share": 7.1
+        "items": 16247,
+        "share": 6.7
        }
       ]
      }
@@ -3955,159 +3955,159 @@
      "21.32"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 26981,
-    "cost": 307854,
-    "items12m": 342274,
-    "cost12m": 3625965,
-    "itemsYoY": -8.0,
-    "products": 47,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 22694,
+    "cost": 260606,
+    "items12m": 340160,
+    "cost12m": 3617869,
+    "itemsYoY": -8.5,
+    "products": 48,
     "topNational": [
      {
       "code": "21120000163",
       "label": "1 Easy peak flow meter standard range",
       "generic": false,
-      "items": 4389,
-      "share": 16.3,
-      "cost": 16926,
-      "yoy": -21.9
+      "items": 3566,
+      "share": 15.7,
+      "cost": 13732,
+      "yoy": -22.5
      },
      {
       "code": "21120000130",
       "label": "Mini-Wright peak flow meter standard range",
       "generic": false,
-      "items": 3284,
-      "share": 12.2,
-      "cost": 22304,
-      "yoy": -24.0
+      "items": 2679,
+      "share": 11.8,
+      "cost": 18181,
+      "yoy": -24.6
      },
      {
       "code": "21120000161",
       "label": "Medi peak flow meter standard range",
       "generic": false,
-      "items": 2480,
+      "items": 2099,
       "share": 9.2,
-      "cost": 10273,
-      "yoy": -23.7
-     },
-     {
-      "code": "21320000101",
-      "label": "Nebusal",
-      "generic": false,
-      "items": 1605,
-      "share": 5.9,
-      "cost": 42538,
-      "yoy": -1.7
+      "cost": 8675,
+      "yoy": -22.1
      },
      {
       "code": "21320000102",
       "label": "MucoClear",
       "generic": false,
-      "items": 1569,
-      "share": 5.8,
-      "cost": 51402,
-      "yoy": 9.0
+      "items": 1421,
+      "share": 6.3,
+      "cost": 46799,
+      "yoy": 6.8
      },
      {
-      "code": "21120000132",
-      "label": "AirZone peak flow meter standard range",
+      "code": "21320000101",
+      "label": "Nebusal",
       "generic": false,
-      "items": 1505,
-      "share": 5.6,
-      "cost": 5717,
-      "yoy": 15.9
+      "items": 1363,
+      "share": 6.0,
+      "cost": 35457,
+      "yoy": -7.7
      },
      {
       "code": "21120000120",
       "label": "Peak flow meter standard range",
       "generic": false,
-      "items": 1371,
-      "share": 5.1,
-      "cost": 5293,
-      "yoy": 17.5
+      "items": 1235,
+      "share": 5.4,
+      "cost": 4741,
+      "yoy": 29.7
+     },
+     {
+      "code": "21120000132",
+      "label": "AirZone peak flow meter standard range",
+      "generic": false,
+      "items": 1199,
+      "share": 5.3,
+      "cost": 4556,
+      "yoy": 10.5
      },
      {
       "code": "21320000105",
       "label": "Respi-Clear",
       "generic": false,
-      "items": 1327,
-      "share": 4.9,
-      "cost": 17889,
-      "yoy": 16.4
+      "items": 1173,
+      "share": 5.2,
+      "cost": 16020,
+      "yoy": 10.7
      },
      {
-      "code": "21120000164",
-      "label": "1 Easy peak flow meter low range",
+      "code": "21320000111",
+      "label": "PulmoClear",
       "generic": false,
-      "items": 980,
-      "share": 3.6,
-      "cost": 5341,
-      "yoy": 1.0
+      "items": 767,
+      "share": 3.4,
+      "cost": 12647,
+      "yoy": 16.4
      },
      {
       "code": "21120000131",
       "label": "Mini-Wright peak flow meter low range",
       "generic": false,
-      "items": 967,
-      "share": 3.6,
-      "cost": 6633,
-      "yoy": -7.6
+      "items": 752,
+      "share": 3.3,
+      "cost": 5162,
+      "yoy": -10.4
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 379,
+      "items": 341,
       "leaders": [
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 62,
+        "share": 18.2
+       },
        {
         "code": "21120000163",
         "label": "1 Easy peak flow meter standard range",
         "generic": false,
-        "items": 88,
-        "share": 23.2
+        "items": 60,
+        "share": 17.6
        },
        {
         "code": "21120000161",
         "label": "Medi peak flow meter standard range",
         "generic": false,
-        "items": 51,
-        "share": 13.5
-       },
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 41,
-        "share": 10.8
+        "items": 47,
+        "share": 13.8
        }
       ]
      },
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 809,
+      "items": 657,
       "leaders": [
        {
         "code": "21120000163",
         "label": "1 Easy peak flow meter standard range",
         "generic": false,
-        "items": 159,
-        "share": 19.7
+        "items": 134,
+        "share": 20.4
        },
        {
         "code": "21120000130",
         "label": "Mini-Wright peak flow meter standard range",
         "generic": false,
-        "items": 150,
-        "share": 18.5
+        "items": 120,
+        "share": 18.3
        },
        {
         "code": "21120000161",
         "label": "Medi peak flow meter standard range",
         "generic": false,
-        "items": 71,
+        "items": 58,
         "share": 8.8
        }
       ]
@@ -4115,952 +4115,952 @@
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 601,
+      "items": 524,
       "leaders": [
        {
         "code": "21120000163",
         "label": "1 Easy peak flow meter standard range",
         "generic": false,
-        "items": 166,
-        "share": 27.6
-       },
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 70,
-        "share": 11.6
+        "items": 136,
+        "share": 26.0
        },
        {
         "code": "21320000102",
         "label": "MucoClear",
         "generic": false,
-        "items": 62,
-        "share": 10.3
-       }
-      ]
-     },
-     {
-      "icb": "QUY",
-      "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 356,
-      "leaders": [
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 60,
-        "share": 16.9
-       },
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 50,
-        "share": 14.0
-       },
-       {
-        "code": "21120000164",
-        "label": "1 Easy peak flow meter low range",
-        "generic": false,
-        "items": 37,
-        "share": 10.4
-       }
-      ]
-     },
-     {
-      "icb": "S1Y5D",
-      "name": "NHS Central East",
-      "items": 1511,
-      "leaders": [
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 265,
-        "share": 17.5
-       },
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 155,
-        "share": 10.3
-       },
-       {
-        "code": "21120000161",
-        "label": "Medi peak flow meter standard range",
-        "generic": false,
-        "items": 126,
-        "share": 8.3
-       }
-      ]
-     },
-     {
-      "icb": "QYG",
-      "name": "NHS Cheshire and Merseyside",
-      "items": 1540,
-      "leaders": [
-       {
-        "code": "21320000105",
-        "label": "Respi-Clear",
-        "generic": false,
-        "items": 316,
-        "share": 20.5
-       },
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 127,
-        "share": 8.2
-       },
-       {
-        "code": "21320000100",
-        "label": "MucoClear",
-        "generic": false,
-        "items": 114,
-        "share": 7.4
-       }
-      ]
-     },
-     {
-      "icb": "QT6",
-      "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 261,
-      "leaders": [
-       {
-        "code": "21320000101",
-        "label": "Nebusal",
-        "generic": false,
-        "items": 47,
-        "share": 18.0
-       },
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 30,
-        "share": 11.5
-       },
-       {
-        "code": "21120000161",
-        "label": "Medi peak flow meter standard range",
-        "generic": false,
-        "items": 30,
-        "share": 11.5
-       }
-      ]
-     },
-     {
-      "icb": "QWU",
-      "name": "NHS Coventry and Warwickshire",
-      "items": 364,
-      "leaders": [
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 59,
-        "share": 16.2
-       },
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 54,
-        "share": 14.8
-       },
-       {
-        "code": "21120000132",
-        "label": "AirZone peak flow meter standard range",
-        "generic": false,
-        "items": 39,
+        "items": 56,
         "share": 10.7
-       }
-      ]
-     },
-     {
-      "icb": "QJ2",
-      "name": "NHS Derby and Derbyshire",
-      "items": 418,
-      "leaders": [
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 100,
-        "share": 23.9
-       },
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 85,
-        "share": 20.3
-       },
-       {
-        "code": "21120000161",
-        "label": "Medi peak flow meter standard range",
-        "generic": false,
-        "items": 31,
-        "share": 7.4
-       }
-      ]
-     },
-     {
-      "icb": "QJK",
-      "name": "NHS Devon",
-      "items": 839,
-      "leaders": [
-       {
-        "code": "21120000161",
-        "label": "Medi peak flow meter standard range",
-        "generic": false,
-        "items": 91,
-        "share": 10.8
-       },
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 86,
-        "share": 10.3
-       },
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 74,
-        "share": 8.8
-       }
-      ]
-     },
-     {
-      "icb": "QVV",
-      "name": "NHS Dorset",
-      "items": 301,
-      "leaders": [
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 94,
-        "share": 31.2
-       },
-       {
-        "code": "21120000132",
-        "label": "AirZone peak flow meter standard range",
-        "generic": false,
-        "items": 28,
-        "share": 9.3
-       },
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 27,
-        "share": 9.0
-       }
-      ]
-     },
-     {
-      "icb": "D7T5G",
-      "name": "NHS Essex",
-      "items": 1278,
-      "leaders": [
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 266,
-        "share": 20.8
-       },
-       {
-        "code": "21120000161",
-        "label": "Medi peak flow meter standard range",
-        "generic": false,
-        "items": 202,
-        "share": 15.8
-       },
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 109,
-        "share": 8.5
-       }
-      ]
-     },
-     {
-      "icb": "QR1",
-      "name": "NHS Gloucestershire",
-      "items": 233,
-      "leaders": [
-       {
-        "code": "21120000120",
-        "label": "Peak flow meter standard range",
-        "generic": false,
-        "items": 44,
-        "share": 18.9
-       },
-       {
-        "code": "21320000105",
-        "label": "Respi-Clear",
-        "generic": false,
-        "items": 29,
-        "share": 12.4
-       },
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 20,
-        "share": 8.6
-       }
-      ]
-     },
-     {
-      "icb": "QOP",
-      "name": "NHS Greater Manchester",
-      "items": 1917,
-      "leaders": [
-       {
-        "code": "21320000101",
-        "label": "Nebusal",
-        "generic": false,
-        "items": 373,
-        "share": 19.5
-       },
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 193,
-        "share": 10.1
-       },
-       {
-        "code": "21320000102",
-        "label": "MucoClear",
-        "generic": false,
-        "items": 152,
-        "share": 7.9
-       }
-      ]
-     },
-     {
-      "icb": "QRL",
-      "name": "NHS Hampshire and Isle of Wight",
-      "items": 946,
-      "leaders": [
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 178,
-        "share": 18.8
-       },
-       {
-        "code": "21320000108",
-        "label": "Salineb",
-        "generic": false,
-        "items": 87,
-        "share": 9.2
-       },
-       {
-        "code": "21120000161",
-        "label": "Medi peak flow meter standard range",
-        "generic": false,
-        "items": 86,
-        "share": 9.1
-       }
-      ]
-     },
-     {
-      "icb": "QGH",
-      "name": "NHS Herefordshire and Worcestershire",
-      "items": 303,
-      "leaders": [
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 68,
-        "share": 22.4
-       },
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 50,
-        "share": 16.5
-       },
-       {
-        "code": "21120000120",
-        "label": "Peak flow meter standard range",
-        "generic": false,
-        "items": 47,
-        "share": 15.5
-       }
-      ]
-     },
-     {
-      "icb": "QOQ",
-      "name": "NHS Humber and North Yorkshire",
-      "items": 490,
-      "leaders": [
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 123,
-        "share": 25.1
-       },
-       {
-        "code": "21120000161",
-        "label": "Medi peak flow meter standard range",
-        "generic": false,
-        "items": 67,
-        "share": 13.7
        },
        {
         "code": "21120000130",
         "label": "Mini-Wright peak flow meter standard range",
         "generic": false,
         "items": 55,
-        "share": 11.2
+        "share": 10.5
        }
       ]
      },
      {
-      "icb": "QKS",
-      "name": "NHS Kent and Medway",
-      "items": 709,
-      "leaders": [
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 152,
-        "share": 21.4
-       },
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 102,
-        "share": 14.4
-       },
-       {
-        "code": "21320000102",
-        "label": "MucoClear",
-        "generic": false,
-        "items": 60,
-        "share": 8.5
-       }
-      ]
-     },
-     {
-      "icb": "QE1",
-      "name": "NHS Lancashire and South Cumbria",
-      "items": 894,
-      "leaders": [
-       {
-        "code": "21320000101",
-        "label": "Nebusal",
-        "generic": false,
-        "items": 104,
-        "share": 11.6
-       },
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 95,
-        "share": 10.6
-       },
-       {
-        "code": "21320000102",
-        "label": "MucoClear",
-        "generic": false,
-        "items": 73,
-        "share": 8.2
-       }
-      ]
-     },
-     {
-      "icb": "QK1",
-      "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 293,
+      "icb": "QUY",
+      "name": "NHS Bristol, North Somerset and South Gloucestershire",
+      "items": 301,
       "leaders": [
        {
         "code": "21120000163",
         "label": "1 Easy peak flow meter standard range",
         "generic": false,
-        "items": 46,
-        "share": 15.7
+        "items": 45,
+        "share": 15.0
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 43,
+        "share": 14.3
        },
        {
         "code": "21120000161",
         "label": "Medi peak flow meter standard range",
         "generic": false,
-        "items": 34,
-        "share": 11.6
-       },
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 32,
-        "share": 10.9
+        "items": 41,
+        "share": 13.6
        }
       ]
      },
      {
-      "icb": "QJM",
-      "name": "NHS Lincolnshire",
-      "items": 313,
-      "leaders": [
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 68,
-        "share": 21.7
-       },
-       {
-        "code": "21120000120",
-        "label": "Peak flow meter standard range",
-        "generic": false,
-        "items": 39,
-        "share": 12.5
-       },
-       {
-        "code": "21120000161",
-        "label": "Medi peak flow meter standard range",
-        "generic": false,
-        "items": 34,
-        "share": 10.9
-       }
-      ]
-     },
-     {
-      "icb": "T6Y0W",
-      "name": "NHS Norfolk and Suffolk",
-      "items": 905,
+      "icb": "S1Y5D",
+      "name": "NHS Central East",
+      "items": 1181,
       "leaders": [
        {
         "code": "21120000163",
         "label": "1 Easy peak flow meter standard range",
         "generic": false,
-        "items": 231,
-        "share": 25.5
-       },
-       {
-        "code": "21120000161",
-        "label": "Medi peak flow meter standard range",
-        "generic": false,
-        "items": 110,
-        "share": 12.2
-       },
-       {
-        "code": "21120000120",
-        "label": "Peak flow meter standard range",
-        "generic": false,
-        "items": 75,
-        "share": 8.3
-       }
-      ]
-     },
-     {
-      "icb": "QMF",
-      "name": "NHS North East London",
-      "items": 1131,
-      "leaders": [
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 239,
-        "share": 21.1
-       },
-       {
-        "code": "21320000102",
-        "label": "MucoClear",
-        "generic": false,
-        "items": 160,
-        "share": 14.1
+        "items": 192,
+        "share": 16.3
        },
        {
         "code": "21120000130",
         "label": "Mini-Wright peak flow meter standard range",
         "generic": false,
-        "items": 158,
-        "share": 14.0
-       }
-      ]
-     },
-     {
-      "icb": "QHM",
-      "name": "NHS North East and North Cumbria",
-      "items": 1213,
-      "leaders": [
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 196,
-        "share": 16.2
-       },
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 149,
-        "share": 12.3
+        "items": 119,
+        "share": 10.1
        },
        {
         "code": "21120000161",
         "label": "Medi peak flow meter standard range",
         "generic": false,
-        "items": 141,
-        "share": 11.6
+        "items": 93,
+        "share": 7.9
        }
       ]
      },
      {
-      "icb": "QPM",
-      "name": "NHS Northamptonshire",
-      "items": 710,
+      "icb": "QYG",
+      "name": "NHS Cheshire and Merseyside",
+      "items": 1301,
       "leaders": [
        {
         "code": "21320000105",
         "label": "Respi-Clear",
         "generic": false,
-        "items": 392,
-        "share": 55.2
+        "items": 268,
+        "share": 20.6
+       },
+       {
+        "code": "21320000100",
+        "label": "MucoClear",
+        "generic": false,
+        "items": 119,
+        "share": 9.1
        },
        {
         "code": "21120000163",
         "label": "1 Easy peak flow meter standard range",
         "generic": false,
-        "items": 83,
-        "share": 11.7
+        "items": 107,
+        "share": 8.2
+       }
+      ]
+     },
+     {
+      "icb": "QT6",
+      "name": "NHS Cornwall and the Isles of Scilly",
+      "items": 236,
+      "leaders": [
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 42,
+        "share": 17.8
+       },
+       {
+        "code": "21320000101",
+        "label": "Nebusal",
+        "generic": false,
+        "items": 32,
+        "share": 13.6
+       },
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 24,
+        "share": 10.2
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 309,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 57,
+        "share": 18.4
        },
        {
         "code": "21120000161",
         "label": "Medi peak flow meter standard range",
         "generic": false,
         "items": 38,
-        "share": 5.4
-       }
-      ]
-     },
-     {
-      "icb": "QT1",
-      "name": "NHS Nottingham and Nottinghamshire",
-      "items": 728,
-      "leaders": [
-       {
-        "code": "21320000114",
-        "label": "PulmoClear",
-        "generic": false,
-        "items": 165,
-        "share": 22.7
-       },
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 101,
-        "share": 13.9
-       },
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 95,
-        "share": 13.0
-       }
-      ]
-     },
-     {
-      "icb": "QOC",
-      "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 330,
-      "leaders": [
-       {
-        "code": "21120000120",
-        "label": "Peak flow meter standard range",
-        "generic": false,
-        "items": 50,
-        "share": 15.2
-       },
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 48,
-        "share": 14.5
-       },
-       {
-        "code": "21320000101",
-        "label": "Nebusal",
-        "generic": false,
-        "items": 37,
-        "share": 11.2
-       }
-      ]
-     },
-     {
-      "icb": "QSL",
-      "name": "NHS Somerset",
-      "items": 144,
-      "leaders": [
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 24,
-        "share": 16.7
+        "share": 12.3
        },
        {
         "code": "21120000120",
         "label": "Peak flow meter standard range",
         "generic": false,
-        "items": 19,
-        "share": 13.2
-       },
-       {
-        "code": "21120000161",
-        "label": "Medi peak flow meter standard range",
-        "generic": false,
-        "items": 16,
-        "share": 11.1
+        "items": 35,
+        "share": 11.3
        }
       ]
      },
      {
-      "icb": "QKK",
-      "name": "NHS South East London",
-      "items": 806,
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 317,
       "leaders": [
        {
         "code": "21120000163",
         "label": "1 Easy peak flow meter standard range",
         "generic": false,
-        "items": 159,
-        "share": 19.7
+        "items": 71,
+        "share": 22.4
        },
        {
         "code": "21120000130",
         "label": "Mini-Wright peak flow meter standard range",
         "generic": false,
-        "items": 128,
-        "share": 15.9
-       },
-       {
-        "code": "21320000102",
-        "label": "MucoClear",
-        "generic": false,
-        "items": 119,
-        "share": 14.8
-       }
-      ]
-     },
-     {
-      "icb": "QWE",
-      "name": "NHS South West London",
-      "items": 637,
-      "leaders": [
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 131,
-        "share": 20.6
+        "items": 57,
+        "share": 18.0
        },
        {
         "code": "21120000161",
         "label": "Medi peak flow meter standard range",
         "generic": false,
-        "items": 81,
-        "share": 12.7
-       },
+        "items": 38,
+        "share": 12.0
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 723,
+      "leaders": [
        {
         "code": "21120000130",
         "label": "Mini-Wright peak flow meter standard range",
         "generic": false,
         "items": 74,
-        "share": 11.6
-       }
-      ]
-     },
-     {
-      "icb": "QF7",
-      "name": "NHS South Yorkshire",
-      "items": 560,
-      "leaders": [
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 107,
-        "share": 19.1
+        "share": 10.2
        },
        {
         "code": "21120000163",
         "label": "1 Easy peak flow meter standard range",
         "generic": false,
-        "items": 85,
-        "share": 15.2
+        "items": 72,
+        "share": 10.0
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 69,
+        "share": 9.5
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 268,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 98,
+        "share": 36.6
+       },
+       {
+        "code": "21120000132",
+        "label": "AirZone peak flow meter standard range",
+        "generic": false,
+        "items": 29,
+        "share": 10.8
+       },
+       {
+        "code": "21120000145",
+        "label": "Vitalograph peak flow meter standard range",
+        "generic": false,
+        "items": 21,
+        "share": 7.8
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 1049,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 212,
+        "share": 20.2
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 155,
+        "share": 14.8
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 82,
+        "share": 7.8
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 183,
+      "leaders": [
+       {
+        "code": "21120000120",
+        "label": "Peak flow meter standard range",
+        "generic": false,
+        "items": 32,
+        "share": 17.5
+       },
+       {
+        "code": "21320000105",
+        "label": "Respi-Clear",
+        "generic": false,
+        "items": 26,
+        "share": 14.2
+       },
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 19,
+        "share": 10.4
+       }
+      ]
+     },
+     {
+      "icb": "QOP",
+      "name": "NHS Greater Manchester",
+      "items": 1625,
+      "leaders": [
+       {
+        "code": "21320000101",
+        "label": "Nebusal",
+        "generic": false,
+        "items": 347,
+        "share": 21.4
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 176,
+        "share": 10.8
+       },
+       {
+        "code": "21320000102",
+        "label": "MucoClear",
+        "generic": false,
+        "items": 141,
+        "share": 8.7
+       }
+      ]
+     },
+     {
+      "icb": "QRL",
+      "name": "NHS Hampshire and Isle of Wight",
+      "items": 792,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 130,
+        "share": 16.4
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 69,
+        "share": 8.7
+       },
+       {
+        "code": "21320000114",
+        "label": "PulmoClear",
+        "generic": false,
+        "items": 68,
+        "share": 8.6
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 245,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 46,
+        "share": 18.8
+       },
+       {
+        "code": "21120000120",
+        "label": "Peak flow meter standard range",
+        "generic": false,
+        "items": 38,
+        "share": 15.5
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 37,
+        "share": 15.1
+       }
+      ]
+     },
+     {
+      "icb": "QOQ",
+      "name": "NHS Humber and North Yorkshire",
+      "items": 434,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 80,
+        "share": 18.4
        },
        {
         "code": "21120000161",
         "label": "Medi peak flow meter standard range",
         "generic": false,
         "items": 79,
-        "share": 14.1
-       }
-      ]
-     },
-     {
-      "icb": "QNC",
-      "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 676,
-      "leaders": [
+        "share": 18.2
+       },
        {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
+        "code": "21120000132",
+        "label": "AirZone peak flow meter standard range",
         "generic": false,
-        "items": 84,
+        "items": 54,
         "share": 12.4
-       },
-       {
-        "code": "21120000163",
-        "label": "1 Easy peak flow meter standard range",
-        "generic": false,
-        "items": 80,
-        "share": 11.8
-       },
-       {
-        "code": "21320000111",
-        "label": "PulmoClear",
-        "generic": false,
-        "items": 68,
-        "share": 10.1
        }
       ]
      },
      {
-      "icb": "S9B9J",
-      "name": "NHS Surrey and Sussex",
-      "items": 1167,
+      "icb": "QKS",
+      "name": "NHS Kent and Medway",
+      "items": 615,
       "leaders": [
-       {
-        "code": "21120000130",
-        "label": "Mini-Wright peak flow meter standard range",
-        "generic": false,
-        "items": 195,
-        "share": 16.7
-       },
        {
         "code": "21120000163",
         "label": "1 Easy peak flow meter standard range",
         "generic": false,
-        "items": 182,
-        "share": 15.6
+        "items": 114,
+        "share": 18.5
        },
        {
-        "code": "21120000161",
-        "label": "Medi peak flow meter standard range",
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
         "generic": false,
-        "items": 107,
+        "items": 111,
+        "share": 18.0
+       },
+       {
+        "code": "21120000132",
+        "label": "AirZone peak flow meter standard range",
+        "generic": false,
+        "items": 49,
+        "share": 8.0
+       }
+      ]
+     },
+     {
+      "icb": "QE1",
+      "name": "NHS Lancashire and South Cumbria",
+      "items": 779,
+      "leaders": [
+       {
+        "code": "21320000101",
+        "label": "Nebusal",
+        "generic": false,
+        "items": 86,
+        "share": 11.0
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 75,
+        "share": 9.6
+       },
+       {
+        "code": "21320000102",
+        "label": "MucoClear",
+        "generic": false,
+        "items": 72,
         "share": 9.2
        }
       ]
      },
      {
-      "icb": "S0E4D",
-      "name": "NHS Thames Valley",
-      "items": 779,
+      "icb": "QK1",
+      "name": "NHS Leicester, Leicestershire and Rutland",
+      "items": 297,
       "leaders": [
        {
         "code": "21120000163",
         "label": "1 Easy peak flow meter standard range",
         "generic": false,
-        "items": 200,
-        "share": 25.7
-       },
-       {
-        "code": "21120000161",
-        "label": "Medi peak flow meter standard range",
-        "generic": false,
-        "items": 101,
-        "share": 13.0
+        "items": 49,
+        "share": 16.5
        },
        {
         "code": "21120000130",
         "label": "Mini-Wright peak flow meter standard range",
         "generic": false,
-        "items": 91,
-        "share": 11.7
+        "items": 39,
+        "share": 13.1
+       },
+       {
+        "code": "21320000102",
+        "label": "MucoClear",
+        "generic": false,
+        "items": 29,
+        "share": 9.8
        }
       ]
      },
      {
-      "icb": "QWO",
-      "name": "NHS West Yorkshire",
-      "items": 951,
+      "icb": "QJM",
+      "name": "NHS Lincolnshire",
+      "items": 252,
+      "leaders": [
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 51,
+        "share": 20.2
+       },
+       {
+        "code": "21120000120",
+        "label": "Peak flow meter standard range",
+        "generic": false,
+        "items": 25,
+        "share": 9.9
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 24,
+        "share": 9.5
+       }
+      ]
+     },
+     {
+      "icb": "T6Y0W",
+      "name": "NHS Norfolk and Suffolk",
+      "items": 755,
       "leaders": [
        {
         "code": "21120000163",
         "label": "1 Easy peak flow meter standard range",
         "generic": false,
-        "items": 164,
+        "items": 180,
+        "share": 23.8
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 77,
+        "share": 10.2
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 67,
+        "share": 8.9
+       }
+      ]
+     },
+     {
+      "icb": "QMF",
+      "name": "NHS North East London",
+      "items": 983,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 185,
+        "share": 18.8
+       },
+       {
+        "code": "21320000102",
+        "label": "MucoClear",
+        "generic": false,
+        "items": 144,
+        "share": 14.6
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 116,
+        "share": 11.8
+       }
+      ]
+     },
+     {
+      "icb": "QHM",
+      "name": "NHS North East and North Cumbria",
+      "items": 921,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 167,
+        "share": 18.1
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 123,
+        "share": 13.4
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 105,
+        "share": 11.4
+       }
+      ]
+     },
+     {
+      "icb": "QPM",
+      "name": "NHS Northamptonshire",
+      "items": 558,
+      "leaders": [
+       {
+        "code": "21320000105",
+        "label": "Respi-Clear",
+        "generic": false,
+        "items": 331,
+        "share": 59.3
+       },
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 60,
+        "share": 10.8
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 28,
+        "share": 5.0
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 615,
+      "leaders": [
+       {
+        "code": "21320000114",
+        "label": "PulmoClear",
+        "generic": false,
+        "items": 152,
+        "share": 24.7
+       },
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 86,
+        "share": 14.0
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 83,
+        "share": 13.5
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 321,
+      "leaders": [
+       {
+        "code": "21120000120",
+        "label": "Peak flow meter standard range",
+        "generic": false,
+        "items": 37,
+        "share": 11.5
+       },
+       {
+        "code": "21320000101",
+        "label": "Nebusal",
+        "generic": false,
+        "items": 36,
+        "share": 11.2
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 32,
+        "share": 10.0
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 163,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 27,
+        "share": 16.6
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 27,
+        "share": 16.6
+       },
+       {
+        "code": "21120000120",
+        "label": "Peak flow meter standard range",
+        "generic": false,
+        "items": 26,
+        "share": 16.0
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 640,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 108,
+        "share": 16.9
+       },
+       {
+        "code": "21320000102",
+        "label": "MucoClear",
+        "generic": false,
+        "items": 108,
+        "share": 16.9
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 83,
+        "share": 13.0
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 605,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 104,
         "share": 17.2
        },
        {
         "code": "21120000130",
         "label": "Mini-Wright peak flow meter standard range",
         "generic": false,
-        "items": 149,
-        "share": 15.7
+        "items": 85,
+        "share": 14.0
        },
        {
         "code": "21120000161",
         "label": "Medi peak flow meter standard range",
         "generic": false,
-        "items": 125,
-        "share": 13.1
+        "items": 73,
+        "share": 12.1
+       }
+      ]
+     },
+     {
+      "icb": "QF7",
+      "name": "NHS South Yorkshire",
+      "items": 433,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 85,
+        "share": 19.6
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 85,
+        "share": 19.6
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 55,
+        "share": 12.7
+       }
+      ]
+     },
+     {
+      "icb": "QNC",
+      "name": "NHS Staffordshire and Stoke-on-trent",
+      "items": 559,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 71,
+        "share": 12.7
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 58,
+        "share": 10.4
+       },
+       {
+        "code": "21320000111",
+        "label": "PulmoClear",
+        "generic": false,
+        "items": 56,
+        "share": 10.0
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 1049,
+      "leaders": [
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 171,
+        "share": 16.3
+       },
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 129,
+        "share": 12.3
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 84,
+        "share": 8.0
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 658,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 146,
+        "share": 22.2
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 89,
+        "share": 13.5
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 88,
+        "share": 13.4
+       }
+      ]
+     },
+     {
+      "icb": "QWO",
+      "name": "NHS West Yorkshire",
+      "items": 738,
+      "leaders": [
+       {
+        "code": "21120000163",
+        "label": "1 Easy peak flow meter standard range",
+        "generic": false,
+        "items": 136,
+        "share": 18.4
+       },
+       {
+        "code": "21120000130",
+        "label": "Mini-Wright peak flow meter standard range",
+        "generic": false,
+        "items": 109,
+        "share": 14.8
+       },
+       {
+        "code": "21120000161",
+        "label": "Medi peak flow meter standard range",
+        "generic": false,
+        "items": 96,
+        "share": 13.0
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 1482,
+      "items": 1266,
       "leaders": [
        {
         "code": "21120000163",
         "label": "1 Easy peak flow meter standard range",
         "generic": false,
-        "items": 267,
-        "share": 18.0
-       },
-       {
-        "code": "21120000145",
-        "label": "Vitalograph peak flow meter standard range",
-        "generic": false,
-        "items": 195,
-        "share": 13.2
+        "items": 225,
+        "share": 17.8
        },
        {
         "code": "21120000161",
         "label": "Medi peak flow meter standard range",
         "generic": false,
-        "items": 158,
-        "share": 10.7
+        "items": 171,
+        "share": 13.5
+       },
+       {
+        "code": "21120000145",
+        "label": "Vitalograph peak flow meter standard range",
+        "generic": false,
+        "items": 171,
+        "share": 13.5
        }
       ]
      }

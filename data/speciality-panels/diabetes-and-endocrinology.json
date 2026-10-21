@@ -22,7 +22,7 @@
   "drugTariff": "2026-10-21",
   "localIntel": "2026-10-21",
   "supplierDirectory": "2026-10-21",
-  "gpPrescribing": "2026-09-30",
+  "gpPrescribing": "2026-10-21",
   "mhraDsu": "2026-10-19",
   "drugTariffViiia": "2026-10-21",
   "hospitalPrescribing": "2026-09-30"
@@ -35,10 +35,10 @@
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "NHSBSA Drug Tariff Part IXA/IXR for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /insulin|glucose|ketone|lancet|neuropathy sweat|diabetic/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,879 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's.",
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: diabetes). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 6 of the 10 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
-  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202608) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (26 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-19.",
   "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF 06.01 or 06.02. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 51 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first.",
-  "marketShare": "Computed at every build from NHSBSA data, not bought in and not estimated. PRIMARY CARE: every item dispensed in England against a GP practice prescription, English Prescribing Dataset with SNOMED code, for the BNF codes named on each market (21.48, 0601060D0), latest month 202607, with a 12-month total. SECONDARY CARE: NHS trust prescriptions dispensed in a community pharmacy (NHSBSA hospital prescribing dispensed in the community), the same BNF codes, 12 months; it is not in-hospital use, which NHSBSA publishes only by chemical substance and so cannot show a brand. DRUG TARIFF: every Part IX line NHSBSA files under the same BNF codes, in any part, counted in tariff lines per supplier, which measures what is listed and reimbursable, not what is sold. A BRAND is the first word of NHSBSA's product label, so the products of one range are counted together; a label that names its supplier in brackets stays on its own, and every generic is one row. Share is share of ITEMS, never company share: the data does not name the company, and one company can own several brands. A change on a year earlier is printed only where that month had at least 25 items. An ICB's share is the brand's items as a share of that ICB's whole market in the same month."
+  "marketShare": "Computed at every build from NHSBSA data, not bought in and not estimated. PRIMARY CARE: every item dispensed in England against a GP practice prescription, English Prescribing Dataset with SNOMED code, for the BNF codes named on each market (21.48, 0601060D0), latest month 202608, with a 12-month total. SECONDARY CARE: NHS trust prescriptions dispensed in a community pharmacy (NHSBSA hospital prescribing dispensed in the community), the same BNF codes, 12 months; it is not in-hospital use, which NHSBSA publishes only by chemical substance and so cannot show a brand. DRUG TARIFF: every Part IX line NHSBSA files under the same BNF codes, in any part, counted in tariff lines per supplier, which measures what is listed and reimbursable, not what is sold. A BRAND is the first word of NHSBSA's product label, so the products of one range are counted together; a label that names its supplier in brackets stays on its own, and every generic is one row. Share is share of ITEMS, never company share: the data does not name the company, and one company can own several brands. A change on a year earlier is printed only where that month had at least 25 items. An ICB's share is the brand's items as a share of that ICB's whole market in the same month."
  },
  "counts": {
   "frameworks": 1,
@@ -1065,14 +1065,14 @@
   }
  ],
  "gpPrescribing": {
-  "generatedOn": "2026-09-30",
+  "generatedOn": "2026-10-21",
   "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
   "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
   "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
   "periods": [
-   "202507",
-   "202607"
+   "202508",
+   "202608"
   ],
   "minBaselineItems": 25,
   "defined": true,
@@ -1084,159 +1084,159 @@
      "06.01"
     ],
     "note": "BNF 6.1 includes GLP-1 and GIP/GLP-1 medicines prescribed for weight management; the dataset does not separate them by indication.",
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 7261493,
-    "cost": 175000214,
-    "items12m": 80215440,
-    "cost12m": 1946510260,
-    "itemsYoY": 6.3,
-    "products": 201,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 6580046,
+    "cost": 162865458,
+    "items12m": 80522949,
+    "cost12m": 1967996671,
+    "itemsYoY": 4.9,
+    "products": 202,
     "topNational": [
      {
       "code": "0601022B0AA",
       "label": "Metformin",
       "generic": true,
-      "items": 2313250,
+      "items": 2097403,
       "share": 31.9,
-      "cost": 4400447,
-      "yoy": 4.7
+      "cost": 4787547,
+      "yoy": 3.0
      },
      {
       "code": "0601023AGAA",
       "label": "Dapagliflozin",
       "generic": true,
-      "items": 1359343,
-      "share": 18.7,
-      "cost": 3594550,
-      "yoy": 44.1
+      "items": 1273604,
+      "share": 19.4,
+      "cost": 3332771,
+      "yoy": 41.7
      },
      {
       "code": "0601021M0AA",
       "label": "Gliclazide",
       "generic": true,
-      "items": 497355,
+      "items": 446520,
       "share": 6.8,
-      "cost": 862731,
-      "yoy": -3.3
+      "cost": 769544,
+      "yoy": -5.1
      },
      {
       "code": "0601023X0AA",
       "label": "Sitagliptin",
       "generic": true,
-      "items": 298838,
+      "items": 272115,
       "share": 4.1,
-      "cost": 524060,
-      "yoy": 16.5
+      "cost": 475188,
+      "yoy": 13.0
      },
      {
       "code": "0601023ANAA",
       "label": "Empagliflozin",
       "generic": true,
-      "items": 294678,
-      "share": 4.1,
-      "cost": 10612189,
-      "yoy": -28.9
+      "items": 249360,
+      "share": 3.8,
+      "cost": 8908156,
+      "yoy": -34.9
      },
      {
       "code": "0601023AZBB",
       "label": "Mounjaro KwikPen",
       "generic": false,
-      "items": 248902,
-      "share": 3.4,
-      "cost": 57107000,
-      "yoy": 43.5
+      "items": 230392,
+      "share": 3.5,
+      "cost": 52931008,
+      "yoy": 59.5
      },
      {
       "code": "0601023AEAA",
       "label": "Linagliptin",
       "generic": true,
-      "items": 210758,
+      "items": 191099,
       "share": 2.9,
-      "cost": 5838263,
-      "yoy": -7.8
+      "cost": 5254815,
+      "yoy": -8.1
      },
      {
       "code": "0601011A0BB",
       "label": "NovoRapid FlexPen",
       "generic": false,
-      "items": 178552,
-      "share": 2.5,
-      "cost": 7886334,
-      "yoy": 0.2
+      "items": 157036,
+      "share": 2.4,
+      "cost": 6899555,
+      "yoy": -0.5
      },
      {
       "code": "0601023AZAA",
       "label": "Tirzepatide",
       "generic": true,
-      "items": 118695,
-      "share": 1.6,
-      "cost": 28469979,
-      "yoy": 67.8
+      "items": 111860,
+      "share": 1.7,
+      "cost": 26903898,
+      "yoy": 86.2
      },
      {
       "code": "0601060D0CU",
       "label": "GlucoRx Q testing strips",
       "generic": false,
-      "items": 115680,
+      "items": 102806,
       "share": 1.6,
-      "cost": 1218348,
-      "yoy": -8.6
+      "cost": 1078822,
+      "yoy": -11.4
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 109744,
+      "items": 98871,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 32423,
-        "share": 29.5
+        "items": 29107,
+        "share": 29.4
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 26039,
-        "share": 23.7
+        "items": 24078,
+        "share": 24.4
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 8372,
-        "share": 7.6
+        "items": 7365,
+        "share": 7.4
        }
       ]
      },
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 187986,
+      "items": 166593,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 53179,
-        "share": 28.3
+        "items": 47575,
+        "share": 28.6
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 28809,
-        "share": 15.3
+        "items": 26870,
+        "share": 16.1
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 12492,
+        "items": 10998,
         "share": 6.6
        }
       ]
@@ -1244,27 +1244,27 @@
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 179387,
+      "items": 159162,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 53466,
-        "share": 29.8
+        "items": 47243,
+        "share": 29.7
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 31457,
-        "share": 17.5
+        "items": 28572,
+        "share": 18.0
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 11660,
+        "items": 10336,
         "share": 6.5
        }
       ]
@@ -1272,27 +1272,27 @@
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 84842,
+      "items": 76301,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 26571,
+        "items": 23910,
         "share": 31.3
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 18794,
-        "share": 22.2
+        "items": 17708,
+        "share": 23.2
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 5377,
+        "items": 4788,
         "share": 6.3
        }
       ]
@@ -1300,83 +1300,83 @@
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 380313,
+      "items": 342699,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 119560,
-        "share": 31.4
+        "items": 107256,
+        "share": 31.3
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 73669,
-        "share": 19.4
+        "items": 67901,
+        "share": 19.8
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 28141,
-        "share": 7.4
+        "items": 24909,
+        "share": 7.3
        }
       ]
      },
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 312208,
+      "items": 280150,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 99037,
-        "share": 31.7
+        "items": 89111,
+        "share": 31.8
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 63078,
-        "share": 20.2
+        "items": 58454,
+        "share": 20.9
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 20950,
-        "share": 6.7
+        "items": 18929,
+        "share": 6.8
        }
       ]
      },
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 70894,
+      "items": 64030,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 20925,
-        "share": 29.5
+        "items": 18922,
+        "share": 29.6
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 13236,
-        "share": 18.7
+        "items": 12151,
+        "share": 19.0
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 4274,
+        "items": 3840,
         "share": 6.0
        }
       ]
@@ -1384,195 +1384,195 @@
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 125517,
+      "items": 112959,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 41956,
-        "share": 33.4
+        "items": 37866,
+        "share": 33.5
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 20725,
-        "share": 16.5
+        "items": 19578,
+        "share": 17.3
        },
        {
         "code": "0601023ANAA",
         "label": "Empagliflozin",
         "generic": true,
-        "items": 8294,
-        "share": 6.6
+        "items": 6995,
+        "share": 6.2
        }
       ]
      },
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 112858,
+      "items": 99959,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 35888,
-        "share": 31.8
+        "items": 31843,
+        "share": 31.9
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 15557,
-        "share": 13.8
+        "items": 13920,
+        "share": 13.9
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 9896,
-        "share": 8.8
+        "items": 8562,
+        "share": 8.6
        }
       ]
      },
      {
       "icb": "QJK",
       "name": "NHS Devon",
-      "items": 130155,
+      "items": 117997,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 40188,
-        "share": 30.9
+        "items": 36393,
+        "share": 30.8
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 27225,
-        "share": 20.9
+        "items": 25498,
+        "share": 21.6
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 12589,
-        "share": 9.7
+        "items": 11333,
+        "share": 9.6
        }
       ]
      },
      {
       "icb": "QVV",
       "name": "NHS Dorset",
-      "items": 83498,
+      "items": 75923,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 25021,
+        "items": 22804,
         "share": 30.0
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 18653,
-        "share": 22.3
+        "items": 17838,
+        "share": 23.5
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 4725,
-        "share": 5.7
+        "items": 4153,
+        "share": 5.5
        }
       ]
      },
      {
       "icb": "D7T5G",
       "name": "NHS Essex",
-      "items": 229542,
+      "items": 207727,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 68532,
+        "items": 62209,
         "share": 29.9
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 39344,
-        "share": 17.1
+        "items": 36427,
+        "share": 17.5
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 13876,
-        "share": 6.0
+        "items": 12286,
+        "share": 5.9
        }
       ]
      },
      {
       "icb": "QR1",
       "name": "NHS Gloucestershire",
-      "items": 75852,
+      "items": 69289,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 24400,
-        "share": 32.2
+        "items": 22539,
+        "share": 32.5
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 15851,
-        "share": 20.9
+        "items": 15486,
+        "share": 22.3
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 5001,
-        "share": 6.6
+        "items": 4503,
+        "share": 6.5
        }
       ]
      },
      {
       "icb": "QOP",
       "name": "NHS Greater Manchester",
-      "items": 401395,
+      "items": 363336,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 127200,
+        "items": 115023,
         "share": 31.7
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 62291,
-        "share": 15.5
+        "items": 57464,
+        "share": 15.8
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 26599,
+        "items": 23997,
         "share": 6.6
        }
       ]
@@ -1580,55 +1580,55 @@
      {
       "icb": "QRL",
       "name": "NHS Hampshire and Isle of Wight",
-      "items": 202878,
+      "items": 184394,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 62774,
-        "share": 30.9
-       },
-       {
-        "code": "0601023AGAA",
-        "label": "Dapagliflozin",
-        "generic": true,
-        "items": 43099,
-        "share": 21.2
-       },
-       {
-        "code": "0601023AZBB",
-        "label": "Mounjaro KwikPen",
-        "generic": false,
-        "items": 12059,
-        "share": 5.9
-       }
-      ]
-     },
-     {
-      "icb": "QGH",
-      "name": "NHS Herefordshire and Worcestershire",
-      "items": 81607,
-      "leaders": [
-       {
-        "code": "0601022B0AA",
-        "label": "Metformin",
-        "generic": true,
-        "items": 25315,
+        "items": 57112,
         "share": 31.0
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 15531,
-        "share": 19.0
+        "items": 40230,
+        "share": 21.8
        },
        {
         "code": "0601023AZBB",
         "label": "Mounjaro KwikPen",
         "generic": false,
-        "items": 6346,
+        "items": 11213,
+        "share": 6.1
+       }
+      ]
+     },
+     {
+      "icb": "QGH",
+      "name": "NHS Herefordshire and Worcestershire",
+      "items": 75219,
+      "leaders": [
+       {
+        "code": "0601022B0AA",
+        "label": "Metformin",
+        "generic": true,
+        "items": 23375,
+        "share": 31.1
+       },
+       {
+        "code": "0601023AGAA",
+        "label": "Dapagliflozin",
+        "generic": true,
+        "items": 15092,
+        "share": 20.1
+       },
+       {
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
+        "generic": false,
+        "items": 5831,
         "share": 7.8
        }
       ]
@@ -1636,27 +1636,27 @@
      {
       "icb": "QOQ",
       "name": "NHS Humber and North Yorkshire",
-      "items": 230534,
+      "items": 207583,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 71402,
+        "items": 64283,
         "share": 31.0
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 37589,
-        "share": 16.3
+        "items": 34787,
+        "share": 16.8
        },
        {
         "code": "0601023ANAA",
         "label": "Empagliflozin",
         "generic": true,
-        "items": 18036,
+        "items": 16153,
         "share": 7.8
        }
       ]
@@ -1664,223 +1664,223 @@
      {
       "icb": "QKS",
       "name": "NHS Kent and Medway",
-      "items": 210995,
+      "items": 192640,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 66156,
+        "items": 60521,
         "share": 31.4
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 40456,
-        "share": 19.2
+        "items": 37084,
+        "share": 19.3
        },
        {
         "code": "0601023AZBB",
         "label": "Mounjaro KwikPen",
         "generic": false,
-        "items": 12688,
-        "share": 6.0
+        "items": 11837,
+        "share": 6.1
        }
       ]
      },
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 235370,
+      "items": 209441,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 77609,
-        "share": 33.0
+        "items": 68923,
+        "share": 32.9
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 47698,
-        "share": 20.3
+        "items": 44503,
+        "share": 21.2
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 14818,
-        "share": 6.3
+        "items": 13038,
+        "share": 6.2
        }
       ]
      },
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 166692,
+      "items": 153056,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 51953,
-        "share": 31.2
+        "items": 47860,
+        "share": 31.3
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 35194,
+        "items": 32259,
         "share": 21.1
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 10610,
-        "share": 6.4
+        "items": 9680,
+        "share": 6.3
        }
       ]
      },
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 134586,
+      "items": 123902,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 39627,
+        "items": 36375,
         "share": 29.4
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 28328,
-        "share": 21.0
+        "items": 26622,
+        "share": 21.5
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 8042,
-        "share": 6.0
+        "items": 7195,
+        "share": 5.8
        }
       ]
      },
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 228704,
+      "items": 208050,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 71353,
-        "share": 31.2
+        "items": 65240,
+        "share": 31.4
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 38159,
-        "share": 16.7
+        "items": 35454,
+        "share": 17.0
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 16199,
-        "share": 7.1
+        "items": 14419,
+        "share": 6.9
        }
       ]
      },
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 357172,
+      "items": 328531,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 122180,
-        "share": 34.2
+        "items": 112030,
+        "share": 34.1
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 56019,
-        "share": 15.7
+        "items": 53860,
+        "share": 16.4
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 31560,
-        "share": 8.8
+        "items": 28682,
+        "share": 8.7
        }
       ]
      },
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 453864,
+      "items": 414744,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 164241,
+        "items": 150168,
         "share": 36.2
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 82532,
-        "share": 18.2
+        "items": 77952,
+        "share": 18.8
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 33151,
-        "share": 7.3
+        "items": 29700,
+        "share": 7.2
        }
       ]
      },
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 106506,
+      "items": 95755,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 34156,
-        "share": 32.1
+        "items": 30499,
+        "share": 31.9
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 21286,
-        "share": 20.0
+        "items": 19609,
+        "share": 20.5
        },
        {
-        "code": "0601060D0ED",
-        "label": "Finetest Lite testing strips",
+        "code": "0601023AZBB",
+        "label": "Mounjaro KwikPen",
         "generic": false,
-        "items": 5687,
+        "items": 5109,
         "share": 5.3
        }
       ]
@@ -1888,111 +1888,111 @@
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 143085,
+      "items": 128264,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 46907,
-        "share": 32.8
-       },
-       {
-        "code": "0601023AGAA",
-        "label": "Dapagliflozin",
-        "generic": true,
-        "items": 22857,
-        "share": 16.0
-       },
-       {
-        "code": "0601021M0AA",
-        "label": "Gliclazide",
-        "generic": true,
-        "items": 11075,
-        "share": 7.7
-       }
-      ]
-     },
-     {
-      "icb": "QOC",
-      "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 53460,
-      "leaders": [
-       {
-        "code": "0601022B0AA",
-        "label": "Metformin",
-        "generic": true,
-        "items": 15384,
-        "share": 28.8
-       },
-       {
-        "code": "0601023AGAA",
-        "label": "Dapagliflozin",
-        "generic": true,
-        "items": 10268,
-        "share": 19.2
-       },
-       {
-        "code": "0601021M0AA",
-        "label": "Gliclazide",
-        "generic": true,
-        "items": 3811,
-        "share": 7.1
-       }
-      ]
-     },
-     {
-      "icb": "QSL",
-      "name": "NHS Somerset",
-      "items": 58651,
-      "leaders": [
-       {
-        "code": "0601022B0AA",
-        "label": "Metformin",
-        "generic": true,
-        "items": 16834,
-        "share": 28.7
-       },
-       {
-        "code": "0601023AGAA",
-        "label": "Dapagliflozin",
-        "generic": true,
-        "items": 13873,
-        "share": 23.7
-       },
-       {
-        "code": "0601021M0AA",
-        "label": "Gliclazide",
-        "generic": true,
-        "items": 4710,
-        "share": 8.0
-       }
-      ]
-     },
-     {
-      "icb": "QKK",
-      "name": "NHS South East London",
-      "items": 194364,
-      "leaders": [
-       {
-        "code": "0601022B0AA",
-        "label": "Metformin",
-        "generic": true,
-        "items": 63532,
+        "items": 41907,
         "share": 32.7
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 37751,
-        "share": 19.4
+        "items": 21163,
+        "share": 16.5
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 15571,
+        "items": 9785,
+        "share": 7.6
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 49313,
+      "leaders": [
+       {
+        "code": "0601022B0AA",
+        "label": "Metformin",
+        "generic": true,
+        "items": 14245,
+        "share": 28.9
+       },
+       {
+        "code": "0601023AGAA",
+        "label": "Dapagliflozin",
+        "generic": true,
+        "items": 9537,
+        "share": 19.3
+       },
+       {
+        "code": "0601021M0AA",
+        "label": "Gliclazide",
+        "generic": true,
+        "items": 3454,
+        "share": 7.0
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 53337,
+      "leaders": [
+       {
+        "code": "0601022B0AA",
+        "label": "Metformin",
+        "generic": true,
+        "items": 15480,
+        "share": 29.0
+       },
+       {
+        "code": "0601023AGAA",
+        "label": "Dapagliflozin",
+        "generic": true,
+        "items": 12963,
+        "share": 24.3
+       },
+       {
+        "code": "0601021M0AA",
+        "label": "Gliclazide",
+        "generic": true,
+        "items": 4239,
+        "share": 7.9
+       }
+      ]
+     },
+     {
+      "icb": "QKK",
+      "name": "NHS South East London",
+      "items": 179858,
+      "leaders": [
+       {
+        "code": "0601022B0AA",
+        "label": "Metformin",
+        "generic": true,
+        "items": 58874,
+        "share": 32.7
+       },
+       {
+        "code": "0601023AGAA",
+        "label": "Dapagliflozin",
+        "generic": true,
+        "items": 36031,
+        "share": 20.0
+       },
+       {
+        "code": "0601021M0AA",
+        "label": "Gliclazide",
+        "generic": true,
+        "items": 14454,
         "share": 8.0
        }
       ]
@@ -2000,83 +2000,83 @@
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 178817,
+      "items": 163700,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 60806,
-        "share": 34.0
+        "items": 55534,
+        "share": 33.9
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 40292,
-        "share": 22.5
+        "items": 37588,
+        "share": 23.0
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 14151,
-        "share": 7.9
+        "items": 13054,
+        "share": 8.0
        }
       ]
      },
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 206127,
+      "items": 185342,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 63325,
+        "items": 56922,
         "share": 30.7
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 32725,
-        "share": 15.9
+        "items": 30371,
+        "share": 16.4
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 11901,
-        "share": 5.8
+        "items": 10492,
+        "share": 5.7
        }
       ]
      },
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 153962,
+      "items": 139845,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 47642,
-        "share": 30.9
+        "items": 43571,
+        "share": 31.2
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 27857,
-        "share": 18.1
+        "items": 26694,
+        "share": 19.1
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 13347,
+        "items": 12229,
         "share": 8.7
        }
       ]
@@ -2084,27 +2084,27 @@
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 273737,
+      "items": 250261,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 80952,
-        "share": 29.6
+        "items": 74228,
+        "share": 29.7
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 57836,
-        "share": 21.1
+        "items": 54007,
+        "share": 21.6
        },
        {
         "code": "0601023AZBB",
         "label": "Mounjaro KwikPen",
         "generic": false,
-        "items": 13556,
+        "items": 12608,
         "share": 5.0
        }
       ]
@@ -2112,83 +2112,83 @@
      {
       "icb": "S0E4D",
       "name": "NHS Thames Valley",
-      "items": 228175,
+      "items": 206423,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 69074,
+        "items": 62582,
         "share": 30.3
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 53039,
-        "share": 23.2
+        "items": 48692,
+        "share": 23.6
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 14112,
-        "share": 6.2
+        "items": 12401,
+        "share": 6.0
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 347365,
+      "items": 313001,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 111475,
+        "items": 100413,
         "share": 32.1
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 62663,
-        "share": 18.0
+        "items": 59628,
+        "share": 19.1
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 21424,
-        "share": 6.2
+        "items": 19640,
+        "share": 6.3
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 530473,
+      "items": 482215,
       "leaders": [
        {
         "code": "0601022B0AA",
         "label": "Metformin",
         "generic": true,
-        "items": 182162,
+        "items": 165432,
         "share": 34.3
        },
        {
         "code": "0601023AGAA",
         "label": "Dapagliflozin",
         "generic": true,
-        "items": 99538,
-        "share": 18.8
+        "items": 97511,
+        "share": 20.2
        },
        {
         "code": "0601021M0AA",
         "label": "Gliclazide",
         "generic": true,
-        "items": 48618,
+        "items": 44139,
         "share": 9.2
        }
       ]
@@ -2202,49 +2202,58 @@
      "21.48"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 449261,
-    "cost": 36960864,
-    "items12m": 4669248,
-    "cost12m": 382216966,
-    "itemsYoY": 15.1,
-    "products": 7,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 404817,
+    "cost": 33310964,
+    "items12m": 4715191,
+    "cost12m": 386410911,
+    "itemsYoY": 12.8,
+    "products": 8,
     "topNational": [
      {
       "code": "21480000109",
       "label": "FreeStyle Libre",
       "generic": false,
-      "items": 405719,
-      "share": 90.3,
-      "cost": 33514086,
-      "yoy": 41.8
+      "items": 364777,
+      "share": 90.1,
+      "cost": 30128623,
+      "yoy": 26.3
      },
      {
       "code": "21480000110",
       "label": "Dexcom One+ Sensor",
       "generic": false,
-      "items": 35501,
-      "share": 7.9,
-      "cost": 2666873,
-      "yoy": 85.0
+      "items": 32507,
+      "share": 8.0,
+      "cost": 2450184,
+      "yoy": 73.3
      },
      {
       "code": "21480000111",
       "label": "FreeStyle Libre",
       "generic": false,
-      "items": 7885,
+      "items": 7351,
       "share": 1.8,
-      "cost": 770910,
-      "yoy": 837.6
+      "cost": 721964,
+      "yoy": 592.8
+     },
+     {
+      "code": "21480000112",
+      "label": "CareSens Air Sensor",
+      "generic": false,
+      "items": 63,
+      "share": 0.0,
+      "cost": 3563,
+      "yoy": null
      },
      {
       "code": "21480000113",
       "label": "GlucoMen iCan Sensor",
       "generic": false,
-      "items": 54,
+      "items": 57,
       "share": 0.0,
-      "cost": 3427,
+      "cost": 3750,
       "yoy": null
      },
      {
@@ -2253,25 +2262,25 @@
       "generic": false,
       "items": 52,
       "share": 0.0,
-      "cost": 2661,
-      "yoy": null
-     },
-     {
-      "code": "21480000112",
-      "label": "CareSens Air Sensor",
-      "generic": false,
-      "items": 46,
-      "share": 0.0,
-      "cost": 2699,
+      "cost": 2470,
       "yoy": null
      },
      {
       "code": "21480000102",
       "label": "GlucoRx AiDEX Sensor",
       "generic": false,
-      "items": 4,
+      "items": 7,
       "share": 0.0,
-      "cost": 208,
+      "cost": 238,
+      "yoy": null
+     },
+     {
+      "code": "21480000115",
+      "label": "ALLYcgm Sensor",
+      "generic": false,
+      "items": 3,
+      "share": 0.0,
+      "cost": 172,
       "yoy": null
      },
      {
@@ -2291,70 +2300,61 @@
       "share": 0.0,
       "cost": 0,
       "yoy": -100.0
-     },
-     {
-      "code": "21480000101",
-      "label": "FreeStyle Libre",
-      "generic": false,
-      "items": 0,
-      "share": 0.0,
-      "cost": 0,
-      "yoy": -100.0
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 7627,
+      "items": 6925,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 6701,
-        "share": 87.9
+        "items": 6040,
+        "share": 87.2
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 923,
-        "share": 12.1
+        "items": 880,
+        "share": 12.7
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 2,
-        "share": 0.0
+        "items": 4,
+        "share": 0.1
        }
       ]
      },
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 6491,
+      "items": 5870,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 6011,
-        "share": 92.6
+        "items": 5446,
+        "share": 92.8
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 381,
-        "share": 5.9
+        "items": 336,
+        "share": 5.7
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 97,
+        "items": 86,
         "share": 1.5
        }
       ]
@@ -2362,111 +2362,111 @@
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 9847,
+      "items": 8877,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 9141,
-        "share": 92.8
+        "items": 8189,
+        "share": 92.2
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 403,
-        "share": 4.1
+        "items": 388,
+        "share": 4.4
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 300,
-        "share": 3.0
+        "items": 297,
+        "share": 3.3
        }
       ]
      },
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 7657,
+      "items": 6976,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 6574,
-        "share": 85.9
+        "items": 6021,
+        "share": 86.3
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 1055,
-        "share": 13.8
+        "items": 930,
+        "share": 13.3
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 26,
-        "share": 0.3
+        "items": 25,
+        "share": 0.4
        }
       ]
      },
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 23630,
+      "items": 21353,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 20516,
-        "share": 86.8
+        "items": 18439,
+        "share": 86.4
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 2192,
-        "share": 9.3
+        "items": 2023,
+        "share": 9.5
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 914,
-        "share": 3.9
+        "items": 885,
+        "share": 4.1
        }
       ]
      },
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 24806,
+      "items": 22053,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 23171,
-        "share": 93.4
+        "items": 20513,
+        "share": 93.0
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 1560,
-        "share": 6.3
+        "items": 1469,
+        "share": 6.7
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 71,
+        "items": 67,
         "share": 0.3
        }
       ]
@@ -2474,27 +2474,27 @@
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 4343,
+      "items": 3822,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 3742,
-        "share": 86.2
+        "items": 3306,
+        "share": 86.5
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 389,
-        "share": 9.0
+        "items": 330,
+        "share": 8.6
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 195,
+        "items": 172,
         "share": 4.5
        }
       ]
@@ -2502,111 +2502,111 @@
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 9757,
+      "items": 8646,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 8746,
-        "share": 89.6
+        "items": 7706,
+        "share": 89.1
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 966,
-        "share": 9.9
+        "items": 899,
+        "share": 10.4
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 44,
-        "share": 0.5
+        "items": 38,
+        "share": 0.4
        }
       ]
      },
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 5069,
+      "items": 4338,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 4588,
-        "share": 90.5
+        "items": 3911,
+        "share": 90.2
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 433,
-        "share": 8.5
+        "items": 382,
+        "share": 8.8
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 47,
-        "share": 0.9
+        "items": 44,
+        "share": 1.0
        }
       ]
      },
      {
       "icb": "QJK",
       "name": "NHS Devon",
-      "items": 10083,
+      "items": 9019,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 8844,
-        "share": 87.7
+        "items": 7859,
+        "share": 87.1
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 1088,
-        "share": 10.8
+        "items": 1014,
+        "share": 11.2
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 150,
-        "share": 1.5
+        "items": 146,
+        "share": 1.6
        }
       ]
      },
      {
       "icb": "QVV",
       "name": "NHS Dorset",
-      "items": 5437,
+      "items": 4877,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 4508,
-        "share": 82.9
+        "items": 4054,
+        "share": 83.1
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 599,
-        "share": 11.0
+        "items": 525,
+        "share": 10.8
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 330,
+        "items": 298,
         "share": 6.1
        }
       ]
@@ -2614,111 +2614,111 @@
      {
       "icb": "D7T5G",
       "name": "NHS Essex",
-      "items": 16655,
+      "items": 15031,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 14071,
-        "share": 84.5
+        "items": 12688,
+        "share": 84.4
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 1690,
-        "share": 10.1
+        "items": 1510,
+        "share": 10.0
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 894,
-        "share": 5.4
+        "items": 832,
+        "share": 5.5
        }
       ]
      },
      {
       "icb": "QR1",
       "name": "NHS Gloucestershire",
-      "items": 6304,
+      "items": 5697,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 5649,
-        "share": 89.6
+        "items": 5049,
+        "share": 88.6
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 577,
-        "share": 9.2
+        "items": 555,
+        "share": 9.7
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 78,
-        "share": 1.2
+        "items": 92,
+        "share": 1.6
        }
       ]
      },
      {
       "icb": "QOP",
       "name": "NHS Greater Manchester",
-      "items": 23195,
+      "items": 20873,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 21319,
-        "share": 91.9
+        "items": 19167,
+        "share": 91.8
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 1748,
-        "share": 7.5
+        "items": 1578,
+        "share": 7.6
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 124,
-        "share": 0.5
+        "items": 122,
+        "share": 0.6
        }
       ]
      },
      {
       "icb": "QRL",
       "name": "NHS Hampshire and Isle of Wight",
-      "items": 18071,
+      "items": 16017,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 16299,
+        "items": 14451,
         "share": 90.2
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 1273,
-        "share": 7.0
+        "items": 1110,
+        "share": 6.9
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 499,
+        "items": 454,
         "share": 2.8
        }
       ]
@@ -2726,83 +2726,83 @@
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 7640,
+      "items": 6791,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 6062,
-        "share": 79.3
+        "items": 5316,
+        "share": 78.3
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 1315,
-        "share": 17.2
+        "items": 1247,
+        "share": 18.4
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 262,
-        "share": 3.4
+        "items": 227,
+        "share": 3.3
        }
       ]
      },
      {
       "icb": "QOQ",
       "name": "NHS Humber and North Yorkshire",
-      "items": 15135,
+      "items": 13496,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 13552,
+        "items": 12074,
         "share": 89.5
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 1329,
-        "share": 8.8
+        "items": 1201,
+        "share": 8.9
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 254,
-        "share": 1.7
+        "items": 218,
+        "share": 1.6
        }
       ]
      },
      {
       "icb": "QKS",
       "name": "NHS Kent and Medway",
-      "items": 18232,
+      "items": 16862,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 17074,
-        "share": 93.6
+        "items": 15744,
+        "share": 93.4
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 1071,
-        "share": 5.9
+        "items": 1020,
+        "share": 6.0
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 83,
+        "items": 89,
         "share": 0.5
        }
       ]
@@ -2810,27 +2810,27 @@
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 16558,
+      "items": 14769,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 15382,
-        "share": 92.9
+        "items": 13653,
+        "share": 92.4
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 1067,
-        "share": 6.4
+        "items": 1020,
+        "share": 6.9
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 107,
+        "items": 90,
         "share": 0.6
        }
       ]
@@ -2838,167 +2838,167 @@
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 10506,
+      "items": 9758,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 9552,
-        "share": 90.9
+        "items": 8881,
+        "share": 91.0
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 805,
+        "items": 747,
         "share": 7.7
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 126,
-        "share": 1.2
+        "items": 106,
+        "share": 1.1
        }
       ]
      },
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 7552,
+      "items": 6865,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 6855,
-        "share": 90.8
+        "items": 6227,
+        "share": 90.7
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 563,
-        "share": 7.5
+        "items": 491,
+        "share": 7.2
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 133,
-        "share": 1.8
+        "items": 130,
+        "share": 1.9
        }
       ]
      },
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 14931,
+      "items": 13365,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 12854,
-        "share": 86.1
+        "items": 11469,
+        "share": 85.8
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 1432,
-        "share": 9.6
+        "items": 1273,
+        "share": 9.5
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 644,
-        "share": 4.3
+        "items": 621,
+        "share": 4.6
        }
       ]
      },
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 11900,
+      "items": 10991,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 11080,
-        "share": 93.1
+        "items": 10214,
+        "share": 92.9
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 543,
+        "items": 507,
         "share": 4.6
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 277,
-        "share": 2.3
+        "items": 269,
+        "share": 2.4
        }
       ]
      },
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 29117,
+      "items": 26519,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 27232,
-        "share": 93.5
+        "items": 24750,
+        "share": 93.3
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 1838,
-        "share": 6.3
+        "items": 1717,
+        "share": 6.5
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 35,
-        "share": 0.1
+        "items": 48,
+        "share": 0.2
        }
       ]
      },
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 5704,
+      "items": 5157,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 5024,
-        "share": 88.1
+        "items": 4518,
+        "share": 87.6
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 564,
-        "share": 9.9
+        "items": 535,
+        "share": 10.4
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 116,
+        "items": 104,
         "share": 2.0
        }
       ]
@@ -3006,49 +3006,77 @@
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 11042,
+      "items": 9996,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 9711,
-        "share": 87.9
+        "items": 8770,
+        "share": 87.7
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 1120,
-        "share": 10.1
+        "items": 1019,
+        "share": 10.2
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 204,
-        "share": 1.8
+        "items": 202,
+        "share": 2.0
        }
       ]
      },
      {
       "icb": "QOC",
       "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 5117,
+      "items": 4668,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 4415,
-        "share": 86.3
+        "items": 4040,
+        "share": 86.5
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 649,
-        "share": 12.7
+        "items": 577,
+        "share": 12.4
+       },
+       {
+        "code": "21480000111",
+        "label": "FreeStyle Libre",
+        "generic": false,
+        "items": 48,
+        "share": 1.0
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 5185,
+      "leaders": [
+       {
+        "code": "21480000109",
+        "label": "FreeStyle Libre",
+        "generic": false,
+        "items": 4531,
+        "share": 87.4
+       },
+       {
+        "code": "21480000110",
+        "label": "Dexcom One+ Sensor",
+        "generic": false,
+        "items": 602,
+        "share": 11.6
        },
        {
         "code": "21480000111",
@@ -3060,85 +3088,57 @@
       ]
      },
      {
-      "icb": "QSL",
-      "name": "NHS Somerset",
-      "items": 5879,
-      "leaders": [
-       {
-        "code": "21480000109",
-        "label": "FreeStyle Libre",
-        "generic": false,
-        "items": 5164,
-        "share": 87.8
-       },
-       {
-        "code": "21480000110",
-        "label": "Dexcom One+ Sensor",
-        "generic": false,
-        "items": 642,
-        "share": 10.9
-       },
-       {
-        "code": "21480000111",
-        "label": "FreeStyle Libre",
-        "generic": false,
-        "items": 57,
-        "share": 1.0
-       }
-      ]
-     },
-     {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 9604,
+      "items": 8622,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 8810,
-        "share": 91.7
+        "items": 7882,
+        "share": 91.4
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 498,
-        "share": 5.2
+        "items": 433,
+        "share": 5.0
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 294,
-        "share": 3.1
+        "items": 301,
+        "share": 3.5
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 7403,
+      "items": 6734,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 6948,
+        "items": 6326,
         "share": 93.9
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 351,
-        "share": 4.7
+        "items": 310,
+        "share": 4.6
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 104,
+        "items": 94,
         "share": 1.4
        }
       ]
@@ -3146,27 +3146,27 @@
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 10950,
+      "items": 9761,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 9361,
-        "share": 85.5
+        "items": 8328,
+        "share": 85.3
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 1530,
-        "share": 14.0
+        "items": 1372,
+        "share": 14.1
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 41,
+        "items": 40,
         "share": 0.4
        }
       ]
@@ -3174,139 +3174,139 @@
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 7123,
+      "items": 6328,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 6603,
+        "items": 5869,
         "share": 92.7
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 454,
+        "items": 408,
         "share": 6.4
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 61,
-        "share": 0.9
+        "items": 42,
+        "share": 0.7
        }
       ]
      },
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 19610,
+      "items": 17776,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 18287,
+        "items": 16587,
         "share": 93.3
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 1218,
-        "share": 6.2
+        "items": 1074,
+        "share": 6.0
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 102,
-        "share": 0.5
+        "items": 110,
+        "share": 0.6
        }
       ]
      },
      {
       "icb": "S0E4D",
       "name": "NHS Thames Valley",
-      "items": 18570,
+      "items": 16727,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 16769,
-        "share": 90.3
+        "items": 15093,
+        "share": 90.2
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 1629,
-        "share": 8.8
+        "items": 1463,
+        "share": 8.7
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 165,
-        "share": 0.9
+        "items": 167,
+        "share": 1.0
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 17706,
+      "items": 15874,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 16564,
-        "share": 93.6
+        "items": 14843,
+        "share": 93.5
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 1106,
-        "share": 6.2
+        "items": 1006,
+        "share": 6.3
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 36,
-        "share": 0.2
+        "items": 23,
+        "share": 0.1
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 19996,
+      "items": 18188,
       "leaders": [
        {
         "code": "21480000109",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 18527,
-        "share": 92.7
+        "items": 16812,
+        "share": 92.4
        },
        {
         "code": "21480000110",
         "label": "Dexcom One+ Sensor",
         "generic": false,
-        "items": 973,
-        "share": 4.9
+        "items": 915,
+        "share": 5.0
        },
        {
         "code": "21480000111",
         "label": "FreeStyle Libre",
         "generic": false,
-        "items": 493,
+        "items": 455,
         "share": 2.5
        }
       ]
@@ -3320,103 +3320,103 @@
      "06.02"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 3190180,
-    "cost": 4572108,
-    "items12m": 36015113,
-    "cost12m": 49184964,
-    "itemsYoY": 1.6,
-    "products": 13,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 2878746,
+    "cost": 4140798,
+    "items12m": 36014289,
+    "cost12m": 49126042,
+    "itemsYoY": -0.0,
+    "products": 14,
     "topNational": [
      {
       "code": "0602010V0AA",
       "label": "Levothyroxine sodium",
       "generic": true,
-      "items": 3103420,
+      "items": 2799881,
       "share": 97.3,
-      "cost": 3522180,
-      "yoy": 1.4
+      "cost": 3187441,
+      "yoy": -0.2
      },
      {
       "code": "0602020D0AA",
       "label": "Carbimazole",
       "generic": true,
-      "items": 72159,
+      "items": 65495,
       "share": 2.3,
-      "cost": 186098,
-      "yoy": 6.1
+      "cost": 175170,
+      "yoy": 4.2
      },
      {
       "code": "0602010M0AA",
       "label": "Liothyronine",
       "generic": true,
-      "items": 6431,
+      "items": 5928,
       "share": 0.2,
-      "cost": 646619,
-      "yoy": 3.7
+      "cost": 601068,
+      "yoy": 4.3
      },
      {
       "code": "0602020N0AA",
       "label": "Propylthiouracil",
       "generic": true,
-      "items": 4909,
+      "items": 4323,
       "share": 0.2,
-      "cost": 81472,
-      "yoy": -0.2
+      "cost": 74635,
+      "yoy": -5.3
      },
      {
       "code": "0602010V0BD",
       "label": "Eltroxin",
       "generic": false,
-      "items": 2598,
+      "items": 2508,
       "share": 0.1,
-      "cost": 7866,
-      "yoy": 21.6
+      "cost": 7863,
+      "yoy": 31.4
      },
      {
       "code": "0602010V0BK",
       "label": "Vencamil",
       "generic": false,
-      "items": 463,
+      "items": 409,
       "share": 0.0,
-      "cost": 1811,
-      "yoy": 103.1
+      "cost": 1543,
+      "yoy": 75.5
      },
      {
       "code": "0602010Z0BB",
       "label": "Armour Thyroid",
       "generic": false,
-      "items": 152,
+      "items": 140,
       "share": 0.0,
-      "cost": 98933,
-      "yoy": -6.7
+      "cost": 74221,
+      "yoy": 11.1
      },
      {
       "code": "0602010Z0BE",
       "label": "Erfa Thyroid",
       "generic": false,
-      "items": 25,
+      "items": 31,
       "share": 0.0,
-      "cost": 16184,
-      "yoy": null
-     },
-     {
-      "code": "0602010V0BJ",
-      "label": "Tirosint",
-      "generic": false,
-      "items": 10,
-      "share": 0.0,
-      "cost": 3522,
+      "cost": 12373,
       "yoy": null
      },
      {
       "code": "0602010M0BI",
       "label": "Enolio",
       "generic": false,
-      "items": 8,
+      "items": 9,
       "share": 0.0,
-      "cost": 336,
+      "cost": 358,
+      "yoy": null
+     },
+     {
+      "code": "0602010V0BL",
+      "label": "Teriston",
+      "generic": false,
+      "items": 9,
+      "share": 0.0,
+      "cost": 22,
       "yoy": null
      }
     ],
@@ -3424,27 +3424,27 @@
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 51595,
+      "items": 46462,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 49954,
-        "share": 96.8
+        "items": 45002,
+        "share": 96.9
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 1353,
+        "items": 1186,
         "share": 2.6
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 130,
+        "items": 124,
         "share": 0.3
        }
       ]
@@ -3452,55 +3452,55 @@
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 50542,
+      "items": 44594,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 48827,
-        "share": 96.6
+        "items": 43000,
+        "share": 96.4
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 1535,
-        "share": 3.0
+        "items": 1436,
+        "share": 3.2
        },
        {
         "code": "0602020N0AA",
         "label": "Propylthiouracil",
         "generic": true,
-        "items": 93,
-        "share": 0.2
+        "items": 64,
+        "share": 0.1
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 55437,
+      "items": 49284,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 53541,
-        "share": 96.6
+        "items": 47547,
+        "share": 96.5
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 1699,
-        "share": 3.1
+        "items": 1570,
+        "share": 3.2
        },
        {
         "code": "0602020N0AA",
         "label": "Propylthiouracil",
         "generic": true,
-        "items": 116,
+        "items": 97,
         "share": 0.2
        }
       ]
@@ -3508,27 +3508,27 @@
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 42363,
+      "items": 37501,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 41074,
-        "share": 97.0
+        "items": 36331,
+        "share": 96.9
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 1076,
-        "share": 2.5
+        "items": 986,
+        "share": 2.6
        },
        {
         "code": "0602010V0BD",
         "label": "Eltroxin",
         "generic": false,
-        "items": 110,
+        "items": 103,
         "share": 0.3
        }
       ]
@@ -3536,27 +3536,27 @@
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 180733,
+      "items": 162213,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 175875,
+        "items": 157859,
         "share": 97.3
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 4048,
+        "items": 3595,
         "share": 2.2
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 305,
+        "items": 275,
         "share": 0.2
        }
       ]
@@ -3564,55 +3564,55 @@
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 143661,
+      "items": 128981,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 139423,
-        "share": 97.0
+        "items": 125229,
+        "share": 97.1
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 3401,
+        "items": 3035,
         "share": 2.4
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 375,
-        "share": 0.3
+        "items": 307,
+        "share": 0.2
        }
       ]
      },
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 40968,
+      "items": 37245,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 39749,
-        "share": 97.0
+        "items": 36064,
+        "share": 96.8
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 863,
-        "share": 2.1
+        "items": 834,
+        "share": 2.2
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 194,
+        "items": 180,
         "share": 0.5
        }
       ]
@@ -3620,27 +3620,27 @@
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 62041,
+      "items": 55318,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 60330,
-        "share": 97.2
+        "items": 53802,
+        "share": 97.3
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 1398,
+        "items": 1259,
         "share": 2.3
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 149,
+        "items": 122,
         "share": 0.2
        }
       ]
@@ -3648,55 +3648,55 @@
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 52486,
+      "items": 46611,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 51157,
-        "share": 97.5
-       },
-       {
-        "code": "0602020D0AA",
-        "label": "Carbimazole",
-        "generic": true,
-        "items": 1123,
-        "share": 2.1
-       },
-       {
-        "code": "0602010M0AA",
-        "label": "Liothyronine",
-        "generic": true,
-        "items": 85,
-        "share": 0.2
-       }
-      ]
-     },
-     {
-      "icb": "QJK",
-      "name": "NHS Devon",
-      "items": 76271,
-      "leaders": [
-       {
-        "code": "0602010V0AA",
-        "label": "Levothyroxine sodium",
-        "generic": true,
-        "items": 74407,
+        "items": 45493,
         "share": 97.6
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 1507,
-        "share": 2.0
+        "items": 957,
+        "share": 2.1
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 226,
+        "items": 64,
+        "share": 0.1
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 69040,
+      "leaders": [
+       {
+        "code": "0602010V0AA",
+        "label": "Levothyroxine sodium",
+        "generic": true,
+        "items": 67379,
+        "share": 97.6
+       },
+       {
+        "code": "0602020D0AA",
+        "label": "Carbimazole",
+        "generic": true,
+        "items": 1306,
+        "share": 1.9
+       },
+       {
+        "code": "0602010M0AA",
+        "label": "Liothyronine",
+        "generic": true,
+        "items": 215,
         "share": 0.3
        }
       ]
@@ -3704,25 +3704,25 @@
      {
       "icb": "QVV",
       "name": "NHS Dorset",
-      "items": 40891,
+      "items": 37234,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 39830,
+        "items": 36268,
         "share": 97.4
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 921,
-        "share": 2.3
+        "items": 836,
+        "share": 2.2
        },
        {
-        "code": "0602020N0AA",
-        "label": "Propylthiouracil",
+        "code": "0602010M0AA",
+        "label": "Liothyronine",
         "generic": true,
         "items": 54,
         "share": 0.1
@@ -3732,27 +3732,27 @@
      {
       "icb": "D7T5G",
       "name": "NHS Essex",
-      "items": 123457,
+      "items": 111472,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 120593,
+        "items": 108945,
         "share": 97.7
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 2413,
-        "share": 2.0
+        "items": 2139,
+        "share": 1.9
        },
        {
         "code": "0602020N0AA",
         "label": "Propylthiouracil",
         "generic": true,
-        "items": 174,
+        "items": 150,
         "share": 0.1
        }
       ]
@@ -3760,55 +3760,55 @@
      {
       "icb": "QR1",
       "name": "NHS Gloucestershire",
-      "items": 42697,
+      "items": 39381,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 41581,
-        "share": 97.4
+        "items": 38324,
+        "share": 97.3
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 820,
+        "items": 751,
         "share": 1.9
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 131,
-        "share": 0.3
+        "items": 142,
+        "share": 0.4
        }
       ]
      },
      {
       "icb": "QOP",
       "name": "NHS Greater Manchester",
-      "items": 147957,
+      "items": 133130,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 142479,
+        "items": 128236,
         "share": 96.3
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 4881,
-        "share": 3.3
+        "items": 4280,
+        "share": 3.2
        },
        {
         "code": "0602020N0AA",
         "label": "Propylthiouracil",
         "generic": true,
-        "items": 272,
+        "items": 277,
         "share": 0.2
        }
       ]
@@ -3816,27 +3816,27 @@
      {
       "icb": "QRL",
       "name": "NHS Hampshire and Isle of Wight",
-      "items": 90966,
+      "items": 82316,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 88348,
-        "share": 97.1
+        "items": 79825,
+        "share": 97.0
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 1951,
-        "share": 2.1
+        "items": 1853,
+        "share": 2.3
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 372,
+        "items": 370,
         "share": 0.4
        }
       ]
@@ -3844,27 +3844,27 @@
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 45397,
+      "items": 41514,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 44159,
-        "share": 97.3
+        "items": 40336,
+        "share": 97.2
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 970,
-        "share": 2.1
+        "items": 904,
+        "share": 2.2
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 163,
+        "items": 167,
         "share": 0.4
        }
       ]
@@ -3872,27 +3872,27 @@
      {
       "icb": "QOQ",
       "name": "NHS Humber and North Yorkshire",
-      "items": 128510,
+      "items": 115803,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 126130,
+        "items": 113622,
         "share": 98.1
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 1756,
+        "items": 1609,
         "share": 1.4
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 375,
+        "items": 352,
         "share": 0.3
        }
       ]
@@ -3900,27 +3900,27 @@
      {
       "icb": "QKS",
       "name": "NHS Kent and Medway",
-      "items": 102448,
+      "items": 92848,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 100167,
-        "share": 97.8
+        "items": 90709,
+        "share": 97.7
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 1658,
+        "items": 1516,
         "share": 1.6
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 371,
+        "items": 355,
         "share": 0.4
        }
       ]
@@ -3928,55 +3928,55 @@
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 105390,
+      "items": 94433,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 102286,
-        "share": 97.1
+        "items": 91637,
+        "share": 97.0
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 2705,
+        "items": 2433,
         "share": 2.6
        },
        {
         "code": "0602020N0AA",
         "label": "Propylthiouracil",
         "generic": true,
-        "items": 178,
-        "share": 0.2
+        "items": 138,
+        "share": 0.1
        }
       ]
      },
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 63145,
+      "items": 57470,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 60830,
-        "share": 96.3
+        "items": 55422,
+        "share": 96.4
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 1970,
+        "items": 1764,
         "share": 3.1
        },
        {
         "code": "0602020N0AA",
         "label": "Propylthiouracil",
         "generic": true,
-        "items": 138,
+        "items": 123,
         "share": 0.2
        }
       ]
@@ -3984,27 +3984,27 @@
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 63809,
+      "items": 58517,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 62121,
-        "share": 97.4
+        "items": 56955,
+        "share": 97.3
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 1356,
+        "items": 1247,
         "share": 2.1
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 162,
+        "items": 165,
         "share": 0.3
        }
       ]
@@ -4012,27 +4012,27 @@
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 129795,
+      "items": 118039,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 127164,
-        "share": 98.0
+        "items": 115590,
+        "share": 97.9
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 1991,
-        "share": 1.5
+        "items": 1844,
+        "share": 1.6
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 363,
+        "items": 346,
         "share": 0.3
        }
       ]
@@ -4040,27 +4040,27 @@
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 88951,
+      "items": 81236,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 85412,
-        "share": 96.0
+        "items": 78035,
+        "share": 96.1
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 3123,
+        "items": 2842,
         "share": 3.5
        },
        {
         "code": "0602020N0AA",
         "label": "Propylthiouracil",
         "generic": true,
-        "items": 246,
+        "items": 214,
         "share": 0.3
        }
       ]
@@ -4068,27 +4068,27 @@
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 231869,
+      "items": 211153,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 227599,
-        "share": 98.2
+        "items": 207245,
+        "share": 98.1
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 3682,
+        "items": 3408,
         "share": 1.6
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 229,
+        "items": 198,
         "share": 0.1
        }
       ]
@@ -4096,27 +4096,27 @@
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 54773,
+      "items": 48918,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 53372,
-        "share": 97.4
+        "items": 47684,
+        "share": 97.5
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 1192,
-        "share": 2.2
+        "items": 1039,
+        "share": 2.1
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 106,
+        "items": 104,
         "share": 0.2
        }
       ]
@@ -4124,27 +4124,27 @@
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 63962,
+      "items": 57200,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 62273,
+        "items": 55685,
         "share": 97.4
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 1469,
+        "items": 1328,
         "share": 2.3
        },
        {
         "code": "0602020N0AA",
         "label": "Propylthiouracil",
         "generic": true,
-        "items": 119,
+        "items": 89,
         "share": 0.2
        }
       ]
@@ -4152,55 +4152,55 @@
      {
       "icb": "QOC",
       "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 25817,
+      "items": 23834,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 25171,
-        "share": 97.5
+        "items": 23213,
+        "share": 97.4
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 509,
-        "share": 2.0
+        "items": 497,
+        "share": 2.1
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 61,
-        "share": 0.2
+        "items": 65,
+        "share": 0.3
        }
       ]
      },
      {
       "icb": "QSL",
       "name": "NHS Somerset",
-      "items": 30280,
+      "items": 27820,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 29431,
-        "share": 97.2
+        "items": 27067,
+        "share": 97.3
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 719,
-        "share": 2.4
+        "items": 648,
+        "share": 2.3
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 45,
+        "items": 36,
         "share": 0.1
        }
       ]
@@ -4208,55 +4208,55 @@
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 64764,
+      "items": 59376,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 62844,
-        "share": 97.0
-       },
-       {
-        "code": "0602020D0AA",
-        "label": "Carbimazole",
-        "generic": true,
-        "items": 1717,
-        "share": 2.7
-       },
-       {
-        "code": "0602020N0AA",
-        "label": "Propylthiouracil",
-        "generic": true,
-        "items": 109,
-        "share": 0.2
-       }
-      ]
-     },
-     {
-      "icb": "QWE",
-      "name": "NHS South West London",
-      "items": 69041,
-      "leaders": [
-       {
-        "code": "0602010V0AA",
-        "label": "Levothyroxine sodium",
-        "generic": true,
-        "items": 66901,
+        "items": 57557,
         "share": 96.9
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 1856,
-        "share": 2.7
+        "items": 1672,
+        "share": 2.8
        },
        {
         "code": "0602020N0AA",
         "label": "Propylthiouracil",
         "generic": true,
-        "items": 145,
+        "items": 76,
+        "share": 0.1
+       }
+      ]
+     },
+     {
+      "icb": "QWE",
+      "name": "NHS South West London",
+      "items": 62350,
+      "leaders": [
+       {
+        "code": "0602010V0AA",
+        "label": "Levothyroxine sodium",
+        "generic": true,
+        "items": 60363,
+        "share": 96.8
+       },
+       {
+        "code": "0602020D0AA",
+        "label": "Carbimazole",
+        "generic": true,
+        "items": 1721,
+        "share": 2.8
+       },
+       {
+        "code": "0602020N0AA",
+        "label": "Propylthiouracil",
+        "generic": true,
+        "items": 123,
         "share": 0.2
        }
       ]
@@ -4264,27 +4264,27 @@
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 91162,
+      "items": 81442,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 88645,
+        "items": 79142,
         "share": 97.2
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 2287,
-        "share": 2.5
+        "items": 2080,
+        "share": 2.6
        },
        {
         "code": "0602020N0AA",
         "label": "Propylthiouracil",
         "generic": true,
-        "items": 105,
+        "items": 95,
         "share": 0.1
        }
       ]
@@ -4292,27 +4292,27 @@
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 60852,
+      "items": 54963,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 59005,
-        "share": 97.0
+        "items": 53249,
+        "share": 96.9
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 1600,
-        "share": 2.6
+        "items": 1478,
+        "share": 2.7
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 105,
+        "items": 99,
         "share": 0.2
        }
       ]
@@ -4320,27 +4320,27 @@
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 151440,
+      "items": 138109,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 147761,
+        "items": 134744,
         "share": 97.6
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 2818,
+        "items": 2646,
         "share": 1.9
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 447,
+        "items": 370,
         "share": 0.3
        }
       ]
@@ -4348,27 +4348,27 @@
      {
       "icb": "S0E4D",
       "name": "NHS Thames Valley",
-      "items": 106485,
+      "items": 94205,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 103244,
-        "share": 97.0
+        "items": 91303,
+        "share": 96.9
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 2492,
+        "items": 2197,
         "share": 2.3
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 430,
+        "items": 400,
         "share": 0.4
        }
       ]
@@ -4376,27 +4376,27 @@
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 138184,
+      "items": 124061,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 134995,
-        "share": 97.7
+        "items": 121141,
+        "share": 97.6
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 2597,
+        "items": 2376,
         "share": 1.9
        },
        {
         "code": "0602010M0AA",
         "label": "Liothyronine",
         "generic": true,
-        "items": 266,
+        "items": 238,
         "share": 0.2
        }
       ]
@@ -4404,27 +4404,27 @@
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 171961,
+      "items": 154632,
       "leaders": [
        {
         "code": "0602010V0AA",
         "label": "Levothyroxine sodium",
         "generic": true,
-        "items": 166665,
+        "items": 149838,
         "share": 96.9
        },
        {
         "code": "0602020D0AA",
         "label": "Carbimazole",
         "generic": true,
-        "items": 4700,
+        "items": 4223,
         "share": 2.7
        },
        {
         "code": "0602020N0AA",
         "label": "Propylthiouracil",
         "generic": true,
-        "items": 310,
+        "items": 323,
         "share": 0.2
        }
       ]
@@ -5094,14 +5094,14 @@
     ],
     "primary": {
      "basis": "items",
-     "latestPeriod": "202607",
+     "latestPeriod": "202608",
      "window12m": [
-      "202508",
-      "202607"
+      "202509",
+      "202608"
      ],
-     "items": 449261,
-     "items12m": 4669248,
-     "brandCount": 6,
+     "items": 404817,
+     "items12m": 4715191,
+     "brandCount": 7,
      "topN": 12,
      "brands": [
       {
@@ -5110,43 +5110,43 @@
        "products": [
         "FreeStyle Libre"
        ],
-       "items": 413604,
-       "share": 92.1,
-       "cost": 34284996,
-       "items12m": 4322060,
-       "share12m": 92.6,
-       "yoy": 13.8,
+       "items": 372128,
+       "share": 91.9,
+       "cost": 30850587,
+       "items12m": 4360487,
+       "share12m": 92.5,
+       "yoy": 11.5,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 27267,
-         "shareOfIcb": 93.6
+         "items": 24798,
+         "shareOfIcb": 93.5
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 23242,
-         "shareOfIcb": 93.7
-        },
-        {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 21443,
-         "shareOfIcb": 92.4
+         "items": 20580,
+         "shareOfIcb": 93.3
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 21430,
-         "shareOfIcb": 90.7
+         "items": 19324,
+         "shareOfIcb": 90.5
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 19289,
+         "shareOfIcb": 92.4
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 19020,
-         "shareOfIcb": 95.1
+         "items": 17267,
+         "shareOfIcb": 94.9
         }
        ]
       },
@@ -5156,43 +5156,89 @@
        "products": [
         "Dexcom One+ Sensor"
        ],
-       "items": 35501,
-       "share": 7.9,
-       "cost": 2666873,
-       "items12m": 346221,
-       "share12m": 7.4,
-       "yoy": 32.6,
+       "items": 32507,
+       "share": 8.0,
+       "cost": 2450184,
+       "items12m": 353575,
+       "share12m": 7.5,
+       "yoy": 29.2,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 2192,
-         "shareOfIcb": 9.3
+         "items": 2023,
+         "shareOfIcb": 9.5
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 1838,
-         "shareOfIcb": 6.3
+         "items": 1717,
+         "shareOfIcb": 6.5
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 1748,
-         "shareOfIcb": 7.5
+         "items": 1578,
+         "shareOfIcb": 7.6
         },
         {
          "icb": "D7T5G",
          "name": "NHS Essex",
-         "items": 1690,
-         "shareOfIcb": 10.1
+         "items": 1510,
+         "shareOfIcb": 10.0
         },
         {
-         "icb": "S0E4D",
-         "name": "NHS Thames Valley",
-         "items": 1629,
-         "shareOfIcb": 8.8
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 1469,
+         "shareOfIcb": 6.7
+        }
+       ]
+      },
+      {
+       "brand": "CareSens",
+       "generic": false,
+       "products": [
+        "CareSens Air Sensor"
+       ],
+       "items": 63,
+       "share": 0.0,
+       "cost": 3563,
+       "items12m": 491,
+       "share12m": 0.0,
+       "yoy": null,
+       "icbsPrescribing": 14,
+       "topIcbs": [
+        {
+         "icb": "QK1",
+         "name": "NHS Leicester, Leicestershire and Rutland",
+         "items": 24,
+         "shareOfIcb": 0.2
+        },
+        {
+         "icb": "QF7",
+         "name": "NHS South Yorkshire",
+         "items": 19,
+         "shareOfIcb": 0.2
+        },
+        {
+         "icb": "QNC",
+         "name": "NHS Staffordshire and Stoke-on-trent",
+         "items": 6,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QE1",
+         "name": "NHS Lancashire and South Cumbria",
+         "items": 2,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QWU",
+         "name": "NHS Coventry and Warwickshire",
+         "items": 2,
+         "shareOfIcb": 0.0
         }
        ]
       },
@@ -5202,43 +5248,43 @@
        "products": [
         "GlucoMen iCan Sensor"
        ],
-       "items": 54,
+       "items": 57,
        "share": 0.0,
-       "cost": 3427,
-       "items12m": 243,
+       "cost": 3750,
+       "items12m": 297,
        "share12m": 0.0,
        "yoy": null,
-       "icbsPrescribing": 12,
+       "icbsPrescribing": 17,
        "topIcbs": [
+        {
+         "icb": "QJM",
+         "name": "NHS Lincolnshire",
+         "items": 14,
+         "shareOfIcb": 0.2
+        },
         {
          "icb": "QT6",
          "name": "NHS Cornwall and the Isles of Scilly",
-         "items": 17,
-         "shareOfIcb": 0.4
+         "items": 13,
+         "shareOfIcb": 0.3
         },
         {
          "icb": "QSL",
          "name": "NHS Somerset",
-         "items": 15,
-         "shareOfIcb": 0.3
+         "items": 6,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QKS",
+         "name": "NHS Kent and Medway",
+         "items": 4,
+         "shareOfIcb": 0.0
         },
         {
          "icb": "QOC",
          "name": "NHS Shropshire, Telford and Wrekin",
-         "items": 7,
+         "items": 3,
          "shareOfIcb": 0.1
-        },
-        {
-         "icb": "S0E4D",
-         "name": "NHS Thames Valley",
-         "items": 5,
-         "shareOfIcb": 0.0
-        },
-        {
-         "icb": "QE1",
-         "name": "NHS Lancashire and South Cumbria",
-         "items": 2,
-         "shareOfIcb": 0.0
         }
        ]
       },
@@ -5250,86 +5296,40 @@
        ],
        "items": 52,
        "share": 0.0,
-       "cost": 2661,
-       "items12m": 218,
+       "cost": 2470,
+       "items12m": 270,
        "share12m": 0.0,
        "yoy": null,
-       "icbsPrescribing": 19,
+       "icbsPrescribing": 26,
        "topIcbs": [
-        {
-         "icb": "QHM",
-         "name": "NHS North East and North Cumbria",
-         "items": 11,
-         "shareOfIcb": 0.0
-        },
         {
          "icb": "QT1",
          "name": "NHS Nottingham and Nottinghamshire",
-         "items": 6,
+         "items": 5,
          "shareOfIcb": 0.1
         },
         {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 5,
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 4,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 3,
          "shareOfIcb": 0.0
         },
         {
          "icb": "QKS",
          "name": "NHS Kent and Medway",
-         "items": 4,
+         "items": 3,
          "shareOfIcb": 0.0
         },
         {
-         "icb": "QNC",
-         "name": "NHS Staffordshire and Stoke-on-trent",
-         "items": 4,
-         "shareOfIcb": 0.1
-        }
-       ]
-      },
-      {
-       "brand": "CareSens",
-       "generic": false,
-       "products": [
-        "CareSens Air Sensor"
-       ],
-       "items": 46,
-       "share": 0.0,
-       "cost": 2699,
-       "items12m": 438,
-       "share12m": 0.0,
-       "yoy": null,
-       "icbsPrescribing": 10,
-       "topIcbs": [
-        {
-         "icb": "QK1",
-         "name": "NHS Leicester, Leicestershire and Rutland",
-         "items": 23,
-         "shareOfIcb": 0.2
-        },
-        {
-         "icb": "QF7",
-         "name": "NHS South Yorkshire",
-         "items": 14,
-         "shareOfIcb": 0.1
-        },
-        {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 2,
-         "shareOfIcb": 0.0
-        },
-        {
-         "icb": "QGH",
-         "name": "NHS Herefordshire and Worcestershire",
-         "items": 1,
-         "shareOfIcb": 0.0
-        },
-        {
-         "icb": "QHL",
-         "name": "NHS Birmingham and Solihull",
-         "items": 1,
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 3,
          "shareOfIcb": 0.0
         }
        ]
@@ -5340,23 +5340,23 @@
        "products": [
         "GlucoRx AiDEX Sensor"
        ],
-       "items": 4,
+       "items": 7,
        "share": 0.0,
-       "cost": 208,
+       "cost": 238,
        "items12m": 68,
        "share12m": 0.0,
        "yoy": null,
-       "icbsPrescribing": 4,
+       "icbsPrescribing": 5,
        "topIcbs": [
-        {
-         "icb": "QF7",
-         "name": "NHS South Yorkshire",
-         "items": 1,
-         "shareOfIcb": 0.0
-        },
         {
          "icb": "QKK",
          "name": "NHS South East London",
+         "items": 3,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QKS",
+         "name": "NHS Kent and Medway",
          "items": 1,
          "shareOfIcb": 0.0
         },
@@ -5367,9 +5367,37 @@
          "shareOfIcb": 0.0
         },
         {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
+         "icb": "QWE",
+         "name": "NHS South West London",
          "items": 1,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 1,
+         "shareOfIcb": 0.0
+        }
+       ]
+      },
+      {
+       "brand": "ALLYcgm",
+       "generic": false,
+       "products": [
+        "ALLYcgm Sensor"
+       ],
+       "items": 3,
+       "share": 0.0,
+       "cost": 172,
+       "items12m": 3,
+       "share12m": 0.0,
+       "yoy": null,
+       "icbsPrescribing": 1,
+       "topIcbs": [
+        {
+         "icb": "QJM",
+         "name": "NHS Lincolnshire",
+         "items": 3,
          "shareOfIcb": 0.0
         }
        ]
@@ -5468,14 +5496,14 @@
     ],
     "primary": {
      "basis": "items",
-     "latestPeriod": "202607",
+     "latestPeriod": "202608",
      "window12m": [
-      "202508",
-      "202607"
+      "202509",
+      "202608"
      ],
-     "items": 432837,
-     "items12m": 5042751,
-     "brandCount": 45,
+     "items": 385523,
+     "items12m": 5005228,
+     "brandCount": 42,
      "topN": 12,
      "brands": [
       {
@@ -5486,43 +5514,43 @@
         "GlucoRx Smart Glucose testing strips",
         "GlucoRx X6 Glucose testing strips"
        ],
-       "items": 119715,
+       "items": 106768,
        "share": 27.7,
-       "cost": 1250079,
-       "items12m": 1395133,
+       "cost": 1109775,
+       "items12m": 1385853,
        "share12m": 27.7,
-       "yoy": -5.5,
+       "yoy": -8.0,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 12533,
-         "shareOfIcb": 45.1
+         "items": 11389,
+         "shareOfIcb": 46.0
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 10731,
+         "items": 9519,
          "shareOfIcb": 51.0
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 6778,
-         "shareOfIcb": 32.3
+         "items": 6253,
+         "shareOfIcb": 31.9
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 6755,
-         "shareOfIcb": 29.0
+         "items": 5791,
+         "shareOfIcb": 28.1
         },
         {
          "icb": "T6Y0W",
          "name": "NHS Norfolk and Suffolk",
-         "items": 6248,
-         "shareOfIcb": 45.0
+         "items": 5582,
+         "shareOfIcb": 45.6
         }
        ]
       },
@@ -5534,43 +5562,43 @@
         "Contour Next testing strips",
         "Contour testing strips"
        ],
-       "items": 69566,
-       "share": 16.1,
-       "cost": 761305,
-       "items12m": 761085,
-       "share12m": 15.1,
-       "yoy": 7.7,
+       "items": 63841,
+       "share": 16.6,
+       "cost": 692635,
+       "items12m": 765522,
+       "share12m": 15.3,
+       "yoy": 7.5,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 10271,
-         "shareOfIcb": 44.0
+         "items": 9512,
+         "shareOfIcb": 46.1
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 6504,
-         "shareOfIcb": 31.0
+         "items": 6140,
+         "shareOfIcb": 31.3
         },
         {
          "icb": "QHL",
          "name": "NHS Birmingham and Solihull",
-         "items": 5546,
-         "shareOfIcb": 31.1
+         "items": 5067,
+         "shareOfIcb": 32.2
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 5535,
-         "shareOfIcb": 23.5
+         "items": 4895,
+         "shareOfIcb": 23.3
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 3639,
-         "shareOfIcb": 14.6
+         "items": 3390,
+         "shareOfIcb": 15.1
         }
        ]
       },
@@ -5580,43 +5608,43 @@
        "products": [
         "GLUCOFIX TECH Sensor testing stips"
        ],
-       "items": 42063,
-       "share": 9.7,
-       "cost": 365539,
-       "items12m": 459030,
-       "share12m": 9.1,
-       "yoy": 9.8,
+       "items": 37185,
+       "share": 9.6,
+       "cost": 321233,
+       "items12m": 461055,
+       "share12m": 9.2,
+       "yoy": 5.8,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 4348,
-         "shareOfIcb": 15.7
+         "items": 3945,
+         "shareOfIcb": 15.9
         },
         {
          "icb": "QUA",
          "name": "NHS Black Country",
-         "items": 3921,
-         "shareOfIcb": 28.9
+         "items": 3335,
+         "shareOfIcb": 27.8
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 3277,
-         "shareOfIcb": 13.9
+         "items": 2984,
+         "shareOfIcb": 14.2
         },
         {
          "icb": "QOQ",
          "name": "NHS Humber and North Yorkshire",
-         "items": 3016,
-         "shareOfIcb": 25.9
+         "items": 2598,
+         "shareOfIcb": 25.7
         },
         {
          "icb": "QKS",
          "name": "NHS Kent and Medway",
-         "items": 2571,
-         "shareOfIcb": 22.6
+         "items": 2188,
+         "shareOfIcb": 21.2
         }
        ]
       },
@@ -5626,43 +5654,43 @@
        "products": [
         "Finetest Lite testing strips"
        ],
-       "items": 32965,
-       "share": 7.6,
-       "cost": 248149,
-       "items12m": 376552,
+       "items": 29736,
+       "share": 7.7,
+       "cost": 225300,
+       "items12m": 375484,
        "share12m": 7.5,
-       "yoy": -3.1,
+       "yoy": -3.5,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QPM",
          "name": "NHS Northamptonshire",
-         "items": 5687,
-         "shareOfIcb": 78.9
-        },
-        {
-         "icb": "QHM",
-         "name": "NHS North East and North Cumbria",
-         "items": 4340,
-         "shareOfIcb": 20.6
+         "items": 5004,
+         "shareOfIcb": 79.2
         },
         {
          "icb": "QK1",
          "name": "NHS Leicester, Leicestershire and Rutland",
-         "items": 4323,
-         "shareOfIcb": 38.5
+         "items": 3928,
+         "shareOfIcb": 38.9
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 3848,
+         "shareOfIcb": 20.6
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 3421,
-         "shareOfIcb": 12.3
+         "items": 2884,
+         "shareOfIcb": 11.6
         },
         {
          "icb": "S0E4D",
          "name": "NHS Thames Valley",
-         "items": 2658,
-         "shareOfIcb": 22.2
+         "items": 2421,
+         "shareOfIcb": 22.8
         }
        ]
       },
@@ -5674,43 +5702,43 @@
         "CareSens PRO testing strips",
         "CareSens N testing strips"
        ],
-       "items": 29172,
-       "share": 6.7,
-       "cost": 356360,
-       "items12m": 307462,
-       "share12m": 6.1,
-       "yoy": 12.7,
+       "items": 25609,
+       "share": 6.6,
+       "cost": 310064,
+       "items12m": 309287,
+       "share12m": 6.2,
+       "yoy": 7.7,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QUA",
          "name": "NHS Black Country",
-         "items": 4016,
-         "shareOfIcb": 29.6
+         "items": 3482,
+         "shareOfIcb": 29.0
         },
         {
          "icb": "QWU",
          "name": "NHS Coventry and Warwickshire",
-         "items": 2700,
-         "shareOfIcb": 42.8
+         "items": 2415,
+         "shareOfIcb": 43.0
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 2612,
-         "shareOfIcb": 10.5
+         "items": 2256,
+         "shareOfIcb": 10.0
         },
         {
          "icb": "QNC",
          "name": "NHS Staffordshire and Stoke-on-trent",
-         "items": 2558,
-         "shareOfIcb": 22.4
+         "items": 2206,
+         "shareOfIcb": 22.2
         },
         {
          "icb": "D7T5G",
          "name": "NHS Essex",
-         "items": 2398,
-         "shareOfIcb": 18.2
+         "items": 2123,
+         "shareOfIcb": 17.9
         }
        ]
       },
@@ -5720,43 +5748,43 @@
        "products": [
         "WaveSense JAZZ testing strips"
        ],
-       "items": 29054,
-       "share": 6.7,
-       "cost": 463551,
-       "items12m": 384336,
-       "share12m": 7.6,
-       "yoy": -26.6,
+       "items": 25222,
+       "share": 6.5,
+       "cost": 400565,
+       "items12m": 373646,
+       "share12m": 7.5,
+       "yoy": -29.8,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
-         "icb": "QNC",
-         "name": "NHS Staffordshire and Stoke-on-trent",
-         "items": 1945,
-         "shareOfIcb": 17.0
-        },
-        {
          "icb": "QJ2",
          "name": "NHS Derby and Derbyshire",
-         "items": 1855,
-         "shareOfIcb": 20.8
+         "items": 1600,
+         "shareOfIcb": 20.2
+        },
+        {
+         "icb": "QNC",
+         "name": "NHS Staffordshire and Stoke-on-trent",
+         "items": 1587,
+         "shareOfIcb": 16.0
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 1819,
-         "shareOfIcb": 7.3
+         "items": 1570,
+         "shareOfIcb": 7.0
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 1711,
-         "shareOfIcb": 6.2
+         "items": 1493,
+         "shareOfIcb": 6.0
         },
         {
-         "icb": "QKK",
-         "name": "NHS South East London",
-         "items": 1538,
-         "shareOfIcb": 11.8
+         "icb": "QMF",
+         "name": "NHS North East London",
+         "items": 1221,
+         "shareOfIcb": 6.2
         }
        ]
       },
@@ -5766,43 +5794,43 @@
        "products": [
         "Instant testing strips"
        ],
-       "items": 25512,
-       "share": 5.9,
-       "cost": 252895,
-       "items12m": 311471,
-       "share12m": 6.2,
-       "yoy": -16.6,
+       "items": 22296,
+       "share": 5.8,
+       "cost": 221129,
+       "items12m": 306529,
+       "share12m": 6.1,
+       "yoy": -18.1,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QF7",
          "name": "NHS South Yorkshire",
-         "items": 4521,
-         "shareOfIcb": 34.3
+         "items": 3947,
+         "shareOfIcb": 34.2
         },
         {
          "icb": "QJK",
          "name": "NHS Devon",
-         "items": 3096,
-         "shareOfIcb": 39.8
+         "items": 2786,
+         "shareOfIcb": 40.2
         },
         {
          "icb": "QHL",
          "name": "NHS Birmingham and Solihull",
-         "items": 2553,
+         "items": 2245,
          "shareOfIcb": 14.3
         },
         {
          "icb": "QT1",
          "name": "NHS Nottingham and Nottinghamshire",
-         "items": 2019,
+         "items": 1780,
          "shareOfIcb": 19.2
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 1773,
-         "shareOfIcb": 7.5
+         "items": 1559,
+         "shareOfIcb": 7.4
         }
        ]
       },
@@ -5812,10 +5840,10 @@
        "products": [
         "4SURE testing strips"
        ],
-       "items": 16086,
+       "items": 14404,
        "share": 3.7,
-       "cost": 212617,
-       "items12m": 174789,
+       "cost": 189267,
+       "items12m": 175305,
        "share12m": 3.5,
        "yoy": 3.7,
        "icbsPrescribing": 36,
@@ -5823,31 +5851,31 @@
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 2026,
-         "shareOfIcb": 12.3
+         "items": 1847,
+         "shareOfIcb": 12.7
         },
         {
          "icb": "QRL",
          "name": "NHS Hampshire and Isle of Wight",
-         "items": 1795,
-         "shareOfIcb": 15.2
+         "items": 1449,
+         "shareOfIcb": 14.0
         },
         {
          "icb": "QWE",
          "name": "NHS South West London",
-         "items": 1661,
-         "shareOfIcb": 17.2
+         "items": 1437,
+         "shareOfIcb": 16.4
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 1388,
-         "shareOfIcb": 5.6
+         "items": 1225,
+         "shareOfIcb": 5.5
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 1328,
+         "items": 1202,
          "shareOfIcb": 5.7
         }
        ]
@@ -5858,43 +5886,43 @@
        "products": [
         "TEE2 testing strips"
        ],
-       "items": 11258,
+       "items": 9847,
        "share": 2.6,
-       "cost": 127895,
-       "items12m": 158235,
-       "share12m": 3.1,
-       "yoy": -38.3,
+       "cost": 112234,
+       "items12m": 152210,
+       "share12m": 3.0,
+       "yoy": -38.0,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 2704,
+         "items": 2414,
          "shareOfIcb": 11.5
         },
         {
          "icb": "QHL",
          "name": "NHS Birmingham and Solihull",
-         "items": 1823,
-         "shareOfIcb": 10.2
+         "items": 1546,
+         "shareOfIcb": 9.8
         },
         {
          "icb": "QF7",
          "name": "NHS South Yorkshire",
-         "items": 1589,
+         "items": 1390,
          "shareOfIcb": 12.1
         },
         {
          "icb": "D7T5G",
          "name": "NHS Essex",
-         "items": 1044,
-         "shareOfIcb": 7.9
+         "items": 909,
+         "shareOfIcb": 7.6
         },
         {
          "icb": "QUA",
          "name": "NHS Black Country",
-         "items": 634,
-         "shareOfIcb": 4.7
+         "items": 540,
+         "shareOfIcb": 4.5
         }
        ]
       },
@@ -5904,43 +5932,43 @@
        "products": [
         "Mobile cassette"
        ],
-       "items": 8775,
+       "items": 7570,
        "share": 2.0,
-       "cost": 185126,
-       "items12m": 112443,
+       "cost": 159544,
+       "items12m": 109544,
        "share12m": 2.2,
-       "yoy": -24.8,
+       "yoy": -27.7,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "S9B9J",
          "name": "NHS Surrey and Sussex",
-         "items": 686,
-         "shareOfIcb": 4.4
+         "items": 599,
+         "shareOfIcb": 4.2
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 682,
-         "shareOfIcb": 2.9
+         "items": 593,
+         "shareOfIcb": 2.8
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 586,
-         "shareOfIcb": 3.5
+         "items": 494,
+         "shareOfIcb": 3.4
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 450,
+         "items": 397,
          "shareOfIcb": 2.1
         },
         {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 367,
-         "shareOfIcb": 1.5
+         "icb": "QKS",
+         "name": "NHS Kent and Medway",
+         "items": 320,
+         "shareOfIcb": 3.1
         }
        ]
       },
@@ -5951,43 +5979,43 @@
         "FreeStyle Optium testing strips",
         "FreeStyle Lite testing strips"
        ],
-       "items": 8540,
-       "share": 2.0,
-       "cost": 282941,
-       "items12m": 102242,
+       "items": 7351,
+       "share": 1.9,
+       "cost": 242920,
+       "items12m": 100633,
        "share12m": 2.0,
-       "yoy": -21.2,
+       "yoy": -18.0,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 725,
-         "shareOfIcb": 3.1
+         "items": 618,
+         "shareOfIcb": 2.9
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 545,
+         "items": 479,
          "shareOfIcb": 3.3
         },
         {
          "icb": "QE1",
          "name": "NHS Lancashire and South Cumbria",
-         "items": 425,
-         "shareOfIcb": 3.5
+         "items": 365,
+         "shareOfIcb": 3.4
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 399,
+         "items": 360,
          "shareOfIcb": 1.9
         },
         {
-         "icb": "QT1",
-         "name": "NHS Nottingham and Nottinghamshire",
-         "items": 361,
-         "shareOfIcb": 3.4
+         "icb": "QHL",
+         "name": "NHS Birmingham and Solihull",
+         "items": 311,
+         "shareOfIcb": 2.0
         }
        ]
       },
@@ -5997,43 +6025,43 @@
        "products": [
         "GlucoMen areo Sensor testing strips"
        ],
-       "items": 8280,
+       "items": 7178,
        "share": 1.9,
-       "cost": 105145,
-       "items12m": 112507,
+       "cost": 90138,
+       "items12m": 108801,
        "share12m": 2.2,
-       "yoy": -34.6,
+       "yoy": -34.0,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 1024,
-         "shareOfIcb": 4.4
+         "items": 831,
+         "shareOfIcb": 4.0
         },
         {
          "icb": "QKS",
          "name": "NHS Kent and Medway",
-         "items": 871,
-         "shareOfIcb": 7.7
+         "items": 737,
+         "shareOfIcb": 7.1
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 770,
+         "items": 688,
          "shareOfIcb": 3.1
         },
         {
          "icb": "S9B9J",
          "name": "NHS Surrey and Sussex",
-         "items": 537,
-         "shareOfIcb": 3.4
+         "items": 460,
+         "shareOfIcb": 3.3
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 531,
-         "shareOfIcb": 1.9
+         "items": 455,
+         "shareOfIcb": 1.8
         }
        ]
       },
@@ -6043,41 +6071,41 @@
        "products": [
         "True Metrix testing strips"
        ],
-       "items": 5499,
+       "items": 4924,
        "share": 1.3,
-       "cost": 39904,
-       "items12m": 61956,
+       "cost": 35509,
+       "items12m": 62061,
        "share12m": 1.2,
-       "yoy": 2.4,
-       "icbsPrescribing": 36,
+       "yoy": 2.2,
+       "icbsPrescribing": 35,
        "topIcbs": [
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 2684,
+         "items": 2400,
          "shareOfIcb": 11.4
         },
         {
          "icb": "QOX",
          "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-         "items": 1368,
-         "shareOfIcb": 21.6
+         "items": 1176,
+         "shareOfIcb": 21.0
         },
         {
          "icb": "QR1",
          "name": "NHS Gloucestershire",
-         "items": 365,
-         "shareOfIcb": 9.9
+         "items": 332,
+         "shareOfIcb": 10.4
         },
         {
          "icb": "QKK",
          "name": "NHS South East London",
-         "items": 139,
-         "shareOfIcb": 1.1
+         "items": 120,
+         "shareOfIcb": 1.0
         },
         {
-         "icb": "QWO",
-         "name": "NHS West Yorkshire",
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
          "items": 100,
          "shareOfIcb": 0.4
         }
@@ -6089,91 +6117,43 @@
        "products": [
         "Performa testing strips"
        ],
-       "items": 5210,
+       "items": 4572,
        "share": 1.2,
-       "cost": 49685,
-       "items12m": 71583,
+       "cost": 44176,
+       "items12m": 69140,
        "share12m": 1.4,
-       "yoy": -34.3,
+       "yoy": -34.8,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 810,
-         "shareOfIcb": 3.4
+         "items": 738,
+         "shareOfIcb": 3.5
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 480,
-         "shareOfIcb": 2.9
+         "items": 410,
+         "shareOfIcb": 2.8
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 431,
+         "items": 366,
          "shareOfIcb": 2.0
         },
         {
          "icb": "QT1",
          "name": "NHS Nottingham and Nottinghamshire",
-         "items": 381,
-         "shareOfIcb": 3.6
+         "items": 339,
+         "shareOfIcb": 3.7
         },
         {
          "icb": "QRL",
          "name": "NHS Hampshire and Isle of Wight",
-         "items": 345,
-         "shareOfIcb": 2.9
-        }
-       ]
-      },
-      {
-       "brand": "palmdoc",
-       "generic": false,
-       "products": [
-        "palmdoc testing strips",
-        "palmdoc iCare Advanced testing strips",
-        "palmdoc iCare Advanced Solo testing strips"
-       ],
-       "items": 4230,
-       "share": 1.0,
-       "cost": 38623,
-       "items12m": 54772,
-       "share12m": 1.1,
-       "yoy": -24.3,
-       "icbsPrescribing": 29,
-       "topIcbs": [
-        {
-         "icb": "Z9B2Z",
-         "name": "NHS West and North London",
-         "items": 1457,
-         "shareOfIcb": 5.2
-        },
-        {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 1137,
-         "shareOfIcb": 4.6
-        },
-        {
-         "icb": "D7T5G",
-         "name": "NHS Essex",
-         "items": 436,
-         "shareOfIcb": 3.3
-        },
-        {
-         "icb": "QKK",
-         "name": "NHS South East London",
-         "items": 420,
-         "shareOfIcb": 3.2
-        },
-        {
-         "icb": "QUY",
-         "name": "NHS Bristol, North Somerset and South Gloucestershire",
-         "items": 231,
-         "shareOfIcb": 4.5
+         "items": 310,
+         "shareOfIcb": 3.0
         }
        ]
       },
@@ -6183,43 +6163,90 @@
        "products": [
         "Aviva testing strips"
        ],
-       "items": 4151,
+       "items": 3687,
        "share": 1.0,
-       "cost": 132412,
-       "items12m": 54703,
+       "cost": 114251,
+       "items12m": 53090,
        "share12m": 1.1,
-       "yoy": -31.2,
+       "yoy": -30.4,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 269,
+         "items": 236,
          "shareOfIcb": 1.1
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 262,
+         "items": 219,
          "shareOfIcb": 1.2
         },
         {
          "icb": "S9B9J",
          "name": "NHS Surrey and Sussex",
-         "items": 221,
-         "shareOfIcb": 1.4
-        },
-        {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 207,
-         "shareOfIcb": 0.8
+         "items": 210,
+         "shareOfIcb": 1.5
         },
         {
          "icb": "S0E4D",
          "name": "NHS Thames Valley",
-         "items": 202,
-         "shareOfIcb": 1.7
+         "items": 189,
+         "shareOfIcb": 1.8
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 185,
+         "shareOfIcb": 0.7
+        }
+       ]
+      },
+      {
+       "brand": "palmdoc",
+       "generic": false,
+       "products": [
+        "palmdoc testing strips",
+        "palmdoc iCare Advanced testing strips"
+       ],
+       "items": 3645,
+       "share": 0.9,
+       "cost": 33116,
+       "items12m": 53540,
+       "share12m": 1.1,
+       "yoy": -25.3,
+       "icbsPrescribing": 25,
+       "topIcbs": [
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 1260,
+         "shareOfIcb": 5.1
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 1011,
+         "shareOfIcb": 4.5
+        },
+        {
+         "icb": "QKK",
+         "name": "NHS South East London",
+         "items": 396,
+         "shareOfIcb": 3.3
+        },
+        {
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 356,
+         "shareOfIcb": 3.0
+        },
+        {
+         "icb": "QUY",
+         "name": "NHS Bristol, North Somerset and South Gloucestershire",
+         "items": 188,
+         "shareOfIcb": 4.3
         }
        ]
       },
@@ -6229,43 +6256,43 @@
        "products": [
         "AgaMatrix Agile testing strips"
        ],
-       "items": 3131,
-       "share": 0.7,
-       "cost": 24829,
-       "items12m": 32253,
-       "share12m": 0.6,
-       "yoy": 17.4,
-       "icbsPrescribing": 36,
+       "items": 2923,
+       "share": 0.8,
+       "cost": 23003,
+       "items12m": 32870,
+       "share12m": 0.7,
+       "yoy": 26.8,
+       "icbsPrescribing": 34,
        "topIcbs": [
         {
          "icb": "QWE",
          "name": "NHS South West London",
-         "items": 608,
-         "shareOfIcb": 6.3
+         "items": 591,
+         "shareOfIcb": 6.8
         },
         {
          "icb": "QKK",
          "name": "NHS South East London",
-         "items": 403,
-         "shareOfIcb": 3.1
+         "items": 353,
+         "shareOfIcb": 3.0
         },
         {
          "icb": "QOQ",
          "name": "NHS Humber and North Yorkshire",
-         "items": 369,
-         "shareOfIcb": 3.2
+         "items": 338,
+         "shareOfIcb": 3.3
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 197,
-         "shareOfIcb": 0.9
+         "items": 188,
+         "shareOfIcb": 1.0
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
          "items": 177,
-         "shareOfIcb": 0.7
+         "shareOfIcb": 0.8
         }
        ]
       },
@@ -6275,42 +6302,42 @@
        "products": [
         "OneTouch Select Plus testing strips"
        ],
-       "items": 2342,
+       "items": 2066,
        "share": 0.5,
-       "cost": 50829,
-       "items12m": 31049,
+       "cost": 44204,
+       "items12m": 30168,
        "share12m": 0.6,
-       "yoy": -29.2,
+       "yoy": -29.9,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 357,
+         "items": 305,
          "shareOfIcb": 1.5
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 283,
+         "items": 248,
          "shareOfIcb": 1.2
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 225,
-         "shareOfIcb": 0.9
+         "items": 220,
+         "shareOfIcb": 1.0
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 130,
+         "items": 124,
          "shareOfIcb": 0.5
         },
         {
          "icb": "T6Y0W",
          "name": "NHS Norfolk and Suffolk",
-         "items": 118,
+         "items": 113,
          "shareOfIcb": 0.9
         }
        ]
@@ -6321,43 +6348,89 @@
        "products": [
         "Guide testing strips"
        ],
-       "items": 1967,
-       "share": 0.5,
-       "cost": 64999,
-       "items12m": 23675,
+       "items": 1705,
+       "share": 0.4,
+       "cost": 55365,
+       "items12m": 23252,
        "share12m": 0.5,
-       "yoy": -17.2,
+       "yoy": -19.9,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 255,
+         "items": 215,
          "shareOfIcb": 1.2
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 153,
-         "shareOfIcb": 0.6
-        },
-        {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 103,
-         "shareOfIcb": 0.4
+         "items": 152,
+         "shareOfIcb": 0.7
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 101,
+         "items": 89,
+         "shareOfIcb": 0.4
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 82,
          "shareOfIcb": 0.4
         },
         {
          "icb": "T6Y0W",
          "name": "NHS Norfolk and Suffolk",
-         "items": 92,
-         "shareOfIcb": 0.7
+         "items": 78,
+         "shareOfIcb": 0.6
+        }
+       ]
+      },
+      {
+       "brand": "Neon",
+       "generic": false,
+       "products": [
+        "Neon GK+ Glucose testing strips"
+       ],
+       "items": 1359,
+       "share": 0.4,
+       "cost": 9465,
+       "items12m": 6219,
+       "share12m": 0.1,
+       "yoy": 3476.3,
+       "icbsPrescribing": 26,
+       "topIcbs": [
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 311,
+         "shareOfIcb": 1.3
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 196,
+         "shareOfIcb": 1.1
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 191,
+         "shareOfIcb": 0.9
+        },
+        {
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 119,
+         "shareOfIcb": 1.0
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 108,
+         "shareOfIcb": 0.5
         }
        ]
       },
@@ -6369,89 +6442,43 @@
         "Mylife Unio testing strips",
         "Mylife Aveo testing strips"
        ],
-       "items": 1489,
+       "items": 1286,
        "share": 0.3,
-       "cost": 26801,
-       "items12m": 20688,
+       "cost": 22370,
+       "items12m": 19900,
        "share12m": 0.4,
-       "yoy": -34.2,
-       "icbsPrescribing": 33,
+       "yoy": -38.0,
+       "icbsPrescribing": 34,
        "topIcbs": [
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 433,
-         "shareOfIcb": 1.7
+         "items": 367,
+         "shareOfIcb": 1.6
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 206,
+         "items": 183,
          "shareOfIcb": 0.7
         },
         {
          "icb": "S9B9J",
          "name": "NHS Surrey and Sussex",
-         "items": 155,
+         "items": 145,
          "shareOfIcb": 1.0
         },
         {
          "icb": "D7T5G",
          "name": "NHS Essex",
-         "items": 105,
-         "shareOfIcb": 0.8
-        },
-        {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 62,
-         "shareOfIcb": 0.3
-        }
-       ]
-      },
-      {
-       "brand": "Neon",
-       "generic": false,
-       "products": [
-        "Neon GK+ Glucose testing strips"
-       ],
-       "items": 1331,
-       "share": 0.3,
-       "cost": 9480,
-       "items12m": 4898,
-       "share12m": 0.1,
-       "yoy": null,
-       "icbsPrescribing": 26,
-       "topIcbs": [
-        {
-         "icb": "Z9B2Z",
-         "name": "NHS West and North London",
-         "items": 333,
-         "shareOfIcb": 1.2
-        },
-        {
-         "icb": "QHM",
-         "name": "NHS North East and North Cumbria",
-         "items": 218,
-         "shareOfIcb": 1.0
-        },
-        {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 158,
-         "shareOfIcb": 0.6
-        },
-        {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 111,
-         "shareOfIcb": 0.5
-        },
-        {
-         "icb": "D7T5G",
-         "name": "NHS Essex",
-         "items": 98,
+         "items": 82,
          "shareOfIcb": 0.7
+        },
+        {
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 55,
+         "shareOfIcb": 0.5
         }
        ]
       },
@@ -6461,43 +6488,43 @@
        "products": [
         "GluNEO testing strips"
        ],
-       "items": 640,
-       "share": 0.1,
-       "cost": 8936,
-       "items12m": 7914,
+       "items": 595,
+       "share": 0.2,
+       "cost": 8454,
+       "items12m": 7761,
        "share12m": 0.2,
-       "yoy": -25.0,
-       "icbsPrescribing": 25,
+       "yoy": -20.5,
+       "icbsPrescribing": 22,
        "topIcbs": [
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 171,
+         "items": 160,
          "shareOfIcb": 0.7
-        },
-        {
-         "icb": "QUY",
-         "name": "NHS Bristol, North Somerset and South Gloucestershire",
-         "items": 73,
-         "shareOfIcb": 1.4
         },
         {
          "icb": "T6Y0W",
          "name": "NHS Norfolk and Suffolk",
-         "items": 67,
+         "items": 59,
          "shareOfIcb": 0.5
+        },
+        {
+         "icb": "QUY",
+         "name": "NHS Bristol, North Somerset and South Gloucestershire",
+         "items": 53,
+         "shareOfIcb": 1.2
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 48,
-         "shareOfIcb": 0.2
+         "items": 50,
+         "shareOfIcb": 0.3
         },
         {
          "icb": "QT6",
          "name": "NHS Cornwall and the Isles of Scilly",
-         "items": 48,
-         "shareOfIcb": 1.1
+         "items": 50,
+         "shareOfIcb": 1.3
         }
        ]
       },
@@ -6507,43 +6534,43 @@
        "products": [
         "GlucoLab testing strips"
        ],
-       "items": 635,
+       "items": 548,
        "share": 0.1,
-       "cost": 9272,
-       "items12m": 8909,
+       "cost": 8212,
+       "items12m": 8500,
        "share12m": 0.2,
-       "yoy": -40.9,
-       "icbsPrescribing": 26,
+       "yoy": -42.7,
+       "icbsPrescribing": 25,
        "topIcbs": [
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 173,
-         "shareOfIcb": 0.6
+         "items": 170,
+         "shareOfIcb": 0.7
         },
         {
          "icb": "QK1",
          "name": "NHS Leicester, Leicestershire and Rutland",
-         "items": 141,
-         "shareOfIcb": 1.3
+         "items": 115,
+         "shareOfIcb": 1.1
         },
         {
          "icb": "QMF",
          "name": "NHS North East London",
-         "items": 69,
+         "items": 55,
          "shareOfIcb": 0.3
-        },
-        {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 58,
-         "shareOfIcb": 0.2
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 55,
+         "items": 51,
          "shareOfIcb": 0.3
+        },
+        {
+         "icb": "QJK",
+         "name": "NHS Devon",
+         "items": 48,
+         "shareOfIcb": 0.7
         }
        ]
       },
@@ -6555,42 +6582,42 @@
         "On-Call Advanced testing strips",
         "On Call Sure testing strips"
        ],
-       "items": 586,
+       "items": 548,
        "share": 0.1,
-       "cost": 4415,
-       "items12m": 6875,
+       "cost": 4133,
+       "items12m": 6878,
        "share12m": 0.1,
-       "yoy": -3.5,
-       "icbsPrescribing": 28,
+       "yoy": 0.6,
+       "icbsPrescribing": 27,
        "topIcbs": [
         {
          "icb": "QGH",
          "name": "NHS Herefordshire and Worcestershire",
-         "items": 150,
-         "shareOfIcb": 3.7
-        },
-        {
-         "icb": "QJ2",
-         "name": "NHS Derby and Derbyshire",
-         "items": 114,
-         "shareOfIcb": 1.3
+         "items": 143,
+         "shareOfIcb": 3.8
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 113,
-         "shareOfIcb": 0.4
+         "items": 131,
+         "shareOfIcb": 0.5
+        },
+        {
+         "icb": "QJ2",
+         "name": "NHS Derby and Derbyshire",
+         "items": 109,
+         "shareOfIcb": 1.4
         },
         {
          "icb": "D7T5G",
          "name": "NHS Essex",
-         "items": 60,
+         "items": 55,
          "shareOfIcb": 0.5
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 26,
+         "items": 20,
          "shareOfIcb": 0.1
         }
        ]
@@ -6601,43 +6628,89 @@
        "products": [
         "Element testing strips"
        ],
-       "items": 315,
+       "items": 268,
        "share": 0.1,
-       "cost": 4436,
-       "items12m": 4287,
+       "cost": 3939,
+       "items12m": 4138,
        "share12m": 0.1,
-       "yoy": -36.9,
-       "icbsPrescribing": 10,
+       "yoy": -35.7,
+       "icbsPrescribing": 9,
        "topIcbs": [
         {
          "icb": "QJM",
          "name": "NHS Lincolnshire",
-         "items": 96,
+         "items": 87,
          "shareOfIcb": 1.4
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 94,
-         "shareOfIcb": 0.4
+         "items": 86,
+         "shareOfIcb": 0.5
         },
         {
          "icb": "QOQ",
          "name": "NHS Humber and North Yorkshire",
-         "items": 80,
-         "shareOfIcb": 0.7
+         "items": 57,
+         "shareOfIcb": 0.6
         },
         {
          "icb": "D7T5G",
          "name": "NHS Essex",
-         "items": 25,
+         "items": 22,
          "shareOfIcb": 0.2
         },
         {
          "icb": "QKS",
          "name": "NHS Kent and Medway",
-         "items": 10,
+         "items": 11,
          "shareOfIcb": 0.1
+        }
+       ]
+      },
+      {
+       "brand": "ALLYbg",
+       "generic": false,
+       "products": [
+        "ALLYbg testing strips"
+       ],
+       "items": 172,
+       "share": 0.0,
+       "cost": 1206,
+       "items12m": 235,
+       "share12m": 0.0,
+       "yoy": null,
+       "icbsPrescribing": 19,
+       "topIcbs": [
+        {
+         "icb": "QR1",
+         "name": "NHS Gloucestershire",
+         "items": 28,
+         "shareOfIcb": 0.9
+        },
+        {
+         "icb": "QJM",
+         "name": "NHS Lincolnshire",
+         "items": 27,
+         "shareOfIcb": 0.4
+        },
+        {
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
+         "items": 25,
+         "shareOfIcb": 0.2
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 15,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QSL",
+         "name": "NHS Somerset",
+         "items": 14,
+         "shareOfIcb": 0.5
         }
        ]
       },
@@ -6648,26 +6721,14 @@
         "Kinetik Wellbeing AG-607 testing strips",
         "Kinetik Wellbeing BG-710/BG-710b testing strips"
        ],
-       "items": 98,
+       "items": 81,
        "share": 0.0,
-       "cost": 1094,
-       "items12m": 1105,
+       "cost": 889,
+       "items12m": 1097,
        "share12m": 0.0,
-       "yoy": -5.8,
+       "yoy": -9.0,
        "icbsPrescribing": 27,
        "topIcbs": [
-        {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 12,
-         "shareOfIcb": 0.1
-        },
-        {
-         "icb": "QF7",
-         "name": "NHS South Yorkshire",
-         "items": 11,
-         "shareOfIcb": 0.1
-        },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
@@ -6675,107 +6736,27 @@
          "shareOfIcb": 0.0
         },
         {
-         "icb": "QRL",
-         "name": "NHS Hampshire and Isle of Wight",
-         "items": 8,
-         "shareOfIcb": 0.1
-        },
-        {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 8,
-         "shareOfIcb": 0.0
-        }
-       ]
-      },
-      {
-       "brand": "ALLYbg",
-       "generic": false,
-       "products": [
-        "ALLYbg testing strips"
-       ],
-       "items": 62,
-       "share": 0.0,
-       "cost": 420,
-       "items12m": 63,
-       "share12m": 0.0,
-       "yoy": null,
-       "icbsPrescribing": 17,
-       "topIcbs": [
-        {
-         "icb": "QJM",
-         "name": "NHS Lincolnshire",
-         "items": 17,
-         "shareOfIcb": 0.2
-        },
-        {
-         "icb": "QR1",
-         "name": "NHS Gloucestershire",
-         "items": 10,
-         "shareOfIcb": 0.3
-        },
-        {
-         "icb": "QSL",
-         "name": "NHS Somerset",
-         "items": 6,
-         "shareOfIcb": 0.2
-        },
-        {
-         "icb": "QJK",
-         "name": "NHS Devon",
-         "items": 5,
-         "shareOfIcb": 0.1
-        },
-        {
-         "icb": "QRL",
-         "name": "NHS Hampshire and Isle of Wight",
-         "items": 5,
-         "shareOfIcb": 0.0
-        }
-       ]
-      },
-      {
-       "brand": "Glucoflex-R",
-       "generic": false,
-       "products": [
-        "Glucoflex-R testing strips"
-       ],
-       "items": 61,
-       "share": 0.0,
-       "cost": 387,
-       "items12m": 636,
-       "share12m": 0.0,
-       "yoy": -3.2,
-       "icbsPrescribing": 24,
-       "topIcbs": [
-        {
-         "icb": "Z9B2Z",
-         "name": "NHS West and North London",
-         "items": 8,
-         "shareOfIcb": 0.0
-        },
-        {
-         "icb": "QKK",
-         "name": "NHS South East London",
-         "items": 6,
-         "shareOfIcb": 0.0
-        },
-        {
-         "icb": "QMF",
-         "name": "NHS North East London",
-         "items": 4,
-         "shareOfIcb": 0.0
-        },
-        {
-         "icb": "QWE",
-         "name": "NHS South West London",
-         "items": 4,
+         "items": 7,
          "shareOfIcb": 0.0
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 4,
+         "items": 7,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 5,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QMF",
+         "name": "NHS North East London",
+         "items": 5,
          "shareOfIcb": 0.0
         }
        ]
@@ -6786,41 +6767,87 @@
        "products": [
         "Betachek C50 cassette"
        ],
-       "items": 46,
+       "items": 45,
        "share": 0.0,
-       "cost": 807,
-       "items12m": 617,
+       "cost": 744,
+       "items12m": 603,
        "share12m": 0.0,
-       "yoy": -34.3,
-       "icbsPrescribing": 24,
+       "yoy": -23.7,
+       "icbsPrescribing": 22,
        "topIcbs": [
         {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 5,
+         "icb": "QUY",
+         "name": "NHS Bristol, North Somerset and South Gloucestershire",
+         "items": 6,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 6,
          "shareOfIcb": 0.0
         },
         {
-         "icb": "S0E4D",
-         "name": "NHS Thames Valley",
-         "items": 5,
-         "shareOfIcb": 0.0
+         "icb": "QJM",
+         "name": "NHS Lincolnshire",
+         "items": 4,
+         "shareOfIcb": 0.1
         },
         {
-         "icb": "QE1",
-         "name": "NHS Lancashire and South Cumbria",
+         "icb": "QJ2",
+         "name": "NHS Derby and Derbyshire",
          "items": 3,
          "shareOfIcb": 0.0
         },
         {
          "icb": "QF7",
          "name": "NHS South Yorkshire",
-         "items": 3,
+         "items": 2,
+         "shareOfIcb": 0.0
+        }
+       ]
+      },
+      {
+       "brand": "Glucoflex-R",
+       "generic": false,
+       "products": [
+        "Glucoflex-R testing strips"
+       ],
+       "items": 39,
+       "share": 0.0,
+       "cost": 248,
+       "items12m": 620,
+       "share12m": 0.0,
+       "yoy": -29.1,
+       "icbsPrescribing": 16,
+       "topIcbs": [
+        {
+         "icb": "QWE",
+         "name": "NHS South West London",
+         "items": 6,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 4,
          "shareOfIcb": 0.0
         },
         {
-         "icb": "QJ2",
-         "name": "NHS Derby and Derbyshire",
+         "icb": "QKK",
+         "name": "NHS South East London",
+         "items": 4,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 4,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
          "items": 3,
          "shareOfIcb": 0.0
         }
@@ -6832,41 +6859,41 @@
        "products": [
         "VivaChek Ino testing strips"
        ],
-       "items": 42,
+       "items": 32,
        "share": 0.0,
-       "cost": 502,
-       "items12m": 443,
+       "cost": 462,
+       "items12m": 440,
        "share12m": 0.0,
-       "yoy": 7.7,
-       "icbsPrescribing": 25,
+       "yoy": -8.6,
+       "icbsPrescribing": 19,
        "topIcbs": [
         {
-         "icb": "QT1",
-         "name": "NHS Nottingham and Nottinghamshire",
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
          "items": 3,
          "shareOfIcb": 0.0
         },
         {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
          "items": 3,
          "shareOfIcb": 0.0
         },
         {
-         "icb": "D7T5G",
-         "name": "NHS Essex",
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 3,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QJK",
+         "name": "NHS Devon",
          "items": 2,
          "shareOfIcb": 0.0
         },
         {
-         "icb": "QHL",
-         "name": "NHS Birmingham and Solihull",
-         "items": 2,
-         "shareOfIcb": 0.0
-        },
-        {
-         "icb": "QJ2",
-         "name": "NHS Derby and Derbyshire",
+         "icb": "QK1",
+         "name": "NHS Leicester, Leicestershire and Rutland",
          "items": 2,
          "shareOfIcb": 0.0
         }
@@ -6874,8 +6901,8 @@
       }
      ],
      "otherBrands": {
-      "count": 15,
-      "items": 16,
+      "count": 12,
+      "items": 21,
       "share": 0.0
      }
     },

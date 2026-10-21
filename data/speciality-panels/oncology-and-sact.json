@@ -22,7 +22,7 @@
   "drugTariff": "2026-10-21",
   "localIntel": "2026-10-21",
   "supplierDirectory": "2026-10-21",
-  "gpPrescribing": "2026-09-30",
+  "gpPrescribing": "2026-10-21",
   "mhraDsu": "2026-10-19",
   "drugTariffViiia": "2026-10-21",
   "hospitalPrescribing": null
@@ -35,7 +35,7 @@
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: oncology). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 16 of the 17 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
-  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202608) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (32 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (2 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-10-19.",
   "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-10: narrowed to the lines whose medicine NHSBSA prescribes under BNF chapter 8. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 51 of the 3,534 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
  },
@@ -2027,14 +2027,14 @@
   }
  ],
  "gpPrescribing": {
-  "generatedOn": "2026-09-30",
+  "generatedOn": "2026-10-21",
   "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
   "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
   "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
   "periods": [
-   "202507",
-   "202607"
+   "202508",
+   "202608"
   ],
   "minBaselineItems": 25,
   "defined": true,
@@ -2046,495 +2046,495 @@
      "chapter 8"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 418840,
-    "cost": 15074180,
-    "items12m": 4694417,
-    "cost12m": 167996577,
-    "itemsYoY": 4.7,
-    "products": 89,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 377109,
+    "cost": 13591757,
+    "items12m": 4703148,
+    "cost12m": 168196942,
+    "itemsYoY": 2.4,
+    "products": 88,
     "topNational": [
      {
       "code": "0803041L0AA",
       "label": "Letrozole",
       "generic": true,
-      "items": 115351,
-      "share": 27.5,
-      "cost": 277265,
-      "yoy": 6.5
+      "items": 105080,
+      "share": 27.9,
+      "cost": 185677,
+      "yoy": 4.5
      },
      {
       "code": "0802010G0AA",
       "label": "Azathioprine",
       "generic": true,
-      "items": 53695,
-      "share": 12.8,
-      "cost": 155233,
-      "yoy": -5.4
+      "items": 47955,
+      "share": 12.7,
+      "cost": 173831,
+      "yoy": -7.4
      },
      {
       "code": "0803041B0AA",
       "label": "Anastrozole",
       "generic": true,
-      "items": 43788,
+      "items": 39694,
       "share": 10.5,
-      "cost": 49047,
-      "yoy": -0.4
+      "cost": 43408,
+      "yoy": -2.7
      },
      {
       "code": "0803041S0AA",
       "label": "Tamoxifen",
       "generic": true,
-      "items": 41616,
-      "share": 9.9,
-      "cost": 302089,
-      "yoy": -4.2
+      "items": 36159,
+      "share": 9.6,
+      "cost": 227815,
+      "yoy": -7.7
      },
      {
       "code": "0802010M0AA",
       "label": "Mycophenolate mofetil",
       "generic": true,
-      "items": 20615,
-      "share": 4.9,
-      "cost": 251612,
-      "yoy": 8.4
+      "items": 18803,
+      "share": 5.0,
+      "cost": 231572,
+      "yoy": 7.2
      },
      {
       "code": "0803041C0AA",
       "label": "Exemestane",
       "generic": true,
-      "items": 16610,
+      "items": 15098,
       "share": 4.0,
-      "cost": 75731,
-      "yoy": 6.8
+      "cost": 67813,
+      "yoy": 4.5
      },
      {
       "code": "0803042N0BB",
       "label": "Prostap",
       "generic": false,
-      "items": 15972,
+      "items": 14514,
       "share": 3.8,
-      "cost": 2969744,
-      "yoy": -4.9
+      "cost": 2704775,
+      "yoy": -7.0
      },
      {
       "code": "0803042K0BB",
       "label": "Zoladex LA",
       "generic": false,
-      "items": 14754,
+      "items": 13321,
       "share": 3.5,
-      "cost": 2366274,
-      "yoy": -3.5
+      "cost": 2125463,
+      "yoy": -4.9
      },
      {
       "code": "0803042A0AA",
       "label": "Bicalutamide",
       "generic": true,
-      "items": 12440,
+      "items": 11280,
       "share": 3.0,
-      "cost": 45682,
-      "yoy": -15.5
+      "cost": 38016,
+      "yoy": -16.4
      },
      {
-      "code": "0801030H0AA",
-      "label": "Fluorouracil",
+      "code": "0803042X0AA",
+      "label": "Relugolix",
       "generic": true,
-      "items": 12109,
+      "items": 10925,
       "share": 2.9,
-      "cost": 359327,
-      "yoy": 245.8
+      "cost": 1113419,
+      "yoy": 593.7
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 8135,
+      "items": 7100,
       "leaders": [
        {
         "code": "0803041B0AA",
         "label": "Anastrozole",
         "generic": true,
-        "items": 1458,
-        "share": 17.9
+        "items": 1287,
+        "share": 18.1
        },
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 1384,
-        "share": 17.0
+        "items": 1269,
+        "share": 17.9
        },
        {
         "code": "0803041S0AA",
         "label": "Tamoxifen",
         "generic": true,
-        "items": 1072,
-        "share": 13.2
+        "items": 958,
+        "share": 13.5
        }
       ]
      },
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 6400,
+      "items": 5501,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 1576,
-        "share": 24.6
+        "items": 1371,
+        "share": 24.9
        },
        {
         "code": "0803041B0AA",
         "label": "Anastrozole",
         "generic": true,
-        "items": 1088,
+        "items": 936,
         "share": 17.0
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 650,
-        "share": 10.2
+        "items": 537,
+        "share": 9.8
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 6695,
+      "items": 5777,
       "leaders": [
        {
         "code": "0803041B0AA",
         "label": "Anastrozole",
         "generic": true,
-        "items": 1481,
-        "share": 22.1
+        "items": 1331,
+        "share": 23.0
        },
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 1176,
-        "share": 17.6
+        "items": 1021,
+        "share": 17.7
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 1015,
-        "share": 15.2
+        "items": 808,
+        "share": 14.0
        }
       ]
      },
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 6123,
+      "items": 5490,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 1885,
-        "share": 30.8
+        "items": 1757,
+        "share": 32.0
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 968,
-        "share": 15.8
+        "items": 864,
+        "share": 15.7
        },
        {
-        "code": "0803041C0AA",
-        "label": "Exemestane",
+        "code": "0802010M0AA",
+        "label": "Mycophenolate mofetil",
         "generic": true,
-        "items": 398,
-        "share": 6.5
+        "items": 346,
+        "share": 6.3
        }
       ]
      },
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 24672,
+      "items": 21932,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 6013,
-        "share": 24.4
+        "items": 5565,
+        "share": 25.4
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 3986,
-        "share": 16.2
+        "items": 3418,
+        "share": 15.6
        },
        {
         "code": "0803041S0AA",
         "label": "Tamoxifen",
         "generic": true,
-        "items": 2610,
-        "share": 10.6
+        "items": 2196,
+        "share": 10.0
        }
       ]
      },
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 18300,
+      "items": 16483,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 6211,
-        "share": 33.9
+        "items": 5626,
+        "share": 34.1
        },
        {
         "code": "0803041S0AA",
         "label": "Tamoxifen",
         "generic": true,
-        "items": 2163,
-        "share": 11.8
+        "items": 1832,
+        "share": 11.1
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 1984,
-        "share": 10.8
+        "items": 1765,
+        "share": 10.7
        }
       ]
      },
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 5077,
+      "items": 4578,
       "leaders": [
        {
         "code": "0803041B0AA",
         "label": "Anastrozole",
         "generic": true,
-        "items": 1078,
-        "share": 21.2
-       },
-       {
-        "code": "0803041L0AA",
-        "label": "Letrozole",
-        "generic": true,
-        "items": 736,
-        "share": 14.5
-       },
-       {
-        "code": "0802010G0AA",
-        "label": "Azathioprine",
-        "generic": true,
-        "items": 534,
-        "share": 10.5
-       }
-      ]
-     },
-     {
-      "icb": "QWU",
-      "name": "NHS Coventry and Warwickshire",
-      "items": 7005,
-      "leaders": [
-       {
-        "code": "0803041L0AA",
-        "label": "Letrozole",
-        "generic": true,
-        "items": 2370,
-        "share": 33.8
-       },
-       {
-        "code": "0803041S0AA",
-        "label": "Tamoxifen",
-        "generic": true,
-        "items": 999,
-        "share": 14.3
-       },
-       {
-        "code": "0802010G0AA",
-        "label": "Azathioprine",
-        "generic": true,
-        "items": 693,
-        "share": 9.9
-       }
-      ]
-     },
-     {
-      "icb": "QJ2",
-      "name": "NHS Derby and Derbyshire",
-      "items": 6735,
-      "leaders": [
-       {
-        "code": "0803041L0AA",
-        "label": "Letrozole",
-        "generic": true,
-        "items": 1709,
-        "share": 25.4
-       },
-       {
-        "code": "0803041B0AA",
-        "label": "Anastrozole",
-        "generic": true,
-        "items": 1157,
-        "share": 17.2
-       },
-       {
-        "code": "0802010G0AA",
-        "label": "Azathioprine",
-        "generic": true,
-        "items": 741,
-        "share": 11.0
-       }
-      ]
-     },
-     {
-      "icb": "QJK",
-      "name": "NHS Devon",
-      "items": 9510,
-      "leaders": [
-       {
-        "code": "0803041L0AA",
-        "label": "Letrozole",
-        "generic": true,
-        "items": 2031,
-        "share": 21.4
-       },
-       {
-        "code": "0803041B0AA",
-        "label": "Anastrozole",
-        "generic": true,
-        "items": 1537,
-        "share": 16.2
-       },
-       {
-        "code": "0802010G0AA",
-        "label": "Azathioprine",
-        "generic": true,
-        "items": 904,
-        "share": 9.5
-       }
-      ]
-     },
-     {
-      "icb": "QVV",
-      "name": "NHS Dorset",
-      "items": 7341,
-      "leaders": [
-       {
-        "code": "0803041L0AA",
-        "label": "Letrozole",
-        "generic": true,
-        "items": 1485,
-        "share": 20.2
-       },
-       {
-        "code": "0803041B0AA",
-        "label": "Anastrozole",
-        "generic": true,
-        "items": 895,
-        "share": 12.2
-       },
-       {
-        "code": "0802010G0AA",
-        "label": "Azathioprine",
-        "generic": true,
-        "items": 593,
-        "share": 8.1
-       }
-      ]
-     },
-     {
-      "icb": "D7T5G",
-      "name": "NHS Essex",
-      "items": 16010,
-      "leaders": [
-       {
-        "code": "0803041L0AA",
-        "label": "Letrozole",
-        "generic": true,
-        "items": 4540,
-        "share": 28.4
-       },
-       {
-        "code": "0802010G0AA",
-        "label": "Azathioprine",
-        "generic": true,
-        "items": 2451,
-        "share": 15.3
-       },
-       {
-        "code": "0803041S0AA",
-        "label": "Tamoxifen",
-        "generic": true,
-        "items": 1613,
-        "share": 10.1
-       }
-      ]
-     },
-     {
-      "icb": "QR1",
-      "name": "NHS Gloucestershire",
-      "items": 5996,
-      "leaders": [
-       {
-        "code": "0803041B0AA",
-        "label": "Anastrozole",
-        "generic": true,
-        "items": 1280,
+        "items": 977,
         "share": 21.3
        },
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 928,
-        "share": 15.5
+        "items": 661,
+        "share": 14.4
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 690,
-        "share": 11.5
+        "items": 512,
+        "share": 11.2
+       }
+      ]
+     },
+     {
+      "icb": "QWU",
+      "name": "NHS Coventry and Warwickshire",
+      "items": 6359,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 2165,
+        "share": 34.0
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 890,
+        "share": 14.0
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 589,
+        "share": 9.3
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 6060,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 1530,
+        "share": 25.2
+       },
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 1023,
+        "share": 16.9
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 692,
+        "share": 11.4
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 8633,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 1869,
+        "share": 21.6
+       },
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 1367,
+        "share": 15.8
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 798,
+        "share": 9.2
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 6534,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 1338,
+        "share": 20.5
+       },
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 806,
+        "share": 12.3
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 543,
+        "share": 8.3
+       }
+      ]
+     },
+     {
+      "icb": "D7T5G",
+      "name": "NHS Essex",
+      "items": 14404,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 4164,
+        "share": 28.9
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 2220,
+        "share": 15.4
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 1320,
+        "share": 9.2
+       }
+      ]
+     },
+     {
+      "icb": "QR1",
+      "name": "NHS Gloucestershire",
+      "items": 5566,
+      "leaders": [
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 1231,
+        "share": 22.1
+       },
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 843,
+        "share": 15.1
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 651,
+        "share": 11.7
        }
       ]
      },
      {
       "icb": "QOP",
       "name": "NHS Greater Manchester",
-      "items": 17627,
+      "items": 15805,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 7060,
-        "share": 40.1
+        "items": 6379,
+        "share": 40.4
        },
        {
         "code": "0803041S0AA",
         "label": "Tamoxifen",
         "generic": true,
-        "items": 2123,
-        "share": 12.0
+        "items": 1859,
+        "share": 11.8
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 2023,
+        "items": 1812,
         "share": 11.5
        }
       ]
@@ -2542,55 +2542,55 @@
      {
       "icb": "QRL",
       "name": "NHS Hampshire and Isle of Wight",
-      "items": 16136,
+      "items": 14146,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 3430,
-        "share": 21.3
+        "items": 3210,
+        "share": 22.7
        },
        {
         "code": "0803041S0AA",
         "label": "Tamoxifen",
         "generic": true,
-        "items": 1953,
-        "share": 12.1
+        "items": 1628,
+        "share": 11.5
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 1810,
-        "share": 11.2
+        "items": 1606,
+        "share": 11.4
        }
       ]
      },
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 6729,
+      "items": 6101,
       "leaders": [
        {
         "code": "0803041B0AA",
         "label": "Anastrozole",
         "generic": true,
-        "items": 1697,
-        "share": 25.2
+        "items": 1602,
+        "share": 26.3
        },
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 804,
-        "share": 11.9
+        "items": 771,
+        "share": 12.6
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 747,
+        "items": 678,
         "share": 11.1
        }
       ]
@@ -2598,27 +2598,27 @@
      {
       "icb": "QOQ",
       "name": "NHS Humber and North Yorkshire",
-      "items": 17524,
+      "items": 15823,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 3408,
-        "share": 19.4
+        "items": 3185,
+        "share": 20.1
        },
        {
         "code": "0803041B0AA",
         "label": "Anastrozole",
         "generic": true,
-        "items": 2733,
-        "share": 15.6
+        "items": 2495,
+        "share": 15.8
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 2287,
+        "items": 2074,
         "share": 13.1
        }
       ]
@@ -2626,139 +2626,139 @@
      {
       "icb": "QKS",
       "name": "NHS Kent and Medway",
-      "items": 14256,
+      "items": 12836,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 4244,
-        "share": 29.8
+        "items": 3781,
+        "share": 29.5
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 1998,
-        "share": 14.0
+        "items": 1745,
+        "share": 13.6
        },
        {
         "code": "0803041B0AA",
         "label": "Anastrozole",
         "generic": true,
-        "items": 1335,
-        "share": 9.4
+        "items": 1270,
+        "share": 9.9
        }
       ]
      },
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 13761,
+      "items": 12375,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 5308,
-        "share": 38.6
+        "items": 4723,
+        "share": 38.2
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 1481,
-        "share": 10.8
+        "items": 1316,
+        "share": 10.6
        },
        {
         "code": "0803041S0AA",
         "label": "Tamoxifen",
         "generic": true,
-        "items": 1362,
-        "share": 9.9
+        "items": 1204,
+        "share": 9.7
        }
       ]
      },
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 7937,
+      "items": 7229,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 2153,
-        "share": 27.1
+        "items": 2028,
+        "share": 28.1
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 1238,
-        "share": 15.6
+        "items": 1108,
+        "share": 15.3
        },
        {
         "code": "0803041S0AA",
         "label": "Tamoxifen",
         "generic": true,
-        "items": 1027,
-        "share": 12.9
+        "items": 844,
+        "share": 11.7
        }
       ]
      },
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 8185,
+      "items": 7452,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 2511,
-        "share": 30.7
+        "items": 2335,
+        "share": 31.3
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 1167,
-        "share": 14.3
+        "items": 1082,
+        "share": 14.5
        },
        {
         "code": "0803041B0AA",
         "label": "Anastrozole",
         "generic": true,
-        "items": 734,
-        "share": 9.0
+        "items": 656,
+        "share": 8.8
        }
       ]
      },
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 19200,
+      "items": 17499,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 4217,
-        "share": 22.0
+        "items": 3912,
+        "share": 22.4
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 3207,
+        "items": 2924,
         "share": 16.7
        },
        {
         "code": "0803041S0AA",
         "label": "Tamoxifen",
         "generic": true,
-        "items": 2158,
+        "items": 1967,
         "share": 11.2
        }
       ]
@@ -2766,55 +2766,55 @@
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 9426,
+      "items": 8567,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 3314,
-        "share": 35.2
+        "items": 2987,
+        "share": 34.9
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 1484,
-        "share": 15.7
+        "items": 1300,
+        "share": 15.2
        },
        {
         "code": "0803041S0AA",
         "label": "Tamoxifen",
         "generic": true,
-        "items": 818,
-        "share": 8.7
+        "items": 726,
+        "share": 8.5
        }
       ]
      },
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 25938,
+      "items": 23542,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 10089,
-        "share": 38.9
+        "items": 9247,
+        "share": 39.3
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 2658,
-        "share": 10.2
+        "items": 2368,
+        "share": 10.1
        },
        {
         "code": "0803041S0AA",
         "label": "Tamoxifen",
         "generic": true,
-        "items": 2533,
+        "items": 2309,
         "share": 9.8
        }
       ]
@@ -2822,279 +2822,279 @@
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 6534,
+      "items": 5763,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 1720,
-        "share": 26.3
+        "items": 1553,
+        "share": 26.9
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 1064,
-        "share": 16.3
+        "items": 913,
+        "share": 15.8
        },
        {
         "code": "0803041B0AA",
         "label": "Anastrozole",
         "generic": true,
-        "items": 972,
-        "share": 14.9
+        "items": 872,
+        "share": 15.1
        }
       ]
      },
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 6311,
+      "items": 5661,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 1533,
-        "share": 24.3
+        "items": 1381,
+        "share": 24.4
        },
        {
         "code": "0803041B0AA",
         "label": "Anastrozole",
         "generic": true,
-        "items": 1466,
-        "share": 23.2
+        "items": 1319,
+        "share": 23.3
        },
        {
         "code": "0803041S0AA",
         "label": "Tamoxifen",
         "generic": true,
-        "items": 1041,
-        "share": 16.5
+        "items": 876,
+        "share": 15.5
        }
       ]
      },
      {
       "icb": "QOC",
       "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 3714,
+      "items": 3401,
       "leaders": [
        {
         "code": "0803041B0AA",
         "label": "Anastrozole",
         "generic": true,
-        "items": 884,
-        "share": 23.8
+        "items": 821,
+        "share": 24.1
        },
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 715,
-        "share": 19.3
+        "items": 703,
+        "share": 20.7
        },
        {
         "code": "0803042N0BB",
         "label": "Prostap",
         "generic": false,
-        "items": 345,
-        "share": 9.3
+        "items": 308,
+        "share": 9.1
        }
       ]
      },
      {
       "icb": "QSL",
       "name": "NHS Somerset",
-      "items": 4933,
+      "items": 4617,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 1323,
-        "share": 26.8
+        "items": 1225,
+        "share": 26.5
        },
        {
         "code": "0803041S0AA",
         "label": "Tamoxifen",
         "generic": true,
-        "items": 522,
-        "share": 10.6
+        "items": 525,
+        "share": 11.4
        },
        {
         "code": "0803042X0AA",
         "label": "Relugolix",
         "generic": true,
-        "items": 514,
-        "share": 10.4
+        "items": 503,
+        "share": 10.9
        }
       ]
      },
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 9020,
+      "items": 8355,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 2893,
-        "share": 32.1
+        "items": 2639,
+        "share": 31.6
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 1006,
-        "share": 11.2
+        "items": 969,
+        "share": 11.6
        },
        {
         "code": "0803041S0AA",
         "label": "Tamoxifen",
         "generic": true,
-        "items": 901,
-        "share": 10.0
+        "items": 790,
+        "share": 9.5
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 8405,
+      "items": 7440,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 3385,
-        "share": 40.3
+        "items": 2957,
+        "share": 39.7
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 1154,
-        "share": 13.7
+        "items": 1040,
+        "share": 14.0
        },
        {
         "code": "0803041S0AA",
         "label": "Tamoxifen",
         "generic": true,
-        "items": 858,
-        "share": 10.2
+        "items": 731,
+        "share": 9.8
        }
       ]
      },
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 10493,
+      "items": 9478,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 4624,
-        "share": 44.1
+        "items": 4159,
+        "share": 43.9
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 1206,
-        "share": 11.5
+        "items": 1046,
+        "share": 11.0
        },
        {
         "code": "0803042N0BB",
         "label": "Prostap",
         "generic": false,
-        "items": 687,
-        "share": 6.5
+        "items": 733,
+        "share": 7.7
        }
       ]
      },
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 7645,
+      "items": 7055,
       "leaders": [
        {
         "code": "0803041B0AA",
         "label": "Anastrozole",
         "generic": true,
-        "items": 2215,
+        "items": 2045,
         "share": 29.0
        },
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 1419,
-        "share": 18.6
-       },
-       {
-        "code": "0802010G0AA",
-        "label": "Azathioprine",
-        "generic": true,
-        "items": 918,
-        "share": 12.0
-       }
-      ]
-     },
-     {
-      "icb": "S9B9J",
-      "name": "NHS Surrey and Sussex",
-      "items": 22706,
-      "leaders": [
-       {
-        "code": "0803041L0AA",
-        "label": "Letrozole",
-        "generic": true,
-        "items": 6703,
-        "share": 29.5
-       },
-       {
-        "code": "0803041S0AA",
-        "label": "Tamoxifen",
-        "generic": true,
-        "items": 2608,
-        "share": 11.5
-       },
-       {
-        "code": "0802010G0AA",
-        "label": "Azathioprine",
-        "generic": true,
-        "items": 2567,
-        "share": 11.3
-       }
-      ]
-     },
-     {
-      "icb": "S0E4D",
-      "name": "NHS Thames Valley",
-      "items": 16910,
-      "leaders": [
-       {
-        "code": "0803041B0AA",
-        "label": "Anastrozole",
-        "generic": true,
-        "items": 3307,
-        "share": 19.6
-       },
-       {
-        "code": "0803041L0AA",
-        "label": "Letrozole",
-        "generic": true,
-        "items": 2987,
+        "items": 1246,
         "share": 17.7
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 2187,
+        "items": 793,
+        "share": 11.2
+       }
+      ]
+     },
+     {
+      "icb": "S9B9J",
+      "name": "NHS Surrey and Sussex",
+      "items": 20684,
+      "leaders": [
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 6139,
+        "share": 29.7
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 2329,
+        "share": 11.3
+       },
+       {
+        "code": "0803041S0AA",
+        "label": "Tamoxifen",
+        "generic": true,
+        "items": 2295,
+        "share": 11.1
+       }
+      ]
+     },
+     {
+      "icb": "S0E4D",
+      "name": "NHS Thames Valley",
+      "items": 15198,
+      "leaders": [
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 2939,
+        "share": 19.3
+       },
+       {
+        "code": "0803041L0AA",
+        "label": "Letrozole",
+        "generic": true,
+        "items": 2716,
+        "share": 17.9
+       },
+       {
+        "code": "0802010G0AA",
+        "label": "Azathioprine",
+        "generic": true,
+        "items": 1957,
         "share": 12.9
        }
       ]
@@ -3102,56 +3102,56 @@
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 19057,
+      "items": 17191,
       "leaders": [
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 3390,
-        "share": 17.8
-       },
-       {
-        "code": "0803041B0AA",
-        "label": "Anastrozole",
-        "generic": true,
-        "items": 3200,
-        "share": 16.8
+        "items": 3171,
+        "share": 18.4
        },
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 3175,
-        "share": 16.7
+        "items": 2900,
+        "share": 16.9
+       },
+       {
+        "code": "0803041B0AA",
+        "label": "Anastrozole",
+        "generic": true,
+        "items": 2892,
+        "share": 16.8
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 18333,
+      "items": 16422,
       "leaders": [
        {
         "code": "0803041L0AA",
         "label": "Letrozole",
         "generic": true,
-        "items": 6290,
-        "share": 34.3
+        "items": 5722,
+        "share": 34.8
        },
        {
         "code": "0802010G0AA",
         "label": "Azathioprine",
         "generic": true,
-        "items": 2528,
-        "share": 13.8
+        "items": 2124,
+        "share": 12.9
        },
        {
         "code": "0803041S0AA",
         "label": "Tamoxifen",
         "generic": true,
-        "items": 2278,
-        "share": 12.4
+        "items": 2015,
+        "share": 12.3
        }
       ]
      }

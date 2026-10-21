@@ -22,7 +22,7 @@
   "drugTariff": "2026-10-21",
   "localIntel": "2026-10-21",
   "supplierDirectory": "2026-10-21",
-  "gpPrescribing": "2026-09-30",
+  "gpPrescribing": "2026-10-21",
   "mhraDsu": "2026-10-19",
   "drugTariffViiia": null,
   "hospitalPrescribing": "2026-09-30"
@@ -35,10 +35,10 @@
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "NHSBSA Drug Tariff Part IXB/IXC/IXB & IXC for the stated effective month, summarised. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's.",
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: continence, ostomy). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 16 of the 22 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
-  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
+  "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202608) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "mhraDsu": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
   "drugTariffViiia": null,
-  "marketShare": "Computed at every build from NHSBSA data, not bought in and not estimated. PRIMARY CARE: every item dispensed in England against a GP practice prescription, English Prescribing Dataset with SNOMED code, for the BNF codes named on each market (21.02), latest month 202607, with a 12-month total. SECONDARY CARE: NHS trust prescriptions dispensed in a community pharmacy (NHSBSA hospital prescribing dispensed in the community), the same BNF codes, 12 months; it is not in-hospital use, which NHSBSA publishes only by chemical substance and so cannot show a brand. DRUG TARIFF: every Part IX line NHSBSA files under the same BNF codes, in any part, counted in tariff lines per supplier, which measures what is listed and reimbursable, not what is sold. A BRAND is the first word of NHSBSA's product label, so the products of one range are counted together; a label that names its supplier in brackets stays on its own, and every generic is one row. Share is share of ITEMS, never company share: the data does not name the company, and one company can own several brands. A change on a year earlier is printed only where that month had at least 25 items. An ICB's share is the brand's items as a share of that ICB's whole market in the same month."
+  "marketShare": "Computed at every build from NHSBSA data, not bought in and not estimated. PRIMARY CARE: every item dispensed in England against a GP practice prescription, English Prescribing Dataset with SNOMED code, for the BNF codes named on each market (21.02), latest month 202608, with a 12-month total. SECONDARY CARE: NHS trust prescriptions dispensed in a community pharmacy (NHSBSA hospital prescribing dispensed in the community), the same BNF codes, 12 months; it is not in-hospital use, which NHSBSA publishes only by chemical substance and so cannot show a brand. DRUG TARIFF: every Part IX line NHSBSA files under the same BNF codes, in any part, counted in tariff lines per supplier, which measures what is listed and reimbursable, not what is sold. A BRAND is the first word of NHSBSA's product label, so the products of one range are counted together; a label that names its supplier in brackets stays on its own, and every generic is one row. Share is share of ITEMS, never company share: the data does not name the company, and one company can own several brands. A change on a year earlier is printed only where that month had at least 25 items. An ICB's share is the brand's items as a share of that ICB's whole market in the same month."
  },
  "counts": {
   "frameworks": 2,
@@ -1337,7 +1337,7 @@
    "url": "https://www.find-tender.service.gov.uk/Notice/031173-2026",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1357,7 +1357,7 @@
    "url": "https://www.find-tender.service.gov.uk/Notice/010151-2026",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1386,7 +1386,7 @@
    "url": "https://www.find-tender.service.gov.uk/Notice/010389-2025",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1410,7 +1410,7 @@
    "url": "https://www.contractsfinder.service.gov.uk/Notice/8168996b-342a-4248-bab7-b89dcb3ecd42",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1434,7 +1434,7 @@
    "url": "https://www.contractsfinder.service.gov.uk/Notice/46489f7f-d659-4052-bcff-44286730e207",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "missing"
@@ -1457,7 +1457,7 @@
    "url": "https://www.contractsfinder.service.gov.uk/Notice/ecf72dc0-41cb-4c0e-a39f-4640130c8cdb",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1481,7 +1481,7 @@
    "url": "https://www.find-tender.service.gov.uk/Notice/028000-2025",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1504,7 +1504,7 @@
    "url": "https://www.find-tender.service.gov.uk/Notice/054489-2025",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1527,7 +1527,7 @@
    "url": "https://www.contractsfinder.service.gov.uk/Notice/03f4f934-90a4-443f-8e5c-2308917b1098",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1550,7 +1550,7 @@
    "url": "https://www.contractsfinder.service.gov.uk/Notice/39dd32c6-d43e-492a-8a74-8a9b1f51869c",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1574,7 +1574,7 @@
    "url": "https://www.contractsfinder.service.gov.uk/Notice/854a6418-e124-40e8-8c66-db7bb5ea5991",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1598,7 +1598,7 @@
    "url": "https://www.find-tender.service.gov.uk/Notice/004147-2024",
    "verifiedOn": "2026-09-30",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1624,7 +1624,7 @@
    "url": "https://www.find-tender.service.gov.uk/Notice/009114-2022",
    "verifiedOn": "2026-09-30",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1647,7 +1647,7 @@
    "url": "https://hduhb.nhs.wales/about-us/your-health-board/board-meetings-2025/board-agenda-and-papers-31-july-2025/board-agenda-and-papers-31-july-2025/21-1-procurement-report-pdf/",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1667,7 +1667,7 @@
    "url": "https://www.gov.wales/adult-continence-products-whc2022003",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "missing"
@@ -1685,7 +1685,7 @@
    "url": "https://www2.hse.ie/conditions/urinary-incontinence/incontinence-products/",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1709,7 +1709,7 @@
    "url": "https://www.bdct.nhs.uk/continence-pads-provision/",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1731,7 +1731,7 @@
    "url": "https://www.lscft.nhs.uk/our-services/service-finder-z/continence-service/containment-product-home-delivery-service",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1754,7 +1754,7 @@
    "url": "https://www.bsmhft.nhs.uk/wp-content/uploads/2025/01/FOI-0294_2024-Continence-Resource.pdf",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1775,7 +1775,7 @@
    "url": "https://www.nhstaysideadtc.scot.nhs.uk/Continence%20Formulary/Continence%20Product%20Formulary%20-%20Adult%20Community%20Formulary.pdf",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -1795,7 +1795,7 @@
    "url": "https://www.nice.org.uk/guidance/qs77",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "unreachable",
     "http": 403
    }
@@ -1814,7 +1814,7 @@
    "url": "https://www.nice.org.uk/guidance/qs54",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "unreachable",
     "http": 403
    }
@@ -1833,7 +1833,7 @@
    "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/socialcare/articles/carehomesandestimatingtheselffundingpopulationengland/2022to2023",
    "verifiedOn": "2026-09-28",
    "lastCheck": {
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -2585,14 +2585,14 @@
   }
  ],
  "gpPrescribing": {
-  "generatedOn": "2026-09-30",
+  "generatedOn": "2026-10-21",
   "source": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
   "sourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
   "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "scope": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset.",
   "periods": [
-   "202507",
-   "202607"
+   "202508",
+   "202608"
   ],
   "minBaselineItems": 25,
   "defined": true,
@@ -2606,411 +2606,411 @@
      "chapter 22"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 410692,
-    "cost": 25017517,
-    "items12m": 4495548,
-    "cost12m": 275741363,
-    "itemsYoY": 7.9,
-    "products": 1213,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 372251,
+    "cost": 22725414,
+    "items12m": 4522459,
+    "cost12m": 276932492,
+    "itemsYoY": 7.8,
+    "products": 1187,
     "topNational": [
      {
       "code": "22600956002",
       "label": "Prosys single use non-sterile drainable night drainage bag",
       "generic": false,
-      "items": 28419,
+      "items": 25690,
       "share": 6.9,
-      "cost": 298659,
-      "yoy": 0.6
+      "cost": 270217,
+      "yoy": 3.2
      },
      {
       "code": "21020000950",
       "label": "Brillant AquaFlate all silicone catheter male",
       "generic": false,
-      "items": 11095,
+      "items": 10015,
       "share": 2.7,
-      "cost": 166004,
-      "yoy": 3.5
+      "cost": 146121,
+      "yoy": 17.8
      },
      {
       "code": "22500955013",
       "label": "Prosys sterile leg bag with lever tap",
       "generic": false,
-      "items": 7777,
+      "items": 7078,
       "share": 1.9,
-      "cost": 240340,
-      "yoy": -2.4
-     },
-     {
-      "code": "22601006045",
-      "label": "Simpla Profile drainable night drainage bag with",
-      "generic": false,
-      "items": 7034,
-      "share": 1.7,
-      "cost": 193399,
-      "yoy": 2.8
+      "cost": 219186,
+      "yoy": 3.1
      },
      {
       "code": "22801008011",
       "label": "Simpla G-Strap adult",
       "generic": false,
-      "items": 6714,
-      "share": 1.6,
-      "cost": 116276,
-      "yoy": -3.7
+      "items": 6393,
+      "share": 1.7,
+      "cost": 111022,
+      "yoy": -3.1
+     },
+     {
+      "code": "22601006045",
+      "label": "Simpla Profile drainable night drainage bag with",
+      "generic": false,
+      "items": 6328,
+      "share": 1.7,
+      "cost": 173753,
+      "yoy": -7.8
      },
      {
       "code": "22600956003",
       "label": "Prosys sterile drainable night drainage bag with lever tap",
       "generic": false,
-      "items": 6710,
-      "share": 1.6,
-      "cost": 120982,
-      "yoy": 8.3
-     },
-     {
-      "code": "21020001033",
-      "label": "Prosys all silicone catheter male",
-      "generic": false,
-      "items": 6479,
-      "share": 1.6,
-      "cost": 94727,
-      "yoy": 5.9
+      "items": 6162,
+      "share": 1.7,
+      "cost": 109772,
+      "yoy": 14.8
      },
      {
       "code": "22602086003",
       "label": "Libra GB3S drainable night drainage bag",
       "generic": false,
-      "items": 6334,
-      "share": 1.5,
-      "cost": 123089,
-      "yoy": 20.2
+      "items": 6092,
+      "share": 1.6,
+      "cost": 119365,
+      "yoy": 20.9
      },
      {
       "code": "22501005068",
       "label": "Simpla Profile sterile leg bag",
       "generic": false,
-      "items": 6299,
+      "items": 5743,
       "share": 1.5,
-      "cost": 249929,
-      "yoy": 6.7
+      "cost": 226369,
+      "yoy": 0.4
      },
      {
-      "code": "22500955012",
-      "label": "Prosys sterile leg bag with lever tap",
+      "code": "21020001033",
+      "label": "Prosys all silicone catheter male",
       "generic": false,
-      "items": 5587,
-      "share": 1.4,
-      "cost": 172173,
-      "yoy": 3.4
+      "items": 5696,
+      "share": 1.5,
+      "cost": 83016,
+      "yoy": -2.8
+     },
+     {
+      "code": "21130000124",
+      "label": "Uro-Tainer Twin Suby G citric acid",
+      "generic": false,
+      "items": 5016,
+      "share": 1.3,
+      "cost": 253852,
+      "yoy": -0.4
      }
     ],
     "icbLeaders": [
      {
       "icb": "QOX",
       "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-      "items": 7207,
+      "items": 6187,
       "leaders": [
        {
         "code": "22602086003",
         "label": "Libra GB3S drainable night drainage bag",
         "generic": false,
-        "items": 337,
+        "items": 288,
         "share": 4.7
        },
        {
         "code": "22502085002",
         "label": "Libra sterile leg bag long tube",
         "generic": false,
-        "items": 289,
+        "items": 250,
         "share": 4.0
        },
        {
-        "code": "21020001458",
-        "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 206,
-        "share": 2.9
+        "items": 162,
+        "share": 2.6
        }
       ]
      },
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 8925,
+      "items": 8074,
       "leaders": [
-       {
-        "code": "22600956002",
-        "label": "Prosys single use non-sterile drainable night drainage bag",
-        "generic": false,
-        "items": 359,
-        "share": 4.0
-       },
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 326,
-        "share": 3.7
+        "items": 306,
+        "share": 3.8
        },
        {
         "code": "22501005068",
         "label": "Simpla Profile sterile leg bag",
         "generic": false,
-        "items": 325,
-        "share": 3.6
+        "items": 300,
+        "share": 3.7
+       },
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 297,
+        "share": 3.7
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 10893,
+      "items": 10309,
       "leaders": [
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 957,
-        "share": 8.8
+        "items": 985,
+        "share": 9.6
        },
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 614,
-        "share": 5.6
+        "items": 536,
+        "share": 5.2
        },
        {
         "code": "22606156025",
         "label": "LINC-Flo sterile drainable night drainage bag",
         "generic": false,
-        "items": 461,
-        "share": 4.2
+        "items": 456,
+        "share": 4.4
        }
       ]
      },
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 7909,
+      "items": 6997,
       "leaders": [
        {
         "code": "21020001458",
         "label": "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
         "generic": false,
-        "items": 444,
-        "share": 5.6
-       },
-       {
-        "code": "22602086002",
-        "label": "Libra GB3 drainable night drainage bag",
-        "generic": false,
-        "items": 402,
-        "share": 5.1
+        "items": 417,
+        "share": 6.0
        },
        {
         "code": "22502085002",
         "label": "Libra sterile leg bag long tube",
         "generic": false,
-        "items": 378,
-        "share": 4.8
+        "items": 377,
+        "share": 5.4
+       },
+       {
+        "code": "22602086002",
+        "label": "Libra GB3 drainable night drainage bag",
+        "generic": false,
+        "items": 342,
+        "share": 4.9
        }
       ]
      },
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 19722,
+      "items": 17486,
       "leaders": [
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 1265,
-        "share": 6.4
+        "items": 1130,
+        "share": 6.5
        },
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 723,
-        "share": 3.7
+        "items": 673,
+        "share": 3.8
        },
        {
         "code": "22601006045",
         "label": "Simpla Profile drainable night drainage bag with",
         "generic": false,
-        "items": 581,
-        "share": 2.9
+        "items": 550,
+        "share": 3.1
        }
       ]
      },
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 22775,
+      "items": 20837,
       "leaders": [
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 3111,
-        "share": 13.7
+        "items": 2800,
+        "share": 13.4
        },
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 788,
+        "items": 721,
         "share": 3.5
        },
        {
         "code": "22500955009",
         "label": "Prosys sterile leg bag with slide tap",
         "generic": false,
-        "items": 659,
-        "share": 2.9
+        "items": 643,
+        "share": 3.1
        }
       ]
      },
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 5124,
+      "items": 4576,
       "leaders": [
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 322,
-        "share": 6.3
+        "items": 297,
+        "share": 6.5
        },
        {
         "code": "22602086003",
         "label": "Libra GB3S drainable night drainage bag",
         "generic": false,
-        "items": 242,
-        "share": 4.7
+        "items": 231,
+        "share": 5.0
        },
        {
         "code": "22606156013",
         "label": "Spirit One MT drainable night drainage bag",
         "generic": false,
-        "items": 172,
-        "share": 3.4
+        "items": 169,
+        "share": 3.7
        }
       ]
      },
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 7715,
+      "items": 6923,
       "leaders": [
-       {
-        "code": "22606156025",
-        "label": "LINC-Flo sterile drainable night drainage bag",
-        "generic": false,
-        "items": 387,
-        "share": 5.0
-       },
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 386,
-        "share": 5.0
+        "items": 362,
+        "share": 5.2
        },
        {
-        "code": "21020001033",
-        "label": "Prosys all silicone catheter male",
+        "code": "22606156025",
+        "label": "LINC-Flo sterile drainable night drainage bag",
         "generic": false,
-        "items": 267,
-        "share": 3.5
+        "items": 326,
+        "share": 4.7
+       },
+       {
+        "code": "22500955013",
+        "label": "Prosys sterile leg bag with lever tap",
+        "generic": false,
+        "items": 229,
+        "share": 3.3
        }
       ]
      },
      {
       "icb": "QJ2",
       "name": "NHS Derby and Derbyshire",
-      "items": 8145,
+      "items": 7226,
       "leaders": [
        {
         "code": "22600956003",
         "label": "Prosys sterile drainable night drainage bag with lever tap",
         "generic": false,
-        "items": 580,
+        "items": 515,
         "share": 7.1
-       },
-       {
-        "code": "22600956002",
-        "label": "Prosys single use non-sterile drainable night drainage bag",
-        "generic": false,
-        "items": 465,
-        "share": 5.7
        },
        {
         "code": "22500955013",
         "label": "Prosys sterile leg bag with lever tap",
         "generic": false,
-        "items": 453,
-        "share": 5.6
+        "items": 424,
+        "share": 5.9
+       },
+       {
+        "code": "22600956002",
+        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "generic": false,
+        "items": 422,
+        "share": 5.8
        }
       ]
      },
      {
       "icb": "QJK",
       "name": "NHS Devon",
-      "items": 12664,
+      "items": 11144,
       "leaders": [
        {
         "code": "22602086003",
         "label": "Libra GB3S drainable night drainage bag",
         "generic": false,
-        "items": 711,
-        "share": 5.6
+        "items": 673,
+        "share": 6.0
        },
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 674,
+        "items": 593,
         "share": 5.3
        },
        {
         "code": "22502085001",
         "label": "Libra sterile leg bag short tube",
         "generic": false,
-        "items": 482,
-        "share": 3.8
+        "items": 404,
+        "share": 3.6
        }
       ]
      },
      {
       "icb": "QVV",
       "name": "NHS Dorset",
-      "items": 7391,
+      "items": 6502,
       "leaders": [
        {
         "code": "22602086001",
         "label": "Libra GB4 drainable night drainage bag",
         "generic": false,
-        "items": 266,
+        "items": 233,
         "share": 3.6
        },
        {
         "code": "22502085001",
         "label": "Libra sterile leg bag short tube",
         "generic": false,
-        "items": 248,
-        "share": 3.4
+        "items": 204,
+        "share": 3.1
        },
        {
-        "code": "22600956002",
-        "label": "Prosys single use non-sterile drainable night drainage bag",
+        "code": "21020001561",
+        "label": "iQ Cath hydrophilic catheter with sleeve male",
         "generic": false,
-        "items": 226,
+        "items": 201,
         "share": 3.1
        }
       ]
@@ -3018,279 +3018,279 @@
      {
       "icb": "D7T5G",
       "name": "NHS Essex",
-      "items": 10302,
+      "items": 9104,
       "leaders": [
        {
         "code": "22801008011",
         "label": "Simpla G-Strap adult",
         "generic": false,
-        "items": 411,
-        "share": 4.0
+        "items": 325,
+        "share": 3.6
        },
        {
         "code": "22606156025",
         "label": "LINC-Flo sterile drainable night drainage bag",
         "generic": false,
-        "items": 336,
+        "items": 301,
         "share": 3.3
        },
        {
-        "code": "22601006045",
-        "label": "Simpla Profile drainable night drainage bag with",
+        "code": "21020000950",
+        "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 290,
-        "share": 2.8
+        "items": 274,
+        "share": 3.0
        }
       ]
      },
      {
       "icb": "QR1",
       "name": "NHS Gloucestershire",
-      "items": 4621,
+      "items": 4385,
       "leaders": [
        {
         "code": "22606156001",
         "label": "Ugo",
         "generic": false,
-        "items": 319,
-        "share": 6.9
+        "items": 307,
+        "share": 7.0
        },
        {
         "code": "22506155003",
         "label": "Ugo",
         "generic": false,
-        "items": 179,
-        "share": 3.9
+        "items": 175,
+        "share": 4.0
        },
        {
         "code": "22606156006",
         "label": "Ugo",
         "generic": false,
-        "items": 178,
-        "share": 3.9
+        "items": 174,
+        "share": 4.0
        }
       ]
      },
      {
       "icb": "QOP",
       "name": "NHS Greater Manchester",
-      "items": 17698,
+      "items": 16074,
       "leaders": [
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 2284,
-        "share": 12.9
+        "items": 2019,
+        "share": 12.6
        },
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 934,
-        "share": 5.3
+        "items": 863,
+        "share": 5.4
        },
        {
         "code": "22500955013",
         "label": "Prosys sterile leg bag with lever tap",
         "generic": false,
-        "items": 522,
-        "share": 2.9
+        "items": 477,
+        "share": 3.0
        }
       ]
      },
      {
       "icb": "QRL",
       "name": "NHS Hampshire and Isle of Wight",
-      "items": 10759,
+      "items": 10219,
       "leaders": [
-       {
-        "code": "22501755004",
-        "label": "Flexicare sterile leg bag long tube",
-        "generic": false,
-        "items": 577,
-        "share": 5.4
-       },
        {
         "code": "21020001550",
         "label": "SpiritCare all slc cath+pfs for ball inflation & supplementary syrg for ball deflation male",
         "generic": false,
-        "items": 555,
-        "share": 5.2
+        "items": 595,
+        "share": 5.8
+       },
+       {
+        "code": "22501755004",
+        "label": "Flexicare sterile leg bag long tube",
+        "generic": false,
+        "items": 591,
+        "share": 5.8
        },
        {
         "code": "22600956003",
         "label": "Prosys sterile drainable night drainage bag with lever tap",
         "generic": false,
-        "items": 516,
-        "share": 4.8
+        "items": 550,
+        "share": 5.4
        }
       ]
      },
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 7958,
+      "items": 7805,
       "leaders": [
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 1648,
-        "share": 20.7
+        "items": 1609,
+        "share": 20.6
        },
        {
         "code": "21020001378",
         "label": "Prosys Vesica Community Catheterisation Pack",
         "generic": false,
-        "items": 417,
-        "share": 5.2
+        "items": 550,
+        "share": 7.0
        },
        {
         "code": "22500955012",
         "label": "Prosys sterile leg bag with lever tap",
         "generic": false,
-        "items": 339,
-        "share": 4.3
+        "items": 343,
+        "share": 4.4
        }
       ]
      },
      {
       "icb": "QOQ",
       "name": "NHS Humber and North Yorkshire",
-      "items": 15850,
+      "items": 14469,
       "leaders": [
        {
         "code": "22606156013",
         "label": "Spirit One MT drainable night drainage bag",
         "generic": false,
-        "items": 877,
-        "share": 5.5
+        "items": 805,
+        "share": 5.6
+       },
+       {
+        "code": "22800508003",
+        "label": "Leg bag strap (Bard)",
+        "generic": false,
+        "items": 369,
+        "share": 2.6
        },
        {
         "code": "22500505054",
         "label": "Spirit sterile leg bag",
         "generic": false,
-        "items": 432,
-        "share": 2.7
-       },
-       {
-        "code": "22600956002",
-        "label": "Prosys single use non-sterile drainable night drainage bag",
-        "generic": false,
-        "items": 386,
-        "share": 2.4
+        "items": 356,
+        "share": 2.5
        }
       ]
      },
      {
       "icb": "QKS",
       "name": "NHS Kent and Medway",
-      "items": 11396,
+      "items": 10212,
       "leaders": [
        {
         "code": "22600956003",
         "label": "Prosys sterile drainable night drainage bag with lever tap",
         "generic": false,
-        "items": 544,
-        "share": 4.8
+        "items": 442,
+        "share": 4.3
        },
        {
         "code": "22601006045",
         "label": "Simpla Profile drainable night drainage bag with",
         "generic": false,
-        "items": 349,
+        "items": 312,
         "share": 3.1
        },
        {
-        "code": "22500955012",
-        "label": "Prosys sterile leg bag with lever tap",
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
         "generic": false,
-        "items": 312,
-        "share": 2.7
+        "items": 263,
+        "share": 2.6
        }
       ]
      },
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 15128,
+      "items": 14228,
       "leaders": [
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 2336,
-        "share": 15.4
+        "items": 2254,
+        "share": 15.8
        },
        {
-        "code": "21020001149",
-        "label": "VaPro Pocket No Touch hydrophilic catheter male",
+        "code": "21020001033",
+        "label": "Prosys all silicone catheter male",
         "generic": false,
-        "items": 551,
-        "share": 3.6
+        "items": 547,
+        "share": 3.8
        },
        {
         "code": "22500955013",
         "label": "Prosys sterile leg bag with lever tap",
         "generic": false,
-        "items": 527,
-        "share": 3.5
+        "items": 525,
+        "share": 3.7
        }
       ]
      },
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 8791,
+      "items": 7683,
       "leaders": [
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 1090,
-        "share": 12.4
+        "items": 981,
+        "share": 12.8
        },
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 357,
-        "share": 4.1
+        "items": 269,
+        "share": 3.5
        },
        {
-        "code": "22500955009",
-        "label": "Prosys sterile leg bag with slide tap",
+        "code": "22500955013",
+        "label": "Prosys sterile leg bag with lever tap",
         "generic": false,
-        "items": 299,
-        "share": 3.4
+        "items": 255,
+        "share": 3.3
        }
       ]
      },
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 7730,
+      "items": 6951,
       "leaders": [
        {
         "code": "22601006045",
         "label": "Simpla Profile drainable night drainage bag with",
         "generic": false,
-        "items": 523,
-        "share": 6.8
+        "items": 432,
+        "share": 6.2
        },
        {
         "code": "22501005068",
         "label": "Simpla Profile sterile leg bag",
         "generic": false,
-        "items": 467,
-        "share": 6.0
+        "items": 425,
+        "share": 6.1
        },
        {
-        "code": "22801008011",
-        "label": "Simpla G-Strap adult",
+        "code": "22601006003",
+        "label": "Simpla S2 non-drainable night drainage bag",
         "generic": false,
-        "items": 445,
+        "items": 401,
         "share": 5.8
        }
       ]
@@ -3298,83 +3298,83 @@
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 16494,
+      "items": 14962,
       "leaders": [
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 2041,
-        "share": 12.4
+        "items": 1769,
+        "share": 11.8
        },
        {
         "code": "22500955013",
         "label": "Prosys sterile leg bag with lever tap",
         "generic": false,
-        "items": 524,
-        "share": 3.2
+        "items": 503,
+        "share": 3.4
        },
        {
         "code": "22500955012",
         "label": "Prosys sterile leg bag with lever tap",
         "generic": false,
-        "items": 504,
-        "share": 3.1
+        "items": 449,
+        "share": 3.0
        }
       ]
      },
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 7665,
+      "items": 7184,
       "leaders": [
        {
         "code": "22601006045",
         "label": "Simpla Profile drainable night drainage bag with",
         "generic": false,
-        "items": 363,
-        "share": 4.7
-       },
-       {
-        "code": "21130000104",
-        "label": "OptiFlo S saline",
-        "generic": false,
-        "items": 290,
-        "share": 3.8
+        "items": 364,
+        "share": 5.1
        },
        {
         "code": "22501005068",
         "label": "Simpla Profile sterile leg bag",
         "generic": false,
-        "items": 273,
-        "share": 3.6
+        "items": 286,
+        "share": 4.0
+       },
+       {
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
+        "generic": false,
+        "items": 250,
+        "share": 3.5
        }
       ]
      },
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 25585,
+      "items": 22906,
       "leaders": [
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 2198,
-        "share": 8.6
+        "items": 1956,
+        "share": 8.5
        },
        {
         "code": "22600956003",
         "label": "Prosys sterile drainable night drainage bag with lever tap",
         "generic": false,
-        "items": 859,
-        "share": 3.4
+        "items": 755,
+        "share": 3.3
        },
        {
-        "code": "21020001033",
-        "label": "Prosys all silicone catheter male",
+        "code": "22602086003",
+        "label": "Libra GB3S drainable night drainage bag",
         "generic": false,
-        "items": 734,
+        "items": 668,
         "share": 2.9
        }
       ]
@@ -3382,83 +3382,83 @@
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 5544,
+      "items": 5301,
       "leaders": [
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 346,
-        "share": 6.2
+        "items": 378,
+        "share": 7.1
        },
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 231,
-        "share": 4.2
+        "items": 198,
+        "share": 3.7
        },
        {
         "code": "21130000124",
         "label": "Uro-Tainer Twin Suby G citric acid",
         "generic": false,
-        "items": 185,
-        "share": 3.3
+        "items": 163,
+        "share": 3.1
        }
       ]
      },
      {
       "icb": "QT1",
       "name": "NHS Nottingham and Nottinghamshire",
-      "items": 7277,
+      "items": 6562,
       "leaders": [
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 329,
+        "items": 297,
         "share": 4.5
        },
        {
         "code": "22502655016",
         "label": "LINC-Flo sterile leg bag with lever tap",
         "generic": false,
-        "items": 210,
-        "share": 2.9
+        "items": 214,
+        "share": 3.3
        },
        {
         "code": "22806208012",
         "label": "CliniSure catheter retaining strap adult",
         "generic": false,
-        "items": 201,
-        "share": 2.8
+        "items": 189,
+        "share": 2.9
        }
       ]
      },
      {
       "icb": "QOC",
       "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 4650,
+      "items": 4493,
       "leaders": [
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 810,
-        "share": 17.4
+        "items": 772,
+        "share": 17.2
        },
        {
         "code": "22500955013",
         "label": "Prosys sterile leg bag with lever tap",
         "generic": false,
-        "items": 229,
-        "share": 4.9
+        "items": 216,
+        "share": 4.8
        },
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 219,
+        "items": 213,
         "share": 4.7
        }
       ]
@@ -3466,27 +3466,27 @@
      {
       "icb": "QSL",
       "name": "NHS Somerset",
-      "items": 5830,
+      "items": 5312,
       "leaders": [
        {
         "code": "22606156013",
         "label": "Spirit One MT drainable night drainage bag",
         "generic": false,
-        "items": 311,
-        "share": 5.3
+        "items": 302,
+        "share": 5.7
        },
        {
         "code": "22606156001",
         "label": "Ugo",
         "generic": false,
-        "items": 240,
-        "share": 4.1
+        "items": 234,
+        "share": 4.4
        },
        {
         "code": "22050500501",
         "label": "Flip-Flo sterile catheter valve",
         "generic": false,
-        "items": 170,
+        "items": 153,
         "share": 2.9
        }
       ]
@@ -3494,55 +3494,55 @@
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 8194,
+      "items": 7127,
       "leaders": [
+       {
+        "code": "22602086003",
+        "label": "Libra GB3S drainable night drainage bag",
+        "generic": false,
+        "items": 213,
+        "share": 3.0
+       },
        {
         "code": "21130000124",
         "label": "Uro-Tainer Twin Suby G citric acid",
         "generic": false,
-        "items": 241,
+        "items": 208,
         "share": 2.9
        },
        {
-        "code": "22602086001",
-        "label": "Libra GB4 drainable night drainage bag",
+        "code": "22502085001",
+        "label": "Libra sterile leg bag short tube",
         "generic": false,
-        "items": 235,
+        "items": 206,
         "share": 2.9
-       },
-       {
-        "code": "22502085002",
-        "label": "Libra sterile leg bag long tube",
-        "generic": false,
-        "items": 226,
-        "share": 2.8
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 5774,
+      "items": 5055,
       "leaders": [
        {
         "code": "22601006045",
         "label": "Simpla Profile drainable night drainage bag with",
         "generic": false,
-        "items": 213,
-        "share": 3.7
+        "items": 175,
+        "share": 3.5
        },
        {
         "code": "21130000124",
         "label": "Uro-Tainer Twin Suby G citric acid",
         "generic": false,
-        "items": 183,
-        "share": 3.2
+        "items": 167,
+        "share": 3.3
        },
        {
         "code": "22801008011",
         "label": "Simpla G-Strap adult",
         "generic": false,
-        "items": 176,
+        "items": 150,
         "share": 3.0
        }
       ]
@@ -3550,168 +3550,168 @@
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 11440,
+      "items": 10411,
       "leaders": [
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 434,
-        "share": 3.8
+        "items": 410,
+        "share": 3.9
        },
        {
         "code": "21020001249",
         "label": "LoFric Primo catheter male non PVC",
         "generic": false,
-        "items": 279,
-        "share": 2.4
+        "items": 287,
+        "share": 2.8
        },
        {
-        "code": "22606156013",
-        "label": "Spirit One MT drainable night drainage bag",
+        "code": "22801008011",
+        "label": "Simpla G-Strap adult",
         "generic": false,
-        "items": 241,
-        "share": 2.1
+        "items": 189,
+        "share": 1.8
        }
       ]
      },
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 11284,
+      "items": 9952,
       "leaders": [
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 1555,
-        "share": 13.8
+        "items": 1391,
+        "share": 14.0
        },
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 576,
-        "share": 5.1
+        "items": 496,
+        "share": 5.0
        },
        {
         "code": "22500955013",
         "label": "Prosys sterile leg bag with lever tap",
         "generic": false,
-        "items": 383,
-        "share": 3.4
+        "items": 370,
+        "share": 3.7
        }
       ]
      },
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 23412,
+      "items": 21443,
       "leaders": [
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 1007,
-        "share": 4.3
+        "items": 944,
+        "share": 4.4
        },
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 902,
-        "share": 3.9
+        "items": 824,
+        "share": 3.8
        },
        {
         "code": "22602086003",
         "label": "Libra GB3S drainable night drainage bag",
         "generic": false,
-        "items": 708,
-        "share": 3.0
+        "items": 667,
+        "share": 3.1
        }
       ]
      },
      {
       "icb": "S0E4D",
       "name": "NHS Thames Valley",
-      "items": 15609,
+      "items": 13385,
       "leaders": [
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 1603,
-        "share": 10.3
+        "items": 1335,
+        "share": 10.0
        },
        {
         "code": "21020000950",
         "label": "Brillant AquaFlate all silicone catheter male",
         "generic": false,
-        "items": 818,
+        "items": 699,
         "share": 5.2
        },
        {
         "code": "22500955009",
         "label": "Prosys sterile leg bag with slide tap",
         "generic": false,
-        "items": 403,
-        "share": 2.6
+        "items": 375,
+        "share": 2.8
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 17825,
+      "items": 16740,
       "leaders": [
        {
         "code": "22600956002",
         "label": "Prosys single use non-sterile drainable night drainage bag",
         "generic": false,
-        "items": 633,
-        "share": 3.6
+        "items": 558,
+        "share": 3.3
        },
        {
         "code": "22601006003",
         "label": "Simpla S2 non-drainable night drainage bag",
         "generic": false,
-        "items": 521,
+        "items": 485,
         "share": 2.9
        },
        {
         "code": "22801008011",
         "label": "Simpla G-Strap adult",
         "generic": false,
-        "items": 509,
-        "share": 2.9
+        "items": 467,
+        "share": 2.8
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 14702,
+      "items": 12806,
       "leaders": [
        {
         "code": "22601006045",
         "label": "Simpla Profile drainable night drainage bag with",
         "generic": false,
-        "items": 517,
-        "share": 3.5
+        "items": 422,
+        "share": 3.3
        },
        {
         "code": "22501005068",
         "label": "Simpla Profile sterile leg bag",
         "generic": false,
-        "items": 379,
-        "share": 2.6
+        "items": 321,
+        "share": 2.5
        },
        {
-        "code": "22602086001",
-        "label": "Libra GB4 drainable night drainage bag",
+        "code": "21130000104",
+        "label": "OptiFlo S saline",
         "generic": false,
-        "items": 363,
-        "share": 2.5
+        "items": 313,
+        "share": 2.4
        }
       ]
      }
@@ -3724,104 +3724,104 @@
      "21.28"
     ],
     "note": null,
-    "latestPeriod": "202607",
-    "baselinePeriod": "202507",
-    "items": 22244,
-    "cost": 4544032,
-    "items12m": 237319,
-    "cost12m": 47632786,
-    "itemsYoY": 14.0,
-    "products": 77,
+    "latestPeriod": "202608",
+    "baselinePeriod": "202508",
+    "items": 20631,
+    "cost": 4197100,
+    "items12m": 240009,
+    "cost12m": 48303668,
+    "itemsYoY": 15.0,
+    "products": 79,
     "topNational": [
      {
       "code": "21280000172",
       "label": "Peristeen Plus anal irrigation system accessory unit regular",
       "generic": false,
-      "items": 3462,
-      "share": 15.6,
-      "cost": 960465,
-      "yoy": 4.8
+      "items": 3150,
+      "share": 15.3,
+      "cost": 870398,
+      "yoy": 0.2
      },
      {
       "code": "21280000164",
       "label": "Qufora IrriSedo MiniGo",
       "generic": false,
-      "items": 2812,
-      "share": 12.6,
-      "cost": 614707,
-      "yoy": 21.2
+      "items": 2536,
+      "share": 12.3,
+      "cost": 558427,
+      "yoy": 19.1
      },
      {
       "code": "21280000179",
       "label": "Qufora IrriSedo Flow",
       "generic": false,
-      "items": 1949,
-      "share": 8.8,
-      "cost": 575127,
-      "yoy": 23.5
+      "items": 1776,
+      "share": 8.6,
+      "cost": 531431,
+      "yoy": 24.5
      },
      {
       "code": "21280000169",
       "label": "Peristeen Plus anal irrigation system regular",
       "generic": false,
-      "items": 1359,
-      "share": 6.1,
-      "cost": 123900,
-      "yoy": 25.7
+      "items": 1246,
+      "share": 6.0,
+      "cost": 109147,
+      "yoy": 31.0
      },
      {
       "code": "21280000165",
       "label": "Qufora IrriSedo MiniGo Flex",
       "generic": false,
-      "items": 1213,
-      "share": 5.5,
-      "cost": 306414,
-      "yoy": 15.1
+      "items": 1117,
+      "share": 5.4,
+      "cost": 283241,
+      "yoy": 19.7
      },
      {
       "code": "21280000174",
       "label": "Peristeen Plus anal irrigation system rectal catheters regular",
       "generic": false,
-      "items": 968,
-      "share": 4.4,
-      "cost": 234583,
-      "yoy": 0.1
+      "items": 885,
+      "share": 4.3,
+      "cost": 208945,
+      "yoy": -1.0
      },
      {
       "code": "21280000191",
       "label": "Peristeen Light anal irrigation system with extension tube",
       "generic": false,
-      "items": 909,
-      "share": 4.1,
-      "cost": 217679,
-      "yoy": null
+      "items": 865,
+      "share": 4.2,
+      "cost": 211423,
+      "yoy": 1501.9
      },
      {
       "code": "21280000168",
       "label": "Peristeen Plus anal irrigation system regular with toilet bag",
       "generic": false,
-      "items": 848,
-      "share": 3.8,
-      "cost": 74564,
-      "yoy": -16.9
+      "items": 817,
+      "share": 4.0,
+      "cost": 72532,
+      "yoy": -20.0
      },
      {
       "code": "21280000109",
       "label": "Qufora IrriSedo Cone System",
       "generic": false,
-      "items": 798,
-      "share": 3.6,
-      "cost": 126177,
-      "yoy": -11.9
+      "items": 698,
+      "share": 3.4,
+      "cost": 111581,
+      "yoy": -10.4
      },
      {
-      "code": "21280000134",
-      "label": "Qufora IrriSedo Mini System",
+      "code": "21280000142",
+      "label": "Navina Consumable Set",
       "generic": false,
-      "items": 612,
-      "share": 2.8,
-      "cost": 93392,
-      "yoy": -9.5
+      "items": 554,
+      "share": 2.7,
+      "cost": 145892,
+      "yoy": 11.9
      }
     ],
     "icbLeaders": [
@@ -3834,329 +3834,329 @@
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 53,
-        "share": 19.9
+        "items": 45,
+        "share": 16.9
        },
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 29,
-        "share": 10.9
+        "items": 23,
+        "share": 8.6
        },
        {
         "code": "21280000179",
         "label": "Qufora IrriSedo Flow",
         "generic": false,
-        "items": 26,
-        "share": 9.7
+        "items": 22,
+        "share": 8.2
        }
       ]
      },
      {
       "icb": "QHL",
       "name": "NHS Birmingham and Solihull",
-      "items": 434,
+      "items": 425,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 57,
-        "share": 13.1
+        "items": 50,
+        "share": 11.8
        },
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 38,
-        "share": 8.8
+        "items": 39,
+        "share": 9.2
        },
        {
         "code": "21280000191",
         "label": "Peristeen Light anal irrigation system with extension tube",
         "generic": false,
-        "items": 30,
-        "share": 6.9
+        "items": 31,
+        "share": 7.3
        }
       ]
      },
      {
       "icb": "QUA",
       "name": "NHS Black Country",
-      "items": 500,
+      "items": 490,
       "leaders": [
-       {
-        "code": "21280000146",
-        "label": "Aquaflush Maxi - Lite System monthly set",
-        "generic": false,
-        "items": 52,
-        "share": 10.4
-       },
        {
         "code": "21280000147",
         "label": "Aquaflush Cone Refill Pack standard cones",
         "generic": false,
-        "items": 46,
-        "share": 9.2
+        "items": 51,
+        "share": 10.4
        },
        {
         "code": "21280000153",
         "label": "Aquaflush Midi - Compact+ System monthly set",
         "generic": false,
-        "items": 38,
-        "share": 7.6
+        "items": 49,
+        "share": 10.0
+       },
+       {
+        "code": "21280000146",
+        "label": "Aquaflush Maxi - Lite System monthly set",
+        "generic": false,
+        "items": 48,
+        "share": 9.8
        }
       ]
      },
      {
       "icb": "QUY",
       "name": "NHS Bristol, North Somerset and South Gloucestershire",
-      "items": 478,
+      "items": 450,
       "leaders": [
        {
         "code": "21280000179",
         "label": "Qufora IrriSedo Flow",
         "generic": false,
-        "items": 63,
-        "share": 13.2
+        "items": 72,
+        "share": 16.0
        },
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 62,
-        "share": 13.0
+        "items": 60,
+        "share": 13.3
        },
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 58,
-        "share": 12.1
+        "items": 49,
+        "share": 10.9
        }
       ]
      },
      {
       "icb": "S1Y5D",
       "name": "NHS Central East",
-      "items": 1077,
+      "items": 939,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 164,
-        "share": 15.2
-       },
-       {
-        "code": "21280000179",
-        "label": "Qufora IrriSedo Flow",
-        "generic": false,
-        "items": 118,
-        "share": 11.0
+        "items": 153,
+        "share": 16.3
        },
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 113,
-        "share": 10.5
+        "items": 101,
+        "share": 10.8
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 94,
+        "share": 10.0
        }
       ]
      },
      {
       "icb": "QYG",
       "name": "NHS Cheshire and Merseyside",
-      "items": 1593,
+      "items": 1422,
       "leaders": [
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 318,
-        "share": 20.0
+        "items": 277,
+        "share": 19.5
        },
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 236,
-        "share": 14.8
+        "items": 220,
+        "share": 15.5
        },
        {
         "code": "21280000165",
         "label": "Qufora IrriSedo MiniGo Flex",
         "generic": false,
-        "items": 147,
-        "share": 9.2
+        "items": 126,
+        "share": 8.9
        }
       ]
      },
      {
       "icb": "QT6",
       "name": "NHS Cornwall and the Isles of Scilly",
-      "items": 198,
+      "items": 180,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
         "items": 33,
-        "share": 16.7
+        "share": 18.3
+       },
+       {
+        "code": "21280000174",
+        "label": "Peristeen Plus anal irrigation system rectal catheters regular",
+        "generic": false,
+        "items": 16,
+        "share": 8.9
        },
        {
         "code": "21280000147",
         "label": "Aquaflush Cone Refill Pack standard cones",
         "generic": false,
-        "items": 16,
-        "share": 8.1
-       },
-       {
-        "code": "21280000169",
-        "label": "Peristeen Plus anal irrigation system regular",
-        "generic": false,
         "items": 13,
-        "share": 6.6
+        "share": 7.2
        }
       ]
      },
      {
       "icb": "QWU",
       "name": "NHS Coventry and Warwickshire",
-      "items": 367,
+      "items": 356,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 78,
-        "share": 21.3
+        "items": 68,
+        "share": 19.1
        },
        {
         "code": "21280000179",
         "label": "Qufora IrriSedo Flow",
         "generic": false,
-        "items": 40,
-        "share": 10.9
-       },
-       {
-        "code": "21280000164",
-        "label": "Qufora IrriSedo MiniGo",
-        "generic": false,
-        "items": 35,
-        "share": 9.5
-       }
-      ]
-     },
-     {
-      "icb": "QJ2",
-      "name": "NHS Derby and Derbyshire",
-      "items": 368,
-      "leaders": [
-       {
-        "code": "21280000109",
-        "label": "Qufora IrriSedo Cone System",
-        "generic": false,
-        "items": 39,
-        "share": 10.6
-       },
-       {
-        "code": "21280000172",
-        "label": "Peristeen Plus anal irrigation system accessory unit regular",
-        "generic": false,
-        "items": 33,
-        "share": 9.0
-       },
-       {
-        "code": "21280000147",
-        "label": "Aquaflush Cone Refill Pack standard cones",
-        "generic": false,
-        "items": 27,
-        "share": 7.3
-       }
-      ]
-     },
-     {
-      "icb": "QJK",
-      "name": "NHS Devon",
-      "items": 480,
-      "leaders": [
-       {
-        "code": "21280000164",
-        "label": "Qufora IrriSedo MiniGo",
-        "generic": false,
-        "items": 82,
-        "share": 17.1
-       },
-       {
-        "code": "21280000172",
-        "label": "Peristeen Plus anal irrigation system accessory unit regular",
-        "generic": false,
-        "items": 44,
-        "share": 9.2
-       },
-       {
-        "code": "21280000179",
-        "label": "Qufora IrriSedo Flow",
-        "generic": false,
-        "items": 33,
-        "share": 6.9
-       }
-      ]
-     },
-     {
-      "icb": "QVV",
-      "name": "NHS Dorset",
-      "items": 339,
-      "leaders": [
-       {
-        "code": "21280000134",
-        "label": "Qufora IrriSedo Mini System",
-        "generic": false,
-        "items": 56,
-        "share": 16.5
-       },
-       {
-        "code": "21280000172",
-        "label": "Peristeen Plus anal irrigation system accessory unit regular",
-        "generic": false,
-        "items": 51,
-        "share": 15.0
+        "items": 41,
+        "share": 11.5
        },
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
         "items": 38,
-        "share": 11.2
+        "share": 10.7
+       }
+      ]
+     },
+     {
+      "icb": "QJ2",
+      "name": "NHS Derby and Derbyshire",
+      "items": 301,
+      "leaders": [
+       {
+        "code": "21280000109",
+        "label": "Qufora IrriSedo Cone System",
+        "generic": false,
+        "items": 30,
+        "share": 10.0
+       },
+       {
+        "code": "21280000147",
+        "label": "Aquaflush Cone Refill Pack standard cones",
+        "generic": false,
+        "items": 29,
+        "share": 9.6
+       },
+       {
+        "code": "21280000153",
+        "label": "Aquaflush Midi - Compact+ System monthly set",
+        "generic": false,
+        "items": 28,
+        "share": 9.3
+       }
+      ]
+     },
+     {
+      "icb": "QJK",
+      "name": "NHS Devon",
+      "items": 486,
+      "leaders": [
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 66,
+        "share": 13.6
+       },
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 46,
+        "share": 9.5
+       },
+       {
+        "code": "21280000142",
+        "label": "Navina Consumable Set",
+        "generic": false,
+        "items": 32,
+        "share": 6.6
+       }
+      ]
+     },
+     {
+      "icb": "QVV",
+      "name": "NHS Dorset",
+      "items": 305,
+      "leaders": [
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 45,
+        "share": 14.8
+       },
+       {
+        "code": "21280000134",
+        "label": "Qufora IrriSedo Mini System",
+        "generic": false,
+        "items": 44,
+        "share": 14.4
+       },
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 39,
+        "share": 12.8
        }
       ]
      },
      {
       "icb": "D7T5G",
       "name": "NHS Essex",
-      "items": 756,
+      "items": 704,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 134,
-        "share": 17.7
+        "items": 126,
+        "share": 17.9
        },
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 112,
-        "share": 14.8
+        "items": 87,
+        "share": 12.4
        },
        {
-        "code": "21280000179",
-        "label": "Qufora IrriSedo Flow",
+        "code": "21280000169",
+        "label": "Peristeen Plus anal irrigation system regular",
         "generic": false,
-        "items": 74,
+        "items": 69,
         "share": 9.8
        }
       ]
@@ -4164,55 +4164,55 @@
      {
       "icb": "QR1",
       "name": "NHS Gloucestershire",
-      "items": 365,
+      "items": 415,
       "leaders": [
-       {
-        "code": "21280000165",
-        "label": "Qufora IrriSedo MiniGo Flex",
-        "generic": false,
-        "items": 53,
-        "share": 14.5
-       },
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 49,
-        "share": 13.4
+        "items": 60,
+        "share": 14.5
        },
        {
         "code": "21280000142",
         "label": "Navina Consumable Set",
         "generic": false,
-        "items": 42,
-        "share": 11.5
+        "items": 58,
+        "share": 14.0
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 39,
+        "share": 9.4
        }
       ]
      },
      {
       "icb": "QOP",
       "name": "NHS Greater Manchester",
-      "items": 972,
+      "items": 883,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 208,
-        "share": 21.4
+        "items": 190,
+        "share": 21.5
        },
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 110,
-        "share": 11.3
+        "items": 97,
+        "share": 11.0
        },
        {
-        "code": "21280000174",
-        "label": "Peristeen Plus anal irrigation system rectal catheters regular",
+        "code": "21280000169",
+        "label": "Peristeen Plus anal irrigation system regular",
         "generic": false,
-        "items": 80,
+        "items": 72,
         "share": 8.2
        }
       ]
@@ -4220,279 +4220,279 @@
      {
       "icb": "QRL",
       "name": "NHS Hampshire and Isle of Wight",
-      "items": 509,
+      "items": 456,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 120,
-        "share": 23.6
+        "items": 112,
+        "share": 24.6
        },
        {
-        "code": "21280000169",
-        "label": "Peristeen Plus anal irrigation system regular",
+        "code": "21280000168",
+        "label": "Peristeen Plus anal irrigation system regular with toilet bag",
         "generic": false,
         "items": 41,
-        "share": 8.1
+        "share": 9.0
        },
        {
-        "code": "21280000191",
-        "label": "Peristeen Light anal irrigation system with extension tube",
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 35,
-        "share": 6.9
+        "items": 32,
+        "share": 7.0
        }
       ]
      },
      {
       "icb": "QGH",
       "name": "NHS Herefordshire and Worcestershire",
-      "items": 234,
+      "items": 271,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 59,
-        "share": 25.2
+        "items": 62,
+        "share": 22.9
        },
        {
         "code": "21280000169",
         "label": "Peristeen Plus anal irrigation system regular",
         "generic": false,
-        "items": 16,
-        "share": 6.8
+        "items": 22,
+        "share": 8.1
        },
        {
-        "code": "21280000168",
-        "label": "Peristeen Plus anal irrigation system regular with toilet bag",
+        "code": "21280000191",
+        "label": "Peristeen Light anal irrigation system with extension tube",
         "generic": false,
-        "items": 14,
-        "share": 6.0
+        "items": 17,
+        "share": 6.3
        }
       ]
      },
      {
       "icb": "QOQ",
       "name": "NHS Humber and North Yorkshire",
-      "items": 677,
+      "items": 631,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 108,
-        "share": 16.0
+        "items": 98,
+        "share": 15.5
        },
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 77,
-        "share": 11.4
+        "items": 64,
+        "share": 10.1
        },
        {
         "code": "21280000179",
         "label": "Qufora IrriSedo Flow",
         "generic": false,
         "items": 53,
-        "share": 7.8
+        "share": 8.4
        }
       ]
      },
      {
       "icb": "QKS",
       "name": "NHS Kent and Medway",
-      "items": 770,
+      "items": 676,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 139,
-        "share": 18.1
+        "items": 132,
+        "share": 19.5
        },
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 113,
-        "share": 14.7
+        "items": 92,
+        "share": 13.6
        },
        {
         "code": "21280000179",
         "label": "Qufora IrriSedo Flow",
         "generic": false,
-        "items": 74,
-        "share": 9.6
+        "items": 64,
+        "share": 9.5
        }
       ]
      },
      {
       "icb": "QE1",
       "name": "NHS Lancashire and South Cumbria",
-      "items": 521,
+      "items": 458,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 152,
-        "share": 29.2
-       },
-       {
-        "code": "21280000169",
-        "label": "Peristeen Plus anal irrigation system regular",
-        "generic": false,
-        "items": 50,
-        "share": 9.6
+        "items": 141,
+        "share": 30.8
        },
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 44,
-        "share": 8.4
+        "items": 40,
+        "share": 8.7
+       },
+       {
+        "code": "21280000169",
+        "label": "Peristeen Plus anal irrigation system regular",
+        "generic": false,
+        "items": 36,
+        "share": 7.9
        }
       ]
      },
      {
       "icb": "QK1",
       "name": "NHS Leicester, Leicestershire and Rutland",
-      "items": 447,
+      "items": 466,
       "leaders": [
-       {
-        "code": "21280000179",
-        "label": "Qufora IrriSedo Flow",
-        "generic": false,
-        "items": 78,
-        "share": 17.4
-       },
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 74,
-        "share": 16.6
+        "items": 77,
+        "share": 16.5
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 72,
+        "share": 15.5
        },
        {
         "code": "21280000191",
         "label": "Peristeen Light anal irrigation system with extension tube",
         "generic": false,
-        "items": 34,
-        "share": 7.6
+        "items": 33,
+        "share": 7.1
        }
       ]
      },
      {
       "icb": "QJM",
       "name": "NHS Lincolnshire",
-      "items": 260,
+      "items": 242,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 36,
-        "share": 13.8
+        "items": 33,
+        "share": 13.6
        },
        {
         "code": "21280000179",
         "label": "Qufora IrriSedo Flow",
         "generic": false,
-        "items": 27,
-        "share": 10.4
+        "items": 20,
+        "share": 8.3
        },
        {
         "code": "21280000109",
         "label": "Qufora IrriSedo Cone System",
         "generic": false,
-        "items": 24,
-        "share": 9.2
+        "items": 19,
+        "share": 7.9
        }
       ]
      },
      {
       "icb": "T6Y0W",
       "name": "NHS Norfolk and Suffolk",
-      "items": 628,
+      "items": 593,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 157,
-        "share": 25.0
+        "items": 133,
+        "share": 22.4
        },
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
         "items": 82,
-        "share": 13.1
+        "share": 13.8
        },
        {
         "code": "21280000169",
         "label": "Peristeen Plus anal irrigation system regular",
         "generic": false,
-        "items": 41,
-        "share": 6.5
+        "items": 47,
+        "share": 7.9
        }
       ]
      },
      {
       "icb": "QMF",
       "name": "NHS North East London",
-      "items": 548,
+      "items": 525,
       "leaders": [
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 110,
-        "share": 20.1
+        "items": 95,
+        "share": 18.1
        },
        {
         "code": "21280000179",
         "label": "Qufora IrriSedo Flow",
         "generic": false,
-        "items": 78,
-        "share": 14.2
+        "items": 80,
+        "share": 15.2
        },
        {
         "code": "21280000165",
         "label": "Qufora IrriSedo MiniGo Flex",
         "generic": false,
-        "items": 78,
-        "share": 14.2
+        "items": 77,
+        "share": 14.7
        }
       ]
      },
      {
       "icb": "QHM",
       "name": "NHS North East and North Cumbria",
-      "items": 1783,
+      "items": 1731,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 310,
-        "share": 17.4
+        "items": 284,
+        "share": 16.4
        },
        {
         "code": "21280000179",
         "label": "Qufora IrriSedo Flow",
         "generic": false,
-        "items": 272,
-        "share": 15.3
+        "items": 256,
+        "share": 14.8
        },
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 247,
+        "items": 240,
         "share": 13.9
        }
       ]
@@ -4500,336 +4500,336 @@
      {
       "icb": "QPM",
       "name": "NHS Northamptonshire",
-      "items": 258,
+      "items": 240,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 36,
-        "share": 14.0
-       },
-       {
-        "code": "21280000179",
-        "label": "Qufora IrriSedo Flow",
-        "generic": false,
-        "items": 28,
-        "share": 10.9
-       },
-       {
-        "code": "21280000164",
-        "label": "Qufora IrriSedo MiniGo",
-        "generic": false,
-        "items": 24,
-        "share": 9.3
-       }
-      ]
-     },
-     {
-      "icb": "QT1",
-      "name": "NHS Nottingham and Nottinghamshire",
-      "items": 254,
-      "leaders": [
-       {
-        "code": "21280000172",
-        "label": "Peristeen Plus anal irrigation system accessory unit regular",
-        "generic": false,
-        "items": 29,
-        "share": 11.4
-       },
-       {
-        "code": "21280000109",
-        "label": "Qufora IrriSedo Cone System",
-        "generic": false,
-        "items": 25,
-        "share": 9.8
-       },
-       {
-        "code": "21280000147",
-        "label": "Aquaflush Cone Refill Pack standard cones",
-        "generic": false,
-        "items": 21,
-        "share": 8.3
-       }
-      ]
-     },
-     {
-      "icb": "QOC",
-      "name": "NHS Shropshire, Telford and Wrekin",
-      "items": 178,
-      "leaders": [
-       {
-        "code": "21280000172",
-        "label": "Peristeen Plus anal irrigation system accessory unit regular",
-        "generic": false,
-        "items": 28,
-        "share": 15.7
-       },
-       {
-        "code": "21280000164",
-        "label": "Qufora IrriSedo MiniGo",
-        "generic": false,
-        "items": 20,
-        "share": 11.2
-       },
-       {
-        "code": "21280000179",
-        "label": "Qufora IrriSedo Flow",
-        "generic": false,
-        "items": 18,
-        "share": 10.1
-       }
-      ]
-     },
-     {
-      "icb": "QSL",
-      "name": "NHS Somerset",
-      "items": 187,
-      "leaders": [
-       {
-        "code": "21280000164",
-        "label": "Qufora IrriSedo MiniGo",
-        "generic": false,
-        "items": 32,
-        "share": 17.1
+        "items": 44,
+        "share": 18.3
        },
        {
         "code": "21280000179",
         "label": "Qufora IrriSedo Flow",
         "generic": false,
         "items": 27,
-        "share": 14.4
+        "share": 11.2
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 25,
+        "share": 10.4
+       }
+      ]
+     },
+     {
+      "icb": "QT1",
+      "name": "NHS Nottingham and Nottinghamshire",
+      "items": 224,
+      "leaders": [
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 22,
+        "share": 9.8
+       },
+       {
+        "code": "21280000109",
+        "label": "Qufora IrriSedo Cone System",
+        "generic": false,
+        "items": 21,
+        "share": 9.4
+       },
+       {
+        "code": "21280000147",
+        "label": "Aquaflush Cone Refill Pack standard cones",
+        "generic": false,
+        "items": 19,
+        "share": 8.5
+       }
+      ]
+     },
+     {
+      "icb": "QOC",
+      "name": "NHS Shropshire, Telford and Wrekin",
+      "items": 168,
+      "leaders": [
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 17,
+        "share": 10.1
        },
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 26,
-        "share": 13.9
+        "items": 16,
+        "share": 9.5
+       },
+       {
+        "code": "21280000185",
+        "label": "Peristeen Light anal irrigation system",
+        "generic": false,
+        "items": 14,
+        "share": 8.3
+       }
+      ]
+     },
+     {
+      "icb": "QSL",
+      "name": "NHS Somerset",
+      "items": 169,
+      "leaders": [
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 24,
+        "share": 14.2
+       },
+       {
+        "code": "21280000179",
+        "label": "Qufora IrriSedo Flow",
+        "generic": false,
+        "items": 22,
+        "share": 13.0
+       },
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 18,
+        "share": 10.7
        }
       ]
      },
      {
       "icb": "QKK",
       "name": "NHS South East London",
-      "items": 780,
+      "items": 752,
       "leaders": [
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 113,
-        "share": 14.5
+        "items": 87,
+        "share": 11.6
        },
        {
         "code": "21280000179",
         "label": "Qufora IrriSedo Flow",
         "generic": false,
         "items": 84,
-        "share": 10.8
+        "share": 11.2
        },
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 80,
-        "share": 10.3
+        "items": 79,
+        "share": 10.5
        }
       ]
      },
      {
       "icb": "QWE",
       "name": "NHS South West London",
-      "items": 473,
+      "items": 399,
       "leaders": [
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 85,
-        "share": 18.0
+        "items": 73,
+        "share": 18.3
        },
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 46,
-        "share": 9.7
+        "items": 37,
+        "share": 9.3
        },
        {
-        "code": "21280000165",
-        "label": "Qufora IrriSedo MiniGo Flex",
+        "code": "21280000142",
+        "label": "Navina Consumable Set",
         "generic": false,
-        "items": 35,
-        "share": 7.4
+        "items": 31,
+        "share": 7.8
        }
       ]
      },
      {
       "icb": "QF7",
       "name": "NHS South Yorkshire",
-      "items": 569,
+      "items": 481,
       "leaders": [
-       {
-        "code": "21280000172",
-        "label": "Peristeen Plus anal irrigation system accessory unit regular",
-        "generic": false,
-        "items": 92,
-        "share": 16.2
-       },
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 83,
-        "share": 14.6
+        "items": 81,
+        "share": 16.8
+       },
+       {
+        "code": "21280000172",
+        "label": "Peristeen Plus anal irrigation system accessory unit regular",
+        "generic": false,
+        "items": 78,
+        "share": 16.2
        },
        {
         "code": "21280000109",
         "label": "Qufora IrriSedo Cone System",
         "generic": false,
-        "items": 55,
-        "share": 9.7
+        "items": 47,
+        "share": 9.8
        }
       ]
      },
      {
       "icb": "QNC",
       "name": "NHS Staffordshire and Stoke-on-trent",
-      "items": 366,
+      "items": 337,
       "leaders": [
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 40,
-        "share": 10.9
+        "items": 45,
+        "share": 13.4
        },
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 35,
-        "share": 9.6
+        "items": 28,
+        "share": 8.3
        },
        {
-        "code": "21280000179",
-        "label": "Qufora IrriSedo Flow",
+        "code": "21280000191",
+        "label": "Peristeen Light anal irrigation system with extension tube",
         "generic": false,
-        "items": 32,
-        "share": 8.7
+        "items": 25,
+        "share": 7.4
        }
       ]
      },
      {
       "icb": "S9B9J",
       "name": "NHS Surrey and Sussex",
-      "items": 955,
+      "items": 961,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 130,
-        "share": 13.6
+        "items": 139,
+        "share": 14.5
        },
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 101,
-        "share": 10.6
+        "items": 91,
+        "share": 9.5
        },
        {
-        "code": "21280000179",
-        "label": "Qufora IrriSedo Flow",
+        "code": "21280000169",
+        "label": "Peristeen Plus anal irrigation system regular",
         "generic": false,
-        "items": 86,
-        "share": 9.0
+        "items": 75,
+        "share": 7.8
        }
       ]
      },
      {
       "icb": "S0E4D",
       "name": "NHS Thames Valley",
-      "items": 962,
+      "items": 862,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 172,
-        "share": 17.9
+        "items": 143,
+        "share": 16.6
        },
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 145,
-        "share": 15.1
+        "items": 140,
+        "share": 16.2
        },
        {
         "code": "21280000179",
         "label": "Qufora IrriSedo Flow",
         "generic": false,
-        "items": 99,
-        "share": 10.3
+        "items": 94,
+        "share": 10.9
        }
       ]
      },
      {
       "icb": "QWO",
       "name": "NHS West Yorkshire",
-      "items": 1586,
+      "items": 1313,
       "leaders": [
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 255,
-        "share": 16.1
-       },
-       {
-        "code": "21280000164",
-        "label": "Qufora IrriSedo MiniGo",
-        "generic": false,
-        "items": 165,
-        "share": 10.4
+        "items": 215,
+        "share": 16.4
        },
        {
         "code": "21280000165",
         "label": "Qufora IrriSedo MiniGo Flex",
         "generic": false,
-        "items": 142,
-        "share": 9.0
+        "items": 139,
+        "share": 10.6
+       },
+       {
+        "code": "21280000164",
+        "label": "Qufora IrriSedo MiniGo",
+        "generic": false,
+        "items": 113,
+        "share": 8.6
        }
       ]
      },
      {
       "icb": "Z9B2Z",
       "name": "NHS West and North London",
-      "items": 1054,
+      "items": 1000,
       "leaders": [
        {
         "code": "21280000164",
         "label": "Qufora IrriSedo MiniGo",
         "generic": false,
-        "items": 158,
-        "share": 15.0
+        "items": 160,
+        "share": 16.0
        },
        {
         "code": "21280000179",
         "label": "Qufora IrriSedo Flow",
         "generic": false,
-        "items": 129,
-        "share": 12.2
+        "items": 137,
+        "share": 13.7
        },
        {
         "code": "21280000172",
         "label": "Peristeen Plus anal irrigation system accessory unit regular",
         "generic": false,
-        "items": 121,
-        "share": 11.5
+        "items": 122,
+        "share": 12.2
        }
       ]
      }
@@ -4858,13 +4858,13 @@
     ],
     "primary": {
      "basis": "items",
-     "latestPeriod": "202607",
+     "latestPeriod": "202608",
      "window12m": [
-      "202508",
-      "202607"
+      "202509",
+      "202608"
      ],
-     "items": 138012,
-     "items12m": 1510348,
+     "items": 124835,
+     "items12m": 1519268,
      "brandCount": 66,
      "topN": 12,
      "brands": [
@@ -4876,45 +4876,45 @@
         "SpeediCath Compact catheter female",
         "SpeediCath Flex catheter male",
         "SpeediCath Compact Plus catheter female",
-        "SpeediCath catheter male"
+        "SpeediCath Compact Eve catheter female"
        ],
-       "items": 24608,
-       "share": 17.8,
-       "cost": 5851347,
-       "items12m": 287376,
-       "share12m": 19.0,
-       "yoy": -6.1,
+       "items": 21924,
+       "share": 17.6,
+       "cost": 5211577,
+       "items12m": 284679,
+       "share12m": 18.7,
+       "yoy": -11.0,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 1626,
-         "shareOfIcb": 20.9
-        },
-        {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 1398,
-         "shareOfIcb": 21.3
+         "items": 1426,
+         "shareOfIcb": 20.8
         },
         {
          "icb": "S9B9J",
          "name": "NHS Surrey and Sussex",
-         "items": 1391,
-         "shareOfIcb": 17.5
+         "items": 1278,
+         "shareOfIcb": 17.3
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 1382,
-         "shareOfIcb": 15.6
+         "items": 1245,
+         "shareOfIcb": 16.0
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 1218,
+         "shareOfIcb": 20.9
         },
         {
          "icb": "T6Y0W",
          "name": "NHS Norfolk and Suffolk",
-         "items": 1218,
-         "shareOfIcb": 22.2
+         "items": 1078,
+         "shareOfIcb": 21.6
         }
        ]
       },
@@ -4925,94 +4925,46 @@
         "Prosys all silicone catheter male",
         "Prosys all silicone open ended catheter male",
         "Prosys Vesica Community Catheterisation Pack",
-        "Prosys Vesica Community Catheterisation Pack LT",
-        "Prosys all silicone catheter female"
+        "Prosys all silicone catheter female",
+        "Prosys Vesica Community Catheterisation Pack LT"
        ],
-       "items": 16855,
-       "share": 12.2,
-       "cost": 306818,
-       "items12m": 170749,
-       "share12m": 11.3,
-       "yoy": 35.7,
+       "items": 14936,
+       "share": 12.0,
+       "cost": 265186,
+       "items12m": 174086,
+       "share12m": 11.5,
+       "yoy": 28.8,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 1517,
-         "shareOfIcb": 17.1
+         "items": 1277,
+         "shareOfIcb": 16.4
         },
         {
          "icb": "QGH",
          "name": "NHS Herefordshire and Worcestershire",
-         "items": 1089,
-         "shareOfIcb": 37.7
+         "items": 1062,
+         "shareOfIcb": 36.9
         },
         {
          "icb": "QE1",
          "name": "NHS Lancashire and South Cumbria",
-         "items": 921,
-         "shareOfIcb": 18.3
+         "items": 977,
+         "shareOfIcb": 20.4
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 823,
-         "shareOfIcb": 10.6
+         "items": 751,
+         "shareOfIcb": 10.9
         },
-        {
-         "icb": "T6Y0W",
-         "name": "NHS Norfolk and Suffolk",
-         "items": 791,
-         "shareOfIcb": 14.4
-        }
-       ]
-      },
-      {
-       "brand": "Brillant",
-       "generic": false,
-       "products": [
-        "Brillant AquaFlate all silicone catheter male",
-        "Brillant AquaFlate all silicone catheter female",
-        "Brillant Plus AquaFlate all silicone catheter male"
-       ],
-       "items": 13211,
-       "share": 9.6,
-       "cost": 204395,
-       "items12m": 142448,
-       "share12m": 9.4,
-       "yoy": 4.6,
-       "icbsPrescribing": 36,
-       "topIcbs": [
         {
          "icb": "S9B9J",
          "name": "NHS Surrey and Sussex",
-         "items": 1089,
-         "shareOfIcb": 13.7
-        },
-        {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 1058,
-         "shareOfIcb": 17.6
-        },
-        {
-         "icb": "S0E4D",
-         "name": "NHS Thames Valley",
-         "items": 945,
-         "shareOfIcb": 19.6
-        },
-        {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 889,
-         "shareOfIcb": 11.4
-        },
-        {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 855,
-         "shareOfIcb": 13.0
+         "items": 732,
+         "shareOfIcb": 9.9
         }
        ]
       },
@@ -5026,43 +4978,91 @@
         "LoFric Origo catheter male flexible",
         "LoFric catheter male non PVC"
        ],
-       "items": 12970,
-       "share": 9.4,
-       "cost": 2582717,
-       "items12m": 152541,
+       "items": 12826,
+       "share": 10.3,
+       "cost": 2597139,
+       "items12m": 153167,
        "share12m": 10.1,
-       "yoy": -6.4,
+       "yoy": 5.1,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QF7",
          "name": "NHS South Yorkshire",
-         "items": 824,
-         "shareOfIcb": 20.1
-        },
-        {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 781,
-         "shareOfIcb": 13.0
+         "items": 879,
+         "shareOfIcb": 22.3
         },
         {
          "icb": "S9B9J",
          "name": "NHS Surrey and Sussex",
-         "items": 779,
-         "shareOfIcb": 9.8
+         "items": 778,
+         "shareOfIcb": 10.5
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 699,
-         "shareOfIcb": 11.7
+         "items": 711,
+         "shareOfIcb": 12.8
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 679,
-         "shareOfIcb": 10.3
+         "items": 658,
+         "shareOfIcb": 11.3
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 651,
+         "shareOfIcb": 12.3
+        }
+       ]
+      },
+      {
+       "brand": "Brillant",
+       "generic": false,
+       "products": [
+        "Brillant AquaFlate all silicone catheter male",
+        "Brillant AquaFlate all silicone catheter female",
+        "Brillant Plus AquaFlate all silicone catheter male"
+       ],
+       "items": 11879,
+       "share": 9.5,
+       "cost": 179301,
+       "items12m": 143969,
+       "share12m": 9.5,
+       "yoy": 14.7,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 1009,
+         "shareOfIcb": 19.1
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 966,
+         "shareOfIcb": 13.1
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 830,
+         "shareOfIcb": 12.1
+        },
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 806,
+         "shareOfIcb": 19.0
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 789,
+         "shareOfIcb": 13.6
         }
        ]
       },
@@ -5074,44 +5074,44 @@
         "VaPro No Touch catheter male",
         "VaPro Plus Pocket No Touch catheter male",
         "VaPro F-Style No Touch catheter male",
-        "VaPro hydrophilic catheter male Tiemann tip"
+        "VaPro Plus No Touch catheter male"
        ],
-       "items": 10750,
-       "share": 7.8,
-       "cost": 2549043,
-       "items12m": 116177,
+       "items": 9604,
+       "share": 7.7,
+       "cost": 2266276,
+       "items12m": 116999,
        "share12m": 7.7,
-       "yoy": 6.9,
+       "yoy": 9.4,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QE1",
          "name": "NHS Lancashire and South Cumbria",
-         "items": 1021,
-         "shareOfIcb": 20.3
-        },
-        {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 708,
-         "shareOfIcb": 9.1
+         "items": 950,
+         "shareOfIcb": 19.8
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 592,
-         "shareOfIcb": 9.9
+         "items": 562,
+         "shareOfIcb": 10.1
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 560,
+         "shareOfIcb": 8.2
         },
         {
          "icb": "Z9B2Z",
          "name": "NHS West and North London",
-         "items": 520,
-         "shareOfIcb": 10.7
+         "items": 467,
+         "shareOfIcb": 10.9
         },
         {
          "icb": "S0E4D",
          "name": "NHS Thames Valley",
-         "items": 512,
+         "items": 451,
          "shareOfIcb": 10.6
         }
        ]
@@ -5124,43 +5124,43 @@
         "Luja catheter male",
         "Luja pocket size catheter male"
        ],
-       "items": 7283,
+       "items": 6633,
        "share": 5.3,
-       "cost": 1682614,
-       "items12m": 73272,
+       "cost": 1523862,
+       "items12m": 74769,
        "share12m": 4.9,
-       "yoy": 43.3,
+       "yoy": 29.1,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 727,
-         "shareOfIcb": 9.4
+         "items": 642,
+         "shareOfIcb": 9.3
         },
         {
          "icb": "S9B9J",
          "name": "NHS Surrey and Sussex",
-         "items": 493,
-         "shareOfIcb": 6.2
-        },
-        {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 475,
-         "shareOfIcb": 7.2
+         "items": 447,
+         "shareOfIcb": 6.1
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 461,
-         "shareOfIcb": 5.2
+         "items": 396,
+         "shareOfIcb": 5.1
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 389,
+         "shareOfIcb": 6.7
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 414,
-         "shareOfIcb": 6.9
+         "items": 379,
+         "shareOfIcb": 7.2
         }
        ]
       },
@@ -5172,43 +5172,43 @@
         "Libra Cath Kit catheter male long tube",
         "Libra Cath Kit catheter male short tube"
        ],
-       "items": 6474,
-       "share": 4.7,
-       "cost": 167236,
-       "items12m": 68954,
+       "items": 5683,
+       "share": 4.6,
+       "cost": 146033,
+       "items12m": 70039,
        "share12m": 4.6,
-       "yoy": 37.8,
+       "yoy": 23.6,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
-         "icb": "QJK",
-         "name": "NHS Devon",
-         "items": 504,
-         "shareOfIcb": 12.8
-        },
-        {
-         "icb": "Z9B2Z",
-         "name": "NHS West and North London",
-         "items": 503,
-         "shareOfIcb": 10.4
-        },
-        {
          "icb": "QUY",
          "name": "NHS Bristol, North Somerset and South Gloucestershire",
-         "items": 494,
-         "shareOfIcb": 18.4
+         "items": 466,
+         "shareOfIcb": 19.5
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 477,
-         "shareOfIcb": 5.4
+         "items": 457,
+         "shareOfIcb": 5.9
         },
         {
          "icb": "S9B9J",
          "name": "NHS Surrey and Sussex",
-         "items": 463,
-         "shareOfIcb": 5.8
+         "items": 434,
+         "shareOfIcb": 5.9
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 423,
+         "shareOfIcb": 9.9
+        },
+        {
+         "icb": "QJK",
+         "name": "NHS Devon",
+         "items": 408,
+         "shareOfIcb": 11.4
         }
        ]
       },
@@ -5222,93 +5222,43 @@
         "Biocath Comprehensive Care Foley Tray catheter male small",
         "Biocath hydrogel coated catheter male"
        ],
-       "items": 4900,
+       "items": 4501,
        "share": 3.6,
-       "cost": 169810,
-       "items12m": 60082,
-       "share12m": 4.0,
-       "yoy": -15.4,
+       "cost": 153378,
+       "items12m": 59595,
+       "share12m": 3.9,
+       "yoy": -9.8,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QJK",
          "name": "NHS Devon",
-         "items": 613,
-         "shareOfIcb": 15.6
+         "items": 547,
+         "shareOfIcb": 15.3
         },
         {
          "icb": "QOQ",
          "name": "NHS Humber and North Yorkshire",
-         "items": 479,
-         "shareOfIcb": 9.2
+         "items": 418,
+         "shareOfIcb": 8.8
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 353,
-         "shareOfIcb": 4.5
+         "items": 402,
+         "shareOfIcb": 5.9
+        },
+        {
+         "icb": "QGH",
+         "name": "NHS Herefordshire and Worcestershire",
+         "items": 321,
+         "shareOfIcb": 11.1
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 320,
-         "shareOfIcb": 3.6
-        },
-        {
-         "icb": "QR1",
-         "name": "NHS Gloucestershire",
-         "items": 275,
-         "shareOfIcb": 16.7
-        }
-       ]
-      },
-      {
-       "brand": "Actreen",
-       "generic": false,
-       "products": [
-        "Actreen Mini Cath catheter female",
-        "Actreen Mini set catheter female",
-        "Actreen Hi-Lite catheter male Tiemann tip",
-        "Actreen Hi-Lite catheter male",
-        "Actreen Hi-Lite catheter female"
-       ],
-       "items": 4509,
-       "share": 3.3,
-       "cost": 927018,
-       "items12m": 50588,
-       "share12m": 3.3,
-       "yoy": 4.8,
-       "icbsPrescribing": 36,
-       "topIcbs": [
-        {
-         "icb": "QHM",
-         "name": "NHS North East and North Cumbria",
-         "items": 1217,
-         "shareOfIcb": 13.7
-        },
-        {
-         "icb": "S9B9J",
-         "name": "NHS Surrey and Sussex",
-         "items": 476,
-         "shareOfIcb": 6.0
-        },
-        {
-         "icb": "QOQ",
-         "name": "NHS Humber and North Yorkshire",
-         "items": 428,
-         "shareOfIcb": 8.2
-        },
-        {
-         "icb": "QJK",
-         "name": "NHS Devon",
-         "items": 295,
-         "shareOfIcb": 7.5
-        },
-        {
-         "icb": "QF7",
-         "name": "NHS South Yorkshire",
-         "items": 245,
-         "shareOfIcb": 6.0
+         "items": 285,
+         "shareOfIcb": 3.7
         }
        ]
       },
@@ -5322,92 +5272,93 @@
         "LINC all silicone catheter with integral balloon and glycerine filled syringe standard",
         "LINC all silicone catheter with integral balloon and glycerine filled syringe male"
        ],
-       "items": 4473,
-       "share": 3.2,
-       "cost": 139691,
-       "items12m": 50952,
+       "items": 4111,
+       "share": 3.3,
+       "cost": 122875,
+       "items12m": 51284,
        "share12m": 3.4,
-       "yoy": 10.4,
+       "yoy": 8.8,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "D7T5G",
          "name": "NHS Essex",
-         "items": 383,
-         "shareOfIcb": 10.3
-        },
-        {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 347,
-         "shareOfIcb": 5.3
+         "items": 359,
+         "shareOfIcb": 10.7
         },
         {
          "icb": "QUA",
          "name": "NHS Black Country",
-         "items": 343,
-         "shareOfIcb": 10.5
+         "items": 331,
+         "shareOfIcb": 11.2
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 313,
+         "shareOfIcb": 5.4
         },
         {
          "icb": "QOQ",
          "name": "NHS Humber and North Yorkshire",
-         "items": 312,
-         "shareOfIcb": 6.0
+         "items": 272,
+         "shareOfIcb": 5.7
         },
         {
-         "icb": "S0E4D",
-         "name": "NHS Thames Valley",
-         "items": 257,
-         "shareOfIcb": 5.3
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 231,
+         "shareOfIcb": 3.1
         }
        ]
       },
       {
-       "brand": "Infyna",
+       "brand": "Actreen",
        "generic": false,
        "products": [
-        "Infyna Chic hydrophilic catheter female",
-        "Infyna Plus hydrophilic catheter female",
-        "Infyna hydrophilic catheter female",
-        "Infyna hydrophilic catheter male"
+        "Actreen Mini Cath catheter female",
+        "Actreen Mini set catheter female",
+        "Actreen Hi-Lite catheter male Tiemann tip",
+        "Actreen Hi-Lite catheter male",
+        "Actreen Hi-Lite catheter female"
        ],
-       "items": 3450,
-       "share": 2.5,
-       "cost": 666230,
-       "items12m": 36196,
-       "share12m": 2.4,
-       "yoy": 15.6,
+       "items": 3852,
+       "share": 3.1,
+       "cost": 801672,
+       "items12m": 50218,
+       "share12m": 3.3,
+       "yoy": -8.8,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 242,
-         "shareOfIcb": 2.7
+         "items": 948,
+         "shareOfIcb": 12.2
         },
         {
-         "icb": "QWO",
-         "name": "NHS West Yorkshire",
-         "items": 239,
-         "shareOfIcb": 4.0
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 377,
+         "shareOfIcb": 7.9
         },
         {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 209,
-         "shareOfIcb": 2.7
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 373,
+         "shareOfIcb": 5.1
         },
         {
-         "icb": "QE1",
-         "name": "NHS Lancashire and South Cumbria",
-         "items": 174,
-         "shareOfIcb": 3.5
+         "icb": "QJK",
+         "name": "NHS Devon",
+         "items": 266,
+         "shareOfIcb": 7.5
         },
         {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 173,
-         "shareOfIcb": 2.9
+         "icb": "QF7",
+         "name": "NHS South Yorkshire",
+         "items": 240,
+         "shareOfIcb": 6.1
         }
        ]
       },
@@ -5421,43 +5372,92 @@
         "Liquick X-treme Plus catheter male",
         "Liquick X-treme catheter male Tiemann tip"
        ],
-       "items": 3400,
+       "items": 3114,
        "share": 2.5,
-       "cost": 608480,
-       "items12m": 35575,
+       "cost": 562091,
+       "items12m": 35856,
        "share12m": 2.4,
-       "yoy": 5.0,
+       "yoy": 9.9,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 347,
-         "shareOfIcb": 4.5
-        },
-        {
          "icb": "T6Y0W",
          "name": "NHS Norfolk and Suffolk",
-         "items": 342,
-         "shareOfIcb": 6.2
-        },
-        {
-         "icb": "QRL",
-         "name": "NHS Hampshire and Isle of Wight",
-         "items": 330,
-         "shareOfIcb": 7.8
+         "items": 323,
+         "shareOfIcb": 6.5
         },
         {
          "icb": "S9B9J",
          "name": "NHS Surrey and Sussex",
-         "items": 329,
-         "shareOfIcb": 4.1
+         "items": 294,
+         "shareOfIcb": 4.0
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 293,
+         "shareOfIcb": 4.3
+        },
+        {
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
+         "items": 265,
+         "shareOfIcb": 6.7
         },
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 206,
-         "shareOfIcb": 2.3
+         "items": 197,
+         "shareOfIcb": 2.5
+        }
+       ]
+      },
+      {
+       "brand": "Infyna",
+       "generic": false,
+       "products": [
+        "Infyna Chic hydrophilic catheter female",
+        "Infyna Plus hydrophilic catheter female",
+        "Infyna hydrophilic catheter female",
+        "Infyna hydrophilic catheter male"
+       ],
+       "items": 2952,
+       "share": 2.4,
+       "cost": 589452,
+       "items12m": 36448,
+       "share12m": 2.4,
+       "yoy": 9.3,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 221,
+         "shareOfIcb": 2.8
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 190,
+         "shareOfIcb": 2.8
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 185,
+         "shareOfIcb": 3.3
+        },
+        {
+         "icb": "QE1",
+         "name": "NHS Lancashire and South Cumbria",
+         "items": 170,
+         "shareOfIcb": 3.5
+        },
+        {
+         "icb": "QKS",
+         "name": "NHS Kent and Medway",
+         "items": 133,
+         "shareOfIcb": 3.5
         }
        ]
       },
@@ -5468,43 +5468,43 @@
         "Sympacath AquaFlate hydrogel coated latex catheter male",
         "Sympacath AquaFlate hydrogel coated latex catheter female"
        ],
-       "items": 3059,
+       "items": 2739,
        "share": 2.2,
-       "cost": 51784,
-       "items12m": 35533,
-       "share12m": 2.4,
-       "yoy": -5.9,
+       "cost": 46608,
+       "items12m": 35219,
+       "share12m": 2.3,
+       "yoy": -10.3,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 432,
-         "shareOfIcb": 6.6
-        },
-        {
          "icb": "QE1",
          "name": "NHS Lancashire and South Cumbria",
-         "items": 429,
-         "shareOfIcb": 8.5
+         "items": 418,
+         "shareOfIcb": 8.7
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 378,
+         "shareOfIcb": 6.5
         },
         {
          "icb": "T6Y0W",
          "name": "NHS Norfolk and Suffolk",
-         "items": 343,
-         "shareOfIcb": 6.3
+         "items": 281,
+         "shareOfIcb": 5.6
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 242,
-         "shareOfIcb": 4.0
+         "items": 216,
+         "shareOfIcb": 4.1
         },
         {
          "icb": "QOQ",
          "name": "NHS Humber and North Yorkshire",
-         "items": 197,
-         "shareOfIcb": 3.8
+         "items": 198,
+         "shareOfIcb": 4.2
         }
        ]
       },
@@ -5515,46 +5515,46 @@
         "Lubri-Sil Comprehensive Care Foley Tray catheter male large",
         "Lubri-Sil Aquafil hydrogel coated silicone catheter male",
         "Lubri-Sil Comprehensive Care Foley Tray catheter male medium",
-        "Lubri-Sil Aquafil hydrogel coated silicone catheter female",
-        "Lubri-Sil Comprehensive Care Foley Tray catheter male small"
+        "Lubri-Sil Comprehensive Care Foley Tray catheter female large",
+        "Lubri-Sil Aquafil hydrogel coated silicone catheter female"
        ],
-       "items": 2321,
-       "share": 1.7,
-       "cost": 88930,
-       "items12m": 25477,
+       "items": 1894,
+       "share": 1.5,
+       "cost": 70619,
+       "items12m": 25376,
        "share12m": 1.7,
-       "yoy": 1.5,
+       "yoy": -5.1,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QOQ",
          "name": "NHS Humber and North Yorkshire",
-         "items": 372,
-         "shareOfIcb": 7.1
+         "items": 318,
+         "shareOfIcb": 6.7
         },
         {
          "icb": "QUA",
          "name": "NHS Black Country",
-         "items": 171,
-         "shareOfIcb": 5.2
-        },
-        {
-         "icb": "Z9B2Z",
-         "name": "NHS West and North London",
-         "items": 159,
-         "shareOfIcb": 3.3
+         "items": 174,
+         "shareOfIcb": 5.9
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 146,
-         "shareOfIcb": 2.4
+         "items": 141,
+         "shareOfIcb": 2.7
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 116,
+         "shareOfIcb": 2.7
         },
         {
          "icb": "QKS",
          "name": "NHS Kent and Medway",
-         "items": 134,
-         "shareOfIcb": 3.2
+         "items": 112,
+         "shareOfIcb": 3.0
         }
        ]
       },
@@ -5566,45 +5566,45 @@
         "WyCath hydrophilic meatal dilatation catheter male taper tip",
         "WyCath H2O hydrophilic catheter male taper tip",
         "WyCath H2O hydrophilic catheter male",
-        "WyCath uncoated catheter standard"
+        "WyCath uncoated catheter paediatric soft tip"
        ],
-       "items": 2006,
-       "share": 1.5,
-       "cost": 216239,
-       "items12m": 21156,
+       "items": 1781,
+       "share": 1.4,
+       "cost": 191452,
+       "items12m": 21382,
        "share12m": 1.4,
-       "yoy": 14.2,
+       "yoy": 14.5,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 201,
+         "items": 181,
          "shareOfIcb": 2.3
         },
         {
          "icb": "QF7",
          "name": "NHS South Yorkshire",
-         "items": 159,
-         "shareOfIcb": 3.9
+         "items": 143,
+         "shareOfIcb": 3.6
         },
         {
          "icb": "QRL",
          "name": "NHS Hampshire and Isle of Wight",
-         "items": 112,
-         "shareOfIcb": 2.6
+         "items": 120,
+         "shareOfIcb": 3.0
         },
         {
          "icb": "QOP",
          "name": "NHS Greater Manchester",
-         "items": 108,
+         "items": 96,
          "shareOfIcb": 1.8
         },
         {
          "icb": "QJK",
          "name": "NHS Devon",
-         "items": 101,
-         "shareOfIcb": 2.6
+         "items": 83,
+         "shareOfIcb": 2.3
         }
        ]
       },
@@ -5614,43 +5614,139 @@
        "products": [
         "Ugo"
        ],
-       "items": 1360,
+       "items": 1300,
        "share": 1.0,
-       "cost": 18188,
-       "items12m": 11525,
+       "cost": 17362,
+       "items12m": 12230,
        "share12m": 0.8,
-       "yoy": 163.1,
+       "yoy": 118.5,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 151,
-         "shareOfIcb": 1.9
+         "items": 140,
+         "shareOfIcb": 2.0
         },
         {
          "icb": "S0E4D",
          "name": "NHS Thames Valley",
-         "items": 146,
+         "items": 125,
          "shareOfIcb": 3.0
         },
         {
          "icb": "S9B9J",
          "name": "NHS Surrey and Sussex",
-         "items": 121,
-         "shareOfIcb": 1.5
-        },
-        {
-         "icb": "QWO",
-         "name": "NHS West Yorkshire",
-         "items": 80,
-         "shareOfIcb": 1.3
+         "items": 123,
+         "shareOfIcb": 1.7
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 74,
-         "shareOfIcb": 1.1
+         "items": 87,
+         "shareOfIcb": 1.5
+        },
+        {
+         "icb": "QF7",
+         "name": "NHS South Yorkshire",
+         "items": 76,
+         "shareOfIcb": 1.9
+        }
+       ]
+      },
+      {
+       "brand": "Ugopro",
+       "generic": false,
+       "products": [
+        "Ugopro Catheterisation Procedure Pack"
+       ],
+       "items": 1210,
+       "share": 1.0,
+       "cost": 5883,
+       "items12m": 11495,
+       "share12m": 0.8,
+       "yoy": 94.2,
+       "icbsPrescribing": 35,
+       "topIcbs": [
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 267,
+         "shareOfIcb": 6.3
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 113,
+         "shareOfIcb": 1.5
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 107,
+         "shareOfIcb": 1.8
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 92,
+         "shareOfIcb": 1.7
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 75,
+         "shareOfIcb": 1.0
+        }
+       ]
+      },
+      {
+       "brand": "SensaCath",
+       "generic": false,
+       "products": [
+        "SensaCath Flex catheter male",
+        "SensaCath hydrophilic catheter male",
+        "SensaCath Aqua hydrophilic catheter male",
+        "SensaCath hydrophilic catheter female",
+        "SensaCath Flex Compact catheter standard"
+       ],
+       "items": 1192,
+       "share": 1.0,
+       "cost": 149758,
+       "items12m": 11655,
+       "share12m": 0.8,
+       "yoy": 54.2,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
+         "items": 224,
+         "shareOfIcb": 5.6
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 213,
+         "shareOfIcb": 2.9
+        },
+        {
+         "icb": "QMF",
+         "name": "NHS North East London",
+         "items": 157,
+         "shareOfIcb": 6.2
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 65,
+         "shareOfIcb": 0.8
+        },
+        {
+         "icb": "QKS",
+         "name": "NHS Kent and Medway",
+         "items": 45,
+         "shareOfIcb": 1.2
         }
        ]
       },
@@ -5664,139 +5760,43 @@
         "iQ Cath catheter male",
         "iQ Cath hydrophilic catheter female"
        ],
-       "items": 1317,
-       "share": 1.0,
-       "cost": 268932,
-       "items12m": 14460,
+       "items": 1181,
+       "share": 0.9,
+       "cost": 243205,
+       "items12m": 14495,
        "share12m": 1.0,
-       "yoy": 1.5,
+       "yoy": 3.1,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QVV",
          "name": "NHS Dorset",
-         "items": 274,
-         "shareOfIcb": 10.8
+         "items": 268,
+         "shareOfIcb": 11.9
         },
         {
          "icb": "QJ2",
          "name": "NHS Derby and Derbyshire",
-         "items": 130,
-         "shareOfIcb": 4.4
-        },
-        {
-         "icb": "QOP",
-         "name": "NHS Greater Manchester",
-         "items": 78,
-         "shareOfIcb": 1.3
-        },
-        {
-         "icb": "QOX",
-         "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-         "items": 69,
-         "shareOfIcb": 2.8
+         "items": 123,
+         "shareOfIcb": 4.8
         },
         {
          "icb": "D7T5G",
          "name": "NHS Essex",
-         "items": 63,
-         "shareOfIcb": 1.7
-        }
-       ]
-      },
-      {
-       "brand": "Ugopro",
-       "generic": false,
-       "products": [
-        "Ugopro Catheterisation Procedure Pack"
-       ],
-       "items": 1283,
-       "share": 0.9,
-       "cost": 6240,
-       "items12m": 10908,
-       "share12m": 0.7,
-       "yoy": 62.6,
-       "icbsPrescribing": 35,
-       "topIcbs": [
+         "items": 69,
+         "shareOfIcb": 2.1
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 60,
+         "shareOfIcb": 1.1
+        },
         {
          "icb": "S0E4D",
          "name": "NHS Thames Valley",
-         "items": 260,
-         "shareOfIcb": 5.4
-        },
-        {
-         "icb": "S9B9J",
-         "name": "NHS Surrey and Sussex",
-         "items": 112,
-         "shareOfIcb": 1.4
-        },
-        {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 109,
-         "shareOfIcb": 1.7
-        },
-        {
-         "icb": "QYG",
-         "name": "NHS Cheshire and Merseyside",
-         "items": 102,
-         "shareOfIcb": 1.3
-        },
-        {
-         "icb": "QWO",
-         "name": "NHS West Yorkshire",
-         "items": 98,
-         "shareOfIcb": 1.6
-        }
-       ]
-      },
-      {
-       "brand": "SensaCath",
-       "generic": false,
-       "products": [
-        "SensaCath hydrophilic catheter male",
-        "SensaCath Flex catheter male",
-        "SensaCath Aqua hydrophilic catheter male",
-        "SensaCath hydrophilic catheter female",
-        "SensaCath Aqua hydrophilic catheter female"
-       ],
-       "items": 1141,
-       "share": 0.8,
-       "cost": 141223,
-       "items12m": 11236,
-       "share12m": 0.7,
-       "yoy": 32.8,
-       "icbsPrescribing": 36,
-       "topIcbs": [
-        {
-         "icb": "QRL",
-         "name": "NHS Hampshire and Isle of Wight",
-         "items": 269,
-         "shareOfIcb": 6.3
-        },
-        {
-         "icb": "S9B9J",
-         "name": "NHS Surrey and Sussex",
-         "items": 148,
-         "shareOfIcb": 1.9
-        },
-        {
-         "icb": "QMF",
-         "name": "NHS North East London",
-         "items": 111,
-         "shareOfIcb": 4.0
-        },
-        {
-         "icb": "QHM",
-         "name": "NHS North East and North Cumbria",
-         "items": 74,
-         "shareOfIcb": 0.8
-        },
-        {
-         "icb": "QT1",
-         "name": "NHS Nottingham and Nottinghamshire",
-         "items": 50,
-         "shareOfIcb": 2.1
+         "items": 49,
+         "shareOfIcb": 1.2
         }
        ]
       },
@@ -5810,43 +5810,90 @@
         "Bardex I.C. Bard Tray catheter female large",
         "Bardex I.C. Bard Tray catheter male small"
        ],
-       "items": 945,
+       "items": 835,
        "share": 0.7,
-       "cost": 33959,
-       "items12m": 11048,
+       "cost": 29546,
+       "items12m": 10972,
        "share12m": 0.7,
-       "yoy": -3.8,
+       "yoy": -8.3,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 88,
-         "shareOfIcb": 1.0
+         "items": 62,
+         "shareOfIcb": 0.8
         },
         {
          "icb": "QOQ",
          "name": "NHS Humber and North Yorkshire",
-         "items": 64,
-         "shareOfIcb": 1.2
-        },
-        {
-         "icb": "QJK",
-         "name": "NHS Devon",
-         "items": 63,
-         "shareOfIcb": 1.6
+         "items": 61,
+         "shareOfIcb": 1.3
         },
         {
          "icb": "QT6",
          "name": "NHS Cornwall and the Isles of Scilly",
-         "items": 59,
-         "shareOfIcb": 3.6
+         "items": 56,
+         "shareOfIcb": 3.9
+        },
+        {
+         "icb": "QJK",
+         "name": "NHS Devon",
+         "items": 51,
+         "shareOfIcb": 1.4
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 58,
-         "shareOfIcb": 0.9
+         "items": 46,
+         "shareOfIcb": 0.8
+        }
+       ]
+      },
+      {
+       "brand": "SpiritCare",
+       "generic": false,
+       "products": [
+        "SpiritCare all slc cath+pfs for ball inflation & supplementary syrg for ball deflation male",
+        "SpiritCare all slc cath + pfs for ball inflation & supp syrg for ball deflation female"
+       ],
+       "items": 792,
+       "share": 0.6,
+       "cost": 7769,
+       "items12m": 8212,
+       "share12m": 0.5,
+       "yoy": 24.3,
+       "icbsPrescribing": 7,
+       "topIcbs": [
+        {
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
+         "items": 608,
+         "shareOfIcb": 15.3
+        },
+        {
+         "icb": "QJ2",
+         "name": "NHS Derby and Derbyshire",
+         "items": 95,
+         "shareOfIcb": 3.7
+        },
+        {
+         "icb": "QT1",
+         "name": "NHS Nottingham and Nottinghamshire",
+         "items": 53,
+         "shareOfIcb": 2.5
+        },
+        {
+         "icb": "QWU",
+         "name": "NHS Coventry and Warwickshire",
+         "items": 2,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 2,
+         "shareOfIcb": 0.0
         }
        ]
       },
@@ -5860,92 +5907,186 @@
         "GC Air catheter male Tiemann tip",
         "GC Glide hydrophilic catheter male"
        ],
-       "items": 870,
+       "items": 782,
        "share": 0.6,
-       "cost": 151836,
-       "items12m": 5606,
+       "cost": 136248,
+       "items12m": 6103,
        "share12m": 0.4,
-       "yoy": 270.2,
+       "yoy": 174.4,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 107,
-         "shareOfIcb": 1.2
+         "items": 71,
+         "shareOfIcb": 0.9
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 70,
+         "items": 65,
          "shareOfIcb": 1.2
         },
         {
          "icb": "QKS",
          "name": "NHS Kent and Medway",
-         "items": 66,
+         "items": 59,
          "shareOfIcb": 1.6
         },
         {
          "icb": "T6Y0W",
          "name": "NHS Norfolk and Suffolk",
-         "items": 51,
+         "items": 44,
          "shareOfIcb": 0.9
         },
         {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 46,
-         "shareOfIcb": 0.7
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 38,
+         "shareOfIcb": 0.9
         }
        ]
       },
       {
-       "brand": "SpiritCare",
+       "brand": "GentleCath",
        "generic": false,
        "products": [
-        "SpiritCare all slc cath+pfs for ball inflation & supplementary syrg for ball deflation male",
-        "SpiritCare all slc cath + pfs for ball inflation & supp syrg for ball deflation female",
-        "SpiritCare hydrophilic catheter male",
-        "SpiritCare hydrophilic catheter female"
+        "GentleCath Glide hydrophilic catheter male",
+        "GentleCath Glide hydrophilic catheter female"
        ],
-       "items": 783,
+       "items": 718,
        "share": 0.6,
-       "cost": 7822,
-       "items12m": 8057,
-       "share12m": 0.5,
-       "yoy": 12.8,
-       "icbsPrescribing": 9,
+       "cost": 93777,
+       "items12m": 6445,
+       "share12m": 0.4,
+       "yoy": 115.6,
+       "icbsPrescribing": 36,
        "topIcbs": [
         {
-         "icb": "QRL",
-         "name": "NHS Hampshire and Isle of Wight",
-         "items": 560,
-         "shareOfIcb": 13.2
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 54,
+         "shareOfIcb": 0.7
         },
         {
-         "icb": "QJ2",
-         "name": "NHS Derby and Derbyshire",
-         "items": 104,
-         "shareOfIcb": 3.5
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 53,
+         "shareOfIcb": 0.9
         },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 50,
+         "shareOfIcb": 0.9
+        },
+        {
+         "icb": "QF7",
+         "name": "NHS South Yorkshire",
+         "items": 45,
+         "shareOfIcb": 1.1
+        },
+        {
+         "icb": "T6Y0W",
+         "name": "NHS Norfolk and Suffolk",
+         "items": 40,
+         "shareOfIcb": 0.8
+        }
+       ]
+      },
+      {
+       "brand": "2",
+       "generic": false,
+       "products": [
+        "2 way foy all slc cath+glyc filled syrg for inflation & empty syrg for deflation male 12Ch-24Ch",
+        "2 way foley all silicone catheter male open tip 14Ch-18Ch",
+        "2 way foley all silicone catheter male 12Ch-18Ch",
+        "2 way foy all slc cath+glyc filled syrg for inflation&empty syrg for deflation Tiemann tip 12Ch-24Ch",
+        "2 way foley all silicone catheter female 12Ch-16Ch"
+       ],
+       "items": 677,
+       "share": 0.5,
+       "cost": 13093,
+       "items12m": 6167,
+       "share12m": 0.4,
+       "yoy": 80.5,
+       "icbsPrescribing": 35,
+       "topIcbs": [
         {
          "icb": "QT1",
          "name": "NHS Nottingham and Nottinghamshire",
-         "items": 85,
-         "shareOfIcb": 3.5
+         "items": 180,
+         "shareOfIcb": 8.4
         },
         {
-         "icb": "QWU",
-         "name": "NHS Coventry and Warwickshire",
-         "items": 3,
-         "shareOfIcb": 0.1
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
+         "items": 106,
+         "shareOfIcb": 2.7
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 39,
+         "shareOfIcb": 0.7
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 28,
+         "shareOfIcb": 0.4
         },
         {
          "icb": "QOQ",
          "name": "NHS Humber and North Yorkshire",
-         "items": 2,
-         "shareOfIcb": 0.0
+         "items": 25,
+         "shareOfIcb": 0.5
+        }
+       ]
+      },
+      {
+       "brand": "The",
+       "generic": false,
+       "products": [
+        "The Ugobox Ugo"
+       ],
+       "items": 657,
+       "share": 0.5,
+       "cost": 19844,
+       "items12m": 7097,
+       "share12m": 0.5,
+       "yoy": 40.7,
+       "icbsPrescribing": 32,
+       "topIcbs": [
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 73,
+         "shareOfIcb": 1.3
+        },
+        {
+         "icb": "QR1",
+         "name": "NHS Gloucestershire",
+         "items": 71,
+         "shareOfIcb": 4.5
+        },
+        {
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 58,
+         "shareOfIcb": 1.2
+        },
+        {
+         "icb": "QSL",
+         "name": "NHS Somerset",
+         "items": 56,
+         "shareOfIcb": 3.6
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 53,
+         "shareOfIcb": 1.2
         }
        ]
       },
@@ -5959,140 +6100,43 @@
         "HydroSil Silicone Hydrophilic Personal catheter male",
         "HydroSil discreet catheter female"
        ],
-       "items": 768,
-       "share": 0.6,
-       "cost": 138809,
-       "items12m": 9232,
+       "items": 644,
+       "share": 0.5,
+       "cost": 116825,
+       "items12m": 9100,
        "share12m": 0.6,
-       "yoy": -5.9,
-       "icbsPrescribing": 35,
+       "yoy": -17.0,
+       "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QOX",
          "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-         "items": 73,
-         "shareOfIcb": 3.0
+         "items": 55,
+         "shareOfIcb": 2.6
         },
         {
          "icb": "T6Y0W",
          "name": "NHS Norfolk and Suffolk",
-         "items": 49,
-         "shareOfIcb": 0.9
+         "items": 50,
+         "shareOfIcb": 1.0
         },
         {
          "icb": "S0E4D",
          "name": "NHS Thames Valley",
-         "items": 48,
-         "shareOfIcb": 1.0
+         "items": 40,
+         "shareOfIcb": 0.9
         },
         {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 48,
-         "shareOfIcb": 0.7
-        },
-        {
-         "icb": "QPM",
-         "name": "NHS Northamptonshire",
-         "items": 43,
-         "shareOfIcb": 2.4
-        }
-       ]
-      },
-      {
-       "brand": "GentleCath",
-       "generic": false,
-       "products": [
-        "GentleCath Glide hydrophilic catheter male",
-        "GentleCath Glide hydrophilic catheter female"
-       ],
-       "items": 753,
-       "share": 0.5,
-       "cost": 96973,
-       "items12m": 6060,
-       "share12m": 0.4,
-       "yoy": 105.2,
-       "icbsPrescribing": 36,
-       "topIcbs": [
-        {
-         "icb": "QHM",
-         "name": "NHS North East and North Cumbria",
-         "items": 73,
-         "shareOfIcb": 0.8
-        },
-        {
-         "icb": "QWO",
-         "name": "NHS West Yorkshire",
-         "items": 63,
+         "icb": "QJK",
+         "name": "NHS Devon",
+         "items": 39,
          "shareOfIcb": 1.1
         },
         {
-         "icb": "T6Y0W",
-         "name": "NHS Norfolk and Suffolk",
-         "items": 48,
-         "shareOfIcb": 0.9
-        },
-        {
-         "icb": "QRL",
-         "name": "NHS Hampshire and Isle of Wight",
-         "items": 43,
-         "shareOfIcb": 1.0
-        },
-        {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 40,
+         "items": 36,
          "shareOfIcb": 0.6
-        }
-       ]
-      },
-      {
-       "brand": "2",
-       "generic": false,
-       "products": [
-        "2 way foley all silicone catheter male open tip 14Ch-18Ch",
-        "2 way foy all slc cath+glyc filled syrg for inflation & empty syrg for deflation male 12Ch-24Ch",
-        "2 way foley all silicone catheter male 12Ch-18Ch",
-        "2 way foy all slc cath+glyc filled syrg for inflation&empty syrg for deflation Tiemann tip 12Ch-24Ch",
-        "2 way foley all silicone catheter female 12Ch-16Ch"
-       ],
-       "items": 744,
-       "share": 0.5,
-       "cost": 14585,
-       "items12m": 5865,
-       "share12m": 0.4,
-       "yoy": 74.6,
-       "icbsPrescribing": 36,
-       "topIcbs": [
-        {
-         "icb": "QT1",
-         "name": "NHS Nottingham and Nottinghamshire",
-         "items": 200,
-         "shareOfIcb": 8.3
-        },
-        {
-         "icb": "QRL",
-         "name": "NHS Hampshire and Isle of Wight",
-         "items": 66,
-         "shareOfIcb": 1.6
-        },
-        {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 38,
-         "shareOfIcb": 0.6
-        },
-        {
-         "icb": "QOQ",
-         "name": "NHS Humber and North Yorkshire",
-         "items": 34,
-         "shareOfIcb": 0.7
-        },
-        {
-         "icb": "S0E4D",
-         "name": "NHS Thames Valley",
-         "items": 33,
-         "shareOfIcb": 0.7
         }
        ]
       },
@@ -6106,89 +6150,43 @@
         "Curan Advantage catheter female",
         "Curan Advantage catheter male Tiemann tip"
        ],
-       "items": 715,
+       "items": 641,
        "share": 0.5,
-       "cost": 119921,
-       "items12m": 8229,
+       "cost": 110943,
+       "items12m": 8177,
        "share12m": 0.5,
-       "yoy": -0.4,
+       "yoy": -7.5,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 87,
-         "shareOfIcb": 1.0
+         "items": 68,
+         "shareOfIcb": 0.9
         },
         {
          "icb": "T6Y0W",
          "name": "NHS Norfolk and Suffolk",
-         "items": 77,
-         "shareOfIcb": 1.4
-        },
-        {
-         "icb": "QF7",
-         "name": "NHS South Yorkshire",
-         "items": 66,
-         "shareOfIcb": 1.6
-        },
-        {
-         "icb": "S1Y5D",
-         "name": "NHS Central East",
-         "items": 56,
-         "shareOfIcb": 0.9
-        },
-        {
-         "icb": "Z9B2Z",
-         "name": "NHS West and North London",
-         "items": 41,
-         "shareOfIcb": 0.8
-        }
-       ]
-      },
-      {
-       "brand": "The",
-       "generic": false,
-       "products": [
-        "The Ugobox Ugo"
-       ],
-       "items": 698,
-       "share": 0.5,
-       "cost": 20238,
-       "items12m": 6907,
-       "share12m": 0.5,
-       "yoy": 26.7,
-       "icbsPrescribing": 36,
-       "topIcbs": [
-        {
-         "icb": "QWO",
-         "name": "NHS West Yorkshire",
-         "items": 79,
-         "shareOfIcb": 1.3
+         "items": 61,
+         "shareOfIcb": 1.2
         },
         {
          "icb": "QF7",
          "name": "NHS South Yorkshire",
          "items": 59,
-         "shareOfIcb": 1.4
+         "shareOfIcb": 1.5
         },
         {
-         "icb": "QSL",
-         "name": "NHS Somerset",
-         "items": 58,
-         "shareOfIcb": 3.3
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 49,
+         "shareOfIcb": 0.8
         },
         {
-         "icb": "QOQ",
-         "name": "NHS Humber and North Yorkshire",
-         "items": 56,
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 47,
          "shareOfIcb": 1.1
-        },
-        {
-         "icb": "QR1",
-         "name": "NHS Gloucestershire",
-         "items": 54,
-         "shareOfIcb": 3.3
         }
        ]
       },
@@ -6200,91 +6198,43 @@
         "Conveen EasiCath catheter female",
         "Conveen EasiCath catheter male Tiemann tip"
        ],
-       "items": 564,
+       "items": 520,
        "share": 0.4,
-       "cost": 99353,
-       "items12m": 7112,
+       "cost": 89078,
+       "items12m": 7039,
        "share12m": 0.5,
-       "yoy": -14.4,
+       "yoy": -12.3,
        "icbsPrescribing": 36,
        "topIcbs": [
         {
          "icb": "QHM",
          "name": "NHS North East and North Cumbria",
-         "items": 38,
+         "items": 31,
          "shareOfIcb": 0.4
         },
         {
          "icb": "T6Y0W",
          "name": "NHS Norfolk and Suffolk",
-         "items": 35,
+         "items": 28,
          "shareOfIcb": 0.6
         },
         {
          "icb": "QK1",
          "name": "NHS Leicester, Leicestershire and Rutland",
-         "items": 33,
-         "shareOfIcb": 1.2
+         "items": 27,
+         "shareOfIcb": 1.1
         },
         {
-         "icb": "QHL",
-         "name": "NHS Birmingham and Solihull",
-         "items": 28,
-         "shareOfIcb": 0.9
-        },
-        {
-         "icb": "QRL",
-         "name": "NHS Hampshire and Isle of Wight",
-         "items": 25,
-         "shareOfIcb": 0.6
-        }
-       ]
-      },
-      {
-       "brand": "Foley",
-       "generic": false,
-       "products": [
-        "Foley all silicone catheter male",
-        "Foley catheter male",
-        "Foley catheter female"
-       ],
-       "items": 544,
-       "share": 0.4,
-       "cost": 14625,
-       "items12m": 6470,
-       "share12m": 0.4,
-       "yoy": -11.3,
-       "icbsPrescribing": 36,
-       "topIcbs": [
-        {
-         "icb": "Z9B2Z",
-         "name": "NHS West and North London",
-         "items": 50,
-         "shareOfIcb": 1.0
-        },
-        {
-         "icb": "QHM",
-         "name": "NHS North East and North Cumbria",
-         "items": 39,
-         "shareOfIcb": 0.4
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 27,
+         "shareOfIcb": 0.5
         },
         {
          "icb": "S1Y5D",
          "name": "NHS Central East",
-         "items": 37,
-         "shareOfIcb": 0.6
-        },
-        {
-         "icb": "QKS",
-         "name": "NHS Kent and Medway",
-         "items": 34,
-         "shareOfIcb": 0.8
-        },
-        {
-         "icb": "QOQ",
-         "name": "NHS Humber and North Yorkshire",
-         "items": 30,
-         "shareOfIcb": 0.6
+         "items": 25,
+         "shareOfIcb": 0.4
         }
        ]
       },
@@ -6298,51 +6248,99 @@
         "UltraSmooth MCath4 catheter male",
         "UltraSmooth Aqua hydrophilic catheter female"
        ],
-       "items": 516,
+       "items": 495,
        "share": 0.4,
-       "cost": 44858,
-       "items12m": 6407,
+       "cost": 42255,
+       "items12m": 6412,
        "share12m": 0.4,
-       "yoy": -9.3,
+       "yoy": 1.0,
        "icbsPrescribing": 35,
        "topIcbs": [
         {
          "icb": "QOX",
          "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
-         "items": 88,
-         "shareOfIcb": 3.6
-        },
-        {
-         "icb": "T6Y0W",
-         "name": "NHS Norfolk and Suffolk",
-         "items": 47,
-         "shareOfIcb": 0.9
+         "items": 78,
+         "shareOfIcb": 3.7
         },
         {
          "icb": "QYG",
          "name": "NHS Cheshire and Merseyside",
-         "items": 41,
-         "shareOfIcb": 0.5
+         "items": 46,
+         "shareOfIcb": 0.7
         },
         {
          "icb": "QJK",
          "name": "NHS Devon",
-         "items": 37,
-         "shareOfIcb": 0.9
+         "items": 34,
+         "shareOfIcb": 1.0
+        },
+        {
+         "icb": "T6Y0W",
+         "name": "NHS Norfolk and Suffolk",
+         "items": 32,
+         "shareOfIcb": 0.6
         },
         {
          "icb": "QWO",
          "name": "NHS West Yorkshire",
-         "items": 21,
+         "items": 25,
          "shareOfIcb": 0.4
+        }
+       ]
+      },
+      {
+       "brand": "Foley",
+       "generic": false,
+       "products": [
+        "Foley all silicone catheter male",
+        "Foley catheter male",
+        "Foley catheter female"
+       ],
+       "items": 445,
+       "share": 0.4,
+       "cost": 12389,
+       "items12m": 6402,
+       "share12m": 0.4,
+       "yoy": -13.3,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 40,
+         "shareOfIcb": 0.9
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 34,
+         "shareOfIcb": 0.4
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 28,
+         "shareOfIcb": 0.5
+        },
+        {
+         "icb": "QKS",
+         "name": "NHS Kent and Medway",
+         "items": 26,
+         "shareOfIcb": 0.7
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 23,
+         "shareOfIcb": 0.3
         }
        ]
       }
      ],
      "otherBrands": {
       "count": 36,
-      "items": 4742,
-      "share": 3.4
+      "items": 4317,
+      "share": 3.5
      }
     },
     "secondary": {
