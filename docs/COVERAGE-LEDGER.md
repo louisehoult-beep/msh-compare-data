@@ -44,7 +44,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Total Orthopaedic Solutions 3 | ortho | 101 | 36 | 35.6% | 13 | 70 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 24 | 38.1% | 22 | 31 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 23 | 42 | STARTED |
-| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 22 | 37.9% | 18 | 32 | STARTED |
+| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 24 | 41.4% | 16 | 32 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 23 | 40.4% | 16 | 32 | STARTED |
 | Urology and Bowel Management | continence | 57 | 20 | 35.1% | 26 | 37 | STARTED |
 | Advanced Wound Care | wound | 56 | 22 | 39.3% | 16 | 41 | STARTED |
@@ -53,16 +53,16 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Pressure Area Care and Patient Handling | handling | 53 | 27 | 50.9% | 15 | 30 | STARTED |
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 21 | 26 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 12 | 27.9% | 14 | 30 | STARTED |
-| Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 15 | 40.5% | 6 | 28 | STARTED |
+| Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 15 | 40.5% | 6 | 27 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 16 | 43.2% | 16 | 18 | STARTED |
-| Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 13 | 37.1% | 8 | 22 | STARTED |
+| Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 13 | 37.1% | 8 | 21 | STARTED |
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 12 | 36.4% | 13 | 22 | STARTED |
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | 14 | 12 | STARTED |
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 10 | 32.3% | 5 | 22 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 11 | 37.9% | 7 | 23 | STARTED |
 | General Wound Care | wound | 28 | 11 | 39.3% | 8 | 23 | STARTED |
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 11 | 40.7% | 8 | 16 | STARTED |
-| Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 9 | 36.0% | 10 | 14 | STARTED |
+| Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 9 | 36.0% | 10 | 13 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 8 | 32.0% | 7 | 15 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 6 | 16 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 7 | 31.8% | 7 | 13 | STARTED |
@@ -85,50 +85,50 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 2 | 10 | STARTED |
 | Prosthetic Components and Associated Products | orthotics | 12 | 5 | 41.7% | 1 | 8 | STARTED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 4 | 6 | STARTED |
-| CT Scanners and Associated Options and Related Services | imaging | 8 | 2 | 25.0% | 4 | 7 | STARTED |
+| CT Scanners and Associated Options and Related Services | imaging | 8 | 2 | 25.0% | 4 | 6 | STARTED |
 | Polymer Aprons | infection | 8 | 2 | 25.0% | 1 | 8 | STARTED |
 | Contrast Injectors, Consumables and Associated Options and Related Services | imaging | 5 | 1 | 20.0% | 0 | 4 | STARTED · BLOCKED |
 | Polymer Products | infection | 5 | 2 | 40.0% | 3 | 2 | STARTED |
 | Reusable Clinical and Sharps Waste Management Service | infection | 3 | 1 | 33.3% | 0 | 2 | STARTED · BLOCKED |
 | Brachytherapy Seeds and Associated Accessories | oncology | 2 | 1 | 50.0% | 1 | 1 | STARTED |
 | Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services | ent | 7 | 0 | 0.0% | 3 | 5 | NOT STARTED |
-| Nuclear Medicine Imaging and Associated Options and Related Services | nuclear | 4 | 0 | 0.0% | 4 | 1 | NOT STARTED |
+| Nuclear Medicine Imaging and Associated Options and Related Services | nuclear | 4 | 0 | 0.0% | 4 | 0 | NOT STARTED |
 | Lithotripsy and Associated Options and Related Services | endourology | 3 | 0 | 0.0% | 2 | 2 | NOT STARTED |
 | Male Intra-Urethral Catheter with Magnet Control | continence | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Non-Imaging Vibration Controlled Ultrasound System | ultrasound | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Airway Management Products and Associated Equipment | — | 54 | 0 | 0.0% | 39 | 28 | UNMAPPED |
 | Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 41 | 27 | UNMAPPED |
-| Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 31 | 22 | UNMAPPED |
+| Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 31 | 21 | UNMAPPED |
 | Wound Closure | — | 39 | 0 | 0.0% | 35 | 19 | UNMAPPED |
 | Procedure Packs | — | 29 | 0 | 0.0% | 22 | 18 | UNMAPPED |
 | Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics | — | 28 | 0 | 0.0% | 23 | 8 | UNMAPPED |
-| Pulse Oximetry, Capnography and Related Monitoring Technologies | — | 26 | 0 | 0.0% | 25 | 10 | UNMAPPED |
-| Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions | — | 25 | 0 | 0.0% | 19 | 10 | UNMAPPED |
+| Pulse Oximetry, Capnography and Related Monitoring Technologies | — | 26 | 0 | 0.0% | 25 | 9 | UNMAPPED |
+| Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions | — | 25 | 0 | 0.0% | 19 | 9 | UNMAPPED |
 | Extension Sets and Lines | — | 23 | 0 | 0.0% | 20 | 10 | UNMAPPED |
 | Vascular Therapy and Associated Products | — | 23 | 0 | 0.0% | 19 | 9 | UNMAPPED |
-| External Defibrillation Devices and Related Services and Accessories | — | 21 | 0 | 0.0% | 15 | 8 | UNMAPPED |
+| External Defibrillation Devices and Related Services and Accessories | — | 21 | 0 | 0.0% | 15 | 7 | UNMAPPED |
 | Surgical Mesh | — | 21 | 0 | 0.0% | 16 | 11 | UNMAPPED |
 | Instrument Decontamination and Accessories | — | 20 | 0 | 0.0% | 12 | 11 | UNMAPPED |
 | Intravenous Accessories and Pressure Monitoring Accessories | — | 20 | 0 | 0.0% | 14 | 12 | UNMAPPED |
 | Rigid Endoscopy and Associated Options and Related Services | — | 18 | 0 | 0.0% | 12 | 14 | UNMAPPED |
 | Needlefree Connection Systems and Associated Products | — | 16 | 0 | 0.0% | 16 | 8 | UNMAPPED |
-| Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services | — | 14 | 0 | 0.0% | 11 | 7 | UNMAPPED |
-| Mobile X-Ray Systems and Associated Option and Related Services | — | 14 | 0 | 0.0% | 6 | 10 | UNMAPPED |
+| Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services | — | 14 | 0 | 0.0% | 11 | 6 | UNMAPPED |
+| Mobile X-Ray Systems and Associated Option and Related Services | — | 14 | 0 | 0.0% | 6 | 9 | UNMAPPED |
 | Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories | — | 13 | 0 | 0.0% | 12 | 1 | UNMAPPED |
-| Static X-Ray and Associated Options and Related Services | — | 13 | 0 | 0.0% | 6 | 9 | UNMAPPED |
+| Static X-Ray and Associated Options and Related Services | — | 13 | 0 | 0.0% | 6 | 8 | UNMAPPED |
 | Wipes for Surface Cleaning and Disinfection | — | 13 | 0 | 0.0% | 7 | 7 | UNMAPPED |
-| Finance Solutions | — | 12 | 0 | 0.0% | 9 | 4 | UNMAPPED |
+| Finance Solutions | — | 12 | 0 | 0.0% | 9 | 3 | UNMAPPED |
 | Bladder Scanners and Associated Options and Related Services | — | 11 | 0 | 0.0% | 8 | 5 | UNMAPPED |
-| Fluoroscopy and Associated Options and Related Services | — | 11 | 0 | 0.0% | 6 | 8 | UNMAPPED |
+| Fluoroscopy and Associated Options and Related Services | — | 11 | 0 | 0.0% | 6 | 7 | UNMAPPED |
 | Transcatheter Heart Valve Repair, Replacement and Associated Devices | — | 11 | 0 | 0.0% | 10 | 3 | UNMAPPED |
-| Mobile Image Intensifiers and Associated Options and Related Services | — | 10 | 0 | 0.0% | 5 | 8 | UNMAPPED |
+| Mobile Image Intensifiers and Associated Options and Related Services | — | 10 | 0 | 0.0% | 5 | 7 | UNMAPPED |
 | Structural Heart and Ventricular Assist Devices | — | 10 | 0 | 0.0% | 8 | 6 | UNMAPPED |
 | External Breast Prosthesis and Chest Support | — | 9 | 0 | 0.0% | 5 | 5 | UNMAPPED |
 | Perfusion Devices, Consumables and Associated Equipment | — | 9 | 0 | 0.0% | 7 | 6 | UNMAPPED |
 | Medical Hollowware | — | 8 | 0 | 0.0% | 8 | 4 | UNMAPPED |
 | Pressure Infusers and Associated Products | — | 8 | 0 | 0.0% | 6 | 4 | UNMAPPED |
 | Tray Wrap and Sterilisation Equipment | — | 8 | 0 | 0.0% | 8 | 3 | UNMAPPED |
-| Magnetic Resonance Imaging Scanners and Associated Option and Related Services | — | 7 | 0 | 0.0% | 4 | 6 | UNMAPPED |
+| Magnetic Resonance Imaging Scanners and Associated Option and Related Services | — | 7 | 0 | 0.0% | 4 | 5 | UNMAPPED |
 | Mammography Imaging Systems and Associated Options and Related Services | — | 7 | 0 | 0.0% | 4 | 4 | UNMAPPED |
 | Simulation Devices and Services | — | 7 | 0 | 0.0% | 6 | 1 | UNMAPPED |
 | Bone Densitometers, Associated Options and Related Services | — | 6 | 0 | 0.0% | 3 | 4 | UNMAPPED |
@@ -136,8 +136,8 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Surgical Implants for Men’s and Women’s Health | — | 6 | 0 | 0.0% | 5 | 3 | UNMAPPED |
 | Surgical Navigation Systems with Associated Options and Related Services | — | 6 | 0 | 0.0% | 4 | 4 | UNMAPPED |
 | Flexible Endoscopes and Associated Options and Related Services | — | 5 | 0 | 0.0% | 1 | 4 | UNMAPPED |
-| Medical Chart Paper and Ultrasound Film | — | 5 | 0 | 0.0% | 3 | 4 | UNMAPPED |
-| Radiotherapy IT Solutions and Associated Options and Related Services | — | 5 | 0 | 0.0% | 4 | 2 | UNMAPPED |
+| Medical Chart Paper and Ultrasound Film | — | 5 | 0 | 0.0% | 3 | 3 | UNMAPPED |
+| Radiotherapy IT Solutions and Associated Options and Related Services | — | 5 | 0 | 0.0% | 4 | 1 | UNMAPPED |
 | Robotic Medical Equipment and Associated Accessories | — | 5 | 0 | 0.0% | 2 | 4 | UNMAPPED |
 | Specimen Cabinets and Associated Options and Related Services | — | 5 | 0 | 0.0% | 3 | 3 | UNMAPPED |
 | Reusable Plastic Medical Hollowware | — | 4 | 0 | 0.0% | 2 | 3 | UNMAPPED |

@@ -12,9 +12,9 @@
  },
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
-  "frameworks.json": "2026-10-12",
-  "differentiator.json published": 37204,
-  "differentiator.json held": 293910
+  "frameworks.json": "2026-10-20",
+  "differentiator.json published": 37219,
+  "differentiator.json held": 295235
  },
  "counts": {
   "frameworks": 122,
@@ -25,10 +25,10 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 407,
-  "inScopeSuppliersNeedingCrawl": 243,
+  "inScopeSuppliersNeedingCrawl": 241,
   "inScopeSuppliersNeedingDomain": 227,
-  "suppliersRefused": 560,
-  "suppliersRefusedButPublishingElsewhere": 168,
+  "suppliersRefused": 559,
+  "suppliersRefusedButPublishingElsewhere": 167,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
   "blockedFrameworks": 2,
@@ -3888,8 +3888,8 @@
    "category": "Medical Technology",
    "ends": "30 September 2027",
    "suppliersAwarded": 58,
-   "suppliersPublished": 22,
-   "coverage": 37.9,
+   "suppliersPublished": 24,
+   "coverage": 41.4,
    "nhsscCategory": "Medical Technology",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3902,19 +3902,11 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 58,
-   "coverageOfTarget": 37.9,
+   "coverageOfTarget": 41.4,
    "crawlWorklist": [
     {
      "supplier": "GI UK Medical Ltd (Duomed)",
      "domain": "duomed.com"
-    },
-    {
-     "supplier": "Pentax Medical",
-     "domain": "pentaxmedical.com"
-    },
-    {
-     "supplier": "TSC Endovision",
-     "domain": "tsc-life.com"
     },
     {
      "supplier": "Aquilant Endoscopy Limited",
@@ -4187,7 +4179,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 8,
-    "heldNeedingCategory": 7,
+    "heldNeedingCategory": 5,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -4212,10 +4204,12 @@
     "Newtons Medical Supplies Ltd",
     "Omnimed Limited",
     "Penlon",
+    "Pentax Medical",
     "Promed Limited",
     "Steris",
     "Synectics Medical T/A SynMed",
-    "TFX Group Ltd (Teleflex Medical)"
+    "TFX Group Ltd (Teleflex Medical)",
+    "TSC Endovision"
    ],
    "publishedElsewhere": [
     "Advanced Medical Systems Ltd",
@@ -4234,9 +4228,7 @@
     "Erbe Medical UK Ltd",
     "Fairmont Medical Products Limited",
     "GI UK Medical Ltd (Duomed)",
-    "Pentax Medical",
-    "RB Medical Engineering Ltd",
-    "TSC Endovision"
+    "RB Medical Engineering Ltd"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
@@ -4263,7 +4255,7 @@
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)"
    ],
    "unknown": [],
-   "actionableTotal": 18,
+   "actionableTotal": 16,
    "blockedReason": null,
    "deferred": null
   },
@@ -7254,13 +7246,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Reliance Medical",
      "domain": "www.reliancemedical.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -7800,13 +7785,6 @@
      "supplier": "Draeger Medical UK",
      "domain": "www.draeger.com",
      "reason": "neither www.draeger.com nor www.www.draeger.com answered \u2014 the domain does not resolve or serves no usable certificate",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-08-31",
      "bucket": "publishedElsewhere"
     },
@@ -9457,13 +9435,6 @@
      "domain": "www.getinge.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-10-08",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
      "bucket": "publishedElsewhere"
     },
     {
@@ -13104,13 +13075,6 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Siemens Healthineers",
      "domain": "www.siemens-healthineers.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
@@ -13634,10 +13598,6 @@
    "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
-     "supplier": "Pentax Medical",
-     "domain": "pentaxmedical.com"
-    },
-    {
      "supplier": "Aquilant Endoscopy Limited",
      "domain": null
     }
@@ -13690,8 +13650,8 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 0,
-    "heldNeedingCategory": 2,
+    "publishedElsewhereNeedingCategory": 1,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -13699,11 +13659,11 @@
    },
    "published": [],
    "publishedElsewhere": [
-    "Olympus (KeyMed)"
+    "Olympus (KeyMed)",
+    "Pentax Medical"
    ],
    "heldOnly": [
-    "D.P. Medical Systems Limited",
-    "Pentax Medical"
+    "D.P. Medical Systems Limited"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
@@ -13740,15 +13700,7 @@
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
-   "refusedSuppliers": [
-    {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    }
-   ],
+   "refusedSuppliers": [],
    "route": "NHSSC framework",
    "catsInScope": [],
    "publishedElsewhereNoOwnRange": [],
@@ -14772,13 +14724,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Reliance Medical",
      "domain": "www.reliancemedical.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -15585,7 +15530,7 @@
    "framework": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pulse-oximetry-and-capnography-devices-and-support-products/",
    "category": "Medical and Surgical Consumables",
-   "ends": "4 March 2028",
+   "ends": "1 March 2028",
    "suppliersAwarded": 26,
    "suppliersPublished": 0,
    "coverage": 0.0,
@@ -15651,13 +15596,6 @@
      "domain": "medtronic.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-08",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
      "bucket": "publishedElsewhere"
     },
     {
@@ -15855,13 +15793,6 @@
      "reason": "only 5 product records on the site's API \u2014 that is a landing page, not a catalogue; the WooCommerce Store API returned 5 product(s), too few to be a catalogue; the sitemap carries 5 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
      "bucket": "refused"
-    },
-    {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
     },
     {
      "supplier": "GE HealthCare",
@@ -16338,13 +16269,6 @@
      "domain": "oscartech-uk.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-05",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
      "bucket": "publishedElsewhere"
     },
     {
@@ -16921,10 +16845,6 @@
    "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
-     "supplier": "Pentax Medical",
-     "domain": "pentaxmedical.com"
-    },
-    {
      "supplier": "G S Medical",
      "domain": null
     }
@@ -17041,8 +16961,8 @@
    ],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 5,
-    "heldNeedingCategory": 5,
+    "publishedElsewhereNeedingCategory": 6,
+    "heldNeedingCategory": 4,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -17055,6 +16975,7 @@
     "Conmed UK Ltd",
     "Medtronic",
     "Olympus (KeyMed)",
+    "Pentax Medical",
     "Smith+Nephew",
     "Stryker"
    ],
@@ -17062,7 +16983,6 @@
     "Aquilant Limited",
     "D.P. Medical Systems Limited",
     "LocaMed Ltd",
-    "Pentax Medical",
     "RB Medical Engineering Ltd"
    ],
    "capturedNothingCounted": [],
@@ -17284,13 +17204,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Siemens Healthineers",
      "domain": "www.siemens-healthineers.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
@@ -17417,13 +17330,6 @@
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 1 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-08-31",
      "bucket": "refused"
-    },
-    {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
     },
     {
      "supplier": "Siemens Healthineers",
@@ -17665,13 +17571,6 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Siemens Healthineers",
      "domain": "www.siemens-healthineers.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
@@ -17911,13 +17810,6 @@
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 1 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-04",
      "bucket": "refused"
-    },
-    {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
@@ -18129,13 +18021,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Siemens Healthineers",
      "domain": "www.siemens-healthineers.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
@@ -18323,13 +18208,6 @@
      "domain": "medtronic.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-08",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
      "bucket": "publishedElsewhere"
     },
     {
@@ -19036,13 +18914,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Siemens Healthineers",
      "domain": "www.siemens-healthineers.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
@@ -19626,12 +19497,7 @@
    "excludedByRuling": [],
    "targetSuppliers": 5,
    "coverageOfTarget": 0.0,
-   "crawlWorklist": [
-    {
-     "supplier": "Pentax Medical",
-     "domain": "pentaxmedical.com"
-    }
-   ],
+   "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -19671,8 +19537,8 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 0,
-    "heldNeedingCategory": 1,
+    "publishedElsewhereNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -19680,11 +19546,10 @@
    },
    "published": [],
    "publishedElsewhere": [
-    "Olympus (KeyMed)"
-   ],
-   "heldOnly": [
+    "Olympus (KeyMed)",
     "Pentax Medical"
    ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [],
    "refused": [
@@ -19727,13 +19592,6 @@
     {
      "supplier": "NISSHA Medical Technologies",
      "domain": "www.nisshamedical.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-08-31",
      "bucket": "publishedElsewhere"
@@ -19816,13 +19674,6 @@
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-10",
      "bucket": "refused"
-    },
-    {
-     "supplier": "Philips",
-     "domain": "www.philips.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
