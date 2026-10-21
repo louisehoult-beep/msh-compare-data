@@ -30,6 +30,7 @@ USAGE
   python3 scripts/build_speciality_panels.py tissue-viability-and-wound-care
 """
 import json
+from urllib.parse import quote
 import os
 import re
 import sys
@@ -10197,7 +10198,93 @@ def build_digital_extras(sources):
         }
         out["icbDigital"]["none"] = (out["icbDigital"]["icbs"] - out["icbDigital"]["published"]
                                      - len(out["icbDigital"]["dated"]))
+    companies = build_health_tech_companies(sources)
+    if companies:
+        out["companies"] = companies
     return out
+
+
+# HEALTH TECH COMPANY DIRECTORY (Lou, 21/10/2026: "we need all sales info and
+# businesses in this section"). Every Hub company record that is digital by ANY of
+# three recorded facts: the directory files it under a digital speciality label, it
+# is named on a digital framework's own supplier list as held on its record, or an
+# NHS buyer's software or IT award notice names it exactly (company-digital-awards).
+# Nothing is inferred from a company name or a product word. Each row links to the
+# company report, which carries the sources.
+DIGITAL_LABELS = ("digital", " ai", "medical it", "clinical software", "clinical comms")
+DIGITAL_FRAMEWORK_WORDS = ("Digital Diagnostic Solutions", "Radiotherapy IT", "G-Cloud",
+                           "Technology Services 4", "Digital Workplace Solutions",
+                           "Digital Pathology", "Tech Devices", "Technology Enabled Care",
+                           "Digital Health Advisory", "Healthcare AI Solutions",
+                           "Digital Primary Care")
+COMPANY_REPORT_URL = "/medical-sales-hub/company-report/?company="
+
+
+def _is_digital_label(label):
+    l = " " + (label or "").lower()
+    return any(w in l for w in DIGITAL_LABELS)
+
+
+def build_health_tech_companies(sources):
+    idx = sources.get("supplier_index") or []
+    awards = (sources.get("digital_awards") or {}).get("companies") or {}
+    if not idx:
+        return None
+    rows = []
+    for rec in idx:
+        name = rec.get("name")
+        labels = [l for l in rec.get("specialities") or [] if _is_digital_label(l)]
+        fws = []
+        for f in rec.get("frameworks") or []:
+            fname = f.get("name") or ""
+            if not any(w in fname for w in DIGITAL_FRAMEWORK_WORDS):
+                continue
+            short = fname.replace("NHS Supply Chain \u2014 ", "").replace(" (to 2027)", "")
+            if short in [x["name"] for x in fws]:
+                continue
+            fws.append({"name": short, "url": f.get("url"),
+                        "lots": [re.sub(r"^Lot ", "", str(x.get("lot") if isinstance(x, dict) else x))
+                                 for x in f.get("lots") or [] if x]})
+        aw = awards.get(name) or []
+        if not (labels or fws or aw):
+            continue
+        dates = sorted(a.get("date") for a in aw if a.get("date"))
+        rows.append({
+            "name": name,
+            "report": COMPANY_REPORT_URL + quote(name or "", safe=""),
+            "labels": labels,
+            "frameworks": fws,
+            "digitalAwards": len(aw),
+            "clinicalAwards": sum(1 for a in aw if a.get("clinical")),
+            "latestAward": dates[-1] if dates else None,
+            "products": len(rec.get("products") or []),
+            "companyNumber": rec.get("companyNumber") or None,
+        })
+    rows.sort(key=lambda r: (-(len(r["frameworks"]) + (1 if r["digitalAwards"] else 0)),
+                             -r["digitalAwards"], (r["name"] or "").lower()))
+    return {
+        "dataAsOf": max([d for d in (
+            (sources.get("supplier_index_meta") or {}).get("dataAsOf"),
+            (sources.get("digital_awards") or {}).get("generated")) if d] or [None]),
+        "counts": {
+            "companies": len(rows),
+            "onDigitalFramework": sum(1 for r in rows if r["frameworks"]),
+            "withDigitalAwards": sum(1 for r in rows if r["digitalAwards"]),
+            "withProducts": sum(1 for r in rows if r["products"]),
+        },
+        "rule": (
+            "Every company record in the Hub's supplier directory that is digital by a "
+            "recorded fact: filed under a digital speciality label, named on a digital "
+            "framework's own published supplier list as held on its record (NHS Supply "
+            "Chain, Government Commercial Agency (GCA), NHS Shared Business Services (SBS) "
+            "or HealthTrust Europe), or named exactly on an NHS buyer's software or IT "
+            "award notice. A framework place is not a contract and an award count is not "
+            "spend. Products are counted from the company record; the company report "
+            "lists them with their sources. Companies on a framework's list that have no "
+            "Hub company record are not listed here, so this is not a census of the "
+            "market."),
+        "items": rows,
+    }
 
 
 def directory_rule(slug, directory):
@@ -10367,6 +10454,12 @@ def load_sources():
                       ("icb_watch", "icb-watch.json")):
         path = os.path.join(DATA, name)
         sources[key] = load(name) if os.path.exists(path) else None
+    if os.path.exists(os.path.join(DATA, "supplier-index.json")):
+        si = load("supplier-index.json")
+        sources["supplier_index"] = si.get("suppliers") or []
+        sources["supplier_index_meta"] = {"dataAsOf": si.get("generated") or si.get("dataAsOf")}
+    if os.path.exists(os.path.join(DATA, "company-digital-awards.json")):
+        sources["digital_awards"] = load("company-digital-awards.json")
     return sources
 
 
