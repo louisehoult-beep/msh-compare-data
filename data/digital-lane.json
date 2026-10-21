@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "20/10/2026",
- "generated": "2026-10-20",
+ "dataAsOf": "21/10/2026",
+ "generated": "2026-10-21",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,20 +22,20 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-10-12",
-   "to": "2026-10-20",
+   "from": "2026-10-13",
+   "to": "2026-10-21",
    "days": 8,
-   "run": "2026-10-20"
+   "run": "2026-10-21"
   },
   "notes": [
-   "Find a Tender (tender stage): 0 digital lane notice(s) from 64 release(s) over 1 page(s)",
-   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-12",
-   "Find a Tender (planning stage): 0 digital lane notice(s) from 33 release(s) over 1 page(s)",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-12"
+   "Find a Tender (tender stage): 0 digital lane notice(s) from 56 release(s) over 1 page(s)",
+   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-13",
+   "Find a Tender (planning stage): 0 digital lane notice(s) from 29 release(s) over 1 page(s)",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-13"
   ]
  },
  "counts": {
-  "awards": 264,
+  "awards": 270,
   "awardsClinical": 32,
   "openNotices": 1,
   "openNoticesClinical": 0,
@@ -43,6 +43,63 @@
   "marketEngagementClinical": 0
  },
  "awards": [
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Online Survey Tool",
+   "buyer": "NHS England",
+   "published": "2026-10-21",
+   "suppliers": [
+    "QUL Technologies LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72416000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/099369-2026",
+   "ocid": "ocds-h6vhtk-078c9c"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "\"Medisoft\" I.T. System",
+   "buyer": "MID CHESHIRE HOSPITALS NHS FOUNDATION TRUST",
+   "published": "2026-10-21",
+   "suppliers": [
+    "Medisoft"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-06-30",
+   "value": 24785.95,
+   "digitalCpv": [
+    "72300000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/099333-2026",
+   "ocid": "ocds-h6vhtk-078c88"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "Business Continuity Testing Exercise - RFI",
+   "buyer": "NHS Business Services Authority",
+   "published": "2026-10-21",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72120000",
+    "72221000",
+    "72251000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/099277-2026",
+   "ocid": "ocds-h6vhtk-078c6d"
+  },
   {
    "lane": "digital",
    "clinical": false,
@@ -59,6 +116,85 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/098795-2026",
    "ocid": "ocds-h6vhtk-078b6d"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "NHP Health Care Planning Tool SaaS Licence",
+   "buyer": "NHS England",
+   "published": "2026-10-20",
+   "suppliers": [
+    "dRofus AS"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-18",
+   "value": 657720.0,
+   "digitalCpv": [
+    "48311100",
+    "48613000",
+    "48810000",
+    "72268000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/099003-2026",
+   "ocid": "ocds-h6vhtk-06ea83"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "2073 - NECS - Duende ID Server",
+   "buyer": "NHS North of England Commissioning Support Unit",
+   "published": "2026-10-20",
+   "suppliers": [
+    "Phoenix Software"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-08-25",
+   "value": 15659.96,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/098993-2026",
+   "ocid": "ocds-h6vhtk-078bd3"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "ESNEFT3427 - Staff Helpdesk Subscription",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "published": "2026-10-20",
+   "suppliers": [
+    "A2Z Cloud Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 40740.0,
+   "digitalCpv": [
+    "72253100"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/098983-2026",
+   "ocid": "ocds-h6vhtk-078bcd"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "ESNEFT3427 - Staff Helpdesk Subscription",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "published": "2026-10-20",
+   "suppliers": [
+    "A2Z Cloud Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 40740.0,
+   "digitalCpv": [
+    "72253100"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/098982-2026",
+   "ocid": "ocds-h6vhtk-078bcc"
   },
   {
    "lane": "digital",
@@ -2164,28 +2300,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/090057-2026",
    "ocid": "ocds-h6vhtk-077870"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "award",
-   "title": "NHP Health Care Planning Tool SaaS Licence",
-   "buyer": "NHS England",
-   "published": "2026-09-22",
-   "suppliers": [
-    "dRofus AS"
-   ],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "48311100",
-    "48613000",
-    "48810000",
-    "72268000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/089406-2026",
-   "ocid": "ocds-h6vhtk-06ea83"
   },
   {
    "lane": "digital",
@@ -5117,6 +5231,12 @@
    "to": "2026-10-20",
    "days": 8,
    "run": "2026-10-20"
+  },
+  {
+   "from": "2026-10-13",
+   "to": "2026-10-21",
+   "days": 8,
+   "run": "2026-10-21"
   }
  ]
 }
