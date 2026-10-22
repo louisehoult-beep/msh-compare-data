@@ -98,7 +98,7 @@
       '.msh .mshc-bar .mshc-back:hover{background:#14304F;}',
       '.msh .mshc-bar .mshc-back:focus-visible{outline:3px solid #1B5FBF;outline-offset:2px;}',
       '.msh nav a.mshc-myhub{font-weight:700;}',
-      '.msh header .mshc-sw{flex:none;order:9;margin-left:8px;}',
+      '.msh header .mshc-sw{flex:none;order:9;margin-left:8px;display:inline-block;vertical-align:middle;}',
       '.msh header .mshc-sb{display:inline-flex;align-items:center;gap:6px;cursor:pointer;background:#FFFFFF;border:1px solid #D6CEBE;border-radius:999px;padding:6px 12px;font-family:Inter,-apple-system,"Segoe UI",system-ui,sans-serif!important;font-size:12px!important;font-weight:700!important;letter-spacing:.3px;color:#0B1C33!important;line-height:1.2!important;}',
       '.msh header .mshc-sb:hover{border-color:#0B1C33;}',
       '.msh header .mshc-sb:focus-visible{outline:3px solid #1B5FBF;outline-offset:2px;}',
@@ -178,12 +178,20 @@
      box, the button focuses that instead. */
   function ensureSearch() {
     var header = document.querySelector('.msh header');
-    if (!header || document.getElementById('mshc-sw')) { return; }
+    if (!header) { return; }
+    var nav = header.querySelector('nav');
+    var old = document.getElementById('mshc-sw');
+    /* The header is not a flex row on the live site, so a button appended to it
+       dropped onto its own line under the logo and went unnoticed (22/10/2026).
+       It sits in the nav row, last, where the other links are. */
+    if (old) { if (nav && old.parentNode !== nav) { nav.appendChild(old); } return; }
+    var oldPanel = document.getElementById('mshc-sp');
+    if (oldPanel) { oldPanel.parentNode.removeChild(oldPanel); }
     var w = document.createElement('div');
     w.id = 'mshc-sw';
     w.className = 'mshc-sw';
     w.innerHTML = '<button type="button" class="mshc-sb" aria-expanded="false" aria-controls="mshc-sp" aria-label="Search the Hub">' + SEARCH_SVG + '<span class="mshc-sl">SEARCH</span></button>';
-    header.appendChild(w);
+    (nav || header).appendChild(w);
     var btn = w.querySelector('button'), panel = null, loaded = false;
     function close() { if (panel) { panel.hidden = true; } btn.setAttribute('aria-expanded', 'false'); }
     function place() { var r = header.getBoundingClientRect(); panel.style.top = Math.max(r.bottom + 6, 8) + 'px'; }
