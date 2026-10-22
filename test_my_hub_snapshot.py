@@ -19,7 +19,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 LOGIC = os.path.join(HERE, "app", "my-hub-logic.js")
 RUNNER = r"""
 const L = require(process.argv[1]);
-const cases = JSON.parse(process.argv[2]);
+const cases = JSON.parse(require('fs').readFileSync(0, 'utf8'));  // stdin: argv has a size limit
 process.stdout.write(JSON.stringify(cases.map(([fn, args]) => L[fn].apply(null, args))));
 """
 
@@ -28,7 +28,7 @@ def node(calls):
     n = shutil.which("node")
     if not n:
         raise unittest.SkipTest("node not installed")
-    r = subprocess.run([n, "-e", RUNNER, LOGIC, json.dumps(calls)], capture_output=True, text=True, timeout=60)
+    r = subprocess.run([n, "-e", RUNNER, LOGIC], input=json.dumps(calls), capture_output=True, text=True, timeout=60)
     if r.returncode != 0:
         raise AssertionError(r.stderr)
     return json.loads(r.stdout)
