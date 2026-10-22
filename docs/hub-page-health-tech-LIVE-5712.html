@@ -1,0 +1,162 @@
+<!-- wp:html -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Jost:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+.htn{--navy:#0B1C33;--deep:#14304F;--gold:#A8842C;--lgold:#E0BE8E;--warm:#EDE7DC;--steel:#DBE3EE;--ink:#1D2733;--muted:#4A5563;--line:#D5DCE5;--wine:#4A1526;
+  font-family:'Inter',system-ui,sans-serif;font-size:16.5px;line-height:1.75;color:var(--ink);}
+.htn *{box-sizing:border-box;}
+.htn .fw{width:100vw;position:relative;left:50%;margin-left:-50vw;}
+.htn .col{max-width:1080px;margin:0 auto;padding:0 40px;}
+.htn section{padding:88px 0;}
+.htn h1,.htn h2,.htn h3{font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:500;margin:0;font-variant-numeric:lining-nums;}
+.htn h2{font-size:clamp(28px,3vw,38px);line-height:1.15;color:var(--navy);margin:0 0 16px;}
+.htn h3{font-size:clamp(20px,2vw,24px);line-height:1.25;color:var(--navy);margin:0 0 14px;}
+.htn p{margin:0 0 16px;}
+.htn p:last-child{margin-bottom:0;}
+.htn a{color:var(--deep);text-decoration:underline;text-decoration-color:rgba(20,48,79,.35);text-underline-offset:3px;}
+.htn .eyebrow{font-family:'Jost',sans-serif;font-weight:700;font-size:12px;letter-spacing:2.2px;text-transform:uppercase;color:var(--navy);margin:0 0 12px;}
+.htn .rule{width:64px;height:3px;background:var(--gold);border:0;margin:0 0 26px;}
+/* hero: the photo at full strength, shading only behind the text */
+.htn .hero{background:url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/10/health-tech-hero.jpg?w=1800') 70% 30%/cover no-repeat;padding:120px 0;min-height:540px;display:flex;align-items:center;}
+.htn .hero .col{width:100%;}
+.htn .panel{background:rgba(74,21,38,.9);max-width:640px;padding:44px 44px 40px;border-left:4px solid var(--lgold);}
+.htn .hero .eyebrow{color:var(--lgold);}
+.htn .hero h1{font-weight:300;font-size:clamp(40px,5vw,62px);line-height:1.05;color:#FFFFFF;margin:0 0 22px;}
+.htn .hero p{color:var(--steel);font-size:clamp(16.5px,1.5vw,19px);}
+.htn .hero .meta{font-family:'Jost',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--lgold);margin:18px 0 0;}
+.htn .cta{margin:30px 0 0;display:flex;gap:22px;align-items:center;flex-wrap:wrap;}
+.htn .btn{display:inline-block;background:var(--navy);color:#FFFFFF!important;font-family:'Jost',sans-serif;font-weight:600;font-size:14px;letter-spacing:1.2px;text-transform:uppercase;text-decoration:none!important;padding:15px 28px;border-radius:4px;}
+.htn .btn:hover{background:var(--deep);}
+.htn .btn.gold{background:var(--lgold);color:var(--navy)!important;}
+.htn .ghost{font-family:'Jost',sans-serif;font-weight:600;font-size:14px;letter-spacing:1.2px;text-transform:uppercase;color:#FFFFFF!important;text-decoration-color:rgba(224,190,142,.7)!important;}
+/* hooks */
+.htn .hooks{background:#FFFFFF;}
+.htn .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin-top:40px;}
+.htn .card{background:#FFFFFF;border:1px solid var(--line);border-top:4px solid var(--wine);border-radius:10px;padding:34px 32px 30px;display:flex;flex-direction:column;}
+.htn .card .more{margin-top:auto;padding-top:16px;}
+.htn .big{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;line-height:1;color:var(--wine);font-weight:500;margin:0 0 16px;font-variant-numeric:lining-nums;}
+.htn .more{font-family:'Jost',sans-serif;font-weight:600;font-size:14px;letter-spacing:.6px;margin:14px 0 0;}
+/* wine band */
+.htn .wine{background:var(--wine);color:#F5F1E8;}
+.htn .wine h2,.htn .wine h3{color:#FFFFFF!important;}
+.htn .wine .eyebrow{color:var(--lgold);}
+.htn .three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px;margin-top:34px;}
+.htn .wine .three>div+div{border-left:1px solid rgba(224,190,142,.35);padding-left:48px;}
+.htn .wine .cta{margin-top:44px;}
+/* wider hub: pattern at full strength, shading only behind the text */
+.htn .wider{padding:96px 0;background:url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/10/live-desk-theme-digital.jpg?w=1800') center/cover no-repeat;}
+.htn .panel.wide{max-width:none;padding:52px 48px 48px;}
+.htn .wider h2,.htn .wider h3{color:#FFFFFF!important;}
+.htn .wider .eyebrow{color:var(--lgold);}
+.htn .wider p{color:var(--steel);}
+.htn .tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 28px;margin-top:38px;}
+.htn .tile{border-top:2px solid var(--lgold);padding:18px 0 0;}
+.htn .tile h3{font-size:21px;}
+.htn .tile p{font-size:15px;line-height:1.6;}
+/* close */
+.htn .close{background:#FFFFFF;text-align:center;border-top:4px solid var(--wine);}
+.htn .close .btn{background:var(--wine);margin-top:8px;}
+.htn .close .src{font-size:13px;color:var(--muted);max-width:820px;margin:34px auto 0;text-align:left;}
+@media (max-width:960px){.htn .tiles{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media (max-width:760px){
+  .htn .col{padding:0 20px;}
+  .htn section{padding:56px 0;}
+  .htn .hero{padding:56px 0;min-height:0;}
+  .htn .panel,.htn .panel.wide{padding:30px 22px 26px;}
+  .htn .grid,.htn .three,.htn .tiles{grid-template-columns:1fr;gap:30px;}
+  .htn .wine .three>div+div{border-left:0;padding-left:0;border-top:1px solid rgba(224,190,142,.35);padding-top:28px;}
+}
+/* public page: remove theme gaps above and below, no sideways scroll */
+body.page-id-5712 .wp-block-post-content{padding-top:0!important;padding-bottom:0!important;margin-top:0!important;margin-bottom:0!important}
+body.page-id-5712 main.wp-block-group{margin-top:0!important;margin-bottom:0!important;padding-top:0!important;padding-bottom:0!important}
+body.page-id-5712 .wp-site-blocks>main+*{margin-block-start:0!important}
+body.page-id-5712{overflow-x:hidden}
+.htn{margin:0!important}
+.htn .fw{width:100%;left:auto;margin-left:0;}
+body.page-id-5712 .wp-block-post-content.has-global-padding{padding-left:0!important;padding-right:0!important}
+body.page-id-5712 .wp-block-post-content>.htn{max-width:none!important;width:100%!important}
+.htn .hero h1{color:#FFFFFF!important}
+.htn .close h2,.htn .hooks h2,.htn .hooks h3{color:#0B1C33!important}
+html:has(body.page-id-5712){overflow-x:hidden}
+body .wp-site-blocks .htn .hero h1,body .wp-site-blocks .htn .wine h2,body .wp-site-blocks .htn .wine h3,body .wp-site-blocks .htn .wider h2,body .wp-site-blocks .htn .wider h3{color:#FFFFFF!important}
+body .wp-site-blocks .htn .hooks h2,body .wp-site-blocks .htn .hooks h3,body .wp-site-blocks .htn .close h2{color:#0B1C33!important}
+body .wp-site-blocks .htn .hero p,body .wp-site-blocks .htn .hero li,body .wp-site-blocks .htn .wider p,body .wp-site-blocks .htn .wider li{color:#DBE3EE!important}
+body .wp-site-blocks .htn .wine p,body .wp-site-blocks .htn .wine li{color:#F5F1E8!important}
+body .wp-site-blocks .htn .hero .eyebrow,body .wp-site-blocks .htn .wine .eyebrow,body .wp-site-blocks .htn .wider .eyebrow{color:#E0BE8E!important}
+body .wp-site-blocks .htn .hero a.ghost{color:#FFFFFF!important}
+body .wp-site-blocks .htn a.btn.gold{color:#0B1C33!important}
+body .wp-site-blocks .htn a.btn:not(.gold){color:#FFFFFF!important}
+body .wp-site-blocks .htn .close .btn{background:#4A1526!important}
+</style>
+<div class="htn">
+
+<section class="hero fw"><div class="col"><div class="panel">
+<p class="eyebrow">Medical Sales Hub · Digital health and artificial intelligence (AI)</p>
+<h1>Selling health tech into the NHS?</h1>
+<p>The rules, the buying routes and the buyers are all moving at once. The Hub tracks every change, checked at the source, so you walk in knowing more than the room.</p>
+<p class="cta"><a class="btn gold" href="https://medsalesintelligencehub.co.uk/join-the-hub/">Join the Hub</a><a class="ghost" href="#inside">See what's inside</a></p>
+</div></div></section>
+
+<section class="hooks fw"><div class="col">
+<p class="eyebrow">This month in health tech</p>
+<hr class="rule">
+<h2>Four things your customers will ask you about</h2>
+<div class="grid">
+
+<div class="card"><p class="big">6 April 2026</p>
+<h3>Is your assurance pack on the old form?</h3>
+<p>The previous Digital Technology Assessment Criteria (DTAC) form should not be used from 6 April 2026. Buyers will spot it.</p>
+<p class="more"><a href="https://medsalesintelligencehub.co.uk/join-the-hub/">Get the approval gates guide &rarr;</a></p></div>
+
+<div class="card"><p class="big">44</p>
+<h3>The AI rulebook is being rewritten</h3>
+<p>The government accepted all 44 recommendations of the National Commission into the Regulation of AI in Healthcare. Draft regulator guidance is due by December 2026.</p>
+<p class="more"><a href="https://medsalesintelligencehub.co.uk/join-the-hub/">See what it means for your product &rarr;</a></p></div>
+
+<div class="card"><p class="big">142</p>
+<h3>Trusts already live on the Federated Data Platform</h3>
+<p>170 trusts have signed up. Do you know which of your accounts are live, and what that unlocks?</p>
+<p class="more"><a href="https://medsalesintelligencehub.co.uk/join-the-hub/">Get the buyer map &rarr;</a></p></div>
+
+<div class="card"><p class="big">G-Cloud 15</p>
+<h3>A new buying route opened on 6 August 2026</h3>
+<p>Frameworks decide who can be bought from without a full tender. Miss one and you wait for it to reopen.</p>
+<p class="more"><a href="https://medsalesintelligencehub.co.uk/join-the-hub/">Get the buying routes guide &rarr;</a></p></div>
+
+</div>
+</div></section>
+
+<section class="wine fw"><div class="col">
+<p class="eyebrow">Three member guides</p>
+<h2>Gates, routes and buyers, in plain English</h2>
+<div class="three">
+<div><h3>The approval gates</h3><p>Regulation, clinical safety, data protection and evidence, in the order a buyer checks them.</p></div>
+<div><h3>The buying routes</h3><p>Which frameworks, what is coming, and the notices to watch.</p></div>
+<div><h3>The buyers</h3><p>Who signs off a digital purchase, and the questions that qualify them.</p></div>
+</div>
+<p class="cta"><a class="btn gold" href="https://medsalesintelligencehub.co.uk/join-the-hub/">Unlock all three guides</a></p>
+</div></section>
+
+<section class="wider fw" id="inside"><div class="col"><div class="panel wide">
+<p class="eyebrow">And that's one corner of the Hub</p>
+<h2>Everything else a medical sales professional needs, in one place</h2>
+<div class="tiles">
+<div class="tile"><h3>Live Desk and Rep Briefings</h3><p>Daily news and briefings built for the field.</p></div>
+<div class="tile"><h3>Framework Hub</h3><p>Frameworks, tenders, awards and expiries across the NHS.</p></div>
+<div class="tile"><h3>Sales Triggers Desk</h3><p>Which accounts to call this week, and why.</p></div>
+<div class="tile"><h3>Company Intelligence Reports</h3><p>Twelve sections on any competitor or customer.</p></div>
+<div class="tile"><h3>Compare Your Product</h3><p>Up to ten products side by side.</p></div>
+<div class="tile"><h3>Stakeholder Mapper</h3><p>Map the people behind a buying decision.</p></div>
+<div class="tile"><h3>The Rep's Briefing</h3><p>A weekly email every Monday: who's buying, what's changed, what to ask.</p></div>
+<div class="tile"><h3>Career Centre and Interview Prep</h3><p>Roles, preparation and courses for your next move.</p></div>
+</div>
+</div></div></section>
+
+<section class="close fw"><div class="col">
+<h2>Every plan opens the whole Hub from day one</h2>
+<p>Each item is checked on the issuing organisation's own page. No guesswork, no invented figures.</p>
+<p><a class="btn" href="https://medsalesintelligencehub.co.uk/join-the-hub/">Join the Hub</a></p>
+<p class="src">Sources, all read 20 October 2026: NHS England Digital, <a href="https://digital.nhs.uk/services/digital-technology-assessment-criteria-dtac">Digital Technology Assessment Criteria</a>; GOV.UK, <a href="https://www.gov.uk/government/news/government-backs-recommendations-of-nhs-doctors-led-ai-commission">Government backs recommendations of NHS doctors-led AI Commission</a> (6 October 2026); NHS England, <a href="https://www.england.nhs.uk/digitaltechnology/nhs-federated-data-platform/impact/fdp-uptake-and-benefits/">Federated Data Platform uptake and benefits</a> (figures to end of August 2026); Government Commercial Agency, <a href="https://www.gca.gov.uk/agreements/RM1557.15">G-Cloud 15</a>.</p>
+</div></section>
+
+</div>
+<!-- /wp:html -->
