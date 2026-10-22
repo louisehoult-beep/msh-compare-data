@@ -339,6 +339,20 @@ SOURCES = [
      "specialities": [], "paged": True},
     {"id": "bhta", "name": "British Healthcare Trades Association", "url": "https://www.bhta.com/feed/",
      "specialities": [], "paged": True},
+    # Added 22/10/2026 for dermatology (Lou: "find news ... add the sources so they are checked on each
+    # refresh"). The page held no whole-feed source, only the keyword slice. Both fetched 22/10/2026 with
+    # items inside the last fortnight. Skin Analytics is the supplier's own news feed: its items are
+    # company-reported (the AI skin cancer triage tool, DERM, now live in 25 NHS trusts and rolling out
+    # across all 18 NHS England South East trusts), and the label says so. The Nursing Times
+    # dermatology section is the tagged section feed, where the general Nursing Times feed above only
+    # reaches the page by headline keyword. Rejected the same day: British Association of Dermatologists,
+    # British Skin Foundation, Eczema UK, Psoriasis UK (no feed, 404); Primary Care Dermatology Society
+    # (500); Melanoma Focus (bot challenge); British Journal of Dermatology and Clinical and
+    # Experimental Dermatology contents (60 to 90 items of international research each, would bury UK news).
+    {"id": "skin_analytics", "name": "Skin Analytics (company news)", "url": "https://skin-analytics.com/news/feed/",
+     "specialities": ["dermatology"]},
+    {"id": "nursing_times_dermatology", "name": "Nursing Times", "url": "https://www.nursingtimes.net/dermatology/feed/",
+     "specialities": ["dermatology"]},
 ]
 
 
