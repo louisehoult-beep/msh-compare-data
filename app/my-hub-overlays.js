@@ -10,8 +10,8 @@
                Procurement, Recruiter, All), each page labelled with the
                profiles whose nav carries it; your own profile only adds a
                starter set, it never limits what you can pick.
-     m-brief   Weekly briefing: phase 2. Coming soon; the only action records
-               interest on the account and promises nothing by email.
+     m-brief   Weekly briefing: live. The Rep's Briefing goes to every member from
+               MailerLite on Monday at 9am; "Got it" only records that it was seen.
      m-how     How My Hub works, with Replay the tour.
      m-phone   Add to Home Screen, for the checklist.
      m-lib     Which speciality to open the Clinical Evidence Library at,
@@ -74,12 +74,12 @@
         + '<div class="chips" id="mx-pchips" role="group" aria-label="Browse by profile"></div>' + field('mx-pq', 'Search Hub pages', 'Search Hub pages')
         + '<div class="mx-pgrid"><div id="mx-plist"></div><div class="mx-pord"><h3>Your page, in order</h3><ol id="mx-pord"></ol></div></div>',
         '<small id="mx-pn"></small><button type="button" class="btn ghost" data-act="pages-starter">Add my profile\u2019s starter set</button><button type="button" class="btn ghost" data-close>Cancel</button><button type="button" class="btn navy" data-act="pages-save">Save my pages</button>')
-      + modal('m-brief', 'sm', 'mail', 'Weekly briefing', '<p class="mx-lede">Every Monday morning, built from your specialities. A section with nothing in it is left out. It has not started yet.</p>'
-        + '<label class="opt locked"><input type="checkbox" checked disabled><span><b>Safety alerts</b><span>Always included, for every member</span></span></label>'
-        + '<label class="opt locked"><input type="checkbox" checked disabled><span><b>New stories in your specialities</b><span>Only the ones worth your time</span></span></label>'
-        + '<label class="opt locked"><input type="checkbox" checked disabled><span><b>Tenders and framework deadlines</b><span>Closing in the next fortnight</span></span></label>'
-        + '<label class="opt locked"><input type="checkbox" checked disabled><span><b>Events</b><span>In the next fortnight</span></span></label>',
-        '<small id="mx-brief-note">We\u2019ll show it on My Hub when it starts.</small><button type="button" class="btn ghost" data-close>Not now</button><button type="button" class="btn navy" data-act="brief-go" id="mx-brief-go">Tell me when it starts</button>')
+      + modal('m-brief', 'sm', 'mail', 'Weekly briefing', '<p class="mx-lede">The Rep\u2019s Briefing is emailed to every Hub member on Monday at 9am. There is nothing to switch on.</p>'
+        + '<label class="opt locked"><input type="checkbox" checked disabled><span><b>Leading signals</b><span>Demand, competitor and NICE moves</span></span></label>'
+        + '<label class="opt locked"><input type="checkbox" checked disabled><span><b>What\u2019s changed</b><span>Policy, guidance and supply</span></span></label>'
+        + '<label class="opt locked"><input type="checkbox" checked disabled><span><b>Who\u2019s buying and what\u2019s launching</b><span>Awards and tenders, each with its source</span></span></label>'
+        + '<label class="opt locked"><input type="checkbox" checked disabled><span><b>Questions to ask customers this week</b><span>Plus a pathway spotlight</span></span></label>',
+        '<small id="mx-brief-note">It is the same briefing for every member. Unsubscribe from the email itself if you do not want it.</small><button type="button" class="btn ghost" data-close>Close</button><button type="button" class="btn navy" data-act="brief-go" id="mx-brief-go">Got it</button>')
       + modal('m-how', 'sm', 'help', 'How My Hub works', '<ul class="howlist">' + how.map(function (h) { return '<li><span class="c">' + svg(h[0]) + '</span><span>' + h[1] + '</span></li>'; }).join('') + '</ul>',
         '<button type="button" class="btn navy" data-act="tour">' + svg('play') + 'Replay the tour</button>')
       + modal('m-phone', 'sm', 'phone', 'Add My Hub to your Home Screen', '<ul class="howlist">'
@@ -236,7 +236,6 @@
   function briefFoot() {
     var on = M.acct.state.briefing, go = $('#mx-brief-go');
     go.style.display = on ? 'none' : '';
-    $('#mx-brief-note').textContent = on ? 'You\u2019re on the list. We\u2019ll show it on My Hub when it starts.' : 'We\u2019ll show it on My Hub when it starts.';
   }
 
   /* ---------- library chooser ---------- */
@@ -252,7 +251,7 @@
     ['scope', 'My specialities or Everything', 'Narrow the page to your specialities, or switch to the whole Hub. Safety alerts always show in full.'],
     ['tools', 'Tools', 'Every Hub tool in one place, grouped and searchable.'],
     ['library', 'Clinical Evidence Library', 'Studies and guidance for your specialities, ready for a customer conversation.'],
-    ['briefing', 'Weekly briefing', 'A Monday email with what changed in your specialities. Coming soon.'],
+    ['briefing', 'Weekly briefing', 'The Rep\u2019s Briefing, emailed to every member on Monday at 9am.'],
     ['saved', 'Saved', 'Anything you star lands here, on every device you use.'],
     ['search', 'Search', 'Search every Hub page. Press Ctrl K on My Hub to jump straight here.'],
     ['how', 'How it works', 'A one-minute guide, and the place to replay this tour.'],
@@ -373,7 +372,7 @@
       if (act === 'spec-save') { saveSpecs(); return; }
       if (act === 'pages-save') { savePages(); return; }
       if (act === 'pages-starter') { starter(); return; }
-      if (act === 'brief-go') { close(); M.saveState({ briefing: true }).then(function () { M.toast('You\u2019re on the list.'); }); return; }
+      if (act === 'brief-go') { close(); M.saveState({ briefing: true }).then(function () { M.toast('Look out for it on Monday at 9am.'); }); return; }
       if (act === 'phone-done') { close(); M.saveState({ phone: true }).then(function () { M.toast('Done. Open My Hub from your Home Screen.'); }); }
     });
     M.mount.addEventListener('change', function (e) {
