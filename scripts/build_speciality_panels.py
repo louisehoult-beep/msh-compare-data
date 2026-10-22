@@ -568,7 +568,7 @@ SPECIALITY_RULES = {
             r"surgical stapler\w*|skin stapler\w*|linear stapler\w*|"
             r"circular stapler\w*|stapling device\w*|"
             r"tissue adhesive|skin adhesive|haemostat\w*|hemostat\w*|"
-            r"procedure pack\w*|surgical drape\w*|surgical gown\w*|surgical glove\w*|"
+            r"procedure pack\w*|procedural kit\w*|surgical drape\w*|surgical gown\w*|surgical glove\w*|"
             r"scrub suit\w*|laparoscop\w*|minimally invasive|trocar\w*|"
             r"robotic surger\w*|surgical robot\w*|perioperative|peri-operative|"
             r"smoke evacuat\w*|surgical light\w*)\b"
