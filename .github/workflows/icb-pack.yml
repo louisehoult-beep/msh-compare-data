@@ -1,0 +1,94 @@
+name: ICB pack data (dermatology emollients)
+
+# WHY THIS WORKFLOW EXISTS (added 22/10/2026, Lou: the pack is a Hub tool, so it must refresh itself)
+#
+# Rebuilds data/icb-pack/ (index.json + one shard per ICB) for app/icb-pack.js from five open
+# sources: NHSBSA English Prescribing Dataset (practice level), NHSBSA Secondary Care Medicines
+# Data, NHS England RTT waiting times, English Indices of Deprivation 2025 with the ONS LSOA to ICB
+# lookup, and NHS Digital registered patients. See scripts/build_icb_pack.py and
+# Process flows for all brands/icb-pack-dermatology-spec-2026-10-22.md.
+#
+# TIMING. It has to run AFTER gp-prescribing.yml (07:20 UTC, days 15-28), because it reads
+# data/gp-prescribing/ for ICB-level series and refuses to build if its periods differ from the
+# practice-level pull. So it runs at 09:30 UTC on the same days. `--if-new` makes a day with
+# nothing new a no-op in a few seconds: it rebuilds only when NHSBSA has a newer prescribing month
+# than the pack, or NHS England has a newer RTT month than the pack (RTT lands around the second
+# Thursday, so the 15th onward catches it too). Measured 22/10/2026: full build about 3 minutes.
+#
+# GATES. test_icb_pack.py (data shape, brands plus other equal market, QV equals the repo shard rows,
+# trend floor, palette) and the shared publish gate. Nothing commits until both pass.
+
+on:
+  schedule:
+    - cron: "30 9 15-28 * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Rebuild even if nothing new has been published (yes/no)"
+        required: false
+        default: "no"
+
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  icb-pack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install openpyxl
+        run: python3 -m pip install --quiet openpyxl
+
+      - name: Build ICB pack data
+        run: |
+          if [ "${{ github.event.inputs.force }}" = "yes" ]; then
+            python3 scripts/build_icb_pack.py --refresh
+          else
+            python3 scripts/build_icb_pack.py --if-new
+          fi
+
+      - name: ICB pack check
+        run: python3 test_icb_pack.py
+
+      - name: Publish gate, the same one every other writer runs
+        run: bash scripts/gate.sh
+
+      - name: Commit and push
+        run: |
+          git config user.name "hub-bot"
+          git config user.email "contact@elevateandthrive.uk"
+          git add data/icb-pack/
+          if git diff --cached --quiet; then
+            echo "no change to commit"
+            exit 0
+          fi
+          latest=$(python3 -c "import json;print(json.load(open('data/icb-pack/index.json'))['periods'][-1])")
+          git commit -m "ICB pack data to $latest ($(date -u +%F))"
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (attempt $attempt), rebasing and re-gating"
+            git fetch origin
+            git rebase origin/main
+            bash scripts/gate.sh || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
+            sleep 5
+          done
+          if [ "$pushed" != "1" ]; then
+            echo "could not push after 5 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi

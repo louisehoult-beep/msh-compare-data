@@ -60,6 +60,8 @@ LICENCES = [
     ("IMD 2025 File 7 (LSOA scores and population) with ONS LSOA (2021) to ICB (April 2026) lookup",
      "Open Government Licence v3.0 (IMD); ONS lookup: data.gov.uk dataset licence field unset, site footer says "
      "Open Government Licence v3.0 except where stated. https://www.data.gov.uk/dataset/1d16e489-1dc8-443e-9e1c-15de4f961c6d"),
+    ("NHSBSA Secondary Care Medicines Data (finalised to March 2026, provisional after), via the datastore SQL API", "Open Government Licence 3.0. "
+     "https://opendata.nhsbsa.net/dataset/secondary-care-medicines-data-indicative-price"),
     ("NHS Digital Patients Registered at a GP Practice, mapping and practice totals", "NHS England terms: "
      "released under the Open Government Licence. " + GPREG_PARENT),
     ("NHS England, items which should not routinely be prescribed in primary care", "Open Government Licence v3.0. "
@@ -214,6 +216,49 @@ def fetch_practice_level(cache, periods, refresh=False):
         have[p] = month
         json.dump(have, open(path, "w"))
     return have
+
+
+def scmd_tables(periods):
+    """{YYYYMM: resource} for NHSBSA Secondary Care Medicines Data: finalised where it
+    exists (to March 2026), provisional after."""
+    import refresh_gp_prescribing as g
+    names = {}
+    for pkg in ("finalised-secondary-care-medicines-data-scmd-with-indicative-price",
+                "secondary-care-medicines-data-indicative-price"):
+        doc = json.loads(g.fetch("%s/package_show?id=%s" % (g.CKAN, pkg), timeout=90))
+        for r in doc["result"]["resources"]:
+            m = re.fullmatch(r"SCMD_(FINAL|PROVISIONAL)_(\d{6})", (r.get("name") or "").strip())
+            if m and (m.group(2) not in names or m.group(1) == "FINAL"):
+                names[m.group(2)] = r["name"]
+    missing = [p for p in periods if p not in names]
+    if missing:
+        raise RuntimeError("SCMD months not published: %s" % missing)
+    return {p: names[p] for p in periods}
+
+
+def fetch_hospital(cache, periods, brand_words, refresh=False):
+    """Indicative cost by trust x VMP name for emollient brand VMPs, per month. VMP names
+    for brands read 'Generic <Brand> ...' or '<Brand> ...'."""
+    import refresh_gp_prescribing as g
+    path = os.path.join(cache, "scmd-brand-months.json")
+    have = json.load(open(path)) if os.path.exists(path) and not refresh else {}
+    tables = scmd_tables(periods)
+    like = " OR ".join("LOWER(VMP_PRODUCT_NAME) LIKE 'generic %s%%' OR LOWER(VMP_PRODUCT_NAME) LIKE '%s%%'"
+                       % (w.lower().replace("'", ""), w.lower().replace("'", "")) for w in brand_words)
+    for p in periods:
+        if p in have:
+            continue
+        t = tables[p]
+        q = ("SELECT ODS_CODE AS o, VMP_PRODUCT_NAME AS n, SUM(INDICATIVE_COST) AS c FROM `%s` WHERE %s "
+             "GROUP BY ODS_CODE, VMP_PRODUCT_NAME" % (t, like))
+        have[p] = [[r["o"], r["n"], float(r["c"] or 0)] for r in g.sql(t, q)]
+        json.dump(have, open(path, "w"))
+    return have
+
+
+def hospital_brand_key(name):
+    w = re.sub(r"^generic\s+", "", name.strip(), flags=re.I).split()
+    return brand_key(w[0]) if w else ""
 
 
 def brand_key(word):
@@ -434,6 +479,25 @@ def assemble(cache):
     for d in pcn.values():
         d["list"] = sum(size.get(pr, 0) for pr in d["practices"])
 
+    tmap = {t["code"]: t for t in json.load(open(os.path.join(ROOT, "data", "trust-map.json")))["trusts"]}
+    hosp = collections.defaultdict(lambda: collections.defaultdict(lambda: [0.0] * n))   # icb -> brand -> [n]
+    hosp_trust = collections.defaultdict(lambda: collections.defaultdict(lambda: collections.defaultdict(float)))  # icb->trust->brand->12m
+    hosp_nat = collections.defaultdict(lambda: [0.0] * n)
+    scmd = json.load(open(os.path.join(cache, "scmd-brand-months.json")))
+    hosp_unmapped = 0.0
+    for k, p in enumerate(periods):
+        for o, nme, c in scmd[p]:
+            b = hospital_brand_key(nme)
+            if b not in bset:
+                continue
+            hosp_nat[b][k] += c
+            t = tmap.get(o[:3]) or tmap.get(o)
+            if not t:
+                hosp_unmapped += c
+                continue
+            hosp[t["icb"]][b][k] += c
+            if k >= n - 12:
+                hosp_trust[t["icb"]][o][b] += c
     shards, rank = {}, {b: {} for b in brands}
     icb_meta = {}
     for code, name in idx["icbs"].items():
@@ -455,6 +519,10 @@ def assemble(cache):
             "brands": brand_blocks,
             "otherBrands": {"items": [max(0, mkt[k] - sum(s_items[code].get(b, [0] * n)[k] for b in brands)) for k in range(n)]},
             "topProducts": [{"label": l, "items12": v} for l, v in sorted(s_products[code].items(), key=lambda kv: -kv[1])[:15]],
+            "hospital": {"brands": {b: [r2(x, 0) for x in hosp[code][b]] for b in brands if any(hosp[code][b])},
+                         "trusts": [{"code": o, "name": (tmap.get(o) or {}).get("n", o),
+                                     "cost12": {b: r2(v, 0) for b, v in bb.items()}}
+                                    for o, bb in sorted(hosp_trust[code].items())]},
             "pcns": [{"code": c, "name": d["name"], "list": d["list"], "practices": len(d["practices"]),
                       "market": [int(x) for x in d["m"]],
                       "brands": {b: [int(x) for x in d["b"][b]] for b in brands}}
@@ -474,6 +542,11 @@ def assemble(cache):
             "rttSeries": series,
             "list": sum(d["list"] for _, d in pcns),
         }
+    pol_path = os.path.join(ROOT, "config", "icb-pack-policies.json")
+    policies = {k: v for k, v in json.load(open(pol_path)).items() if not k.startswith("_")}
+    for code, pol in policies.items():
+        if code in icb_meta:
+            icb_meta[code]["otc"] = pol
     index = {
         "generatedOn": datetime.date.today().isoformat(), "periods": periods, "minBaselineItems": floor,
         "rttPeriod": rtt_period, "rttPeriods": rtt_periods,
@@ -486,6 +559,12 @@ def assemble(cache):
                      "rttSeries": {"total": [rtt_hist[q]["ENGLAND"]["total"] for q in rtt_periods],
                                    "median": [r2(rtt_hist[q]["ENGLAND"]["median"], 1) for q in rtt_periods]}},
         "unmappedItems": int(unmapped),
+        "hospital": {"national": {b: [r2(x, 0) for x in hosp_nat[b]] for b in brands if any(hosp_nat[b])},
+                     "unmappedCost": r2(hosp_unmapped, 0),
+                     "scope": "Medicines issued by NHS trust pharmacies (pharmacy stock control), England, Secondary Care Medicines Data. "
+                              "Indicative cost at list or reimbursement price, not what trusts pay. Only emollients whose dm+d name carries the brand "
+                              "(for example Generic QV Gentle wash) can be attributed to a brand; generic-named emollients cannot, so there is no "
+                              "hospital share of the emollient market. Provisional data after March 2026."},
         "sources": {k: v for k, v in sources.items()},
         "licences": [{"source": a, "licence": b} for a, b in LICENCES],
     }
@@ -503,18 +582,52 @@ NOTICE = {
 }
 
 
+def hospital_words(cache, periods):
+    """Brand display words, from the practice-level pull (same rule as assemble)."""
+    prac = json.load(open(os.path.join(cache, "epd-practice-brand-months.json")))
+    tot, disp = collections.Counter(), {}
+    for p in periods[-12:]:
+        for bw in prac[p].values():
+            for w, (i, c) in bw.items():
+                tot[brand_key(w)] += i
+                disp.setdefault(brand_key(w), w)
+    return [disp[k] for k, v in tot.most_common() if v >= BRAND_FLOOR and k not in GENERIC_WORDS]
+
+
+def up_to_date(out, gp_periods):
+    """True when data/icb-pack/ already carries the latest NHSBSA month and the latest RTT month."""
+    path = os.path.join(out, "index.json")
+    if not os.path.exists(path):
+        return False
+    have = json.load(open(path))
+    if have.get("periods") != gp_periods:
+        return False
+    text = http(RTT_PAGE).decode("utf-8", "replace")
+    m = re.search(r"Incomplete-Commissioner-([A-Za-z]{3})(\d\d)", text)
+    if not m:
+        return False          # cannot tell, so rebuild
+    full = {"Jan": "January", "Feb": "February", "Mar": "March", "Apr": "April", "May": "May", "Jun": "June",
+            "Jul": "July", "Aug": "August", "Sep": "September", "Oct": "October", "Nov": "November", "Dec": "December"}
+    return have.get("rttPeriod") == "%s 20%s" % (full[m.group(1)], m.group(2))
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--cache", default=os.path.join(ROOT, "tmp", "icb-pack-cache"))
     ap.add_argument("--out", default=os.path.join(ROOT, "data", "icb-pack"))
     ap.add_argument("--refresh", action="store_true", help="re-download every source")
+    ap.add_argument("--if-new", action="store_true", help="exit quietly unless NHSBSA or RTT has a newer month")
     ap.add_argument("--no-fetch", action="store_true", help="use the cache as it stands")
     a = ap.parse_args(argv)
     idx = json.load(open(os.path.join(GP_DIR, "index.json")))
+    if a.if_new and up_to_date(a.out, idx["periods"]):
+        print("icb-pack: already at NHSBSA %s and RTT %s, nothing to do" % (idx["periods"][-1], "latest"))
+        return 0
     if not a.no_fetch:
         fetch_all(a.cache, a.refresh)
         fetch_practice_level(a.cache, idx["periods"], a.refresh)
         fetch_rtt_history(a.cache, a.refresh)
+        fetch_hospital(a.cache, idx["periods"], hospital_words(a.cache, idx["periods"]), a.refresh)
     index, shards = assemble(a.cache)
     os.makedirs(a.out, exist_ok=True)
     for old in glob.glob(os.path.join(a.out, "icb-*.json")):

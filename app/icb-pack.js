@@ -139,6 +139,23 @@
       + '<p class="note">Monthly ' + esc(BL) + ' items in the ICB. Emollient items in the ICB: ' + num(m12) + ' in the 12 months.</p>'
       + '<h3>Top emollient products in the ICB (12 months, items)</h3><table><tr><th>Product</th><th>Items</th><th>Share of emollient items</th></tr>' + prod + '</table>';
 
+    // 2b hospital use (NHSBSA Secondary Care Medicines Data)
+    var H = S.hospital || { brands: {}, trusts: [] }, hb = H.brands[brand], hnat = (D.hospital.national[brand] || []);
+    var hosp;
+    if (hb) {
+      var htr = H.trusts.map(function (t) { return { name: t.name, c: t.cost12[brand] || 0 }; }).filter(function (t) { return t.c > 0; }).sort(function (a, b) { return b.c - a.c; });
+      hosp = '<div class="kpis"><div class="kpi"><b>' + money(sum(last12(hb))) + '</b><span>' + esc(BL) + ' issued by trust pharmacies in ' + esc(nm) + ', indicative cost, 12 months</span></div>'
+        + '<div class="kpi"><b>' + pc(ratio(sum(last12(hb)), sum(last12(hnat)))) + '</b><span>of England\'s ' + esc(BL) + ' hospital issues (indicative cost)</span></div></div>'
+        + line(hb, labels, GOLD)
+        + '<h3>By trust (12 months, indicative cost)</h3><table><tr><th>Trust</th><th>' + esc(BL) + ' indicative cost</th></tr>'
+        + htr.map(function (t) { return '<tr><td>' + esc(t.name) + '</td><td>' + money(t.c) + '</td></tr>'; }).join('') + '</table>';
+    } else if (hnat.length) {
+      hosp = '<p>No ' + esc(BL) + ' issues are recorded for the trusts in ' + esc(nm) + ' in these 13 months (England: ' + money(sum(last12(hnat))) + ' indicative cost).</p>';
+    } else {
+      hosp = '<p><span class="nv">' + NV + '</span>: no brand-named ' + esc(BL) + ' products in the hospital data.</p>';
+    }
+    hosp += '<p class="note">' + esc(D.hospital.scope) + ' Trusts are assigned to ICBs from the NHS Organisation Data Service (trust map, April 2026 ICBs).</p>';
+
     // 3 PCNs
     var rows = S.pcns.filter(function (c) { return c.list > 0; }).map(function (c) {
       var series = c.brands[brand], q12 = sum(last12(series)), mm = sum(last12(c.market));
@@ -181,7 +198,11 @@
 
     // 6 OTC context
     var otc = '<p><b>National position (verified at source, 22/10/2026).</b> NHS England policy guidance, "Items which should not routinely be prescribed in primary care" (published 3 August 2023, updated 19 August 2025), lists bath and shower preparations for dry and pruritic skin conditions as prescribe only in exceptional circumstances, with the advice to substitute leave-on emollients. It does not list plain leave-on emollients.</p>'
-      + '<p><b>This ICB\'s own over-the-counter policy: <span class="nv">' + NV + '</span>.</b> Local positions sit in each ICB\'s own formulary or Area Prescribing Committee documents. What would settle it: that page, or a written answer from the ICB medicines optimisation team. Write what you find here.</p><div class="edit" contenteditable="true">ICB policy: </div>';
+      + (M.otc
+        ? '<p><b>This ICB\'s own position (read at source, ' + esc(M.otc.verifiedOn) + ').</b></p><ul>' + M.otc.points.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>'
+          + '<p class="note">Sources: ' + M.otc.sources.map(function (s) { return '<a href="' + esc(s.url) + '" style="color:' + DEEP + '">' + esc(s.title) + '</a>'; }).join('; ') + '. ' + esc(M.otc.limits) + '</p>'
+        : '<p><b>This ICB\'s own over-the-counter policy: <span class="nv">' + NV + '</span>.</b> Local positions sit in each ICB\'s own formulary or Area Prescribing Committee documents. What would settle it: that page, or a written answer from the ICB medicines optimisation team. Write what you find here.</p>')
+      + '<div class="edit" contenteditable="true">ICB policy notes: </div>';
 
     // 7 ranking, for the chosen brand
     var codes = Object.keys(D.icbs), R = D.rank[brand];
@@ -207,12 +228,13 @@
       + '<p><button id="icbp-save">Save edited copy</button><button id="icbp-print">Print or save as PDF</button></p></div></div>'
       + sec('', '1 · National overview', 'England', nat + '<p class="note">Market definition: ' + esc(D.market) + '. Brand: the first word of the NHSBSA presentation name. Items are the NHSBSA English Prescribing Dataset, primary care, 12 months to ' + labels[labels.length - 1] + '.</p>')
       + sec('warm', '2 · ICB view', 'Brand share and trend', icbv)
-      + sec('', '3 · Primary Care Networks', 'Where it is prescribed, and how much it varies', pcn)
-      + sec('warm', '4 · Dermatology waiting times', 'Referral to Treatment (RTT)', rtt)
-      + sec('', '5 · Deprivation', 'Index of Multiple Deprivation (IMD)', imd)
-      + sec('warm', '6 · Context', 'Moves towards over-the-counter', otc)
-      + sec('', '7 · Choosing a focus', 'All ICBs side by side', rank)
-      + sec('warm', '8 · Your notes', 'Value proposition starting points', '<div class="edit" contenteditable="true">Type here: what the figures say for this ICB, the access barrier, the ask.</div>')
+      + sec('', '2b · Hospital use', 'Secondary care: medicines issued by trust pharmacies', hosp)
+      + sec('warm', '3 · Primary Care Networks', 'Where it is prescribed, and how much it varies', pcn)
+      + sec('', '4 · Dermatology waiting times', 'Referral to Treatment (RTT)', rtt)
+      + sec('warm', '5 · Deprivation', 'Index of Multiple Deprivation (IMD)', imd)
+      + sec('', '6 · Context', 'Moves towards over-the-counter', otc)
+      + sec('warm', '7 · Choosing a focus', 'All ICBs side by side', rank)
+      + sec('', '8 · Your notes', 'Value proposition starting points', '<div class="edit" contenteditable="true">Type here: what the figures say for this ICB, the access barrier, the ask.</div>')
       + '<div class="band"><div class="col"><div class="eyebrow">Definitions, sources and licences</div>'
       + '<p class="note">Trend: latest month against the same month a year earlier, shown only where that baseline is at least ' + floor + ' items. Share: brand items divided by emollient items over the latest 12 months. PCN spread: coefficient of variation of 12-month brand items per 1,000 registered patients across the ICB\'s PCNs. Built ' + esc(D.generatedOn) + '.</p><ul class="note">' + srcs + '</ul></div></div></div>';
 
