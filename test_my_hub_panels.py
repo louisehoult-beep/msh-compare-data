@@ -23,7 +23,7 @@ NOW = "2026-10-22T09:30:15.123Z"
 
 RUNNER = r"""
 const P = require(process.argv[1]);
-const cases = JSON.parse(process.argv[2]);
+const cases = JSON.parse(require('fs').readFileSync(0, 'utf8'));
 process.stdout.write(JSON.stringify(cases.map(([fn, args]) => P[fn].apply(null, args))));
 """
 
@@ -32,7 +32,7 @@ def node(calls):
     n = shutil.which("node")
     if not n:
         raise unittest.SkipTest("node not installed")
-    r = subprocess.run([n, "-e", RUNNER, LIB, json.dumps(calls)], capture_output=True, text=True, timeout=60)
+    r = subprocess.run([n, "-e", RUNNER, LIB], input=json.dumps(calls), capture_output=True, text=True, timeout=60)
     if r.returncode != 0:
         raise AssertionError(r.stderr)
     return json.loads(r.stdout)
