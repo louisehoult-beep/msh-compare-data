@@ -189,6 +189,7 @@ RUN = [
     "test_whats_new.py",
     "test_my_hub_logic.py",
     "test_my_hub_ui.py",             # 2026-10, My Hub modules wired, copy rules
+    "test_my_hub_bookmark.py",       # 2026-10, My Hub bookmark prompt shown once
     "test_my_hub_panels.py",         # 22/10/2026, pinned speciality panels and calendar export
     "test_emollient_explorer.py",    # 22/10/2026, dermatology emollient prescribing explorer data
     "test_my_hub_state.py",          # 2026-10, PHP snippet and browser client agree (php, node; skipped where absent)
