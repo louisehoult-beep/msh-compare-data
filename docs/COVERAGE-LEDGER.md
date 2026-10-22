@@ -73,7 +73,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Blood Collection Devices | bloodcoll | 19 | 9 | 47.4% | 7 | 11 | STARTED |
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 9 | 47.4% | 8 | 9 | STARTED |
 | Examination Gloves | infection | 19 | 5 | 26.3% | 5 | 13 | STARTED |
-| Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 10 | 9 | STARTED |
+| Central Venous Catheters and Associated Products | vascular | 18 | 8 | 44.4% | 7 | 11 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 7 | 38.9% | 2 | 13 | STARTED |
 | Patient Temperature Management | theatres | 18 | 7 | 38.9% | 10 | 10 | STARTED |
 | Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 6 | 33.3% | 0 | 11 | STARTED · 2 EXCLUDED |
@@ -97,7 +97,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Male Intra-Urethral Catheter with Magnet Control | continence | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Non-Imaging Vibration Controlled Ultrasound System | ultrasound | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Airway Management Products and Associated Equipment | — | 54 | 0 | 0.0% | 39 | 28 | UNMAPPED |
-| Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 41 | 27 | UNMAPPED |
+| Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 40 | 28 | UNMAPPED |
 | Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 31 | 21 | UNMAPPED |
 | Wound Closure | — | 39 | 0 | 0.0% | 35 | 19 | UNMAPPED |
 | Procedure Packs | — | 29 | 0 | 0.0% | 22 | 18 | UNMAPPED |
