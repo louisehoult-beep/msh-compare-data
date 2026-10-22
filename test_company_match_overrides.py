@@ -36,7 +36,8 @@ class OverrideFileShape(unittest.TestCase):
         for name, e in ENTRIES.items():
             self.assertTrue(e.get("reason"), "%s: no reason" % name)
             self.assertTrue(e.get("decidedOn"), "%s: no decidedOn" % name)
-            self.assertTrue(e.get("exclude"), "%s: no exclude list" % name)
+            self.assertTrue(e.get("exclude") or e.get("correct"),
+                            "%s: neither an exclude list nor a corrected number" % name)
 
     def test_a_corrected_number_cites_two_independent_sources(self):
         """Lou's rule, 03/09/2026: one source is not enough to assert an identity."""
@@ -52,7 +53,7 @@ class OverrideFileShape(unittest.TestCase):
         for name, e in ENTRIES.items():
             if e.get("correct"):
                 self.assertNotIn(e["correct"].upper(),
-                                 {n.upper() for n in e["exclude"]},
+                                 {n.upper() for n in e.get("exclude", [])},
                                  "%s both sets and excludes the same number" % name)
 
     def test_overrides_name_real_suppliers(self):
@@ -126,7 +127,7 @@ class LiveDataMatchesTheDecision(unittest.TestCase):
             num = (rec.get("companyNumber") or "").upper()
             if not num:
                 continue
-            self.assertNotIn(num, {n.upper() for n in e["exclude"]},
+            self.assertNotIn(num, {n.upper() for n in e.get("exclude", [])},
                              "%s still publishes excluded company %s (%s)"
                              % (name, num, rec.get("registeredName")))
 
