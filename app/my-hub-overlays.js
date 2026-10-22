@@ -59,7 +59,7 @@
       ['star', '<b>Star anything</b> to keep it under Saved, on any device.'],
       ['search', '<b>Press Ctrl K</b> (Cmd K on a Mac) to search from My Hub.']
     ];
-    return modal('m-tools', '', 'grid', 'All tools', field('mx-tf', 'Filter tools', 'Filter tools, for example frameworks')
+    return M.company.modalHtml() + modal('m-tools', '', 'grid', 'All tools', field('mx-tf', 'Filter tools', 'Filter tools, for example frameworks')
         + '<div class="chips" id="mx-tchips" role="group" aria-label="Tool groups"></div>'
         + '<p class="scope-note" id="mx-tnote"></p><div id="mx-tgroups"></div>')
       + '<div class="scrim" id="m-search" role="dialog" aria-modal="true" aria-labelledby="m-search-t"><div class="modal sm mx-search">'
@@ -106,6 +106,7 @@
     if (id === 'm-spec') { specDraft = M.specIds().slice(); $('#mx-spf').value = ''; renderSpecs(); }
     if (id === 'm-pages') { draft = M.visiblePins().slice(); pProfile = 'all'; $('#mx-pq').value = ''; pageChips(); renderPages(); }
     if (id === 'm-brief') { briefFoot(); }
+    if (id === 'm-company') { M.company.openPicker(); }
     var f = m.querySelector('input:not([disabled])') || m.querySelector('button:not([disabled])');
     setTimeout(function () { if (f) { f.focus(); } }, 30);
   }

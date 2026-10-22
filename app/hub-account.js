@@ -23,12 +23,12 @@
   var API = '/wp-json/msh/v1/my-hub';
   var LS_PINS = 'msh_my_hub_pins_v1';
   var LS_STATE = 'msh_hub_state_v1';
-  var MAX_STARS = 200, MAX_SEEN = 300;
+  var MAX_STARS = 200, MAX_SEEN = 300, MAX_COMPANIES = 5;
   var HOST = /^https:\/\/(www\.)?medsalesintelligencehub\.co\.uk(?=\/|$)/;
 
   /* ---------- pure: the same rules as the PHP snippet ---------- */
   function blank() {
-    return { v: 1, wnSeen: [], tour: false, tourSeen: false, briefing: false, phone: false, scope: 'mine', stars: [] };
+    return { v: 1, wnSeen: [], tour: false, tourSeen: false, briefing: false, phone: false, scope: 'mine', stars: [], companies: [] };
   }
   function starKey(u) {
     u = String(u === null || u === undefined ? '' : u).trim();
@@ -62,6 +62,14 @@
     }
     ['tour', 'tourSeen', 'briefing', 'phone'].forEach(function (k) { out[k] = s[k] === true; });
     out.scope = s.scope === 'all' ? 'all' : 'mine';
+    if (Array.isArray(s.companies)) {
+      s.companies.slice(0, 200).forEach(function (id) {
+        if (typeof id === 'string') {
+          if (/^[a-z0-9-]{1,80}$/.test(id)) { if (out.companies.indexOf(id) === -1) { out.companies.push(id); } }
+        }
+      });
+      out.companies = out.companies.slice(0, MAX_COMPANIES);
+    }
     if (Array.isArray(s.stars)) {
       var have = {};
       for (var i = 0; i < Math.min(s.stars.length, 2000); i++) {

@@ -39,6 +39,7 @@ if ( ! function_exists( 'msh_hub_state_blank' ) ) {
 			'phone'    => false,
 			'scope'    => 'mine',
 			'stars'    => array(),
+			'companies' => array(),
 		);
 	}
 }
@@ -117,6 +118,14 @@ if ( ! function_exists( 'msh_hub_state_clean' ) ) {
 			$out[ $k ] = isset( $s[ $k ] ) && true === $s[ $k ];
 		}
 		$out['scope'] = ( isset( $s['scope'] ) && 'all' === $s['scope'] ) ? 'all' : 'mine';
+		if ( isset( $s['companies'] ) && msh_hub_is_list( $s['companies'] ) ) {
+			foreach ( array_slice( $s['companies'], 0, 200 ) as $id ) {
+				if ( is_string( $id ) && preg_match( '/^[a-z0-9-]{1,80}$/D', $id ) && ! in_array( $id, $out['companies'], true ) ) {
+					$out['companies'][] = $id;
+				}
+			}
+			$out['companies'] = array_slice( $out['companies'], 0, 5 );
+		}
 		if ( isset( $s['stars'] ) && msh_hub_is_list( $s['stars'] ) ) {
 			$have = array();
 			foreach ( array_slice( $s['stars'], 0, 2000 ) as $x ) {

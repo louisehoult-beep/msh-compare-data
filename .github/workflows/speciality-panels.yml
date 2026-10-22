@@ -68,6 +68,11 @@ jobs:
         run: python3 scripts/check_speciality_local_intel.py
       - name: Rebuild the speciality panels
         run: python3 scripts/build_speciality_panels.py
+      - name: Rebuild the company briefs for My Hub
+        # data/company-key-info/<id>.json: what a member who ticks their company
+        # on My Hub should know, built from the panels just rebuilt above and the
+        # supplier, press and news files. Writes only the files that changed.
+        run: python3 scripts/build_company_key_info.py
       - name: Panel invariants — the wound care panel cannot start showing X-ray cabinets
         # Cheap (~7s) and it reads the panels this job has just written, so it
         # catches a bad rebuild BEFORE the publish gate and before the commit.
@@ -83,7 +88,7 @@ jobs:
           # speciality-local-intel.json too (29/09/2026): the checker above writes each
           # item's lastCheck, and until now only this run's build used it; the stored
           # dates only moved when someone ran the checker by hand.
-          git add data/speciality-panels/ data/speciality-local-intel.json
+          git add data/speciality-panels/ data/speciality-local-intel.json data/company-key-info/
           git diff --cached --quiet || git commit -m "speciality panels rebuild $(date -u +'%F %H:%M')"
           pushed=0
           for attempt in 1 2 3 4 5; do
