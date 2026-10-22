@@ -281,12 +281,12 @@
 
   function briefHtml() {
     var on = M.acct.state.briefing;
-    return '<span class="bi">' + M.svg('mail') + '</span><h2 id="mx-br-t">Your Monday briefing<span class="soon">Coming soon</span></h2>'
-      + '<p>One email on Monday morning with what changed in your specialities. Left out when there is nothing worth sending.</p>'
+    return '<span class="bi">' + M.svg('mail') + '</span><h2 id="mx-br-t">Your Monday briefing<span class="soon">' + (on ? 'On' : 'Off') + '</span></h2>'
+      + '<p>One email on Monday morning with what changed in your specialities and companies. No email in a week with nothing new.</p>'
       + '<ul><li>' + M.svg('check') + 'New stories from your specialities</li><li>' + M.svg('check') + 'Every device and patient safety alert</li>'
       + '<li>' + M.svg('check') + 'Tenders and events in the next fortnight</li></ul>'
-      + (on ? '<div class="ok mx-on" role="status">' + M.svg('check') + 'You\u2019re on the list. We\u2019ll show it here when it starts.</div>'
-        : '<button type="button" class="btn brass" data-open="m-brief" data-k="brief-go">Tell me when it starts</button>');
+      + (on ? '<div class="ok mx-on" role="status">' + M.svg('check') + 'Switched on. Change your specialities and it follows.</div>'
+        : '<button type="button" class="btn brass" data-open="m-brief" data-k="brief-go">Switch on my briefing</button>');
   }
 
   function shell() {
