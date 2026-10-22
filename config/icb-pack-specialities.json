@@ -1,0 +1,39 @@
+{
+  "_note": "Speciality definitions for the ICB pack (scripts/build_icb_pack.py --speciality <id>). market = BNF presentation-code prefixes (NHSBSA English Prescribing Dataset). genericWords = first words of presentation names that are substances or formulations, not brands, so they fall into 'other'. rtt = NHS England Referral to Treatment treatment function, or null where none matches (it then reads Not applicable, never a substitute). Definitions are ours and are printed in the tool.",
+  "dermatology": {
+    "label": "Dermatology emollients", "short": "Dermatology", "noun": "emollient",
+    "market": ["130201", "2122"],
+    "marketText": "BNF 130201 (emollient preparations) plus appliance section 2122 (emollients), primary care items",
+    "shards": ["1302", "2122"], "brandFloor": 5000,
+    "genericWords": ["aqueous", "emulsifying", "liquid", "white", "isopropyl", "urea", "yellow", "paraffin", "soft", "hard", "wool", "glycerin", "glycerol", "sodium", "coal", "arachis", "zinc"],
+    "rtt": {"code": "C_330", "label": "Dermatology"},
+    "defaultBrand": "qv", "defaultIcb": "QHL", "policies": true, "otcNational": true
+  },
+  "respiratory": {
+    "label": "Respiratory inhalers and oral treatments", "short": "Respiratory", "noun": "respiratory",
+    "market": ["0301", "0302", "0303"],
+    "marketText": "BNF 0301 (bronchodilators), 0302 (corticosteroids, including combination inhalers) and 0303 (leukotriene receptor antagonists and phosphodiesterase type 4 inhibitors), primary care items",
+    "shards": ["0301", "0302", "0303"], "brandFloor": 5000,
+    "genericWords": ["salbutamol", "tiotropium", "ipratropium", "terbutaline", "salmeterol", "umeclidinium", "formoterol", "fluticasone", "beclometasone", "budesonide", "montelukast", "roflumilast", "theophylline", "aminophylline", "aclidinium", "glycopyrronium", "indacaterol", "vilanterol", "olodaterol", "mometasone", "ciclesonide", "fluticasone", "beclometasone", "carbocisteine", "acetylcysteine", "cromoglicate", "nedocromil", "zafirlukast", "sodium"],
+    "rtt": {"code": "C_340", "label": "Respiratory Medicine"},
+    "defaultBrand": "trimbow", "defaultIcb": "QHL", "policies": false, "otcNational": false
+  },
+  "diabetes": {
+    "label": "Diabetes medicines and testing", "short": "Diabetes", "noun": "diabetes",
+    "market": ["0601"],
+    "marketText": "BNF 0601 (drugs used in diabetes, including insulins, antidiabetic drugs and blood glucose testing), primary care items",
+    "shards": ["0601"], "brandFloor": 5000,
+    "genericWords": ["metformin", "dapagliflozin", "gliclazide", "sitagliptin", "empagliflozin", "linagliptin", "tirzepatide", "alogliptin", "canagliflozin", "pioglitazone", "glimepiride", "glucose", "insulin", "semaglutide", "saxagliptin", "liraglutide", "dulaglutide", "exenatide", "acarbose", "repaglinide", "nateglinide", "vildagliptin", "ertugliflozin", "lixisenatide", "glibenclamide", "glipizide", "tolbutamide", "glucagon", "dextrose", "ketone", "blood", "lancets", "needles", "sodium", "biphasic", "isophane", "soluble"],
+    "rtt": null,
+    "defaultBrand": "mounjaro", "defaultIcb": "QHL", "policies": false, "otcNational": false
+  },
+  "wound-care": {
+    "label": "Wound care dressings", "short": "Wound care", "noun": "dressing",
+    "market": ["2003"],
+    "marketText": "BNF-code section 2003 (wound management and other dressings, appliance list), primary care items",
+    "shards": ["2003"], "brandFloor": 2000,
+    "genericWords": ["gauze", "cotton", "paraffin", "wool", "adhesive", "dressing", "dressings", "bandage", "sodium", "zinc", "silver", "foam", "hydrocolloid", "alginate", "film", "tape", "swab", "swabs", "sterile", "povidone", "iodine"],
+    "rtt": null,
+    "defaultBrand": "allevyn", "defaultIcb": "QHL", "policies": false, "otcNational": false
+  }
+}

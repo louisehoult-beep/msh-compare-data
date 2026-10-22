@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
-"""ICB pack (dermatology, emollients): one editable page of starting figures for one
-ICB and one brand, built only from published open data.
+"""ICB pack data builder (dermatology, emollients). Builds data/icb-pack/ for the Hub tool
+app/icb-pack.js: index.json (ranking inputs for every ICB and brand, national series, RTT,
+IMD, licences) plus one icb-<CODE>.json per ICB (monthly brand and market items, PCN rows).
 
 Spec: 02-Elevate-and-Thrive/Process flows for all brands/icb-pack-dermatology-spec-2026-10-22.md
-Check: python3 test_icb_pack.py            (offline, on the cached inputs)
+Check: python3 test_icb_pack.py
 
 Stages
   fetch   download the open sources into a cache folder (default tmp/icb-pack-cache,
           git-ignored). Needs the network. Skipped when the files are already there
           unless --refresh is given.
-  build   compute every figure and write <out>/icb-pack-<ICB>-<BRAND>.html and a
-          .json of the figures behind it.
+  build   compute every figure and write data/icb-pack/.
 
-Nothing is invented. Where a figure cannot be had from a named source this session it
-is printed as "Not verified" with what would settle it (HUB-VERIFICATION-STANDARD).
+Nothing is invented. Where a figure cannot be had from a named source it is null and the
+tool prints "Not verified" (HUB-VERIFICATION-STANDARD).
 
-Brand = rows whose BNF presentation name starts with "<brand> " (QV by default).
-Market = emollient preparations: BNF 130201 (drug-tariff emollients) plus 2122
-(appliance-list emollients). That denominator is OUR definition, shown on the page
-and editable: Aneeka's own denominator is not known.
+Brand = first word of the NHSBSA presentation name, for first words with at least
+BRAND_FLOOR national items in the 12 months that are not generic words. Market =
+emollient preparations: BNF 130201 plus 2122 (appliance-list emollients). The
+denominator is OUR definition, shown in the tool: Aneeka's own is not known.
 """
 import argparse
 import collections
@@ -60,6 +60,8 @@ LICENCES = [
     ("IMD 2025 File 7 (LSOA scores and population) with ONS LSOA (2021) to ICB (April 2026) lookup",
      "Open Government Licence v3.0 (IMD); ONS lookup: data.gov.uk dataset licence field unset, site footer says "
      "Open Government Licence v3.0 except where stated. https://www.data.gov.uk/dataset/1d16e489-1dc8-443e-9e1c-15de4f961c6d"),
+    ("NHSBSA Secondary Care Medicines Data (finalised to March 2026, provisional after), via the datastore SQL API", "Open Government Licence 3.0. "
+     "https://opendata.nhsbsa.net/dataset/secondary-care-medicines-data-indicative-price"),
     ("NHS Digital Patients Registered at a GP Practice, mapping and practice totals", "NHS England terms: "
      "released under the Open Government Licence. " + GPREG_PARENT),
     ("NHS England, items which should not routinely be prescribed in primary care", "Open Government Licence v3.0. "
@@ -67,7 +69,29 @@ LICENCES = [
 ]
 
 NOT_VERIFIED = "Not verified"
-MARKET_PREFIXES = ("130201", "2122")      # BNF presentation-code prefixes
+# Speciality definitions: config/icb-pack-specialities.json, chosen with --speciality.
+SPECS = json.load(open(os.path.join(ROOT, "config", "icb-pack-specialities.json")))
+SPECS = {k: v for k, v in SPECS.items() if not k.startswith("_")}
+SPEC = dict(SPECS["dermatology"], id="dermatology")
+
+
+def set_spec(sid):
+    global SPEC, GENERIC_WORDS, BRAND_FLOOR
+    SPEC = dict(SPECS[sid], id=sid)
+    GENERIC_WORDS = set(SPEC["genericWords"])
+    BRAND_FLOOR = SPEC["brandFloor"]
+
+
+set_spec("dermatology")
+
+
+def epd_where():
+    return " OR ".join("SUBSTR(BNF_PRESENTATION_CODE,1,%d)='%s'" % (len(p), p) for p in SPEC["market"])
+
+
+def cfile(base):
+    """Cache file name for the current speciality (dermatology keeps the original names)."""
+    return base if SPEC["id"] == "dermatology" else base.replace(".json", "-%s.json" % SPEC["id"])
 
 
 # --------------------------------------------------------------------------
@@ -175,39 +199,88 @@ def fetch_rtt_history(cache, refresh=False, months=13):
 
 
 def load_rtt_history(cache):
-    """{period: {icb_code: row}} for dermatology from every cached month."""
+    """{period: {icb_code: row}} for the speciality's RTT function from every cached month."""
     out = {}
     for path in sorted(glob.glob(os.path.join(cache, "rtt", "*.xlsx"))):
         out[os.path.basename(path)[:6]] = load_rtt(cache, path)[0]
     return out
 
 
+
+# --------------------------------------------------------------------------
+# practice-level pull: every brand, not just one
+# --------------------------------------------------------------------------
+OTHER = "other"
+
+
 def fetch_practice_level(cache, periods, refresh=False):
-    """Practice-level market and brand items/cost per month, England, via the NHSBSA
-    datastore SQL API (server-side aggregation, ~6.5k rows a month)."""
+    """Practice x brand-word items and cost per month, England, through the NHSBSA datastore
+    SQL API (server-side aggregation; ~133,000 rows a month, ~8 seconds)."""
     import refresh_gp_prescribing as g
-    path = os.path.join(cache, "epd-practice-months.json")
+    path = os.path.join(cache, cfile("epd-practice-brand-months.json"))
     have = json.load(open(path)) if os.path.exists(path) and not refresh else {}
     res = dict(g.resources())
     for p in periods:
         if p in have:
             continue
         t = res[p]
-        q = ("SELECT PRACTICE_CODE AS pr, SUM(ITEMS) AS mi, SUM(ACTUAL_COST) AS mc, "
-             "SUM(CASE WHEN BNF_PRESENTATION_NAME LIKE 'QV %' THEN ITEMS ELSE 0 END) AS qi, "
-             "SUM(CASE WHEN BNF_PRESENTATION_NAME LIKE 'QV %' THEN ACTUAL_COST ELSE 0 END) AS qc "
-             "FROM `{t}` WHERE SUBSTR(BNF_PRESENTATION_CODE,1,6)='130201' "
-             "OR SUBSTR(BNF_PRESENTATION_CODE,1,4)='2122' GROUP BY PRACTICE_CODE".format(t=t))
-        rows = g.sql(t, q)
-        have[p] = {r["pr"]: [float(r["mi"] or 0), float(r["mc"] or 0), float(r["qi"] or 0), float(r["qc"] or 0)]
-                   for r in rows}
+        q = ("SELECT PRACTICE_CODE AS pr, SPLIT(BNF_PRESENTATION_NAME,' ')[OFFSET(0)] AS b, "
+             "SUM(ITEMS) AS i, SUM(ACTUAL_COST) AS c FROM `{t}` "
+             "WHERE " + epd_where() + " GROUP BY PRACTICE_CODE, b").format(t=t)
+        month = collections.defaultdict(dict)
+        for r in g.sql(t, q):
+            month[r["pr"]][r["b"]] = [float(r["i"] or 0), float(r["c"] or 0)]
+        have[p] = month
         json.dump(have, open(path, "w"))
     return have
 
 
-# --------------------------------------------------------------------------
-# loading
-# --------------------------------------------------------------------------
+def scmd_tables(periods):
+    """{YYYYMM: resource} for NHSBSA Secondary Care Medicines Data: finalised where it
+    exists (to March 2026), provisional after."""
+    import refresh_gp_prescribing as g
+    names = {}
+    for pkg in ("finalised-secondary-care-medicines-data-scmd-with-indicative-price",
+                "secondary-care-medicines-data-indicative-price"):
+        doc = json.loads(g.fetch("%s/package_show?id=%s" % (g.CKAN, pkg), timeout=90))
+        for r in doc["result"]["resources"]:
+            m = re.fullmatch(r"SCMD_(FINAL|PROVISIONAL)_(\d{6})", (r.get("name") or "").strip())
+            if m and (m.group(2) not in names or m.group(1) == "FINAL"):
+                names[m.group(2)] = r["name"]
+    missing = [p for p in periods if p not in names]
+    if missing:
+        raise RuntimeError("SCMD months not published: %s" % missing)
+    return {p: names[p] for p in periods}
+
+
+def fetch_hospital(cache, periods, brand_words, refresh=False):
+    """Indicative cost by trust x VMP name for brand VMPs, per month. VMP names
+    for brands read 'Generic <Brand> ...' or '<Brand> ...'."""
+    import refresh_gp_prescribing as g
+    path = os.path.join(cache, cfile("scmd-brand-months.json"))
+    have = json.load(open(path)) if os.path.exists(path) and not refresh else {}
+    tables = scmd_tables(periods)
+    like = " OR ".join("LOWER(VMP_PRODUCT_NAME) LIKE 'generic %s%%' OR LOWER(VMP_PRODUCT_NAME) LIKE '%s%%'"
+                       % (w.lower().replace("'", ""), w.lower().replace("'", "")) for w in brand_words)
+    for p in periods:
+        if p in have:
+            continue
+        t = tables[p]
+        q = ("SELECT ODS_CODE AS o, VMP_PRODUCT_NAME AS n, SUM(INDICATIVE_COST) AS c FROM `%s` WHERE %s "
+             "GROUP BY ODS_CODE, VMP_PRODUCT_NAME" % (t, like))
+        have[p] = [[r["o"], r["n"], float(r["c"] or 0)] for r in g.sql(t, q)]
+        json.dump(have, open(path, "w"))
+    return have
+
+
+def hospital_brand_key(name):
+    w = re.sub(r"^generic\s+", "", name.strip(), flags=re.I).split()
+    return brand_key(w[0]) if w else ""
+
+
+def brand_key(word):
+    return re.sub(r"[^a-z0-9]", "", (word or "").lower())
+
 def zip_csv(path):
     with zipfile.ZipFile(path) as z:
         name = [n for n in z.namelist() if n.lower().endswith(".csv")][0]
@@ -227,9 +300,12 @@ def load_gpreg(cache):
 
 
 def load_rtt(cache, path=None):
-    """Dermatology Service (C_330) rows: per ICB from the ICB sheet, England from the
+    """Rows for the speciality's treatment function (SPEC rtt; empty when it has none): per ICB from the ICB sheet, England from the
     National sheet. Returns ({icb_code: row, "ENGLAND": row}, period)."""
     import openpyxl
+    if not SPEC.get("rtt"):
+        return {}, None
+    code = SPEC["rtt"]["code"]
     wb = openpyxl.load_workbook(path or os.path.join(cache, "rtt-incomplete-commissioner.xlsx"),
                                 read_only=True, data_only=True)
     need = ["Total number of incomplete pathways", "Total within 18 weeks",
@@ -251,11 +327,11 @@ def load_rtt(cache, path=None):
         if r[1] == "Period:":
             period = r[2]
     for r in rows[hi + 1:]:
-        if r[3] == "C_330" and r[1] != "-":
+        if r[3] == code and r[1] != "-":
             out[r[1]] = pick(r, h, r[2])
     rows, hi, h = rows_of("National")
     for r in rows[hi + 1:]:
-        if r[1] == "C_330":
+        if r[1] == code:
             out["ENGLAND"] = pick(r, h, "England")
     return out, period
 
@@ -311,37 +387,6 @@ def norm_icb(n):
     n = re.sub(r"^NHS ", "", n)
     return re.sub(r"[^A-Z0-9]+", " ", n).strip()
 
-
-def load_shards(brand):
-    """From the repo's own ICB-level shards: brand and market items per ICB per month."""
-    idx = json.load(open(os.path.join(GP_DIR, "index.json")))
-    periods = idx["periods"]
-    n = len(periods)
-    brand_i = collections.defaultdict(lambda: [0] * n)
-    brand_c = collections.defaultdict(lambda: [0.0] * n)
-    mkt_i = collections.defaultdict(lambda: [0] * n)
-    mkt_c = collections.defaultdict(lambda: [0.0] * n)
-    brands = collections.defaultdict(lambda: collections.defaultdict(int))   # icb -> label -> 12m items
-    for fn in ("s-1302.json", "s-2122.json"):
-        s = json.load(open(os.path.join(GP_DIR, fn)))["s"]
-        for sub, v in s.items():
-            if not (sub.startswith("130201") or sub.startswith("2122")):
-                continue
-            for icb, prods in v["t"].items():
-                for key, arr in prods.items():
-                    label = v["p"].get(key, key)
-                    for k in range(n):
-                        mkt_i[icb][k] += arr[k] or 0
-                    brands[icb][label] += sum(arr[-12:])
-                    if label.lower().startswith(brand.lower()):
-                        for k in range(n):
-                            brand_i[icb][k] += arr[k] or 0
-    return idx, brand_i, brand_c, mkt_i, mkt_c, brands
-
-
-# --------------------------------------------------------------------------
-# computation
-# --------------------------------------------------------------------------
 def pct(a, b):
     return None if not b else 100.0 * a / b
 
@@ -353,6 +398,34 @@ def trend(series, floor):
     return 100.0 * (now - base) / base
 
 
+
+
+# --------------------------------------------------------------------------
+# repo shards: ICB-level items for market and each brand word
+# --------------------------------------------------------------------------
+def load_shards():
+    idx = json.load(open(os.path.join(GP_DIR, "index.json")))
+    n = len(idx["periods"])
+    items = collections.defaultdict(lambda: collections.defaultdict(lambda: [0] * n))   # icb -> brand key -> [n]
+    market = collections.defaultdict(lambda: [0] * n)
+    products = collections.defaultdict(lambda: collections.defaultdict(int))             # icb -> label -> 12m items
+    for sec in SPEC["shards"]:
+        s = json.load(open(os.path.join(GP_DIR, "s-%s.json" % sec)))["s"]
+        for sub, v in s.items():
+            if not any(sub.startswith(m) for m in SPEC["market"]):
+                continue
+            for icb, prods in v["t"].items():
+                for key, arr in prods.items():
+                    label = v["p"].get(key, key)
+                    first = label.split()[0] if label.split() else label
+                    bk = brand_key(first)
+                    for k in range(n):
+                        market[icb][k] += arr[k] or 0
+                        items[icb][bk][k] += arr[k] or 0
+                    products[icb][label] += sum(arr[-12:])
+    return idx, items, market, products
+
+
 def cv(values):
     if len(values) < 3:
         return None
@@ -360,97 +433,6 @@ def cv(values):
     return None if m == 0 else statistics.pstdev(values) / m
 
 
-def assemble(cache, icb_code, brand):
-    idx, bi, bc, mi, mc, brands = load_shards(brand)
-    periods = idx["periods"]
-    floor = idx["minBaselineItems"]
-    icb_names = idx["icbs"]
-    gmap, size = load_gpreg(cache)
-    rtt, rtt_period = load_rtt(cache)
-    imd = load_imd_recomputed(cache)
-    rtt_hist = load_rtt_history(cache)
-    rtt_periods = sorted(rtt_hist)
-    prac = json.load(open(os.path.join(cache, "epd-practice-months.json")))
-    last12 = periods[-12:]
-    sources = json.load(open(os.path.join(cache, "sources.json")))
-
-    # practice -> PCN level, per (icb, pcn)
-    pcn = {}
-    unmapped_items = 0.0
-    for p in periods:
-        for pr, (m_i, m_c, q_i, q_c) in prac.get(p, {}).items():
-            g = gmap.get(pr)
-            if not g:
-                unmapped_items += m_i
-                continue
-            key = (g["icb"], g["pcn"])
-            d = pcn.setdefault(key, {"name": g["pcn_name"], "icb": g["icb"], "practices": set(),
-                                     "m": {}, "q": {}, "qc": {}})
-            d["practices"].add(pr)
-            d["m"][p] = d["m"].get(p, 0) + m_i
-            d["q"][p] = d["q"].get(p, 0) + q_i
-            d["qc"][p] = d["qc"].get(p, 0) + q_c
-    for (icb, code), d in pcn.items():
-        d["list"] = sum(size.get(pr, 0) for pr in d["practices"])
-        d["q12"] = sum(d["q"].get(p, 0) for p in last12)
-        d["m12"] = sum(d["m"].get(p, 0) for p in last12)
-        d["per1000"] = (1000.0 * d["q12"] / d["list"]) if d["list"] else None
-        d["share"] = pct(d["q12"], d["m12"])
-
-    # cost: not held per ICB in the shards, so taken from the practice-level pull
-    cost_b = collections.defaultdict(lambda: [0.0] * len(periods))
-    cost_m = collections.defaultdict(lambda: [0.0] * len(periods))
-    nat_bc = [0.0] * len(periods)
-    nat_mc = [0.0] * len(periods)
-    for k, p in enumerate(periods):
-        for pr, (m_i, m_c, q_i, q_c) in prac.get(p, {}).items():
-            nat_bc[k] += q_c
-            nat_mc[k] += m_c
-            g = gmap.get(pr)
-            if g:
-                cost_b[g["icb"]][k] += q_c
-                cost_m[g["icb"]][k] += m_c
-    for code in icb_names:
-        bc[code] = cost_b[code]
-        mc[code] = cost_m[code]
-    icbs = {}
-    for code, name in icb_names.items():
-        if code == "-":
-            continue
-        pcns = [d for (i, _), d in pcn.items() if i == code and d["list"]]
-        per = [d["per1000"] for d in pcns if d["per1000"] is not None]
-        q12 = sum(bi[code][-12:])
-        m12 = sum(mi[code][-12:])
-        imd_hit = imd.get(code)
-        # a series only where the same ICB code carries a row in every month (April 2026
-        # mergers break the series for the ICBs they created)
-        series = None
-        if all(code in rtt_hist[q] for q in rtt_periods):
-            series = {"total": [rtt_hist[q][code]["total"] for q in rtt_periods],
-                      "median": [rtt_hist[q][code]["median"] for q in rtt_periods],
-                      "w52": [rtt_hist[q][code]["w52"] for q in rtt_periods]}
-        icbs[code] = {"rtt_series": series, 
-            "code": code, "name": name, "q12": q12, "m12": m12, "share12": pct(q12, m12),
-            "brand_items": bi[code], "mkt_items": mi[code], "brand_cost": bc[code], "mkt_cost": mc[code],
-            "trend_items": trend(bi[code], floor) if len(bi[code]) > 1 else None,
-            "pcn_cv": cv(per), "n_pcn": len(per),
-            "rtt": rtt.get(code), "imd": imd_hit,
-            "list": sum(d["list"] for d in pcns),
-        }
-    nat_bi = [sum(bi[c][k] for c in bi if c != "-") + bi["-"][k] for k in range(len(periods))]
-    nat_mi = [sum(mi[c][k] for c in mi) for k in range(len(periods))]
-    return {"brand": brand, "icb": icb_code, "periods": periods, "floor": floor, "icbs": icbs, "pcn": pcn,
-            "brands_in_icb": brands[icb_code], "nat": {"bi": nat_bi, "mi": nat_mi, "bc": nat_bc, "mc": nat_mc},
-            "rtt_period": rtt_period, "rtt_national": rtt.get("ENGLAND"), "rtt_periods": rtt_periods,
-            "rtt_nat_series": {"total": [rtt_hist[q]["ENGLAND"]["total"] for q in rtt_periods],
-                               "median": [rtt_hist[q]["ENGLAND"]["median"] for q in rtt_periods]}, "sources": sources,
-            "unmapped_items": unmapped_items, "gpreg_extract": "see sources.gpreg_page",
-            "generated": datetime.date.today().isoformat(), "imd_n": len(imd)}
-
-
-# --------------------------------------------------------------------------
-# rendering
-# --------------------------------------------------------------------------
 def pretty(name):
     n = re.sub(r"^NHS ", "", name or "")
     n = re.sub(r" INTEGRATED CARE BOARD$", "", n, flags=re.I)
@@ -458,278 +440,237 @@ def pretty(name):
     return re.sub(r"\b(And|Of|The|On)\b", lambda m: m.group(1).lower(), n)
 
 
-def e(x):
-    return html.escape(str(x), quote=True)
+def r2(x, d=2):
+    return None if x is None else round(x, d)
 
 
-def num(x, d=0):
-    return NOT_VERIFIED if x is None else ("{:,.%df}" % d).format(x)
+def assemble(cache):
+    """Everything the tool needs, for every ICB and every brand. Returns (index, {icb: shard})."""
+    idx, s_items, s_market, s_products = load_shards()
+    periods, floor = idx["periods"], idx["minBaselineItems"]
+    n = len(periods)
+    last12 = range(n - 12, n)
+    gmap, size = load_gpreg(cache)
+    rtt, rtt_period = load_rtt(cache)
+    rtt_hist = load_rtt_history(cache) if SPEC.get("rtt") else {}
+    rtt_periods = sorted(rtt_hist)
+    imd = load_imd_recomputed(cache)
+    prac = json.load(open(os.path.join(cache, cfile("epd-practice-brand-months.json"))))
+    sources = json.load(open(os.path.join(cache, "sources.json")))
+
+    # brand list: first words with enough national items, display name from NHSBSA
+    tot, disp = collections.Counter(), {}
+    for p in periods[-12:]:
+        for pr, bw in prac[p].items():
+            for w, (i, c) in bw.items():
+                tot[brand_key(w)] += i
+                disp.setdefault(brand_key(w), w)
+    brands = [k for k, v in tot.most_common() if v >= BRAND_FLOOR and k not in GENERIC_WORDS]
+    bset = set(brands)
+
+    def bk_of(w):
+        k = brand_key(w)
+        return k if k in bset else OTHER
+
+    # practice rows -> (icb, pcn)
+    pcn = {}
+    nat = {"items": collections.defaultdict(lambda: [0.0] * n), "cost": collections.defaultdict(lambda: [0.0] * n)}
+    icb_cost = collections.defaultdict(lambda: collections.defaultdict(lambda: [0.0] * n))
+    unmapped = 0.0
+    for k, p in enumerate(periods):
+        for pr, bw in prac[p].items():
+            g = gmap.get(pr)
+            for w, (i, c) in bw.items():
+                b = bk_of(w)
+                nat["items"][b][k] += i
+                nat["items"]["_market"][k] += i
+                nat["cost"][b][k] += c
+                nat["cost"]["_market"][k] += c
+                if not g:
+                    unmapped += i
+                    continue
+                icb_cost[g["icb"]][b][k] += c
+                icb_cost[g["icb"]]["_market"][k] += c
+                d = pcn.setdefault((g["icb"], g["pcn"]), {"name": g["pcn_name"], "practices": set(),
+                                                           "m": [0.0] * n, "b": collections.defaultdict(lambda: [0.0] * n)})
+                d["practices"].add(pr)
+                d["m"][k] += i
+                d["b"][b][k] += i
+    for d in pcn.values():
+        d["list"] = sum(size.get(pr, 0) for pr in d["practices"])
+
+    tmap = {t["code"]: t for t in json.load(open(os.path.join(ROOT, "data", "trust-map.json")))["trusts"]}
+    hosp = collections.defaultdict(lambda: collections.defaultdict(lambda: [0.0] * n))   # icb -> brand -> [n]
+    hosp_trust = collections.defaultdict(lambda: collections.defaultdict(lambda: collections.defaultdict(float)))  # icb->trust->brand->12m
+    hosp_nat = collections.defaultdict(lambda: [0.0] * n)
+    scmd = json.load(open(os.path.join(cache, cfile("scmd-brand-months.json"))))
+    hosp_unmapped = 0.0
+    for k, p in enumerate(periods):
+        for o, nme, c in scmd[p]:
+            b = hospital_brand_key(nme)
+            if b not in bset:
+                continue
+            hosp_nat[b][k] += c
+            t = tmap.get(o[:3]) or tmap.get(o)
+            if not t:
+                hosp_unmapped += c
+                continue
+            hosp[t["icb"]][b][k] += c
+            if k >= n - 12:
+                hosp_trust[t["icb"]][o][b] += c
+    shards, rank = {}, {b: {} for b in brands}
+    icb_meta = {}
+    for code, name in idx["icbs"].items():
+        if code == "-":
+            continue
+        pcns = [(c, d) for (i, c), d in pcn.items() if i == code and d["list"]]
+        mkt = s_market[code]
+        brand_blocks = {}
+        for b in brands:
+            ser = s_items[code].get(b, [0] * n)
+            brand_blocks[b] = {"items": ser, "cost": [r2(x) for x in icb_cost[code][b]]}
+            per = [sum(d["b"][b][k] for k in last12) / d["list"] * 1000 for _, d in pcns]
+            rank[b][code] = {"items12": sum(ser[-12:]), "share12": r2(pct(sum(ser[-12:]), sum(mkt[-12:])), 3),
+                             "trend": r2(trend(ser, floor), 1) if floor is not None else None,
+                             "cv": r2(cv(per), 3), "nPcn": len(per)}
+        shards[code] = {
+            "code": code, "name": name, "periods": periods,
+            "market": {"items": mkt, "cost": [r2(x) for x in icb_cost[code]["_market"]]},
+            "brands": brand_blocks,
+            "otherBrands": {"items": [max(0, mkt[k] - sum(s_items[code].get(b, [0] * n)[k] for b in brands)) for k in range(n)]},
+            "topProducts": [{"label": l, "items12": v} for l, v in sorted(s_products[code].items(), key=lambda kv: -kv[1])[:15]],
+            "hospital": {"brands": {b: [r2(x, 0) for x in hosp[code][b]] for b in brands if any(hosp[code][b])},
+                         "trusts": [{"code": o, "name": (tmap.get(o) or {}).get("n", o),
+                                     "cost12": {b: r2(v, 0) for b, v in bb.items()}}
+                                    for o, bb in sorted(hosp_trust[code].items())]},
+            "pcns": [{"code": c, "name": d["name"], "list": d["list"], "practices": len(d["practices"]),
+                      "market": [int(x) for x in d["m"]],
+                      "brands": {b: [int(x) for x in d["b"][b]] for b in brands}}
+                     for c, d in sorted(pcns, key=lambda cd: cd[1]["name"])],
+        }
+        series = None
+        if rtt_periods and all(code in rtt_hist[q] for q in rtt_periods):
+            series = {"total": [rtt_hist[q][code]["total"] for q in rtt_periods],
+                      "median": [r2(rtt_hist[q][code]["median"], 1) for q in rtt_periods],
+                      "w52": [rtt_hist[q][code]["w52"] for q in rtt_periods]}
+        r = rtt.get(code)
+        icb_meta[code] = {
+            "name": name, "pretty": pretty(name),
+            "imd": ({"score": r2(imd[code]["avg_score"], 2), "rank": imd[code]["rank_avg_score"],
+                     "prop10": r2(imd[code]["prop10"], 4)} if code in imd else None),
+            "rtt": ({k: (r2(v, 1) if k == "median" else v) for k, v in r.items() if k != "name"} if r else None),
+            "rttSeries": series,
+            "list": sum(d["list"] for _, d in pcns),
+        }
+    pol_path = os.path.join(ROOT, "config", "icb-pack-policies.json")
+    policies = ({k: v for k, v in json.load(open(pol_path)).items() if not k.startswith("_")}
+                if SPEC.get("policies") else {})
+    for code, pol in policies.items():
+        if code in icb_meta:
+            icb_meta[code]["otc"] = pol
+    index = {
+        "generatedOn": datetime.date.today().isoformat(), "periods": periods, "minBaselineItems": floor,
+        "rttPeriod": rtt_period, "rttPeriods": rtt_periods,
+        "speciality": {"id": SPEC["id"], "label": SPEC["label"], "short": SPEC["short"], "noun": SPEC["noun"],
+                       "rtt": SPEC.get("rtt"), "otcNational": bool(SPEC.get("otcNational")),
+                       "defaultBrand": SPEC["defaultBrand"], "defaultIcb": SPEC["defaultIcb"],
+                       "all": [{"id": k, "label": v["label"]} for k, v in SPECS.items()]},
+        "market": SPEC["marketText"],
+        "brands": [{"key": b, "label": disp[b]} for b in brands],
+        "icbs": icb_meta, "rank": rank,
+        "national": {"items": {b: [int(x) for x in nat["items"][b]] for b in brands + ["_market"]},
+                     "cost": {b: [r2(x, 0) for x in nat["cost"][b]] for b in brands + ["_market"]},
+                     "rtt": rtt.get("ENGLAND"),
+                     "rttSeries": ({"total": [rtt_hist[q]["ENGLAND"]["total"] for q in rtt_periods],
+                                    "median": [r2(rtt_hist[q]["ENGLAND"]["median"], 1) for q in rtt_periods]}
+                                   if rtt_periods else None)},
+        "unmappedItems": int(unmapped),
+        "hospital": {"national": {b: [r2(x, 0) for x in hosp_nat[b]] for b in brands if any(hosp_nat[b])},
+                     "unmappedCost": r2(hosp_unmapped, 0),
+                     "scope": "Medicines issued by NHS trust pharmacies (pharmacy stock control), England, Secondary Care Medicines Data. "
+                              "Indicative cost at list or reimbursement price, not what trusts pay. Only products whose dm+d name carries the brand "
+                              "can be attributed to a brand; generic-named products cannot, so there is no "
+                              "hospital share of the market. Provisional data after March 2026."},
+        "sources": {k: v for k, v in sources.items()},
+        "licences": [{"source": a, "licence": b} for a, b in LICENCES],
+    }
+    return index, shards
 
 
-def pcts(x, d=1):
-    return NOT_VERIFIED if x is None else "%.*f%%" % (d, x)
+NOTICE = {
+    "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+    "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+    "databaseRight": "Database right asserted. Compiled from Open Government Licence sources listed in 'licences'; "
+                     "the compilation, definitions and derived measures are Elevate and Thrive Ltd's.",
+    "published": "Published solely to serve the Medical Sales Intelligence Hub (ICB pack tool). Public accessibility "
+                 "of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+    "terms": "https://medsalesintelligencehub.co.uk/terms/",
+}
 
 
-def money(x):
-    return "£{:,.0f}".format(x)
+def hospital_words(cache, periods):
+    """Brand display words, from the practice-level pull (same rule as assemble)."""
+    prac = json.load(open(os.path.join(cache, cfile("epd-practice-brand-months.json"))))
+    tot, disp = collections.Counter(), {}
+    for p in periods[-12:]:
+        for bw in prac[p].values():
+            for w, (i, c) in bw.items():
+                tot[brand_key(w)] += i
+                disp.setdefault(brand_key(w), w)
+    return [disp[k] for k, v in tot.most_common() if v >= BRAND_FLOOR and k not in GENERIC_WORDS]
 
 
-def mlabel(p):
-    return datetime.date(int(p[:4]), int(p[4:]), 1).strftime("%b %Y")
-
-
-def ramp(v, lo, hi):
-    """Light to deep navy; returns (background, text colour) with contrast chosen."""
-    if v is None or hi == lo:
-        return "#EDE7DC", "#1D2733"
-    t = max(0.0, min(1.0, (v - lo) / (hi - lo)))
-    a, b = (237, 231, 220), (20, 48, 79)
-    c = tuple(round(a[i] + (b[i] - a[i]) * t) for i in range(3))
-    return "#%02X%02X%02X" % c, ("#FFFFFF" if t > 0.45 else "#1D2733")
-
-
-def line_svg(series, labels, w=640, h=170, colour="#14304F"):
-    if not series or max(series) == 0:
-        return "<p>No items.</p>"
-    mx = max(series)
-    pts = []
-    for i, v in enumerate(series):
-        x = 40 + i * (w - 60) / max(1, len(series) - 1)
-        y = h - 28 - (v / mx) * (h - 50)
-        pts.append((x, y, v))
-    path = " ".join("%s%.1f,%.1f" % ("M" if i == 0 else "L", x, y) for i, (x, y, _) in enumerate(pts))
-    dots = "".join('<circle cx="%.1f" cy="%.1f" r="3" fill="%s"/>' % (x, y, colour) for x, y, _ in pts)
-    ticks = "".join('<text x="%.1f" y="%d" font-size="10" text-anchor="middle" fill="#1D2733">%s</text>'
-                    % (x, h - 8, e(labels[i])) for i, (x, _, _) in enumerate(pts) if i % 3 == 0 or i == len(pts) - 1)
-    return ('<svg viewBox="0 0 %d %d" role="img" aria-label="monthly items" style="width:100%%;max-width:%dpx">'
-            '<text x="4" y="14" font-size="10" fill="#1D2733">max %s</text>'
-            '<path d="%s" fill="none" stroke="%s" stroke-width="2"/>%s%s</svg>'
-            % (w, h, w, num(mx), path, colour, dots, ticks))
-
-
-def build_html(D):
-    brand, code, periods = D["brand"], D["icb"], D["periods"]
-    I = D["icbs"][code]
-    labels = [mlabel(p) for p in periods]
-    nat = D["nat"]
-    n12b, n12m = sum(nat["bi"][-12:]), sum(nat["mi"][-12:])
-    css = """
-:root{--navy:#0B1C33;--deep:#14304F;--gold:#A8842C;--goldl:#E0BE8E;--ink:#1D2733;--warm:#EDE7DC}
-*{box-sizing:border-box}body{margin:0;font:15px/1.5 Georgia,serif;color:var(--ink);background:#fff}
-.band{padding:28px 0}.band.dark{background:var(--navy);color:#F5F1E8}.band.warm{background:var(--warm)}
-.col{max-width:1080px;margin:0 auto;padding:0 40px}@media(max-width:600px){.col{padding:0 20px}}
-h1,h2{font-family:"Didot","Bodoni 72",Georgia,serif;margin:0 0 10px}h1{font-size:34px}h2{font-size:24px;color:var(--navy)}
-.dark h1,.dark h2,.dark p,.dark li{color:#F5F1E8}.dark .gold{color:var(--goldl)}
-.eyebrow{font:700 12px/1 Helvetica,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:8px}
-.dark .eyebrow{color:var(--goldl)}
-table{border-collapse:collapse;width:100%;font:13px/1.4 Helvetica,Arial,sans-serif}th,td{padding:6px 8px;border-bottom:1px solid #d8d2c4;text-align:right}
-th:first-child,td:first-child{text-align:left}th{background:var(--deep);color:#fff;cursor:pointer}
-.kpis{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0}.kpi{border-left:4px solid var(--gold);padding:4px 12px;min-width:150px}
-.kpi b{display:block;font:700 24px Georgia,serif;color:var(--navy)}.kpi span{font:12px Helvetica,Arial,sans-serif}
-.nv{color:#7A1F1F;font-weight:700}.edit{border:1px dashed var(--gold);padding:10px;min-height:60px;background:#fff}
-.note{font:12px/1.5 Helvetica,Arial,sans-serif;color:#39424d}.scroll{overflow-x:auto}
-button{background:var(--navy);color:#fff;border:0;padding:9px 16px;font:14px Helvetica,Arial,sans-serif;cursor:pointer}
-.hm td{text-align:center;font-size:11px;padding:4px 3px;min-width:34px}.hm td:first-child{min-width:230px;text-align:left}
-@media print{button{display:none}.band.dark{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
-"""
-    def nv(x):
-        return '<span class="nv">%s</span>' % NOT_VERIFIED if x == NOT_VERIFIED else e(x)
-
-    # ---- national overview
-    nat_trend = trend(nat["bi"], D["floor"])
-    nat_html = ('<div class="kpis"><div class="kpi"><b>%s</b><span>%s items, 12 months to %s</span></div>'
-                '<div class="kpi"><b>%s</b><span>%s share of emollient items (our market definition)</span></div>'
-                '<div class="kpi"><b>%s</b><span>%s items %s vs %s</span></div>'
-                '<div class="kpi"><b>%s</b><span>%s actual cost, 12 months</span></div></div>'
-                % (num(n12b), e(brand), labels[-1], pcts(pct(n12b, n12m)), e(brand),
-                   pcts(nat_trend) if nat_trend is not None else "too few to trend", e(brand), labels[-1], labels[0],
-                   money(sum(nat["bc"][-12:])), e(brand)))
-    rn = D["rtt_national"]
-    nat_rtt = ("Dermatology, England, %s: %s incomplete pathways, median wait %s weeks, %s waiting 52+ weeks."
-               % (e(D["rtt_period"]), num(rn["total"]), num(rn["median"], 1), num(rn["w52"])) if rn else NOT_VERIFIED)
-
-    # ---- ICB view
-    ti = I["trend_items"]
-    brands_rows = "".join(
-        "<tr><td>%s</td><td>%s</td><td>%s</td></tr>" % (e(l), num(n), pcts(pct(n, I["m12"])))
-        for l, n in sorted(D["brands_in_icb"].items(), key=lambda kv: -kv[1])[:12])
-    icb_html = ('<div class="kpis"><div class="kpi"><b>%s</b><span>%s items, 12 months</span></div>'
-                '<div class="kpi"><b>%s</b><span>share of emollient items in %s</span></div>'
-                '<div class="kpi"><b>%s</b><span>%s items %s vs %s</span></div>'
-                '<div class="kpi"><b>%s</b><span>%s actual cost, 12 months</span></div></div>'
-                % (num(I["q12"]), e(brand), pcts(I["share12"]), e(pretty(I["name"])),
-                   pcts(ti) if ti is not None else "too few to trend", e(brand), labels[-1], labels[0],
-                   money(sum(I["brand_cost"][-12:])), e(brand)))
-    icb_html += line_svg(I["brand_items"], labels)
-    icb_html += ('<p class="note">Monthly %s items in the ICB. Market in the ICB: %s items in the 12 months.</p>'
-                 '<h3>Top emollient products in the ICB (12 months, items)</h3><table><tr><th>Product</th>'
-                 '<th>Items</th><th>Share of emollient items</th></tr>%s</table>'
-                 % (e(brand), num(I["m12"]), brands_rows))
-
-    # ---- PCN tables
-    pcns = sorted([d for (i, _), d in D["pcn"].items() if i == code and d["list"]], key=lambda d: -d["q12"])
-    top = "".join("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>"
-                  % (e(d["name"]), num(d["q12"]), num(d["list"]), num(d["per1000"], 1), pcts(d["share"]))
-                  for d in pcns[:10])
-    vals = [d["per1000"] for d in pcns]
-    allv = [d["q"].get(p, 0) / d["list"] * 1000 for d in pcns for p in periods]
-    lo, hi = min(allv), max(allv)
-    hm_head = "".join("<th>%s</th>" % e(l) for l in labels)
-    hm = ""
-    for d in sorted(pcns, key=lambda d: -(d["per1000"] or 0)):
-        cells = ""
-        for p in periods:
-            v = d["q"].get(p, 0) / d["list"] * 1000
-            bg, fg = ramp(v, lo, hi)
-            cells += '<td style="background:%s;color:%s">%.1f</td>' % (bg, fg, v)
-        hm += "<tr><td>%s</td>%s</tr>" % (e(d["name"]), cells)
-    pcn_html = ('<h3>Highest-prescribing PCNs (12 months)</h3><table><tr><th>PCN</th><th>%s items</th>'
-                '<th>Registered patients</th><th>Items per 1,000 patients</th><th>Share of emollient items</th></tr>%s</table>'
-                '<p class="note">Registered patients: NHS Digital practice totals, %s snapshot, applied to every month. '
-                'A PCN is the sum of its member practices as NHS Digital maps them today.</p>'
-                '<h3>Variation across the ICB\'s PCNs: %s items per 1,000 registered patients, by month</h3>'
-                '<div class="scroll"><table class="hm"><tr><th>PCN</th>%s</tr>%s</table></div>'
-                '<p class="note">PCN figures cover registered GP practices: %s of the ICB emollient items in the 12 months. The rest come from prescriber codes that have no PCN.</p><p class="note">Colour runs from the lowest to the highest cell in this ICB (%.1f to %.1f). '
-                'Spread across PCNs (coefficient of variation of 12-month items per 1,000): %s, over %d PCNs.</p>'
-                % (e(brand), top, e(D["sources"].get("gpreg_page", "")), e(brand), hm_head, hm,
-                   pcts(pct(sum(d["m12"] for d in pcns), I["m12"])), lo, hi,
-                   num(I["pcn_cv"], 2), I["n_pcn"]))
-
-    # ---- RTT and IMD
-    r = I["rtt"]
-    if r:
-        rtt_html = ('<div class="kpis"><div class="kpi"><b>%s</b><span>incomplete dermatology pathways</span></div>'
-                    '<div class="kpi"><b>%s</b><span>median wait, weeks (England %s)</span></div>'
-                    '<div class="kpi"><b>%s</b><span>within 18 weeks (England %s)</span></div>'
-                    '<div class="kpi"><b>%s</b><span>waiting 52+ weeks</span></div></div>'
-                    '<p class="note">NHS England RTT, Incomplete pathways, Commissioner basis, ICB sheet, treatment function '
-                    'C_330 Dermatology Service, %s. Commissioner basis means patients registered with this ICB, wherever '
-                    'they are treated. Trend below.</p>'
-                    % (num(r["total"]), num(r["median"], 1), num(rn["median"], 1) if rn else NOT_VERIFIED,
-                       pcts(pct(r["w18"], r["total"])), pcts(pct(rn["w18"], rn["total"])) if rn else NOT_VERIFIED,
-                       num(r["w52"]), e(D["rtt_period"])))
-        rs = I["rtt_series"]
-        rl = [mlabel(q) for q in D["rtt_periods"]]
-        if rs:
-            rtt_html += ('<h3>Incomplete dermatology pathways, by month</h3>' + line_svg(rs["total"], rl) +
-                         '<h3>Median wait (weeks), by month</h3>' + line_svg(rs["median"], rl, colour="#A8842C") +
-                         '<p class="note">England median: ' + ", ".join(num(v, 1) for v in D["rtt_nat_series"]["median"]) +
-                         '. Series is complete only for ICBs whose code is unchanged since April 2025.</p>')
-        else:
-            rtt_html += '<p><span class="nv">%s</span>: no 13-month series, this ICB was created by the April 2026 mergers.</p>' % NOT_VERIFIED
-    else:
-        rtt_html = "<p>%s</p>" % nv(NOT_VERIFIED)
-    m = I["imd"]
-    if m:
-        imd_html = ('<div class="kpis"><div class="kpi"><b>%s of %d</b><span>rank of average score (1 = most deprived ICB)</span></div>'
-                    '<div class="kpi"><b>%s</b><span>average IMD score</span></div>'
-                    '<div class="kpi"><b>%s</b><span>of LSOAs in the most deprived 10%% nationally</span></div></div>'
-                    '<p class="note">English Indices of Deprivation 2025: population-weighted mean of LSOA IMD scores (mid-2022 population), '
-                    'LSOAs assigned to ICBs as at April 2026 (ONS lookup). Same method as the official File 13 ICB summaries, '
-                    'which it reproduces on the ICBs unchanged since 2024; File 13 itself uses 2024 boundaries.</p>'
-                    % (num(m["rank_avg_score"]), D["imd_n"], num(m["avg_score"], 2), pcts(100 * m["prop10"])))
-    else:
-        imd_html = '<p><span class="nv">%s</span>: no IMD figure for this ICB.</p>' % NOT_VERIFIED
-
-    otc = ('<p><b>National position (verified this session).</b> NHS England\'s policy guidance, "Items which should not '
-           'routinely be prescribed in primary care" (published 3 August 2023, updated 19 August 2025), lists bath and '
-           'shower preparations for dry and pruritic skin conditions as prescribe only in exceptional circumstances, with '
-           'the advice to substitute leave-on emollients. It does not list plain leave-on emollients.</p>'
-           '<p><b>This ICB\'s own policy: <span class="nv">%s</span>.</b> No Birmingham and Solihull emollient or '
-           'self-care policy was found at source this session. Several other ICBs (for example Somerset, Barnsley, '
-           'North East London, South West London) publish over-the-counter positions for mild dry skin; each is its own '
-           'document. What would settle it: the ICB\'s formulary or Area Prescribing Committee page, or a written answer '
-           'from the ICB medicines optimisation team.</p>' % NOT_VERIFIED)
-
-    # ---- cross-ICB ranking
-    rows = sorted(D["icbs"].values(), key=lambda x: x["name"])
-    def rank_of(key, reverse=False):
-        vals = [(c["code"], c[key]) for c in rows if c[key] is not None]
-        vals.sort(key=lambda kv: kv[1], reverse=reverse)
-        return {c: i + 1 for i, (c, _) in enumerate(vals)}, len(vals)
-    r_share, _ = rank_of("share12")
-    r_cv, _ = rank_of("pcn_cv", reverse=True)
-    imd_rank_pop = [c for c in rows if c["imd"]]
-    tr = "".join(
-        "<tr%s><td>%s</td><td data-v='%s'>%s</td><td>%s</td><td data-v='%s'>%s</td><td>%s</td><td data-v='%s'>%s</td>"
-        "<td data-v='%s'>%s</td><td data-v='%s'>%s</td></tr>" % (
-            ' style="background:#F3E9D2"' if c["code"] == code else "",
-            e(pretty(c["name"])),
-            c["share12"] or "", pcts(c["share12"]), r_share.get(c["code"], ""),
-            c["pcn_cv"] if c["pcn_cv"] is not None else "", num(c["pcn_cv"], 2), r_cv.get(c["code"], ""),
-            c["imd"]["rank_avg_score"] if c["imd"] else "", (str(c["imd"]["rank_avg_score"]) if c["imd"] else NOT_VERIFIED),
-            c["rtt"]["median"] if c["rtt"] else "", num(c["rtt"]["median"], 1) if c["rtt"] else NOT_VERIFIED,
-            c["rtt"]["w52"] if c["rtt"] else "", num(c["rtt"]["w52"]) if c["rtt"] else NOT_VERIFIED)
-        for c in rows)
-    rank_html = ('<div class="scroll"><table id="rank"><tr><th>ICB</th><th>%s share of emollient items</th>'
-                 '<th>Rank (1 = lowest share)</th><th>PCN spread (CV)</th><th>Rank (1 = most varied)</th>'
-                 '<th>IMD rank of 36 (1 = most deprived)</th><th>Derm median wait (wks)</th><th>Derm 52+ weeks</th></tr>%s</table></div>'
-                 '<p class="note">Click a heading to sort. No composite score: the focus is picked by reading the columns, '
-                 'not by a formula we invented. IMD is recomputed for the April 2026 ICBs from LSOA data. Share and spread are our definitions (see the spec).</p>'
-                 % (e(brand), tr))
-
-    srcs = "".join("<li>%s: %s</li>" % (e(a), e(b)) for a, b in LICENCES)
-    body = f"""
-<div class="band dark"><div class="col"><div class="eyebrow">Medical Sales Intelligence Hub · starting figures</div>
-<h1 contenteditable="true">{e(brand)} — {e(pretty(I['name']))}</h1>
-<p>Dermatology emollients, prototype. Built {e(D['generated'])} from open data only. Every figure below is from a named published source; anything that could not be verified is marked <span style="color:#E0BE8E;font-weight:700">Not verified</span>. Every block is editable in your browser, then use Save edited copy.</p>
-<p><button id="save">Save edited copy</button></p></div></div>
-<div class="band"><div class="col"><div class="eyebrow">1 · National overview</div><h2>England</h2>{nat_html}<p>{nat_rtt}</p>
-<p class="note">Market definition: BNF 130201 (emollient preparations) plus appliance section 2122 (emollients). Brand: presentations whose name starts "{e(brand)} ". Items are NHSBSA English Prescribing Dataset, primary care, 12 months to {e(labels[-1])}.</p></div></div>
-<div class="band warm"><div class="col"><div class="eyebrow">2 · ICB view</div><h2>Brand share and trend</h2>{icb_html}</div></div>
-<div class="band"><div class="col"><div class="eyebrow">3 · Primary Care Networks</div><h2>Where it is prescribed, and how much it varies</h2>{pcn_html}</div></div>
-<div class="band warm"><div class="col"><div class="eyebrow">4 · Dermatology waiting times</div><h2>Referral to Treatment</h2>{rtt_html}</div></div>
-<div class="band"><div class="col"><div class="eyebrow">5 · Deprivation</div><h2>Index of Multiple Deprivation</h2>{imd_html}</div></div>
-<div class="band warm"><div class="col"><div class="eyebrow">6 · Context</div><h2>Moves towards over-the-counter</h2>{otc}</div></div>
-<div class="band"><div class="col"><div class="eyebrow">7 · Choosing a focus</div><h2>All ICBs side by side</h2>{rank_html}</div></div>
-<div class="band warm"><div class="col"><div class="eyebrow">8 · Your notes</div><h2>Value proposition starting points</h2>
-<div class="edit" contenteditable="true">Type here: what the figures say for this ICB, the access barrier, the ask.</div></div></div>
-<div class="band"><div class="col"><div class="eyebrow">Sources and licences</div><ul class="note">{srcs}</ul>
-<p class="note">PCN prescribing is practice-level NHSBSA data rolled up with the NHS Digital practice-to-PCN mapping; {num(D['unmapped_items'])} market items across the window belong to practices not in today's mapping and are excluded from PCN figures only.</p></div></div>
-<script>
-document.getElementById('save').onclick=function(){{var h='<!doctype html>'+document.documentElement.outerHTML;
-var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([h],{{type:'text/html'}}));a.download='icb-pack-edited.html';a.click();}};
-document.querySelectorAll('#rank th').forEach(function(th,i){{th.onclick=function(){{var t=document.getElementById('rank'),
-rows=[].slice.call(t.rows,1),asc=th.dataset.asc!=='1';th.dataset.asc=asc?'1':'0';
-rows.sort(function(a,b){{var x=a.cells[i].dataset.v||a.cells[i].textContent,y=b.cells[i].dataset.v||b.cells[i].textContent;
-var nx=parseFloat(x),ny=parseFloat(y);var r=(isNaN(nx)||isNaN(ny))?String(x).localeCompare(String(y)):nx-ny;return asc?r:-r;}});
-rows.forEach(function(r){{t.tbody.appendChild(r);}});}};}});
-</script>"""
-    return ("<!doctype html><html lang=\"en-GB\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">"
-            "<title>ICB pack %s %s</title><style>%s</style></head><body>%s</body></html>" % (e(brand), e(I["name"]), css, body))
-
-
-def jsonable(D):
-    out = dict(D)
-    out["pcn"] = {"%s|%s" % k: {kk: (sorted(vv) if isinstance(vv, set) else vv) for kk, vv in d.items()}
-                  for k, d in D["pcn"].items() if k[0] == D["icb"]}
-    out["brands_in_icb"] = dict(D["brands_in_icb"])
-    return out
+def up_to_date(out, gp_periods):
+    """True when data/icb-pack/ already carries the latest NHSBSA month and the latest RTT month."""
+    path = os.path.join(out, "index.json")
+    if not os.path.exists(path):
+        return False
+    have = json.load(open(path))
+    if have.get("periods") != gp_periods:
+        return False
+    if not SPEC.get("rtt"):
+        return True
+    text = http(RTT_PAGE).decode("utf-8", "replace")
+    m = re.search(r"Incomplete-Commissioner-([A-Za-z]{3})(\d\d)", text)
+    if not m:
+        return False          # cannot tell, so rebuild
+    full = {"Jan": "January", "Feb": "February", "Mar": "March", "Apr": "April", "May": "May", "Jun": "June",
+            "Jul": "July", "Aug": "August", "Sep": "September", "Oct": "October", "Nov": "November", "Dec": "December"}
+    return have.get("rttPeriod") == "%s 20%s" % (full[m.group(1)], m.group(2))
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("--icb", default="QHL", help="NHS ICB code (QHL = Birmingham and Solihull)")
-    ap.add_argument("--brand", default="QV")
     ap.add_argument("--cache", default=os.path.join(ROOT, "tmp", "icb-pack-cache"))
-    ap.add_argument("--out", default=os.path.join(ROOT, "out", "icb-pack"))
+    ap.add_argument("--speciality", default="dermatology", choices=sorted(SPECS))
+    ap.add_argument("--out", default=None, help="default data/icb-pack/<speciality>")
     ap.add_argument("--refresh", action="store_true", help="re-download every source")
+    ap.add_argument("--if-new", action="store_true", help="exit quietly unless NHSBSA or RTT has a newer month")
     ap.add_argument("--no-fetch", action="store_true", help="use the cache as it stands")
     a = ap.parse_args(argv)
-    if a.brand.upper() != "QV":
-        sys.exit("The practice-level query is written for the QV brand prefix only; generalise "
-                 "fetch_practice_level before using another brand.")
+    set_spec(a.speciality)
+    a.out = a.out or os.path.join(ROOT, "data", "icb-pack", a.speciality)
     idx = json.load(open(os.path.join(GP_DIR, "index.json")))
+    if a.if_new and up_to_date(a.out, idx["periods"]):
+        print("icb-pack: already at NHSBSA %s and RTT %s, nothing to do" % (idx["periods"][-1], "latest"))
+        return 0
     if not a.no_fetch:
         fetch_all(a.cache, a.refresh)
         fetch_practice_level(a.cache, idx["periods"], a.refresh)
-        fetch_rtt_history(a.cache, a.refresh)
-    D = assemble(a.cache, a.icb, a.brand)
+        if SPEC.get("rtt"):
+            fetch_rtt_history(a.cache, a.refresh)
+        fetch_hospital(a.cache, idx["periods"], hospital_words(a.cache, idx["periods"]), a.refresh)
+    index, shards = assemble(a.cache)
     os.makedirs(a.out, exist_ok=True)
-    base = os.path.join(a.out, "icb-pack-%s-%s" % (a.icb, a.brand))
-    open(base + ".html", "w").write(build_html(D))
-    json.dump(jsonable(D), open(base + ".json", "w"), indent=1, default=str)
-    print("wrote", base + ".html")
+    for old in glob.glob(os.path.join(a.out, "icb-*.json")):
+        os.remove(old)
+    index["_notice"] = NOTICE
+    json.dump(index, open(os.path.join(a.out, "index.json"), "w"), separators=(",", ":"))
+    for code, sh in shards.items():
+        sh["_notice"] = NOTICE
+        json.dump(sh, open(os.path.join(a.out, "icb-%s.json" % code), "w"), separators=(",", ":"))
+    size = sum(os.path.getsize(f) for f in glob.glob(os.path.join(a.out, "*.json")))
+    print("wrote %d ICB shards + index to %s (%.1f MB), %d brands" % (len(shards), a.out, size / 1e6, len(index["brands"])))
     return 0
 
 
