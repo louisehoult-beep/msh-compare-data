@@ -191,6 +191,7 @@ RUN = [
     "test_my_hub_ui.py",             # 2026-10, My Hub modules wired, copy rules
     "test_my_hub_panels.py",         # 22/10/2026, pinned speciality panels and calendar export
     "test_emollient_explorer.py",    # 22/10/2026, dermatology emollient prescribing explorer data
+    "test_derm_icb_context.py",      # 22/10/2026, dermatology ICB context (RTT, IMD, brand share, PCN spread)
     "test_my_hub_state.py",          # 2026-10, PHP snippet and browser client agree (php, node; skipped where absent)
     # Added by 748ae43d (^o635, 15/10/2026) with scripts/crawl_supplier_site.py's
     # tidy_capture() fix, but arrived unregistered and stopped this job dead
