@@ -19,7 +19,7 @@ from datetime import date
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DIR = os.path.join(HERE, 'data', 'company-key-info')
-KINDS = {'news', 'tariff', 'discontinued', 'share', 'framework', 'formulary'}
+KINDS = {'news', 'tariff', 'discontinued', 'share', 'framework', 'formulary', 'award'}
 
 
 def load_all():
@@ -68,6 +68,16 @@ class CompanyKeyInfo(unittest.TestCase):
                 if f.get('u'):
                     self.assertRegex(f['u'], r'^https?://\S+$', cid)
                 self.assertFalse(any(k.startswith('_') for k in f), cid + ' leaks an internal key')
+
+    def test_awards_are_recent_sourced_and_linked(self):
+        n = 0
+        for cid, d in self.files.items():
+            for f in every_fact(d):
+                if f['k'] == 'award':
+                    n += 1
+                    self.assertTrue(f.get('u', '').startswith('http'), cid)
+                    self.assertTrue(f.get('d'), cid)
+        self.assertGreater(n, 0)
 
     def test_no_future_dates(self):
         # framework entries carry their END date in d, so only dated news-like kinds are held to today

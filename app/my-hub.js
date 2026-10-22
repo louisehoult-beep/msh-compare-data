@@ -31,7 +31,7 @@
   mount.setAttribute('data-mhx', '1');
 
   var BASE = window.MSH_MYHUB_BASE || 'https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/';
-  var MODULES = ['app/hub-icons.js', 'app/hub-account.js', 'app/hub-panels.js', 'app/my-hub-logic.js', 'app/my-hub-feeds.js', 'app/my-hub-company.js', 'app/my-hub-panels.js', 'app/my-hub-overlays.js'];
+  var MODULES = ['app/hub-icons.js', 'app/hub-account.js', 'app/hub-panels.js', 'app/my-hub-logic.js', 'app/my-hub-feeds.js', 'app/my-hub-company.js', 'app/my-hub-snapshot.js', 'app/my-hub-panels.js', 'app/my-hub-overlays.js'];
   var WN_WINDOW = 60;   // days a What's new entry stays news
   var M = window.MSH_MYHUB = { base: BASE, mount: mount };
 
@@ -99,7 +99,7 @@
   M.saveState = function (patch) {
     return M.A.saveState(patch).then(function (a) { M.acct = a; refresh(); });
   };
-  M.paintFeeds = function () { keepFocus(function () { setHtml('mx-feeds', M.feeds.html()); }); };
+  M.paintFeeds = function () { keepFocus(function () { setHtml('mx-snap', M.snapshot.html()); setHtml('mx-feeds', M.feeds.html()); }); };
   var toastTimer = null;
   M.toast = function (msg) {
     var t = document.getElementById('mx-toast');
@@ -126,6 +126,17 @@
   }
 
   /* ---------- regions ---------- */
+  /* Bookmark prompt, shown once per browser after the first sign-in. */
+  var LS_BM = 'msh_my_hub_bookmark_v1';
+  function bmSeen() { try { return !!localStorage.getItem(LS_BM); } catch (e) { return true; } }
+  function bmHtml() {
+    if (bmSeen()) { return ''; }
+    var mac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '');
+    return '<div class="bm" role="note"><p><b>Bookmark My Hub.</b> Press ' + (mac ? 'Cmd' : 'Ctrl') + ' + D now and next time you can come straight back here. '
+      + 'This is the Medical Sales Hub, not the Elevate &amp; Thrive training site, and it has its own login.</p>'
+      + '<button type="button" class="chip-d" data-act="bm-dismiss" data-k="bm-dismiss">Got it</button></div>';
+  }
+
   function helloHtml() {
     var l = labels();
     return '<h1 id="mx-hello-t">' + esc(M.L.greeting(new Date().getHours())) + (M.firstName ? ', ' + esc(M.firstName) : '') + '</h1>'
@@ -133,7 +144,7 @@
       + (l.length ? 'Your page is set to <b>' + esc(M.L.joinNames(l)) + '</b>.' : 'You are seeing the whole Hub. <b>Pick your specialities</b> to narrow it.') + '</p>'
       + '<div class="meta"><button type="button" class="chip-d" data-open="m-spec" data-k="hello-spec">' + M.svg('steth') + 'Change specialities</button>'
       + '<button type="button" class="chip-d" data-open="m-company" data-k="hello-company">' + M.svg('grid') + 'Your company</button>'
-      + '<button type="button" class="chip-d" data-act="tour" data-k="hello-tour">' + M.svg('play') + 'Take the tour</button></div>';
+      + '<button type="button" class="chip-d" data-act="tour" data-k="hello-tour">' + M.svg('play') + 'Take the tour</button></div>' + bmHtml();
   }
 
   function changes(n) { return n + (n === 1 ? ' change' : ' changes'); }
@@ -281,7 +292,7 @@
   function shell() {
     return '<section class="mast on-dark" aria-labelledby="mx-hello-t"><div class="wrap"><div class="hello" id="mx-hello"></div><div class="wn-slot" id="wn-slot" data-state="off"></div></div></section>'
       + '<div class="wrap bar-wrap"><nav class="bar" id="mx-bar" aria-label="My Hub controls"></nav></div>'
-      + '<div class="mx-main" id="main"><div class="wrap"><div id="mx-know"></div><div id="mx-gs"></div><div id="mx-panels" class="mx-panels"></div><div class="layout"><div class="stack" id="mx-feeds"></div>'
+      + '<div class="mx-main" id="main"><div class="wrap"><div id="mx-snap" class="mx-snap"></div><div id="mx-know"></div><div id="mx-gs"></div><div id="mx-panels" class="mx-panels"></div><div class="layout"><details class="mx-deeper" id="mx-deeper"><summary data-k="deeper">More from your specialities<small>Full key news, safety alerts, procurement and jobs</small></summary><div class="stack" id="mx-feeds"></div></details>'
       + '<aside class="side" aria-label="Your shortcuts"><section class="card pages" id="mx-pages" aria-labelledby="mx-yp-t"></section>'
       + '<section class="card saved" id="mx-saved" aria-labelledby="mx-sv-t"></section>'
       + '<section class="brief on-dark" id="mx-brief" aria-labelledby="mx-br-t"></section></aside></div></div></div>'
@@ -299,6 +310,10 @@
       setHtml('mx-hello', helloHtml());
       setWn(M.wnView === 'off' ? wnStart() : M.wnView);
       setHtml('mx-bar', barHtml());
+      setHtml('mx-snap', M.snapshot.html());
+      M.snapshot.load();
+      var dd = document.getElementById('mx-deeper');
+      if (dd) { if (!M.specIds().length) { dd.open = true; } }   // nothing picked: the desk is the page
       setHtml('mx-know', M.company.html());
       M.company.load();
       setHtml('mx-gs', checklistHtml());
@@ -380,6 +395,7 @@
       }
       if (t.hasAttribute('data-star')) { toggleStory(t); return; }
       var act = t.getAttribute('data-act');
+      if (act === 'bm-dismiss') { try { localStorage.setItem(LS_BM, '1'); } catch (e) {} setHtml('mx-hello', helloHtml()); return; }
       if (act === 'tour') { M.ui.startTour(0); return; }
       if (act === 'library') { library(); return; }
       if (act === 'saved') { goTo('mx-saved'); return; }

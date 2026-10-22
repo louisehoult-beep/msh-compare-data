@@ -66,6 +66,7 @@
     for (var i = 0; i < wanted.length; i++) {
       if (wanted[i] && ids.indexOf(wanted[i]) !== -1) { return wanted[i]; }
     }
+    if (c.dermatology) { return 'dermatology'; }
     for (var j = 0; j < ids.length; j++) { if (c[ids[j]]) { return ids[j]; } }
     return ids[0];
   }
@@ -139,7 +140,7 @@
     }).join('');
     mount.innerHTML = '<style>' + CSS + '</style><div class="kolf">'
       + '<h2>Find a Key Opinion Leader (KOL)</h2>'
-      + '<p class="kolf-sub">People the professional bodies themselves put forward in public: the board and committee members who steer a speciality, the speakers they invite, the editors and guideline authors. Pick a speciality, then narrow by who they are. Dermatology is first; other specialities show as soon as their sources are checked.</p>'
+      + '<p class="kolf-sub">People the professional bodies themselves put forward in public: the board and committee members who steer a speciality, the speakers they invite, the editors and guideline authors. Pick a speciality, then narrow by who they are. Dermatology, continence, wound care and tissue viability, vascular access and diabetes are covered so far; other specialities show as soon as their sources are checked.</p>'
       + '<div class="kolf-controls"><label>Speciality<select id="kolf-spec">' + specOpts + '</select></label>'
       + '<label>Body<select id="kolf-body">' + bodyOpts + '</select></label>'
       + '<label>Search name or role<input id="kolf-q" type="search" placeholder="for example Scotland, editor, guidelines"></label></div>'
@@ -164,7 +165,7 @@
       if (list.length) {
         out.innerHTML = '<div class="kolf-grid">' + list.map(card).join('') + '</div>';
       } else if (!c.all) {
-        out.innerHTML = '<div class="kolf-empty"><b>No checked people for ' + esc(label) + ' yet.</b>We publish a name only after reading it on the speciality body\'s own public page, so this stays empty until that is done. Dermatology has the full set to see how it will look.</div>';
+        out.innerHTML = '<div class="kolf-empty"><b>No checked people for ' + esc(label) + ' yet.</b>We publish a name only after reading it on the speciality body\'s own public page, so this stays empty until that is done. Dermatology has the fullest set.</div>';
       } else if (st.cls && doc.empty[st.cls] && !c[st.cls]) {
         out.innerHTML = '<div class="kolf-empty"><b>Nobody listed in this group.</b>' + esc(doc.empty[st.cls]) + '</div>';
       } else {

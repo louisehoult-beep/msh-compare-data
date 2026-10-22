@@ -272,7 +272,62 @@
     });
   }
 
+  /* ---------- the snapshot (22/10/2026) ---------- */
+  var LONG_MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  function periodLabel(p) {
+    var m = /^(\d{4})(\d{2})$/.exec(String(p || ''));
+    return m && +m[2] >= 1 && +m[2] <= 12 ? LONG_MONTHS[+m[2] - 1] + ' ' + m[1] : '';
+  }
+  /* Headline figures for each prescribing market a speciality file defines
+     (data/speciality-panels/<slug>.json, gpPrescribing). Null when the
+     speciality has no defined market. Nothing is computed here: every number
+     is the file's own. */
+  function marketHeadlines(panels) {
+    var gp = panels ? panels.gpPrescribing : null;
+    if (!gp || !gp.defined) { return null; }
+    var ms = (gp.markets || []).filter(function (m) { return m && m.items !== undefined && m.items !== null && periodLabel(m.latestPeriod); }).map(function (m) {
+      var t = (m.topNational || [])[0];
+      return {
+        id: m.id, label: m.label, short: String(m.label || '').split(':')[0], period: periodLabel(m.latestPeriod),
+        items: m.items, cost: m.cost, itemsYoY: m.itemsYoY === undefined ? null : m.itemsYoY,
+        lead: t ? { label: t.label, share: t.share === undefined ? null : t.share, yoy: t.yoy === undefined ? null : t.yoy } : null
+      };
+    });
+    if (!ms.length) { return null; }
+    return { markets: ms, source: gp.source || '', sourceUrl: gp.sourceUrl || '', attribution: gp.attribution || '', scope: gp.scope || '' };
+  }
+  /* ICB changes from data/icb-watch.json. Structure is national, so the facts
+     line is the same for every speciality; an event is marked "relevant" only
+     when its own text names one of the speciality's terms. Terms come from
+     TERMS, else the speciality's label, never a guess. */
+  var TERMS = { dermatology: ['dermatolog', 'skin', 'emollient', 'eczema', 'psoria', 'acne'] };
+  function termsFor(specs) {
+    var out = [];
+    (specs || []).forEach(function (s) {
+      var t = TERMS[s.id] || [String(s.label || '').toLowerCase()];
+      t.forEach(function (x) { if (x && out.indexOf(x) === -1) { out.push(x); } });
+    });
+    return out;
+  }
+  function icbChanges(watch, specs, today, days) {
+    if (!watch || !Array.isArray(watch.events)) { return null; }
+    var from = addDays(today, -days), terms = termsFor(specs);
+    var ev = watch.events.filter(function (e) { return e && e.headline && e.date >= from && e.date <= today; }).map(function (e) {
+      var txt = (String(e.headline) + ' ' + String(e.detail || '')).toLowerCase();
+      return { id: e.id, date: e.date, kind: e.kind, headline: e.headline, sources: e.sources || [], relevant: terms.some(function (t) { return txt.indexOf(t) !== -1; }) };
+    });
+    ev.sort(function (a, b) {
+      return (b.relevant ? 1 : 0) - (a.relevant ? 1 : 0) || (a.kind === 'curated' ? 0 : 1) - (b.kind === 'curated' ? 0 : 1) || String(b.date).localeCompare(String(a.date));
+    });
+    var ends = (watch.abolished || []).map(function (a) { return a.legalEnd; }).filter(Boolean).sort();
+    return {
+      asOf: watch.asOf || '', count: watch.count === undefined ? null : watch.count, abolished: (watch.abolished || []).length,
+      lastAbolished: ends.length ? ends[ends.length - 1] : '', clusters: (watch.clusters || []).length, events: ev, windowDays: days
+    };
+  }
+
   var api = {
+    periodLabel: periodLabel, marketHeadlines: marketHeadlines, icbChanges: icbChanges, termsFor: termsFor,
     safeUrl: safeUrl, toolsFor: toolsFor,
     MONTHS: MONTHS, PROC: PROC, pad: pad, isoDay: isoDay, parseDay: parseDay, addDays: addDays,
     fmtDate: fmtDate, fmtShort: fmtShort, daysFrom: daysFrom, whenLabel: whenLabel,
