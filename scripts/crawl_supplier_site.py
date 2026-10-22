@@ -1930,12 +1930,22 @@ def sitemap_products(domain, deadline=None, product_paths=None):
         # uses the CDATA form, which the bare-URL regex silently matched zero
         # times, so the whole sitemap read looked empty. Extract the raw loc
         # body first, then unwrap CDATA if present.
+        #
+        # A bare loc is still XML, so a literal "&" in a query string (a cHash
+        # param, for instance) is always escaped "&amp;" in the file — valid
+        # per the sitemap spec, but unescaped here meant TYPO3 sites (pfm
+        # medical UK, found 22/10/2026) got a sub-sitemap URL requested with a
+        # literal "&amp;cHash=..." still in it, which fails cHash validation
+        # and returns a near-empty fallback page instead of the real sub-
+        # sitemap, so every product URL under it silently vanished. CDATA locs
+        # were never affected (CDATA content is not XML-escaped), only bare
+        # ones with an entity in them.
         raw_locs = re.findall(r"<loc>(.*?)</loc>", body, re.S)
         locs = []
         for raw in raw_locs:
             raw = raw.strip()
             m = re.match(r"<!\[CDATA\[(.*?)\]\]>", raw, re.S)
-            locs.append(m.group(1).strip() if m else raw)
+            locs.append(m.group(1).strip() if m else H.unescape(raw))
         if "<sitemapindex" in body[:400].lower():
             # BUG FIXED 26/08/2026: "sitemap" is a substring of every sub-sitemap
             # URL (they all end "...-sitemap.xml"), so the old filter was a
