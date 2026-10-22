@@ -12,7 +12,7 @@
         { saved, pins, stateSaved, state }
    POST /wp-json/msh/v1/my-hub   (any of, in one body)
         pins:   [catalogue id, ...]                  replaces the list
-        state:  { wnSeen, tour, tourSeen, briefing, phone, scope, stars }
+        state:  { wnSeen, tour, tourSeen, briefing, phone, scope, stars, companies }
                                                      merges the keys given
         star:   { u, t, k }                          adds one saved item, newest first
         unstar: "url"                                removes one saved item
@@ -21,7 +21,8 @@
    User meta: msh_hub_pins (list of ids, unchanged since 23/09/2026) and
    msh_hub_state (added 2026-10 for the home screen: What's new entries
    seen, tour finished or skipped, briefing interest, Home Screen step,
-   the specialities/everything switch, and starred pages and stories).
+   the specialities/everything switch, starred pages and stories, and the
+   companies the member ticked on My Hub, up to five ids).
    Logged-in members only, each reads and writes their own, nothing else.
    Every value is cleaned by the functions below before it is stored;
    app/hub-account.js applies the same rules in the browser, and
@@ -39,6 +40,7 @@ if ( ! function_exists( 'msh_hub_state_blank' ) ) {
 			'phone'    => false,
 			'scope'    => 'mine',
 			'stars'    => array(),
+			'companies' => array(),
 		);
 	}
 }
@@ -117,6 +119,14 @@ if ( ! function_exists( 'msh_hub_state_clean' ) ) {
 			$out[ $k ] = isset( $s[ $k ] ) && true === $s[ $k ];
 		}
 		$out['scope'] = ( isset( $s['scope'] ) && 'all' === $s['scope'] ) ? 'all' : 'mine';
+		if ( isset( $s['companies'] ) && msh_hub_is_list( $s['companies'] ) ) {
+			foreach ( array_slice( $s['companies'], 0, 200 ) as $id ) {
+				if ( is_string( $id ) && preg_match( '/^[a-z0-9-]{1,80}$/D', $id ) && ! in_array( $id, $out['companies'], true ) ) {
+					$out['companies'][] = $id;
+				}
+			}
+			$out['companies'] = array_slice( $out['companies'], 0, 5 );
+		}
 		if ( isset( $s['stars'] ) && msh_hub_is_list( $s['stars'] ) ) {
 			$have = array();
 			foreach ( array_slice( $s['stars'], 0, 2000 ) as $x ) {

@@ -214,6 +214,13 @@ can amend; automation in THIS repo still never writes 'use' lines itself.
   `docs/PUSH-ALERTS.md`.
 - My Hub, the member-built front page: `app/my-hub.js`, `hub/my-hub-catalogue.json`,
   `hub/`. Set-up and runbook: `docs/MY-HUB.md`.
+- My Hub company brief ("What you should know", 22/10/2026): a member ticks up to five
+  companies on My Hub (`app/my-hub-company.js`, ticks saved as `state.companies` on the
+  account by `hub/wpcode/my-hub-pins.php`). `scripts/build_company_key_info.py` builds
+  `data/company-key-info/<id>.json` from the supplier, press, news and speciality-panel
+  files (top news, facts, closest competitors; every line sourced), rebuilt daily in
+  `.github/workflows/speciality-panels.yml`. Test: `test_company_key_info.py`. The WPCode
+  snippet must be updated live in step with this code, or the account drops the ticks.
 
 ## Stakeholder Mapper — trust level (added 24/07/2026)
 `app/mst-logic.js` drills below the ICB to the individual trust. It injects its

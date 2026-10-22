@@ -52,7 +52,7 @@ process.stdout.write(JSON.stringify(out));
 """
 
 BLANK = {"v": 1, "wnSeen": [], "tour": False, "tourSeen": False, "briefing": False,
-         "phone": False, "scope": "mine", "stars": []}
+         "phone": False, "scope": "mine", "stars": [], "companies": []}
 FW = {"u": "/medical-sales-hub/frameworks/", "t": "Framework Hub", "k": "page", "at": "2026-09-30"}
 
 CASES = [
@@ -75,6 +75,12 @@ CASES = [
         {"u": "https://example.org/story", "t": "A story", "k": "story", "at": "1 Oct"},
         ["not", "a", "star"],
     ]}], dict(BLANK, stars=[FW, {"u": "https://example.org/story", "t": "A story", "k": "story", "at": ""}])),
+    ("companies: valid ids, unique, strings only, at most five", "normState",
+     [{"companies": ["ego-pharmaceuticals-uk", "ego-pharmaceuticals-uk", "BAD id", 7, "a", "b", "c", "d", "e", "f"]}],
+     dict(BLANK, companies=["ego-pharmaceuticals-uk", "a", "b", "c", "d"])),
+    ("companies: a non-list is ignored", "normState", [{"companies": "ego"}], BLANK),
+    ("companies: set through the state patch", "applyBody",
+     [BLANK, {"state": {"companies": ["aspire-pharma"]}}, "2026-10-22"], dict(BLANK, companies=["aspire-pharma"])),
     ("bare host is the root path", "starKey", ["https://medsalesintelligencehub.co.uk"], "/"),
     ("empty stays empty (and is then rejected)", "starKey", [""], ""),
     ("titles cut at 200", "normState", [{"stars": [{"u": "/x/", "t": "y" * 250}]}],

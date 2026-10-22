@@ -429,3 +429,32 @@
 /* Render-check fixes (preview 01/10/2026): the lead story's speciality tag hugs its text, as in the mock-up; a "new" dot wins over the Ctrl K hint. */
 .msh #msh-my-hub .lead .stag{align-self:flex-start}
 .msh #msh-my-hub .ib[data-new="true"] .kbd{display:none}
+/* Company brief, "What you should know" (app/my-hub-company.js). Light card, navy text; tags are navy on ice, News is white on navy. */
+.msh #msh-my-hub #mx-know:not(:empty){margin-bottom:32px}
+.msh #msh-my-hub .know{padding:28px 32px 24px}
+.msh #msh-my-hub .know.kn-empty{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.msh #msh-my-hub .know.kn-empty h2,.msh #msh-my-hub .know .sec-h h2{font-family:var(--serif)!important;font-weight:600!important;color:var(--navy)!important}
+.msh #msh-my-hub .know.kn-empty h2{font-size:24px!important;margin-bottom:6px}
+.msh #msh-my-hub .know.kn-empty p{color:var(--ink2)!important;max-width:640px}
+.msh #msh-my-hub .kn-co{padding:4px 0 8px}
+.msh #msh-my-hub .kn-co + .kn-co{border-top:1px solid #E2DBCD;margin-top:20px;padding-top:20px}
+.msh #msh-my-hub .kn-co h3{font-family:var(--serif)!important;font-size:24px!important;font-weight:600!important;color:var(--navy)!important;letter-spacing:-.012em;margin-bottom:4px}
+.msh #msh-my-hub .kn-sub{margin:18px 0 6px;font-size:13px!important;font-weight:700!important;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-text)!important}
+.msh #msh-my-hub .kn-l{list-style:none;padding:0;margin:0}
+.msh #msh-my-hub .kn-l li{display:grid;grid-template-columns:132px minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid #EFE9DD}
+.msh #msh-my-hub .kn-l li:first-child{border-top:0}
+.msh #msh-my-hub .kn-l b{display:block;font-size:15px!important;font-weight:600!important;color:var(--navy)!important;line-height:1.35!important}
+.msh #msh-my-hub .kn-l b a{color:var(--navy)!important;text-decoration:underline;text-decoration-color:var(--gold-line);text-underline-offset:3px}
+.msh #msh-my-hub .kn-l p{margin-top:4px;font-size:14px!important;color:var(--ink2)!important;line-height:1.5!important}
+.msh #msh-my-hub .kn-l small{display:block;margin-top:4px;font-size:12.5px!important;color:var(--ink2)!important}
+.msh #msh-my-hub .kt{align-self:start;justify-self:start;font-size:12px!important;font-weight:700!important;letter-spacing:.03em;padding:4px 10px;border-radius:999px;background:var(--ice);color:var(--navy)!important}
+.msh #msh-my-hub .kt.k-news{background:var(--navy);color:#FFFFFF!important}
+.msh #msh-my-hub .kn-comps{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.msh #msh-my-hub .kn-c{background:var(--ivory);border-radius:14px;padding:16px 18px}
+.msh #msh-my-hub .kn-c h4{font-family:var(--serif)!important;font-size:19px!important;font-weight:600!important;color:var(--navy)!important}
+.msh #msh-my-hub .kn-why{font-size:13px!important;color:var(--ink2)!important;margin:2px 0 6px}
+.msh #msh-my-hub .kn-c .kn-l li{grid-template-columns:1fr;gap:6px;padding:10px 0}
+.msh #msh-my-hub .kn-note,.msh #msh-my-hub .kn-foot{font-size:13.5px!important;color:var(--ink2)!important;line-height:1.5!important}
+.msh #msh-my-hub .kn-foot{margin-top:18px}
+.msh #msh-my-hub .specs.cos{grid-template-columns:1fr}
+@media (max-width:640px){.msh #msh-my-hub .know{padding:20px 16px}.msh #msh-my-hub .kn-l li{grid-template-columns:1fr;gap:6px}.msh #msh-my-hub .kn-co h3{font-size:22px!important}}
