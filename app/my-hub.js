@@ -270,7 +270,7 @@
   function briefHtml() {
     var on = M.acct.state.briefing;
     return '<span class="bi">' + M.svg('mail') + '</span><h2 id="mx-br-t">Your Monday briefing<span class="soon">Live</span></h2>'
-      + '<p>The Rep\u2019s Briefing is emailed to every Hub member on Monday at 9am, with every item linked to its source.</p>'
+      + '<p>The Rep\u2019s Briefing is emailed to every Medical Sales Hub member on Monday at 9am, with every item linked to its source.</p>'
       + '<ul><li>' + M.svg('check') + 'Leading signals: demand, competitors and NICE</li><li>' + M.svg('check') + 'What\u2019s changed and who\u2019s buying</li>'
       + '<li>' + M.svg('check') + 'Questions to ask customers this week</li></ul>'
       + (on ? '<div class="ok mx-on" role="status">' + M.svg('check') + 'Next one lands Monday at 9am.</div>'

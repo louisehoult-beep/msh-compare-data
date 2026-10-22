@@ -74,12 +74,12 @@
         + '<div class="chips" id="mx-pchips" role="group" aria-label="Browse by profile"></div>' + field('mx-pq', 'Search Hub pages', 'Search Hub pages')
         + '<div class="mx-pgrid"><div id="mx-plist"></div><div class="mx-pord"><h3>Your page, in order</h3><ol id="mx-pord"></ol></div></div>',
         '<small id="mx-pn"></small><button type="button" class="btn ghost" data-act="pages-starter">Add my profile\u2019s starter set</button><button type="button" class="btn ghost" data-close>Cancel</button><button type="button" class="btn navy" data-act="pages-save">Save my pages</button>')
-      + modal('m-brief', 'sm', 'mail', 'Weekly briefing', '<p class="mx-lede">The Rep\u2019s Briefing is emailed to every Hub member on Monday at 9am. There is nothing to switch on.</p>'
+      + modal('m-brief', 'sm', 'mail', 'Weekly briefing', '<p class="mx-lede">The Rep\u2019s Briefing is emailed to every Medical Sales Hub member on Monday at 9am. There is nothing to switch on.</p>'
         + '<label class="opt locked"><input type="checkbox" checked disabled><span><b>Leading signals</b><span>Demand, competitor and NICE moves</span></span></label>'
         + '<label class="opt locked"><input type="checkbox" checked disabled><span><b>What\u2019s changed</b><span>Policy, guidance and supply</span></span></label>'
         + '<label class="opt locked"><input type="checkbox" checked disabled><span><b>Who\u2019s buying and what\u2019s launching</b><span>Awards and tenders, each with its source</span></span></label>'
         + '<label class="opt locked"><input type="checkbox" checked disabled><span><b>Questions to ask customers this week</b><span>Plus a pathway spotlight</span></span></label>',
-        '<small id="mx-brief-note">It is the same briefing for every member. Unsubscribe from the email itself if you do not want it.</small><button type="button" class="btn ghost" data-close>Close</button><button type="button" class="btn navy" data-act="brief-go" id="mx-brief-go">Got it</button>')
+        '<small id="mx-brief-note">It is the same briefing for every member, and free clinical members get the Clinical Briefing instead. Unsubscribe from the email itself if you do not want it.</small><button type="button" class="btn ghost" data-close>Close</button><button type="button" class="btn navy" data-act="brief-go" id="mx-brief-go">Got it</button>')
       + modal('m-how', 'sm', 'help', 'How My Hub works', '<ul class="howlist">' + how.map(function (h) { return '<li><span class="c">' + svg(h[0]) + '</span><span>' + h[1] + '</span></li>'; }).join('') + '</ul>',
         '<button type="button" class="btn navy" data-act="tour">' + svg('play') + 'Replay the tour</button>')
       + modal('m-phone', 'sm', 'phone', 'Add My Hub to your Home Screen', '<ul class="howlist">'
