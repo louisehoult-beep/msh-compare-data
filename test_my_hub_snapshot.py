@@ -95,6 +95,63 @@ class Icb(unittest.TestCase):
         self.assertEqual(node([["icbChanges", [w, [DERM_SPEC], "2026-10-22", 120]]])[0]["events"], [])
 
 
+PANELS = os.path.join(HERE, "app", "hub-panels.js")
+SECS = ["frameworks", "tenders", "local", "awards", "tariff-moves", "dsu"]
+
+
+def sec(panels, ids):
+    n = shutil.which("node")
+    if not n:
+        raise unittest.SkipTest("node not installed")
+    run = "const P=require(process.argv[1]);const d=JSON.parse(process.argv[2]);const o={};JSON.parse(process.argv[3]).forEach(i=>o[i]=P.sectionSummary(d,i,'2026-10-22'));process.stdout.write(JSON.stringify(o))"
+    r = subprocess.run([n, "-e", run, PANELS, json.dumps(panels), json.dumps(ids)], capture_output=True, text=True, timeout=60)
+    if r.returncode != 0:
+        raise AssertionError(r.stderr)
+    return json.loads(r.stdout)
+
+
+class PinnableSections(unittest.TestCase):
+    """Every section of a speciality page can be pinned; the My Hub card is the file's own rows."""
+
+    def test_rows_come_from_the_file(self):
+        o = sec(DERM, SECS)
+        self.assertEqual(o["awards"]["total"], len(DERM["awards"]))
+        self.assertEqual(o["awards"]["rows"][0]["t"], DERM["awards"][0]["title"])
+        self.assertEqual(o["local"]["total"], len(DERM["localIntel"]))
+        self.assertEqual(o["dsu"]["rows"][0]["t"], DERM["mhraDsu"]["updates"][0]["title"])
+        self.assertIn("lines changed price", o["tariff-moves"]["lede"])
+        self.assertLessEqual(len(o["awards"]["rows"]), 5)
+
+    def test_empty_sections_are_null_not_invented(self):
+        o = sec(DERM, ["frameworks", "tenders"])   # dermatology has none of either
+        self.assertIsNone(o["frameworks"])
+        self.assertIsNone(o["tenders"])
+
+    def test_frameworks_soonest_end_first(self):
+        d = {"frameworks": [{"name": "B", "ends": "31 August 2028"}, {"name": "A", "ends": "1 March 2027"}, {"name": "C"}]}
+        self.assertEqual([r["t"] for r in sec(d, ["frameworks"])["frameworks"]["rows"]], ["A", "B", "C"])
+
+    def test_tender_stage_is_not_called_an_award(self):
+        d = {"awards": [{"title": "T", "stage": "tender", "date": "2026-10-16", "buyer": "B"}]}
+        self.assertIn("not yet awarded", sec(d, ["awards"])["awards"]["rows"][0]["s"])
+
+    def test_unknown_section_is_null(self):
+        self.assertIsNone(sec(DERM, ["nonsense"])["nonsense"])
+
+    def test_pin_buttons_wired_on_the_page_and_drawn_on_my_hub(self):
+        sp = load("app", "speciality-panels.js")
+        for i in SECS:
+            self.assertIn("secHead('" + i + "'", sp)
+        self.assertIn("'sec:' + id", sp)
+        mp = load("app", "my-hub-panels.js")
+        self.assertIn("P.sectionSummary(d, k.id", mp)
+        self.assertIn("k.kind === 'sec'", mp)
+        self.assertIn("Source: ", mp)
+
+    def test_add_to_my_hub_on_every_page(self):
+        self.assertNotIn("it.group === 'specialities' ? '<button", load("app", "hub-chrome.js"))
+
+
 class Wiring(unittest.TestCase):
     def setUp(self):
         self.js = load("app", "my-hub.js")

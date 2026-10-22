@@ -126,10 +126,63 @@
       source: gp.source, attribution: gp.attribution || '' };
   }
 
+  /* ---------- a section of the speciality page, summarised for My Hub ----------
+     Pin ids "sec:<id>". Every row is the file's own text; nothing is computed
+     beyond ordering and a cap. Null when the speciality has nothing for the
+     section, so My Hub shows an honest "no longer on the page". */
+  var SEC_TITLES = { frameworks: 'Frameworks', tenders: 'Open now', local: 'Local contracts, formularies and policy',
+    awards: 'Awarded contracts', 'tariff-moves': 'Drug Tariff price moves', dsu: 'MHRA Drug Safety Updates' };
+  var SEC_CAP = 5;
+  function row(t, s, u) { return { t: String(t || ''), s: String(s || ''), u: u ? String(u) : '' }; }
+  function parseEnd(txt) { var d = new Date(txt); return isNaN(d.getTime()) ? null : d.getTime(); }
+  function sectionSummary(panels, id, today) {
+    if (!panels || !SEC_TITLES[id]) { return null; }
+    var d = panels, rows = [], total = 0, lede = '', asOf = '', src = '', srcUrl = '';
+    if (id === 'frameworks') {
+      var f = (d.frameworks || []).slice();
+      total = f.length;
+      f.sort(function (a, b) { var x = parseEnd(a.ends), y = parseEnd(b.ends); return (x === null ? 1e15 : x) - (y === null ? 1e15 : y); });
+      rows = f.map(function (x) { return row(x.name, [x.supplyRoute || x.category, 'ends ' + (x.ends || 'not stated'), x.supplierCount === null || x.supplierCount === undefined ? '' : x.supplierCount + ' suppliers'].filter(Boolean).join(', '), x.url); });
+      asOf = (d.dataAsOf || {}).frameworks || ''; src = 'NHS Supply Chain framework pages';
+    } else if (id === 'tenders') {
+      var o = d.openTenders || [];
+      total = o.length;
+      rows = o.map(function (x) { return row(x.title, [x.buyer, 'closes ' + (x.closingDate ? String(x.closingDate).slice(0, 10) : 'not stated')].filter(Boolean).join(', '), x.url); });
+      asOf = (d.dataAsOf || {}).openTenders || ''; src = 'Find a Tender and Contracts Finder notices';
+    } else if (id === 'awards') {
+      var a = d.awards || [];
+      total = a.length;
+      rows = a.map(function (x) {
+        var kind = x.stage === 'planning' ? 'Planning notice, not an award' : (x.stage === 'tender' ? 'Tender notice, not yet awarded' : (x.supplier ? 'Awarded to ' + x.supplier : 'Award notice'));
+        return row(x.title, [fmtDate(x.date), x.buyer, kind].filter(Boolean).join(', '), x.url);
+      });
+      asOf = (d.dataAsOf || {}).tenderHistory || ''; src = 'Find a Tender and Contracts Finder notices';
+    } else if (id === 'local') {
+      var l = d.localIntel || [];
+      total = l.length;
+      rows = l.map(function (x) { return row(x.title, [x.org, x.kind, x.ends ? (/^\d/.test(x.ends) ? 'ends ' : '') + x.ends : ''].filter(Boolean).join(', '), x.url); });
+      asOf = (d.dataAsOf || {}).localIntel || ''; src = 'each item’s own source, read by the Hub';
+    } else if (id === 'dsu') {
+      var u = (d.mhraDsu && d.mhraDsu.updates) || [];
+      total = u.length;
+      rows = u.map(function (x) { return row(x.title, 'Published ' + fmtDate(x.published), x.url); });
+      asOf = (d.mhraDsu && d.mhraDsu.dataAsOf) || ''; src = 'MHRA Drug Safety Update on GOV.UK'; srcUrl = (d.mhraDsu && d.mhraDsu.sourcePage) || '';
+    } else if (id === 'tariff-moves') {
+      var t = d.drugTariffMoves;
+      if (!t) { return null; }
+      total = 1;
+      lede = t.movedCount + ' of ' + t.linesCompared + ' lines changed price (' + t.upCount + ' up, ' + t.downCount + ' down), ' + t.addedCount + ' new, ' + t.droppedCount + ' no longer listed. ' + t.previousMonth + ' to ' + t.currentMonth + '.';
+      rows = (t.suppliers || []).map(function (x) { return row(x.name, x.up + ' up, ' + x.down + ' down' + (x.minPct === undefined ? '' : ', ' + x.minPct + '% to ' + x.maxPct + '%'), ''); });
+      asOf = t.dataAsOf || ''; src = 'NHSBSA Drug Tariff Part IX'; srcUrl = t.sourcePage || '';
+    }
+    if (!total) { return null; }
+    return { id: id, title: SEC_TITLES[id], lede: lede, rows: rows.slice(0, SEC_CAP), total: total, asOf: asOf, source: src, sourceUrl: srcUrl };
+  }
+
   var api = {
     slugId: slugId, panelKey: panelKey, parsePanelKey: parsePanelKey, isPanelStar: isPanelStar, pinnedPanels: pinnedPanels,
     calendarRows: calendarRows, fmtDate: fmtDate, typeLabel: typeLabel, ics: ics, icsName: icsName, hubLink: hubLink,
-    gpSummary: gpSummary, CAL_TYPES: CAL_TYPES
+    gpSummary: gpSummary, sectionSummary: sectionSummary, SEC_TITLES: SEC_TITLES, CAL_TYPES: CAL_TYPES
   };
   root.MSH_PANELS = api;
   if (typeof module === 'object') { if (module) { if (module.exports) { module.exports = api; } } }

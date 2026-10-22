@@ -238,7 +238,7 @@
     bar.className = 'mshc-bar';
     bar.innerHTML = '<div class="mshc-in">' + (CAME_FROM_MYHUB ? '<a class="mshc-back" href="' + MYHUB + '" aria-label="Back to My Hub">' + '<span aria-hidden="true">\u2039</span> My Hub</a>' : '') + '<span class="mshc-pi" aria-hidden="true">' + I.svg(it ? I.forItem(it) : 'file', 'mshc-svg') + '</span>'
       + '<span class="mshc-t"></span>'
-      + (it && it.group === 'specialities' ? '<button type="button" class="mshc-star mshc-add" aria-pressed="false">' + I.svg('plus', 'mshc-svg') + '<span class="mshc-l">Add to My Hub</span></button>' : '')
+      + (it ? '<button type="button" class="mshc-star mshc-add" aria-pressed="false">' + I.svg('plus', 'mshc-svg') + '<span class="mshc-l">Add to My Hub</span></button>' : '')
       + '<button type="button" class="mshc-star mshc-save" aria-pressed="false">' + I.svg('star', 'mshc-svg') + '<span class="mshc-l">Save</span></button></div>';
     bar.querySelector('.mshc-t').textContent = title;
     header.parentNode.insertBefore(bar, header.nextSibling);

@@ -146,6 +146,10 @@
   function pinBtn(id, title) {
     return '<button type="button" class="sp-pin" hidden data-pin="' + esc(id) + '" data-pin-t="' + esc(title) + '" aria-pressed="false">' + starSvg() + '<span>Pin to My Hub</span></button>';
   }
+  /* A section heading with its own Pin to My Hub (kind "sec", app/hub-panels.js sectionSummary). */
+  function secHead(id, title) {
+    return '<div class="sp-bar"><h3 class="sub-h3" style="margin:0;">' + esc(title) + '</h3><span>' + pinBtn('sec:' + id, title) + '</span></div>';
+  }
   function pinPaint(btn) {
     var on = !!(ACCT && P && ACCT.isStarred(P.panelKey(PAGE, btn.getAttribute('data-pin'))));
     btn.setAttribute('aria-pressed', on ? 'true' : 'false');
@@ -280,7 +284,7 @@
     /* FRAMEWORKS. A speciality with none gets an honest empty state, not a table
        with only a header row: obesity and weight management genuinely has no NHS
        Supply Chain framework, and a bare header reads as a panel that failed. */
-    h += '<div class="sp-sec"><h3 class="sub-h3">Frameworks</h3>';
+    h += '<div class="sp-sec">' + secHead('frameworks', 'Frameworks');
     if (!d.frameworks.length) {
       h += '<div class="empty-state">No NHS Supply Chain framework covers this speciality. Every framework name was checked, so this is a fact about how the patch is bought rather than a gap in the data. See the rule below for what that means, and what this panel shows instead.</div>';
     } else {
@@ -314,7 +318,7 @@
     h += '</div>';
 
     /* OPEN TENDERS */
-    h += '<div class="sp-sec"><h3 class="sub-h3">Open now</h3>';
+    h += '<div class="sp-sec">' + secHead('tenders', 'Open now');
     if (!d.openTenders.length) {
       h += '<div class="empty-state">No notice on this patch is open for bidding today. This is checked against the live feed, not left blank. When one opens it appears here.</div>';
     } else {
@@ -460,7 +464,7 @@
     if (d.localIntel && d.localIntel.length) {
       var groups = d.localIntelGroups || {};
       var order = ['routes', 'local', 'formulary', 'nations', 'policy', 'data'];
-      h += '<div class="sp-sec"><h3 class="sub-h3">Local contracts, formularies and policy</h3>';
+      h += '<div class="sp-sec">' + secHead('local', 'Local contracts, formularies and policy');
       h += '<p style="font-size:13px;line-height:1.6;margin:0 0 4px;">Contracts, formularies, board papers and national routes on this patch, each read at its own source. Who holds a contract and when it ends is the call-planning fact; the quote is the source\'s own words.</p>';
       for (var g = 0; g < order.length; g++) {
         var rows = [];
@@ -487,7 +491,7 @@
     }
 
     /* AWARDS */
-    h += '<div class="sp-sec"><h3 class="sub-h3">Awarded contracts</h3>';
+    h += '<div class="sp-sec">' + secHead('awards', 'Awarded contracts');
     if (!d.awards.length) {
       h += '<div class="empty-state">No award on this patch has been recorded in the feeds yet.</div>';
     } else {
@@ -535,7 +539,7 @@
       var pen = function (v) { return '&pound;' + Number(v).toFixed(2); };
       var sgn = function (v) { return (v > 0 ? '+' : '') + v.toFixed(1) + '%'; };
       var pack = function (m) { return (m.qty ? m.qty + ' ' : '') + (m.uom || '') + (m.size ? ' ' + m.size : ''); };
-      h += '<div class="sp-sec"><h3 class="sub-h3">Drug Tariff price moves: ' + esc(tm.previousMonth) + ' to ' + esc(tm.currentMonth) + '</h3>';
+      h += '<div class="sp-sec">' + secHead('tariff-moves', 'Drug Tariff price moves: ' + tm.previousMonth + ' to ' + tm.currentMonth);
       h += '<div class="sp-tiles">';
       h += '<div class="sp-tile"><b>' + n(tm.movedCount) + '</b><span>Lines changed price</span></div>';
       h += '<div class="sp-tile"><b>' + n(tm.upCount) + ' up, ' + n(tm.downCount) + ' down</b><span>Direction</span></div>';
@@ -676,7 +680,7 @@
     /* MHRA DRUG SAFETY UPDATES — tagged by GOV.UK's own therapeutic-area facet. */
     if (d.mhraDsu) {
       var ds = d.mhraDsu;
-      h += '<div class="sp-sec"><h3 class="sub-h3">MHRA Drug Safety Updates</h3>';
+      h += '<div class="sp-sec">' + secHead('dsu', 'MHRA Drug Safety Updates');
       if (!ds.updates.length) {
         h += '<div class="empty-state">' + esc(ds.whyEmpty || 'No Drug Safety Update is tagged to this speciality.') + '</div>';
       } else {

@@ -34,7 +34,7 @@
   function load() {
     pins().forEach(function (s) {
       var k = P.parsePanelKey(s.u);
-      if (k.kind === 'gp') {
+      if (k.kind === 'gp' || k.kind === 'sec') {
         if (SPEC[k.slug] === undefined) {
           SPEC[k.slug] = null;
           raw('data/speciality-panels/' + encodeURIComponent(k.slug) + '.json').then(function (d) { SPEC[k.slug] = d; }, function () { SPEC[k.slug] = false; }).then(repaint);
@@ -65,6 +65,19 @@
       '<div class="mx-scroll"><table class="mx-tbl"><tr><th>Leading products</th><th class="num">Share</th><th class="num">vs a year earlier</th></tr>' + rows + '</table></div>'
       + '<p class="note">Share is product share of items, not company share. ' + esc(g.attribution) + '</p>', page);
   }
+  /* A pinned section of the speciality page: the file's own top rows. */
+  function secCard(s, k) {
+    var d = SPEC[k.slug], page = k.page;
+    var title = nameOf(k.slug) + ': ' + (P.SEC_TITLES[k.id] || 'Section');
+    if (d === null || d === undefined) { return card(s, title, '', '<ul><li class="mx-sk"><span class="sk w40"></span><span class="sk w90"></span></li></ul>', page); }
+    var x = d ? P.sectionSummary(d, k.id, M.today) : null;
+    if (!x) { return card(s, title, '', '<p class="empty">Nothing is held for this section just now, or it is no longer on the page. Open the page to see it.</p>', page); }
+    var body = (x.lede ? '<p class="note">' + esc(x.lede) + '</p>' : '') + '<ul class="snap-l">' + x.rows.map(function (r) {
+      return '<li>' + (r.u ? '<a href="' + esc(M.L.safeUrl(r.u)) + '" target="_blank" rel="noopener"><b>' + esc(r.t) + '</b></a>' : '<b>' + esc(r.t) + '</b>') + (r.s ? '<small>' + esc(r.s) + '</small>' : '') + '</li>';
+    }).join('') + '</ul>'
+      + '<p class="note">' + (x.total > x.rows.length ? 'Top ' + x.rows.length + ' of ' + x.total + '. ' : '') + 'Source: ' + esc(x.source) + (x.asOf ? ', as at ' + esc(x.asOf) : '') + '.</p>';
+    return card(s, title, '', body, page);
+  }
   function calCard(s, k) {
     var title = nameOf(k.slug) + ' calendar';
     if (CAL === null) { return card(s, title, '', '<ul><li class="mx-sk"><span class="sk w40"></span><span class="sk w90"></span></li></ul>', k.page); }
@@ -86,7 +99,7 @@
     var h = '<div class="sec-h"><h2 id="mx-pn-t">Pinned from your specialities</h2><span class="n">' + list.length + (list.length === 1 ? ' panel' : ' panels') + '</span></div><div class="mx-pinned-grid">';
     list.forEach(function (s) {
       var k = P.parsePanelKey(s.u);
-      h += k.kind === 'gp' ? gpCard(s, k) : calCard(s, k);
+      h += k.kind === 'gp' ? gpCard(s, k) : (k.kind === 'sec' ? secCard(s, k) : calCard(s, k));
     });
     return h + '</div>';
   }

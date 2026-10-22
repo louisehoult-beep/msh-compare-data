@@ -173,7 +173,7 @@ class Wiring(unittest.TestCase):
         s = src("app", "hub-chrome.js")
         self.assertIn("Add to My Hub", s)
         self.assertIn("A.addPin(it.id)", s)
-        self.assertIn("it.group === 'specialities'", s)
+        self.assertNotIn("it.group === 'specialities' ? '<button", s, "Add to My Hub is on every catalogue page, not only specialities (22/10/2026)")
 
     def test_no_dashes_in_member_copy(self):
         for f in ("hub-panels.js", "my-hub-panels.js"):
