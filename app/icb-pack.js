@@ -48,6 +48,9 @@
     + '.icbp select{font:14px Helvetica,Arial,sans-serif;padding:8px;color:' + INK + ';background:#fff;border:1px solid ' + GOLD + ';max-width:100%}'
     + '.icbp label{font:700 12px Helvetica,Arial,sans-serif;display:block;margin-bottom:4px}.icbp .pick{display:flex;gap:18px;flex-wrap:wrap;margin:12px 0}'
     + '.icbp .hm td{text-align:center;font-size:11px;padding:4px 3px;min-width:34px}.icbp .hm td:first-child{min-width:230px;text-align:left}'
+    + 'body .wp-site-blocks .icbp .dark h1,body .wp-site-blocks .icbp .dark h2,body .wp-site-blocks .icbp .dark h3,body .wp-site-blocks .icbp .dark p,body .wp-site-blocks .icbp .dark label,body .wp-site-blocks .icbp .dark li{color:#F5F1E8!important}'
+    + 'body .wp-site-blocks .icbp .dark .eyebrow,body .wp-site-blocks .icbp .dark .nv{color:' + GOLDL + '!important}'
+    + 'body .wp-site-blocks .icbp th{color:#fff!important}body .wp-site-blocks .icbp button{color:#fff!important}'
     + '@media print{.icbp button,.icbp .pick{display:none}.icbp .dark{-webkit-print-color-adjust:exact;print-color-adjust:exact}}';
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
