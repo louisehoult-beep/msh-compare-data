@@ -147,6 +147,7 @@ RUN = [
     "test_fetch_issues_icn_depth.py",
     "test_framework_lots.py",
     "test_gp_prescribing.py",            # 29/09/2026, offline, no workflow of its own
+    "test_emollient_explorer.py",        # 22/10/2026, explorer data reconciles to the dermatology panel
     "test_hospital_prescribing_resources.py",
     "test_identity_policy.py",
     "test_merge_seed_on_retry.py",

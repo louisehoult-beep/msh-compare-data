@@ -808,9 +808,14 @@
       }
       h += '</select><div id="' + id + '-out"></div></div>';
       h += '<div class="sp-meta">Primary care: ' + esc(ms.gpSource) + '. Secondary care: ' + esc((S && S.source) || 'not available') + '. Drug Tariff: NHSBSA Drug Tariff Part IX. ' + esc(ms.attribution || '') + '</div>';
+      if (M.id === 'emollients') { h += '<div id="ms-expl-' + k + '"></div>'; }
     }
     h += ruleBlock(d.rules, ['marketShare']);
     MKT.innerHTML = h;
+    for (var xk = 0; xk < ms.markets.length; xk++) {
+      var xm = document.getElementById('ms-expl-' + xk);
+      if (xm) { explorer(xm); }
+    }
 
     function wire(k2) {
       var M2 = ms.markets[k2], sel = document.getElementById('ms-pick-' + k2), out = document.getElementById('ms-pick-' + k2 + '-out');
@@ -838,6 +843,393 @@
       show();
     }
     for (var w = 0; w < ms.markets.length; w++) { wire(w); }
+  }
+
+  /* PRESCRIBING EXPLORER (22/10/2026). Month-by-month trends, presentation level, brand
+     comparison, ICB scope and PCN / practice variation for the emollient market.
+     Data: data/emollient-explorer/ (scripts/build_emollient_explorer.py). Nothing here is
+     estimated: every line is NHSBSA items, and every chart carries its source and period. */
+  var EXPL = window.MSH_EXPLORER_BASE || 'https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/emollient-explorer/';
+  var EX_COL = ['#14304F', '#A8842C', '#4A1526', '#1F7A8C', '#6B7785', '#2E7D4F', '#B5532A', '#5B4B8A'];
+
+  function exCss() {
+    if (document.getElementById('msh-ex-css')) { return; }
+    var st = document.createElement('style');
+    st.id = 'msh-ex-css';
+    st.textContent = [
+      '.msh .ex{margin-top:26px;border:1px solid var(--border);border-radius:10px;background:var(--panel);padding:18px 18px 14px;color:var(--ink);}',
+      '.msh .ex h3{margin:0 0 4px;font-size:17px;color:var(--navy);}',
+      '.msh .ex-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 14px;}',
+      '.msh .ex-tabs button{font:inherit;font-size:13px;font-weight:700;padding:8px 13px;border:1px solid var(--border);border-radius:99px;background:var(--panel2);color:var(--navy);cursor:pointer;}',
+      '.msh .ex-tabs button[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy);}',
+      '.msh .ex-ctl{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:flex-end;margin-bottom:14px;}',
+      '.msh .ex-ctl label{display:block;font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:800;color:var(--dim);}',
+      '.msh .ex-ctl>div{flex:1 1 220px;min-width:0;max-width:100%;}',
+      '.msh .ex-ctl select{display:block;width:100%;margin-top:4px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:14px;background:var(--panel);color:var(--ink);max-width:100%;min-width:0;}',
+      '.msh .ex-chart{margin:16px 0 4px;}',
+      '.msh .ex-chart h4{font-size:13px;margin:0 0 6px;color:var(--navy);}',
+      '.msh .ex-chart svg{width:100%;height:auto;display:block;overflow:visible;}',
+      '.msh .ex-leg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;margin:4px 0 6px;color:var(--ink);}',
+      '.msh .ex-leg i{display:inline-block;width:18px;height:0;border-top:3px solid;vertical-align:middle;margin-right:5px;}',
+      '.msh .ex-src{font-size:11.5px;color:var(--dim);line-height:1.55;margin:6px 0 0;}',
+      '.msh .ex details{margin:6px 0 0;}',
+      '.msh .ex details summary{cursor:pointer;font-size:12px;font-weight:700;color:var(--navy);}',
+      '.msh .ex-checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:4px 14px;margin:6px 0 12px;}',
+      '.msh .ex-checks label{font-size:13px;display:flex;gap:7px;align-items:flex-start;color:var(--ink);}',
+      '.msh .ex-heat{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:6px;margin:10px 0;}',
+      '.msh .ex-tile{font:inherit;text-align:left;border:1px solid var(--border);border-radius:7px;padding:8px 9px;cursor:pointer;min-height:74px;display:flex;flex-direction:column;justify-content:space-between;}',
+      '.msh .ex-tile b{font-size:19px;line-height:1.1;}',
+      '.msh .ex-tile span{font-size:11px;line-height:1.3;overflow-wrap:anywhere;}',
+      '.msh .ex-tile[aria-pressed="true"]{outline:3px solid var(--gold);outline-offset:1px;}',
+      '.msh .ex-tile.ex-low{background:repeating-linear-gradient(45deg,#fff,#fff 6px,#EEF1F5 6px,#EEF1F5 12px);color:#4A5563;cursor:default;}',
+      '.msh .ex-scale{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--dim);margin:2px 0 8px;}',
+      '.msh .ex-scale i{display:block;width:160px;height:10px;border-radius:5px;background:linear-gradient(90deg,#EAF0F7,#14304F);border:1px solid var(--border);}',
+      '.msh .ex-note{border-left:3px solid var(--gold);background:var(--panel2);padding:10px 14px;border-radius:0 8px 8px 0;font-size:12.5px;line-height:1.55;margin:10px 0;color:var(--ink);}'
+    ].join('');
+    document.head.appendChild(st);
+  }
+
+  function exShort(p) {
+    var M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return M[parseInt(p.slice(4), 10) - 1] + ' ' + p.slice(2, 4);
+  }
+
+  function exNiceMax(v) {
+    if (!(v > 0)) { return 1; }
+    var p = Math.pow(10, Math.floor(Math.log(v) / Math.LN10)), f = v / p;
+    var s = f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10;
+    return s * p;
+  }
+
+  /* Line chart as inline SVG. series: [{name, color, dash, vals[]}]; null values break the line.
+     Direct end labels plus a legend, a native tooltip on every point, and a data table below. */
+  function exChart(periods, series, o) {
+    var W = 640, H = 290, L = 54, R = 16, Tp = 12, B = 34, max = 0, min = o.zero === false ? Infinity : 0, i, s, m;
+    for (s = 0; s < series.length; s++) {
+      for (m = 0; m < series[s].vals.length; m++) {
+        var v = series[s].vals[m];
+        if (v !== null && v > max) { max = v; }
+        if (v !== null && v < min) { min = v; }
+      }
+    }
+    var top = exNiceMax(max), bot = 0;
+    if (o.zero === false) {
+      var span = (max - min) || 1, step = exNiceMax(span / 4) / (span / 4 > 5 ? 1 : 1);
+      bot = Math.floor(min / step) * step; top = Math.ceil(max / step) * step; if (top === bot) { top = bot + step; }
+    }
+    function X(k) { return L + (W - L - R) * k / Math.max(1, periods.length - 1); }
+    function Y(val) { return Tp + (H - Tp - B) * (1 - (val - bot) / (top - bot)); }
+    var g = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.label) + '" xmlns="http://www.w3.org/2000/svg" font-family="inherit">';
+    for (i = 0; i <= 4; i++) {
+      var tv = bot + (top - bot) * i / 4, y = Y(tv);
+      g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y + '" y2="' + y + '" stroke="#D5DBE3" stroke-width="1"/>' +
+           '<text x="' + (L - 6) + '" y="' + (y + 4) + '" text-anchor="end" font-size="11" fill="#4A5563">' + esc(o.tick(tv, top - bot)) + '</text>';
+    }
+    for (m = 0; m < periods.length; m++) {
+      if (m % 2 === 0 || m === periods.length - 1) {
+        g += '<text x="' + X(m) + '" y="' + (H - 12) + '" text-anchor="middle" font-size="11" fill="#4A5563">' + exShort(periods[m]) + '</text>';
+      }
+    }
+    for (s = 0; s < series.length; s++) {
+      var d = '', pen = false, S = series[s], last = -1;
+      for (m = 0; m < S.vals.length; m++) {
+        if (S.vals[m] === null) { pen = false; continue; }
+        d += (pen ? 'L' : 'M') + X(m).toFixed(1) + ' ' + Y(S.vals[m]).toFixed(1);
+        pen = true; last = m;
+      }
+      g += '<path d="' + d + '" fill="none" stroke="' + S.color + '" stroke-width="2.4" stroke-linejoin="round"' + (S.dash ? ' stroke-dasharray="' + S.dash + '"' : '') + '/>';
+      for (m = 0; m < S.vals.length; m++) {
+        if (S.vals[m] === null) { continue; }
+        g += '<circle cx="' + X(m).toFixed(1) + '" cy="' + Y(S.vals[m]).toFixed(1) + '" r="3.2" fill="' + S.color + '"><title>' +
+             esc(S.name + ', ' + month(periods[m]) + ': ' + o.fmt(S.vals[m])) + '</title></circle>';
+      }
+    }
+    g += '</svg>';
+    var leg = '<div class="ex-leg">';
+    for (s = 0; s < series.length; s++) {
+      leg += '<span><i style="border-color:' + series[s].color + (series[s].dash ? ';border-top-style:dashed' : '') + '"></i>' + esc(series[s].name) + '</span>';
+    }
+    leg += '</div>';
+    var tb = '<details><summary>Show the figures</summary><div class="sp-scroll"><table class="sp-tbl"><tr><th>Month</th>';
+    for (s = 0; s < series.length; s++) { tb += '<th class="sp-num">' + esc(series[s].name) + '</th>'; }
+    tb += '</tr>';
+    for (m = 0; m < periods.length; m++) {
+      tb += '<tr><td>' + esc(month(periods[m])) + '</td>';
+      for (s = 0; s < series.length; s++) { tb += '<td class="sp-num">' + (series[s].vals[m] === null ? 'no items' : esc(o.fmt(series[s].vals[m]))) + '</td>'; }
+      tb += '</tr>';
+    }
+    tb += '</table></div></details>';
+    return '<div class="ex-chart"><h4>' + esc(o.title) + '</h4>' + leg + g + tb + '<p class="ex-src">' + o.src + (bot > 0 ? ' The vertical axis does not start at zero.' : '') + '</p></div>';
+  }
+
+  function explorer(mount) {
+    exCss();
+    mount.innerHTML = '<div class="ex"><h3>Prescribing explorer</h3><div class="empty-state">Loading the month-by-month data&hellip;</div></div>';
+    fetch(EXPL + 'trends.json?cb=' + new Date().toISOString().slice(0, 13))
+      .then(function (r) { if (!r.ok) { throw new Error('HTTP ' + r.status); } return r.json(); })
+      .then(function (T) { exStart(mount, T); })
+      .catch(function (e) {
+        mount.innerHTML = '<div class="ex"><h3>Prescribing explorer</h3><div class="empty-state">The month-by-month data could not load (' + esc(e.message) + '). Nothing is missing from the rest of the page. Reload, and if it persists it is the feed, not your access.</div></div>';
+      });
+  }
+
+  function shTick(v, range) { return v.toFixed(range < 1 ? 2 : (range < 10 ? 1 : 0)) + '%'; }
+
+  function exStart(mount, T) {
+    var P = T.periods, N = P.length, LAST = N - 1, floor = T.minBaselineItems || 25;
+    var brandIdx = {}, i;
+    for (i = 0; i < T.brands.length; i++) { brandIdx[T.brands[i].name] = i; }
+    var byId = {};
+    for (i = 0; i < T.products.length; i++) { byId[T.products[i].id] = T.products[i]; }
+    var forms = {};
+    for (i = 0; i < T.products.length; i++) { if (T.products[i].form !== 'unspecified') { forms[T.products[i].form] = (forms[T.products[i].form] || 0) + T.products[i].n.slice(-12).reduce(function (a, b) { return a + b; }, 0); } }
+    var formList = Object.keys(forms).sort(function (a, b) { return forms[b] - forms[a]; }).slice(0, 4);
+    function pick(name) { return brandIdx.hasOwnProperty(name) ? name : T.brands[0].name; }
+    var defaultSkus = ['QV cream', 'QV Intensive ointment', 'Cetraben cream', 'Cetraben ointment', 'Epimax original cream', 'Hydromol ointment'];
+    var S = {tab: 'brand', scope: 'ALL', brand: pick('QV'), a: pick('QV'), b: pick('Cetraben'), icb: T.icbs[0].code, pbrand: pick('QV'), pcn: null,
+             sku: [], skuMeasure: 'share', forms: []};
+    for (i = 0; i < T.products.length && S.sku.length < 6; i++) { if (defaultSkus.indexOf(T.products[i].label) >= 0) { S.sku.push(T.products[i].id); } }
+    var pcnCache = {};
+
+    function zeros() { var z = []; for (var k = 0; k < N; k++) { z.push(0); } return z; }
+    function scopeName() { if (S.scope === 'ALL') { return 'England'; } for (var k = 0; k < T.icbs.length; k++) { if (T.icbs[k].code === S.scope) { return T.icbs[k].name; } } return S.scope; }
+    function totalS(scope) { return scope === 'ALL' ? T.total : (T.icbTotal[scope] || zeros()); }
+    function prodS(p, scope) { return scope === 'ALL' ? p.n : (p.icb[scope] || zeros()); }
+    function sum(arrs) { var o = zeros(); for (var a = 0; a < arrs.length; a++) { for (var k = 0; k < N; k++) { o[k] += arrs[a][k]; } } return o; }
+    function brandS(name, scope) {
+      var bi = brandIdx[name], l = [];
+      for (var k = 0; k < T.products.length; k++) { if (T.products[k].b === bi) { l.push(prodS(T.products[k], scope)); } }
+      return sum(l);
+    }
+    function formS(f, scope) { var l = []; for (var k = 0; k < T.products.length; k++) { if (T.products[k].form === f) { l.push(prodS(T.products[k], scope)); } } return sum(l); }
+    function share(a, t) { var o = []; for (var k = 0; k < N; k++) { o.push(t[k] > 0 ? a[k] * 100 / t[k] : null); } return o; }
+    function idx(a) { var o = []; for (var k = 0; k < N; k++) { o.push(a[0] >= floor ? a[k] * 100 / a[0] : null); } return o; }
+    function tot12(a) { var s2 = 0; for (var k = N - 12; k < N; k++) { s2 += a[k]; } return s2; }
+    function yoy(a) { return a[0] >= floor ? Math.round((a[LAST] - a[0]) * 1000 / a[0]) / 10 : null; }
+    function pc(v) { return v === null ? 'no items' : v.toFixed(1) + '%'; }
+    function opt(sel, items, labelFn) {
+      var o = '';
+      for (var k = 0; k < items.length; k++) { o += '<option value="' + esc(items[k].v) + '"' + (items[k].v === sel ? ' selected' : '') + '>' + esc(items[k].l) + '</option>'; }
+      return o;
+    }
+    function brandOpts(sel) {
+      var l = [];
+      for (var k = 0; k < T.brands.length; k++) { l.push({v: T.brands[k].name, l: T.brands[k].name + (T.brands[k].generic ? ' (generic)' : '')}); }
+      return opt(sel, l);
+    }
+    function scopeCtl() {
+      var l = [{v: 'ALL', l: 'England (national)'}];
+      for (var k = 0; k < T.icbs.length; k++) { l.push({v: T.icbs[k].code, l: T.icbs[k].name}); }
+      return '<div><label for="ex-scope">Where</label><select id="ex-scope">' + opt(S.scope, l) + '</select></div>';
+    }
+    var win = month(P[0]) + ' to ' + month(P[LAST]);
+    function src(extra) {
+      return 'Source: ' + esc(T.source) + ' (NHSBSA), BNF ' + esc(T.bnf.join(' and ')) + ' emollients, GP-prescribed items dispensed in the community, ' + esc(S.scope === 'ALL' ? 'England' : scopeName()) + ', ' + esc(win) + '. Share is share of items, not company share. ' + (extra || '');
+    }
+
+    function tiles(list) {
+      var h = '<div class="sp-tiles">';
+      for (var k = 0; k < list.length; k++) { h += '<div class="sp-tile"><b>' + list[k][0] + '</b><span>' + esc(list[k][1]) + '</span></div>'; }
+      return h + '</div>';
+    }
+
+    function viewBrand() {
+      var sc = S.scope, tot = totalS(sc), b = brandS(S.brand, sc), sh = share(b, tot);
+      var nat = share(brandS(S.brand, 'ALL'), T.total);
+      var h = '<div class="ex-ctl">' + scopeCtl() + '<div><label for="ex-brand">Brand</label><select id="ex-brand">' + brandOpts(S.brand) + '</select></div></div>';
+      var yShare = sh[0] !== null && b[0] >= floor ? Math.round((sh[LAST] - sh[0]) * 10) / 10 : null;
+      h += tiles([
+        [pc(sh[LAST]), 'Share of items, ' + month(P[LAST])],
+        [pc(tot12(tot) > 0 ? tot12(b) * 100 / tot12(tot) : null), 'Share of items, 12 months'],
+        [yShare === null ? 'too few to trend' : (yShare > 0 ? '+' : '') + yShare.toFixed(1) + ' pts', 'Share change vs ' + month(P[0])],
+        [pct(yoy(b)), 'Brand items vs ' + month(P[0])],
+        [pct(yoy(tot)), 'Whole market items vs ' + month(P[0])]]);
+      var ser = [{name: S.brand + ', ' + (sc === 'ALL' ? 'England' : scopeName()), color: EX_COL[0], vals: sh}];
+      if (sc !== 'ALL') { ser.push({name: S.brand + ', England', color: EX_COL[4], dash: '6 4', vals: nat}); }
+      h += exChart(P, ser, {title: S.brand + ': share of emollient items, month by month', label: S.brand + ' share of emollient items by month', zero: false, tick: shTick, fmt: pc, src: src()});
+      h += exChart(P, [{name: S.brand + ' items', color: EX_COL[0], vals: idx(b)}, {name: 'All emollient items (the market)', color: EX_COL[1], vals: idx(tot)}],
+                   {title: S.brand + ' against the market: items indexed to ' + month(P[0]) + ' = 100', label: S.brand + ' items against the market, indexed', zero: false, tick: function (v) { return Math.round(v); }, fmt: function (v) { return v.toFixed(1); },
+                    src: src('An index of 110 is 10% more items than in ' + month(P[0]) + '. An index is shown only where that month had at least ' + floor + ' items.')});
+      /* every brand in this scope */
+      var rows = [];
+      for (var k = 0; k < T.brands.length; k++) {
+        var bs = brandS(T.brands[k].name, sc), t12 = tot12(tot);
+        if (tot12(bs) > 0) { rows.push({n: T.brands[k].name, g: T.brands[k].generic, l: share(bs, tot)[LAST], f: share(bs, tot)[0], y: t12 > 0 ? tot12(bs) * 100 / t12 : null, ok: bs[0] >= floor}); }
+      }
+      rows.sort(function (x, y) { return y.y - x.y; });
+      h += '<div class="ex-chart"><h4>Brand shares in ' + esc(scopeName()) + '</h4><div class="sp-scroll"><table class="sp-tbl"><tr><th>Brand</th><th class="sp-num">' + esc(month(P[LAST])) + '</th><th class="sp-num">12 months</th><th class="sp-num">' + esc(month(P[0])) + '</th><th class="sp-num">Change</th></tr>';
+      for (k = 0; k < Math.min(15, rows.length); k++) {
+        var r = rows[k], ch = r.ok && r.l !== null && r.f !== null ? r.l - r.f : null;
+        h += '<tr><td>' + esc(r.n) + (r.g ? ' <span class="sp-chip">generic</span>' : '') + '</td><td class="sp-num">' + pc(r.l) + '</td><td class="sp-num">' + pc(r.y) + '</td><td class="sp-num">' + pc(r.f) + '</td><td class="sp-num">' + (ch === null ? 'too few to trend' : (ch > 0 ? '+' : '') + ch.toFixed(1) + ' pts') + '</td></tr>';
+      }
+      h += '</table></div><p class="ex-src">' + src('Top 15 of ' + rows.length + ' brands by 12-month items.') + '</p></div>';
+      return h;
+    }
+
+    function skuLabel(p) { return p.label; }
+    function viewSku() {
+      var sc = S.scope, tot = totalS(sc), k, ser = [], ids = S.sku, fl = S.forms;
+      var top = T.products.slice(0, 14);
+      var h = '<div class="ex-ctl">' + scopeCtl() + '<div><label for="ex-meas">Measure</label><select id="ex-meas">' + opt(S.skuMeasure, [{v: 'share', l: 'Share of market items'}, {v: 'items', l: 'Items per month'}, {v: 'index', l: 'Index: ' + month(P[0]) + ' = 100 (shows movement)'}]) + '</select></div></div>';
+      h += '<p class="ms-sub">Pick up to eight presentations. A presentation is one NHSBSA product line, so QV cream and QV Intensive ointment are separate lines. The form is read from the product name; where the name gives none it is not guessed.</p><div class="ex-checks">';
+      var shown = {};
+      for (k = 0; k < top.length; k++) { shown[top[k].id] = 1; }
+      for (k = 0; k < ids.length; k++) { if (!shown[ids[k]] && byId[ids[k]]) { top.push(byId[ids[k]]); shown[ids[k]] = 1; } }
+      for (k = 0; k < top.length; k++) {
+        h += '<label><input type="checkbox" data-sku="' + esc(top[k].id) + '"' + (ids.indexOf(top[k].id) >= 0 ? ' checked' : '') + '> ' + esc(skuLabel(top[k])) + '</label>';
+      }
+      for (k = 0; k < formList.length; k++) {
+        h += '<label><input type="checkbox" data-form="' + esc(formList[k]) + '"' + (fl.indexOf(formList[k]) >= 0 ? ' checked' : '') + '> All ' + esc(formList[k]) + 's, whole market</label>';
+      }
+      h += '</div><div class="ex-ctl"><div><label for="ex-addsku">Add another presentation</label><select id="ex-addsku"><option value="">Choose&hellip;</option>';
+      for (k = 0; k < T.products.length; k++) { if (!shown[T.products[k].id]) { h += '<option value="' + esc(T.products[k].id) + '">' + esc(T.products[k].label) + '</option>'; } }
+      h += '</select></div></div>';
+      var rows = [];
+      for (k = 0; k < ids.length; k++) { if (byId[ids[k]]) { rows.push({name: byId[ids[k]].label, vals: prodS(byId[ids[k]], sc)}); } }
+      for (k = 0; k < fl.length; k++) { rows.push({name: 'All ' + fl[k] + 's (market)', vals: formS(fl[k], sc), dash: '6 4'}); }
+      if (!rows.length) { return h + '<div class="empty-state">Tick at least one presentation.</div>'; }
+      for (k = 0; k < rows.length; k++) {
+        ser.push({name: rows[k].name, color: EX_COL[k % EX_COL.length], dash: rows[k].dash, vals: S.skuMeasure === 'share' ? share(rows[k].vals, tot) : S.skuMeasure === 'index' ? idx(rows[k].vals) : rows[k].vals});
+      }
+      var isShare = S.skuMeasure === 'share', isIdx = S.skuMeasure === 'index';
+      h += exChart(P, ser, {title: isShare ? 'Presentations: share of all emollient items, month by month' : isIdx ? 'Presentations: items indexed to ' + month(P[0]) + ' = 100' : 'Presentations: items per month', label: 'Presentation level trend', zero: isShare || isIdx ? false : true, tick: isShare ? shTick : isIdx ? function (v) { return Math.round(v); } : function (v) { return Math.round(v).toLocaleString('en-GB'); }, fmt: isShare ? pc : isIdx ? function (v) { return v.toFixed(1); } : n, src: src('Dashed lines are every presentation of that form across all brands.' + (isIdx ? ' An index is shown only where ' + month(P[0]) + ' had at least ' + floor + ' items.' : ''))});
+      h += '<div class="sp-scroll"><table class="sp-tbl"><tr><th>Presentation</th><th class="sp-num">Items ' + esc(month(P[LAST])) + '</th><th class="sp-num">Share ' + esc(month(P[LAST])) + '</th><th class="sp-num">Share 12 months</th><th class="sp-num">Items vs ' + esc(month(P[0])) + '</th></tr>';
+      for (k = 0; k < rows.length; k++) {
+        var v = rows[k].vals;
+        h += '<tr><td>' + esc(rows[k].name) + '</td><td class="sp-num">' + n(v[LAST]) + '</td><td class="sp-num">' + pc(share(v, tot)[LAST]) + '</td><td class="sp-num">' + pc(tot12(tot) > 0 ? tot12(v) * 100 / tot12(tot) : null) + '</td><td class="sp-num">' + pct(yoy(v)) + '</td></tr>';
+      }
+      return h + '</table></div>';
+    }
+
+    function viewCompare() {
+      var sc = S.scope, tot = totalS(sc), A = brandS(S.a, sc), B = brandS(S.b, sc);
+      var h = '<div class="ex-ctl">' + scopeCtl() + '<div><label for="ex-a">Brand A</label><select id="ex-a">' + brandOpts(S.a) + '</select></div><div><label for="ex-b">Compare with</label><select id="ex-b">' + brandOpts(S.b) + '</select></div></div>';
+      h += exChart(P, [{name: S.a, color: EX_COL[0], vals: share(A, tot)}, {name: S.b, color: EX_COL[1], vals: share(B, tot)}],
+                   {title: S.a + ' against ' + S.b + ': share of emollient items, month by month', label: S.a + ' against ' + S.b, zero: false, tick: shTick, fmt: pc, src: src()});
+      h += exChart(P, [{name: S.a, color: EX_COL[0], vals: idx(A)}, {name: S.b, color: EX_COL[1], vals: idx(B)}, {name: 'The market', color: EX_COL[4], dash: '6 4', vals: idx(tot)}],
+                   {title: 'Growth against the market: items indexed to ' + month(P[0]) + ' = 100', label: 'Indexed items', zero: false, tick: function (v) { return Math.round(v); }, fmt: function (v) { return v.toFixed(1); }, src: src('Shown only where ' + month(P[0]) + ' had at least ' + floor + ' items.')});
+      function row(nm, a, c) { return '<tr><td>' + esc(nm) + '</td><td class="sp-num">' + a + '</td><td class="sp-num">' + c + '</td></tr>'; }
+      var sa = share(A, tot), sb = share(B, tot), t12 = tot12(tot);
+      h += '<div class="sp-scroll"><table class="sp-tbl"><tr><th>' + esc(scopeName()) + '</th><th class="sp-num">' + esc(S.a) + '</th><th class="sp-num">' + esc(S.b) + '</th></tr>' +
+           row('Items, ' + month(P[LAST]), n(A[LAST]), n(B[LAST])) +
+           row('Share of items, ' + month(P[LAST]), pc(sa[LAST]), pc(sb[LAST])) +
+           row('Share of items, 12 months', pc(t12 > 0 ? tot12(A) * 100 / t12 : null), pc(t12 > 0 ? tot12(B) * 100 / t12 : null)) +
+           row('Share of items, ' + month(P[0]), pc(sa[0]), pc(sb[0])) +
+           row('Items vs ' + month(P[0]), pct(yoy(A)), pct(yoy(B))) + '</table></div>';
+      return h;
+    }
+
+    function viewVar() {
+      var h = '<div class="ex-ctl"><div><label for="ex-icb">ICB</label><select id="ex-icb">' + opt(S.icb, T.icbs.map(function (x) { return {v: x.code, l: x.name}; })) + '</select></div>' +
+              '<div><label for="ex-pb">Brand</label><select id="ex-pb">' + brandOpts(S.pbrand) + '</select></div></div><div id="ex-var"><div class="empty-state">Loading practice data&hellip;</div></div>';
+      return h;
+    }
+
+    function drawVar(doc) {
+      var out = document.getElementById('ex-var');
+      if (!out) { return; }
+      var bi = doc.brands.indexOf(S.pbrand), M = T.pcn, h = '';
+      var pb = S.pbrand;
+      if (bi < 0) {
+        out.innerHTML = '<div class="empty-state">' + esc(pb) + ' is not one of the ' + (doc.brands.length - 1) + ' largest brands carried at practice level, so no PCN view is built for it. Pick another brand.</div>';
+        return;
+      }
+      var pc2 = doc.pcns, i2, all = 0, br = 0;
+      for (i2 = 0; i2 < pc2.length; i2++) { all += pc2[i2].t; br += pc2[i2].b[bi]; }
+      var shares = [];
+      for (i2 = 0; i2 < pc2.length; i2++) { if (pc2[i2].id !== 'none' && pc2[i2].t >= doc.pcnFloor) { shares.push(pc2[i2].b[bi] * 100 / pc2[i2].t); } }
+      var max = shares.length ? Math.max.apply(null, shares) : 0, min = shares.length ? Math.min.apply(null, shares) : 0;
+      h += tiles([[all ? (br * 100 / all).toFixed(1) + '%' : 'no items', pb + ' share across the whole ICB, ' + month(doc.window[0]) + ' to ' + month(doc.window[1])],
+                  [shares.length ? min.toFixed(1) + '% to ' + max.toFixed(1) + '%' : 'not enough', 'Lowest to highest PCN (' + shares.length + ' PCNs with at least ' + n(doc.pcnFloor) + ' items)'],
+                  [n(all), 'Emollient items in the ICB, 12 months']]);
+      h += '<div class="ex-scale"><span>0%</span><i></i><span>' + max.toFixed(1) + '% of the PCN\'s emollient items (the highest here)</span></div><div class="ex-heat" id="ex-heat">';
+      for (i2 = 0; i2 < pc2.length; i2++) {
+        var p = pc2[i2];
+        if (p.id === 'none') { continue; }
+        if (p.t < doc.pcnFloor) {
+          h += '<div class="ex-tile ex-low" role="group" aria-label="' + esc(p.name) + ': too few items"><span>' + esc(p.name) + '</span><span>Too few items to show a share (' + n(p.t) + ')</span></div>';
+          continue;
+        }
+        var s2 = p.b[bi] * 100 / p.t, f = max ? s2 / max : 0, bg = mix(f), tx = f > 0.5 ? '#FFFFFF' : '#0B1C33';
+        h += '<button type="button" class="ex-tile" data-pcn="' + esc(p.id) + '" aria-pressed="' + (S.pcn === p.id ? 'true' : 'false') + '" style="background:' + bg + ';color:' + tx + '"><span>' + esc(p.name) + '</span><b>' + s2.toFixed(1) + '%</b><span>' + n(p.b[bi]) + ' of ' + n(p.t) + ' items</span></button>';
+      }
+      h += '</div>';
+      var none = null;
+      for (i2 = 0; i2 < pc2.length; i2++) { if (pc2[i2].id === 'none') { none = pc2[i2]; } }
+      if (none) { h += '<p class="ex-src">' + n(none.t) + ' items in this ICB come from practices ODS does not place in a PCN, so they are in the ICB total above but in no tile.</p>'; }
+      var sel = null;
+      for (i2 = 0; i2 < pc2.length; i2++) { if (pc2[i2].id === S.pcn) { sel = pc2[i2]; } }
+      if (sel) {
+        h += '<h4 style="margin:14px 0 6px;color:var(--navy);font-size:14px;">Practices in ' + esc(sel.name) + '</h4><div class="sp-scroll"><table class="sp-tbl"><tr><th>Practice</th><th class="sp-num">Emollient items</th><th class="sp-num">' + esc(pb) + ' items</th><th class="sp-num">' + esc(pb) + ' share</th></tr>';
+        for (i2 = 0; i2 < sel.p.length; i2++) {
+          var q = sel.p[i2];
+          h += '<tr><td>' + esc(q.n) + ' <span class="sp-chip">' + esc(q.c) + '</span></td><td class="sp-num">' + n(q.t) + '</td><td class="sp-num">' + n(q.b[bi]) + '</td><td class="sp-num">' + (q.t >= doc.practiceFloor ? (q.b[bi] * 100 / q.t).toFixed(1) + '%' : 'too few') + '</td></tr>';
+        }
+        h += '</table></div>';
+      } else {
+        h += '<p class="ms-sub">Select a PCN tile to see its practices.</p>';
+      }
+      h += '<div class="ex-note">A PCN is a group of neighbouring GP practices. ' + esc(M.membershipCaveat) + ' ' + n(M.itemsNotPlacedInAnIcb) + ' of ' + n(M.itemsAtPracticeLevel) + ' practice-level items (' + (M.itemsNotPlacedInAnIcb * 100 / M.itemsAtPracticeLevel).toFixed(2) + '%) come from practices that were not open in ' + month(M.window[1]) + ' and so sit in no ICB here; they are in the national totals on the other tabs.</div>';
+      h += '<p class="ex-src">Source: NHSBSA English Prescribing Dataset with SNOMED code, practice level (BNF ' + esc(T.bnf.join(' and ')) + ', items, ' + esc(month(doc.window[0])) + ' to ' + esc(month(doc.window[1])) + '). PCN membership: ' + esc(M.membershipSource) + '. A PCN with fewer than ' + n(doc.pcnFloor) + ' emollient items in the 12 months, or a practice with fewer than ' + n(doc.practiceFloor) + ', shows no share. Share is share of the PCN\'s or practice\'s own emollient items.</p>';
+      out.innerHTML = h;
+      var tl = out.querySelectorAll('.ex-tile[data-pcn]');
+      for (var z = 0; z < tl.length; z++) {
+        tl[z].addEventListener('click', function () { S.pcn = this.getAttribute('data-pcn'); drawVar(doc); });
+      }
+    }
+    function mix(f) {
+      var a = [234, 240, 247], b = [20, 48, 79], o = [];
+      for (var c = 0; c < 3; c++) { o.push(Math.round(a[c] + (b[c] - a[c]) * f)); }
+      return 'rgb(' + o.join(',') + ')';
+    }
+    function loadVar() {
+      var code = S.icb;
+      if (pcnCache[code]) { drawVar(pcnCache[code]); return; }
+      fetch(EXPL + 'pcn/' + code + '.json?cb=' + new Date().toISOString().slice(0, 13))
+        .then(function (r) { if (!r.ok) { throw new Error('HTTP ' + r.status); } return r.json(); })
+        .then(function (d) { pcnCache[code] = d; if (S.icb === code && S.tab === 'var') { drawVar(d); } })
+        .catch(function (e) { var o = document.getElementById('ex-var'); if (o) { o.innerHTML = '<div class="empty-state">Practice data for this ICB could not load (' + esc(e.message) + ').</div>'; } });
+    }
+
+    function draw() {
+      var tabs = [['brand', 'Brand trend'], ['sku', 'Presentations'], ['cmp', 'Compare two brands'], ['var', 'PCN variation within an ICB']];
+      var h = '<div class="ex"><h3>Prescribing explorer: month by month</h3><p class="ms-sub">Thirteen months of NHSBSA items for the same emollient codes as the cards above, ' + esc(win) + '. Pick England or any ICB; every line is counted, none is estimated.</p><div class="ex-tabs" role="group" aria-label="Explorer view">';
+      for (var k = 0; k < tabs.length; k++) { h += '<button type="button" data-tab="' + tabs[k][0] + '" aria-pressed="' + (S.tab === tabs[k][0] ? 'true' : 'false') + '">' + tabs[k][1] + '</button>'; }
+      h += '</div><div id="ex-body">' + (S.tab === 'brand' ? viewBrand() : S.tab === 'sku' ? viewSku() : S.tab === 'cmp' ? viewCompare() : viewVar()) + '</div><p class="ex-src">' + esc(T.attribution || '') + '</p></div>';
+      mount.innerHTML = h;
+      wire();
+      if (S.tab === 'var') { loadVar(); }
+    }
+    function on(id, fn) { var el = document.getElementById(id); if (el) { el.addEventListener('change', function () { fn(el.value); draw(); }); } }
+    function wire() {
+      var bt = mount.querySelectorAll('.ex-tabs button');
+      for (var k = 0; k < bt.length; k++) { bt[k].addEventListener('click', function () { S.tab = this.getAttribute('data-tab'); draw(); }); }
+      on('ex-scope', function (v) { S.scope = v; });
+      on('ex-brand', function (v) { S.brand = v; });
+      on('ex-a', function (v) { S.a = v; });
+      on('ex-b', function (v) { S.b = v; });
+      on('ex-meas', function (v) { S.skuMeasure = v; });
+      on('ex-icb', function (v) { S.icb = v; S.pcn = null; });
+      on('ex-pb', function (v) { S.pbrand = v; });
+      on('ex-addsku', function (v) { if (v && S.sku.length < 8) { S.sku.push(v); } });
+      var cs = mount.querySelectorAll('input[data-sku]');
+      for (k = 0; k < cs.length; k++) {
+        cs[k].addEventListener('change', function () {
+          var id = this.getAttribute('data-sku'), at = S.sku.indexOf(id);
+          if (this.checked && S.sku.length + S.forms.length < 8) { S.sku.push(id); } else if (!this.checked && at >= 0) { S.sku.splice(at, 1); }
+          draw();
+        });
+      }
+      var cf = mount.querySelectorAll('input[data-form]');
+      for (k = 0; k < cf.length; k++) {
+        cf[k].addEventListener('change', function () {
+          var f = this.getAttribute('data-form'), at = S.forms.indexOf(f);
+          if (this.checked && S.sku.length + S.forms.length < 8) { S.forms.push(f); } else if (!this.checked && at >= 0) { S.forms.splice(at, 1); }
+          draw();
+        });
+      }
+    }
+    draw();
   }
 
   css();
