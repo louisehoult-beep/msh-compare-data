@@ -5,7 +5,7 @@ WHAT THIS IS
 ------------
 Every person below was read on 22/10/2026 from a public page of the body named,
 and the page is recorded against them (source_url). Nothing is carried from memory
-or from a search snippet. Dermatology only for now; the structure holds any
+or from a search snippet. Dermatology first, then continence, wound care and tissue viability, vascular access and diabetes; the structure holds any
 speciality in data/speciality-map.json (canonicalSpecialities), and a speciality
 with no checked people renders an honest empty state.
 
@@ -113,6 +113,30 @@ SOURCES = {
         "title": "Welcome to the SDS",
         "url": "https://www.sds.org.uk/",
         "note": "President's message and the secretary named for nominations."},
+    "acp-exec": {
+        "short": "ACP executive",
+        "body": "Association for Continence Professionals (ACP, also known as the Association for Continence Advice)",
+        "title": "Meet Our Executive Members",
+        "url": "https://acpcontinence.co.uk/acp-exec/",
+        "note": "Executive members as the page lists them. Only the Chair, Secretary and Treasurer have a role on the page; the others are listed without one. Commercial advisors and patrons are on separate pages and are not listed."},
+    "tvs-charity": {
+        "short": "TVS trustees (Charity Commission)",
+        "body": "Tissue Viability Society (TVS)",
+        "title": "Trustees of the Tissue Viability Society (charity 1180844), Charity Commission register",
+        "url": "https://register-of-charities.charitycommission.gov.uk/en/charity-search/-/charity-details/5129933/trustees",
+        "note": "Statutory register of trustees, under the Open Government Licence v3.0. The Society's own site was not found, so the register is the source."},
+    "vasbi-team": {
+        "short": "VASBI team",
+        "body": "Vascular Access Society of Britain and Ireland (VASBI)",
+        "title": "Meet the Team",
+        "url": "https://www.vasbi.org.uk/about/meet-the-team/",
+        "note": "VASBI's remit is vascular access for haemodialysis (fistulas, grafts and lines). Clinicians only; the patient representative is not listed."},
+    "abcd-committee": {
+        "short": "ABCD committee",
+        "body": "Association of British Clinical Diabetologists (ABCD)",
+        "title": "ABCD Committee",
+        "url": "https://abcd.care/committee",
+        "note": "The four officers the page names. The page's Committee Members section was empty when read, and it shows no affiliations."},
 }
 
 DERM = ["dermatology"]
@@ -122,7 +146,7 @@ DERM_PC = DERM  # canonicalSpecialities has no primary care id; the PCDS body no
 PEOPLE = {}
 
 
-def add(name, source, role, org=None, classes=("board",), term=None, specialities=DERM, body=None, region=None, shown_as=None):
+def add(name, source, role, org=None, classes=("board",), term=None, specialities=DERM, body=None, region=None, shown_as=None, note=None):
     p = PEOPLE.setdefault(name, {"name": name, "appearances": [], "specialities": [], "classes": []})
     p["appearances"].append({
         "body": body, "role": role, "organisation": org, "term": term,
@@ -130,6 +154,8 @@ def add(name, source, role, org=None, classes=("board",), term=None, specialitie
     })
     if shown_as:
         p["appearances"][-1]["spelling_on_source"] = shown_as
+    if note:
+        p["appearances"][-1]["note"] = note
     for s in specialities:
         if s not in p["specialities"]:
             p["specialities"].append(s)
@@ -150,7 +176,8 @@ add("Dr Simon Tso", L, "Honorary Treasurer", "South Warwickshire University NHS 
 add("Dr Victoria Swale", L, "Honorary Secretary", "Royal Free London NHS Foundation Trust", term="July 2025 to July 2027", body=BAD)
 add("Dr Graham Johnston", L, "Assistant Honorary Secretary", "University Hospitals of Leicester NHS Trust", term="July 2025 to July 2027", body=BAD)
 add("Professor John Lear", L, "Research Vice President", "Cheshire Hospitals NHS Foundation Trust", term="July 2025 to July 2027", body=BAD, classes=("board", "evidence"))
-add("Professor Minal Singh", L, "Education Vice President", "Salford Royal NHS Foundation Trust", term="July 2023 to July 2026", body=BAD)
+add("Professor Minal Singh", L, "Education Vice President", "Salford Royal NHS Foundation Trust", term="July 2023 to July 2026", body=BAD,
+    note="The term end shown on the page (July 2026) had passed when read on 22/10/2026 and the page still listed this role; check the page for a successor before relying on it.")
 add("Professor John McGrath", L, "Editor, British Journal of Dermatology (BJD)", "Guy's and St Thomas' NHS Foundation Trust", term="July 2024 to July 2029", body=BAD, classes=("board", "editor"))
 # Regional representatives
 for n, r, t in [
@@ -226,11 +253,53 @@ add("Dr Inma Mauri-Sole", T, "Chair of Trustees", None, body="PCDS", specialitie
 add("Barbara E Page MBE", T, "Honorary Member and Trustee", None, body="PCDS", specialities=DERM_PC)
 add("Geoff Holmes", T, "Trustee", None, body="PCDS", specialities=DERM_PC)
 add("Dr Stephen Kownacki", T, "Trustee", None, body="PCDS", specialities=DERM_PC)
-for n in ["Dr Michelle Ralph", "Ivan Bristow", "Professor Alan M Borthwick OBE"]:
-    add(n, T, "Listed on the Trustees page; the page states no trustee role", None, body="PCDS", specialities=DERM_PC)
+# Dr Michelle Ralph, Ivan Bristow and Professor Alan M Borthwick OBE are on the Trustees page but the
+# page states no trustee role for them (re-read 22/10/2026), so they are not listed as board members.
 # SDS
 add("Dr Paula Beattie", "sds-home", "President, Scottish Dermatological Society; Scotland's representative on the BAD Executive", None, body="SDS")
 add("Dr Gordon Hale", "sds-home", "Secretary, Scottish Dermatological Society (receives membership nominations)", None, body="SDS")
+
+# ---- Next specialities (22/10/2026). No member demand data exists in the repo, so the fallback four ----
+# were used: continence, wound care and tissue viability, vascular access, diabetes. Names are copied as
+# each page shows them; a person with no role on the page is listed as "listed", never given a role.
+CONT = ["continence"]
+X = "acp-exec"
+for n, r in [("Polly Weston", "Chair"), ("Kerry Doherty", "Secretary"), ("Bo Yeung", "Treasurer")]:
+    add(n, X, r, "Association for Continence Professionals", specialities=CONT, body="ACP")
+for n in ["Esther Taborn", "Professor Nikki Cotterill", "Julia Thrush", "Rebecca Cousins", "Ruth Scrivens", "Dr Angie Rantell"]:
+    add(n, X, "Executive member (listed on the executive page; the page shows no role)", "Association for Continence Professionals", specialities=CONT, body="ACP")
+
+WND = ["wound"]
+V = "tvs-charity"
+add("Sharon Neill", V, "Chair of trustees", None, term="Appointed 16 July 2020", specialities=WND, body="TVS")
+for n, d in [("Sara Burr", "15 September 2026"), ("Deborah Chester Bessell", "15 September 2026"), ("Eva Harris", "15 September 2026"),
+             ("Keira Bradley", "18 September 2025"), ("Heather Hodgson", "18 September 2025"), ("Sarah Bradbury", "17 September 2024"),
+             ("Julie Hewish", "17 September 2024"), ("Luxmi Dhoonmoon", "17 September 2024"), ("Madeleine Coupland", "19 September 2023"),
+             ("Ayesha Marshall", "1 February 2023"), ("Samantha Rooney", "22 July 2022"), ("Sharon Anne Scattergood", "22 July 2022"),
+             ("Peter Worsley", "22 July 2022"), ("Clare Greenwood", "22 July 2021"), ("Victoria Murray", "22 July 2021"),
+             ("Joanna Swan", "28 November 2018"), ("David Hibbitt", "28 November 2018")]:
+    add(n, V, "Trustee", None, term="Appointed " + d, specialities=WND, body="TVS")
+
+VAC = ["vascular"]
+T2 = "vasbi-team"
+for n, r, o in [
+    ("Mr Jeremy Crane", "President", "Imperial College Healthcare NHS Trust"),
+    ("Dr Jennifer Hanko", "Vice President", "Belfast Health and Social Care Trust"),
+    ("Dr Kate Steiner", "Treasurer", "East and North Herts NHS Trust"),
+    ("Mr Hiren Mistry", "Website lead", "King's College Hospital NHS Foundation Trust"),
+    ("Margaret Aitken", "Council member (Vascular Access Clinical Nurse Specialist)", "Queen Elizabeth University Hospital, Glasgow"),
+    ("Alison Swain", "Council member (Renal Vascular Access Sister)", "Royal Berkshire Hospital, Reading"),
+    ("Dr Saeed Ahmed", "Council member (Consultant Interventional Nephrologist)", "Sunderland Royal Hospital"),
+    ("Professor David Kingsmore", "Council member (Consultant Vascular and Renal Transplant Surgeon)", "Queen Elizabeth University Hospital, Glasgow"),
+    ("Mr Damian McGrogan", "Council member (Consultant Transplant and Vascular Access Surgeon)", "Belfast City Hospital"),
+]:
+    add(n, T2, r, o, specialities=VAC, body="VASBI")
+
+DIA = ["diabetes"]
+add("Professor Ketan Dhatariya", "abcd-committee", "Chair", None, specialities=DIA, body="ABCD")
+add("Dr Vijay Jayagopal", "abcd-committee", "Honorary Treasurer", None, specialities=DIA, body="ABCD")
+add("Professor Hermione Price", "abcd-committee", "Honorary Secretary", None, specialities=DIA, body="ABCD")
+add("Dr Aaisha Saqib", "abcd-committee", "Honorary Meeting Secretary", None, specialities=DIA, body="ABCD")
 
 # Wording each source gives the member about itself, kept short
 NOTES = {
@@ -238,6 +307,10 @@ NOTES = {
     "BDNG": "Dermatology nurses and healthcare professionals",
     "PCDS": "GPs and primary care clinicians with a special interest in dermatology",
     "SDS": "Scottish consultant dermatologists",
+    "ACP": "Continence nurses, physiotherapists and other bladder and bowel professionals",
+    "TVS": "Tissue viability and wound care professionals (charity trustees)",
+    "VASBI": "Surgeons, nephrologists, radiologists and nurses in haemodialysis vascular access",
+    "ABCD": "Consultant diabetologists",
 }
 
 EMPTY = {
@@ -250,7 +323,8 @@ EMPTY = {
 def linkedin(name, bodies):
     q = re.sub(r"^(Dr|Professor|Prof|Mrs|Mr|Miss)\s+", "", name)
     q = re.sub(r"\s+(MBE|OBE)$", "", q)
-    org = {"BAD": "dermatology", "BDNG": "dermatology nurse", "PCDS": "dermatology GP", "SDS": "dermatology"}.get(bodies[0] if bodies else None, "dermatology")
+    org = {"BAD": "dermatology", "BDNG": "dermatology nurse", "PCDS": "dermatology GP", "SDS": "dermatology",
+           "ACP": "continence", "TVS": "tissue viability", "VASBI": "vascular access", "ABCD": "diabetes"}.get(bodies[0] if bodies else None, "dermatology")
     return "https://www.linkedin.com/search/results/people/?keywords=" + urllib.parse.quote(q + " " + org)
 
 

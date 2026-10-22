@@ -49,10 +49,27 @@ class Gate(unittest.TestCase):
         d["classes"].append({"id": "zzz", "label": "Zzz"})
         self.assertTrue(any("zzz" in b for b in chk.check(d)))
 
-    def test_every_person_dermatology_and_cited(self):
+    def test_every_person_has_speciality_and_https_source(self):
         for p in DOC["people"]:
-            self.assertIn("dermatology", p["specialities"])
+            self.assertTrue(p["specialities"])
             self.assertTrue(all(a["source_url"].startswith("https://") for a in p["appearances"]))
+
+    def test_lapsed_term_needs_note(self):
+        import datetime
+        d = copy.deepcopy(DOC)
+        a = d["people"][0]["appearances"][0]
+        a["term"] = "July 2023 to July 2026"
+        a.pop("note", None)
+        self.assertTrue(any("term ended" in b for b in chk.check(d, today=datetime.date(2026, 10, 22))))
+        a["note"] = "page still lists this role"
+        self.assertFalse(any("term ended" in b for b in chk.check(d, today=datetime.date(2026, 10, 22))))
+
+    def test_no_stale_terms_in_built_file(self):
+        self.assertFalse([b for b in chk.check(DOC) if "term ended" in b])
+
+    def test_each_new_speciality_has_checked_people(self):
+        for spec in ("dermatology", "continence", "wound", "vascular", "diabetes"):
+            self.assertTrue([p for p in DOC["people"] if spec in p["specialities"]], spec)
 
 
 NODE = r"""
@@ -61,6 +78,7 @@ const doc = JSON.parse(require('fs').readFileSync(process.argv[2], 'utf8'));
 const out = {
   derm: k.filter(doc.people, {spec: 'dermatology'}).length,
   wound: k.filter(doc.people, {spec: 'wound'}).length,
+  ortho: k.filter(doc.people, {spec: 'ortho'}).length,
   speakers: k.filter(doc.people, {spec: 'dermatology', cls: 'speaker'}).length,
   supply: k.filter(doc.people, {spec: 'dermatology', cls: 'supply'}).length,
   pcds: k.filter(doc.people, {body: 'PCDS'}).length,
@@ -81,9 +99,9 @@ class Page(unittest.TestCase):
                             os.path.join(HERE, "data", "kol-finder.json")], capture_output=True, text=True)
         self.assertEqual(r.returncode, 0, r.stderr)
         o = json.loads(r.stdout)
-        n = len(DOC["people"])
-        self.assertEqual(o["derm"], n)
-        self.assertEqual(o["wound"], 0)
+        self.assertEqual(o["derm"], len([p for p in DOC["people"] if "dermatology" in p["specialities"]]))
+        self.assertGreater(o["wound"], 10)
+        self.assertEqual(o["ortho"], 0)
         self.assertEqual(o["speakers"], 23)
         self.assertEqual(o["supply"], 0)
         self.assertGreater(o["pcds"], 10)
