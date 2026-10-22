@@ -90,7 +90,8 @@ class CalendarRows(unittest.TestCase):
     def test_real_dermatology_rows_are_all_published_with_sources(self):
         with open(os.path.join(HERE, "data", "hub-calendar.json"), encoding="utf-8") as f:
             cal = json.load(f)
-        rows = node([["calendarRows", [cal["entries"], "dermatology", "2000-01-01"]]])[0]
+        derm = [e for e in cal["entries"] if "dermatology" in (e.get("specialities") or [])]  # argv limit: send only the rows under test
+        rows = node([["calendarRows", [derm, "dermatology", "2000-01-01"]]])[0]
         self.assertTrue(rows, "dermatology has dated rows")
         for r in rows:
             self.assertRegex(r["date"], r"^\d{4}-\d{2}-\d{2}$")
