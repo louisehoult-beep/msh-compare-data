@@ -148,6 +148,7 @@ RUN = [
     "test_framework_lots.py",
     "test_gp_prescribing.py",            # 29/09/2026, offline, no workflow of its own
     "test_hospital_prescribing_resources.py",
+    "test_icb_pack.py",                  # 22/10/2026, offline (reconciles only if a local cache exists)
     "test_identity_policy.py",
     "test_merge_seed_on_retry.py",
     # 29/09/2026: MHRA Drug Safety Update feed + Drug Tariff Part VIIIA, and
