@@ -1,6 +1,6 @@
 /* My Hub company brief: "What you should know" (2026-10).
-   A member ticks the companies they work for (up to five). My Hub then shows,
-   for each: its top news, the facts that bear on it, and the same for its
+   A member picks the one company they work for. My Hub then shows,
+   for it: its top news, the facts that bear on it, and the same for its
    closest competitors. Specialities still narrow Key news and On the desk;
    this block follows the company.
 
@@ -20,7 +20,7 @@
   if (!M) { return; }
   var L = window.MSH_MYHUB_LOGIC;
 
-  var MAX = 5, PICK_SHOWN = 40, FACTS_SHOWN = 6;
+  var MAX = 1, PICK_SHOWN = 40, FACTS_SHOWN = 6;
   var KINDS = { news: 'News', tariff: 'Drug Tariff', discontinued: 'Still on formularies', share: 'Market share', award: 'Contract award', framework: 'Framework', formulary: 'Formulary' };
   var INDEX = null;               // null loading, false failed, else { built, companies }
   var CO = {};                    // id -> data | false (failed) | undefined (not asked yet)
@@ -103,7 +103,7 @@
   function modalHtml() {
     return '<div class="scrim" id="m-company" role="dialog" aria-modal="true" aria-labelledby="m-company-t"><div class="modal sm">'
       + '<div class="mh"><span class="mi">' + svg('grid') + '</span><h2 id="m-company-t">Your company</h2><button type="button" class="icon-btn" data-close aria-label="Close">' + svg('x') + '</button></div>'
-      + '<div class="mb"><p class="mx-lede">Tick the companies you work for, up to five. My Hub shows their news, what affects them and what their competitors are doing.</p>'
+      + '<div class="mb"><p class="mx-lede">Choose the company you work for. My Hub then shows its news, awards, frameworks and figures, and what its competitors are doing.</p>'
       + '<label class="field">' + svg('search') + '<span class="sr">Find a company</span><input id="mx-cf" type="search" placeholder="Type your company name" autocomplete="off" spellcheck="false"></label>'
       + '<div class="specs cos" id="mx-cos" role="group" aria-label="Companies"></div></div>'
       + '<div class="mf"><small id="mx-co-n"></small><button type="button" class="btn ghost" data-close>Cancel</button><button type="button" class="btn navy" data-act="company-save" id="mx-co-save">Save</button></div>'
@@ -133,12 +133,11 @@
         return c.n.toLowerCase().indexOf(q) !== -1 || (c.a || []).some(function (a) { return a.indexOf(q) !== -1; });
       }).slice(0, PICK_SHOWN);
     } else { rows = chosen; }
-    var full = draft.length >= MAX;
     box.innerHTML = rows.length ? rows.map(function (c) {
       var on = draft.indexOf(c.id) !== -1;
-      return '<label><input type="checkbox" data-co="' + esc(c.id) + '"' + (on ? ' checked' : '') + (!on && full ? ' disabled' : '') + '>' + esc(c.n) + '</label>';
+      return '<label><input type="checkbox" data-co="' + esc(c.id) + '"' + (on ? ' checked' : '') + '' + '>' + esc(c.n) + '</label>';
     }).join('') : '<p class="kn-note">' + (q ? 'No company matches that. Try a shorter name or a brand.' : 'Type your company name to find it.') + '</p>';
-    if (note) { note.textContent = draft.length + ' of ' + MAX + ' chosen' + (full ? ', the most you can choose' : ''); }
+    if (note) { note.textContent = draft.length ? '1 company chosen. Choose another to swap it.' : 'None chosen yet'; }
   }
   function save() {
     var list = draft.slice(0, MAX);
@@ -164,7 +163,7 @@
     var t = e.target;
     if (!t || !t.getAttribute || !t.hasAttribute('data-co')) { return; }
     var id = t.getAttribute('data-co'), i = draft.indexOf(id);
-    if (t.checked) { if (i === -1) { if (draft.length < MAX) { draft.push(id); } } } else { if (i !== -1) { draft.splice(i, 1); } }
+    if (t.checked) { draft = [id]; } else { if (i !== -1) { draft.splice(i, 1); } }
     renderPick();
   });
   M.mount.addEventListener('input', function (e) { if (e.target && e.target.id === 'mx-cf') { renderPick(); } });
