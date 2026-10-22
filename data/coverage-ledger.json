@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-10-20",
-  "differentiator.json published": 37219,
-  "differentiator.json held": 295236
+  "differentiator.json published": 37228,
+  "differentiator.json held": 295363
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 407,
-  "inScopeSuppliersNeedingCrawl": 241,
-  "inScopeSuppliersNeedingDomain": 227,
-  "suppliersRefused": 559,
+  "inScopeSuppliersNeedingCrawl": 238,
+  "inScopeSuppliersNeedingDomain": 224,
+  "suppliersRefused": 561,
   "suppliersRefusedButPublishingElsewhere": 167,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
@@ -1855,10 +1855,6 @@
      "domain": null
     },
     {
-     "supplier": "pfm medical UK",
-     "domain": null
-    },
-    {
      "supplier": "Pisces Scientific",
      "domain": null
     },
@@ -1946,8 +1942,7 @@
     "Twist Bioscience",
     "Una Health",
     "VWR International (Avantor)",
-    "nal von minden",
-    "pfm medical UK"
+    "nal von minden"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -2269,12 +2264,12 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 4,
+    "publishedElsewhereNeedingCategory": 5,
     "heldNeedingCategory": 9,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 47
+    "needDomain": 46
    },
    "published": [
     "Abbott Diagnostics",
@@ -2321,6 +2316,7 @@
     "Henry Schein UK Holdings",
     "OscarTech UK",
     "Pasante Healthcare",
+    "pfm medical UK",
     "Sychem"
    ],
    "heldOnly": [
@@ -2373,7 +2369,6 @@
     "nal von minden",
     "Oxford Biosystems",
     "Revvity (formerly PerkinElmer)",
-    "pfm medical UK",
     "Pisces Scientific",
     "Pro-Lab Diagnostics",
     "R&L Slaughter",
@@ -11325,8 +11320,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "22 March 2028",
    "suppliersAwarded": 18,
-   "suppliersPublished": 7,
-   "coverage": 38.9,
+   "suppliersPublished": 8,
+   "coverage": 44.4,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -11336,33 +11331,30 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 18,
-   "coverageOfTarget": 38.9,
-   "crawlWorklist": [
-    {
-     "supplier": "Headington Medical Technology Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "pfm medical UK",
-     "domain": null
-    },
-    {
-     "supplier": "Scottmed Distribution (UK) Ltd",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "Headington Medical Technology Ltd",
-    "Scottmed Distribution (UK) Ltd",
-    "pfm medical UK"
-   ],
+   "coverageOfTarget": 44.4,
+   "crawlWorklist": [],
+   "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
+    {
+     "supplier": "Headington Medical Technology Ltd",
+     "domain": "headingtonmedical.co.uk",
+     "reason": "the site's WordPress API returned HTTP 500; the WooCommerce Store API returned HTTP 500; the sitemap carries 0 URLs under /product/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 500: Internal Server Error)",
+     "checked": "2026-10-22",
+     "bucket": "refused"
+    },
     {
      "supplier": "Medical Access Ltd",
      "domain": "www.medicalaccess.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Scottmed Distribution (UK) Ltd",
+     "domain": "www.scott-med.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-10-22",
      "bucket": "refused"
     },
     {
@@ -11440,7 +11432,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 0
    },
    "published": [
     "B. Braun Medical",
@@ -11448,6 +11440,7 @@
     "GBUK Group",
     "ICU Medical (incl. Smiths Medical)",
     "Kimal PLC",
+    "pfm medical UK",
     "TFX Group Ltd (Teleflex Medical)",
     "Vygon (UK)"
    ],
@@ -11463,16 +11456,14 @@
     "Unisurge International Limited"
    ],
    "capturedNothingCounted": [],
-   "notCrawled": [
+   "notCrawled": [],
+   "refused": [
     "Headington Medical Technology Ltd",
-    "pfm medical UK",
+    "Medical Access Ltd",
     "Scottmed Distribution (UK) Ltd"
    ],
-   "refused": [
-    "Medical Access Ltd"
-   ],
    "unknown": [],
-   "actionableTotal": 10,
+   "actionableTotal": 7,
    "blockedReason": null,
    "deferred": null
   },
@@ -14285,10 +14276,6 @@
     {
      "supplier": "Pajunk UK Medical Products Limited",
      "domain": null
-    },
-    {
-     "supplier": "Scottmed Distribution (UK) Ltd",
-     "domain": null
     }
    ],
    "domainsMissing": [
@@ -14297,7 +14284,6 @@
     "Mediworld Ltd",
     "Neon Diagnostics Ltd",
     "Pajunk UK Medical Products Limited",
-    "Scottmed Distribution (UK) Ltd",
     "embecta UK Limited"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -14328,6 +14314,13 @@
      "domain": "www.prosummedical.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Scottmed Distribution (UK) Ltd",
+     "domain": "www.scott-med.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-10-22",
      "bucket": "refused"
     },
     {
@@ -14506,7 +14499,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 7
+    "needDomain": 6
    },
    "published": [],
    "publishedElsewhere": [
@@ -14556,14 +14549,14 @@
     "embecta UK Limited",
     "Mediworld Ltd",
     "Neon Diagnostics Ltd",
-    "Pajunk UK Medical Products Limited",
-    "Scottmed Distribution (UK) Ltd"
+    "Pajunk UK Medical Products Limited"
    ],
    "refused": [
     "MCT Lifesciences Ltd",
     "Medical Access Ltd",
     "Meditrade UK Ltd",
     "Prosum Medical Ltd",
+    "Scottmed Distribution (UK) Ltd",
     "TerraMed Limited",
     "Valley Northern Ltd",
     "IMS Euro Ltd",
@@ -14572,7 +14565,7 @@
    "unknown": [
     "Apollo Medical Technologies Ltd"
    ],
-   "actionableTotal": 41,
+   "actionableTotal": 40,
    "blockedReason": null,
    "deferred": null
   },
@@ -16363,10 +16356,6 @@
      "domain": null
     },
     {
-     "supplier": "pfm medical UK",
-     "domain": null
-    },
-    {
      "supplier": "TELA Bio Ltd",
      "domain": null
     }
@@ -16374,8 +16363,7 @@
    "domainsMissing": [
     "Assut UK LTD",
     "Carrow Medical Limited",
-    "TELA Bio Ltd",
-    "pfm medical UK"
+    "TELA Bio Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -16462,12 +16450,12 @@
    "publishedElsewhereNoOwnRange": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 10,
+    "publishedElsewhereNeedingCategory": 11,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 4
+    "needDomain": 3
    },
    "published": [],
    "publishedElsewhere": [
@@ -16479,6 +16467,7 @@
     "Ideal Medical Solutions",
     "Johnson & Johnson MedTech",
     "Medtronic",
+    "pfm medical UK",
     "Sela Medical UK Ltd",
     "W.L. Gore & Associates"
    ],
@@ -16490,7 +16479,6 @@
    "notCrawled": [
     "Assut UK LTD",
     "Carrow Medical Limited",
-    "pfm medical UK",
     "TELA Bio Ltd"
    ],
    "refused": [
