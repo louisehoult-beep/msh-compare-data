@@ -201,7 +201,7 @@
     var sub = {
       profile: s.route ? (s.routeName || 'Chosen') : 'Sets your nav',
       spec: s.specCount ? s.specCount + ' chosen' : 'Sets your news',
-      brief: s.briefing ? 'On the list' : 'Coming soon',
+      brief: s.briefing ? 'Seen' : 'Every Monday, 9am',
       phone: 'One tap on your phone',
       tour: 'Nine quick stops'
     };

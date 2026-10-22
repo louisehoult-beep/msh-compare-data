@@ -269,12 +269,12 @@
 
   function briefHtml() {
     var on = M.acct.state.briefing;
-    return '<span class="bi">' + M.svg('mail') + '</span><h2 id="mx-br-t">Your Monday briefing<span class="soon">Coming soon</span></h2>'
-      + '<p>One email on Monday morning with what changed in your specialities. Left out when there is nothing worth sending.</p>'
-      + '<ul><li>' + M.svg('check') + 'New stories from your specialities</li><li>' + M.svg('check') + 'Every device and patient safety alert</li>'
-      + '<li>' + M.svg('check') + 'Tenders and events in the next fortnight</li></ul>'
-      + (on ? '<div class="ok mx-on" role="status">' + M.svg('check') + 'You\u2019re on the list. We\u2019ll show it here when it starts.</div>'
-        : '<button type="button" class="btn brass" data-open="m-brief" data-k="brief-go">Tell me when it starts</button>');
+    return '<span class="bi">' + M.svg('mail') + '</span><h2 id="mx-br-t">Your Monday briefing<span class="soon">Live</span></h2>'
+      + '<p>The Rep\u2019s Briefing is emailed to every Hub member on Monday at 9am, with every item linked to its source.</p>'
+      + '<ul><li>' + M.svg('check') + 'Leading signals: demand, competitors and NICE</li><li>' + M.svg('check') + 'What\u2019s changed and who\u2019s buying</li>'
+      + '<li>' + M.svg('check') + 'Questions to ask customers this week</li></ul>'
+      + (on ? '<div class="ok mx-on" role="status">' + M.svg('check') + 'Next one lands Monday at 9am.</div>'
+        : '<button type="button" class="btn brass" data-open="m-brief" data-k="brief-go">See what\u2019s in it</button>');
   }
 
   function shell() {
