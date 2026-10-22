@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """Gate for data/kol-finder.json (exit 0 = pass, 1 = findings).
 
-Rules: every person has a source page on the source list, checked 2026; no email,
+Rules: a stated term end that has passed carries a note; every person has a source page on the source list, checked 2026; no email,
 phone or postal detail anywhere; classes and specialities are known; opt-out
 names absent; LinkedIn is a search link only; empty states exist for classes with
 no people; names unique.
     python3 scripts/check_kol_finder.py
 """
+import datetime
 import json
 import pathlib
 import re
@@ -15,7 +16,21 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 
-def check(doc, optout=()):
+MONTHS = {m: i + 1 for i, m in enumerate(["january", "february", "march", "april", "may", "june", "july",
+                                          "august", "september", "october", "november", "december"])}
+
+
+def term_end(term):
+    """Last day of the month in 'X to <Month> <Year>' (None if the term has no stated end)."""
+    m = re.search(r"\bto (\w+) (20\d\d)$", term or "")
+    if not m or m.group(1).lower() not in MONTHS:
+        return None
+    y, mo = int(m.group(2)), MONTHS[m.group(1).lower()]
+    return datetime.date(y + mo // 12, mo % 12 + 1, 1) - datetime.timedelta(days=1)
+
+
+def check(doc, optout=(), today=None):
+    today = today or datetime.date.today()
     bad = []
     src = {s["id"]: s for s in doc["sources"]}
     classes = {c["id"] for c in doc["classes"]}
@@ -41,6 +56,9 @@ def check(doc, optout=()):
                 bad.append(n + ": no checked date")
             if not a.get("role"):
                 bad.append(n + ": no role")
+            end = term_end(a.get("term"))
+            if end and end < today and not a.get("note"):
+                bad.append("%s: term ended %s with no note saying so" % (n, end.isoformat()))
         for c in p["classes"]:
             if c not in classes:
                 bad.append("%s: unknown class %s" % (n, c))
