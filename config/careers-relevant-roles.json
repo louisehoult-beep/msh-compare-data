@@ -19,7 +19,7 @@
   "\\bsupply chain\\b",
   "\\bmaintenance\\b",
   "\\bsoftware\\b",
-  "\\bdevelopers?\\b",
+  "\\b(web|front[- ]?end|back[- ]?end|full[- ]stack|application|mobile|java|data|platform) developers?\\b",
   "\\bit (support|analyst|manager|engineer|technician)\\b",
   "\\blaboratory\\b",
   "\\blab\\b",
@@ -30,7 +30,12 @@
   "\\bbuyer\\b",
   "\\bcustomer service\\b",
   "\\badministrator\\b",
-  "\\badmin assistant\\b"
+  "\\badmin assistant\\b",
+  "\\bcoffee\\b",
+  "\\bdriver\\b",
+  "\\bwashroom\\b",
+  "\\boperative\\b",
+  "\\bsales (finance|tax)\\b"
  ],
  "categories": [
   {
@@ -39,7 +44,11 @@
    "patterns": [
     "\\bkey account\\b",
     "\\bkam\\b",
-    "\\b(strategic|national) accounts? (manager|director|lead)\\b"
+    "\\b(strategic|national) accounts? (manager|director|lead)\\b",
+    "\\bkey accounts?\\b",
+    "\\b(national|strategic|healthcare|nhs|enterprise) accounts?\\b",
+    "\\bcustomer (account )?(manager|director)s?\\b",
+    "\\bnhs (account|sales|business|engagement)\\b"
    ]
   },
   {
@@ -50,7 +59,14 @@
     "\\bclinical applications?\\b",
     "\\bapplications? (specialists?|scientists?|engineers?)\\b",
     "\\bproduct specialists?\\b",
-    "\\bfield clinical (engineers?|specialists?)\\b"
+    "\\bfield clinical (engineers?|specialists?)\\b",
+    "\\bclinical (account )?(consultant|liaison|manager)s?\\b",
+    "\\bclinical (sales|applications?) (consultant|manager|trainer|support)s?\\b",
+    "\\b(surgical|theatre|implant|diagnostics?|cardiac|cath ?lab|imaging) (specialist|consultant|liaison|support)s?\\b",
+    "\\btechnical (specialist|sales|consultant)s? .*\\b(clinical|sales)\\b",
+    "\\bcase support\\b",
+    "\\bfield clinical\\b",
+    "\\bclinical field\\b"
    ]
   },
   {
@@ -58,7 +74,12 @@
    "label": "Sales specialist",
    "patterns": [
     "\\bsales( \\w+)? specialists?\\b",
-    "\\bspecialist sales\\b"
+    "\\bspecialist sales\\b",
+    "\\bsolutions? (consultant|executive|specialist|sales)s?\\b",
+    "\\bcapital (equipment|sales)\\b",
+    "\\bspecialty (sales|consultant|manager|specialist)s?\\b",
+    "\\b(senior|lead) (sales|account) (specialist|executive)s?\\b",
+    "\\bdigital health (solutions? )?(executive|consultant|specialist|manager)s?\\b"
    ]
   },
   {
@@ -67,7 +88,13 @@
    "patterns": [
     "\\bbusiness development\\b",
     "\\bbdm\\b",
-    "\\bnew business\\b"
+    "\\bnew business\\b",
+    "\\bbusiness developers?\\b",
+    "\\bpartnerships? (manager|executive|lead|director|specialist)s?\\b",
+    "\\bchannel (manager|sales|partner|development)s?\\b",
+    "\\bdistributor (manager|sales|development)\\b",
+    "\\b(sdr|bdr)\\b",
+    "\\b(sales|business) development (representative|rep|associate|executive)s?\\b"
    ]
   },
   {
@@ -76,7 +103,14 @@
    "patterns": [
     "\\bmarket access\\b",
     "\\bvalue (and|&) access\\b",
-    "\\breimbursement\\b"
+    "\\breimbursement\\b",
+    "\\bhealth economics\\b",
+    "\\bhealth(care)? policy\\b",
+    "\\b(government|public) affairs\\b",
+    "\\bpricing (and|&) (access|reimbursement)\\b",
+    "\\bhealthcare (partnerships?|engagement)\\b",
+    "\\bnhs (engagement|partnership|relationship|policy)s?\\b",
+    "\\bheor\\b"
    ]
   },
   {
@@ -85,7 +119,11 @@
    "patterns": [
     "\\btenders?\\b",
     "\\bbids?\\b",
-    "\\bcontracts? (manager|lead|specialist|executive)\\b"
+    "\\bcontracts? (manager|lead|specialist|executive)\\b",
+    "\\bpricing (and|&) contracts?\\b",
+    "\\bcommercial contracts?\\b",
+    "\\bpublic sector\\b.*\\b(sales|bid|tender)\\b",
+    "\\bframeworks?\\b.*\\b(manager|lead|specialist)\\b"
    ]
   },
   {
@@ -96,7 +134,14 @@
     "\\bclinical support\\b",
     "\\bclinical (nurse )?advis(e|o)rs?\\b",
     "\\bnurse (advis(e|o)rs?|educators?|specialists?|consultants?)\\b",
-    "\\b(homecare|home care|field[- ]based) nurses?\\b"
+    "\\b(homecare|home care|field[- ]based) nurses?\\b",
+    "\\bclinical (nurse |nursing )?(liaison|services|support)\\w*\\b",
+    "\\bnurse (liaison|trainer|manager|lead|consultant)s?\\b",
+    "\\bpatient (support|services|liaison|engagement|care) (manager|specialist|advis(e|o)r|nurse|lead|coordinator)s?\\b",
+    "\\b(wound|stoma|continence|diabetes|respiratory|oxygen|tissue viability|infusion) (care )?(nurse|advis(e|o)r|specialist|educator|consultant)s?\\b",
+    "\\bhomecare\\b",
+    "\\bcustomer (experience|care|success) (manager|lead|specialist|executive)s?\\b",
+    "\\bcommunity nurses?\\b"
    ]
   },
   {
@@ -105,7 +150,11 @@
    "patterns": [
     "\\bmedical science liaisons?\\b",
     "\\bmsls?\\b",
-    "\\bmedical affairs (manager|advis(e|o)r|lead|specialist)s?\\b"
+    "\\bmedical affairs (manager|advis(e|o)r|lead|specialist)s?\\b",
+    "\\bmedical (advis(e|o)r|manager|director|information|liaison|education|lead)s?\\b",
+    "\\bhead of medical\\b",
+    "\\bscientific (advis(e|o)r|affairs|liaison)s?\\b",
+    "\\bclinical (affairs|evidence) (manager|lead|specialist|director)s?\\b"
    ]
   },
   {
@@ -115,7 +164,13 @@
     "\\btrainers?\\b",
     "\\bclinical educators?\\b",
     "\\beducation (specialist|manager|lead|consultant)s?\\b",
-    "\\btraining (manager|specialist|lead|consultant)s?\\b"
+    "\\btraining (manager|specialist|lead|consultant)s?\\b",
+    "\\bprofessional (education|development)\\b",
+    "\\b(learning|clinical|education|customer) (and|&) (development|education|training)\\b",
+    "\\bclinical education\\b",
+    "\\bmedical education\\b",
+    "\\bcustomer (education|training)\\b",
+    "\\bacademy (manager|lead|specialist)s?\\b"
    ]
   },
   {
@@ -125,7 +180,13 @@
     "\\bproduct (manager|marketing|owner|director)s?\\b",
     "\\bbrand (manager|lead|director)s?\\b",
     "\\bportfolio (manager|lead)s?\\b",
-    "\\bmarketing (manager|executive|lead|director|specialist)s?\\b"
+    "\\bmarketing (manager|executive|lead|director|specialist)s?\\b",
+    "\\bproduct (lead|executive|specialist marketing)s?\\b",
+    "\\b(global|regional|senior|associate|assistant) product\\b",
+    "\\bcategory (manager|lead)s?\\b",
+    "\\bmarketing (associate|coordinator|communications|business partner)s?\\b",
+    "\\b(digital|commercial|clinical|trade) marketing\\b",
+    "\\bcommercial (excellence|strategy|insights?)\\b"
    ]
   },
   {
@@ -134,7 +195,8 @@
    "patterns": [
     "\\bterritory\\b",
     "\\barea sales (manager|executive)\\b",
-    "\\baccount managers?\\b"
+    "\\baccount managers?\\b",
+    "\\bfield[- ]based (sales|account|commercial)\\b"
    ]
   },
   {
@@ -147,7 +209,13 @@
     "\\b(vp|vice president),? (of )?sales\\b",
     "\\bcountry (manager|director)s?\\b",
     "\\bregional business managers?\\b",
-    "\\bbusiness unit (manager|director|lead)s?\\b"
+    "\\bbusiness unit (manager|director|lead)s?\\b",
+    "\\b(uk|uki|uk&i|ireland|regional|national) (general manager|managing director)s?\\b",
+    "\\bdirector,? (of )?(sales|commercial|business|customer)\\b",
+    "\\bchief (commercial|revenue)\\b",
+    "\\bcommercial lead\\b",
+    "\\bsales team (leader|lead|manager)s?\\b",
+    "\\bregional (manager|director)s?\\b"
    ]
   },
   {
@@ -158,9 +226,37 @@
     "\\bmedical (sales )?representatives?\\b",
     "\\baccount executives?\\b",
     "\\bfield sales\\b",
-    "\\binside sales\\b"
+    "\\binside sales\\b",
+    "\\bsales (professional|advis(e|o)r|account executive)s?\\b",
+    "\\bsales development\\b",
+    "\\b(healthcare|medical|diagnostic) sales\\b",
+    "\\baccount (director|lead|coordinator)s?\\b"
+   ]
+  },
+  {
+   "key": "commercial-operations",
+   "label": "Sales operations and commercial support",
+   "patterns": [
+    "\\bsales (operations|enablement|excellence|planning|analyst|support)\\b",
+    "\\bcommercial (analyst|operations?|support|executive|business partner)s?\\b",
+    "\\bcontracts? (analyst|executive)s?\\b"
    ]
   }
  ],
- "_widened": "14/10/2026 (Lou: 'product managers, trainers, nurse advisors in medical companies too'): added medical affairs/MSL, trainer and clinical educator, product and marketing manager; widened clinical specialist, nurse advisor, sales specialist and sales management patterns."
+ "_widened": "14/10/2026 (Lou: 'product managers, trainers, nurse advisors in medical companies too'): added medical affairs/MSL, trainer and clinical educator, product and marketing manager; widened clinical specialist, nurse advisor, sales specialist and sales management patterns.",
+ "entry": {
+  "label": "Early career and graduate",
+  "_about": "Lou, 22/10/2026: list entry-level roles for people without medical sales experience who have a proven track record in their own industry. A role is tagged early career when its TITLE says so (graduate, trainee, associate, junior, assistant, sales development representative, inside sales) alongside a sales, commercial, account, marketing or clinical-specialist word. The tag is about the title only. The posting itself says whether experience is required, so the page tells members to read it. Roles already in another category keep that category and carry the tag as well; a tagged role that fits no other category is listed under this one.",
+  "patterns": [
+   "\\b(graduate|early[- ]careers?|trainee|apprentice(ship)?|entry[- ]level|junior|associate)\\b.*\\b(sales|commercial|account|territory|business development|marketing|market access|tender|bids?|clinical (specialist|sales|support|advis\\w*|educat\\w*)|product (specialist|marketing|manager|executive)|customer success)\\b",
+   "\\b(sales|commercial|territory|business development|marketing|clinical specialist|product specialist|customer success)\\b.*\\b(graduate|trainee|apprentice(ship)?|junior|associate|assistant|coordinator|entry[- ]level)\\b",
+   "\\b(sdr|bdr)\\b",
+   "\\b(sales|business) development (representative|rep|associate)s?\\b",
+   "\\binside sales\\b",
+   "\\bsales (trainee|coordinator|assistant)s?\\b"
+  ],
+  "exclude": [
+   "\\b(senior|principal|head|director|vp|vice president|lead)\\b"
+  ]
+ }
 }

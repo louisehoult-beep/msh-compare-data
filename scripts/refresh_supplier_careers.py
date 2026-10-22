@@ -1327,9 +1327,28 @@ def rotation_targets(targets, rows, known, n):
     the same pace."""
     holders = {name for name, r in rows.items() if holds_roles(r)}
     keep = [t for t in targets if t[0] in holders]
+    prio = priority_names()
     rest = sorted((t for t in targets if t[0] not in holders),
-                  key=lambda t: (known.get(t[0]) or ""))
+                  key=lambda t: (0 if (not known.get(t[0]) and _is_priority(t[0], prio)) else 1,
+                                 known.get(t[0]) or ""))
     return keep + rest[:n]
+
+
+PRIORITY = "config/careers-priority-suppliers.json"
+
+
+def priority_names():
+    """Lower-cased name fragments of the employers to read first (22/10/2026)."""
+    try:
+        with open(PRIORITY, encoding="utf-8") as f:
+            return [x.lower() for x in json.load(f).get("names", [])]
+    except Exception:
+        return []
+
+
+def _is_priority(name, prio):
+    n = (name or "").lower()
+    return any(p in n for p in prio)
 
 
 def previous_keys():

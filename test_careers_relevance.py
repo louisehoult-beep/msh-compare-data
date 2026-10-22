@@ -88,7 +88,30 @@ IN = {
     "Brand Manager, Respiratory": "product-marketing",
 }
 
+# Widened 22/10/2026 (Lou: more job-title names, plus early-career roles).
+IN.update({
+    "Professional Education and Development Manager, 12 month contract": "training-education",
+    "Digital Health Solutions Executive (Diagnostics)": "sales-specialist",
+    "Business Developer - Medical Devices": "business-development",
+    "National Account Manager - NHS": "key-account",
+    "Medical Director UK & Ireland": "medical-affairs",
+    "Health Economics Manager": "market-access",
+    "Sales Operations Manager": "commercial-operations",
+    "Graduate Sales Programme": "entry-level",
+    "Marketing Assistant": "entry-level",
+})
+
+# Early-career tag: title only.
+ENTRY_YES = ["Graduate Sales Programme", "Associate Territory Manager (ADC) Field based North",
+             "Junior Product Manager", "Sales Development Representative",
+             "Business Development Representative - NHS", "Inside Sales Executive",
+             "Trainee Clinical Specialist", "Sales Associate", "Marketing Assistant"]
+ENTRY_NO = ["Senior Product Manager", "Key Account Manager", "Graduate Chemist",
+            "Graduate Software Engineer", "Associate Director, Sales", "Territory Manager"]
+
 OUT = [
+    "Business Developer - Coffee Solutions",
+    "Van Driver",
     # Real titles from the file, 28/09/2026.
     "Talent Acquisition Specialist - Commercial - temporary position based in Maidenhead",
     "Tax Accountant",
@@ -124,6 +147,10 @@ def main():
         check("IN  %s" % t[:60], cr.classify(t, c), want)
     for t in OUT:
         check("OUT %s" % t[:60], cr.classify(t, c), None)
+    for t in ENTRY_YES:
+        check("ENTRY yes %s" % t[:50], cr.is_entry(t, c), True)
+    for t in ENTRY_NO:
+        check("ENTRY no  %s" % t[:50], cr.is_entry(t, c), False)
 
     # No cap: 500 matching roles across 40 suppliers all come back.
     doc = {"suppliers": [
@@ -173,6 +200,14 @@ def main():
         out = subprocess.run([node, "-e", js], input=json.dumps(titles), capture_output=True,
                              text=True, check=True).stdout
         got = json.loads(out)
+        ejs = ("const api=require('./app/careers-roles.js');"
+               "const c=api.compile(require('./config/careers-relevant-roles.json'));"
+               "const t=JSON.parse(require('fs').readFileSync(0,'utf8'));"
+               "process.stdout.write(JSON.stringify(t.map(x=>api.isEntry(x,c))));")
+        et = ENTRY_YES + ENTRY_NO + titles
+        eout = json.loads(subprocess.run([node, "-e", ejs], input=json.dumps(et), capture_output=True,
+                                         text=True, check=True).stdout)
+        check("JS parity on early-career tag", eout, [cr.is_entry(t, c) for t in et])
         want = [cr.classify(t, c) for t in titles]
         diff = [(t, g, w) for t, g, w in zip(titles, got, want) if g != w]
         check("JS parity over %d titles" % len(titles), diff, [])
