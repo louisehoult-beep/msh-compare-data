@@ -262,5 +262,5 @@
     M.paintFeeds();
   });
 
-  M.feeds = { load: load, html: html };
+  M.feeds = { load: load, html: html, FEED: FEED };
 })();

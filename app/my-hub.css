@@ -474,3 +474,28 @@
 .msh #msh-my-hub .mx-calrow small{display:block;font-size:12px!important;color:var(--ink2)!important}
 .msh #msh-my-hub .mx-calrow .more{align-self:center}
 @media (max-width:640px){.msh #msh-my-hub .mx-calrow{grid-template-columns:minmax(0,1fr) auto}.msh #msh-my-hub .mx-calrow .d{grid-column:1 / -1}}
+/* Snapshot (22/10/2026): four short cards at the top, the full desk under More */
+.msh #msh-my-hub .mx-snap:not(:empty){margin-bottom:32px}
+.msh #msh-my-hub .snap-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:stretch}
+@media (max-width:760px){.msh #msh-my-hub .snap-grid{grid-template-columns:minmax(0,1fr)}}
+.msh #msh-my-hub .snap{min-width:0;display:flex;flex-direction:column;padding:20px 22px 0}
+.msh #msh-my-hub .snap:hover{transform:none}
+.msh #msh-my-hub .snap-l{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:12px}
+.msh #msh-my-hub .snap-l li{display:grid;gap:2px;padding-bottom:12px;border-bottom:1px solid var(--hair)}
+.msh #msh-my-hub .snap-l li:last-child{border-bottom:0;padding-bottom:0}
+.msh #msh-my-hub .snap-l b{font-size:14.5px!important;line-height:1.35!important;color:var(--navy)!important}
+.msh #msh-my-hub .snap-l a{text-decoration:none}
+.msh #msh-my-hub .snap-l a:hover b{color:var(--gold-text)!important}
+.msh #msh-my-hub .snap-l small,.msh #msh-my-hub .snap .note{font-size:12.5px!important;color:var(--ink2)!important;line-height:1.45!important}
+.msh #msh-my-hub .snap .note{margin:0 0 12px}
+.msh #msh-my-hub .snap .note a{color:var(--navy2)!important;text-decoration:underline}
+.msh #msh-my-hub .snap-fig{font-family:var(--serif);font-size:20px;color:var(--navy);font-variant-numeric:lining-nums tabular-nums}
+.msh #msh-my-hub .snap-fact{font-size:13.5px!important;color:var(--ink)!important;margin:0 0 12px;line-height:1.5!important}
+.msh #msh-my-hub .snap-empty{padding:24px 26px;margin-bottom:32px}
+.msh #msh-my-hub .snap-empty h2{font-family:var(--serif)!important;font-size:24px!important;color:var(--navy)!important;margin:0 0 6px}
+.msh #msh-my-hub .snap-empty p{color:var(--ink)!important;margin:0 0 14px}
+.msh #msh-my-hub .mx-deeper{min-width:0}
+.msh #msh-my-hub .mx-deeper>summary{cursor:pointer;list-style:none;display:flex;flex-direction:column;gap:2px;padding:14px 18px;background:var(--card);border-radius:var(--r-lg);box-shadow:var(--shadow);font-weight:700;color:var(--navy)!important;margin-bottom:24px}
+.msh #msh-my-hub .mx-deeper>summary::-webkit-details-marker{display:none}
+.msh #msh-my-hub .mx-deeper>summary small{font-weight:500;font-size:12.5px;color:var(--ink2)!important}
+.msh #msh-my-hub .mx-deeper:not([open])>summary{margin-bottom:0}
