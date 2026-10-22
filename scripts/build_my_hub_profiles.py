@@ -34,6 +34,10 @@ import sys
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CAT = os.path.join(HERE, "hub", "my-hub-catalogue.json")
 ROLES = ["company", "rep", "clinical", "procurement", "recruit"]
+# Pages app/hub-chrome.js adds to a profile's nav on the page (snippet 1331 is
+# not in the repo), so the live nav does not list them yet. Unioned in here so a
+# rebuild from the live nav does not drop them. Remove an entry once 1331 lists it.
+CHROME_ADDS = {"/medical-sales-hub/build-your-network/": ["company", "procurement", "recruit"]}
 PAIR = re.compile(r'\[\s*"((?:[^"\\]|\\.)*)"\s*,\s*"([^"]*)"\s*\]')
 
 
@@ -67,7 +71,7 @@ def label(cat, navs):
     out = json.loads(json.dumps(cat))
     for it in out["items"]:
         base = it["url"].split("#")[0]   # a tool view takes its page's profiles
-        it["profiles"] = [r for r in ROLES if base in set(navs[r])]
+        it["profiles"] = [r for r in ROLES if base in set(navs[r]) or r in CHROME_ADDS.get(base, [])]
     return out
 
 
