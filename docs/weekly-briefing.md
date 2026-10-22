@@ -11,6 +11,6 @@ Aneeka Hussain's request: one Monday email telling a member what changed in THEI
 ## Not done, needs Lou's approval first
 1. Audience export: a WordPress snippet that lists opted-in members' speciality pins and company ids into the generator's members file (opaque keys, no names or emails in the repo).
 2. Group sync and a campaign created as a DRAFT in MailerLite, then a launchd or Code routine for Monday.
-3. Members who already pressed "Tell me when it starts" have `briefing: true`; treat them as opted in only if Lou agrees.
+3. Members who already pressed "Tell me when it starts" have `briefing: true`; Lou, 22/10/2026: they count as opted in.
 
 Dry run: `python3 scripts/weekly_briefing.py --today 2026-10-26 --members members.json --out out/`
