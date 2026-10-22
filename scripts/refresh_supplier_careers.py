@@ -1334,6 +1334,32 @@ def rotation_targets(targets, rows, known, n):
     return keep + rest[:n]
 
 
+EXTRA = "config/careers-extra-employers.json"
+
+
+def extra_targets(targets, only=None):
+    """Pharma and med tech employers outside the NHS Supply Chain seed (22/10/2026).
+
+    Skipped where a seed supplier already carries the name, so nobody is read twice."""
+    try:
+        with open(EXTRA, encoding="utf-8") as f:
+            doc = json.load(f)
+    except Exception:
+        return []
+    have = [t[0].lower() for t in targets]
+    out = []
+    for e in (doc.get("pharma") or []) + (doc.get("medtech") or []):
+        n = e["name"]
+        key = re.split(r" \(", n.lower())[0]
+        if any(h.startswith(key) or key.startswith(h) for h in have) \
+                or any(n == o[0] for o in out):
+            continue
+        if only and not any(w.strip().lower() in n.lower() for w in only.split(",") if w.strip()):
+            continue
+        out.append((n, e["domain"]))
+    return out
+
+
 PRIORITY = "config/careers-priority-suppliers.json"
 
 
@@ -1551,6 +1577,7 @@ def main():
             if not any(w in n.lower() for w in wanted for n in names):
                 continue
         targets.append((rec["name"], dom))
+    targets += extra_targets(targets, a.supplier)
 
     if a.rotate:
         # Oldest first, never-checked before ever-checked. A supplier whose row

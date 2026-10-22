@@ -99,6 +99,10 @@ IN.update({
     "Sales Operations Manager": "commercial-operations",
     "Graduate Sales Programme": "entry-level",
     "Marketing Assistant": "entry-level",
+    "Hospital Specialist - Immunology": "sales-rep",
+    "Primary Care Sales Representative - North West": "sales-rep",
+    "Customer Engagement Manager - Oncology": "sales-rep",
+    "Regional Access Manager": "market-access",
 })
 
 # Early-career tag: title only.
