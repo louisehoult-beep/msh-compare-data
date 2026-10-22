@@ -458,3 +458,19 @@
 .msh #msh-my-hub .kn-foot{margin-top:18px}
 .msh #msh-my-hub .specs.cos{grid-template-columns:1fr}
 @media (max-width:640px){.msh #msh-my-hub .know{padding:20px 16px}.msh #msh-my-hub .kn-l li{grid-template-columns:1fr;gap:6px}.msh #msh-my-hub .kn-co h3{font-size:22px!important}}
+/* Pinned panels (22/10/2026): panels a member starred on a speciality page */
+.msh #msh-my-hub .mx-panels:not(:empty){margin-bottom:32px}
+.msh #msh-my-hub .mx-pinned-grid{align-items:start;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px}
+.msh #msh-my-hub .mx-pinned{min-width:0}
+.msh #msh-my-hub .mx-pinned:hover{transform:none}
+.msh #msh-my-hub .mx-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.msh #msh-my-hub .mx-tbl{width:100%;border-collapse:collapse;font-size:13.5px!important;color:var(--ink)!important}
+.msh #msh-my-hub .mx-tbl th{text-align:left;font-size:12px!important;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)!important;font-weight:700;padding:0 8px 6px 0;border-bottom:1px solid var(--hair)}
+.msh #msh-my-hub .mx-tbl td{padding:8px 8px 8px 0;border-bottom:1px solid var(--hair);vertical-align:top;color:var(--ink)!important}
+.msh #msh-my-hub .mx-tbl .num{text-align:right;white-space:nowrap}
+.msh #msh-my-hub .mx-calrow{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:4px 12px;align-items:start;padding:10px 0;border-bottom:1px solid var(--hair);font-size:13.5px!important;color:var(--ink)!important}
+.msh #msh-my-hub .mx-calrow .d{font-weight:700;color:var(--navy)!important}
+.msh #msh-my-hub .mx-calrow a{color:var(--navy)!important;text-decoration:none}
+.msh #msh-my-hub .mx-calrow small{display:block;font-size:12px!important;color:var(--ink2)!important}
+.msh #msh-my-hub .mx-calrow .more{align-self:center}
+@media (max-width:640px){.msh #msh-my-hub .mx-calrow{grid-template-columns:minmax(0,1fr) auto}.msh #msh-my-hub .mx-calrow .d{grid-column:1 / -1}}

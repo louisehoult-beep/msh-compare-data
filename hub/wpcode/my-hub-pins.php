@@ -14,7 +14,9 @@
         pins:   [catalogue id, ...]                  replaces the list
         state:  { wnSeen, tour, tourSeen, briefing, phone, scope, stars, companies }
                                                      merges the keys given
-        star:   { u, t, k }                          adds one saved item, newest first
+        star:   { u, t, k }   k is page, story or panel (a panel pinned from a
+                              speciality page: its address ends #pin=...)
+                              adds one saved item, newest first
         unstar: "url"                                removes one saved item
         Returns the same shape as GET.
 
@@ -94,7 +96,12 @@ if ( ! function_exists( 'msh_hub_star_clean' ) ) {
 		if ( '' === $t ) {
 			return null;
 		}
-		$k  = ( isset( $s['k'] ) && 'story' === $s['k'] ) ? 'story' : 'page';
+		$k  = 'page';
+			if ( isset( $s['k'] ) && 'story' === $s['k'] ) {
+				$k = 'story';
+			} elseif ( isset( $s['k'] ) && 'panel' === $s['k'] ) {
+				$k = 'panel';
+			}
 		$at = ( isset( $s['at'] ) && is_string( $s['at'] ) && preg_match( '/^\d{4}-\d{2}-\d{2}$/D', $s['at'] ) ) ? $s['at'] : '';
 		return array( 'u' => $u, 't' => $t, 'k' => $k, 'at' => $at );
 	}

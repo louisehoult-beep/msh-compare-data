@@ -88,6 +88,7 @@
       '.msh .mshc-bar .mshc-pi .mshc-svg{width:16px;height:16px;display:block;}',
       '.msh .mshc-bar .mshc-t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:Inter,-apple-system,"Segoe UI",system-ui,sans-serif!important;font-size:13.5px!important;font-weight:600!important;color:#0B1C33!important;line-height:1.3!important;margin:0!important;}',
       '.msh .mshc-bar .mshc-star{display:inline-flex;align-items:center;gap:6px;flex:none;cursor:pointer;background:#FFFFFF;border:1.5px solid #D6CEBE;border-radius:999px;padding:5px 12px 5px 9px;font-family:Inter,-apple-system,"Segoe UI",system-ui,sans-serif!important;font-size:13px!important;font-weight:600!important;color:#0B1C33!important;line-height:1.2!important;}',
+      '.msh .mshc-bar .mshc-save{margin-left:0;}',
       '.msh .mshc-bar .mshc-star:hover{border-color:#0B1C33;}',
       '.msh .mshc-bar .mshc-star:focus-visible{outline:3px solid #1B5FBF;outline-offset:2px;}',
       '.msh .mshc-bar .mshc-star .mshc-svg{width:16px;height:16px;display:block;}',
@@ -236,10 +237,29 @@
     bar.id = 'mshc-bar';
     bar.className = 'mshc-bar';
     bar.innerHTML = '<div class="mshc-in">' + (CAME_FROM_MYHUB ? '<a class="mshc-back" href="' + MYHUB + '" aria-label="Back to My Hub">' + '<span aria-hidden="true">\u2039</span> My Hub</a>' : '') + '<span class="mshc-pi" aria-hidden="true">' + I.svg(it ? I.forItem(it) : 'file', 'mshc-svg') + '</span>'
-      + '<span class="mshc-t"></span><button type="button" class="mshc-star" aria-pressed="false">' + I.svg('star', 'mshc-svg') + '<span class="mshc-l">Save</span></button></div>';
+      + '<span class="mshc-t"></span>'
+      + (it && it.group === 'specialities' ? '<button type="button" class="mshc-star mshc-add" aria-pressed="false">' + I.svg('plus', 'mshc-svg') + '<span class="mshc-l">Add to My Hub</span></button>' : '')
+      + '<button type="button" class="mshc-star mshc-save" aria-pressed="false">' + I.svg('star', 'mshc-svg') + '<span class="mshc-l">Save</span></button></div>';
     bar.querySelector('.mshc-t').textContent = title;
     header.parentNode.insertBefore(bar, header.nextSibling);
-    var btn = bar.querySelector('.mshc-star');
+    var btn = bar.querySelector('.mshc-save');
+    var add = bar.querySelector('.mshc-add');
+    /* One click puts this speciality on My Hub (its pinned pages, which set the
+       member's specialities); another takes it off. */
+    function paintAdd() {
+      var on = A.hasPin(it.id);
+      add.setAttribute('aria-pressed', on ? 'true' : 'false');
+      add.querySelector('.mshc-l').textContent = on ? 'On My Hub' : 'Add to My Hub';
+      add.setAttribute('aria-label', (on ? 'Remove ' : 'Add ') + it.label + (on ? ' from My Hub' : ' to My Hub'));
+    }
+    if (add) {
+      A.load().then(paintAdd);
+      add.addEventListener('click', function () {
+        var on = add.getAttribute('aria-pressed') !== 'true';
+        add.setAttribute('aria-pressed', on ? 'true' : 'false');
+        (on ? A.addPin(it.id) : A.removePin(it.id)).then(paintAdd, paintAdd);
+      });
+    }
     function paint(on) {
       btn.setAttribute('aria-pressed', on ? 'true' : 'false');
       btn.querySelector('.mshc-l').textContent = on ? 'Saved' : 'Save';
