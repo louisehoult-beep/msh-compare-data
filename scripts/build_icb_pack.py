@@ -47,6 +47,8 @@ UA = {"User-Agent": "msh-compare-data/icb-pack (+elevateandthrive.uk)"}
 # they are resolved from these pages at fetch time, never stored.
 RTT_PAGE = "https://www.england.nhs.uk/statistics/statistical-work-areas/rtt-waiting-times/rtt-data-2026-27/"
 IMD_API = "https://www.gov.uk/api/content/government/statistics/english-indices-of-deprivation-2025"
+# ONS LSOA (2021) to ICB (April 2026) lookup; item id from data.gov.uk dataset 1d16e489-1dc8-443e-9e1c-15de4f961c6d
+LSOA_ICB_LOOKUP = "https://open-geography-portalx-ons.hub.arcgis.com/api/download/v1/items/bebf631bb1ac40cf9ec7dc060897ca99/csv?layers=0"
 GPREG_PARENT = "https://digital.nhs.uk/data-and-information/publications/statistical/patients-registered-at-a-gp-practice"
 
 LICENCES = [
@@ -55,6 +57,9 @@ LICENCES = [
     ("NHS England RTT waiting times (Incomplete Commissioner)", "Open Government Licence v3.0. " + RTT_PAGE),
     ("English Indices of Deprivation 2025, File 13 ICB summaries (MHCLG)", "Open Government Licence v3.0. "
      "https://www.gov.uk/government/statistics/english-indices-of-deprivation-2025"),
+    ("IMD 2025 File 7 (LSOA scores and population) with ONS LSOA (2021) to ICB (April 2026) lookup",
+     "Open Government Licence v3.0 (IMD); ONS lookup: data.gov.uk dataset licence field unset, site footer says "
+     "Open Government Licence v3.0 except where stated. https://www.data.gov.uk/dataset/1d16e489-1dc8-443e-9e1c-15de4f961c6d"),
     ("NHS Digital Patients Registered at a GP Practice, mapping and practice totals", "NHS England terms: "
      "released under the Open Government Licence. " + GPREG_PARENT),
     ("NHS England, items which should not routinely be prescribed in primary care", "Open Government Licence v3.0. "
@@ -93,6 +98,10 @@ def resolve_urls():
     if not m:
         raise RuntimeError("IMD 2025 File 13 link not found")
     urls["imd"] = m["url"]
+    f7 = next((a for a in atts if (a.get("title") or "").startswith("File 7")), None)
+    if not f7:
+        raise RuntimeError("IMD 2025 File 7 link not found")
+    urls["imd7"] = f7["url"]
     parent = http(GPREG_PARENT).decode("utf-8", "replace")
     pubs = sorted(set(re.findall(r'href="([^"]*patients-registered-at-a-gp-practice/[a-z]+-\d{4})"', parent)))
     if not pubs:
@@ -129,16 +138,48 @@ def resolve_urls():
 def fetch_all(cache, refresh=False):
     os.makedirs(cache, exist_ok=True)
     meta_path = os.path.join(cache, "sources.json")
-    need = refresh or not os.path.exists(meta_path)
+    files = ("rtt-incomplete-commissioner.xlsx", "imd2025-file13-icb.xlsx", "imd2025-file7-lsoa.csv",
+             "lsoa21-icb26-lookup.csv", "gp-reg-pat-prac-map.zip", "gp-reg-pat-prac-all.zip")
+    need = refresh or not os.path.exists(meta_path) or any(
+        not os.path.exists(os.path.join(cache, f)) for f in files)
     if need:
         urls = resolve_urls()
-        for tag, fn in (("rtt", "rtt-incomplete-commissioner.xlsx"), ("imd", "imd2025-file13-icb.xlsx"),
+        urls["lsoa"] = LSOA_ICB_LOOKUP
+        for tag, fn in (("rtt", "rtt-incomplete-commissioner.xlsx"), ("imd", "imd2025-file13-icb.xlsx"), ("imd7", "imd2025-file7-lsoa.csv"),
+                        ("lsoa", "lsoa21-icb26-lookup.csv"),
                         ("gpmap", "gp-reg-pat-prac-map.zip"), ("gpall", "gp-reg-pat-prac-all.zip")):
             with open(os.path.join(cache, fn), "wb") as f:
                 f.write(http(urls[tag], timeout=240))
         urls["fetchedOn"] = datetime.date.today().isoformat()
         json.dump(urls, open(meta_path, "w"), indent=1)
     return json.load(open(meta_path))
+
+
+def fetch_rtt_history(cache, refresh=False, months=13):
+    """The last `months` Incomplete Commissioner files, from the two NHS England RTT year pages."""
+    os.makedirs(os.path.join(cache, "rtt"), exist_ok=True)
+    found = {}
+    mon = {m: i for i, m in enumerate(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], 1)}
+    for page in (RTT_PAGE, RTT_PAGE.replace("2026-27", "2025-26")):
+        text = http(page).decode("utf-8", "replace")
+        for u in re.findall(r'href="([^"]*Incomplete-Commissioner-[A-Za-z]{3}\d\d[^"]*\.xlsx)"', text):
+            m = re.search(r"Commissioner-([A-Za-z]{3})(\d\d)", u)
+            found["20%s%02d" % (m.group(2), mon[m.group(1)])] = html.unescape(u)
+    wanted = sorted(found)[-months:]
+    for p in wanted:
+        path = os.path.join(cache, "rtt", "%s.xlsx" % p)
+        if refresh or not os.path.exists(path):
+            with open(path, "wb") as f:
+                f.write(http(found[p], timeout=240))
+    return wanted
+
+
+def load_rtt_history(cache):
+    """{period: {icb_code: row}} for dermatology from every cached month."""
+    out = {}
+    for path in sorted(glob.glob(os.path.join(cache, "rtt", "*.xlsx"))):
+        out[os.path.basename(path)[:6]] = load_rtt(cache, path)[0]
+    return out
 
 
 def fetch_practice_level(cache, periods, refresh=False):
@@ -185,11 +226,11 @@ def load_gpreg(cache):
     return mp, size
 
 
-def load_rtt(cache):
+def load_rtt(cache, path=None):
     """Dermatology Service (C_330) rows: per ICB from the ICB sheet, England from the
     National sheet. Returns ({icb_code: row, "ENGLAND": row}, period)."""
     import openpyxl
-    wb = openpyxl.load_workbook(os.path.join(cache, "rtt-incomplete-commissioner.xlsx"),
+    wb = openpyxl.load_workbook(path or os.path.join(cache, "rtt-incomplete-commissioner.xlsx"),
                                 read_only=True, data_only=True)
     need = ["Total number of incomplete pathways", "Total within 18 weeks",
             "Average (median) waiting time (in weeks)", "Total 52 plus weeks", "Total 65 plus weeks",
@@ -228,6 +269,40 @@ def load_imd(cache):
         if r[0]:
             out[r[0]] = {"name": r[1], "avg_rank": r[2], "rank_avg_rank": r[3], "avg_score": r[4],
                          "rank_avg_score": r[5], "prop10": r[6], "rank_prop10": r[7]}
+    return out
+
+
+def load_imd_recomputed(cache):
+    """IMD 2025 for the ICBs as at April 2026, from LSOA-level File 7 and the ONS LSOA to
+    ICB (April 2026) lookup. Population-weighted mean IMD score (mid-2022 population) and
+    the share of LSOAs in the most deprived national decile: the same two measures File 13
+    publishes for the 2024 ICBs, and test_icb_pack.py reproduces File 13 on the ICBs that
+    did not change. Ranks are among the ICBs returned (36)."""
+    look = {}
+    with open(os.path.join(cache, "lsoa21-icb26-lookup.csv"), encoding="utf-8-sig") as f:
+        for r in csv.DictReader(f):
+            look[r["LSOA21CD"]] = r["ICB26CDH"]
+    agg = collections.defaultdict(lambda: [0.0, 0.0, 0, 0])
+    with open(os.path.join(cache, "imd2025-file7-lsoa.csv"), encoding="utf-8-sig") as f:
+        rd = csv.DictReader(f)
+        cols = rd.fieldnames
+        sc = next(c for c in cols if c.startswith("Index of Multiple Deprivation (IMD) Score"))
+        dc = next(c for c in cols if c.startswith("Index of Multiple Deprivation (IMD) Decile"))
+        pc = "Total population: mid 2022"
+        for r in rd:
+            icb = look.get(r["LSOA code (2021)"])
+            if not icb:
+                continue
+            a = agg[icb]
+            pop = float(r[pc])
+            a[0] += pop
+            a[1] += pop * float(r[sc])
+            a[2] += 1
+            a[3] += 1 if r[dc].strip() == "1" else 0
+    out = {k: {"avg_score": v[1] / v[0], "prop10": v[3] / v[2], "lsoas": v[2], "population": v[0]}
+           for k, v in agg.items()}
+    for rank, k in enumerate(sorted(out, key=lambda k: -out[k]["avg_score"]), 1):
+        out[k]["rank_avg_score"] = rank
     return out
 
 
@@ -292,7 +367,9 @@ def assemble(cache, icb_code, brand):
     icb_names = idx["icbs"]
     gmap, size = load_gpreg(cache)
     rtt, rtt_period = load_rtt(cache)
-    imd = load_imd(cache)
+    imd = load_imd_recomputed(cache)
+    rtt_hist = load_rtt_history(cache)
+    rtt_periods = sorted(rtt_hist)
     prac = json.load(open(os.path.join(cache, "epd-practice-months.json")))
     last12 = periods[-12:]
     sources = json.load(open(os.path.join(cache, "sources.json")))
@@ -344,11 +421,15 @@ def assemble(cache, icb_code, brand):
         per = [d["per1000"] for d in pcns if d["per1000"] is not None]
         q12 = sum(bi[code][-12:])
         m12 = sum(mi[code][-12:])
-        gname = next((v["ons_icb"] for v in gmap.values() if v["icb"] == code), None)
-        imd_hit = imd.get(gname) if gname else None
-        if imd_hit and norm_icb(imd_hit["name"]) != norm_icb(name):
-            imd_hit = None            # code reused by a different (merged) ICB: refuse the match
-        icbs[code] = {
+        imd_hit = imd.get(code)
+        # a series only where the same ICB code carries a row in every month (April 2026
+        # mergers break the series for the ICBs they created)
+        series = None
+        if all(code in rtt_hist[q] for q in rtt_periods):
+            series = {"total": [rtt_hist[q][code]["total"] for q in rtt_periods],
+                      "median": [rtt_hist[q][code]["median"] for q in rtt_periods],
+                      "w52": [rtt_hist[q][code]["w52"] for q in rtt_periods]}
+        icbs[code] = {"rtt_series": series, 
             "code": code, "name": name, "q12": q12, "m12": m12, "share12": pct(q12, m12),
             "brand_items": bi[code], "mkt_items": mi[code], "brand_cost": bc[code], "mkt_cost": mc[code],
             "trend_items": trend(bi[code], floor) if len(bi[code]) > 1 else None,
@@ -360,7 +441,9 @@ def assemble(cache, icb_code, brand):
     nat_mi = [sum(mi[c][k] for c in mi) for k in range(len(periods))]
     return {"brand": brand, "icb": icb_code, "periods": periods, "floor": floor, "icbs": icbs, "pcn": pcn,
             "brands_in_icb": brands[icb_code], "nat": {"bi": nat_bi, "mi": nat_mi, "bc": nat_bc, "mc": nat_mc},
-            "rtt_period": rtt_period, "rtt_national": rtt.get("ENGLAND"), "sources": sources,
+            "rtt_period": rtt_period, "rtt_national": rtt.get("ENGLAND"), "rtt_periods": rtt_periods,
+            "rtt_nat_series": {"total": [rtt_hist[q]["ENGLAND"]["total"] for q in rtt_periods],
+                               "median": [rtt_hist[q]["ENGLAND"]["median"] for q in rtt_periods]}, "sources": sources,
             "unmapped_items": unmapped_items, "gpreg_extract": "see sources.gpreg_page",
             "generated": datetime.date.today().isoformat(), "imd_n": len(imd)}
 
@@ -521,10 +604,19 @@ button{background:var(--navy);color:#fff;border:0;padding:9px 16px;font:14px Hel
                     '<div class="kpi"><b>%s</b><span>waiting 52+ weeks</span></div></div>'
                     '<p class="note">NHS England RTT, Incomplete pathways, Commissioner basis, ICB sheet, treatment function '
                     'C_330 Dermatology Service, %s. Commissioner basis means patients registered with this ICB, wherever '
-                    'they are treated. One month only in this prototype: the trend is a gap.</p>'
+                    'they are treated. Trend below.</p>'
                     % (num(r["total"]), num(r["median"], 1), num(rn["median"], 1) if rn else NOT_VERIFIED,
                        pcts(pct(r["w18"], r["total"])), pcts(pct(rn["w18"], rn["total"])) if rn else NOT_VERIFIED,
                        num(r["w52"]), e(D["rtt_period"])))
+        rs = I["rtt_series"]
+        rl = [mlabel(q) for q in D["rtt_periods"]]
+        if rs:
+            rtt_html += ('<h3>Incomplete dermatology pathways, by month</h3>' + line_svg(rs["total"], rl) +
+                         '<h3>Median wait (weeks), by month</h3>' + line_svg(rs["median"], rl, colour="#A8842C") +
+                         '<p class="note">England median: ' + ", ".join(num(v, 1) for v in D["rtt_nat_series"]["median"]) +
+                         '. Series is complete only for ICBs whose code is unchanged since April 2025.</p>')
+        else:
+            rtt_html += '<p><span class="nv">%s</span>: no 13-month series, this ICB was created by the April 2026 mergers.</p>' % NOT_VERIFIED
     else:
         rtt_html = "<p>%s</p>" % nv(NOT_VERIFIED)
     m = I["imd"]
@@ -532,11 +624,12 @@ button{background:var(--navy);color:#fff;border:0;padding:9px 16px;font:14px Hel
         imd_html = ('<div class="kpis"><div class="kpi"><b>%s of %d</b><span>rank of average score (1 = most deprived ICB)</span></div>'
                     '<div class="kpi"><b>%s</b><span>average IMD score</span></div>'
                     '<div class="kpi"><b>%s</b><span>of LSOAs in the most deprived 10%% nationally</span></div></div>'
-                    '<p class="note">English Indices of Deprivation 2025, File 13 (ICB summaries). The file uses the 42 ICBs '
-                    'as at 2024; this ICB is unchanged by the April 2026 mergers, so the match is exact.</p>'
+                    '<p class="note">English Indices of Deprivation 2025: population-weighted mean of LSOA IMD scores (mid-2022 population), '
+                    'LSOAs assigned to ICBs as at April 2026 (ONS lookup). Same method as the official File 13 ICB summaries, '
+                    'which it reproduces on the ICBs unchanged since 2024; File 13 itself uses 2024 boundaries.</p>'
                     % (num(m["rank_avg_score"]), D["imd_n"], num(m["avg_score"], 2), pcts(100 * m["prop10"])))
     else:
-        imd_html = '<p><span class="nv">%s</span>: this ICB was formed in the 2026 mergers and File 13 uses 2024 boundaries.</p>' % NOT_VERIFIED
+        imd_html = '<p><span class="nv">%s</span>: no IMD figure for this ICB.</p>' % NOT_VERIFIED
 
     otc = ('<p><b>National position (verified this session).</b> NHS England\'s policy guidance, "Items which should not '
            'routinely be prescribed in primary care" (published 3 August 2023, updated 19 August 2025), lists bath and '
@@ -570,10 +663,9 @@ button{background:var(--navy);color:#fff;border:0;padding:9px 16px;font:14px Hel
         for c in rows)
     rank_html = ('<div class="scroll"><table id="rank"><tr><th>ICB</th><th>%s share of emollient items</th>'
                  '<th>Rank (1 = lowest share)</th><th>PCN spread (CV)</th><th>Rank (1 = most varied)</th>'
-                 '<th>IMD rank of 42 (1 = most deprived)</th><th>Derm median wait (wks)</th><th>Derm 52+ weeks</th></tr>%s</table></div>'
+                 '<th>IMD rank of 36 (1 = most deprived)</th><th>Derm median wait (wks)</th><th>Derm 52+ weeks</th></tr>%s</table></div>'
                  '<p class="note">Click a heading to sort. No composite score: the focus is picked by reading the columns, '
-                 'not by a formula we invented. IMD is shown only where the 2025 file\'s ICB matches the current ICB by code '
-                 'and name; merged 2026 ICBs read Not verified. Share and spread are our definitions (see the spec).</p>'
+                 'not by a formula we invented. IMD is recomputed for the April 2026 ICBs from LSOA data. Share and spread are our definitions (see the spec).</p>'
                  % (e(brand), tr))
 
     srcs = "".join("<li>%s: %s</li>" % (e(a), e(b)) for a, b in LICENCES)
@@ -631,6 +723,7 @@ def main(argv=None):
     if not a.no_fetch:
         fetch_all(a.cache, a.refresh)
         fetch_practice_level(a.cache, idx["periods"], a.refresh)
+        fetch_rtt_history(a.cache, a.refresh)
     D = assemble(a.cache, a.icb, a.brand)
     os.makedirs(a.out, exist_ok=True)
     base = os.path.join(a.out, "icb-pack-%s-%s" % (a.icb, a.brand))
