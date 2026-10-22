@@ -100,6 +100,20 @@
       '.msh .ms-bar.ms-hi i em{background:var(--navy);}',
       '.msh .ms-pick{margin-top:18px;border:1px solid var(--border);border-radius:10px;background:var(--panel);padding:16px 18px;}',
       '.msh .ms-pick select{padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:14px;background:var(--panel);color:var(--ink);max-width:100%;margin:6px 0 12px;}',
+      '.msh .sp-pin,.msh .sp-ics{display:inline-flex;align-items:center;gap:6px;cursor:pointer;background:var(--panel);border:1.5px solid var(--border);border-radius:99px;padding:5px 12px;font-size:12.5px;font-weight:700;color:var(--navy);line-height:1.2;text-decoration:none;font-family:inherit;}',
+      '.msh .sp-pin:hover,.msh .sp-ics:hover{border-color:var(--navy);}',
+      '.msh .sp-pin:focus-visible,.msh .sp-ics:focus-visible{outline:3px solid #1B5FBF;outline-offset:2px;}',
+      '.msh .sp-pin[aria-pressed="true"]{background:#F7F1E3;border-color:#B8935A;color:#7E6118;}',
+      '.msh .sp-pin svg{width:15px;height:15px;display:block;}',
+      '.msh .sp-pin[aria-pressed="true"] svg{fill:#C9A227;stroke:#8C6A1C;}',
+      '.msh .sp-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;justify-content:space-between;margin:0 0 10px;}',
+      '.msh .sp-bar h4{margin:0;}',
+      '.msh .sp-cal-row{display:grid;grid-template-columns:130px minmax(0,1fr) auto;gap:4px 14px;align-items:start;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;line-height:1.45;color:var(--ink);}',
+      '.msh .sp-cal-row:last-child{border-bottom:0;}',
+      '.msh .sp-cal-d{font-weight:700;color:var(--navy);}',
+      '.msh .sp-cal-t a{color:var(--gold);font-weight:700;text-decoration:none;}',
+      '.msh .sp-cal-m{font-size:11.5px;color:var(--dim);}',
+      '@media (max-width:640px){.msh .sp-cal-row{grid-template-columns:minmax(0,1fr);}}',
       '.msh .ms-find{border-left:3px solid var(--gold);background:var(--panel2);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0 0;font-size:13.5px;line-height:1.55;color:var(--ink);}'
     ].join('');
     document.head.appendChild(st);
@@ -115,6 +129,112 @@
 
   function n(x) {
     return (x === null || x === undefined) ? 'not stated' : Number(x).toLocaleString('en-GB');
+  }
+
+  /* ---------- pin to My Hub, and the calendar (22/10/2026) ----------
+     Pins are the member's own saved items (app/hub-account.js, kind "panel"),
+     shown on My Hub by app/my-hub-panels.js. The buttons stay hidden for a
+     visitor who is not logged in. The calendar rows are data/hub-calendar.json
+     filtered to this speciality; the .ics carries only those rows. */
+  var ROOT = BASE.replace('data/speciality-panels/', '');
+  var PAGE = '/medical-sales-hub/' + slug + '/';
+  var P = null, ACCT = null, CAL = null, PANEL = null;
+  function loggedIn() { return !!(window.mshRestNonce || window.mshPrefsNonce); }
+  function starSvg() {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg>';
+  }
+  function pinBtn(id, title) {
+    return '<button type="button" class="sp-pin" hidden data-pin="' + esc(id) + '" data-pin-t="' + esc(title) + '" aria-pressed="false">' + starSvg() + '<span>Pin to My Hub</span></button>';
+  }
+  function pinPaint(btn) {
+    var on = !!(ACCT && P && ACCT.isStarred(P.panelKey(PAGE, btn.getAttribute('data-pin'))));
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.querySelector('span').textContent = on ? 'Pinned to My Hub' : 'Pin to My Hub';
+    btn.setAttribute('aria-label', (on ? 'Unpin ' : 'Pin ') + btn.getAttribute('data-pin-t') + (on ? ' from My Hub' : ' to My Hub'));
+  }
+  function pinPaintAll() {
+    var all = document.querySelectorAll('.msh .sp-pin');
+    for (var i = 0; i < all.length; i++) { all[i].hidden = !(ACCT && P); pinPaint(all[i]); }
+  }
+  function runSrc(src) { (new Function(src))(); }
+  function getText(path) {
+    return fetch(ROOT + path, { cache: 'no-cache' }).then(function (r) { if (!r.ok) { throw new Error(path + ' ' + r.status); } return r.text(); });
+  }
+  function loadHelpers() {
+    return Promise.all([
+      window.MSH_PANELS ? '' : getText('app/hub-panels.js'),
+      (window.MSH_ACCOUNT || !loggedIn()) ? '' : getText('app/hub-account.js')
+    ]).then(function (got) {
+      if (got[0]) { runSrc(got[0]); }
+      if (got[1]) { runSrc(got[1]); }
+      P = window.MSH_PANELS;
+      if (loggedIn() && window.MSH_ACCOUNT) { return window.MSH_ACCOUNT.load().then(function () { ACCT = window.MSH_ACCOUNT; }); }
+    });
+  }
+  function download(name, text) {
+    var blob = new Blob([text], { type: 'text/calendar;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
+  function calRows() { return CAL ? P.calendarRows(CAL, slug, new Date().toISOString().slice(0, 10)) : []; }
+  function calHtml() {
+    var rows = calRows(), title = ((PANEL && PANEL.label) || 'This speciality') + ' calendar';
+    var h = '<div class="sp-sec" id="sp-calendar"><div class="sp-bar"><h3 class="sub-h3" style="margin:0;">Calendar</h3><span>' + pinBtn('calendar', title);
+    if (rows.length) { h += ' <button type="button" class="sp-ics" data-ics="all">Add all to my calendar</button>'; }
+    h += '</span></div>';
+    if (!rows.length) {
+      return h + '<div class="empty-state">No dated conference, awareness day, framework end or contract end is recorded for this speciality yet. Nothing is estimated from a previous year.</div></div>';
+    }
+    for (var i = 0; i < rows.length; i++) {
+      var e = rows[i], range = P.fmtDate(e.date) + (e.endDate && e.endDate > e.date ? ' to ' + P.fmtDate(e.endDate) : '');
+      h += '<div class="sp-cal-row"><div class="sp-cal-d">' + esc(range) + '</div><div><div class="sp-cal-t"><a href="' + esc(e.source) + '" target="_blank" rel="noopener">' + esc(e.title) + '</a></div>' +
+           '<div class="sp-cal-m">' + esc(P.typeLabel(e)) + (e.location ? ' &middot; ' + esc(e.location) : '') + (e.verified ? ' &middot; checked ' + esc(e.verified) : '') + '</div></div>' +
+           '<button type="button" class="sp-ics" data-ics="' + esc(e.id) + '" aria-label="Add ' + esc(e.title) + ' to my calendar">Add to my calendar</button></div>';
+    }
+    return h + '<div class="sp-meta">Dates are those published by each organiser or framework owner, as held in the Hub Calendar. Each calendar entry links back to this page.</div></div>';
+  }
+  function wirePins(box) {
+    box.addEventListener('click', function (ev) {
+      var t = ev.target.closest ? ev.target.closest('[data-pin],[data-ics]') : null;
+      if (!t) { return; }
+      if (t.hasAttribute('data-ics')) {
+        var id = t.getAttribute('data-ics'), rows = calRows();
+        if (id !== 'all') { rows = rows.filter(function (r) { return r.id === id; }); }
+        if (!rows.length) { return; }
+        download(P.icsName(slug, id === 'all' ? '' : id), P.ics(rows, slug, ((PANEL && PANEL.label) || slug) + ' (Medical Sales Hub)', new Date().toISOString()));
+        return;
+      }
+      if (!ACCT) { return; }
+      var key = P.panelKey(PAGE, t.getAttribute('data-pin')), on = t.getAttribute('aria-pressed') !== 'true';
+      t.setAttribute('aria-pressed', on ? 'true' : 'false');
+      var done = on ? ACCT.star({ u: key, t: ((PANEL && PANEL.label) || slug) + ': ' + t.getAttribute('data-pin-t'), k: 'panel' }) : ACCT.unstar(key);
+      done.then(function () { pinPaint(t); }, function () { pinPaint(t); });
+    });
+  }
+  /* Called once the Frameworks panel has drawn: add the calendar, then the pins. */
+  function addCalendarAndPins(d) {
+    PANEL = d;
+    var box = FW;
+    if (!box) { return; }
+    wirePins(box);
+    var cal = document.createElement('div');
+    cal.id = 'sp-cal-slot';
+    box.appendChild(cal);
+    cal.innerHTML = '<div class="empty-state">Loading the calendar.</div>';
+    loadHelpers().then(function () {
+      return fetch(ROOT + 'data/hub-calendar.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) { throw new Error('calendar ' + r.status); } return r.json(); });
+    }).then(function (c) {
+      CAL = c.entries || [];
+      cal.innerHTML = calHtml();
+      pinPaintAll();
+    }).catch(function () {
+      cal.innerHTML = '<div class="sp-sec"><h3 class="sub-h3">Calendar</h3><div class="empty-state">The calendar could not load just now. Reload to try again.</div></div>';
+      pinPaintAll();
+    });
   }
 
   function pct(x) {
@@ -524,7 +644,7 @@
         for (var mk = 0; mk < gp.markets.length; mk++) {
           var M = gp.markets[mk];
           var per = M.latestPeriod.slice(0, 4) + '-' + M.latestPeriod.slice(4);
-          h += '<div class="sp-mkt"><h4>' + esc(M.label) + '</h4>';
+          h += '<div class="sp-mkt"><div class="sp-bar"><h4>' + esc(M.label) + '</h4>' + pinBtn('gp:' + M.id, 'GP prescribing, ' + M.label) + '</div>';
           h += '<div class="sp-tiles">';
           h += '<div class="sp-tile"><b>' + n(M.items) + '</b><span>Items, ' + esc(per) + '</span></div>';
           h += '<div class="sp-tile"><b>&pound;' + n(M.cost) + '</b><span>Actual cost, ' + esc(per) + '</span></div>';
@@ -854,7 +974,7 @@
         fail(MKT, why);
         return;
       }
-      if (FW) { renderFrameworks(d); }
+      if (FW) { renderFrameworks(d); addCalendarAndPins(d); }
       if (SUP) { renderSuppliers(d); }
       if (MKT) { renderMarket(d); }
     })

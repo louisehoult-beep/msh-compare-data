@@ -46,7 +46,7 @@
     var t = Array.from(s.t.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()).slice(0, 200).join('');
     if (!t) { return null; }
     var at = typeof s.at === 'string' ? (/^\d{4}-\d{2}-\d{2}$/.test(s.at) ? s.at : '') : '';
-    return { u: u, t: t, k: s.k === 'story' ? 'story' : 'page', at: at };
+    return { u: u, t: t, k: s.k === 'story' ? 'story' : (s.k === 'panel' ? 'panel' : 'page'), at: at };
   }
   function normState(s) {
     var out = blank();
@@ -185,7 +185,14 @@
     });
   }
 
+  /* One speciality (or any page) on or off the pinned list. Retired ids the
+     catalogue no longer lists stay in the stored list, as My Hub does. */
+  function hasPin(id) { return !!CUR && CUR.pins.indexOf(id) !== -1; }
+  function addPin(id) { return load().then(function () { return hasPin(id) ? CUR : savePins(CUR.pins.concat([id])); }); }
+  function removePin(id) { return load().then(function () { return hasPin(id) ? savePins(CUR.pins.filter(function (x) { return x !== id; })) : CUR; }); }
+
   var api = {
+    hasPin: hasPin, addPin: addPin, removePin: removePin,
     load: load, saveState: saveState, star: star, unstar: unstar, isStarred: isStarred, savePins: savePins,
     _pure: { blank: blank, starKey: starKey, cleanStar: cleanStar, normState: normState, applyBody: applyBody }
   };
