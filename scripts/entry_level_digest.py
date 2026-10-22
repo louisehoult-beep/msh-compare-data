@@ -129,6 +129,26 @@ def from_reed(compiled):
     return out
 
 
+def from_medtechjobs(compiled):
+    """Medical Technology Jobs' public JSON feed (CC BY 4.0, link back required).
+
+    No key needed. It carries only the latest handful of vacancies, so it is a
+    supplement, not the main source. Titles arrive as 'Role · Company · Location'."""
+    try:
+        items = get_json("https://medicaltechnologyjobs.co.uk/jobs.json").get("items", [])
+    except Exception:
+        return None
+    out = []
+    for j in items:
+        parts = [x.strip() for x in (j.get("title") or "").split("·")]
+        title = parts[0]
+        if cr.is_entry(title, compiled) and cr.classify(title, compiled):
+            out.append({"source": "Medical Technology Jobs", "title": title,
+                        "company": parts[1] if len(parts) > 1 else "",
+                        "location": parts[2] if len(parts) > 2 else "", "url": j.get("url")})
+    return out
+
+
 def load_seen():
     try:
         return set(json.load(open(SEEN)).get("urls", []))
@@ -149,6 +169,9 @@ def build_html(rows, skipped, today):
     if skipped:
         note = ('<p style="color:#1D2733;font-size:14px;">Not read today (no key yet): %s.</p>'
                 % e(", ".join(skipped)))
+    if any(r["source"] == "Medical Technology Jobs" for r in rows):
+        note += ('<p style="color:#1D2733;font-size:13px;">Some roles from '
+                 '<a href="https://medicaltechnologyjobs.co.uk" style="color:#0B1C33;">Medical Technology Jobs</a> (CC BY 4.0).</p>')
     return (
         '<div style="background:#EDE7DC;padding:24px 0;font-family:Arial,Helvetica,sans-serif;">'
         '<table role="presentation" width="100%%" style="max-width:720px;margin:0 auto;background:#FFFFFF;">'
@@ -170,7 +193,8 @@ def main():
     a = ap.parse_args()
     compiled = cr.load_config()
     rows, skipped = from_careers(compiled), []
-    for name, fn in (("Adzuna", from_adzuna), ("Reed", from_reed)):
+    for name, fn in (("Medical Technology Jobs", from_medtechjobs),
+                     ("Adzuna", from_adzuna), ("Reed", from_reed)):
         got = fn(compiled)
         if got is None:
             skipped.append(name)
