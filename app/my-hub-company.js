@@ -21,7 +21,7 @@
   var L = window.MSH_MYHUB_LOGIC;
 
   var MAX = 5, PICK_SHOWN = 40, FACTS_SHOWN = 6;
-  var KINDS = { news: 'News', tariff: 'Drug Tariff', discontinued: 'Still on formularies', share: 'Market share', framework: 'Framework', formulary: 'Formulary' };
+  var KINDS = { news: 'News', tariff: 'Drug Tariff', discontinued: 'Still on formularies', share: 'Market share', award: 'Contract award', framework: 'Framework', formulary: 'Formulary' };
   var INDEX = null;               // null loading, false failed, else { built, companies }
   var CO = {};                    // id -> data | false (failed) | undefined (not asked yet)
   var draft = [], expanded = {};
@@ -58,7 +58,7 @@
   /* ---------- the block ---------- */
   function factLi(f, withKind) {
     var u = f.u ? L.safeUrl(f.u) : '';
-    var meta = [f.s, ['news', 'tariff', 'discontinued', 'formulary'].indexOf(f.k) !== -1 ? stamp(f.d) : ''].filter(Boolean).join(', ');
+    var meta = [f.s, ['news', 'tariff', 'discontinued', 'formulary', 'award'].indexOf(f.k) !== -1 ? stamp(f.d) : ''].filter(Boolean).join(', ');
     return '<li><span class="kt k-' + esc(f.k) + '">' + esc(KINDS[f.k] || 'Note') + '</span><div><b>'
       + (u ? '<a href="' + esc(u) + '"' + (/^\//.test(u) ? '' : ' target="_blank" rel="noopener"') + '>' + esc(f.t) + '</a>' : esc(f.t)) + '</b>'
       + (f.x ? '<p>' + esc(f.x) + '</p>' : '') + (meta ? '<small>' + esc(meta) + '</small>' : '') + '</div></li>';
