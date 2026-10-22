@@ -1,4 +1,4 @@
-/* Medical Sales Hub, ICB pack for dermatology emollients. Mounts on #msh-icb-pack.
+/* Medical Sales Hub, ICB pack (dermatology emollients, respiratory, diabetes, wound care; ?spec=). Mounts on #msh-icb-pack.
 
    WHAT IT IS. A rep picks an Integrated Care Board and an emollient brand and gets one
    editable page of starting figures for a value-proposition pack: national overview,
@@ -23,10 +23,12 @@
   if (!MOUNT) return;
 
   var NAVY = '#0B1C33', DEEP = '#14304F', GOLD = '#A8842C', GOLDL = '#E0BE8E', INK = '#1D2733', WARM = '#EDE7DC';
-  var BASE = 'https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/icb-pack/';
+  var ROOT = 'https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/icb-pack/';
+  var SPEC_ID = (new URLSearchParams(location.search).get('spec') || 'dermatology').replace(/[^a-z-]/g, '');
+  var BASE = ROOT + SPEC_ID + '/';
   var CB = '?cb=' + new Date().toISOString().slice(0, 10);
   var NV = 'Not verified';
-  var DEFAULT_ICB = 'QHL', DEFAULT_BRAND = 'qv';
+  var DEFAULT_ICB = 'QHL', DEFAULT_BRAND = 'qv', N = 'emollient', SP = 'Dermatology';
 
   var CSS = '.icbp{font:15px/1.5 Georgia,serif;color:' + INK + '}.icbp *{box-sizing:border-box}'
     + '.icbp .band{padding:26px 0}.icbp .dark{background:' + NAVY + ';color:#F5F1E8}.icbp .warm{background:' + WARM + '}'
@@ -95,6 +97,7 @@
 
   get('index.json').then(function (d) {
     IDX = d;
+    N = d.speciality.noun; SP = d.speciality.short; DEFAULT_ICB = d.speciality.defaultIcb; DEFAULT_BRAND = d.speciality.defaultBrand;
     var q = new URLSearchParams(location.search);
     var icb = q.get('icb') || DEFAULT_ICB, brand = q.get('brand') || DEFAULT_BRAND;
     if (!IDX.icbs[icb]) icb = DEFAULT_ICB;
@@ -118,26 +121,27 @@
     // pickers
     var icbOpts = Object.keys(D.icbs).sort(function (a, b) { return D.icbs[a].pretty.localeCompare(D.icbs[b].pretty); })
       .map(function (c) { return '<option value="' + c + '"' + (c === icb ? ' selected' : '') + '>' + esc(D.icbs[c].pretty) + '</option>'; }).join('');
+    var specOpts = D.speciality.all.map(function (x) { return '<option value="' + x.id + '"' + (x.id === SPEC_ID ? ' selected' : '') + '>' + esc(x.label) + '</option>'; }).join('');
     var brandOpts = D.brands.map(function (b) { return '<option value="' + b.key + '"' + (b.key === brand ? ' selected' : '') + '>' + esc(b.label) + '</option>'; }).join('');
 
     // 1 national
     var natRtt = D.national.rtt;
     var nat = '<div class="kpis"><div class="kpi"><b>' + num(sum(last12(nb))) + '</b><span>' + esc(BL) + ' items, 12 months to ' + labels[labels.length - 1] + '</span></div>'
-      + '<div class="kpi"><b>' + pc(ratio(sum(last12(nb)), sum(last12(nm_)))) + '</b><span>' + esc(BL) + ' share of emollient items (our market definition)</span></div>'
+      + '<div class="kpi"><b>' + pc(ratio(sum(last12(nb)), sum(last12(nm_)))) + '</b><span>' + esc(BL) + ' share of ' + esc(N) + ' items (our market definition)</span></div>'
       + '<div class="kpi"><b>' + trendTxt(trend(nb, floor)) + '</b><span>' + esc(BL) + ' items ' + labels[labels.length - 1] + ' against ' + labels[0] + '</span></div>'
       + '<div class="kpi"><b>' + money(sum(last12(nbc))) + '</b><span>' + esc(BL) + ' actual cost, 12 months</span></div></div>'
-      + '<p>' + (natRtt ? 'Dermatology, England, ' + esc(D.rttPeriod) + ': ' + num(natRtt.total) + ' incomplete pathways, median wait ' + num(natRtt.median, 1) + ' weeks, ' + num(natRtt.w52) + ' waiting 52 weeks or more.' : NV) + '</p>';
+      + '<p>' + (!D.speciality.rtt ? '<span class="nv">Not applicable</span>: NHS England publishes no Referral to Treatment waiting time for ' + esc(SP.toLowerCase()) + ' as a treatment function.' : natRtt ? esc(SP) + ', England, ' + esc(D.rttPeriod) + ': ' + num(natRtt.total) + ' incomplete pathways, median wait ' + num(natRtt.median, 1) + ' weeks, ' + num(natRtt.w52) + ' waiting 52 weeks or more.' : NV) + '</p>';
 
     // 2 ICB view
     var m12 = sum(last12(S.market.items));
     var prod = S.topProducts.slice(0, 12).map(function (t) { return '<tr><td>' + esc(t.label) + '</td><td>' + num(t.items12) + '</td><td>' + pc(ratio(t.items12, m12)) + '</td></tr>'; }).join('');
     var icbv = '<div class="kpis"><div class="kpi"><b>' + num(sum(last12(bi))) + '</b><span>' + esc(BL) + ' items, 12 months</span></div>'
-      + '<div class="kpi"><b>' + pc(rk.share12) + '</b><span>share of emollient items in ' + esc(nm) + '</span></div>'
+      + '<div class="kpi"><b>' + pc(rk.share12) + '</b><span>share of ' + esc(N) + ' items in ' + esc(nm) + '</span></div>'
       + '<div class="kpi"><b>' + trendTxt(trend(bi, floor)) + '</b><span>' + esc(BL) + ' items ' + labels[labels.length - 1] + ' against ' + labels[0] + '</span></div>'
       + '<div class="kpi"><b>' + money(sum(last12(bcost))) + '</b><span>' + esc(BL) + ' actual cost, 12 months</span></div></div>'
       + line(bi, labels, DEEP)
-      + '<p class="note">Monthly ' + esc(BL) + ' items in the ICB. Emollient items in the ICB: ' + num(m12) + ' in the 12 months.</p>'
-      + '<h3>Top emollient products in the ICB (12 months, items)</h3><table><tr><th>Product</th><th>Items</th><th>Share of emollient items</th></tr>' + prod + '</table>';
+      + '<p class="note">Monthly ' + esc(BL) + ' items in the ICB. Items in the ICB market: ' + num(m12) + ' in the 12 months.</p>'
+      + '<h3>Top products in the ICB (12 months, items)</h3><table><tr><th>Product</th><th>Items</th><th>Share of ' + esc(N) + ' items</th></tr>' + prod + '</table>';
 
     // 2b hospital use (NHSBSA Secondary Care Medicines Data)
     var H = S.hospital || { brands: {}, trusts: [] }, hb = H.brands[brand], hnat = (D.hospital.national[brand] || []);
@@ -170,24 +174,24 @@
       return '<tr><td>' + esc(r.name) + '</td>' + r.series.map(function (v) { var x = v / r.list * 1000, c = ramp(x, lo, hi); return '<td style="background:' + c[0] + ';color:' + c[1] + '">' + x.toFixed(1) + '</td>'; }).join('') + '</tr>';
     }).join('');
     var cover = ratio(rows.reduce(function (a, r) { return a + r.m12; }, 0), m12);
-    var pcn = '<h3>Highest-prescribing Primary Care Networks (PCNs), 12 months</h3><table><tr><th>PCN</th><th>' + esc(BL) + ' items</th><th>Registered patients</th><th>Items per 1,000 patients</th><th>Share of emollient items</th></tr>' + top + '</table>'
-      + '<p class="note">Registered patients: NHS Digital practice totals, October 2026 snapshot, applied to every month. A PCN is the sum of its member practices as NHS Digital maps them today. PCN figures cover registered GP practices: ' + pc(cover) + ' of the ICB emollient items in the 12 months; the rest come from prescriber codes that have no PCN.</p>'
+    var pcn = '<h3>Highest-prescribing Primary Care Networks (PCNs), 12 months</h3><table><tr><th>PCN</th><th>' + esc(BL) + ' items</th><th>Registered patients</th><th>Items per 1,000 patients</th><th>Share of ' + esc(N) + ' items</th></tr>' + top + '</table>'
+      + '<p class="note">Registered patients: NHS Digital practice totals, October 2026 snapshot, applied to every month. A PCN is the sum of its member practices as NHS Digital maps them today. PCN figures cover registered GP practices: ' + pc(cover) + ' of the ICB ' + esc(N) + ' items in the 12 months; the rest come from prescriber codes that have no PCN.</p>'
       + '<h3>Variation across the ICB\'s PCNs: ' + esc(BL) + ' items per 1,000 registered patients, by month</h3><div class="scroll"><table class="hm"><tr><th>PCN</th>' + labels.map(function (l) { return '<th>' + esc(l) + '</th>'; }).join('') + '</tr>' + hm + '</table></div>'
       + '<p class="note">Colour runs from the lowest to the highest cell in this ICB (' + lo.toFixed(1) + ' to ' + hi.toFixed(1) + '). Spread across PCNs (coefficient of variation of 12-month items per 1,000): ' + (rk.cv == null ? '<span class="nv">' + NV + '</span>' : rk.cv.toFixed(2)) + ', over ' + rk.nPcn + ' PCNs.</p>';
 
     // 4 RTT
     var r = M.rtt, rtt;
     if (r) {
-      rtt = '<div class="kpis"><div class="kpi"><b>' + num(r.total) + '</b><span>incomplete dermatology pathways</span></div>'
+      rtt = '<div class="kpis"><div class="kpi"><b>' + num(r.total) + '</b><span>incomplete ' + esc(SP.toLowerCase()) + ' pathways</span></div>'
         + '<div class="kpi"><b>' + num(r.median, 1) + '</b><span>median wait, weeks (England ' + (natRtt ? num(natRtt.median, 1) : NV) + ')</span></div>'
         + '<div class="kpi"><b>' + pc(ratio(r.w18, r.total)) + '</b><span>within 18 weeks (England ' + (natRtt ? pc(ratio(natRtt.w18, natRtt.total)) : NV) + ')</span></div>'
         + '<div class="kpi"><b>' + num(r.w52) + '</b><span>waiting 52 weeks or more</span></div></div>'
-        + '<p class="note">NHS England Referral to Treatment (RTT), incomplete pathways, commissioner basis, ICB sheet, treatment function C_330 Dermatology Service, ' + esc(D.rttPeriod) + '. Commissioner basis means patients registered with this ICB, wherever they are treated.</p>';
+        + '<p class="note">NHS England Referral to Treatment (RTT), incomplete pathways, commissioner basis, ICB sheet, treatment function ' + esc(D.speciality.rtt.code) + ' ' + esc(D.speciality.rtt.label) + ', ' + esc(D.rttPeriod) + '. Commissioner basis means patients registered with this ICB, wherever they are treated.</p>';
       var rl = D.rttPeriods.map(mlabel), rs = M.rttSeries;
-      rtt += rs ? '<h3>Incomplete dermatology pathways, by month</h3>' + line(rs.total, rl, DEEP) + '<h3>Median wait (weeks), by month</h3>' + line(rs.median, rl, GOLD)
+      rtt += rs ? '<h3>Incomplete ' + esc(SP.toLowerCase()) + ' pathways, by month</h3>' + line(rs.total, rl, DEEP) + '<h3>Median wait (weeks), by month</h3>' + line(rs.median, rl, GOLD)
         + '<p class="note">England median by month: ' + D.national.rttSeries.median.join(', ') + '. A 13-month series exists only for ICBs whose code is unchanged since April 2025.</p>'
         : '<p><span class="nv">' + NV + '</span>: no 13-month series, this ICB was created by the April 2026 mergers.</p>';
-    } else rtt = '<p><span class="nv">' + NV + '</span></p>';
+    } else rtt = D.speciality.rtt ? '<p><span class="nv">' + NV + '</span></p>' : '<p><span class="nv">Not applicable</span>: NHS England publishes no Referral to Treatment waiting time for ' + esc(SP.toLowerCase()) + ' as a treatment function, so no waiting figure is shown. Nothing is substituted for it.</p>';
 
     // 5 IMD
     var imd = M.imd ? '<div class="kpis"><div class="kpi"><b>' + M.imd.rank + ' of ' + Object.keys(D.icbs).length + '</b><span>rank of average score (1 = most deprived ICB)</span></div>'
@@ -197,7 +201,7 @@
       : '<p><span class="nv">' + NV + '</span></p>';
 
     // 6 OTC context
-    var otc = '<p><b>National position (verified at source, 22/10/2026).</b> NHS England policy guidance, "Items which should not routinely be prescribed in primary care" (published 3 August 2023, updated 19 August 2025), lists bath and shower preparations for dry and pruritic skin conditions as prescribe only in exceptional circumstances, with the advice to substitute leave-on emollients. It does not list plain leave-on emollients.</p>'
+    var otc = !D.speciality.otcNational ? '<p><span class="nv">' + NV + '</span>: no over-the-counter or low-priority-prescribing position has been checked at source for ' + esc(SP.toLowerCase()) + '. What would settle it: the NHS England policy guidance on items which should not routinely be prescribed, and each ICB\'s formulary, read for this market.</p><div class="edit" contenteditable="true">Context notes: </div>' : '<p><b>National position (verified at source, 22/10/2026).</b> NHS England policy guidance, "Items which should not routinely be prescribed in primary care" (published 3 August 2023, updated 19 August 2025), lists bath and shower preparations for dry and pruritic skin conditions as prescribe only in exceptional circumstances, with the advice to substitute leave-on emollients. It does not list plain leave-on emollients.</p>'
       + (M.otc
         ? '<p><b>This ICB\'s own position (read at source, ' + esc(M.otc.verifiedOn) + ').</b></p><ul>' + M.otc.points.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>'
           + '<p class="note">Sources: ' + M.otc.sources.map(function (s) { return '<a href="' + esc(s.url) + '" style="color:' + DEEP + '">' + esc(s.title) + '</a>'; }).join('; ') + '. ' + esc(M.otc.limits) + '</p>'
@@ -212,9 +216,9 @@
       var x = R[c], mm = D.icbs[c], rr = mm.rtt;
       function td(v, txt) { return '<td data-v="' + (v == null ? '' : v) + '">' + txt + '</td>'; }
       return '<tr' + (c === icb ? ' style="background:#F3E9D2"' : '') + '><td>' + esc(mm.pretty) + '</td>' + td(x.share12, pc(x.share12)) + td(rShare[c], rShare[c] || '') + td(x.cv, x.cv == null ? NV : x.cv.toFixed(2)) + td(rCv[c], rCv[c] || '')
-        + td(mm.imd && mm.imd.rank, mm.imd ? mm.imd.rank : NV) + td(rr && rr.median, rr ? num(rr.median, 1) : NV) + td(rr && rr.w52, rr ? num(rr.w52) : NV) + '</tr>';
+        + td(mm.imd && mm.imd.rank, mm.imd ? mm.imd.rank : NV) + (D.speciality.rtt ? td(rr && rr.median, rr ? num(rr.median, 1) : NV) + td(rr && rr.w52, rr ? num(rr.w52) : NV) : '') + '</tr>';
     }).join('');
-    var rank = '<div class="scroll"><table id="icbp-rank" class="sort"><tr><th>ICB</th><th>' + esc(BL) + ' share of emollient items</th><th>Rank (1 = lowest share)</th><th>PCN spread (CV)</th><th>Rank (1 = most varied)</th><th>IMD rank of ' + codes.length + ' (1 = most deprived)</th><th>Dermatology median wait (weeks)</th><th>Dermatology 52 weeks or more</th></tr>' + trs + '</table></div>'
+    var rank = '<div class="scroll"><table id="icbp-rank" class="sort"><tr><th>ICB</th><th>' + esc(BL) + ' share of ' + esc(N) + ' items</th><th>Rank (1 = lowest share)</th><th>PCN spread (CV)</th><th>Rank (1 = most varied)</th><th>IMD rank of ' + codes.length + ' (1 = most deprived)</th>' + (D.speciality.rtt ? '<th>' + esc(SP) + ' median wait (weeks)</th><th>' + esc(SP) + ' 52 weeks or more</th>' : '') + '</tr>' + trs + '</table></div>'
       + '<p class="note">Click a heading to sort. No composite score: pick the focus by reading the columns, not by a formula we invented. Share and spread are our definitions, printed below.</p>';
 
     var srcs = D.licences.map(function (l) { return '<li>' + esc(l.source) + ': ' + esc(l.licence) + '</li>'; }).join('');
@@ -222,23 +226,24 @@
     MOUNT.innerHTML = '<style>' + CSS + '</style><div class="icbp" id="icbp-page">'
       + '<div class="band dark"><div class="col"><div class="eyebrow">Medical Sales Intelligence Hub · starting figures</div>'
       + '<h1 contenteditable="true">' + esc(BL) + ' — ' + esc(nm) + '</h1>'
-      + '<p>Dermatology emollients, from open data only. Every figure is from a named published source; anything that could not be verified is marked <span class="nv">Not verified</span>. Every block is editable in your browser: change it, then save an edited copy.</p>'
+      + '<p>' + esc(D.speciality.label) + ', from open data only. Every figure is from a named published source; anything that could not be verified is marked <span class="nv">Not verified</span>. Every block is editable in your browser: change it, then save an edited copy.</p>'
       + '<div class="pick"><div><label for="icbp-icb">Integrated Care Board (ICB)</label><select id="icbp-icb">' + icbOpts + '</select></div>'
-      + '<div><label for="icbp-brand">Brand</label><select id="icbp-brand">' + brandOpts + '</select></div></div>'
+      + '<div><label for="icbp-spec">Speciality</label><select id="icbp-spec">' + specOpts + '</select></div><div><label for="icbp-brand">Brand</label><select id="icbp-brand">' + brandOpts + '</select></div></div>'
       + '<p><button id="icbp-save">Save edited copy</button><button id="icbp-print">Print or save as PDF</button></p></div></div>'
       + sec('', '1 · National overview', 'England', nat + '<p class="note">Market definition: ' + esc(D.market) + '. Brand: the first word of the NHSBSA presentation name. Items are the NHSBSA English Prescribing Dataset, primary care, 12 months to ' + labels[labels.length - 1] + '.</p>')
       + sec('warm', '2 · ICB view', 'Brand share and trend', icbv)
       + sec('', '2b · Hospital use', 'Secondary care: medicines issued by trust pharmacies', hosp)
       + sec('warm', '3 · Primary Care Networks', 'Where it is prescribed, and how much it varies', pcn)
-      + sec('', '4 · Dermatology waiting times', 'Referral to Treatment (RTT)', rtt)
+      + sec('', '4 · ' + esc(SP) + ' waiting times', 'Referral to Treatment (RTT)', rtt)
       + sec('warm', '5 · Deprivation', 'Index of Multiple Deprivation (IMD)', imd)
       + sec('', '6 · Context', 'Moves towards over-the-counter', otc)
       + sec('warm', '7 · Choosing a focus', 'All ICBs side by side', rank)
       + sec('', '8 · Your notes', 'Value proposition starting points', '<div class="edit" contenteditable="true">Type here: what the figures say for this ICB, the access barrier, the ask.</div>')
       + '<div class="band"><div class="col"><div class="eyebrow">Definitions, sources and licences</div>'
-      + '<p class="note">Trend: latest month against the same month a year earlier, shown only where that baseline is at least ' + floor + ' items. Share: brand items divided by emollient items over the latest 12 months. PCN spread: coefficient of variation of 12-month brand items per 1,000 registered patients across the ICB\'s PCNs. Built ' + esc(D.generatedOn) + '.</p><ul class="note">' + srcs + '</ul></div></div></div>';
+      + '<p class="note">Trend: latest month against the same month a year earlier, shown only where that baseline is at least ' + floor + ' items. Share: brand items divided by the market\'s items over the latest 12 months. PCN spread: coefficient of variation of 12-month brand items per 1,000 registered patients across the ICB\'s PCNs. Built ' + esc(D.generatedOn) + '.</p><ul class="note">' + srcs + '</ul></div></div></div>';
 
-    function go() { var i = document.getElementById('icbp-icb').value, b = document.getElementById('icbp-brand').value; if (history.replaceState) history.replaceState(null, '', '?icb=' + i + '&brand=' + b); show(i, b); }
+    function go() { var i = document.getElementById('icbp-icb').value, b = document.getElementById('icbp-brand').value; if (history.replaceState) history.replaceState(null, '', '?spec=' + SPEC_ID + '&icb=' + i + '&brand=' + b); show(i, b); }
+    document.getElementById('icbp-spec').onchange = function () { location.search = '?spec=' + this.value + '&icb=' + document.getElementById('icbp-icb').value; };
     document.getElementById('icbp-icb').onchange = go;
     document.getElementById('icbp-brand').onchange = go;
     document.getElementById('icbp-print').onclick = function () { window.print(); };
@@ -247,7 +252,7 @@
       [].forEach.call(page.querySelectorAll('.pick,button'), function (n) { n.parentNode.removeChild(n); });
       var h = '<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ICB pack ' + esc(BL) + ' ' + esc(nm) + '</title><style>body{margin:0}' + CSS + '</style></head><body>' + page.outerHTML + '</body></html>';
       var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([h], { type: 'text/html' }));
-      a.download = 'icb-pack-' + icb + '-' + brand + '.html'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      a.download = 'icb-pack-' + SPEC_ID + '-' + icb + '-' + brand + '.html'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
     };
     var t = document.getElementById('icbp-rank');
     [].forEach.call(t.rows[0].cells, function (th, i) {

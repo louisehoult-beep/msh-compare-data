@@ -2,7 +2,7 @@ name: ICB pack data (dermatology emollients)
 
 # WHY THIS WORKFLOW EXISTS (added 22/10/2026, Lou: the pack is a Hub tool, so it must refresh itself)
 #
-# Rebuilds data/icb-pack/ (index.json + one shard per ICB) for app/icb-pack.js from five open
+# Rebuilds data/icb-pack/<speciality>/ (index.json + one shard per ICB, four specialities) for app/icb-pack.js from five open
 # sources: NHSBSA English Prescribing Dataset (practice level), NHSBSA Secondary Care Medicines
 # Data, NHS England RTT waiting times, English Indices of Deprivation 2025 with the ONS LSOA to ICB
 # lookup, and NHS Digital registered patients. See scripts/build_icb_pack.py and
@@ -37,7 +37,7 @@ permissions:
 jobs:
   icb-pack:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v5
         with:
@@ -52,11 +52,13 @@ jobs:
 
       - name: Build ICB pack data
         run: |
-          if [ "${{ github.event.inputs.force }}" = "yes" ]; then
-            python3 scripts/build_icb_pack.py --refresh
-          else
-            python3 scripts/build_icb_pack.py --if-new
-          fi
+          for s in dermatology respiratory diabetes wound-care; do
+            if [ "${{ github.event.inputs.force }}" = "yes" ]; then
+              python3 scripts/build_icb_pack.py --speciality "$s" --refresh
+            else
+              python3 scripts/build_icb_pack.py --speciality "$s" --if-new
+            fi
+          done
 
       - name: ICB pack check
         run: python3 test_icb_pack.py
@@ -73,7 +75,7 @@ jobs:
             echo "no change to commit"
             exit 0
           fi
-          latest=$(python3 -c "import json;print(json.load(open('data/icb-pack/index.json'))['periods'][-1])")
+          latest=$(python3 -c "import json;print(json.load(open('data/icb-pack/dermatology/index.json'))['periods'][-1])")
           git commit -m "ICB pack data to $latest ($(date -u +%F))"
           pushed=0
           for attempt in 1 2 3 4 5; do

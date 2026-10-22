@@ -69,7 +69,29 @@ LICENCES = [
 ]
 
 NOT_VERIFIED = "Not verified"
-MARKET_PREFIXES = ("130201", "2122")      # BNF presentation-code prefixes
+# Speciality definitions: config/icb-pack-specialities.json, chosen with --speciality.
+SPECS = json.load(open(os.path.join(ROOT, "config", "icb-pack-specialities.json")))
+SPECS = {k: v for k, v in SPECS.items() if not k.startswith("_")}
+SPEC = dict(SPECS["dermatology"], id="dermatology")
+
+
+def set_spec(sid):
+    global SPEC, GENERIC_WORDS, BRAND_FLOOR
+    SPEC = dict(SPECS[sid], id=sid)
+    GENERIC_WORDS = set(SPEC["genericWords"])
+    BRAND_FLOOR = SPEC["brandFloor"]
+
+
+set_spec("dermatology")
+
+
+def epd_where():
+    return " OR ".join("SUBSTR(BNF_PRESENTATION_CODE,1,%d)='%s'" % (len(p), p) for p in SPEC["market"])
+
+
+def cfile(base):
+    """Cache file name for the current speciality (dermatology keeps the original names)."""
+    return base if SPEC["id"] == "dermatology" else base.replace(".json", "-%s.json" % SPEC["id"])
 
 
 # --------------------------------------------------------------------------
@@ -177,7 +199,7 @@ def fetch_rtt_history(cache, refresh=False, months=13):
 
 
 def load_rtt_history(cache):
-    """{period: {icb_code: row}} for dermatology from every cached month."""
+    """{period: {icb_code: row}} for the speciality's RTT function from every cached month."""
     out = {}
     for path in sorted(glob.glob(os.path.join(cache, "rtt", "*.xlsx"))):
         out[os.path.basename(path)[:6]] = load_rtt(cache, path)[0]
@@ -186,12 +208,8 @@ def load_rtt_history(cache):
 
 
 # --------------------------------------------------------------------------
-# practice-level pull: every emollient brand, not just one
+# practice-level pull: every brand, not just one
 # --------------------------------------------------------------------------
-# First words of presentation names that are generics or formulations, not brands.
-GENERIC_WORDS = {"aqueous", "emulsifying", "liquid", "white", "isopropyl", "urea", "yellow", "paraffin",
-                 "soft", "hard", "wool", "glycerin", "glycerol", "sodium", "coal", "arachis", "zinc"}
-BRAND_FLOOR = 5000        # national 12-month items a first word needs to be offered as a brand
 OTHER = "other"
 
 
@@ -199,7 +217,7 @@ def fetch_practice_level(cache, periods, refresh=False):
     """Practice x brand-word items and cost per month, England, through the NHSBSA datastore
     SQL API (server-side aggregation; ~133,000 rows a month, ~8 seconds)."""
     import refresh_gp_prescribing as g
-    path = os.path.join(cache, "epd-practice-brand-months.json")
+    path = os.path.join(cache, cfile("epd-practice-brand-months.json"))
     have = json.load(open(path)) if os.path.exists(path) and not refresh else {}
     res = dict(g.resources())
     for p in periods:
@@ -208,8 +226,7 @@ def fetch_practice_level(cache, periods, refresh=False):
         t = res[p]
         q = ("SELECT PRACTICE_CODE AS pr, SPLIT(BNF_PRESENTATION_NAME,' ')[OFFSET(0)] AS b, "
              "SUM(ITEMS) AS i, SUM(ACTUAL_COST) AS c FROM `{t}` "
-             "WHERE SUBSTR(BNF_PRESENTATION_CODE,1,6)='130201' OR SUBSTR(BNF_PRESENTATION_CODE,1,4)='2122' "
-             "GROUP BY PRACTICE_CODE, b".format(t=t))
+             "WHERE " + epd_where() + " GROUP BY PRACTICE_CODE, b").format(t=t)
         month = collections.defaultdict(dict)
         for r in g.sql(t, q):
             month[r["pr"]][r["b"]] = [float(r["i"] or 0), float(r["c"] or 0)]
@@ -237,10 +254,10 @@ def scmd_tables(periods):
 
 
 def fetch_hospital(cache, periods, brand_words, refresh=False):
-    """Indicative cost by trust x VMP name for emollient brand VMPs, per month. VMP names
+    """Indicative cost by trust x VMP name for brand VMPs, per month. VMP names
     for brands read 'Generic <Brand> ...' or '<Brand> ...'."""
     import refresh_gp_prescribing as g
-    path = os.path.join(cache, "scmd-brand-months.json")
+    path = os.path.join(cache, cfile("scmd-brand-months.json"))
     have = json.load(open(path)) if os.path.exists(path) and not refresh else {}
     tables = scmd_tables(periods)
     like = " OR ".join("LOWER(VMP_PRODUCT_NAME) LIKE 'generic %s%%' OR LOWER(VMP_PRODUCT_NAME) LIKE '%s%%'"
@@ -283,9 +300,12 @@ def load_gpreg(cache):
 
 
 def load_rtt(cache, path=None):
-    """Dermatology Service (C_330) rows: per ICB from the ICB sheet, England from the
+    """Rows for the speciality's treatment function (SPEC rtt; empty when it has none): per ICB from the ICB sheet, England from the
     National sheet. Returns ({icb_code: row, "ENGLAND": row}, period)."""
     import openpyxl
+    if not SPEC.get("rtt"):
+        return {}, None
+    code = SPEC["rtt"]["code"]
     wb = openpyxl.load_workbook(path or os.path.join(cache, "rtt-incomplete-commissioner.xlsx"),
                                 read_only=True, data_only=True)
     need = ["Total number of incomplete pathways", "Total within 18 weeks",
@@ -307,11 +327,11 @@ def load_rtt(cache, path=None):
         if r[1] == "Period:":
             period = r[2]
     for r in rows[hi + 1:]:
-        if r[3] == "C_330" and r[1] != "-":
+        if r[3] == code and r[1] != "-":
             out[r[1]] = pick(r, h, r[2])
     rows, hi, h = rows_of("National")
     for r in rows[hi + 1:]:
-        if r[1] == "C_330":
+        if r[1] == code:
             out["ENGLAND"] = pick(r, h, "England")
     return out, period
 
@@ -389,10 +409,10 @@ def load_shards():
     items = collections.defaultdict(lambda: collections.defaultdict(lambda: [0] * n))   # icb -> brand key -> [n]
     market = collections.defaultdict(lambda: [0] * n)
     products = collections.defaultdict(lambda: collections.defaultdict(int))             # icb -> label -> 12m items
-    for fn in ("s-1302.json", "s-2122.json"):
-        s = json.load(open(os.path.join(GP_DIR, fn)))["s"]
+    for sec in SPEC["shards"]:
+        s = json.load(open(os.path.join(GP_DIR, "s-%s.json" % sec)))["s"]
         for sub, v in s.items():
-            if not (sub.startswith("130201") or sub.startswith("2122")):
+            if not any(sub.startswith(m) for m in SPEC["market"]):
                 continue
             for icb, prods in v["t"].items():
                 for key, arr in prods.items():
@@ -432,10 +452,10 @@ def assemble(cache):
     last12 = range(n - 12, n)
     gmap, size = load_gpreg(cache)
     rtt, rtt_period = load_rtt(cache)
-    rtt_hist = load_rtt_history(cache)
+    rtt_hist = load_rtt_history(cache) if SPEC.get("rtt") else {}
     rtt_periods = sorted(rtt_hist)
     imd = load_imd_recomputed(cache)
-    prac = json.load(open(os.path.join(cache, "epd-practice-brand-months.json")))
+    prac = json.load(open(os.path.join(cache, cfile("epd-practice-brand-months.json"))))
     sources = json.load(open(os.path.join(cache, "sources.json")))
 
     # brand list: first words with enough national items, display name from NHSBSA
@@ -483,7 +503,7 @@ def assemble(cache):
     hosp = collections.defaultdict(lambda: collections.defaultdict(lambda: [0.0] * n))   # icb -> brand -> [n]
     hosp_trust = collections.defaultdict(lambda: collections.defaultdict(lambda: collections.defaultdict(float)))  # icb->trust->brand->12m
     hosp_nat = collections.defaultdict(lambda: [0.0] * n)
-    scmd = json.load(open(os.path.join(cache, "scmd-brand-months.json")))
+    scmd = json.load(open(os.path.join(cache, cfile("scmd-brand-months.json"))))
     hosp_unmapped = 0.0
     for k, p in enumerate(periods):
         for o, nme, c in scmd[p]:
@@ -529,7 +549,7 @@ def assemble(cache):
                      for c, d in sorted(pcns, key=lambda cd: cd[1]["name"])],
         }
         series = None
-        if all(code in rtt_hist[q] for q in rtt_periods):
+        if rtt_periods and all(code in rtt_hist[q] for q in rtt_periods):
             series = {"total": [rtt_hist[q][code]["total"] for q in rtt_periods],
                       "median": [r2(rtt_hist[q][code]["median"], 1) for q in rtt_periods],
                       "w52": [rtt_hist[q][code]["w52"] for q in rtt_periods]}
@@ -543,28 +563,34 @@ def assemble(cache):
             "list": sum(d["list"] for _, d in pcns),
         }
     pol_path = os.path.join(ROOT, "config", "icb-pack-policies.json")
-    policies = {k: v for k, v in json.load(open(pol_path)).items() if not k.startswith("_")}
+    policies = ({k: v for k, v in json.load(open(pol_path)).items() if not k.startswith("_")}
+                if SPEC.get("policies") else {})
     for code, pol in policies.items():
         if code in icb_meta:
             icb_meta[code]["otc"] = pol
     index = {
         "generatedOn": datetime.date.today().isoformat(), "periods": periods, "minBaselineItems": floor,
         "rttPeriod": rtt_period, "rttPeriods": rtt_periods,
-        "market": "BNF 130201 (emollient preparations) plus appliance section 2122 (emollients), primary care items",
+        "speciality": {"id": SPEC["id"], "label": SPEC["label"], "short": SPEC["short"], "noun": SPEC["noun"],
+                       "rtt": SPEC.get("rtt"), "otcNational": bool(SPEC.get("otcNational")),
+                       "defaultBrand": SPEC["defaultBrand"], "defaultIcb": SPEC["defaultIcb"],
+                       "all": [{"id": k, "label": v["label"]} for k, v in SPECS.items()]},
+        "market": SPEC["marketText"],
         "brands": [{"key": b, "label": disp[b]} for b in brands],
         "icbs": icb_meta, "rank": rank,
         "national": {"items": {b: [int(x) for x in nat["items"][b]] for b in brands + ["_market"]},
                      "cost": {b: [r2(x, 0) for x in nat["cost"][b]] for b in brands + ["_market"]},
                      "rtt": rtt.get("ENGLAND"),
-                     "rttSeries": {"total": [rtt_hist[q]["ENGLAND"]["total"] for q in rtt_periods],
-                                   "median": [r2(rtt_hist[q]["ENGLAND"]["median"], 1) for q in rtt_periods]}},
+                     "rttSeries": ({"total": [rtt_hist[q]["ENGLAND"]["total"] for q in rtt_periods],
+                                    "median": [r2(rtt_hist[q]["ENGLAND"]["median"], 1) for q in rtt_periods]}
+                                   if rtt_periods else None)},
         "unmappedItems": int(unmapped),
         "hospital": {"national": {b: [r2(x, 0) for x in hosp_nat[b]] for b in brands if any(hosp_nat[b])},
                      "unmappedCost": r2(hosp_unmapped, 0),
                      "scope": "Medicines issued by NHS trust pharmacies (pharmacy stock control), England, Secondary Care Medicines Data. "
-                              "Indicative cost at list or reimbursement price, not what trusts pay. Only emollients whose dm+d name carries the brand "
-                              "(for example Generic QV Gentle wash) can be attributed to a brand; generic-named emollients cannot, so there is no "
-                              "hospital share of the emollient market. Provisional data after March 2026."},
+                              "Indicative cost at list or reimbursement price, not what trusts pay. Only products whose dm+d name carries the brand "
+                              "can be attributed to a brand; generic-named products cannot, so there is no "
+                              "hospital share of the market. Provisional data after March 2026."},
         "sources": {k: v for k, v in sources.items()},
         "licences": [{"source": a, "licence": b} for a, b in LICENCES],
     }
@@ -584,7 +610,7 @@ NOTICE = {
 
 def hospital_words(cache, periods):
     """Brand display words, from the practice-level pull (same rule as assemble)."""
-    prac = json.load(open(os.path.join(cache, "epd-practice-brand-months.json")))
+    prac = json.load(open(os.path.join(cache, cfile("epd-practice-brand-months.json"))))
     tot, disp = collections.Counter(), {}
     for p in periods[-12:]:
         for bw in prac[p].values():
@@ -602,6 +628,8 @@ def up_to_date(out, gp_periods):
     have = json.load(open(path))
     if have.get("periods") != gp_periods:
         return False
+    if not SPEC.get("rtt"):
+        return True
     text = http(RTT_PAGE).decode("utf-8", "replace")
     m = re.search(r"Incomplete-Commissioner-([A-Za-z]{3})(\d\d)", text)
     if not m:
@@ -614,11 +642,14 @@ def up_to_date(out, gp_periods):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--cache", default=os.path.join(ROOT, "tmp", "icb-pack-cache"))
-    ap.add_argument("--out", default=os.path.join(ROOT, "data", "icb-pack"))
+    ap.add_argument("--speciality", default="dermatology", choices=sorted(SPECS))
+    ap.add_argument("--out", default=None, help="default data/icb-pack/<speciality>")
     ap.add_argument("--refresh", action="store_true", help="re-download every source")
     ap.add_argument("--if-new", action="store_true", help="exit quietly unless NHSBSA or RTT has a newer month")
     ap.add_argument("--no-fetch", action="store_true", help="use the cache as it stands")
     a = ap.parse_args(argv)
+    set_spec(a.speciality)
+    a.out = a.out or os.path.join(ROOT, "data", "icb-pack", a.speciality)
     idx = json.load(open(os.path.join(GP_DIR, "index.json")))
     if a.if_new and up_to_date(a.out, idx["periods"]):
         print("icb-pack: already at NHSBSA %s and RTT %s, nothing to do" % (idx["periods"][-1], "latest"))
@@ -626,7 +657,8 @@ def main(argv=None):
     if not a.no_fetch:
         fetch_all(a.cache, a.refresh)
         fetch_practice_level(a.cache, idx["periods"], a.refresh)
-        fetch_rtt_history(a.cache, a.refresh)
+        if SPEC.get("rtt"):
+            fetch_rtt_history(a.cache, a.refresh)
         fetch_hospital(a.cache, idx["periods"], hospital_words(a.cache, idx["periods"]), a.refresh)
     index, shards = assemble(a.cache)
     os.makedirs(a.out, exist_ok=True)
