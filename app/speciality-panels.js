@@ -100,6 +100,20 @@
       '.msh .ms-bar.ms-hi i em{background:var(--navy);}',
       '.msh .ms-pick{margin-top:18px;border:1px solid var(--border);border-radius:10px;background:var(--panel);padding:16px 18px;}',
       '.msh .ms-pick select{padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:14px;background:var(--panel);color:var(--ink);max-width:100%;margin:6px 0 12px;}',
+      '.msh .sp-pin,.msh .sp-ics{display:inline-flex;align-items:center;gap:6px;cursor:pointer;background:var(--panel);border:1.5px solid var(--border);border-radius:99px;padding:5px 12px;font-size:12.5px;font-weight:700;color:var(--navy);line-height:1.2;text-decoration:none;font-family:inherit;}',
+      '.msh .sp-pin:hover,.msh .sp-ics:hover{border-color:var(--navy);}',
+      '.msh .sp-pin:focus-visible,.msh .sp-ics:focus-visible{outline:3px solid #1B5FBF;outline-offset:2px;}',
+      '.msh .sp-pin[aria-pressed="true"]{background:#F7F1E3;border-color:#B8935A;color:#7E6118;}',
+      '.msh .sp-pin svg{width:15px;height:15px;display:block;}',
+      '.msh .sp-pin[aria-pressed="true"] svg{fill:#C9A227;stroke:#8C6A1C;}',
+      '.msh .sp-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;justify-content:space-between;margin:0 0 10px;}',
+      '.msh .sp-bar h4{margin:0;}',
+      '.msh .sp-cal-row{display:grid;grid-template-columns:130px minmax(0,1fr) auto;gap:4px 14px;align-items:start;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;line-height:1.45;color:var(--ink);}',
+      '.msh .sp-cal-row:last-child{border-bottom:0;}',
+      '.msh .sp-cal-d{font-weight:700;color:var(--navy);}',
+      '.msh .sp-cal-t a{color:var(--gold);font-weight:700;text-decoration:none;}',
+      '.msh .sp-cal-m{font-size:11.5px;color:var(--dim);}',
+      '@media (max-width:640px){.msh .sp-cal-row{grid-template-columns:minmax(0,1fr);}}',
       '.msh .ms-find{border-left:3px solid var(--gold);background:var(--panel2);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0 0;font-size:13.5px;line-height:1.55;color:var(--ink);}'
     ].join('');
     document.head.appendChild(st);
@@ -115,6 +129,112 @@
 
   function n(x) {
     return (x === null || x === undefined) ? 'not stated' : Number(x).toLocaleString('en-GB');
+  }
+
+  /* ---------- pin to My Hub, and the calendar (22/10/2026) ----------
+     Pins are the member's own saved items (app/hub-account.js, kind "panel"),
+     shown on My Hub by app/my-hub-panels.js. The buttons stay hidden for a
+     visitor who is not logged in. The calendar rows are data/hub-calendar.json
+     filtered to this speciality; the .ics carries only those rows. */
+  var ROOT = BASE.replace('data/speciality-panels/', '');
+  var PAGE = '/medical-sales-hub/' + slug + '/';
+  var P = null, ACCT = null, CAL = null, PANEL = null;
+  function loggedIn() { return !!(window.mshRestNonce || window.mshPrefsNonce); }
+  function starSvg() {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg>';
+  }
+  function pinBtn(id, title) {
+    return '<button type="button" class="sp-pin" hidden data-pin="' + esc(id) + '" data-pin-t="' + esc(title) + '" aria-pressed="false">' + starSvg() + '<span>Pin to My Hub</span></button>';
+  }
+  function pinPaint(btn) {
+    var on = !!(ACCT && P && ACCT.isStarred(P.panelKey(PAGE, btn.getAttribute('data-pin'))));
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.querySelector('span').textContent = on ? 'Pinned to My Hub' : 'Pin to My Hub';
+    btn.setAttribute('aria-label', (on ? 'Unpin ' : 'Pin ') + btn.getAttribute('data-pin-t') + (on ? ' from My Hub' : ' to My Hub'));
+  }
+  function pinPaintAll() {
+    var all = document.querySelectorAll('.msh .sp-pin');
+    for (var i = 0; i < all.length; i++) { all[i].hidden = !(ACCT && P); pinPaint(all[i]); }
+  }
+  function runSrc(src) { (new Function(src))(); }
+  function getText(path) {
+    return fetch(ROOT + path, { cache: 'no-cache' }).then(function (r) { if (!r.ok) { throw new Error(path + ' ' + r.status); } return r.text(); });
+  }
+  function loadHelpers() {
+    return Promise.all([
+      window.MSH_PANELS ? '' : getText('app/hub-panels.js'),
+      (window.MSH_ACCOUNT || !loggedIn()) ? '' : getText('app/hub-account.js')
+    ]).then(function (got) {
+      if (got[0]) { runSrc(got[0]); }
+      if (got[1]) { runSrc(got[1]); }
+      P = window.MSH_PANELS;
+      if (loggedIn() && window.MSH_ACCOUNT) { return window.MSH_ACCOUNT.load().then(function () { ACCT = window.MSH_ACCOUNT; }); }
+    });
+  }
+  function download(name, text) {
+    var blob = new Blob([text], { type: 'text/calendar;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
+  function calRows() { return CAL ? P.calendarRows(CAL, slug, new Date().toISOString().slice(0, 10)) : []; }
+  function calHtml() {
+    var rows = calRows(), title = ((PANEL && PANEL.label) || 'This speciality') + ' calendar';
+    var h = '<div class="sp-sec" id="sp-calendar"><div class="sp-bar"><h3 class="sub-h3" style="margin:0;">Calendar</h3><span>' + pinBtn('calendar', title);
+    if (rows.length) { h += ' <button type="button" class="sp-ics" data-ics="all">Add all to my calendar</button>'; }
+    h += '</span></div>';
+    if (!rows.length) {
+      return h + '<div class="empty-state">No dated conference, awareness day, framework end or contract end is recorded for this speciality yet. Nothing is estimated from a previous year.</div></div>';
+    }
+    for (var i = 0; i < rows.length; i++) {
+      var e = rows[i], range = P.fmtDate(e.date) + (e.endDate && e.endDate > e.date ? ' to ' + P.fmtDate(e.endDate) : '');
+      h += '<div class="sp-cal-row"><div class="sp-cal-d">' + esc(range) + '</div><div><div class="sp-cal-t"><a href="' + esc(e.source) + '" target="_blank" rel="noopener">' + esc(e.title) + '</a></div>' +
+           '<div class="sp-cal-m">' + esc(P.typeLabel(e)) + (e.location ? ' &middot; ' + esc(e.location) : '') + (e.verified ? ' &middot; checked ' + esc(e.verified) : '') + '</div></div>' +
+           '<button type="button" class="sp-ics" data-ics="' + esc(e.id) + '" aria-label="Add ' + esc(e.title) + ' to my calendar">Add to my calendar</button></div>';
+    }
+    return h + '<div class="sp-meta">Dates are those published by each organiser or framework owner, as held in the Hub Calendar. Each calendar entry links back to this page.</div></div>';
+  }
+  function wirePins(box) {
+    box.addEventListener('click', function (ev) {
+      var t = ev.target.closest ? ev.target.closest('[data-pin],[data-ics]') : null;
+      if (!t) { return; }
+      if (t.hasAttribute('data-ics')) {
+        var id = t.getAttribute('data-ics'), rows = calRows();
+        if (id !== 'all') { rows = rows.filter(function (r) { return r.id === id; }); }
+        if (!rows.length) { return; }
+        download(P.icsName(slug, id === 'all' ? '' : id), P.ics(rows, slug, ((PANEL && PANEL.label) || slug) + ' (Medical Sales Hub)', new Date().toISOString()));
+        return;
+      }
+      if (!ACCT) { return; }
+      var key = P.panelKey(PAGE, t.getAttribute('data-pin')), on = t.getAttribute('aria-pressed') !== 'true';
+      t.setAttribute('aria-pressed', on ? 'true' : 'false');
+      var done = on ? ACCT.star({ u: key, t: ((PANEL && PANEL.label) || slug) + ': ' + t.getAttribute('data-pin-t'), k: 'panel' }) : ACCT.unstar(key);
+      done.then(function () { pinPaint(t); }, function () { pinPaint(t); });
+    });
+  }
+  /* Called once the Frameworks panel has drawn: add the calendar, then the pins. */
+  function addCalendarAndPins(d) {
+    PANEL = d;
+    var box = FW;
+    if (!box) { return; }
+    wirePins(box);
+    var cal = document.createElement('div');
+    cal.id = 'sp-cal-slot';
+    box.appendChild(cal);
+    cal.innerHTML = '<div class="empty-state">Loading the calendar.</div>';
+    loadHelpers().then(function () {
+      return fetch(ROOT + 'data/hub-calendar.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) { throw new Error('calendar ' + r.status); } return r.json(); });
+    }).then(function (c) {
+      CAL = c.entries || [];
+      cal.innerHTML = calHtml();
+      pinPaintAll();
+    }).catch(function () {
+      cal.innerHTML = '<div class="sp-sec"><h3 class="sub-h3">Calendar</h3><div class="empty-state">The calendar could not load just now. Reload to try again.</div></div>';
+      pinPaintAll();
+    });
   }
 
   function pct(x) {
@@ -524,7 +644,7 @@
         for (var mk = 0; mk < gp.markets.length; mk++) {
           var M = gp.markets[mk];
           var per = M.latestPeriod.slice(0, 4) + '-' + M.latestPeriod.slice(4);
-          h += '<div class="sp-mkt"><h4>' + esc(M.label) + '</h4>';
+          h += '<div class="sp-mkt"><div class="sp-bar"><h4>' + esc(M.label) + '</h4>' + pinBtn('gp:' + M.id, 'GP prescribing, ' + M.label) + '</div>';
           h += '<div class="sp-tiles">';
           h += '<div class="sp-tile"><b>' + n(M.items) + '</b><span>Items, ' + esc(per) + '</span></div>';
           h += '<div class="sp-tile"><b>&pound;' + n(M.cost) + '</b><span>Actual cost, ' + esc(per) + '</span></div>';
@@ -808,13 +928,15 @@
       }
       h += '</select><div id="' + id + '-out"></div></div>';
       h += '<div class="sp-meta">Primary care: ' + esc(ms.gpSource) + '. Secondary care: ' + esc((S && S.source) || 'not available') + '. Drug Tariff: NHSBSA Drug Tariff Part IX. ' + esc(ms.attribution || '') + '</div>';
-      if (M.id === 'emollients') { h += '<div id="ms-expl-' + k + '"></div>'; }
+      if (M.id === 'emollients') { h += '<div id="ms-expl-' + k + '"></div><div id="ms-opp-' + k + '"></div>'; }
     }
     h += ruleBlock(d.rules, ['marketShare']);
     MKT.innerHTML = h;
     for (var xk = 0; xk < ms.markets.length; xk++) {
       var xm = document.getElementById('ms-expl-' + xk);
       if (xm) { explorer(xm); }
+      var om = document.getElementById('ms-opp-' + xk);
+      if (om) { icbOpp(om); }
     }
 
     function wire(k2) {
@@ -884,6 +1006,11 @@
       '.msh .ex-tile.ex-low{background:repeating-linear-gradient(45deg,#fff,#fff 6px,#EEF1F5 6px,#EEF1F5 12px);color:#4A5563;cursor:default;}',
       '.msh .ex-scale{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--dim);margin:2px 0 8px;}',
       '.msh .ex-scale i{display:block;width:160px;height:10px;border-radius:5px;background:linear-gradient(90deg,#EAF0F7,#14304F);border:1px solid var(--border);}',
+      '.msh .ex-sort{font:inherit;font-weight:700;font-size:12px;background:none;border:0;color:inherit;cursor:pointer;text-align:inherit;padding:0;text-decoration:underline dotted;}',
+      '.msh .ex-sort[aria-pressed="true"]{color:var(--gold-ink,#7A5C12);}',
+      '.msh .ex-opp .ex-row{cursor:pointer;}',
+      '.msh .ex-opp .ex-row[aria-selected="true"]{outline:2px solid var(--gold);outline-offset:-2px;}',
+      '.msh .ex-rk{color:var(--dim);font-size:11px;}',
       '.msh .ex-note{border-left:3px solid var(--gold);background:var(--panel2);padding:10px 14px;border-radius:0 8px 8px 0;font-size:12.5px;line-height:1.55;margin:10px 0;color:var(--ink);}'
     ].join('');
     document.head.appendChild(st);
@@ -955,7 +1082,7 @@
     tb += '</tr>';
     for (m = 0; m < periods.length; m++) {
       tb += '<tr><td>' + esc(month(periods[m])) + '</td>';
-      for (s = 0; s < series.length; s++) { tb += '<td class="sp-num">' + (series[s].vals[m] === null ? 'no items' : esc(o.fmt(series[s].vals[m]))) + '</td>'; }
+      for (s = 0; s < series.length; s++) { tb += '<td class="sp-num">' + (series[s].vals[m] === null ? (o.nullText || 'no items') : esc(o.fmt(series[s].vals[m]))) + '</td>'; }
       tb += '</tr>';
     }
     tb += '</table></div></details>';
@@ -971,6 +1098,111 @@
       .catch(function (e) {
         mount.innerHTML = '<div class="ex"><h3>Prescribing explorer</h3><div class="empty-state">The month-by-month data could not load (' + esc(e.message) + '). Nothing is missing from the rest of the page. Reload, and if it persists it is the feed, not your access.</div></div>';
       });
+  }
+
+  /* ICB OPPORTUNITY (22/10/2026). All 36 ICBs on brand share, PCN variation, deprivation and
+     dermatology waiting time. Data: data/derm-icb-context/context.json
+     (scripts/build_derm_icb_context.py). Every figure carries its source and period; a missing
+     figure reads "Not verified". The order is an aid, not a score: the average of four ranks. */
+  var OPPB = window.MSH_DERMCTX_BASE || 'https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/derm-icb-context/';
+
+  function icbOpp(mount) {
+    exCss();
+    mount.innerHTML = '<div class="ex"><h3>ICB opportunity: where to start</h3><div class="empty-state">Loading the ICB comparison&hellip;</div></div>';
+    fetch(OPPB + 'context.json?cb=' + new Date().toISOString().slice(0, 13))
+      .then(function (r) { if (!r.ok) { throw new Error('HTTP ' + r.status); } return r.json(); })
+      .then(function (C) { oppStart(mount, C); })
+      .catch(function (e) {
+        mount.innerHTML = '<div class="ex"><h3>ICB opportunity: where to start</h3><div class="empty-state">The ICB comparison could not load (' + esc(e.message) + '). Nothing is missing from the rest of the page. Reload, and if it persists it is the feed, not your access.</div></div>';
+      });
+  }
+
+  function oppStart(mount, C) {
+    var RP = C.periods.rtt, LAST = RP.length - 1, NV = 'Not verified';
+    var S = {brand: C.brands.indexOf('QV') >= 0 ? 'QV' : C.brands[0], sort: 'avg', sel: null};
+    function rankOf(vals, desc) {
+      var idx = [], r = {}, i;
+      for (i = 0; i < vals.length; i++) { if (vals[i] !== null && vals[i] !== undefined) { idx.push(i); } }
+      idx.sort(function (a, b) { return desc ? vals[b] - vals[a] : vals[a] - vals[b]; });
+      for (i = 0; i < idx.length; i++) { r[idx[i]] = i + 1; }
+      return r;
+    }
+    function rows() {
+      var I = C.icbs, b = S.brand, sh = [], sd = [], im = [], wt = [], i;
+      for (i = 0; i < I.length; i++) {
+        sh.push(I[i].brands[b].share);
+        sd.push(I[i].brands[b].pcnSd);
+        im.push(I[i].imd ? I[i].imd.score : null);
+        wt.push(I[i].rtt ? I[i].rtt.median[LAST] : null);
+      }
+      var rs = rankOf(sh, false), rv = rankOf(sd, true), rd = rankOf(im, true), rw = rankOf(wt, true), out = [];
+      for (i = 0; i < I.length; i++) {
+        var rk = [rs[i], rv[i], rd[i], rw[i]], full = rk.every(function (x) { return x !== undefined; });
+        out.push({i: i, icb: I[i], share: sh[i], sd: sd[i], imd: im[i], wait: wt[i], rs: rs[i], rv: rv[i], rd: rd[i], rw: rw[i],
+                  avg: full ? (rk[0] + rk[1] + rk[2] + rk[3]) / 4 : null});
+      }
+      return out;
+    }
+    function f1(x, d) { return x === null || x === undefined ? NV : x.toFixed(d); }
+    function cell(v, r, d, suffix) { return v === null || v === undefined ? '<td class="sp-num">' + NV + '</td>' : '<td class="sp-num">' + v.toFixed(d) + (suffix || '') + ' <span class="ex-rk">#' + r + '</span></td>'; }
+    function draw() {
+      var R = rows(), key = S.sort, h, k;
+      var cmp = {avg: function (a, b) { return a.avg - b.avg; }, name: function (a, b) { return a.icb.name < b.icb.name ? -1 : 1; },
+                 share: function (a, b) { return a.share - b.share; }, sd: function (a, b) { return b.sd - a.sd; },
+                 imd: function (a, b) { return b.imd - a.imd; }, wait: function (a, b) { return b.wait - a.wait; }}[key];
+      R.sort(function (a, b) {
+        var va = key === 'name' ? 0 : a[key], vb = key === 'name' ? 0 : b[key];
+        if (key !== 'name' && (va === null || va === undefined)) { return 1; }
+        if (key !== 'name' && (vb === null || vb === undefined)) { return -1; }
+        return cmp(a, b);
+      });
+      h = '<div class="ex"><h3>ICB opportunity: where to start</h3><p class="ms-sub">All ' + C.icbs.length + ' ICBs side by side. Each column is ranked across the ICBs (#1 = most room to grow, or most need). Click a heading to sort, a row to see its dermatology waiting-time trend.</p>';
+      h += '<div class="ex-ctl"><div><label for="opp-brand">Brand</label><select id="opp-brand">';
+      for (k = 0; k < C.brands.length; k++) { h += '<option' + (C.brands[k] === S.brand ? ' selected' : '') + '>' + esc(C.brands[k]) + '</option>'; }
+      h += '</select></div></div>';
+      function th(id, t) { return '<th class="sp-num"><button type="button" class="ex-sort" data-sort="' + id + '" aria-pressed="' + (S.sort === id ? 'true' : 'false') + '">' + t + '</button></th>'; }
+      h += '<div class="sp-scroll"><table class="sp-tbl ex-opp"><tr><th><button type="button" class="ex-sort" data-sort="name" aria-pressed="' + (S.sort === 'name' ? 'true' : 'false') + '">ICB</button></th>' +
+           th('avg', 'Average rank') + th('share', S.brand + ' share of emollient items') + th('sd', 'Spread between PCNs (percentage points)') +
+           th('imd', 'Deprivation (IMD score)') + th('wait', 'Dermatology median wait (weeks)') + '</tr>';
+      for (k = 0; k < R.length; k++) {
+        var r = R[k], b = r.icb.brands[S.brand];
+        h += '<tr class="ex-row" data-i="' + r.i + '" tabindex="0"' + (S.sel === r.i ? ' aria-selected="true"' : '') + '><td>' + esc(r.icb.name.replace(/^NHS /, '')) + '</td>' +
+             '<td class="sp-num">' + (r.avg === null ? NV : r.avg.toFixed(1)) + '</td>' +
+             cell(r.share, r.rs, 2, '%') + cell(r.sd, r.rv, 2, '') + cell(r.imd, r.rd, 1, '') + cell(r.wait, r.rw, 1, '') + '</tr>';
+      }
+      h += '</table></div>';
+      h += '<p class="ex-note"><b>How to read the order.</b> The average rank is an ordering aid, not a score: a simple average of four ranks, each 1 to ' + C.icbs.length + ', where #1 is the lowest ' + esc(S.brand) + ' share, the widest spread between PCNs, the highest deprivation and the longest dermatology wait. It treats the four as equally important, which they are not for every brand, so sort by the column that matters to you. An ICB missing any of the four has no average rank.</p>';
+      h += '<div id="opp-detail">' + detail() + '</div>';
+      h += '<details><summary>Sources, periods and definitions</summary><p class="ex-src"><b>Brand share and spread between PCNs.</b> ' + esc(C.sources.items.name) + ', items, ' + esc(month(C.periods.items[0])) + ' to ' + esc(month(C.periods.items[1])) + '. ' + esc(C.sources.items.measure) + ' ' + esc(C.sources.items.attribution) + '</p>' +
+           '<p class="ex-src"><b>Deprivation.</b> ' + esc(C.sources.imd.name) + '. ' + esc(C.sources.imd.measure) + ' ' + esc(C.sources.imd.method) + ' ' + esc(C.sources.imd.licence) + '.</p>' +
+           '<p class="ex-src"><b>Dermatology waiting time.</b> ' + esc(C.sources.rtt.name) + ', ' + esc(month(RP[LAST])) + ', treatment function code ' + esc(C.sources.rtt.treatmentFunctionCode) + ' (' + esc(C.sources.rtt.treatmentFunction) + '), ' + esc(C.sources.rtt.basis) + '. ' + esc(C.sources.rtt.measure) + ' ' + esc(C.sources.rtt.licence) + '.</p></details></div>';
+      mount.innerHTML = h;
+      var bs = mount.querySelectorAll('.ex-sort'), j;
+      for (j = 0; j < bs.length; j++) { bs[j].addEventListener('click', function () { S.sort = this.getAttribute('data-sort'); draw(); }); }
+      var br = mount.querySelectorAll('.ex-row');
+      function pickRow() { S.sel = parseInt(this.getAttribute('data-i'), 10); draw(); }
+      for (j = 0; j < br.length; j++) {
+        br[j].addEventListener('click', pickRow);
+        br[j].addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); pickRow.call(this); } });
+      }
+      document.getElementById('opp-brand').addEventListener('change', function () { S.brand = this.value; draw(); });
+    }
+    function detail() {
+      if (S.sel === null) { return '<p class="ex-src">Select an ICB row to see its dermatology waiting-time trend against England.</p>'; }
+      var ic = C.icbs[S.sel], t = ic.rtt, E = C.england;
+      if (!t) { return '<p><span class="nv">' + NV + '</span>: no dermatology waiting-time series for ' + esc(ic.name) + '.</p>'; }
+      var src = 'Source: NHS England RTT, incomplete pathways by commissioner, treatment function ' + esc(C.sources.rtt.treatmentFunctionCode) + ' (' + esc(C.sources.rtt.treatmentFunction) + '), ' + esc(month(RP[0])) + ' to ' + esc(month(RP[LAST])) + '. Open Government Licence v3.0.';
+      var note = ic.rttFirstMonth !== RP[0] ? '<p class="ex-note">' + esc(ic.name) + ' was formed in April 2026, so NHS England publishes no figure for it before ' + esc(month(ic.rttFirstMonth)) + '. Earlier months are left blank, not borrowed from the ICBs it replaced.</p>' : '';
+      return '<h4>' + esc(ic.name) + '</h4>' + note +
+        exChart(RP, [{name: ic.name.replace(/^NHS /, ''), color: '#14304F', vals: t.median}, {name: 'England', color: '#A8842C', dash: '6 4', vals: E.median}],
+                {title: 'Dermatology median wait, weeks (incomplete pathways)', label: 'Dermatology median wait in weeks by month, ' + ic.name + ' against England', zero: false, nullText: NV,
+                 tick: function (v, rg) { return v.toFixed(rg < 5 ? 1 : 0); }, fmt: function (v) { return v.toFixed(1) + ' weeks'; }, src: src}) +
+        exChart(RP, [{name: ic.name.replace(/^NHS /, ''), color: '#14304F', vals: t.w18pct}, {name: 'England', color: '#A8842C', dash: '6 4', vals: E.w18pct}],
+                {title: 'Share of dermatology pathways waiting under 18 weeks', label: 'Share waiting under 18 weeks by month, ' + ic.name + ' against England', zero: false, nullText: NV,
+                 tick: function (v) { return v.toFixed(0) + '%'; }, fmt: function (v) { return v.toFixed(1) + '%'; }, src: src}) +
+        '<p class="ex-src">' + n(t.total[LAST]) + ' patients on the dermatology waiting list in ' + esc(month(RP[LAST])) + ', of whom ' + n(t.w52[LAST]) + ' had waited 52 weeks or more. Deprivation: ' + (ic.imd ? 'IMD score ' + ic.imd.score.toFixed(1) + ', rank ' + ic.imd.rank + ' of ' + C.icbs.length + ' (1 = most deprived), ' + ic.imd.prop10.toFixed(1) + '% of neighbourhoods in the most deprived 10% nationally' : NV) + '.</p>';
+    }
+    draw();
   }
 
   function shTick(v, range) { return v.toFixed(range < 1 ? 2 : (range < 10 ? 1 : 0)) + '%'; }
@@ -1246,7 +1478,7 @@
         fail(MKT, why);
         return;
       }
-      if (FW) { renderFrameworks(d); }
+      if (FW) { renderFrameworks(d); addCalendarAndPins(d); }
       if (SUP) { renderSuppliers(d); }
       if (MKT) { renderMarket(d); }
     })

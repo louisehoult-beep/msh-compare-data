@@ -149,6 +149,7 @@ RUN = [
     "test_gp_prescribing.py",            # 29/09/2026, offline, no workflow of its own
     "test_emollient_explorer.py",        # 22/10/2026, explorer data reconciles to the dermatology panel
     "test_hospital_prescribing_resources.py",
+    "test_icb_pack.py",                  # 22/10/2026, offline (reconciles only if a local cache exists)
     "test_identity_policy.py",
     "test_merge_seed_on_retry.py",
     # 29/09/2026: MHRA Drug Safety Update feed + Drug Tariff Part VIIIA, and
@@ -189,6 +190,9 @@ RUN = [
     "test_whats_new.py",
     "test_my_hub_logic.py",
     "test_my_hub_ui.py",             # 2026-10, My Hub modules wired, copy rules
+    "test_my_hub_panels.py",         # 22/10/2026, pinned speciality panels and calendar export
+    "test_emollient_explorer.py",    # 22/10/2026, dermatology emollient prescribing explorer data
+    "test_derm_icb_context.py",      # 22/10/2026, dermatology ICB context (RTT, IMD, brand share, PCN spread)
     "test_my_hub_state.py",          # 2026-10, PHP snippet and browser client agree (php, node; skipped where absent)
     # Added by 748ae43d (^o635, 15/10/2026) with scripts/crawl_supplier_site.py's
     # tidy_capture() fix, but arrived unregistered and stopped this job dead
