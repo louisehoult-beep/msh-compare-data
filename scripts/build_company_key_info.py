@@ -44,6 +44,8 @@ GENERIC = {'ltd', 'limited', 'plc', 'uk', 'the', 'group', 'healthcare', 'medical
            'pharmaceuticals', 'health', 'international', 'and', 'solutions', 'systems', 'services'}
 NEWS_MAX_AGE = 120      # days a news item stays a headline
 MAX_HEADLINES = 4
+AWARD_MAX_AGE = 365     # days a contract award stays listed
+AWARDS_SHOWN = 3
 MAX_FACTS = 10
 MAX_COMPETITORS = 4
 MAX_COMP_FACTS = 3
@@ -118,6 +120,7 @@ def fact(kind, title, text, url=None, source=None, when=None):
 def build():
     index = load('data/supplier-index.json')['suppliers']
     press = load('data/company-press.json').get('suppliers') or {}
+    awards = load('data/company-awards.json').get('companies') or {}
     news = {}
     for p in glob.glob(os.path.join(ROOT, 'data', 'speciality-news', '*.json')):
         d = json.load(open(p, encoding='utf-8'))
@@ -189,6 +192,15 @@ def build():
                               fw.get('note', ''), fw.get('url'), 'NHS Supply Chain' if fw.get('source') == 'nhssc-brief' else 'Hub supplier record',
                               end.isoformat() if soon else None))
             facts[-1]['_cat'] = fw.get('category')
+        # contract awards (Find a Tender / Contracts Finder), exact-name matches only
+        for a in sorted(awards.get(rec['name']) or [], key=lambda x: x.get('date') or '', reverse=True)[:AWARDS_SHOWN]:
+            d = parse_iso(a.get('date'))
+            if not d or (TODAY - d).days > AWARD_MAX_AGE or not str(a.get('url', '')).startswith('http'):
+                continue
+            val = a.get('valueAmount')
+            facts.append(fact('award', 'Contract awarded: ' + a['title'].strip().rstrip('.'),
+                              'Buyer: ' + a.get('buyer', 'not stated') + '.' + (' Value £' + format(val, ',.0f') + '.' if val else ''),
+                              a['url'], a.get('source'), d.isoformat()))
         # market share, price moves, discontinued lines, formulary positions
         for pid, panel in panels.items():
             for mk in (panel.get('marketShare') or {}).get('markets') or []:
@@ -229,7 +241,7 @@ def build():
         return facts
 
     def rank(f):
-        order = {'news': 0, 'tariff': 1, 'discontinued': 2, 'share': 3, 'framework': 4, 'formulary': 5}
+        order = {'news': 0, 'tariff': 1, 'discontinued': 2, 'award': 3, 'share': 4, 'framework': 5, 'formulary': 6}
         d = parse_iso(f.get('d'))
         return (order.get(f['k'], 9), -(d.toordinal() if d else 0))
 
@@ -303,7 +315,7 @@ def build():
             if of:
                 comp_out.append({'id': oid, 'n': by_id[oid]['name'], 'why': why, 'f': of})
         result[s['id']] = {'id': s['id'], 'n': s['name'], 'specs': s['specs'], 'built': TODAY.isoformat(),
-                           'head': [clean(x) for x in heads], 'f': [clean(x) for x in f[:MAX_FACTS]], 'comp': comp_out}
+                           'head': [clean(x) for x in heads], 'f': [clean(x) for x in (heads + [x for x in f if x not in heads])[:MAX_FACTS]], 'comp': comp_out}
         picker.append({'id': s['id'], 'n': s['name'], 'a': sorted(s['terms'])[:4], 'sp': s['specs'][:2]})
     picker.sort(key=lambda p: p['n'].lower())
     return result, picker

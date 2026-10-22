@@ -126,6 +126,17 @@
   }
 
   /* ---------- regions ---------- */
+  /* Bookmark prompt, shown once per browser after the first sign-in. */
+  var LS_BM = 'msh_my_hub_bookmark_v1';
+  function bmSeen() { try { return !!localStorage.getItem(LS_BM); } catch (e) { return true; } }
+  function bmHtml() {
+    if (bmSeen()) { return ''; }
+    var mac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '');
+    return '<div class="bm" role="note"><p><b>Bookmark My Hub.</b> Press ' + (mac ? 'Cmd' : 'Ctrl') + ' + D now and next time you can come straight back here. '
+      + 'This is the Medical Sales Hub, not the Elevate &amp; Thrive training site, and it has its own login.</p>'
+      + '<button type="button" class="chip-d" data-act="bm-dismiss" data-k="bm-dismiss">Got it</button></div>';
+  }
+
   function helloHtml() {
     var l = labels();
     return '<h1 id="mx-hello-t">' + esc(M.L.greeting(new Date().getHours())) + (M.firstName ? ', ' + esc(M.firstName) : '') + '</h1>'
@@ -133,7 +144,7 @@
       + (l.length ? 'Your page is set to <b>' + esc(M.L.joinNames(l)) + '</b>.' : 'You are seeing the whole Hub. <b>Pick your specialities</b> to narrow it.') + '</p>'
       + '<div class="meta"><button type="button" class="chip-d" data-open="m-spec" data-k="hello-spec">' + M.svg('steth') + 'Change specialities</button>'
       + '<button type="button" class="chip-d" data-open="m-company" data-k="hello-company">' + M.svg('grid') + 'Your company</button>'
-      + '<button type="button" class="chip-d" data-act="tour" data-k="hello-tour">' + M.svg('play') + 'Take the tour</button></div>';
+      + '<button type="button" class="chip-d" data-act="tour" data-k="hello-tour">' + M.svg('play') + 'Take the tour</button></div>' + bmHtml();
   }
 
   function changes(n) { return n + (n === 1 ? ' change' : ' changes'); }
@@ -380,6 +391,7 @@
       }
       if (t.hasAttribute('data-star')) { toggleStory(t); return; }
       var act = t.getAttribute('data-act');
+      if (act === 'bm-dismiss') { try { localStorage.setItem(LS_BM, '1'); } catch (e) {} setHtml('mx-hello', helloHtml()); return; }
       if (act === 'tour') { M.ui.startTour(0); return; }
       if (act === 'library') { library(); return; }
       if (act === 'saved') { goTo('mx-saved'); return; }
