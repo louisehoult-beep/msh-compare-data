@@ -1,37 +1,70 @@
 <div id="ain">
 <style>
-body .wp-site-blocks .wp-block-post-content,body .wp-site-blocks main{padding-top:0!important;padding-bottom:0!important;margin-top:0!important;margin-bottom:0!important;padding-left:0!important;padding-right:0!important}
-body .wp-site-blocks #ain{font-family:Inter,system-ui,Arial,sans-serif;color:#1D2733!important;background:#fff;margin:0;width:100%;line-height:1.6}
+body .wp-site-blocks .wp-block-post-content,body .wp-site-blocks main{padding:0!important;margin:0!important}
+body .wp-site-blocks > header,body .wp-site-blocks > header.wp-block-template-part{display:none!important}
+body .wp-site-blocks #ain{font-family:Inter,system-ui,Arial,sans-serif;color:#F5F1E8!important;background:#0B1C33;margin:0;width:100%;line-height:1.65}
 body .wp-site-blocks #ain *{box-sizing:border-box}
-body .wp-site-blocks #ain .in{max-width:1080px;margin:0 auto;padding:0 40px}
-body .wp-site-blocks #ain .band{padding:64px 0}
-body .wp-site-blocks #ain .navy{background:#0B1C33;color:#F5F1E8!important}
-body .wp-site-blocks #ain .hero{background:linear-gradient(90deg,rgba(11,28,51,.92) 0%,rgba(11,28,51,.82) 45%,rgba(11,28,51,0) 80%),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-medical-sales-professionals.jpg') center/cover no-repeat #0B1C33;padding:96px 0}
-body .wp-site-blocks #ain .hero .txt{max-width:640px}
-body .wp-site-blocks #ain .wine.photo{background:linear-gradient(90deg,rgba(74,21,38,.93) 0%,rgba(74,21,38,.85) 55%,rgba(74,21,38,.25) 100%),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-clinicians.jpg') center/cover no-repeat #4A1526}
+body .wp-site-blocks #ain .in{max-width:1120px;margin:0 auto;padding:0 40px}
+body .wp-site-blocks #ain .band{padding:96px 0;text-align:center}
+body .wp-site-blocks #ain .b-hero{background:linear-gradient(rgba(11,28,51,.80),rgba(11,28,51,.86)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-medical-sales-professionals.jpg') center/cover no-repeat rgb(11,28,51)}
+body .wp-site-blocks #ain .b-who{background:linear-gradient(rgba(74,21,38,.80),rgba(74,21,38,.86)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-clinicians.jpg') center/cover no-repeat rgb(74,21,38)}
+body .wp-site-blocks #ain .b-roles{background:linear-gradient(rgba(11,28,51,.80),rgba(11,28,51,.86)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/10/health-tech-hero.jpg') center/cover no-repeat rgb(11,28,51)}
+body .wp-site-blocks #ain .b-co{background:linear-gradient(rgba(74,21,38,.80),rgba(74,21,38,.86)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/10/antt-conf-ward-nurse.jpg') center/cover no-repeat rgb(74,21,38)}
+body .wp-site-blocks #ain .b-qs{background:linear-gradient(rgba(11,28,51,.80),rgba(11,28,51,.86)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-medical-supplier.jpg') center/cover no-repeat rgb(11,28,51)}
+body .wp-site-blocks #ain .b-links{background:linear-gradient(rgba(74,21,38,.80),rgba(74,21,38,.86)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-procurement.jpg') center/cover no-repeat rgb(74,21,38)}
+body .wp-site-blocks #ain .b-faq{background:linear-gradient(rgba(11,28,51,.80),rgba(11,28,51,.86)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/nbe-mhra-photo-web.jpg') center/cover no-repeat rgb(11,28,51)}
+body .wp-site-blocks #ain .b-ben{background:linear-gradient(rgba(74,21,38,.80),rgba(74,21,38,.86)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-recruitment.jpg') center/cover no-repeat rgb(74,21,38)}
+body .wp-site-blocks #ain .b-com{background:linear-gradient(rgba(11,28,51,.80),rgba(11,28,51,.86)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-clinicians.jpg') center/cover no-repeat rgb(11,28,51)}
+body .wp-site-blocks #ain .b-joinb{background:linear-gradient(rgba(74,21,38,.80),rgba(74,21,38,.86)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-medical-sales-professionals.jpg') center/cover no-repeat rgb(74,21,38)}
+body .wp-site-blocks #ain .b-hero{padding:128px 0 120px;background:linear-gradient(rgba(11,28,51,.72),rgba(11,28,51,.82)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-medical-sales-professionals.jpg') center/cover no-repeat #0B1C33}
+body .wp-site-blocks #ain h1{font-size:58px;line-height:1.08;margin:0 auto 22px;font-weight:800;letter-spacing:-.02em;color:#FFFFFF!important;max-width:900px}
+body .wp-site-blocks #ain h2{font-size:38px;line-height:1.15;margin:0 auto 18px;font-weight:800;color:#FFFFFF!important;max-width:820px}
+body .wp-site-blocks #ain h3{font-size:20px;margin:0 0 8px;font-weight:800;color:#FFFFFF!important}
+body .wp-site-blocks #ain p{margin:0 auto 16px;font-size:18px;color:#F5F1E8!important;max-width:780px}
+body .wp-site-blocks #ain .lede{font-size:21px;max-width:820px}
+body .wp-site-blocks #ain .tag{display:inline-block;font-size:14px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;margin:0 0 16px;color:#E0BE8E!important}
+body .wp-site-blocks #ain .rule{width:64px;height:3px;background:#E0BE8E;margin:0 auto 26px;border:0}
+body .wp-site-blocks #ain .btn{display:inline-block;background:#E0BE8E;color:#0B1C33!important;font-weight:800;font-size:18px;padding:16px 34px;border-radius:8px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;margin:6px}
+body .wp-site-blocks #ain .btn:hover{background:#FFFFFF}
+body .wp-site-blocks #ain .btn.ghost{background:transparent;color:#FFFFFF!important;border:2px solid #E0BE8E}
+body .wp-site-blocks #ain .btn.ghost:hover{background:rgba(224,190,142,.2)}
+body .wp-site-blocks #ain .topbar{background:#0B1C33;padding:14px 0;border-bottom:1px solid rgba(224,190,142,.35)}
+body .wp-site-blocks #ain .topbar .in{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+body .wp-site-blocks #ain .topbar b{font-size:17px;color:#FFFFFF!important}
+body .wp-site-blocks #ain .topbar nav{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+body .wp-site-blocks #ain .topbar nav a{color:#F5F1E8!important;text-decoration:none;font-size:15px;font-weight:600}
+body .wp-site-blocks #ain .topbar nav a:hover{text-decoration:underline}
+body .wp-site-blocks #ain .topbar nav a.btn{color:#0B1C33!important;padding:9px 20px;font-size:15px;margin:0}
+body .wp-site-blocks #ain .grid{display:grid;gap:22px;margin-top:40px;text-align:left}
+body .wp-site-blocks #ain .g3{grid-template-columns:repeat(3,1fr)}
+body .wp-site-blocks #ain .g2{grid-template-columns:repeat(2,1fr)}
+body .wp-site-blocks #ain .glass{background:rgba(11,28,51,.62);border:1px solid rgba(224,190,142,.5);border-top:4px solid #E0BE8E;border-radius:14px;padding:26px;backdrop-filter:blur(4px)}
+body .wp-site-blocks #ain .glass p{font-size:16.5px;margin:0;max-width:none;color:#F5F1E8!important}
+body .wp-site-blocks #ain .glass a.t{display:block;font-weight:800;font-size:18px;color:#FFFFFF!important;text-decoration:none;margin-bottom:6px;border-bottom:1px solid #E0BE8E;padding-bottom:6px}
+body .wp-site-blocks #ain .glass a.t:hover{color:#E0BE8E!important}
+body .wp-site-blocks #ain .glass h3 span{display:block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#E0BE8E!important;margin-bottom:4px}
+body .wp-site-blocks #ain .src{font-size:14.5px!important;margin-top:28px!important}
+body .wp-site-blocks #ain .src a{color:#E0BE8E!important;text-decoration:underline}
+body .wp-site-blocks #ain .grp{font-size:15px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#E0BE8E!important;margin:44px 0 0;text-align:left;border-bottom:1px solid rgba(224,190,142,.4);padding-bottom:10px}
+body .wp-site-blocks #ain .grp+.grid{margin-top:20px}
+body .wp-site-blocks #ain details{background:rgba(11,28,51,.62);border:1px solid rgba(224,190,142,.5);border-radius:12px;padding:18px 22px;margin:0 auto 12px;max-width:860px;text-align:left}
+body .wp-site-blocks #ain summary{font-weight:800;font-size:18px;color:#FFFFFF!important;cursor:pointer}
+body .wp-site-blocks #ain details p{margin:12px 0 0;font-size:16.5px;max-width:none}
+body .wp-site-blocks #ain details a{color:#E0BE8E!important;text-decoration:underline}
+body .wp-site-blocks #ain .twocol{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;text-align:left}
+body .wp-site-blocks #ain .twocol p,body .wp-site-blocks #ain .twocol h2{margin-left:0;max-width:none}
+body .wp-site-blocks #ain .cbox{background:#fff;border-radius:16px;padding:30px;text-align:center}
+body .wp-site-blocks #ain .cbox h3{color:#0B1C33!important;font-size:24px}
+body .wp-site-blocks #ain .cbox p{color:#1D2733!important;font-size:16.5px}
+body .wp-site-blocks #ain .cbox .btn{background:#0B1C33;color:#FFFFFF!important}
+body .wp-site-blocks #ain .formwrap{text-align:left}
 body .wp-site-blocks #ain .free{display:inline-block;background:#E0BE8E;color:#0B1C33!important;font-weight:800;font-size:14px;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin:0 0 16px}
-body .wp-site-blocks #ain .panel{max-width:640px}
-body .wp-site-blocks #ain .panel p{color:#F5F1E8!important}
 body .wp-site-blocks #ain textarea{width:100%;padding:12px 13px;font-size:16px;border:1px solid #8793A3;border-radius:8px;background:#fff;color:#1D2733!important;font-family:inherit;min-height:90px}
 body .wp-site-blocks #ain textarea:focus{outline:3px solid #E0BE8E;outline-offset:1px}
 body .wp-site-blocks #ain .sub{border-top:1px solid #D9D3C5;margin:22px 0 6px;padding-top:18px}
 body .wp-site-blocks #ain .sub h3{color:#0B1C33!important;font-size:17px}
-body .wp-site-blocks #ain .wine{background:#4A1526;color:#F5F1E8!important}
-body .wp-site-blocks #ain .light{background:#fff;color:#1D2733!important}
-body .wp-site-blocks #ain .tag{display:inline-block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;margin:0 0 14px;color:#E0BE8E!important}
-body .wp-site-blocks #ain .light .tag{color:#0B1C33!important}
-body .wp-site-blocks #ain h1{font-size:42px;line-height:1.12;margin:0 0 16px;font-weight:800;letter-spacing:-.02em;color:#FFFFFF!important}
-body .wp-site-blocks #ain h2{font-size:29px;line-height:1.2;margin:0 0 12px;font-weight:800;color:#FFFFFF!important}
-body .wp-site-blocks #ain .light h2,body .wp-site-blocks #ain .light h3{color:#0B1C33!important}
-body .wp-site-blocks #ain h3{font-size:19px;margin:0 0 6px;font-weight:800;color:#FFFFFF!important}
-body .wp-site-blocks #ain p{margin:0 0 14px;font-size:17px}
-body .wp-site-blocks #ain .lede{font-size:19px;color:#F5F1E8!important;max-width:760px}
 body .wp-site-blocks #ain .btn{display:inline-block;background:#E0BE8E;color:#0B1C33!important;font-weight:800;font-size:17px;padding:14px 28px;border-radius:8px;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
 body .wp-site-blocks #ain .btn:hover{background:#F5F1E8}
-body .wp-site-blocks #ain .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
-body .wp-site-blocks #ain .card{background:#fff;border:1px solid #D9D3C5;border-top:4px solid #A8842C;border-radius:12px;padding:20px}
-body .wp-site-blocks #ain .card h3{color:#0B1C33!important}
-body .wp-site-blocks #ain .card p{font-size:15.5px;color:#1D2733!important;margin:0}
 body .wp-site-blocks #ain .formwrap{background:#fff;color:#1D2733!important;border-radius:16px;padding:32px;max-width:760px;margin:0 auto;box-shadow:0 8px 30px rgba(0,0,0,.25)}
 body .wp-site-blocks #ain .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 body .wp-site-blocks #ain .fld{margin:0 0 16px}
@@ -47,124 +80,106 @@ body .wp-site-blocks #ain .hp{position:absolute;left:-9999px;height:0;overflow:h
 body .wp-site-blocks #ain .ok,body .wp-site-blocks #ain .err{display:none;padding:16px;border-radius:8px;font-size:16px;margin-top:16px}
 body .wp-site-blocks #ain .ok{background:#E8F3EA;color:#143D1F!important;border:1px solid #2E7D45}
 body .wp-site-blocks #ain .err{background:#FBEAEA;color:#6B1111!important;border:1px solid #B3261E}
-body .wp-site-blocks #ain .joinphoto{background:linear-gradient(90deg,rgba(74,21,38,.94) 0%,rgba(74,21,38,.86) 60%,rgba(74,21,38,.55) 100%),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-medical-sales-professionals.jpg') right center/cover no-repeat #4A1526}
-body .wp-site-blocks #ain .q{background:#fff;border:1px solid #D9D3C5;border-left:5px solid #A8842C;border-radius:12px;padding:20px 22px}
-body .wp-site-blocks #ain .q p{font-size:17px;font-weight:700;color:#0B1C33!important;margin:0 0 6px}
-body .wp-site-blocks #ain .q span{font-size:14.5px;color:#3F5068!important;display:block}
-body .wp-site-blocks #ain .g2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:24px}
-body .wp-site-blocks #ain .src{font-size:13.5px!important;color:#3F5068!important;margin-top:18px!important}
-body .wp-site-blocks #ain .src a{color:#0B1C33!important;text-decoration:underline}
-body .wp-site-blocks #ain .links{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-body .wp-site-blocks #ain .links li{background:#fff;border:1px solid #D9D3C5;border-left:5px solid #A8842C;border-radius:12px;padding:16px 20px;font-size:15.5px;color:#1D2733!important}
-body .wp-site-blocks #ain .links a{display:block;font-weight:800;font-size:17px;color:#0B1C33!important;text-decoration:underline;margin-bottom:3px}
-body .wp-site-blocks #ain details{background:#fff;border:1px solid #D9D3C5;border-radius:12px;padding:16px 20px;margin:0 0 12px}
-body .wp-site-blocks #ain summary{font-weight:800;font-size:17px;color:#0B1C33!important;cursor:pointer}
-body .wp-site-blocks #ain details p{margin:10px 0 0;font-size:16px;color:#1D2733!important}
-body .wp-site-blocks #ain details a{color:#0B1C33!important;text-decoration:underline}
-body .wp-site-blocks #ain .midcta{margin-top:28px}
 @media(max-width:800px){body .wp-site-blocks #ain .bgroles{background:linear-gradient(rgba(11,28,51,.9),rgba(11,28,51,.9)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/10/health-tech-hero.jpg') center/cover no-repeat rgb(11,28,51)}body .wp-site-blocks #ain .bgco{background:linear-gradient(rgba(74,21,38,.9),rgba(74,21,38,.9)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/10/antt-conf-ward-nurse.jpg') center/cover no-repeat rgb(74,21,38)}body .wp-site-blocks #ain .bgq{background:linear-gradient(rgba(11,28,51,.9),rgba(11,28,51,.9)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-medical-supplier.jpg') center/cover no-repeat rgb(11,28,51)}body .wp-site-blocks #ain .bgfaq{background:linear-gradient(rgba(74,21,38,.9),rgba(74,21,38,.9)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-procurement.jpg') center/cover no-repeat rgb(74,21,38)}body .wp-site-blocks #ain .bgcom{background:linear-gradient(rgba(11,28,51,.9),rgba(11,28,51,.9)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-clinicians.jpg') center/cover no-repeat rgb(11,28,51)}body .wp-site-blocks #ain .twocol{grid-template-columns:1fr}body .wp-site-blocks #ain .hero{background:linear-gradient(rgba(11,28,51,.85),rgba(11,28,51,.85)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-medical-sales-professionals.jpg') center/cover no-repeat #0B1C33;padding:64px 0}body .wp-site-blocks #ain .wine.photo{background:linear-gradient(rgba(74,21,38,.9),rgba(74,21,38,.9)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-clinicians.jpg') center/cover no-repeat #4A1526}body .wp-site-blocks #ain .joinphoto{background:linear-gradient(rgba(74,21,38,.9),rgba(74,21,38,.9)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-medical-sales-professionals.jpg') center/cover no-repeat #4A1526}body .wp-site-blocks #ain .links{grid-template-columns:1fr}body .wp-site-blocks #ain .g3,body .wp-site-blocks #ain .g2,body .wp-site-blocks #ain .row{grid-template-columns:1fr}body .wp-site-blocks #ain h1{font-size:32px}body .wp-site-blocks #ain .in{padding:0 20px}body .wp-site-blocks #ain .formwrap{padding:22px}}
-body .wp-site-blocks #ain .bgroles{background:linear-gradient(90deg,rgba(11,28,51,.93) 0%,rgba(11,28,51,.84) 55%,rgba(11,28,51,.45) 100%),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/10/health-tech-hero.jpg') center/cover no-repeat rgb(11,28,51)}
-body .wp-site-blocks #ain .bgco{background:linear-gradient(90deg,rgba(74,21,38,.93) 0%,rgba(74,21,38,.84) 55%,rgba(74,21,38,.45) 100%),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/10/antt-conf-ward-nurse.jpg') center/cover no-repeat rgb(74,21,38)}
-body .wp-site-blocks #ain .bgq{background:linear-gradient(90deg,rgba(11,28,51,.93) 0%,rgba(11,28,51,.84) 55%,rgba(11,28,51,.45) 100%),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-medical-supplier.jpg') center/cover no-repeat rgb(11,28,51)}
-body .wp-site-blocks #ain .bgfaq{background:linear-gradient(90deg,rgba(74,21,38,.93) 0%,rgba(74,21,38,.84) 55%,rgba(74,21,38,.45) 100%),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-procurement.jpg') center/cover no-repeat rgb(74,21,38)}
-body .wp-site-blocks #ain .bgcom{background:linear-gradient(90deg,rgba(11,28,51,.93) 0%,rgba(11,28,51,.84) 55%,rgba(11,28,51,.45) 100%),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-clinicians.jpg') right center/cover no-repeat rgb(11,28,51)}
-body .wp-site-blocks > header.wp-block-template-part,body .wp-site-blocks > header{display:none!important}
-body .wp-site-blocks #ain .topbar{background:#0B1C33;color:#F5F1E8!important;padding:14px 0}
-body .wp-site-blocks #ain .topbar .in{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-body .wp-site-blocks #ain .topbar b{font-size:17px;color:#FFFFFF!important;letter-spacing:.01em}
-body .wp-site-blocks #ain .topbar nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-body .wp-site-blocks #ain .topbar nav a{color:#F5F1E8!important;text-decoration:underline;font-size:15px;font-weight:600}
-body .wp-site-blocks #ain .topbar nav a.btn{color:#0B1C33!important;text-decoration:none;padding:8px 18px;font-size:15px}
-body .wp-site-blocks #ain .dark .src,body .wp-site-blocks #ain .dark .src a{color:#F5F1E8!important}
-body .wp-site-blocks #ain .dark .tag{color:#E0BE8E!important}
-body .wp-site-blocks #ain .twocol{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:start}
-body .wp-site-blocks #ain .cbox{background:#fff;border-radius:16px;padding:26px;color:#1D2733!important}
-body .wp-site-blocks #ain .cbox h3{color:#0B1C33!important}
-body .wp-site-blocks #ain .cbox p,body .wp-site-blocks #ain .cbox li{color:#1D2733!important;font-size:16px}
-body .wp-site-blocks #ain .cbox ul{margin:0 0 14px;padding-left:20px}
-body .wp-site-blocks #ain .cbox .btn{background:#0B1C33;color:#FFFFFF!important}
-body .wp-site-blocks #ain .dark .in>p,body .wp-site-blocks #ain .dark .twocol>div:not(.cbox)>p{color:#F5F1E8!important}
+body .wp-site-blocks #ain .formwrap p{max-width:none}
+body .wp-site-blocks #ain .formwrap .priv{color:#3F5068!important;font-size:13.5px}
+body .wp-site-blocks #ain .formwrap .priv a{color:#0B1C33!important}
+@media(max-width:800px){body .wp-site-blocks #ain .band{padding:64px 0}body .wp-site-blocks #ain .b-hero{padding:80px 0}body .wp-site-blocks #ain h1{font-size:34px}body .wp-site-blocks #ain h2{font-size:28px}body .wp-site-blocks #ain .in{padding:0 20px}body .wp-site-blocks #ain .g3,body .wp-site-blocks #ain .g2,body .wp-site-blocks #ain .row,body .wp-site-blocks #ain .twocol{grid-template-columns:1fr}body .wp-site-blocks #ain .formwrap{padding:22px}body .wp-site-blocks #ain .topbar .in{justify-content:center;text-align:center}}
 </style>
 
-<div class="topbar"><div class="in"><b>Association for Industry Professional Nurses</b><nav><a href="#committee">Join the committee</a><a href="https://medsalesintelligencehub.co.uk/join-the-hub/">Medical Sales Hub</a><a class="btn" href="#join">Join for free</a></nav></div></div>
+<div class="topbar"><div class="in"><b>Association for Industry Professional Nurses</b><nav><a href="#who">About</a><a href="#links">Useful links</a><a href="#committee">Join the committee</a><a href="https://medsalesintelligencehub.co.uk/join-the-hub/">Medical Sales Hub</a><a class="btn" href="#join">Join for free</a></nav></div></div>
 
-<div class="band hero"><div class="in"><div class="txt">
+<div class="band b-hero"><div class="in">
 <span class="free">Join for free today</span><br>
-<span class="tag">A new association for nurses in industry</span>
+<span class="tag" style="margin-top:18px">A new association for nurses in industry</span>
 <h1>Association for Industry Professional Nurses</h1>
+<hr class="rule">
 <p class="lede">Are you a nurse working for a medical device, pharmaceutical, diagnostics or digital health company, as a clinical advisor, product manager, product specialist, trainer or in a similar role? This is a brand new association, and it is being shaped by the people who will belong to it. Be part of something new and exciting in shaping the way we work.</p>
-<h2 style="font-size:24px;margin:18px 0 14px">Join for free today and be part of something great</h2>
-<p style="margin-top:6px"><a class="btn" href="#join">Join for free</a></p>
-</div></div></div>
+<p style="margin-top:28px"><a class="btn" href="#join">Join for free</a><a class="btn ghost" href="#committee">Sit on the committee</a></p>
+</div></div>
 
-<div class="band light"><div class="in">
+<div class="band b-who" id="who"><div class="in">
 <span class="tag">Who it is for</span>
 <h2>Nurses who work in industry, and the companies that employ them</h2>
+<hr class="rule">
 <p>Nurses in industry sit between the clinic and the company. The work is different from ward or community nursing, and the profession has not always had a place of its own for it. This association is intended to be that place.</p>
-<div class="g3">
-<div class="card"><h3>Clinical advisors and specialists</h3><p>Nurses who support products and services in clinical settings and advise on how they are used.</p></div>
-<div class="card"><h3>Product and training roles</h3><p>Product managers, product specialists and trainers who bring clinical practice into how products are built, explained and taught.</p></div>
-<div class="card"><h3>Employers</h3><p>Companies that employ nurses can register too, and tell us how many nurses they employ, so the association reflects the whole sector.</p></div>
-</div>
-</div></div>
+<div class="grid g3">
+<div class="glass"><h3>Clinical advisors and specialists</h3><p>Nurses who support products and services in clinical settings and advise on how they are used.</p></div>
+<div class="glass"><h3>Product and training roles</h3><p>Product managers, product specialists and trainers who bring clinical practice into how products are built, explained and taught.</p></div>
+<div class="glass"><h3>Employers</h3><p>Companies that employ nurses can register too, and tell us how many nurses they employ, so the association reflects the whole sector.</p></div>
+</div></div></div>
 
-<div class="band navy bgroles dark"><div class="in">
+<div class="band b-roles"><div class="in">
 <span class="tag">The roles</span>
 <h2>What nurses do in industry</h2>
+<hr class="rule">
 <p>Job titles vary from company to company, and the same job can carry different names. These are the kinds of role this association is for.</p>
-<div class="g3">
-<div class="card"><h3>Clinical advisor or clinical specialist</h3><p>Supports customers and clinical teams in using a product safely and well, often at the bedside, in clinic or in training sessions.</p></div>
-<div class="card"><h3>Product specialist</h3><p>Demonstrates a product to clinicians and helps them judge how it fits their patients and their pathway.</p></div>
-<div class="card"><h3>Product manager</h3><p>Brings clinical practice into how a product is specified, improved and positioned.</p></div>
-<div class="card"><h3>Trainer or educator</h3><p>Designs and delivers training so that staff can use products and services confidently.</p></div>
-<div class="card"><h3>Clinical safety, quality and regulatory</h3><p>Helps a company meet the safety and quality standards that apply to what it sells into the NHS.</p></div>
-<div class="card"><h3>Sales and account roles</h3><p>Nurses who use their clinical background to work with NHS and care customers.</p></div>
+<div class="grid g3">
+<div class="glass"><h3>Clinical advisor or clinical specialist</h3><p>Supports customers and clinical teams in using a product safely and well, often at the bedside, in clinic or in training sessions.</p></div>
+<div class="glass"><h3>Product specialist</h3><p>Demonstrates a product to clinicians and helps them judge how it fits their patients and their pathway.</p></div>
+<div class="glass"><h3>Product manager</h3><p>Brings clinical practice into how a product is specified, improved and positioned.</p></div>
+<div class="glass"><h3>Trainer or educator</h3><p>Designs and delivers training so that staff can use products and services confidently.</p></div>
+<div class="glass"><h3>Clinical safety, quality and regulatory</h3><p>Helps a company meet the safety and quality standards that apply to what it sells into the NHS.</p></div>
+<div class="glass"><h3>Sales and account roles</h3><p>Nurses who use their clinical background to work with NHS and care customers.</p></div>
 </div>
-<p class="midcta"><a class="btn" href="#join">Join for free</a></p>
+<p style="margin-top:36px"><a class="btn" href="#join">Join for free</a></p>
 </div></div>
 
-<div class="band wine bgco dark"><div class="in">
+<div class="band b-co"><div class="in">
 <span class="tag">The companies</span>
 <h2>Who employs nurses in industry</h2>
+<hr class="rule">
 <p>Nurses work for companies of every size that supply the NHS and the wider care sector, from small specialist suppliers to large multinationals. Typical sectors include medical devices, wound care, diagnostics, digital health, and pharmaceutical and clinical services. If your employer is not on that list, you are still welcome.</p>
 <p>Companies can register as employers and tell us how many nurses they employ. That gives the association a true picture of the sector, and it is how we will learn where nurses in industry are, and what they need.</p>
 </div></div>
 
-<div class="band navy bgq dark"><div class="in">
+<div class="band b-qs"><div class="in">
 <span class="tag">Your questions</span>
 <h2>The questions we want to ask you</h2>
+<hr class="rule">
 <p>We would rather ask than assume. Join, and we will ask these when we write to you. Your answers will help decide what the association does first.</p>
-<div class="g2">
-<div class="q"><p>Do you find it hard to get your revalidation hours?</p><span>The Nursing and Midwifery Council (NMC) asks nurses for 450 practice hours and 35 hours of continuing professional development (CPD), at least 20 of them participatory, in each three-year cycle. The NMC's page says hours count when you rely on your skills, knowledge and experience as a registered nurse, but it does not say whether industry roles count, so many nurses are left to work it out for themselves.</span></div>
-<div class="q"><p>Does your employer understand what your registration asks of you?</p><span>Keeping your registration current is your responsibility. Is it clear who supports you in that?</span></div>
-<div class="q"><p>Who do you turn to for peer support?</p><span>Is there anyone else doing your kind of job that you can talk to?</span></div>
-<div class="q"><p>What would you like to learn, and from whom?</p><span>Which topics and speakers would make the biggest difference to your work?</span></div>
-<div class="q"><p>Is there an article or paper you would like to read or write?</p><span>Members can offer one for the association to share.</span></div>
-<div class="q"><p>What would make this association worth your time?</p><span>Tell us in your own words.</span></div>
+<div class="grid g2">
+<div class="glass"><h3>Do you find it hard to get your revalidation hours?</h3><p>The Nursing and Midwifery Council (NMC) asks nurses for 450 practice hours and 35 hours of continuing professional development (CPD), at least 20 of them participatory, in each three-year cycle. The NMC’s page says hours count when you rely on your skills, knowledge and experience as a registered nurse, but it does not say whether industry roles count, so many nurses are left to work it out for themselves.</p></div>
+<div class="glass"><h3>Does your employer understand what your registration asks of you?</h3><p>Keeping your registration current is your responsibility. Is it clear who supports you in that?</p></div>
+<div class="glass"><h3>Who do you turn to for peer support?</h3><p>Is there anyone else doing your kind of job that you can talk to?</p></div>
+<div class="glass"><h3>What would you like to learn, and from whom?</h3><p>Which topics and speakers would make the biggest difference to your work?</p></div>
+<div class="glass"><h3>Is there an article or paper you would like to read or write?</h3><p>Members can offer one for the association to share.</p></div>
+<div class="glass"><h3>What would make this association worth your time?</h3><p>Tell us in your own words.</p></div>
 </div>
 <p class="src">Source: <a href="https://www.nmc.org.uk/revalidation/requirements/practice-hours/">NMC practice hours</a> and <a href="https://www.nmc.org.uk/revalidation/requirements/cpd/">NMC continuing professional development</a>, read 23 October 2026. Check the NMC about your own role.</p>
 </div></div>
 
-<div class="band light"><div class="in">
+<div class="band b-links" id="links"><div class="in">
 <span class="tag">Useful links</span>
 <h2>Where to look for answers</h2>
-<p>Official sources for keeping your registration current, wherever you work. Links open the organisation's own pages.</p>
-<ul class="links">
-<li><a href="https://www.nmc.org.uk/revalidation/requirements/">NMC: what you need to do to revalidate</a>The full list of revalidation requirements from the Nursing and Midwifery Council (NMC).</li>
-<li><a href="https://www.nmc.org.uk/revalidation/requirements/practice-hours/">NMC: practice hours</a>How many hours you need and what counts.</li>
-<li><a href="https://www.nmc.org.uk/revalidation/requirements/cpd/">NMC: continuing professional development</a>The 35 hours, including 20 participatory.</li>
-<li><a href="https://www.nmc.org.uk/revalidation/requirements/confirmation/">NMC: confirmation</a>Who can confirm your revalidation.</li>
-<li><a href="https://www.nmc.org.uk/standards/code/">The NMC Code</a>The professional standards that apply to your registration in any role.</li>
-<li><a href="https://www.rcn.org.uk/professional-development/revalidation">Royal College of Nursing (RCN): revalidation</a>Guidance and support from the RCN.</li>
-<li><a href="https://www.rcn.org.uk/Professional-Development/Revalidation/Practice-hours">RCN: practice hours</a>Includes how non-clinical work can count.</li>
-<li><a href="https://www.abhi.org.uk/">Association of British HealthTech Industries (ABHI)</a>The trade body for the UK medical technology industry, for nurses and employers.</li>
-<li><a href="https://medsalesintelligencehub.co.uk/join-the-hub/">The Medical Sales Hub</a>Live UK market intelligence for people working with the NHS. Free when you join the association.</li>
-</ul>
+<hr class="rule">
+<p>Official and professional sources for keeping your registration current and your practice strong, wherever you work. Links open each organisation’s own pages. They are for your information; none of these organisations runs or endorses this association.</p>
+<div class="grp">Regulation and standards</div>
+<div class="grid g3">
+<div class="glass"><h3><span>Nursing and Midwifery Council (NMC)</span></h3><a class="t" href="https://www.nmc.org.uk/revalidation/requirements/">What you need to do to revalidate</a><p>The full list of revalidation requirements.</p></div>
+<div class="glass"><h3><span>NMC</span></h3><a class="t" href="https://www.nmc.org.uk/revalidation/requirements/practice-hours/">Practice hours and CPD</a><p>How many hours you need, what counts, and the 35 hours of CPD including 20 participatory.</p></div>
+<div class="glass"><h3><span>NMC</span></h3><a class="t" href="https://www.nmc.org.uk/standards/code/">The NMC Code</a><p>The professional standards that apply to your registration in any role.</p></div>
+</div>
+<div class="grp">Professional bodies and charities</div>
+<div class="grid g3">
+<div class="glass"><h3><span>Royal College of Nursing (RCN)</span></h3><a class="t" href="https://www.rcn.org.uk/professional-development/revalidation">Revalidation guidance</a><p>Guidance and support for revalidation.</p></div>
+<div class="glass"><h3><span>RCN</span></h3><a class="t" href="https://www.rcn.org.uk/Professional-Development/Revalidation/Practice-hours">Practice hours</a><p>Includes how non-clinical work can count.</p></div>
+<div class="glass"><h3><span>RCNi</span></h3><a class="t" href="https://rcni.com/">RCNi</a><p>Information and inspiration for nurses, from the RCN’s publishing arm.</p></div>
+<div class="glass"><h3><span>QICN</span></h3><a class="t" href="https://qicn.org.uk/">Queen’s Institute of Community Nursing</a><p>The charity for community nurses in England, formerly the Queen’s Nursing Institute.</p></div>
+<div class="glass"><h3><span>FoNS</span></h3><a class="t" href="https://www.fons.org/">Foundation of Nursing Studies</a><p>A charity supporting nurses to develop practice and improve care.</p></div>
+</div>
+<div class="grp">Industry bodies</div>
+<div class="grid g3">
+<div class="glass"><h3><span>ABHI</span></h3><a class="t" href="https://www.abhi.org.uk/">Association of British HealthTech Industries</a><p>The trade body for the UK medical technology industry.</p></div>
+<div class="glass"><h3><span>ABPI</span></h3><a class="t" href="https://www.abpi.org.uk/">Association of the British Pharmaceutical Industry</a><p>The trade body for the UK pharmaceutical industry.</p></div>
+<div class="glass"><h3><span>Medical Sales Hub</span></h3><a class="t" href="https://medsalesintelligencehub.co.uk/join-the-hub/">The Medical Sales Hub</a><p>Live UK market intelligence for people working with the NHS. Free when you join the association.</p></div>
+</div>
 </div></div>
 
-<div class="band wine bgfaq dark"><div class="in">
+<div class="band b-faq"><div class="in">
 <span class="tag">Questions people ask</span>
 <h2>Before you join</h2>
+<hr class="rule">
 <details><summary>Is this for occupational health nurses?</summary><p>No. Occupational health nurses look after the health of a workforce, and they have their own professional groups. This association is for nurses employed by companies that supply health and care, such as medical device, pharmaceutical, diagnostics and digital health companies.</p></details>
 <details><summary>Who can join?</summary><p>Nurses working in industry, and companies that employ them. The form asks for your professional registration, including midwives and nursing associates. If yours is not listed, choose Other.</p></details>
 <details><summary>Does it cost anything?</summary><p>No. Joining is free, and so is the Medical Sales Hub access that comes with it.</p></details>
@@ -175,15 +190,16 @@ body .wp-site-blocks #ain .dark .in>p,body .wp-site-blocks #ain .dark .twocol>di
 <details><summary>What happens to my details?</summary><p>Your answers are used to run the association and keep you informed. You can unsubscribe from our emails at any time. The <a href="https://medsalesintelligencehub.co.uk/privacy-policy/">privacy policy</a> explains how we handle your data.</p></details>
 </div></div>
 
-<div class="band wine photo"><div class="in"><div class="panel">
+<div class="band b-ben"><div class="in">
 <span class="tag">Member benefits</span>
 <h2>Free access to the Medical Sales Hub</h2>
-<p>Free access to the Medical Sales Hub, the live UK market intelligence service for people working with the NHS, is included when you join. Confirm your email address and we will send you a personal link by email to set up your Hub account, at no cost.</p>
-<h3 style="margin-top:22px">Write a paper or an article</h3>
-<p>Have something to say about how nurses work in industry? Members can offer a paper or an article to be shared with the association. Tick the box on the form and tell us your topic.</p>
+<hr class="rule">
+<div class="grid g2">
+<div class="glass"><h3>Free Hub access</h3><p>Free access to the Medical Sales Hub, the live UK market intelligence service for people working with the NHS, is included when you join. Confirm your email address and we will send you a personal link by email to set up your Hub account, at no cost.</p></div>
+<div class="glass"><h3>Write a paper or an article</h3><p>Have something to say about how nurses work in industry? Members can offer a paper or an article to be shared with the association. Tick the box on the form and tell us your topic.</p></div>
 </div></div></div>
 
-<div class="band navy bgcom dark" id="committee"><div class="in"><div class="twocol">
+<div class="band b-com" id="committee"><div class="in"><div class="twocol">
 <div>
 <span class="tag">Help run it</span>
 <h2>Sit on the AIPN committee</h2>
@@ -195,10 +211,11 @@ body .wp-site-blocks #ain .dark .in>p,body .wp-site-blocks #ain .dark .twocol>di
 <p><a class="btn" href="#join">Register my interest</a></p></div>
 </div></div></div>
 
-<div class="band wine joinphoto" id="join"><div class="in">
+<div class="band b-joinb" id="join"><div class="in">
 <span class="tag">Join for free</span>
 <h2>Help shape the way we work</h2>
-<p class="lede" style="margin-bottom:28px">Joining is free. Tell us a little about you and your role. We will ask you to confirm your email address, then email you a link to set up your free Medical Sales Hub access, and keep you updated as the association takes shape.</p>
+<hr class="rule">
+<p class="lede" style="margin-bottom:36px">Joining is free. Tell us a little about you and your role. We will ask you to confirm your email address, then email you a link to set up your free Medical Sales Hub access, and keep you updated as the association takes shape.</p>
 
 <div class="formwrap">
 <form id="ain-form" novalidate>
