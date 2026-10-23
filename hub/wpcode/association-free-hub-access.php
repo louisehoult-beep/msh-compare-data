@@ -13,14 +13,21 @@
 
    HOW IT WORKS (same mechanism as the NHS clinician and care worker routes:
    Process flows for all brands/nhs-clinician-free-access.md "Why no new plan")
-   1. A nurse joins on the association landing page. MailerLite double opt-in
-      asks them to confirm their address.
-   2. MailerLite calls the webhook below (REST, secret key in the URL).
-      Only a subscriber who is ACTIVE (confirmed) and who came through the
-      association form gets anything.
-   3. WordPress emails them a signed link (HMAC of their address plus an
-      expiry, 14 days) to the free sign-up page (shortcode
-      [msh_assoc_register]).
+   1. A nurse joins on the association landing page. The form posts to
+      /wp-json/msh-assoc/v1/join (section 0 below), which adds them to the
+      MailerLite group as UNCONFIRMED through the API key the MailerLite
+      WooCommerce plugin already holds. (Changed 23/10/2026: MailerLite's own
+      embedded form, posted to directly, answered "success" and created no
+      subscriber at all, so the form is no longer used.)
+   2. WordPress emails them ONE message with a signed link (HMAC of their
+      address plus an expiry, 14 days). Opening the link is the double
+      opt-in: it marks them ACTIVE in MailerLite and opens the free sign-up
+      page (shortcode [msh_assoc_register]). An address that already has a
+      Hub account is sent to the login page instead.
+   3. The webhook below (REST, secret key in the URL) stays as a second route
+      for a subscriber made active in MailerLite some other way. Only an
+      ACTIVE subscriber in the association group gets anything, and never
+      twice for one join.
    4. On that page the link sets a cookie and redirects to the bare URL. While
       the cookie is valid, plan 690 (Hub Member, Annual, the plan every Hub
       page already ticks) costs 0 for that request, but ONLY when the form
@@ -112,6 +119,166 @@ function msh_assoc_cookie() {
 		$c = array( 'email' => $email, 'exp' => (int) $parts[1], 'sig' => $parts[2] );
 	}
 	return $c;
+}
+
+/* ---------- 0. Join: landing form -> MailerLite (unconfirmed) -> one email ---------- */
+
+/** One MailerLite API call with the key the WooCommerce plugin holds. array( code, body ). */
+function msh_assoc_ml( $method, $path, $payload = null ) {
+	$key = defined( 'MSH_ML_API_KEY' ) && MSH_ML_API_KEY ? MSH_ML_API_KEY : '';
+	if ( ! $key ) {
+		$o   = get_option( 'woo_mailerlite_options', array() );
+		$key = ( is_array( $o ) && ! empty( $o['apiKey'] ) ) ? $o['apiKey'] : '';
+	}
+	if ( ! $key ) {
+		return array( 0, array( 'error' => 'no MailerLite key on this site' ) );
+	}
+	$args = array(
+		'method'  => $method,
+		'timeout' => 20,
+		'headers' => array( 'Authorization' => 'Bearer ' . $key, 'Content-Type' => 'application/json', 'Accept' => 'application/json' ),
+	);
+	if ( null !== $payload ) {
+		$args['body'] = wp_json_encode( $payload );
+	}
+	$r = wp_remote_request( 'https://connect.mailerlite.com/api' . $path, $args );
+	if ( is_wp_error( $r ) ) {
+		return array( 0, array( 'error' => $r->get_error_message() ) );
+	}
+	$body = json_decode( wp_remote_retrieve_body( $r ), true );
+	return array( (int) wp_remote_retrieve_response_code( $r ), is_array( $body ) ? $body : array() );
+}
+
+function msh_assoc_log( $msg ) {
+	$log   = get_option( 'msh_assoc_join_log', array() );
+	$log   = is_array( $log ) ? $log : array();
+	$log[] = gmdate( 'c' ) . ' ' . $msg;
+	update_option( 'msh_assoc_join_log', array_slice( $log, -40 ), false );
+}
+
+/** The join email: one link that confirms the address and opens the sign-up. */
+function msh_assoc_send_link( $email ) {
+	set_transient( 'msh_assoc_sent_' . md5( $email ), 1, MSH_ASSOC_LINK_DAYS * DAY_IN_SECONDS ); // the webhook must not send a second one
+	if ( get_user_by( 'email', $email ) ) {
+		return msh_assoc_mail( $email, 'Confirm your Association for Industry Professional Nurses membership', array(
+			'Thank you for joining the Association for Industry Professional Nurses.',
+			'',
+			'Please confirm your email address by opening this link:',
+			'',
+			msh_assoc_make_link( $email ),
+			'',
+			'You already have an account on the Medical Sales Intelligence Hub with this email address, so the link takes you to the sign-in page and there is nothing more to set up.',
+			'',
+			'If you did not ask to join, ignore this email and nothing will happen.',
+			'',
+			'Elevate and Thrive Ltd',
+		) );
+	}
+	return msh_assoc_mail( $email, 'Confirm your email and set up your free Medical Sales Hub access', array(
+		'Thank you for joining the Association for Industry Professional Nurses.',
+		'',
+		'Open this link to confirm your email address and set up your free Medical Sales Hub account:',
+		'',
+		msh_assoc_make_link( $email ),
+		'',
+		'The link is for you only and works once. Please register with this same email address.',
+		'If the link will not open, reply to this email and we will help.',
+		'',
+		'If you did not ask to join, ignore this email and nothing will happen.',
+		'',
+		'Elevate and Thrive Ltd',
+	) );
+}
+
+add_action( 'rest_api_init', function () {
+	register_rest_route( 'msh-assoc/v1', '/join', array(
+		'methods'             => 'POST',
+		'permission_callback' => '__return_true',
+		'callback'            => 'msh_assoc_join',
+	) );
+} );
+
+function msh_assoc_join( WP_REST_Request $req ) {
+
+	$p = $req->get_params();
+	$f = isset( $p['fields'] ) && is_array( $p['fields'] ) ? $p['fields'] : array();
+
+	if ( ! empty( $p['website_url'] ) ) {
+		return new WP_REST_Response( array( 'ok' => true ), 200 ); // honeypot: look successful, do nothing
+	}
+
+	$email = isset( $f['email'] ) ? strtolower( sanitize_email( $f['email'] ) ) : '';
+	if ( ! is_email( $email ) ) {
+		return new WP_REST_Response( array( 'ok' => false, 'error' => 'email' ), 400 );
+	}
+	foreach ( array( 'name', 'last_name', 'company', 'job_title', 'registration_type', 'nurses_employed' ) as $k ) {
+		if ( empty( $f[ $k ] ) || '' === trim( (string) $f[ $k ] ) ) {
+			return new WP_REST_Response( array( 'ok' => false, 'error' => $k ), 400 );
+		}
+	}
+
+	// At most 3 joins per address and 20 per IP address per day.
+	$ip  = isset( $_SERVER['REMOTE_ADDR'] ) ? (string) $_SERVER['REMOTE_ADDR'] : '';
+	$k_e = 'msh_assoc_rl_' . md5( $email );
+	$k_i = 'msh_assoc_rli_' . md5( $ip );
+	$n_e = (int) get_transient( $k_e );
+	$n_i = (int) get_transient( $k_i );
+	if ( $n_e >= 3 || $n_i >= 20 ) {
+		return new WP_REST_Response( array( 'ok' => false, 'error' => 'limit' ), 429 );
+	}
+	set_transient( $k_e, $n_e + 1, DAY_IN_SECONDS );
+	set_transient( $k_i, $n_i + 1, DAY_IN_SECONDS );
+
+	$fields = array();
+	foreach ( array( 'name', 'last_name', 'company', 'job_title', 'registration_type', 'nurses_employed', 'signup_source', 'wants_to_write_article' ) as $k ) {
+		if ( isset( $f[ $k ] ) && '' !== trim( (string) $f[ $k ] ) ) {
+			$fields[ $k ] = substr( sanitize_text_field( $f[ $k ] ), 0, 200 );
+		}
+	}
+	if ( ! empty( $f['article_topic'] ) ) {
+		$fields['article_topic'] = substr( sanitize_textarea_field( $f['article_topic'] ), 0, 1000 );
+	}
+	$best                         = isset( $f['best_contact_email'] ) ? strtolower( sanitize_email( $f['best_contact_email'] ) ) : '';
+	$fields['best_contact_email'] = is_email( $best ) ? $best : $email;
+
+	// Existing subscribers keep their status; a new one is unconfirmed until the link is opened.
+	list( $code ) = msh_assoc_ml( 'GET', '/subscribers/' . rawurlencode( $email ) );
+	$sub = array( 'email' => $email, 'fields' => $fields, 'groups' => array( MSH_ASSOC_GROUP_ID ) );
+	if ( 200 !== $code ) {
+		$sub['status']     = 'unconfirmed';
+		$sub['ip_address'] = $ip;
+	}
+	list( $code, $body ) = msh_assoc_ml( 'POST', '/subscribers', $sub );
+	if ( $code < 200 || $code > 299 ) {
+		msh_assoc_log( 'join: MailerLite ' . $code . ' ' . substr( wp_json_encode( $body ), 0, 300 ) );
+		// Still send the link: the Hub access must not depend on MailerLite being up.
+	}
+
+	if ( ! msh_assoc_send_link( $email ) ) {
+		msh_assoc_log( 'join: wp_mail failed' );
+		return new WP_REST_Response( array( 'ok' => false, 'error' => 'mail' ), 500 );
+	}
+	return new WP_REST_Response( array( 'ok' => true ), 200 );
+}
+
+/** Opening the link is the confirmation: mark the subscriber active in MailerLite. */
+function msh_assoc_confirm( $email ) {
+	$flag = 'msh_assoc_confirmed_' . md5( $email );
+	if ( get_transient( $flag ) ) {
+		return;
+	}
+	list( $code, $body ) = msh_assoc_ml( 'POST', '/subscribers', array(
+		'email'       => $email,
+		'status'      => 'active',
+		'groups'      => array( MSH_ASSOC_GROUP_ID ),
+		'opted_in_at' => gmdate( 'Y-m-d H:i:s' ),
+		'optin_ip'    => isset( $_SERVER['REMOTE_ADDR'] ) ? (string) $_SERVER['REMOTE_ADDR'] : '',
+	) );
+	if ( $code >= 200 && $code <= 299 ) {
+		set_transient( $flag, 1, 30 * DAY_IN_SECONDS );
+	} else {
+		msh_assoc_log( 'confirm: MailerLite ' . $code . ' ' . substr( wp_json_encode( $body ), 0, 300 ) );
+	}
 }
 
 /* ---------- 1. MailerLite webhook ---------- */
@@ -234,6 +401,14 @@ add_action( 'template_redirect', function () {
 
 	if ( ! msh_assoc_valid( $email, $exp, $sig ) ) {
 		wp_safe_redirect( add_query_arg( 'ai', 'invalid', $target ) );
+		exit;
+	}
+
+	msh_assoc_confirm( $email );
+
+	// Already has a Hub account and is not signed in: confirmation done, go and sign in.
+	if ( ! is_user_logged_in() && get_user_by( 'email', $email ) ) {
+		wp_safe_redirect( home_url( '/login/' ) );
 		exit;
 	}
 

@@ -127,9 +127,8 @@ body .wp-site-blocks #ain .err{background:#FBEAEA;color:#6B1111!important;border
 <input type="hidden" name="fields[signup_source]" id="ain-src" value="">
 <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website_url" tabindex="-1" autocomplete="off"></label></div>
 <label class="chk"><input type="checkbox" id="ain-consent" required><span>I am happy for Elevate and Thrive Ltd to email me about the Association for Industry Professional Nurses.</span></label>
-<input type="hidden" name="ml-submit" value="1"><input type="hidden" name="anticsrf" value="true">
 <button class="btn" type="submit" id="ain-btn">Join for free</button>
-<div class="ok" id="ain-ok" role="status"><b>Thank you.</b> Please check your inbox for an email asking you to confirm your address. Once you confirm, we will email you a second message with your link to set up free Medical Sales Hub access. If either has not arrived in a few minutes, check your junk folder.</div>
+<div class="ok" id="ain-ok" role="status"><b>Thank you.</b> Please check your inbox for an email from us. Opening the link in it confirms your address and sets up your free Medical Sales Hub access. If it has not arrived in a few minutes, check your junk folder.</div>
 <div class="err" id="ain-err" role="alert">Something went wrong. Please check the highlighted details and try again, or email louisehoult@elevateandthrive.uk.</div>
 <p class="priv">Your answers go to Elevate and Thrive Ltd (company no. 17154474) and are used to run the association and keep you informed. How we handle your data: <a href="https://medsalesintelligencehub.co.uk/privacy-policy/">privacy policy</a>.</p>
 </form>
@@ -142,7 +141,7 @@ var f=document.getElementById('ain-form');if(!f)return;
 document.getElementById('ain-src').value=location.hostname;
 var art=document.getElementById('ain-art');
 art.addEventListener('change',function(){document.getElementById('ain-artv').value=art.checked?'Yes':'No';document.getElementById('ain-topicwrap').style.display=art.checked?'block':'none'});
-var URL='https://assets.mailerlite.com/jsonp/2399418/forms/202112622188824084/subscribe';
+var URL='https://medsalesintelligencehub.co.uk/wp-json/msh-assoc/v1/join';
 f.addEventListener('submit',function(e){
 e.preventDefault();
 var ok=document.getElementById('ain-ok'),er=document.getElementById('ain-err'),b=document.getElementById('ain-btn');
@@ -153,7 +152,7 @@ if(bad||!/^\S+@\S+\.\S+$/.test(f.elements['fields[email]'].value)){er.style.disp
 if(f.elements['website_url'].value){ok.style.display='block';return}
 if(!f.elements['fields[best_contact_email]'].value){f.elements['fields[best_contact_email]'].value=f.elements['fields[email]'].value}
 b.disabled=true;b.textContent='Sending';
-fetch(URL,{method:'POST',mode:'no-cors',body:new FormData(f)}).then(function(){
+fetch(URL,{method:'POST',body:new FormData(f)}).then(function(r){if(!r.ok)throw new Error(r.status);
 f.querySelectorAll('input,select,textarea').forEach(function(x){x.disabled=true});
 b.style.display='none';ok.style.display='block';
 }).catch(function(){b.disabled=false;b.textContent='Join for free';er.style.display='block'});
