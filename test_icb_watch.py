@@ -269,11 +269,12 @@ class BlockedSource(unittest.TestCase):
         tmp = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False)
         json.dump(base, tmp); tmp.close()
         saved = (w.OUT, w.ods_icbs, w.nhse_leaders, w.nhse_statement, w.own_site_people,
-                 w.today, sys.argv)
+                 w.today, sys.argv, w.CLUSTER_WATCH)
         def blocked():
             raise w.SourceUnavailable("challenge page")
         try:
             w.OUT = tmp.name
+            w.CLUSTER_WATCH = tmp.name + ".no-cluster-watch"   # hermetic: not the repo's live cluster events
             w.ods_icbs = lambda: (live_rows(), [])
             w.nhse_leaders = blocked
             w.nhse_statement = blocked
@@ -284,7 +285,7 @@ class BlockedSource(unittest.TestCase):
             doc = json.load(open(tmp.name))
         finally:
             (w.OUT, w.ods_icbs, w.nhse_leaders, w.nhse_statement, w.own_site_people,
-             w.today, sys.argv) = saved
+             w.today, sys.argv, w.CLUSTER_WATCH) = saved
             os.unlink(tmp.name)
         self.assertEqual(len(doc["sourceErrors"]), 2)
         self.assertEqual(sorted(doc["sourceErrorsToday"]), ["leaders", "statement"])

@@ -91,17 +91,21 @@ def uk_date(s):
 
 def meta_field(txt, label):
     m = re.search(re.escape(label) + r":\s*\n?\s*([^\n]+)", txt)
+    if not m:
+        # 23/10/2026: gca.gov.uk dropped the colons ("Agreement ID" / value on the next line).
+        m = re.search(r"^" + re.escape(label) + r"[ \t]*\n\s*([^\n]+)", txt, re.M)
     return m.group(1).strip() if m else None
 
 
 def parse_agreement_header(page_html):
     txt = text_of(page_html)
-    if not meta_field(txt, "Agreement number"):
+    ref = meta_field(txt, "Agreement number") or meta_field(txt, "Agreement ID")
+    if not ref:
         # gca.gov.uk answers an outage with a redirect to an "unavailable" page, which
         # reads as an empty agreement. Fail the run rather than overwrite good data.
         raise RuntimeError("agreement page has no 'Agreement number' (site unavailable?)")
     return {
-        "reference": meta_field(txt, "Agreement number"),
+        "reference": ref,
         "start": uk_date(meta_field(txt, "Start date") or ""),
         "end": uk_date(meta_field(txt, "End date") or ""),
         "type": meta_field(txt, "Agreement type"),

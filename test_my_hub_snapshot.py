@@ -74,7 +74,9 @@ class Icb(unittest.TestCase):
         self.assertEqual(c["count"], ICB["count"])
         self.assertEqual(c["abolished"], len(ICB["abolished"]))
         self.assertEqual(c["clusters"], len(ICB["clusters"]))
-        self.assertEqual(len(c["events"]), len(ICB["events"]))
+        # live file moves on: only events inside the 120-day window up to the as-of date count
+        in_window = [e for e in ICB["events"] if "2026-06-24" <= e["date"] <= "2026-10-22"]
+        self.assertEqual(len(c["events"]), len(in_window))
         old = node([["icbChanges", [ICB, [DERM_SPEC], "2026-10-22", 10]]])[0]
         self.assertTrue(all(e["date"] >= "2026-10-12" for e in old["events"]))
 
