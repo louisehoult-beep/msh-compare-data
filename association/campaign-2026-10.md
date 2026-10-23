@@ -123,3 +123,19 @@ Body: Short version of LinkedIn post 1 plus the events line and the link. Send o
 
 - Add the ANTT venue name once confirmed, and the stand details if there is one.
 - Posting and scheduling are in Lou's name, so nothing is posted or scheduled until she says yes (Metricool is connected and can schedule all of these).
+
+## Images (made 23/10/2026, in `association/images/`)
+
+Brand photos from the Hub uploads with navy shading behind the text; no ties, no statistics, no ANTT venue.
+
+| Post | File |
+|---|---|
+| LinkedIn / Facebook launch | `li-fb-1-launch.png` (1200x630) |
+| LinkedIn / Facebook ANTT teaser and ANTT day | `li-fb-2-antt.png` |
+| LinkedIn / Facebook Nursing Live | `li-fb-3-nursing-live.png` |
+| LinkedIn employers | `li-fb-4-employers.png` |
+| LinkedIn follow-up | `li-fb-5-followup.png` |
+| Facebook share ask | `fb-6-share.png` |
+| Instagram launch carousel, slides 1 to 5 | `ig-carousel-1.png` to `ig-carousel-5.png` (1080x1350) |
+| Instagram story/reel and TikTok cover: launch, ANTT, Nursing Live | `story-1-launch.png`, `story-2-antt.png`, `story-3-nursing-live.png` (1080x1920) |
+| MailerLite email header | `email-header.png` (1200x400, show at 600 wide) |
