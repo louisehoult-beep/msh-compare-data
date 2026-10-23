@@ -59,23 +59,23 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 12 | 36.4% | 13 | 22 | STARTED |
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | 14 | 12 | STARTED |
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 10 | 32.3% | 5 | 22 | STARTED |
-| Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 11 | 37.9% | 7 | 23 | STARTED |
+| Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 11 | 37.9% | 7 | 24 | STARTED |
 | General Wound Care | wound | 28 | 11 | 39.3% | 8 | 23 | STARTED |
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 11 | 40.7% | 8 | 16 | STARTED |
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 9 | 36.0% | 10 | 13 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 8 | 32.0% | 7 | 15 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 6 | 16 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 7 | 31.8% | 7 | 13 | STARTED |
-| Hand Hygiene and Associated Products and Services | infection | 21 | 6 | 28.6% | 5 | 15 | STARTED |
+| Hand Hygiene and Associated Products and Services | infection | 21 | 6 | 28.6% | 5 | 16 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 7 | 11 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 6 | 28.6% | 1 | 11 | STARTED · 5 EXCLUDED |
-| Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 9 | 45.0% | 3 | 11 | STARTED |
+| Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 9 | 45.0% | 3 | 12 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 9 | 47.4% | 7 | 11 | STARTED |
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 9 | 47.4% | 8 | 9 | STARTED |
 | Examination Gloves | infection | 19 | 5 | 26.3% | 5 | 13 | STARTED |
 | Central Venous Catheters and Associated Products | vascular | 18 | 8 | 44.4% | 7 | 11 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 7 | 38.9% | 2 | 13 | STARTED |
-| Patient Temperature Management | theatres | 18 | 7 | 38.9% | 10 | 10 | STARTED |
+| Patient Temperature Management | theatres | 18 | 7 | 38.9% | 9 | 12 | STARTED |
 | Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 6 | 33.3% | 0 | 11 | STARTED · 2 EXCLUDED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
 | Clinical and Sharps Waste Management | infection | 14 | 4 | 28.6% | 5 | 12 | STARTED |
@@ -108,7 +108,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Vascular Therapy and Associated Products | — | 23 | 0 | 0.0% | 19 | 9 | UNMAPPED |
 | External Defibrillation Devices and Related Services and Accessories | — | 21 | 0 | 0.0% | 15 | 7 | UNMAPPED |
 | Surgical Mesh | — | 21 | 0 | 0.0% | 16 | 11 | UNMAPPED |
-| Instrument Decontamination and Accessories | — | 20 | 0 | 0.0% | 12 | 11 | UNMAPPED |
+| Instrument Decontamination and Accessories | — | 20 | 0 | 0.0% | 11 | 12 | UNMAPPED |
 | Intravenous Accessories and Pressure Monitoring Accessories | — | 20 | 0 | 0.0% | 14 | 12 | UNMAPPED |
 | Rigid Endoscopy and Associated Options and Related Services | — | 18 | 0 | 0.0% | 12 | 14 | UNMAPPED |
 | Needlefree Connection Systems and Associated Products | — | 16 | 0 | 0.0% | 16 | 8 | UNMAPPED |
@@ -127,7 +127,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Perfusion Devices, Consumables and Associated Equipment | — | 9 | 0 | 0.0% | 7 | 6 | UNMAPPED |
 | Medical Hollowware | — | 8 | 0 | 0.0% | 8 | 4 | UNMAPPED |
 | Pressure Infusers and Associated Products | — | 8 | 0 | 0.0% | 6 | 4 | UNMAPPED |
-| Tray Wrap and Sterilisation Equipment | — | 8 | 0 | 0.0% | 8 | 3 | UNMAPPED |
+| Tray Wrap and Sterilisation Equipment | — | 8 | 0 | 0.0% | 8 | 4 | UNMAPPED |
 | Magnetic Resonance Imaging Scanners and Associated Option and Related Services | — | 7 | 0 | 0.0% | 4 | 5 | UNMAPPED |
 | Mammography Imaging Systems and Associated Options and Related Services | — | 7 | 0 | 0.0% | 4 | 4 | UNMAPPED |
 | Simulation Devices and Services | — | 7 | 0 | 0.0% | 6 | 1 | UNMAPPED |
@@ -143,7 +143,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Reusable Plastic Medical Hollowware | — | 4 | 0 | 0.0% | 2 | 3 | UNMAPPED |
 | Obstetrics and Vinyl Pessaries | — | 3 | 0 | 0.0% | 3 | 0 | UNMAPPED |
 | Fresh Food DPS | — | 97 | 0 | 0.0% | 97 | 0 | OUT OF SCOPE |
-| Cleaning Equipment, Supplies and Associated Products | facilities | 60 | 5 | 8.3% | 44 | 13 | OUT OF SCOPE |
+| Cleaning Equipment, Supplies and Associated Products | facilities | 60 | 5 | 8.3% | 44 | 14 | OUT OF SCOPE |
 | Medical Healthcare Furniture | — | 51 | 0 | 0.0% | 46 | 9 | OUT OF SCOPE |
 | Beverages, Confectionary and Snacks | — | 44 | 0 | 0.0% | 42 | 2 | OUT OF SCOPE |
 | Textiles and Associated Products | workwear | 32 | 2 | 6.2% | 24 | 10 | OUT OF SCOPE |
@@ -152,7 +152,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Office and Outdoor Furniture | — | 28 | 0 | 0.0% | 22 | 6 | OUT OF SCOPE |
 | Ambient Food | — | 27 | 0 | 0.0% | 26 | 1 | OUT OF SCOPE |
 | Multi Temperature Food Solutions | — | 27 | 0 | 0.0% | 27 | 0 | OUT OF SCOPE |
-| Environmental Decontamination | — | 22 | 0 | 0.0% | 18 | 5 | OUT OF SCOPE |
+| Environmental Decontamination | — | 22 | 0 | 0.0% | 17 | 6 | OUT OF SCOPE |
 | Catering Consumables and Equipment | — | 17 | 0 | 0.0% | 13 | 4 | OUT OF SCOPE |
 | Paper Hygiene | — | 17 | 0 | 0.0% | 11 | 7 | OUT OF SCOPE |
 | Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging) | — | 16 | 0 | 0.0% | 13 | 3 | OUT OF SCOPE |
