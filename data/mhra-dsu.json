@@ -10,7 +10,7 @@
   "ref": "ETH-D761DEE34",
   "contact": "contact@elevateandthrive.uk"
  },
- "dataAsOf": "2026-10-19",
+ "dataAsOf": "2026-10-23",
  "source": "MHRA Drug Safety Update, GOV.UK search API, Open Government Licence v3",
  "sourcePage": "https://www.gov.uk/drug-safety-update",
  "scopeRule": "Every item GOV.UK indexes as content_store_document_type drug_safety_update, the whole archive, re-read each run. Device alerts (DSI, NatPSA) are in data/mhra-alerts.json, not here.",
@@ -18,12 +18,12 @@
  "note": "published is GOV.UK's first_published_at; updated is its public_timestamp. roundup marks the monthly 'Letters and medicine recalls sent to healthcare professionals' digest. Refreshed daily by .github/workflows/mhra-dsu.yml.",
  "coverage": {
   "complete": true,
-  "apiTotal": 868,
-  "fetched": 868
+  "apiTotal": 869,
+  "fetched": 869
  },
  "counts": {
-  "updates": 868,
-  "withSpeciality": 736,
+  "updates": 869,
+  "withSpeciality": 737,
   "roundups": 47,
   "bySpeciality": {
    "audiology-and-hearing": 0,
@@ -40,7 +40,7 @@
    "frailty-and-older-people": 0,
    "gynaecology-and-womens-health": 124,
    "haematology-and-patient-blood-management": 110,
-   "infection-prevention-and-control": 4,
+   "infection-prevention-and-control": 5,
    "interventional-radiology": 0,
    "maternity-and-neonatal": 224,
    "mental-health": 111,
@@ -88,10 +88,10 @@
    "general-surgery": 3,
    "gi-hepatology-pancreatic-disorders": 88,
    "haematology": 110,
-   "immunology-vaccination": 90,
+   "immunology-vaccination": 91,
    "immunosuppression-transplantation": 61,
-   "infection-prevention": 4,
-   "infectious-disease": 167,
+   "infection-prevention": 5,
+   "infectious-disease": 168,
    "neurology": 163,
    "nutrition-dietetics": 44,
    "obstetrics-gynaecology-fertility": 124,
@@ -171,7 +171,7 @@
   {
    "facet": "immunology-vaccination",
    "label": "Immunology and vaccination",
-   "updates": 90,
+   "updates": 91,
    "reason": "No Hub panel covers immunology or vaccination. infection-prevention-and-control is a different discipline; not guessed."
   },
   {
@@ -183,7 +183,7 @@
   {
    "facet": "infectious-disease",
    "label": "Infectious disease",
-   "updates": 167,
+   "updates": 168,
    "reason": "Infectious disease (treatment, antimicrobials) is not the same discipline as infection prevention and control, and sepsis is narrower. Left for a decision."
   },
   {
@@ -208,6 +208,22 @@
   "vascular-access-and-iv-therapy"
  ],
  "updates": [
+  {
+   "title": "IXCHIQ Chikungunya vaccine: UK marketing authorisation withdrawn following safety review",
+   "url": "https://www.gov.uk/drug-safety-update/ixchiq-chikungunya-vaccine-uk-marketing-authorisation-withdrawn-following-safety-review",
+   "published": "2026-10-20",
+   "updated": "2026-10-20",
+   "summary": "Following advice from the Commission on Human Medicines (CHM), the MHRA has concluded that the benefit-risk balance for the IXCHIQ chikungunya vaccine is no longer considered favourable and the UK marketing authorisation has been withdrawn.",
+   "therapeuticAreas": [
+    "immunology-vaccination",
+    "infection-prevention",
+    "infectious-disease"
+   ],
+   "specialities": [
+    "infection-prevention-and-control"
+   ],
+   "roundup": false
+  },
   {
    "title": "Antidepressants: new safety measures for all patients to improve communication of the risk of suicidal thoughts and behaviours and persistent sexual dysfunction",
    "url": "https://www.gov.uk/drug-safety-update/antidepressants-new-safety-measures-for-all-patients-to-improve-communication-of-the-risk-of-suicidal-thoughts-and-behaviours-and-persistent-sexual-dysfunction",
