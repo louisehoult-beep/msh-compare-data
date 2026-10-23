@@ -108,10 +108,25 @@ def http(url, timeout=120, retries=2):
     raise RuntimeError("could not fetch %s: %s" % (url.split("?")[0], last))
 
 
+def rtt_page():
+    """The RTT landing page. NHS England serves its HTML to GitHub's runners as a bot
+    challenge (23/10/2026, as for the ICB watch), but the statistics site's WordPress REST
+    API answers, so ask it for the page by slug first and fall back to the HTML."""
+    try:
+        api = ("https://www.england.nhs.uk/statistics/wp-json/wp/v2/pages?slug=%s&_fields=link,content"
+               % RTT_PAGE.rstrip("/").rsplit("/", 1)[-1])
+        for pg in json.loads(http(api, timeout=60)):
+            if pg.get("link", "").rstrip("/") == RTT_PAGE.rstrip("/") and "Incomplete-Commissioner-" in pg["content"]["rendered"]:
+                return pg["content"]["rendered"]
+    except Exception:  # noqa: BLE001 - fall back to the HTML page
+        pass
+    return http(RTT_PAGE).decode("utf-8", "replace")
+
+
 def resolve_urls():
     """Current file URLs from the publishers' own pages."""
     urls = {}
-    page = http(RTT_PAGE).decode("utf-8", "replace")
+    page = rtt_page()
     m = re.search(r'href="([^"]*Incomplete-Commissioner-[A-Za-z]{3}\d\d[^"]*\.xlsx)"', page)
     if not m:
         raise RuntimeError("RTT Incomplete Commissioner link not found on %s" % RTT_PAGE)
@@ -630,7 +645,7 @@ def up_to_date(out, gp_periods):
         return False
     if not SPEC.get("rtt"):
         return True
-    text = http(RTT_PAGE).decode("utf-8", "replace")
+    text = rtt_page()
     m = re.search(r"Incomplete-Commissioner-([A-Za-z]{3})(\d\d)", text)
     if not m:
         return False          # cannot tell, so rebuild
