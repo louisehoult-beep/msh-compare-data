@@ -11,8 +11,8 @@
   "contact": "contact@elevateandthrive.uk"
  },
  "lane": "digital",
- "dataAsOf": "22/10/2026",
- "generated": "2026-10-22",
+ "dataAsOf": "23/10/2026",
+ "generated": "2026-10-23",
  "source": "Find a Tender and Contracts Finder award notices in the Hub's digital lane (data/digital-lane.json), Open Government Licence v3.",
  "sectionRule": "Software and IT notices only. Each row is one supplier named on one Find a Tender or Contracts Finder award notice that an NHS buyer classified under a Common Procurement Vocabulary (CPV) code beginning 48 (software packages and information systems) or 72 (IT services). Those codes cover payroll, finance and office systems as much as clinical ones, so a row is not a claim of health technology. A row is counted as clinical only where the notice title names a clinical system. Medical device awards (CPV division 33) appear in the award sections above and are never repeated here.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
@@ -24,23 +24,23 @@
   "laneCoverage": {
    "complete": true,
    "window": {
-    "from": "2026-10-14",
-    "to": "2026-10-22",
+    "from": "2026-10-15",
+    "to": "2026-10-23",
     "days": 8,
-    "run": "2026-10-22"
+    "run": "2026-10-23"
    },
    "notes": [
-    "Find a Tender (tender stage): 0 digital lane notice(s) from 54 release(s) over 1 page(s)",
-    "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-14",
-    "Find a Tender (planning stage): 0 digital lane notice(s) from 31 release(s) over 1 page(s)",
-    "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-14"
+    "Find a Tender (tender stage): 0 digital lane notice(s) from 50 release(s) over 1 page(s)",
+    "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-15",
+    "Find a Tender (planning stage): 1 digital lane notice(s) from 29 release(s) over 1 page(s)",
+    "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-15"
    ]
   }
  },
  "counts": {
   "companies": 43,
-  "awardRows": 86,
-  "unmatched": 145,
+  "awardRows": 87,
+  "unmatched": 148,
   "ambiguous": 0,
   "alreadyInMedicalFeed": 0
  },
@@ -1243,6 +1243,27 @@
   ],
   "Intersystems": [
    {
+    "title": "Ensemble E2",
+    "buyer": "The Walton Centre NHS Foundation Trust",
+    "date": "2026-10-22",
+    "url": "https://www.find-tender.service.gov.uk/Notice/099987-2026",
+    "ocid": "ocds-h6vhtk-078dea",
+    "source": "Find a Tender",
+    "valueAmount": 13948.95,
+    "valueCurrency": "GBP",
+    "periodEnd": "2027-09-30",
+    "isFramework": false,
+    "digitalCpv": [
+     "72500000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "Intersystems",
+    "noticeSupplierCount": 1,
+    "company": "Intersystems",
+    "matchedOn": "\"intersystems\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   },
+   {
     "title": "Provision of Healthshare Health Connect Enterprise System",
     "buyer": "SOMERSET NHS FOUNDATION TRUST",
     "date": "2026-10-07",
@@ -1960,6 +1981,66 @@
   ]
  },
  "unmatched": [
+  {
+   "title": "ENHT - Dawn AC Anticoagulation Software Maintenance/Support",
+   "buyer": "East and North Hertfordshire Teaching NHS Trust",
+   "date": "2026-10-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/100275-2026",
+   "ocid": "ocds-h6vhtk-078e84",
+   "source": "Find a Tender",
+   "valueAmount": 10745.21,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-07-30",
+   "isFramework": false,
+   "digitalCpv": [
+    "72260000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "4S Information Systems Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"4s information systems\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Digital Services Report",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "date": "2026-10-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/100274-2026",
+   "ocid": "ocds-h6vhtk-078e83",
+   "source": "Find a Tender",
+   "valueAmount": 40000,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-10-22",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "ADEPTEQ LTD",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"adepteq\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Associate Support with The Partnership Leading Care (PLC) Programme",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "date": "2026-10-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/100009-2026",
+   "ocid": "ocds-h6vhtk-078df7",
+   "source": "Find a Tender",
+   "valueAmount": 23200.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-09-03",
+   "isFramework": false,
+   "digitalCpv": [
+    "72224000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Moon & Mountain Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"moon and mountain\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
   {
    "title": "Google Maps for NHS 111 online (111.nhs.uk)",
    "buyer": "NHS England",

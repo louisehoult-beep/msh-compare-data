@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "22/10/2026",
- "generated": "2026-10-22",
+ "dataAsOf": "23/10/2026",
+ "generated": "2026-10-23",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,27 +22,65 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-10-14",
-   "to": "2026-10-22",
+   "from": "2026-10-15",
+   "to": "2026-10-23",
    "days": 8,
-   "run": "2026-10-22"
+   "run": "2026-10-23"
   },
   "notes": [
-   "Find a Tender (tender stage): 0 digital lane notice(s) from 54 release(s) over 1 page(s)",
-   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-14",
-   "Find a Tender (planning stage): 0 digital lane notice(s) from 31 release(s) over 1 page(s)",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-14"
+   "Find a Tender (tender stage): 0 digital lane notice(s) from 50 release(s) over 1 page(s)",
+   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-15",
+   "Find a Tender (planning stage): 1 digital lane notice(s) from 29 release(s) over 1 page(s)",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-15"
   ]
  },
  "counts": {
-  "awards": 278,
-  "awardsClinical": 33,
-  "openNotices": 1,
-  "openNoticesClinical": 0,
+  "awards": 283,
+  "awardsClinical": 34,
+  "openNotices": 2,
+  "openNoticesClinical": 1,
   "marketEngagement": 2,
   "marketEngagementClinical": 0
  },
  "awards": [
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "ENHT - Dawn AC Anticoagulation Software Maintenance/Support",
+   "buyer": "East and North Hertfordshire Teaching NHS Trust",
+   "published": "2026-10-23",
+   "suppliers": [
+    "4S Information Systems Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-07-30",
+   "value": 10745.21,
+   "digitalCpv": [
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/100275-2026",
+   "ocid": "ocds-h6vhtk-078e84"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Digital Services Report",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "published": "2026-10-23",
+   "suppliers": [
+    "ADEPTEQ LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-22",
+   "value": 40000,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/100274-2026",
+   "ocid": "ocds-h6vhtk-078e83"
+  },
   {
    "lane": "digital",
    "clinical": false,
@@ -62,6 +100,61 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/099842-2026",
    "ocid": "ocds-h6vhtk-078d95"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "planning",
+   "title": "Population Health Management (PHM)",
+   "buyer": "NHS SOUTH WEST LONDON INTEGRATED CARE BOARD",
+   "published": "2026-10-22",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/100097-2026",
+   "ocid": "ocds-h6vhtk-078e26"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Associate Support with The Partnership Leading Care (PLC) Programme",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "published": "2026-10-22",
+   "suppliers": [
+    "Moon & Mountain Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-09-03",
+   "value": 23200.0,
+   "digitalCpv": [
+    "72224000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/100009-2026",
+   "ocid": "ocds-h6vhtk-078df7"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Ensemble E2",
+   "buyer": "The Walton Centre NHS Foundation Trust",
+   "published": "2026-10-22",
+   "suppliers": [
+    "Intersystems"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-09-30",
+   "value": 13948.95,
+   "digitalCpv": [
+    "72500000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/099987-2026",
+   "ocid": "ocds-h6vhtk-078dea"
   },
   {
    "lane": "digital",
@@ -5350,6 +5443,24 @@
    "ocid": "ocds-h6vhtk-078109",
    "lane": "digital",
    "clinical": false
+  },
+  {
+   "title": "Population Health Management (PHM)",
+   "buyer": "NHS SOUTH WEST LONDON INTEGRATED CARE BOARD",
+   "status": "planning",
+   "rawStatus": "planned",
+   "stage": "preliminary market engagement / planning",
+   "date": "2026-10-22",
+   "closingDate": null,
+   "startDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/100097-2026",
+   "source": "Find a Tender",
+   "cpv": "48000000",
+   "valueAmount": null,
+   "valueCurrency": "",
+   "ocid": "ocds-h6vhtk-078e26",
+   "lane": "digital",
+   "clinical": true
   }
  ],
  "marketEngagement": [
@@ -5406,6 +5517,12 @@
    "to": "2026-10-22",
    "days": 8,
    "run": "2026-10-22"
+  },
+  {
+   "from": "2026-10-15",
+   "to": "2026-10-23",
+   "days": 8,
+   "run": "2026-10-23"
   }
  ]
 }
