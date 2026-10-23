@@ -1,51 +1,53 @@
 <div id="ain">
 <style>
-#ain{font-family:Inter,system-ui,Arial,sans-serif;color:#1D2733;background:#fff;margin:0 calc(50% - 50vw);width:100vw;line-height:1.6}
-#ain *{box-sizing:border-box}
-#ain .in{max-width:1080px;margin:0 auto;padding:0 40px}
-#ain .band{padding:64px 0}
-#ain .navy{background:#0B1C33;color:#F5F1E8}
-#ain .hero{background:linear-gradient(90deg,rgba(11,28,51,.92) 0%,rgba(11,28,51,.82) 45%,rgba(11,28,51,0) 80%),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-medical-sales-professionals.jpg') center/cover no-repeat #0B1C33;padding:96px 0}
-#ain .hero .txt{max-width:640px}
-#ain .photo{background:linear-gradient(90deg,rgba(74,21,38,.93) 0%,rgba(74,21,38,.85) 55%,rgba(74,21,38,.25) 100%),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-clinicians.jpg') center/cover no-repeat #4A1526}
-#ain .free{display:inline-block;background:#E0BE8E;color:#0B1C33;font-weight:800;font-size:14px;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin:0 0 16px}
-#ain .panel{max-width:640px}
-#ain textarea{width:100%;padding:12px 13px;font-size:16px;border:1px solid #8793A3;border-radius:8px;background:#fff;color:#1D2733;font-family:inherit;min-height:90px}
-#ain textarea:focus{outline:3px solid #E0BE8E;outline-offset:1px}
-#ain .sub{border-top:1px solid #D9D3C5;margin:22px 0 6px;padding-top:18px}
-#ain .sub h3{color:#0B1C33;font-size:17px}
-#ain .wine{background:#4A1526;color:#F5F1E8}
-#ain .light{background:#fff;color:#1D2733}
-#ain .tag{display:inline-block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;margin:0 0 14px;color:#E0BE8E}
-#ain .light .tag{color:#0B1C33}
-#ain h1{font-size:42px;line-height:1.12;margin:0 0 16px;font-weight:800;letter-spacing:-.02em;color:#FFFFFF}
-#ain h2{font-size:29px;line-height:1.2;margin:0 0 12px;font-weight:800;color:#FFFFFF}
-#ain .light h2,#ain .light h3{color:#0B1C33}
-#ain h3{font-size:19px;margin:0 0 6px;font-weight:800;color:#FFFFFF}
-#ain p{margin:0 0 14px;font-size:17px}
-#ain .lede{font-size:19px;color:#F5F1E8;max-width:760px}
-#ain .btn{display:inline-block;background:#E0BE8E;color:#0B1C33;font-weight:800;font-size:17px;padding:14px 28px;border-radius:8px;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
-#ain .btn:hover{background:#F5F1E8}
-#ain .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
-#ain .card{background:#fff;border:1px solid #D9D3C5;border-top:4px solid #A8842C;border-radius:12px;padding:20px}
-#ain .card h3{color:#0B1C33}
-#ain .card p{font-size:15.5px;color:#1D2733;margin:0}
-#ain .formwrap{background:#fff;color:#1D2733;border-radius:16px;padding:32px;max-width:760px;margin:0 auto;box-shadow:0 8px 30px rgba(0,0,0,.25)}
-#ain .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-#ain .fld{margin:0 0 16px}
-#ain label{display:block;font-weight:700;font-size:15px;color:#0B1C33;margin:0 0 5px}
-#ain .hint{font-weight:400;color:#3F5068;font-size:13.5px;display:block;margin-top:2px}
-#ain input[type=text],#ain input[type=email],#ain select{width:100%;padding:12px 13px;font-size:16px;border:1px solid #8793A3;border-radius:8px;background:#fff;color:#1D2733;font-family:inherit}
-#ain input:focus,#ain select:focus{outline:3px solid #E0BE8E;outline-offset:1px}
-#ain .chk{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:#1D2733;margin:6px 0 18px}
-#ain .chk input{margin-top:4px;width:18px;height:18px;flex:none}
-#ain .priv{font-size:13.5px;color:#3F5068;margin:14px 0 0}
-#ain .priv a{color:#0B1C33;text-decoration:underline}
-#ain .hp{position:absolute;left:-9999px;height:0;overflow:hidden}
-#ain .ok,#ain .err{display:none;padding:16px;border-radius:8px;font-size:16px;margin-top:16px}
-#ain .ok{background:#E8F3EA;color:#143D1F;border:1px solid #2E7D45}
-#ain .err{background:#FBEAEA;color:#6B1111;border:1px solid #B3261E}
-@media(max-width:800px){#ain .hero{background:linear-gradient(rgba(11,28,51,.85),rgba(11,28,51,.85)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-medical-sales-professionals.jpg') center/cover no-repeat #0B1C33;padding:64px 0}#ain .photo{background:linear-gradient(rgba(74,21,38,.9),rgba(74,21,38,.9)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-clinicians.jpg') center/cover no-repeat #4A1526}#ain .g3,#ain .row{grid-template-columns:1fr}#ain h1{font-size:32px}#ain .in{padding:0 20px}#ain .formwrap{padding:22px}}
+body .wp-site-blocks .wp-block-post-content,body .wp-site-blocks main{padding-top:0!important;padding-bottom:0!important;margin-top:0!important;margin-bottom:0!important;padding-left:0!important;padding-right:0!important}
+body .wp-site-blocks #ain{font-family:Inter,system-ui,Arial,sans-serif;color:#1D2733!important;background:#fff;margin:0;width:100%;line-height:1.6}
+body .wp-site-blocks #ain *{box-sizing:border-box}
+body .wp-site-blocks #ain .in{max-width:1080px;margin:0 auto;padding:0 40px}
+body .wp-site-blocks #ain .band{padding:64px 0}
+body .wp-site-blocks #ain .navy{background:#0B1C33;color:#F5F1E8!important}
+body .wp-site-blocks #ain .hero{background:linear-gradient(90deg,rgba(11,28,51,.92) 0%,rgba(11,28,51,.82) 45%,rgba(11,28,51,0) 80%),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-medical-sales-professionals.jpg') center/cover no-repeat #0B1C33;padding:96px 0}
+body .wp-site-blocks #ain .hero .txt{max-width:640px}
+body .wp-site-blocks #ain .photo{background:linear-gradient(90deg,rgba(74,21,38,.93) 0%,rgba(74,21,38,.85) 55%,rgba(74,21,38,.25) 100%),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-clinicians.jpg') center/cover no-repeat #4A1526}
+body .wp-site-blocks #ain .free{display:inline-block;background:#E0BE8E;color:#0B1C33!important;font-weight:800;font-size:14px;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin:0 0 16px}
+body .wp-site-blocks #ain .panel{max-width:640px}
+body .wp-site-blocks #ain .panel p{color:#F5F1E8!important}
+body .wp-site-blocks #ain textarea{width:100%;padding:12px 13px;font-size:16px;border:1px solid #8793A3;border-radius:8px;background:#fff;color:#1D2733!important;font-family:inherit;min-height:90px}
+body .wp-site-blocks #ain textarea:focus{outline:3px solid #E0BE8E;outline-offset:1px}
+body .wp-site-blocks #ain .sub{border-top:1px solid #D9D3C5;margin:22px 0 6px;padding-top:18px}
+body .wp-site-blocks #ain .sub h3{color:#0B1C33!important;font-size:17px}
+body .wp-site-blocks #ain .wine{background:#4A1526;color:#F5F1E8!important}
+body .wp-site-blocks #ain .light{background:#fff;color:#1D2733!important}
+body .wp-site-blocks #ain .tag{display:inline-block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;margin:0 0 14px;color:#E0BE8E!important}
+body .wp-site-blocks #ain .light .tag{color:#0B1C33!important}
+body .wp-site-blocks #ain h1{font-size:42px;line-height:1.12;margin:0 0 16px;font-weight:800;letter-spacing:-.02em;color:#FFFFFF!important}
+body .wp-site-blocks #ain h2{font-size:29px;line-height:1.2;margin:0 0 12px;font-weight:800;color:#FFFFFF!important}
+body .wp-site-blocks #ain .light h2,body .wp-site-blocks #ain .light h3{color:#0B1C33!important}
+body .wp-site-blocks #ain h3{font-size:19px;margin:0 0 6px;font-weight:800;color:#FFFFFF!important}
+body .wp-site-blocks #ain p{margin:0 0 14px;font-size:17px}
+body .wp-site-blocks #ain .lede{font-size:19px;color:#F5F1E8!important;max-width:760px}
+body .wp-site-blocks #ain .btn{display:inline-block;background:#E0BE8E;color:#0B1C33!important;font-weight:800;font-size:17px;padding:14px 28px;border-radius:8px;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
+body .wp-site-blocks #ain .btn:hover{background:#F5F1E8}
+body .wp-site-blocks #ain .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
+body .wp-site-blocks #ain .card{background:#fff;border:1px solid #D9D3C5;border-top:4px solid #A8842C;border-radius:12px;padding:20px}
+body .wp-site-blocks #ain .card h3{color:#0B1C33!important}
+body .wp-site-blocks #ain .card p{font-size:15.5px;color:#1D2733!important;margin:0}
+body .wp-site-blocks #ain .formwrap{background:#fff;color:#1D2733!important;border-radius:16px;padding:32px;max-width:760px;margin:0 auto;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+body .wp-site-blocks #ain .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+body .wp-site-blocks #ain .fld{margin:0 0 16px}
+body .wp-site-blocks #ain label{display:block;font-weight:700;font-size:15px;color:#0B1C33!important;margin:0 0 5px}
+body .wp-site-blocks #ain .hint{font-weight:400;color:#3F5068!important;font-size:13.5px;display:block;margin-top:2px}
+body .wp-site-blocks #ain input[type=text],body .wp-site-blocks #ain input[type=email],body .wp-site-blocks #ain select{width:100%;padding:12px 13px;font-size:16px;border:1px solid #8793A3;border-radius:8px;background:#fff;color:#1D2733!important;font-family:inherit}
+body .wp-site-blocks #ain input:focus,body .wp-site-blocks #ain select:focus{outline:3px solid #E0BE8E;outline-offset:1px}
+body .wp-site-blocks #ain .chk{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:#1D2733!important;margin:6px 0 18px}
+body .wp-site-blocks #ain .chk input{margin-top:4px;width:18px;height:18px;flex:none}
+body .wp-site-blocks #ain .priv{font-size:13.5px;color:#3F5068!important;margin:14px 0 0}
+body .wp-site-blocks #ain .priv a{color:#0B1C33!important;text-decoration:underline}
+body .wp-site-blocks #ain .hp{position:absolute;left:-9999px;height:0;overflow:hidden}
+body .wp-site-blocks #ain .ok,body .wp-site-blocks #ain .err{display:none;padding:16px;border-radius:8px;font-size:16px;margin-top:16px}
+body .wp-site-blocks #ain .ok{background:#E8F3EA;color:#143D1F!important;border:1px solid #2E7D45}
+body .wp-site-blocks #ain .err{background:#FBEAEA;color:#6B1111!important;border:1px solid #B3261E}
+@media(max-width:800px){body .wp-site-blocks #ain .hero{background:linear-gradient(rgba(11,28,51,.85),rgba(11,28,51,.85)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-medical-sales-professionals.jpg') center/cover no-repeat #0B1C33;padding:64px 0}body .wp-site-blocks #ain .photo{background:linear-gradient(rgba(74,21,38,.9),rgba(74,21,38,.9)),url('https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-profile-clinicians.jpg') center/cover no-repeat #4A1526}body .wp-site-blocks #ain .g3,body .wp-site-blocks #ain .row{grid-template-columns:1fr}body .wp-site-blocks #ain h1{font-size:32px}body .wp-site-blocks #ain .in{padding:0 20px}body .wp-site-blocks #ain .formwrap{padding:22px}}
 </style>
 
 <div class="band hero"><div class="in"><div class="txt">
@@ -71,7 +73,7 @@
 <div class="band wine photo"><div class="in"><div class="panel">
 <span class="tag">Member benefits</span>
 <h2>Free access to the Medical Sales Hub</h2>
-<p>Membership is free, and so is a way into the Medical Sales Hub, the live UK market intelligence service for people working with the NHS. Tick the box on the form and we will set up your access. Prefer to look around first? <a href="https://medsalesintelligencehub.co.uk/register/" style="color:#E0BE8E;font-weight:700">See the Hub sign-up page</a>.</p>
+<p>Free access to the Medical Sales Hub, the live UK market intelligence service for people working with the NHS, is included when you join. Confirm your email address and we will send you a personal link by email to set up your Hub account, at no cost.</p>
 <h3 style="margin-top:22px">Write a paper or an article</h3>
 <p>Have something to say about how nurses work in industry? Members can offer a paper or an article to be shared with the association. Tick the box on the form and tell us your topic.</p>
 </div></div></div>
@@ -79,7 +81,7 @@
 <div class="band wine" id="join"><div class="in">
 <span class="tag">Join for free</span>
 <h2>Help shape the way we work</h2>
-<p class="lede" style="margin-bottom:28px">Joining is free. Tell us a little about you and your role. We will confirm your email address, then keep you updated as the association takes shape.</p>
+<p class="lede" style="margin-bottom:28px">Joining is free. Tell us a little about you and your role. We will ask you to confirm your email address, then email you a link to set up your free Medical Sales Hub access, and keep you updated as the association takes shape.</p>
 
 <div class="formwrap">
 <form id="ain-form" novalidate>
@@ -119,16 +121,15 @@
 </select></div>
 </div>
 <div class="sub"><h3>Optional extras</h3>
-<label class="chk"><input type="checkbox" id="ain-hub"><span>Yes, I would like free access to the Medical Sales Hub.</span></label>
 <label class="chk"><input type="checkbox" id="ain-art"><span>I would like to write a paper or an article.</span></label>
 <div class="fld" id="ain-topicwrap" style="display:none"><label for="ain-topic">Your topic<span class="hint">A line or two is plenty</span></label><textarea id="ain-topic" name="fields[article_topic]"></textarea></div>
-<input type="hidden" name="fields[wants_free_hub_access]" id="ain-hubv" value="No"><input type="hidden" name="fields[wants_to_write_article]" id="ain-artv" value="No"></div>
+<input type="hidden" name="fields[wants_to_write_article]" id="ain-artv" value="No"></div>
 <input type="hidden" name="fields[signup_source]" id="ain-src" value="">
 <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website_url" tabindex="-1" autocomplete="off"></label></div>
 <label class="chk"><input type="checkbox" id="ain-consent" required><span>I am happy for Elevate and Thrive Ltd to email me about the Association for Industry Professional Nurses.</span></label>
 <input type="hidden" name="ml-submit" value="1"><input type="hidden" name="anticsrf" value="true">
 <button class="btn" type="submit" id="ain-btn">Join for free</button>
-<div class="ok" id="ain-ok" role="status"><b>Thank you.</b> Please check your inbox for an email asking you to confirm your address. If it has not arrived in a few minutes, check your junk folder.</div>
+<div class="ok" id="ain-ok" role="status"><b>Thank you.</b> Please check your inbox for an email asking you to confirm your address. Once you confirm, we will email you a second message with your link to set up free Medical Sales Hub access. If either has not arrived in a few minutes, check your junk folder.</div>
 <div class="err" id="ain-err" role="alert">Something went wrong. Please check the highlighted details and try again, or email louisehoult@elevateandthrive.uk.</div>
 <p class="priv">Your answers go to Elevate and Thrive Ltd (company no. 17154474) and are used to run the association and keep you informed. How we handle your data: <a href="https://medsalesintelligencehub.co.uk/privacy-policy/">privacy policy</a>.</p>
 </form>
@@ -139,8 +140,7 @@
 (function(){
 var f=document.getElementById('ain-form');if(!f)return;
 document.getElementById('ain-src').value=location.hostname;
-var hub=document.getElementById('ain-hub'),art=document.getElementById('ain-art');
-hub.addEventListener('change',function(){document.getElementById('ain-hubv').value=hub.checked?'Yes':'No'});
+var art=document.getElementById('ain-art');
 art.addEventListener('change',function(){document.getElementById('ain-artv').value=art.checked?'Yes':'No';document.getElementById('ain-topicwrap').style.display=art.checked?'block':'none'});
 var URL='https://assets.mailerlite.com/jsonp/2399418/forms/202112622188824084/subscribe';
 f.addEventListener('submit',function(e){
