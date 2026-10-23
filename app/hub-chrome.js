@@ -39,6 +39,7 @@
 
   var BYURL = {};
   var MYHUB = '/medical-sales-hub/my-hub/';
+  var ASSOC = ['NURSES ASSOCIATION', 'https://medsalesintelligencehub.co.uk/association-for-industry-professional-nurses/'];
   var NETWORK = ['Build Your Network', '/medical-sales-hub/build-your-network/'];
   /* Profile (the label under the logo) -> the nav group that gains Build Your
      Network. Medical sales professionals already list it under Your career;
@@ -148,6 +149,25 @@
     else { nav.insertBefore(a, nav.firstChild); }
   }
 
+  /* Association for Industry Professional Nurses (23/10/2026): its landing page
+     is outside /medical-sales-hub/, so no profile nav linked to it. A top-level
+     link on every profile, after My Hub. */
+  function ensureAssocLink() {
+    var nav = document.querySelector('.msh header nav');
+    if (!nav) { return; }
+    var all = nav.querySelectorAll('a');
+    for (var i = 0; i !== all.length; i++) {
+      if (norm((all[i].getAttribute('href') || '').replace(/^https?:\/\/[^/]+/, '')) === norm(ASSOC[1].replace(/^https?:\/\/[^/]+/, ''))) { return; }
+    }
+    var a = document.createElement('a');
+    a.href = ASSOC[1];
+    a.textContent = ASSOC[0];
+    var my = nav.querySelector('a.mshc-myhub');
+    if (my && my.nextSibling) { nav.insertBefore(a, my.nextSibling); }
+    else if (my) { nav.appendChild(a); }
+    else { nav.insertBefore(a, nav.firstChild); }
+  }
+
   function ensureNetworkLink() {
     var lab = document.querySelector('.msh header .msh-plabel');
     var group = lab ? NAV_ADD[String(lab.textContent || '').trim().toUpperCase()] : '';
@@ -224,7 +244,7 @@
     });
   }
 
-  function navFixes() { ensureMyHubLink(); ensureNetworkLink(); ensureSearch(); }
+  function navFixes() { ensureMyHubLink(); ensureAssocLink(); ensureNetworkLink(); ensureSearch(); }
 
   function watchNav() {
     var nav = document.querySelector('.msh header nav');
