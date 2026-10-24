@@ -3,10 +3,11 @@
     "frameworks": [
         {
             "framework": "Minimally Invasive Surgery, Related Equipment and Accessories",
-            "checkedOn": "2026-09-26",
-            "coverageAtCheck": "30.0% (18/60)",
+            "checkedOn": "2026-10-24",
+            "coverageAtCheck": "30.0% (18/60), unchanged",
             "suppliersChecked": [
                 "Advanced Medical Solutions (AMS)",
+                "Aquilant Limited",
                 "B. Braun Medical",
                 "Bolton Surgical Limited",
                 "Fannin (UK) Limited",
@@ -15,10 +16,22 @@
                 "Reflex Medical Limited",
                 "Stryker",
                 "W.L. Gore & Associates",
-                "Healthcare 25 Ltd"
+                "Healthcare 25 Ltd",
+                "Applied Medical UK Ltd",
+                "Creed Medical Ltd",
+                "Erbe Medical UK Ltd",
+                "Fairmont Medical Products Limited",
+                "Integra LifeSciences (Integra Neurosciences)",
+                "Laprosurge Limited",
+                "Lawmed Ltd",
+                "LocaMed Ltd",
+                "RB Medical Engineering Ltd",
+                "SRA Developments",
+                "Surgical Holdings Limited",
+                "Unisurge International Limited"
             ],
-            "reason": "All 10 remaining actionable items checked (9 publishedElsewhere, 1 heldOnly). B. Braun Medical, Fannin (UK) Limited, Medline Industries and Stryker are already recorded crawl-refusals for this framework, so re-crawling them is forbidden by the brief's own rule; their captured NHSSC-cache ranges (vascular/renal/ortho/cardiology/monitoring for Stryker; ECG for Fannin; respiratory for Medline; anaesthesia/renal/vascular/wound for B. Braun) carry nothing MIS-shaped. The other 5 publishedElsewhere suppliers were checked product-by-product against their real, crawled ranges: Advanced Medical Solutions (wound/gastro/skin-prep), Kebomed UK Ltd (nutrition devices), Reflex Medical Limited (761 held products checked via the raw crawl — first-aid/AED/patient-monitoring/PPE, none surgical), Bolton Surgical Limited (418 held products checked — traditional open-surgery hand instruments organised by department: ENT, orthopaedic/neuro, plastic, GU/gynae, colorectal, dental, cardiothoracic; none laparoscopic/MIS), W.L. Gore & Associates (31 held products checked — vascular grafts/stents, hernia mesh (Dualmesh, Soft Tissue Patch) and staple-line reinforcement (Seamguard); Seamguard is used alongside surgical staplers but is not itself an MIS instrument/clip/trocar/kit and its fit to any one of the framework's 7 in-scope categories is not unambiguous from the product name alone — correctly held per the mixed-division-mapping policy guard, not forced). Healthcare 25 Ltd's 1 heldOnly item is an already-documented nav-labels-are-not-products case (12 captured names are the site's own clinical-speciality navigation headings with no products beneath them) — correctly held, no ruling needed. No permitted route left on any of the 10.",
-            "wouldReopenIf": "Any of the 9 publishedElsewhere suppliers gets a new/changed crawl result revealing a genuine laparoscopic/MIS instrument, clip, trocar, stapler or energy-device line; Healthcare 25 Ltd's site is recrawled and reaches real product pages instead of navigation labels; or a new supplier is awarded on this framework."
+            "reason": "RE-CHECK 24/10/2026: Left recounts at 23, not the 10 this entry previously recorded, purely from backfill_seed_from_frameworks.py attaching this framework's award to 12 more suppliers plus Aquilant Limited (all supplier-seed.json capturedOn 2026-10-20) — the same backfill-churn pattern already seen on Operating Theatres Equipment and Laboratory Diagnostics, not new crawlable work. Every one of the 13 newly-actionable suppliers (Applied Medical UK Ltd, Creed Medical Ltd, Erbe Medical UK Ltd, Fairmont Medical Products Limited, Integra LifeSciences, Laprosurge Limited, Lawmed Ltd, LocaMed Ltd, RB Medical Engineering Ltd, SRA Developments, Surgical Holdings Limited, Unisurge International Limited, plus Aquilant Limited) already carries a recorded crawl refusal dated between 06/09/2026 and 28/09/2026 — all inside the 90-day TTL as of this check (HTTP 404/525 on WordPress and WooCommerce APIs, robots.txt disallow, zero sitemap product URLs, or Aquilant Limited's TLS handshake failure on aquilantservices.com recorded in its own seed note) — so re-crawling any of them is forbidden by the brief's own rule. No product data exists for any of the 13 to check for an MIS fit; there is nothing to categorise, only a refusal to honour. The original 10 publishedElsewhere/heldOnly suppliers checked 26/09/2026 are unchanged and restand. No permitted route left on any of the 23.",
+            "wouldReopenIf": "Any of the 9 original publishedElsewhere suppliers gets a new/changed crawl result revealing a genuine laparoscopic/MIS instrument, clip, trocar, stapler or energy-device line; Healthcare 25 Ltd's site is recrawled and reaches real product pages instead of navigation labels; any of the 13 newly-awarded suppliers' refusal TTL expires (after their 90-day window) and a re-crawl succeeds; or a new supplier is awarded on this framework."
         },
         {
             "framework": "Ultrasound Scanners and Associated Options and Related Services",
@@ -505,6 +518,20 @@
             ],
             "reason": "Investigated as the lowest-coverage STARTED framework with Left>0 this run. Two actionable items, both dead ends. Babease Limited: already correctly handled under the unconfirmable-awardee policy (data/identity-vocabulary-policy.json) since 30/09/2026 -- the only exact Companies House name match (BABEASE LIMITED, 07473497) was dissolved 1 November 2023, before this framework's award period starts, so it cannot be the awardee; the real trading baby-food company (BABEASE FOODS LIMITED, 12320133) is a different registered name and rule 10 forbids linking the two on similarity alone. Re-checked 23/10/2026: BABEASE FOODS LIMITED is still in Liquidation at Companies House, nothing has changed. No domain is attached (correctly, per policy), so there is nothing to crawl. Central Medical Supplies: its site (centralmedical.co.uk) carries a recorded crawl refusal (no readable WordPress/WooCommerce API, no sitemap product URLs; checked 2026-08-31, inside the 90-day TTL until 29/11/2026) -- re-crawling is forbidden by the brief's own rule. No permitted route left on either of the 2.",
             "wouldReopenIf": "Babease Foods Limited exits liquidation and its own site or a procurement listing confirms it holds the award under a documented name change or transfer (rule 10/11); a new primary source names a different, confirmable entity as \"Babease Limited\"; Central Medical Supplies' refusal TTL expires (after 29/11/2026) and a re-crawl succeeds; or a new supplier is awarded on this framework."
+        },
+        {
+            "framework": "General Wound Care",
+            "checkedOn": "2026-10-24",
+            "coverageAtCheck": "39.3% (11/28), unchanged",
+            "suppliersChecked": [
+                "Trion Pharma Limited",
+                "Mediworld Ltd",
+                "SAI Medical Solutions Ltd",
+                "Rocialle Healthcare",
+                "Unisurge International Limited"
+            ],
+            "reason": "First check of this framework. Rocialle Healthcare and Unisurge International Limited both carry recorded crawl refusals (checked 05/09/2026 and 06/09/2026, inside the 90-day TTL) — re-crawling either is forbidden by the brief's own rule. Trion Pharma Limited is a curated (not crawled) record with no domain on file; its real, sourced product list — a pessary range, catheter maintenance solutions/gels, and a line of dermatology creams (aqueous, cetomacrogol, emulsifying ointment, menthol, urea) — contains nothing that is a genuine wound dressing, antimicrobial or wound-care consumable; it is correctly filed under Continence & urology / Dermatology and there is no unambiguous wound-care item to move, so nothing is forced. SAI Medical Solutions Ltd has no confirmable domain: scripts/seed_supplier_domains.py (--search --retry-unproven) found no site that identifies itself as this company, and a web search found no NHS wound-care supply record or website for it — Companies House shows it under a 2019 renaming from 'Sai Quality Veg & Fruits Ltd', consistent with a shell/trading entity with no public storefront. No permitted route to either. Mediworld Ltd ALSO has no domain on file and was refused twice by the automated domain-seeding script (mediworld.co.uk and mediworldltd.co.uk tried 15/09/2026, found not to self-identify; mediworldltd.co.uk and mediworld.com retried 24/10/2026, found parked) — but manual web research this run found that mediworld.co.uk (a candidate the script's 24/10 retry did not re-try) is in fact a live, real trading site whose page title and logo alt-text both read 'Mediworld Ltd', with a 'Dressings, first aid, surgical: wound care' product category — directly relevant to this framework. Companies House confirms MEDIWORLD LIMITED (01936692) is registered at 444-446 Streatham High Road, London SW16 3PX, and an LBHF council directory lists a 'Medi World' medical/surgical/mobility equipment showroom at that exact address. This is a strong lead but NOT yet proof under domain-proof-tier (data/identity-vocabulary-policy.json): the site itself must state the matching registered address or company number, not a third party, and every attempt this run to read mediworld.co.uk past its homepage nav menu (contact/about/terms pages, and raw curl) returned HTTP 429 from the site itself. Writing the domain in on a name-title match alone would be the weak --accept-name tier, which this script's own history records producing false positives (7 of 128 proven that way turned out to be parked pages) — not used here. No permitted route completed this run; the domain is not written to supplier-seed.json.",
+            "wouldReopenIf": "mediworld.co.uk's contact/about/terms page can be read (it is rate-limiting, not permanently blocked) and is found to state the Streatham High Road address or company number 01936692, at which point the domain can be written and the site crawled; SAI Medical Solutions Ltd publishes a real website; Trion Pharma Limited is given a domain and crawled, revealing a genuine wound-care line; or a new supplier is awarded on this framework."
         }
     ]
 }
