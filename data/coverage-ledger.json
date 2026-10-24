@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-10-20",
-  "differentiator.json published": 37228,
-  "differentiator.json held": 295363
+  "differentiator.json published": 37248,
+  "differentiator.json held": 295343
  },
  "counts": {
   "frameworks": 122,
@@ -2808,6 +2808,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Delta Surgical",
+     "domain": "www.deltasurgical.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (<urlopen error timed out>)",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Fannin (UK) Limited",
      "domain": "fannin.eu",
      "reason": "robots.txt disallows automated reading of this site",
@@ -2832,13 +2839,6 @@
      "supplier": "Baxter Healthcare Ltd",
      "domain": "www.baxterhealthcare.co.uk",
      "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Delta Surgical",
-     "domain": "www.deltasurgical.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (<urlopen error timed out>)",
      "checked": "2026-08-31",
      "bucket": "heldOnly"
     },
@@ -2943,11 +2943,13 @@
     "ortho:inject",
     "ortho:trauma"
    ],
-   "publishedElsewhereNoOwnRange": [],
+   "publishedElsewhereNoOwnRange": [
+    "Delta Surgical"
+   ],
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 4,
-    "heldNeedingCategory": 7,
+    "heldNeedingCategory": 6,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -2993,13 +2995,13 @@
    ],
    "publishedElsewhere": [
     "Anetic Aid Ltd",
+    "Delta Surgical",
     "Fannin (UK) Limited",
     "GenX MediCare Ltd",
     "M\u00f6lnlycke"
    ],
    "heldOnly": [
     "Baxter Healthcare Ltd",
-    "Delta Surgical",
     "D.P. Medical Systems Limited",
     "Advita Ortho UK Limited",
     "Integra LifeSciences (Integra Neurosciences)",
@@ -3066,7 +3068,7 @@
     "Venturis Medical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 13,
+   "actionableTotal": 12,
    "blockedReason": null,
    "deferred": null
   },
@@ -3247,6 +3249,20 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Fenton Pharmaceuticals Limited",
+     "domain": "fentonpharmaceuticals.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Solventum (3M Health Care)",
+     "domain": "solventum.com",
+     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-26",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Peacocks Medical Group",
      "domain": "www.peacocks.net",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 1 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -3265,20 +3281,6 @@
      "domain": "www.eurekaphysiocare.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Fenton Pharmaceuticals Limited",
-     "domain": "fentonpharmaceuticals.com",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Solventum (3M Health Care)",
-     "domain": "solventum.com",
-     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-26",
      "bucket": "heldOnly"
     },
     {
@@ -3367,12 +3369,13 @@
     "orthotics:upper"
    ],
    "publishedElsewhereNoOwnRange": [
+    "Fenton Pharmaceuticals Limited",
     "Peacocks Medical Group"
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 7,
-    "heldNeedingCategory": 8,
+    "publishedElsewhereNeedingCategory": 8,
+    "heldNeedingCategory": 6,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -3407,7 +3410,9 @@
    "publishedElsewhere": [
     "Ambu UK",
     "Crest Medical Ltd",
+    "Fenton Pharmaceuticals Limited",
     "Huntleigh",
+    "Solventum (3M Health Care)",
     "L&R Medical / Activa (Lohmann & Rauscher)",
     "Peacocks Medical Group",
     "Praxis Medical Ltd",
@@ -3418,8 +3423,6 @@
     "Canonbury Products Limited",
     "Critical Healthcare",
     "Eureka Physiocare Ltd",
-    "Fenton Pharmaceuticals Limited",
-    "Solventum (3M Health Care)",
     "\u00d6ssur UK",
     "Repton Medical Ltd",
     "Walters Medical Ltd"
@@ -3453,7 +3456,7 @@
     "Darco UK Ltd (formerly V-M Orthotics Ltd)"
    ],
    "unknown": [],
-   "actionableTotal": 22,
+   "actionableTotal": 21,
    "blockedReason": null,
    "deferred": null
   },
@@ -3613,6 +3616,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Aquilant Limited",
+     "domain": "aquilantservices.com",
+     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-20",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "B. Braun Medical",
      "domain": "bbraun.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -3645,13 +3655,6 @@
      "domain": "appliedmedical.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-13",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Aquilant Limited",
-     "domain": "aquilantservices.com",
-     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
-     "checked": "2026-09-20",
      "bucket": "heldOnly"
     },
     {
@@ -3784,11 +3787,13 @@
     "mis:staple",
     "mis:trocar"
    ],
-   "publishedElsewhereNoOwnRange": [],
+   "publishedElsewhereNoOwnRange": [
+    "Aquilant Limited"
+   ],
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 9,
-    "heldNeedingCategory": 14,
+    "heldNeedingCategory": 13,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -3816,6 +3821,7 @@
    ],
    "publishedElsewhere": [
     "Advanced Medical Solutions (AMS)",
+    "Aquilant Limited",
     "B. Braun Medical",
     "Bolton Surgical Limited",
     "Fannin (UK) Limited",
@@ -3827,7 +3833,6 @@
    ],
    "heldOnly": [
     "Applied Medical UK Ltd",
-    "Aquilant Limited",
     "Creed Medical Ltd",
     "Erbe Medical UK Ltd",
     "Fairmont Medical Products Limited",
@@ -3865,7 +3870,7 @@
     "Winners First Trading Limited"
    ],
    "unknown": [],
-   "actionableTotal": 23,
+   "actionableTotal": 22,
    "blockedReason": null,
    "deferred": null
   },
@@ -4035,6 +4040,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Aquilant Limited",
+     "domain": "aquilantservices.com",
+     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-20",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Fannin (UK) Limited",
      "domain": "fannin.eu",
      "reason": "robots.txt disallows automated reading of this site",
@@ -4054,13 +4066,6 @@
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-31",
      "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Aquilant Limited",
-     "domain": "aquilantservices.com",
-     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
-     "checked": "2026-09-20",
-     "bucket": "heldOnly"
     },
     {
      "supplier": "Erbe Medical UK Ltd",
@@ -4161,12 +4166,13 @@
    ],
    "publishedElsewhereNoOwnRange": [
     "Advanced Medical Systems Ltd",
+    "Aquilant Limited",
     "Olympus (KeyMed)"
    ],
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 8,
-    "heldNeedingCategory": 5,
+    "heldNeedingCategory": 4,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -4200,6 +4206,7 @@
    ],
    "publishedElsewhere": [
     "Advanced Medical Systems Ltd",
+    "Aquilant Limited",
     "Fannin (UK) Limited",
     "GenX MediCare Ltd",
     "Kebomed UK Ltd",
@@ -4211,7 +4218,6 @@
     "Uniplex"
    ],
    "heldOnly": [
-    "Aquilant Limited",
     "Erbe Medical UK Ltd",
     "Fairmont Medical Products Limited",
     "GI UK Medical Ltd (Duomed)",
@@ -4242,7 +4248,7 @@
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)"
    ],
    "unknown": [],
-   "actionableTotal": 16,
+   "actionableTotal": 15,
    "blockedReason": null,
    "deferred": null
   },
@@ -4709,6 +4715,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Solventum (3M Health Care)",
+     "domain": "solventum.com",
+     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-26",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Mediq Healthcare UK Ltd",
      "domain": "www.mediq.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -4776,13 +4789,6 @@
      "domain": "flexicare.com",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Solventum (3M Health Care)",
-     "domain": "solventum.com",
-     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-26",
      "bucket": "heldOnly"
     },
     {
@@ -4892,8 +4898,8 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 18,
-    "heldNeedingCategory": 7,
+    "publishedElsewhereNeedingCategory": 19,
+    "heldNeedingCategory": 6,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -4929,6 +4935,7 @@
     "Fresenius Kabi Ltd",
     "GenX MediCare Ltd",
     "Hollister",
+    "Solventum (3M Health Care)",
     "Medicina Limited",
     "Mediq Healthcare UK Ltd",
     "Medline Industries",
@@ -4946,7 +4953,6 @@
     "Baxter Healthcare Ltd",
     "Fairmont Medical Products Limited",
     "Flexicare Medical",
-    "Solventum (3M Health Care)",
     "Pennine Healthcare (Ivor Shaw Ltd)",
     "RB Medical Engineering Ltd",
     "Rocialle Healthcare"
@@ -5131,6 +5137,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Solventum (3M Health Care)",
+     "domain": "solventum.com",
+     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-26",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Medline Industries",
      "domain": "medline.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -5177,13 +5190,6 @@
      "domain": "www.integralife.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-13",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Solventum (3M Health Care)",
-     "domain": "solventum.com",
-     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-26",
      "bucket": "heldOnly"
     },
     {
@@ -5313,8 +5319,8 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 6,
-    "heldNeedingCategory": 7,
+    "publishedElsewhereNeedingCategory": 7,
+    "heldNeedingCategory": 6,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -5348,6 +5354,7 @@
     "BD \u2014 Becton, Dickinson",
     "CliniMed",
     "Frontier Therapeutics",
+    "Solventum (3M Health Care)",
     "Medline Industries",
     "OscarTech UK",
     "Schulke & Mayr UK Ltd",
@@ -5358,7 +5365,6 @@
     "AOTI",
     "Creed Medical Ltd",
     "Integra LifeSciences (Integra Neurosciences)",
-    "Solventum (3M Health Care)",
     "Richardson Healthcare",
     "Rocialle Healthcare",
     "Unisurge International Limited"
@@ -5967,6 +5973,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Solventum (3M Health Care)",
+     "domain": "solventum.com",
+     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-26",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Leica Microsystems (UK)",
      "domain": "www.leica-microsystems.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -6013,13 +6026,6 @@
      "domain": "altomed.com",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-10-08",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Solventum (3M Health Care)",
-     "domain": "solventum.com",
-     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-26",
      "bucket": "heldOnly"
     },
     {
@@ -6073,8 +6079,8 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 7,
-    "heldNeedingCategory": 6,
+    "publishedElsewhereNeedingCategory": 8,
+    "heldNeedingCategory": 5,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -6104,6 +6110,7 @@
     "Clonallon Laboratories Limited",
     "DTR Medical Ltd",
     "Joint Operations",
+    "Solventum (3M Health Care)",
     "Leica Microsystems (UK)",
     "MedScience Distribution",
     "M\u00f6lnlycke",
@@ -6115,7 +6122,6 @@
     "Albert Waeschle Ltd",
     "Altomed Limited",
     "Johnson & Johnson Surgical Vision",
-    "Solventum (3M Health Care)",
     "RB Medical Engineering Ltd",
     "Unisurge International Limited"
    ],
@@ -6247,6 +6253,20 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Central Medical Supplies",
+     "domain": "centralmedical.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Delta Surgical",
+     "domain": "www.deltasurgical.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (<urlopen error timed out>)",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Drive DeVilbiss Healthcare UK",
      "domain": "drivemedical.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -6294,20 +6314,6 @@
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-08",
      "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Central Medical Supplies",
-     "domain": "centralmedical.co.uk",
-     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Delta Surgical",
-     "domain": "www.deltasurgical.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (<urlopen error timed out>)",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
     },
     {
      "supplier": "Lisclare",
@@ -6399,13 +6405,14 @@
     "handling:sling"
    ],
    "publishedElsewhereNoOwnRange": [
+    "Delta Surgical",
     "Performance Health International Limited",
     "ProSys International Ltd"
    ],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 9,
-    "heldNeedingCategory": 5,
+    "publishedElsewhereNeedingCategory": 10,
+    "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -6442,7 +6449,9 @@
    ],
    "publishedElsewhere": [
     "BES Healthcare",
+    "Central Medical Supplies",
     "Croyde Medical",
+    "Delta Surgical",
     "Drive DeVilbiss Healthcare UK",
     "Fannin (UK) Limited",
     "Baxter / Hillrom",
@@ -6454,8 +6463,6 @@
     "Stryker"
    ],
    "heldOnly": [
-    "Central Medical Supplies",
-    "Delta Surgical",
     "Lisclare",
     "MIP UK",
     "Wealden Rehab"
@@ -6476,7 +6483,7 @@
    "unknown": [
     "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)"
    ],
-   "actionableTotal": 15,
+   "actionableTotal": 14,
    "blockedReason": null,
    "deferred": null
   },
@@ -6605,6 +6612,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Aquilant Limited",
+     "domain": "aquilantservices.com",
+     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-20",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "B. Braun Medical",
      "domain": "bbraun.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -6652,13 +6666,6 @@
      "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue",
      "checked": "2026-08-26",
      "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Aquilant Limited",
-     "domain": "aquilantservices.com",
-     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
-     "checked": "2026-09-20",
-     "bucket": "heldOnly"
     },
     {
      "supplier": "Creed Medical Ltd",
@@ -6712,6 +6719,7 @@
     "surgical:suction"
    ],
    "publishedElsewhereNoOwnRange": [
+    "Aquilant Limited",
     "Henry Schein UK Holdings",
     "OscarTech UK",
     "ProSys International Ltd"
@@ -6719,7 +6727,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 13,
-    "heldNeedingCategory": 7,
+    "heldNeedingCategory": 6,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -6741,6 +6749,7 @@
     "Uniplex"
    ],
    "publishedElsewhere": [
+    "Aquilant Limited",
     "Avicenna Surgical Limited",
     "B. Braun Medical",
     "Beaver Visitec International Sales Ltd",
@@ -6759,7 +6768,6 @@
     "Vernacare"
    ],
    "heldOnly": [
-    "Aquilant Limited",
     "Creed Medical Ltd",
     "RB Medical Engineering Ltd",
     "Rocialle Healthcare",
@@ -6787,7 +6795,7 @@
     "Valley Northern Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 21,
+   "actionableTotal": 20,
    "blockedReason": null,
    "deferred": null
   },
@@ -7233,6 +7241,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Solventum (3M Health Care)",
+     "domain": "solventum.com",
+     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-26",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Reliance Medical",
      "domain": "www.reliancemedical.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -7251,13 +7266,6 @@
      "domain": "gehealthcare.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-05",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Solventum (3M Health Care)",
-     "domain": "solventum.com",
-     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-26",
      "bucket": "heldOnly"
     },
     {
@@ -7341,8 +7349,8 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 2,
-    "heldNeedingCategory": 4,
+    "publishedElsewhereNeedingCategory": 3,
+    "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -7367,6 +7375,7 @@
    ],
    "publishedElsewhere": [
     "Henry Schein UK Holdings",
+    "Solventum (3M Health Care)",
     "Mindray UK",
     "Philips",
     "Reliance Medical",
@@ -7374,7 +7383,6 @@
    ],
    "heldOnly": [
     "GE HealthCare",
-    "Solventum (3M Health Care)",
     "Surgical Holdings Limited",
     "Walters Medical Ltd"
    ],
@@ -7769,25 +7777,25 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Draeger Medical UK",
-     "domain": "www.draeger.com",
-     "reason": "neither www.draeger.com nor www.www.draeger.com answered \u2014 the domain does not resolve or serves no usable certificate",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Central Medical Supplies",
      "domain": "centralmedical.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
-     "bucket": "heldOnly"
+     "bucket": "publishedElsewhere"
     },
     {
      "supplier": "Delta Surgical",
      "domain": "www.deltasurgical.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (<urlopen error timed out>)",
      "checked": "2026-08-31",
-     "bucket": "heldOnly"
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Draeger Medical UK",
+     "domain": "www.draeger.com",
+     "reason": "neither www.draeger.com nor www.www.draeger.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
     },
     {
      "supplier": "Deltex Medical Ltd",
@@ -7832,12 +7840,13 @@
     "monitoring:spec"
    ],
    "publishedElsewhereNoOwnRange": [
+    "Delta Surgical",
     "Draeger Medical UK"
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 2,
-    "heldNeedingCategory": 5,
+    "publishedElsewhereNeedingCategory": 3,
+    "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -7859,13 +7868,13 @@
     "Zoll Medical UK Limited"
    ],
    "publishedElsewhere": [
+    "Central Medical Supplies",
+    "Delta Surgical",
     "Draeger Medical UK",
     "Probo Medical (formerly MIUS)",
     "Philips"
    ],
    "heldOnly": [
-    "Central Medical Supplies",
-    "Delta Surgical",
     "Deltex Medical Ltd",
     "Edwards Lifesciences",
     "GE HealthCare"
@@ -7890,7 +7899,7 @@
     "Wardray Premise Limited"
    ],
    "unknown": [],
-   "actionableTotal": 8,
+   "actionableTotal": 7,
    "blockedReason": null,
    "deferred": null
   },
@@ -7900,8 +7909,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "19 October 2028",
    "suppliersAwarded": 33,
-   "suppliersPublished": 12,
-   "coverage": 36.4,
+   "suppliersPublished": 14,
+   "coverage": 42.4,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -7911,7 +7920,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 33,
-   "coverageOfTarget": 36.4,
+   "coverageOfTarget": 42.4,
    "crawlWorklist": [
     {
      "supplier": "Surgica Limited",
@@ -8006,13 +8015,6 @@
      "bucket": "heldOnly"
     },
     {
-     "supplier": "Delta Surgical",
-     "domain": "www.deltasurgical.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (<urlopen error timed out>)",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "Erbe Medical UK Ltd",
      "domain": "uk.erbegroup.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -8024,13 +8026,6 @@
      "domain": "healthcare25.co.uk",
      "reason": "the sitemap's product-path URLs are the site's clinical speciality navigation, not a product list \u2014 all 12 captured names are category headings (Personal Hygiene, Surgical Instruments, Urology, Urogynaecology, PPE, Paediatric Health, Cardiothoracic, Head & Neck Surgery, ENT, Women's Health, General Surgery, Plastic & Cosmetic Surgery) with no product beneath them in the capture, so publishing them would state 12 products where the capture read none; RE-CHECKED 28/09/2026 (^o289): there is no real product path to re-crawl against. The site's own sitemap index (Yoast) carries only post, page, events and category sitemaps; its WordPress REST API exposes no product post type; and every /products/<speciality>/ page is a category page listing product-line headings as text (e.g. /products/urology/: Monopolar Resectoscopes, Bipolar Resectoscopes, Cystoscopy Instruments) with no individual product URLs beneath them. The 12 nav-label rows held under the range key 'Gemini Surgical UK' were therefore removed from supplier-products.json, supplier-product-detail.json and the differentiator category map on 28/09/2026: since 'Gemini Surgical UK' became an alias of Healthcare 25 Ltd (18/09/2026, ^o535) that key matched a live index record, so the failed capture was no longer safely held. The 12 labels are preserved in this refusal. Re-crawl only if the site gains product-level pages.",
      "checked": "2026-09-28",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Solventum (3M Health Care)",
-     "domain": "solventum.com",
-     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-26",
      "bucket": "heldOnly"
     },
     {
@@ -8053,6 +8048,20 @@
      "reason": "the WooCommerce taxonomy captured is the company's own range navigation rather than a product list \u2014 the names are ranges and pack families (Orthopaedic, Ophthalmic, Cardio Thoracic, Surgical Gowns, Needle Holder, Scissors, Dental, Podiatry) and the division field carries the WordPress taxonomy labels Range / Products / Uncategorised rather than real divisions, so a capture would state 44 products where the site lists ranges",
      "checked": "2026-09-06",
      "bucket": "heldOnly"
+    },
+    {
+     "supplier": "Delta Surgical",
+     "domain": "www.deltasurgical.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (<urlopen error timed out>)",
+     "checked": "2026-08-31",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Solventum (3M Health Care)",
+     "domain": "solventum.com",
+     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-26",
+     "bucket": "published"
     },
     {
      "supplier": "Medtronic",
@@ -8101,7 +8110,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 3,
-    "heldNeedingCategory": 9,
+    "heldNeedingCategory": 7,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -8110,10 +8119,12 @@
    "published": [
     "Bolton Surgical Limited",
     "Conmed UK Ltd",
+    "Delta Surgical",
     "Empire Medical UK Ltd",
     "Ideal Medical Solutions",
     "Johnson & Johnson MedTech",
     "Judd Medical Ltd",
+    "Solventum (3M Health Care)",
     "Medtronic",
     "M\u00f6lnlycke",
     "Starkstrom Limited",
@@ -8131,10 +8142,8 @@
    ],
    "heldOnly": [
     "Critical Healthcare",
-    "Delta Surgical",
     "Erbe Medical UK Ltd",
     "Healthcare 25 Ltd",
-    "Solventum (3M Health Care)",
     "RB Medical Engineering Ltd",
     "SRA Developments",
     "Surgica Limited",
@@ -8152,7 +8161,7 @@
     "Toffeln Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 13,
+   "actionableTotal": 11,
    "blockedReason": null,
    "deferred": null
   },
@@ -8729,6 +8738,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Solventum (3M Health Care)",
+     "domain": "solventum.com",
+     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-26",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "LINC Medical",
      "domain": "linc-medical.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 2 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -8761,13 +8777,6 @@
      "domain": "microdot.biz",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Solventum (3M Health Care)",
-     "domain": "solventum.com",
-     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-26",
      "bucket": "heldOnly"
     },
     {
@@ -8833,8 +8842,8 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 5,
-    "heldNeedingCategory": 2,
+    "publishedElsewhereNeedingCategory": 6,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -8857,14 +8866,14 @@
     "Crest Medical Ltd",
     "Essity UK Limited",
     "Fannin (UK) Limited",
+    "Solventum (3M Health Care)",
     "LINC Medical",
     "Medline Industries",
     "Reliance Medical",
     "Vernacare"
    ],
    "heldOnly": [
-    "Cambridge Sensors Ltd",
-    "Solventum (3M Health Care)"
+    "Cambridge Sensors Ltd"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [],
@@ -8982,6 +8991,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Fenton Pharmaceuticals Limited",
+     "domain": "fentonpharmaceuticals.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Fannin (UK) Limited",
      "domain": "fannin.eu",
      "reason": "robots.txt disallows automated reading of this site",
@@ -8994,13 +9010,6 @@
      "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue",
      "checked": "2026-08-26",
      "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Fenton Pharmaceuticals Limited",
-     "domain": "fentonpharmaceuticals.com",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
     },
     {
      "supplier": "Rocialle Healthcare",
@@ -9088,11 +9097,13 @@
     "wound:fa",
     "wound:iv"
    ],
-   "publishedElsewhereNoOwnRange": [],
+   "publishedElsewhereNoOwnRange": [
+    "Fenton Pharmaceuticals Limited"
+   ],
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 3,
-    "heldNeedingCategory": 3,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -9112,12 +9123,12 @@
     "Urgo Medical"
    ],
    "publishedElsewhere": [
+    "Fenton Pharmaceuticals Limited",
     "Fannin (UK) Limited",
     "Trion Pharma Limited",
     "Vernacare"
    ],
    "heldOnly": [
-    "Fenton Pharmaceuticals Limited",
     "Rocialle Healthcare",
     "Unisurge International Limited"
    ],
@@ -9138,7 +9149,7 @@
     "Steroplast Healthcare Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 8,
+   "actionableTotal": 7,
    "blockedReason": null,
    "deferred": null
   },
@@ -9425,25 +9436,25 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Getinge",
-     "domain": "www.getinge.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-10-08",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Aquilant Limited",
      "domain": "aquilantservices.com",
      "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
      "checked": "2026-09-20",
-     "bucket": "heldOnly"
+     "bucket": "publishedElsewhere"
     },
     {
      "supplier": "Central Medical Supplies",
      "domain": "centralmedical.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
-     "bucket": "heldOnly"
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Getinge",
+     "domain": "www.getinge.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-10-08",
+     "bucket": "publishedElsewhere"
     },
     {
      "supplier": "GE HealthCare",
@@ -9482,11 +9493,13 @@
     "neonatal:equip",
     "neonatal:resp"
    ],
-   "publishedElsewhereNoOwnRange": [],
+   "publishedElsewhereNoOwnRange": [
+    "Aquilant Limited"
+   ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 3,
-    "heldNeedingCategory": 5,
+    "publishedElsewhereNeedingCategory": 4,
+    "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -9504,13 +9517,13 @@
     "Penlon"
    ],
    "publishedElsewhere": [
+    "Aquilant Limited",
+    "Central Medical Supplies",
     "Getinge",
     "Nihon Kohden",
     "Philips"
    ],
    "heldOnly": [
-    "Aquilant Limited",
-    "Central Medical Supplies",
     "GE HealthCare",
     "L\u00f6wenstein Medical UK",
     "Walters Medical Ltd"
@@ -9529,7 +9542,7 @@
     "@SimulationMan Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 10,
+   "actionableTotal": 9,
    "blockedReason": null,
    "deferred": null
   },
@@ -10230,6 +10243,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Fenton Pharmaceuticals Limited",
+     "domain": "fentonpharmaceuticals.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Schulke & Mayr UK Ltd",
      "domain": "www.schuelke.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -10241,13 +10261,6 @@
      "domain": "creedhealth.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-11",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Fenton Pharmaceuticals Limited",
-     "domain": "fentonpharmaceuticals.com",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-08-31",
      "bucket": "heldOnly"
     },
     {
@@ -10280,12 +10293,13 @@
    ],
    "publishedElsewhereNoOwnRange": [
     "Diversey",
+    "Fenton Pharmaceuticals Limited",
     "Schulke & Mayr UK Ltd"
    ],
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 2,
-    "heldNeedingCategory": 2,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -10302,12 +10316,12 @@
    "publishedElsewhere": [
     "Diversey",
     "Essity UK Limited",
+    "Fenton Pharmaceuticals Limited",
     "PDI (EMEA)",
     "Schulke & Mayr UK Ltd"
    ],
    "heldOnly": [
-    "Creed Medical Ltd",
-    "Fenton Pharmaceuticals Limited"
+    "Creed Medical Ltd"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
@@ -10324,7 +10338,7 @@
     "SC Johnson Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 5,
+   "actionableTotal": 4,
    "blockedReason": null,
    "deferred": null
   },
@@ -11371,18 +11385,18 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Aquilant Limited",
+     "domain": "aquilantservices.com",
+     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-20",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Fannin (UK) Limited",
      "domain": "fannin.eu",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-08",
      "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Aquilant Limited",
-     "domain": "aquilantservices.com",
-     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
-     "checked": "2026-09-20",
-     "bucket": "heldOnly"
     },
     {
      "supplier": "Balmung Medical Handel GmbH",
@@ -11437,11 +11451,13 @@
     "vascular:pivc",
     "vascular:sec"
    ],
-   "publishedElsewhereNoOwnRange": [],
+   "publishedElsewhereNoOwnRange": [
+    "Aquilant Limited"
+   ],
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 4,
-    "heldNeedingCategory": 3,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -11458,13 +11474,13 @@
     "Vygon (UK)"
    ],
    "publishedElsewhere": [
+    "Aquilant Limited",
     "Fannin (UK) Limited",
     "Johnson & Johnson MedTech",
     "Reflex Medical Limited",
     "Timesco Healthcare Ltd"
    ],
    "heldOnly": [
-    "Aquilant Limited",
     "Balmung Medical Handel GmbH",
     "Unisurge International Limited"
    ],
@@ -11476,7 +11492,7 @@
     "Scottmed Distribution (UK) Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 7,
+   "actionableTotal": 6,
    "blockedReason": null,
    "deferred": null
   },
@@ -11577,7 +11593,7 @@
      "domain": "centralmedical.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
-     "bucket": "heldOnly"
+     "bucket": "publishedElsewhere"
     },
     {
      "supplier": "GBUK Group",
@@ -11611,8 +11627,8 @@
    "publishedElsewhereNoOwnRange": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 0,
-    "heldNeedingCategory": 1,
+    "publishedElsewhereNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -11627,10 +11643,10 @@
     "Medela",
     "Medicare Colgate Ltd (Sterifeed)"
    ],
-   "publishedElsewhere": [],
-   "heldOnly": [
+   "publishedElsewhere": [
     "Central Medical Supplies"
    ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Babease Limited"
@@ -11657,8 +11673,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "19 June 2027",
    "suppliersAwarded": 18,
-   "suppliersPublished": 7,
-   "coverage": 38.9,
+   "suppliersPublished": 12,
+   "coverage": 66.7,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -11668,7 +11684,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 18,
-   "coverageOfTarget": 38.9,
+   "coverageOfTarget": 66.7,
    "crawlWorklist": [
     {
      "supplier": "Novus Medical Ltd",
@@ -11711,41 +11727,41 @@
      "domain": "solventum.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-26",
-     "bucket": "heldOnly"
+     "bucket": "published"
     },
     {
      "supplier": "Aquilant Limited",
      "domain": "aquilantservices.com",
      "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
      "checked": "2026-09-20",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Central Medical Supplies",
-     "domain": "centralmedical.co.uk",
-     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Fenton Pharmaceuticals Limited",
-     "domain": "fentonpharmaceuticals.com",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Delta Surgical",
-     "domain": "www.deltasurgical.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (<urlopen error timed out>)",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
+     "bucket": "published"
     },
     {
      "supplier": "GBUK Group",
      "domain": null,
      "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
      "checked": "2026-09-07",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Central Medical Supplies",
+     "domain": "centralmedical.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-31",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Fenton Pharmaceuticals Limited",
+     "domain": "fentonpharmaceuticals.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-08-31",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Delta Surgical",
+     "domain": "www.deltasurgical.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (<urlopen error timed out>)",
+     "checked": "2026-08-31",
      "bucket": "published"
     },
     {
@@ -11785,16 +11801,21 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 2,
-    "heldNeedingCategory": 5,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
     "needDomain": 2
    },
    "published": [
+    "Solventum (3M Health Care)",
+    "Aquilant Limited",
     "GBUK Group",
+    "Central Medical Supplies",
     "HC21 (UK) Ltd",
     "ICU Medical (incl. Smiths Medical)",
+    "Fenton Pharmaceuticals Limited",
+    "Delta Surgical",
     "Draeger Medical UK",
     "M\u00f6lnlycke",
     "Steris",
@@ -11806,13 +11827,7 @@
     "Crest Medical Ltd",
     "Reliance Medical"
    ],
-   "heldOnly": [
-    "Solventum (3M Health Care)",
-    "Aquilant Limited",
-    "Central Medical Supplies",
-    "Fenton Pharmaceuticals Limited",
-    "Delta Surgical"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Novus Medical Ltd",
@@ -11820,7 +11835,7 @@
    ],
    "refused": [],
    "unknown": [],
-   "actionableTotal": 9,
+   "actionableTotal": 4,
    "blockedReason": null,
    "deferred": null
   },
@@ -12179,6 +12194,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Central Medical Supplies",
+     "domain": "centralmedical.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Fannin (UK) Limited",
      "domain": "fannin.eu",
      "reason": "robots.txt disallows automated reading of this site",
@@ -12198,13 +12220,6 @@
      "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue",
      "checked": "2026-08-26",
      "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Central Medical Supplies",
-     "domain": "centralmedical.co.uk",
-     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
     },
     {
      "supplier": "Mediq Healthcare UK Ltd",
@@ -12230,8 +12245,8 @@
    "publishedElsewhereNoOwnRange": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 4,
-    "heldNeedingCategory": 1,
+    "publishedElsewhereNeedingCategory": 5,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -12245,13 +12260,12 @@
    ],
    "publishedElsewhere": [
     "Cardinal Health U.K. 432 Ltd",
+    "Central Medical Supplies",
     "Fannin (UK) Limited",
     "Medline Industries",
     "Vernacare"
    ],
-   "heldOnly": [
-    "Central Medical Supplies"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [],
    "refused": [
@@ -14384,6 +14398,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Aquilant Limited",
+     "domain": "aquilantservices.com",
+     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-20",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "B. Braun Medical",
      "domain": "bbraun.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -14401,6 +14422,13 @@
      "supplier": "Cardinal Health U.K. 432 Ltd",
      "domain": "www.cardinalhealth.com",
      "reason": "neither www.cardinalhealth.com nor www.www.cardinalhealth.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Delta Surgical",
+     "domain": "www.deltasurgical.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (<urlopen error timed out>)",
      "checked": "2026-08-31",
      "bucket": "publishedElsewhere"
     },
@@ -14468,13 +14496,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Aquilant Limited",
-     "domain": "aquilantservices.com",
-     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
-     "checked": "2026-09-20",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "Balmung Medical Handel GmbH",
      "domain": "www.balmung-medical.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -14485,13 +14506,6 @@
      "supplier": "Cambridge Sensors Ltd",
      "domain": "microdot.biz",
      "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Delta Surgical",
-     "domain": "www.deltasurgical.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (<urlopen error timed out>)",
      "checked": "2026-08-31",
      "bucket": "heldOnly"
     },
@@ -14520,6 +14534,8 @@
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "publishedElsewhereNoOwnRange": [
+    "Aquilant Limited",
+    "Delta Surgical",
     "Henry Schein UK Holdings",
     "Reliance Medical",
     "Rocket Medical"
@@ -14527,7 +14543,7 @@
    "actionable": {
     "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 26,
-    "heldNeedingCategory": 7,
+    "heldNeedingCategory": 5,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -14535,11 +14551,13 @@
    },
    "published": [],
    "publishedElsewhere": [
+    "Aquilant Limited",
     "Argon Medical Devices UK Ltd",
     "B. Braun Medical",
     "BD \u2014 Becton, Dickinson",
     "Cardinal Health U.K. 432 Ltd",
     "Crest Medical Ltd",
+    "Delta Surgical",
     "Fannin (UK) Limited",
     "GBUK Group",
     "Greiner Bio-One Ltd",
@@ -14566,10 +14584,8 @@
     "Orion Medical Supplies"
    ],
    "heldOnly": [
-    "Aquilant Limited",
     "Balmung Medical Handel GmbH",
     "Cambridge Sensors Ltd",
-    "Delta Surgical",
     "Prospect Diagnostics Ltd",
     "Rocialle Healthcare",
     "Unisurge International Limited"
@@ -14597,7 +14613,7 @@
    "unknown": [
     "Apollo Medical Technologies Ltd"
    ],
-   "actionableTotal": 40,
+   "actionableTotal": 38,
    "blockedReason": null,
    "deferred": null
   },
@@ -14944,6 +14960,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Aquilant Limited",
+     "domain": "aquilantservices.com",
+     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-20",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "B. Braun Medical",
      "domain": "bbraun.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -14953,6 +14976,20 @@
     {
      "supplier": "Essity UK Limited",
      "domain": "medical.essity.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-26",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Delta Surgical",
+     "domain": "www.deltasurgical.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (<urlopen error timed out>)",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Solventum (3M Health Care)",
+     "domain": "solventum.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-26",
      "bucket": "publishedElsewhere"
@@ -15014,13 +15051,6 @@
      "bucket": "heldOnly"
     },
     {
-     "supplier": "Aquilant Limited",
-     "domain": "aquilantservices.com",
-     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
-     "checked": "2026-09-20",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "Baxter Healthcare Ltd",
      "domain": "www.baxterhealthcare.co.uk",
      "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -15032,20 +15062,6 @@
      "domain": "www.criticalhealthcare.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Delta Surgical",
-     "domain": "www.deltasurgical.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (<urlopen error timed out>)",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Solventum (3M Health Care)",
-     "domain": "solventum.com",
-     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-26",
      "bucket": "heldOnly"
     },
     {
@@ -15066,13 +15082,15 @@
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "publishedElsewhereNoOwnRange": [
+    "Aquilant Limited",
+    "Delta Surgical",
     "OscarTech UK",
     "Reliance Medical"
    ],
    "actionable": {
     "unresolvedNames": 3,
-    "publishedElsewhereNeedingCategory": 18,
-    "heldNeedingCategory": 8,
+    "publishedElsewhereNeedingCategory": 19,
+    "heldNeedingCategory": 5,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -15081,12 +15099,15 @@
    "published": [],
    "publishedElsewhere": [
     "Advanced Medical Solutions (AMS)",
+    "Aquilant Limited",
     "B. Braun Medical",
     "Essity UK Limited",
     "Crest Medical Ltd",
+    "Delta Surgical",
     "Healthium Medtech UK",
     "Ideal Medical Solutions",
     "Johnson & Johnson MedTech",
+    "Solventum (3M Health Care)",
     "Kebomed UK Ltd",
     "Mediq Healthcare UK Ltd",
     "Medline Industries",
@@ -15103,11 +15124,8 @@
    ],
    "heldOnly": [
     "Anser Medical",
-    "Aquilant Limited",
     "Baxter Healthcare Ltd",
     "Critical Healthcare",
-    "Delta Surgical",
-    "Solventum (3M Health Care)",
     "Richardson Healthcare",
     "Terumo Aortic"
    ],
@@ -15129,7 +15147,7 @@
     "GS Medical Healthcare Ltd (novating to GBUK Ltd)",
     "T.J Smith & Nephew Ltd"
    ],
-   "actionableTotal": 35,
+   "actionableTotal": 33,
    "blockedReason": null,
    "deferred": null
   },
@@ -15225,6 +15243,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Delta Surgical",
+     "domain": "www.deltasurgical.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (<urlopen error timed out>)",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Fannin (UK) Limited",
      "domain": "fannin.eu",
      "reason": "robots.txt disallows automated reading of this site",
@@ -15267,13 +15292,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Delta Surgical",
-     "domain": "www.deltasurgical.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (<urlopen error timed out>)",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "Pennine Healthcare (Ivor Shaw Ltd)",
      "domain": "penninehealthcare.co.uk",
      "reason": "the site's WordPress API returned HTTP 401; the WooCommerce Store API returned HTTP 401; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -15305,12 +15323,13 @@
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "publishedElsewhereNoOwnRange": [
+    "Delta Surgical",
     "OscarTech UK"
    ],
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 13,
-    "heldNeedingCategory": 5,
+    "heldNeedingCategory": 4,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -15321,6 +15340,7 @@
     "Andersen Caledonia Ltd",
     "Avicenna Surgical Limited",
     "B. Braun Medical",
+    "Delta Surgical",
     "Fannin (UK) Limited",
     "Farla Medical",
     "ISOL8 Healthcare Limited",
@@ -15334,7 +15354,6 @@
     "Vygon (UK)"
    ],
    "heldOnly": [
-    "Delta Surgical",
     "Pennine Healthcare (Ivor Shaw Ltd)",
     "Richardson Healthcare",
     "Rocialle Healthcare",
@@ -15356,7 +15375,7 @@
     "Toffeln Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 22,
+   "actionableTotal": 21,
    "blockedReason": null,
    "deferred": null
   },
@@ -16435,6 +16454,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Aquilant Limited",
+     "domain": "aquilantservices.com",
+     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-20",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "B. Braun Medical",
      "domain": "bbraun.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -16463,13 +16489,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Aquilant Limited",
-     "domain": "aquilantservices.com",
-     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
-     "checked": "2026-09-20",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "Lawmed Ltd",
      "domain": "www.lawmed.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -16479,11 +16498,13 @@
    ],
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
-   "publishedElsewhereNoOwnRange": [],
+   "publishedElsewhereNoOwnRange": [
+    "Aquilant Limited"
+   ],
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 11,
-    "heldNeedingCategory": 2,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -16492,6 +16513,7 @@
    "published": [],
    "publishedElsewhere": [
     "Advanced Medical Solutions (AMS)",
+    "Aquilant Limited",
     "B. Braun Medical",
     "BD \u2014 Becton, Dickinson",
     "Boston Scientific",
@@ -16504,7 +16526,6 @@
     "W.L. Gore & Associates"
    ],
    "heldOnly": [
-    "Aquilant Limited",
     "Lawmed Ltd"
    ],
    "capturedNothingCounted": [],
@@ -16521,7 +16542,7 @@
     "Raise Healthcare Pvt Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 16,
+   "actionableTotal": 15,
    "blockedReason": null,
    "deferred": null
   },
@@ -16911,6 +16932,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Aquilant Limited",
+     "domain": "aquilantservices.com",
+     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-20",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Arthrex",
      "domain": "www.arthrex.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -16953,13 +16981,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Aquilant Limited",
-     "domain": "aquilantservices.com",
-     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
-     "checked": "2026-09-20",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "D.P. Medical Systems Limited",
      "domain": "www.dpmedicalsys.com",
      "reason": "the site's WordPress API could not be read (<urlopen error timed out>); the sitemap carries 0 product URLs, too few to call a catalogue",
@@ -16984,13 +17005,14 @@
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "publishedElsewhereNoOwnRange": [
+    "Aquilant Limited",
     "Arthrex",
     "Olympus (KeyMed)"
    ],
    "actionable": {
     "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 6,
-    "heldNeedingCategory": 4,
+    "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -16998,6 +17020,7 @@
    },
    "published": [],
    "publishedElsewhere": [
+    "Aquilant Limited",
     "Arthrex",
     "B. Braun Medical",
     "Conmed UK Ltd",
@@ -17008,7 +17031,6 @@
     "Stryker"
    ],
    "heldOnly": [
-    "Aquilant Limited",
     "D.P. Medical Systems Limited",
     "LocaMed Ltd",
     "RB Medical Engineering Ltd"
@@ -17026,7 +17048,7 @@
    "unknown": [
     "Emmat Medical"
    ],
-   "actionableTotal": 12,
+   "actionableTotal": 11,
    "blockedReason": null,
    "deferred": null
   },
@@ -17091,6 +17113,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Solventum (3M Health Care)",
+     "domain": "solventum.com",
+     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-26",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "RPG Medical Limited",
      "domain": "rpgmedical.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
@@ -17110,13 +17139,6 @@
      "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
      "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Solventum (3M Health Care)",
-     "domain": "solventum.com",
-     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-26",
-     "bucket": "heldOnly"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
@@ -17124,8 +17146,8 @@
    "publishedElsewhereNoOwnRange": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 11,
-    "heldNeedingCategory": 4,
+    "publishedElsewhereNeedingCategory": 12,
+    "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -17139,6 +17161,7 @@
     "Fannin (UK) Limited",
     "GBUK Group",
     "ICU Medical (incl. Smiths Medical)",
+    "Solventum (3M Health Care)",
     "Merit Medical UK Ltd",
     "OncoSem UK Limited",
     "RPG Medical Limited",
@@ -17148,7 +17171,6 @@
    "heldOnly": [
     "Balmung Medical Handel GmbH",
     "Baxter Healthcare Ltd",
-    "Solventum (3M Health Care)",
     "Wescott Medical Ltd"
    ],
    "capturedNothingCounted": [],
@@ -18343,6 +18365,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Aquilant Limited",
+     "domain": "aquilantservices.com",
+     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-20",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "BD \u2014 Becton, Dickinson",
      "domain": "bd.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -18357,13 +18386,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Aquilant Limited",
-     "domain": "aquilantservices.com",
-     "reason": "neither aquilantservices.com nor www.aquilantservices.com answered \u2014 the domain does not resolve or serves no usable certificate",
-     "checked": "2026-09-20",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "Edwards Lifesciences",
      "domain": "www.edwards.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -18374,12 +18396,13 @@
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "publishedElsewhereNoOwnRange": [
-    "Abbott Medical U.K. Ltd"
+    "Abbott Medical U.K. Ltd",
+    "Aquilant Limited"
    ],
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 3,
-    "heldNeedingCategory": 2,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -18388,12 +18411,12 @@
    "published": [],
    "publishedElsewhere": [
     "Abbott Medical U.K. Ltd",
+    "Aquilant Limited",
     "BD \u2014 Becton, Dickinson",
     "Medtronic",
     "Meril UK Pvt Ltd"
    ],
    "heldOnly": [
-    "Aquilant Limited",
     "Edwards Lifesciences"
    ],
    "capturedNothingCounted": [],
@@ -18406,7 +18429,7 @@
     "Abiomed Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 8,
+   "actionableTotal": 7,
    "blockedReason": null,
    "deferred": null
   },
@@ -18844,6 +18867,13 @@
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
+     "supplier": "Solventum (3M Health Care)",
+     "domain": "solventum.com",
+     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-26",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Medline Industries",
      "domain": "medline.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -18863,13 +18893,6 @@
      "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue",
      "checked": "2026-08-26",
      "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Solventum (3M Health Care)",
-     "domain": "solventum.com",
-     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-26",
-     "bucket": "heldOnly"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
@@ -18877,8 +18900,8 @@
    "publishedElsewhereNoOwnRange": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 3,
-    "heldNeedingCategory": 2,
+    "publishedElsewhereNeedingCategory": 4,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -18886,12 +18909,12 @@
    },
    "published": [],
    "publishedElsewhere": [
+    "Solventum (3M Health Care)",
     "Medline Industries",
     "Steris",
     "Vernacare"
    ],
    "heldOnly": [
-    "Solventum (3M Health Care)",
     "Westfield Medical Ltd"
    ],
    "capturedNothingCounted": [],
@@ -19300,6 +19323,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Solventum (3M Health Care)",
+     "domain": "solventum.com",
+     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-26",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "M\u00f6lnlycke",
      "domain": "molnlycke.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -19312,13 +19342,6 @@
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-31",
      "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Solventum (3M Health Care)",
-     "domain": "solventum.com",
-     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-26",
-     "bucket": "heldOnly"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
@@ -19326,8 +19349,8 @@
    "publishedElsewhereNoOwnRange": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 3,
-    "heldNeedingCategory": 2,
+    "publishedElsewhereNeedingCategory": 4,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -19336,11 +19359,11 @@
    "published": [],
    "publishedElsewhere": [
     "Convatec",
+    "Solventum (3M Health Care)",
     "M\u00f6lnlycke",
     "Smith+Nephew"
    ],
    "heldOnly": [
-    "Solventum (3M Health Care)",
     "Talley"
    ],
    "capturedNothingCounted": [],
