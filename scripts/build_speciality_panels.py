@@ -7948,7 +7948,7 @@ SPECIALITY_RULES = {
         #                        only as the recipient of the shared care paperwork
         #                        afterwards. Buying a secondary care drug service is not
         #                        a primary care contract.
-        "exclude": r"\b(primary care orthodontic\w*|shared care documentation)\b",
+        "exclude": r"\b(primary care orthodontic\w*|shared care documentation|urgent treatment centres?)\b",
         "excludeFinding": (
             "The exclusion list exists because every pattern in it matched a real notice "
             "that was not this speciality, and there were five rows across two patterns: "
@@ -7956,7 +7956,9 @@ SPECIALITY_RULES = {
             "are high-street dentistry on a separate performers list and a separate "
             "commissioning route, and NHS Essex ICB's denosumab outpatient therapy "
             "agreement, where primary care appears only as the recipient of the shared "
-            "care paperwork. WHAT A READER OF THIS LIST SHOULD KNOW BEFORE READING IT: "
+            "care paperwork. A third pattern, urgent treatment centre, was added on 24/10/2026 when "
+            "three NHS Kent and Medway ICB awards titled GP-led Urgent Treatment Centre matched on the GP token; "
+            "urgent care is counted on the Emergency and Urgent Care page and must not appear on two pages at once. WHAT A READER OF THIS LIST SHOULD KNOW BEFORE READING IT: "
             "[[awardsTitle:Locally Commissioned Services]] of the [[awards]] matching notices are a single contract family - NHS South "
             "Yorkshire ICB's GP Locally Commissioned Services, awarded practice by "
             "practice across Sheffield, the first of them published on 9 and 10 September 2026. They "

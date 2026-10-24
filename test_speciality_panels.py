@@ -7009,6 +7009,8 @@ _pc_absent("urgent treatment centres are counted on page 2922",
            "UHS Urgent Treatment Centre Clinical Service Provision")
 _pc_absent("urgent treatment centres are counted on page 2922",
            "HHFT Urgent Treatment Centre Clinical Service Provision (3 + 2 years)")
+_pc_absent("a GP-led urgent treatment centre matches the GP token but is page 2922's",
+           "GP-led Urgent Treatment Centre")
 _pc_absent("NHS 111 and integrated urgent care are counted on page 2922",
            "BLMK ICB Integrated Urgent Care (111 & Out of Hours) Service")
 _pc_absent("a children's palliative out-of-hours line is the palliative page's",
