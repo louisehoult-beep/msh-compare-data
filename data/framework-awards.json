@@ -13,22 +13,51 @@
  "source": "Find a Tender Service (OCDS 1.1)",
  "source_url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages",
  "licence": "Open Government Licence",
- "generated": "2026-10-24T11:02:19+00:00",
+ "generated": "2026-10-25T11:16:51+00:00",
  "window_last_run": {
-  "from": "2026-10-21",
-  "to": "2026-10-24"
+  "from": "2026-10-22",
+  "to": "2026-10-25"
  },
  "health_relevance_rule": "Kept if the buyer name matches NHS / Integrated Care Board / Health Board, or any CPV code begins 33 (medical equipment and pharmaceuticals) or 851 (health services). Bare 'Trust' is not a match (academy and housing trusts would flood the feed). CPV 852 (veterinary) and 853 (social work) excluded.",
  "evidence_caveat": "A supplier named on a framework award is evidence they CAN supply through that framework. It is NOT evidence of uptake, volume or market share at any trust. Do not convert these records into share-of-market claims.",
  "counts": {
-  "awards": 3459,
+  "awards": 3460,
   "framework_awards": 225,
-  "with_named_suppliers": 2519,
+  "with_named_suppliers": 2520,
   "with_contract_end_date": 1250,
   "with_max_extent_date": 203,
   "distinct_buyers": 661
  },
  "awards": [
+  {
+   "ocid": "ocds-h6vhtk-078faa",
+   "notice_id": "100779-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-10-24",
+   "title": "801500 - FRF-01663 - Deployable Medical Diagnosis",
+   "buyer": {
+    "name": "Ministry of Defence",
+    "ppon": "PHVX-4316-ZVGZ"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Fujifilm Healthcare UK Ltd",
+     "companies_house": "03218117"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [],
+   "cpv": [
+    "33100000",
+    "73400000"
+   ],
+   "matched_by": "cpv_33_medical",
+   "url": "https://www.find-tender.service.gov.uk/Notice/100779-2026"
+  },
   {
    "ocid": "ocds-h6vhtk-078cf1",
    "notice_id": "100295-2026",
