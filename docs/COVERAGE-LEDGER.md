@@ -88,7 +88,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | CT Scanners and Associated Options and Related Services | imaging | 8 | 2 | 25.0% | 4 | 6 | STARTED |
 | Polymer Aprons | infection | 8 | 2 | 25.0% | 1 | 8 | STARTED |
 | Contrast Injectors, Consumables and Associated Options and Related Services | imaging | 5 | 1 | 20.0% | 0 | 4 | STARTED · BLOCKED |
-| Polymer Products | infection | 5 | 2 | 40.0% | 3 | 2 | STARTED |
+| Polymer Products | infection | 5 | 2 | 40.0% | 2 | 3 | STARTED |
 | Reusable Clinical and Sharps Waste Management Service | infection | 3 | 1 | 33.3% | 0 | 2 | STARTED · BLOCKED |
 | Brachytherapy Seeds and Associated Accessories | oncology | 2 | 1 | 50.0% | 1 | 1 | STARTED |
 | Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services | ent | 7 | 0 | 0.0% | 3 | 5 | NOT STARTED |
