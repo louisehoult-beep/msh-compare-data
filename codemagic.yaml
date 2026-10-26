@@ -108,7 +108,7 @@ workflows:
 # Environment group "industrynurses" (Codemagic > Teams > Global variables):
 #   APP_STORE_APPLE_ID   numeric Apple ID of the new app (App Store Connect > App Information)
 # The "livedesk" group's GCLOUD_SERVICE_ACCOUNT_CREDENTIALS is reused for Play uploads.
-# Android keystore reference "ain_upload" must be created in Codemagic > Code signing identities.
+# Android signing reuses the Live Desk upload keystore "livedesk_upload" (one upload key may sign several apps).
   ain-ios:
     name: Industry Nurses iOS
     working_directory: association-app
@@ -160,7 +160,7 @@ workflows:
         - livedesk
         - industrynurses
       android_signing:
-        - ain_upload
+        - livedesk_upload
       node: 22
       java: 21
     triggering:

@@ -34,7 +34,7 @@ Put the email and password in the review notes; the app's sign-in screen has "I 
 ## Phone apps
 
 1. App Store Connect: new app, bundle id `uk.co.medsalesintelligencehub.industrynurses`, name "Industry Nurses". Note its numeric Apple ID.
-2. Play Console: new app, package `uk.co.medsalesintelligencehub.industrynurses`. Create upload keystore `ain_upload` in Codemagic.
+2. Play Console: new app, package `uk.co.medsalesintelligencehub.industrynurses`. The Android build reuses the Live Desk upload keystore `livedesk_upload`.
 3. Codemagic: group `industrynurses` with `APP_STORE_APPLE_ID`.
 4. `git tag ain-v1.0.0 && git push origin ain-v1.0.0`. Codemagic runs the tests, builds, signs and uploads to TestFlight and Play internal testing.
 5. Store review needs: reviewer login above, a screen recording for Apple, and a store name, icon and description that match the app (Google rejected Live Desk on 23/10 for a mismatch).
