@@ -1,9 +1,24 @@
 export class ApiError extends Error {}
 
+// The phone apps are built with VITE_API_BASE set to the hosted address; the website uses same-origin calls and a cookie.
+export const API_BASE: string = (import.meta as any).env?.VITE_API_BASE || '';
+const TOKEN_KEY = 'ain-session';
+const store = {
+  get: () => { try { return localStorage.getItem(TOKEN_KEY); } catch { return null; } },
+  set: (v: string | null) => { try { v ? localStorage.setItem(TOKEN_KEY, v) : localStorage.removeItem(TOKEN_KEY); } catch { /* private mode */ } },
+};
+
 export async function api<T = any>(method: string, path: string, body?: unknown): Promise<T> {
-  const r = await fetch(path, { method, headers: body ? { 'content-type': 'application/json' } : undefined, body: body ? JSON.stringify(body) : undefined });
+  const headers: Record<string, string> = {};
+  if (body) headers['content-type'] = 'application/json';
+  const token = API_BASE ? store.get() : null;
+  if (token) headers.authorization = `Bearer ${token}`;
+  const r = await fetch(API_BASE + path, { method, headers, body: body ? JSON.stringify(body) : undefined });
   const data = await r.json().catch(() => ({}));
   if (!r.ok) throw new ApiError(data.error || 'Something went wrong. Try again.');
+  if (API_BASE && path === '/api/auth/verify' && data.session) store.set(data.session);
+  if (API_BASE && path === '/api/auth/logout') store.set(null);
+  if (API_BASE && method === 'DELETE' && path === '/api/me') store.set(null);
   return data as T;
 }
 

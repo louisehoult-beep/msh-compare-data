@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState, type FormEvent, type ReactNode } from 'react';
-import { api, type EventItem, type Member } from './api';
+import { api, API_BASE, type EventItem, type Member } from './api';
 
 const ASSOC_URL = 'https://medsalesintelligencehub.co.uk/association-for-industry-professional-nurses/';
 
@@ -30,7 +30,7 @@ export function App() {
   const seg = path.split('/').filter(Boolean);
   if (seg[0] === 'verify') page = <Verify token={seg[1]} onDone={() => { refresh(); go('/'); }} />;
   else if (seg[0] === 'join') page = <Join />;
-  else if (seg[0] === 'signin') page = <SignIn />;
+  else if (seg[0] === 'signin') page = <SignIn onDone={() => { refresh(); go('/'); }} />;
   else if (seg[0] === 'events') page = <Events member={m} />;
   else if (!m) page = <Landing />;
   else if (seg[0] === 'me') page = <Profile member={m} onChange={refresh} />;
@@ -130,6 +130,7 @@ function Join() {
   const submit = (e: FormEvent) => { e.preventDefault(); run(async () => { const r = await api('POST', '/api/auth/signup', f); setLink(r.devLink || null); setSent(true); }); };
   if (sent) return (<div className="wrap page-head"><h1>Check your email</h1>
     <div className="ok">We've sent a sign-in link to {f.email}. It works once and lasts 15 minutes. After you sign in, your membership waits for approval; we'll alert you when it's done.</div>
+    <p>Using the phone app? Open <a href="#/signin">Sign in</a> and type the 6-digit code from the email.</p>
     {link && <p className="hint">Mail is not connected yet. Test sign-in link: <a href={link}>{link}</a></p>}</div>);
   return (<div className="wrap page-head" style={{ maxWidth: 640 }}>
     <span className="tag">Join free</span><h1>Join the Association</h1>
@@ -148,25 +149,33 @@ function Join() {
       <label htmlFor="g">Region (optional)</label><input id="g" value={f.region} onChange={set('region')} placeholder="e.g. North West" />
       <p />
       <label className="check"><input type="checkbox" checked={f.consent} onChange={set('consent')} required />
-        <span>I agree that the Association may store these details to run my membership. I can export or delete them at any time from my profile.</span></label>
+        <span>I agree to the <a href="https://medsalesintelligencehub.co.uk/terms/" target="_blank" rel="noopener noreferrer">Terms of Use</a> and <a href="https://medsalesintelligencehub.co.uk/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>, and that the Association may store these details to run my membership. I can export or delete them at any time from my profile. There is no tolerance for abusive or offensive posts.</span></label>
       <Err text={err} />
       <button className="btn" disabled={busy}>{busy ? 'Joining…' : 'Join'}</button>
       <a className="btn ghost" href="#/signin">Already a member?</a>
     </form></div>);
 }
 
-function SignIn() {
+function SignIn({ onDone }: { onDone: () => void }) {
   const [email, setEmail] = useState('');
+  const [code, setCode] = useState('');
   const [sent, setSent] = useState(false);
-  const [link, setLink] = useState<string | null>(null);
+  const [dev, setDev] = useState<{ link?: string; code?: string }>({});
   const { err, busy, run } = useAction();
-  const submit = (e: FormEvent) => { e.preventDefault(); run(async () => { const r = await api('POST', '/api/auth/request', { email }); setLink(r.devLink || null); setSent(true); }); };
+  const submit = (e: FormEvent) => { e.preventDefault(); run(async () => { const r = await api('POST', '/api/auth/request', { email }); setDev({ link: r.devLink, code: r.devCode }); setSent(true); }); };
+  const enter = (e: FormEvent) => { e.preventDefault(); run(async () => { await api('POST', '/api/auth/verify', { email, code: code.trim() }); onDone(); }); };
   return (<div className="wrap page-head" style={{ maxWidth: 560 }}>
     <h1>Sign in</h1>
-    {sent ? <div className="ok">If that email is registered, a sign-in link is on its way. It lasts 15 minutes.</div> : (
+    {!sent ? (
       <form onSubmit={submit}><label htmlFor="e">Email</label><input id="e" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" />
-        <Err text={err} /><button className="btn" disabled={busy}>Email me a sign-in link</button></form>)}
-    {link && <p className="hint">Mail is not connected yet. Test sign-in link: <a href={link}>{link}</a></p>}
+        <Err text={err} /><button className="btn" disabled={busy}>Email me a sign-in code</button>
+        <button type="button" className="btn ghost" onClick={() => setSent(true)}>I already have a code</button></form>
+    ) : (
+      <form onSubmit={enter}><div className="ok">If that email is registered, we've sent a sign-in link and a 6-digit code. They last 15 minutes.</div>
+        {!email && (<><label htmlFor="e2">Email</label><input id="e2" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" /></>)}
+        <label htmlFor="c">6-digit code</label><input id="c" inputMode="numeric" autoComplete="one-time-code" maxLength={6} value={code} onChange={(e) => setCode(e.target.value)} required />
+        <Err text={err} /><button className="btn" disabled={busy}>Sign in</button></form>)}
+    {dev.link && <p className="hint">Mail is not connected yet. Test link: <a href={dev.link}>{dev.link}</a> · code {dev.code}</p>}
   </div>);
 }
 
@@ -214,7 +223,7 @@ function EventCard({ e, member, onToggle }: { e: EventItem; member: Member | nul
     <div className="row">
       <a className="btn small" href={e.source_url} target="_blank" rel="noopener noreferrer">{e.source_label}</a>
       {member && <button className="btn ghost small" onClick={toggle} aria-pressed={e.saved}>{e.saved ? 'Saved ✓' : 'Save'}</button>}
-      {e.start_date && <a className="btn ghost small" href={`/api/events/${e.id}.ics`}>Add to calendar</a>}
+      {e.start_date && <a className="btn ghost small" href={`${API_BASE}/api/events/${e.id}.ics`}>Add to calendar</a>}
     </div>
   </article>);
 }
@@ -273,8 +282,9 @@ function Channel({ slug, member }: { slug: string; member: Member }) {
   const post = (parent_id?: number, text?: string) => run(async () => { await api('POST', `/api/channels/${slug}/posts`, { body: text ?? body, parent_id }); setBody(''); setReply(null); await load(); });
   const report = (id: number) => { const reason = prompt('Why are you reporting this post?') || ''; run(async () => { await api('POST', `/api/posts/${id}/report`, { reason }); setNote('Thank you. An admin will look at it.'); }); };
   const remove = (id: number) => { if (confirm('Delete this post?')) run(async () => { await api('DELETE', `/api/posts/${id}`); await load(); }); };
+  const block = (p: any) => { if (confirm(`Block ${p.author}? You will no longer see their posts.`)) run(async () => { await api('POST', `/api/members/${p.member_id}/block`); await load(); }); };
   const Actions = ({ p }: { p: any }) => (<span className="row" style={{ gap: 6 }}>
-    {p.member_id === member.id || member.is_admin ? <button className="btn danger small" onClick={() => remove(p.id)}>Delete</button> : <button className="btn ghost small" onClick={() => report(p.id)}>Report</button>}</span>);
+    {p.member_id === member.id || member.is_admin ? <button className="btn danger small" onClick={() => remove(p.id)}>Delete</button> : <><button className="btn ghost small" onClick={() => report(p.id)}>Report</button><button className="btn ghost small" onClick={() => block(p)}>Block</button></>}</span>);
   return (<div className="wrap"><div className="page-head"><a href="#/community">← All channels</a><h1>{data.channel.title}</h1><p>{data.channel.description}</p></div>
     <div className="card plain"><label htmlFor="b">Start a thread</label><textarea id="b" rows={3} value={body} onChange={(e) => setBody(e.target.value)} />
       <p className="hint">Do not include patient details or confidential employer information.</p><Err text={err} />{note && <div className="ok">{note}</div>}

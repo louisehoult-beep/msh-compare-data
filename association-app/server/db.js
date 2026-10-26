@@ -28,7 +28,13 @@ export function openDb(path = process.env.DB_PATH || 'data/app.db') {
     );
     CREATE TABLE IF NOT EXISTS login_tokens (
       token TEXT PRIMARY KEY, member_id INTEGER NOT NULL REFERENCES members(id) ON DELETE CASCADE,
-      expires_at TEXT NOT NULL, used INTEGER NOT NULL DEFAULT 0
+      expires_at TEXT NOT NULL, used INTEGER NOT NULL DEFAULT 0,
+      code TEXT NOT NULL DEFAULT '', attempts INTEGER NOT NULL DEFAULT 0
+    );
+    CREATE TABLE IF NOT EXISTS blocks (
+      blocker_id INTEGER NOT NULL REFERENCES members(id) ON DELETE CASCADE,
+      blocked_id INTEGER NOT NULL REFERENCES members(id) ON DELETE CASCADE,
+      PRIMARY KEY (blocker_id, blocked_id)
     );
     CREATE TABLE IF NOT EXISTS sessions (
       id TEXT PRIMARY KEY, member_id INTEGER NOT NULL REFERENCES members(id) ON DELETE CASCADE,

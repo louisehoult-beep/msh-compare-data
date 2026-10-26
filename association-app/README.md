@@ -19,6 +19,8 @@ For development run `npm run dev:server` and `npm run dev:client` (client on :51
 |---|---|
 | `ADMIN_EMAILS` | Comma-separated. These sign-ups are approved automatically and get the Admin area. |
 | `BASE_URL` | Public address, used in sign-in links. Use `https://` in production. |
+| `RESEND_API_KEY`, `MAIL_FROM` | Sends sign-in emails through Resend. |
+| `REVIEWER_EMAIL`, `REVIEWER_CODE` | One pre-approved account that signs in with a fixed 6-digit code, for app store reviewers. |
 | `MAIL_WEBHOOK_URL` | Address that receives `{to, subject, text}` as JSON and sends the email. Until set, sign-in links are printed in the server log and shown on screen (dev mode). |
 | `DB_PATH` | SQLite file, default `data/app.db`. Back it up. |
 | `PORT` | Default 3000. |
@@ -35,3 +37,5 @@ Not in v1: CPD log, accreditation, payments, push notifications, mentor booking.
 - Host it under the Association's domain, `medsalesintelligencehub.co.uk`. A Node host is needed; WordPress cannot run it.
 - Check each member's PIN on the NMC register before approving (the app checks format only).
 - Add a privacy notice link to the join form.
+
+Deployment and store steps: see `DEPLOY.md`.

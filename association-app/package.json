@@ -7,14 +7,25 @@
     "dev:client": "vite --config client/vite.config.ts",
     "build": "vite build --config client/vite.config.ts",
     "start": "node server/index.js",
-    "test": "node --test server/"
+    "test": "node --test server/",
+    "build:app": "VITE_API_BASE=https://app.medsalesintelligencehub.co.uk vite build --config client/vite.config.ts",
+    "sync": "npm run build:app && cap sync"
   },
   "dependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/browser": "^8.0.5",
+    "@capacitor/core": "^8.5.3",
+    "@capacitor/ios": "^8.5.3",
+    "@capacitor/splash-screen": "^8.0.2",
+    "@capacitor/status-bar": "^8.0.4",
     "express": "^4.21.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^8.5.3",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",

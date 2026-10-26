@@ -1,5 +1,5 @@
 import express from 'express';
-import { randomBytes } from 'node:crypto';
+import { randomBytes, randomInt, timingSafeEqual } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -13,9 +13,21 @@ const bad = (res, msg, code = 400) => res.status(code).json({ error: msg });
 const str = (v, max = 200) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
 const isUrl = (u) => /^https?:\/\/[^\s]+$/i.test(u);
 
-export function createApp(db, { adminEmails = [], sendMail = async () => {}, baseUrl = '', devLinks = false } = {}) {
+const NATIVE_ORIGINS = ['capacitor://localhost', 'https://localhost', 'http://localhost'];
+const same = (a, b) => a.length === b.length && timingSafeEqual(Buffer.from(a), Buffer.from(b));
+
+export function createApp(db, { adminEmails = [], sendMail = async () => {}, baseUrl = '', devLinks = false, reviewer = null } = {}) {
   const app = express();
   app.use(express.json({ limit: '50kb' }));
+  // The phone apps load from capacitor://localhost, so they need cross-origin access to this API.
+  app.use((req, res, next) => {
+    const o = req.headers.origin;
+    if (o && NATIVE_ORIGINS.includes(o)) {
+      res.set({ 'Access-Control-Allow-Origin': o, 'Access-Control-Allow-Headers': 'content-type, authorization', 'Access-Control-Allow-Methods': 'GET,POST,PATCH,DELETE,OPTIONS', Vary: 'Origin' });
+      if (req.method === 'OPTIONS') return res.sendStatus(204);
+    }
+    next();
+  });
 
   const publicMember = (m) => ({ id: m.id, name: m.name, email: m.email, role_category: m.role_category, employer_type: m.employer_type,
     speciality: m.speciality, region: m.region, directory_visible: !!m.directory_visible, mentoring: m.mentoring,
@@ -24,9 +36,11 @@ export function createApp(db, { adminEmails = [], sendMail = async () => {}, bas
   // ---- session middleware
   app.use((req, _res, next) => {
     const cookie = /(?:^|; )sid=([a-f0-9]+)/.exec(req.headers.cookie || '');
+    const bearer = /^Bearer ([a-f0-9]+)$/.exec(req.headers.authorization || '');
+    const sid = bearer ? bearer[1] : cookie?.[1];
     req.member = null;
-    if (cookie) {
-      const row = db.prepare(`SELECT m.* FROM sessions s JOIN members m ON m.id = s.member_id WHERE s.id = ? AND s.expires_at > ?`).get(cookie[1], iso(0));
+    if (sid) {
+      const row = db.prepare(`SELECT m.* FROM sessions s JOIN members m ON m.id = s.member_id WHERE s.id = ? AND s.expires_at > ?`).get(sid, iso(0));
       if (row) req.member = row;
     }
     next();
@@ -61,10 +75,11 @@ export function createApp(db, { adminEmails = [], sendMail = async () => {}, bas
 
   async function issueLink(memberId, email) {
     const token = randomBytes(24).toString('hex');
-    db.prepare('INSERT INTO login_tokens (token, member_id, expires_at) VALUES (?,?,?)').run(token, memberId, iso(15 * 60 * 1000));
+    const code = String(randomInt(0, 1000000)).padStart(6, '0');
+    db.prepare('INSERT INTO login_tokens (token, member_id, expires_at, code) VALUES (?,?,?,?)').run(token, memberId, iso(15 * 60 * 1000), code);
     const link = `${baseUrl}/#/verify/${token}`;
-    await sendMail(email, 'Your sign-in link', `Use this link within 15 minutes to sign in:\n\n${link}\n\nIf you did not ask for it, ignore this email.`);
-    return devLinks ? { devLink: link } : {};
+    await sendMail(email, 'Your sign-in link', `Sign in with this link within 15 minutes:\n\n${link}\n\nUsing the phone app? Type this code instead: ${code}\n\nIf you did not ask for it, ignore this email.`);
+    return devLinks ? { devLink: link, devCode: code } : {};
   }
 
   app.post('/api/auth/request', async (req, res) => {
@@ -74,19 +89,41 @@ export function createApp(db, { adminEmails = [], sendMail = async () => {}, bas
     res.json({ ok: true, ...(m ? await issueLink(m.id, email) : {}) });
   });
 
-  app.post('/api/auth/verify', (req, res) => {
-    const t = db.prepare('SELECT * FROM login_tokens WHERE token = ? AND used = 0 AND expires_at > ?').get(str(req.body?.token, 100), iso(0));
-    if (!t) return bad(res, 'That link has expired or was already used. Request a new one.', 400);
-    db.prepare('UPDATE login_tokens SET used = 1 WHERE token = ?').run(t.token);
+  function startSession(res, memberId) {
     const sid = randomBytes(24).toString('hex');
-    db.prepare('INSERT INTO sessions (id, member_id, expires_at) VALUES (?,?,?)').run(sid, t.member_id, iso(30 * 24 * 3600 * 1000));
+    db.prepare('INSERT INTO sessions (id, member_id, expires_at) VALUES (?,?,?)').run(sid, memberId, iso(30 * 24 * 3600 * 1000));
     res.setHeader('Set-Cookie', `sid=${sid}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${30 * 24 * 3600}${baseUrl.startsWith('https') ? '; Secure' : ''}`);
-    res.json({ ok: true });
+    return sid;
+  }
+
+  // Sign in with the emailed link token (web), or with email plus the 6-digit code (phone app).
+  app.post('/api/auth/verify', (req, res) => {
+    const email = str(req.body?.email).toLowerCase();
+    const code = str(req.body?.code, 6);
+    if (reviewer && email && code && email === reviewer.email && same(code, reviewer.code)) {
+      const m = db.prepare('SELECT id FROM members WHERE email = ?').get(email);
+      if (m) return res.json({ ok: true, session: startSession(res, m.id) });
+    }
+    let t;
+    if (email && code) {
+      t = db.prepare(`SELECT lt.* FROM login_tokens lt JOIN members m ON m.id = lt.member_id WHERE m.email = ? AND lt.used = 0 AND lt.expires_at > ? ORDER BY lt.rowid DESC LIMIT 1`).get(email, iso(0));
+      if (t) {
+        if (t.attempts >= 5) return bad(res, 'Too many wrong codes. Request a new one.', 429);
+        if (!t.code || !same(code, t.code)) { db.prepare('UPDATE login_tokens SET attempts = attempts + 1 WHERE token = ?').run(t.token); t = null; }
+      }
+    } else {
+      t = db.prepare('SELECT * FROM login_tokens WHERE token = ? AND used = 0 AND expires_at > ?').get(str(req.body?.token, 100), iso(0));
+    }
+    if (!t) return bad(res, 'That link or code has expired, was already used, or is wrong. Request a new one.', 400);
+    db.prepare('UPDATE login_tokens SET used = 1 WHERE token = ?').run(t.token);
+    res.json({ ok: true, session: startSession(res, t.member_id) });
   });
 
   app.post('/api/auth/logout', (req, res) => {
     const cookie = /(?:^|; )sid=([a-f0-9]+)/.exec(req.headers.cookie || '');
-    if (cookie) db.prepare('DELETE FROM sessions WHERE id = ?').run(cookie[1]);
+    const bearer = /^Bearer ([a-f0-9]+)$/.exec(req.headers.authorization || '');
+    const sid = bearer ? bearer[1] : cookie?.[1];
+    if (sid) db.prepare('DELETE FROM sessions WHERE id = ?').run(sid);
     res.setHeader('Set-Cookie', 'sid=; HttpOnly; Path=/; Max-Age=0');
     res.json({ ok: true });
   });
@@ -234,8 +271,8 @@ export function createApp(db, { adminEmails = [], sendMail = async () => {}, bas
   app.get('/api/channels/:slug/posts', needAuth, needApproved, (req, res) => {
     const c = db.prepare('SELECT * FROM channels WHERE slug = ?').get(req.params.slug);
     if (!c) return bad(res, 'Channel not found.', 404);
-    const threads = db.prepare(`SELECT ${postRow} FROM posts p JOIN members m ON m.id = p.member_id WHERE p.channel_id = ? AND p.parent_id IS NULL AND p.hidden = 0 ORDER BY p.id DESC LIMIT 100`).all(c.id);
-    const replies = threads.length ? db.prepare(`SELECT ${postRow} FROM posts p JOIN members m ON m.id = p.member_id WHERE p.parent_id IN (${threads.map(() => '?').join(',')}) AND p.hidden = 0 ORDER BY p.id`).all(...threads.map((t) => t.id)) : [];
+    const threads = db.prepare(`SELECT ${postRow} FROM posts p JOIN members m ON m.id = p.member_id WHERE p.channel_id = ? AND p.parent_id IS NULL AND p.hidden = 0 AND p.member_id NOT IN (SELECT blocked_id FROM blocks WHERE blocker_id = ?) ORDER BY p.id DESC LIMIT 100`).all(c.id, req.member.id);
+    const replies = threads.length ? db.prepare(`SELECT ${postRow} FROM posts p JOIN members m ON m.id = p.member_id WHERE p.parent_id IN (${threads.map(() => '?').join(',')}) AND p.hidden = 0 AND p.member_id NOT IN (SELECT blocked_id FROM blocks WHERE blocker_id = ?) ORDER BY p.id`).all(...threads.map((t) => t.id), req.member.id) : [];
     res.json({ channel: c, threads: threads.map((t) => ({ ...t, replies: replies.filter((r) => r.parent_id === t.id) })) });
   });
   app.post('/api/channels/:slug/posts', needAuth, needApproved, (req, res) => {
@@ -263,6 +300,15 @@ export function createApp(db, { adminEmails = [], sendMail = async () => {}, bas
     if (!p) return bad(res, 'Post not found.', 404);
     db.prepare('INSERT OR IGNORE INTO reports (post_id, member_id, reason) VALUES (?,?,?)').run(p.id, req.member.id, str(req.body?.reason, 300) || 'No reason given');
     for (const a of db.prepare('SELECT id FROM members WHERE is_admin = 1').all()) notify(a.id, 'A post was reported', '/admin');
+    res.json({ ok: true });
+  });
+
+  // Members can block anyone whose posts they do not want to see (required for apps with user-generated content).
+  app.post('/api/members/:id/block', needAuth, needApproved, (req, res) => {
+    const id = Number(req.params.id);
+    if (id === req.member.id || !db.prepare('SELECT 1 FROM members WHERE id = ?').get(id)) return bad(res, 'Not allowed.', 400);
+    db.prepare('INSERT OR IGNORE INTO blocks (blocker_id, blocked_id) VALUES (?,?)').run(req.member.id, id);
+    for (const a of db.prepare('SELECT id FROM members WHERE is_admin = 1').all()) notify(a.id, 'A member was blocked by another member', '/admin');
     res.json({ ok: true });
   });
 

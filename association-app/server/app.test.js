@@ -7,7 +7,8 @@ import { createApp } from './app.js';
 async function boot() {
   const db = openDb(':memory:');
   seed(db);
-  const server = createApp(db, { adminEmails: ['admin@example.com'], devLinks: true }).listen(0);
+  db.prepare("INSERT INTO members (email,name,nmc_pin,role_category,employer_type,status,consent_at) VALUES ('rev@example.com','Reviewer','00A0000A','Other','Other','approved',datetime('now'))").run();
+  const server = createApp(db, { adminEmails: ['admin@example.com'], devLinks: true, reviewer: { email: 'rev@example.com', code: '424242' } }).listen(0); server.unref();
   const base = `http://localhost:${server.address().port}`;
   const client = () => {
     let cookie = '';
@@ -119,6 +120,53 @@ test('member can delete their account', async () => {
   const a = client();
   await join(a, 'a@example.com');
   assert.equal((await a('DELETE', '/api/me')).status, 200);
-  assert.equal(db.prepare('SELECT COUNT(*) c FROM members').get().c, 0);
+  assert.equal(db.prepare('SELECT COUNT(*) c FROM members WHERE email = ?').get('a@example.com').c, 0);
+  server.close();
+});
+
+test('phone app signs in with email plus code and a bearer token', async () => {
+  const { server, client } = await boot();
+  const web = client();
+  const r = await web('POST', '/api/auth/signup', signup('p@example.com'));
+  const phone = client();
+  assert.equal((await phone('POST', '/api/auth/verify', { email: 'p@example.com', code: '000000' })).status, 400);
+  const ok = await phone('POST', '/api/auth/verify', { email: 'p@example.com', code: r.body.devCode });
+  assert.equal(ok.status, 200);
+  const res = await fetch(`http://localhost:${server.address().port}/api/me`, { headers: { authorization: `Bearer ${ok.body.session}`, origin: 'capacitor://localhost' } });
+  assert.equal((await res.json()).member.email, 'p@example.com');
+  assert.equal(res.headers.get('access-control-allow-origin'), 'capacitor://localhost');
+  server.close();
+});
+
+test('wrong codes lock out after five tries', async () => {
+  const { server, client } = await boot();
+  const c = client();
+  const r = await c('POST', '/api/auth/signup', signup('l@example.com'));
+  for (let i = 0; i < 5; i++) await c('POST', '/api/auth/verify', { email: 'l@example.com', code: '111111' });
+  assert.equal((await c('POST', '/api/auth/verify', { email: 'l@example.com', code: r.body.devCode })).status, 429);
+  server.close();
+});
+
+test('reviewer account signs in with the fixed code only', async () => {
+  const { server, client } = await boot();
+  const c = client();
+  assert.equal((await c('POST', '/api/auth/verify', { email: 'rev@example.com', code: '000000' })).status, 400);
+  assert.equal((await c('POST', '/api/auth/verify', { email: 'rev@example.com', code: '424242' })).status, 200);
+  assert.equal((await c('GET', '/api/channels')).status, 200);
+  server.close();
+});
+
+test('blocked members disappear from the feed', async () => {
+  const { server, client, db } = await boot();
+  const a = client(), b = client();
+  await join(a, 'a@example.com');
+  await join(b, 'b@example.com');
+  db.prepare("UPDATE members SET status='approved'").run();
+  await b('POST', '/api/channels/regional/posts', { body: 'Hello from B' });
+  const bid = db.prepare("SELECT id FROM members WHERE email='b@example.com'").get().id;
+  assert.equal((await a('GET', '/api/channels/regional/posts')).body.threads.length, 1);
+  await a('POST', `/api/members/${bid}/block`);
+  assert.equal((await a('GET', '/api/channels/regional/posts')).body.threads.length, 0);
+  assert.equal((await b('GET', '/api/channels/regional/posts')).body.threads.length, 1);
   server.close();
 });

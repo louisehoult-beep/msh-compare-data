@@ -100,3 +100,93 @@ workflows:
         credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
         track: internal
         submit_as_draft: true
+
+# ---------------------------------------------------------------------------
+# Association for Industry Professional Nurses app (association-app/). Added 26/10/2026.
+# Same route as Live Desk: a tag "ain-v*" builds, signs and uploads iOS to TestFlight
+# and Android to the Google Play internal testing track.
+# Environment group "industrynurses" (Codemagic > Teams > Global variables):
+#   APP_STORE_APPLE_ID   numeric Apple ID of the new app (App Store Connect > App Information)
+# The "livedesk" group's GCLOUD_SERVICE_ACCOUNT_CREDENTIALS is reused for Play uploads.
+# Android keystore reference "ain_upload" must be created in Codemagic > Code signing identities.
+  ain-ios:
+    name: Industry Nurses iOS
+    working_directory: association-app
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: Live Desk ASC
+    environment:
+      groups:
+        - industrynurses
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: uk.co.medsalesintelligencehub.industrynurses
+      node: 22
+      xcode: latest
+    triggering:
+      events:
+        - tag
+      tag_patterns:
+        - pattern: "ain-v*"
+    scripts:
+      - name: Install
+        script: npm ci
+      - name: Test
+        script: npm test
+      - name: Build web app
+        script: npm run build:app
+      - name: Sync native project
+        script: npx cap sync ios
+      - name: Signing profiles
+        script: xcode-project use-profiles
+      - name: Build number
+        script: |
+          LATEST=$(app-store-connect get-latest-testflight-build-number "$APP_STORE_APPLE_ID" || echo 0)
+          cd ios/App && agvtool new-version -all $((LATEST + 1))
+      - name: Build ipa
+        script: xcode-project build-ipa --project ios/App/App.xcodeproj --scheme App
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+
+  ain-android:
+    name: Industry Nurses Android
+    working_directory: association-app
+    max_build_duration: 60
+    environment:
+      groups:
+        - livedesk
+        - industrynurses
+      android_signing:
+        - ain_upload
+      node: 22
+      java: 21
+    triggering:
+      events:
+        - tag
+      tag_patterns:
+        - pattern: "ain-v*"
+    scripts:
+      - name: Install
+        script: npm ci
+      - name: Test
+        script: npm test
+      - name: Build web app
+        script: npm run build:app
+      - name: Sync native project
+        script: npx cap sync android
+      - name: Build app bundle
+        script: |
+          cd android
+          ./gradlew bundleRelease --stacktrace -PversionCode=${PROJECT_BUILD_NUMBER:-1}
+    artifacts:
+      - android/app/build/outputs/bundle/release/*.aab
+    publishing:
+      google_play:
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: internal
+        submit_as_draft: true
