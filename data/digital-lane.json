@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "25/10/2026",
- "generated": "2026-10-25",
+ "dataAsOf": "26/10/2026",
+ "generated": "2026-10-26",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,20 +22,20 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-10-17",
-   "to": "2026-10-25",
+   "from": "2026-10-18",
+   "to": "2026-10-26",
    "days": 8,
-   "run": "2026-10-25"
+   "run": "2026-10-26"
   },
   "notes": [
-   "Find a Tender (tender stage): 0 digital lane notice(s) from 35 release(s) over 1 page(s)",
-   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-17",
-   "Find a Tender (planning stage): 1 digital lane notice(s) from 21 release(s) over 1 page(s)",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-17"
+   "Find a Tender (tender stage): 0 digital lane notice(s) from 38 release(s) over 1 page(s)",
+   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-18",
+   "Find a Tender (planning stage): 1 digital lane notice(s) from 22 release(s) over 1 page(s)",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-18"
   ]
  },
  "counts": {
-  "awards": 283,
+  "awards": 287,
   "awardsClinical": 34,
   "openNotices": 2,
   "openNoticesClinical": 1,
@@ -43,6 +43,80 @@
   "marketEngagementClinical": 0
  },
  "awards": [
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "tender",
+   "title": "World Model for SCAT",
+   "buyer": "Velindre University NHS Trust - : Please note NHS Wales Shared Services Partnership (hosted by Velindre University NHS Trust) will manage this procurement on behalf of the contracting authority. Due to having the same identifiers, we're unable to reflect this in the notice options.",
+   "published": "2026-10-26",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72200000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/100941-2026",
+   "ocid": "ocds-h6vhtk-06da19"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "WHHT - PM3 Licence",
+   "buyer": "West Hertfordshire Teaching Hospitals NHS Trust",
+   "published": "2026-10-26",
+   "suppliers": [
+    "Bestoutcome Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-03-31",
+   "value": 17808.0,
+   "digitalCpv": [
+    "48218000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/100821-2026",
+   "ocid": "ocds-h6vhtk-078fc1"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Anticoagulation Software",
+   "buyer": "BUCKINGHAMSHIRE HEALTHCARE NHS TRUST",
+   "published": "2026-10-26",
+   "suppliers": [
+    "4 S INFORMATION SYSTEMS LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 61732,
+   "digitalCpv": [
+    "72212180"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/100814-2026",
+   "ocid": "ocds-h6vhtk-078fbd"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Next Generation Sequencing Testing (NGS)",
+   "buyer": "NHS Blood and Transplant",
+   "published": "2026-10-26",
+   "suppliers": [
+    "SGS United Kingdom Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-12",
+   "value": 407200.0,
+   "digitalCpv": [
+    "72225000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/100796-2026",
+   "ocid": "ocds-h6vhtk-0514f8"
+  },
   {
    "lane": "digital",
    "clinical": false,
@@ -5535,6 +5609,12 @@
    "to": "2026-10-25",
    "days": 8,
    "run": "2026-10-25"
+  },
+  {
+   "from": "2026-10-18",
+   "to": "2026-10-26",
+   "days": 8,
+   "run": "2026-10-26"
   }
  ]
 }
