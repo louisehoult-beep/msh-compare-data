@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState, type FormEvent, type ReactNode } from 'react';
-import { api, API_BASE, type EventItem, type Member } from './api';
+import { api, API_BASE, signInWithPassword, verifyCode, type EventItem, type Member } from './api';
 
 const ASSOC_URL = 'https://medsalesintelligencehub.co.uk/association-for-industry-professional-nurses/';
 
@@ -28,8 +28,7 @@ export function App() {
 
   let page: ReactNode;
   const seg = path.split('/').filter(Boolean);
-  if (seg[0] === 'verify') page = <Verify token={seg[1]} onDone={() => { refresh(); go('/'); }} />;
-  else if (seg[0] === 'join') page = <Join />;
+  if (seg[0] === 'join') page = <Join />;
   else if (seg[0] === 'signin') page = <SignIn onDone={() => { refresh(); go('/'); }} />;
   else if (seg[0] === 'events') page = <Events member={m} />;
   else if (!m) page = <Landing />;
@@ -122,16 +121,14 @@ function Landing() {
 function Join() {
   const [opts, setOpts] = useState<{ roles: string[]; employers: string[] }>({ roles: [], employers: [] });
   const [f, setF] = useState<any>({ email: '', name: '', nmc_pin: '', role_category: '', employer_type: '', speciality: '', region: '', consent: false });
-  const [link, setLink] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
   const { err, busy, run } = useAction();
   useEffect(() => { api('GET', '/api/options').then(setOpts); }, []);
   const set = (k: string) => (e: any) => setF({ ...f, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value });
-  const submit = (e: FormEvent) => { e.preventDefault(); run(async () => { const r = await api('POST', '/api/auth/signup', f); setLink(r.devLink || null); setSent(true); }); };
+  const submit = (e: FormEvent) => { e.preventDefault(); run(async () => { await api('POST', '/api/auth/signup', f); setSent(true); }); };
   if (sent) return (<div className="wrap page-head"><h1>Check your email</h1>
-    <div className="ok">We've sent a sign-in link to {f.email}. It works once and lasts 15 minutes. After you sign in, your membership waits for approval; we'll alert you when it's done.</div>
-    <p>Using the phone app? Open <a href="#/signin">Sign in</a> and type the 6-digit code from the email.</p>
-    {link && <p className="hint">Mail is not connected yet. Test sign-in link: <a href={link}>{link}</a></p>}</div>);
+    <div className="ok">We've sent a 6-digit sign-in code to {f.email}. It lasts an hour. After you sign in, your membership waits for approval; we'll alert you when it's done.</div>
+    <p>Open <a href="#/signin">Sign in</a>, choose “I already have a code” and type it in.</p></div>);
   return (<div className="wrap page-head" style={{ maxWidth: 640 }}>
     <span className="tag">Join free</span><h1>Join the Association</h1>
     <p>Membership is free for nurses in industry and nurses moving into industry.</p>
@@ -159,30 +156,31 @@ function Join() {
 function SignIn({ onDone }: { onDone: () => void }) {
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
-  const [sent, setSent] = useState(false);
-  const [dev, setDev] = useState<{ link?: string; code?: string }>({});
+  const [password, setPassword] = useState('');
+  const [mode, setMode] = useState<'email' | 'code' | 'password'>('email');
   const { err, busy, run } = useAction();
-  const submit = (e: FormEvent) => { e.preventDefault(); run(async () => { const r = await api('POST', '/api/auth/request', { email }); setDev({ link: r.devLink, code: r.devCode }); setSent(true); }); };
-  const enter = (e: FormEvent) => { e.preventDefault(); run(async () => { await api('POST', '/api/auth/verify', { email, code: code.trim() }); onDone(); }); };
+  const submit = (e: FormEvent) => { e.preventDefault(); run(async () => { await api('POST', '/api/auth/request', { email }); setMode('code'); }); };
+  const enter = (e: FormEvent) => { e.preventDefault(); run(async () => { await verifyCode(email.trim().toLowerCase(), code.trim()); onDone(); }); };
+  const enterPw = (e: FormEvent) => { e.preventDefault(); run(async () => { await signInWithPassword(email.trim().toLowerCase(), password); onDone(); }); };
+  const emailField = (<><label htmlFor="e">Email</label><input id="e" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" /></>);
   return (<div className="wrap page-head" style={{ maxWidth: 560 }}>
     <h1>Sign in</h1>
-    {!sent ? (
-      <form onSubmit={submit}><label htmlFor="e">Email</label><input id="e" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" />
+    {mode === 'email' && (
+      <form onSubmit={submit}>{emailField}
         <Err text={err} /><button className="btn" disabled={busy}>Email me a sign-in code</button>
-        <button type="button" className="btn ghost" onClick={() => setSent(true)}>I already have a code</button></form>
-    ) : (
-      <form onSubmit={enter}><div className="ok">If that email is registered, we've sent a sign-in link and a 6-digit code. They last 15 minutes.</div>
-        {!email && (<><label htmlFor="e2">Email</label><input id="e2" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" /></>)}
+        <button type="button" className="btn ghost" onClick={() => setMode('code')}>I already have a code</button>
+        <button type="button" className="btn ghost" onClick={() => setMode('password')}>I have a password</button></form>)}
+    {mode === 'code' && (
+      <form onSubmit={enter}><div className="ok">If that email is registered, we've sent a 6-digit code. It lasts an hour.</div>
+        {!email && emailField}
         <label htmlFor="c">6-digit code</label><input id="c" inputMode="numeric" autoComplete="one-time-code" maxLength={6} value={code} onChange={(e) => setCode(e.target.value)} required />
         <Err text={err} /><button className="btn" disabled={busy}>Sign in</button></form>)}
-    {dev.link && <p className="hint">Mail is not connected yet. Test link: <a href={dev.link}>{dev.link}</a> · code {dev.code}</p>}
+    {mode === 'password' && (
+      <form onSubmit={enterPw}>{emailField}
+        <label htmlFor="pw">Password</label><input id="pw" type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <Err text={err} /><button className="btn" disabled={busy}>Sign in</button>
+        <button type="button" className="btn ghost" onClick={() => setMode('email')}>Use an email code instead</button></form>)}
   </div>);
-}
-
-function Verify({ token, onDone }: { token: string; onDone: () => void }) {
-  const { err, run } = useAction();
-  useEffect(() => { run(async () => { await api('POST', '/api/auth/verify', { token }); onDone(); }); }, []); // eslint-disable-line
-  return <div className="wrap page-head"><h1>Signing you in…</h1><Err text={err} />{err && <a className="btn" href="#/signin">Get a new link</a>}</div>;
 }
 
 function Pending({ member }: { member: Member }) {

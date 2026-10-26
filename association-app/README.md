@@ -1,41 +1,34 @@
 # Association for Industry Professional Nurses: member app
 
-Progressive web app (React + TypeScript front end, Node + SQLite back end). Spec: `../association-industry-nurses-app-spec.md`.
+React + TypeScript app (website and Capacitor phone apps) on Supabase, the same host as Live Desk. Spec: `../association-industry-nurses-app-spec.md`.
 
-## Run
+| Piece | Where |
+|---|---|
+| Tables (all `ain_*`, row-level security on, no public policies) and seed events, channels, resources | `../supabase/migrations/20261026180000_industry_nurses_app.sql` |
+| API: edge function `industrynurses` (same `/api/...` routes as the old Node server) | `../supabase/functions/industrynurses/` |
+| Sign-in | Supabase Auth email code (6 digits). Reviewers can use email and password. |
+| Client | `client/` |
+
+Server address: `https://vbthumugbzyqndirmyns.supabase.co/functions/v1/industrynurses` (set in `npm run build:app`).
+
+## Run and test
 
 ```bash
 npm install
-npm run build
-ADMIN_EMAILS=you@example.com npm start      # http://localhost:3000
-npm test                                     # API tests
+npm test            # Deno: rules plus the real handler against an in-memory Postgres (PGlite) loaded with the real migration
+npm run build:app   # client pointed at Supabase; then `npx cap sync`
 ```
 
-For development run `npm run dev:server` and `npm run dev:client` (client on :5173 proxies `/api`).
+## Settings
 
-## Settings (environment)
-
-| Variable | Meaning |
-|---|---|
-| `ADMIN_EMAILS` | Comma-separated. These sign-ups are approved automatically and get the Admin area. |
-| `BASE_URL` | Public address, used in sign-in links. Use `https://` in production. |
-| `RESEND_API_KEY`, `MAIL_FROM` | Sends sign-in emails through Resend. |
-| `REVIEWER_EMAIL`, `REVIEWER_CODE` | One pre-approved account that signs in with a fixed 6-digit code, for app store reviewers. |
-| `MAIL_WEBHOOK_URL` | Address that receives `{to, subject, text}` as JSON and sends the email. Until set, sign-in links are printed in the server log and shown on screen (dev mode). |
-| `DB_PATH` | SQLite file, default `data/app.db`. Back it up. |
-| `PORT` | Default 3000. |
+Function secret `ADMIN_EMAILS` (comma separated): those sign-ups are approved automatically and get the Admin area. Everything else is injected by Supabase.
 
 ## What is in v1
 
-Sign-up with NMC PIN format check and manual approval; email sign-in links; events (seeded from the live conferences page, checked 26/10/2026, undated events show "date not confirmed", calendar file for dated ones); jobs (each links to the employer's own listing, clicks logged); community channels with replies, reports and moderation; opt-in member directory; resources; in-app alerts; profile with data export and account deletion; admin approval queue, moderation, content forms and weekly numbers.
+Sign-up with NMC PIN format check and manual approval; email code sign-in; events (seeded from the live conferences page, checked 26/10/2026, undated events show "date not confirmed", calendar file for dated ones); jobs (each links to the employer's own listing, clicks logged); community channels with replies, reports, blocking and moderation; opt-in member directory; resources; in-app alerts; profile with data export and account deletion; admin approval queue, moderation, content forms and weekly numbers.
 
 Not in v1: CPD log, accreditation, payments, push notifications, mentor booking.
 
-## Before going live
+The app checks the PIN format only. Check each PIN on the NMC register before approving.
 
-- Connect a mail sender (`MAIL_WEBHOOK_URL`) and set `BASE_URL`.
-- Host it under the Association's domain, `medsalesintelligencehub.co.uk`. A Node host is needed; WordPress cannot run it.
-- Check each member's PIN on the NMC register before approving (the app checks format only).
-- Add a privacy notice link to the join form.
-
-Deployment and store steps: see `DEPLOY.md`.
+Deployment and store steps: `DEPLOY.md`.

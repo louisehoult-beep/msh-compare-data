@@ -3,12 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev:server": "node --watch server/index.js",
     "dev:client": "vite --config client/vite.config.ts",
     "build": "vite build --config client/vite.config.ts",
-    "start": "node server/index.js",
-    "test": "node --test server/",
-    "build:app": "VITE_API_BASE=https://app.medsalesintelligencehub.co.uk vite build --config client/vite.config.ts",
+    "test": "deno test -A ../supabase/functions/industrynurses/",
+    "build:app": "VITE_API_BASE=https://vbthumugbzyqndirmyns.supabase.co/functions/v1/industrynurses VITE_AUTH_BASE=https://vbthumugbzyqndirmyns.supabase.co VITE_AUTH_KEY=sb_publishable_U-4Fni78kJOu7fd_HhT_Kg_6Icm4LRk vite build --config client/vite.config.ts",
     "sync": "npm run build:app && cap sync"
   },
   "dependencies": {
@@ -19,7 +17,6 @@
     "@capacitor/ios": "^8.5.3",
     "@capacitor/splash-screen": "^8.0.2",
     "@capacitor/status-bar": "^8.0.4",
-    "express": "^4.21.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
