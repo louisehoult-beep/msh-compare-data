@@ -16,20 +16,11 @@ supabase functions deploy industrynurses --no-verify-jwt --project-ref vbthumugb
 
 ## Sign-in email
 
-The code email uses the project's Supabase Auth email, the same as Live Desk (OTP on, template shows `{{ .Token }}`, custom SMTP before launch per the Live Desk README). Not verified from here: check Authentication > Emails that custom SMTP is on, because the built-in sender allows only a few emails an hour.
+The code email uses the project's Supabase Auth email, the same as Live Desk (OTP on, template shows `{{ .Token }}`, custom SMTP before launch per the Live Desk README). Checked 26/10/2026: custom SMTP is on (Resend, sender noreply@elevateandthrive.uk, name Medical Sales Intelligence Hub), shared with Live Desk.
 
 ## Reviewer account (App Store and Play)
 
-Reviewers cannot read email. In Supabase > Authentication > Users create `review@elevateandthrive.uk` with a password and "auto confirm", then run in the SQL editor:
-
-```sql
-insert into public.ain_members (id, email, name, nmc_pin, role_category, employer_type, status, verified_at, consent_at)
-select id, email, 'App Store Reviewer', '00A0000A', 'Other', 'Other', 'approved', now(), now()
-from auth.users where email = 'review@elevateandthrive.uk'
-on conflict (id) do update set status = 'approved';
-```
-
-Put the email and password in the review notes; the app's sign-in screen has "I have a password".
+Done 26/10/2026: `review@elevateandthrive.uk` (the Live Desk reviewer auth user, password unchanged, already in the Live Desk review notes) has an approved `ain_members` row, so it signs in with "I have a password". Reuse the same email and password in this app's review notes.
 
 ## Phone apps
 
