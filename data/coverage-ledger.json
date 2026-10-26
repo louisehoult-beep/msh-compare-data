@@ -12,7 +12,7 @@
  },
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
-  "frameworks.json": "2026-10-20",
+  "frameworks.json": "2026-10-26",
   "differentiator.json published": 37243,
   "differentiator.json held": 295344
  },
@@ -24,11 +24,11 @@
   "unmapped": 46,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 405,
+  "supplierNamesUnresolved": 406,
   "inScopeSuppliersNeedingCrawl": 238,
   "inScopeSuppliersNeedingDomain": 224,
-  "suppliersRefused": 563,
-  "suppliersRefusedButPublishingElsewhere": 168,
+  "suppliersRefused": 562,
+  "suppliersRefusedButPublishingElsewhere": 167,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
   "blockedFrameworks": 2,
@@ -1371,6 +1371,10 @@
   ],
   [
    "Creed Health \u2013 novated from BVM Medical Ltd",
+   1
+  ],
+  [
+   "Globus Medical UK Ltd \u2013 novated from Nevro Medical Limited",
    1
   ],
   [
@@ -9760,8 +9764,8 @@
    "category": "Medical Technology",
    "ends": "18 March 2028",
    "suppliersAwarded": 23,
-   "suppliersPublished": 12,
-   "coverage": 52.2,
+   "suppliersPublished": 11,
+   "coverage": 47.8,
    "nhsscCategory": "Medical Technology",
    "inScope": true,
    "outOfScopeReason": null,
@@ -9771,7 +9775,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 23,
-   "coverageOfTarget": 52.2,
+   "coverageOfTarget": 47.8,
    "crawlWorklist": [
     {
      "supplier": "Far From Surgical Solutions",
@@ -9885,13 +9889,6 @@
      "bucket": "published"
     },
     {
-     "supplier": "Nevro Medical Limited",
-     "domain": "nevro.com",
-     "reason": "the site's WordPress API exposes no product catalogue \u2014 its only product-named post types are document libraries (l-product-manuals, product-manuals), which hold manuals and leaflets, not a product range; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "published"
-    },
-    {
      "supplier": "Precisis",
      "domain": "precisis.de",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -9916,7 +9913,7 @@
    ],
    "publishedElsewhereNoOwnRange": [],
    "actionable": {
-    "unresolvedNames": 1,
+    "unresolvedNames": 2,
     "publishedElsewhereNeedingCategory": 1,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
@@ -9934,7 +9931,6 @@
     "LivaNova UK Limited",
     "Mainstay Medical Distribution Ltd",
     "Medtronic",
-    "Nevro Medical Limited",
     "Precisis",
     "Saluda Medical"
    ],
@@ -9958,9 +9954,10 @@
     "Phagenesis"
    ],
    "unknown": [
-    "Creed Health \u2013 novated from BVM Medical Ltd"
+    "Creed Health \u2013 novated from BVM Medical Ltd",
+    "Globus Medical UK Ltd \u2013 novated from Nevro Medical Limited"
    ],
-   "actionableTotal": 6,
+   "actionableTotal": 7,
    "blockedReason": null,
    "deferred": null
   },
