@@ -1,38 +1,62 @@
 <!-- wp:html -->
-<div id="pc-wrap" style="background:#0B1C33;color:#F5F1E8;font-family:Helvetica,Arial,sans-serif;padding:56px 0">
+<div id="pc-wrap" style="font-family:Helvetica,Arial,sans-serif;color:#F5F1E8;background:#0B1C33">
 <style>
+#pc-wrap{opacity:1!important;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important;max-width:none!important}
+#pc-wrap h1,#pc-wrap h2,#pc-wrap h3,#pc-wrap p,#pc-wrap b,#pc-wrap span,#pc-wrap label{font-family:Helvetica,Arial,sans-serif!important;text-shadow:none!important;opacity:1!important;margin-top:0;text-transform:none;letter-spacing:normal}
+#pc-wrap .eye{text-transform:uppercase!important;letter-spacing:.2em!important}
 #pc-wrap *{box-sizing:border-box}
-#pc-wrap .in{max-width:760px;margin:0 auto;padding:0 20px}
-#pc-wrap .eye{color:#E0BE8E;letter-spacing:.2em;text-transform:uppercase;font-weight:700;font-size:15px}
-#pc-wrap h1{color:#FFFFFF;font-size:38px;line-height:1.1;margin:10px 0 14px}
-#pc-wrap p{color:#F5F1E8;font-size:18px;line-height:1.5;margin:0 0 14px}
-#pc-wrap ul.get{margin:0 0 24px;padding-left:22px;color:#F5F1E8;font-size:18px;line-height:1.5}
-#pc-wrap .card{background:#14304F;border:2px solid #E0BE8E;border-radius:12px;padding:26px}
+#pc-wrap .in{max-width:1080px;margin:0 auto;padding:0 40px}
+#pc-wrap .hero{background:linear-gradient(90deg,#0B1C33 0,#0B1C33 16%,rgba(11,28,51,0) 38%),url(https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/10/nurse-connect-ward.jpg) right 22%/1100px auto no-repeat #0B1C33;padding:96px 0 104px;min-height:480px}
+#pc-wrap .hero .shade{display:inline-block;max-width:600px;background:linear-gradient(90deg,rgba(11,28,51,.94),rgba(11,28,51,.88));padding:34px 36px;border-left:4px solid #E0BE8E;border-radius:0 10px 10px 0}
+#pc-wrap .eye{color:#E0BE8E!important;letter-spacing:.2em;text-transform:uppercase;font-weight:700;font-size:15px}
+#pc-wrap h1{color:#FFFFFF!important;font-size:50px;line-height:1.05;margin:12px 0 16px;font-weight:800}
+#pc-wrap h1 em{color:#E0BE8E!important;font-style:normal}
+#pc-wrap .lead{color:#F5F1E8!important;font-size:20px;line-height:1.5;margin:0}
+#pc-wrap .wine{background:#4A1526;padding:64px 0}
+#pc-wrap .wine h2{color:#FFFFFF!important;font-size:26px;margin:0 0 26px;text-align:center}
+#pc-wrap .cards{display:flex;gap:20px;flex-wrap:wrap}
+#pc-wrap .c{flex:1;min-width:250px;background:#0B1C33;border-top:4px solid #E0BE8E;border-radius:10px;padding:24px}
+#pc-wrap .c b{display:block;color:#FFFFFF!important;font-size:19px;line-height:1.3;margin:0 0 8px}
+#pc-wrap .c span{color:#DBE3EE!important;font-size:16px;line-height:1.5}
+#pc-wrap .formband{padding:72px 0 80px;background:#0B1C33}
+#pc-wrap .split{display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap}
+#pc-wrap .who{flex:1;min-width:260px;text-align:center}
+#pc-wrap .who img{width:200px;height:200px;border-radius:50%;object-fit:cover;border:4px solid #E0BE8E}
+#pc-wrap .who h3{color:#FFFFFF!important;font-size:24px;margin:16px 0 4px}
+#pc-wrap .who p{color:#DBE3EE!important;font-size:16px;line-height:1.5;margin:0}
+#pc-wrap .card{flex:1.4;min-width:300px;background:#14304F;border:2px solid #E0BE8E;border-radius:12px;padding:30px}
+#pc-wrap .card h2{color:#FFFFFF!important;font-size:26px;margin:0 0 18px}
 #pc-wrap label{display:block;color:#FFFFFF;font-weight:700;font-size:16px;margin:0 0 6px}
 #pc-wrap .fld{margin:0 0 16px}
-#pc-wrap .row{display:flex;gap:16px;flex-wrap:wrap}
-#pc-wrap .row .fld{flex:1;min-width:220px}
-#pc-wrap input[type=text],#pc-wrap input[type=email],#pc-wrap select{width:100%;padding:12px;font-size:17px;border:1px solid #DBE3EE;border-radius:6px;background:#FFFFFF;color:#1D2733}
-#pc-wrap .chk{display:flex;gap:10px;align-items:flex-start;font-weight:400;color:#F5F1E8;font-size:17px;line-height:1.4;margin:0 0 10px}
-#pc-wrap .chk input{margin-top:4px;width:20px;height:20px;flex:none}
-#pc-wrap .btn{display:inline-block;background:#E0BE8E;color:#0B1C33;font-weight:800;font-size:19px;border:0;border-radius:8px;padding:14px 26px;cursor:pointer;text-decoration:none}
+#pc-wrap input[type=text],#pc-wrap input[type=email],#pc-wrap select{width:100%;padding:13px;font-size:17px;border:1px solid #DBE3EE;border-radius:6px;background:#FFFFFF;color:#1D2733}
+#pc-wrap .chk{display:flex;gap:10px;align-items:flex-start;font-weight:400;color:#F5F1E8;font-size:16px;line-height:1.4;margin:0 0 10px}
+#pc-wrap .chk input{margin-top:3px;width:20px;height:20px;flex:none}
+#pc-wrap .btn{display:inline-block;background:#E0BE8E;color:#0B1C33;font-weight:800;font-size:19px;border:0;border-radius:8px;padding:15px 28px;cursor:pointer;text-decoration:none}
 #pc-wrap .hp{position:absolute;left:-9999px}
 #pc-wrap .err{display:none;background:#FFFFFF;color:#8A1C14;padding:12px;border-radius:6px;margin-top:14px;font-weight:700}
 #pc-wrap .ok{display:none;text-align:center}
-#pc-wrap .ok h2{color:#FFFFFF;font-size:28px;margin:0 0 10px}
-#pc-wrap .priv{font-size:14px;color:#DBE3EE;margin:16px 0 0}
+#pc-wrap .ok h2{color:#FFFFFF!important;font-size:28px;margin:0 0 10px}
+#pc-wrap .ok p{color:#F5F1E8!important;font-size:18px;line-height:1.5;margin:0 0 16px}
+#pc-wrap .priv{font-size:14px;color:#DBE3EE;margin:16px 0 0;line-height:1.5}
 #pc-wrap .priv a{color:#E0BE8E}
+@media(max-width:700px){#pc-wrap .in{padding:0 20px}#pc-wrap .hero{padding:230px 0 0!important;min-height:0;background:url(https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/10/nurse-connect-ward.jpg) center 12%/cover no-repeat #0B1C33}#pc-wrap .hero .shade{padding:26px 20px;max-width:none;border-radius:0;border-left:0;border-top:4px solid #E0BE8E;background:#0B1C33;margin:0 -20px}#pc-wrap h1{font-size:36px}#pc-wrap .lead{font-size:18px}#pc-wrap .formband{padding:48px 0}}
 </style>
-<div class="in">
+<div class="hero"><div class="in"><div class="shade">
 <div class="eye">For nurses working in hospitals</div>
-<h1>Stay in touch with Lou Hoult</h1>
-<p>Leave your details and I will keep you updated on:</p>
-<ul class="get">
-<li>The Medical Sales Hub, clinical section: free for NHS staff</li>
-<li>From Clinical to Commercial: the Clinical Interview Playbook for nurses moving into industry</li>
-<li>The Association for Industry Professional Nurses</li>
-</ul>
+<h1>Stay in touch with <em>Lou Hoult</em></h1>
+<p class="lead">Leave your details and I will keep you updated on the Hub, the Clinical Interview Playbook and the Association.</p>
+</div></div></div>
+<div class="wine"><div class="in">
+<h2>What you will hear about</h2>
+<div class="cards">
+<div class="c"><b>The Medical Sales Hub, clinical section</b><span>Free for NHS staff.</span></div>
+<div class="c"><b>From Clinical to Commercial</b><span>The Clinical Interview Playbook for nurses moving into industry.</span></div>
+<div class="c"><b>The Association for Industry Professional Nurses</b><span>A community for nurses working in industry.</span></div>
+</div></div></div>
+<div class="formband"><div class="in"><div class="split">
+<div class="who"><img src="https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/10/nurse-connect-lou.jpg" alt="Lou Hoult" width="200" height="200"><h3>Lou Hoult</h3><p>Elevate and Thrive. Look for Louise Hoult on LinkedIn.</p></div>
 <div class="card">
+<h2>Keep me updated</h2>
 <form id="pc-form" novalidate>
 <div class="fld"><label for="pc-fn">Your name</label><input type="text" id="pc-fn" name="fields[name]" autocomplete="name" required></div>
 <div class="fld"><label for="pc-em">Email address</label><input type="email" id="pc-em" name="fields[email]" autocomplete="email" required></div>
@@ -51,7 +75,7 @@
 <a class="btn" id="pc-li" href="https://www.linkedin.com/in/louise-hoult-a7002041/" target="_blank" rel="noopener">Connect on LinkedIn</a>
 </div>
 </div>
-</div>
+</div></div></div>
 <script>
 (function(){
 var f=document.getElementById('pc-form');if(!f)return;
