@@ -1,0 +1,82 @@
+<!-- wp:html -->
+<div id="pc-wrap" style="background:#0B1C33;color:#F5F1E8;font-family:Helvetica,Arial,sans-serif;padding:56px 0">
+<style>
+#pc-wrap *{box-sizing:border-box}
+#pc-wrap .in{max-width:760px;margin:0 auto;padding:0 20px}
+#pc-wrap .eye{color:#E0BE8E;letter-spacing:.2em;text-transform:uppercase;font-weight:700;font-size:15px}
+#pc-wrap h1{color:#FFFFFF;font-size:38px;line-height:1.1;margin:10px 0 14px}
+#pc-wrap p{color:#F5F1E8;font-size:18px;line-height:1.5;margin:0 0 14px}
+#pc-wrap ul.get{margin:0 0 24px;padding-left:22px;color:#F5F1E8;font-size:18px;line-height:1.5}
+#pc-wrap .card{background:#14304F;border:2px solid #E0BE8E;border-radius:12px;padding:26px}
+#pc-wrap label{display:block;color:#FFFFFF;font-weight:700;font-size:16px;margin:0 0 6px}
+#pc-wrap .fld{margin:0 0 16px}
+#pc-wrap .row{display:flex;gap:16px;flex-wrap:wrap}
+#pc-wrap .row .fld{flex:1;min-width:220px}
+#pc-wrap input[type=text],#pc-wrap input[type=email],#pc-wrap select{width:100%;padding:12px;font-size:17px;border:1px solid #DBE3EE;border-radius:6px;background:#FFFFFF;color:#1D2733}
+#pc-wrap .chk{display:flex;gap:10px;align-items:flex-start;font-weight:400;color:#F5F1E8;font-size:17px;line-height:1.4;margin:0 0 10px}
+#pc-wrap .chk input{margin-top:4px;width:20px;height:20px;flex:none}
+#pc-wrap .btn{display:inline-block;background:#E0BE8E;color:#0B1C33;font-weight:800;font-size:19px;border:0;border-radius:8px;padding:14px 26px;cursor:pointer;text-decoration:none}
+#pc-wrap .hp{position:absolute;left:-9999px}
+#pc-wrap .err{display:none;background:#FFFFFF;color:#8A1C14;padding:12px;border-radius:6px;margin-top:14px;font-weight:700}
+#pc-wrap .ok{display:none;text-align:center}
+#pc-wrap .ok h2{color:#FFFFFF;font-size:28px;margin:0 0 10px}
+#pc-wrap .priv{font-size:14px;color:#DBE3EE;margin:16px 0 0}
+#pc-wrap .priv a{color:#E0BE8E}
+</style>
+<div class="in">
+<div class="eye">For nurses working in hospitals</div>
+<h1>Stay in touch with Lou Hoult</h1>
+<p>Leave your details and I will keep you updated on:</p>
+<ul class="get">
+<li>The Medical Sales Hub, clinical section: free for NHS staff</li>
+<li>From Clinical to Commercial: the Clinical Interview Playbook for nurses moving into industry</li>
+<li>The Association for Industry Professional Nurses</li>
+</ul>
+<div class="card">
+<form id="pc-form" novalidate>
+<div class="fld"><label for="pc-fn">Your name</label><input type="text" id="pc-fn" name="fields[name]" autocomplete="name" required></div>
+<div class="fld"><label for="pc-em">Email address</label><input type="email" id="pc-em" name="fields[email]" autocomplete="email" required></div>
+<label style="margin-top:6px">What would you like to hear about?</label>
+<label class="chk"><input type="checkbox" class="pc-int" value="Hub clinical section" checked><span>The Medical Sales Hub, clinical section (free for NHS staff)</span></label>
+<label class="chk"><input type="checkbox" class="pc-int" value="Clinical to Commercial" checked><span>From Clinical to Commercial, the Clinical Interview Playbook</span></label>
+<label class="chk"><input type="checkbox" class="pc-int" value="Association"><span>The Association for Industry Professional Nurses</span></label>
+<input type="hidden" name="fields[poster_interests]" id="pc-int">
+<input type="hidden" name="fields[signup_source]" id="pc-src" value="poster">
+<div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website_url" tabindex="-1" autocomplete="off"></label></div>
+<label class="chk" style="margin-top:14px"><input type="checkbox" id="pc-consent" name="consent" value="1" required><span>I am happy for Elevate and Thrive Ltd to email me about the things I have ticked.</span></label>
+<button class="btn" type="submit" id="pc-btn">Keep me updated</button>
+<div class="err" id="pc-err" role="alert">Something went wrong. Please check the details and try again, or email louisehoult@elevateandthrive.uk.</div>
+<p class="priv">Your details go to Elevate and Thrive Ltd (company no. 17154474) and are used to send what you ticked. You can unsubscribe in any email. <a href="https://medsalesintelligencehub.co.uk/privacy-policy/">Privacy policy</a>.</p>
+</form>
+<div class="ok" id="pc-ok" role="status">
+<h2>Thank you. One last step.</h2>
+<p>Connect with me on LinkedIn so you know it is the right person and we can stay in touch. Look for Louise Hoult.</p>
+<a class="btn" id="pc-li" href="https://www.linkedin.com/in/louise-hoult-a7002041/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+</div>
+</div>
+</div>
+<script>
+(function(){
+var f=document.getElementById('pc-form');if(!f)return;
+var API='https://medsalesintelligencehub.co.uk/wp-json/msh-poster/v1/';
+var q=new URLSearchParams(location.search).get('src');
+if(q){document.getElementById('pc-src').value='poster-'+q.replace(/[^a-z0-9_-]/gi,'').slice(0,40)}
+f.addEventListener('submit',function(e){
+e.preventDefault();
+var er=document.getElementById('pc-err'),b=document.getElementById('pc-btn');er.style.display='none';
+var bad=false;
+f.querySelectorAll('[required]').forEach(function(x){var v=x.type==='checkbox'?x.checked:x.value.trim();if(!v){bad=true;x.style.outline='3px solid #B3261E'}else{x.style.outline=''}});
+if(bad||!/^\S+@\S+\.\S+$/.test(f.elements['fields[email]'].value)){er.style.display='block';return}
+var ints=[];f.querySelectorAll('.pc-int:checked').forEach(function(c){ints.push(c.value)});
+document.getElementById('pc-int').value=ints.join(', ');
+b.disabled=true;b.textContent='Sending';
+fetch(API+'join',{method:'POST',body:new FormData(f)}).then(function(r){if(!r.ok)throw new Error(r.status);
+f.style.display='none';document.getElementById('pc-ok').style.display='block';
+var em=f.elements['fields[email]'].value;
+document.getElementById('pc-li').addEventListener('click',function(){var d=new FormData();d.append('email',em);try{navigator.sendBeacon(API+'click',d)}catch(x){fetch(API+'click',{method:'POST',body:d,keepalive:true})}});
+}).catch(function(){b.disabled=false;b.textContent='Keep me updated';er.style.display='block'});
+});
+})();
+</script>
+</div>
+<!-- /wp:html -->
