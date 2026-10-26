@@ -36,17 +36,14 @@
 <form id="pc-form" novalidate>
 <div class="fld"><label for="pc-fn">Your name</label><input type="text" id="pc-fn" name="fields[name]" autocomplete="name" required></div>
 <div class="fld"><label for="pc-em">Email address</label><input type="email" id="pc-em" name="fields[email]" autocomplete="email" required></div>
-<label style="margin-top:6px">What would you like to hear about?</label>
-<label class="chk"><input type="checkbox" class="pc-int" value="Hub clinical section" checked><span>The Medical Sales Hub, clinical section (free for NHS staff)</span></label>
-<label class="chk"><input type="checkbox" class="pc-int" value="Clinical to Commercial" checked><span>From Clinical to Commercial, the Clinical Interview Playbook</span></label>
-<label class="chk"><input type="checkbox" class="pc-int" value="Association"><span>The Association for Industry Professional Nurses</span></label>
-<input type="hidden" name="fields[poster_interests]" id="pc-int">
+<div class="fld"><label for="pc-ws">Where do you work?</label><select id="pc-ws" name="fields[work_setting]" required><option value="">Please choose</option><option value="Hospital">In a hospital</option><option value="Industry">In an industry role (private company)</option></select></div>
+<input type="hidden" name="fields[poster_interests]" value="Hub clinical section, Clinical to Commercial, Association">
 <input type="hidden" name="fields[signup_source]" id="pc-src" value="poster">
 <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website_url" tabindex="-1" autocomplete="off"></label></div>
-<label class="chk" style="margin-top:14px"><input type="checkbox" id="pc-consent" name="consent" value="1" required><span>I am happy for Elevate and Thrive Ltd to email me about the things I have ticked.</span></label>
+<label class="chk" style="margin-top:14px"><input type="checkbox" id="pc-consent" name="consent" value="1" required><span>I am happy for Elevate and Thrive Ltd to email me about the topics listed above.</span></label>
 <button class="btn" type="submit" id="pc-btn">Keep me updated</button>
 <div class="err" id="pc-err" role="alert">Something went wrong. Please check the details and try again, or email louisehoult@elevateandthrive.uk.</div>
-<p class="priv">Your details go to Elevate and Thrive Ltd (company no. 17154474) and are used to send what you ticked. You can unsubscribe in any email. <a href="https://medsalesintelligencehub.co.uk/privacy-policy/">Privacy policy</a>.</p>
+<p class="priv">Your details go to Elevate and Thrive Ltd (company no. 17154474) and are used to send you these updates. You can unsubscribe in any email. <a href="https://medsalesintelligencehub.co.uk/privacy-policy/">Privacy policy</a>.</p>
 </form>
 <div class="ok" id="pc-ok" role="status">
 <h2>Thank you. One last step.</h2>
@@ -67,8 +64,6 @@ var er=document.getElementById('pc-err'),b=document.getElementById('pc-btn');er.
 var bad=false;
 f.querySelectorAll('[required]').forEach(function(x){var v=x.type==='checkbox'?x.checked:x.value.trim();if(!v){bad=true;x.style.outline='3px solid #B3261E'}else{x.style.outline=''}});
 if(bad||!/^\S+@\S+\.\S+$/.test(f.elements['fields[email]'].value)){er.style.display='block';return}
-var ints=[];f.querySelectorAll('.pc-int:checked').forEach(function(c){ints.push(c.value)});
-document.getElementById('pc-int').value=ints.join(', ');
 b.disabled=true;b.textContent='Sending';
 fetch(API+'join',{method:'POST',body:new FormData(f)}).then(function(r){if(!r.ok)throw new Error(r.status);
 f.style.display='none';document.getElementById('pc-ok').style.display='block';
