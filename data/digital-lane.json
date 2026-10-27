@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "26/10/2026",
- "generated": "2026-10-26",
+ "dataAsOf": "27/10/2026",
+ "generated": "2026-10-27",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,20 +22,20 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-10-18",
-   "to": "2026-10-26",
+   "from": "2026-10-19",
+   "to": "2026-10-27",
    "days": 8,
-   "run": "2026-10-26"
+   "run": "2026-10-27"
   },
   "notes": [
-   "Find a Tender (tender stage): 0 digital lane notice(s) from 38 release(s) over 1 page(s)",
-   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-18",
-   "Find a Tender (planning stage): 1 digital lane notice(s) from 22 release(s) over 1 page(s)",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-18"
+   "Find a Tender (tender stage): 0 digital lane notice(s) from 45 release(s) over 1 page(s)",
+   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-19",
+   "Find a Tender (planning stage): 1 digital lane notice(s) from 23 release(s) over 1 page(s)",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-19"
   ]
  },
  "counts": {
-  "awards": 287,
+  "awards": 293,
   "awardsClinical": 34,
   "openNotices": 2,
   "openNoticesClinical": 1,
@@ -43,6 +43,23 @@
   "marketEngagementClinical": 0
  },
  "awards": [
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "BWC Karotyping and FISH Service PME",
+   "buyer": "Birmingham Women's and Children's NHS Foundation Trust",
+   "published": "2026-10-27",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48517000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101403-2026",
+   "ocid": "ocds-h6vhtk-078af3"
+  },
   {
    "lane": "digital",
    "clinical": false,
@@ -116,6 +133,121 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/100796-2026",
    "ocid": "ocds-h6vhtk-0514f8"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Dispatch & Logistics Software (ii)",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "published": "2026-10-26",
+   "suppliers": [
+    "CLERIC COMPUTER SERVICES LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 479862.47,
+   "digitalCpv": [
+    "72212100"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101253-2026",
+   "ocid": "ocds-h6vhtk-07909e"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "W230298 Patient Experience Portal (PEP)",
+   "buyer": "Bradford Teaching Hospitals NHS Foundation Trust",
+   "published": "2026-10-26",
+   "suppliers": [
+    "Vitalhub UK Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48611000",
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101155-2026",
+   "ocid": "ocds-h6vhtk-06d45c"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "BE23/043 - LTHT Medical Location Risk Grading Trustwide",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "published": "2026-10-26",
+   "suppliers": [
+    "Walker Sime Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72224000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101080-2026",
+   "ocid": "ocds-h6vhtk-079043"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Windows patching service",
+   "buyer": "MEDWAY NHS FOUNDATION TRUST",
+   "published": "2026-10-26",
+   "suppliers": [
+    "ALTERA HEALTHCARE (IT) UK LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-08-22",
+   "value": 42238,
+   "digitalCpv": [
+    "72212730"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101047-2026",
+   "ocid": "ocds-h6vhtk-079035"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "PLICS NCC model support and collaboration - YSTH",
+   "buyer": "York and Scarborough Teaching Hospital NHS Foundation Trust",
+   "published": "2026-10-26",
+   "suppliers": [
+    "Carecosting Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-12-31",
+   "value": 110250.0,
+   "digitalCpv": [
+    "72316000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101036-2026",
+   "ocid": "ocds-h6vhtk-07902e"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Space Booking Software",
+   "buyer": "BUCKINGHAMSHIRE HEALTHCARE NHS TRUST",
+   "published": "2026-10-26",
+   "suppliers": [
+    "DIGPACKS"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 60055.0,
+   "digitalCpv": [
+    "72212517"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101018-2026",
+   "ocid": "ocds-h6vhtk-079023"
   },
   {
    "lane": "digital",
@@ -694,23 +826,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/098588-2026",
    "ocid": "ocds-h6vhtk-078b00"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "planning",
-   "title": "BWC Karotyping and FISH Service PME",
-   "buyer": "Birmingham Women's and Children's NHS Foundation Trust",
-   "published": "2026-10-19",
-   "suppliers": [],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "48517000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/098573-2026",
-   "ocid": "ocds-h6vhtk-078af3"
   },
   {
    "lane": "digital",
@@ -5615,6 +5730,12 @@
    "to": "2026-10-26",
    "days": 8,
    "run": "2026-10-26"
+  },
+  {
+   "from": "2026-10-19",
+   "to": "2026-10-27",
+   "days": 8,
+   "run": "2026-10-27"
   }
  ]
 }
