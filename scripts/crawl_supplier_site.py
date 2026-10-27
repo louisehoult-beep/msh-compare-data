@@ -1262,6 +1262,102 @@ UK_LOCALE_SEGMENTS = {"en-gb", "en_gb", "en-uk", "uk", "gb"}
 _LOCALE_SEGMENT_RE = re.compile(r"/[a-z]{2}[-_][a-z]{2}/", re.I)
 
 
+# ---- UK SITEMAP SELECTION AND FILE-NAME LEAVES (27/10/2026, attended crawler change) ----
+# Found by the refused-catalogue-only recapture job, each shape on 3+ suppliers.
+#
+# A per-market sitemap is not always marked by a /en-gb/ PATH segment: Stryker's
+# index names its markets in the FILE NAME (stryker.sitemap.gb-sitemap.xml next
+# to ...de-sitemap.xml, ...fr-sitemap.xml). A name token of exactly "gb" or "uk"
+# marks the UK one; the other markets are the files that are identical to it
+# bar that token. Nothing is guessed from a company name or a country list.
+_UK_NAME_TOKENS = {"gb", "uk"}
+_NAME_TOKEN_RE = re.compile(r"(?<![a-z0-9])(gb|uk)(?![a-z0-9])")
+
+
+def _sitemap_file(url):
+    return urllib.parse.urlparse(url).path.rsplit("/", 1)[-1].lower()
+
+
+def uk_sitemap_url(url):
+    """True when a sitemap URL names the UK market, in a path segment
+    (/en-gb/sitemap.xml) or as a token of the file name (gb-sitemap.xml)."""
+    low = url.lower()
+    if any("/%s/" % seg in low for seg in UK_LOCALE_SEGMENTS):
+        return True
+    return bool(_NAME_TOKEN_RE.search(_sitemap_file(url)))
+
+
+def other_market_sibling(url, uk_urls):
+    """True when `url` is the same sitemap file as one of the UK sitemaps with
+    only the market token changed (stryker...de-sitemap.xml vs ...gb-sitemap.xml)."""
+    parsed = urllib.parse.urlparse(url)
+    here_dir = parsed.path.rsplit("/", 1)[0]
+    name = _sitemap_file(url)
+    for uk in uk_urls:
+        if uk == url:
+            continue
+        up = urllib.parse.urlparse(uk)
+        if up.path.rsplit("/", 1)[0] != here_dir:
+            continue
+        uname = _sitemap_file(uk)
+        if not _NAME_TOKEN_RE.search(uname):
+            continue
+        # split() with a capture group alternates text, token, text, token...
+        parts = _NAME_TOKEN_RE.split(uname)
+        pat = "".join(("[a-z]{2}" if i % 2 else re.escape(part)) for i, part in enumerate(parts))
+        if re.fullmatch(pat, name) and name != uname:
+            return True
+    return False
+
+
+def _is_sitemap_file_url(url):
+    path = urllib.parse.urlparse(url).path.lower()
+    return "sitemap" in path and (path.endswith(".xml") or path.endswith(".xml.gz")
+                                  or path.endswith(".php"))
+
+
+def urlset_lists_sitemaps(locs):
+    """A top-level sitemap written as an ordinary <urlset> whose entries are
+    mostly other sitemap files (thuasne.com lists /en-gb/sitemap.xml and six
+    other markets as plain <url><loc>s). Such a file is an index in all but name."""
+    if not locs:
+        return False
+    n = sum(1 for l in locs if _is_sitemap_file_url(l))
+    return n >= 1 and n * 2 >= len(locs)
+
+
+def uk_siblings_of_locale_sitemap(url):
+    """For a declared sitemap under a NON-UK locale prefix (schuelke.com declares
+    only /de-de/google-sitemap.php), the same file under each UK prefix, to be
+    tried as well. Returned only as candidates; whether they exist is for the
+    fetch to say."""
+    p = urllib.parse.urlparse(url)
+    m = re.match(r"^/([a-z]{2}[-_][a-z]{2})(/.*)$", p.path, re.I)
+    if not m or m.group(1).lower() in UK_LOCALE_SEGMENTS:
+        return []
+    return [urllib.parse.urlunparse(p._replace(path="/%s%s" % (seg, m.group(2))))
+            for seg in ("en-gb", "en-uk")]
+
+
+# A PAGE FILE NAME IS NOT A PRODUCT NAME. Boston Scientific's URLs end ".html"
+# (names read "Dynagen.Html"); Stryker files each product at
+# .../products/<product>/index-eu.html or index-eu-eemea.html, where the leaf
+# is a locale file and the product is the PARENT segment. The extension is
+# stripped; an index/default/home file (with an optional market suffix) is
+# dropped so the parent becomes the leaf. Only web-page extensions: a .pdf is
+# still a document, handled elsewhere.
+_PAGE_EXT_RE = re.compile(r"\.(?:html?|shtml|php|aspx?|jsp)$", re.I)
+_INDEX_STEM_RE = re.compile(r"^(?:index|default|home)(?:[-_][a-z0-9]{1,8}){0,3}$", re.I)
+
+
+def page_stem(seg):
+    return _PAGE_EXT_RE.sub("", seg or "")
+
+
+def is_index_file(seg):
+    return bool(_PAGE_EXT_RE.search(seg or "")) and bool(_INDEX_STEM_RE.match(page_stem(seg)))
+
+
 def is_download_leaf(slug):
     words = [w for w in re.split(r"[-_\s]+", (slug or "").lower()) if w]
     if not any(w in DOWNLOAD_LEAF_WORDS for w in words):
@@ -1905,15 +2001,43 @@ def robots_sitemaps(domain):
 BLOG_PATH_SEGMENTS = {"blog", "news", "press", "press-releases", "newsroom"}
 
 
-def sitemap_products(domain, deadline=None, product_paths=None):
+def sitemap_products(domain, deadline=None, product_paths=None, link_urls=None):
+    """`link_urls`, when given, are product-path URLs found by following links
+    (link_follow_products) on a site with no sitemap: they stand in for the
+    sitemap's <loc> list and go through exactly the same shaping."""
     seen, urls = set(), []
     blog_post_urls, product_sitemap_urls = set(), set()
     # Declared sitemaps first, then the conventional paths (^o469 follow-up).
     to_read = robots_sitemaps(domain)
+    # A declared sitemap under a non-UK locale prefix gets its UK twin tried
+    # first (27/10/2026): schuelke.com declares only /de-de/google-sitemap.php.
+    for u in list(to_read):
+        for twin in uk_siblings_of_locale_sitemap(u):
+            if twin not in to_read:
+                to_read.insert(0, twin)
     for u in ("https://%s/sitemap.xml" % domain, "https://%s/sitemap_index.xml" % domain):
         if u not in to_read:
             to_read.append(u)
-    while to_read and len(seen) < 12:
+    if link_urls is not None:
+        to_read = []
+        urls = list(link_urls)
+    uk_probed = False
+    while True:
+        if not to_read and not uk_probed and link_urls is None:
+            # UNDECLARED UK-LOCALE SITEMAP (27/10/2026). fphcare.com declares an
+            # empty sitemap and keeps its UK one at /en-gb/sitemap.xml. Tried only
+            # when everything above produced no product-path URL, so an ordinary
+            # site pays nothing.
+            uk_probed = True
+            _segs = tuple(product_paths) if product_paths else PRODUCT_PATHS
+            _pat = r"/(%s)/" % "|".join(re.escape(x) for x in _segs)
+            if not any(re.search(_pat, x, re.I) for x in urls):
+                for seg in ("en-gb", "en-uk"):
+                    u = "https://%s/%s/sitemap.xml" % (domain, seg)
+                    if u not in seen:
+                        to_read.append(u)
+        if not to_read or len(seen) >= 16:
+            break
         if deadline and time.time() > deadline:
             return None, ("gave up while reading the sitemap — the site answers too slowly to "
                           "crawl inside its budget")
@@ -1946,7 +2070,7 @@ def sitemap_products(domain, deadline=None, product_paths=None):
             raw = raw.strip()
             m = re.match(r"<!\[CDATA\[(.*?)\]\]>", raw, re.S)
             locs.append(m.group(1).strip() if m else H.unescape(raw))
-        if "<sitemapindex" in body[:400].lower():
+        if "<sitemapindex" in body[:400].lower() or urlset_lists_sitemaps(locs):
             # BUG FIXED 26/08/2026: "sitemap" is a substring of every sub-sitemap
             # URL (they all end "...-sitemap.xml"), so the old filter was a
             # no-op — it kept document order and just took the first 8 entries.
@@ -1973,7 +2097,7 @@ def sitemap_products(domain, deadline=None, product_paths=None):
             # /en-gb/sitemap-Page.xml, where its GentleCath and Cure catheter
             # pages live. This Hub is for UK members.
             candidates.sort(key=lambda l: (
-                0 if any("/%s/" % seg in l.lower() for seg in UK_LOCALE_SEGMENTS) else 1,
+                0 if uk_sitemap_url(l) else 1,
                 0 if "product" in l.lower() else 1))
             # A LOCALE INDEX WITH A UK ENTRY: READ THE UK ONE, NOT SEVEN OTHER MARKETS
             # (15/10/2026). ottobock.com's index lists ~50 per-market sitemaps
@@ -1982,11 +2106,15 @@ def sitemap_products(domain, deadline=None, product_paths=None):
             # divisions into the UK range (1064 products, 135 divisions). Where a
             # UK-locale sitemap is in the index, the other locale-prefixed ones
             # are not read. Unprefixed sub-sitemaps are kept.
-            uk_cands = [l for l in candidates
-                        if any("/%s/" % seg in l.lower() for seg in UK_LOCALE_SEGMENTS)]
+            # 27/10/2026: the UK market may be named in the FILE NAME rather than a
+            # path segment (uk_sitemap_url), and a same-named file for another
+            # market is dropped too (other_market_sibling). A top-level <urlset>
+            # that only lists country sitemaps is read the same way as an index.
+            uk_cands = [l for l in candidates if uk_sitemap_url(l)]
             if uk_cands:
                 candidates = [l for l in candidates
-                              if l in uk_cands or not _LOCALE_SEGMENT_RE.search(l)]
+                              if l in uk_cands or (not _LOCALE_SEGMENT_RE.search(l)
+                                                   and not other_market_sibling(l, uk_cands))]
             to_read.extend(candidates[:8])
             continue
         urls.extend(locs)
@@ -1998,6 +2126,10 @@ def sitemap_products(domain, deadline=None, product_paths=None):
 
     segs = tuple(product_paths) if product_paths else PRODUCT_PATHS
     pat = r"/(%s)/" % "|".join(re.escape(x) for x in segs)
+    # How many URLs any sitemap gave at all: crawl() only falls back to following
+    # links when the site has no readable sitemap, never when it has one that
+    # simply lacks products.
+    sitemap_products.urls_read = len(urls) if link_urls is None else None
     prod = [u for u in urls if re.search(pat, u, re.I)]
 
     # BLOG POSTS ARE NOT PRODUCTS (15/10/2026). optimummedical.co.uk publishes its
@@ -2093,6 +2225,7 @@ def sitemap_products(domain, deadline=None, product_paths=None):
     # name — dropping anything that "looks like a category" — is guesswork that
     # would take real products with generic names down with it.
     paths, has_root = [], False
+    seen_paths = set()
     for u in prod:
         path = urllib.parse.urlparse(u).path.strip("/").split("/")
         try:
@@ -2101,7 +2234,20 @@ def sitemap_products(domain, deadline=None, product_paths=None):
         except StopIteration:
             continue
         rest = path[i + 1:]
+        # A FILE NAME IS NOT A PRODUCT NAME (27/10/2026): an index/default/home
+        # file (index-eu.html, index-eu-eemea.html) is the page of its PARENT
+        # path, so the parent is the leaf; any other leaf loses its page
+        # extension ("dynagen.html" -> "dynagen"). Several locale files for one
+        # product collapse to one entry below.
+        if rest and is_index_file(rest[-1]):
+            rest = rest[:-1]
         if rest:
+            rest = rest[:-1] + [page_stem(rest[-1])]
+        if rest and rest[-1]:
+            key = (tuple(path[:i]), tuple(rest))
+            if key in seen_paths:
+                continue
+            seen_paths.add(key)
             paths.append((path[:i], rest, u))
             if not path[:i]:
                 has_root = True
@@ -2478,13 +2624,18 @@ def sitemap_products(domain, deadline=None, product_paths=None):
     return {
         "domain": domain,
         "verified": time.strftime("%Y-%m-%d"),
-        "source": "%s XML sitemap, read this run" % domain,
-        "structureFrom": "sitemap",
+        "source": ("%s product pages reached by following links from the site's own category "
+                   "pages (it has no sitemap), read this run" % domain) if link_urls is not None
+                  else "%s XML sitemap, read this run" % domain,
+        "structureFrom": "links" if link_urls is not None else "sitemap",
         "hasDivisions": has_divisions,
         "landingPagesDropped": landing,
         "furniturePagesDropped": furniture,
         "duplicateUrlsDropped": duplicate_urls,
-        "captureCaveat": ("Names are derived from the last segment of each product URL, not read "
+        "captureCaveat": (("This site publishes no sitemap, so the range was found by following "
+                           "links from its category pages, bounded in pages and depth; a product "
+                           "not linked from a page reached is missing. " if link_urls is not None else "")
+                          + "Names are derived from the last segment of each product URL, not read "
                           "from a product record, so they carry no category and read as title-cased "
                           "slugs. %d category landing page(s) were dropped by the prefix test — a "
                           "path that is a strict prefix of other paths is a page you pass through, "
@@ -2518,6 +2669,109 @@ def sitemap_products(domain, deadline=None, product_paths=None):
                       for k, v in sorted(divisions.items(), key=lambda kv: -kv[1])],
         "products": plist,
     }, None
+
+
+# ---------------------------------------------------------------- route 5
+# LINK FOLLOWING, added 27/10/2026 (attended change, Lou: "fix the gaps and go ahead").
+#
+# WHY. Some sites publish no sitemap at all (robots.txt 404, every sitemap path
+# 404) yet their product pages are plainly linked from category pages
+# (blatchfordmobility.com/en-gb/products/..., teleflex.com). Every route above
+# needs a list to start from, so those sites were recorded as "refused" when
+# nothing had been refused.
+#
+# WHAT IT IS. A bounded breadth-first read of the site's OWN product-path
+# pages: start at the home page and /<product-path>/, follow only same-site
+# links whose path contains a product-path segment, and hand the URLs found to
+# sitemap_products() in place of a sitemap, so the landing-page, furniture,
+# download, locale and duplicate tests all apply unchanged. It runs only when
+# no sitemap URL was readable at all, honours robots.txt for every page it
+# fetches, and gives up (returns nothing) rather than publish a partial read:
+# if the page cap or the clock is reached with pages still unvisited, the
+# unvisited ones might be categories, so the result is refused as incomplete.
+LINK_FOLLOW_MAX_PAGES = 250
+LINK_FOLLOW_MAX_DEPTH = 4
+LINK_FOLLOW_BUDGET_S = 900
+_HREF_RE = re.compile(r"""<a\b[^>]*?\bhref\s*=\s*["']([^"'#\s][^"']*)["']""", re.I | re.S)
+_NON_PAGE_EXT_RE = re.compile(
+    r"\.(?:pdf|jpe?g|png|gif|svg|webp|zip|docx?|xlsx?|pptx?|mp4|mov|css|js|ico|xml)$", re.I)
+
+
+def _robots_gate(domain):
+    """path -> bool for this host, built from ONE robots.txt read. Same rules as
+    allowed(): our generic UA and our real identities are all checked. An
+    unreadable or absent file obeys nothing (allowed() has already vetted it)."""
+    try:
+        body, _ = get("https://%s/robots.txt" % domain, timeout=12)
+    except Exception:
+        return lambda path: True
+    head = (body or "").lstrip()[:400].lower()
+    if "<html" in head or "<!doctype" in head or "user-agent" not in (body or "").lower():
+        return lambda path: True
+    rp = urllib.robotparser.RobotFileParser()
+    rp.parse(body.splitlines())
+    return lambda path: all(rp.can_fetch(ua, "https://%s%s" % (domain, path))
+                            for ua in (UA_STR, "ClaudeBot", "anthropic-ai"))
+
+
+def link_follow_products(domain, deadline=None, product_paths=None):
+    segs = tuple(product_paths) if product_paths else PRODUCT_PATHS
+    pat = re.compile(r"/(%s)(?:/|$)" % "|".join(re.escape(x) for x in segs), re.I)
+    ok_path = _robots_gate(domain)
+
+    def norm(href, base):
+        u = urllib.parse.urljoin(base, H.unescape(href.strip()))
+        p = urllib.parse.urlparse(u)
+        if p.scheme not in ("http", "https") or not _same_site(p.netloc, domain):
+            return None
+        if p.query or _NON_PAGE_EXT_RE.search(p.path):
+            return None
+        # /a/b and /a/b/ are one page.
+        path = (p.path or "/").rstrip("/") or "/"
+        return "https://%s%s" % (domain, path)
+
+    start = ["https://%s/" % domain] + ["https://%s/%s" % (domain, x) for x in segs]
+    found, queue, visited = {}, [], set()
+    for u in start:
+        queue.append((u, 0))
+    pages = 0
+    incomplete = False
+    while queue:
+        if deadline and time.time() > deadline:
+            return None, "gave up following links — the site answers too slowly to read inside its budget"
+        u, depth = queue.pop(0)
+        if u in visited:
+            continue
+        path = urllib.parse.urlparse(u).path or "/"
+        if not ok_path(path):
+            continue
+        if pages >= LINK_FOLLOW_MAX_PAGES:
+            incomplete = True
+            break
+        visited.add(u)
+        pages += 1
+        try:
+            body, _ = get(u, timeout=20)
+        except Exception:
+            continue
+        for href in _HREF_RE.findall(body or ""):
+            v = norm(href, u)
+            if not v or not pat.search(urllib.parse.urlparse(v).path):
+                continue
+            if v not in found:
+                found[v] = depth + 1
+            if v not in visited and depth + 1 <= LINK_FOLLOW_MAX_DEPTH:
+                queue.append((v, depth + 1))
+    if incomplete:
+        return None, ("following links reached the %d-page cap with pages still unread, so the "
+                      "range could not be read completely" % LINK_FOLLOW_MAX_PAGES)
+    # URLs found at the depth limit were listed but never opened; they are taken
+    # as product pages (a category that deep is not expected), and the capture
+    # caveat says the read was bounded.
+    if not found:
+        return None, "no product-path links were found by following the site's pages"
+    return sitemap_products(domain, deadline=deadline, product_paths=product_paths,
+                            link_urls=sorted(found))
 
 
 # ---------------------------------------------------------------- route 3
@@ -2919,6 +3173,7 @@ def crawl(domain):
     except Exception as e:
         why4 = "the WooCommerce Store API could not be read (%s)" % str(e)[:60]
 
+    sitemap_products.urls_read = None
     try:
         shaped, why2 = sitemap_products(domain, deadline=time.time() + SITE_BUDGET_S,
                                         product_paths=crawl.product_paths)
@@ -2944,7 +3199,20 @@ def crawl(domain):
     except Exception as e:
         why3 = "the Wix storefront could not be read (%s)" % str(e)[:60]
 
-    return None, "%s; %s; %s; %s" % (why, why4, why2, why3)
+    # Route 5 — LINK FOLLOWING (27/10/2026), only for a site with no readable
+    # sitemap at all (zero URLs from every sitemap address tried). A site whose
+    # sitemap simply lacks products is not sent here.
+    why5 = None
+    if sitemap_products.urls_read == 0:
+        try:
+            shaped, why5 = link_follow_products(domain, deadline=time.time() + LINK_FOLLOW_BUDGET_S,
+                                                product_paths=crawl.product_paths)
+            if shaped:
+                return shaped, None
+        except Exception as e:
+            why5 = "following links could not be completed (%s)" % str(e)[:60]
+
+    return None, "%s; %s; %s; %s%s" % (why, why4, why2, why3, ("; " + why5) if why5 else "")
 
 
 # THREE SHAPES THAT HELD TEN RE-CRAWLS ON 09/10/2026 (^o635, fixed 15/10/2026).

@@ -129,6 +129,7 @@ RUN = [
     "test_bnf_products.py",
     "test_breadcrumb_division.py",
     "test_robots_sitemaps.py",
+    "test_crawl_range_gaps.py",          # 27/10/2026, crawler gaps: link following, UK sitemap choice, file-name leaves
     "test_careers_jobpages.py",
     "test_careers_rotation.py",
     "test_careers_shared_roles.py",
