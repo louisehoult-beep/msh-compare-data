@@ -37,3 +37,12 @@ Deno.test("revenuecat: renewal sets expiry, anonymous ignored, test ignored", ()
   assertEquals(fromRevenueCat({ type: "RENEWAL", app_user_id: "$RCAnonymousID:abc", expiration_at_ms: NOW }), null);
   assertEquals(fromRevenueCat({ type: "TEST", app_user_id: uid }), null);
 });
+
+Deno.test("device keeps areas and role-alert choice, refuses bad areas", () => {
+  const tok = "x".repeat(30);
+  const ok = readDevice({ token: tok, platform: "ios", specialities: [], regions: ["london", "london", "south-west"], role_alerts: true });
+  assertEquals(typeof ok === "string" ? ok : [ok.regions, ok.role_alerts], [["london", "south-west"], true]);
+  assertEquals(readDevice({ token: tok, platform: "ios", regions: ["Bad Area"] }), "regions");
+  const off = readDevice({ token: tok, platform: "android" });
+  assertEquals(typeof off === "string" ? off : [off.regions, off.role_alerts], [[], false]);
+});

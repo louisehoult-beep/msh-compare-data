@@ -6,11 +6,13 @@
 //
 //   {action:"status"}                         -> access status (rules.ts status())
 //   {action:"feed"}                           -> the Live Desk document, or 402
+//   {action:"careers"}                        -> the Careers document (roles with
+//                                                area and speciality), same access as feed
 //   {action:"link", pass}                     -> link a Hub membership (member pass
 //                                                from WordPress snippet 4510, the
 //                                                same pass Ask the Hub and phone
 //                                                alerts use; ../ask-the-hub/pass.ts)
-//   {action:"device", token, platform, specialities}  -> save this phone for alerts
+//   {action:"device", token, platform, specialities, regions, role_alerts}  -> save this phone for alerts
 //   {action:"device-off", token}              -> stop alerts to this phone
 //   {action:"delete-account"}                 -> delete the account and everything
 //                                                tied to it (App Store rule 5.1.1(v))
@@ -103,6 +105,14 @@ Deno.serve(async (req) => {
         return reply(origin, 200, { ok: true, feed: rows[0].payload, ...s });
       }
 
+      case "careers": {
+        const s = status(await accessRow(uid));
+        if (!s.access) return reply(origin, 402, { ok: false, why: s.relink ? "relink" : "subscribe", ...s });
+        const rows = await rest("GET", "livedesk_feed?select=payload&id=eq.careers") as { payload: unknown }[];
+        if (!rows || !rows.length) return reply(origin, 503, { ok: false, why: "empty" });
+        return reply(origin, 200, { ok: true, careers: rows[0].payload, ...s });
+      }
+
       case "link": {
         if (!SECRET) return reply(origin, 500, { ok: false, why: "config" });
         const member = await verifyPass(body.pass, SECRET, Math.floor(Date.now() / 1000), PASS_GRACE);
@@ -121,7 +131,7 @@ Deno.serve(async (req) => {
         if (typeof d === "string") return reply(origin, 400, { ok: false, why: d });
         await rest("POST", "livedesk_devices?on_conflict=token",
           { ...d, user_id: uid, updated_at: now }, "resolution=merge-duplicates,return=minimal");
-        return reply(origin, 200, { ok: true, specialities: d.specialities });
+        return reply(origin, 200, { ok: true, specialities: d.specialities, regions: d.regions, role_alerts: d.role_alerts });
       }
 
       case "device-off": {

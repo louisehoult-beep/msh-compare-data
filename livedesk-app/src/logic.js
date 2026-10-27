@@ -97,3 +97,23 @@ export function topStories(panels, max = 8) {
   panels.forEach((p) => { const r = rowsOf(p)[0]; if (r) add(p, r); });
   return out;
 }
+
+/** Careers roles for a choice of areas and specialities. Empty choice = everything.
+ *  A role with no stated area, or no mapped speciality, is never hidden by a choice
+ *  it cannot answer (mirrors matches() in scripts/careers_feed.py). */
+export function filterCareers(careers, regions, specs) {
+  const roles = (careers && careers.roles) || [];
+  return roles.filter((r) => {
+    if (regions && regions.length && (r.regions || []).length && !r.regions.some((x) => regions.includes(x))) return false;
+    if (specs && specs.length && (r.specialities || []).length && !r.specialities.some((x) => specs.includes(x))) return false;
+    return true;
+  });
+}
+
+/** Keep the feed's order, but put roles that name one of the chosen areas before
+ *  roles with no stated area. */
+export function rankCareers(roles, regions) {
+  if (!regions || !regions.length) return roles;
+  const named = (r) => (r.regions || []).some((x) => regions.includes(x));
+  return [...roles.filter(named), ...roles.filter((r) => !named(r))];
+}

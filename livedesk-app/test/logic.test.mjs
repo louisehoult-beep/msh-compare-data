@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { deskTheme, filterFeed, topStories, itemsFromNotification, newCount, passFromLink, safeUrl, shortDate, stamp } from '../src/logic.js';
+import { filterCareers, rankCareers, deskTheme, filterFeed, topStories, itemsFromNotification, newCount, passFromLink, safeUrl, shortDate, stamp } from '../src/logic.js';
 
 const FEED = { panels: [
   { key: 'MHRA ALERTS', rows: [
@@ -51,4 +51,23 @@ test('top stories: lead, then new, then one per desk, no repeats', () => {
   ];
   assert.deepEqual(topStories(panels).map((s) => s.row.title), ['b1', 'a2', 'a1']);
   assert.equal(topStories(panels, 2).length, 2);
+});
+
+const CAREERS = { roles: [
+  { title: 'A', regions: ['scotland'], specialities: [] },
+  { title: 'B', regions: ['london', 'south-east'], specialities: ['ophthalmology'] },
+  { title: 'C', regions: [], specialities: ['orthopaedics-and-trauma'] },
+] };
+
+test('careers: empty choice shows everything', () => {
+  assert.equal(filterCareers(CAREERS, [], []).length, 3);
+});
+test('careers: area filter keeps named matches and roles with no stated area', () => {
+  assert.deepEqual(filterCareers(CAREERS, ['london'], []).map((r) => r.title), ['B', 'C']);
+  assert.deepEqual(rankCareers(filterCareers(CAREERS, ['london'], []), ['london']).map((r) => r.title), ['B', 'C']);
+});
+test('careers: speciality filter never hides a role with no mapped speciality', () => {
+  assert.deepEqual(filterCareers(CAREERS, [], ['ophthalmology']).map((r) => r.title), ['A', 'B']);
+  assert.deepEqual(filterCareers(CAREERS, ['scotland'], ['ophthalmology']).map((r) => r.title), ['A']);
+  assert.equal(filterCareers(null, [], []).length, 0);
 });

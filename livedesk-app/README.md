@@ -11,6 +11,7 @@ else. Added 01/10/2026. Everything else stays on the laptop Hub.
 | Feed | `medical-sales-hub-pipeline/app_feed.py` | Each hourly page 675 publish also writes the same panels and ticker as JSON to Supabase `livedesk_feed`. |
 | Server | `supabase/functions/livedesk`, `livedesk-revenuecat`, migration `20261001090000_livedesk_app.sql` | Accounts, access rule, feed behind a login, Hub link, devices, account deletion, store subscriptions. |
 | Hub link page | `docs/hub-page-livedesk-app-link.html` | Members-only Hub page. Hands the member pass (WPCode snippet 4510) back to the app. |
+| Careers | `scripts/careers_feed.py`, `.github/workflows/livedesk-careers.yml` | Added 27/10/2026. The Hub Career Centre's roles (employer's own listings), with area and speciality, in the app's Careers tab; new-role push alerts by area and speciality. Row `livedesk_feed` id `careers`; `livedesk` action `careers`; devices carry `regions` and `role_alerts`. |
 | Alerts | `scripts/push_alerts.py` + `scripts/fcm_push.py` | The same 9am, 12 noon and 4pm digest, sent to app devices through Firebase. |
 | App | `livedesk-app/` (Capacitor) | Sign-in by email code, Desk, Alerts, Account, paywall. |
 | Builds | `codemagic.yaml` | Tag `livedesk-vX.Y.Z` builds both apps and uploads to TestFlight and Play internal testing. |

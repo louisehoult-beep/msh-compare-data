@@ -42,7 +42,9 @@ export function status(a: Access | null, now = Date.now()): Status {
 
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-export type Device = { token: string; platform: "ios" | "android"; specialities: string[] };
+export type Device = {
+  token: string; platform: "ios" | "android"; specialities: string[]; regions: string[]; role_alerts: boolean;
+};
 
 /** A clean device registration from the request body, or why it is refused. */
 export function readDevice(body: Record<string, unknown>): Device | string {
@@ -57,7 +59,14 @@ export function readDevice(body: Record<string, unknown>): Device | string {
     if (typeof s !== "string" || s.length > 80 || !SLUG.test(s)) return "specialities";
     if (!clean.includes(s)) clean.push(s);
   }
-  return { token, platform, specialities: clean };
+  const regs = body.regions ?? [];
+  if (!Array.isArray(regs) || regs.length > 20) return "regions";
+  const regions: string[] = [];
+  for (const r of regs) {
+    if (typeof r !== "string" || !SLUG.test(r) || r.length > 40) return "regions";
+    if (!regions.includes(r)) regions.push(r);
+  }
+  return { token, platform, specialities: clean, regions, role_alerts: body.role_alerts === true };
 }
 
 /** RevenueCat webhook event -> the store columns to write, or null to ignore.
