@@ -219,6 +219,19 @@ SOURCES = [
      "specialities": ["sepsis-and-the-deteriorating-patient"]},
     {"id": "afpp_theatres", "name": "AfPP", "url": "https://www.afpp.org.uk/feed/",
      "specialities": ["theatres-and-surgical"]},
+    # Added 23/10/2026 (weekly-hub-gap-audit STEP 3c): check_speciality_news_coverage.py
+    # showed theatres-and-surgical THIN (2 items in 31 days) and afpp_theatres STALE (its
+    # /feed/ returned HTTP 403, a Cloudflare "Attention Required" page, when fetched
+    # 23/10/2026). Journal of Perioperative Practice's SAGE contents feed fetched the same
+    # day: HTTP 200, 56 items, 7 inside 30 days, newest 20/10/2026, channel title read from
+    # the body. Perioperative practice only, so a whole-feed tag is safe. afpp_theatres
+    # stays in SOURCES (stale, reported, not deleted). Rejected the same day: rcoa.ac.uk
+    # /feed and /rss.xml (403, Cloudflare challenge), anaesthetists.org/rss (404),
+    # rcseng.ac.uk /rss and /news-and-events/news/rss/ (404), journals.sagepub.com
+    # /connected/PPJ/rss (403 challenge). Anaesthesia (Wiley) not re-tried: rejected 14/10/2026.
+    {"id": "jpp_toc", "name": "Journal of Perioperative Practice (contents)",
+     "url": "https://journals.sagepub.com/action/showFeed?ui=0&mi=ehikzz&ai=2b4&jc=ppja&type=etoc&feed=rss",
+     "specialities": ["theatres-and-surgical"]},
     {"id": "bopa_oncology", "name": "British Oncology Pharmacy Association", "url": "https://www.bopa.org.uk/feed/",
      "specialities": ["oncology-and-sact"]},
     {"id": "bapen_nutrition", "name": "BAPEN", "url": "https://www.bapen.org.uk/feed/",
