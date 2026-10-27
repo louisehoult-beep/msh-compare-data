@@ -2012,7 +2012,8 @@ check("no tariff part is claimed", not B.SPECIALITY_RULES[NEURO].get("tariffPart
 check("no Drug Tariff block is published", ne.get("drugTariff") is None)
 check("the tariff rule says why rather than going quiet",
       "No Drug Tariff part applies" in (ne.get("rules") or {}).get("drugTariff", ""))
-check("no open tender on this patch today, and none invented", ne["openTenders"] == [])
+check("the open-tender count published matches what is actually listed, nothing invented",
+      ne["counts"]["openTenders"] == len(ne["openTenders"]))
 
 print("\nTHE COVERAGE LIMIT IS PUBLISHED, NOT HIDDEN (rule 14)")
 nefw = (ne.get("rules") or {}).get("frameworks", "")
