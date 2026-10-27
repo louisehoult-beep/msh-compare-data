@@ -13,20 +13,20 @@
  "slug": "digital-and-medical-it",
  "label": "Digital health and AI",
  "defined": true,
- "generated": "2026-10-24",
+ "generated": "2026-10-27",
  "dataAsOf": {
-  "frameworks": "2026-10-20",
-  "tenderHistory": "2026-10-24",
-  "frameworkAwards": "2026-10-24T11:02:19+00:00",
-  "openTenders": "24/10/2026",
-  "drugTariff": "2026-10-23",
-  "localIntel": "2026-10-24",
+  "frameworks": "2026-10-26",
+  "tenderHistory": "2026-10-27",
+  "frameworkAwards": "2026-10-27T12:15:39+00:00",
+  "openTenders": "27/10/2026",
+  "drugTariff": "2026-10-27",
+  "localIntel": "2026-10-27",
   "supplierDirectory": "2026-10-23",
   "gpPrescribing": "2026-10-21",
-  "mhraDsu": "2026-10-24",
+  "mhraDsu": "2026-10-27",
   "drugTariffViiia": null,
   "hospitalPrescribing": null,
-  "digitalLane": "24/10/2026"
+  "digitalLane": "27/10/2026"
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -1024,7 +1024,7 @@
    "url": "https://www.gov.uk/government/collections/ai-airlock-a-regulatory-sandbox-for-ai-enabled-medical-devices",
    "verifiedOn": "2026-10-20",
    "lastCheck": {
-    "date": "2026-10-24",
+    "date": "2026-10-27",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1044,7 +1044,7 @@
    "url": "https://digital.nhs.uk/services/digital-technology-assessment-criteria-dtac",
    "verifiedOn": "2026-10-20",
    "lastCheck": {
-    "date": "2026-10-24",
+    "date": "2026-10-27",
     "status": "unreachable",
     "http": 403
    }
@@ -1064,7 +1064,7 @@
    "url": "https://www.gov.uk/government/news/government-backs-recommendations-of-nhs-doctors-led-ai-commission",
    "verifiedOn": "2026-10-20",
    "lastCheck": {
-    "date": "2026-10-24",
+    "date": "2026-10-27",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -2346,7 +2346,7 @@
   "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
  },
  "mhraDsu": {
-  "dataAsOf": "2026-10-24",
+  "dataAsOf": "2026-10-27",
   "sourcePage": "https://www.gov.uk/drug-safety-update",
   "noFacet": true,
   "whyEmpty": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
@@ -2357,10 +2357,10 @@
  },
  "drugTariffViiia": null,
  "digitalLane": {
-  "dataAsOf": "24/10/2026",
+  "dataAsOf": "27/10/2026",
   "rule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction. CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only. A call-off under a framework is not a notice, and most digital money in the NHS moves as framework call-offs, capital business cases and G-Cloud awards without competition. This lane is therefore a floor, not a census: an absence here says nothing about the buyer or the market. Contract values, where shown, are the notice's own and are not summed across rows. Shown here: the clinical rows only, up to 15 awards and every open notice and market engagement row. The full lane, with the rows left out, is data/digital-lane.json.",
   "counts": {
-   "awards": 283,
+   "awards": 293,
    "awardsClinical": 34,
    "openNotices": 2,
    "openNoticesClinical": 1,
@@ -2647,7 +2647,7 @@
   "awardsClinicalTotal": 34,
   "gates": {
    "rule": "Each row is one owner page for a health tech gate. lastUpdated is the owner's own date: GOV.UK's public_updated_at from its content API, or the 'Last edited' line on an NHS England Digital page. latestChange is the owner's own change note, verbatim, where the owner publishes one. changedSinceLastRun is true when that date moved since the previous run. Nothing is summarised or interpreted.",
-   "dataAsOf": "23/10/2026",
+   "dataAsOf": "27/10/2026",
    "pages": [
     {
      "gate": "Regulation",
@@ -2753,7 +2753,7 @@
   },
   "frameworks": {
    "rule": "Every fact read at the named primary source on verifiedOn, else 'Not verified' with what would settle it. Supplier lists hold company names only; no contact person, email, phone or address is ever stored. suppliers null means no list was read.",
-   "dataAsOf": "2026-10-20",
+   "dataAsOf": "2026-10-26",
    "items": [
     {
      "name": "Technology Services 4",
@@ -2855,7 +2855,7 @@
       }
      ],
      "notVerified": [
-      "Supplier list read 21/10/2026 from the Digital Marketplace G-Cloud 15 supplier A to Z (https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud-15/suppliers), company names only, 2836 suppliers. The A to Z does not say which lot each supplier holds, so every lot's list stays null; a supplier's lot is shown only where its own service page was read. The agreement facts above were read at gca.gov.uk on 20/10/2026; gca.gov.uk redirected to its 'unavailable' page on 21/10/2026, so they were not re-read.",
+      "Supplier list read from the Digital Marketplace G-Cloud 15 supplier A to Z (https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud-15/suppliers), company names only, 2861 suppliers. The A to Z does not say which lot each supplier holds, so every lot's list stays null; a supplier's lot is shown only where its own service page was read.",
       "Agreement end 05/02/2028 (page header) and 'run for 4 years from 6 August 2026, reopening after 18 months and again after 36 months' (page text) are both recorded verbatim and not resolved. Settled by the framework award form."
      ]
     },
@@ -3190,7 +3190,7 @@
   },
   "dspt": {
    "defined": true,
-   "checked": "2026-10-20",
+   "checked": "2026-10-26",
    "sourceUrl": "https://www.dsptoolkit.nhs.uk/OrganisationSearch",
    "reuseBasis": "Terms and conditions at https://www.dsptoolkit.nhs.uk/Home/TermsAndConditions: Crown copyright material may be reproduced free of charge in any format or medium, provided it is reproduced accurately and not used in a misleading context; source identified.",
    "note": "Status is as published by DSPT on the checked date, for the organisation whose DSPT name exactly matches the supplier name. Identity beyond the name match is not verified, and this is not an endorsement.",
@@ -3297,7 +3297,7 @@
      "statusDate": "26 June 2026"
     }
    ],
-   "unmatched": 68
+   "unmatched": 78
   },
   "icbDigital": {
    "icbs": 36,
@@ -3566,7 +3566,7 @@
    "none": 6
   },
   "companies": {
-   "dataAsOf": "2026-10-24T08:12:29.037880Z",
+   "dataAsOf": "2026-10-27",
    "counts": {
     "companies": 146,
     "onDigitalFramework": 119,
@@ -3622,6 +3622,15 @@
      "labels": [],
      "frameworks": [
       {
+       "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
+       "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
+       "lots": [
+        "1",
+        "3",
+        "4"
+       ]
+      },
+      {
        "name": "Digital Diagnostic Solutions",
        "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
        "lots": []
@@ -3630,15 +3639,6 @@
        "name": "Radiotherapy IT Solutions and Associated Options and Related Services",
        "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-it-solutions-and-associated-options-and-related-services/",
        "lots": []
-      },
-      {
-       "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
-       "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
-       "lots": [
-        "1",
-        "3",
-        "4"
-       ]
       }
      ],
      "digitalAwards": 1,
@@ -3682,13 +3682,13 @@
      "labels": [],
      "frameworks": [
       {
-       "name": "Digital Diagnostic Solutions",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
        "lots": []
       },
       {
-       "name": "G-Cloud 15",
-       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
        "lots": []
       }
      ],
@@ -3706,11 +3706,6 @@
      ],
      "frameworks": [
       {
-       "name": "Digital Diagnostic Solutions",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
-       "lots": []
-      },
-      {
        "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
        "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
        "lots": [
@@ -3718,6 +3713,11 @@
         "3",
         "4"
        ]
+      },
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
       }
      ],
      "digitalAwards": 1,
@@ -3732,16 +3732,16 @@
      "labels": [],
      "frameworks": [
       {
-       "name": "Digital Diagnostic Solutions",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
-       "lots": []
-      },
-      {
        "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
        "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
        "lots": [
         "3"
        ]
+      },
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
       }
      ],
      "digitalAwards": 1,
@@ -3759,13 +3759,13 @@
      ],
      "frameworks": [
       {
-       "name": "Digital Diagnostic Solutions",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
        "lots": []
       },
       {
-       "name": "G-Cloud 15",
-       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
        "lots": []
       }
      ],
@@ -3783,11 +3783,6 @@
      ],
      "frameworks": [
       {
-       "name": "Digital Diagnostic Solutions",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
-       "lots": []
-      },
-      {
        "name": "Technology Services 4",
        "url": "https://www.gca.gov.uk/agreements/RM6190",
        "lots": [
@@ -3799,6 +3794,11 @@
       {
        "name": "G-Cloud 15",
        "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      },
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
        "lots": []
       }
      ],
@@ -3885,6 +3885,25 @@
      "clinicalAwards": 2,
      "latestAward": "2026-10-16",
      "products": 5,
+     "companyNumber": null
+    },
+    {
+     "name": "Altera Digital Health",
+     "report": "/medical-sales-hub/company-report/?company=Altera%20Digital%20Health",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 2,
+     "clinicalAwards": 1,
+     "latestAward": "2026-10-26",
+     "products": 0,
      "companyNumber": null
     },
     {
@@ -3996,25 +4015,6 @@
      "digitalAwards": 2,
      "clinicalAwards": 0,
      "latestAward": "2026-09-10",
-     "products": 0,
-     "companyNumber": null
-    },
-    {
-     "name": "Altera Digital Health",
-     "report": "/medical-sales-hub/company-report/?company=Altera%20Digital%20Health",
-     "labels": [
-      "Digital and medical IT"
-     ],
-     "frameworks": [
-      {
-       "name": "G-Cloud 15",
-       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
-       "lots": []
-      }
-     ],
-     "digitalAwards": 1,
-     "clinicalAwards": 1,
-     "latestAward": "2026-09-03",
      "products": 0,
      "companyNumber": null
     },
@@ -4292,11 +4292,6 @@
      ],
      "frameworks": [
       {
-       "name": "Digital Diagnostic Solutions",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
-       "lots": []
-      },
-      {
        "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
        "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
        "lots": [
@@ -4306,6 +4301,11 @@
         "4",
         "5"
        ]
+      },
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
       }
      ],
      "digitalAwards": 0,
@@ -4322,17 +4322,17 @@
      ],
      "frameworks": [
       {
-       "name": "Digital Diagnostic Solutions",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
-       "lots": []
-      },
-      {
        "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
        "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
        "lots": [
         "2",
         "3"
        ]
+      },
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
       }
      ],
      "digitalAwards": 0,
@@ -4349,13 +4349,13 @@
      ],
      "frameworks": [
       {
-       "name": "Digital Diagnostic Solutions",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
        "lots": []
       },
       {
-       "name": "G-Cloud 15",
-       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
        "lots": []
       }
      ],
@@ -4371,11 +4371,6 @@
      "labels": [],
      "frameworks": [
       {
-       "name": "Digital Diagnostic Solutions",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
-       "lots": []
-      },
-      {
        "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
        "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
        "lots": [
@@ -4383,6 +4378,11 @@
         "3",
         "4"
        ]
+      },
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
       }
      ],
      "digitalAwards": 0,
@@ -4397,11 +4397,6 @@
      "labels": [],
      "frameworks": [
       {
-       "name": "Digital Diagnostic Solutions",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
-       "lots": []
-      },
-      {
        "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
        "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
        "lots": [
@@ -4409,6 +4404,11 @@
         "3",
         "4"
        ]
+      },
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
       }
      ],
      "digitalAwards": 0,
@@ -4425,16 +4425,16 @@
      ],
      "frameworks": [
       {
-       "name": "Digital Diagnostic Solutions",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
-       "lots": []
-      },
-      {
        "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
        "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
        "lots": [
         "3"
        ]
+      },
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
       }
      ],
      "digitalAwards": 0,
@@ -4449,11 +4449,6 @@
      "labels": [],
      "frameworks": [
       {
-       "name": "Digital Diagnostic Solutions",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
-       "lots": []
-      },
-      {
        "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
        "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
        "lots": [
@@ -4462,6 +4457,11 @@
         "4",
         "5"
        ]
+      },
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
       }
      ],
      "digitalAwards": 0,
@@ -4478,13 +4478,13 @@
      ],
      "frameworks": [
       {
-       "name": "Digital Diagnostic Solutions",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
        "lots": []
       },
       {
-       "name": "G-Cloud 15",
-       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
        "lots": []
       }
      ],
@@ -4502,13 +4502,13 @@
      ],
      "frameworks": [
       {
-       "name": "Digital Diagnostic Solutions",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
        "lots": []
       },
       {
-       "name": "G-Cloud 15",
-       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
        "lots": []
       }
      ],
@@ -4524,13 +4524,13 @@
      "labels": [],
      "frameworks": [
       {
-       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
        "lots": []
       },
       {
-       "name": "G-Cloud 15",
-       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
        "lots": []
       }
      ],
@@ -4546,13 +4546,13 @@
      "labels": [],
      "frameworks": [
       {
-       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
        "lots": []
       },
       {
-       "name": "G-Cloud 15",
-       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
        "lots": []
       }
      ],
@@ -4568,11 +4568,6 @@
      "labels": [],
      "frameworks": [
       {
-       "name": "Digital Diagnostic Solutions",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
-       "lots": []
-      },
-      {
        "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
        "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
        "lots": [
@@ -4580,6 +4575,11 @@
         "3",
         "4"
        ]
+      },
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
       }
      ],
      "digitalAwards": 0,
@@ -4594,13 +4594,13 @@
      "labels": [],
      "frameworks": [
       {
-       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
        "lots": []
       },
       {
-       "name": "G-Cloud 15",
-       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "name": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
        "lots": []
       }
      ],
@@ -4616,11 +4616,6 @@
      "labels": [],
      "frameworks": [
       {
-       "name": "Digital Diagnostic Solutions",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
-       "lots": []
-      },
-      {
        "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
        "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
        "lots": [
@@ -4628,6 +4623,11 @@
         "3",
         "4"
        ]
+      },
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
       }
      ],
      "digitalAwards": 0,
