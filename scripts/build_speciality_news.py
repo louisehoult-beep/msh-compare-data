@@ -232,6 +232,15 @@ SOURCES = [
     {"id": "jpp_toc", "name": "Journal of Perioperative Practice (contents)",
      "url": "https://journals.sagepub.com/action/showFeed?ui=0&mi=ehikzz&ai=2b4&jc=ppja&type=etoc&feed=rss",
      "specialities": ["theatres-and-surgical"]},
+    # Added 27/10/2026 (Lou approved "go ahead"): The Biomedical Scientist (IBMS magazine) for
+    # pathology-and-laboratory-medicine. INDIRECT: its own feeds are Cloudflare-blocked, so this
+    # reads the Google News index of site:thebiomedicalscientist.net. The when:30d term is needed:
+    # without it Google returns 60 items of which 1 is inside 30 days (mostly 2017-2020 pages);
+    # with it 14 items, newest 26/10/2026 (fetched 27/10/2026). Whole feed is the IBMS magazine,
+    # so a whole-feed tag is safe. Items link through news.google.com.
+    {"id": "biomedical_scientist_gnews", "name": "The Biomedical Scientist (IBMS, via Google News)",
+     "url": "https://news.google.com/rss/search?q=site:thebiomedicalscientist.net+when:30d&hl=en-GB&gl=GB&ceid=GB:en",
+     "specialities": ["pathology-and-laboratory-medicine"]},
     {"id": "bopa_oncology", "name": "British Oncology Pharmacy Association", "url": "https://www.bopa.org.uk/feed/",
      "specialities": ["oncology-and-sact"]},
     {"id": "bapen_nutrition", "name": "BAPEN", "url": "https://www.bapen.org.uk/feed/",
