@@ -3473,7 +3473,19 @@
     }
     function refreshScope() {
       var p = pool(), v = specSel.value;
-      list.innerHTML = p.map(function (s) { return '<option value="' + esc(s.name) + '">'; }).join('');
+      /* Aliases are suggested too (labelled with the company they resolve to), so a member typing a legal
+         or former name ("GE Medical Systems") is offered the report instead of an empty list. */
+      list.innerHTML = p.map(function (s) {
+        var seen = {}; seen[norm(s.name)] = 1;
+        var out = '<option value="' + esc(s.name) + '">';
+        (s.aliases || []).forEach(function (a) {
+          var k = norm(a);
+          if (!k || seen[k]) return;
+          seen[k] = 1;
+          out += '<option value="' + esc(a) + '" label="' + esc(a + ' → ' + s.name) + '">';
+        });
+        return out;
+      }).join('');
       var quick = v
         ? p.slice(0, 5).map(function (s) { return s.name; })
         : ['GBUK Group', 'BD — Becton, Dickinson', 'Vygon (UK)', 'Coloplast', 'Convatec'].filter(function (q) { return !!byName[q]; });
