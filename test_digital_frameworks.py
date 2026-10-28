@@ -283,8 +283,47 @@ class Extras(unittest.TestCase):
             raise RuntimeError("boom")
         entries, not_added = rdf.build_extras(f, "2026-10-20")
         self.assertEqual(entries, [])
-        self.assertEqual(len(not_added), 6)
+        self.assertEqual(len(not_added), 7)
         self.assertTrue(all("Nothing recorded" in n["reason"] for n in not_added))
+
+
+SBS_PAGE_WITH_SUPPLIERS = """<html><body><main>
+<p>Framework Agreement Reference: SBS10225</p>
+<h4>What dates is the framework agreement active?</h4>
+<p>25 March 2024 &#8211; 24 March 2028</p>
+<section id="lot-breakdown"><div class="supplierprofile"><a href="#">Lot 1 Specialist clinical</a></div></section>
+<section id="supplier-details"><h3>Supplier Details</h3><div class="suppliercontainer">
+<div class="supplierprofile"><a href="https://b.example/" target="_blank">Beta Ltd</a></div>
+<div class="supplierprofile"><a href="https://a.example/" target="_blank">Alpha &amp; Co </a></div>
+<div class="supplierprofile"><a href="https://a.example/">Alpha &amp; Co</a></div>
+</div></section>
+<section id="contact-us"><div class="supplierprofile"><a href="#">Not a supplier</a></div></section>
+</main></body></html>"""
+
+
+class SbsSupplierDetails(unittest.TestCase):
+    """28/10/2026: SBS pages carry the supplier list in plain HTML (div.supplierprofile)."""
+
+    def test_names_only_scoped_to_supplier_section(self):
+        self.assertEqual(rdf.parse_sbs_suppliers(SBS_PAGE_WITH_SUPPLIERS), ["Alpha & Co", "Beta Ltd"])
+
+    def test_short_reference_form(self):
+        p = rdf.parse_sbs_page(SBS_PAGE_SHORT.replace("Framework Agreement Reference:", "Reference:"))
+        self.assertEqual(p["reference"], "SBS10225")
+
+    def test_missing_section_gives_none(self):
+        self.assertIsNone(rdf.parse_sbs_suppliers(SBS_PAGE_SHORT))
+
+    def test_page_only_entry_carries_names_and_no_urls(self):
+        e = rdf.build_sbs_page_only(lambda u: SBS_PAGE_WITH_SUPPLIERS, "digital-health-advisory", "DHA", "2026-10-28")
+        self.assertEqual(e["suppliers"], ["Alpha & Co", "Beta Ltd"])
+        self.assertNotIn("example", json.dumps(e))
+        self.assertTrue(any("Supplier Details section" in n for n in e["notVerified"]))
+
+    def test_page_only_entry_without_list_stays_null_and_not_verified(self):
+        e = rdf.build_sbs_page_only(lambda u: SBS_PAGE_SHORT, "digital-health-advisory", "DHA", "2026-10-28")
+        self.assertIsNone(e["suppliers"])
+        self.assertTrue(any(n.startswith("Supplier list not read") for n in e["notVerified"]))
 
 
 if __name__ == "__main__":

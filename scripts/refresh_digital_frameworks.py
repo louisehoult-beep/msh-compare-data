@@ -397,7 +397,8 @@ def long_date(s):
 def parse_sbs_page(page_html):
     """Reference, active dates and the extension option, as the SBS page states them."""
     txt = text_of(page_html)
-    ref = re.search(r"Framework Agreement Reference:\s*(SBS\d+)", txt)
+    # 28/10/2026: newer SBS pages print "Reference: SBS10521" without "Framework Agreement".
+    ref = re.search(r"(?:Framework Agreement )?Reference:\s*(SBS\d+)", txt)
     m = re.search(r"What dates is the framework agreement active\?\s*\n\s*(\d{1,2} (?:%s) \d{4})\s*[\u2013-]\s*(\d{1,2} (?:%s) \d{4})(?:\s*\n\s*\(([^)\n]+)\))?" % (MONTHS, MONTHS), txt)
     return {
         "reference": ref.group(1) if ref else None,
@@ -406,6 +407,26 @@ def parse_sbs_page(page_html):
         "option": m.group(3).strip() if m and m.group(3) else None,
         "dateLine": re.sub(r"\s+", " ", m.group(0).split("?", 1)[1]).strip() if m else None,
     }
+
+
+def parse_sbs_suppliers(page_html):
+    """Company names from the SBS page's own Supplier Details section, names exactly as the
+    page shows them (link text only; the supplier URL is never kept). Added 28/10/2026: the
+    section is plain HTML on the page (div.supplierprofile), not behind a separate tab.
+    Returns a sorted list, or None when the section or its names cannot be found."""
+    m = re.search(r'id="supplier-details"', page_html)
+    if not m:
+        return None
+    seg = page_html[m.end():]
+    end = re.search(r'<section\b|id="(?:contact-us|press-coverage|testimonials)"', seg)
+    if end:
+        seg = seg[:end.start()]
+    names = set()
+    for a in re.findall(r'class="supplierprofile"[^>]*>\s*(?:<a\b[^>]*>)?([\s\S]*?)</', seg):
+        n = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", a))).strip()
+        if n:
+            names.add(n)
+    return sorted(names, key=str.casefold) or None
 
 
 def award_suppliers(pkg):
@@ -483,9 +504,15 @@ def build_sbs_page_only(fetcher, slug, name, today, extra_nv=()):
     pg = parse_sbs_page(page_html)
     if not pg["reference"] or not pg["starts"]:
         raise RuntimeError("SBS page %s: reference or dates not found" % slug)
-    nv.append("Supplier list not read: the SBS page lists suppliers behind its own supplier tab "
-              "and no award notice was read for this framework. Settled by the SBS supplier "
-              "details or the award notice.")
+    sup = parse_sbs_suppliers(page_html)
+    if sup:
+        nv.append("Supplier names are as listed in the SBS page's Supplier Details section (a "
+                  "trading name may appear); the page does not say which lot each supplier holds, "
+                  "so no lot list is recorded. Not alias-resolved to Hub companies here.")
+    else:
+        nv.append("Supplier list not read: the SBS page's Supplier Details section could not be "
+                  "read on this run and no award notice was read for this framework. Settled by "
+                  "the SBS supplier details or the award notice.")
     return {
         "name": name,
         "reference": pg["reference"],
@@ -496,7 +523,7 @@ def build_sbs_page_only(fetcher, slug, name, today, extra_nv=()):
         "ends": pg["ends"],
         "extensionOption": pg["option"],
         "lots": [],
-        "suppliers": None,
+        "suppliers": sup,
         "verifiedOn": today,
         "sourceQuote": pg["dateLine"],
         "notVerified": nv,
@@ -537,6 +564,12 @@ def build_extras(fetcher, today):
             lambda: build_sbs_page_only(fetcher, "tech-devices-link-4", "Tech Devices", today))
     attempt("NHS SBS Digital Health Advisory (SBS10225)", SBS + "digital-health-advisory/",
             lambda: build_sbs_page_only(fetcher, "digital-health-advisory", "Digital Health Advisory", today))
+    # Added 28/10/2026 (health-tech-sources-reverify watch list c): SBS10521, Lot 1 is
+    # "Digital (online) communications"; dates and supplier names read from the SBS page.
+    attempt("NHS SBS Patient/Citizen Communication, Engagement and Hybrid Mail Solutions (SBS10521)",
+            SBS + "patient-citizen-communication-engagement-and-hybrid-mail-solutions/",
+            lambda: build_sbs_page_only(fetcher, "patient-citizen-communication-engagement-and-hybrid-mail-solutions",
+                                        "Patient/Citizen Communication, Engagement and Hybrid Mail Solutions", today))
     attempt("HealthTrust Europe Digital Pathology 2024 Framework", FTS_NOTICE + "058054-2026",
             lambda: build_award(fetcher, "058054-2026", "Digital Pathology 2024 Framework (HealthTrust Europe)",
                                 "HealthTrust Europe LLP", today, None,
