@@ -42,11 +42,11 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 34 | 27.9% | 60 | 43 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 36 | 35.6% | 12 | 70 | STARTED |
-| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 24 | 38.1% | 21 | 31 | STARTED |
+| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 24 | 38.1% | 21 | 30 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 22 | 42 | STARTED |
-| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 24 | 41.4% | 15 | 33 | STARTED |
+| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 26 | 44.8% | 13 | 33 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 26 | 45.6% | 13 | 32 | STARTED |
-| Urology and Bowel Management | continence | 57 | 20 | 35.1% | 26 | 37 | STARTED |
+| Urology and Bowel Management | continence | 57 | 20 | 35.1% | 26 | 36 | STARTED |
 | Advanced Wound Care | wound | 56 | 22 | 39.3% | 16 | 41 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 1 | 39 | STARTED · 7 EXCLUDED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 14 | 32 | STARTED |
@@ -105,7 +105,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Pulse Oximetry, Capnography and Related Monitoring Technologies | — | 26 | 0 | 0.0% | 25 | 9 | UNMAPPED |
 | Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions | — | 25 | 0 | 0.0% | 19 | 9 | UNMAPPED |
 | Extension Sets and Lines | — | 23 | 0 | 0.0% | 20 | 10 | UNMAPPED |
-| Vascular Therapy and Associated Products | — | 23 | 0 | 0.0% | 19 | 9 | UNMAPPED |
+| Vascular Therapy and Associated Products | — | 23 | 0 | 0.0% | 19 | 8 | UNMAPPED |
 | External Defibrillation Devices and Related Services and Accessories | — | 21 | 0 | 0.0% | 15 | 7 | UNMAPPED |
 | Surgical Mesh | — | 21 | 0 | 0.0% | 15 | 11 | UNMAPPED |
 | Instrument Decontamination and Accessories | — | 20 | 0 | 0.0% | 11 | 12 | UNMAPPED |
@@ -123,7 +123,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Transcatheter Heart Valve Repair, Replacement and Associated Devices | — | 11 | 0 | 0.0% | 10 | 3 | UNMAPPED |
 | Mobile Image Intensifiers and Associated Options and Related Services | — | 10 | 0 | 0.0% | 5 | 7 | UNMAPPED |
 | Structural Heart and Ventricular Assist Devices | — | 10 | 0 | 0.0% | 7 | 6 | UNMAPPED |
-| External Breast Prosthesis and Chest Support | — | 9 | 0 | 0.0% | 5 | 5 | UNMAPPED |
+| External Breast Prosthesis and Chest Support | — | 9 | 0 | 0.0% | 5 | 4 | UNMAPPED |
 | Perfusion Devices, Consumables and Associated Equipment | — | 9 | 0 | 0.0% | 7 | 6 | UNMAPPED |
 | Medical Hollowware | — | 8 | 0 | 0.0% | 8 | 4 | UNMAPPED |
 | Pressure Infusers and Associated Products | — | 8 | 0 | 0.0% | 6 | 4 | UNMAPPED |

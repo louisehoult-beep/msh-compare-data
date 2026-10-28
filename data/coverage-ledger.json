@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-10-26",
-  "differentiator.json published": 37243,
-  "differentiator.json held": 295344
+  "differentiator.json published": 37262,
+  "differentiator.json held": 295576
  },
  "counts": {
   "frameworks": 122,
@@ -27,8 +27,8 @@
   "supplierNamesUnresolved": 406,
   "inScopeSuppliersNeedingCrawl": 237,
   "inScopeSuppliersNeedingDomain": 224,
-  "suppliersRefused": 563,
-  "suppliersRefusedButPublishingElsewhere": 168,
+  "suppliersRefused": 561,
+  "suppliersRefusedButPublishingElsewhere": 166,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
   "blockedFrameworks": 2,
@@ -3349,13 +3349,6 @@
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-08-31",
      "bucket": "published"
-    },
-    {
-     "supplier": "Thuasne UK Ltd",
-     "domain": "www.thuasne.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "published"
     }
    ],
    "route": "NHSSC framework",
@@ -3884,8 +3877,8 @@
    "category": "Medical Technology",
    "ends": "30 September 2027",
    "suppliersAwarded": 58,
-   "suppliersPublished": 24,
-   "coverage": 41.4,
+   "suppliersPublished": 26,
+   "coverage": 44.8,
    "nhsscCategory": "Medical Technology",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3898,18 +3891,18 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 58,
-   "coverageOfTarget": 41.4,
+   "coverageOfTarget": 44.8,
    "crawlWorklist": [
+    {
+     "supplier": "Varian (Siemens Healthineers)",
+     "domain": null
+    },
     {
      "supplier": "Aquilant Endoscopy Limited",
      "domain": null
     },
     {
      "supplier": "Ingles Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Varian (Siemens Healthineers)",
      "domain": null
     }
    ],
@@ -4178,12 +4171,12 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 8,
-    "heldNeedingCategory": 4,
+    "publishedElsewhereNeedingCategory": 6,
+    "heldNeedingCategory": 5,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 2
    },
    "published": [
     "Ambu UK",
@@ -4199,11 +4192,13 @@
     "It\u2019s Interventional Limited",
     "Johnson & Johnson MedTech",
     "Laborie Medical Technologies UK Ltd",
+    "Macromed UK Ltd",
     "Medtronic",
     "Micro-Tech (UK) Ltd",
     "Newtons Medical Supplies Ltd",
     "Omnimed Limited",
     "Penlon",
+    "Pennamed Limited",
     "Pentax Medical",
     "Promed Limited",
     "Steris",
@@ -4218,9 +4213,7 @@
     "GenX MediCare Ltd",
     "Kebomed UK Ltd",
     "Olympus (KeyMed)",
-    "Macromed UK Ltd",
     "Merit Medical UK Ltd",
-    "Pennamed Limited",
     "Terumo UK",
     "Uniplex"
    ],
@@ -4228,13 +4221,13 @@
     "Erbe Medical UK Ltd",
     "Fairmont Medical Products Limited",
     "GI UK Medical Ltd (Duomed)",
-    "RB Medical Engineering Ltd"
+    "RB Medical Engineering Ltd",
+    "Varian (Siemens Healthineers)"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Aquilant Endoscopy Limited",
-    "Ingles Ltd",
-    "Varian (Siemens Healthineers)"
+    "Ingles Ltd"
    ],
    "refused": [
     "APR Medtech Limited",
@@ -4255,7 +4248,7 @@
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)"
    ],
    "unknown": [],
-   "actionableTotal": 15,
+   "actionableTotal": 13,
    "blockedReason": null,
    "deferred": null
   },
@@ -4740,13 +4733,6 @@
      "domain": "medline.com",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-08",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Eakin Ostomy (Pelican Healthcare)",
-     "domain": "www.pelicanhealthcare.co.uk",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-08-20",
      "bucket": "publishedElsewhere"
     },
     {
@@ -12445,11 +12431,11 @@
    "coverageOfTarget": 38.5,
    "crawlWorklist": [
     {
-     "supplier": "Accuray UK",
+     "supplier": "Varian (Siemens Healthineers)",
      "domain": null
     },
     {
-     "supplier": "Varian (Siemens Healthineers)",
+     "supplier": "Accuray UK",
      "domain": null
     },
     {
@@ -12533,11 +12519,11 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 0,
-    "heldNeedingCategory": 0,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 2
    },
    "published": [
     "Boston Scientific",
@@ -12547,11 +12533,12 @@
     "Xstrahl"
    ],
    "publishedElsewhere": [],
-   "heldOnly": [],
+   "heldOnly": [
+    "Varian (Siemens Healthineers)"
+   ],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Accuray UK",
-    "Varian (Siemens Healthineers)",
     "Viewray,Inc"
    ],
    "refused": [
@@ -16152,13 +16139,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Thuasne UK Ltd",
-     "domain": "www.thuasne.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Urgo Medical",
      "domain": "urgomedical.com",
      "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 product URLs, too few to call a catalogue",
@@ -18495,13 +18475,6 @@
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-08-31",
      "bucket": "refused"
-    },
-    {
-     "supplier": "Thuasne UK Ltd",
-     "domain": "www.thuasne.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
@@ -19714,11 +19687,11 @@
    "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
-     "supplier": "Raysearch UK Ltd",
+     "supplier": "Varian (Siemens Healthineers)",
      "domain": null
     },
     {
-     "supplier": "Varian (Siemens Healthineers)",
+     "supplier": "Raysearch UK Ltd",
      "domain": null
     }
    ],
@@ -19742,22 +19715,23 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 2,
-    "heldNeedingCategory": 0,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 2
+    "needDomain": 1
    },
    "published": [],
    "publishedElsewhere": [
     "Elekta",
     "Philips"
    ],
-   "heldOnly": [],
+   "heldOnly": [
+    "Varian (Siemens Healthineers)"
+   ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Raysearch UK Ltd",
-    "Varian (Siemens Healthineers)"
+    "Raysearch UK Ltd"
    ],
    "refused": [
     "Oncology Systems Ltd (OSL)"
