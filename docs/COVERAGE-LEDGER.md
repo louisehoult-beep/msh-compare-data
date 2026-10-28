@@ -28,7 +28,7 @@ A refusal is listed for every awarded supplier that carries one, including
 suppliers counted under Left because they publish outside this speciality:
 the two facts are separate, and the refusal used to be invisible for any
 supplier publishing anything anywhere.
-**2 framework(s) have nothing left by a permitted route** —
+**3 framework(s) have nothing left by a permitted route** —
 low coverage there means exhausted, not neglected.
 **1 framework(s) are DEFERRED** — their Left is real and
 counted here, but every supplier in it is waiting on a ruling only Lou can
@@ -42,7 +42,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 34 | 27.9% | 60 | 43 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 36 | 35.6% | 12 | 70 | STARTED |
-| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 24 | 38.1% | 21 | 30 | STARTED |
+| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 25 | 39.7% | 20 | 30 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 22 | 42 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 26 | 44.8% | 13 | 33 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 26 | 45.6% | 13 | 32 | STARTED |
@@ -83,7 +83,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 5 | 38.5% | 3 | 8 | STARTED |
 | Disposable and Washable Continence Care | continence | 12 | 5 | 41.7% | 4 | 7 | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 2 | 10 | STARTED |
-| Prosthetic Components and Associated Products | orthotics | 12 | 5 | 41.7% | 1 | 8 | STARTED |
+| Prosthetic Components and Associated Products | orthotics | 12 | 6 | 50.0% | 0 | 8 | STARTED · BLOCKED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 4 | 6 | STARTED |
 | CT Scanners and Associated Options and Related Services | imaging | 8 | 2 | 25.0% | 4 | 6 | STARTED |
 | Polymer Aprons | infection | 8 | 2 | 25.0% | 1 | 8 | STARTED |

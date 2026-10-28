@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-10-26",
-  "differentiator.json published": 37262,
-  "differentiator.json held": 295576
+  "differentiator.json published": 37268,
+  "differentiator.json held": 295570
  },
  "counts": {
   "frameworks": 122,
@@ -31,7 +31,7 @@
   "suppliersRefusedButPublishingElsewhere": 166,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
-  "blockedFrameworks": 2,
+  "blockedFrameworks": 3,
   "frameworksWithExclusions": 3,
   "suppliersExcludedByRuling": 14,
   "deferredFrameworks": 1
@@ -3082,8 +3082,8 @@
    "category": "Rehabilitation and Community",
    "ends": "2 March 2027",
    "suppliersAwarded": 63,
-   "suppliersPublished": 24,
-   "coverage": 38.1,
+   "suppliersPublished": 25,
+   "coverage": 39.7,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3093,7 +3093,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 63,
-   "coverageOfTarget": 38.1,
+   "coverageOfTarget": 39.7,
    "crawlWorklist": [
     {
      "supplier": "Canonbury Products Limited",
@@ -3288,13 +3288,6 @@
      "bucket": "heldOnly"
     },
     {
-     "supplier": "\u00d6ssur UK",
-     "domain": "www.ossur.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "Repton Medical Ltd",
      "domain": "www.reptonmedical.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -3344,6 +3337,13 @@
      "bucket": "published"
     },
     {
+     "supplier": "\u00d6ssur UK",
+     "domain": "www.ossur.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-31",
+     "bucket": "published"
+    },
+    {
      "supplier": "Performance Health International Limited",
      "domain": "www.performancehealth.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -3372,7 +3372,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 8,
-    "heldNeedingCategory": 6,
+    "heldNeedingCategory": 5,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -3394,6 +3394,7 @@
     "Medalin Limited",
     "Medfac UK Ltd",
     "medi UK",
+    "\u00d6ssur UK",
     "Performance Health International Limited",
     "Piedro Ltd",
     "Prestige Healthcare (London) Ltd",
@@ -3420,7 +3421,6 @@
     "Canonbury Products Limited",
     "Critical Healthcare",
     "Eureka Physiocare Ltd",
-    "\u00d6ssur UK",
     "Repton Medical Ltd",
     "Walters Medical Ltd"
    ],
@@ -3453,7 +3453,7 @@
     "Darco UK Ltd (formerly V-M Orthotics Ltd)"
    ],
    "unknown": [],
-   "actionableTotal": 21,
+   "actionableTotal": 20,
    "blockedReason": null,
    "deferred": null
   },
@@ -12830,8 +12830,8 @@
    "category": "Rehabilitation and Community",
    "ends": "23 November 2027",
    "suppliersAwarded": 12,
-   "suppliersPublished": 5,
-   "coverage": 41.7,
+   "suppliersPublished": 6,
+   "coverage": 50.0,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -12841,7 +12841,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 12,
-   "coverageOfTarget": 41.7,
+   "coverageOfTarget": 50.0,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -12889,16 +12889,16 @@
      "bucket": "refused"
     },
     {
-     "supplier": "\u00d6ssur UK",
-     "domain": "www.ossur.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "Blatchford Limited",
      "domain": "www.blatchfordmobility.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-08-31",
+     "bucket": "published"
+    },
+    {
+     "supplier": "\u00d6ssur UK",
+     "domain": "www.ossur.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
      "bucket": "published"
     }
@@ -12915,7 +12915,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 0,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -12926,12 +12926,11 @@
     "Juzo UK Limited",
     "Koalaa Ltd",
     "Medalin Limited",
+    "\u00d6ssur UK",
     "Otto Bock Healthcare PLC"
    ],
    "publishedElsewhere": [],
-   "heldOnly": [
-    "\u00d6ssur UK"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [],
    "refused": [
@@ -12943,8 +12942,8 @@
     "TayCare Medical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 1,
-   "blockedReason": null,
+   "actionableTotal": 0,
+   "blockedReason": "every awarded supplier not yet published has been read and refused (8 recorded refusal(s)) \u2014 no permitted route left to the rest of this framework, so its coverage cannot rise without a new route",
    "deferred": null
   },
   {
