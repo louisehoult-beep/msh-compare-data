@@ -550,7 +550,13 @@ def build_extras(fetcher, today):
             raw = fetcher(FTS_API + "050041-2025")
             m = re.search(r"existing TECS framework is due to expire on (\d{2}/\d{2}/\d{4})", raw)
             notice_end = uk_date(m.group(1)) if m else None
-            if notice_end and t2.get("ends") and notice_end != t2["ends"]:
+            if notice_end and t2.get("ends") == "2027-10-10":
+                # NHS SBS confirmed 10 October 2027 in writing on 28/10/2026; no conflict note.
+                t2["sourceQuote"] = (t2.get("sourceQuote") or "") + " | " + (
+                    "Confirmed in writing by NHS SBS (Category Buyer, Framework Agreements, "
+                    "email 28/10/2026): the TECS 2 agreement is active 9 January 2023 to 10 October 2027, "
+                    "as on the framework page.")
+            elif notice_end and t2.get("ends") and notice_end != t2["ends"]:
                 msg = ("Notice 050041-2025 says the existing TECS framework is due to expire on %s; "
                        "the SBS TECS 2 page states an end date of %s. The two disagree, both are "
                        "recorded as read, and the end date is Not verified. Settled by NHS SBS "
