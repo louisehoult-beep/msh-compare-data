@@ -265,6 +265,32 @@ h3{font-size:1.55rem;margin-bottom:8px}
 .js .rv{opacity:0;transform:translateY(24px);transition:opacity .85s cubic-bezier(.22,.61,.36,1),transform .85s cubic-bezier(.22,.61,.36,1);transition-delay:var(--rd,0s)}
 .js .rv.rv-in{opacity:1;transform:none}
 
+/* laptop tour */
+.laptop{width:100%;max-width:640px;justify-self:center}
+.lt-lid{background:#10192a;border:1px solid #33425c;border-radius:18px 18px 6px 6px;padding:14px 14px 16px;box-shadow:0 40px 70px -26px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.05)}
+.lt-screen{display:grid;background:#FFFFFF;border-radius:6px;overflow:hidden}
+.lt-s{grid-area:1/1;opacity:0;transform:scale(1.02);transition:opacity .8s ease,transform 1.6s ease;pointer-events:none}
+.lt-s.on{opacity:1;transform:none;pointer-events:auto}
+.lt-f{height:100%;min-height:100%;border-radius:0;box-shadow:none!important;animation:none!important}
+.lt-f tbody tr{opacity:1!important;transform:none!important}
+.lt-f tbody tr:nth-child(n+5){display:none}
+.lt-s.on tbody tr{animation:ltrow .6s ease both}
+.lt-s.on tbody tr:nth-child(2){animation-delay:.12s}.lt-s.on tbody tr:nth-child(3){animation-delay:.24s}.lt-s.on tbody tr:nth-child(4){animation-delay:.36s}
+@keyframes ltrow{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.lt-form{padding:14px 18px}
+.lt-out{margin:0 18px 12px!important}
+.lt-flow{padding:14px 18px;display:grid;gap:10px}
+.lt-flow div{border:1px solid var(--line);border-radius:10px;padding:12px 16px;font-size:.8rem;color:var(--muted)}
+.lt-flow b{display:block;font-family:var(--serif);font-size:1.15rem;font-weight:500;color:var(--navy)}
+.lt-flow .res{background:var(--navy);border-color:var(--navy);color:var(--pale)}
+.lt-flow .res b{color:#FFFFFF}
+.lt-base{height:14px;margin:0 -5%;background:linear-gradient(#d5dbe5,#8f9bad);border-radius:0 0 22px 22px;box-shadow:0 18px 30px -12px rgba(0,0,0,.6)}
+.lt-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;justify-content:center}
+.lt-tabs button{font:600 .78rem var(--sans);color:var(--pale);background:rgba(255,255,255,.06);border:1px solid rgba(224,190,142,.35);border-radius:999px;padding:9px 14px;cursor:pointer;position:relative;overflow:hidden}
+.lt-tabs button.on{background:var(--gold-lt);color:var(--navy);border-color:var(--gold-lt)}
+.lt-tabs button:hover{border-color:var(--gold-lt)}
+@media (max-width:600px){.lt-lid{padding:8px 8px 10px}.lt-s .frame-head b{font-size:1.05rem}.lt-tabs button{padding:8px 11px}.lt-f .hide-sm{display:none}}
+
 /* review fixes */
 .hf a,.jump a{display:inline-block;padding:8px 0}
 .tlink{display:inline-block;padding:8px 0 4px}
@@ -393,16 +419,60 @@ h3{font-size:1.55rem;margin-bottom:8px}
       </div>
       <p class="price"><b>£25 a month</b>, or £20 a month on the annual plan. One named person, no trial. Cancel the monthly plan any time.</p>
     </div>
-    <div>
-      <div class="frame" role="img" aria-label="The Hub's framework tracker showing NHS Supply Chain frameworks ending soonest">
-        <div class="frame-bar"><i></i><i></i><i></i><span class="url">medsalesintelligencehub.co.uk/medical-sales-hub/frameworks</span></div>
-        <div class="frame-head"><b>Frameworks ending soonest</b><small>As of {{ASOF}}</small></div>
-        <table>
-          <thead><tr><th>NHS Supply Chain framework</th><th class="num">Ends</th><th class="num hide-sm">Suppliers</th></tr></thead>
-          <tbody>{{FW_ROWS}}</tbody>
-        </table>
-        <div class="frame-foot">Source: each framework's own NHS Supply Chain contract launch brief</div>
-      </div>
+    <div class="laptop" id="laptop" aria-label="A tour of the Hub's screens">
+      <div class="lt-lid"><div class="lt-screen">
+        <div class="lt-s on" data-n="Frameworks"><div class="frame lt-f">
+          <div class="frame-bar"><i></i><i></i><i></i><span class="url">medsalesintelligencehub.co.uk/medical-sales-hub/frameworks</span></div>
+          <div class="frame-head"><b>Frameworks ending soonest</b><small>As of {{ASOF}}</small></div>
+          <table><thead><tr><th>NHS Supply Chain framework</th><th class="num">Ends</th><th class="num hide-sm">Suppliers</th></tr></thead><tbody>{{FW_ROWS}}</tbody></table>
+        </div></div>
+        <div class="lt-s" data-n="Open tenders"><div class="frame lt-f">
+          <div class="frame-bar"><i></i><i></i><i></i><span class="url">Open tenders · NHS medical</span></div>
+          <div class="frame-head"><b>Open tenders</b><small>Closing soonest</small></div>
+          <table><thead><tr><th>Tender</th><th class="num hide-sm">Value</th><th class="num">Closes</th></tr></thead><tbody>
+            <tr><td>Single Use Podiatry Instruments<span class="sub">NHS National Services Scotland</span></td><td class="num hide-sm">£2.0m</td><td class="num"><span class="pill blue">5 Nov</span></td></tr>
+            <tr><td>Cochlear Implants<span class="sub">Public Services Delivery Scotland</span></td><td class="num hide-sm">£14.2m</td><td class="num"><span class="pill blue">19 Nov</span></td></tr>
+            <tr><td>Ophthalmology Equipment<span class="sub">NHS National Services Scotland</span></td><td class="num hide-sm">£18.0m</td><td class="num"><span class="pill blue">27 Nov</span></td></tr>
+            <tr><td>Fully Managed Renal Dialysis Satellite Unit<span class="sub">Epsom and St Helier University Hospitals NHS Trust</span></td><td class="num hide-sm">£20.0m</td><td class="num"><span class="pill blue">2 Dec</span></td></tr>
+          </tbody></table>
+        </div></div>
+        <div class="lt-s" data-n="Company report"><div class="frame lt-f">
+          <div class="frame-bar"><i></i><i></i><i></i><span class="url">Company Intelligence Report</span></div>
+          <div class="frame-head"><b>What every report shows</b><small>{{SUPPLIERS_FMT}} suppliers</small></div>
+          <table><tbody>
+            <tr><td>Company information, structure and ownership<span class="sub">From the public company register</span></td></tr>
+            <tr><td>Frameworks held, end dates and who else is on them<span class="sub">From NHS Supply Chain launch briefs</span></td></tr>
+            <tr><td>Contracts won outside the national frameworks<span class="sub">From Find a Tender and Contracts Finder</span></td></tr>
+            <tr><td>Alerts and recalls<span class="sub">From the MHRA</span></td></tr>
+          </tbody></table>
+        </div></div>
+        <div class="lt-s" data-n="Alerts"><div class="frame lt-f">
+          <div class="frame-bar"><i></i><i></i><i></i><span class="url">Alerts and recalls</span></div>
+          <div class="frame-head"><b>Alerts and recalls</b><small>Latest first</small></div>
+          <table><thead><tr><th>MHRA alert</th><th class="num">Issued</th></tr></thead><tbody>
+            <tr><td>Continuous renal replacement therapy: filter membrane adsorption risk<span class="sub">DSI/2026/014</span></td><td class="num"><span class="pill red">13 Oct</span></td></tr>
+            <tr><td>Nova Biomedical StatStrip ketone test strips: supply interruption<span class="sub">DSI/2026/013</span></td><td class="num"><span class="pill red">9 Oct</span></td></tr>
+            <tr><td>Wireless cardiotocography monitoring: radiofrequency safety<span class="sub">DSI/2026/012</span></td><td class="num"><span class="pill red">17 Sep</span></td></tr>
+          </tbody></table>
+        </div></div>
+        <div class="lt-s" data-n="Help Me Prepare"><div class="frame lt-f">
+          <div class="frame-bar"><i></i><i></i><i></i><span class="url">Help Me Prepare</span></div>
+          <div class="brief-form lt-form">
+            <div class="field"><label>Your company</label><div>Your company</div></div>
+            <div class="field"><label>Trust</label><div>The trust you are visiting</div></div>
+            <div class="field"><label>Speciality</label><div>Vascular access and intravenous (IV) therapy</div></div>
+            <div class="field"><label>Meeting with</label><div>Procurement lead</div></div>
+          </div>
+          <div class="brief-out lt-out"><b>Your one-page brief</b><ul><li>What has changed at this trust and in this speciality</li><li>The angle for a procurement audience</li><li>The questions to ask, with sources linked</li></ul></div>
+        </div></div>
+        <div class="lt-s" data-n="Value case"><div class="frame lt-f">
+          <div class="frame-bar"><i></i><i></i><i></i><span class="url">Value Case Calculator</span></div>
+          <div class="frame-head"><b>Build the value case</b><small>Assumptions shown</small></div>
+          <div class="lt-flow"><div><b>The problem your product solves</b>Cost of the problem × how often it happens</div><div><b>What your product changes</b>Efficacy and how directly it acts</div><div class="res"><b>An annual saving for that trust</b>Every assumption can be tested</div></div>
+        </div></div>
+      </div></div>
+      <div class="lt-base" aria-hidden="true"></div>
+      <div class="lt-tabs" id="lt-tabs" role="tablist" aria-label="Hub screens"></div>
     </div>
   </div>
   <div class="jump"><div class="wrap">
@@ -441,7 +511,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
       <p style="margin-top:22px"><a class="btn btn-gold" href="#plans">See the plans →</a></p>
     </div>
     <div class="rv">
-      <video controls playsinline preload="none" poster="https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-advert-poster-2026-09-29.jpg">
+      <video id="ad" controls muted playsinline preload="metadata" poster="https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/hub-advert-poster-2026-09-29.jpg">
         <source src="https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/Hub-advert-43s-web-2026-09-29.mp4" type="video/mp4">
         Your browser cannot play this video. It is also on the Hub home page.
       </video>
@@ -807,6 +877,18 @@ h3{font-size:1.55rem;margin-bottom:8px}
   var links=[].slice.call(d.querySelectorAll('[data-s]')),secs=['top','figures','week','tools','companies','briefing','teams','plans','faq'].map(function(id){return d.getElementById(id)}).filter(Boolean);
   var sio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var id=e.target.id;links.forEach(function(l){l.classList.toggle('on',l.getAttribute('data-s')===id)})}})},{rootMargin:'-40% 0px -55% 0px'});
   secs.forEach(function(s){sio.observe(s)});
+  // film: autoplay (muted, as browsers require) when it scrolls into view
+  var ad=d.getElementById('ad');
+  if(ad&&!reduce){var vio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!ad.dataset.done&&ad.paused){var p=ad.play();if(p&&p.catch)p.catch(function(){})}else if(!e.isIntersecting&&!ad.paused&&!ad.dataset.user){ad.pause()}})},{threshold:0.6});vio.observe(ad);
+    ad.addEventListener('ended',function(){ad.dataset.done='1'});
+    ad.addEventListener('volumechange',function(){if(!ad.muted)ad.dataset.user='1'})}
+  // laptop tour
+  var lts=[].slice.call(d.querySelectorAll('#laptop .lt-s')),ltt=d.getElementById('lt-tabs'),lc=0,lt;
+  lts.forEach(function(s2,i){var b=d.createElement('button');b.type='button';b.textContent=s2.getAttribute('data-n');b.addEventListener('click',function(){lshow(i);lrestart()});ltt.appendChild(b)});
+  function lshow(i){lc=i;lts.forEach(function(s2,k){s2.classList.toggle('on',k===i)});[].forEach.call(ltt.children,function(b,k){b.classList.toggle('on',k===i)})}
+  function lrestart(){clearInterval(lt);if(!reduce)lt=setInterval(function(){lshow((lc+1)%lts.length)},4200)}
+  lshow(0);lrestart();
+  var lp=d.getElementById('laptop');lp.addEventListener('mouseenter',function(){clearInterval(lt)});lp.addEventListener('mouseleave',lrestart);
   // testimonials
   var sl=[].slice.call(d.querySelectorAll('#slides .slide')),dots=d.getElementById('dots'),cur=0,timer;
   sl.forEach(function(s,i){var b=d.createElement('button');b.setAttribute('aria-label','Show quote '+(i+1));b.addEventListener('click',function(){show(i);restart()});dots.appendChild(b)});
