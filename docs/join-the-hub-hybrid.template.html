@@ -311,6 +311,12 @@ h3{font-size:1.55rem;margin-bottom:8px}
 .hf a:hover,.hf a:focus-visible{text-decoration:underline;text-decoration-color:var(--gold-lt)}
 .hf-in{max-width:1240px;margin:0 auto;padding:52px 32px 28px}
 .hf-top{display:flex;flex-wrap:wrap;gap:36px 56px;align-items:flex-start;justify-content:space-between;padding-bottom:28px;border-bottom:1px solid rgba(219,227,238,.14)}
+.hf-book{display:flex;align-items:center;gap:20px;padding-bottom:28px;margin-bottom:28px;border-bottom:1px solid rgba(219,227,238,.14)}
+.hf-book img{flex:0 0 72px;width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-lt);display:block}
+.hf-book .tx{flex:1 1 auto;min-width:0}
+.hf-book b{display:block;font-family:var(--serif);font-weight:500;font-size:1.45rem;color:#FFFFFF;line-height:1.15}
+.hf-book .btn{flex:0 0 auto;white-space:nowrap;color:var(--navy)!important}
+.hf-book .btn:hover{text-decoration:none}
 .hf-brand b{display:block;font-family:var(--serif);font-weight:500;font-size:1.7rem;color:#FFFFFF;line-height:1.05}
 .hf-brand span{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-lt)}
 .hf-links{display:grid;grid-template-columns:1fr 1fr;gap:8px 36px;font-size:.92rem;font-weight:600}
@@ -320,6 +326,12 @@ h3{font-size:1.55rem;margin-bottom:8px}
 .hf-lbl{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
 .hf-et>a{display:flex;align-items:center;gap:10px;font:500 1.25rem/1.2 var(--serif)}
 .hf-et img{height:34px;width:auto;display:block}
+.hf-lou{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:24px 0 6px}
+.hf-lou img{width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid #E0BE8E;display:block}
+.hf-lou p{max-width:420px}
+.hf-lou b{display:block;font:500 1.2rem/1.2 var(--serif);color:#FFFFFF}
+.hf-lou .btn{margin-left:auto}
+@media (max-width:600px){.hf-lou .btn{margin-left:0}}
 .hf-fine{padding-top:18px;font-size:.76rem!important}
 
 /* value case on a laptop (white screen) */
@@ -464,6 +476,8 @@ h3{font-size:1.55rem;margin-bottom:8px}
   .outcome h3{font-size:1.8rem}
   .hf-in{padding:36px 20px 24px}
   .hf-top{flex-direction:column;gap:26px}
+  .hf-book{flex-direction:column;align-items:flex-start;gap:14px}
+  .hf-book .btn{width:100%;white-space:normal;justify-content:center}
   .jump .wrap{gap:8px 18px}
 }
 </style>
@@ -890,6 +904,11 @@ h3{font-size:1.55rem;margin-bottom:8px}
 <!-- FOOTER -->
 <footer class="hf">
   <div class="hf-in">
+    <div class="hf-book">
+      <img src="https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/08/one-to-one-interview-prep.jpg" alt="Louise Hoult, founder of Elevate &amp; Thrive" width="72" height="72" loading="lazy">
+      <div class="tx"><b>Talk it through with Louise</b><p>A free 30-minute Hub overview on Microsoft Teams.</p></div>
+      <a class="btn btn-gold" href="https://elevateandthrive.uk/book-a-call/">Book an overview</a>
+    </div>
     <div class="hf-top">
       <div class="hf-brand"><b>Medical Sales Intelligence Hub™</b><span>NHS market intelligence</span></div>
       <nav class="hf-links" aria-label="Page sections">
@@ -902,6 +921,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
       </div>
       <div class="hf-et"><span class="hf-lbl">From</span><a href="https://elevateandthrive.uk/"><img src="https://elevateandthrive.uk/wp-content/uploads/2026/10/et-mark-transparent.png" alt="" width="411" height="280">Elevate &amp; Thrive</a></div>
     </div>
+    <div class="hf-lou"><img src="https://elevateandthrive.uk/wp-content/uploads/2026/10/et-cti-lou-portrait-600.webp" alt="Louise Hoult" width="72" height="72" loading="lazy"><p><b>Louise Hoult</b>Not sure the Hub fits? Take 30 minutes on Microsoft Teams and see it on your own market.</p><a class="btn btn-gold" href="https://elevateandthrive.uk/book-a-call/">Book an overview</a></div>
     <p class="hf-fine">© Elevate and Thrive Ltd 2026. The Hub's content and data are protected by copyright and by database right. Your subscription is personal to you and is for one named individual. You may not extract or re-utilise a substantial part of the data, use automated tools or scrapers, share your login, redistribute or resell any part of the Hub, or use its content, data or tools to build or improve a competing product or service. Database right asserted.</p>
   </div>
 </footer>
