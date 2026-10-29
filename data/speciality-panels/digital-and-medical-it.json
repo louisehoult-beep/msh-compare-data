@@ -13,20 +13,20 @@
  "slug": "digital-and-medical-it",
  "label": "Digital health and AI",
  "defined": true,
- "generated": "2026-10-27",
+ "generated": "2026-10-29",
  "dataAsOf": {
   "frameworks": "2026-10-26",
-  "tenderHistory": "2026-10-27",
-  "frameworkAwards": "2026-10-27T12:15:39+00:00",
-  "openTenders": "27/10/2026",
-  "drugTariff": "2026-10-27",
+  "tenderHistory": "2026-10-29",
+  "frameworkAwards": "2026-10-28T12:42:47+00:00",
+  "openTenders": "28/10/2026",
+  "drugTariff": "2026-10-28",
   "localIntel": "2026-10-27",
   "supplierDirectory": "2026-10-23",
   "gpPrescribing": "2026-10-21",
-  "mhraDsu": "2026-10-27",
+  "mhraDsu": "2026-10-29",
   "drugTariffViiia": null,
   "hospitalPrescribing": null,
-  "digitalLane": "27/10/2026"
+  "digitalLane": "28/10/2026"
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -45,12 +45,12 @@
   "frameworks": 2,
   "suppliers": 58,
   "suppliersUnresolved": 0,
-  "awardsShown": 13,
-  "awardsMatched": 13,
+  "awardsShown": 14,
+  "awardsMatched": 14,
   "awardsWithheldByBuyerCap": 0,
   "awardsShownNotYetAwarded": 3,
   "openTenders": 0,
-  "localIntel": 3,
+  "localIntel": 4,
   "suppliersFrameworkNamedAlsoTagged": 39,
   "suppliersDirectoryTagged": 61,
   "suppliersDirectoryOnOtherFrameworks": 9,
@@ -810,6 +810,23 @@
  ],
  "awards": [
   {
+   "title": "2026/2027-1691 - WEB BASED ELECTRONIC PATIENT RECORD SYSTEM FOR LYMPHOEDEMA SERVICES ",
+   "buyer": "Betsi Cadwaladr University Health Board",
+   "supplier": "Lymbase ",
+   "date": "2026-10-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/101520-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "48000000",
+    "72000000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
    "title": "NHFT Integrated Sexual Health Electronic Patient Record (EPR) Pre-Market Engagement",
    "buyer": "Northamptonshire Healthcare NHS Foundation Trust",
    "supplier": null,
@@ -1069,6 +1086,22 @@
     "http": 200,
     "quote": "found"
    }
+  },
+  {
+   "id": "dig-malue",
+   "group": "routes",
+   "kind": "Innovation partner seeking NHS development partners",
+   "nation": "Not stated",
+   "org": "Malue",
+   "title": "Malue: decision support tools for healthcare, looking for NHS development partners",
+   "fact": "Malue is an early-stage start-up building decision support tools for healthcare. Its platform gathers the experience of people across healthcare, including industry, procurement, clinicians, leadership and patients, and turns it into trend analyses, summaries and recommendations for the people making decisions. The aim is to help a product or a new pathway move from idea through to adoption, so that work done in one trust does not have to be repeated from scratch in the next. Malue is looking for NHS development partners to help shape the platform. Wording agreed with Lucy Chatwin of Malue, 29 October 2026.",
+   "quote": "Malue is an early-stage start-up focused on providing Decision Support Tools to healthcare everywhere.",
+   "use": "For an NHS organisation that wants to help shape a decision support platform, or an industry team that wants its product experience captured and shared. Website: malue.co.uk.",
+   "names": [
+    "Malue"
+   ],
+   "url": "https://malue.co.uk",
+   "verifiedOn": "2026-10-29"
   }
  ],
  "localIntelGroups": {
@@ -2346,7 +2379,7 @@
   "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
  },
  "mhraDsu": {
-  "dataAsOf": "2026-10-27",
+  "dataAsOf": "2026-10-29",
   "sourcePage": "https://www.gov.uk/drug-safety-update",
   "noFacet": true,
   "whyEmpty": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
@@ -2357,11 +2390,11 @@
  },
  "drugTariffViiia": null,
  "digitalLane": {
-  "dataAsOf": "27/10/2026",
+  "dataAsOf": "28/10/2026",
   "rule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction. CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only. A call-off under a framework is not a notice, and most digital money in the NHS moves as framework call-offs, capital business cases and G-Cloud awards without competition. This lane is therefore a floor, not a census: an absence here says nothing about the buyer or the market. Contract values, where shown, are the notice's own and are not summed across rows. Shown here: the clinical rows only, up to 15 awards and every open notice and market engagement row. The full lane, with the rows left out, is data/digital-lane.json.",
   "counts": {
-   "awards": 293,
-   "awardsClinical": 34,
+   "awards": 311,
+   "awardsClinical": 36,
    "openNotices": 2,
    "openNoticesClinical": 1,
    "marketEngagement": 2,
@@ -2389,6 +2422,40 @@
   ],
   "marketEngagement": [],
   "awards": [
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "award",
+    "title": "Provision of a Hybrid Mail / Patient Portal System",
+    "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+    "published": "2026-10-28",
+    "isFramework": false,
+    "contractEnd": null,
+    "value": null,
+    "digitalCpv": [
+     "48000000",
+     "72260000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/102005-2026",
+    "ocid": "ocds-h6vhtk-079244"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "award",
+    "title": "2026/2027-1691 - WEB BASED ELECTRONIC PATIENT RECORD SYSTEM FOR LYMPHOEDEMA SERVICES ",
+    "buyer": "Betsi Cadwaladr University Health Board",
+    "published": "2026-10-27",
+    "isFramework": false,
+    "contractEnd": "2027-10-27",
+    "value": 27500.0,
+    "digitalCpv": [
+     "48000000",
+     "72000000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/101520-2026",
+    "ocid": "ocds-h6vhtk-07912d"
+   },
    {
     "lane": "digital",
     "clinical": true,
@@ -2610,44 +2677,12 @@
     ],
     "url": "https://www.find-tender.service.gov.uk/Notice/091997-2026",
     "ocid": "ocds-h6vhtk-077cc4"
-   },
-   {
-    "lane": "digital",
-    "clinical": true,
-    "stage": "award",
-    "title": "Provision of an AI Powered Documentation Tool",
-    "buyer": "NHS SOMERSET INTEGRATED CARE BOARD",
-    "published": "2026-09-28",
-    "isFramework": false,
-    "contractEnd": null,
-    "value": null,
-    "digitalCpv": [
-     "48000000"
-    ],
-    "url": "https://www.find-tender.service.gov.uk/Notice/091306-2026",
-    "ocid": "ocds-h6vhtk-077b41"
-   },
-   {
-    "lane": "digital",
-    "clinical": true,
-    "stage": "award",
-    "title": "Artificial intelligence platform.",
-    "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
-    "published": "2026-09-23",
-    "isFramework": false,
-    "contractEnd": "2027-09-22",
-    "value": 15000,
-    "digitalCpv": [
-     "72000000"
-    ],
-    "url": "https://www.find-tender.service.gov.uk/Notice/089884-2026",
-    "ocid": "ocds-h6vhtk-07780b"
    }
   ],
-  "awardsClinicalTotal": 34,
+  "awardsClinicalTotal": 36,
   "gates": {
    "rule": "Each row is one owner page for a health tech gate. lastUpdated is the owner's own date: GOV.UK's public_updated_at from its content API, or the 'Last edited' line on an NHS England Digital page. latestChange is the owner's own change note, verbatim, where the owner publishes one. changedSinceLastRun is true when that date moved since the previous run. Nothing is summarised or interpreted.",
-   "dataAsOf": "27/10/2026",
+   "dataAsOf": "28/10/2026",
    "pages": [
     {
      "gate": "Regulation",
@@ -3566,12 +3601,12 @@
    "none": 6
   },
   "companies": {
-   "dataAsOf": "2026-10-27",
+   "dataAsOf": "2026-10-29T09:58:22.102971Z",
    "counts": {
-    "companies": 146,
+    "companies": 147,
     "onDigitalFramework": 119,
-    "withDigitalAwards": 43,
-    "withProducts": 45
+    "withDigitalAwards": 44,
+    "withProducts": 46
    },
    "rule": "Every company record in the Hub's supplier directory that is digital by a recorded fact: filed under a digital speciality label, named on a digital framework's own published supplier list as held on its record (NHS Supply Chain, Government Commercial Agency (GCA), NHS Shared Business Services (SBS) or HealthTrust Europe), or named exactly on an NHS buyer's software or IT award notice. A framework place is not a contract and an award count is not spend. Products are counted from the company record; the company report lists them with their sources. Companies on a framework's list that have no Hub company record are not listed here, so this is not a census of the market.",
    "items": [
@@ -3861,9 +3896,9 @@
        ]
       }
      ],
-     "digitalAwards": 7,
+     "digitalAwards": 8,
      "clinicalAwards": 4,
-     "latestAward": "2026-10-15",
+     "latestAward": "2026-10-27",
      "products": 0,
      "companyNumber": null
     },
@@ -4634,6 +4669,17 @@
      "clinicalAwards": 0,
      "latestAward": null,
      "products": 3,
+     "companyNumber": null
+    },
+    {
+     "name": "Abbott Diagnostics",
+     "report": "/medical-sales-hub/company-report/?company=Abbott%20Diagnostics",
+     "labels": [],
+     "frameworks": [],
+     "digitalAwards": 2,
+     "clinicalAwards": 0,
+     "latestAward": "2026-10-27",
+     "products": 8,
      "companyNumber": null
     },
     {
