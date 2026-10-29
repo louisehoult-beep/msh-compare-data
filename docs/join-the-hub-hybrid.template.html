@@ -95,6 +95,8 @@ h3{font-size:1.55rem;margin-bottom:8px}
 .frame table{table-layout:fixed;width:100%;border-collapse:collapse;font-size:.8rem}
 .frame th.num,.frame td.num{width:104px}
 .frame .shot{display:block;width:100%;height:auto}
+.frame .shot-cap{margin:0;padding:14px 18px;font-size:15px;line-height:1.5;background:#14304F;color:#F5F1E8}
+.frame .shot-cap b{color:#E0BE8E}
 .frame-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;background:#EEF1F5;border-bottom:1px solid var(--line)}
 .frame-bar i{width:10px;height:10px;border-radius:50%;background:#C9D1DB;display:block}
 .frame-bar .url{margin-left:12px;flex:1;background:#FFFFFF;border-radius:5px;font-size:.72rem;color:var(--muted);padding:4px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -141,8 +143,9 @@ h3{font-size:1.55rem;margin-bottom:8px}
 .card p{color:var(--muted);font-size:.98rem}
 
 /* ---------- outcomes ---------- */
-.outcome{display:grid;grid-template-columns:1fr 1.05fr;gap:64px;align-items:center;padding:48px 0;border-bottom:1px solid var(--line)}
+.outcome{display:grid;grid-template-columns:0.85fr 1.25fr;gap:48px;align-items:center;padding:48px 0;border-bottom:1px solid var(--line)}
 .outcome:last-child{border-bottom:0}
+.outcome.flip{grid-template-columns:1.25fr 0.85fr}
 .outcome.flip .copy{order:2}
 .outcome .num{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);font-weight:700}
 .outcome h3{font-size:2.15rem;margin:8px 0 14px}
@@ -367,7 +370,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
   .hn-ui ul:last-child{display:none}
 }
 @media (max-width:960px){
-  .hero-grid,.outcome,.brief-grid,.film-grid,.two{grid-template-columns:1fr;gap:40px}
+  .hero-grid,.outcome,.outcome.flip,.brief-grid,.film-grid,.two{grid-template-columns:1fr;gap:40px}
   .outcome.flip .copy{order:0}
   .stats{grid-template-columns:repeat(3,1fr);row-gap:30px}
   .stat:nth-child(4){border-left:0;padding-left:0}
@@ -547,8 +550,9 @@ h3{font-size:1.55rem;margin-bottom:8px}
         <p class="tool">Inside: <b>Frameworks, tenders and awards</b> and the <b>Sales Triggers Desk</b></p>
       </div>
       <div class="frame rv">
-        <div class="frame-bar"><i></i><i></i><i></i><span class="url">Sales Triggers Desk</span></div>
-        <img class="shot" src="hub-screens/sales-triggers.jpg" alt="The Sales Triggers Desk showing live tender and contract triggers" loading="lazy">
+        <div class="frame-bar"><i></i><i></i><i></i><span class="url">The Live Desk</span></div>
+        <img class="shot" src="hub-screens/live-desk-recall.jpg" alt="The Live Desk showing a supplier recall with NHS Supply Chain stock quarantined, next to the MHRA alerts list" loading="lazy">
+        <p class="shot-cap"><b>Sales trigger example: out of stock.</b> Contact procurement and offer your help. They will likely be looking for a replacement, even a temporary one, and it builds relationships and trust.</p>
       </div>
     </div>
 
@@ -561,7 +565,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
       </div>
       <div class="frame rv">
         <div class="frame-bar"><i></i><i></i><i></i><span class="url">Help Me Prepare</span></div>
-        <img class="shot" src="hub-screens/prepare.jpg" alt="Help Me Prepare: pick speciality, company, trust and who you are meeting" loading="lazy">
+        <img class="shot" src="hub-screens/prepare-brief.jpg" alt="A generated Help Me Prepare brief for Convatec wound care at a trust, with the sales angle for procurement and finance" loading="lazy">
       </div>
     </div>
 
@@ -574,7 +578,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
       </div>
       <div class="frame rv">
         <div class="frame-bar"><i></i><i></i><i></i><span class="url">Company Intelligence Report</span></div>
-        <img class="shot" src="hub-screens/company-report.jpg" alt="A Company Intelligence Report header with sourced company facts and a download button" loading="lazy">
+        <img class="shot" src="hub-screens/company-frameworks.jpg" alt="A Company Intelligence Report frameworks panel showing which NHS Supply Chain frameworks the company holds and when they end" loading="lazy">
       </div>
     </div>
 
@@ -586,8 +590,8 @@ h3{font-size:1.55rem;margin-bottom:8px}
         <p class="tool">Inside: <b>Supply Disruption Tracker</b> and alerts by speciality</p>
       </div>
       <div class="frame rv">
-        <div class="frame-bar"><i></i><i></i><i></i><span class="url">MHRA Regulatory Desk</span></div>
-        <img class="shot" src="hub-screens/mhra-desk.jpg" alt="MHRA Regulatory Desk with the latest device alerts" loading="lazy">
+        <div class="frame-bar"><i></i><i></i><i></i><span class="url">Supply Disruption Tracker</span></div>
+        <img class="shot" src="hub-screens/supply-tracker-rows.jpg" alt="Supply Disruption Tracker listing suspended and recalled NHS Supply Chain lines with supplier, reason, return date and number of alternatives" loading="lazy">
       </div>
     </div>
   </div>
