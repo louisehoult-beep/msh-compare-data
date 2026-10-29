@@ -253,6 +253,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
 .clin-roles{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 40px;padding:0;list-style:none}
 .clin-roles li{background:rgba(11,28,51,.78);border:1px solid rgba(224,190,142,.55);color:#F5F1E8;border-radius:999px;padding:9px 18px;font-size:.95rem;font-weight:600}
 .clin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.clin-grid>.clin-card:last-child{grid-column:span 2}
 .clin-card{background:rgba(11,28,51,.86);border:1px solid rgba(219,227,238,.22);border-radius:12px;padding:24px 22px}
 .clin-card h3{font-size:1.22rem;margin:0 0 8px}
 .clin-card p{color:#DBE3EE;font-size:.94rem;margin:0}
@@ -261,7 +262,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
 .clin-imgs img{width:100%;height:100%;min-height:220px;max-height:300px;object-fit:cover;border-radius:12px;display:block}
 .clin-foot{margin-top:30px;display:flex;flex-wrap:wrap;gap:18px 28px;align-items:center;color:#F5F1E8}
 .clin-foot b{color:#E0BE8E}
-@media (max-width:1000px){.clin-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:1000px){.clin-grid{grid-template-columns:repeat(2,1fr)}.clin-grid>.clin-card:last-child{grid-column:auto}}
 @media (max-width:640px){.clin-grid,.clin-imgs{grid-template-columns:1fr}.clin{background:linear-gradient(rgba(6,15,29,.9),rgba(11,28,51,.9)),url("hub-screens/clinical-ward-nurses.jpg") center/cover}}
 .clin-note{margin-top:28px;font-size:1rem;color:var(--ink)}
 @media (max-width:1100px){.paths.four{grid-template-columns:repeat(2,1fr)}}
@@ -703,7 +704,6 @@ h3{font-size:1.55rem;margin-bottom:8px}
       <div class="clin-card rv"><h3>Jobs and pay</h3><p>Live NHS clinical and care vacancies, Agenda for Change pay bands and the carer to nurse ladder.</p></div>
       <div class="clin-card rv"><h3>Listen and watch</h3><p>Nursing and care webinars, podcasts including The Radar: Clinical Edition, conferences and award ceremonies.</p></div>
       <div class="clin-card rv"><h3>Your CV and routes into industry</h3><p>The CV Tailor tool, and which routes out of clinical practice actually convert.</p></div>
-      <div class="clin-card rv"><h3>Nursing Register</h3><p>Employers with a Hub Employer plan can search the register by region, speciality and skill, and ask the Hub to introduce them. <a href="https://medsalesintelligencehub.co.uk/hub-employer/">How employers use it</a>.</p></div>
     </div>
     <div class="clin-imgs rv">
       <img src="hub-screens/clinical-nhs-ward.jpg" alt="A nurse caring for a patient on an NHS ward" loading="lazy">
