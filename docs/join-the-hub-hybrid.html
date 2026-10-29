@@ -77,7 +77,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
 /* ---------- hero ---------- */
 .hero{position:relative;background:linear-gradient(100deg,rgba(6,15,29,.97) 0%,rgba(11,28,51,.94) 55%,rgba(11,28,51,.62) 100%),url("https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/live-desk-masthead-bg.jpg") center/cover;padding:96px 0 0;overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:1.02fr 1fr;gap:56px;align-items:center;padding-bottom:84px}
-.hero h1{font-size:clamp(2.6rem,4.6vw,4.1rem);margin:18px 0 22px}
+.hero h1{font-size:clamp(2.4rem,3.7vw,3.5rem);margin:18px 0 22px;text-wrap:balance}
 .hero h1 em{font-style:italic;color:var(--gold-lt)}
 .hero .lede{color:var(--pale);font-size:1.15rem}
 .hero .ctas{display:flex;flex-wrap:wrap;align-items:center;gap:26px;margin:34px 0 14px}
@@ -94,6 +94,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
 .frame{max-width:100%;background:#FFFFFF;border-radius:14px;box-shadow:0 30px 60px -20px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.08);overflow:hidden;font-family:var(--ui);color:var(--ink)}
 .frame table{table-layout:fixed;width:100%;border-collapse:collapse;font-size:.8rem}
 .frame th.num,.frame td.num{width:104px}
+.frame .shot{display:block;width:100%;height:auto}
 .frame-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;background:#EEF1F5;border-bottom:1px solid var(--line)}
 .frame-bar i{width:10px;height:10px;border-radius:50%;background:#C9D1DB;display:block}
 .frame-bar .url{margin-left:12px;flex:1;background:#FFFFFF;border-radius:5px;font-size:.72rem;color:var(--muted);padding:4px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -212,6 +213,18 @@ h3{font-size:1.55rem;margin-bottom:8px}
 .path p{color:var(--muted);font-size:.97rem;margin-bottom:22px}
 .path .btn,.path .tlink{margin-top:auto;align-self:flex-start}
 
+.paths.four{grid-template-columns:repeat(4,1fr);gap:18px}
+.paths.four .path{padding:28px 24px}
+.paths.four .btn{white-space:nowrap;padding:14px 22px}
+.paths.four .path h3{font-size:1.35rem;line-height:1.2;margin-top:10px}
+.path .inside{list-style:none;margin:0 0 22px;padding:0}
+.path .inside li{padding:6px 0 6px 20px;position:relative;font-size:.92rem;color:var(--ink);border-bottom:1px solid #DCE3EC}
+.path .inside li:before{content:"→";position:absolute;left:0;color:var(--navy);font-weight:700}
+.path .inside a{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+.clin-note{margin-top:28px;font-size:1rem;color:var(--ink)}
+@media (max-width:1100px){.paths.four{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.paths.four{grid-template-columns:1fr}}
+
 /* ---------- plans ---------- */
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:46px;align-items:stretch}
 .plan{border:1px solid var(--line);border-radius:14px;padding:34px 30px;display:flex;flex-direction:column;background:#FFFFFF;transition:transform .25s}
@@ -286,11 +299,12 @@ h3{font-size:1.55rem;margin-bottom:8px}
 .lt-flow .res{background:var(--navy);border-color:var(--navy);color:var(--pale)}
 .lt-flow .res b{color:#FFFFFF}
 .lt-base{height:14px;margin:0 -5%;background:linear-gradient(#d5dbe5,#8f9bad);border-radius:0 0 22px 22px;box-shadow:0 18px 30px -12px rgba(0,0,0,.6)}
-.lt-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;justify-content:center}
-.lt-tabs button{font:600 .78rem var(--sans);color:var(--pale);background:rgba(255,255,255,.06);border:1px solid rgba(224,190,142,.35);border-radius:999px;padding:9px 14px;cursor:pointer;position:relative;overflow:hidden}
+.lt-tabs{display:flex;flex-wrap:nowrap;gap:6px;margin-top:20px;justify-content:center;overflow-x:auto;scrollbar-width:none}
+.lt-tabs::-webkit-scrollbar{display:none}
+.lt-tabs button{font:600 .78rem var(--sans);color:var(--pale);background:rgba(255,255,255,.06);border:1px solid rgba(224,190,142,.35);border-radius:999px;padding:9px 11px;cursor:pointer;position:relative;overflow:hidden;white-space:nowrap;flex:0 0 auto}
 .lt-tabs button.on{background:var(--gold-lt);color:var(--navy);border-color:var(--gold-lt)}
 .lt-tabs button:hover{border-color:var(--gold-lt)}
-@media (max-width:600px){.lt-lid{padding:8px 8px 10px}.lt-s .frame-head b{font-size:1.05rem}.lt-tabs button{padding:8px 11px}.lt-f .hide-sm{display:none}}
+@media (max-width:600px){.lt-lid{padding:8px 8px 10px}.lt-s .frame-head b{font-size:1.05rem}.lt-tabs button{padding:8px 10px;font-size:.72rem}.lt-tabs{justify-content:flex-start}.lt-f .hide-sm{display:none}}
 
 .sechead{text-align:center;max-width:760px;margin:0 auto 28px}
 .sechead h2{margin:16px 0 20px}
@@ -401,6 +415,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
     <nav class="hn-m" aria-label="On this page">
       <a href="#week" data-s="week">Your week</a>
       <a href="#tools" data-s="tools">Tools</a>
+      <a href="#clinical" data-s="clinical">Clinical</a>
       <a href="#companies" data-s="companies">Reports</a>
       <a href="#briefing" data-s="briefing">Briefing</a>
       <a href="#teams" data-s="teams">Teams</a>
@@ -417,6 +432,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
   <a href="#figures" data-s="figures"><span>The figures</span></a>
   <a href="#week" data-s="week"><span>Your week</span></a>
   <a href="#tools" data-s="tools"><span>Tools</span></a>
+  <a href="#clinical" data-s="clinical"><span>Clinical section</span></a>
   <a href="#companies" data-s="companies"><span>Company reports</span></a>
   <a href="#briefing" data-s="briefing"><span>The Rep's Briefing</span></a>
   <a href="#teams" data-s="teams"><span>Teams and new starters</span></a>
@@ -451,7 +467,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
   </div>
   <div class="jump"><div class="wrap">
     <strong>Jump to</strong>
-    <a href="#figures">The figures</a><a href="#week">Your week</a><a href="#tools">Tools</a><a href="#companies">Company reports</a><a href="#briefing">Rep's Briefing</a><a href="#teams">Teams</a><a href="#plans">Plans</a><a href="#faq">Questions</a>
+    <a href="#figures">The figures</a><a href="#week">Your week</a><a href="#tools">Tools</a><a href="#clinical">Clinical</a><a href="#companies">Company reports</a><a href="#briefing">Rep's Briefing</a><a href="#teams">Teams</a><a href="#plans">Plans</a><a href="#faq">Questions</a>
   </div></div>
 </section>
 
@@ -531,17 +547,8 @@ h3{font-size:1.55rem;margin-bottom:8px}
         <p class="tool">Inside: <b>Frameworks, tenders and awards</b> and the <b>Sales Triggers Desk</b></p>
       </div>
       <div class="frame rv">
-        <div class="frame-bar"><i></i><i></i><i></i><span class="url">Open tenders · NHS medical</span></div>
-        <table>
-          <thead><tr><th>Tender</th><th class="num hide-sm">Value</th><th class="num">Closes</th></tr></thead>
-          <tbody>
-            <tr style="--i:0"><td>Fully Managed Renal Dialysis Satellite Unit<span class="sub">Epsom and St Helier University Hospitals NHS Trust</span></td><td class="num hide-sm">£20.0m</td><td class="num"><span class="pill blue">2 Dec</span></td></tr>
-            <tr style="--i:1"><td>Ophthalmology Equipment<span class="sub">NHS National Services Scotland</span></td><td class="num hide-sm">£18.0m</td><td class="num"><span class="pill blue">27 Nov</span></td></tr>
-            <tr style="--i:2"><td>Cochlear Implants<span class="sub">Public Services Delivery Scotland</span></td><td class="num hide-sm">£14.2m</td><td class="num"><span class="pill blue">19 Nov</span></td></tr>
-            <tr style="--i:3"><td>Single Use Podiatry Instruments<span class="sub">NHS National Services Scotland</span></td><td class="num hide-sm">£2.0m</td><td class="num"><span class="pill blue">5 Nov</span></td></tr>
-          </tbody>
-        </table>
-        <div class="frame-foot">Source: Find a Tender and Contracts Finder, 28 Oct 2026</div>
+        <div class="frame-bar"><i></i><i></i><i></i><span class="url">Sales Triggers Desk</span></div>
+        <img class="shot" src="hub-screens/sales-triggers.jpg" alt="The Sales Triggers Desk showing live tender and contract triggers" loading="lazy">
       </div>
     </div>
 
@@ -554,13 +561,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
       </div>
       <div class="frame rv">
         <div class="frame-bar"><i></i><i></i><i></i><span class="url">Help Me Prepare</span></div>
-        <div class="brief-form">
-          <div class="field" style="--i:0"><label>Your company</label><div>Your company</div></div>
-          <div class="field" style="--i:1"><label>Trust</label><div>The trust you are visiting</div></div>
-          <div class="field" style="--i:2"><label>Speciality</label><div>Vascular access and intravenous (IV) therapy</div></div>
-          <div class="field" style="--i:3"><label>Meeting with</label><div>Procurement lead</div></div>
-        </div>
-        <div class="brief-out" style="--i:5"><b>Your one-page brief</b><ul><li>What has changed at this trust and in this speciality</li><li>The angle for a procurement audience</li><li>The questions to ask, with sources linked</li></ul></div>
+        <img class="shot" src="hub-screens/prepare.jpg" alt="Help Me Prepare: pick speciality, company, trust and who you are meeting" loading="lazy">
       </div>
     </div>
 
@@ -573,14 +574,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
       </div>
       <div class="frame rv">
         <div class="frame-bar"><i></i><i></i><i></i><span class="url">Company Intelligence Report</span></div>
-        <div class="frame-head"><b>What every report shows</b><small>1,369 suppliers</small></div>
-        <table><tbody>
-          <tr style="--i:0"><td>Company information, structure and ownership<span class="sub">From the public company register</span></td></tr>
-          <tr style="--i:1"><td>Frameworks held, end dates and who else is on them<span class="sub">From NHS Supply Chain launch briefs</span></td></tr>
-          <tr style="--i:2"><td>Contracts won outside the national frameworks<span class="sub">From Find a Tender and Contracts Finder</span></td></tr>
-          <tr style="--i:3"><td>Alerts and recalls<span class="sub">From the MHRA</span></td></tr>
-          <tr style="--i:4"><td>Market position as a band, never an invented share</td></tr>
-        </tbody></table>
+        <img class="shot" src="hub-screens/company-report.jpg" alt="A Company Intelligence Report header with sourced company facts and a download button" loading="lazy">
       </div>
     </div>
 
@@ -592,17 +586,8 @@ h3{font-size:1.55rem;margin-bottom:8px}
         <p class="tool">Inside: <b>Supply Disruption Tracker</b> and alerts by speciality</p>
       </div>
       <div class="frame rv">
-        <div class="frame-bar"><i></i><i></i><i></i><span class="url">Alerts and recalls</span></div>
-        <table>
-          <thead><tr><th>MHRA alert</th><th class="num">Issued</th></tr></thead>
-          <tbody>
-            <tr style="--i:0"><td>Continuous renal replacement therapy: filter membrane adsorption risk<span class="sub">DSI/2026/014</span></td><td class="num"><span class="pill red">13 Oct</span></td></tr>
-            <tr style="--i:1"><td>Nova Biomedical StatStrip ketone test strips: supply interruption<span class="sub">DSI/2026/013</span></td><td class="num"><span class="pill red">9 Oct</span></td></tr>
-            <tr style="--i:2"><td>Wireless cardiotocography monitoring: radiofrequency safety<span class="sub">DSI/2026/012</span></td><td class="num"><span class="pill red">17 Sep</span></td></tr>
-            <tr style="--i:3"><td>Patient hoists and slings: risk of harm from falls<span class="sub">National Patient Safety Alert</span></td><td class="num"><span class="pill red">16 Sep</span></td></tr>
-          </tbody>
-        </table>
-        <div class="frame-foot">Source: gov.uk drug and device alerts</div>
+        <div class="frame-bar"><i></i><i></i><i></i><span class="url">MHRA Regulatory Desk</span></div>
+        <img class="shot" src="hub-screens/mhra-desk.jpg" alt="MHRA Regulatory Desk with the latest device alerts" loading="lazy">
       </div>
     </div>
   </div>
@@ -639,7 +624,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
     <h2 class="rv">Each outcome has a working tool behind it</h2>
     <p class="lede rv">Working tools, not reading lists. Each is built from the NHS's own published records and the companies' own pages, and each shows where its facts came from.</p>
     <div class="tools">
-      <a href="#plans"><span class="k">Know the company</span><b>Company Intelligence Reports</b><span class="d">One printable pack per company</span></a>
+      <a href="#companies"><span class="k">Know the company</span><b>Company Intelligence Reports</b><span class="d">One printable pack per company</span></a>
       <a href="#plans"><span class="k">Beat them</span><b>Compare Your Product</b><span class="d">Like against like, up to ten products side by side</span></a>
       <a href="#plans"><span class="k">Walk in prepared</span><b>Help Me Prepare</b><span class="d">A one-page brief for each meeting</span></a>
       <a href="#plans"><span class="k">Right person</span><b>Stakeholder Mapper</b><span class="d">The roles at a trust and the question to ask each</span></a>
@@ -652,6 +637,64 @@ h3{font-size:1.55rem;margin-bottom:8px}
   </div>
 </section>
 
+<!-- CLINICAL -->
+<section class="band" id="clinical" data-sec="clinical">
+  <div class="wrap">
+    <div class="sechead">
+      <div class="eyebrow rv">The Medical Sales Hub, clinical section</div>
+      <h2 class="rv">Not in sales? Find what the Hub holds for your role</h2>
+      <p class="lede rv">Nurses, allied health professionals, clinical buyers and product teams all use it. Pick the one that sounds like you.</p>
+    </div>
+    <div class="paths four">
+      <div class="path rv">
+        <div class="eyebrow">Nurse or allied health professional</div>
+        <h3>Keep your registration current, and see what else is open to you</h3>
+        <ul class="inside">
+          <li>News from the Nursing and Midwifery Council (NMC), the Royal College of Nursing (RCN) and the National Institute for Health and Care Excellence (NICE)</li>
+          <li>Continuing professional development (CPD) and revalidation guidance, with a <a href="https://medsalesintelligencehub.co.uk/medical-sales-hub/clinical-portfolio/">portfolio</a> to build your pack as you go</li>
+          <li><a href="https://medsalesintelligencehub.co.uk/medical-sales-hub/clinical-training/">Training</a> and <a href="https://medsalesintelligencehub.co.uk/medical-sales-hub/clinical-jobs/">clinical jobs</a></li>
+          <li>Help with <a href="https://medsalesintelligencehub.co.uk/medical-sales-hub/clinical-cv/">your CV</a> and the <a href="https://medsalesintelligencehub.co.uk/medical-sales-hub/clinical-to-commercial-routes/">routes into industry</a></li>
+        </ul>
+        <a class="btn btn-navy" href="https://medsalesintelligencehub.co.uk/medical-sales-hub/clinical/">Open the Clinical Desk</a>
+      </div>
+      <div class="path rv">
+        <div class="eyebrow">Outpatient or operating department</div>
+        <h3>Pathways and evidence for the area you work in</h3>
+        <ul class="inside">
+          <li><a href="https://medsalesintelligencehub.co.uk/medical-sales-hub/pathways/">Clinical pathways</a>, each with its NICE guidance and national programme links</li>
+          <li>The <a href="https://medsalesintelligencehub.co.uk/medical-sales-hub/clinical-evidence-library/">Clinical Evidence Library</a></li>
+          <li>Clinical conferences and the free CPD listing</li>
+          <li>Regulator alerts as they are issued</li>
+        </ul>
+        <a class="btn btn-outline" href="https://medsalesintelligencehub.co.uk/medical-sales-hub/pathways/">See the pathways</a>
+      </div>
+      <div class="path rv">
+        <div class="eyebrow">Clinical procurement</div>
+        <h3>See how the market and the rules look from the supplier side</h3>
+        <ul class="inside">
+          <li><a href="https://medsalesintelligencehub.co.uk/medical-sales-hub/voice-of-procurement/">Voice of Procurement</a>: how NHS procurement decides</li>
+          <li><a href="https://medsalesintelligencehub.co.uk/medical-sales-hub/procurement-act/">Procurement Act 2023</a> and <a href="https://medsalesintelligencehub.co.uk/medical-sales-hub/value-based-procurement/">value-based procurement</a></li>
+          <li>Company Intelligence Reports on the suppliers you assess</li>
+          <li>Supply Disruption Tracker for suspended lines and alternatives</li>
+        </ul>
+        <a class="btn btn-outline" href="#plans">See the plans</a>
+      </div>
+      <div class="path rv">
+        <div class="eyebrow">Product manager</div>
+        <h3>Know the field your product sells into</h3>
+        <ul class="inside">
+          <li>Compare Your Product against others in the same category</li>
+          <li>Company Intelligence Reports on competitors</li>
+          <li>Value Case Calculator for the trust-level saving</li>
+          <li>Frameworks, tenders and awards by speciality</li>
+        </ul>
+        <a class="btn btn-outline" href="#plans">See the plans</a>
+      </div>
+    </div>
+    <p class="clin-note rv"><b>Free for NHS staff.</b> The clinical section is part of the Medical Sales Hub. <a href="https://medsalesintelligencehub.co.uk/medical-sales-hub/clinical/" style="color:var(--navy);text-decoration:underline">See the clinical section</a>.</p>
+  </div>
+</section>
+
 <!-- COMPANY REPORTS -->
 <section class="band mist" id="companies" data-sec="companies">
   <div class="wrap two">
@@ -659,7 +702,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
       <div class="eyebrow">Company Intelligence Reports</div>
       <h2>Walk in knowing more about the competitor than they know about you</h2>
       <p class="lede">Most reps walk into a competitive account knowing their own product and guessing at everyone else's. A report closes that gap with facts you can check.</p>
-      <p style="margin-top:22px"><a class="btn btn-navy" href="#plans">Get the reports →</a></p>
+      <p style="margin-top:22px"><a class="btn btn-navy" href="#plans">See the plans with the reports →</a></p>
     </div>
     <div class="rv">
       <div class="eyebrow">What every report shows</div>
@@ -805,7 +848,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
     <div class="hf-top">
       <div class="hf-brand"><b>Medical Sales Intelligence Hub™</b><span>NHS market intelligence</span></div>
       <nav class="hf-links" aria-label="Page sections">
-        <a href="#week">Your week</a><a href="#tools">Tools</a><a href="#companies">Company reports</a><a href="#briefing">Rep's Briefing</a><a href="#teams">Teams</a><a href="#plans">Plans</a><a href="#faq">Questions</a><a href="https://medsalesintelligencehub.co.uk/login/">Members log in</a>
+        <a href="#week">Your week</a><a href="#tools">Tools</a><a href="#clinical">Clinical</a><a href="#companies">Company reports</a><a href="#briefing">Rep's Briefing</a><a href="#teams">Teams</a><a href="#plans">Plans</a><a href="#faq">Questions</a><a href="https://medsalesintelligencehub.co.uk/login/">Members log in</a>
       </nav>
       <div class="hf-contact">
         <p>Questions or team pricing<br><a href="mailto:contact@elevateandthrive.uk">contact@elevateandthrive.uk</a></p>
@@ -858,7 +901,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
   })},{threshold:0.5});
   d.querySelectorAll('.stat').forEach(function(s){cio.observe(s)});
   // scrollspy
-  var links=[].slice.call(d.querySelectorAll('[data-s]')),secs=['top','figures','week','tools','companies','briefing','teams','plans','faq'].map(function(id){return d.getElementById(id)}).filter(Boolean);
+  var links=[].slice.call(d.querySelectorAll('[data-s]')),secs=['top','figures','week','tools','clinical','companies','briefing','teams','plans','faq'].map(function(id){return d.getElementById(id)}).filter(Boolean);
   var sio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var id=e.target.id;links.forEach(function(l){l.classList.toggle('on',l.getAttribute('data-s')===id)})}})},{rootMargin:'-40% 0px -55% 0px'});
   secs.forEach(function(s){sio.observe(s)});
   // film: autoplay (muted, as browsers require) when it scrolls into view
