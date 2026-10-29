@@ -142,6 +142,26 @@ h3{font-size:1.55rem;margin-bottom:8px}
 .card h3{margin:12px 0 10px}
 .card p{color:var(--muted);font-size:.98rem}
 
+
+/* ---------- value case animation ---------- */
+.vc{background:rgba(255,255,255,.06);border:1px solid rgba(224,190,142,.35);border-radius:14px;padding:26px 28px;color:#F5F1E8}
+.vc-tag{margin:0 0 14px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:#E0BE8E;font-weight:700}
+.vc-row{display:grid;grid-template-columns:1.4fr 1fr auto;gap:14px;align-items:center;opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
+.vc-l{font-weight:600;color:#fff}.vc-l small{display:block;font-weight:400;color:#DBE3EE;font-size:.82rem}
+.vc-bar{height:8px;background:rgba(255,255,255,.14);border-radius:4px;overflow:hidden}
+.vc-bar i{display:block;height:100%;width:0;background:#E0BE8E;border-radius:4px;transition:width 1.2s ease .2s}
+.vc-v{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.7rem;min-width:84px;text-align:right;color:#fff}
+.vc-op{text-align:center;color:#E0BE8E;font-size:1.2rem;opacity:0;transition:opacity .5s ease;margin:4px 0}
+.vc-res{margin-top:12px;padding-top:16px;border-top:1px solid rgba(224,190,142,.4);opacity:0;transform:translateY(10px);transition:opacity .7s ease,transform .7s ease}
+.vc-res b{display:block;color:#E0BE8E}.vc-total{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-size:3rem;color:#fff;line-height:1.1}
+.vc-res small{color:#DBE3EE}
+.vc.go .vc-row,.vc.go .vc-op,.vc.go .vc-res{opacity:1;transform:none}
+.vc.go .vc-bar i{width:var(--w)}
+.vc.go [data-i="1"],.vc.go [data-i="1"]+*{transition-delay:.9s}.vc.go [data-i="2"]{transition-delay:1.8s}.vc.go [data-i="3"]{transition-delay:2.7s}.vc.go .vc-res{transition-delay:3.6s}
+.vc.go [data-i="1"] i{transition-delay:1.1s}.vc.go [data-i="2"] i{transition-delay:2s}.vc.go [data-i="3"] i{transition-delay:2.9s}
+.vc.go .vc-op{transition-delay:.7s}
+@media (max-width:600px){.vc-row{grid-template-columns:1fr auto}.vc-bar{grid-column:1/3;order:3}}
+@media (prefers-reduced-motion:reduce){.vc *{transition:none!important}}
 /* ---------- outcomes ---------- */
 .outcome{display:grid;grid-template-columns:0.85fr 1.25fr;gap:48px;align-items:center;padding:48px 0;border-bottom:1px solid var(--line)}
 .outcome:last-child{border-bottom:0}
@@ -454,7 +474,6 @@ h3{font-size:1.55rem;margin-bottom:8px}
         <a class="btn btn-gold" href="#plans">See the plans →</a>
         <a class="tlink" href="#film">Watch the 43-second film</a>
       </div>
-      <p class="price"><b>£25 a month</b>, or £20 a month on the annual plan. One named person, no trial. Cancel the monthly plan any time.</p>
     </div>
     <div class="laptop" id="laptop" aria-label="A tour of the Hub's screens">
       <div class="lt-lid"><div class="lt-screen">
@@ -611,12 +630,16 @@ h3{font-size:1.55rem;margin-bottom:8px}
         <li>Send the result straight into your meeting brief</li>
       </ul>
     </div>
-    <div class="flow rv" aria-label="How the value case is built">
-      <div><b>The problem your product solves</b>Cost of the problem × how often it happens</div>
-      <div class="arrow">↓</div>
-      <div><b>What your product changes</b>Efficacy and how directly it acts</div>
-      <div class="arrow">↓</div>
-      <div class="res"><b>An annual saving for that trust</b>Assumptions shown, so every one can be tested</div>
+    <div class="vc rv" id="vc" aria-label="How the value case is built, with illustrative figures">
+      <p class="vc-tag">Illustrative figures, not a real product</p>
+      <div class="vc-row" data-i="0"><span class="vc-l">Cost of the problem<small>per patient episode</small></span><span class="vc-bar"><i style="--w:100%"></i></span><span class="vc-v" data-to="400" data-pre="£">£0</span></div>
+      <div class="vc-op">×</div>
+      <div class="vc-row" data-i="1"><span class="vc-l">Frequency<small>episodes a year in the trust</small></span><span class="vc-bar"><i style="--w:70%"></i></span><span class="vc-v" data-to="250" data-pre="">0</span></div>
+      <div class="vc-op">×</div>
+      <div class="vc-row" data-i="2"><span class="vc-l">Efficacy<small>share of cases your product resolves</small></span><span class="vc-bar"><i style="--w:60%"></i></span><span class="vc-v" data-to="60" data-suf="%">0%</span></div>
+      <div class="vc-op">×</div>
+      <div class="vc-row" data-i="3"><span class="vc-l">Directness<small>how directly it acts on the cost</small></span><span class="vc-bar"><i style="--w:80%"></i></span><span class="vc-v" data-to="80" data-suf="%">0%</span></div>
+      <div class="vc-res"><b>An annual saving for that trust</b><span class="vc-total" data-to="48000" data-pre="£">£0</span><small>£400 × 250 × 60% × 80%. Every input is shown, so a buyer can test each one.</small></div>
     </div>
   </div>
 </section>
@@ -927,6 +950,12 @@ h3{font-size:1.55rem;margin-bottom:8px}
   function restart(){clearInterval(timer);if(!reduce)timer=setInterval(function(){show((cur+1)%sl.length)},7000)}
   show(0);restart();
 })();
+</script>
+<script>
+(function(){var v=document.getElementById('vc');if(!v)return;
+function f(el,t,d,dl){var pre=el.dataset.pre||'',suf=el.dataset.suf||'';setTimeout(function(){var s=null;function st(ts){s=s||ts;var p=Math.min((ts-s)/d,1);el.textContent=pre+Math.round(t*p).toLocaleString('en-GB')+suf;if(p<1)requestAnimationFrame(st)}requestAnimationFrame(st)},dl)}
+function run(){v.classList.add('go');var r=window.matchMedia('(prefers-reduced-motion:reduce)').matches;v.querySelectorAll('[data-to]').forEach(function(e,i){var t=+e.dataset.to;if(r){e.textContent=(e.dataset.pre||'')+t.toLocaleString('en-GB')+(e.dataset.suf||'')}else f(e,t,e.classList.contains('vc-total')?1800:1100,i<4?i*900+300:3700)})}
+if('IntersectionObserver' in window){var o=new IntersectionObserver(function(x){if(x[0].isIntersecting){o.disconnect();run()}},{threshold:.35});o.observe(v)}else run()})();
 </script>
 </body>
 </html>
