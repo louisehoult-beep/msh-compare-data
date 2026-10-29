@@ -245,7 +245,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
 .path .inside li:before{content:"→";position:absolute;left:0;color:var(--navy);font-weight:700}
 .path .inside a{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
 
-.clin{background:#0B1C33;color:#F5F1E8}
+.clin{background:linear-gradient(90deg,rgba(6,15,29,.94) 0%,rgba(11,28,51,.88) 48%,rgba(11,28,51,.45) 100%),url("hub-screens/clinical-ward-nurses.jpg") center/cover;color:#F5F1E8}
 .clin .eyebrow{color:#E0BE8E}
 .clin h2,.clin h3{color:#FFFFFF}
 .clin .clin-big{font-size:clamp(3.4rem,8vw,6rem);line-height:1;margin:10px 0 14px}
@@ -253,10 +253,10 @@ h3{font-size:1.55rem;margin-bottom:8px}
 .clin .sechead{text-align:left;margin:0 0 30px;max-width:720px}
 .clin .sechead .lede{color:#DBE3EE;margin:0}
 .clin-roles{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 40px;padding:0;list-style:none}
-.clin-roles li{background:#14304F;border:1px solid rgba(224,190,142,.55);color:#F5F1E8;border-radius:999px;padding:9px 18px;font-size:.95rem;font-weight:600}
+.clin-roles li{background:rgba(11,28,51,.78);border:1px solid rgba(224,190,142,.55);color:#F5F1E8;border-radius:999px;padding:9px 18px;font-size:.95rem;font-weight:600}
 .clin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .clin-grid>.clin-card:last-child{grid-column:span 2}
-.clin-card{background:#14304F;border:1px solid rgba(219,227,238,.14);border-radius:12px;padding:24px 22px}
+.clin-card{background:rgba(11,28,51,.86);border:1px solid rgba(219,227,238,.22);border-radius:12px;padding:24px 22px}
 .clin-card h3{font-size:1.22rem;margin:0 0 8px}
 .clin-card p{color:#DBE3EE;font-size:.94rem;margin:0}
 .clin-card a{color:#E0BE8E;text-decoration:underline;text-underline-offset:3px}
@@ -266,7 +266,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
 .clin-foot b{color:#E0BE8E}
 .clin-member{color:#E0BE8E;font-weight:600;text-decoration:underline;text-underline-offset:3px}
 @media (max-width:1000px){.clin-grid{grid-template-columns:repeat(2,1fr)}.clin-grid>.clin-card:last-child{grid-column:auto}}
-@media (max-width:640px){.clin-grid,.clin-imgs{grid-template-columns:1fr}}
+@media (max-width:640px){.clin-grid,.clin-imgs{grid-template-columns:1fr}.clin{background:linear-gradient(rgba(6,15,29,.9),rgba(11,28,51,.9)),url("hub-screens/clinical-ward-nurses.jpg") center/cover}}
 .clin-note{margin-top:28px;font-size:1rem;color:var(--ink)}
 @media (max-width:1100px){.paths.four{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.paths.four{grid-template-columns:1fr}}
@@ -691,29 +691,29 @@ h3{font-size:1.55rem;margin-bottom:8px}
 <section class="band clin" id="clinical" data-sec="clinical">
   <div class="wrap">
     <div class="sechead">
-      <div class="eyebrow">The Medical Sales Hub, clinical section</div>
-      <h2 class="clin-big">Clinical</h2>
-      <p class="clin-sub">Built for the people who work in UK health and care</p>
-      <p class="lede">Revalidation and care records, funded training, news, jobs and your route into industry, in one place. Free for NHS staff.</p>
+      <div class="eyebrow rv">The Medical Sales Hub, clinical section</div>
+      <h2 class="rv clin-big">Clinical</h2>
+      <p class="clin-sub rv">Built for the people who work in UK health and care</p>
+      <p class="lede rv">Revalidation and care records, funded training, news, jobs and your route into industry, in one place. Free for NHS staff.</p>
     </div>
-    <ul class="clin-roles" aria-label="Who the clinical section is for">
+    <ul class="clin-roles rv" aria-label="Who the clinical section is for">
       <li>Nurses</li><li>Carers and care staff</li><li>Allied health professionals (AHPs)</li><li>Pharmacists</li><li>Clinical staff moving into industry</li>
     </ul>
     <div class="clin-grid">
-      <div class="clin-card"><h3>Revalidation Portfolio Builder</h3><p>Build your Nursing and Midwifery Council (NMC) revalidation pack across the eight requirements, as you go. It saves in your own browser.</p></div>
-      <div class="clin-card"><h3>Care Standard Portfolio Builder</h3><p>A record of your training, reflections and recommendations that moves with you between jobs.</p></div>
-      <div class="clin-card"><h3>Clinical Desk news</h3><p>Regulator, college and guidance news, refreshed every Monday from official sources, including Royal College of Nursing (RCN) and NMC updates.</p></div>
-      <div class="clin-card"><h3>Training and courses</h3><p>Free and paid courses for nurses and carers, and the continuing professional development (CPD) worth your time.</p></div>
-      <div class="clin-card"><h3>Funded Clinical Training Tracker</h3><p>Funded training you can actually get, with the funding wording quoted from the provider.</p></div>
-      <div class="clin-card"><h3>Jobs and pay</h3><p>Live NHS clinical and care vacancies, Agenda for Change pay bands and the carer to nurse ladder.</p></div>
-      <div class="clin-card"><h3>Listen and watch</h3><p>Nursing and care webinars, podcasts including The Radar: Clinical Edition, conferences and award ceremonies.</p></div>
-      <div class="clin-card"><h3>Your CV and routes into industry</h3><p>The CV Tailor tool, and which routes out of clinical practice actually convert.</p></div>
+      <div class="clin-card rv"><h3>Revalidation Portfolio Builder</h3><p>Build your Nursing and Midwifery Council (NMC) revalidation pack across the eight requirements, as you go. It saves in your own browser.</p></div>
+      <div class="clin-card rv"><h3>Care Standard Portfolio Builder</h3><p>A record of your training, reflections and recommendations that moves with you between jobs.</p></div>
+      <div class="clin-card rv"><h3>Clinical Desk news</h3><p>Regulator, college and guidance news, refreshed every Monday from official sources, including Royal College of Nursing (RCN) and NMC updates.</p></div>
+      <div class="clin-card rv"><h3>Training and courses</h3><p>Free and paid courses for nurses and carers, and the continuing professional development (CPD) worth your time.</p></div>
+      <div class="clin-card rv"><h3>Funded Clinical Training Tracker</h3><p>Funded training you can actually get, with the funding wording quoted from the provider.</p></div>
+      <div class="clin-card rv"><h3>Jobs and pay</h3><p>Live NHS clinical and care vacancies, Agenda for Change pay bands and the carer to nurse ladder.</p></div>
+      <div class="clin-card rv"><h3>Listen and watch</h3><p>Nursing and care webinars, podcasts including The Radar: Clinical Edition, conferences and award ceremonies.</p></div>
+      <div class="clin-card rv"><h3>Your CV and routes into industry</h3><p>The CV Tailor tool, and which routes out of clinical practice actually convert.</p></div>
     </div>
-    <div class="clin-imgs">
+    <div class="clin-imgs rv">
       <img src="hub-screens/clinical-nhs-ward.jpg" alt="A nurse caring for a patient on an NHS ward" loading="lazy">
       <img src="hub-screens/clinical-nurse-laptop.jpg" alt="A nurse working on a laptop at a patient's bedside" loading="lazy">
     </div>
-    <div class="clin-foot">
+    <div class="clin-foot rv">
       <p><b>Free for NHS staff.</b> Choose NHS Clinician on the registration page; your NHS email address is confirmed there.</p>
       <a class="btn btn-gold" href="https://medsalesintelligencehub.co.uk/register/">Register free as an NHS clinician</a>
       <a class="clin-member" href="https://medsalesintelligencehub.co.uk/medical-sales-hub/clinical/">Already a member? Open the clinical section</a>
