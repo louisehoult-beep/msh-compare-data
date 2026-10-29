@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "28/10/2026",
- "generated": "2026-10-28",
+ "dataAsOf": "29/10/2026",
+ "generated": "2026-10-29",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,20 +22,20 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-10-20",
-   "to": "2026-10-28",
+   "from": "2026-10-21",
+   "to": "2026-10-29",
    "days": 8,
-   "run": "2026-10-28"
+   "run": "2026-10-29"
   },
   "notes": [
-   "Find a Tender (tender stage): 0 digital lane notice(s) from 54 release(s) over 1 page(s)",
-   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-20",
-   "Find a Tender (planning stage): 1 digital lane notice(s) from 26 release(s) over 1 page(s)",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-20"
+   "Find a Tender (tender stage): 0 digital lane notice(s) from 53 release(s) over 1 page(s)",
+   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-21",
+   "Find a Tender (planning stage): 1 digital lane notice(s) from 24 release(s) over 1 page(s)",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-21"
   ]
  },
  "counts": {
-  "awards": 311,
+  "awards": 319,
   "awardsClinical": 36,
   "openNotices": 2,
   "openNoticesClinical": 1,
@@ -43,6 +43,63 @@
   "marketEngagementClinical": 0
  },
  "awards": [
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "TELEPHONY MODERNISATION SUBSCRIPTION RENEWAL",
+   "buyer": "Hywel Dda University Health Board",
+   "published": "2026-10-29",
+   "suppliers": [
+    "MAINTEL EUROPE LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 999981.06,
+   "digitalCpv": [
+    "48200000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102586-2026",
+   "ocid": "ocds-h6vhtk-079371"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "BOB APC DDaT Mobilisation - Digital Support Contract",
+   "buyer": "BUCKINGHAMSHIRE HEALTHCARE NHS TRUST",
+   "published": "2026-10-29",
+   "suppliers": [
+    "Starlight Digital Services Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 1000000,
+   "digitalCpv": [
+    "72200000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102571-2026",
+   "ocid": "ocds-h6vhtk-07936b"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "IT Software and License",
+   "buyer": "The Christie NHS Foundation Trust",
+   "published": "2026-10-29",
+   "suppliers": [
+    "Integrated Business Software and Solutions Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-03-31",
+   "value": 53065.03,
+   "digitalCpv": [
+    "48218000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102411-2026",
+   "ocid": "ocds-h6vhtk-079311"
+  },
   {
    "lane": "digital",
    "clinical": false,
@@ -181,6 +238,121 @@
   {
    "lane": "digital",
    "clinical": false,
+   "stage": "award",
+   "title": "TLM Portal - Health Needs Assessment Tool",
+   "buyer": "KENT COMMUNITY HEALTH NHS FOUNDATION TRUST",
+   "published": "2026-10-28",
+   "suppliers": [
+    "Aire Innovate Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 20125,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102285-2026",
+   "ocid": "ocds-h6vhtk-0792d2"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "GP Practice Software",
+   "buyer": "Aneurin Bevan University Health Board",
+   "published": "2026-10-28",
+   "suppliers": [
+    "ACCURX LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 164867.96,
+   "digitalCpv": [
+    "48000000",
+    "48100000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102206-2026",
+   "ocid": "ocds-h6vhtk-0792af"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "HCT - Website, Intranet & Hosting",
+   "buyer": "Hertfordshire Community NHS Trust",
+   "published": "2026-10-28",
+   "suppliers": [
+    "Mixd"
+   ],
+   "isFramework": false,
+   "contractEnd": "2030-10-31",
+   "value": 106004.0,
+   "digitalCpv": [
+    "48220000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102167-2026",
+   "ocid": "ocds-h6vhtk-07929c"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "SmartPark Parking Permit System Access",
+   "buyer": "MERSEY AND WEST LANCASHIRE TEACHING HOSPITALS NHS TRUST",
+   "published": "2026-10-28",
+   "suppliers": [
+    "SISO SOFTWARE LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-07-31",
+   "value": 21168,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102125-2026",
+   "ocid": "ocds-h6vhtk-079285"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Provision of subscription-based Gartner Research Services to Swansea Bay University Health Board",
+   "buyer": "Swansea Bay University Health Board",
+   "published": "2026-10-28",
+   "suppliers": [
+    "Gartner UK Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 184875.0,
+   "digitalCpv": [
+    "72220000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102075-2026",
+   "ocid": "ocds-h6vhtk-07926c"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Data Centre Contract",
+   "buyer": "BUCKINGHAMSHIRE HEALTHCARE NHS TRUST",
+   "published": "2026-10-28",
+   "suppliers": [
+    "Rackspace Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 13174576,
+   "digitalCpv": [
+    "72415000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102055-2026",
+   "ocid": "ocds-h6vhtk-079262"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
    "stage": "planning",
    "title": "BWC Karotyping and FISH Service PME",
    "buyer": "Birmingham Women's and Children's NHS Foundation Trust",
@@ -194,26 +366,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/101403-2026",
    "ocid": "ocds-h6vhtk-078af3"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "award",
-   "title": "Notice title: New Hospital Programme - Hospital 2.0 Alliance (H2A) Framework Call-Off Contract for North Manchester General Hospital OPD",
-   "buyer": "Manchester University NHS Foundation Trust",
-   "published": "2026-10-27",
-   "suppliers": [
-    "BOVIS CONSTRUCTION (EUROPE) LIMITED"
-   ],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": 300000.0,
-   "digitalCpv": [
-    "48000000",
-    "48100000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/101619-2026",
-   "ocid": "ocds-h6vhtk-044e56"
   },
   {
    "lane": "digital",
@@ -6089,6 +6241,12 @@
    "to": "2026-10-28",
    "days": 8,
    "run": "2026-10-28"
+  },
+  {
+   "from": "2026-10-21",
+   "to": "2026-10-29",
+   "days": 8,
+   "run": "2026-10-29"
   }
  ]
 }
