@@ -322,6 +322,28 @@ h3{font-size:1.55rem;margin-bottom:8px}
 .hf-et img{height:34px;width:auto;display:block}
 .hf-fine{padding-top:18px;font-size:.76rem!important}
 
+/* value case on a laptop (white screen) */
+.laptop-vc{max-width:640px;width:100%;justify-self:center}
+.laptop-vc .lt-screen{display:block}
+.laptop-vc .vc{background:#FFFFFF;border:0;border-radius:0;padding:26px 28px 24px;color:var(--ink)}
+.laptop-vc .vc-tag{color:var(--navy)}
+.laptop-vc .vc-l{color:var(--navy)}
+.laptop-vc .vc-l small{color:var(--muted)}
+.laptop-vc .vc-bar{background:#E3E8EF}
+.laptop-vc .vc-bar i{background:#A8842C}
+.laptop-vc .vc-v{color:var(--navy)}
+.laptop-vc .vc-op{color:var(--navy)}
+.laptop-vc .vc-res{border-top:1px solid #A8842C}
+.laptop-vc .vc-res b{color:var(--navy)}
+.laptop-vc .vc-total{color:var(--navy)}
+.laptop-vc .vc-res small{color:var(--muted)}
+@media (max-width:600px){.laptop-vc .vc{padding:18px 16px}.laptop-vc .vc-total{font-size:2.4rem}}
+/* app coming soon badge */
+.appsoon{display:inline-flex;align-items:center;gap:14px;margin-top:26px;padding:10px 18px 10px 10px;border:1px solid rgba(224,190,142,.55);border-radius:16px;background:rgba(255,255,255,.07)}
+.appsoon img{width:56px;height:56px;border-radius:14px;display:block}
+.appsoon b{display:block;font:600 .74rem var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#E0BE8E}
+.appsoon span{display:block;font:500 1.25rem/1.2 var(--serif);color:#FFFFFF}
+
 /* ---------- reveal ---------- */
 .js .rv{opacity:0;transform:translateY(24px);transition:opacity .85s cubic-bezier(.22,.61,.36,1),transform .85s cubic-bezier(.22,.61,.36,1);transition-delay:var(--rd,0s)}
 .js .rv.rv-in{opacity:1;transform:none}
@@ -499,6 +521,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
         <a class="btn btn-gold" href="#plans">See the plans →</a>
         <a class="tlink" href="#film">Watch the 43-second film</a>
       </div>
+      <div class="appsoon"><img src="hub-screens/hub-app-icon.webp" alt="The Medical Sales Intelligence Hub app icon" width="56" height="56" loading="eager"><div><b>Coming soon</b><span>The Hub app</span></div></div>
     </div>
     <div class="laptop" id="laptop" aria-label="A tour of the Hub's screens">
       <div class="lt-lid"><div class="lt-screen">
@@ -647,7 +670,8 @@ h3{font-size:1.55rem;margin-bottom:8px}
         <li>Send the result straight into your meeting brief</li>
       </ul>
     </div>
-    <div class="vc rv" id="vc" aria-label="How the value case is built, with illustrative figures">
+    <div class="laptop laptop-vc rv"><div class="lt-lid"><div class="lt-screen">
+    <div class="vc" id="vc" aria-label="How the value case is built, with illustrative figures">
       <p class="vc-tag">Illustrative figures, not a real product</p>
       <div class="vc-row" data-i="0"><span class="vc-l">Cost of the problem<small>per patient episode</small></span><span class="vc-bar"><i style="--w:100%"></i></span><span class="vc-v" data-to="400" data-pre="£">£0</span></div>
       <div class="vc-op">×</div>
@@ -658,6 +682,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
       <div class="vc-row" data-i="3"><span class="vc-l">Directness<small>how directly it acts on the cost</small></span><span class="vc-bar"><i style="--w:80%"></i></span><span class="vc-v" data-to="80" data-suf="%">0%</span></div>
       <div class="vc-res"><b>An annual saving for that trust</b><span class="vc-total" data-to="48000" data-pre="£">£0</span><small>£400 × 250 × 60% × 80%. Every input is shown, so a buyer can test each one.</small></div>
     </div>
+    </div></div><div class="lt-base" aria-hidden="true"></div></div>
   </div>
 </section>
 
