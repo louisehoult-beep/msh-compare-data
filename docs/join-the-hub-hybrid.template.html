@@ -211,7 +211,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
 
 /* ---------- tools ---------- */
 .tools{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:44px}
-.tools a{background:#FFFFFF;padding:26px 22px;min-height:158px;border-top:2px solid transparent;transition:border-color .2s,background .2s;text-decoration:none;display:block}
+.tools a,.tools .tile{background:#FFFFFF;padding:26px 22px;min-height:158px;border-top:2px solid transparent;transition:border-color .2s,background .2s;text-decoration:none;display:block}
 .tools a:hover{border-top-color:var(--gold);background:var(--warm)}
 .tools .k{font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);display:block;margin-bottom:8px}
 .tools b{display:block;font-family:var(--serif);font-size:1.3rem;font-weight:500;color:var(--navy);margin-bottom:6px;line-height:1.15}
@@ -248,6 +248,8 @@ h3{font-size:1.55rem;margin-bottom:8px}
 .clin{background:linear-gradient(90deg,rgba(6,15,29,.94) 0%,rgba(11,28,51,.88) 48%,rgba(11,28,51,.45) 100%),url("hub-screens/clinical-ward-nurses.jpg") center/cover;color:#F5F1E8}
 .clin .eyebrow{color:#E0BE8E}
 .clin h2,.clin h3{color:#FFFFFF}
+.clin .clin-big{font-size:clamp(3.4rem,8vw,6rem);line-height:1;margin:10px 0 14px}
+.clin .clin-sub{font-family:var(--serif);font-size:clamp(1.4rem,2.4vw,1.9rem);color:#F5F1E8;margin:0 0 14px;line-height:1.25}
 .clin .sechead{text-align:left;margin:0 0 30px;max-width:720px}
 .clin .sechead .lede{color:#DBE3EE;margin:0}
 .clin-roles{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 40px;padding:0;list-style:none}
@@ -262,6 +264,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
 .clin-imgs img{width:100%;height:100%;min-height:220px;max-height:300px;object-fit:cover;border-radius:12px;display:block}
 .clin-foot{margin-top:30px;display:flex;flex-wrap:wrap;gap:18px 28px;align-items:center;color:#F5F1E8}
 .clin-foot b{color:#E0BE8E}
+.clin-member{color:#E0BE8E;font-weight:600;text-decoration:underline;text-underline-offset:3px}
 @media (max-width:1000px){.clin-grid{grid-template-columns:repeat(2,1fr)}.clin-grid>.clin-card:last-child{grid-column:auto}}
 @media (max-width:640px){.clin-grid,.clin-imgs{grid-template-columns:1fr}.clin{background:linear-gradient(rgba(6,15,29,.9),rgba(11,28,51,.9)),url("hub-screens/clinical-ward-nurses.jpg") center/cover}}
 .clin-note{margin-top:28px;font-size:1rem;color:var(--ink)}
@@ -509,7 +512,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
   </div>
   <div class="jump"><div class="wrap">
     <strong>Jump to</strong>
-    <a href="#figures">The figures</a><a href="#week">Your week</a><a href="#tools">Tools</a><a href="#clinical">Clinical</a><a href="#companies">Company reports</a><a href="#briefing">Rep's Briefing</a><a href="#teams">Teams</a><a href="#plans">Plans</a><a href="#faq">Questions</a>
+    <a href="#figures">The figures</a><a href="#week">Your week</a><a href="#tools">Tools</a><a href="#clinical">Clinical</a><a href="#companies">Company reports</a><a href="#briefing">Rep's Briefing</a><a href="#teams">Teams</a><div class="tile">Plans</div><a href="#faq">Questions</a>
   </div></div>
 </section>
 
@@ -672,13 +675,13 @@ h3{font-size:1.55rem;margin-bottom:8px}
     <p class="lede rv">Working tools, not reading lists. Each is built from the NHS's own published records and the companies' own pages, and each shows where its facts came from.</p>
     <div class="tools">
       <a href="#companies"><span class="k">Know the company</span><b>Company Intelligence Reports</b><span class="d">One printable pack per company</span></a>
-      <a href="#plans"><span class="k">Beat them</span><b>Compare Your Product</b><span class="d">Like against like, up to ten products side by side</span></a>
-      <a href="#plans"><span class="k">Walk in prepared</span><b>Help Me Prepare</b><span class="d">A one-page brief for each meeting</span></a>
-      <a href="#plans"><span class="k">Right person</span><b>Stakeholder Mapper</b><span class="d">The roles at a trust and the question to ask each</span></a>
-      <a href="#plans"><span class="k">Call when live</span><b>Frameworks, tenders and awards</b><span class="d">Scope, expiry and who won what</span></a>
-      <a href="#plans"><span class="k">Their gap, your call</span><b>Supply Disruption Tracker</b><span class="d">Suspended lines and the listed alternatives</span></a>
-      <a href="#plans"><span class="k">Put a number on it</span><b>Value Case and Sustainability Calculator</b><span class="d">A saving the finance director can check, plus the carbon saving</span></a>
-      <a href="#plans"><span class="k">Find the tenders</span><b>Common Procurement Vocabulary (CPV) Code Finder</b><span class="d">The codes buyers publish tenders under</span></a>
+      <div class="tile"><span class="k">Beat them</span><b>Compare Your Product</b><span class="d">Like against like, up to ten products side by side</span></div>
+      <div class="tile"><span class="k">Walk in prepared</span><b>Help Me Prepare</b><span class="d">A one-page brief for each meeting</span></div>
+      <div class="tile"><span class="k">Right person</span><b>Stakeholder Mapper</b><span class="d">The roles at a trust and the question to ask each</span></div>
+      <div class="tile"><span class="k">Call when live</span><b>Frameworks, tenders and awards</b><span class="d">Scope, expiry and who won what</span></div>
+      <div class="tile"><span class="k">Their gap, your call</span><b>Supply Disruption Tracker</b><span class="d">Suspended lines and the listed alternatives</span></div>
+      <div class="tile"><span class="k">Put a number on it</span><b>Value Case and Sustainability Calculator</b><span class="d">A saving the finance director can check, plus the carbon saving</span></div>
+      <div class="tile"><span class="k">Find the tenders</span><b>Common Procurement Vocabulary (CPV) Code Finder</b><span class="d">The codes buyers publish tenders under</span></div>
     </div>
     <p class="also rv">Also in membership: the Sales Triggers Desk, Interview Prep, My Hub, phone alerts for the specialities you choose, Ask the Desk, the Procurement Act and value-based procurement briefings, the supplier directory, speciality pages, clinical pathways, career centre and glossary. Plus a health tech lane for digital health, artificial intelligence (AI) and software as a medical device (SaMD).</p>
   </div>
@@ -689,7 +692,8 @@ h3{font-size:1.55rem;margin-bottom:8px}
   <div class="wrap">
     <div class="sechead">
       <div class="eyebrow rv">The Medical Sales Hub, clinical section</div>
-      <h2 class="rv">Built for the people who work in UK health and care</h2>
+      <h2 class="rv clin-big">Clinical</h2>
+      <p class="clin-sub rv">Built for the people who work in UK health and care</p>
       <p class="lede rv">Revalidation and care records, funded training, news, jobs and your route into industry, in one place. Free for NHS staff.</p>
     </div>
     <ul class="clin-roles rv" aria-label="Who the clinical section is for">
@@ -710,8 +714,9 @@ h3{font-size:1.55rem;margin-bottom:8px}
       <img src="hub-screens/clinical-nurse-laptop.jpg" alt="A nurse working on a laptop at a patient's bedside" loading="lazy">
     </div>
     <div class="clin-foot rv">
-      <p><b>Free for NHS staff.</b> Choose NHS Clinician on the registration page.</p>
-      <a class="btn btn-gold" href="https://medsalesintelligencehub.co.uk/medical-sales-hub/clinical/">Open the clinical section</a>
+      <p><b>Free for NHS staff.</b> Choose NHS Clinician on the registration page; your NHS email address is confirmed there.</p>
+      <a class="btn btn-gold" href="https://medsalesintelligencehub.co.uk/register/">Register free as an NHS clinician</a>
+      <a class="clin-member" href="https://medsalesintelligencehub.co.uk/medical-sales-hub/clinical/">Already a member? Open the clinical section</a>
     </div>
   </div>
 </section>
@@ -869,7 +874,7 @@ h3{font-size:1.55rem;margin-bottom:8px}
     <div class="hf-top">
       <div class="hf-brand"><b>Medical Sales Intelligence Hub™</b><span>NHS market intelligence</span></div>
       <nav class="hf-links" aria-label="Page sections">
-        <a href="#week">Your week</a><a href="#tools">Tools</a><a href="#clinical">Clinical</a><a href="#companies">Company reports</a><a href="#briefing">Rep's Briefing</a><a href="#teams">Teams</a><a href="#plans">Plans</a><a href="#faq">Questions</a><a href="https://medsalesintelligencehub.co.uk/login/">Members log in</a>
+        <a href="#week">Your week</a><a href="#tools">Tools</a><a href="#clinical">Clinical</a><a href="#companies">Company reports</a><a href="#briefing">Rep's Briefing</a><a href="#teams">Teams</a><div class="tile">Plans</div><a href="#faq">Questions</a><a href="https://medsalesintelligencehub.co.uk/login/">Members log in</a>
       </nav>
       <div class="hf-contact">
         <p>Questions or team pricing<br><a href="mailto:contact@elevateandthrive.uk">contact@elevateandthrive.uk</a></p>
