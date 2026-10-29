@@ -9,8 +9,10 @@ or from a search snippet. Dermatology first, then continence, wound care and tis
 speciality in data/speciality-map.json (canonicalSpecialities), and a speciality
 with no checked people renders an honest empty state.
 
-SOURCES READ (22/10/2026)
+SOURCES READ (22/10/2026; Wounds UK editorial board added 29/10/2026)
 -------------------------
+WUK   Wounds UK journal, wounds-uk.com/about-us/editorial-board/ (read 29/10/2026;
+      that source carries its own checked date).
 BAD   British Association of Dermatologists, /about-the-bad/leadership-team
       (officers, regional representatives, co-opted and ex-officio members), and
       badannualmeeting.co.uk /keynotes-speakers/ (106th Annual Meeting, Manchester,
@@ -137,6 +139,13 @@ SOURCES = {
         "title": "ABCD Committee",
         "url": "https://abcd.care/committee",
         "note": "The four officers the page names. The page's Committee Members section was empty when read, and it shows no affiliations."},
+    "wuk-editorial": {
+        "short": "Wounds UK editorial board",
+        "body": "Wounds UK (journal)",
+        "title": "Wounds UK Editorial board",
+        "url": "https://wounds-uk.com/about-us/editorial-board/",
+        "checked": "2026-10-29",
+        "note": "The journal's own editorial board page. Only the Clinical Editor and Academic Editor have a role on the page; the others are listed under the Editorial board heading. Affiliations are copied as the page shows them."},
 }
 
 DERM = ["dermatology"]
@@ -150,7 +159,7 @@ def add(name, source, role, org=None, classes=("board",), term=None, specialitie
     p = PEOPLE.setdefault(name, {"name": name, "appearances": [], "specialities": [], "classes": []})
     p["appearances"].append({
         "body": body, "role": role, "organisation": org, "term": term,
-        "source": source, "source_url": SOURCES[source]["url"], "checked": CHECKED,
+        "source": source, "source_url": SOURCES[source]["url"], "checked": SOURCES[source].get("checked", CHECKED),
     })
     if shown_as:
         p["appearances"][-1]["spelling_on_source"] = shown_as
@@ -296,6 +305,37 @@ for n, r, o in [
     add(n, T2, r, o, specialities=VAC, body="VASBI")
 
 DIA = ["diabetes"]
+# Wounds UK editorial board (read 29/10/2026). Names and affiliations exactly as the page shows them.
+W = "wuk-editorial"
+add("Jacqui Fletcher OBE", W, "Clinical Editor", "Independent Wound Care Advisor", classes=("editor",), specialities=WND, body="Wounds UK")
+add("Samantha Holloway", W, "Academic Editor", "Reader, Programme Director, Cardiff University School of Medicine, Cardiff", classes=("editor",), specialities=WND, body="Wounds UK")
+for n, o in [
+    ("Leanne Atkin", "PhD, MHSc, RGN, Vascular Nurse Consultant/Associate Professor, Mid Yorks NHS Trust/ University of Huddersfield"),
+    ("Alexandra Bishop", "MSc, BSc, Consultant Nurse, Tissue Viability, University Hospitals Plymouth NHS Trust"),
+    ("Luxmi Dhoonmoon", "BSc, MSc, Nurse Consultant Tissue Viability, London North West University Healthcare NHS Trust"),
+    ("Fiona Downie", "RGN, PGCE, MSc, Senior Lecturer Advanced Practice, Department of Nursing and Midwifery, Anglia Ruskin University, Cambridge"),
+    ("Rachael Durrans", "MSc, MCSP, FHEA, Senior Lecturer Physiotherapy, University of Huddersfield"),
+    ("Valerie Edwards-Jones", "PhD, CSci, FIBMS, Emeritus Professor of Medical Microbiology, Manchester Metropolitan University"),
+    ("Gilly Glendewar", "Clinical Nurse Specialist Tissue Viability, Queen’s Nurse Family Nursing & Home Care, Le Bas Centre, St Helier, Jersey"),
+    ("Vanessa Goulding", "BSc (Hons), MSc, PGCert, National Strategic Lead for Diabetes Footcare (Wales), Podiatry Professional Lead (Cardiff and Vale University Health Board)"),
+    ("Karl Guttormsen", "BSc(Hons), MSc, PGCert, Podiatrist, Advanced Clinical Practitioner Acute Medicine, North Manchester General Hospital, Manchester NHS Foundation Trust, Manchester"),
+    ("Heather Hodgson", "RGN, BSc, MN, PGD, Lead Nurse Tissue Viability, NHS Greater Glasgow and Clyde"),
+    ("Anita Kilroy-Findley", "Clinical Lead Tissue Viability, Leicestershire Partnership NHS Trust, Loughborough"),
+    ("Ellie Lindsay OBE", "Life President and Founder of the Lindsay Leg Club Foundation; Honorary Professor, The College of Phlebology, London; Independent Specialist Practitioner; Visiting Fellow, Queensland University of Technology; Visiting Senior Fellow, University of Suffolk; Associate Lecturer CRICP, Thames Valley University, London"),
+    ("Jeanette Milne", "RGN, BSc, Post Grad Dip, Head of Nursing, Northumbria Healthcare NHS Foundation Trust"),
+    ("Elizabeth Nichols", "BNurs (Hons), MSc, RN, DN, Tissue Viability Nurse Specialist, Your Healthcare CIC, Kingston upon Thames"),
+    ("Karen Ousey", "PhD, MA, PGDE, DPPN, RN, CMgr MCMI, FHEA, Professor of Skin Integrity, University of Huddersfield; Immediate Past President ISTAP; World Union of Wound Healing Societies recorder"),
+    ("Kelly Phillips", "RGN, BSc, MSc, Skin Integrity Nurse Consultant, Trust Advanced Practice Strategic Lead, Doncaster and Bassetlaw Teaching Hospitals NHS Foundation Trust"),
+    ("Susy Pramod", "MSc, PGCert CliRes, RN, Tissue Viability Matron, The Christie NHS Foundation Trust, Manchester"),
+    ("Hollie Robinson", "RGN, CMgr, FCMI, Strategic Tissue Viability Lead, South Warwickshire University Foundation Trust"),
+    ("Ray Samuriwo", "PhD, RGN, Associate Professor, Edinburgh Napier University, Edinburgh"),
+    ("Jackie Stephen-Haynes", "RGN, MSc, PGCert Ed and Post Grad Dip research , District Nurse qualifications, Professor in Wound and Tissue Repair, Birmingham City University, Chair, Wound Care Alliance UK"),
+    ("John Stephenson", "Reader in Biomedical Statistics, School of Human and Health Sciences, University of Huddersfield"),
+    ("Joshua Totty", "MBBS, MRCS, PGCertHPE, PGCertRes, MD(Res), FHEA, Academic Clinical Lecturer in Plastic Surgery, University of Hull, Visiting NIHR Research Fellow, University of York, Registrar in Plastic and Reconstructive Surgery (ST8), Leeds Teaching Hospitals NHS Trust Yorkshire and Humber Deanery"),
+    ("Amy Verdon", "RN, BSc Specialist Practitioner Tissue Viability, PG Cert HEPP, Tissue Viability Clinical Nurse Specialist, Acute Tissue Viability Team, University Hospitals Coventry and Warwickshire"),
+    ("Kim Whitlock", "Tissue Viability Matron, Infection Control and Tissue Viability, North Bristol NHS Trust, Southmead Hospital, Bristol"),
+]:
+    add(n, W, "Editorial board member (listed under the page's Editorial board heading; the page shows no further role)", o, classes=("editor",), specialities=WND, body="Wounds UK")
 add("Professor Ketan Dhatariya", "abcd-committee", "Chair", None, specialities=DIA, body="ABCD")
 add("Dr Vijay Jayagopal", "abcd-committee", "Honorary Treasurer", None, specialities=DIA, body="ABCD")
 add("Professor Hermione Price", "abcd-committee", "Honorary Secretary", None, specialities=DIA, body="ABCD")
@@ -311,6 +351,7 @@ NOTES = {
     "TVS": "Tissue viability and wound care professionals (charity trustees)",
     "VASBI": "Surgeons, nephrologists, radiologists and nurses in haemodialysis vascular access",
     "ABCD": "Consultant diabetologists",
+    "Wounds UK": "Editorial board of the Wounds UK journal (wound care and tissue viability)",
 }
 
 EMPTY = {
@@ -324,7 +365,7 @@ def linkedin(name, bodies):
     q = re.sub(r"^(Dr|Professor|Prof|Mrs|Mr|Miss)\s+", "", name)
     q = re.sub(r"\s+(MBE|OBE)$", "", q)
     org = {"BAD": "dermatology", "BDNG": "dermatology nurse", "PCDS": "dermatology GP", "SDS": "dermatology",
-           "ACP": "continence", "TVS": "tissue viability", "VASBI": "vascular access", "ABCD": "diabetes"}.get(bodies[0] if bodies else None, "dermatology")
+           "ACP": "continence", "TVS": "tissue viability", "VASBI": "vascular access", "ABCD": "diabetes", "Wounds UK": "wound care"}.get(bodies[0] if bodies else None, "dermatology")
     return "https://www.linkedin.com/search/results/people/?keywords=" + urllib.parse.quote(q + " " + org)
 
 
@@ -360,7 +401,7 @@ def main():
         "classes": [{"id": c, "label": l} for c, l in CLASSES],
         "specialities": [{"id": s["id"], "label": s["label"]} for s in specs],
         "bodies": [{"id": k, "label": v} for k, v in NOTES.items()],
-        "sources": [dict(id=k, **v, checked=CHECKED) for k, v in SOURCES.items()],
+        "sources": [{"id": k, **v, "checked": v.get("checked", CHECKED)} for k, v in SOURCES.items()],
         "empty": EMPTY,
         "people": people,
     }
