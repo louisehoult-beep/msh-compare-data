@@ -42,7 +42,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 34 | 27.9% | 60 | 43 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 36 | 35.6% | 12 | 70 | STARTED |
-| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 25 | 39.7% | 20 | 30 | STARTED |
+| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 27 | 42.9% | 18 | 30 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 22 | 42 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 26 | 44.8% | 13 | 33 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 26 | 45.6% | 13 | 32 | STARTED |
