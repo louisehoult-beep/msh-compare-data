@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "29/10/2026",
- "generated": "2026-10-29",
+ "dataAsOf": "30/10/2026",
+ "generated": "2026-10-30",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,20 +22,20 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-10-21",
-   "to": "2026-10-29",
+   "from": "2026-10-22",
+   "to": "2026-10-30",
    "days": 8,
-   "run": "2026-10-29"
+   "run": "2026-10-30"
   },
   "notes": [
-   "Find a Tender (tender stage): 0 digital lane notice(s) from 53 release(s) over 1 page(s)",
-   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-21",
-   "Find a Tender (planning stage): 1 digital lane notice(s) from 24 release(s) over 1 page(s)",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-21"
+   "Find a Tender (tender stage): 0 digital lane notice(s) from 52 release(s) over 1 page(s)",
+   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-22",
+   "Find a Tender (planning stage): 1 digital lane notice(s) from 23 release(s) over 1 page(s)",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-22"
   ]
  },
  "counts": {
-  "awards": 319,
+  "awards": 321,
   "awardsClinical": 36,
   "openNotices": 2,
   "openNoticesClinical": 1,
@@ -43,6 +43,45 @@
   "marketEngagementClinical": 0
  },
  "awards": [
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Provision of an Alert System",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "published": "2026-10-30",
+   "suppliers": [
+    "Global View Systems"
+   ],
+   "isFramework": false,
+   "contractEnd": "2028-10-26",
+   "value": 48994.51,
+   "digitalCpv": [
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/103004-2026",
+   "ocid": "ocds-h6vhtk-079254"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "award",
+   "title": "Provision of a Hybrid Mail / Patient Portal System",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "published": "2026-10-30",
+   "suppliers": [
+    "IMIMOBILE EUROPE LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-27",
+   "value": 600000.0,
+   "digitalCpv": [
+    "48000000",
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102941-2026",
+   "ocid": "ocds-h6vhtk-079244"
+  },
   {
    "lane": "digital",
    "clinical": false,
@@ -104,40 +143,58 @@
    "lane": "digital",
    "clinical": false,
    "stage": "award",
-   "title": "Provision of an Alert System",
-   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
-   "published": "2026-10-28",
+   "title": "Project Activity Management (PAM) Contract",
+   "buyer": "Guy's and St Thomas' NHS Foundation Trust",
+   "published": "2026-10-29",
    "suppliers": [
-    "Global View Systems"
+    "Rembrace Ltd"
    ],
    "isFramework": false,
-   "contractEnd": null,
-   "value": null,
+   "contractEnd": "2029-09-30",
+   "value": 171660.0,
    "digitalCpv": [
-    "72260000"
+    "48517000",
+    "72212517"
    ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/102033-2026",
-   "ocid": "ocds-h6vhtk-079254"
+   "url": "https://www.find-tender.service.gov.uk/Notice/102622-2026",
+   "ocid": "ocds-h6vhtk-078d2b"
   },
   {
    "lane": "digital",
-   "clinical": true,
+   "clinical": false,
    "stage": "award",
-   "title": "Provision of a Hybrid Mail / Patient Portal System",
-   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
-   "published": "2026-10-28",
+   "title": "Virtual Care Services",
+   "buyer": "Mid Yorkshire Hospitals NHS Trust",
+   "published": "2026-10-29",
    "suppliers": [
-    "IMIMOBILE EUROPE LIMITED"
+    "Doccla UK Limited"
    ],
+   "isFramework": false,
+   "contractEnd": "2027-11-01",
+   "value": 167889.0,
+   "digitalCpv": [
+    "72212218"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102844-2026",
+   "ocid": "ocds-h6vhtk-079404"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "Cardiac Magnetic Resonance Post-Processing Software",
+   "buyer": "Royal Papworth Hospital NHS Foundation Trust",
+   "published": "2026-10-29",
+   "suppliers": [],
    "isFramework": false,
    "contractEnd": null,
    "value": null,
    "digitalCpv": [
     "48000000",
-    "72260000"
+    "48180000"
    ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/102005-2026",
-   "ocid": "ocds-h6vhtk-079244"
+   "url": "https://www.find-tender.service.gov.uk/Notice/102664-2026",
+   "ocid": "ocds-h6vhtk-079399"
   },
   {
    "lane": "digital",
@@ -936,26 +993,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/099671-2026",
    "ocid": "ocds-h6vhtk-078804"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "award",
-   "title": "Renewal of the Project Activity Management (PAM) Contract",
-   "buyer": "Guy's and St Thomas' NHS Foundation Trust",
-   "published": "2026-10-21",
-   "suppliers": [
-    "Rembrace Ltd"
-   ],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "48517000",
-    "72212517"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/099621-2026",
-   "ocid": "ocds-h6vhtk-078d2b"
   },
   {
    "lane": "digital",
@@ -6247,6 +6284,12 @@
    "to": "2026-10-29",
    "days": 8,
    "run": "2026-10-29"
+  },
+  {
+   "from": "2026-10-22",
+   "to": "2026-10-30",
+   "days": 8,
+   "run": "2026-10-30"
   }
  ]
 }
