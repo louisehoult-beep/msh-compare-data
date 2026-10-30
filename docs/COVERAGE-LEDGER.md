@@ -81,7 +81,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Clinical and Sharps Waste Management | infection | 14 | 4 | 28.6% | 5 | 12 | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | imaging, oncology | 13 | 4 | 30.8% | 1 | 9 | STARTED · DEFERRED |
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 5 | 38.5% | 3 | 8 | STARTED |
-| Disposable and Washable Continence Care | continence | 12 | 5 | 41.7% | 4 | 7 | STARTED |
+| Disposable and Washable Continence Care | continence | 12 | 5 | 41.7% | 2 | 9 | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 2 | 10 | STARTED |
 | Prosthetic Components and Associated Products | orthotics | 12 | 6 | 50.0% | 0 | 8 | STARTED · BLOCKED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 4 | 6 | STARTED |

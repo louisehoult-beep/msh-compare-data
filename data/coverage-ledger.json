@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 406,
-  "inScopeSuppliersNeedingCrawl": 237,
-  "inScopeSuppliersNeedingDomain": 224,
-  "suppliersRefused": 561,
+  "inScopeSuppliersNeedingCrawl": 235,
+  "inScopeSuppliersNeedingDomain": 222,
+  "suppliersRefused": 563,
   "suppliersRefusedButPublishingElsewhere": 166,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
@@ -12573,22 +12573,12 @@
    "coverageOfTarget": 41.7,
    "crawlWorklist": [
     {
-     "supplier": "Forma-Care (UK) Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Ontex Healthcare UK Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "P&S Healthcare Ltd",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "Forma-Care (UK) Ltd",
-    "Ontex Healthcare UK Ltd",
-    "P&S Healthcare Ltd"
+    "Ontex Healthcare UK Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -12600,10 +12590,24 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Forma-Care (UK) Ltd",
+     "domain": "forma-care.co.uk",
+     "reason": "neither forma-care.co.uk nor www.forma-care.co.uk answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-10-30",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Meditrade UK Ltd",
      "domain": "meditradeuk.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; sitemap URLs did not resolve into product names; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "P&S Healthcare Ltd",
+     "domain": "pshealthcare.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-10-30",
      "bucket": "refused"
     },
     {
@@ -12658,7 +12662,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 1
    },
    "published": [
     "Abena UK Limited",
@@ -12673,17 +12677,17 @@
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Forma-Care (UK) Ltd",
-    "Ontex Healthcare UK Ltd",
-    "P&S Healthcare Ltd"
+    "Ontex Healthcare UK Ltd"
    ],
    "refused": [
     "Attends Ltd",
+    "Forma-Care (UK) Ltd",
     "Meditrade UK Ltd",
+    "P&S Healthcare Ltd",
     "Sharon Services (UK) Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 4,
+   "actionableTotal": 2,
    "blockedReason": null,
    "deferred": null
   },
