@@ -1327,9 +1327,54 @@ def rotation_targets(targets, rows, known, n):
     the same pace."""
     holders = {name for name, r in rows.items() if holds_roles(r)}
     keep = [t for t in targets if t[0] in holders]
+    prio = priority_names()
     rest = sorted((t for t in targets if t[0] not in holders),
-                  key=lambda t: (known.get(t[0]) or ""))
+                  key=lambda t: (0 if (not known.get(t[0]) and _is_priority(t[0], prio)) else 1,
+                                 known.get(t[0]) or ""))
     return keep + rest[:n]
+
+
+EXTRA = "config/careers-extra-employers.json"
+
+
+def extra_targets(targets, only=None):
+    """Pharma and med tech employers outside the NHS Supply Chain seed (22/10/2026).
+
+    Skipped where a seed supplier already carries the name, so nobody is read twice."""
+    try:
+        with open(EXTRA, encoding="utf-8") as f:
+            doc = json.load(f)
+    except Exception:
+        return []
+    have = [t[0].lower() for t in targets]
+    out = []
+    for e in (doc.get("pharma") or []) + (doc.get("medtech") or []):
+        n = e["name"]
+        key = re.split(r" \(", n.lower())[0]
+        if any(h.startswith(key) or key.startswith(h) for h in have) \
+                or any(n == o[0] for o in out):
+            continue
+        if only and not any(w.strip().lower() in n.lower() for w in only.split(",") if w.strip()):
+            continue
+        out.append((n, e["domain"]))
+    return out
+
+
+PRIORITY = "config/careers-priority-suppliers.json"
+
+
+def priority_names():
+    """Lower-cased name fragments of the employers to read first (22/10/2026)."""
+    try:
+        with open(PRIORITY, encoding="utf-8") as f:
+            return [x.lower() for x in json.load(f).get("names", [])]
+    except Exception:
+        return []
+
+
+def _is_priority(name, prio):
+    n = (name or "").lower()
+    return any(p in n for p in prio)
 
 
 def previous_keys():
@@ -1532,6 +1577,7 @@ def main():
             if not any(w in n.lower() for w in wanted for n in names):
                 continue
         targets.append((rec["name"], dom))
+    targets += extra_targets(targets, a.supplier)
 
     if a.rotate:
         # Oldest first, never-checked before ever-checked. A supplier whose row

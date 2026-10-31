@@ -1,0 +1,419 @@
+{
+ "_about": "Lou, 22/10/2026: pharma and med tech employers to read for sales, clinical and early-career roles, on top of the NHS Supply Chain supplier list. Each domain is the company's own site as I know it; scripts/refresh_supplier_careers.py opens it and records the careers page only where that site itself points at one, so a wrong domain shows up as a refusal and is fixed here, not published. Entries whose name already matches a supplier in data/supplier-seed.json are skipped. Add, never remove.",
+ "pharma": [
+  {
+   "name": "Pfizer",
+   "domain": "pfizer.co.uk"
+  },
+  {
+   "name": "Novartis",
+   "domain": "novartis.com"
+  },
+  {
+   "name": "AstraZeneca",
+   "domain": "astrazeneca.com"
+  },
+  {
+   "name": "GSK",
+   "domain": "gsk.com"
+  },
+  {
+   "name": "MSD (Merck Sharp & Dohme) UK",
+   "domain": "msd-uk.com"
+  },
+  {
+   "name": "Eli Lilly and Company",
+   "domain": "lilly.com"
+  },
+  {
+   "name": "Sanofi",
+   "domain": "sanofi.com"
+  },
+  {
+   "name": "Bayer",
+   "domain": "bayer.co.uk"
+  },
+  {
+   "name": "Takeda",
+   "domain": "takeda.com"
+  },
+  {
+   "name": "Amgen",
+   "domain": "amgen.com"
+  },
+  {
+   "name": "AbbVie",
+   "domain": "abbvie.co.uk"
+  },
+  {
+   "name": "Bristol Myers Squibb",
+   "domain": "bms.com"
+  },
+  {
+   "name": "Janssen (Johnson & Johnson Innovative Medicine)",
+   "domain": "janssen.com"
+  },
+  {
+   "name": "Boehringer Ingelheim",
+   "domain": "boehringer-ingelheim.com"
+  },
+  {
+   "name": "Astellas",
+   "domain": "astellas.com"
+  },
+  {
+   "name": "Daiichi Sankyo",
+   "domain": "daiichi-sankyo.eu"
+  },
+  {
+   "name": "UCB",
+   "domain": "ucb.com"
+  },
+  {
+   "name": "Ipsen",
+   "domain": "ipsen.com"
+  },
+  {
+   "name": "Servier",
+   "domain": "servier.com"
+  },
+  {
+   "name": "Gilead Sciences",
+   "domain": "gilead.com"
+  },
+  {
+   "name": "Biogen",
+   "domain": "biogen.com"
+  },
+  {
+   "name": "Vertex Pharmaceuticals",
+   "domain": "vrtx.com"
+  },
+  {
+   "name": "Regeneron",
+   "domain": "regeneron.com"
+  },
+  {
+   "name": "Organon",
+   "domain": "organon.com"
+  },
+  {
+   "name": "Viatris",
+   "domain": "viatris.com"
+  },
+  {
+   "name": "Teva",
+   "domain": "tevauk.com"
+  },
+  {
+   "name": "Sandoz",
+   "domain": "sandoz.com"
+  },
+  {
+   "name": "Chiesi",
+   "domain": "chiesi.com"
+  },
+  {
+   "name": "Lundbeck",
+   "domain": "lundbeck.com"
+  },
+  {
+   "name": "Otsuka",
+   "domain": "otsuka.co.uk"
+  },
+  {
+   "name": "Eisai",
+   "domain": "eisai.co.uk"
+  },
+  {
+   "name": "Pierre Fabre",
+   "domain": "pierre-fabre.com"
+  },
+  {
+   "name": "Grünenthal",
+   "domain": "grunenthal.com"
+  },
+  {
+   "name": "Merck KGaA",
+   "domain": "merckgroup.com"
+  },
+  {
+   "name": "Alexion (AstraZeneca Rare Disease)",
+   "domain": "alexion.com"
+  },
+  {
+   "name": "Moderna",
+   "domain": "modernatx.com"
+  },
+  {
+   "name": "BioMarin",
+   "domain": "biomarin.com"
+  },
+  {
+   "name": "Jazz Pharmaceuticals",
+   "domain": "jazzpharma.com"
+  },
+  {
+   "name": "Novo Nordisk",
+   "domain": "novonordisk.co.uk"
+  },
+  {
+   "name": "Reckitt",
+   "domain": "reckitt.com"
+  },
+  {
+   "name": "Haleon",
+   "domain": "haleon.com"
+  },
+  {
+   "name": "Bausch + Lomb",
+   "domain": "bausch.co.uk"
+  }
+ ],
+ "medtech": [
+  {
+   "name": "Oxford Nanopore Technologies",
+   "domain": "nanoporetech.com"
+  },
+  {
+   "name": "Shockwave Medical",
+   "domain": "shockwavemedical.com"
+  },
+  {
+   "name": "Inari Medical",
+   "domain": "inarimedical.com"
+  },
+  {
+   "name": "Tandem Diabetes Care",
+   "domain": "tandemdiabetes.com"
+  },
+  {
+   "name": "LifeScan",
+   "domain": "lifescan.com"
+  },
+  {
+   "name": "Straumann Group",
+   "domain": "straumann.com"
+  },
+  {
+   "name": "Inspire Medical Systems",
+   "domain": "inspiresleep.com"
+  },
+  {
+   "name": "Nevro",
+   "domain": "nevro.com"
+  },
+  {
+   "name": "Axonics",
+   "domain": "axonics.com"
+  },
+  {
+   "name": "Senseonics",
+   "domain": "senseonics.com"
+  },
+  {
+   "name": "Medtronic",
+   "domain": "medtronic.com"
+  },
+  {
+   "name": "Smith+Nephew",
+   "domain": "smith-nephew.com"
+  },
+  {
+   "name": "Stryker",
+   "domain": "stryker.com"
+  },
+  {
+   "name": "Zimmer Biomet",
+   "domain": "zimmerbiomet.com"
+  },
+  {
+   "name": "Boston Scientific",
+   "domain": "bostonscientific.com"
+  },
+  {
+   "name": "BD",
+   "domain": "bd.com"
+  },
+  {
+   "name": "Abbott",
+   "domain": "abbott.com"
+  },
+  {
+   "name": "Edwards Lifesciences",
+   "domain": "edwards.com"
+  },
+  {
+   "name": "Intuitive",
+   "domain": "intuitive.com"
+  },
+  {
+   "name": "Insulet",
+   "domain": "insulet.com"
+  },
+  {
+   "name": "Dexcom",
+   "domain": "dexcom.com"
+  },
+  {
+   "name": "ResMed",
+   "domain": "resmed.co.uk"
+  },
+  {
+   "name": "Philips",
+   "domain": "philips.co.uk"
+  },
+  {
+   "name": "Siemens Healthineers",
+   "domain": "siemens-healthineers.com"
+  },
+  {
+   "name": "Roche Diagnostics",
+   "domain": "diagnostics.roche.com"
+  },
+  {
+   "name": "Convatec",
+   "domain": "convatec.com"
+  },
+  {
+   "name": "Coloplast",
+   "domain": "coloplast.co.uk"
+  },
+  {
+   "name": "Mölnlycke",
+   "domain": "molnlycke.co.uk"
+  },
+  {
+   "name": "Ethicon (J&J MedTech)",
+   "domain": "jnjmedtech.com"
+  },
+  {
+   "name": "Teleflex",
+   "domain": "teleflex.com"
+  },
+  {
+   "name": "Terumo",
+   "domain": "terumo.co.uk"
+  },
+  {
+   "name": "Olympus",
+   "domain": "olympus.co.uk"
+  },
+  {
+   "name": "Hologic",
+   "domain": "hologic.com"
+  },
+  {
+   "name": "Penumbra",
+   "domain": "penumbrainc.com"
+  },
+  {
+   "name": "Masimo",
+   "domain": "masimo.com"
+  },
+  {
+   "name": "Zoll",
+   "domain": "zoll.com"
+  },
+  {
+   "name": "Biotronik",
+   "domain": "biotronik.com"
+  },
+  {
+   "name": "Cochlear",
+   "domain": "cochlear.com"
+  },
+  {
+   "name": "Sonova",
+   "domain": "sonova.com"
+  },
+  {
+   "name": "Ambu",
+   "domain": "ambu.com"
+  },
+  {
+   "name": "Sysmex",
+   "domain": "sysmex.co.uk"
+  },
+  {
+   "name": "Werfen",
+   "domain": "werfen.com"
+  },
+  {
+   "name": "Ottobock",
+   "domain": "ottobock.com"
+  },
+  {
+   "name": "Össur",
+   "domain": "ossur.com"
+  },
+  {
+   "name": "Solventum",
+   "domain": "solventum.com"
+  },
+  {
+   "name": "Essity",
+   "domain": "essity.co.uk"
+  },
+  {
+   "name": "Urgo",
+   "domain": "urgomedical.co.uk"
+  },
+  {
+   "name": "Fisher & Paykel Healthcare",
+   "domain": "fphcare.com"
+  },
+  {
+   "name": "Draeger",
+   "domain": "draeger.com"
+  },
+  {
+   "name": "Getinge",
+   "domain": "getinge.com"
+  },
+  {
+   "name": "Arjo",
+   "domain": "arjo.com"
+  },
+  {
+   "name": "Hartmann",
+   "domain": "hartmann.info"
+  },
+  {
+   "name": "Medline",
+   "domain": "medline.com"
+  },
+  {
+   "name": "Merit Medical",
+   "domain": "merit.com"
+  },
+  {
+   "name": "Orthofix",
+   "domain": "orthofix.com"
+  },
+  {
+   "name": "Karl Storz",
+   "domain": "karlstorz.com"
+  },
+  {
+   "name": "Novocure",
+   "domain": "novocure.com"
+  },
+  {
+   "name": "Illumina",
+   "domain": "illumina.com"
+  },
+  {
+   "name": "Cepheid",
+   "domain": "cepheid.com"
+  },
+  {
+   "name": "Beckman Coulter",
+   "domain": "beckmancoulter.com"
+  },
+  {
+   "name": "bioMérieux",
+   "domain": "biomerieux.co.uk"
+  }
+ ]
+}
