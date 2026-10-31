@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-10-26",
-  "differentiator.json published": 37283,
-  "differentiator.json held": 295555
+  "differentiator.json published": 37373,
+  "differentiator.json held": 295471
  },
  "counts": {
   "frameworks": 122,
@@ -1669,8 +1669,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "11 March 2028",
    "suppliersAwarded": 122,
-   "suppliersPublished": 34,
-   "coverage": 27.9,
+   "suppliersPublished": 37,
+   "coverage": 30.3,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -1680,7 +1680,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 122,
-   "coverageOfTarget": 27.9,
+   "coverageOfTarget": 30.3,
    "crawlWorklist": [
     {
      "supplier": "Immucor (IBG Immucor)",
@@ -2153,13 +2153,6 @@
      "bucket": "heldOnly"
     },
     {
-     "supplier": "Labcold",
-     "domain": "labcold.com",
-     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-15",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "Williams Medical Supplies",
      "domain": "wms.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -2206,6 +2199,13 @@
      "domain": "www.cepheid.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-25",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Labcold",
+     "domain": "labcold.com",
+     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-15",
      "bucket": "published"
     },
     {
@@ -2260,8 +2260,8 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 5,
-    "heldNeedingCategory": 9,
+    "publishedElsewhereNeedingCategory": 3,
+    "heldNeedingCategory": 8,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -2278,10 +2278,12 @@
     "BD \u2014 Becton, Dickinson",
     "bioM\u00e9rieux UK",
     "Cepheid",
+    "Coolmed",
     "Epredia",
     "Thermo Fisher Scientific UK",
     "Hologic UK",
     "Illumina UK",
+    "Labcold",
     "LEEC",
     "Leica Microsystems (UK)",
     "Thermo Fisher Scientific UK",
@@ -2290,6 +2292,7 @@
     "Medical Wire & Equipment (MWE)",
     "MedScience Distribution",
     "QuidelOrtho (Ortho Clinical Diagnostics UK)",
+    "pfm medical UK",
     "PHC Europe / PHCbi",
     "QIAGEN UK",
     "Radiometer UK",
@@ -2306,20 +2309,17 @@
    "publishedElsewhere": [
     "A. Menarini Diagnostics Ltd",
     "Abbott Laboratories Limited",
-    "Coolmed",
     "Greiner Bio-One Ltd",
     "Haemonetics",
     "Henry Schein UK Holdings",
     "OscarTech UK",
     "Pasante Healthcare",
-    "pfm medical UK",
     "Sychem"
    ],
    "heldOnly": [
     "Critical Healthcare",
     "Immucor (IBG Immucor)",
     "Kinetik Medical Devices",
-    "Labcold",
     "Launch Diagnostics",
     "Scientific Laboratory Supplies (SLS)",
     "Twist Bioscience",
@@ -2401,7 +2401,7 @@
     "Wolf Laboratories"
    ],
    "unknown": [],
-   "actionableTotal": 60,
+   "actionableTotal": 57,
    "blockedReason": null,
    "deferred": null
   },
