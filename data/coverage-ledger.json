@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 406,
-  "inScopeSuppliersNeedingCrawl": 235,
-  "inScopeSuppliersNeedingDomain": 222,
-  "suppliersRefused": 563,
+  "inScopeSuppliersNeedingCrawl": 234,
+  "inScopeSuppliersNeedingDomain": 221,
+  "suppliersRefused": 564,
   "suppliersRefusedButPublishingElsewhere": 166,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
@@ -12571,15 +12571,8 @@
    "excludedByRuling": [],
    "targetSuppliers": 12,
    "coverageOfTarget": 41.7,
-   "crawlWorklist": [
-    {
-     "supplier": "Ontex Healthcare UK Ltd",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "Ontex Healthcare UK Ltd"
-   ],
+   "crawlWorklist": [],
+   "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
@@ -12601,6 +12594,13 @@
      "domain": "meditradeuk.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; sitemap URLs did not resolve into product names; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Ontex Healthcare UK Ltd",
+     "domain": "id-direct.com/ukb2c/en",
+     "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occur); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING]); no product-path links were found by following the site's pages",
+     "checked": "2026-10-31",
      "bucket": "refused"
     },
     {
@@ -12662,7 +12662,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 1
+    "needDomain": 0
    },
    "published": [
     "Abena UK Limited",
@@ -12676,18 +12676,17 @@
     "Healthcare 25 Ltd"
    ],
    "capturedNothingCounted": [],
-   "notCrawled": [
-    "Ontex Healthcare UK Ltd"
-   ],
+   "notCrawled": [],
    "refused": [
     "Attends Ltd",
     "Forma-Care (UK) Ltd",
     "Meditrade UK Ltd",
+    "Ontex Healthcare UK Ltd",
     "P&S Healthcare Ltd",
     "Sharon Services (UK) Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 2,
+   "actionableTotal": 1,
    "blockedReason": null,
    "deferred": null
   },
