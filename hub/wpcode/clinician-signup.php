@@ -17,20 +17,75 @@
    - Hands back the reference and the Bookings link, so the page moves straight
      to booking the 60-minute Teams call.
 
-   The gate: while MSH_CP_AGREEMENT_VERSION starts with PLACEHOLDER the form
-   only accepts submissions from administrators (for testing) and shows
-   everyone else "opening soon". Swapping in the real agreement text and
-   version is the switch.
+   The gate: the form only accepts submissions from administrators (for
+   testing) and shows everyone else "opening soon" until all three hold:
+   MSH_CP_SIGNED_OFF is true (Lou or the solicitor has signed off the
+   wording), the version no longer starts with PLACEHOLDER, and both the
+   terms and privacy notice links are set.
 
    Process: 02-Elevate-and-Thrive/Process flows for all brands/clinician-signup-pipeline.md */
 
+/* Agreement and privacy notice wording: CSP-PA-v0.3 and CSP-PN-v0.3, from
+   02-Elevate-and-Thrive/Clinical-Recruitment/Agreement/01 and 04. DRAFT
+   pending solicitor review; never edit the wording here without a new
+   version there. */
+if ( ! defined( 'MSH_CP_SIGNED_OFF' ) ) {
+	define( 'MSH_CP_SIGNED_OFF', false );
+}
 if ( ! defined( 'MSH_CP_AGREEMENT_VERSION' ) ) {
-	define( 'MSH_CP_AGREEMENT_VERSION', 'PLACEHOLDER-v0' );
+	define( 'MSH_CP_AGREEMENT_VERSION', 'CSP-PA-v0.3' );
+}
+if ( ! defined( 'MSH_CP_PRIVACY_VERSION' ) ) {
+	define( 'MSH_CP_PRIVACY_VERSION', 'CSP-PN-v0.3' );
+}
+if ( ! defined( 'MSH_CP_TERMS_URL' ) ) {
+	define( 'MSH_CP_TERMS_URL', '' );
+}
+if ( ! defined( 'MSH_CP_PRIVACY_URL' ) ) {
+	define( 'MSH_CP_PRIVACY_URL', '' );
 }
 if ( ! defined( 'MSH_CP_AGREEMENT_TEXT' ) ) {
-	/* Replaced by the text from the exclusivity-agreement work. Plain text,
-	   paragraphs separated by blank lines. */
-	define( 'MSH_CP_AGREEMENT_TEXT', "PLACEHOLDER: the programme and exclusivity agreement is being drafted. This text will be replaced, and the version above changed, before the form opens to the public." );
+	/* Plain text, paragraphs separated by blank lines. {terms} and {privacy}
+	   become links to the full terms and the privacy notice. */
+	define( 'MSH_CP_AGREEMENT_TEXT', "DRAFT – solicitor review. Not for use until signed off.
+
+Your free programme with Elevate and Thrive
+
+This is a short summary of how the programme works. The full terms are here: {terms}. If anything here differs from the full terms, the full terms apply.
+
+Who we are. Elevate and Thrive Ltd (company number 17154474), 2 Lakeside, Sturton by Stow, Lincoln, LN1 2TZ. Contact: Louise Hoult, louisehoult@elevateandthrive.uk.
+
+What you get, free. Exactly three things:
+1. The Clinical Interview Playbook: the full Clinical Interview Playbook bundle, the same bundle sold at elevateandthrive.uk/training-courses/: the 9-module video course, the Medical Device Interview Preparation Pack and the Beyond the Bedside nursing careers guide, with 12 months' access from the date we set up your account.
+2. 12 months of Medical Sales Hub access (the Medical Sales Intelligence Hub, medsalesintelligencehub.co.uk), the Hub access that comes with the paid bundle, from the date we set up your account.
+3. One-to-one support from Louise Hoult through the whole process: your first call, CV and LinkedIn profile, preparation for each role, interviews and presentations, offers, and your first six months in post if you are placed through us.
+
+The Playbook bundle, including its Hub access, is a paid product; you do not pay for it. The current price is shown on that page.
+
+It costs you nothing, now or later. We never charge you for finding you work, and there is nothing to repay if you leave.
+
+How placement works. We work with one recruitment partner, Kore Executive Limited (KORE). When a suitable role comes up, we will ask you first. Only if you say yes do we put you forward, through KORE, to that employer. The employer pays KORE's fee, never you.
+
+What we ask of you.
+1. Before each role, confirm you want to be put forward and that no one else has put you forward to that employer for that role in the last six months.
+2. Once we have put you forward for a role, do not let another agency put you forward for the same role while ours is live.
+3. Please tell us before you register with another agency for industry roles, so you are not put forward twice. This is a request. You never have to tell us who your next employer is.
+4. Give us accurate details, including your professional registration.
+
+Leaving. You can leave at any time by emailing us. There is no penalty and nothing to pay back. Playbook and Hub access already set up continue to the end of their 12 months. One-to-one support and future introductions to roles stop when you leave.
+
+Your details. We keep your details safely and only share them as explained in our {privacy}. We share your CV and details with KORE only if you tick the separate box below, and with an employer only when you agree to each role. We never contact your current employer." );
+}
+if ( ! function_exists( 'msh_cp_boxes' ) ) {
+	/* The three sign-up boxes, word for word from CSP-PA-v0.3. All start
+	   unticked; only box 1 is required. */
+	function msh_cp_boxes() {
+		return array(
+			'box1' => array( 'Programme agreement (required).', 'I have read and agree to the Clinical Selection Pathway programme agreement and terms, version CSP-PA-v0.3. I understand I receive the Clinical Interview Playbook course, 12 months of Medical Sales Hub access and one-to-one support free, I can leave at any time without penalty or repayment, and I will never be charged for being found work.' ),
+			'box2' => array( 'Sharing my details with KORE (optional, needed for placement).', 'I agree that Elevate and Thrive Ltd may share my CV, contact details, registration details and assessment notes with Kore Executive Limited so that KORE can consider me for industry roles. I understand nothing is sent to any employer without my agreement for each role, and that I can withdraw this consent at any time by emailing louisehoult@elevateandthrive.uk.' ),
+			'box3' => array( 'Updates (optional).', 'I would like to receive emails from Elevate and Thrive Ltd about new roles, training and events. I can unsubscribe at any time.' ),
+		);
+	}
 }
 if ( ! defined( 'MSH_CP_BOOKING_URL' ) ) {
 	define( 'MSH_CP_BOOKING_URL', 'https://bookings.cloud.microsoft/book/ElevateThrive@elevateandthrive.uk/s/DMxhuXZTw0Sfr_KVQKx7ng2' );
@@ -107,15 +162,15 @@ if ( ! function_exists( 'msh_cp_options' ) ) {
 
 if ( ! function_exists( 'msh_cp_live' ) ) {
 	function msh_cp_live() {
-		return 0 !== strpos( MSH_CP_AGREEMENT_VERSION, 'PLACEHOLDER' );
+		return MSH_CP_SIGNED_OFF && 0 !== strpos( MSH_CP_AGREEMENT_VERSION, 'PLACEHOLDER' ) && MSH_CP_TERMS_URL && MSH_CP_PRIVACY_URL;
 	}
 }
 
 if ( ! function_exists( 'msh_cp_clean' ) ) {
 	/* Raw form fields in, a clean record or a list of errors out. $now is an
-	   ISO 8601 time, $version the agreement version on show. Pure, so it
-	   is tested. */
-	function msh_cp_clean( $in, $now, $version ) {
+	   ISO 8601 time, $version and $privacy the agreement and privacy notice
+	   versions on show. Pure, so it is tested. */
+	function msh_cp_clean( $in, $now, $version, $privacy ) {
 		$o   = msh_cp_options();
 		$err = array();
 		$s   = function ( $k, $max = 200 ) use ( $in ) {
@@ -172,8 +227,11 @@ if ( ! function_exists( 'msh_cp_clean' ) ) {
 			'source'       => preg_replace( '/[^a-z0-9_-]/', '', strtolower( $s( 'source', 60 ) ) ),
 			'signed_up'    => $now,
 			'agreement_version'  => '',
+			'privacy_version'    => '',
 			'agreement_accepted' => '',
-			'gdpr_consent'       => '',
+			'box1'               => false,
+			'box2'               => false,
+			'box3'               => false,
 		);
 		$y = $s( 'years', 4 );
 		if ( preg_match( '/^\d{1,2}$/', $y ) ) {
@@ -213,20 +271,21 @@ if ( ! function_exists( 'msh_cp_clean' ) ) {
 		if ( '' !== $r['linkedin'] && ! preg_match( '#^https?://([a-z]{2,3}\.)?linkedin\.com/#i', $r['linkedin'] ) ) {
 			$err[] = 'linkedin';
 		}
-		$agree = isset( $in['agreement'] ) && in_array( (string) $in['agreement'], array( '1', 'on', 'yes', 'true' ), true );
-		$gdpr  = isset( $in['gdpr'] ) && in_array( (string) $in['gdpr'], array( '1', 'on', 'yes', 'true' ), true );
-		$sent_version = $s( 'agreement_version', 40 );
-		if ( ! $agree || $sent_version !== $version ) {
-			$err[] = 'agreement';
+		$tick = function ( $k ) use ( $in ) {
+			return isset( $in[ $k ] ) && in_array( (string) $in[ $k ], array( '1', 'on', 'yes', 'true' ), true );
+		};
+		/* Box 1 is the only required tick, and only counts against the
+		   versions on show; boxes 2 and 3 are stored as given. */
+		if ( ! $tick( 'box1' ) || $s( 'agreement_version', 40 ) !== $version || $s( 'privacy_version', 40 ) !== $privacy ) {
+			$err[] = 'box1';
 		} else {
 			$r['agreement_version']  = $version;
+			$r['privacy_version']    = $privacy;
 			$r['agreement_accepted'] = $now;
+			$r['box1']               = true;
 		}
-		if ( ! $gdpr ) {
-			$err[] = 'gdpr';
-		} else {
-			$r['gdpr_consent'] = $now;
-		}
+		$r['box2'] = $tick( 'box2' );
+		$r['box3'] = $tick( 'box3' );
 		return array( 'record' => $r, 'errors' => array_values( array_unique( $err ) ) );
 	}
 }
@@ -279,7 +338,9 @@ if ( ! function_exists( 'msh_cp_labels' ) ) {
 			'Notes'                   => $r['notes'],
 			'Source'                  => $r['source'],
 			'Agreement'               => $r['agreement_version'] . ', accepted ' . $r['agreement_accepted'],
-			'Data consent'            => $r['gdpr_consent'],
+			'Privacy notice'          => $r['privacy_version'],
+			'Share with KORE (box 2)' => $r['box2'] ? 'Yes' : 'No: never share with KORE',
+			'Email updates (box 3)'   => $r['box3'] ? 'Yes' : 'No',
 		);
 	}
 }
@@ -287,9 +348,17 @@ if ( ! function_exists( 'msh_cp_labels' ) ) {
 if ( ! function_exists( 'msh_cp_agreement_html' ) ) {
 	function msh_cp_agreement_html() {
 		$paras = preg_split( '/\n\s*\n/', trim( MSH_CP_AGREEMENT_TEXT ) );
-		return implode( '', array_map( function ( $p ) {
-			return '<p>' . nl2br( htmlspecialchars( $p, ENT_QUOTES ) ) . '</p>';
+		$links = array(
+			'{terms}'   => msh_cp_link( MSH_CP_TERMS_URL, 'Programme terms ' . MSH_CP_AGREEMENT_VERSION ),
+			'{privacy}' => msh_cp_link( MSH_CP_PRIVACY_URL, 'privacy notice' ),
+		);
+		return implode( '', array_map( function ( $p ) use ( $links ) {
+			return '<p>' . strtr( nl2br( htmlspecialchars( $p, ENT_QUOTES ) ), $links ) . '</p>';
 		}, $paras ) );
+	}
+	/* A link, or plain text marked as waiting while the URL is not set. */
+	function msh_cp_link( $url, $text ) {
+		return $url ? '<a href="' . htmlspecialchars( $url, ENT_QUOTES ) . '" target="_blank" rel="noopener" style="color:#14304F">' . htmlspecialchars( $text ) . '</a>' : htmlspecialchars( $text ) . ' (link added at sign-off)';
 	}
 }
 
@@ -307,31 +376,53 @@ if ( ! function_exists( 'msh_cp_uk_time' ) ) {
 }
 
 if ( ! function_exists( 'msh_cp_welcome_email' ) ) {
-	/* The clinician's welcome: next steps and a copy of the agreement they
-	   ticked. Pure apart from the agreement constants, so it is tested. */
+	/* The clinician's welcome, from the CSP v0.3 welcome email
+	   (Clinical-Recruitment/Agreement/03): what they chose, what they get
+	   free, the key points, then the booking step and a copy of the
+	   agreement they ticked. Pure apart from the agreement constants, so it
+	   is tested. */
 	function msh_cp_welcome_email( $r, $ref, $booking ) {
 		$h    = function ( $v ) {
 			return htmlspecialchars( (string) $v, ENT_QUOTES );
 		};
+		$yn   = function ( $v ) {
+			return $v ? 'yes' : 'no';
+		};
 		$btn  = $booking ? '<p style="margin:22px 0"><a href="' . $h( $booking ) . '" style="background:#0B1C33;color:#FFFFFF;padding:14px 26px;text-decoration:none;font-weight:700;display:inline-block">Book your 60-minute call</a></p>' : '';
+		$when = msh_cp_uk_time( $r['agreement_accepted'] );
 		$html = '<div style="font-family:Arial,sans-serif;font-size:16px;line-height:1.55;color:#1D2733;background:#FFFFFF;max-width:640px">'
-			. '<div style="background:#0B1C33;color:#FFFFFF;padding:22px 26px"><div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#E0BE8E">Clinicians into industry</div>'
+			. '<div style="background:#0B1C33;color:#FFFFFF;padding:22px 26px"><div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#E0BE8E">Clinical Selection Pathway</div>'
 			. '<div style="font-size:24px;margin-top:6px;color:#FFFFFF">Welcome, ' . $h( $r['first_name'] ) . '</div></div>'
 			. '<div style="padding:22px 26px;border:1px solid #DBE3EE;border-top:0">'
-			. '<p>Thank you for signing up. Your reference is <strong>' . $h( $ref ) . '</strong>.</p>'
-			. '<p><strong>Your next steps</strong></p><ol>'
-			. '<li>Book your 60-minute Microsoft Teams call with me, if you have not already. Put your reference in the booking form so I have your details in front of me.</li>'
-			. '<li>Before the call, have your CV to hand. If you did not upload one, reply to this email with it attached.</li>'
-			. '<li>On the call we go through your experience, the roles that suit it and your training plan.</li></ol>'
+			. '<p>Thank you for joining the Clinical Selection Pathway. Your reference is <strong>' . $h( $ref ) . '</strong>. Here is your copy of what you agreed on ' . $h( $when ) . ':</p><ul>'
+			. '<li>Programme agreement and terms, version ' . $h( $r['agreement_version'] ) . ': ' . msh_cp_link( MSH_CP_TERMS_URL, 'read the terms' ) . ' (the summary is copied below)</li>'
+			. '<li>Privacy notice, version ' . $h( $r['privacy_version'] ) . ': ' . msh_cp_link( MSH_CP_PRIVACY_URL, 'read the privacy notice' ) . '</li></ul>'
+			. '<p><strong>What you chose</strong></p><ul>'
+			. '<li>Programme agreement: agreed</li>'
+			. '<li>Share my CV and details with Kore Executive Limited for industry roles: ' . $yn( $r['box2'] ) . '</li>'
+			. '<li>Emails about new roles, training and events: ' . $yn( $r['box3'] ) . '</li></ul>'
+			. '<p><strong>What you receive, free</strong></p><ul>'
+			. "<li>The Clinical Interview Playbook (full bundle, 12 months' access).</li>"
+			. '<li>12 months of Medical Sales Hub access.</li></ul>'
+			. '<p>Your login details for both follow within 5 business days.</p><ul>'
+			. '<li>One-to-one support from me through the whole process, from our first call to your first six months in a new role if you are placed through us.</li></ul>'
+			. '<p><strong>The key points</strong></p><ul>'
+			. '<li>The programme is free, including the Playbook and the Hub. You will never be charged for being found work, and there is nothing to repay if you leave.</li>'
+			. '<li>I will always ask you before putting you forward for a role, and nothing goes to an employer without your agreement for that role.</li>'
+			. '<li>I will never contact your current employer.</li>'
+			. '<li>You can leave, or change what you agreed to share, at any time by replying to this email.</li></ul>'
+			. '<p><strong>What happens next</strong></p>'
+			. '<p>Book your 60-minute Microsoft Teams call with me, if you have not already, and put your reference in the booking form so I have your details in front of me. Before then, have your CV to hand and your registration number.</p>'
 			. $btn
-			. '<p>Questions? Reply to this email and it comes straight to me.</p><p>Lou<br>Louise Hoult, Elevate &amp; Thrive</p>'
+			. '<p>If anything here does not match what you meant to agree to, just reply and I will put it right.</p>'
+			. '<p>Best wishes,</p><p>Louise Hoult<br>Director, Elevate and Thrive Ltd<br>louisehoult@elevateandthrive.uk</p>'
 			. '<hr style="border:0;border-top:2px solid #A8842C;margin:26px 0">'
-			. '<p><strong>Your copy of the agreement you accepted</strong><br>Version ' . $h( $r['agreement_version'] ) . ', accepted ' . $h( msh_cp_uk_time( $r['agreement_accepted'] ) ) . '</p>'
+			. '<p><strong>Your copy of the agreement you accepted</strong><br>Version ' . $h( $r['agreement_version'] ) . ', accepted ' . $h( $when ) . '</p>'
 			. '<div style="background:#EDE7DC;color:#1D2733;padding:16px 18px;font-size:14px">' . msh_cp_agreement_html() . '</div>'
-			. '<p style="font-size:13px;color:#1D2733">You agreed on ' . $h( msh_cp_uk_time( $r['gdpr_consent'] ) ) . ' that Elevate &amp; Thrive may keep these details to support your move into industry. See the <a href="https://medsalesintelligencehub.co.uk/privacy-policy/" style="color:#14304F">privacy policy</a>. To change or delete your details, reply to this email.</p>'
+			. "<p style=\"font-size:13px;color:#1D2733\">Elevate and Thrive Ltd, company number 17154474, 2 Lakeside, Sturton by Stow, Lincoln, LN1 2TZ. Information Commissioner's Office registration ZC203137.</p>"
 			. '</div></div>';
 		return array(
-			'subject' => 'Welcome: your next steps (' . $ref . ')',
+			'subject' => 'Welcome to the Clinical Selection Pathway: your copy of what you agreed (' . $ref . ')',
 			'html'    => $html,
 		);
 	}
@@ -445,7 +536,7 @@ add_action( 'rest_api_init', function () {
 			}
 			set_transient( $ip_key, $hits + 1, HOUR_IN_SECONDS );
 
-			$c = msh_cp_clean( $p, gmdate( 'Y-m-d\TH:i:s\Z' ), MSH_CP_AGREEMENT_VERSION );
+			$c = msh_cp_clean( $p, gmdate( 'Y-m-d\TH:i:s\Z' ), MSH_CP_AGREEMENT_VERSION, MSH_CP_PRIVACY_VERSION );
 			$files = $req->get_file_params();
 			$cv    = isset( $files['cv'] ) && is_array( $files['cv'] ) && UPLOAD_ERR_OK === $files['cv']['error'] ? $files['cv'] : null;
 			$ext   = '';
@@ -551,7 +642,7 @@ add_shortcode( 'msh_clinician_signup', function () {
 	};
 
 	$form  = '<form class="mshcp-form" novalidate enctype="multipart/form-data">';
-	$form .= ( $live ? '' : '<p class="mshcp-warn">Admin preview: the agreement text is a placeholder, so only administrators can submit. Name a test entry starting TEST.</p>' );
+	$form .= ( $live ? '' : '<p class="mshcp-warn">Admin preview: the wording is not signed off yet, so only administrators can submit. Name a test entry starting TEST.</p>' );
 	$form .= '<h3>About you</h3><div class="mshcp-grid">' . $txt( 'first_name', 'First name' ) . $txt( 'last_name', 'Last name' ) . $txt( 'email', 'Email', true, 'email' ) . $txt( 'phone', 'Mobile number', true, 'tel' ) . $txt( 'linkedin', 'LinkedIn profile link', false, 'url' ) . '</div>';
 	$form .= '<h3>Where you are</h3><div class="mshcp-grid">' . $sel( 'region', 'regions', 'Home region' ) . $txt( 'postcode', 'Postcode district', true, 'text', 'The first half only, for example LN6', ' maxlength="4"' )
 		. $txt( 'icb', 'Integrated Care Board (ICB) area', false, 'text', 'If you know it, for example Lincolnshire' ) . $sel( 'travel', 'travel', 'How far would you travel for work?' ) . $sel( 'relocate', 'relocate', 'Would you relocate?', false ) . $sel( 'licence', 'licence', 'Driving licence' ) . '</div>';
@@ -568,14 +659,17 @@ add_shortcode( 'msh_clinician_signup', function () {
 	$form .= '<label class="mshcp-f" data-f="cv"><span>Your CV</span><small>PDF or Word, up to 5 MB. You can email it later instead.</small><input type="file" name="cv" accept=".pdf,.doc,.docx"><em>PDF or Word only, up to 5 MB</em></label>';
 	$form .= $area( 'notes', 'Anything else I should know' );
 	$form .= '<input type="text" name="website" tabindex="-1" autocomplete="off" class="mshcp-hp" aria-hidden="true">';
-	$form .= '<input type="hidden" name="source" value=""><input type="hidden" name="agreement_version" value="' . esc_attr( MSH_CP_AGREEMENT_VERSION ) . '">';
-	$form .= '<h3>The agreement</h3><div class="mshcp-agreement" tabindex="0"><p class="mshcp-ver">Version ' . esc_html( MSH_CP_AGREEMENT_VERSION ) . '</p>' . msh_cp_agreement_html() . '</div>';
-	$form .= '<label class="mshcp-tick" data-f="agreement"><input type="checkbox" name="agreement" value="1" required> I have read and accept the programme agreement above (version ' . esc_html( MSH_CP_AGREEMENT_VERSION ) . '). *<em>Please accept the agreement to continue</em></label>';
-	$form .= '<label class="mshcp-tick" data-f="gdpr"><input type="checkbox" name="gdpr" value="1" required> I agree that Elevate &amp; Thrive may keep the details on this form, and my CV, to support my move into industry and contact me about it, as set out in the <a href="https://medsalesintelligencehub.co.uk/privacy-policy/" target="_blank" rel="noopener">privacy policy</a>. I can ask for them to be changed or deleted at any time. *<em>Please tick to continue</em></label>';
+	$form .= '<input type="hidden" name="source" value=""><input type="hidden" name="agreement_version" value="' . esc_attr( MSH_CP_AGREEMENT_VERSION ) . '"><input type="hidden" name="privacy_version" value="' . esc_attr( MSH_CP_PRIVACY_VERSION ) . '">';
+	$form .= '<h3>The agreement</h3><div class="mshcp-agreement" tabindex="0"><p class="mshcp-ver">Version ' . esc_html( MSH_CP_AGREEMENT_VERSION ) . ' (draft, pending solicitor review)</p>' . msh_cp_agreement_html() . '</div>';
+	foreach ( msh_cp_boxes() as $k => $b ) {
+		$req   = 'box1' === $k;
+		$form .= '<label class="mshcp-tick" data-f="' . $k . '"><input type="checkbox" name="' . $k . '" value="1"' . ( $req ? ' required' : '' ) . '> <strong>' . substr( $k, 3 ) . '. ' . esc_html( $b[0] ) . '</strong> ' . esc_html( $b[1] ) . ( $req ? '<em>Please tick box 1 to continue</em>' : '' ) . '</label>';
+	}
+	$form .= '<p class="mshcp-tick">Read our ' . msh_cp_link( MSH_CP_PRIVACY_URL, 'privacy notice' ) . ' to see how we use your details. <span class="mshcp-ver">Privacy notice version ' . esc_html( MSH_CP_PRIVACY_VERSION ) . ' (draft, pending solicitor review)</span></p>';
 	$form .= '<p class="mshcp-err" role="alert" hidden></p><button type="submit" class="mshcp-btn">Sign up and book my call</button></form>';
 
 	$done = '<div class="mshcp-done" hidden><h2>You are signed up</h2><p>Your reference is <strong class="mshcp-ref"></strong> <button type="button" class="mshcp-copy">Copy</button></p>'
-		. '<p>Now book your 60-minute Microsoft Teams call with me. <strong>Paste your reference into the booking form</strong> so I have your details and CV in front of me. A welcome email with your next steps and a copy of the agreement is on its way.</p>'
+		. '<p>Now book your 60-minute Microsoft Teams call with me. <strong>Paste your reference into the booking form</strong> so I have your details and CV in front of me. A welcome email with your next steps, what you chose and a copy of the agreement is on its way.</p>'
 		. '<p><a class="mshcp-btn mshcp-book" href="#" target="_top">Book my call</a></p><iframe class="mshcp-frame" title="Book your call" hidden></iframe></div>';
 
 	$css = '<style>.mshcp{max-width:1080px;margin:0 auto;padding:0 40px;font-family:inherit;color:#1D2733}.mshcp .mshcp-card,.mshcp .mshcp-form,.mshcp .mshcp-done{background:#FFFFFF;color:#1D2733;border-top:4px solid #A8842C;padding:36px 40px;margin:0 0 40px}'
