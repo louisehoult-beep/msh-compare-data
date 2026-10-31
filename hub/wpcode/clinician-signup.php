@@ -33,7 +33,7 @@ if ( ! defined( 'MSH_CP_AGREEMENT_TEXT' ) ) {
 	define( 'MSH_CP_AGREEMENT_TEXT', "PLACEHOLDER: the programme and exclusivity agreement is being drafted. This text will be replaced, and the version above changed, before the form opens to the public." );
 }
 if ( ! defined( 'MSH_CP_BOOKING_URL' ) ) {
-	define( 'MSH_CP_BOOKING_URL', '' );
+	define( 'MSH_CP_BOOKING_URL', 'https://bookings.cloud.microsoft/book/ElevateThrive@elevateandthrive.uk/s/DMxhuXZTw0Sfr_KVQKx7ng2' );
 }
 if ( ! defined( 'MSH_CP_LOU' ) ) {
 	define( 'MSH_CP_LOU', 'louisehoult@elevateandthrive.uk' );
@@ -76,12 +76,12 @@ if ( ! function_exists( 'msh_cp_options' ) ) {
 				'theatres' => 'Theatres and perioperative', 'icu' => 'Intensive care (ICU) and critical care', 'emergency' => 'Emergency and urgent care',
 				'acute-medicine' => 'Acute and general medicine', 'general-surgery' => 'General surgery', 'wound-care' => 'Wound care',
 				'tissue-viability' => 'Tissue viability', 'renal' => 'Renal and dialysis', 'cardiology' => 'Cardiology and cardiac surgery',
-				'cath-lab' => 'Cath lab and interventional', 'orthopaedics' => 'Orthopaedics and trauma', 'oncology' => 'Oncology and SACT',
+				'cath-lab' => 'Cath lab and interventional', 'orthopaedics' => 'Orthopaedics and trauma', 'oncology' => 'Oncology and systemic anti-cancer therapy (SACT)',
 				'haematology' => 'Haematology', 'diabetes' => 'Diabetes and endocrinology', 'continence' => 'Continence, bladder and bowel',
 				'urology' => 'Urology', 'stoma' => 'Stoma care', 'gastro' => 'Gastroenterology and endoscopy',
 				'infection-prevention' => 'Infection prevention and control', 'community' => 'Community and district nursing',
 				'respiratory' => 'Respiratory', 'vascular' => 'Vascular', 'vascular-access' => 'Vascular access and IV therapy',
-				'neurology' => 'Neurology and stroke', 'ophthalmology' => 'Ophthalmology', 'ent' => 'ENT', 'plastics-burns' => 'Plastics and burns',
+				'neurology' => 'Neurology and stroke', 'ophthalmology' => 'Ophthalmology', 'ent' => 'Ear, nose and throat (ENT)', 'plastics-burns' => 'Plastics and burns',
 				'womens-health' => "Gynaecology and women's health", 'maternity' => 'Maternity', 'neonatal' => 'Neonatal', 'paediatrics' => 'Paediatrics',
 				'older-people' => 'Older people and frailty', 'palliative' => 'Palliative care', 'mental-health' => 'Mental health',
 				'radiology' => 'Radiology and imaging', 'pain' => 'Pain management', 'nutrition' => 'Nutrition',
@@ -293,6 +293,19 @@ if ( ! function_exists( 'msh_cp_agreement_html' ) ) {
 	}
 }
 
+if ( ! function_exists( 'msh_cp_uk_time' ) ) {
+	/* 2026-10-31T16:53:44Z -> 31/10/2026 16:53 (UK time). */
+	function msh_cp_uk_time( $iso ) {
+		try {
+			$d = new DateTime( $iso );
+			$d->setTimezone( new DateTimeZone( 'Europe/London' ) );
+			return $d->format( 'd/m/Y H:i' ) . ' (UK time)';
+		} catch ( Exception $e ) {
+			return (string) $iso;
+		}
+	}
+}
+
 if ( ! function_exists( 'msh_cp_welcome_email' ) ) {
 	/* The clinician's welcome: next steps and a copy of the agreement they
 	   ticked. Pure apart from the agreement constants, so it is tested. */
@@ -313,9 +326,9 @@ if ( ! function_exists( 'msh_cp_welcome_email' ) ) {
 			. $btn
 			. '<p>Questions? Reply to this email and it comes straight to me.</p><p>Lou<br>Louise Hoult, Elevate &amp; Thrive</p>'
 			. '<hr style="border:0;border-top:2px solid #A8842C;margin:26px 0">'
-			. '<p><strong>Your copy of the agreement you accepted</strong><br>Version ' . $h( $r['agreement_version'] ) . ', accepted ' . $h( $r['agreement_accepted'] ) . '</p>'
+			. '<p><strong>Your copy of the agreement you accepted</strong><br>Version ' . $h( $r['agreement_version'] ) . ', accepted ' . $h( msh_cp_uk_time( $r['agreement_accepted'] ) ) . '</p>'
 			. '<div style="background:#EDE7DC;color:#1D2733;padding:16px 18px;font-size:14px">' . msh_cp_agreement_html() . '</div>'
-			. '<p style="font-size:13px;color:#1D2733">You agreed on ' . $h( $r['gdpr_consent'] ) . ' that Elevate &amp; Thrive may keep these details to support your move into industry. See the <a href="https://medsalesintelligencehub.co.uk/privacy-policy/" style="color:#14304F">privacy policy</a>. To change or delete your details, reply to this email.</p>'
+			. '<p style="font-size:13px;color:#1D2733">You agreed on ' . $h( msh_cp_uk_time( $r['gdpr_consent'] ) ) . ' that Elevate &amp; Thrive may keep these details to support your move into industry. See the <a href="https://medsalesintelligencehub.co.uk/privacy-policy/" style="color:#14304F">privacy policy</a>. To change or delete your details, reply to this email.</p>'
 			. '</div></div>';
 		return array(
 			'subject' => 'Welcome: your next steps (' . $ref . ')',
@@ -472,11 +485,13 @@ add_action( 'rest_api_init', function () {
 			update_post_meta( $id, 'msh_cp_cv_file', $file );
 			update_post_meta( $id, 'msh_cp_cv_url', $cv_url );
 
-			$from = array( 'Content-Type: text/html; charset=UTF-8', 'Reply-To: Louise Hoult <' . MSH_CP_LOU . '>' );
+			/* Sent as Lou's elevateandthrive.uk address (the domain's SPF covers
+			   WordPress.com's servers), never the site's wordpress@ default. */
+			$from = array( 'Content-Type: text/html; charset=UTF-8', 'From: Louise Hoult, Elevate & Thrive <' . MSH_CP_LOU . '>', 'Reply-To: Louise Hoult <' . MSH_CP_LOU . '>' );
 			$w = msh_cp_welcome_email( $r, $ref, MSH_CP_BOOKING_URL );
 			wp_mail( $r['email'], $w['subject'], $w['html'], $from );
 			$l = msh_cp_lou_email( $r, $ref, $cv_url );
-			wp_mail( MSH_CP_LOU, $l['subject'], $l['html'], array( 'Content-Type: text/html; charset=UTF-8', 'Reply-To: ' . $r['email'] ) );
+			wp_mail( MSH_CP_LOU, $l['subject'], $l['html'], array( 'Content-Type: text/html; charset=UTF-8', 'From: Clinician sign-ups <' . MSH_CP_LOU . '>', 'Reply-To: ' . $r['email'] ) );
 
 			return array( 'ok' => true, 'ref' => $ref, 'booking' => MSH_CP_BOOKING_URL );
 		},
@@ -546,7 +561,7 @@ add_shortcode( 'msh_clinician_signup', function () {
 	$form .= '<h3>Your current work</h3><div class="mshcp-grid">' . $txt( 'current_role', 'Current job title' ) . $sel( 'employer', 'employer', 'Who employs you?' ) . $txt( 'employer_name', 'Employer name', false )
 		. $sel( 'band', 'band', 'NHS Agenda for Change band', false ) . '</div>';
 	$form .= $ticks( 'specialities', 'specialities', 'Your specialities', 'Tick every area you have worked in' );
-	$form .= $area( 'procedures', 'Procedures and devices you use or have trained others on', 'For example negative pressure wound therapy, PICC insertion, insulin pumps, cell salvage' );
+	$form .= $area( 'procedures', 'Procedures and devices you use or have trained others on', 'For example negative pressure wound therapy, peripherally inserted central catheter (PICC) insertion, insulin pumps, cell salvage' );
 	$form .= $area( 'industry', 'Any industry experience', 'Product evaluations, link nurse roles, company training, secondments. Leave blank if none' );
 	$form .= '<h3>What you are looking for</h3>' . $ticks( 'roles', 'roles', 'Roles that interest you' );
 	$form .= '<div class="mshcp-grid">' . $txt( 'salary', 'Salary you would be looking for', false, 'text', 'A figure or a range' ) . $sel( 'notice', 'notice', 'Notice period', false ) . $sel( 'availability', 'availability', 'When could you start?' ) . '</div>';
