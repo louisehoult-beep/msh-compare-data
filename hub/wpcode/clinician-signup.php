@@ -25,7 +25,7 @@
 
    Process: 02-Elevate-and-Thrive/Process flows for all brands/clinician-signup-pipeline.md */
 
-/* Agreement and privacy notice wording: CSP-PA-v0.2 and CSP-PN-v0.2, from
+/* Agreement and privacy notice wording: CSP-PA-v0.3 and CSP-PN-v0.3, from
    02-Elevate-and-Thrive/Clinical-Recruitment/Agreement/01 and 04. DRAFT
    pending solicitor review; never edit the wording here without a new
    version there. */
@@ -33,10 +33,10 @@ if ( ! defined( 'MSH_CP_SIGNED_OFF' ) ) {
 	define( 'MSH_CP_SIGNED_OFF', false );
 }
 if ( ! defined( 'MSH_CP_AGREEMENT_VERSION' ) ) {
-	define( 'MSH_CP_AGREEMENT_VERSION', 'CSP-PA-v0.2' );
+	define( 'MSH_CP_AGREEMENT_VERSION', 'CSP-PA-v0.3' );
 }
 if ( ! defined( 'MSH_CP_PRIVACY_VERSION' ) ) {
-	define( 'MSH_CP_PRIVACY_VERSION', 'CSP-PN-v0.2' );
+	define( 'MSH_CP_PRIVACY_VERSION', 'CSP-PN-v0.3' );
 }
 if ( ! defined( 'MSH_CP_TERMS_URL' ) ) {
 	define( 'MSH_CP_TERMS_URL', '' );
@@ -55,9 +55,12 @@ This is a short summary of how the programme works. The full terms are here: {te
 
 Who we are. Elevate and Thrive Ltd (company number 17154474), 2 Lakeside, Sturton by Stow, Lincoln, LN1 2TZ. Contact: Louise Hoult, louisehoult@elevateandthrive.uk.
 
-What you get, free. Exactly two things:
-1. The Clinical Interview Playbook: the full Clinical Interview Playbook bundle (the 9-module video course and its bonus content), the same bundle sold at elevateandthrive.uk/training-courses/, with 12 months' access from the date we set up your account. It is a paid course; you do not pay for it. The current price is shown on that page.
-2. One-to-one support from Louise Hoult through the whole process: your first call, CV and LinkedIn profile, preparation for each role, interviews and presentations, offers, and your first six months in post if you are placed through us.
+What you get, free. Exactly three things:
+1. The Clinical Interview Playbook: the full Clinical Interview Playbook bundle, the same bundle sold at elevateandthrive.uk/training-courses/: the 9-module video course, the Medical Device Interview Preparation Pack and the Beyond the Bedside nursing careers guide, with 12 months' access from the date we set up your account.
+2. 12 months of Medical Sales Hub access (the Medical Sales Intelligence Hub, medsalesintelligencehub.co.uk), the Hub access that comes with the paid bundle, from the date we set up your account.
+3. One-to-one support from Louise Hoult through the whole process: your first call, CV and LinkedIn profile, preparation for each role, interviews and presentations, offers, and your first six months in post if you are placed through us.
+
+The Playbook bundle, including its Hub access, is a paid product; you do not pay for it. The current price is shown on that page.
 
 It costs you nothing, now or later. We never charge you for finding you work, and there is nothing to repay if you leave.
 
@@ -69,16 +72,16 @@ What we ask of you.
 3. Please tell us before you register with another agency for industry roles, so you are not put forward twice. This is a request. You never have to tell us who your next employer is.
 4. Give us accurate details, including your professional registration.
 
-Leaving. You can leave at any time by emailing us. There is no penalty and nothing to pay back. Playbook access already set up continues to the end of its 12 months. One-to-one support and future introductions to roles stop when you leave.
+Leaving. You can leave at any time by emailing us. There is no penalty and nothing to pay back. Playbook and Hub access already set up continue to the end of their 12 months. One-to-one support and future introductions to roles stop when you leave.
 
 Your details. We keep your details safely and only share them as explained in our {privacy}. We share your CV and details with KORE only if you tick the separate box below, and with an employer only when you agree to each role. We never contact your current employer." );
 }
 if ( ! function_exists( 'msh_cp_boxes' ) ) {
-	/* The three sign-up boxes, word for word from CSP-PA-v0.2. All start
+	/* The three sign-up boxes, word for word from CSP-PA-v0.3. All start
 	   unticked; only box 1 is required. */
 	function msh_cp_boxes() {
 		return array(
-			'box1' => array( 'Programme agreement (required).', 'I have read and agree to the Clinical Selection Pathway programme agreement and terms, version CSP-PA-v0.2. I understand I receive the Clinical Interview Playbook course and one-to-one support free, I can leave at any time without penalty or repayment, and I will never be charged for being found work.' ),
+			'box1' => array( 'Programme agreement (required).', 'I have read and agree to the Clinical Selection Pathway programme agreement and terms, version CSP-PA-v0.3. I understand I receive the Clinical Interview Playbook course, 12 months of Medical Sales Hub access and one-to-one support free, I can leave at any time without penalty or repayment, and I will never be charged for being found work.' ),
 			'box2' => array( 'Sharing my details with KORE (optional, needed for placement).', 'I agree that Elevate and Thrive Ltd may share my CV, contact details, registration details and assessment notes with Kore Executive Limited so that KORE can consider me for industry roles. I understand nothing is sent to any employer without my agreement for each role, and that I can withdraw this consent at any time by emailing louisehoult@elevateandthrive.uk.' ),
 			'box3' => array( 'Updates (optional).', 'I would like to receive emails from Elevate and Thrive Ltd about new roles, training and events. I can unsubscribe at any time.' ),
 		);
@@ -373,7 +376,7 @@ if ( ! function_exists( 'msh_cp_uk_time' ) ) {
 }
 
 if ( ! function_exists( 'msh_cp_welcome_email' ) ) {
-	/* The clinician's welcome, from the CSP v0.2 welcome email
+	/* The clinician's welcome, from the CSP v0.3 welcome email
 	   (Clinical-Recruitment/Agreement/03): what they chose, what they get
 	   free, the key points, then the booking step and a copy of the
 	   agreement they ticked. Pure apart from the agreement constants, so it
@@ -399,10 +402,12 @@ if ( ! function_exists( 'msh_cp_welcome_email' ) ) {
 			. '<li>Share my CV and details with Kore Executive Limited for industry roles: ' . $yn( $r['box2'] ) . '</li>'
 			. '<li>Emails about new roles, training and events: ' . $yn( $r['box3'] ) . '</li></ul>'
 			. '<p><strong>What you receive, free</strong></p><ul>'
-			. "<li>The Clinical Interview Playbook (full bundle, 12 months' access). Your login details follow within 5 business days.</li>"
+			. "<li>The Clinical Interview Playbook (full bundle, 12 months' access).</li>"
+			. '<li>12 months of Medical Sales Hub access.</li></ul>'
+			. '<p>Your login details for both follow within 5 business days.</p><ul>'
 			. '<li>One-to-one support from me through the whole process, from our first call to your first six months in a new role if you are placed through us.</li></ul>'
 			. '<p><strong>The key points</strong></p><ul>'
-			. '<li>The programme is free, including the Playbook. You will never be charged for being found work, and there is nothing to repay if you leave.</li>'
+			. '<li>The programme is free, including the Playbook and the Hub. You will never be charged for being found work, and there is nothing to repay if you leave.</li>'
 			. '<li>I will always ask you before putting you forward for a role, and nothing goes to an employer without your agreement for that role.</li>'
 			. '<li>I will never contact your current employer.</li>'
 			. '<li>You can leave, or change what you agreed to share, at any time by replying to this email.</li></ul>'
