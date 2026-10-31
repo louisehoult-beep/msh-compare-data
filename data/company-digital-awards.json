@@ -11,8 +11,8 @@
   "contact": "contact@elevateandthrive.uk"
  },
  "lane": "digital",
- "dataAsOf": "30/10/2026",
- "generated": "2026-10-30",
+ "dataAsOf": "31/10/2026",
+ "generated": "2026-10-31",
  "source": "Find a Tender and Contracts Finder award notices in the Hub's digital lane (data/digital-lane.json), Open Government Licence v3.",
  "sectionRule": "Software and IT notices only. Each row is one supplier named on one Find a Tender or Contracts Finder award notice that an NHS buyer classified under a Common Procurement Vocabulary (CPV) code beginning 48 (software packages and information systems) or 72 (IT services). Those codes cover payroll, finance and office systems as much as clinical ones, so a row is not a claim of health technology. A row is counted as clinical only where the notice title names a clinical system. Medical device awards (CPV division 33) appear in the award sections above and are never repeated here.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
@@ -24,23 +24,23 @@
   "laneCoverage": {
    "complete": true,
    "window": {
-    "from": "2026-10-22",
-    "to": "2026-10-30",
+    "from": "2026-10-23",
+    "to": "2026-10-31",
     "days": 8,
-    "run": "2026-10-30"
+    "run": "2026-10-31"
    },
    "notes": [
-    "Find a Tender (tender stage): 0 digital lane notice(s) from 52 release(s) over 1 page(s)",
-    "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-22",
-    "Find a Tender (planning stage): 1 digital lane notice(s) from 23 release(s) over 1 page(s)",
-    "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-22"
+    "Find a Tender (tender stage): 0 digital lane notice(s) from 53 release(s) over 1 page(s)",
+    "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-23",
+    "Find a Tender (planning stage): 0 digital lane notice(s) from 21 release(s) over 1 page(s)",
+    "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-23"
    ]
   }
  },
  "counts": {
   "companies": 45,
   "awardRows": 93,
-  "unmatched": 182,
+  "unmatched": 183,
   "ambiguous": 0,
   "alreadyInMedicalFeed": 0
  },
@@ -2113,6 +2113,26 @@
   ]
  },
  "unmatched": [
+  {
+   "title": "ESNEFT3437 - Organisational Listening and  Transformation Planning Programme",
+   "buyer": "EAST SUFFOLK AND NORTH ESSEX NHS FOUNDATION TRUST",
+   "date": "2026-10-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/103241-2026",
+   "ocid": "ocds-h6vhtk-0794b4",
+   "source": "Find a Tender",
+   "valueAmount": 41600.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-10-18",
+   "isFramework": false,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "CARRADALE FUTURES HORIZON LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"carradale futures horizon\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
   {
    "title": "Provision of an Alert System",
    "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",

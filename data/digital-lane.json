@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "30/10/2026",
- "generated": "2026-10-30",
+ "dataAsOf": "31/10/2026",
+ "generated": "2026-10-31",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,20 +22,20 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-10-22",
-   "to": "2026-10-30",
+   "from": "2026-10-23",
+   "to": "2026-10-31",
    "days": 8,
-   "run": "2026-10-30"
+   "run": "2026-10-31"
   },
   "notes": [
-   "Find a Tender (tender stage): 0 digital lane notice(s) from 52 release(s) over 1 page(s)",
-   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-22",
-   "Find a Tender (planning stage): 1 digital lane notice(s) from 23 release(s) over 1 page(s)",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-22"
+   "Find a Tender (tender stage): 0 digital lane notice(s) from 53 release(s) over 1 page(s)",
+   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-23",
+   "Find a Tender (planning stage): 0 digital lane notice(s) from 21 release(s) over 1 page(s)",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-23"
   ]
  },
  "counts": {
-  "awards": 321,
+  "awards": 322,
   "awardsClinical": 36,
   "openNotices": 2,
   "openNoticesClinical": 1,
@@ -81,6 +81,25 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/102941-2026",
    "ocid": "ocds-h6vhtk-079244"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "ESNEFT3437 - Organisational Listening and  Transformation Planning Programme",
+   "buyer": "EAST SUFFOLK AND NORTH ESSEX NHS FOUNDATION TRUST",
+   "published": "2026-10-30",
+   "suppliers": [
+    "CARRADALE FUTURES HORIZON LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-18",
+   "value": 41600.0,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/103241-2026",
+   "ocid": "ocds-h6vhtk-0794b4"
   },
   {
    "lane": "digital",
@@ -6290,6 +6309,12 @@
    "to": "2026-10-30",
    "days": 8,
    "run": "2026-10-30"
+  },
+  {
+   "from": "2026-10-23",
+   "to": "2026-10-31",
+   "days": 8,
+   "run": "2026-10-31"
   }
  ]
 }
