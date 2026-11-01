@@ -45,7 +45,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 27 | 42.9% | 18 | 30 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 22 | 42 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 26 | 44.8% | 13 | 33 | STARTED |
-| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 26 | 45.6% | 13 | 32 | STARTED |
+| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 26 | 45.6% | 13 | 33 | STARTED |
 | Urology and Bowel Management | continence | 57 | 20 | 35.1% | 26 | 36 | STARTED |
 | Advanced Wound Care | wound | 56 | 22 | 39.3% | 16 | 41 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 1 | 39 | STARTED · 7 EXCLUDED |
@@ -53,16 +53,16 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Pressure Area Care and Patient Handling | handling | 53 | 27 | 50.9% | 14 | 30 | STARTED |
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 20 | 26 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 12 | 27.9% | 14 | 30 | STARTED |
-| Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 15 | 40.5% | 6 | 27 | STARTED |
-| Respiratory Solutions | respiratory | 37 | 16 | 43.2% | 16 | 18 | STARTED |
+| Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 15 | 40.5% | 6 | 28 | STARTED |
+| Respiratory Solutions | respiratory | 37 | 16 | 43.2% | 16 | 19 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 13 | 37.1% | 7 | 21 | STARTED |
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 14 | 42.4% | 11 | 22 | STARTED |
-| Aids for Daily Living | rehab | 31 | 13 | 41.9% | 14 | 12 | STARTED |
+| Aids for Daily Living | rehab | 31 | 14 | 45.2% | 12 | 14 | STARTED |
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 10 | 32.3% | 5 | 22 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 11 | 37.9% | 7 | 24 | STARTED |
 | General Wound Care | wound | 28 | 11 | 39.3% | 7 | 23 | STARTED |
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 11 | 40.7% | 8 | 16 | STARTED |
-| Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 9 | 36.0% | 9 | 13 | STARTED |
+| Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 9 | 36.0% | 9 | 14 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 8 | 32.0% | 7 | 15 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 11 | 47.8% | 7 | 15 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 7 | 31.8% | 7 | 13 | STARTED |
@@ -96,13 +96,13 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Lithotripsy and Associated Options and Related Services | endourology | 3 | 0 | 0.0% | 2 | 2 | NOT STARTED |
 | Male Intra-Urethral Catheter with Magnet Control | continence | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Non-Imaging Vibration Controlled Ultrasound System | ultrasound | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
-| Airway Management Products and Associated Equipment | — | 54 | 0 | 0.0% | 39 | 28 | UNMAPPED |
-| Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 38 | 28 | UNMAPPED |
-| Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 31 | 21 | UNMAPPED |
+| Airway Management Products and Associated Equipment | — | 54 | 0 | 0.0% | 39 | 29 | UNMAPPED |
+| Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 38 | 29 | UNMAPPED |
+| Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 31 | 22 | UNMAPPED |
 | Wound Closure | — | 39 | 0 | 0.0% | 33 | 19 | UNMAPPED |
 | Procedure Packs | — | 29 | 0 | 0.0% | 21 | 18 | UNMAPPED |
 | Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics | — | 28 | 0 | 0.0% | 23 | 8 | UNMAPPED |
-| Pulse Oximetry, Capnography and Related Monitoring Technologies | — | 26 | 0 | 0.0% | 25 | 9 | UNMAPPED |
+| Pulse Oximetry, Capnography and Related Monitoring Technologies | — | 26 | 0 | 0.0% | 25 | 10 | UNMAPPED |
 | Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions | — | 25 | 0 | 0.0% | 19 | 9 | UNMAPPED |
 | Extension Sets and Lines | — | 23 | 0 | 0.0% | 20 | 10 | UNMAPPED |
 | Vascular Therapy and Associated Products | — | 23 | 0 | 0.0% | 19 | 8 | UNMAPPED |

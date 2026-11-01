@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-10-26",
-  "differentiator.json published": 37373,
-  "differentiator.json held": 295471
+  "differentiator.json published": 37380,
+  "differentiator.json held": 295574
  },
  "counts": {
   "frameworks": 122,
@@ -25,10 +25,10 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 406,
-  "inScopeSuppliersNeedingCrawl": 234,
+  "inScopeSuppliersNeedingCrawl": 232,
   "inScopeSuppliersNeedingDomain": 221,
-  "suppliersRefused": 564,
-  "suppliersRefusedButPublishingElsewhere": 166,
+  "suppliersRefused": 566,
+  "suppliersRefusedButPublishingElsewhere": 167,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
   "blockedFrameworks": 3,
@@ -4485,6 +4485,13 @@
      "bucket": "published"
     },
     {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
+     "bucket": "published"
+    },
+    {
      "supplier": "Medicare Colgate Ltd (Sterifeed)",
      "domain": "www.sterifeed.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -7297,6 +7304,13 @@
      "bucket": "published"
     },
     {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
+     "bucket": "published"
+    },
+    {
      "supplier": "MedScience Distribution",
      "domain": "medscienceuk.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap's product URLs are flat, so they carry no division structure (360 names, all uncategorised) \u2014 a product list without the company's own grouping is not the range this report shows",
@@ -7552,6 +7566,13 @@
      "domain": "www.fphcare.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
      "bucket": "published"
     },
     {
@@ -8164,8 +8185,8 @@
    "category": "Rehabilitation and Community",
    "ends": "31 October 2027",
    "suppliersAwarded": 31,
-   "suppliersPublished": 13,
-   "coverage": 41.9,
+   "suppliersPublished": 14,
+   "coverage": 45.2,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -8175,12 +8196,8 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 31,
-   "coverageOfTarget": 41.9,
+   "coverageOfTarget": 45.2,
    "crawlWorklist": [
-    {
-     "supplier": "Benmor Medical",
-     "domain": "benmormedical.co.uk"
-    },
     {
      "supplier": "Aidapt Bathrooms Ltd",
      "domain": null
@@ -8204,10 +8221,6 @@
     {
      "supplier": "Langham Gordon Ellis",
      "domain": null
-    },
-    {
-     "supplier": "Medequip Assistive Technology",
-     "domain": "medequip-uk.com"
     },
     {
      "supplier": "Splice Cast Ltd t/a Eureka Physiocare",
@@ -8240,6 +8253,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Medequip Assistive Technology",
+     "domain": "medequip-uk.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Rehabilitation Manufacturing Services",
      "domain": "rms-rehab.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -8258,6 +8278,13 @@
      "domain": null,
      "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
      "checked": "2026-09-07",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
      "bucket": "publishedElsewhere"
     },
     {
@@ -8324,10 +8351,10 @@
    "actionable": {
     "unresolvedNames": 2,
     "publishedElsewhereNeedingCategory": 2,
-    "heldNeedingCategory": 2,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 1,
+    "crawlable": 0,
     "needDomain": 7
    },
    "published": [
@@ -8340,6 +8367,7 @@
     "Sunrise Medical Ltd",
     "Trulife Limited",
     "Vernacare",
+    "Benmor Medical",
     "Enable Access Ltd",
     "Etac Ltd",
     "Medi-Plinth Equipment",
@@ -8350,7 +8378,6 @@
     "Henleys Medical Supplies Limited"
    ],
    "heldOnly": [
-    "Benmor Medical",
     "Lisclare"
    ],
    "capturedNothingCounted": [],
@@ -8361,12 +8388,12 @@
     "Chiltern Invadex (UK) Limited",
     "Essential Healthcare Solutions (UK) Ltd",
     "Langham Gordon Ellis",
-    "Medequip Assistive Technology",
     "Splice Cast Ltd t/a Eureka Physiocare"
    ],
    "refused": [
     "Prism Medical UK",
     "AJ Mobility Ltd",
+    "Medequip Assistive Technology",
     "Rehabilitation Manufacturing Services",
     "Valley Northern Ltd"
    ],
@@ -8374,7 +8401,7 @@
     "The Helping Hand Company",
     "Omnimedical Ltd"
    ],
-   "actionableTotal": 14,
+   "actionableTotal": 12,
    "blockedReason": null,
    "deferred": null
   },
@@ -9475,6 +9502,13 @@
      "domain": "www.draeger.com",
      "reason": "neither www.draeger.com nor www.www.draeger.com answered \u2014 the domain does not resolve or serves no usable certificate",
      "checked": "2026-08-31",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
      "bucket": "published"
     }
    ],
@@ -14102,6 +14136,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Intersurgical",
      "domain": "www.intersurgical.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (Remote end closed connection without response)",
@@ -14439,6 +14480,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Henry Schein UK Holdings",
      "domain": "www.henryschein.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -14733,6 +14781,13 @@
      "domain": null,
      "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
      "checked": "2026-09-07",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
      "bucket": "publishedElsewhere"
     },
     {
@@ -15604,6 +15659,13 @@
      "domain": "drivemedical.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-30",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
      "bucket": "publishedElsewhere"
     },
     {
