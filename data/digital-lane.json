@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "31/10/2026",
- "generated": "2026-10-31",
+ "dataAsOf": "01/11/2026",
+ "generated": "2026-11-01",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,16 +22,16 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-10-23",
-   "to": "2026-10-31",
+   "from": "2026-10-24",
+   "to": "2026-11-01",
    "days": 8,
-   "run": "2026-10-31"
+   "run": "2026-11-01"
   },
   "notes": [
-   "Find a Tender (tender stage): 0 digital lane notice(s) from 53 release(s) over 1 page(s)",
-   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-23",
-   "Find a Tender (planning stage): 0 digital lane notice(s) from 21 release(s) over 1 page(s)",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-23"
+   "Find a Tender (tender stage): 0 digital lane notice(s) from 41 release(s) over 1 page(s)",
+   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-24",
+   "Find a Tender (planning stage): 0 digital lane notice(s) from 14 release(s) over 1 page(s)",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-24"
   ]
  },
  "counts": {
@@ -6315,6 +6315,12 @@
    "to": "2026-10-31",
    "days": 8,
    "run": "2026-10-31"
+  },
+  {
+   "from": "2026-10-24",
+   "to": "2026-11-01",
+   "days": 8,
+   "run": "2026-11-01"
   }
  ]
 }
