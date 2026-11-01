@@ -40,7 +40,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
-| Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 37 | 30.3% | 57 | 43 | STARTED |
+| Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 39 | 32.0% | 48 | 50 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 36 | 35.6% | 12 | 70 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 27 | 42.9% | 18 | 30 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 22 | 42 | STARTED |
