@@ -478,6 +478,21 @@ MERGES_APPLIED_2026_10_09 = [
      "Technology Products Ltd as canonical and merge LimbO into it."),
 ]
 
+# ALREADY APPLIED 01/11/2026 (^o639). Kept as an applied group so main() asserts the fold stays intact.
+MERGES_APPLIED_2026_11_01 = [
+    ("Syringa UK", ["Syringa Wholesale Distributor"], "07480088",
+     "One company, two NHS Supply Chain brief names (^o639, checked 01/11/2026). The Find a "
+     "Tender award notice for Respiratory Solutions (008439-2022, "
+     "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/ocds-h6vhtk-02e1c4) "
+     "names its supplier \"Syringa UK Ltd\", Billingshurst, and no \"Syringa Wholesale "
+     "Distributor\" - the NHSSC brief's \"Syringa Wholesale Distributor\" is the same award "
+     "in the brief's own wording. Companies House holds no company of that name (search "
+     "'syringa', 01/11/2026); the only Syringa medical company is SYRINGA UK LTD (07480088, "
+     "Rival House, Daux Road, Billingshurst), whose own site (syringa-uk.co.uk) prints that "
+     "number and describes itself as a Medical Wholesale Distributor. Number shared, "
+     "register-proved, per Lou's 25/08/2026 rule."),
+]
+
 MERGES = [
 ]
 
@@ -757,7 +772,8 @@ def main(argv):
             + MERGES_APPLIED_2026_08_21C + MERGES_APPLIED_2026_08_24
             + MERGES_APPLIED_2026_08_25 + MERGES_APPLIED_2026_08_25B
             + MERGES_APPLIED_2026_08_25C + MERGES_APPLIED_2026_08_27
-            + MERGES_APPLIED_2026_09_11 + MERGES_APPLIED_2026_10_09):
+            + MERGES_APPLIED_2026_09_11 + MERGES_APPLIED_2026_10_09
+            + MERGES_APPLIED_2026_11_01):
         keep = by_name.get(keep_name)
         if keep is None:
             undone.append("%s: survivor missing" % keep_name)
