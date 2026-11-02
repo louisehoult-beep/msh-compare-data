@@ -25,7 +25,7 @@
 
    Process: 02-Elevate-and-Thrive/Process flows for all brands/clinician-signup-pipeline.md */
 
-/* Agreement and privacy notice wording: CSP-PA-v0.3 and CSP-PN-v0.3, from
+/* Agreement and privacy notice wording: CSP-PA-v1.1 and CSP-PN-v1.1, from
    02-Elevate-and-Thrive/Clinical-Recruitment/Agreement/01 and 04. DRAFT
    pending solicitor review; never edit the wording here without a new
    version there. */
@@ -33,10 +33,10 @@ if ( ! defined( 'MSH_CP_SIGNED_OFF' ) ) {
 	define( 'MSH_CP_SIGNED_OFF', false );
 }
 if ( ! defined( 'MSH_CP_AGREEMENT_VERSION' ) ) {
-	define( 'MSH_CP_AGREEMENT_VERSION', 'CSP-PA-v0.3' );
+	define( 'MSH_CP_AGREEMENT_VERSION', 'CSP-PA-v1.1' );
 }
 if ( ! defined( 'MSH_CP_PRIVACY_VERSION' ) ) {
-	define( 'MSH_CP_PRIVACY_VERSION', 'CSP-PN-v0.3' );
+	define( 'MSH_CP_PRIVACY_VERSION', 'CSP-PN-v1.1' );
 }
 if ( ! defined( 'MSH_CP_TERMS_URL' ) ) {
 	define( 'MSH_CP_TERMS_URL', '' );
@@ -77,11 +77,11 @@ Leaving. You can leave at any time by emailing us. There is no penalty and nothi
 Your details. We keep your details safely and only share them as explained in our {privacy}. We share your CV and details with KORE only if you tick the separate box below, and with an employer only when you agree to each role. We never contact your current employer." );
 }
 if ( ! function_exists( 'msh_cp_boxes' ) ) {
-	/* The three sign-up boxes, word for word from CSP-PA-v0.3. All start
+	/* The three sign-up boxes, word for word from CSP-PA-v1.1. All start
 	   unticked; only box 1 is required. */
 	function msh_cp_boxes() {
 		return array(
-			'box1' => array( 'Programme agreement (required).', 'I have read and agree to the Clinical Selection Pathway programme agreement and terms, version CSP-PA-v0.3. I understand I receive the Clinical Interview Playbook course, 12 months of Medical Sales Hub access and one-to-one support free, I can leave at any time without penalty or repayment, and I will never be charged for being found work.' ),
+			'box1' => array( 'Programme agreement (required).', 'I have read and agree to the Clinical to Commercial: The Gateway to Industry Roles programme agreement and terms, version CSP-PA-v1.1. I understand I receive the Clinical Interview Playbook course, 12 months of Medical Sales Hub access and one-to-one support free, and, if I am a Nursing and Midwifery Council (NMC)-registered nurse, the Industry Nurse Professional Standard™ course (course starts January 2027) free, each course with 12 months\' access. By signing up I will use Elevate and Thrive\'s recruitment service to be placed: Elevate and Thrive works in partnership with Kore Executive Limited (KORE) and will show me the roles and prepare me for them. I can leave at any time. As the courses are provided free of charge, while I am on the programme and for 6 months after I leave it, I will not engage with other competing recruiters working in this sector.' ),
 			'box2' => array( 'Sharing my details with KORE (optional, needed for placement).', 'I agree that Elevate and Thrive Ltd may share my CV, contact details, registration details and assessment notes with Kore Executive Limited so that KORE can consider me for industry roles. I understand nothing is sent to any employer without my agreement for each role, and that I can withdraw this consent at any time by emailing louisehoult@elevateandthrive.uk.' ),
 			'box3' => array( 'Updates (optional).', 'I would like to receive emails from Elevate and Thrive Ltd about new roles, training and events. I can unsubscribe at any time.' ),
 		);
@@ -391,10 +391,10 @@ if ( ! function_exists( 'msh_cp_welcome_email' ) ) {
 		$btn  = $booking ? '<p style="margin:22px 0"><a href="' . $h( $booking ) . '" style="background:#0B1C33;color:#FFFFFF;padding:14px 26px;text-decoration:none;font-weight:700;display:inline-block">Book your 60-minute call</a></p>' : '';
 		$when = msh_cp_uk_time( $r['agreement_accepted'] );
 		$html = '<div style="font-family:Arial,sans-serif;font-size:16px;line-height:1.55;color:#1D2733;background:#FFFFFF;max-width:640px">'
-			. '<div style="background:#0B1C33;color:#FFFFFF;padding:22px 26px"><div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#E0BE8E">Clinical Selection Pathway</div>'
+			. '<div style="background:#0B1C33;color:#FFFFFF;padding:22px 26px"><div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#E0BE8E">Clinical to Commercial: The Gateway to Industry Roles</div>'
 			. '<div style="font-size:24px;margin-top:6px;color:#FFFFFF">Welcome, ' . $h( $r['first_name'] ) . '</div></div>'
 			. '<div style="padding:22px 26px;border:1px solid #DBE3EE;border-top:0">'
-			. '<p>Thank you for joining the Clinical Selection Pathway. Your reference is <strong>' . $h( $ref ) . '</strong>. Here is your copy of what you agreed on ' . $h( $when ) . ':</p><ul>'
+			. '<p>Thank you for joining the Clinical to Commercial: The Gateway to Industry Roles. Your reference is <strong>' . $h( $ref ) . '</strong>. Here is your copy of what you agreed on ' . $h( $when ) . ':</p><ul>'
 			. '<li>Programme agreement and terms, version ' . $h( $r['agreement_version'] ) . ': ' . msh_cp_link( MSH_CP_TERMS_URL, 'read the terms' ) . ' (the summary is copied below)</li>'
 			. '<li>Privacy notice, version ' . $h( $r['privacy_version'] ) . ': ' . msh_cp_link( MSH_CP_PRIVACY_URL, 'read the privacy notice' ) . '</li></ul>'
 			. '<p><strong>What you chose</strong></p><ul>'
@@ -422,7 +422,7 @@ if ( ! function_exists( 'msh_cp_welcome_email' ) ) {
 			. "<p style=\"font-size:13px;color:#1D2733\">Elevate and Thrive Ltd, company number 17154474, 2 Lakeside, Sturton by Stow, Lincoln, LN1 2TZ. Information Commissioner's Office registration ZC203137.</p>"
 			. '</div></div>';
 		return array(
-			'subject' => 'Welcome to the Clinical Selection Pathway: your copy of what you agreed (' . $ref . ')',
+			'subject' => 'Welcome to the Clinical to Commercial: The Gateway to Industry Roles: your copy of what you agreed (' . $ref . ')',
 			'html'    => $html,
 		);
 	}
