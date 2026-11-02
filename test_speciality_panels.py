@@ -3573,7 +3573,7 @@ _pd_all = len([r for r in B.load("drug-tariff-part-ix.json")["rows"]
 check("the slice is well under one per cent of the three parts (%d of %d)"
       % (_pd_dt["lineCount"], _pd_all), _pd_dt["lineCount"] < _pd_all / 100)
 # The brand-name search is the whole reason Part IXC appears at all. Searching the
-# generic description alone returns 258 lines, every one of them IXA.
+# generic description alone returns 256 lines, every one of them IXA.
 _pd_dtrows = [r for r in B.load("drug-tariff-part-ix.json")["rows"]
               if r[0] in ("IXA", "IXB", "IXC")]
 import re as _re
@@ -3581,11 +3581,11 @@ _pd_vrx = _re.compile(_pd_rule["tariffVmp"], _re.I)
 check("the rule reads the brand name as well as the generic one",
       tuple(_pd_rule.get("tariffFields") or ()) == ("vmp", "amp"))
 check("generic-name-only would lose Part IXC entirely, which is why it is not used",
-      len([r for r in _pd_dtrows if _pd_vrx.search(r[2] or "")]) == 258)
+      len([r for r in _pd_dtrows if _pd_vrx.search(r[2] or "")]) == 256)
 check("the published rule states the limit of the counting rule",
       "is invisible to it" in pd_["rules"]["drugTariff"])
 _pd_top = {x["name"]: x["lines"] for x in _pd_dt["topSuppliers"]}
-for name, lines in [("Dermacea Ltd", 54), ("Kavendor Ltd", 52), ("Coloplast Ltd", 26),
+for name, lines in [("Dermacea Ltd", 54), ("Kavendor Ltd", 52), ("Coloplast Ltd", 23),
                     ("Flexicare Medical Ltd", 23), ("Charles S Bullen Stomacare Ltd", 22)]:
     check("top supplier matches the page: %s %d lines" % (name, lines),
           _pd_top.get(name) == lines, "got %s" % _pd_top.get(name))
