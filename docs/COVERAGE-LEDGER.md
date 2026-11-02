@@ -54,7 +54,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 20 | 26 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 12 | 27.9% | 14 | 30 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 15 | 40.5% | 6 | 28 | STARTED |
-| Respiratory Solutions | respiratory | 37 | 16 | 43.2% | 16 | 19 | STARTED |
+| Respiratory Solutions | respiratory | 37 | 17 | 45.9% | 15 | 19 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 13 | 37.1% | 7 | 21 | STARTED |
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 14 | 42.4% | 11 | 22 | STARTED |
 | Aids for Daily Living | rehab | 31 | 14 | 45.2% | 12 | 14 | STARTED |
