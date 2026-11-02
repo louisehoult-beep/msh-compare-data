@@ -4085,7 +4085,7 @@ SPECIALITY_RULES = {
         # JuniorSTAR half-unit insulin pen carries nothing paediatric in its virtual
         # product description ("Hypodermic insulin injection pen reusable for 3ml
         # cartridge 0.5 unit dial up") and is a children's dosing device. Searching
-        # the virtual name alone returns 258 lines, all of them IXA, and loses Part
+        # the virtual name alone returns 256 lines, all of them IXA, and loses Part
         # IXC's 111 paediatric stoma lines entirely.
         "tariffParts": ("IXA", "IXB", "IXC"),
         "tariffVmp": r"p[ae]ediatric|child|infant|junior",
@@ -8622,7 +8622,7 @@ def tariff_rows(rule, dt_doc):
     # needs it: the paediatric marker often lives only in the BRAND name, so Sanofi's
     # JuniorSTAR half-unit insulin pen is a children's dosing device whose virtual
     # description says nothing about children. Searching the virtual name alone
-    # returns 258 of its 473 lines and loses Part IXC's paediatric stoma range whole.
+    # returns 256 of its 473 lines and loses Part IXC's paediatric stoma range whole.
     fields = tuple(rule.get("tariffFields") or ("vmp",))
     # NHSBSA'S OWN BNF SECTION, WHERE A RULE NAMES ONE, DECIDES. A name pattern cannot
     # see a branded generic: NHSBSA lists Ego Pharmaceuticals' QV range as "Generic QV
