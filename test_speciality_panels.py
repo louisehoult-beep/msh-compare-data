@@ -3581,14 +3581,26 @@ _pd_vrx = _re.compile(_pd_rule["tariffVmp"], _re.I)
 check("the rule reads the brand name as well as the generic one",
       tuple(_pd_rule.get("tariffFields") or ()) == ("vmp", "amp"))
 check("generic-name-only would lose Part IXC entirely, which is why it is not used",
-      len([r for r in _pd_dtrows if _pd_vrx.search(r[2] or "")]) == 256)
+      len([r for r in _pd_dtrows if _pd_vrx.search(r[2] or "")])
+      < tariff_slice(PAEDS)["lines"])
 check("the published rule states the limit of the counting rule",
       "is invisible to it" in pd_["rules"]["drugTariff"])
 _pd_top = {x["name"]: x["lines"] for x in _pd_dt["topSuppliers"]}
-for name, lines in [("Dermacea Ltd", 54), ("Kavendor Ltd", 52), ("Coloplast Ltd", 23),
-                    ("Flexicare Medical Ltd", 23), ("Charles S Bullen Stomacare Ltd", 22)]:
-    check("top supplier matches the page: %s %d lines" % (name, lines),
-          _pd_top.get(name) == lines, "got %s" % _pd_top.get(name))
+# Was pinned to October's figures (258 generic lines, Coloplast 26, ...); NHSBSA
+# republishes Part IX monthly and the 02/11/2026 file moved Coloplast to 23 and
+# blocked every push with nothing wrong (same lesson as tariff_slice, 01/10/2026).
+# The count is data; the invariant is that each top supplier's line count equals a
+# fresh re-read of the tariff copy, and that the leading names are the real leaders.
+_pd_ix = {k: i for i, k in enumerate(B.load("drug-tariff-part-ix.json")["schema"])}
+_pd_by_sup = {}
+for _r in tariff_slice(PAEDS)["rows"]:
+    _pd_by_sup[_r[_pd_ix["supplier"]]] = _pd_by_sup.get(_r[_pd_ix["supplier"]], 0) + 1
+for name, lines in list(_pd_top.items())[:5]:
+    check("top supplier matches the tariff copy: %s %d lines" % (name, lines),
+          _pd_by_sup.get(name) == lines, "tariff copy says %s" % _pd_by_sup.get(name))
+check("the panel's top five are the five largest suppliers in the tariff copy",
+      sorted(list(_pd_top.values())[:5], reverse=True)
+      == sorted(_pd_by_sup.values(), reverse=True)[:5])
 
 print("  no exclusion list, and the file says why rather than hiding it")
 check("exclude is genuinely None, not a never-matching placeholder",

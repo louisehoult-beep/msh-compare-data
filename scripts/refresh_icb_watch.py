@@ -169,10 +169,29 @@ def iso(d):
     return d.isoformat()
 
 
-def fetch(url, timeout=40):
-    req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return r.read().decode("utf-8", "replace")
+def fetch(url, timeout=40, attempts=4):
+    """GET with retries. The ODS host intermittently drops the TLS handshake
+    (ssl.SSLEOFError, seen 02/11/2026 in the overnight run), which succeeds on a
+    retry. Certificate verification stays ON; only transient network errors
+    (SSL EOF, reset, timeout, URLError) are retried, with a growing pause."""
+    import ssl
+    import time
+    last = None
+    for i in range(attempts):
+        try:
+            req = urllib.request.Request(url, headers=UA)
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return r.read().decode("utf-8", "replace")
+        except urllib.error.HTTPError as e:
+            if e.code < 500 and e.code != 429:
+                raise                                   # a real 4xx is not transient
+            last = e
+        except (ssl.SSLError, urllib.error.URLError, ConnectionError,
+                TimeoutError, OSError) as e:
+            last = e
+        if i < attempts - 1:
+            time.sleep(2 * (i + 1))
+    raise last
 
 
 def page_lines(raw):
