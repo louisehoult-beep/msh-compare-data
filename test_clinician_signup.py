@@ -156,7 +156,7 @@ class SignupRules(unittest.TestCase):
         self.assertIn("One-to-one support from me through the whole process", w["html"])
         self.assertIn("Kore Executive Limited for industry roles: yes", w["html"])
         self.assertIn("training and events: no", w["html"])
-        self.assertIn("Industry Nurse Professional Standard&trade; course (launching December 2026)", w["html"])
+        self.assertIn("Industry Nurse Professional Standard&trade; course (course starts January 2027)", w["html"])
         self.assertIn("CSP-PN-v1.1", w["html"])
         self.assertNotIn("Jo<b>", w["html"])               # escaped
         self.assertIn("https://hub.example/cv?t=1", l["html"])
