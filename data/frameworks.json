@@ -10,7 +10,7 @@
   "ref": "ETH-DB4D6B772",
   "contact": "contact@elevateandthrive.uk"
  },
- "dataAsOf": "2026-10-26",
+ "dataAsOf": "2026-11-02",
  "source": "NHS Supply Chain Contract Launch Briefs (https://www.supplychain.nhs.uk/product-information/contract-launch-briefs/), each framework's own page, fetched this run.",
  "rule": "A supplier appears under a framework here ONLY because that framework's own NHS Supply Chain brief names it. Nothing is inferred from product ranges, specialities or catalogue categories. Frameworks whose brief could not be parsed are listed in `unparsed` with the reason and are NOT silently dropped.",
  "briefsSeen": 140,
@@ -17427,5 +17427,5 @@
   }
  ],
  "lotRule": "A supplier is shown on a lot ONLY where the framework owner's own published source for that framework names it against that lot: the NHS Supply Chain contract launch brief's lot-by-lot supplier lists or supplier-by-lot table, the Product/Supplier Matrix spreadsheet attached to that brief (only where the sheet has an explicit lot axis, and only where the supplier has a mark or a product in that lot), or the Find a Tender contract award notice for that framework's own procurement. Nothing is inferred from product ranges, specialities or lot titles. Lots attach to the exact supplier string the brief uses; a source name attaches only where its normalised form (brief_names.clean + company_match.key) equals that brief name's, or both resolve to the same single Hub company under the seed's recorded aliases. Unmatched names are listed in `unresolved`, never guessed. Where the brief breaks a framework into lots but no source names who holds which, lotStatus is 'notPublished' and the report says so.",
- "lotsAsOf": "2026-10-26"
+ "lotsAsOf": "2026-11-02"
 }

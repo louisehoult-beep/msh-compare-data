@@ -6137,10 +6137,28 @@ if euc:
                         ("non-emergency", "non-emergency PTS is not this patch"),
                         ("non emergency", "non-emergency PTS is not this patch"),
                         ("dental", "dental is its own route"),
-                        ("mental health", "mental health crisis is its own route"),
-                        ("cancer", "urgent cancer pathways are not urgent care")]:
+                        ("mental health", "mental health crisis is its own route")]:
         check("no %s row reached the panel (%s)" % (banned, why[:34]),
               banned not in _euc_titles)
+
+    # "cancer" is checked separately. A genuine cancer-PATHWAY row (a triage,
+    # screening or suspected-cancer referral service borrowing "urgent") must
+    # still be refused — that is what the blanket check above caught for years.
+    # But NHS Blaenau Gwent/Velindre's defibrillator award is admitted on
+    # "defibrillat", not on "cancer" or "urgent": it is this patch's own
+    # equipment, bought for a hospital building whose own name is "New
+    # Velindre Cancer Centre". Read and confirmed 01/11/2026 (GitHub Actions
+    # triage) rather than excluded wholesale.
+    _euc_cancer_venue_exceptions = (
+        "procurement of defibrillators and associated accessories for the "
+        "new velindre cancer centre (nvcc)",
+    )
+    _euc_cancer_hits = [a["title"] for a in euc["awards"]
+                        if "cancer" in (a.get("title") or "").lower()
+                        and (a.get("title") or "").lower()
+                            not in _euc_cancer_venue_exceptions]
+    check("no cancer row reached the panel (urgent cancer pathways are not urg)",
+          not _euc_cancer_hits, "got %r" % _euc_cancer_hits)
 
     print("  five frameworks, the five the page's own scope and calendar name")
     check("exactly five frameworks", len(euc["frameworks"]) == 5,

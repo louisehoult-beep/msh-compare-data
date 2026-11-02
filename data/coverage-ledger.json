@@ -12,9 +12,9 @@
  },
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
-  "frameworks.json": "2026-10-26",
-  "differentiator.json published": 37373,
-  "differentiator.json held": 295471
+  "frameworks.json": "2026-11-02",
+  "differentiator.json published": 37407,
+  "differentiator.json held": 297351
  },
  "counts": {
   "frameworks": 122,
@@ -25,10 +25,10 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 406,
-  "inScopeSuppliersNeedingCrawl": 234,
-  "inScopeSuppliersNeedingDomain": 221,
-  "suppliersRefused": 564,
-  "suppliersRefusedButPublishingElsewhere": 166,
+  "inScopeSuppliersNeedingCrawl": 222,
+  "inScopeSuppliersNeedingDomain": 211,
+  "suppliersRefused": 573,
+  "suppliersRefusedButPublishingElsewhere": 167,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
   "blockedFrameworks": 3,
@@ -1669,8 +1669,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "11 March 2028",
    "suppliersAwarded": 122,
-   "suppliersPublished": 37,
-   "coverage": 30.3,
+   "suppliersPublished": 39,
+   "coverage": 32.0,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -1680,7 +1680,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 122,
-   "coverageOfTarget": 30.3,
+   "coverageOfTarget": 32.0,
    "crawlWorklist": [
     {
      "supplier": "Immucor (IBG Immucor)",
@@ -1689,6 +1689,10 @@
     {
      "supplier": "Launch Diagnostics",
      "domain": null
+    },
+    {
+     "supplier": "Oxford Biosystems",
+     "domain": "oxfordbiosystems.com"
     },
     {
      "supplier": "Scientific Laboratory Supplies (SLS)",
@@ -1767,10 +1771,6 @@
      "domain": null
     },
     {
-     "supplier": "Digostics",
-     "domain": null
-    },
-    {
      "supplier": "DWK Life Sciences",
      "domain": null
     },
@@ -1791,19 +1791,11 @@
      "domain": null
     },
     {
-     "supplier": "Genetic Signatures",
-     "domain": null
-    },
-    {
      "supplier": "Genmed",
      "domain": null
     },
     {
      "supplier": "Glen Dimplex Home Appliances",
-     "domain": null
-    },
-    {
-     "supplier": "Hawksley & Sons",
      "domain": null
     },
     {
@@ -1815,19 +1807,11 @@
      "domain": null
     },
     {
-     "supplier": "International Scientific Supplies",
-     "domain": null
-    },
-    {
      "supplier": "LumiraDx",
      "domain": null
     },
     {
      "supplier": "Matrix Diagnostics",
-     "domain": null
-    },
-    {
-     "supplier": "Medline Scientific",
      "domain": null
     },
     {
@@ -1843,10 +1827,6 @@
      "domain": null
     },
     {
-     "supplier": "Oxford Biosystems",
-     "domain": null
-    },
-    {
      "supplier": "Revvity (formerly PerkinElmer)",
      "domain": null
     },
@@ -1855,15 +1835,7 @@
      "domain": null
     },
     {
-     "supplier": "Pro-Lab Diagnostics",
-     "domain": null
-    },
-    {
      "supplier": "R&L Slaughter",
-     "domain": null
-    },
-    {
-     "supplier": "SciQuip",
      "domain": null
     },
     {
@@ -1871,15 +1843,7 @@
      "domain": null
     },
     {
-     "supplier": "Serosep UK",
-     "domain": null
-    },
-    {
      "supplier": "Solmedia Laboratory Supplies",
-     "domain": null
-    },
-    {
-     "supplier": "Thriva",
      "domain": null
     },
     {
@@ -1905,36 +1869,26 @@
     "Denward Manufacturing",
     "DiaSorin",
     "Diagnostica Stago UK",
-    "Digostics",
     "E&O Laboratories",
     "ELITech UK",
     "Edinburgh Genetics",
     "Ethicheck",
-    "Genetic Signatures",
     "Genmed",
     "Glen Dimplex Home Appliances",
-    "Hawksley & Sons",
     "Home Health (UK)",
     "Hygeco",
     "Immucor (IBG Immucor)",
-    "International Scientific Supplies",
     "Launch Diagnostics",
     "LumiraDx",
     "Matrix Diagnostics",
-    "Medline Scientific",
     "Msoft eSolutions",
-    "Oxford Biosystems",
     "Pisces Scientific",
-    "Pro-Lab Diagnostics",
     "R&L Slaughter",
     "Revvity (formerly PerkinElmer)",
-    "SciQuip",
     "Scientific Laboratory Supplies (SLS)",
     "Sebia UK",
-    "Serosep UK",
     "Solmedia Laboratory Supplies",
     "Sterilab Services",
-    "Thriva",
     "Twist Bioscience",
     "Una Health",
     "VWR International (Avantor)",
@@ -1985,6 +1939,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Digostics",
+     "domain": "digostics.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Don Whitley Scientific",
      "domain": "www.dwscientific.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
@@ -2020,6 +1981,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Genetic Signatures",
+     "domain": "geneticsignatures.com",
+     "reason": "the site's WordPress API returned HTTP 401; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Grifols UK Ltd",
      "domain": "www.grifols.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
@@ -2048,6 +2016,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "International Scientific Supplies",
+     "domain": "intscientific.com",
+     "reason": "neither intscientific.com nor www.intscientific.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-11-01",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Medecon Healthcare UK",
      "domain": "medecon.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
@@ -2059,6 +2034,13 @@
      "domain": "novabiomedical.com",
      "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-10-19",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Pro-Lab Diagnostics",
+     "domain": "pro-lab.co.uk",
+     "reason": "neither pro-lab.co.uk nor www.pro-lab.co.uk answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-11-01",
      "bucket": "refused"
     },
     {
@@ -2083,10 +2065,31 @@
      "bucket": "refused"
     },
     {
+     "supplier": "SciQuip",
+     "domain": "sciquip.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker); following links reached the 250-page cap with pages still unread, so the range could not be read completely",
+     "checked": "2026-11-01",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Serosep UK",
+     "domain": "serosep.com",
+     "reason": "neither serosep.com nor www.serosep.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-11-01",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Syringa UK",
      "domain": "www.syringa-uk.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-07",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Thriva",
+     "domain": "thriva.co",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
      "bucket": "refused"
     },
     {
@@ -2261,11 +2264,11 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 3,
-    "heldNeedingCategory": 8,
+    "heldNeedingCategory": 9,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 46
+    "needDomain": 36
    },
    "published": [
     "Abbott Diagnostics",
@@ -2281,6 +2284,7 @@
     "Coolmed",
     "Epredia",
     "Thermo Fisher Scientific UK",
+    "Hawksley & Sons",
     "Hologic UK",
     "Illumina UK",
     "Labcold",
@@ -2290,6 +2294,7 @@
     "LTE Scientific Limited",
     "Mast Group",
     "Medical Wire & Equipment (MWE)",
+    "Medline Scientific",
     "MedScience Distribution",
     "QuidelOrtho (Ortho Clinical Diagnostics UK)",
     "pfm medical UK",
@@ -2321,6 +2326,7 @@
     "Immucor (IBG Immucor)",
     "Kinetik Medical Devices",
     "Launch Diagnostics",
+    "Oxford Biosystems",
     "Scientific Laboratory Supplies (SLS)",
     "Twist Bioscience",
     "VWR International (Avantor)",
@@ -2344,35 +2350,25 @@
     "DGP Intelsius",
     "Diagnostica Stago UK",
     "DiaSorin",
-    "Digostics",
     "DWK Life Sciences",
     "E&O Laboratories",
     "Edinburgh Genetics",
     "ELITech UK",
     "Ethicheck",
-    "Genetic Signatures",
     "Genmed",
     "Glen Dimplex Home Appliances",
-    "Hawksley & Sons",
     "Home Health (UK)",
     "Hygeco",
-    "International Scientific Supplies",
     "LumiraDx",
     "Matrix Diagnostics",
-    "Medline Scientific",
     "Sterilab Services",
     "Msoft eSolutions",
     "nal von minden",
-    "Oxford Biosystems",
     "Revvity (formerly PerkinElmer)",
     "Pisces Scientific",
-    "Pro-Lab Diagnostics",
     "R&L Slaughter",
-    "SciQuip",
     "Sebia UK",
-    "Serosep UK",
     "Solmedia Laboratory Supplies",
-    "Thriva",
     "Una Health"
    ],
    "refused": [
@@ -2382,26 +2378,33 @@
     "Bio-Rad Laboratories UK",
     "Bruker UK",
     "CellPath",
+    "Digostics",
     "Don Whitley Scientific",
     "ESTS (GB)",
     "EUROIMMUN UK",
     "Exact Sciences UK",
     "Fujifilm Healthcare UK",
+    "Genetic Signatures",
     "Grifols UK Ltd",
     "Haier Biomedical",
     "Helena Biosciences",
     "HORIBA UK",
+    "International Scientific Supplies",
     "Medecon Healthcare UK",
     "Nova Biomedical",
+    "Pro-Lab Diagnostics",
     "Promega UK",
     "Randox Laboratories",
     "Sakura Finetek UK",
+    "SciQuip",
+    "Serosep UK",
     "Syringa UK",
+    "Thriva",
     "Valley Northern Ltd",
     "Wolf Laboratories"
    ],
    "unknown": [],
-   "actionableTotal": 57,
+   "actionableTotal": 48,
    "blockedReason": null,
    "deferred": null
   },
@@ -4482,6 +4485,13 @@
      "domain": "bbraun.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-08",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
      "bucket": "published"
     },
     {
@@ -7297,6 +7307,13 @@
      "bucket": "published"
     },
     {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
+     "bucket": "published"
+    },
+    {
      "supplier": "MedScience Distribution",
      "domain": "medscienceuk.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap's product URLs are flat, so they carry no division structure (360 names, all uncategorised) \u2014 a product list without the company's own grouping is not the range this report shows",
@@ -7407,8 +7424,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "15 June 2027",
    "suppliersAwarded": 37,
-   "suppliersPublished": 16,
-   "coverage": 43.2,
+   "suppliersPublished": 17,
+   "coverage": 45.9,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -7418,12 +7435,8 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 37,
-   "coverageOfTarget": 43.2,
+   "coverageOfTarget": 45.9,
    "crawlWorklist": [
-    {
-     "supplier": "Numed Healthcare",
-     "domain": "numed.co.uk"
-    },
     {
      "supplier": "Philips Respironics",
      "domain": null
@@ -7555,6 +7568,13 @@
      "bucket": "published"
     },
     {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
+     "bucket": "published"
+    },
+    {
      "supplier": "Intersurgical",
      "domain": "www.intersurgical.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (Remote end closed connection without response)",
@@ -7590,7 +7610,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 6,
-    "heldNeedingCategory": 8,
+    "heldNeedingCategory": 7,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -7607,6 +7627,7 @@
     "Intersurgical",
     "Meditech Systems Ltd (Dorset)",
     "Medline Industries",
+    "Numed Healthcare",
     "Pari Medical",
     "Proact Medical Ltd",
     "Salter Labs UK Ltd",
@@ -7629,7 +7650,6 @@
     "GE HealthCare",
     "Kinetik Medical Devices",
     "Marshall Products",
-    "Numed Healthcare",
     "Pennine Healthcare (Ivor Shaw Ltd)",
     "Philips Respironics",
     "Syringa Wholesale Distributor"
@@ -7645,7 +7665,7 @@
     "Schiller UK Limited"
    ],
    "unknown": [],
-   "actionableTotal": 16,
+   "actionableTotal": 15,
    "blockedReason": null,
    "deferred": null
   },
@@ -8164,8 +8184,8 @@
    "category": "Rehabilitation and Community",
    "ends": "31 October 2027",
    "suppliersAwarded": 31,
-   "suppliersPublished": 13,
-   "coverage": 41.9,
+   "suppliersPublished": 14,
+   "coverage": 45.2,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -8175,12 +8195,8 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 31,
-   "coverageOfTarget": 41.9,
+   "coverageOfTarget": 45.2,
    "crawlWorklist": [
-    {
-     "supplier": "Benmor Medical",
-     "domain": "benmormedical.co.uk"
-    },
     {
      "supplier": "Aidapt Bathrooms Ltd",
      "domain": null
@@ -8204,10 +8220,6 @@
     {
      "supplier": "Langham Gordon Ellis",
      "domain": null
-    },
-    {
-     "supplier": "Medequip Assistive Technology",
-     "domain": "medequip-uk.com"
     },
     {
      "supplier": "Splice Cast Ltd t/a Eureka Physiocare",
@@ -8240,6 +8252,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Medequip Assistive Technology",
+     "domain": "medequip-uk.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Rehabilitation Manufacturing Services",
      "domain": "rms-rehab.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -8258,6 +8277,13 @@
      "domain": null,
      "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
      "checked": "2026-09-07",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
      "bucket": "publishedElsewhere"
     },
     {
@@ -8324,10 +8350,10 @@
    "actionable": {
     "unresolvedNames": 2,
     "publishedElsewhereNeedingCategory": 2,
-    "heldNeedingCategory": 2,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 1,
+    "crawlable": 0,
     "needDomain": 7
    },
    "published": [
@@ -8340,6 +8366,7 @@
     "Sunrise Medical Ltd",
     "Trulife Limited",
     "Vernacare",
+    "Benmor Medical",
     "Enable Access Ltd",
     "Etac Ltd",
     "Medi-Plinth Equipment",
@@ -8350,7 +8377,6 @@
     "Henleys Medical Supplies Limited"
    ],
    "heldOnly": [
-    "Benmor Medical",
     "Lisclare"
    ],
    "capturedNothingCounted": [],
@@ -8361,12 +8387,12 @@
     "Chiltern Invadex (UK) Limited",
     "Essential Healthcare Solutions (UK) Ltd",
     "Langham Gordon Ellis",
-    "Medequip Assistive Technology",
     "Splice Cast Ltd t/a Eureka Physiocare"
    ],
    "refused": [
     "Prism Medical UK",
     "AJ Mobility Ltd",
+    "Medequip Assistive Technology",
     "Rehabilitation Manufacturing Services",
     "Valley Northern Ltd"
    ],
@@ -8374,7 +8400,7 @@
     "The Helping Hand Company",
     "Omnimedical Ltd"
    ],
-   "actionableTotal": 14,
+   "actionableTotal": 12,
    "blockedReason": null,
    "deferred": null
   },
@@ -9475,6 +9501,13 @@
      "domain": "www.draeger.com",
      "reason": "neither www.draeger.com nor www.www.draeger.com answered \u2014 the domain does not resolve or serves no usable certificate",
      "checked": "2026-08-31",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
      "bucket": "published"
     }
    ],
@@ -14102,6 +14135,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Intersurgical",
      "domain": "www.intersurgical.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (Remote end closed connection without response)",
@@ -14439,6 +14479,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Henry Schein UK Holdings",
      "domain": "www.henryschein.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -14733,6 +14780,13 @@
      "domain": null,
      "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
      "checked": "2026-09-07",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
      "bucket": "publishedElsewhere"
     },
     {
@@ -15607,6 +15661,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Henleys Medical Supplies Limited",
+     "domain": "www.henleysmedicalsupplies.co.uk",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-01",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Henry Schein UK Holdings",
      "domain": "www.henryschein.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -15736,10 +15797,6 @@
    "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
-     "supplier": "Numed Healthcare",
-     "domain": "numed.co.uk"
-    },
-    {
      "supplier": "Seca Ltd",
      "domain": "seca.com"
     },
@@ -15857,8 +15914,8 @@
    "publishedElsewhereNoOwnRange": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 6,
-    "heldNeedingCategory": 5,
+    "publishedElsewhereNeedingCategory": 7,
+    "heldNeedingCategory": 4,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -15869,13 +15926,13 @@
     "Intermedical (UK) Ltd",
     "Love Medical",
     "Mindray UK",
+    "Numed Healthcare",
     "Philips",
     "Spacelabs Healthcare Ltd",
     "Baxter / Hillrom"
    ],
    "heldOnly": [
     "GE HealthCare",
-    "Numed Healthcare",
     "Seca Ltd",
     "Walters Medical Ltd",
     "Williams Medical Supplies"
