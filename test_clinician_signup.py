@@ -113,9 +113,9 @@ class SignupRules(unittest.TestCase):
         self.assertIn("box1", p["errors"])
 
     def test_wording_matches_agreement_files(self):
-        """Every box is word for word from CSP-PA-v1.0, and the form is signed off (Lou, 02/11/2026)."""
+        """Every box is word for word from CSP-PA-v1.1, and the form is signed off (v1.1, Lou, 02/11/2026)."""
         boxes, consts = self.run_php([["boxes", []], ["consts", []]])
-        self.assertEqual(consts, ["CSP-PA-v1.0", "CSP-PN-v1.0", True])
+        self.assertEqual(consts, ["CSP-PA-v1.1", "CSP-PN-v1.1", True])
         src = os.path.join(agreement_dir(), "01-programme-agreement-one-page.md")
         if not os.path.exists(src):
             self.skipTest("agreement file not on this machine")
@@ -126,8 +126,8 @@ class SignupRules(unittest.TestCase):
     def test_no_fees_wording(self):
         """No fees clause at all (Lou, 31/10/2026): nothing about charges, repayment or price."""
         boxes, = self.run_php([["boxes", []]])
-        (c,) = self.run_php([["clean", [GOOD, NOW, "CSP-PA-v1.0", "CSP-PN-v1.0"]]])
-        (w,) = self.run_php([["welcome", [dict(c["record"], agreement_version="CSP-PA-v1.0", privacy_version="CSP-PN-v1.0"), "CLN-X", ""]]])
+        (c,) = self.run_php([["clean", [GOOD, NOW, "CSP-PA-v1.1", "CSP-PN-v1.1"]]])
+        (w,) = self.run_php([["welcome", [dict(c["record"], agreement_version="CSP-PA-v1.1", privacy_version="CSP-PN-v1.1"), "CLN-X", ""]]])
         for text in [w["html"]] + [b for pair in boxes.values() for b in pair]:
             for word in ("repay", "charged", "fee", "price", "pay back", "solicitor"):
                 self.assertNotIn(word, text.lower(), word)
@@ -143,8 +143,8 @@ class SignupRules(unittest.TestCase):
         self.assertNotIn("pin", p["errors"])
 
     def test_emails(self):
-        (c,) = self.run_php([["clean", [dict(GOOD, box2="1"), NOW, "CSP-PA-v1.0", "CSP-PN-v1.0"]]])
-        r = dict(c["record"], agreement_version="CSP-PA-v1.0", privacy_version="CSP-PN-v1.0", first_name="Jo<b>")
+        (c,) = self.run_php([["clean", [dict(GOOD, box2="1"), NOW, "CSP-PA-v1.1", "CSP-PN-v1.1"]]])
+        r = dict(c["record"], agreement_version="CSP-PA-v1.1", privacy_version="CSP-PN-v1.1", first_name="Jo<b>")
         w, l, live = self.run_php([["welcome", [r, "CLN-ABC123", "https://book.example/x"]],
                                    ["lou", [r, "CLN-ABC123", "https://hub.example/cv?t=1"]], ["live", []]])
         self.assertIn("CLN-ABC123", w["subject"])
@@ -157,7 +157,7 @@ class SignupRules(unittest.TestCase):
         self.assertIn("Kore Executive Limited for industry roles: yes", w["html"])
         self.assertIn("training and events: no", w["html"])
         self.assertIn("Industry Nurse Professional Standard&trade; course (launching December 2026)", w["html"])
-        self.assertIn("CSP-PN-v1.0", w["html"])
+        self.assertIn("CSP-PN-v1.1", w["html"])
         self.assertNotIn("Jo<b>", w["html"])               # escaped
         self.assertIn("https://hub.example/cv?t=1", l["html"])
         self.assertIn("Integrated Care Board (ICB) area", l["html"])

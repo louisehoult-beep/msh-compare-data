@@ -25,7 +25,7 @@
 
    Process: 02-Elevate-and-Thrive/Process flows for all brands/clinician-signup-pipeline.md */
 
-/* Agreement and privacy notice wording: CSP-PA-v1.0 and CSP-PN-v1.0, from
+/* Agreement and privacy notice wording: CSP-PA-v1.1 and CSP-PN-v1.1, from
    02-Elevate-and-Thrive/Clinical-Recruitment/Agreement/01 and 04. Final,
    no fees clause (Lou, 31/10/2026); the form opens on Lou's own yes. Never
    edit the wording here without a new version there. */
@@ -33,10 +33,10 @@ if ( ! defined( 'MSH_CP_SIGNED_OFF' ) ) {
 	define( 'MSH_CP_SIGNED_OFF', true );
 }
 if ( ! defined( 'MSH_CP_AGREEMENT_VERSION' ) ) {
-	define( 'MSH_CP_AGREEMENT_VERSION', 'CSP-PA-v1.0' );
+	define( 'MSH_CP_AGREEMENT_VERSION', 'CSP-PA-v1.1' );
 }
 if ( ! defined( 'MSH_CP_PRIVACY_VERSION' ) ) {
-	define( 'MSH_CP_PRIVACY_VERSION', 'CSP-PN-v1.0' );
+	define( 'MSH_CP_PRIVACY_VERSION', 'CSP-PN-v1.1' );
 }
 if ( ! defined( 'MSH_CP_TERMS_URL' ) ) {
 	define( 'MSH_CP_TERMS_URL', 'https://medsalesintelligencehub.co.uk/clinical-hub/clinical-selection-pathway-terms/' );
@@ -59,24 +59,23 @@ What you get, free. Exactly these things (the fourth only if you are a registere
 3. One-to-one support from Louise Hoult through the whole process: your first call, CV and LinkedIn profile, preparation for each role, interviews and presentations, offers, and your first six months in post if you are placed through us.
 4. The Industry Nurse Professional Standard™ course, free, for Nursing and Midwifery Council (NMC)-registered nurses only (launching December 2026). It covers professional practice, governance and accountability for NMC-registered nurses working in industry (14 modules in 3 stages, 9 to 12 months part-time, with 1 face-to-face day), with 12 months' access from set-up. Clinicians who are not NMC-registered nurses, such as Operating Department Practitioners and Allied Health Professionals, receive items 1 to 3.
 
-Using our recruitment service. By signing up you will use our recruitment service to be placed. We work in partnership with one recruitment partner, Kore Executive Limited (KORE), and we will show you the roles and prepare you for them. When a suitable role comes up, we will ask you first. Only if you say yes do we put you forward, through KORE, to that employer. You are still free to apply for any job directly or use other agencies.
+Using our recruitment service. By signing up you will use our recruitment service to be placed. We work in partnership with one recruitment partner, Kore Executive Limited (KORE), and we will show you the roles and prepare you for them. When a suitable role comes up, we will ask you first. Only if you say yes do we put you forward, through KORE, to that employer.
 
 What we ask of you.
-1. Before each role, confirm you want to be put forward and that no one else has put you forward to that employer for that role in the last six months.
-2. Once we have put you forward for a role, do not let another agency put you forward for the same role while ours is live.
-3. Please tell us before you register with another agency for industry roles, so you are not put forward twice. This is a request. You never have to tell us who your next employer is.
-4. Give us accurate details, including your professional registration.
+1. Before each role, confirm you want to be put forward.
+2. As the courses are provided free of charge, while you are on the programme and for 6 months after you leave it, do not engage with other competing recruiters working in this sector. You never have to tell us who your next employer is.
+3. Give us accurate details, including your professional registration.
 
-Leaving. You can leave at any time by emailing us. Course and Hub access already set up continue to the end of their 12 months. One-to-one support and future introductions to roles stop when you leave.
+Leaving. You can leave at any time by emailing us. Course and Hub access end as soon as you leave, along with one-to-one support and future introductions to roles. Point 2 above still applies for 6 months after you leave. If you are placed in a role you do not need to leave: email us to change your registration to “Happy in role at present” and you keep full access to the course materials.
 
 Your details. We keep your details safely and only share them as explained in our {privacy}. We share your CV and details with KORE only if you tick the separate box below, and with an employer only when you agree to each role. We never contact your current employer." );
 }
 if ( ! function_exists( 'msh_cp_boxes' ) ) {
-	/* The three sign-up boxes, word for word from CSP-PA-v1.0. All start
+	/* The three sign-up boxes, word for word from CSP-PA-v1.1. All start
 	   unticked; only box 1 is required. */
 	function msh_cp_boxes() {
 		return array(
-			'box1' => array( 'Programme agreement (required).', 'I have read and agree to the Clinical Selection Pathway programme agreement and terms, version CSP-PA-v1.0. I understand I receive the Clinical Interview Playbook course, 12 months of Medical Sales Hub access and one-to-one support free, and, if I am a Nursing and Midwifery Council (NMC)-registered nurse, the Industry Nurse Professional Standard™ course (launching December 2026) free, each course with 12 months\' access. By signing up I will use Elevate and Thrive\'s recruitment service to be placed: Elevate and Thrive works in partnership with Kore Executive Limited (KORE) and will show me the roles and prepare me for them. I can leave at any time, and I am free to apply for any job directly or use other agencies.' ),
+			'box1' => array( 'Programme agreement (required).', 'I have read and agree to the Clinical to Commercial: The Gateway to Industry Roles programme agreement and terms, version CSP-PA-v1.1. I understand I receive the Clinical Interview Playbook course, 12 months of Medical Sales Hub access and one-to-one support free, and, if I am a Nursing and Midwifery Council (NMC)-registered nurse, the Industry Nurse Professional Standard™ course (launching December 2026) free, each course with 12 months\' access. By signing up I will use Elevate and Thrive\'s recruitment service to be placed: Elevate and Thrive works in partnership with Kore Executive Limited (KORE) and will show me the roles and prepare me for them. I can leave at any time. As the courses are provided free of charge, while I am on the programme and for 6 months after I leave it, I will not engage with other competing recruiters working in this sector.' ),
 			'box2' => array( 'Sharing my details with KORE (optional, needed for placement).', 'I agree that Elevate and Thrive Ltd may share my CV, contact details, registration details and assessment notes with Kore Executive Limited so that KORE can consider me for industry roles. I understand nothing is sent to any employer without my agreement for each role, and that I can withdraw this consent at any time by emailing louisehoult@elevateandthrive.uk.' ),
 			'box3' => array( 'Updates (optional).', 'I would like to receive emails from Elevate and Thrive Ltd about new roles, training and events. I can unsubscribe at any time.' ),
 		);
@@ -386,10 +385,10 @@ if ( ! function_exists( 'msh_cp_welcome_email' ) ) {
 		$btn  = $booking ? '<p style="margin:22px 0"><a href="' . $h( $booking ) . '" style="background:#CBA257;color:#1D2733;padding:14px 26px;text-decoration:none;font-weight:700;display:inline-block">Book your 60-minute call</a></p>' : '';
 		$when = msh_cp_uk_time( $r['agreement_accepted'] );
 		$html = '<div style="font-family:Arial,sans-serif;font-size:16px;line-height:1.55;color:#1D2733;background:#FFFFFF;max-width:640px">'
-			. '<div style="background:#FFFFFF;color:#1D2733;padding:22px 26px;border:1px solid #E6E8EC;border-top:4px solid #CBA257"><div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#8A6A2E">Clinical Selection Pathway</div>'
+			. '<div style="background:#FFFFFF;color:#1D2733;padding:22px 26px;border:1px solid #E6E8EC;border-top:4px solid #CBA257"><div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#8A6A2E">Clinical to Commercial: The Gateway to Industry Roles</div>'
 			. '<div style="font-size:24px;margin-top:6px;color:#1D2733">Welcome, ' . $h( $r['first_name'] ) . '</div></div>'
 			. '<div style="padding:22px 26px;border:1px solid #E6E8EC;border-top:0">'
-			. '<p>Thank you for joining the Clinical Selection Pathway. Your reference is <strong>' . $h( $ref ) . '</strong>. Here is your copy of what you agreed on ' . $h( $when ) . ':</p><ul>'
+			. '<p>Thank you for joining the Clinical to Commercial: The Gateway to Industry Roles. Your reference is <strong>' . $h( $ref ) . '</strong>. Here is your copy of what you agreed on ' . $h( $when ) . ':</p><ul>'
 			. '<li>Programme agreement and terms, version ' . $h( $r['agreement_version'] ) . ': ' . msh_cp_link( MSH_CP_TERMS_URL, 'read the terms' ) . ' (the summary is copied below)</li>'
 			. '<li>Privacy notice, version ' . $h( $r['privacy_version'] ) . ': ' . msh_cp_link( MSH_CP_PRIVACY_URL, 'read the privacy notice' ) . '</li></ul>'
 			. '<p><strong>What you chose</strong></p><ul>'
@@ -418,7 +417,7 @@ if ( ! function_exists( 'msh_cp_welcome_email' ) ) {
 			. "<p style=\"font-size:13px;color:#1D2733\">Elevate and Thrive Ltd, company number 17154474, 2 Lakeside, Sturton by Stow, Lincoln, LN1 2TZ. Information Commissioner's Office registration ZC203137.</p>"
 			. '</div></div>';
 		return array(
-			'subject' => 'Welcome to the Clinical Selection Pathway: your copy of what you agreed (' . $ref . ')',
+			'subject' => 'Welcome to the Clinical to Commercial: The Gateway to Industry Roles: your copy of what you agreed (' . $ref . ')',
 			'html'    => $html,
 		);
 	}
