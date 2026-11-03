@@ -741,6 +741,9 @@ function msh_cpass_user_column_value( $value, $column, $user_id ) {
 		return esc_html( 'Pass from ' . ( $ref ? $ref->display_name : '#' . $from ) . ', until ' . get_user_meta( $user_id, 'msh_cpass_expires', true ) );
 	}
 	$code = get_user_meta( $user_id, 'msh_cpass_code', true );
+	if ( ! $code && msh_cpass_is_eligible_referrer( $user_id ) ) {
+		$code = msh_cpass_code_for( $user_id ); // listing the Users screen gives every paying member a code, so it can go in an email before they open the page
+	}
 	if ( $code ) {
 		return esc_html( $code . ' (' . count( msh_cpass_uses( $user_id ) ) . ' used)' );
 	}
