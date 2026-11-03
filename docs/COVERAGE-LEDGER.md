@@ -65,17 +65,17 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 9 | 36.0% | 9 | 14 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 8 | 32.0% | 7 | 15 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 11 | 47.8% | 7 | 15 | STARTED |
-| Physiotherapy and Occupational Therapy | rehab | 22 | 7 | 31.8% | 7 | 13 | STARTED |
+| Physiotherapy and Occupational Therapy | rehab | 22 | 8 | 36.4% | 6 | 13 | STARTED |
 | Hand Hygiene and Associated Products and Services | infection | 21 | 6 | 28.6% | 4 | 16 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 7 | 11 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 6 | 28.6% | 1 | 11 | STARTED · 5 EXCLUDED |
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 9 | 45.0% | 3 | 12 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 9 | 47.4% | 7 | 11 | STARTED |
-| Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 9 | 47.4% | 8 | 9 | STARTED |
+| Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 10 | 52.6% | 7 | 9 | STARTED |
 | Examination Gloves | infection | 19 | 5 | 26.3% | 5 | 13 | STARTED |
-| Central Venous Catheters and Associated Products | vascular | 18 | 8 | 44.4% | 6 | 11 | STARTED |
+| Central Venous Catheters and Associated Products | vascular | 18 | 9 | 50.0% | 5 | 11 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 7 | 38.9% | 2 | 13 | STARTED |
-| Patient Temperature Management | theatres | 18 | 12 | 66.7% | 4 | 12 | STARTED |
+| Patient Temperature Management | theatres | 18 | 13 | 72.2% | 3 | 12 | STARTED |
 | Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 6 | 33.3% | 0 | 11 | STARTED · 2 EXCLUDED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
 | Clinical and Sharps Waste Management | infection | 14 | 4 | 28.6% | 5 | 12 | STARTED |
@@ -143,7 +143,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Reusable Plastic Medical Hollowware | — | 4 | 0 | 0.0% | 2 | 3 | UNMAPPED |
 | Obstetrics and Vinyl Pessaries | — | 3 | 0 | 0.0% | 3 | 0 | UNMAPPED |
 | Fresh Food DPS | — | 97 | 0 | 0.0% | 97 | 0 | OUT OF SCOPE |
-| Cleaning Equipment, Supplies and Associated Products | facilities | 60 | 5 | 8.3% | 44 | 14 | OUT OF SCOPE |
+| Cleaning Equipment, Supplies and Associated Products | facilities | 60 | 6 | 10.0% | 43 | 14 | OUT OF SCOPE |
 | Medical Healthcare Furniture | — | 51 | 0 | 0.0% | 46 | 9 | OUT OF SCOPE |
 | Beverages, Confectionary and Snacks | — | 44 | 0 | 0.0% | 42 | 2 | OUT OF SCOPE |
 | Textiles and Associated Products | workwear | 32 | 2 | 6.2% | 24 | 10 | OUT OF SCOPE |
