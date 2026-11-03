@@ -267,6 +267,12 @@ class PassRules(unittest.TestCase):
         for html in (visitor, referrer, holder, ended, other):
             self.assertNotIn("trial", html.lower())
 
+    def test_users_screen_creates_a_code_for_a_paying_member(self):
+        r = self.run_php(self.REF + [["user", [11, "nhs@home.com", "Nic", 690]], ["meta", [11, "msh_nhs_email", "n@nhs.net"]], ["column", [10]], ["column", [11]], ["code_for", [10]]])
+        self.assertRegex(r[3], r"^HUB-SAM-[A-Z2-9]{4} \(0 used\)$", "a paying member with no code yet gets one when the Users screen lists them")
+        self.assertEqual(r[4], "", "an NHS free-access member is not given a code")
+        self.assertEqual(r[5] + " (0 used)", r[3], "the code shown is the one stored")
+
     def test_page_is_noindex(self):
         self.assertEqual(self.run_php([["robots"]])[0], {"follow": True, "noindex": True})
 
