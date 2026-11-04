@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>uk.co.elevateandthrive.personal-alerts-shadow</string>
+
+    <!-- Weekly shadow scorecard for the personal Monday briefing and phone triggers. Made-up
+         profiles, sends nothing, commits nothing. Monday 06:50; RunAtLoad also fires it at
+         login/wake and the script decides whether a run is due. The script is read from the
+         local mirror's main each run. Source of truth: msh-compare-data ops/launchagents/.
+         No Claude involved. -->
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>-c</string>
+        <string>mkdir -p "$HOME/.claude/state" "$HOME/Library/Logs"; M="$HOME/.claude/msh-mirror/msh-compare-data.git"; git -C "$M" fetch --quiet https://github.com/louisehoult-beep/msh-compare-data.git main:main 2&gt;&gt;"$HOME/Library/Logs/personal-alerts-shadow.log"; git -C "$M" show main:ops/launchagents/personal-alerts-shadow.sh &gt; "$HOME/.claude/state/personal-alerts-shadow.sh" 2&gt;&gt;"$HOME/Library/Logs/personal-alerts-shadow.log" &amp;&amp; /bin/bash "$HOME/.claude/state/personal-alerts-shadow.sh"</string>
+    </array>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Weekday</key><integer>1</integer>
+        <key>Hour</key><integer>6</integer>
+        <key>Minute</key><integer>50</integer>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+</dict>
+</plist>
