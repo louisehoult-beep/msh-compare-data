@@ -1368,12 +1368,13 @@
           });
         }
       }
-      /* Named suppliers before captured ranges (a reseller's "Ethicon Prolene" must not
-         push out Medtronic), and at most three from one supplier while others have a
-         match, so a rep sees J&J, Medtronic and the rest side by side. */
-      var perSup = {}, kept = [], spare = [];
-      out.filter(function(p){ return !p.fromRange; }).concat(out.filter(function(p){ return p.fromRange; })).forEach(function(p){ perSup[p.supplier] = (perSup[p.supplier] || 0) + 1; (perSup[p.supplier] <= 3 ? kept : spare).push(p); });
-      return kept.concat(spare).slice(0, 12);
+      /* Same type first, then named suppliers before captured ranges (a reseller's
+         "Ethicon Prolene" must not push out Medtronic). No per-supplier limit: a
+         supplier with several matching products shows them all (Lou, 04/11/2026). */
+      function band(p){ return (mine.type && p.type === mine.type ? 0 : 2) + (p.fromRange ? 1 : 0); }
+      var ranked = out.map(function(p, i){ return [band(p), i, p]; });
+      ranked.sort(function(a, b){ return a[0] - b[0] || a[1] - b[1]; });
+      return ranked.map(function(x){ return x[2]; }).slice(0, 12);
     }
 
     function thumbImg(d, px){
