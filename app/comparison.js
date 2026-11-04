@@ -849,7 +849,7 @@
       dl2.innerHTML = '';
       var mine = resolveMine();
       var seenO = {};
-      rivalsOf(mine, selSup2.sel.value).slice(0, 500).forEach(function(p){
+      rivalsOf(mine, selSup2.sel.value).forEach(function(p){
         var v = p.name + '  ·  ' + p.supplier;
         if (!seenO[v]){ seenO[v] = 1; var o = el('option'); o.value = v; dl2.appendChild(o); }
       });
@@ -1368,13 +1368,18 @@
           });
         }
       }
-      /* Same type first, then named suppliers before captured ranges (a reseller's
-         "Ethicon Prolene" must not push out Medtronic). No per-supplier limit: a
-         supplier with several matching products shows them all (Lou, 04/11/2026). */
-      function band(p){ return (mine.type && p.type === mine.type ? 0 : 2) + (p.fromRange ? 1 : 0); }
-      var ranked = out.map(function(p, i){ return [band(p), i, p]; });
+      /* EVERY MATCH, NO CAP (Lou, 04/11/2026: "I need all the matches pulling
+         through, that's the whole point"). No per-supplier limit and no length
+         cut. A product with a known type is matched on that type, so when same-
+         type rivals exist only they are returned (MoliCare Bed Mat 5D gets every
+         underpad, not hospital beds that merely share its category). Named
+         suppliers rank before captured ranges, so a reseller's "Ethicon Prolene"
+         cannot push out Medtronic. */
+      if (mine.type && out.some(function(p){ return p.type === mine.type; }))
+        out = out.filter(function(p){ return p.type === mine.type; });
+      var ranked = out.map(function(p, i){ return [p.fromRange ? 1 : 0, i, p]; });
       ranked.sort(function(a, b){ return a[0] - b[0] || a[1] - b[1]; });
-      return ranked.map(function(x){ return x[2]; }).slice(0, 12);
+      return ranked.map(function(x){ return x[2]; });
     }
 
     function thumbImg(d, px){
@@ -2223,9 +2228,9 @@
       // Other tracked products in the same category — a quick way to switch who
       // you're compared against without retyping, kept secondary to the main
       // head-to-head above (the rep asked for ONE clear comparison, not a list).
-      var others = (chosenSupTheirs ? competitorsOf(mine, chosenSupTheirs) : allComps).filter(function(p){ return p !== theirs; }).slice(0, 5);
+      var others = (chosenSupTheirs ? competitorsOf(mine, chosenSupTheirs) : allComps).filter(function(p){ return p !== theirs; });
       if (others.length){
-        h += '<div style="margin:14px 0 0;font-size:12.5px;color:#75808d;">Other tracked products in this category' + (chosenSupTheirs ? ' from ' + esc(chosenSupTheirs) : '') + ': ' + others.map(function(p){ return '<a href="#" class="msh-cmp-other" data-name="' + esc(p.name) + '" data-supplier="' + esc(p.supplier) + '" style="color:' + GOLD + ';font-weight:600;">' + esc(p.name) + ' (' + esc(p.supplier) + ')</a>'; }).join(', ') + ' — click one to compare against that instead.</div>';
+        h += '<div style="margin:14px 0 0;font-size:12.5px;color:#75808d;max-height:260px;overflow-y:auto;">All ' + others.length + ' other tracked match' + (others.length === 1 ? '' : 'es') + (chosenSupTheirs ? ' from ' + esc(chosenSupTheirs) : '') + ': ' + others.map(function(p){ return '<a href="#" class="msh-cmp-other" data-name="' + esc(p.name) + '" data-supplier="' + esc(p.supplier) + '" style="color:' + GOLD + ';font-weight:600;">' + esc(p.name) + ' (' + esc(p.supplier) + ')</a>'; }).join(', ') + ' — click one to compare against that instead.</div>';
       }
 
       // optional angle
