@@ -3242,9 +3242,20 @@ def _div_key(s):
     return s[:-1] if s.endswith("s") else s
 
 
+# 4. CMS PLACEHOLDER PAGES READ AS PRODUCTS. Six supplier sites (Hospital Direct,
+#    Crest Medical, MAG Orthotics, Bailey Instruments, Medicom, Symbios) left a
+#    "Test Product" page live, and Paramount Medical one called "test product with
+#    multiple product codes". Found 04/11/2026 on Hospital Direct's own profile.
+#    Only a name that STARTS with the placeholder wording is dropped. "Sample
+#    Product – <name>" is NOT matched: Medicom lists free-sample offers of real
+#    products that way, and those name a product.
+_PLACEHOLDER_NAME_RE = re.compile(r"^(test|dummy|demo)[ _-]+product\b|^sample product$", re.I)
+
+
 def is_junk_product_name(n):
     t = str(n or "").strip()
-    return t.endswith("?") or t.lower().strip(" !.") in _CONFIRMATION_PAGE_NAMES
+    return (t.endswith("?") or t.lower().strip(" !.") in _CONFIRMATION_PAGE_NAMES
+            or bool(_PLACEHOLDER_NAME_RE.match(t)))
 
 
 def tidy_capture(shaped):
@@ -3255,7 +3266,7 @@ def tidy_capture(shaped):
     notes = []
     kept = [p for p in rows if not is_junk_product_name(p.get("n"))]
     if len(kept) != len(rows):
-        notes.append("%d FAQ question or form-confirmation page(s) dropped" % (len(rows) - len(kept)))
+        notes.append("%d FAQ question, form-confirmation or placeholder page(s) dropped" % (len(rows) - len(kept)))
     self_div = 0
     for p in kept:
         d = p.get("division") or "Uncategorised"
