@@ -367,6 +367,12 @@ function msh_cpass_fill_billing() {
 	$first = isset( $_POST['first_name'] ) ? sanitize_text_field( wp_unslash( $_POST['first_name'] ) ) : '';
 	$last  = isset( $_POST['last_name'] ) ? sanitize_text_field( wp_unslash( $_POST['last_name'] ) ) : '';
 	$email = isset( $_POST['user_email'] ) ? sanitize_email( wp_unslash( $_POST['user_email'] ) ) : '';
+	/* Username is the email address (Lou, 04/11/2026), so a pass holder logs in
+	   with the one thing they know. The page's script copies it in as they type;
+	   this keeps it right if the script did not run. */
+	if ( $email !== '' ) {
+		$_POST['user_login'] = $email;
+	}
 	$fill  = array(
 		'pms_billing_first_name' => $first !== '' ? $first : 'Colleague',
 		'pms_billing_last_name'  => $last !== '' ? $last : 'Day Pass',
@@ -782,6 +788,19 @@ body .wp-site-blocks .msh-cpass-meta{font-size:15px!important;color:#26364B!impo
 	try {
 		if (first && first.parentNode) { first.parentNode.insertBefore(li, first); } else if (list) { list.appendChild(li); } else { form.insertBefore(li, form.firstChild); }
 	} catch (e) { form.insertBefore(li, form.firstChild); }
+	/* Username = email address (Lou, 04/11/2026): hide the username field and copy the email into it. */
+	var login = form.querySelector('input[name="user_login"]');
+	var mail = form.querySelector('input[name="user_email"]');
+	if (login && mail) {
+		var row = login.closest('li') || login.parentNode;
+		if (row) { row.style.display = 'none'; }
+		login.removeAttribute('required');
+		var sync = function(){ login.value = mail.value.trim(); };
+		mail.addEventListener('input', sync);
+		mail.addEventListener('change', sync);
+		form.addEventListener('submit', sync);
+		sync();
+	}
 	var code = li.querySelector('#msh-cpass-code-input');
 	code.addEventListener('input', function(){ code.value = code.value.toUpperCase().replace(/[^A-Z0-9-]/g, ''); });
 })();
