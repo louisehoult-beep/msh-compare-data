@@ -61,6 +61,13 @@ app with the reviewer email, then in Supabase SQL:
     select id, now() + interval '60 days' from auth.users where email = 'review@elevateandthrive.uk'
     on conflict (user_id) do update set store_expires_at = excluded.store_expires_at;
 
+**The account must be confirmed as well as having a password** (`email_confirmed_at` set in
+`auth.users`, or tick Auto Confirm when creating it). "Confirm email" is on for this project, and an
+unconfirmed account fails password sign-in whatever password is used: this is what caused the Google
+rejections of 23/10 and 27/10/2026. `scripts/reviewer_account_check.py` checks all of this every day
+(workflow "Reviewer account check"). Its "Delete account" keeps the login, so a reviewer testing that
+button cannot lock out the next review.
+
 A reviewer cannot read email codes, so give the account a password
 (Supabase > Authentication > Users > the user > Reset password, or create the
 user there with a password) and put the email and password in the review

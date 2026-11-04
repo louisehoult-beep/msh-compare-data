@@ -21,8 +21,7 @@ import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { Purchases } from '@revenuecat/purchases-capacitor';
 import { CONFIG } from './config.js';
 import {
-  deskTheme, filterFeed, itemsFromNotification, topStories, newCount, passFromLink, safeUrl, shortDate, stamp, filterCareers, rankCareers,
-} from './logic.js';
+  deskTheme, filterFeed, itemsFromNotification, topStories, newCount, passFromLink, safeUrl, shortDate, stamp, filterCareers, rankCareers, passwordErrorNote } from './logic.js';
 
 const NATIVE = Capacitor.isNativePlatform();
 const PLATFORM = Capacitor.getPlatform(); // 'ios' | 'android' | 'web'
@@ -577,7 +576,7 @@ $app.addEventListener('click', async (e) => {
       setBusy('Signing in...');
       const { data, error } = await sb.auth.signInWithPassword({ email, password });
       S.busy = '';
-      if (error || !data.user) { S.note = 'That email and password did not match.'; render(); return; }
+      if (error || !data.user) { S.note = passwordErrorNote(error); render(); return; }
       S.note = ''; await afterSignIn(data.user); return;
     }
     case 'hub': connectHub(); return;

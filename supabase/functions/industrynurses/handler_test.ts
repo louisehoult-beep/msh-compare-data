@@ -152,3 +152,14 @@ Deno.test("only admins add jobs, resources and events; jobs need the employer's 
   assertEquals((await a.call("POST", `/api/jobs/${id}/click`)).body.url, job.source_url);
   assertEquals((await admin.call("GET", "/api/admin/stats")).body.job_clicks, 1);
 });
+
+Deno.test("the App Review demo account survives Delete account; anyone else is removed", async () => {
+  const { db, join, deleted, approveAll } = await boot();
+  const reviewer = await join("review@elevateandthrive.uk"), other = await join("other@example.com");
+  await approveAll();
+  assertEquals((await reviewer.call("DELETE", "/api/me")).status, 200);
+  assertEquals(deleted, []);
+  assertEquals((await db.query("select 1 from ain_members where id = $1", [reviewer.id])).rows.length, 1);
+  assertEquals((await other.call("DELETE", "/api/me")).status, 200);
+  assertEquals(deleted, [other.id]);
+});

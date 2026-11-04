@@ -26,7 +26,7 @@
 // SUPABASE_SERVICE_ROLE_KEY and SUPABASE_ANON_KEY (injected by Supabase).
 
 import { verifyPass } from "../ask-the-hub/pass.ts";
-import { PASS_GRACE, readDevice, status } from "./rules.ts";
+import { isReviewerAccount, PASS_GRACE, readDevice, status } from "./rules.ts";
 
 // Capacitor serves the app from these origins (iOS, Android).
 const ORIGINS = ["capacitor://localhost", "https://localhost", "http://localhost"];
@@ -142,6 +142,15 @@ Deno.serve(async (req) => {
       }
 
       case "delete-account": {
+        // The App Review demo account keeps its login: see isReviewerAccount in rules.ts.
+        const who = await fetch(BASE + "/auth/v1/admin/users/" + uid, {
+          headers: { apikey: KEY, Authorization: "Bearer " + KEY },
+        });
+        if (!who.ok) throw new Error("read user " + who.status);
+        if (isReviewerAccount((await who.json())?.email)) {
+          await rest("DELETE", `livedesk_devices?user_id=eq.${uid}`, undefined, "return=minimal");
+          return reply(origin, 200, { ok: true, deleted: true });
+        }
         // Deleting the auth user cascades to livedesk_access and livedesk_devices.
         const r = await fetch(BASE + "/auth/v1/admin/users/" + uid, {
           method: "DELETE", headers: { apikey: KEY, Authorization: "Bearer " + KEY },

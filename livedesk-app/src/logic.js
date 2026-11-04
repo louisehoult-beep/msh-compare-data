@@ -117,3 +117,15 @@ export function rankCareers(roles, regions) {
   const named = (r) => (r.regions || []).some((x) => regions.includes(x));
   return [...roles.filter(named), ...roles.filter((r) => !named(r))];
 }
+
+// What to show when password sign-in fails. Everything used to read "did not match",
+// which hid an unconfirmed reviewer account behind what looked like a wrong password
+// through two store rejections (04/11/2026). Only wrong credentials say that now.
+export function passwordErrorNote(error) {
+  const code = String(error?.code || '');
+  const msg = String(error?.message || '').toLowerCase();
+  if (code === 'email_not_confirmed' || msg.includes('not confirmed')) return 'This account has not been confirmed yet. Use the email code instead, or contact support.';
+  if (code === 'over_request_rate_limit' || error?.status === 429) return 'Too many attempts. Wait a few minutes and try again.';
+  if (code === 'invalid_credentials' || msg.includes('invalid login')) return 'That email and password did not match.';
+  return 'Could not sign in just now. Check your connection and try again.';
+}

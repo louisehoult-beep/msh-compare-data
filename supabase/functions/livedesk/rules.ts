@@ -89,3 +89,11 @@ export function fromRevenueCat(ev: Record<string, unknown>):
     store_platform: typeof ev.store === "string" ? ev.store : null,
   };
 }
+
+// The App Review demo account (livedesk-app/README.md). Reviewers are expected to try
+// "Delete account"; deleting this login makes every later review fail with a sign-in
+// error, so the action clears its devices and keeps the login. Added 04/11/2026.
+export const REVIEWER_EMAIL = "review@elevateandthrive.uk";
+export function isReviewerAccount(email: unknown): boolean {
+  return typeof email === "string" && email.trim().toLowerCase() === REVIEWER_EMAIL;
+}

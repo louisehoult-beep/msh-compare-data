@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { filterCareers, rankCareers, deskTheme, filterFeed, topStories, itemsFromNotification, newCount, passFromLink, safeUrl, shortDate, stamp } from '../src/logic.js';
+import { filterCareers, rankCareers, deskTheme, filterFeed, topStories, itemsFromNotification, newCount, passFromLink, passwordErrorNote, safeUrl, shortDate, stamp } from '../src/logic.js';
 
 const FEED = { panels: [
   { key: 'MHRA ALERTS', rows: [
@@ -70,4 +70,11 @@ test('careers: speciality filter never hides a role with no mapped speciality', 
   assert.deepEqual(filterCareers(CAREERS, [], ['ophthalmology']).map((r) => r.title), ['A', 'B']);
   assert.deepEqual(filterCareers(CAREERS, ['scotland'], ['ophthalmology']).map((r) => r.title), ['A']);
   assert.equal(filterCareers(null, [], []).length, 0);
+});
+
+test('password sign-in errors say what actually went wrong', () => {
+  assert.equal(passwordErrorNote({ code: 'invalid_credentials', message: 'Invalid login credentials' }), 'That email and password did not match.');
+  assert.match(passwordErrorNote({ code: 'email_not_confirmed', message: 'Email not confirmed' }), /not been confirmed/);
+  assert.match(passwordErrorNote({ status: 429 }), /Too many/);
+  assert.match(passwordErrorNote({ message: 'Failed to fetch' }), /connection/);
 });

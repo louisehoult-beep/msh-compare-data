@@ -116,6 +116,9 @@ export function createHandler({ query, auth, adminEmails = [] }: Deps) {
       // Member can delete their own account and data (UK GDPR erasure, App Store rule 5.1.1(v)).
       if (route("DELETE", /^\/api\/me$/)) {
         const u = needAuth();
+        // The App Review demo account keeps its login and membership: reviewers are
+        // expected to try this, and losing the account fails every later review (04/11/2026).
+        if (String(u.email || "").trim().toLowerCase() === "review@elevateandthrive.uk") return send(200, ok);
         await query("UPDATE ain_posts SET body = '[deleted]', hidden = true WHERE member_id = $1", [u.id]);
         await query("DELETE FROM ain_members WHERE id = $1", [u.id]); // cascades notifications, saves, clicks, reports, blocks; posts keep a null author
         // Another app (Live Desk) may use the same sign-in: only remove the auth user when nothing else needs it.

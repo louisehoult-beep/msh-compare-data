@@ -15,7 +15,12 @@ const store = {
 async function authCall(path: string, body: unknown): Promise<any> {
   const r = await fetch(`${AUTH_BASE}/auth/v1${path}`, { method: 'POST', headers: { apikey: AUTH_KEY, 'content-type': 'application/json' }, body: JSON.stringify(body) });
   const data = await r.json().catch(() => ({}));
-  if (!r.ok || !data.access_token) throw new ApiError('That code or password did not work, or it has expired. Request a new one.');
+  if (!r.ok || !data.access_token) {
+    // Say what went wrong: a blanket message hid an unconfirmed reviewer account (04/11/2026).
+    if (data.error_code === 'email_not_confirmed') throw new ApiError('This account has not been confirmed yet. Use the email code instead, or contact support.');
+    if (r.status === 429) throw new ApiError('Too many attempts. Wait a few minutes and try again.');
+    throw new ApiError('That code or password did not work, or it has expired. Request a new one.');
+  }
   store.set({ access_token: data.access_token, refresh_token: data.refresh_token });
   return data;
 }

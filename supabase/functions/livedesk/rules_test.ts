@@ -1,6 +1,6 @@
 // deno test --allow-read supabase/functions/livedesk/rules_test.ts
 import { assertEquals } from "jsr:@std/assert@1";
-import { fromRevenueCat, HUB_LINK_DAYS, readDevice, status } from "./rules.ts";
+import { fromRevenueCat, HUB_LINK_DAYS, isReviewerAccount, readDevice, status } from "./rules.ts";
 
 const NOW = Date.parse("2026-10-01T09:00:00Z");
 const day = 86400_000;
@@ -45,4 +45,11 @@ Deno.test("device keeps areas and role-alert choice, refuses bad areas", () => {
   assertEquals(readDevice({ token: tok, platform: "ios", regions: ["Bad Area"] }), "regions");
   const off = readDevice({ token: tok, platform: "android" });
   assertEquals(typeof off === "string" ? off : [off.regions, off.role_alerts], [[], false]);
+});
+
+Deno.test("only the App Review demo account is protected from delete-account", () => {
+  assertEquals(isReviewerAccount("review@elevateandthrive.uk"), true);
+  assertEquals(isReviewerAccount(" Review@ElevateAndThrive.uk "), true);
+  assertEquals(isReviewerAccount("someone@example.com"), false);
+  assertEquals(isReviewerAccount(undefined), false);
 });
