@@ -536,6 +536,43 @@
         });
       });
     })();
+    /* A SUPPLIER'S SPECIALITIES ARE NOT EVERY PRODUCT'S (04/11/2026, Meril). Every
+       product inherits all its supplier's specialities, so a supplier spanning
+       five of them listed coronary stents and hip stems under Wound care. Where a
+       captured range gives the company's own divisions, those decide it: a name
+       rule first (first match wins), then the division. A division mapped to []
+       shows only when no speciality is picked. These products are placed by hand,
+       so the type list in SPECMAP does not narrow them again (specsStated). */
+    var T_S = 'Theatres / surgical', MIS = 'Minimally invasive surgery', WC = 'Wound care', ORTHO = 'Orthopaedics and trauma', CARD = 'Cardiology';
+    var PRODUCT_SPECS = {
+      'Meril UK Pvt Ltd': {
+        names: [
+          [/intrauterine|\bmerite cu\b|^erinna$|^fiona$/i, []],
+          [/cuvis/i, [ORTHO, T_S]],
+          [/suture anchor/i, [ORTHO]],
+          [/casting|pop bandage|pbt bandage|stockinette|cast padding/i, [ORTHO, T_S]],
+          [/iv dressing|tracheal/i, [T_S]],
+          [/suture|ligature|skin adhesive|skin staple/i, [T_S, MIS, WC]],
+          [/bandage|dressing|\btape\b|gauze|lap sponge/i, [T_S, WC]]
+        ],
+        divisions: {
+          'Endo Surgery': [T_S, MIS], 'Surgical Robots': [T_S, MIS], '360 Infection Prevention Solution': [T_S],
+          'Orthopedics': [ORTHO], 'Sports Medicine': [ORTHO],
+          'Vascular Intervention': [CARD], 'Peripheral Vascular Intervention': [CARD], 'Cardiac Surgery': [CARD],
+          'Neurovascular': [], 'Ent': [], 'Diagnostics': [], 'Urology': []
+        }
+      }
+    };
+    Object.keys(PRODUCT_SPECS).forEach(function(sup){
+      var rule = PRODUCT_SPECS[sup], divOf = {};
+      ((RANGE[sup] || {}).products || []).forEach(function(p){ if (p && p.n) divOf[nk(p.n)] = p.division || ''; });
+      PRODUCTS.forEach(function(p){
+        if (p.supplier !== sup) return;
+        var hit = rule.names.filter(function(r){ return r[0].test(p.name); })[0];
+        var specs = hit ? hit[1] : rule.divisions[p.division || divOf[nk(p.name)]];
+        if (specs){ p.specs = specs; p.specsStated = true; }
+      });
+    });
     /* The longest product-type word a catalogue description OPENS with. */
     function leadType(desc){
       var d = String(desc || '').toLowerCase().replace(/^\s+/, ''), best = '';
@@ -761,7 +798,7 @@
         if (sup && p.supplier !== sup) return;
         if (!inSpec(p, spec)) return;
         if (!p.type) return;
-        if (allowed && allowed.indexOf(p.type) === -1) return;
+        if (allowed && !p.specsStated && allowed.indexOf(p.type) === -1) return;
         if (spec && specExcludes(spec.toLowerCase(), p)) return;
         if (!seenT[p.type]){ seenT[p.type] = 1; out.push(p.type); }
       });
@@ -774,7 +811,7 @@
         if (sup && p.supplier !== sup) return false;
         if (!inSpec(p, spec)) return false;
         if (typ && p.type !== typ) return false;
-        if (allowed && p.type && allowed.indexOf(p.type) === -1) return false;
+        if (allowed && !p.specsStated && p.type && allowed.indexOf(p.type) === -1) return false;
         if (spec && specExcludes(spec.toLowerCase(), p)) return false;
         return true;
       });
