@@ -45,9 +45,18 @@ name: ICC product matrices and CCF reference (monthly)
 #    the page, update KNOWN_HOSTS and EXPECTED_HOST_COUNT in the script, and
 #    re-run. Do not reach for --allow-count-change to make the job go green.
 #
+#    ⚠️ CHANGED 04/11/2026: THE CCF REFRESH NOW RUNS FROM THE MAC, NOT HERE.
+#    england.nhs.uk answered this runner with an empty HTTP 202 on every attempt
+#    from 03/10/2026 (three tries each, 20s and 40s apart), and the same page reads
+#    normally from Lou's Mac. Same family as icb-watch.yml. The overnight
+#    orchestrator job `ccf-reference-refresh` (monthly, 2nd) runs
+#    scripts/refresh_ccf_reference.py and lands the file. This workflow only checks
+#    the committed file is not stale and goes red, naming the file, if it is.
+#
 # ⚠️ NEEDS NO SECRET. Both sources are public.
-# ⚠️ NOTHING ELSE MAY WRITE data/icc-catalogue.json, data/icc-matrices.json or
-#    data/ccf-reference.json. This is their only writer.
+# ⚠️ NOTHING ELSE MAY WRITE data/icc-catalogue.json or data/icc-matrices.json.
+#    This is their only writer. data/ccf-reference.json has one writer too: the
+#    Mac job `ccf-reference-refresh`.
 
 on:
   schedule:
@@ -94,18 +103,6 @@ jobs:
           ICC_LIBRARY: ${{ runner.temp }}/icc-library
         run: python3 test_icc_matrix.py
 
-      # The CCF host list comes from england.nhs.uk, which can answer a runner
-      # with an empty HTTP 202. That must not stop the ICC matrices (already
-      # parsed and gated above) from being committed, and it must not be quietly
-      # ignored either: the step is allowed to fail here, the data is committed,
-      # and the final step turns the job red with the reason. The committed
-      # ccf-reference.json is left as it was when the fetch fails ("Nothing
-      # written").
-      - name: Refresh the CCF accredited framework host list
-        id: ccf
-        continue-on-error: true
-        run: python3 scripts/refresh_ccf_reference.py
-
       - name: Re-stamp the ownership notice and data markers
         run: python3 scripts/stamp_notice.py
 
@@ -120,8 +117,8 @@ jobs:
         run: |
           git config user.name "icc-ccf-bot"
           git config user.email "actions@github.com"
-          git add data/icc-catalogue.json data/icc-matrices.json data/ccf-reference.json
-          git diff --cached --quiet || git commit -m "ICC matrices and CCF reference $(date -u +%F)"
+          git add data/icc-catalogue.json data/icc-matrices.json
+          git diff --cached --quiet || git commit -m "ICC matrices $(date -u +%F)"
           pushed=0
           for attempt in 1 2 3; do
             if git push; then
@@ -133,11 +130,10 @@ jobs:
             git fetch origin
             git reset --hard origin/main
             ICC_LIBRARY="${{ runner.temp }}/icc-library" python3 scripts/refresh_icc.py
-            python3 scripts/refresh_ccf_reference.py || echo "CCF refresh failed on retry; keeping the committed file (the final step reports it)"
             python3 scripts/stamp_notice.py
             bash scripts/gate.sh || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
-            git add data/icc-catalogue.json data/icc-matrices.json data/ccf-reference.json
-            git diff --cached --quiet || git commit -m "ICC matrices and CCF reference $(date -u +%F) (retry)"
+            git add data/icc-catalogue.json data/icc-matrices.json
+            git diff --cached --quiet || git commit -m "ICC matrices $(date -u +%F) (retry)"
             sleep 5
           done
           if [ "$pushed" -ne 1 ]; then
@@ -145,8 +141,16 @@ jobs:
             exit 1
           fi
 
-      - name: Fail loudly if the CCF reference could not be refreshed
-        if: steps.ccf.outcome == 'failure'
+      # The Mac job refreshes monthly, so anything over 45 days means it has missed
+      # a run. Stale data is what this step exists to report, so it stays red.
+      - name: Fail loudly if data/ccf-reference.json is stale
         run: |
-          echo "::error::CCF reference refresh failed (see that step). ICC data was committed; data/ccf-reference.json is unchanged and is stale until this passes."
-          exit 1
+          python3 - <<'PY'
+          import datetime as dt, json, sys
+          g = json.load(open("data/ccf-reference.json"))["generated"]
+          age = (dt.datetime.now(dt.timezone.utc) - dt.datetime.fromisoformat(g)).days
+          print("data/ccf-reference.json generated %s, %d days ago" % (g, age))
+          if age > 45:
+              print("::error::data/ccf-reference.json is %d days old. The Mac job ccf-reference-refresh (overnight orchestrator, monthly on the 2nd) has not landed a refresh." % age)
+              sys.exit(1)
+          PY
