@@ -24,6 +24,11 @@
    Never call this a trial. The one-week trial (plan 954) was withdrawn on
    23/09/2026. This is one day, by a member's invitation only.
 
+   CAPTURE (Lou, 04/11/2026): every redeemed pass is added to the MailerLite
+   group MSH_CPASS_ML_GROUP for follow-up, and Lou's notification email
+   carries the lines for the CRM. A MailerLite failure never blocks the pass;
+   the email says NOT ADDED so it can be added by hand.
+
    Process: 02-Elevate-and-Thrive/Process flows for all brands/hub-colleague-day-pass.md */
 
 if ( ! defined( 'MSH_CPASS_PLAN_ID' ) ) {
@@ -43,6 +48,20 @@ if ( ! defined( 'MSH_CPASS_JOIN_URL' ) ) {
 }
 if ( ! defined( 'MSH_CPASS_FROM' ) ) {
 	define( 'MSH_CPASS_FROM', 'louisehoult@elevateandthrive.uk' );
+}
+/* Lou's own code, fixed so it can go in an email before she has opened the
+   page (Lou, 04/11/2026). It resolves to the administrator whose email is
+   MSH_CPASS_FROM, or else the first administrator. Admin codes have no cap. */
+if ( ! defined( 'MSH_CPASS_ADMIN_CODE' ) ) {
+	define( 'MSH_CPASS_ADMIN_CODE', 'HUB-LOUISE-TEGU' );
+}
+/* Every redeemed pass goes into this MailerLite group for follow-up
+   (Lou, 04/11/2026: "capture the email for CRM and follow up in MailerLite").
+   Group "Hub - Colleague Day Pass (auto from WordPress)", made 04/11/2026.
+   Uses the key the MailerLite WooCommerce plugin already holds, as the
+   Medical Sales Register snippet does. No key is stored here. */
+if ( ! defined( 'MSH_CPASS_ML_GROUP' ) ) {
+	define( 'MSH_CPASS_ML_GROUP', '203233407060149528' );
 }
 /* Plans whose active members may hold a code. 690 annual, 691 monthly, 692 programme member, 694 Clinical Interview Playbook. */
 if ( ! defined( 'MSH_CPASS_REFERRER_PLANS' ) ) {
@@ -174,12 +193,31 @@ function msh_cpass_find_user_by_code( $code ) {
 		'number'     => 1,
 		'fields'     => 'ID',
 	) );
-	return $users ? (int) $users[0] : 0;
+	if ( $users ) {
+		return (int) $users[0];
+	}
+	if ( MSH_CPASS_ADMIN_CODE && $code === MSH_CPASS_ADMIN_CODE ) {
+		return msh_cpass_admin_user_id();
+	}
+	return 0;
+}
+
+/** The administrator who owns MSH_CPASS_ADMIN_CODE: the one whose email is MSH_CPASS_FROM, else the first administrator. */
+function msh_cpass_admin_user_id() {
+	$u = function_exists( 'get_user_by' ) ? get_user_by( 'email', MSH_CPASS_FROM ) : false;
+	if ( $u && msh_cpass_is_admin_referrer( $u->ID ) ) {
+		return (int) $u->ID;
+	}
+	$admins = get_users( array( 'role' => 'administrator', 'number' => 1, 'orderby' => 'ID', 'order' => 'ASC', 'fields' => 'ID' ) );
+	return $admins ? (int) $admins[0] : 0;
 }
 
 /** The member's code, made on first request. A code is never changed once given. */
 function msh_cpass_code_for( $user_id ) {
 	$user_id = (int) $user_id;
+	if ( MSH_CPASS_ADMIN_CODE && $user_id && $user_id === msh_cpass_admin_user_id() ) {
+		return MSH_CPASS_ADMIN_CODE;
+	}
 	$code    = get_user_meta( $user_id, 'msh_cpass_code', true );
 	if ( $code ) {
 		return $code;
@@ -425,6 +463,8 @@ function msh_cpass_after_create_user( $user_data ) {
 		. "Louise Hoult\nElevate & Thrive\n"
 	);
 
+	$ml = msh_cpass_to_mailerlite( $req['email'], $user, $req['code'], $ref_name, $expires );
+
 	msh_cpass_mail(
 		MSH_CPASS_FROM,
 		'Colleague day pass used: ' . ( $user ? $user->display_name : $req['email'] ),
@@ -433,7 +473,50 @@ function msh_cpass_after_create_user( $user_data ) {
 		. "Referred by: $ref_name (code " . $req['code'] . ", " . msh_cpass_uses_this_month( $req['referrer'] ) . " of " . MSH_CPASS_USES_PER_MONTH . " this month)\n"
 		. "Access until: $expires\n\n"
 		. "Users list: " . admin_url( 'users.php?s=' . rawurlencode( $req['email'] ) ) . "\n"
+		. "MailerLite: " . $ml . "\n\n"
+		. "FOR THE CRM (add or update this contact, source Colleague Day Pass):\n"
+		. "Name: " . ( $user ? trim( $user->first_name . ' ' . $user->last_name ) : '' ) . "\n"
+		. "Email: " . $req['email'] . "\n"
+		. "Email domain: " . substr( strrchr( $req['email'], '@' ), 1 ) . "\n"
+		. "Source: Colleague Day Pass, code " . $req['code'] . ", referred by $ref_name\n"
+		. "Pass granted: " . wp_date( 'Y-m-d', $now ) . ", ends $expires\n"
+		. "Next step: follow up the day after the pass ends\n"
 	);
+}
+
+/** Add the pass holder to the Colleague Day Pass group in MailerLite. Returns a short
+    status line for Lou's email. Never blocks the registration: a failure is reported, not thrown. */
+function msh_cpass_to_mailerlite( $email, $user, $code, $ref_name, $expires ) {
+	if ( ! MSH_CPASS_ML_GROUP ) {
+		return 'not sent (no group set)';
+	}
+	$key = defined( 'MSH_ML_API_KEY' ) && MSH_ML_API_KEY ? MSH_ML_API_KEY : '';
+	if ( ! $key ) {
+		$o   = get_option( 'woo_mailerlite_options', array() );
+		$key = ( is_array( $o ) && ! empty( $o['apiKey'] ) ) ? $o['apiKey'] : '';
+	}
+	if ( ! $key ) {
+		return 'NOT ADDED: no MailerLite key on this site. Add them by hand.';
+	}
+	$payload = array(
+		'email'  => $email,
+		'fields' => array(
+			'name'          => $user ? $user->first_name : '',
+			'last_name'     => $user ? $user->last_name : '',
+			'signup_source' => 'Colleague Day Pass ' . $code . ' from ' . $ref_name . ', ends ' . substr( $expires, 0, 10 ),
+		),
+		'groups' => array( (string) MSH_CPASS_ML_GROUP ),
+	);
+	$r = wp_remote_post( 'https://connect.mailerlite.com/api/subscribers', array(
+		'timeout' => 15,
+		'headers' => array( 'Authorization' => 'Bearer ' . $key, 'Content-Type' => 'application/json', 'Accept' => 'application/json' ),
+		'body'    => wp_json_encode( $payload ),
+	) );
+	if ( is_wp_error( $r ) ) {
+		return 'NOT ADDED: ' . $r->get_error_message() . '. Add them by hand.';
+	}
+	$http = (int) wp_remote_retrieve_response_code( $r );
+	return ( $http === 200 || $http === 201 ) ? 'added to the Colleague Day Pass group' : 'NOT ADDED: MailerLite answered HTTP ' . $http . '. Add them by hand.';
 }
 
 /** Deleting a pass holder's account (wp-admin, Users) frees their address and gives the referrer the use back. */

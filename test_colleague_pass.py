@@ -43,7 +43,12 @@ function wp_date($f, $ts = null) { return date($f, $ts === null ? $GLOBALS['now'
 function get_user_meta($id, $k, $single = true) { return isset($GLOBALS['meta'][$id][$k]) ? $GLOBALS['meta'][$id][$k] : ''; }
 function update_user_meta($id, $k, $v) { $GLOBALS['meta'][$id][$k] = $v; return true; }
 function get_userdata($id) { return isset($GLOBALS['users'][$id]) ? (object) $GLOBALS['users'][$id] : false; }
-function get_users($args) { $out = array(); foreach ($GLOBALS['meta'] as $id => $m) { if (isset($m[$args['meta_key']]) && $m[$args['meta_key']] === $args['meta_value']) { $out[] = $id; } } return $out; }
+function get_users($args) { $out = array(); if (isset($args['role'])) { foreach ($GLOBALS['users'] as $id => $u) { if (!empty($u['admin'])) { $out[] = $id; } } sort($out); return $out; } foreach ($GLOBALS['meta'] as $id => $m) { if (isset($m[$args['meta_key']]) && $m[$args['meta_key']] === $args['meta_value']) { $out[] = $id; } } return $out; }
+function get_user_by($f, $v) { foreach ($GLOBALS['users'] as $id => $u) { if (strtolower($u['user_email']) === strtolower($v)) { return (object) $u; } } return false; }
+function wp_json_encode($v) { return json_encode($v); }
+function wp_remote_post($url, $args) { $GLOBALS['posted'][] = array('url' => $url, 'body' => json_decode($args['body'], true)); return array('code' => isset($GLOBALS['ml_http']) ? $GLOBALS['ml_http'] : 201); }
+function is_wp_error($r) { return false; }
+function wp_remote_retrieve_response_code($r) { return $r['code']; }
 function email_exists($e) { foreach ($GLOBALS['users'] as $id => $u) { if (strtolower($u['user_email']) === strtolower($e)) { return $id; } } return false; }
 function get_option($k, $d = false) { return isset($GLOBALS['opts'][$k]) ? $GLOBALS['opts'][$k] : $d; }
 function update_option($k, $v) { $GLOBALS['opts'][$k] = $v; return true; }
@@ -97,6 +102,8 @@ foreach ($cases as $c) {
   elseif ($fn === 'column') { $out[] = msh_cpass_user_column_value('', 'msh_cpass', $a[0]); }
   elseif ($fn === 'billing') { msh_cpass_fill_billing(); $out[] = array_intersect_key($_POST, array_flip(array('pms_billing_first_name','pms_billing_last_name','pms_billing_email','pms_billing_address','pms_billing_city','pms_billing_country'))); }
   elseif ($fn === 'robots') { $out[] = msh_cpass_robots(array('index' => true, 'follow' => true)); }
+  elseif ($fn === 'mlkey') { $GLOBALS['opts']['woo_mailerlite_options'] = array('apiKey' => 'k'); $out[] = true; }
+  elseif ($fn === 'posted') { $out[] = isset($GLOBALS['posted']) ? $GLOBALS['posted'] : array(); }
   elseif ($fn === 'admin') { $GLOBALS['users'][$a[0]]['admin'] = true; $out[] = true; }
   elseif ($fn === 'delete') { msh_cpass_on_delete_user($a[0]); $out[] = array('redeemed' => get_option('msh_cpass_redeemed'), 'uses' => msh_cpass_uses($a[1])); }
 }
@@ -159,6 +166,35 @@ class PassRules(unittest.TestCase):
         out = self.run_php([["user", [1, "lou@x.com", "Louise", 0]], ["admin", [1]], ["meta", [1, "msh_cpass_code", "HUB-LOUISE-ABCD"]], ["meta", [1, "msh_cpass_uses", uses]],
                             ["eligible", [1]], ["check", ["HUB-LOUISE-ABCD", "new@acme.com"]], ["login", [1]], ["shortcode"]])
         self.assertTrue(out[4]); self.assertTrue(out[5]["ok"]); self.assertIn("No monthly limit", out[7])
+
+    def test_lou_has_a_fixed_code_that_works_before_she_opens_the_page(self):
+        out = self.run_php([["user", [1, "louisehoult@elevateandthrive.uk", "Louise", 0]], ["admin", [1]],
+                            ["code_for", [1]], ["check", ["HUB-LOUISE-TEGU", "bruce@acme.com"]], ["user", [2, "sam@x.com", "Sam", 690]], ["code_for", [2]]])
+        self.assertEqual(out[2], "HUB-LOUISE-TEGU")
+        self.assertTrue(out[3]["ok"])
+        self.assertNotEqual(out[5], "HUB-LOUISE-TEGU")
+
+    def test_every_pass_goes_to_mailerlite_and_lou_gets_the_crm_lines(self):
+        post = {"msh_cpass_choice": "1", "msh_cpass_code": "HUB-SAM-ABCD", "user_email": "new@acme.com", "subscription_plans": "690"}
+        out = self.run_php(self.REF + [["meta", [10, "msh_cpass_code", "HUB-SAM-ABCD"]], ["mlkey"], ["post", [post]], ["validate"],
+                                       ["create", [30, "new@acme.com", "New"]], ["posted"]])
+        sent = out[-1]
+        self.assertEqual(len(sent), 1)
+        self.assertEqual(sent[0]["body"]["email"], "new@acme.com")
+        self.assertEqual(sent[0]["body"]["groups"], ["203233407060149528"])
+        self.assertIn("HUB-SAM-ABCD", sent[0]["body"]["fields"]["signup_source"])
+        lou = [m for m in out[-2]["mail"] if m["to"] == "louisehoult@elevateandthrive.uk"][0]["body"]
+        self.assertIn("added to the Colleague Day Pass group", lou)
+        self.assertIn("FOR THE CRM", lou)
+        self.assertIn("Email: new@acme.com", lou)
+
+    def test_no_mailerlite_key_never_blocks_the_pass_and_says_so(self):
+        post = {"msh_cpass_choice": "1", "msh_cpass_code": "HUB-SAM-ABCD", "user_email": "new@acme.com", "subscription_plans": "690"}
+        out = self.run_php(self.REF + [["meta", [10, "msh_cpass_code", "HUB-SAM-ABCD"]], ["post", [post]], ["validate"], ["create", [30, "new@acme.com", "New"]]])
+        made = out[-1]
+        self.assertTrue(made["meta"].get("msh_cpass_expires"))
+        lou = [m for m in made["mail"] if m["to"] == "louisehoult@elevateandthrive.uk"][0]["body"]
+        self.assertIn("NOT ADDED", lou)
 
     def test_deleting_a_pass_holder_frees_the_address(self):
         post = {"msh_cpass_choice": "1", "msh_cpass_code": "HUB-SAM-ABCD", "user_email": "new@acme.com", "subscription_plans": "690"}
