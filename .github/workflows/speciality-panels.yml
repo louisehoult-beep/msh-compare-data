@@ -52,7 +52,9 @@ permissions:
 jobs:
   rebuild:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # 20 -> 45 on 04/11/2026: 7 of the last 10 runs were cancelled at the limit, one
+    # during "Commit and push", because verify.py now takes 5+ minutes a pass.
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v5
         with:
