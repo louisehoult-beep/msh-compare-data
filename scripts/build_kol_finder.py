@@ -50,6 +50,7 @@ USAGE
 """
 import json
 import pathlib
+import datetime
 import re
 import sys
 import urllib.parse
@@ -356,17 +357,77 @@ NOTES = {
 
 EMPTY = {
     "evidence": "No evidence authors are listed beyond people a source page names as an author or guideline chair. No publication list was read for this build, so none is claimed.",
-    "supply": "NHS Supply Chain's medical technology contacts page has no dermatology, skin or wound care section (read 22/10/2026). Use the category directory to find the right buyer.",
+    "supply": "No NHS Supply Chain buyers are listed here. Use the category directory to find the right buyer.",
     "editor": "No journalists or commentators are listed until a source names them.",
 }
 
 
-def linkedin(name, bodies):
+def term_end(term):
+    """Last day of the month in 'X to <Month> <Year>' (None if the term has no stated end)."""
+    months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
+    m = re.search(r"\bto (\w+) (20\d\d)$", term or "")
+    if not m or m.group(1).lower() not in months:
+        return None
+    y, mo = int(m.group(2)), months.index(m.group(1).lower()) + 1
+    return datetime.date(y + mo // 12, mo % 12 + 1, 1) - datetime.timedelta(days=1)
+
+
+def linkedin(name, bodies, spec_label="dermatology"):
     q = re.sub(r"^(Dr|Professor|Prof|Mrs|Mr|Miss)\s+", "", name)
     q = re.sub(r"\s+(MBE|OBE)$", "", q)
     org = {"BAD": "dermatology", "BDNG": "dermatology nurse", "PCDS": "dermatology GP", "SDS": "dermatology",
-           "ACP": "continence", "TVS": "tissue viability", "VASBI": "vascular access", "ABCD": "diabetes", "Wounds UK": "wound care"}.get(bodies[0] if bodies else None, "dermatology")
+           "ACP": "continence", "TVS": "tissue viability", "VASBI": "vascular access", "ABCD": "diabetes", "Wounds UK": "wound care"}.get(bodies[0] if bodies else None, spec_label)
     return "https://www.linkedin.com/search/results/people/?keywords=" + urllib.parse.quote(q + " " + org)
+
+
+LINKEDIN_RE = re.compile(r"^https://(www|uk)\.linkedin\.com/in/[A-Za-z0-9%_.\-]+/?$")
+
+
+def load_linkedin():
+    """data/kol-linkedin-*.json: {name: {url, basis}}. A URL is kept only if it is a profile URL with a stated basis."""
+    out = {}
+    for f in sorted((ROOT / "data").glob("kol-linkedin-*.json")):
+        for n, v in json.loads(f.read_text()).items():
+            if v.get("url") and v.get("basis") and LINKEDIN_RE.match(v["url"]):
+                out[n] = v
+    return out
+
+
+def merge_research(sources, bodies, spec_ids):
+    """Fold data/kol-sources/<speciality>.json (agent research, brief in docs/KOL-AGENT-BRIEF.md) into PEOPLE."""
+    for f in sorted((ROOT / "data" / "kol-sources").glob("*.json")):
+        d = json.loads(f.read_text())
+        spec = d["speciality"]
+        if spec not in spec_ids:
+            print("skip %s: unknown speciality %s" % (f.name, spec))
+            continue
+        specs_here = [spec] + [x for x in d.get("alsoSpecialities", []) if x in spec_ids]
+        for b in d.get("bodies", []):
+            bodies.setdefault(b["id"], b["label"])
+        for sc in d["sources"]:
+            sources[sc["id"]] = dict({k: sc[k] for k in ("short", "body", "title", "url", "note")}, checked=d["checked"])
+        for q in d["people"]:
+            if q["source"] not in sources:
+                print("skip %s: unknown source" % q["name"])
+                continue
+            p = PEOPLE.setdefault(q["name"], {"name": q["name"], "appearances": [], "specialities": [], "classes": []})
+            app = {"body": q.get("body"), "role": q["role"], "organisation": q.get("organisation"),
+                   "term": q.get("term"), "source": q["source"],
+                   "source_url": sources[q["source"]]["url"], "checked": d["checked"]}
+            end = term_end(q.get("term"))
+            if end and end < datetime.date.today():
+                app["note"] = "The term end shown on the page has passed; check the page for a successor before relying on it."
+            p["appearances"].append(app)
+            for sp in specs_here:
+                if sp not in p["specialities"]:
+                    p["specialities"].append(sp)
+            for c in q["classes"]:
+                if c not in p["classes"]:
+                    p["classes"].append(c)
+            if q.get("title_basis") and (q.get("job_title") or q.get("trust")):
+                p.setdefault("_jt", {k: q.get(k) for k in ("job_title", "trust", "title_basis")})
+            if q.get("linkedin_url") and q.get("linkedin_basis") and LINKEDIN_RE.match(q["linkedin_url"]):
+                p.setdefault("_li", {"url": q["linkedin_url"], "basis": q["linkedin_basis"]})
 
 
 def main():
@@ -376,6 +437,12 @@ def main():
         optout = {n.lower() for n in d.get("names", [])}
     except Exception:
         pass
+    specs = json.loads((ROOT / "data" / "speciality-map.json").read_text())["canonicalSpecialities"]
+    spec_label = {x["id"]: x["label"] for x in specs}
+    sources = {k: dict(v) for k, v in SOURCES.items()}
+    body_labels = dict(NOTES)
+    merge_research(sources, body_labels, set(spec_label))
+    li = load_linkedin()
     people = []
     for name in sorted(PEOPLE, key=lambda n: re.sub(r"^(Dr|Professor|Mrs|Mr|Miss)\s+", "", n).split()[-1].lower()):
         if name.lower() in optout or re.sub(r"^(Dr|Professor)\s+", "", name).lower() in optout:
@@ -387,21 +454,31 @@ def main():
                 bodies.append(a["body"])
         p["bodies"] = bodies
         p["classes"] = [c for c, _ in CLASSES if c in p["classes"]]
-        p["linkedin_search"] = linkedin(name, bodies)
+        first = spec_label.get(p["specialities"][0], "") if p["specialities"] else ""
+        p["linkedin_search"] = linkedin(name, bodies, first)
+        hit = li.get(name) or p.pop("_li", None)
+        p.pop("_li", None)
+        jt = p.pop("_jt", None)
+        if jt:
+            for k in ("job_title", "trust", "title_basis"):
+                if jt.get(k):
+                    p[k] = jt[k]
+        if hit:
+            p["linkedin_url"] = hit["url"]
+            p["linkedin_basis"] = hit["basis"]
         people.append(p)
-    specs = json.loads((ROOT / "data" / "speciality-map.json").read_text())["canonicalSpecialities"]
     out = {
         "_meta": {
             "built": CHECKED,
-            "purpose": "Key Opinion Leader (KOL) finder behind Build Your Network (page 1882). Dermatology first.",
+            "purpose": "Key Opinion Leader (KOL) finder behind Build Your Network (page 1882). Every speciality researched from its main bodies and conference.",
             "basis": "Public-domain information published by the bodies themselves. Lawful basis: legitimate interests (UK GDPR Article 6(1)(f)), limited to name, public role and the page it came from. No contact details are held.",
             "removal": "Anyone listed can ask for removal at contact@elevateandthrive.uk. The name is added to data/contacts-optout.json and dropped at the next build.",
-            "linkedin": "A search link built from the name and the body. No profile is matched, scraped or stored.",
+            "linkedin": "A profile link is held only where a public search result showed the same name with a matching role, employer or speciality (the basis is recorded). Everyone else has a search link built from the name and speciality. Nothing is scraped.",
         },
         "classes": [{"id": c, "label": l} for c, l in CLASSES],
         "specialities": [{"id": s["id"], "label": s["label"]} for s in specs],
-        "bodies": [{"id": k, "label": v} for k, v in NOTES.items()],
-        "sources": [{"id": k, **v, "checked": v.get("checked", CHECKED)} for k, v in SOURCES.items()],
+        "bodies": [{"id": k, "label": v} for k, v in body_labels.items()],
+        "sources": [{"id": k, **v, "checked": v.get("checked", CHECKED)} for k, v in sources.items()],
         "empty": EMPTY,
         "people": people,
     }

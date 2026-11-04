@@ -93,6 +93,7 @@
     + '.kolf .kolf-tags{display:flex;flex-wrap:wrap;gap:6px}'
     + '.kolf .kolf-tag{font-size:11.5px;font-weight:700;letter-spacing:.04em;padding:3px 10px;border-radius:99px;background:#0B1C33;color:#E0BE8E}'
     + '.kolf .kolf-tag.cls{background:#F5F1E8;color:#0B1C33;border:1px solid #bfb49c}'
+    + '.kolf-jt{margin:2px 0 6px;color:#14304F;font-size:.95em}'
     + '.kolf .kolf-links{margin-top:auto;font-size:13px;display:flex;flex-wrap:wrap;gap:6px 14px}'
     + '.kolf .kolf-links a{color:#0B1C33;font-weight:600;text-decoration:underline}'
     + '.kolf .kolf-empty{background:#fff;border:1px dashed #8a7d5c;border-radius:12px;padding:18px 20px;color:#0B1C33;line-height:1.6}'
@@ -115,8 +116,11 @@
     var src = a.filter(function (x) { if (seen[x.source_url]) { return false; } seen[x.source_url] = 1; return true; }).map(function (x) {
       return '<a href="' + esc(x.source_url) + '" target="_blank" rel="noopener">' + esc(SRC_SHORT[x.source] || 'Source') + ', checked ' + ukDate(x.checked) + '</a>';
     }).join('');
-    return '<article class="kolf-card"><h3>' + esc(p.name) + '</h3>' + roles + '<div class="kolf-tags">' + tags + '</div>'
-      + '<div class="kolf-links">' + src + '<a href="' + esc(p.linkedin_search) + '" target="_blank" rel="noopener">Find on LinkedIn (search)</a></div></article>';
+    return '<article class="kolf-card"><h3>' + esc(p.name) + '</h3>'
+      + (p.job_title || p.trust ? '<p class="kolf-jt">' + esc([p.job_title, p.trust].filter(Boolean).join(', ')) + '</p>' : '') + roles + '<div class="kolf-tags">' + tags + '</div>'
+      + '<div class="kolf-links">' + src + (p.linkedin_url
+        ? '<a href="' + esc(p.linkedin_url) + '" target="_blank" rel="noopener">LinkedIn profile</a>'
+        : '<a href="' + esc(p.linkedin_search) + '" target="_blank" rel="noopener">Find on LinkedIn (search)</a>') + '</div></article>';
   }
   var CLASS_LABEL = {};
   var SRC_SHORT = {};
@@ -132,21 +136,30 @@
     var specOpts = doc.specialities.map(function (s) {
       return '<option value="' + esc(s.id) + '">' + esc(s.label) + (sc[s.id] ? ' (' + sc[s.id] + ')' : ' (none checked yet)') + '</option>';
     }).join('');
-    var bodyOpts = '<option value="">All bodies</option>' + doc.bodies.map(function (b) {
-      return '<option value="' + esc(b.id) + '">' + esc(BODY_LABEL[b.id] || b.id) + '</option>';
-    }).join('');
+    var BODY_NAME = {};
+    doc.bodies.forEach(function (b) { BODY_NAME[b.id] = BODY_LABEL[b.id] || b.label || b.id; });
+    function bodyOptsFor(spec) {
+      var have = {};
+      doc.people.forEach(function (p) {
+        if (p.specialities.indexOf(spec) !== -1) { p.bodies.forEach(function (b) { have[b] = 1; }); }
+      });
+      return '<option value="">All bodies</option>' + doc.bodies.filter(function (b) { return have[b.id]; }).map(function (b) {
+        return '<option value="' + esc(b.id) + '">' + esc(BODY_NAME[b.id]) + '</option>';
+      }).join('');
+    }
+    var bodyOpts = bodyOptsFor(st.spec);
     var srcList = doc.sources.map(function (s) {
       return '<li><a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.body) + ': ' + esc(s.title) + '</a>, read ' + ukDate(s.checked) + '. ' + esc(s.note) + '</li>';
     }).join('');
     mount.innerHTML = '<style>' + CSS + '</style><div class="kolf">'
       + '<h2>Find a Key Opinion Leader (KOL)</h2>'
-      + '<p class="kolf-sub">People the professional bodies themselves put forward in public: the board and committee members who steer a speciality, the speakers they invite, the editors and guideline authors. Pick a speciality, then narrow by who they are. Dermatology, continence, wound care and tissue viability, vascular access and diabetes are covered so far; other specialities show as soon as their sources are checked.</p>'
+      + '<p class="kolf-sub">People the professional bodies themselves put forward in public: the board and committee members who steer a speciality, the speakers they invite, the editors and guideline authors. Pick a speciality, then narrow by who they are. Specialities show as soon as their sources are checked.</p>'
       + '<div class="kolf-controls"><label>Speciality<select id="kolf-spec">' + specOpts + '</select></label>'
       + '<label>Body<select id="kolf-body">' + bodyOpts + '</select></label>'
       + '<label>Search name or role<input id="kolf-q" type="search" placeholder="for example Scotland, editor, guidelines"></label></div>'
       + '<div class="kolf-chips" id="kolf-chips"></div><p class="kolf-count" id="kolf-count" aria-live="polite"></p>'
       + '<div id="kolf-out"></div>'
-      + '<details><summary>Where this comes from, and why it is lawful</summary><p>Every name was read on the date shown from a page the body itself publishes. Only the name, the public role and the page it came from are held. No email address, phone number or home detail is stored, and paid staff are not listed. The lawful basis is legitimate interests under the UK General Data Protection Regulation (UK GDPR), Article 6(1)(f): a member of the Hub finding the people a speciality publicly puts forward. The LinkedIn link is a search built from the name and the body, so it leads you to profiles to judge for yourself. Nothing is matched or stored.</p>'
+      + '<details><summary>Where this comes from, and why it is lawful</summary><p>Every name was read on the date shown from a page the body itself publishes. Only the name, the public role and the page it came from are held. No email address, phone number or home detail is stored, and paid staff are not listed. The lawful basis is legitimate interests under the UK General Data Protection Regulation (UK GDPR), Article 6(1)(f): a member of the Hub finding the people a speciality publicly puts forward. A LinkedIn profile link appears only where a public search showed the same name with a matching role, employer or speciality; otherwise the link is a search for you to judge. Nothing is scraped.</p>'
       + '<p>Anyone listed can ask to be removed at <a href="mailto:contact@elevateandthrive.uk">contact@elevateandthrive.uk</a> and is dropped at the next build. Roles change at each election, so check the source page before you write to anyone.</p>'
       + '<p>Pages read:</p><ul>' + srcList + '</ul></details></div>';
 
@@ -165,14 +178,18 @@
       if (list.length) {
         out.innerHTML = '<div class="kolf-grid">' + list.map(card).join('') + '</div>';
       } else if (!c.all) {
-        out.innerHTML = '<div class="kolf-empty"><b>No checked people for ' + esc(label) + ' yet.</b>We publish a name only after reading it on the speciality body\'s own public page, so this stays empty until that is done. Dermatology has the fullest set.</div>';
+        out.innerHTML = '<div class="kolf-empty"><b>No checked people for ' + esc(label) + ' yet.</b>We publish a name only after reading it on the speciality body\'s own public page, so this stays empty until that is done.</div>';
       } else if (st.cls && doc.empty[st.cls] && !c[st.cls]) {
         out.innerHTML = '<div class="kolf-empty"><b>Nobody listed in this group.</b>' + esc(doc.empty[st.cls]) + '</div>';
       } else {
         out.innerHTML = '<div class="kolf-empty"><b>Nobody matches those filters.</b>Clear the search or choose Everyone.</div>';
       }
     }
-    specSel.addEventListener('change', function () { st.spec = specSel.value; st.cls = ''; draw(); });
+    specSel.addEventListener('change', function () {
+      st.spec = specSel.value; st.cls = ''; st.body = '';
+      mount.querySelector('#kolf-body').innerHTML = bodyOptsFor(st.spec);
+      draw();
+    });
     mount.querySelector('#kolf-body').addEventListener('change', function (e) { st.body = e.target.value; draw(); });
     mount.querySelector('#kolf-q').addEventListener('input', function (e) { st.q = e.target.value; draw(); });
     mount.querySelector('#kolf-chips').addEventListener('click', function (e) {

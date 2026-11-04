@@ -188,6 +188,9 @@ REFS = {
     # Added 20/10/2026: NHS Supply Chain National Pricing Matrix finder.
     "npm-finder.json":                 "ETH-DAD6FDB5B",
     # Added 22/10/2026: dermatology Key Opinion Leader finder (Build Your Network, page 1882).
+    "kol-linkedin-1.json":  "ETH-D23D030F7",
+    "kol-linkedin-2.json":  "ETH-DFA147300",
+    "kol-linkedin-3.json":  "ETH-DC85674DE",
     "kol-finder.json":                 "ETH-DB5F39660",
 }
 

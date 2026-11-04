@@ -78,7 +78,7 @@ const doc = JSON.parse(require('fs').readFileSync(process.argv[2], 'utf8'));
 const out = {
   derm: k.filter(doc.people, {spec: 'dermatology'}).length,
   wound: k.filter(doc.people, {spec: 'wound'}).length,
-  ortho: k.filter(doc.people, {spec: 'ortho'}).length,
+  ortho: k.filter(doc.people, {spec: 'it'}).length,
   speakers: k.filter(doc.people, {spec: 'dermatology', cls: 'speaker'}).length,
   supply: k.filter(doc.people, {spec: 'dermatology', cls: 'supply'}).length,
   pcds: k.filter(doc.people, {body: 'PCDS'}).length,

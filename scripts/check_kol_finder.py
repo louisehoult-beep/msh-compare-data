@@ -3,7 +3,7 @@
 
 Rules: a stated term end that has passed carries a note; every person has a source page on the source list, checked 2026; no email,
 phone or postal detail anywhere; classes and specialities are known; opt-out
-names absent; LinkedIn is a search link only; empty states exist for classes with
+names absent; LinkedIn search link plus an optional profile URL with a stated basis; empty states exist for classes with
 no people; names unique.
     python3 scripts/check_kol_finder.py
 """
@@ -46,6 +46,13 @@ def check(doc, optout=(), today=None):
             bad.append("opt-out name present: " + n)
         if not p["appearances"]:
             bad.append(n + ": no source")
+        if (p.get("job_title") or p.get("trust")) and not p.get("title_basis"):
+            bad.append(n + ": job_title/trust with no title_basis")
+        if "linkedin_url" in p:
+            if not re.match(r"^https://(www|uk)\.linkedin\.com/in/[A-Za-z0-9%_.\-]+/?$", p["linkedin_url"]):
+                bad.append(n + ": linkedin_url is not a profile URL")
+            if not p.get("linkedin_basis"):
+                bad.append(n + ": linkedin_url with no basis")
         for a in p["appearances"]:
             s = src.get(a["source"])
             if not s:

@@ -212,13 +212,20 @@
   // fetch resolves (see the Promise.all below). Keep this in step with the JSON
   // file's own `types` array; verify.py's check_product_types() fails the
   // publish if this literal is ever restored as the tool's SOLE source again.
-  var TYPES = ['antisepsis','antiseptic','chlorhexidine','skin prep','skin disinfect','disinfectant','applicator','swabstick','swab','tourniquet','blood culture','cannula','picc','midline','catheter','iol','intraocular','phaco','hearing aid','cochlear','stent','balloon','guidewire','sheath','mesh','suture','stapler','staple','skin closure','wound closure','tissue adhesive','glue','haemostat','sealant','dressing','foam','hydrocolloid','alginate','hydrofiber','silver','collagen','honey','barrier film','film dressing','bandage','compression','tape','plaster','npwt','negative pressure','wound','glove','gown','drape','wipe','sanitiser','irrigation','ventilator','anaesthesia','laryngoscope','airway','tracheostomy','tracheal','bronchoscope','endoscope','colonoscope','gastroscope','scope','infusion pump','syringe pump','pump','syringe','needle','lancet','connector','stopcock','extension set','giving set','iv set','flush','implant','knee','hip','shoulder','robot','freezer','refrigerator','incubator','analyser','sequencer','defibrillator','monitor','ultrasound','mri','ct scan','x-ray','mammography','bed mat ','bed pad','bed protector','bed','mattress','hoist','sling','wheelchair','cushion','dialyser','dialysis','apheresis','linac','brachytherapy','pacemaker','ablation','tavi','biopsy','warmer','warming','securement','ostomy','urostomy','stoma','nephrostomy','foley','feeding','enteral','feeding tube','peg tube','slide sheet','glucose','sensor','test strip','electrode','scalpel','blade','forceps','retractor','trocar','clip','clamp','specimen','drainage','chest drain','suction','mask','circuit','cpap','oxygen','nebuliser','filter','lubricant','bouffant','theatre cap','cap theatre','surgical cap','shoe cover','overshoe','coverall','apron','visor','face shield','respirator','scrub','incontinence pad','underpad','commode','bedpan','urinal','nutritional supplement','enteral feed','oral nutrition','all-in-one pad','shaped pad','rectangular pad','pull up pants','fixation pants','hand wash ','moisturiser','antimicrobial body wash','sick bag','disposable care'];
+  var TYPES = ['antisepsis','antiseptic','chlorhexidine','skin prep','skin disinfect','disinfectant','applicator','swabstick','swab','tourniquet','blood culture','cannula','picc','midline','catheter','iol','intraocular','phaco','hearing aid','cochlear','stent','balloon','guidewire','sheath','mesh','suture','linear cutter','stapler','staple','skin closure','endoscopic suturing','endostitch','wound closure','tissue adhesive','glue','haemostat','sealant','dressing','foam','hydrocolloid','alginate','hydrofiber','silver','collagen','honey','barrier film','film dressing','bandage','compression','tape','plaster','npwt','negative pressure','wound','glove','gown','drape','wipe','sanitiser','irrigation','ventilator','anaesthesia','laryngoscope','airway','tracheostomy','tracheal','bronchoscope','endoscope','colonoscope','gastroscope','scope','infusion pump','syringe pump','pump','syringe','needle','lancet','connector','stopcock','extension set','giving set','iv set','flush','implant','knee','hip','shoulder','robot','freezer','refrigerator','incubator','analyser','sequencer','defibrillator','monitor','ultrasound','mri','ct scan','x-ray','mammography','bed mat ','bed pad','bed protector','bed','mattress','hoist','sling','wheelchair','cushion','dialyser','dialysis','apheresis','linac','brachytherapy','pacemaker','ablation','tavi','biopsy','warmer','warming','securement','ostomy','urostomy','stoma','nephrostomy','foley','feeding','enteral','feeding tube','peg tube','slide sheet','glucose','sensor','test strip','electrode','scalpel','blade','forceps','retractor','trocar','clip','clamp','specimen','drainage','chest drain','suction','mask','circuit','cpap','oxygen','nebuliser','filter','lubricant','bouffant','theatre cap','cap theatre','surgical cap','shoe cover','overshoe','coverall','apron','visor','face shield','respirator','scrub','incontinence pad','underpad','commode','bedpan','urinal','nutritional supplement','enteral feed','oral nutrition','all-in-one pad','shaped pad','rectangular pad','pull up pants','fixation pants','hand wash ','moisturiser','antimicrobial body wash','sick bag','disposable care'];
   // Also baked-in fallbacks for the same reason — see PTYPESURL note above.
   var GENERIC_TYPE_OVERRIDE = { catheter: 'cannula', wound: 'dressing', foam: 'dressing', stoma: 'ostomy', iol: 'intraocular', sealant: 'haemostat', pump: 'dispenser' };
   var CANNULA_DISQUALIFIERS = ['picc', 'central venous', 'central line'];
   /* One type for one kind of product: a matched keyword on the left is reported
      as the type on the right (data/product-types.json `type_alias`). */
-  var TYPE_ALIAS = { 'bed mat': 'underpad', 'bed pad': 'underpad', 'bed protector': 'underpad' };
+  var TYPE_ALIAS = { 'endoscopic suturing': 'suture', 'endostitch': 'suture', 'linear cutter': 'stapler', 'bed mat': 'underpad', 'bed pad': 'underpad', 'bed protector': 'underpad' };
+  /* A word in a name is not always the product (03/11/2026, Meril demo): "mesh"
+     found bed-rail bumpers and wire baskets, "suture" found forceps and carts,
+     and those filled the rival list ahead of real hernia mesh and sutures. */
+  var TYPE_NOT = {
+    mesh: /\b(bed|rail|siderail|bumper|basket|bag|sling|nebuli[sz]er|tray|cap|bin|shoe|hair|mitt|mitts|visor|laundry|cot|cradle|chair|filter|filters|hammock|bandage|bandages|hat|hats|nets|lead|shelf|mesh-free|fixation|universal|alto|pro-fit|pronto-fit|secure-fit|clip-fit)\b/i,
+    suture: /\b(forceps|scissor|scissors|cart|couch|anchor|anchors|pack|packs|remov\w*|needle holders?|pusher|marker|button|clip|set|instruments?|fil de|smoother)\b/i
+  };
   var KEYPOINTS = {
     'BD — Becton, Dickinson': { 'nexiva': 'Closed IV system — fewer blood exposures/disconnections vs an open cannula', 'chloraprep': 'Licensed medicinal product (UK marketing authorisation) — 2% CHG / 70% IPA sterile applicator, indicated for skin disinfection before invasive procedures' },
     'GAMA Healthcare': { 'hexi-prep': 'Licensed medicine (PL 40867/0002) — sterile 2% CHG / 70% IPA pad; its indication covers invasive procedures NOT requiring a clean-air environment (vascular access focus, per GAMA\u2019s prescribing information)' },
@@ -304,7 +311,7 @@
        needs the proper fix — resolving every supplier's raw text through
        data/speciality-map.json, the way comptab.js and supplier-search.js
        already do — as its own piece of work, not a side effect of this one. */
-    var SPEC_CANON = { 'moving and handling': 'Patient handling and pressure area care',
+    var SPEC_CANON = { 'theatre / surgical': 'Theatres / surgical', 'moving and handling': 'Patient handling and pressure area care',
                         'patient handling': 'Patient handling and pressure area care' };
     suppliers.forEach(function(s){
       if (!s.specialities || !s.specialities.length) return;
@@ -589,6 +596,7 @@
     }
     function typeForProduct(name, dGiven){
       var t = typeOf(name);
+      if (t && TYPE_NOT[t] && TYPE_NOT[t].test(name)) return '';
       var override = GENERIC_TYPE_OVERRIDE[t];
       if (override){
         var d = dGiven || CACHE[nk(name)];
@@ -1342,6 +1350,9 @@
         var inCat = PRODUCTS.filter(function(p){ return p.supplier !== mine.supplier && (!supFilter || p.supplier === supFilter) && catOf(p) === myCat; });
         function rankC(p){ return (mine.type && p.type === mine.type ? 100000 : 0) + score(p); }
         inCat.sort(function(a, b){ return rankC(b) - rankC(a); });
+        /* General theatre consumables holds everything from gloves to sutures, so
+           the category alone says nothing there: keep to the same type. */
+        if (myCat === 'theatres:theatre' && mine.type) inCat = inCat.filter(function(p){ return p.type === mine.type; });
         inCat.forEach(add);
       }
       if (mine.type){
@@ -1357,7 +1368,12 @@
           });
         }
       }
-      return out.slice(0, 12);
+      /* Named suppliers before captured ranges (a reseller's "Ethicon Prolene" must not
+         push out Medtronic), and at most three from one supplier while others have a
+         match, so a rep sees J&J, Medtronic and the rest side by side. */
+      var perSup = {}, kept = [], spare = [];
+      out.filter(function(p){ return !p.fromRange; }).concat(out.filter(function(p){ return p.fromRange; })).forEach(function(p){ perSup[p.supplier] = (perSup[p.supplier] || 0) + 1; (perSup[p.supplier] <= 3 ? kept : spare).push(p); });
+      return kept.concat(spare).slice(0, 12);
     }
 
     function thumbImg(d, px){
