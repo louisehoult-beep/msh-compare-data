@@ -722,6 +722,7 @@ body .wp-site-blocks .msh-cpass-link input{width:100%;max-width:520px;padding:10
 body .wp-site-blocks .msh-cpass-copy{margin-top:8px;background:#0B1C33;color:#FFFFFF;border:0;border-radius:8px;padding:10px 18px;font:600 15px Jost,Inter,system-ui,sans-serif;cursor:pointer}
 body .wp-site-blocks .msh-cpass-meta{font-size:15px!important;color:#26364B!important}
 .msh-cpass-register .pms-form .pms-subscription-plans-list,
+.msh-cpass-register .pms-form .pms-field-subscriptions,
 .msh-cpass-register .pms-form .pms-paygates-holder,
 .msh-cpass-register .pms-form .pms-billing-details,
 .msh-cpass-register .pms-form .pms-section-billing-details,
