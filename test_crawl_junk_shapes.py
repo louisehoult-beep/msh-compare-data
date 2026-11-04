@@ -352,5 +352,30 @@ class HelpPagesAreNotProducts(unittest.TestCase):
         self.assertIn("Navina Smart", names)
 
 
+class PlaceholderPagesAreNotProducts(unittest.TestCase):
+    """04/11/2026: CMS placeholder pages ("Test Product") captured as products on
+    seven supplier sites, Hospital Direct's own profile among them."""
+
+    def test_placeholders_refused(self):
+        for n in ("Test Product", "test product", "Test Product for DHL",
+                  "test product with multiple product codes", "Dummy Product", "Sample Product"):
+            self.assertTrue(cs.is_junk_product_name(n), n)
+
+    def test_real_products_are_not_caught(self):
+        for n in ("Testosterone Gel", "Protest Product", "Slideezi", "ProTurn Sheets",
+                  "Sample Product \u2013 AssureTouch\u2122 Ultra (Large)", "Test Strips"):
+            self.assertFalse(cs.is_junk_product_name(n), n)
+
+    def test_tidy_capture_drops_them(self):
+        shaped = {"products": [{"n": "Test Product", "division": "Uncategorised"},
+                               {"n": "Slideezi", "division": "Uncategorised"}]}
+        s, notes = cs.tidy_capture(shaped)
+        self.assertEqual([p["n"] for p in s["products"]], ["Slideezi"])
+
+    def test_differentiator_build_skips_them(self):
+        src = open(os.path.join(HERE, "scripts", "build_differentiator.py"), encoding="utf-8").read()
+        self.assertIn("is_junk_product_name(name)", src)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

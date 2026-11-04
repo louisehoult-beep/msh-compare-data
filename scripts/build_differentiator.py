@@ -43,6 +43,7 @@ import json, os, re, sys, collections, subprocess
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "company-aliases"))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from redact_personal import redact_text  # public repo: product copy must not carry a named person's email
+from crawl_supplier_site import is_junk_product_name  # placeholder/FAQ/confirmation pages, never products
 
 OUT = "data/differentiator.json"
 
@@ -222,7 +223,7 @@ def main():
         domain = rec.get("domain")
         for p in rec.get("products") or []:
             name = p.get("n")
-            if not name:
+            if not name or is_junk_product_name(name):
                 continue
             div = p.get("division") or ""
             # Falls back to a (supplier, PRODUCT NAME) match when there's no
