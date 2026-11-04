@@ -102,6 +102,7 @@ foreach ($cases as $c) {
   elseif ($fn === 'column') { $out[] = msh_cpass_user_column_value('', 'msh_cpass', $a[0]); }
   elseif ($fn === 'billing') { msh_cpass_fill_billing(); $out[] = array_intersect_key($_POST, array_flip(array('pms_billing_first_name','pms_billing_last_name','pms_billing_email','pms_billing_address','pms_billing_city','pms_billing_country'))); }
   elseif ($fn === 'robots') { $out[] = msh_cpass_robots(array('index' => true, 'follow' => true)); }
+  elseif ($fn === 'login_after_billing') { msh_cpass_fill_billing(); $out[] = isset($_POST['user_login']) ? $_POST['user_login'] : null; }
   elseif ($fn === 'mlkey') { $GLOBALS['opts']['woo_mailerlite_options'] = array('apiKey' => 'k'); $out[] = true; }
   elseif ($fn === 'posted') { $out[] = isset($GLOBALS['posted']) ? $GLOBALS['posted'] : array(); }
   elseif ($fn === 'admin') { $GLOBALS['users'][$a[0]]['admin'] = true; $out[] = true; }
@@ -167,6 +168,14 @@ class PassRules(unittest.TestCase):
                             ["eligible", [1]], ["check", ["HUB-LOUISE-ABCD", "new@acme.com"]], ["login", [1]], ["shortcode"]])
         self.assertTrue(out[4]); self.assertTrue(out[5]["ok"]); self.assertIn("No monthly limit", out[7])
 
+    def test_username_is_the_email_address(self):
+        post = {"msh_cpass_choice": "1", "msh_cpass_code": "HUB-SAM-ABCD", "user_email": "new@acme.com", "user_login": "something", "first_name": "New", "subscription_plans": "690"}
+        setup = self.REF + [["meta", [10, "msh_cpass_code", "HUB-SAM-ABCD"]]]
+        out = self.run_php(setup + [["post", [post]], ["login_after_billing"]])
+        self.assertEqual(out[-1], "new@acme.com")
+        src = open(PHP_SNIPPET, encoding="utf-8").read()
+        self.assertIn("input[name=\"user_login\"]", src)
+        self.assertIn("login.value = mail.value.trim()", src)
     def test_lou_has_a_fixed_code_that_works_before_she_opens_the_page(self):
         out = self.run_php([["user", [1, "louisehoult@elevateandthrive.uk", "Louise", 0]], ["admin", [1]],
                             ["code_for", [1]], ["check", ["HUB-LOUISE-TEGU", "bruce@acme.com"]], ["user", [2, "sam@x.com", "Sam", 690]], ["code_for", [2]]])
