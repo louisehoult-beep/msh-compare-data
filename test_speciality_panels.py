@@ -1163,8 +1163,14 @@ print("\nTHE CLINICAL VOCABULARY IS MOSTLY ABSENT FROM THE DATA, AND SAID SO")
 for word in ["geriatric", "delirium",
              "urgent community response", "discharge to assess"]:
     check("nothing published on '%s' today" % word, word not in ftitles)
-check("reablement is published now that a real notice exists for it",
-      "reablement" in ftitles)
+#
+# AGED OUT OF THE CAP, 05/11/2026 (same cause as ^o537, see matched_titles). The
+# Enfield notice is still matched and correct, but this panel now matches 135
+# awards against an AWARD_CAP of 40, so newer awards pushed it out of the shown
+# slice and this assertion failed on nothing. Checked against the matched set,
+# which is the coverage question it was always asking.
+check("reablement is matched now that a real notice exists for it",
+      "reablement" in matched_titles(FRAILTY))
 # FRAILTY MOVED, 22/09/2026, exactly the way reablement moved on 10/09 and for the
 # same reason. "Proactive Care (Berkshire West) - Frailty" (Berkshire Healthcare
 # NHS Foundation Trust, 22/09/2026) is a genuine award on this patch and the panel
