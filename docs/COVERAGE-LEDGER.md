@@ -57,7 +57,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Respiratory Solutions | respiratory | 37 | 17 | 45.9% | 15 | 19 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 13 | 37.1% | 7 | 21 | STARTED |
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 14 | 42.4% | 11 | 22 | STARTED |
-| Aids for Daily Living | rehab | 31 | 14 | 45.2% | 12 | 14 | STARTED |
+| Aids for Daily Living | rehab | 31 | 16 | 51.6% | 7 | 17 | STARTED |
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 10 | 32.3% | 5 | 22 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 11 | 37.9% | 7 | 24 | STARTED |
 | General Wound Care | wound | 28 | 11 | 39.3% | 7 | 23 | STARTED |

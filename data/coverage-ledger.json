@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-11-02",
-  "differentiator.json published": 38281,
-  "differentiator.json held": 296472
+  "differentiator.json published": 38492,
+  "differentiator.json held": 296500
  },
  "counts": {
   "frameworks": 122,
@@ -24,10 +24,10 @@
   "unmapped": 46,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 405,
-  "inScopeSuppliersNeedingCrawl": 222,
-  "inScopeSuppliersNeedingDomain": 210,
-  "suppliersRefused": 573,
+  "supplierNamesUnresolved": 404,
+  "inScopeSuppliersNeedingCrawl": 218,
+  "inScopeSuppliersNeedingDomain": 207,
+  "suppliersRefused": 576,
   "suppliersRefusedButPublishingElsewhere": 167,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
@@ -124,10 +124,6 @@
   [
    "Emergent Crown Contract Office Furnishings Limited",
    2
-  ],
-  [
-   "Omnimedical Ltd",
-   1
   ],
   [
    "Aimia Foods Ltd",
@@ -8175,8 +8171,8 @@
    "category": "Rehabilitation and Community",
    "ends": "31 October 2027",
    "suppliersAwarded": 31,
-   "suppliersPublished": 14,
-   "coverage": 45.2,
+   "suppliersPublished": 16,
+   "coverage": 51.6,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -8186,18 +8182,10 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 31,
-   "coverageOfTarget": 45.2,
+   "coverageOfTarget": 51.6,
    "crawlWorklist": [
     {
-     "supplier": "The Helping Hand Company",
-     "domain": "helping-hand.com"
-    },
-    {
      "supplier": "Aidapt Bathrooms Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Cefndy Healthcare",
      "domain": null
     },
     {
@@ -8205,15 +8193,7 @@
      "domain": null
     },
     {
-     "supplier": "Chiltern Invadex (UK) Limited",
-     "domain": null
-    },
-    {
-     "supplier": "Essential Healthcare Solutions (UK) Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Langham Gordon Ellis",
+     "supplier": "Omnimedical Ltd",
      "domain": null
     },
     {
@@ -8223,11 +8203,8 @@
    ],
    "domainsMissing": [
     "Aidapt Bathrooms Ltd",
-    "Cefndy Healthcare",
-    "Chiltern Invadex (UK) Limited",
-    "Essential Healthcare Solutions (UK) Ltd",
-    "Langham Gordon Ellis",
     "Nottingham Rehab Limited (Trading as NRS Healthcare)",
+    "Omnimedical Ltd",
     "Splice Cast Ltd t/a Eureka Physiocare"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -8244,6 +8221,27 @@
      "domain": "www.ajmhealthcare.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 403: Forbidden)",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Chiltern Invadex (UK) Limited",
+     "domain": "www.chilterninvadex.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found); no product-path links were found by following the site's pages",
+     "checked": "2026-11-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Essential Healthcare Solutions (UK) Ltd",
+     "domain": "essential-healthcare.com",
+     "reason": "neither essential-healthcare.com nor www.essential-healthcare.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-11-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Langham Gordon Ellis",
+     "domain": "www.langham-ge.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-05",
      "bucket": "refused"
     },
     {
@@ -8343,22 +8341,24 @@
    ],
    "publishedElsewhereNoOwnRange": [],
    "actionable": {
-    "unresolvedNames": 1,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 2,
-    "heldNeedingCategory": 2,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 7
+    "needDomain": 4
    },
    "published": [
     "Arjo",
+    "Cefndy Healthcare",
     "Drive DeVilbiss Healthcare UK",
     "GAMA Healthcare",
     "Invacare UK",
     "Performance Health International Limited",
     "Roma Medical Aids Ltd",
     "Sunrise Medical Ltd",
+    "The Helping Hand Company",
     "Trulife Limited",
     "Vernacare",
     "Benmor Medical",
@@ -8372,30 +8372,27 @@
     "Henleys Medical Supplies Limited"
    ],
    "heldOnly": [
-    "The Helping Hand Company",
     "Lisclare"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Aidapt Bathrooms Ltd",
-    "Cefndy Healthcare",
     "Nottingham Rehab Limited (Trading as NRS Healthcare)",
-    "Chiltern Invadex (UK) Limited",
-    "Essential Healthcare Solutions (UK) Ltd",
-    "Langham Gordon Ellis",
+    "Omnimedical Ltd",
     "Splice Cast Ltd t/a Eureka Physiocare"
    ],
    "refused": [
     "Prism Medical UK",
     "AJ Mobility Ltd",
+    "Chiltern Invadex (UK) Limited",
+    "Essential Healthcare Solutions (UK) Ltd",
+    "Langham Gordon Ellis",
     "Medequip Assistive Technology",
     "Rehabilitation Manufacturing Services",
     "Valley Northern Ltd"
    ],
-   "unknown": [
-    "Omnimedical Ltd"
-   ],
-   "actionableTotal": 12,
+   "unknown": [],
+   "actionableTotal": 7,
    "blockedReason": null,
    "deferred": null
   },
