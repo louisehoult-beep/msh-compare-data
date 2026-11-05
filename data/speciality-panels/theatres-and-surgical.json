@@ -13,17 +13,17 @@
  "slug": "theatres-and-surgical",
  "label": "Theatres and Surgical",
  "defined": true,
- "generated": "2026-11-02",
+ "generated": "2026-11-05",
  "dataAsOf": {
   "frameworks": "2026-11-02",
-  "tenderHistory": "2026-11-01",
-  "frameworkAwards": "2026-11-02T15:38:20+00:00",
-  "openTenders": "02/11/2026",
-  "drugTariff": "2026-10-31",
-  "localIntel": "2026-11-02",
+  "tenderHistory": "2026-11-05",
+  "frameworkAwards": "2026-11-05T14:38:49+00:00",
+  "openTenders": "05/11/2026",
+  "drugTariff": "2026-11-04",
+  "localIntel": "2026-11-05",
   "supplierDirectory": "2026-11-01",
   "gpPrescribing": "2026-10-21",
-  "mhraDsu": "2026-11-02",
+  "mhraDsu": "2026-11-05",
   "drugTariffViiia": null,
   "hospitalPrescribing": null
  },
@@ -36,7 +36,7 @@
   "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: mis, surgical, theatres). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 15 of the 18 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
   "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
-  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (10 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (3 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-11-02.",
+  "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (10 here), and so is any update GOV.UK ticks against 30 or more therapeutic areas, which is a message to everyone rather than to this speciality (3 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-11-05.",
   "drugTariffViiia": null
  },
  "counts": {
@@ -44,12 +44,12 @@
   "suppliers": 262,
   "suppliersUnresolved": 4,
   "awardsShown": 40,
-  "awardsMatched": 509,
+  "awardsMatched": 512,
   "awardsWithheldByBuyerCap": 0,
-  "awardsShownNotYetAwarded": 9,
-  "openTenders": 1,
+  "awardsShownNotYetAwarded": 8,
+  "openTenders": 2,
   "localIntel": 0,
-  "suppliersFrameworkNamedAlsoTagged": 79,
+  "suppliersFrameworkNamedAlsoTagged": 80,
   "suppliersDirectoryTagged": 18,
   "suppliersDirectoryOnOtherFrameworks": 12,
   "suppliersDirectoryWithFrameworkNote": 15,
@@ -1523,7 +1523,7 @@
     "Wound Closure"
    ],
    "provenance": "framework-named",
-   "directoryTagged": false
+   "directoryTagged": true
   },
   {
    "name": "Novus Med Ltd",
@@ -3748,24 +3748,56 @@
  ],
  "awards": [
   {
+   "title": "Theatre/ENT Dental",
+   "buyer": "The Shrewsbury and Telford Hospital NHS Trust",
+   "supplier": null,
+   "date": "2026-11-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/104961-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000"
+   ],
+   "isFramework": false,
+   "stage": "tender",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Stryker Operon Operating Table",
+   "buyer": "Hull University Teaching Hospitals NHS Foundation Trust",
+   "supplier": "Stryker UK Limited",
+   "date": "2026-11-03",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/dcf078a5-c8f2-4a59-b4e9-2facb9b188c1",
+   "value": 37996,
+   "periodEnd": "2026-11-04",
+   "source": "tender-history"
+  },
+  {
+   "title": "Ophthalmology Custom Procedure Packs",
+   "buyer": "Simply Serve Ltd",
+   "supplier": "BLINK MEDICAL LIMITED",
+   "date": "2026-11-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/104156-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000"
+   ],
+   "isFramework": false,
+   "stage": "award",
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
    "title": "Operating Tables & Theatre Lighting",
    "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotland) (NSS)",
-   "supplier": "Getinge Limited, Hill-Rom Ltd (Liko), Medscience Distribution Ltd, Stryker UK, MET Healthcare Ltd, Spectranetics International b.v., D & H (PARTNERSHIP) LTD, Draeger Medical UK Limited, KARL STORZ Endoscopy UK, Starkstrom",
+   "supplier": "Getinge Limited, Hill-Rom Ltd (Liko), Medscience Distribution Ltd, Stryker UK, MET Healthcare Ltd",
    "date": "2026-11-02",
    "url": "https://www.find-tender.service.gov.uk/Notice/103741-2026",
    "value": null,
    "periodEnd": null,
-   "cpv": [
-    "31524110",
-    "33162100",
-    "33169000",
-    "33192230",
-    "39143112"
-   ],
-   "isFramework": true,
-   "stage": "award",
-   "source": "framework-awards",
-   "cpvCorroborates": true
+   "source": "tender-history"
   },
   {
    "title": "Minimally Invasive Surgery Consumables",
@@ -4297,60 +4329,19 @@
    "stage": "tender",
    "source": "framework-awards",
    "cpvCorroborates": true
-  },
-  {
-   "title": "Pre-Market Engagement for Craniofacial Orthotics and Helmet Therapy Services for Endoscopic-Assisted Suturectomy Patients and Craniofacial Orthotist Services",
-   "buyer": "Birmingham Women's and Children's NHS Foundation Trust",
-   "supplier": null,
-   "date": "2026-09-08",
-   "url": "https://www.find-tender.service.gov.uk/Notice/085075-2026",
-   "value": null,
-   "periodEnd": null,
-   "cpv": [
-    "33140000",
-    "33183000",
-    "85111600"
-   ],
-   "isFramework": false,
-   "stage": "planning",
-   "source": "framework-awards",
-   "cpvCorroborates": false
-  },
-  {
-   "title": "Theatre Waste Management Solution",
-   "buyer": "Northumbria Healthcare Facilities Management",
-   "supplier": null,
-   "date": "2026-09-04",
-   "url": "https://www.find-tender.service.gov.uk/Notice/083943-2026",
-   "value": null,
-   "periodEnd": null,
-   "cpv": [
-    "33100000",
-    "90524200"
-   ],
-   "isFramework": false,
-   "stage": "planning",
-   "source": "framework-awards",
-   "cpvCorroborates": false
-  },
-  {
-   "title": "WSFT - Theatres - EBME - Lithotripter Maintenance",
-   "buyer": "West Suffolk NHS Foundation Trust",
-   "supplier": "Boston Scientific Limited",
-   "date": "2026-09-04",
-   "url": "https://www.find-tender.service.gov.uk/Notice/083904-2026",
-   "value": null,
-   "periodEnd": null,
-   "cpv": [
-    "50420000"
-   ],
-   "isFramework": false,
-   "stage": "award",
-   "source": "framework-awards",
-   "cpvCorroborates": false
   }
  ],
  "openTenders": [
+  {
+   "title": "Theatre Royal Plymouth - Architect-led Multi-disciplinary Design Team Services",
+   "buyer": "Theatre Royal Plymouth",
+   "status": "active",
+   "stage": "open tender",
+   "closingDate": "2026-11-20T15:00:00Z",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/8665d1a9-fc76-4e46-9baa-75eb3710ad2d",
+   "value": 750000,
+   "source": "Contracts Finder"
+  },
   {
    "title": "Wound Closure Products",
    "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
@@ -4984,7 +4975,7 @@
   "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
  },
  "mhraDsu": {
-  "dataAsOf": "2026-11-02",
+  "dataAsOf": "2026-11-05",
   "sourcePage": "https://www.gov.uk/drug-safety-update",
   "noFacet": false,
   "whyEmpty": null,

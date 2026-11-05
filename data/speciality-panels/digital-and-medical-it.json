@@ -13,20 +13,20 @@
  "slug": "digital-and-medical-it",
  "label": "Digital health and AI",
  "defined": true,
- "generated": "2026-11-02",
+ "generated": "2026-11-05",
  "dataAsOf": {
   "frameworks": "2026-11-02",
-  "tenderHistory": "2026-11-01",
-  "frameworkAwards": "2026-11-02T15:38:20+00:00",
-  "openTenders": "02/11/2026",
-  "drugTariff": "2026-10-31",
-  "localIntel": "2026-11-02",
+  "tenderHistory": "2026-11-05",
+  "frameworkAwards": "2026-11-05T14:38:49+00:00",
+  "openTenders": "05/11/2026",
+  "drugTariff": "2026-11-04",
+  "localIntel": "2026-11-05",
   "supplierDirectory": "2026-11-01",
   "gpPrescribing": "2026-10-21",
-  "mhraDsu": "2026-11-02",
+  "mhraDsu": "2026-11-05",
   "drugTariffViiia": null,
   "hospitalPrescribing": null,
-  "digitalLane": "02/11/2026"
+  "digitalLane": "05/11/2026"
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -1041,7 +1041,7 @@
    "url": "https://www.gov.uk/government/collections/ai-airlock-a-regulatory-sandbox-for-ai-enabled-medical-devices",
    "verifiedOn": "2026-10-20",
    "lastCheck": {
-    "date": "2026-11-02",
+    "date": "2026-11-05",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1061,7 +1061,7 @@
    "url": "https://digital.nhs.uk/services/digital-technology-assessment-criteria-dtac",
    "verifiedOn": "2026-10-20",
    "lastCheck": {
-    "date": "2026-11-02",
+    "date": "2026-11-05",
     "status": "unreachable",
     "http": 403
    }
@@ -1081,7 +1081,7 @@
    "url": "https://www.gov.uk/government/news/government-backs-recommendations-of-nhs-doctors-led-ai-commission",
    "verifiedOn": "2026-10-20",
    "lastCheck": {
-    "date": "2026-11-02",
+    "date": "2026-11-05",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1103,7 +1103,7 @@
    "url": "https://malue.co.uk",
    "verifiedOn": "2026-10-29",
    "lastCheck": {
-    "date": "2026-11-02",
+    "date": "2026-11-05",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -2385,7 +2385,7 @@
   "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
  },
  "mhraDsu": {
-  "dataAsOf": "2026-11-02",
+  "dataAsOf": "2026-11-05",
   "sourcePage": "https://www.gov.uk/drug-safety-update",
   "noFacet": true,
   "whyEmpty": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
@@ -2396,11 +2396,11 @@
  },
  "drugTariffViiia": null,
  "digitalLane": {
-  "dataAsOf": "02/11/2026",
+  "dataAsOf": "05/11/2026",
   "rule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction. CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only. A call-off under a framework is not a notice, and most digital money in the NHS moves as framework call-offs, capital business cases and G-Cloud awards without competition. This lane is therefore a floor, not a census: an absence here says nothing about the buyer or the market. Contract values, where shown, are the notice's own and are not summed across rows. Shown here: the clinical rows only, up to 15 awards and every open notice and market engagement row. The full lane, with the rows left out, is data/digital-lane.json.",
   "counts": {
-   "awards": 327,
-   "awardsClinical": 36,
+   "awards": 344,
+   "awardsClinical": 39,
    "openNotices": 2,
    "openNoticesClinical": 1,
    "marketEngagement": 2,
@@ -2428,6 +2428,61 @@
   ],
   "marketEngagement": [],
   "awards": [
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "award",
+    "title": "EHR Programme Director",
+    "buyer": "University Hospitals Dorset NHS Foundation Trust",
+    "published": "2026-11-05",
+    "isFramework": false,
+    "contractEnd": null,
+    "value": null,
+    "digitalCpv": [
+     "72263000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/105247-2026",
+    "ocid": "ocds-h6vhtk-07b55b"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "planning",
+    "title": "Blood Transfusion Laboratory Information System (LIMS)",
+    "buyer": "Great Ormond Street Hospital for Children NHS Foundation Trust",
+    "published": "2026-11-05",
+    "isFramework": false,
+    "contractEnd": null,
+    "value": null,
+    "digitalCpv": [
+     "48814000",
+     "48814400",
+     "72260000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/105127-2026",
+    "ocid": "ocds-h6vhtk-07b3e1"
+   },
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "planning",
+    "title": "Supplier Ambient Voice Technology (AVT) Self Certified Registry for the use of AI-Enabled Ambient Scribing Products in Health and Care Settings",
+    "buyer": "NHS ENGLAND",
+    "published": "2026-11-03",
+    "isFramework": false,
+    "contractEnd": null,
+    "value": null,
+    "digitalCpv": [
+     "48180000",
+     "48314000",
+     "48317000",
+     "72212180",
+     "72212314",
+     "72212512"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/104117-2026",
+    "ocid": "ocds-h6vhtk-05d63c"
+   },
    {
     "lane": "digital",
     "clinical": true,
@@ -2631,64 +2686,12 @@
     ],
     "url": "https://www.find-tender.service.gov.uk/Notice/096595-2026",
     "ocid": "ocds-h6vhtk-0786a9"
-   },
-   {
-    "lane": "digital",
-    "clinical": true,
-    "stage": "award",
-    "title": "Video Consultation Platform",
-    "buyer": "Cardiff and Vale University Health Board",
-    "published": "2026-10-06",
-    "isFramework": false,
-    "contractEnd": "2029-12-31",
-    "value": 300000.0,
-    "digitalCpv": [
-     "72211000"
-    ],
-    "url": "https://www.find-tender.service.gov.uk/Notice/094368-2026",
-    "ocid": "ocds-h6vhtk-05d17e"
-   },
-   {
-    "lane": "digital",
-    "clinical": true,
-    "stage": "planning",
-    "title": "Digital Primary Care Open Framework",
-    "buyer": "NHS England",
-    "published": "2026-10-06",
-    "isFramework": true,
-    "contractEnd": null,
-    "value": null,
-    "digitalCpv": [
-     "48180000",
-     "48311000",
-     "72263000",
-     "72300000"
-    ],
-    "url": "https://www.find-tender.service.gov.uk/Notice/094419-2026",
-    "ocid": "ocds-h6vhtk-050c1e"
-   },
-   {
-    "lane": "digital",
-    "clinical": true,
-    "stage": "planning",
-    "title": "AI Overlay for the Existing Avaya Elite Telephony Platform",
-    "buyer": "North East Ambulance Service NHS Foundation Trust",
-    "published": "2026-09-29",
-    "isFramework": false,
-    "contractEnd": null,
-    "value": null,
-    "digitalCpv": [
-     "48000000",
-     "72000000"
-    ],
-    "url": "https://www.find-tender.service.gov.uk/Notice/091997-2026",
-    "ocid": "ocds-h6vhtk-077cc4"
    }
   ],
-  "awardsClinicalTotal": 36,
+  "awardsClinicalTotal": 39,
   "gates": {
    "rule": "Each row is one owner page for a health tech gate. lastUpdated is the owner's own date: GOV.UK's public_updated_at from its content API, or the 'Last edited' line on an NHS England Digital page. latestChange is the owner's own change note, verbatim, where the owner publishes one. changedSinceLastRun is true when that date moved since the previous run. Nothing is summarised or interpreted.",
-   "dataAsOf": "02/11/2026",
+   "dataAsOf": "04/11/2026",
    "pages": [
     {
      "gate": "Regulation",
@@ -3607,11 +3610,11 @@
    "none": 6
   },
   "companies": {
-   "dataAsOf": "2026-11-02",
+   "dataAsOf": "2026-11-05T10:53:45.180189Z",
    "counts": {
-    "companies": 147,
+    "companies": 148,
     "onDigitalFramework": 119,
-    "withDigitalAwards": 45,
+    "withDigitalAwards": 47,
     "withProducts": 46
    },
    "rule": "Every company record in the Hub's supplier directory that is digital by a recorded fact: filed under a digital speciality label, named on a digital framework's own published supplier list as held on its record (NHS Supply Chain, Government Commercial Agency (GCA), NHS Shared Business Services (SBS) or HealthTrust Europe), or named exactly on an NHS buyer's software or IT award notice. A framework place is not a contract and an award count is not spend. Products are counted from the company record; the company report lists them with their sources. Companies on a framework's list that have no Hub company record are not listed here, so this is not a census of the market.",
@@ -3711,9 +3714,9 @@
        "lots": []
       }
      ],
-     "digitalAwards": 4,
+     "digitalAwards": 5,
      "clinicalAwards": 1,
-     "latestAward": "2026-10-19",
+     "latestAward": "2026-11-03",
      "products": 0,
      "companyNumber": null
     },
@@ -3862,9 +3865,9 @@
        "lots": []
       }
      ],
-     "digitalAwards": 12,
+     "digitalAwards": 13,
      "clinicalAwards": 1,
-     "latestAward": "2026-10-01",
+     "latestAward": "2026-11-05",
      "products": 0,
      "companyNumber": null
     },
@@ -4190,6 +4193,25 @@
      "clinicalAwards": 0,
      "latestAward": "2026-10-29",
      "products": 5,
+     "companyNumber": null
+    },
+    {
+     "name": "Elekta",
+     "report": "/medical-sales-hub/company-report/?company=Elekta",
+     "labels": [
+      "Digital health and clinical software"
+     ],
+     "frameworks": [
+      {
+       "name": "Radiotherapy IT Solutions and Associated Options and Related Services",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-it-solutions-and-associated-options-and-related-services/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-11-05",
+     "products": 4,
      "companyNumber": null
     },
     {
@@ -4769,6 +4791,17 @@
      "companyNumber": null
     },
     {
+     "name": "Audit Data",
+     "report": "/medical-sales-hub/company-report/?company=Audit%20Data",
+     "labels": [],
+     "frameworks": [],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-11-05",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
      "name": "Floki Health",
      "report": "/medical-sales-hub/company-report/?company=Floki%20Health",
      "labels": [
@@ -5174,25 +5207,6 @@
      "clinicalAwards": 0,
      "latestAward": null,
      "products": 6,
-     "companyNumber": null
-    },
-    {
-     "name": "Elekta",
-     "report": "/medical-sales-hub/company-report/?company=Elekta",
-     "labels": [
-      "Digital health and clinical software"
-     ],
-     "frameworks": [
-      {
-       "name": "Radiotherapy IT Solutions and Associated Options and Related Services",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/radiotherapy-it-solutions-and-associated-options-and-related-services/",
-       "lots": []
-      }
-     ],
-     "digitalAwards": 0,
-     "clinicalAwards": 0,
-     "latestAward": null,
-     "products": 4,
      "companyNumber": null
     },
     {
