@@ -39,7 +39,7 @@ name: Company intelligence (frameworks + Companies House + accounts)
 
 on:
   schedule:
-    - cron: "10 3 * * 1"     # Mondays 03:10 UTC, before the Monday morning tasks
+    - cron: "0 19 * * 0"     # Sundays 19:00 UTC, before the Monday morning tasks
   workflow_dispatch: {}
 
 # Same reason as weekly-refresh.yml: every writer in this repo shares one branch, and

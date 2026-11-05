@@ -32,8 +32,8 @@ name: Supplier product-detail capture (own product pages)
 
 on:
   schedule:
-    - cron: "40 2 * * 0"      # weekly, Sunday 02:40 UTC — after the Sunday range
-                               # capture (02:20) and well ahead of refresh.yml (03:15)
+    - cron: "30 18 * * 6"      # weekly, Saturdays 18:30 UTC — on its own in the evening,
+                               # after Saturday's range capture and clear of the daily writers
   workflow_dispatch:
     inputs:
       supplier_limit:

@@ -32,10 +32,10 @@ name: Atamis Health Family opportunities (daily, one request)
 
 on:
   schedule:
-    # 00:50 UTC daily — its own slot. 01:10 is taken by acquirer-press and 01:40
+    # 00:40 UTC daily — its own slot. 01:10 is taken by acquirer-press and 01:40
     # by company-press and search-index, so this sits ahead of all of them and
-    # clear of supplier-capture (02:20), mhra-alerts (02:50) and refresh (03:15).
-    - cron: "50 0 * * *"
+    # clear of supplier-capture (02:35), mhra-alerts (02:50) and refresh (03:55).
+    - cron: "40 0 * * *"
   workflow_dispatch:
 
 # TIMEOUT RAISED 20/10/2026. The 20/10/2026 05:24 run was cancelled by its own 20-minute job

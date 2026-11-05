@@ -206,7 +206,7 @@ conservative) and posts them to Lou's dashboard for checking - Lou reviews and
 can amend; automation in THIS repo still never writes 'use' lines itself.
 
 ## Ops
-- Runs daily 03:15 UTC via GitHub Actions (manual: Actions tab, "Run workflow").
+- Runs daily 03:55 UTC via GitHub Actions (manual: Actions tab, "Run workflow").
 - `state/last_run.json` records what each run scanned and added.
 - Rollback: this is git - revert the commit.
 - Member phone alerts (web push) on new speciality news: `alerts/` (GitHub Pages),

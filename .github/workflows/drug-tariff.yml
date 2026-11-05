@@ -31,7 +31,7 @@ name: Drug Tariff Parts IX and VIIIA (daily check, monthly source)
 # refresh overwrites it, so month-on-month price moves (speciality panel `drugTariffMoves`)
 # need last month stored somewhere durable. scripts/tariff_snapshots.py appends each
 # month's per-speciality slice to data/tariff-snapshots.json straight after the refresh;
-# build_speciality_panels.py (07:00 run) diffs the live month against the latest earlier
+# build_speciality_panels.py (07:45 run) diffs the live month against the latest earlier
 # snapshot. Git history is not relied on.
 #
 # ⚠️ THE PRODUCT DOSSIERS MUST FOLLOW THE TARIFF (added 01/10/2026).
@@ -57,8 +57,8 @@ name: Drug Tariff Parts IX and VIIIA (daily check, monthly source)
 
 on:
   schedule:
-    # 06:40 UTC daily — clear of the 06:10 framework-awards run, before the working day.
-    - cron: "40 6 * * *"
+    # 07:15 UTC daily — clear of the 06:00 framework-awards run, before the working day.
+    - cron: "15 7 * * *"
   workflow_dispatch:
     inputs:
       month:

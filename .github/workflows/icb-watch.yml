@@ -27,9 +27,9 @@ name: ICB watch (structure page 884, Live Desk NHS England panel)
 
 on:
   schedule:
-    # 04:05 UTC daily: clear of mhra-alerts (02:50), refresh.yml (03:15) and the
+    # 04:25 UTC daily: clear of mhra-alerts (02:50), refresh.yml (03:55) and the
     # 05:00 digest, and hours ahead of the pipeline's daily read of the file.
-    - cron: "5 4 * * *"
+    - cron: "25 4 * * *"
   workflow_dispatch: {}
 
 concurrency:

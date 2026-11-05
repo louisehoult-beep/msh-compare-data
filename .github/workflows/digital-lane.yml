@@ -3,21 +3,21 @@ name: Digital health lane and Federated Data Platform profile (daily)
 # ADDED 20/10/2026 (Hub health tech intelligence gap, build plan "Next 30 days").
 #
 # scripts/refresh_digital_lane.py writes data/digital-lane.json: NHS-buyer notices
-# with a CPV 48 or 72 (software, IT services), from framework-awards.json (06:10),
+# with a CPV 48 or 72 (software, IT services), from framework-awards.json (06:00),
 # a live tender/planning pass over Find a Tender and Contracts Finder, and the Atamis
-# live file (00:50). It never writes company-awards.json or open-tenders.json; their
+# live file (00:40). It never writes company-awards.json or open-tenders.json; their
 # CPV 33 medical rule is unchanged. verify.py check_digital_lane() enforces both.
 #
 # scripts/refresh_fdp_live.py writes data/trust-digital-profile.json from NHS
 # England's Federated Data Platform lists. The source updates quarterly, so it runs
 # on Mondays only; a run on an unchanged page rewrites the same rows.
 #
-# 06:35 UTC: after framework-awards (06:10) and open-tenders (06:25), before
-# speciality-panels (07:00), which reads both files into the digital page.
+# 06:50 UTC: after framework-awards (06:00) and open-tenders (06:25), before
+# speciality-panels (07:45), which reads both files into the digital page.
 
 on:
   schedule:
-    - cron: "35 6 * * *"
+    - cron: "50 6 * * *"
   workflow_dispatch:
     inputs:
       days:
