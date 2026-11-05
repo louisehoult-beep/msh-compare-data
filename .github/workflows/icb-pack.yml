@@ -8,7 +8,7 @@ name: ICB pack data (dermatology emollients)
 # lookup, and NHS Digital registered patients. See scripts/build_icb_pack.py and
 # Process flows for all brands/icb-pack-dermatology-spec-2026-10-22.md.
 #
-# TIMING. It has to run AFTER gp-prescribing.yml (07:20 UTC, days 15-28), because it reads
+# TIMING. It has to run AFTER gp-prescribing.yml (08:20 UTC, days 15-28), because it reads
 # data/gp-prescribing/ for ICB-level series and refuses to build if its periods differ from the
 # practice-level pull. So it runs at 09:30 UTC on the same days. `--if-new` makes a day with
 # nothing new a no-op in a few seconds: it rebuilds only when NHSBSA has a newer prescribing month

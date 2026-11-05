@@ -58,9 +58,9 @@ name: NHS Supply Chain launch briefs (weekly)
 
 on:
   schedule:
-    # 03:50 UTC on Wednesdays — its own slot, clear of the Monday (03:10) and
-    # Tuesday (03:40) weekly jobs and of every daily writer.
-    - cron: "50 3 * * 3"
+    # 19:00 UTC on Tuesdays — its own evening, clear of the Sunday and
+    # Monday 19:00 weekly jobs and of every daily writer.
+    - cron: "0 19 * * 2"
   workflow_dispatch:
 
 concurrency:

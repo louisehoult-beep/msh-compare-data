@@ -60,9 +60,9 @@ name: ICC product matrices and CCF reference (monthly)
 
 on:
   schedule:
-    # 04:20 UTC on the 3rd of each month — clear of the 12th monthly job and of
-    # both new daily jobs (01:10 Atamis, 06:10 framework awards).
-    - cron: "20 4 3 * *"
+    # 19:00 UTC on the 3rd of each month — on its own in the evening, clear of
+    # the daily writers. See docs/writer-queue-schedule.md.
+    - cron: "0 19 3 * *"
   workflow_dispatch:
 
 concurrency:

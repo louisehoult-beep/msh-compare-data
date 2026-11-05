@@ -34,9 +34,9 @@ name: Find a Tender framework awards (daily)
 
 on:
   schedule:
-    # 06:10 UTC daily — after the 05:00 search-index/company-intelligence cluster
+    # 06:00 UTC daily — after the 05:00 search-index/company-intelligence cluster
     # and well clear of Atamis at 01:10, so the two new jobs never queue together.
-    - cron: "10 6 * * *"
+    - cron: "0 6 * * *"
   workflow_dispatch:
     inputs:
       days:

@@ -37,7 +37,7 @@ name: Prune the Hub calendar (drop rows that aged into the past)
 
 on:
   schedule:
-    # 01:50 UTC daily — 30 minutes ahead of supplier-capture.yml at 02:20, which
+    # 01:50 UTC daily — 30 minutes ahead of supplier-capture.yml at 02:35, which
     # is the earliest daily writer. The calendar must be clean before anything
     # else reaches the gate, or they all fail on it exactly as they did on 25/08.
     - cron: "50 1 * * *"

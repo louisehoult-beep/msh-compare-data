@@ -25,8 +25,8 @@ name: GP prescribing by ICB (NHSBSA EPD, monthly source)
 
 on:
   schedule:
-    # 07:20 UTC, days 15-28: clear of drug-tariff (06:40) and the overnight writers.
-    - cron: "20 7 15-28 * *"
+    # 08:20 UTC, days 15-28: clear of drug-tariff (07:15) and the overnight writers.
+    - cron: "20 8 15-28 * *"
   workflow_dispatch:
     inputs:
       force:

@@ -18,7 +18,7 @@ name: Hospital prescribing by trust (NHSBSA, monthly source)
 # anything from 06:36 to 15:51 UTC. The one revision in that span,
 # 202505FINAL, landed on 14/08/2025. So the job runs daily on the 14th to the
 # 28th at 17:40 UTC, after the day's publication window: a file NHSBSA posts
-# that afternoon is built the same evening, and the 07:00 speciality-panels.yml
+# that afternoon is built the same evening, and the 07:45 speciality-panels.yml
 # rebuild carries it onto the Hub the next morning.
 #
 # `--if-new` makes a day with nothing new a no-op in a second or two. It rebuilds
@@ -35,7 +35,7 @@ name: Hospital prescribing by trust (NHSBSA, monthly source)
 on:
   schedule:
     # 17:40 UTC, days 14-28: after NHSBSA's publication window and the 17:00
-    # differentiator run, before the next morning's 07:00 panels rebuild.
+    # differentiator run, before the next morning's 07:45 panels rebuild.
     - cron: "40 17 14-28 * *"
   workflow_dispatch:
     inputs:

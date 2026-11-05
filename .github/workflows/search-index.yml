@@ -45,12 +45,10 @@ name: Build Hub search index
 
 on:
   schedule:
-    # 01:40 UTC, the slot this job has always run in. It is clear of
-    # supplier-capture.yml (02:20) and refresh.yml (03:15). It shares the slot
-    # with company-press.yml, which is now harmless rather than a race: both are
-    # in the msh-compare-data-writer group below, so the second one queues
-    # behind the first instead of losing its push to it.
-    - cron: "40 1 * * *"
+    # 02:10 UTC, 30 minutes after company-press.yml (01:40) so the index reads
+    # the press sweep's seed, and ahead of supplier-capture.yml (02:35). It used
+    # to share 01:40 with company-press; see docs/writer-queue-schedule.md.
+    - cron: "10 2 * * *"
   workflow_dispatch:
     inputs:
       dry_run:

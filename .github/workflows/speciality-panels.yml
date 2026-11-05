@@ -17,15 +17,15 @@ name: Speciality panels rebuild
 #   was empty until this commit. The loader pattern was proved; the workflow was
 #   assumed. That comment is corrected in the same change.
 #
-# TIMING. 07:00 UTC, deliberately after every writer that feeds it:
-#   atamis-opportunities  00:50   -> framework-awards.json
-#   supplier-capture      02:20   -> frameworks.json
-#   company-intelligence  Mon 03:10 -> frameworks.json
-#   framework-awards      06:10   -> framework-awards.json
+# TIMING. 07:45 UTC, deliberately after every writer that feeds it:
+#   atamis-opportunities  00:40   -> framework-awards.json
+#   supplier-capture      02:35   -> frameworks.json
+#   company-intelligence  Sundays 19:00 UTC -> frameworks.json
+#   framework-awards      06:00   -> framework-awards.json
 #   open-tenders          06:25   -> open-tenders.json
-#   drug-tariff           06:40   -> drug-tariff-part-ix.json, drug-tariff-part-viiia.json
-#   mhra-dsu              02:55   -> mhra-dsu.json
-#   gp-prescribing        07:20 (15th-28th, monthly data) -> data/gp-prescribing/
+#   drug-tariff           07:15   -> drug-tariff-part-ix.json, drug-tariff-part-viiia.json
+#   mhra-dsu              03:25   -> mhra-dsu.json
+#   gp-prescribing        08:20 (15th-28th, monthly data) -> data/gp-prescribing/
 #     This one lands AFTER the rebuild, deliberately not waited for: a new NHSBSA
 #     month reaches the panels at the next morning's run, one day later.
 #   hospital-prescribing  17:40 (14th-28th, monthly data) -> data/hospital-prescribing/
@@ -37,7 +37,7 @@ name: Speciality panels rebuild
 
 on:
   schedule:
-    - cron: "0 7 * * *"      # daily 07:00 UTC, after every feed this reads
+    - cron: "45 7 * * *"      # daily 07:45 UTC, after every feed this reads
   workflow_dispatch: {}
 
 # Same group as every other writer to this repo (see weekly-refresh.yml's own
