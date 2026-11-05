@@ -57,7 +57,7 @@ import urllib.parse
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "data" / "kol-finder.json"
-CHECKED = "2026-10-22"
+CHECKED = "2026-10-22"  # not advanced 05/11/2026: TVS Charity Commission page did not load
 
 CLASSES = [
     ("board", "Board and committee members"),
@@ -121,7 +121,7 @@ SOURCES = {
         "body": "Association for Continence Professionals (ACP, also known as the Association for Continence Advice)",
         "title": "Meet Our Executive Members",
         "url": "https://acpcontinence.co.uk/acp-exec/",
-        "note": "Executive members as the page lists them. Only the Chair, Secretary and Treasurer have a role on the page; the others are listed without one. Commercial advisors and patrons are on separate pages and are not listed."},
+        "note": "Executive members as the page lists them. Each member is shown with the role the page gives. Commercial advisors and patrons are on separate pages and are not listed."},
     "tvs-charity": {
         "short": "TVS trustees (Charity Commission)",
         "body": "Tissue Viability Society (TVS)",
@@ -139,7 +139,7 @@ SOURCES = {
         "body": "Association of British Clinical Diabetologists (ABCD)",
         "title": "ABCD Committee",
         "url": "https://abcd.care/committee",
-        "note": "The four officers the page names. The page's Committee Members section was empty when read, and it shows no affiliations."},
+        "note": "The officers the page names, plus the DTN-UK Chair it lists alongside them. The page's Committee Members section was empty when read, and it shows no affiliations."},
     "wuk-editorial": {
         "short": "Wounds UK editorial board",
         "body": "Wounds UK (journal)",
@@ -186,8 +186,7 @@ add("Dr Simon Tso", L, "Honorary Treasurer", "South Warwickshire University NHS 
 add("Dr Victoria Swale", L, "Honorary Secretary", "Royal Free London NHS Foundation Trust", term="July 2025 to July 2027", body=BAD)
 add("Dr Graham Johnston", L, "Assistant Honorary Secretary", "University Hospitals of Leicester NHS Trust", term="July 2025 to July 2027", body=BAD)
 add("Professor John Lear", L, "Research Vice President", "Cheshire Hospitals NHS Foundation Trust", term="July 2025 to July 2027", body=BAD, classes=("board", "evidence"))
-add("Professor Minal Singh", L, "Education Vice President", "Salford Royal NHS Foundation Trust", term="July 2023 to July 2026", body=BAD,
-    note="The term end shown on the page (July 2026) had passed when read on 22/10/2026 and the page still listed this role; check the page for a successor before relying on it.")
+add("Professor Minal Singh", L, "Education Vice President", "Salford Royal NHS Foundation Trust", term="July 2023 to July 2027", body=BAD)
 add("Professor John McGrath", L, "Editor, British Journal of Dermatology (BJD)", "Guy's and St Thomas' NHS Foundation Trust", term="July 2024 to July 2029", body=BAD, classes=("board", "editor"))
 # Regional representatives
 for n, r, t in [
@@ -274,10 +273,10 @@ add("Dr Gordon Hale", "sds-home", "Secretary, Scottish Dermatological Society (r
 # each page shows them; a person with no role on the page is listed as "listed", never given a role.
 CONT = ["continence"]
 X = "acp-exec"
-for n, r in [("Polly Weston", "Chair"), ("Kerry Doherty", "Secretary"), ("Bo Yeung", "Treasurer")]:
+for n, r in [("Dr Angie Rantell", "Chair"), ("Suzanne Carney", "Honorary Secretary and Website Lead"), ("Julia Thrush", "Honorary Treasurer"),
+             ("Rebecca Cousins", "Conference Lead"), ("Jasmine King", "Education Lead"), ("Tracy Pouard", "Education Deputy"),
+             ("Teresa Woollerton", "Newsletter Editor"), ("Darrin Powell", "Membership Deputy Lead"), ("Jane Clarke", "Committee Member")]:
     add(n, X, r, "Association for Continence Professionals", specialities=CONT, body="ACP")
-for n in ["Esther Taborn", "Professor Nikki Cotterill", "Julia Thrush", "Rebecca Cousins", "Ruth Scrivens", "Dr Angie Rantell"]:
-    add(n, X, "Executive member (listed on the executive page; the page shows no role)", "Association for Continence Professionals", specialities=CONT, body="ACP")
 
 WND = ["wound"]
 V = "tvs-charity"
@@ -340,6 +339,7 @@ for n, o in [
 add("Professor Ketan Dhatariya", "abcd-committee", "Chair", None, specialities=DIA, body="ABCD")
 add("Dr Vijay Jayagopal", "abcd-committee", "Honorary Treasurer", None, specialities=DIA, body="ABCD")
 add("Professor Hermione Price", "abcd-committee", "Honorary Secretary", None, specialities=DIA, body="ABCD")
+add("Dr Sufyan Hussain", "abcd-committee", "DTN-UK Chair", None, specialities=DIA, body="ABCD")
 add("Dr Aaisha Saqib", "abcd-committee", "Honorary Meeting Secretary", None, specialities=DIA, body="ABCD")
 
 # Wording each source gives the member about itself, kept short
