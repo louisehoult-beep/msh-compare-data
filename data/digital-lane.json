@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "05/11/2026",
- "generated": "2026-11-05",
+ "dataAsOf": "06/11/2026",
+ "generated": "2026-11-06",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,22 +22,22 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-10-28",
-   "to": "2026-11-05",
+   "from": "2026-10-29",
+   "to": "2026-11-06",
    "days": 8,
-   "run": "2026-11-05"
+   "run": "2026-11-06"
   },
   "notes": [
-   "Find a Tender (tender stage): 0 digital lane notice(s) from 55 release(s) over 1 page(s)",
-   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-28",
-   "Find a Tender (planning stage): 0 digital lane notice(s) from 34 release(s) over 1 page(s)",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-28"
+   "Find a Tender (tender stage): 0 digital lane notice(s) from 48 release(s) over 1 page(s)",
+   "Contracts Finder (tender stage): 1 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-29",
+   "Find a Tender (planning stage): 0 digital lane notice(s) from 30 release(s) over 1 page(s)",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-29"
   ]
  },
  "counts": {
-  "awards": 344,
-  "awardsClinical": 39,
-  "openNotices": 2,
+  "awards": 349,
+  "awardsClinical": 40,
+  "openNotices": 3,
   "openNoticesClinical": 1,
   "marketEngagement": 2,
   "marketEngagementClinical": 0
@@ -157,6 +157,100 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/104930-2026",
    "ocid": "ocds-h6vhtk-07b36c"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Contract for RFID Tracking Solution (iRecord/iFit) Software",
+   "buyer": "Swansea Bay University Health Board",
+   "published": "2026-11-05",
+   "suppliers": [
+    "IDOX SOFTWARE LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 688572.53,
+   "digitalCpv": [
+    "72511000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105431-2026",
+   "ocid": "ocds-h6vhtk-07b5ce"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Drug Knowledge Base for Electronic Health and Care Record",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "published": "2026-11-05",
+   "suppliers": [
+    "FIRST DATABANK UK LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105425-2026",
+   "ocid": "ocds-h6vhtk-07b5c1"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "Systems Integration PME",
+   "buyer": "North East Ambulance Service NHS Foundation Trust",
+   "published": "2026-11-05",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000",
+    "72212430"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105399-2026",
+   "ocid": "ocds-h6vhtk-07b5b8"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "award",
+   "title": "Leasing AI Software",
+   "buyer": "NHS Property Services Limited",
+   "published": "2026-11-05",
+   "suppliers": [
+    "Orbital Witness Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-11-01",
+   "value": 72000.0,
+   "digitalCpv": [
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105396-2026",
+   "ocid": "ocds-h6vhtk-07b5b5"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "LHCA Environmental Fit Screening Tool",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "published": "2026-11-05",
+   "suppliers": [
+    "Pearn Kandola"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-03-31",
+   "value": 22500.0,
+   "digitalCpv": [
+    "72224000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105349-2026",
+   "ocid": "ocds-h6vhtk-07b599"
   },
   {
    "lane": "digital",
@@ -6595,6 +6689,24 @@
  ],
  "openNotices": [
   {
+   "title": "RA361117 - Sharegate Migrate Renewal",
+   "buyer": "Aneurin Bevan Health Board",
+   "status": "active",
+   "rawStatus": "active",
+   "stage": "open tender",
+   "date": "2026-11-06",
+   "closingDate": "2026-11-09T12:00:00Z",
+   "startDate": null,
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/e16440ea-9112-4579-93ab-075519ab0fad",
+   "source": "Contracts Finder",
+   "cpv": "48000000",
+   "valueAmount": null,
+   "valueCurrency": "",
+   "ocid": "ocds-b5fd17-7ecbbf9b-320e-4d5d-b50a-cc47bcf25f97",
+   "lane": "digital",
+   "clinical": false
+  },
+  {
    "title": "Asset Tracking System",
    "buyer": "NHS Borders",
    "status": "active",
@@ -6763,6 +6875,12 @@
    "to": "2026-11-05",
    "days": 8,
    "run": "2026-11-05"
+  },
+  {
+   "from": "2026-10-29",
+   "to": "2026-11-06",
+   "days": 8,
+   "run": "2026-11-06"
   }
  ]
 }
