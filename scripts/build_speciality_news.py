@@ -304,6 +304,17 @@ SOURCES = [
     {"id": "jpras", "name": "Journal of Plastic, Reconstructive & Aesthetic Surgery",
      "url": "https://www.jprasurg.com/current.rss",
      "specialities": ["plastics-burns-and-reconstruction"]},
+    # Added 06/11/2026: continence-bladder-and-bowel was THIN (2 items in 31 days,
+    # scripts/check_speciality_news_coverage.py). Neurourology and Urodynamics (Wiley,
+    # the International Continence Society's journal) fetched 06/11/2026: channel
+    # "Wiley: Neurourology and Urodynamics: Table of Contents", items dated 03-05/11/2026.
+    # Rejected the same day: Bladder & Bowel Community (feed 200 but newest item
+    # 01/10/2026, outside 30 days), ERIC (403 Cloudflare challenge), BAUS and
+    # Bladder & Bowel Foundation (no feed / 404 / 526), BJU International (international
+    # volume would bury the page; rejected 30/10/2026).
+    {"id": "neurourol_urodyn", "name": "Neurourology and Urodynamics",
+     "url": "https://onlinelibrary.wiley.com/feed/15206777/most-recent",
+     "specialities": ["continence-bladder-and-bowel"]},
     # UK nursing news across every speciality: keyword slice only, like BJN.
     {"id": "nursing_times", "name": "Nursing Times", "url": "https://www.nursingtimes.net/feed/",
      "specialities": [], "paged": True},
