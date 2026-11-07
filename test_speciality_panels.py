@@ -4313,8 +4313,14 @@ for good in ["Stroke Central Monitor",
 # is a direct award of stroke services and belongs on this page. Read from the
 # award feed record (buyer, title, supplier, date); the notice itself was not
 # opened.
-check("exactly fifteen, and every one of them was read",
-      sk["counts"]["awardsMatched"] == 15, "got %s" % sk["counts"]["awardsMatched"])
+# SIXTEEN FROM 07/11/2026: "QHM-2026-6953 Stroke Recovery Support Service" (NHS
+# North East and North Cumbria ICB to Stroke Association, published 06/11/2026,
+# Find a Tender notice 105606-2026, framework-awards feed, not itself a framework
+# award) is a direct award of a stroke recovery support service and belongs on
+# this page. Read from the award feed record (buyer, title, supplier, date); the
+# notice itself was not opened.
+check("exactly sixteen, and every one of them was read",
+      sk["counts"]["awardsMatched"] == 16, "got %s" % sk["counts"]["awardsMatched"])
 check("the Norfolk and Suffolk community stroke service is one of them",
       any("enhanced community stroke services" in (a.get("title") or "").lower()
           for a in sk["awards"]))
