@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "06/11/2026",
- "generated": "2026-11-06",
+ "dataAsOf": "08/11/2026",
+ "generated": "2026-11-08",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,27 +22,177 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-10-29",
-   "to": "2026-11-06",
+   "from": "2026-10-31",
+   "to": "2026-11-08",
    "days": 8,
-   "run": "2026-11-06"
+   "run": "2026-11-08"
   },
   "notes": [
-   "Find a Tender (tender stage): 0 digital lane notice(s) from 48 release(s) over 1 page(s)",
-   "Contracts Finder (tender stage): 1 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-29",
+   "Find a Tender (tender stage): 0 digital lane notice(s) from 41 release(s) over 1 page(s)",
+   "Contracts Finder (tender stage): 1 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-31",
    "Find a Tender (planning stage): 0 digital lane notice(s) from 30 release(s) over 1 page(s)",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-29"
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-31"
   ]
  },
  "counts": {
-  "awards": 349,
-  "awardsClinical": 40,
+  "awards": 356,
+  "awardsClinical": 41,
   "openNotices": 3,
   "openNoticesClinical": 1,
   "marketEngagement": 2,
   "marketEngagementClinical": 0
  },
  "awards": [
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "MEDICODE 360 ENCODER",
+   "buyer": "LIVERPOOL HEART AND CHEST HOSPITAL NHS FOUNDATION TRUST",
+   "published": "2026-11-07",
+   "suppliers": [
+    "INSIGHT DIRECT (UK) LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-12-11",
+   "value": 14741.47,
+   "digitalCpv": [
+    "48218000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105971-2026",
+   "ocid": "ocds-h6vhtk-07b70e"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "Public Sector Construction Consultancy",
+   "buyer": "NHS Shared Business Services Limited",
+   "published": "2026-11-06",
+   "suppliers": [],
+   "isFramework": true,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72224000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105739-2026",
+   "ocid": "ocds-h6vhtk-055328"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "award",
+   "title": "CHS - Acute Electronic Patient Record (EPR) Contract Extension",
+   "buyer": "Croydon Health Services NHS Trust",
+   "published": "2026-11-06",
+   "suppliers": [
+    "Oracle Health"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 17549439.0,
+   "digitalCpv": [
+    "48814000",
+    "72268000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105806-2026",
+   "ocid": "ocds-h6vhtk-07b6b8"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Project Management Support",
+   "buyer": "Mid Yorkshire Hospitals NHS Trust",
+   "published": "2026-11-06",
+   "suppliers": [
+    "The Health Informatics Service"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-03-31",
+   "value": 27846.0,
+   "digitalCpv": [
+    "72224000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105776-2026",
+   "ocid": "ocds-h6vhtk-07b6a9"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Trickle Platform",
+   "buyer": "Mid Yorkshire Hospitals NHS Trust",
+   "published": "2026-11-06",
+   "suppliers": [
+    "Aptiq Works Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-11-05",
+   "value": 24912.0,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105680-2026",
+   "ocid": "ocds-h6vhtk-07b66f"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "tender",
+   "title": "Electronic Prescription Service",
+   "buyer": "The Rotherham NHS Foundation Trust",
+   "published": "2026-11-06",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000",
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105612-2026",
+   "ocid": "ocds-h6vhtk-07b63c"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "CarePartner Licenses ",
+   "buyer": "Cwm Taf Morgannwg Univerity Health Board",
+   "published": "2026-11-06",
+   "suppliers": [
+    "imosphere"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105569-2026",
+   "ocid": "ocds-h6vhtk-07b622"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Disaster Recovery Audit Actions – Technical Programme Leadership Support",
+   "buyer": "NHS Property Services Limited",
+   "published": "2026-11-06",
+   "suppliers": [
+    "RedRock Consulting Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72251000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105527-2026",
+   "ocid": "ocds-h6vhtk-07b609"
+  },
   {
    "lane": "digital",
    "clinical": true,
@@ -2109,23 +2259,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/097261-2026",
    "ocid": "ocds-h6vhtk-078812"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "planning",
-   "title": "Public Sector Construction Consultancy",
-   "buyer": "NHS Shared Business Services Limited",
-   "published": "2026-10-15",
-   "suppliers": [],
-   "isFramework": true,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "72224000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/097664-2026",
-   "ocid": "ocds-h6vhtk-055328"
   },
   {
    "lane": "digital",
@@ -6881,6 +7014,12 @@
    "to": "2026-11-06",
    "days": 8,
    "run": "2026-11-06"
+  },
+  {
+   "from": "2026-10-31",
+   "to": "2026-11-08",
+   "days": 8,
+   "run": "2026-11-08"
   }
  ]
 }
