@@ -13,20 +13,20 @@
  "slug": "digital-and-medical-it",
  "label": "Digital health and AI",
  "defined": true,
- "generated": "2026-11-07",
+ "generated": "2026-11-08",
  "dataAsOf": {
   "frameworks": "2026-11-02",
-  "tenderHistory": "2026-11-07",
-  "frameworkAwards": "2026-11-07T12:31:54+00:00",
-  "openTenders": "07/11/2026",
-  "drugTariff": "2026-11-07",
-  "localIntel": "2026-11-07",
+  "tenderHistory": "2026-11-08",
+  "frameworkAwards": "2026-11-08T12:51:10+00:00",
+  "openTenders": "08/11/2026",
+  "drugTariff": "2026-11-08",
+  "localIntel": "2026-11-08",
   "supplierDirectory": "2026-11-05",
   "gpPrescribing": "2026-10-21",
-  "mhraDsu": "2026-11-07",
+  "mhraDsu": "2026-11-08",
   "drugTariffViiia": null,
   "hospitalPrescribing": null,
-  "digitalLane": "06/11/2026"
+  "digitalLane": "08/11/2026"
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -1058,7 +1058,7 @@
    "url": "https://www.gov.uk/government/collections/ai-airlock-a-regulatory-sandbox-for-ai-enabled-medical-devices",
    "verifiedOn": "2026-10-20",
    "lastCheck": {
-    "date": "2026-11-07",
+    "date": "2026-11-08",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1078,7 +1078,7 @@
    "url": "https://digital.nhs.uk/services/digital-technology-assessment-criteria-dtac",
    "verifiedOn": "2026-10-20",
    "lastCheck": {
-    "date": "2026-11-07",
+    "date": "2026-11-08",
     "status": "unreachable",
     "http": 403
    }
@@ -1098,7 +1098,7 @@
    "url": "https://www.gov.uk/government/news/government-backs-recommendations-of-nhs-doctors-led-ai-commission",
    "verifiedOn": "2026-10-20",
    "lastCheck": {
-    "date": "2026-11-07",
+    "date": "2026-11-08",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1120,7 +1120,7 @@
    "url": "https://malue.co.uk",
    "verifiedOn": "2026-10-29",
    "lastCheck": {
-    "date": "2026-11-07",
+    "date": "2026-11-08",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -2402,7 +2402,7 @@
   "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
  },
  "mhraDsu": {
-  "dataAsOf": "2026-11-07",
+  "dataAsOf": "2026-11-08",
   "sourcePage": "https://www.gov.uk/drug-safety-update",
   "noFacet": true,
   "whyEmpty": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
@@ -2413,11 +2413,11 @@
  },
  "drugTariffViiia": null,
  "digitalLane": {
-  "dataAsOf": "06/11/2026",
+  "dataAsOf": "08/11/2026",
   "rule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction. CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only. A call-off under a framework is not a notice, and most digital money in the NHS moves as framework call-offs, capital business cases and G-Cloud awards without competition. This lane is therefore a floor, not a census: an absence here says nothing about the buyer or the market. Contract values, where shown, are the notice's own and are not summed across rows. Shown here: the clinical rows only, up to 15 awards and every open notice and market engagement row. The full lane, with the rows left out, is data/digital-lane.json.",
   "counts": {
-   "awards": 349,
-   "awardsClinical": 40,
+   "awards": 356,
+   "awardsClinical": 41,
    "openNotices": 3,
    "openNoticesClinical": 1,
    "marketEngagement": 2,
@@ -2445,6 +2445,23 @@
   ],
   "marketEngagement": [],
   "awards": [
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "award",
+    "title": "CHS - Acute Electronic Patient Record (EPR) Contract Extension",
+    "buyer": "Croydon Health Services NHS Trust",
+    "published": "2026-11-06",
+    "isFramework": false,
+    "contractEnd": null,
+    "value": 17549439.0,
+    "digitalCpv": [
+     "48814000",
+     "72268000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/105806-2026",
+    "ocid": "ocds-h6vhtk-07b6b8"
+   },
    {
     "lane": "digital",
     "clinical": true,
@@ -2687,28 +2704,12 @@
     ],
     "url": "https://www.find-tender.service.gov.uk/Notice/097462-2026",
     "ocid": "ocds-h6vhtk-078881"
-   },
-   {
-    "lane": "digital",
-    "clinical": true,
-    "stage": "award",
-    "title": "Chest X-Ray Artificial Intelligence Solution and Radiology AI Platform",
-    "buyer": "SOMERSET NHS FOUNDATION TRUST",
-    "published": "2026-10-14",
-    "isFramework": false,
-    "contractEnd": null,
-    "value": null,
-    "digitalCpv": [
-     "72250000"
-    ],
-    "url": "https://www.find-tender.service.gov.uk/Notice/096998-2026",
-    "ocid": "ocds-h6vhtk-078788"
    }
   ],
-  "awardsClinicalTotal": 40,
+  "awardsClinicalTotal": 41,
   "gates": {
    "rule": "Each row is one owner page for a health tech gate. lastUpdated is the owner's own date: GOV.UK's public_updated_at from its content API, or the 'Last edited' line on an NHS England Digital page. latestChange is the owner's own change note, verbatim, where the owner publishes one. changedSinceLastRun is true when that date moved since the previous run. Nothing is summarised or interpreted.",
-   "dataAsOf": "06/11/2026",
+   "dataAsOf": "08/11/2026",
    "pages": [
     {
      "gate": "Regulation",
@@ -3627,7 +3628,7 @@
    "none": 6
   },
   "companies": {
-   "dataAsOf": "2026-11-07T10:48:09.122524Z",
+   "dataAsOf": "2026-11-08T10:52:27.128316Z",
    "counts": {
     "companies": 148,
     "onDigitalFramework": 119,
@@ -3671,9 +3672,9 @@
        ]
       }
      ],
-     "digitalAwards": 5,
+     "digitalAwards": 6,
      "clinicalAwards": 4,
-     "latestAward": "2026-08-20",
+     "latestAward": "2026-11-07",
      "products": 0,
      "companyNumber": null
     },
@@ -3985,6 +3986,25 @@
      "companyNumber": null
     },
     {
+     "name": "Imosphere",
+     "report": "/medical-sales-hub/company-report/?company=Imosphere",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [
+      {
+       "name": "G-Cloud 15",
+       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 2,
+     "clinicalAwards": 1,
+     "latestAward": "2026-11-06",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
      "name": "Intersystems",
      "report": "/medical-sales-hub/company-report/?company=Intersystems",
      "labels": [
@@ -4287,25 +4307,6 @@
      "clinicalAwards": 1,
      "latestAward": "2026-10-19",
      "products": 2,
-     "companyNumber": null
-    },
-    {
-     "name": "Imosphere",
-     "report": "/medical-sales-hub/company-report/?company=Imosphere",
-     "labels": [
-      "Digital and medical IT"
-     ],
-     "frameworks": [
-      {
-       "name": "G-Cloud 15",
-       "url": "https://www.gca.gov.uk/agreements/RM1557.15",
-       "lots": []
-      }
-     ],
-     "digitalAwards": 1,
-     "clinicalAwards": 1,
-     "latestAward": "2026-09-01",
-     "products": 0,
      "companyNumber": null
     },
     {
