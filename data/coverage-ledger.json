@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-11-02",
-  "differentiator.json published": 38870,
-  "differentiator.json held": 296498
+  "differentiator.json published": 38871,
+  "differentiator.json held": 296509
  },
  "counts": {
   "frameworks": 122,
@@ -26,7 +26,7 @@
   "inScope": 102,
   "supplierNamesUnresolved": 404,
   "inScopeSuppliersNeedingCrawl": 216,
-  "inScopeSuppliersNeedingDomain": 205,
+  "inScopeSuppliersNeedingDomain": 204,
   "suppliersRefused": 577,
   "suppliersRefusedButPublishingElsewhere": 167,
   "suppliersCapturedNothingCounted": 0,
@@ -9371,8 +9371,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "28 February 2029",
    "suppliersAwarded": 25,
-   "suppliersPublished": 9,
-   "coverage": 36.0,
+   "suppliersPublished": 10,
+   "coverage": 40.0,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -9383,7 +9383,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 25,
-   "coverageOfTarget": 36.0,
+   "coverageOfTarget": 40.0,
    "crawlWorklist": [
     {
      "supplier": "Atom Medical Corporation UK ltd",
@@ -9396,7 +9396,6 @@
    ],
    "domainsMissing": [
     "Atom Medical Corporation UK ltd",
-    "L\u00f6wenstein Medical UK",
     "Scott Medical Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -9472,13 +9471,6 @@
      "bucket": "heldOnly"
     },
     {
-     "supplier": "L\u00f6wenstein Medical UK",
-     "domain": "loewensteinmedical.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-30",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "Walters Medical Ltd",
      "domain": "www.waltersmedical.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
@@ -9498,6 +9490,13 @@
      "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-11-01",
      "bucket": "published"
+    },
+    {
+     "supplier": "L\u00f6wenstein Medical UK",
+     "domain": "loewensteinmedical.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-30",
+     "bucket": "published"
     }
    ],
    "route": "NHSSC framework",
@@ -9514,7 +9513,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 4,
-    "heldNeedingCategory": 3,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -9526,6 +9525,7 @@
     "Hamilton Medical UK",
     "Henleys Medical Supplies Limited",
     "Inspiration Healthcare",
+    "L\u00f6wenstein Medical UK",
     "MEDACX Limited",
     "Mediprema",
     "Mindray UK",
@@ -9540,7 +9540,6 @@
    ],
    "heldOnly": [
     "GE HealthCare",
-    "L\u00f6wenstein Medical UK",
     "Walters Medical Ltd"
    ],
    "capturedNothingCounted": [],
@@ -9557,7 +9556,7 @@
     "@SimulationMan Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 9,
+   "actionableTotal": 8,
    "blockedReason": null,
    "deferred": null
   },
@@ -15476,7 +15475,6 @@
     "Breas Medical Ltd",
     "Cavagna Group UK",
     "Independent Physiological Diagnostics Ltd",
-    "L\u00f6wenstein Medical UK",
     "Nowus Healthcare",
     "Philips Healthcare / Philips Respironics",
     "Remserve Medical Supplies Ltd",
@@ -15529,17 +15527,17 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Flexicare Medical",
-     "domain": "flexicare.com",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "L\u00f6wenstein Medical UK",
      "domain": "loewensteinmedical.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-30",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Flexicare Medical",
+     "domain": "flexicare.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-08-31",
      "bucket": "heldOnly"
     }
    ],
@@ -15547,12 +15545,13 @@
    "catsInScope": [],
    "publishedElsewhereNoOwnRange": [
     "Draeger Medical UK",
-    "Fisher & Paykel Healthcare"
+    "Fisher & Paykel Healthcare",
+    "L\u00f6wenstein Medical UK"
    ],
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 10,
-    "heldNeedingCategory": 5,
+    "heldNeedingCategory": 4,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -15566,6 +15565,7 @@
     "Intermedical (UK) Ltd",
     "Intersurgical",
     "Intus Healthcare",
+    "L\u00f6wenstein Medical UK",
     "Medicina Limited",
     "Nihon Kohden",
     "Radiometer UK",
@@ -15575,7 +15575,6 @@
    ],
    "heldOnly": [
     "Flexicare Medical",
-    "L\u00f6wenstein Medical UK",
     "Nowus Healthcare",
     "Sefam Medical Ltd",
     "Stowood Scientific Instruments"
@@ -15597,7 +15596,7 @@
     "The Better Sleep Clinic"
    ],
    "unknown": [],
-   "actionableTotal": 23,
+   "actionableTotal": 22,
    "blockedReason": null,
    "deferred": null
   },
