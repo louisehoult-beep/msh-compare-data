@@ -67,7 +67,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Neuromodulation Devices and Associated Products | neuro | 23 | 11 | 47.8% | 7 | 15 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 8 | 36.4% | 6 | 13 | STARTED |
 | Hand Hygiene and Associated Products and Services | infection | 21 | 6 | 28.6% | 4 | 16 | STARTED |
-| Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 7 | 11 | STARTED |
+| Intravenous Cannula and Associated Products | vascular | 21 | 11 | 52.4% | 5 | 12 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 6 | 28.6% | 1 | 11 | STARTED · 5 EXCLUDED |
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 9 | 45.0% | 3 | 12 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 9 | 47.4% | 7 | 11 | STARTED |

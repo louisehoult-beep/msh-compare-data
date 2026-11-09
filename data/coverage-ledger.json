@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-11-02",
-  "differentiator.json published": 38871,
-  "differentiator.json held": 296509
+  "differentiator.json published": 38877,
+  "differentiator.json held": 296503
  },
  "counts": {
   "frameworks": 122,
@@ -24,10 +24,10 @@
   "unmapped": 46,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 404,
+  "supplierNamesUnresolved": 403,
   "inScopeSuppliersNeedingCrawl": 216,
   "inScopeSuppliersNeedingDomain": 204,
-  "suppliersRefused": 577,
+  "suppliersRefused": 578,
   "suppliersRefusedButPublishingElsewhere": 167,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
@@ -1167,10 +1167,6 @@
   ],
   [
    "Your Choice Fruit & Vegetables T/A Your Choice Catering Supplies",
-   1
-  ],
-  [
-   "Applied Medical Technology Limited",
    1
   ],
   [
@@ -10356,8 +10352,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "31 March 2027",
    "suppliersAwarded": 21,
-   "suppliersPublished": 10,
-   "coverage": 47.6,
+   "suppliersPublished": 11,
+   "coverage": 52.4,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -10367,7 +10363,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 21,
-   "coverageOfTarget": 47.6,
+   "coverageOfTarget": 52.4,
    "crawlWorklist": [
     {
      "supplier": "Unomedical Ltd",
@@ -10380,6 +10376,13 @@
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
+    {
+     "supplier": "Applied Medical Technology Limited",
+     "domain": "www.applied-medical.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-09",
+     "bucket": "refused"
+    },
     {
      "supplier": "Iskus Health UK Limited",
      "domain": "fannin.eu",
@@ -10471,8 +10474,8 @@
     "Reliance Medical"
    ],
    "actionable": {
-    "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 3,
+    "unresolvedNames": 0,
+    "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -10486,6 +10489,7 @@
     "GBUK Group",
     "Greiner Bio-One Ltd",
     "ICU Medical (incl. Smiths Medical)",
+    "Praxis Medical Ltd",
     "ICU Medical (incl. Smiths Medical)",
     "Terumo UK",
     "Vygon (UK)",
@@ -10493,7 +10497,6 @@
    ],
    "publishedElsewhere": [
     "Fannin (UK) Limited",
-    "Praxis Medical Ltd",
     "Nipro Medical Europe",
     "Reliance Medical"
    ],
@@ -10506,14 +10509,13 @@
     "Unomedical Ltd"
    ],
    "refused": [
+    "Applied Medical Technology Limited",
     "Iskus Health UK Limited",
     "Prosum Medical Ltd",
     "TLB Medical Supplies"
    ],
-   "unknown": [
-    "Applied Medical Technology Limited"
-   ],
-   "actionableTotal": 7,
+   "unknown": [],
+   "actionableTotal": 5,
    "blockedReason": null,
    "deferred": null
   },
