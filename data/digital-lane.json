@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "08/11/2026",
- "generated": "2026-11-08",
+ "dataAsOf": "09/11/2026",
+ "generated": "2026-11-09",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,27 +22,181 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-10-31",
-   "to": "2026-11-08",
+   "from": "2026-11-01",
+   "to": "2026-11-09",
    "days": 8,
-   "run": "2026-11-08"
+   "run": "2026-11-09"
   },
   "notes": [
-   "Find a Tender (tender stage): 0 digital lane notice(s) from 41 release(s) over 1 page(s)",
-   "Contracts Finder (tender stage): 1 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-31",
-   "Find a Tender (planning stage): 0 digital lane notice(s) from 30 release(s) over 1 page(s)",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-31"
+   "Find a Tender (tender stage): 2 digital lane notice(s) from 51 release(s) over 1 page(s)",
+   "Contracts Finder (tender stage): 1 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-01",
+   "Find a Tender (planning stage): 0 digital lane notice(s) from 35 release(s) over 1 page(s)",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-01"
   ]
  },
  "counts": {
-  "awards": 356,
+  "awards": 361,
   "awardsClinical": 41,
-  "openNotices": 3,
+  "openNotices": 5,
   "openNoticesClinical": 1,
   "marketEngagement": 2,
   "marketEngagementClinical": 0
  },
  "awards": [
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "BE23/043 - LTHT Medical Location Risk Grading Trustwide",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "published": "2026-11-09",
+   "suppliers": [
+    "Walker Sime Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2028-08-31",
+   "value": 290000.0,
+   "digitalCpv": [
+    "72224000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106132-2026",
+   "ocid": "ocds-h6vhtk-079043"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Laundry Replacement of the PLC Controlling",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "published": "2026-11-09",
+   "suppliers": [
+    "Laundry Replacement of the PLC Controlling"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72263000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106025-2026",
+   "ocid": "ocds-h6vhtk-077dfd"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "TELEPATH EXTENSION",
+   "buyer": "Cwm Taff Morgannwg Universty Health Board",
+   "published": "2026-11-09",
+   "suppliers": [
+    "Dedalus DH OPCO UK Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-03-31",
+   "value": 13957.71,
+   "digitalCpv": [
+    "72320000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106057-2026",
+   "ocid": "ocds-h6vhtk-077836"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "tender",
+   "title": "NENC ICB Clinical Support Information and Pathway Implementation for the North Area Integrated Care Partnership",
+   "buyer": "NHS NORTH EAST AND NORTH CUMBRIA INTEGRATED CARE BOARD",
+   "published": "2026-11-09",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72300000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105979-2026",
+   "ocid": "ocds-h6vhtk-06c915"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Computerised Maintenance Management System (CMMS) / Computer-Aided Facility Management System (CAFM)",
+   "buyer": "NHS Grampian",
+   "published": "2026-11-09",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48420000",
+    "48421000",
+    "72000000",
+    "72212420",
+    "72212421",
+    "72514000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106313-2026",
+   "ocid": "ocds-h6vhtk-07b7b3"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "tender",
+   "title": "Computerised Maintenance Management System (CMMS) / Computer-Aided Facility Management System (CAFM)",
+   "buyer": "NHS Grampian",
+   "published": "2026-11-09",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48420000",
+    "48421000",
+    "72000000",
+    "72212420",
+    "72212421",
+    "72514000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106307-2026",
+   "ocid": "ocds-h6vhtk-07b7c3"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Disaster Recovery Consultancy",
+   "buyer": "NHS Property Services Limited",
+   "published": "2026-11-09",
+   "suppliers": [
+    "REDROCK CONSULTING LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-03-05",
+   "value": 56250.0,
+   "digitalCpv": [
+    "72222300"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106277-2026",
+   "ocid": "ocds-h6vhtk-07b7b0"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "WPL07329 – HIOW OneEPR Readiness",
+   "buyer": "HAMPSHIRE HOSPITALS NHS FOUNDATION TRUST",
+   "published": "2026-11-09",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72200000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106232-2026",
+   "ocid": "ocds-h6vhtk-07b797"
+  },
   {
    "lane": "digital",
    "clinical": false,
@@ -1472,25 +1626,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/101155-2026",
    "ocid": "ocds-h6vhtk-06d45c"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "award",
-   "title": "BE23/043 - LTHT Medical Location Risk Grading Trustwide",
-   "buyer": "Leeds Teaching Hospitals NHS Trust",
-   "published": "2026-10-26",
-   "suppliers": [
-    "Walker Sime Limited"
-   ],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "72224000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/101080-2026",
-   "ocid": "ocds-h6vhtk-079043"
   },
   {
    "lane": "digital",
@@ -3252,23 +3387,6 @@
   {
    "lane": "digital",
    "clinical": false,
-   "stage": "tender",
-   "title": "Laundry Replacement of the PLC Controlling",
-   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
-   "published": "2026-09-30",
-   "suppliers": [],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "72263000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/092547-2026",
-   "ocid": "ocds-h6vhtk-077dfd"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
    "stage": "planning",
    "title": "UHB Outsourcing Clinical Coding PME",
    "buyer": "University Hospitals Birmingham NHS Foundation Trust",
@@ -3837,25 +3955,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/090037-2026",
    "ocid": "ocds-h6vhtk-077864"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "award",
-   "title": "TELEPATH EXTENSION",
-   "buyer": "Cwm Taff Morgannwg Universty Health Board",
-   "published": "2026-09-23",
-   "suppliers": [
-    "Dedalus DH OPCO UK Ltd"
-   ],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "72320000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/090227-2026",
-   "ocid": "ocds-h6vhtk-077836"
   },
   {
    "lane": "digital",
@@ -6858,6 +6957,42 @@
    "clinical": false
   },
   {
+   "title": "Computerised Maintenance Management System (CMMS) / Computer-Aided Facility Management System (CAFM)",
+   "buyer": "NHS Grampian",
+   "status": "active",
+   "rawStatus": "active",
+   "stage": "open tender",
+   "date": "2026-11-09",
+   "closingDate": "2026-12-09T12:00:00Z",
+   "startDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/106307-2026",
+   "source": "Find a Tender",
+   "cpv": "72212421",
+   "valueAmount": null,
+   "valueCurrency": "",
+   "ocid": "ocds-h6vhtk-07b7c3",
+   "lane": "digital",
+   "clinical": false
+  },
+  {
+   "title": "Computerised Maintenance Management System (CMMS) / Computer-Aided Facility Management System (CAFM)",
+   "buyer": "NHS Grampian",
+   "status": "active",
+   "rawStatus": "active",
+   "stage": "open tender",
+   "date": "2026-11-09",
+   "closingDate": "2026-12-09T12:00:00Z",
+   "startDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/106281-2026",
+   "source": "Find a Tender",
+   "cpv": "72212421",
+   "valueAmount": null,
+   "valueCurrency": "",
+   "ocid": "ocds-h6vhtk-07b7b3",
+   "lane": "digital",
+   "clinical": false
+  },
+  {
    "title": "Population Health Management (PHM)",
    "buyer": "NHS SOUTH WEST LONDON INTEGRATED CARE BOARD",
    "status": "planning",
@@ -7020,6 +7155,12 @@
    "to": "2026-11-08",
    "days": 8,
    "run": "2026-11-08"
+  },
+  {
+   "from": "2026-11-01",
+   "to": "2026-11-09",
+   "days": 8,
+   "run": "2026-11-09"
   }
  ]
 }
