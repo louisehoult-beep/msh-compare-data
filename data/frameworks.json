@@ -10,7 +10,7 @@
   "ref": "ETH-DB4D6B772",
   "contact": "contact@elevateandthrive.uk"
  },
- "dataAsOf": "2026-11-02",
+ "dataAsOf": "2026-11-10",
  "source": "NHS Supply Chain Contract Launch Briefs (https://www.supplychain.nhs.uk/product-information/contract-launch-briefs/), each framework's own page, fetched this run.",
  "rule": "A supplier appears under a framework here ONLY because that framework's own NHS Supply Chain brief names it. Nothing is inferred from product ranges, specialities or catalogue categories. Frameworks whose brief could not be parsed are listed in `unparsed` with the reason and are NOT silently dropped.",
  "briefsSeen": 140,
@@ -10801,6 +10801,10 @@
    "supplierSource": "count verified against the page's own stated total (63)",
    "supplierCount": 63,
    "supplierLots": {
+    "AM Healthcare Group": [
+     "Lot 2",
+     "Lot 3"
+    ],
     "Algeo Ltd": [
      "Lot 1"
     ],
@@ -11106,6 +11110,9 @@
     ],
     "Walters Medical Ltd": [
      "Walters Medical Limited"
+    ],
+    "AM Healthcare Group": [
+     "Ability Matters Group Limited"
     ]
    },
    "statedLotCount": null,
@@ -17275,12 +17282,12 @@
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/fresh-and-food-to-go/",
    "name": "Fresh and Food To Go Direct Solutions",
    "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source",
-   "type": "New Contract",
+   "type": "Contract Extension",
    "category": "Food",
    "reference": "2024/S 000-010195",
    "supplyRoute": "Direct",
    "starts": "3 September 2024",
-   "ends": "3 September 2026"
+   "ends": "2 February 2027"
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/hand-hygiene-active-hand-shield/",
@@ -17427,5 +17434,5 @@
   }
  ],
  "lotRule": "A supplier is shown on a lot ONLY where the framework owner's own published source for that framework names it against that lot: the NHS Supply Chain contract launch brief's lot-by-lot supplier lists or supplier-by-lot table, the Product/Supplier Matrix spreadsheet attached to that brief (only where the sheet has an explicit lot axis, and only where the supplier has a mark or a product in that lot), or the Find a Tender contract award notice for that framework's own procurement. Nothing is inferred from product ranges, specialities or lot titles. Lots attach to the exact supplier string the brief uses; a source name attaches only where its normalised form (brief_names.clean + company_match.key) equals that brief name's, or both resolve to the same single Hub company under the seed's recorded aliases. Unmatched names are listed in `unresolved`, never guessed. Where the brief breaks a framework into lots but no source names who holds which, lotStatus is 'notPublished' and the report says so.",
- "lotsAsOf": "2026-11-02"
+ "lotsAsOf": "2026-11-10"
 }

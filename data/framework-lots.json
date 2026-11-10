@@ -10,7 +10,7 @@
   "ref": "ETH-D8F73B696",
   "contact": "contact@elevateandthrive.uk"
  },
- "dataAsOf": "2026-11-02",
+ "dataAsOf": "2026-11-10",
  "owner": "NHS Supply Chain",
  "rule": "A supplier is shown on a lot ONLY where the framework owner's own published source for that framework names it against that lot: the NHS Supply Chain contract launch brief's lot-by-lot supplier lists or supplier-by-lot table, the Product/Supplier Matrix spreadsheet attached to that brief (only where the sheet has an explicit lot axis, and only where the supplier has a mark or a product in that lot), or the Find a Tender contract award notice for that framework's own procurement. Nothing is inferred from product ranges, specialities or lot titles. Lots attach to the exact supplier string the brief uses; a source name attaches only where its normalised form (brief_names.clean + company_match.key) equals that brief name's, or both resolve to the same single Hub company under the seed's recorded aliases. Unmatched names are listed in `unresolved`, never guessed. Where the brief breaks a framework into lots but no source names who holds which, lotStatus is 'notPublished' and the report says so.",
  "counts": {
@@ -14838,19 +14838,10 @@
       "Lot 2",
       "Lot 3"
      ],
-     "suppliersWithLots": 58
+     "suppliersWithLots": 59
     }
    ],
    "unresolved": [
-    {
-     "name": "Ability Matters Group Limited",
-     "lots": [
-      "Lot 2",
-      "Lot 3"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
     {
      "name": "Credenhill Limited",
      "lots": [
@@ -15069,6 +15060,10 @@
      ],
      "medi UK Ltd": [
       "Lot 1"
+     ],
+     "AM Healthcare Group": [
+      "Lot 2",
+      "Lot 3"
      ]
     }
    },
@@ -15147,6 +15142,9 @@
     ],
     "Walters Medical Ltd": [
      "Walters Medical Limited"
+    ],
+    "AM Healthcare Group": [
+     "Ability Matters Group Limited"
     ]
    },
    "briefLotTitles": {
@@ -15155,6 +15153,10 @@
     "Lot 3": "Service"
    },
    "supplierLots": {
+    "AM Healthcare Group": [
+     "Lot 2",
+     "Lot 3"
+    ],
     "Algeo Ltd": [
      "Lot 1"
     ],
@@ -15349,7 +15351,6 @@
    },
    "status": "published",
    "suppliersWithoutLot": [
-    "AM Healthcare Group",
     "Cardiac Services",
     "Daylong Direct",
     "Prestige Health Footwear Ltd",
