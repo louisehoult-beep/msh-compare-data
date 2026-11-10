@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "09/11/2026",
- "generated": "2026-11-09",
+ "dataAsOf": "10/11/2026",
+ "generated": "2026-11-10",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,27 +22,106 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-11-01",
-   "to": "2026-11-09",
+   "from": "2026-11-02",
+   "to": "2026-11-10",
    "days": 8,
-   "run": "2026-11-09"
+   "run": "2026-11-10"
   },
   "notes": [
-   "Find a Tender (tender stage): 2 digital lane notice(s) from 51 release(s) over 1 page(s)",
-   "Contracts Finder (tender stage): 1 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-01",
-   "Find a Tender (planning stage): 0 digital lane notice(s) from 35 release(s) over 1 page(s)",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-01"
+   "Find a Tender (tender stage): 2 digital lane notice(s) from 57 release(s) over 1 page(s)",
+   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-02",
+   "Find a Tender (planning stage): 0 digital lane notice(s) from 40 release(s) over 1 page(s)",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-02"
   ]
  },
  "counts": {
-  "awards": 361,
+  "awards": 364,
   "awardsClinical": 41,
-  "openNotices": 5,
+  "openNotices": 4,
   "openNoticesClinical": 1,
   "marketEngagement": 2,
   "marketEngagementClinical": 0
  },
  "awards": [
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Workforce Technology Solutions for HULL",
+   "buyer": "HULL UNIVERSITY TEACHING HOSPITALS NHS TRUST",
+   "published": "2026-11-10",
+   "suppliers": [
+    "ALLOCATE SOFTWARE LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2028-11-30",
+   "value": 1808369,
+   "digitalCpv": [
+    "48000000",
+    "72222300"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106474-2026",
+   "ocid": "ocds-h6vhtk-079587"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Provision of Workforce Technology NLaG",
+   "buyer": "NORTHERN LINCOLNSHIRE AND GOOLE NHS FOUNDATION TRUST",
+   "published": "2026-11-10",
+   "suppliers": [
+    "ALLOCATE SOFTWARE LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2028-11-30",
+   "value": 1566894,
+   "digitalCpv": [
+    "48000000",
+    "72222300"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106475-2026",
+   "ocid": "ocds-h6vhtk-07957c"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Workforce Tech Solutions Y&S",
+   "buyer": "YORK AND SCARBOROUGH TEACHING HOSPITALS NHS FOUNDATION TRUST",
+   "published": "2026-11-10",
+   "suppliers": [
+    "ALLOCATE SOFTWARE LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2028-11-30",
+   "value": 3039235,
+   "digitalCpv": [
+    "48000000",
+    "72222300"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106487-2026",
+   "ocid": "ocds-h6vhtk-079573"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Renewal of Licences",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "published": "2026-11-10",
+   "suppliers": [
+    "ATOS IT SERVICES UK LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-11-09",
+   "value": 56000,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106508-2026",
+   "ocid": "ocds-h6vhtk-07b839"
+  },
   {
    "lane": "digital",
    "clinical": false,
@@ -196,6 +275,45 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/106232-2026",
    "ocid": "ocds-h6vhtk-07b797"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Medical Revalidation and Appraisal, 360 Feedback and Medical Job Planning System",
+   "buyer": "Lincolnshire Partnership NHS Foundation Trust",
+   "published": "2026-11-09",
+   "suppliers": [
+    "SARD JV Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2029-10-31",
+   "value": 40825.0,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106379-2026",
+   "ocid": "ocds-h6vhtk-07b7ef"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Informed Consent Suite",
+   "buyer": "Northampton General Hospital NHS Trust",
+   "published": "2026-11-09",
+   "suppliers": [
+    "Eido Healthcare Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-03-13",
+   "value": 23976.05,
+   "digitalCpv": [
+    "48814000",
+    "72212180"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106373-2026",
+   "ocid": "ocds-h6vhtk-07b7ec"
   },
   {
    "lane": "digital",
@@ -841,66 +959,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/103745-2026",
    "ocid": "ocds-h6vhtk-06da19"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "award",
-   "title": "Workforce Technology Solutions for HULL",
-   "buyer": "HULL UNIVERSITY TEACHING HOSPITALS NHS TRUST",
-   "published": "2026-11-02",
-   "suppliers": [
-    "ALLOCATE SOFTWARE LIMITED"
-   ],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "48000000",
-    "72222300"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/103708-2026",
-   "ocid": "ocds-h6vhtk-079587"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "award",
-   "title": "Provision of Workforce Technology NLaG",
-   "buyer": "NORTHERN LINCOLNSHIRE AND GOOLE NHS FOUNDATION TRUST",
-   "published": "2026-11-02",
-   "suppliers": [
-    "ALLOCATE SOFTWARE LIMITED"
-   ],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "48000000",
-    "72222300"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/103692-2026",
-   "ocid": "ocds-h6vhtk-07957c"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "award",
-   "title": "Provision of Workforce Technology Systems",
-   "buyer": "YORK AND SCARBOROUGH TEACHING HOSPITALS NHS FOUNDATION TRUST",
-   "published": "2026-11-02",
-   "suppliers": [
-    "ALLOCATE SOFTWARE LIMITED"
-   ],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "48000000",
-    "72222300"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/103675-2026",
-   "ocid": "ocds-h6vhtk-079573"
   },
   {
    "lane": "digital",
@@ -6921,24 +6979,6 @@
  ],
  "openNotices": [
   {
-   "title": "RA361117 - Sharegate Migrate Renewal",
-   "buyer": "Aneurin Bevan Health Board",
-   "status": "active",
-   "rawStatus": "active",
-   "stage": "open tender",
-   "date": "2026-11-06",
-   "closingDate": "2026-11-09T12:00:00Z",
-   "startDate": null,
-   "url": "https://www.contractsfinder.service.gov.uk/Notice/e16440ea-9112-4579-93ab-075519ab0fad",
-   "source": "Contracts Finder",
-   "cpv": "48000000",
-   "valueAmount": null,
-   "valueCurrency": "",
-   "ocid": "ocds-b5fd17-7ecbbf9b-320e-4d5d-b50a-cc47bcf25f97",
-   "lane": "digital",
-   "clinical": false
-  },
-  {
    "title": "Asset Tracking System",
    "buyer": "NHS Borders",
    "status": "active",
@@ -7161,6 +7201,12 @@
    "to": "2026-11-09",
    "days": 8,
    "run": "2026-11-09"
+  },
+  {
+   "from": "2026-11-02",
+   "to": "2026-11-10",
+   "days": 8,
+   "run": "2026-11-10"
   }
  ]
 }
