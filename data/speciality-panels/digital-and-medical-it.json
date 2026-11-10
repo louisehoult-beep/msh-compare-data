@@ -13,20 +13,20 @@
  "slug": "digital-and-medical-it",
  "label": "Digital health and AI",
  "defined": true,
- "generated": "2026-11-08",
+ "generated": "2026-11-10",
  "dataAsOf": {
   "frameworks": "2026-11-02",
-  "tenderHistory": "2026-11-08",
-  "frameworkAwards": "2026-11-08T12:51:10+00:00",
-  "openTenders": "08/11/2026",
-  "drugTariff": "2026-11-08",
-  "localIntel": "2026-11-08",
-  "supplierDirectory": "2026-11-05",
+  "tenderHistory": "2026-11-10",
+  "frameworkAwards": "2026-11-09T15:38:59+00:00",
+  "openTenders": "09/11/2026",
+  "drugTariff": "2026-11-09",
+  "localIntel": "2026-11-10",
+  "supplierDirectory": "2026-11-09",
   "gpPrescribing": "2026-10-21",
-  "mhraDsu": "2026-11-08",
+  "mhraDsu": "2026-11-09",
   "drugTariffViiia": null,
   "hospitalPrescribing": null,
-  "digitalLane": "08/11/2026"
+  "digitalLane": "09/11/2026"
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -1058,7 +1058,7 @@
    "url": "https://www.gov.uk/government/collections/ai-airlock-a-regulatory-sandbox-for-ai-enabled-medical-devices",
    "verifiedOn": "2026-10-20",
    "lastCheck": {
-    "date": "2026-11-08",
+    "date": "2026-11-10",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1078,7 +1078,7 @@
    "url": "https://digital.nhs.uk/services/digital-technology-assessment-criteria-dtac",
    "verifiedOn": "2026-10-20",
    "lastCheck": {
-    "date": "2026-11-08",
+    "date": "2026-11-10",
     "status": "unreachable",
     "http": 403
    }
@@ -1098,7 +1098,7 @@
    "url": "https://www.gov.uk/government/news/government-backs-recommendations-of-nhs-doctors-led-ai-commission",
    "verifiedOn": "2026-10-20",
    "lastCheck": {
-    "date": "2026-11-08",
+    "date": "2026-11-10",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1120,7 +1120,7 @@
    "url": "https://malue.co.uk",
    "verifiedOn": "2026-10-29",
    "lastCheck": {
-    "date": "2026-11-08",
+    "date": "2026-11-10",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -2402,7 +2402,7 @@
   "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
  },
  "mhraDsu": {
-  "dataAsOf": "2026-11-08",
+  "dataAsOf": "2026-11-09",
   "sourcePage": "https://www.gov.uk/drug-safety-update",
   "noFacet": true,
   "whyEmpty": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
@@ -2413,12 +2413,12 @@
  },
  "drugTariffViiia": null,
  "digitalLane": {
-  "dataAsOf": "08/11/2026",
+  "dataAsOf": "09/11/2026",
   "rule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction. CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only. A call-off under a framework is not a notice, and most digital money in the NHS moves as framework call-offs, capital business cases and G-Cloud awards without competition. This lane is therefore a floor, not a census: an absence here says nothing about the buyer or the market. Contract values, where shown, are the notice's own and are not summed across rows. Shown here: the clinical rows only, up to 15 awards and every open notice and market engagement row. The full lane, with the rows left out, is data/digital-lane.json.",
   "counts": {
-   "awards": 356,
+   "awards": 361,
    "awardsClinical": 41,
-   "openNotices": 3,
+   "openNotices": 5,
    "openNoticesClinical": 1,
    "marketEngagement": 2,
    "marketEngagementClinical": 0
@@ -2709,7 +2709,7 @@
   "awardsClinicalTotal": 41,
   "gates": {
    "rule": "Each row is one owner page for a health tech gate. lastUpdated is the owner's own date: GOV.UK's public_updated_at from its content API, or the 'Last edited' line on an NHS England Digital page. latestChange is the owner's own change note, verbatim, where the owner publishes one. changedSinceLastRun is true when that date moved since the previous run. Nothing is summarised or interpreted.",
-   "dataAsOf": "08/11/2026",
+   "dataAsOf": "09/11/2026",
    "pages": [
     {
      "gate": "Regulation",
@@ -2815,7 +2815,7 @@
   },
   "frameworks": {
    "rule": "Every fact read at the named primary source on verifiedOn, else 'Not verified' with what would settle it. Supplier lists hold company names only; no contact person, email, phone or address is ever stored. suppliers null means no list was read.",
-   "dataAsOf": "2026-11-02",
+   "dataAsOf": "2026-11-09",
    "items": [
     {
      "name": "Technology Services 4",
@@ -2841,7 +2841,7 @@
       {
        "lot": "3",
        "name": "End User Services",
-       "suppliers": 119
+       "suppliers": 120
       },
       {
        "lot": "3a",
@@ -2851,7 +2851,7 @@
       {
        "lot": "4",
        "name": "Infrastructure Management",
-       "suppliers": 114
+       "suppliers": 115
       },
       {
        "lot": "4a",
@@ -2917,7 +2917,7 @@
       }
      ],
      "notVerified": [
-      "Supplier list read from the Digital Marketplace G-Cloud 15 supplier A to Z (https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud-15/suppliers), company names only, 2919 suppliers. The A to Z does not say which lot each supplier holds, so every lot's list stays null; a supplier's lot is shown only where its own service page was read.",
+      "Supplier list read from the Digital Marketplace G-Cloud 15 supplier A to Z (https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud-15/suppliers), company names only, 2951 suppliers. The A to Z does not say which lot each supplier holds, so every lot's list stays null; a supplier's lot is shown only where its own service page was read.",
       "Agreement end 05/02/2028 (page header) and 'run for 4 years from 6 August 2026, reopening after 18 months and again after 36 months' (page text) are both recorded verbatim and not resolved. Settled by the framework award form."
      ]
     },
@@ -3252,7 +3252,7 @@
   },
   "dspt": {
    "defined": true,
-   "checked": "2026-11-02",
+   "checked": "2026-11-09",
    "sourceUrl": "https://www.dsptoolkit.nhs.uk/OrganisationSearch",
    "reuseBasis": "Terms and conditions at https://www.dsptoolkit.nhs.uk/Home/TermsAndConditions: Crown copyright material may be reproduced free of charge in any format or medium, provided it is reproduced accurately and not used in a misleading context; source identified.",
    "note": "Status is as published by DSPT on the checked date, for the organisation whose DSPT name exactly matches the supplier name. Identity beyond the name match is not verified, and this is not an endorsement.",
@@ -3628,7 +3628,7 @@
    "none": 6
   },
   "companies": {
-   "dataAsOf": "2026-11-08T10:52:27.128316Z",
+   "dataAsOf": "2026-11-09T12:17:21.872446Z",
    "counts": {
     "companies": 148,
     "onDigitalFramework": 119,
@@ -4750,6 +4750,19 @@
      "companyNumber": null
     },
     {
+     "name": "Dedalus",
+     "report": "/medical-sales-hub/company-report/?company=Dedalus",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [],
+     "digitalAwards": 3,
+     "clinicalAwards": 0,
+     "latestAward": "2026-11-09",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
      "name": "Abbott Diagnostics",
      "report": "/medical-sales-hub/company-report/?company=Abbott%20Diagnostics",
      "labels": [],
@@ -4758,19 +4771,6 @@
      "clinicalAwards": 0,
      "latestAward": "2026-10-27",
      "products": 8,
-     "companyNumber": null
-    },
-    {
-     "name": "Dedalus",
-     "report": "/medical-sales-hub/company-report/?company=Dedalus",
-     "labels": [
-      "Digital and medical IT"
-     ],
-     "frameworks": [],
-     "digitalAwards": 2,
-     "clinicalAwards": 0,
-     "latestAward": "2026-09-23",
-     "products": 0,
      "companyNumber": null
     },
     {
