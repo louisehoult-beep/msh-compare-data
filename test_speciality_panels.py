@@ -5282,8 +5282,17 @@ check("and it is named on four of the five frameworks",
 check("with the three NHSSC spellings kept visible",
       bool(_co_oly) and len(_co_oly[0]["variants"]) == 3)
 
-print("  open tenders — empty is the honest answer, not a miss")
-check("no open notice on this patch today", co["openTenders"] == [])
+print("  open tenders — never invented, whatever the day's true count is")
+# Was a hardcoded empty list until 10/11/2026, when the East of England NHS
+# collaborative Procurement Hub opened real market engagement for stoma care
+# nurse sponsorship (Find a Tender 106395-2026). An empty list was correct the
+# day this was written, not a property of the logic - see mental-health's and
+# audiology's version of this same check for why count-not-invented is the
+# durable form.
+check("open tenders count is not invented", co["counts"]["openTenders"] == len(co["openTenders"]))
+_co_open_titles = {t.get("title") for t in co["openTenders"]}
+check("the stoma care nurse sponsorship market engagement is carried",
+      "Market Engagement for Stoma Care Nurse Sponsorship Services" in _co_open_titles)
 
 
 # ---------------------------------------------------------------------------

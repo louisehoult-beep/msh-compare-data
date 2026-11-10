@@ -7720,6 +7720,13 @@ SPECIALITY_RULES = {
         #                        Forensic Advocacy Services for South West Yorkshire
         #                        Partnership and Humber - do not say "mental health" in
         #                        the title and would otherwise be lost.
+        #   environmental audit -> "Neurodiverse Environmental Audits v2" (Oxford Health
+        #                        NHS Foundation Trust), reissued 10/11/2026. Matched on
+        #                        "neurodivers\w*", but it is an estates/accessibility
+        #                        audit, not a clinical purchase - the same row the
+        #                        neurology rule already refuses by name for the same
+        #                        reason. "environmental audit" is excluded rather than
+        #                        the one title, so a v3 reissue cannot slip through again.
         "exclude": (
             r"\b(education(?:al)? psycholog\w*|psychology services group|"
             r"forensic (?:vacuum|science)|dna profiling|"
@@ -7727,16 +7734,19 @@ SPECIALITY_RULES = {
             # contracts matched "forensic" (property marking, DNA consumables, pay-as-
             # you-go forensic services, lab glass washers). Forensic mental health
             # services keep matching: none of these words appears in their titles.
-            r"forensic property|forensic consumables|pay as you go forensic|glass washers)\b"
+            r"forensic property|forensic consumables|pay as you go forensic|glass washers|"
+            r"environmental audit\w*)\b"
         ),
         "excludeFinding": (
             "The exclusion list exists because every pattern in it matched a real notice "
-            "that was not this speciality, and there were seven: four educational "
+            "that was not this speciality, and there were eight: four educational "
             "psychology contracts bought by local authority education directorates "
             "(Rutland twice, West Northamptonshire, Milton Keynes), the Ministry of "
             "Justice's HMPPS Psychology Services Group court and parole reports service, "
-            "and two police forensics buys - a forensic vacuum metal deposition chamber "
-            "and DNA profiling kits. Prison healthcare is deliberately NOT excluded: HMP "
+            "two police forensics buys - a forensic vacuum metal deposition chamber "
+            "and DNA profiling kits - and an estates/accessibility audit (Neurodiverse "
+            "Environmental Audits, Oxford Health NHS Foundation Trust) matched on "
+            "'neurodiverse'. Prison healthcare is deliberately NOT excluded: HMP "
             "Wandsworth counselling, bought by Oxleas NHS Foundation Trust, and Northern "
             "Ireland Prison Service challenging environment furniture are both this "
             "market and both stand."
