@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-11-02",
-  "differentiator.json published": 38877,
-  "differentiator.json held": 296503
+  "differentiator.json published": 38880,
+  "differentiator.json held": 296500
  },
  "counts": {
   "frameworks": 122,
@@ -24,7 +24,7 @@
   "unmapped": 46,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 403,
+  "supplierNamesUnresolved": 401,
   "inScopeSuppliersNeedingCrawl": 216,
   "inScopeSuppliersNeedingDomain": 204,
   "suppliersRefused": 578,
@@ -1355,14 +1355,6 @@
   ],
   [
    "Turner Price (Country Range)",
-   1
-  ],
-  [
-   "Creed Health \u2013 novated from BVM Medical Ltd",
-   1
-  ],
-  [
-   "Globus Medical UK Ltd \u2013 novated from Nevro Medical Limited",
    1
   ],
   [
@@ -9770,8 +9762,8 @@
    "category": "Medical Technology",
    "ends": "18 March 2028",
    "suppliersAwarded": 23,
-   "suppliersPublished": 11,
-   "coverage": 47.8,
+   "suppliersPublished": 13,
+   "coverage": 56.5,
    "nhsscCategory": "Medical Technology",
    "inScope": true,
    "outOfScopeReason": null,
@@ -9781,7 +9773,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 23,
-   "coverageOfTarget": 47.8,
+   "coverageOfTarget": 56.5,
    "crawlWorklist": [
     {
      "supplier": "Far From Surgical Solutions",
@@ -9839,10 +9831,10 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Polar Medical Ltd",
-     "domain": "www.polarmedical.co.uk",
-     "reason": "only 2 product records on the site's API \u2014 that is a landing page, not a catalogue; the WooCommerce Store API returned HTTP 404; the sitemap carries 2 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
+     "supplier": "Creed Medical Ltd",
+     "domain": "creedhealth.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-11",
      "bucket": "heldOnly"
     },
     {
@@ -9895,6 +9887,13 @@
      "bucket": "published"
     },
     {
+     "supplier": "Polar Medical Ltd",
+     "domain": "www.polarmedical.co.uk",
+     "reason": "only 2 product records on the site's API \u2014 that is a landing page, not a catalogue; the WooCommerce Store API returned HTTP 404; the sitemap carries 2 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-31",
+     "bucket": "published"
+    },
+    {
      "supplier": "Precisis",
      "domain": "precisis.de",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -9913,13 +9912,14 @@
    "catsInScope": [
     "neuro:dbs",
     "neuro:pns",
+    "neuro:rfa",
     "neuro:scs",
     "neuro:shockwave",
     "neuro:sns"
    ],
    "publishedElsewhereNoOwnRange": [],
    "actionable": {
-    "unresolvedNames": 2,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 1,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
@@ -9929,6 +9929,7 @@
    },
    "published": [
     "Abbott Medical U.K. Ltd",
+    "Avanos Medical UK Limited",
     "Boston Scientific",
     "Charco Neurotech",
     "electroCore UK Ltd",
@@ -9937,14 +9938,15 @@
     "LivaNova UK Limited",
     "Mainstay Medical Distribution Ltd",
     "Medtronic",
+    "Polar Medical Ltd",
     "Precisis",
     "Saluda Medical"
    ],
    "publishedElsewhere": [
-    "Avanos Medical UK Limited"
+    "Globus Medical UK Ltd"
    ],
    "heldOnly": [
-    "Polar Medical Ltd"
+    "Creed Medical Ltd"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
@@ -9959,11 +9961,8 @@
     "Nyxoah SA",
     "Phagenesis"
    ],
-   "unknown": [
-    "Creed Health \u2013 novated from BVM Medical Ltd",
-    "Globus Medical UK Ltd \u2013 novated from Nevro Medical Limited"
-   ],
-   "actionableTotal": 7,
+   "unknown": [],
+   "actionableTotal": 5,
    "blockedReason": null,
    "deferred": null
   },

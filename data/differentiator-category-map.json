@@ -259,7 +259,8 @@
    "dbs": "Deep brain stimulation",
    "sns": "Sacral nerve stimulation",
    "pns": "Peripheral / other nerve stimulation",
-   "shockwave": "Non-invasive neuromodulation & extracorporeal shockwave therapy — distinct from implantable devices (scs/dbs/sns/pns)"
+   "shockwave": "Non-invasive neuromodulation & extracorporeal shockwave therapy — distinct from implantable devices (scs/dbs/sns/pns)",
+   "rfa": "Radiofrequency ablation and denervation for chronic pain — distinct from nerve-stimulation implants (dbs/scs/sns/pns)"
   },
   "orthotics": {
    "afo": "Ankle-foot orthoses and bracing",
@@ -92644,9 +92645,10 @@
     "Coolief Cooled Radiofrequency For Cervical Facet Joint Pain",
     "Coolief Cooled Radiofrequency For Hip"
    ],
-   "hub": null,
+   "hub": "neuro:rfa",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are COOLIEF Cooled Radiofrequency (discogenic pain, cervical facet joint pain, hip) and the TRIDENT/ESENTEC RF ablation systems (2023 Diros Technology acquisition) — radiofrequency ablation/denervation of peripheral nerves for chronic pain. This is a genuine vocabulary gap under the vocabulary-gap policy (data/identity-vocabulary-policy.json, ruled 20/09/2026): it is not nerve STIMULATION (neuro:pns is reserved for implantable stimulators/leads — every existing pns row is a stimulation device), and it is not non-invasive shockwave. Added neuro:rfa, named from the supplier's own product language (\"Radiofrequency\"), named on NHS Supply Chain's Neuromodulation Devices and Associated Products framework brief as an awarded supplier."
   },
   {
    "supplier": "Johnson & Johnson MedTech",
@@ -184955,6 +184957,32 @@
    "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item description above",
    "why": "The Prisma VENT30 is a bi-level (NIV) ventilator — same device class as ResMed's Astral/Stellar, already mapped anaesthesia:vent in this file — and the supplier's own site is crawl-refused (checked 2026-09-30, within TTL), so NHSSC's own catalogue is the only permitted route to this award.",
    "decidedIn": "framework-coverage batch 09/11/2026 (Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems)"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Avanos Medical UK Limited",
+   "term": "COOLIEF Cooled Radiofrequency (knee OA/genicular, cervical/lumbar facet, SI joint, shoulder, discogenic pain — current generation)",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "hub": "neuro:rfa",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py",
+   "why": "NHS Supply Chain's own catalogue cache carries this term for Avanos with real NPC-coded items (RF generators/accessories for genicular, facet, SI joint, hip, shoulder and discogenic pain). Avanos's own-site crawl captured these same products as bare division listings with no detail page, so they carry no manufacturer source and would otherwise be held for want of a source; this NHSSC-term entry is the sourced route. Radiofrequency ablation/denervation for chronic pain is a genuine vocabulary gap under the vocabulary-gap policy (ruled 20/09/2026, data/identity-vocabulary-policy.json): not nerve STIMULATION (neuro:pns is reserved for implantable stimulators/leads) and not non-invasive shockwave. Added neuro:rfa, named from the supplier's own product language (\"Radiofrequency\").",
+   "decidedIn": "framework-coverage batch 10/11/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Polar Medical Ltd",
+   "term": "URF 3AP / Diros Owl RF Lesion Generator (radiofrequency generator for pain management)",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "hub": "neuro:rfa",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py",
+   "why": "NHS Supply Chain's own catalogue cache carries this term for Polar Medical Ltd with real NPC-coded RF-ablation items (RF generator, needle/cannula, cable and multi-lesion adaptor accessories) — the same Diros-technology radiofrequency-ablation mechanism as Avanos Medical UK Limited's COOLIEF/TRIDENT/ESENTEC range, mapped under the same new neuro:rfa category added this run. Named on NHS Supply Chain's Neuromodulation Devices and Associated Products framework brief (Lot 3) as \"Polar Medical Ltd\".",
+   "decidedIn": "framework-coverage batch 10/11/2026"
   }
  ],
  "kinds": {

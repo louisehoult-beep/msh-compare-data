@@ -64,7 +64,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 11 | 40.7% | 8 | 16 | STARTED |
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 10 | 40.0% | 8 | 14 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 8 | 32.0% | 7 | 15 | STARTED |
-| Neuromodulation Devices and Associated Products | neuro | 23 | 11 | 47.8% | 7 | 15 | STARTED |
+| Neuromodulation Devices and Associated Products | neuro | 23 | 13 | 56.5% | 5 | 16 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 8 | 36.4% | 6 | 13 | STARTED |
 | Hand Hygiene and Associated Products and Services | infection | 21 | 6 | 28.6% | 4 | 16 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 11 | 52.4% | 5 | 12 | STARTED |
