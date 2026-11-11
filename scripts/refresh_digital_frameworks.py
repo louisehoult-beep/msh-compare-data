@@ -408,6 +408,30 @@ def parse_sbs_page(page_html):
     }
 
 
+SBS_LIST_STOPS = ("Strategic Procurement Support", "If this framework", "Find out what the press",
+                  "Contract Award Notice", "Contact the Digital")
+
+
+def parse_sbs_suppliers(page_html):
+    """Company names from the page's own 'Supplier Details' list (names only, as published),
+    or None when the list cannot be read cleanly. Never guesses."""
+    lines = [l.strip() for l in text_of(page_html).split("\n") if l.strip()]
+    idx = [i for i, l in enumerate(lines) if l == "Supplier Details"]
+    if not idx:
+        return None
+    names, closed = [], False
+    for l in lines[idx[-1] + 1:]:
+        if l.startswith(SBS_LIST_STOPS):
+            closed = True
+            break
+        if len(l) > 90 or l.endswith("."):
+            continue  # an intro sentence, not a company name
+        names.append(l)
+    if not closed or not 5 <= len(names) <= 300:
+        return None
+    return sorted(dict.fromkeys(names), key=str.casefold)
+
+
 def award_suppliers(pkg):
     """{lot id: sorted company names} from the award notice, names exactly as published."""
     r = pkg["releases"][0]
@@ -483,9 +507,15 @@ def build_sbs_page_only(fetcher, slug, name, today, extra_nv=()):
     pg = parse_sbs_page(page_html)
     if not pg["reference"] or not pg["starts"]:
         raise RuntimeError("SBS page %s: reference or dates not found" % slug)
-    nv.append("Supplier list not read: the SBS page lists suppliers behind its own supplier tab "
-              "and no award notice was read for this framework. Settled by the SBS supplier "
-              "details or the award notice.")
+    names = parse_sbs_suppliers(page_html)
+    if names is None:
+        nv.append("Supplier list not read: the SBS page lists suppliers behind its own supplier tab "
+                  "and no award notice was read for this framework. Settled by the SBS supplier "
+                  "details or the award notice.")
+    else:
+        nv.append("Supplier names are as published in the 'Supplier Details' list on the SBS page "
+                  "(company names only); the page does not say which lot each supplier holds, and "
+                  "a trading name may appear; not alias-resolved to Hub companies here.")
     return {
         "name": name,
         "reference": pg["reference"],
@@ -496,7 +526,8 @@ def build_sbs_page_only(fetcher, slug, name, today, extra_nv=()):
         "ends": pg["ends"],
         "extensionOption": pg["option"],
         "lots": [],
-        "suppliers": None,
+        "suppliers": names,
+        "supplierCount": len(names) if names else None,
         "verifiedOn": today,
         "sourceQuote": pg["dateLine"],
         "notVerified": nv,
