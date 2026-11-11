@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "10/11/2026",
- "generated": "2026-11-10",
+ "dataAsOf": "11/11/2026",
+ "generated": "2026-11-11",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,27 +22,86 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-11-02",
-   "to": "2026-11-10",
+   "from": "2026-11-03",
+   "to": "2026-11-11",
    "days": 8,
-   "run": "2026-11-10"
+   "run": "2026-11-11"
   },
   "notes": [
-   "Find a Tender (tender stage): 2 digital lane notice(s) from 57 release(s) over 1 page(s)",
-   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-02",
-   "Find a Tender (planning stage): 0 digital lane notice(s) from 40 release(s) over 1 page(s)",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-02"
+   "Find a Tender (tender stage): 2 digital lane notice(s) from 53 release(s) over 1 page(s)",
+   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-03",
+   "Find a Tender (planning stage): 0 digital lane notice(s) from 43 release(s) over 1 page(s)",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-03"
   ]
  },
  "counts": {
-  "awards": 364,
-  "awardsClinical": 41,
+  "awards": 369,
+  "awardsClinical": 42,
   "openNotices": 4,
   "openNoticesClinical": 1,
   "marketEngagement": 2,
   "marketEngagementClinical": 0
  },
  "awards": [
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Solihull Multi-User licences for Health Visiting",
+   "buyer": "KENT COMMUNITY HEALTH NHS FOUNDATION TRUST",
+   "published": "2026-11-11",
+   "suppliers": [
+    "University Hospitals Birmingham FT"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-07-31",
+   "value": 14000,
+   "digitalCpv": [
+    "48500000",
+    "48900000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/107094-2026",
+   "ocid": "ocds-h6vhtk-07b990"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "PME for Tissue and Cell Management System",
+   "buyer": "King's College Hospital NHS Foundation Trust",
+   "published": "2026-11-11",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48180000",
+    "48814000",
+    "72250000",
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/107075-2026",
+   "ocid": "ocds-h6vhtk-07b983"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "DCS Catalogue Invoicing Solution (Odoo)",
+   "buyer": "NHS England",
+   "published": "2026-11-11",
+   "suppliers": [
+    "SMART INFORMATION TECHNOLOGIES LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106966-2026",
+   "ocid": "ocds-h6vhtk-07b935"
+  },
   {
    "lane": "digital",
    "clinical": false,
@@ -121,6 +180,60 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/106508-2026",
    "ocid": "ocds-h6vhtk-07b839"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "tender",
+   "title": "CE ICB - WorkWell Initiative Service Procurement",
+   "buyer": "NHS Central East Integrated Care Board",
+   "published": "2026-11-10",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000",
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106886-2026",
+   "ocid": "ocds-h6vhtk-06f52e"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "tender",
+   "title": "PN365 - Patient Engagement Portal",
+   "buyer": "Sheffield Health Partnership University NHS Foundation Trust",
+   "published": "2026-11-10",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48814200"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106878-2026",
+   "ocid": "ocds-h6vhtk-07b903"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "NGH - CDW - CISCO FIREPOWER 2130",
+   "buyer": "Northampton General Hospital NHS Trust",
+   "published": "2026-11-10",
+   "suppliers": [
+    "CDW Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-05",
+   "value": 4652.48,
+   "digitalCpv": [
+    "48821000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106752-2026",
+   "ocid": "ocds-h6vhtk-07b8bd"
   },
   {
    "lane": "digital",
@@ -5029,25 +5142,6 @@
    "lane": "digital",
    "clinical": false,
    "stage": "planning",
-   "title": "CE ICB - WorkWell Initiative Service",
-   "buyer": "NHS Central East Integrated Care Board",
-   "published": "2026-09-09",
-   "suppliers": [],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "48000000",
-    "48180000",
-    "72000000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/085187-2026",
-   "ocid": "ocds-h6vhtk-06f52e"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "planning",
    "title": "Market Engagement Notice for the Provision of FMS Managed Services",
    "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
    "published": "2026-09-09",
@@ -7207,6 +7301,12 @@
    "to": "2026-11-10",
    "days": 8,
    "run": "2026-11-10"
+  },
+  {
+   "from": "2026-11-03",
+   "to": "2026-11-11",
+   "days": 8,
+   "run": "2026-11-11"
   }
  ]
 }
