@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-11-10",
-  "differentiator.json published": 38880,
-  "differentiator.json held": 296500
+  "differentiator.json published": 38889,
+  "differentiator.json held": 296491
  },
  "counts": {
   "frameworks": 122,
@@ -25,13 +25,13 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 401,
-  "inScopeSuppliersNeedingCrawl": 216,
-  "inScopeSuppliersNeedingDomain": 204,
-  "suppliersRefused": 578,
+  "inScopeSuppliersNeedingCrawl": 214,
+  "inScopeSuppliersNeedingDomain": 203,
+  "suppliersRefused": 579,
   "suppliersRefusedButPublishingElsewhere": 167,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
-  "blockedFrameworks": 3,
+  "blockedFrameworks": 4,
   "frameworksWithExclusions": 3,
   "suppliersExcludedByRuling": 14,
   "deferredFrameworks": 1
@@ -6134,8 +6134,8 @@
    "category": "Rehabilitation and Community",
    "ends": "8 March 2028",
    "suppliersAwarded": 53,
-   "suppliersPublished": 27,
-   "coverage": 50.9,
+   "suppliersPublished": 28,
+   "coverage": 52.8,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -6145,13 +6145,8 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 53,
-   "coverageOfTarget": 50.9,
-   "crawlWorklist": [
-    {
-     "supplier": "Wealden Rehab",
-     "domain": "wealdenrehab.com"
-    }
-   ],
+   "coverageOfTarget": 52.8,
+   "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -6385,7 +6380,7 @@
    "actionable": {
     "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 10,
-    "heldNeedingCategory": 3,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -6418,6 +6413,7 @@
     "Talarmade Limited",
     "Ultimate Healthcare",
     "Guldmann",
+    "Wealden Rehab",
     "Winncare UK"
    ],
    "publishedElsewhere": [
@@ -6437,8 +6433,7 @@
    ],
    "heldOnly": [
     "Lisclare",
-    "MIP UK",
-    "Wealden Rehab"
+    "MIP UK"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [],
@@ -6456,7 +6451,7 @@
    "unknown": [
     "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)"
    ],
-   "actionableTotal": 14,
+   "actionableTotal": 13,
    "blockedReason": null,
    "deferred": null
   },
@@ -13577,17 +13572,17 @@
    "excludedByRuling": [],
    "targetSuppliers": 2,
    "coverageOfTarget": 50.0,
-   "crawlWorklist": [
-    {
-     "supplier": "BXTAccelyon Ltd",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "BXTAccelyon Ltd"
-   ],
+   "crawlWorklist": [],
+   "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
+    {
+     "supplier": "BXTAccelyon Ltd",
+     "domain": "bxta.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 5 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-11",
+     "bucket": "refused"
+    },
     {
      "supplier": "BD \u2014 Becton, Dickinson",
      "domain": "bd.com",
@@ -13608,7 +13603,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 1
+    "needDomain": 0
    },
    "published": [
     "BD \u2014 Becton, Dickinson"
@@ -13616,13 +13611,13 @@
    "publishedElsewhere": [],
    "heldOnly": [],
    "capturedNothingCounted": [],
-   "notCrawled": [
+   "notCrawled": [],
+   "refused": [
     "BXTAccelyon Ltd"
    ],
-   "refused": [],
    "unknown": [],
-   "actionableTotal": 1,
-   "blockedReason": null,
+   "actionableTotal": 0,
+   "blockedReason": "every awarded supplier not yet published has been read and refused (2 recorded refusal(s)) \u2014 no permitted route left to the rest of this framework, so its coverage cannot rise without a new route",
    "deferred": null
   },
   {
@@ -14317,10 +14312,6 @@
    "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
-     "supplier": "BXTAccelyon Ltd",
-     "domain": null
-    },
-    {
      "supplier": "D S Medical",
      "domain": null
     },
@@ -14342,7 +14333,6 @@
     }
    ],
    "domainsMissing": [
-    "BXTAccelyon Ltd",
     "D S Medical",
     "Mediworld Ltd",
     "Neon Diagnostics Ltd",
@@ -14351,6 +14341,13 @@
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
+    {
+     "supplier": "BXTAccelyon Ltd",
+     "domain": "bxta.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 5 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-11",
+     "bucket": "refused"
+    },
     {
      "supplier": "MCT Lifesciences Ltd",
      "domain": "www.mctlife.co.uk",
@@ -14571,7 +14568,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 6
+    "needDomain": 5
    },
    "published": [],
    "publishedElsewhere": [
@@ -14616,7 +14613,6 @@
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "BXTAccelyon Ltd",
     "D S Medical",
     "embecta UK Limited",
     "Mediworld Ltd",
@@ -14624,6 +14620,7 @@
     "Pajunk UK Medical Products Limited"
    ],
    "refused": [
+    "BXTAccelyon Ltd",
     "MCT Lifesciences Ltd",
     "Medical Access Ltd",
     "Meditrade UK Ltd",
@@ -14637,7 +14634,7 @@
    "unknown": [
     "Apollo Medical Technologies Ltd"
    ],
-   "actionableTotal": 38,
+   "actionableTotal": 37,
    "blockedReason": null,
    "deferred": null
   },
@@ -20452,10 +20449,6 @@
    "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
-     "supplier": "Wealden Rehab",
-     "domain": "wealdenrehab.com"
-    },
-    {
      "supplier": "Denward Manufacturing",
      "domain": null
     },
@@ -20541,8 +20534,8 @@
    ],
    "actionable": {
     "unresolvedNames": 27,
-    "publishedElsewhereNeedingCategory": 14,
-    "heldNeedingCategory": 3,
+    "publishedElsewhereNeedingCategory": 15,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -20564,12 +20557,12 @@
     "Renray Healthcare",
     "Roma Medical Aids Ltd",
     "Stryker",
-    "Sychem"
+    "Sychem",
+    "Wealden Rehab"
    ],
    "heldOnly": [
     "D.P. Medical Systems Limited",
-    "Eureka Physiocare Ltd",
-    "Wealden Rehab"
+    "Eureka Physiocare Ltd"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [

@@ -28,7 +28,7 @@ A refusal is listed for every awarded supplier that carries one, including
 suppliers counted under Left because they publish outside this speciality:
 the two facts are separate, and the refusal used to be invisible for any
 supplier publishing anything anywhere.
-**3 framework(s) have nothing left by a permitted route** —
+**4 framework(s) have nothing left by a permitted route** —
 low coverage there means exhausted, not neglected.
 **1 framework(s) are DEFERRED** — their Left is real and
 counted here, but every supplier in it is waiting on a ruling only Lou can
@@ -50,7 +50,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Advanced Wound Care | wound | 56 | 22 | 39.3% | 16 | 41 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 1 | 39 | STARTED · 7 EXCLUDED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 14 | 32 | STARTED |
-| Pressure Area Care and Patient Handling | handling | 53 | 27 | 50.9% | 14 | 30 | STARTED |
+| Pressure Area Care and Patient Handling | handling | 53 | 28 | 52.8% | 13 | 30 | STARTED |
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 20 | 26 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 12 | 27.9% | 14 | 30 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 15 | 40.5% | 6 | 28 | STARTED |
@@ -90,14 +90,14 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Contrast Injectors, Consumables and Associated Options and Related Services | imaging | 5 | 1 | 20.0% | 0 | 4 | STARTED · BLOCKED |
 | Polymer Products | infection | 5 | 2 | 40.0% | 2 | 3 | STARTED |
 | Reusable Clinical and Sharps Waste Management Service | infection | 3 | 1 | 33.3% | 0 | 2 | STARTED · BLOCKED |
-| Brachytherapy Seeds and Associated Accessories | oncology | 2 | 1 | 50.0% | 1 | 1 | STARTED |
+| Brachytherapy Seeds and Associated Accessories | oncology | 2 | 1 | 50.0% | 0 | 2 | STARTED · BLOCKED |
 | Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services | ent | 7 | 0 | 0.0% | 3 | 5 | NOT STARTED |
 | Nuclear Medicine Imaging and Associated Options and Related Services | nuclear | 4 | 0 | 0.0% | 4 | 0 | NOT STARTED |
 | Lithotripsy and Associated Options and Related Services | endourology | 3 | 0 | 0.0% | 2 | 2 | NOT STARTED |
 | Male Intra-Urethral Catheter with Magnet Control | continence | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Non-Imaging Vibration Controlled Ultrasound System | ultrasound | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Airway Management Products and Associated Equipment | — | 54 | 0 | 0.0% | 39 | 29 | UNMAPPED |
-| Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 38 | 29 | UNMAPPED |
+| Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 37 | 30 | UNMAPPED |
 | Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 31 | 22 | UNMAPPED |
 | Wound Closure | — | 39 | 0 | 0.0% | 33 | 19 | UNMAPPED |
 | Procedure Packs | — | 29 | 0 | 0.0% | 21 | 18 | UNMAPPED |
