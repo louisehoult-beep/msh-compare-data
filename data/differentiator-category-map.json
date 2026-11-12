@@ -373,6 +373,13 @@
    "knife": "Knives, scalpel handles & blades",
    "probe": "Probes, dilators & sounds",
    "suction": "Suction tubes, cannulas & trocars"
+  },
+  "closure": {
+   "sutures": "Sub-lot 1 · Surgical sutures (absorbable and non-absorbable, incl. tapes)",
+   "haemo": "Sub-lot 2 · Haemostats (flowables, sealants, fabrics, sponges, powders, bone wax)",
+   "adhes": "Sub-lot 3 · Tissue adhesives",
+   "stapler": "Sub-lot 4 · Skin staplers and staple removers",
+   "strips": "Sub-lot 5 · Wound closure strips"
   }
  },
  "counts": {
@@ -17789,11 +17796,13 @@
     "Nylus® Monofilament Polyamide, Non-Absorbable Sutures",
     "Estralus® Braided Coated Polyester Non-Absorbable Sutures"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
-   "why": "Silkus, Prolus, Nylus and Estralus sutures are absorbable and non-absorbable general theatre consumables.",
-   "decidedIn": "Uniplex.json"
+   "why": "Silkus, Prolus, Nylus and Estralus sutures (own site); Wound Closure framework sub-lot 1.",
+   "decidedIn": "Uniplex.json",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "supplier": "Uniplex",
@@ -30970,11 +30979,13 @@
     "Cutanplast FAST Gelatin Sponge Haemostats",
     "Cutanplast Gelatin Sponge Haemostats"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:haemo",
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
-   "why": "Okcel oxidised cellulose and Cutanplast gelatin haemostats are theatre consumables for haemostasis.",
-   "decidedIn": "Uniplex.json"
+   "why": "Okcel oxidised cellulose and Cutanplast gelatin haemostats (own site); Wound Closure framework sub-lot 2.",
+   "decidedIn": "Uniplex.json",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "supplier": "Uniplex",
@@ -42054,12 +42065,17 @@
    "examples": [
     "Blue Dot Sterile Skin Closure Strips 6Mm X 75Mm 50 X Packs Of 3 Strips"
    ],
-   "hub": "wound:fa",
+   "hub": [
+    "wound:fa",
+    "closure:strips"
+   ],
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py; re-keyed 02/11/2026 from the product's URL row id to its own name after the re-crawl filed the range under 'Uncategorised' (scripts/_fix_crest_numeric_divisions_1102.py)",
    "why": "\"Blue Dot Sterile Skin Closure Strips 6Mm X 75Mm 50 X Packs Of 3 Strips\" is a first-aid/resuscitation/workplace-safety item sold as first aid stock.",
    "decidedIn": "Crest-Medical-Ltd.json",
-   "kind": "product-override"
+   "kind": "product-override",
+   "movedFrom": "wound:fa",
+   "movedIn": "Wound closure speciality added 2026-11-12: closure strips also filed under sub-lot 5"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -45309,12 +45325,17 @@
    "examples": [
     "Blue Dot Sterile Skin Closure Strips 3Mm X 75Mm 50 X Packs Of 5 Strips"
    ],
-   "hub": "wound:fa",
+   "hub": [
+    "wound:fa",
+    "closure:strips"
+   ],
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py; re-keyed 02/11/2026 from the product's URL row id to its own name after the re-crawl filed the range under 'Uncategorised' (scripts/_fix_crest_numeric_divisions_1102.py)",
    "why": "\"Blue Dot Sterile Skin Closure Strips 3Mm X 75Mm 50 X Packs Of 5 Strips\" is a first-aid/resuscitation/workplace-safety item sold as first aid stock.",
    "decidedIn": "Crest-Medical-Ltd.json",
-   "kind": "product-override"
+   "kind": "product-override",
+   "movedFrom": "wound:fa",
+   "movedIn": "Wound closure speciality added 2026-11-12: closure strips also filed under sub-lot 5"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -47349,12 +47370,17 @@
    "examples": [
     "Blue Dot Sterile Skin Closure Strips 75Mm X 6Mm Pack 5"
    ],
-   "hub": "wound:fa",
+   "hub": [
+    "wound:fa",
+    "closure:strips"
+   ],
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py; re-keyed 02/11/2026 from the product's URL row id to its own name after the re-crawl filed the range under 'Uncategorised' (scripts/_fix_crest_numeric_divisions_1102.py)",
    "why": "'Blue Dot Sterile Skin Closure Strips 75Mm X 6Mm Pack 5' is a wound-care/first-aid dressing, bandage, tape or eye-wash consumable.",
    "decidedIn": "Crest-Medical-Ltd.json",
-   "kind": "product-override"
+   "kind": "product-override",
+   "movedFrom": "wound:fa",
+   "movedIn": "Wound closure speciality added 2026-11-12: closure strips also filed under sub-lot 5"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -48384,12 +48410,17 @@
    "examples": [
     "Blue Dot Sterile Skin Closure Strips 6Mm X 38Mm 50 X Packs Of 6 Strips"
    ],
-   "hub": "wound:fa",
+   "hub": [
+    "wound:fa",
+    "closure:strips"
+   ],
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py; re-keyed 02/11/2026 from the product's URL row id to its own name after the re-crawl filed the range under 'Uncategorised' (scripts/_fix_crest_numeric_divisions_1102.py)",
    "why": "'Blue Dot Sterile Skin Closure Strips 6Mm X 38Mm 50 X Packs Of 6 Strips' is a wound-care/first-aid dressing, bandage, tape or eye-wash consumable.",
    "decidedIn": "Crest-Medical-Ltd.json",
-   "kind": "product-override"
+   "kind": "product-override",
+   "movedFrom": "wound:fa",
+   "movedIn": "Wound closure speciality added 2026-11-12: closure strips also filed under sub-lot 5"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -48399,12 +48430,17 @@
    "examples": [
     "Blue Dot Sterile Skin Closure Strips 12Mm X 100Mm 50 X Packs Of 4 Strips"
    ],
-   "hub": "wound:fa",
+   "hub": [
+    "wound:fa",
+    "closure:strips"
+   ],
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py; re-keyed 02/11/2026 from the product's URL row id to its own name after the re-crawl filed the range under 'Uncategorised' (scripts/_fix_crest_numeric_divisions_1102.py)",
    "why": "'Blue Dot Sterile Skin Closure Strips 12Mm X 100Mm 50 X Packs Of 4 Strips' is a wound-care/first-aid dressing, bandage, tape or eye-wash consumable.",
    "decidedIn": "Crest-Medical-Ltd.json",
-   "kind": "product-override"
+   "kind": "product-override",
+   "movedFrom": "wound:fa",
+   "movedIn": "Wound closure speciality added 2026-11-12: closure strips also filed under sub-lot 5"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -48414,12 +48450,17 @@
    "examples": [
     "Blue Dot Sterile Skin Closure Strips 25Mm X 125Mm 50 X Packs Of 3 Strips"
    ],
-   "hub": "wound:fa",
+   "hub": [
+    "wound:fa",
+    "closure:strips"
+   ],
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py; re-keyed 02/11/2026 from the product's URL row id to its own name after the re-crawl filed the range under 'Uncategorised' (scripts/_fix_crest_numeric_divisions_1102.py)",
    "why": "'Blue Dot Sterile Skin Closure Strips 25Mm X 125Mm 50 X Packs Of 3 Strips' is a wound-care/first-aid dressing, bandage, tape or eye-wash consumable.",
    "decidedIn": "Crest-Medical-Ltd.json",
-   "kind": "product-override"
+   "kind": "product-override",
+   "movedFrom": "wound:fa",
+   "movedIn": "Wound closure speciality added 2026-11-12: closure strips also filed under sub-lot 5"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -48429,12 +48470,17 @@
    "examples": [
     "Blue Dot Sterile Skin Closure Strips 6Mm X 102Mm 50 X Packs Of 2 Strips"
    ],
-   "hub": "wound:fa",
+   "hub": [
+    "wound:fa",
+    "closure:strips"
+   ],
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py; re-keyed 02/11/2026 from the product's URL row id to its own name after the re-crawl filed the range under 'Uncategorised' (scripts/_fix_crest_numeric_divisions_1102.py)",
    "why": "'Blue Dot Sterile Skin Closure Strips 6Mm X 102Mm 50 X Packs Of 2 Strips' is a wound-care/first-aid dressing, bandage, tape or eye-wash consumable.",
    "decidedIn": "Crest-Medical-Ltd.json",
-   "kind": "product-override"
+   "kind": "product-override",
+   "movedFrom": "wound:fa",
+   "movedIn": "Wound closure speciality added 2026-11-12: closure strips also filed under sub-lot 5"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -68341,11 +68387,13 @@
     "Suture absorbable VICRYL CT BRD VIO 70CM M3 USP2-0 S/A V-3",
     "Suture absorbable W9023 150cm vicryl absorbable coated braided violet 4/0 pre-cut lengths"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
-   "why": "Examples are absorbable Vicryl sutures — no dedicated suture category exists; general theatre consumables is the closest fit.",
-   "decidedIn": "NHSSC map sprint 28/08/2026"
+   "why": "Every example is an Ethicon suture in the NHS Supply Chain catalogue; Wound Closure framework sub-lot 1 now has its own category.",
+   "decidedIn": "NHSSC map sprint 28/08/2026",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "nhssc-term",
@@ -70897,11 +70945,13 @@
     "Haemostat Absorbable Oxidised Regenerated Cellulose Structured 5.1 x 10.2cm Non Woven",
     "Haemostat Absorbable Oxidised Regenerated Cellulose Structured 5 x 5cm Non Woven"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:haemo",
    "notTaxonomy": false,
    "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
-   "why": "Examples are absorbable oxidised regenerated cellulose surgical haemostats; no dedicated surgical haemostat category exists, so general theatre consumables is the closest fit.",
-   "decidedIn": "NHSSC map sprint 28/08/2026"
+   "why": "Every example is a haemostat in the NHS Supply Chain catalogue; Wound Closure framework sub-lot 2.",
+   "decidedIn": "NHSSC map sprint 28/08/2026",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "nhssc-term",
@@ -71265,11 +71315,13 @@
     "Haemostatic Powders Absorbable 3g",
     "Haemostatic Fabrics Size 1 x 2 x 1"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:haemo",
    "notTaxonomy": false,
    "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
-   "why": "Examples are oxidised-cellulose haemostatic fabrics/powders — no dedicated haemostat category; general theatre consumables is the closest fit.",
-   "decidedIn": "NHSSC map sprint 28/08/2026"
+   "why": "Every example is an absorbable haemostat in the NHS Supply Chain catalogue; Wound Closure framework sub-lot 2 now has its own category.",
+   "decidedIn": "NHSSC map sprint 28/08/2026",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "nhssc-term",
@@ -74326,11 +74378,13 @@
     "Haemostatic Powders 1gr Microporous Polysaccharide Hemospheres MPH Absorbable Particles",
     "Haemostatic Powders 3gr Microporous Polysaccharide Hemospheres (MPH) Absorbable Particles"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:haemo",
    "notTaxonomy": false,
    "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
-   "why": "Examples are microporous polysaccharide haemostatic powders; no dedicated surgical haemostat category exists, so general theatre consumables is the closest fit.",
-   "decidedIn": "NHSSC map sprint 28/08/2026"
+   "why": "Every example is a haemostat in the NHS Supply Chain catalogue; Wound Closure framework sub-lot 2.",
+   "decidedIn": "NHSSC map sprint 28/08/2026",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "nhssc-term",
@@ -75035,11 +75089,13 @@
     "Haemostat Absorbable Gelatin 80 x 30mm anal",
     "Haemostat Absorbable Gelatin 70 x 50 x 10mm standard"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:haemo",
    "notTaxonomy": false,
    "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
-   "why": "Examples are absorbable gelatin haemostat products — no dedicated haemostat category; general theatre consumables is the closest fit.",
-   "decidedIn": "NHSSC map sprint 28/08/2026"
+   "why": "Every example is an absorbable haemostat in the NHS Supply Chain catalogue; Wound Closure framework sub-lot 2 now has its own category.",
+   "decidedIn": "NHSSC map sprint 28/08/2026",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "nhssc-term",
@@ -75703,11 +75759,13 @@
     "Haemostatic Fabrics Size 1 x 2 x 1",
     "Haemostatic Fabrics Size 4 x 4 x 1"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:haemo",
    "notTaxonomy": false,
    "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
-   "why": "Examples are haemostatic fabric sizes — no dedicated haemostat category; general theatre consumables is the closest fit.",
-   "decidedIn": "NHSSC map sprint 28/08/2026"
+   "why": "Every example is an absorbable haemostat in the NHS Supply Chain catalogue; Wound Closure framework sub-lot 2 now has its own category.",
+   "decidedIn": "NHSSC map sprint 28/08/2026",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "nhssc-term",
@@ -75721,11 +75779,13 @@
     "Haemostat Absorbable Gelatin Endoscopic Applicators",
     "Haemostat Flowable Matrix with Thrombin"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:haemo",
    "notTaxonomy": false,
    "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
-   "why": "Examples are flowable haemostatic matrix products — no dedicated haemostat category; general theatre consumables is the closest fit.",
-   "decidedIn": "NHSSC map sprint 28/08/2026"
+   "why": "Every example is an absorbable haemostat in the NHS Supply Chain catalogue; Wound Closure framework sub-lot 2 now has its own category.",
+   "decidedIn": "NHSSC map sprint 28/08/2026",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "nhssc-term",
@@ -75739,11 +75799,13 @@
     "Haemostatic Fabrics 51 x 102mm",
     "Haemostatic Fabrics 100 x 100mm"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:haemo",
    "notTaxonomy": false,
    "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
-   "why": "Examples are haemostatic fabric sizes — no dedicated haemostat category; general theatre consumables is the closest fit.",
-   "decidedIn": "NHSSC map sprint 28/08/2026"
+   "why": "Every example is an absorbable haemostat in the NHS Supply Chain catalogue; Wound Closure framework sub-lot 2 now has its own category.",
+   "decidedIn": "NHSSC map sprint 28/08/2026",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "nhssc-term",
@@ -92268,13 +92330,15 @@
     "Suture non absorbable W2870 13cm ethilon non-absorbable monofilament black 10/0 3.8mm 3/8 circle taper point needle",
     "Suture non absorbable W505 4 x 45cm mersilk non-absorbable coated braided 1 ivory 3 black 4/0 16mm 3/8 circle conventional cutting needle"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "NPC descriptions read directly from the live NHS Supply Chain suspension feed (cloud-pipeline/sdt-suspensions.json, NPCs incl. FVT885/FVT002/FVT860/FVR151/FVS068 (Prolene), FVR611/FVQ3919/FVS037/FVR063 (Silk/Mersilk), FVS183 (Ethibond Excel), FVS626/FVS118 (Ethilon)) — the existing 'Vicryl / Prolene / Monocryl (Ethicon sutures)' term in nhssc-cache.json is cached with absorbable Vicryl items only; none of these non-absorbable brands or NPCs appear in it, so this is a genuinely separate, uncached family.",
-   "why": "Examples are non-absorbable Ethicon sutures (monofilament Prolene/Ethilon, braided Mersilk, coated braided Ethibond Excel) — same reasoning as the existing absorbable-Vicryl entry: no dedicated suture category exists in the vocabulary, so general theatre consumables (theatres:theatre) is the closest fit.",
+   "why": "Every example is an Ethicon suture in the NHS Supply Chain catalogue; Wound Closure framework sub-lot 1 now has its own category.",
    "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026; brand-split 07/09/2026 (under-capture fix)",
    "_splitFrom": "Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)",
-   "_splitNote": "Split from the combined term 'Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)' on 07/09/2026 after the manual weekly-refresh run confirmed under-capture: refresh_nhssc_cache.py's candidate search only ever tried the first brand in the slash-separated label, so the other brands never got their own catalogue query. One seed term per brand, same hub category as the original decision."
+   "_splitNote": "Split from the combined term 'Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)' on 07/09/2026 after the manual weekly-refresh run confirmed under-capture: refresh_nhssc_cache.py's candidate search only ever tried the first brand in the slash-separated label, so the other brands never got their own catalogue query. One seed term per brand, same hub category as the original decision.",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "nhssc-term",
@@ -92293,13 +92357,15 @@
     "Suture non absorbable W2870 13cm ethilon non-absorbable monofilament black 10/0 3.8mm 3/8 circle taper point needle",
     "Suture non absorbable W505 4 x 45cm mersilk non-absorbable coated braided 1 ivory 3 black 4/0 16mm 3/8 circle conventional cutting needle"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "NPC descriptions read directly from the live NHS Supply Chain suspension feed (cloud-pipeline/sdt-suspensions.json, NPCs incl. FVT885/FVT002/FVT860/FVR151/FVS068 (Prolene), FVR611/FVQ3919/FVS037/FVR063 (Silk/Mersilk), FVS183 (Ethibond Excel), FVS626/FVS118 (Ethilon)) — the existing 'Vicryl / Prolene / Monocryl (Ethicon sutures)' term in nhssc-cache.json is cached with absorbable Vicryl items only; none of these non-absorbable brands or NPCs appear in it, so this is a genuinely separate, uncached family.",
-   "why": "Examples are non-absorbable Ethicon sutures (monofilament Prolene/Ethilon, braided Mersilk, coated braided Ethibond Excel) — same reasoning as the existing absorbable-Vicryl entry: no dedicated suture category exists in the vocabulary, so general theatre consumables (theatres:theatre) is the closest fit.",
+   "why": "Every example is an Ethicon suture in the NHS Supply Chain catalogue; Wound Closure framework sub-lot 1 now has its own category.",
    "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026; brand-split 07/09/2026 (under-capture fix)",
    "_splitFrom": "Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)",
-   "_splitNote": "Split from the combined term 'Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)' on 07/09/2026 after the manual weekly-refresh run confirmed under-capture: refresh_nhssc_cache.py's candidate search only ever tried the first brand in the slash-separated label, so the other brands never got their own catalogue query. One seed term per brand, same hub category as the original decision."
+   "_splitNote": "Split from the combined term 'Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)' on 07/09/2026 after the manual weekly-refresh run confirmed under-capture: refresh_nhssc_cache.py's candidate search only ever tried the first brand in the slash-separated label, so the other brands never got their own catalogue query. One seed term per brand, same hub category as the original decision.",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "nhssc-term",
@@ -92318,13 +92384,15 @@
     "Suture non absorbable W2870 13cm ethilon non-absorbable monofilament black 10/0 3.8mm 3/8 circle taper point needle",
     "Suture non absorbable W505 4 x 45cm mersilk non-absorbable coated braided 1 ivory 3 black 4/0 16mm 3/8 circle conventional cutting needle"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "NPC descriptions read directly from the live NHS Supply Chain suspension feed (cloud-pipeline/sdt-suspensions.json, NPCs incl. FVT885/FVT002/FVT860/FVR151/FVS068 (Prolene), FVR611/FVQ3919/FVS037/FVR063 (Silk/Mersilk), FVS183 (Ethibond Excel), FVS626/FVS118 (Ethilon)) — the existing 'Vicryl / Prolene / Monocryl (Ethicon sutures)' term in nhssc-cache.json is cached with absorbable Vicryl items only; none of these non-absorbable brands or NPCs appear in it, so this is a genuinely separate, uncached family.",
-   "why": "Examples are non-absorbable Ethicon sutures (monofilament Prolene/Ethilon, braided Mersilk, coated braided Ethibond Excel) — same reasoning as the existing absorbable-Vicryl entry: no dedicated suture category exists in the vocabulary, so general theatre consumables (theatres:theatre) is the closest fit.",
+   "why": "Every example is an Ethicon suture in the NHS Supply Chain catalogue; Wound Closure framework sub-lot 1 now has its own category.",
    "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026; brand-split 07/09/2026 (under-capture fix)",
    "_splitFrom": "Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)",
-   "_splitNote": "Split from the combined term 'Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)' on 07/09/2026 after the manual weekly-refresh run confirmed under-capture: refresh_nhssc_cache.py's candidate search only ever tried the first brand in the slash-separated label, so the other brands never got their own catalogue query. One seed term per brand, same hub category as the original decision."
+   "_splitNote": "Split from the combined term 'Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)' on 07/09/2026 after the manual weekly-refresh run confirmed under-capture: refresh_nhssc_cache.py's candidate search only ever tried the first brand in the slash-separated label, so the other brands never got their own catalogue query. One seed term per brand, same hub category as the original decision.",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "nhssc-term",
@@ -92343,13 +92411,15 @@
     "Suture non absorbable W2870 13cm ethilon non-absorbable monofilament black 10/0 3.8mm 3/8 circle taper point needle",
     "Suture non absorbable W505 4 x 45cm mersilk non-absorbable coated braided 1 ivory 3 black 4/0 16mm 3/8 circle conventional cutting needle"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "NPC descriptions read directly from the live NHS Supply Chain suspension feed (cloud-pipeline/sdt-suspensions.json, NPCs incl. FVT885/FVT002/FVT860/FVR151/FVS068 (Prolene), FVR611/FVQ3919/FVS037/FVR063 (Silk/Mersilk), FVS183 (Ethibond Excel), FVS626/FVS118 (Ethilon)) — the existing 'Vicryl / Prolene / Monocryl (Ethicon sutures)' term in nhssc-cache.json is cached with absorbable Vicryl items only; none of these non-absorbable brands or NPCs appear in it, so this is a genuinely separate, uncached family.",
-   "why": "Examples are non-absorbable Ethicon sutures (monofilament Prolene/Ethilon, braided Mersilk, coated braided Ethibond Excel) — same reasoning as the existing absorbable-Vicryl entry: no dedicated suture category exists in the vocabulary, so general theatre consumables (theatres:theatre) is the closest fit.",
+   "why": "Every example is an Ethicon suture in the NHS Supply Chain catalogue; Wound Closure framework sub-lot 1 now has its own category.",
    "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026; brand-split 07/09/2026 (under-capture fix)",
    "_splitFrom": "Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)",
-   "_splitNote": "Split from the combined term 'Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)' on 07/09/2026 after the manual weekly-refresh run confirmed under-capture: refresh_nhssc_cache.py's candidate search only ever tried the first brand in the slash-separated label, so the other brands never got their own catalogue query. One seed term per brand, same hub category as the original decision."
+   "_splitNote": "Split from the combined term 'Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)' on 07/09/2026 after the manual weekly-refresh run confirmed under-capture: refresh_nhssc_cache.py's candidate search only ever tried the first brand in the slash-separated label, so the other brands never got their own catalogue query. One seed term per brand, same hub category as the original decision.",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183112,11 +183182,13 @@
    "examples": [
     "Filamide Nylon Non-Absorbable Suture"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/filamide, read 03/11/2026: Non-Absorbable Nylon Suture | Filamide | Meril Life",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A surgical suture or ligature by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 1.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183127,11 +183199,13 @@
    "examples": [
     "Filapron Poliglecaprone 25 Absorbable Suture"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/filapron-poliglecaprone-sutures, read 03/11/2026: Filapron Monofilament Absorbable Sutures",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A surgical suture or ligature by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 1.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183142,11 +183216,13 @@
    "examples": [
     "Filaprop Polypropylene Non-Absorbable Suture"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/filaprop, read 03/11/2026: Filaprop Polypropylene Non-Absorbable Sutures | Monofilament",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A surgical suture or ligature by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 1.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183157,11 +183233,13 @@
    "examples": [
     "Filasilk Braided Silk Non-Absorbable Suture"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/filasilk, read 03/11/2026: Filasilk Silk Non-Absorbable Sutures",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A surgical suture or ligature by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 1.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183172,11 +183250,13 @@
    "examples": [
     "Filaxyn Polydioxanone Absorbable Suture"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/filaxyn-polydioxanone-sutures, read 03/11/2026: PDS Absorbable Sutures | Filaxyn Polydioxanone | Meril Life",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A surgical suture or ligature by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 1.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183187,11 +183267,13 @@
    "examples": [
     "Megasorb Plus Antibacterial PGA Suture"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/megasorb-plus, read 03/11/2026: Polyglycolic Acid Sutures | Megasorb Plus Antibacterial PGA | Meril Life",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A surgical suture or ligature by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 1.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183202,11 +183284,13 @@
    "examples": [
     "Megasorb PGA Absorbable Suture"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/megasorb-polyglycolic-acid-suture, read 03/11/2026: Polyglycolic Acid Absorbable Sutures | Megasorb PGA | Meril Life",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A surgical suture or ligature by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 1.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183217,11 +183301,13 @@
    "examples": [
     "Megasorb Rapid PGA Suture"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/megasorb-rapid-suture, read 03/11/2026: Rapid Absorption PGA Sutures | Megasorb Rapid | Meril Life",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A surgical suture or ligature by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 1.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183232,11 +183318,13 @@
    "examples": [
     "Mericron XL Silk Non-Absorbable Suture"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/mericron-xl, read 03/11/2026: Mericron XL Silk Non-Absorbable Sutures",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A surgical suture or ligature by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 1.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183247,11 +183335,13 @@
    "examples": [
     "Merisoft Chromic Catgut Absorbable Suture"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/merisoft-chromic-catgut-sutures, read 03/11/2026: Catgut Absorbable Sutures - Merisoft Chromic | Meril Life",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A surgical suture or ligature by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 1.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183262,11 +183352,13 @@
    "examples": [
     "Meristeel Stainless Steel Surgical Suture"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/meristeel, read 03/11/2026: Stainless Steel Surgical Suture - Meristeel | Meril Life",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A surgical suture or ligature by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 1.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183277,11 +183369,13 @@
    "examples": [
     "Mitsu Polyglactin 910 Absorbable Suture"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/mitsu, read 03/11/2026: Mitsu Polyglactin 910 Absorbable Sutures",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A surgical suture or ligature by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 1.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183292,11 +183386,13 @@
    "examples": [
     "Mitsu AB Antibacterial Absorbable Suture"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/mitsu-ab, read 03/11/2026: Mitsu AB Antibacterial Absorbable Sutures | Triclosan Coated",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A surgical suture or ligature by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 1.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183307,11 +183403,13 @@
    "examples": [
     "Mitsu C+ Coated Polyglactin Absorbable Suture"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/mitsu-c-suture, read 03/11/2026: Mitsu C+ Coated Polyglactin Absorbable Sutures",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A surgical suture or ligature by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 1.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183322,11 +183420,13 @@
    "examples": [
     "Mitsu FST Fast Absorbing Suture"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/mitsu-fst-suture, read 03/11/2026: Fast Absorbing Surgical Sutures - Mitsu FST | Meril Life",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A surgical suture or ligature by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 1.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183337,11 +183437,13 @@
    "examples": [
     "Pinion Barbed Absorbable Suture"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/pinion, read 03/11/2026: Pinion Barbed Absorbable Sutures | Knotless Surgical Sutures",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A surgical suture or ligature by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 1.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183352,11 +183454,13 @@
    "examples": [
     "Filatwine Chromic Catgut Endoloop Ligature"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:sutures",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/filatwine, read 03/11/2026: Endoloop Chromic Catgut | Filatwine Loop Ligature | Meril Life",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A surgical suture or ligature by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 1.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183487,11 +183591,13 @@
    "examples": [
     "Mirus Disposable Skin Stapler"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:stapler",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/mirus-disposable-skin-stapler, read 03/11/2026: MIRUS™ Disposable Skin Stapler for Wound Closure | Meril",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A skin stapler / staple remover by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 4.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183502,11 +183608,13 @@
    "examples": [
     "Mirus Skin Staple Remover"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:stapler",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/mirus-skin-staple-remover, read 03/11/2026: MIRUS Skin Staple Remover | Meril Life",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A skin stapler / staple remover by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 4.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183517,11 +183625,13 @@
    "examples": [
     "Meri Glu Topical Skin Adhesive"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:adhes",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/meri-glu-topical-skin-adhesive, read 03/11/2026: MeriGlu Topical Skin Adhesive | N-Butyl Surgical Glue",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A topical skin adhesive by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 3.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "kind": "product-override",
@@ -183532,11 +183642,13 @@
    "examples": [
     "Merifix Topical Skin Adhesive"
    ],
-   "hub": "theatres:theatre",
+   "hub": "closure:adhes",
    "notTaxonomy": false,
    "evidence": "the supplier's own product page, https://www.merillife.com/our-products/endo-surgery/merifix-topical-skin-adhesive, read 03/11/2026: MeriFix Topical Skin Adhesive | 2-Octyl Surgical Glue",
-   "why": "A surgical closure, mesh or skin stapling product by its own page; filed with the other suppliers' sutures and closure products under General theatre consumables.",
-   "addedOn": "2026-11-03"
+   "why": "A topical skin adhesive by its own Meril product page (re-read 12/11/2026); Wound Closure framework sub-lot 3.",
+   "addedOn": "2026-11-03",
+   "movedFrom": "theatres:theatre",
+   "movedIn": "Wound closure speciality added 2026-11-12 (scripts/_add_wound_closure_speciality_1112.py)"
   },
   {
    "supplier": "Cefndy Healthcare",
@@ -185510,6 +185622,417 @@
    "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py (data/nhssc-cache.json); item description quoted in examples below, read 12/11/2026.",
    "why": "Fannin's own site (fannin.eu) is robots.txt-blocked, so the NHSSC catalogue is the only route to this range. Described \"Safety Peripheral Intravenous Cannula\" or \"Safety Integrated Cannula\" with gauge/length — a direct match for the vascular:pivc vocabulary type (\"Peripheral IV cannula\"), not a central venous catheter, midline or PICC. No NPC recorded on this catalogue line; checked against the whole Fannin/Nipro catalogue for a same-named non-cannula product before keying on the name alone — none found.",
    "decidedIn": "framework-coverage batch, Intravenous Cannula and Associated Products, 12/11/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Advanced Medical Solutions (AMS)",
+   "term": "RESORBA (haemostats/sutures)",
+   "division": null,
+   "products": 123,
+   "categories": [],
+   "examples": [
+    "Suture absorbable PGA-RESORBA undyed 0 USP 6x45cm",
+    "Suture absorbable PGA-RESORBA violet 3/0 USP 12x45cm",
+    "Suture absorbable PGA-RESORBA undyed 5/0 USP 1x45cm 3/8 circle cutting needle 18mm",
+    "Suture absorbable PGA-RESORBA violet 7/0 USP 1x45cm 3/8 circle spatulated PREMIUM cut 7mm double armed",
+    "Suture absorbable PGA-RESORBA violet 4/0 USP 1x45cm 3/8 circle cutting needle 18mm",
+    "Suture absorbable PGA-RESORBA violet 1 USP 8x45cm 1/2 circle round bodied control release needle stronger 27mm",
+    "Suture absorbable PGA-RESORBA violet 5/0 USP 1x70cm 1/2 circle round bodied needle 17mm",
+    "Suture absorbable PGA-RESORBA violet 2/0 USP 1x70cm 1/2 circle round bodied needle 17mm"
+   ],
+   "hub": "closure:sutures",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "All 123 cached items are RESORBA absorbable or non-absorbable sutures.",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Advanced Medical Solutions (AMS)",
+   "term": "LiquiBand (tissue adhesive)",
+   "division": null,
+   "products": 10,
+   "categories": [],
+   "examples": [
+    "Tissue Adhesives Liquiband flex 0.8g",
+    "Tissue Adhesives LiquiBand Optima 0.5g",
+    "Tissue Adhesives LiquiBand Exceed 0.8g",
+    "Tissue Adhesives LiquiBand Surgical S 0.8g",
+    "Tissue Adhesives Topical XL Skin Closure System 22cm",
+    "Tissue Adhesives Exceed XS topical skin adhesive 0.4g high viscosity liquid dressing",
+    "Tissue Adhesives Topical XL Skin Closure System 44cm",
+    "Tissue Adhesives Topical Skin Adhesive 0.35g"
+   ],
+   "hub": "closure:adhes",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "All cached items are LiquiBand tissue adhesives.",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "B. Braun Medical",
+   "term": "Safil / Novosyn / Monosyn / Monomax / MonoPlus (sutures)",
+   "division": null,
+   "products": 177,
+   "categories": [],
+   "examples": [
+    "Suture absorbable VIOLET 9/0 (0.3) 15CM DRM6",
+    "Suture absorbable Novosyn violet 0 48mm 1/2 cirlce cutting needle 70cm",
+    "Suture absorbable Novosyn violet 2/0 65mm 1/2 circle round bodied needle 70cm",
+    "Suture absorbable Novosyn violet 2/0 45mm 3/8 circle cutting needle 70cm",
+    "Suture absorbable 120cm novosyn 0 30mm hook needle round bodied with short cutting point heavy",
+    "Suture absorbable 1 x 250cm novosyn absorbable coated braided violet 0 ligature reel",
+    "Suture absorbable Novosyn undyed 5/0 16mm progressive curved needle with precision point 45cm",
+    "Suture absorbable 1 x 250cm novosyn absorbable coated braided violet 1 ligature reel"
+   ],
+   "hub": "closure:sutures",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "All 177 cached items are absorbable sutures (Monomax, Monoplus, Monosyn, Novosyn, Safil).",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Baxter Healthcare Ltd",
+   "term": "Floseal Haemostatic Matrix (flowable haemostatic matrix, >20 years cardiac surgery use)",
+   "division": null,
+   "products": 4,
+   "categories": [],
+   "examples": [
+    "Haemostat Product Laparoscopic Applicator",
+    "Haemostat Product Applicator",
+    "Haemostat Flowable Matrix VHSD 10ml",
+    "Haemostat Flowable Matrix VHSD 5ml"
+   ],
+   "hub": "closure:haemo",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "All cached items are Floseal haemostat products.",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Baxter Healthcare Ltd",
+   "term": "Coseal (synthetic surgical sealant); Hemopatch (sealing patch for intraoperative bleeding/postoperative leakage)",
+   "division": null,
+   "products": 8,
+   "categories": [],
+   "examples": [
+    "Haemostat Sealant Surgical 4ml",
+    "Haemostat Sealant Surgical 2ml",
+    "Haemostat Product Easy Set Box of 10",
+    "Haemostat Product Duplo Mis Applicator 30cm",
+    "Haemostat Sealant Surgical 8ml",
+    "Haemostat patch Small 2.7cm x 2.7cm room temperature storage",
+    "Haemostat patch Large 4.5cm x 9cm room temperature storage",
+    "Haemostat patch Medium 4.5cm x 4.5cm room temperature storage"
+   ],
+   "hub": "closure:haemo",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "All cached items are haemostat sealants and patches (Coseal, Hemopatch).",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Baxter Healthcare Ltd",
+   "term": "Tisseel (fibrin sealant, ~40 years clinical use); Artiss (fibrin sealant for plastic/reconstructive/burns surgery)",
+   "division": null,
+   "products": 13,
+   "categories": [],
+   "examples": [
+    "Haemostat Product Duplotip 20g x 26.4cm",
+    "Haemostat Product Duplotip 20g x 10.4cm",
+    "Haemostat Product Gasless Applicator Replacement Tips",
+    "Haemostat Product Duplotip 5mm x 31.8cm",
+    "Haemostat Product Gasless Tip MIS 25cm",
+    "Haemostat Product Duplo Mis Applicator 40cm",
+    "Haemostat Product 3600 Endoscopic Set and Applicator 40cm",
+    "Haemostat Product Gasless Tip MIS 40cm"
+   ],
+   "hub": "closure:haemo",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "All cached items are Tisseel/Artiss fibrin sealant haemostat products.",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Baxter Healthcare Ltd",
+   "term": "Ostene (haemostatic bone wax alternative); Peri-Strips / Tissue-Guard (tissue reinforcement, same Advanced Surgery division)",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Bone Wax 2.5g pk 12"
+   ],
+   "hub": "closure:haemo",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The one cached item is Ostene bone wax; bone wax is in Wound Closure sub-lot 2.",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Healthium Medtech UK",
+   "term": "AbGel / Clinicel / Sterispon / Truwax (haemostats)",
+   "division": null,
+   "products": 6,
+   "categories": [],
+   "examples": [
+    "Haemostat Absorbable Oxidised Regenerated Cellulose 5.1 cm x 35.5 cm Sheer Knitted Form",
+    "Haemostat Absorbable Oxidised Regenerated Cellulose 5.1 cm x 10 cm Fibrous & Layered Form",
+    "Haemostat Absorbable Oxidised Regenerated Cellulose 5.1 cm x 7.6 cm Sheer Knitted Form",
+    "Haemostat Absorbable Oxidised Regenerated Cellulose 10.2 cm x 10.2 cm Fibrous & Layered Form",
+    "Haemostat Absorbable Oxidised Regenerated Cellulose 10 cm x 20 cm Sheer Knitted Form",
+    "Haemostat Absorbable Oxidised Regenerated Cellulose 2.5 cm x 5.1 cm Fibrous & Layered Form"
+   ],
+   "hub": "closure:haemo",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "All cached items are Clinicel oxidised cellulose haemostats.",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "B BRAUN MEDICAL LTD",
+   "term": "NPC:FVN069",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tissue Adhesives Skin adhesive 5 ampoules of 0.5ml monomeric lucent n-butyl-2-cyanoacrylate"
+   ],
+   "hub": "closure:adhes",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The catalogue item is a tissue adhesive (Histoacryl).",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "B BRAUN MEDICAL LTD",
+   "term": "NPC:FKV081",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tissue Adhesives Histoacryl skin adhesive 10 ampoules of 0.5ml monometric n-butyl-cyanoacrylate - translucent"
+   ],
+   "hub": "closure:adhes",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The catalogue item is a tissue adhesive (Histoacryl).",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "CHEMENCE LTD",
+   "term": "NPC:FKV13364",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tissue Adhesives Skin closure system 2-octyl cyanoacrylate adhesive 60CM mesh"
+   ],
+   "hub": "closure:adhes",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The catalogue item is a tissue adhesive (Exofin Fusion).",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "B BRAUN MEDICAL LTD",
+   "term": "NPC:FVF019",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tissue Adhesives Histoacryl flexible skin adhesive 5 ampoules of 0.5ml monometric n-butle-cyanoacrylate - blue"
+   ],
+   "hub": "closure:adhes",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The catalogue item is a tissue adhesive (Histoacryl).",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "CHEMENCE LTD",
+   "term": "NPC:FVF057",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tissue Adhesives Topical skin adhesive high viscosity medical cyanoacrylate 0.7ml"
+   ],
+   "hub": "closure:adhes",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The catalogue item is a tissue adhesive (Derma Flex).",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "CHEMENCE LTD",
+   "term": "NPC:FKV13365",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tissue Adhesives Skin closure system 2-octyl cyanoacrylate adhesive 30CM mesh"
+   ],
+   "hub": "closure:adhes",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The catalogue item is a tissue adhesive (Exofin Fusion).",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "B BRAUN MEDICAL LTD",
+   "term": "NPC:FVF073",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tissue Adhesives High Viscosity 2-Octyl Cyanoacrylate 0.5ml"
+   ],
+   "hub": "closure:adhes",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The catalogue item is a tissue adhesive (Histoacryl).",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "JOHNSON & JOHNSON MEDICAL LTD",
+   "term": "NPC:ELY189",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tissue Adhesives Skin closure system 2-octyl cyanoacrylate adhesive formulation mesh applicator"
+   ],
+   "hub": "closure:adhes",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The catalogue item is a tissue adhesive (Prineo).",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "B BRAUN MEDICAL LTD",
+   "term": "NPC:FVN176",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tissue Adhesives Skin adhesive 10 ampoules of 0.5ml monomeric n-butyl-2-cyanoacrylate blue"
+   ],
+   "hub": "closure:adhes",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The catalogue item is a tissue adhesive (Histoacryl).",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "CHEMENCE LTD",
+   "term": "NPC:FKV13345",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tissue Adhesives 2 Octyl Cyanoacrylate high viscosity 1.0ml"
+   ],
+   "hub": "closure:adhes",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The catalogue item is a tissue adhesive (Exofin).",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "CHEMENCE LTD",
+   "term": "NPC:FKV13366",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tissue Adhesives Skin closure system 2-octyl cyanoacrylate adhesive 22CM mesh"
+   ],
+   "hub": "closure:adhes",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The catalogue item is a tissue adhesive (Exofin Fusion).",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "B BRAUN MEDICAL LTD",
+   "term": "NPC:FVN055",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tissue Adhesives Skin adhesive 5 ampoules of 0.5ml monomeric n-butyl-2-cyanoacrylate blue"
+   ],
+   "hub": "closure:adhes",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The catalogue item is a tissue adhesive (Histoacryl).",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "B BRAUN MEDICAL LTD",
+   "term": "NPC:FVF074",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tissue Adhesives High Viscosity 2-Octyl Cyanoacrylate 1ml"
+   ],
+   "hub": "closure:adhes",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The catalogue item is a tissue adhesive (Histoacryl).",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "CHEMENCE LTD",
+   "term": "NPC:FKV13350",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tissue Adhesives 2 Octyl Cyanoacrylate high viscosity 0.5ml"
+   ],
+   "hub": "closure:adhes",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The catalogue item is a tissue adhesive (Exofin).",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "JOHNSON & JOHNSON MEDICAL LTD",
+   "term": "NPC:FKV13367",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tissue Adhesives Skin Closure System"
+   ],
+   "hub": "closure:adhes",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The catalogue item is a tissue adhesive (Prineo).",
+   "decidedIn": "Wound closure speciality, 2026-11-12"
   }
  ],
  "kinds": {
