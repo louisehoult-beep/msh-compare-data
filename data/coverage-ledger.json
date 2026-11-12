@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-11-10",
-  "differentiator.json published": 38889,
-  "differentiator.json held": 296491
+  "differentiator.json published": 38920,
+  "differentiator.json held": 296479
  },
  "counts": {
   "frameworks": 122,
@@ -10346,8 +10346,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "31 March 2027",
    "suppliersAwarded": 21,
-   "suppliersPublished": 11,
-   "coverage": 52.4,
+   "suppliersPublished": 13,
+   "coverage": 61.9,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -10357,7 +10357,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 21,
-   "coverageOfTarget": 52.4,
+   "coverageOfTarget": 61.9,
    "crawlWorklist": [
     {
      "supplier": "Unomedical Ltd",
@@ -10397,13 +10397,6 @@
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-14",
      "bucket": "refused"
-    },
-    {
-     "supplier": "Fannin (UK) Limited",
-     "domain": "fannin.eu",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-09-08",
-     "bucket": "publishedElsewhere"
     },
     {
      "supplier": "Reliance Medical",
@@ -10448,6 +10441,13 @@
      "bucket": "published"
     },
     {
+     "supplier": "Fannin (UK) Limited",
+     "domain": "fannin.eu",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-08",
+     "bucket": "published"
+    },
+    {
      "supplier": "GBUK Group",
      "domain": null,
      "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
@@ -10469,7 +10469,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 2,
+    "publishedElsewhereNeedingCategory": 0,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -10480,6 +10480,7 @@
     "B. Braun Medical",
     "BD \u2014 Becton, Dickinson",
     "BD \u2014 Becton, Dickinson",
+    "Fannin (UK) Limited",
     "GBUK Group",
     "Greiner Bio-One Ltd",
     "ICU Medical (incl. Smiths Medical)",
@@ -10487,11 +10488,10 @@
     "ICU Medical (incl. Smiths Medical)",
     "Terumo UK",
     "Vygon (UK)",
+    "Nipro Medical Europe",
     "Terumo UK"
    ],
    "publishedElsewhere": [
-    "Fannin (UK) Limited",
-    "Nipro Medical Europe",
     "Reliance Medical"
    ],
    "heldOnly": [
@@ -10509,7 +10509,7 @@
     "TLB Medical Supplies"
    ],
    "unknown": [],
-   "actionableTotal": 5,
+   "actionableTotal": 3,
    "blockedReason": null,
    "deferred": null
   },
@@ -11352,8 +11352,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "22 March 2028",
    "suppliersAwarded": 18,
-   "suppliersPublished": 9,
-   "coverage": 50.0,
+   "suppliersPublished": 10,
+   "coverage": 55.6,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -11363,7 +11363,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 18,
-   "coverageOfTarget": 50.0,
+   "coverageOfTarget": 55.6,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -11397,13 +11397,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Fannin (UK) Limited",
-     "domain": "fannin.eu",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-09-08",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Balmung Medical Handel GmbH",
      "domain": "www.balmung-medical.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -11429,6 +11422,13 @@
      "domain": "bd.com",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-26",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Fannin (UK) Limited",
+     "domain": "fannin.eu",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-08",
      "bucket": "published"
     },
     {
@@ -11461,7 +11461,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 3,
+    "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -11471,6 +11471,7 @@
    "published": [
     "B. Braun Medical",
     "BD \u2014 Becton, Dickinson",
+    "Fannin (UK) Limited",
     "GBUK Group",
     "ICU Medical (incl. Smiths Medical)",
     "Kimal PLC",
@@ -11481,7 +11482,6 @@
    ],
    "publishedElsewhere": [
     "Aquilant Limited",
-    "Fannin (UK) Limited",
     "Johnson & Johnson MedTech",
     "Timesco Healthcare Ltd"
    ],
@@ -11497,7 +11497,7 @@
     "Scottmed Distribution (UK) Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 5,
+   "actionableTotal": 4,
    "blockedReason": null,
    "deferred": null
   },

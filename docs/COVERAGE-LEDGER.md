@@ -67,13 +67,13 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Neuromodulation Devices and Associated Products | neuro | 23 | 13 | 56.5% | 5 | 16 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 8 | 36.4% | 6 | 13 | STARTED |
 | Hand Hygiene and Associated Products and Services | infection | 21 | 6 | 28.6% | 4 | 16 | STARTED |
-| Intravenous Cannula and Associated Products | vascular | 21 | 11 | 52.4% | 5 | 12 | STARTED |
+| Intravenous Cannula and Associated Products | vascular | 21 | 13 | 61.9% | 3 | 12 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 6 | 28.6% | 1 | 11 | STARTED · 5 EXCLUDED |
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 9 | 45.0% | 3 | 12 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 9 | 47.4% | 7 | 11 | STARTED |
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 10 | 52.6% | 7 | 9 | STARTED |
 | Examination Gloves | infection | 19 | 5 | 26.3% | 5 | 13 | STARTED |
-| Central Venous Catheters and Associated Products | vascular | 18 | 9 | 50.0% | 5 | 11 | STARTED |
+| Central Venous Catheters and Associated Products | vascular | 18 | 10 | 55.6% | 4 | 11 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 7 | 38.9% | 2 | 13 | STARTED |
 | Patient Temperature Management | theatres | 18 | 13 | 72.2% | 3 | 12 | STARTED |
 | Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 6 | 33.3% | 0 | 11 | STARTED · 2 EXCLUDED |
