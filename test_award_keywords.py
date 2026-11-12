@@ -8,7 +8,10 @@ HIT = ["Surgical stapling", "Surgical Staplers and reloads", "Laparoscopic consu
        "Endoscopy stack", "Sutures", "Absorbable Suture", "Wound closure",
        "Polymer Ligating Clips", "Clip appliers", "Trocars",
        "Minimally Invasive Surgery Consumables", "Haemostatic agents",
-       "Electrosurgical generator", "Orthopaedic implants", "Ventilators"]
+       "Electrosurgical generator", "Orthopaedic implants", "Ventilators",
+       "Hernia repair", "Surgical mesh", "Skin closure strips", "Diathermy pencils",
+       "Thoracic consumables", "Robotic surgery system", "Robot-assisted surgery",
+       "Surgical robotics", "Hemostatic matrix"]
 MISS = ["Office staplers", "Ventilation system upgrade", "Stapleford Road resurfacing",
         "Grounds maintenance"]
 

@@ -128,11 +128,13 @@ _KW_WORDS = (
     r'hoist|ligation|biopsy|sutures?|pacemaker|stent|guidewire|nebuliser|'
     r'oximeter|spirometer|audiometer|ophthalmic|wound closure|clip appliers?|'
     r'ligating clips?|ligation clips?|trocars?|minimally invasive|'
-    r'tissue adhesives?|hernia mesh|vessel sealing|surgical energy')
+    r'tissue adhesives?|hernia mesh|vessel sealing|surgical energy|'
+    r'hernia|surgical mesh|skin closure|diathermy|thoracic|robotic surgery|'
+    r'robot(?:ic)?[- ]assisted')
 _KW_STEMS = (
     r'surgic|endoscop|laparoscop|arthroscop|prosthe|orthopaed|radiotherap|'
     r'mammograph|sterilis|steriliz|decontaminat|anaesthe|defibrillat|'
-    r'lymphoedema|dosimet|electrosurg|haemostat|endomechanic|stapling|'
+    r'lymphoedema|dosimet|electrosurg|haemostat|hemostat|endomechanic|stapling|surgical robot|'
     r'(?:surgical|skin|circular|linear|endo|endoscopic) stapl')
 STRONG_KW = re.compile(
     r'\b(?:(?:%s)\b|(?:%s)\w*)' % (_KW_WORDS, _KW_STEMS), re.I)
