@@ -114,15 +114,28 @@ MAX_WAIT = 600
 # backstop for notices a buyer has mis-coded.
 CPV_MEDICAL_PREFIX = "33"
 
+# Fixed 12/11/2026. The list used to be one alternation closed by \b, so a stem
+# such as "surgic" or "laparoscop" could only match when the word ENDED there:
+# "Surgical stapling", "Laparoscopic consumables" and "Endoscopy stack" were all
+# missed, and so was every stapling, closure and MIS title, which had no term at
+# all. Whole words keep the closing \b; stems may run on (\w*); and the surgical
+# consumable terms are added. "ventilat" stays whole-word only, so a building
+# "Ventilation" contract is not pulled in.
+_KW_WORDS = (
+    r'theatre|catheter|cannula|vascular access|wound care|dressing|stoma|'
+    r'continence|implants?|ultrasound|ct scanner|mri scanner|x-ray|infusion pump|'
+    r'syringe driver|ventilator|ventilators|dialysis|mattress|spineboard|scoop|'
+    r'hoist|ligation|biopsy|sutures?|pacemaker|stent|guidewire|nebuliser|'
+    r'oximeter|spirometer|audiometer|ophthalmic|wound closure|clip appliers?|'
+    r'ligating clips?|ligation clips?|trocars?|minimally invasive|'
+    r'tissue adhesives?|hernia mesh|vessel sealing|surgical energy')
+_KW_STEMS = (
+    r'surgic|endoscop|laparoscop|arthroscop|prosthe|orthopaed|radiotherap|'
+    r'mammograph|sterilis|steriliz|decontaminat|anaesthe|defibrillat|'
+    r'lymphoedema|dosimet|electrosurg|haemostat|endomechanic|stapling|'
+    r'(?:surgical|skin|circular|linear|endo|endoscopic) stapl')
 STRONG_KW = re.compile(
-    r'\b(surgic|theatre|endoscop|catheter|cannula|vascular access|wound care|'
-    r'dressing|stoma|continence|implant|prosthe|orthopaed|radiotherap|'
-    r'ultrasound|ct scanner|mri scanner|x-ray|mammograph|infusion pump|syringe '
-    r'driver|sterilis|steriliz|decontaminat|ventilat|anaesthe|dialysis|'
-    r'defibrillat|mattress|spineboard|scoop|hoist|lymphoedema|dosimet|'
-    r'ligation|biopsy|electrosurg|sutures|arthroscop|laparoscop|pacemaker|'
-    r'stent|guidewire|nebuliser|oximeter|spirometer|audiometer|ophthalmic)\b',
-    re.I)
+    r'\b(?:(?:%s)\b|(?:%s)\w*)' % (_KW_WORDS, _KW_STEMS), re.I)
 
 EXCLUDE = re.compile(
     r'\b(mental health|talking therap|counsell|homecare|home care|floor walker|'
