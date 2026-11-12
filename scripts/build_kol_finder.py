@@ -57,7 +57,7 @@ import urllib.parse
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "data" / "kol-finder.json"
-CHECKED = "2026-10-22"  # not advanced 05/11/2026: TVS Charity Commission page did not load
+CHECKED = "2026-11-12"  # all 14 script sources re-read 12/11/2026; no people changes
 
 CLASSES = [
     ("board", "Board and committee members"),
