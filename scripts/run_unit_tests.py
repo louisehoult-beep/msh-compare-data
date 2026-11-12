@@ -188,6 +188,7 @@ RUN = [
     "test_speciality_panels_phase2.py",  # 29/09/2026, in-memory build, writes nothing
     "test_stale_brief_rows.py",
     "test_awards_history.py",
+    "test_award_keywords.py",
     "test_supplier_index_awards.py",
     "test_supplier_index_framework_dedupe.py",
     "test_tariff_bnf_filter.py",

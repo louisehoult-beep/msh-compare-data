@@ -26,3 +26,9 @@ def test_strong_kw_hits_and_misses():
 
 def test_both_scripts_share_one_rule():
     assert ra.STRONG_KW.pattern == ro.STRONG_KW.pattern
+
+
+if __name__ == "__main__":
+    test_strong_kw_hits_and_misses()
+    test_both_scripts_share_one_rule()
+    print("test_award_keywords: OK")
