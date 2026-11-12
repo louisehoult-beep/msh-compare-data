@@ -74,7 +74,7 @@ function pms_get_member_subscriptions($args) { $out = array(); foreach ($GLOBALS
   if (isset($args['subscription_plan_id']) && (int) $s->subscription_plan_id !== (int) $args['subscription_plan_id']) continue;
   $out[] = $s; } return $out; }
 function user($id, $email, $first, $plan = 0, $status = 'active', $exp = '2027-06-01 00:00:00') {
-  $GLOBALS['users'][$id] = array('ID' => $id, 'user_email' => $email, 'first_name' => $first, 'display_name' => $first . ' Test');
+  $GLOBALS['users'][$id] = array('ID' => $id, 'user_email' => $email, 'first_name' => $first, 'last_name' => 'Test', 'display_name' => $first . ' Test');
   if ($plan) { $GLOBALS['subs'][$id] = new Sub(array('id' => $id, 'user_id' => $id, 'subscription_plan_id' => $plan, 'status' => $status, 'expiration_date' => $exp, 'billing_amount' => 300)); }
 }
 """
