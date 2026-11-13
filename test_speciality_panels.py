@@ -1116,15 +1116,15 @@ print("\nTRUE POSITIVES — awards that must be on this patch")
 # be genuinely matched and still fall outside the cap once matched > 40 (see
 # below). These two stay common enough to keep appearing in the shown slice.
 for good in ["telecare", "community equipment", "care home", "intermediate care",
-             "virtual ward", "technology enabled care", "falls prevention",
+             "technology enabled care", "falls prevention",
              "independent living", "nursing care beds"]:
     check("present: %s" % good, good in ftitles)
-# "digital care alarms" is checked against the full matched set, not the shown
-# slice: added 15/09/2026 when backfilling three genuine Integrated Community
-# Equipment Service awards (Calderdale, Nottinghamshire Adults/Children — see
-# patient-handling's include-list note) pushed this speciality's matched
-# total past AWARD_CAP for the first time, ageing this older title out of the
-# top 40 by date. The matcher still admits it; only the display window changed.
+# "digital care alarms" and "virtual ward" are checked against the full matched
+# set, not the shown slice: added 15/09/2026 (digital care alarms) and
+# 13/11/2026 (virtual ward) when new awards elsewhere on this patch pushed the
+# matched total past AWARD_CAP, ageing these older titles out of the top 40 by
+# date. The matcher still admits them (5 virtual-ward awards in the full set on
+# 13/11/2026); only the display window changed.
 _fr_th = B.load("tender-history.json")
 _fr_fa = B.load("framework-awards.json")
 _fr_matched_titles = " || ".join(
@@ -1136,6 +1136,8 @@ _fr_matched_titles = " || ".join(
 ).lower()
 check("present in the full matched set (beyond the display cap): digital care alarms",
       "digital care alarms" in _fr_matched_titles)
+check("present in the full matched set (beyond the display cap): virtual ward",
+      "virtual ward" in _fr_matched_titles)
 check("every award shown is one the matcher still admits",
       all(B.match_title(frx, a["title"]) for a in fr["awards"]))
 check("the shown slice is the matched set up to AWARD_CAP, nothing else withheld",
