@@ -11,8 +11,8 @@
   "contact": "contact@elevateandthrive.uk"
  },
  "lane": "digital",
- "dataAsOf": "12/11/2026",
- "generated": "2026-11-12",
+ "dataAsOf": "13/11/2026",
+ "generated": "2026-11-13",
  "source": "Find a Tender and Contracts Finder award notices in the Hub's digital lane (data/digital-lane.json), Open Government Licence v3.",
  "sectionRule": "Software and IT notices only. Each row is one supplier named on one Find a Tender or Contracts Finder award notice that an NHS buyer classified under a Common Procurement Vocabulary (CPV) code beginning 48 (software packages and information systems) or 72 (IT services). Those codes cover payroll, finance and office systems as much as clinical ones, so a row is not a claim of health technology. A row is counted as clinical only where the notice title names a clinical system. Medical device awards (CPV division 33) appear in the award sections above and are never repeated here.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
@@ -24,23 +24,23 @@
   "laneCoverage": {
    "complete": true,
    "window": {
-    "from": "2026-11-04",
-    "to": "2026-11-12",
+    "from": "2026-11-05",
+    "to": "2026-11-13",
     "days": 8,
-    "run": "2026-11-12"
+    "run": "2026-11-13"
    },
    "notes": [
-    "Find a Tender (tender stage): 2 digital lane notice(s) from 54 release(s) over 1 page(s)",
-    "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-04",
-    "Find a Tender (planning stage): 0 digital lane notice(s) from 49 release(s) over 1 page(s)",
-    "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-04"
+    "Find a Tender (tender stage): 2 digital lane notice(s) from 55 release(s) over 1 page(s)",
+    "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-05",
+    "Find a Tender (planning stage): 1 digital lane notice(s) from 46 release(s) over 1 page(s)",
+    "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-05"
    ]
   }
  },
  "counts": {
   "companies": 48,
-  "awardRows": 108,
-  "unmatched": 221,
+  "awardRows": 109,
+  "unmatched": 222,
   "ambiguous": 0,
   "alreadyInMedicalFeed": 0
  },
@@ -1943,6 +1943,27 @@
   ],
   "OneAdvanced (Advanced Health and Care)": [
    {
+    "title": "NHS Scotland National Finance System Software Licence and Support Services Agreement",
+    "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotland) (NSS)",
+    "date": "2026-11-12",
+    "url": "https://www.find-tender.service.gov.uk/Notice/107727-2026",
+    "ocid": "ocds-h6vhtk-04db83",
+    "source": "Find a Tender",
+    "valueAmount": 6150000,
+    "valueCurrency": "GBP",
+    "periodEnd": null,
+    "isFramework": false,
+    "digitalCpv": [
+     "72000000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "OneAdvanced",
+    "noticeSupplierCount": 2,
+    "company": "OneAdvanced (Advanced Health and Care)",
+    "matchedOn": "\"oneadvanced\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   },
+   {
     "title": "ELFS - Finance & eProcurement System",
     "buyer": "Lancashire Teaching Hospitals NHS Foundation Trust",
     "date": "2026-09-10",
@@ -2440,6 +2461,26 @@
   ]
  },
  "unmatched": [
+  {
+   "title": "Confirmation of Award of a Contract for the provision of software licences for digital simulation software",
+   "buyer": "NHS Wales Performance and Improvement (hosted by Public Health Wales)",
+   "date": "2026-11-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/107740-2026",
+   "ocid": "ocds-h6vhtk-06af46",
+   "source": "Find a Tender",
+   "valueAmount": 96927.44,
+   "valueCurrency": "GBP",
+   "periodEnd": "2029-10-18",
+   "isFramework": false,
+   "digitalCpv": [
+    "72268000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Minitab Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"minitab\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
   {
    "title": "UCLH-7742 - Service Desk and End-User-Technology Procurement",
    "buyer": "University College London Hospitals NHS FT",
