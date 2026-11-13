@@ -53,7 +53,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Pressure Area Care and Patient Handling | handling | 53 | 28 | 52.8% | 13 | 30 | STARTED |
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 20 | 26 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 11 | 25.6% | 15 | 30 | STARTED |
-| Wound Closure | closure | 39 | 10 | 25.6% | 23 | 20 | STARTED |
+| Wound Closure | closure | 39 | 11 | 28.2% | 21 | 20 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 15 | 40.5% | 6 | 28 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 17 | 45.9% | 14 | 20 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 13 | 37.1% | 7 | 21 | STARTED |
@@ -122,7 +122,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Fluoroscopy and Associated Options and Related Services | — | 11 | 0 | 0.0% | 6 | 7 | UNMAPPED |
 | Transcatheter Heart Valve Repair, Replacement and Associated Devices | — | 11 | 0 | 0.0% | 10 | 3 | UNMAPPED |
 | Mobile Image Intensifiers and Associated Options and Related Services | — | 10 | 0 | 0.0% | 5 | 7 | UNMAPPED |
-| Structural Heart and Ventricular Assist Devices | — | 10 | 0 | 0.0% | 7 | 6 | UNMAPPED |
+| Structural Heart and Ventricular Assist Devices | — | 10 | 0 | 0.0% | 6 | 7 | UNMAPPED |
 | External Breast Prosthesis and Chest Support | — | 9 | 0 | 0.0% | 5 | 4 | UNMAPPED |
 | Perfusion Devices, Consumables and Associated Equipment | — | 9 | 0 | 0.0% | 7 | 6 | UNMAPPED |
 | Medical Hollowware | — | 8 | 0 | 0.0% | 8 | 4 | UNMAPPED |
@@ -134,7 +134,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Bone Densitometers, Associated Options and Related Services | — | 6 | 0 | 0.0% | 3 | 4 | UNMAPPED |
 | Negative Pressure Wound Therapy | — | 6 | 0 | 0.0% | 5 | 4 | UNMAPPED |
 | Surgical Implants for Men’s and Women’s Health | — | 6 | 0 | 0.0% | 5 | 3 | UNMAPPED |
-| Surgical Navigation Systems with Associated Options and Related Services | — | 6 | 0 | 0.0% | 4 | 5 | UNMAPPED |
+| Surgical Navigation Systems with Associated Options and Related Services | — | 6 | 0 | 0.0% | 4 | 4 | UNMAPPED |
 | Flexible Endoscopes and Associated Options and Related Services | — | 5 | 0 | 0.0% | 1 | 4 | UNMAPPED |
 | Medical Chart Paper and Ultrasound Film | — | 5 | 0 | 0.0% | 3 | 3 | UNMAPPED |
 | Radiotherapy IT Solutions and Associated Options and Related Services | — | 5 | 0 | 0.0% | 4 | 1 | UNMAPPED |

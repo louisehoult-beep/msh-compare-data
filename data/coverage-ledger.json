@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-11-10",
-  "differentiator.json published": 38953,
-  "differentiator.json held": 296453
+  "differentiator.json published": 38954,
+  "differentiator.json held": 296490
  },
  "counts": {
   "frameworks": 122,
@@ -24,10 +24,10 @@
   "unmapped": 45,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 397,
-  "inScopeSuppliersNeedingCrawl": 215,
-  "inScopeSuppliersNeedingDomain": 204,
-  "suppliersRefused": 579,
+  "supplierNamesUnresolved": 399,
+  "inScopeSuppliersNeedingCrawl": 213,
+  "inScopeSuppliersNeedingDomain": 202,
+  "suppliersRefused": 580,
   "suppliersRefusedButPublishingElsewhere": 167,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
@@ -1502,6 +1502,10 @@
    1
   ],
   [
+   "T.J.Smith and Nephew Limited",
+   1
+  ],
+  [
    "Apollo Medical Technologies Ltd",
    1
   ],
@@ -1623,6 +1627,10 @@
   ],
   [
    "Nuvik UK Ltd",
+   1
+  ],
+  [
+   "T.J Smith & Nephew Ltd",
    1
   ]
  ],
@@ -7078,8 +7086,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "18 January 2030",
    "suppliersAwarded": 39,
-   "suppliersPublished": 10,
-   "coverage": 25.6,
+   "suppliersPublished": 11,
+   "coverage": 28.2,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -7089,12 +7097,8 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 39,
-   "coverageOfTarget": 25.6,
+   "coverageOfTarget": 28.2,
    "crawlWorklist": [
-    {
-     "supplier": "Artivion UK Ltd",
-     "domain": null
-    },
     {
      "supplier": "Assut UK LTD",
      "domain": null
@@ -7112,21 +7116,15 @@
      "domain": null
     },
     {
-     "supplier": "R&D Surgical Ltd",
-     "domain": null
-    },
-    {
      "supplier": "SAI Medical Solutions Ltd",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "Artivion UK Ltd",
     "Assut UK LTD",
     "GS Medical Healthcare Ltd (novating to GBUK Ltd)",
     "Lenience UK Ltd",
     "Pearsalls Ltd",
-    "R&D Surgical Ltd",
     "SAI Medical Solutions Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -7136,6 +7134,13 @@
      "domain": "www.gentell.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "R&D Surgical Ltd",
+     "domain": "randdsurgical.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found); no product-path links were found by following the site's pages",
+     "checked": "2026-11-13",
      "bucket": "refused"
     },
     {
@@ -7223,13 +7228,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Smith+Nephew",
-     "domain": "www.smith-nephew.com",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Critical Healthcare",
      "domain": "www.criticalhealthcare.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -7287,17 +7285,18 @@
     "Reliance Medical"
    ],
    "actionable": {
-    "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 13,
+    "unresolvedNames": 1,
+    "publishedElsewhereNeedingCategory": 12,
     "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 7
+    "needDomain": 5
    },
    "published": [
     "Advanced Medical Solutions (AMS)",
     "Anser Medical",
+    "Artivion UK Ltd",
     "B. Braun Medical",
     "Baxter Healthcare Ltd",
     "Chemence Ltd",
@@ -7323,8 +7322,7 @@
     "Reliance Medical",
     "Sela Medical UK Ltd",
     "Stryker",
-    "TFX Group Ltd (Teleflex Medical)",
-    "Smith+Nephew"
+    "TFX Group Ltd (Teleflex Medical)"
    ],
    "heldOnly": [
     "Critical Healthcare",
@@ -7333,20 +7331,21 @@
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Artivion UK Ltd",
     "Assut UK LTD",
     "GS Medical Healthcare Ltd (novating to GBUK Ltd)",
     "Lenience UK Ltd",
     "Pearsalls Ltd",
-    "R&D Surgical Ltd",
     "SAI Medical Solutions Ltd"
    ],
    "refused": [
     "Gentell UK Ltd",
+    "R&D Surgical Ltd",
     "Winners First Trading Limited"
    ],
-   "unknown": [],
-   "actionableTotal": 23,
+   "unknown": [
+    "T.J Smith & Nephew Ltd"
+   ],
+   "actionableTotal": 21,
    "blockedReason": null,
    "deferred": null
   },
@@ -18358,22 +18357,12 @@
    "coverageOfTarget": 0.0,
    "crawlWorklist": [
     {
-     "supplier": "Artivion UK Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Corcym UK (Holding) Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "R&D Surgical Ltd",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "Artivion UK Ltd",
-    "Corcym UK (Holding) Ltd",
-    "R&D Surgical Ltd"
+    "Corcym UK (Holding) Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -18382,6 +18371,13 @@
      "domain": "heartrecovery.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 1 product URLs, too few to call a catalogue",
      "checked": "2026-08-25",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "R&D Surgical Ltd",
+     "domain": "randdsurgical.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found); no product-path links were found by following the site's pages",
+     "checked": "2026-11-13",
      "bucket": "refused"
     },
     {
@@ -18428,17 +18424,18 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 3,
+    "publishedElsewhereNeedingCategory": 4,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 1
    },
    "published": [],
    "publishedElsewhere": [
     "Abbott Medical U.K. Ltd",
     "Aquilant Limited",
+    "Artivion UK Ltd",
     "BD \u2014 Becton, Dickinson",
     "Medtronic",
     "Meril UK Pvt Ltd"
@@ -18448,15 +18445,14 @@
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Artivion UK Ltd",
-    "Corcym UK (Holding) Ltd",
-    "R&D Surgical Ltd"
+    "Corcym UK (Holding) Ltd"
    ],
    "refused": [
-    "Abiomed Ltd"
+    "Abiomed Ltd",
+    "R&D Surgical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 7,
+   "actionableTotal": 6,
    "blockedReason": null,
    "deferred": null
   },
@@ -19524,21 +19520,14 @@
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-08",
      "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Smith+Nephew",
-     "domain": "www.smith-nephew.com",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "publishedElsewhereNoOwnRange": [],
    "actionable": {
-    "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 4,
+    "unresolvedNames": 1,
+    "publishedElsewhereNeedingCategory": 3,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -19549,8 +19538,7 @@
    "publishedElsewhere": [
     "Hospital Services Limited",
     "Medtronic",
-    "Stryker",
-    "Smith+Nephew"
+    "Stryker"
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
@@ -19559,7 +19547,9 @@
     "Brainlab Ltd",
     "Karl Storz UK"
    ],
-   "unknown": [],
+   "unknown": [
+    "T.J.Smith and Nephew Limited"
+   ],
    "actionableTotal": 4,
    "blockedReason": null,
    "deferred": null
