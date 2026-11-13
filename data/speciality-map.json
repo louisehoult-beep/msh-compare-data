@@ -785,6 +785,11 @@
         "handling"
       ],
       "note": "Added 27/08/2026. Introduced into supplier-seed.json by commits d273bfc and b853707 on 26/08/2026 and mapped to nothing, which made verify.py's vocab check fail and blocked every refresh.yml run from that evening onward. Mapped to the single canonical speciality the label already names; nothing is widened, so no supplier is claimed into a category its own label did not already assert. 1 supplier (Crest Medical Ltd). DELIBERATELY NARROW: 'pressure area care' is not mapped to `wound`, because Crest Medical already carries 'Wound care' as a separate speciality, so mapping it here would assert nothing new and would set a precedent for splitting a compound label into a claim."
+    },
+    "Wound closure": {
+      "to": [
+        "closure"
+      ]
     }
   },
   "gapsInCanonicalList": [
