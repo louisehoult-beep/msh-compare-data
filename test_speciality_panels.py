@@ -1994,13 +1994,16 @@ check("Medtronic appears exactly once", len(medtronic) == 1,
       "got %s" % [s["name"] for s in nesup if "medtronic" in s["name"].lower()])
 check("Medtronic is credited on both frameworks",
       bool(medtronic) and len(medtronic[0]["frameworks"]) == 2)
-# The alias registry keeps T.J. Smith and Nephew (Companies House 00093994) separate
-# from Smith+Nephew (00156031) on purpose. It must be flagged, never merged and never
-# dropped.
-tj = [s for s in nesup if s["name"].lower().startswith("t.j.smith")]
-check("T.J. Smith and Nephew is kept as NHSSC wrote it", len(tj) == 1)
-check("...and flagged unresolved rather than merged into Smith+Nephew",
-      bool(tj) and tj[0]["resolved"] is False)
+# T.J. Smith and Nephew (Companies House 00093994) got its own confirmed
+# canonical record on 14/11/2026 (Wound Closure framework-coverage batch),
+# kept distinct from Smith+Nephew (00156031) per that record's own ownership
+# note. Its two NHSSC spellings now resolve to each other under that record,
+# never into Smith+Nephew.
+tj = [s for s in nesup if s["name"] == "T.J Smith & Nephew Ltd"]
+check("T.J Smith & Nephew Ltd resolves to its own canonical record", len(tj) == 1)
+check("...both NHSSC spellings merge into it, not into Smith+Nephew",
+      bool(tj) and tj[0]["resolved"] is True
+      and "T.J.Smith and Nephew Limited" in tj[0]["variants"])
 check("no supplier from Total Orthopaedic Solutions 3 leaked in",
       not any(s["name"] in ("Zimmer Biomet Limited", "Arthrex Ltd", "Corin Ltd")
               for s in nesup))
