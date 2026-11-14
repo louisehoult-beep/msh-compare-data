@@ -53,7 +53,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Pressure Area Care and Patient Handling | handling | 53 | 28 | 52.8% | 13 | 30 | STARTED |
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 20 | 26 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 11 | 25.6% | 15 | 30 | STARTED |
-| Wound Closure | closure | 39 | 11 | 28.2% | 21 | 20 | STARTED |
+| Wound Closure | closure | 39 | 13 | 33.3% | 19 | 20 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 15 | 40.5% | 6 | 28 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 17 | 45.9% | 14 | 20 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 13 | 37.1% | 7 | 21 | STARTED |

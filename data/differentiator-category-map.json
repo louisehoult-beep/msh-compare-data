@@ -186295,6 +186295,53 @@
    "evidence": "the supplier's own site filing (artivion.com), read by scripts/crawl_supplier_site.py 13/11/2026.",
    "why": "BioGlue is Artivion's albumin-glutaraldehyde surgical sealant, used to control bleeding at suture lines in cardiovascular and vascular surgery. NHS Supply Chain's own Wound Closure Product Matrix by Lot already assigns Artivion UK Ltd to the Haemostats sub-lot only, so this is filed to match the awarding source rather than guessed from the product's marketing name.",
    "decidedIn": "framework-coverage batch, Wound Closure, 13/11/2026"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "TFX Group Ltd (Teleflex Medical)",
+   "division": "Weck Visistat",
+   "products": 3,
+   "categories": [],
+   "examples": [
+    "Stapler skin disposable single patient use 35 Regular Staples",
+    "Stapler skin disposable single patient use 35 Wide Staples",
+    "Skin staple remover Single Use"
+   ],
+   "hub": "closure:stapler",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py, term \"Weck Hem-o-lok clips\" under TFX Group Ltd (Teleflex Medical): NPCs FGS358, FGS098, FGS437, all carrying nhsscName \"Weck Visistat\" -- Weck Visistat Stapler skin disposable (35 Regular Staples, 35 Wide Staples) and the matching Skin staple remover.",
+   "why": "These three items are genuinely skin staplers and a skin-staple remover, matching the existing closure:stapler category exactly (Wound Closure framework, framework-coverage batch 14/11/2026). The parent (supplier, term) entry for \"Weck Hem-o-lok clips\" already flagged these as not fitting its own mis:clips/mis:instruments categories (\"note two skin-stapler items don't clearly fit either and no hem-o-lok clip itself appears\") -- this override resolves that flagged gap at product level, per the mixed-division-mapping policy (data/identity-vocabulary-policy.json), leaving the clip applier and specimen-retrieval bags on their existing categories.",
+   "decidedIn": "Wound Closure framework-coverage batch 14/11/2026"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Medtronic",
+   "division": "ENDO CLIP",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Single Load Clip Appliers Minimal Access Endo 33cm Shaft 5mm Clips"
+   ],
+   "hub": "mis:clips",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py, term \"V-Loc / Endo Stitch (wound closure / endoscopic suturing)\" under Medtronic: NPC FSH86567, nhsscName \"ENDO CLIP\".",
+   "why": "A single-load clip applier, the same product type as other MIS clip appliers already filed under mis:clips (e.g. TFX Group Ltd's Weck Hem-o-lok clip applier). Not a wound-closure item.",
+   "decidedIn": "Wound Closure framework-coverage batch 14/11/2026"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Medtronic",
+   "division": "Auto Suture Endostitch",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Laparoscopic Suturing endo stitch instrument x3"
+   ],
+   "hub": "closure:sutures",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py, term \"V-Loc / Endo Stitch (wound closure / endoscopic suturing)\" under Medtronic: NPC FGP199, nhsscName \"Auto Suture Endostitch\".",
+   "why": "A genuine endoscopic suturing instrument -- the term's own name (\"wound closure / endoscopic suturing\") and the item's description both confirm it. Matches closure:sutures (Wound Closure framework).",
+   "decidedIn": "Wound Closure framework-coverage batch 14/11/2026"
   }
  ],
  "kinds": {
