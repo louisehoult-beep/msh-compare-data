@@ -769,6 +769,33 @@
    ],
    "reason": "Second-lowest-coverage STARTED framework with Left>0 in the 2026-11-11 ledger run, after Insulin Pumps and the top-8 ledger pick list (Digital Diagnostic Solutions, CT Scanners, Polymer Aprons, Surgical Instruments, Examination Gloves, Operating Theatres, Hand Hygiene) were all confirmed already exhausted. BXTAccelyon Ltd had no domain recorded at the top level of supplier-seed.json (the ledger flagged it needDomain), despite its identity and domain (bxta.com) already being confirmed in its own deepDive via Companies House and the company's own site (bxta.com/contact). Added a Website link (https://bxta.com/) to the seed record and ran crawl_supplier_site.py --supplier \"BXTAccelyon Ltd\" --domain bxta.com: the site's WordPress API exposes no product post type, the WooCommerce Store API returns HTTP 404, and the sitemap carries only 5 URLs under /product(s)/, /our-products/, /range(s)/ \u2014 too few to call a catalogue (matching the deepDive's own finding that the home page names 5 product headings \u2014 LDR Brachytherapy, 4D Brachytherapy, WebBXT, PrecisionPoint, MRI Pro \u2014 with no product detail beneath them). BD \u2014 Becton, Dickinson is robots.txt-refused (bd.com, checked 2026-08-26, inside TTL). No permitted route left on either of the framework's 2 awarded suppliers.",
    "wouldReopenIf": "BXTAccelyon's refusal TTL expires (after roughly 2027-02-09) and a re-crawl of bxta.com finds a real catalogue, or the company publishes per-product pages beyond its 5 marketing headings; BD's refusal TTL expires and a re-crawl of bd.com succeeds; or a new supplier is awarded on this framework."
+  },
+  {
+   "framework": "Wound Closure",
+   "checkedOn": "2026-11-15",
+   "coverageAtCheck": "35.9% (14/39), unchanged",
+   "suppliersChecked": [
+    "Assut UK LTD",
+    "GS Medical Healthcare Ltd (novating to GBUK Ltd)",
+    "Lenience UK Ltd",
+    "Pearsalls Ltd",
+    "SAI Medical Solutions Ltd",
+    "T.J Smith & Nephew Ltd",
+    "Critical Healthcare",
+    "Richardson Healthcare",
+    "Terumo Aortic",
+    "Essity UK Limited",
+    "Solventum (3M Health Care)",
+    "Kebomed UK Ltd",
+    "Mediq Healthcare UK Ltd",
+    "Medline Industries",
+    "P3 Medical Ltd",
+    "Reflex Medical Limited",
+    "Sela Medical UK Ltd",
+    "Stryker"
+   ],
+   "reason": "RE-CHECK 15/11/2026, continuing the same-day 05:16 run that crawled Ideal Medical Solutions, P3 Medical Ltd, Reflex Medical Limited and Sela Medical UK Ltd (git 998e976c): that run mapped 5 genuine closure products via Ideal Medical Solutions and confirmed, then correctly reverted, that P3 Medical's and Reflex Medical's candidate closure-sounding products have no manufacturer detail page or NHSSC match (inert), and that Sela Medical's one candidate ('Glutack') is an MIS mesh-fixation glue, not a wound-closure adhesive. It also flagged that P3 Medical's own site has drifted since its last crawl, so a re-crawl risks losing 9 already-published records on other frameworks (land.sh's record-loss check) -- this run independently re-confirmed that exact risk by test-crawling P3 Medical again (same result: 12 products, 5 divisions, all Veterinary/Coloproctology/theatre-instrument, none closure-fitting) and Reflex Medical again (1194 products, 16 divisions, all first-aid/urology/defib/hygiene, none closure-fitting) in a throwaway clone, then discarded both re-crawls rather than risk or duplicate the morning run's landed state. needDomain (6): GS Medical Healthcare Ltd (novating to GBUK Ltd) and T.J Smith & Nephew Ltd are already correctly-settled stubs from 13/11 and 14/11 (unconfirmable-awardee and no-parent-catalogue-credit-to-uk-subsidiary policies respectively) -- not re-investigated. The other 4 were searched fresh today: Assut UK LTD's only discoverable identity is Assut Medical Sarl (Switzerland, assutsutures.com) with no confirmed UK-specific site: ASSUT UK LIMITED (Companies House 05338676, Huddersfield) exists but no site was found naming it or printing its number, so domain-proof-tier is not met. Pearsalls Ltd (now trading as Surgical Specialties Taunton per Corza Medical's own catalogue PDFs) has no confirmed live site of its own -- only a third-party directory listing for pearsalls.co.uk, unverified and not opened. Lenience UK Ltd (Companies House 12545155, City Road London) has no discoverable website, product list or press coverage anywhere -- registry listings only. SAI Medical Solutions Ltd (Companies House 12347370, ex-SAI Quality Veg & Fruits Ltd) has a genuine NHS Wound Closure award (Find a Tender notice 065219-2025) but no discoverable website, phone or email. No permitted route on any of the 4 -- inventing a domain from a third-party directory guess would violate the never-fuzzy-match rule. heldOnly (3): Critical Healthcare and Richardson Healthcare are curated stubs with no own-site range (both domain guesses already failed crawl checks, 2026-08-31); Terumo Aortic's real, NHS-Supply-Chain-confirmed range (RelayPro, TREO, Gelweave, Thoraflex) is vascular/aortic stent-grafts and surgical grafts, not sutures/staples/adhesives/haemostats/closure strips -- correctly outside this framework's catsInScope, and its own site (terumo.com) already carries a recorded crawl refusal (HTTP 403, checked 2026-08-20). publishedElsewhereNeedingCategory (9): Essity UK Limited, Solventum, Mediq Healthcare UK Ltd, Medline Industries and Stryker all carry recorded crawl refusals or robots.txt blocks from 2026-08/09 (inside or spanning their TTLs, not re-crawled); Kebomed UK Ltd was crawled fresh today at kebomed.co.uk and refused on data quality (80 product records carrying only 11 distinct names -- a thin/duplicate-heavy capture, not a genuine catalogue, nav-labels-are-not-products-adjacent); P3 Medical Ltd, Reflex Medical Limited and Sela Medical UK Ltd are the three already covered above. No permitted route left on any of the 18 actionable items.",
+   "wouldReopenIf": "A primary source (the supplier's own site, or a procurement listing naming the legal entity) surfaces a confirmable UK domain for Assut UK LTD, Pearsalls Ltd, Lenience UK Ltd or SAI Medical Solutions Ltd; Kebomed UK Ltd's kebomed.co.uk catalogue is restructured into a genuine, non-thin product range; Terumo Aortic's site (terumo.com) becomes readable and a per-product crawl surfaces a genuine wound-closure item distinct from its vascular-graft range; Critical Healthcare's or Richardson Healthcare's domain guess is superseded by a confirmed site; or a new supplier is awarded on this framework."
   }
  ]
 }
