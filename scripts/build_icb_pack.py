@@ -50,6 +50,18 @@ IMD_API = "https://www.gov.uk/api/content/government/statistics/english-indices-
 # ONS LSOA (2021) to ICB (April 2026) lookup; item id from data.gov.uk dataset 1d16e489-1dc8-443e-9e1c-15de4f961c6d
 LSOA_ICB_LOOKUP = "https://open-geography-portalx-ons.hub.arcgis.com/api/download/v1/items/bebf631bb1ac40cf9ec7dc060897ca99/csv?layers=0"
 GPREG_PARENT = "https://digital.nhs.uk/data-and-information/publications/statistical/patients-registered-at-a-gp-practice"
+# digital.nhs.uk answers HTTP 403 to every request from GitHub's runners - the whole host,
+# robots.txt included, so it is the requesting network and not the User-Agent (probed
+# 16/11/2026: five digital.nhs.uk URLs 403 on a runner, the same five 200 from Lou's Mac
+# with this exact UA). files.digital.nhs.uk, which actually serves the zips, answers the
+# runner normally. So the two file URLs are resolved from the publication page wherever
+# that page can be read and kept here as the last known good, and the build uses them.
+# Refresh with: python3 scripts/build_icb_pack.py --refresh-gpreg-sources   (from a normal
+# network, not a runner), which rewrites this file; the monthly task gpreg-sources-refresh
+# owns that. GPREG_POINTER_MAX_DAYS is the age at which the build refuses to go on rather
+# than quietly serve a stale mapping.
+GPREG_POINTER = os.path.join(ROOT, "config", "gpreg-sources.json")
+GPREG_POINTER_MAX_DAYS = 100
 
 LICENCES = [
     ("NHSBSA English Prescribing Dataset (SNOMED)", "Open Government Licence 3.0; reuse statement: NHSBSA Copyright. "
@@ -141,6 +153,14 @@ def resolve_urls():
     if not f7:
         raise RuntimeError("IMD 2025 File 7 link not found")
     urls["imd7"] = f7["url"]
+    urls.update(gpreg_urls())
+    return urls
+
+
+def resolve_gpreg_from_site():
+    """The current mapping and practice-totals zips, read from NHS Digital's own publication
+    pages. Raises RuntimeError where the host will not serve this client (it 403s GitHub's
+    runners wholesale), which is what sends the build to the pointer file."""
     parent = http(GPREG_PARENT).decode("utf-8", "replace")
     pubs = sorted(set(re.findall(r'href="([^"]*patients-registered-at-a-gp-practice/[a-z]+-\d{4})"', parent)))
     if not pubs:
@@ -164,14 +184,59 @@ def resolve_urls():
         for tag, pat in (("gpmap", r"gp-reg-pat-prac-map\.zip"), ("gpall", r"gp-reg-pat-prac-all\.zip")):
             m = re.search(r'href="([^"]*%s)"' % pat, pub)
             if m:
-                found[tag] = m.group(1)
+                found[tag] = html.unescape(m.group(1))
         if len(found) == 2:
-            urls.update(found)
-            break
-    else:
-        raise RuntimeError("no Patients Registered publication with the mapping and practice files")
-    urls["gpreg_page"] = latest
-    return urls
+            found["gpreg_page"] = latest
+            return found
+    raise RuntimeError("no Patients Registered publication with the mapping and practice files")
+
+
+def write_gpreg_pointer(found):
+    """Record the resolved zips as the last known good, so a runner that cannot read
+    digital.nhs.uk still builds from the publisher's own file URLs."""
+    doc = {
+        "_why": "digital.nhs.uk 403s GitHub's runners (the whole host). files.digital.nhs.uk "
+                "serves them normally, so these URLs are resolved where the publication page "
+                "can be read and used by the build. Refresh: python3 scripts/build_icb_pack.py "
+                "--refresh-gpreg-sources",
+        "resolvedOn": datetime.date.today().isoformat(),
+        "publication": found["gpreg_page"],
+        "gpmap": found["gpmap"],
+        "gpall": found["gpall"],
+    }
+    with open(GPREG_POINTER, "w") as f:
+        json.dump(doc, f, indent=1)
+        f.write("\n")
+    return doc
+
+
+def gpreg_urls():
+    """Resolve live where the publisher will serve us, and fall back to the committed
+    pointer. A pointer older than GPREG_POINTER_MAX_DAYS is refused, not used: a stale
+    practice-to-ICB mapping is worse than a loud failure."""
+    try:
+        found = resolve_gpreg_from_site()
+    except Exception as live_exc:  # noqa: BLE001 - reported with the pointer's own state
+        if not os.path.exists(GPREG_POINTER):
+            raise RuntimeError(
+                "could not resolve the Patients Registered files (%s) and %s does not exist. "
+                "Run `python3 scripts/build_icb_pack.py --refresh-gpreg-sources` from a network "
+                "NHS Digital serves, then commit config/gpreg-sources.json."
+                % (live_exc, os.path.relpath(GPREG_POINTER, ROOT)))
+        doc = json.load(open(GPREG_POINTER))
+        age = (datetime.date.today() - datetime.date.fromisoformat(doc["resolvedOn"])).days
+        if age > GPREG_POINTER_MAX_DAYS:
+            raise RuntimeError(
+                "could not resolve the Patients Registered files (%s) and %s was resolved %d days "
+                "ago (limit %d), so it is too old to trust. Run "
+                "`python3 scripts/build_icb_pack.py --refresh-gpreg-sources` and commit it."
+                % (live_exc, os.path.relpath(GPREG_POINTER, ROOT), age, GPREG_POINTER_MAX_DAYS))
+        print("gp-reg: digital.nhs.uk would not serve this client (%s); using "
+              "config/gpreg-sources.json resolved %s (%d days old)"
+              % (live_exc, doc["resolvedOn"], age))
+        return {"gpmap": doc["gpmap"], "gpall": doc["gpall"], "gpreg_page": doc["publication"]}
+    write_gpreg_pointer(found)
+    return found
 
 
 def fetch_all(cache, refresh=False):
@@ -662,7 +727,16 @@ def main(argv=None):
     ap.add_argument("--refresh", action="store_true", help="re-download every source")
     ap.add_argument("--if-new", action="store_true", help="exit quietly unless NHSBSA or RTT has a newer month")
     ap.add_argument("--no-fetch", action="store_true", help="use the cache as it stands")
+    ap.add_argument("--refresh-gpreg-sources", action="store_true",
+                    help="resolve the Patients Registered zips from NHS Digital and rewrite "
+                         "config/gpreg-sources.json, then stop. Run this from a normal network: "
+                         "digital.nhs.uk 403s GitHub's runners.")
     a = ap.parse_args(argv)
+    if a.refresh_gpreg_sources:
+        doc = write_gpreg_pointer(resolve_gpreg_from_site())
+        print("config/gpreg-sources.json <- %s\n  gpmap %s\n  gpall %s"
+              % (doc["publication"], doc["gpmap"], doc["gpall"]))
+        return 0
     set_spec(a.speciality)
     a.out = a.out or os.path.join(ROOT, "data", "icb-pack", a.speciality)
     idx = json.load(open(os.path.join(GP_DIR, "index.json")))
