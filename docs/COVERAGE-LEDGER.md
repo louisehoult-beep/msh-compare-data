@@ -40,7 +40,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
-| Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 40 | 32.8% | 47 | 50 | STARTED |
+| Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 40 | 32.8% | 43 | 54 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 36 | 35.6% | 12 | 70 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 27 | 42.9% | 18 | 30 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 22 | 42 | STARTED |
@@ -52,7 +52,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 14 | 32 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 28 | 52.8% | 13 | 30 | STARTED |
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 20 | 26 | STARTED |
-| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 11 | 25.6% | 15 | 30 | STARTED |
+| Operating Theatres Equipment and Related Accessories and Services | theatres | 42 | 11 | 26.2% | 14 | 29 | STARTED |
 | Wound Closure | closure | 39 | 14 | 35.9% | 18 | 20 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 15 | 40.5% | 6 | 28 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 17 | 45.9% | 14 | 20 | STARTED |

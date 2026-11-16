@@ -12,9 +12,9 @@
  },
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
-  "frameworks.json": "2026-11-10",
+  "frameworks.json": "2026-11-15",
   "differentiator.json published": 38963,
-  "differentiator.json held": 296544
+  "differentiator.json held": 296649
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 397,
-  "inScopeSuppliersNeedingCrawl": 214,
-  "inScopeSuppliersNeedingDomain": 203,
-  "suppliersRefused": 580,
+  "inScopeSuppliersNeedingCrawl": 210,
+  "inScopeSuppliersNeedingDomain": 199,
+  "suppliersRefused": 584,
   "suppliersRefusedButPublishingElsewhere": 167,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
@@ -1647,6 +1647,10 @@
    "coverageOfTarget": 32.8,
    "crawlWorklist": [
     {
+     "supplier": "BHR Pharmaceuticals",
+     "domain": null
+    },
+    {
      "supplier": "Immucor (IBG Immucor)",
      "domain": null
     },
@@ -1699,10 +1703,6 @@
      "domain": null
     },
     {
-     "supplier": "BHR Pharmaceuticals",
-     "domain": null
-    },
-    {
      "supplier": "Bio-Packaging",
      "domain": null
     },
@@ -1727,23 +1727,11 @@
      "domain": null
     },
     {
-     "supplier": "Diagnostica Stago UK",
-     "domain": null
-    },
-    {
      "supplier": "DiaSorin",
      "domain": null
     },
     {
-     "supplier": "DWK Life Sciences",
-     "domain": null
-    },
-    {
      "supplier": "Edinburgh Genetics",
-     "domain": null
-    },
-    {
-     "supplier": "ELITech UK",
      "domain": null
     },
     {
@@ -1787,10 +1775,6 @@
      "domain": null
     },
     {
-     "supplier": "Revvity (formerly PerkinElmer)",
-     "domain": null
-    },
-    {
      "supplier": "Pisces Scientific",
      "domain": null
     },
@@ -1825,11 +1809,8 @@
     "Clinical Design Technologies",
     "Craven & Co",
     "DGP Intelsius",
-    "DWK Life Sciences",
     "Denward Manufacturing",
     "DiaSorin",
-    "Diagnostica Stago UK",
-    "ELITech UK",
     "Edinburgh Genetics",
     "Ethicheck",
     "Genmed",
@@ -1843,7 +1824,6 @@
     "Msoft eSolutions",
     "Pisces Scientific",
     "R&L Slaughter",
-    "Revvity (formerly PerkinElmer)",
     "Scientific Laboratory Supplies (SLS)",
     "Sebia UK",
     "Solmedia Laboratory Supplies",
@@ -1898,6 +1878,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Diagnostica Stago UK",
+     "domain": "stago-uk.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-11-16",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Digostics",
      "domain": "digostics.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -1909,6 +1896,20 @@
      "domain": "www.dwscientific.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-25",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "DWK Life Sciences",
+     "domain": "dwk.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-16",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "ELITech UK",
+     "domain": "elitechgroup.com",
+     "reason": "the site's WordPress API returned HTTP 401; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-11-16",
      "bucket": "refused"
     },
     {
@@ -1993,6 +1994,13 @@
      "domain": "novabiomedical.com",
      "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-10-19",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Revvity (formerly PerkinElmer)",
+     "domain": "revvity.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-11-16",
      "bucket": "refused"
     },
     {
@@ -2223,11 +2231,11 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 3,
-    "heldNeedingCategory": 9,
+    "heldNeedingCategory": 10,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 35
+    "needDomain": 30
    },
    "published": [
     "Abbott Diagnostics",
@@ -2282,6 +2290,7 @@
     "Sychem"
    ],
    "heldOnly": [
+    "BHR Pharmaceuticals",
     "Critical Healthcare",
     "Immucor (IBG Immucor)",
     "Kinetik Medical Devices",
@@ -2301,18 +2310,14 @@
     "AttoLife",
     "Barber of Sheffield",
     "BHA Medical",
-    "BHR Pharmaceuticals",
     "Bio-Packaging",
     "Chirus",
     "Clinical Design Technologies",
     "Craven & Co",
     "Denward Manufacturing",
     "DGP Intelsius",
-    "Diagnostica Stago UK",
     "DiaSorin",
-    "DWK Life Sciences",
     "Edinburgh Genetics",
-    "ELITech UK",
     "Ethicheck",
     "Genmed",
     "Glen Dimplex Home Appliances",
@@ -2323,7 +2328,6 @@
     "Sterilab Services",
     "Msoft eSolutions",
     "nal von minden",
-    "Revvity (formerly PerkinElmer)",
     "Pisces Scientific",
     "R&L Slaughter",
     "Sebia UK",
@@ -2337,8 +2341,11 @@
     "Bio-Rad Laboratories UK",
     "Bruker UK",
     "CellPath",
+    "Diagnostica Stago UK",
     "Digostics",
     "Don Whitley Scientific",
+    "DWK Life Sciences",
+    "ELITech UK",
     "ESTS (GB)",
     "EUROIMMUN UK",
     "Exact Sciences UK",
@@ -2351,6 +2358,7 @@
     "International Scientific Supplies",
     "Medecon Healthcare UK",
     "Nova Biomedical",
+    "Revvity (formerly PerkinElmer)",
     "Pro-Lab Diagnostics",
     "Promega UK",
     "Randox Laboratories",
@@ -2363,7 +2371,7 @@
     "Wolf Laboratories"
    ],
    "unknown": [],
-   "actionableTotal": 47,
+   "actionableTotal": 43,
    "blockedReason": null,
    "deferred": null
   },
@@ -6756,9 +6764,9 @@
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatres-equipment-and-related-accessories/",
    "category": "Diagnostic Equipment and Services",
    "ends": "11 April 2028",
-   "suppliersAwarded": 43,
+   "suppliersAwarded": 42,
    "suppliersPublished": 11,
-   "coverage": 25.6,
+   "coverage": 26.2,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -6767,8 +6775,8 @@
     "theatres"
    ],
    "excludedByRuling": [],
-   "targetSuppliers": 43,
-   "coverageOfTarget": 25.6,
+   "targetSuppliers": 42,
+   "coverageOfTarget": 26.2,
    "crawlWorklist": [
     {
      "supplier": "Ingles Ltd",
@@ -6928,13 +6936,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "D.P. Medical Systems Limited",
-     "domain": "www.dpmedicalsys.com",
-     "reason": "the site's WordPress API could not be read (<urlopen error timed out>); the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-13",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "Erbe Medical UK Ltd",
      "domain": "uk.erbegroup.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -7007,7 +7008,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 10,
-    "heldNeedingCategory": 4,
+    "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -7042,7 +7043,6 @@
     "Promed Limited"
    ],
    "heldOnly": [
-    "D.P. Medical Systems Limited",
     "Erbe Medical UK Ltd",
     "SRA Developments",
     "Surgical Holdings Limited"
@@ -7068,7 +7068,7 @@
     "Xograph Healthcare Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 15,
+   "actionableTotal": 14,
    "blockedReason": null,
    "deferred": null
   },
