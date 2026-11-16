@@ -70,6 +70,7 @@ REFS = {
     "open-tenders.json":        "ETH-DCEFAF9C5",
     "digital-lane.json":        "ETH-D1785F3EE",
     "trust-digital-profile.json": "ETH-D20F5DF46",
+    "trust-jag.json":           "ETH-D79A42585",
     "gates-watch.json":         "ETH-DD13317EF",
     "digital-frameworks.json":  "ETH-D1AA304A7",
     "digital-sources.json":     "ETH-DA95CE0DB",

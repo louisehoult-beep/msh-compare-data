@@ -116,6 +116,7 @@ RUN = [
     "test_company_digital_awards.py",    # 20/10/2026, digital awards layer (own file, exact-only match)
     "test_company_key_info.py",          # 22/10/2026, My Hub company briefs: sourced, no confidential wording, Ego matches the panel
     "test_digital_frameworks.py",        # 20/10/2026, GCA Technology Services 4, G-Cloud 15, coming NHS digital frameworks
+    "test_trust_jag.py",                 # 16/11/2026, per-trust JAG endoscopy accreditation from the participating services register
     "test_other_body_frameworks.py",     # 22/10/2026, SBS/GCA/LPP rows on the Frameworks directory re-read at source
     "test_digital_sources.py",            # 20/10/2026, NHS App partners + Digital Maturity Assessment
     "test_ai_airlock.py",                # 20/10/2026, MHRA AI Airlock cohorts

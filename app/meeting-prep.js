@@ -37,6 +37,14 @@
     }).then(function(r){ return r.ok ? r.json() : null; });
   }
   var PRESSURES = BASE + 'data/trust-pressures.json' + CB;
+  /* JAG endoscopy accreditation, per trust (16/11/2026, data/trust-jag.json,
+     scripts/refresh_trust_jag.py). The Joint Advisory Group's participating
+     services register is the first thing an endoscopy conversation turns on,
+     and the Hub held it only as a national aggregate, so a trust profile could
+     say nothing about it. Fails soft: a trust with no JAG panel is a trust the
+     register does not name, which the panel says in those words rather than
+     leaving a reader to read silence as "not accredited". */
+  var TRUSTJAG = BASE + 'data/trust-jag.json' + CB;
   /* The NHS Supply Chain catalogue cache, read for one thing only: to list a
      supplier's products the way Product Comparison does, one per catalogue
      brand line, instead of the grouped seed search terms (30/09/2026). Fails
@@ -131,15 +139,19 @@
     fetch(PRODUCTS).then(function(r){return r.json();}).catch(function(){return null;}),
     fetchGated('trust-contacts').catch(function(){return null;}),
     fetch(PRESSURES).then(function(r){return r.json();}).catch(function(){return null;}),
-    fetch(NHSSC).then(function(r){return r.json();}).catch(function(){return null;})
-  ]).then(function(res){ render(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7]); })
+    fetch(NHSSC).then(function(r){return r.json();}).catch(function(){return null;}),
+    fetch(TRUSTJAG).then(function(r){return r.json();}).catch(function(){return null;})
+  ]).then(function(res){ render(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8]); })
     .catch(function(){ MOUNT.innerHTML = '<div style="font-family:Inter,system-ui,sans-serif;color:#8a6d00;">Meeting prep is temporarily unavailable — please try again shortly.</div>'; });
 
-  function render(index, cfg, seed, specMap, prodFile, contactFile, pressureFile, nhsscFile){
+  function render(index, cfg, seed, specMap, prodFile, contactFile, pressureFile, nhsscFile, jagFile){
     var CONTACT_BY_CODE = (contactFile && contactFile.trusts) || {};
     var CONTACTS_ASOF = (contactFile && contactFile.asOf) || '';
     var PRESS_BY_CODE = (pressureFile && pressureFile.trusts) || {};
     var PRESS = pressureFile || null;
+    var JAG = jagFile || null;
+    var JAG_BY_CODE = {};
+    if (JAG && JAG.trusts) JAG.trusts.forEach(function(t){ if (t.code) JAG_BY_CODE[t.code] = t; });
     /* Verified full ranges live in supplier-products.json, NOT in the seed —
        supplier-seed.json is declared human-owned and never-overwritten by
        build_supplier_index.py, and Lou's hand-written product names carry
@@ -704,6 +716,52 @@
         '#6B2A34');
     }
 
+    /* JAG ENDOSCOPY ACCREDITATION — the register's own word, service by service.
+       Added 16/11/2026. A row on JAG's participating services register is one
+       SERVICE, not one trust: a trust can run several and hold a different status
+       on each, so this panel lists them and never collapses them into one badge
+       for the organisation. Every status is JAG's word, copied unchanged; nothing
+       is scored, ranked or restated as a pass or a failure, and "undergoing
+       self-assessment or not assessed" is shown as exactly that rather than as a
+       gap to sell into.
+
+       A trust the register does not name gets no panel. That is deliberate and
+       the file says why: absence from the register is a fact about the register
+       on the day it was read, not a finding about the trust. The register has no
+       feed and no publication date, so the read date is the only date there is. */
+    function jagPanel(code){
+      var t = code && JAG_BY_CODE[code];
+      if (!t || !t.jagServices || !t.jagServices.length) return '';
+      var ACC = 'Accredited';
+      var rows = t.jagServices.map(function(s){
+        var accredited = s.status === ACC;
+        return '<strong>' + esc(s.service) + '</strong> — <span style="font-weight:700;color:'
+          + (accredited ? '#2E6B3E' : '#8a6d00') + ';">' + esc(s.status) + '</span>'
+          + (s.sites && s.sites.length
+              ? '<br><span style="color:#6b7684;font-size:12.5px;">' + esc(s.sites.join(', ')) + '</span>'
+              : '')
+          + '<span style="color:#6b7684;font-size:12.5px;">'
+          + (s.sector ? (s.sites && s.sites.length ? ' · ' : '<br>') + esc(s.sector) : '')
+          + (s.adultPaediatric && s.adultPaediatric !== 'Not set' ? ' · ' + esc(s.adultPaediatric) : '')
+          + '</span>';
+      });
+      var head = t.services + (t.services === 1 ? ' endoscopy service' : ' endoscopy services')
+        + ' on the register, ' + t.accredited + ' accredited';
+      var src = (JAG && JAG.sourceUrl)
+        ? ' <a href="' + esc(JAG.sourceUrl) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-size:11px;font-weight:600;">JAG register &#8599;</a>'
+        : '';
+      return panel('JAG endoscopy accreditation — the register\u2019s own word',
+        '<div style="font-size:12.5px;color:#39424d;margin-bottom:4px;">' + esc(head) + '.</div>'
+        + li(rows)
+        + '<div style="margin-top:8px;font-size:12px;color:#8a8778;">A row is one service, not the '
+        + 'trust: a trust running several can hold a different status on each, and every status '
+        + 'above is JAG\u2019s own word, copied unchanged. The register has no feed and no '
+        + 'publication date, so a status changes on the page when it changes'
+        + (JAG && JAG.dataAsOf ? '; this reading is as at ' + esc(JAG.dataAsOf) : '') + '.'
+        + src + '</div>',
+        '#2E5E6B');
+    }
+
     /* WHO ACTUALLY BUYS HERE — named people, from Find a Tender.
        Framed exactly as the Stakeholder Mapper frames them: each person was
        published as the enquiry contact for the notice shown. That is a real,
@@ -859,6 +917,7 @@
           + ';font-size:11.5px;color:#6b7684;line-height:1.55;">' + verifiedLine(tr) + '</div>';
         h += panel('The trust: ' + esc(tr.name), body);
         h += pressurePanel(tr.code, sp);
+        h += jagPanel(tr.code);
         h += contactsPanel(tr.code, tr.name);
       } else if (trName && trName !== 'Other / any trust'){
         /* Every directory trust now gets a real profile built from verified
@@ -878,6 +937,7 @@
         h += panel('The trust: ' + esc(trName),
           (meta.length ? '<span style="color:#6b7684;font-size:12.5px;">' + meta.join(' · ') + ' — NHS ODS register' + (de.bc ? ' · buying centre: ' + esc(de.bc) : '') + '</span>' : ''));
         h += pressurePanel(de.code, sp);
+        h += jagPanel(de.code);
         h += contactsPanel(de.code, trName);
         h += panel('What the Hub hasn’t researched here yet',
           'This trust has no hand-researched profile yet, so there is no annual-report detail, procurement team structure or named executive above — everything shown is straight from the published data. Fill the gap in three clicks:'
