@@ -11,8 +11,8 @@
   "contact": "contact@elevateandthrive.uk"
  },
  "lane": "digital",
- "dataAsOf": "15/11/2026",
- "generated": "2026-11-15",
+ "dataAsOf": "16/11/2026",
+ "generated": "2026-11-16",
  "source": "Find a Tender and Contracts Finder award notices in the Hub's digital lane (data/digital-lane.json), Open Government Licence v3.",
  "sectionRule": "Software and IT notices only. Each row is one supplier named on one Find a Tender or Contracts Finder award notice that an NHS buyer classified under a Common Procurement Vocabulary (CPV) code beginning 48 (software packages and information systems) or 72 (IT services). Those codes cover payroll, finance and office systems as much as clinical ones, so a row is not a claim of health technology. A row is counted as clinical only where the notice title names a clinical system. Medical device awards (CPV division 33) appear in the award sections above and are never repeated here.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
@@ -24,23 +24,23 @@
   "laneCoverage": {
    "complete": true,
    "window": {
-    "from": "2026-11-07",
-    "to": "2026-11-15",
+    "from": "2026-11-08",
+    "to": "2026-11-16",
     "days": 8,
-    "run": "2026-11-15"
+    "run": "2026-11-16"
    },
    "notes": [
-    "Find a Tender (tender stage): 2 digital lane notice(s) from 41 release(s) over 1 page(s)",
-    "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-07",
-    "Find a Tender (planning stage): 1 digital lane notice(s) from 37 release(s) over 1 page(s)",
-    "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-07"
+    "Find a Tender (tender stage): 2 digital lane notice(s) from 51 release(s) over 1 page(s)",
+    "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-08",
+    "Find a Tender (planning stage): 1 digital lane notice(s) from 40 release(s) over 1 page(s)",
+    "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-08"
    ]
   }
  },
  "counts": {
   "companies": 48,
-  "awardRows": 109,
-  "unmatched": 222,
+  "awardRows": 111,
+  "unmatched": 225,
   "ambiguous": 0,
   "alreadyInMedicalFeed": 0
  },
@@ -382,6 +382,27 @@
   ],
   "Audit Data": [
    {
+    "title": "Auditbase for clinical testing.",
+    "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+    "date": "2026-11-16",
+    "url": "https://www.find-tender.service.gov.uk/Notice/108327-2026",
+    "ocid": "ocds-h6vhtk-07bc5c",
+    "source": "Find a Tender",
+    "valueAmount": 44457.0,
+    "valueCurrency": "GBP",
+    "periodEnd": "2027-11-15",
+    "isFramework": false,
+    "digitalCpv": [
+     "48180000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "AUDITDATA LIMITED",
+    "noticeSupplierCount": 1,
+    "company": "Audit Data",
+    "matchedOn": "\"auditdata limited\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   },
+   {
     "title": "GOSH - MAINT7293 - Auditbase Maintenance",
     "buyer": "Great Ormond Street Hospital for Children NHS Foundation Trust",
     "date": "2026-11-05",
@@ -650,6 +671,27 @@
    }
   ],
   "Dedalus": [
+   {
+    "title": "Provision of EPR services",
+    "buyer": "NORTH CHESHIRE & MERSEY NHS FOUNDATION TRUST",
+    "date": "2026-11-16",
+    "url": "https://www.find-tender.service.gov.uk/Notice/108275-2026",
+    "ocid": "ocds-h6vhtk-07bc40",
+    "source": "Find a Tender",
+    "valueAmount": null,
+    "valueCurrency": null,
+    "periodEnd": null,
+    "isFramework": false,
+    "digitalCpv": [
+     "72268000"
+    ],
+    "clinical": true,
+    "lane": "digital",
+    "noticeSupplierName": "DH OPCO UK LTD",
+    "noticeSupplierCount": 1,
+    "company": "Dedalus",
+    "matchedOn": "\"dh opco uk ltd\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   },
    {
     "title": "TELEPATH EXTENSION",
     "buyer": "Cwm Taff Morgannwg Universty Health Board",
@@ -2461,6 +2503,66 @@
   ]
  },
  "unmatched": [
+  {
+   "title": "Elevate SysymOne Optimisation",
+   "buyer": "HUMBER TEACHING NHS FOUNDATION TRUST",
+   "date": "2026-11-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/108523-2026",
+   "ocid": "ocds-h6vhtk-07bcd4",
+   "source": "Find a Tender",
+   "valueAmount": 77150,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-03-31",
+   "isFramework": false,
+   "digitalCpv": [
+    "48624000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "KADEL CONSULTING LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"kadel consulting\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "POW-ITT-63713 - Welshpool Nurse Call Replacement",
+   "buyer": "Powys Teaching Health Board",
+   "date": "2026-11-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/108424-2026",
+   "ocid": "ocds-h6vhtk-06d69a",
+   "source": "Find a Tender",
+   "valueAmount": null,
+   "valueCurrency": null,
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Static Systems Group Limited",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"static systems group\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "New Finance ledger system.",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "date": "2026-11-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/108264-2026",
+   "ocid": "ocds-h6vhtk-07bc3b",
+   "source": "Find a Tender",
+   "valueAmount": 21083.33,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-11-12",
+   "isFramework": false,
+   "digitalCpv": [
+    "48442000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "NORTHUMBRIA HEALTHCARE NHS FOUNDATION TRUST",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"northumbria healthcare nhs foundation trust\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
   {
    "title": "Confirmation of Award of a Contract for the provision of software licences for digital simulation software",
    "buyer": "NHS Wales Performance and Improvement (hosted by Public Health Wales)",
