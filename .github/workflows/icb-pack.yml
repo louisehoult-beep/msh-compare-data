@@ -50,6 +50,34 @@ jobs:
       - name: Install openpyxl
         run: python3 -m pip install --quiet openpyxl
 
+      # NHS DIGITAL POINTER (added 16/11/2026). digital.nhs.uk answers HTTP 403 to every request
+      # from GitHub's runners - the whole host, robots.txt included, so it is the requesting
+      # network and not the User-Agent (probed on a runner against five URLs that all return 200
+      # from Lou's Mac with the same UA). files.digital.nhs.uk, which serves the zips, answers the
+      # runner normally. So build_icb_pack.py resolves the two "Patients Registered at a GP
+      # Practice" file URLs wherever the publication page can be read and keeps them in
+      # config/gpreg-sources.json, and the runner builds from that. This step fails the run while
+      # the pointer is still young enough to refresh, rather than letting it rot to the 100-day
+      # refusal inside the build. TO FIX A FAILURE HERE, on Lou's Mac:
+      #   cd .../Website/msh-compare-data
+      #   python3 scripts/build_icb_pack.py --refresh-gpreg-sources
+      #   git add config/gpreg-sources.json && git commit -m "ICB pack: refresh the NHS Digital GP-reg pointer" && git push
+      # Commit nothing else from that clone: it is shared and usually dirty.
+      - name: NHS Digital GP-reg pointer is fresh enough
+        run: |
+          python3 - <<'EOF'
+          import datetime, json, sys
+          d = json.load(open("config/gpreg-sources.json"))
+          age = (datetime.date.today() - datetime.date.fromisoformat(d["resolvedOn"])).days
+          print("config/gpreg-sources.json resolved %s (%d days ago)" % (d["resolvedOn"], age))
+          if age > 60:
+              sys.exit("STALE: refresh it on Lou's Mac with "
+                       "`python3 scripts/build_icb_pack.py --refresh-gpreg-sources` and commit "
+                       "config/gpreg-sources.json. digital.nhs.uk will not serve this runner, so "
+                       "the build cannot refresh it itself. The build refuses the pointer outright "
+                       "at 100 days; this fails earlier, on purpose.")
+          EOF
+
       - name: Build ICB pack data
         run: |
           for s in dermatology respiratory diabetes wound-care; do
