@@ -529,6 +529,124 @@ def check_wales_buyer_map(doc, trust_codes):
 ICB_EVENT_KINDS = {"leadership", "legal-end", "new-icb", "national", "curated", "cluster"}
 
 
+# --------------------------------------------------------------------------
+# 3b. TRUST JAG ACCREDITATION (16/11/2026)
+# --------------------------------------------------------------------------
+# data/trust-jag.json, built by scripts/refresh_trust_jag.py from JAG's own
+# participating services register. The accuracy of this file is sold, so the
+# failures refused here are the ones that would be invisible on the page:
+# a shrunken register that still renders, a status word the UI has no branch
+# for, a count that no longer adds up to the rows behind it, and a trust code
+# that does not resolve in trust-map.json so the panel silently never shows.
+JAG_STATUSES = {
+    "Accredited",
+    "Deferred",
+    "Not awarded",
+    "Undergoing JAG onsite assessment",
+    "Undergoing self-assessment/not assessed",
+}
+
+
+def check_trust_jag(doc, trust_codes):
+    if doc is None:
+        WARN("trust-jag", "data/trust-jag.json is missing, so trust profiles show no "
+                          "JAG panel. Run scripts/refresh_trust_jag.py.")
+        return
+    counts = doc.get("counts") or {}
+    trusts = doc.get("trusts") or []
+    unmatched = doc.get("unmatched") or []
+
+    # 1. Row count. The register held 511 services on 16/11/2026. A crawl that
+    #    silently truncates (the DataTables grid paginates client-side, so a
+    #    partial fetch parses cleanly) must not pass as a smaller register.
+    services = counts.get("services")
+    if not isinstance(services, int):
+        FAIL("trust-jag", "counts.services is %r, not a number — the file did not build."
+                          % (services,))
+        return
+    if services < 480:
+        FAIL("trust-jag", "only %d endoscopy service(s) — the register held 511 on "
+                          "16/11/2026. Refusing a shrunken register: a client-side "
+                          "truncation parses cleanly and would quietly empty trust "
+                          "panels. If JAG really has fewer, lower this floor AND the "
+                          "floor in scripts/refresh_trust_jag.py together." % services)
+
+    # 2. No unknown statuses. refresh_trust_jag.py parks an unlisted status in
+    #    unknownStatuses rather than guessing a bucket; if one is sitting there,
+    #    app/meeting-prep.js is showing a word the panel was never designed for.
+    unknown = doc.get("unknownStatuses") or []
+    if unknown:
+        FAIL("trust-jag", "JAG is publishing status(es) this repo does not know: %s. "
+                          "Add them to STATUSES in scripts/refresh_trust_jag.py and to "
+                          "JAG_STATUSES here together, and check the panel renders them."
+                          % ", ".join(sorted(str(u) for u in unknown)[:6]))
+    declared = set(doc.get("statusValues") or [])
+    if declared and declared != JAG_STATUSES:
+        FAIL("trust-jag", "statusValues no longer matches the five statuses this check "
+                          "knows. Added: %s. Dropped: %s."
+                          % (", ".join(sorted(declared - JAG_STATUSES)) or "none",
+                             ", ".join(sorted(JAG_STATUSES - declared)) or "none"))
+
+    # 3. The counts add up to the rows behind them. A summary that drifts from
+    #    its own rows is the one failure a member would never spot.
+    by_status = doc.get("summary", {}).get("byStatus") or {}
+    summed = sum(v for v in by_status.values() if isinstance(v, int))
+    if summed != services:
+        FAIL("trust-jag", "summary.byStatus totals %d but counts.services is %d. The "
+                          "summary has drifted from its own rows." % (summed, services))
+    for status in by_status:
+        if status not in JAG_STATUSES:
+            FAIL("trust-jag", "summary.byStatus carries %r, which is not one of JAG's "
+                              "five statuses." % status)
+
+    if len(trusts) != counts.get("trustsJoined"):
+        FAIL("trust-jag", "counts.trustsJoined is %r but %d trust(s) are listed."
+                          % (counts.get("trustsJoined"), len(trusts)))
+    if len(unmatched) != counts.get("unmatchedOrganisations"):
+        FAIL("trust-jag", "counts.unmatchedOrganisations is %r but %d organisation(s) "
+                          "are listed as unmatched."
+                          % (counts.get("unmatchedOrganisations"), len(unmatched)))
+
+    joined_rows = 0
+    for t in trusts:
+        name = t.get("name") or t.get("code")
+        rows = t.get("jagServices") or []
+        joined_rows += len(rows)
+
+        # 4. Every code must resolve, or the panel never shows for that trust
+        #    and nothing on the page says why.
+        if trust_codes and t.get("code") not in trust_codes:
+            FAIL("trust-jag", "%s has ODS code %r, which is not in trust-map.json, so "
+                              "its JAG panel can never render." % (name, t.get("code")))
+        if t.get("services") != len(rows):
+            FAIL("trust-jag", "%s says %r service(s) but lists %d."
+                              % (name, t.get("services"), len(rows)))
+        statuses = t.get("statuses") or {}
+        if sum(v for v in statuses.values() if isinstance(v, int)) != len(rows):
+            FAIL("trust-jag", "%s's statuses tally does not match its %d service row(s)."
+                              % (name, len(rows)))
+        accredited = sum(1 for r in rows if r.get("status") == "Accredited")
+        if t.get("accredited") != accredited:
+            FAIL("trust-jag", "%s says %r accredited service(s) but %d row(s) read "
+                              "Accredited." % (name, t.get("accredited"), accredited))
+        for r in rows:
+            if r.get("status") not in JAG_STATUSES:
+                FAIL("trust-jag", "%s / %s has status %r, which the panel has no branch "
+                                  "for." % (name, r.get("service"), r.get("status")))
+            if not r.get("service"):
+                FAIL("trust-jag", "%s has a service row with no service name." % name)
+
+    if joined_rows != counts.get("servicesJoined"):
+        FAIL("trust-jag", "counts.servicesJoined is %r but the trust rows hold %d "
+                          "service(s)." % (counts.get("servicesJoined"), joined_rows))
+
+    unmatched_rows = sum(u.get("services", 0) for u in unmatched
+                         if isinstance(u.get("services"), int))
+    if joined_rows + unmatched_rows != services:
+        FAIL("trust-jag", "%d joined service(s) plus %d unmatched do not add up to the "
+                          "%d on the register — rows have been lost between the parse "
+                          "and the join." % (joined_rows, unmatched_rows, services))
+
 def check_npm_finder(doc, fwdoc):
     """NPM Finder (data/npm-finder.json, scripts/refresh_npm_finder.py).
 
@@ -7233,6 +7351,7 @@ def main():
 
     trust_codes = check_trust_map(load("trust-map.json"))
     check_wales_buyer_map(load("wales-buyer-map.json"), trust_codes)
+    check_trust_jag(load("trust-jag.json"), trust_codes)
     check_icb_watch(load("icb-watch.json"))
     check_npm_finder(load("npm-finder.json"), load("frameworks.json"))
     n = check_contacts(load("trust-contacts.json"), trust_codes, blocked, retention) or 0
