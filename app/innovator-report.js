@@ -844,6 +844,7 @@
   /* 6 — what is happening now */
   function s6(st) {
     var sp = B.specialities[st.spec], slug = sp && sp.tenderSlug, out = '';
+    var t = typeOf(st.type);
     out += '<h3>Open tenders in this speciality</h3>';
     if (!TEN) {
       out += gapNote('data/open-tenders.json', parseUk((B.sources['open-tenders.json'] || {}).dataAsOf));
