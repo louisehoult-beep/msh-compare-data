@@ -50,7 +50,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Advanced Wound Care | wound | 56 | 22 | 39.3% | 16 | 40 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 1 | 39 | STARTED · 7 EXCLUDED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 14 | 32 | STARTED |
-| Pressure Area Care and Patient Handling | handling | 53 | 28 | 52.8% | 13 | 30 | STARTED |
+| Pressure Area Care and Patient Handling | handling | 53 | 28 | 52.8% | 13 | 31 | STARTED |
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 20 | 25 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 42 | 11 | 26.2% | 14 | 29 | STARTED |
 | Wound Closure | closure | 39 | 14 | 35.9% | 18 | 20 | STARTED |
