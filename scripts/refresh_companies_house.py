@@ -1106,6 +1106,18 @@ def main():
         if not entry:
             unresolved.append(supplier["name"] + " (number %s does not resolve)" % number)
             continue
+        if excluded and entry["matchConfidence"] != "confirmed":
+            # A cleared supplier (one with an exclude list) may only be
+            # re-identified by a confirmed route. A weak match on a DIFFERENT
+            # number than the excluded one would otherwise slip past the
+            # excluded-number check above and silently undo the clearance.
+            override_hits.append(
+                "%s: refusing %s match on %s (%s) — cleared supplier, only a confirmed "
+                "route may re-identify it"
+                % (supplier["name"], entry["matchConfidence"], number, entry["registeredName"]))
+            ov = overrides.get(supplier["name"]) or {}
+            companies[supplier["name"]] = cleared_record(ov.get("decidedOn"), ov.get("clearedNote"))
+            continue
         companies[supplier["name"]] = entry
         if from_record and entry["matchConfidence"] == "probable":
             downgraded.append("%s -> %s (%s)" % (supplier["name"], entry["registeredName"],
