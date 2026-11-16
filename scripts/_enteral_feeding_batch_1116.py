@@ -81,3 +81,41 @@ with io.open(SEED, 'w', encoding='utf-8') as f:
     json.dump(seed, f, ensure_ascii=False, indent=2)
     f.write('\n')
 print('wrote', SEED)
+
+# --- 4. company-press.json: same EAT duplicate, caught by verify.py's
+#     company-press check (every name it carries press for must resolve to a
+#     supplier-seed.json record). Both the stub's and the good record's press
+#     entries are empty (items: []); drop the stub's empty entry and add its
+#     alias string onto the good record's matchAliases so a press source using
+#     that exact brief wording still matches. ---
+PRESS = 'data/company-press.json'
+press = json.load(open(PRESS))
+psups = press['suppliers']
+if stub_name in psups:
+    stub_press = psups.pop(stub_name)
+    good_press = psups.get(eat_good['name'])
+    if good_press is not None and not good_press.get('items') and not stub_press.get('items'):
+        ci = good_press.setdefault('matchAliases', {}).setdefault('caseInsensitive', [])
+        if stub_name not in ci:
+            ci.append(stub_name)
+        print('removed empty stub press entry, added alias to good EAT press record')
+    else:
+        print('WARNING: stub or good press entry carries items — not auto-merged, check by hand')
+else:
+    print('no stub press entry found (already merged)')
+# The merge above drops company-press.json from 1289 to 1288 rows -- the
+# same -1 the supplier-seed.json merge applies. Update the header counts to
+# match this run's real row count (not a stale generation-drift bug: the
+# count genuinely changed because of this merge).
+actual = len(press['suppliers'])
+if press.get('counts', {}).get('suppliers') != actual:
+    press['counts']['suppliers'] = actual
+    print('updated counts.suppliers ->', actual)
+if press.get('rotation', {}).get('seedSuppliers') != actual:
+    press['rotation']['seedSuppliers'] = actual
+    print('updated rotation.seedSuppliers ->', actual)
+
+with io.open(PRESS, 'w', encoding='utf-8') as f:
+    json.dump(press, f, ensure_ascii=False, indent=2)
+    f.write('\n')
+print('wrote', PRESS)
