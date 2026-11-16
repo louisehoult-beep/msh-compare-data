@@ -7,7 +7,6 @@
     "tests": "test_speciality_news_keywords.py asserts every page slug has a rule, every pattern compiles, and a fixture of real 29/09/2026 headlines routes (and does not route) as judged by hand."
   },
   "noRule": {
-    "sterile-services": "Panel built 16/11/2026; the Hub page is NOT published yet. A keyword rule here would start generating data/speciality-news/sterile-services.json, and a news file must be pinnable in hub/my-hub-catalogue.json, where every item carries the URL of a live page - so it would point members at a page that does not exist. The panel itself is inert until a page carries data-speciality=\"sterile-services\". Add a rule here AND a catalogue entry together, in the same change, when the page goes live. The terms are ready and evidenced: sterile services, SSD, CSSD, HSDU, TSSU, decontamination, washer-disinfector, endoscope reprocessing, HTM 01-01, HTM 01-06, AER, instrument tracking. Bare \"autoclave\" is refused for the same reason as in the panel rule - university laboratory autoclaves.",
     "capital-estates-watch": "Not a clinical speciality, and not a speciality in hub/my-hub-catalogue.json, so a news file for it fails test_my_hub_catalogue (a news file must be pinnable). Its only match in 60 days of Pulse and Nursing in Practice (29/09/2026) was one GP premises-funding story. Add a rule here AND a catalogue entry together if Lou wants it."
   },
   "generalSources": ["pulse_today", "nursing_in_practice", "pnur_toc", "nrec_toc", "bjon_toc", "nursing_times", "mhra_alerts", "thiis", "bhta"],
@@ -46,6 +45,7 @@
     "gynaecology-and-womens-health": {"include": ["gynaecolog\\w*", "endometriosis", "menopaus\\w*", "(?-i:HRT)", "fibroids", "cervical (?:screening|cancer|smear)", "(?-i:HPV)", "womb cancer", "ovarian", "contracepti\\w*", "(?-i:IUDs?)", "pelvic pain", "(?-i:PCOS)", "polycystic ovary", "women(?:'|’)s health"]},
     "haematology-and-patient-blood-management": {"include": ["haematolog\\w*", "anaemia", "(?:blood )?transfusions?", "sickle cell", "thalassaemia", "leukaemia", "lymphoma", "myeloma", "iron deficiency", "B12 deficiency", "blood donat\\w*"],
       "exclude": ["infected blood"]},
+    "sterile-services": {"include": ["sterile services?", "(?-i:SSD)", "(?-i:CSSD)", "(?-i:HSDU)", "(?-i:TSSU)", "decontamination", "washer[- ]disinfectors?", "endoscope reprocessing", "(?-i:HTM) 01-0[16]", "(?-i:AERs?)", "instrument tracking"]},
     "infection-prevention-and-control": {"include": ["infection prevention", "infection control", "(?-i:IPC)", "hospital-acquired", "healthcare-associated", "(?-i:HCAIs?)", "(?-i:MRSA)", "C\\. difficile", "Clostridioides", "carbapenem\\w*", "norovirus", "hand hygiene", "(?-i:PPE)", "antimicrobial resistance", "(?-i:AMR)", "decontamination", "sterilis\\w*", "disinfect\\w*"]},
     "interventional-radiology": {"include": ["interventional radiolog\\w*", "thrombectomy", "embolisation", "angioplasty", "stents?"]},
     "maternity-and-neonatal": {"include": ["maternity", "midwi\\w*", "neonatal", "newborns?", "pregnan\\w*", "antenatal", "postnatal", "stillbirths?", "gestational", "(?:babies|baby) in intensive care", "maternal"]},
