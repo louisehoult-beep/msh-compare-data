@@ -163,7 +163,7 @@
   }
   function label(k, id) { return ((S.options || {})[k] || {})[id] || id; }
 
-  var CSS = '#msh-nursing-register{max-width:1100px;margin:0 auto;padding:32px 20px 64px;font-family:Inter,Arial,sans-serif;color:#1C2633;font-size:15px;line-height:1.5}'
+  var CSS = '#msh-nursing-register{max-width:none;margin:0;padding:32px 40px 64px;font-family:Inter,Arial,sans-serif;color:#1C2633;font-size:15px;line-height:1.5}'
     + '.nr h1{font-family:"Source Serif 4",Georgia,serif;font-size:32px;color:#14304F;margin:0 0 8px}'
     + '.nr .lede{color:#3A4656;max-width:720px;margin:0 0 24px}'
     + '.nr .tabs{display:flex;gap:8px;margin:0 0 24px;flex-wrap:wrap}'
@@ -200,7 +200,8 @@
     + '.nr .cv{background:#FFFBEA;border-color:#E9D9A6}.nr .cv input[type=file]{margin:6px 0 4px}'
     + '.nr .ticks label.fromcv,.nr label.fromcv{background:#FFF1BF;border-radius:6px;padding:2px 4px;margin:-2px -4px}'
     + '.nr .done{margin-top:20px}.nr .done a.chip{text-decoration:none}.nr .done .links{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 8px}'
-    + '@media (max-width:600px){.nr h1{font-size:26px}.nr fieldset{padding:14px}}';
+    + '.msh.alignfull{max-width:none!important}'
+    + '@media (max-width:600px){#msh-nursing-register{padding-left:20px;padding-right:20px}.nr h1{font-size:26px}.nr fieldset{padding:14px}}';
 
   function ticks(k, chosen) {
     var o = S.options[k] || {}, h = '<div class="ticks">';

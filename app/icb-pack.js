@@ -32,7 +32,8 @@
 
   var CSS = '.icbp{font:15px/1.5 Georgia,serif;color:' + INK + '}.icbp *{box-sizing:border-box}'
     + '.icbp .band{padding:26px 0}.icbp .dark{background:' + NAVY + ';color:#F5F1E8}.icbp .warm{background:' + WARM + '}'
-    + '.icbp .col{max-width:1080px;margin:0 auto;padding:0 40px}@media(max-width:600px){.icbp .col{padding:0 20px}}'
+    + '.msh.alignfull{max-width:none!important}'
+    + '.icbp .col{max-width:none;margin:0;padding:0 40px}@media(max-width:600px){.icbp .col{padding:0 20px}}'
     + '.icbp h1,.icbp h2{font-family:Didot,"Bodoni 72",Georgia,serif;margin:0 0 10px}.icbp h1{font-size:32px}.icbp h2{font-size:24px;color:' + NAVY + '}'
     + '.icbp h3{font:700 15px Helvetica,Arial,sans-serif;color:' + NAVY + ';margin:16px 0 6px}'
     + '.icbp .dark h1,.icbp .dark h2,.icbp .dark h3,.icbp .dark p,.icbp .dark label,.icbp .dark span,.icbp .dark li{color:#F5F1E8}'
