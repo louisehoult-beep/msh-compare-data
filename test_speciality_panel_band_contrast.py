@@ -194,5 +194,186 @@ class SpecialityPanelBandContrast(unittest.TestCase):
                                  for c, u in bad))
 
 
+
+# ---------------------------------------------------------------------------
+# The band-seated half, added 16/11/2026.
+#
+# The docstring above says the host band "is not held in this repo". For one
+# block that is not quite true, and the gap it left had shipped: #suppliers-
+# frameworks is #14304F on all 43 live pages and has been since 09/10/2026,
+# asserted by the computed-background check recorded in Cowork-OS
+# "Process flows for all brands/speciality-frameworks-band-navy-2026-10-09.md".
+# A known ground means a real contrast ratio CAN be computed without rendering
+# -- but only for a block with no light card between it and the band.
+#
+# addCalendarAndPins() appends #sp-cal-slot straight to #msh-spec-frameworks,
+# so the calendar is exactly that block, and the only one. Its rules were
+# written for a light card: measured signed-in on the live pages on 16/11/2026
+# the dates were 1.27:1, the meta line 2.90:1 and the three .empty-state
+# messages 1.13:1, on every panel. Neither existing test could see it: the one
+# above looks only at cards with a light background of their own.
+#
+# LIMIT: this can only judge colours THIS repo sets. .empty-state takes its
+# dark ink from each page's own CSS, so pre-fix it was invisible here too; the
+# fix pins it explicitly in the panel sheet, which is what makes it checkable.
+BAND_GROUND = "#14304f"
+
+# Read from the live pages' :root, signed in, 16/11/2026. Same discipline as
+# LIGHT_BACKGROUNDS above: this repo does not hold the page palette.
+PALETTE = {
+    "var(--ink)": "#1d2733",
+    "var(--navy)": "#0b1c33",
+    "var(--dim)": "#6b7683",
+    "var(--gold)": "#a8842c",
+    "var(--panel)": "#ffffff",
+    "var(--panel2)": "#f2f1ed",
+}
+
+CAL_SLOT = "#sp-cal-slot"
+
+
+def _hex_to_rgb(h):
+    h = h.strip().lstrip("#")
+    if len(h) == 3:
+        h = "".join(c * 2 for c in h)
+    if len(h) != 6:
+        return None
+    try:
+        return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+    except ValueError:
+        return None
+
+
+def _luminance(rgb):
+    def ch(v):
+        v = v / 255.0
+        return v / 12.92 if v <= 0.03928 else ((v + 0.055) / 1.055) ** 2.4
+    r, g, b = (ch(x) for x in rgb)
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+
+def contrast(a, b):
+    la, lb = _luminance(a), _luminance(b)
+    hi, lo = max(la, lb), min(la, lb)
+    return (hi + 0.05) / (lo + 0.05)
+
+
+def resolve_colour(value):
+    """A declaration's colour as rgb, resolving the page palette. None if unknown."""
+    v = value.strip().rstrip("!important").strip().lower()
+    if v in PALETTE:
+        v = PALETTE[v]
+    if v.startswith("#"):
+        return _hex_to_rgb(v)
+    m = re.match(r"rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)", v)
+    if m:
+        return tuple(int(m.group(i)) for i in (1, 2, 3))
+    return None
+
+
+def specificity(selector):
+    """(ids, classes, elements) for one compound selector."""
+    s = re.sub(r"\[[^\]]*\]", " attr ", selector)
+    ids = len(re.findall(r"#[A-Za-z0-9_-]+", s))
+    classes = len(re.findall(r"\.[A-Za-z0-9_-]+", s)) + s.count(" attr ")
+    classes += len(re.findall(r":(?!:)(?!hover|focus|active|visited|first-child|last-child)[A-Za-z-]+", s))
+    elements = len([p for p in re.split(r"[\s>+~]+", s.strip())
+                    if re.match(r"^[A-Za-z]", p)])
+    return (ids, classes, elements)
+
+
+def calendar_source(src):
+    """The JS that builds the calendar: calHtml() plus the slot's own innerHTML."""
+    out = []
+    for name in ("function calHtml()", "function addCalendarAndPins("):
+        i = src.find(name)
+        if i < 0:
+            continue
+        j = src.find("\n  function ", i + 1)
+        out.append(src[i:j if j > 0 else len(src)])
+    return "\n".join(out)
+
+
+class CalendarSeatedOnTheBand(unittest.TestCase):
+    """The calendar has no card under it, so its ink must suit #14304F."""
+
+    @classmethod
+    def setUpClass(cls):
+        with open(JS, encoding="utf-8") as f:
+            cls.src = f.read()
+        cls.sheet = stylesheet(cls.src)
+        cls.rules = rules(cls.sheet)
+        cls.cal_src = calendar_source(cls.src)
+        seated = set()
+        for m in re.finditer(r'class="([^"]*)"', cls.cal_src):
+            for c in m.group(1).split():
+                if c:
+                    seated.add(c)
+        cls.seated = seated
+        # Classes that bring their own light ground are the other test's business.
+        own_light = set()
+        for sel, decls in cls.rules:
+            bg = value_of(decls, "background") or value_of(decls, "background-color")
+            if bg and any(b in bg for b in LIGHT_BACKGROUNDS):
+                for one in sel.split(","):
+                    last = re.split(r"[\s>+~]+", one.strip())[-1]
+                    own_light.update(re.findall(r"\.([A-Za-z0-9_-]+)", last))
+        cls.own_light = own_light
+
+    def test_it_found_the_calendar_and_its_classes(self):
+        self.assertIn("sp-cal-row", self.seated,
+                      "the calendar builder was not parsed; "
+                      "found classes: %s" % sorted(self.seated))
+        self.assertIn(CAL_SLOT.lstrip("#"), self.src,
+                      "the calendar slot id changed; this test is scoped to it")
+
+    def test_the_band_ground_is_still_what_we_assume(self):
+        rgb = _hex_to_rgb(BAND_GROUND)
+        self.assertIsNotNone(rgb)
+        # Sanity: the band is dark, so light ink is what passes on it.
+        self.assertLess(_luminance(rgb), 0.1, "BAND_GROUND is no longer dark")
+        self.assertGreater(contrast(_hex_to_rgb("#f5f1e8"), rgb), 4.5)
+        self.assertLess(contrast(_hex_to_rgb("#1d2733"), rgb), 4.5)
+
+    def test_calendar_ink_passes_on_the_navy_band(self):
+        band = _hex_to_rgb(BAND_GROUND)
+        bad = []
+        for cls_name in sorted(self.seated):
+            if cls_name in self.own_light:
+                continue                      # it carries its own light ground
+            winner, best = None, None
+            for sel, decls in self.rules:
+                col = value_of(decls, "color")
+                if col is None:
+                    continue
+                for one in sel.split(","):
+                    one = one.strip()
+                    if not has_class(one, cls_name):
+                        continue
+                    if not targets_card_itself(one, cls_name):
+                        continue
+                    spec = specificity(one)
+                    if best is None or spec >= best:
+                        best, winner = spec, (one, col)
+            if winner is None:
+                continue                      # this repo sets no colour for it
+            rgb = resolve_colour(winner[1])
+            if rgb is None:
+                continue
+            ratio = contrast(rgb, band)
+            if ratio < 4.5:
+                bad.append("%s -> %s (%s) = %.2f:1 via `%s`"
+                           % (cls_name, winner[1].strip(),
+                              "#%02x%02x%02x" % rgb, ratio, winner[0]))
+        self.assertEqual(
+            [], bad,
+            "the calendar is appended straight to #msh-spec-frameworks, so its "
+            "ground is the navy band (%s) and not a light card. These rules "
+            "colour it for a light card, so the text is near-invisible to a "
+            "signed-in member -- the 16/11/2026 defect (dates 1.27:1, meta "
+            "2.90:1, empty states 1.13:1 on all 43 panels). Add a band-scoped "
+            "light rule under %s: %s"
+            % (BAND_GROUND, CAL_SLOT, "; ".join(bad)))
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

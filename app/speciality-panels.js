@@ -122,6 +122,25 @@
       '.msh .sp-cal-t a{color:var(--gold);font-weight:700;text-decoration:none;}',
       '.msh .sp-cal-m{font-size:11.5px;color:var(--dim);}',
       '@media (max-width:640px){.msh .sp-cal-row{grid-template-columns:minmax(0,1fr);}}',
+      /* The calendar is the one panel block with NO light card under it.
+         addCalendarAndPins() appends #sp-cal-slot straight to #msh-spec-frameworks,
+         so its ground is the navy band itself (#14304F on all 43 pages since
+         09/10/2026), not var(--panel). The rules above colour it for a light card,
+         which is why, measured signed-in on the live pages on 16/11/2026, the
+         dates ran at 1.27:1 (var(--navy) on the band) and the meta line at 2.90:1
+         (var(--dim)) on every panel, and .empty-state -- the calendar's loading,
+         failed-to-load and no-dated-rows states -- at 1.13:1, i.e. invisible.
+         Two ids keep these at (2,2,0), clear of the band's own (1,2,1) rules. */
+      '.msh #msh-spec-frameworks #sp-cal-slot .sp-cal-row{color:#F5F1E8;}',
+      '.msh #msh-spec-frameworks #sp-cal-slot .sp-cal-d{color:#F5F1E8;}',
+      '.msh #msh-spec-frameworks #sp-cal-slot .sp-cal-m{color:#DBE3EE;}',
+      '.msh #msh-spec-frameworks #sp-cal-slot .empty-state{color:#DBE3EE;}',
+      /* .sp-meta already RENDERS at #DBE3EE here, but only because a rule in
+         each page's own CSS happens to reach it; the panel sheet itself says
+         var(--dim), which is 2.90:1 on the band. Pinning it changes nothing
+         on screen and stops the calendar depending on markup this repo does
+         not own -- the same accident that made the dates invisible. */
+      '.msh #msh-spec-frameworks #sp-cal-slot .sp-meta{color:#DBE3EE;}',
       '.msh .ms-find{border-left:3px solid var(--gold);background:var(--panel2);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0 0;font-size:13.5px;line-height:1.55;color:var(--ink);}'
     ].join('');
     document.head.appendChild(st);
