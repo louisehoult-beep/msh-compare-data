@@ -125,6 +125,11 @@ REFS = {
     # digital frameworks for /medical-sales-hub/digital-assurance/. Minted with
     # `stamp_notice.py --mint`.
     "digital-assurance.json":  "ETH-D34222CA7",
+    # The NHS App partner history, added 16/11/2026: the APPEND-ONLY store that
+    # lets a product falling off the owner's live list be seen at all. Nothing
+    # is detectable until it holds two readings. Minted with
+    # `stamp_notice.py --mint`.
+    "nhs-app-partner-history.json": "ETH-D6239402B",
     "trust-pressures.json":    "ETH-DAE43C750",
     "nhssc-procurement-calendar.json": "ETH-DBC575194",
     "framework-date-conflicts.json":   "ETH-D2368919F",

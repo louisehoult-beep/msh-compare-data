@@ -67,6 +67,16 @@ jobs:
             echo "not Monday: Federated Data Platform profile left as it is"
           fi
 
+      # 16/11/2026. APPEND-ONLY: it adds a reading only when digital-sources.json
+      # holds one it has not seen, so running it every day is idempotent and
+      # cheap. It must run OUTSIDE the Monday block, because digital.nhs.uk
+      # blocks GitHub runners (403) and the refresh above therefore usually
+      # leaves the file as it is — a reading refreshed from a Mac must still be
+      # picked up on whatever day it lands. It never edits or removes a reading
+      # or a hand-written 'use' line.
+      - name: Append the NHS App partner reading to the append-only history
+        run: python3 scripts/build_nhs_app_history.py
+
       - name: Re-stamp the ownership notice and data markers
         run: python3 scripts/stamp_notice.py
 

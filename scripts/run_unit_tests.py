@@ -121,6 +121,7 @@ RUN = [
     "test_ai_airlock.py",                # 20/10/2026, MHRA AI Airlock cohorts
     "test_dspt_supplier_check.py",       # 20/10/2026, DSPT status for digital-tagged suppliers
     "test_digital_assurance.py",         # 16/11/2026, the DSPT + frameworks join behind the Hub assurance page
+    "test_nhs_app_history.py",           # 16/11/2026, the APPEND-ONLY NHS App partner store: overlap, de-duplication, hand-written 'use' lines survive
     "test_hub_chrome.py",                # 2026-10, nav icons and page bar; 1331 loader is ASCII
     "test_my_hub_landing.py",                # 2026-10, nav icons and page bar; 1331 loader is ASCII
     "test_nursing_register.py",          # 2026-10, Nursing Register snippet rules and page filters

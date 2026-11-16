@@ -1,0 +1,980 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "ref": "ETH-D6239402B",
+  "contact": "contact@elevateandthrive.uk"
+ },
+ "note": "APPEND-ONLY store. A run only ADDS: a reading whose fingerprint is not already held, and a departure not already recorded. It never edits and never removes an existing reading or departure. Hand-written 'use' lines on a departure are added by editing this file directly and are never touched by automation.",
+ "rule": "A row's identity is organisation + product + section as the owner spells them, normalised only for case and whitespace when keyed. Stage is not part of identity: stage is what is being watched.",
+ "detectionRule": "A product leaving the live list can only be seen by comparing two readings. While this store holds one reading, departures is empty because there is nothing to compare against, not because nothing has left.",
+ "promiseRule": "Not to be shown or promised on any Hub page until this store holds at least two readings.",
+ "overlapRule": "The owner's three lists overlap: one partner can appear on more than one of them at the same reading (four did on the 02/11/2026 reading). An entry therefore holds a SET of stages, not one stage, and leaving the live list is judged on the live list alone. A stage set that looks lower is never read as a demotion.",
+ "claimRule": "A partner no longer on the live list is a question to ask, not a withdrawal, a suspension, a failure or a judgement on the supplier. The owner states these lists are not an extensive directory of live services. A row may leave for reasons the owner does not publish, including a page edit.",
+ "watchedStage": "live",
+ "stageOrder": [
+  "live",
+  "integrating",
+  "planned"
+ ],
+ "readings": [
+  {
+   "verifiedOn": "2026-11-02",
+   "sourceDataAsOf": "2026-11-02",
+   "sourceGenerated": "2026-11-02",
+   "pages": [
+    {
+     "stage": "live",
+     "url": "https://digital.nhs.uk/services/nhs-app/how-to-integrate-with-the-nhs-app/nhs-app-integrated-partners-and-services/nhs-app-integrated-live-partners-and-services",
+     "pageLastEdited": "25 September 2026",
+     "rows": 80
+    },
+    {
+     "stage": "integrating",
+     "url": "https://digital.nhs.uk/services/nhs-app/how-to-integrate-with-the-nhs-app/nhs-app-partners-and-services-currently-integrating",
+     "pageLastEdited": "16 September 2026",
+     "rows": 25
+    },
+    {
+     "stage": "planned",
+     "url": "https://digital.nhs.uk/services/nhs-app/how-to-integrate-with-the-nhs-app/nhs-app-integrated-partners-and-services/partners-and-services-that-plan-to-be-integrated",
+     "pageLastEdited": "16 September 2026",
+     "rows": 7
+    }
+   ],
+   "rows": 112,
+   "counts": {
+    "live": 80,
+    "integrating": 25,
+    "planned": 7
+   },
+   "entries": [
+    {
+     "k": "abtrace||primary care",
+     "organisation": "Abtrace",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "access uk ltd|access elemental|secondary care appointments",
+     "organisation": "Access UK Ltd",
+     "product": "Access Elemental",
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "accurx|patient triage|online consultations",
+     "organisation": "Accurx",
+     "product": "Patient Triage",
+     "section": "Online consultations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "accurx||primary care",
+     "organisation": "Accurx",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "anima health|anima|online consultations",
+     "organisation": "Anima Health",
+     "product": "Anima",
+     "section": "Online consultations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "anima health||primary care",
+     "organisation": "Anima Health",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "appt health||primary care",
+     "organisation": "Appt Health",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "ardens manager||primary care",
+     "organisation": "Ardens Manager",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "integrating"
+     ]
+    },
+    {
+     "k": "birmingham womens||secondary care appointments",
+     "organisation": "Birmingham Womens",
+     "product": null,
+     "section": "Secondary care appointments",
+     "stages": [
+      "planned"
+     ]
+    },
+    {
+     "k": "blinx healthcare|paco (the patient and care optimiser)|online consultations",
+     "organisation": "Blinx Healthcare",
+     "product": "PACO (The Patient and Care Optimiser)",
+     "section": "Online Consultations",
+     "stages": [
+      "integrating"
+     ]
+    },
+    {
+     "k": "cambridge university hospitals||secondary care appointments",
+     "organisation": "Cambridge University Hospitals",
+     "product": null,
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "cisco|healthcare communications|secondary care appointments",
+     "organisation": "CISCO",
+     "product": "Healthcare Communications",
+     "section": "Secondary care appointments",
+     "stages": [
+      "live",
+      "planned"
+     ]
+    },
+    {
+     "k": "dedalus: patientaide||secondary care appointments",
+     "organisation": "Dedalus: PatientAide",
+     "product": null,
+     "section": "Secondary Care Appointments",
+     "stages": [
+      "integrating"
+     ]
+    },
+    {
+     "k": "dedalus|patientaide|secondary care appointments",
+     "organisation": "Dedalus",
+     "product": "PatientAide",
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "digital best start||national",
+     "organisation": "Digital Best Start",
+     "product": null,
+     "section": "National",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "drdoctor|drdoctor|secondary care appointments",
+     "organisation": "DrDoctor",
+     "product": "DrDoctor",
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "drdoctor||secondary care",
+     "organisation": "DrDoctor",
+     "product": null,
+     "section": "Secondary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "east kent hospitals university foundation trust|patheks2|secondary care appointments",
+     "organisation": "East Kent Hospitals University Foundation Trust",
+     "product": "PathEKS2",
+     "section": "Secondary care appointments",
+     "stages": [
+      "live",
+      "integrating"
+     ]
+    },
+    {
+     "k": "east kent hospitals university foundation trust||secondary care",
+     "organisation": "East Kent Hospitals University Foundation Trust",
+     "product": null,
+     "section": "Secondary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "east suffolk and north essex||secondary care appointments",
+     "organisation": "East Suffolk and North Essex",
+     "product": null,
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "ebo.ai|ebo intelligent patient portal|secondary care appointments",
+     "organisation": "EBO.ai",
+     "product": "EBO Intelligent Patient Portal",
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "ebo||secondary care appointments",
+     "organisation": "EBO",
+     "product": null,
+     "section": "Secondary care appointments",
+     "stages": [
+      "live",
+      "planned"
+     ]
+    },
+    {
+     "k": "echo communication ltd||primary care",
+     "organisation": "Echo Communication Ltd",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "integrating"
+     ]
+    },
+    {
+     "k": "econsult health limited|web-gp|online consultations",
+     "organisation": "eConsult Health Limited",
+     "product": "Web-GP",
+     "section": "Online consultations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "electronic prescription service (eps)||national",
+     "organisation": "Electronic Prescription Service (EPS)",
+     "product": null,
+     "section": "National",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "engage health systems|engage consult|online consultations",
+     "organisation": "Engage Health Systems",
+     "product": "Engage Consult",
+     "section": "Online consultations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "engage health systems||primary care",
+     "organisation": "Engage Health Systems",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "eyev limited|v-consult|online consultations",
+     "organisation": "EYEV Limited",
+     "product": "V-Consult",
+     "section": "Online consultations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "frimley health||secondary care appointments",
+     "organisation": "Frimley Health",
+     "product": null,
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "frimley heath||secondary care appointments",
+     "organisation": "Frimley Heath",
+     "product": null,
+     "section": "Secondary Care Appointments",
+     "stages": [
+      "integrating"
+     ]
+    },
+    {
+     "k": "gosh and royal marsden||secondary care appointments",
+     "organisation": "GOSH and Royal Marsden",
+     "product": null,
+     "section": "Secondary care appointments",
+     "stages": [
+      "live",
+      "integrating"
+     ]
+    },
+    {
+     "k": "gp reg||national",
+     "organisation": "GP Reg",
+     "product": null,
+     "section": "National",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "guy's and st thomas/kings college||secondary care appointments",
+     "organisation": "Guy's and St Thomas/Kings College",
+     "product": null,
+     "section": "Secondary care appointments",
+     "stages": [
+      "live",
+      "integrating"
+     ]
+    },
+    {
+     "k": "health call|my health call pep|secondary care appointments",
+     "organisation": "Health Call",
+     "product": "My Health Call PEP",
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "health call||secondary care",
+     "organisation": "Health Call",
+     "product": null,
+     "section": "Secondary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "healthtech-1|bookable navigator|online consultations",
+     "organisation": "Healthtech-1",
+     "product": "Bookable Navigator",
+     "section": "Online consultations",
+     "stages": [
+      "planned"
+     ]
+    },
+    {
+     "k": "hero health||primary care",
+     "organisation": "Hero Health",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "hippo labs||primary care",
+     "organisation": "Hippo Labs",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "humber teaching nhs foundation trust|interweave-humber|secondary care appointments",
+     "organisation": "Humber Teaching NHS Foundation Trust",
+     "product": "Interweave-Humber",
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "induction healthcare|zesty|secondary care appointments",
+     "organisation": "Induction Healthcare",
+     "product": "Zesty",
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "induction healthcare||secondary care",
+     "organisation": "Induction Healthcare",
+     "product": null,
+     "section": "Secondary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "intersystems|iris|secondary care appointments",
+     "organisation": "Intersystems",
+     "product": "Iris",
+     "section": "Secondary Care Appointments",
+     "stages": [
+      "integrating"
+     ]
+    },
+    {
+     "k": "iplato healthcare||primary care",
+     "organisation": "iPLATO Healthcare",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "iplato|mygp triage|online consultations",
+     "organisation": "iPlato",
+     "product": "MyGP Triage",
+     "section": "Online consultations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "klinik healthcare solutions|klinik access|online consultations",
+     "organisation": "Klinik Healthcare Solutions",
+     "product": "Klinik Access",
+     "section": "Online consultations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "liberate ai||primary care",
+     "organisation": "Liberate AI",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "manchester foundation trust||secondary care appointments",
+     "organisation": "Manchester Foundation Trust",
+     "product": null,
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "medicus|medicus system|online consultations",
+     "organisation": "Medicus",
+     "product": "Medicus System",
+     "section": "Online consultations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "medicus||primary care",
+     "organisation": "Medicus",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "integrating"
+     ]
+    },
+    {
+     "k": "mediwave|maia|secondary care appointments",
+     "organisation": "Mediwave",
+     "product": "MAIA",
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "medlink||primary care",
+     "organisation": "Medlink",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "mjog||primary care",
+     "organisation": "MJOG",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "national breast screening||national",
+     "organisation": "National Breast Screening",
+     "product": null,
+     "section": "National",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "national cervical screening||national",
+     "organisation": "National Cervical Screening",
+     "product": null,
+     "section": "National",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "national institute of health research|be part of research|national integrations",
+     "organisation": "National Institute of Health Research",
+     "product": "Be Part of Research",
+     "section": "National integrations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "netcall|patienthub|secondary care appointments",
+     "organisation": "Netcall",
+     "product": "PatientHub",
+     "section": "Secondary care appointments",
+     "stages": [
+      "live",
+      "integrating"
+     ]
+    },
+    {
+     "k": "netcall||secondary care",
+     "organisation": "Netcall",
+     "product": null,
+     "section": "Secondary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "nhs england|111 online|national integrations",
+     "organisation": "NHS England",
+     "product": "111 online",
+     "section": "National integrations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "nhs england|change address|national integrations",
+     "organisation": "NHS England",
+     "product": "Change Address",
+     "section": "National integrations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "nhs england|check and book vaccinations|national integrations",
+     "organisation": "NHS England",
+     "product": "Check and book vaccinations",
+     "section": "National integrations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "nhs england|gp registration|national integrations",
+     "organisation": "NHS England",
+     "product": "GP registration",
+     "section": "National integrations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "nhs england|hiv home test|national integrations",
+     "organisation": "NHS England",
+     "product": "HIV Home Test",
+     "section": "National integrations",
+     "stages": [
+      "integrating"
+     ]
+    },
+    {
+     "k": "nhs england|national booking service (nbs) spring covid campaign|national integrations",
+     "organisation": "NHS England",
+     "product": "National Booking Service (NBS) Spring Covid Campaign",
+     "section": "National integrations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "nhs england|nhs health checks online|national integrations",
+     "organisation": "NHS England",
+     "product": "NHS Health Checks Online",
+     "section": "National integrations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "nhs england|nhs health store|national integrations",
+     "organisation": "NHS England",
+     "product": "NHS Health Store",
+     "section": "National integrations",
+     "stages": [
+      "integrating"
+     ]
+    },
+    {
+     "k": "nhs england|online gp registration|national integrations",
+     "organisation": "NHS England",
+     "product": "Online GP Registration",
+     "section": "National integrations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "nhs england|proxy application service|national integrations",
+     "organisation": "NHS England",
+     "product": "Proxy Application Service",
+     "section": "National integrations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "nhs england||primary care",
+     "organisation": "NHS England",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "nhs health checks online||national",
+     "organisation": "NHS Health Checks Online",
+     "product": null,
+     "section": "National",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "nhs online trust||secondary care appointments",
+     "organisation": "NHS Online Trust",
+     "product": null,
+     "section": "Secondary Care Appointments",
+     "stages": [
+      "integrating"
+     ]
+    },
+    {
+     "k": "nhs proxy||national",
+     "organisation": "NHS Proxy",
+     "product": null,
+     "section": "National",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "oneadvanced (patchs)||primary care",
+     "organisation": "OneAdvanced (Patchs)",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "oneadvanced|patchs|online consultations",
+     "organisation": "OneAdvanced",
+     "product": "Patchs",
+     "section": "Online consultations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "optum (emis) pathway||primary care",
+     "organisation": "Optum (EMIS) Pathway",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "integrating"
+     ]
+    },
+    {
+     "k": "orion health|virtuoso|secondary care appointments",
+     "organisation": "Orion Health",
+     "product": "Virtuoso",
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "patients know best (pkb)|pkb|personal health records",
+     "organisation": "Patients Know Best (PKB)",
+     "product": "PKB",
+     "section": "Personal health records",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "patients know best (pkb)|pkb|secondary care appointments",
+     "organisation": "Patients Know Best (PKB)",
+     "product": "PKB",
+     "section": "Secondary care appointments",
+     "stages": [
+      "live",
+      "integrating"
+     ]
+    },
+    {
+     "k": "patients know best (pkb)||secondary care",
+     "organisation": "Patients Know Best (PKB)",
+     "product": null,
+     "section": "Secondary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "patients know best|pkb|secondary care appointments",
+     "organisation": "Patients Know Best",
+     "product": "PKB",
+     "section": "Secondary care appointments",
+     "stages": [
+      "planned"
+     ]
+    },
+    {
+     "k": "primum digital: cross cover||secondary care appointments",
+     "organisation": "Primum Digital: Cross Cover",
+     "product": null,
+     "section": "Secondary Care Appointments",
+     "stages": [
+      "integrating"
+     ]
+    },
+    {
+     "k": "rapid health|smart triage|online consultations",
+     "organisation": "Rapid Health",
+     "product": "Smart Triage",
+     "section": "Online consultations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "riviam digital care limited: riviam patient portal||secondary care appointments",
+     "organisation": "Riviam Digital Care Limited: Riviam Patient Portal",
+     "product": null,
+     "section": "Secondary Care Appointments",
+     "stages": [
+      "integrating"
+     ]
+    },
+    {
+     "k": "royal devon||secondary care appointments",
+     "organisation": "Royal Devon",
+     "product": null,
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "silicon practice||primary care",
+     "organisation": "Silicon Practice",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "integrating"
+     ]
+    },
+    {
+     "k": "tameside: myt&gcare||secondary care appointments",
+     "organisation": "Tameside: MyT&Gcare",
+     "product": null,
+     "section": "Secondary care appointments",
+     "stages": [
+      "live",
+      "integrating"
+     ]
+    },
+    {
+     "k": "the christie nhs foundation trust|mychristie|secondary care appointments",
+     "organisation": "The Christie NHS Foundation Trust",
+     "product": "MyChristie",
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "tpp|systmconnect|online consultations",
+     "organisation": "TPP",
+     "product": "SystmConnect",
+     "section": "Online consultations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "tpp|systmone|secondary care appointments",
+     "organisation": "TPP",
+     "product": "SystmOne",
+     "section": "Secondary Care Appointments",
+     "stages": [
+      "integrating",
+      "planned"
+     ]
+    },
+    {
+     "k": "tpp||primary care",
+     "organisation": "TPP",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "live",
+      "integrating"
+     ]
+    },
+    {
+     "k": "universal care plan (ucp)|better|personal health records",
+     "organisation": "Universal Care Plan (UCP)",
+     "product": "Better",
+     "section": "Personal health records",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "university college royal orthopedic||secondary care appointments",
+     "organisation": "University College Royal Orthopedic",
+     "product": null,
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "university hospital of morecambe bay nhs foundation trust: pep+||secondary care appointments",
+     "organisation": "University Hospital of Morecambe Bay NHS Foundation Trust: PEP+",
+     "product": null,
+     "section": "Secondary Care Appointments",
+     "stages": [
+      "integrating"
+     ]
+    },
+    {
+     "k": "university hospital southampton foundation trust: my medical record||secondary care",
+     "organisation": "University Hospital Southampton Foundation Trust: My Medical Record",
+     "product": null,
+     "section": "Secondary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "university hospital southampton foundation trust|my medical record|secondary care appointments",
+     "organisation": "University Hospital Southampton Foundation Trust",
+     "product": "My Medical Record",
+     "section": "Secondary care appointments",
+     "stages": [
+      "live",
+      "integrating",
+      "planned"
+     ]
+    },
+    {
+     "k": "university hospitals of morecambe bay nhs foundation trust|pep+|secondary care appointments",
+     "organisation": "University Hospitals of Morecambe Bay NHS Foundation Trust",
+     "product": "PEP+",
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "vaccines||national",
+     "organisation": "Vaccines",
+     "product": null,
+     "section": "National",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "virtually|virtually healthcare|online consultations",
+     "organisation": "Virtually",
+     "product": "Virtually Healthcare",
+     "section": "Online consultations",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "virtually||primary care",
+     "organisation": "Virtually",
+     "product": null,
+     "section": "Primary care",
+     "stages": [
+      "live"
+     ]
+    },
+    {
+     "k": "wellola: portasana||secondary care appointments",
+     "organisation": "Wellola: Portasana",
+     "product": null,
+     "section": "Secondary Care Appointments",
+     "stages": [
+      "integrating"
+     ]
+    },
+    {
+     "k": "wellola|portasana|secondary care appointments",
+     "organisation": "Wellola",
+     "product": "Portasana",
+     "section": "Secondary care appointments",
+     "stages": [
+      "live"
+     ]
+    }
+   ],
+   "fingerprint": "9e2e30cfae4749d4"
+  }
+ ],
+ "departures": [],
+ "source": "digital.nhs.uk (NHS England Digital) pages and data file; Open Government Licence",
+ "sourceLicence": "Contains information from NHS England, licensed under the current version of the Open Government Licence (https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).",
+ "termsUrl": "https://digital.nhs.uk/about-nhs-digital/terms-and-conditions",
+ "lastChecked": "2026-11-02",
+ "dataAsOf": "2026-11-02",
+ "readingCount": 1
+}
