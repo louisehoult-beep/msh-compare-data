@@ -121,6 +121,10 @@ REFS = {
     "trust-map.json":          "ETH-D5BBB9C7A",
     # The Wales buyer map, added 16/11/2026. Minted with `stamp_notice.py --mint`.
     "wales-buyer-map.json":    "ETH-DAEA3A8C7",
+    # Digital supplier assurance, added 16/11/2026: the DSPT reading joined to the
+    # digital frameworks for /medical-sales-hub/digital-assurance/. Minted with
+    # `stamp_notice.py --mint`.
+    "digital-assurance.json":  "ETH-D34222CA7",
     "trust-pressures.json":    "ETH-DAE43C750",
     "nhssc-procurement-calendar.json": "ETH-DBC575194",
     "framework-date-conflicts.json":   "ETH-D2368919F",

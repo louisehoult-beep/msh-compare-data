@@ -1,0 +1,6 @@
+<!-- wp:html -->
+<!-- Digital supplier assurance (/medical-sales-hub/digital-assurance/). Paste as the whole page body, exactly as here: the wp:html wrapper and no blank lines inside it stop WordPress adding paragraph tags. Every figure is drawn at load from data/digital-assurance.json by app/digital-assurance.js. The wrapper carries alignfull so the page escapes WordPress's 75px global padding and runs full width with 40px margins (Lou, 16/11/2026). Create as a CHILD of page 675 before publishing, set the six Hub plan ticks, run Hub/check_hub_page.py (CLAUDE.md rule 7). -->
+<div class="msh-dga alignfull"><div id="msh-digital-assurance"></div>
+<script>(function(){function go(){fetch('https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/app/digital-assurance.js',{cache:'no-cache'}).then(function(r){if(!r.ok){throw new Error(r.status);}return r.text();}).then(function(s){(new Function(s))();}).catch(function(){var m=document.getElementById('msh-digital-assurance');if(m){m.innerHTML='The digital supplier assurance check is temporarily unavailable. Please try again shortly.';}});}if(document.readyState==='complete'){go();}else{window.addEventListener('load',go);}})();</script>
+</div>
+<!-- /wp:html -->
