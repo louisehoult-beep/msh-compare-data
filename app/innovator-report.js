@@ -147,6 +147,10 @@
     + '@media print{.inr .pick,.inr button,.inr .noprint{display:none!important}'
     + '.inr .band{padding:14px 0;break-inside:avoid}.inr .col{max-width:none;padding:0 10mm}'
     + '.inr .dark,.inr .wine,.inr .warm,.inr .mine>.lab,.inr th{-webkit-print-color-adjust:exact;print-color-adjust:exact}'
+    /* The .ask line coaches the innovator while they write. It is not content a grant
+       assessor should read, so it stays on screen and in the saved copy (which is still
+       editable) but drops out of the print. Not .noprint: save() strips those outright. */
+    + '.inr .mine>.ask{display:none}'
     + '.inr h2{break-after:avoid}.inr table{font-size:10pt}.inr a{text-decoration:none}'
     + '.inr .mine{break-inside:avoid}}';
 
