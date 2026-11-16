@@ -7164,6 +7164,138 @@ for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
 
 
 
+# ---------------------------------------------------------------------------
+# STERILE SERVICES (16/11/2026). The rule is wide on "decontaminat*" because
+# that is the word NHS buyers put in an SSD title, so the exclusion list is
+# doing real work and every entry in it is asserted here against the notice
+# that forced it. The other half of this block is the no-removal invariant:
+# this panel was added BESIDE infection prevention and control, not carved out
+# of it, and a future edit that moves the `ssd` directory tag instead of
+# sharing it would take live companies off a published page.
+SSD = "sterile-services"
+_ssd_rule = B.SPECIALITY_RULES[SSD]
+_ssd = load_panel(SSD)
+_ssd_titles = matched_titles(SSD)
+
+
+def _ssd_absent(label, needle):
+    check("%s: %s" % (label, needle[:58]), needle.lower() not in _ssd_titles,
+          "matched a notice that is not sterile services")
+
+
+def _ssd_present(label, needle):
+    check("%s: %s" % (label, needle[:58]), needle.lower() in _ssd_titles,
+          "a genuine sterile services notice is not matched")
+
+
+print("  sterile services claims exactly three frameworks and names them")
+_ssd_fw_names = sorted({f["name"] for f in _ssd["frameworks"]})
+check("three NHS Supply Chain agreements, no more",
+      _ssd_fw_names == ["Decontamination Capital Equipment, Associated Accessories and Services",
+                        "Instrument Decontamination and Accessories",
+                        "Tray Wrap and Sterilisation Equipment"],
+      repr(_ssd_fw_names))
+check("Environmental Decontamination is left with infection prevention",
+      "environmental" not in _ssd_rule["frameworks"].lower()
+      and not any("Environmental" in n for n in _ssd_fw_names))
+check("the endoscopes themselves are not claimed here",
+      not any("Endoscop" in n for n in _ssd_fw_names))
+
+print("  what the rule refuses, it refuses in the include and not in the exclude")
+for _refused in ("autoclave", "reverse osmosis", "water treatment",
+                 "instrument set", "loan kit", "track and trace"):
+    check("'%s' is refused in the include" % _refused,
+          _refused not in _ssd_rule["include"].lower())
+check("the autoclave refusal costs nothing here, because SSD catches it",
+      "sgh autoclave replacement project" in _ssd_titles,
+      "York's autoclave award, which the IPC rule named as the price of refusing "
+      "bare 'autoclave', is matched here by 'sterile services' instead")
+# The other row IPC named, Bedfordshire's "SSD Autoclave Cooling Water Chiller",
+# DOES match this rule - but it is tagged `tender` with supplier_count 0, so it is
+# not an award and no award list can carry it. Asserted as the notice it actually
+# is, rather than claimed as a win this panel does not show.
+_ssd_bed = [a for a in B.load("framework-awards.json")["awards"]
+            if a.get("title") == "SSD Autoclave Cooling Water Chiller"]
+check("Bedfordshire's SSD chiller matches the rule",
+      len(_ssd_bed) == 1 and B.match_title(B.compile_rule(_ssd_rule), _ssd_bed[0]["title"]))
+check("and it is a tender notice, not an award, so no award list shows it",
+      _ssd_bed[0]["tag"] == ["tender"] and _ssd_bed[0]["supplier_count"] == 0
+      and "ssd autoclave cooling water chiller" not in _ssd_titles)
+
+print("  every notice the exclusion list drops is named, and is really not SSD")
+_ssd_absent("dental decontamination is HTM 01-05", "Mold Dental Decontamination")
+_ssd_absent("dental decontamination is HTM 01-05", "Colwyn Bay DDS Dental Decontamination")
+_ssd_absent("dental autoclaves are primary care", "Infection control of dental autoclaves")
+_ssd_absent("a process-industry steriliser is not a hospital one",
+            "Framework for Laboratory Continuous Steriliser")
+_ssd_absent("a lab incubator's self-sterilising cycle is not a purchase",
+            "CO2 Self-sterilising Incubators")
+_ssd_absent("a ward kitchen appliance is not SSD", "Ward Dishwashers/Sterilisers")
+_ssd_absent("CBRN casualty lotion is not instrument reprocessing",
+            "Reactive Skin Decontamination Lotion")
+_ssd_absent("mass decontamination is emergency preparedness", "DECONTAMINATION TENT")
+_ssd_absent("a plant room is not an instrument", "Asbestos Decontamination Services")
+_ssd_absent("estates works are not a reprocessing contract", "Safety and decontamination works")
+_ssd_absent("bed and mattress cleaning is patient handling",
+            "Dynamic Mattresses & Decontamination Services")
+_ssd_absent("bariatric equipment rental is patient handling",
+            "bariatric equipment rental, maintenance and decontaminatio")
+_ssd_absent("ambulance cleaning is not SSD", "Decontamination Services for ESTH NEPTS Vehicles")
+_ssd_absent("dialysis and estates water belong to renal and estates",
+            "Maintenance of Reverse Osmosis Equipment")
+_ssd_absent("theatre instrument rental is not an SSD purchase",
+            "Lap Renal Instrument sets rental")
+
+print("  and the department's own notices are matched, in all four spellings")
+_ssd_present("sterile services by name", "Sterile Services Department annual & quarterly servicing")
+_ssd_present("SSD by initials", "Provision of the Replacement of SSD Equipment")
+_ssd_present("CSSD by initials", "CSSD Track and Trace system")
+_ssd_present("the washer-disinfector", "Instrument Washer Disinfectors")
+_ssd_present("the automated endoscope reprocessor", "Automated Endoscope Washer Disinfectors")
+_ssd_present("AER as the buyer writes it", "SERVICE MAINTENANCE OF AER WASHER")
+_ssd_present("endoscope reprocessing", "LAPARID RAPIDAER ENDOSCOPE REPROCESSOR")
+_ssd_present("the ultrasonic bath", "Washer Disinfector, Ultrasonic Bath and Steriliser Periodic Testing")
+_ssd_present("rigid containers", "Purchase of Rigid Containers for Sterile Services")
+_ssd_present("tray wrap", "Tray Wrap & Sterilisation Products")
+_ssd_present("instrument tracking", "Fingerprint Instrument Tracking System")
+_ssd_present("a traceability system", "Decontamination Services Department - Traceability System")
+
+print("  CPV corroborates only, and the shared maintenance code is not claimed")
+check("33191 sterilisation and disinfection devices is the claim",
+      _ssd_rule["cpv"] == ("33191",), repr(_ssd_rule.get("cpv")))
+check("50421 repair of medical equipment is NOT claimed",
+      not any(c.startswith("50421") for c in _ssd_rule["cpv"]))
+
+print("  the panel was added BESIDE infection prevention, not taken out of it")
+check("the ssd directory tag reaches both panels",
+      B.SEED_TAG_TO_PANELS["ssd"] == ["infection-prevention-and-control", SSD],
+      repr(B.SEED_TAG_TO_PANELS["ssd"]))
+check("infection prevention still holds its sixteen agreements",
+      len(load_panel("infection-prevention-and-control")["frameworks"]) == 16)
+check("the coverage note says the sharing out loud",
+      "SHARES ITS THREE FRAMEWORKS" in (_ssd["rules"].get("coverage") or _ssd_rule["coverageNote"]))
+
+print("  HTM 01-01 is carried as a sourced policy item, never as award evidence")
+check("no award row carries HTM 01-01, so none is claimed",
+      "htm 01-01" not in _ssd_titles and "htm01-01" not in _ssd_titles)
+_ssd_li = _ssd["localIntel"]
+check("three local intelligence items", len(_ssd_li) == 3, "%d items" % len(_ssd_li))
+_ssd_ids = sorted(i["id"] for i in _ssd_li)
+check("HTM 01-01, HTM 01-06 and the scope boundary",
+      _ssd_ids == ["ssd-htm-siblings", "ssd-htm0101", "ssd-htm0106"], repr(_ssd_ids))
+for _i in _ssd_li:
+    check("%s carries its own source" % _i["id"],
+          _i["url"].startswith("https://www.england.nhs.uk/")
+          and bool(_i.get("quote")) and bool(_i.get("verifiedOn")))
+    check("%s is a policy item, not a buying route" % _i["id"], _i["group"] == "policy")
+check("the surgical instruments memorandum is quoted, not paraphrased",
+      any("explains the management of decontamination and the various ways to sterilize"
+          in (i.get("quote") or "") for i in _ssd_li))
+check("HTM 01-04 and HTM 01-05 are named as NOT this patch",
+      any("01-05" in (i.get("fact") or "") and "01-04" in (i.get("fact") or "")
+          for i in _ssd_li))
+
+
 print()
 if fails:
     print("%d FAILED: %s" % (len(fails), "; ".join(fails)))

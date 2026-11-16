@@ -7,6 +7,7 @@
     "tests": "test_speciality_news_keywords.py asserts every page slug has a rule, every pattern compiles, and a fixture of real 29/09/2026 headlines routes (and does not route) as judged by hand."
   },
   "noRule": {
+    "sterile-services": "Panel built 16/11/2026; the Hub page is NOT published yet. A keyword rule here would start generating data/speciality-news/sterile-services.json, and a news file must be pinnable in hub/my-hub-catalogue.json, where every item carries the URL of a live page - so it would point members at a page that does not exist. The panel itself is inert until a page carries data-speciality=\"sterile-services\". Add a rule here AND a catalogue entry together, in the same change, when the page goes live. The terms are ready and evidenced: sterile services, SSD, CSSD, HSDU, TSSU, decontamination, washer-disinfector, endoscope reprocessing, HTM 01-01, HTM 01-06, AER, instrument tracking. Bare \"autoclave\" is refused for the same reason as in the panel rule - university laboratory autoclaves.",
     "capital-estates-watch": "Not a clinical speciality, and not a speciality in hub/my-hub-catalogue.json, so a news file for it fails test_my_hub_catalogue (a news file must be pinnable). Its only match in 60 days of Pulse and Nursing in Practice (29/09/2026) was one GP premises-funding story. Add a rule here AND a catalogue entry together if Lou wants it."
   },
   "generalSources": ["pulse_today", "nursing_in_practice", "pnur_toc", "nrec_toc", "bjon_toc", "nursing_times", "mhra_alerts", "thiis", "bhta"],

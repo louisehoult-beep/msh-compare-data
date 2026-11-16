@@ -8021,6 +8021,196 @@ SPECIALITY_RULES = {
         ),
     },
 
+    # STERILE SERVICES. The hospital department that takes a used surgical
+    # instrument back, washes it, inspects it, packs it, sterilises it and returns
+    # it to theatre - Sterile Services Department (SSD), also written Central
+    # Sterile Services Department (CSSD), Theatre Sterile Supply Unit (TSSU) and
+    # Hospital Sterilisation and Disinfection Unit (HSDU), and all four spellings
+    # are in the include because NHS buyers use all four. Flexible endoscope
+    # reprocessing sits here too: the Automated Endoscope Reprocessor (AER) is a
+    # washer-disinfector and the trust that buys one buys it for the same reason.
+    #
+    # THIS PANEL TAKES NOTHING AWAY FROM INFECTION PREVENTION AND CONTROL. Both
+    # pages claim the same three NHS Supply Chain agreements, because a framework
+    # is not consumed by being claimed, and the `ssd` directory tag now reaches
+    # BOTH panels rather than being moved off IPC. No company that is on the live
+    # IPC page today comes off it because of this rule.
+    "sterile-services": {
+        "label": "Sterile Services",
+        # THREE agreements, and the pattern was run over all 140 names in
+        # frameworks.json: it returns these three and nothing else.
+        #   Decontamination Capital Equipment, Associated Accessories and Services
+        #   Instrument Decontamination and Accessories
+        #   Tray Wrap and Sterilisation Equipment
+        # Environmental Decontamination is deliberately NOT claimed. It is the
+        # room-and-surface agreement (hydrogen peroxide vapour, ultraviolet), which
+        # is IPC's patch, and this rule has no "environmental" in it so it cannot
+        # reach it by accident. The two endoscope agreements (Flexible Endoscopes,
+        # Rigid Endoscopy) are the SCOPE, not the reprocessor, and belong to
+        # colorectal-gi-and-endoscopy, which already claims them.
+        "frameworks": (
+            r"\b(instrument decontamination|decontamination capital|tray wrap)\b"
+        ),
+        # NOT INCLUDED, DELIBERATELY. Each term was run over all 7,656 rows of
+        # tender-history.json and all 4,344 of framework-awards.json, every hit was
+        # read, and the term was REFUSED in the include rather than admitted and
+        # then argued with in the exclusion list:
+        #   autoclave      -> 52 hits, overwhelmingly university and research
+        #                     laboratory autoclaves (Hertfordshire, Glasgow's CL3
+        #                     containment autoclave, Leeds, Warwick, Quadram
+        #                     Institute, UKRI, Pirbright, an Aberystwyth scientific
+        #                     equipment DPS). Bare "Autoclave 2024" carries nothing
+        #                     in the title to separate a teaching lab from an SSD.
+        #                     Same decision as the IPC rule above, and here it
+        #                     costs almost nothing: the two NHS rows IPC named as
+        #                     the price of that refusal, "SSD Autoclave Cooling
+        #                     Water Chiller" and York's "SGH AUTOCLAVE REPLACEMENT
+        #                     PROJECT (ENDOSCOPY AND STERILE SERVICES)", are both
+        #                     caught here by "ssd" and "sterile services" instead.
+        #   reverse osmosis / water treatment
+        #                 -> real SSD plant, but every hit in this data is RENAL
+        #                     DIALYSIS water or an estates water-safety contract
+        #                     (Regional Business Services Organisation's polishing
+        #                     plants and softeners, Belfast's water treatment and
+        #                     salt). The renal panel has them. A Compare sub-code
+        #                     "ssd:ro" exists and is NOT evidence that these award
+        #                     rows are SSD's; the rows were read and they are not.
+        #   instrument set / loan kit
+        #                 -> matched B Braun Aesculap laparoscopic renal instrument
+        #                     set RENTAL at Partners Procurement Service. That is
+        #                     theatre instrument supply, which SSD processes but
+        #                     does not buy. Refused whole; nothing genuine is lost.
+        #   track and trace -> bare, it is 2020 Covid contact tracing. The SSD
+        #                     systems are reached by "instrument tracking",
+        #                     "CSSD" and "traceability system" instead.
+        #   htm 01-01, hsdu as a policy term
+        #                 -> ZERO award rows in either file. HTM 01-01 is the
+        #                     governing standard for this patch and it is sourced
+        #                     and quoted in data/speciality-local-intel.json, where
+        #                     a curated policy item carries its own source, rather
+        #                     than being bolted onto an award filter that has no
+        #                     evidence for it. "hsdu" stays in the include only as
+        #                     a department spelling, where it costs nothing.
+        "include": (
+            r"\b(sterile services?|ssd|cssd|tssu|hsdu|sterilis\w*|steriliz\w*|"
+            r"decontaminat\w*|washer.?disinfect\w*|tray wrap|sterilisation wrap|"
+            r"instrument track\w*|instrument traceab\w*|traceability system|"
+            r"endoscope reprocess\w*|endoscope washer|automated endoscope|aer|"
+            r"ultrasonic bath|ultrasonic clean\w*|rigid containers?)\b"
+        ),
+        # EVERY PATTERN HERE MATCHED A REAL NOTICE THAT WAS NOT THIS SPECIALITY.
+        # The include above is deliberately wide on "decontaminat\w*", because
+        # that is the word NHS buyers put in an SSD title; the price of that is
+        # this list, and each entry names the notice that forced it:
+        #   laborator*    -> "Framework for Laboratory Continuous Steriliser",
+        #                    Centre for Process Innovation. A process-industry
+        #                    steriliser, not a hospital one.
+        #   incubators?   -> "Provision for CO2 Self-sterilising Incubators",
+        #                    Public Health England. A laboratory incubator whose
+        #                    self-sterilising cycle is a feature, not the purchase.
+        #   dishwashers?  -> "Ward Dishwashers/Sterilisers", Kettering General. A
+        #                    ward kitchen appliance.
+        #   skin decontamination, decontamination lotion, rsdl
+        #                 -> the Ministry of Defence's Reactive Skin
+        #                    Decontamination Lotion framework. A CBRN casualty
+        #                    product.
+        #   decontamination tent
+        #                 -> "SYSTEM GREEN S250 (DECONTAMINATION TENT)", Hull
+        #                    Royal Infirmary. Emergency-department mass
+        #                    decontamination, not instrument reprocessing.
+        #   asbestos, decontamination works
+        #                 -> "Plant Room Asbestos Decontamination Services" (West
+        #                    Hertfordshire) and "Safety and decontamination works"
+        #                    (Mid Yorkshire). Estates, not an instrument.
+        #   mattress*, bariatric, pressure area, patient handling, beds and associated
+        #                 -> "Dynamic Mattresses & Decontamination Services",
+        #                    Benmor bariatric equipment rental and decontamination,
+        #                    and NHS Supply Chain's "Pressure Area Care and Patient
+        #                    Handling Including Beds and Associated Products Rental
+        #                    and Decontamination". Bed and mattress cleaning is
+        #                    patient-handling's patch.
+        #   deep clean*, vehicles?
+        #                 -> "Specialist Clinical Deep Cleaning and Decontamination
+        #                    Services for ESTH NEPTS Vehicles". Ambulance cleaning.
+        #   dental        -> Betsi Cadwaladr's Mold, Colwyn Bay and Holyhead dental
+        #                    decontamination tenders and Somerset's "Infection
+        #                    control of dental autoclaves and washer disinfectors".
+        #                    Primary care dental decontamination is HTM 01-05, a
+        #                    different memorandum and a different service.
+        #   water treatment, reverse osmosis, water softeners?
+        #                 -> the renal and estates water rows named above.
+        #   linen, laundry -> HTM 01-04 decontamination of linen. A different
+        #                    memorandum and, in this data, an estates contract.
+        #   primary care  -> HTM 01-05 again, by its own name.
+        "exclude": (
+            r"\b(laborator\w*|incubators?|dishwashers?|skin decontamination|"
+            r"decontamination lotion|rsdl|decontamination tent|asbestos|"
+            r"decontamination works|mattress\w*|bariatric|pressure area|"
+            r"patient handling|beds? and associated|deep clean\w*|vehicles?|"
+            r"dental|water treatment|reverse osmosis|water softeners?|linen|"
+            r"laundry|primary care)\b"
+        ),
+        # 33191, sterilisation, disinfection and hygiene devices. It is the one CPV
+        # code specific to this patch, and it is claimed as CORROBORATION ONLY - the
+        # title still has to match. It appears on just one of the 45 matching award
+        # notices, and that thinness is the finding, not a defect: 50421 (repair of
+        # medical equipment) is the commonest code on these rows and is NOT claimed,
+        # because it is shared with every maintained device in the hospital. The rest
+        # of the scatter - 71318 and 71315 engineering consultancy, 45000 construction,
+        # 48000 and 48517 software, 72320 database services, 42924 cleaning plant,
+        # 90722 and 90733 environmental remediation, 85100 health services, 33140 and
+        # 33169 medical consumables and surgical instruments - is what a department
+        # with no procurement category of its own looks like in the CPV data.
+        "cpv": ("33191",),
+        # NO DRUG TARIFF PART. Nothing in Part IX reimburses a washer-disinfector,
+        # a tray wrap or a rigid container, and the panel carries no tariff rather
+        # than reaching for the nearest part.
+        "coverageNote": (
+            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. THERE IS NO NHS SUPPLY "
+            "CHAIN STERILE SERVICES CATEGORY. The three agreements above sit under "
+            "Medical and Surgical Consumables and Diagnostic Equipment and "
+            "Services, so no category filter could have produced this list and "
+            "none was used: the frameworks are matched by subject and the rule is "
+            "printed above so it can be judged. THIS PANEL SHARES ITS THREE "
+            "FRAMEWORKS AND ITS TAGGED COMPANIES WITH INFECTION PREVENTION AND "
+            "CONTROL, and nothing was taken off that page to build this one. A "
+            "company tagged for sterile services in the Hub's supplier directory "
+            "now appears on both, which is what a reprocessing supplier's market "
+            "actually looks like. WHAT WAS REFUSED, AND WHAT IT COST. Bare "
+            "'autoclave' is not in the award filter, because 52 of its matches in "
+            "this data are university and research-institute laboratory autoclaves "
+            "with nothing in the title to separate them from a sterile services "
+            "department; the cost here is near zero, because the genuine NHS "
+            "autoclave rows carry 'SSD' or 'sterile services' in the same title "
+            "and are caught by those: York's autoclave replacement project for "
+            "endoscopy and sterile services is on this panel for that reason, and "
+            "Bedfordshire's SSD autoclave cooling water chiller matches the rule "
+            "but is a tender notice with no supplier rather than an award, so it "
+            "is named here instead of counted. Bare 'reverse osmosis' and "
+            "'water treatment' "
+            "were refused although reverse osmosis water IS sterile services plant: "
+            "every hit in this data is renal dialysis water or an estates "
+            "water-safety contract, and the renal page holds them. Bare "
+            "'instrument set' and 'loan kit' were refused because the only match is "
+            "a theatre instrument rental, which this department processes but does "
+            "not buy. HTM 01-01, THE STANDARD THIS DEPARTMENT IS RUN TO, HAS ZERO "
+            "AWARD ROWS IN THIS DATA and is therefore not in the award filter at "
+            "all; it is carried instead as a sourced and quoted policy item in the "
+            "Hub's local intelligence store, read at NHS England's own Health "
+            "Technical Memoranda index, so the standard is on the page without "
+            "being faked into the procurement evidence. WHAT IS NOT HERE AT ALL: "
+            "primary care dental decontamination, which is HTM 01-05 and a "
+            "different service; decontamination of linen, which is HTM 01-04 and an "
+            "estates contract in this data; environmental and room decontamination, "
+            "which is infection prevention's Environmental Decontamination "
+            "agreement and is not claimed here; the flexible and rigid endoscopes "
+            "themselves, which are the scope and not the reprocessor and belong to "
+            "the colorectal, gastrointestinal and endoscopy page; and mass "
+            "casualty and CBRN decontamination, which is emergency preparedness. "
+            "NO OPEN TENDER MATCHED TODAY, which means no notice on this patch is "
+            "open for bidding in this feed, not that none was looked for."
+        ),
+    },
 }
 
 
@@ -8738,7 +8928,10 @@ SEED_TAG_TO_PANELS = {
     "orthotics": ["rehabilitation-prosthetics-and-orthotics"],
     "infection": ["infection-prevention-and-control"],
     "skin-prep": ["infection-prevention-and-control"],
-    "ssd": ["infection-prevention-and-control"],
+    # BOTH panels, not moved. A reprocessing supplier sells to the sterile
+    # services department and is part of the infection prevention market; taking
+    # "ssd" off IPC would have removed live companies from a published page.
+    "ssd": ["infection-prevention-and-control", "sterile-services"],
     "digital": ["digital-and-medical-it"],
     "it": ["digital-and-medical-it"],
     "cardiology": ["cardiology-and-cardiac-surgery"],

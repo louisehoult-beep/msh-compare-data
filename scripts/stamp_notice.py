@@ -178,6 +178,7 @@ REFS = {
     "speciality-panels/renal.json": "ETH-DAEFA4BE3",
     "speciality-panels/respiratory.json": "ETH-DE93237EE",
     "speciality-panels/sepsis-and-the-deteriorating-patient.json": "ETH-D5C0DA15A",
+    "speciality-panels/sterile-services.json": "ETH-D2CF868DA",
     "speciality-panels/stroke.json": "ETH-DFEBB3ED6",
     "speciality-panels/theatres-and-surgical.json": "ETH-DFD9DFDE8",
     "speciality-panels/tissue-viability-and-wound-care.json": "ETH-DCAF55138",
