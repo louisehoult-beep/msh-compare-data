@@ -96,6 +96,7 @@ REFS = {
     "framework-directory-extra.json": "ETH-D332ABFEE",
     "formulary-positions.json":         "ETH-D4BDA1D46",
     "hub-calendar.json":                "ETH-DB8887BA0",
+    "innovator-report.json":                                           "ETH-DCC876B19",
     "hub-search-index.json":   "ETH-D50A4C4E3",
     "interview-prep.json":     "ETH-D77050906",
     "nhssc-launch-briefs.json":    "ETH-DFB1984CE",

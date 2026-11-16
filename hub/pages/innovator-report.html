@@ -1,0 +1,6 @@
+<!-- wp:html -->
+<!-- Innovator Market Analysis Report (/medical-sales-hub/innovator-market-analysis-report/). Paste as the whole page body, exactly as here: the wp:html wrapper and no blank lines inside it stop WordPress adding paragraph tags. Every figure is drawn at load from data/innovator-report.json and the Hub's own data files by app/innovator-report.js. Plain ASCII, no double ampersand: WordPress rewrites a double ampersand in an inline script. Create as a CHILD of page 675 before publishing, read the six PMS ticks, run Hub/check_hub_page.py (CLAUDE.md rule 7). -->
+<div class="msh-inr"><div id="msh-innovator-report"></div>
+<script>(function(){function go(){fetch('https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/app/innovator-report.js',{cache:'no-cache'}).then(function(r){if(!r.ok){throw new Error(r.status);}return r.text();}).then(function(s){(new Function(s))();}).catch(function(){var m=document.getElementById('msh-innovator-report');if(m){m.innerHTML='The Innovator Market Analysis Report is temporarily unavailable. Please try again shortly.';}});}if(document.readyState==='complete'){go();}else{window.addEventListener('load',go);}})();</script>
+</div>
+<!-- /wp:html -->
