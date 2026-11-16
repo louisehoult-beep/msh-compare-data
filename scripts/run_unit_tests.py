@@ -162,6 +162,12 @@ RUN = [
     "test_my_hub_catalogue.py",
     "test_npm_finder.py",
     "test_my_hub_css.py",
+    # 16/11/2026. The panels' white cards must not inherit their text colour
+    # from the host page: the navy Frameworks band paints its descendants light,
+    # and a card that names no ink of its own goes out invisible. That shipped
+    # twice (08/10 .sp-li, 16/11 the Sources and freshness table). Static,
+    # stdlib only, no network, ~0.01s.
+    "test_speciality_panel_band_contrast.py",
     "test_nhssc_card.py",
     "test_numeric_id_division.py",
     "test_numeric_slug_detail.py",
