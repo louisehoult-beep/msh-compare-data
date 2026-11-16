@@ -33,7 +33,7 @@ import sys
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CAT = os.path.join(HERE, "hub", "my-hub-catalogue.json")
-ROLES = ["company", "rep", "clinical", "procurement", "recruit"]
+ROLES = ["company", "rep", "clinical", "procurement", "recruit", "innovator-early", "innovator-market"]
 # Pages app/hub-chrome.js adds to a profile's nav on the page (snippet 1331 is
 # not in the repo), so the live nav does not list them yet. Unioned in here so a
 # rebuild from the live nav does not drop them. Remove an entry once 1331 lists it.

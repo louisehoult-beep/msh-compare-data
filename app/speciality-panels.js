@@ -52,6 +52,13 @@
       '.msh .sp-rule p{font-size:12px;color:var(--dim);line-height:1.6;margin:8px 0 0;}',
       '.msh .sp-find{width:100%;max-width:340px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:13.5px;background:var(--panel);color:var(--ink);margin-bottom:14px;}',
       '.msh .sp-sec{margin-top:26px;}',
+      '.msh .sp-fresh{margin-top:4px;margin-bottom:22px;border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:10px;background:var(--panel);padding:14px 16px 6px;}',
+      '.msh .sp-fresh h4{font-size:11px;letter-spacing:1.1px;text-transform:uppercase;color:var(--ink);font-weight:700;margin:0 0 3px;}',
+      '.msh .sp-fresh .sp-fresh-lede{font-size:12px;color:var(--dim);line-height:1.6;margin:0 0 12px;}',
+      '.msh .sp-fresh td.sp-fresh-src{font-weight:700;color:var(--ink);white-space:nowrap;}',
+      '.msh .sp-fresh td.sp-fresh-when{white-space:nowrap;}',
+      '.msh .sp-age{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.3px;padding:2px 8px;border-radius:99px;border:1px solid var(--border);background:var(--panel2);color:var(--ink);}',
+      '.msh .sp-age-none{background:transparent;color:var(--dim);}',
       '.msh .sp-sec:first-child{margin-top:0;}',
       '.msh .sp-alt{font-size:11px;color:var(--dim);font-weight:400;margin-top:3px;line-height:1.45;}',
       '.msh .sp-li-g{font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:700;color:var(--dim);margin:16px 0 8px;}',
@@ -251,15 +258,112 @@
     mount.innerHTML = '<div class="empty-state">' + esc(why) + '</div>';
   }
 
+  /* Was printing the raw field name to members (`tenderHistory`,
+     `drugTariffViiia`). Same human labels as the freshness table, so the
+     definitions and the dates name a source the same way (16/11/2026). */
+  var RULE_LABELS = {
+    frameworks: 'Frameworks', awards: 'Awards', openTenders: 'Open tenders',
+    tenderHistory: 'Awards', frameworkAwards: 'Awards matched to a lot',
+    suppliers: 'Framework-named suppliers', directorySuppliers: 'Supplier directory',
+    drugTariff: 'Drug Tariff Part IX', drugTariffViiia: 'Drug Tariff Part VIIIA',
+    drugTariffMoves: 'Drug Tariff price moves',
+    discontinuedOnFormulary: 'Discontinued lines still on a formulary',
+    gpPrescribing: 'GP prescribing', hospitalPrescribing: 'Hospital prescribing',
+    mhraDsu: 'Drug Safety Updates', localIntel: 'Local intelligence',
+    digitalLane: 'Digital and health tech buying routes'
+  };
+  function ruleLabel(k) {
+    if (RULE_LABELS[k]) { return RULE_LABELS[k]; }
+    return String(k).replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/^./, function (c) { return c.toUpperCase(); });
+  }
   function ruleBlock(rules, keys) {
-    var out = '<details class="sp-rule"><summary>How this list was filtered</summary>';
+    var out = '<details class="sp-rule"><summary>How this list was filtered, and what each source is</summary>';
     for (var i = 0; i < keys.length; i++) {
       if (rules[keys[i]]) {
-        out += '<p><b>' + esc(keys[i]) + ':</b> ' + esc(rules[keys[i]]) + '</p>';
+        out += '<p><b>' + esc(ruleLabel(keys[i])) + ':</b> ' + esc(rules[keys[i]]) + '</p>';
       }
     }
     return out + '</details>';
   }
+  /* PER-SOURCE FRESHNESS (Lou, 16/11/2026, from the Health Innovation East
+     Midlands call). Every panel carries up to eleven source dates in
+     `dataAsOf`; until today five of them were concatenated into one dimmed
+     footnote at the foot of the page. A member could not tell which number on
+     the page rested on which source, or how old it was. These labels say what
+     each source is and who publishes it; the date and the age are read
+     straight off the data, so nothing here is a new claim. */
+  var SOURCE_META = [
+    ['frameworks', 'Frameworks', 'The buying routes on this patch, from each framework owner\'s own published list.'],
+    ['tenderHistory', 'Awards', 'Contract award notices, from Find a Tender and Contracts Finder.'],
+    ['frameworkAwards', 'Awards matched to a lot', 'Those awards matched to a named framework lot.'],
+    ['openTenders', 'Open tenders', 'Find a Tender notices still open to bid.'],
+    ['drugTariff', 'Drug Tariff Part IX', 'Reimbursement prices published by the NHS Business Services Authority (NHSBSA).'],
+    ['drugTariffViiia', 'Drug Tariff Part VIIIA', 'Drug prices published by the NHS Business Services Authority (NHSBSA).'],
+    ['supplierDirectory', 'Supplier directory', 'The Hub supplier index, built from framework supplier lists and award notices.'],
+    ['localIntel', 'Local intelligence', 'Board papers, committee minutes and trust notices read on this patch.'],
+    ['gpPrescribing', 'GP prescribing', 'The English Prescribing Dataset, published by the NHS Business Services Authority (NHSBSA).'],
+    ['hospitalPrescribing', 'Hospital prescribing', 'Secondary care medicines data, published by the NHS Business Services Authority (NHSBSA).'],
+    ['mhraDsu', 'Drug Safety Updates', 'GOV.UK Drug Safety Updates from the Medicines and Healthcare products Regulatory Agency (MHRA), by therapeutic area.']
+  ];
+  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+                'August', 'September', 'October', 'November', 'December'];
+
+  /* The eleven dates arrive in three shapes: 2026-11-10, a full timestamp, and
+     15/11/2026. Parsed here rather than shown raw, so one panel does not print
+     three date formats. Returns null when there is nothing to show. */
+  function asDate(v) {
+    if (!v) { return null; }
+    var s = String(v), m;
+    m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s);
+    if (m) { return new Date(Date.UTC(+m[1], +m[2] - 1, +m[3])); }
+    m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(s);
+    if (m) { return new Date(Date.UTC(+m[3], +m[2] - 1, +m[1])); }
+    return null;
+  }
+  function longDate(d) { return d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()] + ' ' + d.getUTCFullYear(); }
+  function ageDays(d) {
+    var now = new Date();
+    var today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+    return Math.round((today - d.getTime()) / 86400000);
+  }
+  function ageWords(n) {
+    if (n < 0) { return 'dated ahead'; }
+    if (n === 0) { return 'today'; }
+    if (n === 1) { return 'yesterday'; }
+    return n + ' days old';
+  }
+
+  function freshnessBlock(asOf) {
+    var a = asOf || {}, rows = '', i, key, dt, carried = 0, oldest = null;
+    for (i = 0; i < SOURCE_META.length; i++) {
+      key = SOURCE_META[i][0];
+      if (!Object.prototype.hasOwnProperty.call(a, key)) { continue; }
+      dt = asDate(a[key]);
+      rows += '<tr><td class="sp-fresh-src">' + esc(SOURCE_META[i][1]) + '</td>' +
+              '<td>' + esc(SOURCE_META[i][2]) + '</td>';
+      if (dt) {
+        carried++;
+        var n = ageDays(dt);
+        if (oldest === null || n > oldest) { oldest = n; }
+        rows += '<td class="sp-fresh-when">Live as of ' + esc(longDate(dt)) + '</td>' +
+                '<td class="sp-fresh-when"><span class="sp-age">' + esc(ageWords(n)) + '</span></td>';
+      } else {
+        rows += '<td class="sp-fresh-when">Not carried on this patch</td>' +
+                '<td class="sp-fresh-when"><span class="sp-age sp-age-none">&mdash;</span></td>';
+      }
+      rows += '</tr>';
+    }
+    if (!rows) { return ''; }
+    var lede = 'Each block on this page names the source it rests on and the date that source was last read. ' +
+               carried + ' source' + (carried === 1 ? '' : 's') + ' carried here' +
+               (oldest === null ? '' : ', the oldest ' + ageWords(oldest)) + '.';
+    return '<div class="sp-fresh"><h4>Sources and freshness</h4>' +
+           '<p class="sp-fresh-lede">' + esc(lede) + '</p>' +
+           '<div class="sp-scroll"><table class="sp-tbl">' +
+           '<tr><th>Source</th><th>What it is</th><th>Live as of</th><th>Age</th></tr>' +
+           rows + '</table></div></div>';
+  }
+
 
   function renderFrameworks(d) {
     if (!FW) { return; }
@@ -276,6 +380,7 @@
     h += '<div class="sp-tile"><b>' + soon + '</b><span>Expiring within a year</span></div>';
     h += '<div class="sp-tile"><b>' + d.counts.awardsMatched + '</b><span>Awards recorded</span></div>';
     h += '</div>';
+    h += freshnessBlock(d.dataAsOf);
 
     /* FRAMEWORKS. A speciality with none gets an honest empty state, not a table
        with only a header row: obesity and weight management genuinely has no NHS
@@ -691,11 +796,8 @@
       h += '</div>';
     }
 
-    h += '<div class="sp-meta">Frameworks as at ' + esc(d.dataAsOf.frameworks || 'not stated') +
-         ' &middot; awards as at ' + esc(d.dataAsOf.tenderHistory || 'not stated') +
-         ' &middot; Drug Tariff as at ' + esc(d.dataAsOf.drugTariff || 'not stated') +
-         (d.dataAsOf.gpPrescribing ? ' &middot; GP prescribing built ' + esc(d.dataAsOf.gpPrescribing) : '') +
-         (d.dataAsOf.mhraDsu ? ' &middot; MHRA as at ' + esc(d.dataAsOf.mhraDsu) : '') + '.</div>';
+    h += '<div class="sp-meta">Every source on this panel, what it is and the date it is live as of, ' +
+         'is listed under <b>Sources and freshness</b> at the top of this section.</div>';
     h += ruleBlock(d.rules, ['frameworks', 'awards', 'openTenders', 'digitalLane', 'drugTariff', 'drugTariffMoves', 'discontinuedOnFormulary', 'drugTariffViiia', 'gpPrescribing', 'mhraDsu', 'localIntel']);
     FW.innerHTML = h;
   }
