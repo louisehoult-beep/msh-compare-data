@@ -106,6 +106,10 @@ ELSEWHERE = {
 # second; the matcher case needs node, which ubuntu-latest has. RUN: it has no
 # workflow of its own.
 RUN = [
+    # 16/11/2026, the Wales buyer map: the seven Local Health Boards, NWSSP as the
+    # route to market, and the Stakeholder Mapper's Wales branch. Static (reads the
+    # built files and slices app/mst-logic.js), no network.
+    "test_wales_buyer_map.py",
     # My Hub search modal mount in app/hub-search.js (my-hub task 9). Static, no network.
     "test_hub_search_embed.py",
     "test_digital_lane.py",              # 20/10/2026, digital health lane + Federated Data Platform profile

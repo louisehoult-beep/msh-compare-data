@@ -91,7 +91,11 @@ ICB_CODES = {
     'QWE','Z9B2Z','QRL','QKS','S9B9J','S0E4D','QOX','QUY','QT6','QJK','QVV',
     'QR1','QSL',
 }
-KINDS = {None, 'Ambulance service', 'Mental health', 'Community'}
+# 'Local Health Board' added 16/11/2026 with the seven Welsh boards. It is the
+# one sector the ODS register PROVES rather than leaves to the name: the primary
+# role RO142 says it. app/mst-logic.js groups this label in fillTrust's `order`.
+KINDS = {None, 'Ambulance service', 'Mental health', 'Community',
+         'Local Health Board'}
 DEPARTMENTAL = re.compile(
     r"\b(team|dept|department|office|procurement|purchasing|supplies|supply|"
     r"contracts?|commercial|admin|helpdesk|mailbox|enquir|info|general|shared|"
@@ -413,7 +417,105 @@ def check_trust_map(tm):
                 FAIL("trustmap", "%s has an ICB code but no ICB name" % t.get("n"))
         elif t.get("icb"):
             FAIL("trustmap", "%s is tagged %s but carries an ICB code" % (t.get("n"), t.get("nation")))
+    # Wales, added 16/11/2026. Seven Local Health Boards and three NHS Trusts, and
+    # the count is checked because the failure mode is silent: a crawl that drops
+    # RO142 leaves app/mst-logic.js with a Wales picker whose every board entry
+    # resolves to nothing, and no page errors — Wales just quietly goes empty.
+    boards = [t for t in trusts if t.get("kind") == "Local Health Board"]
+    welsh = [t for t in trusts if t.get("nation") == "Wales"]
+    if len(boards) != 7:
+        FAIL("trustmap", "%d Welsh Local Health Board(s); expected 7. Wales has had "
+                         "seven since 01/04/2019. If a boundary change has landed, "
+                         "update this count AND the floor in scripts/refresh_trusts.py "
+                         "together." % len(boards))
+    if len(welsh) < 10:
+        FAIL("trustmap", "%d Welsh organisation(s); expected at least 10 (7 health "
+                         "boards, 3 NHS trusts)." % len(welsh))
+    for t in boards:
+        if t.get("nation") != "Wales":
+            FAIL("trustmap", "%s is a Local Health Board but is tagged nation %r. The "
+                             "role RO142 is Welsh-only." % (t.get("n"), t.get("nation")))
     return set(codes)
+
+
+# --------------------------------------------------------------------------
+# 3a. WALES BUYER MAP (16/11/2026)
+# --------------------------------------------------------------------------
+def check_wales_buyer_map(doc, trust_codes):
+    """data/wales-buyer-map.json — who buys in Wales and how a supplier reaches
+    them. Built by scripts/build_wales_buyer_map.py.
+
+    What this refuses, and why each one is the failure that would actually
+    happen rather than a tidiness rule:
+
+    * An organisation whose ODS code is not in trust-map.json. The two files are
+      built from the same register by two scripts, and a code in one and not the
+      other means one of them silently fell behind. The Hub joins them by code.
+    * A procurement-route field with no source URL. Every fact on this page is
+      read at NWSSP's own site; one that loses its source is indistinguishable
+      from one somebody remembered.
+    * A buyer-name spelling with no award notice behind it. The spellings exist
+      so a rep searching "NWSSP" finds all 243 notices. A spelling nothing was
+      awarded under is a guess at how a buyer MIGHT be written, which is exactly
+      what this dataset must not contain.
+    """
+    if doc is None:
+        FAIL("wales", "data/wales-buyer-map.json is missing — the Wales buyer map "
+                      "cannot render and app/mst-logic.js's Wales branch has no "
+                      "source behind its NWSSP note.")
+        return
+    if not doc.get("rule"):
+        FAIL("wales", "wales-buyer-map.json states no derivation rule (root rule 14).")
+    if not doc.get("sources"):
+        FAIL("wales", "wales-buyer-map.json lists no sources.")
+
+    orgs = doc.get("organisations") or []
+    if len(orgs) < 10:
+        FAIL("wales", "%d Welsh organisation(s); expected at least 10." % len(orgs))
+    seen = set()
+    for o in orgs:
+        code = o.get("code")
+        if not code:
+            FAIL("wales", "%r has no ODS code." % o.get("n"))
+            continue
+        if code in seen:
+            FAIL("wales", "%s: duplicate ODS code." % code)
+        seen.add(code)
+        if o.get("nation") != "Wales":
+            FAIL("wales", "%s is in the Wales map but tagged nation %r."
+                          % (code, o.get("nation")))
+        if not o.get("source"):
+            FAIL("wales", "%s carries no source URL." % code)
+        if trust_codes and code not in trust_codes:
+            FAIL("wales", "%s (%s) is in wales-buyer-map.json but not in "
+                          "trust-map.json. Both are built from the ODS register; one "
+                          "of the two crawls has fallen behind, and the Hub joins "
+                          "these files by code." % (code, o.get("n")))
+
+    route = doc.get("procurementRoute") or {}
+    if not route.get("shortName"):
+        FAIL("wales", "wales-buyer-map.json names no procurement route. NWSSP is the "
+                      "whole point of the file.")
+    for field in ("whatItIs", "buysOnBehalfOf", "frameworkScope", "frameworkTerm",
+                  "smes"):
+        if route.get(field) and not route.get(field + "Source"):
+            FAIL("wales", "procurementRoute.%s has no %sSource. A fact read at a "
+                          "supplier-facing page keeps the URL it was read at."
+                          % (field, field))
+    if not (route.get("advertisedOn") or {}).get("url"):
+        FAIL("wales", "procurementRoute.advertisedOn has no url. Wales advertises on "
+                      "Sell2Wales and a supplier watching only Find a Tender misses "
+                      "the pipeline — that is the single most useful fact here.")
+    if not route.get("checkedAt"):
+        FAIL("wales", "procurementRoute carries no checkedAt date.")
+
+    for e in (doc.get("buyerNames") or []):
+        if not e.get("name"):
+            FAIL("wales", "a buyerNames entry has no name.")
+        elif not e.get("awards"):
+            FAIL("wales", "buyer spelling %r has no award notice behind it. These are "
+                          "read from captured notices, never guessed at."
+                          % e.get("name"))
 
 
 # --------------------------------------------------------------------------
@@ -7130,6 +7232,7 @@ def main():
     retention = None
 
     trust_codes = check_trust_map(load("trust-map.json"))
+    check_wales_buyer_map(load("wales-buyer-map.json"), trust_codes)
     check_icb_watch(load("icb-watch.json"))
     check_npm_finder(load("npm-finder.json"), load("frameworks.json"))
     n = check_contacts(load("trust-contacts.json"), trust_codes, blocked, retention) or 0

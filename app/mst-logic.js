@@ -47,6 +47,54 @@
      NOTE: a naive ODS query returns 48 - all 12 abolished ICBs still show Status:Active for ~6
      months after their 31/03/2026 legal end. Filter on legal end date, never on status. */
   var GEOS=[{r:'East of England',n:['Central East','Essex','Norfolk and Suffolk']},{r:'London',n:['North East London','South East London','South West London','West and North London']},{r:'Midlands',n:['Birmingham and Solihull','Black Country','Coventry and Warwickshire','Derby and Derbyshire','Herefordshire and Worcestershire','Leicester, Leicestershire and Rutland','Lincolnshire','Northamptonshire','Nottingham and Nottinghamshire','Shropshire, Telford and Wrekin','Staffordshire and Stoke-on-Trent']},{r:'North East and Yorkshire',n:['Humber and North Yorkshire','North East and North Cumbria','South Yorkshire','West Yorkshire']},{r:'North West',n:['Cheshire and Merseyside','Greater Manchester','Lancashire and South Cumbria']},{r:'South East',n:['Hampshire and Isle of Wight','Kent and Medway','Surrey and Sussex','Thames Valley']},{r:'South West',n:['Bath and North East Somerset, Swindon and Wiltshire','Bristol, North Somerset and South Gloucestershire','Cornwall and the Isles of Scilly','Devon','Dorset','Gloucestershire','Somerset']}];
+  /* WALES (16/11/2026). Wales has no ICBs, so it cannot be an entry in the list
+     above: the seven Local Health Boards are both the commissioner and the
+     provider for their area, and in practice almost everything is bought by one
+     national service, NWSSP, on behalf of all of them.
+
+     Before this, Wales was unreachable in this tool. trust-map.json did carry
+     Velindre, Welsh Ambulance and Public Health Wales, but the geography picker
+     only ever offered "NHS <name> ICB" and trustsInICB() matched on icbName,
+     which is null for every Welsh row. So the three Welsh organisations were in
+     the data and could not be selected, and the two places that print a
+     commissioner printed "NHS null ICB" for them if they ever were. A rep
+     selling into Wales got England's answer or nothing.
+
+     Board names here are the names the award notices and the boards' own sites
+     use ("University Health Board"), not the ODS register's "LOCAL HEALTH
+     BOARD". data/wales-buyer-map.json records both and ties them together by
+     ODS code. nation:'Wales' is what every Wales branch below tests. */
+  var GEOS_WALES={r:'Wales (no ICBs — health boards buy via NWSSP)',nation:'Wales',
+    n:['All Wales — NWSSP and the national trusts',
+       'Aneurin Bevan University Health Board',
+       'Betsi Cadwaladr University Health Board',
+       'Cardiff and Vale University Health Board',
+       'Cwm Taf Morgannwg University Health Board',
+       'Hywel Dda University Health Board',
+       'Powys Teaching Health Board',
+       'Swansea Bay University Health Board']};
+  var WALES_ALL='All Wales — NWSSP and the national trusts';
+  /* The stem that ties a picker entry to its ODS row in trust-map.json. Same
+     stems as ORG_NAME_STEMS in scripts/build_wales_buyer_map.py, for the same
+     reason: ODS calls these boards something nobody else calls them. */
+  var WALES_STEMS={'Aneurin Bevan University Health Board':'aneurin bevan',
+    'Betsi Cadwaladr University Health Board':'betsi cadwaladr',
+    'Cardiff and Vale University Health Board':'cardiff',
+    'Cwm Taf Morgannwg University Health Board':'cwm taf',
+    'Hywel Dda University Health Board':'hywel dda',
+    'Powys Teaching Health Board':'powys',
+    'Swansea Bay University Health Board':'swansea bay'};
+  /* NWSSP buys for every board and trust in Wales, so the three national trusts
+     are shown alongside whichever board is picked rather than hidden behind a
+     separate choice. Velindre is in the list because NWSSP is hosted by it. */
+  var WALES_NATIONAL=['velindre','welsh ambulance','public health wales'];
+  var NWSSP_NOTE='Wales has no ICB. This health board is its own commissioner, '
+    +'and almost all of its buying goes through NHS Wales Shared Services '
+    +'Partnership (NWSSP) Procurement Services, hosted by Velindre University '
+    +'NHS Trust, on behalf of every health board and trust in Wales. '
+    +'Frameworks and contracts are advertised on Sell2Wales, not on Find a '
+    +'Tender alone — a supplier watching only Find a Tender misses the '
+    +'Welsh pipeline. Enquiries: ProcurementServicesenquiries@wales.nhs.uk.';
   /* Three legal entities, one buying centre - Board in Common since 20/11/2025, one shared exec team. */
   var BUYING_CENTRE={'NHS Derby and Derbyshire ICB':'DLN','NHS Lincolnshire ICB':'DLN','NHS Nottingham and Nottinghamshire ICB':'DLN'};
   var BUYING_CENTRE_NOTE='Meets as a Board in Common with Derby and Derbyshire, Lincolnshire and Nottingham and Nottinghamshire ICBs — three legal entities, one shared executive team. Work them as one account, not three.';
@@ -117,7 +165,20 @@
     return P.filter(function(p){return wanted.indexOf(p.s)!==-1;});
   }
   function currentProduct(){var l=productsFor(state.spec);return l[state.prodIdx]||l[0]||{n:'your product',p:'the problem you solve',s:state.spec||'',t:'dev',area:''};}
-  function fillGeo(){var h='';GEOS.forEach(function(g){h+='<optgroup label="'+g.r+'">';g.n.forEach(function(nm){h+='<option>NHS '+nm+' ICB</option>';});h+='</optgroup>';});$('m-geo').innerHTML=h;fixNote();}
+  function fillGeo(){var h='';GEOS.forEach(function(g){h+='<optgroup label="'+g.r+'">';g.n.forEach(function(nm){h+='<option>NHS '+nm+' ICB</option>';});h+='</optgroup>';});
+    /* Wales options carry the board's own name. Wrapping them in "NHS ... ICB"
+       would assert a commissioner structure Wales does not have. */
+    h+='<optgroup label="'+esc(GEOS_WALES.r)+'">';
+    GEOS_WALES.n.forEach(function(nm){h+='<option>'+esc(nm)+'</option>';});
+    h+='</optgroup>';
+    $('m-geo').innerHTML=h;fixNote();}
+  /* True when the current picker value is one of the Wales entries. Tested by
+     exact match against the Wales list, never by looking for the word "Wales"
+     in the string: "NHS Wales" would be one typo away from dragging English
+     ICBs down the Welsh branch. */
+  function geoIsWales(v){var val=v==null?($('m-geo')?$('m-geo').value:''):v;
+    for(var i=0;i<GEOS_WALES.n.length;i++){if(GEOS_WALES.n[i]===val)return true;}
+    return false;}
   /* The on-page note lives in WP page 1109's content, not here, and still read
      "42 ICBs ... consolidating into roughly 26 clusters across 2026-27" - both
      wrong since 01/04/2026. The note sits inside a 26,000-character block, so
@@ -353,8 +414,37 @@
     return ($('m-geo').value||'').replace(/^NHS\s+/,'').replace(/\s+ICB$/,'').trim();
   }
   function trustsInICB(){
+    if(geoIsWales())return trustsInWales($('m-geo')?$('m-geo').value:'');
     var want=icbNameFromGeo();
     return TRUSTS.filter(function(t){return t.icbName===want;});
+  }
+  /* The Welsh organisations behind a Wales picker entry. A board entry returns
+     that board plus the three national trusts, because NWSSP buys for all of
+     them and a rep working a board will meet the national trusts on the same
+     frameworks. "All Wales" returns every Welsh row. Matching is on the ODS
+     name via the stems above; nation comes from trust-map.json, which takes it
+     from the ODS register's own country field. */
+  function trustsInWales(val){
+    var welsh=TRUSTS.filter(function(t){return t.nation==='Wales';});
+    if(val===WALES_ALL)return welsh;
+    var stem=WALES_STEMS[val];
+    if(!stem)return welsh;
+    return welsh.filter(function(t){
+      var n=(t.n||'').toLowerCase();
+      if(n.indexOf(stem)>-1)return true;
+      for(var i=0;i<WALES_NATIONAL.length;i++){
+        if(n.indexOf(WALES_NATIONAL[i])>-1)return true;}
+      return false;
+    });
+  }
+  /* ONE PLACE THAT DECIDES WHAT A COMMISSIONER LINE SAYS. Three separate places
+     used to build it by concatenation, and for a Welsh organisation two of them
+     produced "NHS  ICB" and the account sheet produced the literal string
+     "NHS null ICB", because icbName is null for every Welsh row. */
+  function commissionerOf(t){
+    if(!t)return '';
+    if(t.nation==='Wales')return 'its own commissioner (Wales has no ICBs) · buys via NWSSP';
+    return t.icbName?('commissioned by NHS '+t.icbName+' ICB'):'commissioner not established';
   }
   function selectedTrust(){
     if(TRUST_OVERRIDE) return TRUST_OVERRIDE;   /* territory pack renders trusts that are not selected */
@@ -380,9 +470,12 @@
     /* kind===null means ODS gave no sector and the name did not prove one — the
        group is honestly "and other", not silently "acute". See kind() in
        scripts/refresh_trusts.py for why "Healthcare"/"Partnership" can't be rules. */
-    var groups={}, order=['Acute and other trusts','Mental health','Community','Ambulance service'];
+    var groups={}, order=['Local Health Board','Acute and other trusts','Mental health','Community','Ambulance service'];
     list.forEach(function(t){var k=t.kind||'Acute and other trusts';(groups[k]=groups[k]||[]).push(t);});
-    var h='<option value="">— Whole ICB (no single trust) —</option>';
+    var wales=geoIsWales();
+    var h='<option value="">'+(wales
+      ? '— All of these (no single organisation) —'
+      : '— Whole ICB (no single trust) —')+'</option>';
     order.forEach(function(k){
       if(!groups[k])return;
       h+='<optgroup label="'+esc(k)+'">';
@@ -391,7 +484,8 @@
       h+='</optgroup>';
     });
     if(!list.length){
-      h='<option value="">'+(TRUST_LOAD_ERR?'Trust list unavailable':'No trusts listed for this ICB')+'</option>';
+      h='<option value="">'+(TRUST_LOAD_ERR?'Trust list unavailable'
+        :(wales?'No Welsh organisations listed for this board':'No trusts listed for this ICB'))+'</option>';
     }
     el.innerHTML=h;
     if(keep){el.value=keep;}
@@ -406,15 +500,25 @@
     }
     if(!t){
       var n=trustsInICB().length;
-      if(n)el.innerHTML+='<div class="mst__tline" style="color:var(--muted)">'+n
-        +' NHS trust'+(n===1?'':'s')+' sit'+(n===1?'s':'')+' in this ICB — pick one above to drill the map '
-        +'down to a single account, with name routes, LinkedIn searches and a printable account sheet.</div>';
+      if(n){
+        var wal=geoIsWales();
+        el.innerHTML+='<div class="mst__tline" style="color:var(--muted)">'+n
+          +(wal?(' Welsh NHS organisation'+(n===1?'':'s')+' sit'+(n===1?'s':'')+' here')
+               :(' NHS trust'+(n===1?'':'s')+' sit'+(n===1?'s':'')+' in this ICB'))
+          +' — pick one above to drill the map '
+          +'down to a single account, with name routes, LinkedIn searches and a printable account sheet.</div>';
+        if(wal)el.innerHTML+='<div class="mst__tline" style="color:var(--muted)"><b>Buying route:</b> '
+          +esc(NWSSP_NOTE)+'</div>';
+      }
       return;
     }
     var h='<div class="mst__tline"><b>'+esc(t.n)+'</b> · ODS '+esc(t.code)
       +(t.town?' · '+esc(t.town):'')+(t.postcode?' '+esc(t.postcode):'')
-      +(t.kind?' · '+esc(t.kind):'')+' · commissioned by <b>NHS '+esc(t.icbName)+' ICB</b>'
+      +(t.kind?' · '+esc(t.kind):'')+' · <b>'+esc(commissionerOf(t))+'</b>'
       +(t.region?' ('+esc(t.region)+')':'')+'</div>';
+    if(t.nation==='Wales'){
+      h+='<div class="mst__tline" style="color:var(--muted)"><b>Buying route:</b> '+esc(NWSSP_NOTE)+'</div>';
+    }
     if(t.bc==='DLN'){
       h+='<div class="mst__tline" style="color:var(--muted)"><b>Buying centre:</b> '+BUYING_CENTRE_NOTE+'</div>';
     }
@@ -674,7 +778,7 @@
                community are provable from the name, so the rest say so rather
                than printing a blank the reader has to interpret. It is NOT a
                synonym for acute: guessing that was wrong about a fifth of trusts. */
-            kind:t?(t.kind||'Sector not established'):'', icb:t?('NHS '+t.icbName+' ICB'):$('m-geo').value,
+            kind:t?(t.kind||'Sector not established'):'', icb:t?commissionerOf(t):$('m-geo').value,
             region:t?(t.region||''):'',
             bc:(t&&t.bc==='DLN')?BUYING_CENTRE_NOTE:'',
             product:p.n, spec:p.area, problem:p.p,
@@ -1226,7 +1330,7 @@
         var rows=sheetRows(p,s);
         body+='<div class="acct"><h1>'+esc(tr.n)+'</h1>'
           +'<p class="meta">ODS '+esc(tr.code)+(tr.town?' · '+esc(tr.town):'')
-          +(tr.kind?' · '+esc(tr.kind):'')+' · NHS '+esc(tr.icbName)+' ICB'
+          +(tr.kind?' · '+esc(tr.kind):'')+' · '+esc(commissionerOf(tr))
           +' &nbsp;|&nbsp; <b>'+esc(p.n)+'</b> · '+esc(p.area)
           +' &nbsp;|&nbsp; Rep: ____________  Prepared: '+today()+'</p>';
         body+=buildDiagram(p,s);

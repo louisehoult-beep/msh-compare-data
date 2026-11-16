@@ -228,7 +228,8 @@ own trust picker, styles and panels, so nothing on WP page 1109 needs editing.
 
 | File | What it drives |
 |---|---|
-| `data/trust-map.json` | 202 legally-live NHS trusts, each with the ICB that commissions it (ODS, weekly) |
+| `data/trust-map.json` | 212 legally-live NHS organisations — 202 English trusts with the ICB that commissions each, plus Wales's 7 Local Health Boards and 3 NHS trusts (ODS, weekly) |
+| `data/wales-buyer-map.json` | Who buys in Wales and how a supplier reaches them: the 10 Welsh NHS organisations, NWSSP as the national procurement route, and every spelling of a Welsh buyer in the captured award notices (ODS + nwssp.nhs.wales + Find a Tender) |
 | `data/trust-contacts.json` | Named contacts on each trust's own Find a Tender notices (daily) |
 | `data/people-moves.json` | Observed changes of named contact — evidence, never an inferred appointment |
 

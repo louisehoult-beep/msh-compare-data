@@ -26,6 +26,27 @@ Writes two files from ONE crawl:
 
 Welsh trusts (Velindre, Welsh Ambulance, Public Health Wales) are legally live
 but have no ICB — Wales has no ICBs. Kept, tagged nation 'Wales', icb null.
+
+4. WALES BUYS THROUGH HEALTH BOARDS, NOT TRUSTS (added 16/11/2026). Until now
+   this crawl asked ODS for RO197 and RO107 only, so the whole of Welsh
+   purchasing was represented by three national trusts and the seven Local
+   Health Boards that actually buy — Betsi Cadwaladr, Hywel Dda, Swansea Bay,
+   Cardiff and Vale, Cwm Taf Morgannwg, Aneurin Bevan and Powys — appeared
+   nowhere on the Hub. Their ODS primary role is RO142 (LOCAL HEALTH BOARD),
+   now in LIST_URLS.
+
+   NOT RO144 (WELSH LOCAL HEALTH BOARD), which is the role the name suggests and
+   is the wrong one: checked 16/11/2026, RO144 returns ZERO active
+   organisations. Every live Welsh board is filed under RO142.
+
+5. NATION COMES FROM THE REGISTER, NOT FROM "HAS NO ICB" (changed 16/11/2026).
+   This used to read `welsh = icb is None`, which is a guess that happened to
+   hold while the only ICB-less rows were Welsh. It printed a warning for
+   anything else and would have mislabelled a Scottish or Northern Irish body,
+   or an English trust whose ICB relationship lapsed, as Welsh. The ODS record
+   carries the answer: GeoLoc.Location.Country, which reads WALES for all ten
+   Welsh organisations. The warning below now fires on a row the register calls
+   neither England nor Wales, which is a real anomaly rather than a guess.
 """
 import json, re, urllib.request, concurrent.futures, datetime, sys
 
@@ -41,7 +62,7 @@ import json, re, urllib.request, concurrent.futures, datetime, sys
 #    trust-like primary role, add it here rather than to a second crawl.
 LIST_URLS = [("https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations"
               "?PrimaryRoleId=%s&Status=Active&Limit=1000") % r
-             for r in ('RO197', 'RO107')]
+             for r in ('RO197', 'RO107', 'RO142')]
 CFG_PATH = "data/prep-config.json"
 MAP_PATH = "data/trust-map.json"
 
@@ -127,6 +148,17 @@ def kind(name):
     return None
 
 
+def kind_for(name, primary_role):
+    """A Welsh Local Health Board is a sector in its own right, and it is the one
+    sector the ODS register DOES prove: the primary role RO142 says it. Every
+    other sector still comes from the name and still refuses to guess. Added
+    16/11/2026 with the Welsh boards; app/mst-logic.js groups this label and
+    verify.py's KINDS allows it."""
+    if primary_role == 'RO142':
+        return 'Local Health Board'
+    return kind(name)
+
+
 def fetch_detail(o):
     """Returns None for a trust that has legally ended (see filter 1 above)."""
     try:
@@ -144,14 +176,22 @@ def fetch_detail(o):
         if t.get('PrimaryRoleId', {}).get('id') == 'RO261':
             icb = t['OrgId']['extension']
             break
-    town = (r.get('GeoLoc', {}).get('Location', {}) or {}).get('Town', '').title()
+    loc = (r.get('GeoLoc', {}).get('Location', {}) or {})
+    town = loc.get('Town', '').title()
     icb_name, region = ICB.get(icb, (None, None))
-    welsh = icb is None
+    # See note 5 in the module docstring: the register's own country field, not
+    # "has no ICB link".
+    country = (loc.get('Country') or '').strip().upper()
+    welsh = country == 'WALES'
+    primary = next((x['id'] for x in (r.get('Roles') or {}).get('Role', [])
+                    if x.get('primaryRole')), None)
     return {'n': clean(o['Name']), 'code': o['OrgId'], 'town': town,
-            'postcode': o.get('PostCode', ''), 'kind': kind(o['Name']),
+            'postcode': o.get('PostCode', ''),
+            'kind': kind_for(o['Name'], primary),
             'icb': icb, 'icbName': icb_name,
             'region': region or ('Wales' if welsh else None),
             'nation': 'Wales' if welsh else 'England',
+            'odsCountry': country or None,
             'bc': BUYING_CENTRE.get(icb)}
 
 
@@ -170,12 +210,23 @@ def main():
     if len(live) < 180:
         raise SystemExit("ABORT: only %d legally-live trusts after filtering (expected ~210+) — "
                          "refusing to shrink the directory." % len(live))
-    stray = [e['n'] for e in live if e['nation'] == 'Wales' and 'WALES' not in e['n'].upper()
-             and 'VELINDRE' not in e['n'].upper()]
+    # The register says WALES or it says ENGLAND. Anything else is an anomaly
+    # worth a human look, not something to label by guesswork. This replaced a
+    # warning that fired on "no ICB link and the name does not say Wales", which
+    # was a guess about a guess.
+    stray = [(e['n'], e['odsCountry']) for e in live
+             if (e['odsCountry'] or '') not in ('ENGLAND', 'WALES')]
     if stray:
-        print("WARNING: %d legally-live trusts with no ICB link that are not obviously Welsh — "
-              "check before trusting their region: %s" % (len(stray), ', '.join(stray[:10])),
+        print("WARNING: %d legally-live organisation(s) whose ODS country is neither "
+              "ENGLAND nor WALES — they are tagged England by default, so check them "
+              "before trusting the nation or region: %s"
+              % (len(stray), ', '.join('%s (%r)' % s for s in stray[:10])),
               file=sys.stderr)
+    boards = [e for e in live if e['kind'] == 'Local Health Board']
+    if len(boards) < 7:
+        raise SystemExit("ABORT: only %d Welsh Local Health Board(s) (expected 7). Wales has "
+                         "had seven since 01/04/2019; refusing to shrink Wales coverage."
+                         % len(boards))
 
     live.sort(key=lambda e: (0 if e['kind'] is None else 1, e['n']))
     today = datetime.date.today().strftime('%d/%m/%Y')
