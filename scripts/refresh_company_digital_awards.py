@@ -53,6 +53,7 @@ SEED = os.path.join(ROOT, "data", "supplier-seed.json")
 LANE = os.path.join(ROOT, "data", "digital-lane.json")
 MEDICAL = os.path.join(ROOT, "data", "company-awards.json")
 OUT = os.path.join(ROOT, "data", "company-digital-awards.json")
+FRAMEWORKS = os.path.join(ROOT, "data", "digital-frameworks.json")
 
 SECTION_RULE = (
     "Software and IT notices only. Each row is one supplier named on one Find a Tender "
@@ -123,7 +124,67 @@ def medical_keys(medical):
     return keys
 
 
-def build(seed, lane, medical, previous):
+def framework_index(frameworks):
+    """{normalised key: framework record} from data/digital-frameworks.json.
+
+    Keyed on the agreement reference AND on the agreement name, because a notice
+    states one or the other and sometimes only the name: West Hertfordshire's award
+    says "via G-Cloud 12 Digital Marketplace ID ... Framework" and gives no RM
+    number, so the name is the only key it can be matched on.
+    """
+    index = {}
+    for f in (frameworks or {}).get("frameworks") or []:
+        for key in (f.get("reference"), f.get("name")):
+            k = str(key or "").strip().casefold()
+            if k:
+                index.setdefault(k, f)
+    return index
+
+
+def attach_framework(row, index):
+    """Add the framework's own status and term to a row that states its route.
+
+    WHY (16/11/2026). The route a call-off was bought through is only half the
+    fact. The half a rep acts on is whether that framework is still open: a
+    call-off on a closed agreement runs to its own end date and nothing on it rolls
+    forward, so the contract end IS the decision date. Medilogik's Barnsley award
+    is a G-Cloud 13 call-off ending 30/11/2026 on an agreement that expired in
+    November 2024.
+
+    The framework facts are read from data/digital-frameworks.json every run, so
+    they never go stale in this file. A route naming a framework the Hub holds no
+    record of is left exactly as the notice stated it; nothing is invented.
+    """
+    # Cleared first, so a framework record that has gone from
+    # data/digital-frameworks.json does not leave its facts behind on the row.
+    for k in ("frameworkStatus", "frameworkStarts", "frameworkEnds", "frameworkUrl",
+              "frameworkOwner", "frameworkCallOffRule"):
+        row.pop(k, None)
+    if row.pop("frameworkRefSource", None):
+        row["frameworkRef"] = None
+    for key in (row.get("frameworkRef"), row.get("frameworkName")):
+        f = index.get(str(key or "").strip().casefold())
+        if not f:
+            continue
+        row["frameworkStatus"] = f.get("status")
+        row["frameworkStarts"] = f.get("starts")
+        row["frameworkEnds"] = f.get("ends")
+        row["frameworkUrl"] = f.get("url")
+        row["frameworkOwner"] = f.get("owner")
+        if f.get("callOffRule"):
+            row["frameworkCallOffRule"] = f["callOffRule"]
+        # The notice gave a name but no reference, and the Hub's own record has
+        # one. Record it as the Hub's, not as something the notice said.
+        if not row.get("frameworkRef") and f.get("reference"):
+            row["frameworkRefSource"] = ("the Hub's own record of %s; the notice names the "
+                                         "framework but gives no agreement number."
+                                         % f.get("name"))
+            row["frameworkRef"] = f.get("reference")
+        return row
+    return row
+
+
+def build(seed, lane, medical, previous, frameworks=None):
     index = company_match.build_index(seed)
     seed_names = {s.get("name") for s in (seed or {}).get("suppliers") or []}
     med = medical_keys(medical)
@@ -141,8 +202,11 @@ def build(seed, lane, medical, previous):
         r = {f: v for f, v in r.items() if f not in ("company", "matchedOn", "reason")}
         pool.append(r)
 
+    fw_index = framework_index(frameworks)
     companies, unmatched, ambiguous, in_medical = {}, [], [], 0
     for r in pool:
+        if r.get("frameworkRef") or r.get("frameworkName"):
+            attach_framework(r, fw_index)
         company, state, reason = company_match.resolve(r.get("noticeSupplierName"), index)
         if state == "confirmed" and company in seed_names:
             if (company, r.get("url") or "") in med:
@@ -204,7 +268,7 @@ def main():
     seed, lane = load(SEED), load(LANE)
     if not seed or not lane:
         raise SystemExit("cannot read %s or %s" % (SEED, LANE))
-    doc = build(seed, lane, load(MEDICAL, {}), load(OUT, {}))
+    doc = build(seed, lane, load(MEDICAL, {}), load(OUT, {}), load(FRAMEWORKS, {}))
     c = doc["counts"]
     print("company-digital-awards: %d rows on %d companies, %d unmatched, %d ambiguous, "
           "%d already in the medical feed" % (c["awardRows"], c["companies"], c["unmatched"],

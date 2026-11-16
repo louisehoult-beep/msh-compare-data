@@ -283,8 +283,90 @@ class Extras(unittest.TestCase):
             raise RuntimeError("boom")
         entries, not_added = rdf.build_extras(f, "2026-10-20")
         self.assertEqual(entries, [])
-        self.assertEqual(len(not_added), 6)
+        self.assertEqual(len(not_added), 9)
         self.assertTrue(all("Nothing recorded" in n["reason"] for n in not_added))
+
+
+GC14_EXPIRED_PAGE = """<html><body><main>
+<p>!</p><p>Important</p><p>Expired agreement - This information is for reference only</p>
+<h1>G-Cloud 14</h1>
+<p>Agreement number: </p><p> RM1557.14 </p><p>Start date: </p><p> 29/10/2024 </p>
+<p>End date: </p><p> 28/10/2026 </p><p>Agreement type: </p><p> PCR15 Framework </p>
+<h2>Updates</h2><p>29 October 2026:</p>
+<p>Please be advised that G-Cloud 14 expired on 28 October 2026. You should now access</p>
+<p><a href="/agreements/RM1557.15">RM1557.15 G-Cloud 15</a></p>
+<p>for your cloud requirements. Existing G-Cloud 14 call-off contracts signed prior to the
+28 October 2026 expiration date will remain in effect for their full defined terms. Work
+performed under G-Cloud 14 cannot be transferred to G-Cloud 15 agreements. For the most
+current information, please refer to the official</p>
+<h2>Documents</h2>
+<p>The core terms form part of the framework and call-off contracts and must be used on
+every contract. They cannot be changed.</p>
+</main></body></html>"""
+
+GC13_EXPIRED_PAGE = """<html><body><main>
+<p>Important</p><p>Expired agreement - This information is for reference only</p>
+<p>Important Expired agreement \u2013 This information is for reference only.</p>
+<p>RM1557.13: G-Cloud 13 was replaced by RM1557.14: G-Cloud 14.</p>
+<p>Agreement number: </p><p> RM1557.13 </p><p>Start date: </p><p> 09/11/2022 </p>
+<p>End date: </p><p> 08/11/2024 </p><p>Agreement type: </p><p> PCR15 Framework </p>
+<h2>Documents</h2></main></body></html>"""
+
+GC_LIVE_NO_BANNER = """<html><body><main><h1>G-Cloud 14</h1>
+<p>Agreement number: </p><p> RM1557.14 </p><p>Start date: </p><p> 29/10/2024 </p>
+<p>End date: </p><p> 28/10/2026 </p><p>Agreement type: </p><p> PCR15 Framework </p>
+<h2>Documents</h2></main></body></html>"""
+
+
+class ExpiredGCloud(unittest.TestCase):
+    """An expired G-Cloud iteration is recorded so a call-off bought through it has
+    something to point at. Added 16/11/2026 for Medilogik's Barnsley Hospital award,
+    a G-Cloud 13 call-off ending 30/11/2026 on an agreement closed since 2024."""
+
+    def test_expired_agreement_is_read_from_its_own_page(self):
+        e = rdf.build_gcloud_expired(lambda u: GC14_EXPIRED_PAGE, "RM1557.14", "G-Cloud 14",
+                                     "2026-11-16")
+        self.assertEqual((e["reference"], e["status"], e["starts"], e["ends"]),
+                         ("RM1557.14", "expired", "2024-10-29", "2026-10-28"))
+        self.assertEqual(e["lots"], [])
+        self.assertIsNone(e["suppliers"])
+        self.assertIn("nothing on it rolls forward", e["callOffRule"])
+
+    def test_sentence_split_across_an_inline_link_is_whole(self):
+        """GCA breaks a sentence wherever it carries a link, so a line-by-line read
+        returns the sentence with the link text missing. The quote must be whole."""
+        e = rdf.build_gcloud_expired(lambda u: GC14_EXPIRED_PAGE, "RM1557.14", "G-Cloud 14",
+                                     "2026-11-16")
+        self.assertIn("Existing G-Cloud 14 call-off contracts signed prior to the 28 October "
+                      "2026 expiration date will remain in effect for their full defined "
+                      "terms.", e["sourceQuote"])
+        self.assertIn("Work performed under G-Cloud 14 cannot be transferred to G-Cloud 15 "
+                      "agreements.", e["sourceQuote"])
+
+    def test_page_navigation_is_never_glued_to_a_quote(self):
+        e = rdf.build_gcloud_expired(lambda u: GC14_EXPIRED_PAGE, "RM1557.14", "G-Cloud 14",
+                                     "2026-11-16")
+        self.assertNotIn("Documents", e["sourceQuote"])
+        self.assertNotIn("core terms", e["sourceQuote"].lower())
+
+    def test_replacement_sentence_is_not_cut_at_the_reference_dot(self):
+        e = rdf.build_gcloud_expired(lambda u: GC13_EXPIRED_PAGE, "RM1557.13", "G-Cloud 13",
+                                     "2026-11-16")
+        self.assertIn("RM1557.13: G-Cloud 13 was replaced by RM1557.14: G-Cloud 14.",
+                      e["sourceQuote"])
+        # The banner renders twice, hyphen and en dash. One sentence, kept once.
+        self.assertEqual(e["sourceQuote"].lower().count("this information is for reference"), 1)
+
+    def test_missing_banner_is_not_verified_never_assumed_expired(self):
+        e = rdf.build_gcloud_expired(lambda u: GC_LIVE_NO_BANNER, "RM1557.14", "G-Cloud 14",
+                                     "2026-11-16")
+        self.assertEqual(e["status"], "not verified")
+        self.assertTrue(any("Expired agreement" in n for n in e["notVerified"]))
+
+    def test_wrong_page_is_refused_not_recorded(self):
+        with self.assertRaises(RuntimeError):
+            rdf.build_gcloud_expired(lambda u: GC13_EXPIRED_PAGE, "RM1557.14", "G-Cloud 14",
+                                     "2026-11-16")
 
 
 if __name__ == "__main__":

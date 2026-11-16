@@ -36,6 +36,7 @@ Then: python3 scripts/stamp_notice.py && python3 verify.py
 """
 import json
 import os
+import re
 import sys
 import time
 import urllib.request
@@ -120,6 +121,64 @@ def award_release(pkg):
     return None
 
 
+FW_NAME_RE = re.compile(r"G[\s-]?Cloud[\s-]?(\d+)", re.I)
+FW_REF_RE = re.compile(r"RM\s?(\d{4})\.(\d+)", re.I)
+
+
+def framework_route(tender):
+    """The call-off route this notice states, read from the notice and nothing else.
+
+    WHY (16/11/2026). Most of these awards are framework call-offs, and the
+    framework is the renewal fact: a call-off on a closed framework runs to its own
+    end date and has no route forward on the same agreement. Medilogik's Barnsley
+    award is a G-Cloud 13 call-off ending 30/11/2026 and the Hub could not say so.
+
+    Only what the notice itself states is recorded. procurementMethodDetails is the
+    buyer's own classification. A framework name or reference is taken only where
+    the notice's description names one; where the buyer says "call-off from a
+    framework agreement" and names no framework, name and reference stay null and
+    `frameworkRouteStated` is false, which is the honest state. Nothing is inferred
+    from the supplier, the buyer or the date.
+
+    "G-Cloud13", "G-Cloud 13" and "G Cloud 13" are the same framework written three
+    ways across these notices, so the name is normalised to "G-Cloud 13" and the
+    reference to "RM1557.13"; the notice's own wording is kept verbatim in the quote.
+    """
+    desc = str(tender.get("description") or "")
+    name = ref = None
+    m = FW_NAME_RE.search(desc)
+    if m:
+        name = "G-Cloud %s" % m.group(1)
+    m = FW_REF_RE.search(desc)
+    if m:
+        ref = "RM%s.%s" % (m.group(1), m.group(2))
+    # The quote is the line the route is named on, verbatim. Notices put it either
+    # under "Additional information:" or in the body sentence that names the
+    # framework, and it is taken as the notice writes it. A notice that names a
+    # framework this helper does not identify (NHS Supply Chain's Digital
+    # Diagnostic Solutions agreement, a trust's own "Medical IT Framework") still
+    # gets its quote: the route is the fact, and a name the Hub cannot normalise is
+    # not a reason to drop what the buyer stated.
+    quote = None
+    for line in [re.sub(r"\s+", " ", l).strip() for l in desc.splitlines()]:
+        # Buyers put the route under an "Additional information:" label, usually on
+        # the line above it and sometimes on the same line. The label is theirs, not
+        # the route, so it is stripped and what follows is read.
+        line = re.sub(r"^Additional information:\s*", "", line, flags=re.I).strip()
+        if not line:
+            continue
+        if FW_NAME_RE.search(line) or FW_REF_RE.search(line) or re.search(r"framework", line, re.I):
+            quote = line
+            break
+    return {
+        "procurementMethodDetails": tender.get("procurementMethodDetails"),
+        "frameworkRouteStated": bool(quote),
+        "frameworkName": name,
+        "frameworkRef": ref,
+        "frameworkRouteQuote": quote,
+    }
+
+
 def rows_for(pkg, url):
     r = award_release(pkg)
     if r is None:
@@ -130,6 +189,7 @@ def rows_for(pkg, url):
     if not R.in_lane(buyer, cpvs):
         return [], "outside the lane rule (buyer %r, CPV %s)" % (buyer, ",".join(cpvs))
     out = []
+    route = framework_route(tender)
     contracts = r.get("contracts") or []
     for a in r.get("awards") or []:
         names = [s.get("name") for s in a.get("suppliers") or [] if s.get("name")]
@@ -146,7 +206,7 @@ def rows_for(pkg, url):
                         if (c.get("period") or {}).get("endDate")), None))
         date = (a.get("datePublished") or r.get("date") or "")[:10]
         for n in names:
-            out.append({
+            out.append(dict(route, **{
                 "title": tender.get("title"),
                 "buyer": buyer,
                 "date": date,
@@ -162,7 +222,7 @@ def rows_for(pkg, url):
                 "lane": "digital",
                 "noticeSupplierName": n,
                 "noticeSupplierCount": len(names),
-            })
+            }))
     return out, None
 
 
@@ -193,9 +253,22 @@ def main():
 
     seed, lane = CDA.load(CDA.SEED), CDA.load(CDA.LANE)
     prev = CDA.load(CDA.OUT, {}) or {}
+    # CDA.build() de-duplicates on (notice URL, supplier name) and keeps the FIRST
+    # row it sees, published rows before carried ones. So a re-read of a notice
+    # this script already seeded would be thrown away in favour of the older,
+    # thinner row. The rows below were read from the notice in THIS run, so they
+    # are the ones to publish: drop the published copies of the same notices first
+    # and let the fresh read stand. Every other published row is untouched.
+    fresh = {CDA.row_key(r) for r in rows}
     pool = dict(prev)
-    pool["unmatched"] = list(prev.get("unmatched") or []) + rows
-    doc = CDA.build(seed, lane, CDA.load(CDA.MEDICAL, {}), pool)
+    pool["companies"] = {c: [r for r in (rs or []) if CDA.row_key(r) not in fresh]
+                         for c, rs in (prev.get("companies") or {}).items()}
+    pool["ambiguous"] = [r for r in (prev.get("ambiguous") or [])
+                         if CDA.row_key(r) not in fresh]
+    pool["unmatched"] = [r for r in (prev.get("unmatched") or [])
+                         if CDA.row_key(r) not in fresh] + rows
+    doc = CDA.build(seed, lane, CDA.load(CDA.MEDICAL, {}), pool,
+                    CDA.load(CDA.FRAMEWORKS, {}))
     for r in rows:
         placed = [c for c, rs in doc["companies"].items()
                   if any(CDA.row_key(x) == CDA.row_key(r) for x in rs)]

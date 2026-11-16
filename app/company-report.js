@@ -2767,6 +2767,64 @@
     return doc.companies[s.name] || [];
   }
 
+  /* THE ROUTE A CALL-OFF WAS BOUGHT THROUGH (16/11/2026).
+     Most NHS software money moves as a framework call-off, and the framework is
+     the renewal fact: a call-off on a closed agreement runs to its own end date
+     and nothing on it rolls forward, so the contract end IS the decision date and
+     there is no "it will just roll" to assume. Medilogik's Barnsley Hospital award
+     is a G-Cloud 13 call-off ending 30/11/2026 on an agreement that expired in
+     November 2024 — the single strongest call-planning fact on that record, and
+     invisible here until this line existed.
+
+     Every part of it is read: the buyer's own procedure wording, the framework the
+     notice names, and that framework's status and term from the framework owner's
+     own page (scripts/refresh_digital_frameworks.py). A notice that says "call-off
+     from a framework agreement" and names no framework gets the procedure line and
+     nothing more, which is the honest state, not a gap to fill. */
+  function frameworkRouteLine(a) {
+    var method = String(a.procurementMethodDetails || '');
+    var named = a.frameworkName || a.frameworkRef;
+    if (!method && !named) return '';
+
+    var bits = [];
+    if (named) {
+      var label = a.frameworkName
+        ? esc(a.frameworkName) + (a.frameworkRef ? ' (' + esc(a.frameworkRef) + ')' : '')
+        : esc(a.frameworkRef);
+      bits.push(a.frameworkUrl
+        ? '<a href="' + esc(a.frameworkUrl) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">' + label + ' &#8599;</a>'
+        : '<b>' + label + '</b>');
+    }
+    if (method) bits.push(esc(method.toLowerCase()));
+    if (a.frameworkStatus === 'expired') {
+      bits.push('<span style="color:' + RED + ';font-weight:700;">framework expired' +
+        (a.frameworkEnds ? ' ' + esc(uk(a.frameworkEnds)) : '') + '</span>');
+    } else if (a.frameworkStatus) {
+      bits.push('framework ' + esc(a.frameworkStatus) +
+        (a.frameworkEnds ? ' to ' + esc(uk(a.frameworkEnds)) : ''));
+    }
+
+    /* "Route" is only the right word for a call-off. A notice that says "open
+       procedure" is describing a tender the buyer ran itself, which is a different
+       and equally useful signal, so it is labelled as what it is. */
+    var label = (named || /framework/i.test(method)) ? 'Bought through' : 'Procedure';
+    var out = '<br><span style="font-size:12.5px;color:#37485a;"><b style="color:' + INK +
+      ';">' + label + ':</b> ' + bits.join(' &middot; ') + '</span>';
+    if (a.frameworkStatus === 'expired' && a.frameworkCallOffRule) {
+      out += '<br><span style="font-size:12px;color:' + DIM + ';">' +
+        esc(a.frameworkCallOffRule) + '</span>';
+    }
+    if (a.frameworkRouteQuote) {
+      out += '<br><span style="font-size:12px;color:' + DIM + ';">The notice states the route as &ldquo;' +
+        esc(a.frameworkRouteQuote) + '&rdquo;.</span>';
+    }
+    if (a.frameworkRefSource) {
+      out += '<br><span style="font-size:12px;color:' + DIM + ';">Agreement number from ' +
+        esc(a.frameworkRefSource) + '</span>';
+    }
+    return out;
+  }
+
   function awardRow(a) {
     var value = (typeof a.valueAmount === 'number')
       ? '<span style="color:' + GREEN + ';font-weight:700;">' +
@@ -2794,7 +2852,7 @@
       '<a href="' + esc(a.url) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">' +
       esc(a.source) + ' notice &#8599;</a>' +
       (a.hubUrl ? ' &middot; <a href="' + esc(a.hubUrl) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">Award Tracker &#8599;</a>' : '') +
-      '</span></div>';
+      '</span>' + frameworkRouteLine(a) + '</div>';
   }
 
   function awardSection(title, rows, ctx, blurb) {

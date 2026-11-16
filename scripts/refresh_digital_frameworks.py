@@ -334,6 +334,97 @@ def build_gc15(fetcher, today):
     }
 
 
+def build_gcloud_expired(fetcher, ref, name, today):
+    """An expired G-Cloud iteration, read from its own GCA agreement page.
+
+    WHY (16/11/2026). The Hub holds live frameworks because a live framework is a
+    route a rep can still use. An expired one matters for a different reason: a
+    call-off already running under it has a fixed end and no route forward on the
+    same agreement, which is exactly the renewal fact a rep needs. Medilogik's
+    Barnsley Hospital award is a G-Cloud 13 call-off ending 30/11/2026, and until
+    this record existed there was nothing for that award to point at.
+
+    Expired agreement pages carry no 'Products and suppliers' section, so lots and
+    supplier lists are honestly null, never []. The page's own Important banner and
+    Updates text are recorded verbatim; nothing about what replaces the agreement or
+    what happens to live call-offs is inferred here.
+    """
+    nv = []
+    url = GCA + "/agreements/" + ref
+    page = fetcher(url)
+    h = parse_agreement_header(page)
+    if h["reference"] and h["reference"] != ref:
+        raise RuntimeError("%s page states reference %r" % (ref, h["reference"]))
+    txt = h["text"]
+    lines = [re.sub(r"\s+", " ", l).strip() for l in txt.split("\n")]
+    lines = [l for l in lines if l]
+
+    expired = any(l.startswith("Expired agreement") for l in lines)
+    if not expired:
+        nv.append("The page does not carry the 'Expired agreement' banner on this run, so the "
+                  "closed status is Not verified. Settled by re-reading %s." % url)
+
+    # The sentences on the page that state this agreement's own end, what
+    # replaced it, and what happens to call-offs already signed under it.
+    # Read from the whole page joined into one string first: GCA breaks a
+    # sentence across block elements wherever it carries an inline link, so
+    # line-by-line matching returns sentences with the link text missing. Each
+    # pattern below captures a whole sentence, so the page's navigation and
+    # heading text (which carries no full stop) cannot be glued to the front
+    # of a quote.
+    joined = " ".join(lines)
+    patterns = [
+        r"Expired agreement\s*[-\u2013\u2014]\s*This information is for reference only",
+        r"RM\S+:\s*G-Cloud \d+ was replaced by RM\S+:\s*G-Cloud \d+\.",
+        r"Please be advised that G-Cloud \d+ expired on [^.]+?\.",
+        r"Existing G-Cloud \d+ call-off contracts signed prior to [^.]+?\.",
+        r"Work performed under G-Cloud \d+ cannot be transferred to [^.]+?\.",
+    ]
+    quotes = []
+    for pat in patterns:
+        for m in re.finditer(pat, joined):
+            q = re.sub(r"\s+", " ", m.group(0)).strip()
+            # The banner is rendered twice, once with and once without its full
+            # stop. One sentence, so it is stored once, punctuated.
+            if not q.endswith("."):
+                q += "."
+            # The banner's dash is a hyphen in one rendering and an en dash in
+            # the other. Same sentence, so it is kept once, as first read.
+            key = re.sub(r"[\u2013\u2014]", "-", q)
+            if key not in {re.sub(r"[\u2013\u2014]", "-", x) for x in quotes}:
+                quotes.append(q)
+    if not quotes:
+        nv.append("No sentence on the page states what replaced this agreement or what happens "
+                  "to call-offs already signed under it. Settled by re-reading %s." % url)
+
+    nv.append("Lots and supplier lists are not published on an expired agreement page, so both "
+              "stay null. A supplier's place on this agreement cannot be read from GCA now; it "
+              "is shown only where an award notice names the agreement as its route.")
+    nv.append("Whether an individual call-off under this agreement was extended beyond the term "
+              "its own notice states is not published anywhere this Hub can read. Settled by the "
+              "buyer.")
+
+    return {
+        "name": name,
+        "reference": h["reference"] or ref,
+        "owner": "Government Commercial Agency (GCA), formerly Crown Commercial Service",
+        "url": url,
+        "status": "expired" if expired else "not verified",
+        "starts": h["start"],
+        "ends": h["end"],
+        "agreementType": h["type"],
+        "term": None,
+        "lots": [],
+        "suppliers": None,
+        "callOffRule": ("A call-off already signed under this agreement runs to its own end date. "
+                        "The agreement itself is closed, so no new call-off can be made from it "
+                        "and nothing on it rolls forward."),
+        "verifiedOn": today,
+        "sourceQuote": " ".join(quotes) or None,
+        "notVerified": nv,
+    }
+
+
 def build_coming(fetcher, notice_id, name, owner_hint, today):
     nv = []
     pkg = json.loads(fetcher(FTS_API + notice_id))
@@ -537,6 +628,12 @@ def build_extras(fetcher, today):
             lambda: build_sbs_page_only(fetcher, "tech-devices-link-4", "Tech Devices", today))
     attempt("NHS SBS Digital Health Advisory (SBS10225)", SBS + "digital-health-advisory/",
             lambda: build_sbs_page_only(fetcher, "digital-health-advisory", "Digital Health Advisory", today))
+    attempt("GCA G-Cloud 12 (RM1557.12), expired", GCA + "/agreements/RM1557.12",
+            lambda: build_gcloud_expired(fetcher, "RM1557.12", "G-Cloud 12", today))
+    attempt("GCA G-Cloud 13 (RM1557.13), expired", GCA + "/agreements/RM1557.13",
+            lambda: build_gcloud_expired(fetcher, "RM1557.13", "G-Cloud 13", today))
+    attempt("GCA G-Cloud 14 (RM1557.14), expired", GCA + "/agreements/RM1557.14",
+            lambda: build_gcloud_expired(fetcher, "RM1557.14", "G-Cloud 14", today))
     attempt("HealthTrust Europe Digital Pathology 2024 Framework", FTS_NOTICE + "058054-2026",
             lambda: build_award(fetcher, "058054-2026", "Digital Pathology 2024 Framework (HealthTrust Europe)",
                                 "HealthTrust Europe LLP", today, None,
