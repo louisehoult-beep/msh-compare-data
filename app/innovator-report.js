@@ -880,6 +880,43 @@
       }
     }
 
+    if (t.digital) {
+      var dln = (B.sources || {})['digital-lane.json'] || {};
+      var don = B.digitalOpenNotices || [], dme = B.digitalMarketEngagement || [];
+      out += '<h3>Digital and technology notices now open</h3>';
+      out += don.length
+        ? '<div class="scroll"><table><tr><th>Notice</th><th>Buyer</th><th>Published</th>'
+          + '<th>Closes</th><th class="n">Value</th></tr>'
+          + don.map(function (n) {
+            return '<tr><td>' + link(n.url, n.title) + '<br><span class="src">' + esc(n.source || '')
+              + (n.stage ? ' · ' + esc(n.stage) : '')
+              + (n.cpv ? ' · Common Procurement Vocabulary (CPV) ' + esc(n.cpv) : '')
+              + '</span></td><td>' + esc(n.buyer || NV) + '</td><td>' + esc(ukdate(n.date))
+              + '</td><td>' + esc(ukdate((n.closingDate || '').slice(0, 10)) || NV) + '</td>'
+              + '<td class="n">' + (n.valueAmount == null ? 'not published' : money(n.valueAmount))
+              + '</td></tr>';
+          }).join('') + '</table></div>'
+        : '<p>No digital or technology notice is open in this reading.</p>';
+      if (dme.length) {
+        out += '<h3>Digital market engagement open to suppliers</h3>'
+          + '<div class="scroll"><table><tr><th>Exercise</th><th>Authority</th><th>Category</th>'
+          + '<th>Opens</th><th>Deadline</th></tr>'
+          + dme.map(function (m) {
+            return '<tr><td>' + link(m.url, m.title) + (m.ref ? '<br><span class="src">reference '
+              + esc(m.ref) + '</span>' : '') + '</td><td>' + esc(m.authority || NV) + '</td>'
+              + '<td>' + esc(m.category || NV) + '</td><td>' + esc(ukdate(m.opens) || NV)
+              + '</td><td>' + esc(ukdate(m.deadline) || NV) + '</td></tr>';
+          }).join('') + '</table></div>'
+          + '<p class="src">Preliminary market engagement is the stage before a tender: it is '
+          + 'where an early-stage supplier can still shape what gets specified.</p>';
+      }
+      out += '<p class="src">Source: ' + esc(dln.source || NV) + ', as held in '
+        + 'data/digital-lane.json, ' + asOf(dln.dataAsOf) + '. This is the digital lane of the '
+        + 'same two feeds as the medical rows above, carried here because the digital '
+        + 'specialities have no Clinical Evidence Library band and so cannot be filtered out of '
+        + 'the medical feed. ' + esc(dln.scopeNote || '') + '</p>';
+    }
+
     out += '<h3>Awards published but not yet started</h3>';
     if (!PEND) {
       out += gapNote('data/pending-awards.json', parseUk((B.sources['pending-awards.json'] || {}).dataAsOf));

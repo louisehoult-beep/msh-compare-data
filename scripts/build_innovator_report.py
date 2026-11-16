@@ -11,7 +11,7 @@ files it needs are small enough to fetch in the browser:
 
     products.json  compare-suppliers.json  frameworks.json
     framework-directory-extra.json  icb-watch.json  open-tenders.json
-    pending-awards.json  trust-pressures.json
+    pending-awards.json  trust-pressures.json  digital-lane.json
 
 One is not. data/company-awards.json is 20 MB, and the report only ever needs,
 per speciality, the award history of the companies that speciality's competitor
@@ -232,6 +232,7 @@ def build():
     calendar = load("nhssc-procurement-calendar.json")
     digital_fw = load("digital-frameworks.json")
     digital_awards = load("company-digital-awards.json")
+    digital_lane = load("digital-lane.json")
     awards = load("company-awards.json")
 
     with open(os.path.join(APP, "mst-logic.js"), encoding="utf-8") as fh:
@@ -398,6 +399,39 @@ def build():
         })
     dig_co.sort(key=lambda r: (-r["awardCount"], r["co"].lower()))
 
+    #  - digital-lane.json, for WHAT IS MOVING NOW. The medical open-tender feed
+    #    is filtered by a Clinical Evidence Library desk slug, and the digital
+    #    specialities have no band and so no slug: a digital innovator's
+    #    section 6 could only say the feed cannot be filtered for them. This
+    #    file is the digital lane of the same two feeds, already walked daily,
+    #    so the digital arm gets the same "is this market moving" evidence the
+    #    medical arm gets. Its own scopeNote travels with it: a call-off under a
+    #    framework is not a notice, so the lane is a floor, not a census.
+    dig_open = [{
+        "title": n.get("title"),
+        "buyer": n.get("buyer"),
+        "stage": n.get("stage"),
+        "date": n.get("date"),
+        "closingDate": n.get("closingDate"),
+        "url": n.get("url"),
+        "source": n.get("source"),
+        "cpv": n.get("cpv"),
+        "valueAmount": n.get("valueAmount"),
+        "valueCurrency": n.get("valueCurrency"),
+    } for n in (digital_lane.get("openNotices") or [])]
+    dig_open.sort(key=lambda r: r.get("date") or "", reverse=True)
+
+    dig_eng = [{
+        "title": m.get("title"),
+        "authority": m.get("authority"),
+        "category": m.get("category"),
+        "opens": m.get("opens"),
+        "deadline": m.get("deadline"),
+        "url": m.get("url"),
+        "ref": m.get("ref"),
+    } for m in (digital_lane.get("marketEngagement") or [])]
+    dig_eng.sort(key=lambda r: r.get("deadline") or "", reverse=True)
+
     other = []
     for row in extra.get("otherBodies") or []:
         r = dict(row)
@@ -472,6 +506,8 @@ def build():
             "count": calendar.get("count"),
         },
         "digitalFrameworks": dig_fw,
+        "digitalOpenNotices": dig_open,
+        "digitalMarketEngagement": dig_eng,
         "digitalCompetitors": dig_co,
         "specialityList": [{
             "id": s.get("id"),
@@ -526,6 +562,14 @@ def build():
                 "laneRule": digital_awards.get("laneRule"),
                 "counts": {k: (digital_awards.get("counts") or {}).get(k)
                            for k in ("companies", "awardRows")},
+            },
+            "digital-lane.json": {
+                "dataAsOf": digital_lane.get("dataAsOf"),
+                "source": digital_lane.get("source"),
+                "laneRule": digital_lane.get("laneRule"),
+                "scopeNote": digital_lane.get("scopeNote"),
+                "openNotices": len(dig_open),
+                "marketEngagement": len(dig_eng),
             },
             "nhssc-procurement-calendar.json": {
                 "pageLastUpdated": calendar.get("pageLastUpdated"),
