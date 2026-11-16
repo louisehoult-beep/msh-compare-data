@@ -208,7 +208,7 @@
     + '.sr-tabs button[aria-selected=true]{color:#14304F;border-bottom-color:#A8842C}'
     + '.sr fieldset{border:1px solid #E2DED3;background:#FFFFFF;margin:0 0 18px;padding:26px 28px}'
     + '.sr legend{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:21px;color:#14304F;padding:0 8px;margin-left:-8px}'
-    + '.sr .num{display:inline-block;min-width:30px;color:#A8842C}'
+    + '.sr .num{display:inline-block;min-width:30px;color:#14304F}'
     + '.sr .hint{color:#4A5666;font-size:13.5px;margin:2px 0 14px}'
     + '.sr .lab{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#14304F;margin:18px 0 8px}'
     + '.sr .ticks{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:4px 18px}'

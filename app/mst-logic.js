@@ -352,7 +352,7 @@
     /* Evidence-library citations -- brand accent pass (oxblood/blush), 07/09/2026:
        citations alternate gold/oxblood left border (odd=gold, even=oxblood),
        the "use it for" line sits on a blush fill, per 00-Resources/brand-guide.md */
-    +'.mst__evhead{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 8px}'
+    +'.mst__evhead{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#0B1C33;font-weight:700;margin:0 0 8px}'
     +'.mst__evcite{border-top:1px solid var(--line);padding-top:9px;margin-top:9px;padding-left:10px}'
     +'.mst__evcite:first-of-type{border-top:none;padding-top:0;margin-top:0}'
     +'.mst__ev--a{border-left:3px solid #A8842C}'
@@ -362,7 +362,7 @@
     +'.mst__evfind{font-size:12.5px;line-height:1.5;color:var(--ink);margin:4px 0}'
     +'.mst__evimpl{font-size:12px;line-height:1.5;background:#F3E4E1;border:1px solid #e3c3bd;border-radius:6px;padding:6px 9px;margin-top:4px;color:#7A4A44}'
     +'.mst__evimpl b{color:#6B2A34}'
-    +'.mst__evsrc{display:inline-block;margin-top:5px;font-size:11px;font-weight:700;color:var(--gold);text-decoration:none}'
+    +'.mst__evsrc{display:inline-block;margin-top:5px;font-size:11px;font-weight:700;color:#14304F;text-decoration:underline;text-underline-offset:2px}'
     +'.mst__evsrc:hover{text-decoration:underline}'
     +'.mst__evmore{display:block;text-align:right;font-size:11.5px;font-weight:700;color:var(--ink);text-decoration:none;margin-top:10px;padding-top:8px;border-top:1px dashed rgba(0,0,0,.14)}'
     +'.mst__evmore:hover{text-decoration:underline}'

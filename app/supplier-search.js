@@ -53,7 +53,7 @@
     MOUNT.innerHTML=''+
     '<div style="font-family:Inter,-apple-system,Segoe UI,sans-serif;margin:0;">'+
       '<div style="padding:2px 0 6px;">'+
-        '<div style="font-size:11.5px;letter-spacing:2px;font-weight:700;color:'+G+';">SUPPLIER INTELLIGENCE SEARCH</div>'+
+        '<div style="font-size:11.5px;letter-spacing:2px;font-weight:700;color:#0B1C33;">SUPPLIER INTELLIGENCE SEARCH</div>'+
         '<p style="margin:5px 0 12px;font-size:13.5px;color:'+DIM+';">Pick a speciality, then a supplier or brand — get their frameworks, products, and live alerts/recalls, all in one place. <span id="mssCount"></span></p>'+
         '<label style="display:block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:'+DIM+';margin:0 0 4px;">1 &middot; Speciality</label>'+
         '<select id="mssSpec" style="width:100%;max-width:520px;padding:10px 15px;border-radius:99px;border:1px solid '+LINE+';font:inherit;font-size:14px;color:'+INK+';background:#ffffff;outline:none;margin:0 0 11px;"></select>'+
@@ -72,8 +72,8 @@
     var h='<div style="border:1px solid '+LINE+';border-radius:11px;padding:16px 18px;background:#fdfcf9;">';
     // header: image/monogram + name
     var _w=s.name.replace(/^the\s+/i,'').split(/[\s\-—,\.]+/).filter(Boolean);var inits=esc((/^[A-Za-z0-9]{2,4}$/.test(_w[0]||'')?_w[0]:_w.slice(0,2).map(function(w){return w[0];}).join('')).toUpperCase());
-    var ph='<div style="width:56px;height:56px;flex:0 0 56px;border-radius:10px;background:#efe9db;border:1px solid '+LINE+';display:flex;align-items:center;justify-content:center;font-weight:700;color:'+G+';font-size:16px;">'+inits+'</div>';
-    var thumb = s.image ? '<img src="'+esc(s.image)+'" alt="" referrerpolicy="no-referrer" loading="lazy" style="width:56px;height:56px;flex:0 0 56px;border-radius:10px;object-fit:contain;background:#fff;border:1px solid '+LINE+';" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';"><div style="display:none;width:56px;height:56px;flex:0 0 56px;border-radius:10px;background:#efe9db;border:1px solid '+LINE+';align-items:center;justify-content:center;font-weight:700;color:'+G+';font-size:16px;">'+inits+'</div>' : ph;
+    var ph='<div style="width:56px;height:56px;flex:0 0 56px;border-radius:10px;background:#efe9db;border:1px solid '+LINE+';display:flex;align-items:center;justify-content:center;font-weight:700;color:#0B1C33;font-size:16px;">'+inits+'</div>';
+    var thumb = s.image ? '<img src="'+esc(s.image)+'" alt="" referrerpolicy="no-referrer" loading="lazy" style="width:56px;height:56px;flex:0 0 56px;border-radius:10px;object-fit:contain;background:#fff;border:1px solid '+LINE+';" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';"><div style="display:none;width:56px;height:56px;flex:0 0 56px;border-radius:10px;background:#efe9db;border:1px solid '+LINE+';align-items:center;justify-content:center;font-weight:700;color:#0B1C33;font-size:16px;">'+inits+'</div>' : ph;
     h+='<div style="display:flex;gap:13px;align-items:flex-start;">'+thumb+'<div><div style="font-size:20px;font-weight:700;color:'+INK+';">'+esc(s.name)+(s.autoDetected?' <span style="font-size:10px;font-weight:700;letter-spacing:.06em;color:#7a5b14;background:#f3e8cf;border-radius:99px;padding:2px 8px;vertical-align:3px;">AUTO — VERIFY AT SOURCE</span>':'')+(s.identityUnconfirmed?' <span style="font-size:10px;font-weight:700;letter-spacing:.06em;color:#8a2b2b;background:#fdeaea;border:1px solid #f0c4c4;border-radius:99px;padding:2px 8px;vertical-align:3px;" title="This name is exactly as the awarding source wrote it. No search confirms it as a specific registered company — no company number, financials, domain or logo are attached.">IDENTITY UNCONFIRMED</span>':'')+'</div>'+
       (s.note?'<p style="margin:4px 0 0;font-size:13.5px;color:#37485a;">'+esc(s.note)+'</p>':'')+'</div></div>';
     if(s.specialities&&s.specialities.length) h+='<div style="margin-top:8px;">'+s.specialities.map(function(x){return '<span style="display:inline-block;background:#f3ead2;color:#7a5b14;border-radius:99px;padding:3px 10px;font-size:11.5px;font-weight:600;margin-right:6px;">'+esc(x)+'</span>';}).join('')+'</div>';
@@ -132,7 +132,7 @@
               (f.from?' <span style="color:'+DIM+';">· from '+esc(f.from)+'</span>':'')+
               (f.reason?'<br><span style="color:#37485a;font-size:12.5px;">'+esc(f.reason)+'</span>':'')+
               (f.delistedAs&&f.delistedAs!==s.name?'<br><span style="color:'+DIM+';font-size:12px;">named on the brief as \u201c'+esc(f.delistedAs)+'\u201d</span>':'')+
-              (f.url?'<br><a href="'+esc(f.url)+'" style="color:'+G+';font-size:12px;">the launch brief</a>':'')+
+              (f.url?'<br><a href="'+esc(f.url)+'" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-size:12px;">the launch brief</a>':'')+
               '</div>';
           }).join(''));
     }
@@ -186,7 +186,7 @@
           (a.value?' <span style="color:'+GREEN+';font-weight:700;">'+esc(a.value)+'</span>':'')+
           (a.date?' <span style="color:'+DIM+';">· '+esc(a.date)+'</span>':'')+
           (a.buyer?'<br><span style="color:#37485a;font-size:12.5px;">Buyer: '+esc(a.buyer)+'</span>':'')+
-          (a.url?' <a href="'+esc(a.url)+'" target="_blank" rel="noopener" style="color:'+G+';font-weight:600;">↗</a>':'')+'</div>';
+          (a.url?' <a href="'+esc(a.url)+'" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">↗</a>':'')+'</div>';
       }).join('') + (s.awards.length>8?'<div style="font-size:12px;color:'+DIM+';margin-top:4px;">+'+(s.awards.length-8)+' more — see the Award Tracker.</div>':''));
     }
     // alerts
@@ -195,15 +195,15 @@
         return '<div style="padding:9px 11px;margin:0 0 7px;border-left:3px solid '+RED+';background:#fff;border-radius:7px;font-size:13px;">'+
           '<b style="color:'+RED+';">'+esc(a.date)+'</b> — <b>'+esc(a.title)+'</b>'+
           '<br><span style="color:#37485a;">'+esc(a.detail)+'</span>'+
-          (a.use?'<br><span style="color:'+G+';">▸ '+esc(a.use)+'</span>':'')+
-          (a.url?' <a href="'+esc(a.url)+'" target="_blank" rel="noopener" style="color:'+G+';font-weight:600;">source ↗</a>':'')+'</div>';
+          (a.use?'<br><span style="color:#0B1C33;">▸ '+esc(a.use)+'</span>':'')+
+          (a.url?' <a href="'+esc(a.url)+'" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">source ↗</a>':'')+'</div>';
       }).join(''));
     } else h+=sec('Alerts &amp; recalls','<div style="font-size:13px;color:'+GREEN+';">No current alert indexed.</div>');
 
     // news (only stories corroborated by >=2 reputable sources reach here)
     if(s.news&&s.news.length){
       h+=sec('News · verified by 2+ sources', s.news.map(function(nw){
-        var srcs=(nw.sources||[]).map(function(x){return x.url?'<a href="'+esc(x.url)+'" target="_blank" rel="noopener" style="color:'+G+';font-weight:600;">'+esc(x.publisher)+' ↗</a>':esc(x.publisher);}).join(' · ');
+        var srcs=(nw.sources||[]).map(function(x){return x.url?'<a href="'+esc(x.url)+'" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">'+esc(x.publisher)+' ↗</a>':esc(x.publisher);}).join(' · ');
         return '<div style="padding:8px 0;border-bottom:1px solid #f0ece3;font-size:13px;">'+
           '<span style="color:'+GREEN+';font-weight:700;">✓</span> <b>'+esc(nw.headline)+'</b>'+
           (nw.date?' <span style="color:'+DIM+';">· '+esc(nw.date)+'</span>':'')+
@@ -212,13 +212,13 @@
     }
     // links
     if(s.links&&s.links.length){
-      h+=sec('Links', s.links.map(function(l){return '<a href="'+esc(l.url)+'" target="_blank" rel="noopener" style="color:'+G+';font-weight:600;font-size:13px;margin-right:14px;">'+esc(l.label)+' ↗</a>';}).join(''));
+      h+=sec('Links', s.links.map(function(l){return '<a href="'+esc(l.url)+'" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;font-size:13px;margin-right:14px;">'+esc(l.label)+' ↗</a>';}).join(''));
     }
     h+='<div style="margin-top:14px;padding-top:10px;border-top:1px solid '+LINE+';font-size:11px;color:'+DIM+';">Related Hub pages: '+
-       '<a href="/medical-sales-hub/frameworks/" style="color:'+G+';">Frameworks</a> · '+
-       '<a href="/medical-sales-hub/awards/" style="color:'+G+';">Award Tracker</a> · '+
-       '<a href="/medical-sales-hub/" style="color:'+G+';">Live Desk (alerts)</a> · '+
-       '<a href="/medical-sales-hub/news/" style="color:'+G+';">News</a></div>';
+       '<a href="/medical-sales-hub/frameworks/" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;">Frameworks</a> · '+
+       '<a href="/medical-sales-hub/awards/" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;">Award Tracker</a> · '+
+       '<a href="/medical-sales-hub/" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;">Live Desk (alerts)</a> · '+
+       '<a href="/medical-sales-hub/news/" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;">News</a></div>';
     h+='</div>';
     return h;
   }

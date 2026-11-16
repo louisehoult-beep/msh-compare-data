@@ -37,6 +37,14 @@
       '.msh .sp-tbl th{text-align:left;font-size:10px;letter-spacing:1.1px;text-transform:uppercase;color:var(--dim);font-weight:700;padding:0 10px 7px 0;border-bottom:1px solid var(--border);}',
       '.msh .sp-tbl td{padding:9px 10px 9px 0;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.45;}',
       '.msh .sp-tbl tr:last-child td{border-bottom:0;}',
+      /* The five var(--gold) link/summary rules below are left as they are
+         (16/11/2026 gold+clay contrast fix). Measured signed-in on the live
+         panels, each is already overridden by the host page's own band rule:
+         #E0BE8E on #14304F (7.62:1) for the band-seated ones (.sp-tbl a,
+         .sp-more summary, .sp-cal-t a) and #14304F on #FFFFFF (13.41:1) for
+         .sp-li-t a. A navy written here would be invisible on the navy
+         Frameworks band if that host rule ever went away -- the 16/11
+         calendar defect again. See test_speciality_panel_band_contrast.py. */
       '.msh .sp-tbl a{color:var(--gold);font-weight:600;text-decoration:none;}',
       '.msh .sp-tbl a:hover{text-decoration:underline;}',
       '.msh .sp-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}',

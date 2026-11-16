@@ -226,7 +226,7 @@
     function byName(a,b){ return (a.name||'').toLowerCase() < (b.name||'').toLowerCase() ? -1 : 1; }
 
     var wrap = el('div', 'font-family:Inter,system-ui,sans-serif;color:' + INK + ';');
-    wrap.appendChild(el('div', 'text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:700;color:' + GOLD + ';', 'Medical Sales Intelligence Hub'));
+    wrap.appendChild(el('div', 'text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:700;color:#0B1C33;', 'Medical Sales Intelligence Hub'));
     wrap.appendChild(el('div', 'font-size:24px;font-weight:800;margin:2px 0 4px;', 'Help me prepare'));
     wrap.appendChild(el('div', 'font-size:14px;line-height:1.6;color:#4a5766;max-width:660px;margin-bottom:12px;', 'Pick the speciality, who you are, the trust and <strong>who you’re meeting</strong>. You get your competitors and how you stack up, the right angle for that person, the value case, and what to know about the trust — pulled from the whole Hub. Tick “early-stage” if you’re not on a product yet.'));
 
@@ -594,7 +594,7 @@
         + '<div style="font-size:14px;line-height:1.65;color:#39424d;">' + bodyHtml + '</div></div>';
     }
     function li(items){ return '<ul style="margin:4px 0 0;padding-left:18px;">' + items.map(function(i){ return '<li style="margin:3px 0;">' + i + '</li>'; }).join('') + '</ul>'; }
-    function link(text, id){ return '<a href="/?page_id=' + id + '" style="color:' + GOLD + ';font-weight:600;">' + text + '</a>'; }
+    function link(text, id){ return '<a href="/?page_id=' + id + '" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">' + text + '</a>'; }
     // One-click LinkedIn lookups: the tool builds the exact people-search and
     // recent-posts search and opens them in the rep's own logged-in LinkedIn.
     // (LinkedIn blocks server-side scraping, so deep links are the robust route.)
@@ -614,8 +614,7 @@
     function srcLink(key, text){
       var s = PRESS && PRESS.sources && PRESS.sources[key];
       if (!s) return '';
-      return ' <a href="' + esc(s.url) + '" target="_blank" rel="noopener" style="color:' + GOLD
-        + ';font-size:11px;font-weight:600;">' + esc(text || 'source') + ' &#8599;</a>';
+      return ' <a href="' + esc(s.url) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-size:11px;font-weight:600;">' + esc(text || 'source') + ' &#8599;</a>';
     }
 
     /* THE TRUST'S OWN OPERATING PRESSURE — published figures, copied not derived.
@@ -721,7 +720,7 @@
       var show = sorted.slice(0, 6);
       var rows = show.map(function(c){
         var b = '<strong>' + esc(c.name) + '</strong>'
-          + (c.email ? ' — <a href="mailto:' + esc(c.email) + '" style="color:' + GOLD + ';font-weight:600;">' + esc(c.email) + '</a>' : '')
+          + (c.email ? ' — <a href="mailto:' + esc(c.email) + '" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">' + esc(c.email) + '</a>' : '')
           + (c.tel ? ' · ' + esc(c.tel) : '')
           + '<br><span style="color:#6b7684;font-size:12.5px;">Named on “' + esc(c.notice || 'a procurement notice') + '”'
           + (c.last ? ', most recent ' + esc(c.last) : '')
@@ -786,7 +785,7 @@
         h += panel('Frameworks & timing', li(fr) + '<div style="margin-top:8px;">A framework’s final year is the selling window — see the ' + link('Framework Hub', 678) + '.</div>');
       }
 
-      var nat = (cfg.nationalKeyInfo || []).map(function(n){ return '<strong>' + esc(n.title) + '</strong> — ' + esc(n.detail) + '<br><span style="color:' + GOLD + ';">Use it:</span> ' + esc(n.use); });
+      var nat = (cfg.nationalKeyInfo || []).map(function(n){ return '<strong>' + esc(n.title) + '</strong> — ' + esc(n.detail) + '<br><span style="color:#0B1C33;">Use it:</span> ' + esc(n.use); });
       if (nat.length){ h += panel('What’s changed nationally (use these)', li(nat)); }
 
       /* An alert carrying no title and no product name renders as an empty bullet,
@@ -812,7 +811,7 @@
         if (tr.reportFacts && tr.reportFacts.length){
           var rf = tr.reportFacts.map(function(f){
             return esc(f.fact) + (f.figure ? ' — <strong>' + esc(f.figure) + '</strong>' : '')
-              + (f.source ? ' <a href="' + esc(f.source) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-size:11.5px;font-weight:600;">' + esc(f.where || 'source') + ' &#8599;</a>' : '');
+              + (f.source ? ' <a href="' + esc(f.source) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-size:11.5px;font-weight:600;">' + esc(f.where || 'source') + ' &#8599;</a>' : '');
           });
           body += '<div style="margin-top:10px;font-weight:700;">From their own annual report &amp; board papers:</div>' + li(rf);
         }
@@ -845,7 +844,7 @@
         if (tr.voices && tr.voices.length){
           var vl = tr.voices.map(function(v){
             return '<strong>' + esc(v.who) + '</strong>' + (v.role ? ' (' + esc(v.role) + ')' : '') + (v.date ? ' <span style="color:#8a8778;font-size:11.5px;">' + esc(v.date) + '</span>' : '') + ' — ' + esc(v.what)
-              + (v.source ? ' <a href="' + esc(v.source) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-size:11.5px;font-weight:600;">source &#8599;</a>' : '');
+              + (v.source ? ' <a href="' + esc(v.source) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-size:11.5px;font-weight:600;">source &#8599;</a>' : '');
           });
           body += '<div style="margin-top:10px;font-weight:700;">What they’re saying publicly:</div>' + li(vl);
         }
@@ -900,7 +899,7 @@
       h += panel('How to use this in the meeting', li(howItems));
       h += '<div style="background:#fdfbf6;border:1px solid #e0c98a;border-radius:10px;padding:16px 18px;margin:14px 0 6px;text-align:center;">'
         + '<div style="font-size:14.5px;line-height:1.65;color:#39424d;"><em>The Hub has done the homework — this is your intel. Your skill as a salesperson is what turns it into a sale: people buy from people, and the relationship matters. Walk in as a partner in their care, not a supplier at the door.</em></div>'
-        + '<div style="font-size:13px;color:' + GOLD + ';font-weight:700;margin-top:8px;">&ldquo;Trust is the glue of life.&rdquo; &mdash; Stephen R. Covey</div>'
+        + '<div style="font-size:13px;color:#0B1C33;font-weight:700;margin-top:8px;">&ldquo;Trust is the glue of life.&rdquo; &mdash; Stephen R. Covey</div>'
         + '</div>';
       h += '<div style="font-size:12px;color:#8a8778;margin-top:6px;">Assembled from the live Hub — supplier directory, frameworks, Live Desk and Tools. Verify framework/award status at source before quoting.</div>';
       return h;

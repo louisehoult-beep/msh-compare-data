@@ -142,7 +142,7 @@
     foot.style.cssText = 'margin-top:12px;padding-top:10px;border-top:1px solid ' + LINE + ';font-size:12px;color:' + MUTED + ';line-height:1.6;';
     foot.innerHTML =
       'Source: ' + (eric.url
-        ? '<a href="' + esc(eric.url) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';">' + esc(eric.label || 'NHS Digital ERIC') + '</a>'
+        ? '<a href="' + esc(eric.url) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;">' + esc(eric.label || 'NHS Digital ERIC') + '</a>'
         : esc(eric.label || 'NHS Digital ERIC'))
       + ', collection period ' + esc(ericPeriod) + '. '
       + 'Snapshot taken into the Hub on ' + esc(asOf) + '. '

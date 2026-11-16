@@ -781,7 +781,7 @@
     cov.innerHTML = 'These dropdowns cover the <strong>' + PRODUCTS.length.toLocaleString('en-GB') + ' products indexed across ' + Object.keys(SUPOBJ).length + ' tracked suppliers</strong> — not the whole market. '
       + (rangeAdded ? '<strong>' + (PRODUCTS.length - rangeAdded).toLocaleString('en-GB') + '</strong> come from the procurement record — framework awards and NHS Supply Chain catalogue lines. The other <strong>' + rangeAdded.toLocaleString('en-GB') + '</strong> come from four suppliers’ own product websites, are marked <em>company’s own range</em> wherever they appear, and prove only that the company sells the item: they say nothing about NHS Supply Chain. ' : '')
       + 'A product that is missing is <strong>not yet indexed</strong>, not "nothing found". '
-      + '<a href="mailto:louisehoult@elevateandthrive.uk?subject=' + askSub + '&body=' + askBody + '" style="color:' + GOLD + ';font-weight:600;">Ask for something to be added &rarr;</a> '
+      + '<a href="mailto:louisehoult@elevateandthrive.uk?subject=' + askSub + '&body=' + askBody + '" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">Ask for something to be added &rarr;</a> '
       + '<span style="color:#8a8778;">— usually live within a working day.</span>';
     wrap.appendChild(cov);
     /* Two speciality filters, and they do different jobs. SPECMAP narrows by
@@ -1084,7 +1084,7 @@
           + 'manufacturer&rsquo;s current IFU before quoting anything clinically.';
       }
       return note + ' <a href="' + esc(m.source_url) + '" target="_blank" rel="noopener" '
-        + 'style="color:' + GOLD + ';font-weight:600;">Open the source document &#8599;</a>';
+        + 'style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">Open the source document &#8599;</a>';
     }
 
     function iccTable(m, chosen){
@@ -1171,8 +1171,7 @@
       panel.id = 'msh-differential';
 
       panel.appendChild(el('div',
-        'font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:'
-        + GOLD + ';margin:0 0 6px;', 'Full differential'));
+        'font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:#0B1C33;margin:0 0 6px;', 'Full differential'));
       panel.appendChild(el('div',
         'font-size:13.5px;color:#39424d;line-height:1.6;margin:0 0 12px;max-width:70ch;',
         'Put up to ' + ICC_MAX + ' products side by side on <strong>NHS-authored specifications</strong> '
@@ -1316,7 +1315,7 @@
     }
     btn.addEventListener('click', function(){ runCompare(); });
 
-    function link(text, id){ return '<a href="/?page_id=' + id + '" style="color:' + GOLD + ';font-weight:600;">' + text + '</a>'; }
+    function link(text, id){ return '<a href="/?page_id=' + id + '" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">' + text + '</a>'; }
     function lookupUrl(name){ return 'https://pilot.supplychain.nhs.uk/search?query=' + encodeURIComponent(String(name).replace(/\s*\(.*?\)\s*/g,' ').trim()); }
     var GENERIC_WORDS = { 'system':1,'safety':1,'products':1,'medical':1,'range':1,'solution':1,'solutions':1,'products':1,'closed':1,'sterile':1,'single':1,'device':1,'plus':1,'ultra':1,'flex':1,'select':1,'advance':1,'advanced':1 };
     function sigTokens(name){
@@ -1446,13 +1445,13 @@
       if (li){
         codeCell = '<span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;">NPC ' + esc(li.npc) + (li.mpc ? ' · ' + esc(li.mpc) : '') + '</span>'
           + (d.items.length > 1 ? '<span style="color:#8a8778;font-size:11px;"> +' + (d.items.length - 1) + ' packs</span>' : '')
-          + '<br><a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-weight:600;font-size:11px;">all codes &#8599;</a>';
+          + '<br><a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;font-size:11px;">all codes &#8599;</a>';
       } else if (p.code){
         codeCell = esc(p.code);
       } else if (NOTCAT[nk(p.name)]){
         codeCell = '<span style="color:#8a8778;font-size:11.5px;font-style:italic;">not a catalogue line — ' + esc(NOTCAT[nk(p.name)].reason) + '</span>';
       } else {
-        codeCell = '<a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-weight:600;">look up &#8599;</a>';
+        codeCell = '<a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">look up &#8599;</a>';
       }
       return '<tr style="' + hl + 'border-bottom:1px solid ' + LINE + ';vertical-align:top;">'
         + '<td style="padding:7px 9px;">' + prodCell + '</td>'
@@ -1476,7 +1475,7 @@
           + '<td style="padding:5px 8px;font-size:11px;">' + (it.status ? '<span style="color:#a24; font-weight:600;">' + esc(it.status) + '</span>' : '<span style="color:' + GRN + ';">live</span>') + '</td></tr>';
       }).join('');
       var table = '<div style="overflow-x:auto;margin-top:8px;"><table style="width:100%;border-collapse:collapse;min-width:320px;"><thead><tr style="text-align:left;color:#8a8778;font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;"><th style="padding:2px 8px;">Pack</th><th style="padding:2px 8px;">NPC / MPC</th><th style="padding:2px 8px;">Status</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
-      var more = d.items.length > 6 ? '<div style="font-size:11px;color:#8a8778;margin-top:4px;">+' + (d.items.length - 6) + ' more packs — <a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';">see all on NHS Supply Chain &#8599;</a></div>' : '';
+      var more = d.items.length > 6 ? '<div style="font-size:11px;color:#8a8778;margin-top:4px;">+' + (d.items.length - 6) + ' more packs — <a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;">see all on NHS Supply Chain &#8599;</a></div>' : '';
       var bd = mine ? '2px solid ' + OX : '1px solid ' + LINE;
       return '<div style="background:#fff;border:' + bd + ';border-radius:10px;padding:12px 14px;">' + head + table + more + '</div>';
     }
@@ -1544,7 +1543,7 @@
           (d.items.some(function(it){ return it.status; })
             ? '<span style="color:#a24;font-weight:600;">a pack shows a status change</span>'
             : '<span style="color:' + GRN + ';">all live</span>') + '</div>';
-        h += '<div style="margin-top:5px;"><a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-weight:600;font-size:11.5px;">all codes on NHS Supply Chain &#8599;</a></div>';
+        h += '<div style="margin-top:5px;"><a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;font-size:11.5px;">all codes on NHS Supply Chain &#8599;</a></div>';
       } else {
         h += '<div style="margin-top:8px;font-size:11.5px;color:#8a8778;">' +
           (NOTCAT[nk(p.name)] ? 'Not a catalogue line — ' + esc(NOTCAT[nk(p.name)].reason)
@@ -1578,7 +1577,7 @@
       }
       h2 += '<div style="margin-top:5px;font-size:10.5px;color:#9a958a;">'
         + (pd.parsed === 'heuristic' ? 'Read from the page text, not a structured product record — ' : '')
-        + 'captured ' + esc(ddmm(pd.capturedDate)) + ' &middot; <a href="' + esc(pd.sourceUrl) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-weight:600;">source &#8599;</a></div>'
+        + 'captured ' + esc(ddmm(pd.capturedDate)) + ' &middot; <a href="' + esc(pd.sourceUrl) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">source &#8599;</a></div>'
         + '</div>';
       if (pd.changedSince && pd.changedSince.changed && pd.changedSince.changed.length){
         h2 += '<div style="margin-top:6px;padding:7px 10px;background:' + SOFT + ';border:1px dashed ' + GOLD + ';border-radius:7px;font-size:11.5px;color:#7a5b14;line-height:1.5;">'
@@ -1720,7 +1719,7 @@
       return '<div style="font-size:10.5px;color:#8a8778;margin-top:2px;">' + badge + ' '
         + esc(name) + extra + (when ? ' &middot; ' + esc(ddmm(when)) : '') + range
         + (s.url ? ' &middot; <a href="' + esc(s.url) + '" target="_blank" rel="noopener" '
-            + 'style="color:' + GOLD + ';font-weight:600;">source &#8599;</a>' : '')
+            + 'style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">source &#8599;</a>' : '')
         + '</div>';
     }
 
@@ -1758,7 +1757,7 @@
           + (multi ? 'background:#fcfaf5;' : '') + '">'
           + '<th scope="row" style="padding:8px 10px;font-size:12px;color:#6b7684;text-align:left;'
           + 'font-weight:600;width:220px;">' + esc(field)
-          + (multi ? '<div style="font-size:10px;color:#a8842c;font-weight:700;margin-top:2px;">'
+          + (multi ? '<div style="font-size:10px;color:#0B1C33;font-weight:700;margin-top:2px;">'
               + obs.length + ' sources</div>' : '') + '</th>'
           + '<td style="padding:8px 10px;">' + vals + '</td></tr>';
       }
@@ -2102,7 +2101,7 @@
       }
       if (theirAlerts.length){
         var a0 = theirAlerts[0];
-        reasons.push('<strong>Live MHRA / safety action on their line:</strong> ' + esc(theirs.name) + ' — ' + esc(a0.title) + (a0.date ? ' (' + esc(a0.date) + ')' : '') + '. ' + esc(a0.detail || '') + (a0.use ? ' <em>' + esc(a0.use) + '</em>' : '') + (a0.url ? ' <a href="' + a0.url + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-size:11px;font-weight:600;">official alert &#8599;</a>' : '') + ' Quote the official alert verbatim — never embellish a safety issue.');
+        reasons.push('<strong>Live MHRA / safety action on their line:</strong> ' + esc(theirs.name) + ' — ' + esc(a0.title) + (a0.date ? ' (' + esc(a0.date) + ')' : '') + '. ' + esc(a0.detail || '') + (a0.use ? ' <em>' + esc(a0.use) + '</em>' : '') + (a0.url ? ' <a href="' + a0.url + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-size:11px;font-weight:600;">official alert &#8599;</a>' : '') + ' Quote the official alert verbatim — never embellish a safety issue.');
       }
       if (mineAlerts.length){
         reasons.push('<strong>Be upfront — your own line carries an active alert:</strong> ' + esc(mineAlerts[0].title) + '. Raise it before they do, with your remediation story ready; credibility is won here.');
@@ -2214,7 +2213,7 @@
       var dOn = DRIVERS.filter(function(d){ return d.on; });
       var dOff = DRIVERS.filter(function(d){ return !d.on; });
       function drow(d, on){
-        return '<li style="margin:4px 0;' + (on ? '' : 'opacity:.55;') + '"><strong>' + (on ? '✓ ' : '· ') + esc(d.n) + '</strong> — ' + d.ev + (on && d.note ? ' <span style="color:#14432f;font-weight:600;">Your case: ' + d.note + '.</span>' : (d.note ? ' <span style="color:#8a8778;">' + d.note + '.</span>' : '')) + ' <a href="' + d.src + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-size:11px;font-weight:600;">source &#8599;</a></li>';
+        return '<li style="margin:4px 0;' + (on ? '' : 'opacity:.55;') + '"><strong>' + (on ? '✓ ' : '· ') + esc(d.n) + '</strong> — ' + d.ev + (on && d.note ? ' <span style="color:#14432f;font-weight:600;">Your case: ' + d.note + '.</span>' : (d.note ? ' <span style="color:#8a8778;">' + d.note + '.</span>' : '')) + ' <a href="' + d.src + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-size:11px;font-weight:600;">source &#8599;</a></li>';
       }
       h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GOLD + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">Why trusts actually switch — and where your case lands</div><div style="font-size:12px;color:#6b7684;margin:2px 0 6px;">The evidenced switch drivers from published NHS sources. ✓ = active in your case now (' + dOn.length + ' of ' + DRIVERS.length + ').</div><ul style="margin:2px 0 0;padding-left:18px;font-size:13px;line-height:1.6;color:#39424d;">' + dOn.map(function(d){ return drow(d, true); }).join('') + dOff.map(function(d){ return drow(d, false); }).join('') + '</ul></div>';
 
@@ -2267,7 +2266,7 @@
       // head-to-head above (the rep asked for ONE clear comparison, not a list).
       var others = (chosenSupTheirs ? competitorsOf(mine, chosenSupTheirs) : allComps).filter(function(p){ return p !== theirs; });
       if (others.length){
-        h += '<div style="margin:14px 0 0;font-size:12.5px;color:#75808d;max-height:260px;overflow-y:auto;">All ' + others.length + ' other tracked match' + (others.length === 1 ? '' : 'es') + (chosenSupTheirs ? ' from ' + esc(chosenSupTheirs) : '') + ': ' + others.map(function(p){ return '<a href="#" class="msh-cmp-other" data-name="' + esc(p.name) + '" data-supplier="' + esc(p.supplier) + '" style="color:' + GOLD + ';font-weight:600;">' + esc(p.name) + ' (' + esc(p.supplier) + ')</a>'; }).join(', ') + ' — click one to compare against that instead.</div>';
+        h += '<div style="margin:14px 0 0;font-size:12.5px;color:#75808d;max-height:260px;overflow-y:auto;">All ' + others.length + ' other tracked match' + (others.length === 1 ? '' : 'es') + (chosenSupTheirs ? ' from ' + esc(chosenSupTheirs) : '') + ': ' + others.map(function(p){ return '<a href="#" class="msh-cmp-other" data-name="' + esc(p.name) + '" data-supplier="' + esc(p.supplier) + '" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">' + esc(p.name) + ' (' + esc(p.supplier) + ')</a>'; }).join(', ') + ' — click one to compare against that instead.</div>';
       }
 
       // optional angle
