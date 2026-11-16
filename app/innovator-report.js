@@ -100,7 +100,7 @@
   var CSS = '.inr{font:15px/1.55 Georgia,serif;color:' + INK + '}.inr *{box-sizing:border-box}'
     + '.inr .band{padding:28px 0}.inr .dark{background:' + NAVY + ';color:#F5F1E8}'
     + '.inr .wine{background:' + WINE + ';color:#F5F1E8}.inr .warm{background:' + WARM + '}'
-    + '.inr .col{max-width:1080px;margin:0 auto;padding:0 40px}@media(max-width:600px){.inr .col{padding:0 20px}}'
+    + '.inr .col{max-width:none;margin:0;padding:0 40px}@media(max-width:600px){.inr .col{padding:0 20px}}'
     + '.inr h1,.inr h2{font-family:Didot,"Bodoni 72",Georgia,serif;margin:0 0 10px}'
     + '.inr h1{font-size:32px;line-height:1.15}.inr h2{font-size:25px;color:' + NAVY + '}'
     + '.inr h3{font:700 15px Helvetica,Arial,sans-serif;color:' + NAVY + ';margin:18px 0 6px}'
