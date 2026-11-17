@@ -87,6 +87,40 @@ class MatrixReaders(unittest.TestCase):
         self.assertEqual(got["Beta Ltd"], {"Lot 1", "Lot 2"})
         self.assertNotIn("Yes", got)
 
+    def test_a_lot_heading_row_carrying_products_is_read_not_dropped(self):
+        """Robotic Medical Equipment, matrix of 9 September 2026: NHS Supply
+        Chain writes the first product of a lot on the heading row itself. That
+        row used to be skipped whenever it held three or fewer values, so a
+        supplier whose ONLY mark sat there vanished — silently, not into
+        `unresolved`. Zimmer Biomet (ROSA Brain, Lot 2) and MCT Lifesciences
+        (ROBOFLEX AVICENNA, Lot 3) were both lost that way, while Medtronic and
+        Procept survived only on a second product one row lower."""
+        rows = [["Specification", "CMR Surgical Ltd", "Medtronic Limited",
+                 "MCT Lifesciences Ltd", "Procept Biorobotics", "Zimmer Biomet UK Limited"],
+                ["Lot 1 - Surgical Robots", "Versius", "HUGO RAS", "", "", ""],
+                ["Lot 2 - Spinal Robots", "", "Mazor X System", "", "", "ROSA Brain"],
+                ["", "", "StealthAxis Autopilot", "", "", ""],
+                ["Lot 3 - Freestanding Arms", "", "", "ROBOFLEX AVICENNA", "Aquablation", ""],
+                ["", "", "", "", "Hydros", ""]]
+        got = L.parse_matrix_sections(rows, "Product Matrix")
+        self.assertEqual(got["Zimmer Biomet UK Limited"], {"Lot 2"})
+        self.assertEqual(got["MCT Lifesciences Ltd"], {"Lot 3"})
+        self.assertEqual(got["Medtronic Limited"], {"Lot 1", "Lot 2"})
+        self.assertEqual(got["Procept Biorobotics"], {"Lot 3"})
+        self.assertEqual(got["CMR Surgical Ltd"], {"Lot 1"})
+
+    def test_the_cell_holding_the_lot_label_is_never_read_as_a_mark(self):
+        """A sheet that puts the lot heading in a DATA column: that text is the
+        heading, not a mark against the supplier whose column it lands in."""
+        rows = [["Specification", "Acme Ltd", "Beta Ltd"],
+                ["", "Lot 1 - Curtains", ""],
+                ["Cubicle curtains", "Yes", ""],
+                ["", "Lot 2 - Tracks", ""],
+                ["Cubicle tracks", "", "Yes"]]
+        got = L.parse_matrix_sections(rows, "Product Matrix")
+        self.assertEqual(got["Acme Ltd"], {"Lot 1"})
+        self.assertEqual(got["Beta Ltd"], {"Lot 2"})
+
     def test_lot_rows_reconcile_to_brief_numbering(self):
         titles = {"Lot 1.1": "Dialysis Consumables and Equipment", "Lot 2": "CRRT"}
         self.assertEqual(L.reconcile_lot("Lot 1 - Dialysis Consumables and Equipment", titles), "Lot 1.1")

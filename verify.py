@@ -4576,9 +4576,14 @@ def _warn_unresolved_lot_names(rows, seed):
         n, nf, ex = tell(norecord)
         WARN("framework-lots", "%d lot-source supplier name(s) across %d framework(s) resolve to NO Hub "
                                "supplier record, so their lots show 'lot not confirmed'. These are candidate "
-                               "NEW records, not missing aliases — an alias has nothing to point at. Whether "
-                               "the Hub holds that kind of supplier at all is a decision, not a backlog item "
-                               "(most are non-clinical: catering, facilities, furniture, hand hygiene): %s."
+                               "NEW records, not missing aliases — an alias has nothing to point at, so this "
+                               "line is a DECIDED STATE, not a backlog. Non-clinical suppliers stay out: "
+                               "catering, facilities and electrical, furniture, office supplies and food were "
+                               "ruled out on 17/11/2026 and are not to be re-asked. Hand hygiene was settled "
+                               "name by name on product evidence — the clinical ones were added and the rest "
+                               "recorded as out, with reasons, in "
+                               "state/hand-hygiene-lot-source-adjudication.json. A name here is only work "
+                               "when it is clinical and no adjudication file already covers it: %s."
              % (n, nf, ex))
     if absent:
         n, nf, ex = tell(absent)
