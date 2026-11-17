@@ -12,17 +12,17 @@
  },
  "source": "Atamis Health Family public opportunity search",
  "source_url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects",
- "generated": "2026-11-16T07:18:18+00:00",
+ "generated": "2026-11-17T08:30:36+00:00",
  "access_note": "One request per day. The endpoint returns the whole result set in a single response, so this is the least burdensome access pattern available. See the script docstring for the robots.txt / OGL position.",
  "field_caveat": "The public Atamis data carries NO supplier name, NO contract value, NO CPV code and NO contract end date. Those fields exist in Atamis but are behind supplier login. Contract end dates come from Find a Tender: see data/framework-awards.json.",
  "classification_rule": "pre_market_engagement: title or description matches market engagement, pre-engagement, expression of interest, EOI, soft market, market sounding, prior information, request for information or RFI. framework_further_competition: the title, description or Procurement Route matches further competition, mini-competition, call-off or framework mini/further. digital: the Atamis Category is a software, information systems or IT services category (the stand-in for CPV 48/72, since Atamis carries no CPV), or the title names a clinical digital system; digital_clinical: the title test alone. Both rules are in scripts/digital_lane_rules.py. PME (pre-market engagement) counts as pre_market_engagement from 20/10/2026. A record may carry several labels or none. Procurement Route is the unnamed ninth CSV column, recovered by this script.",
  "counts": {
-  "total_held": 5504,
-  "live_on_last_run": 5482,
-  "new_this_run": 0,
-  "newly_delisted_this_run": 0,
-  "pre_market_engagement": 899,
-  "framework_further_competition": 295,
+  "total_held": 5509,
+  "live_on_last_run": 5486,
+  "new_this_run": 5,
+  "newly_delisted_this_run": 1,
+  "pre_market_engagement": 901,
+  "framework_further_competition": 297,
   "distinct_authorities": 283,
   "broken_rows_skipped": 314
  },
@@ -78,12 +78,104 @@
    "description": "Open tender for a personal dosimetry service for Leeds Teaching Hospitals NHS Trust.",
    "category": "Radiation protection services",
    "procurement_route": "PA23 Open Procedure",
-   "opens": "2026-11-16",
-   "deadline": "2026-11-26",
-   "time_remaining": "< 2 weeks",
+   "opens": "2026-11-23",
+   "deadline": "2026-12-03",
+   "time_remaining": "< 1 month",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C475340",
    "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C484333",
+   "name": "Boiler Chemical and softener service Contract",
+   "authority": "Maidstone and Tunbridge Wells NHS Trust",
+   "description": "Boiler chemical and softener service contract for MGH, KMOC, KMMS and CDC",
+   "category": "Service Contracts",
+   "procurement_route": "",
+   "opens": "2026-11-17",
+   "deadline": "2026-11-24",
+   "time_remaining": "< 2 weeks",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484333",
+   "first_seen": "2026-10-20"
+  },
+  {
+   "ref": "C491833",
+   "name": "NHS CIOS and NHS Devon - WorkWell Coaching Hub",
+   "authority": "NHS Cornwall and the Isles of Scilly Integrated Care Board",
+   "description": "NHS CIOS ICB and NHS Devon ICB are procuring a WorkWell Coaching Hub service to:\r\na. provide a single referral route for WorkWell support which is accessible to all residents across Cornwall, Isles of Scilly and Devon\r\nb. lead the Coaching Community of Practice to ensure quality and consistency of support across the WorkWell Hub and WorkWell Neighbourhoods",
+   "category": "Training & Education Services",
+   "procurement_route": "PA23 Competitive Flexible Procedure",
+   "opens": "2026-11-16",
+   "deadline": "2026-12-11",
+   "time_remaining": "< 1 month",
+   "labels": [],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C491833",
+   "first_seen": "2026-11-17"
+  },
+  {
+   "ref": "C491697",
+   "name": "Expression of Interest for Child's House in the Midlands",
+   "authority": "NHS England",
+   "description": "NHS England’s Midlands Health and Justice Commissioning Team is inviting expressions of interest from providers and system partnerships to inform the development of a Child House model for the Midlands. The proposed regional investment builds on the commitment to a Child House model outlined in Freedom from violence and abuse: a cross-government strategy.",
+   "category": "Healthcare",
+   "procurement_route": "",
+   "opens": "2026-11-16",
+   "deadline": "2026-12-04",
+   "time_remaining": "< 1 month",
+   "labels": [
+    "pre_market_engagement"
+   ],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C491697",
+   "first_seen": "2026-11-17"
+  },
+  {
+   "ref": "C491687",
+   "name": "Fertility Services within Leicester Fertility Centre",
+   "authority": "University Hospitals of Leicester NHS Trust",
+   "description": "University Hospitals of Leicester NHS Trust (UHL) is commencing a programme of Pre-Market Engagement in relation to the future operation of Fertility Services at UHL’s Leicester Fertility Centre.\r\n\r\nUHL seeks a provider with fertility service expertise, access to investment and demonstrable commercial and operational capability to work in partnership with the Trust. The Provider shall sustain the existing service and deliver agreed improvements in capacity, facilities, technology, patient experience and financial performance. It is anticipated that a contract will be in place by mid-2027.",
+   "category": "NHS Healthcare Assisted Fertility Services",
+   "procurement_route": "PSR Competitive Process",
+   "opens": "2026-11-16",
+   "deadline": "2026-12-11",
+   "time_remaining": "< 1 month",
+   "labels": [
+    "pre_market_engagement"
+   ],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C491687",
+   "first_seen": "2026-11-17"
+  },
+  {
+   "ref": "C489910",
+   "name": "Perinatal Pathology Transport (pilot)",
+   "authority": "NHS England",
+   "description": "The Paediatric and Perinatal Post-Mortem Transport PILOT Service will be responsible for the transfer of deceased babies and foetus of more than 12 weeks gestation, organs and associated tissue from hospitals to pathology service providers.\r\nThe service includes transport and repatriation or transfer to a funeral provider. it will be used to assess whether this service is viable and provides the benefits intended before national rollout on a framework where contracting authorities shall be able to call off from prequalified providers.",
+   "category": "Transport",
+   "procurement_route": "PA23 Open or Competitive Flexible Procedure - New Framework",
+   "opens": "2026-11-16",
+   "deadline": "2026-12-16",
+   "time_remaining": "< 1 month",
+   "labels": [
+    "framework_further_competition"
+   ],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C489910",
+   "first_seen": "2026-11-17"
+  },
+  {
+   "ref": "C488285",
+   "name": "External Audit NLaG NHS - RM6310 LOT2",
+   "authority": "Northern Lincolnshire and Goole NHS Foundation Trust",
+   "description": "External Audit for NLaG Trust - as part of Trust Legal requirements",
+   "category": "Audit Fees External Non Statutory",
+   "procurement_route": "PCR 2015 Framework - Further Competition",
+   "opens": "2026-11-16",
+   "deadline": "2026-12-18",
+   "time_remaining": "> 1 month",
+   "labels": [
+    "framework_further_competition"
+   ],
+   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C488285",
+   "first_seen": "2026-11-17"
   },
   {
    "ref": "C472176",
@@ -124,7 +216,7 @@
    "procurement_route": "Below Threshold - 3 Quotes",
    "opens": "2026-11-13",
    "deadline": "2026-11-23",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C491925",
    "first_seen": "2026-11-14"
@@ -138,7 +230,7 @@
    "procurement_route": "Below Threshold - 3 Quotes",
    "opens": "2026-11-13",
    "deadline": "2026-11-23",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C491892",
    "first_seen": "2026-11-14"
@@ -196,7 +288,7 @@
    "procurement_route": "PA23 Light Touch Regime",
    "opens": "2026-11-13",
    "deadline": "2026-11-30",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C488768",
    "first_seen": "2026-11-14"
@@ -592,7 +684,7 @@
    "procurement_route": "PA23 Below Threshold - Limited Competition",
    "opens": "2026-11-09",
    "deadline": "2026-11-17",
-   "time_remaining": "< 2 days",
+   "time_remaining": "< 4 hours",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C488852",
    "first_seen": "2026-11-10"
@@ -606,7 +698,7 @@
    "procurement_route": "",
    "opens": "2026-11-09",
    "deadline": "2026-11-30",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C488629",
    "first_seen": "2026-11-10"
@@ -714,7 +806,7 @@
    "procurement_route": "PA23 Open or Competitive Flexible Procedure - New Framework",
    "opens": "2026-11-06",
    "deadline": "2026-12-16",
-   "time_remaining": "> 1 month",
+   "time_remaining": "< 1 month",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C459338",
    "first_seen": "2026-11-07"
@@ -728,7 +820,7 @@
    "procurement_route": "Below Threshold - 3 Quotes",
    "opens": "2026-11-05",
    "deadline": "2026-11-16",
-   "time_remaining": "< 4 hours",
+   "time_remaining": "Closed",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C488425",
    "first_seen": "2026-11-06"
@@ -756,7 +848,7 @@
    "procurement_route": "",
    "opens": "2026-11-05",
    "deadline": "2026-11-16",
-   "time_remaining": "< 6 hours",
+   "time_remaining": "Closed",
    "labels": [
     "pre_market_engagement",
     "digital",
@@ -882,7 +974,7 @@
    "procurement_route": "PA23 Light Touch Regime",
    "opens": "2026-11-04",
    "deadline": "2026-12-16",
-   "time_remaining": "> 1 month",
+   "time_remaining": "< 1 month",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C483992",
    "first_seen": "2026-11-05"
@@ -999,7 +1091,7 @@
    "procurement_route": "PSR Competitive Process",
    "opens": "2026-11-03",
    "deadline": "2026-11-30",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C486014",
    "first_seen": "2026-11-04"
@@ -1013,7 +1105,7 @@
    "procurement_route": "PSR Framework - Set up of new Framework",
    "opens": "2026-11-03",
    "deadline": "2026-11-16",
-   "time_remaining": "< 12 hours",
+   "time_remaining": "Closed",
    "labels": [
     "pre_market_engagement"
    ],
@@ -1029,7 +1121,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-11-03",
    "deadline": "2026-11-30",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C464449",
    "first_seen": "2026-11-04"
@@ -1043,7 +1135,7 @@
    "procurement_route": "",
    "opens": "2026-11-02",
    "deadline": "2026-11-30",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C487659",
    "first_seen": "2026-11-03"
@@ -1085,7 +1177,7 @@
    "procurement_route": "PA23 Below Threshold - open competition",
    "opens": "2026-11-02",
    "deadline": "2026-11-16",
-   "time_remaining": "< 6 hours",
+   "time_remaining": "Closed",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C487479",
    "first_seen": "2026-11-03"
@@ -1099,7 +1191,7 @@
    "procurement_route": "PA23 Below Threshold - open competition",
    "opens": "2026-11-02",
    "deadline": "2026-11-23",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C487383",
    "first_seen": "2026-11-03"
@@ -1171,7 +1263,7 @@
    "procurement_route": "PA23 Below Threshold - open competition",
    "opens": "2026-10-30",
    "deadline": "2026-11-30",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [
     "digital"
    ],
@@ -1215,7 +1307,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-10-30",
    "deadline": "2026-11-30",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C474352",
    "first_seen": "2026-10-31"
@@ -1347,7 +1439,7 @@
    "procurement_route": "",
    "opens": "2026-10-28",
    "deadline": "2026-11-23",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [
     "pre_market_engagement"
    ],
@@ -1393,7 +1485,7 @@
    "procurement_route": "PA23 Light Touch Regime",
    "opens": "2026-10-28",
    "deadline": "2026-11-23",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C483046",
    "first_seen": "2026-10-30"
@@ -1421,7 +1513,7 @@
    "procurement_route": "PA23 Below Threshold - open competition",
    "opens": "2026-10-28",
    "deadline": "2026-11-18",
-   "time_remaining": "< 1 week",
+   "time_remaining": "< 2 days",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C461041",
    "first_seen": "2026-10-29"
@@ -1464,7 +1556,7 @@
    "procurement_route": "",
    "opens": "2026-10-27",
    "deadline": "2026-11-18",
-   "time_remaining": "< 1 week",
+   "time_remaining": "< 2 days",
    "labels": [
     "pre_market_engagement"
    ],
@@ -1526,7 +1618,7 @@
    "procurement_route": "",
    "opens": "2026-10-26",
    "deadline": "2026-11-17",
-   "time_remaining": "< 2 days",
+   "time_remaining": "< 12 hours",
    "labels": [
     "framework_further_competition"
    ],
@@ -1542,7 +1634,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-10-26",
    "deadline": "2026-11-23",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C485549",
    "first_seen": "2026-10-27"
@@ -1555,7 +1647,7 @@
    "category": "Computer Software Licences",
    "procurement_route": "",
    "opens": "2026-10-26",
-   "deadline": "2026-11-16",
+   "deadline": "2026-11-17",
    "time_remaining": "< 12 hours",
    "labels": [
     "pre_market_engagement",
@@ -1589,7 +1681,7 @@
    "procurement_route": "",
    "opens": "2026-10-26",
    "deadline": "2026-11-23",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C473623",
    "first_seen": "2026-10-24"
@@ -1677,7 +1769,7 @@
    "procurement_route": "PA23 Open or Competitive Flexible Procedure - New Framework",
    "opens": "2026-10-23",
    "deadline": "2026-11-23",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484624",
    "first_seen": "2026-10-24"
@@ -1705,7 +1797,7 @@
    "procurement_route": "PA23 Competitive Flexible Procedure",
    "opens": "2026-10-23",
    "deadline": "2026-11-17",
-   "time_remaining": "< 2 days",
+   "time_remaining": "< 4 hours",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C474587",
    "first_seen": "2026-10-24"
@@ -1821,7 +1913,7 @@
    "category": "Building Construction",
    "procurement_route": "PA23 Below Threshold - open competition",
    "opens": "2026-10-21",
-   "deadline": "2026-11-18",
+   "deadline": "2026-11-23",
    "time_remaining": "< 1 week",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484930",
@@ -1865,8 +1957,8 @@
    "category": "Ventilation",
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-10-21",
-   "deadline": "2026-11-18",
-   "time_remaining": "< 1 week",
+   "deadline": "2026-11-25",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484527",
    "first_seen": "2026-10-22"
@@ -1880,7 +1972,7 @@
    "procurement_route": "",
    "opens": "2026-10-21",
    "deadline": "2026-11-30",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484395",
    "first_seen": "2026-10-22"
@@ -1924,7 +2016,7 @@
    "procurement_route": "",
    "opens": "2026-10-21",
    "deadline": "2026-11-17",
-   "time_remaining": "< 2 days",
+   "time_remaining": "< 4 hours",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C483156",
    "first_seen": "2026-10-22"
@@ -2054,7 +2146,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-10-20",
    "deadline": "2026-11-17",
-   "time_remaining": "< 2 days",
+   "time_remaining": "< 2 hours",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C476248",
    "first_seen": "2026-10-20"
@@ -2128,7 +2220,7 @@
    "procurement_route": "",
    "opens": "2026-10-19",
    "deadline": "2026-11-16",
-   "time_remaining": "< 6 hours",
+   "time_remaining": "Closed",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484361",
    "first_seen": "2026-10-20"
@@ -2142,7 +2234,7 @@
    "procurement_route": "PA23 Below Threshold - open competition",
    "opens": "2026-10-19",
    "deadline": "2026-11-16",
-   "time_remaining": "< 6 hours",
+   "time_remaining": "Closed",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484350",
    "first_seen": "2026-10-20"
@@ -2162,20 +2254,6 @@
     "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484348",
-   "first_seen": "2026-10-20"
-  },
-  {
-   "ref": "C484333",
-   "name": "Boiler Chemical and softener service Contract",
-   "authority": "Maidstone and Tunbridge Wells NHS Trust",
-   "description": "Boiler chemical and softener service contract for MGH, KMOC, KMMS and CDC",
-   "category": "Service Contracts",
-   "procurement_route": "",
-   "opens": "2026-10-19",
-   "deadline": "2026-11-16",
-   "time_remaining": "< 6 hours",
-   "labels": [],
-   "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C484333",
    "first_seen": "2026-10-20"
   },
   {
@@ -2201,7 +2279,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-10-19",
    "deadline": "2026-11-30",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C483280",
    "first_seen": "2026-10-29"
@@ -2310,7 +2388,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-10-19",
    "deadline": "2026-11-30",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C461206",
    "first_seen": "2026-10-20"
@@ -2590,7 +2668,7 @@
    "procurement_route": "",
    "opens": "2026-10-14",
    "deadline": "2026-11-23",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C476296",
    "first_seen": "2026-10-20"
@@ -2646,7 +2724,7 @@
    "procurement_route": "PSR Competitive Process",
    "opens": "2026-10-14",
    "deadline": "2026-11-16",
-   "time_remaining": "< 12 hours",
+   "time_remaining": "Closed",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C455994",
    "first_seen": "2026-10-15"
@@ -2659,7 +2737,7 @@
    "category": "Networks Communications & Cabling",
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-10-13",
-   "deadline": "2026-11-17",
+   "deadline": "2026-11-18",
    "time_remaining": "< 2 days",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C482550",
@@ -2702,7 +2780,7 @@
    "procurement_route": "PA23 Open or Competitive Flexible Procedure - New Framework",
    "opens": "2026-10-13",
    "deadline": "2026-11-30",
-   "time_remaining": "< 1 month",
+   "time_remaining": "< 2 weeks",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C475795",
    "first_seen": "2026-10-14"
@@ -2715,8 +2793,8 @@
    "category": "Medical Equipment",
    "procurement_route": "PA23 Competitive Flexible Procedure",
    "opens": "2026-10-13",
-   "deadline": "2026-11-13",
-   "time_remaining": "Closed",
+   "deadline": "2026-11-30",
+   "time_remaining": "< 2 weeks",
    "labels": [
     "pre_market_engagement"
    ],
@@ -2808,7 +2886,7 @@
    "procurement_route": "PSR Framework - Set up of new Framework",
    "opens": "2026-10-12",
    "deadline": "2026-11-23",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C473529",
    "first_seen": "2026-10-13"
@@ -3083,7 +3161,7 @@
    "procurement_route": "PCR 2015 Framework - Further Competition",
    "opens": "2026-10-08",
    "deadline": "2026-11-16",
-   "time_remaining": "< 6 hours",
+   "time_remaining": "Closed",
    "labels": [
     "framework_further_competition"
    ],
@@ -3199,7 +3277,7 @@
    "procurement_route": "PSR Competitive Process",
    "opens": "2026-10-07",
    "deadline": "2026-11-23",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C475272",
    "first_seen": "2026-10-08"
@@ -3243,7 +3321,7 @@
    "procurement_route": "PA23 Below Threshold - open competition",
    "opens": "2026-10-07",
    "deadline": "2026-11-17",
-   "time_remaining": "< 2 days",
+   "time_remaining": "< 4 hours",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C471877",
    "first_seen": "2026-10-08"
@@ -3374,7 +3452,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-10-05",
    "deadline": "2026-11-23",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C473302",
    "first_seen": "2026-10-03"
@@ -3403,8 +3481,8 @@
    "category": "Care and treatment Medical and Associated services - Paediatrics",
    "procurement_route": "PSR Framework - Set up of new Framework",
    "opens": "2026-10-05",
-   "deadline": "2026-11-16",
-   "time_remaining": "< 12 hours",
+   "deadline": "2026-11-17",
+   "time_remaining": "< 2 hours",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C472828",
    "first_seen": "2026-10-06"
@@ -3704,7 +3782,7 @@
    "procurement_route": "PA23 Below Threshold - Limited Competition",
    "opens": "2026-10-01",
    "deadline": "2026-11-17",
-   "time_remaining": "< 2 days",
+   "time_remaining": "< 6 hours",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C467124",
    "first_seen": "2026-10-02"
@@ -3777,7 +3855,7 @@
    "procurement_route": "",
    "opens": "2026-09-30",
    "deadline": "2026-11-18",
-   "time_remaining": "< 1 week",
+   "time_remaining": "< 2 days",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C474558",
    "first_seen": "2026-10-02"
@@ -4043,7 +4121,7 @@
    "procurement_route": "PCR 2015 Framework - Further Competition",
    "opens": "2026-09-24",
    "deadline": "2026-11-17",
-   "time_remaining": "< 2 days",
+   "time_remaining": "< 1 day",
    "labels": [
     "framework_further_competition"
    ],
@@ -4059,7 +4137,7 @@
    "procurement_route": "PA23 Open Procedure",
    "opens": "2026-09-24",
    "deadline": "2026-11-17",
-   "time_remaining": "< 2 days",
+   "time_remaining": "< 4 hours",
    "labels": [],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C425492",
    "first_seen": "2026-09-25"
@@ -4604,7 +4682,7 @@
    "procurement_route": "PA23 Competitive Flexible Procedure",
    "opens": "2026-09-16",
    "deadline": "2026-11-23",
-   "time_remaining": "< 2 weeks",
+   "time_remaining": "< 1 week",
    "labels": [
     "digital"
    ],
@@ -79686,7 +79764,8 @@
     "digital"
    ],
    "url": "https://health-family-contract-search.secure.force.com/?searchtype=Projects&searchStr=C460029",
-   "first_seen": "2026-08-28"
+   "first_seen": "2026-08-28",
+   "delisted_on": "2026-11-17"
   },
   {
    "ref": "C459513",
