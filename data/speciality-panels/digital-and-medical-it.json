@@ -13,20 +13,20 @@
  "slug": "digital-and-medical-it",
  "label": "Digital health and AI",
  "defined": true,
- "generated": "2026-11-16",
+ "generated": "2026-11-17",
  "dataAsOf": {
   "frameworks": "2026-11-15",
-  "tenderHistory": "2026-11-16",
-  "frameworkAwards": "2026-11-16T15:27:44+00:00",
-  "openTenders": "16/11/2026",
-  "drugTariff": "2026-11-16",
-  "localIntel": "2026-11-16",
+  "tenderHistory": "2026-11-17",
+  "frameworkAwards": "2026-11-17T15:34:08+00:00",
+  "openTenders": "17/11/2026",
+  "drugTariff": "2026-11-17",
+  "localIntel": "2026-11-17",
   "supplierDirectory": "2026-11-14",
   "gpPrescribing": "2026-10-21",
-  "mhraDsu": "2026-11-16",
+  "mhraDsu": "2026-11-17",
   "drugTariffViiia": null,
   "hospitalPrescribing": null,
-  "digitalLane": "16/11/2026"
+  "digitalLane": "17/11/2026"
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -1074,7 +1074,7 @@
    "url": "https://www.gov.uk/government/collections/ai-airlock-a-regulatory-sandbox-for-ai-enabled-medical-devices",
    "verifiedOn": "2026-10-20",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1094,10 +1094,9 @@
    "url": "https://digital.nhs.uk/services/digital-technology-assessment-criteria-dtac",
    "verifiedOn": "2026-10-20",
    "lastCheck": {
-    "date": "2026-11-16",
-    "status": "ok",
-    "http": 200,
-    "quote": "found"
+    "date": "2026-11-17",
+    "status": "unreachable",
+    "http": 403
    }
   },
   {
@@ -1115,7 +1114,7 @@
    "url": "https://www.gov.uk/government/news/government-backs-recommendations-of-nhs-doctors-led-ai-commission",
    "verifiedOn": "2026-10-20",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -1137,7 +1136,7 @@
    "url": "https://malue.co.uk",
    "verifiedOn": "2026-10-29",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -2419,7 +2418,7 @@
   "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
  },
  "mhraDsu": {
-  "dataAsOf": "2026-11-16",
+  "dataAsOf": "2026-11-17",
   "sourcePage": "https://www.gov.uk/drug-safety-update",
   "noFacet": true,
   "whyEmpty": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
@@ -2430,12 +2429,12 @@
  },
  "drugTariffViiia": null,
  "digitalLane": {
-  "dataAsOf": "16/11/2026",
+  "dataAsOf": "17/11/2026",
   "rule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction. CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only. A call-off under a framework is not a notice, and most digital money in the NHS moves as framework call-offs, capital business cases and G-Cloud awards without competition. This lane is therefore a floor, not a census: an absence here says nothing about the buyer or the market. Contract values, where shown, are the notice's own and are not summed across rows. Shown here: the clinical rows only, up to 15 awards and every open notice and market engagement row. The full lane, with the rows left out, is data/digital-lane.json.",
   "counts": {
-   "awards": 388,
-   "awardsClinical": 47,
-   "openNotices": 5,
+   "awards": 395,
+   "awardsClinical": 48,
+   "openNotices": 4,
    "openNoticesClinical": 1,
    "marketEngagement": 2,
    "marketEngagementClinical": 0
@@ -2462,6 +2461,22 @@
   ],
   "marketEngagement": [],
   "awards": [
+   {
+    "lane": "digital",
+    "clinical": true,
+    "stage": "planning",
+    "title": "NHS Essex Preliminary Market Engagement Notice for Online Consultation Provision",
+    "buyer": "NHS ESSEX INTEGRATED CARE BOARD",
+    "published": "2026-11-17",
+    "isFramework": false,
+    "contractEnd": null,
+    "value": null,
+    "digitalCpv": [
+     "72000000"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/108868-2026",
+    "ocid": "ocds-h6vhtk-07bd97"
+   },
    {
     "lane": "digital",
     "clinical": true,
@@ -2696,31 +2711,12 @@
     ],
     "url": "https://www.find-tender.service.gov.uk/Notice/100097-2026",
     "ocid": "ocds-h6vhtk-078e26"
-   },
-   {
-    "lane": "digital",
-    "clinical": true,
-    "stage": "award",
-    "title": "BCU-DCO-63923 - ENDOSCOPY MANAGEMENT SYSTEM",
-    "buyer": "Betsi Cadwaladr University Health Board",
-    "published": "2026-10-21",
-    "isFramework": false,
-    "contractEnd": null,
-    "value": 186600,
-    "digitalCpv": [
-     "48000000",
-     "48180000",
-     "72212180",
-     "72260000"
-    ],
-    "url": "https://www.find-tender.service.gov.uk/Notice/099456-2026",
-    "ocid": "ocds-h6vhtk-043b03"
    }
   ],
-  "awardsClinicalTotal": 47,
+  "awardsClinicalTotal": 48,
   "gates": {
    "rule": "Each row is one owner page for a health tech gate. lastUpdated is the owner's own date: GOV.UK's public_updated_at from its content API, or the 'Last edited' line on an NHS England Digital page. latestChange is the owner's own change note, verbatim, where the owner publishes one. changedSinceLastRun is true when that date moved since the previous run. Nothing is summarised or interpreted.",
-   "dataAsOf": "16/11/2026",
+   "dataAsOf": "17/11/2026",
    "pages": [
     {
      "gate": "Regulation",
@@ -2928,7 +2924,7 @@
       }
      ],
      "notVerified": [
-      "Supplier list read from the Digital Marketplace G-Cloud 15 supplier A to Z (https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud-15/suppliers), company names only, 2987 suppliers. The A to Z does not say which lot each supplier holds, so every lot's list stays null; a supplier's lot is shown only where its own service page was read.",
+      "Supplier list read from the Digital Marketplace G-Cloud 15 supplier A to Z (https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud-15/suppliers), company names only, 2988 suppliers. The A to Z does not say which lot each supplier holds, so every lot's list stays null; a supplier's lot is shown only where its own service page was read.",
       "Agreement end 05/02/2028 (page header) and 'run for 4 years from 6 August 2026, reopening after 18 months and again after 36 months' (page text) are both recorded verbatim and not resolved. Settled by the framework award form."
      ]
     },
@@ -3110,6 +3106,54 @@
      "lots": [],
      "notVerified": [
       "Supplier list not read: the SBS page lists suppliers behind its own supplier tab and no award notice was read for this framework. Settled by the SBS supplier details or the award notice."
+     ]
+    },
+    {
+     "name": "G-Cloud 12",
+     "reference": "RM1557.12",
+     "owner": "Government Commercial Agency (GCA), formerly Crown Commercial Service",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.12",
+     "status": "expired",
+     "starts": "2020-09-28",
+     "ends": "2022-11-27",
+     "term": null,
+     "estimatedValue": null,
+     "lots": [],
+     "notVerified": [
+      "Lots and supplier lists are not published on an expired agreement page, so both stay null. A supplier's place on this agreement cannot be read from GCA now; it is shown only where an award notice names the agreement as its route.",
+      "Whether an individual call-off under this agreement was extended beyond the term its own notice states is not published anywhere this Hub can read. Settled by the buyer."
+     ]
+    },
+    {
+     "name": "G-Cloud 13",
+     "reference": "RM1557.13",
+     "owner": "Government Commercial Agency (GCA), formerly Crown Commercial Service",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.13",
+     "status": "expired",
+     "starts": "2022-11-09",
+     "ends": "2024-11-08",
+     "term": null,
+     "estimatedValue": null,
+     "lots": [],
+     "notVerified": [
+      "Lots and supplier lists are not published on an expired agreement page, so both stay null. A supplier's place on this agreement cannot be read from GCA now; it is shown only where an award notice names the agreement as its route.",
+      "Whether an individual call-off under this agreement was extended beyond the term its own notice states is not published anywhere this Hub can read. Settled by the buyer."
+     ]
+    },
+    {
+     "name": "G-Cloud 14",
+     "reference": "RM1557.14",
+     "owner": "Government Commercial Agency (GCA), formerly Crown Commercial Service",
+     "url": "https://www.gca.gov.uk/agreements/RM1557.14",
+     "status": "expired",
+     "starts": "2024-10-29",
+     "ends": "2026-10-28",
+     "term": null,
+     "estimatedValue": null,
+     "lots": [],
+     "notVerified": [
+      "Lots and supplier lists are not published on an expired agreement page, so both stay null. A supplier's place on this agreement cannot be read from GCA now; it is shown only where an award notice names the agreement as its route.",
+      "Whether an individual call-off under this agreement was extended beyond the term its own notice states is not published anywhere this Hub can read. Settled by the buyer."
      ]
     },
     {
@@ -3774,11 +3818,11 @@
    "none": 6
   },
   "companies": {
-   "dataAsOf": "2026-11-16T12:12:41.369112Z",
+   "dataAsOf": "2026-11-17T12:45:58.940323Z",
    "counts": {
     "companies": 148,
     "onDigitalFramework": 119,
-    "withDigitalAwards": 48,
+    "withDigitalAwards": 49,
     "withProducts": 46
    },
    "rule": "Every company record in the Hub's supplier directory that is digital by a recorded fact: filed under a digital speciality label, named on a digital framework's own published supplier list as held on its record (NHS Supply Chain, Government Commercial Agency (GCA), NHS Shared Business Services (SBS) or HealthTrust Europe), or named exactly on an NHS buyer's software or IT award notice. A framework place is not a contract and an award count is not spend. Products are counted from the company record; the company report lists them with their sources. Companies on a framework's list that have no Hub company record are not listed here, so this is not a census of the market.",
@@ -3928,6 +3972,32 @@
      "clinicalAwards": 0,
      "latestAward": "2026-11-12",
      "products": 0,
+     "companyNumber": null
+    },
+    {
+     "name": "Roche Diagnostics UK",
+     "report": "/medical-sales-hub/company-report/?company=Roche%20Diagnostics%20UK",
+     "labels": [],
+     "frameworks": [
+      {
+       "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
+       "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
+       "lots": [
+        "1",
+        "3",
+        "4"
+       ]
+      },
+      {
+       "name": "Digital Diagnostic Solutions",
+       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
+       "lots": []
+      }
+     ],
+     "digitalAwards": 1,
+     "clinicalAwards": 0,
+     "latestAward": "2026-11-17",
+     "products": 17,
      "companyNumber": null
     },
     {
@@ -4809,32 +4879,6 @@
      "companyNumber": "02025063"
     },
     {
-     "name": "Roche Diagnostics UK",
-     "report": "/medical-sales-hub/company-report/?company=Roche%20Diagnostics%20UK",
-     "labels": [],
-     "frameworks": [
-      {
-       "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
-       "url": "https://www.find-tender.service.gov.uk/Notice/058054-2026",
-       "lots": [
-        "1",
-        "3",
-        "4"
-       ]
-      },
-      {
-       "name": "Digital Diagnostic Solutions",
-       "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
-       "lots": []
-      }
-     ],
-     "digitalAwards": 0,
-     "clinicalAwards": 0,
-     "latestAward": null,
-     "products": 17,
-     "companyNumber": null
-    },
-    {
      "name": "Skyguard Ltd T/A Peoplesafe",
      "report": "/medical-sales-hub/company-report/?company=Skyguard%20Ltd%20T%2FA%20Peoplesafe",
      "labels": [],
@@ -4931,6 +4975,19 @@
      "companyNumber": null
     },
     {
+     "name": "HealthRota",
+     "report": "/medical-sales-hub/company-report/?company=HealthRota",
+     "labels": [
+      "Digital and medical IT"
+     ],
+     "frameworks": [],
+     "digitalAwards": 2,
+     "clinicalAwards": 0,
+     "latestAward": "2026-11-17",
+     "products": 0,
+     "companyNumber": null
+    },
+    {
      "name": "Rx-Info",
      "report": "/medical-sales-hub/company-report/?company=Rx-Info",
      "labels": [
@@ -4986,19 +5043,6 @@
      "digitalAwards": 1,
      "clinicalAwards": 0,
      "latestAward": "2026-09-25",
-     "products": 0,
-     "companyNumber": null
-    },
-    {
-     "name": "HealthRota",
-     "report": "/medical-sales-hub/company-report/?company=HealthRota",
-     "labels": [
-      "Digital and medical IT"
-     ],
-     "frameworks": [],
-     "digitalAwards": 1,
-     "clinicalAwards": 0,
-     "latestAward": "2026-10-12",
      "products": 0,
      "companyNumber": null
     },
@@ -5842,7 +5886,7 @@
      "digitalAwards": 0,
      "clinicalAwards": 0,
      "latestAward": null,
-     "products": 38,
+     "products": 41,
      "companyNumber": null
     },
     {

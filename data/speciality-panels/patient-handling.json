@@ -13,17 +13,17 @@
  "slug": "patient-handling",
  "label": "Patient Moving and Handling",
  "defined": true,
- "generated": "2026-11-16",
+ "generated": "2026-11-17",
  "dataAsOf": {
   "frameworks": "2026-11-15",
-  "tenderHistory": "2026-11-16",
-  "frameworkAwards": "2026-11-16T15:27:44+00:00",
-  "openTenders": "16/11/2026",
-  "drugTariff": "2026-11-16",
-  "localIntel": "2026-11-16",
+  "tenderHistory": "2026-11-17",
+  "frameworkAwards": "2026-11-17T15:34:08+00:00",
+  "openTenders": "17/11/2026",
+  "drugTariff": "2026-11-17",
+  "localIntel": "2026-11-17",
   "supplierDirectory": "2026-11-14",
   "gpPrescribing": "2026-10-21",
-  "mhraDsu": "2026-11-16",
+  "mhraDsu": "2026-11-17",
   "drugTariffViiia": null,
   "hospitalPrescribing": null
  },
@@ -34,7 +34,7 @@
   "awards": "Award-stage notices whose TITLE matches /\\b(patient handling|manual handling|moving and handling|people handling|hoists?|patient sling|hoist sling|toileting sling|standing sling|falls prevention|falls management|falls detection|fall detection|falls service|mobility (?:aids?|equipment|goods|services?|scooters?)|walking aid|walking frame|rollator|crutch(?:es)?|wheelchairs?|specialist seating|postural support|riser recliner|profiling bed|hospital beds?|bed rails?|mattress(?:es)?|pressure redistribut\\w*|pressure relieving|pressure area care|patient transfer|transfer board|slide sheet|glide sheet|(?:integrated )?community equipment(?: service| loan\\w*| framework)?|aids for daily living|daily living aids?|bariatric|stand(?:ing)? aids?|turning aid|stairlift|stair lift)\\b/i and does not match /\\b(wheelchair lifts?|b7r|disabled adaptations|atw grant|hcid)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33193 or 3319212 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part.",
-  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: handling). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 9 of the 21 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
+  "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: handling). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 9 of the 20 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
   "gpPrescribing": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's.",
   "mhraDsu": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
   "drugTariffViiia": null
@@ -42,15 +42,15 @@
  "counts": {
   "frameworks": 4,
   "suppliers": 113,
-  "suppliersUnresolved": 1,
+  "suppliersUnresolved": 0,
   "awardsShown": 40,
   "awardsMatched": 188,
   "awardsWithheldByBuyerCap": 0,
   "awardsShownNotYetAwarded": 10,
   "openTenders": 0,
   "localIntel": 19,
-  "suppliersFrameworkNamedAlsoTagged": 61,
-  "suppliersDirectoryTagged": 21,
+  "suppliersFrameworkNamedAlsoTagged": 62,
+  "suppliersDirectoryTagged": 20,
   "suppliersDirectoryOnOtherFrameworks": 7,
   "suppliersDirectoryWithFrameworkNote": 9,
   "gpMarkets": 0,
@@ -639,6 +639,18 @@
    "directoryTagged": false
   },
   {
+   "name": "Caversham Health",
+   "resolved": true,
+   "variants": [
+    "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ],
+   "provenance": "framework-named",
+   "directoryTagged": true
+  },
+  {
    "name": "Cefndy Healthcare",
    "resolved": true,
    "variants": [],
@@ -1039,16 +1051,6 @@
    ],
    "provenance": "framework-named",
    "directoryTagged": true
-  },
-  {
-   "name": "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)",
-   "resolved": false,
-   "variants": [],
-   "frameworks": [
-    "Pressure Area Care and Patient Handling"
-   ],
-   "provenance": "framework-named",
-   "directoryTagged": false
   },
   {
    "name": "Medequip Assistive Technology",
@@ -2216,7 +2218,7 @@
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-area-care-and-patient-handling/",
    "verifiedOn": "2026-10-08",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -2236,7 +2238,7 @@
    "url": "https://innovation.nhs.uk/innovation-guides/commissioning-and-adoption/procurement-frameworks/",
    "verifiedOn": "2026-10-08",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -2260,7 +2262,7 @@
    "url": "https://www.find-tender.service.gov.uk/Notice/085171-2026",
    "verifiedOn": "2026-10-13",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -2284,7 +2286,7 @@
    "url": "https://www.contractsfinder.service.gov.uk/Notice/826b8ac5-d1d5-4f8d-a103-ae3995c1a154",
    "verifiedOn": "2026-10-13",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -2304,10 +2306,9 @@
    "url": "https://www.nice.org.uk/guidance/cg179",
    "verifiedOn": "2026-10-13",
    "lastCheck": {
-    "date": "2026-11-16",
-    "status": "ok",
-    "http": 200,
-    "quote": "found"
+    "date": "2026-11-17",
+    "status": "unreachable",
+    "http": 403
    }
   },
   {
@@ -2324,10 +2325,9 @@
    "url": "https://www.nice.org.uk/guidance/qs89",
    "verifiedOn": "2026-10-13",
    "lastCheck": {
-    "date": "2026-11-16",
-    "status": "ok",
-    "http": 200,
-    "quote": "found"
+    "date": "2026-11-17",
+    "status": "unreachable",
+    "http": 403
    }
   },
   {
@@ -2344,7 +2344,7 @@
    "url": "https://www.england.nhs.uk/wp-content/uploads/2021/09/Guidance-for-reporting-pressure-ulcers.pdf",
    "verifiedOn": "2026-10-08",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "unchecked"
@@ -2364,10 +2364,9 @@
    "url": "https://bmjopen.bmj.com/content/10/12/e045253",
    "verifiedOn": "2026-10-13",
    "lastCheck": {
-    "date": "2026-11-16",
-    "status": "ok",
-    "http": 200,
-    "quote": "found"
+    "date": "2026-11-17",
+    "status": "unreachable",
+    "http": 403
    }
   },
   {
@@ -2385,7 +2384,7 @@
    "url": "https://www.internationalguideline.com/the-international-guideline",
    "verifiedOn": "2026-10-08",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -2405,7 +2404,7 @@
    "url": "https://www.healthcareimprovementscotland.scot/publications/prevention-and-management-of-pressure-ulcers-standards/",
    "verifiedOn": "2026-10-08",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -2428,7 +2427,7 @@
    "url": "https://www.find-tender.service.gov.uk/Notice/080521-2026",
    "verifiedOn": "2026-11-04",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -2448,7 +2447,7 @@
    "url": "https://www.find-tender.service.gov.uk/Notice/076288-2026",
    "verifiedOn": "2026-11-04",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -2470,7 +2469,7 @@
    "url": "https://www.find-tender.service.gov.uk/Notice/065185-2026",
    "verifiedOn": "2026-11-04",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -2490,7 +2489,7 @@
    "url": "https://www.find-tender.service.gov.uk/Notice/099007-2026",
    "verifiedOn": "2026-11-04",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -2513,7 +2512,7 @@
    "url": "https://www.find-tender.service.gov.uk/Notice/089451-2026",
    "verifiedOn": "2026-11-04",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -2536,7 +2535,7 @@
    "url": "https://www.find-tender.service.gov.uk/Notice/103193-2026",
    "verifiedOn": "2026-11-04",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -2556,7 +2555,7 @@
    "url": "https://www.hse.gov.uk/pubns/hsis4.htm",
    "verifiedOn": "2026-11-04",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -2575,7 +2574,7 @@
    "url": "https://www.hse.gov.uk/pubns/hsis3.pdf",
    "verifiedOn": "2026-11-04",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "n/a"
@@ -2595,7 +2594,7 @@
    "url": "https://www.hse.gov.uk/msd/manual-handling/index.htm",
    "verifiedOn": "2026-11-04",
    "lastCheck": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "status": "ok",
     "http": 200,
     "quote": "found"
@@ -2887,21 +2886,6 @@
    "frameworkNote": null
   },
   {
-   "name": "Caversham Health",
-   "resolved": true,
-   "provenance": "directory-tagged",
-   "directoryName": "Caversham Health",
-   "seedLabels": [
-    "Patient handling"
-   ],
-   "via": [
-    "speciality-label-map.json"
-   ],
-   "otherFrameworks": [],
-   "directoryFrameworks": [],
-   "frameworkNote": null
-  },
-  {
    "name": "Herida Healthcare",
    "resolved": true,
    "provenance": "directory-tagged",
@@ -3080,7 +3064,7 @@
   "whyEmpty": "No BNF section is mapped to this speciality, so no GP prescribing market is sized here rather than borrowing a neighbouring page's."
  },
  "mhraDsu": {
-  "dataAsOf": "2026-11-16",
+  "dataAsOf": "2026-11-17",
   "sourcePage": "https://www.gov.uk/drug-safety-update",
   "noFacet": true,
   "whyEmpty": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
