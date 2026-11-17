@@ -4511,7 +4511,99 @@ def check_no_clusters_on_tools(comptab_js):
             return
 
 
-def check_framework_lots(fwdoc, lotsdoc, report_js):
+def _lot_name_resolver(seed):
+    """to_company() built exactly as scripts/refresh_framework_lots.resolver()
+    builds it, or None when the seed or the matcher cannot be loaded.
+
+    Same module, same rule. The gate must not sort a name into a cause by a
+    matching rule the writer does not itself apply, or it would name a fix for a
+    problem the writer does not have.
+    """
+    if not isinstance(seed, dict) or not seed.get("suppliers"):
+        return None
+    try:
+        sys.path.insert(0, os.path.join(REPO_DIR, "scripts"))
+        import company_match
+        import brief_names
+        index = company_match.build_index(seed)
+    except Exception:
+        return None
+
+    def to_company(n):
+        try:
+            for cand in (brief_names.clean(n), n):
+                if not cand:
+                    continue
+                got, state, _ = company_match.resolve(cand, index)
+                if state == "confirmed":
+                    return got
+        except Exception:
+            return None
+        return None
+    return to_company
+
+
+def _warn_unresolved_lot_names(rows, seed):
+    """One WARN per CAUSE, not one WARN for the pile.
+
+    Added 17/11/2026. The pile had reached 138 source spellings across 42
+    frameworks under a single warning whose remedy line said to add an alias.
+    Read as a backlog of missing aliases it is wrong three ways: 86 of those
+    names have no Hub record to alias to, 50 name a supplier the framework's own
+    brief list omits (no alias can reach a supplier that is not on the brief),
+    and 2 are the brief's own duplicate rows. Each line below carries the fix
+    that actually applies to the names it counts. See check_framework_lots().
+    """
+    if not rows:
+        return
+    to_company = _lot_name_resolver(seed)
+    norecord, absent, ambiguous, unclassified = [], [], [], []
+    for fwname, src, reason in sorted(rows):
+        if reason.startswith("matches "):
+            ambiguous.append((fwname, src))
+        elif to_company is None:
+            unclassified.append((fwname, src))
+        elif to_company(src) is None:
+            norecord.append((fwname, src))
+        else:
+            absent.append((fwname, src))
+
+    def tell(items):
+        return (len(items), len({f for f, _ in items}),
+                "; ".join("%s: %s" % (f, s) for f, s in items[:5]))
+
+    if norecord:
+        n, nf, ex = tell(norecord)
+        WARN("framework-lots", "%d lot-source supplier name(s) across %d framework(s) resolve to NO Hub "
+                               "supplier record, so their lots show 'lot not confirmed'. These are candidate "
+                               "NEW records, not missing aliases — an alias has nothing to point at. Whether "
+                               "the Hub holds that kind of supplier at all is a decision, not a backlog item "
+                               "(most are non-clinical: catering, facilities, furniture, hand hygiene): %s."
+             % (n, nf, ex))
+    if absent:
+        n, nf, ex = tell(absent)
+        WARN("framework-lots", "%d lot-source supplier name(s) across %d framework(s) DO resolve to a Hub "
+                               "company, but that company is not on the framework's own brief supplier list, "
+                               "so the lot has no brief row to attach to and no alias can fix it. Either the "
+                               "brief capture missed a name the notice awards (re-read the brief), or the Hub "
+                               "holds one company twice and the brief names the other record (merge them): %s."
+             % (n, nf, ex))
+    if ambiguous:
+        n, nf, ex = tell(ambiguous)
+        WARN("framework-lots", "%d lot-source supplier name(s) across %d framework(s) reach TWO OR MORE rows "
+                               "on the framework's own brief supplier list, so which row holds the lot cannot "
+                               "be settled from the notice. De-duplicate the brief's supplier list — do not "
+                               "pick a row: %s." % (n, nf, ex))
+    if unclassified:
+        n, nf, ex = tell(unclassified)
+        WARN("framework-lots", "%d lot-source supplier name(s) across %d framework(s) did not attach to a "
+                               "brief supplier, so their lots show 'lot not confirmed'. data/supplier-seed.json "
+                               "was not passed to this check, so the cause (no Hub record / not on this brief / "
+                               "ambiguous on this brief) could not be told apart and no one fix can be named "
+                               "here: %s." % (n, nf, ex))
+
+
+def check_framework_lots(fwdoc, lotsdoc, report_js, seed=None):
     """Every framework card must say which lot(s) the company holds, or say
     plainly that the owner does not publish it. Lou's standing rule, 30/09/2026:
     "When they are on a framework I want the company profile to pull the lots too."
@@ -4532,8 +4624,28 @@ def check_framework_lots(fwdoc, lotsdoc, report_js):
       * a lot value is not a "Lot ..." label;
       * the Company Report has lost the lot line or its honest empty state.
     A source that publishes lots whose supplier names could not be tied to the
-    brief's own names is a WARN listing them: the fix is an alias in
-    data/supplier-seed.json, never a looser match.
+    brief's own names is a WARN — but WHICH warning depends on why the name did
+    not attach, and the three causes take three different fixes. Counted
+    together on 17/11/2026 they were 138 spellings across 42 frameworks, and the
+    single remedy this warning used to give ("add the spelling as an alias in
+    data/supplier-seed.json") was the right answer for a minority of them:
+      * the spelling resolves to no Hub supplier record at all — a candidate NEW
+        record (86 of the 138, nearly all non-clinical framework suppliers:
+        catering, facilities, furniture, hand hygiene). An alias has nothing to
+        point at, and whether the Hub wants that kind of supplier is a decision,
+        not a backlog item;
+      * the Hub holds the company, but the framework's OWN brief supplier list
+        does not name it (50 of the 138). attach_names() resolves a source name
+        to a supplier ON THAT BRIEF, and there is none to resolve to, so no alias
+        can fix it: either the brief capture missed a name the notice awards, or
+        the Hub holds one company twice under two records and the brief names the
+        other one;
+      * two or more of the brief's own rows reach one Hub company (2 of the 138),
+        so which brief row holds the lot cannot be settled from the notice; the
+        brief's own supplier list is what needs de-duplicating.
+    An alias remains the only legal fix where one applies — never a looser match.
+    `seed` is optional: without it the three cannot be told apart, and the warning
+    says exactly that rather than naming a remedy that may not apply.
     """
     if not isinstance(fwdoc, dict):
         return
@@ -4542,7 +4654,8 @@ def check_framework_lots(fwdoc, lotsdoc, report_js):
     if not lots_by_url:
         FAIL("framework-lots", "data/framework-lots.json is missing or empty, so no framework card "
                                "can show a lot. Run scripts/refresh_framework_lots.py.")
-    no_status, unread, dropped, stray, badlab, unmatched = [], [], [], [], [], []
+    no_status, unread, dropped, stray, badlab = [], [], [], [], []
+    unresolved_rows = []
     for f in fwdoc.get("frameworks") or []:
         if not isinstance(f, dict):
             continue
@@ -4565,9 +4678,8 @@ def check_framework_lots(fwdoc, lotsdoc, report_js):
                 stray.append("%s: %r" % (name, k))
             if not v or any(not re.match(r"^Lot \S+", str(x)) for x in v):
                 badlab.append("%s: %r -> %r" % (name, k, v))
-        if rec and rec.get("unresolved"):
-            unmatched.append("%s (%d: %s)" % (name, len(rec["unresolved"]), ", ".join(
-                str(u.get("name")) for u in rec["unresolved"][:3])))
+        for u in (rec or {}).get("unresolved") or []:
+            unresolved_rows.append((name, str(u.get("name")), str(u.get("reason") or "")))
     if no_status:
         FAIL("framework-lots", "%d live framework(s) carry no lotStatus, so their card has nothing honest "
                                "to say about the lot: %s. Run scripts/refresh_framework_lots.py --attach-only."
@@ -4587,11 +4699,7 @@ def check_framework_lots(fwdoc, lotsdoc, report_js):
     if badlab:
         FAIL("framework-lots", "%d supplierLots value(s) are not 'Lot ...' labels: %s."
              % (len(badlab), "; ".join(badlab[:6])))
-    if unmatched:
-        WARN("framework-lots", "%d framework(s) publish lots under supplier names that do not match the brief's "
-                               "own spelling, so those suppliers show 'lot not confirmed'. Add the spelling as an "
-                               "alias in data/supplier-seed.json (via scripts/seed_format.py), never a looser "
-                               "match: %s." % (len(unmatched), "; ".join(unmatched[:5])))
+    _warn_unresolved_lot_names(unresolved_rows, seed)
     if report_js and ("function fwLotLine" not in report_js or "lot not published by" not in report_js):
         FAIL("framework-lots", "app/company-report.js no longer carries fwLotLine() and its honest empty state "
                                "('lot not published by ...'). Every framework card must show the lot or say "
@@ -7473,7 +7581,8 @@ def main():
     check_no_clusters_on_tools(comptab_js)
     check_compare_groups_by_ref(comptab_js)
     check_no_expired_frameworks(load("frameworks.json"))
-    check_framework_lots(load("frameworks.json"), load("framework-lots.json"), report_js)
+    check_framework_lots(load("frameworks.json"), load("framework-lots.json"), report_js,
+                         load("supplier-seed.json"))
     check_no_delisted_as_a_route(load("nhssc-launch-briefs.json"),
                                  load("frameworks.json"),
                                  load("supplier-seed.json"),

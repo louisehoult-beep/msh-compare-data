@@ -230,11 +230,16 @@ class FindATender(unittest.TestCase):
         self.assertEqual(rec["lotsNotCovered"], [])
         self.assertEqual(rec["suppliersWithoutLot"], ["Other Ltd"])
 
-def run_gate(fw, lots_doc, js="function fwLotLine(){} lot not published by"):
+def run_gate(fw, lots_doc, js="function fwLotLine(){} lot not published by", seed=None):
     verify.fails.clear()
     verify.warns.clear()
-    verify.check_framework_lots({"frameworks": [fw]}, lots_doc, js)
+    verify.check_framework_lots({"frameworks": [fw]}, lots_doc, js, seed)
     return [m for c, m in verify.fails if c == "framework-lots"]
+
+
+def gate_warns(fw, lots_doc, seed=None):
+    run_gate(fw, lots_doc, seed=seed)
+    return [m for c, m in verify.warns if c == "framework-lots"]
 
 
 class Gate(unittest.TestCase):
@@ -274,6 +279,59 @@ class Gate(unittest.TestCase):
     def test_renderer_lost_empty_state(self):
         fails = run_gate(self.fw(), self.lots({"Acme Ltd": ["Lot 1"]}), js="nothing here")
         self.assertTrue(any("fwLotLine" in m for m in fails), fails)
+
+
+class UnresolvedCauses(unittest.TestCase):
+    """The warning on names that did not attach must split its three causes.
+
+    Added 17/11/2026. One warning counted 138 spellings across 42 frameworks and
+    told the reader to add an alias; only a minority of them could be fixed that
+    way. 86 resolved to no Hub record at all, 50 named a company the brief's own
+    supplier list omits (unreachable by any alias) and 2 were the brief's own
+    duplicate rows.
+    """
+    URL = "https://example/brief/"
+    SEED = {"suppliers": [{"name": "Beta Ltd"}, {"name": "Gamma Ltd"}]}
+
+    def doc(self, unresolved):
+        return {"frameworks": {self.URL: {"status": "published",
+                                          "supplierLots": {"Acme Ltd": ["Lot 1"]},
+                                          "unresolved": unresolved}}}
+
+    def fw(self):
+        return {"name": "Test FW", "url": self.URL, "suppliers": ["Acme Ltd", "Beta Ltd"],
+                "supplierSource": "count verified", "lotStatus": "published",
+                "supplierLots": {"Acme Ltd": ["Lot 1"]}}
+
+    UNRESOLVED = [
+        # no Hub record resolves to it at all -> a candidate new record
+        {"name": "Nowhere Foods Ltd", "lots": ["Lot 2"], "reason":
+         "no supplier on this brief normalises to it, and no recorded alias links it to one"},
+        # the Hub holds it, but it is not on this brief's supplier list
+        {"name": "Gamma Ltd", "lots": ["Lot 3"], "reason":
+         "no supplier on this brief normalises to it, and no recorded alias links it to one"},
+        # two brief rows reach one company
+        {"name": "Beta Limited", "lots": ["Lot 4"], "reason": "matches 2 suppliers on this brief"},
+    ]
+
+    def test_three_causes_three_warnings(self):
+        got = gate_warns(self.fw(), self.doc(self.UNRESOLVED), seed=self.SEED)
+        self.assertEqual(len(got), 3, got)
+        self.assertTrue(any("NO Hub supplier record" in m and "Nowhere Foods Ltd" in m for m in got), got)
+        self.assertTrue(any("not on the framework's own brief supplier list" in m
+                            and "Gamma Ltd" in m for m in got), got)
+        self.assertTrue(any("TWO OR MORE rows" in m and "Beta Limited" in m for m in got), got)
+        # the old single remedy must no longer be the answer given to all of them
+        self.assertFalse(any("NO Hub supplier record" in m and "alias in data/supplier-seed.json" in m
+                             for m in got), got)
+
+    def test_without_a_seed_it_says_so_instead_of_guessing(self):
+        got = gate_warns(self.fw(), self.doc(self.UNRESOLVED))
+        self.assertEqual(len(got), 2, got)          # the ambiguous one still needs no seed
+        self.assertTrue(any("could not be told apart" in m for m in got), got)
+
+    def test_nothing_unresolved_warns_nothing(self):
+        self.assertEqual(gate_warns(self.fw(), self.doc([]), seed=self.SEED), [])
 
 
 if __name__ == "__main__":
