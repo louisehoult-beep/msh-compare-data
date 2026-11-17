@@ -1700,7 +1700,8 @@
       "Turnover was £203.5m in 2024 and £224.4m in 2025, and operating profit rose from £5.1m to £7.4m, which the directors describe as driven primarily by growth in turnover. Only these two years were read from the filings, so no longer series is shown."
      ]
     }
-   }
+   },
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Enteral Feeding lot source names \"Abbott Medical U.K. Ltd\" at Lots 3 and 4; the brief's own Abbott row is \"Abbott Laboratories Limited\", a separate registration with its own Hub record. This is the worked example of the parent-subsidiary-award-credit policy: the award credits to the entity the awarding source names, financials attach to the legal entity they describe, and no alias links the two because aliases drive award routing. The records stay apart and the lot stays unattached."
   },
   {
    "name": "Abbott Toxicology",
@@ -2644,56 +2645,14 @@
    "autoDetected": true
   },
   {
-   "name": "Accrington Surgical Inst. Suppliers",
-   "aliases": [
-    "Accrington Surgical Inst. Suppliers"
-   ],
-   "specialities": [
-    "Theatres / surgical"
-   ],
-   "products": [],
-   "frameworks": [
-    {
-     "name": "Procedure Packs",
-     "dates": "1 April 2024 to 31 March 2028",
-     "note": "Named on NHS Supply Chain's own contract launch brief for this framework, as \"Accrington Surgical Inst. Suppliers\". 29 suppliers on the framework.",
-     "reference": "2023/S 000-031398",
-     "category": "Medical and Surgical Consumables",
-     "supplierCount": 29,
-     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/custom-procedure-packs/",
-     "source": "nhssc-brief",
-     "capturedOn": "2026-11-15"
-    }
-   ],
-   "alerts": [],
-   "news": [],
-   "links": [],
-   "awards": [],
-   "curated": true,
-   "note": "Added 14/08/2026 from NHS Supply Chain's own contract launch briefs for 1 framework (2023/S 000-031398). The framework award is the only verified fact in this record. Product range, UK entity, ownership and website have NOT been verified and must be checked at source before being used with a customer.",
-   "verified": "2026-08-14",
-   "source": "NHS Supply Chain contract launch briefs (2023/S 000-031398), fetched 14/08/2026",
-   "reconciledFrom": "reconcile_suppliers.py tier-3 backfill, 14/08/2026",
-   "companyNumberNote": "No Companies House match could be established: No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ACCRINGTON SURGICAL INSTRUMENT SUPPLIERS LIMITED.",
-   "productCategories": [
-    {
-     "category": "Medical and Surgical Consumables",
-     "source": {
-      "frameworkRef": "2023/S 000-031398",
-      "frameworkName": "Procedure Packs",
-      "capturedOn": "2026-11-15"
-     },
-     "generatedBy": "backfill_product_categories.py"
-    }
-   ]
-  },
-  {
    "name": "Accrington Surgical Instrument Suppliers Ltd",
    "aliases": [
     "Accrington Surgical Instrument Suppliers Ltd",
     "Accrington Surgical Instrument Suppliers Limited",
     "Accrington Surgical",
-    "Accrington Surgical Instrument"
+    "Accrington Surgical Instrument",
+    "Accrington Surgical Inst. Suppliers",
+    "Accrington Surgical Inst Suppliers"
    ],
    "specialities": [
     "Ophthalmology",
@@ -2724,6 +2683,17 @@
      "source": "nhssc-brief",
      "capturedOn": "2026-11-15",
      "lotSourceUrl": "https://azuksappnpdsa01.blob.core.windows.net/datashare/Product-Matrix-Surgical-Instruments-8-September-2026-MSC.xlsx"
+    },
+    {
+     "name": "Procedure Packs",
+     "dates": "1 April 2024 to 31 March 2028",
+     "note": "Named on NHS Supply Chain's own contract launch brief for this framework, as \"Accrington Surgical Inst. Suppliers\". 29 suppliers on the framework.",
+     "reference": "2023/S 000-031398",
+     "category": "Medical and Surgical Consumables",
+     "supplierCount": 29,
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/custom-procedure-packs/",
+     "source": "nhssc-brief",
+     "capturedOn": "2026-11-15"
     }
    ],
    "alerts": [],
@@ -2736,9 +2706,9 @@
    ],
    "awards": [],
    "curated": true,
-   "note": "Added 14/08/2026 from NHS Supply Chain's own contract launch briefs for 1 framework (2024/S 000-033370). The framework award is the only verified fact in this record. Product range, UK entity, ownership and website have NOT been verified and must be checked at source before being used with a customer. Merged 24/08/2026 by merge_duplicates.py: one company was showing as 2 suppliers. Folded in: \"Accrington Surgical\". Company number 05980916. One company, two brief names, and the short form is deliberately NOT the survivor. ACCRINGTON SURGICAL INSTRUMENT SUPPLIERS LIMITED (05980916, incorporated 27/10/2006, active, Westhoughton, SIC 32500) is the live supplier. The register also carries ACCRINGTON SURGICAL LTD (06046644), DISSOLVED 17/09/2015, which cannot hold the Surgical Instruments framework the folded record was added from (2020/S 170-412524) because it did not exist by then - so keeping the long registered form as the survivor stops the dissolved namesake being resolved to later. Checked at the register on 24/08/2026. Own site footer confirms 'Accrington Surgical Instrument Suppliers Ltd'; found and domain recorded 11/09/2026.",
-   "verified": "2026-08-14",
-   "source": "NHS Supply Chain contract launch briefs (2024/S 000-033370), fetched 14/08/2026",
+   "note": "MERGED 2026-11-17 working the framework-lots residuals: the Hub held one company as two records, \"Accrington Surgical Instrument Suppliers Ltd\" and NHS Supply Chain's own abbreviation of it on the Procedure Packs brief, \"Accrington Surgical Inst. Suppliers\" (2023/S 000-031398). \"Inst.\" is an abbreviation of \"Instrument\", and Companies House holds exactly one company it can abbreviate: ACCRINGTON SURGICAL INSTRUMENT SUPPLIERS LIMITED 05980916, active, incorporated 27 October 2006, Unit 6a Petre Court, Petre Road, Clayton-Le-Moors, Accrington, BB5 5JB (name search 2026-11-17; the only other Accrington Surgical company, ACCRINGTON SURGICAL LTD 06046644, was dissolved 17 September 2015 and was itself folded into this record by merge_duplicates.py on 24/08/2026 on the same reading). An abbreviation with one possible referent is not two companies sharing a name, which is what data/identity-vocabulary-policy.json refuses to merge on. The abbreviation is kept as an alias and the brief row is untouched. Effect: the Procedure Packs lot source \"Accrington Surgical Instrument Suppliers Ltd\" (Lots 1 and 2) now has a brief row to attach to.  Previous \"Accrington Surgical Instrument Suppliers Ltd\" record: Added 14/08/2026 from NHS Supply Chain's own contract launch briefs for 1 framework (2024/S 000-033370). The framework award is the only verified fact in this record. Product range, UK entity, ownership and website have NOT been verified and must be checked at source before being used with a customer. Merged 24/08/2026 by merge_duplicates.py: one company was showing as 2 suppliers. Folded in: \"Accrington Surgical\". Company number 05980916. One company, two brief names, and the short form is deliberately NOT the survivor. ACCRINGTON SURGICAL INSTRUMENT SUPPLIERS LIMITED (05980916, incorporated 27/10/2006, active, Westhoughton, SIC 32500) is the live supplier. The register also carries ACCRINGTON SURGICAL LTD (06046644), DISSOLVED 17/09/2015, which cannot hold the Surgical Instruments framework the folded record was added from (2020/S 170-412524) because it did not exist by then - so keeping the long registered form as the survivor stops the dissolved namesake being resolved to later. Checked at the register on 24/08/2026. Own site footer confirms 'Accrington Surgical Instrument Suppliers Ltd'; found and domain recorded 11/09/2026.  Previous \"Accrington Surgical Inst. Suppliers\" record: Added 14/08/2026 from NHS Supply Chain's own contract launch briefs for 1 framework (2023/S 000-031398). The framework award is the only verified fact in this record. Product range, UK entity, ownership and website have NOT been verified and must be checked at source before being used with a customer.",
+   "verified": "2026-11-17",
+   "source": "NHS Supply Chain contract launch briefs (2024/S 000-033370), fetched 14/08/2026 | from the merged \"Accrington Surgical Inst. Suppliers\" record: NHS Supply Chain contract launch briefs (2023/S 000-031398), fetched 14/08/2026",
    "reconciledFrom": "reconcile_suppliers.py tier-3 backfill, 14/08/2026",
    "_specialitiesEvidence": "Speciality assigned solely because the company is named on NHS Supply Chain's Complete Ophthalmology Solutions 3 framework. No product-level evidence yet.",
    "companyNumberCandidate": {
@@ -2768,6 +2738,11 @@
      },
      "generatedBy": "backfill_product_categories.py"
     }
+   ],
+   "identityNote": "MERGED 2026-11-17 working the framework-lots residuals: the Hub held one company as two records, \"Accrington Surgical Instrument Suppliers Ltd\" and NHS Supply Chain's own abbreviation of it on the Procedure Packs brief, \"Accrington Surgical Inst. Suppliers\" (2023/S 000-031398). \"Inst.\" is an abbreviation of \"Instrument\", and Companies House holds exactly one company it can abbreviate: ACCRINGTON SURGICAL INSTRUMENT SUPPLIERS LIMITED 05980916, active, incorporated 27 October 2006, Unit 6a Petre Court, Petre Road, Clayton-Le-Moors, Accrington, BB5 5JB (name search 2026-11-17; the only other Accrington Surgical company, ACCRINGTON SURGICAL LTD 06046644, was dissolved 17 September 2015 and was itself folded into this record by merge_duplicates.py on 24/08/2026 on the same reading). An abbreviation with one possible referent is not two companies sharing a name, which is what data/identity-vocabulary-policy.json refuses to merge on. The abbreviation is kept as an alias and the brief row is untouched. Effect: the Procedure Packs lot source \"Accrington Surgical Instrument Suppliers Ltd\" (Lots 1 and 2) now has a brief row to attach to.",
+   "companyNumberNote": "No Companies House match could be established: No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: ACCRINGTON SURGICAL INSTRUMENT SUPPLIERS LIMITED.",
+   "mergedFrom": [
+    "Accrington Surgical Inst. Suppliers"
    ]
   },
   {
@@ -3901,7 +3876,8 @@
     "place": "Registered office (Companies House and the accounts): 10 Manor Park, Banbury, Oxfordshire, OX16 3TB. Incorporated 5 December 1997; active; SIC 46460 (wholesale of pharmaceutical goods); no previous names.",
     "interview": "Worth raising: (1) the company has three staff yet sits on two national frameworks, so ask how orders, fulfilment and NHS customer support are delivered; (2) stocks rose from £131,280 to £165,315 while cash is £6,761, so ask how stock is financed and what the lead times are; (3) Marko Boulton became a PSC in March 2026, so ask whether ownership or succession plans have changed; (4) turnover is not filed, so ask for an annual revenue range and the NHS share; (5) ask which of the products on the shop front are own-brand and which are distributed, and from whom.",
     "sources": "Primary sources read this session (08/11/2026): https://find-and-update.company-information.service.gov.uk/company/03476650; its /officers, /persons-with-significant-control and /filing-history pages; the accounts to 31 December 2025 (filing id MzUxODM3OTM2NmFkaXF6a2N4, iXBRL); https://advmedical.com/; and the two NHS Supply Chain launch-brief pages linked above. Turnover and profit are not stated anywhere: the profit and loss account was not delivered."
-   }
+   },
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Advanced Wound Care lot source names \"ADVANCED MEDICAL SYSTEMS LTD.\", which reaches this record; the nearest row on that brief is \"Advanced Medical Solutions Ltd\", a DIFFERENT company. Companies House holds ADVANCED MEDICAL SYSTEMS LTD. 03476650, active, incorporated 5 December 1997, 10 Manor Park, Banbury, OX16 3TB (search 2026-11-17), which is not Advanced Medical Solutions. Two separate registrations, so under data/identity-vocabulary-policy.json these records stay apart and the lot stays unattached: a shared word in a name is not evidence."
   },
   {
    "name": "Advanced Sterilization Products (UK) Limited",
@@ -9922,7 +9898,8 @@
     "interview": "Worth raising: (1) the company sold most of its trade on 1 December 2025 and the accounts do not name the buyer, so a candidate should ask the interviewing company directly who now holds the endoscopy range and its NHS listings; (2) if interviewing at Aquilant Limited, ask which part of the endoscopy business it took on and which went to the buyer; (3) ask how trusts buying under the two framework listings were moved across.",
     "sources": "Primary sources read this session: https://find-and-update.company-information.service.gov.uk/company/03402556; https://find-and-update.company-information.service.gov.uk/company/03402556/officers; https://find-and-update.company-information.service.gov.uk/company/03402556/persons-with-significant-control; https://find-and-update.company-information.service.gov.uk/company/03402556/filing-history; the full accounts to 30 December 2025 (filed 03/07/2026: page 2 company information, 4 and 5 strategic report, 7 post balance sheet events, 12 profit and loss account, 20 disposal note, 21 notes 8 and 9, 26 note 23); https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/; https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ear-nose-and-throat-ent-endoscopes-and-associated-options-and-related-services/. Identity: the accounts state registered number 03402556 on pages 1, 2 and 13. No website is recorded: aquilantendoscopy.com refused the request (HTTP 403) on 21/10/2026 and no own site was proved."
    },
-   "_curatorNotes": "16/11/2026: internal cross-references were reworded out of the member note so the note renders. No fact was changed. Replaced, in order: \"Until today 'Aquilant Endoscopy' was carried only as an alias inside supplier-index.json, folding two distinct registered companies into one record; the nightly rebuild destroys index-only aliases, so it also would have broken on its own.\" -> ''"
+   "_curatorNotes": "16/11/2026: internal cross-references were reworded out of the member note so the note renders. No fact was changed. Replaced, in order: \"Until today 'Aquilant Endoscopy' was carried only as an alias inside supplier-index.json, folding two distinct registered companies into one record; the nightly rebuild destroys index-only aliases, so it also would have broken on its own.\" -> ''",
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Airway Management lot source names \"Aquilant Endoscopy Limited\" at Lot 1; the brief's own Aquilant row is \"Aquilant Critical Care\", a separate record. Aquilant Endoscopy (03402556) and Aquilant Critical Care (02090807) were checked at Companies House on 17/11/2026 and found to be SEPARATE companies, recorded then. The lot stays unattached."
   },
   {
    "name": "Aquilant Limited",
@@ -22851,7 +22828,8 @@
    "aliases": [
     "BVM Medical Ltd",
     "BVM Medical Limited",
-    "bvmmedical.com"
+    "bvmmedical.com",
+    "BVM"
    ],
    "specialities": [
     "Endoscopy",
@@ -22917,7 +22895,7 @@
    ],
    "curated": true,
    "note": "Added 14/08/2026 from NHS Supply Chain's own contract launch briefs for 2 frameworks (2023/S 000-034841, 2024/S 000-029975). The framework award is the only verified fact in this record. Product range, UK entity, ownership and website have NOT been verified and must be checked at source before being used with a customer.",
-   "verified": "2026-08-14",
+   "verified": "2026-11-17",
    "source": "NHS Supply Chain contract launch briefs (2023/S 000-034841, 2024/S 000-029975), fetched 14/08/2026",
    "reconciledFrom": "reconcile_suppliers.py tier-2 backfill, 14/08/2026",
    "_specialitiesEvidence": "Speciality assigned solely because the company is named on NHS Supply Chain's Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products; Neuromodulation Devices and Associated Products frameworks. No product-level evidence yet.",
@@ -22939,7 +22917,8 @@
      },
      "generatedBy": "backfill_product_categories.py"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. Two separate questions, two answers. (1) Transcatheter Heart Valve Repair, Replacement and Associated Devices: the brief lists this company as a bare \"BVM\" with no lot, while the NHS Supply Chain product matrix attached to that same brief (Product-Matrix-Transcatheter-Heart-Valve-09-September-2026-MT.xlsx) names \"BVM Medical Limited\" on Lot 2. One owner's own document writing one supplier two ways, so \"BVM\" is recorded here as an alias and the brief row is untouched. No other framework brief names a bare \"BVM\". (2) Neuromodulation Devices: the lot source names \"BVM MEDICAL LTD\" at Lot 3, but that brief's own supplier row is \"Creed Health - novated from BVM Medical Ltd\", which resolves to the separate \"Creed Medical Ltd\" record. A novation moves the contract to another company, so the Lot 3 holder on that framework is the novatee the brief names, not this record, and the lot correctly does not attach here."
   },
   {
    "name": "BXTAccelyon Ltd",
@@ -42306,7 +42285,8 @@
     "url": "https://www.essential-healthcare.com/",
     "evidence": "footer states \"Registered Company 04991941\"; Companies House confirms ESSENTIAL HEALTHCARE SOLUTIONS (UK) LIMITED, active, registered office Essential Enterprise Village, Field Head Lane, Birstall, Batley, WF17 9BN (matches the site address)",
     "checkedOn": "2026-11-05"
-   }
+   },
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. No row on the 53-supplier Pressure Area Care brief reaches this record; its only unattached row is an unrelated company. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "Essity UK Limited",
@@ -44079,7 +44059,8 @@
      },
      "generatedBy": "backfill_product_categories.py"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. No row on the 18-supplier Technology Enabled Care brief reaches this record. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "EziDrops Ltd",
@@ -52988,7 +52969,8 @@
     "incorporated": "1990-02-22",
     "confidence": "probable",
     "matchedOn": "Companies House name search on 17/11/2026 (https://find-and-update.company-information.service.gov.uk/company/02473045) -- NOT verified against a number published by the company; gojo.com refuses automated requests, so route 2 of docs/COMPANY-REPORT-METHOD.md could not be run. It stays a candidate. The registered name differs from the award notice's spelling only in hyphenation and legal form, and this record's own existing alert already names GOJO Industries-Europe Limited as the UK entity -- but a shared name is not evidence, so it is not written to companyNumber."
-   }
+   },
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Hand Hygiene lot source is Find a Tender award notice 000335-2023, which awards 33 names; NHS Supply Chain's brief states 21 suppliers and prints 21, naming no GOJO row. The award spelling and its variants were added to this record as aliases on 17/11/2026, but an alias cannot attach a lot to a brief row that does not exist, so Lots 1, 3 and 4 stay unattached. See state/hand-hygiene-lot-source-adjudication.json."
   },
   {
    "name": "Grafton Optical Company Limited",
@@ -54440,7 +54422,8 @@
      },
      "generatedBy": "backfill_product_categories.py"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. No row on the 57-supplier Urology and Bowel Management brief reaches this record; none of its five unattached rows is H&R. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "H4 Medical Ltd",
@@ -55062,7 +55045,8 @@
     },
     "interview": "Lead with the FY2025 rebound rather than treating growth as a given — the company's own accounts show a 6% turnover dip in FY2024 before the 29% jump in FY2025, so a question like 'how did FY24's bedside slowdown change your approach to FY25' will land as informed rather than generic. Worth noting going in: both current directors are recent appointments (Bell since October 2022, Krüger since April 2024, after an earlier stint), the company secretary role just turned over after 13 years, and the business settles heavily with its Swiss parent on intercompany account (£2.57m of current liabilities) rather than external trade credit. The directors have flagged a new market entrant as a specific threat to sales outside the ICU, which is a live, named concern worth raising directly.",
     "sources": "Companies House: company overview, officers list (current and resigned), filing history and persons-with-significant-control pages for Hamilton Medical UK Ltd (06836131), all fetched and read in full on 23/09/2026. Two accounts filings fetched and read as complete PDFs on 23/09/2026: 'Accounts for a medium company made up to 30 November 2025' (filed 22/06/2026, 23 pages) and 'Accounts for a medium company made up to 30 November 2024' (filed 20/05/2025, 22 pages) — these supplied the Strategic Report narrative, Income Statement, Balance Sheet, employee note, dividend note and the ultimate-parent note (Note 18) used throughout this record. Hamilton Medical's global website (hamilton-medical.com/en_GB/ homepage and Jobs-overview page) fetched on 23/09/2026 for group history and current UK vacancies. NHS Supply Chain contract launch brief for the Anaesthesia Machines & Ventilators framework fetched on 23/09/2026 for framework dates and supplier-count context. One item — the Royal Berkshire NHS Foundation Trust Find a Tender notice (008600-2026) — was read only via a WebSearch snippet, not a full page fetch, and is flagged as such in the press entry rather than presented as a fully verified read. Registered-office coordinates for the place field came from a postcodes.io lookup of B76 1DJ, not an invented estimate."
-   }
+   },
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Airway Management lot source names \"Hamilton Medical UK Ltd\" at Lot 3; the brief's own row is \"Hamilton Sales And Service UK Ltd\", which is its own record. Companies House holds these as TWO registrations: HAMILTON MEDICAL UK LTD 06836131, active, incorporated 4 March 2009 (previous name HAMILTON MEDICAL LIMITED), Unit J6 Fulford Drive, Minworth, Sutton Coldfield, B76 1DJ; and HAMILTON SALES & SERVICE UK LTD 02188200, active, incorporated 3 November 1987 (previous names HAMILTON ROBOTICS LTD, HAMILTON (G.B.) LIMITED, MAGNAMINSTER LIMITED), Unit 1 Forge Mills Park, Station Road, Coleshill, Birmingham, B46 1JH — both read at Companies House 2026-11-17. Under the parent-subsidiary-award-credit policy the award credits to the entity the source names and no alias links the two, so the lot stays unattached. What would change it: NHS Supply Chain naming Hamilton Medical UK Ltd on the brief, or a Companies House filing showing one registration absorbed the other."
   },
   {
    "name": "Hamilton Sales And Service UK Ltd",
@@ -58002,7 +57986,8 @@
     "url": "https://www.find-tender.service.gov.uk/Notice/032831-2025",
     "evidence": "FTS notice 2025/S 000-032831, Section V, names the contractor verbatim as 'Henry Schein UK Holdings Limited, Gillingham, ME8 0SB, Companies House 11584480'.",
     "dateRead": "2026-09-18"
-   }
+   },
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Total Patient Assessment lot source names \"Henry Schein UK Holdings Ltd\", which reaches this record (companyNumberProof 11584480, from Find a Tender notice 2025/S 000-032831); the brief's own row is \"Henry Schien Medical\", its own Hub record and a different thing — the Henry Schein group files several UK registrations at Gillingham, among them HENRY SCHEIN LIMITED 01820330, HENRY SCHEIN UK LIMITED 11735268, HENRY SCHEIN EUROPE LIMITED 04194906 and HENRY SCHEIN UK HOLDINGS LIMITED 11584480 (search 2026-11-17), and a holding company is not its trading sibling. Under the parent-subsidiary-award-credit policy the award credits to the entity the source names, no alias links related entities, and Lots 1, 4 and 5 stay unattached."
   },
   {
    "name": "Henry Schien Medical",
@@ -59961,7 +59946,8 @@
      "sourceUrl": "https://find-and-update.company-information.service.gov.uk/company/00173865",
      "readOn": "2026-09-03"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Technology Enabled Care lot source names \"Hugh Steeper Ltd\" on four lots and no row on that brief reaches this record. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "Huma",
@@ -63081,7 +63067,8 @@
      },
      "generatedBy": "backfill_product_categories.py"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. Find a Tender award notice 000335-2023 names \"Inivos Ltd\" on five lots; NHS Supply Chain's own Hand Hygiene brief prints 21 suppliers, matching its own stated count, and names no Inivos row. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "Innotec Hygiene Solutions Ltd",
@@ -65083,7 +65070,8 @@
     ],
     "interview": "Go in knowing Intersurgical UK is not the top of its own ownership chain — it reports up through Intersurgical AG (Vaduz) to Cosmeplast Ets and the Selva Trust, all Liechtenstein-based, and a new UK holding company (Intersurgical UK Holdco Ltd) was set up in March 2026 for reasons not yet public. That framing matters for who actually signs off UK-facing decisions. On the commercial side, the UK business is growing steadily (turnover +8% in both FY2023 and FY2024, to £296.9m) and increasingly dependent on the group's Lithuanian factory for manufactured product, having closed its own Guernsey site in 2022 — worth asking how that supply dependency is managed for NHS-critical lines like the i-gel.",
     "sources": "Companies House: company overview, officers, persons with significant control and filing history for INTERSURGICAL LIMITED (01488409), all pages read 23/09/2026; company overview, officers and PSC pages for INTERSURGICAL UK HOLDCO LTD (17106003), read 23/09/2026; company search results for 'Intersurgical' and 'Fullent Limited' confirming the previous-name match, read 23/09/2026. Filed accounts (PDFs downloaded directly from Companies House and read in full): 'Intersurgical Limited and Subsidiaries, Report and Financial Statements, Year Ended 31 December 2024' (58 pages, filed 09/07/2025) — strategic report, directors' report, auditor's report (BDO LLP), all primary statements and notes 1-28 including notes 3 (turnover), 6 (directors' remuneration), 7 (employees), 13 (subsidiary undertakings), 26 (related parties) and 28 (ultimate parent and controlling party); 'Intersurgical Limited and Subsidiaries, Report and Financial Statements, Year Ended 31 December 2022' (55 pages, filed 20/09/2023) — strategic report and consolidated income statement read for FY2021/FY2022 turnover and profit comparatives. Web pages read directly: intersurgical.co.uk (homepage) and intersurgical.com/info/companyhistory, read 23/09/2026. Web search (snippet-level only, flagged inline where used): the careers/vacancy claim in the 'hiring' field is the only substantive fact drawn from search snippets rather than a directly read page. No press item found met the sourcing bar for a verifiable date/source, so the press array is left empty rather than filled with unsourced claims. Place field (Google Maps embed) omitted: the registered office postcode (RG41 2RZ) is known but no independently verified latitude/longitude was obtained, so per the sourcing rules the field is left out rather than invented."
-   }
+   },
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Pulse Oximetry lot source names \"Intersurgical Limited\" at Lot 2 and no row on that brief reaches this record (the company is named in full on other briefs, where its lots do attach). The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "Intersystems",
@@ -66060,7 +66048,8 @@
      },
      "generatedBy": "backfill_product_categories.py"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. Three frameworks name this company as a lot source with no brief row to attach to. On General Wound Care and Pressure Area Care no row on the brief shares a word with the name at all, so there is nothing to attach to. On External Breast Prosthesis the brief's row is \"Iskus Health Ltd - Distributor for Theya Healthcare\", which is its own Hub record and names \"Iskus Health Ltd\" — NOT the UK entity this record holds. Companies House holds ISKUS HEALTH UK LTD 08946660, active, incorporated 19 March 2014, Westminster Industrial Estate, Repton Road, Measham, DE12 7DT, and no company named \"Iskus Health Ltd\" (search 2026-11-17; Iskus Health is an Irish group). A name that may be the Irish parent cannot be tied to this registration, and under data/identity-vocabulary-policy.json a shared name is not evidence, so the two records stay apart and all three lots stay unattached. What would settle it: the registration number published on the supplier's own site, or a Find a Tender notice naming the awardee with its number."
   },
   {
    "name": "ISOL8 Healthcare Limited",
@@ -66382,7 +66371,8 @@
       "source": "It's Interventional Limited, Companies House 02144870"
      }
     }
-   }
+   },
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. No row on that brief shares a word with \"It's Interventional Limited\". The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "J & M Medical",
@@ -66436,7 +66426,8 @@
      },
      "generatedBy": "backfill_product_categories.py"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. No row on the 32-supplier Textiles brief reaches this record. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "J Heinz Foods UK Limited",
@@ -66489,7 +66480,8 @@
      },
      "generatedBy": "backfill_product_categories.py"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. Ambient Food is a catering framework. Lou has ruled that the Hub does not carry non-clinical framework suppliers (catering, facilities and electrical, furniture, office supplies, food), so this is a DECIDED state and not a backlog item. For the record: the brief's nearest rows are \"Kraft Heinz\" and \"Premier Foods Limited\", neither of which reaches this record, and Kraft Heinz is the group, not the UK entity the lot source names. The Lot 1, 6 and 8 lots stay unattached and nothing further is to be done here."
   },
   {
    "name": "Jabbla UK Ltd",
@@ -69974,7 +69966,8 @@
      "sourceUrl": "https://find-and-update.company-information.service.gov.uk/company/06778337",
      "readOn": "2026-09-03"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Pulse Oximetry lot source names \"Kinetik Medical Devices Limited\", which reaches this record; the brief's own row is \"Kinetic Medical Devices Ltd (New)\" — Kinetic with a c — which is its own Hub record. Companies House holds NO company named \"Kinetic Medical Devices\" (search 2026-11-17), and two Kinetik ones: KINETIK MEDICAL DEVICES LIMITED 06778337, active, incorporated 22 December 2008, Talbot House Unit 11, Perrywood Business Park, Honeycrock Lane, Redhill, RH1 5JQ; and HAMSARD 3150 LIMITED 06388994, previously named KINETIK MEDICAL DEVICES, dissolved 8 March 2016. So the brief's spelling has no registration of its own, but neither Hub record carries a confirmed number and \"(New)\" suggests NHS Supply Chain is distinguishing an entity, so WHICH registration each record is cannot be settled from here. Under data/identity-vocabulary-policy.json a shared name is not evidence and a name-search candidate cannot carry a merge: the records stay apart and Lot 1 stays unattached. What would settle it: the registration number published on the supplier's own site, or a Find a Tender notice naming the awardee with its number."
   },
   {
    "name": "KLS Martin UK Limited",
@@ -74558,7 +74551,8 @@
      },
      "generatedBy": "backfill_product_categories.py"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. Find a Tender award notice 050296-2025 names \"Lyreco UK Limited\" at Lot 1, but neither of the two unattached rows on NHS Supply Chain's own brief for that framework is Lyreco, and no row on the brief reaches this record. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "Löwenstein Medical UK",
@@ -76582,7 +76576,8 @@
    "name": "MCT Lifesciences Ltd",
    "aliases": [
     "MCT Lifesciences Ltd",
-    "MCT Lifesciences Ltd (New to framework)"
+    "MCT Lifesciences Ltd (New to framework)",
+    "MCT"
    ],
    "specialities": [
     "Endoscopy"
@@ -76636,7 +76631,7 @@
    "awards": [],
    "curated": true,
    "note": "Added 14/08/2026 from NHS Supply Chain's own contract launch briefs for 3 frameworks (2024/S 000-004668, 2024/S 000-029975, 2026/S 000-002484). The framework award is the only verified fact in this record. Product range, UK entity, ownership and website have NOT been verified and must be checked at source before being used with a customer.",
-   "verified": "2026-08-14",
+   "verified": "2026-11-17",
    "source": "NHS Supply Chain contract launch briefs (2024/S 000-004668, 2024/S 000-029975, 2026/S 000-002484), fetched 14/08/2026",
    "reconciledFrom": "reconcile_suppliers.py tier-1 backfill, 14/08/2026",
    "_specialitiesEvidence": "Speciality assigned solely because the company is named on NHS Supply Chain's Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products framework. No product-level evidence yet.",
@@ -76676,7 +76671,8 @@
      },
      "generatedBy": "backfill_product_categories.py"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. NHS Supply Chain's Transcatheter Heart Valve brief lists this company as a bare \"MCT\" with no lot, while the product matrix attached to that same brief (Product-Matrix-Transcatheter-Heart-Valve-09-September-2026-MT.xlsx) names \"MCT Lifesciences Limited\" on Lot 2. One owner's own document writing one supplier two ways, so \"MCT\" is recorded here as an alias and the brief row is left as NHS Supply Chain writes it. No other framework brief names a bare \"MCT\" (checked across data/frameworks.json 2026-11-17); the Endoscopy, Robotic Medical Equipment and Syringes briefs all name this company in full."
   },
   {
    "name": "MDI Medical Ltd",
@@ -80956,7 +80952,8 @@
      "movedFrom": "background",
      "movedOn": "2026-09-30"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Procedure Packs lot source names a bare \"Mediq\", which reaches this record, and none of the brief's three unattached rows is Mediq. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "Meditech Devices Pvt. Ltd.; Bipson Surgical Private Ltd; Precision Coatings (P) Ltd; Romsons Group Private Ltd; Niraj Industries Ltd; Hindustan Syringes & Medical Devices Ltd",
@@ -82619,7 +82616,8 @@
      "sourceUrl": "https://find-and-update.company-information.service.gov.uk/company/02491098",
      "readOn": "2026-09-03"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. No row on the 56-supplier Advanced Wound Care brief shares a word with \"MedScience Distribution Ltd\". The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "Medserve (South West)",
@@ -87795,7 +87793,8 @@
     "c1": "#58c8d8",
     "c2": "#367c85",
     "source": "sampled from the company's own favicon at https://www.google.com/s2/favicons?domain=www.nestlehealthscience.co.uk&sz=128 on 2026-08-06; c2 is c1 darkened for the gradient, not a second brand colour"
-   }
+   },
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Infant Feeding lot source names a bare \"Nestle\", which reaches this record; the brief's own row is \"Nestle Nutrition\", a separate Hub record. A bare group word cannot be read as naming one of several Nestle entities, and under the parent-subsidiary-award-credit policy no alias may link related entities because aliases drive award routing. Lots 1 and 2 stay unattached. What would change it: NHS Supply Chain naming the entity in full on the brief, or a Find a Tender notice naming the awardee with its registration number."
   },
   {
    "name": "Nestle Nutrition",
@@ -90700,7 +90699,8 @@
      },
      "generatedBy": "backfill_product_categories.py"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Pressure Area Care lot source names \"Nottingham Rehab Limited\" at Lot 1 and no row on that brief reaches this record (the nearest word-match is \"Wealden Rehab Ltd\", a different company). The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "Nova Biomedical",
@@ -91672,7 +91672,8 @@
     "place": "Registered office: Newmarket Avenue, Whitehorse Business Park, Trowbridge, Wiltshire, BA14 0XQ (Companies House). Incorporated 3 May 1933 as United Dairies Limited; later Cow & Gate Limited (1978), Cow & Gate Nutricia Limited (1993), then Nutricia Limited (1997).",
     "interview": "Worth asking how the NHS medical nutrition team is organised and measured inside a company whose accounts are dominated by dairy, plant-based and water brands, and how much of the £548m Specialised Nutrition line is NHS-funded medical nutrition rather than infant formula. Also worth asking which of Lots 2, 3 and 4 of the Enteral Feeding framework carry most of the volume and how the commission-based sales arrangement with other Danone companies affects UK pricing decisions.",
     "sources": "Primary sources read this session: https://find-and-update.company-information.service.gov.uk/company/00275552; https://find-and-update.company-information.service.gov.uk/company/00275552/officers; https://find-and-update.company-information.service.gov.uk/company/00275552/persons-with-significant-control; https://find-and-update.company-information.service.gov.uk/company/00275552/filing-history; https://find-and-update.company-information.service.gov.uk/company/00275552/filing-history/MzUzODMxNDQxM2FkaXF6a2N4/document?format=pdf&download=0; https://www.supplychain.nhs.uk/product-information/contract-launch-brief/enteral-feeding-bile-bags-and-associated-products/."
-   }
+   },
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. Two frameworks name \"Nutricia Ltd\" as a lot source, and on both the brief's own row is \"Danone Nutricia Early Life Nutrition\" (written \"Danone Nutricia: early life Nutrition\" on the Ambient Food brief), which is its own Hub record. Under the parent-subsidiary-award-credit policy in data/identity-vocabulary-policy.json these are two facts about two things: the award credits to the entity the awarding source names, and no alias links a related entity, because aliases drive award routing. The records stay apart and the lots stay unattached."
   },
   {
    "name": "NuVasive UK Ltd",
@@ -94985,7 +94986,8 @@
    "name": "Ortus Technology Limited",
    "aliases": [
     "Ortus Technology Limited",
-    "Ortus Technologies"
+    "Ortus Technologies",
+    "Ortus"
    ],
    "specialities": [
     "Anaesthesia and critical care",
@@ -95029,7 +95031,7 @@
    "awards": [],
    "curated": true,
    "note": "Added 14/08/2026 from NHS Supply Chain's own contract launch briefs for 2 frameworks (2023/S 000-030987, 2026/S 000-008108). The framework award is the only verified fact in this record. Product range, UK entity, ownership and website have NOT been verified and must be checked at source before being used with a customer.",
-   "verified": "2026-08-14",
+   "verified": "2026-11-17",
    "source": "NHS Supply Chain contract launch briefs (2023/S 000-030987, 2026/S 000-008108), fetched 14/08/2026",
    "reconciledFrom": "reconcile_suppliers.py tier-2 backfill, 14/08/2026",
    "_specialitiesEvidence": "Speciality assigned solely because the company is named on NHS Supply Chain's Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services; Electrodes, Ultrasound Gels, Defibrillation and Related Consumables frameworks. No product-level evidence yet.",
@@ -95060,7 +95062,8 @@
      },
      "generatedBy": "backfill_product_categories.py"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. NHS Supply Chain's External Defibrillation Devices brief lists this company as a bare \"Ortus\" with no lot, while that brief's own lot source — Find a Tender contract award notice 050296-2025 — names \"Ortus Technology Limited\" on Lots 1, 2 and 3. One owner's own documents writing one supplier two ways, so the brief's spelling is recorded here as an alias and the brief row is left as NHS Supply Chain writes it. No other framework brief names a bare \"Ortus\" (checked across data/frameworks.json 2026-11-17), so the alias cannot re-route another company's award; the Hub's separate \"Ortus-iHealth\" record is a different company and is named in full wherever it appears."
   },
   {
    "name": "Ortus-iHealth",
@@ -96469,7 +96472,8 @@
      },
      "generatedBy": "backfill_product_categories.py"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Procedure Packs lot source names \"Owens & Minor Halyard UK Ltd\", which reaches this record; the brief's own row is \"O&M Halyard Uk Limited\", which is its own Hub record carrying the name-search candidate O&M HALYARD UK LIMITED 11111792 (active, incorporated 14 December 2017, Eastcastle House, 27/28 Eastcastle Street, London, W1W 8DH). 11111792 records NO previous company name, so Companies House does not tie \"Owens & Minor Halyard UK Ltd\" to it, and no company of that name was found (searches 2026-11-17). \"O&M\" plainly reads as Owens & Minor, but a reading is not evidence: under data/identity-vocabulary-policy.json two records merge on a shared registration number, and a name-search candidate cannot carry a merge. The records stay apart and Lots 1 and 2 stay unattached. What would settle it: the registration number published on the supplier's own site, or a Find a Tender notice naming the awardee with its number."
   },
   {
    "name": "Oxford Biosystems",
@@ -96667,51 +96671,6 @@
      "source": {
       "frameworkRef": "2026/S 000-031173",
       "frameworkName": "Disposable and Washable Continence Care",
-      "capturedOn": "2026-11-15"
-     },
-     "generatedBy": "backfill_product_categories.py"
-    }
-   ]
-  },
-  {
-   "name": "P.W.Coole & Son Limited T/A Surgical Holdings",
-   "aliases": [
-    "P.W.Coole & Son Limited T/A Surgical Holdings"
-   ],
-   "specialities": [
-    "Theatres / surgical"
-   ],
-   "products": [],
-   "frameworks": [
-    {
-     "name": "Electrosurgical Consumables and Related Accessories",
-     "dates": "20 October 2025 to 19 October 2028",
-     "note": "Named on NHS Supply Chain's own contract launch brief for this framework, as \"P.W.Coole & Son Limited T/A Surgical Holdings\". 33 suppliers on the framework.",
-     "reference": "2024/S 000-001161",
-     "category": "Medical and Surgical Consumables",
-     "supplierCount": 33,
-     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrosurgical-consumables/",
-     "source": "nhssc-brief",
-     "capturedOn": "2026-11-15"
-    }
-   ],
-   "alerts": [],
-   "news": [],
-   "links": [],
-   "awards": [],
-   "curated": true,
-   "note": "Added 14/08/2026 from NHS Supply Chain's own contract launch briefs for 1 framework (2024/S 000-001161). The framework award is the only verified fact in this record. Product range, UK entity, ownership and website have NOT been verified and must be checked at source before being used with a customer.",
-   "verified": "2026-08-14",
-   "source": "NHS Supply Chain contract launch briefs (2024/S 000-001161), fetched 14/08/2026",
-   "reconciledFrom": "reconcile_suppliers.py tier-3 backfill, 14/08/2026",
-   "_specialitiesEvidence": "Speciality assigned solely because the company is named on NHS Supply Chain's Electrosurgical Consumables and Related Accessories framework. No product-level evidence yet.",
-   "companyNumberNote": "No Companies House match could be established: No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: G. T. HEWETT & SON LIMITED,.",
-   "productCategories": [
-    {
-     "category": "Medical and Surgical Consumables",
-     "source": {
-      "frameworkRef": "2024/S 000-001161",
-      "frameworkName": "Electrosurgical Consumables and Related Accessories",
       "capturedOn": "2026-11-15"
      },
      "generatedBy": "backfill_product_categories.py"
@@ -96971,7 +96930,8 @@
      },
      "generatedBy": "backfill_product_categories.py"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. Find a Tender award notice 000335-2023 names this company twice, as \"Pal International Limited\" (Lot 4) and \"Pal International Ltd\" (Lots 1 and 3); both reach this record. NHS Supply Chain's own Hand Hygiene brief prints 21 suppliers, matching its own stated count, and names no PAL row — its only unattached row is an unrelated company. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "Pall Europe Limited",
@@ -105309,7 +105269,8 @@
     ],
     "interview": "Prosum Medical is a small, independently-owned UK medical device manufacturer (incorporated 2013, single majority owner/director Yanshen Sun) based in Uxbridge, working to ISO 13485:2016 and offering OEM services (procedure packs, bulk parts, moulding and extrusion) alongside its own needle, syringe, infusion therapy, insulin delivery and blood collection product lines. It holds NHS Supply Chain framework positions in blood collection devices and extension sets/lines, and its website actively courts distribution partners, which fits a manufacturer-led rather than a large sales-force-led go-to-market. Accounts filed are small/micro-company exemption accounts with no turnover or headcount disclosed, so candidates should not assume specific revenue or company size going in — ask directly rather than quoting a figure that isn't published anywhere.",
     "sources": "Sources read on 2026-09-07: Companies House company overview, filing history, officers and persons-with-significant-control pages for PROSUM MEDICAL LIMITED (company 08681398, find-and-update.company-information.service.gov.uk); the company's own website prosummedical.co.uk (About, Contact, Blood Collection System, Partners pages); a general web search for company/press/framework context. NOT checked in this session: the actual iXBRL/PDF accounts documents (filings confirm 'Total exemption full accounts' under the small/micro exemption, indicating no P&L is publicly disclosed, but the documents themselves were not opened); LinkedIn; Glassdoor; a live re-check of the NHS Supply Chain framework pages for the Blood Collection Devices and Extension Sets and Lines contracts (framework details taken as supplied); Companies House charges register; any careers/vacancies page (none found in the site's navigation, so no hiring section is included)."
-   }
+   },
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Needlefree Connection Systems brief has no unattached supplier rows at all — every row on it already carries its lot — and none of them reaches this record. The lot source names \"Prosum Medical Ltd\" on four lots, so the two sources name different supplier sets. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "ProSys International Ltd",
@@ -108889,7 +108850,8 @@
     "interview": "Before any meeting, ask about the split between the UK trade-distribution business and the wholly owned Shanghai manufacturing operation, since that vertical integration, own factory, own quality control, TUV Rheinland certification, is the company's stated point of difference from agents and distributors who rely on third parties, and is worth probing on lead times and control of specification changes. Given the filed employee count of 1 looks inconsistent with the scale the company describes, do not quote workforce size from the accounts without first asking the company directly or checking the full statutory accounts, and be ready to ask plainly who currently leads commercial and NHS-facing sales, since Companies House does not give job titles and the public site does not name a leadership team.",
     "sources": "Sources read in this session, all 18/08/2026 unless stated: Companies House company overview for RELIANCE MEDICAL LTD, 05701697; Companies House officers list for the same company; Companies House persons with significant control for the same company; Companies House company overview for RELIANCE MEDICAL HOLDINGS LTD, 11911024; Reliance Medical's own About Us page; Our Brands page; Latest News page; Careers page. The turnover, £20,989,946, and employee, 1, figures were supplied as already read from this Hub's Companies House pipeline for the accounts made up to 31 December 2024 and were not independently re-pulled from the raw accounts filing in this session. Could not verify: any 2025 to 2026 dated UK press release, leadership change, acquisition or product launch announcement specifically naming Reliance Medical Ltd, a web search for 2025 to 2026 press coverage returned no relevant results, only unrelated Reliance companies; the true current headcount, given the filed figure of 1 looks inconsistent with the company's own description of its operations; named job titles for any officer, Companies House gives appointment roles only, director or secretary, not functional titles; any NHS Supply Chain contract launch brief specifically naming this company, not searched independently, per instruction to rely on the existing frameworks array for this supplier; ultimate ownership above Reliance Medical Holdings Ltd, that is whether the Pear family surname connection between directors is a formally confirmed family relationship. These gaps are left as Not verified rather than filled."
    },
-   "_curatorNotes": "16/11/2026: the shared 07/08/2026 compare-suppliers reconciliation block was moved out of the member note so the note renders, and is preserved here verbatim: \"Reconciled from data/compare-suppliers.json on 07/08/2026 — this company already had a researched row on the Compare tab and no record in the master, which is the drift docs/ONE-LIST-AUDIT.md set out to close. Its speciality, brands and link are taken from that row, which is human-curated under this repo's sourceRule (framework name, dates and supplier list from NHS Supply Chain's own contract launch brief; brands from the catalogue entry). NOT verified against Companies House on this run, so no company number is recorded and the legal entity is not asserted.\""
+   "_curatorNotes": "16/11/2026: the shared 07/08/2026 compare-suppliers reconciliation block was moved out of the member note so the note renders, and is preserved here verbatim: \"Reconciled from data/compare-suppliers.json on 07/08/2026 — this company already had a researched row on the Compare tab and no record in the master, which is the drift docs/ONE-LIST-AUDIT.md set out to close. Its speciality, brands and link are taken from that row, which is human-curated under this repo's sourceRule (framework name, dates and supplier list from NHS Supply Chain's own contract launch brief; brands from the catalogue entry). NOT verified against Companies House on this run, so no company number is recorded and the legal entity is not asserted.\"",
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. Find a Tender award notice 000335-2023 names \"Reliance Medical Ltd\" at Lot 3 of Hand Hygiene; NHS Supply Chain's own brief for that framework prints 21 suppliers, matching its stated count, and names no Reliance row (the company is named in full on other briefs, where its lots do attach). The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "Relonchem Limited",
@@ -112828,7 +112790,8 @@
      },
      "generatedBy": "backfill_product_categories.py"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The only Airway Management brief row sharing a word with \"Sai Medical Solutions Ltd\" is \"Sai Quality Fruits And Veg Limited\", an unrelated company. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "Sai Quality Fruits And Veg Limited",
@@ -113776,7 +113739,8 @@
      "sourceUrl": "https://find-and-update.company-information.service.gov.uk/company/00364651",
      "readOn": "2026-09-03"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Hand Hygiene lot source names \"SC Johnson Professional\", which reaches this record; the brief's own row is \"SC Johnson Ltd\", which is its own record. Companies House holds these as separate registrations: SC JOHNSON PROFESSIONAL LIMITED 00364651, incorporated 2 January 1941, Denby Hall Way, Denby, Ripley, DE5 8JZ (and SC JOHNSON PROFESSIONAL GROUP LIMITED 04934334 at the same address), against SC JOHNSON LTD 04166155, incorporated 22 February 2001 (previous name S.C. JOHNSON LIMITED), Frimley Green, Camberley, GU16 7AJ — read at Companies House 2026-11-17. Two registrations, so under the parent-subsidiary-award-credit policy the award credits as named, no alias links them, and Lots 1, 2 and 4 stay unattached."
   },
   {
    "name": "Scala Surgical Ltd",
@@ -118250,7 +118214,7 @@
      "generatedBy": "backfill_product_categories.py"
     }
    ],
-   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. \"Simulation Man\" (this Hub record, from the Simulation Devices and Services brief 2022/S 000-031912) and \"@SimulationMan Ltd\" (from the Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems brief 2026/S 000-008108) may be one company, and are NOT treated as one. Companies House holds NO company named \"Simulation Man\" (searches for \"simulation man\" and \"simulationman\", 2026-11-17); the only resembling registration is @SIMULATIONMAN LTD 12391166, active, incorporated 8 January 2020, 83/84 Livingstone Road Walworth Business Park, Andover, Hampshire SP10 5QZ, SIC 70229 (https://find-and-update.company-information.service.gov.uk/company/12391166). Suggestive but not proof: on the Anaesthesia framework the brief's own supplier row is \"@SimulationMan Ltd\" while that framework's lot source names \"Simulation Man Ltd\" — one award under two spellings. The domain simulationman.co.uk is parked (it redirects to a lander, 2026-11-17), so there is no route-2 registration proof for either record, and data/identity-vocabulary-policy.json accepts only a shared registration number as evidence that two records are one company. What would settle it: a company number on the supplier's own site, or a Find a Tender award notice for either framework naming the supplier with its registration number."
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. \"Simulation Man\" (this Hub record, from the Simulation Devices and Services brief 2022/S 000-031912) and \"@SimulationMan Ltd\" (from the Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems brief 2026/S 000-008108) may be one company, and are NOT treated as one. Companies House holds NO company named \"Simulation Man\" (searches for \"simulation man\" and \"simulationman\", 2026-11-17); the only resembling registration is @SIMULATIONMAN LTD 12391166, active, incorporated 8 January 2020, 83/84 Livingstone Road Walworth Business Park, Andover, Hampshire SP10 5QZ, SIC 70229 (https://find-and-update.company-information.service.gov.uk/company/12391166). Suggestive but not proof: on the Anaesthesia framework the brief's own supplier row is \"@SimulationMan Ltd\" while that framework's lot source names \"Simulation Man Ltd\" — one award under two spellings. The domain simulationman.co.uk is parked (it redirects to a lander, 2026-11-17), so there is no route-2 registration proof for either record, and data/identity-vocabulary-policy.json accepts only a shared registration number as evidence that two records are one company. What would settle it: a company number on the supplier's own site, or a Find a Tender award notice for either framework naming the supplier with its registration number.  Checked 2026-11-17 working the framework-lots residuals. The Anaesthesia Machines lot source names \"Simulation Man Ltd\" at Lot 2 and no row on that brief reaches this record. This name was checked at Companies House on 17/11/2026 and could not be tied to a registration, recorded then; under the unconfirmable-awardee policy the award publishes under the name as given with no company attached. The lot stays unattached."
   },
   {
    "name": "Sinapi Biomedical UK",
@@ -119438,7 +119402,8 @@
      "generatedBy": "backfill_product_categories.py"
     }
    ],
-   "_curatorNotes": "16/11/2026: internal cross-references were reworded out of the member note so the note renders. No fact was changed. Replaced, in order: 'Proposed for the address route in docs/domain-proof-address-route.md on 08/09/2026; that proposal is withdrawn.' -> ''"
+   "_curatorNotes": "16/11/2026: internal cross-references were reworded out of the member note so the note renders. No fact was changed. Replaced, in order: 'Proposed for the address route in docs/domain-proof-address-route.md on 08/09/2026; that proposal is withdrawn.' -> ''",
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. No row on the 58-supplier Endoscopy brief reaches this record. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "Solventum (3M Health Care)",
@@ -119822,7 +119787,8 @@
     ],
     "interview": "A useful line of inquiry would be how Solventum's UK commercial team is positioning the January 2026 V.A.C. Peel and Place launch against NHS England's ongoing review of Part IX Drug Tariff wound-product commercial models, and how it expects NPWT products to be treated differently from Part IX dressings.",
     "sources": "Checked 10/09/2026. Companies House: search results for \"KCI Medical\" and \"Solventum\"; full company overview, previous-names history, officers and filing history for KCI Medical Limited (01130981); full company overview for Solventum UK Holding Company Ltd (14715751); PSC record for KCI Medical Limited showing the KCI UK Holdings Ltd → 3M United Kingdom Plc → Solventum UK Holding Company Ltd chain with exact notified/ceased dates. KCI Medical Limited's full statutory accounts for the year ended 31/12/2024 (34 pages, filed 20/12/2025, signed by the board 10/12/2025, audited by PricewaterhouseCoopers LLP) — downloaded and read in full: Strategic report, Directors' report, Profit and loss account, Balance sheet, Statement of changes in equity, and Notes including Note 23 \"Controlling parties\", the primary-source confirmation of the Solventum Corporation ultimate-parent relationship. 3M's own newsroom for the spin-off completion announcement. Solventum's own corporate site for its business-segment description, and its UK newsroom for the 06/01/2026 V.A.C. Peel and Place UK launch press release, including the Royal Free London NHS Foundation Trust quote. NHS Supply Chain's own Advanced Wound Care contract launch brief spot-checked live to confirm KCI Medical Limited's current listing among 56 suppliers on framework 2024/S 000-029271. What a future session should still check: KCI Medical Limited's FY2025 accounts (due by 30/09/2026) for the post-divestment turnover base."
-   }
+   },
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Total Patient Assessment lot source names \"KCI Medical Limited\", which reaches this record through its 3M/KCI aliases, and the brief's own row is \"KCI Medical Ltd (3M)\", which reaches NO Hub record at all. So the lot cannot attach from either side: the source name lands on the Solventum record while the brief row lands nowhere. KCI Medical Limited is its own UK registration, and under data/identity-vocabulary-policy.json an alias may not be added to link a related entity, because aliases drive award routing and would re-route the award away from the entity the source names. Lot 4 stays unattached. What would change it: a record for KCI Medical Limited in its own right, with its registration confirmed, which is a decision about whether the Hub holds that entity and not a backlog item."
   },
   {
    "name": "Solventum (formerly 3M Healthcare)",
@@ -121071,7 +121037,8 @@
      },
      "generatedBy": "backfill_product_categories.py"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Physiotherapy and Occupational Therapy lot source names \"Splice Cast Ltd t/a Eureka Physiocare Ltd\", which reaches this record; the brief's own row is \"Eureka Physiocare (previously Splice Cast)\", which reaches the separate \"Eureka Physiocare Ltd\" record. Those are TWO registrations, not one renamed: Companies House holds SPLICE CAST LIMITED 05102276, incorporated 15 April 2004, and EUREKA PHYSIOCARE LTD 13730060, incorporated 8 November 2021, whose only previous name is EUREKA PHYSIOCARE (NEWTOWN) LTD (8 to 24 November 2021) — so 13730060 was never named Splice Cast (read at Companies House 2026-11-17). NHS Supply Chain's \"previously\" describes a trading succession, not a shared registration, and data/identity-vocabulary-policy.json merges on a registration, never on a name. The records stay apart and Lots 1 and 2 stay unattached. What would settle it: a Companies House filing, or a statement on the company's own site, documenting that the business transferred."
   },
   {
    "name": "SRA Developments",
@@ -122618,7 +122585,8 @@
      },
      "generatedBy": "backfill_product_categories.py"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. No row on the 26-supplier Pulse Oximetry brief reaches this record. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "Streets Heaver",
@@ -123946,10 +123914,15 @@
     "Surgical Instruments (dental)",
     "Surgical Holdings",
     "Surgical Holdings Limited",
-    "P.W. COOLE & SON LIMITED"
+    "P.W. COOLE & SON LIMITED",
+    "P.W.Coole & Son Limited T/A Surgical Holdings",
+    "P.W. Coole & Son Limited T/A Surgical Holdings",
+    "P.W. Coole & Son Ltd",
+    "P.W.Coole & Son Limited"
    ],
    "specialities": [
-    "Dental and maxillofacial"
+    "Dental and maxillofacial",
+    "Theatres / surgical"
    ],
    "products": [
     "Elevator Reusable Warwick James Dental Straight 150mm (NHS-Supply-Chain-confirmed)",
@@ -124020,11 +123993,22 @@
      "source": "nhssc-brief",
      "capturedOn": "2026-11-15",
      "lotSourceUrl": "https://azuksappnpdsa01.blob.core.windows.net/datashare/TOS3-Awarded-Supplier-Matrix-by-Lot-March-2025-mt.xlsx"
+    },
+    {
+     "name": "Electrosurgical Consumables and Related Accessories",
+     "dates": "20 October 2025 to 19 October 2028",
+     "note": "Named on NHS Supply Chain's own contract launch brief for this framework, as \"P.W.Coole & Son Limited T/A Surgical Holdings\". 33 suppliers on the framework.",
+     "reference": "2024/S 000-001161",
+     "category": "Medical and Surgical Consumables",
+     "supplierCount": 33,
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrosurgical-consumables/",
+     "source": "nhssc-brief",
+     "capturedOn": "2026-11-15"
     }
    ],
    "alerts": [],
    "news": [],
-   "note": "From NHS Supply Chain's official Supplier and Product Matrix (7 Jan 2026), which the framework's own summary page disagrees with slightly — matrix treated as authoritative. Supplies: Dental Consumables, Dental Implantology and Related Products, Orthodontics and Related Products, Handpieces, Dental Chairs, Dental Laboratory Equipment, Dental Imaging, Dental Environment/Practice Building.",
+   "note": "MERGED 2026-11-17 working the framework-lots residuals: the Hub held one company as two records, \"Surgical Holdings Limited\" and \"P.W.Coole & Son Limited T/A Surgical Holdings\". Companies House 03090951 SURGICAL HOLDINGS LIMITED, active, incorporated 14 August 1995, Unit 8 Parkside Centre, Potters Way, Temple Farm Industrial Estate, Southend On Sea, SS2 5SJ, records the dated previous name \"P.W. COOLE & SON LIMITED\" (14 Aug 1995 to 27 Aug 2025), read at Companies House 2026-11-17; data/company-financials.json already publishes 03090951 for this record at matchConfidence \"confirmed\". Both names are therefore names of ONE registration, which is the evidence data/identity-vocabulary-policy.json requires before two records become one — a shared registration number, never a shared name. A separate P.W. COOLE & SON LIMITED 11614775 (incorporated 2018) is in Liquidation at a London insolvency address and carries no Surgical Holdings trading name, so NHS Supply Chain's Electrosurgical Consumables brief row \"P.W.Coole & Son Limited T/A Surgical Holdings\" (2024/S 000-001161), which names the trading name, names 03090951. Both names are kept as aliases, so every award stays findable under the name its own source uses, and the brief row itself is untouched. Effect: the Electrosurgical Consumables lot source \"P.W.Coole & Son Limited\" (Lots 1 and 6) now has a brief row to attach to.  Previous \"Surgical Holdings Limited\" record: From NHS Supply Chain's official Supplier and Product Matrix (7 Jan 2026), which the framework's own summary page disagrees with slightly — matrix treated as authoritative. Supplies: Dental Consumables, Dental Implantology and Related Products, Orthodontics and Related Products, Handpieces, Dental Chairs, Dental Laboratory Equipment, Dental Imaging, Dental Environment/Practice Building.  Previous \"P.W.Coole & Son Limited T/A Surgical Holdings\" record: Added 14/08/2026 from NHS Supply Chain's own contract launch briefs for 1 framework (2024/S 000-001161). The framework award is the only verified fact in this record. Product range, UK entity, ownership and website have NOT been verified and must be checked at source before being used with a customer.",
    "links": [
     {
      "label": "Company website",
@@ -124049,7 +124033,7 @@
     "angle": "",
     "line": ""
    },
-   "_specialitiesEvidence": "20/07/2026: replaced 8 generic Lot labels with real named eponymous instruments (Warwick James, Cryer, Ash) confirmed on NHS Supply Chain, plus the company's own product-category list. Flagged the Surgical Instruments = Surgical Holdings identity match as high-confidence-not-certain, and the Aug 2025 Stille AB acquisition.",
+   "_specialitiesEvidence": "20/07/2026: replaced 8 generic Lot labels with real named eponymous instruments (Warwick James, Cryer, Ash) confirmed on NHS Supply Chain, plus the company's own product-category list. Flagged the Surgical Instruments = Surgical Holdings identity match as high-confidence-not-certain, and the Aug 2025 Stille AB acquisition. | from the merged \"P.W.Coole & Son Limited T/A Surgical Holdings\" record: Speciality assigned solely because the company is named on NHS Supply Chain's Electrosurgical Consumables and Related Accessories framework. No product-level evidence yet.",
    "background": [
     {
      "heading": "Entity identification",
@@ -124200,7 +124184,26 @@
     "interview": "Lead with the acquisition, not the name change — the name change is a mechanical consequence of the sale, and any rep or candidate who frames it as a rebrand will be corrected quickly. The live story is: a 37-year family business, still led day-to-day by the same managing director (Daniel Coole), was bought in August 2025 by Stille AB, a much larger Swedish-listed group with its own manufacturing and European distribution. Expect messaging from the company to lean on 'more investment, same team, same quality' — Stille's own announcement explicitly kept Coole in place and framed this as growth capital rather than integration/cost-cutting. Worth probing in any conversation: how far product-range consolidation with Stille's own instrument lines has gone since the October 2025 board change (when Stille's own Group CEO took a direct board seat, replacing an interim appointee), whether the NHS Supply Chain framework listings are being renamed or reissued under any Stille branding, and whether the company is still positioning itself as dental-specialist, general-surgical-specialist, or both — its own site markets across both today. No verified figures exist for current UK revenue or headcount beyond the £6.4m/57-employee figures already noted, so don't quote larger post-acquisition numbers unless the company states them directly.",
     "sources": "Companies House company overview, filing history, officers list and PSC filings for Surgical Holdings Limited / P.W. Coole & Son Limited, company no. 03090951 (find-and-update.company-information.service.gov.uk/company/03090951 and its /filing-history, /officers and /persons-with-significant-control subpages), all read 19/09/2026; the company's own website (https://www.surgicalholdings.co.uk/ and https://www.surgicalholdings.co.uk/blog/2025/07/acquisition-announcement/), read 19/09/2026; Stille AB's own investor-relations press releases — CEO appointment, acquisition agreement announcement, and completion announcement (https://www.stille.se/news/stille-completes-the-acquisition-of-surgical-holdings/), all read 19/09/2026; trade press coverage of the deal via Healthcare Today and HTWorld (https://www.htworld.co.uk/news/deals/surgical-holdings-acquisition-by-stille-ab-marks-major-milestone-in-surgical-instrumentation-jp25/), read 19/09/2026. All financial figures (£7.7m acquisition price, £6.4m revenue, ~£1.0m adjusted EBITDA) originate from Stille AB's own disclosures, not from Surgical Holdings' own Companies House filings, which as a small company do not carry a public turnover figure — this is flagged explicitly in the record rather than treated as a gap. Not opened directly in this pass: the actual accounts PDFs (document IDs found for the 30/04/2025 and 31/12/2025 filing periods) — the filing-history index gave no indication either contains a director's report or narrative beyond the standard small-company statements."
    },
-   "domain": "surgicalholdings.co.uk"
+   "domain": "surgicalholdings.co.uk",
+   "productCategories": [
+    {
+     "category": "Medical and Surgical Consumables",
+     "source": {
+      "frameworkRef": "2024/S 000-001161",
+      "frameworkName": "Electrosurgical Consumables and Related Accessories",
+      "capturedOn": "2026-11-15"
+     },
+     "generatedBy": "backfill_product_categories.py"
+    }
+   ],
+   "identityNote": "MERGED 2026-11-17 working the framework-lots residuals: the Hub held one company as two records, \"Surgical Holdings Limited\" and \"P.W.Coole & Son Limited T/A Surgical Holdings\". Companies House 03090951 SURGICAL HOLDINGS LIMITED, active, incorporated 14 August 1995, Unit 8 Parkside Centre, Potters Way, Temple Farm Industrial Estate, Southend On Sea, SS2 5SJ, records the dated previous name \"P.W. COOLE & SON LIMITED\" (14 Aug 1995 to 27 Aug 2025), read at Companies House 2026-11-17; data/company-financials.json already publishes 03090951 for this record at matchConfidence \"confirmed\". Both names are therefore names of ONE registration, which is the evidence data/identity-vocabulary-policy.json requires before two records become one — a shared registration number, never a shared name. A separate P.W. COOLE & SON LIMITED 11614775 (incorporated 2018) is in Liquidation at a London insolvency address and carries no Surgical Holdings trading name, so NHS Supply Chain's Electrosurgical Consumables brief row \"P.W.Coole & Son Limited T/A Surgical Holdings\" (2024/S 000-001161), which names the trading name, names 03090951. Both names are kept as aliases, so every award stays findable under the name its own source uses, and the brief row itself is untouched. Effect: the Electrosurgical Consumables lot source \"P.W.Coole & Son Limited\" (Lots 1 and 6) now has a brief row to attach to.",
+   "source": "NHS Supply Chain contract launch briefs (2024/S 000-001161), fetched 14/08/2026",
+   "reconciledFrom": "reconcile_suppliers.py tier-3 backfill, 14/08/2026",
+   "companyNumberNote": "No Companies House match could be established: No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. The nearest hits match only on generic industry words. Nearest: G. T. HEWETT & SON LIMITED,.",
+   "mergedFrom": [
+    "P.W.Coole & Son Limited T/A Surgical Holdings"
+   ],
+   "verified": "2026-11-17"
   },
   {
    "name": "Surgical Instrument Group Holdings Ltd",
@@ -125993,7 +125996,8 @@
     "place": "Registered office (Companies House, 16/11/2026): 101 Hessle Road, Hull, England HU3 2BN. Incorporated 2 July 1907; active; SIC 20590 and 32500 (manufacture of medical and dental instruments and supplies). Next accounts to 31 December 2026 are due by 30 September 2027.",
     "interview": "Worth raising: (1) the company says most sales and purchases are with group companies, so ask which NHS-facing lines it contracts directly and which go through the group's other UK entities; (2) UK turnover grew about 6.8% to £186.3m while production headcount fell from 500 to 434, so ask what changed in Hull manufacturing; (3) tangible assets rose from £101.2m to £149.4m, so ask what the Hull investment is for and when new wound care capacity comes online.",
     "sources": "Primary sources read this session: https://find-and-update.company-information.service.gov.uk/company/00093994; https://find-and-update.company-information.service.gov.uk/company/00093994/officers; https://find-and-update.company-information.service.gov.uk/company/00093994/persons-with-significant-control; https://find-and-update.company-information.service.gov.uk/company/00093994/filing-history; the full accounts for the year to 31 December 2025 (document filed 26 August 2026; company number and name checked on the balance sheet; read from page images, figures checked against the images on pages 19, 21, 31 and 32). Framework lines are read from NHS Supply Chain's own contract launch briefs, captured 15/11/2026; the briefs were not re-fetched this session. No company website was read, and none is attached to this record."
-   }
+   },
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Advanced Wound Care lot source names \"T.J.SMITH AND NEPHEW,LIMITED\", which reaches this record (Companies House 00093994); the brief's own row is \"Smith & Nephew\", which reaches the separate \"Smith+Nephew\" record (00156031). Those two registrations were checked at Companies House on 17/11/2026 and found to be SEPARATE companies, recorded then. Two registrations, two records, so the lot has no row of this record's on that brief and stays unattached."
   },
   {
    "name": "Taking Care Personal Alarms Limited",
@@ -134431,7 +134435,8 @@
      "generatedBy": "backfill_product_categories.py"
     }
    ],
-   "_curatorNotes": "16/11/2026: internal cross-references were reworded out of the member note so the note renders. No fact was changed. Replaced, in order: 'recorded in data/company-match-overrides.json: the register itself' -> \"recorded in this Hub's own company-match overrides: the register itself\""
+   "_curatorNotes": "16/11/2026: internal cross-references were reworded out of the member note so the note renders. No fact was changed. Replaced, in order: 'recorded in data/company-match-overrides.json: the register itself' -> \"recorded in this Hub's own company-match overrides: the register itself\"",
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Minimally Invasive Surgery lot source names \"Vanguard Medical Devices Ltd\", which reaches this record; the brief's own row is \"Vanguard AG\", a separate record and a non-UK entity. Under the parent-subsidiary-award-credit policy the award credits to the entity the source names and no alias links the two, so Lot 2 stays unattached."
   },
   {
    "name": "Vannin Healthcare Global Ltd",
@@ -136885,7 +136890,8 @@
      "sourceUrl": "https://find-and-update.company-information.service.gov.uk/company/10187476",
      "readOn": "2026-09-03"
     }
-   ]
+   ],
+   "identityNote": "Checked 2026-11-17 working the framework-lots residuals. The Electrodes brief's three unattached rows do not include Vyaire; the company is named in full on other briefs, where its lots do attach. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
   },
   {
    "name": "Vygon (UK)",
@@ -141859,7 +141865,7 @@
    "curated": false,
    "companyNumber": "03393686",
    "companyNumberSource": "Published by the company itself: esteve.com's own legal notice lists \"Esteve Pharmaceuticals, Ltd. The Round House, The Courtyard Barns, Choke Lane, Cookham Dean, Maidenhead Berkshire, United Kingdom SL6 6PT ... Company No. 3393686\" (https://www.esteve.com/uk/legal-notice/, read 17/11/2026). It matches the register: ESTEVE PHARMACEUTICALS LTD, 03393686, active, incorporated 27/06/1997, registered office The Round House, The Courtyard Barns, Choke Lane, Cookham Dean, Maidenhead, Berkshire SL6 6PT (https://find-and-update.company-information.service.gov.uk/company/03393686, read 17/11/2026). Confirmed on the company's own publication, not a name search.",
-   "identityNote": "Added 17/11/2026, working the Hand Hygiene lot-source names under Lou's ruling that hand-hygiene framework suppliers come in where the product is genuinely clinical. WHAT THIS COMPANY SELLS, read on its own site (https://www.esteve.com/uk/patients/products/otc, 17/11/2026): Aquamax skin cream 100g, Aquamax skin cream 500g and Aquamax body wash 250g, with Aquamax described by Esteve as \"an innovative formula for eczema, psoriasis and other dry skin conditions\"; the same site carries a separate Prescription products section. Aquamax cream appears in the NHS dictionary of medicines and devices under Esteve Pharmaceuticals Ltd in 100g and 500g packs. WHY THAT IS CLINICAL: a licensed leave-on emollient indicated for eczema and psoriasis, from a prescription pharmaceutical company, is clinical skin care a clinician chooses for a patient -- not a washroom consumable, a dispenser or a general-purpose sanitiser, which is the line Lou's ruling draws. Esteve Pharmaceuticals is the former Intrapharm Laboratories; ESTEVE RD UK & IRELAND LTD. (06837207) shares the registered address and is a DIFFERENT company -- not an alias of this record.",
+   "identityNote": "Added 17/11/2026, working the Hand Hygiene lot-source names under Lou's ruling that hand-hygiene framework suppliers come in where the product is genuinely clinical. WHAT THIS COMPANY SELLS, read on its own site (https://www.esteve.com/uk/patients/products/otc, 17/11/2026): Aquamax skin cream 100g, Aquamax skin cream 500g and Aquamax body wash 250g, with Aquamax described by Esteve as \"an innovative formula for eczema, psoriasis and other dry skin conditions\"; the same site carries a separate Prescription products section. Aquamax cream appears in the NHS dictionary of medicines and devices under Esteve Pharmaceuticals Ltd in 100g and 500g packs. WHY THAT IS CLINICAL: a licensed leave-on emollient indicated for eczema and psoriasis, from a prescription pharmaceutical company, is clinical skin care a clinician chooses for a patient -- not a washroom consumable, a dispenser or a general-purpose sanitiser, which is the line Lou's ruling draws. Esteve Pharmaceuticals is the former Intrapharm Laboratories; ESTEVE RD UK & IRELAND LTD. (06837207) shares the registered address and is a DIFFERENT company -- not an alias of this record.  Checked 2026-11-17 working the framework-lots residuals. This record was added on 17/11/2026 from Find a Tender award notice 000335-2023 (the Hand Hygiene lot source), which awards 33 names while NHS Supply Chain's own brief states \"There are 21 suppliers on the framework\" and prints 21 — none of them this company. The brief's stated count matches its printed list, so the capture is not short: the notice and the owner's current list genuinely differ, which is why the record's own framework entry says the owner's current list does not name it. Nothing can attach the Lot 4 lot, because there is no brief row to attach it to. See state/hand-hygiene-lot-source-adjudication.json.",
    "note": "Added 17/11/2026 by the hand-hygiene lot-source run, resolving an unresolved-name gap on the Hand Hygiene and Associated Products and Services framework. The verified facts in this record are: the Find a Tender award (notice 000335-2023, Lot 4, read at source 17/11/2026), the company number (published on the company's own legal notice and matching the register), and the product names and their stated indication (read on the company's own UK site). This company is NOT on NHS Supply Chain's current 21-supplier list for the framework -- see the framework entry. Ownership, turnover, UK headcount and NHS Supply Chain catalogue presence have NOT been verified and must be checked at source before being used with a customer.",
    "verified": "2026-11-17",
    "source": "Find a Tender contract award notice 000335-2023 (ocid ocds-h6vhtk-02ad97), read 17/11/2026; NHS Supply Chain contract launch brief for the framework, read 17/11/2026; esteve.com/uk OTC products and legal notice, read 17/11/2026; Companies House company 03393686, read 17/11/2026.",

@@ -1,0 +1,568 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "published": "Working state for the Medical Sales Intelligence Hub, not a member-facing file."
+ },
+ "generated": "2026-11-17",
+ "decidedBy": "Claude, under data/identity-vocabulary-policy.json; no new ruling from Lou was needed",
+ "question": "verify._warn_unresolved_lot_names() counts 50 lot-source supplier names across 25 frameworks that DO resolve to a Hub supplier record, but whose framework's own brief supplier list names no row reaching that record, so attach_names() has nothing to attach the lot to.",
+ "whatIsNotTheFix": "\"Re-read the brief\" is not the general answer. On Hand Hygiene the brief states 21 suppliers and prints 21 while Find a Tender notice 000335-2023 awards 33; on Airway Management the brief prints 54 and states 54. Both captures are complete — the brief and its lot source genuinely name different supplier sets.",
+ "bar": "data/identity-vocabulary-policy.json: two companies sharing a NAME is not evidence, two sharing a REGISTRATION NUMBER is; a name-search candidate cannot carry a merge; an alias may never link a related entity, because aliases drive award routing.",
+ "fixed": {
+  "merged": [
+   {
+    "into": "Surgical Holdings Limited",
+    "folded": "P.W.Coole & Son Limited T/A Surgical Holdings",
+    "registration": "03090951",
+    "evidence": "MERGED 2026-11-17 working the framework-lots residuals: the Hub held one company as two records, \"Surgical Holdings Limited\" and \"P.W.Coole & Son Limited T/A Surgical Holdings\". Companies House 03090951 SURGICAL HOLDINGS LIMITED, active, incorporated 14 August 1995, Unit 8 Parkside Centre, Potters Way, Temple Farm Industrial Estate, Southend On Sea, SS2 5SJ, records the dated previous name \"P.W. COOLE & SON LIMITED\" (14 Aug 1995 to 27 Aug 2025), read at Companies House 2026-11-17; data/company-financials.json already publishes 03090951 for this record at matchConfidence \"confirmed\". Both names are therefore names of ONE registration, which is the evidence data/identity-vocabulary-policy.json requires before two records become one — a shared registration number, never a shared name. A separate P.W. COOLE & SON LIMITED 11614775 (incorporated 2018) is in Liquidation at a London insolvency address and carries no Surgical Holdings trading name, so NHS Supply Chain's Electrosurgical Consumables brief row \"P.W.Coole & Son Limited T/A Surgical Holdings\" (2024/S 000-001161), which names the trading name, names 03090951. Both names are kept as aliases, so every award stays findable under the name its own source uses, and the brief row itself is untouched. Effect: the Electrosurgical Consumables lot source \"P.W.Coole & Son Limited\" (Lots 1 and 6) now has a brief row to attach to."
+   },
+   {
+    "into": "Accrington Surgical Instrument Suppliers Ltd",
+    "folded": "Accrington Surgical Inst. Suppliers",
+    "registration": "05980916",
+    "evidence": "MERGED 2026-11-17 working the framework-lots residuals: the Hub held one company as two records, \"Accrington Surgical Instrument Suppliers Ltd\" and NHS Supply Chain's own abbreviation of it on the Procedure Packs brief, \"Accrington Surgical Inst. Suppliers\" (2023/S 000-031398). \"Inst.\" is an abbreviation of \"Instrument\", and Companies House holds exactly one company it can abbreviate: ACCRINGTON SURGICAL INSTRUMENT SUPPLIERS LIMITED 05980916, active, incorporated 27 October 2006, Unit 6a Petre Court, Petre Road, Clayton-Le-Moors, Accrington, BB5 5JB (name search 2026-11-17; the only other Accrington Surgical company, ACCRINGTON SURGICAL LTD 06046644, was dissolved 17 September 2015 and was itself folded into this record by merge_duplicates.py on 24/08/2026 on the same reading). An abbreviation with one possible referent is not two companies sharing a name, which is what data/identity-vocabulary-policy.json refuses to merge on. The abbreviation is kept as an alias and the brief row is untouched. Effect: the Procedure Packs lot source \"Accrington Surgical Instrument Suppliers Ltd\" (Lots 1 and 2) now has a brief row to attach to."
+   }
+  ],
+  "aliased": [
+   {
+    "record": "Ortus Technology Limited",
+    "aliasesAdded": [
+     "Ortus"
+    ],
+    "evidence": "Checked 2026-11-17 working the framework-lots residuals. NHS Supply Chain's External Defibrillation Devices brief lists this company as a bare \"Ortus\" with no lot, while that brief's own lot source — Find a Tender contract award notice 050296-2025 — names \"Ortus Technology Limited\" on Lots 1, 2 and 3. One owner's own documents writing one supplier two ways, so the brief's spelling is recorded here as an alias and the brief row is left as NHS Supply Chain writes it. No other framework brief names a bare \"Ortus\" (checked across data/frameworks.json 2026-11-17), so the alias cannot re-route another company's award; the Hub's separate \"Ortus-iHealth\" record is a different company and is named in full wherever it appears."
+   },
+   {
+    "record": "BVM Medical Ltd",
+    "aliasesAdded": [
+     "BVM"
+    ],
+    "evidence": "Checked 2026-11-17 working the framework-lots residuals. Two separate questions, two answers. (1) Transcatheter Heart Valve Repair, Replacement and Associated Devices: the brief lists this company as a bare \"BVM\" with no lot, while the NHS Supply Chain product matrix attached to that same brief (Product-Matrix-Transcatheter-Heart-Valve-09-September-2026-MT.xlsx) names \"BVM Medical Limited\" on Lot 2. One owner's own document writing one supplier two ways, so \"BVM\" is recorded here as an alias and the brief row is untouched. No other framework brief names a bare \"BVM\". (2) Neuromodulation Devices: the lot source names \"BVM MEDICAL LTD\" at Lot 3, but that brief's own supplier row is \"Creed Health - novated from BVM Medical Ltd\", which resolves to the separate \"Creed Medical Ltd\" record. A novation moves the contract to another company, so the Lot 3 holder on that framework is the novatee the brief names, not this record, and the lot correctly does not attach here."
+   },
+   {
+    "record": "MCT Lifesciences Ltd",
+    "aliasesAdded": [
+     "MCT"
+    ],
+    "evidence": "Checked 2026-11-17 working the framework-lots residuals. NHS Supply Chain's Transcatheter Heart Valve brief lists this company as a bare \"MCT\" with no lot, while the product matrix attached to that same brief (Product-Matrix-Transcatheter-Heart-Valve-09-September-2026-MT.xlsx) names \"MCT Lifesciences Limited\" on Lot 2. One owner's own document writing one supplier two ways, so \"MCT\" is recorded here as an alias and the brief row is left as NHS Supply Chain writes it. No other framework brief names a bare \"MCT\" (checked across data/frameworks.json 2026-11-17); the Endoscopy, Robotic Medical Equipment and Syringes briefs all name this company in full."
+   }
+  ]
+ },
+ "left": [
+  {
+   "record": "Advanced Medical Systems Ltd",
+   "code": "distinct-registration",
+   "names": [
+    {
+     "framework": "Advanced Wound Care",
+     "lotSourceName": "ADVANCED MEDICAL SYSTEMS LTD.",
+     "lots": "Lot 2"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Advanced Wound Care lot source names \"ADVANCED MEDICAL SYSTEMS LTD.\", which reaches this record; the nearest row on that brief is \"Advanced Medical Solutions Ltd\", a DIFFERENT company. Companies House holds ADVANCED MEDICAL SYSTEMS LTD. 03476650, active, incorporated 5 December 1997, 10 Manor Park, Banbury, OX16 3TB (search 2026-11-17), which is not Advanced Medical Solutions. Two separate registrations, so under data/identity-vocabulary-policy.json these records stay apart and the lot stays unattached: a shared word in a name is not evidence."
+  },
+  {
+   "record": "MedScience Distribution",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Advanced Wound Care",
+     "lotSourceName": "MedScience Distribution Ltd",
+     "lots": "Lot 1, Lot 2"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. No row on the 56-supplier Advanced Wound Care brief shares a word with \"MedScience Distribution Ltd\". The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "T.J Smith & Nephew Ltd",
+   "code": "distinct-registration",
+   "names": [
+    {
+     "framework": "Advanced Wound Care",
+     "lotSourceName": "T.J.SMITH AND NEPHEW,LIMITED",
+     "lots": "Lot 1, Lot 2"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Advanced Wound Care lot source names \"T.J.SMITH AND NEPHEW,LIMITED\", which reaches this record (Companies House 00093994); the brief's own row is \"Smith & Nephew\", which reaches the separate \"Smith+Nephew\" record (00156031). Those two registrations were checked at Companies House on 17/11/2026 and found to be SEPARATE companies, recorded then. Two registrations, two records, so the lot has no row of this record's on that brief and stays unattached."
+  },
+  {
+   "record": "Aquilant Endoscopy Limited",
+   "code": "distinct-registration",
+   "names": [
+    {
+     "framework": "Airway Management Products and Associated Equipment",
+     "lotSourceName": "Aquilant Endoscopy Limited",
+     "lots": "Lot 1"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Airway Management lot source names \"Aquilant Endoscopy Limited\" at Lot 1; the brief's own Aquilant row is \"Aquilant Critical Care\", a separate record. Aquilant Endoscopy (03402556) and Aquilant Critical Care (02090807) were checked at Companies House on 17/11/2026 and found to be SEPARATE companies, recorded then. The lot stays unattached."
+  },
+  {
+   "record": "Hamilton Medical UK",
+   "code": "distinct-registration",
+   "names": [
+    {
+     "framework": "Airway Management Products and Associated Equipment",
+     "lotSourceName": "Hamilton Medical UK Ltd",
+     "lots": "Lot 3"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Airway Management lot source names \"Hamilton Medical UK Ltd\" at Lot 3; the brief's own row is \"Hamilton Sales And Service UK Ltd\", which is its own record. Companies House holds these as TWO registrations: HAMILTON MEDICAL UK LTD 06836131, active, incorporated 4 March 2009 (previous name HAMILTON MEDICAL LIMITED), Unit J6 Fulford Drive, Minworth, Sutton Coldfield, B76 1DJ; and HAMILTON SALES & SERVICE UK LTD 02188200, active, incorporated 3 November 1987 (previous names HAMILTON ROBOTICS LTD, HAMILTON (G.B.) LIMITED, MAGNAMINSTER LIMITED), Unit 1 Forge Mills Park, Station Road, Coleshill, Birmingham, B46 1JH — both read at Companies House 2026-11-17. Under the parent-subsidiary-award-credit policy the award credits to the entity the source names and no alias links the two, so the lot stays unattached. What would change it: NHS Supply Chain naming Hamilton Medical UK Ltd on the brief, or a Companies House filing showing one registration absorbed the other."
+  },
+  {
+   "record": "SAI Medical Solutions Ltd",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Airway Management Products and Associated Equipment",
+     "lotSourceName": "Sai Medical Solutions Ltd",
+     "lots": "Lot 1, Lot 2"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The only Airway Management brief row sharing a word with \"Sai Medical Solutions Ltd\" is \"Sai Quality Fruits And Veg Limited\", an unrelated company. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "J Heinz Foods UK Limited",
+   "code": "out-of-scope-non-clinical",
+   "names": [
+    {
+     "framework": "Ambient Food",
+     "lotSourceName": "H.J. Heinz Foods UK Ltd",
+     "lots": "Lot 1, Lot 6, Lot 8"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. Ambient Food is a catering framework. Lou has ruled that the Hub does not carry non-clinical framework suppliers (catering, facilities and electrical, furniture, office supplies, food), so this is a DECIDED state and not a backlog item. For the record: the brief's nearest rows are \"Kraft Heinz\" and \"Premier Foods Limited\", neither of which reaches this record, and Kraft Heinz is the group, not the UK entity the lot source names. The Lot 1, 6 and 8 lots stay unattached and nothing further is to be done here."
+  },
+  {
+   "record": "Nutricia Ltd",
+   "code": "related-entity",
+   "names": [
+    {
+     "framework": "Ambient Food",
+     "lotSourceName": "Nutricia Ltd",
+     "lots": "Lot 2"
+    },
+    {
+     "framework": "Infant Feeding and Accessories",
+     "lotSourceName": "Nutricia Ltd",
+     "lots": "Lot 1"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. Two frameworks name \"Nutricia Ltd\" as a lot source, and on both the brief's own row is \"Danone Nutricia Early Life Nutrition\" (written \"Danone Nutricia: early life Nutrition\" on the Ambient Food brief), which is its own Hub record. Under the parent-subsidiary-award-credit policy in data/identity-vocabulary-policy.json these are two facts about two things: the award credits to the entity the awarding source names, and no alias links a related entity, because aliases drive award routing. The records stay apart and the lots stay unattached."
+  },
+  {
+   "record": "Simulation Man",
+   "code": "unconfirmable",
+   "names": [
+    {
+     "framework": "Anaesthesia Machines, Ventilators, Neonatal Equipment and Associated Products",
+     "lotSourceName": "Simulation Man Ltd",
+     "lots": "Lot 2"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Anaesthesia Machines lot source names \"Simulation Man Ltd\" at Lot 2 and no row on that brief reaches this record. This name was checked at Companies House on 17/11/2026 and could not be tied to a registration, recorded then; under the unconfirmable-awardee policy the award publishes under the name as given with no company attached. The lot stays unattached."
+  },
+  {
+   "record": "It’s Interventional Limited",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "lotSourceName": "It's Interventional Limited",
+     "lots": "Lot 1"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. No row on that brief shares a word with \"It's Interventional Limited\". The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "Vyaire Medical Products Limited",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+     "lotSourceName": "Vyaire Medical Products Limited",
+     "lots": "Lot 6"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Electrodes brief's three unattached rows do not include Vyaire; the company is named in full on other briefs, where its lots do attach. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "Soluvos Medical Ltd",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+     "lotSourceName": "SOLUVOS MEDICAL LTD",
+     "lots": "Lot 2"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. No row on the 58-supplier Endoscopy brief reaches this record. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "Abbott Medical U.K. Ltd",
+   "code": "related-entity",
+   "names": [
+    {
+     "framework": "Enteral Feeding, Bile Bags and Associated Products",
+     "lotSourceName": "Abbott Medical U.K. Ltd",
+     "lots": "Lot 3, Lot 4"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Enteral Feeding lot source names \"Abbott Medical U.K. Ltd\" at Lots 3 and 4; the brief's own Abbott row is \"Abbott Laboratories Limited\", a separate registration with its own Hub record. This is the worked example of the parent-subsidiary-award-credit policy: the award credits to the entity the awarding source names, financials attach to the legal entity they describe, and no alias links the two because aliases drive award routing. The records stay apart and the lot stays unattached."
+  },
+  {
+   "record": "Iskus Health UK Limited",
+   "code": "unsettled-identity",
+   "names": [
+    {
+     "framework": "External Breast Prosthesis and Chest Support",
+     "lotSourceName": "Iskus Health UK Ltd",
+     "lots": "Lot 2"
+    },
+    {
+     "framework": "General Wound Care",
+     "lotSourceName": "Iskus Health UK Limited",
+     "lots": "Lot 2b"
+    },
+    {
+     "framework": "Pressure Area Care and Patient Handling",
+     "lotSourceName": "Iskus Health UK Ltd",
+     "lots": "Lot 1"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. Three frameworks name this company as a lot source with no brief row to attach to. On General Wound Care and Pressure Area Care no row on the brief shares a word with the name at all, so there is nothing to attach to. On External Breast Prosthesis the brief's row is \"Iskus Health Ltd - Distributor for Theya Healthcare\", which is its own Hub record and names \"Iskus Health Ltd\" — NOT the UK entity this record holds. Companies House holds ISKUS HEALTH UK LTD 08946660, active, incorporated 19 March 2014, Westminster Industrial Estate, Repton Road, Measham, DE12 7DT, and no company named \"Iskus Health Ltd\" (search 2026-11-17; Iskus Health is an Irish group). A name that may be the Irish parent cannot be tied to this registration, and under data/identity-vocabulary-policy.json a shared name is not evidence, so the two records stay apart and all three lots stay unattached. What would settle it: the registration number published on the supplier's own site, or a Find a Tender notice naming the awardee with its number."
+  },
+  {
+   "record": "Lyreco UK Limited",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "External Defibrillation Devices and Related Services and Accessories",
+     "lotSourceName": "Lyreco UK Limited",
+     "lots": "Lot 1"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. Find a Tender award notice 050296-2025 names \"Lyreco UK Limited\" at Lot 1, but neither of the two unattached rows on NHS Supply Chain's own brief for that framework is Lyreco, and no row on the brief reaches this record. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "Esteve Pharmaceuticals Ltd",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Hand Hygiene and Associated Products and Services",
+     "lotSourceName": "Esteve Pharmaceuticals Ltd",
+     "lots": "Lot 4"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. This record was added on 17/11/2026 from Find a Tender award notice 000335-2023 (the Hand Hygiene lot source), which awards 33 names while NHS Supply Chain's own brief states \"There are 21 suppliers on the framework\" and prints 21 — none of them this company. The brief's stated count matches its printed list, so the capture is not short: the notice and the owner's current list genuinely differ, which is why the record's own framework entry says the owner's current list does not name it. Nothing can attach the Lot 4 lot, because there is no brief row to attach it to. See state/hand-hygiene-lot-source-adjudication.json."
+  },
+  {
+   "record": "GOJO / Purell",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Hand Hygiene and Associated Products and Services",
+     "lotSourceName": "GOJO Industries Europe Ltd",
+     "lots": "Lot 1, Lot 3, Lot 4"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Hand Hygiene lot source is Find a Tender award notice 000335-2023, which awards 33 names; NHS Supply Chain's brief states 21 suppliers and prints 21, naming no GOJO row. The award spelling and its variants were added to this record as aliases on 17/11/2026, but an alias cannot attach a lot to a brief row that does not exist, so Lots 1, 3 and 4 stay unattached. See state/hand-hygiene-lot-source-adjudication.json."
+  },
+  {
+   "record": "Inivos UK Limited",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Hand Hygiene and Associated Products and Services",
+     "lotSourceName": "Inivos Ltd",
+     "lots": "Lot 1, Lot 2, Lot 3, Lot 4, Lot 5"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. Find a Tender award notice 000335-2023 names \"Inivos Ltd\" on five lots; NHS Supply Chain's own Hand Hygiene brief prints 21 suppliers, matching its own stated count, and names no Inivos row. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "PAL International Ltd",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Hand Hygiene and Associated Products and Services",
+     "lotSourceName": "Pal International Limited",
+     "lots": "Lot 4"
+    },
+    {
+     "framework": "Hand Hygiene and Associated Products and Services",
+     "lotSourceName": "Pal International Ltd",
+     "lots": "Lot 1, Lot 3"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. Find a Tender award notice 000335-2023 names this company twice, as \"Pal International Limited\" (Lot 4) and \"Pal International Ltd\" (Lots 1 and 3); both reach this record. NHS Supply Chain's own Hand Hygiene brief prints 21 suppliers, matching its own stated count, and names no PAL row — its only unattached row is an unrelated company. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "Reliance Medical",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Hand Hygiene and Associated Products and Services",
+     "lotSourceName": "Reliance Medical Ltd",
+     "lots": "Lot 3"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. Find a Tender award notice 000335-2023 names \"Reliance Medical Ltd\" at Lot 3 of Hand Hygiene; NHS Supply Chain's own brief for that framework prints 21 suppliers, matching its stated count, and names no Reliance row (the company is named in full on other briefs, where its lots do attach). The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "SC Johnson Professional (Deb)",
+   "code": "distinct-registration",
+   "names": [
+    {
+     "framework": "Hand Hygiene and Associated Products and Services",
+     "lotSourceName": "SC Johnson Professional",
+     "lots": "Lot 1, Lot 2, Lot 4"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Hand Hygiene lot source names \"SC Johnson Professional\", which reaches this record; the brief's own row is \"SC Johnson Ltd\", which is its own record. Companies House holds these as separate registrations: SC JOHNSON PROFESSIONAL LIMITED 00364651, incorporated 2 January 1941, Denby Hall Way, Denby, Ripley, DE5 8JZ (and SC JOHNSON PROFESSIONAL GROUP LIMITED 04934334 at the same address), against SC JOHNSON LTD 04166155, incorporated 22 February 2001 (previous name S.C. JOHNSON LIMITED), Frimley Green, Camberley, GU16 7AJ — read at Companies House 2026-11-17. Two registrations, so under the parent-subsidiary-award-credit policy the award credits as named, no alias links them, and Lots 1, 2 and 4 stay unattached."
+  },
+  {
+   "record": "Nestle Health Science UK",
+   "code": "related-entity",
+   "names": [
+    {
+     "framework": "Infant Feeding and Accessories",
+     "lotSourceName": "Nestle",
+     "lots": "Lot 1, Lot 2"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Infant Feeding lot source names a bare \"Nestle\", which reaches this record; the brief's own row is \"Nestle Nutrition\", a separate Hub record. A bare group word cannot be read as naming one of several Nestle entities, and under the parent-subsidiary-award-credit policy no alias may link related entities because aliases drive award routing. Lots 1 and 2 stay unattached. What would change it: NHS Supply Chain naming the entity in full on the brief, or a Find a Tender notice naming the awardee with its registration number."
+  },
+  {
+   "record": "Vanguard Medical Devices Ltd",
+   "code": "related-entity",
+   "names": [
+    {
+     "framework": "Minimally Invasive Surgery, Related Equipment and Accessories",
+     "lotSourceName": "Vanguard Medical Devices Ltd",
+     "lots": "Lot 2"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Minimally Invasive Surgery lot source names \"Vanguard Medical Devices Ltd\", which reaches this record; the brief's own row is \"Vanguard AG\", a separate record and a non-UK entity. Under the parent-subsidiary-award-credit policy the award credits to the entity the source names and no alias links the two, so Lot 2 stays unattached."
+  },
+  {
+   "record": "Prosum Medical Ltd",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Needlefree Connection Systems and Associated Products",
+     "lotSourceName": "Prosum Medical Ltd",
+     "lots": "Lot 1, Lot 2, Lot 3, Lot 4"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Needlefree Connection Systems brief has no unattached supplier rows at all — every row on it already carries its lot — and none of them reaches this record. The lot source names \"Prosum Medical Ltd\" on four lots, so the two sources name different supplier sets. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "Splice Cast Ltd t/a Eureka Physiocare",
+   "code": "distinct-registration",
+   "names": [
+    {
+     "framework": "Physiotherapy and Occupational Therapy",
+     "lotSourceName": "Splice Cast Ltd t/a Eureka Physiocare Ltd",
+     "lots": "Lot 1, Lot 2"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Physiotherapy and Occupational Therapy lot source names \"Splice Cast Ltd t/a Eureka Physiocare Ltd\", which reaches this record; the brief's own row is \"Eureka Physiocare (previously Splice Cast)\", which reaches the separate \"Eureka Physiocare Ltd\" record. Those are TWO registrations, not one renamed: Companies House holds SPLICE CAST LIMITED 05102276, incorporated 15 April 2004, and EUREKA PHYSIOCARE LTD 13730060, incorporated 8 November 2021, whose only previous name is EUREKA PHYSIOCARE (NEWTOWN) LTD (8 to 24 November 2021) — so 13730060 was never named Splice Cast (read at Companies House 2026-11-17). NHS Supply Chain's \"previously\" describes a trading succession, not a shared registration, and data/identity-vocabulary-policy.json merges on a registration, never on a name. The records stay apart and Lots 1 and 2 stay unattached. What would settle it: a Companies House filing, or a statement on the company's own site, documenting that the business transferred."
+  },
+  {
+   "record": "Essential Healthcare Solutions (UK) Ltd",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Pressure Area Care and Patient Handling",
+     "lotSourceName": "Essential Healthcare Solutions (UK) Limited",
+     "lots": "Lot 1, Lot 2, Lot 3"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. No row on the 53-supplier Pressure Area Care brief reaches this record; its only unattached row is an unrelated company. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "Nottingham Rehab Limited (Trading as NRS Healthcare)",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Pressure Area Care and Patient Handling",
+     "lotSourceName": "Nottingham Rehab Limited",
+     "lots": "Lot 1"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Pressure Area Care lot source names \"Nottingham Rehab Limited\" at Lot 1 and no row on that brief reaches this record (the nearest word-match is \"Wealden Rehab Ltd\", a different company). The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "Mediq Healthcare UK Ltd",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Procedure Packs",
+     "lotSourceName": "Mediq",
+     "lots": "Lot 1, Lot 2"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Procedure Packs lot source names a bare \"Mediq\", which reaches this record, and none of the brief's three unattached rows is Mediq. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "Owens and Minor Halyard Ltd",
+   "code": "unsettled-identity",
+   "names": [
+    {
+     "framework": "Procedure Packs",
+     "lotSourceName": "Owens & Minor Halyard UK Ltd",
+     "lots": "Lot 1, Lot 2"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Procedure Packs lot source names \"Owens & Minor Halyard UK Ltd\", which reaches this record; the brief's own row is \"O&M Halyard Uk Limited\", which is its own Hub record carrying the name-search candidate O&M HALYARD UK LIMITED 11111792 (active, incorporated 14 December 2017, Eastcastle House, 27/28 Eastcastle Street, London, W1W 8DH). 11111792 records NO previous company name, so Companies House does not tie \"Owens & Minor Halyard UK Ltd\" to it, and no company of that name was found (searches 2026-11-17). \"O&M\" plainly reads as Owens & Minor, but a reading is not evidence: under data/identity-vocabulary-policy.json two records merge on a shared registration number, and a name-search candidate cannot carry a merge. The records stay apart and Lots 1 and 2 stay unattached. What would settle it: the registration number published on the supplier's own site, or a Find a Tender notice naming the awardee with its number."
+  },
+  {
+   "record": "Intersurgical",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
+     "lotSourceName": "Intersurgical Limited",
+     "lots": "Lot 2"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Pulse Oximetry lot source names \"Intersurgical Limited\" at Lot 2 and no row on that brief reaches this record (the company is named in full on other briefs, where its lots do attach). The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "Kinetik Medical Devices",
+   "code": "unsettled-identity",
+   "names": [
+    {
+     "framework": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
+     "lotSourceName": "Kinetik Medical Devices Limited",
+     "lots": "Lot 1"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Pulse Oximetry lot source names \"Kinetik Medical Devices Limited\", which reaches this record; the brief's own row is \"Kinetic Medical Devices Ltd (New)\" — Kinetic with a c — which is its own Hub record. Companies House holds NO company named \"Kinetic Medical Devices\" (search 2026-11-17), and two Kinetik ones: KINETIK MEDICAL DEVICES LIMITED 06778337, active, incorporated 22 December 2008, Talbot House Unit 11, Perrywood Business Park, Honeycrock Lane, Redhill, RH1 5JQ; and HAMSARD 3150 LIMITED 06388994, previously named KINETIK MEDICAL DEVICES, dissolved 8 March 2016. So the brief's spelling has no registration of its own, but neither Hub record carries a confirmed number and \"(New)\" suggests NHS Supply Chain is distinguishing an entity, so WHICH registration each record is cannot be settled from here. Under data/identity-vocabulary-policy.json a shared name is not evidence and a name-search candidate cannot carry a merge: the records stay apart and Lot 1 stays unattached. What would settle it: the registration number published on the supplier's own site, or a Find a Tender notice naming the awardee with its number."
+  },
+  {
+   "record": "Stowood Scientific Instruments",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
+     "lotSourceName": "Stowood Scientific Instruments Ltd",
+     "lots": "Lot 1, Lot 2"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. No row on the 26-supplier Pulse Oximetry brief reaches this record. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "EyeTech International Ltd",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Technology Enabled Care, Electronic Assistive Technology and Associated Services",
+     "lotSourceName": "EyeTech International Ltd",
+     "lots": "Lot 2"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. No row on the 18-supplier Technology Enabled Care brief reaches this record. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "Hugh Steeper Limited",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Technology Enabled Care, Electronic Assistive Technology and Associated Services",
+     "lotSourceName": "Hugh Steeper Ltd",
+     "lots": "Lot 1, Lot 2, Lot 3, Lot 4"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Technology Enabled Care lot source names \"Hugh Steeper Ltd\" on four lots and no row on that brief reaches this record. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "J & M Medical",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Textiles and Associated Products",
+     "lotSourceName": "J & M Medical",
+     "lots": "Lot 2"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. No row on the 32-supplier Textiles brief reaches this record. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  },
+  {
+   "record": "Henry Schein UK Holdings",
+   "code": "distinct-registration",
+   "names": [
+    {
+     "framework": "Total Patient Assessment Device Solutions",
+     "lotSourceName": "Henry Schein UK Holdings Ltd",
+     "lots": "Lot 1, Lot 4, Lot 5"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Total Patient Assessment lot source names \"Henry Schein UK Holdings Ltd\", which reaches this record (companyNumberProof 11584480, from Find a Tender notice 2025/S 000-032831); the brief's own row is \"Henry Schien Medical\", its own Hub record and a different thing — the Henry Schein group files several UK registrations at Gillingham, among them HENRY SCHEIN LIMITED 01820330, HENRY SCHEIN UK LIMITED 11735268, HENRY SCHEIN EUROPE LIMITED 04194906 and HENRY SCHEIN UK HOLDINGS LIMITED 11584480 (search 2026-11-17), and a holding company is not its trading sibling. Under the parent-subsidiary-award-credit policy the award credits to the entity the source names, no alias links related entities, and Lots 1, 4 and 5 stay unattached."
+  },
+  {
+   "record": "Solventum (3M Health Care)",
+   "code": "unsettled-identity",
+   "names": [
+    {
+     "framework": "Total Patient Assessment Device Solutions",
+     "lotSourceName": "KCI Medical Limited",
+     "lots": "Lot 4"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. The Total Patient Assessment lot source names \"KCI Medical Limited\", which reaches this record through its 3M/KCI aliases, and the brief's own row is \"KCI Medical Ltd (3M)\", which reaches NO Hub record at all. So the lot cannot attach from either side: the source name lands on the Solventum record while the brief row lands nowhere. KCI Medical Limited is its own UK registration, and under data/identity-vocabulary-policy.json an alias may not be added to link a related entity, because aliases drive award routing and would re-route the award away from the entity the source names. Lot 4 stays unattached. What would change it: a record for KCI Medical Limited in its own right, with its registration confirmed, which is a decision about whether the Hub holds that entity and not a backlog item."
+  },
+  {
+   "record": "H & R Healthcare Ltd",
+   "code": "notice-only",
+   "names": [
+    {
+     "framework": "Urology and Bowel Management",
+     "lotSourceName": "H&R Healthcare Ltd",
+     "lots": "Lot 1, Lot 6"
+    }
+   ],
+   "verdict": "Checked 2026-11-17 working the framework-lots residuals. No row on the 57-supplier Urology and Bowel Management brief reaches this record; none of its five unattached rows is H&R. The lot source names this company, but the framework's own brief supplier list carries no row that reaches this record (checked with scripts/company_match.py, the module verify._lot_name_resolver() itself uses). attach_names() can only attach a lot to a supplier ON THAT BRIEF, so there is nothing to attach to and no alias can create one — an alias would have to point at a brief row that does not exist. The brief and its lot source genuinely name different supplier sets; the owner's current list is what the Hub shows as the framework's suppliers. Left unattached. What would change it: NHS Supply Chain naming the company on the brief itself. Recorded in state/framework-lot-name-adjudication-1117.json."
+  }
+ ],
+ "alreadyAdjudicatedElsewhere": [
+  {
+   "record": "Uniphar Medtech",
+   "names": [
+    {
+     "framework": "Airway Management Products and Associated Equipment",
+     "lotSourceName": "Uniphar Medtech UK Limited",
+     "lots": "Lot 2"
+    }
+   ],
+   "verdict": "Adjudicated earlier on 2026-11-17 and left apart from \"Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)\" because the bare name cannot be tied to one registration (Companies House holds UNIPHAR MEDTECH UK LIMITED NI018037 and UNIPHAR MEDTECH HOLDINGS UK LIMITED NI040976 at one Belfast address, and the group's Irish entity is a lot source elsewhere). That record's own identityNote carries the reasoning and is not rewritten here. STILL OUTSTANDING, not closed: the two records stay apart, but NI018037's own registered name IS \"Uniphar Medtech UK Limited\", and normalisation strips \"UK\" and \"Limited\", so that lot-source name collapses onto this bare brand record instead of the confirmed one. Re-read at Companies House 2026-11-17 by a sibling session: NI018037 UNIPHAR MEDTECH UK LIMITED active, NI040976 UNIPHAR MEDTECH HOLDINGS UK LIMITED active. The consequence is live and is a misattribution: ten award rows that belong to the confirmed record sit on this one, including \"Synapse MR400 MRI Patient Monitoring System\" (Hull University Teaching Hospitals, 2026-02-12). The fix is to add \"Uniphar Medtech UK Limited\" and \"Uniphar Medtech UK Ltd\" as aliases to the CONFIRMED record — no merge. Not done here and not closed."
+  },
+  {
+   "record": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+   "names": [
+    {
+     "framework": "Total Patient Assessment Device Solutions",
+     "lotSourceName": "Uniphar Medtech UK Limited T/A Cardiac Services",
+     "lots": "Lot 1, Lot 2"
+    }
+   ],
+   "verdict": "The other side of the same question, answered in the same place. Its identityNote is not rewritten here. This is the record holding companyNumber NI018037 with confidence \"confirmed\" (Companies House previous-name chain SISK HEALTHCARE (UK) LIMITED / CARDIAC SERVICES LIMITED). The registered-name aliases \"Uniphar Medtech UK Limited\" and \"Uniphar Medtech UK Ltd\" belong HERE and are still outstanding; until they are added, lot-source and award names in that form resolve to the bare brand record instead."
+  }
+ ],
+ "effectOnTheGate": "Simulated offline against the stored lotsBySource with refresh_framework_lots.attach_names() and the new seed on 2026-11-17: the five fixes attach and nothing else moves — Electrosurgical Consumables 1 unresolved name to 0, External Defibrillation 3 to 2, Procedure Packs 3 to 2, Transcatheter Heart Valve 6 to 4; 136 unresolved source names in all to 131, so the \"DO resolve but not on this brief\" line falls from 50 to 45. data/framework-lots.json's own `unresolved` lists are NOT rewritten here: --attach-only reuses them and only a full refresh_framework_lots.py run (which re-reads the briefs) recomputes them, so the gate's count moves on the next full run, not on this commit. The same holds for the framework claims the three new aliases unlock, which backfill_seed_from_frameworks.py attaches from the briefs on its own next run.",
+ "notTouched": [
+  "data/frameworks.json supplier lists, data/framework-lots.json unresolved names and data/nhssc-launch-briefs.json: NHS Supply Chain's own words.",
+  "The \"Uniphar Medtech\" and \"Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)\" records, adjudicated earlier on 2026-11-17 and carrying their own identityNote.",
+  "Non-clinical framework suppliers (catering, facilities and electrical, furniture, office supplies, food) — Lou has ruled that the Hub does not carry them."
+ ],
+ "counts": {
+  "namesTheGateCounts": 50,
+  "namesUnderLeft": 42,
+  "merged": 2,
+  "namesFixedByAlias": 3,
+  "namesAnsweredInsideAnAliasNote": 1,
+  "namesAdjudicatedElsewhere": 2,
+  "recordsLeftWithVerdict": 38
+ }
+}

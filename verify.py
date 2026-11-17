@@ -4582,16 +4582,30 @@ def _warn_unresolved_lot_names(rows, seed):
                                "ruled out on 17/11/2026 and are not to be re-asked. Hand hygiene was settled "
                                "name by name on product evidence — the clinical ones were added and the rest "
                                "recorded as out, with reasons, in "
-                               "state/hand-hygiene-lot-source-adjudication.json. A name here is only work "
+                               "state/hand-hygiene-lot-source-adjudication.json, and the identity verdicts "
+                               "for the names that DO reach a record are in "
+                               "state/framework-lot-name-adjudication-1117.json. A name here is only work "
                                "when it is clinical and no adjudication file already covers it: %s."
              % (n, nf, ex))
     if absent:
         n, nf, ex = tell(absent)
         WARN("framework-lots", "%d lot-source supplier name(s) across %d framework(s) DO resolve to a Hub "
                                "company, but that company is not on the framework's own brief supplier list, "
-                               "so the lot has no brief row to attach to and no alias can fix it. Either the "
-                               "brief capture missed a name the notice awards (re-read the brief), or the Hub "
-                               "holds one company twice and the brief names the other record (merge them): %s."
+                               "so the lot has no brief row to attach to. These are per-name IDENTITY "
+                               "questions, answered at the Companies House bar one at a time — NOT a short "
+                               "capture: on Hand Hygiene the brief states 21 suppliers and prints 21 while "
+                               "the award notice awards 33, and on Airway Management the brief prints 54 and "
+                               "states 54, so re-reading the brief changes nothing. Three shapes, three "
+                               "fixes: the brief writes the SAME company's name another way, commonly as a "
+                               "bare word (add that spelling as an alias on the record, which is the only "
+                               "legal fix); the Hub holds ONE company twice and the brief names the other "
+                               "record (merge them, on a shared registration number, never on a shared "
+                               "name); or it is a DISTINCT company the brief genuinely does not name (leave "
+                               "it, and write the verdict into the record's identityNote so it is not asked "
+                               "again). The verdicts already reached are in "
+                               "state/framework-lot-name-adjudication-1117.json and "
+                               "state/hand-hygiene-lot-source-adjudication.json, so a name named below that "
+                               "appears in one of those is a DECIDED state, not a backlog item: %s."
              % (n, nf, ex))
     if ambiguous:
         n, nf, ex = tell(ambiguous)
