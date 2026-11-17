@@ -67,9 +67,13 @@ USAGE
     python3 scripts/refresh_awards.py --rematch      # re-resolve what is stored,
                                                      # no network (after a seed edit)
 
-Then, as for every data file:
-    python3 scripts/stamp_notice.py
+Then:
     python3 verify.py
+
+This writer stamps data/company-awards.json's own ownership notice as it writes
+(see write()), so `python3 scripts/stamp_notice.py` is no longer needed to clear
+the gate after a run here. Running it is still harmless and still required for
+any OTHER file a run touched.
 """
 
 import argparse
@@ -85,6 +89,8 @@ import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import company_match
+import seed_format
+import stamp_notice
 
 SEED_PATH = "data/supplier-seed.json"
 OUT_PATH = "data/company-awards.json"
@@ -679,10 +685,45 @@ def load(path, default=None):
 
 
 def write(doc, path=OUT_PATH):
-    """indent=1, the house style for this repo's data files — stamp_notice.py
-    reproduces a file's own formatting and refuses anything it cannot."""
-    with open(path, "w") as fh:
-        json.dump(doc, fh, ensure_ascii=False, indent=1)
+    """Write the award index back STAMPED and in the byte format it already has.
+
+    WHY THIS STAMPS ITSELF (17/11/2026). assemble() builds the document from
+    scratch, so it does not carry the `_notice` block stamp_notice.py put in the
+    file. A plain write therefore published an UNMARKED copy of a 20MB data file
+    and left the next gate red on
+
+        [notice] data/company-awards.json is missing its ownership notice
+
+    which bit twice in one day: a `--rematch` run after a seed edit dropped the
+    notice, the gate failed, and it took a separate `scripts/stamp_notice.py`
+    run to clear. Re-applying the notice here means this writer's own output can
+    never be the thing that fails the gate. A later stamp_notice.py run is still
+    correct and now a no-op for this file, so the documented two-step order is
+    unchanged — it just no longer matters whether anyone remembers the second
+    step.
+
+    `_notice` goes back FIRST, as stamp_notice.py puts it, so the two writers
+    produce identical bytes and neither re-orders the other's keys.
+
+    The format is matched, not asserted, through seed_format.write_like() — the
+    same rule as supplier-seed.json. This file is indent 1 with no trailing
+    newline today; hardcoding indent=1 happened to agree, but a hardcoded style
+    is exactly what reformatted 9.6MB elsewhere, and a whole-file diff in a repo
+    where a push to main IS the publish means the review disappears.
+    """
+    name = os.path.basename(path)
+    if name in stamp_notice.REFS:
+        stamped = {"_notice": stamp_notice.notice_for(name)}
+        stamped.update({k: v for k, v in doc.items() if k != "_notice"})
+        doc = stamped
+    else:
+        # A path with no minted ref (a test temp file, or a new data file whose
+        # ref is not in REFS yet). Say so rather than inventing a notice: mint
+        # it with `python3 scripts/stamp_notice.py --mint <file>`.
+        print("note: %s has no marker ref in stamp_notice.REFS, so no ownership "
+              "notice was stamped." % name)
+    fmt, round_trips = seed_format.write_like(path, doc)
+    print(seed_format.describe(path, fmt, round_trips))
 
 
 def main(argv=None):
@@ -753,8 +794,7 @@ def main(argv=None):
         return 0
 
     write(doc)
-    print("\nwrote %s. Now: python3 scripts/stamp_notice.py && python3 verify.py"
-          % OUT_PATH)
+    print("\nwrote %s, stamped. Now: python3 verify.py" % OUT_PATH)
     return 0
 
 
