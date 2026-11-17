@@ -10,7 +10,7 @@
   "ref": "ETH-D503B3895",
   "contact": "contact@elevateandthrive.uk"
  },
- "generatedOn": "2026-11-10",
+ "generatedOn": "2026-11-17",
  "firstRun": false,
  "rule": "A careers page URL is recorded on the company's own link or a conventional path answering from its own domain. A role COUNT is recorded only where each role was read as a discrete record — an applicant tracking system's public API, or schema.org JobPosting structured data. Layouts are never pattern-counted. Everything else is refused, with the reason kept.",
  "scope": "UK ROLES ONLY. Where the source can filter by its own country facet, ukRoleCount is the company's own UK total and ukCountFrom says 'source'. Otherwise the whole board is read and UK roles are picked out from the locations the company published; roles it published with NO location are EXCLUDED and counted in rolesUnplaceable, because folding them in either direction would invent a number. totalRolesAllLocations, where present, is the source's own worldwide figure — context, never the headline.",
@@ -18,15 +18,15 @@
  "ukRule": "uk is true only where the company's own published location names a UK nation, city or region; false where it names somewhere else; null where no location was published. rolesWithoutLocation gives the denominator a UK count must be read against.",
  "sharedRoleRule": "Each role URL is attributed once. Where several supplier records share one careers site (e.g. four Abbott entities on one Abbott board), the role is held by one record chosen deterministically — the record whose own domain is the careers site's domain; otherwise the group's parent record; otherwise the lowest record by name — and the others do not repeat it. Identity policy shared-careers-site-role-attribution (Lou, 28/09/2026).",
  "counts": {
-  "checked": 394,
-  "withCareersPage": 346,
-  "withRoleCount": 30,
-  "refused": 361,
-  "ukRoles": 180,
-  "distinctRoleUrls": 180,
+  "checked": 436,
+  "withCareersPage": 395,
+  "withRoleCount": 32,
+  "refused": 401,
+  "ukRoles": 155,
+  "distinctRoleUrls": 155,
   "attributedToAnotherRecord": 3,
-  "completeBreakdowns": 30,
-  "rolesUnplaceable": 1213
+  "completeBreakdowns": 32,
+  "rolesUnplaceable": 1318
  },
  "suppliers": [
   {
@@ -72,7 +72,7 @@
   {
    "name": "AOTI",
    "domain": "aotinc.net",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://aotinc.net/careers/",
    "careersUrlFoundBy": "nav",
    "ats": "greenhouse",
@@ -99,7 +99,7 @@
   {
    "name": "Abbott Diabetes Care",
    "domain": "www.abbott.co.uk",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.abbott.com/en-us/careers",
    "careersUrlFoundBy": "path",
    "ats": "workday",
@@ -108,108 +108,36 @@
    "totalRolesAllLocations": 2000,
    "ukCountFrom": "source",
    "rolesUnplaceable": 0,
-   "ukRoleCount": 54,
-   "rolesRetrieved": 54,
+   "ukRoleCount": 51,
+   "rolesRetrieved": 51,
    "complete": true,
-   "commercialRoles": 16,
+   "commercialRoles": 15,
    "clinicalRoles": 3,
-   "newRoles": 11,
+   "newRoles": 3,
    "roles": [
     {
-     "title": "Clinical Specialist - Endovascular",
-     "location": "United Kingdom - Maidenhead",
+     "title": "Head Medical Affairs EUCAN",
+     "location": "3 Locations",
      "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Clinical-Specialist---Endovascular_31166650",
-     "commercial": false,
-     "clinical": true,
-     "new": true
-    },
-    {
-     "title": "Inside Sales Associate Ambassador",
-     "location": "United Kingdom - Abingdon",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Abingdon/Inside-Sales-Associate-Ambassador_31166540",
-     "commercial": true,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "National Sales Manager Endovascular & Vessel Closure",
-     "location": "United Kingdom > Maidenhead : Remote",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom--Maidenhead--Remote/National-Sales-Manager-Endovascular---Vessel-Closure_31166814",
-     "commercial": true,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Regional Director, Europe - Rapid Diagnostics Infectious Disease (m/f/d)",
-     "location": "United Kingdom - Maidenhead",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Regional-Director--Europe---Rapid-Diagnostics-Infectious-Disease--m-f-d-_31166760",
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/France---Paris/Head-Medical-Affairs-EUCAN_31166926",
      "commercial": false,
      "clinical": false,
      "new": true
     },
     {
-     "title": "Regulatory Affairs Manager",
-     "location": "United Kingdom - Maidenhead",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Regulatory-Affairs-Manager_31166545-1",
-     "commercial": false,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Scientist I",
-     "location": "United Kingdom-Dundee",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom-Dundee/Scientist-I_31167111",
-     "commercial": false,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Scientist II",
-     "location": "United Kingdom-Dundee",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom-Dundee/Scientist-II_31166757",
-     "commercial": false,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Senior Field Technical Engineer EP",
-     "location": "United Kingdom > Solihull : Remote",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Solihull--Remote/Senior-Field-Technical-Engineer-EP_31166580-1",
-     "commercial": false,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Senior Software Developer",
+     "title": "Level 3 Engineering Apprenticeship - September 2027 Intake",
      "location": "United Kingdom - Witney",
      "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Senior-Software-Developer_31167234",
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Level-3-Engineering-Apprenticeship---September-2027-Intake_31165444",
      "commercial": false,
      "clinical": false,
      "new": true
     },
     {
-     "title": "Support / Maintenance Engineer (Mechanical Bias or Multi-skilled) - Commutable from Oxford, Swindon, Cheltenham, Banbury - Various shifts",
-     "location": "England - Witney",
+     "title": "Regional Sales Manager, Southwest & Ireland NMD",
+     "location": "United Kingdom > Solihull : Remote",
      "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/England---Witney/Support---Maintenance-Engineer--Mechanical-Bias-or-Multi-skilled----Commutable-from-Oxford--Swindon--Cheltenham--Banbury---Various-shifts_31167099",
-     "commercial": false,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Territory Manager Endovascular (London & South East)",
-     "location": "United Kingdom > Maidenhead : Remote",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom--Maidenhead--Remote/Territory-Manager-Endovascular--London---South-East-_31159811",
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Solihull--Remote/Regional-Sales-Manager--Southwest-Central-Ireland_31166770",
      "commercial": true,
      "clinical": false,
      "new": true
@@ -255,6 +183,15 @@
      "location": "United Kingdom-London",
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom-London/Clinical-Development-Specialist-Electrophysiology-London-South-East-UK_31160099",
+     "commercial": false,
+     "clinical": true,
+     "new": false
+    },
+    {
+     "title": "Clinical Specialist - Endovascular",
+     "location": "United Kingdom - Maidenhead",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Clinical-Specialist---Endovascular_31166650",
      "commercial": false,
      "clinical": true,
      "new": false
@@ -332,6 +269,15 @@
      "new": false
     },
     {
+     "title": "Inside Sales Associate Ambassador",
+     "location": "United Kingdom - Abingdon",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Abingdon/Inside-Sales-Associate-Ambassador_31166540",
+     "commercial": true,
+     "clinical": false,
+     "new": false
+    },
+    {
      "title": "Join the Talent Pipeline at Abbott Nutrition UK & Ireland",
      "location": "2 Locations",
      "uk": true,
@@ -395,11 +341,11 @@
      "new": false
     },
     {
-     "title": "Occupational Health Advisor based in Crewe",
-     "location": "United Kingdom > Abingdon : Remote",
+     "title": "National Sales Manager Endovascular & Vessel Closure",
+     "location": "United Kingdom > Maidenhead : Remote",
      "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom--Abingdon--Remote/Occupational-Health-Advisor-based-in-Crewe_31159901",
-     "commercial": false,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom--Maidenhead--Remote/National-Sales-Manager-Endovascular---Vessel-Closure_31166814",
+     "commercial": true,
      "clinical": false,
      "new": false
     },
@@ -431,15 +377,6 @@
      "new": false
     },
     {
-     "title": "Regional Ambassador",
-     "location": "United Kingdom > Abingdon : Remote",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom--Abingdon--Remote/Regional-Ambassador_31166538",
-     "commercial": false,
-     "clinical": false,
-     "new": false
-    },
-    {
      "title": "Regional Business Manager North UK & Ireland",
      "location": "5 Locations",
      "uk": true,
@@ -449,11 +386,20 @@
      "new": false
     },
     {
-     "title": "Regional Sales Manager TAVI, Structural Heart - North",
-     "location": "6 Locations",
+     "title": "Regional Director, Europe - Rapid Diagnostics Infectious Disease (m/f/d)",
+     "location": "United Kingdom - Maidenhead",
      "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Solihull--Remote/Regional-Sales-Manager-TAVI--Structural-Heart---North_31163847",
-     "commercial": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Regional-Director--Europe---Rapid-Diagnostics-Infectious-Disease--m-f-d-_31166760",
+     "commercial": false,
+     "clinical": false,
+     "new": false
+    },
+    {
+     "title": "Scientist II",
+     "location": "United Kingdom-Dundee",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom-Dundee/Scientist-II_31166757",
+     "commercial": false,
      "clinical": false,
      "new": false
     },
@@ -462,6 +408,15 @@
      "location": "United Kingdom - Witney",
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Senior-Control-Systems-Engineer-I---Automation---PLC_31160011",
+     "commercial": false,
+     "clinical": false,
+     "new": false
+    },
+    {
+     "title": "Senior Field Technical Engineer EP",
+     "location": "United Kingdom > Solihull : Remote",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Solihull--Remote/Senior-Field-Technical-Engineer-EP_31166580-1",
      "commercial": false,
      "clinical": false,
      "new": false
@@ -512,6 +467,15 @@
      "new": false
     },
     {
+     "title": "Senior Software Developer",
+     "location": "United Kingdom - Witney",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Senior-Software-Developer_31167234",
+     "commercial": false,
+     "clinical": false,
+     "new": false
+    },
+    {
      "title": "Senior Specialist, Good Manufacturing Practices",
      "location": "United Kingdom - Witney",
      "uk": true,
@@ -557,6 +521,15 @@
      "new": false
     },
     {
+     "title": "Support / Maintenance Engineer (Mechanical Bias or Multi-skilled) - Commutable from Oxford, Swindon, Cheltenham, Banbury - Various shifts",
+     "location": "England - Witney",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/England---Witney/Support---Maintenance-Engineer--Mechanical-Bias-or-Multi-skilled----Commutable-from-Oxford--Swindon--Cheltenham--Banbury---Various-shifts_31167099",
+     "commercial": false,
+     "clinical": false,
+     "new": false
+    },
+    {
      "title": "System Project Lead",
      "location": "United Kingdom - Witney",
      "uk": true,
@@ -570,6 +543,15 @@
      "location": "2 Locations",
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Solihull--Remote/Territory-Manager-Electrophysiology--Central-London-_31159965-1",
+     "commercial": true,
+     "clinical": false,
+     "new": false
+    },
+    {
+     "title": "Territory Manager Endovascular (London & South East)",
+     "location": "United Kingdom > Maidenhead : Remote",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom--Maidenhead--Remote/Territory-Manager-Endovascular--London---South-East-_31159811",
      "commercial": true,
      "clinical": false,
      "new": false
@@ -591,15 +573,6 @@
      "commercial": true,
      "clinical": false,
      "new": false
-    },
-    {
-     "title": "Virtual Territory Manager",
-     "location": "United Kingdom - Remote",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Remote/Virtual-Territory-Manager_31164596",
-     "commercial": true,
-     "clinical": false,
-     "new": false
     }
    ],
    "sharedRolesAttributedHere": "lowest record by name (no domain match, no parent record)"
@@ -607,7 +580,7 @@
   {
    "name": "Abbott Diagnostics",
    "domain": "www.diagnostics.abbott",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.abbott.com/careers.html",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
@@ -617,7 +590,7 @@
    "rolesAttributedElsewhere": [
     {
      "to": "Abbott Diabetes Care",
-     "roles": 54
+     "roles": 51
     }
    ],
    "rolesAttributedTo": "Abbott Diabetes Care",
@@ -626,7 +599,7 @@
   {
    "name": "Abbott Laboratories Limited",
    "domain": "www.abbott.co.uk",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.abbott.com/en-us/careers",
    "careersUrlFoundBy": "path",
    "ats": "workday",
@@ -635,7 +608,7 @@
    "rolesAttributedElsewhere": [
     {
      "to": "Abbott Diabetes Care",
-     "roles": 54
+     "roles": 51
     }
    ],
    "rolesAttributedTo": "Abbott Diabetes Care",
@@ -644,7 +617,7 @@
   {
    "name": "Abbott Medical U.K. Ltd",
    "domain": "www.abbott.co.uk",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.abbott.com/en-us/careers",
    "careersUrlFoundBy": "path",
    "ats": "workday",
@@ -653,7 +626,7 @@
    "rolesAttributedElsewhere": [
     {
      "to": "Abbott Diabetes Care",
-     "roles": 54
+     "roles": 51
     }
    ],
    "rolesAttributedTo": "Abbott Diabetes Care",
@@ -687,14 +660,14 @@
   {
    "name": "Accora",
    "domain": "accora.care",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://accora.care/careers",
    "careersUrlFoundBy": "nav",
    "ats": "workable",
    "atsAccount": "accora",
    "countMethod": "ats",
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 3,
+   "rolesUnplaceable": 4,
    "ukRoleCount": 0,
    "rolesRetrieved": 0,
    "complete": true,
@@ -806,16 +779,15 @@
   {
    "name": "Alcon Eye Care UK",
    "domain": "www.alcon.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.alcon.com/careers/",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
    "atsAccount": "alcon",
    "countMethod": "ats",
-   "totalRolesAllLocations": 314,
-   "rolesExcludedBlank": 2,
+   "totalRolesAllLocations": 334,
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 222,
+   "rolesUnplaceable": 239,
    "ukRoleCount": 0,
    "rolesRetrieved": 0,
    "complete": true,
@@ -1007,6 +979,14 @@
    "refused": "the careers page hands off to a workday account named “gehc”, which does not carry this company's own identity — a parent or group careers site. Its roles are not this company's, so no count is stated. The page is linked."
   },
   {
+   "name": "BXTAccelyon Ltd",
+   "domain": "bxta.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://bxta.com/uk/careers/",
+   "careersUrlFoundBy": "path",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
    "name": "Banner Group Limited",
    "domain": "www.banneruk.com",
    "checkedOn": "2026-09-01",
@@ -1176,15 +1156,15 @@
   {
    "name": "Bracco UK Limited",
    "domain": "www.bracco.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.bracco.com/careers",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
    "atsAccount": "bracco",
    "countMethod": "ats",
-   "totalRolesAllLocations": 152,
+   "totalRolesAllLocations": 159,
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 102,
+   "rolesUnplaceable": 105,
    "ukRoleCount": 2,
    "rolesRetrieved": 2,
    "complete": true,
@@ -1223,7 +1203,7 @@
   {
    "name": "Brainomix",
    "domain": "www.brainomix.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://apply.workable.com/brainomix-2/",
    "careersUrlFoundBy": "nav",
    "ats": "workable",
@@ -1315,7 +1295,7 @@
   {
    "name": "CardioScan Ltd",
    "domain": "www.cardioscan.co",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.cardioscan.co/careers",
    "careersUrlFoundBy": "nav",
    "ats": "bamboohr",
@@ -1407,14 +1387,14 @@
   {
    "name": "Civica",
    "domain": "www.civica.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.civica.com/en-us/about-us/careers/",
    "careersUrlFoundBy": "nav",
    "ats": "workable",
    "atsAccount": "civica-uk-ltd-1",
    "countMethod": "ats",
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 68,
+   "rolesUnplaceable": 74,
    "ukRoleCount": 0,
    "rolesRetrieved": 0,
    "complete": true,
@@ -1613,120 +1593,30 @@
   {
    "name": "Daniels Health (Sharpsmart)",
    "domain": "www.sharpsmart.co.uk",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.sharpsmart.co.uk/careers",
    "careersUrlFoundBy": "nav",
-   "ats": "lever",
+   "ats": "greenhouse",
    "atsAccount": "sharpsmart",
    "countMethod": "ats",
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 9,
-   "ukRoleCount": 10,
-   "rolesRetrieved": 10,
+   "rolesUnplaceable": 14,
+   "ukRoleCount": 1,
+   "rolesRetrieved": 1,
    "complete": true,
    "commercialRoles": 0,
    "clinicalRoles": 0,
-   "newRoles": 4,
+   "newRoles": 1,
    "roles": [
     {
-     "title": "HGV Class 2 Driver (4 on, 4 off - Days)",
-     "location": "RM13 8BT, Rainham, England",
+     "title": "HGV Class 2 Driver",
+     "location": "Stoke",
      "uk": true,
-     "url": "https://jobs.lever.co/sharpsmart/a3d5cca7-751a-4999-86dd-9530c7ec5fdd",
-     "posted": "2026-11-06",
+     "url": "https://job-boards.greenhouse.io/sharpsmart/jobs/4502652009",
+     "posted": "2026-11-16",
      "commercial": false,
      "clinical": false,
      "new": true
-    },
-    {
-     "title": "HGV Class 2 Driver (4 on, 4 off - Nights)",
-     "location": "RM13 8BT, Rainham, England",
-     "uk": true,
-     "url": "https://jobs.lever.co/sharpsmart/24788c07-0433-403e-b4bd-8e6cd03a99dc",
-     "posted": "2026-11-06",
-     "commercial": false,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "HGV Class 2 Driver (Nights)",
-     "location": "RM13 8BT, Rainham, England",
-     "uk": true,
-     "url": "https://jobs.lever.co/sharpsmart/8c7c7437-2e39-419e-89c9-006b17294250",
-     "posted": "2026-11-06",
-     "commercial": false,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Van Driver",
-     "location": "RM13 8BT, Rainham, England",
-     "uk": true,
-     "url": "https://jobs.lever.co/sharpsmart/a50bad0d-4342-4497-836b-0e12825560b5",
-     "posted": "2026-11-06",
-     "commercial": false,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Contract Manager",
-     "location": "London",
-     "uk": true,
-     "url": "https://jobs.lever.co/sharpsmart/9b3c3fd2-edd6-4e8a-8cd6-0a8c74e468df",
-     "posted": "2026-09-08",
-     "commercial": false,
-     "clinical": false,
-     "new": false
-    },
-    {
-     "title": "HGV Class 1 Driver (Nights)",
-     "location": "RM13 8BT, Rainham, England",
-     "uk": true,
-     "url": "https://jobs.lever.co/sharpsmart/0e27be75-754c-4fac-a50d-49e5005a881f",
-     "posted": "2026-10-02",
-     "commercial": false,
-     "clinical": false,
-     "new": false
-    },
-    {
-     "title": "HGV Class 2 Driver (days)",
-     "location": "Stoke on Trent",
-     "uk": true,
-     "url": "https://jobs.lever.co/sharpsmart/a14455c5-df7d-4b24-b737-419ba4d165c0",
-     "posted": "2026-10-14",
-     "commercial": false,
-     "clinical": false,
-     "new": false
-    },
-    {
-     "title": "Hospital Porter - Zero Hour",
-     "location": "London",
-     "uk": true,
-     "url": "https://jobs.lever.co/sharpsmart/3a3b7518-dffb-44df-abae-20de551e0a29",
-     "posted": "2026-10-22",
-     "commercial": false,
-     "clinical": false,
-     "new": false
-    },
-    {
-     "title": "Operations Administrator",
-     "location": "RM13 8BT, Rainham, England",
-     "uk": true,
-     "url": "https://jobs.lever.co/sharpsmart/6e677f0e-e0be-47e4-848e-778064604c8c",
-     "posted": "2026-10-30",
-     "commercial": false,
-     "clinical": false,
-     "new": false
-    },
-    {
-     "title": "Operative",
-     "location": "Stoke on Trent",
-     "uk": true,
-     "url": "https://jobs.lever.co/sharpsmart/18c91360-2a39-4988-833d-91b61ee2294a",
-     "posted": "2026-09-30",
-     "commercial": false,
-     "clinical": false,
-     "new": false
     }
    ]
   },
@@ -1765,21 +1655,21 @@
   {
    "name": "Dedalus",
    "domain": "www.dedalus.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.dedalus.com/global/en/working-at-dedalus/",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
    "atsAccount": "dedalus",
    "countMethod": "ats",
-   "totalRolesAllLocations": 23,
+   "totalRolesAllLocations": 39,
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 17,
-   "ukRoleCount": 5,
-   "rolesRetrieved": 5,
+   "rolesUnplaceable": 30,
+   "ukRoleCount": 4,
+   "rolesRetrieved": 4,
    "complete": true,
    "commercialRoles": 1,
    "clinicalRoles": 0,
-   "newRoles": 5,
+   "newRoles": 0,
    "roles": [
     {
      "title": "Integration Support Analyst",
@@ -1788,16 +1678,7 @@
      "url": "https://dedalus.wd3.myworkdayjobs.com/External/job/GBR---Leeds/Integration-Support-Analyst_JR108887",
      "commercial": false,
      "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Junior Software Tester",
-     "location": "GBR - Leeds",
-     "uk": true,
-     "url": "https://dedalus.wd3.myworkdayjobs.com/External/job/GBR---Leeds/Junior-Software-Tester_JR108647",
-     "commercial": false,
-     "clinical": false,
-     "new": true
+     "new": false
     },
     {
      "title": "LIMS and Diagnostic Imaging Sales Manager",
@@ -1806,7 +1687,7 @@
      "url": "https://dedalus.wd3.myworkdayjobs.com/External/job/GBR---Leeds/Business-Development-Manager_JR108030",
      "commercial": true,
      "clinical": false,
-     "new": true
+     "new": false
     },
     {
      "title": "LIMS Implementation Specialist",
@@ -1815,7 +1696,7 @@
      "url": "https://dedalus.wd3.myworkdayjobs.com/External/job/GBR---Leeds/LIMS-Implementation-Specilaist-2_JR108633",
      "commercial": false,
      "clinical": false,
-     "new": true
+     "new": false
     },
     {
      "title": "Project Manager",
@@ -1824,7 +1705,7 @@
      "url": "https://dedalus.wd3.myworkdayjobs.com/External/job/GBR---Leeds/Project-Manager_JR108421",
      "commercial": false,
      "clinical": false,
-     "new": true
+     "new": false
     }
    ]
   },
@@ -1903,7 +1784,7 @@
   {
    "name": "EOS Imaging",
    "domain": "www.eos-imaging.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://apply.workable.com/eos-imaging/",
    "careersUrlFoundBy": "nav",
    "ats": "workable",
@@ -1947,49 +1828,22 @@
   {
    "name": "Elekta",
    "domain": "www.elekta.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.elekta.com/company/careers/",
    "careersUrlFoundBy": "path",
    "ats": "workday",
    "atsAccount": "elekta",
    "countMethod": "ats",
-   "totalRolesAllLocations": 101,
+   "totalRolesAllLocations": 97,
    "ukCountFrom": "source",
    "rolesUnplaceable": 0,
-   "ukRoleCount": 20,
-   "rolesRetrieved": 20,
+   "ukRoleCount": 19,
+   "rolesRetrieved": 19,
    "complete": true,
    "commercialRoles": 3,
    "clinicalRoles": 1,
-   "newRoles": 3,
+   "newRoles": 0,
    "roles": [
-    {
-     "title": "Director of Marketing Operations",
-     "location": "Crawley",
-     "uk": true,
-     "url": "https://elekta.wd3.myworkdayjobs.com/Elekta_Careers/job/Crawley/Director-of-Marketing-Operations_R2026-1521",
-     "commercial": true,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Junior Software Engineer",
-     "location": "Crawley",
-     "uk": true,
-     "url": "https://elekta.wd3.myworkdayjobs.com/Elekta_Careers/job/Crawley/Junior-Software-Engineer_R2026-1527",
-     "commercial": false,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Sr. Solutions Marketing Manager",
-     "location": "Crawley",
-     "uk": true,
-     "url": "https://elekta.wd3.myworkdayjobs.com/Elekta_Careers/job/Crawley/Sr-Solutions-Marketing-Manager_R2026-1567",
-     "commercial": true,
-     "clinical": false,
-     "new": true
-    },
     {
      "title": "Application Specialist",
      "location": "Crawley",
@@ -2018,6 +1872,15 @@
      "new": false
     },
     {
+     "title": "Director of Marketing Operations",
+     "location": "Crawley",
+     "uk": true,
+     "url": "https://elekta.wd3.myworkdayjobs.com/Elekta_Careers/job/Crawley/Director-of-Marketing-Operations_R2026-1521",
+     "commercial": true,
+     "clinical": false,
+     "new": false
+    },
+    {
      "title": "Global Demand Planner",
      "location": "Crawley",
      "uk": true,
@@ -2027,19 +1890,19 @@
      "new": false
     },
     {
-     "title": "Lead Electronics Engineer – FPGA",
+     "title": "Junior Software Engineer",
      "location": "Crawley",
      "uk": true,
-     "url": "https://elekta.wd3.myworkdayjobs.com/Elekta_Careers/job/Crawley/Lead-Electronics-Engineer---FPGA_R2026-1480",
+     "url": "https://elekta.wd3.myworkdayjobs.com/Elekta_Careers/job/Crawley/Junior-Software-Engineer_R2026-1527",
      "commercial": false,
      "clinical": false,
      "new": false
     },
     {
-     "title": "Lead Electronics Engineer – Power Electronics",
+     "title": "Lead Electronics Engineer – FPGA",
      "location": "Crawley",
      "uk": true,
-     "url": "https://elekta.wd3.myworkdayjobs.com/Elekta_Careers/job/Crawley/Lead-Electronics-Engineer---Power-Electronics_R2026-1153",
+     "url": "https://elekta.wd3.myworkdayjobs.com/Elekta_Careers/job/Crawley/Lead-Electronics-Engineer---FPGA_R2026-1480",
      "commercial": false,
      "clinical": false,
      "new": false
@@ -2142,13 +2005,22 @@
      "commercial": false,
      "clinical": false,
      "new": false
+    },
+    {
+     "title": "Sr. Solutions Marketing Manager",
+     "location": "Crawley",
+     "uk": true,
+     "url": "https://elekta.wd3.myworkdayjobs.com/Elekta_Careers/job/Crawley/Sr-Solutions-Marketing-Manager_R2026-1567",
+     "commercial": true,
+     "clinical": false,
+     "new": false
     }
    ]
   },
   {
    "name": "Endosoft Limited",
    "domain": "www.endosoft.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.endosoft.com/careers/",
    "careersUrlFoundBy": "nav",
    "countMethod": "jsonld",
@@ -2271,31 +2143,20 @@
   {
    "name": "Flen Health UK Ltd",
    "domain": "flenhealth.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.flenhealth.com/careers",
    "careersUrlFoundBy": "nav",
    "countMethod": "jsonld",
-   "totalRolesAllLocations": 5,
+   "totalRolesAllLocations": 3,
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 3,
-   "ukRoleCount": 1,
-   "rolesRetrieved": 1,
+   "rolesUnplaceable": 2,
+   "ukRoleCount": 0,
+   "rolesRetrieved": 0,
    "complete": true,
-   "commercialRoles": 1,
+   "commercialRoles": 0,
    "clinicalRoles": 0,
    "newRoles": 0,
-   "roles": [
-    {
-     "title": "Marketing Product Officer",
-     "location": "United Kingdom",
-     "uk": true,
-     "url": "https://www.flenhealth.com/careers",
-     "posted": "2026-09-11",
-     "commercial": true,
-     "clinical": false,
-     "new": false
-    }
-   ]
+   "roles": []
   },
   {
    "name": "Fontus Health",
@@ -2426,22 +2287,31 @@
   {
    "name": "Globus Medical UK Ltd",
    "domain": "www.globusmedical.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.globusmedical.com/about/careers/",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
    "atsAccount": "globusmedical",
    "countMethod": "ats",
-   "totalRolesAllLocations": 330,
+   "totalRolesAllLocations": 315,
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 123,
+   "rolesUnplaceable": 115,
    "ukRoleCount": 6,
    "rolesRetrieved": 6,
    "complete": true,
    "commercialRoles": 4,
    "clinicalRoles": 2,
-   "newRoles": 0,
+   "newRoles": 1,
    "roles": [
+    {
+     "title": "Clinical Specialist - North West",
+     "location": "United Kingdom",
+     "uk": true,
+     "url": "https://globusmedical.wd5.myworkdayjobs.com/GMED_Careers/job/United-Kingdom/Clinical-Specialist---North-West_JR106327",
+     "commercial": false,
+     "clinical": true,
+     "new": true
+    },
     {
      "title": "Account Manager",
      "location": "United Kingdom - Elstree",
@@ -2456,15 +2326,6 @@
      "location": "United Kingdom",
      "uk": true,
      "url": "https://globusmedical.wd5.myworkdayjobs.com/GMED_Careers/job/United-Kingdom/Clinical-Specialist---Midlands_JR107073-1",
-     "commercial": false,
-     "clinical": true,
-     "new": false
-    },
-    {
-     "title": "Cranial Clinical Specialist Representative EMEA - North",
-     "location": "United Kingdom",
-     "uk": true,
-     "url": "https://globusmedical.wd5.myworkdayjobs.com/GMED_Careers/job/United-Kingdom/Cranial-Clinical-Specialist-Representative---North--North_JR106180",
      "commercial": false,
      "clinical": true,
      "new": false
@@ -2557,19 +2418,19 @@
   {
    "name": "Haemonetics",
    "domain": "www.haemonetics.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.haemonetics.com/careers",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
    "atsAccount": "haemonetics",
    "countMethod": "ats",
-   "totalRolesAllLocations": 111,
+   "totalRolesAllLocations": 115,
    "ukCountFrom": "source",
    "rolesUnplaceable": 0,
-   "ukRoleCount": 6,
-   "rolesRetrieved": 6,
+   "ukRoleCount": 5,
+   "rolesRetrieved": 5,
    "complete": true,
-   "commercialRoles": 1,
+   "commercialRoles": 0,
    "clinicalRoles": 1,
    "newRoles": 0,
    "roles": [
@@ -2610,15 +2471,6 @@
      "new": false
     },
     {
-     "title": "Manager, Product Marketing",
-     "location": "8 Locations",
-     "uk": true,
-     "url": "https://haemonetics.wd5.myworkdayjobs.com/HAE/job/Boston-MA/Manager--Product-Marketing_R10843",
-     "commercial": true,
-     "clinical": false,
-     "new": false
-    },
-    {
      "title": "Software Support I",
      "location": "Coventry, UK",
      "uk": true,
@@ -2640,13 +2492,13 @@
   {
    "name": "Healogics",
    "domain": "www.healogics.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.healogics.com/careers/",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
    "atsAccount": "healogics",
    "countMethod": "ats",
-   "totalRolesAllLocations": 168,
+   "totalRolesAllLocations": 213,
    "ukCountFrom": "location strings published by the company",
    "rolesUnplaceable": 6,
    "ukRoleCount": 0,
@@ -2668,14 +2520,14 @@
   {
    "name": "Heartflow UK Ltd",
    "domain": "www.heartflow.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.heartflow.com/about/careers/",
    "careersUrlFoundBy": "nav",
    "ats": "greenhouse",
    "atsAccount": "heartflowinc",
    "countMethod": "ats",
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 37,
+   "rolesUnplaceable": 30,
    "ukRoleCount": 0,
    "rolesRetrieved": 0,
    "complete": true,
@@ -2689,6 +2541,14 @@
    "domain": "www.heidelbergengineering.com",
    "checkedOn": "2026-10-13",
    "careersUrl": "https://heidelberg-engineering.job-shop.com/heidelberg-engineering-en",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Helapet Ltd",
+   "domain": "www.helapet.co.uk",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.helapet.co.uk/vacancies.php",
    "careersUrlFoundBy": "nav",
    "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
   },
@@ -3140,7 +3000,7 @@
   {
    "name": "Materialise",
    "domain": "www.materialise.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.materialise.com/en/careers",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
@@ -3154,26 +3014,8 @@
    "complete": true,
    "commercialRoles": 0,
    "clinicalRoles": 0,
-   "newRoles": 2,
+   "newRoles": 0,
    "roles": [
-    {
-     "title": "Production Operator II-1",
-     "location": "Plymouth",
-     "uk": true,
-     "url": "https://materialise.wd103.myworkdayjobs.com/Materialise_Jobs/job/Plymouth/Production-Operator-II-1_JR104713",
-     "commercial": false,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Quality Engineer",
-     "location": "Plymouth",
-     "uk": true,
-     "url": "https://materialise.wd103.myworkdayjobs.com/Materialise_Jobs/job/Plymouth/Quality-Engineer_JR104710",
-     "commercial": false,
-     "clinical": false,
-     "new": true
-    },
     {
      "title": "Process Engineer",
      "location": "Plymouth",
@@ -3245,6 +3087,24 @@
      "commercial": false,
      "clinical": false,
      "new": false
+    },
+    {
+     "title": "Production Operator II-1",
+     "location": "Plymouth",
+     "uk": true,
+     "url": "https://materialise.wd103.myworkdayjobs.com/Materialise_Jobs/job/Plymouth/Production-Operator-II-1_JR104713",
+     "commercial": false,
+     "clinical": false,
+     "new": false
+    },
+    {
+     "title": "Quality Engineer",
+     "location": "Plymouth",
+     "uk": true,
+     "url": "https://materialise.wd103.myworkdayjobs.com/Materialise_Jobs/job/Plymouth/Quality-Engineer_JR104710",
+     "commercial": false,
+     "clinical": false,
+     "new": false
     }
    ]
   },
@@ -3283,7 +3143,7 @@
   {
    "name": "Medela",
    "domain": "www.medela.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.medela.com/en/working-at-medela",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
@@ -3396,22 +3256,41 @@
   {
    "name": "Merit Medical",
    "domain": "merit.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.merit.com/careers/",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
    "atsAccount": "merit",
    "countMethod": "ats",
-   "totalRolesAllLocations": 101,
+   "totalRolesAllLocations": 103,
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 35,
-   "ukRoleCount": 0,
-   "rolesRetrieved": 0,
+   "rolesUnplaceable": 32,
+   "ukRoleCount": 2,
+   "rolesRetrieved": 2,
    "complete": true,
-   "commercialRoles": 0,
+   "commercialRoles": 1,
    "clinicalRoles": 0,
-   "newRoles": 0,
-   "roles": []
+   "newRoles": 2,
+   "roles": [
+    {
+     "title": "Strategic Accounts Coordinator",
+     "location": "United Kingdom, Virtual",
+     "uk": true,
+     "url": "https://merit.wd503.myworkdayjobs.com/Merit/job/United-Kingdom-Virtual/Strategic-Accounts-Coordinator_JR117539",
+     "commercial": false,
+     "clinical": false,
+     "new": true
+    },
+    {
+     "title": "Territory Manager- UK East London",
+     "location": "United Kingdom, Virtual",
+     "uk": true,
+     "url": "https://merit.wd503.myworkdayjobs.com/Merit/job/United-Kingdom-Virtual/Territory-Manager--UK-East-London_JR117619",
+     "commercial": true,
+     "clinical": false,
+     "new": true
+    }
+   ]
   },
   {
    "name": "Mermaid Medical Ltd",
@@ -3643,13 +3522,13 @@
   {
    "name": "Orthofix Limited",
    "domain": "orthofix.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://orthofix.com/about/careers/",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
    "atsAccount": "orthofix",
    "countMethod": "ats",
-   "totalRolesAllLocations": 25,
+   "totalRolesAllLocations": 22,
    "ukCountFrom": "source",
    "rolesUnplaceable": 0,
    "ukRoleCount": 0,
@@ -3816,14 +3695,14 @@
   {
    "name": "Penumbra",
    "domain": "penumbrainc.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.penumbrainc.com/careers/",
    "careersUrlFoundBy": "nav",
    "ats": "lever",
    "atsAccount": "penumbrainc",
    "countMethod": "ats",
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 21,
+   "rolesUnplaceable": 23,
    "ukRoleCount": 1,
    "rolesRetrieved": 1,
    "complete": true,
@@ -3934,14 +3813,14 @@
   {
    "name": "QIAGEN UK",
    "domain": "www.qiagen.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.qiagen.com/careers",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
    "atsAccount": "qiagen",
    "countMethod": "ats",
    "rolesUrl": "https://www.qiagen.com/us/careers",
-   "totalRolesAllLocations": 136,
+   "totalRolesAllLocations": 137,
    "ukCountFrom": "location strings published by the company",
    "rolesUnplaceable": 111,
    "ukRoleCount": 5,
@@ -3949,6 +3828,7 @@
    "complete": true,
    "commercialRoles": 2,
    "clinicalRoles": 1,
+   "newRoles": 0,
    "roles": [
     {
      "title": "Account Manager – Clinical Bioinformatics Sales, UK and Ireland",
@@ -3956,7 +3836,8 @@
      "uk": true,
      "url": "https://qiagen.wd502.myworkdayjobs.com/QIAGEN/job/Remote-United-Kingdom/Account-Manager---Clinical-Bioinformatics-Sales--UK-and-Ireland_JR00001279",
      "commercial": true,
-     "clinical": true
+     "clinical": true,
+     "new": false
     },
     {
      "title": "Bioinformatician – Molecular Diagnostics",
@@ -3964,7 +3845,8 @@
      "uk": true,
      "url": "https://qiagen.wd502.myworkdayjobs.com/QIAGEN/job/Manchester/Bioinformatician---Molecular-Diagnostics_JR00001216-1",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Degree Apprenticeship – Technical Assistant",
@@ -3972,7 +3854,8 @@
      "uk": true,
      "url": "https://qiagen.wd502.myworkdayjobs.com/QIAGEN/job/Manchester/Apprentice-Technical-Assistant_JR00001222",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Senior Director Medical Affairs, Oncology Precision Diagnostics",
@@ -3980,7 +3863,8 @@
      "uk": true,
      "url": "https://qiagen.wd502.myworkdayjobs.com/QIAGEN/job/Manchester/Senior-Director-Medical-Affairs--Oncology-Precision-Diagnostics_JR00000959",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Strategic Account Manager, Infectious Diseases (Tuberculosis) QuantiFERON – North UK & Ireland",
@@ -3988,7 +3872,8 @@
      "uk": true,
      "url": "https://qiagen.wd502.myworkdayjobs.com/QIAGEN/job/Remote-United-Kingdom/Strategic-Account-Manager--Infectious-Diseases--Tuberculosis--QuantiFERON---North-UK---Ireland_JR00001245",
      "commercial": true,
-     "clinical": false
+     "clinical": false,
+     "new": false
     }
    ]
   },
@@ -4011,20 +3896,21 @@
   {
    "name": "QuidelOrtho (Ortho Clinical Diagnostics UK)",
    "domain": "www.quidelortho.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.quidelortho.com/global/en/careers/careers-home",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
    "atsAccount": "orthoclinical",
    "countMethod": "ats",
-   "totalRolesAllLocations": 16,
+   "totalRolesAllLocations": 18,
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 14,
+   "rolesUnplaceable": 16,
    "ukRoleCount": 0,
    "rolesRetrieved": 0,
    "complete": true,
    "commercialRoles": 0,
    "clinicalRoles": 0,
+   "newRoles": 0,
    "roles": []
   },
   {
@@ -4094,15 +3980,15 @@
   {
    "name": "ResMed",
    "domain": "www.resmed.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://careers.resmed.com/",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
    "atsAccount": "resmed",
    "countMethod": "ats",
-   "totalRolesAllLocations": 259,
+   "totalRolesAllLocations": 264,
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 91,
+   "rolesUnplaceable": 95,
    "ukRoleCount": 1,
    "rolesRetrieved": 1,
    "complete": true,
@@ -4122,6 +4008,14 @@
    ]
   },
   {
+   "name": "Richardson Healthcare",
+   "domain": "directmedimaging.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://triimaging.com/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
    "name": "Roche Diagnostics UK",
    "domain": "diagnostics.roche.com",
    "checkedOn": "2026-11-03",
@@ -4132,6 +4026,186 @@
    "countMethod": "ats",
    "totalRolesAllLocations": 1253,
    "refused": "the source publishes no country filter, and only 500 of its 1253 roles were retrieved before the fetch cap. UK roles picked out of a partial board would be a floor, not a count, so none is stated. The page is linked."
+  },
+  {
+   "name": "Rocialle Healthcare",
+   "domain": "www.rociallehealthcare.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.rociallehealthcare.com/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Rock Compliance Limited",
+   "domain": "www.rockcompliance.co.uk",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.rockcompliance.co.uk/careers-at-rock-compliance/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Roma Medical Aids Ltd",
+   "domain": "romamedical.co.uk",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://romamedical.co.uk/join-us-at-arab-health-2015/",
+   "careersUrlFoundBy": "path",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Rosenfield Health Tech Ltd",
+   "domain": "www.rosenfieldhealth.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.rosenfieldhealth.com/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Rudolf Riester GmbH",
+   "domain": "riester.de",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://riester.de/about-us/career",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Ryna Medical Uk Limited",
+   "domain": "rynamedical.co.uk",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://rynamedical.co.uk/career-opportunities",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "SARD JV",
+   "domain": "www.sardjv.co.uk",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://sardjv.co.uk/About/Careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "SRA Developments",
+   "domain": "bowa-medical.co.uk",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.bowa-medical.co.uk/careers",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "SRCL Ltd, trading as Stericycle",
+   "domain": "www.stericycle.co.uk",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.stericycle.co.uk/en-gb/about-us/careers",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Sakura Finetek UK",
+   "domain": "www.sakura.eu",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.sakura.eu/careers",
+   "careersUrlFoundBy": "nav",
+   "ats": "recruitee",
+   "refused": "the careers page hands off to a recruitee account named “careers-analytics”, which does not carry this company's own identity — a parent or group careers site. Its roles are not this company's, so no count is stated. The page is linked."
+  },
+  {
+   "name": "Salter Labs UK Ltd",
+   "domain": "www.myairlife.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://myairlife.com/careers",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Saluda Medical",
+   "domain": "www.saludamedical.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.saludamedical.com/about-saluda/careers/",
+   "careersUrlFoundBy": "nav",
+   "ats": "bamboohr",
+   "atsAccount": "saludamedical",
+   "countMethod": "ats",
+   "ukCountFrom": "location strings published by the company",
+   "rolesUnplaceable": 22,
+   "ukRoleCount": 1,
+   "rolesRetrieved": 1,
+   "complete": true,
+   "commercialRoles": 0,
+   "clinicalRoles": 0,
+   "roles": [
+    {
+     "title": "Principal Quality Design Assurance Engineer",
+     "location": "Macquarie Park, New South Wales",
+     "uk": true,
+     "url": "https://saludamedical.bamboohr.com/careers/954",
+     "commercial": false,
+     "clinical": false
+    }
+   ]
+  },
+  {
+   "name": "Sarstedt Ltd",
+   "domain": "www.sarstedt.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.sarstedt.com/en/US/career",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Schulke & Mayr UK Ltd",
+   "domain": "www.schuelke.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.schuelke.com/intl-en/career/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "SciQuip",
+   "domain": "www.sciquip.co.uk",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://sciquip.co.uk/careers",
+   "careersUrlFoundBy": "path",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Scope Ophthalmics",
+   "domain": "scopeeyecare.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.linkedin.com/company/scopeeyecareandhealthcare/life/lifeatscope",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Seating Matters",
+   "domain": "seatingmatters.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://seatingmatters.com/careers",
+   "careersUrlFoundBy": "path",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Seca Ltd",
+   "domain": "www.seca.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.seca.com/en_gb/company/career.html",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Sectra Limited",
+   "domain": "medical.sectra.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://career.sectra.com/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Semperit Investments Asia",
+   "domain": "www.sempermed.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://harpsglobal.com/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
   },
   {
    "name": "Siemens Healthineers",
@@ -4146,39 +4220,105 @@
    "refused": "the source publishes no country filter, and only 500 of its 504 roles were retrieved before the fetch cap. UK roles picked out of a partial board would be a floor, not a count, so none is stated. The page is linked."
   },
   {
+   "name": "Sight Sciences UK Ltd",
+   "domain": "www.sightsciences.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.sightsciences.com/us/careers/",
+   "careersUrlFoundBy": "path",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Sigvaris",
+   "domain": "www.sigvaris.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.sigvaris.com/en-us/company/career/working-with-us",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Silony Medical Ltd",
+   "domain": "www.silonyspine.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.silonyspine.com/careers",
+   "careersUrlFoundBy": "nav",
+   "refused": "careers page returned HTTP 404"
+  },
+  {
+   "name": "Sirtex Medical",
+   "domain": "www.sirtex.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.sirtex.com/us/about-sirtex/careers/explore-global-career-opportunities/",
+   "careersUrlFoundBy": "nav",
+   "ats": "smartrecruiters",
+   "atsAccount": "Sirtex",
+   "countMethod": "ats",
+   "ukCountFrom": "location strings published by the company",
+   "rolesUnplaceable": 8,
+   "ukRoleCount": 0,
+   "rolesRetrieved": 0,
+   "complete": true,
+   "commercialRoles": 0,
+   "clinicalRoles": 0,
+   "roles": []
+  },
+  {
+   "name": "Skyguard Ltd T/A Peoplesafe",
+   "domain": "peoplesafe.co.uk",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://peoplesafe.co.uk/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Smartbox Assistive Technology",
+   "domain": "thinksmartbox.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://smartboxaac.com/ukie/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
    "name": "Smith+Nephew",
    "domain": "www.smith-nephew.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.smith-nephew.com/en-us/careers",
    "careersUrlFoundBy": "path",
    "ats": "workday",
    "atsAccount": "smithnephew",
    "countMethod": "ats",
-   "totalRolesAllLocations": 351,
-   "rolesExcludedBlank": 1,
+   "totalRolesAllLocations": 385,
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 224,
+   "rolesUnplaceable": 264,
    "ukRoleCount": 14,
    "rolesRetrieved": 14,
    "complete": true,
    "commercialRoles": 3,
    "clinicalRoles": 0,
-   "newRoles": 2,
+   "newRoles": 3,
    "roles": [
     {
-     "title": "Loan Set Controller Graduate - East London",
-     "location": "ZAF - East London",
+     "title": "Global Master Planner, AWM",
+     "location": "UK - Hull GBU Office",
      "uk": true,
-     "url": "https://smithnephew.wd5.myworkdayjobs.com/External/job/ZAF---East-London/Loan-Set-Controller-Graduate---East-London_R92856",
+     "url": "https://smithnephew.wd5.myworkdayjobs.com/External/job/UK---Hull-GBU-Office/Global-Master-Planner--AWM_R92590",
      "commercial": false,
      "clinical": false,
      "new": true
     },
     {
-     "title": "Value Stream Supervisor",
-     "location": "Melton, UK",
+     "title": "Medical Education Manager, Non Healing Wounds NEUCAN",
+     "location": "UK - Field",
      "uk": true,
-     "url": "https://smithnephew.wd5.myworkdayjobs.com/External/job/Melton-UK/Value-Stream-Supervisor_R91645",
+     "url": "https://smithnephew.wd5.myworkdayjobs.com/External/job/UK---Field/Medical-Education-Manager--Non-Healing-Wounds-NEUCAN_R91675",
+     "commercial": false,
+     "clinical": false,
+     "new": true
+    },
+    {
+     "title": "SIOP Lead, AWM",
+     "location": "UK - Hull GBU Office",
+     "uk": true,
+     "url": "https://smithnephew.wd5.myworkdayjobs.com/External/job/UK---Hull-GBU-Office/SIOP-Lead--AWM_R92700",
      "commercial": false,
      "clinical": false,
      "new": true
@@ -4189,15 +4329,6 @@
      "uk": true,
      "url": "https://smithnephew.wd5.myworkdayjobs.com/External/job/UK---Hull-GBU-Office/Account-Manager--Sports-Medicine-_R91166",
      "commercial": true,
-     "clinical": false,
-     "new": false
-    },
-    {
-     "title": "AI Tech Lead – Planning",
-     "location": "UK - Watford",
-     "uk": true,
-     "url": "https://smithnephew.wd5.myworkdayjobs.com/External/job/UK---Watford/IT-AI-Lead---Planning_R91984",
-     "commercial": false,
      "clinical": false,
      "new": false
     },
@@ -4238,19 +4369,19 @@
      "new": false
     },
     {
-     "title": "Global Workday People Reporting & Analytics Specialist",
+     "title": "Interim Assistant Company Secretary",
      "location": "UK - Watford",
      "uk": true,
-     "url": "https://smithnephew.wd5.myworkdayjobs.com/External/job/UK---Watford/Global-People-Reporting---Analytics-Specialist_R92646",
+     "url": "https://smithnephew.wd5.myworkdayjobs.com/External/job/UK---Watford/Interim-Senior-Assistant-Company-Secretary_R92506",
      "commercial": false,
      "clinical": false,
      "new": false
     },
     {
-     "title": "Interim Assistant Company Secretary",
-     "location": "UK - Watford",
+     "title": "Loan Set Controller Graduate - East London",
+     "location": "ZAF - East London",
      "uk": true,
-     "url": "https://smithnephew.wd5.myworkdayjobs.com/External/job/UK---Watford/Interim-Senior-Assistant-Company-Secretary_R92506",
+     "url": "https://smithnephew.wd5.myworkdayjobs.com/External/job/ZAF---East-London/Loan-Set-Controller-Graduate---East-London_R92856",
      "commercial": false,
      "clinical": false,
      "new": false
@@ -4303,24 +4434,130 @@
    "refused": "the careers page hands off to a workday account named “healthcare”, which does not carry this company's own identity — a parent or group careers site. Its roles are not this company's, so no count is stated. The page is linked."
   },
   {
+   "name": "Southgate Group Ltd",
+   "domain": "southgateglobal.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://southgateglobal.com/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Sovereign Medical",
+   "domain": "www.sovereignmedical.co.uk",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.sovereignmedical.co.uk/careers",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Spacelabs Healthcare Ltd",
+   "domain": "spacelabshealthcare.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://spacelabshealthcare.com/about-us/work-for-us/",
+   "careersUrlFoundBy": "nav",
+   "ats": "icims",
+   "refused": "icims detected — it renders its listings in the browser, so the roles cannot be read as records. The page is linked; the count is not stated."
+  },
+  {
+   "name": "Spineart UK Ltd",
+   "domain": "www.spineart.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.spineart.com/company/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Spirit Healthcare Ltd",
+   "domain": "spirit-healthcare.co.uk",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.spirit-health.com/work-at-spirit",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Spirit Medical Ltd",
+   "domain": "spiritmedical.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://spiritmedical.com/company/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Starkstrom Limited",
+   "domain": "starkstrom.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://starkstrom.com/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Steris",
+   "domain": "www.steris.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://careers.steris.com/?utm_source=careersite&utm_campaign=steris.com",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Steris IMS Ltd",
+   "domain": "healthcare.steris.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://careers.steris.com/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Storz Medical UK",
+   "domain": "www.storzmedical.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.storzmedical.com/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Stowood Scientific Instruments",
+   "domain": "stowood.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://stowood.com/about/company/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Streets Heaver",
+   "domain": "www.streets-heaver.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.streets-heaver.com/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
    "name": "Stryker",
    "domain": "www.stryker.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://careers.stryker.com:443/",
    "careersUrlFoundBy": "path",
    "ats": "workday",
    "atsAccount": "stryker",
    "countMethod": "ats",
-   "totalRolesAllLocations": 1460,
+   "totalRolesAllLocations": 1466,
    "ukCountFrom": "source",
    "rolesUnplaceable": 0,
-   "ukRoleCount": 42,
-   "rolesRetrieved": 42,
+   "ukRoleCount": 30,
+   "rolesRetrieved": 30,
    "complete": true,
-   "commercialRoles": 15,
+   "commercialRoles": 7,
    "clinicalRoles": 1,
-   "newRoles": 8,
+   "newRoles": 1,
    "roles": [
+    {
+     "title": "Senior Staff Advanced Engineer, Logistics",
+     "location": "2 Locations",
+     "uk": true,
+     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Venlo-Netherlands/Senior-Staff-Advanced-Engineer--Logistics_R576793",
+     "commercial": false,
+     "clinical": false,
+     "new": true
+    },
     {
      "title": "Account Executive - Theatre Infrastructure and Strategic Projects",
      "location": "7 Locations",
@@ -4328,70 +4565,7 @@
      "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Newbury-United-Kingdom/Account-Executive---Theatre-Infrastructure-and-Strategic-Projects_R577068",
      "commercial": true,
      "clinical": true,
-     "new": true
-    },
-    {
-     "title": "Associate Sales Representative - Neptune S",
-     "location": "20 Locations",
-     "uk": true,
-     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Newbury-United-Kingdom/Associate-Sales-Representative---Neptune-S_R576782-1",
-     "commercial": true,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Associate Sales Representative Neptune S.",
-     "location": "16 Locations",
-     "uk": true,
-     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Manchester-England/Associate-Sales-Representative-Neptune-S_R576778",
-     "commercial": true,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Brand Marketing Lead, EMEA | ProCare Services",
-     "location": "9 Locations",
-     "uk": true,
-     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Amsterdam-Netherlands/Brand-Marketing-Lead--EMEA---ProCare-Services_R573477",
-     "commercial": true,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Logistics Operations Manager",
-     "location": "Newbury, United Kingdom",
-     "uk": true,
-     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Newbury-United-Kingdom/Logistics-Operations-Manager_R575282",
-     "commercial": false,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Sales Associate, Endoscopy Visualisation (North West)",
-     "location": "3 Locations",
-     "uk": true,
-     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Manchester-England/Sales-Associate--Endoscopy-Visualisation--North-West-_R577078",
-     "commercial": true,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Sales Representative, CMF (Cranialmaxillofacial)",
-     "location": "4 Locations",
-     "uk": true,
-     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Leeds-England/Sales-Representative--CMF--Cranialmaxillofacial-_R577119",
-     "commercial": true,
-     "clinical": false,
-     "new": true
-    },
-    {
-     "title": "Territory Sales Manager (Neurovascular) - North West",
-     "location": "4 Locations",
-     "uk": true,
-     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Manchester-England/Territory-Sales-Manager--Neurovascular----North-West_R576853",
-     "commercial": true,
-     "clinical": false,
-     "new": true
+     "new": false
     },
     {
      "title": "Associate Manager, Materials",
@@ -4457,6 +4631,15 @@
      "new": false
     },
     {
+     "title": "Logistics Operations Manager",
+     "location": "Newbury, United Kingdom",
+     "uk": true,
+     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Newbury-United-Kingdom/Logistics-Operations-Manager_R575282",
+     "commercial": false,
+     "clinical": false,
+     "new": false
+    },
+    {
      "title": "Manager, Employee Relations EMEA",
      "location": "2 Locations",
      "uk": true,
@@ -4511,55 +4694,10 @@
      "new": false
     },
     {
-     "title": "Medical Sales Representative, Endoscopy Visualisation - Cambridge/Essex/East Anglia",
-     "location": "5 Locations",
-     "uk": true,
-     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Cambridge-England/Medical-Sales-Representative--Endoscopy-Visualisation---Cambridge-Essex-East-Anglia_R575187",
-     "commercial": true,
-     "clinical": false,
-     "new": false
-    },
-    {
-     "title": "Medical Sales Representative, Neurovascular",
-     "location": "London, United Kingdom",
-     "uk": true,
-     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/London-United-Kingdom/Medical-Sales-Representative--Neurovascular_R576666",
-     "commercial": true,
-     "clinical": false,
-     "new": false
-    },
-    {
      "title": "Principal Advanced Engineer, Logistics",
      "location": "2 Locations",
      "uk": true,
      "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Venlo-Netherlands/Principal-Advanced-Engineer--Logistics_R575686-1",
-     "commercial": false,
-     "clinical": false,
-     "new": false
-    },
-    {
-     "title": "ProCare Customer Experience Representative",
-     "location": "Newbury, United Kingdom",
-     "uk": true,
-     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Newbury-United-Kingdom/ProCare-Customer-Experience-Representative_R569933",
-     "commercial": false,
-     "clinical": false,
-     "new": false
-    },
-    {
-     "title": "Product Support Specialist",
-     "location": "6 Locations",
-     "uk": true,
-     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Edinburgh-Scotland/Product-Support-Specialist_R566774",
-     "commercial": false,
-     "clinical": false,
-     "new": false
-    },
-    {
-     "title": "Product Support Specialist, Extremities - Northern Ireland",
-     "location": "2 Locations",
-     "uk": true,
-     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Belfast-Northern-Ireland/Product-Support-Specialist--Extremities---Northern-Ireland_R576379",
      "commercial": false,
      "clinical": false,
      "new": false
@@ -4574,10 +4712,10 @@
      "new": false
     },
     {
-     "title": "Sales Representative",
-     "location": "16 Locations",
+     "title": "Sales Representative, CMF (Cranialmaxillofacial)",
+     "location": "4 Locations",
      "uk": true,
-     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Newbury-United-Kingdom/Sales-Representative_R573199",
+     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Leeds-England/Sales-Representative--CMF--Cranialmaxillofacial-_R577119",
      "commercial": true,
      "clinical": false,
      "new": false
@@ -4588,15 +4726,6 @@
      "uk": true,
      "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Edinburgh-Scotland/Sales-Representative--Trauma---South-Scotland_R574057-1",
      "commercial": true,
-     "clinical": false,
-     "new": false
-    },
-    {
-     "title": "Senior Manager, Benefits - EMEA and Latin America",
-     "location": "10 Locations",
-     "uk": true,
-     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Cork-Ireland/Senior-Manager--Benefits---EMEA-and-Latin-America_R575606",
-     "commercial": false,
      "clinical": false,
      "new": false
     },
@@ -4623,15 +4752,6 @@
      "location": "Belfast, United Kingdom",
      "uk": true,
      "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Belfast-United-Kingdom/Senior-Quality-Systems-Specialist---Integration_R573889-1",
-     "commercial": false,
-     "clinical": false,
-     "new": false
-    },
-    {
-     "title": "Staff Electronics Engineer",
-     "location": "Belfast, United Kingdom",
-     "uk": true,
-     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Belfast-United-Kingdom/Staff-Electrical---Electronics-Engineer_R568654",
      "commercial": false,
      "clinical": false,
      "new": false
@@ -4664,10 +4784,10 @@
      "new": false
     },
     {
-     "title": "Territory Sales Manager (Neurovascular) - London",
-     "location": "London, United Kingdom",
+     "title": "Territory Sales Manager (Neurovascular) - North West",
+     "location": "4 Locations",
      "uk": true,
-     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/London-United-Kingdom/Territory-Sales-Manager--Neurovascular----London-and-South-East_R572612",
+     "url": "https://stryker.wd1.myworkdayjobs.com/StrykerCareers/job/Manchester-England/Territory-Sales-Manager--Neurovascular----North-West_R576853",
      "commercial": true,
      "clinical": false,
      "new": false
@@ -4702,12 +4822,76 @@
    ]
   },
   {
+   "name": "Summit Medical UK",
+   "domain": "summit-medical.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://summit-medical.com/company/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Supermax Healthcare",
+   "domain": "www.supermax.com.my",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.supermax.com.my/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "SureScreen Diagnostics",
+   "domain": "www.surescreen.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.surescreen.com/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Surgical Holdings Limited",
+   "domain": "www.surgicalholdings.co.uk",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.surgicalholdings.co.uk/careers.html",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Surtex Instruments Ltd",
+   "domain": "surtex-instruments.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://surtex-instruments.com/careers/join-us/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Sychem",
+   "domain": "www.sychem.co.uk",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.sychem.co.uk/sychem-careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Symbios",
+   "domain": "symbios.ch",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://symbios.ch/a-propos-de-nous/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
    "name": "Sysmex UK",
    "domain": "www.sysmex.co.uk",
    "checkedOn": "2026-11-03",
    "careersUrl": "https://www.sysmex.co.uk/career/current-vacancies/",
    "careersUrlFoundBy": "nav",
    "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "System C",
+   "domain": "www.systemc.com",
+   "checkedOn": "2026-11-17",
+   "careersUrl": "https://www.systemc.com/about-us/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "careers page returned HTTP 403"
   },
   {
    "name": "TFX Group Ltd (Teleflex Medical)",
@@ -4752,21 +4936,21 @@
   {
    "name": "Zoll Medical UK Limited",
    "domain": "www.zoll.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://careers.zoll.com/",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
    "atsAccount": "zoll",
    "countMethod": "ats",
-   "totalRolesAllLocations": 258,
+   "totalRolesAllLocations": 243,
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 67,
+   "rolesUnplaceable": 68,
    "ukRoleCount": 1,
    "rolesRetrieved": 1,
    "complete": true,
    "commercialRoles": 0,
    "clinicalRoles": 0,
-   "newRoles": 1,
+   "newRoles": 0,
    "roles": [
     {
      "title": "Customer Experience Partner - Hospital & EMS",
@@ -4775,7 +4959,7 @@
      "url": "https://zoll.wd5.myworkdayjobs.com/ZOLLMedicalCorp/job/United-Kingdom-Remote/Customer-Experience-Partner---Hospital---EMS_R20734-1",
      "commercial": false,
      "clinical": false,
-     "new": true
+     "new": false
     }
    ]
   },
@@ -4839,13 +5023,13 @@
   {
    "name": "Össur UK",
    "domain": "www.ossur.com",
-   "checkedOn": "2026-11-10",
+   "checkedOn": "2026-11-17",
    "careersUrl": "https://www.ossur.com/global/about-ossur/careers-at-ossur",
    "careersUrlFoundBy": "path",
    "ats": "workday",
    "atsAccount": "ossur",
    "countMethod": "ats",
-   "totalRolesAllLocations": 21,
+   "totalRolesAllLocations": 19,
    "ukCountFrom": "location strings published by the company",
    "rolesUnplaceable": 3,
    "ukRoleCount": 2,
