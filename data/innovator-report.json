@@ -10,7 +10,7 @@
   "ref": "ETH-DCC876B19",
   "contact": "contact@elevateandthrive.uk"
  },
- "generatedOn": "2026-11-16",
+ "generatedOn": "2026-11-17",
  "rule": "Built by scripts/build_innovator_report.py for the Innovator Market Analysis Report (app/innovator-report.js). Holds only what that report cannot read in the browser: the award history of each speciality's competitor set, reduced from data/company-awards.json (20 MB); the Stakeholder Mapper's role library, parsed from app/mst-logic.js; a digital flag on the other-body framework rows; and every source file's own as-of date, so an unreachable source can still be reported with its last good reading. Nothing here is computed beyond counts, earliest and latest dates, and a name match.",
  "awardsPerCompany": 3,
  "matchRule": "A competitor row is tied to a company in company-awards.json by the normalised form of its `ref` (the master supplier record), falling back to its `co`. Where no company matches, the row is written with awardCount 0 and matched false, and the report prints \"No award row in the Hub's set\" — which is not the same as \"no contracts\", and the report says so.",
@@ -376,6 +376,45 @@
    "supplierCount": 0
   },
   {
+   "name": "G-Cloud 12",
+   "reference": "RM1557.12",
+   "owner": "Government Commercial Agency (GCA), formerly Crown Commercial Service",
+   "url": "https://www.gca.gov.uk/agreements/RM1557.12",
+   "status": "expired",
+   "starts": "2020-09-28",
+   "ends": "2022-11-27",
+   "agreementType": "PCR15 Framework",
+   "term": null,
+   "lots": [],
+   "supplierCount": 0
+  },
+  {
+   "name": "G-Cloud 13",
+   "reference": "RM1557.13",
+   "owner": "Government Commercial Agency (GCA), formerly Crown Commercial Service",
+   "url": "https://www.gca.gov.uk/agreements/RM1557.13",
+   "status": "expired",
+   "starts": "2022-11-09",
+   "ends": "2024-11-08",
+   "agreementType": "PCR15 Framework",
+   "term": null,
+   "lots": [],
+   "supplierCount": 0
+  },
+  {
+   "name": "G-Cloud 14",
+   "reference": "RM1557.14",
+   "owner": "Government Commercial Agency (GCA), formerly Crown Commercial Service",
+   "url": "https://www.gca.gov.uk/agreements/RM1557.14",
+   "status": "expired",
+   "starts": "2024-10-29",
+   "ends": "2026-10-28",
+   "agreementType": "PCR15 Framework",
+   "term": null,
+   "lots": [],
+   "supplierCount": 0
+  },
+  {
    "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
    "reference": "Find a Tender notice 058054-2026",
    "owner": "HealthTrust Europe LLP (HTE) acting on behalf of Mid South Essex NHS Foundation Trust",
@@ -468,18 +507,6 @@
    "cpv": "48000000",
    "valueAmount": null,
    "valueCurrency": ""
-  },
-  {
-   "title": "Asset Tracking System",
-   "buyer": "NHS Borders",
-   "stage": "open tender",
-   "date": "2026-10-05",
-   "closingDate": "2026-11-16T12:00:00Z",
-   "url": "https://www.find-tender.service.gov.uk/Notice/093954-2026",
-   "source": "Find a Tender",
-   "cpv": "48422000",
-   "valueAmount": 116000,
-   "valueCurrency": "GBP"
   }
  ],
  "digitalMarketEngagement": [
@@ -1001,6 +1028,37 @@
      "valueAmount": 23155,
      "valueCurrency": "GBP",
      "periodEnd": "2027-08-09",
+     "clinical": false
+    }
+   ]
+  },
+  {
+   "co": "HealthRota",
+   "matched": true,
+   "awardCount": 2,
+   "firstAward": "2026-10-12",
+   "lastAward": "2026-11-17",
+   "awards": [
+    {
+     "title": "Medical Erostering Software Solution",
+     "buyer": "The Rotherham NHS Foundation Trust",
+     "date": "2026-11-17",
+     "url": "https://www.find-tender.service.gov.uk/Notice/108829-2026",
+     "source": "Find a Tender",
+     "valueAmount": 449214.68,
+     "valueCurrency": "GBP",
+     "periodEnd": "2029-12-01",
+     "clinical": false
+    },
+    {
+     "title": "Medical Erostering Software Solution",
+     "buyer": "The Rotherham NHS Foundation Trust",
+     "date": "2026-10-12",
+     "url": "https://www.find-tender.service.gov.uk/Notice/096159-2026",
+     "source": "Find a Tender",
+     "valueAmount": null,
+     "valueCurrency": null,
+     "periodEnd": null,
      "clinical": false
     }
    ]
@@ -1556,26 +1614,6 @@
    ]
   },
   {
-   "co": "HealthRota",
-   "matched": true,
-   "awardCount": 1,
-   "firstAward": "2026-10-12",
-   "lastAward": "2026-10-12",
-   "awards": [
-    {
-     "title": "Medical Erostering Software Solution",
-     "buyer": "The Rotherham NHS Foundation Trust",
-     "date": "2026-10-12",
-     "url": "https://www.find-tender.service.gov.uk/Notice/096159-2026",
-     "source": "Find a Tender",
-     "valueAmount": null,
-     "valueCurrency": null,
-     "periodEnd": null,
-     "clinical": false
-    }
-   ]
-  },
-  {
    "co": "Heidi Health",
    "matched": true,
    "awardCount": 1,
@@ -1691,6 +1729,26 @@
      "valueAmount": 58692,
      "valueCurrency": "GBP",
      "periodEnd": "2027-07-06",
+     "clinical": false
+    }
+   ]
+  },
+  {
+   "co": "Roche Diagnostics UK",
+   "matched": true,
+   "awardCount": 1,
+   "firstAward": "2026-11-17",
+   "lastAward": "2026-11-17",
+   "awards": [
+    {
+     "title": "Roche Ventana Interface",
+     "buyer": "Mid Yorkshire Hospitals NHS Trust",
+     "date": "2026-11-17",
+     "url": "https://www.find-tender.service.gov.uk/Notice/108883-2026",
+     "source": "Find a Tender",
+     "valueAmount": 18795.0,
+     "valueCurrency": "GBP",
+     "periodEnd": "2027-10-20",
      "clinical": false
     }
    ]
@@ -2058,14 +2116,14 @@
    "digitalCount": 20
   },
   "icb-watch.json": {
-   "asOf": "16/11/2026",
-   "leadersCheckedOn": "2026-11-15",
+   "asOf": "17/11/2026",
+   "leadersCheckedOn": "2026-11-17",
    "count": 36
   },
   "open-tenders.json": {
-   "dataAsOf": "16/11/2026",
+   "dataAsOf": "17/11/2026",
    "source": "Find a Tender and Contracts Finder tender-stage OCDS notices, Open Government Licence v3",
-   "openNotices": 23
+   "openNotices": 22
   },
   "pending-awards.json": {
    "dataAsOf": "15/11/2026",
@@ -2075,23 +2133,23 @@
    "dataAsOf": "2026-11-16",
    "source": "gca.gov.uk agreement pages and lot-supplier CSV exports; find-tender.service.gov.uk OCDS API; sbs.nhs.uk framework pages",
    "rule": "Every fact read at the named primary source on verifiedOn, else 'Not verified' with what would settle it. Supplier lists hold company names only; no contact person, email, phone or address is ever stored. suppliers null means no list was read.",
-   "frameworkCount": 10
+   "frameworkCount": 13
   },
   "company-digital-awards.json": {
-   "dataAsOf": "16/11/2026",
+   "dataAsOf": "17/11/2026",
    "source": "Find a Tender and Contracts Finder award notices in the Hub's digital lane (data/digital-lane.json), Open Government Licence v3.",
    "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
    "counts": {
-    "companies": 48,
-    "awardRows": 111
+    "companies": 49,
+    "awardRows": 113
    }
   },
   "digital-lane.json": {
-   "dataAsOf": "16/11/2026",
+   "dataAsOf": "17/11/2026",
    "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
    "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
    "scopeNote": "A call-off under a framework is not a notice, and most digital money in the NHS moves as framework call-offs, capital business cases and G-Cloud awards without competition. This lane is therefore a floor, not a census: an absence here says nothing about the buyer or the market. Contract values, where shown, are the notice's own and are not summed across rows.",
-   "openNotices": 5,
+   "openNotices": 4,
    "marketEngagement": 2
   },
   "nhssc-procurement-calendar.json": {
@@ -2111,6 +2169,10 @@
   },
   "products.json": {
    "note": "The Hub's own speciality list, product and problem list, framework family map, national priority map and Clinical Evidence Library highlights — the same records behind the Hub's Stakeholder Mapper and Value Equation. Human-curated; no automation writes it."
+  },
+  "scripts/regional-innovation.json": {
+   "asOf": "2026-11-17",
+   "note": "Hand-curated regional research and innovation bodies, one public page per row, read on the date shown. One row per organisation, each linked to the organisation's own public page (or its host's official page about it) and read on the region's readOn date. The 'what' line paraphrases only that page. No named individuals, no personal contact details. A body whose page could not be opened is left out, not described from memory."
   },
   "app/mst-logic.js": {
    "note": "The Hub's Stakeholder Mapper. Its role library is read straight out of the tool, so the roles in this report and the roles a member sees in the mapper cannot drift apart."
@@ -2882,6 +2944,190 @@
    "digital": true
   }
  ],
+ "regionalSupport": {
+  "rule": "One row per organisation, each linked to the organisation's own public page (or its host's official page about it) and read on the region's readOn date. The 'what' line paraphrases only that page. No named individuals, no personal contact details. A body whose page could not be opened is left out, not described from memory.",
+  "regions": {
+   "Midlands": {
+    "readOn": "2026-11-17",
+    "intro": "The research and innovation bodies an innovator can approach in this region, with what each one's own page says it offers. Work out which one owns your problem before you approach any of them.",
+    "basis": "Bodies are those the Midlands Health Alliance named as regional partners at its Industry Gateway launch on 17/11/2026; only those whose own page could be opened and read are listed.",
+    "groups": [
+     {
+      "title": "Innovation and NHS adoption support",
+      "rows": [
+       {
+        "name": "Medilink Midlands",
+        "url": "https://www.medilinkmidlands.com/",
+        "what": "The life sciences industry association for the Midlands: business support, connections and collaboration to help companies establish, develop and grow.",
+        "specs": []
+       },
+       {
+        "name": "Health Innovation West Midlands",
+        "url": "https://www.healthinnovationwestmidlands.org/our-offer/",
+        "what": "The NHS innovation arm for the West Midlands, supporting adoption and spread of innovations; its Industry Gateway is a single point for commercial enquiries.",
+        "specs": []
+       }
+      ]
+     },
+     {
+      "title": "Research centres to take your question to",
+      "rows": [
+       {
+        "name": "NIHR Birmingham Biomedical Research Centre",
+        "url": "https://www.research.uhb.nhs.uk/facilities-and-infrastructure/national-institute-for-health-and-care-research-nihr-infrastructure/birmingham-biomedical-research-centre-brc/",
+        "what": "Turns scientific discoveries into treatments and diagnostics, focused on inflammation; hosted by University Hospitals Birmingham with the University of Birmingham.",
+        "specs": [
+         "infection"
+        ]
+       },
+       {
+        "name": "NIHR Leicester Biomedical Research Centre",
+        "url": "https://leicesterbrc.nihr.ac.uk/",
+        "what": "Six research themes: cardiovascular; data innovation for multiple long-term conditions and ethnic health; environment; lifestyle; personalised cancer prevention and treatment; respiratory and infection.",
+        "specs": [
+         "cardiology",
+         "respiratory",
+         "oncology",
+         "infection",
+         "diabetes"
+        ]
+       },
+       {
+        "name": "NIHR Nottingham Biomedical Research Centre",
+        "url": "https://www.nottingham.ac.uk/medicine/research/biomedical-research-centre.aspx",
+        "what": "Translates research for common illnesses such as asthma and arthritis into new treatments, technologies and advanced medicines.",
+        "specs": [
+         "respiratory",
+         "ortho"
+        ]
+       },
+       {
+        "name": "NIHR HealthTech Research Centre in Rehabilitation",
+        "url": "https://hrc-rehabilitation.nihr.ac.uk/",
+        "what": "Brings researchers, companies, charities and patients together to develop rehabilitation technology; hosted by Nottingham University Hospitals with the National Rehabilitation Centre.",
+        "specs": [
+         "rehab",
+         "orthotics",
+         "ortho",
+         "handling"
+        ]
+       },
+       {
+        "name": "MindTech (NIHR HealthTech Research Centre in Mental Health)",
+        "url": "https://www.mindtech.org.uk/about-us",
+        "what": "National centre for developing, adopting and evaluating technologies for mental healthcare and dementia; works with clinicians, patients, researchers and industry.",
+        "specs": [
+         "digital",
+         "neuro"
+        ]
+       },
+       {
+        "name": "Birmingham Experimental Cancer Medicine Centre",
+        "url": "https://www.ecmcnetwork.org.uk/how-we-work/adult-network/birmingham-adult-centre",
+        "what": "Develops personalised cancer therapies and delivers early-phase cancer research at University Hospitals Birmingham.",
+        "specs": [
+         "oncology"
+        ]
+       },
+       {
+        "name": "Leicester Experimental Cancer Medicine Centre",
+        "url": "https://www.ecmcnetwork.org.uk/how-we-work/adult-network/leicester-adult-centre",
+        "what": "Early-phase oncology, haematology and prevention trials, including first-in-human studies, through the Hope Cancer Trials Centre.",
+        "specs": [
+         "oncology"
+        ]
+       }
+      ]
+     },
+     {
+      "title": "Running a commercial study",
+      "rows": [
+       {
+        "name": "NIHR Nottingham Clinical Research Facility",
+        "url": "https://www.nottingham.ac.uk/medicine/research/facilities/clinicalresearchfacility/index.aspx",
+        "what": "Early-phase experimental medicine for adults and children, with dedicated clinical research space available for clinical trial hire.",
+        "specs": []
+       },
+       {
+        "name": "NIHR Central and North West Midlands Commercial Research Delivery Centre",
+        "url": "https://bwc.nhs.uk/central-and-north-west-midlands-commercial-research-delivery-centre-crdc",
+        "what": "NHS trusts, GPs, universities and community partners delivering commercial research across Birmingham, Solihull, the Black Country, Staffordshire and Shropshire.",
+        "specs": []
+       },
+       {
+        "name": "NIHR North Midlands Commercial Research Delivery Centre",
+        "url": "https://crdc-nm.nihr.ac.uk/about-us/",
+        "what": "One of the Commercial Research Delivery Centres set up in April 2025 to make commercial clinical research faster and easier to place; hosted by UHNM.",
+        "specs": []
+       }
+      ]
+     },
+     {
+      "title": "Funding a partnership with a university",
+      "rows": [
+       {
+        "name": "Knowledge Transfer Partnerships (Innovate UK)",
+        "url": "https://www.ukri.org/councils/innovate-uk/guidance-for-applicants/guidance-for-specific-funds/knowledge-transfer-partnership-guidance/",
+        "what": "Part-funded partnerships between a business and a university or research organisation, built around a specific innovation challenge.",
+        "specs": []
+       },
+       {
+        "name": "University of Birmingham KTP office",
+        "url": "https://www.birmingham.ac.uk/collaborate/business-engagement/knowledge-transfer-partnerships",
+        "what": "Three-way KTP projects in any academic field; the page states SMEs can expect 67% funding and larger companies 50%.",
+        "specs": []
+       },
+       {
+        "name": "University of Nottingham KTP office",
+        "url": "https://www.nottingham.ac.uk/workingwithbusiness/services/knowledge-transfer-partnerships.aspx",
+        "what": "Three-way KTP projects led by a graduate KTP Associate, part-funded by Innovate UK; the university reports over 160 KTPs delivered.",
+        "specs": []
+       }
+      ]
+     }
+    ],
+    "examples": [
+     {
+      "name": "Neupulse, Tourette syndrome (Neurotherapeutics, University of Nottingham spin-out)",
+      "what": "A wrist-worn device built on University of Nottingham research; included in NICE's early value assessment HTG748, which records it as awaiting CE and UKCA marking.",
+      "specs": [
+       "neuro",
+       "digital"
+      ],
+      "sources": [
+       {
+        "url": "https://www.nice.org.uk/guidance/htg748",
+        "label": "NICE HTG748"
+       },
+       {
+        "url": "https://www.nottingham.ac.uk/news/technology-developed-in-nottingham-to-treat-tourettes-recommended-by-nice",
+        "label": "University of Nottingham"
+       }
+      ]
+     },
+     {
+      "name": "GALEAS Bladder, bladder cancer (Nonacus with the University of Birmingham)",
+      "what": "A urine test studied in 964 patients across seven NHS urology departments, led by the University of Birmingham and Nonacus; the study was funded by Nonacus.",
+      "specs": [
+       "pathology",
+       "continence",
+       "oncology"
+      ],
+      "sources": [
+       {
+        "url": "https://www.birmingham.ac.uk/news/2026/urine-test-identifies-more-than-9-in-10-bladder-cancers-clinical-study-finds",
+        "label": "University of Birmingham"
+       },
+       {
+        "url": "https://nonacus.com/in-vitro-diagnostic-products-ukca/galeas-bladder-cancer-test/",
+        "label": "Nonacus"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
  "specialities": {
   "bloodcoll": {
    "label": "Blood collection / phlebotomy",
@@ -46984,9 +47230,9 @@
     {
      "co": "Medtronic",
      "ref": "Medtronic",
-     "brands": "Not verified — brand-level detail not yet captured; see the supplier's own site.",
-     "url": "https://www.medtronic.com/en-gb",
-     "note": "Named on the NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027) framework by NHS Supply Chain's own award brief. Not yet catalogue-verified for this speciality — no brand or NPC-level product line matched here yet; check the company's own site or The Differential.",
+     "brands": "MiniMed 780G system · Guardian 4 Sensor & transmitter",
+     "url": "https://www.minimed.com/en-gb/products/minimed-780G-insulin-pump",
+     "note": "Confirmed live on minimed.com/en-gb 17/11/2026: MiniMed 780G hybrid closed-loop insulin pump (Lot 1 of NHS Supply Chain — Insulin Pumps, CGM & Hybrid Closed Loop, 2025/S 000-4043), pairing with the Guardian 4 Sensor & transmitter / Guardian Link 4 Transmitter (Lot 2 CGM), plus compatible reservoirs (MMT-332A, MMT0326A) and infusion sets (pumpset consumables).",
      "matched": true,
      "matchedTo": "Medtronic",
      "awardCount": 184,

@@ -126,6 +126,24 @@
     + '.inr .src{font:11px/1.4 Helvetica,Arial,sans-serif;color:#39424d}'
     + '.inr .note{font:12px/1.55 Helvetica,Arial,sans-serif;color:#39424d}'
     + '.inr .scroll{overflow-x:auto}'
+    /* Regional support cards (section 5). */
+    + '.inr .rg{margin:22px 0 8px;padding-top:6px;border-top:1px solid #d8d2c4}'
+    + '.inr .rg-h{font:700 12px/1.3 Helvetica,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;'
+    + 'color:' + DEEP + ';margin:20px 0 10px}'
+    + '.inr .rg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}'
+    + '.inr .rg-card{background:#fff;border:1px solid #d8d2c4;border-top:4px solid ' + DEEP + ';padding:14px 16px 12px;'
+    + 'display:flex;flex-direction:column;break-inside:avoid;page-break-inside:avoid;'
+    + 'box-shadow:0 1px 2px rgba(14,27,48,.06);transition:box-shadow .15s,transform .15s}'
+    + '.inr .rg-card:hover{box-shadow:0 6px 18px rgba(14,27,48,.12);transform:translateY(-2px)}'
+    + '.inr .rg-hit{border-top-color:' + GOLD + ';background:#FFFCF4}'
+    + '.inr .rg-case{border-top-color:' + WINE + '}.inr .rg-case.rg-hit{border-top-color:' + GOLD + '}'
+    + '.inr .rg-kind{font:700 10px/1.3 Helvetica,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#6b6556}'
+    + '.inr .rg-chip{align-self:flex-start;margin-top:6px;font:700 10px/1 Helvetica,Arial,sans-serif;letter-spacing:.06em;'
+    + 'text-transform:uppercase;background:' + GOLD + ';color:#fff;padding:5px 8px;border-radius:2px}'
+    + '.inr .rg-name{font:700 16px/1.3 Georgia,serif;color:' + NAVY + ';margin:8px 0 6px}'
+    + '.inr .rg-what{font:13px/1.5 Helvetica,Arial,sans-serif;color:#39424d;margin:0 0 10px;flex:1}'
+    + '.inr .rg-go{font:700 12px/1.4 Helvetica,Arial,sans-serif}.inr .rg-go a{text-decoration:none;border-bottom:1px solid ' + GOLD + '}'
+    + '@media print{.inr .rg-card{box-shadow:none;transform:none}.inr .rg-grid{grid-template-columns:1fr 1fr}}'
     /* The innovator's own words. The header strip is the whole point and it prints. */
     + '.inr .mine{border:2px dashed ' + GOLD + ';background:#fff;margin:10px 0 4px}'
     + '.inr .mine>.lab{font:700 11px/1.4 Helvetica,Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;'
@@ -834,10 +852,85 @@
           + esc(ukdate(ICB.leadersCheckedOn)) + '.</p>';
       }
     }
+    out += regionalHelp(st);
     out += mine(st.org, 'Name your actual contacts against the roles above, and say which of them '
       + 'you have spoken to. An empty row is an honest answer and a funder can read it; a guess '
       + 'cannot survive a question.',
       'Role, name, organisation, whether you have spoken to them.', 'inr-w5');
+    return out;
+  }
+
+  /* Regional innovation support. scripts/regional-innovation.json (published inside this bundle) is hand-curated: each row
+     is an organisation's own public page, read on the date the file records. Shown only when
+     the ICB picked sits in a region the file covers; a row tagged with the speciality picked
+     is marked, nothing is hidden. No named individuals: a role changes hands, a page does not. */
+  function regionalHelp(st) {
+    var RG = (B.regionalSupport || {}).regions || {};
+    if (st.geo === 'national') {
+      var have = Object.keys(RG);
+      return have.length ? '<p class="note">Pick an ICB in ' + esc(have.join(' or '))
+        + ' above to see the regional research and innovation bodies that can help you in.</p>' : '';
+    }
+    var m = icbByCode(st.geo), R = m && RG[m.region];
+    if (!R) { return ''; }
+    var spl = specLabel(st.spec);
+    function hit(x) { return (x.specs || []).indexOf(st.spec) >= 0; }
+    function card(r, g, star) {
+      return '<div class="rg-card' + (star ? ' rg-hit' : '') + '">'
+        + (star ? '<div class="rg-kind">' + esc(g) + '</div>' : '')
+        + (star ? '<div class="rg-chip">Matches ' + esc(spl) + '</div>' : '')
+        + '<div class="rg-name">' + esc(r.name) + '</div>'
+        + '<p class="rg-what">' + esc(r.what) + '</p>'
+        + '<div class="rg-go">' + link(r.url, 'Read their page') + '</div></div>';
+    }
+    var all = [], kinds = 0;
+    (R.groups || []).forEach(function (g) {
+      (g.rows || []).forEach(function (r) { all.push({ r: r, g: g.title }); });
+      kinds++;
+    });
+    var hits = all.filter(function (x) { return hit(x.r); });
+    var exHits = (R.examples || []).filter(hit).length;
+
+    var out = '<div class="rg"><h3>Who can help you in: ' + esc(m.region) + '</h3>'
+      + (R.intro ? '<p class="note">' + esc(R.intro) + '</p>' : '')
+      + '<div class="kpis"><div class="kpi"><b>' + all.length + '</b><span>research and innovation '
+      + 'bodies listed for ' + esc(m.region) + ', each linked to its own page</span></div>'
+      + '<div class="kpi"><b>' + hits.length + '</b><span>name ' + esc(spl) + ' among their own '
+      + 'stated themes</span></div>'
+      + '<div class="kpi"><b>' + (R.examples || []).length + '</b><span>products from this region that '
+      + 'have taken this route' + (exHits ? ', ' + exHits + ' in ' + esc(spl) : '') + '</span></div></div>';
+
+    out += '<p class="rg-h">Start here for ' + esc(spl) + '</p>';
+    out += hits.length
+      ? '<div class="rg-grid">' + hits.map(function (x) { return card(x.r, x.g, true); }).join('') + '</div>'
+      : '<p class="note">No body in this list names ' + esc(spl) + ' among its own stated themes. '
+        + 'Start with innovation and NHS adoption support below: their job is to route you to the '
+        + 'team that owns your problem.</p>';
+
+    (R.groups || []).forEach(function (g) {
+      var rest = (g.rows || []).filter(function (r) { return !hit(r); });
+      if (!rest.length) { return; }
+      out += '<p class="rg-h">' + esc(g.title) + '</p><div class="rg-grid">'
+        + rest.map(function (r) { return card(r, g.title, false); }).join('') + '</div>';
+    });
+
+    var ex = (R.examples || []).slice().sort(function (a, b) { return hit(b) - hit(a); });
+    if (ex.length) {
+      out += '<p class="rg-h">Routes that have worked here</p><div class="rg-grid rg-ex">'
+        + ex.map(function (e) {
+          return '<div class="rg-card rg-case' + (hit(e) ? ' rg-hit' : '') + '">'
+            + '<div class="rg-kind">Worked example</div>'
+            + (hit(e) ? '<div class="rg-chip">Matches ' + esc(spl) + '</div>' : '')
+            + '<div class="rg-name">' + esc(e.name) + '</div><p class="rg-what">' + esc(e.what) + '</p>'
+            + '<div class="rg-go">' + (e.sources || []).map(function (x) {
+              return link(x.url, x.label || 'source');
+            }).join(' · ') + '</div></div>';
+        }).join('') + '</div>';
+    }
+    out += '<p class="src">Source: the Hub’s regional innovation list, each card read at the page it '
+      + 'links to; ' + asOf(R.readOn) + '.' + (R.basis ? ' ' + esc(R.basis) : '')
+      + ' The “matches” flag means the body’s own page names that area; it is not a '
+      + 'recommendation.</p></div>';
     return out;
   }
 
