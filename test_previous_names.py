@@ -85,8 +85,15 @@ class PreviousNamesAreNotAMerge(unittest.TestCase):
     #   gs medical        - the declared AMBIGUOUS case in the registry README
     #                       (GS MEDICAL HEALTHCARE LTD inside GBUK vs GS MEDICAL
     #                       LIMITED NI659208), which must stay ambiguous forever
+    #   uniphar medtech   - the same ^o143 Uniphar cluster. Since b983be28
+    #                       (17/11/2026) the NI018037 record holds its own
+    #                       registered name UNIPHAR MEDTECH UK LIMITED, which
+    #                       norm_stripped() collapses onto the bare-brand record.
+    #                       Kept apart ON PURPOSE pending a registration number
+    #                       for the bare name (both identityNotes say why). Open,
+    #                       not settled: it belongs here, not in SETTLED_DISTINCT.
     # They are listed so that a NEW collision still fails this test.
-    KNOWN_PRE_EXISTING = {"cardiac services", "gs medical"}
+    KNOWN_PRE_EXISTING = {"cardiac services", "gs medical", "uniphar medtech"}
 
     # SETTLED distinct pairs: two records that norm_stripped() collapses onto one
     # key ONLY because it removes territory words, and that Lou has already ruled

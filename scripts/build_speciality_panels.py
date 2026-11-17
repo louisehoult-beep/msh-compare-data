@@ -10605,7 +10605,7 @@ def main():
         doc = build(slug, sources)
         path = os.path.join(OUT, slug + ".json")
         with open(path, "w", encoding="utf-8") as fh:
-            json.dump(doc, fh, indent=1, ensure_ascii=False)
+            json.dump(doc, fh, separators=(",", ":"), ensure_ascii=False)  # compact: the page fetches these, whitespace was ~20% of each slice
         c = doc.get("counts") or {}
         print("%-38s frameworks=%s suppliers=%s awards=%s/%s open=%s tariff=%s  (%d KB)" % (
             slug, c.get("frameworks"), c.get("suppliers"), c.get("awardsShown"),

@@ -201,6 +201,7 @@ RUN = [
     "test_speciality_panels_phase2.py",  # 29/09/2026, in-memory build, writes nothing
     "test_stale_brief_rows.py",
     "test_awards_history.py",
+    "test_awards_notice.py",            # 17/11/2026, refresh_awards.write() keeps the _notice block
     "test_award_keywords.py",
     "test_supplier_index_awards.py",
     "test_supplier_index_framework_dedupe.py",
