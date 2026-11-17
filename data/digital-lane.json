@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "16/11/2026",
- "generated": "2026-11-16",
+ "dataAsOf": "17/11/2026",
+ "generated": "2026-11-17",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,27 +22,120 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-11-08",
-   "to": "2026-11-16",
+   "from": "2026-11-09",
+   "to": "2026-11-17",
    "days": 8,
-   "run": "2026-11-16"
+   "run": "2026-11-17"
   },
   "notes": [
-   "Find a Tender (tender stage): 2 digital lane notice(s) from 51 release(s) over 1 page(s)",
-   "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-08",
-   "Find a Tender (planning stage): 1 digital lane notice(s) from 40 release(s) over 1 page(s)",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-08"
+   "Find a Tender (tender stage): 2 digital lane notice(s) from 55 release(s) over 1 page(s)",
+   "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-09",
+   "Find a Tender (planning stage): 1 digital lane notice(s) from 45 release(s) over 1 page(s)",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-09"
   ]
  },
  "counts": {
-  "awards": 388,
-  "awardsClinical": 47,
-  "openNotices": 5,
+  "awards": 395,
+  "awardsClinical": 48,
+  "openNotices": 4,
   "openNoticesClinical": 1,
   "marketEngagement": 2,
   "marketEngagementClinical": 0
  },
  "awards": [
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Medical Erostering Software Solution",
+   "buyer": "The Rotherham NHS Foundation Trust",
+   "published": "2026-11-17",
+   "suppliers": [
+    "HealthRota Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2029-12-01",
+   "value": 449214.68,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108829-2026",
+   "ocid": "ocds-h6vhtk-06d8fd"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Annual Hosting Website and Intranet",
+   "buyer": "Cambridgeshire & Peterborough NHS Foundation Trust",
+   "published": "2026-11-17",
+   "suppliers": [
+    "VERSEONE GROUP LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72222300"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108910-2026",
+   "ocid": "ocds-h6vhtk-07bdb0"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Roche Ventana Interface",
+   "buyer": "Mid Yorkshire Hospitals NHS Trust",
+   "published": "2026-11-17",
+   "suppliers": [
+    "Roche Diagnostics Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-20",
+   "value": 18795.0,
+   "digitalCpv": [
+    "72212180"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108883-2026",
+   "ocid": "ocds-h6vhtk-07bda1"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "planning",
+   "title": "NHS Essex Preliminary Market Engagement Notice for Online Consultation Provision",
+   "buyer": "NHS ESSEX INTEGRATED CARE BOARD",
+   "published": "2026-11-17",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108868-2026",
+   "ocid": "ocds-h6vhtk-07bd97"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Specialist technical consultant input.",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "published": "2026-11-17",
+   "suppliers": [
+    "WPS-UK LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-11-16",
+   "value": 32287.0,
+   "digitalCpv": [
+    "72220000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108723-2026",
+   "ocid": "ocds-h6vhtk-07bd40"
+  },
   {
    "lane": "digital",
    "clinical": false,
@@ -137,6 +230,63 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/108264-2026",
    "ocid": "ocds-h6vhtk-07bc3b"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "BeSeen Platform",
+   "buyer": "Essex Partnership University NHS Foundation Trust",
+   "published": "2026-11-16",
+   "suppliers": [
+    "PSYOMICS LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108655-2026",
+   "ocid": "ocds-h6vhtk-07bd1d"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "INTRANET HOSTING AND SUPPORTING",
+   "buyer": "NORTH STAFFORDSHIRE COMBINED HEALTHCARE NHS TRUST",
+   "published": "2026-11-16",
+   "suppliers": [
+    "KAMELEON GROUP LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-09-30",
+   "value": 15435,
+   "digitalCpv": [
+    "72415000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108635-2026",
+   "ocid": "ocds-h6vhtk-07bd15"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "HUMAN RESOURCES CASE MANAGEMENT SYSTEM",
+   "buyer": "NORTH STAFFORDSHIRE COMBINED HEALTHCARE NHS TRUST",
+   "published": "2026-11-16",
+   "suppliers": [
+    "SOFTCAT PLC"
+   ],
+   "isFramework": false,
+   "contractEnd": "2029-08-31",
+   "value": 31596,
+   "digitalCpv": [
+    "48450000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108582-2026",
+   "ocid": "ocds-h6vhtk-07bcf6"
   },
   {
    "lane": "digital",
@@ -3171,26 +3321,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/096164-2026",
    "ocid": "ocds-h6vhtk-05953a"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "award",
-   "title": "Medical Erostering Software Solution",
-   "buyer": "The Rotherham NHS Foundation Trust",
-   "published": "2026-10-12",
-   "suppliers": [
-    "HealthRota Limited"
-   ],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "48000000",
-    "48180000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/096159-2026",
-   "ocid": "ocds-h6vhtk-06d8fd"
   },
   {
    "lane": "digital",
@@ -7430,24 +7560,6 @@
  ],
  "openNotices": [
   {
-   "title": "Asset Tracking System",
-   "buyer": "NHS Borders",
-   "status": "active",
-   "rawStatus": "active",
-   "stage": "open tender",
-   "date": "2026-10-05",
-   "closingDate": "2026-11-16T12:00:00Z",
-   "startDate": null,
-   "url": "https://www.find-tender.service.gov.uk/Notice/093954-2026",
-   "source": "Find a Tender",
-   "cpv": "48422000",
-   "valueAmount": 116000,
-   "valueCurrency": "GBP",
-   "ocid": "ocds-h6vhtk-078109",
-   "lane": "digital",
-   "clinical": false
-  },
-  {
    "title": "Computerised Maintenance Management System (CMMS) / Computer-Aided Facility Management System (CAFM)",
    "buyer": "NHS Grampian",
    "status": "active",
@@ -7712,6 +7824,12 @@
    "to": "2026-11-16",
    "days": 8,
    "run": "2026-11-16"
+  },
+  {
+   "from": "2026-11-09",
+   "to": "2026-11-17",
+   "days": 8,
+   "run": "2026-11-17"
   }
  ]
 }
