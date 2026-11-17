@@ -995,7 +995,12 @@ def write_state():
                         "sit on this one, including \"Synapse MR400 MRI Patient Monitoring System\" "
                         "(Hull University Teaching Hospitals, 2026-02-12). The fix is to add \"Uniphar "
                         "Medtech UK Limited\" and \"Uniphar Medtech UK Ltd\" as aliases to the "
-                        "CONFIRMED record — no merge. Not done here and not closed."},
+                        "CONFIRMED record — no merge. DONE: landed in b983be2 on 2026-11-17. The "
+                        "confirmed record now holds \"Uniphar Medtech UK Limited\" and "
+                        "\"Uniphar Medtech UK Ltd\"; six award rows moved onto it (18 to 24), "
+                        "the bare brand record is left with none, and four notice names with no "
+                        "territory word are quarantined as ambiguous. The records are still not "
+                        "merged."},
             {"record": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
              "names": [{"framework": "Total Patient Assessment Device Solutions",
                         "lotSourceName": "Uniphar Medtech UK Limited T/A Cardiac Services",
@@ -1005,8 +1010,9 @@ def write_state():
                         "NI018037 with confidence \"confirmed\" (Companies House previous-name chain "
                         "SISK HEALTHCARE (UK) LIMITED / CARDIAC SERVICES LIMITED). The registered-name "
                         "aliases \"Uniphar Medtech UK Limited\" and \"Uniphar Medtech UK Ltd\" "
-                        "belong HERE and are still outstanding; until they are added, lot-source and "
-                        "award names in that form resolve to the bare brand record instead."},
+                        "belong HERE and were added in b983be2 on 2026-11-17, so lot-source and award "
+                        "names in that form now reach this record instead of the bare brand "
+                        "one."},
         ],
         "effectOnTheGate": (
             "Simulated offline against the stored lotsBySource with refresh_framework_lots."
