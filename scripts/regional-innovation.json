@@ -1,4 +1,51 @@
 {
- "rule": "One row per organisation, each linked to the organisation's own public page and read on the region's readOn date. No named individuals, no personal contact details.",
- "regions": {}
+ "rule": "One row per organisation, each linked to the organisation's own public page (or its host's official page about it) and read on the region's readOn date. The 'what' line paraphrases only that page. No named individuals, no personal contact details. A body whose page could not be opened is left out, not described from memory.",
+ "regions": {
+  "Midlands": {
+   "readOn": "2026-11-17",
+   "intro": "The research and innovation bodies an innovator can approach in this region, with what each one's own page says it offers. Work out which one owns your problem before you approach any of them.",
+   "basis": "Bodies are those the Midlands Health Alliance named as regional partners at its Industry Gateway launch on 17/11/2026; only those whose own page could be opened and read are listed.",
+   "groups": [
+    {
+     "title": "Innovation and NHS adoption support",
+     "rows": [
+      {"name": "Medilink Midlands", "url": "https://www.medilinkmidlands.com/", "what": "The life sciences industry association for the Midlands: business support, connections and collaboration to help companies establish, develop and grow.", "specs": []},
+      {"name": "Health Innovation West Midlands", "url": "https://www.healthinnovationwestmidlands.org/our-offer/", "what": "The NHS innovation arm for the West Midlands, supporting adoption and spread of innovations; its Industry Gateway is a single point for commercial enquiries.", "specs": []}
+     ]
+    },
+    {
+     "title": "Research centres to take your question to",
+     "rows": [
+      {"name": "NIHR Birmingham Biomedical Research Centre", "url": "https://www.research.uhb.nhs.uk/facilities-and-infrastructure/national-institute-for-health-and-care-research-nihr-infrastructure/birmingham-biomedical-research-centre-brc/", "what": "Turns scientific discoveries into treatments and diagnostics, focused on inflammation; hosted by University Hospitals Birmingham with the University of Birmingham.", "specs": ["infection"]},
+      {"name": "NIHR Leicester Biomedical Research Centre", "url": "https://leicesterbrc.nihr.ac.uk/", "what": "Six research themes: cardiovascular; data innovation for multiple long-term conditions and ethnic health; environment; lifestyle; personalised cancer prevention and treatment; respiratory and infection.", "specs": ["cardiology", "respiratory", "oncology", "infection", "diabetes"]},
+      {"name": "NIHR Nottingham Biomedical Research Centre", "url": "https://www.nottingham.ac.uk/medicine/research/biomedical-research-centre.aspx", "what": "Translates research for common illnesses such as asthma and arthritis into new treatments, technologies and advanced medicines.", "specs": ["respiratory", "ortho"]},
+      {"name": "NIHR HealthTech Research Centre in Rehabilitation", "url": "https://hrc-rehabilitation.nihr.ac.uk/", "what": "Brings researchers, companies, charities and patients together to develop rehabilitation technology; hosted by Nottingham University Hospitals with the National Rehabilitation Centre.", "specs": ["rehab", "orthotics", "ortho", "handling"]},
+      {"name": "MindTech (NIHR HealthTech Research Centre in Mental Health)", "url": "https://www.mindtech.org.uk/about-us", "what": "National centre for developing, adopting and evaluating technologies for mental healthcare and dementia; works with clinicians, patients, researchers and industry.", "specs": ["digital", "neuro"]},
+      {"name": "Birmingham Experimental Cancer Medicine Centre", "url": "https://www.ecmcnetwork.org.uk/how-we-work/adult-network/birmingham-adult-centre", "what": "Develops personalised cancer therapies and delivers early-phase cancer research at University Hospitals Birmingham.", "specs": ["oncology"]},
+      {"name": "Leicester Experimental Cancer Medicine Centre", "url": "https://www.ecmcnetwork.org.uk/how-we-work/adult-network/leicester-adult-centre", "what": "Early-phase oncology, haematology and prevention trials, including first-in-human studies, through the Hope Cancer Trials Centre.", "specs": ["oncology"]}
+     ]
+    },
+    {
+     "title": "Running a commercial study",
+     "rows": [
+      {"name": "NIHR Nottingham Clinical Research Facility", "url": "https://www.nottingham.ac.uk/medicine/research/facilities/clinicalresearchfacility/index.aspx", "what": "Early-phase experimental medicine for adults and children, with dedicated clinical research space available for clinical trial hire.", "specs": []},
+      {"name": "NIHR Central and North West Midlands Commercial Research Delivery Centre", "url": "https://bwc.nhs.uk/central-and-north-west-midlands-commercial-research-delivery-centre-crdc", "what": "NHS trusts, GPs, universities and community partners delivering commercial research across Birmingham, Solihull, the Black Country, Staffordshire and Shropshire.", "specs": []},
+      {"name": "NIHR North Midlands Commercial Research Delivery Centre", "url": "https://crdc-nm.nihr.ac.uk/about-us/", "what": "One of the Commercial Research Delivery Centres set up in April 2025 to make commercial clinical research faster and easier to place; hosted by UHNM.", "specs": []}
+     ]
+    },
+    {
+     "title": "Funding a partnership with a university",
+     "rows": [
+      {"name": "Knowledge Transfer Partnerships (Innovate UK)", "url": "https://www.ukri.org/councils/innovate-uk/guidance-for-applicants/guidance-for-specific-funds/knowledge-transfer-partnership-guidance/", "what": "Part-funded partnerships between a business and a university or research organisation, built around a specific innovation challenge.", "specs": []},
+      {"name": "University of Birmingham KTP office", "url": "https://www.birmingham.ac.uk/collaborate/business-engagement/knowledge-transfer-partnerships", "what": "Three-way KTP projects in any academic field; the page states SMEs can expect 67% funding and larger companies 50%.", "specs": []},
+      {"name": "University of Nottingham KTP office", "url": "https://www.nottingham.ac.uk/workingwithbusiness/services/knowledge-transfer-partnerships.aspx", "what": "Three-way KTP projects led by a graduate KTP Associate, part-funded by Innovate UK; the university reports over 160 KTPs delivered.", "specs": []}
+     ]
+    }
+   ],
+   "examples": [
+    {"name": "Neupulse, Tourette syndrome (Neurotherapeutics, University of Nottingham spin-out)", "what": "A wrist-worn device built on University of Nottingham research; included in NICE's early value assessment HTG748, which records it as awaiting CE and UKCA marking.", "specs": ["neuro", "digital"], "sources": [{"url": "https://www.nice.org.uk/guidance/htg748", "label": "NICE HTG748"}, {"url": "https://www.nottingham.ac.uk/news/technology-developed-in-nottingham-to-treat-tourettes-recommended-by-nice", "label": "University of Nottingham"}]},
+    {"name": "GALEAS Bladder, bladder cancer (Nonacus with the University of Birmingham)", "what": "A urine test studied in 964 patients across seven NHS urology departments, led by the University of Birmingham and Nonacus; the study was funded by Nonacus.", "specs": ["pathology", "continence", "oncology"], "sources": [{"url": "https://www.birmingham.ac.uk/news/2026/urine-test-identifies-more-than-9-in-10-bladder-cancers-clinical-study-finds", "label": "University of Birmingham"}, {"url": "https://nonacus.com/in-vitro-diagnostic-products-ukca/galeas-bladder-cancer-test/", "label": "Nonacus"}]}
+   ]
+  }
+ }
 }
