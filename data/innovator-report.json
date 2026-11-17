@@ -10,7 +10,7 @@
   "ref": "ETH-DCC876B19",
   "contact": "contact@elevateandthrive.uk"
  },
- "generatedOn": "2026-11-16",
+ "generatedOn": "2026-11-17",
  "rule": "Built by scripts/build_innovator_report.py for the Innovator Market Analysis Report (app/innovator-report.js). Holds only what that report cannot read in the browser: the award history of each speciality's competitor set, reduced from data/company-awards.json (20 MB); the Stakeholder Mapper's role library, parsed from app/mst-logic.js; a digital flag on the other-body framework rows; and every source file's own as-of date, so an unreachable source can still be reported with its last good reading. Nothing here is computed beyond counts, earliest and latest dates, and a name match.",
  "awardsPerCompany": 3,
  "matchRule": "A competitor row is tied to a company in company-awards.json by the normalised form of its `ref` (the master supplier record), falling back to its `co`. Where no company matches, the row is written with awardCount 0 and matched false, and the report prints \"No award row in the Hub's set\" — which is not the same as \"no contracts\", and the report says so.",
@@ -376,6 +376,45 @@
    "supplierCount": 0
   },
   {
+   "name": "G-Cloud 12",
+   "reference": "RM1557.12",
+   "owner": "Government Commercial Agency (GCA), formerly Crown Commercial Service",
+   "url": "https://www.gca.gov.uk/agreements/RM1557.12",
+   "status": "expired",
+   "starts": "2020-09-28",
+   "ends": "2022-11-27",
+   "agreementType": "PCR15 Framework",
+   "term": null,
+   "lots": [],
+   "supplierCount": 0
+  },
+  {
+   "name": "G-Cloud 13",
+   "reference": "RM1557.13",
+   "owner": "Government Commercial Agency (GCA), formerly Crown Commercial Service",
+   "url": "https://www.gca.gov.uk/agreements/RM1557.13",
+   "status": "expired",
+   "starts": "2022-11-09",
+   "ends": "2024-11-08",
+   "agreementType": "PCR15 Framework",
+   "term": null,
+   "lots": [],
+   "supplierCount": 0
+  },
+  {
+   "name": "G-Cloud 14",
+   "reference": "RM1557.14",
+   "owner": "Government Commercial Agency (GCA), formerly Crown Commercial Service",
+   "url": "https://www.gca.gov.uk/agreements/RM1557.14",
+   "status": "expired",
+   "starts": "2024-10-29",
+   "ends": "2026-10-28",
+   "agreementType": "PCR15 Framework",
+   "term": null,
+   "lots": [],
+   "supplierCount": 0
+  },
+  {
    "name": "Digital Pathology 2024 Framework (HealthTrust Europe)",
    "reference": "Find a Tender notice 058054-2026",
    "owner": "HealthTrust Europe LLP (HTE) acting on behalf of Mid South Essex NHS Foundation Trust",
@@ -468,18 +507,6 @@
    "cpv": "48000000",
    "valueAmount": null,
    "valueCurrency": ""
-  },
-  {
-   "title": "Asset Tracking System",
-   "buyer": "NHS Borders",
-   "stage": "open tender",
-   "date": "2026-10-05",
-   "closingDate": "2026-11-16T12:00:00Z",
-   "url": "https://www.find-tender.service.gov.uk/Notice/093954-2026",
-   "source": "Find a Tender",
-   "cpv": "48422000",
-   "valueAmount": 116000,
-   "valueCurrency": "GBP"
   }
  ],
  "digitalMarketEngagement": [
@@ -1001,6 +1028,37 @@
      "valueAmount": 23155,
      "valueCurrency": "GBP",
      "periodEnd": "2027-08-09",
+     "clinical": false
+    }
+   ]
+  },
+  {
+   "co": "HealthRota",
+   "matched": true,
+   "awardCount": 2,
+   "firstAward": "2026-10-12",
+   "lastAward": "2026-11-17",
+   "awards": [
+    {
+     "title": "Medical Erostering Software Solution",
+     "buyer": "The Rotherham NHS Foundation Trust",
+     "date": "2026-11-17",
+     "url": "https://www.find-tender.service.gov.uk/Notice/108829-2026",
+     "source": "Find a Tender",
+     "valueAmount": 449214.68,
+     "valueCurrency": "GBP",
+     "periodEnd": "2029-12-01",
+     "clinical": false
+    },
+    {
+     "title": "Medical Erostering Software Solution",
+     "buyer": "The Rotherham NHS Foundation Trust",
+     "date": "2026-10-12",
+     "url": "https://www.find-tender.service.gov.uk/Notice/096159-2026",
+     "source": "Find a Tender",
+     "valueAmount": null,
+     "valueCurrency": null,
+     "periodEnd": null,
      "clinical": false
     }
    ]
@@ -1556,26 +1614,6 @@
    ]
   },
   {
-   "co": "HealthRota",
-   "matched": true,
-   "awardCount": 1,
-   "firstAward": "2026-10-12",
-   "lastAward": "2026-10-12",
-   "awards": [
-    {
-     "title": "Medical Erostering Software Solution",
-     "buyer": "The Rotherham NHS Foundation Trust",
-     "date": "2026-10-12",
-     "url": "https://www.find-tender.service.gov.uk/Notice/096159-2026",
-     "source": "Find a Tender",
-     "valueAmount": null,
-     "valueCurrency": null,
-     "periodEnd": null,
-     "clinical": false
-    }
-   ]
-  },
-  {
    "co": "Heidi Health",
    "matched": true,
    "awardCount": 1,
@@ -1691,6 +1729,26 @@
      "valueAmount": 58692,
      "valueCurrency": "GBP",
      "periodEnd": "2027-07-06",
+     "clinical": false
+    }
+   ]
+  },
+  {
+   "co": "Roche Diagnostics UK",
+   "matched": true,
+   "awardCount": 1,
+   "firstAward": "2026-11-17",
+   "lastAward": "2026-11-17",
+   "awards": [
+    {
+     "title": "Roche Ventana Interface",
+     "buyer": "Mid Yorkshire Hospitals NHS Trust",
+     "date": "2026-11-17",
+     "url": "https://www.find-tender.service.gov.uk/Notice/108883-2026",
+     "source": "Find a Tender",
+     "valueAmount": 18795.0,
+     "valueCurrency": "GBP",
+     "periodEnd": "2027-10-20",
      "clinical": false
     }
    ]
@@ -2058,14 +2116,14 @@
    "digitalCount": 20
   },
   "icb-watch.json": {
-   "asOf": "16/11/2026",
-   "leadersCheckedOn": "2026-11-15",
+   "asOf": "17/11/2026",
+   "leadersCheckedOn": "2026-11-17",
    "count": 36
   },
   "open-tenders.json": {
-   "dataAsOf": "16/11/2026",
+   "dataAsOf": "17/11/2026",
    "source": "Find a Tender and Contracts Finder tender-stage OCDS notices, Open Government Licence v3",
-   "openNotices": 23
+   "openNotices": 22
   },
   "pending-awards.json": {
    "dataAsOf": "15/11/2026",
@@ -2075,23 +2133,23 @@
    "dataAsOf": "2026-11-16",
    "source": "gca.gov.uk agreement pages and lot-supplier CSV exports; find-tender.service.gov.uk OCDS API; sbs.nhs.uk framework pages",
    "rule": "Every fact read at the named primary source on verifiedOn, else 'Not verified' with what would settle it. Supplier lists hold company names only; no contact person, email, phone or address is ever stored. suppliers null means no list was read.",
-   "frameworkCount": 10
+   "frameworkCount": 13
   },
   "company-digital-awards.json": {
-   "dataAsOf": "16/11/2026",
+   "dataAsOf": "17/11/2026",
    "source": "Find a Tender and Contracts Finder award notices in the Hub's digital lane (data/digital-lane.json), Open Government Licence v3.",
    "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
    "counts": {
-    "companies": 48,
-    "awardRows": 111
+    "companies": 49,
+    "awardRows": 113
    }
   },
   "digital-lane.json": {
-   "dataAsOf": "16/11/2026",
+   "dataAsOf": "17/11/2026",
    "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
    "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
    "scopeNote": "A call-off under a framework is not a notice, and most digital money in the NHS moves as framework call-offs, capital business cases and G-Cloud awards without competition. This lane is therefore a floor, not a census: an absence here says nothing about the buyer or the market. Contract values, where shown, are the notice's own and are not summed across rows.",
-   "openNotices": 5,
+   "openNotices": 4,
    "marketEngagement": 2
   },
   "nhssc-procurement-calendar.json": {
@@ -2111,6 +2169,10 @@
   },
   "products.json": {
    "note": "The Hub's own speciality list, product and problem list, framework family map, national priority map and Clinical Evidence Library highlights — the same records behind the Hub's Stakeholder Mapper and Value Equation. Human-curated; no automation writes it."
+  },
+  "scripts/regional-innovation.json": {
+   "asOf": null,
+   "note": "Hand-curated regional research and innovation bodies, one public page per row, read on the date shown. One row per organisation, each linked to the organisation's own public page and read on the region's readOn date. No named individuals, no personal contact details."
   },
   "app/mst-logic.js": {
    "note": "The Hub's Stakeholder Mapper. Its role library is read straight out of the tool, so the roles in this report and the roles a member sees in the mapper cannot drift apart."
@@ -2882,6 +2944,10 @@
    "digital": true
   }
  ],
+ "regionalSupport": {
+  "rule": "One row per organisation, each linked to the organisation's own public page and read on the region's readOn date. No named individuals, no personal contact details.",
+  "regions": {}
+ },
  "specialities": {
   "bloodcoll": {
    "label": "Blood collection / phlebotomy",
@@ -46984,9 +47050,9 @@
     {
      "co": "Medtronic",
      "ref": "Medtronic",
-     "brands": "Not verified — brand-level detail not yet captured; see the supplier's own site.",
-     "url": "https://www.medtronic.com/en-gb",
-     "note": "Named on the NHS Supply Chain — Interventional Cardiology / IR / Neuro / CRM / EP (to 2027) framework by NHS Supply Chain's own award brief. Not yet catalogue-verified for this speciality — no brand or NPC-level product line matched here yet; check the company's own site or The Differential.",
+     "brands": "MiniMed 780G system · Guardian 4 Sensor & transmitter",
+     "url": "https://www.minimed.com/en-gb/products/minimed-780G-insulin-pump",
+     "note": "Confirmed live on minimed.com/en-gb 17/11/2026: MiniMed 780G hybrid closed-loop insulin pump (Lot 1 of NHS Supply Chain — Insulin Pumps, CGM & Hybrid Closed Loop, 2025/S 000-4043), pairing with the Guardian 4 Sensor & transmitter / Guardian Link 4 Transmitter (Lot 2 CGM), plus compatible reservoirs (MMT-332A, MMT0326A) and infusion sets (pumpset consumables).",
      "matched": true,
      "matchedTo": "Medtronic",
      "awardCount": 184,

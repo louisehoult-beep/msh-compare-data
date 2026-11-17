@@ -220,6 +220,27 @@ def parse_stakeholder_roles(js):
     return roles, tpl
 
 
+def load_regional():
+    """scripts/regional-innovation.json is hand-curated (kept beside the builder, published
+    only inside the stamped bundle). Every row must carry its own public
+    URL, and every region its read date, or the build fails: the report prints no row
+    it cannot link to its source."""
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "regional-innovation.json"),
+              encoding="utf-8") as fh:
+        doc = json.load(fh)
+    for name, reg in (doc.get("regions") or {}).items():
+        if not reg.get("readOn"):
+            raise SystemExit("regional-innovation.json: region %s has no readOn" % name)
+        for g in reg.get("groups") or []:
+            for r in g.get("rows") or []:
+                if not (r.get("name") and r.get("url", "").startswith("https://") and r.get("what")):
+                    raise SystemExit("regional-innovation.json: row without name/https url/what: %r" % r)
+        for e in reg.get("examples") or []:
+            if not e.get("sources") or not all(s.get("url", "").startswith("https://") for s in e["sources"]):
+                raise SystemExit("regional-innovation.json: example without an https source: %r" % e.get("name"))
+    return {"rule": doc.get("rule"), "regions": doc.get("regions") or {}}
+
+
 def build():
     products = load("products.json")
     compare = load("compare-suppliers.json")
@@ -234,6 +255,7 @@ def build():
     digital_awards = load("company-digital-awards.json")
     digital_lane = load("digital-lane.json")
     awards = load("company-awards.json")
+    regional = load_regional()
 
     with open(os.path.join(APP, "mst-logic.js"), encoding="utf-8") as fh:
         roles, tpl = parse_stakeholder_roles(fh.read())
@@ -586,6 +608,11 @@ def build():
                         "highlights — the same records behind the Hub's Stakeholder "
                         "Mapper and Value Equation. Human-curated; no automation writes it.",
             },
+            "scripts/regional-innovation.json": {
+                "asOf": max([r.get("readOn") for r in regional["regions"].values()] or [None]),
+                "note": "Hand-curated regional research and innovation bodies, one public "
+                        "page per row, read on the date shown. " + (regional.get("rule") or ""),
+            },
             "app/mst-logic.js": {
                 "note": "The Hub's Stakeholder Mapper. Its role library is read straight out "
                         "of the tool, so the roles in this report and the roles a member sees "
@@ -595,6 +622,7 @@ def build():
         "stakeholderRoles": roles,
         "stakeholderTemplates": tpl,
         "otherBodies": other,
+        "regionalSupport": regional,
         "specialities": specs,
     }
     return doc

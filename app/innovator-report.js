@@ -834,10 +834,54 @@
           + esc(ukdate(ICB.leadersCheckedOn)) + '.</p>';
       }
     }
+    out += regionalHelp(st);
     out += mine(st.org, 'Name your actual contacts against the roles above, and say which of them '
       + 'you have spoken to. An empty row is an honest answer and a funder can read it; a guess '
       + 'cannot survive a question.',
       'Role, name, organisation, whether you have spoken to them.', 'inr-w5');
+    return out;
+  }
+
+  /* Regional innovation support. scripts/regional-innovation.json (published inside this bundle) is hand-curated: each row
+     is an organisation's own public page, read on the date the file records. Shown only when
+     the ICB picked sits in a region the file covers; a row tagged with the speciality picked
+     is marked, nothing is hidden. No named individuals: a role changes hands, a page does not. */
+  function regionalHelp(st) {
+    var RG = (B.regionalSupport || {}).regions || {};
+    if (st.geo === 'national') {
+      var have = Object.keys(RG);
+      return have.length ? '<p class="note">Pick an ICB in ' + esc(have.join(' or '))
+        + ' above to list the regional research and innovation bodies that can help you in.</p>' : '';
+    }
+    var m = icbByCode(st.geo), R = m && RG[m.region];
+    if (!R) { return ''; }
+    function tag(specs) {
+      return (specs || []).indexOf(st.spec) >= 0
+        ? ' <span class="src"><b>· matches ' + esc(specLabel(st.spec)) + '</b></span>' : '';
+    }
+    var out = '<h3>Who can help you in: ' + esc(m.region) + '</h3>'
+      + (R.intro ? '<p class="note">' + esc(R.intro) + '</p>' : '');
+    (R.groups || []).forEach(function (g) {
+      out += '<p><b>' + esc(g.title) + '</b></p><div class="scroll"><table><tr><th>Organisation</th>'
+        + '<th>What it offers you</th><th>Read from</th></tr>'
+        + (g.rows || []).map(function (r) {
+          return '<tr><td>' + esc(r.name) + tag(r.specs) + '</td><td>' + esc(r.what) + '</td><td>'
+            + link(r.url, r.urlLabel || 'its own page') + '</td></tr>';
+        }).join('') + '</table></div>';
+    });
+    var ex = (R.examples || []).slice().sort(function (a, b) {
+      return ((b.specs || []).indexOf(st.spec) >= 0) - ((a.specs || []).indexOf(st.spec) >= 0);
+    });
+    if (ex.length) {
+      out += '<p><b>Routes that have worked here</b></p><ul class="note">'
+        + ex.map(function (e) {
+          return '<li><b>' + esc(e.name) + '.</b>' + tag(e.specs) + ' ' + esc(e.what) + ' '
+            + (e.sources || []).map(function (s) { return link(s.url, s.label || 'source'); }).join(', ')
+            + '</li>';
+        }).join('') + '</ul>';
+    }
+    out += '<p class="src">Source: the Hub’s regional innovation list, each row read at the page linked '
+      + 'beside it; ' + asOf(R.readOn) + '.' + (R.basis ? ' ' + esc(R.basis) : '') + '</p>';
     return out;
   }
 
