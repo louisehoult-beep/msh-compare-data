@@ -1,0 +1,261 @@
+<!-- wp:html -->
+<!-- The Innovators Section (Hub page 6667, child of 675). Paste as the whole page body, exactly as here: the wp:html wrapper and no blank lines inside it stop WordPress adding paragraph tags. Plain ASCII, no double ampersand (WordPress rewrites it in an inline script). Each organisation row is read from its own public page on the date shown in its profile, except three carried over from the earlier draft, which say so; placeholders are labelled as placeholders. Source: hub/pages/innovators-section.html in msh-compare-data. -->
+<div class="msh"><style>body .wp-site-blocks > header,body header.wp-block-template-part,body .site-header,body #masthead{display:none!important}body .wp-site-blocks > footer,body footer.wp-block-template-part,body .site-footer,body #colophon{display:none!important}body h1.wp-block-post-title,body .entry-title{display:none!important}body main,body .wp-site-blocks main,body .wp-block-post-content,body .entry-content{max-width:none!important;margin:0!important;padding:0!important}body .entry-content>*{max-width:none!important}</style><header><div class="logo">MEDICAL SALES INTELLIGENCE <span>HUB</span></div><nav></nav></header></div>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: full-bleed bands, 1200px inner grid; deep teal dominant, aqua only for action and focus. */
+body .tis{--teal:#073B45;--teal2:#0A4C58;--aqua:#47D7C8;--mint:#E5F7F3;--white:#FFFFFF;--ink:#202D33;--slate:#71868C;--line:#D5E6E2;--fh:Manrope,'Segoe UI',Arial,sans-serif;--fb:Inter,'Segoe UI',Arial,sans-serif;font-family:var(--fb);font-size:16px;line-height:1.6;color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased}
+body .tis *{box-sizing:border-box}
+body .tis h1,body .tis h2,body .tis h3,body .tis h4{font-family:var(--fh)!important;color:var(--ink)!important;letter-spacing:-.02em;margin:0;text-wrap:balance}
+body .tis p,body .tis li,body .tis span,body .tis label,body .tis small{color:inherit}
+body .tis p{margin:0}
+body .tis a{color:var(--teal);text-decoration:none}
+body .tis .in{max-width:1200px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+body .tis .band{padding-block:88px}
+body .tis .mint{background:var(--mint)}
+body .tis .eyebrow{font:700 12px/1.3 var(--fb);letter-spacing:.16em;text-transform:uppercase;color:var(--teal)!important;margin-bottom:14px;display:block}
+body .tis .lead{font-size:18px;color:var(--slate)!important;max-width:62ch;margin-top:14px}
+body .tis h2{font-size:clamp(28px,3.4vw,42px);line-height:1.12;font-weight:800}
+body .tis :focus-visible{outline:3px solid var(--aqua);outline-offset:3px}
+/* Buttons */
+body .tis .btn{display:inline-flex;align-items:center;gap:10px;font:700 15px/1 var(--fh);padding:15px 22px;border-radius:8px;border:1.5px solid transparent;cursor:pointer;transition:background .2s,color .2s,border-color .2s,transform .2s}
+body .tis .btn-aqua{background:var(--aqua);color:var(--teal)!important}
+body .tis .btn-aqua:hover{background:#6FE3D7;transform:translateY(-1px)}
+body .tis .btn-line{border-color:rgba(255,255,255,.45);color:#fff!important;background:transparent}
+body .tis .btn-line:hover{border-color:var(--aqua);color:var(--aqua)!important}
+body .tis .btn-teal{background:var(--teal);color:#fff!important}
+body .tis .btn-teal:hover{background:var(--teal2)}
+body .tis .arrow{transition:transform .2s}
+body .tis .btn:hover .arrow,body .tis .more:hover .arrow{transform:translateX(4px)}
+/* Section nav */
+body .tis .snav{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:saturate(1.4) blur(8px);transition:box-shadow .25s}
+body .tis .snav.scrolled{box-shadow:0 6px 24px rgba(7,59,69,.08)}
+body .tis .snav .in{display:flex;align-items:center;gap:24px;min-height:64px}
+body .tis .brand{font:800 16px/1.2 var(--fh);color:var(--teal)!important;white-space:nowrap;display:flex;align-items:center;gap:10px}
+body .tis .brand i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--aqua);box-shadow:0 0 0 4px rgba(71,215,200,.22)}
+body .tis .snav ul{display:flex;gap:4px;list-style:none;margin:0 0 0 auto;padding:0;overflow-x:auto;scrollbar-width:none}
+body .tis .snav ul::-webkit-scrollbar{display:none}
+body .tis .snav ul a{display:block;padding:8px 12px;border-radius:6px;font:600 14px/1.2 var(--fb);color:var(--ink)!important;white-space:nowrap}
+body .tis .snav ul a:hover{background:var(--mint);color:var(--teal)!important}
+body .tis .snav .btn{padding:11px 16px;font-size:14px;white-space:nowrap}
+/* Hero */
+body .tis .hero{background:var(--teal);color:#fff;position:relative;overflow:hidden}
+body .tis .hero .in{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding-block:96px 104px}
+body .tis .hero .eyebrow{color:var(--aqua)!important}
+body .tis .hero h1{color:#fff!important;font-size:clamp(44px,7vw,92px);line-height:.98;font-weight:800;letter-spacing:-.035em}
+body .tis .hero h1 em{font-style:normal;color:var(--aqua)!important}
+body .tis .hero p.sub{color:#CFE7E3!important;font-size:clamp(17px,1.6vw,20px);max-width:52ch;margin:26px 0 36px}
+body .tis .hero .ctas{display:flex;flex-wrap:wrap;gap:14px}
+body .tis .net{width:100%;height:auto;max-width:520px;justify-self:end}
+body .tis .net line{stroke:rgba(71,215,200,.28);stroke-width:1}
+body .tis .net circle{fill:#0E5A66;stroke:rgba(71,215,200,.55);stroke-width:1.2}
+body .tis .net circle.k{fill:var(--aqua);stroke:none}
+body .tis .net text{fill:#9FD9D1;font:600 11px var(--fb);letter-spacing:.08em}
+body .tis .pulse{transform-origin:center;transform-box:fill-box;animation:tisP 3.6s ease-in-out infinite}
+@keyframes tisP{0%,100%{opacity:.35}50%{opacity:1}}
+body .tis .qual{border-top:1px solid rgba(255,255,255,.12)}
+body .tis .qual .in{display:flex;flex-wrap:wrap;gap:12px 36px;padding-block:22px;font:700 12px/1.2 var(--fh);letter-spacing:.22em;color:#9FD9D1}
+body .tis .qual b{color:var(--aqua)}
+/* Category cards */
+body .tis .grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
+body .tis .cat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:12px;transition:border-color .2s,transform .2s,box-shadow .2s;text-align:left;cursor:pointer;font:inherit;color:inherit}
+body .tis .cat:hover{border-color:var(--aqua);transform:translateY(-3px);box-shadow:0 14px 34px rgba(7,59,69,.08)}
+body .tis .cat svg{width:40px;height:40px;stroke:var(--teal);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+body .tis .cat h3{font-size:20px;font-weight:700}
+body .tis .cat p{color:var(--slate)!important;font-size:15px;flex:1}
+body .tis .cat .n{font:600 13px var(--fb);color:var(--slate)!important}
+body .tis .more{font:700 14px var(--fh);color:var(--teal)!important;display:inline-flex;gap:8px;align-items:center}
+/* Search */
+body .tis .search{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:36px;box-shadow:0 18px 50px rgba(7,59,69,.07)}
+body .tis .q{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:10px;padding:0 16px;background:#fff;transition:border-color .2s}
+body .tis .q:focus-within{border-color:var(--aqua)}
+body .tis .q svg{width:22px;height:22px;stroke:var(--slate);fill:none;stroke-width:2;flex:none}
+body .tis .q input{border:0!important;outline:0;flex:1;min-width:0;font:500 17px var(--fb);padding:16px 0;color:var(--ink)!important;background:transparent!important;box-shadow:none!important}
+body .tis .filters{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:14px}
+body .tis .filters label{display:block;font:700 11px/1.3 var(--fb);letter-spacing:.1em;text-transform:uppercase;color:var(--slate)!important;margin-bottom:6px}
+body .tis select{width:100%;font:500 14px var(--fb);color:var(--ink)!important;background:#fff!important;border:1px solid var(--line)!important;border-radius:8px;padding:11px 10px;appearance:auto}
+body .tis .tog{display:flex;align-items:center;gap:10px;font:600 14px var(--fb);color:var(--ink)!important;height:44px;margin-top:17px;cursor:pointer}
+body .tis .tog input{width:18px;height:18px;accent-color:var(--teal)}
+body .tis .meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center;margin:26px 0 16px}
+body .tis .count{font:700 15px var(--fh);color:var(--ink)!important}
+body .tis .reset{background:none;border:0;font:600 14px var(--fb);color:var(--teal)!important;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+/* Organisation cards */
+body .tis .orgs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+body .tis .org{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s,box-shadow .2s}
+body .tis .org:hover{border-color:var(--aqua);box-shadow:0 12px 30px rgba(7,59,69,.07)}
+body .tis .org .top{display:flex;gap:14px;align-items:center}
+body .tis .mono{width:48px;height:48px;border-radius:10px;background:var(--mint);color:var(--teal)!important;font:800 15px var(--fh);display:flex;align-items:center;justify-content:center;flex:none;border:1px solid var(--line)}
+body .tis .org .c{font:700 11px/1.3 var(--fb);letter-spacing:.1em;text-transform:uppercase;color:var(--teal)!important}
+body .tis .org h3{font-size:18px;font-weight:700;line-height:1.3}
+body .tis .org p{font-size:15px;color:var(--slate)!important;flex:1}
+body .tis .chips{display:flex;flex-wrap:wrap;gap:6px}
+body .tis .chip{font:600 12px/1 var(--fb);padding:6px 9px;border-radius:999px;background:var(--mint);color:var(--teal)!important}
+body .tis .chip.r{background:#fff;border:1px solid var(--line);color:var(--slate)!important}
+body .tis .org .btn{align-self:flex-start;padding:10px 14px;font-size:14px;margin-top:4px}
+body .tis .empty{border:1.5px dashed var(--line);border-radius:12px;padding:28px;color:var(--slate)!important;background:#fff}
+/* Featured */
+body .tis .feat{display:grid;grid-template-columns:1.3fr 1fr;border-radius:14px;overflow:hidden;border:1px solid var(--line);margin-top:40px}
+body .tis .feat .l{background:#fff;padding:40px}
+body .tis .feat .r{background:var(--teal);padding:40px;color:#D6ECE8}
+body .tis .feat h3{font-size:28px;font-weight:800;margin:6px 0 12px}
+body .tis .feat .r h4{color:var(--aqua)!important;font:700 12px var(--fb);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+body .tis .feat .r li{color:#D6ECE8!important;margin-bottom:10px}
+body .tis .ph{display:inline-block;font:700 11px var(--fb);letter-spacing:.08em;text-transform:uppercase;background:#FFF4DA;color:#7A5A00!important;padding:5px 8px;border-radius:4px}
+/* Pathway */
+body .tis .path{list-style:none;padding:0;margin:48px 0 0;display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative}
+body .tis .path:before{content:"";position:absolute;left:8%;right:8%;top:27px;height:2px;background:linear-gradient(90deg,var(--line),var(--aqua),var(--line))}
+body .tis .path li{position:relative;text-align:center;padding:0 8px}
+body .tis .path button{background:none;border:0;cursor:pointer;font:inherit;color:inherit;width:100%;padding:0}
+body .tis .path .dot{width:56px;height:56px;margin:0 auto 16px;border-radius:50%;background:#fff;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font:800 15px var(--fh);color:var(--teal)!important;transition:all .25s;position:relative;z-index:1}
+body .tis .path button:hover .dot,body .tis .path button.on .dot{background:var(--teal);border-color:var(--aqua);color:#fff!important;box-shadow:0 0 0 6px rgba(71,215,200,.2)}
+body .tis .path b{display:block;font:700 17px var(--fh);color:var(--ink)!important}
+body .tis .path small{display:block;color:var(--slate)!important;font-size:14px;margin-top:4px;line-height:1.45}
+body .tis .path .ct{display:inline-block;margin-top:10px;font:600 12px var(--fb);color:var(--teal)!important}
+/* Funding */
+body .tis .fund{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:36px}
+body .tis .split{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px}
+body .tis .split h3{font-size:17px;font-weight:700}
+body .tis .bar{height:10px;border-radius:999px;background:var(--mint);overflow:hidden;margin:16px 0 10px}
+body .tis .bar i{display:block;height:100%;background:var(--teal);border-radius:999px;transition:width 1.4s cubic-bezier(.2,.7,.2,1)}
+body .tis .split small{color:var(--slate)!important;font-size:14px}
+body .tis .split a{font-size:13px;font-weight:600}
+body .tis .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+body .tis .stat{padding:28px 24px;border-left:1px solid var(--line)}
+body .tis .stat:first-child{border-left:0}
+body .tis .stat b{display:block;font:800 clamp(34px,4vw,48px)/1 var(--fh);color:var(--teal)!important;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+body .tis .stat span{display:block;color:var(--ink)!important;font-size:14px;margin-top:10px;line-height:1.45}
+body .tis .stat a{display:inline-block;margin-top:8px;font:600 12px var(--fb)}
+/* Checklist */
+body .tis .check{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:36px}
+body .tis .check div{border-top:2px solid var(--aqua);padding-top:16px}
+body .tis .check b{display:block;font:700 17px var(--fh);color:var(--ink)!important;margin-bottom:6px}
+body .tis .check span{color:var(--slate)!important;font-size:15px}
+/* CTA + footer */
+body .tis .cta{background:var(--teal);color:#fff;text-align:left}
+body .tis .cta h2{color:#fff!important;font-size:clamp(32px,4.6vw,56px);max-width:16ch}
+body .tis .cta p{color:#CFE7E3!important;font-size:19px;margin:18px 0 32px;max-width:56ch}
+body .tis .foot{background:#052C34;color:#9FBFC0;font-size:14px}
+body .tis .foot .in{display:flex;flex-wrap:wrap;gap:16px 40px;justify-content:space-between;padding-block:40px}
+body .tis .foot .logo{font:800 14px/1.3 var(--fh);letter-spacing:.12em;color:#fff!important}
+body .tis .foot .logo span{color:var(--aqua)!important}
+body .tis .foot a{color:#CFE7E3!important}
+body .tis .foot a:hover{color:var(--aqua)!important}
+body .tis .foot nav{display:flex;flex-wrap:wrap;gap:10px 22px}
+body .tis .src{font-size:13px;color:#7FA3A5!important;line-height:1.7;max-width:900px}
+body .tis .src a{color:#9FD9D1!important;text-decoration:underline;text-underline-offset:2px}
+/* Profile drawer */
+body .tis .scrim{position:fixed;inset:0;background:rgba(5,30,36,.55);z-index:9998;opacity:0;pointer-events:none;transition:opacity .25s}
+body .tis .scrim.on{opacity:1;pointer-events:auto}
+body .tis .drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:#fff;z-index:9999;transform:translateX(100%);transition:transform .3s cubic-bezier(.2,.7,.2,1);overflow-y:auto;padding:32px max(24px,env(safe-area-inset-right,0px)) 40px 32px;box-shadow:-20px 0 60px rgba(5,30,36,.2)}
+body .tis .drawer.on{transform:none}
+body .tis .drawer .x{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:8px;border:1px solid var(--line);background:#fff;cursor:pointer;font:600 20px var(--fb);color:var(--ink)}
+body .tis .drawer h3{font-size:26px;font-weight:800;margin:8px 0 6px;padding-right:44px}
+body .tis .drawer dl{margin:24px 0 0;display:grid;gap:18px}
+body .tis .drawer dt{font:700 11px var(--fb);letter-spacing:.12em;text-transform:uppercase;color:var(--slate)}
+body .tis .drawer dd{margin:4px 0 0;color:var(--ink)}
+body .tis .drawer .tbc{color:var(--slate);font-style:italic}
+/* Reveal (content is visible at rest; only enhances when JS runs) */
+body .tis.js .rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+body .tis.js .rv.shown{opacity:1;transform:none}
+/* Responsive */
+@media(max-width:1000px){body .tis .hero .in{grid-template-columns:1fr}body .tis .net{justify-self:start;max-width:420px}body .tis .grid6,body .tis .orgs{grid-template-columns:repeat(2,1fr)}body .tis .filters{grid-template-columns:repeat(2,1fr)}body .tis .stats{grid-template-columns:repeat(2,1fr)}body .tis .stat:nth-child(3){border-left:0}body .tis .check{grid-template-columns:repeat(2,1fr)}body .tis .feat{grid-template-columns:1fr}body .tis .snav ul{display:none}}
+@media(max-width:700px){body .tis .band{padding-block:64px}body .tis .hero .in{padding-block:64px 72px}body .tis .grid6,body .tis .orgs,body .tis .fund,body .tis .filters,body .tis .check{grid-template-columns:1fr}body .tis .path{grid-template-columns:1fr;gap:18px}body .tis .path:before{left:27px;right:auto;top:0;bottom:0;width:2px;height:auto;background:linear-gradient(180deg,var(--line),var(--aqua),var(--line))}body .tis .path li{text-align:left;padding:0}body .tis .path button{display:grid;grid-template-columns:56px 1fr;gap:0 16px;text-align:left}body .tis .path .dot{margin:0;grid-row:span 3}body .tis .feat .l,body .tis .feat .r{padding:28px}body .tis .stats{grid-template-columns:1fr 1fr}body .tis .snav .brand{font-size:14px}}
+@media(prefers-reduced-motion:reduce){body .tis *{transition:none!important;animation:none!important}body .tis.js .rv{opacity:1;transform:none}}
+</style>
+<div class="tis" id="tis">
+<nav class="snav" aria-label="The Innovators Section"><div class="in"><a class="brand" href="#tis-home"><i aria-hidden="true"></i>The Innovators Section</a><ul><li><a href="#tis-home">Home</a></li><li><a href="#tis-explore">Explore Organisations</a></li><li><a href="#tis-pathway">Innovation Pathways</a></li><li><a href="#tis-funding">Funding &amp; Support</a></li><li><a href="#tis-ready">Resources</a></li><li><a href="#tis-about">About</a></li></ul><a class="btn btn-aqua" href="#tis-find">Find Support <span class="arrow">&rarr;</span></a></div></nav>
+<section class="hero" id="tis-home"><div class="in"><div><span class="eyebrow">The Innovators Section &middot; Medical Sales Intelligence Hub</span><h1>Where innovation meets <em>impact.</em></h1><p class="sub">Connecting the organisations, expertise and opportunities advancing innovation across UK healthcare, health sciences and research.</p><div class="ctas"><a class="btn btn-aqua" href="#tis-ecosystem">Explore the Innovation Ecosystem <span class="arrow">&rarr;</span></a><a class="btn btn-line" href="#tis-find">Find Innovation Support <span class="arrow">&rarr;</span></a></div></div>
+<svg class="net" viewBox="0 0 520 440" role="img" aria-label="A network of connected organisations: research, NHS, funding and industry"><g><line x1="260" y1="220" x2="120" y2="110"/><line x1="260" y1="220" x2="400" y2="96"/><line x1="260" y1="220" x2="440" y2="250"/><line x1="260" y1="220" x2="350" y2="370"/><line x1="260" y1="220" x2="140" y2="350"/><line x1="260" y1="220" x2="70" y2="230"/><line x1="120" y1="110" x2="400" y2="96"/><line x1="400" y1="96" x2="440" y2="250"/><line x1="440" y1="250" x2="350" y2="370"/><line x1="350" y1="370" x2="140" y2="350"/><line x1="140" y1="350" x2="70" y2="230"/><line x1="70" y1="230" x2="120" y2="110"/><line x1="120" y1="110" x2="200" y2="40"/><line x1="400" y1="96" x2="480" y2="150"/><line x1="350" y1="370" x2="460" y2="410"/><line x1="140" y1="350" x2="40" y2="400"/><line x1="200" y1="40" x2="320" y2="30"/><line x1="320" y1="30" x2="400" y2="96"/></g><g><circle cx="200" cy="40" r="5"/><circle cx="320" cy="30" r="4"/><circle cx="480" cy="150" r="5"/><circle cx="460" cy="410" r="4"/><circle cx="40" cy="400" r="5"/><circle cx="120" cy="110" r="11"/><circle cx="400" cy="96" r="11"/><circle cx="440" cy="250" r="11"/><circle cx="350" cy="370" r="11"/><circle cx="140" cy="350" r="11"/><circle cx="70" cy="230" r="11"/><circle class="k pulse" cx="260" cy="220" r="34" style="opacity:.25"/><circle class="k" cx="260" cy="220" r="16"/></g><text x="94" y="86">RESEARCH</text><text x="372" y="72">NHS</text><text x="452" y="246">FUNDING</text><text x="322" y="400">INDUSTRY</text><text x="96" y="384">UNIVERSITIES</text><text x="10" y="210">ADOPTION</text></svg></div>
+<div class="qual"><div class="in"><span>INTELLIGENCE</span><b>&middot;</b><span>INNOVATION</span><b>&middot;</b><span>CONNECTION</span><b>&middot;</b><span>IMPACT</span></div></div></section>
+<section class="band" id="tis-ecosystem"><div class="in"><span class="eyebrow">Connecting the innovation ecosystem</span><h2 class="rv">Innovation doesn&rsquo;t happen in isolation.</h2><p class="lead rv">From early-stage research to real-world healthcare implementation, discover the organisations helping innovators develop, validate, fund and commercialise their ideas.</p><div class="grid6" id="tis-cats"></div></div></section>
+<section class="band mint" id="tis-find"><div class="in"><span class="eyebrow">Find the right support</span><h2 class="rv">Find the expertise to move your innovation forward.</h2>
+<div class="search" role="search"><label class="q" for="tis-q"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="tis-q" type="search" placeholder="Search by organisation name or expertise, e.g. respiratory, KTP, early-phase trials" autocomplete="off"></label>
+<div class="filters"><div><label for="tis-f-cat">Type of support</label><select id="tis-f-cat"></select></div><div><label for="tis-f-stage">Innovation stage</label><select id="tis-f-stage"></select></div><div><label for="tis-f-spec">Healthcare speciality</label><select id="tis-f-spec"></select></div><div><label for="tis-f-reg">Region</label><select id="tis-f-reg"></select></div><div><label class="tog" for="tis-f-fund"><input id="tis-f-fund" type="checkbox"> Funding opportunities only</label></div></div></div>
+<div id="tis-explore"><div class="meta"><span class="count" id="tis-count" aria-live="polite"></span><button class="reset" id="tis-reset" type="button">Clear filters</button></div><div class="orgs" id="tis-orgs"></div></div></div></section>
+<section class="band" id="tis-pathway"><div class="in"><span class="eyebrow">From research to real-world impact</span><h2 class="rv">Every stage has people who can help.</h2><p class="lead rv">Pick a stage to see the organisations that support it. The directory above updates to match.</p><ol class="path" id="tis-path"></ol></div></section>
+<section class="band mint" id="tis-about"><div class="in"><span class="eyebrow">Featured organisation</span><h2 class="rv">A single front door for the Midlands.</h2>
+<div class="feat rv"><div class="l"><span class="ph">Placeholder &middot; website to be confirmed</span><h3>Midlands Health Alliance Industry Gateway</h3><p style="color:var(--slate)">Launched on 17 November 2026 to give industry one route into the research, clinical and innovation expertise of the Birmingham, Leicester and Nottingham Biomedical Research Centres and their partners. The Gateway connects; its partners deliver.</p></div><div class="r"><h4>At a glance</h4><ul><li>Who it&rsquo;s for: companies and innovators who want to work with Midlands universities and NHS organisations</li><li>Website and contact: to be confirmed</li><li>Next event: to be confirmed</li></ul></div></div></div></section>
+<section class="band" id="tis-funding"><div class="in"><span class="eyebrow">Funding &amp; support</span><h2 class="rv">Know what each route pays for.</h2><p class="lead rv">Of 37 health innovation funding programmes open in England in 2025, only 19% were dedicated to adoption. Most money goes into earlier stages.</p>
+<div class="stats"><div class="stat"><b data-to="15">15</b><span>Health Innovation Networks across England</span><a href="https://thehealthinnovationnetwork.co.uk/news/driving-health-and-wealth-health-innovation-network-2024-25-impact-report/">Source</a></div><div class="stat"><b data-to="37">37</b><span>Health innovation funding programmes open in England in 2025</span><a href="https://www.health.org.uk/features-and-opinion/blogs/priorities-for-supporting-health-care-innovation-an-analysis-of-funding">Source</a></div><div class="stat"><b data-to="67" data-suf="%">67%</b><span>Of KTP costs covered by grant for SMEs</span><a href="https://www.birmingham.ac.uk/collaborate/business-engagement/knowledge-transfer-partnerships">Source</a></div><div class="stat"><b data-to="157" data-pre="&pound;" data-suf="m">&pound;157m</b><span>NIHR investment in 10 Applied Research Collaborations, over 5 years from April 2026</span><a href="https://pharmatimes.com/news/nihr-invests-157-million-in-research-partnerships-to-transform-healthcare/">Source</a></div></div>
+<div class="fund"><div class="split rv"><h3>KTP: SMEs</h3><div class="bar"><i data-w="67" style="width:67%"></i></div><small>Grant up to 67% &middot; the business pays the rest</small></div><div class="split rv"><h3>KTP: large companies</h3><div class="bar"><i data-w="50" style="width:50%"></i></div><small>Grant up to 50% &middot; the business pays the rest</small></div><div class="split rv"><h3>NIHR: NHS or commercial lead</h3><div class="bar"><i data-w="100" style="width:100%"></i></div><small>Up to 100% of research costs on some calls &middot; <a href="https://www.nihr.ac.uk/funding/transformative-and-disruptive-innovations-reduce-waiting-lists-and-waiting-times-april-2025/2025291">NIHR call, April 2025</a></small></div><div class="split rv"><h3>NIHR: university lead</h3><div class="bar"><i data-w="80" style="width:80%"></i></div><small>Up to 80% of full economic cost on some calls</small></div></div>
+<p class="lead" style="font-size:15px;margin-top:20px">Success rates for KTP and other programmes: not verified yet. They&rsquo;ll be added once confirmed from the funders.</p></div></section>
+<section class="band mint" id="tis-ready"><div class="in"><span class="eyebrow">Resources</span><h2 class="rv">Before you get in touch.</h2><p class="lead rv">Have these ready and you&rsquo;ll get a better answer, faster.</p><div class="check"><div class="rv"><b>The problem</b><span>One sentence on what you solve and who has the problem.</span></div><div class="rv"><b>Your stage</b><span>Where you are now and what you need next.</span></div><div class="rv"><b>Your evidence</b><span>Anything you already have, however early.</span></div><div class="rv"><b>Your ask</b><span>Advice, research, funding or an introduction.</span></div></div></div></section>
+<section class="band cta"><div class="in"><h2>Great ideas deserve the right connections.</h2><p>Explore the organisations helping turn healthcare innovation into meaningful impact.</p><a class="btn btn-aqua" href="#tis-explore">Explore Organisations <span class="arrow">&rarr;</span></a></div></section>
+<footer class="foot"><div class="in"><div><div class="logo">MEDICAL SALES INTELLIGENCE <span>HUB</span></div><p style="margin-top:8px">The Innovators Section is part of the Hub. Subscribers only.</p></div><nav aria-label="Hub"><a href="/medical-sales-hub/my-hub/">My Hub</a><a href="/medical-sales-hub/">Live Desk</a><a href="/medical-sales-hub/innovator-market-analysis-report/">Innovator Market Analysis Report</a></nav></div><div class="in" style="padding-block:0 36px"><p class="src">Every organisation card links to its source, and its profile says when that source was read. Filtering by speciality shows organisations whose own page names that area; it is not a recommendation. Last updated 17 November 2026. Other sources: <a href="https://thehealthinnovationnetwork.co.uk/news/driving-health-and-wealth-health-innovation-network-2024-25-impact-report/">Health Innovation Network impact report 2024/25</a> &middot; <a href="https://www.health.org.uk/features-and-opinion/blogs/priorities-for-supporting-health-care-innovation-an-analysis-of-funding">The Health Foundation, funding programmes analysis</a> &middot; <a href="https://iuk-ktp.org.uk/discover/businesses/">Innovate UK KTP</a> &middot; <a href="https://pharmatimes.com/news/nihr-invests-157-million-in-research-partnerships-to-transform-healthcare/">PharmaTimes, NIHR ARCs</a> &middot; <a href="https://innovation.nhs.uk/funding-your-innovation/">NHS Innovation Service</a></p></div></footer>
+<div class="scrim" id="tis-scrim"></div><aside class="drawer" id="tis-drawer" role="dialog" aria-modal="true" aria-labelledby="tis-d-h" tabindex="-1"><button class="x" id="tis-x" type="button" aria-label="Close profile">&times;</button><div id="tis-d"></div></aside>
+</div>
+<script>
+(function(){
+var root=document.getElementById('tis');if(!root){return;}root.classList.add('js');
+var READ='17 November 2026';
+var CATS=[
+{id:'uni',t:'Universities and Research',d:'Research centres and university teams that can test, refine and evidence an idea.',i:'<path d="M3 9l9-5 9 5-9 5z"/><path d="M7 11v5c0 1.5 2.5 3 5 3s5-1.5 5-3v-5"/>'},
+{id:'nhs',t:'NHS Innovation and Adoption',d:'The NHS teams and networks that help innovations get adopted and spread.',i:'<path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/>'},
+{id:'life',t:'Health Sciences and Life Sciences',d:'Industry bodies that connect and support life sciences and medtech companies.',i:'<path d="M9 3h6"/><path d="M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/><path d="M7.5 15h9"/>'},
+{id:'fund',t:'Funding and Investment',d:'Grant and partnership schemes that pay for research and development.',i:'<circle cx="12" cy="12" r="8"/><path d="M14.5 9.5c-.5-1-1.5-1.5-2.5-1.5-1.7 0-3 1-3 2.3 0 3 5.5 1.7 5.5 4.4 0 1.3-1.3 2.3-3 2.3-1.1 0-2.1-.5-2.6-1.5M12 6.5v11"/>'},
+{id:'acc',t:'Accelerators and Incubators',d:'Programmes that take an early company from idea to investable business.',i:'<path d="M5 19c2-6 6-11 14-14-3 8-8 12-14 14z"/><path d="M9 15l-3-3"/>'},
+{id:'com',t:'Commercialisation and Industry Support',d:'Teams that place commercial studies and turn research into partnerships.',i:'<path d="M3 17l5-5 4 4 8-8"/><path d="M14 8h6v6"/>'}];
+var STAGES=[{id:'discover',t:'Discover',d:'Is there a real problem?'},{id:'develop',t:'Develop',d:'Build and refine the idea'},{id:'validate',t:'Validate',d:'Research and clinical evidence'},{id:'fund',t:'Fund',d:'Grants and partnerships'},{id:'commercialise',t:'Commercialise',d:'Industry and market routes'},{id:'implement',t:'Implement',d:'NHS adoption and spread'}];
+var SPECS=['Respiratory','Cardiovascular','Cancer','Inflammation','Mental health and dementia','Rehabilitation','Diabetes and lifestyle','Musculoskeletal'];
+var REGIONS=['Midlands','West Midlands','East Midlands','National'];
+var O=[
+{n:'NIHR Leicester Biomedical Research Centre',c:'uni',s:['discover','develop','validate'],sp:['Respiratory','Cardiovascular','Cancer','Diabetes and lifestyle'],r:'East Midlands',f:false,d:'Six research themes: cardiovascular; data innovation for multiple long-term conditions and ethnic health; environment; lifestyle; personalised cancer prevention and treatment; respiratory and infection.',u:'https://leicesterbrc.nihr.ac.uk/'},
+{n:'NIHR Birmingham Biomedical Research Centre',c:'uni',s:['discover','develop','validate'],sp:['Inflammation'],r:'West Midlands',f:false,d:'Turns scientific discoveries into treatments and diagnostics, focused on inflammation. Hosted by University Hospitals Birmingham with the University of Birmingham.',u:'https://www.research.uhb.nhs.uk/facilities-and-infrastructure/national-institute-for-health-and-care-research-nihr-infrastructure/birmingham-biomedical-research-centre-brc/'},
+{n:'NIHR Nottingham Biomedical Research Centre',c:'uni',s:['discover','develop','validate'],sp:['Respiratory','Musculoskeletal'],r:'East Midlands',f:false,d:'Translates research for common illnesses such as asthma and arthritis into new treatments, technologies and advanced medicines.',u:'https://www.nottingham.ac.uk/medicine/research/biomedical-research-centre.aspx'},
+{n:'NIHR HealthTech Research Centre in Rehabilitation',c:'uni',s:['develop','validate'],sp:['Rehabilitation','Musculoskeletal'],r:'East Midlands',f:false,d:'Brings researchers, companies, charities and patients together to develop rehabilitation technology. Hosted by Nottingham University Hospitals with the National Rehabilitation Centre.',u:'https://hrc-rehabilitation.nihr.ac.uk/'},
+{n:'MindTech, NIHR HealthTech Research Centre in Mental Health',c:'uni',s:['develop','validate','implement'],sp:['Mental health and dementia'],r:'National',f:false,d:'National centre for developing, adopting and evaluating technologies for mental healthcare and dementia. Works with clinicians, patients, researchers and industry.',u:'https://www.mindtech.org.uk/about-us'},
+{n:'Birmingham Experimental Cancer Medicine Centre',c:'uni',s:['validate'],sp:['Cancer'],r:'West Midlands',f:false,d:'Develops personalised cancer therapies and delivers early-phase cancer research at University Hospitals Birmingham.',u:'https://www.ecmcnetwork.org.uk/how-we-work/adult-network/birmingham-adult-centre'},
+{n:'Leicester Experimental Cancer Medicine Centre',c:'uni',s:['validate'],sp:['Cancer'],r:'East Midlands',f:false,d:'Early-phase oncology, haematology and prevention trials, including first-in-human studies, through the Hope Cancer Trials Centre.',u:'https://www.ecmcnetwork.org.uk/how-we-work/adult-network/leicester-adult-centre'},
+{n:'NIHR Nottingham Clinical Research Facility',c:'uni',s:['validate'],sp:[],r:'East Midlands',f:false,d:'Early-phase experimental medicine for adults and children, with dedicated clinical research space available for clinical trial hire.',u:'https://www.nottingham.ac.uk/medicine/research/facilities/clinicalresearchfacility/index.aspx'},
+{n:'Health Innovation West Midlands',c:'nhs',s:['implement','commercialise'],sp:[],r:'West Midlands',f:false,d:'The NHS innovation arm for the West Midlands, supporting adoption and spread of innovations. Its Industry Gateway is a single point for commercial enquiries.',u:'https://www.healthinnovationwestmidlands.org/our-offer/'},
+{v:0,n:'Health Innovation Networks',c:'nhs',s:['implement'],sp:[],r:'National',f:false,d:'15 networks across England supporting innovators and the NHS to develop, spread and adopt innovation. They signpost to MHRA, NIHR and NHS Supply Chain.',u:'https://thehealthinnovationnetwork.co.uk/news/driving-health-and-wealth-health-innovation-network-2024-25-impact-report/'},
+{v:0,n:'NHS Innovation Service',c:'nhs',s:['discover','fund','implement'],sp:[],r:'National',f:true,d:'Single front door for innovators. Includes a funding finder covering UKRI, Innovate UK and NIHR, plus UK incubators and accelerators.',u:'https://innovation.nhs.uk/funding-your-innovation/'},
+{n:'Medilink Midlands',c:'life',s:['develop','commercialise'],sp:[],r:'Midlands',f:false,d:'The life sciences industry association for the Midlands: business support, connections and collaboration to help companies establish, develop and grow.',u:'https://www.medilinkmidlands.com/'},
+{n:'Knowledge Transfer Partnerships, Innovate UK',c:'fund',s:['develop','fund'],sp:[],r:'National',f:true,d:'Part-funded partnerships between a business and a university or research organisation, built around a specific innovation challenge.',u:'https://www.ukri.org/councils/innovate-uk/guidance-for-applicants/guidance-for-specific-funds/knowledge-transfer-partnership-guidance/'},
+{v:0,n:'Invention for Innovation (i4i), NIHR',c:'fund',s:['validate','fund'],sp:[],r:'National',f:true,d:'Funds innovations that have shown proof of concept and have a clear path to adoption and commercialisation.',u:'https://www.nihr.ac.uk/research-funding/funding-programmes/invention-for-innovation'},
+{n:'University of Birmingham KTP office',c:'com',s:['fund','commercialise'],sp:[],r:'West Midlands',f:true,d:'Three-way KTP projects in any academic field. The page states SMEs can expect 67% funding and larger companies 50%.',u:'https://www.birmingham.ac.uk/collaborate/business-engagement/knowledge-transfer-partnerships'},
+{n:'University of Nottingham KTP office',c:'com',s:['fund','commercialise'],sp:[],r:'East Midlands',f:true,d:'Three-way KTP projects led by a graduate KTP Associate, part-funded by Innovate UK. The university reports over 160 KTPs delivered.',u:'https://www.nottingham.ac.uk/workingwithbusiness/services/knowledge-transfer-partnerships.aspx'},
+{n:'NIHR Central and North West Midlands Commercial Research Delivery Centre',c:'com',s:['validate','commercialise'],sp:[],r:'West Midlands',f:false,d:'NHS trusts, GPs, universities and community partners delivering commercial research across Birmingham, Solihull, the Black Country, Staffordshire and Shropshire.',u:'https://bwc.nhs.uk/central-and-north-west-midlands-commercial-research-delivery-centre-crdc'},
+{n:'NIHR North Midlands Commercial Research Delivery Centre',c:'com',s:['validate','commercialise'],sp:[],r:'West Midlands',f:false,d:'One of the Commercial Research Delivery Centres set up in April 2025 to make commercial clinical research faster and easier to place. Hosted by UHNM.',u:'https://crdc-nm.nihr.ac.uk/about-us/'}];
+function el(id){return document.getElementById(id);}
+function esc(s){return String(s).replace(/[<>"]/g,function(c){return c==='<'?'\x26lt;':(c==='>'?'\x26gt;':'\x26quot;');});}
+function catName(id){for(var i=0;i<CATS.length;i++){if(CATS[i].id===id){return CATS[i].t;}}return '';}
+function stageName(id){for(var i=0;i<STAGES.length;i++){if(STAGES[i].id===id){return STAGES[i].t;}}return '';}
+function mono(n){var w=n.replace(/^NIHR /,'').split(/[\s,]+/).filter(function(x){return /^[A-Z]/.test(x);});return ((w[0]||'')[0]||'')+((w[1]||'')[0]||'');}
+function opts(sel,list,all){var h='<option value="">'+all+'</option>';list.forEach(function(x){h+='<option value="'+esc(x.id||x)+'">'+esc(x.t||x)+'</option>';});el(sel).innerHTML=h;}
+opts('tis-f-cat',CATS,'All types');opts('tis-f-stage',STAGES,'All stages');opts('tis-f-spec',SPECS,'All specialities');opts('tis-f-reg',REGIONS,'All regions');
+var ARR=' <span class="arrow">\x26rarr;</span>';
+var ch='';CATS.forEach(function(c){var n=O.filter(function(o){return o.c===c.id;}).length;ch+='<button class="cat rv" type="button" data-cat="'+c.id+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+c.i+'</svg><h3>'+esc(c.t)+'</h3><p>'+esc(c.d)+'</p><span class="n">'+(n?n+' verified organisation'+(n>1?'s':''):'Verified listings to be added')+'</span><span class="more">Explore'+ARR+'</span></button>';});el('tis-cats').innerHTML=ch;
+var ph='';STAGES.forEach(function(s,i){var n=O.filter(function(o){return o.s.indexOf(s.id)>=0;}).length;ph+='<li><button type="button" data-stage="'+s.id+'"><span class="dot">0'+(i+1)+'</span><b>'+s.t+'</b><small>'+s.d+'</small><span class="ct">'+n+' organisations'+ARR+'</span></button></li>';});el('tis-path').innerHTML=ph;
+function match(o){var q=el('tis-q').value.trim().toLowerCase(),c=el('tis-f-cat').value,s=el('tis-f-stage').value,sp=el('tis-f-spec').value,r=el('tis-f-reg').value;
+if(c){if(o.c!==c){return false;}}if(s){if(o.s.indexOf(s)<0){return false;}}if(sp){if(o.sp.indexOf(sp)<0){return false;}}
+if(r){var ok=o.r===r;if(r==='Midlands'){ok=/Midlands/.test(o.r);}if(!ok){return false;}}if(el('tis-f-fund').checked){if(!o.f){return false;}}
+if(q){var hay=(o.n+' '+o.d+' '+catName(o.c)+' '+o.sp.join(' ')+' '+o.r).toLowerCase();if(hay.indexOf(q)<0){return false;}}return true;}
+function render(){var list=O.filter(match),h='';
+list.forEach(function(o){var i=O.indexOf(o);h+='<article class="org"><div class="top"><span class="mono" aria-hidden="true">'+esc(mono(o.n))+'</span><div><div class="c">'+esc(catName(o.c))+'</div><h3>'+esc(o.n)+'</h3></div></div><p>'+esc(o.d)+'</p><div class="chips"><span class="chip r">'+esc(o.r)+'</span>'+o.s.map(function(x){return '<span class="chip">'+stageName(x)+'</span>';}).join('')+'</div><button class="btn btn-teal" type="button" data-o="'+i+'">View profile'+ARR+'</button></article>';});
+var cat=el('tis-f-cat').value;
+if(!list.length){h='<div class="empty" style="grid-column:1/-1">'+(cat==='acc'?'No accelerators or incubators are listed yet. Each one is added only after its own page has been read.':'No organisation matches all of these filters. Clear a filter to widen the search.')+'</div>';}
+el('tis-orgs').innerHTML=h;el('tis-count').textContent=list.length+' of '+O.length+' organisations';
+var st=el('tis-f-stage').value;[].forEach.call(document.querySelectorAll('#tis-path button'),function(b){b.classList.toggle('on',b.getAttribute('data-stage')===st);});}
+['tis-q','tis-f-cat','tis-f-stage','tis-f-spec','tis-f-reg','tis-f-fund'].forEach(function(id){el(id).addEventListener(id==='tis-q'?'input':'change',render);});
+el('tis-reset').addEventListener('click',function(){el('tis-q').value='';['tis-f-cat','tis-f-stage','tis-f-spec','tis-f-reg'].forEach(function(id){el(id).value='';});el('tis-f-fund').checked=false;render();});
+function go(){el('tis-explore').scrollIntoView({behavior:'smooth',block:'start'});}
+el('tis-cats').addEventListener('click',function(e){var b=e.target.closest('[data-cat]');if(!b){return;}el('tis-f-cat').value=b.getAttribute('data-cat');el('tis-f-stage').value='';render();go();});
+el('tis-path').addEventListener('click',function(e){var b=e.target.closest('[data-stage]');if(!b){return;}el('tis-f-stage').value=b.getAttribute('data-stage');render();go();});
+var last=null;
+function row(k,v){return '<div><dt>'+k+'</dt><dd>'+(v?v:'<span class="tbc">To be confirmed</span>')+'</dd></div>';}
+function open(i){var o=O[i];last=document.activeElement;
+el('tis-d').innerHTML='<span class="eyebrow">'+esc(catName(o.c))+'</span><h3 id="tis-d-h">'+esc(o.n)+'</h3><dl>'+row('Overview',esc(o.d))+row('Areas of expertise',o.sp.length?esc(o.sp.join(', ')):'')+row('Innovation stages supported',o.s.map(stageName).join(', '))+row('Geographic coverage',esc(o.r))+row('Funding offered',o.f?'Yes':'')+row('Who they support','')+row('Application or eligibility','')+row('Website','<a href="'+esc(o.u)+'" target="_blank" rel="noopener">Visit their page'+ARR+'</a>')+row('Source',o.v===0?'Carried over from the earlier draft of this page; not yet re-read.':'Read from the organisation\x27s own page on '+READ+'.')+'</dl>';
+el('tis-drawer').classList.add('on');el('tis-scrim').classList.add('on');el('tis-drawer').focus();}
+function shut(){el('tis-drawer').classList.remove('on');el('tis-scrim').classList.remove('on');if(last){last.focus();}}
+el('tis-orgs').addEventListener('click',function(e){var b=e.target.closest('[data-o]');if(b){open(+b.getAttribute('data-o'));}});
+el('tis-x').addEventListener('click',shut);el('tis-scrim').addEventListener('click',shut);
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){shut();}});
+render();
+var nav=root.querySelector('.snav');window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
+var items=root.querySelectorAll('.rv');
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('shown');io.unobserve(x.target);}});},{threshold:.12});[].forEach.call(items,function(x){io.observe(x);});}else{[].forEach.call(items,function(x){x.classList.add('shown');});}
+setTimeout(function(){[].forEach.call(items,function(x){x.classList.add('shown');});},2500);
+})();
+</script>
+<!-- /wp:html -->
