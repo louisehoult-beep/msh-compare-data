@@ -120,6 +120,13 @@ for d in range(0, 28, 7):
         except Exception as e:  # noqa: BLE001
             fails.append("real data %s %s: %r" % (sl, day, e))
 
+# A lower-case multi-word "supplier" is a fragment of the notice text, never a company name (16/11 sample).
+AW = {"title": "Training", "url": "https://example.org/aw", "date": "2026-10-23", "buyer": "A Trust", "isFramework": False}
+bad = wb.render_html(wb.build(M, TODAY, Fake(awards=[dict(AW, supplier="york and scarborough")])))
+good = wb.render_html(wb.build(M, TODAY, Fake(awards=[dict(AW, supplier="Lakeside Healthcare")])))
+check("fragment supplier not shown as a supplier", "york and scarborough" not in bad and "Supplier not named" in bad)
+check("real supplier still shown", "Supplier: Lakeside Healthcare." in good)
+
 # The shadow scorecard: test profiles only, sends nothing, and refuses to write into this public repo.
 sys.path.insert(0, os.path.join(HERE, "scripts"))
 import personal_alerts_shadow as shadow  # noqa: E402

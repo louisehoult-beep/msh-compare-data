@@ -124,6 +124,16 @@ def _norm_title(t):
     return re.sub(r"[^a-z0-9]+", " ", str(t).lower()).strip()
 
 
+def _supplier(s):
+    """The supplier as the notice names it, or the not-named line. A multi-word name in all lower case is a
+    fragment lifted from the notice text (the 16/11 sample showed 'york and scarborough' as a supplier), not a
+    registered name, so it is never shown as one."""
+    s = str(s or "").strip()
+    if not s or (" " in s and s == s.lower()):
+        return "Supplier not named on the notice"
+    return s
+
+
 def _clean_title(t):
     return re.sub(r"\s*[\u2013-]\s*Full Text\s*$", "", str(t)).strip()
 
@@ -180,7 +190,7 @@ def speciality_section(data, slug, today):
         if not a.get("isFramework") and _in_window(a.get("date"), today) and _safe_url(a.get("url")):
             sec["awards"].append({
                 "title": a.get("title", ""), "url": a["url"], "date": a["date"],
-                "buyer": a.get("buyer") or "", "supplier": a.get("supplier") or "Supplier not named on the notice",
+                "buyer": a.get("buyer") or "", "supplier": _supplier(a.get("supplier")),
             })
     for u in (panel.get("mhraDsu") or {}).get("updates", []) or []:
         if _in_window(u.get("published"), today) and _safe_url(u.get("url")):
