@@ -80,7 +80,7 @@
 
   var EMPHASIS = {
     grant: {
-      2: 'A grant assessor is testing whether the problem is real, sized and someone else’s published figure — not yours.',
+      2: 'A grant assessor is testing whether the problem is real, sized and someone else’s published figure, not yours.',
       3: 'A grant assessor is testing whether you know who already holds this ground, because an unmet need with four incumbents is not an unmet need.',
       4: 'A grant assessor is testing whether there is a lawful route to a paying NHS customer at the end of the project.',
       5: 'A grant assessor is testing whether you know who has to say yes, by role, not by name.',
@@ -91,7 +91,7 @@
       2: 'An investor is testing the size of the prize and whether the figure comes from somewhere they can check.',
       3: 'An investor is testing who you displace, how entrenched they are, and what their NHS contract history says about how hard that will be.',
       4: 'An investor is testing time to revenue: which framework, when it reopens, and what happens if you miss that window.',
-      5: 'An investor is testing length of sales cycle — how many people have to agree before money moves.',
+      5: 'An investor is testing length of sales cycle: how many people have to agree before money moves.',
       6: 'An investor is testing whether there is live demand they can see for themselves.',
       7: 'This is the slide. Everything above it is why it is credible.'
     }
@@ -116,12 +116,44 @@
     + '.inr .emph{font:italic 14px/1.5 Georgia,serif;color:' + DEEP + ';border-left:4px solid ' + GOLD + ';padding:2px 0 2px 12px;margin:0 0 14px}'
     + '.inr table{border-collapse:collapse;width:100%;font:13px/1.45 Helvetica,Arial,sans-serif;margin:6px 0}'
     + '.inr th,.inr td{padding:6px 8px;border-bottom:1px solid #d8d2c4;text-align:left;vertical-align:top}'
+    + '.inr tr:nth-child(even) td{background:rgba(255,255,255,.55)}.inr .warm tr:nth-child(even) td{background:rgba(255,255,255,.45)}'
     + '.inr th{background:' + DEEP + ';color:#fff;font-weight:700}.inr td.n,.inr th.n{text-align:right;white-space:nowrap}'
     + '.inr a{color:' + DEEP + '}.inr .dark a,.inr .wine a{color:' + GOLDL + '}'
-    + '.inr .kpis{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0}'
-    + '.inr .kpi{border-left:4px solid ' + GOLD + ';padding:4px 12px;min-width:160px;flex:1 1 180px}'
-    + '.inr .kpi b{display:block;font:700 24px Georgia,serif;color:' + NAVY + '}'
-    + '.inr .dark .kpi b{color:' + GOLDL + '}.inr .kpi span{font:12px/1.4 Helvetica,Arial,sans-serif;display:block}'
+    + '.inr .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0 18px}'
+    + '.inr .kpi{background:#fff;border:1px solid #d8d2c4;border-top:4px solid ' + GOLD + ';padding:12px 14px;'
+    + 'box-shadow:0 1px 2px rgba(14,27,48,.06);break-inside:avoid}'
+    + '.inr .kpi b{display:block;font:700 26px/1.15 Georgia,serif;color:' + NAVY + ';margin-bottom:4px}'
+    + '.inr .kpi span{font:12px/1.45 Helvetica,Arial,sans-serif;display:block;color:#39424d}'
+    /* Section heads: a numbered badge so a reader can find "section 4" in a printed copy. */
+    + '.inr h2 .sn{display:inline-block;min-width:1.6em;height:1.6em;line-height:1.6em;text-align:center;'
+    + 'background:' + NAVY + ';color:' + GOLDL + ';border-radius:50%;font:700 17px/1.6em Helvetica,Arial,sans-serif;'
+    + 'margin-right:12px;vertical-align:4px}'
+    + '.inr .dark h2 .sn,.inr .wine h2 .sn{background:' + GOLD + ';color:#fff}'
+    + '.inr .band>.col>.eyebrow{display:inline-block;border-bottom:2px solid ' + GOLD + ';padding-bottom:4px}'
+    /* At a glance: the five picks, read back as the figures each section will show. */
+    + '.inr .glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:20px 0 6px}'
+    + '.inr .gl{display:block;text-decoration:none;background:rgba(255,255,255,.06);border:1px solid rgba(224,190,142,.35);'
+    + 'border-left:4px solid ' + GOLD + ';padding:12px 14px;transition:background .15s}'
+    + '.inr .gl:hover{background:rgba(255,255,255,.12)}'
+    + '.inr .dark .gl b{display:block;font:700 24px/1.2 Georgia,serif;color:' + GOLDL + '!important;margin-bottom:4px}'
+    + '.inr .dark .gl span{display:block;font:12px/1.45 Helvetica,Arial,sans-serif;color:#F5F1E8}'
+    + '.inr .dark .gl i{display:block;font:700 10px/1.3 Helvetica,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;'
+    + 'font-style:normal;color:' + GOLDL + '!important;margin-top:8px}'
+    + '.inr .toc{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}'
+    + '.inr .toc a{display:inline-block;font:700 12px/1 Helvetica,Arial,sans-serif;color:#F5F1E8;text-decoration:none;'
+    + 'border:1px solid rgba(224,190,142,.5);border-radius:20px;padding:8px 12px}'
+    + '.inr .toc a:hover{background:' + GOLD + ';border-color:' + GOLD + '}'
+    + '.inr .more-rows{display:none}.inr .showall .more-rows{display:table-row}'
+    + '.inr .tgl{background:#fff;color:' + DEEP + ';border:1px solid ' + DEEP + ';font:700 13px Helvetica,Arial,sans-serif;padding:8px 14px;margin:8px 0 0}'
+    + '.inr .soft{color:#8a8578;font-style:italic}'
+    + '@media(max-width:640px){.inr h1{font-size:26px}.inr h2{font-size:21px}'
+    + '.inr table.stack,.inr table.stack tbody,.inr table.stack tr,.inr table.stack td{display:block;width:100%}'
+    + '.inr table.stack tr:first-child{display:none}'
+    + '.inr table.stack tr{border:1px solid #d8d2c4;background:#fff;margin:0 0 10px;padding:6px 10px}'
+    + '.inr table.stack td{border:0;padding:4px 0;text-align:left!important;white-space:normal!important}'
+    + '.inr table.stack td[data-label]:before{content:attr(data-label);display:block;font:700 10px/1.4 Helvetica,Arial,sans-serif;'
+    + 'letter-spacing:.08em;text-transform:uppercase;color:#6b6556}'
+    + '.inr table.stack tr.more-rows{display:none}.inr .showall table.stack tr.more-rows{display:block}.inr .scroll{overflow:visible}}'
     + '.inr .nv{color:#7A1F1F;font-weight:700}.inr .dark .nv{color:' + GOLDL + '}'
     + '.inr .src{font:11px/1.4 Helvetica,Arial,sans-serif;color:#39424d}'
     + '.inr .note{font:12px/1.55 Helvetica,Arial,sans-serif;color:#39424d}'
@@ -163,14 +195,16 @@
     + '.inr .pick{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:16px 0}'
     + '.inr .foot{font:12px/1.6 Helvetica,Arial,sans-serif}'
     + '@media print{.inr .pick,.inr button,.inr .noprint{display:none!important}'
-    + '.inr .band{padding:14px 0;break-inside:avoid}.inr .col{max-width:none;padding:0 10mm}'
+    + '.inr .band{padding:14px 0}.inr .kpis,.inr .glance,.inr .rg-grid{break-inside:avoid}.inr .col{max-width:none;padding:0 10mm}'
     + '.inr .dark,.inr .wine,.inr .warm,.inr .mine>.lab,.inr th{-webkit-print-color-adjust:exact;print-color-adjust:exact}'
     /* The .ask line coaches the innovator while they write. It is not content a grant
        assessor should read, so it stays on screen and in the saved copy (which is still
        editable) but drops out of the print. Not .noprint: save() strips those outright. */
     + '.inr .mine>.ask{display:none}'
     + '.inr h2{break-after:avoid}.inr table{font-size:10pt}.inr a{text-decoration:none}'
-    + '.inr .mine{break-inside:avoid}}';
+    + '.inr .mine{break-inside:avoid}.inr .more-rows{display:table-row!important}'
+    + '.inr .kpi,.inr .gl{box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}'
+    + '.inr .toc,.inr .tgl{display:none!important}.inr tr{break-inside:avoid}}';
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -302,8 +336,9 @@
   /* ------------------------------------------------------------------ blocks */
 
   function sec(cls, n, eyebrow, title, body) {
-    return '<div class="band ' + cls + '"><div class="col"><div class="eyebrow">' + esc(eyebrow)
-      + '</div><h2>' + n + ' · ' + esc(title) + '</h2>' + body + '</div></div>';
+    return '<div class="band ' + cls + '" id="inr-s' + n + '"><div class="col"><div class="eyebrow">'
+      + esc(eyebrow) + '</div><h2><span class="sn">' + n + '</span>' + esc(title) + '</h2>' + body
+      + '</div></div>';
   }
   function evidence(label, body) {
     return '<div class="ev"><div class="evlab">Hub evidence · ' + label + '</div>' + body + '</div>';
@@ -321,14 +356,14 @@
     var problems = [];
     if (P && P.P) {
       for (var i = 0; i < P.P.length && problems.length < 6; i++) {
-        if (P.P[i].s === st.spec) problems.push(P.P[i].n + ' — ' + P.P[i].p);
+        if (P.P[i].s === st.spec) problems.push(P.P[i].n + ': ' + P.P[i].p);
       }
     }
     var prompt = problems.length
       ? evidence(asOf(B.generatedOn),
           '<p class="note">The problems the Hub already holds for ' + esc(specLabel(st.spec))
           + ', from the Stakeholder Mapper’s product list. These are here to show you the '
-          + 'level a buyer expects a problem stated at. <b>They are not your problem</b> — '
+          + 'level a buyer expects a problem stated at. <b>They are not your problem</b>: '
           + 'write your own in the box below.</p><ul class="note">'
           + problems.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('')
           + '</ul><p class="src">Source: data/products.json, the Hub’s own product and problem '
@@ -336,15 +371,15 @@
       : '';
     return prompt
       + mine(st.org, 'In one sentence, what is it? Name the product, what it does and who uses it. '
-        + 'No adjectives — a reader who has never heard of you has to be able to repeat it back.',
+        + 'No adjectives: a reader who has never heard of you has to be able to repeat it back.',
         'One sentence. What it is, what it does, who uses it.', 'inr-w1')
       + mine(st.org, 'What is the clinical problem? State it as the NHS would recognise it: the '
         + 'harm, the delay or the cost that happens today, in the pathway where it happens.',
         'The problem as a clinician or a commissioner would state it.', 'inr-w2')
       + mine(st.org, 'What is your claimed benefit, and what is it measured against? Give the '
         + 'comparator and the effect size you are claiming. If you do not have one yet, say so '
-        + 'here — a stated gap reads better than a number you cannot evidence.',
-        'The claim, the comparator, the effect size — or the honest statement that you do not have it yet.', 'inr-w3')
+        + 'here. A stated gap reads better than a number you cannot evidence.',
+        'The claim, the comparator, the effect size, or the honest statement that you do not have it yet.', 'inr-w3')
       + '<p class="note"><b>Product type:</b> ' + esc(t.label) + ' · <b>Stage:</b> '
       + esc(stageLabel(st.stage)) + ' · <b>Speciality:</b> ' + esc(specLabel(st.spec))
       + ' · <b>Geography:</b> ' + esc(geoLabel(st)) + '. These are the five answers this '
@@ -401,7 +436,7 @@
           + '<p class="src">Source: the Hub’s ' + link(B.hubPages.evidence, 'Clinical Evidence Library')
           + ', band “' + esc(hi.band_title || band) + '”, area “' + esc(hi.area || '')
           + '”, as held in data/products.json. ' + asOf(B.generatedOn) + '. These are '
-          + 'published studies with their own citations — cite the study, not this report.</p>';
+          + 'published studies with their own citations: cite the study, not this report.</p>';
       } else {
         out += '<p><span class="nv">' + NV + '</span>: the Hub holds no Clinical Evidence Library '
           + 'band for ' + esc(specLabel(st.spec)) + ' yet, so no burden figure is shown and none '
@@ -485,7 +520,7 @@
         + 'Hub’s ' + link(B.hubPages.competitors, 'Who Are the Competitors?') + ' page and its '
         + link(B.hubPages.suppliers, 'Suppliers') + ' directory are where the researched sets live.</p>';
     } else {
-      var rows = sp.suppliers || [];
+      var rows = sp.suppliers || [], TOP = 10;
       out += '<div class="kpis">'
         + '<div class="kpi"><b>' + num(sp.supplierCount) + '</b><span>companies the Hub holds in '
         + 'the researched ' + esc(sp.label) + ' supplier set</span></div>'
@@ -501,12 +536,12 @@
       out += '<p class="note"><b>Read this table as: how established is this company as an '
         + 'NHS supplier.</b> The award columns are every NHS award row the Hub holds for that '
         + 'legal entity <b>in any speciality</b>, not only in ' + esc(sp.label) + '. A large '
-        + 'supplier’s most recent award will often be nothing to do with your product — '
-        + 'that is the point: it is who you are competing with for a buyer’s attention.</p>';
-      out += '<div class="scroll"><table><tr><th>Company (legal entity)</th><th>Brands</th>'
+        + 'supplier’s most recent award will often be nothing to do with your product. '
+        + 'That is the point: it is who you are competing with for a buyer’s attention.</p>';
+      out += '<div class="scroll" id="inr-s3t"><table><tr><th>Company (legal entity)</th><th>Brands</th>'
         + '<th class="n">NHS award rows held, any speciality</th>'
         + '<th>Most recent NHS award row, any speciality</th></tr>'
-        + rows.map(function (r) {
+        + rows.map(function (r, ri) {
           var last = r.awards && r.awards[0];
           var cell;
           if (!r.matched) {
@@ -518,12 +553,23 @@
               + esc(ukdate(last.date)) + ' · ' + (last.valueAmount == null ? 'value not published'
               : money(last.valueAmount)) + ' · ' + link(last.url, last.source || 'notice') + '</span>';
           }
-          return '<tr><td>' + (r.url ? link(r.url, r.co) : esc(r.co || NV))
+          /* The brands field is a full sentence when no brand is held. In a 40-row table
+             that sentence repeated is noise: the cell says "Not verified" and the note under
+             the table carries the rest. */
+          var br = !r.brands || /^Not verified/.test(r.brands)
+            ? '<span class="soft">Not verified</span>' : esc(r.brands);
+          return '<tr' + (ri >= TOP ? ' class="more-rows"' : '') + '><td>'
+            + (r.url ? link(r.url, r.co) : esc(r.co || NV))
             + (r.ref && r.ref !== r.co ? '<br><span class="src">Hub master record: ' + esc(r.ref) + '</span>' : '')
-            + '</td><td>' + esc(r.brands || NV) + '</td>'
+            + '</td><td>' + br + '</td>'
             + '<td class="n">' + num(r.awardCount) + '</td><td>' + cell + '</td></tr>';
-        }).join('') + '</table></div>';
-      out += '<p class="src">Most contracted first. The supplier set is the Hub’s own '
+        }).join('') + '</table></div>'
+        + (rows.length > TOP ? '<button type="button" class="tgl" data-tgl="inr-s3t">Show all '
+          + rows.length + ' companies</button>' : '');
+      out += '<p class="src">Most contracted first'
+        + (rows.length > TOP ? '; the ' + TOP + ' most contracted show on screen, every row prints' : '')
+        + '. “Not verified” under Brands means the Hub has not yet captured brand-level detail '
+        + 'for that company: see the supplier’s own site. The supplier set is the Hub’s own '
         + 'researched set for this speciality (data/compare-suppliers.json, human-curated, '
         + 'verified ' + esc((B.sources['compare-suppliers.json'] || {}).verifiedOn || NV)
         + '); every framework name, its dates and its supplier list come from that framework’s '
@@ -559,7 +605,7 @@
         + 'a digital Common Procurement Vocabulary (CPV) code, Open Government Licence, '
         + asOf(parseUk((B.sources['company-digital-awards.json'] || {}).dataAsOf)) + '. '
         + 'This is a competitor set built from who has actually won a digital NHS contract, not '
-        + 'from who is listed on a framework — ' + esc(B.digitalArmRule) + '</p>';
+        + 'from who is listed on a framework. ' + esc(B.digitalArmRule) + '</p>';
     }
     return out;
   }
@@ -619,7 +665,7 @@
     if (sp && (sp.route || []).length) {
       out += '<h3>What the Hub records about the route itself</h3><ul class="note">'
         + sp.route.map(function (r) {
-          return '<li>' + link(r.url, r.name) + ' — ' + esc(r.dates || NV)
+          return '<li>' + link(r.url, r.name) + ', ' + esc(r.dates || NV)
             + (r.note ? '. ' + esc(r.note) : '') + '</li>';
         }).join('') + '</ul>'
         + '<p class="src">Source: data/compare-suppliers.json, the Hub’s curated route per '
@@ -639,7 +685,7 @@
             + '</td><td>' + esc(f.agreementType || NV) + '</td>'
             + '<td class="n">' + num(f.supplierCount || null) + '</td></tr>';
         }).join('') + '</table></div>'
-        + '<p class="src">Source: data/digital-frameworks.json — '
+        + '<p class="src">Source: data/digital-frameworks.json: '
         + esc((B.sources['digital-frameworks.json'] || {}).source || NV) + ', '
         + asOf((B.sources['digital-frameworks.json'] || {}).dataAsOf) + '. Supplier counts are the '
         + 'sum of each agreement’s lot supplier lists as published on its own page; the lists '
@@ -656,7 +702,7 @@
             + '</td><td>' + esc(r.regime || NV) + '</td></tr>';
         }).join('') + '</table></div>'
         + '<p class="src">' + ob.length + ' of ' + (B.otherBodies || []).length + ' other-body '
-        + 'framework rows. Source: data/framework-directory-extra.json — '
+        + 'framework rows. Source: data/framework-directory-extra.json: '
         + esc((B.sources['framework-directory-extra.json'] || {}).checkedAt || NV) + '. '
         + esc(B.digitalRule) + '</p>';
     } else {
@@ -707,6 +753,7 @@
   ];
   /* icb-watch writes board roles as bare keys. These are the only two it uses. */
   var BOARD_ROLE = { chair: 'Chair', ceo: 'Chief Executive' };
+  var ROLE_WORDS = { cfo: 'Chief Finance Officer', cmo: 'Chief Medical Officer', cno: 'Chief Nursing Officer' };
   function boardRole(r) { return BOARD_ROLE[r] || r; }
 
   function clusterOf(code) {
@@ -764,7 +811,7 @@
         + esc(t.label.toLowerCase())
         + (extra ? ', plus the ' + esc(((B.stakeholderRoles || {})[extra] || {}).role || extra)
           + ' role, which the mapper adds for products in this speciality' : '')
-        + '. These are roles, not named people — the names are yours to find and go in the box below.</p>';
+        + '. These are roles, not named people. The names are yours to find and go in the box below.</p>';
       out += glossaryFor(all);
       var risky = all.filter(function (k) { return ((B.stakeholderRoles || {})[k] || {}).risk; });
       if (risky.length) {
@@ -780,9 +827,9 @@
     if (!ICB) {
       out += gapNote('data/icb-watch.json', parseUk((B.sources['icb-watch.json'] || {}).asOf));
     } else if (st.geo === 'national') {
-      out += '<p class="note">No named leaders are listed because the geography selected is '
+      out += '<p class="note">No ICB roles are listed because the geography selected is '
         + 'England, national. Pick an Integrated Care Board (ICB) above to list its board and '
-        + 'executives, each with the page they were read from. There are ' + num(ICB.count)
+        + 'executive roles, each with the page they were read from. There are ' + num(ICB.count)
         + ' ICBs in England, counted from '
         + link(ICB.countSource, 'the NHS Organisation Data Service directory')
         + '.</p><p class="src">Source: data/icb-watch.json, '
@@ -795,9 +842,10 @@
         var ld = (m.leaders || []).map(function (l) {
           return '<tr><td>' + esc(boardRole(l.role))
             + (l.qualifier ? ' <span class="src">(' + esc(l.qualifier) + ')</span>' : '')
-            + '</td><td>' + esc(l.name) + '</td><td>'
+            + '</td><td>'
             + link(m.leadersSource, 'NHS England, integrated care in your area') + '</td>'
-            + '<td><span class="src">—</span></td></tr>';
+            + '<td><span class="src">' + (ICB.leadersCheckedOn ? 'read ' + esc(ukdate(ICB.leadersCheckedOn))
+              : NV) + '</span></td></tr>';
         });
         /* Executives are grouped by role family so the finance people sit together, and
            a name whose last sighting is older than the Hub's own last sweep is flagged:
@@ -812,26 +860,41 @@
           var stale = swept && e.lastSeen && e.lastSeen < swept;
           return '<tr><td>' + esc(e.title)
             + (stale ? '<br><span class="nv">Not listed in the Hub’s latest sweep.</span>' : '')
-            + '</td><td>' + esc(e.name) + '</td><td>'
+            + '</td><td>'
             + link(e.url, 'the ICB’s own leadership page') + '</td>'
             + '<td><span class="src">first seen ' + esc(ukdate(e.firstSeen)) + ', last seen '
             + esc(ukdate(e.lastSeen))
             + (stale ? '; the Hub last swept this page ' + esc(ukdate(swept))
-              + ', so this name was not on it then' : '')
+              + ', so this post-holder was not on it then' : '')
             + '</span></td></tr>';
         });
         out += '<p><b>' + esc(m.name) + '</b> (' + esc(m.code) + '), ' + esc(m.region || NV)
           + (m.legalStart ? ', legally established ' + esc(ukdate(m.legalStart)) : '') + '.</p>';
         out += (ld.length || ex.length)
-          ? '<div class="scroll"><table><tr><th>Role</th><th>Name</th><th>Read from</th>'
+          ? '<div class="scroll"><table><tr><th>Role</th><th>Read from</th>'
             + '<th>When</th></tr>' + ld.join('') + ex.join('') + '</table></div>'
+            + '<p class="note">Roles only. The report names no individuals: post-holders change '
+            + 'and the linked page is always the current one, so read the names there.</p>'
           : '<p><span class="nv">' + NV + '</span>: no leaders or executives are held for this ICB.</p>';
         var evs = (ICB.events || []).filter(function (e) { return e.icb === m.code; });
         if (evs.length) {
-          out += '<h3>Leadership changes the Hub has recorded here</h3><ul class="note">'
+          out += '<h3>Changes the Hub has recorded here</h3><ul class="note">'
             + evs.map(function (e) {
-              return '<li><b>' + esc(ukdate(e.date)) + '.</b> ' + esc(e.headline) + ' '
-                + esc(e.detail || '') + ' ' + (e.sources || []).map(function (u) {
+              /* A leadership event names the person in its headline and detail. The report
+                 names no individuals, so it keeps only the role and points at the page. */
+              var txt;
+              if (e.kind === 'leadership') {
+                txt = 'A change of ' + esc(boardRole(ROLE_WORDS[e.role] || e.role || 'post-holder'))
+                  + ' is recorded on the ICB’s own leadership page.';
+              } else {
+                /* Headline only: the detail lines quote minutes and name people. A name left in
+                   a headline ("Firstname Surname sits as...") is replaced by the role it holds. */
+                txt = esc(String(e.headline || '').replace(
+                  /:\s+(?:(?:Dr|Mr|Mrs|Ms|Prof)\.?\s+)?[A-Z][a-z'-]+\s+[A-Z][A-Za-z'-]+\s+(?=[a-z])/,
+                  ': a named post-holder ')) + '.';
+              }
+              return '<li><b>' + esc(ukdate(e.date)) + '.</b> ' + txt + ' '
+                + (e.sources || []).map(function (u) {
                   return link(u, 'source');
                 }).join(' ') + '</li>';
             }).join('') + '</ul>'
@@ -846,7 +909,7 @@
             + '. Separate legal entities, one executive team: work them as one account, not '
             + cl.length + '.</p>';
         }
-        out += '<p class="src">Source: data/icb-watch.json — each row read at the page named '
+        out += '<p class="src">Source: data/icb-watch.json: each row read at the page named '
           + 'beside it; board leaders from NHS England’s own list, executives from the '
           + 'ICB’s own leadership page. ' + asOf(parseUk(ICB.asOf)) + ', leaders re-read '
           + esc(ukdate(ICB.leadersCheckedOn)) + '.</p>';
@@ -947,7 +1010,7 @@
         + 'band and so no desk slug to match notices against. ' + esc(B.tenderSlugRule)
         + ' All ' + num((TEN.counts || {}).openNotices) + ' open notices in this reading are on the '
         + link(B.hubPages.frameworks, 'Frameworks, Tenders, Awards, Drug Tariff and Contracts')
-        + ' page — read them there rather than take a filtered list the Hub cannot stand behind.</p>';
+        + ' page. Read them there rather than take a filtered list the Hub cannot stand behind.</p>';
     } else {
       var ns = (TEN.notices || []).filter(function (n) { return n.speciality === slug; });
       if (!ns.length) {
@@ -1027,7 +1090,7 @@
               + (a.contractExtendedEnd ? ' (extendable to ' + esc(ukdate(a.contractExtendedEnd)) + ')' : '')
               + '</td><td class="n">' + num((a.noticeSuppliers || []).length) + '</td></tr>';
           }).join('') + '</table></div>'
-          + '<p class="src">Every pending award the Hub holds, across all specialities — a '
+          + '<p class="src">Every pending award the Hub holds, across all specialities. A '
           + 'framework that has been awarded but has not started is the one you can still plan '
           + 'around. Source: ' + esc(PEND.source || NV) + ', ' + asOf(parseUk(PEND.dataAsOf)) + '.</p>'
         : '<p>No award in the Hub’s set has been published but not yet started in this reading.</p>';
@@ -1042,7 +1105,7 @@
         + 'These are the most recent NHS award rows the Hub holds for the companies in the '
         + esc(sp.label) + ' competitor set, <b>across every speciality they sell into</b>. Many '
         + 'will have nothing to do with ' + esc(sp.label) + '. It is here to show how often these '
-        + 'companies are in front of NHS buyers and what else they are selling them — not to '
+        + 'companies are in front of NHS buyers and what else they are selling them, not to '
         + 'size your market. The market activity is the open tenders and pending awards above.</p>';
       var recent = [];
       (sp.suppliers || []).forEach(function (r) {
@@ -1133,7 +1196,7 @@
       + (st.org ? ' for ' + esc(st.org) : '')
       + '. Each section above carries its own “live as of” date, which is the date the '
       + 'source was read, not the date this report was opened. Where a source could not be read, '
-      + 'the section says so and shows the last good reading the Hub holds — nothing is '
+      + 'the section says so and shows the last good reading the Hub holds. Nothing is '
       + 'substituted and nothing is omitted silently.</p>';
     if (GAPS.length) {
       out += '<div class="gap"><b>' + GAPS.length + ' source'
@@ -1155,6 +1218,46 @@
     return out;
   }
 
+  /* At a glance. Each tile is a figure a section below prints, from the same source, read
+     back at the top so a change of picker shows at once what moved. Nothing here is new:
+     the tile names the section that carries the figure and its source. */
+  function glance(st) {
+    var sp = B.specialities[st.spec], fws = (sp && sp.frameworks) || [];
+    var slug = sp && sp.tenderSlug, spl = specLabel(st.spec);
+    var open = (TEN && slug) ? (TEN.notices || []).filter(function (n) { return n.speciality === slug; }).length : null;
+    var nvb = '<span class="nv">' + NV + '</span>';
+    function tile(n, big, txt) {
+      return '<a class="gl" href="#inr-s' + n + '"><b>' + big + '</b><span>' + txt + '</span>'
+        + '<i>Section ' + n + '</i></a>';
+    }
+    var t = [];
+    t.push(tile('3', sp ? num(sp.supplierCount) : nvb, sp
+      ? 'companies in the Hub’s researched ' + esc(spl) + ' supplier set, '
+        + num(sp.matchedCount) + ' with an NHS award row'
+      : 'the Hub holds no researched supplier set for ' + esc(spl) + ' yet'));
+    var f = fws[0];
+    t.push(tile('4', f ? (f.ends ? esc(f.ends) : nvb) : nvb, f
+      ? esc(f.name) + (f.ends ? ' runs to this date' : '') + (fws.length > 1 ? ', one of ' + fws.length + ' frameworks' : '')
+      : 'no NHS Supply Chain framework matched to ' + esc(spl)));
+    var RG = (B.regionalSupport || {}).regions || {}, m = st.geo === 'national' ? null : icbByCode(st.geo);
+    var R = m && RG[m.region];
+    if (R) {
+      var n = 0, hit = 0;
+      (R.groups || []).forEach(function (g) {
+        (g.rows || []).forEach(function (r) { n++; if ((r.specs || []).indexOf(st.spec) >= 0) hit++; });
+      });
+      t.push(tile('5', String(n), 'research and innovation bodies in ' + esc(m.region)
+        + (hit ? ', ' + hit + ' naming ' + esc(spl) : '')));
+    } else {
+      t.push(tile('5', m ? esc(m.code) : (ICB ? num(ICB.count) : nvb), m
+        ? esc(m.name) + ', its board and executives by role'
+        : 'Integrated Care Boards in England; pick one to see its roles'));
+    }
+    t.push(tile('6', open == null ? nvb : num(open), 'open tender notices carrying the '
+      + esc(spl) + ' tag in the Hub’s latest reading'));
+    return '<div class="glance">' + t.join('') + '</div>';
+  }
+
   /* ------------------------------------------------------------------ render */
 
   function render(st) {
@@ -1166,7 +1269,7 @@
     }).map(function (s) {
       var has = !!B.specialities[s.id];
       return '<option value="' + esc(s.id) + '"' + (s.id === st.spec ? ' selected' : '') + '>'
-        + esc(s.label) + (has ? '' : ' — no competitor set held') + '</option>';
+        + esc(specLabel(s.id)) + (has ? '' : ' (no competitor set held)') + '</option>';
     }).join('');
     var typeOpts = TYPES.map(function (t) {
       return '<option value="' + t.id + '"' + (t.id === st.type ? ' selected' : '') + '>'
@@ -1192,7 +1295,7 @@
     var head = '<div class="band dark"><div class="col">'
       + '<div class="eyebrow">Medical Sales Intelligence Hub · Innovator Market Analysis Report</div>'
       + '<h1 contenteditable="true" id="inr-title">' + esc(specLabel(st.spec))
-      + ' — NHS market analysis</h1>'
+      + ': NHS market analysis</h1>'
       + '<p>Eight sections of NHS market evidence for an early-stage innovator, generated '
       + today() + ' from the Hub’s own data. Every factual row carries its source link and '
       + 'the date that source was read. The boxes with a gold dashed border are yours to write: '
@@ -1208,7 +1311,13 @@
       + '<div><label for="inr-geo">Geography</label><select id="inr-geo">' + geoOpts + '</select></div>'
       + '<div><label for="inr-purpose">Purpose</label><select id="inr-purpose">' + purpOpts + '</select></div>'
       + '</div>'
-      + '<p><button id="inr-save" type="button">Save edited copy</button>'
+      + glance(st)
+      + '<ul class="toc noprint">' + [['1', 'Product and claim'], ['2', 'Market'], ['3', 'Who sells here'],
+        ['4', 'How it is bought'], ['5', 'Who decides'], ['6', 'Happening now'], ['7', 'Your gap'],
+        ['8', 'Sources']].map(function (x) {
+          return '<li><a href="#inr-s' + x[0] + '">' + x[0] + ' · ' + x[1] + '</a></li>';
+        }).join('') + '</ul>'
+      + '<p style="margin-top:18px"><button id="inr-save" type="button">Save edited copy</button>'
       + '<button id="inr-print" type="button">Print or save as PDF</button></p>'
       + '<p class="note noprint" style="color:#F5F1E8">Fill the gold boxes in, then save an edited '
       + 'copy: the download is a single file you can reopen, keep editing and print. Changing a '
@@ -1241,6 +1350,25 @@
   }
 
   function wire(st) {
+    /* Every table carries its column names on each cell, so on a phone the rows stack as
+       labelled cards instead of a strip a reader has to scroll sideways. */
+    [].forEach.call(MOUNT.querySelectorAll('table'), function (tb) {
+      var hs = [].map.call(tb.querySelectorAll('tr:first-child th'), function (h) { return h.textContent; });
+      if (!hs.length) return;
+      tb.classList.add('stack');
+      [].forEach.call(tb.querySelectorAll('tr'), function (tr) {
+        [].forEach.call(tr.children, function (td, i) {
+          if (td.tagName === 'TD' && hs[i]) td.setAttribute('data-label', hs[i]);
+        });
+      });
+    });
+    [].forEach.call(MOUNT.querySelectorAll('button[data-tgl]'), function (b) {
+      var box = document.getElementById(b.getAttribute('data-tgl')), lab = b.textContent;
+      b.onclick = function () {
+        var on = box.classList.toggle('showall');
+        b.textContent = on ? 'Show the top 10 only' : lab;
+      };
+    });
     function val(id) { var e = document.getElementById(id); return e ? e.value : ''; }
     function go() {
       var next = {
@@ -1279,8 +1407,10 @@
     [].forEach.call(page.querySelectorAll('.pick,button,.noprint'), function (n) {
       n.parentNode.removeChild(n);
     });
+    /* The toggle went with the buttons, so the saved copy shows every row. */
+    [].forEach.call(page.querySelectorAll('.scroll'), function (n) { n.classList.add('showall'); });
     var who = st.org ? st.org.replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase() : 'innovator';
-    var title = 'NHS market analysis — ' + specLabel(st.spec) + (st.org ? ' — ' + st.org : '');
+    var title = 'NHS market analysis: ' + specLabel(st.spec) + (st.org ? ', ' + st.org : '');
     var html = '<!doctype html><html lang="en-GB"><head><meta charset="utf-8">'
       + '<meta name="viewport" content="width=device-width,initial-scale=1">'
       + '<title>' + esc(title) + '</title>'
