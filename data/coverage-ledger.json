@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-11-15",
-  "differentiator.json published": 38981,
-  "differentiator.json held": 297542
+  "differentiator.json published": 38991,
+  "differentiator.json held": 297533
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 395,
-  "inScopeSuppliersNeedingCrawl": 209,
-  "inScopeSuppliersNeedingDomain": 197,
-  "suppliersRefused": 584,
+  "inScopeSuppliersNeedingCrawl": 210,
+  "inScopeSuppliersNeedingDomain": 198,
+  "suppliersRefused": 582,
   "suppliersRefusedButPublishingElsewhere": 167,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
@@ -1625,8 +1625,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "11 March 2028",
    "suppliersAwarded": 122,
-   "suppliersPublished": 40,
-   "coverage": 32.8,
+   "suppliersPublished": 41,
+   "coverage": 33.6,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -1636,12 +1636,8 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 122,
-   "coverageOfTarget": 32.8,
+   "coverageOfTarget": 33.6,
    "crawlWorklist": [
-    {
-     "supplier": "BHR Pharmaceuticals",
-     "domain": null
-    },
     {
      "supplier": "Immucor (IBG Immucor)",
      "domain": null
@@ -1794,7 +1790,6 @@
     "Advanced Global Health",
     "AttoLife",
     "BHA Medical",
-    "BHR Pharmaceuticals",
     "Barber of Sheffield",
     "Bio-Packaging",
     "Chirus",
@@ -2223,7 +2218,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 3,
-    "heldNeedingCategory": 10,
+    "heldNeedingCategory": 9,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -2238,6 +2233,7 @@
     "Appleton Woods",
     "Beckman Coulter",
     "BD \u2014 Becton, Dickinson",
+    "BHR Pharmaceuticals",
     "bioM\u00e9rieux UK",
     "Cepheid",
     "Coolmed",
@@ -2282,7 +2278,6 @@
     "Sychem"
    ],
    "heldOnly": [
-    "BHR Pharmaceuticals",
     "Critical Healthcare",
     "Immucor (IBG Immucor)",
     "Kinetik Medical Devices",
@@ -2363,7 +2358,7 @@
     "Wolf Laboratories"
    ],
    "unknown": [],
-   "actionableTotal": 43,
+   "actionableTotal": 42,
    "blockedReason": null,
    "deferred": null
   },
@@ -3070,6 +3065,10 @@
      "domain": null
     },
     {
+     "supplier": "Daylong Direct",
+     "domain": null
+    },
+    {
      "supplier": "Dynamic Metrics Ltd",
      "domain": null
     },
@@ -3094,6 +3093,7 @@
     "Beagle Orthopaedic Ltd",
     "Benefoot UK Ltd trading as BeneCare Medical",
     "Canonbury Products Limited",
+    "Daylong Direct",
     "Dynamic Metrics Ltd",
     "Firefly Orthoses NI Limited",
     "Medezine Ltd",
@@ -3170,13 +3170,6 @@
      "domain": "dacey.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-10-12",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Credenhill Ltd (trading as Daylong Direct)",
-     "domain": "daylongdirect.co.uk",
-     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 1 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-25",
      "bucket": "refused"
     },
     {
@@ -3338,7 +3331,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 7
+    "needDomain": 8
    },
    "published": [
     "Allard Support UK Limited",
@@ -3390,6 +3383,7 @@
    "notCrawled": [
     "Beagle Orthopaedic Ltd",
     "Benefoot UK Ltd trading as BeneCare Medical",
+    "Daylong Direct",
     "Dynamic Metrics Ltd",
     "Podopro UK Ltd",
     "Firefly Orthoses NI Limited",
@@ -3407,7 +3401,6 @@
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
     "Cuxson Gerrard & Company Limited",
     "Dacey LTD",
-    "Credenhill Ltd (trading as Daylong Direct)",
     "Hugh Steeper Limited",
     "Ken Hall Ltd",
     "Steroplast Healthcare Ltd",
@@ -3415,7 +3408,7 @@
     "Darco UK Ltd (formerly V-M Orthotics Ltd)"
    ],
    "unknown": [],
-   "actionableTotal": 18,
+   "actionableTotal": 19,
    "blockedReason": null,
    "deferred": null
   },
@@ -8153,9 +8146,14 @@
     {
      "supplier": "Sterimed Medical Implants UK Ltd",
      "domain": null
+    },
+    {
+     "supplier": "P.W.Coole & Son Limited T/A Surgical Holdings",
+     "domain": null
     }
    ],
    "domainsMissing": [
+    "P.W.Coole & Son Limited T/A Surgical Holdings",
     "Sterimed Medical Implants UK Ltd",
     "Surgica Limited"
    ],
@@ -8180,13 +8178,6 @@
      "domain": "www.jmmedical.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-27",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Surgical Holdings Limited",
-     "domain": "surgicalholdings.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-08",
      "bucket": "refused"
     },
     {
@@ -8338,7 +8329,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 1
+    "needDomain": 2
    },
    "published": [
     "Bolton Surgical Limited",
@@ -8375,17 +8366,17 @@
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Sterimed Medical Implants UK Ltd"
+    "Sterimed Medical Implants UK Ltd",
+    "P.W.Coole & Son Limited T/A Surgical Holdings"
    ],
    "refused": [
     "Elemental Healthcare Ltd",
     "Eurosurgical Ltd",
     "J & M Medical",
-    "Surgical Holdings Limited",
     "Toffeln Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 12,
+   "actionableTotal": 13,
    "blockedReason": null,
    "deferred": null
   },
@@ -15170,7 +15161,7 @@
      "domain": "rociallehealthcare.com"
     },
     {
-     "supplier": "Accrington Surgical Instrument Suppliers Ltd",
+     "supplier": "Accrington Surgical Inst. Suppliers",
      "domain": null
     },
     {
@@ -15187,7 +15178,7 @@
     }
    ],
    "domainsMissing": [
-    "Accrington Surgical Instrument Suppliers Ltd",
+    "Accrington Surgical Inst. Suppliers",
     "O&M Halyard Uk Limited",
     "Plasmic Healthsciences Uk Limited",
     "Vascular Perspectives Ltd"
@@ -15312,13 +15303,6 @@
      "reason": "the WooCommerce taxonomy captured is the company's own range navigation rather than a product list \u2014 the names are ranges and pack families (Orthopaedic, Ophthalmic, Cardio Thoracic, Surgical Gowns, Needle Holder, Scissors, Dental, Podiatry) and the division field carries the WordPress taxonomy labels Range / Products / Uncategorised rather than real divisions, so a capture would state 44 products where the site lists ranges",
      "checked": "2026-09-06",
      "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Accrington Surgical Instrument Suppliers Ltd",
-     "domain": "accringtonsurgical.co.uk",
-     "reason": "neither accringtonsurgical.co.uk nor www.accringtonsurgical.co.uk answered \u2014 the domain does not resolve or serves no usable certificate",
-     "checked": "2026-09-11",
-     "bucket": "refused"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
@@ -15362,7 +15346,7 @@
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Accrington Surgical Instrument Suppliers Ltd",
+    "Accrington Surgical Inst. Suppliers",
     "O&M Halyard Uk Limited",
     "Plasmic Healthsciences Uk Limited",
     "Vascular Perspectives Ltd"
