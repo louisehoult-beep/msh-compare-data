@@ -113,6 +113,7 @@ RUN = [
     # My Hub search modal mount in app/hub-search.js (my-hub task 9). Static, no network.
     "test_hub_search_embed.py",
     "test_search_private_desks.py",      # 18/11/2026, private company desks never in the public search index
+    "test_hub_search_findability.py",    # 18/11/2026, product searches reach the framework, Compare and pages (needs node)
     "test_digital_lane.py",              # 20/10/2026, digital health lane + Federated Data Platform profile
     "test_company_digital_awards.py",    # 20/10/2026, digital awards layer (own file, exact-only match)
     "test_company_key_info.py",          # 22/10/2026, My Hub company briefs: sourced, no confidential wording, Ego matches the panel

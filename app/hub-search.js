@@ -149,14 +149,45 @@
    * Both haystacks are space-padded at each end, so ' tok ' can only match a
    * complete word. The one intentional stretch is singular/plural: "reports"
    * finds "report" and vice versa. */
-  function hits(hay, tok) {
+  function hits(hay, tok, shay) {
     if (hay.indexOf(' ' + tok + ' ') !== -1) { return true; }
     if (tok.length > 3) {
       if (tok.charAt(tok.length - 1) === 's') {
         if (hay.indexOf(' ' + tok.slice(0, -1) + ' ') !== -1) { return true; }
       } else if (hay.indexOf(' ' + tok + 's ') !== -1) { return true; }
     }
+    if (shay && tok.length > 4) {
+      var st = stem(tok);
+      if (st.length > 3 && shay.indexOf(' ' + st + ' ') !== -1) { return true; }
+    }
     return false;
+  }
+
+  /* A LIGHT STEMMER, ADDED 18/11/2026. "stapling", "staples" and "stapled" are
+   * one word to a rep and three to the exact-word match above, so a query for
+   * one found nothing written with another ("surgical stapling" found three
+   * pages, none of them the Minimally Invasive Surgery framework whose Lot 3 is
+   * "Surgical Stapling Devices"). This strips plural, -ing, -ed and a final -e
+   * from words of five or more letters and leaves anything shorter alone.
+   *
+   * It is deliberately NOT a general suffix stripper: no -er, -ion, -al. -er would
+   * make "tender" match "tending" on the one word this Hub is about. "stapler"
+   * is handled by the concept groups below instead, where a human chose it. */
+  function stem(w) {
+    var s = String(w);
+    if (s.length < 5) { return s; }
+    if (/ies$/.test(s)) { return s.slice(0, -3) + 'y'; }
+    if (/[^s]s$/.test(s)) { s = s.slice(0, -1); }
+    if (s.length >= 6 && /ing$/.test(s) && s.length - 3 >= 4) { s = s.slice(0, -3); }
+    else if (s.length >= 6 && /ed$/.test(s) && s.length - 2 >= 4) { s = s.slice(0, -2); }
+    if (s.length >= 5 && /e$/.test(s)) { s = s.slice(0, -1); }
+    return s;
+  }
+
+  function stemWords(text) {
+    var parts = String(text).split(' '), out = [], i;
+    for (i = 0; i < parts.length; i++) { if (parts[i]) { out.push(stem(parts[i])); } }
+    return ' ' + out.join(' ') + ' ';
   }
 
   /* Lowercased, space-padded copies are built once at load so a keystroke is a
@@ -166,30 +197,37 @@
     for (i = 0; i < doc.pages.length; i++) {
       p = doc.pages[i];
       p._t = ' ' + fold(p.t).toLowerCase() + ' ';
+      p._ts = stemWords(p._t);
       for (j = 0; j < p.sec.length; j++) {
         s = p.sec[j];
         s._h = ' ' + fold(s.h).toLowerCase() + ' ';
+        s._hs = stemWords(s._h);
         /* `w` is a bag of words, not prose: unique, alphabetised, stopwords
          * dropped. The index is served from a public repo, so it deliberately
          * carries nothing that can be read back as the Hub's paid content. That
          * is why there is no snippet under a result — do not add one by putting
          * text back in the index. */
         s._w = ' ' + fold(s.w).toLowerCase() + ' ';
+        s._ws = stemWords(s._w);
       }
     }
     for (i = 0; i < doc.records.length; i++) {
       doc.records[i]._t = ' ' + fold(doc.records[i].t).toLowerCase() + ' ';
       doc.records[i]._k = ' ' + fold(doc.records[i].k).toLowerCase() + ' ';
+      doc.records[i]._ts = stemWords(doc.records[i]._t);
+      doc.records[i]._ks = stemWords(doc.records[i]._k);
     }
     return doc;
   }
 
   function scorePage(p, toks, phrase) {
-    var s = 0, best = null, bestS = 0, i, j, sec, ss, covered = {}, tok;
+    var s = 0, best = null, bestS = 0, i, j, sec, ss, covered = {}, tok, secAll,
+        allSec = null, allS = 0, titleAll = toks.length > 0;
 
     if (phrase.length > 2 && p._t.indexOf(phrase) !== -1) { s += 140; }
     for (i = 0; i < toks.length; i++) {
-      if (hits(p._t, toks[i])) { s += 18; covered[toks[i]] = 1; }
+      if (hits(p._t, toks[i], p._ts)) { s += 18; covered[toks[i]] = 1; }
+      else { titleAll = false; }
     }
 
     for (j = 0; j < p.sec.length; j++) {
@@ -200,12 +238,15 @@
        * phrase left to find — which is exactly the property that stops the
        * index being readable. */
       if (phrase.length > 2 && sec._h.indexOf(phrase) !== -1) { ss += 90; }
+      secAll = toks.length > 0;
       for (i = 0; i < toks.length; i++) {
         tok = toks[i];
-        if (hits(sec._h, tok)) { ss += 12; covered[tok] = 1; }
-        else if (hits(sec._w, tok)) { ss += 6; covered[tok] = 1; }
+        if (hits(sec._h, tok, sec._hs)) { ss += 12; covered[tok] = 1; }
+        else if (hits(sec._w, tok, sec._ws)) { ss += 6; covered[tok] = 1; }
+        else { secAll = false; }
       }
       if (ss > bestS) { bestS = ss; best = sec; }
+      if (secAll && ss > allS) { allS = ss; allSec = sec; }
     }
 
     /* Score the BEST section, never the sum of all of them.
@@ -224,7 +265,11 @@
     for (i = 0; i < toks.length; i++) { if (!covered[toks[i]]) { all = false; } }
     if (all && toks.length) { s += 45; }
 
-    return { s: s, sec: best };
+    /* `allSec` is the best section that holds EVERY query word, or null. A
+     * concept's extra query counts only through it (or through a title that
+     * holds every word): words scattered across one big page are not an answer. */
+    return { s: s, sec: best, all: !!(all && toks.length), allSec: allSec, allS: allS,
+             titleAll: titleAll, titleS: s - bestS - (all && toks.length ? 45 : 0) };
   }
 
   function scoreRecord(r, toks, phrase) {
@@ -234,8 +279,8 @@
       else if (r._k.indexOf(phrase) !== -1) { s += 45; }
     }
     for (i = 0; i < toks.length; i++) {
-      if (hits(r._t, toks[i])) { s += 22; named = true; }
-      else if (hits(r._k, toks[i])) { s += 7; }
+      if (hits(r._t, toks[i], r._ts)) { s += 22; named = true; }
+      else if (hits(r._k, toks[i], r._ks)) { s += 7; }
     }
     /* A supplier record is one of 1,304 records (as at 07/09/2026) with names, aliases, specialities and
      * framework titles. One incidental keyword hit — "tender close april 2026"
@@ -275,19 +320,140 @@
     return '#:~:text=' + encodeURIComponent(words);
   }
 
+  /* CONCEPT GROUPS, ADDED 18/11/2026.
+   *
+   * A rep searches the PRODUCT ("surgical stapling", "sutures", "hernia mesh") and
+   * the Hub files the answer under the BUYING ROUTE and the speciality. Three
+   * words in the index never meet the three in the query, however well the
+   * words are matched, so this is a short list a human has curated, in the same
+   * spirit as SPECS below:
+   *
+   *   triggers  whole words or phrases in the query that start the group (matched
+   *             after stemming, so staple / staples / stapling / stapled all fire)
+   *   also      other ways the Hub writes the same thing. Each is searched as an
+   *             extra query and counts only when EVERY word of it is found, at
+   *             nine-tenths weight, so "minimally invasive surgery" cannot drag
+   *             in every page that mentions surgery.
+   *   boost     pages, tools and framework records a rep selling this should land
+   *             on, with the score they are lifted to. A key is a URL, or
+   *             'rec:' plus a record title. A boost that names something not in
+   *             the index does nothing: it never invents a result.
+   *
+   * It carries no Hub prose and no supplier names. Keep it short: every line is
+   * a judgement that this query means that route. */
+  var HUB = '/medical-sales-hub/';
+  var CONCEPTS = [
+    { id: 'closure',
+      triggers: ['stapler', 'stapling', 'staple', 'suture', 'stitch', 'wound closure',
+                 'skin closure', 'surgical closure', 'ethicon'],
+      also: ['minimally invasive surgery', 'surgical stapling devices', 'wound closure',
+             'surgical closure'],
+      steps: [['Find the framework and lot', HUB + 'tender-history/#frameworks',
+               'Which NHS Supply Chain framework buys this, and its lots.'],
+              ['Compare against a competitor', HUB + 'med-sales-tools/#view-compare',
+               'Side by side, with open recalls and supply gaps flagged.']],
+      boost: [['rec:Minimally Invasive Surgery, Related Equipment and Accessories', 92],
+              ['rec:Wound Closure', 88],
+              [HUB + 'theatres-and-surgical/', 76],
+              [HUB + 'med-sales-tools/#view-compare', 74],
+              [HUB + 'tender-history/', 70],
+              [HUB + 'colorectal-gi-and-endoscopy/', 56],
+              [HUB + 'build-your-network/', 52],
+              [HUB + 'supply-disruption-tracker/', 50]] },
+    { id: 'mesh',
+      triggers: ['mesh', 'hernia'],
+      also: ['surgical mesh', 'hernia mesh', 'minimally invasive surgery'],
+      steps: [['Find the framework and lot', HUB + 'tender-history/#frameworks',
+               'Which NHS Supply Chain framework buys this, and its lots.'],
+              ['Compare against a competitor', HUB + 'med-sales-tools/#view-compare',
+               'Side by side, with open recalls and supply gaps flagged.']],
+      boost: [['rec:Surgical Mesh', 92],
+              [HUB + 'theatres-and-surgical/', 76],
+              [HUB + 'med-sales-tools/#view-compare', 74],
+              [HUB + 'tender-history/', 70],
+              [HUB + 'build-your-network/', 52],
+              [HUB + 'supply-disruption-tracker/', 50]] },
+    { id: 'thoracic',
+      triggers: ['thoracic', 'cardiothoracic'],
+      also: ['cardiac surgery', 'cardiothoracic'],
+      boost: [[HUB + 'cardiology-and-cardiac-surgery/', 88],
+              [HUB + 'theatres-and-surgical/', 60],
+              [HUB + 'build-your-network/', 52]] }
+  ];
+
+  function conceptsFor(q) {
+    var qs = stemWords(clean(q)), alts = [], boosts = {}, seen = {}, steps = [], i, j, k, c, hit;
+    for (i = 0; i < CONCEPTS.length; i++) {
+      c = CONCEPTS[i];
+      hit = false;
+      for (j = 0; j < c.triggers.length; j++) {
+        if (qs.indexOf(stemWords(c.triggers[j])) !== -1) { hit = true; break; }
+      }
+      if (!hit) { continue; }
+      for (j = 0; j < c.also.length; j++) {
+        if (!seen[c.also[j]]) {
+          seen[c.also[j]] = 1;
+          alts.push({ toks: tokenise(c.also[j]), phrase: clean(c.also[j]) });
+        }
+      }
+      for (k = 0; c.steps && k < c.steps.length; k++) { steps.push(c.steps[k]); }
+      for (k = 0; k < c.boost.length; k++) {
+        if (!boosts[c.boost[k][0]] || boosts[c.boost[k][0]] < c.boost[k][1]) {
+          boosts[c.boost[k][0]] = c.boost[k][1];
+        }
+      }
+    }
+    return { alts: alts, boosts: boosts, steps: steps };
+  }
+
+  var ALT_WEIGHT = 0.9;
+
+  /* An extra query only counts when every one of its words is found. */
+  function recCovers(r, toks) {
+    var i;
+    for (i = 0; i < toks.length; i++) {
+      if (!hits(r._t, toks[i], r._ts) && !hits(r._k, toks[i], r._ks)) { return false; }
+    }
+    return true;
+  }
+
   function rank(q) {
-    var toks = tokenise(q), phrase = clean(q), out = [], i, r, sc;
+    var toks = tokenise(q), phrase = clean(q), out = [], i, j, r, sc, ra, rb, cc, pg, rec, bs, sec;
     if (!toks.length) { return out; }
+    cc = conceptsFor(q);
 
     for (i = 0; i < DATA.pages.length; i++) {
-      r = scorePage(DATA.pages[i], toks, phrase);
-      if (r.s > 0) {
-        out.push({ kind: 'page', s: r.s, page: DATA.pages[i], sec: r.sec });
+      pg = DATA.pages[i];
+      r = scorePage(pg, toks, phrase);
+      sc = r.s; sec = r.sec;
+      for (j = 0; j < cc.alts.length; j++) {
+        ra = scorePage(pg, cc.alts[j].toks, cc.alts[j].phrase);
+        if (ra.titleAll && ra.s * ALT_WEIGHT > sc) { sc = ra.s * ALT_WEIGHT; sec = ra.sec; }
+        else if (ra.allSec && (ra.titleS + ra.allS) * ALT_WEIGHT > sc) {
+          sc = (ra.titleS + ra.allS) * ALT_WEIGHT; sec = ra.allSec;
+        }
+      }
+      bs = cc.boosts[pg.u];
+      if (bs && bs > sc) { sc = bs; sec = sec || null; }
+      if (sc > 0) {
+        out.push({ kind: 'page', s: sc, page: pg, sec: sec });
       }
     }
     for (i = 0; i < DATA.records.length; i++) {
-      sc = scoreRecord(DATA.records[i], toks, phrase);
-      if (sc > 0) { out.push({ kind: 'rec', s: sc, rec: DATA.records[i] }); }
+      rec = DATA.records[i];
+      sc = scoreRecord(rec, toks, phrase);
+      for (j = 0; j < cc.alts.length; j++) {
+        if (recCovers(rec, cc.alts[j].toks)) {
+          // A supplier whose keywords brush a concept is background, not the
+          // answer: framework, tool and page results must out-rank it.
+          rb = scoreRecord(rec, cc.alts[j].toks, cc.alts[j].phrase) *
+               (rec.c === 'Supplier' ? 0.4 : ALT_WEIGHT);
+          if (rb > sc) { sc = rb; }
+        }
+      }
+      bs = cc.boosts[rec.u] || cc.boosts['rec:' + rec.t];
+      if (bs && bs > sc && rec.c !== 'Supplier') { sc = bs; }
+      if (sc > 0) { out.push({ kind: 'rec', s: sc, rec: rec }); }
     }
     if (!out.length) { return out; }
     out.sort(function (a, b) { return b.s - a.s; });
@@ -481,6 +647,8 @@
     if (!DATA) { return null; }
     for (i = 0; i < DATA.records.length; i++) {
       r = DATA.records[i];
+      // Framework and Tool records (18/11/2026) are not companies.
+      if (r.c && r.c !== 'Supplier') { continue; }
       n = r._n;
       if (n === undefined) {
         n = r._n = clean(String(r.t).replace(/\b(ltd|limited|plc|uk|group|inc|llc|gmbh)\b\.?/gi, ' '));
@@ -492,7 +660,7 @@
   }
 
   function plan(q) {
-    var hay = ' ' + clean(q) + ' ', steps = [], seen = {}, i, j, g, sp = null, sup;
+    var hay = ' ' + clean(q) + ' ', steps = [], seen = {}, i, j, g, sp = null, sup, cs;
 
     function add(title, href, why) {
       if (seen[href]) { return; }
@@ -526,6 +694,10 @@
     }
     for (i = 0; i < goals.length; i++) {
       for (j = 1; j < goals[i].steps.length; j++) { add.apply(null, goals[i].steps[j]); }
+    }
+    cs = conceptsFor(q).steps;
+    if (sp || sup || goals.length) {
+      for (i = 0; i < cs.length; i++) { add.apply(null, cs[i]); }
     }
     if (sp || sup) {
       add('Check for recalls and supply gaps', '/medical-sales-hub/supply-disruption-tracker/',
@@ -1001,7 +1173,10 @@
     for (i = 0; i < res.length; i++) {
       r = res[i];
       if (r.kind === 'rec') {
-        html += row(r.rec.u, r.rec.t, r.rec.c || 'Record', 'Opens the supplier record on the Suppliers page');
+        html += row(r.rec.u, r.rec.t, r.rec.c || 'Record',
+                    r.rec.c === 'Framework' ? 'Opens Frameworks and Awards, where the framework directory lists it'
+                    : r.rec.c === 'Tool' ? 'Opens the tool'
+                    : 'Opens the supplier record on the Suppliers page');
       } else {
         href = r.page.u;
         kicker = r.page.t;
@@ -1214,4 +1389,5 @@
 
   // Harness hook: lets a test call the planner directly. Carries no data.
   window.MSH_HUB_PLAN = plan;
+  window.MSH_HUB_RANK = rank;
 })();
