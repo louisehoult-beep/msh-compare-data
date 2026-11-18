@@ -5381,6 +5381,17 @@ MONTHS = frozenset(("jan", "feb", "mar", "apr", "jun", "jul",
                     "aug", "sep", "sept", "oct", "nov", "dec"))
 
 
+def _private_desks():
+    """{page id: slug} of the private company desks, from the builder's own list."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "_build_search_index", os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                            "build_search_index.py"))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return dict(mod.PRIVATE_DESKS)
+
+
 def check_search_index(doc):
     """The Hub's own search index: is it real, is it whole, is it clean?"""
     if not doc:
@@ -5400,6 +5411,30 @@ def check_search_index(doc):
             FAIL("search", "a page in %s has no title or no URL (id %r). A result a member "
                            "cannot click is worse than no result." % (SEARCH_INDEX, p.get("id")))
             break
+
+    # -- private company desks must never be in this PUBLIC file ----------
+    # Added 18/11/2026. A desk restricted to one client's team (Meril UK 6259,
+    # Medilogik 6502) was indexed, so every member's search, and anyone reading
+    # the raw GitHub file, could see it exists and what it covers. The list is
+    # build_search_index.PRIVATE_DESKS: add every new private desk there.
+    desks = _private_desks()
+    bad = []
+    for p in pages:
+        u = str(p.get("u") or "")
+        if p.get("id") in desks or any(u.rstrip("/") + "/" == "/medical-sales-hub/%s/" % slug
+                                        or u.startswith("/medical-sales-hub/%s/" % slug)
+                                        for slug in desks.values()):
+            bad.append("%s (id %r, %s)" % (p.get("t"), p.get("id"), u))
+    for r in doc.get("records") or []:
+        u = str(r.get("u") or "").split("#")[0]
+        if any(u.startswith("/medical-sales-hub/%s/" % slug) for slug in desks.values()):
+            bad.append("record %r (%s)" % (r.get("t"), u))
+    if bad:
+        FAIL("search", "%s indexes a PRIVATE company desk: %s. These pages are restricted to "
+                       "one client's team and this file is public. Exclude them in "
+                       "build_search_index.PRIVATE_DESKS and rebuild; do not relax this."
+             % (SEARCH_INDEX, "; ".join(bad)))
+        return
 
     # -- every link must stay on the Hub ----------------------------------
     for p in pages:

@@ -115,6 +115,41 @@ EXTRA_IDS = {
 # words into the index, making it compete with the pages it links to.
 EXCLUDE_IDS = {165, 166, 167, 685, 686, 687, 688, 946, 955, 957, 3768}
 
+# PRIVATE COMPANY DESKS: NEVER INDEXED. Added 18/11/2026.
+#
+# A private company desk is a Hub page restricted to ONE client's team (a
+# company's own desk, not a speciality or tool page for the whole membership).
+# This index is a PUBLIC file read by every Hub member's search box and by
+# anyone who opens the raw GitHub URL, so indexing a desk would publish that the
+# client's desk EXISTS, its title and its section headings, to every other
+# member and to the world. Both desks below were in the public index until
+# 18/11/2026.
+#
+# EVERY NEW PRIVATE COMPANY DESK MUST BE ADDED HERE (id and slug) BEFORE IT IS
+# PUBLISHED, or the next daily crawl will index it. verify.py reads this same
+# constant and fails the publish if either the id or the slug appears in the
+# index, so a desk that is added here is also held by the gate.
+#
+# This excludes content that comes from the desk PAGE only. The public supplier
+# record for the same company (e.g. "Meril UK Pvt Ltd") comes from
+# data/supplier-index.json, which is public framework data, and stays.
+PRIVATE_DESKS = {
+    6259: "meril-uk",     # Meril UK desk
+    6502: "medilogik",    # Medilogik desk
+}
+PRIVATE_DESK_IDS = frozenset(PRIVATE_DESKS)
+PRIVATE_DESK_PATHS = tuple(HUB_PREFIX + slug + "/" for slug in PRIVATE_DESKS.values())
+
+
+def is_private_desk(page_id=None, path=None):
+    """True for a private company desk, matched by page id OR by path."""
+    if page_id in PRIVATE_DESK_IDS:
+        return True
+    p = str(path or "")
+    return any(p == d or p.startswith(d) or p.rstrip("/") + "/" == d
+               for d in PRIVATE_DESK_PATHS)
+
+
 # Text that appears on many pages and belongs to the furniture, not the content.
 # Matched after tag-stripping, case-insensitively, and removed.
 BOILERPLATE = (
@@ -512,6 +547,8 @@ def supplier_records():
 # --------------------------------------------------------------------------
 def wanted(page):
     pid = page.get("id")
+    if is_private_desk(pid, path_of(page)):
+        return False
     if pid in EXCLUDE_IDS:
         return False
     if pid in EXTRA_IDS:
@@ -542,6 +579,12 @@ def build(pages):
             "sec": secs,
         })
 
+    # Belt and braces: nothing from a private desk may leave this function, even
+    # if a later edit to wanted() or the record builders let one through.
+    indexed = [p for p in indexed if not is_private_desk(p.get("id"), p.get("u"))]
+    records = [r for r in supplier_records()
+               if not is_private_desk(None, str(r.get("u") or "").split("#")[0])]
+
     now = datetime.now(timezone.utc)
     return {
         "generated": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -549,7 +592,7 @@ def build(pages):
         "note": ("Search index for the Medical Sales Intelligence Hub, built from the "
                  "Hub's own published pages. Rebuilt daily; see build_search_index.py."),
         "pages": indexed,
-        "records": supplier_records(),
+        "records": records,
     }
 
 

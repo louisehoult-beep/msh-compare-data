@@ -2291,6 +2291,31 @@ def _(tmp):
     return "unsorted or duplicated word bag"
 
 
+@case("a search index carrying a private company desk (Meril UK, page 6259)")
+def _(tmp):
+    # 18/11/2026: two desks restricted to one client's team were in this PUBLIC
+    # file, so every member's search, and anyone reading the raw GitHub URL, could
+    # see they exist. Matched by id and by slug.
+    doc = search_index()
+    doc["pages"].append({
+        "id": 6259, "t": "Meril UK", "u": "/medical-sales-hub/meril-uk/",
+        "sec": [{"h": "Surgical stapling", "a": "", "w": "framework stapling surgical"}],
+    })
+    write_search(doc)
+    return "PRIVATE company desk"
+
+
+@case("a search index carrying a private company desk under a new page id (Medilogik slug)")
+def _(tmp):
+    doc = search_index()
+    doc["pages"].append({
+        "id": 99999, "t": "Desk", "u": "/medical-sales-hub/medilogik/",
+        "sec": [{"h": "Desk", "a": "", "w": "digital medical"}],
+    })
+    write_search(doc)
+    return "PRIVATE company desk"
+
+
 @case("a search index pointing results off the Hub")
 def _(tmp):
     doc = search_index()
