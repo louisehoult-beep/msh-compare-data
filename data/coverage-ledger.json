@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-11-15",
-  "differentiator.json published": 38991,
-  "differentiator.json held": 297533
+  "differentiator.json published": 39003,
+  "differentiator.json held": 297527
  },
  "counts": {
   "frameworks": 122,
@@ -24,10 +24,10 @@
   "unmapped": 45,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 395,
-  "inScopeSuppliersNeedingCrawl": 210,
-  "inScopeSuppliersNeedingDomain": 198,
-  "suppliersRefused": 582,
+  "supplierNamesUnresolved": 388,
+  "inScopeSuppliersNeedingCrawl": 208,
+  "inScopeSuppliersNeedingDomain": 195,
+  "suppliersRefused": 583,
   "suppliersRefusedButPublishingElsewhere": 167,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
@@ -207,10 +207,6 @@
   ],
   [
    "Weetabix Limited",
-   1
-  ],
-  [
-   "Genmed.Me Ltd",
    1
   ],
   [
@@ -702,15 +698,7 @@
    1
   ],
   [
-   "Ortus",
-   1
-  ],
-  [
    "GE Capital Equipment Finance Limited",
-   1
-  ],
-  [
-   "GENMED.ME LIMITED",
    1
   ],
   [
@@ -1478,6 +1466,10 @@
    1
   ],
   [
+   "Uniphar Medtech Ltd",
+   1
+  ],
+  [
    "Robinson Healthcare Limited (Vernacare)",
    1
   ],
@@ -1582,31 +1574,11 @@
    1
   ],
   [
-   "BVM",
-   1
-  ],
-  [
-   "Edwards",
-   1
-  ],
-  [
-   "Jenavalve",
-   1
-  ],
-  [
-   "MCT",
-   1
-  ],
-  [
    "SMT",
    1
   ],
   [
    "crxcompression.com",
-   1
-  ],
-  [
-   "Daylong Direct (Credenhill)",
    1
   ],
   [
@@ -3065,10 +3037,6 @@
      "domain": null
     },
     {
-     "supplier": "Daylong Direct",
-     "domain": null
-    },
-    {
      "supplier": "Dynamic Metrics Ltd",
      "domain": null
     },
@@ -3093,7 +3061,6 @@
     "Beagle Orthopaedic Ltd",
     "Benefoot UK Ltd trading as BeneCare Medical",
     "Canonbury Products Limited",
-    "Daylong Direct",
     "Dynamic Metrics Ltd",
     "Firefly Orthoses NI Limited",
     "Medezine Ltd",
@@ -3170,6 +3137,13 @@
      "domain": "dacey.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-10-12",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Credenhill Ltd (trading as Daylong Direct)",
+     "domain": "www.credenhill.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the sitemap's product URLs are flat, so they carry no division structure (14 names, all uncategorised) \u2014 a product list without the company's own grouping is not the range this report shows | the merged \"Daylong Direct\" record held: the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 1 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-20",
      "bucket": "refused"
     },
     {
@@ -3331,7 +3305,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 8
+    "needDomain": 7
    },
    "published": [
     "Allard Support UK Limited",
@@ -3383,7 +3357,6 @@
    "notCrawled": [
     "Beagle Orthopaedic Ltd",
     "Benefoot UK Ltd trading as BeneCare Medical",
-    "Daylong Direct",
     "Dynamic Metrics Ltd",
     "Podopro UK Ltd",
     "Firefly Orthoses NI Limited",
@@ -3401,6 +3374,7 @@
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
     "Cuxson Gerrard & Company Limited",
     "Dacey LTD",
+    "Credenhill Ltd (trading as Daylong Direct)",
     "Hugh Steeper Limited",
     "Ken Hall Ltd",
     "Steroplast Healthcare Ltd",
@@ -3408,7 +3382,7 @@
     "Darco UK Ltd (formerly V-M Orthotics Ltd)"
    ],
    "unknown": [],
-   "actionableTotal": 19,
+   "actionableTotal": 18,
    "blockedReason": null,
    "deferred": null
   },
@@ -8146,14 +8120,9 @@
     {
      "supplier": "Sterimed Medical Implants UK Ltd",
      "domain": null
-    },
-    {
-     "supplier": "P.W.Coole & Son Limited T/A Surgical Holdings",
-     "domain": null
     }
    ],
    "domainsMissing": [
-    "P.W.Coole & Son Limited T/A Surgical Holdings",
     "Sterimed Medical Implants UK Ltd",
     "Surgica Limited"
    ],
@@ -8258,6 +8227,13 @@
      "bucket": "heldOnly"
     },
     {
+     "supplier": "Surgical Holdings Limited",
+     "domain": "www.surgicalholdings.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-20",
+     "bucket": "heldOnly"
+    },
+    {
      "supplier": "Unisurge International Limited",
      "domain": "unisurge.com",
      "reason": "the WooCommerce taxonomy captured is the company's own range navigation rather than a product list \u2014 the names are ranges and pack families (Orthopaedic, Ophthalmic, Cardio Thoracic, Surgical Gowns, Needle Holder, Scissors, Dental, Podiatry) and the division field carries the WordPress taxonomy labels Range / Products / Uncategorised rather than real divisions, so a capture would state 44 products where the site lists ranges",
@@ -8325,11 +8301,11 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 4,
-    "heldNeedingCategory": 7,
+    "heldNeedingCategory": 8,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 2
+    "needDomain": 1
    },
    "published": [
     "Bolton Surgical Limited",
@@ -8362,12 +8338,12 @@
     "RB Medical Engineering Ltd",
     "SRA Developments",
     "Surgica Limited",
+    "Surgical Holdings Limited",
     "Unisurge International Limited"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Sterimed Medical Implants UK Ltd",
-    "P.W.Coole & Son Limited T/A Surgical Holdings"
+    "Sterimed Medical Implants UK Ltd"
    ],
    "refused": [
     "Elemental Healthcare Ltd",
@@ -15161,10 +15137,6 @@
      "domain": "rociallehealthcare.com"
     },
     {
-     "supplier": "Accrington Surgical Inst. Suppliers",
-     "domain": null
-    },
-    {
      "supplier": "O&M Halyard Uk Limited",
      "domain": null
     },
@@ -15178,13 +15150,19 @@
     }
    ],
    "domainsMissing": [
-    "Accrington Surgical Inst. Suppliers",
     "O&M Halyard Uk Limited",
     "Plasmic Healthsciences Uk Limited",
     "Vascular Perspectives Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
+    {
+     "supplier": "Accrington Surgical Instrument Suppliers Ltd",
+     "domain": "accringtonsurgical.co.uk",
+     "reason": "neither accringtonsurgical.co.uk nor www.accringtonsurgical.co.uk answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-11",
+     "bucket": "refused"
+    },
     {
      "supplier": "ALXR Limited",
      "domain": "alxr.co",
@@ -15318,7 +15296,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 4
+    "needDomain": 3
    },
    "published": [],
    "publishedElsewhere": [
@@ -15346,12 +15324,12 @@
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Accrington Surgical Inst. Suppliers",
     "O&M Halyard Uk Limited",
     "Plasmic Healthsciences Uk Limited",
     "Vascular Perspectives Ltd"
    ],
    "refused": [
+    "Accrington Surgical Instrument Suppliers Ltd",
     "ALXR Limited",
     "Genmed Enterprises Ltd",
     "H & R Healthcare Ltd",
@@ -15360,7 +15338,7 @@
     "Toffeln Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 21,
+   "actionableTotal": 20,
    "blockedReason": null,
    "deferred": null
   },
@@ -16096,6 +16074,13 @@
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
+     "supplier": "Credenhill Ltd (trading as Daylong Direct)",
+     "domain": "www.credenhill.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the sitemap's product URLs are flat, so they carry no division structure (14 names, all uncategorised) \u2014 a product list without the company's own grouping is not the range this report shows | the merged \"Daylong Direct\" record held: the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 1 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-20",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Global Health and Safety Ltd",
      "domain": "globalhealth.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -16151,7 +16136,7 @@
     "DJO UK Ltd (Enovis)"
    ],
    "actionable": {
-    "unresolvedNames": 3,
+    "unresolvedNames": 2,
     "publishedElsewhereNeedingCategory": 12,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
@@ -16185,16 +16170,16 @@
     "Neo-Innovations UK Ltd"
    ],
    "refused": [
+    "Credenhill Ltd (trading as Daylong Direct)",
     "Global Health and Safety Ltd",
     "Haddenham Healthcare",
     "Sigvaris"
    ],
    "unknown": [
     "crxcompression.com",
-    "Daylong Direct (Credenhill)",
     "Gardamed Limited (Barcelcom SA)"
    ],
-   "actionableTotal": 19,
+   "actionableTotal": 18,
    "blockedReason": null,
    "deferred": null
   },
@@ -16277,6 +16262,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Ortus Technology Limited",
+     "domain": "www.theortusgroup.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Schiller UK Limited",
      "domain": "www.schiller-medical.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -16312,7 +16304,7 @@
     "Reliance Medical"
    ],
    "actionable": {
-    "unresolvedNames": 1,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 7,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
@@ -16347,12 +16339,11 @@
     "Baywater Healthcare UK Ltd",
     "British Heart Foundation",
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+    "Ortus Technology Limited",
     "Schiller UK Limited"
    ],
-   "unknown": [
-    "Ortus"
-   ],
-   "actionableTotal": 15,
+   "unknown": [],
+   "actionableTotal": 14,
    "blockedReason": null,
    "deferred": null
   },
@@ -17184,6 +17175,10 @@
      "domain": null
     },
     {
+     "supplier": "Genmed",
+     "domain": null
+    },
+    {
      "supplier": "United Imaging Health Ltd",
      "domain": null
     },
@@ -17195,6 +17190,7 @@
    "domainsMissing": [
     "Agito Medical A/S",
     "Compleo Health Limited",
+    "Genmed",
     "United Imaging Health Ltd",
     "WSR Medical Solutions Ltd"
    ],
@@ -17249,13 +17245,13 @@
     "Siemens Healthineers"
    ],
    "actionable": {
-    "unresolvedNames": 2,
+    "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 4,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 4
+    "needDomain": 5
    },
    "published": [],
    "publishedElsewhere": [
@@ -17272,6 +17268,7 @@
    "notCrawled": [
     "Agito Medical A/S",
     "Compleo Health Limited",
+    "Genmed",
     "United Imaging Health Ltd",
     "WSR Medical Solutions Ltd"
    ],
@@ -17280,7 +17277,6 @@
     "Regent\u2019s Park Healthcare"
    ],
    "unknown": [
-    "Genmed.Me Ltd",
     "InHealth Ltd"
    ],
    "actionableTotal": 11,
@@ -17803,11 +17799,16 @@
     {
      "supplier": "Triple Point Lease Partners",
      "domain": null
+    },
+    {
+     "supplier": "Genmed",
+     "domain": null
     }
    ],
    "domainsMissing": [
     "CHG Meridian UK Limited",
     "De Lage Landen Leasing Limited",
+    "Genmed",
     "Room Twelve Limited",
     "Siemens Financial Services",
     "Solutions Asset Finance Limited",
@@ -17841,13 +17842,13 @@
    "catsInScope": [],
    "publishedElsewhereNoOwnRange": [],
    "actionable": {
-    "unresolvedNames": 2,
+    "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 1,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 6
+    "needDomain": 7
    },
    "published": [],
    "publishedElsewhere": [
@@ -17861,7 +17862,8 @@
     "Room Twelve Limited",
     "Siemens Financial Services",
     "Solutions Asset Finance Limited",
-    "Triple Point Lease Partners"
+    "Triple Point Lease Partners",
+    "Genmed"
    ],
    "refused": [
     "TP Leasing Limited",
@@ -17869,8 +17871,7 @@
     "Surgical Instrument Group Holdings Ltd"
    ],
    "unknown": [
-    "GE Capital Equipment Finance Limited",
-    "GENMED.ME LIMITED"
+    "GE Capital Equipment Finance Limited"
    ],
    "actionableTotal": 9,
    "blockedReason": null,
@@ -18116,15 +18117,34 @@
    "excludedByRuling": [],
    "targetSuppliers": 11,
    "coverageOfTarget": 0.0,
-   "crawlWorklist": [],
+   "crawlWorklist": [
+    {
+     "supplier": "JenaValve Production Limited",
+     "domain": "jenavalve.com"
+    }
+   ],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
+    {
+     "supplier": "BVM Medical Ltd",
+     "domain": "www.bvmmedical.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-08-31",
+     "bucket": "refused"
+    },
     {
      "supplier": "Dot Medical Limited",
      "domain": "dot-medical.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-19",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "MCT Lifesciences Ltd",
+     "domain": "www.mctlife.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-31",
      "bucket": "refused"
     },
     {
@@ -18140,18 +18160,25 @@
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-20",
      "bucket": "heldOnly"
+    },
+    {
+     "supplier": "Edwards Lifesciences",
+     "domain": "www.edwards.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-31",
+     "bucket": "heldOnly"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "publishedElsewhereNoOwnRange": [],
    "actionable": {
-    "unresolvedNames": 7,
+    "unresolvedNames": 3,
     "publishedElsewhereNeedingCategory": 2,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 0,
+    "crawlable": 1,
     "needDomain": 0
    },
    "published": [],
@@ -18160,23 +18187,24 @@
     "Meril UK Pvt Ltd"
    ],
    "heldOnly": [
-    "Abbott Diabetes Care"
+    "Abbott Diabetes Care",
+    "Edwards Lifesciences"
    ],
    "capturedNothingCounted": [],
-   "notCrawled": [],
+   "notCrawled": [
+    "JenaValve Production Limited"
+   ],
    "refused": [
-    "Dot Medical Limited"
+    "BVM Medical Ltd",
+    "Dot Medical Limited",
+    "MCT Lifesciences Ltd"
    ],
    "unknown": [
     "Acrostak",
     "Biosensors",
-    "BVM",
-    "Edwards",
-    "Jenavalve",
-    "MCT",
     "SMT"
    ],
-   "actionableTotal": 10,
+   "actionableTotal": 8,
    "blockedReason": null,
    "deferred": null
   },
@@ -18541,13 +18569,6 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Uniphar Medtech",
-     "domain": "unipharmedtech.com",
-     "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-13",
-     "bucket": "refused"
-    },
-    {
      "supplier": "Getinge",
      "domain": "www.getinge.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -18580,7 +18601,7 @@
    "catsInScope": [],
    "publishedElsewhereNoOwnRange": [],
    "actionable": {
-    "unresolvedNames": 0,
+    "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 5,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
@@ -18603,11 +18624,12 @@
     "XVIVO"
    ],
    "refused": [
-    "Chalice Medical Ltd",
-    "Uniphar Medtech"
+    "Chalice Medical Ltd"
    ],
-   "unknown": [],
-   "actionableTotal": 7,
+   "unknown": [
+    "Uniphar Medtech Ltd"
+   ],
+   "actionableTotal": 8,
    "blockedReason": null,
    "deferred": null
   },
