@@ -98,7 +98,12 @@ RULE = (
     "Lots attach to the exact supplier string the brief uses; a source name attaches "
     "only where its normalised form (brief_names.clean + company_match.key) equals "
     "that brief name's, or both resolve to the same single Hub company under the "
-    "seed's recorded aliases. Unmatched names are listed in `unresolved`, never "
+    "seed's recorded aliases. Where that normalised form reaches TWO brief names, "
+    "it is retried on a narrower form that canonicalises the legal-form word but "
+    "keeps the territory word (company_match.key_keep_territory), which separates "
+    "two real companies named on the same brief whose names differ only by that "
+    "word; a name still reaching two brief names is quarantined, never picked. "
+    "Unmatched names are listed in `unresolved`, never "
     "guessed. Where the brief breaks a framework into lots but no source names who "
     "holds which, lotStatus is 'notPublished' and the report says so.")
 
@@ -542,9 +547,10 @@ def resolver(seed):
 def attach_names(source_map, brief_suppliers, to_company, names_out=None):
     """({brief_name: sorted lots}, unresolved[]) under the stated matching rule.
     names_out, when given, collects {brief_name: {source spelling, ...}}."""
-    by_key, by_co = {}, {}
+    by_key, by_terr, by_co = {}, {}, {}
     for b in brief_suppliers:
         by_key.setdefault(company_match.key(brief_names.clean(b)), set()).add(b)
+        by_terr.setdefault(company_match.key_keep_territory(brief_names.clean(b)), set()).add(b)
         c = to_company(brief_names.clean(b)) or to_company(b)
         if c:
             by_co.setdefault(c, set()).add(b)
@@ -553,10 +559,32 @@ def attach_names(source_map, brief_suppliers, to_company, names_out=None):
         k = company_match.key(brief_names.clean(src))
         cands = by_key.get(k) or set()
         how = "normalised name"
+        if len(cands) > 1:
+            # key() strips the territory word, so a brief that names two REAL
+            # companies differing only by that word collapses them onto one key
+            # and the notice's name reaches both. Retry on a narrower key that
+            # canonicalises the legal form but KEEPS the territory word — the
+            # same guard company_match.resolve()'s verbatim tier gives the seed,
+            # which norm() alone cannot give here because these sources write
+            # the legal form long in one place and short in the other.
+            # Urology and Bowel Management named both "Clinisupplies Ltd"
+            # (04013240) and "Clinisupplies GB Limited" (02503030) and the award
+            # notice's "Clinisupplies Limited" matched both; it is 04013240.
+            # Narrowing only: used solely when the wider key was ambiguous, and
+            # a tie here still quarantines.
+            narrowed = by_terr.get(company_match.key_keep_territory(brief_names.clean(src)), set())
+            if len(narrowed) == 1:
+                cands, how = narrowed, "normalised name, territory word kept"
         if len(cands) != 1:
+            # Keep the ambiguity if there was one: the alias lookup below can
+            # come back empty, and reporting "no supplier normalises to it"
+            # when two of them do sends the reader to the wrong remedy.
+            ambiguous = cands if len(cands) > 1 else set()
             c = to_company(brief_names.clean(src)) or to_company(src)
             cands = by_co.get(c, set()) if c else set()
             how = "recorded alias"
+            if len(cands) != 1 and ambiguous:
+                cands = ambiguous
         if len(cands) == 1:
             b = next(iter(cands))
             lots.setdefault(b, set()).update(labs)

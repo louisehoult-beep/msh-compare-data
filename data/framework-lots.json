@@ -12,7 +12,7 @@
  },
  "dataAsOf": "2026-11-15",
  "owner": "NHS Supply Chain",
- "rule": "A supplier is shown on a lot ONLY where the framework owner's own published source for that framework names it against that lot: the NHS Supply Chain contract launch brief's lot-by-lot supplier lists or supplier-by-lot table, the Product/Supplier Matrix spreadsheet attached to that brief (only where the sheet has an explicit lot axis, and only where the supplier has a mark or a product in that lot), or the Find a Tender contract award notice for that framework's own procurement. Nothing is inferred from product ranges, specialities or lot titles. Lots attach to the exact supplier string the brief uses; a source name attaches only where its normalised form (brief_names.clean + company_match.key) equals that brief name's, or both resolve to the same single Hub company under the seed's recorded aliases. Unmatched names are listed in `unresolved`, never guessed. Where the brief breaks a framework into lots but no source names who holds which, lotStatus is 'notPublished' and the report says so.",
+ "rule": "A supplier is shown on a lot ONLY where the framework owner's own published source for that framework names it against that lot: the NHS Supply Chain contract launch brief's lot-by-lot supplier lists or supplier-by-lot table, the Product/Supplier Matrix spreadsheet attached to that brief (only where the sheet has an explicit lot axis, and only where the supplier has a mark or a product in that lot), or the Find a Tender contract award notice for that framework's own procurement. Nothing is inferred from product ranges, specialities or lot titles. Lots attach to the exact supplier string the brief uses; a source name attaches only where its normalised form (brief_names.clean + company_match.key) equals that brief name's, or both resolve to the same single Hub company under the seed's recorded aliases. Where that normalised form reaches TWO brief names, it is retried on a narrower form that canonicalises the legal-form word but keeps the territory word (company_match.key_keep_territory), which separates two real companies named on the same brief whose names differ only by that word; a name still reaching two brief names is quarantined, never picked. Unmatched names are listed in `unresolved`, never guessed. Where the brief breaks a framework into lots but no source names who holds which, lotStatus is 'notPublished' and the report says so.",
  "counts": {
   "published": 63,
   "notPublished": 18,
@@ -3159,15 +3159,6 @@
      "source": "fts-award"
     },
     {
-     "name": "Nestle UK Ltd",
-     "lots": [
-      "Lot 1",
-      "Lot 13"
-     ],
-     "reason": "matches 2 suppliers on this brief",
-     "source": "fts-award"
-    },
-    {
      "name": "Nestlé Waters & Healthy Beverages UK",
      "lots": [
       "Lot 3",
@@ -3370,6 +3361,10 @@
       "Lot 11",
       "Lot 12",
       "Lot 13"
+     ],
+     "Nestle UK": [
+      "Lot 1",
+      "Lot 13"
      ]
     }
    },
@@ -3431,6 +3426,9 @@
     "Pladis": [
      "pladis",
      "pladis (UK) Ltd"
+    ],
+    "Nestle UK": [
+     "Nestle UK Ltd"
     ]
    },
    "supplierLots": {
@@ -3504,6 +3502,10 @@
     ],
     "NEMI Teas Ltd": [
      "Lot 2"
+    ],
+    "Nestle UK": [
+     "Lot 1",
+     "Lot 13"
     ],
     "Nutricia Ltd t/a Danone UK": [
      "Lot 6"
@@ -3598,7 +3600,6 @@
     "Jacobs Douwe Egberts GB Ltd",
     "Nairobi Coffee & Tea Company Ltd (THE)",
     "Nestle Ltd",
-    "Nestle UK",
     "Nestle Waters & Healthy Beverages UK",
     "PROPER t/a Catapult Enterprises Ltd",
     "RM Curtis"
@@ -22178,18 +22179,6 @@
      "source": "fts-award"
     },
     {
-     "name": "Clinisupplies Limited",
-     "lots": [
-      "Lot 1",
-      "Lot 2",
-      "Lot 3",
-      "Lot 5",
-      "Lot 10"
-     ],
-     "reason": "matches 2 suppliers on this brief",
-     "source": "fts-award"
-    },
-    {
      "name": "Great Bear Healthcare Ltd",
      "lots": [
       "Lot 1",
@@ -22433,6 +22422,13 @@
       "Lot 1",
       "Lot 3",
       "Lot 11"
+     ],
+     "Clinisupplies Ltd": [
+      "Lot 1",
+      "Lot 2",
+      "Lot 3",
+      "Lot 5",
+      "Lot 10"
      ]
     }
    },
@@ -22530,6 +22526,9 @@
     ],
     "Flexicare Medical Ltd": [
      "Flexicare UK Ltd"
+    ],
+    "Clinisupplies Ltd": [
+     "Clinisupplies Limited"
     ]
    },
    "briefLotTitles": {
@@ -22601,6 +22600,13 @@
      "Lot 12",
      "Lot 13",
      "Lot 14"
+    ],
+    "Clinisupplies Ltd": [
+     "Lot 1",
+     "Lot 2",
+     "Lot 3",
+     "Lot 5",
+     "Lot 10"
     ],
     "Coloplast Limited": [
      "Lot 1",
@@ -22779,7 +22785,6 @@
    "suppliersWithoutLot": [
     "AQLANE Medical BV",
     "Clinisupplies GB Limited",
-    "Clinisupplies Ltd",
     "Creo Medical UK Ltd",
     "KCI Medical Limited (3m)"
    ],

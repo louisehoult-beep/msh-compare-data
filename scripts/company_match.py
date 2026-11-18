@@ -113,6 +113,35 @@ def key(s):
     return n
 
 
+def key_keep_territory(s):
+    """norm() with trailing legal-form words removed but TERRITORY words KEPT.
+
+    The middle of three tiers, narrower than key() and wider than norm().
+
+    key() strips the territory word, so two REAL companies whose names differ
+    only by that word collapse onto one key. The verbatim tier (norm() alone)
+    tells them apart whenever one of them is held exactly, but it fails on the
+    commonest spelling difference in these sources: the legal form written long
+    in one place and short in the other. "Clinisupplies Limited" on a Find a
+    Tender award notice and "Clinisupplies Ltd" on NHS Supply Chain's own brief
+    are the same registration, 04013240; "Clinisupplies GB Limited" is a
+    different one, 02503030. norm() matches none of the three to each other and
+    key() matches all three, so neither tier can separate them.
+
+    Canonicalising the legal form while keeping the territory word does, and
+    only ever in the narrowing direction: it never joins two names that norm()
+    already told apart by anything other than their legal suffix. It does not
+    change resolve(), whose two tiers are unchanged; it is here because this is
+    the module that owns normalisation, so callers share one implementation.
+    """
+    n = norm(s)
+    prev = None
+    while prev != n:
+        prev = n
+        n = re.sub(r"\s+(%s)$" % LEGAL_SUFFIX, "", n).strip()
+    return n
+
+
 class Index(dict):
     """The stripped-key map, with the unstripped map that disambiguates it.
 

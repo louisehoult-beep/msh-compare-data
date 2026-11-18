@@ -139,6 +139,55 @@ class NameRule(unittest.TestCase):
         self.assertEqual(sorted(u["name"] for u in unresolved),
                          ["Baxter Healthcare Ltd", "Blatchford Limted"])
 
+    def test_territory_word_separates_two_real_companies_on_one_brief(self):
+        """NHS Supply Chain's Urology and Bowel Management brief names both
+        Clinisupplies Ltd (04013240) and Clinisupplies GB Limited (02503030) —
+        two real registrations. company_match.key() strips the territory word,
+        so the award notice's "Clinisupplies Limited" reaches both and the lots
+        were quarantined. The notice names 04013240, which the brief writes
+        "Clinisupplies Ltd"; keeping the territory word settles it."""
+        brief = ["Clinisupplies Ltd", "Clinisupplies GB Limited", "CliniMed Ltd"]
+        src = {"Clinisupplies Limited": {"Lot 1", "Lot 10"}}
+        lots, unresolved = L.attach_names(src, brief, lambda n: None)
+        self.assertEqual(lots, {"Clinisupplies Ltd": ["Lot 1", "Lot 10"]})
+        self.assertEqual(unresolved, [])
+
+    def test_the_gb_row_is_not_the_one_that_gains_the_lot(self):
+        """The failure this guards against is attaching to the WRONG one of the
+        two, which would publish 02503030's name against 04013240's award."""
+        brief = ["Clinisupplies Ltd", "Clinisupplies GB Limited"]
+        lots, _ = L.attach_names({"Clinisupplies Limited": {"Lot 2"}}, brief,
+                                 lambda n: None)
+        self.assertNotIn("Clinisupplies GB Limited", lots)
+
+    def test_the_gb_spelling_still_reaches_the_gb_row(self):
+        """The narrower tier must not rob the territory-bearing row of its own
+        awards: the notice spelling that carries GB resolves to it."""
+        brief = ["Clinisupplies Ltd", "Clinisupplies GB Limited"]
+        lots, unresolved = L.attach_names({"Clinisupplies GB Ltd": {"Lot 3"}},
+                                          brief, lambda n: None)
+        self.assertEqual(lots, {"Clinisupplies GB Limited": ["Lot 3"]})
+        self.assertEqual(unresolved, [])
+
+    def test_a_tie_on_the_narrower_key_is_still_quarantined(self):
+        """Narrowing only. Where even the territory-keeping form reaches two
+        brief rows, the name is quarantined, never picked."""
+        brief = ["Acme Medical Ltd", "Acme Medical Limited"]
+        lots, unresolved = L.attach_names({"Acme Medical PLC": {"Lot 1"}}, brief,
+                                          lambda n: None)
+        self.assertEqual(lots, {})
+        self.assertEqual([u["name"] for u in unresolved], ["Acme Medical PLC"])
+        self.assertIn("matches 2 suppliers", unresolved[0]["reason"])
+
+    def test_the_narrower_tier_never_widens_an_unambiguous_miss(self):
+        """A source name that reached NO brief row must not now reach one: the
+        tier fires only where the wider key was ambiguous."""
+        brief = ["Blatchford Limited"]
+        lots, unresolved = L.attach_names({"Baxter Healthcare Ltd": {"Lot 1"}},
+                                          brief, lambda n: None)
+        self.assertEqual(lots, {})
+        self.assertEqual([u["name"] for u in unresolved], ["Baxter Healthcare Ltd"])
+
     def test_recorded_alias(self):
         brief = ["HARTMANN"]
         alias = {"hartmann": "Paul Hartmann", "paul hartmann ltd": "Paul Hartmann"}
