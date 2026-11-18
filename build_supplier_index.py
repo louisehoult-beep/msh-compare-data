@@ -339,7 +339,22 @@ def main():
     prev = load(INDEX, {"suppliers": []})
     by_name = {}
     for s in seed.get("suppliers", []):
-        s.setdefault("awards", []); s.setdefault("news", []); s["curated"] = True
+        # alerts/frameworks/products are setdefault'ed for the same reason as
+        # awards and news: later sections subscript them directly (rec["alerts"]
+        # at the recall merge and at the sort before writing), so a seed record
+        # that simply omits an empty list takes the whole build down.
+        #
+        # THE MISS THIS CAUSED, 18/11/2026. "Clinisupplies GB Limited" was added
+        # to the seed at 13:26 without an `alerts` key. The next run raised
+        # KeyError('alerts') on the sort, __main__ logged "FATAL (exit 0 to keep
+        # Actions green)" and exited 0, so data/supplier-index.json was never
+        # written and the workflow reported SUCCESS. The Compare tab kept serving
+        # the previous day's index while looking current. Only `awards` and `news`
+        # were defaulted here, so every other list was one hand-written seed entry
+        # away from the same silent miss.
+        for _k in ("alerts", "awards", "news", "frameworks", "products"):
+            s.setdefault(_k, [])
+        s["curated"] = True
         by_name[s["name"]] = json.loads(json.dumps(s))
     prev_news = {}
     # Carry forward auto-detected records from the last build — but re-test each
@@ -413,6 +428,10 @@ def main():
                 _fold(by_name[canonical], s)
                 merged.append("%s -> %s" % (s["name"], canonical))
                 continue
+            # Same defaulting as the seed load above: this record comes straight
+            # out of the previous index and is subscripted by later sections.
+            for _k in ("alerts", "awards", "news", "frameworks", "products"):
+                s.setdefault(_k, [])
             by_name[s["name"]] = s
     for name in dropped:
         print("dropped carried-forward multi-company record: %s" % name)

@@ -67,11 +67,14 @@ def rebuild(seed_suppliers, prev_suppliers):
         with open(os.path.join(repo, "data", name), "w") as f:
             json.dump(doc, f)
 
-    # Real seed records always carry these; main() only setdefaults awards/news,
-    # so a fixture missing `alerts` fails on a KeyError that no real data hits.
-    for rec in seed_suppliers:
-        rec.setdefault("alerts", [])
-        rec.setdefault("news", [])
+    # NOTHING is defaulted for the fixtures on purpose. This used to read "real
+    # seed records always carry these ... a KeyError that no real data hits", and
+    # filled in `alerts` and `news` before writing the seed. Real data hit it on
+    # 18/11/2026: a seed record added without `alerts` took the build down with
+    # KeyError('alerts'), __main__ swallowed it, exited 0, and the workflow went
+    # green with the index never rewritten. The workaround here is exactly what
+    # stopped a test ever seeing it, so the builder defaults these itself now and
+    # the fixtures go in as written.
     w("supplier-seed.json", {"suppliers": seed_suppliers})
     w("supplier-index.json", {"suppliers": prev_suppliers})
     w("compare-issues.json", {"specialities": {}})
@@ -268,6 +271,34 @@ _resolving = sum(1 for _s in _sup for _a in (_s.get("aliases") or [])
                  if _lut.get(_b.norm(_a)))
 check("declared aliases still resolve", _resolving > 1000, _resolving)
 
+
+# ---------------------------------------------------------------------------
+# 7. A SEED RECORD THAT OMITS A LIST MUST NOT TAKE THE BUILD DOWN.
+#    The 18/11/2026 silent miss. "Clinisupplies GB Limited" went into the seed
+#    at 13:26 with no `alerts` key. main() setdefaulted only awards and news, so
+#    the sort before the write raised KeyError('alerts'); __main__ logged
+#    "FATAL (exit 0 to keep Actions green)" and exited 0. The refresh workflow
+#    reported SUCCESS, data/supplier-index.json was never written, and the
+#    Compare tab served the previous day's data while looking current.
+#
+#    A hand-written seed entry omitting an empty list is normal and must cost
+#    nothing. rebuild() raises if the builder exits non-zero, and the award
+#    assertions below would fail on an index that was never rewritten, so this
+#    case fails loudly either way.
+# ---------------------------------------------------------------------------
+print("a seed record with no alerts/frameworks key still builds")
+recs, state, out = rebuild(
+    # Deliberately missing alerts, news, frameworks and products.
+    [{"name": "Sparse Medical"}],
+    [{"name": "Sparse Medical", "awards": [award("Catheters")]}])
+check("the build completed and wrote the index", "Sparse Medical" in recs,
+      sorted(recs))
+check("the missing list was defaulted, not dropped",
+      recs.get("Sparse Medical", {}).get("alerts") == [],
+      recs.get("Sparse Medical", {}).get("alerts"))
+check("and its published award still came forward",
+      titles(recs.get("Sparse Medical", {})) == ["Catheters"],
+      titles(recs.get("Sparse Medical", {})))
 
 print()
 if FAILURES:
