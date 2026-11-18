@@ -1076,15 +1076,34 @@
      --------------------------------------------------------------------- */
   function fwIndex(fwDoc) {
     var byKey = {};
+    /* The same index keyed on norm() alone — nothing stripped. This is the
+       browser's copy of company_match.Index.exact, and it exists for the same
+       reason: coKey() strips "ltd", "limited", "uk" and "gb", so two REAL
+       companies named on one brief whose names differ only by those words
+       collapse onto one key. NHS Supply Chain's Urology and Bowel Management
+       brief names both "Clinisupplies Ltd" (Companies House 04013240) and
+       "Clinisupplies GB Limited" (02503030), and both coKey to "clinisupplies".
+       Without this map, each record matched BOTH rows and fwLotLine() unioned
+       their lots, so 04013240's five lots would publish on 02503030's card and
+       the other way round. Added 18/11/2026. */
+    var byExact = {};
     ((fwDoc && fwDoc.frameworks) || []).forEach(function (f) {
       (f.suppliers || []).forEach(function (nm) {
+        var hit = { fw: f, matched: nm };
+        var e = norm(nm);
+        if (e) {
+          if (!byExact[e]) byExact[e] = [];
+          byExact[e].push(hit);
+        }
         var k = coKey(nm);
         if (!k) return;
         if (!byKey[k]) byKey[k] = [];
-        byKey[k].push({ fw: f, matched: nm });
+        byKey[k].push(hit);
       });
     });
-    return byKey;
+    /* Two separate maps, not one with a reserved property: a brief row really
+       named "Exact" would coKey to "exact" and collide with it. */
+    return { byCoKey: byKey, byExact: byExact };
   }
 
   /* Every framework whose brief names this company, under any of its recorded
@@ -1093,13 +1112,38 @@
      another is a fact about the register, not noise to tidy away. */
   function supplierFrameworks(s, ctx) {
     if (!ctx.fwByKey) return [];
-    var keys = {}, out = [], seen = {};
-    [s.name].concat(s.aliases || []).forEach(function (n) {
+    var ownNames = [s.name].concat(s.aliases || []);
+    var keys = {}, exact = {}, out = [], seen = {};
+    ownNames.forEach(function (n) {
       var k = coKey(n);
       if (k) keys[k] = 1;
+      var e = norm(n);
+      if (e) exact[e] = 1;
     });
+
+    /* VERBATIM TIER FIRST (18/11/2026), for the same reason company_match
+       .resolve() has one: a brief row this record holds UNSTRIPPED is this
+       record's row, and once we have one for a framework, the rows that only
+       reach it through coKey()'s stripping are somebody else's. So a framework
+       the record is named on verbatim keeps only its verbatim rows; a framework
+       that matches only by coKey is untouched, which is what keeps the cases
+       this index was built for working — a brief writing "GB UK Ltd" for GBUK
+       reaches the record by coKey alone and must go on reaching it. Narrowing
+       only: a record can lose a row that is not its own, never a framework. */
+    var byExact = ctx.fwByKey.byExact || {};
+    var byCoKey = ctx.fwByKey.byCoKey || {};
+    var verbatimRows = {};
+    Object.keys(exact).forEach(function (e) {
+      (byExact[e] || []).forEach(function (hit) {
+        if (!verbatimRows[hit.fw.url]) verbatimRows[hit.fw.url] = {};
+        verbatimRows[hit.fw.url][hit.matched] = 1;
+      });
+    });
+
     Object.keys(keys).forEach(function (k) {
-      (ctx.fwByKey[k] || []).forEach(function (hit) {
+      (byCoKey[k] || []).forEach(function (hit) {
+        var only = verbatimRows[hit.fw.url];
+        if (only && !only[hit.matched]) return;
         if (seen[hit.fw.url]) {
           if (seen[hit.fw.url].matched.indexOf(hit.matched) === -1) {
             seen[hit.fw.url].matched.push(hit.matched);
