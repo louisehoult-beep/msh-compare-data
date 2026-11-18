@@ -106,7 +106,35 @@ class PreviousNamesAreNotAMerge(unittest.TestCase):
     #                   Medical UK Ltd' says the two must never be merged.
     #                   "Europe" and "UK" are the distinguishing words, and
     #                   norm_stripped() is what discards them.
-    SETTLED_DISTINCT = {"nipro medical"}
+    #   clinisupplies - 04013240 CLINISUPPLIES LIMITED vs 02503030 CLINISUPPLIES
+    #                   GB LIMITED, both active. "GB" is the distinguishing word
+    #                   and norm_stripped() is what discards it. Ruled separate
+    #                   by Lou on 18/11/2026 ("Two records + link") on a
+    #                   Companies House reading taken the same day:
+    #                     - NEITHER number carries the other's name among its
+    #                       previous names. 04013240 has no previous names at
+    #                       all, and 02503030's are GREAT BEAR HEALTHCARE /
+    #                       SIGMA HEALTHCARE / WILLIAM JONES PACKAGING / JONES
+    #                       PACKAGING. So the rename evidence this whole file
+    #                       exists to police is ABSENT, which is why the pair
+    #                       belongs in this set and not in KNOWN_PRE_EXISTING.
+    #                     - Both registrations are live today, so neither is the
+    #                       dissolved-namesake case either.
+    #                     - Find a Tender award notice 032330-2023 (NHS Supply
+    #                       Chain, Urology and Bowel Management) awards them as
+    #                       TWO supplier parties, GB-FTS-96951 and GB-FTS-96957,
+    #                       on different lots (1/2/3/5/10 and 1/2/3/5/13). A
+    #                       buying organisation treats them as two suppliers.
+    #                   The PSC chains DO converge -- both sit under
+    #                   CLINISUPPLIES GROUP LIMITED 14506446 up to KKR, 75%+ at
+    #                   every link -- so this is one business held through one
+    #                   group. Lou's decision was to publish that relationship
+    #                   as a sourced fact on each record rather than merge them:
+    #                   see deepDive.ownership on both, written by
+    #                   scripts/_add_clinisupplies_group_link_1118.py. Common
+    #                   ownership is not one legal person, so the records stay
+    #                   apart and a bare "Clinisupplies" stays AMBIGUOUS.
+    SETTLED_DISTINCT = {"nipro medical", "clinisupplies"}
 
     def test_no_previous_name_is_claimed_by_another_supplier(self):
         """The guard. A previous name that is already another supplier's own
