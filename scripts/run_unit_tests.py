@@ -131,6 +131,7 @@ RUN = [
     "test_clinician_signup.py",          # 2026-10, clinician programme sign-up snippet rules
     "test_colleague_pass.py",            # 02/11/2026, Colleague Day Pass snippet rules (plan 690 at £0 for one day, codes, limits)
     "test_kol_finder.py",                # 2026-10, KOL finder data gate and page filters (Build Your Network 1882)
+    "test_stock_alerts.py",              # 2026-11, stapling/sutures/mesh supply-notice feed (app/stock-alerts.js)
     "test_sales_register.py",            # 2026-10, Medical Sales Register snippet rules, job typing, page filters
     # Added 30/09/2026 with scripts/refresh_icb_watch.py. Stdlib only, no network.
     "test_icb_watch.py",
