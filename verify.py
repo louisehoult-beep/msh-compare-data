@@ -4551,8 +4551,16 @@ def _warn_unresolved_lot_names(rows, seed):
     Read as a backlog of missing aliases it is wrong three ways: 86 of those
     names have no Hub record to alias to, 50 name a supplier the framework's own
     brief list omits (no alias can reach a supplier that is not on the brief),
-    and 2 are the brief's own duplicate rows. Each line below carries the fix
-    that actually applies to the names it counts. See check_framework_lots().
+    and 2 reach two rows on one brief. Each line below carries the fix that
+    actually applies to the names it counts. See check_framework_lots().
+
+    Corrected 18/11/2026: that third line originally called those two "the
+    brief's own duplicate rows" and told the reader to de-duplicate the list.
+    Both owner pages were re-read and neither row is a duplicate — each brief
+    prints two REAL companies and its own stated supplier count matches the
+    capture. The ambiguity is ours, not the owner's: company_match.key() strips
+    a legal-form or territory word and collapses them. Verdicts in
+    state/two-brief-rows-one-key-adjudication-1118.json.
     """
     if not rows:
         return
@@ -4611,8 +4619,21 @@ def _warn_unresolved_lot_names(rows, seed):
         n, nf, ex = tell(ambiguous)
         WARN("framework-lots", "%d lot-source supplier name(s) across %d framework(s) reach TWO OR MORE rows "
                                "on the framework's own brief supplier list, so which row holds the lot cannot "
-                               "be settled from the notice. De-duplicate the brief's supplier list — do not "
-                               "pick a row: %s." % (n, nf, ex))
+                               "be settled from the notice alone. This line USED to say to de-duplicate the "
+                               "brief's supplier list. That is NOT the fix and the owner's pages disprove it: "
+                               "both were re-read on 18/11/2026 and each prints two rows for two REAL "
+                               "companies, with the page's own stated supplier count matching the capture — "
+                               "Clinisupplies Ltd (04013240) beside Clinisupplies GB Limited (02503030), "
+                               "Nestle Ltd beside Nestle UK. Editing the capture would delete a real supplier "
+                               "and be restored by the next weekly run. What the rows share is only a "
+                               "company_match.key() that strips a legal-form or territory word, so the fix is "
+                               "attach_names()' territory-preserving tier, which fires only where the seed "
+                               "holds BOTH the source name and one of the rows verbatim on one record. A name "
+                               "left here is one the Hub has no such evidence for, and it stays quarantined on "
+                               "purpose rather than being attached to a record that is not the awardee. The "
+                               "verdicts reached are in state/two-brief-rows-one-key-adjudication-1118.json, "
+                               "so a name named below that appears there is a DECIDED state, not a backlog "
+                               "item: %s." % (n, nf, ex))
     if unclassified:
         n, nf, ex = tell(unclassified)
         WARN("framework-lots", "%d lot-source supplier name(s) across %d framework(s) did not attach to a "
