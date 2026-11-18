@@ -199,6 +199,76 @@ check("quiet when the build ADDS an award",
 check("silent about a supplier that has left the index entirely",
       gate(pub, [{"name": "Other Medical", "awards": []}]) == [])
 
+# ---------------------------------------------------------------------------
+# 6. ALIAS PRECEDENCE. The 18/11/2026 failure: an award was carried forward onto
+#    the WRONG supplier because another record's suffix-stripped alias had taken
+#    over its canonical name in the alias lookup.
+#
+#      "Uniphar Medtech"                        norm    -> uniphar medtech
+#      "Uniphar Medtech UK Ltd"  (alias of the
+#       Cardiac Services / Synapse Medical
+#       record)                                 norm_co -> uniphar medtech
+#
+#    norm_co() strips "uk" and "ltd". The alias was written last, so it won, and
+#    the carry-forward loop resolved "Uniphar Medtech" to the Cardiac Services
+#    record. "Uniphar Medtech" stayed in the build with no awards, the gate in
+#    section 5 fired, and the daily refresh went red with the Compare tab frozen.
+#
+#    A supplier's own canonical name must always resolve to that supplier. This
+#    runs over the REAL seed, so a future alias cannot take a canonical name away
+#    from its owner without this test saying so.
+# ---------------------------------------------------------------------------
+print("a supplier's own name always wins over another supplier's loose alias")
+
+import importlib.util
+_spec = importlib.util.spec_from_file_location("_bsi", BUILDER)
+_b = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_b)
+
+# The exact shape of the 18/11/2026 collision, built by hand so the case stands
+# even if the seed is later curated.
+collide = [
+    {"name": "Uniphar Medtech", "aliases": []},
+    {"name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+     "aliases": ["Cardiac Services", "Uniphar Medtech UK Ltd",
+                 "Uniphar Medtech UK Limited"]},
+]
+lut = _b.build_alias_lookup(collide)
+check("exact canonical name beats another record's norm_co alias",
+      lut.get("uniphar medtech") == "Uniphar Medtech", lut.get("uniphar medtech"))
+check("the other record keeps its own aliases",
+      lut.get("uniphar medtech uk ltd")
+      == "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+      lut.get("uniphar medtech uk ltd"))
+check("and keeps an alias nothing else claims",
+      lut.get("cardiac services")
+      == "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+      lut.get("cardiac services"))
+
+# Order must not decide the outcome: the same two records, declared the other way
+# round, must resolve identically. The old body was last-writer-wins, so this is
+# the assertion it could not pass.
+lut_rev = _b.build_alias_lookup(list(reversed(collide)))
+check("the result does not depend on seed order",
+      lut_rev.get("uniphar medtech") == "Uniphar Medtech", lut_rev.get("uniphar medtech"))
+
+# Over the shipped seed, no supplier's canonical name may resolve elsewhere.
+_seed = json.load(open(os.path.join(HERE, "data", "supplier-seed.json")))
+_sup = _seed["suppliers"] if isinstance(_seed, dict) else _seed
+_lut = _b.build_alias_lookup(_sup)
+_own = {}
+for _s in _sup:
+    _own.setdefault(_b.norm(_s["name"]), _s["name"])
+_hijacked = ["%s -> %s" % (_own[k], _lut.get(k)) for k in _own if _lut.get(k) != _own[k]]
+check("no supplier in the real seed loses its name to another record",
+      not _hijacked, "; ".join(_hijacked[:5]))
+
+# An alias must still resolve — the fix must not have made the lookup useless.
+_resolving = sum(1 for _s in _sup for _a in (_s.get("aliases") or [])
+                 if _lut.get(_b.norm(_a)))
+check("declared aliases still resolve", _resolving > 1000, _resolving)
+
+
 print()
 if FAILURES:
     print("FAILED: %s" % ", ".join(FAILURES))

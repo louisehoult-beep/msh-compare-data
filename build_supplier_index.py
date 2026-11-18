@@ -170,10 +170,50 @@ def verified_news(name):
     return out[:NEWS_KEEP]
 
 def build_alias_lookup(suppliers):
-    lut = {}
+    """Resolve a raw name to a canonical supplier, strongest evidence first.
+
+    THE BLEED THIS FIXES, found 18/11/2026. The old body wrote norm() and
+    norm_co() keys for every name and alias in one pass, last writer winning. So
+    a LOOSE key derived from one supplier's alias could overwrite the EXACT key
+    that was another supplier's own canonical name. In the shipped seed that
+    happened once and it cost an award:
+
+        "Uniphar Medtech"                                    norm    -> uniphar medtech
+        "Uniphar Medtech UK Ltd"   (an alias of the merged
+         Cardiac Services / Synapse Medical record)          norm_co -> uniphar medtech
+
+    norm_co() strips "uk" and "ltd", so the alias collided with the other
+    company's real name and, being written later, won. The award on "Uniphar
+    Medtech" was then carried forward onto the Cardiac Services record, while the
+    "Uniphar Medtech" record stayed in the build holding nothing — which is a
+    supplier losing a published award, so check_supplier_index_awards() turned
+    the 18/11/2026 refresh red and the Compare tab froze. The gate was right.
+
+    Precedence, strongest first. A tier never overwrites a tier above it, and
+    within a tier the first writer wins, because a later equal-strength claim is
+    not better evidence — it is just later:
+
+        1. norm(own name)      a supplier's own name, spelled exactly
+        2. norm(alias)         a declared alias, spelled exactly
+        3. norm_co(own name)   a supplier's own name, suffixes stripped
+        4. norm_co(alias)      a declared alias, suffixes stripped
+
+    Tier 1 is the invariant that matters: a name that IS a supplier's canonical
+    name must always resolve to that supplier. test_supplier_index_awards.py
+    asserts it over the real seed, so a future alias cannot quietly take a
+    canonical name away from its owner again.
+    """
+    tiers = [{}, {}, {}, {}]
     for s in suppliers:
-        for a in ([s["name"]] + s.get("aliases", [])):
-            lut[norm(a)] = s["name"]; lut[norm_co(a)] = s["name"]
+        name = s["name"]
+        tiers[0].setdefault(norm(name), name)
+        tiers[2].setdefault(norm_co(name), name)
+        for a in s.get("aliases", []):
+            tiers[1].setdefault(norm(a), name)
+            tiers[3].setdefault(norm_co(a), name)
+    lut = {}
+    for t in reversed(tiers):          # weakest first, so stronger tiers overwrite
+        lut.update(t)
     return lut
 
 def split_companies(raw_name, alias_lut):
