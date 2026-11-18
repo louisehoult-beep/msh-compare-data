@@ -41887,7 +41887,7 @@
    "links": [],
    "awards": [],
    "curated": true,
-   "note": "Added 14/08/2026 from NHS Supply Chain's own contract launch briefs for 1 framework (2023/S 000-034841). The framework award is the only verified fact in this record. Product range, UK entity, ownership and website have NOT been verified and must be checked at source before being used with a customer.",
+   "note": "Added 14/08/2026 from NHS Supply Chain's own contract launch briefs for 1 framework (2023/S 000-034841). The framework award is the only verified fact in this record. Product range, UK entity, ownership and website have NOT been verified and must be checked at source before being used with a customer. Companies House identity confirmed 18/11/2026: FAR FROM SURGICAL SOLUTIONS LTD, company number 12333908, registered office Ty Taf Fechan, Dol-Y-Gaer, Merthyr Tydfil, Wales, CF48 2UR, SIC 86220 (specialist medical practice activities), incorporated 26/11/2019, status Active -- this is the right company for the award, no ambiguity on name. No website was found for it or for the aliases FERIS MEDICAL LTD / POLAR MEDTECH LIMITED after a web search on 18/11/2026; no domain is recorded here rather than guessed. A future run does not need to repeat this search unless a new lead for the company's own site turns up.",
    "verified": "2026-08-14",
    "source": "NHS Supply Chain contract launch briefs (2023/S 000-034841), fetched 14/08/2026",
    "reconciledFrom": "reconcile_suppliers.py tier-3 backfill, 14/08/2026",
@@ -49290,7 +49290,9 @@
    "specialities": [
     "Orthopaedics and trauma"
    ],
-   "products": [],
+   "products": [
+    "Senza / HFX iQ (spinal cord stimulation system) -- added 18/11/2026: the Neuromodulation framework award itself is named by NHS Supply Chain as \"Globus Medical UK Ltd – novated from Nevro Medical Limited\" (nhssc-brief, capturedOn 2026-11-15), i.e. Nevro's own award transferred to Globus on NHSSC's own record, which is stronger than the identity-vocabulary policy's dissolved-awardee-successor shape requires (that shape needs a transfer document; here the primary source names the novation itself). Nevro's Senza/HFX spinal cord stimulation range is confirmed via trade press reporting Globus's completed acquisition of Nevro (event sourcing, verification standard rule 9's carve-out for M&A) and via NICE medical technologies guidance MTG41, which covers the earlier Senza system for chronic neuropathic pain (now succeeded by Senza Omnia / HFX iQ). No NHS Supply Chain catalogue item description for this product under Globus Medical UK Ltd has been read this run, so this is NOT run through differentiator-category-map.json's own NHSSC-catalogue-sourced mapping process -- see OUTSTANDING.md for the open item."
+   ],
    "frameworks": [
     {
      "name": "Neuromodulation Devices and Associated Products",
@@ -88034,15 +88036,23 @@
     }
    ],
    "news": [],
-   "note": "Nottinghamshire-based UK specialist.",
-   "links": [],
+   "note": "Nottinghamshire-based UK specialist. Domain confirmed 18/11/2026: optimus-medical.com's own Contact Us page lists its address as \"The Enterprise Centre Retford Nottinghamshire DN22 7GR\", matching Companies House's registered office for OPTIMUS MEDICAL LIMITED (08254822) — \"Retford Enterprise Centre, Randall Way, Retford, Nottinghamshire, DN22 7GR\" — under the identity policy table's domain-proof-tier ruling (20/09/2026), tier 2 (registered-office address match). Crawled 18/11/2026: the site's WordPress API and WooCommerce Store API both returned HTTP 404 and the sitemap carries no product URLs, so it is not a catalogue site — refusal recorded in data/supplier-products.json. The 4 curated products above (confirmed against 173 live NHS Supply Chain SKUs, 20/07/2026) remain the only product data for this supplier; nothing further was crawlable.",
+   "links": [
+    {
+     "label": "Website",
+     "url": "https://www.optimus-medical.com/",
+     "source": "Proved by REGISTERED-OFFICE ADDRESS (tier 2 under the identity policy table's domain-proof-tier ruling, 20/09/2026): below an on-site registration number, above a name match. Site's Contact Us page, read 2026-11-18, lists \"The Enterprise Centre Retford Nottinghamshire DN22 7GR\", matching Companies House's registered office for OPTIMUS MEDICAL LIMITED (08254822): Retford Enterprise Centre, Randall Way, Retford, Nottinghamshire, DN22 7GR.",
+     "route": "registered-address",
+     "checkedOn": "2026-11-18"
+    }
+   ],
    "curated": true,
    "awards": [],
    "voice": {
     "angle": "",
     "line": ""
    },
-   "_specialitiesEvidence": "20/07/2026: replaced the generic category label with 4 named product families, 3 confirmed against 173 live NHS Supply Chain SKUs."
+   "_specialitiesEvidence": "20/07/2026: replaced the generic category label with 4 named product families, 3 confirmed against 173 live NHS Supply Chain SKUs. Domain confirmed 18/11/2026 (registered-office address tier); crawled same day, no catalogue found, refusal recorded."
   },
   {
    "name": "Optos",
