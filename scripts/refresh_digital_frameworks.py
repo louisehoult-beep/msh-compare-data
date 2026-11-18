@@ -499,6 +499,23 @@ def parse_sbs_page(page_html):
     }
 
 
+def parse_sbs_suppliers(page_html):
+    """Company names only, exactly as the SBS page's own Supplier Details section lists them
+    (div.supplierprofile inside section id=supplier-details). Empty list if none found."""
+    i = page_html.find('id="supplier-details"')
+    if i < 0:
+        return []
+    j = page_html.find("</section>", i)
+    block = page_html[i:j if j > 0 else len(page_html)]
+    names = []
+    for m in re.finditer(r'<div class="supplierprofile">(.*?)</div>', block, re.S):
+        n = html.unescape(re.sub(r"<[^>]+>", " ", m.group(1)))
+        n = re.sub(r"\s+", " ", n).strip()
+        if n and n not in names:
+            names.append(n)
+    return names
+
+
 def award_suppliers(pkg):
     """{lot id: sorted company names} from the award notice, names exactly as published."""
     r = pkg["releases"][0]
@@ -574,9 +591,11 @@ def build_sbs_page_only(fetcher, slug, name, today, extra_nv=()):
     pg = parse_sbs_page(page_html)
     if not pg["reference"] or not pg["starts"]:
         raise RuntimeError("SBS page %s: reference or dates not found" % slug)
-    nv.append("Supplier list not read: the SBS page lists suppliers behind its own supplier tab "
-              "and no award notice was read for this framework. Settled by the SBS supplier "
-              "details or the award notice.")
+    sup = parse_sbs_suppliers(page_html)
+    if not sup:
+        nv.append("Supplier list not read: the SBS page lists suppliers behind its own supplier tab "
+                  "and no award notice was read for this framework. Settled by the SBS supplier "
+                  "details or the award notice.")
     return {
         "name": name,
         "reference": pg["reference"],
@@ -587,7 +606,7 @@ def build_sbs_page_only(fetcher, slug, name, today, extra_nv=()):
         "ends": pg["ends"],
         "extensionOption": pg["option"],
         "lots": [],
-        "suppliers": None,
+        "suppliers": sup or None,
         "verifiedOn": today,
         "sourceQuote": pg["dateLine"],
         "notVerified": nv,

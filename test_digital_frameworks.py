@@ -369,5 +369,16 @@ class ExpiredGCloud(unittest.TestCase):
                                      "2026-11-16")
 
 
+class SbsSupplierDetailsTest(unittest.TestCase):
+    def test_parse_sbs_suppliers_reads_only_supplier_details_section(self):
+        page = ('<section class="section" id="supplier-details"><div class="suppliercontainer">'
+                '<div class="supplierprofile"><a href="x">Alpha Ltd</a></div>'
+                '<div class="supplierprofile"><a href="y">Beta &amp; Co </a></div>'
+                '</div></section><section><h3>Other</h3>'
+                '<div class="supplierprofile"><a>Not a supplier</a></div></section>')
+        self.assertEqual(rdf.parse_sbs_suppliers(page), ["Alpha Ltd", "Beta & Co"])
+        self.assertEqual(rdf.parse_sbs_suppliers("<html>none</html>"), [])
+
+
 if __name__ == "__main__":
     unittest.main()
