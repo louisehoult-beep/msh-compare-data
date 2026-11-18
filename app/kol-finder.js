@@ -129,9 +129,9 @@
     doc.classes.forEach(function (c) { CLASS_LABEL[c.id] = c.label; });
     doc.sources.forEach(function (s) { SRC_SHORT[s.id] = s.short; });
     var BODY_LABEL = { BAD: 'British Association of Dermatologists (BAD)', BDNG: 'British Dermatological Nursing Group (BDNG)', PCDS: 'Primary Care Dermatology Society (PCDS)', SDS: 'Scottish Dermatological Society (SDS)' };
-    var qs = '';
-    try { qs = new URLSearchParams(location.search).get('speciality') || ''; } catch (e) {}
-    var st = { spec: pickSpeciality(doc, [qs]), cls: '', body: '', q: '' };
+    var qs = '', qq = '';
+    try { var up = new URLSearchParams(location.search); qs = up.get('speciality') || ''; qq = (up.get('q') || '').slice(0, 80); } catch (e) {}
+    var st = { spec: pickSpeciality(doc, [qs]), cls: '', body: '', q: qq };
     var sc = specCounts(doc.people);
     var specOpts = doc.specialities.map(function (s) {
       return '<option value="' + esc(s.id) + '">' + esc(s.label) + (sc[s.id] ? ' (' + sc[s.id] + ')' : ' (none checked yet)') + '</option>';
@@ -156,7 +156,7 @@
       + '<p class="kolf-sub">People the professional bodies themselves put forward in public: the board and committee members who steer a speciality, the speakers they invite, the editors and guideline authors. Pick a speciality, then narrow by who they are. Specialities show as soon as their sources are checked.</p>'
       + '<div class="kolf-controls"><label>Speciality<select id="kolf-spec">' + specOpts + '</select></label>'
       + '<label>Body<select id="kolf-body">' + bodyOpts + '</select></label>'
-      + '<label>Search name or role<input id="kolf-q" type="search" placeholder="for example Scotland, editor, guidelines"></label></div>'
+      + '<label>Search name or role<input id="kolf-q" type="search" placeholder="for example Scotland, editor, thoracic"></label></div>'
       + '<div class="kolf-chips" id="kolf-chips"></div><p class="kolf-count" id="kolf-count" aria-live="polite"></p>'
       + '<div id="kolf-out"></div>'
       + '<details><summary>Where this comes from, and why it is lawful</summary><p>Every name was read on the date shown from a page the body itself publishes. Only the name, the public role and the page it came from are held. No email address, phone number or home detail is stored, and paid staff are not listed. The lawful basis is legitimate interests under the UK General Data Protection Regulation (UK GDPR), Article 6(1)(f): a member of the Hub finding the people a speciality publicly puts forward. A LinkedIn profile link appears only where a public search showed the same name with a matching role, employer or speciality; otherwise the link is a search for you to judge. Nothing is scraped.</p>'
@@ -165,6 +165,7 @@
 
     var specSel = mount.querySelector('#kolf-spec');
     specSel.value = st.spec;
+    mount.querySelector('#kolf-q').value = st.q;
     function draw() {
       var c = counts(doc.people, st.spec);
       var chips = [['', 'Everyone', c.all]].concat(doc.classes.map(function (k) { return [k.id, k.label, c[k.id] || 0]; }));

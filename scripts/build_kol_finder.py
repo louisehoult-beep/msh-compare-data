@@ -65,6 +65,7 @@ CLASSES = [
     ("evidence", "Evidence authors"),
     ("editor", "Journalists, editors and commentators"),
     ("supply", "Supply chain contacts"),
+    ("clinical", "Named hospital unit consultants"),
 ]
 
 SOURCES = {
@@ -359,6 +360,7 @@ EMPTY = {
     "evidence": "No evidence authors are listed beyond people a source page names as an author or guideline chair. No publication list was read for this build, so none is claimed.",
     "supply": "No NHS Supply Chain buyers are listed here. Use the category directory to find the right buyer.",
     "editor": "No journalists or commentators are listed until a source names them.",
+    "clinical": "No hospital unit consultants are listed for this speciality. A name is added only when the trust's own page names the consultant.",
 }
 
 

@@ -71,6 +71,23 @@ class Gate(unittest.TestCase):
         for spec in ("dermatology", "continence", "wound", "vascular", "diabetes"):
             self.assertTrue([p for p in DOC["people"] if spec in p["specialities"]], spec)
 
+    def test_thoracic_names_findable_from_mis(self):
+        """Thoracic surgery sits in the minimally invasive surgery view: search 'thoracic', or filter by SCTS / BTOG."""
+        mis = [p for p in DOC["people"] if "mis" in p["specialities"]]
+        hits = [p for p in mis if any("thoracic" in (a["role"] + " " + (a["organisation"] or "")).lower() for a in p["appearances"])]
+        self.assertGreaterEqual(len(hits), 40)
+        self.assertTrue({"SCTS", "BTOG"} <= {b for p in mis for b in p["bodies"]})
+        names = {p["name"] for p in hits}
+        for n in ("Mr Kandadai Rammohan", "Mr Michael Gooseman", "Annabel Jane Sharkey"):
+            self.assertIn(n, names)
+
+    def test_thoracic_people_have_named_primary_source(self):
+        for p in DOC["people"]:
+            for a in p["appearances"]:
+                if a["source"].startswith("thor-"):
+                    self.assertEqual(a["checked"], "2026-11-18")
+                    self.assertTrue(a["source_url"].startswith("https://"))
+
 
 NODE = r"""
 const k = require(process.argv[1])._pure;
@@ -83,6 +100,7 @@ const out = {
   supply: k.filter(doc.people, {spec: 'dermatology', cls: 'supply'}).length,
   pcds: k.filter(doc.people, {body: 'PCDS'}).length,
   q: k.filter(doc.people, {q: 'scotland'}).map(p => p.name),
+  thor: k.filter(doc.people, {spec: 'mis', q: 'thoracic'}).length,
   pickDefault: k.pickSpeciality(doc, ['']),
   pickUnknown: k.pickSpeciality(doc, ['zzz']),
   pickWound: k.pickSpeciality(doc, ['wound']),
@@ -106,6 +124,7 @@ class Page(unittest.TestCase):
         self.assertEqual(o["supply"], 0)
         self.assertGreater(o["pcds"], 10)
         self.assertIn("Dr Paula Beattie", o["q"])
+        self.assertGreaterEqual(o["thor"], 40)
         self.assertEqual(o["pickDefault"], "dermatology")
         self.assertEqual(o["pickUnknown"], "dermatology")
         self.assertEqual(o["pickWound"], "wound")
