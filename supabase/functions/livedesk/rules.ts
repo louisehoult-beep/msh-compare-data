@@ -80,3 +80,16 @@ export function fromRevenueCat(ev: Record<string, unknown>):
     store_platform: typeof ev.store === "string" ? ev.store : null,
   };
 }
+
+/** RevenueCat TRANSFER event -> the Supabase user ids the purchase moved from and to.
+ *  Restore purchases on another account (or on a new guest account after a
+ *  reinstall) moves the store subscription; access must move with it. Only
+ *  Supabase user ids are kept, as in fromRevenueCat. null when there is nothing to move. */
+export function transferFromRevenueCat(ev: Record<string, unknown>): { from: string[]; to: string[] } | null {
+  if (String(ev.type || "") !== "TRANSFER") return null;
+  const ids = (v: unknown) => Array.isArray(v)
+    ? [...new Set(v.filter((x): x is string => typeof x === "string" && /^[0-9a-f-]{36}$/i.test(x)))] : [];
+  const from = ids(ev.transferred_from);
+  const to = ids(ev.transferred_to).filter((x) => !from.includes(x));
+  return from.length && to.length ? { from, to } : null;
+}

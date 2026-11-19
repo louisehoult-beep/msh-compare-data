@@ -1,7 +1,13 @@
 // Live Desk app. One screen at a time, rendered into #app.
 //
-//   sign-in  ->  (no access) access screen: connect Hub membership, or subscribe
-//            ->  (access)    Desk | Alerts | Account
+//   first launch -> guest account (no details asked) -> (no access) access
+//   screen: connect Hub membership, subscribe, or sign in to an existing
+//   account -> (access) Desk | Alerts | Account
+//
+// App Store 5.1.1(v) (rejection 19/11/2026): registering must not be required
+// to buy. A guest is an anonymous Supabase user: it holds the subscription
+// with no email. Signing in is optional; Restore purchases moves a
+// subscription to whichever account is signed in (webhook TRANSFER).
 //
 // Server: the Supabase Edge Function "livedesk" (supabase/functions/livedesk).
 // Hub members connect by opening the Hub's "Live Desk app" page, which hands a
@@ -58,7 +64,10 @@ const S = {
   busy: '',
   packages: null,
   note: '',
+  showSignIn: false,  // a guest chose "Sign in" on the access screen
 };
+
+const isGuest = () => !!(S.user && S.user.is_anonymous);
 
 // ---------------------------------------------------------------- helpers
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -108,7 +117,7 @@ async function loadFeed() {
 }
 
 async function afterSignIn(user) {
-  S.user = user;
+  S.user = user; S.showSignIn = false; S.pendingEmail = '';
   if (NATIVE && CONFIG.revenueCatKey[PLATFORM]) {
     try { await Purchases.logIn({ appUserID: user.id }); } catch { /* offline: retried next launch */ }
   }
@@ -132,6 +141,15 @@ async function loadOfferings() {
       period: PERIOD[p.packageType] || '',
     }));
   } catch { S.packages = []; }
+}
+
+// No account details needed to look at plans or subscribe (5.1.1(v)).
+async function startAsGuest() {
+  setBusy('Opening the Live Desk...');
+  const { data, error } = await sb.auth.signInAnonymously();
+  S.busy = '';
+  if (error || !data.user) { S.note = ''; S.showSignIn = true; render(); return; }
+  await afterSignIn(data.user);
 }
 
 async function sendCode(email) {
@@ -229,7 +247,7 @@ async function signOut() {
   try { if (NATIVE && CONFIG.revenueCatKey[PLATFORM]) await Purchases.logOut(); } catch { /* anonymous already */ }
   await sb.auth.signOut();
   await store.del('feed'); await store.del('status');
-  Object.assign(S, { user: null, status: null, feed: null, tab: 'desk', note: '' });
+  Object.assign(S, { user: null, status: null, feed: null, tab: 'desk', note: '', showSignIn: false });
   render();
 }
 
@@ -310,6 +328,7 @@ function viewSignIn() {
            <button id="usepw" class="link">I have a password</button>`}
     ${S.note ? `<p class="note">${esc(S.note)}</p>` : ''}
     <p class="small">By signing in you agree to the <a data-open="${CONFIG.termsUrl}">terms</a> and <a data-open="${CONFIG.privacyUrl}">privacy policy</a>.</p>
+    ${sent ? '' : `<p class="small">Signing in is optional. You can subscribe without an account.</p><button id="guest" class="link">${isGuest() ? 'Back' : 'Continue without an account'}</button>`}
   </main>`;
 }
 
@@ -335,7 +354,8 @@ function viewAccess() {
       <button id="check" class="link">Check again</button>
     </section>` : ''}
     ${S.note ? `<p class="note">${esc(S.note)}</p>` : ''}
-    <p class="small"><a data-open="${CONFIG.termsUrl}">Terms of use</a> · <a data-open="${CONFIG.privacyUrl}">Privacy policy</a> · <button id="signout" class="link inline">Sign out</button></p>
+    ${isGuest() ? '<p class="small">No account needed. Already subscribed on another device? Tap Restore purchases.</p>' : ''}
+    <p class="small"><a data-open="${CONFIG.termsUrl}">Terms of use</a> · <a data-open="${CONFIG.privacyUrl}">Privacy policy</a> · ${isGuest() ? '<button id="signin" class="link inline">Sign in</button>' : '<button id="signout" class="link inline">Sign out</button>'}</p>
   </main>`;
 }
 
@@ -413,13 +433,14 @@ function viewAccount() {
     : st.via === 'store' ? `Subscription, renews or ends ${esc(shortDate(st.store_until))}` : 'No access';
   return `<main class="pad">
     <h1>Account</h1>
-    <section class="card"><p><b>${esc(S.user && S.user.email)}</b></p><p>${via}</p></section>
+    <section class="card"><p><b>${isGuest() ? 'No account (guest)' : esc(S.user && S.user.email)}</b></p><p>${via}</p>
+      ${isGuest() ? '<p class="small">To use the Live Desk on another phone or tablet, install the app there and tap Restore purchases with the same store account. Signing in is optional.</p>' : ''}</section>
     ${st.via === 'store' ? `<button id="manage" class="btn ghost">Manage subscription</button>` : ''}
     <button id="hub" class="btn ghost">${st.via === 'hub' ? 'Re-check Hub membership' : 'Connect Hub membership'}</button>
     ${CONFIG.revenueCatKey[PLATFORM] ? '<button id="restore" class="btn ghost">Restore purchases</button>' : ''}
     <p class="small"><a data-open="${CONFIG.supportUrl}">Help and contact</a> · <a data-open="${CONFIG.privacyUrl}">Privacy policy</a> · <a data-open="${CONFIG.termsUrl}">Terms</a></p>
-    <button id="signout" class="btn ghost">Sign out</button>
-    <button id="delete" class="link danger">Delete my account</button>
+    ${isGuest() ? '' : '<button id="signout" class="btn ghost">Sign out</button>'}
+    <button id="delete" class="link danger">${isGuest() ? 'Delete this guest account' : 'Delete my account'}</button>
     ${S.note ? `<p class="note">${esc(S.note)}</p>` : ''}
     <p class="small">Version ${esc(CONFIG.version)}</p>
   </main>`;
@@ -433,7 +454,7 @@ function tabs() {
 function render() {
   let html;
   if (S.busy) html = `${header()}<main class="pad center"><div class="spinner"></div><p>${esc(S.busy)}</p></main>`;
-  else if (!S.user) html = viewSignIn();
+  else if (!S.user || S.showSignIn) html = viewSignIn();
   else if (!S.status || !S.status.access) html = viewAccess();
   else html = (S.tab === 'desk' ? deskHeader() : header()) + ({ desk: viewDesk, alerts: viewAlerts, account: viewAccount }[S.tab])() + tabs();
   $app.innerHTML = html;
@@ -474,6 +495,11 @@ $app.addEventListener('click', async (e) => {
       if (error || !data.user) { S.note = 'That email and password did not match.'; render(); return; }
       S.note = ''; await afterSignIn(data.user); return;
     }
+    case 'signin': S.showSignIn = true; S.withPassword = false; S.pendingEmail = ''; S.note = ''; render(); return;
+    case 'guest':
+      S.note = '';
+      if (isGuest()) { S.showSignIn = false; render(); } else startAsGuest();
+      return;
     case 'hub': connectHub(); return;
     case 'restore': restore(); return;
     case 'check': setBusy('Checking...'); await waitForAccess(); return;
@@ -533,7 +559,7 @@ async function start() {
 
   const { data } = await sb.auth.getSession();
   if (data.session && data.session.user) await afterSignIn(data.session.user);
-  else render();
+  else await startAsGuest();
   if (NATIVE) SplashScreen.hide();
 }
 

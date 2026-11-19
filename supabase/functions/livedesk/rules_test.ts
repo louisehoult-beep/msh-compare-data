@@ -1,6 +1,6 @@
 // deno test --allow-read supabase/functions/livedesk/rules_test.ts
 import { assertEquals } from "jsr:@std/assert@1";
-import { fromRevenueCat, HUB_LINK_DAYS, readDevice, status } from "./rules.ts";
+import { fromRevenueCat, HUB_LINK_DAYS, readDevice, status, transferFromRevenueCat } from "./rules.ts";
 
 const NOW = Date.parse("2026-10-01T09:00:00Z");
 const day = 86400_000;
@@ -36,4 +36,12 @@ Deno.test("revenuecat: renewal sets expiry, anonymous ignored, test ignored", ()
   assertEquals(r?.store_expires_at, new Date(NOW + day).toISOString());
   assertEquals(fromRevenueCat({ type: "RENEWAL", app_user_id: "$RCAnonymousID:abc", expiration_at_ms: NOW }), null);
   assertEquals(fromRevenueCat({ type: "TEST", app_user_id: uid }), null);
+});
+
+Deno.test("transferFromRevenueCat keeps only Supabase ids and needs both sides", () => {
+  const a = "11111111-1111-1111-1111-111111111111", b = "22222222-2222-2222-2222-222222222222";
+  assertEquals(transferFromRevenueCat({ type: "TRANSFER", transferred_from: [a, "$RCAnonymousID:x"], transferred_to: [b] }), { from: [a], to: [b] });
+  assertEquals(transferFromRevenueCat({ type: "TRANSFER", transferred_from: ["$RCAnonymousID:x"], transferred_to: [b] }), null);
+  assertEquals(transferFromRevenueCat({ type: "TRANSFER", transferred_from: [a], transferred_to: [a] }), null);
+  assertEquals(transferFromRevenueCat({ type: "RENEWAL", app_user_id: a }), null);
 });
