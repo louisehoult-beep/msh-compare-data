@@ -35,14 +35,14 @@ counted here, but every supplier in it is waiting on a ruling only Lou can
 give, so `differentiator-framework-coverage` skips them when it picks a
 framework to work. They are listed in `data/coverage-deferrals.json` with
 the decision each waits on; delete the entry once that decision is made.
-**14 supplier(s) on 3 framework(s) are EXCLUDED** — Lou ruled they are not a coverage target (`data/coverage-deferrals.json`, `exclusions`).
+**15 supplier(s) on 4 framework(s) are EXCLUDED** — Lou ruled they are not a coverage target (`data/coverage-deferrals.json`, `exclusions`).
 They stay in Awarded and in every record; they leave Left and the pick list.
 
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 42 | 34.4% | 40 | 55 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 36 | 35.6% | 12 | 70 | STARTED |
-| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 27 | 42.9% | 18 | 30 | STARTED |
+| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 27 | 42.9% | 18 | 31 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 22 | 42 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 28 | 48.3% | 11 | 33 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 26 | 45.6% | 13 | 32 | STARTED |
@@ -55,7 +55,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 42 | 11 | 26.2% | 14 | 29 | STARTED |
 | Wound Closure | closure | 39 | 14 | 35.9% | 18 | 20 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 15 | 40.5% | 6 | 28 | STARTED |
-| Respiratory Solutions | respiratory | 37 | 17 | 45.9% | 14 | 20 | STARTED |
+| Respiratory Solutions | respiratory | 37 | 18 | 48.6% | 12 | 20 | STARTED · 1 EXCLUDED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 13 | 37.1% | 7 | 21 | STARTED |
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 13 | 39.4% | 13 | 22 | STARTED |
 | Aids for Daily Living | rehab | 31 | 16 | 51.6% | 7 | 17 | STARTED |
@@ -66,7 +66,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 10 | 40.0% | 8 | 14 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 8 | 32.0% | 7 | 15 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 13 | 56.5% | 4 | 17 | STARTED |
-| Physiotherapy and Occupational Therapy | rehab | 22 | 8 | 36.4% | 6 | 13 | STARTED |
+| Physiotherapy and Occupational Therapy | rehab | 22 | 8 | 36.4% | 7 | 12 | STARTED |
 | Hand Hygiene and Associated Products and Services | infection | 21 | 6 | 28.6% | 4 | 16 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 13 | 61.9% | 3 | 11 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 6 | 28.6% | 1 | 11 | STARTED · 5 EXCLUDED |

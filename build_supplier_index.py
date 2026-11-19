@@ -596,7 +596,12 @@ def main():
     out = {"dataAsOf": datetime.date.today().strftime("%d/%m/%Y"),
            "generated": datetime.datetime.utcnow().isoformat() + "Z",
            "note": "Curated core + auto-detected medical award winners (Contracts Finder CPV 33*) + live recalls + news corroborated by >=2 reputable sources. Auto items: verify at source.",
-           "suppliers": sorted(by_name.values(), key=lambda s: s["name"].lower())}
+           # A seed record carrying `heldOffHub` (Lou's ruling, ^o639, 19/11/2026)
+           # stays in by_name above so its aliases still absorb matching raw names
+           # (no auto-detected twin appears), but is never written to the index,
+           # so it reaches no Hub page until the hold is lifted in the seed.
+           "suppliers": sorted((s for s in by_name.values() if not s.get("heldOffHub")),
+                               key=lambda s: s["name"].lower())}
     redact_obj(out)
     INDEX.write_text(json.dumps(out, ensure_ascii=False, indent=1))
     STATE.parent.mkdir(exist_ok=True)

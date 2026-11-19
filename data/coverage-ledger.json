@@ -13,7 +13,7 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-11-15",
-  "differentiator.json published": 39038,
+  "differentiator.json published": 39039,
   "differentiator.json held": 298016
  },
  "counts": {
@@ -28,12 +28,12 @@
   "inScopeSuppliersNeedingCrawl": 205,
   "inScopeSuppliersNeedingDomain": 192,
   "suppliersRefused": 585,
-  "suppliersRefusedButPublishingElsewhere": 167,
+  "suppliersRefusedButPublishingElsewhere": 168,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
   "blockedFrameworks": 4,
-  "frameworksWithExclusions": 3,
-  "suppliersExcludedByRuling": 14,
+  "frameworksWithExclusions": 4,
+  "suppliersExcludedByRuling": 15,
   "deferredFrameworks": 1
  },
  "unresolvedSupplierNames": [
@@ -3260,6 +3260,13 @@
      "domain": "medical.essity.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-26",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Medfac UK Ltd",
+     "domain": "kinetecuk.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-23",
      "bucket": "published"
     },
     {
@@ -7597,8 +7604,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "15 June 2027",
    "suppliersAwarded": 37,
-   "suppliersPublished": 17,
-   "coverage": 45.9,
+   "suppliersPublished": 18,
+   "coverage": 48.6,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -7606,16 +7613,18 @@
    "speciality": [
     "respiratory"
    ],
-   "excludedByRuling": [],
-   "targetSuppliers": 37,
-   "coverageOfTarget": 45.9,
+   "excludedByRuling": [
+    {
+     "supplier": "Syringa Wholesale Distributor",
+     "decisionRef": "^o639",
+     "ruledOn": "2026-11-19"
+    }
+   ],
+   "targetSuppliers": 36,
+   "coverageOfTarget": 50.0,
    "crawlWorklist": [
     {
      "supplier": "Philips Respironics",
-     "domain": null
-    },
-    {
-     "supplier": "Syringa Wholesale Distributor",
      "domain": null
     },
     {
@@ -7625,8 +7634,7 @@
    ],
    "domainsMissing": [
     "Aquilant Critical Care",
-    "Philips Respironics",
-    "Syringa Wholesale Distributor"
+    "Philips Respironics"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -7776,7 +7784,8 @@
     "respiratory:aero",
     "respiratory:diag",
     "respiratory:o2",
-    "respiratory:resp"
+    "respiratory:resp",
+    "respiratory:vent"
    ],
    "publishedElsewhereNoOwnRange": [
     "Draeger Medical UK",
@@ -7784,8 +7793,8 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 7,
-    "heldNeedingCategory": 6,
+    "publishedElsewhereNeedingCategory": 6,
+    "heldNeedingCategory": 5,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -7796,6 +7805,7 @@
     "Armstrong Medical (Eakin Respiratory)",
     "B.N.O.S Meditech Ltd",
     "Fisher & Paykel Healthcare",
+    "Hamilton Medical UK",
     "HC21 (UK) Ltd",
     "Henleys Medical Supplies Limited",
     "Intermedical (UK) Ltd",
@@ -7814,7 +7824,6 @@
     "Draeger Medical UK",
     "Fannin (UK) Limited",
     "GenX MediCare Ltd",
-    "Hamilton Medical UK",
     "Inspiration Healthcare",
     "Mediq Healthcare UK Ltd",
     "Pennine Healthcare (Ivor Shaw Ltd)",
@@ -7826,8 +7835,7 @@
     "GE HealthCare",
     "Kinetik Medical Devices",
     "Marshall Products",
-    "Philips Respironics",
-    "Syringa Wholesale Distributor"
+    "Philips Respironics"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
@@ -7840,7 +7848,7 @@
     "Schiller UK Limited"
    ],
    "unknown": [],
-   "actionableTotal": 14,
+   "actionableTotal": 12,
    "blockedReason": null,
    "deferred": null
   },
@@ -10187,11 +10195,16 @@
    "coverageOfTarget": 36.4,
    "crawlWorklist": [
     {
+     "supplier": "Medfac UK Ltd",
+     "domain": null
+    },
+    {
      "supplier": "Phoenix Medical Ltd",
      "domain": null
     }
    ],
    "domainsMissing": [
+    "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
     "Phoenix Medical Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -10215,13 +10228,6 @@
      "domain": "www.koolpak.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-05",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
-     "domain": "kinetecuk.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-23",
      "bucket": "refused"
     },
     {
@@ -10307,7 +10313,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 1
+    "needDomain": 2
    },
    "published": [
     "Brighthedge Ltd T/A Summit Medical and Scientific",
@@ -10332,18 +10338,18 @@
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
+    "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
     "Phoenix Medical Ltd"
    ],
    "refused": [
     "Algeo",
     "Cuxson Gerrard & Company Limited",
     "Koolpak Ltd",
-    "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
     "Physiolab Technologies Limited",
     "Thera Trainer UK Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 6,
+   "actionableTotal": 7,
    "blockedReason": null,
    "deferred": null
   },
