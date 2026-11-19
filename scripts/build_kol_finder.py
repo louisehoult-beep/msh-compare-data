@@ -407,7 +407,7 @@ def merge_research(sources, bodies, spec_ids):
         for b in d.get("bodies", []):
             bodies.setdefault(b["id"], b["label"])
         for sc in d["sources"]:
-            sources[sc["id"]] = dict({k: sc[k] for k in ("short", "body", "title", "url", "note")}, checked=d["checked"])
+            sources[sc["id"]] = dict({k: sc[k] for k in ("short", "body", "title", "url", "note")}, checked=sc.get("checked", d["checked"]))
         for q in d["people"]:
             if q["source"] not in sources:
                 print("skip %s: unknown source" % q["name"])
@@ -415,7 +415,7 @@ def merge_research(sources, bodies, spec_ids):
             p = PEOPLE.setdefault(q["name"], {"name": q["name"], "appearances": [], "specialities": [], "classes": []})
             app = {"body": q.get("body"), "role": q["role"], "organisation": q.get("organisation"),
                    "term": q.get("term"), "source": q["source"],
-                   "source_url": sources[q["source"]]["url"], "checked": d["checked"]}
+                   "source_url": sources[q["source"]]["url"], "checked": sources[q["source"]]["checked"]}
             end = term_end(q.get("term"))
             if end and end < datetime.date.today():
                 app["note"] = "The term end shown on the page has passed; check the page for a successor before relying on it."
