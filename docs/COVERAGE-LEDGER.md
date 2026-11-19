@@ -78,7 +78,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Infant Feeding and Accessories | neonatal | 18 | 7 | 38.9% | 2 | 13 | STARTED |
 | Patient Temperature Management | theatres | 18 | 13 | 72.2% | 3 | 12 | STARTED |
 | Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 6 | 33.3% | 0 | 11 | STARTED · 2 EXCLUDED |
-| Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
+| Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 10 | 66.7% | 4 | 6 | STARTED |
 | Clinical and Sharps Waste Management | infection | 14 | 4 | 28.6% | 5 | 12 | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | imaging, oncology | 13 | 4 | 30.8% | 1 | 9 | STARTED · DEFERRED |
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 6 | 46.2% | 2 | 8 | STARTED |
