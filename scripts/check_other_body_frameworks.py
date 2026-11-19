@@ -122,6 +122,16 @@ def short_uk_date(s):
 def parse_sbs(page_html):
     p = rdf.parse_sbs_page(page_html)
     if not p["ends"]:
+        # A page with neither the dates question nor the reference line is not an
+        # SBS framework page at all (maintenance, bot check, error template). On
+        # 19/11/2026 every SBS row came back like that in one run and all read
+        # fine an hour later: that is a page we could not read today, not a
+        # changed page. A framework page that lost only its dates line stays
+        # UNPARSEABLE.
+        txt = rdf.text_of(page_html)
+        if ("What dates is the framework agreement active" not in txt
+                and "Framework Agreement Reference" not in txt):
+            raise ConnectionError("SBS served a non-framework page (outage or bot check)")
         raise ValueError("no 'What dates is the framework agreement active?' line")
     ref_txt = "Framework Agreement Reference: %s" % p["reference"] if p["reference"] else ""
     return {"reference": p["reference"], "starts": p["starts"], "ends": p["ends"],

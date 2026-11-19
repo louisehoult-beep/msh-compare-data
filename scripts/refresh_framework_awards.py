@@ -58,6 +58,9 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from redact_personal import redact_text  # noqa: E402
+
 API = "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages"
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -73,6 +76,19 @@ NHS_PATTERNS = (
 )
 
 MAX_PAGES = 400          # backstop against a runaway cursor loop
+
+
+def withhold_person_emails(o):
+    """Every string in an award record with person-shaped emails withheld.
+    Find a Tender buyers sometimes type a named officer's address into a
+    party name or title (matthew.wood7@nhs.net, 19/11/2026); this repo is
+    public and an award record never needs it, so it is withheld here, at the
+    only writer of framework-awards.json, rather than attributed."""
+    if isinstance(o, dict):
+        return {k: withhold_person_emails(v) for k, v in o.items()}
+    if isinstance(o, list):
+        return [withhold_person_emails(v) for v in o]
+    return redact_text(o) if isinstance(o, str) else o
 
 
 def log(msg: str) -> None:
@@ -306,7 +322,8 @@ def main() -> int:
             store[ocid] = rec
             updated += 1
 
-    awards = sorted(store.values(), key=lambda r: (r.get("published") or ""), reverse=True)
+    awards = sorted((withhold_person_emails(r) for r in store.values()),
+                    key=lambda r: (r.get("published") or ""), reverse=True)
 
     # ---- invariants (root CLAUDE.md rule 14) ----------------------------
     problems = []
