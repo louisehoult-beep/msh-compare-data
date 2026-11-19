@@ -55,9 +55,11 @@ Deno.test("device keeps areas and role-alert choice, refuses bad areas", () => {
   assertEquals(typeof off === "string" ? off : [off.regions, off.role_alerts], [[], false]);
 });
 
-Deno.test("only the App Review demo account is protected from delete-account", () => {
+Deno.test("only the App Review demo accounts are protected from delete-account", () => {
   assertEquals(isReviewerAccount("review@elevateandthrive.uk"), true);
   assertEquals(isReviewerAccount(" Review@ElevateAndThrive.uk "), true);
+  assertEquals(isReviewerAccount("review-expired@elevateandthrive.uk"), true);
+  assertEquals(isReviewerAccount("review-expired@example.com"), false);
   assertEquals(isReviewerAccount("someone@example.com"), false);
   assertEquals(isReviewerAccount(undefined), false);
 });

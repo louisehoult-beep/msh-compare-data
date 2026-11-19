@@ -106,7 +106,10 @@ export function transferFromRevenueCat(ev: Record<string, unknown>): { from: str
 // The App Review demo account (livedesk-app/README.md). Reviewers are expected to try
 // "Delete account"; deleting this login makes every later review fail with a sign-in
 // error, so the action clears its devices and keeps the login. Added 04/11/2026.
+// The expired-subscription demo account (App Review 2.1, made 19/11/2026) is kept
+// the same way, so its ended subscription stays in place for the next review.
 export const REVIEWER_EMAIL = "review@elevateandthrive.uk";
+export const REVIEWER_EMAILS = [REVIEWER_EMAIL, "review-expired@elevateandthrive.uk"];
 export function isReviewerAccount(email: unknown): boolean {
-  return typeof email === "string" && email.trim().toLowerCase() === REVIEWER_EMAIL;
+  return typeof email === "string" && REVIEWER_EMAILS.includes(email.trim().toLowerCase());
 }
