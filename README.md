@@ -206,7 +206,7 @@ conservative) and posts them to Lou's dashboard for checking - Lou reviews and
 can amend; automation in THIS repo still never writes 'use' lines itself.
 
 ## Ops
-- Runs daily 03:15 UTC via GitHub Actions (manual: Actions tab, "Run workflow").
+- Runs daily 03:55 UTC via GitHub Actions (manual: Actions tab, "Run workflow").
 - `state/last_run.json` records what each run scanned and added.
 - Rollback: this is git - revert the commit.
 - Member phone alerts (web push) on new speciality news: `alerts/` (GitHub Pages),
@@ -214,6 +214,13 @@ can amend; automation in THIS repo still never writes 'use' lines itself.
   `docs/PUSH-ALERTS.md`.
 - My Hub, the member-built front page: `app/my-hub.js`, `hub/my-hub-catalogue.json`,
   `hub/`. Set-up and runbook: `docs/MY-HUB.md`.
+- My Hub company brief ("What you should know", 22/10/2026): a member ticks up to five
+  companies on My Hub (`app/my-hub-company.js`, ticks saved as `state.companies` on the
+  account by `hub/wpcode/my-hub-pins.php`). `scripts/build_company_key_info.py` builds
+  `data/company-key-info/<id>.json` from the supplier, press, news and speciality-panel
+  files (top news, facts, closest competitors; every line sourced), rebuilt daily in
+  `.github/workflows/speciality-panels.yml`. Test: `test_company_key_info.py`. The WPCode
+  snippet must be updated live in step with this code, or the account drops the ticks.
 
 ## Stakeholder Mapper — trust level (added 24/07/2026)
 `app/mst-logic.js` drills below the ICB to the individual trust. It injects its
@@ -221,7 +228,8 @@ own trust picker, styles and panels, so nothing on WP page 1109 needs editing.
 
 | File | What it drives |
 |---|---|
-| `data/trust-map.json` | 202 legally-live NHS trusts, each with the ICB that commissions it (ODS, weekly) |
+| `data/trust-map.json` | 212 legally-live NHS organisations — 202 English trusts with the ICB that commissions each, plus Wales's 7 Local Health Boards and 3 NHS trusts (ODS, weekly) |
+| `data/wales-buyer-map.json` | Who buys in Wales and how a supplier reaches them: the 10 Welsh NHS organisations, NWSSP as the national procurement route, and every spelling of a Welsh buyer in the captured award notices (ODS + nwssp.nhs.wales + Find a Tender) |
 | `data/trust-contacts.json` | Named contacts on each trust's own Find a Tender notices (daily) |
 | `data/people-moves.json` | Observed changes of named contact — evidence, never an inferred appointment |
 

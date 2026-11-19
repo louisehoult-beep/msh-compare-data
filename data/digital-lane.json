@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "20/10/2026",
- "generated": "2026-10-20",
+ "dataAsOf": "19/11/2026",
+ "generated": "2026-11-19",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,27 +22,2656 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-10-12",
-   "to": "2026-10-20",
+   "from": "2026-11-11",
+   "to": "2026-11-19",
    "days": 8,
-   "run": "2026-10-20"
+   "run": "2026-11-19"
   },
   "notes": [
-   "Find a Tender (tender stage): 0 digital lane notice(s) from 64 release(s) over 1 page(s)",
-   "Contracts Finder (tender stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-12",
-   "Find a Tender (planning stage): 0 digital lane notice(s) from 33 release(s) over 1 page(s)",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-10-12"
+   "Find a Tender (tender stage): 0 digital lane notice(s) from 47 release(s) over 1 page(s)",
+   "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-11",
+   "Find a Tender (planning stage): 1 digital lane notice(s) from 42 release(s) over 1 page(s)",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-11"
   ]
  },
  "counts": {
-  "awards": 264,
-  "awardsClinical": 32,
-  "openNotices": 1,
-  "openNoticesClinical": 0,
+  "awards": 395,
+  "awardsClinical": 48,
+  "openNotices": 4,
+  "openNoticesClinical": 1,
   "marketEngagement": 2,
   "marketEngagementClinical": 0
  },
  "awards": [
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Medical Erostering Software Solution",
+   "buyer": "The Rotherham NHS Foundation Trust",
+   "published": "2026-11-17",
+   "suppliers": [
+    "HealthRota Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2029-12-01",
+   "value": 449214.68,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108829-2026",
+   "ocid": "ocds-h6vhtk-06d8fd"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Annual Hosting Website and Intranet",
+   "buyer": "Cambridgeshire & Peterborough NHS Foundation Trust",
+   "published": "2026-11-17",
+   "suppliers": [
+    "VERSEONE GROUP LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72222300"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108910-2026",
+   "ocid": "ocds-h6vhtk-07bdb0"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Roche Ventana Interface",
+   "buyer": "Mid Yorkshire Hospitals NHS Trust",
+   "published": "2026-11-17",
+   "suppliers": [
+    "Roche Diagnostics Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-20",
+   "value": 18795.0,
+   "digitalCpv": [
+    "72212180"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108883-2026",
+   "ocid": "ocds-h6vhtk-07bda1"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "planning",
+   "title": "NHS Essex Preliminary Market Engagement Notice for Online Consultation Provision",
+   "buyer": "NHS ESSEX INTEGRATED CARE BOARD",
+   "published": "2026-11-17",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108868-2026",
+   "ocid": "ocds-h6vhtk-07bd97"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Specialist technical consultant input.",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "published": "2026-11-17",
+   "suppliers": [
+    "WPS-UK LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-11-16",
+   "value": 32287.0,
+   "digitalCpv": [
+    "72220000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108723-2026",
+   "ocid": "ocds-h6vhtk-07bd40"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Elevate SysymOne Optimisation",
+   "buyer": "HUMBER TEACHING NHS FOUNDATION TRUST",
+   "published": "2026-11-16",
+   "suppliers": [
+    "KADEL CONSULTING LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-03-31",
+   "value": 77150,
+   "digitalCpv": [
+    "48624000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108523-2026",
+   "ocid": "ocds-h6vhtk-07bcd4"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "POW-ITT-63713 - Welshpool Nurse Call Replacement",
+   "buyer": "Powys Teaching Health Board",
+   "published": "2026-11-16",
+   "suppliers": [
+    "Static Systems Group Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108424-2026",
+   "ocid": "ocds-h6vhtk-06d69a"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Auditbase for clinical testing.",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "published": "2026-11-16",
+   "suppliers": [
+    "AUDITDATA LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-11-15",
+   "value": 44457.0,
+   "digitalCpv": [
+    "48180000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108327-2026",
+   "ocid": "ocds-h6vhtk-07bc5c"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "award",
+   "title": "Provision of EPR services",
+   "buyer": "NORTH CHESHIRE & MERSEY NHS FOUNDATION TRUST",
+   "published": "2026-11-16",
+   "suppliers": [
+    "DH OPCO UK LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72268000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108275-2026",
+   "ocid": "ocds-h6vhtk-07bc40"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "New Finance ledger system.",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "published": "2026-11-16",
+   "suppliers": [
+    "NORTHUMBRIA HEALTHCARE NHS FOUNDATION TRUST"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-11-12",
+   "value": 21083.33,
+   "digitalCpv": [
+    "48442000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108264-2026",
+   "ocid": "ocds-h6vhtk-07bc3b"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "BeSeen Platform",
+   "buyer": "Essex Partnership University NHS Foundation Trust",
+   "published": "2026-11-16",
+   "suppliers": [
+    "PSYOMICS LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108655-2026",
+   "ocid": "ocds-h6vhtk-07bd1d"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "INTRANET HOSTING AND SUPPORTING",
+   "buyer": "NORTH STAFFORDSHIRE COMBINED HEALTHCARE NHS TRUST",
+   "published": "2026-11-16",
+   "suppliers": [
+    "KAMELEON GROUP LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-09-30",
+   "value": 15435,
+   "digitalCpv": [
+    "72415000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108635-2026",
+   "ocid": "ocds-h6vhtk-07bd15"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "HUMAN RESOURCES CASE MANAGEMENT SYSTEM",
+   "buyer": "NORTH STAFFORDSHIRE COMBINED HEALTHCARE NHS TRUST",
+   "published": "2026-11-16",
+   "suppliers": [
+    "SOFTCAT PLC"
+   ],
+   "isFramework": false,
+   "contractEnd": "2029-08-31",
+   "value": 31596,
+   "digitalCpv": [
+    "48450000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108582-2026",
+   "ocid": "ocds-h6vhtk-07bcf6"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "tender",
+   "title": "Asset Tracking System",
+   "buyer": "NHS Borders",
+   "published": "2026-11-13",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48422000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/107897-2026",
+   "ocid": "ocds-h6vhtk-078109"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "NLFT Service Desk and End User Technology Services - Open Market Engagement (RFI)",
+   "buyer": "North London NHS Foundation Trust",
+   "published": "2026-11-13",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108028-2026",
+   "ocid": "ocds-h6vhtk-07bbb8"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "Cyber Supplier and Third Party Risk Management capability - Market Engagement",
+   "buyer": "NHS England",
+   "published": "2026-11-13",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000",
+    "72000000",
+    "72212517"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/108132-2026",
+   "ocid": "ocds-h6vhtk-07bbcf"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "planning",
+   "title": "Child Digital Health Services",
+   "buyer": "NHS England",
+   "published": "2026-11-12",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/107589-2026",
+   "ocid": "ocds-h6vhtk-07baa2"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "UCLH-7742 - Service Desk and End-User-Technology Procurement",
+   "buyer": "University College London Hospitals NHS FT",
+   "published": "2026-11-12",
+   "suppliers": [
+    "ENTSERV UK LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72253000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/107461-2026",
+   "ocid": "ocds-h6vhtk-07ba56"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "DCB0160 Clinical Risk Management and Clinical Safety Assurance Services",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "published": "2026-11-12",
+   "suppliers": [
+    "Bradshaw Medical Solutions Ltd Trading as BMS Digital Safety"
+   ],
+   "isFramework": false,
+   "contractEnd": "2026-12-09",
+   "value": 34800.0,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/107452-2026",
+   "ocid": "ocds-h6vhtk-07ba52"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "DCB0160 Clinical Risk Management and Clinical Safety Assurance Services",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "published": "2026-11-12",
+   "suppliers": [
+    "Bradshaw Medical Solutions Ltd Trading as BMS Digital Safety"
+   ],
+   "isFramework": false,
+   "contractEnd": "2026-12-09",
+   "value": 34800.0,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/107447-2026",
+   "ocid": "ocds-h6vhtk-07ba4e"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Cris Service Charge including Hosting",
+   "buyer": "The Christie NHS Foundation Trust",
+   "published": "2026-11-12",
+   "suppliers": [
+    "Magentus Software Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-06-30",
+   "value": 86286.0,
+   "digitalCpv": [
+    "72212517"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/107424-2026",
+   "ocid": "ocds-h6vhtk-07ba40"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Pregnancy and Breast Cancer Project -  data analysis",
+   "buyer": "The Christie NHS Foundation Trust",
+   "published": "2026-11-12",
+   "suppliers": [
+    "HEALTH DATA INSIGHT CIC"
+   ],
+   "isFramework": false,
+   "contractEnd": "2026-12-01",
+   "value": 12380.0,
+   "digitalCpv": [
+    "72316000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/107419-2026",
+   "ocid": "ocds-h6vhtk-07ba3d"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Confirmation of Award of a Contract for the provision of software licences for digital simulation software",
+   "buyer": "NHS Wales Performance and Improvement (hosted by Public Health Wales)",
+   "published": "2026-11-12",
+   "suppliers": [
+    "Minitab Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": "2029-10-18",
+   "value": 96927.44,
+   "digitalCpv": [
+    "72268000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/107740-2026",
+   "ocid": "ocds-h6vhtk-06af46"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "NHS Scotland National Finance System Software Licence and Support Services Agreement",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotland) (NSS)",
+   "published": "2026-11-12",
+   "suppliers": [
+    "OneAdvanced",
+    "OneAdvanced"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 6150000,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/107727-2026",
+   "ocid": "ocds-h6vhtk-04db83"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Solihull Multi-User licences for Health Visiting",
+   "buyer": "KENT COMMUNITY HEALTH NHS FOUNDATION TRUST",
+   "published": "2026-11-11",
+   "suppliers": [
+    "University Hospitals Birmingham FT"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-07-31",
+   "value": 14000,
+   "digitalCpv": [
+    "48500000",
+    "48900000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/107094-2026",
+   "ocid": "ocds-h6vhtk-07b990"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "PME for Tissue and Cell Management System",
+   "buyer": "King's College Hospital NHS Foundation Trust",
+   "published": "2026-11-11",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48180000",
+    "48814000",
+    "72250000",
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/107075-2026",
+   "ocid": "ocds-h6vhtk-07b983"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "DCS Catalogue Invoicing Solution (Odoo)",
+   "buyer": "NHS England",
+   "published": "2026-11-11",
+   "suppliers": [
+    "SMART INFORMATION TECHNOLOGIES LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106966-2026",
+   "ocid": "ocds-h6vhtk-07b935"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "award",
+   "title": "Post-Deployment Monitoring of Diagnostic Imaging Artificial Intelligence (AI) in the NHS",
+   "buyer": "NHS England",
+   "published": "2026-11-11",
+   "suppliers": [
+    "The Royal College of Radiologists"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48814400"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/107311-2026",
+   "ocid": "ocds-h6vhtk-07ba05"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "award",
+   "title": "Performance and Safety Monitoring for AI Diagnostic Tools in the NHS",
+   "buyer": "NHS England",
+   "published": "2026-11-11",
+   "suppliers": [
+    "The Royal College of Radiologists"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48814400"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/107275-2026",
+   "ocid": "ocds-h6vhtk-07b9fa"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "planning",
+   "title": "AI Triage and Care Navigation: NHS App Programme (PME)",
+   "buyer": "NHS Central East Integrated Care Board",
+   "published": "2026-11-11",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48180000",
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/107196-2026",
+   "ocid": "ocds-h6vhtk-07b9cd"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Website Estate Registry and Management Capability",
+   "buyer": "NHS England",
+   "published": "2026-11-11",
+   "suppliers": [
+    "Little Forest"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-31",
+   "value": 24750.0,
+   "digitalCpv": [
+    "72416000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/107161-2026",
+   "ocid": "ocds-h6vhtk-07b9b8"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Workforce Technology Solutions for HULL",
+   "buyer": "HULL UNIVERSITY TEACHING HOSPITALS NHS TRUST",
+   "published": "2026-11-10",
+   "suppliers": [
+    "ALLOCATE SOFTWARE LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2028-11-30",
+   "value": 1808369,
+   "digitalCpv": [
+    "48000000",
+    "72222300"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106474-2026",
+   "ocid": "ocds-h6vhtk-079587"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Provision of Workforce Technology NLaG",
+   "buyer": "NORTHERN LINCOLNSHIRE AND GOOLE NHS FOUNDATION TRUST",
+   "published": "2026-11-10",
+   "suppliers": [
+    "ALLOCATE SOFTWARE LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2028-11-30",
+   "value": 1566894,
+   "digitalCpv": [
+    "48000000",
+    "72222300"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106475-2026",
+   "ocid": "ocds-h6vhtk-07957c"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Workforce Tech Solutions Y&S",
+   "buyer": "YORK AND SCARBOROUGH TEACHING HOSPITALS NHS FOUNDATION TRUST",
+   "published": "2026-11-10",
+   "suppliers": [
+    "ALLOCATE SOFTWARE LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2028-11-30",
+   "value": 3039235,
+   "digitalCpv": [
+    "48000000",
+    "72222300"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106487-2026",
+   "ocid": "ocds-h6vhtk-079573"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Renewal of Licences",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "published": "2026-11-10",
+   "suppliers": [
+    "ATOS IT SERVICES UK LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-11-09",
+   "value": 56000,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106508-2026",
+   "ocid": "ocds-h6vhtk-07b839"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "tender",
+   "title": "CE ICB - WorkWell Initiative Service Procurement",
+   "buyer": "NHS Central East Integrated Care Board",
+   "published": "2026-11-10",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000",
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106886-2026",
+   "ocid": "ocds-h6vhtk-06f52e"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "tender",
+   "title": "PN365 - Patient Engagement Portal",
+   "buyer": "Sheffield Health Partnership University NHS Foundation Trust",
+   "published": "2026-11-10",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48814200"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106878-2026",
+   "ocid": "ocds-h6vhtk-07b903"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "NGH - CDW - CISCO FIREPOWER 2130",
+   "buyer": "Northampton General Hospital NHS Trust",
+   "published": "2026-11-10",
+   "suppliers": [
+    "CDW Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-05",
+   "value": 4652.48,
+   "digitalCpv": [
+    "48821000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106752-2026",
+   "ocid": "ocds-h6vhtk-07b8bd"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "BE23/043 - LTHT Medical Location Risk Grading Trustwide",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "published": "2026-11-09",
+   "suppliers": [
+    "Walker Sime Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2028-08-31",
+   "value": 290000.0,
+   "digitalCpv": [
+    "72224000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106132-2026",
+   "ocid": "ocds-h6vhtk-079043"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Laundry Replacement of the PLC Controlling",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "published": "2026-11-09",
+   "suppliers": [
+    "Laundry Replacement of the PLC Controlling"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72263000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106025-2026",
+   "ocid": "ocds-h6vhtk-077dfd"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "TELEPATH EXTENSION",
+   "buyer": "Cwm Taff Morgannwg Universty Health Board",
+   "published": "2026-11-09",
+   "suppliers": [
+    "Dedalus DH OPCO UK Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-03-31",
+   "value": 13957.71,
+   "digitalCpv": [
+    "72320000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106057-2026",
+   "ocid": "ocds-h6vhtk-077836"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "tender",
+   "title": "NENC ICB Clinical Support Information and Pathway Implementation for the North Area Integrated Care Partnership",
+   "buyer": "NHS NORTH EAST AND NORTH CUMBRIA INTEGRATED CARE BOARD",
+   "published": "2026-11-09",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72300000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105979-2026",
+   "ocid": "ocds-h6vhtk-06c915"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Computerised Maintenance Management System (CMMS) / Computer-Aided Facility Management System (CAFM)",
+   "buyer": "NHS Grampian",
+   "published": "2026-11-09",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48420000",
+    "48421000",
+    "72000000",
+    "72212420",
+    "72212421",
+    "72514000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106313-2026",
+   "ocid": "ocds-h6vhtk-07b7b3"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "tender",
+   "title": "Computerised Maintenance Management System (CMMS) / Computer-Aided Facility Management System (CAFM)",
+   "buyer": "NHS Grampian",
+   "published": "2026-11-09",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48420000",
+    "48421000",
+    "72000000",
+    "72212420",
+    "72212421",
+    "72514000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106307-2026",
+   "ocid": "ocds-h6vhtk-07b7c3"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Disaster Recovery Consultancy",
+   "buyer": "NHS Property Services Limited",
+   "published": "2026-11-09",
+   "suppliers": [
+    "REDROCK CONSULTING LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-03-05",
+   "value": 56250.0,
+   "digitalCpv": [
+    "72222300"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106277-2026",
+   "ocid": "ocds-h6vhtk-07b7b0"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "WPL07329 – HIOW OneEPR Readiness",
+   "buyer": "HAMPSHIRE HOSPITALS NHS FOUNDATION TRUST",
+   "published": "2026-11-09",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72200000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106232-2026",
+   "ocid": "ocds-h6vhtk-07b797"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Medical Revalidation and Appraisal, 360 Feedback and Medical Job Planning System",
+   "buyer": "Lincolnshire Partnership NHS Foundation Trust",
+   "published": "2026-11-09",
+   "suppliers": [
+    "SARD JV Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2029-10-31",
+   "value": 40825.0,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106379-2026",
+   "ocid": "ocds-h6vhtk-07b7ef"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Informed Consent Suite",
+   "buyer": "Northampton General Hospital NHS Trust",
+   "published": "2026-11-09",
+   "suppliers": [
+    "Eido Healthcare Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-03-13",
+   "value": 23976.05,
+   "digitalCpv": [
+    "48814000",
+    "72212180"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/106373-2026",
+   "ocid": "ocds-h6vhtk-07b7ec"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "MEDICODE 360 ENCODER",
+   "buyer": "LIVERPOOL HEART AND CHEST HOSPITAL NHS FOUNDATION TRUST",
+   "published": "2026-11-07",
+   "suppliers": [
+    "INSIGHT DIRECT (UK) LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-12-11",
+   "value": 14741.47,
+   "digitalCpv": [
+    "48218000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105971-2026",
+   "ocid": "ocds-h6vhtk-07b70e"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "Public Sector Construction Consultancy",
+   "buyer": "NHS Shared Business Services Limited",
+   "published": "2026-11-06",
+   "suppliers": [],
+   "isFramework": true,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72224000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105739-2026",
+   "ocid": "ocds-h6vhtk-055328"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "award",
+   "title": "CHS - Acute Electronic Patient Record (EPR) Contract Extension",
+   "buyer": "Croydon Health Services NHS Trust",
+   "published": "2026-11-06",
+   "suppliers": [
+    "Oracle Health"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 17549439.0,
+   "digitalCpv": [
+    "48814000",
+    "72268000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105806-2026",
+   "ocid": "ocds-h6vhtk-07b6b8"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Project Management Support",
+   "buyer": "Mid Yorkshire Hospitals NHS Trust",
+   "published": "2026-11-06",
+   "suppliers": [
+    "The Health Informatics Service"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-03-31",
+   "value": 27846.0,
+   "digitalCpv": [
+    "72224000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105776-2026",
+   "ocid": "ocds-h6vhtk-07b6a9"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Trickle Platform",
+   "buyer": "Mid Yorkshire Hospitals NHS Trust",
+   "published": "2026-11-06",
+   "suppliers": [
+    "Aptiq Works Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-11-05",
+   "value": 24912.0,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105680-2026",
+   "ocid": "ocds-h6vhtk-07b66f"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "tender",
+   "title": "Electronic Prescription Service",
+   "buyer": "The Rotherham NHS Foundation Trust",
+   "published": "2026-11-06",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000",
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105612-2026",
+   "ocid": "ocds-h6vhtk-07b63c"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "CarePartner Licenses ",
+   "buyer": "Cwm Taf Morgannwg Univerity Health Board",
+   "published": "2026-11-06",
+   "suppliers": [
+    "imosphere"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105569-2026",
+   "ocid": "ocds-h6vhtk-07b622"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Disaster Recovery Audit Actions – Technical Programme Leadership Support",
+   "buyer": "NHS Property Services Limited",
+   "published": "2026-11-06",
+   "suppliers": [
+    "RedRock Consulting Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72251000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105527-2026",
+   "ocid": "ocds-h6vhtk-07b609"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "award",
+   "title": "EHR Programme Director",
+   "buyer": "University Hospitals Dorset NHS Foundation Trust",
+   "published": "2026-11-05",
+   "suppliers": [
+    "The Black Fallow Company"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72263000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105247-2026",
+   "ocid": "ocds-h6vhtk-07b55b"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "STH Endoscopy Management Solution (EMS)",
+   "buyer": "Sheffield Teaching Hospitals NHS Foundation Trust",
+   "published": "2026-11-05",
+   "suppliers": [
+    "HD Clinical Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48180000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105226-2026",
+   "ocid": "ocds-h6vhtk-06c7e8"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "GOSH - MAINT7293 - Auditbase Maintenance",
+   "buyer": "Great Ormond Street Hospital for Children NHS Foundation Trust",
+   "published": "2026-11-05",
+   "suppliers": [
+    "Auditdata Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-12-01",
+   "value": 24738.0,
+   "digitalCpv": [
+    "48814000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105169-2026",
+   "ocid": "ocds-h6vhtk-07b3fc"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "planning",
+   "title": "Blood Transfusion Laboratory Information System (LIMS)",
+   "buyer": "Great Ormond Street Hospital for Children NHS Foundation Trust",
+   "published": "2026-11-05",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48814000",
+    "48814400",
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105127-2026",
+   "ocid": "ocds-h6vhtk-07b3e1"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Provision of Elekta Care OIS Gold Maintenance and Support Services for the MOSAIQ Oncology Information System",
+   "buyer": "Velindre University NHS Trust - Please note NHS Wales Shared Services Partnership (hosted by Velindre University NHS Trust) will manage this procurement on behalf of the contracting authority. Due to having the same identifiers, we're unable to reflect this in the notice options.",
+   "published": "2026-11-05",
+   "suppliers": [
+    "ELEKTA LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 39477.94,
+   "digitalCpv": [
+    "72267000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105019-2026",
+   "ocid": "ocds-h6vhtk-07b39d"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Dental Public Health ePortfolio",
+   "buyer": "NHS England",
+   "published": "2026-11-05",
+   "suppliers": [
+    "Public Services Delivery Scotland"
+   ],
+   "isFramework": false,
+   "contractEnd": "2028-03-31",
+   "value": 11000.0,
+   "digitalCpv": [
+    "72222300",
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/104930-2026",
+   "ocid": "ocds-h6vhtk-07b36c"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Contract for RFID Tracking Solution (iRecord/iFit) Software",
+   "buyer": "Swansea Bay University Health Board",
+   "published": "2026-11-05",
+   "suppliers": [
+    "IDOX SOFTWARE LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 688572.53,
+   "digitalCpv": [
+    "72511000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105431-2026",
+   "ocid": "ocds-h6vhtk-07b5ce"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Drug Knowledge Base for Electronic Health and Care Record",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "published": "2026-11-05",
+   "suppliers": [
+    "FIRST DATABANK UK LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105425-2026",
+   "ocid": "ocds-h6vhtk-07b5c1"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "Systems Integration PME",
+   "buyer": "North East Ambulance Service NHS Foundation Trust",
+   "published": "2026-11-05",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000",
+    "72212430"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105399-2026",
+   "ocid": "ocds-h6vhtk-07b5b8"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "award",
+   "title": "Leasing AI Software",
+   "buyer": "NHS Property Services Limited",
+   "published": "2026-11-05",
+   "suppliers": [
+    "Orbital Witness Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-11-01",
+   "value": 72000.0,
+   "digitalCpv": [
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105396-2026",
+   "ocid": "ocds-h6vhtk-07b5b5"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "LHCA Environmental Fit Screening Tool",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "published": "2026-11-05",
+   "suppliers": [
+    "Pearn Kandola"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-03-31",
+   "value": 22500.0,
+   "digitalCpv": [
+    "72224000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/105349-2026",
+   "ocid": "ocds-h6vhtk-07b599"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "BHNFT Proxmox Licences",
+   "buyer": "Barnsley Hospital NHS Foundation Trust",
+   "published": "2026-11-04",
+   "suppliers": [
+    "Novatech Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2029-10-31",
+   "value": 18021.53,
+   "digitalCpv": [
+    "72500000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/104587-2026",
+   "ocid": "ocds-h6vhtk-07b2b7"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Python Training",
+   "buyer": "Yorkshire Ambulance Service NHS Trust",
+   "published": "2026-11-04",
+   "suppliers": [
+    "QA Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-25",
+   "value": 11581.0,
+   "digitalCpv": [
+    "72212931"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/104524-2026",
+   "ocid": "ocds-h6vhtk-07b28f"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "PR BHFT 0825",
+   "buyer": "Berkshire Healthcare NHS Foundation Trust",
+   "published": "2026-11-04",
+   "suppliers": [
+    "Locumtap Limited t/a Patchwork"
+   ],
+   "isFramework": false,
+   "contractEnd": "2029-10-29",
+   "value": 247900.0,
+   "digitalCpv": [
+    "72268000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/104790-2026",
+   "ocid": "ocds-h6vhtk-077ce7"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "STW26-08 ADHD Diagnostics",
+   "buyer": "Leeds Community Healthcare NHS Trust",
+   "published": "2026-11-03",
+   "suppliers": [
+    "Qbtech Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-09-07",
+   "value": 13000.0,
+   "digitalCpv": [
+    "72226000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/103979-2026",
+   "ocid": "ocds-h6vhtk-078cf7"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "PHW-FTS-63449 Review of Violence Monitoring Data Portal - PHW",
+   "buyer": "Public Health Wales NHS Trust",
+   "published": "2026-11-03",
+   "suppliers": [
+    "Pixel Fusion Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-03-31",
+   "value": 249450.0,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/104018-2026",
+   "ocid": "ocds-h6vhtk-06d759"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Health Roster & Job Planning",
+   "buyer": "SHEFFIELD TEACHING HOSPITALS NHS FOUNDATION TRUST",
+   "published": "2026-11-03",
+   "suppliers": [
+    "Softcat Plc"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 2407327,
+   "digitalCpv": [
+    "72261000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/104204-2026",
+   "ocid": "ocds-h6vhtk-07968c"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Trimble software licences",
+   "buyer": "Black Country Healthcare NHS Foundation Trust",
+   "published": "2026-11-03",
+   "suppliers": [
+    "Trimble UK LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-18",
+   "value": 10076.25,
+   "digitalCpv": [
+    "72268000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/104202-2026",
+   "ocid": "ocds-h6vhtk-07968a"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Project management support",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "published": "2026-11-03",
+   "suppliers": [
+    "NORTHMORE ASSOCIATES LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-11-02",
+   "value": 81081.0,
+   "digitalCpv": [
+    "72224000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/104188-2026",
+   "ocid": "ocds-h6vhtk-079682"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "planning",
+   "title": "Supplier Ambient Voice Technology (AVT) Self Certified Registry for the use of AI-Enabled Ambient Scribing Products in Health and Care Settings",
+   "buyer": "NHS ENGLAND",
+   "published": "2026-11-03",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48180000",
+    "48314000",
+    "48317000",
+    "72212180",
+    "72212314",
+    "72212512"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/104117-2026",
+   "ocid": "ocds-h6vhtk-05d63c"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Smokefree App Licences",
+   "buyer": "NHS HUMBER AND NORTH YORKSHIRE INTEGRATED CARE BOARD",
+   "published": "2026-11-03",
+   "suppliers": [
+    "23 LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-07-26",
+   "value": 74030,
+   "digitalCpv": [
+    "48517000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/104037-2026",
+   "ocid": "ocds-h6vhtk-079634"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "UK Cystic Fibrosis Patient Registry",
+   "buyer": "NHS England",
+   "published": "2026-11-03",
+   "suppliers": [
+    "Cystic Fibrosis Trust"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-03-31",
+   "value": 185651.0,
+   "digitalCpv": [
+    "72310000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/104010-2026",
+   "ocid": "ocds-h6vhtk-06bb4a"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Declarations of Interest Management System",
+   "buyer": "NHS SURREY AND SUSSEX INTEGRATED CARE BOARD",
+   "published": "2026-11-03",
+   "suppliers": [
+    "CIVICA UK LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2029-09-30",
+   "value": 30984,
+   "digitalCpv": [
+    "72320000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/103975-2026",
+   "ocid": "ocds-h6vhtk-079612"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Temporary IT Services",
+   "buyer": "NHS Property Services Limited",
+   "published": "2026-11-03",
+   "suppliers": [
+    "REDROCK CONSULTING LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2026-09-30",
+   "value": 36750.0,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/104372-2026",
+   "ocid": "ocds-h6vhtk-0796ef"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Health Roster, Medical Roster & Job Planning",
+   "buyer": "SHEFFIELD CHILDREN'S NHS FOUNDATION TRUST",
+   "published": "2026-11-03",
+   "suppliers": [
+    "Softcat Plc"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 1053440,
+   "digitalCpv": [
+    "72261000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/104364-2026",
+   "ocid": "ocds-h6vhtk-0796ea"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "tender",
+   "title": "World Model for SCAT",
+   "buyer": "Velindre University NHS Trust - : Please note NHS Wales Shared Services Partnership (hosted by Velindre University NHS Trust) will manage this procurement on behalf of the contracting authority. Due to having the same identifiers, we're unable to reflect this in the notice options.",
+   "published": "2026-11-02",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72200000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/103745-2026",
+   "ocid": "ocds-h6vhtk-06da19"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "Guided Ultrasound Technology for Suspected Deep Vein Thrombosis (DVT)",
+   "buyer": "Chelsea and Westminster Hospital NHS Foundation Trust",
+   "published": "2026-11-02",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/103607-2026",
+   "ocid": "ocds-h6vhtk-07954a"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Enhancements of Talentis Platform",
+   "buyer": "NHS England",
+   "published": "2026-11-02",
+   "suppliers": [
+    "Ikiru People Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-12-31",
+   "value": 20000.0,
+   "digitalCpv": [
+    "48000000",
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/103565-2026",
+   "ocid": "ocds-h6vhtk-079535"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Provision of an Alert System",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "published": "2026-10-30",
+   "suppliers": [
+    "Global View Systems"
+   ],
+   "isFramework": false,
+   "contractEnd": "2028-10-26",
+   "value": 48994.51,
+   "digitalCpv": [
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/103004-2026",
+   "ocid": "ocds-h6vhtk-079254"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "award",
+   "title": "Provision of a Hybrid Mail / Patient Portal System",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "published": "2026-10-30",
+   "suppliers": [
+    "IMIMOBILE EUROPE LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-27",
+   "value": 600000.0,
+   "digitalCpv": [
+    "48000000",
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102941-2026",
+   "ocid": "ocds-h6vhtk-079244"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "ESNEFT3437 - Organisational Listening and  Transformation Planning Programme",
+   "buyer": "EAST SUFFOLK AND NORTH ESSEX NHS FOUNDATION TRUST",
+   "published": "2026-10-30",
+   "suppliers": [
+    "CARRADALE FUTURES HORIZON LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-18",
+   "value": 41600.0,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/103241-2026",
+   "ocid": "ocds-h6vhtk-0794b4"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "TELEPHONY MODERNISATION SUBSCRIPTION RENEWAL",
+   "buyer": "Hywel Dda University Health Board",
+   "published": "2026-10-29",
+   "suppliers": [
+    "MAINTEL EUROPE LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 999981.06,
+   "digitalCpv": [
+    "48200000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102586-2026",
+   "ocid": "ocds-h6vhtk-079371"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "BOB APC DDaT Mobilisation - Digital Support Contract",
+   "buyer": "BUCKINGHAMSHIRE HEALTHCARE NHS TRUST",
+   "published": "2026-10-29",
+   "suppliers": [
+    "Starlight Digital Services Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 1000000,
+   "digitalCpv": [
+    "72200000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102571-2026",
+   "ocid": "ocds-h6vhtk-07936b"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "IT Software and License",
+   "buyer": "The Christie NHS Foundation Trust",
+   "published": "2026-10-29",
+   "suppliers": [
+    "Integrated Business Software and Solutions Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-03-31",
+   "value": 53065.03,
+   "digitalCpv": [
+    "48218000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102411-2026",
+   "ocid": "ocds-h6vhtk-079311"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Project Activity Management (PAM) Contract",
+   "buyer": "Guy's and St Thomas' NHS Foundation Trust",
+   "published": "2026-10-29",
+   "suppliers": [
+    "Rembrace Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": "2029-09-30",
+   "value": 171660.0,
+   "digitalCpv": [
+    "48517000",
+    "72212517"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102622-2026",
+   "ocid": "ocds-h6vhtk-078d2b"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Virtual Care Services",
+   "buyer": "Mid Yorkshire Hospitals NHS Trust",
+   "published": "2026-10-29",
+   "suppliers": [
+    "Doccla UK Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-11-01",
+   "value": 167889.0,
+   "digitalCpv": [
+    "72212218"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102844-2026",
+   "ocid": "ocds-h6vhtk-079404"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "Cardiac Magnetic Resonance Post-Processing Software",
+   "buyer": "Royal Papworth Hospital NHS Foundation Trust",
+   "published": "2026-10-29",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000",
+    "48180000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102664-2026",
+   "ocid": "ocds-h6vhtk-079399"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "ENHT - NME Desk Sensors Booking System",
+   "buyer": "East and North Hertfordshire Teaching NHS Trust",
+   "published": "2026-10-28",
+   "suppliers": [
+    "Haltian Oy"
+   ],
+   "isFramework": false,
+   "contractEnd": "2029-10-01",
+   "value": 38113.38,
+   "digitalCpv": [
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101866-2026",
+   "ocid": "ocds-h6vhtk-0791f6"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Data Engineering Architect",
+   "buyer": "The Christie NHS Foundation Trust",
+   "published": "2026-10-28",
+   "suppliers": [
+    "Max20 Project Solutions Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2026-12-31",
+   "value": 33792.0,
+   "digitalCpv": [
+    "72310000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101845-2026",
+   "ocid": "ocds-h6vhtk-0791e7"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Cloud-based portfolio, programme, project and PMO management software",
+   "buyer": "Nottinghamshire Healthcare NHS Foundation Trust",
+   "published": "2026-10-28",
+   "suppliers": [
+    "Mosaique Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-11-11",
+   "value": 16200.0,
+   "digitalCpv": [
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101841-2026",
+   "ocid": "ocds-h6vhtk-0791e6"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Electronic Document and Records Management System Renewal",
+   "buyer": "Hywel Dda University Health Board",
+   "published": "2026-10-28",
+   "suppliers": [
+    "Mizaic Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 1332653.0,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101840-2026",
+   "ocid": "ocds-h6vhtk-0791e5"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "BHNFT - Cloud back ups Wasabi",
+   "buyer": "Barnsley Hospital NHS Foundation Trust",
+   "published": "2026-10-28",
+   "suppliers": [
+    "BCN Group LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-09-28",
+   "value": 105300.78,
+   "digitalCpv": [
+    "48820000",
+    "72100000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101807-2026",
+   "ocid": "ocds-h6vhtk-0791d4"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "TLM Portal - Health Needs Assessment Tool",
+   "buyer": "KENT COMMUNITY HEALTH NHS FOUNDATION TRUST",
+   "published": "2026-10-28",
+   "suppliers": [
+    "Aire Innovate Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 20125,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102285-2026",
+   "ocid": "ocds-h6vhtk-0792d2"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "GP Practice Software",
+   "buyer": "Aneurin Bevan University Health Board",
+   "published": "2026-10-28",
+   "suppliers": [
+    "ACCURX LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 164867.96,
+   "digitalCpv": [
+    "48000000",
+    "48100000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102206-2026",
+   "ocid": "ocds-h6vhtk-0792af"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "HCT - Website, Intranet & Hosting",
+   "buyer": "Hertfordshire Community NHS Trust",
+   "published": "2026-10-28",
+   "suppliers": [
+    "Mixd"
+   ],
+   "isFramework": false,
+   "contractEnd": "2030-10-31",
+   "value": 106004.0,
+   "digitalCpv": [
+    "48220000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102167-2026",
+   "ocid": "ocds-h6vhtk-07929c"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "SmartPark Parking Permit System Access",
+   "buyer": "MERSEY AND WEST LANCASHIRE TEACHING HOSPITALS NHS TRUST",
+   "published": "2026-10-28",
+   "suppliers": [
+    "SISO SOFTWARE LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-07-31",
+   "value": 21168,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102125-2026",
+   "ocid": "ocds-h6vhtk-079285"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Provision of subscription-based Gartner Research Services to Swansea Bay University Health Board",
+   "buyer": "Swansea Bay University Health Board",
+   "published": "2026-10-28",
+   "suppliers": [
+    "Gartner UK Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 184875.0,
+   "digitalCpv": [
+    "72220000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102075-2026",
+   "ocid": "ocds-h6vhtk-07926c"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Data Centre Contract",
+   "buyer": "BUCKINGHAMSHIRE HEALTHCARE NHS TRUST",
+   "published": "2026-10-28",
+   "suppliers": [
+    "Rackspace Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 13174576,
+   "digitalCpv": [
+    "72415000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/102055-2026",
+   "ocid": "ocds-h6vhtk-079262"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "BWC Karotyping and FISH Service PME",
+   "buyer": "Birmingham Women's and Children's NHS Foundation Trust",
+   "published": "2026-10-27",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48517000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101403-2026",
+   "ocid": "ocds-h6vhtk-078af3"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "AEGIS POC MANAGEMENT SOLUTION",
+   "buyer": "UNIVERSITY HOSPITALS OF DERBY AND BURTON NHS FOUNDATION TRUST",
+   "published": "2026-10-27",
+   "suppliers": [
+    "ABBOTT RAPID DIAGNOSTICS LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-09-30",
+   "value": 22351.52,
+   "digitalCpv": [
+    "72267100"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101762-2026",
+   "ocid": "ocds-h6vhtk-0791bc"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Demand & Capacity Advisor",
+   "buyer": "AIREDALE NHS FOUNDATION TRUST",
+   "published": "2026-10-27",
+   "suppliers": [
+    "MS HEALTH INSIGHT LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72221000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101755-2026",
+   "ocid": "ocds-h6vhtk-05ec10"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Provision of Cyber Vault Security to Swansea Bay University Health Board",
+   "buyer": "Swansea Bay University Health Board",
+   "published": "2026-10-27",
+   "suppliers": [
+    "Dell Corporation Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 222055.51,
+   "digitalCpv": [
+    "72212732"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101704-2026",
+   "ocid": "ocds-h6vhtk-079199"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "999 & 111 SUPPORT RENEWAL (WESTCON)",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "published": "2026-10-27",
+   "suppliers": [
+    "SOFTCAT PLC"
+   ],
+   "isFramework": true,
+   "contractEnd": null,
+   "value": 130000,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101685-2026",
+   "ocid": "ocds-h6vhtk-07918d"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "NaTHNaC Provision of Website",
+   "buyer": "University College London Hospitals NHS FT",
+   "published": "2026-10-27",
+   "suppliers": [
+    "Chris Johnson Studio Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72212517"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101671-2026",
+   "ocid": "ocds-h6vhtk-079185"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Endoscopy Reporting System",
+   "buyer": "BUCKINGHAMSHIRE HEALTHCARE NHS TRUST",
+   "published": "2026-10-27",
+   "suppliers": [
+    "Medilogik Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 115975,
+   "digitalCpv": [
+    "72212517"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101668-2026",
+   "ocid": "ocds-h6vhtk-079182"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Diamond Diabetes Management Software",
+   "buyer": "BUCKINGHAMSHIRE HEALTHCARE NHS TRUST",
+   "published": "2026-10-27",
+   "suppliers": [
+    "Vitalhub"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 140000,
+   "digitalCpv": [
+    "72212517"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101645-2026",
+   "ocid": "ocds-h6vhtk-079171"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Waiver - UHB_QEH - 12089 - RFiD Discovery Solutions Ltd  - RFID Tracking System",
+   "buyer": "University Hospitals Birmingham NHS Foundation Trust",
+   "published": "2026-10-27",
+   "suppliers": [
+    "RFiD Discovery Solutions Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-09-16",
+   "value": 32562.0,
+   "digitalCpv": [
+    "48180000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101564-2026",
+   "ocid": "ocds-h6vhtk-079141"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "award",
+   "title": "2026/2027-1691 - WEB BASED ELECTRONIC PATIENT RECORD SYSTEM FOR LYMPHOEDEMA SERVICES ",
+   "buyer": "Betsi Cadwaladr University Health Board",
+   "published": "2026-10-27",
+   "suppliers": [
+    "Lymbase "
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-27",
+   "value": 27500.0,
+   "digitalCpv": [
+    "48000000",
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101520-2026",
+   "ocid": "ocds-h6vhtk-07912d"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "AEGIS POC MANAGEMENT SOLUTION",
+   "buyer": "UNIVERSITY HOSPITALS OF DERBY AND BURTON NHS FOUNDATION TRUST",
+   "published": "2026-10-27",
+   "suppliers": [
+    "ABBOTT RAPID DIAGNOSTICS LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-09-30",
+   "value": 13165.86,
+   "digitalCpv": [
+    "48814000",
+    "72267100"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101501-2026",
+   "ocid": "ocds-h6vhtk-079125"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "WHHT - PM3 Licence",
+   "buyer": "West Hertfordshire Teaching Hospitals NHS Trust",
+   "published": "2026-10-26",
+   "suppliers": [
+    "Bestoutcome Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-03-31",
+   "value": 17808.0,
+   "digitalCpv": [
+    "48218000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/100821-2026",
+   "ocid": "ocds-h6vhtk-078fc1"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Anticoagulation Software",
+   "buyer": "BUCKINGHAMSHIRE HEALTHCARE NHS TRUST",
+   "published": "2026-10-26",
+   "suppliers": [
+    "4 S INFORMATION SYSTEMS LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 61732,
+   "digitalCpv": [
+    "72212180"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/100814-2026",
+   "ocid": "ocds-h6vhtk-078fbd"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Next Generation Sequencing Testing (NGS)",
+   "buyer": "NHS Blood and Transplant",
+   "published": "2026-10-26",
+   "suppliers": [
+    "SGS United Kingdom Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-12",
+   "value": 407200.0,
+   "digitalCpv": [
+    "72225000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/100796-2026",
+   "ocid": "ocds-h6vhtk-0514f8"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Dispatch & Logistics Software (ii)",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "published": "2026-10-26",
+   "suppliers": [
+    "CLERIC COMPUTER SERVICES LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 479862.47,
+   "digitalCpv": [
+    "72212100"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101253-2026",
+   "ocid": "ocds-h6vhtk-07909e"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "W230298 Patient Experience Portal (PEP)",
+   "buyer": "Bradford Teaching Hospitals NHS Foundation Trust",
+   "published": "2026-10-26",
+   "suppliers": [
+    "Vitalhub UK Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48611000",
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101155-2026",
+   "ocid": "ocds-h6vhtk-06d45c"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Windows patching service",
+   "buyer": "MEDWAY NHS FOUNDATION TRUST",
+   "published": "2026-10-26",
+   "suppliers": [
+    "ALTERA HEALTHCARE (IT) UK LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-08-22",
+   "value": 42238,
+   "digitalCpv": [
+    "72212730"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101047-2026",
+   "ocid": "ocds-h6vhtk-079035"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "PLICS NCC model support and collaboration - YSTH",
+   "buyer": "York and Scarborough Teaching Hospital NHS Foundation Trust",
+   "published": "2026-10-26",
+   "suppliers": [
+    "Carecosting Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-12-31",
+   "value": 110250.0,
+   "digitalCpv": [
+    "72316000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101036-2026",
+   "ocid": "ocds-h6vhtk-07902e"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Space Booking Software",
+   "buyer": "BUCKINGHAMSHIRE HEALTHCARE NHS TRUST",
+   "published": "2026-10-26",
+   "suppliers": [
+    "DIGPACKS"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 60055.0,
+   "digitalCpv": [
+    "72212517"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/101018-2026",
+   "ocid": "ocds-h6vhtk-079023"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "ENHT - Dawn AC Anticoagulation Software Maintenance/Support",
+   "buyer": "East and North Hertfordshire Teaching NHS Trust",
+   "published": "2026-10-23",
+   "suppliers": [
+    "4S Information Systems Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-07-30",
+   "value": 10745.21,
+   "digitalCpv": [
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/100275-2026",
+   "ocid": "ocds-h6vhtk-078e84"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Digital Services Report",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "published": "2026-10-23",
+   "suppliers": [
+    "ADEPTEQ LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-22",
+   "value": 40000,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/100274-2026",
+   "ocid": "ocds-h6vhtk-078e83"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Google Maps for NHS 111 online (111.nhs.uk)",
+   "buyer": "NHS England",
+   "published": "2026-10-22",
+   "suppliers": [
+    "GEO.ME SOLUTIONS LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000",
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/099842-2026",
+   "ocid": "ocds-h6vhtk-078d95"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "planning",
+   "title": "Population Health Management (PHM)",
+   "buyer": "NHS SOUTH WEST LONDON INTEGRATED CARE BOARD",
+   "published": "2026-10-22",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/100097-2026",
+   "ocid": "ocds-h6vhtk-078e26"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Associate Support with The Partnership Leading Care (PLC) Programme",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "published": "2026-10-22",
+   "suppliers": [
+    "Moon & Mountain Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-09-03",
+   "value": 23200.0,
+   "digitalCpv": [
+    "72224000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/100009-2026",
+   "ocid": "ocds-h6vhtk-078df7"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Ensemble E2",
+   "buyer": "The Walton Centre NHS Foundation Trust",
+   "published": "2026-10-22",
+   "suppliers": [
+    "Intersystems"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-09-30",
+   "value": 13948.95,
+   "digitalCpv": [
+    "72500000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/099987-2026",
+   "ocid": "ocds-h6vhtk-078dea"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Online Survey Tool",
+   "buyer": "NHS England",
+   "published": "2026-10-21",
+   "suppliers": [
+    "QUL Technologies LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72416000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/099369-2026",
+   "ocid": "ocds-h6vhtk-078c9c"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "\"Medisoft\" I.T. System",
+   "buyer": "MID CHESHIRE HOSPITALS NHS FOUNDATION TRUST",
+   "published": "2026-10-21",
+   "suppliers": [
+    "Medisoft"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-06-30",
+   "value": 24785.95,
+   "digitalCpv": [
+    "72300000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/099333-2026",
+   "ocid": "ocds-h6vhtk-078c88"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "Business Continuity Testing Exercise - RFI",
+   "buyer": "NHS Business Services Authority",
+   "published": "2026-10-21",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72120000",
+    "72221000",
+    "72251000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/099277-2026",
+   "ocid": "ocds-h6vhtk-078c6d"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Robotic Process Automation (RPA) Services",
+   "buyer": "NHS Lanarkshire (Scotland)",
+   "published": "2026-10-21",
+   "suppliers": [
+    "ROBIQUITY LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-04-15",
+   "value": 493568,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/099671-2026",
+   "ocid": "ocds-h6vhtk-078804"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "Provision of an Enterprise-wide Medical Imaging Management and Processing System for eight Trusts in the East Midlands",
+   "buyer": "Nottingham University Hospital NHS Trust",
+   "published": "2026-10-21",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48180000",
+    "48329000",
+    "48814000",
+    "48814400",
+    "72253200",
+    "72263000",
+    "72317000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/099603-2026",
+   "ocid": "ocds-h6vhtk-078d1f"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Electronic Drug Tariff Support",
+   "buyer": "NHS Business Services Authority",
+   "published": "2026-10-21",
+   "suppliers": [
+    "Contiem Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": "2028-07-07",
+   "value": 60592.0,
+   "digitalCpv": [
+    "48000000",
+    "48517000",
+    "72212517"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/099489-2026",
+   "ocid": "ocds-h6vhtk-078ca2"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "award",
+   "title": "BCU-DCO-63923 - ENDOSCOPY MANAGEMENT SYSTEM",
+   "buyer": "Betsi Cadwaladr University Health Board",
+   "published": "2026-10-21",
+   "suppliers": [
+    "Medilogic UK Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 186600,
+   "digitalCpv": [
+    "48000000",
+    "48180000",
+    "72212180",
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/099456-2026",
+   "ocid": "ocds-h6vhtk-043b03"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Menumark Satellite and Training",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "published": "2026-10-21",
+   "suppliers": [
+    "DATASYM (U.K.) LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-30",
+   "value": 23630,
+   "digitalCpv": [
+    "72224200"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/099401-2026",
+   "ocid": "ocds-h6vhtk-078cb0"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Work involved in migrating  data to alternate server",
+   "buyer": "UNIVERSITY HOSPITALS OF DERBY AND BURTON NHS FOUNDATION TRUST",
+   "published": "2026-10-21",
+   "suppliers": [
+    "IMAGEX MEDICAL LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": "2026-10-31",
+   "value": 25000,
+   "digitalCpv": [
+    "72300000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/099380-2026",
+   "ocid": "ocds-h6vhtk-078ca3"
+  },
   {
    "lane": "digital",
    "clinical": false,
@@ -59,6 +2688,85 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/098795-2026",
    "ocid": "ocds-h6vhtk-078b6d"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "NHP Health Care Planning Tool SaaS Licence",
+   "buyer": "NHS England",
+   "published": "2026-10-20",
+   "suppliers": [
+    "dRofus AS"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-18",
+   "value": 657720.0,
+   "digitalCpv": [
+    "48311100",
+    "48613000",
+    "48810000",
+    "72268000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/099003-2026",
+   "ocid": "ocds-h6vhtk-06ea83"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "2073 - NECS - Duende ID Server",
+   "buyer": "NHS North of England Commissioning Support Unit",
+   "published": "2026-10-20",
+   "suppliers": [
+    "Phoenix Software"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-08-25",
+   "value": 15659.96,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/098993-2026",
+   "ocid": "ocds-h6vhtk-078bd3"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "ESNEFT3427 - Staff Helpdesk Subscription",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "published": "2026-10-20",
+   "suppliers": [
+    "A2Z Cloud Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 40740.0,
+   "digitalCpv": [
+    "72253100"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/098983-2026",
+   "ocid": "ocds-h6vhtk-078bcd"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "ESNEFT3427 - Staff Helpdesk Subscription",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "published": "2026-10-20",
+   "suppliers": [
+    "A2Z Cloud Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 40740.0,
+   "digitalCpv": [
+    "72253100"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/098982-2026",
+   "ocid": "ocds-h6vhtk-078bcc"
   },
   {
    "lane": "digital",
@@ -209,23 +2917,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/098588-2026",
    "ocid": "ocds-h6vhtk-078b00"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "planning",
-   "title": "BWC Karotyping and FISH Service PME",
-   "buyer": "Birmingham Women's and Children's NHS Foundation Trust",
-   "published": "2026-10-19",
-   "suppliers": [],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "48517000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/098573-2026",
-   "ocid": "ocds-h6vhtk-078af3"
   },
   {
    "lane": "digital",
@@ -402,23 +3093,6 @@
   {
    "lane": "digital",
    "clinical": false,
-   "stage": "planning",
-   "title": "Public Sector Construction Consultancy",
-   "buyer": "NHS Shared Business Services Limited",
-   "published": "2026-10-15",
-   "suppliers": [],
-   "isFramework": true,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "72224000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/097664-2026",
-   "ocid": "ocds-h6vhtk-055328"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
    "stage": "award",
    "title": "Healthset Data Migration Specialist",
    "buyer": "University Hospitals Dorset NHS Foundation Trust",
@@ -550,25 +3224,6 @@
   },
   {
    "lane": "digital",
-   "clinical": false,
-   "stage": "award",
-   "title": "Robotic Process Automation (RPA) Services",
-   "buyer": "NHS Lanarkshire (Scotland)",
-   "published": "2026-10-14",
-   "suppliers": [
-    "ROBIQUITY LIMITED"
-   ],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "72000000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/097236-2026",
-   "ocid": "ocds-h6vhtk-078804"
-  },
-  {
-   "lane": "digital",
    "clinical": true,
    "stage": "award",
    "title": "Chest X-Ray Artificial Intelligence Solution and Radiology AI Platform",
@@ -666,26 +3321,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/096164-2026",
    "ocid": "ocds-h6vhtk-05953a"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "award",
-   "title": "Medical Erostering Software Solution",
-   "buyer": "The Rotherham NHS Foundation Trust",
-   "published": "2026-10-12",
-   "suppliers": [
-    "HealthRota Limited"
-   ],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "48000000",
-    "48180000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/096159-2026",
-   "ocid": "ocds-h6vhtk-06d8fd"
   },
   {
    "lane": "digital",
@@ -800,25 +3435,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/094608-2026",
    "ocid": "ocds-h6vhtk-07825d"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "award",
-   "title": "PHW-FTS-63449 Review of Violence Monitoring Data Portal - Public Health Wales",
-   "buyer": "Public Health Wales NHS Trust",
-   "published": "2026-10-07",
-   "suppliers": [
-    "Pixel Fusion Limited"
-   ],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "72000000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/094910-2026",
-   "ocid": "ocds-h6vhtk-06d759"
   },
   {
    "lane": "digital",
@@ -1049,23 +3665,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/093986-2026",
    "ocid": "ocds-h6vhtk-07811a"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "tender",
-   "title": "Asset Tracking System",
-   "buyer": "NHS Borders",
-   "published": "2026-10-05",
-   "suppliers": [],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "48422000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/093954-2026",
-   "ocid": "ocds-h6vhtk-078109"
   },
   {
    "lane": "digital",
@@ -1446,23 +4045,6 @@
   {
    "lane": "digital",
    "clinical": false,
-   "stage": "tender",
-   "title": "Laundry Replacement of the PLC Controlling",
-   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
-   "published": "2026-09-30",
-   "suppliers": [],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "72263000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/092547-2026",
-   "ocid": "ocds-h6vhtk-077dfd"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
    "stage": "planning",
    "title": "UHB Outsourcing Clinical Coding PME",
    "buyer": "University Hospitals Birmingham NHS Foundation Trust",
@@ -1571,25 +4153,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/091660-2026",
    "ocid": "ocds-h6vhtk-077c04"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "award",
-   "title": "PR BHFT 0825",
-   "buyer": "Berkshire Healthcare NHS Foundation Trust",
-   "published": "2026-09-29",
-   "suppliers": [
-    "LocumTap Limited trading as Patchwork Health"
-   ],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "72261000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/092060-2026",
-   "ocid": "ocds-h6vhtk-077ce7"
   },
   {
    "lane": "digital",
@@ -2053,25 +4616,6 @@
   },
   {
    "lane": "digital",
-   "clinical": false,
-   "stage": "award",
-   "title": "TELEPATH EXTENSION",
-   "buyer": "Cwm Taff Morgannwg Universty Health Board",
-   "published": "2026-09-23",
-   "suppliers": [
-    "Dedalus DH OPCO UK Ltd"
-   ],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "72320000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/090227-2026",
-   "ocid": "ocds-h6vhtk-077836"
-  },
-  {
-   "lane": "digital",
    "clinical": true,
    "stage": "award",
    "title": "Artificial intelligence platform.",
@@ -2164,28 +4708,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/090057-2026",
    "ocid": "ocds-h6vhtk-077870"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "award",
-   "title": "NHP Health Care Planning Tool SaaS Licence",
-   "buyer": "NHS England",
-   "published": "2026-09-22",
-   "suppliers": [
-    "dRofus AS"
-   ],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "48311100",
-    "48613000",
-    "48810000",
-    "72268000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/089406-2026",
-   "ocid": "ocds-h6vhtk-06ea83"
   },
   {
    "lane": "digital",
@@ -3102,25 +5624,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/085260-2026",
    "ocid": "ocds-h6vhtk-06f555"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "planning",
-   "title": "CE ICB - WorkWell Initiative Service",
-   "buyer": "NHS Central East Integrated Care Board",
-   "published": "2026-09-09",
-   "suppliers": [],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "48000000",
-    "48180000",
-    "72000000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/085187-2026",
-   "ocid": "ocds-h6vhtk-06f52e"
   },
   {
    "lane": "digital",
@@ -5057,20 +7560,74 @@
  ],
  "openNotices": [
   {
-   "title": "Asset Tracking System",
-   "buyer": "NHS Borders",
+   "title": "Computerised Maintenance Management System (CMMS) / Computer-Aided Facility Management System (CAFM)",
+   "buyer": "NHS Grampian",
    "status": "active",
    "rawStatus": "active",
    "stage": "open tender",
-   "date": "2026-10-05",
-   "closingDate": "2026-11-16T12:00:00Z",
+   "date": "2026-11-09",
+   "closingDate": "2026-12-09T12:00:00Z",
    "startDate": null,
-   "url": "https://www.find-tender.service.gov.uk/Notice/093954-2026",
+   "url": "https://www.find-tender.service.gov.uk/Notice/106307-2026",
    "source": "Find a Tender",
-   "cpv": "48422000",
-   "valueAmount": 116000,
-   "valueCurrency": "GBP",
-   "ocid": "ocds-h6vhtk-078109",
+   "cpv": "72212421",
+   "valueAmount": null,
+   "valueCurrency": "",
+   "ocid": "ocds-h6vhtk-07b7c3",
+   "lane": "digital",
+   "clinical": false
+  },
+  {
+   "title": "Computerised Maintenance Management System (CMMS) / Computer-Aided Facility Management System (CAFM)",
+   "buyer": "NHS Grampian",
+   "status": "active",
+   "rawStatus": "active",
+   "stage": "open tender",
+   "date": "2026-11-09",
+   "closingDate": "2026-12-09T12:00:00Z",
+   "startDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/106281-2026",
+   "source": "Find a Tender",
+   "cpv": "72212421",
+   "valueAmount": null,
+   "valueCurrency": "",
+   "ocid": "ocds-h6vhtk-07b7b3",
+   "lane": "digital",
+   "clinical": false
+  },
+  {
+   "title": "Population Health Management (PHM)",
+   "buyer": "NHS SOUTH WEST LONDON INTEGRATED CARE BOARD",
+   "status": "planning",
+   "rawStatus": "planned",
+   "stage": "preliminary market engagement / planning",
+   "date": "2026-10-22",
+   "closingDate": null,
+   "startDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/100097-2026",
+   "source": "Find a Tender",
+   "cpv": "48000000",
+   "valueAmount": null,
+   "valueCurrency": "",
+   "ocid": "ocds-h6vhtk-078e26",
+   "lane": "digital",
+   "clinical": true
+  },
+  {
+   "title": "NLFT Service Desk and End User Technology Services - Open Market Engagement (RFI)",
+   "buyer": "North London NHS Foundation Trust",
+   "status": "planning",
+   "rawStatus": "planned",
+   "stage": "preliminary market engagement / planning",
+   "date": "2026-11-13",
+   "closingDate": null,
+   "startDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/108028-2026",
+   "source": "Find a Tender",
+   "cpv": "72000000",
+   "valueAmount": null,
+   "valueCurrency": "",
+   "ocid": "ocds-h6vhtk-07bbb8",
    "lane": "digital",
    "clinical": false
   }
@@ -5117,6 +7674,168 @@
    "to": "2026-10-20",
    "days": 8,
    "run": "2026-10-20"
+  },
+  {
+   "from": "2026-10-13",
+   "to": "2026-10-21",
+   "days": 8,
+   "run": "2026-10-21"
+  },
+  {
+   "from": "2026-10-14",
+   "to": "2026-10-22",
+   "days": 8,
+   "run": "2026-10-22"
+  },
+  {
+   "from": "2026-10-15",
+   "to": "2026-10-23",
+   "days": 8,
+   "run": "2026-10-23"
+  },
+  {
+   "from": "2026-10-16",
+   "to": "2026-10-24",
+   "days": 8,
+   "run": "2026-10-24"
+  },
+  {
+   "from": "2026-10-17",
+   "to": "2026-10-25",
+   "days": 8,
+   "run": "2026-10-25"
+  },
+  {
+   "from": "2026-10-18",
+   "to": "2026-10-26",
+   "days": 8,
+   "run": "2026-10-26"
+  },
+  {
+   "from": "2026-10-19",
+   "to": "2026-10-27",
+   "days": 8,
+   "run": "2026-10-27"
+  },
+  {
+   "from": "2026-10-20",
+   "to": "2026-10-28",
+   "days": 8,
+   "run": "2026-10-28"
+  },
+  {
+   "from": "2026-10-21",
+   "to": "2026-10-29",
+   "days": 8,
+   "run": "2026-10-29"
+  },
+  {
+   "from": "2026-10-22",
+   "to": "2026-10-30",
+   "days": 8,
+   "run": "2026-10-30"
+  },
+  {
+   "from": "2026-10-23",
+   "to": "2026-10-31",
+   "days": 8,
+   "run": "2026-10-31"
+  },
+  {
+   "from": "2026-10-24",
+   "to": "2026-11-01",
+   "days": 8,
+   "run": "2026-11-01"
+  },
+  {
+   "from": "2026-10-25",
+   "to": "2026-11-02",
+   "days": 8,
+   "run": "2026-11-02"
+  },
+  {
+   "from": "2026-10-27",
+   "to": "2026-11-04",
+   "days": 8,
+   "run": "2026-11-04"
+  },
+  {
+   "from": "2026-10-28",
+   "to": "2026-11-05",
+   "days": 8,
+   "run": "2026-11-05"
+  },
+  {
+   "from": "2026-10-29",
+   "to": "2026-11-06",
+   "days": 8,
+   "run": "2026-11-06"
+  },
+  {
+   "from": "2026-10-31",
+   "to": "2026-11-08",
+   "days": 8,
+   "run": "2026-11-08"
+  },
+  {
+   "from": "2026-11-01",
+   "to": "2026-11-09",
+   "days": 8,
+   "run": "2026-11-09"
+  },
+  {
+   "from": "2026-11-02",
+   "to": "2026-11-10",
+   "days": 8,
+   "run": "2026-11-10"
+  },
+  {
+   "from": "2026-11-03",
+   "to": "2026-11-11",
+   "days": 8,
+   "run": "2026-11-11"
+  },
+  {
+   "from": "2026-11-04",
+   "to": "2026-11-12",
+   "days": 8,
+   "run": "2026-11-12"
+  },
+  {
+   "from": "2026-11-05",
+   "to": "2026-11-13",
+   "days": 8,
+   "run": "2026-11-13"
+  },
+  {
+   "from": "2026-11-06",
+   "to": "2026-11-14",
+   "days": 8,
+   "run": "2026-11-14"
+  },
+  {
+   "from": "2026-11-07",
+   "to": "2026-11-15",
+   "days": 8,
+   "run": "2026-11-15"
+  },
+  {
+   "from": "2026-11-08",
+   "to": "2026-11-16",
+   "days": 8,
+   "run": "2026-11-16"
+  },
+  {
+   "from": "2026-11-09",
+   "to": "2026-11-17",
+   "days": 8,
+   "run": "2026-11-17"
+  },
+  {
+   "from": "2026-11-11",
+   "to": "2026-11-19",
+   "days": 8,
+   "run": "2026-11-19"
   }
  ]
 }

@@ -25,8 +25,8 @@ name: GP prescribing by ICB (NHSBSA EPD, monthly source)
 
 on:
   schedule:
-    # 07:20 UTC, days 15-28: clear of drug-tariff (06:40) and the overnight writers.
-    - cron: "20 7 15-28 * *"
+    # 08:20 UTC, days 15-28: clear of drug-tariff (07:15) and the overnight writers.
+    - cron: "20 8 15-28 * *"
   workflow_dispatch:
     inputs:
       force:
@@ -62,6 +62,15 @@ jobs:
             python3 scripts/refresh_gp_prescribing.py --if-new
           fi
 
+      - name: Rebuild the emollient explorer (trends, practice and PCN files) when the month changed
+        run: |
+          if git status --porcelain data/gp-prescribing/ | grep -q .; then
+            python3 scripts/build_emollient_explorer.py --pcn
+            python3 test_emollient_explorer.py
+          else
+            echo "no new GP month, explorer unchanged"
+          fi
+
       - name: Publish gate — the same one every other writer runs
         run: bash scripts/gate.sh
 
@@ -69,7 +78,7 @@ jobs:
         run: |
           git config user.name "hub-bot"
           git config user.email "contact@elevateandthrive.uk"
-          git add data/gp-prescribing/
+          git add data/gp-prescribing/ data/emollient-explorer/
           if git diff --cached --quiet; then
             echo "no change to commit"
             exit 0

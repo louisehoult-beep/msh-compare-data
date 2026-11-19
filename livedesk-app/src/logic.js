@@ -80,3 +80,52 @@ export function deskTheme(panel) {
   for (const [re, t] of THEMES) if (re.test(k)) return t;
   return { c: 'other', img: 'generic', icon: 'pulse' };
 }
+
+/** Stories for the swipe cards at the top of the Desk: lead rows first, then new
+ *  rows, then each desk's first row, one list with no repeats, at most max.
+ *  Each comes back with the panel it sits in. */
+export function topStories(panels, max = 8) {
+  const out = []; const seen = new Set();
+  const add = (p, r) => {
+    const k = r.url + '|' + r.title;
+    if (seen.has(k) || out.length >= max) return;
+    seen.add(k); out.push({ panel: p, row: r });
+  };
+  const rowsOf = (p) => (p.rows || []).filter((r) => r.kind !== 'note');
+  panels.forEach((p) => rowsOf(p).filter((r) => r.lead).forEach((r) => add(p, r)));
+  panels.forEach((p) => rowsOf(p).filter((r) => r.new).forEach((r) => add(p, r)));
+  panels.forEach((p) => { const r = rowsOf(p)[0]; if (r) add(p, r); });
+  return out;
+}
+
+/** Careers roles for a choice of areas and specialities. Empty choice = everything.
+ *  A role with no stated area, or no mapped speciality, is never hidden by a choice
+ *  it cannot answer (mirrors matches() in scripts/careers_feed.py). */
+export function filterCareers(careers, regions, specs) {
+  const roles = (careers && careers.roles) || [];
+  return roles.filter((r) => {
+    if (regions && regions.length && (r.regions || []).length && !r.regions.some((x) => regions.includes(x))) return false;
+    if (specs && specs.length && (r.specialities || []).length && !r.specialities.some((x) => specs.includes(x))) return false;
+    return true;
+  });
+}
+
+/** Keep the feed's order, but put roles that name one of the chosen areas before
+ *  roles with no stated area. */
+export function rankCareers(roles, regions) {
+  if (!regions || !regions.length) return roles;
+  const named = (r) => (r.regions || []).some((x) => regions.includes(x));
+  return [...roles.filter(named), ...roles.filter((r) => !named(r))];
+}
+
+// What to show when password sign-in fails. Everything used to read "did not match",
+// which hid an unconfirmed reviewer account behind what looked like a wrong password
+// through two store rejections (04/11/2026). Only wrong credentials say that now.
+export function passwordErrorNote(error) {
+  const code = String(error?.code || '');
+  const msg = String(error?.message || '').toLowerCase();
+  if (code === 'email_not_confirmed' || msg.includes('not confirmed')) return 'This account has not been confirmed yet. Use the email code instead, or contact support.';
+  if (code === 'over_request_rate_limit' || error?.status === 429) return 'Too many attempts. Wait a few minutes and try again.';
+  if (code === 'invalid_credentials' || msg.includes('invalid login')) return 'That email and password did not match.';
+  return 'Could not sign in just now. Check your connection and try again.';
+}

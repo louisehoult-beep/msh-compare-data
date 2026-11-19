@@ -105,11 +105,11 @@
     var max = top.length ? top[0].n : 1;
 
     var h = '<div style="font-family:Inter,-apple-system,Segoe UI,sans-serif;">';
-    h += '<div style="font-size:11px;letter-spacing:2px;font-weight:700;color:' + G + ';">TOP ' + top.length + ' NHS SUPPLIERS</div>';
+    h += '<div style="font-size:11px;letter-spacing:2px;font-weight:700;color:#0B1C33;">TOP ' + top.length + ' NHS SUPPLIERS</div>';
     h += '<div style="font-size:20px;font-weight:800;color:' + INK + ';margin:4px 0 8px;">By number of NHS Supply Chain frameworks</div>';
 
     h += '<div style="background:' + SOFT + ';border:1px solid ' + LINE + ';border-left:3px solid ' + G + ';border-radius:0 8px 8px 0;padding:10px 13px;font-size:12px;color:#4a5766;line-height:1.6;margin:0 0 14px;">' +
-      '<b style="color:' + G + ';letter-spacing:.06em;">HOW THIS IS RANKED</b><br>' +
+      '<b style="color:#0B1C33;letter-spacing:.06em;">HOW THIS IS RANKED</b><br>' +
       'The number of NHS Supply Chain frameworks whose <b>own contract launch brief names that supplier</b>, counted across ' +
       frameworks.length + ' briefs captured on ' + esc(fwDoc.dataAsOf || 'an unrecorded date') + '. ' +
       'This is <b>not</b> revenue, NHS spend or market share: nobody publishes those per supplier, so the Hub does not show them. ' +
@@ -120,7 +120,7 @@
     h += top.map(function (r, i) {
       var pct = Math.round(r.n / max * 100);
       return '<div style="display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid #f0ece3;">' +
-        '<div style="width:22px;text-align:right;font-size:13px;font-weight:800;color:' + G + ';">' + (i + 1) + '</div>' +
+        '<div style="width:22px;text-align:right;font-size:13px;font-weight:800;color:#0B1C33;">' + (i + 1) + '</div>' +
         '<div style="flex:1;min-width:0;">' +
           '<div style="font-size:14px;font-weight:700;color:' + INK + ';">' + esc(r.name) +
           (r.profile ? '' : ' <span style="font-size:10.5px;font-weight:600;color:' + DIM + ';">· no Hub profile yet</span>') + '</div>' +
@@ -134,7 +134,7 @@
 
     h += '<div style="font-size:11.5px;color:' + DIM + ';margin-top:10px;line-height:1.6;">' +
       'Ranked from ' + Object.keys(count).length + ' distinct supplier names across those briefs. ' +
-      'Open any company in <a href="/medical-sales-hub/company-report/" style="color:' + G + ';font-weight:600;">Company Intelligence Reports</a> for its full framework list, the other suppliers on each one, and its Companies House record.' +
+      'Open any company in <a href="/medical-sales-hub/company-report/" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">Company Intelligence Reports</a> for its full framework list, the other suppliers on each one, and its Companies House record.' +
       '</div></div>';
 
     MOUNT.innerHTML = h;

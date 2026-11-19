@@ -1,0 +1,102 @@
+{
+ "_what": "Transcatheter Heart Valve Repair, Replacement and Associated Devices -- every lot-source supplier name on the framework's NHS Supply Chain product matrix that reached no Hub supplier record, and what was decided about it. Written by scripts/_add_transcatheter_clinical_records_1118.py so these decisions are recorded once and not re-worked.",
+ "framework": "Transcatheter Heart Valve Repair, Replacement and Associated Devices",
+ "frameworkReference": "2022/S 000-025267",
+ "frameworkDates": "18 September 2023 to 26 February 2027",
+ "briefUrl": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/transcatheter-heart-valve-repair-replacement-and-associated-devices/",
+ "matrixUrl": "https://azuksappnpdsa01.blob.core.windows.net/datashare/Product-Matrix-Transcatheter-Heart-Valve-09-September-2026-MT.xlsx",
+ "matrixIssued": "2026-09-09",
+ "briefSupplierCount": 11,
+ "briefSupplierCountSource": "the brief states \"There are 11 suppliers in total on this framework\" and prints exactly 11, so the capture is complete",
+ "briefSuppliers": [
+  "Abbott",
+  "Acrostak",
+  "Biosensors",
+  "BVM",
+  "Dot Medical",
+  "Edwards",
+  "Jenavalve",
+  "MCT",
+  "Medtronic",
+  "Meril",
+  "SMT"
+ ],
+ "lotTitles": {
+  "Lot 1": "Transcatheter Aortic Valve Implant (TAVI) System",
+  "Lot 2": "Transcatheter Non-Aortic Valve/Chord Repair and Replacement System, Components and Accessories"
+ },
+ "frameworkClaimRecord": "~/.claude/framework-claims/2022-S-000-025267-2026-11-18.json",
+ "decidedOn": "2026-11-18",
+ "ruling": "Lou's standing ruling that the Hub does not carry non-clinical framework suppliers -- catering, facilities and electrical, furniture, office supplies, food. Both companies decided here are clinical device suppliers, so both are in scope. The speciality on each record comes from the product evidence, not from the framework.",
+ "included": [
+  {
+   "name": "Biosensors International UK Limited",
+   "lots": [
+    "Lot 1"
+   ],
+   "verdict": "included-clinical",
+   "record": "Biosensors International UK Ltd",
+   "companyNumberCandidate": "11783737",
+   "companyStatus": "Active",
+   "why": "NHS Supply Chain's own product matrix names this company in full and marks it on Lot 1, Transcatheter Aortic Valve Implant (TAVI) System; Companies House SIC 32500 and 46460. The UK arm of the Biosensors International Group (Singapore; European HQ Morges, Switzerland; ultimate parent Blue Sail Medical Co., Ltd).",
+   "constraints": "biosensors.com names no UK entity and prints no UK number or UK address, so it is recorded as a related brand site, NOT attributed (cross-border-sibling-domain-attribution), and the group catalogue is NOT published under the UK record (no-parent-catalogue-credit-to-uk-subsidiary). `products` is empty on purpose. The number is a candidate only: the registered office 12 New Fetter Lane EC4A 1JP is the company secretary's own address and was shared by 344 companies on 18/11/2026, which domain-proof-tier's guard says is no proof at all.",
+   "lotAttached": false,
+   "lotAttachedWhyNot": "Attaching Lot 1 needs the brief's bare word \"Biosensors\" as an alias, and that alias is unsafe: company_match strips trailing legal-form words, so \"Biosensors\" and \"Biosensors SA\" (the Swiss group entity) reduce to the same key \"biosensors\", and the two award rows sitting in data/company-awards.json's unmatched list under \"Biosensors SA\" would be published against this UK record by the next refresh_awards.py --rematch. Tested 18/11/2026. The Lot 1 allocation is recorded on the record's own framework entry instead; the lot-source name stays in the framework's unresolved list. Same choice as Abbott on this framework. It would become attachable if a Hub record for Biosensors SA ever held that name verbatim, because company_match tries the unstripped name first -- separate work, not done here. Independently re-derived on main by the sibling session working this repo's remaining framework-lots residuals, 18/11/2026: the alias would leave exactly ONE holder of the key, so the Swiss rows would resolve \"confirmed\" and PUBLISH, not quarantine as ambiguous.",
+   "collisionRetestWarning": "data/company-awards.json's unmatched list also holds \"Microbiosensor Limited\" (key \"microbiosensor\") and \"SD BIOSENSOR, INC.\" (key \"sd biosensor\"). Neither collides with this record today. If the alias \"Biosensors International\" is ever added here, re-run the same collision test first.",
+   "notAliased": [
+    "Biosensors SA (and the bare word \"Biosensors\")",
+    "Microbiosensor Limited",
+    "Dynamic Biosensors GmbH",
+    "SD BIOSENSOR, INC.",
+    "BIOSENSORS LTD (13052619)",
+    "BIOSENSORS BEYOND BORDERS LIMITED (10581522)"
+   ],
+   "sources": [
+    "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/transcatheter-heart-valve-repair-replacement-and-associated-devices/",
+    "https://azuksappnpdsa01.blob.core.windows.net/datashare/Product-Matrix-Transcatheter-Heart-Valve-09-September-2026-MT.xlsx",
+    "https://find-and-update.company-information.service.gov.uk/company/11783737",
+    "https://www.biosensors.com/intl/contact-us"
+   ]
+  },
+  {
+   "name": "Jenavalve Production Limited",
+   "lots": [
+    "Lot 1"
+   ],
+   "verdict": "included-clinical",
+   "record": "JenaValve Production Limited",
+   "companyNumberCandidate": "09520509",
+   "companyStatus": "Active",
+   "why": "Sells the Trilogy Transcatheter Heart Valve System for aortic regurgitation -- valve, delivery system and introducer sheath -- read on the group's own site, which is attributed to this entity at the address tier of domain-proof-tier. NHS Supply Chain's matrix marks it on Lot 1. Companies House SIC 32500. The UK manufacturing entity of the JenaValve group.",
+   "constraints": "Domain jenavalve.com attributed at the ADDRESS tier: the site prints the Leeds registered office of 09520509 verbatim and names \"JenaValve Production Ltd.\" as an affiliate. The number is still a candidate, because the address tier proves the site, not the number, and the company publishes no number -- same treatment as Artivion UK Ltd (03837138).",
+   "lotAttached": true,
+   "lotAttachedWhyNot": null,
+   "bareBriefWordAliased": "Yes -- \"Jenavalve\". Tested 18/11/2026 against every award supplier name in data/company-awards.json: nothing else reduces to the key \"jenavalve\" (the only award names in the region are \"JenaValve Production Ltd.\", key \"jenavalve production\", which routes here on its full name), and no other Hub record's name or aliases contain \"jena\". The bare alias therefore routes no award by itself; it only lets the brief's own word reach this record so Lot 1 attaches.",
+   "notAliased": [
+    "JenaValve Technology, Inc.",
+    "JenaValve Technology GmbH"
+   ],
+   "sources": [
+    "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/transcatheter-heart-valve-repair-replacement-and-associated-devices/",
+    "https://azuksappnpdsa01.blob.core.windows.net/datashare/Product-Matrix-Transcatheter-Heart-Valve-09-September-2026-MT.xlsx",
+    "https://find-and-update.company-information.service.gov.uk/company/09520509",
+    "https://jenavalve.com/contact/",
+    "https://jenavalve.com/eu-uk-privacy-policy/"
+   ]
+  }
+ ],
+ "excluded": [],
+ "alreadyDecidedElsewhere": [
+  {
+   "name": "Abbott Meditcal UK Limited",
+   "lots": [
+    "Lot 1",
+    "Lot 2"
+   ],
+   "verdict": "decided-in-b983be2",
+   "why": "NHS Supply Chain's own matrix misspelling, put on Abbott Medical U.K. Ltd by commit b983be2. Abbott's lots stay unattached on purpose: the brief's bare word \"Abbott\" resolves to Abbott Diabetes Care, and a global alias index cannot carry a per-framework truth. Not touched by this run."
+  }
+ ],
+ "residual": "Both companies now have a Hub record, so neither name is a \"no Hub record\" case any more. Unlike the Hand Hygiene framework, the owner's brief DOES name both, so a lot CAN attach -- and on the next FULL run of refresh_framework_lots.py it should, for JenaValve. TWO NAMES WILL REMAIN in this framework's `unresolved` list on purpose, each with its reason recorded: \"Biosensors International UK Limited\", because the bare-word alias its brief row needs would re-route Biosensors SA's two unmatched award rows (see its lotAttachedWhyNot above), and \"Abbott Meditcal UK Limited\", decided in commit b983be2 for the same shape of reason. Neither is an open question. The count does not move on refresh_framework_lots.py --attach-only, which reuses the stored unresolved lists.",
+ "otherBareWordsOnThisFramework": "Reported by the sibling session working this repo's remaining framework-lots residuals, 18/11/2026, and recorded here so this framework's bare-word picture is in one place: the brief's bare words now attach for Edwards (Lots 1 and 2, via the matrix's own misspelling \"Edwards Lidesciences Limited\"), BVM and MCT. \"Abbott\" stays unattached and must NOT be aliased -- it resolves to Abbott Diabetes Care. With the two records added here, suppliersWithoutLot on this framework should come down to Abbott and Biosensors."
+}

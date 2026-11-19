@@ -503,7 +503,14 @@ def _sitemap_urls(domain, deadline):
             body, _ = base.get(u)
         except Exception:
             continue
-        locs = re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", body)
+        # A bare <loc> is XML, so a literal "&" in a query string (a TYPO3
+        # cHash param, for instance) is always escaped "&amp;" in the file.
+        # Left unescaped, the sub-sitemap URL this builds still carries the
+        # literal "&amp;cHash=..." and fails cHash validation on a TYPO3 site
+        # (pfm medical UK, found 22/10/2026), returning a near-empty fallback
+        # page instead of the real sub-sitemap — same bug, same fix, as
+        # crawl_supplier_site.py's sitemap_products().
+        locs = [base.H.unescape(l) for l in re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", body)]
         if "<sitemapindex" in body[:400].lower():
             to_read.extend([l for l in locs
                             if "product" in l.lower() or "sitemap" in l.lower()][:40])

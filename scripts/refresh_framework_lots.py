@@ -98,7 +98,16 @@ RULE = (
     "Lots attach to the exact supplier string the brief uses; a source name attaches "
     "only where its normalised form (brief_names.clean + company_match.key) equals "
     "that brief name's, or both resolve to the same single Hub company under the "
-    "seed's recorded aliases. Unmatched names are listed in `unresolved`, never "
+    "seed's recorded aliases. Where that normalised form reaches TWO brief names, "
+    "it is retried on a narrower form that canonicalises the legal-form word but "
+    "keeps the territory word (company_match.key_keep_territory), which separates "
+    "two real companies named on the same brief whose names differ only by that "
+    "word — and only where the seed holds BOTH the source name and that brief "
+    "name verbatim on one record, which is the Hub's own evidence that the row "
+    "is the company the notice names. A name still reaching two brief names, or "
+    "reaching one the seed holds no verbatim evidence for, is quarantined, "
+    "never picked. "
+    "Unmatched names are listed in `unresolved`, never "
     "guessed. Where the brief breaks a framework into lots but no source names who "
     "holds which, lotStatus is 'notPublished' and the report says so.")
 
@@ -327,21 +336,40 @@ def parse_matrix_sections(rows, sheet_title):
             # Supplier names start in the column after the label cell.
             header = [""] * (hc + 1) + row[hc + 1:]
             continue
-        lab = lot_label(first)
+        lab, lab_col = lot_label(first), 0
         if not lab and len(nonempty) <= 3:
-            for v in nonempty:
+            for ci, v in enumerate(row):
+                if not v:
+                    continue
                 lab = lot_label(v)
                 if lab:
+                    lab_col = ci
                     break
         if lab:
             cur_lot = lab
-            if len(nonempty) <= 3:
-                continue
+            # A LOT HEADING ROW MAY ALSO CARRY DATA, and it is read, not skipped.
+            # NHS Supply Chain writes the first product of a lot on the same row
+            # as the lot heading ("Lot 2 – Spinal and Neurological Robots |  |  |
+            # Mazor X System |  |  | ROSA Brain"). This used to `continue` on any
+            # heading row with three or fewer non-empty cells, which SILENTLY
+            # dropped those cells — not quarantined in `unresolved`, just gone.
+            # On Robotic Medical Equipment (matrix of 9 September 2026) that lost
+            # Zimmer Biomet UK Limited's only mark (ROSA Brain, Lot 2) and MCT
+            # Lifesciences Ltd's only mark (ROBOFLEX AVICENNA, Lot 3) outright,
+            # while Medtronic and Procept survived only because they had a second
+            # product on the row BELOW the heading. A heading row with four or
+            # more values was already read, so the old threshold made the parser
+            # disagree with itself about the same shape of row.
         if header is None or cur_lot is None:
             continue
         for ci in range(1, min(len(row), len(header))):
             sup = header[ci]
             if not sup:
+                continue
+            # Never read the cell the lot label itself came from: on a sheet that
+            # puts the heading in a data column, that text is the heading, not a
+            # mark against that supplier.
+            if lab and ci == lab_col:
                 continue
             if sup and _looks_like_company(sup) and _is_mark(row[ci]):
                 out.setdefault(sup, set()).add(cur_lot)
@@ -517,15 +545,41 @@ def resolver(seed):
     def to_company(n):
         c, state, _ = company_match.resolve(n, idx)
         return c if state == "confirmed" else None
+    # The index itself, so attach_names() can ask whether the seed holds a name
+    # VERBATIM (index.exact) when it has to choose between two brief rows. Hung
+    # on the function rather than added to attach_names()'s signature so all
+    # five existing callers get the guard unchanged; a caller passing its own
+    # plain callable simply does not get it, and nothing is attached on a tie.
+    to_company.index = idx
     return to_company
+
+
+def _verbatim_company(name, idx):
+    """The ONE Hub company that holds `name` verbatim, or None.
+
+    company_match.Index.exact is norm() alone, with no legal-form or territory
+    word stripped, so this reaches only a spelling the seed actually records. It
+    is used below purely to refuse a choice the Hub has no evidence for, never
+    to widen a match.
+    """
+    if idx is None:
+        return None
+    exact = getattr(idx, "exact", None) or {}
+    for probe in (company_match.norm(brief_names.clean(name)), company_match.norm(name)):
+        hits = exact.get(probe)
+        if hits and len(hits) == 1:
+            return sorted(hits)[0]
+    return None
 
 
 def attach_names(source_map, brief_suppliers, to_company, names_out=None):
     """({brief_name: sorted lots}, unresolved[]) under the stated matching rule.
     names_out, when given, collects {brief_name: {source spelling, ...}}."""
-    by_key, by_co = {}, {}
+    idx = getattr(to_company, "index", None)
+    by_key, by_terr, by_co = {}, {}, {}
     for b in brief_suppliers:
         by_key.setdefault(company_match.key(brief_names.clean(b)), set()).add(b)
+        by_terr.setdefault(company_match.key_keep_territory(brief_names.clean(b)), set()).add(b)
         c = to_company(brief_names.clean(b)) or to_company(b)
         if c:
             by_co.setdefault(c, set()).add(b)
@@ -534,10 +588,65 @@ def attach_names(source_map, brief_suppliers, to_company, names_out=None):
         k = company_match.key(brief_names.clean(src))
         cands = by_key.get(k) or set()
         how = "normalised name"
+        if len(cands) > 1:
+            # key() strips the territory word, so a brief that names two REAL
+            # companies differing only by that word collapses them onto one key
+            # and the notice's name reaches both. Retry on a narrower key that
+            # canonicalises the legal form but KEEPS the territory word — the
+            # same guard company_match.resolve()'s verbatim tier gives the seed,
+            # which norm() alone cannot give here because these sources write
+            # the legal form long in one place and short in the other.
+            # Urology and Bowel Management named both "Clinisupplies Ltd"
+            # (04013240) and "Clinisupplies GB Limited" (02503030) and the award
+            # notice's "Clinisupplies Limited" matched both; it is 04013240.
+            # Narrowing only: used solely when the wider key was ambiguous, and
+            # a tie here still quarantines.
+            # ...but only where the Hub has its own evidence that the row it
+            # picks is the company the notice names. Added 18/11/2026, the same
+            # day as the tier above and for a case that tier got wrong.
+            #
+            # Beverages, Confectionary and Snacks names both "Nestle Ltd" and
+            # "Nestle UK", and the notice's "Nestle UK Ltd" narrows to the
+            # second. Attaching the lot to that ROW looks harmless -- it creates
+            # no record -- but app/company-report.js does not render a row, it
+            # renders a COMPANY: supplierFrameworks() collects every brief row
+            # whose coKey matches one of a record's own names or aliases, and
+            # fwLotLine() then unions the lots of all of them. The only
+            # Nestle-keyed Hub record is Nestle Health Science UK, the clinical
+            # nutrition arm, which holds a bare alias "nestle" and so collects
+            # BOTH rows. So the attachment put "Lots: Lot 1, Lot 13" of a
+            # confectionery and beverages framework on the card of a company
+            # that is not the awardee -- and that record's own identityNote,
+            # written 17/11/2026, already says a bare group word cannot be read
+            # as naming one of several Nestle entities, and left its Infant
+            # Feeding lots unattached for exactly that reason.
+            #
+            # The test that separates the two cases is the one company_match
+            # already uses: does the seed hold the notice's name and that row
+            # VERBATIM, on the same record? For Clinisupplies it does -- the
+            # record records both "Clinisupplies Limited" and "Clinisupplies
+            # Ltd", and that is the Hub's own evidence that 04013240 is the
+            # awardee. For Nestle it holds neither spelling, only the bare group
+            # word. Without that evidence the name stays quarantined, which is a
+            # question for a human, never a loss.
+            narrowed = by_terr.get(company_match.key_keep_territory(brief_names.clean(src)), set())
+            if len(narrowed) == 1:
+                row = next(iter(narrowed))
+                src_co = _verbatim_company(src, idx)
+                if src_co and _verbatim_company(row, idx) == src_co:
+                    cands, how = narrowed, ("normalised name, territory word kept, "
+                                            "confirmed by both spellings being held "
+                                            "verbatim by one record")
         if len(cands) != 1:
+            # Keep the ambiguity if there was one: the alias lookup below can
+            # come back empty, and reporting "no supplier normalises to it"
+            # when two of them do sends the reader to the wrong remedy.
+            ambiguous = cands if len(cands) > 1 else set()
             c = to_company(brief_names.clean(src)) or to_company(src)
             cands = by_co.get(c, set()) if c else set()
             how = "recorded alias"
+            if len(cands) != 1 and ambiguous:
+                cands = ambiguous
         if len(cands) == 1:
             b = next(iter(cands))
             lots.setdefault(b, set()).update(labs)

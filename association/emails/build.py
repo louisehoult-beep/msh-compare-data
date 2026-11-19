@@ -1,0 +1,32 @@
+import json
+B="https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/09/"
+IMG={"m":B+"hub-profile-medical-sales-professionals.jpg","c":B+"hub-profile-clinicians.jpg"}
+MAIL="contact@elevateandthrive.uk"
+def tpl(eyebrow,title,img,body,cta,sub):
+    return f'''<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#EDE7DC"><tr><td align="center" style="padding:24px 12px">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;background:#ffffff;font-family:Arial,Helvetica,sans-serif">
+<tr><td style="background:#0B1C33;padding:22px 32px"><div style="color:#E0BE8E;font-size:12px;letter-spacing:2px;font-weight:bold">ASSOCIATION FOR</div><div style="color:#FFFFFF;font-size:20px;font-weight:bold;margin-top:2px">Industry Professional Nurses</div></td></tr>
+<tr><td style="height:4px;background:#E0BE8E;font-size:0;line-height:0">&nbsp;</td></tr>
+<tr><td><img src="{IMG[img]}" width="600" alt="" style="display:block;width:100%;height:auto;border:0"></td></tr>
+<tr><td style="background:#14304F;padding:26px 32px"><div style="color:#E0BE8E;font-size:12px;letter-spacing:2px;font-weight:bold">{eyebrow}</div><div style="color:#FFFFFF;font-size:26px;line-height:1.25;font-weight:bold;margin-top:8px">{title}</div></td></tr>
+<tr><td style="padding:30px 32px;color:#1D2733;font-size:16px;line-height:1.65">{body}
+<table role="presentation" cellpadding="0" cellspacing="0" style="margin:26px 0 8px"><tr><td style="background:#0B1C33;border-radius:4px"><a href="{sub}" style="display:inline-block;padding:14px 28px;color:#FFFFFF;font-size:16px;font-weight:bold;text-decoration:none">{cta}</a></td></tr></table>
+<p style="margin:22px 0 0">Lou<br><span style="color:#26364B">Registered nurse, founder, Association for Industry Professional Nurses</span></p></td></tr>
+<tr><td style="background:#0B1C33;padding:20px 32px;color:#DBE3EE;font-size:12px;line-height:1.6">You are receiving this because you joined the Association for Industry Professional Nurses on medsalesintelligencehub.co.uk.<br><a href="{{$unsubscribe}}" style="color:#E0BE8E">Unsubscribe</a></td></tr>
+</table></td></tr></table>'''
+def li(items): return "<ul style='padding-left:20px;margin:12px 0'>"+"".join(f"<li style='margin-bottom:8px'>{i}</li>" for i in items)+"</ul>"
+def ol(items): return "<ol style='padding-left:22px;margin:12px 0'>"+"".join(f"<li style='margin-bottom:10px'>{i}</li>" for i in items)+"</ol>"
+H="https://medsalesintelligencehub.co.uk"
+SURVEY=H+"/association-member-survey/"
+def lk(u,t): return f'<a href="{u}" style="color:#0B1C33;font-weight:bold">{t}</a>'
+E1=tpl("WELCOME","Welcome. Here is what you can use today","m",
+"<p style='margin:0 0 14px'>Hi {$name},</p><p style='margin:0 0 14px'>Thank you for joining. I'm Lou, a registered nurse who moved into industry, and I'm building this association for nurses working in this world, because it can be a lonely place to be.</p><p style='margin:0 0 14px'>Before I ask you anything, here is something you can use straight away. Your membership includes free access to the Medical Sales Hub, and its clinical section brings together, for clinical staff:</p>"+li(["regulator and college news, and clinical guidance, on the Clinical Desk","the Revalidation Portfolio Builder and the Care Standard Portfolio Builder","free and funded training, and clinical jobs"])+"<p style='margin:14px 0'>"+lk(H+"/clinical-hub/","Take a look at the Medical Sales Hub, clinical section")+".</p><p style='margin:0 0 14px'>When you have a few minutes, I would also like to know who is in the association, so I can build what you actually need. It is a short form with drop-down answers, and every question is optional:</p>"+li(["where you work and the kind of role you do","what would help you most","whether you would like to meet other industry nurses"])+"<p style='margin:0'>I read every answer myself.</p>","Answer the short form",SURVEY)
+E2=tpl("YOUR REVALIDATION","Build your revalidation pack as you go","c",
+"<p style='margin:0 0 14px'>Hi {$name},</p><p style='margin:0 0 14px'>Keeping up with revalidation is one of the questions nurses in industry ask me most, so here is a tool for it.</p><p style='margin:0 0 14px'>The <b>Revalidation Portfolio Builder</b>, in the Medical Sales Hub's clinical section, helps you build your Nursing and Midwifery Council (NMC) pack across the eight requirements as you go. It saves in your own browser as you work, and it does not ask you to create another account.</p><p style='margin:0 0 14px'>"+lk(H+"/medical-sales-hub/clinical-portfolio/","Open the Revalidation Portfolio Builder")+" (sign in to the Hub first; it is free for association members).</p><p style='margin:0 0 6px'>I would like to hear how revalidation works for you in industry: whether anything gets in the way, for example practice hours, reflection or evidence of your practice. The form takes about three minutes, and your answers decide what the association builds first.</p>","Answer the short form",SURVEY)
+E3=tpl("CAREERS AND COMMUNITY","Your next move, and meeting other industry nurses","m",
+"<p style='margin:0 0 14px'>Hi {$name},</p><p style='margin:0 0 14px'>Two more things in the Medical Sales Hub that you may find useful:</p>"+li([lk(H+"/medical-sales-hub/careers/","Career Centre")+": medical sales recruiters, the live sales jobs map and published salary guides",lk(H+"/medical-sales-hub/clinical-jobs/","Jobs")+": live clinical roles, Agenda for Change pay bands, and the routes between roles"])+"<p style='margin:14px 0'>The form also asks whether you network with other industry nurses now, and whether you would come to a networking event, in person or online. If enough of you are interested, I will organise it and tell you first.</p><p style='margin:0'>Want to help shape the association? You can still "+lk(H+"/association-for-industry-professional-nurses/","put yourself forward for the committee")+".</p>","Answer the short form",SURVEY)
+json.dump([E1,E2,E3],open("emails.json","w"))
+pv='<!doctype html><meta charset=utf-8><title>AIPN sequence preview</title><body style="margin:0;background:#888">'
+for i,(e,d) in enumerate(zip([E1,E2,E3],["Day 1","Day 5","Day 10"])):
+    pv+=f'<div style="font:bold 14px Arial;color:#fff;padding:14px 20px;background:#333">Email {i+1} ({d} after sign-up)</div>'+e.replace("{$name}","Ana").replace("{$unsubscribe}","#")
+open("preview.html","w").write(pv)

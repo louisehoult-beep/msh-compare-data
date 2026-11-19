@@ -27,8 +27,7 @@ import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { Purchases } from '@revenuecat/purchases-capacitor';
 import { CONFIG } from './config.js';
 import {
-  deskTheme, filterFeed, itemsFromNotification, newCount, passFromLink, safeUrl, shortDate, stamp,
-} from './logic.js';
+  deskTheme, filterFeed, itemsFromNotification, topStories, newCount, passFromLink, safeUrl, shortDate, stamp, filterCareers, rankCareers, passwordErrorNote } from './logic.js';
 
 const NATIVE = Capacitor.isNativePlatform();
 const PLATFORM = Capacitor.getPlatform(); // 'ios' | 'android' | 'web'
@@ -58,6 +57,9 @@ const S = {
   feedFrom: null,     // 'live' | 'cache'
   tab: 'desk',
   chosen: [],         // speciality slugs for the Desk filter and alerts
+  regions: [],        // area slugs for Careers and role alerts
+  roleAlerts: false,  // new-role alerts on
+  careers: null, careersFrom: null, careerSpecs: false,
   mine: false,        // Desk filter on?
   alertsOn: false,
   lastAlert: null,    // {at, items}
@@ -65,6 +67,8 @@ const S = {
   packages: null,
   note: '',
   showSignIn: false,  // a guest chose "Sign in" on the access screen
+  focus: null,        // index of the one desk shown, or null for all
+  openDesks: {},      // desk index -> showing every row
 };
 
 const isGuest = () => !!(S.user && S.user.is_anonymous);
@@ -113,6 +117,16 @@ async function loadFeed() {
     S.status = { ...(S.status || {}), ...r.body, access: false };
   } else {
     S.feed = await store.getJSON('feed', null); S.feedFrom = S.feed ? 'cache' : null;
+  }
+}
+
+async function loadCareers() {
+  const r = await api('careers');
+  if (r.status === 200 && r.body.careers) {
+    S.careers = r.body.careers; S.careersFrom = 'live';
+    await store.setJSON('careers', S.careers);
+  } else {
+    S.careers = await store.getJSON('careers', null); S.careersFrom = S.careers ? 'cache' : null;
   }
 }
 
@@ -233,7 +247,7 @@ async function registerDevice() {
     }
     const { token } = await FirebaseMessaging.getToken();
     await store.set('pushToken', token);
-    await api('device', { token, platform: PLATFORM, specialities: S.chosen });
+    await api('device', { token, platform: PLATFORM, specialities: S.chosen, regions: S.regions, role_alerts: S.roleAlerts });
   } catch { /* retried on next launch */ }
 }
 
@@ -274,6 +288,7 @@ const ICONS = {
   globe: '<circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19"/><path d="M12 2.5c2.6 2.6 3.9 5.8 3.9 9.5s-1.3 6.9-3.9 9.5c-2.6-2.6-3.9-5.8-3.9-9.5S9.4 5.1 12 2.5z"/>',
   pulse: '<path d="M2 12h4l3-7 4 14 3-7h6"/>',
   desk: '<rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18M8 13h8M8 16.5h5"/>',
+  brief: '<rect x="3" y="7.5" width="18" height="12.5" rx="2.5"/><path d="M9 7.5V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5v2"/><path d="M3 13h18"/>',
   bell: '<path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/>',
   user: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-4 4.3-6 8-6s6.8 2 8 6"/>',
 };
@@ -359,16 +374,31 @@ function viewAccess() {
   </main>`;
 }
 
-function rowHtml(r) {
+const SHOW = 3; // rows per desk before "Show all"
+
+function storyCard({ panel, row }) {
+  const th = deskTheme(panel);
+  return `<a class="story" data-open="${esc(row.url)}" style="--c:var(--c-${th.c});--img:url(img/live-desk-theme-${th.img}.jpg)">
+    <span class="wm">${svg(th.icon)}</span>
+    <span class="story-top"><span class="ico sm">${svg(th.icon)}</span><span class="story-desk">${esc(shortTitle(panel.title))}</span>${row.new ? '<span class="chip new">NEW</span>' : ''}</span>
+    <span class="story-t">${esc(row.title)}</span>
+    <span class="story-meta">${row.badge ? `<span class="badge">${esc(row.badge)}</span>` : ''}${esc(shortDate(row.date))}${row.date ? ' · ' : ''}Read more ›</span>
+  </a>`;
+}
+
+function deskRow(r, th) {
   if (r.kind === 'note') return `<li class="note-row">${esc(r.title)}</li>`;
   const members = r.kind === 'story' && r.members && r.members.length
     ? `<div class="members">${r.members.map((m, i) => `<a data-open="${esc(m.url)}">${i + 1}. ${esc(m.title || 'Notice')}</a>`).join('')}</div>` : '';
-  return `<li class="${r.new ? 'is-new' : ''}${r.lead ? ' is-lead' : ''}">
-    <div class="meta">${r.lead ? '<span class="chip lead">TOP STORY</span>' : ''}${r.new ? '<span class="chip new">NEW</span>' : ''}<span class="d">${esc(shortDate(r.date))}</span></div>
-    <a class="t" data-open="${esc(r.url)}">${esc(r.title)}</a>
-    ${r.badge ? `<div class="badge">${esc(r.badge)}</div>` : ''}
-    ${r.use ? `<div class="use">Use it: ${esc(r.use)}</div>` : ''}
-    ${members}
+  return `<li class="row${r.new ? ' is-new' : ''}">
+    <span class="ico sm">${svg(th.icon)}</span>
+    <div class="row-body">
+      <div class="meta">${r.new ? '<span class="chip new">NEW</span>' : ''}<span class="d">${esc(shortDate(r.date))}</span></div>
+      <a class="t" data-open="${esc(r.url)}">${esc(r.title)}</a>
+      ${r.badge ? `<div class="badge">${esc(r.badge)}</div>` : ''}
+      ${r.use ? `<div class="use">Use it: ${esc(r.use)}</div>` : ''}
+      ${members}
+    </div>
   </li>`;
 }
 
@@ -376,39 +406,91 @@ function viewDesk() {
   if (!S.feed) {
     return `<main class="pad"><p class="lead">${S.feedFrom === null ? 'No connection, and nothing saved on this phone yet. Try again when you are online.' : 'Loading the Live Desk...'}</p><button id="refresh" class="btn">Try again</button></main>`;
   }
-  const panels = filterFeed(S.feed, S.mine ? S.chosen : []);
+  const all = filterFeed(S.feed, S.mine ? S.chosen : []);
+  if (S.focus !== null && !all[S.focus]) S.focus = null;
+  const panels = S.focus === null ? all : [all[S.focus]];
   const ticks = (S.feed.ticker || []).map((t) => `<a class="tick" data-open="${esc(t.url)}"><span class="tag">${esc(t.tag)}</span>${t.badge ? `<b>${esc(t.badge)}</b> ` : ''}${esc(t.title)}</a>`).join('');
   // The track holds the items twice so the marquee loops without a gap; speed follows length.
   const ticker = ticks ? `<div class="ticker" aria-label="Latest"><div class="ticker-track" style="--dur:${Math.max(30, (S.feed.ticker || []).length * 7)}s">${ticks}${ticks}</div></div>` : '';
-  const stats = panels.map((p, i) => {
-    const th = deskTheme(p); const n = (p.rows || []).filter((r) => r.new).length;
-    return `<a class="stat" data-jump="p${i}" style="--c:var(--c-${th.c})"><b>${n || (p.rows || []).filter((r) => r.kind !== 'note').length}</b><span>${esc(shortTitle(p.title))}<small>${n ? 'new' : 'on the desk'}</small></span></a>`;
+
+  const tiles = all.map((p, i) => {
+    const th = deskTheme(p); const rows = (p.rows || []).filter((r) => r.kind !== 'note');
+    const n = rows.filter((r) => r.new).length;
+    return `<button class="tile${S.focus === i ? ' on' : ''}" data-focus="${i}" style="--c:var(--c-${th.c})">
+      <span class="ico">${svg(th.icon)}</span>
+      <span class="tile-t">${esc(shortTitle(p.title))}</span>
+      <span class="tile-n">${rows.length} on the desk${n ? ` · <b>${n} new</b>` : ''}</span>
+    </button>`;
   }).join('');
-  const body = panels.length ? panels.map((p, i) => {
-    const th = deskTheme(p); const n = (p.rows || []).filter((r) => r.new).length;
-    const items = (p.rows || []).filter((r) => r.kind !== 'note').length;
+
+  const stories = topStories(panels, 8);
+  const carousel = stories.length ? `<div class="sec-h"><h2>${S.focus === null ? 'Top stories' : 'Latest'}</h2><span class="small">Swipe ›</span></div>
+    <div class="stories">${stories.map(storyCard).join('')}</div>` : '';
+
+  const body = panels.length ? panels.map((p) => {
+    const i = all.indexOf(p); const th = deskTheme(p);
+    const rows = p.rows || []; const open = S.focus !== null || S.openDesks[i];
+    const shown = open ? rows : rows.slice(0, SHOW);
+    const more = rows.filter((r) => r.kind !== 'note').length - shown.filter((r) => r.kind !== 'note').length;
     return `<section class="panel" id="p${i}" style="--c:var(--c-${th.c})">
-      <div class="band" style="--img:url(img/live-desk-theme-${th.img}.jpg)"><span class="ico">${svg(th.icon)}</span><div><h2>${esc(p.title)}</h2><div class="pn">${items} item${items === 1 ? '' : 's'}${n ? ` · <b>${n} new</b>` : ''}</div></div></div>
-      <ul>${p.rows.map(rowHtml).join('')}</ul></section>`;
+      <div class="band" style="--img:url(img/live-desk-theme-${th.img}.jpg)"><span class="ico">${svg(th.icon)}</span><div><h2>${esc(p.title)}</h2></div></div>
+      <ul>${shown.map((r) => deskRow(r, th)).join('')}</ul>
+      ${more > 0 ? `<button class="more" data-more="${i}">Show all ${rows.filter((r) => r.kind !== 'note').length} ›</button>` : ''}
+    </section>`;
   }).join('')
     : '<p class="empty">Nothing in your specialities on the desk right now. Switch to All to see everything.</p>';
-  const nc = newCount(panels);
+  const nc = newCount(all);
   return `${ticker}
-    ${stats ? `<div class="stats">${stats}</div>` : ''}
     <div class="filter">
       <button class="seg ${S.mine ? '' : 'on'}" data-mine="0">All</button>
       <button class="seg ${S.mine ? 'on' : ''}" data-mine="1">My specialities${S.chosen.length ? ` (${S.chosen.length})` : ''}</button>
       <span class="count${nc ? '' : ' zero'}">${nc} new</span>
     </div>
     ${S.mine && !S.chosen.length ? '<p class="pad small">Pick your specialities in the Alerts tab.</p>' : ''}
+    ${carousel}
+    ${tiles ? `<div class="sec-h"><h2>On the desk</h2>${S.focus !== null ? '<button class="link inline" data-focus="all">Show every desk</button>' : ''}</div><div class="tiles">${tiles}</div>` : ''}
     <main>${body}</main>`;
 }
 
 // "NICE GUIDANCE — NEW" -> "NICE guidance" for the stat chips.
 function shortTitle(t) {
   const s = String(t || '').split(/\s+[—–-]\s+/)[0].trim();
-  const t2 = s.toLowerCase().replace(/\b(mhra|nice|nhs|dhsc|icb|uk)\b/g, (m) => m.toUpperCase());
+  const t2 = s.toLowerCase().replace(/\b(mhra|nice|nhs|dhsc|icb|uk)\b/g, (m) => m.toUpperCase())
+    .replace(/\b(england|scotland|wales|ireland)\b/g, (m) => m.charAt(0).toUpperCase() + m.slice(1));
   return t2.charAt(0).toUpperCase() + t2.slice(1);
+}
+
+const careerAge = (c) => (c && c.dataAsOf ? shortDate(c.dataAsOf) : '');
+
+function viewCareers() {
+  const c = S.careers;
+  const areas = (c && c.regions) || [];
+  const chip = (slug, text, on, attr) => `<button class="area ${on ? 'on' : ''}" ${attr}="${esc(slug)}">${esc(text)}</button>`;
+  const head = `<main class="pad"><h1>Careers</h1>
+    <p class="lead">Medical sales and related roles, read from each employer's own careers page.</p>`;
+  if (!c) {
+    return `${head}<p class="lead">${S.careersFrom === null && S.careersLoaded ? 'No connection, and nothing saved on this phone yet. Try again when you are online.' : 'Loading roles...'}</p><button id="careers-refresh" class="btn">Try again</button></main>`;
+  }
+  const picked = S.careerSpecs ? S.chosen : [];
+  const roles = rankCareers(filterCareers(c, S.regions, picked), S.regions);
+  const areaChips = areas.map((a) => chip(a.slug, a.label, S.regions.includes(a.slug), 'data-region')).join('');
+  const rows = roles.map((r) => {
+    const where = (r.regions || []).length ? (r.regions.map((x) => (areas.find((a) => a.slug === x) || {}).label || x).join(', ')) : 'Area not stated';
+    return `<a class="rrole" data-open="${esc(r.url)}">
+      <div class="rt">${esc(r.title)}</div>
+      <div class="rm">${esc(r.company)} · ${esc(where)}${r.location && /\S/.test(r.location) && !/^\d+ Locations$/.test(r.location) ? ` · ${esc(r.location)}` : ''}</div>
+      ${r.kind ? `<span class="tagpill">${esc(r.kind)}</span>` : ''}</a>`;
+  }).join('');
+  return `${head}
+    <div class="areas">${areaChips}</div>
+    <p class="small">${S.regions.length ? 'Showing your areas, plus roles that do not state one.' : 'Pick your areas, or leave none for the whole UK.'}</p>
+    <div class="seg2"><button class="seg ${S.careerSpecs ? '' : 'on'}" data-cspec="0">All specialities</button><button class="seg ${S.careerSpecs ? 'on' : ''}" data-cspec="1">My specialities${S.chosen.length ? ` (${S.chosen.length})` : ''}</button></div>
+    ${S.careerSpecs && !S.chosen.length ? '<p class="small">Pick your specialities in the Alerts tab.</p>' : ''}
+    <p class="rcount">${roles.length} role${roles.length === 1 ? '' : 's'}${S.careersFrom === 'cache' ? ' (offline copy)' : ''} · checked ${esc(careerAge(c))}</p>
+    ${rows || '<p class="lead">No roles match right now. New roles appear when an employer lists one.</p>'}
+    <p class="small">${esc(c.source || '')} Only employers whose careers page lists roles one by one are included, so this is not every vacancy in the UK.</p>
+    <p class="small"><a data-open="${esc(c.hub || '')}">All careers on the Hub</a></p>
+  </main>`;
 }
 
 function viewAlerts() {
@@ -420,6 +502,8 @@ function viewAlerts() {
     <div class="times"><span><small>MORNING</small>9am</span><span><small>MIDDAY</small>12 noon</span><span><small>AFTERNOON</small>4pm</span></div>
     <label class="toggle"><input id="alerts" type="checkbox" ${S.alertsOn ? 'checked' : ''}> Alerts on</label>
     ${items.length ? `<section class="card"><h2>Latest alert</h2><ul class="plain">${items.map((i) => `<li><a data-open="${esc(i.u)}">${esc(i.t)}</a>${i.sp ? `<span class="small"> ${esc(i.sp)}</span>` : ''}</li>`).join('')}</ul></section>` : ''}
+    <label class="toggle"><input id="rolealerts" type="checkbox" ${S.roleAlerts ? 'checked' : ''}> New role alerts</label>
+    <p class="small">When a new role appears in your areas and specialities. Turning this on also turns Alerts on. Choose your areas in the Careers tab.</p>
     <h2 style="margin-top:20px">Your specialities</h2>
     <p class="small">None ticked means every speciality.</p>
     <div class="specs">${boxes}</div>
@@ -448,7 +532,7 @@ function viewAccount() {
 
 function tabs() {
   const t = (k, l, i) => `<button class="tab ${S.tab === k ? 'on' : ''}" data-tab="${k}">${svg(i)}${l}</button>`;
-  return `<nav class="tabs">${t('desk', 'Desk', 'desk')}${t('alerts', 'Alerts', 'bell')}${t('account', 'Account', 'user')}</nav>`;
+  return `<nav class="tabs">${t('desk', 'Desk', 'desk')}${t('careers', 'Careers', 'brief')}${t('alerts', 'Alerts', 'bell')}${t('account', 'Account', 'user')}</nav>`;
 }
 
 function render() {
@@ -456,7 +540,7 @@ function render() {
   if (S.busy) html = `${header()}<main class="pad center"><div class="spinner"></div><p>${esc(S.busy)}</p></main>`;
   else if (!S.user || S.showSignIn) html = viewSignIn();
   else if (!S.status || !S.status.access) html = viewAccess();
-  else html = (S.tab === 'desk' ? deskHeader() : header()) + ({ desk: viewDesk, alerts: viewAlerts, account: viewAccount }[S.tab])() + tabs();
+  else html = (S.tab === 'desk' ? deskHeader() : header()) + ({ desk: viewDesk, careers: viewCareers, alerts: viewAlerts, account: viewAccount }[S.tab])() + tabs();
   $app.innerHTML = html;
 }
 
@@ -465,9 +549,30 @@ $app.addEventListener('click', async (e) => {
   const el = e.target.closest('button, a, [data-open]');
   if (!el) return;
   if (el.dataset.open !== undefined) { e.preventDefault(); open(el.dataset.open); return; }
+  if (el.dataset.focus !== undefined) {
+    const f = el.dataset.focus === 'all' || S.focus === Number(el.dataset.focus) ? null : Number(el.dataset.focus);
+    S.focus = f; render();
+    const t = f === null ? null : document.querySelector('.stories');
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+  if (el.dataset.region !== undefined) {
+    const v = el.dataset.region;
+    S.regions = S.regions.includes(v) ? S.regions.filter((x) => x !== v) : [...S.regions, v];
+    await store.setJSON('regions', S.regions); render();
+    if (S.alertsOn) registerDevice();
+    return;
+  }
+  if (el.dataset.cspec !== undefined) { S.careerSpecs = el.dataset.cspec === '1'; await store.set('careerSpecs', S.careerSpecs ? '1' : '0'); render(); return; }
+  if (el.id === 'careers-refresh') { S.careersLoaded = false; await loadCareers(); S.careersLoaded = true; render(); return; }
+  if (el.dataset.more !== undefined) { S.openDesks[el.dataset.more] = true; render(); return; }
   if (el.dataset.jump) { const t = document.getElementById(el.dataset.jump); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
-  if (el.dataset.tab) { S.tab = el.dataset.tab; S.note = ''; render(); window.scrollTo(0, 0); return; }
-  if (el.dataset.mine !== undefined) { S.mine = el.dataset.mine === '1'; await store.set('mine', S.mine ? '1' : '0'); render(); return; }
+  if (el.dataset.tab) {
+    S.tab = el.dataset.tab; S.note = ''; render(); window.scrollTo(0, 0);
+    if (S.tab === 'careers') { await loadCareers(); S.careersLoaded = true; render(); }
+    return;
+  }
+  if (el.dataset.mine !== undefined) { S.mine = el.dataset.mine === '1'; S.focus = null; await store.set('mine', S.mine ? '1' : '0'); render(); return; }
   if (el.dataset.plan) { subscribe(el.dataset.plan); return; }
   switch (el.id) {
     case 'send': {
@@ -492,7 +597,7 @@ $app.addEventListener('click', async (e) => {
       setBusy('Signing in...');
       const { data, error } = await sb.auth.signInWithPassword({ email, password });
       S.busy = '';
-      if (error || !data.user) { S.note = 'That email and password did not match.'; render(); return; }
+      if (error || !data.user) { S.note = passwordErrorNote(error); render(); return; }
       S.note = ''; await afterSignIn(data.user); return;
     }
     case 'signin': S.showSignIn = true; S.withPassword = false; S.pendingEmail = ''; S.note = ''; render(); return;
@@ -519,6 +624,12 @@ $app.addEventListener('change', async (e) => {
     if (S.alertsOn) await registerDevice(); else await alertsOff();
     render(); return;
   }
+  if (e.target.id === 'rolealerts') {
+    S.roleAlerts = e.target.checked; await store.set('roleAlerts', S.roleAlerts ? '1' : '0');
+    if (S.roleAlerts && !S.alertsOn) { S.alertsOn = true; await store.set('alertsOn', '1'); }
+    if (S.alertsOn) await registerDevice();
+    render(); return;
+  }
   if (e.target.closest('.specs')) {
     S.chosen = [...document.querySelectorAll('.specs input:checked')].map((i) => i.value);
     await store.setJSON('chosen', S.chosen);
@@ -531,13 +642,13 @@ async function start() {
   if (NATIVE) {
     try { await StatusBar.setStyle({ style: Style.Dark }); } catch { /* not all devices */ }
     App.addListener('appUrlOpen', ({ url }) => { const p = passFromLink(url); if (p) linkWithPass(p); });
-    App.addListener('resume', async () => { if (S.user && S.status && S.status.access && S.tab === 'desk') { await loadFeed(); render(); } });
+    App.addListener('resume', async () => { if (S.user && S.status && S.status.access && S.tab === 'desk') { await loadFeed(); render(); } else if (S.user && S.status && S.status.access && S.tab === 'careers') { await loadCareers(); render(); } });
     if (CONFIG.revenueCatKey[PLATFORM]) {
       try { await Purchases.configure({ apiKey: CONFIG.revenueCatKey[PLATFORM] }); } catch { /* shown as no plans */ }
     }
     FirebaseMessaging.addListener('tokenReceived', async ({ token }) => {
       await store.set('pushToken', token);
-      if (S.user && S.alertsOn) api('device', { token, platform: PLATFORM, specialities: S.chosen });
+      if (S.user && S.alertsOn) api('device', { token, platform: PLATFORM, specialities: S.chosen, regions: S.regions, role_alerts: S.roleAlerts });
     });
     const keep = async (n) => {
       const items = itemsFromNotification(n && n.data);
@@ -553,6 +664,10 @@ async function start() {
   }
   S.chosen = await store.getJSON('chosen', []);
   S.mine = (await store.get('mine')) === '1';
+  S.regions = await store.getJSON('regions', []);
+  S.roleAlerts = (await store.get('roleAlerts')) === '1';
+  S.careerSpecs = (await store.get('careerSpecs')) === '1';
+  S.careers = await store.getJSON('careers', null); S.careersFrom = S.careers ? 'cache' : null;
   S.alertsOn = (await store.get('alertsOn')) === '1';
   S.lastAlert = await store.getJSON('lastAlert', null);
   S.feed = await store.getJSON('feed', null); S.feedFrom = S.feed ? 'cache' : null;

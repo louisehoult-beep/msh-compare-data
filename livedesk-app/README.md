@@ -11,6 +11,7 @@ else. Added 01/10/2026. Everything else stays on the laptop Hub.
 | Feed | `medical-sales-hub-pipeline/app_feed.py` | Each hourly page 675 publish also writes the same panels and ticker as JSON to Supabase `livedesk_feed`. |
 | Server | `supabase/functions/livedesk`, `livedesk-revenuecat`, migration `20261001090000_livedesk_app.sql` | Accounts, access rule, feed behind a login, Hub link, devices, account deletion, store subscriptions. |
 | Hub link page | `docs/hub-page-livedesk-app-link.html` | Members-only Hub page. Hands the member pass (WPCode snippet 4510) back to the app. |
+| Careers | `scripts/careers_feed.py`, `.github/workflows/livedesk-careers.yml` | Added 27/10/2026. The Hub Career Centre's roles (employer's own listings), with area and speciality, in the app's Careers tab; new-role push alerts by area and speciality. Row `livedesk_feed` id `careers`; `livedesk` action `careers`; devices carry `regions` and `role_alerts`. |
 | Alerts | `scripts/push_alerts.py` + `scripts/fcm_push.py` | The same 9am, 12 noon and 4pm digest, sent to app devices through Firebase. |
 | App | `livedesk-app/` (Capacitor) | Sign-in by email code, Desk, Alerts, Account, paywall. |
 | Builds | `codemagic.yaml` | Tag `livedesk-vX.Y.Z` builds both apps and uploads to TestFlight and Play internal testing. |
@@ -59,6 +60,13 @@ app with the reviewer email, then in Supabase SQL:
     insert into public.livedesk_access (user_id, store_expires_at)
     select id, now() + interval '60 days' from auth.users where email = 'review@elevateandthrive.uk'
     on conflict (user_id) do update set store_expires_at = excluded.store_expires_at;
+
+**The account must be confirmed as well as having a password** (`email_confirmed_at` set in
+`auth.users`, or tick Auto Confirm when creating it). "Confirm email" is on for this project, and an
+unconfirmed account fails password sign-in whatever password is used: this is what caused the Google
+rejections of 23/10 and 27/10/2026. `scripts/reviewer_account_check.py` checks all of this every day
+(workflow "Reviewer account check"). Its "Delete account" keeps the login, so a reviewer testing that
+button cannot lock out the next review.
 
 A reviewer cannot read email codes, so give the account a password
 (Supabase > Authentication > Users > the user > Reset password, or create the

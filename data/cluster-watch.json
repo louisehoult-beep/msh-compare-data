@@ -10,7 +10,7 @@
   "ref": "ETH-D47111DC3",
   "contact": "contact@elevateandthrive.uk"
  },
- "generated": "2026-10-21",
+ "generated": "2026-11-19",
  "configRead": "2026-10-16",
  "note": "What each ICB cluster has published, read from the sources in config/cluster-watch-sources.json. A first read is a baseline; a change is published only when seen on two different days. A failed read keeps the stored state and is never reported as a removal.",
  "clusters": [
@@ -27,8 +27,8 @@
      "label": "Birmingham and Solihull Integrated Medicines Optimisation Committee (IMOC) minutes",
      "kind": "doclib",
      "url": "https://birminghamandsurroundsformulary.nhs.uk/docs/default.asp?DocLib=APM&Sort=B",
-     "checkedOn": "2026-10-21",
-     "status": "ok",
+     "checkedOn": "2026-11-18",
+     "status": "error",
      "firstRead": "2026-10-16",
      "items": [
       {
@@ -206,17 +206,25 @@
       {
        "id": "713",
        "title": "IMOC Minutes 2026 07 (July 2026)"
+      },
+      {
+       "id": "726",
+       "title": "IMOC Minutes 2026 09 (September 2026)"
       }
      ],
-     "pending": {}
+     "pending": {},
+     "lastError": {
+      "on": "2026-11-19",
+      "message": "The read operation timed out"
+     }
     },
     {
      "id": "bc-imog-minutes",
      "label": "Black Country Integrated Medicines Optimisation Group (IMOG) minutes",
      "kind": "doclib",
      "url": "https://www.blackcountryformulary.nhs.uk/docs/default.asp?DocLib=102&Sort=D",
-     "checkedOn": "2026-10-21",
-     "status": "ok",
+     "checkedOn": "2026-11-11",
+     "status": "error",
      "firstRead": "2026-10-16",
      "items": [
       {
@@ -320,33 +328,47 @@
        "title": "IMOG Minutes 2023 01 V0.2"
       }
      ],
-     "pending": {}
+     "pending": {},
+     "lastError": {
+      "on": "2026-11-19",
+      "message": "read returned no items where 25 were stored"
+     }
     },
     {
      "id": "bsol-skin-13-02-01",
      "label": "Birmingham and Solihull formulary, Skin chapter 13.2.1 Emollients",
      "kind": "chapter",
      "url": "https://www.birminghamandsurroundsformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
-     "checkedOn": "2026-10-21",
-     "status": "ok",
+     "checkedOn": "2026-11-18",
+     "status": "error",
      "firstRead": "2026-10-16",
-     "hash": "30f08bd774deaffc",
-     "chars": 34328,
+     "hash": "e222aa7e11a98f35",
+     "chars": 34313,
      "named": [],
-     "pending": {}
+     "pending": {},
+     "hashSince": "2026-10-30",
+     "lastError": {
+      "on": "2026-11-19",
+      "message": "The read operation timed out"
+     }
     },
     {
      "id": "bc-skin-13-02-01",
      "label": "Black Country formulary, Skin chapter 13.2.1 Emollients",
      "kind": "chapter",
      "url": "https://www.blackcountryformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100",
-     "checkedOn": "2026-10-21",
+     "checkedOn": "2026-11-19",
      "status": "ok",
      "firstRead": "2026-10-16",
-     "hash": "bbf4f7a46b64a02e",
-     "chars": 3389,
+     "hash": "f5e26d6e2be1c76a",
+     "chars": 3400,
      "named": [],
-     "pending": {}
+     "pending": {},
+     "lastError": {
+      "on": "2026-11-17",
+      "message": "HTTP Error 500: Internal Server Error"
+     },
+     "hashSince": "2026-11-05"
     }
    ],
    "notWatched": []
@@ -364,7 +386,7 @@
      "label": "Coventry and Warwickshire Area Prescribing Committee formulary revisions log",
      "kind": "dirlist",
      "url": "https://www.covwarkformulary.nhs.uk/docs/admin/revisions/",
-     "checkedOn": "2026-10-21",
+     "checkedOn": "2026-11-19",
      "status": "ok",
      "firstRead": "2026-10-16",
      "items": [
@@ -421,14 +443,18 @@
        "title": "m January 2025 revisions.pdf"
       }
      ],
-     "pending": {}
+     "pending": {},
+     "lastError": {
+      "on": "2026-11-13",
+      "message": "HTTP Error 500: Internal Server Error"
+     }
     },
     {
      "id": "hw-dermatology-guidance",
      "label": "Herefordshire and Worcestershire ICB dermatology prescribing guidance list",
      "kind": "linklist",
      "url": "https://herefordshireandworcestershire.icb.nhs.uk/documents/clinical-and-prescribing-policies-guidance-and-pathways/dermatology",
-     "checkedOn": "2026-10-21",
+     "checkedOn": "2026-11-19",
      "status": "ok",
      "firstRead": "2026-10-16",
      "items": [
@@ -496,6 +522,56 @@
    ]
   }
  ],
- "events": [],
- "errorsToday": []
+ "events": [
+  {
+   "date": "2026-10-30",
+   "icb": "QHL",
+   "kind": "cluster",
+   "role": "medicines",
+   "headline": "Birmingham and Solihull formulary, Skin chapter 13.2.1 Emollients: page text changed",
+   "detail": "The text of this formulary page differs from the version stored on 2026-10-16 (first seen changed on 2026-10-29). The change has not been read by a person; open the page to see what it says. This notice does not say the chapter has been merged or rewritten.",
+   "sources": [
+    "https://www.birminghamandsurroundsformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100"
+   ],
+   "alsoIcbs": [
+    "QUA"
+   ],
+   "id": "b2d279d77df1"
+  },
+  {
+   "date": "2026-10-30",
+   "icb": "QUA",
+   "kind": "cluster",
+   "role": "medicines",
+   "headline": "Black Country formulary, Skin chapter 13.2.1 Emollients: page text changed",
+   "detail": "The text of this formulary page differs from the version stored on 2026-10-16 (first seen changed on 2026-10-29). The change has not been read by a person; open the page to see what it says. This notice does not say the chapter has been merged or rewritten.",
+   "sources": [
+    "https://www.blackcountryformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=13&SubSectionRef=13.02.01&SubSectionID=A100"
+   ],
+   "alsoIcbs": [
+    "QHL"
+   ],
+   "id": "4f1d2923553e"
+  },
+  {
+   "date": "2026-10-23",
+   "icb": "QHL",
+   "kind": "cluster",
+   "role": "medicines",
+   "headline": "Birmingham and Solihull Integrated Medicines Optimisation Committee (IMOC) minutes: new minutes listed: IMOC Minutes 2026 09 (September 2026)",
+   "detail": "The list at this address now includes \"IMOC Minutes 2026 09 (September 2026)\", which was not in the list stored on 2026-10-16. It has not been read by a person; open it to see what it says.",
+   "sources": [
+    "https://birminghamandsurroundsformulary.nhs.uk/docs/default.asp?DocLib=APM&Sort=B"
+   ],
+   "alsoIcbs": [
+    "QUA"
+   ],
+   "id": "7846939b7dd7"
+  }
+ ],
+ "errorsToday": [
+  "bsol-imoc-minutes: The read operation timed out",
+  "bc-imog-minutes: read returned no items where 25 were stored",
+  "bsol-skin-13-02-01: The read operation timed out"
+ ]
 }

@@ -1,0 +1,667 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "ref": "ETH-DAEA3A8C7",
+  "contact": "contact@elevateandthrive.uk"
+ },
+ "rule": "The Wales buyer map. Welsh NHS organisations are taken from the NHS Organisation Data Service register every run and filtered on the register's own country field, never on 'has no ICB link'. An organisation whose ODS record carries a legal end date is excluded, because ODS leaves merged and dissolved bodies at status Active. The procurement route is read at NWSSP's own site and every field carries the URL and the date it was read. Buyer-name spellings and their counts are read from the Find a Tender and Contracts Finder notices already captured in data/company-awards.json; nothing is inferred from a name that does not appear in a notice. NWSSP has no ODS record of its own, so it appears as the procurement route rather than as an organisation.",
+ "asOf": "16/11/2026",
+ "generated": "2026-11-16",
+ "sources": [
+  {
+   "name": "NHS Organisation Data Service (ODS) ORD API",
+   "url": "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations",
+   "licence": "Open Government Licence v3",
+   "usedFor": "the Welsh health boards and trusts, their towns, postcodes and operational start dates"
+  },
+  {
+   "name": "NHS Wales Shared Services Partnership",
+   "url": "https://nwssp.nhs.wales/",
+   "usedFor": "the procurement route, the tender portal, the framework scope and term, and the enquiries address"
+  },
+  {
+   "name": "Find a Tender and Contracts Finder award notices",
+   "url": "https://www.find-tender.service.gov.uk/",
+   "usedFor": "the buyer-name spellings, their notice counts and the suppliers who hold Welsh awards"
+  }
+ ],
+ "nation": "Wales",
+ "noIcbs": "Wales has no Integrated Care Boards. The seven Local Health Boards are both the commissioner and the provider for their area, which is why every Welsh row in data/trust-map.json carries a null icb and why an England-shaped stakeholder map does not describe Wales.",
+ "procurementRoute": {
+  "name": "NHS Wales Shared Services Partnership — Procurement Services",
+  "shortName": "NWSSP",
+  "whatItIs": "The single procurement service for NHS Wales. It runs the frameworks and the tenders that the seven Local Health Boards and three NHS Trusts buy through, rather than each of them tendering separately.",
+  "whatItIsSource": "https://nwssp.nhs.wales/ourservices/procurement-services/",
+  "whatItIsSourceQuote": "As an established Procurement Service we have been assisting the Health Boards and Trusts in the delivery of patient centred services for NHS Wales Shared Services.",
+  "buysOnBehalfOf": "The health boards and trusts across NHS Wales.",
+  "buysOnBehalfOfSource": "https://nwssp.nhs.wales/about-us/our-suppliers/",
+  "buysOnBehalfOfSourceQuote": "Information about how to register for contract opportunities and details about the types of goods and services procured by NHS Wales Shares Services Partnership on behalf of health boards and trusts across NHS Wales can be found below.",
+  "hostedBy": {
+   "name": "Velindre University NHS Trust",
+   "odsCode": "RQF",
+   "odsName": "VELINDRE NHS TRUST",
+   "odsNameNote": "ODS still carries the pre-university-status name. The notices and NWSSP's own site use 'Velindre University NHS Trust'. Both are recorded; neither is corrected into the other.",
+   "source": "Find a Tender and Contracts Finder award notices, as captured in data/company-awards.json",
+   "sourceQuote": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)"
+  },
+  "advertisedOn": {
+   "name": "Sell2Wales",
+   "url": "https://www.sell2wales.gov.uk",
+   "source": "https://nwssp.nhs.wales/about-us/our-suppliers/",
+   "sourceQuote": "Frameworks are advertised on Sell2Wales ( www.sell2wales.gov.uk ) where suppliers are given the opportunity to bid for business."
+  },
+  "enquiries": "ProcurementServicesenquiries@wales.nhs.uk",
+  "enquiriesSource": "https://nwssp.nhs.wales/about-us/our-suppliers/",
+  "frameworkScope": "Both goods and services, including capital equipment, pharmaceutical, medical and clinical, food and textiles, utilities, maintenance, information technology and the commissioning of healthcare services.",
+  "frameworkScopeSource": "https://nwssp.nhs.wales/about-us/our-suppliers/",
+  "frameworkScopeSourceQuote": "NWSSP Frameworks covers both goods and services including, capital equipment, Pharmaceutical, medical and clinical, food and textiles, utilities, maintenance, Information technology and the commissioning of healthcare services.",
+  "frameworkTerm": "Generally three to four years.",
+  "frameworkTermSource": "https://nwssp.nhs.wales/about-us/our-suppliers/",
+  "frameworkTermSourceQuote": "Frameworks or contracts generally last for three to four years.",
+  "smes": "Tenders are broken into smaller lots where appropriate so that small and medium enterprises can bid.",
+  "smesSource": "https://nwssp.nhs.wales/about-us/our-suppliers/",
+  "smesSourceQuote": "NWSSP welcome tenders from small and medium enterprises where appropriate tenders are broken down into smaller lots to make it easier for SME's to bid for business.",
+  "checkedAt": "2026-11-16"
+ },
+ "counts": {
+  "organisations": 10,
+  "healthBoards": 7,
+  "trusts": 3,
+  "buyerNameSpellings": 27,
+  "awardNotices": 243,
+  "suppliersWithWelshAwards": 178
+ },
+ "organisations": [
+  {
+   "n": "Betsi Cadwaladr University Local Health Board",
+   "odsName": "BETSI CADWALADR UNIVERSITY LOCAL HEALTH BOARD",
+   "code": "7A1",
+   "kind": "Local Health Board",
+   "primaryRoleId": "RO142",
+   "town": "Bangor",
+   "postcode": "LL57 2PW",
+   "nation": "Wales",
+   "operationalFrom": "2009-10-01",
+   "buysVia": "NWSSP",
+   "source": "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations/7A1",
+   "noticeSpellings": [
+    {
+     "name": "Betsi Cadwaladr University Health Board",
+     "awardNotices": 1
+    }
+   ],
+   "noticeSpellingsSource": "Find a Tender and Contracts Finder award notices captured in data/company-awards.json. Tied to this ODS code by a place-name stem that belongs to this organisation and nothing else in the notices."
+  },
+  {
+   "n": "Hywel Dda University Local Health Board",
+   "odsName": "HYWEL DDA UNIVERSITY LOCAL HEALTH BOARD",
+   "code": "7A2",
+   "kind": "Local Health Board",
+   "primaryRoleId": "RO142",
+   "town": "Carmarthen",
+   "postcode": "SA31 3BB",
+   "nation": "Wales",
+   "operationalFrom": "2009-10-01",
+   "buysVia": "NWSSP",
+   "source": "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations/7A2",
+   "noticeSpellings": [
+    {
+     "name": "Hywel Dda University Health Board",
+     "awardNotices": 1
+    },
+    {
+     "name": "Hywel Dda University Local Health Board",
+     "awardNotices": 1
+    }
+   ],
+   "noticeSpellingsSource": "Find a Tender and Contracts Finder award notices captured in data/company-awards.json. Tied to this ODS code by a place-name stem that belongs to this organisation and nothing else in the notices."
+  },
+  {
+   "n": "Swansea Bay University Local Health Board",
+   "odsName": "SWANSEA BAY UNIVERSITY LOCAL HEALTH BOARD",
+   "code": "7A3",
+   "kind": "Local Health Board",
+   "primaryRoleId": "RO142",
+   "town": "Neath",
+   "postcode": "SA11 3LX",
+   "nation": "Wales",
+   "operationalFrom": "2009-10-01",
+   "buysVia": "NWSSP",
+   "source": "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations/7A3",
+   "noticeSpellings": [
+    {
+     "name": "Swansea Bay University Health Board (SBUHB)",
+     "awardNotices": 4
+    }
+   ],
+   "noticeSpellingsSource": "Find a Tender and Contracts Finder award notices captured in data/company-awards.json. Tied to this ODS code by a place-name stem that belongs to this organisation and nothing else in the notices."
+  },
+  {
+   "n": "Cardiff & Vale University Local Health Board",
+   "odsName": "CARDIFF & VALE UNIVERSITY LOCAL HEALTH BOARD",
+   "code": "7A4",
+   "kind": "Local Health Board",
+   "primaryRoleId": "RO142",
+   "town": "Cardiff",
+   "postcode": "CF14 4HH",
+   "nation": "Wales",
+   "operationalFrom": "2009-10-01",
+   "buysVia": "NWSSP",
+   "source": "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations/7A4",
+   "noticeSpellings": [
+    {
+     "name": "Cardiff and Vale University Health Board",
+     "awardNotices": 2
+    },
+    {
+     "name": "NWSSP Cardiff and Vale Local Health Board",
+     "awardNotices": 2
+    },
+    {
+     "name": "NHS Wales Shared Services Partnership on behalf of Cardiff and Vale LHB",
+     "awardNotices": 1
+    },
+    {
+     "name": "NHS Wales Shared Services Partnership on behalf of Cardiff and Vale University Local Health Board",
+     "awardNotices": 1
+    }
+   ],
+   "noticeSpellingsSource": "Find a Tender and Contracts Finder award notices captured in data/company-awards.json. Tied to this ODS code by a place-name stem that belongs to this organisation and nothing else in the notices."
+  },
+  {
+   "n": "Cwm Taf Morgannwg University Local Health Board",
+   "odsName": "CWM TAF MORGANNWG UNIVERSITY LOCAL HEALTH BOARD",
+   "code": "7A5",
+   "kind": "Local Health Board",
+   "primaryRoleId": "RO142",
+   "town": "Pontypridd",
+   "postcode": "CF37 1LB",
+   "nation": "Wales",
+   "operationalFrom": "2009-10-01",
+   "buysVia": "NWSSP",
+   "source": "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations/7A5",
+   "noticeSpellings": [
+    {
+     "name": "Cwm Taf Morgannwg University Health Board",
+     "awardNotices": 4
+    },
+    {
+     "name": "Cwm Taf University Health Board",
+     "awardNotices": 1
+    }
+   ],
+   "noticeSpellingsSource": "Find a Tender and Contracts Finder award notices captured in data/company-awards.json. Tied to this ODS code by a place-name stem that belongs to this organisation and nothing else in the notices."
+  },
+  {
+   "n": "Aneurin Bevan University Local Health Board",
+   "odsName": "ANEURIN BEVAN UNIVERSITY LOCAL HEALTH BOARD",
+   "code": "7A6",
+   "kind": "Local Health Board",
+   "primaryRoleId": "RO142",
+   "town": "Newport",
+   "postcode": "NP18 3XQ",
+   "nation": "Wales",
+   "operationalFrom": "2009-10-01",
+   "buysVia": "NWSSP",
+   "source": "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations/7A6",
+   "noticeSpellings": [],
+   "noticeSpellingsSource": "Find a Tender and Contracts Finder award notices captured in data/company-awards.json. Tied to this ODS code by a place-name stem that belongs to this organisation and nothing else in the notices."
+  },
+  {
+   "n": "Powys Teaching Local Health Board",
+   "odsName": "POWYS TEACHING LOCAL HEALTH BOARD",
+   "code": "7A7",
+   "kind": "Local Health Board",
+   "primaryRoleId": "RO142",
+   "town": "Brecon",
+   "postcode": "LD3 0LY",
+   "nation": "Wales",
+   "operationalFrom": "2009-10-01",
+   "buysVia": "NWSSP",
+   "source": "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations/7A7",
+   "noticeSpellings": [],
+   "noticeSpellingsSource": "Find a Tender and Contracts Finder award notices captured in data/company-awards.json. Tied to this ODS code by a place-name stem that belongs to this organisation and nothing else in the notices."
+  },
+  {
+   "n": "Velindre NHS Trust",
+   "odsName": "VELINDRE NHS TRUST",
+   "code": "RQF",
+   "kind": "NHS Trust",
+   "primaryRoleId": "RO197",
+   "town": "Cardiff",
+   "postcode": "CF15 7QZ",
+   "nation": "Wales",
+   "operationalFrom": "1994-04-01",
+   "buysVia": "NWSSP",
+   "source": "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations/RQF",
+   "noticeSpellings": [
+    {
+     "name": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+     "awardNotices": 151
+    },
+    {
+     "name": "NHS Wales Shared Service Partnership (hosted by Velindre NHS Trust)",
+     "awardNotices": 11
+    },
+    {
+     "name": "Velindre University NHS Trust",
+     "awardNotices": 5
+    },
+    {
+     "name": "Velindre NHS Trust, NHS Wales Shared Services Partnership - Procurement Services (on behalf of All Wales UHBs  & Trusts",
+     "awardNotices": 2
+    },
+    {
+     "name": "Velindre NHS Trust, NHS Shared Services Partnership - Procurement Services (on behalf of All Wales Health Boards and Trusts)",
+     "awardNotices": 1
+    },
+    {
+     "name": "Velindre NHS Trust, NHS Shared Services Partnership — Procurement Services (on behalf of All Wales Health Boards and Trusts)",
+     "awardNotices": 1
+    },
+    {
+     "name": "Velindre NHS Trust, NHS Wales Shared Services Parternship - Procurement Services (On Behalf of All Wales) Health Boards and Trusts",
+     "awardNotices": 1
+    },
+    {
+     "name": "Velindre NHS Trust, NHS Wales Shared Services Partnership - Procurement Services (on behalf of All Wales LHB's and Trusts)",
+     "awardNotices": 1
+    },
+    {
+     "name": "Velindre University NHS Trust Please note NHS Wales Shared Services Partnership (hosted by Velindre University NHS Trust) will manage this procurement on behalf of the contracting authority. Due to having the same identifiers, we're unable to reflect this in the notice options.",
+     "awardNotices": 1
+    }
+   ],
+   "noticeSpellingsSource": "Find a Tender and Contracts Finder award notices captured in data/company-awards.json. Tied to this ODS code by a place-name stem that belongs to this organisation and nothing else in the notices.",
+   "note": "NWSSP is hosted by this trust and has no ODS record of its own, so all-Wales procurement notices are filed under Velindre's name. Most notices counted here are NWSSP buying for every health board and trust in Wales, not Velindre buying for itself."
+  },
+  {
+   "n": "Welsh Ambulance Services NHS Trust",
+   "odsName": "WELSH AMBULANCE SERVICES NHS TRUST",
+   "code": "RT4",
+   "kind": "NHS Trust",
+   "primaryRoleId": "RO197",
+   "town": "St. Asaph",
+   "postcode": "LL17 0LJ",
+   "nation": "Wales",
+   "operationalFrom": "1998-04-01",
+   "buysVia": "NWSSP",
+   "source": "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations/RT4",
+   "noticeSpellings": [],
+   "noticeSpellingsSource": "Find a Tender and Contracts Finder award notices captured in data/company-awards.json. Tied to this ODS code by a place-name stem that belongs to this organisation and nothing else in the notices."
+  },
+  {
+   "n": "Public Health Wales NHS Trust",
+   "odsName": "PUBLIC HEALTH WALES NHS TRUST",
+   "code": "RYT",
+   "kind": "NHS Trust",
+   "primaryRoleId": "RO197",
+   "town": "Cardiff",
+   "postcode": "CF10 4BZ",
+   "nation": "Wales",
+   "operationalFrom": "2009-10-01",
+   "buysVia": "NWSSP",
+   "source": "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations/RYT",
+   "noticeSpellings": [
+    {
+     "name": "Public Health Wales NHS Trust",
+     "awardNotices": 1
+    }
+   ],
+   "noticeSpellingsSource": "Find a Tender and Contracts Finder award notices captured in data/company-awards.json. Tied to this ODS code by a place-name stem that belongs to this organisation and nothing else in the notices."
+  }
+ ],
+ "buyerNames": [
+  {
+   "name": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "awards": 151,
+   "firstSeen": "2021-01-18",
+   "lastSeen": "2026-11-12",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "NHS Wales Shared Services Partnership",
+   "awards": 37,
+   "firstSeen": "2021-01-13",
+   "lastSeen": "2023-04-07",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "NHS Wales Shared Service Partnership (hosted by Velindre NHS Trust)",
+   "awards": 11,
+   "firstSeen": "2023-07-27",
+   "lastSeen": "2023-07-27",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "NHS Wales Shared Service Partnership",
+   "awards": 7,
+   "firstSeen": "2023-10-04",
+   "lastSeen": "2023-10-04",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "Velindre University NHS Trust",
+   "awards": 5,
+   "firstSeen": "2026-09-25",
+   "lastSeen": "2026-10-30",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "Cwm Taf Morgannwg University Health Board",
+   "awards": 4,
+   "firstSeen": "2022-01-21",
+   "lastSeen": "2026-10-15",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "Swansea Bay University Health Board (SBUHB)",
+   "awards": 4,
+   "firstSeen": "2026-06-29",
+   "lastSeen": "2026-07-24",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "Cardiff and Vale University Health Board",
+   "awards": 2,
+   "firstSeen": "2026-10-27",
+   "lastSeen": "2026-10-27",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "NWSSP Cardiff and Vale Local Health Board",
+   "awards": 2,
+   "firstSeen": "2023-02-14",
+   "lastSeen": "2024-01-23",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "Velindre NHS Trust, NHS Wales Shared Services Partnership - Procurement Services (on behalf of All Wales UHBs  & Trusts",
+   "awards": 2,
+   "firstSeen": "2021-07-26",
+   "lastSeen": "2023-06-09",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "eTenderwales",
+   "awards": 2,
+   "firstSeen": "2025-05-21",
+   "lastSeen": "2025-07-28",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "Betsi Cadwaladr University Health Board",
+   "awards": 1,
+   "firstSeen": "2026-10-14",
+   "lastSeen": "2026-10-14",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "Cwm Taf University Health Board",
+   "awards": 1,
+   "firstSeen": "2022-11-02",
+   "lastSeen": "2022-11-02",
+   "sources": [
+    "Contracts Finder"
+   ]
+  },
+  {
+   "name": "Hywel Dda University Health Board",
+   "awards": 1,
+   "firstSeen": "2026-07-13",
+   "lastSeen": "2026-07-13",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "Hywel Dda University Local Health Board",
+   "awards": 1,
+   "firstSeen": "2026-08-07",
+   "lastSeen": "2026-08-07",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "NHS Wales Shared Services",
+   "awards": 1,
+   "firstSeen": "2025-07-25",
+   "lastSeen": "2025-07-25",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "NHS Wales Shared Services Partnership - Procurement Services",
+   "awards": 1,
+   "firstSeen": "2023-04-28",
+   "lastSeen": "2023-04-28",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "NHS Wales Shared Services Partnership on behalf of Cardiff and Vale LHB",
+   "awards": 1,
+   "firstSeen": "2021-11-18",
+   "lastSeen": "2021-11-18",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "NHS Wales Shared Services Partnership on behalf of Cardiff and Vale University Local Health Board",
+   "awards": 1,
+   "firstSeen": "2021-05-12",
+   "lastSeen": "2021-05-12",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "NHS Wales Shares Services Procurement",
+   "awards": 1,
+   "firstSeen": "2023-08-09",
+   "lastSeen": "2023-08-09",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "NWSSP",
+   "awards": 1,
+   "firstSeen": "2024-01-23",
+   "lastSeen": "2024-01-23",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "Public Health Wales NHS Trust",
+   "awards": 1,
+   "firstSeen": "2026-08-26",
+   "lastSeen": "2026-08-26",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "Velindre NHS Trust, NHS Shared Services Partnership - Procurement Services (on behalf of All Wales Health Boards and Trusts)",
+   "awards": 1,
+   "firstSeen": "2025-05-29",
+   "lastSeen": "2025-05-29",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "Velindre NHS Trust, NHS Shared Services Partnership — Procurement Services (on behalf of All Wales Health Boards and Trusts)",
+   "awards": 1,
+   "firstSeen": "2023-09-28",
+   "lastSeen": "2023-09-28",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "Velindre NHS Trust, NHS Wales Shared Services Parternship - Procurement Services (On Behalf of All Wales) Health Boards and Trusts",
+   "awards": 1,
+   "firstSeen": "2022-03-14",
+   "lastSeen": "2022-03-14",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "Velindre NHS Trust, NHS Wales Shared Services Partnership - Procurement Services (on behalf of All Wales LHB's and Trusts)",
+   "awards": 1,
+   "firstSeen": "2024-08-09",
+   "lastSeen": "2024-08-09",
+   "sources": [
+    "Find a Tender"
+   ]
+  },
+  {
+   "name": "Velindre University NHS Trust Please note NHS Wales Shared Services Partnership (hosted by Velindre University NHS Trust) will manage this procurement on behalf of the contracting authority. Due to having the same identifiers, we're unable to reflect this in the notice options.",
+   "awards": 1,
+   "firstSeen": "2026-11-05",
+   "lastSeen": "2026-11-05",
+   "sources": [
+    "Find a Tender"
+   ]
+  }
+ ],
+ "suppliersWithWelshAwards": [
+  {
+   "company": "Rocialle Healthcare",
+   "awards": 5
+  },
+  {
+   "company": "AbbVie UK",
+   "awards": 4
+  },
+  {
+   "company": "B. Braun Medical",
+   "awards": 4
+  },
+  {
+   "company": "Invacare UK",
+   "awards": 4
+  },
+  {
+   "company": "Johnson & Johnson MedTech",
+   "awards": 4
+  },
+  {
+   "company": "Baxter / Hillrom",
+   "awards": 3
+  },
+  {
+   "company": "Flexicare Medical",
+   "awards": 3
+  },
+  {
+   "company": "LivaNova UK Limited",
+   "awards": 3
+  },
+  {
+   "company": "Medical Imaging Systems (MIS Healthcare)",
+   "awards": 3
+  },
+  {
+   "company": "Medtronic",
+   "awards": 3
+  },
+  {
+   "company": "Philips",
+   "awards": 3
+  },
+  {
+   "company": "Terumo BCT",
+   "awards": 3
+  },
+  {
+   "company": "Timesco Healthcare Ltd",
+   "awards": 3
+  },
+  {
+   "company": "Unisurge International Limited",
+   "awards": 3
+  },
+  {
+   "company": "Williams Medical Supplies",
+   "awards": 3
+  },
+  {
+   "company": "AM Healthcare Group",
+   "awards": 2
+  },
+  {
+   "company": "Abbott Laboratories Limited",
+   "awards": 2
+  },
+  {
+   "company": "Amercare Limited",
+   "awards": 2
+  },
+  {
+   "company": "Aquilant Limited",
+   "awards": 2
+  },
+  {
+   "company": "Arjo",
+   "awards": 2
+  },
+  {
+   "company": "Bayer",
+   "awards": 2
+  },
+  {
+   "company": "Blatchford Limited",
+   "awards": 2
+  },
+  {
+   "company": "Cook Medical",
+   "awards": 2
+  },
+  {
+   "company": "Direct Healthcare Group",
+   "awards": 2
+  },
+  {
+   "company": "Draeger Medical UK",
+   "awards": 2
+  }
+ ]
+}

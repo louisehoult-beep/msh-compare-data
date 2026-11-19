@@ -47,6 +47,15 @@ GC_PAGE = """<html><body><main>
 
 SUPPLIERS_NO_GC15 = "<html>G-Cloud 14 Lot 4 (RM1557.14L4)</html>"
 
+AZ_A1 = """<div class="app-search-result"><h2 class="govuk-heading-s">
+<a class="govuk-link" href="/g-cloud-15/supplier/1">ALPHA CLOUD LTD</a></h2>
+<p>Description that is never stored. Call jane@alpha.example</p></div>
+<div class="app-search-result"><h2 class="govuk-heading-s">
+<a class="govuk-link" href="/g-cloud-15/supplier/2">A&amp;B HEALTH LIMITED</a></h2></div>
+<a class="govuk-link govuk-pagination__link" href="/g-cloud-15/suppliers?page=2&amp;prefix=A" rel="next">"""
+AZ_A2 = """<a class="govuk-link" href="/g-cloud-15/supplier/3">AZURE CARE LTD</a>"""
+AZ_M = """<a class="govuk-link" href="/g-cloud-15/supplier/4">MEDILOGIK LIMITED</a>"""
+
 OCDS_AI = {"releases": [{
     "id": "050314-2026", "date": "2026-05-28T13:23:29+01:00", "tag": ["tenderUpdate"],
     "buyer": {"name": "NHS Shared Business Services Limited"},
@@ -96,6 +105,14 @@ def fake_fetch(fail=()):
             return GC_PAGE
         if url.endswith("/suppliers"):
             return SUPPLIERS_NO_GC15
+        if "/g-cloud-15/suppliers?" in url:
+            if url.endswith("page=2&prefix=A"):
+                return AZ_A2
+            if url.endswith("prefix=A"):
+                return AZ_A1
+            if url.endswith("prefix=M"):
+                return AZ_M
+            return "<html>no suppliers under this letter</html>"
         if url.endswith("050314-2026"):
             return json.dumps(OCDS_AI)
         if url.endswith("094419-2026"):
@@ -167,10 +184,20 @@ class Build(unittest.TestCase):
         self.assertIsNone(ts4["suppliers"])
         self.assertTrue(any("Lot 3a supplier list not verified" in n for n in ts4["notVerified"]))
 
-    def test_gcloud15_verbatim_term_and_null_suppliers(self):
+    def test_gcloud15_verbatim_term_and_az_suppliers(self):
         g = self.by["RM1557.15"]
         self.assertEqual((g["starts"], g["ends"]), ("2026-08-06", "2028-02-05"))
         self.assertIn("reopening after 18 months and again after 36 months", g["term"])
+        self.assertEqual(g["suppliers"],
+                         ["A&B HEALTH LIMITED", "ALPHA CLOUD LTD", "AZURE CARE LTD",
+                          "MEDILOGIK LIMITED"])
+        # The A to Z gives no lots, so no lot list is claimed.
+        self.assertTrue(all(l["suppliers"] is None for l in g["lots"]))
+        self.assertTrue(any("does not say which lot" in n for n in g["notVerified"]))
+
+    def test_gcloud15_az_failure_gives_null_and_note(self):
+        doc = rdf.build(fake_fetch(fail=("prefix=M",)), "2026-10-20")
+        g = {e["reference"]: e for e in doc["frameworks"]}["RM1557.15"]
         self.assertIsNone(g["suppliers"])
         self.assertTrue(any("Supplier list not verified" in n for n in g["notVerified"]))
 
@@ -186,6 +213,14 @@ class Build(unittest.TestCase):
         self.assertEqual(gp["futureNoticeDate"], "2026-11-09")
         self.assertEqual((gp["starts"], gp["ends"]), ("2027-09-20", "2030-09-19"))
         self.assertEqual(gp["sourceQuote"], "Framework go-live is expected in Q3 2027.")
+
+    def test_unavailable_gca_page_raises_so_main_does_not_write(self):
+        f = fake_fetch()
+
+        def outage(url):
+            return "<html>Service unavailable</html>" if "gca.gov.uk/agreements" in url else f(url)
+        with self.assertRaises(RuntimeError):
+            rdf.build(outage, "2026-10-20")
 
     def test_total_failure_raises_so_main_does_not_write(self):
         with self.assertRaises(RuntimeError):
@@ -248,8 +283,90 @@ class Extras(unittest.TestCase):
             raise RuntimeError("boom")
         entries, not_added = rdf.build_extras(f, "2026-10-20")
         self.assertEqual(entries, [])
-        self.assertEqual(len(not_added), 6)
+        self.assertEqual(len(not_added), 9)
         self.assertTrue(all("Nothing recorded" in n["reason"] for n in not_added))
+
+
+GC14_EXPIRED_PAGE = """<html><body><main>
+<p>!</p><p>Important</p><p>Expired agreement - This information is for reference only</p>
+<h1>G-Cloud 14</h1>
+<p>Agreement number: </p><p> RM1557.14 </p><p>Start date: </p><p> 29/10/2024 </p>
+<p>End date: </p><p> 28/10/2026 </p><p>Agreement type: </p><p> PCR15 Framework </p>
+<h2>Updates</h2><p>29 October 2026:</p>
+<p>Please be advised that G-Cloud 14 expired on 28 October 2026. You should now access</p>
+<p><a href="/agreements/RM1557.15">RM1557.15 G-Cloud 15</a></p>
+<p>for your cloud requirements. Existing G-Cloud 14 call-off contracts signed prior to the
+28 October 2026 expiration date will remain in effect for their full defined terms. Work
+performed under G-Cloud 14 cannot be transferred to G-Cloud 15 agreements. For the most
+current information, please refer to the official</p>
+<h2>Documents</h2>
+<p>The core terms form part of the framework and call-off contracts and must be used on
+every contract. They cannot be changed.</p>
+</main></body></html>"""
+
+GC13_EXPIRED_PAGE = """<html><body><main>
+<p>Important</p><p>Expired agreement - This information is for reference only</p>
+<p>Important Expired agreement \u2013 This information is for reference only.</p>
+<p>RM1557.13: G-Cloud 13 was replaced by RM1557.14: G-Cloud 14.</p>
+<p>Agreement number: </p><p> RM1557.13 </p><p>Start date: </p><p> 09/11/2022 </p>
+<p>End date: </p><p> 08/11/2024 </p><p>Agreement type: </p><p> PCR15 Framework </p>
+<h2>Documents</h2></main></body></html>"""
+
+GC_LIVE_NO_BANNER = """<html><body><main><h1>G-Cloud 14</h1>
+<p>Agreement number: </p><p> RM1557.14 </p><p>Start date: </p><p> 29/10/2024 </p>
+<p>End date: </p><p> 28/10/2026 </p><p>Agreement type: </p><p> PCR15 Framework </p>
+<h2>Documents</h2></main></body></html>"""
+
+
+class ExpiredGCloud(unittest.TestCase):
+    """An expired G-Cloud iteration is recorded so a call-off bought through it has
+    something to point at. Added 16/11/2026 for Medilogik's Barnsley Hospital award,
+    a G-Cloud 13 call-off ending 30/11/2026 on an agreement closed since 2024."""
+
+    def test_expired_agreement_is_read_from_its_own_page(self):
+        e = rdf.build_gcloud_expired(lambda u: GC14_EXPIRED_PAGE, "RM1557.14", "G-Cloud 14",
+                                     "2026-11-16")
+        self.assertEqual((e["reference"], e["status"], e["starts"], e["ends"]),
+                         ("RM1557.14", "expired", "2024-10-29", "2026-10-28"))
+        self.assertEqual(e["lots"], [])
+        self.assertIsNone(e["suppliers"])
+        self.assertIn("nothing on it rolls forward", e["callOffRule"])
+
+    def test_sentence_split_across_an_inline_link_is_whole(self):
+        """GCA breaks a sentence wherever it carries a link, so a line-by-line read
+        returns the sentence with the link text missing. The quote must be whole."""
+        e = rdf.build_gcloud_expired(lambda u: GC14_EXPIRED_PAGE, "RM1557.14", "G-Cloud 14",
+                                     "2026-11-16")
+        self.assertIn("Existing G-Cloud 14 call-off contracts signed prior to the 28 October "
+                      "2026 expiration date will remain in effect for their full defined "
+                      "terms.", e["sourceQuote"])
+        self.assertIn("Work performed under G-Cloud 14 cannot be transferred to G-Cloud 15 "
+                      "agreements.", e["sourceQuote"])
+
+    def test_page_navigation_is_never_glued_to_a_quote(self):
+        e = rdf.build_gcloud_expired(lambda u: GC14_EXPIRED_PAGE, "RM1557.14", "G-Cloud 14",
+                                     "2026-11-16")
+        self.assertNotIn("Documents", e["sourceQuote"])
+        self.assertNotIn("core terms", e["sourceQuote"].lower())
+
+    def test_replacement_sentence_is_not_cut_at_the_reference_dot(self):
+        e = rdf.build_gcloud_expired(lambda u: GC13_EXPIRED_PAGE, "RM1557.13", "G-Cloud 13",
+                                     "2026-11-16")
+        self.assertIn("RM1557.13: G-Cloud 13 was replaced by RM1557.14: G-Cloud 14.",
+                      e["sourceQuote"])
+        # The banner renders twice, hyphen and en dash. One sentence, kept once.
+        self.assertEqual(e["sourceQuote"].lower().count("this information is for reference"), 1)
+
+    def test_missing_banner_is_not_verified_never_assumed_expired(self):
+        e = rdf.build_gcloud_expired(lambda u: GC_LIVE_NO_BANNER, "RM1557.14", "G-Cloud 14",
+                                     "2026-11-16")
+        self.assertEqual(e["status"], "not verified")
+        self.assertTrue(any("Expired agreement" in n for n in e["notVerified"]))
+
+    def test_wrong_page_is_refused_not_recorded(self):
+        with self.assertRaises(RuntimeError):
+            rdf.build_gcloud_expired(lambda u: GC13_EXPIRED_PAGE, "RM1557.14", "G-Cloud 14",
+                                     "2026-11-16")
 
 
 if __name__ == "__main__":

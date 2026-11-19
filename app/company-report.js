@@ -200,7 +200,8 @@
      the thing actually protecting line length.
 
      Colours are the brand guide's, verbatim: Midnight Navy #0B1C33 with the
-     signature 135deg navy gradient, Deep Gold #A8842C for labels and rules on
+     signature 135deg navy gradient, navy #0B1C33 for small labels and Deep
+     Gold #A8842C for rules on
      light, Light Gold #E0BE8E for gold on navy, the D4AF7A→B8935A button
      gradient. Gold never carries body copy.
 
@@ -231,7 +232,7 @@
     '.mcr *{box-sizing:border-box;}',
     '.mcr p{margin:0 0 12px;}',
     '.mcr p:last-child{margin-bottom:0;}',
-    '.mcr a{color:var(--mcr-gold);font-weight:600;text-decoration:none;}',
+    '.mcr a{color:#14304F;font-weight:600;text-decoration:underline;text-underline-offset:2px;}',
     '.mcr a:hover{text-decoration:underline;}',
     /* Cross-link to another company's report. HOUSE GOLD, deliberately, not
        var(--mcr-accent-ink): the accent is the company's own colour and it
@@ -240,9 +241,7 @@
        name here inherits a weight that already means something (bold marks
        the company being read in the filing table). Quiet underline, no second
        colour fighting the prose. */
-    '.mcr .mcr-colink{color:var(--mcr-gold);font-weight:inherit;text-decoration:none;',
-    'border-bottom:1px solid rgba(168,132,44,.42);}',
-    '.mcr .mcr-colink:hover{border-bottom-color:var(--mcr-gold);}',
+    '.mcr .mcr-colink{color:#14304F;font-weight:inherit;text-decoration:underline;text-underline-offset:2px;}',
 
     /* --- report shell + masthead ------------------------------------- */
     /* The measure. min(1600px,96vw): fills most of a wide monitor while
@@ -291,7 +290,7 @@
     '.mcr .mcr-part:before{content:"";position:absolute;left:0;top:-2px;width:38px;height:2px;',
     'background:var(--mcr-accent-ink);-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
     '.mcr .mcr-part-n{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;',
-    'color:var(--mcr-gold);}',
+    'color:#0B1C33;}',
     '.mcr .mcr-part-t{font-size:17px;font-weight:700;color:var(--mcr-navy);line-height:1.3;margin-top:4px;}',
     '.mcr .mcr-part-s{font-size:12.5px;color:var(--mcr-dim);line-height:1.62;margin-top:6px;max-width:66em;}',
     '.mcr .mcr-card{background:#fff;border:1px solid var(--mcr-line);border-radius:12px;',
@@ -358,13 +357,13 @@
     '.mcr .mcr-alert--recall .mcr-alert-d{color:#b84a5c;}',
     '.mcr .mcr-alert--unsourced{background:#faf8f3;border-left-style:dashed;box-shadow:none;}',
     '.mcr .mcr-alert-x{color:var(--mcr-body);}',
-    '.mcr .mcr-alert-u{color:var(--mcr-gold);}',
+    '.mcr .mcr-alert-u{color:#0B1C33;}',
     '.mcr .mcr-alert .mcr-note{margin-top:4px;}',
     '.mcr .mcr-rule{margin:0 0 14px;padding:13px 16px;background:var(--mcr-soft);',
     'border-left:3px solid var(--mcr-gold);border-radius:0 8px 8px 0;font-size:12px;',
     'color:#4a5766;line-height:1.65;}',
     '.mcr .mcr-rule-h{display:block;font-size:9.5px;letter-spacing:1.6px;text-transform:uppercase;',
-    'font-weight:700;color:var(--mcr-gold);margin-bottom:5px;}',
+    'font-weight:700;color:#0B1C33;margin-bottom:5px;}',
 
     /* Company facts, as tiles rather than a single-column table — added
        19/08/2026. Five or six short facts used to be one per full-width
@@ -721,9 +720,9 @@
        tools cannot drift apart visually. */
     var _w = String(s.name || '').replace(/^the\s+/i, '').split(/[\s\-—,\.]+/).filter(Boolean);
     var inits = esc((/^[A-Za-z0-9]{2,4}$/.test(_w[0] || '') ? _w[0] : _w.slice(0, 2).map(function (w) { return w[0]; }).join('')).toUpperCase());
-    var ph = '<div style="width:56px;height:56px;flex:0 0 56px;border-radius:10px;background:#efe9db;border:1px solid ' + LINE + ';display:flex;align-items:center;justify-content:center;font-weight:700;color:' + G + ';font-size:16px;">' + inits + '</div>';
+    var ph = '<div style="width:56px;height:56px;flex:0 0 56px;border-radius:10px;background:#efe9db;border:1px solid ' + LINE + ';display:flex;align-items:center;justify-content:center;font-weight:700;color:#0B1C33;font-size:16px;">' + inits + '</div>';
     var thumb = s.image
-      ? '<img src="' + esc(imgSrc(s.image)) + '" alt="" referrerpolicy="no-referrer" loading="lazy" style="width:56px;height:56px;flex:0 0 56px;border-radius:10px;object-fit:contain;background:#fff;border:1px solid ' + LINE + ';" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';"><div style="display:none;width:56px;height:56px;flex:0 0 56px;border-radius:10px;background:#efe9db;border:1px solid ' + LINE + ';align-items:center;justify-content:center;font-weight:700;color:' + G + ';font-size:16px;">' + inits + '</div>'
+      ? '<img src="' + esc(imgSrc(s.image)) + '" alt="" referrerpolicy="no-referrer" loading="lazy" style="width:56px;height:56px;flex:0 0 56px;border-radius:10px;object-fit:contain;background:#fff;border:1px solid ' + LINE + ';" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';"><div style="display:none;width:56px;height:56px;flex:0 0 56px;border-radius:10px;background:#efe9db;border:1px solid ' + LINE + ';align-items:center;justify-content:center;font-weight:700;color:#0B1C33;font-size:16px;">' + inits + '</div>'
       : ph;
     var h = '<div style="display:flex;gap:13px;align-items:flex-start;">' + thumb + '<div><div style="font-size:21px;font-weight:700;color:' + INK + ';line-height:1.25;">' + esc(s.name) +
       (s.autoDetected ? ' <span style="font-size:10px;font-weight:700;letter-spacing:.06em;color:#7a5b14;background:#f3e8cf;border-radius:99px;padding:2px 8px;vertical-align:3px;">AUTO — VERIFY AT SOURCE</span>' : '') +
@@ -853,7 +852,7 @@
         (rows.length > shown.length ? (', showing the first ' + shown.length + ' alphabetically') : '') + '.</div>' +
         shown.map(function (c) {
           return '<div style="padding:6px 0;border-bottom:1px solid #f0ece3;font-size:13px;line-height:1.5;">' +
-            '<a href="' + esc(c.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:700;">' + esc(c.supplier) + ' &#8599;</a>' +
+            '<a href="' + esc(c.url) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:700;">' + esc(c.supplier) + ' &#8599;</a>' +
             '<br><span style="color:' + DIM + ';font-size:12px;">' + c.products.slice(0, 6).map(esc).join(', ') +
             (c.products.length > 6 ? ' &middot; +' + (c.products.length - 6) + ' more' : '') + '</span>' +
             '</div>';
@@ -954,11 +953,11 @@
              printable pack still reads correctly on paper. */
           var npcUrl = it.npc ? 'https://pilot.supplychain.nhs.uk/product/' + encodeURIComponent(it.npc) : '';
           var npcCell = npcUrl
-            ? '<a href="' + esc(npcUrl) + '" target="_blank" rel="noopener" title="Open this line in the NHS Supply Chain catalogue" style="color:' + G + ';font-weight:600;">' + esc(it.npc) + '</a>'
+            ? '<a href="' + esc(npcUrl) + '" target="_blank" rel="noopener" title="Open this line in the NHS Supply Chain catalogue" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">' + esc(it.npc) + '</a>'
             : esc(it.npc);
           return '<tr>' +
             '<td style="padding:9px 14px 9px 0;border-bottom:1px solid #f0ece3;font-size:12.5px;color:#37485a;">' + esc(it.desc) + '</td>' +
-            '<td style="padding:9px 14px 9px 0;border-bottom:1px solid #f0ece3;font-size:12px;color:' + G + ';font-weight:600;white-space:nowrap;">' + npcCell + '</td>' +
+            '<td style="padding:9px 14px 9px 0;border-bottom:1px solid #f0ece3;font-size:12px;color:#0B1C33;font-weight:600;white-space:nowrap;">' + npcCell + '</td>' +
             '<td style="padding:9px 14px 9px 0;border-bottom:1px solid #f0ece3;font-size:12px;color:' + DIM + ';white-space:nowrap;">' + esc(it.pack) + '</td>' +
             '</tr>';
         }).join('');
@@ -1077,15 +1076,34 @@
      --------------------------------------------------------------------- */
   function fwIndex(fwDoc) {
     var byKey = {};
+    /* The same index keyed on norm() alone — nothing stripped. This is the
+       browser's copy of company_match.Index.exact, and it exists for the same
+       reason: coKey() strips "ltd", "limited", "uk" and "gb", so two REAL
+       companies named on one brief whose names differ only by those words
+       collapse onto one key. NHS Supply Chain's Urology and Bowel Management
+       brief names both "Clinisupplies Ltd" (Companies House 04013240) and
+       "Clinisupplies GB Limited" (02503030), and both coKey to "clinisupplies".
+       Without this map, each record matched BOTH rows and fwLotLine() unioned
+       their lots, so 04013240's five lots would publish on 02503030's card and
+       the other way round. Added 18/11/2026. */
+    var byExact = {};
     ((fwDoc && fwDoc.frameworks) || []).forEach(function (f) {
       (f.suppliers || []).forEach(function (nm) {
+        var hit = { fw: f, matched: nm };
+        var e = norm(nm);
+        if (e) {
+          if (!byExact[e]) byExact[e] = [];
+          byExact[e].push(hit);
+        }
         var k = coKey(nm);
         if (!k) return;
         if (!byKey[k]) byKey[k] = [];
-        byKey[k].push({ fw: f, matched: nm });
+        byKey[k].push(hit);
       });
     });
-    return byKey;
+    /* Two separate maps, not one with a reserved property: a brief row really
+       named "Exact" would coKey to "exact" and collide with it. */
+    return { byCoKey: byKey, byExact: byExact };
   }
 
   /* Every framework whose brief names this company, under any of its recorded
@@ -1094,13 +1112,38 @@
      another is a fact about the register, not noise to tidy away. */
   function supplierFrameworks(s, ctx) {
     if (!ctx.fwByKey) return [];
-    var keys = {}, out = [], seen = {};
-    [s.name].concat(s.aliases || []).forEach(function (n) {
+    var ownNames = [s.name].concat(s.aliases || []);
+    var keys = {}, exact = {}, out = [], seen = {};
+    ownNames.forEach(function (n) {
       var k = coKey(n);
       if (k) keys[k] = 1;
+      var e = norm(n);
+      if (e) exact[e] = 1;
     });
+
+    /* VERBATIM TIER FIRST (18/11/2026), for the same reason company_match
+       .resolve() has one: a brief row this record holds UNSTRIPPED is this
+       record's row, and once we have one for a framework, the rows that only
+       reach it through coKey()'s stripping are somebody else's. So a framework
+       the record is named on verbatim keeps only its verbatim rows; a framework
+       that matches only by coKey is untouched, which is what keeps the cases
+       this index was built for working — a brief writing "GB UK Ltd" for GBUK
+       reaches the record by coKey alone and must go on reaching it. Narrowing
+       only: a record can lose a row that is not its own, never a framework. */
+    var byExact = ctx.fwByKey.byExact || {};
+    var byCoKey = ctx.fwByKey.byCoKey || {};
+    var verbatimRows = {};
+    Object.keys(exact).forEach(function (e) {
+      (byExact[e] || []).forEach(function (hit) {
+        if (!verbatimRows[hit.fw.url]) verbatimRows[hit.fw.url] = {};
+        verbatimRows[hit.fw.url][hit.matched] = 1;
+      });
+    });
+
     Object.keys(keys).forEach(function (k) {
-      (ctx.fwByKey[k] || []).forEach(function (hit) {
+      (byCoKey[k] || []).forEach(function (hit) {
+        var only = verbatimRows[hit.fw.url];
+        if (only && !only[hit.matched]) return;
         if (seen[hit.fw.url]) {
           if (seen[hit.fw.url].matched.indexOf(hit.matched) === -1) {
             seen[hit.fw.url].matched.push(hit.matched);
@@ -1221,7 +1264,7 @@
   }
   function fwLotSources(f) {
     return (f.lotSources || []).map(function (src) {
-      return '<a href="' + esc(src.url) + '" target="_blank" rel="noopener" style="color:' + G + ';">' + esc(src.label) + ' &#8599;</a>';
+      return '<a href="' + esc(src.url) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;">' + esc(src.label) + ' &#8599;</a>';
     }).join('; ');
   }
   function fwLotLine(f, matched) {
@@ -1330,7 +1373,7 @@
           '</span>' +
           fwLotLine(f, h.matched) +
           '<br><span style="font-size:12.5px;color:' + DIM + ';">' + f.supplierCount + ' suppliers on this framework' +
-          ' &middot; <a href="' + esc(f.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">contract launch brief &#8599;</a></span>' +
+          ' &middot; <a href="' + esc(f.url) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">contract launch brief &#8599;</a></span>' +
           '</div>';
       }).join('') + '</div>';
     }
@@ -1364,7 +1407,7 @@
             (lots ? '<br><span class="mcr-fw-lot" style="font-size:12.5px;color:#37485a;"><b style="color:' + INK + ';">Lots:</b> ' + lots + '</span>' : '') +
             '<br><span style="font-size:12.5px;color:' + DIM + ';">' + (f.supplierCount ? esc(String(f.supplierCount)) + ' suppliers on this framework &middot; ' : '') +
             'list read ' + esc(dateUK(f.capturedOn || '')) +
-            (f.url ? ' &middot; <a href="' + esc(f.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">framework owner&rsquo;s page &#8599;</a>' : '') +
+            (f.url ? ' &middot; <a href="' + esc(f.url) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">framework owner&rsquo;s page &#8599;</a>' : '') +
             '</span></div>';
         }).join('') + '</div>';
     }
@@ -1422,7 +1465,7 @@
       (matchedAs ? '<br><span style="font-size:12.5px;color:' + DIM + ';">named on the notice as &ldquo;' + esc(matchedAs) + '&rdquo;</span>' : '') +
       '<br><span style="font-size:12.5px;color:' + DIM + ';">' +
       (a.noticeSuppliers ? a.noticeSuppliers.length + ' supplier(s) named on the award notice' : '') +
-      ' &middot; <a href="' + esc(a.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">Find a Tender notice &#8599;</a></span>' +
+      ' &middot; <a href="' + esc(a.url) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">Find a Tender notice &#8599;</a></span>' +
       '</div>';
   }
 
@@ -1479,7 +1522,7 @@
     var body = ok.map(function (nw) {
       var srcs = (nw.sources || []).map(function (x) {
         return x.url
-          ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">' + esc(x.publisher) + ' ↗</a>'
+          ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">' + esc(x.publisher) + ' ↗</a>'
           : esc(x.publisher);
       }).join(' · ');
       return '<div style="padding:8px 0;border-bottom:1px solid #f0ece3;font-size:13px;line-height:1.55;">' +
@@ -1581,7 +1624,7 @@
         ' other supplier(s) on this framework &middot; ' + grp.total + ' in total, including ' + esc(sub.name) + '.' +
         (grp.reference ? ' &middot; ref ' + esc(grp.reference) : '') +
         (grp.ends ? ' &middot; runs to ' + esc(grp.ends) : '') +
-        ' &middot; <a href="' + esc(grp.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">brief &#8599;</a></div>' +
+        ' &middot; <a href="' + esc(grp.url) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">brief &#8599;</a></div>' +
         '<div>' + grp.others.map(function (n) {
           var lots = grp.lots && grp.lots[n];
           var hub = coResolve(n, ctx);
@@ -1990,7 +2033,7 @@
         : '<span style="color:' + DIM + ';">Not on the Companies House register &mdash; an employee, not an officer</span>';
       var claims = (p.claims || []).map(function (c) {
         return '<div style="padding:6px 0 0;font-size:12.5px;color:#37485a;line-height:1.55;">' + esc(c.text) +
-          (c.url ? ' <a href="' + esc(c.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">' + esc(c.source || 'source') + ' &#8599;</a>' : '') +
+          (c.url ? ' <a href="' + esc(c.url) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">' + esc(c.source || 'source') + ' &#8599;</a>' : '') +
           '</div>';
       }).join('');
       var note = p.note ? '<div style="margin-top:6px;font-size:11.5px;color:' + DIM + ';line-height:1.5;">' + esc(p.note) + '</div>' : '';
@@ -2652,7 +2695,7 @@
     if (!(d && d.press && d.press.length)) return '';
     return d.press.map(function (n) {
       return '<div style="border-bottom:1px solid #f0ece3;padding:11px 0;' + (n.flagged ? 'border-left:3px solid var(--mcr-accent-ink);padding-left:12px;' : '') + '">' +
-        '<div style="font-size:10px;font-weight:700;letter-spacing:1.2px;color:' + G + ';text-transform:uppercase;margin-bottom:5px;">' + esc(n.date) + '</div>' +
+        '<div style="font-size:10px;font-weight:700;letter-spacing:1.2px;color:#0B1C33;text-transform:uppercase;margin-bottom:5px;">' + esc(n.date) + '</div>' +
         '<div style="font-size:13px;line-height:1.6;color:#37485a;">' + esc(n.text) + '</div></div>';
     }).join('');
   }
@@ -2768,6 +2811,64 @@
     return doc.companies[s.name] || [];
   }
 
+  /* THE ROUTE A CALL-OFF WAS BOUGHT THROUGH (16/11/2026).
+     Most NHS software money moves as a framework call-off, and the framework is
+     the renewal fact: a call-off on a closed agreement runs to its own end date
+     and nothing on it rolls forward, so the contract end IS the decision date and
+     there is no "it will just roll" to assume. Medilogik's Barnsley Hospital award
+     is a G-Cloud 13 call-off ending 30/11/2026 on an agreement that expired in
+     November 2024 — the single strongest call-planning fact on that record, and
+     invisible here until this line existed.
+
+     Every part of it is read: the buyer's own procedure wording, the framework the
+     notice names, and that framework's status and term from the framework owner's
+     own page (scripts/refresh_digital_frameworks.py). A notice that says "call-off
+     from a framework agreement" and names no framework gets the procedure line and
+     nothing more, which is the honest state, not a gap to fill. */
+  function frameworkRouteLine(a) {
+    var method = String(a.procurementMethodDetails || '');
+    var named = a.frameworkName || a.frameworkRef;
+    if (!method && !named) return '';
+
+    var bits = [];
+    if (named) {
+      var label = a.frameworkName
+        ? esc(a.frameworkName) + (a.frameworkRef ? ' (' + esc(a.frameworkRef) + ')' : '')
+        : esc(a.frameworkRef);
+      bits.push(a.frameworkUrl
+        ? '<a href="' + esc(a.frameworkUrl) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">' + label + ' &#8599;</a>'
+        : '<b>' + label + '</b>');
+    }
+    if (method) bits.push(esc(method.toLowerCase()));
+    if (a.frameworkStatus === 'expired') {
+      bits.push('<span style="color:' + RED + ';font-weight:700;">framework expired' +
+        (a.frameworkEnds ? ' ' + esc(uk(a.frameworkEnds)) : '') + '</span>');
+    } else if (a.frameworkStatus) {
+      bits.push('framework ' + esc(a.frameworkStatus) +
+        (a.frameworkEnds ? ' to ' + esc(uk(a.frameworkEnds)) : ''));
+    }
+
+    /* "Route" is only the right word for a call-off. A notice that says "open
+       procedure" is describing a tender the buyer ran itself, which is a different
+       and equally useful signal, so it is labelled as what it is. */
+    var label = (named || /framework/i.test(method)) ? 'Bought through' : 'Procedure';
+    var out = '<br><span style="font-size:12.5px;color:#37485a;"><b style="color:' + INK +
+      ';">' + label + ':</b> ' + bits.join(' &middot; ') + '</span>';
+    if (a.frameworkStatus === 'expired' && a.frameworkCallOffRule) {
+      out += '<br><span style="font-size:12px;color:' + DIM + ';">' +
+        esc(a.frameworkCallOffRule) + '</span>';
+    }
+    if (a.frameworkRouteQuote) {
+      out += '<br><span style="font-size:12px;color:' + DIM + ';">The notice states the route as &ldquo;' +
+        esc(a.frameworkRouteQuote) + '&rdquo;.</span>';
+    }
+    if (a.frameworkRefSource) {
+      out += '<br><span style="font-size:12px;color:' + DIM + ';">Agreement number from ' +
+        esc(a.frameworkRefSource) + '</span>';
+    }
+    return out;
+  }
+
   function awardRow(a) {
     var value = (typeof a.valueAmount === 'number')
       ? '<span style="color:' + GREEN + ';font-weight:700;">' +
@@ -2792,10 +2893,10 @@
          a length test here said "at least" on every long, complete list. */
       (a.noticeSupplierCount > 1 ? ', one of ' + (a.supplierCut ? 'at least ' : '') +
         esc(String(a.noticeSupplierCount)) + ' suppliers named' : '') + ' &middot; ' +
-      '<a href="' + esc(a.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">' +
+      '<a href="' + esc(a.url) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">' +
       esc(a.source) + ' notice &#8599;</a>' +
-      (a.hubUrl ? ' &middot; <a href="' + esc(a.hubUrl) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">Award Tracker &#8599;</a>' : '') +
-      '</span></div>';
+      (a.hubUrl ? ' &middot; <a href="' + esc(a.hubUrl) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">Award Tracker &#8599;</a>' : '') +
+      '</span>' + frameworkRouteLine(a) + '</div>';
   }
 
   function awardSection(title, rows, ctx, blurb) {
@@ -3073,7 +3174,7 @@
     h += repsWatch(sub);
 
     /* -- 4 · Competitors ------------------------------------------------ */
-    h += part('3', 'The field around them <span style="font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:' + G + ';vertical-align:3px;">&nbsp;· derived</span>',
+    h += part('3', 'The field around them <span style="font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#0B1C33;vertical-align:3px;">&nbsp;· derived</span>',
       'The panels in this part are <b>computed by this page</b>, not read from a source. Each prints the rule it was computed under and refuses to render on thin evidence. None ranks anyone, and none prints a market-share figure — the filing profile shows which statutory regime each confirmed supplier files under, which is the sourceable part of “how big are they”. Read the rule before you quote any of it.');
     var co = coListing(sub, ctx);
     h += panelCoListed(sub, ctx, co);
@@ -3337,7 +3438,7 @@
     MOUNT.innerHTML = '' +
       '<div class="mcr">' +
         '<div style="padding:2px 0 8px;">' +
-          '<div style="font-size:10.5px;letter-spacing:2.2px;text-transform:uppercase;font-weight:700;color:' + G + ';">Company intelligence report</div>' +
+          '<div style="font-size:10.5px;letter-spacing:2.2px;text-transform:uppercase;font-weight:700;color:#0B1C33;">Company intelligence report</div>' +
           '<p style="margin:6px 0 14px;font-size:13.5px;color:' + DIM + ';line-height:1.65;max-width:62em;">Pick a speciality, then a company — get who they are, what they sell, the frameworks they hold, live alerts, corroborated press, and who else sits on those frameworks. <span id="mcrCount"></span></p>' +
           /* SPECIALITY FIRST (Lou, 11/08/2026). The box used to offer every
              indexed company at once. Choosing the clinical area first cuts the

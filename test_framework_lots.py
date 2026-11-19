@@ -87,6 +87,40 @@ class MatrixReaders(unittest.TestCase):
         self.assertEqual(got["Beta Ltd"], {"Lot 1", "Lot 2"})
         self.assertNotIn("Yes", got)
 
+    def test_a_lot_heading_row_carrying_products_is_read_not_dropped(self):
+        """Robotic Medical Equipment, matrix of 9 September 2026: NHS Supply
+        Chain writes the first product of a lot on the heading row itself. That
+        row used to be skipped whenever it held three or fewer values, so a
+        supplier whose ONLY mark sat there vanished — silently, not into
+        `unresolved`. Zimmer Biomet (ROSA Brain, Lot 2) and MCT Lifesciences
+        (ROBOFLEX AVICENNA, Lot 3) were both lost that way, while Medtronic and
+        Procept survived only on a second product one row lower."""
+        rows = [["Specification", "CMR Surgical Ltd", "Medtronic Limited",
+                 "MCT Lifesciences Ltd", "Procept Biorobotics", "Zimmer Biomet UK Limited"],
+                ["Lot 1 - Surgical Robots", "Versius", "HUGO RAS", "", "", ""],
+                ["Lot 2 - Spinal Robots", "", "Mazor X System", "", "", "ROSA Brain"],
+                ["", "", "StealthAxis Autopilot", "", "", ""],
+                ["Lot 3 - Freestanding Arms", "", "", "ROBOFLEX AVICENNA", "Aquablation", ""],
+                ["", "", "", "", "Hydros", ""]]
+        got = L.parse_matrix_sections(rows, "Product Matrix")
+        self.assertEqual(got["Zimmer Biomet UK Limited"], {"Lot 2"})
+        self.assertEqual(got["MCT Lifesciences Ltd"], {"Lot 3"})
+        self.assertEqual(got["Medtronic Limited"], {"Lot 1", "Lot 2"})
+        self.assertEqual(got["Procept Biorobotics"], {"Lot 3"})
+        self.assertEqual(got["CMR Surgical Ltd"], {"Lot 1"})
+
+    def test_the_cell_holding_the_lot_label_is_never_read_as_a_mark(self):
+        """A sheet that puts the lot heading in a DATA column: that text is the
+        heading, not a mark against the supplier whose column it lands in."""
+        rows = [["Specification", "Acme Ltd", "Beta Ltd"],
+                ["", "Lot 1 - Curtains", ""],
+                ["Cubicle curtains", "Yes", ""],
+                ["", "Lot 2 - Tracks", ""],
+                ["Cubicle tracks", "", "Yes"]]
+        got = L.parse_matrix_sections(rows, "Product Matrix")
+        self.assertEqual(got["Acme Ltd"], {"Lot 1"})
+        self.assertEqual(got["Beta Ltd"], {"Lot 2"})
+
     def test_lot_rows_reconcile_to_brief_numbering(self):
         titles = {"Lot 1.1": "Dialysis Consumables and Equipment", "Lot 2": "CRRT"}
         self.assertEqual(L.reconcile_lot("Lot 1 - Dialysis Consumables and Equipment", titles), "Lot 1.1")
@@ -104,6 +138,119 @@ class NameRule(unittest.TestCase):
         self.assertEqual(lots, {"B. Braun Medical Limited": ["Lot 1"]})
         self.assertEqual(sorted(u["name"] for u in unresolved),
                          ["Baxter Healthcare Ltd", "Blatchford Limted"])
+
+    # The territory tier fires only where the seed holds BOTH the source name
+    # and the chosen brief row VERBATIM on one record (18/11/2026 pm). These
+    # tests therefore hand attach_names() a real resolver rather than a stub, so
+    # that evidence exists; the tests below the guard check what happens without
+    # it.
+    CLINI_SEED = {"suppliers": [
+        {"name": "Clinisupplies",
+         "aliases": ["Clinisupplies Ltd", "Clinisupplies Limited"]},
+        {"name": "CliniMed", "aliases": ["CliniMed Ltd"]},
+    ]}
+
+    def test_territory_word_separates_two_real_companies_on_one_brief(self):
+        """NHS Supply Chain's Urology and Bowel Management brief names both
+        Clinisupplies Ltd (04013240) and Clinisupplies GB Limited (02503030) —
+        two real registrations. company_match.key() strips the territory word,
+        so the award notice's "Clinisupplies Limited" reaches both and the lots
+        were quarantined. The notice names 04013240, which the brief writes
+        "Clinisupplies Ltd"; keeping the territory word settles it, and the Hub
+        record holding both of those spellings verbatim is the evidence that it
+        is the right row."""
+        brief = ["Clinisupplies Ltd", "Clinisupplies GB Limited", "CliniMed Ltd"]
+        src = {"Clinisupplies Limited": {"Lot 1", "Lot 10"}}
+        lots, unresolved = L.attach_names(src, brief, L.resolver(self.CLINI_SEED))
+        self.assertEqual(lots, {"Clinisupplies Ltd": ["Lot 1", "Lot 10"]})
+        self.assertEqual(unresolved, [])
+
+    def test_the_gb_row_is_not_the_one_that_gains_the_lot(self):
+        """The failure this guards against is attaching to the WRONG one of the
+        two, which would publish 02503030's name against 04013240's award."""
+        brief = ["Clinisupplies Ltd", "Clinisupplies GB Limited"]
+        lots, _ = L.attach_names({"Clinisupplies Limited": {"Lot 2"}}, brief,
+                                 L.resolver(self.CLINI_SEED))
+        self.assertNotIn("Clinisupplies GB Limited", lots)
+
+    def test_the_gb_spelling_still_reaches_the_gb_row(self):
+        """The narrower tier must not rob the territory-bearing row of its own
+        awards: the notice spelling that carries GB resolves to it, once a record
+        holds those spellings."""
+        brief = ["Clinisupplies Ltd", "Clinisupplies GB Limited"]
+        seed = {"suppliers": [
+            {"name": "Clinisupplies", "aliases": ["Clinisupplies Ltd"]},
+            {"name": "Clinisupplies GB",
+             "aliases": ["Clinisupplies GB Ltd", "Clinisupplies GB Limited"]},
+        ]}
+        lots, unresolved = L.attach_names({"Clinisupplies GB Ltd": {"Lot 3"}},
+                                          brief, L.resolver(seed))
+        self.assertEqual(lots, {"Clinisupplies GB Limited": ["Lot 3"]})
+        self.assertEqual(unresolved, [])
+
+    def test_no_verbatim_evidence_leaves_the_name_quarantined(self):
+        """The Beverages/Nestle case, 18/11/2026 (pm). The brief names both
+        "Nestle Ltd" and "Nestle UK" and the notice names "Nestle UK Ltd", which
+        the territory tier narrows to the second row. But the only Nestle-keyed
+        Hub record holds a bare alias "nestle" and neither row verbatim, and
+        app/company-report.js renders a COMPANY, not a row: coKey() collapses
+        both rows onto that record, so attaching the lot asserted a beverages
+        Lot 1 and Lot 13 on the clinical nutrition arm's card. Without verbatim
+        evidence the name stays quarantined."""
+        brief = ["Nestle Ltd", "Nestle UK", "Nestle Waters & Healthy Beverages UK"]
+        seed = {"suppliers": [{"name": "Nestle Health Science UK",
+                               "aliases": ["nestle"]}]}
+        lots, unresolved = L.attach_names({"Nestle UK Ltd": {"Lot 1", "Lot 13"}},
+                                          brief, L.resolver(seed))
+        self.assertEqual(lots, {})
+        self.assertEqual([u["name"] for u in unresolved], ["Nestle UK Ltd"])
+        self.assertIn("matches 2 suppliers", unresolved[0]["reason"])
+
+    def test_verbatim_evidence_must_be_on_ONE_record(self):
+        """Evidence spread across two records is not evidence: it is the shape
+        the identity policy refuses — a shared name, not a shared registration."""
+        brief = ["Clinisupplies Ltd", "Clinisupplies GB Limited"]
+        seed = {"suppliers": [
+            {"name": "Alpha", "aliases": ["Clinisupplies Limited"]},
+            {"name": "Beta", "aliases": ["Clinisupplies Ltd"]},
+        ]}
+        lots, unresolved = L.attach_names({"Clinisupplies Limited": {"Lot 1"}},
+                                          brief, L.resolver(seed))
+        self.assertEqual(lots, {})
+        self.assertEqual([u["name"] for u in unresolved], ["Clinisupplies Limited"])
+
+    def test_a_plain_callable_caller_gets_no_tier(self):
+        """attach_names() reads the index off resolver()'s own function. A caller
+        that passes a bare callable still works, and attaches nothing on a tie —
+        the safe direction."""
+        brief = ["Clinisupplies Ltd", "Clinisupplies GB Limited"]
+        lots, unresolved = L.attach_names({"Clinisupplies Limited": {"Lot 1"}},
+                                          brief, lambda n: None)
+        self.assertEqual(lots, {})
+        self.assertEqual(len(unresolved), 1)
+
+    def test_published_rule_names_the_verbatim_condition(self):
+        self.assertIn("verbatim", L.RULE)
+        self.assertIn("never picked", L.RULE)
+
+    def test_a_tie_on_the_narrower_key_is_still_quarantined(self):
+        """Narrowing only. Where even the territory-keeping form reaches two
+        brief rows, the name is quarantined, never picked."""
+        brief = ["Acme Medical Ltd", "Acme Medical Limited"]
+        lots, unresolved = L.attach_names({"Acme Medical PLC": {"Lot 1"}}, brief,
+                                          lambda n: None)
+        self.assertEqual(lots, {})
+        self.assertEqual([u["name"] for u in unresolved], ["Acme Medical PLC"])
+        self.assertIn("matches 2 suppliers", unresolved[0]["reason"])
+
+    def test_the_narrower_tier_never_widens_an_unambiguous_miss(self):
+        """A source name that reached NO brief row must not now reach one: the
+        tier fires only where the wider key was ambiguous."""
+        brief = ["Blatchford Limited"]
+        lots, unresolved = L.attach_names({"Baxter Healthcare Ltd": {"Lot 1"}},
+                                          brief, lambda n: None)
+        self.assertEqual(lots, {})
+        self.assertEqual([u["name"] for u in unresolved], ["Baxter Healthcare Ltd"])
 
     def test_recorded_alias(self):
         brief = ["HARTMANN"]
@@ -230,11 +377,16 @@ class FindATender(unittest.TestCase):
         self.assertEqual(rec["lotsNotCovered"], [])
         self.assertEqual(rec["suppliersWithoutLot"], ["Other Ltd"])
 
-def run_gate(fw, lots_doc, js="function fwLotLine(){} lot not published by"):
+def run_gate(fw, lots_doc, js="function fwLotLine(){} lot not published by", seed=None):
     verify.fails.clear()
     verify.warns.clear()
-    verify.check_framework_lots({"frameworks": [fw]}, lots_doc, js)
+    verify.check_framework_lots({"frameworks": [fw]}, lots_doc, js, seed)
     return [m for c, m in verify.fails if c == "framework-lots"]
+
+
+def gate_warns(fw, lots_doc, seed=None):
+    run_gate(fw, lots_doc, seed=seed)
+    return [m for c, m in verify.warns if c == "framework-lots"]
 
 
 class Gate(unittest.TestCase):
@@ -274,6 +426,70 @@ class Gate(unittest.TestCase):
     def test_renderer_lost_empty_state(self):
         fails = run_gate(self.fw(), self.lots({"Acme Ltd": ["Lot 1"]}), js="nothing here")
         self.assertTrue(any("fwLotLine" in m for m in fails), fails)
+
+
+class UnresolvedCauses(unittest.TestCase):
+    """The warning on names that did not attach must split its three causes.
+
+    Added 17/11/2026. One warning counted 138 spellings across 42 frameworks and
+    told the reader to add an alias; only a minority of them could be fixed that
+    way. 86 resolved to no Hub record at all, 50 named a company the brief's own
+    supplier list omits (unreachable by any alias) and 2 were the brief's own
+    duplicate rows.
+    """
+    URL = "https://example/brief/"
+    SEED = {"suppliers": [{"name": "Beta Ltd"}, {"name": "Gamma Ltd"}]}
+
+    def doc(self, unresolved):
+        return {"frameworks": {self.URL: {"status": "published",
+                                          "supplierLots": {"Acme Ltd": ["Lot 1"]},
+                                          "unresolved": unresolved}}}
+
+    def fw(self):
+        return {"name": "Test FW", "url": self.URL, "suppliers": ["Acme Ltd", "Beta Ltd"],
+                "supplierSource": "count verified", "lotStatus": "published",
+                "supplierLots": {"Acme Ltd": ["Lot 1"]}}
+
+    UNRESOLVED = [
+        # no Hub record resolves to it at all -> a candidate new record
+        {"name": "Nowhere Foods Ltd", "lots": ["Lot 2"], "reason":
+         "no supplier on this brief normalises to it, and no recorded alias links it to one"},
+        # the Hub holds it, but it is not on this brief's supplier list
+        {"name": "Gamma Ltd", "lots": ["Lot 3"], "reason":
+         "no supplier on this brief normalises to it, and no recorded alias links it to one"},
+        # two brief rows reach one company
+        {"name": "Beta Limited", "lots": ["Lot 4"], "reason": "matches 2 suppliers on this brief"},
+    ]
+
+    def test_three_causes_three_warnings(self):
+        got = gate_warns(self.fw(), self.doc(self.UNRESOLVED), seed=self.SEED)
+        self.assertEqual(len(got), 3, got)
+        self.assertTrue(any("NO Hub supplier record" in m and "Nowhere Foods Ltd" in m for m in got), got)
+        self.assertTrue(any("not on the framework's own brief supplier list" in m
+                            and "Gamma Ltd" in m for m in got), got)
+        self.assertTrue(any("TWO OR MORE rows" in m and "Beta Limited" in m for m in got), got)
+        # the old single remedy must no longer be the answer given to all of them
+        self.assertFalse(any("NO Hub supplier record" in m and "alias in data/supplier-seed.json" in m
+                             for m in got), got)
+
+    def test_two_row_line_no_longer_says_de_duplicate_is_the_fix(self):
+        """18/11/2026 (pm). Neither brief's two rows is a duplicate — each names
+        two real companies and matches the page's own stated count — so the line
+        must point at the territory tier and the adjudication file instead."""
+        got = [m for m in gate_warns(self.fw(), self.doc(self.UNRESOLVED), seed=self.SEED)
+               if "TWO OR MORE rows" in m]
+        self.assertEqual(len(got), 1, got)
+        self.assertIn("two-brief-rows-one-key-adjudication-1118.json", got[0])
+        self.assertIn("verbatim", got[0])
+        self.assertIn("NOT the fix", got[0])
+
+    def test_without_a_seed_it_says_so_instead_of_guessing(self):
+        got = gate_warns(self.fw(), self.doc(self.UNRESOLVED))
+        self.assertEqual(len(got), 2, got)          # the ambiguous one still needs no seed
+        self.assertTrue(any("could not be told apart" in m for m in got), got)
+
+    def test_nothing_unresolved_warns_nothing(self):
+        self.assertEqual(gate_warns(self.fw(), self.doc([]), seed=self.SEED), [])
 
 
 if __name__ == "__main__":

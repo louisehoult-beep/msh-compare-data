@@ -118,6 +118,34 @@ class Extraction(unittest.TestCase):
     def test_deputy_is_not_the_role_holder(self):
         self.assertIsNone(w.role_family("Deputy Chief Medical Officer"))
 
+    # 21/10/2026: three layouts that read as zero executives before.
+    def test_card_header_heading_is_kept(self):
+        # Surrey and Sussex / Northamptonshire put each card's heading inside
+        # its own <header>; only a site banner <header> is dropped.
+        raw = ('<header class="site"><a href="/">Home</a><a href="/x">Chief Finance Officer</a></header>'
+               '<article><header class="item-headline"><h3>Allison Cannon, Chief Nursing Officer</h3>'
+               '</header><p>Allison qualified as a nurse in 1992.</p></article>')
+        lines = w.page_lines(raw)
+        self.assertIn("Allison Cannon, Chief Nursing Officer", lines)
+        self.assertNotIn("Home", lines)
+        self.assertEqual([(p["name"], p["family"]) for p in w.extract_people(lines)],
+                         [("Allison Cannon", "nursing")])
+
+    def test_name_colon_title(self):
+        # West and North London: "Jo Sauvage: Chief Medical Officer".
+        got = w.extract_people(["Dr Jo Sauvage: Chief Medical Officer"])
+        self.assertEqual([(p["name"], p["family"]) for p in got], [("Dr Jo Sauvage", "cmo")])
+
+    def test_own_icb_name_after_comma_is_not_a_partner(self):
+        # Greater Manchester: "Chief Finance Officer, NHS Greater Manchester".
+        self.assertEqual(w.role_family("Chief Finance Officer, NHS Greater Manchester"), "cfo")
+        self.assertIsNone(w.role_family("Chief Executive, Example NHS Foundation Trust"))
+        lines = ["NHS Greater Manchester Management Team",
+                 "Chief Finance Officer, NHS Greater Manchester", "Kathy Roe",
+                 "Chief Strategy Officer, NHS Greater Manchester", "Pat Example"]
+        self.assertEqual([(p["name"], p["family"]) for p in w.extract_people(lines)],
+                         [("Kathy Roe", "cfo")])
+
 
 DIG_A = {"name": "Pat Example", "title": "Chief Clinical Information Officer", "family": "digital"}
 DIG_B = {"name": "Robin Sample", "title": "Chief Clinical Information Officer", "family": "digital"}
@@ -241,11 +269,12 @@ class BlockedSource(unittest.TestCase):
         tmp = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False)
         json.dump(base, tmp); tmp.close()
         saved = (w.OUT, w.ods_icbs, w.nhse_leaders, w.nhse_statement, w.own_site_people,
-                 w.today, sys.argv)
+                 w.today, sys.argv, w.CLUSTER_WATCH)
         def blocked():
             raise w.SourceUnavailable("challenge page")
         try:
             w.OUT = tmp.name
+            w.CLUSTER_WATCH = tmp.name + ".no-cluster-watch"   # hermetic: not the repo's live cluster events
             w.ods_icbs = lambda: (live_rows(), [])
             w.nhse_leaders = blocked
             w.nhse_statement = blocked
@@ -256,7 +285,7 @@ class BlockedSource(unittest.TestCase):
             doc = json.load(open(tmp.name))
         finally:
             (w.OUT, w.ods_icbs, w.nhse_leaders, w.nhse_statement, w.own_site_people,
-             w.today, sys.argv) = saved
+             w.today, sys.argv, w.CLUSTER_WATCH) = saved
             os.unlink(tmp.name)
         self.assertEqual(len(doc["sourceErrors"]), 2)
         self.assertEqual(sorted(doc["sourceErrorsToday"]), ["leaders", "statement"])
@@ -307,6 +336,70 @@ class Gate(unittest.TestCase):
                                    "headline": "h", "detail": "d", "verifiedOn": "2026-09-30",
                                    "sources": ["https://example.nhs.uk/x.pdf"]})
         self.assertIn("future date", self.fails())
+
+
+DATED_CFG = {"icbs": {
+    "QUA": {"name": "Sam Older", "title": "Chief Digital and Information Officer",
+            "source": "https://example.icb.nhs.uk/papers/board-2024-07.pdf",
+            "document": "ICB Board minutes, 4 July 2024", "docDate": "2024-07-04",
+            "verifiedOn": "2026-10-21", "quote": "Sam Older, Chief Digital and Information Officer"},
+    "QHL": {"name": "Old Holder", "title": "Chief Information Officer",
+            "source": "https://example.icb.nhs.uk/papers/2023.pdf",
+            "document": "Board pack, March 2023", "docDate": "2023-03-01", "verifiedOn": "2026-10-21"},
+    "QOP": {"name": "Too Old", "title": "Chief Information Officer",
+            "source": "https://example.icb.nhs.uk/papers/2021.pdf",
+            "document": "CCG paper, 2021", "docDate": "2021-06-01", "verifiedOn": "2026-10-21"}}}
+
+
+class DatedDigitalLeads(unittest.TestCase):
+    """Lou, 21/10/2026: an ICB with no current digital lead shows the most recent one
+    its own papers named, starred and dated; never as current, never an event."""
+
+    def doc(self):
+        d = run({}, D1, own=own_with("QHL", [DIG_A]))
+        w.attach_dated_digital(d, DATED_CFG)
+        return {i["code"]: i for i in d["icbs"]}, d
+
+    def test_dated_attached_only_where_no_current_lead(self):
+        q, _ = self.doc()
+        self.assertEqual(q["QUA"]["digital"]["dated"]["name"], "Sam Older")
+        self.assertIsNot(q["QUA"]["digital"].get("published"), True)
+        # QHL publishes a current lead: the dated name is never shown beside it.
+        self.assertNotIn("dated", q["QHL"]["digital"])
+        # Before 2022: left blank.
+        self.assertNotIn("dated", q["QOP"]["digital"])
+
+    def test_dated_is_never_an_executive_or_an_event(self):
+        q, d = self.doc()
+        self.assertFalse([e for e in q["QUA"]["execs"] if e["name"] == "Sam Older"])
+        self.assertFalse([e for e in d["events"] if "Sam Older" in str(e)])
+
+    def test_gate_checks_dated_entries(self):
+        q, d = self.doc()
+        v.fails[:] = []
+        v.check_icb_watch(d, today_iso="2026-10-21")
+        self.assertEqual(" ".join(m for _, m in v.fails if "dated" in m), "")
+        q["QUA"]["digital"]["dated"]["docDate"] = "2019-01-01"
+        q["QUA"]["digital"]["dated"]["source"] = "http://insecure"
+        v.fails[:] = []
+        v.check_icb_watch(d, today_iso="2026-10-21")
+        msg = " ".join(m for _, m in v.fails)
+        self.assertIn("from 2022 onwards", msg)
+        self.assertIn("no https source", msg)
+        q["QHL"]["digital"]["dated"] = dict(DATED_CFG["icbs"]["QHL"])
+        v.fails[:] = []
+        v.check_icb_watch(d, today_iso="2026-10-21")
+        self.assertIn("only the current one may show", " ".join(m for _, m in v.fails))
+
+    def test_panel_lists_current_names_and_starred_dated(self):
+        import build_speciality_panels as bp
+        _, d = self.doc()
+        out = bp.build_digital_extras({"icb_watch": d})["icbDigital"]
+        self.assertEqual(out["published"], 1)
+        self.assertEqual(out["named"][0]["people"][0]["name"], "Pat Example")
+        self.assertEqual([x["name"] for x in out["dated"]], ["Sam Older"])
+        self.assertEqual(out["dated"][0]["docDate"], "2024-07-04")
+        self.assertEqual(out["none"], out["icbs"] - 2)
 
 
 if __name__ == "__main__":

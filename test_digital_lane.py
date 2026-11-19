@@ -237,5 +237,27 @@ class StoredFiles(unittest.TestCase):
         self.assertEqual(doc["label"], "Digital health and AI")
 
 
+class HealthTechCompanyDirectory(unittest.TestCase):
+    def test_recorded_facts_only(self):
+        import build_speciality_panels as b
+        idx = [
+            {"name": "Digi Ltd", "specialities": ["Digital health / AI"], "frameworks": [], "products": ["X"]},
+            {"name": "Fw Ltd", "specialities": ["Wound care"], "frameworks": [
+                {"name": "Technology Services 4", "url": "u", "lots": [{"lot": "1"}, {"lot": "5a"}]}]},
+            {"name": "Award Ltd", "specialities": [], "frameworks": []},
+            {"name": "Wound Ltd", "specialities": ["Wound care"], "frameworks": [
+                {"name": "Advanced Wound Care (NHS SBS)"}]},
+        ]
+        awards = {"companies": {"Award Ltd": [{"date": "2026-10-01", "clinical": True}]}}
+        out = b.build_health_tech_companies({"supplier_index": idx, "digital_awards": awards})
+        names = [r["name"] for r in out["items"]]
+        assert "Wound Ltd" not in names
+        assert set(names) == {"Digi Ltd", "Fw Ltd", "Award Ltd"}
+        fw = [r for r in out["items"] if r["name"] == "Fw Ltd"][0]
+        assert fw["frameworks"][0]["lots"] == ["1", "5a"]
+        assert fw["report"].startswith("/medical-sales-hub/company-report/?company=Fw%20Ltd")
+        assert out["counts"]["withDigitalAwards"] == 1
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)

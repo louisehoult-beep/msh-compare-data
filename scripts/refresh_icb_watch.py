@@ -96,6 +96,7 @@ from refresh_trusts import ICB as ICB_REGION          # noqa: E402  code -> (nam
 OUT = os.path.join(REPO, "data", "icb-watch.json")
 PAGES_CFG = os.path.join(REPO, "config", "icb-leadership-sources.json")
 CURATED_CFG = os.path.join(REPO, "config", "icb-watch-curated.json")
+DATED_CFG = os.path.join(REPO, "config", "icb-digital-dated.json")
 CLUSTER_WATCH = os.path.join(REPO, "data", "cluster-watch.json")
 
 ODS_LIST = ("https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations"
@@ -168,15 +169,40 @@ def iso(d):
     return d.isoformat()
 
 
-def fetch(url, timeout=40):
-    req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return r.read().decode("utf-8", "replace")
+def fetch(url, timeout=40, attempts=4):
+    """GET with retries. The ODS host intermittently drops the TLS handshake
+    (ssl.SSLEOFError, seen 02/11/2026 in the overnight run), which succeeds on a
+    retry. Certificate verification stays ON; only transient network errors
+    (SSL EOF, reset, timeout, URLError) are retried, with a growing pause."""
+    import ssl
+    import time
+    last = None
+    for i in range(attempts):
+        try:
+            req = urllib.request.Request(url, headers=UA)
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return r.read().decode("utf-8", "replace")
+        except urllib.error.HTTPError as e:
+            if e.code < 500 and e.code != 429:
+                raise                                   # a real 4xx is not transient
+            last = e
+        except (ssl.SSLError, urllib.error.URLError, ConnectionError,
+                TimeoutError, OSError) as e:
+            last = e
+        if i < attempts - 1:
+            time.sleep(2 * (i + 1))
+    raise last
 
 
 def page_lines(raw):
     """HTML -> list of visible text lines (block elements become breaks)."""
-    t = re.sub(r"(?is)<(script|style|noscript|svg|nav|footer|header)\b.*?</\1>", " ", raw)
+    t = re.sub(r"(?is)<(script|style|noscript|svg|nav|footer)\b.*?</\1>", " ", raw)
+    # A site banner <header> is dropped, but a card's own <header> holding its
+    # heading is kept: "<header class="item-headline"><h3>Allison Cannon, Chief
+    # Nursing Officer</h3></header>" (Surrey and Sussex, Northamptonshire).
+    t = re.sub(r"(?is)<header\b.*?</header>",
+               lambda m: m.group(0) if (re.search(r"<h[1-6]\b", m.group(0), re.I)
+                                        and len(m.group(0)) < 1500) else " ", t)
     t = re.sub(r"(?i)<br\s*/?>|</(p|div|li|h[1-6]|td|tr|dt|dd|span|a|strong|b)>", "\n", t)
     t = re.sub(r"<[^>]+>", " ", t)
     t = html.unescape(t).replace("\xa0", " ")
@@ -332,7 +358,9 @@ def role_family(title):
     # partner member whose own organisation follows the comma.
     if "," in title:
         suffix = title.split(",", 1)[1].strip()
-        if suffix and not OWN_ORG_SUFFIX.search(suffix):
+        # "Chief Finance Officer, NHS Greater Manchester": the ICB's own name
+        # (a trust's "NHS Foundation Trust" is caught by PARTNER above).
+        if suffix and not OWN_ORG_SUFFIX.search(suffix) and not re.match(r"NHS\b", suffix):
             return None
     fams = [fam for fam, rx in ROLE_FAMILIES if rx.search(title)]
     # "Chair and Chief Executive Officer" is a section heading, not a job title.
@@ -364,6 +392,13 @@ def extract_people(lines):
                      + POSTNOM + r")$", ln)
         if m and looks_like_person(m.group(2)) and role_family(m.group(1)):
             found.append((m.group(2).strip(), m.group(1).strip()))
+            continue
+        # "Jo Sauvage: Chief Medical Officer" (West and North London): the holder
+        # first, a colon, then the title.
+        m = re.match(r"^(" + HONORIFIC + NAMEPART + r"(?:\s+" + NAMEPART + r"){1,3}" + POSTNOM
+                     + r"):\s+(.{6,110})$", ln)
+        if m and looks_like_person(m.group(1)) and role_family(m.group(2)):
+            found.append((m.group(1).strip(), m.group(2).strip()))
             continue
         # "Nominated ICB Executive: Rosi Shepherd – Chief ..." — drop the label.
         one = re.sub(r"^[A-Z][\w ]{2,40}:\s+", "", ln)
@@ -506,6 +541,7 @@ def main():
     doc, new_count = build(prev, live, ended, leaders, leaders_updated, statement, own,
                            curated, today())
     doc["leadersCheckedOn"] = leaders_checked
+    attach_dated_digital(doc, load_json(DATED_CFG, {"icbs": {}}))
     merge_cluster_events(doc, load_json(CLUSTER_WATCH, {}))
     # Today's source problems, as a dict (configuration, not records).
     doc["sourceErrorsToday"] = errors
@@ -567,6 +603,28 @@ def digital_summary(rec, o, prev_digital, tiso):
     if prev_digital:
         return prev_digital
     return {"published": None, "titles": [], "sources": [], "readOn": None}
+
+
+DATED_FIELDS = ("name", "title", "source", "document", "docDate", "verifiedOn")
+
+
+def attach_dated_digital(doc, cfg):
+    """Lou's ruling, 21/10/2026: where an ICB names no digital lead on a current
+    page, show the most recent one its OWN board papers or news named (2022 on),
+    starred and dated, never as current. These come from config/icb-digital-dated.json
+    (each read by hand from the named document) and sit under digital.dated only:
+    never in execs, so they can never raise a leadership event. An ICB that does
+    publish a current digital lead shows that one and no dated name."""
+    for rec in doc.get("icbs") or []:
+        dig = rec.get("digital")
+        if dig is None:
+            continue
+        dig.pop("dated", None)
+        if dig.get("published") is True:
+            continue
+        d = (cfg.get("icbs") or {}).get(rec.get("code"))
+        if d and all(d.get(k) for k in DATED_FIELDS) and d["docDate"] >= "2022-01-01":
+            dig["dated"] = {k: d[k] for k in DATED_FIELDS}
 
 
 def build(prev, live, ended, leaders, leaders_updated, statement, own, curated, t):

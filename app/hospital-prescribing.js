@@ -158,7 +158,7 @@
       '<em>Brand vs generic</em> — ' + esc(IDX.rules.product) + '<br>' +
       '<em>Naming</em> — ' + esc(IDX.rules.label) + '<br>' +
       '<em>Change</em> — ' + esc(IDX.rules.trend) + '<br>' +
-      'Source: <a href="' + esc(src.url) + '" style="color:' + G + '">' + esc(src.name) +
+      'Source: <a href="' + esc(src.url) + '" style="color:#14304F;text-decoration:underline;text-underline-offset:2px">' + esc(src.name) +
       '</a>. ' + esc(src.attribution) + ' Built ' + esc(IDX.generatedOn) + '.' +
       '</div></div>';
   }

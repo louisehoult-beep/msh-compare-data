@@ -23,7 +23,7 @@ NEWS = os.path.join(HERE, "data", "speciality-news")
 JS = os.path.join(HERE, "app", "my-hub.js")
 
 ICONS_JS = os.path.join(HERE, "app", "hub-icons.js")
-ROLES = ["company", "rep", "clinical", "procurement", "recruit"]
+ROLES = ["company", "rep", "clinical", "procurement", "recruit", "innovator-early", "innovator-market"]
 
 # The Clinical Evidence Library's band ids (page 3791 opens on `#<band-id>`),
 # read from the live page's `.stab[data-band]` tabs on 30/09/2026

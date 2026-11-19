@@ -5,7 +5,9 @@ refresh_digital_frameworks.py - build data/digital-frameworks.json.
 Digital / technology frameworks a medical-sales rep may meet:
   live    Technology Services 4 (RM6190) and G-Cloud 15 (RM1557.15), Government
           Commercial Agency (GCA, formerly Crown Commercial Service, renamed
-          1 April 2026), read from gca.gov.uk.
+          1 April 2026), read from gca.gov.uk. The G-Cloud 15 supplier list
+          is the Digital Marketplace supplier A to Z (company names only; the
+          A to Z does not give lots, so G-Cloud 15 lot lists stay null).
   coming  Healthcare AI Solutions (NHS Shared Business Services, notice
           050314-2026) and the Digital Primary Care / GP IT open framework
           (NHS England, notice 094419-2026), read from the Find a Tender OCDS API.
@@ -40,7 +42,10 @@ OUT = os.path.join(ROOT, "data", "digital-frameworks.json")
 GCA = "https://www.gca.gov.uk"
 TS4_URL = GCA + "/agreements/RM6190"
 GC15_URL = GCA + "/agreements/RM1557.15"
-SUPPLIERS_URL = GCA + "/suppliers"
+DM = "https://www.applytosupply.digitalmarketplace.service.gov.uk"
+GC15_AZ = DM + "/g-cloud-15/suppliers"
+AZ_PREFIXES = [chr(c) for c in range(ord("A"), ord("Z") + 1)] + ["other"]
+AZ_MAX_PAGES = 40
 FTS_API = "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/"
 FTS_NOTICE = "https://www.find-tender.service.gov.uk/Notice/"
 UA = "Mozilla/5.0 (compatible; msh-compare-data digital-frameworks)"
@@ -86,13 +91,21 @@ def uk_date(s):
 
 def meta_field(txt, label):
     m = re.search(re.escape(label) + r":\s*\n?\s*([^\n]+)", txt)
+    if not m:
+        # 23/10/2026: gca.gov.uk dropped the colons ("Agreement ID" / value on the next line).
+        m = re.search(r"^" + re.escape(label) + r"[ \t]*\n\s*([^\n]+)", txt, re.M)
     return m.group(1).strip() if m else None
 
 
 def parse_agreement_header(page_html):
     txt = text_of(page_html)
+    ref = meta_field(txt, "Agreement number") or meta_field(txt, "Agreement ID")
+    if not ref:
+        # gca.gov.uk answers an outage with a redirect to an "unavailable" page, which
+        # reads as an empty agreement. Fail the run rather than overwrite good data.
+        raise RuntimeError("agreement page has no 'Agreement number' (site unavailable?)")
     return {
-        "reference": meta_field(txt, "Agreement number"),
+        "reference": ref,
         "start": uk_date(meta_field(txt, "Start date") or ""),
         "end": uk_date(meta_field(txt, "End date") or ""),
         "type": meta_field(txt, "Agreement type"),
@@ -142,6 +155,36 @@ def parse_supplier_csv(csv_text):
         if n:
             names.append(n)
     return sorted(set(names), key=str.casefold)
+
+
+def parse_dm_az(page_html):
+    """One page of a Digital Marketplace supplier A to Z: (company names, next href).
+    Only the supplier link text is read. The description under each name and the
+    supplier's own page (which carries a contact person, phone and email) are never
+    read or stored."""
+    names = [html.unescape(re.sub(r"\s+", " ", m)).strip() for m in
+             re.findall(r'<a class="govuk-link" href="/g-cloud-15/supplier/\d+">([^<]+)</a>',
+                        page_html)]
+    m = re.search(r'href="([^"]+)"\s+rel="next"', page_html)
+    return [n for n in names if n], (html.unescape(m.group(1)) if m else None)
+
+
+def read_gc15_az(fetcher):
+    """Every name on the G-Cloud 15 supplier A to Z, all prefixes and pages."""
+    names = set()
+    for prefix in AZ_PREFIXES:
+        url = "%s?prefix=%s" % (GC15_AZ, prefix)
+        for _ in range(AZ_MAX_PAGES):
+            got, nxt = parse_dm_az(fetcher(url))
+            names.update(got)
+            if not nxt:
+                break
+            url = DM + nxt
+        else:
+            raise RuntimeError("prefix %s ran past %d pages" % (prefix, AZ_MAX_PAGES))
+    if not names:
+        raise RuntimeError("the A to Z gave no supplier names")
+    return sorted(names, key=str.casefold)
 
 
 def ocds_money(v):
@@ -261,17 +304,15 @@ def build_gc15(fetcher, today):
         l["supplierCount"] = None
     suppliers = None
     try:
-        sup = fetcher(SUPPLIERS_URL)
-        if re.search(r"G-Cloud 15|RM1557\.15", sup):
-            nv.append("The GCA suppliers page mentions G-Cloud 15 but no export was parsed; "
-                      "settled by reading the G-Cloud 15 supplier list from the Digital Marketplace.")
-        else:
-            nv.append("Supplier list not verified: %s lists no G-Cloud 15 suppliers (only earlier "
-                      "G-Cloud lots at read time) and the agreement page has no supplier export. "
-                      "Settled by the G-Cloud 15 supplier list on the Digital Marketplace / GCA "
-                      "once published." % SUPPLIERS_URL)
+        suppliers = read_gc15_az(fetcher)
+        nv.append("Supplier list read from the Digital Marketplace G-Cloud 15 supplier A to Z "
+                  "(%s), company names only, %d suppliers. The A to Z does not say which lot "
+                  "each supplier holds, so every lot's list stays null; a supplier's lot is "
+                  "shown only where its own service page was read." % (GC15_AZ, len(suppliers)))
     except Exception as e:  # noqa: BLE001
-        nv.append("Supplier list not verified (%s unreachable: %s)." % (SUPPLIERS_URL, e))
+        nv.append("Supplier list not verified: the Digital Marketplace G-Cloud 15 supplier A to Z "
+                  "(%s) could not be read in full (%s). Settled by re-running when it is "
+                  "reachable." % (GC15_AZ, e))
     nv.append("Agreement end 05/02/2028 (page header) and 'run for 4 years from 6 August 2026, "
               "reopening after 18 months and again after 36 months' (page text) are both "
               "recorded verbatim and not resolved. Settled by the framework award form.")
@@ -289,6 +330,97 @@ def build_gc15(fetcher, today):
         "suppliers": suppliers,
         "verifiedOn": today,
         "sourceQuote": term,
+        "notVerified": nv,
+    }
+
+
+def build_gcloud_expired(fetcher, ref, name, today):
+    """An expired G-Cloud iteration, read from its own GCA agreement page.
+
+    WHY (16/11/2026). The Hub holds live frameworks because a live framework is a
+    route a rep can still use. An expired one matters for a different reason: a
+    call-off already running under it has a fixed end and no route forward on the
+    same agreement, which is exactly the renewal fact a rep needs. Medilogik's
+    Barnsley Hospital award is a G-Cloud 13 call-off ending 30/11/2026, and until
+    this record existed there was nothing for that award to point at.
+
+    Expired agreement pages carry no 'Products and suppliers' section, so lots and
+    supplier lists are honestly null, never []. The page's own Important banner and
+    Updates text are recorded verbatim; nothing about what replaces the agreement or
+    what happens to live call-offs is inferred here.
+    """
+    nv = []
+    url = GCA + "/agreements/" + ref
+    page = fetcher(url)
+    h = parse_agreement_header(page)
+    if h["reference"] and h["reference"] != ref:
+        raise RuntimeError("%s page states reference %r" % (ref, h["reference"]))
+    txt = h["text"]
+    lines = [re.sub(r"\s+", " ", l).strip() for l in txt.split("\n")]
+    lines = [l for l in lines if l]
+
+    expired = any(l.startswith("Expired agreement") for l in lines)
+    if not expired:
+        nv.append("The page does not carry the 'Expired agreement' banner on this run, so the "
+                  "closed status is Not verified. Settled by re-reading %s." % url)
+
+    # The sentences on the page that state this agreement's own end, what
+    # replaced it, and what happens to call-offs already signed under it.
+    # Read from the whole page joined into one string first: GCA breaks a
+    # sentence across block elements wherever it carries an inline link, so
+    # line-by-line matching returns sentences with the link text missing. Each
+    # pattern below captures a whole sentence, so the page's navigation and
+    # heading text (which carries no full stop) cannot be glued to the front
+    # of a quote.
+    joined = " ".join(lines)
+    patterns = [
+        r"Expired agreement\s*[-\u2013\u2014]\s*This information is for reference only",
+        r"RM\S+:\s*G-Cloud \d+ was replaced by RM\S+:\s*G-Cloud \d+\.",
+        r"Please be advised that G-Cloud \d+ expired on [^.]+?\.",
+        r"Existing G-Cloud \d+ call-off contracts signed prior to [^.]+?\.",
+        r"Work performed under G-Cloud \d+ cannot be transferred to [^.]+?\.",
+    ]
+    quotes = []
+    for pat in patterns:
+        for m in re.finditer(pat, joined):
+            q = re.sub(r"\s+", " ", m.group(0)).strip()
+            # The banner is rendered twice, once with and once without its full
+            # stop. One sentence, so it is stored once, punctuated.
+            if not q.endswith("."):
+                q += "."
+            # The banner's dash is a hyphen in one rendering and an en dash in
+            # the other. Same sentence, so it is kept once, as first read.
+            key = re.sub(r"[\u2013\u2014]", "-", q)
+            if key not in {re.sub(r"[\u2013\u2014]", "-", x) for x in quotes}:
+                quotes.append(q)
+    if not quotes:
+        nv.append("No sentence on the page states what replaced this agreement or what happens "
+                  "to call-offs already signed under it. Settled by re-reading %s." % url)
+
+    nv.append("Lots and supplier lists are not published on an expired agreement page, so both "
+              "stay null. A supplier's place on this agreement cannot be read from GCA now; it "
+              "is shown only where an award notice names the agreement as its route.")
+    nv.append("Whether an individual call-off under this agreement was extended beyond the term "
+              "its own notice states is not published anywhere this Hub can read. Settled by the "
+              "buyer.")
+
+    return {
+        "name": name,
+        "reference": h["reference"] or ref,
+        "owner": "Government Commercial Agency (GCA), formerly Crown Commercial Service",
+        "url": url,
+        "status": "expired" if expired else "not verified",
+        "starts": h["start"],
+        "ends": h["end"],
+        "agreementType": h["type"],
+        "term": None,
+        "lots": [],
+        "suppliers": None,
+        "callOffRule": ("A call-off already signed under this agreement runs to its own end date. "
+                        "The agreement itself is closed, so no new call-off can be made from it "
+                        "and nothing on it rolls forward."),
+        "verifiedOn": today,
+        "sourceQuote": " ".join(quotes) or None,
         "notVerified": nv,
     }
 
@@ -496,6 +628,12 @@ def build_extras(fetcher, today):
             lambda: build_sbs_page_only(fetcher, "tech-devices-link-4", "Tech Devices", today))
     attempt("NHS SBS Digital Health Advisory (SBS10225)", SBS + "digital-health-advisory/",
             lambda: build_sbs_page_only(fetcher, "digital-health-advisory", "Digital Health Advisory", today))
+    attempt("GCA G-Cloud 12 (RM1557.12), expired", GCA + "/agreements/RM1557.12",
+            lambda: build_gcloud_expired(fetcher, "RM1557.12", "G-Cloud 12", today))
+    attempt("GCA G-Cloud 13 (RM1557.13), expired", GCA + "/agreements/RM1557.13",
+            lambda: build_gcloud_expired(fetcher, "RM1557.13", "G-Cloud 13", today))
+    attempt("GCA G-Cloud 14 (RM1557.14), expired", GCA + "/agreements/RM1557.14",
+            lambda: build_gcloud_expired(fetcher, "RM1557.14", "G-Cloud 14", today))
     attempt("HealthTrust Europe Digital Pathology 2024 Framework", FTS_NOTICE + "058054-2026",
             lambda: build_award(fetcher, "058054-2026", "Digital Pathology 2024 Framework (HealthTrust Europe)",
                                 "HealthTrust Europe LLP", today, None,

@@ -90,6 +90,68 @@ rc, out, after = run(BULK + [row("ev-bad", "not-a-date")])
 case("a malformed date is left alone — verify.py has the better message for it",
      rc == 0 and "ev-bad" in ids(after))
 
+# --- multi-day rows: judged on FINISHING, not on STARTING ------------------
+# Added 16/11/2026. The pruner judged on `date` alone, so a conference that had
+# started but not finished was deleted while the gate rightly kept it — silent
+# data loss on a members' page. Due to fire 17/11/2026 on COMPAMED, MEDICA and
+# Hospice UK National, all running 16-19 November. verify.py had the identical
+# bug, fixed 12/09/2026 on ev-dukes-club-2026; the fix was never mirrored here.
+rc, out, after = run(BULK + [row("ev-in-progress", d(-1), endDate=d(2))])
+case("a multi-day row that has STARTED but not FINISHED is kept",
+     rc == 0 and "ev-in-progress" in ids(after))
+
+rc, out, after = run(BULK + [row("ev-ends-today", d(-3), endDate=d(0))])
+case("a multi-day row ending today is kept — its last day is not past",
+     rc == 0 and "ev-ends-today" in ids(after))
+
+rc, out, after = run(BULK + [row("ev-finished", d(-5), endDate=d(-1))])
+case("a multi-day row that has FINISHED is dropped",
+     rc == 0 and "ev-finished" not in ids(after))
+
+rc, out, after = run(BULK + [row("aw-week", d(-2), kind="awareness", endDate=d(4))])
+case("an awareness week part-way through is kept, not deleted mid-week",
+     rc == 0 and "aw-week" in ids(after))
+
+rc, out, after = run(BULK + [row("ev-bad-end", d(-1), endDate="not-a-date")])
+case("a malformed endDate is left alone — verify.py has the better message",
+     rc == 0 and "ev-bad-end" in ids(after))
+
+# The pruner must never disagree with the gate about a row. This checks the two
+# rules against each other directly rather than trusting that they were both
+# edited: a row the gate would ACCEPT must never be one the pruner DROPS.
+sys.path.insert(0, os.path.join(HERE, "scripts"))
+import prune_calendar as _pc  # noqa: E402
+
+_HORIZON = TODAY - datetime.timedelta(days=_pc.RECENT_PAST_DAYS)
+
+
+def gate_accepts(e):
+    """verify.py check_calendar's past-date rule, transcribed."""
+    end = e.get("endDate")
+    effective_end = end or e["date"]
+    if effective_end >= TODAY.isoformat():
+        return True
+    return e.get("type") == "framework-end" and bool(e.get("past"))
+
+
+disagreements = []
+for _kind in ("event", "awareness", "framework-start", "framework-end"):
+    for _start in (-200, -95, -89, -5, -1, 0, 1, 30):
+        for _span in (None, 0, 1, 3, 7):
+            _e = row("probe", d(_start), _kind,
+                     **({"endDate": d(_start + _span)} if _span is not None else {}))
+            _keep, _mut, _ = _pc.decide(dict(_e), TODAY, _HORIZON)
+            if gate_accepts(_e) and not _keep:
+                disagreements.append((_kind, _start, _span, "gate keeps, pruner drops"))
+            # And the converse: a row the pruner keeps must leave the gate happy.
+            if _keep and not gate_accepts(_mut):
+                disagreements.append((_kind, _start, _span, "pruner keeps, gate rejects"))
+
+case("pruner and gate agree on every (type, start, span) probe — %d cases"
+     % (4 * 8 * 5), not disagreements)
+for _d in disagreements[:10]:
+    print("        disagreement:", _d)
+
 # --- honesty ---------------------------------------------------------------
 rc, out, after = run(BULK + [row("fw-start-y", d(-1), "framework-start")])
 case("dataAsOf is NOT bumped — pruning reads no sources, so it may not claim freshness",
@@ -130,4 +192,4 @@ if FAILURES:
     for f in FAILURES:
         print("   ", f)
     sys.exit(1)
-print("PRUNER HOLDS — %d case(s) run." % 14)
+print("PRUNER HOLDS — %d case(s) run." % 20)

@@ -1,0 +1,6 @@
+<!-- wp:html -->
+<!-- ICB pack for dermatology emollients (/medical-sales-hub/icb-pack/). Paste as the whole page body, exactly as here: the wp:html wrapper and no blank lines inside it stop WordPress adding paragraph tags. Every figure is drawn at load from data/icb-pack/ by app/icb-pack.js. Create as a CHILD of page 675 before publishing, set the five Hub plan ticks, run Hub/check_hub_page.py (CLAUDE.md rule 7). -->
+<div class="msh-icbp"><div id="msh-icb-pack"></div>
+<script>(function(){function go(){fetch('https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/app/icb-pack.js',{cache:'no-cache'}).then(function(r){if(!r.ok){throw new Error(r.status);}return r.text();}).then(function(s){(new Function(s))();}).catch(function(){var m=document.getElementById('msh-icb-pack');if(m){m.innerHTML='The ICB pack is temporarily unavailable. Please try again shortly.';}});}if(document.readyState==='complete'){go();}else{window.addEventListener('load',go);}})();</script>
+</div>
+<!-- /wp:html -->

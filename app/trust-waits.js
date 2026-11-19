@@ -162,7 +162,7 @@
     foot.style.cssText = 'margin-top:12px;padding-top:10px;border-top:1px solid ' + LINE + ';font-size:12px;color:' + MUTED + ';line-height:1.6;';
     foot.innerHTML =
       'Source: ' + (rtt.url
-        ? '<a href="' + esc(rtt.url) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';">' + esc(rtt.label || 'NHS England RTT waiting times') + '</a>'
+        ? '<a href="' + esc(rtt.url) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;">' + esc(rtt.label || 'NHS England RTT waiting times') + '</a>'
         : esc(rtt.label || 'NHS England RTT waiting times'))
       + ', period ' + esc(period) + '. Snapshot taken into the Hub on ' + esc(asOf) + '. '
       + 'Trusts NHS England does not publish a ' + esc(rttKey) + ' median for are not listed.';

@@ -37,10 +37,32 @@ name: Prune the Hub calendar (drop rows that aged into the past)
 
 on:
   schedule:
-    # 01:50 UTC daily — 30 minutes ahead of supplier-capture.yml at 02:20, which
-    # is the earliest daily writer. The calendar must be clean before anything
-    # else reaches the gate, or they all fail on it exactly as they did on 25/08.
-    - cron: "50 1 * * *"
+    # 00:20 UTC daily — AHEAD OF EVERY OTHER CRON IN THIS REPO. The calendar must
+    # be clean before anything else reaches the gate, or they all fail on it
+    # exactly as they did on 25/08.
+    #
+    # Was 01:50, on the belief that supplier-capture.yml at 02:35 was the earliest
+    # daily writer. It is not. Three writers have earlier crons and therefore
+    # landed ahead of the pruner every single day: atamis-opportunities 00:40,
+    # acquirer-press 01:10, company-press 01:40. Corrected 16/11/2026.
+    #
+    # GitHub does not deliver these crons on time on this repo — it runs them
+    # hours late, and how late varies by the day (scripts/gate.sh records 06:47
+    # to 13:23; push-alerts.yml records the same problem). The ORDER, though,
+    # held across every daily workflow when it was measured on 16/11/2026:
+    # 00:40 ran 07:17, 01:10 ran 07:56, 01:40 ran 08:33, 01:50 ran 08:37,
+    # 02:35 ran 10:07, 03:55 ran 12:07, 05:20 ran 13:46. Earliest cron, first to
+    # run. So moving the cron is what buys the ordering; chasing the clock would
+    # not. One day's measurement is not a guarantee, which is why this workflow
+    # is the BACKSTOP and not the mechanism — see the next paragraph.
+    #
+    # WHAT ACTUALLY STOPS THE OUTAGE is scripts/gate.sh, added 28/09/2026: every
+    # writer prunes immediately before running its own gate, so whichever job
+    # GitHub happens to start first cleans the calendar for itself and the
+    # timing cannot race. This workflow exists to COMMIT the prune on a quiet
+    # day when no other writer has anything to push. Keeping it first in the
+    # order is still worth having; relying on it alone is what failed on 25/08.
+    - cron: "20 0 * * *"
   workflow_dispatch:
 
 concurrency:

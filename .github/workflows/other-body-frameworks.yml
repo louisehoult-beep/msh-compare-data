@@ -1,0 +1,55 @@
+name: Other-body frameworks re-read at source
+
+# Added 22/10/2026. Page 3198's Frameworks directory renders NHS Supply Chain rows
+# live, but the rows run by other bodies (NHS Shared Business Services, Government
+# Commercial Agency, NHS London Procurement Partnership) live by hand in
+# data/framework-directory-extra.json. Lou: the page must not go out of date.
+# This re-reads each row's own source page every day and compares the reference,
+# start and end date it states. On a disagreement it fails (GitHub failure email
+# for github-actions-triage + phone alert) and opens or updates one issue holding
+# the exact text read and the one-command fix (--apply in a begin.sh clone).
+# Read-only on the repo: it commits nothing, so it needs no place in the writer
+# queue. A site's own outage page counts as unreachable, never as a change.
+# Rules and parsers: scripts/check_other_body_frameworks.py.
+# Test: test_other_body_frameworks.py.
+
+on:
+  schedule:
+    - cron: "20 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Re-read every other-body framework at its source
+        id: check
+        run: python3 scripts/check_other_body_frameworks.py --report other-body-report.md
+      - name: Open or update the issue with the exact text read
+        if: failure() && hashFiles('other-body-report.md') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [ -s other-body-report.md ] || exit 0
+          TITLE="Frameworks directory: other-body rows disagree with their source"
+          NUM=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$NUM" ]; then
+            gh issue comment "$NUM" --repo "$GITHUB_REPOSITORY" --body-file other-body-report.md
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --body-file other-body-report.md
+          fi
+      - name: Phone alert if a framework row disagrees with its source (ntfy)
+        if: failure()
+        run: |
+          curl -s -H "Title: Medical Sales Hub - framework row out of date" -H "Priority: default" -H "Tags: warning" \
+            -d "An other-body framework on the Frameworks directory no longer matches its source page. Exact text and fix in the open issue: github.com/louisehoult-beep/msh-compare-data/issues" \
+            ntfy.sh/eth-hub-lou-4437

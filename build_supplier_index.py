@@ -170,10 +170,50 @@ def verified_news(name):
     return out[:NEWS_KEEP]
 
 def build_alias_lookup(suppliers):
-    lut = {}
+    """Resolve a raw name to a canonical supplier, strongest evidence first.
+
+    THE BLEED THIS FIXES, found 18/11/2026. The old body wrote norm() and
+    norm_co() keys for every name and alias in one pass, last writer winning. So
+    a LOOSE key derived from one supplier's alias could overwrite the EXACT key
+    that was another supplier's own canonical name. In the shipped seed that
+    happened once and it cost an award:
+
+        "Uniphar Medtech"                                    norm    -> uniphar medtech
+        "Uniphar Medtech UK Ltd"   (an alias of the merged
+         Cardiac Services / Synapse Medical record)          norm_co -> uniphar medtech
+
+    norm_co() strips "uk" and "ltd", so the alias collided with the other
+    company's real name and, being written later, won. The award on "Uniphar
+    Medtech" was then carried forward onto the Cardiac Services record, while the
+    "Uniphar Medtech" record stayed in the build holding nothing — which is a
+    supplier losing a published award, so check_supplier_index_awards() turned
+    the 18/11/2026 refresh red and the Compare tab froze. The gate was right.
+
+    Precedence, strongest first. A tier never overwrites a tier above it, and
+    within a tier the first writer wins, because a later equal-strength claim is
+    not better evidence — it is just later:
+
+        1. norm(own name)      a supplier's own name, spelled exactly
+        2. norm(alias)         a declared alias, spelled exactly
+        3. norm_co(own name)   a supplier's own name, suffixes stripped
+        4. norm_co(alias)      a declared alias, suffixes stripped
+
+    Tier 1 is the invariant that matters: a name that IS a supplier's canonical
+    name must always resolve to that supplier. test_supplier_index_awards.py
+    asserts it over the real seed, so a future alias cannot quietly take a
+    canonical name away from its owner again.
+    """
+    tiers = [{}, {}, {}, {}]
     for s in suppliers:
-        for a in ([s["name"]] + s.get("aliases", [])):
-            lut[norm(a)] = s["name"]; lut[norm_co(a)] = s["name"]
+        name = s["name"]
+        tiers[0].setdefault(norm(name), name)
+        tiers[2].setdefault(norm_co(name), name)
+        for a in s.get("aliases", []):
+            tiers[1].setdefault(norm(a), name)
+            tiers[3].setdefault(norm_co(a), name)
+    lut = {}
+    for t in reversed(tiers):          # weakest first, so stronger tiers overwrite
+        lut.update(t)
     return lut
 
 def split_companies(raw_name, alias_lut):
@@ -299,7 +339,22 @@ def main():
     prev = load(INDEX, {"suppliers": []})
     by_name = {}
     for s in seed.get("suppliers", []):
-        s.setdefault("awards", []); s.setdefault("news", []); s["curated"] = True
+        # alerts/frameworks/products are setdefault'ed for the same reason as
+        # awards and news: later sections subscript them directly (rec["alerts"]
+        # at the recall merge and at the sort before writing), so a seed record
+        # that simply omits an empty list takes the whole build down.
+        #
+        # THE MISS THIS CAUSED, 18/11/2026. "Clinisupplies GB Limited" was added
+        # to the seed at 13:26 without an `alerts` key. The next run raised
+        # KeyError('alerts') on the sort, __main__ logged "FATAL (exit 0 to keep
+        # Actions green)" and exited 0, so data/supplier-index.json was never
+        # written and the workflow reported SUCCESS. The Compare tab kept serving
+        # the previous day's index while looking current. Only `awards` and `news`
+        # were defaulted here, so every other list was one hand-written seed entry
+        # away from the same silent miss.
+        for _k in ("alerts", "awards", "news", "frameworks", "products"):
+            s.setdefault(_k, [])
+        s["curated"] = True
         by_name[s["name"]] = json.loads(json.dumps(s))
     prev_news = {}
     # Carry forward auto-detected records from the last build — but re-test each
@@ -373,6 +428,10 @@ def main():
                 _fold(by_name[canonical], s)
                 merged.append("%s -> %s" % (s["name"], canonical))
                 continue
+            # Same defaulting as the seed load above: this record comes straight
+            # out of the previous index and is subscripted by later sections.
+            for _k in ("alerts", "awards", "news", "frameworks", "products"):
+                s.setdefault(_k, [])
             by_name[s["name"]] = s
     for name in dropped:
         print("dropped carried-forward multi-company record: %s" % name)
@@ -537,7 +596,12 @@ def main():
     out = {"dataAsOf": datetime.date.today().strftime("%d/%m/%Y"),
            "generated": datetime.datetime.utcnow().isoformat() + "Z",
            "note": "Curated core + auto-detected medical award winners (Contracts Finder CPV 33*) + live recalls + news corroborated by >=2 reputable sources. Auto items: verify at source.",
-           "suppliers": sorted(by_name.values(), key=lambda s: s["name"].lower())}
+           # A seed record carrying `heldOffHub` (Lou's ruling, ^o639, 19/11/2026)
+           # stays in by_name above so its aliases still absorb matching raw names
+           # (no auto-detected twin appears), but is never written to the index,
+           # so it reaches no Hub page until the hold is lifted in the seed.
+           "suppliers": sorted((s for s in by_name.values() if not s.get("heldOffHub")),
+                               key=lambda s: s["name"].lower())}
     redact_obj(out)
     INDEX.write_text(json.dumps(out, ensure_ascii=False, indent=1))
     STATE.parent.mkdir(exist_ok=True)

@@ -1,0 +1,5017 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "ref": "ETH-D79A42585",
+  "contact": "contact@elevateandthrive.uk"
+ },
+ "generated": "2026-11-16",
+ "dataAsOf": "16/11/2026",
+ "source": "Joint Advisory Group on GI Endoscopy (JAG), participating services register",
+ "sourceUrl": "https://app.thejag.org.uk/RegisteredUnits.aspx",
+ "sourceLandingUrl": "https://www.thejag.org.uk/about/participating-services/",
+ "rule": "One row on JAG's participating services register is one endoscopy SERVICE, not one trust. A trust running several services can hold several different statuses, so a trust's entry below carries its services and a count of each status it holds, never a single badge for the organisation. Every status is JAG's own word, read at https://app.thejag.org.uk/RegisteredUnits.aspx on the read date; the register has no feed and no publication date, so that date is the only date there is. Organisation names join to data/trust-map.json (NHS ODS) by exact match after normalising case, apostrophes and '&', plus two named expansions recorded under aliases. Nothing is fuzzy matched: an organisation that does not join is listed under unmatched with its services. A trust absent from the register is absent from JAG's list on the read date, which is a statement about the list and not about the trust.",
+ "statusValues": [
+  "Accredited",
+  "Deferred",
+  "Not awarded",
+  "Undergoing JAG onsite assessment",
+  "Undergoing self-assessment/not assessed"
+ ],
+ "unknownStatuses": [],
+ "aliases": [
+  {
+   "registerName": "cardiff and vale university health board",
+   "odsName": "Cardiff & Vale University Local Health Board",
+   "why": "A spelling difference, not a resemblance: the register omits the word Local that ODS and the board's own registration keep."
+  },
+  {
+   "registerName": "isle of wight nhs foundation trust",
+   "odsName": "Isle of Wight NHS Trust",
+   "why": "The register calls it a Foundation Trust. It is not one: ODS, and the trust's own name, are Isle of Wight NHS Trust."
+  }
+ ],
+ "summary": {
+  "services": 511,
+  "byStatus": {
+   "Accredited": 209,
+   "Deferred": 34,
+   "Not awarded": 26,
+   "Undergoing JAG onsite assessment": 35,
+   "Undergoing self-assessment/not assessed": 207
+  },
+  "byCountry": {
+   "England": {
+    "services": 384,
+    "Accredited": 185,
+    "Deferred": 30,
+    "Not awarded": 14,
+    "Undergoing JAG onsite assessment": 32,
+    "Undergoing self-assessment/not assessed": 123
+   },
+   "Isle of Man": {
+    "services": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "Northern Ireland": {
+    "services": 15,
+    "Not awarded": 3,
+    "Undergoing self-assessment/not assessed": 12
+   },
+   "Republic of Ireland": {
+    "services": 45,
+    "Accredited": 17,
+    "Deferred": 4,
+    "Not awarded": 6,
+    "Undergoing JAG onsite assessment": 1,
+    "Undergoing self-assessment/not assessed": 17
+   },
+   "Scotland": {
+    "services": 43,
+    "Accredited": 4,
+    "Undergoing JAG onsite assessment": 1,
+    "Undergoing self-assessment/not assessed": 38
+   },
+   "Wales": {
+    "services": 23,
+    "Accredited": 3,
+    "Not awarded": 3,
+    "Undergoing JAG onsite assessment": 1,
+    "Undergoing self-assessment/not assessed": 16
+   }
+  },
+  "englandByRegion": {
+   "East of England": {
+    "services": 42,
+    "Accredited": 23,
+    "Deferred": 4,
+    "Not awarded": 3,
+    "Undergoing JAG onsite assessment": 1,
+    "Undergoing self-assessment/not assessed": 11
+   },
+   "London": {
+    "services": 74,
+    "Accredited": 30,
+    "Deferred": 4,
+    "Not awarded": 3,
+    "Undergoing JAG onsite assessment": 10,
+    "Undergoing self-assessment/not assessed": 27
+   },
+   "Midlands": {
+    "services": 60,
+    "Accredited": 31,
+    "Deferred": 6,
+    "Not awarded": 1,
+    "Undergoing JAG onsite assessment": 4,
+    "Undergoing self-assessment/not assessed": 18
+   },
+   "North East and Yorkshire": {
+    "services": 50,
+    "Accredited": 22,
+    "Deferred": 4,
+    "Not awarded": 3,
+    "Undergoing JAG onsite assessment": 5,
+    "Undergoing self-assessment/not assessed": 16
+   },
+   "North West": {
+    "services": 51,
+    "Accredited": 26,
+    "Deferred": 3,
+    "Not awarded": 2,
+    "Undergoing JAG onsite assessment": 1,
+    "Undergoing self-assessment/not assessed": 19
+   },
+   "South East": {
+    "services": 61,
+    "Accredited": 32,
+    "Deferred": 2,
+    "Not awarded": 1,
+    "Undergoing JAG onsite assessment": 3,
+    "Undergoing self-assessment/not assessed": 23
+   },
+   "South West": {
+    "services": 44,
+    "Accredited": 21,
+    "Deferred": 7,
+    "Not awarded": 1,
+    "Undergoing JAG onsite assessment": 8,
+    "Undergoing self-assessment/not assessed": 7
+   },
+   "Unknown region": {
+    "services": 2,
+    "Undergoing self-assessment/not assessed": 2
+   }
+  }
+ },
+ "counts": {
+  "services": 511,
+  "organisations": 233,
+  "trustsJoined": 133,
+  "trustsInMap": 212,
+  "servicesJoined": 222,
+  "unmatchedOrganisations": 100
+ },
+ "unmatched": [
+  {
+   "organisation": "Alimentary Solutions Limited",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Amnch Tallaght",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Bantry General Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Beacon Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "Beacon Medical Services Group Limited",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "Beaumont Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Deferred": 1
+   }
+  },
+  {
+   "organisation": "Belfast Health & Social Care Trust",
+   "country": "Northern Ireland",
+   "services": 3,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 3
+   }
+  },
+  {
+   "organisation": "Benenden Hospital",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "Blackrock Health",
+   "country": "Republic of Ireland",
+   "services": 2,
+   "statuses": {
+    "Accredited": 2
+   }
+  },
+  {
+   "organisation": "Blackrock Health Hermitage Clinic",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "Bon Secours Health System",
+   "country": "Republic of Ireland",
+   "services": 4,
+   "statuses": {
+    "Accredited": 2,
+    "Undergoing JAG onsite assessment": 1,
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Bupa Group",
+   "country": "England",
+   "services": 2,
+   "statuses": {
+    "Deferred": 1,
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Cavan General Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Not awarded": 1
+   }
+  },
+  {
+   "organisation": "Cedar Park Healthcare",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Charter Medical Services",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "Chartwell Private Hospitals Ltd",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Not awarded": 1
+   }
+  },
+  {
+   "organisation": "Chase Lodge Health LTD",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Circle Health Group Limited",
+   "country": "Scotland",
+   "services": 40,
+   "statuses": {
+    "Accredited": 28,
+    "Undergoing JAG onsite assessment": 9,
+    "Undergoing self-assessment/not assessed": 3
+   }
+  },
+  {
+   "organisation": "Cleveland Clinic London, Ltd",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "Community Health and Eyecare Ltd",
+   "country": "England",
+   "services": 7,
+   "statuses": {
+    "Accredited": 3,
+    "Undergoing self-assessment/not assessed": 4
+   }
+  },
+  {
+   "organisation": "Connolly Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Deferred": 1
+   }
+  },
+  {
+   "organisation": "Cora Health Diagnostics",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "Cork University Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Deferred": 1
+   }
+  },
+  {
+   "organisation": "Eastwood Endoscopy Centre",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "Endocare Diagnostics",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Epsomedical Group",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Deferred": 1
+   }
+  },
+  {
+   "organisation": "Galway University Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Not awarded": 1
+   }
+  },
+  {
+   "organisation": "HCA International",
+   "country": "England",
+   "services": 5,
+   "statuses": {
+    "Accredited": 3,
+    "Deferred": 1,
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Hillsborough Private Clinic",
+   "country": "Northern Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Inhealth Limited",
+   "country": "England",
+   "services": 7,
+   "statuses": {
+    "Accredited": 4,
+    "Undergoing self-assessment/not assessed": 3
+   }
+  },
+  {
+   "organisation": "Isle of Man Secondary Health Care Directorate",
+   "country": "Isle of Man",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Kims Hospital",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Kingsbridge Diagnostics & Treatment Centre",
+   "country": "Northern Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Letterkenny General Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Not awarded": 1
+   }
+  },
+  {
+   "organisation": "Louth County Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "Lycahealth Limited",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Undergoing JAG onsite assessment": 1
+   }
+  },
+  {
+   "organisation": "Mallow General Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Mater Misericordiae University Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "Mayo Clinic Healthcare",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Mercy University Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Mid-Western Regional Hospital Ennis",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Not awarded": 1
+   }
+  },
+  {
+   "organisation": "Mid-Western Regional Hospital Nenagh",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Midlands Regional Hospital, Mullingar",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Midlands Regional Hospital, Tullamore",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Not awarded": 1
+   }
+  },
+  {
+   "organisation": "Monaghan Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "NHS Ayrshire & Arran",
+   "country": "Scotland",
+   "services": 2,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 2
+   }
+  },
+  {
+   "organisation": "NHS Borders",
+   "country": "Scotland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "NHS Dumfries & Galloway",
+   "country": "Scotland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "NHS Fife",
+   "country": "Scotland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "NHS Forth Valley",
+   "country": "Scotland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "NHS Grampian",
+   "country": "Scotland",
+   "services": 3,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 3
+   }
+  },
+  {
+   "organisation": "NHS Greater Glasgow And Clyde",
+   "country": "Scotland",
+   "services": 9,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 9
+   }
+  },
+  {
+   "organisation": "NHS Highland",
+   "country": "Scotland",
+   "services": 4,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing self-assessment/not assessed": 3
+   }
+  },
+  {
+   "organisation": "NHS Lanarkshire",
+   "country": "Scotland",
+   "services": 3,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 3
+   }
+  },
+  {
+   "organisation": "NHS Lothian",
+   "country": "Scotland",
+   "services": 6,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 6
+   }
+  },
+  {
+   "organisation": "NHS Orkney",
+   "country": "Scotland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "NHS Shetland",
+   "country": "Scotland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "NHS Tayside",
+   "country": "Scotland",
+   "services": 3,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 3
+   }
+  },
+  {
+   "organisation": "NHS Western Isles",
+   "country": "Scotland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Naas General Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "National Waiting Times Centre",
+   "country": "Scotland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Nexendo Healthcare",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "Northern Health & Social Care Trust",
+   "country": "Northern Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Nuffield Health",
+   "country": "Scotland",
+   "services": 30,
+   "statuses": {
+    "Accredited": 15,
+    "Deferred": 2,
+    "Undergoing JAG onsite assessment": 2,
+    "Undergoing self-assessment/not assessed": 11
+   }
+  },
+  {
+   "organisation": "OSD Healthcare",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "OneWelbeck Endoscopy Centre",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "OneWelbeck Surgery Centre",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Our Lady Of Lourdes, Drogheda",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Phoenix Health Solutions Limited HQ",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Undergoing JAG onsite assessment": 1
+   }
+  },
+  {
+   "organisation": "Phoenix Hospital Group",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Portiuncula Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Practice Plus Group Holdings",
+   "country": "England",
+   "services": 8,
+   "statuses": {
+    "Accredited": 5,
+    "Undergoing JAG onsite assessment": 2,
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Ramsay Health Care UK Operations Limited",
+   "country": "England",
+   "services": 23,
+   "statuses": {
+    "Accredited": 21,
+    "Deferred": 1,
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Roscommon University Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Deferred": 1
+   }
+  },
+  {
+   "organisation": "Saolta Healthcare Group",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Sligo University Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "South Eastern Health & Social Care Trust",
+   "country": "Northern Ireland",
+   "services": 3,
+   "statuses": {
+    "Not awarded": 1,
+    "Undergoing self-assessment/not assessed": 2
+   }
+  },
+  {
+   "organisation": "South Tipperary General Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "Southern Health & Social Care Trust",
+   "country": "Northern Ireland",
+   "services": 3,
+   "statuses": {
+    "Not awarded": 1,
+    "Undergoing self-assessment/not assessed": 2
+   }
+  },
+  {
+   "organisation": "Spire Healthcare",
+   "country": "Scotland",
+   "services": 36,
+   "statuses": {
+    "Accredited": 10,
+    "Deferred": 2,
+    "Undergoing self-assessment/not assessed": 24
+   }
+  },
+  {
+   "organisation": "St Columcille's Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "St James's Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Not awarded": 1
+   }
+  },
+  {
+   "organisation": "St John And St Elizabeth Hospital",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "St Johns Hospital, Limerick",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "St Josephs Private Hospital",
+   "country": "Wales",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "St Michael's Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "St Vincent's Private Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "St Vincents Hospital",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "Sulis Hospital Bath",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Undergoing JAG onsite assessment": 1
+   }
+  },
+  {
+   "organisation": "The Livingcare Group",
+   "country": "England",
+   "services": 3,
+   "statuses": {
+    "Accredited": 2,
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "The London Clinic",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "The New Victoria Hospital Limited",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "The Royal Buckinghamshire Hospital LTD",
+   "country": "England",
+   "services": 2,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 2
+   }
+  },
+  {
+   "organisation": "Tyneside Surgical Services Ltd",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "UPMC",
+   "country": "Republic of Ireland",
+   "services": 3,
+   "statuses": {
+    "Accredited": 3
+   }
+  },
+  {
+   "organisation": "University Hospital Kerry",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "University Hospital Limerick",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  },
+  {
+   "organisation": "Westcliffe Health Innovations Ltd",
+   "country": "England",
+   "services": 1,
+   "statuses": {
+    "Accredited": 1
+   }
+  },
+  {
+   "organisation": "Western Health & Social Care Trust",
+   "country": "Northern Ireland",
+   "services": 3,
+   "statuses": {
+    "Not awarded": 1,
+    "Undergoing self-assessment/not assessed": 2
+   }
+  },
+  {
+   "organisation": "Wexford and Ely Hospitals",
+   "country": "Republic of Ireland",
+   "services": 1,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   }
+  }
+ ],
+ "trusts": [
+  {
+   "code": "RCF",
+   "name": "Airedale NHS Foundation Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Deferred": 1
+   },
+   "jagServices": [
+    {
+     "service": "Airedale General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "RBS",
+   "name": "Alder Hey Children's NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "region": "North West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Alder Hey Children's Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "7A6",
+   "name": "Aneurin Bevan University Local Health Board",
+   "icb": null,
+   "icbName": null,
+   "region": "Wales",
+   "nation": "Wales",
+   "services": 3,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing self-assessment/not assessed": 2
+   },
+   "jagServices": [
+    {
+     "service": "Nevill Hall Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Royal Gwent Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Ystrad Fawr Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RTK",
+   "name": "Ashford and St Peter's Hospitals NHS Foundation Trust",
+   "icb": "S9B9J",
+   "icbName": "Surrey and Sussex",
+   "region": "South East",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "St Peter's Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RF4",
+   "name": "Barking, Havering and Redbridge University Hospitals NHS Trust",
+   "icb": "QMF",
+   "icbName": "North East London",
+   "region": "London",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Queen's and King George Hospitals",
+     "sites": [
+      "King George Hospital",
+      "Queen's Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RFF",
+   "name": "Barnsley Hospital NHS Foundation Trust",
+   "icb": "QF7",
+   "icbName": "South Yorkshire",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Barnsley District General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "R1H",
+   "name": "Barts Health NHS Trust",
+   "icb": "QMF",
+   "icbName": "North East London",
+   "region": "London",
+   "nation": "England",
+   "services": 5,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Deferred": 1,
+    "Undergoing self-assessment/not assessed": 3
+   },
+   "jagServices": [
+    {
+     "service": "Mile End Hospital",
+     "sites": [],
+     "sector": "Non-acute / small",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Newham University Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Paediatric Endoscopy Service at Royal London",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Royal London Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Whipps Cross University Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "RC9",
+   "name": "Bedfordshire Hospitals NHS Foundation Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "region": "East of England",
+   "nation": "England",
+   "services": 2,
+   "accredited": 2,
+   "statuses": {
+    "Accredited": 2
+   },
+   "jagServices": [
+    {
+     "service": "Bedford Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Luton & Dunstable Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "7A1",
+   "name": "Betsi Cadwaladr University Local Health Board",
+   "icb": null,
+   "icbName": null,
+   "region": "Wales",
+   "nation": "Wales",
+   "services": 3,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 3
+   },
+   "jagServices": [
+    {
+     "service": "Glan Clwyd Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Wrexham Maelor Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Ysbyty Gwynedd, Bangor",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RQ3",
+   "name": "Birmingham Women's and Children's NHS Foundation Trust",
+   "icb": "QHL",
+   "icbName": "Birmingham and Solihull",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Birmingham Children's Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RXL",
+   "name": "Blackpool Teaching Hospitals NHS Foundation Trust",
+   "icb": "QE1",
+   "icbName": "Lancashire and South Cumbria",
+   "region": "North West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Blackpool Victoria Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RMC",
+   "name": "Bolton NHS Foundation Trust",
+   "icb": "QOP",
+   "icbName": "Greater Manchester",
+   "region": "North West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Deferred": 1
+   },
+   "jagServices": [
+    {
+     "service": "Royal Bolton Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "RAE",
+   "name": "Bradford Teaching Hospitals NHS Foundation Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Bradford Royal Infirmary",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RA7",
+   "name": "Bristol NHS Foundation Trust",
+   "icb": "QUY",
+   "icbName": "Bristol, North Somerset and South Gloucestershire",
+   "region": "South West",
+   "nation": "England",
+   "services": 5,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing JAG onsite assessment": 1,
+    "Undergoing self-assessment/not assessed": 3
+   },
+   "jagServices": [
+    {
+     "service": "Bristol Royal Hospital For Children",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Bristol Royal Infirmary",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "South Bristol Community Hospital",
+     "sites": [],
+     "sector": "Non-acute / small",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    },
+    {
+     "service": "Southmead Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Weston General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RXQ",
+   "name": "Buckinghamshire Healthcare NHS Trust",
+   "icb": "S0E4D",
+   "icbName": "Thames Valley",
+   "region": "South East",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Wycombe General and Stoke Mandeville Hospitals",
+     "sites": [
+      "Stoke Mandeville Hospital",
+      "Wycombe Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RWY",
+   "name": "Calderdale and Huddersfield NHS Foundation Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Calderdale and Huddersfield NHS Foundation Trust",
+     "sites": [
+      "Huddersfield Royal Infirmary",
+      "Calderdale Royal Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RGT",
+   "name": "Cambridge University Hospitals NHS Foundation Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "region": "East of England",
+   "nation": "England",
+   "services": 3,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Deferred": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Addenbrooke's Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Addenbrooke's Hospital - paediatrics",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "NIHR Cambridge Clinical Research Facility",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "7A4",
+   "name": "Cardiff & Vale University Local Health Board",
+   "icb": null,
+   "icbName": null,
+   "region": "Wales",
+   "nation": "Wales",
+   "services": 2,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 2
+   },
+   "jagServices": [
+    {
+     "service": "University Hospital of Wales and University Hospital LLandough",
+     "sites": [
+      "University Hospital of Wales",
+      "University Hospital Llandough"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "University Hospital of Wales, Cardiff - paediatrics",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RQM",
+   "name": "Chelsea and Westminster Hospital NHS Foundation Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "region": "London",
+   "nation": "England",
+   "services": 3,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing JAG onsite assessment": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Chelsea & Westminster Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Chelsea & Westminster Hospital - paediatric",
+     "sites": [],
+     "sector": "Independent non-acute",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "West Middlesex University Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    }
+   ]
+  },
+  {
+   "code": "RFS",
+   "name": "Chesterfield Royal Hospital NHS Foundation Trust",
+   "icb": "QJ2",
+   "icbName": "Derby and Derbyshire",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Chesterfield Royal Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RJR",
+   "name": "Countess of Chester Hospital NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "region": "North West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Deferred": 1
+   },
+   "jagServices": [
+    {
+     "service": "Countess Of Chester Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "RXP",
+   "name": "County Durham and Darlington NHS Foundation Trust",
+   "icb": "QHM",
+   "icbName": "North East and North Cumbria",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 3,
+   "accredited": 0,
+   "statuses": {
+    "Not awarded": 2,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Bishop Auckland Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Darlington Memorial Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Not awarded"
+    },
+    {
+     "service": "University Hospital Of North Durham",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Not awarded"
+    }
+   ]
+  },
+  {
+   "code": "RJ6",
+   "name": "Croydon Health Services NHS Trust",
+   "icb": "QWE",
+   "icbName": "South West London",
+   "region": "London",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing JAG onsite assessment": 1
+   },
+   "jagServices": [
+    {
+     "service": "Croydon University Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    }
+   ]
+  },
+  {
+   "code": "7A5",
+   "name": "Cwm Taf Morgannwg University Local Health Board",
+   "icb": null,
+   "icbName": null,
+   "region": "Wales",
+   "nation": "Wales",
+   "services": 3,
+   "accredited": 0,
+   "statuses": {
+    "Not awarded": 1,
+    "Undergoing self-assessment/not assessed": 2
+   },
+   "jagServices": [
+    {
+     "service": "Prince Charles Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Princess of Wales Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Not awarded"
+    },
+    {
+     "service": "Royal Glamorgan Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RN7",
+   "name": "Dartford and Gravesham NHS Trust",
+   "icb": "QKS",
+   "icbName": "Kent and Medway",
+   "region": "South East",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing JAG onsite assessment": 1
+   },
+   "jagServices": [
+    {
+     "service": "Darent Valley Hospital and Queen Mary's Hospital",
+     "sites": [
+      "Darent Valley Hospital",
+      "Queen Mary's Hospital Sidcup"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    }
+   ]
+  },
+  {
+   "code": "RP5",
+   "name": "Doncaster and Bassetlaw Teaching Hospitals NHS Foundation Trust",
+   "icb": "QF7",
+   "icbName": "South Yorkshire",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Doncaster And Bassetlaw Hospitals NHS Foundation Trust",
+     "sites": [
+      "Bassetlaw Hospital",
+      "Doncaster Royal Infirmary",
+      "Montagu Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RBD",
+   "name": "Dorset County Hospital NHS Foundation Trust",
+   "icb": "QVV",
+   "icbName": "Dorset",
+   "region": "South West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Deferred": 1
+   },
+   "jagServices": [
+    {
+     "service": "Dorset County Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "RDY",
+   "name": "Dorset Healthcare University NHS Foundation Trust",
+   "icb": "QVV",
+   "icbName": "Dorset",
+   "region": "South West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Victoria Community Hospital",
+     "sites": [],
+     "sector": "Non-acute / small",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RJN",
+   "name": "East Cheshire NHS Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "region": "North West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Macclesfield District General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RVV",
+   "name": "East Kent Hospitals University NHS Foundation Trust",
+   "icb": "QKS",
+   "icbName": "Kent and Medway",
+   "region": "South East",
+   "nation": "England",
+   "services": 2,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 2
+   },
+   "jagServices": [
+    {
+     "service": "East Kent Hospitals University NHS Foundation Trust - linked services",
+     "sites": [
+      "William Harvey Hospital (Ashford)",
+      "Queen Elizabeth The Queen Mother Hospital",
+      "Kent & Canterbury Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Queen Elizabeth The Queen Mother Hospital - paediatrics",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RXR",
+   "name": "East Lancashire Hospitals NHS Trust",
+   "icb": "QE1",
+   "icbName": "Lancashire and South Cumbria",
+   "region": "North West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "East Lancashire Hospitals NHS Trust",
+     "sites": [
+      "Burnley General Hospital",
+      "Royal Blackburn Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RDE",
+   "name": "East Suffolk and North Essex NHS Foundation Trust",
+   "icb": "T6Y0W",
+   "icbName": "Norfolk and Suffolk",
+   "region": "East of England",
+   "nation": "England",
+   "services": 3,
+   "accredited": 0,
+   "statuses": {
+    "Not awarded": 1,
+    "Undergoing self-assessment/not assessed": 2
+   },
+   "jagServices": [
+    {
+     "service": "Clacton Community Diagnostic Centre",
+     "sites": [],
+     "sector": "Non-acute / small",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Colchester General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Ipswich Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Not awarded"
+    }
+   ]
+  },
+  {
+   "code": "RXC",
+   "name": "East Sussex Healthcare NHS Trust",
+   "icb": "S9B9J",
+   "icbName": "Surrey and Sussex",
+   "region": "South East",
+   "nation": "England",
+   "services": 2,
+   "accredited": 0,
+   "statuses": {
+    "Deferred": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "East Sussex Healthcare NHS Trust",
+     "sites": [
+      "Conquest Hospital",
+      "Eastbourne District General Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    },
+    {
+     "service": "Sussex Premier Health",
+     "sites": [],
+     "sector": "Independent non-acute",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RWH",
+   "name": "East and North Hertfordshire Teaching NHS Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "region": "East of England",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "East and North Hertfordshire NHS Trust",
+     "sites": [
+      "Lister Hospital",
+      "Queen Elizabeth I I Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RVR",
+   "name": "Epsom and St Helier University Hospitals NHS Trust",
+   "icb": "QWE",
+   "icbName": "South West London",
+   "region": "London",
+   "nation": "England",
+   "services": 2,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Epsom & St Helier Hospitals",
+     "sites": [
+      "St Helier Hospital",
+      "Epsom Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Epsom & St Helier Hospitals - Paediatrics",
+     "sites": [
+      "Epsom Hospital - Paediatrics",
+      "St Helier Hospital - Paediatrics"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RDU",
+   "name": "Frimley Health NHS Foundation Trust",
+   "icb": "S0E4D",
+   "icbName": "Thames Valley",
+   "region": "South East",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Frimley Health NHS Foundation Trust",
+     "sites": [
+      "Frimley Park Hospital",
+      "Wexham Park Hospital",
+      "Heatherwood Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RR7",
+   "name": "Gateshead Health NHS Foundation Trust",
+   "icb": "QHM",
+   "icbName": "North East and North Cumbria",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Queen Elizabeth Hospital, Gateshead",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RLT",
+   "name": "George Eliot Hospital NHS Trust",
+   "icb": "QWU",
+   "icbName": "Coventry and Warwickshire",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "George Eliot Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RTE",
+   "name": "Gloucestershire Hospitals NHS Foundation Trust",
+   "icb": "QR1",
+   "icbName": "Gloucestershire",
+   "region": "South West",
+   "nation": "England",
+   "services": 3,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Deferred": 2
+   },
+   "jagServices": [
+    {
+     "service": "Cirencester Hospital",
+     "sites": [],
+     "sector": "Non-acute / small",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Gloucestershire Royal and Cheltenham General Hospitals",
+     "sites": [
+      "Cheltenham General Hospital",
+      "Gloucestershire Royal Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    },
+    {
+     "service": "Stroud General Hospital",
+     "sites": [],
+     "sector": "Non-acute / small",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "RP4",
+   "name": "Great Ormond Street Hospital For Children NHS Foundation Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "region": "London",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Great Ormond Street Hospital Central London Site",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RN3",
+   "name": "Great Western Hospitals NHS Foundation Trust",
+   "icb": "QOX",
+   "icbName": "Bath and North East Somerset, Swindon and Wiltshire",
+   "region": "South West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing JAG onsite assessment": 1
+   },
+   "jagServices": [
+    {
+     "service": "Great Western Hospital & West Swindon CDC",
+     "sites": [
+      "The Great Western Hospital",
+      "West Swindon CDC"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    }
+   ]
+  },
+  {
+   "code": "RJ1",
+   "name": "Guy's and St Thomas' NHS Foundation Trust",
+   "icb": "QKK",
+   "icbName": "South East London",
+   "region": "London",
+   "nation": "England",
+   "services": 3,
+   "accredited": 0,
+   "statuses": {
+    "Not awarded": 1,
+    "Undergoing JAG onsite assessment": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Evelina London Children's Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Guy's Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Not awarded"
+    },
+    {
+     "service": "St Thomas' Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    }
+   ]
+  },
+  {
+   "code": "RN5",
+   "name": "Hampshire Hospitals NHS Foundation Trust",
+   "icb": "QRL",
+   "icbName": "Hampshire and Isle of Wight",
+   "region": "South East",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Hampshire Hospitals NHS Foundation Trust",
+     "sites": [
+      "Andover War Memorial Hospital",
+      "Basingstoke And North Hampshire Hospital",
+      "Royal Hampshire County Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RW1",
+   "name": "Hampshire and Isle of Wight Healthcare NHS Foundation Trust",
+   "icb": "QRL",
+   "icbName": "Hampshire and Isle of Wight",
+   "region": "South East",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Lymington New Forest Hospital",
+     "sites": [],
+     "sector": "Non-acute / small",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RCD",
+   "name": "Harrogate and District NHS Foundation Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Harrogate District Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RQX",
+   "name": "Homerton Healthcare NHS Foundation Trust",
+   "icb": "QMF",
+   "icbName": "North East London",
+   "region": "London",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Homerton University Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RWA",
+   "name": "Hull University Teaching Hospitals NHS Trust",
+   "icb": "QOQ",
+   "icbName": "Humber and North Yorkshire",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing JAG onsite assessment": 1
+   },
+   "jagServices": [
+    {
+     "service": "Hull University Teaching Hospitals NHS Trust",
+     "sites": [
+      "Hull Royal Infirmary",
+      "Castle Hill Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    }
+   ]
+  },
+  {
+   "code": "7A2",
+   "name": "Hywel Dda University Local Health Board",
+   "icb": null,
+   "icbName": null,
+   "region": "Wales",
+   "nation": "Wales",
+   "services": 4,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Not awarded": 1,
+    "Undergoing JAG onsite assessment": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Bronglais General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Glangwili General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Prince Philip Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Not awarded"
+    },
+    {
+     "service": "Withybush Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    }
+   ]
+  },
+  {
+   "code": "RYJ",
+   "name": "Imperial College Healthcare NHS Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "region": "London",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Imperial College Healthcare NHS Trust Service",
+     "sites": [
+      "St Mary's Hospital (HQ)",
+      "Charing Cross Hospital",
+      "Hammersmith Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "R1F",
+   "name": "Isle of Wight NHS Trust",
+   "icb": "QRL",
+   "icbName": "Hampshire and Isle of Wight",
+   "region": "South East",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "St Mary's Hospital, Isle of Wight",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RGP",
+   "name": "James Paget University Hospitals NHS Foundation Trust",
+   "icb": "T6Y0W",
+   "icbName": "Norfolk and Suffolk",
+   "region": "East of England",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "James Paget Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RNQ",
+   "name": "Kettering General Hospital NHS Foundation Trust",
+   "icb": "QPM",
+   "icbName": "Northamptonshire",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Deferred": 1
+   },
+   "jagServices": [
+    {
+     "service": "Kettering General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "RJZ",
+   "name": "King's College Hospital NHS Foundation Trust",
+   "icb": "QKK",
+   "icbName": "South East London",
+   "region": "London",
+   "nation": "England",
+   "services": 3,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing self-assessment/not assessed": 2
+   },
+   "jagServices": [
+    {
+     "service": "King's College Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "King's College Hospital - paediatrics",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Princess Royal University Hospital, Farnborough",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RAX",
+   "name": "Kingston and Richmond NHS Foundation Trust",
+   "icb": "QWE",
+   "icbName": "South West London",
+   "region": "London",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Kingston Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RXN",
+   "name": "Lancashire Teaching Hospitals NHS Foundation Trust",
+   "icb": "QE1",
+   "icbName": "Lancashire and South Cumbria",
+   "region": "North West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Lancashire Teaching Hospitals NHS Foundation Trust",
+     "sites": [
+      "Chorley & South Ribble Hospital",
+      "Royal Preston Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RR8",
+   "name": "Leeds Teaching Hospitals NHS Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 2,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing JAG onsite assessment": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Leeds Children's Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Leeds Teaching Hospitals NHS Trust",
+     "sites": [
+      "Leeds General Infirmary",
+      "St James's University Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    }
+   ]
+  },
+  {
+   "code": "RGD",
+   "name": "Leeds and York Partnership NHS Foundation Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "The Grange Medical Centre",
+     "sites": [],
+     "sector": "Non-acute / small",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RJ2",
+   "name": "Lewisham and Greenwich NHS Trust",
+   "icb": "QKK",
+   "icbName": "South East London",
+   "region": "London",
+   "nation": "England",
+   "services": 3,
+   "accredited": 2,
+   "statuses": {
+    "Accredited": 2,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Queen Elizabeth Hospital, Woolwich",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "University Hospital Lewisham",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "University Hospital Lewisham - paediatrics",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "REM",
+   "name": "Liverpool University Hospitals NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "region": "North West",
+   "nation": "England",
+   "services": 2,
+   "accredited": 2,
+   "statuses": {
+    "Accredited": 2
+   },
+   "jagServices": [
+    {
+     "service": "Aintree University Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Liverpool University Hospitals NHS Foundation Trust",
+     "sites": [
+      "The Royal Liverpool University Hospital",
+      "Broadgreen Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "R1K",
+   "name": "London North West University Healthcare NHS Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "region": "London",
+   "nation": "England",
+   "services": 2,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 2
+   },
+   "jagServices": [
+    {
+     "service": "London North West University Healthcare NHS Trust",
+     "sites": [
+      "Ealing Hospital",
+      "Central Middlesex Hospital",
+      "St Marks Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Paediatric Gastroenterology",
+     "sites": [],
+     "sector": "Independent non-acute",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RWF",
+   "name": "Maidstone and Tunbridge Wells NHS Trust",
+   "icb": "QKS",
+   "icbName": "Kent and Medway",
+   "region": "South East",
+   "nation": "England",
+   "services": 3,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing self-assessment/not assessed": 2
+   },
+   "jagServices": [
+    {
+     "service": "Maidstone District General Hospital - paediatrics",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Tunbridge Wells Hospital - paediatrics",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Tunbridge Wells Hospital and Maidstone",
+     "sites": [
+      "The Tunbridge Wells Hospital",
+      "The Maidstone Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "R0A",
+   "name": "Manchester University NHS Foundation Trust",
+   "icb": "QOP",
+   "icbName": "Greater Manchester",
+   "region": "North West",
+   "nation": "England",
+   "services": 5,
+   "accredited": 2,
+   "statuses": {
+    "Accredited": 2,
+    "Undergoing JAG onsite assessment": 1,
+    "Undergoing self-assessment/not assessed": 2
+   },
+   "jagServices": [
+    {
+     "service": "Manchester Royal Infirmary",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    },
+    {
+     "service": "North Manchester General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Royal Manchester Children's Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Trafford General Hospital",
+     "sites": [],
+     "sector": "Independent non-acute",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Wythenshawe Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RPA",
+   "name": "Medway NHS Foundation Trust",
+   "icb": "QKS",
+   "icbName": "Kent and Medway",
+   "region": "South East",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Not awarded": 1
+   },
+   "jagServices": [
+    {
+     "service": "Medway Maritime Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Not awarded"
+    }
+   ]
+  },
+  {
+   "code": "RBN",
+   "name": "Mersey and West Lancashire Teaching Hospitals NHS Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "region": "North West",
+   "nation": "England",
+   "services": 3,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing self-assessment/not assessed": 2
+   },
+   "jagServices": [
+    {
+     "service": "Ormskirk and District General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Southport and Formby District General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "St Helens & Whiston Hospitals Service",
+     "sites": [
+      "Whiston Hospital",
+      "St Helens Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RBT",
+   "name": "Mid Cheshire Hospitals NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "region": "North West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Leighton Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RXF",
+   "name": "Mid Yorkshire Teaching NHS Trust",
+   "icb": "QWO",
+   "icbName": "West Yorkshire",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "The Mid Yorkshire Hospitals NHS Trust",
+     "sites": [
+      "Pontefract General Infirmary",
+      "Pinderfields General Hospital",
+      "Dewsbury & District Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RAJ",
+   "name": "Mid and South Essex NHS Foundation Trust",
+   "icb": "D7T5G",
+   "icbName": "Essex",
+   "region": "East of England",
+   "nation": "England",
+   "services": 3,
+   "accredited": 2,
+   "statuses": {
+    "Accredited": 2,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Basildon University Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Broomfield Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Southend Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RD8",
+   "name": "Milton Keynes University Hospital NHS Foundation Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "region": "East of England",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Milton Keynes Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RM1",
+   "name": "Norfolk and Norwich University Hospitals NHS Foundation Trust",
+   "icb": "T6Y0W",
+   "icbName": "Norfolk and Suffolk",
+   "region": "East of England",
+   "nation": "England",
+   "services": 2,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing JAG onsite assessment": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Norfolk & Norwich University Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    },
+    {
+     "service": "Norfolk & Norwich University Hospital - paediatrics",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RWW",
+   "name": "North Cheshire and Mersey NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "region": "North West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Warrington and Halton General Hospitals",
+     "sites": [
+      "Halton Hospital Nightingale Building",
+      "Warrington Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RNN",
+   "name": "North Cumbria Integrated Care NHS Foundation Trust",
+   "icb": "QHM",
+   "icbName": "North East and North Cumbria",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "North Cumbria Integrated Care",
+     "sites": [
+      "Cumberland Infirmary",
+      "West Cumberland Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RVW",
+   "name": "North Tees and Hartlepool NHS Foundation Trust",
+   "icb": "QHM",
+   "icbName": "North East and North Cumbria",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 2,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "North Tees & Hartlepool Hospital - paediatrics",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "University Hospitals of North Tees and Hartlepool",
+     "sites": [
+      "University Hospital Of Hartlepool",
+      "University Hospital Of North Tees"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RGN",
+   "name": "North West Anglia NHS Foundation Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "region": "East of England",
+   "nation": "England",
+   "services": 2,
+   "accredited": 0,
+   "statuses": {
+    "Deferred": 2
+   },
+   "jagServices": [
+    {
+     "service": "Hinchingbrooke Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    },
+    {
+     "service": "Peterborough City Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "RNS",
+   "name": "Northampton General Hospital NHS Trust",
+   "icb": "QPM",
+   "icbName": "Northamptonshire",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Northampton General Hospital (Acute)",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RM3",
+   "name": "Northern Care Alliance NHS Foundation Trust",
+   "icb": "QOP",
+   "icbName": "Greater Manchester",
+   "region": "North West",
+   "nation": "England",
+   "services": 2,
+   "accredited": 0,
+   "statuses": {
+    "Not awarded": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Fairfield, Rochdale & The Royal Oldham Hospital",
+     "sites": [
+      "Fairfield General Hospital",
+      "Royal Oldham Hospital",
+      "Rochdale Infirmary"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Salford Royal Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Not awarded"
+    }
+   ]
+  },
+  {
+   "code": "RJL",
+   "name": "Northern Lincolnshire and Goole NHS Foundation Trust",
+   "icb": "QOQ",
+   "icbName": "Humber and North Yorkshire",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 2,
+   "accredited": 2,
+   "statuses": {
+    "Accredited": 2
+   },
+   "jagServices": [
+    {
+     "service": "Diana, Princess Of Wales Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Scunthorpe General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RTF",
+   "name": "Northumbria Healthcare NHS Foundation Trust",
+   "icb": "QHM",
+   "icbName": "North East and North Cumbria",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 3,
+   "accredited": 0,
+   "statuses": {
+    "Deferred": 1,
+    "Undergoing self-assessment/not assessed": 2
+   },
+   "jagServices": [
+    {
+     "service": "Alnwick Infirmary",
+     "sites": [],
+     "sector": "Non-acute / small",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Hexham General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "North Tyneside General and Wansbeck General Hospitals",
+     "sites": [
+      "Wansbeck Hospital",
+      "North Tyneside General Hospital",
+      "Northumbria Specialist Emergency Care Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "RX1",
+   "name": "Nottingham University Hospitals NHS Trust",
+   "icb": "QT1",
+   "icbName": "Nottingham and Nottinghamshire",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 3,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing JAG onsite assessment": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Nottingham Children's Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Nottingham UH service",
+     "sites": [
+      "Nottingham NHS Treatment Centre",
+      "Nottingham University Hospitals NHS Trust - City Campus"
+     ],
+     "sector": "Non-acute / small",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Queen's Medical Centre",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    }
+   ]
+  },
+  {
+   "code": "RTH",
+   "name": "Oxford University Hospitals NHS Foundation Trust",
+   "icb": "S0E4D",
+   "icbName": "Thames Valley",
+   "region": "South East",
+   "nation": "England",
+   "services": 3,
+   "accredited": 2,
+   "statuses": {
+    "Accredited": 2,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "John Radcliffe Childrens hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "John Radcliffe Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "The Horton General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RHU",
+   "name": "Portsmouth Hospitals University NHS Trust",
+   "icb": "QRL",
+   "icbName": "Hampshire and Isle of Wight",
+   "region": "South East",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Queen Alexandra Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "7A7",
+   "name": "Powys Teaching Local Health Board",
+   "icb": null,
+   "icbName": null,
+   "region": "Wales",
+   "nation": "Wales",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Not awarded": 1
+   },
+   "jagServices": [
+    {
+     "service": "Brecon War Memorial Hospital",
+     "sites": [],
+     "sector": "Non-acute / small",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Not awarded"
+    }
+   ]
+  },
+  {
+   "code": "RHW",
+   "name": "Royal Berkshire NHS Foundation Trust",
+   "icb": "S0E4D",
+   "icbName": "Thames Valley",
+   "region": "South East",
+   "nation": "England",
+   "services": 2,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 2
+   },
+   "jagServices": [
+    {
+     "service": "Royal Berkshire Hospital - paediatrics",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Royal Berkshire NHS Foundation Trust",
+     "sites": [
+      "Royal Berkshire Hospital",
+      "West Berkshire Community Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "REF",
+   "name": "Royal Cornwall Hospitals NHS Trust",
+   "icb": "QT6",
+   "icbName": "Cornwall and The Isles of Scilly",
+   "region": "South West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Royal Cornwall Hospitals NHS Trust",
+     "sites": [
+      "West Cornwall Hospital (Penzance)",
+      "Royal Cornwall Hospital (Treliske)"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RH8",
+   "name": "Royal Devon University Healthcare NHS Foundation Trust",
+   "icb": "QJK",
+   "icbName": "Devon",
+   "region": "South West",
+   "nation": "England",
+   "services": 2,
+   "accredited": 0,
+   "statuses": {
+    "Not awarded": 1,
+    "Undergoing JAG onsite assessment": 1
+   },
+   "jagServices": [
+    {
+     "service": "Royal Devon University Healthcare NHS Foundation Trust - Eastern Services",
+     "sites": [
+      "Tiverton And District Hospital",
+      "Royal Devon & Exeter Hospital (Wonford)",
+      "Buttercup Unit",
+      "Nightingale Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    },
+    {
+     "service": "Royal Devon University Healthcare NHS Foundation Trust - Northern Services",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Not awarded"
+    }
+   ]
+  },
+  {
+   "code": "RAL",
+   "name": "Royal Free London NHS Foundation Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "region": "London",
+   "nation": "England",
+   "services": 4,
+   "accredited": 0,
+   "statuses": {
+    "Not awarded": 2,
+    "Undergoing self-assessment/not assessed": 2
+   },
+   "jagServices": [
+    {
+     "service": "Chase Farm Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Finchley Memorial Hospital - Community Diagnostic Centre - Endoscopy",
+     "sites": [],
+     "sector": "Non-acute / small",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "North Middlesex Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Not awarded"
+    },
+    {
+     "service": "Royal Free Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Not awarded"
+    }
+   ]
+  },
+  {
+   "code": "RA2",
+   "name": "Royal Surrey NHS Foundation Trust",
+   "icb": "S9B9J",
+   "icbName": "Surrey and Sussex",
+   "region": "South East",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Royal Surrey County Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RD1",
+   "name": "Royal United Hospitals Bath NHS Foundation Trust",
+   "icb": "QOX",
+   "icbName": "Bath and North East Somerset, Swindon and Wiltshire",
+   "region": "South West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Royal United Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RNZ",
+   "name": "Salisbury NHS Foundation Trust",
+   "icb": "QOX",
+   "icbName": "Bath and North East Somerset, Swindon and Wiltshire",
+   "region": "South West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Deferred": 1
+   },
+   "jagServices": [
+    {
+     "service": "Salisbury District Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "RXK",
+   "name": "Sandwell and West Birmingham Hospitals NHS Trust",
+   "icb": "QUA",
+   "icbName": "Black Country",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Deferred": 1
+   },
+   "jagServices": [
+    {
+     "service": "Sandwell & West Birmingham Hospitals NHS Trust",
+     "sites": [
+      "Sandwell General Hospital",
+      "City Hospital",
+      "Midland Metropolitan University Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "RCU",
+   "name": "Sheffield Children's NHS Foundation Trust",
+   "icb": "QF7",
+   "icbName": "South Yorkshire",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Sheffield Children's Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RHQ",
+   "name": "Sheffield Teaching Hospitals NHS Foundation Trust",
+   "icb": "QF7",
+   "icbName": "South Yorkshire",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Sheffield Teaching Hospitals NHS Foundation Trust",
+     "sites": [
+      "Royal Hallamshire Hospital",
+      "Northern General Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RK5",
+   "name": "Sherwood Forest Hospitals NHS Foundation Trust",
+   "icb": "QT1",
+   "icbName": "Nottingham and Nottinghamshire",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 2,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Mansfield Community Diagnostics Centre",
+     "sites": [],
+     "sector": "Non-acute / small",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Sherwood Forest Hospitals Trust",
+     "sites": [
+      "King's Mill Hospital",
+      "Newark Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RH5",
+   "name": "Somerset NHS Foundation Trust",
+   "icb": "QSL",
+   "icbName": "Somerset",
+   "region": "South West",
+   "nation": "England",
+   "services": 2,
+   "accredited": 2,
+   "statuses": {
+    "Accredited": 2
+   },
+   "jagServices": [
+    {
+     "service": "Musgrove Park and Bridgwater Community Hospitals service",
+     "sites": [
+      "Musgrove Park Hospital",
+      "Bridgwater Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Yeovil District Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RTR",
+   "name": "South Tees Hospitals NHS Foundation Trust",
+   "icb": "QOQ",
+   "icbName": "Humber and North Yorkshire",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "South Tees Hospitals NHS Foundation Trust",
+     "sites": [
+      "Redcar Primary Care Hospital",
+      "Friarage Hospital Site",
+      "The James Cook University Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "R0B",
+   "name": "South Tyneside and Sunderland NHS Foundation Trust",
+   "icb": "QHM",
+   "icbName": "North East and North Cumbria",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "South Tyneside and Sunderland Royal Hospitals",
+     "sites": [
+      "South Tyneside District Hospital",
+      "Sunderland Royal Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RJC",
+   "name": "South Warwickshire University NHS Foundation Trust",
+   "icb": "QWU",
+   "icbName": "Coventry and Warwickshire",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Warwick Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RJ7",
+   "name": "St George's University Hospitals NHS Foundation Trust",
+   "icb": "QWE",
+   "icbName": "South West London",
+   "region": "London",
+   "nation": "England",
+   "services": 3,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing JAG onsite assessment": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Queen Mary's Hospital - Roehampton",
+     "sites": [],
+     "sector": "Non-acute / small",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "St George's Hospital (Tooting)",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    },
+    {
+     "service": "St George's Hospital (Tooting) - paediatrics",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RWJ",
+   "name": "Stockport NHS Foundation Trust",
+   "icb": "QOP",
+   "icbName": "Greater Manchester",
+   "region": "North West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Stepping Hill Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RTP",
+   "name": "Surrey and Sussex Healthcare NHS Trust",
+   "icb": "S9B9J",
+   "icbName": "Surrey and Sussex",
+   "region": "South East",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Deferred": 1
+   },
+   "jagServices": [
+    {
+     "service": "East Surrey Hospital",
+     "sites": [
+      "East Surrey Hospital",
+      "Crawley Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "7A3",
+   "name": "Swansea Bay University Local Health Board",
+   "icb": null,
+   "icbName": null,
+   "region": "Wales",
+   "nation": "Wales",
+   "services": 3,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 3
+   },
+   "jagServices": [
+    {
+     "service": "Morriston Hospital - Paediatrics",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Neath Port Talbot Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Singleton and Morriston Hospitals",
+     "sites": [
+      "Singleton Hospital",
+      "Morriston Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RMP",
+   "name": "Tameside and Glossop Integrated Care NHS Foundation Trust",
+   "icb": "QOP",
+   "icbName": "Greater Manchester",
+   "region": "North West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Tameside General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RBV",
+   "name": "The Christie NHS Foundation Trust",
+   "icb": "QOP",
+   "icbName": "Greater Manchester",
+   "region": "North West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "The Christie",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RNA",
+   "name": "The Dudley Group NHS Foundation Trust",
+   "icb": "QUA",
+   "icbName": "Black Country",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 2,
+   "accredited": 0,
+   "statuses": {
+    "Deferred": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Russells Hall Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    },
+    {
+     "service": "Russells Hall Hospital - paediatrics",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RAS",
+   "name": "The Hillingdon Hospitals NHS Foundation Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "region": "London",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Hillingdon Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RTD",
+   "name": "The Newcastle Upon Tyne Hospitals NHS Foundation Trust",
+   "icb": "QHM",
+   "icbName": "North East and North Cumbria",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 2,
+   "accredited": 0,
+   "statuses": {
+    "Deferred": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Great North Children's Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "The Newcastle Upon Tyne NHS Trust",
+     "sites": [
+      "Freeman Hospital",
+      "The Royal Victoria Infirmary"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "RQW",
+   "name": "The Princess Alexandra Hospital NHS Trust",
+   "icb": "D7T5G",
+   "icbName": "Essex",
+   "region": "East of England",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Not awarded": 1
+   },
+   "jagServices": [
+    {
+     "service": "Princess Alexandra Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Not awarded"
+    }
+   ]
+  },
+  {
+   "code": "RCX",
+   "name": "The Queen Elizabeth Hospital, King's Lynn, NHS Foundation Trust",
+   "icb": "T6Y0W",
+   "icbName": "Norfolk and Suffolk",
+   "region": "East of England",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "North Cambridgeshire and Queen Elizabeth Hospitals",
+     "sites": [
+      "North Cambridgeshire Hospital",
+      "The Queen Elizabeth Hospital",
+      "King's Lynn"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RFR",
+   "name": "The Rotherham NHS Foundation Trust",
+   "icb": "QF7",
+   "icbName": "South Yorkshire",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Not awarded": 1
+   },
+   "jagServices": [
+    {
+     "service": "Rotherham District General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Not awarded"
+    }
+   ]
+  },
+  {
+   "code": "RPY",
+   "name": "The Royal Marsden NHS Foundation Trust",
+   "icb": "QWE",
+   "icbName": "South West London",
+   "region": "London",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing JAG onsite assessment": 1
+   },
+   "jagServices": [
+    {
+     "service": "The Royal Marsden Hospital",
+     "sites": [
+      "The Royal Marsden Hospital (London)",
+      "The Royal Marsden Hospital (Sutton)"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    }
+   ]
+  },
+  {
+   "code": "RL4",
+   "name": "The Royal Wolverhampton NHS Trust",
+   "icb": "QUA",
+   "icbName": "Black Country",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing JAG onsite assessment": 1
+   },
+   "jagServices": [
+    {
+     "service": "The Royal Wolverhampton Hospitals NHS Trust",
+     "sites": [
+      "Cannock Chase Hospital",
+      "New Cross Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    }
+   ]
+  },
+  {
+   "code": "RXW",
+   "name": "The Shrewsbury and Telford Hospital NHS Trust",
+   "icb": "QOC",
+   "icbName": "Shropshire, Telford and Wrekin",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 2,
+   "accredited": 0,
+   "statuses": {
+    "Deferred": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Royal Shrewsbury Hospital - paediatrics",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "The Shrewsbury and Telford Hospital NHS Trust",
+     "sites": [
+      "Royal Shrewsbury Hospital",
+      "Princess Royal Hospital",
+      "Telford"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "RA9",
+   "name": "Torbay and South Devon NHS Foundation Trust",
+   "icb": "QJK",
+   "icbName": "Devon",
+   "region": "South West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Torbay Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RWD",
+   "name": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "icb": "QJM",
+   "icbName": "Lincolnshire",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing JAG onsite assessment": 1
+   },
+   "jagServices": [
+    {
+     "service": "United Lincolnshire Hospitals NHS Trust",
+     "sites": [
+      "County Hospital Louth",
+      "Lincoln County Hospital",
+      "Pilgrim Hospital",
+      "Grantham & District Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    }
+   ]
+  },
+  {
+   "code": "RRV",
+   "name": "University College London Hospitals NHS Foundation Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "region": "London",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "University College Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RHM",
+   "name": "University Hospital Southampton NHS Foundation Trust",
+   "icb": "QRL",
+   "icbName": "Hampshire and Isle of Wight",
+   "region": "South East",
+   "nation": "England",
+   "services": 2,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Southampton Children’s Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "Southampton General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RRK",
+   "name": "University Hospitals Birmingham NHS Foundation Trust",
+   "icb": "QHL",
+   "icbName": "Birmingham and Solihull",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 3,
+   "accredited": 3,
+   "statuses": {
+    "Accredited": 3
+   },
+   "jagServices": [
+    {
+     "service": "Birmingham Heartlands & Solihull Hospitals",
+     "sites": [
+      "Heartlands Hospital",
+      "Solihull Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Good Hope Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Queen Elizabeth Hospital, Birmingham",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RKB",
+   "name": "University Hospitals Coventry and Warwickshire NHS Trust",
+   "icb": "QWU",
+   "icbName": "Coventry and Warwickshire",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Hospital of St Cross and University Hospital, Coventry",
+     "sites": [
+      "University Hospital (Coventry)",
+      "Hospital Of St Cross"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "R0D",
+   "name": "University Hospitals Dorset NHS Foundation Trust",
+   "icb": "QVV",
+   "icbName": "Dorset",
+   "region": "South West",
+   "nation": "England",
+   "services": 2,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing JAG onsite assessment": 1
+   },
+   "jagServices": [
+    {
+     "service": "Poole Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing JAG onsite assessment"
+    },
+    {
+     "service": "Royal Bournemouth Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RK9",
+   "name": "University Hospitals Plymouth NHS Trust",
+   "icb": "QT6",
+   "icbName": "Cornwall and The Isles of Scilly",
+   "region": "South West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Deferred": 1
+   },
+   "jagServices": [
+    {
+     "service": "Derriford Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "RYR",
+   "name": "University Hospitals Sussex NHS Foundation Trust",
+   "icb": "S9B9J",
+   "icbName": "Surrey and Sussex",
+   "region": "South East",
+   "nation": "England",
+   "services": 2,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Princess Royal and Sussex Hospitals Service",
+     "sites": [
+      "Royal Sussex County Hospital",
+      "Princess Royal Hospital",
+      "Haywards Heath"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "St Richard's and Worthing Hospital service",
+     "sites": [
+      "St Richard's Hospital",
+      "Worthing Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RTG",
+   "name": "University Hospitals of Derby and Burton NHS Foundation Trust",
+   "icb": "QNC",
+   "icbName": "Staffordshire and Stoke-on-Trent",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 2,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Derbyshire Children's Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "University Hospitals of Derby and Burton Service",
+     "sites": [
+      "Queen's Hospital",
+      "Burton Upon Trent",
+      "Sir Robert Peel Hospital",
+      "Royal Derby Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RWE",
+   "name": "University Hospitals of Leicester NHS Trust",
+   "icb": "QK1",
+   "icbName": "Leicester, Leicestershire and Rutland",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 4,
+   "accredited": 2,
+   "statuses": {
+    "Accredited": 2,
+    "Not awarded": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Leicester General Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Not awarded"
+    },
+    {
+     "service": "Leicester Royal Infirmary - paediatrics",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "University Hospitals Leicester Trust - Community",
+     "sites": [
+      "Hinckley & District Hosp",
+      "St Lukes Hospital",
+      "Loughborough Hospital",
+      "Melton Mowbray Hospital"
+     ],
+     "sector": "Non-acute / small",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "University Hospitals of Leicester service",
+     "sites": [
+      "Glenfield Hospital",
+      "Leicester Royal Infirmary"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RTX",
+   "name": "University Hospitals of Morecambe Bay NHS Foundation Trust",
+   "icb": "QE1",
+   "icbName": "Lancashire and South Cumbria",
+   "region": "North West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "University Hospitals of Morecambe Bay NHS Foundation Trust",
+     "sites": [
+      "Royal Lancaster Infirmary",
+      "Furness General Hospital",
+      "Westmorland General Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RJE",
+   "name": "University Hospitals of North Midlands NHS Trust",
+   "icb": "QNC",
+   "icbName": "Staffordshire and Stoke-on-Trent",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 2,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Royal Stoke Children's Service",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    },
+    {
+     "service": "University Hospital of North Midlands NHS Trust",
+     "sites": [
+      "County Hospital",
+      "Royal Stoke University Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RBK",
+   "name": "Walsall Healthcare NHS Trust",
+   "icb": "QUA",
+   "icbName": "Black Country",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Walsall Manor Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RWG",
+   "name": "West Hertfordshire Teaching Hospitals NHS Trust",
+   "icb": "S1Y5D",
+   "icbName": "Central East",
+   "region": "East of England",
+   "nation": "England",
+   "services": 2,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Undergoing self-assessment/not assessed": 1
+   },
+   "jagServices": [
+    {
+     "service": "Hemel Hempstead and Watford General Hospitals",
+     "sites": [
+      "Hemel Hempstead Hospital",
+      "Watford General Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Watford General Hospital - paediatrics",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Paediatric",
+     "typeOfService": "Not set",
+     "status": "Undergoing self-assessment/not assessed"
+    }
+   ]
+  },
+  {
+   "code": "RGR",
+   "name": "West Suffolk NHS Foundation Trust",
+   "icb": "T6Y0W",
+   "icbName": "Norfolk and Suffolk",
+   "region": "East of England",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Deferred": 1
+   },
+   "jagServices": [
+    {
+     "service": "West Suffolk Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "RKE",
+   "name": "Whittington Health NHS Trust",
+   "icb": "Z9B2Z",
+   "icbName": "West and North London",
+   "region": "London",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Whittington Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RBL",
+   "name": "Wirral University Teaching Hospital NHS Foundation Trust",
+   "icb": "QYG",
+   "icbName": "Cheshire and Merseyside",
+   "region": "North West",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "Arrowe Park Hospital",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RWP",
+   "name": "Worcestershire Acute Hospitals NHS Trust",
+   "icb": "QGH",
+   "icbName": "Herefordshire and Worcestershire",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 2,
+   "accredited": 2,
+   "statuses": {
+    "Accredited": 2
+   },
+   "jagServices": [
+    {
+     "service": "Kidderminster Hospital and Treatment Centre",
+     "sites": [],
+     "sector": "Non-acute / small",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Worcestershire Acute Hospitals NHS Trust",
+     "sites": [
+      "Alexandra Hospital",
+      "Malvern Community Hospital",
+      "Worcestershire Royal Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  },
+  {
+   "code": "RRF",
+   "name": "Wrightington, Wigan and Leigh Teaching Hospitals NHS Foundation Trust",
+   "icb": "QOP",
+   "icbName": "Greater Manchester",
+   "region": "North West",
+   "nation": "England",
+   "services": 2,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1,
+    "Not awarded": 1
+   },
+   "jagServices": [
+    {
+     "service": "Leigh Infirmary",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    },
+    {
+     "service": "Royal Albert Edward Infirmary",
+     "sites": [],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Not awarded"
+    }
+   ]
+  },
+  {
+   "code": "RLQ",
+   "name": "Wye Valley NHS Trust",
+   "icb": "QGH",
+   "icbName": "Herefordshire and Worcestershire",
+   "region": "Midlands",
+   "nation": "England",
+   "services": 1,
+   "accredited": 0,
+   "statuses": {
+    "Deferred": 1
+   },
+   "jagServices": [
+    {
+     "service": "Wye Valley NHS Trust",
+     "sites": [
+      "Ross on Wye Community Hospital",
+      "Hereford County Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Deferred"
+    }
+   ]
+  },
+  {
+   "code": "RCB",
+   "name": "York and Scarborough Teaching Hospitals NHS Foundation Trust",
+   "icb": "QOQ",
+   "icbName": "Humber and North Yorkshire",
+   "region": "North East and Yorkshire",
+   "nation": "England",
+   "services": 1,
+   "accredited": 1,
+   "statuses": {
+    "Accredited": 1
+   },
+   "jagServices": [
+    {
+     "service": "York and Scarborough Teaching Hospital Trust",
+     "sites": [
+      "York Hospital",
+      "Scarborough General Hospital",
+      "Bridlington and District Hospital"
+     ],
+     "sector": "Acute / large",
+     "adultPaediatric": "Adult",
+     "typeOfService": "Not set",
+     "status": "Accredited"
+    }
+   ]
+  }
+ ]
+}

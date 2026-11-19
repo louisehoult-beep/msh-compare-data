@@ -43,10 +43,16 @@ name: Verify (publish gate)
 #   spawn is requested explicitly. The 45 minutes stays: it is now roughly four
 #   times the headroom it was, which is the point.
 
+# TRIGGERS CHANGED 19/11/2026 (repository going private, Lou's option 1: full check
+# on pull requests and nightly only, Actions budget $75 a month, stop usage on).
+# A private repository pays for Actions minutes, and this file on every push was
+# the largest cost. The refresh workflows still run verify.py themselves before
+# they commit, so data pushes stay gated; this file is the full check (gate plus
+# self-test) on pull requests, nightly at 02:40 UTC, and on demand.
 on:
-  push:
-    branches: [main]
   pull_request:
+  schedule:
+    - cron: '40 2 * * *'
   workflow_dispatch: {}
 
 jobs:

@@ -1,0 +1,64 @@
+{
+ "_notice": "Verdicts on the two lot-source supplier names that reach two rows on one framework's own brief supplier list. Written 18/11/2026.",
+ "checkedOn": "2026-11-18",
+ "rule": "The brief's supplier list is a capture of the owner's published page, verified against that page's own stated supplier count, and is never edited to resolve a Hub-side ambiguity. A lot attaches to a brief row only where the seed holds BOTH the notice's name and that row verbatim on one record.",
+ "frameworks": [
+  {
+   "framework": "Urology and Bowel Management",
+   "reference": "2023/S 000-011173",
+   "lotSourceName": "Clinisupplies Limited",
+   "briefRows": [
+    "Clinisupplies Ltd",
+    "Clinisupplies GB Limited"
+   ],
+   "statedSupplierCount": 57,
+   "printedSupplierCount": 57,
+   "duplicateRow": false,
+   "companiesHouse": [
+    {
+     "name": "CLINISUPPLIES LIMITED",
+     "number": "04013240",
+     "incorporated": "2000-06-13",
+     "address": "1 Blackmoor Lane, Watford, England, WD18 8GA"
+    },
+    {
+     "name": "CLINISUPPLIES GB LIMITED",
+     "number": "02503030",
+     "incorporated": "1990-05-17",
+     "address": "1 Blackmoor Lane, Croxley Park, Watford, England, WD18 8GA"
+    }
+   ],
+   "verdict": "attached",
+   "lots": [
+    "Lot 1",
+    "Lot 2",
+    "Lot 3",
+    "Lot 5",
+    "Lot 10"
+   ],
+   "why": "Two real companies, not one row printed twice. The notice names \"Clinisupplies Limited\", the registered name of 04013240, the company the Hub's Clinisupplies record resolves to, and that record holds both that name and the \"Clinisupplies Ltd\" row verbatim. No row was picked any other way.",
+   "residual": "SETTLED 18/11/2026, later the same day. 02503030 now has its own Hub record, \"Clinisupplies GB Limited\" (added by scripts/_add_clinisupplies_gb_record_1118.py), holding Lots 1, 2, 3, 5 and 13 off this same notice under its then-name Great Bear Healthcare Ltd. It is still NOT an alias of 04013240 and must never become one — different registration numbers are evidence they are distinct. On Lou's ruling (\"Two records + link\", 18/11/2026) the relationship between the two is published as a sourced fact on each record rather than resolved by a merge: see deepDive.ownership on both, written by scripts/_add_clinisupplies_group_link_1118.py, which gives the persons-with-significant-control chain read at Companies House on 18/11/2026 — both registrations sit under CLINISUPPLIES GROUP LIMITED 14506446 up to KKR & Co. Inc., 75% or more at every link, 02503030 via GREAT BEAR HEALTHCARE GROUP LIMITED 12570444. One business, two live registrations. Common ownership is not one legal person, and this notice awards them as two supplier parties (GB-FTS-96951 and GB-FTS-96957) on different lots, which is why the records stay apart and this verdict is unchanged. What remains open is only the normaliser: company_match.key() still strips the \"GB\", so a bare \"Clinisupplies\" resolves AMBIGUOUS and each record is kept apart by the verbatim tier in company_match.resolve() and app/company-report.js. Narrowing key() would move award routing repo-wide, so it stays a separate question. test_previous_names.py records the pair in SETTLED_DISTINCT."
+  },
+  {
+   "framework": "Beverages, Confectionary and Snacks",
+   "reference": "2024/S 000-020103",
+   "lotSourceName": "Nestle UK Ltd",
+   "briefRows": [
+    "Nestle Ltd",
+    "Nestle UK",
+    "Nestle Waters & Healthy Beverages UK"
+   ],
+   "statedSupplierCount": 44,
+   "printedSupplierCount": 44,
+   "duplicateRow": false,
+   "verdict": "stays quarantined, on purpose",
+   "lots": [
+    "Lot 1",
+    "Lot 13"
+   ],
+   "why": "Also two real rows, not a duplicate, so there is nothing to de-duplicate. Food, which Lou ruled out of scope for Hub records on 17/11/2026, so no record is to be added for the entity the notice names. The only Nestle-keyed Hub record, Nestle Health Science UK, is the clinical nutrition arm and holds neither row verbatim — only a bare \"Nestle\", which its own 17/11/2026 verdict rules out as a way of naming one of several Nestle entities. Commit fd12566 attached the lots to the \"Nestle UK\" row; because app/company-report.js renders a company rather than a row, that published a confectionery and beverages Lot 1 and Lot 13 on the clinical nutrition arm's card, and it was reverted the same day.",
+   "whatWouldChangeIt": "NHS Supply Chain printing the entity in full on the brief, or a Find a Tender notice naming the awardee with its registration number."
+  }
+ ],
+ "warningAfterThisRun": "The gate's TWO OR MORE rows line counts 1 name, Beverages/\"Nestle UK Ltd\", decided above. It is a DECIDED state, not a backlog item."
+}

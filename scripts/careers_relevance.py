@@ -44,7 +44,13 @@ def compile_config(cfg):
         keys.add(c["key"])
         cats.append((c["key"], c["label"], [_compile(p) for p in c["patterns"]]))
     excl = [_compile(p) for p in cfg.get("exclude", [])]
-    return {"categories": cats, "exclude": excl}
+    entry = cfg.get("entry") or {}
+    ent = [_compile(p) for p in entry.get("patterns", [])]
+    ent_excl = [_compile(p) for p in entry.get("exclude", [])]
+    if ent:
+        # Early-career titles that fit no other category are listed under their own.
+        cats.append(("entry-level", entry.get("label") or "Early career", ent))
+    return {"categories": cats, "exclude": excl, "entry": ent, "entryExclude": ent_excl}
 
 
 # Syntax the browser's RegExp reads differently from Python's re, or not at all.
@@ -69,6 +75,18 @@ def classify(title, compiled):
     return None
 
 
+def is_entry(title, compiled):
+    """True when a relevant title reads as early career (graduate, trainee, junior,
+    associate, sales development). About the title only; the posting says what
+    experience it asks for."""
+    t = title or ""
+    if any(x.search(t) for x in compiled["exclude"]):
+        return False
+    if any(x.search(t) for x in compiled["entryExclude"]):
+        return False
+    return any(p.search(t) for p in compiled["entry"])
+
+
 def relevant_roles(doc, compiled):
     """(roles, suppliers) the page would list: UK roles whose title classifies."""
     out = []
@@ -79,6 +97,7 @@ def relevant_roles(doc, compiled):
             cat = classify(r.get("title"), compiled)
             if cat:
                 out.append({"supplier": s["name"], "category": cat,
+                            "entry": is_entry(r.get("title"), compiled),
                             "checkedOn": s.get("checkedOn"), **r})
     return out, sorted({r["supplier"] for r in out})
 

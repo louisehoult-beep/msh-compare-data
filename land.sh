@@ -153,6 +153,29 @@ while :; do
   fi
 
   echo "==> 7/7 gate, then push"
+  # ADDED 17/11/2026. CI's Verify also runs scripts/run_unit_tests.py, which
+  # land.sh did not, so an unregistered test_*.py passed here and went red on
+  # main. Eight pushes from parallel sessions landed onto that red main in one
+  # evening, each one a failure email. --list is the runner's registry check
+  # alone (instant): it refuses a test file nothing runs.
+  python3 scripts/run_unit_tests.py --list >/dev/null || {
+    python3 scripts/run_unit_tests.py --list | sed -n '1,12p' >&2
+    echo "REFUSING: the unit-test registry would fail CI (see above). Add the test" >&2
+    echo "to RUN in scripts/run_unit_tests.py. Your commit is on the branch." >&2
+    exit 1
+  }
+  # Warn, never refuse: the push may be the fix. But say so when main is
+  # already red, so a writer knows its push will also go red until someone
+  # fixes the cause.
+  if [ "$i" -eq 1 ] && command -v gh >/dev/null 2>&1; then
+    LAST="$(gh run list --repo louisehoult-beep/msh-compare-data --workflow "Verify (publish gate)" \
+      --branch main --status completed --limit 1 --json conclusion,url \
+      --jq '.[0].conclusion + " " + .[0].url' 2>/dev/null || true)"
+    case "$LAST" in
+      failure*) echo "WARNING: main's last Verify run FAILED (${LAST#failure }). Unless this" >&2
+                echo "push fixes that, it will fail too. Read the log before landing more." >&2 ;;
+    esac
+  fi
   bash scripts/gate.sh || {
     echo "REFUSING: verify.py failed after the rebase. Root rule 13 — if the gate" >&2
     echo "and the data disagree, the data is wrong. Never loosen a check to get a" >&2

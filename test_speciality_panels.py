@@ -1116,15 +1116,15 @@ print("\nTRUE POSITIVES — awards that must be on this patch")
 # be genuinely matched and still fall outside the cap once matched > 40 (see
 # below). These two stay common enough to keep appearing in the shown slice.
 for good in ["telecare", "community equipment", "care home", "intermediate care",
-             "virtual ward", "technology enabled care", "falls prevention",
+             "technology enabled care", "falls prevention",
              "independent living", "nursing care beds"]:
     check("present: %s" % good, good in ftitles)
-# "digital care alarms" is checked against the full matched set, not the shown
-# slice: added 15/09/2026 when backfilling three genuine Integrated Community
-# Equipment Service awards (Calderdale, Nottinghamshire Adults/Children — see
-# patient-handling's include-list note) pushed this speciality's matched
-# total past AWARD_CAP for the first time, ageing this older title out of the
-# top 40 by date. The matcher still admits it; only the display window changed.
+# "digital care alarms" and "virtual ward" are checked against the full matched
+# set, not the shown slice: added 15/09/2026 (digital care alarms) and
+# 13/11/2026 (virtual ward) when new awards elsewhere on this patch pushed the
+# matched total past AWARD_CAP, ageing these older titles out of the top 40 by
+# date. The matcher still admits them (5 virtual-ward awards in the full set on
+# 13/11/2026); only the display window changed.
 _fr_th = B.load("tender-history.json")
 _fr_fa = B.load("framework-awards.json")
 _fr_matched_titles = " || ".join(
@@ -1136,6 +1136,8 @@ _fr_matched_titles = " || ".join(
 ).lower()
 check("present in the full matched set (beyond the display cap): digital care alarms",
       "digital care alarms" in _fr_matched_titles)
+check("present in the full matched set (beyond the display cap): virtual ward",
+      "virtual ward" in _fr_matched_titles)
 check("every award shown is one the matcher still admits",
       all(B.match_title(frx, a["title"]) for a in fr["awards"]))
 check("the shown slice is the matched set up to AWARD_CAP, nothing else withheld",
@@ -1163,8 +1165,14 @@ print("\nTHE CLINICAL VOCABULARY IS MOSTLY ABSENT FROM THE DATA, AND SAID SO")
 for word in ["geriatric", "delirium",
              "urgent community response", "discharge to assess"]:
     check("nothing published on '%s' today" % word, word not in ftitles)
-check("reablement is published now that a real notice exists for it",
-      "reablement" in ftitles)
+#
+# AGED OUT OF THE CAP, 05/11/2026 (same cause as ^o537, see matched_titles). The
+# Enfield notice is still matched and correct, but this panel now matches 135
+# awards against an AWARD_CAP of 40, so newer awards pushed it out of the shown
+# slice and this assertion failed on nothing. Checked against the matched set,
+# which is the coverage question it was always asking.
+check("reablement is matched now that a real notice exists for it",
+      "reablement" in matched_titles(FRAILTY))
 # FRAILTY MOVED, 22/09/2026, exactly the way reablement moved on 10/09 and for the
 # same reason. "Proactive Care (Berkshire West) - Frailty" (Berkshire Healthcare
 # NHS Foundation Trust, 22/09/2026) is a genuine award on this patch and the panel
@@ -1986,13 +1994,16 @@ check("Medtronic appears exactly once", len(medtronic) == 1,
       "got %s" % [s["name"] for s in nesup if "medtronic" in s["name"].lower()])
 check("Medtronic is credited on both frameworks",
       bool(medtronic) and len(medtronic[0]["frameworks"]) == 2)
-# The alias registry keeps T.J. Smith and Nephew (Companies House 00093994) separate
-# from Smith+Nephew (00156031) on purpose. It must be flagged, never merged and never
-# dropped.
-tj = [s for s in nesup if s["name"].lower().startswith("t.j.smith")]
-check("T.J. Smith and Nephew is kept as NHSSC wrote it", len(tj) == 1)
-check("...and flagged unresolved rather than merged into Smith+Nephew",
-      bool(tj) and tj[0]["resolved"] is False)
+# T.J. Smith and Nephew (Companies House 00093994) got its own confirmed
+# canonical record on 14/11/2026 (Wound Closure framework-coverage batch),
+# kept distinct from Smith+Nephew (00156031) per that record's own ownership
+# note. Its two NHSSC spellings now resolve to each other under that record,
+# never into Smith+Nephew.
+tj = [s for s in nesup if s["name"] == "T.J Smith & Nephew Ltd"]
+check("T.J Smith & Nephew Ltd resolves to its own canonical record", len(tj) == 1)
+check("...both NHSSC spellings merge into it, not into Smith+Nephew",
+      bool(tj) and tj[0]["resolved"] is True
+      and "T.J.Smith and Nephew Limited" in tj[0]["variants"])
 check("no supplier from Total Orthopaedic Solutions 3 leaked in",
       not any(s["name"] in ("Zimmer Biomet Limited", "Arthrex Ltd", "Corin Ltd")
               for s in nesup))
@@ -2012,7 +2023,8 @@ check("no tariff part is claimed", not B.SPECIALITY_RULES[NEURO].get("tariffPart
 check("no Drug Tariff block is published", ne.get("drugTariff") is None)
 check("the tariff rule says why rather than going quiet",
       "No Drug Tariff part applies" in (ne.get("rules") or {}).get("drugTariff", ""))
-check("no open tender on this patch today, and none invented", ne["openTenders"] == [])
+check("the open-tender count published matches what is actually listed, nothing invented",
+      ne["counts"]["openTenders"] == len(ne["openTenders"]))
 
 print("\nTHE COVERAGE LIMIT IS PUBLISHED, NOT HIDDEN (rule 14)")
 nefw = (ne.get("rules") or {}).get("frameworks", "")
@@ -3572,7 +3584,7 @@ _pd_all = len([r for r in B.load("drug-tariff-part-ix.json")["rows"]
 check("the slice is well under one per cent of the three parts (%d of %d)"
       % (_pd_dt["lineCount"], _pd_all), _pd_dt["lineCount"] < _pd_all / 100)
 # The brand-name search is the whole reason Part IXC appears at all. Searching the
-# generic description alone returns 258 lines, every one of them IXA.
+# generic description alone returns 256 lines, every one of them IXA.
 _pd_dtrows = [r for r in B.load("drug-tariff-part-ix.json")["rows"]
               if r[0] in ("IXA", "IXB", "IXC")]
 import re as _re
@@ -3580,14 +3592,26 @@ _pd_vrx = _re.compile(_pd_rule["tariffVmp"], _re.I)
 check("the rule reads the brand name as well as the generic one",
       tuple(_pd_rule.get("tariffFields") or ()) == ("vmp", "amp"))
 check("generic-name-only would lose Part IXC entirely, which is why it is not used",
-      len([r for r in _pd_dtrows if _pd_vrx.search(r[2] or "")]) == 258)
+      len([r for r in _pd_dtrows if _pd_vrx.search(r[2] or "")])
+      < tariff_slice(PAEDS)["lines"])
 check("the published rule states the limit of the counting rule",
       "is invisible to it" in pd_["rules"]["drugTariff"])
 _pd_top = {x["name"]: x["lines"] for x in _pd_dt["topSuppliers"]}
-for name, lines in [("Dermacea Ltd", 54), ("Kavendor Ltd", 52), ("Coloplast Ltd", 26),
-                    ("Flexicare Medical Ltd", 23), ("Charles S Bullen Stomacare Ltd", 22)]:
-    check("top supplier matches the page: %s %d lines" % (name, lines),
-          _pd_top.get(name) == lines, "got %s" % _pd_top.get(name))
+# Was pinned to October's figures (258 generic lines, Coloplast 26, ...); NHSBSA
+# republishes Part IX monthly and the 02/11/2026 file moved Coloplast to 23 and
+# blocked every push with nothing wrong (same lesson as tariff_slice, 01/10/2026).
+# The count is data; the invariant is that each top supplier's line count equals a
+# fresh re-read of the tariff copy, and that the leading names are the real leaders.
+_pd_ix = {k: i for i, k in enumerate(B.load("drug-tariff-part-ix.json")["schema"])}
+_pd_by_sup = {}
+for _r in tariff_slice(PAEDS)["rows"]:
+    _pd_by_sup[_r[_pd_ix["supplier"]]] = _pd_by_sup.get(_r[_pd_ix["supplier"]], 0) + 1
+for name, lines in list(_pd_top.items())[:5]:
+    check("top supplier matches the tariff copy: %s %d lines" % (name, lines),
+          _pd_by_sup.get(name) == lines, "tariff copy says %s" % _pd_by_sup.get(name))
+check("the panel's top five are the five largest suppliers in the tariff copy",
+      sorted(list(_pd_top.values())[:5], reverse=True)
+      == sorted(_pd_by_sup.values(), reverse=True)[:5])
 
 print("  no exclusion list, and the file says why rather than hiding it")
 check("exclude is genuinely None, not a never-matching placeholder",
@@ -4294,8 +4318,14 @@ for good in ["Stroke Central Monitor",
 # is a direct award of stroke services and belongs on this page. Read from the
 # award feed record (buyer, title, supplier, date); the notice itself was not
 # opened.
-check("exactly fifteen, and every one of them was read",
-      sk["counts"]["awardsMatched"] == 15, "got %s" % sk["counts"]["awardsMatched"])
+# SIXTEEN FROM 07/11/2026: "QHM-2026-6953 Stroke Recovery Support Service" (NHS
+# North East and North Cumbria ICB to Stroke Association, published 06/11/2026,
+# Find a Tender notice 105606-2026, framework-awards feed, not itself a framework
+# award) is a direct award of a stroke recovery support service and belongs on
+# this page. Read from the award feed record (buyer, title, supplier, date); the
+# notice itself was not opened.
+check("exactly sixteen, and every one of them was read",
+      sk["counts"]["awardsMatched"] == 16, "got %s" % sk["counts"]["awardsMatched"])
 check("the Norfolk and Suffolk community stroke service is one of them",
       any("enhanced community stroke services" in (a.get("title") or "").lower()
           for a in sk["awards"]))
@@ -4962,8 +4992,8 @@ if _au_dup:
     check("25 entries for 24 companies", au["counts"]["suppliers"] == 25,
           "got %s" % au["counts"]["suppliers"])
 
-print("  open tenders — empty is the honest answer, not a miss")
-check("no open notice on this patch today", au["openTenders"] == [])
+print("  open tenders — never invented, whatever the day's true count is")
+check("open tenders count is not invented", au["counts"]["openTenders"] == len(au["openTenders"]))
 check("and the rule says an empty list means none was open, not none was sought",
       "empty" in (au["rules"].get("openTenders") or "").lower())
 
@@ -5257,8 +5287,17 @@ check("and it is named on four of the five frameworks",
 check("with the three NHSSC spellings kept visible",
       bool(_co_oly) and len(_co_oly[0]["variants"]) == 3)
 
-print("  open tenders — empty is the honest answer, not a miss")
-check("no open notice on this patch today", co["openTenders"] == [])
+print("  open tenders — never invented, whatever the day's true count is")
+# Was a hardcoded empty list until 10/11/2026, when the East of England NHS
+# collaborative Procurement Hub opened real market engagement for stoma care
+# nurse sponsorship (Find a Tender 106395-2026). An empty list was correct the
+# day this was written, not a property of the logic - see mental-health's and
+# audiology's version of this same check for why count-not-invented is the
+# durable form.
+check("open tenders count is not invented", co["counts"]["openTenders"] == len(co["openTenders"]))
+_co_open_titles = {t.get("title") for t in co["openTenders"]}
+check("the stoma care nurse sponsorship market engagement is carried",
+      "Market Engagement for Stoma Care Nurse Sponsorship Services" in _co_open_titles)
 
 
 # ---------------------------------------------------------------------------
@@ -6136,10 +6175,28 @@ if euc:
                         ("non-emergency", "non-emergency PTS is not this patch"),
                         ("non emergency", "non-emergency PTS is not this patch"),
                         ("dental", "dental is its own route"),
-                        ("mental health", "mental health crisis is its own route"),
-                        ("cancer", "urgent cancer pathways are not urgent care")]:
+                        ("mental health", "mental health crisis is its own route")]:
         check("no %s row reached the panel (%s)" % (banned, why[:34]),
               banned not in _euc_titles)
+
+    # "cancer" is checked separately. A genuine cancer-PATHWAY row (a triage,
+    # screening or suspected-cancer referral service borrowing "urgent") must
+    # still be refused — that is what the blanket check above caught for years.
+    # But NHS Blaenau Gwent/Velindre's defibrillator award is admitted on
+    # "defibrillat", not on "cancer" or "urgent": it is this patch's own
+    # equipment, bought for a hospital building whose own name is "New
+    # Velindre Cancer Centre". Read and confirmed 01/11/2026 (GitHub Actions
+    # triage) rather than excluded wholesale.
+    _euc_cancer_venue_exceptions = (
+        "procurement of defibrillators and associated accessories for the "
+        "new velindre cancer centre (nvcc)",
+    )
+    _euc_cancer_hits = [a["title"] for a in euc["awards"]
+                        if "cancer" in (a.get("title") or "").lower()
+                        and (a.get("title") or "").lower()
+                            not in _euc_cancer_venue_exceptions]
+    check("no cancer row reached the panel (urgent cancer pathways are not urg)",
+          not _euc_cancer_hits, "got %r" % _euc_cancer_hits)
 
     print("  five frameworks, the five the page's own scope and calendar name")
     check("exactly five frameworks", len(euc["frameworks"]) == 5,
@@ -7009,6 +7066,8 @@ _pc_absent("urgent treatment centres are counted on page 2922",
            "UHS Urgent Treatment Centre Clinical Service Provision")
 _pc_absent("urgent treatment centres are counted on page 2922",
            "HHFT Urgent Treatment Centre Clinical Service Provision (3 + 2 years)")
+_pc_absent("a GP-led urgent treatment centre matches the GP token but is page 2922's",
+           "GP-led Urgent Treatment Centre")
 _pc_absent("NHS 111 and integrated urgent care are counted on page 2922",
            "BLMK ICB Integrated Urgent Care (111 & Out of Hours) Service")
 _pc_absent("a children's palliative out-of-hours line is the palliative page's",
@@ -7103,6 +7162,138 @@ for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
         continue
     check("%s still carries an exclusion list" % _slug, bool(_r.get("exclude")))
 
+
+
+# ---------------------------------------------------------------------------
+# STERILE SERVICES (16/11/2026). The rule is wide on "decontaminat*" because
+# that is the word NHS buyers put in an SSD title, so the exclusion list is
+# doing real work and every entry in it is asserted here against the notice
+# that forced it. The other half of this block is the no-removal invariant:
+# this panel was added BESIDE infection prevention and control, not carved out
+# of it, and a future edit that moves the `ssd` directory tag instead of
+# sharing it would take live companies off a published page.
+SSD = "sterile-services"
+_ssd_rule = B.SPECIALITY_RULES[SSD]
+_ssd = load_panel(SSD)
+_ssd_titles = matched_titles(SSD)
+
+
+def _ssd_absent(label, needle):
+    check("%s: %s" % (label, needle[:58]), needle.lower() not in _ssd_titles,
+          "matched a notice that is not sterile services")
+
+
+def _ssd_present(label, needle):
+    check("%s: %s" % (label, needle[:58]), needle.lower() in _ssd_titles,
+          "a genuine sterile services notice is not matched")
+
+
+print("  sterile services claims exactly three frameworks and names them")
+_ssd_fw_names = sorted({f["name"] for f in _ssd["frameworks"]})
+check("three NHS Supply Chain agreements, no more",
+      _ssd_fw_names == ["Decontamination Capital Equipment, Associated Accessories and Services",
+                        "Instrument Decontamination and Accessories",
+                        "Tray Wrap and Sterilisation Equipment"],
+      repr(_ssd_fw_names))
+check("Environmental Decontamination is left with infection prevention",
+      "environmental" not in _ssd_rule["frameworks"].lower()
+      and not any("Environmental" in n for n in _ssd_fw_names))
+check("the endoscopes themselves are not claimed here",
+      not any("Endoscop" in n for n in _ssd_fw_names))
+
+print("  what the rule refuses, it refuses in the include and not in the exclude")
+for _refused in ("autoclave", "reverse osmosis", "water treatment",
+                 "instrument set", "loan kit", "track and trace"):
+    check("'%s' is refused in the include" % _refused,
+          _refused not in _ssd_rule["include"].lower())
+check("the autoclave refusal costs nothing here, because SSD catches it",
+      "sgh autoclave replacement project" in _ssd_titles,
+      "York's autoclave award, which the IPC rule named as the price of refusing "
+      "bare 'autoclave', is matched here by 'sterile services' instead")
+# The other row IPC named, Bedfordshire's "SSD Autoclave Cooling Water Chiller",
+# DOES match this rule - but it is tagged `tender` with supplier_count 0, so it is
+# not an award and no award list can carry it. Asserted as the notice it actually
+# is, rather than claimed as a win this panel does not show.
+_ssd_bed = [a for a in B.load("framework-awards.json")["awards"]
+            if a.get("title") == "SSD Autoclave Cooling Water Chiller"]
+check("Bedfordshire's SSD chiller matches the rule",
+      len(_ssd_bed) == 1 and B.match_title(B.compile_rule(_ssd_rule), _ssd_bed[0]["title"]))
+check("and it is a tender notice, not an award, so no award list shows it",
+      _ssd_bed[0]["tag"] == ["tender"] and _ssd_bed[0]["supplier_count"] == 0
+      and "ssd autoclave cooling water chiller" not in _ssd_titles)
+
+print("  every notice the exclusion list drops is named, and is really not SSD")
+_ssd_absent("dental decontamination is HTM 01-05", "Mold Dental Decontamination")
+_ssd_absent("dental decontamination is HTM 01-05", "Colwyn Bay DDS Dental Decontamination")
+_ssd_absent("dental autoclaves are primary care", "Infection control of dental autoclaves")
+_ssd_absent("a process-industry steriliser is not a hospital one",
+            "Framework for Laboratory Continuous Steriliser")
+_ssd_absent("a lab incubator's self-sterilising cycle is not a purchase",
+            "CO2 Self-sterilising Incubators")
+_ssd_absent("a ward kitchen appliance is not SSD", "Ward Dishwashers/Sterilisers")
+_ssd_absent("CBRN casualty lotion is not instrument reprocessing",
+            "Reactive Skin Decontamination Lotion")
+_ssd_absent("mass decontamination is emergency preparedness", "DECONTAMINATION TENT")
+_ssd_absent("a plant room is not an instrument", "Asbestos Decontamination Services")
+_ssd_absent("estates works are not a reprocessing contract", "Safety and decontamination works")
+_ssd_absent("bed and mattress cleaning is patient handling",
+            "Dynamic Mattresses & Decontamination Services")
+_ssd_absent("bariatric equipment rental is patient handling",
+            "bariatric equipment rental, maintenance and decontaminatio")
+_ssd_absent("ambulance cleaning is not SSD", "Decontamination Services for ESTH NEPTS Vehicles")
+_ssd_absent("dialysis and estates water belong to renal and estates",
+            "Maintenance of Reverse Osmosis Equipment")
+_ssd_absent("theatre instrument rental is not an SSD purchase",
+            "Lap Renal Instrument sets rental")
+
+print("  and the department's own notices are matched, in all four spellings")
+_ssd_present("sterile services by name", "Sterile Services Department annual & quarterly servicing")
+_ssd_present("SSD by initials", "Provision of the Replacement of SSD Equipment")
+_ssd_present("CSSD by initials", "CSSD Track and Trace system")
+_ssd_present("the washer-disinfector", "Instrument Washer Disinfectors")
+_ssd_present("the automated endoscope reprocessor", "Automated Endoscope Washer Disinfectors")
+_ssd_present("AER as the buyer writes it", "SERVICE MAINTENANCE OF AER WASHER")
+_ssd_present("endoscope reprocessing", "LAPARID RAPIDAER ENDOSCOPE REPROCESSOR")
+_ssd_present("the ultrasonic bath", "Washer Disinfector, Ultrasonic Bath and Steriliser Periodic Testing")
+_ssd_present("rigid containers", "Purchase of Rigid Containers for Sterile Services")
+_ssd_present("tray wrap", "Tray Wrap & Sterilisation Products")
+_ssd_present("instrument tracking", "Fingerprint Instrument Tracking System")
+_ssd_present("a traceability system", "Decontamination Services Department - Traceability System")
+
+print("  CPV corroborates only, and the shared maintenance code is not claimed")
+check("33191 sterilisation and disinfection devices is the claim",
+      _ssd_rule["cpv"] == ("33191",), repr(_ssd_rule.get("cpv")))
+check("50421 repair of medical equipment is NOT claimed",
+      not any(c.startswith("50421") for c in _ssd_rule["cpv"]))
+
+print("  the panel was added BESIDE infection prevention, not taken out of it")
+check("the ssd directory tag reaches both panels",
+      B.SEED_TAG_TO_PANELS["ssd"] == ["infection-prevention-and-control", SSD],
+      repr(B.SEED_TAG_TO_PANELS["ssd"]))
+check("infection prevention still holds its sixteen agreements",
+      len(load_panel("infection-prevention-and-control")["frameworks"]) == 16)
+check("the coverage note says the sharing out loud",
+      "SHARES ITS THREE FRAMEWORKS" in (_ssd["rules"].get("coverage") or _ssd_rule["coverageNote"]))
+
+print("  HTM 01-01 is carried as a sourced policy item, never as award evidence")
+check("no award row carries HTM 01-01, so none is claimed",
+      "htm 01-01" not in _ssd_titles and "htm01-01" not in _ssd_titles)
+_ssd_li = _ssd["localIntel"]
+check("three local intelligence items", len(_ssd_li) == 3, "%d items" % len(_ssd_li))
+_ssd_ids = sorted(i["id"] for i in _ssd_li)
+check("HTM 01-01, HTM 01-06 and the scope boundary",
+      _ssd_ids == ["ssd-htm-siblings", "ssd-htm0101", "ssd-htm0106"], repr(_ssd_ids))
+for _i in _ssd_li:
+    check("%s carries its own source" % _i["id"],
+          _i["url"].startswith("https://www.england.nhs.uk/")
+          and bool(_i.get("quote")) and bool(_i.get("verifiedOn")))
+    check("%s is a policy item, not a buying route" % _i["id"], _i["group"] == "policy")
+check("the surgical instruments memorandum is quoted, not paraphrased",
+      any("explains the management of decontamination and the various ways to sterilize"
+          in (i.get("quote") or "") for i in _ssd_li))
+check("HTM 01-04 and HTM 01-05 are named as NOT this patch",
+      any("01-05" in (i.get("fact") or "") and "01-04" in (i.get("fact") or "")
+          for i in _ssd_li))
 
 
 print()

@@ -31,10 +31,23 @@ the sources were last read, and pruning reads no sources. Bumping it would be a
 false freshness claim. `_meta.lastPruned` records this pass instead.
 
 Rules mirrored from calendar_build.py (framework_rows, RECENT_PAST_DAYS = 90):
-  * date today or later                      -> keep, untouched
+  * end date today or later                  -> keep, untouched
   * framework-end, within 90 days past       -> keep, force `past: true`
   * framework-end, more than 90 days past    -> drop (the builder's "too_old")
-  * anything else with a past date           -> drop
+  * anything else whose end date is past     -> drop
+
+A ROW IS JUDGED BY WHETHER IT HAS FINISHED, NOT BY WHETHER IT HAS STARTED.
+`endDate or date` is the date that decides, which is what the builder does
+(`if end < today: continue`, where `end = parse_iso(ev["end"]) or start`) and
+what the gate does (`effective_end = end or date`). Fixed 16/11/2026: this
+script was written 25/08/2026 and judged on `date` alone. verify.py had the
+same bug and was fixed on 12/09/2026 for ev-dukes-club-2026 — a conference
+that had started but not finished — and the fix was never mirrored here. The
+divergence meant the pruner DELETED any in-progress multi-day row that the
+gate would rightly have kept: silent data loss on a members' page rather than
+a loud gate failure, so nothing ever reported it. It was due to fire on
+17/11/2026 on three conferences running 16-19 November (COMPAMED, MEDICA and
+Hospice UK National).
 
 Idempotent: running it twice changes nothing the second time.
 
@@ -63,8 +76,12 @@ MAX_DROP_FRACTION = 0.25
 def decide(entry, today, horizon):
     """(keep?, mutated_entry, reason). Mirrors calendar_build.framework_rows."""
     date = entry.get("date") or ""
+    # The date that decides is the one the row FINISHES on. A conference running
+    # today through Sunday is not past on its second morning. See the module
+    # docstring: judging on `date` alone deleted in-progress multi-day rows.
+    effective_end = entry.get("endDate") or date
     try:
-        d = datetime.date.fromisoformat(date)
+        d = datetime.date.fromisoformat(effective_end)
     except ValueError:
         # Not this script's job to judge — verify.py has a specific, better
         # message for a malformed date. Leave it exactly as found.

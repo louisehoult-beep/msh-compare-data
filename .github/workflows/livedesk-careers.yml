@@ -1,0 +1,55 @@
+name: Live Desk careers feed
+
+# Publishes the Careers tab's roles to the Live Desk app (Supabase livedesk_feed id='careers')
+# and sends new-role alerts to phones that opted in. Reads data/supplier-careers.json, so it
+# runs after the weekly "Supplier careers (hiring signal)" refresh, and can be run by hand.
+# Writes nothing to this repo. Logic and rules: scripts/careers_feed.py.
+# Secrets (same as push-alerts): SUPABASE_URL, SUPABASE_SERVICE_KEY, FCM_SERVICE_ACCOUNT.
+
+on:
+  workflow_run:
+    workflows: ["Supplier careers (hiring signal)"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Report what would be sent; publish and send nothing"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: livedesk-careers
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    # A failed careers refresh must not republish stale roles as fresh.
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install (JWT signing for FCM)
+        run: python3 -m pip install --quiet cryptography
+      - name: Tests
+        run: python3 -m unittest test_careers_feed
+      - name: Publish roles and send new-role alerts
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}
+          DRY_RUN: ${{ inputs.dry_run == true }}
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            python3 scripts/careers_feed.py publish --dry-run
+          else
+            python3 scripts/careers_feed.py publish
+          fi

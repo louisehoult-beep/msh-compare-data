@@ -52,7 +52,7 @@ process.stdout.write(JSON.stringify(out));
 """
 
 BLANK = {"v": 1, "wnSeen": [], "tour": False, "tourSeen": False, "briefing": False,
-         "phone": False, "scope": "mine", "stars": []}
+         "phone": False, "scope": "mine", "stars": [], "companies": []}
 FW = {"u": "/medical-sales-hub/frameworks/", "t": "Framework Hub", "k": "page", "at": "2026-09-30"}
 
 CASES = [
@@ -75,6 +75,12 @@ CASES = [
         {"u": "https://example.org/story", "t": "A story", "k": "story", "at": "1 Oct"},
         ["not", "a", "star"],
     ]}], dict(BLANK, stars=[FW, {"u": "https://example.org/story", "t": "A story", "k": "story", "at": ""}])),
+    ("companies: valid ids, unique, strings only, at most five", "normState",
+     [{"companies": ["ego-pharmaceuticals-uk", "ego-pharmaceuticals-uk", "BAD id", 7, "a", "b", "c", "d", "e", "f"]}],
+     dict(BLANK, companies=["ego-pharmaceuticals-uk", "a", "b", "c", "d"])),
+    ("companies: a non-list is ignored", "normState", [{"companies": "ego"}], BLANK),
+    ("companies: set through the state patch", "applyBody",
+     [BLANK, {"state": {"companies": ["aspire-pharma"]}}, "2026-10-22"], dict(BLANK, companies=["aspire-pharma"])),
     ("bare host is the root path", "starKey", ["https://medsalesintelligencehub.co.uk"], "/"),
     ("empty stays empty (and is then rejected)", "starKey", [""], ""),
     ("titles cut at 200", "normState", [{"stars": [{"u": "/x/", "t": "y" * 250}]}],
@@ -102,6 +108,16 @@ CASES = [
     ("stars must be a list", "normState", [{"stars": {"a": {"u": "/x/", "t": "X"}}}], BLANK),
     ("title cut counts characters, not UTF-16 units", "normState",
      [{"stars": [{"u": "/x/", "t": "\U0001F600" * 250}]}], dict(BLANK, stars=[{"u": "/x/", "t": "\U0001F600" * 200, "k": "page", "at": ""}])),
+    ("a pinned panel keeps its kind and its fragment", "applyBody",
+     [BLANK, {"star": {"u": "https://medsalesintelligencehub.co.uk/medical-sales-hub/dermatology/#pin=gp:skin", "t": "Dermatology: Skin", "k": "panel"}}, "2026-10-22"],
+     dict(BLANK, stars=[{"u": "/medical-sales-hub/dermatology/#pin=gp:skin", "t": "Dermatology: Skin", "k": "panel", "at": "2026-10-22"}])),
+    ("two panels on one page are two pins; unpin removes only one", "applyBody",
+     [dict(BLANK, stars=[{"u": "/medical-sales-hub/dermatology/#pin=calendar", "t": "C", "k": "panel", "at": ""},
+                         {"u": "/medical-sales-hub/dermatology/#pin=gp:skin", "t": "S", "k": "panel", "at": ""}]),
+      {"unstar": "/medical-sales-hub/dermatology/#pin=calendar"}, "2026-10-22"],
+     dict(BLANK, stars=[{"u": "/medical-sales-hub/dermatology/#pin=gp:skin", "t": "S", "k": "panel", "at": ""}])),
+    ("an unknown kind is a page", "normState", [{"stars": [{"u": "/x/", "t": "X", "k": "banner"}]}],
+     dict(BLANK, stars=[{"u": "/x/", "t": "X", "k": "page", "at": ""}])),
     ("protocol-relative path is rejected", "normState",
      [{"stars": [{"u": "https://medsalesintelligencehub.co.uk//evil.com/", "t": "E"}, {"u": "/\\evil.com", "t": "E"}]}], BLANK),
 ]

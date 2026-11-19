@@ -37,6 +37,14 @@
     }).then(function(r){ return r.ok ? r.json() : null; });
   }
   var PRESSURES = BASE + 'data/trust-pressures.json' + CB;
+  /* JAG endoscopy accreditation, per trust (16/11/2026, data/trust-jag.json,
+     scripts/refresh_trust_jag.py). The Joint Advisory Group's participating
+     services register is the first thing an endoscopy conversation turns on,
+     and the Hub held it only as a national aggregate, so a trust profile could
+     say nothing about it. Fails soft: a trust with no JAG panel is a trust the
+     register does not name, which the panel says in those words rather than
+     leaving a reader to read silence as "not accredited". */
+  var TRUSTJAG = BASE + 'data/trust-jag.json' + CB;
   /* The NHS Supply Chain catalogue cache, read for one thing only: to list a
      supplier's products the way Product Comparison does, one per catalogue
      brand line, instead of the grouped seed search terms (30/09/2026). Fails
@@ -131,15 +139,19 @@
     fetch(PRODUCTS).then(function(r){return r.json();}).catch(function(){return null;}),
     fetchGated('trust-contacts').catch(function(){return null;}),
     fetch(PRESSURES).then(function(r){return r.json();}).catch(function(){return null;}),
-    fetch(NHSSC).then(function(r){return r.json();}).catch(function(){return null;})
-  ]).then(function(res){ render(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7]); })
+    fetch(NHSSC).then(function(r){return r.json();}).catch(function(){return null;}),
+    fetch(TRUSTJAG).then(function(r){return r.json();}).catch(function(){return null;})
+  ]).then(function(res){ render(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8]); })
     .catch(function(){ MOUNT.innerHTML = '<div style="font-family:Inter,system-ui,sans-serif;color:#8a6d00;">Meeting prep is temporarily unavailable — please try again shortly.</div>'; });
 
-  function render(index, cfg, seed, specMap, prodFile, contactFile, pressureFile, nhsscFile){
+  function render(index, cfg, seed, specMap, prodFile, contactFile, pressureFile, nhsscFile, jagFile){
     var CONTACT_BY_CODE = (contactFile && contactFile.trusts) || {};
     var CONTACTS_ASOF = (contactFile && contactFile.asOf) || '';
     var PRESS_BY_CODE = (pressureFile && pressureFile.trusts) || {};
     var PRESS = pressureFile || null;
+    var JAG = jagFile || null;
+    var JAG_BY_CODE = {};
+    if (JAG && JAG.trusts) JAG.trusts.forEach(function(t){ if (t.code) JAG_BY_CODE[t.code] = t; });
     /* Verified full ranges live in supplier-products.json, NOT in the seed —
        supplier-seed.json is declared human-owned and never-overwritten by
        build_supplier_index.py, and Lou's hand-written product names carry
@@ -226,7 +238,7 @@
     function byName(a,b){ return (a.name||'').toLowerCase() < (b.name||'').toLowerCase() ? -1 : 1; }
 
     var wrap = el('div', 'font-family:Inter,system-ui,sans-serif;color:' + INK + ';');
-    wrap.appendChild(el('div', 'text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:700;color:' + GOLD + ';', 'Medical Sales Intelligence Hub'));
+    wrap.appendChild(el('div', 'text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:700;color:#0B1C33;', 'Medical Sales Intelligence Hub'));
     wrap.appendChild(el('div', 'font-size:24px;font-weight:800;margin:2px 0 4px;', 'Help me prepare'));
     wrap.appendChild(el('div', 'font-size:14px;line-height:1.6;color:#4a5766;max-width:660px;margin-bottom:12px;', 'Pick the speciality, who you are, the trust and <strong>who you’re meeting</strong>. You get your competitors and how you stack up, the right angle for that person, the value case, and what to know about the trust — pulled from the whole Hub. Tick “early-stage” if you’re not on a product yet.'));
 
@@ -594,7 +606,7 @@
         + '<div style="font-size:14px;line-height:1.65;color:#39424d;">' + bodyHtml + '</div></div>';
     }
     function li(items){ return '<ul style="margin:4px 0 0;padding-left:18px;">' + items.map(function(i){ return '<li style="margin:3px 0;">' + i + '</li>'; }).join('') + '</ul>'; }
-    function link(text, id){ return '<a href="/?page_id=' + id + '" style="color:' + GOLD + ';font-weight:600;">' + text + '</a>'; }
+    function link(text, id){ return '<a href="/?page_id=' + id + '" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">' + text + '</a>'; }
     // One-click LinkedIn lookups: the tool builds the exact people-search and
     // recent-posts search and opens them in the rep's own logged-in LinkedIn.
     // (LinkedIn blocks server-side scraping, so deep links are the robust route.)
@@ -614,8 +626,7 @@
     function srcLink(key, text){
       var s = PRESS && PRESS.sources && PRESS.sources[key];
       if (!s) return '';
-      return ' <a href="' + esc(s.url) + '" target="_blank" rel="noopener" style="color:' + GOLD
-        + ';font-size:11px;font-weight:600;">' + esc(text || 'source') + ' &#8599;</a>';
+      return ' <a href="' + esc(s.url) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-size:11px;font-weight:600;">' + esc(text || 'source') + ' &#8599;</a>';
     }
 
     /* THE TRUST'S OWN OPERATING PRESSURE — published figures, copied not derived.
@@ -705,6 +716,52 @@
         '#6B2A34');
     }
 
+    /* JAG ENDOSCOPY ACCREDITATION — the register's own word, service by service.
+       Added 16/11/2026. A row on JAG's participating services register is one
+       SERVICE, not one trust: a trust can run several and hold a different status
+       on each, so this panel lists them and never collapses them into one badge
+       for the organisation. Every status is JAG's word, copied unchanged; nothing
+       is scored, ranked or restated as a pass or a failure, and "undergoing
+       self-assessment or not assessed" is shown as exactly that rather than as a
+       gap to sell into.
+
+       A trust the register does not name gets no panel. That is deliberate and
+       the file says why: absence from the register is a fact about the register
+       on the day it was read, not a finding about the trust. The register has no
+       feed and no publication date, so the read date is the only date there is. */
+    function jagPanel(code){
+      var t = code && JAG_BY_CODE[code];
+      if (!t || !t.jagServices || !t.jagServices.length) return '';
+      var ACC = 'Accredited';
+      var rows = t.jagServices.map(function(s){
+        var accredited = s.status === ACC;
+        return '<strong>' + esc(s.service) + '</strong> — <span style="font-weight:700;color:'
+          + (accredited ? '#2E6B3E' : '#8a6d00') + ';">' + esc(s.status) + '</span>'
+          + (s.sites && s.sites.length
+              ? '<br><span style="color:#6b7684;font-size:12.5px;">' + esc(s.sites.join(', ')) + '</span>'
+              : '')
+          + '<span style="color:#6b7684;font-size:12.5px;">'
+          + (s.sector ? (s.sites && s.sites.length ? ' · ' : '<br>') + esc(s.sector) : '')
+          + (s.adultPaediatric && s.adultPaediatric !== 'Not set' ? ' · ' + esc(s.adultPaediatric) : '')
+          + '</span>';
+      });
+      var head = t.services + (t.services === 1 ? ' endoscopy service' : ' endoscopy services')
+        + ' on the register, ' + t.accredited + ' accredited';
+      var src = (JAG && JAG.sourceUrl)
+        ? ' <a href="' + esc(JAG.sourceUrl) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-size:11px;font-weight:600;">JAG register &#8599;</a>'
+        : '';
+      return panel('JAG endoscopy accreditation — the register\u2019s own word',
+        '<div style="font-size:12.5px;color:#39424d;margin-bottom:4px;">' + esc(head) + '.</div>'
+        + li(rows)
+        + '<div style="margin-top:8px;font-size:12px;color:#8a8778;">A row is one service, not the '
+        + 'trust: a trust running several can hold a different status on each, and every status '
+        + 'above is JAG\u2019s own word, copied unchanged. The register has no feed and no '
+        + 'publication date, so a status changes on the page when it changes'
+        + (JAG && JAG.dataAsOf ? '; this reading is as at ' + esc(JAG.dataAsOf) : '') + '.'
+        + src + '</div>',
+        '#2E5E6B');
+    }
+
     /* WHO ACTUALLY BUYS HERE — named people, from Find a Tender.
        Framed exactly as the Stakeholder Mapper frames them: each person was
        published as the enquiry contact for the notice shown. That is a real,
@@ -721,7 +778,7 @@
       var show = sorted.slice(0, 6);
       var rows = show.map(function(c){
         var b = '<strong>' + esc(c.name) + '</strong>'
-          + (c.email ? ' — <a href="mailto:' + esc(c.email) + '" style="color:' + GOLD + ';font-weight:600;">' + esc(c.email) + '</a>' : '')
+          + (c.email ? ' — <a href="mailto:' + esc(c.email) + '" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">' + esc(c.email) + '</a>' : '')
           + (c.tel ? ' · ' + esc(c.tel) : '')
           + '<br><span style="color:#6b7684;font-size:12.5px;">Named on “' + esc(c.notice || 'a procurement notice') + '”'
           + (c.last ? ', most recent ' + esc(c.last) : '')
@@ -786,7 +843,7 @@
         h += panel('Frameworks & timing', li(fr) + '<div style="margin-top:8px;">A framework’s final year is the selling window — see the ' + link('Framework Hub', 678) + '.</div>');
       }
 
-      var nat = (cfg.nationalKeyInfo || []).map(function(n){ return '<strong>' + esc(n.title) + '</strong> — ' + esc(n.detail) + '<br><span style="color:' + GOLD + ';">Use it:</span> ' + esc(n.use); });
+      var nat = (cfg.nationalKeyInfo || []).map(function(n){ return '<strong>' + esc(n.title) + '</strong> — ' + esc(n.detail) + '<br><span style="color:#0B1C33;">Use it:</span> ' + esc(n.use); });
       if (nat.length){ h += panel('What’s changed nationally (use these)', li(nat)); }
 
       /* An alert carrying no title and no product name renders as an empty bullet,
@@ -812,7 +869,7 @@
         if (tr.reportFacts && tr.reportFacts.length){
           var rf = tr.reportFacts.map(function(f){
             return esc(f.fact) + (f.figure ? ' — <strong>' + esc(f.figure) + '</strong>' : '')
-              + (f.source ? ' <a href="' + esc(f.source) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-size:11.5px;font-weight:600;">' + esc(f.where || 'source') + ' &#8599;</a>' : '');
+              + (f.source ? ' <a href="' + esc(f.source) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-size:11.5px;font-weight:600;">' + esc(f.where || 'source') + ' &#8599;</a>' : '');
           });
           body += '<div style="margin-top:10px;font-weight:700;">From their own annual report &amp; board papers:</div>' + li(rf);
         }
@@ -845,7 +902,7 @@
         if (tr.voices && tr.voices.length){
           var vl = tr.voices.map(function(v){
             return '<strong>' + esc(v.who) + '</strong>' + (v.role ? ' (' + esc(v.role) + ')' : '') + (v.date ? ' <span style="color:#8a8778;font-size:11.5px;">' + esc(v.date) + '</span>' : '') + ' — ' + esc(v.what)
-              + (v.source ? ' <a href="' + esc(v.source) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-size:11.5px;font-weight:600;">source &#8599;</a>' : '');
+              + (v.source ? ' <a href="' + esc(v.source) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-size:11.5px;font-weight:600;">source &#8599;</a>' : '');
           });
           body += '<div style="margin-top:10px;font-weight:700;">What they’re saying publicly:</div>' + li(vl);
         }
@@ -860,6 +917,7 @@
           + ';font-size:11.5px;color:#6b7684;line-height:1.55;">' + verifiedLine(tr) + '</div>';
         h += panel('The trust: ' + esc(tr.name), body);
         h += pressurePanel(tr.code, sp);
+        h += jagPanel(tr.code);
         h += contactsPanel(tr.code, tr.name);
       } else if (trName && trName !== 'Other / any trust'){
         /* Every directory trust now gets a real profile built from verified
@@ -879,6 +937,7 @@
         h += panel('The trust: ' + esc(trName),
           (meta.length ? '<span style="color:#6b7684;font-size:12.5px;">' + meta.join(' · ') + ' — NHS ODS register' + (de.bc ? ' · buying centre: ' + esc(de.bc) : '') + '</span>' : ''));
         h += pressurePanel(de.code, sp);
+        h += jagPanel(de.code);
         h += contactsPanel(de.code, trName);
         h += panel('What the Hub hasn’t researched here yet',
           'This trust has no hand-researched profile yet, so there is no annual-report detail, procurement team structure or named executive above — everything shown is straight from the published data. Fill the gap in three clicks:'
@@ -900,7 +959,7 @@
       h += panel('How to use this in the meeting', li(howItems));
       h += '<div style="background:#fdfbf6;border:1px solid #e0c98a;border-radius:10px;padding:16px 18px;margin:14px 0 6px;text-align:center;">'
         + '<div style="font-size:14.5px;line-height:1.65;color:#39424d;"><em>The Hub has done the homework — this is your intel. Your skill as a salesperson is what turns it into a sale: people buy from people, and the relationship matters. Walk in as a partner in their care, not a supplier at the door.</em></div>'
-        + '<div style="font-size:13px;color:' + GOLD + ';font-weight:700;margin-top:8px;">&ldquo;Trust is the glue of life.&rdquo; &mdash; Stephen R. Covey</div>'
+        + '<div style="font-size:13px;color:#0B1C33;font-weight:700;margin-top:8px;">&ldquo;Trust is the glue of life.&rdquo; &mdash; Stephen R. Covey</div>'
         + '</div>';
       h += '<div style="font-size:12px;color:#8a8778;margin-top:6px;">Assembled from the live Hub — supplier directory, frameworks, Live Desk and Tools. Verify framework/award status at source before quoting.</div>';
       return h;

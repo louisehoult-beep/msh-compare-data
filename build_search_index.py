@@ -54,6 +54,7 @@ import argparse
 import glob
 import html as htmllib
 import json
+import math
 import os
 import re
 import sys
@@ -114,6 +115,41 @@ EXTRA_IDS = {
 # 3768 added 12/09/2026: its div.stage link lists (outside <nav>) leaked 11 nav
 # words into the index, making it compete with the pages it links to.
 EXCLUDE_IDS = {165, 166, 167, 685, 686, 687, 688, 946, 955, 957, 3768}
+
+# PRIVATE COMPANY DESKS: NEVER INDEXED. Added 18/11/2026.
+#
+# A private company desk is a Hub page restricted to ONE client's team (a
+# company's own desk, not a speciality or tool page for the whole membership).
+# This index is a PUBLIC file read by every Hub member's search box and by
+# anyone who opens the raw GitHub URL, so indexing a desk would publish that the
+# client's desk EXISTS, its title and its section headings, to every other
+# member and to the world. Both desks below were in the public index until
+# 18/11/2026.
+#
+# EVERY NEW PRIVATE COMPANY DESK MUST BE ADDED HERE (id and slug) BEFORE IT IS
+# PUBLISHED, or the next daily crawl will index it. verify.py reads this same
+# constant and fails the publish if either the id or the slug appears in the
+# index, so a desk that is added here is also held by the gate.
+#
+# This excludes content that comes from the desk PAGE only. The public supplier
+# record for the same company (e.g. "Meril UK Pvt Ltd") comes from
+# data/supplier-index.json, which is public framework data, and stays.
+PRIVATE_DESKS = {
+    6259: "meril-uk",     # Meril UK desk
+    6502: "medilogik",    # Medilogik desk
+}
+PRIVATE_DESK_IDS = frozenset(PRIVATE_DESKS)
+PRIVATE_DESK_PATHS = tuple(HUB_PREFIX + slug + "/" for slug in PRIVATE_DESKS.values())
+
+
+def is_private_desk(page_id=None, path=None):
+    """True for a private company desk, matched by page id OR by path."""
+    if page_id in PRIVATE_DESK_IDS:
+        return True
+    p = str(path or "")
+    return any(p == d or p.startswith(d) or p.rstrip("/") + "/" == d
+               for d in PRIVATE_DESK_PATHS)
+
 
 # Text that appears on many pages and belongs to the furniture, not the content.
 # Matched after tag-stripping, case-insensitively, and removed.
@@ -420,25 +456,58 @@ def anchor_for(attrs, preceding):
     return ""
 
 
-def bag(text):
+def _words(text):
+    out = []
+    for w in re.split(r"[^a-z0-9]+", ascii_fold(text).lower()):
+        if len(w) < 2:
+            continue
+        if w in BAG_STOP:
+            continue
+        out.append(w)
+    return out
+
+
+def bag(text, df=None, nsec=None):
     """A section's searchable words: unique, alphabetised, stopwords dropped.
 
     Sorting throws away word order and de-duplication throws away frequency, so
     what is left matches a query but cannot be read back as the Hub's prose. See
     the note on MAX_WORDS — this is the whole reason the index is shaped this
     way, and turning it back into running text would republish a paid product.
+
+    WHICH WORDS SURVIVE THE CAP (18/11/2026). A section longer than MAX_WORDS used
+    to keep the FIRST 120 words ALPHABETICALLY. That is a bias with no
+    relationship to what the section is about: 1,009 of 3,090 sections hit the cap,
+    and every one lost its tail, the letters s to z, so "stapling", "sutures",
+    "wound" and "thoracic" were thrown away from the very sections that discuss
+    them (Theatres and Surgical's "Surgical closure" held words only up to the
+    letter s). When the whole Hub's document frequency `df` is supplied the words
+    are instead ranked by how often they occur in the section times how RARE they
+    are across the Hub, and the best MAX_WORDS are kept. Rank is used only to
+    choose; the output is still sorted and de-duplicated, so nothing readable is
+    added. Without `df` (a bare call, an old test) the old alphabetical cut stands.
     """
-    words = set()
-    for w in re.split(r"[^a-z0-9]+", ascii_fold(text).lower()):
-        if len(w) < 2:
-            continue
-        if w in BAG_STOP:
-            continue
-        words.add(w)
-    return " ".join(sorted(words)[:MAX_WORDS])
+    counts = {}
+    for w in _words(text):
+        counts[w] = counts.get(w, 0) + 1
+    words = sorted(counts)
+    if len(words) <= MAX_WORDS or not df or not nsec:
+        return " ".join(words[:MAX_WORDS])
+
+    def score(w):
+        idf = math.log((nsec + 1.0) / (df.get(w, 0) + 1.0)) + 0.1
+        weight = 1.0 + math.log(counts[w])
+        # Bare numbers and codes (2026, cd016259) are rare, so they would crowd
+        # out the real vocabulary; a member rarely searches one.
+        if any(c.isdigit() for c in w):
+            weight *= 0.25
+        return weight * idf
+
+    best = sorted(words, key=lambda w: (-score(w), w))[:MAX_WORDS]
+    return " ".join(sorted(best))
 
 
-def sections_of(src, page_title):
+def sections_of(src, page_title, df=None, nsec=None, collect=None):
     """Split a page into (heading, anchor, word-bag) in document order."""
     body = strip_furniture(src)
     out = []
@@ -449,7 +518,9 @@ def sections_of(src, page_title):
     # which is a result with nothing in it. 25 characters separates the two.
     lead = clean_text(body[:marks[0].start()] if marks else body)
     if len(lead) >= 25:
-        out.append({"h": page_title[:HEADING_CHARS], "a": "", "w": bag(lead)})
+        if collect is not None:
+            collect.append(set(_words(lead)))
+        out.append({"h": page_title[:HEADING_CHARS], "a": "", "w": bag(lead, df, nsec)})
 
     for i, m in enumerate(marks):
         heading = clean_text(m.group(3))
@@ -458,7 +529,9 @@ def sections_of(src, page_title):
         end = marks[i + 1].start() if i + 1 < len(marks) else len(body)
         text = clean_text(body[m.end():end])
         anchor = anchor_for(m.group(2), body[:m.start()])
-        out.append({"h": heading[:HEADING_CHARS], "a": anchor, "w": bag(text)})
+        if collect is not None:
+            collect.append(set(_words(text)))
+        out.append({"h": heading[:HEADING_CHARS], "a": anchor, "w": bag(text, df, nsec)})
 
     # A section needs a heading someone could read, or enough words to be worth
     # matching. Anything else is a row in the results list that wastes a click.
@@ -507,11 +580,110 @@ def supplier_records():
     return out
 
 
+FRAMEWORKS_URL = HUB_PREFIX + "tender-history/#frameworks"
+
+
+def _kw(*bits, **kw):
+    k = ascii_fold(" ".join(b for b in bits if b)).lower()
+    k = re.sub(r"[^a-z0-9 ]+", " ", k)
+    k = re.sub(r"\s+", " ", k).strip()
+    limit = kw.get("limit", 400)
+    if len(k) > limit:
+        # Cut on a word boundary: a half word ("instrum") matches nothing and
+        # reads as a typo if anyone opens the file.
+        k = k[:limit].rsplit(" ", 1)[0]
+    return k
+
+
+def framework_records():
+    """The frameworks the Hub's framework directory lists.
+
+    ADDED 18/11/2026. The framework names live in data/frameworks.json and are
+    drawn into the Frameworks and Awards page by script, so no framework name
+    exists in any page's crawled HTML, and a rep who searched the product
+    ("surgical stapling") was never shown the framework that buys it. The
+    keywords are the framework's name, its buying category and its LOT TITLES
+    (Lot 3 of the Minimally Invasive Surgery framework is "Surgical Stapling
+    Devices"). Those are the buyer's own published titles, not Hub prose, and
+    carry no supplier names: who is on a framework is read from the notice
+    itself, never from this file (see the framework-award rules).
+
+    There are no per-framework anchors on the target page (company-report.js,
+    fwHref), so every record opens the framework directory section.
+    """
+    out = []
+    path = "data/frameworks.json"
+    if os.path.exists(path):
+        with open(path) as f:
+            doc = json.load(f)
+        for fw in doc.get("frameworks", []):
+            name = (fw.get("name") or "").strip()
+            if not name:
+                continue
+            lots = " ".join(str(v) for v in (fw.get("lotTitles") or {}).values() if v)
+            out.append({
+                "t": name,
+                "u": FRAMEWORKS_URL,
+                "k": _kw(name, fw.get("category"), lots, "framework nhs supply chain"),
+                "c": "Framework",
+            })
+    path = "data/framework-directory-extra.json"
+    if os.path.exists(path):
+        with open(path) as f:
+            doc = json.load(f)
+        for fw in doc.get("otherBodies", []):
+            name = (fw.get("name") or "").strip()
+            if not name:
+                continue
+            out.append({
+                "t": name,
+                "u": FRAMEWORKS_URL,
+                "k": _kw(name, fw.get("owner"), fw.get("category"), "framework"),
+                "c": "Framework",
+            })
+    out.sort(key=lambda r: r["t"].lower())
+    return out
+
+
+# Hub tools whose content is drawn by script from JSON, so the crawl finds
+# almost no words on them. Curated, short and justified: each is a place a rep
+# goes to DO something, and each link is one the Hub already uses.
+def tool_records():
+    spec_labels = ""
+    path = "data/compare-suppliers.json"
+    if os.path.exists(path):
+        with open(path) as f:
+            doc = json.load(f)
+        spec_labels = " ".join(v.get("label", "") for v in (doc.get("specialities") or {}).values())
+    return [
+        {"t": "Compare vs Competitors",
+         "u": HUB_PREFIX + "med-sales-tools/#view-compare",
+         "k": _kw("compare competitor competitors product comparison alternatives recalls "
+                  "delistings supply gaps live issues", spec_labels, limit=1200),
+         "c": "Tool"},
+        {"t": "Help Me Prepare",
+         "u": HUB_PREFIX + "med-sales-tools/#tool-prep",
+         "k": _kw("prepare meeting brief customer call visit pitch"),
+         "c": "Tool"},
+        {"t": "Stakeholder Mapper",
+         "u": HUB_PREFIX + "med-sales-tools/#sec-map",
+         "k": _kw("stakeholder mapper map decision makers buyers influencers who decides"),
+         "c": "Tool"},
+        {"t": "Framework Hub",
+         "u": HUB_PREFIX + "frameworks/",
+         "k": _kw("framework hub nhs supply chain sbs ccs noe cpc health trust europe "
+                  "routes to market renewal dates"),
+         "c": "Tool"},
+    ]
+
+
 # --------------------------------------------------------------------------
 # Build
 # --------------------------------------------------------------------------
 def wanted(page):
     pid = page.get("id")
+    if is_private_desk(pid, path_of(page)):
+        return False
     if pid in EXCLUDE_IDS:
         return False
     if pid in EXTRA_IDS:
@@ -519,8 +691,29 @@ def wanted(page):
     return path_of(page).startswith(HUB_PREFIX)
 
 
+def hub_document_frequency(pages):
+    """{word: number of sections it appears in} across every page that will be
+    indexed, and the section count. Used only to choose which words survive the
+    MAX_WORDS cap in bag(); it is not written to the index."""
+    df, nsec = {}, 0
+    for page in pages:
+        if not wanted(page):
+            continue
+        title, src = plain_title(page), raw_content(page)
+        if not title or not src:
+            continue
+        sets = []
+        sections_of(src, title, collect=sets)
+        for ws in sets:
+            nsec += 1
+            for w in ws:
+                df[w] = df.get(w, 0) + 1
+    return df, nsec
+
+
 def build(pages):
     indexed = []
+    df, nsec = hub_document_frequency(pages)
     for page in sorted(pages, key=lambda p: p.get("id", 0)):
         if not wanted(page):
             continue
@@ -528,7 +721,7 @@ def build(pages):
         src = raw_content(page)
         if not title or not src:
             continue
-        secs = sections_of(src, title)
+        secs = sections_of(src, title, df, nsec)
         words = sum(len(s["w"].split()) for s in secs)
         if words < 5:
             # A page with essentially no text is a shell — a loader, a redirect
@@ -542,6 +735,12 @@ def build(pages):
             "sec": secs,
         })
 
+    # Belt and braces: nothing from a private desk may leave this function, even
+    # if a later edit to wanted() or the record builders let one through.
+    indexed = [p for p in indexed if not is_private_desk(p.get("id"), p.get("u"))]
+    records = [r for r in (supplier_records() + framework_records() + tool_records())
+               if not is_private_desk(None, str(r.get("u") or "").split("#")[0])]
+
     now = datetime.now(timezone.utc)
     return {
         "generated": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -549,7 +748,7 @@ def build(pages):
         "note": ("Search index for the Medical Sales Intelligence Hub, built from the "
                  "Hub's own published pages. Rebuilt daily; see build_search_index.py."),
         "pages": indexed,
-        "records": supplier_records(),
+        "records": records,
     }
 
 

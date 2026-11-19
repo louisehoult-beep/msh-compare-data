@@ -106,17 +106,32 @@ ELSEWHERE = {
 # second; the matcher case needs node, which ubuntu-latest has. RUN: it has no
 # workflow of its own.
 RUN = [
+    # 16/11/2026, the Wales buyer map: the seven Local Health Boards, NWSSP as the
+    # route to market, and the Stakeholder Mapper's Wales branch. Static (reads the
+    # built files and slices app/mst-logic.js), no network.
+    "test_wales_buyer_map.py",
     # My Hub search modal mount in app/hub-search.js (my-hub task 9). Static, no network.
     "test_hub_search_embed.py",
+    "test_search_private_desks.py",      # 18/11/2026, private company desks never in the public search index
+    "test_hub_search_findability.py",    # 18/11/2026, product searches reach the framework, Compare and pages (needs node)
     "test_digital_lane.py",              # 20/10/2026, digital health lane + Federated Data Platform profile
     "test_company_digital_awards.py",    # 20/10/2026, digital awards layer (own file, exact-only match)
+    "test_company_key_info.py",          # 22/10/2026, My Hub company briefs: sourced, no confidential wording, Ego matches the panel
     "test_digital_frameworks.py",        # 20/10/2026, GCA Technology Services 4, G-Cloud 15, coming NHS digital frameworks
+    "test_trust_jag.py",                 # 16/11/2026, per-trust JAG endoscopy accreditation from the participating services register
+    "test_other_body_frameworks.py",     # 22/10/2026, SBS/GCA/LPP rows on the Frameworks directory re-read at source
     "test_digital_sources.py",            # 20/10/2026, NHS App partners + Digital Maturity Assessment
     "test_ai_airlock.py",                # 20/10/2026, MHRA AI Airlock cohorts
     "test_dspt_supplier_check.py",       # 20/10/2026, DSPT status for digital-tagged suppliers
+    "test_digital_assurance.py",         # 16/11/2026, the DSPT + frameworks join behind the Hub assurance page
+    "test_nhs_app_history.py",           # 16/11/2026, the APPEND-ONLY NHS App partner store: overlap, de-duplication, hand-written 'use' lines survive
     "test_hub_chrome.py",                # 2026-10, nav icons and page bar; 1331 loader is ASCII
     "test_my_hub_landing.py",                # 2026-10, nav icons and page bar; 1331 loader is ASCII
     "test_nursing_register.py",          # 2026-10, Nursing Register snippet rules and page filters
+    "test_clinician_signup.py",          # 2026-10, clinician programme sign-up snippet rules
+    "test_colleague_pass.py",            # 02/11/2026, Colleague Day Pass snippet rules (plan 690 at £0 for one day, codes, limits)
+    "test_kol_finder.py",                # 2026-10, KOL finder data gate and page filters (Build Your Network 1882)
+    "test_stock_alerts.py",              # 2026-11, stapling/sutures/mesh supply-notice feed (app/stock-alerts.js)
     "test_sales_register.py",            # 2026-10, Medical Sales Register snippet rules, job typing, page filters
     # Added 30/09/2026 with scripts/refresh_icb_watch.py. Stdlib only, no network.
     "test_icb_watch.py",
@@ -126,6 +141,8 @@ RUN = [
     "test_bnf_products.py",
     "test_breadcrumb_division.py",
     "test_robots_sitemaps.py",
+    "test_crawl_range_gaps.py",          # 27/10/2026, crawler gaps: link following, UK sitemap choice, file-name leaves
+    "test_careers_feed.py",              # 27/10/2026, Live Desk Careers feed (scripts/careers_feed.py)
     "test_careers_jobpages.py",
     "test_careers_rotation.py",
     "test_careers_shared_roles.py",
@@ -144,7 +161,9 @@ RUN = [
     "test_fetch_issues_icn_depth.py",
     "test_framework_lots.py",
     "test_gp_prescribing.py",            # 29/09/2026, offline, no workflow of its own
+    "test_emollient_explorer.py",        # 22/10/2026, explorer data reconciles to the dermatology panel
     "test_hospital_prescribing_resources.py",
+    "test_icb_pack.py",                  # 22/10/2026, offline (reconciles only if a local cache exists)
     "test_identity_policy.py",
     "test_merge_seed_on_retry.py",
     # 29/09/2026: MHRA Drug Safety Update feed + Drug Tariff Part VIIIA, and
@@ -153,6 +172,12 @@ RUN = [
     "test_my_hub_catalogue.py",
     "test_npm_finder.py",
     "test_my_hub_css.py",
+    # 16/11/2026. The panels' white cards must not inherit their text colour
+    # from the host page: the navy Frameworks band paints its descendants light,
+    # and a card that names no ink of its own goes out invisible. That shipped
+    # twice (08/10 .sp-li, 16/11 the Sources and freshness table). Static,
+    # stdlib only, no network, ~0.01s.
+    "test_speciality_panel_band_contrast.py",
     "test_nhssc_card.py",
     "test_numeric_id_division.py",
     "test_numeric_slug_detail.py",
@@ -173,18 +198,27 @@ RUN = [
     "test_speciality_news_pipeline_merge.py",
     "test_speciality_news_keywords.py",
     "test_speciality_panels.py",
+    "test_reviewer_account_check.py",    # 04/11/2026, App Review demo account fit for review
     "test_tariff_moves.py",              # 16/10/2026, Drug Tariff month-on-month price moves
     "test_discontinued_on_formulary.py",  # 16/10/2026, discontinued lines still named on formularies
     "test_speciality_panels_phase2.py",  # 29/09/2026, in-memory build, writes nothing
     "test_stale_brief_rows.py",
     "test_awards_history.py",
+    "test_awards_notice.py",            # 17/11/2026, refresh_awards.write() keeps the _notice block
+    "test_award_keywords.py",
     "test_supplier_index_awards.py",
     "test_supplier_index_framework_dedupe.py",
     "test_tariff_bnf_filter.py",
     "test_vocabulary_duplicates.py",
     "test_whats_new.py",
+    "test_weekly_briefing.py",           # 22/10/2026, offline, sends nothing
     "test_my_hub_logic.py",
     "test_my_hub_ui.py",             # 2026-10, My Hub modules wired, copy rules
+    "test_my_hub_snapshot.py",       # 22/10/2026, My Hub snapshot cards
+    "test_my_hub_bookmark.py",       # 2026-10, My Hub bookmark prompt shown once
+    "test_my_hub_panels.py",         # 22/10/2026, pinned speciality panels and calendar export
+    "test_emollient_explorer.py",    # 22/10/2026, dermatology emollient prescribing explorer data
+    "test_derm_icb_context.py",      # 22/10/2026, dermatology ICB context (RTT, IMD, brand share, PCN spread)
     "test_my_hub_state.py",          # 2026-10, PHP snippet and browser client agree (php, node; skipped where absent)
     "test_livedesk_store_bridge.py", # 2026-11-19, app Hub membership bridge: PHP and Deno sign alike (php, deno; skipped where absent)
     # Added by 748ae43d (^o635, 15/10/2026) with scripts/crawl_supplier_site.py's

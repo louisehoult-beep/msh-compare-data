@@ -19,7 +19,7 @@ import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 APP = os.path.join(HERE, "app")
-FILES = ["my-hub.js", "my-hub-feeds.js", "my-hub-overlays.js", "my-hub-logic.js", "hub-icons.js", "hub-account.js", "hub-chrome.js"]
+FILES = ["my-hub.js", "my-hub-feeds.js", "my-hub-overlays.js", "my-hub-logic.js", "hub-icons.js", "hub-account.js", "hub-chrome.js", "hub-panels.js", "my-hub-panels.js", "my-hub-company.js", "speciality-panels.js"]
 TARGETS = {"spec", "scope", "tools", "library", "briefing", "saved", "search", "how", "new"}
 
 
@@ -39,7 +39,7 @@ class MyHubUi(unittest.TestCase):
 
     def test_loader_loads_every_module_and_file(self):
         src = read("my-hub.js")
-        for need in ("app/hub-icons.js", "app/hub-account.js", "app/my-hub-logic.js", "app/my-hub-feeds.js",
+        for need in ("app/hub-icons.js", "app/hub-account.js", "app/my-hub-logic.js", "app/my-hub-feeds.js", "app/hub-panels.js", "app/my-hub-panels.js",
                      "app/my-hub-overlays.js", "app/my-hub.css", "hub/my-hub-catalogue.json", "hub/whats-new.json"):
             self.assertIn("'" + need + "'", src, need)
         self.assertEqual(len(re.findall(r"raw\.githubusercontent\.com", src)), 1, "one BASE constant only")

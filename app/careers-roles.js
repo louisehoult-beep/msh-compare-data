@@ -30,11 +30,17 @@
 
   function compile(cfg) {
     if (!cfg || !cfg.categories || !cfg.categories.length) { throw new Error('config has no categories'); }
+    var entry = cfg.entry || {};
+    var ent = (entry.patterns || []).map(re);
+    var cats = cfg.categories.map(function (c) {
+      return { key: c.key, label: c.label, patterns: c.patterns.map(re) };
+    });
+    if (ent.length) { cats.push({ key: 'entry-level', label: entry.label || 'Early career', patterns: ent }); }
     return {
       exclude: (cfg.exclude || []).map(re),
-      categories: cfg.categories.map(function (c) {
-        return { key: c.key, label: c.label, patterns: c.patterns.map(re) };
-      })
+      categories: cats,
+      entry: ent,
+      entryExclude: (entry.exclude || []).map(re)
     };
   }
 
@@ -52,6 +58,12 @@
     return null;
   }
 
+  function isEntry(title, compiled) {
+    var t = title || '';
+    if (hit(compiled.exclude, t) || hit(compiled.entryExclude, t)) { return false; }
+    return hit(compiled.entry, t);
+  }
+
   function relevantRoles(doc, compiled) {
     var out = [];
     (doc.suppliers || []).forEach(function (s) {
@@ -59,7 +71,7 @@
         if (r.uk !== true || !r.url) { return; }
         var cat = classify(r.title, compiled);
         if (cat) {
-          out.push({ supplier: s.name, category: cat, checkedOn: s.checkedOn,
+          out.push({ supplier: s.name, category: cat, entry: isEntry(r.title, compiled), checkedOn: s.checkedOn,
                      title: r.title, location: r.location || '', url: r.url });
         }
       });
@@ -153,16 +165,22 @@
       chips.appendChild(b);
     }
     chip('all', 'All (' + roles.length + ')');
+    var nEntry = roles.filter(function (r) { return r.entry; }).length;
+    if (nEntry) { chip('early', 'Early career (' + nEntry + ')'); }
     compiled.categories.forEach(function (c) {
       if (catCount[c.key]) { chip(c.key, c.label + ' (' + catCount[c.key] + ')'); }
     });
     mount.appendChild(chips);
+    if (nEntry) {
+      mount.appendChild(el('p', 'crj-note', 'Early career means the job title says graduate, trainee, junior, associate or sales development. ' +
+        'Read each posting for what experience it asks for; many welcome a proven sales or industry track record from outside medical sales.'));
+    }
     mount.appendChild(list);
 
     function draw() {
       list.textContent = '';
       roles.forEach(function (r) {
-        if (active !== 'all' && r.category !== active) { return; }
+        if (active === 'early' ? !r.entry : (active !== 'all' && r.category !== active)) { return; }
         var li = el('li', 'crj-row');
         var u = safeUrl(r.url);
         var t = el(u ? 'a' : 'span', 'crj-t', r.title);
@@ -173,7 +191,7 @@
         if (r.location) { meta.appendChild(el('span', 'crj-loc', r.location)); }
         if (r.checkedOn) { meta.appendChild(el('span', 'crj-chk', 'Checked ' + fmtDate(r.checkedOn))); }
         li.appendChild(meta);
-        li.appendChild(el('span', 'crj-cat', labels[r.category]));
+        li.appendChild(el('span', 'crj-cat', labels[r.category] + (r.entry && r.category !== 'entry-level' ? ' · early career' : '')));
         list.appendChild(li);
       });
     }
@@ -211,7 +229,7 @@
       });
   }
 
-  var api = { compile: compile, classify: classify, relevantRoles: relevantRoles };
+  var api = { compile: compile, classify: classify, isEntry: isEntry, relevantRoles: relevantRoles };
   if (typeof module !== 'undefined' && module.exports) { module.exports = api; }
   root.MSHCareersRoles = api;
   if (typeof document !== 'undefined') {

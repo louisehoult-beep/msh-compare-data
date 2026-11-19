@@ -52,6 +52,12 @@ class HubChrome(unittest.TestCase):
         self.assertIn("here.indexOf('/medical-sales-hub/') !== 0", self.src)
         self.assertIn("window.mshRestNonce || window.mshPrefsNonce", self.src)
 
+    def test_nav_fixes_search_myhub_network_back(self):
+        for needle in ("ensureMyHubLink", "ensureNetworkLink", "ensureSearch", "data-hub-search-embed",
+                       "mshFromMyHub", "mshc-back", "build-your-network"):
+            self.assertIn(needle, self.src)
+        self.assertIn("navFixes(); })", self.src, "the nav observer must re-apply the fixes")
+
     def test_one_base_constant(self):
         self.assertEqual(len(re.findall(r"raw\.githubusercontent\.com", self.src)), 1)
 

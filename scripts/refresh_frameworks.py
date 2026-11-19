@@ -436,8 +436,16 @@ def main():
         if rec["suppliers"]:
             frameworks.append(rec)
         else:
+            # The supplier list is refused, but the brief's own reference and dates
+            # are still read from labelled fields, so they are kept: the Hub's
+            # Frameworks directory lists every framework, and a framework whose
+            # supplier list is unreadable is still a live route to market (21/10/2026).
             unparsed.append({"url": u, "name": rec["name"],
-                             "reason": refusal or "no supplier list found"})
+                             "reason": refusal or "no supplier list found",
+                             "type": rec.get("type"), "category": rec.get("category"),
+                             "reference": rec.get("reference"),
+                             "supplyRoute": rec.get("supplyRoute"),
+                             "starts": rec.get("starts"), "ends": rec.get("ends")})
         if i % 10 == 0:
             print("  ...%d/%d" % (i, len(urls)), file=sys.stderr)
         time.sleep(PAUSE)

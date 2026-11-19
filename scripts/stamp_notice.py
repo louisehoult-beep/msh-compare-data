@@ -70,6 +70,7 @@ REFS = {
     "open-tenders.json":        "ETH-DCEFAF9C5",
     "digital-lane.json":        "ETH-D1785F3EE",
     "trust-digital-profile.json": "ETH-D20F5DF46",
+    "trust-jag.json":           "ETH-D79A42585",
     "gates-watch.json":         "ETH-DD13317EF",
     "digital-frameworks.json":  "ETH-D1AA304A7",
     "digital-sources.json":     "ETH-DA95CE0DB",
@@ -93,8 +94,10 @@ REFS = {
     "differentiator-category-map.json": "ETH-D01E00B2A",
     "differentiator.json":          "ETH-D29A49944",
     "frameworks.json":         "ETH-DB4D6B772",
+    "framework-directory-extra.json": "ETH-D332ABFEE",
     "formulary-positions.json":         "ETH-D4BDA1D46",
     "hub-calendar.json":                "ETH-DB8887BA0",
+    "innovator-report.json":                                           "ETH-DCC876B19",
     "hub-search-index.json":   "ETH-D50A4C4E3",
     "interview-prep.json":     "ETH-D77050906",
     "nhssc-launch-briefs.json":    "ETH-DFB1984CE",
@@ -117,6 +120,17 @@ REFS = {
     "suppressed-notices.json": "ETH-DB591E91D",
     "trust-contacts.json":     "ETH-D38ACEED2",
     "trust-map.json":          "ETH-D5BBB9C7A",
+    # The Wales buyer map, added 16/11/2026. Minted with `stamp_notice.py --mint`.
+    "wales-buyer-map.json":    "ETH-DAEA3A8C7",
+    # Digital supplier assurance, added 16/11/2026: the DSPT reading joined to the
+    # digital frameworks for /medical-sales-hub/digital-assurance/. Minted with
+    # `stamp_notice.py --mint`.
+    "digital-assurance.json":  "ETH-D34222CA7",
+    # The NHS App partner history, added 16/11/2026: the APPEND-ONLY store that
+    # lets a product falling off the owner's live list be seen at all. Nothing
+    # is detectable until it holds two readings. Minted with
+    # `stamp_notice.py --mint`.
+    "nhs-app-partner-history.json": "ETH-D6239402B",
     "trust-pressures.json":    "ETH-DAE43C750",
     "nhssc-procurement-calendar.json": "ETH-DBC575194",
     "framework-date-conflicts.json":   "ETH-D2368919F",
@@ -174,6 +188,7 @@ REFS = {
     "speciality-panels/renal.json": "ETH-DAEFA4BE3",
     "speciality-panels/respiratory.json": "ETH-DE93237EE",
     "speciality-panels/sepsis-and-the-deteriorating-patient.json": "ETH-D5C0DA15A",
+    "speciality-panels/sterile-services.json": "ETH-D2CF868DA",
     "speciality-panels/stroke.json": "ETH-DFEBB3ED6",
     "speciality-panels/theatres-and-surgical.json": "ETH-DFD9DFDE8",
     "speciality-panels/tissue-viability-and-wound-care.json": "ETH-DCAF55138",
@@ -186,6 +201,11 @@ REFS = {
     "cluster-watch.json":              "ETH-D47111DC3",
     # Added 20/10/2026: NHS Supply Chain National Pricing Matrix finder.
     "npm-finder.json":                 "ETH-DAD6FDB5B",
+    # Added 22/10/2026: dermatology Key Opinion Leader finder (Build Your Network, page 1882).
+    "kol-linkedin-1.json":  "ETH-D23D030F7",
+    "kol-linkedin-2.json":  "ETH-DFA147300",
+    "kol-linkedin-3.json":  "ETH-DC85674DE",
+    "kol-finder.json":                 "ETH-DB5F39660",
 }
 
 

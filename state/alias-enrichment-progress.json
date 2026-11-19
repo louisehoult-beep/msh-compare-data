@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-10-08",
+ "lastRun": "2026-11-19",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -556,7 +556,19 @@
   "Tortus",
   "Newton’s Tree",
   "Seating Matters",
-  "Penumbra"
+  "Penumbra",
+  "Total Mobile",
+  "SomnoMed UK",
+  "Spineart UK Ltd",
+  "Storz Medical UK",
+  "UNEEG Medical UK Ltd",
+  "Symbios",
+  "Smartbox Assistive Technology",
+  "Sivantos Limited",
+  "Twist Bioscience",
+  "TELA Bio Ltd",
+  "Supermax Healthcare",
+  "Uniphar Medtech"
  ],
  "refusals": [
   {
@@ -1593,6 +1605,36 @@
    "name": "Tortus",
    "reason": "'Tortus AI' seen on own site footer but adding it makes verify.py's company-press check fail: a published press item matched on 'tortus' would no longer match the rule's recorded evidence. Alias withheld, not the gate loosened; revisit with the press record.",
    "date": "2026-10-08"
+  },
+  {
+   "name": "Smartbox Assistive Technology",
+   "reason": "smartbox.com is Smartbox Group, a gift-experiences brand, a different company; the assistive-technology business's own site could not be reached (522). No verifiable form.",
+   "date": "2026-11-19"
+  },
+  {
+   "name": "Sivantos Limited",
+   "reason": "Signia UK site names only WS Audiology A/S and does not mention Sivantos; no verified extra form, and the parent name must not be an alias.",
+   "date": "2026-11-19"
+  },
+  {
+   "name": "Twist Bioscience",
+   "reason": "twistbioscience.com shows only 'Twist Bioscience'; identical to the display name, nothing to add.",
+   "date": "2026-11-19"
+  },
+  {
+   "name": "TELA Bio Ltd",
+   "reason": "tela.bio is a parked for-sale domain; no company site reached.",
+   "date": "2026-11-19"
+  },
+  {
+   "name": "Supermax Healthcare",
+   "reason": "supermaxglobal.com redirects to a domain-sale page; supermax.com does not resolve; no source reached.",
+   "date": "2026-11-19"
+  },
+  {
+   "name": "Uniphar Medtech",
+   "reason": "uniphar.ie/medtech serves a login page only with no legal line; no verifiable form.",
+   "date": "2026-11-19"
   }
  ],
  "sources": {

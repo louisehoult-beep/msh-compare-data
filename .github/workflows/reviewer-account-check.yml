@@ -1,0 +1,33 @@
+name: Reviewer account check
+
+# Fails if the App Review demo account could not get into Live Desk or Industry Nurses,
+# so a store rejection for a failed sign-in is caught here first. Added 04/11/2026.
+# Read-only: changes nothing. Logic: scripts/reviewer_account_check.py.
+
+on:
+  schedule:
+    - cron: "20 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Check the reviewer account
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          LIVEDESK_REVIEWER_PASSWORD: ${{ secrets.LIVEDESK_REVIEWER_PASSWORD }}
+        run: |
+          export SUPABASE_ANON_KEY="$(python3 -c "import json;print(json.load(open('alerts/config.json'))['supabaseAnonKey'])")"
+          python3 scripts/reviewer_account_check.py

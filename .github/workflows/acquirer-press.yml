@@ -30,7 +30,7 @@ name: Acquirer press sweep (LSE RNS — listed parents of Hub suppliers)
 on:
   schedule:
     # 01:10 UTC — ahead of company-press.yml (01:40), supplier-capture.yml
-    # (02:20) and refresh.yml (03:15), same reasoning as those workflows:
+    # (02:35) and refresh.yml (03:55), same reasoning as those workflows:
     # queue rather than collide. This workflow only ever touches state/, so
     # it cannot conflict with a data/ writer, but keeping it in the same
     # queue order keeps the whole run's logs easy to read in sequence.

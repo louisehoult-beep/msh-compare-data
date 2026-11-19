@@ -212,13 +212,20 @@
   // fetch resolves (see the Promise.all below). Keep this in step with the JSON
   // file's own `types` array; verify.py's check_product_types() fails the
   // publish if this literal is ever restored as the tool's SOLE source again.
-  var TYPES = ['antisepsis','antiseptic','chlorhexidine','skin prep','skin disinfect','disinfectant','applicator','swabstick','swab','tourniquet','blood culture','cannula','picc','midline','catheter','iol','intraocular','phaco','hearing aid','cochlear','stent','balloon','guidewire','sheath','mesh','suture','stapler','staple','skin closure','wound closure','tissue adhesive','glue','haemostat','sealant','dressing','foam','hydrocolloid','alginate','hydrofiber','silver','collagen','honey','barrier film','film dressing','bandage','compression','tape','plaster','npwt','negative pressure','wound','glove','gown','drape','wipe','sanitiser','irrigation','ventilator','anaesthesia','laryngoscope','airway','tracheostomy','tracheal','bronchoscope','endoscope','colonoscope','gastroscope','scope','infusion pump','syringe pump','pump','syringe','needle','lancet','connector','stopcock','extension set','giving set','iv set','flush','implant','knee','hip','shoulder','robot','freezer','refrigerator','incubator','analyser','sequencer','defibrillator','monitor','ultrasound','mri','ct scan','x-ray','mammography','bed mat ','bed pad','bed protector','bed','mattress','hoist','sling','wheelchair','cushion','dialyser','dialysis','apheresis','linac','brachytherapy','pacemaker','ablation','tavi','biopsy','warmer','warming','securement','ostomy','urostomy','stoma','nephrostomy','foley','feeding','enteral','feeding tube','peg tube','slide sheet','glucose','sensor','test strip','electrode','scalpel','blade','forceps','retractor','trocar','clip','clamp','specimen','drainage','chest drain','suction','mask','circuit','cpap','oxygen','nebuliser','filter','lubricant','bouffant','theatre cap','cap theatre','surgical cap','shoe cover','overshoe','coverall','apron','visor','face shield','respirator','scrub','incontinence pad','underpad','commode','bedpan','urinal','nutritional supplement','enteral feed','oral nutrition','all-in-one pad','shaped pad','rectangular pad','pull up pants','fixation pants','hand wash ','moisturiser','antimicrobial body wash','sick bag','disposable care'];
+  var TYPES = ['antisepsis','antiseptic','chlorhexidine','skin prep','skin disinfect','disinfectant','applicator','swabstick','swab','tourniquet','blood culture','cannula','picc','midline','catheter','iol','intraocular','phaco','hearing aid','cochlear','stent','balloon','guidewire','sheath','mesh','suture','linear cutter','stapler','staple','skin closure','endoscopic suturing','endostitch','wound closure','tissue adhesive','glue','haemostat','sealant','dressing','foam','hydrocolloid','alginate','hydrofiber','silver','collagen','honey','barrier film','film dressing','bandage','compression','tape','plaster','npwt','negative pressure','wound','glove','gown','drape','wipe','sanitiser','irrigation','ventilator','anaesthesia','laryngoscope','airway','tracheostomy','tracheal','bronchoscope','endoscope','colonoscope','gastroscope','scope','infusion pump','syringe pump','pump','syringe','needle','lancet','connector','stopcock','extension set','giving set','iv set','flush','implant','knee','hip','shoulder','robot','freezer','refrigerator','incubator','analyser','sequencer','defibrillator','monitor','ultrasound','mri','ct scan','x-ray','mammography','bed mat ','bed pad','bed protector','bed','mattress','hoist','sling','wheelchair','cushion','dialyser','dialysis','apheresis','linac','brachytherapy','pacemaker','ablation','tavi','biopsy','warmer','warming','securement','ostomy','urostomy','stoma','nephrostomy','foley','feeding','enteral','feeding tube','peg tube','slide sheet','glucose','sensor','test strip','electrode','scalpel','blade','forceps','retractor','trocar','clip','clamp','specimen','drainage','chest drain','suction','mask','circuit','cpap','oxygen','nebuliser','filter','lubricant','bouffant','theatre cap','cap theatre','surgical cap','shoe cover','overshoe','coverall','apron','visor','face shield','respirator','scrub','incontinence pad','underpad','commode','bedpan','urinal','nutritional supplement','enteral feed','oral nutrition','all-in-one pad','shaped pad','rectangular pad','pull up pants','fixation pants','hand wash ','moisturiser','antimicrobial body wash','sick bag','disposable care'];
   // Also baked-in fallbacks for the same reason — see PTYPESURL note above.
   var GENERIC_TYPE_OVERRIDE = { catheter: 'cannula', wound: 'dressing', foam: 'dressing', stoma: 'ostomy', iol: 'intraocular', sealant: 'haemostat', pump: 'dispenser' };
   var CANNULA_DISQUALIFIERS = ['picc', 'central venous', 'central line'];
   /* One type for one kind of product: a matched keyword on the left is reported
      as the type on the right (data/product-types.json `type_alias`). */
-  var TYPE_ALIAS = { 'bed mat': 'underpad', 'bed pad': 'underpad', 'bed protector': 'underpad' };
+  var TYPE_ALIAS = { 'endoscopic suturing': 'suture', 'endostitch': 'suture', 'linear cutter': 'stapler', 'bed mat': 'underpad', 'bed pad': 'underpad', 'bed protector': 'underpad' };
+  /* A word in a name is not always the product (03/11/2026, Meril demo): "mesh"
+     found bed-rail bumpers and wire baskets, "suture" found forceps and carts,
+     and those filled the rival list ahead of real hernia mesh and sutures. */
+  var TYPE_NOT = {
+    mesh: /\b(bed|rail|siderail|bumper|basket|bag|sling|nebuli[sz]er|tray|cap|bin|shoe|hair|mitt|mitts|visor|laundry|cot|cradle|chair|filter|filters|hammock|bandage|bandages|hat|hats|nets|lead|shelf|mesh-free|fixation|universal|alto|pro-fit|pronto-fit|secure-fit|clip-fit)\b/i,
+    suture: /\b(forceps|scissor|scissors|cart|couch|anchor|anchors|pack|packs|remov\w*|needle holders?|pusher|marker|button|clip|set|instruments?|fil de|smoother)\b/i
+  };
   var KEYPOINTS = {
     'BD — Becton, Dickinson': { 'nexiva': 'Closed IV system — fewer blood exposures/disconnections vs an open cannula', 'chloraprep': 'Licensed medicinal product (UK marketing authorisation) — 2% CHG / 70% IPA sterile applicator, indicated for skin disinfection before invasive procedures' },
     'GAMA Healthcare': { 'hexi-prep': 'Licensed medicine (PL 40867/0002) — sterile 2% CHG / 70% IPA pad; its indication covers invasive procedures NOT requiring a clean-air environment (vascular access focus, per GAMA\u2019s prescribing information)' },
@@ -304,7 +311,7 @@
        needs the proper fix — resolving every supplier's raw text through
        data/speciality-map.json, the way comptab.js and supplier-search.js
        already do — as its own piece of work, not a side effect of this one. */
-    var SPEC_CANON = { 'moving and handling': 'Patient handling and pressure area care',
+    var SPEC_CANON = { 'theatre / surgical': 'Theatres / surgical', 'moving and handling': 'Patient handling and pressure area care',
                         'patient handling': 'Patient handling and pressure area care' };
     suppliers.forEach(function(s){
       if (!s.specialities || !s.specialities.length) return;
@@ -529,6 +536,43 @@
         });
       });
     })();
+    /* A SUPPLIER'S SPECIALITIES ARE NOT EVERY PRODUCT'S (04/11/2026, Meril). Every
+       product inherits all its supplier's specialities, so a supplier spanning
+       five of them listed coronary stents and hip stems under Wound care. Where a
+       captured range gives the company's own divisions, those decide it: a name
+       rule first (first match wins), then the division. A division mapped to []
+       shows only when no speciality is picked. These products are placed by hand,
+       so the type list in SPECMAP does not narrow them again (specsStated). */
+    var T_S = 'Theatres / surgical', MIS = 'Minimally invasive surgery', WC = 'Wound care', ORTHO = 'Orthopaedics and trauma', CARD = 'Cardiology';
+    var PRODUCT_SPECS = {
+      'Meril UK Pvt Ltd': {
+        names: [
+          [/intrauterine|\bmerite cu\b|^erinna$|^fiona$/i, []],
+          [/cuvis/i, [ORTHO, T_S]],
+          [/suture anchor/i, [ORTHO]],
+          [/casting|pop bandage|pbt bandage|stockinette|cast padding/i, [ORTHO, T_S]],
+          [/iv dressing|tracheal/i, [T_S]],
+          [/suture|ligature|skin adhesive|skin staple/i, [T_S, MIS, WC]],
+          [/bandage|dressing|\btape\b|gauze|lap sponge/i, [T_S, WC]]
+        ],
+        divisions: {
+          'Endo Surgery': [T_S, MIS], 'Surgical Robots': [T_S, MIS], '360 Infection Prevention Solution': [T_S],
+          'Orthopedics': [ORTHO], 'Sports Medicine': [ORTHO],
+          'Vascular Intervention': [CARD], 'Peripheral Vascular Intervention': [CARD], 'Cardiac Surgery': [CARD],
+          'Neurovascular': [], 'Ent': [], 'Diagnostics': [], 'Urology': []
+        }
+      }
+    };
+    Object.keys(PRODUCT_SPECS).forEach(function(sup){
+      var rule = PRODUCT_SPECS[sup], divOf = {};
+      ((RANGE[sup] || {}).products || []).forEach(function(p){ if (p && p.n) divOf[nk(p.n)] = p.division || ''; });
+      PRODUCTS.forEach(function(p){
+        if (p.supplier !== sup) return;
+        var hit = rule.names.filter(function(r){ return r[0].test(p.name); })[0];
+        var specs = hit ? hit[1] : rule.divisions[p.division || divOf[nk(p.name)]];
+        if (specs){ p.specs = specs; p.specsStated = true; }
+      });
+    });
     /* The longest product-type word a catalogue description OPENS with. */
     function leadType(desc){
       var d = String(desc || '').toLowerCase().replace(/^\s+/, ''), best = '';
@@ -589,6 +633,7 @@
     }
     function typeForProduct(name, dGiven){
       var t = typeOf(name);
+      if (t && TYPE_NOT[t] && TYPE_NOT[t].test(name)) return '';
       var override = GENERIC_TYPE_OVERRIDE[t];
       if (override){
         var d = dGiven || CACHE[nk(name)];
@@ -736,7 +781,7 @@
     cov.innerHTML = 'These dropdowns cover the <strong>' + PRODUCTS.length.toLocaleString('en-GB') + ' products indexed across ' + Object.keys(SUPOBJ).length + ' tracked suppliers</strong> — not the whole market. '
       + (rangeAdded ? '<strong>' + (PRODUCTS.length - rangeAdded).toLocaleString('en-GB') + '</strong> come from the procurement record — framework awards and NHS Supply Chain catalogue lines. The other <strong>' + rangeAdded.toLocaleString('en-GB') + '</strong> come from four suppliers’ own product websites, are marked <em>company’s own range</em> wherever they appear, and prove only that the company sells the item: they say nothing about NHS Supply Chain. ' : '')
       + 'A product that is missing is <strong>not yet indexed</strong>, not "nothing found". '
-      + '<a href="mailto:louisehoult@elevateandthrive.uk?subject=' + askSub + '&body=' + askBody + '" style="color:' + GOLD + ';font-weight:600;">Ask for something to be added &rarr;</a> '
+      + '<a href="mailto:louisehoult@elevateandthrive.uk?subject=' + askSub + '&body=' + askBody + '" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">Ask for something to be added &rarr;</a> '
       + '<span style="color:#8a8778;">— usually live within a working day.</span>';
     wrap.appendChild(cov);
     /* Two speciality filters, and they do different jobs. SPECMAP narrows by
@@ -753,7 +798,7 @@
         if (sup && p.supplier !== sup) return;
         if (!inSpec(p, spec)) return;
         if (!p.type) return;
-        if (allowed && allowed.indexOf(p.type) === -1) return;
+        if (allowed && !p.specsStated && allowed.indexOf(p.type) === -1) return;
         if (spec && specExcludes(spec.toLowerCase(), p)) return;
         if (!seenT[p.type]){ seenT[p.type] = 1; out.push(p.type); }
       });
@@ -766,7 +811,7 @@
         if (sup && p.supplier !== sup) return false;
         if (!inSpec(p, spec)) return false;
         if (typ && p.type !== typ) return false;
-        if (allowed && p.type && allowed.indexOf(p.type) === -1) return false;
+        if (allowed && !p.specsStated && p.type && allowed.indexOf(p.type) === -1) return false;
         if (spec && specExcludes(spec.toLowerCase(), p)) return false;
         return true;
       });
@@ -841,7 +886,7 @@
       dl2.innerHTML = '';
       var mine = resolveMine();
       var seenO = {};
-      rivalsOf(mine, selSup2.sel.value).slice(0, 500).forEach(function(p){
+      rivalsOf(mine, selSup2.sel.value).forEach(function(p){
         var v = p.name + '  ·  ' + p.supplier;
         if (!seenO[v]){ seenO[v] = 1; var o = el('option'); o.value = v; dl2.appendChild(o); }
       });
@@ -899,7 +944,7 @@
 
     // Your edge: the reason the trust would switch — the case builder leads with this.
     var opt = el('div', 'display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin:-6px 0 14px;padding-left:2px;');
-    var ebox = el('div', 'display:flex;flex-direction:column;gap:4px;min-width:300px;flex:2;');
+    var ebox = el('div', 'display:flex;flex-direction:column;gap:4px;min-width:min(300px,100%);flex:2;'); /* min() keeps it inside a 390px phone (12/11/2026) */
     ebox.appendChild(el('label', 'font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6b7684;', 'Your edge — what are you giving them? (recommended)'));
     var edgeInp = el('input', 'padding:9px 12px;border:1px solid ' + LINE + ';border-radius:8px;font-size:13.5px;background:#fff !important;color:#20303f !important;');
     edgeInp.type = 'text'; edgeInp.placeholder = 'e.g. 15% saving vs incumbent · next-day supply · on-site training · UK stockholding';
@@ -1039,7 +1084,7 @@
           + 'manufacturer&rsquo;s current IFU before quoting anything clinically.';
       }
       return note + ' <a href="' + esc(m.source_url) + '" target="_blank" rel="noopener" '
-        + 'style="color:' + GOLD + ';font-weight:600;">Open the source document &#8599;</a>';
+        + 'style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">Open the source document &#8599;</a>';
     }
 
     function iccTable(m, chosen){
@@ -1126,8 +1171,7 @@
       panel.id = 'msh-differential';
 
       panel.appendChild(el('div',
-        'font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:'
-        + GOLD + ';margin:0 0 6px;', 'Full differential'));
+        'font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:#0B1C33;margin:0 0 6px;', 'Full differential'));
       panel.appendChild(el('div',
         'font-size:13.5px;color:#39424d;line-height:1.6;margin:0 0 12px;max-width:70ch;',
         'Put up to ' + ICC_MAX + ' products side by side on <strong>NHS-authored specifications</strong> '
@@ -1271,7 +1315,7 @@
     }
     btn.addEventListener('click', function(){ runCompare(); });
 
-    function link(text, id){ return '<a href="/?page_id=' + id + '" style="color:' + GOLD + ';font-weight:600;">' + text + '</a>'; }
+    function link(text, id){ return '<a href="/?page_id=' + id + '" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">' + text + '</a>'; }
     function lookupUrl(name){ return 'https://pilot.supplychain.nhs.uk/search?query=' + encodeURIComponent(String(name).replace(/\s*\(.*?\)\s*/g,' ').trim()); }
     var GENERIC_WORDS = { 'system':1,'safety':1,'products':1,'medical':1,'range':1,'solution':1,'solutions':1,'products':1,'closed':1,'sterile':1,'single':1,'device':1,'plus':1,'ultra':1,'flex':1,'select':1,'advance':1,'advanced':1 };
     function sigTokens(name){
@@ -1342,6 +1386,9 @@
         var inCat = PRODUCTS.filter(function(p){ return p.supplier !== mine.supplier && (!supFilter || p.supplier === supFilter) && catOf(p) === myCat; });
         function rankC(p){ return (mine.type && p.type === mine.type ? 100000 : 0) + score(p); }
         inCat.sort(function(a, b){ return rankC(b) - rankC(a); });
+        /* General theatre consumables holds everything from gloves to sutures, so
+           the category alone says nothing there: keep to the same type. */
+        if (myCat === 'theatres:theatre' && mine.type) inCat = inCat.filter(function(p){ return p.type === mine.type; });
         inCat.forEach(add);
       }
       if (mine.type){
@@ -1357,7 +1404,18 @@
           });
         }
       }
-      return out.slice(0, 12);
+      /* EVERY MATCH, NO CAP (Lou, 04/11/2026: "I need all the matches pulling
+         through, that's the whole point"). No per-supplier limit and no length
+         cut. A product with a known type is matched on that type, so when same-
+         type rivals exist only they are returned (MoliCare Bed Mat 5D gets every
+         underpad, not hospital beds that merely share its category). Named
+         suppliers rank before captured ranges, so a reseller's "Ethicon Prolene"
+         cannot push out Medtronic. */
+      if (mine.type && out.some(function(p){ return p.type === mine.type; }))
+        out = out.filter(function(p){ return p.type === mine.type; });
+      var ranked = out.map(function(p, i){ return [p.fromRange ? 1 : 0, i, p]; });
+      ranked.sort(function(a, b){ return a[0] - b[0] || a[1] - b[1]; });
+      return ranked.map(function(x){ return x[2]; });
     }
 
     function thumbImg(d, px){
@@ -1387,13 +1445,13 @@
       if (li){
         codeCell = '<span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;">NPC ' + esc(li.npc) + (li.mpc ? ' · ' + esc(li.mpc) : '') + '</span>'
           + (d.items.length > 1 ? '<span style="color:#8a8778;font-size:11px;"> +' + (d.items.length - 1) + ' packs</span>' : '')
-          + '<br><a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-weight:600;font-size:11px;">all codes &#8599;</a>';
+          + '<br><a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;font-size:11px;">all codes &#8599;</a>';
       } else if (p.code){
         codeCell = esc(p.code);
       } else if (NOTCAT[nk(p.name)]){
         codeCell = '<span style="color:#8a8778;font-size:11.5px;font-style:italic;">not a catalogue line — ' + esc(NOTCAT[nk(p.name)].reason) + '</span>';
       } else {
-        codeCell = '<a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-weight:600;">look up &#8599;</a>';
+        codeCell = '<a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">look up &#8599;</a>';
       }
       return '<tr style="' + hl + 'border-bottom:1px solid ' + LINE + ';vertical-align:top;">'
         + '<td style="padding:7px 9px;">' + prodCell + '</td>'
@@ -1417,7 +1475,7 @@
           + '<td style="padding:5px 8px;font-size:11px;">' + (it.status ? '<span style="color:#a24; font-weight:600;">' + esc(it.status) + '</span>' : '<span style="color:' + GRN + ';">live</span>') + '</td></tr>';
       }).join('');
       var table = '<div style="overflow-x:auto;margin-top:8px;"><table style="width:100%;border-collapse:collapse;min-width:320px;"><thead><tr style="text-align:left;color:#8a8778;font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;"><th style="padding:2px 8px;">Pack</th><th style="padding:2px 8px;">NPC / MPC</th><th style="padding:2px 8px;">Status</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
-      var more = d.items.length > 6 ? '<div style="font-size:11px;color:#8a8778;margin-top:4px;">+' + (d.items.length - 6) + ' more packs — <a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';">see all on NHS Supply Chain &#8599;</a></div>' : '';
+      var more = d.items.length > 6 ? '<div style="font-size:11px;color:#8a8778;margin-top:4px;">+' + (d.items.length - 6) + ' more packs — <a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;">see all on NHS Supply Chain &#8599;</a></div>' : '';
       var bd = mine ? '2px solid ' + OX : '1px solid ' + LINE;
       return '<div style="background:#fff;border:' + bd + ';border-radius:10px;padding:12px 14px;">' + head + table + more + '</div>';
     }
@@ -1485,7 +1543,7 @@
           (d.items.some(function(it){ return it.status; })
             ? '<span style="color:#a24;font-weight:600;">a pack shows a status change</span>'
             : '<span style="color:' + GRN + ';">all live</span>') + '</div>';
-        h += '<div style="margin-top:5px;"><a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-weight:600;font-size:11.5px;">all codes on NHS Supply Chain &#8599;</a></div>';
+        h += '<div style="margin-top:5px;"><a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;font-size:11.5px;">all codes on NHS Supply Chain &#8599;</a></div>';
       } else {
         h += '<div style="margin-top:8px;font-size:11.5px;color:#8a8778;">' +
           (NOTCAT[nk(p.name)] ? 'Not a catalogue line — ' + esc(NOTCAT[nk(p.name)].reason)
@@ -1519,7 +1577,7 @@
       }
       h2 += '<div style="margin-top:5px;font-size:10.5px;color:#9a958a;">'
         + (pd.parsed === 'heuristic' ? 'Read from the page text, not a structured product record — ' : '')
-        + 'captured ' + esc(ddmm(pd.capturedDate)) + ' &middot; <a href="' + esc(pd.sourceUrl) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-weight:600;">source &#8599;</a></div>'
+        + 'captured ' + esc(ddmm(pd.capturedDate)) + ' &middot; <a href="' + esc(pd.sourceUrl) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">source &#8599;</a></div>'
         + '</div>';
       if (pd.changedSince && pd.changedSince.changed && pd.changedSince.changed.length){
         h2 += '<div style="margin-top:6px;padding:7px 10px;background:' + SOFT + ';border:1px dashed ' + GOLD + ';border-radius:7px;font-size:11.5px;color:#7a5b14;line-height:1.5;">'
@@ -1661,7 +1719,7 @@
       return '<div style="font-size:10.5px;color:#8a8778;margin-top:2px;">' + badge + ' '
         + esc(name) + extra + (when ? ' &middot; ' + esc(ddmm(when)) : '') + range
         + (s.url ? ' &middot; <a href="' + esc(s.url) + '" target="_blank" rel="noopener" '
-            + 'style="color:' + GOLD + ';font-weight:600;">source &#8599;</a>' : '')
+            + 'style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">source &#8599;</a>' : '')
         + '</div>';
     }
 
@@ -1699,7 +1757,7 @@
           + (multi ? 'background:#fcfaf5;' : '') + '">'
           + '<th scope="row" style="padding:8px 10px;font-size:12px;color:#6b7684;text-align:left;'
           + 'font-weight:600;width:220px;">' + esc(field)
-          + (multi ? '<div style="font-size:10px;color:#a8842c;font-weight:700;margin-top:2px;">'
+          + (multi ? '<div style="font-size:10px;color:#0B1C33;font-weight:700;margin-top:2px;">'
               + obs.length + ' sources</div>' : '') + '</th>'
           + '<td style="padding:8px 10px;">' + vals + '</td></tr>';
       }
@@ -2043,7 +2101,7 @@
       }
       if (theirAlerts.length){
         var a0 = theirAlerts[0];
-        reasons.push('<strong>Live MHRA / safety action on their line:</strong> ' + esc(theirs.name) + ' — ' + esc(a0.title) + (a0.date ? ' (' + esc(a0.date) + ')' : '') + '. ' + esc(a0.detail || '') + (a0.use ? ' <em>' + esc(a0.use) + '</em>' : '') + (a0.url ? ' <a href="' + a0.url + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-size:11px;font-weight:600;">official alert &#8599;</a>' : '') + ' Quote the official alert verbatim — never embellish a safety issue.');
+        reasons.push('<strong>Live MHRA / safety action on their line:</strong> ' + esc(theirs.name) + ' — ' + esc(a0.title) + (a0.date ? ' (' + esc(a0.date) + ')' : '') + '. ' + esc(a0.detail || '') + (a0.use ? ' <em>' + esc(a0.use) + '</em>' : '') + (a0.url ? ' <a href="' + a0.url + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-size:11px;font-weight:600;">official alert &#8599;</a>' : '') + ' Quote the official alert verbatim — never embellish a safety issue.');
       }
       if (mineAlerts.length){
         reasons.push('<strong>Be upfront — your own line carries an active alert:</strong> ' + esc(mineAlerts[0].title) + '. Raise it before they do, with your remediation story ready; credibility is won here.');
@@ -2155,7 +2213,7 @@
       var dOn = DRIVERS.filter(function(d){ return d.on; });
       var dOff = DRIVERS.filter(function(d){ return !d.on; });
       function drow(d, on){
-        return '<li style="margin:4px 0;' + (on ? '' : 'opacity:.55;') + '"><strong>' + (on ? '✓ ' : '· ') + esc(d.n) + '</strong> — ' + d.ev + (on && d.note ? ' <span style="color:#14432f;font-weight:600;">Your case: ' + d.note + '.</span>' : (d.note ? ' <span style="color:#8a8778;">' + d.note + '.</span>' : '')) + ' <a href="' + d.src + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-size:11px;font-weight:600;">source &#8599;</a></li>';
+        return '<li style="margin:4px 0;' + (on ? '' : 'opacity:.55;') + '"><strong>' + (on ? '✓ ' : '· ') + esc(d.n) + '</strong> — ' + d.ev + (on && d.note ? ' <span style="color:#14432f;font-weight:600;">Your case: ' + d.note + '.</span>' : (d.note ? ' <span style="color:#8a8778;">' + d.note + '.</span>' : '')) + ' <a href="' + d.src + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-size:11px;font-weight:600;">source &#8599;</a></li>';
       }
       h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GOLD + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">Why trusts actually switch — and where your case lands</div><div style="font-size:12px;color:#6b7684;margin:2px 0 6px;">The evidenced switch drivers from published NHS sources. ✓ = active in your case now (' + dOn.length + ' of ' + DRIVERS.length + ').</div><ul style="margin:2px 0 0;padding-left:18px;font-size:13px;line-height:1.6;color:#39424d;">' + dOn.map(function(d){ return drow(d, true); }).join('') + dOff.map(function(d){ return drow(d, false); }).join('') + '</ul></div>';
 
@@ -2206,9 +2264,9 @@
       // Other tracked products in the same category — a quick way to switch who
       // you're compared against without retyping, kept secondary to the main
       // head-to-head above (the rep asked for ONE clear comparison, not a list).
-      var others = (chosenSupTheirs ? competitorsOf(mine, chosenSupTheirs) : allComps).filter(function(p){ return p !== theirs; }).slice(0, 5);
+      var others = (chosenSupTheirs ? competitorsOf(mine, chosenSupTheirs) : allComps).filter(function(p){ return p !== theirs; });
       if (others.length){
-        h += '<div style="margin:14px 0 0;font-size:12.5px;color:#75808d;">Other tracked products in this category' + (chosenSupTheirs ? ' from ' + esc(chosenSupTheirs) : '') + ': ' + others.map(function(p){ return '<a href="#" class="msh-cmp-other" data-name="' + esc(p.name) + '" data-supplier="' + esc(p.supplier) + '" style="color:' + GOLD + ';font-weight:600;">' + esc(p.name) + ' (' + esc(p.supplier) + ')</a>'; }).join(', ') + ' — click one to compare against that instead.</div>';
+        h += '<div style="margin:14px 0 0;font-size:12.5px;color:#75808d;max-height:260px;overflow-y:auto;">All ' + others.length + ' other tracked match' + (others.length === 1 ? '' : 'es') + (chosenSupTheirs ? ' from ' + esc(chosenSupTheirs) : '') + ': ' + others.map(function(p){ return '<a href="#" class="msh-cmp-other" data-name="' + esc(p.name) + '" data-supplier="' + esc(p.supplier) + '" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">' + esc(p.name) + ' (' + esc(p.supplier) + ')</a>'; }).join(', ') + ' — click one to compare against that instead.</div>';
       }
 
       // optional angle

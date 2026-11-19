@@ -1,6 +1,6 @@
 // deno test --allow-read supabase/functions/livedesk/rules_test.ts
 import { assertEquals } from "jsr:@std/assert@1";
-import { fromRevenueCat, HUB_LINK_DAYS, readDevice, status, transferFromRevenueCat } from "./rules.ts";
+import { fromRevenueCat, HUB_LINK_DAYS, isReviewerAccount, readDevice, status, transferFromRevenueCat } from "./rules.ts";
 
 const NOW = Date.parse("2026-10-01T09:00:00Z");
 const day = 86400_000;
@@ -44,4 +44,20 @@ Deno.test("transferFromRevenueCat keeps only Supabase ids and needs both sides",
   assertEquals(transferFromRevenueCat({ type: "TRANSFER", transferred_from: ["$RCAnonymousID:x"], transferred_to: [b] }), null);
   assertEquals(transferFromRevenueCat({ type: "TRANSFER", transferred_from: [a], transferred_to: [a] }), null);
   assertEquals(transferFromRevenueCat({ type: "RENEWAL", app_user_id: a }), null);
+});
+
+Deno.test("device keeps areas and role-alert choice, refuses bad areas", () => {
+  const tok = "x".repeat(30);
+  const ok = readDevice({ token: tok, platform: "ios", specialities: [], regions: ["london", "london", "south-west"], role_alerts: true });
+  assertEquals(typeof ok === "string" ? ok : [ok.regions, ok.role_alerts], [["london", "south-west"], true]);
+  assertEquals(readDevice({ token: tok, platform: "ios", regions: ["Bad Area"] }), "regions");
+  const off = readDevice({ token: tok, platform: "android" });
+  assertEquals(typeof off === "string" ? off : [off.regions, off.role_alerts], [[], false]);
+});
+
+Deno.test("only the App Review demo account is protected from delete-account", () => {
+  assertEquals(isReviewerAccount("review@elevateandthrive.uk"), true);
+  assertEquals(isReviewerAccount(" Review@ElevateAndThrive.uk "), true);
+  assertEquals(isReviewerAccount("someone@example.com"), false);
+  assertEquals(isReviewerAccount(undefined), false);
 });

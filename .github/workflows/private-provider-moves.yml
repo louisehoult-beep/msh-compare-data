@@ -34,10 +34,10 @@ name: Private provider moves refresh (Private Sector tracker, page 1666)
 
 on:
   schedule:
-    # 02:35 UTC daily — ahead of company-press (01:40), clear of supplier-capture
-    # (02:20), mhra-alerts (02:50) and refresh.yml (03:15), so this queues rather
+    # 03:00 UTC daily — ahead of company-press (01:40), clear of supplier-capture
+    # (02:35), mhra-alerts (02:50) and refresh.yml (03:55), so this queues rather
     # than collides with them under the shared concurrency group below.
-    - cron: "35 2 * * *"
+    - cron: "0 3 * * *"
   workflow_dispatch:
 
 concurrency:

@@ -91,7 +91,11 @@ ICB_CODES = {
     'QWE','Z9B2Z','QRL','QKS','S9B9J','S0E4D','QOX','QUY','QT6','QJK','QVV',
     'QR1','QSL',
 }
-KINDS = {None, 'Ambulance service', 'Mental health', 'Community'}
+# 'Local Health Board' added 16/11/2026 with the seven Welsh boards. It is the
+# one sector the ODS register PROVES rather than leaves to the name: the primary
+# role RO142 says it. app/mst-logic.js groups this label in fillTrust's `order`.
+KINDS = {None, 'Ambulance service', 'Mental health', 'Community',
+         'Local Health Board'}
 DEPARTMENTAL = re.compile(
     r"\b(team|dept|department|office|procurement|purchasing|supplies|supply|"
     r"contracts?|commercial|admin|helpdesk|mailbox|enquir|info|general|shared|"
@@ -413,7 +417,105 @@ def check_trust_map(tm):
                 FAIL("trustmap", "%s has an ICB code but no ICB name" % t.get("n"))
         elif t.get("icb"):
             FAIL("trustmap", "%s is tagged %s but carries an ICB code" % (t.get("n"), t.get("nation")))
+    # Wales, added 16/11/2026. Seven Local Health Boards and three NHS Trusts, and
+    # the count is checked because the failure mode is silent: a crawl that drops
+    # RO142 leaves app/mst-logic.js with a Wales picker whose every board entry
+    # resolves to nothing, and no page errors — Wales just quietly goes empty.
+    boards = [t for t in trusts if t.get("kind") == "Local Health Board"]
+    welsh = [t for t in trusts if t.get("nation") == "Wales"]
+    if len(boards) != 7:
+        FAIL("trustmap", "%d Welsh Local Health Board(s); expected 7. Wales has had "
+                         "seven since 01/04/2019. If a boundary change has landed, "
+                         "update this count AND the floor in scripts/refresh_trusts.py "
+                         "together." % len(boards))
+    if len(welsh) < 10:
+        FAIL("trustmap", "%d Welsh organisation(s); expected at least 10 (7 health "
+                         "boards, 3 NHS trusts)." % len(welsh))
+    for t in boards:
+        if t.get("nation") != "Wales":
+            FAIL("trustmap", "%s is a Local Health Board but is tagged nation %r. The "
+                             "role RO142 is Welsh-only." % (t.get("n"), t.get("nation")))
     return set(codes)
+
+
+# --------------------------------------------------------------------------
+# 3a. WALES BUYER MAP (16/11/2026)
+# --------------------------------------------------------------------------
+def check_wales_buyer_map(doc, trust_codes):
+    """data/wales-buyer-map.json — who buys in Wales and how a supplier reaches
+    them. Built by scripts/build_wales_buyer_map.py.
+
+    What this refuses, and why each one is the failure that would actually
+    happen rather than a tidiness rule:
+
+    * An organisation whose ODS code is not in trust-map.json. The two files are
+      built from the same register by two scripts, and a code in one and not the
+      other means one of them silently fell behind. The Hub joins them by code.
+    * A procurement-route field with no source URL. Every fact on this page is
+      read at NWSSP's own site; one that loses its source is indistinguishable
+      from one somebody remembered.
+    * A buyer-name spelling with no award notice behind it. The spellings exist
+      so a rep searching "NWSSP" finds all 243 notices. A spelling nothing was
+      awarded under is a guess at how a buyer MIGHT be written, which is exactly
+      what this dataset must not contain.
+    """
+    if doc is None:
+        FAIL("wales", "data/wales-buyer-map.json is missing — the Wales buyer map "
+                      "cannot render and app/mst-logic.js's Wales branch has no "
+                      "source behind its NWSSP note.")
+        return
+    if not doc.get("rule"):
+        FAIL("wales", "wales-buyer-map.json states no derivation rule (root rule 14).")
+    if not doc.get("sources"):
+        FAIL("wales", "wales-buyer-map.json lists no sources.")
+
+    orgs = doc.get("organisations") or []
+    if len(orgs) < 10:
+        FAIL("wales", "%d Welsh organisation(s); expected at least 10." % len(orgs))
+    seen = set()
+    for o in orgs:
+        code = o.get("code")
+        if not code:
+            FAIL("wales", "%r has no ODS code." % o.get("n"))
+            continue
+        if code in seen:
+            FAIL("wales", "%s: duplicate ODS code." % code)
+        seen.add(code)
+        if o.get("nation") != "Wales":
+            FAIL("wales", "%s is in the Wales map but tagged nation %r."
+                          % (code, o.get("nation")))
+        if not o.get("source"):
+            FAIL("wales", "%s carries no source URL." % code)
+        if trust_codes and code not in trust_codes:
+            FAIL("wales", "%s (%s) is in wales-buyer-map.json but not in "
+                          "trust-map.json. Both are built from the ODS register; one "
+                          "of the two crawls has fallen behind, and the Hub joins "
+                          "these files by code." % (code, o.get("n")))
+
+    route = doc.get("procurementRoute") or {}
+    if not route.get("shortName"):
+        FAIL("wales", "wales-buyer-map.json names no procurement route. NWSSP is the "
+                      "whole point of the file.")
+    for field in ("whatItIs", "buysOnBehalfOf", "frameworkScope", "frameworkTerm",
+                  "smes"):
+        if route.get(field) and not route.get(field + "Source"):
+            FAIL("wales", "procurementRoute.%s has no %sSource. A fact read at a "
+                          "supplier-facing page keeps the URL it was read at."
+                          % (field, field))
+    if not (route.get("advertisedOn") or {}).get("url"):
+        FAIL("wales", "procurementRoute.advertisedOn has no url. Wales advertises on "
+                      "Sell2Wales and a supplier watching only Find a Tender misses "
+                      "the pipeline — that is the single most useful fact here.")
+    if not route.get("checkedAt"):
+        FAIL("wales", "procurementRoute carries no checkedAt date.")
+
+    for e in (doc.get("buyerNames") or []):
+        if not e.get("name"):
+            FAIL("wales", "a buyerNames entry has no name.")
+        elif not e.get("awards"):
+            FAIL("wales", "buyer spelling %r has no award notice behind it. These are "
+                          "read from captured notices, never guessed at."
+                          % e.get("name"))
 
 
 # --------------------------------------------------------------------------
@@ -426,6 +528,124 @@ def check_trust_map(tm):
 # source, and a "change" that was not derived from a stored earlier state.
 ICB_EVENT_KINDS = {"leadership", "legal-end", "new-icb", "national", "curated", "cluster"}
 
+
+# --------------------------------------------------------------------------
+# 3b. TRUST JAG ACCREDITATION (16/11/2026)
+# --------------------------------------------------------------------------
+# data/trust-jag.json, built by scripts/refresh_trust_jag.py from JAG's own
+# participating services register. The accuracy of this file is sold, so the
+# failures refused here are the ones that would be invisible on the page:
+# a shrunken register that still renders, a status word the UI has no branch
+# for, a count that no longer adds up to the rows behind it, and a trust code
+# that does not resolve in trust-map.json so the panel silently never shows.
+JAG_STATUSES = {
+    "Accredited",
+    "Deferred",
+    "Not awarded",
+    "Undergoing JAG onsite assessment",
+    "Undergoing self-assessment/not assessed",
+}
+
+
+def check_trust_jag(doc, trust_codes):
+    if doc is None:
+        WARN("trust-jag", "data/trust-jag.json is missing, so trust profiles show no "
+                          "JAG panel. Run scripts/refresh_trust_jag.py.")
+        return
+    counts = doc.get("counts") or {}
+    trusts = doc.get("trusts") or []
+    unmatched = doc.get("unmatched") or []
+
+    # 1. Row count. The register held 511 services on 16/11/2026. A crawl that
+    #    silently truncates (the DataTables grid paginates client-side, so a
+    #    partial fetch parses cleanly) must not pass as a smaller register.
+    services = counts.get("services")
+    if not isinstance(services, int):
+        FAIL("trust-jag", "counts.services is %r, not a number — the file did not build."
+                          % (services,))
+        return
+    if services < 480:
+        FAIL("trust-jag", "only %d endoscopy service(s) — the register held 511 on "
+                          "16/11/2026. Refusing a shrunken register: a client-side "
+                          "truncation parses cleanly and would quietly empty trust "
+                          "panels. If JAG really has fewer, lower this floor AND the "
+                          "floor in scripts/refresh_trust_jag.py together." % services)
+
+    # 2. No unknown statuses. refresh_trust_jag.py parks an unlisted status in
+    #    unknownStatuses rather than guessing a bucket; if one is sitting there,
+    #    app/meeting-prep.js is showing a word the panel was never designed for.
+    unknown = doc.get("unknownStatuses") or []
+    if unknown:
+        FAIL("trust-jag", "JAG is publishing status(es) this repo does not know: %s. "
+                          "Add them to STATUSES in scripts/refresh_trust_jag.py and to "
+                          "JAG_STATUSES here together, and check the panel renders them."
+                          % ", ".join(sorted(str(u) for u in unknown)[:6]))
+    declared = set(doc.get("statusValues") or [])
+    if declared and declared != JAG_STATUSES:
+        FAIL("trust-jag", "statusValues no longer matches the five statuses this check "
+                          "knows. Added: %s. Dropped: %s."
+                          % (", ".join(sorted(declared - JAG_STATUSES)) or "none",
+                             ", ".join(sorted(JAG_STATUSES - declared)) or "none"))
+
+    # 3. The counts add up to the rows behind them. A summary that drifts from
+    #    its own rows is the one failure a member would never spot.
+    by_status = doc.get("summary", {}).get("byStatus") or {}
+    summed = sum(v for v in by_status.values() if isinstance(v, int))
+    if summed != services:
+        FAIL("trust-jag", "summary.byStatus totals %d but counts.services is %d. The "
+                          "summary has drifted from its own rows." % (summed, services))
+    for status in by_status:
+        if status not in JAG_STATUSES:
+            FAIL("trust-jag", "summary.byStatus carries %r, which is not one of JAG's "
+                              "five statuses." % status)
+
+    if len(trusts) != counts.get("trustsJoined"):
+        FAIL("trust-jag", "counts.trustsJoined is %r but %d trust(s) are listed."
+                          % (counts.get("trustsJoined"), len(trusts)))
+    if len(unmatched) != counts.get("unmatchedOrganisations"):
+        FAIL("trust-jag", "counts.unmatchedOrganisations is %r but %d organisation(s) "
+                          "are listed as unmatched."
+                          % (counts.get("unmatchedOrganisations"), len(unmatched)))
+
+    joined_rows = 0
+    for t in trusts:
+        name = t.get("name") or t.get("code")
+        rows = t.get("jagServices") or []
+        joined_rows += len(rows)
+
+        # 4. Every code must resolve, or the panel never shows for that trust
+        #    and nothing on the page says why.
+        if trust_codes and t.get("code") not in trust_codes:
+            FAIL("trust-jag", "%s has ODS code %r, which is not in trust-map.json, so "
+                              "its JAG panel can never render." % (name, t.get("code")))
+        if t.get("services") != len(rows):
+            FAIL("trust-jag", "%s says %r service(s) but lists %d."
+                              % (name, t.get("services"), len(rows)))
+        statuses = t.get("statuses") or {}
+        if sum(v for v in statuses.values() if isinstance(v, int)) != len(rows):
+            FAIL("trust-jag", "%s's statuses tally does not match its %d service row(s)."
+                              % (name, len(rows)))
+        accredited = sum(1 for r in rows if r.get("status") == "Accredited")
+        if t.get("accredited") != accredited:
+            FAIL("trust-jag", "%s says %r accredited service(s) but %d row(s) read "
+                              "Accredited." % (name, t.get("accredited"), accredited))
+        for r in rows:
+            if r.get("status") not in JAG_STATUSES:
+                FAIL("trust-jag", "%s / %s has status %r, which the panel has no branch "
+                                  "for." % (name, r.get("service"), r.get("status")))
+            if not r.get("service"):
+                FAIL("trust-jag", "%s has a service row with no service name." % name)
+
+    if joined_rows != counts.get("servicesJoined"):
+        FAIL("trust-jag", "counts.servicesJoined is %r but the trust rows hold %d "
+                          "service(s)." % (counts.get("servicesJoined"), joined_rows))
+
+    unmatched_rows = sum(u.get("services", 0) for u in unmatched
+                         if isinstance(u.get("services"), int))
+    if joined_rows + unmatched_rows != services:
+        FAIL("trust-jag", "%d joined service(s) plus %d unmatched do not add up to the "
+                          "%d on the register — rows have been lost between the parse "
+                          "and the join." % (joined_rows, unmatched_rows, services))
 
 def check_npm_finder(doc, fwdoc):
     """NPM Finder (data/npm-finder.json, scripts/refresh_npm_finder.py).
@@ -521,6 +741,23 @@ def check_icb_watch(doc, today_iso=None):
             if not str(e.get("url", "")).startswith("https://"):
                 FAIL("icb-watch", "%s: %r is named as %r with no https source."
                      % (who, e.get("name"), e.get("title")))
+        dated = (i.get("digital") or {}).get("dated")
+        if dated:
+            # A dated digital lead (Lou, 21/10/2026) is shown starred with its
+            # document and date; it must say where and when it was read, and an
+            # ICB with a current named lead never also carries a dated one.
+            if (i.get("digital") or {}).get("published") is True:
+                FAIL("icb-watch", "%s publishes a current digital lead but also carries a dated "
+                                  "one; only the current one may show." % who)
+            if not str(dated.get("source", "")).startswith("https://") or not dated.get("document"):
+                FAIL("icb-watch", "%s: dated digital lead %r has no https source or no document "
+                                  "name." % (who, dated.get("name")))
+            dd = str(dated.get("docDate") or "")
+            if not as_date(dd) or dd < "2022-01-01" or dd > today_iso:
+                FAIL("icb-watch", "%s: dated digital lead %r has document date %r; it must be a "
+                                  "real date from 2022 onwards." % (who, dated.get("name"), dd))
+            if not dated.get("name") or not dated.get("title") or not dated.get("verifiedOn"):
+                FAIL("icb-watch", "%s: dated digital lead has no name, title or verifiedOn." % who)
     for ev in doc.get("events") or []:
         tag = (ev.get("headline") or "")[:70]
         if ev.get("kind") not in ICB_EVENT_KINDS:
@@ -4274,7 +4511,139 @@ def check_no_clusters_on_tools(comptab_js):
             return
 
 
-def check_framework_lots(fwdoc, lotsdoc, report_js):
+def _lot_name_resolver(seed):
+    """to_company() built exactly as scripts/refresh_framework_lots.resolver()
+    builds it, or None when the seed or the matcher cannot be loaded.
+
+    Same module, same rule. The gate must not sort a name into a cause by a
+    matching rule the writer does not itself apply, or it would name a fix for a
+    problem the writer does not have.
+    """
+    if not isinstance(seed, dict) or not seed.get("suppliers"):
+        return None
+    try:
+        sys.path.insert(0, os.path.join(REPO_DIR, "scripts"))
+        import company_match
+        import brief_names
+        index = company_match.build_index(seed)
+    except Exception:
+        return None
+
+    def to_company(n):
+        try:
+            for cand in (brief_names.clean(n), n):
+                if not cand:
+                    continue
+                got, state, _ = company_match.resolve(cand, index)
+                if state == "confirmed":
+                    return got
+        except Exception:
+            return None
+        return None
+    return to_company
+
+
+def _warn_unresolved_lot_names(rows, seed):
+    """One WARN per CAUSE, not one WARN for the pile.
+
+    Added 17/11/2026. The pile had reached 138 source spellings across 42
+    frameworks under a single warning whose remedy line said to add an alias.
+    Read as a backlog of missing aliases it is wrong three ways: 86 of those
+    names have no Hub record to alias to, 50 name a supplier the framework's own
+    brief list omits (no alias can reach a supplier that is not on the brief),
+    and 2 reach two rows on one brief. Each line below carries the fix that
+    actually applies to the names it counts. See check_framework_lots().
+
+    Corrected 18/11/2026: that third line originally called those two "the
+    brief's own duplicate rows" and told the reader to de-duplicate the list.
+    Both owner pages were re-read and neither row is a duplicate — each brief
+    prints two REAL companies and its own stated supplier count matches the
+    capture. The ambiguity is ours, not the owner's: company_match.key() strips
+    a legal-form or territory word and collapses them. Verdicts in
+    state/two-brief-rows-one-key-adjudication-1118.json.
+    """
+    if not rows:
+        return
+    to_company = _lot_name_resolver(seed)
+    norecord, absent, ambiguous, unclassified = [], [], [], []
+    for fwname, src, reason in sorted(rows):
+        if reason.startswith("matches "):
+            ambiguous.append((fwname, src))
+        elif to_company is None:
+            unclassified.append((fwname, src))
+        elif to_company(src) is None:
+            norecord.append((fwname, src))
+        else:
+            absent.append((fwname, src))
+
+    def tell(items):
+        return (len(items), len({f for f, _ in items}),
+                "; ".join("%s: %s" % (f, s) for f, s in items[:5]))
+
+    if norecord:
+        n, nf, ex = tell(norecord)
+        WARN("framework-lots", "%d lot-source supplier name(s) across %d framework(s) resolve to NO Hub "
+                               "supplier record, so their lots show 'lot not confirmed'. These are candidate "
+                               "NEW records, not missing aliases — an alias has nothing to point at, so this "
+                               "line is a DECIDED STATE, not a backlog. Non-clinical suppliers stay out: "
+                               "catering, facilities and electrical, furniture, office supplies and food were "
+                               "ruled out on 17/11/2026 and are not to be re-asked. Hand hygiene was settled "
+                               "name by name on product evidence — the clinical ones were added and the rest "
+                               "recorded as out, with reasons, in "
+                               "state/hand-hygiene-lot-source-adjudication.json, and the identity verdicts "
+                               "for the names that DO reach a record are in "
+                               "state/framework-lot-name-adjudication-1117.json. A name here is only work "
+                               "when it is clinical and no adjudication file already covers it: %s."
+             % (n, nf, ex))
+    if absent:
+        n, nf, ex = tell(absent)
+        WARN("framework-lots", "%d lot-source supplier name(s) across %d framework(s) DO resolve to a Hub "
+                               "company, but that company is not on the framework's own brief supplier list, "
+                               "so the lot has no brief row to attach to. These are per-name IDENTITY "
+                               "questions, answered at the Companies House bar one at a time — NOT a short "
+                               "capture: on Hand Hygiene the brief states 21 suppliers and prints 21 while "
+                               "the award notice awards 33, and on Airway Management the brief prints 54 and "
+                               "states 54, so re-reading the brief changes nothing. Three shapes, three "
+                               "fixes: the brief writes the SAME company's name another way, commonly as a "
+                               "bare word (add that spelling as an alias on the record, which is the only "
+                               "legal fix); the Hub holds ONE company twice and the brief names the other "
+                               "record (merge them, on a shared registration number, never on a shared "
+                               "name); or it is a DISTINCT company the brief genuinely does not name (leave "
+                               "it, and write the verdict into the record's identityNote so it is not asked "
+                               "again). The verdicts already reached are in "
+                               "state/framework-lot-name-adjudication-1117.json and "
+                               "state/hand-hygiene-lot-source-adjudication.json, so a name named below that "
+                               "appears in one of those is a DECIDED state, not a backlog item: %s."
+             % (n, nf, ex))
+    if ambiguous:
+        n, nf, ex = tell(ambiguous)
+        WARN("framework-lots", "%d lot-source supplier name(s) across %d framework(s) reach TWO OR MORE rows "
+                               "on the framework's own brief supplier list, so which row holds the lot cannot "
+                               "be settled from the notice alone. This line USED to say to de-duplicate the "
+                               "brief's supplier list. That is NOT the fix and the owner's pages disprove it: "
+                               "both were re-read on 18/11/2026 and each prints two rows for two REAL "
+                               "companies, with the page's own stated supplier count matching the capture — "
+                               "Clinisupplies Ltd (04013240) beside Clinisupplies GB Limited (02503030), "
+                               "Nestle Ltd beside Nestle UK. Editing the capture would delete a real supplier "
+                               "and be restored by the next weekly run. What the rows share is only a "
+                               "company_match.key() that strips a legal-form or territory word, so the fix is "
+                               "attach_names()' territory-preserving tier, which fires only where the seed "
+                               "holds BOTH the source name and one of the rows verbatim on one record. A name "
+                               "left here is one the Hub has no such evidence for, and it stays quarantined on "
+                               "purpose rather than being attached to a record that is not the awardee. The "
+                               "verdicts reached are in state/two-brief-rows-one-key-adjudication-1118.json, "
+                               "so a name named below that appears there is a DECIDED state, not a backlog "
+                               "item: %s." % (n, nf, ex))
+    if unclassified:
+        n, nf, ex = tell(unclassified)
+        WARN("framework-lots", "%d lot-source supplier name(s) across %d framework(s) did not attach to a "
+                               "brief supplier, so their lots show 'lot not confirmed'. data/supplier-seed.json "
+                               "was not passed to this check, so the cause (no Hub record / not on this brief / "
+                               "ambiguous on this brief) could not be told apart and no one fix can be named "
+                               "here: %s." % (n, nf, ex))
+
+
+def check_framework_lots(fwdoc, lotsdoc, report_js, seed=None):
     """Every framework card must say which lot(s) the company holds, or say
     plainly that the owner does not publish it. Lou's standing rule, 30/09/2026:
     "When they are on a framework I want the company profile to pull the lots too."
@@ -4295,8 +4664,28 @@ def check_framework_lots(fwdoc, lotsdoc, report_js):
       * a lot value is not a "Lot ..." label;
       * the Company Report has lost the lot line or its honest empty state.
     A source that publishes lots whose supplier names could not be tied to the
-    brief's own names is a WARN listing them: the fix is an alias in
-    data/supplier-seed.json, never a looser match.
+    brief's own names is a WARN — but WHICH warning depends on why the name did
+    not attach, and the three causes take three different fixes. Counted
+    together on 17/11/2026 they were 138 spellings across 42 frameworks, and the
+    single remedy this warning used to give ("add the spelling as an alias in
+    data/supplier-seed.json") was the right answer for a minority of them:
+      * the spelling resolves to no Hub supplier record at all — a candidate NEW
+        record (86 of the 138, nearly all non-clinical framework suppliers:
+        catering, facilities, furniture, hand hygiene). An alias has nothing to
+        point at, and whether the Hub wants that kind of supplier is a decision,
+        not a backlog item;
+      * the Hub holds the company, but the framework's OWN brief supplier list
+        does not name it (50 of the 138). attach_names() resolves a source name
+        to a supplier ON THAT BRIEF, and there is none to resolve to, so no alias
+        can fix it: either the brief capture missed a name the notice awards, or
+        the Hub holds one company twice under two records and the brief names the
+        other one;
+      * two or more of the brief's own rows reach one Hub company (2 of the 138),
+        so which brief row holds the lot cannot be settled from the notice; the
+        brief's own supplier list is what needs de-duplicating.
+    An alias remains the only legal fix where one applies — never a looser match.
+    `seed` is optional: without it the three cannot be told apart, and the warning
+    says exactly that rather than naming a remedy that may not apply.
     """
     if not isinstance(fwdoc, dict):
         return
@@ -4305,7 +4694,8 @@ def check_framework_lots(fwdoc, lotsdoc, report_js):
     if not lots_by_url:
         FAIL("framework-lots", "data/framework-lots.json is missing or empty, so no framework card "
                                "can show a lot. Run scripts/refresh_framework_lots.py.")
-    no_status, unread, dropped, stray, badlab, unmatched = [], [], [], [], [], []
+    no_status, unread, dropped, stray, badlab = [], [], [], [], []
+    unresolved_rows = []
     for f in fwdoc.get("frameworks") or []:
         if not isinstance(f, dict):
             continue
@@ -4328,9 +4718,8 @@ def check_framework_lots(fwdoc, lotsdoc, report_js):
                 stray.append("%s: %r" % (name, k))
             if not v or any(not re.match(r"^Lot \S+", str(x)) for x in v):
                 badlab.append("%s: %r -> %r" % (name, k, v))
-        if rec and rec.get("unresolved"):
-            unmatched.append("%s (%d: %s)" % (name, len(rec["unresolved"]), ", ".join(
-                str(u.get("name")) for u in rec["unresolved"][:3])))
+        for u in (rec or {}).get("unresolved") or []:
+            unresolved_rows.append((name, str(u.get("name")), str(u.get("reason") or "")))
     if no_status:
         FAIL("framework-lots", "%d live framework(s) carry no lotStatus, so their card has nothing honest "
                                "to say about the lot: %s. Run scripts/refresh_framework_lots.py --attach-only."
@@ -4350,11 +4739,7 @@ def check_framework_lots(fwdoc, lotsdoc, report_js):
     if badlab:
         FAIL("framework-lots", "%d supplierLots value(s) are not 'Lot ...' labels: %s."
              % (len(badlab), "; ".join(badlab[:6])))
-    if unmatched:
-        WARN("framework-lots", "%d framework(s) publish lots under supplier names that do not match the brief's "
-                               "own spelling, so those suppliers show 'lot not confirmed'. Add the spelling as an "
-                               "alias in data/supplier-seed.json (via scripts/seed_format.py), never a looser "
-                               "match: %s." % (len(unmatched), "; ".join(unmatched[:5])))
+    _warn_unresolved_lot_names(unresolved_rows, seed)
     if report_js and ("function fwLotLine" not in report_js or "lot not published by" not in report_js):
         FAIL("framework-lots", "app/company-report.js no longer carries fwLotLine() and its honest empty state "
                                "('lot not published by ...'). Every framework card must show the lot or say "
@@ -4996,6 +5381,17 @@ MONTHS = frozenset(("jan", "feb", "mar", "apr", "jun", "jul",
                     "aug", "sep", "sept", "oct", "nov", "dec"))
 
 
+def _private_desks():
+    """{page id: slug} of the private company desks, from the builder's own list."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "_build_search_index", os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                            "build_search_index.py"))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return dict(mod.PRIVATE_DESKS)
+
+
 def check_search_index(doc):
     """The Hub's own search index: is it real, is it whole, is it clean?"""
     if not doc:
@@ -5015,6 +5411,30 @@ def check_search_index(doc):
             FAIL("search", "a page in %s has no title or no URL (id %r). A result a member "
                            "cannot click is worse than no result." % (SEARCH_INDEX, p.get("id")))
             break
+
+    # -- private company desks must never be in this PUBLIC file ----------
+    # Added 18/11/2026. A desk restricted to one client's team (Meril UK 6259,
+    # Medilogik 6502) was indexed, so every member's search, and anyone reading
+    # the raw GitHub file, could see it exists and what it covers. The list is
+    # build_search_index.PRIVATE_DESKS: add every new private desk there.
+    desks = _private_desks()
+    bad = []
+    for p in pages:
+        u = str(p.get("u") or "")
+        if p.get("id") in desks or any(u.rstrip("/") + "/" == "/medical-sales-hub/%s/" % slug
+                                        or u.startswith("/medical-sales-hub/%s/" % slug)
+                                        for slug in desks.values()):
+            bad.append("%s (id %r, %s)" % (p.get("t"), p.get("id"), u))
+    for r in doc.get("records") or []:
+        u = str(r.get("u") or "").split("#")[0]
+        if any(u.startswith("/medical-sales-hub/%s/" % slug) for slug in desks.values()):
+            bad.append("record %r (%s)" % (r.get("t"), u))
+    if bad:
+        FAIL("search", "%s indexes a PRIVATE company desk: %s. These pages are restricted to "
+                       "one client's team and this file is public. Exclude them in "
+                       "build_search_index.PRIVATE_DESKS and rebuild; do not relax this."
+             % (SEARCH_INDEX, "; ".join(bad)))
+        return
 
     # -- every link must stay on the Hub ----------------------------------
     for p in pages:
@@ -7113,6 +7533,8 @@ def main():
     retention = None
 
     trust_codes = check_trust_map(load("trust-map.json"))
+    check_wales_buyer_map(load("wales-buyer-map.json"), trust_codes)
+    check_trust_jag(load("trust-jag.json"), trust_codes)
     check_icb_watch(load("icb-watch.json"))
     check_npm_finder(load("npm-finder.json"), load("frameworks.json"))
     n = check_contacts(load("trust-contacts.json"), trust_codes, blocked, retention) or 0
@@ -7234,7 +7656,8 @@ def main():
     check_no_clusters_on_tools(comptab_js)
     check_compare_groups_by_ref(comptab_js)
     check_no_expired_frameworks(load("frameworks.json"))
-    check_framework_lots(load("frameworks.json"), load("framework-lots.json"), report_js)
+    check_framework_lots(load("frameworks.json"), load("framework-lots.json"), report_js,
+                         load("supplier-seed.json"))
     check_no_delisted_as_a_route(load("nhssc-launch-briefs.json"),
                                  load("frameworks.json"),
                                  load("supplier-seed.json"),

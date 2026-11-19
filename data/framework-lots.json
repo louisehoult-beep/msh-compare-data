@@ -10,9 +10,9 @@
   "ref": "ETH-D8F73B696",
   "contact": "contact@elevateandthrive.uk"
  },
- "dataAsOf": "2026-10-20",
+ "dataAsOf": "2026-11-15",
  "owner": "NHS Supply Chain",
- "rule": "A supplier is shown on a lot ONLY where the framework owner's own published source for that framework names it against that lot: the NHS Supply Chain contract launch brief's lot-by-lot supplier lists or supplier-by-lot table, the Product/Supplier Matrix spreadsheet attached to that brief (only where the sheet has an explicit lot axis, and only where the supplier has a mark or a product in that lot), or the Find a Tender contract award notice for that framework's own procurement. Nothing is inferred from product ranges, specialities or lot titles. Lots attach to the exact supplier string the brief uses; a source name attaches only where its normalised form (brief_names.clean + company_match.key) equals that brief name's, or both resolve to the same single Hub company under the seed's recorded aliases. Unmatched names are listed in `unresolved`, never guessed. Where the brief breaks a framework into lots but no source names who holds which, lotStatus is 'notPublished' and the report says so.",
+ "rule": "A supplier is shown on a lot ONLY where the framework owner's own published source for that framework names it against that lot: the NHS Supply Chain contract launch brief's lot-by-lot supplier lists or supplier-by-lot table, the Product/Supplier Matrix spreadsheet attached to that brief (only where the sheet has an explicit lot axis, and only where the supplier has a mark or a product in that lot), or the Find a Tender contract award notice for that framework's own procurement. Nothing is inferred from product ranges, specialities or lot titles. Lots attach to the exact supplier string the brief uses; a source name attaches only where its normalised form (brief_names.clean + company_match.key) equals that brief name's, or both resolve to the same single Hub company under the seed's recorded aliases. Where that normalised form reaches TWO brief names, it is retried on a narrower form that canonicalises the legal-form word but keeps the territory word (company_match.key_keep_territory), which separates two real companies named on the same brief whose names differ only by that word — and only where the seed holds BOTH the source name and that brief name verbatim on one record, which is the Hub's own evidence that the row is the company the notice names. A name still reaching two brief names, or reaching one the seed holds no verbatim evidence for, is quarantined, never picked. Unmatched names are listed in `unresolved`, never guessed. Where the brief breaks a framework into lots but no source names who holds which, lotStatus is 'notPublished' and the report says so.",
  "counts": {
   "published": 63,
   "notPublished": 18,
@@ -1332,7 +1332,7 @@
       "Lot 3",
       "Lot 4"
      ],
-     "suppliersWithLots": 49
+     "suppliersWithLots": 50
     }
    ],
    "unresolved": [
@@ -1365,14 +1365,6 @@
      "name": "Sai Medical Solutions Ltd",
      "lots": [
       "Lot 1",
-      "Lot 2"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "Uniphar Medtech UK Limited",
-     "lots": [
       "Lot 2"
      ],
      "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
@@ -1577,6 +1569,9 @@
      ],
      "Zoll Medical UK Ltd": [
       "Lot 3"
+     ],
+     "Cardiac Services UK Ltd": [
+      "Lot 2"
      ]
     }
    },
@@ -1682,6 +1677,9 @@
     ],
     "Zoll Medical UK Ltd": [
      "Zoll Medcial UK Limited"
+    ],
+    "Cardiac Services UK Ltd": [
+     "Uniphar Medtech UK Limited"
     ]
    },
    "briefLotTitles": {
@@ -1717,6 +1715,9 @@
     ],
     "Boston Scientific Ltd": [
      "Lot 1"
+    ],
+    "Cardiac Services UK Ltd": [
+     "Lot 2"
     ],
     "Ccmed Ltd": [
      "Lot 2"
@@ -1891,7 +1892,6 @@
    "status": "published",
    "suppliersWithoutLot": [
     "Aquilant Critical Care",
-    "Cardiac Services UK Ltd",
     "Hamilton Sales And Service UK Ltd",
     "Marshall Products",
     "Sai Quality Fruits And Veg Limited"
@@ -2537,37 +2537,11 @@
       "Lot 3",
       "Lot 4"
      ],
-     "suppliersWithLots": 11,
+     "suppliersWithLots": 14,
      "date": "9 February 2026"
     }
    ],
-   "unresolved": [
-    {
-     "name": "GenMed",
-     "lots": [
-      "Lot 2"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "matrix"
-    },
-    {
-     "name": "Philips Electronic Limited",
-     "lots": [
-      "Lot 1",
-      "Lot 2"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "matrix"
-    },
-    {
-     "name": "United Imaging Limited",
-     "lots": [
-      "Lot 1"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "matrix"
-    }
-   ],
+   "unresolved": [],
    "lotsBySource": {
     "matrix": {
      "Agito Medical A/S": [
@@ -2609,6 +2583,16 @@
      ],
      "WSR Medical Solutions Ltd": [
       "Lot 4"
+     ],
+     "Genmed.Me Ltd": [
+      "Lot 2"
+     ],
+     "Philips Electronics UK Limited": [
+      "Lot 1",
+      "Lot 2"
+     ],
+     "United Imaging Health Ltd": [
+      "Lot 1"
      ]
     }
    },
@@ -2627,6 +2611,15 @@
     ],
     "WSR Medical Solutions Ltd": [
      "W S R Medical Solutions Limited"
+    ],
+    "Genmed.Me Ltd": [
+     "GenMed"
+    ],
+    "Philips Electronics UK Limited": [
+     "Philips Electronic Limited"
+    ],
+    "United Imaging Health Ltd": [
+     "United Imaging Limited"
     ]
    },
    "supplierLots": {
@@ -2650,11 +2643,18 @@
      "Lot 1",
      "Lot 2"
     ],
+    "Genmed.Me Ltd": [
+     "Lot 2"
+    ],
     "InHealth Ltd": [
      "Lot 2",
      "Lot 3"
     ],
     "Medtronic Limited": [
+     "Lot 2"
+    ],
+    "Philips Electronics UK Limited": [
+     "Lot 1",
      "Lot 2"
     ],
     "Regent’s Park Healthcare": [
@@ -2667,16 +2667,15 @@
      "Lot 1",
      "Lot 2"
     ],
+    "United Imaging Health Ltd": [
+     "Lot 1"
+    ],
     "WSR Medical Solutions Ltd": [
      "Lot 4"
     ]
    },
    "status": "published",
-   "suppliersWithoutLot": [
-    "Genmed.Me Ltd",
-    "Philips Electronics UK Limited",
-    "United Imaging Health Ltd"
-   ],
+   "suppliersWithoutLot": [],
    "coversLots": [
     "Lot 1",
     "Lot 2",
@@ -2704,19 +2703,10 @@
       "Lot 1",
       "Lot 2"
      ],
-     "suppliersWithLots": 13
+     "suppliersWithLots": 14
     }
    ],
-   "unresolved": [
-    {
-     "name": "Cosium UK Limited",
-     "lots": [
-      "Lot 2"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    }
-   ],
+   "unresolved": [],
    "lotsBySource": {
     "fts-award": {
      "Advanced Bionics": [
@@ -2759,6 +2749,9 @@
      ],
      "WS Audiology": [
       "Lot 2"
+     ],
+     "Cosium Healthcare": [
+      "Lot 2"
      ]
     }
    },
@@ -2798,6 +2791,9 @@
     ],
     "WS Audiology": [
      "WS AUDIOLOGY LIMITED"
+    ],
+    "Cosium Healthcare": [
+     "Cosium UK Limited"
     ]
    },
    "supplierLots": {
@@ -2812,6 +2808,9 @@
     ],
     "Cochlear Europe": [
      "Lot 1"
+    ],
+    "Cosium Healthcare": [
+     "Lot 2"
     ],
     "Diatec Diagnostics": [
      "Lot 2"
@@ -2845,7 +2844,6 @@
    },
    "status": "published",
    "suppliersWithoutLot": [
-    "Cosium Healthcare",
     "Interacoustics"
    ],
    "coversLots": [
@@ -4870,30 +4868,10 @@
       "Lot 6",
       "Lot 7"
      ],
-     "suppliersWithLots": 12
+     "suppliersWithLots": 14
     }
    ],
-   "unresolved": [
-    {
-     "name": "Frontier Plastics Ltd",
-     "lots": [
-      "Lot 1",
-      "Lot 2",
-      "Lot 7"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "Inpress Plastics",
-     "lots": [
-      "Lot 1",
-      "Lot 2"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    }
-   ],
+   "unresolved": [],
    "lotsBySource": {
     "fts-award": {
      "British Bins Ltd": [
@@ -4937,6 +4915,15 @@
      "Valley Northern": [
       "Lot 1",
       "Lot 2"
+     ],
+     "Vernacare International Limited (previously Frontier Plastics Limited)": [
+      "Lot 1",
+      "Lot 2",
+      "Lot 7"
+     ],
+     "Inpress Precision Limited": [
+      "Lot 1",
+      "Lot 2"
      ]
     }
    },
@@ -4970,6 +4957,12 @@
     ],
     "Valley Northern": [
      "Valley Northern Ltd"
+    ],
+    "Vernacare International Limited (previously Frontier Plastics Limited)": [
+     "Frontier Plastics Ltd"
+    ],
+    "Inpress Precision Limited": [
+     "Inpress Plastics"
     ]
    },
    "supplierLots": {
@@ -4998,6 +4991,10 @@
     "GV Health Ltd": [
      "Lot 3"
     ],
+    "Inpress Precision Limited": [
+     "Lot 1",
+     "Lot 2"
+    ],
     "Mauser UK Ltd": [
      "Lot 1",
      "Lot 2",
@@ -5014,13 +5011,15 @@
     "Valley Northern": [
      "Lot 1",
      "Lot 2"
+    ],
+    "Vernacare International Limited (previously Frontier Plastics Limited)": [
+     "Lot 1",
+     "Lot 2",
+     "Lot 7"
     ]
    },
    "status": "published",
-   "suppliersWithoutLot": [
-    "Inpress Precision Limited",
-    "Vernacare International Limited (previously Frontier Plastics Limited)"
-   ],
+   "suppliersWithoutLot": [],
    "coversLots": [
     "Lot 1",
     "Lot 2",
@@ -5731,22 +5730,13 @@
       "Lot 3",
       "Lot 4"
      ],
-     "suppliersWithLots": 8,
+     "suppliersWithLots": 9,
      "date": "12 September 2025"
     }
    ],
    "unresolved": [
     {
      "name": "Disposable Cubicle Curtains Limited T/A Hygenica",
-     "lots": [
-      "Lot 1",
-      "Lot 2"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "matrix"
-    },
-    {
-     "name": "ORN (Int) Limited T/A ORN Health",
      "lots": [
       "Lot 1",
       "Lot 2"
@@ -5796,6 +5786,10 @@
       "Lot 2",
       "Lot 3",
       "Lot 4"
+     ],
+     "Orn Health": [
+      "Lot 1",
+      "Lot 2"
      ]
     }
    },
@@ -5817,6 +5811,9 @@
     ],
     "Sol Komfort Interiors Ltd": [
      "Sol Komfort Interiors Limited"
+    ],
+    "Orn Health": [
+     "ORN (Int) Limited T/A ORN Health"
     ]
    },
    "supplierLots": {
@@ -5843,6 +5840,10 @@
      "Lot 2",
      "Lot 3"
     ],
+    "Orn Health": [
+     "Lot 1",
+     "Lot 2"
+    ],
     "Panaz Ltd": [
      "Lot 1",
      "Lot 2",
@@ -5863,8 +5864,7 @@
    },
    "status": "published",
    "suppliersWithoutLot": [
-    "Hygenica",
-    "Orn Health"
+    "Hygenica"
    ],
    "coversLots": [
     "Lot 1",
@@ -6895,32 +6895,10 @@
       "Lot 5",
       "Lot 6"
      ],
-     "suppliersWithLots": 31
+     "suppliersWithLots": 33
     }
    ],
-   "unresolved": [
-    {
-     "name": "P.W.Coole & Son Limited",
-     "lots": [
-      "Lot 1",
-      "Lot 6"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "SRA Developments Lee Roach",
-     "lots": [
-      "Lot 1",
-      "Lot 2",
-      "Lot 3",
-      "Lot 4",
-      "Lot 6"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    }
-   ],
+   "unresolved": [],
    "lotsBySource": {
     "fts-award": {
      "Bolton Surgical Ltd": [
@@ -7064,6 +7042,17 @@
       "Lot 2",
       "Lot 5",
       "Lot 6"
+     ],
+     "SRA Developments Limited": [
+      "Lot 1",
+      "Lot 2",
+      "Lot 3",
+      "Lot 4",
+      "Lot 6"
+     ],
+     "P.W.Coole & Son Limited T/A Surgical Holdings": [
+      "Lot 1",
+      "Lot 6"
      ]
     }
    },
@@ -7121,6 +7110,12 @@
     ],
     "Surgica Limited": [
      "Surgica LTD"
+    ],
+    "SRA Developments Limited": [
+     "SRA Developments Lee Roach"
+    ],
+    "P.W.Coole & Son Limited T/A Surgical Holdings": [
+     "P.W.Coole & Son Limited"
     ]
    },
    "briefLotTitles": {
@@ -7231,8 +7226,19 @@
     "OscarTech UK": [
      "Lot 6"
     ],
+    "P.W.Coole & Son Limited T/A Surgical Holdings": [
+     "Lot 1",
+     "Lot 6"
+    ],
     "RB Medical Engineering Ltd": [
      "Lot 2",
+     "Lot 6"
+    ],
+    "SRA Developments Limited": [
+     "Lot 1",
+     "Lot 2",
+     "Lot 3",
+     "Lot 4",
      "Lot 6"
     ],
     "Sela Medical UK Ltd": [
@@ -7276,10 +7282,7 @@
     ]
    },
    "status": "published",
-   "suppliersWithoutLot": [
-    "SRA Developments Limited",
-    "P.W.Coole & Son Limited T/A Surgical Holdings"
-   ],
+   "suppliersWithoutLot": [],
    "coversLots": [
     "Lot 1",
     "Lot 2",
@@ -7311,18 +7314,10 @@
       "Lot 2",
       "Lot 3"
      ],
-     "suppliersWithLots": 55
+     "suppliersWithLots": 56
     }
    ],
    "unresolved": [
-    {
-     "name": "IGEA S.P.A",
-     "lots": [
-      "Lot 3"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
     {
      "name": "SOLUVOS MEDICAL LTD",
      "lots": [
@@ -7545,6 +7540,9 @@
      ],
      "Varian Medical Systems": [
       "Lot 3"
+     ],
+     "IGEA S.p.A. Branch UK": [
+      "Lot 3"
      ]
     }
    },
@@ -7714,6 +7712,9 @@
     ],
     "Varian Medical Systems": [
      "VARIAN MEDICAL SYSTEMS UK LIMITED"
+    ],
+    "IGEA S.p.A. Branch UK": [
+     "IGEA S.P.A"
     ]
    },
    "supplierLots": {
@@ -7807,6 +7808,9 @@
      "Lot 2"
     ],
     "HistoSonics": [
+     "Lot 3"
+    ],
+    "IGEA S.p.A. Branch UK": [
      "Lot 3"
     ],
     "Ingles Ltd": [
@@ -7914,7 +7918,6 @@
    },
    "status": "published",
    "suppliersWithoutLot": [
-    "IGEA S.p.A. Branch UK",
     "TSC Endovision",
     "Uniphar Medtech T/A Synapse Medical"
    ],
@@ -7950,7 +7953,7 @@
       "Lot 4",
       "Lot 5"
      ],
-     "suppliersWithLots": 16
+     "suppliersWithLots": 18
     }
    ],
    "unresolved": [
@@ -7959,23 +7962,6 @@
      "lots": [
       "Lot 3",
       "Lot 4"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "Enteral Access Technologies, Ltd",
-     "lots": [
-      "Lot 2"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "Ivor Shaw Ltd trading as Pennine Healthcare",
-     "lots": [
-      "Lot 2",
-      "Lot 5"
      ],
      "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
      "source": "fts-award"
@@ -8048,6 +8034,13 @@
       "Lot 2",
       "Lot 4",
       "Lot 5"
+     ],
+     "Enteral Access Technologies Ltd (previously named on the framework as Nasogastric Feeding Solutions Ltd": [
+      "Lot 2"
+     ],
+     "Ivor Shaw Ltd (t/a Pennine Healthcare)": [
+      "Lot 2",
+      "Lot 5"
      ]
     }
    },
@@ -8060,6 +8053,12 @@
     ],
     "NGPod Global Ltd": [
      "NGPOD Global Ltd"
+    ],
+    "Enteral Access Technologies Ltd (previously named on the framework as Nasogastric Feeding Solutions Ltd": [
+     "Enteral Access Technologies, Ltd"
+    ],
+    "Ivor Shaw Ltd (t/a Pennine Healthcare)": [
+     "Ivor Shaw Ltd trading as Pennine Healthcare"
     ]
    },
    "supplierLots": {
@@ -8073,6 +8072,9 @@
     ],
     "Crest Medical Ltd": [
      "Lot 1"
+    ],
+    "Enteral Access Technologies Ltd (previously named on the framework as Nasogastric Feeding Solutions Ltd": [
+     "Lot 2"
     ],
     "Fresenius Kabi": [
      "Lot 2",
@@ -8092,6 +8094,10 @@
     "Helapet Ltd": [
      "Lot 1",
      "Lot 2"
+    ],
+    "Ivor Shaw Ltd (t/a Pennine Healthcare)": [
+     "Lot 2",
+     "Lot 5"
     ],
     "Kebomed UK Ltd": [
      "Lot 2"
@@ -8132,9 +8138,7 @@
    },
    "status": "published",
    "suppliersWithoutLot": [
-    "Abbott Laboratories Limited",
-    "Enteral Access Technologies Ltd (previously named on the framework as Nasogastric Feeding Solutions Ltd",
-    "Ivor Shaw Ltd (t/a Pennine Healthcare)"
+    "Abbott Laboratories Limited"
    ],
    "coversLots": [
     "Lot 1",
@@ -8174,20 +8178,12 @@
       "Lot 6",
       "Lot 7"
      ],
-     "suppliersWithLots": 21
+     "suppliersWithLots": 22
     }
    ],
    "unresolved": [
     {
      "name": "AIR SENTRY LIMITED",
-     "lots": [
-      "Lot 4"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "Airbon Ltd T/A Smart Air UK",
      "lots": [
       "Lot 4"
      ],
@@ -8278,6 +8274,9 @@
      ],
      "I3 Membrane GMBH": [
       "Lot 7"
+     ],
+     "Airbon Ltd, trading as Smart Air UK": [
+      "Lot 4"
      ]
     }
    },
@@ -8344,9 +8343,15 @@
     ],
     "I3 Membrane GMBH": [
      "i3 Membrane GmbH"
+    ],
+    "Airbon Ltd, trading as Smart Air UK": [
+     "Airbon Ltd T/A Smart Air UK"
     ]
    },
    "supplierLots": {
+    "Airbon Ltd, trading as Smart Air UK": [
+     "Lot 4"
+    ],
     "Architectural Wallsz (International) Limited": [
      "Lot 3"
     ],
@@ -8431,9 +8436,7 @@
     ]
    },
    "status": "published",
-   "suppliersWithoutLot": [
-    "Airbon Ltd, trading as Smart Air UK"
-   ],
+   "suppliersWithoutLot": [],
    "coversLots": [
     "Lot 1",
     "Lot 2",
@@ -8638,7 +8641,7 @@
       "Lot 2",
       "Lot 3"
      ],
-     "suppliersWithLots": 19
+     "suppliersWithLots": 20
     }
    ],
    "unresolved": [
@@ -8654,16 +8657,6 @@
      "name": "Martek Healthcare",
      "lots": [
       "Lot 1"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "Ortus Technology Limited",
-     "lots": [
-      "Lot 1",
-      "Lot 2",
-      "Lot 3"
      ],
      "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
      "source": "fts-award"
@@ -8740,6 +8733,11 @@
       "Lot 1",
       "Lot 2",
       "Lot 3"
+     ],
+     "Ortus": [
+      "Lot 1",
+      "Lot 2",
+      "Lot 3"
      ]
     }
    },
@@ -8788,6 +8786,9 @@
     ],
     "Zoll": [
      "Zoll Medical UK Ltd"
+    ],
+    "Ortus": [
+     "Ortus Technology Limited"
     ]
    },
    "supplierLots": {
@@ -8830,6 +8831,11 @@
      "Lot 1",
      "Lot 2"
     ],
+    "Ortus": [
+     "Lot 1",
+     "Lot 2",
+     "Lot 3"
+    ],
     "Oscar Tech UK Ltd": [
      "Lot 2"
     ],
@@ -8864,8 +8870,7 @@
    },
    "status": "published",
    "suppliersWithoutLot": [
-    "Martek Lifecare",
-    "Ortus"
+    "Martek Lifecare"
    ],
    "coversLots": [
     "Lot 1",
@@ -9731,7 +9736,7 @@
       "Lot 4",
       "Lot 5"
      ],
-     "suppliersWithLots": 19
+     "suppliersWithLots": 20
     }
    ],
    "unresolved": [
@@ -9739,16 +9744,6 @@
      "name": "Aqualution System Ltd",
      "lots": [
       "Lot 2"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "Bioguard Hygeine Solutions Ltd",
-     "lots": [
-      "Lot 2",
-      "Lot 3",
-      "Lot 4"
      ],
      "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
      "source": "fts-award"
@@ -9928,6 +9923,11 @@
      "Schulke & Mayr": [
       "Lot 1",
       "Lot 4"
+     ],
+     "Bioguard Hygiene Solutions": [
+      "Lot 2",
+      "Lot 3",
+      "Lot 4"
      ]
     }
    },
@@ -9967,6 +9967,9 @@
     ],
     "Schulke & Mayr": [
      "Schulke & Mayr UK Ltd"
+    ],
+    "Bioguard Hygiene Solutions": [
+     "Bioguard Hygeine Solutions Ltd"
     ]
    },
    "briefLotTitles": {
@@ -9988,6 +9991,11 @@
     ],
     "Banner": [
      "Lot 2"
+    ],
+    "Bioguard Hygiene Solutions": [
+     "Lot 2",
+     "Lot 3",
+     "Lot 4"
     ],
     "Biotechnics Ltd": [
      "Lot 2"
@@ -10047,7 +10055,6 @@
    },
    "status": "published",
    "suppliersWithoutLot": [
-    "Bioguard Hygiene Solutions",
     "SC Johnson Ltd"
    ],
    "coversLots": [
@@ -10729,40 +10736,10 @@
       "Lot 6",
       "Lot 8"
      ],
-     "suppliersWithLots": 118
+     "suppliersWithLots": 121
     }
    ],
    "unresolved": [
-    {
-     "name": "Genmed.Me Ltd",
-     "lots": [
-      "Lot 1"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "Ortho Clinical Diagnostics",
-     "lots": [
-      "Lot 1",
-      "Lot 2",
-      "Lot 4",
-      "Lot 8"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "PerkinElmer LAS (UK) Limited",
-     "lots": [
-      "Lot 2",
-      "Lot 3",
-      "Lot 5",
-      "Lot 8"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
     {
      "name": "iDna Genetics Limited trading as Anglia DNA Services",
      "lots": [
@@ -11245,6 +11222,21 @@
       "Lot 5",
       "Lot 6",
       "Lot 8"
+     ],
+     "Genmed Ltd": [
+      "Lot 1"
+     ],
+     "Ortho Clinical Diagnostics/Quidel": [
+      "Lot 1",
+      "Lot 2",
+      "Lot 4",
+      "Lot 8"
+     ],
+     "Revvity formerly PerkinElmer LAS (UK) Limited": [
+      "Lot 2",
+      "Lot 3",
+      "Lot 5",
+      "Lot 8"
      ]
     }
    },
@@ -11260,6 +11252,15 @@
     ],
     "Williams Medical Supplies Limited": [
      "Wiliams Medical Supplies Limited"
+    ],
+    "Genmed Ltd": [
+     "Genmed.Me Ltd"
+    ],
+    "Ortho Clinical Diagnostics/Quidel": [
+     "Ortho Clinical Diagnostics"
+    ],
+    "Revvity formerly PerkinElmer LAS (UK) Limited": [
+     "PerkinElmer LAS (UK) Limited"
     ]
    },
    "briefLotTitles": {
@@ -11454,6 +11455,9 @@
     "Genetic Signatures": [
      "Lot 2"
     ],
+    "Genmed Ltd": [
+     "Lot 1"
+    ],
     "Glen Dimplex Home Appliances": [
      "Lot 5"
     ],
@@ -11578,6 +11582,12 @@
     "Nova Biomedical": [
      "Lot 4"
     ],
+    "Ortho Clinical Diagnostics/Quidel": [
+     "Lot 1",
+     "Lot 2",
+     "Lot 4",
+     "Lot 8"
+    ],
     "OscarTech UK Ltd": [
      "Lot 2",
      "Lot 3",
@@ -11622,6 +11632,12 @@
      "Lot 1",
      "Lot 2",
      "Lot 4",
+     "Lot 5",
+     "Lot 8"
+    ],
+    "Revvity formerly PerkinElmer LAS (UK) Limited": [
+     "Lot 2",
+     "Lot 3",
      "Lot 5",
      "Lot 8"
     ],
@@ -11747,10 +11763,7 @@
    },
    "status": "published",
    "suppliersWithoutLot": [
-    "AttoLife Ltd (formerly Anglia DNA)",
-    "Genmed Ltd",
-    "Ortho Clinical Diagnostics/Quidel",
-    "Revvity formerly PerkinElmer LAS (UK) Limited"
+    "AttoLife Ltd (formerly Anglia DNA)"
    ],
    "coversLots": [
     "Lot 1",
@@ -13960,7 +13973,7 @@
       "Lot 2",
       "Lot 3"
      ],
-     "suppliersWithLots": 22
+     "suppliersWithLots": 21
     }
    ],
    "unresolved": [
@@ -14019,9 +14032,6 @@
       "Lot 1",
       "Lot 2",
       "Lot 3"
-     ],
-     "Nevro Medical Limited": [
-      "Lot 2"
      ],
      "Nyxoah SA": [
       "Lot 3"
@@ -14114,9 +14124,6 @@
      "Lot 2",
      "Lot 3"
     ],
-    "Nevro Medical Limited": [
-     "Lot 2"
-    ],
     "Nyxoah SA": [
      "Lot 3"
     ],
@@ -14147,7 +14154,8 @@
    },
    "status": "published",
    "suppliersWithoutLot": [
-    "Creed Health – novated from BVM Medical Ltd"
+    "Creed Health – novated from BVM Medical Ltd",
+    "Globus Medical UK Ltd – novated from Nevro Medical Limited"
    ],
    "coversLots": [
     "Lot 1",
@@ -14843,27 +14851,10 @@
       "Lot 2",
       "Lot 3"
      ],
-     "suppliersWithLots": 58
+     "suppliersWithLots": 60
     }
    ],
    "unresolved": [
-    {
-     "name": "Ability Matters Group Limited",
-     "lots": [
-      "Lot 2",
-      "Lot 3"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "Credenhill Limited",
-     "lots": [
-      "Lot 1"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
     {
      "name": "Tayco No1 Limited",
      "lots": [
@@ -15074,6 +15065,13 @@
      ],
      "medi UK Ltd": [
       "Lot 1"
+     ],
+     "AM Healthcare Group": [
+      "Lot 2",
+      "Lot 3"
+     ],
+     "Daylong Direct": [
+      "Lot 1"
      ]
     }
    },
@@ -15152,6 +15150,12 @@
     ],
     "Walters Medical Ltd": [
      "Walters Medical Limited"
+    ],
+    "AM Healthcare Group": [
+     "Ability Matters Group Limited"
+    ],
+    "Daylong Direct": [
+     "Credenhill Limited"
     ]
    },
    "briefLotTitles": {
@@ -15160,6 +15164,10 @@
     "Lot 3": "Service"
    },
    "supplierLots": {
+    "AM Healthcare Group": [
+     "Lot 2",
+     "Lot 3"
+    ],
     "Algeo Ltd": [
      "Lot 1"
     ],
@@ -15227,6 +15235,9 @@
      "Lot 1",
      "Lot 2",
      "Lot 3"
+    ],
+    "Daylong Direct": [
+     "Lot 1"
     ],
     "Dynamic Metrics Ltd": [
      "Lot 1"
@@ -15354,9 +15365,7 @@
    },
    "status": "published",
    "suppliersWithoutLot": [
-    "AM Healthcare Group",
     "Cardiac Services",
-    "Daylong Direct",
     "Prestige Health Footwear Ltd",
     "TayCare Medical Ltd"
    ],
@@ -15993,7 +16002,7 @@
       "Lot 1",
       "Lot 2"
      ],
-     "suppliersWithLots": 20
+     "suppliersWithLots": 21
     }
    ],
    "unresolved": [
@@ -16001,15 +16010,6 @@
      "name": "CRX COMPRESSION LIMITED",
      "lots": [
       "Lot 1"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "Kinetec Medical Products UK Ltd",
-     "lots": [
-      "Lot 1",
-      "Lot 2"
      ],
      "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
      "source": "fts-award"
@@ -16102,6 +16102,10 @@
      ],
      "Thera Trainer UK Ltd": [
       "Lot 2"
+     ],
+     "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)": [
+      "Lot 1",
+      "Lot 2"
      ]
     }
    },
@@ -16123,6 +16127,9 @@
     ],
     "Thera Trainer UK Ltd": [
      "THERA TRAINER UK LTD"
+    ],
+    "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)": [
+     "Kinetec Medical Products UK Ltd"
     ]
    },
    "briefLotTitles": {
@@ -16154,6 +16161,10 @@
     ],
     "Koolpak Ltd": [
      "Lot 1"
+    ],
+    "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)": [
+     "Lot 1",
+     "Lot 2"
     ],
     "Medichill UK Ltd": [
      "Lot 1"
@@ -16194,8 +16205,7 @@
    },
    "status": "published",
    "suppliersWithoutLot": [
-    "Eureka Physiocare (previously Splice Cast)",
-    "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)"
+    "Eureka Physiocare (previously Splice Cast)"
    ],
    "coversLots": [
     "Lot 1",
@@ -16394,7 +16404,7 @@
       "Lot 2",
       "Lot 3"
      ],
-     "suppliersWithLots": 50
+     "suppliersWithLots": 52
     }
    ],
    "unresolved": [
@@ -16418,22 +16428,6 @@
     },
     {
      "name": "Iskus Health UK Ltd",
-     "lots": [
-      "Lot 1"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "Liscare Limited",
-     "lots": [
-      "Lot 1"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "Live By Lulu Limited",
      "lots": [
       "Lot 1"
      ],
@@ -16629,6 +16623,12 @@
       "Lot 1",
       "Lot 2",
       "Lot 3"
+     ],
+     "Lisclare Ltd": [
+      "Lot 1"
+     ],
+     "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)": [
+      "Lot 1"
      ]
     }
    },
@@ -16752,6 +16752,12 @@
     ],
     "Winncare PAC Ltd": [
      "Winncare Pac Limited"
+    ],
+    "Lisclare Ltd": [
+     "Liscare Limited"
+    ],
+    "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)": [
+     "Live By Lulu Limited"
     ]
    },
    "supplierLots": {
@@ -16850,6 +16856,12 @@
      "Lot 2",
      "Lot 3"
     ],
+    "Lisclare Ltd": [
+     "Lot 1"
+    ],
+    "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)": [
+     "Lot 1"
+    ],
     "MIP UK Ltd": [
      "Lot 1"
     ],
@@ -16929,9 +16941,7 @@
    },
    "status": "published",
    "suppliersWithoutLot": [
-    "Fannin UK Ltd*",
-    "Lisclare Ltd",
-    "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)"
+    "Fannin UK Ltd*"
    ],
    "coversLots": [
     "Lot 1",
@@ -17098,20 +17108,11 @@
       "Lot 1",
       "Lot 2"
      ],
-     "suppliersWithLots": 26,
+     "suppliersWithLots": 27,
      "date": "01 September 2026"
     }
    ],
    "unresolved": [
-    {
-     "name": "Accrington Surgical Instrument Suppliers Ltd",
-     "lots": [
-      "Lot 1",
-      "Lot 2"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "matrix"
-    },
     {
      "name": "Mediq",
      "lots": [
@@ -17234,6 +17235,10 @@
      "Vygon Uk Ltd": [
       "Lot 1",
       "Lot 2"
+     ],
+     "Accrington Surgical Inst. Suppliers": [
+      "Lot 1",
+      "Lot 2"
      ]
     }
    },
@@ -17285,9 +17290,16 @@
     ],
     "Vygon Uk Ltd": [
      "Vygon (UK) Limited."
+    ],
+    "Accrington Surgical Inst. Suppliers": [
+     "Accrington Surgical Instrument Suppliers Ltd"
     ]
    },
    "supplierLots": {
+    "Accrington Surgical Inst. Suppliers": [
+     "Lot 1",
+     "Lot 2"
+    ],
     "Alxr Limited": [
      "Lot 1"
     ],
@@ -17393,7 +17405,6 @@
    },
    "status": "published",
    "suppliersWithoutLot": [
-    "Accrington Surgical Inst. Suppliers",
     "H&R Healthcare Ltd",
     "O&M Halyard Uk Limited"
    ],
@@ -18125,11 +18136,20 @@
       "Lot 2",
       "Lot 3"
      ],
-     "suppliersWithLots": 4,
+     "suppliersWithLots": 5,
      "date": "9 September 2026"
     }
    ],
-   "unresolved": [],
+   "unresolved": [
+    {
+     "name": "Zimmer Biomet UK Limited",
+     "lots": [
+      "Lot 2"
+     ],
+     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
+     "source": "matrix"
+    }
+   ],
    "lotsBySource": {
     "brief-lists": {
      "CMR Surgical Ltd": [
@@ -18161,6 +18181,9 @@
       "Lot 2"
      ],
      "Procept Biorobotics": [
+      "Lot 3"
+     ],
+     "MCT Lifesciences Ltd (New to framework)": [
       "Lot 3"
      ]
     }
@@ -18455,20 +18478,11 @@
       "Lot 4",
       "Lot 5"
      ],
-     "suppliersWithLots": 42,
+     "suppliersWithLots": 43,
      "date": "8 September 2026"
     }
    ],
-   "unresolved": [
-    {
-     "name": "Beaver-Vistec",
-     "lots": [
-      "Lot 1"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "matrix"
-    }
-   ],
+   "unresolved": [],
    "lotsBySource": {
     "matrix": {
      "Accrington Surgical Instrument": [
@@ -18627,12 +18641,18 @@
      ],
      "Vernacare International Limited": [
       "Lot 1"
+     ],
+     "Beaver Visitec International Sales Ltd": [
+      "Lot 1"
      ]
     }
    },
    "namedAs": {
     "U.K. Medical Limited": [
      "Its Interventional Ltd"
+    ],
+    "Beaver Visitec International Sales Ltd": [
+     "Beaver-Vistec"
     ]
    },
    "supplierLots": {
@@ -18662,6 +18682,9 @@
      "Lot 1",
      "Lot 2",
      "Lot 3"
+    ],
+    "Beaver Visitec International Sales Ltd": [
+     "Lot 1"
     ],
     "BioSpectrum Ltd": [
      "Lot 1",
@@ -18796,7 +18819,6 @@
    },
    "status": "published",
    "suppliersWithoutLot": [
-    "Beaver Visitec International Sales Ltd",
     "Eakin Surgical Limited",
     "GS Medical Healthcare Ltd",
     "Healthcare 21 (UK) Ltd",
@@ -19113,7 +19135,7 @@
       "Lot 1",
       "Lot 2"
      ],
-     "suppliersWithLots": 43
+     "suppliersWithLots": 44
     }
    ],
    "unresolved": [
@@ -19135,14 +19157,6 @@
     },
     {
      "name": "Nipro Diagnostics (UK) Limited",
-     "lots": [
-      "Lot 1"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "PAJUNK U.K. MEDICAL PRODUCTS LIMITED",
      "lots": [
       "Lot 1"
      ],
@@ -19288,6 +19302,9 @@
      ],
      "embecta UK Limited": [
       "Lot 1"
+     ],
+     "Pajunk UK Medical Products Limited": [
+      "Lot 1"
      ]
     }
    },
@@ -19369,6 +19386,9 @@
     ],
     "embecta UK Limited": [
      "embecta U.K. Limited"
+    ],
+    "Pajunk UK Medical Products Limited": [
+     "PAJUNK U.K. MEDICAL PRODUCTS LIMITED"
     ]
    },
    "supplierLots": {
@@ -19460,6 +19480,9 @@
     "Owen Mumford Ltd": [
      "Lot 1"
     ],
+    "Pajunk UK Medical Products Limited": [
+     "Lot 1"
+    ],
     "Prospect Diagnostics Ltd": [
      "Lot 1"
     ],
@@ -19514,7 +19537,6 @@
    "suppliersWithoutLot": [
     "D S Medical",
     "Nipro Medical Europe",
-    "Pajunk UK Medical Products Limited",
     "Blink Medical",
     "Griffiths and Neilson Ltd",
     "ICU Medical International Ltd",
@@ -21370,7 +21392,7 @@
       "Lot 4",
       "Lot 5"
      ],
-     "suppliersWithLots": 35
+     "suppliersWithLots": 37
     }
    ],
    "unresolved": [
@@ -21386,23 +21408,6 @@
     },
     {
      "name": "KCI Medical Limited",
-     "lots": [
-      "Lot 4"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "Marsden Weighing Group Ltd",
-     "lots": [
-      "Lot 2",
-      "Lot 3"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "Schuco International",
      "lots": [
       "Lot 4"
      ],
@@ -21556,6 +21561,13 @@
       "Lot 3",
       "Lot 4",
       "Lot 5"
+     ],
+     "Marsden Weighing Machine Co Ltd": [
+      "Lot 2",
+      "Lot 3"
+     ],
+     "Schuco International (London) Ltd": [
+      "Lot 4"
      ]
     }
    },
@@ -21619,6 +21631,12 @@
     ],
     "Williams Medical Supplies PLC": [
      "Wiliams Medical Supplies Limited"
+    ],
+    "Marsden Weighing Machine Co Ltd": [
+     "Marsden Weighing Group Ltd"
+    ],
+    "Schuco International (London) Ltd": [
+     "Schuco International"
     ]
    },
    "briefLotTitles": {
@@ -21677,6 +21695,10 @@
      "Lot 1",
      "Lot 2"
     ],
+    "Marsden Weighing Machine Co Ltd": [
+     "Lot 2",
+     "Lot 3"
+    ],
     "Medi Uk Ltd": [
      "Lot 1",
      "Lot 2"
@@ -21722,6 +21744,9 @@
     "Rudolf Riester GMBH": [
      "Lot 1",
      "Lot 2",
+     "Lot 4"
+    ],
+    "Schuco International (London) Ltd": [
      "Lot 4"
     ],
     "Seca Ltd": [
@@ -21770,8 +21795,6 @@
    "suppliersWithoutLot": [
     "Henry Schien Medical",
     "KCI Medical Ltd (3M)",
-    "Marsden Weighing Machine Co Ltd",
-    "Schuco International (London) Ltd",
     "Uniphar Medtech"
    ],
    "coversLots": [
@@ -21802,7 +21825,7 @@
       "Lot 1",
       "Lot 2"
      ],
-     "suppliersWithLots": 5,
+     "suppliersWithLots": 9,
      "date": "09 September 2026"
     }
    ],
@@ -21817,42 +21840,9 @@
      "source": "matrix"
     },
     {
-     "name": "BVM Medical Limited",
-     "lots": [
-      "Lot 2"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "matrix"
-    },
-    {
      "name": "Biosensors International UK Limited",
      "lots": [
       "Lot 1"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "matrix"
-    },
-    {
-     "name": "Edwards Lidesciences Limited",
-     "lots": [
-      "Lot 1",
-      "Lot 2"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "matrix"
-    },
-    {
-     "name": "Jenavalve Production Limited",
-     "lots": [
-      "Lot 1"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "matrix"
-    },
-    {
-     "name": "MCT Lifesciences Limited",
-     "lots": [
-      "Lot 2"
      ],
      "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
      "source": "matrix"
@@ -21875,6 +21865,19 @@
      ],
      "SMT": [
       "Lot 1"
+     ],
+     "BVM": [
+      "Lot 2"
+     ],
+     "Edwards": [
+      "Lot 1",
+      "Lot 2"
+     ],
+     "MCT": [
+      "Lot 2"
+     ],
+     "Jenavalve": [
+      "Lot 1"
      ]
     }
    },
@@ -21893,13 +21896,38 @@
     ],
     "SMT": [
      "SMT UK"
+    ],
+    "BVM": [
+     "BVM Medical Limited"
+    ],
+    "Edwards": [
+     "Edwards Lidesciences Limited"
+    ],
+    "MCT": [
+     "MCT Lifesciences Limited"
+    ],
+    "Jenavalve": [
+     "Jenavalve Production Limited"
     ]
    },
    "supplierLots": {
     "Acrostak": [
      "Lot 2"
     ],
+    "BVM": [
+     "Lot 2"
+    ],
     "Dot Medical": [
+     "Lot 2"
+    ],
+    "Edwards": [
+     "Lot 1",
+     "Lot 2"
+    ],
+    "Jenavalve": [
+     "Lot 1"
+    ],
+    "MCT": [
      "Lot 2"
     ],
     "Medtronic": [
@@ -21916,11 +21944,7 @@
    "status": "published",
    "suppliersWithoutLot": [
     "Abbott",
-    "Biosensors",
-    "BVM",
-    "Edwards",
-    "Jenavalve",
-    "MCT"
+    "Biosensors"
    ],
    "coversLots": [
     "Lot 1",
@@ -22133,7 +22157,7 @@
       "Lot 16",
       "Lot 17"
      ],
-     "suppliersWithLots": 50
+     "suppliersWithLots": 54
     }
    ],
    "unresolved": [
@@ -22150,48 +22174,6 @@
      "lots": [
       "Lot 4",
       "Lot 15"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "C&P Medical",
-     "lots": [
-      "Lot 3"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "Clinisupplies Limited",
-     "lots": [
-      "Lot 1",
-      "Lot 2",
-      "Lot 3",
-      "Lot 5",
-      "Lot 10"
-     ],
-     "reason": "matches 2 suppliers on this brief",
-     "source": "fts-award"
-    },
-    {
-     "name": "Flexicare UK Ltd",
-     "lots": [
-      "Lot 1",
-      "Lot 3",
-      "Lot 11"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    },
-    {
-     "name": "Great Bear Healthcare Ltd",
-     "lots": [
-      "Lot 1",
-      "Lot 2",
-      "Lot 3",
-      "Lot 5",
-      "Lot 13"
      ],
      "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
      "source": "fts-award"
@@ -22420,6 +22402,28 @@
      "iMEDicare Ltd": [
       "Lot 2",
       "Lot 10"
+     ],
+     "C&P Medical Trading Ltd": [
+      "Lot 3"
+     ],
+     "Flexicare Medical Ltd": [
+      "Lot 1",
+      "Lot 3",
+      "Lot 11"
+     ],
+     "Clinisupplies Ltd": [
+      "Lot 1",
+      "Lot 2",
+      "Lot 3",
+      "Lot 5",
+      "Lot 10"
+     ],
+     "Clinisupplies GB Limited": [
+      "Lot 1",
+      "Lot 2",
+      "Lot 3",
+      "Lot 5",
+      "Lot 13"
      ]
     }
    },
@@ -22511,6 +22515,18 @@
     ],
     "Vernacare International Limited": [
      "Vernacare LTD"
+    ],
+    "C&P Medical Trading Ltd": [
+     "C&P Medical"
+    ],
+    "Flexicare Medical Ltd": [
+     "Flexicare UK Ltd"
+    ],
+    "Clinisupplies Ltd": [
+     "Clinisupplies Limited"
+    ],
+    "Clinisupplies GB Limited": [
+     "Great Bear Healthcare Ltd"
     ]
    },
    "briefLotTitles": {
@@ -22563,6 +22579,9 @@
      "Lot 6",
      "Lot 10"
     ],
+    "C&P Medical Trading Ltd": [
+     "Lot 3"
+    ],
     "CD Medical Ltd": [
      "Lot 13"
     ],
@@ -22579,6 +22598,20 @@
      "Lot 12",
      "Lot 13",
      "Lot 14"
+    ],
+    "Clinisupplies GB Limited": [
+     "Lot 1",
+     "Lot 2",
+     "Lot 3",
+     "Lot 5",
+     "Lot 13"
+    ],
+    "Clinisupplies Ltd": [
+     "Lot 1",
+     "Lot 2",
+     "Lot 3",
+     "Lot 5",
+     "Lot 10"
     ],
     "Coloplast Limited": [
      "Lot 1",
@@ -22607,6 +22640,11 @@
     ],
     "Fannin UK Ltd": [
      "Lot 5"
+    ],
+    "Flexicare Medical Ltd": [
+     "Lot 1",
+     "Lot 3",
+     "Lot 11"
     ],
     "Fresenius Kabi Ltd": [
      "Lot 15"
@@ -22751,11 +22789,7 @@
    "status": "published",
    "suppliersWithoutLot": [
     "AQLANE Medical BV",
-    "C&P Medical Trading Ltd",
-    "Clinisupplies GB Limited",
-    "Clinisupplies Ltd",
     "Creo Medical UK Ltd",
-    "Flexicare Medical Ltd",
     "KCI Medical Limited (3m)"
    ],
    "coversLots": [
@@ -22814,21 +22848,10 @@
       "Lot 9",
       "Lot 10"
      ],
-     "suppliersWithLots": 22
+     "suppliersWithLots": 23
     }
    ],
-   "unresolved": [
-    {
-     "name": "Daylong Direct",
-     "lots": [
-      "Lot 4",
-      "Lot 5",
-      "Lot 10"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "fts-award"
-    }
-   ],
+   "unresolved": [],
    "lotsBySource": {
     "fts-award": {
      "Arjo UK Ltd": [
@@ -22929,6 +22952,11 @@
      "crxcompression.com": [
       "Lot 4",
       "Lot 5"
+     ],
+     "Daylong Direct (Credenhill)": [
+      "Lot 4",
+      "Lot 5",
+      "Lot 10"
      ]
     }
    },
@@ -22967,6 +22995,9 @@
     ],
     "Urgo Ltd": [
      "URGO LIMITED"
+    ],
+    "Daylong Direct (Credenhill)": [
+     "Daylong Direct"
     ]
    },
    "briefLotTitles": {
@@ -22989,6 +23020,11 @@
     "Cardinal Health UK 432 Ltd": [
      "Lot 1",
      "Lot 2"
+    ],
+    "Daylong Direct (Credenhill)": [
+     "Lot 4",
+     "Lot 5",
+     "Lot 10"
     ],
     "Direct Health Group": [
      "Lot 2"
@@ -23083,9 +23119,7 @@
     ]
    },
    "status": "published",
-   "suppliersWithoutLot": [
-    "Daylong Direct (Credenhill)"
-   ],
+   "suppliersWithoutLot": [],
    "coversLots": [
     "Lot 1",
     "Lot 2",
@@ -23119,28 +23153,11 @@
       "Lot 1",
       "Lot 2"
      ],
-     "suppliersWithLots": 29,
+     "suppliersWithLots": 31,
      "date": "2 June 2025"
     }
    ],
-   "unresolved": [
-    {
-     "name": "Consolar Limited",
-     "lots": [
-      "Lot 1"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "matrix"
-    },
-    {
-     "name": "Formal AL Group",
-     "lots": [
-      "Lot 1"
-     ],
-     "reason": "no supplier on this brief normalises to it, and no recorded alias links it to one",
-     "source": "matrix"
-    }
-   ],
+   "unresolved": [],
    "lotsBySource": {
     "matrix": {
      "AJ Mobility Ltd": [
@@ -23237,6 +23254,12 @@
      ],
      "William Davies Care Limited": [
       "Lot 1"
+     ],
+     "Consolor Ltd": [
+      "Lot 1"
+     ],
+     "FormAL Group Ltd": [
+      "Lot 1"
      ]
     }
    },
@@ -23255,6 +23278,12 @@
     ],
     "Rehabilitation Manufacturing Services ltd": [
      "Rehabilitation Manufacturing Services Ltd"
+    ],
+    "Consolor Ltd": [
+     "Consolar Limited"
+    ],
+    "FormAL Group Ltd": [
+     "Formal AL Group"
     ]
    },
    "supplierLots": {
@@ -23279,11 +23308,17 @@
     "Chunc Limited": [
      "Lot 1"
     ],
+    "Consolor Ltd": [
+     "Lot 1"
+    ],
     "DGT Services Ltd": [
      "Lot 1",
      "Lot 2"
     ],
     "Etac Ltd": [
+     "Lot 1"
+    ],
+    "FormAL Group Ltd": [
      "Lot 1"
     ],
     "Independence Mobility Limited": [
@@ -23355,10 +23390,7 @@
     ]
    },
    "status": "published",
-   "suppliersWithoutLot": [
-    "Consolor Ltd",
-    "FormAL Group Ltd"
-   ],
+   "suppliersWithoutLot": [],
    "coversLots": [
     "Lot 1",
     "Lot 2"

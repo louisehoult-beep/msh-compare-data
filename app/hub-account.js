@@ -23,12 +23,12 @@
   var API = '/wp-json/msh/v1/my-hub';
   var LS_PINS = 'msh_my_hub_pins_v1';
   var LS_STATE = 'msh_hub_state_v1';
-  var MAX_STARS = 200, MAX_SEEN = 300;
+  var MAX_STARS = 200, MAX_SEEN = 300, MAX_COMPANIES = 5;
   var HOST = /^https:\/\/(www\.)?medsalesintelligencehub\.co\.uk(?=\/|$)/;
 
   /* ---------- pure: the same rules as the PHP snippet ---------- */
   function blank() {
-    return { v: 1, wnSeen: [], tour: false, tourSeen: false, briefing: false, phone: false, scope: 'mine', stars: [] };
+    return { v: 1, wnSeen: [], tour: false, tourSeen: false, briefing: false, phone: false, scope: 'mine', stars: [], companies: [] };
   }
   function starKey(u) {
     u = String(u === null || u === undefined ? '' : u).trim();
@@ -46,7 +46,7 @@
     var t = Array.from(s.t.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()).slice(0, 200).join('');
     if (!t) { return null; }
     var at = typeof s.at === 'string' ? (/^\d{4}-\d{2}-\d{2}$/.test(s.at) ? s.at : '') : '';
-    return { u: u, t: t, k: s.k === 'story' ? 'story' : 'page', at: at };
+    return { u: u, t: t, k: s.k === 'story' ? 'story' : (s.k === 'panel' ? 'panel' : 'page'), at: at };
   }
   function normState(s) {
     var out = blank();
@@ -62,6 +62,14 @@
     }
     ['tour', 'tourSeen', 'briefing', 'phone'].forEach(function (k) { out[k] = s[k] === true; });
     out.scope = s.scope === 'all' ? 'all' : 'mine';
+    if (Array.isArray(s.companies)) {
+      s.companies.slice(0, 200).forEach(function (id) {
+        if (typeof id === 'string') {
+          if (/^[a-z0-9-]{1,80}$/.test(id)) { if (out.companies.indexOf(id) === -1) { out.companies.push(id); } }
+        }
+      });
+      out.companies = out.companies.slice(0, MAX_COMPANIES);
+    }
     if (Array.isArray(s.stars)) {
       var have = {};
       for (var i = 0; i < Math.min(s.stars.length, 2000); i++) {
@@ -177,7 +185,14 @@
     });
   }
 
+  /* One speciality (or any page) on or off the pinned list. Retired ids the
+     catalogue no longer lists stay in the stored list, as My Hub does. */
+  function hasPin(id) { return !!CUR && CUR.pins.indexOf(id) !== -1; }
+  function addPin(id) { return load().then(function () { return hasPin(id) ? CUR : savePins(CUR.pins.concat([id])); }); }
+  function removePin(id) { return load().then(function () { return hasPin(id) ? savePins(CUR.pins.filter(function (x) { return x !== id; })) : CUR; }); }
+
   var api = {
+    hasPin: hasPin, addPin: addPin, removePin: removePin,
     load: load, saveState: saveState, star: star, unstar: unstar, isStarred: isStarred, savePins: savePins,
     _pure: { blank: blank, starKey: starKey, cleanStar: cleanStar, normState: normState, applyBody: applyBody }
   };
