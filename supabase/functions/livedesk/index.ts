@@ -12,6 +12,9 @@
 //                                                alerts use; ../ask-the-hub/pass.ts)
 //   {action:"device", token, platform, specialities}  -> save this phone for alerts
 //   {action:"device-off", token}              -> stop alerts to this phone
+//   {action:"hub-login"}                      -> one-time Hub login link for a member
+//                                                who bought Hub membership in the app
+//                                                (plan step D2; hub_bridge.ts)
 //   {action:"delete-account"}                 -> delete the account and everything
 //                                                tied to it (App Store rule 5.1.1(v))
 //
@@ -25,6 +28,7 @@
 
 import { verifyPass } from "../ask-the-hub/pass.ts";
 import { PASS_GRACE, readDevice, status } from "./rules.ts";
+import { bridgeHeader } from "./hub_bridge.ts";
 
 // Capacitor serves the app from these origins (iOS, Android).
 const ORIGINS = ["capacitor://localhost", "https://localhost", "http://localhost"];
@@ -32,6 +36,8 @@ const BASE = (Deno.env.get("SUPABASE_URL") || "").replace(/\/$/, "");
 const KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
 const ANON = Deno.env.get("SUPABASE_ANON_KEY") || "";
 const SECRET = Deno.env.get("ASK_PASS_SECRET") || "";
+const BRIDGE_SECRET = Deno.env.get("HUB_BRIDGE_SECRET") || "";
+const BRIDGE_URL = Deno.env.get("HUB_BRIDGE_URL") || "https://medsalesintelligencehub.co.uk/wp-json/msh/v1/livedesk-store";
 
 function cors(origin: string | null): Record<string, string> {
   return {
@@ -129,6 +135,26 @@ Deno.serve(async (req) => {
         await rest("DELETE", `livedesk_devices?token=eq.${encodeURIComponent(body.token)}&user_id=eq.${uid}`,
           undefined, "return=minimal");
         return reply(origin, 200, { ok: true });
+      }
+
+      case "hub-login": {
+        // Only for an app account whose store-bought Hub membership is in date.
+        if (!BRIDGE_SECRET || BRIDGE_SECRET.length < 32) return reply(origin, 500, { ok: false, why: "config" });
+        const rows = await rest("GET", "livedesk_hub_store?select=wp_user_id,store_expires_at&user_id=eq." + uid) as
+          { wp_user_id: number | null; store_expires_at: string | null }[];
+        const h = rows && rows.length ? rows[0] : null;
+        if (!h || !h.wp_user_id || !h.store_expires_at || Date.parse(h.store_expires_at) <= Date.now()) {
+          return reply(origin, 402, { ok: false, why: "no-hub" });
+        }
+        const payload = JSON.stringify({ v: 1, action: "login_link", wp_user_id: h.wp_user_id, app_user: uid });
+        const w = await fetch(BRIDGE_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "X-MSH-Bridge": await bridgeHeader(BRIDGE_SECRET, payload) },
+          body: payload,
+        });
+        const out = await w.json().catch(() => ({})) as { url?: unknown };
+        if (!w.ok || typeof out.url !== "string") throw new Error("hub-login " + w.status);
+        return reply(origin, 200, { ok: true, url: out.url });
       }
 
       case "delete-account": {
