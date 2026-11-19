@@ -20,6 +20,7 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { Purchases } from '@revenuecat/purchases-capacitor';
 import { CONFIG } from './config.js';
+import { HubView, HUB_PAGES, hubUrl } from './hub.js';
 import {
   deskTheme, filterFeed, itemsFromNotification, topStories, newCount, passFromLink, safeUrl, shortDate, stamp, filterCareers, rankCareers, passwordErrorNote } from './logic.js';
 
@@ -511,15 +512,28 @@ function viewAccount() {
 
 function tabs() {
   const t = (k, l, i) => `<button class="tab ${S.tab === k ? 'on' : ''}" data-tab="${k}">${svg(i)}${l}</button>`;
-  return `<nav class="tabs">${t('desk', 'Desk', 'desk')}${t('careers', 'Careers', 'brief')}${t('alerts', 'Alerts', 'bell')}${t('account', 'Account', 'user')}</nav>`;
+  return `<nav class="tabs">${t('desk', 'Desk', 'desk')}${t('hub', 'Hub', 'pillar')}${t('careers', 'Careers', 'brief')}${t('alerts', 'Alerts', 'bell')}${t('account', 'Account', 'user')}</nav>`;
+}
+
+function hubLinks() {
+  return HUB_PAGES.map((p) => `<button class="btn ${p.key === 'login' ? '' : 'ghost'}" data-hub="${p.key}">${esc(p.label)}</button>`).join('')
+    + '<button class="link" data-hub="signout">Sign out of the Hub</button>';
+}
+
+function viewHub() {
+  return `<main class="pad">
+    <p class="lead">Your Hub member pages. Log in once with your Hub details; the app keeps you logged in.</p>
+    ${hubLinks()}
+    ${S.note ? `<p class="note">${esc(S.note)}</p>` : ''}
+  </main>`;
 }
 
 function render() {
   let html;
   if (S.busy) html = `${header()}<main class="pad center"><div class="spinner"></div><p>${esc(S.busy)}</p></main>`;
-  else if (!S.user) html = viewSignIn();
+  else if (!S.user) html = viewSignIn() + (CONFIG.hubSpike ? `<section class="pad"><p class="small">Test build: Hub web view</p>${hubLinks()}</section>` : '');
   else if (!S.status || !S.status.access) html = viewAccess();
-  else html = (S.tab === 'desk' ? deskHeader() : header()) + ({ desk: viewDesk, careers: viewCareers, alerts: viewAlerts, account: viewAccount }[S.tab])() + tabs();
+  else html = (S.tab === 'desk' ? deskHeader() : header()) + ({ desk: viewDesk, hub: viewHub, careers: viewCareers, alerts: viewAlerts, account: viewAccount }[S.tab])() + tabs();
   $app.innerHTML = html;
 }
 
@@ -528,6 +542,12 @@ $app.addEventListener('click', async (e) => {
   const el = e.target.closest('button, a, [data-open]');
   if (!el) return;
   if (el.dataset.open !== undefined) { e.preventDefault(); open(el.dataset.open); return; }
+  if (el.dataset.hub) {
+    if (!NATIVE) { open(hubUrl(el.dataset.hub === 'signout' ? 'login' : el.dataset.hub)); return; }
+    if (el.dataset.hub === 'signout') { await HubView.signOut(); S.note = 'Signed out of the Hub on this phone.'; render(); return; }
+    await HubView.open({ url: hubUrl(el.dataset.hub), probe: !!CONFIG.hubSpike });
+    return;
+  }
   if (el.dataset.focus !== undefined) {
     const f = el.dataset.focus === 'all' || S.focus === Number(el.dataset.focus) ? null : Number(el.dataset.focus);
     S.focus = f; render();
