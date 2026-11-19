@@ -606,7 +606,11 @@ def send_app(store, new_by_slug, env=os.environ, log=print) -> dict | None:
         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
         import fcm_push
         rows = fcm_push.targets(store)
-        log("send: %d Live Desk app device(s) with access" % len(rows))
+        plats = {}
+        for r in rows:
+            plats[r.get("platform") or "unknown"] = plats.get(r.get("platform") or "unknown", 0) + 1
+        log("send: %d Live Desk app device(s) with access (%s)" % (
+            len(rows), ", ".join("%s %d" % kv for kv in sorted(plats.items())) or "none"))
         counts = deliver(rows, new_by_slug, fcm_push.sender(json.loads(raw)),
                          on_gone=lambda r: fcm_push.forget(store, r["token"]), log=log)
         log("send: app %s" % json.dumps(counts))
