@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { filterCareers, rankCareers, deskTheme, filterFeed, topStories, itemsFromNotification, newCount, passFromLink, passwordErrorNote, safeUrl, shortDate, stamp } from '../src/logic.js';
+import { filterCareers, rankCareers, deskTheme, filterFeed, topStories, itemsFromNotification, newCount, passFromLink, passwordErrorNote, safeUrl, shortDate, stamp, hubPlans, hasHub, canBuyHub } from '../src/logic.js';
 
 const FEED = { panels: [
   { key: 'MHRA ALERTS', rows: [
@@ -77,4 +77,21 @@ test('password sign-in errors say what actually went wrong', () => {
   assert.match(passwordErrorNote({ code: 'email_not_confirmed', message: 'Email not confirmed' }), /not been confirmed/);
   assert.match(passwordErrorNote({ status: 429 }), /Too many/);
   assert.match(passwordErrorNote({ message: 'Failed to fetch' }), /connection/);
+});
+
+test('Hub plans come only from the hub offering, monthly first', () => {
+  const pkg = (identifier, packageType, priceString) => ({ identifier, packageType, product: { priceString } });
+  const offerings = { current: { availablePackages: [pkg('$rc_monthly', 'MONTHLY', 'x')] },
+    all: { hub: { availablePackages: [pkg('$rc_annual', 'ANNUAL', '£240.00'), pkg('$rc_monthly', 'MONTHLY', '£25.00'), pkg('w', 'WEEKLY', '£1')] } } };
+  assert.deepEqual(hubPlans(offerings).map((p) => [p.id, p.price, p.period]), [['$rc_monthly', '£25.00', 'month'], ['$rc_annual', '£240.00', 'year']]);
+  assert.deepEqual(hubPlans({ all: {} }), []);
+  assert.deepEqual(hubPlans(null), []);
+});
+
+test('Hub entitlement and who may buy it', () => {
+  assert.equal(hasHub({ entitlements: { active: { hub: {} } } }), true);
+  assert.equal(hasHub({ entitlements: { active: { livedesk: {} } } }), false);
+  assert.equal(canBuyHub({ is_anonymous: true, email: '' }), false);
+  assert.equal(canBuyHub({ is_anonymous: false, email: 'a@b.co', email_confirmed_at: '2026-11-19' }), true);
+  assert.equal(canBuyHub({ is_anonymous: false, email: 'a@b.co', email_confirmed_at: null }), false);
 });

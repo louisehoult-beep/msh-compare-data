@@ -22,7 +22,7 @@
 //   supabase functions deploy livedesk-revenuecat --no-verify-jwt --project-ref vbthumugbzyqndirmyns
 
 import { fromRevenueCat, transferFromRevenueCat } from "../livedesk/rules.ts";
-import { bridgeHeader, type HubEvent, hubFromRevenueCat, readProductMap } from "../livedesk/hub_bridge.ts";
+import { bridgeHeader, confirmedEmail, type HubEvent, hubFromRevenueCat, readProductMap } from "../livedesk/hub_bridge.ts";
 
 const BASE = (Deno.env.get("SUPABASE_URL") || "").replace(/\/$/, "");
 const KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
@@ -95,16 +95,20 @@ async function transferHub(from: string[], to: string[]): Promise<boolean> {
 // Returns null when done (or nothing can be done), or a Response to send back.
 async function hub(ev: HubEvent): Promise<Response | null> {
   const now = new Date().toISOString();
-  let email = ev.email;
+  // The membership stays with the email it was first granted to (it moves
+  // with the purchase on TRANSFER). A first purchase uses the app account's
+  // confirmed email; the phone-set $email (ev.email) is never trusted.
+  const r = await rest("GET", "livedesk_hub_store?select=email&user_id=eq." + ev.app_user);
+  const rows = r.ok ? await r.json() as { email: string | null }[] : [];
+  let email = rows.length ? rows[0].email : null;
   if (!email) {
-    const r = await rest("GET", "livedesk_hub_store?select=email&user_id=eq." + ev.app_user);
-    const rows = r.ok ? await r.json() as { email: string | null }[] : [];
-    email = rows.length ? rows[0].email : null;
+    const u = await fetch(BASE + "/auth/v1/admin/users/" + ev.app_user, { headers: { apikey: KEY, Authorization: "Bearer " + KEY } });
+    email = u.ok ? confirmedEmail(await u.json()) : null;
   }
   const mine = { user_id: ev.app_user, email, store_product: ev.product, store_expires_at: ev.expires_at,
     store_platform: ev.store, updated_at: now };
   if (!email) {
-    // Bought without an email (should not happen: the app asks for one first).
+    // No confirmed email (should not happen: the app confirms one first).
     // Keep the record so a later event, or support, can finish it.
     console.error("livedesk-revenuecat hub: no email for", ev.app_user, ev.event_id);
     await rest("POST", "livedesk_hub_store?on_conflict=user_id", mine, "resolution=merge-duplicates,return=minimal");

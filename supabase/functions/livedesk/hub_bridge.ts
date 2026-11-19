@@ -52,6 +52,19 @@ export function eventEmail(ev: Record<string, unknown>): string | null {
   return EMAIL.test(e) ? e : null;
 }
 
+/** The email a Hub membership may be granted to: the app account's own email,
+ *  only once Supabase has confirmed it (one-time code) and never for a guest.
+ *  The $email attribute above is set by the phone, so it is not trusted for
+ *  this: anyone could type someone else's address. `u` is a Supabase admin
+ *  user object. */
+export function confirmedEmail(u: unknown): string | null {
+  if (!u || typeof u !== "object") return null;
+  const x = u as { email?: unknown; email_confirmed_at?: unknown; is_anonymous?: unknown };
+  if (x.is_anonymous === true || !x.email_confirmed_at || typeof x.email !== "string") return null;
+  const e = x.email.trim().toLowerCase();
+  return EMAIL.test(e) ? e : null;
+}
+
 /** RevenueCat event -> what WordPress must do for a Hub membership, or null
  *  when the event is not about Hub membership or changes nothing.
  *  - purchase, renewal, plan change, un-cancel: grant to the new expiry;

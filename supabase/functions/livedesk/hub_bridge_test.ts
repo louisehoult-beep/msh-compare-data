@@ -1,6 +1,6 @@
 // deno test supabase/functions/livedesk/hub_bridge_test.ts
 import { assertEquals } from "jsr:@std/assert@1";
-import { bridgeHeader, eventEmail, hubFromRevenueCat, readProductMap } from "./hub_bridge.ts";
+import { bridgeHeader, confirmedEmail, eventEmail, hubFromRevenueCat, readProductMap } from "./hub_bridge.ts";
 import { hmac } from "../ask-the-hub/pass.ts";
 
 const NOW = Date.parse("2026-11-19T20:00:00Z");
@@ -64,4 +64,13 @@ Deno.test("bridge header signs t.body", async () => {
   const secret = "s".repeat(40);
   const h = await bridgeHeader(secret, '{"a":1}', 1795000000);
   assertEquals(h, "t=1795000000,s=" + await hmac(secret, '1795000000.{"a":1}'));
+});
+
+Deno.test("confirmedEmail: only a confirmed, non-guest account email", () => {
+  const at = "2026-11-19T20:00:00Z";
+  assertEquals(confirmedEmail({ email: " Rep@Example.co.uk ", email_confirmed_at: at, is_anonymous: false }), "rep@example.co.uk");
+  assertEquals(confirmedEmail({ email: "rep@example.co.uk", email_confirmed_at: null }), null);
+  assertEquals(confirmedEmail({ email: "rep@example.co.uk", email_confirmed_at: at, is_anonymous: true }), null);
+  assertEquals(confirmedEmail({ email: "", email_confirmed_at: at }), null);
+  assertEquals(confirmedEmail(null), null);
 });

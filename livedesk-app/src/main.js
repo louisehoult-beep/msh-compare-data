@@ -27,7 +27,8 @@ import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { Purchases } from '@revenuecat/purchases-capacitor';
 import { CONFIG } from './config.js';
 import {
-  deskTheme, filterFeed, itemsFromNotification, topStories, newCount, passFromLink, safeUrl, shortDate, stamp, filterCareers, rankCareers, passwordErrorNote } from './logic.js';
+  deskTheme, filterFeed, itemsFromNotification, topStories, newCount, passFromLink, safeUrl, shortDate, stamp, filterCareers, rankCareers, passwordErrorNote,
+  hubPlans, hasHub, canBuyHub, HUB_OFFERING } from './logic.js';
 
 const NATIVE = Capacitor.isNativePlatform();
 const PLATFORM = Capacitor.getPlatform(); // 'ios' | 'android' | 'web'
@@ -69,6 +70,9 @@ const S = {
   showSignIn: false,  // a guest chose "Sign in" on the access screen
   focus: null,        // index of the one desk shown, or null for all
   openDesks: {},      // desk index -> showing every row
+  hubPackages: [],    // Hub membership plans (RevenueCat offering "hub"); empty until the store products exist
+  hubActive: false,   // this store account holds the "hub" entitlement
+  hubAfterSignIn: false, // a guest chose a Hub plan and is confirming their email first
 };
 
 const isGuest = () => !!(S.user && S.user.is_anonymous);
@@ -137,7 +141,12 @@ async function afterSignIn(user) {
   }
   await loadStatus();
   if (S.status && S.status.access) await loadFeed();
-  else await loadOfferings();
+  await loadOfferings();
+  if (S.hubAfterSignIn && canBuyHub(user)) {
+    S.hubAfterSignIn = false;
+    S.note = 'Email confirmed. Choose your Hub plan below.';
+    if (S.status && S.status.access) S.tab = 'account';
+  }
   render();
   if (S.alertsOn) registerDevice();
 }
@@ -154,7 +163,9 @@ async function loadOfferings() {
       price: p.product.priceString,
       period: PERIOD[p.packageType] || '',
     }));
-  } catch { S.packages = []; }
+    S.hubPackages = hubPlans(o);
+  } catch { S.packages = []; S.hubPackages = []; }
+  try { S.hubActive = hasHub((await Purchases.getCustomerInfo()).customerInfo); } catch { /* offline */ }
 }
 
 // No account details needed to look at plans or subscribe (5.1.1(v)).
@@ -223,6 +234,65 @@ async function restore() {
   setBusy('Restoring purchases...');
   try { await Purchases.restorePurchases(); await waitForAccess(); }
   catch { S.busy = ''; S.note = 'Nothing to restore on this store account.'; render(); }
+}
+
+// Hub membership (plan step D2). The membership is a Hub (WordPress) account
+// under the app account's confirmed email; the server never trusts an email
+// typed on the phone. Guests confirm an email with a one-time code first.
+async function subscribeHub(pkgId) {
+  if (!canBuyHub(S.user)) {
+    S.hubAfterSignIn = true; S.showSignIn = true; S.withPassword = false; S.pendingEmail = '';
+    S.note = 'Your Hub membership is tied to your Hub account, so you can use it on the website too. Confirm your email with a one-time code first.';
+    render(); return;
+  }
+  setBusy('Opening the store...');
+  try {
+    const offerings = await Purchases.getOfferings();
+    const o = offerings.all && offerings.all[HUB_OFFERING];
+    const pkg = ((o && o.availablePackages) || []).find((p) => p.identifier === pkgId);
+    if (!pkg) throw new Error('package');
+    try { await Purchases.setEmail({ email: S.user.email }); } catch { /* the server uses the confirmed account email anyway */ }
+    const { customerInfo } = await Purchases.purchasePackage({ aPackage: pkg });
+    S.hubActive = hasHub(customerInfo);
+    await waitForAccess();
+    S.note = 'Your Hub membership is ready. Tap Open the Hub. If it says it is still being set up, try again in a minute.';
+    S.tab = 'account'; render();
+  } catch (e) {
+    S.busy = '';
+    if (!(e && (e.userCancelled || e.code === '1'))) S.note = 'The purchase did not complete. You have not been charged.';
+    render();
+  }
+}
+
+// One-time sign-in link to the Hub for a membership bought in the app.
+async function openHub() {
+  setBusy('Opening the Hub...');
+  const r = await api('hub-login');
+  S.busy = '';
+  if (r.status === 200 && r.body.url) { S.note = ''; render(); open(r.body.url); return; }
+  S.note = r.body.why === 'no-hub'
+    ? 'No Hub membership bought in this app was found on this account. If you have just bought one, it can take a minute to set up.'
+    : 'Could not open the Hub just now. Check your connection and try again.';
+  render();
+}
+
+function hubCard() {
+  if (!CONFIG.revenueCatKey[PLATFORM]) return '';
+  if (S.hubActive) {
+    return `<section class="card feature"><h2>Hub membership</h2>
+      <p>Every desk and tool on the Hub. Signed in as <b>${esc(S.user && S.user.email)}</b>, the same account on the website.</p>
+      <button id="openhub" class="btn">Open the Hub</button></section>`;
+  }
+  if (!S.hubPackages.length) return '';
+  const plans = S.hubPackages.map((p) => `<button class="plan" data-hubplan="${esc(p.id)}"><b>${esc(p.title)}</b><span>${esc(p.price)} per ${esc(p.period)}</span></button>`).join('');
+  return `<section class="card">
+    <h2>Hub membership</h2>
+    <p>The whole Medical Sales Intelligence Hub: every desk and tool, company reports, the Value Case Calculator and the weekly Rep's Briefing. The Live Desk is included.</p>
+    <p class="small">Your membership is tied to your Hub account so you can use it on the website too.${canBuyHub(S.user) ? ` Hub account: <b>${esc(S.user.email)}</b>.` : ' You will confirm your email with a one-time code first.'}</p>
+    ${plans}
+    ${S.status && S.status.via === 'store' ? `<p class="small">The Hub includes the Live Desk. ${PLATFORM === 'ios' ? 'On iPhone your Live Desk subscription is replaced by the Hub one.' : 'After joining, cancel your Live Desk subscription in Google Play so you are not charged for both.'}</p>` : ''}
+    <p class="small">Payment is charged to your ${PLATFORM === 'ios' ? 'Apple ID' : 'Google Play'} account. The subscription renews automatically unless cancelled at least 24 hours before the end of the current period. Manage or cancel in your ${PLATFORM === 'ios' ? 'App Store' : 'Google Play'} account settings.</p>
+  </section>`;
 }
 
 // The store tells our server through RevenueCat's webhook, usually within seconds.
@@ -368,6 +438,7 @@ function viewAccess() {
       <button id="restore" class="link">Restore purchases</button>
       <button id="check" class="link">Check again</button>
     </section>` : ''}
+    ${hubCard()}
     ${S.note ? `<p class="note">${esc(S.note)}</p>` : ''}
     ${isGuest() ? '<p class="small">No account needed. Already subscribed on another device? Tap Restore purchases.</p>' : ''}
     <p class="small"><a data-open="${CONFIG.termsUrl}">Terms of use</a> · <a data-open="${CONFIG.privacyUrl}">Privacy policy</a> · ${isGuest() ? '<button id="signin" class="link inline">Sign in</button>' : '<button id="signout" class="link inline">Sign out</button>'}</p>
@@ -520,6 +591,7 @@ function viewAccount() {
     <section class="card"><p><b>${isGuest() ? 'No account (guest)' : esc(S.user && S.user.email)}</b></p><p>${via}</p>
       ${isGuest() ? '<p class="small">To use the Live Desk on another phone or tablet, install the app there and tap Restore purchases with the same store account. Signing in is optional.</p>' : ''}</section>
     ${st.via === 'store' ? `<button id="manage" class="btn ghost">Manage subscription</button>` : ''}
+    ${hubCard()}
     <button id="hub" class="btn ghost">${st.via === 'hub' ? 'Re-check Hub membership' : 'Connect Hub membership'}</button>
     ${CONFIG.revenueCatKey[PLATFORM] ? '<button id="restore" class="btn ghost">Restore purchases</button>' : ''}
     <p class="small"><a data-open="${CONFIG.supportUrl}">Help and contact</a> · <a data-open="${CONFIG.privacyUrl}">Privacy policy</a> · <a data-open="${CONFIG.termsUrl}">Terms</a></p>
@@ -574,6 +646,7 @@ $app.addEventListener('click', async (e) => {
   }
   if (el.dataset.mine !== undefined) { S.mine = el.dataset.mine === '1'; S.focus = null; await store.set('mine', S.mine ? '1' : '0'); render(); return; }
   if (el.dataset.plan) { subscribe(el.dataset.plan); return; }
+  if (el.dataset.hubplan) { subscribeHub(el.dataset.hubplan); return; }
   switch (el.id) {
     case 'send': {
       const email = (document.getElementById('email').value || '').trim().toLowerCase();
@@ -602,10 +675,11 @@ $app.addEventListener('click', async (e) => {
     }
     case 'signin': S.showSignIn = true; S.withPassword = false; S.pendingEmail = ''; S.note = ''; render(); return;
     case 'guest':
-      S.note = '';
+      S.note = ''; S.hubAfterSignIn = false;
       if (isGuest()) { S.showSignIn = false; render(); } else startAsGuest();
       return;
     case 'hub': connectHub(); return;
+    case 'openhub': openHub(); return;
     case 'restore': restore(); return;
     case 'check': setBusy('Checking...'); await waitForAccess(); return;
     case 'refresh': setBusy('Refreshing...'); await loadFeed(); S.busy = ''; render(); return;

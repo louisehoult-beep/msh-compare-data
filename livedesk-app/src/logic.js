@@ -129,3 +129,26 @@ export function passwordErrorNote(error) {
   if (code === 'invalid_credentials' || msg.includes('invalid login')) return 'That email and password did not match.';
   return 'Could not sign in just now. Check your connection and try again.';
 }
+
+// Hub membership sold in the app (plan step D2). Plans come from the RevenueCat
+// offering "hub"; prices are the store's own (App Store 3.1.2). Empty until the
+// store products exist, so the app shows nothing about it before then.
+export const HUB_OFFERING = 'hub';
+export const HUB_ENTITLEMENT = 'hub';
+const PERIODS = { MONTHLY: 'month', ANNUAL: 'year' };
+export function hubPlans(offerings) {
+  const o = offerings && offerings.all && offerings.all[HUB_OFFERING];
+  return ((o && o.availablePackages) || [])
+    .filter((p) => PERIODS[p.packageType])
+    .map((p) => ({ id: p.identifier, title: PERIODS[p.packageType] === 'year' ? 'Hub annual' : 'Hub monthly',
+      price: (p.product && p.product.priceString) || '', period: PERIODS[p.packageType] }))
+    .sort((a, b) => (a.period === 'year') - (b.period === 'year'));
+}
+export function hasHub(customerInfo) {
+  const a = customerInfo && customerInfo.entitlements && customerInfo.entitlements.active;
+  return !!(a && a[HUB_ENTITLEMENT]);
+}
+// A Hub membership is tied to a confirmed email, so a guest must sign in first.
+export function canBuyHub(user) {
+  return !!(user && !user.is_anonymous && user.email && (user.email_confirmed_at || user.confirmed_at));
+}
