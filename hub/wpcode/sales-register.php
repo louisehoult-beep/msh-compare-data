@@ -971,7 +971,7 @@ if ( ! function_exists( 'msh_sr_ml_week' ) ) {
 	   of what happened, also written to the log. */
 	function msh_sr_ml_week( $draft = false ) {
 		$did = array();
-		$r   = wp_remote_get( MSH_SR_CAREERS_URL, array( 'timeout' => 30 ) );
+		$r   = msh_careers_remote_get( MSH_SR_CAREERS_URL );
 		$feed = ( ! is_wp_error( $r ) && 200 === (int) wp_remote_retrieve_response_code( $r ) ) ? json_decode( wp_remote_retrieve_body( $r ), true ) : null;
 		if ( ! is_array( $feed ) ) {
 			msh_sr_ml_log( 'week: careers feed unreadable, nothing sent' );
@@ -1232,7 +1232,7 @@ add_action( 'rest_api_init', function () {
 		'callback'            => function () {
 			$roles = get_transient( 'msh_sr_roles' );
 			if ( ! is_array( $roles ) ) {
-				$r    = wp_remote_get( MSH_SR_CAREERS_URL, array( 'timeout' => 30 ) );
+				$r    = msh_careers_remote_get( MSH_SR_CAREERS_URL );
 				$feed = ( ! is_wp_error( $r ) && 200 === (int) wp_remote_retrieve_response_code( $r ) ) ? json_decode( wp_remote_retrieve_body( $r ), true ) : null;
 				if ( ! is_array( $feed ) ) {
 					return new WP_Error( 'msh_sr_feed', 'careers feed unreadable', array( 'status' => 502 ) );
@@ -1326,3 +1326,15 @@ add_action( 'rest_api_init', function () {
 		},
 	) );
 } );
+
+/* 19/11/2026: msh-compare-data is private. Read the careers file through the data gate's
+   upstream (snippet 2874, its read-only token) when the gate is active; plain GET otherwise. */
+if ( ! function_exists( 'msh_careers_remote_get' ) ) {
+	function msh_careers_remote_get( $url ) {
+		if ( function_exists( 'msh_gate_file_upstream' ) ) {
+			$up = msh_gate_file_upstream( 'data/supplier-careers.json' );
+			return wp_remote_get( $up['url'], array( 'timeout' => 30, 'headers' => $up['headers'] ) );
+		}
+		return wp_remote_get( $url, array( 'timeout' => 30 ) );
+	}
+}

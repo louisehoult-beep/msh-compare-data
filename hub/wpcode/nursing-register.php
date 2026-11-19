@@ -946,7 +946,7 @@ if ( ! function_exists( 'msh_nr_jobs_batch' ) ) {
 	function msh_nr_jobs_batch() {
 		$feed = get_transient( 'msh_nr_jobs_feed' );
 		if ( ! is_array( $feed ) ) {
-			$r = wp_remote_get( MSH_NR_CAREERS_URL, array( 'timeout' => 30 ) );
+			$r = msh_careers_remote_get( MSH_NR_CAREERS_URL );
 			if ( is_wp_error( $r ) || 200 !== (int) wp_remote_retrieve_response_code( $r ) ) {
 				return;
 			}
@@ -1447,3 +1447,15 @@ add_action( 'rest_api_init', function () {
 		},
 	) );
 } );
+
+/* 19/11/2026: msh-compare-data is private. Read the careers file through the data gate's
+   upstream (snippet 2874, its read-only token) when the gate is active; plain GET otherwise. */
+if ( ! function_exists( 'msh_careers_remote_get' ) ) {
+	function msh_careers_remote_get( $url ) {
+		if ( function_exists( 'msh_gate_file_upstream' ) ) {
+			$up = msh_gate_file_upstream( 'data/supplier-careers.json' );
+			return wp_remote_get( $up['url'], array( 'timeout' => 30, 'headers' => $up['headers'] ) );
+		}
+		return wp_remote_get( $url, array( 'timeout' => 30 ) );
+	}
+}
