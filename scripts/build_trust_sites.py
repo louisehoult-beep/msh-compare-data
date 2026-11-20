@@ -121,6 +121,14 @@ SUBSITE = re.compile(r"DENTAL|\bEYE\b|LIAISON|LIASON|\bDAY HOSPITAL|KIDNEY|DIAGN
 MHWORDS = re.compile(r"MENTAL|PSYCH|CAMHS|LIAISON|RECOVERY|LEARNING DISAB|COMMUNITY|DISTRICT NURS|HEALTH VISIT|DEMENTIA|WELLBEING|ADDICTION|DRUG|ALCOHOL", re.I)
 
 
+# A named unit inside a hospital, not a hospital: "Rheumatology (Huddersfield Royal Infirmary)",
+# "Wansbeck General Hospital - Prescribing", "Lgt ENT at Queen Elizabeth Hospital".
+UNIT = re.compile(r"[(]|HOSPITAL OF WALES|\s-\s|\bAT\b|PRESCRIB|\bTEAM\b|FP ?10|E-PACT|\bNMP\b|BCSC|VILLA|FLATS|PRIVATE|INPATIENT|"
+                  r"SURGICENTRE|DISCHARGE|ANTE ?NATAL|PSYCHOLOG|LEARNING|\bCOURT\b|\bHOUSE\b|\bLODGE\b|\bCDC\b|"
+                  r"\bUTC\b|URGENT CARE|\bA ?(AND|&) ?E\b|DIVISION|^(MEDICAL|RENAL|NEUROLOGY|CARDIOLOGY|PAEDIATRICS|"
+                  r"RHEUMATOLOGY|DERMATOLOGY|OPTHALMOLOGY|OPHTHALMOLOGY|ENT|IMMUNOLOGY|GYNAECOLOGY|OBSTETRICS|LGT)\b")
+
+
 def clean(name):
     n = re.sub(r"\s*\((?:SITE|ACUTE|MAIN)\)|\s+SITE$", "", name.upper().strip())
     return re.sub(r"\s+", " ", n)
@@ -146,9 +154,16 @@ def pick(sites, code=None):
     for pc, group in by_pc.items():
         group.sort(key=lambda s: (not re.search(r"HOSPITAL|INFIRMARY", s["Name"].upper()),
                                   bool(SUBSITE.search(s["Name"].upper())), len(s["Name"]), s["OrgId"]))
-        g = group[0]
-        hosp.append({"ods": g["OrgId"], "name": nice(clean(g["Name"])), "postcode": g.get("PostCode") or "",
-                     "own": bool(code) and g["OrgId"].startswith(code), "npc": at_pc.get(g.get("PostCode"), 1)})
+        # Two hospitals can share a postcode (Manchester Royal Infirmary and St Mary's; Addenbrooke's and
+        # the Rosie). Keep every site the trust codes as its own that is named a hospital or infirmary
+        # and is not a sub-unit; otherwise the first of the group.
+        keepers = [s for s in group if bool(code) and s["OrgId"].startswith(code)
+                   and re.search(r"HOSPITAL|INFIRMARY", s["Name"].upper()) and not SUBSITE.search(s["Name"].upper())
+                   and not re.search(r"\bHQ\b|NHS (FOUNDATION )?TRUST", s["Name"].upper())
+                   and not UNIT.search(s["Name"].upper()) and not DEPT.search(s["Name"].upper())]
+        for g in (keepers or group[:1]):
+            hosp.append({"ods": g["OrgId"], "name": nice(clean(g["Name"])), "postcode": g.get("PostCode") or "",
+                         "own": bool(code) and g["OrgId"].startswith(code), "npc": at_pc.get(g.get("PostCode"), 1)})
     seen, out = set(), []
     for h in sorted(hosp, key=lambda h: (not h["own"], h["name"])):
         k = re.sub(r"^the |[^a-z]", "", h["name"].lower())
@@ -235,7 +250,10 @@ def main():
         def dist(c):
             hq = geo.get(trusts[c]["_hq"]); g = geo.get(pc)
             return km(hq, g) if hq and g else 999
-        return min(cands, key=lambda c: (-w[c], -overlap(c, name), dist(c)))
+        def named_for(c):   # Liverpool Heart and Chest Hospital NHS FT runs Liverpool Heart and Chest Hospital
+            k = lambda x: re.sub(r"[^a-z]", "", re.sub(r"\bnhs\b.*$", "", x.lower()).replace("the ", ""))
+            return k(names.get(c, "")) == k(name)
+        return min(cands, key=lambda c: (not named_for(c), -w[c], -overlap(c, name), dist(c)))
     moved = {}
     for c, t in trusts.items():
         keep = []
@@ -253,6 +271,26 @@ def main():
             if pc not in have:   # the running trust files the building under a non-hospital name
                 trusts[o]["hospitals"].append(dict(h))
                 have.add(pc)
+    # A specialist trust named after its hospital (Liverpool Heart and Chest, The Christie, The Royal
+    # Marsden) runs that hospital, even where ODS files the building under the neighbouring acute trust
+    # and the specialist trust's own sites carry only department names.
+    def hkey(x):
+        x = re.sub(r"\bnhs\b.*$", "", x.lower())
+        return re.sub(r"[^a-z]", "", re.sub(r"^the\s+|\bthe\b", "", x))
+    tkeys = {hkey(names.get(c, "")): c for c in trusts}
+    for c, t in trusts.items():
+        stay = []
+        for h in t["hospitals"]:
+            k = hkey(h["name"])
+            o = tkeys.get(k) or tkeys.get(re.sub(r"hospital$", "", k))
+            hq = geo.get(trusts[o]["_hq"]) if o else None
+            near = bool(hq) and "lat" in h and km(hq, (h["lat"], h["lng"])) <= 30   # two Queen Victoria Hospitals
+            if o and o != c and near:
+                trusts[o]["hospitals"].append(dict(h))
+                t["otherSites"] += 1
+            else:
+                stay.append(h)
+        t["hospitals"] = stay
     for c, t in trusts.items():
         seen, out = set(), []
         for h in sorted(t["hospitals"], key=lambda h: h["name"]):

@@ -430,6 +430,8 @@ def merge_research(sources, bodies, spec_ids):
                     p["specialities"].append(sp)
             if q.get("trustCode"):
                 p.setdefault("_tc", q["trustCode"])
+            if q.get("trustCode") and q.get("hospital"):
+                p.setdefault("_hosp", (q["trustCode"], q["hospital"]))
             for c in q["classes"]:
                 if c not in p["classes"]:
                     p["classes"].append(c)
@@ -446,6 +448,44 @@ def _norm(x):
     return re.sub(r"\s+", " ", x).strip()
 
 
+SITES = {}   # trust code -> its hospitals' names (trust-sites.json)
+GENERIC_CORE = {"general", "community", "royal", "university", "district", "county", "city", "memorial",
+                "children's", "childrens", "women's", "womens", "eye", "dental", "cottage", "war memorial"}
+
+
+def hospital_in_text(p, code):
+    """File a person to one hospital of their own trust, from text already held (roles, organisation,
+    job title, LinkedIn snippet). Within one trust a hospital's short name is unambiguous, so the
+    'Hospital' suffix may be dropped. Returns (hospital, basis) or (None, None)."""
+    names = SITES.get(code) or []
+    if not names:
+        return None, None
+    roles = " ".join(a.get("role") or "" for a in p["appearances"]) + " " + (p.get("job_title") or "")
+    if len(names) > 1 and re.search(r"chief executive|chief officer|\bdirector\b|\bchair\b|non.executive|board|group\b", roles, re.I):
+        return None, None   # trust-wide and group roles belong to the trust, not one site
+    texts = [p.get("job_title"), p.get("trust"), p.get("linkedin_basis")]
+    for a in p["appearances"]:
+        texts += [a.get("role"), a.get("organisation")]
+    blob = " " + " ".join(_norm(x) for x in texts if x) + " "
+    tname = " " + _norm(p.get("trustName") or "") + " "
+    hits = set()
+    for h in names:
+        full = _norm(h)
+        core = re.sub(r"\s+hospital$", "", full).strip()
+        if (" " + core + " ") in tname:   # "St Thomas' Hospital" inside "Guy's and St Thomas'" names the trust, not the site
+            continue
+        for k in {full, core}:
+            if len(k) < 6 or k in GENERIC_CORE or (" " + k + " ") in tname:
+                continue
+            if (" " + k + " ") in blob:
+                hits.add(h)
+    if len(hits) == 1:
+        return hits.pop(), "Hospital named in the person's role, organisation or profile text."
+    if len(names) == 1:
+        return names[0], "The trust's only hospital in NHS ODS."
+    return None, None
+
+
 def place_index():
     """Name -> (trust code, hospital or None), from trust-map.json and trust-sites.json."""
     tm = json.loads((ROOT / "data" / "trust-map.json").read_text())
@@ -459,6 +499,7 @@ def place_index():
     if ts.exists():
         hosp_names = {}
         for c, t in json.loads(ts.read_text())["trusts"].items():
+            SITES[c] = [h["name"] for h in t["hospitals"]]
             for h in t["hospitals"]:
                 hosp_names.setdefault(_norm(h["name"]), set()).add((c, h["name"]))
         for n, hits in hosp_names.items():
@@ -470,6 +511,7 @@ def place_index():
 def place(p, trusts, idx):
     cands = [p.get("trust")] + [a.get("organisation") for a in p["appearances"]]
     code, hosp = p.pop("_tc", None), None
+    filed = p.pop("_hosp", None)
     for c in cands:
         if not c:
             continue
@@ -491,8 +533,16 @@ def place(p, trusts, idx):
             p["icb"], p["icbName"] = t["icb"], t.get("icbName")
         if t.get("region"):
             p["region"] = t["region"]
-        if hosp:
+        if filed and filed[0] == code and filed[1] in SITES.get(code, []):
+            hosp = filed[1]
+            p["hospital"], p["hospitalBasis"] = hosp, "Hospital stated on the source page linked under the person."
+        elif hosp:
             p["hospital"] = hosp
+            p["hospitalBasis"] = "Hospital named in the person's organisation text."
+        else:
+            hosp, basis = hospital_in_text(p, code)
+            if hosp:
+                p["hospital"], p["hospitalBasis"] = hosp, basis
     p["kol"] = any(c in KOL_CLASSES for c in p["classes"])
 
 
