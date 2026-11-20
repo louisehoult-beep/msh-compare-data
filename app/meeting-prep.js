@@ -816,7 +816,10 @@
         if ((c.spec || []).some(function(t){ return keys.indexOf(t) !== -1; })) mine.push(c);
         else if (c.cls === 'clinical') clin.push(c);
       });
-      var mode = (!sp || !tagged) ? 'all' : (mine.length ? 'mine' : (clin.length ? 'clin' : 'none'));
+      /* No "other clinical" fallback (live check 20/11/2026): the tagger files
+         a dental-hospital HEATING tender as clinical on the word "Dental", so
+         the fallback put it back in a urology brief. Speciality match or none. */
+      var mode = (!sp || !tagged) ? 'all' : (mine.length ? 'mine' : 'none');
       var list = mode === 'all' ? all : (mode === 'mine' ? mine : clin);
       var hidden = all.length - list.length;
       var hiddenNote = hidden > 0
@@ -826,7 +829,7 @@
       if (mode === 'none'){
         return panel('Who to contact — named on this trust’s own tender notices',
           'None of the ' + num(all.length) + ' names on file for this trust was published on a notice whose title matches ' + esc(sp)
-          + ' or another clinical product, so none is listed here. All of them, with the notice each came from, are in the ' + link('Stakeholder Mapper', 'mapper') + '.'
+          + ', so none is listed here. All of them, with the notice each came from, are in the ' + link('Stakeholder Mapper', 'mapper') + '.'
           + '<div style="margin-top:6px;font-size:12px;color:#8a8778;">Source: Find a Tender, Open Government Licence v3' + (CONTACTS_ASOF ? ', index as at ' + esc(CONTACTS_ASOF) : '') + '.</div>',
           '#2E6B3E');
       }
