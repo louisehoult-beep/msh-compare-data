@@ -344,6 +344,19 @@ SOURCES = [
     {"id": "nursing_crit_care", "name": "Nursing in Critical Care",
      "url": "https://onlinelibrary.wiley.com/feed/14785153/most-recent",
      "specialities": ["critical-care"]},
+    # Added 20/11/2026 (weekly-hub-gap-audit): gynaecology-and-womens-health was THIN (1 item in 31 days).
+    # Fetched 20/11/2026: British Menopause Society (thebms.org.uk/feed/), 10 items, newest 29/10/2026,
+    # menopause and post-reproductive health only, so a whole-feed tag is safe. BJOG (Wiley feed
+    # 14710528) tested and NOT added: 78 items, newest 19/11/2026, but obstetrics and gynaecology mixed;
+    # as a keyword-slice source its --dry-run put research headlines on cardiology, continence,
+    # critical care, diabetes and haematology pages (e.g. a maternal ICU admission study on critical-care),
+    # and as a whole-feed tag it would put obstetrics on the gynaecology page. Rejected the same day: RCOG (rcog.org.uk/rss/news, 404),
+    # FSRH (404). Also found, not added: Sepsis Trust still 403 and its Google News site: route holds one
+    # item from 2024; Intensive Care Society 404; IDSc, Central Sterilising Club and HSDU Online no
+    # reachable feed (connection failed); Journal of Hospital Infection has a working feed but spans all
+    # infection prevention, so it is not a safe whole-feed tag for sterile-services.
+    {"id": "bms_menopause", "name": "British Menopause Society", "url": "https://thebms.org.uk/feed/",
+     "specialities": ["gynaecology-and-womens-health"]},
     # MHRA alerts, recalls and safety information (GOV.UK atom): keyword slice only, so each alert
     # reaches only the page its headline names. Carries the 16/09/2026 National Patient Safety Alert
     # on patient hoists and slings, which no feed had put on Patient Handling.
