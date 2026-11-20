@@ -21,7 +21,9 @@ THE TWO FEEDS (both public, no key)
 -----------------------------------
 Find a Tender    — above-threshold, UK statutory. OCDS release packages.
     https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages
-        ?stages=award&limit=100&updatedFrom=…&updatedTo=…
+        ?limit=100&updatedFrom=…&updatedTo=…      (NO stages filter: it drops
+        every Procurement Act 2023 notice, see fetch_fts; award releases are
+        picked client-side from tag and awards[])
     Notice URL:  /Notice/{id}      id is "nnnnnn-yyyy"   (capital N)
 
 Contracts Finder — below-threshold and sub-£139k. OCDS search.
@@ -188,23 +190,46 @@ def get(url, timeout=90, retries=3):
             time.sleep(5 * attempt)
 
 
-def headline_cpv(tender):
+def _cpvs(items):
+    """Every CPV on a list of OCDS items, in order, de-duplicated."""
+    out = []
+    for item in items or []:
+        for c in [item.get("classification") or {}] + list(item.get("additionalClassifications") or []):
+            cid = str(c.get("id") or "")
+            if c.get("scheme") == "CPV" and cid and cid not in out:
+                out.append(cid)
+    return out
+
+
+def headline_cpv(tender, awards=None):
     """The buyer's primary classification of the WHOLE contract.
 
     A stray medical sub-code on one line item does not make a social-care
     service a device award, so only the headline counts for CPV inclusion.
+
+    Fixed 20/11/2026: Procurement Act 2023 notices (legalBasis 2023/54) carry NO
+    tender.classification. On an Act tender the CPVs sit on tender.items[]; on an
+    Act award notice (UK6/UK7) tender has no items either and they sit only on
+    awards[].items[]. In both, the first CPV is the main code. Reading
+    tender.classification alone gave "" for every Act award, so a medical award
+    with a plain title ("MLPA Reagents", 107411-2026, CPV 33696300) was dropped.
     """
     cl = tender.get("classification") or {}
-    return str(cl["id"]) if cl.get("scheme") == "CPV" and cl.get("id") else ""
+    if cl.get("scheme") == "CPV" and cl.get("id"):
+        return str(cl["id"])
+    found = _cpvs(tender.get("items"))
+    for award in awards or []:
+        found += [c for c in _cpvs(award.get("items")) if c not in found]
+    return found[0] if found else ""
 
 
-def relevant(tender, title):
+def relevant(tender, title, awards=None):
     """Headline CPV in division 33, or a high-confidence device term in the
     TITLE — never the buyer name, or every award by "NHS Blood and Transplant"
     would false-match. Always subject to the exclude list."""
     if EXCLUDE.search(title):
         return False
-    if headline_cpv(tender).startswith(CPV_MEDICAL_PREFIX):
+    if headline_cpv(tender, awards).startswith(CPV_MEDICAL_PREFIX):
         return True
     return bool(STRONG_KW.search(title))
 
@@ -214,7 +239,7 @@ def cf_guid(release_id):
     return re.sub(r"-\d+$", "", release_id or "")
 
 
-def rows_from_release(rel, source, section):
+def rows_from_release(rel, source, section, only_award=None):
     """One row per SUPPLIER named on the release, not one per notice.
 
     A framework award naming four suppliers is four companies' news. Joining
@@ -222,12 +247,17 @@ def rows_from_release(rel, source, section):
     comma, so the OCDS supplier array is kept as an array all the way through.
     """
     tender = rel.get("tender") or {}
+    awards = rel.get("awards") or []
     title = (tender.get("title") or "").strip()
-    if not relevant(tender, title):
+    if not relevant(tender, title, awards):
         return []
+    cpv = headline_cpv(tender, awards)
     buyer = ((rel.get("buyer") or {}).get("name") or "").strip()
     out = []
-    for award in (rel.get("awards") or []):
+    for award in (awards if only_award is None else [only_award]):
+        # A cancelled or unsuccessful award names nobody who won anything.
+        if (award.get("status") or "").strip().lower() in DEAD_AWARD_STATUSES:
+            continue
         value = award.get("value") or {}
         amount, currency = value.get("amount"), value.get("currency") or "GBP"
         if amount is None:
@@ -251,7 +281,7 @@ def rows_from_release(rel, source, section):
                 "hubUrl": HUB_AWARD_TRACKER,
                 "source": source,
                 "section": section,
-                "cpv": headline_cpv(tender),
+                "cpv": cpv,
                 # Null means the notice did not state a value. It is NEVER 0 —
                 # a 0 in a value field is a parse bug, not a free contract.
                 "valueAmount": amount,
@@ -263,16 +293,63 @@ def rows_from_release(rel, source, section):
     return out
 
 
-def fetch_fts(days, max_pages=60):
+DEAD_AWARD_STATUSES = {"cancelled", "unsuccessful"}
+AWARD_TAGS = {"award", "awardupdate", "contract", "contractupdate"}
+
+
+def is_award_release(rel):
+    """An award release, judged from the release itself (see fetch_fts)."""
+    tags = {str(t).strip().lower() for t in (rel.get("tag") or [])}
+    return bool(tags & AWARD_TAGS) or bool(rel.get("awards"))
+
+
+def fts_award_rows(releases):
+    """Rows from the award releases in an unstaged walk, newest release first.
+
+    One procurement often has several award releases in the window (a UK6
+    award notice, then a corrected UK6 or the UK7 contract details notice, each
+    with its own notice id and so its own URL). The same supplier on the same
+    award of the same procurement is one award, so only the newest release's
+    row is kept: (ocid, award id, supplier) is the identity.
+    """
+    rows, seen = [], set()
+    for rel in sorted(releases, key=lambda r: r.get("date") or "", reverse=True):
+        if not is_award_release(rel):
+            continue
+        ocid = rel.get("ocid") or rel.get("id") or ""
+        for award in rel.get("awards") or []:
+            for row in rows_from_release(rel, "Find a Tender", "tender-awards", award):
+                k = (ocid, str(award.get("id") or ""),
+                     company_match.key(row["noticeSupplierName"]))
+                if k in seen:
+                    continue
+                seen.add(k)
+                rows.append(row)
+    return rows
+
+
+def fetch_fts(days, max_pages=150):
     """Find a Tender award notices for the window. updatedFrom bounds the
-    window server-side, so paging stops naturally; the cap is a runaway guard."""
+    window server-side, so paging stops naturally; the cap is a runaway guard.
+
+    Fixed 20/11/2026: this used to ask for "stages=award". Verified live
+    20/11/2026: Find a Tender's stages filter returns ONLY old-regime notices
+    (legalBasis 32014L0024/5, PCR 2015) and silently drops every Procurement Act
+    2023 notice (legalBasis 2023/54). For 09:00-10:00 on 12/11/2026,
+    stages=award returned 6 releases, all old-regime; the unstaged feed held
+    about 19 award releases in the same hour, 13 of them Act notices (107411,
+    107414, 107416 among them) that never reached this file. The walk is now
+    unstaged and award releases are picked here (is_award_release). It reads
+    every release type, so it is several times as many pages; the guard is
+    raised to match and still says so in the file if it is hit.
+    """
     now = dt.datetime.now(dt.timezone.utc)
     qs = urllib.parse.urlencode({
-        "stages": "award", "limit": 100,
+        "limit": 100,
         "updatedFrom": (now - dt.timedelta(days=days)).strftime("%Y-%m-%dT00:00:00"),
         "updatedTo": now.strftime("%Y-%m-%dT23:59:59")})
     url = "%s?%s" % (FTS_API, qs)
-    rows, pages, scanned, complete = [], 0, 0, True
+    releases, pages, scanned, complete = [], 0, 0, True
     failed = ""
     while url and pages < max_pages:
         try:
@@ -280,18 +357,20 @@ def fetch_fts(days, max_pages=60):
         except Exception as exc:  # network failure after get()'s own retries
             failed, complete = "%s: %s" % (type(exc).__name__, exc), False
             break
-        releases = data.get("releases", [])
-        scanned += len(releases)
-        for rel in releases:
-            rows.extend(rows_from_release(rel, "Find a Tender", "tender-awards"))
+        got = data.get("releases", [])
+        scanned += len(got)
+        releases += got
         pages += 1
         url = (data.get("links") or {}).get("next")
         if url:
             time.sleep(PAGE_SLEEP)
     if url and pages >= max_pages:
         complete = False
-    note = ("Find a Tender: %d supplier row(s) from %d release(s) over %d page(s)"
-            % (len(rows), scanned, pages))
+    award_releases = sum(1 for r in releases if is_award_release(r))
+    rows = fts_award_rows(releases)
+    note = ("Find a Tender: %d supplier row(s) from %d award release(s) among %d "
+            "release(s) of all notice types over %d page(s)"
+            % (len(rows), award_releases, scanned, pages))
     if failed:
         note += (" — ⚠️ THE FEED FAILED (%s) after %d page(s), so this window was "
                  "NOT fully walked and awards are missing." % (failed, pages))

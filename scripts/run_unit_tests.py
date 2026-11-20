@@ -116,6 +116,7 @@ RUN = [
     "test_hub_search_findability.py",    # 18/11/2026, product searches reach the framework, Compare and pages (needs node)
     "test_digital_lane.py",              # 20/10/2026, digital health lane + Federated Data Platform profile
     "test_open_tenders_feed.py",         # 20/11/2026, Find a Tender stages= filter dropped Procurement Act notices (107391-2026)
+    "test_awards_feed.py",               # 20/11/2026, same stages= gap on the awards feed; Act award CPVs only on awards[].items (107411-2026)
     "test_company_digital_awards.py",    # 20/10/2026, digital awards layer (own file, exact-only match)
     "test_company_key_info.py",          # 22/10/2026, My Hub company briefs: sourced, no confidential wording, Ego matches the panel
     "test_digital_frameworks.py",        # 20/10/2026, GCA Technology Services 4, G-Cloud 15, coming NHS digital frameworks
