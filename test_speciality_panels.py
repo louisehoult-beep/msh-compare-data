@@ -149,6 +149,14 @@ def tariff_counts_match(label, panel_dt, slug, *keys):
               panel_dt[names[k]] == want[k], "panel says %s" % panel_dt[names[k]])
 
 
+def none_invented(tenders):
+    """Open tenders change daily. An empty list was the honest answer while the feed held none;
+    the lasting rule is that none is invented: each carries its Find a Tender notice and a title
+    (20/11/2026, when real notices first reached capital-estates)."""
+    return all(t.get("title") and str(t.get("url", "")).startswith("https://www.find-tender.service.gov.uk/")
+               for t in (tenders or []))
+
+
 def load_panel(slug):
     p = os.path.join(HERE, "data", "speciality-panels", slug + ".json")
     if not os.path.exists(p):
@@ -1051,8 +1059,10 @@ check("the routes with no framework at all are named as uncounted",
       "Blood and Transplant" in (p.get("rules") or {}).get("suppliers", ""))
 
 print("\nAN EMPTY PANEL IS AN HONEST ANSWER, NOT A REASON TO WIDEN (rule 14)")
-check("no open tender on this patch today, and none invented",
-      p["openTenders"] == [])
+# Was `== []` while the feed held none. Real notices now arrive daily, so the check is that
+# none is invented: every open tender carries its Find a Tender notice and a title (20/11/2026).
+check("no open tender invented: each carries its Find a Tender notice",
+      all(t.get("title") and str(t.get("url", "")).startswith("https://www.find-tender.service.gov.uk/") for t in p["openTenders"]))
 check("the open-tender rule says an empty list means none open",
       "empty list means" in (p.get("rules") or {}).get("openTenders", ""))
 
@@ -1258,7 +1268,7 @@ check("the sibling page carrying the equipment is named",
 
 print("\nAN EMPTY PANEL IS AN HONEST ANSWER, NOT A REASON TO WIDEN (rule 14)")
 check("no open tender on this patch today, and none invented",
-      fr["openTenders"] == [])
+      none_invented(fr["openTenders"]))
 check("the open-tender rule says an empty list means none open",
       "empty list means" in (fr.get("rules") or {}).get("openTenders", ""))
 
@@ -1416,7 +1426,7 @@ check("the two routes with no NHS Supply Chain page are named",
 
 print("\nAN EMPTY PANEL IS AN HONEST ANSWER, NOT A REASON TO WIDEN (rule 14)")
 check("no open tender on this patch today, and none invented",
-      ir["openTenders"] == [])
+      none_invented(ir["openTenders"]))
 check("the open-tender rule says an empty list means none open",
       "empty list means" in (ir.get("rules") or {}).get("openTenders", ""))
 
@@ -1604,7 +1614,7 @@ check("the resuscitation frameworks are named as deliberately absent",
 
 print("\nAN EMPTY PANEL IS AN HONEST ANSWER, NOT A REASON TO WIDEN (rule 14)")
 check("no open tender on this patch today, and none invented",
-      ca["openTenders"] == [])
+      none_invented(ca["openTenders"]))
 check("the open-tender rule says an empty list means none open",
       "empty list means" in (ca.get("rules") or {}).get("openTenders", ""))
 
@@ -1769,7 +1779,7 @@ check("both framework references and their end dates are named",
 check("the concentration a rep needs is stated", "68.7%" in nufw)
 
 print("\nAN EMPTY PANEL IS AN HONEST ANSWER, NOT A REASON TO WIDEN (rule 14)")
-check("no open tender on this patch today, and none invented", nu["openTenders"] == [])
+check("no open tender on this patch today, and none invented", none_invented(nu["openTenders"]))
 check("the open-tender rule says an empty list means none open",
       "empty list means" in (nu.get("rules") or {}).get("openTenders", ""))
 
@@ -1857,7 +1867,7 @@ print("\nNOTHING IS CLAIMED THAT THE DATA DOES NOT SUPPORT")
 check("no CPV family is claimed", not B.SPECIALITY_RULES[OBESITY].get("cpv"))
 check("no tariff part is claimed", not B.SPECIALITY_RULES[OBESITY].get("tariffParts"))
 check("no Drug Tariff block is published", ob.get("drugTariff") is None)
-check("no open tender on this patch today, and none invented", ob["openTenders"] == [])
+check("no open tender on this patch today, and none invented", none_invented(ob["openTenders"]))
 # The molecule names were deliberately not adopted: dual-licensed, and the
 # diabetes and endocrinology page has its own claim on them.
 for straddler in ["Supply of Tirzepatide", "Semaglutide Injection Framework",
@@ -2216,7 +2226,7 @@ check("no tariff part is claimed", not B.SPECIALITY_RULES[PALLIATIVE].get("tarif
 check("no Drug Tariff block is published", pa.get("drugTariff") is None)
 check("the tariff rule says why rather than going quiet",
       "No Drug Tariff part applies" in (pa.get("rules") or {}).get("drugTariff", ""))
-check("no open tender on this patch today, and none invented", pa["openTenders"] == [])
+check("no open tender on this patch today, and none invented", none_invented(pa["openTenders"]))
 
 print("\nTHE COVERAGE LIMIT IS PUBLISHED, NOT HIDDEN (rule 14)")
 pafw = (pa.get("rules") or {}).get("frameworks", "")
@@ -5502,7 +5512,7 @@ for _bad in ("Paraffin gauze dressing sterile", "Generic Curea P1", "Silicone ge
           "%d live lines" % len(_hits))
 
 print("  open tenders — empty is the honest answer, not a miss")
-check("no open notice on this patch today", de["openTenders"] == [])
+check("no open notice on this patch today", none_invented(de["openTenders"]))
 
 
 # ---------------------------------------------------------------------------
@@ -5731,7 +5741,7 @@ for cost in ["SSD autoclave cooling water chiller", "microbiology autoclave"]:
     check("names the cost: %s" % cost[:44], cost in ip["rules"]["frameworks"])
 
 print("  open tenders — empty is the honest answer, not a miss")
-check("no open notice on this patch today", ip["openTenders"] == [])
+check("no open notice on this patch today", none_invented(ip["openTenders"]))
 
 
 # ---------------------------------------------------------------------------
@@ -5910,7 +5920,7 @@ for phrase in ["no NHS Supply Chain framework for a cytotoxic or a chemotherapy 
     check("coverage note carries: %s" % phrase[:50], phrase in onc["rules"]["frameworks"])
 
 print("  open tenders - empty is the honest answer, not a miss")
-check("no open notice on this patch today", onc["openTenders"] == [])
+check("no open notice on this patch today", none_invented(onc["openTenders"]))
 
 # ---------------------------------------------------------------------------
 # PHARMACY AND MEDICINES (page 2916). The rollout's only speciality with NO NHS
@@ -6483,7 +6493,7 @@ for phrase in ["Sepsis is a pathway, not a product category",
 
 check("every supplier is traced to a framework on this patch",
       sp["counts"]["suppliers"] > 0 and all(s.get("frameworks") for s in sp["suppliers"]))
-check("open tenders is an honest empty list", sp["openTenders"] == [])
+check("open tenders is an honest empty list", none_invented(sp["openTenders"]))
 
 
 # The exclude=None path must not leak to any rule that has not earned it. Six have:
@@ -6571,7 +6581,7 @@ if _d:
           any("Digital Diagnostic Solutions" in n for n in _names)
           and any("Radiotherapy IT" in n for n in _names), "got %s" % _names)
     check("digital claims no open tender it cannot evidence",
-          _d.get("openTenders") == [])
+          none_invented(_d.get("openTenders")))
 
 
 
@@ -6667,7 +6677,8 @@ check("the coverage note names the one non-NHS buyer it keeps",
 check("suppliers come only from that one framework",
       cap["counts"]["suppliers"] > 0
       and all(s.get("frameworks") for s in cap["suppliers"]))
-check("capital claims no open tender it cannot evidence", cap.get("openTenders") == [])
+check("capital claims no open tender it cannot evidence",
+      all(t.get("title") and str(t.get("url", "")).startswith("https://www.find-tender.service.gov.uk/") for t in (cap.get("openTenders") or [])))
 
 # ---------------------------------------------------------------------------
 # DIABETES AND ENDOCRINOLOGY. The last page on the rollout, and the only patch
@@ -6793,7 +6804,7 @@ check("no endocrine tumour row reached the published slice", "neuroendocrine" no
 check("no intravenous glucose fluid row reached the published slice",
       "iv infusion" not in _db_titles)
 check("the hybrid closed loop awards are published", "hybrid closed loop" in _db_titles)
-check("diabetes claims no open tender it cannot evidence", db.get("openTenders") == [])
+check("diabetes claims no open tender it cannot evidence", none_invented(db.get("openTenders")))
 
 print("  the Drug Tariff is TWO parts, both sliced, neither claimed whole")
 _db_dt = db["drugTariff"]
@@ -6988,7 +6999,7 @@ check("the ligature rows are matched by the rule",
       "ligature" in matched_titles(MH))
 check("the awards list is substantial rather than a token slice",
       mh["counts"]["awardsMatched"] >= 70, str(mh["counts"]["awardsMatched"]))
-check("mental health claims no open tender it cannot evidence", mh.get("openTenders") == [])
+check("mental health claims no open tender it cannot evidence", none_invented(mh.get("openTenders")))
 
 
 # ---------------------------------------------------------------------------
@@ -7117,7 +7128,7 @@ check("no chemistry or emission row reached the published slice",
 check("the GP contract rows are published", "gp " in _pc_titles or " gp" in _pc_titles)
 check("the awards list is substantial rather than a token slice",
       pc["counts"]["awardsMatched"] >= 70, str(pc["counts"]["awardsMatched"]))
-check("primary care claims no open tender it cannot evidence", pc.get("openTenders") == [])
+check("primary care claims no open tender it cannot evidence", none_invented(pc.get("openTenders")))
 
 print("  the buyer cap is a display rule and nothing is filtered out by it")
 check("this is the only rule in the file that sets a buyer cap",
