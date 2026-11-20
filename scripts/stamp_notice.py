@@ -148,6 +148,9 @@ REFS = {
     "drug-tariff-part-viiia.json":     "ETH-D8AEA63D7",
     # Added 16/10/2026: previous-month Drug Tariff slices for price-move alerts.
     "tariff-snapshots.json":           "ETH-DA65B1CB0",
+    # Added 20/11/2026: hospitals inside each trust (NHS ODS), for the territory maps and
+    # How the NHS Fits Together. Minted with `stamp_notice.py --mint`.
+    "trust-sites.json":                "ETH-D712799E6",
     # Added 16/10/2026: one ref per speciality panel in data/speciality-panels/, keyed
     # "speciality-panels/<slug>.json". Hash input is the bare file name, as for every
     # other ref. A new panel needs `--mint <slug>.json` and a line here before it builds.

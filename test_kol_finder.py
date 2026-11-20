@@ -51,7 +51,9 @@ class Gate(unittest.TestCase):
 
     def test_every_person_has_speciality_and_https_source(self):
         for p in DOC["people"]:
-            self.assertTrue(p["specialities"])
+            # Trust board members and managers (added 20/11/2026) are found by trust, ICB or
+            # region rather than by speciality, so they may carry none; everyone else needs one.
+            self.assertTrue(p["specialities"] or (p.get("trustCode") and "trust" in p["classes"]), p["name"])
             self.assertTrue(all(a["source_url"].startswith("https://") for a in p["appearances"]))
 
     def test_lapsed_term_needs_note(self):

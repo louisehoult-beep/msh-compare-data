@@ -66,7 +66,11 @@ CLASSES = [
     ("editor", "Journalists, editors and commentators"),
     ("supply", "Supply chain contacts"),
     ("clinical", "Named hospital unit consultants"),
+    ("trust", "Trust leaders and managers"),
 ]
+# Key opinion leaders are the people a professional body puts forward; the other classes
+# are people who run or buy for a trust. The finder's "Key opinion leaders" filter uses this.
+KOL_CLASSES = ("board", "speaker", "evidence", "editor")
 
 SOURCES = {
     "bad-leadership": {
@@ -420,9 +424,12 @@ def merge_research(sources, bodies, spec_ids):
             if end and end < datetime.date.today():
                 app["note"] = "The term end shown on the page has passed; check the page for a successor before relying on it."
             p["appearances"].append(app)
-            for sp in specs_here:
+            mine = [x for x in q.get("specialities", []) if x in spec_ids] if d.get("perPersonSpecialities") else specs_here
+            for sp in mine:
                 if sp not in p["specialities"]:
                     p["specialities"].append(sp)
+            if q.get("trustCode"):
+                p.setdefault("_tc", q["trustCode"])
             for c in q["classes"]:
                 if c not in p["classes"]:
                     p["classes"].append(c)
@@ -430,6 +437,63 @@ def merge_research(sources, bodies, spec_ids):
                 p.setdefault("_jt", {k: q.get(k) for k in ("job_title", "trust", "title_basis")})
             if q.get("linkedin_url") and q.get("linkedin_basis") and LINKEDIN_RE.match(q["linkedin_url"]):
                 p.setdefault("_li", {"url": q["linkedin_url"], "basis": q["linkedin_basis"]})
+
+
+def _norm(x):
+    x = str(x or "").lower().replace("&", " and ").replace("’", "'")
+    x = re.sub(r"\b(nhs|the|foundation|trust|group)\b", " ", x)
+    x = re.sub(r"[^a-z0-9' ]+", " ", x)
+    return re.sub(r"\s+", " ", x).strip()
+
+
+def place_index():
+    """Name -> (trust code, hospital or None), from trust-map.json and trust-sites.json."""
+    tm = json.loads((ROOT / "data" / "trust-map.json").read_text())
+    trusts = {t["code"]: t for t in tm["trusts"]}
+    idx = {}
+    for c, t in trusts.items():
+        n = _norm(t["n"])
+        if len(n) >= 6:
+            idx.setdefault(n, (c, None))
+    ts = ROOT / "data" / "trust-sites.json"
+    if ts.exists():
+        hosp_names = {}
+        for c, t in json.loads(ts.read_text())["trusts"].items():
+            for h in t["hospitals"]:
+                hosp_names.setdefault(_norm(h["name"]), set()).add((c, h["name"]))
+        for n, hits in hosp_names.items():
+            if len(hits) == 1 and len(n) >= 8:   # a hospital name two trusts share is ambiguous: skip it
+                idx.setdefault(n, next(iter(hits)))
+    return trusts, idx
+
+
+def place(p, trusts, idx):
+    cands = [p.get("trust")] + [a.get("organisation") for a in p["appearances"]]
+    code, hosp = p.pop("_tc", None), None
+    for c in cands:
+        if not c:
+            continue
+        for part in [c] + [x for x in re.split(r"[,(]", c) if x.strip()]:
+            hit = idx.get(_norm(part))
+            if hit and (not code or hit[0] == code):
+                code = code or hit[0]
+                hosp = hosp or hit[1]
+    if not code:
+        # a trust name inside a longer organisation string, for long distinctive names only
+        blob = " " + " ".join(_norm(c) for c in cands if c) + " "
+        best = [k for k, v in idx.items() if v[1] is None and len(k) >= 14 and (" " + k + " ") in blob]
+        if len(best) == 1:
+            code = idx[best[0]][0]
+    if code and code in trusts:
+        t = trusts[code]
+        p["trustCode"], p["trustName"] = code, t["n"]
+        if t.get("icb"):
+            p["icb"], p["icbName"] = t["icb"], t.get("icbName")
+        if t.get("region"):
+            p["region"] = t["region"]
+        if hosp:
+            p["hospital"] = hosp
+    p["kol"] = any(c in KOL_CLASSES for c in p["classes"])
 
 
 def main():
@@ -445,6 +509,7 @@ def main():
     body_labels = dict(NOTES)
     merge_research(sources, body_labels, set(spec_label))
     li = load_linkedin()
+    trusts, idx = place_index()
     people = []
     for name in sorted(PEOPLE, key=lambda n: re.sub(r"^(Dr|Professor|Mrs|Mr|Miss)\s+", "", n).split()[-1].lower()):
         if name.lower() in optout or re.sub(r"^(Dr|Professor)\s+", "", name).lower() in optout:
@@ -468,6 +533,7 @@ def main():
         if hit:
             p["linkedin_url"] = hit["url"]
             p["linkedin_basis"] = hit["basis"]
+        place(p, trusts, idx)
         people.append(p)
     out = {
         "_meta": {
@@ -478,6 +544,7 @@ def main():
             "linkedin": "A profile link is held only where a public search result showed the same name with a matching role, employer or speciality (the basis is recorded). Everyone else has a search link built from the name and speciality. Nothing is scraped.",
         },
         "classes": [{"id": c, "label": l} for c, l in CLASSES],
+        "kolClasses": list(KOL_CLASSES),
         "specialities": [{"id": s["id"], "label": s["label"]} for s in specs],
         "bodies": [{"id": k, "label": v} for k, v in body_labels.items()],
         "sources": [{"id": k, **v, "checked": v.get("checked", CHECKED)} for k, v in sources.items()],
