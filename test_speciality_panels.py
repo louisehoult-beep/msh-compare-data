@@ -515,12 +515,21 @@ check("every named framework is one of this speciality's",
 check("an unresolved name is flagged, never silently merged",
       all(("resolved" in s) for s in csup))
 # NHSSC spells these two firms differently on its own two framework pages.
-for firm, spellings in (("Abena", 2), ("Essity", 2), ("Clinisupplies", 2)):
+for firm, spellings in (("Abena", 2), ("Essity", 2)):
     rec = [s for s in csup if firm.lower() in s["name"].lower()]
     check("%s appears exactly once" % firm, len(rec) == 1,
           "got %s" % [s["name"] for s in rec])
     check("%s shows both NHSSC spellings" % firm,
           bool(rec) and len(rec[0]["variants"]) == spellings)
+
+# Clinisupplies is TWO real companies, not one firm spelt two ways: Clinisupplies
+# Ltd (04013240) and Clinisupplies GB Limited (02503030), both re-read on the
+# owner's pages on 18/11/2026. They must stay as two separate, resolved rows.
+_cl = [s for s in csup if "clinisupplies" in s["name"].lower()]
+check("Clinisupplies Ltd and Clinisupplies GB Limited are two separate rows", len(_cl) == 2,
+      "got %s" % [s["name"] for s in _cl])
+check("Clinisupplies GB Limited is its own resolved row",
+      any(s["name"] == "Clinisupplies GB Limited" and s["resolved"] for s in _cl))
 
 print("\nDRUG TARIFF — the dual-listed part label must not be dropped")
 t = c.get("drugTariff") or {}
@@ -1804,9 +1813,13 @@ check("the COVID guard does not throw away a genuine pen needle row",
       B.match_title(obx, "Supply of Wegovy Pen Needles and Sharps Disposal"))
 
 print("\nTRUE POSITIVES — rows that must be present")
-obt = " || ".join((a.get("title") or "") for a in ob["awards"]).lower()
+# Against the matched set, not the newest-40 display slice (^o537): newer
+# awards pushed "Child Tier 2" out of the shown forty on 20/11/2026.
+obt = matched_titles(OBESITY)
 for good in ["obesity pathway innovation programme",
-             "child tier 2 weight management service",
+             # "child tier 2 weight management service" removed 20/11/2026: it was a
+             # planning-stage notice (Bromley, 084245-2026, 07/09/2026) that the
+             # 19/11/2026 framework-awards refresh (5d8d19a2) no longer carries.
              "bariatric equipment rental",
              "bariatric hire contract",
              "level 3 digital weight management service"]:
@@ -5249,7 +5262,9 @@ check("and this panel says the overlap is on purpose",
 print("  suppliers, and the two names the alias registry cannot resolve")
 check("suppliers come only from the five frameworks",
       co["counts"]["suppliers"] > 0 and all(s.get("frameworks") for s in co["suppliers"]))
-check("130 suppliers across the five frameworks", co["counts"]["suppliers"] == 130,
+# 131 since 20/11/2026: Clinisupplies GB Limited is a separate company from
+# Clinisupplies Ltd (verified 18/11/2026), so it is now its own row.
+check("131 suppliers across the five frameworks", co["counts"]["suppliers"] == 131,
       "got %s" % co["counts"]["suppliers"])
 _co_unres = sorted(s["name"] for s in co["suppliers"] if not s["resolved"])
 # Kept exactly as NHS Supply Chain wrote them and flagged, never dropped and
