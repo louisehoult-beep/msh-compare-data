@@ -103,5 +103,39 @@ class FindATenderGap(unittest.TestCase):
         self.assertEqual(rows, [])
 
 
+class ActNoticeValue(unittest.TestCase):
+    """Act notices give amountGross, not amount, or put the value on lots.
+    107391-2026 showed "-" on the Hub until 20/11/2026."""
+
+    def test_107391_2026_shows_its_gross_value(self):
+        row = OT.row_from_release(copy.deepcopy(ACT_TENDER), "Find a Tender", TODAY)
+        self.assertEqual(row["valueAmount"], 260000000)
+        self.assertEqual(row["valueCurrency"], "GBP")
+        self.assertEqual(row["valueBasis"], "gross")
+
+    def test_old_regime_net_amount_unchanged(self):
+        t = {"value": {"amount": 5000, "amountGross": 6000, "currency": "GBP"}}
+        self.assertEqual(OT.tender_value(t), (5000, "GBP", "net"))
+
+    def test_lots_summed_when_no_tender_value(self):
+        rel = copy.deepcopy(ACT_TENDER)
+        rel["tender"].pop("value")
+        rel["tender"]["lots"] = [
+            {"id": "1", "value": {"amountGross": 160000000, "currency": "GBP"}},
+            {"id": "2", "value": {"amount": 100000000, "currency": "GBP"}},
+            {"id": "3"},
+        ]
+        row = OT.row_from_release(rel, "Find a Tender", TODAY)
+        self.assertEqual((row["valueAmount"], row["valueBasis"]), (260000000, "lots"))
+
+    def test_mixed_currency_lots_give_no_value(self):
+        t = {"lots": [{"value": {"amount": 1, "currency": "GBP"}},
+                      {"value": {"amount": 1, "currency": "EUR"}}]}
+        self.assertEqual(OT.tender_value(t), (None, "", ""))
+
+    def test_no_value_anywhere(self):
+        self.assertEqual(OT.tender_value({}), (None, "", ""))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -229,6 +229,35 @@ def cf_guid(release_id):
     return re.sub(r"-\d+$", "", release_id or "")
 
 
+def tender_value(tender):
+    """(amount, currency, basis) for a tender, or (None, "", "").
+
+    Old-regime (PCR 2015) notices give tender.value.amount, net of VAT.
+    Procurement Act 2023 notices give tender.value.amountGross (incl. VAT) and
+    no amount, so 107391-2026 (Urology and Bowel Management, £260m) showed "—"
+    until 20/11/2026. Some Act notices give no tender-level value at all and put
+    it on tender.lots[].value; those are summed only when every valued lot
+    shares one currency, otherwise no value is shown rather than a wrong one.
+    basis says which figure was used: "net", "gross" or "lots".
+    """
+    v = tender.get("value") or {}
+    if v.get("amount") is not None:
+        return v["amount"], v.get("currency") or "GBP", "net"
+    if v.get("amountGross") is not None:
+        return v["amountGross"], v.get("currency") or "GBP", "gross"
+    total, currencies = 0, set()
+    for lot in tender.get("lots") or []:
+        lv = (lot or {}).get("value") or {}
+        amt = lv.get("amount") if lv.get("amount") is not None else lv.get("amountGross")
+        if amt is None:
+            continue
+        total += amt
+        currencies.add(lv.get("currency") or "GBP")
+    if len(currencies) == 1:
+        return total, currencies.pop(), "lots"
+    return None, "", ""
+
+
 def row_from_release(rel, source, today_iso, keep=None):
     """keep(tender, title, buyer) -> bool overrides the medical rule. Only the
     digital lane (scripts/refresh_digital_lane.py) passes one; this file's own
@@ -250,7 +279,7 @@ def row_from_release(rel, source, today_iso, keep=None):
         # than publish a stale "still open" row.
         return None
     buyer = ((rel.get("buyer") or {}).get("name") or "").strip()
-    value = tender.get("value") or {}
+    value_amount, value_currency, value_basis = tender_value(tender)
     rid = rel.get("id", "")
     url = (FTS_NOTICE.format(rid) if source == "Find a Tender"
            else (CF_NOTICE.format(cf_guid(rid)) if cf_guid(rid) else ""))
@@ -274,8 +303,9 @@ def row_from_release(rel, source, today_iso, keep=None):
         "url": url,
         "source": source,
         "cpv": headline_cpv(tender),
-        "valueAmount": value.get("amount"),
-        "valueCurrency": value.get("currency") or ("GBP" if value.get("amount") is not None else ""),
+        "valueAmount": value_amount,
+        "valueCurrency": value_currency,
+        "valueBasis": value_basis,
         "speciality": tag_speciality(title, buyer),
         "ocid": rel.get("ocid", ""),
     }
