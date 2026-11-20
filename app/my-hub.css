@@ -501,3 +501,18 @@
 .msh #msh-my-hub .mx-deeper>summary::-webkit-details-marker{display:none}
 .msh #msh-my-hub .mx-deeper>summary small{font-weight:500;font-size:12.5px;color:var(--ink2)!important}
 .msh #msh-my-hub .mx-deeper:not([open])>summary{margin-bottom:0}
+
+/* 20/11/2026 (Lou): full width with margins, Your pages wide, What's new off, specialities always open, jump links */
+.msh #msh-my-hub .wrap,.msh #msh-my-hub .mx-loading,.msh #msh-my-hub .mx-fail{max-width:none;padding-left:40px;padding-right:40px}
+.msh #msh-my-hub .wn-slot{display:none!important}
+.msh #msh-my-hub .mast .wrap{grid-template-columns:1fr}
+.msh #msh-my-hub .mx-jump{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
+.msh #msh-my-hub .mx-jump a{display:inline-block;padding:8px 14px;border-radius:999px;background:#FFFFFF;border:1px solid #D6CEBE;color:var(--navy)!important;font-size:14px!important;font-weight:600!important;text-decoration:none}
+.msh #msh-my-hub .mx-jump a:hover{border-color:var(--navy)}
+.msh #msh-my-hub #mx-pages,.msh #msh-my-hub #mx-saved,.msh #msh-my-hub #mx-snap,.msh #msh-my-hub #mx-deeper,.msh #msh-my-hub #mx-brief{scroll-margin-top:120px}
+.msh #msh-my-hub .layout{grid-template-columns:minmax(0,1fr)}
+.msh #msh-my-hub .side{order:-1;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);align-items:start}
+.msh #msh-my-hub .tiles{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.msh #msh-my-hub .mx-deeper>summary{cursor:default;pointer-events:none}
+@media (max-width:1240px){.msh #msh-my-hub .side{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.msh #msh-my-hub .side .pages{grid-column:1/-1}}
+@media (max-width:640px){.msh #msh-my-hub .wrap,.msh #msh-my-hub .mx-loading,.msh #msh-my-hub .mx-fail{padding-left:16px;padding-right:16px}.msh #msh-my-hub .side{grid-template-columns:1fr}.msh #msh-my-hub .tiles{grid-template-columns:1fr 1fr}.msh #msh-my-hub .mx-jump a{font-size:13px!important;padding:7px 12px}}

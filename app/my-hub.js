@@ -292,7 +292,8 @@
   function shell() {
     return '<section class="mast on-dark" aria-labelledby="mx-hello-t"><div class="wrap"><div class="hello" id="mx-hello"></div><div class="wn-slot" id="wn-slot" data-state="off"></div></div></section>'
       + '<div class="wrap bar-wrap"><nav class="bar" id="mx-bar" aria-label="My Hub controls"></nav></div>'
-      + '<div class="mx-main" id="main"><div class="wrap"><div id="mx-snap" class="mx-snap"></div><div id="mx-know"></div><div id="mx-gs"></div><div id="mx-panels" class="mx-panels"></div><div class="layout"><details class="mx-deeper" id="mx-deeper"><summary data-k="deeper">More from your specialities<small>Full key news, safety alerts, procurement and jobs</small></summary><div class="stack" id="mx-feeds"></div></details>'
+      + '<div class="wrap"><nav class="mx-jump" aria-label="Jump to"><a href="#mx-pages">Your pages</a><a href="#mx-saved">Saved</a><a href="#mx-snap">Snapshot</a><a href="#mx-deeper">More from your specialities</a><a href="#mx-brief">Monday briefing</a></nav></div>'
+      + '<div class="mx-main" id="main"><div class="wrap"><div id="mx-snap" class="mx-snap"></div><div id="mx-know"></div><div id="mx-gs"></div><div id="mx-panels" class="mx-panels"></div><div class="layout"><details class="mx-deeper" id="mx-deeper" open><summary data-k="deeper" tabindex="-1">More from your specialities<small>Full key news, safety alerts, procurement and jobs</small></summary><div class="stack" id="mx-feeds"></div></details>'
       + '<aside class="side" aria-label="Your shortcuts"><section class="card pages" id="mx-pages" aria-labelledby="mx-yp-t"></section>'
       + '<section class="card saved" id="mx-saved" aria-labelledby="mx-sv-t"></section>'
       + '<section class="brief on-dark" id="mx-brief" aria-labelledby="mx-br-t"></section></aside></div></div></div>'
@@ -313,7 +314,7 @@
       setHtml('mx-snap', M.snapshot.html());
       M.snapshot.load();
       var dd = document.getElementById('mx-deeper');
-      if (dd) { if (!M.specIds().length) { dd.open = true; } }   // nothing picked: the desk is the page
+      if (dd) { dd.open = true; }   // always open (Lou, 20/11/2026)
       setHtml('mx-know', M.company.html());
       M.company.load();
       setHtml('mx-gs', checklistHtml());

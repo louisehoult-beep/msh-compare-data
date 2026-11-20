@@ -110,8 +110,9 @@ class Wiring(unittest.TestCase):
         self.assertIn("M.snapshot.load()", self.js)
 
     def test_full_desk_sits_under_more_and_opens_when_nothing_is_picked(self):
-        self.assertIn('<details class="mx-deeper" id="mx-deeper">', self.js)
-        self.assertIn("dd.open = true", self.js)
+        # Always open (Lou, 20/11/2026): More from your specialities never collapses
+        self.assertIn('<details class="mx-deeper" id="mx-deeper" open>', self.js)
+        self.assertIn("if (dd) { dd.open = true; }", self.js)
 
     def test_snapshot_sources_are_repo_files_and_each_card_links_deeper(self):
         for f in ("data/speciality-panels/", "data/icb-watch.json"):
