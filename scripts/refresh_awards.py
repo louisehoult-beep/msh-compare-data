@@ -162,6 +162,15 @@ EXCLUDE = re.compile(
 
 # ------------------------------------------------------------------ fetching
 
+def _stated(amount):
+    """A notice value, or None when the notice did not state one. Procurement Act
+    notices can carry 0 where no value was entered (Organon UK, 20/11/2026); a 0 is
+    never a free contract, so it is treated as not stated, as the history path does."""
+    if isinstance(amount, bool) or not isinstance(amount, (int, float)) or amount <= 0:
+        return None
+    return amount
+
+
 def get(url, timeout=90, retries=3):
     """GET + parse JSON, honouring Retry-After. Both feeds rate-limit with 429."""
     attempt = 0
@@ -259,10 +268,10 @@ def rows_from_release(rel, source, section, only_award=None):
         if (award.get("status") or "").strip().lower() in DEAD_AWARD_STATUSES:
             continue
         value = award.get("value") or {}
-        amount, currency = value.get("amount"), value.get("currency") or "GBP"
+        amount, currency = _stated(value.get("amount")), value.get("currency") or "GBP"
         if amount is None:
             tv = tender.get("value") or {}
-            amount, currency = tv.get("amount"), tv.get("currency") or "GBP"
+            amount, currency = _stated(tv.get("amount")), tv.get("currency") or "GBP"
         period = award.get("contractPeriod") or {}
         date = (award.get("date") or rel.get("date") or "")[:10]
         rid = rel.get("id", "")
@@ -270,7 +279,10 @@ def rows_from_release(rel, source, section, only_award=None):
                else (CF_NOTICE.format(cf_guid(rid)) if cf_guid(rid) else ""))
         for supplier in (award.get("suppliers") or []):
             name = (supplier.get("name") or "").strip()
-            if not name:
+            # Some buyers type a contact's email into the supplier name field
+            # (Notice 109814-2026, 20/11/2026). An email is not a company, and a
+            # named person's address must never reach this public repo.
+            if not name or "@" in name:
                 continue
             out.append({
                 "noticeSupplierName": name,
