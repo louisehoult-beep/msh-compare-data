@@ -13,7 +13,7 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-11-15",
-  "differentiator.json published": 39160,
+  "differentiator.json published": 39511,
   "differentiator.json held": 297945
  },
  "counts": {
@@ -25,10 +25,10 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 388,
-  "inScopeSuppliersNeedingCrawl": 203,
-  "inScopeSuppliersNeedingDomain": 190,
+  "inScopeSuppliersNeedingCrawl": 202,
+  "inScopeSuppliersNeedingDomain": 189,
   "suppliersRefused": 585,
-  "suppliersRefusedButPublishingElsewhere": 168,
+  "suppliersRefusedButPublishingElsewhere": 173,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
   "blockedFrameworks": 4,
@@ -2053,6 +2053,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Kinetik Medical Devices",
+     "domain": "kinetikwellbeing.com",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 403: Forbidden)",
+     "checked": "2026-09-05",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "OscarTech UK",
      "domain": "oscartech-uk.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -2064,13 +2071,6 @@
      "domain": "www.criticalhealthcare.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Kinetik Medical Devices",
-     "domain": "kinetikwellbeing.com",
-     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 403: Forbidden)",
-     "checked": "2026-09-05",
      "bucket": "heldOnly"
     },
     {
@@ -2181,8 +2181,8 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 3,
-    "heldNeedingCategory": 9,
+    "publishedElsewhereNeedingCategory": 4,
+    "heldNeedingCategory": 8,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -2239,6 +2239,7 @@
     "Greiner Bio-One Ltd",
     "Haemonetics",
     "Henry Schein UK Holdings",
+    "Kinetik Medical Devices",
     "OscarTech UK",
     "Pasante Healthcare",
     "Sychem"
@@ -2246,7 +2247,6 @@
    "heldOnly": [
     "Critical Healthcare",
     "Immucor (IBG Immucor)",
-    "Kinetik Medical Devices",
     "Launch Diagnostics",
     "Oxford Biosystems",
     "Scientific Laboratory Supplies (SLS)",
@@ -3062,13 +3062,6 @@
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
-     "supplier": "Algeo",
-     "domain": "algeos.com",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-08-31",
-     "bucket": "refused"
-    },
-    {
      "supplier": "Apos Medical UK Ltd",
      "domain": "www.aposhealth.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -3114,13 +3107,6 @@
      "supplier": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
      "domain": "cardiac-services.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-05",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Cuxson Gerrard & Company Limited",
-     "domain": "www.cuxsongerrard.com",
-     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-05",
      "bucket": "refused"
     },
@@ -3174,6 +3160,27 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Algeo",
+     "domain": "algeos.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Cuxson Gerrard & Company Limited",
+     "domain": "www.cuxsongerrard.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-05",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Eureka Physiocare Ltd",
+     "domain": "www.eurekaphysiocare.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Fenton Pharmaceuticals Limited",
      "domain": "fentonpharmaceuticals.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -3198,13 +3205,6 @@
      "supplier": "Critical Healthcare",
      "domain": "www.criticalhealthcare.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Eureka Physiocare Ltd",
-     "domain": "www.eurekaphysiocare.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
      "bucket": "heldOnly"
     },
@@ -3299,8 +3299,8 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 6,
-    "heldNeedingCategory": 5,
+    "publishedElsewhereNeedingCategory": 9,
+    "heldNeedingCategory": 4,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -3336,7 +3336,10 @@
     "Trulife Limited"
    ],
    "publishedElsewhere": [
+    "Algeo",
     "Ambu UK",
+    "Cuxson Gerrard & Company Limited",
+    "Eureka Physiocare Ltd",
     "Fenton Pharmaceuticals Limited",
     "Huntleigh",
     "Solventum (3M Health Care)",
@@ -3348,7 +3351,6 @@
    "heldOnly": [
     "Canonbury Products Limited",
     "Critical Healthcare",
-    "Eureka Physiocare Ltd",
     "Repton Medical Ltd",
     "Walters Medical Ltd"
    ],
@@ -3363,7 +3365,6 @@
     "Prestige Health Footwear Ltd"
    ],
    "refused": [
-    "Algeo",
     "Apos Medical UK Ltd",
     "Arden Orthotics Ltd",
     "Bespoke Prosthetics & Orthotics Ltd",
@@ -3371,7 +3372,6 @@
     "C&P Medical Trading Ltd",
     "C&S Footwear Adaptions Ltd",
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
-    "Cuxson Gerrard & Company Limited",
     "Dacey LTD",
     "Credenhill Ltd (trading as Daylong Direct)",
     "Hugh Steeper Limited",
@@ -3381,7 +3381,7 @@
     "Darco UK Ltd (formerly V-M Orthotics Ltd)"
    ],
    "unknown": [],
-   "actionableTotal": 18,
+   "actionableTotal": 20,
    "blockedReason": null,
    "deferred": null
   },
@@ -4438,12 +4438,11 @@
    ],
    "publishedElsewhereNoOwnRange": [
     "OscarTech UK",
-    "Reliance Medical",
     "Rocket Medical"
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 7,
+    "publishedElsewhereNeedingCategory": 8,
     "heldNeedingCategory": 6,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -4518,7 +4517,7 @@
     "Viomedex Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 13,
+   "actionableTotal": 14,
    "blockedReason": null,
    "deferred": null
   },
@@ -4924,16 +4923,11 @@
     {
      "supplier": "Oswell Penda",
      "domain": null
-    },
-    {
-     "supplier": "Phoenix Medical Ltd",
-     "domain": null
     }
    ],
    "domainsMissing": [
     "ClearHeal LTD",
-    "Oswell Penda",
-    "Phoenix Medical Ltd"
+    "Oswell Penda"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -5232,12 +5226,12 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 7,
+    "publishedElsewhereNeedingCategory": 8,
     "heldNeedingCategory": 6,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 2
    },
    "published": [
     "Advanced Medical Solutions (AMS)",
@@ -5270,6 +5264,7 @@
     "Solventum (3M Health Care)",
     "Medline Industries",
     "OscarTech UK",
+    "Phoenix Medical Ltd",
     "Schulke & Mayr UK Ltd",
     "Trion Pharma Limited",
     "Vernacare"
@@ -5285,8 +5280,7 @@
    "capturedNothingCounted": [],
    "notCrawled": [
     "ClearHeal LTD",
-    "Oswell Penda",
-    "Phoenix Medical Ltd"
+    "Oswell Penda"
    ],
    "refused": [
     "Absorbest AB",
@@ -6091,13 +6085,6 @@
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
-     "supplier": "Algeo",
-     "domain": "algeos.com",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-08-31",
-     "bucket": "refused"
-    },
-    {
      "supplier": "CJ Medical",
      "domain": "cjmedical.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
@@ -6152,6 +6139,13 @@
      "reason": "the site's WordPress API could not be read (<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate ); the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-20",
      "bucket": "refused"
+    },
+    {
+     "supplier": "Algeo",
+     "domain": "algeos.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
     },
     {
      "supplier": "BES Healthcare",
@@ -6326,7 +6320,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 10,
+    "publishedElsewhereNeedingCategory": 11,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -6365,6 +6359,7 @@
     "Winncare UK"
    ],
    "publishedElsewhere": [
+    "Algeo",
     "BES Healthcare",
     "Central Medical Supplies",
     "Croyde Medical",
@@ -6386,7 +6381,6 @@
    "capturedNothingCounted": [],
    "notCrawled": [],
    "refused": [
-    "Algeo",
     "CJ Medical",
     "Harvest Healthcare",
     "Health-Care Equipment & Supplies",
@@ -6397,7 +6391,7 @@
     "Silvalea"
    ],
    "unknown": [],
-   "actionableTotal": 12,
+   "actionableTotal": 13,
    "blockedReason": null,
    "deferred": null
   },
@@ -7229,12 +7223,11 @@
    "publishedElsewhereNoOwnRange": [
     "Aquilant Limited",
     "Delta Surgical",
-    "OscarTech UK",
-    "Reliance Medical"
+    "OscarTech UK"
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 9,
+    "publishedElsewhereNeedingCategory": 10,
     "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -7292,7 +7285,7 @@
     "Winners First Trading Limited"
    ],
    "unknown": [],
-   "actionableTotal": 18,
+   "actionableTotal": 19,
    "blockedReason": null,
    "deferred": null
   },
@@ -7527,12 +7520,11 @@
    ],
    "publishedElsewhereNoOwnRange": [
     "Henry Schein UK Holdings",
-    "Reliance Medical",
     "Rocket Medical"
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 3,
+    "publishedElsewhereNeedingCategory": 4,
     "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -7587,7 +7579,7 @@
     "Techmed Charts UK Limited"
    ],
    "unknown": [],
-   "actionableTotal": 6,
+   "actionableTotal": 7,
    "blockedReason": null,
    "deferred": null
   },
@@ -7681,6 +7673,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Kinetik Medical Devices",
+     "domain": "kinetikwellbeing.com",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 403: Forbidden)",
+     "checked": "2026-09-05",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Mediq Healthcare UK Ltd",
      "domain": "www.mediq.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -7719,13 +7718,6 @@
      "supplier": "GE HealthCare",
      "domain": "gehealthcare.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-09-05",
-     "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Kinetik Medical Devices",
-     "domain": "kinetikwellbeing.com",
-     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 403: Forbidden)",
      "checked": "2026-09-05",
      "bucket": "heldOnly"
     },
@@ -7786,8 +7778,8 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 6,
-    "heldNeedingCategory": 5,
+    "publishedElsewhereNeedingCategory": 7,
+    "heldNeedingCategory": 4,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -7818,6 +7810,7 @@
     "Fannin (UK) Limited",
     "GenX MediCare Ltd",
     "Inspiration Healthcare",
+    "Kinetik Medical Devices",
     "Mediq Healthcare UK Ltd",
     "Pennine Healthcare (Ivor Shaw Ltd)",
     "ProSys International Ltd",
@@ -7826,7 +7819,6 @@
    "heldOnly": [
     "Flexicare Medical",
     "GE HealthCare",
-    "Kinetik Medical Devices",
     "Marshall Products",
     "Philips Respironics"
    ],
@@ -9037,12 +9029,11 @@
     "skin-prep:wipe"
    ],
    "publishedElsewhereNoOwnRange": [
-    "LINC Medical",
-    "Reliance Medical"
+    "LINC Medical"
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 6,
+    "publishedElsewhereNeedingCategory": 7,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -9089,7 +9080,7 @@
     "Valley Northern Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 7,
+   "actionableTotal": 8,
    "blockedReason": null,
    "deferred": null
   },
@@ -9131,13 +9122,6 @@
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
-    {
-     "supplier": "Cuxson Gerrard & Company Limited",
-     "domain": "www.cuxsongerrard.com",
-     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-09-05",
-     "bucket": "refused"
-    },
     {
      "supplier": "Evolan Pharma",
      "domain": "www.evolan.se",
@@ -9193,6 +9177,13 @@
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-31",
      "bucket": "refused"
+    },
+    {
+     "supplier": "Cuxson Gerrard & Company Limited",
+     "domain": "www.cuxsongerrard.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-05",
+     "bucket": "publishedElsewhere"
     },
     {
      "supplier": "Fenton Pharmaceuticals Limited",
@@ -9299,7 +9290,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 3,
+    "publishedElsewhereNeedingCategory": 4,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -9320,6 +9311,7 @@
     "Urgo Medical"
    ],
    "publishedElsewhere": [
+    "Cuxson Gerrard & Company Limited",
     "Fenton Pharmaceuticals Limited",
     "Fannin (UK) Limited",
     "Trion Pharma Limited",
@@ -9335,7 +9327,6 @@
     "SAI Medical Solutions Ltd"
    ],
    "refused": [
-    "Cuxson Gerrard & Company Limited",
     "Evolan Pharma",
     "Gentell UK Ltd",
     "Global Health and Safety Ltd",
@@ -9346,7 +9337,7 @@
     "Steroplast Healthcare Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 7,
+   "actionableTotal": 8,
    "blockedReason": null,
    "deferred": null
   },
@@ -9499,12 +9490,10 @@
     "bloodtx:pump",
     "bloodtx:pumps"
    ],
-   "publishedElsewhereNoOwnRange": [
-    "Reliance Medical"
-   ],
+   "publishedElsewhereNoOwnRange": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 7,
+    "publishedElsewhereNeedingCategory": 8,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -9549,7 +9538,7 @@
     "TLB Medical Supplies"
    ],
    "unknown": [],
-   "actionableTotal": 8,
+   "actionableTotal": 9,
    "blockedReason": null,
    "deferred": null
   },
@@ -10174,8 +10163,8 @@
    "category": "Rehabilitation and Community",
    "ends": "30 October 2028",
    "suppliersAwarded": 22,
-   "suppliersPublished": 9,
-   "coverage": 40.9,
+   "suppliersPublished": 21,
+   "coverage": 95.5,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -10185,16 +10174,9 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 22,
-   "coverageOfTarget": 40.9,
-   "crawlWorklist": [
-    {
-     "supplier": "Phoenix Medical Ltd",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "Phoenix Medical Ltd"
-   ],
+   "coverageOfTarget": 95.5,
+   "crawlWorklist": [],
+   "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
@@ -10202,77 +10184,49 @@
      "domain": "algeos.com",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-31",
-     "bucket": "refused"
+     "bucket": "published"
     },
     {
      "supplier": "Cuxson Gerrard & Company Limited",
      "domain": "www.cuxsongerrard.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-05",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Koolpak Ltd",
-     "domain": "www.koolpak.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-05",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Physiolab Technologies Limited",
-     "domain": "physiolab.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-09-05",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Thera Trainer UK Ltd",
-     "domain": "thera-trainer.com",
-     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-09-23",
-     "bucket": "refused"
+     "bucket": "published"
     },
     {
      "supplier": "DJO UK Ltd (Enovis)",
      "domain": "enovis.co.uk",
      "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-05",
-     "bucket": "publishedElsewhere"
+     "bucket": "published"
     },
     {
      "supplier": "Essity UK Limited",
      "domain": "medical.essity.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-26",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Medline Industries",
-     "domain": "medline.com",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-09-08",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Reliance Medical",
-     "domain": "www.reliancemedical.co.uk",
-     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
+     "bucket": "published"
     },
     {
      "supplier": "Eureka Physiocare Ltd",
      "domain": "www.eurekaphysiocare.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
-     "bucket": "heldOnly"
+     "bucket": "published"
     },
     {
      "supplier": "Kinetik Medical Devices",
      "domain": "kinetikwellbeing.com",
      "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 403: Forbidden)",
      "checked": "2026-09-05",
-     "bucket": "heldOnly"
+     "bucket": "published"
+    },
+    {
+     "supplier": "Koolpak Ltd",
+     "domain": "www.koolpak.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-05",
+     "bucket": "published"
     },
     {
      "supplier": "Medfac UK Ltd",
@@ -10282,10 +10236,38 @@
      "bucket": "published"
     },
     {
+     "supplier": "Medline Industries",
+     "domain": "medline.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-08",
+     "bucket": "published"
+    },
+    {
      "supplier": "Performance Health International Limited",
      "domain": "www.performancehealth.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-08-31",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Physiolab Technologies Limited",
+     "domain": "physiolab.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-05",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Reliance Medical",
+     "domain": "www.reliancemedical.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-31",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Thera Trainer UK Ltd",
+     "domain": "thera-trainer.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-23",
      "bucket": "published"
     }
    ],
@@ -10297,54 +10279,48 @@
     "rehab:therapy",
     "rehab:walk"
    ],
-   "publishedElsewhereNoOwnRange": [
-    "DJO UK Ltd (Enovis)",
-    "Reliance Medical"
-   ],
+   "publishedElsewhereNoOwnRange": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 3,
-    "heldNeedingCategory": 2,
+    "publishedElsewhereNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 1
+    "needDomain": 0
    },
    "published": [
+    "Algeo",
     "Brighthedge Ltd T/A Summit Medical and Scientific",
     "Crest Medical Ltd",
+    "Cuxson Gerrard & Company Limited",
+    "DJO UK Ltd (Enovis)",
+    "Essity UK Limited",
+    "Eureka Physiocare Ltd",
+    "Kinetik Medical Devices",
+    "Koolpak Ltd",
     "Medfac UK Ltd",
     "Medichill UK Ltd",
     "Medinox (London) Limited",
+    "Medline Industries",
     "Meglio Ltd",
     "Performance Health International Limited",
-    "Praxis Medical Ltd",
-    "Promedics Orthopaedics Ltd"
-   ],
-   "publishedElsewhere": [
-    "DJO UK Ltd (Enovis)",
-    "Essity UK Limited",
-    "Medline Industries",
-    "Orca Medical Ltd",
-    "Reliance Medical"
-   ],
-   "heldOnly": [
-    "Eureka Physiocare Ltd",
-    "Kinetik Medical Devices"
-   ],
-   "capturedNothingCounted": [],
-   "notCrawled": [
-    "Phoenix Medical Ltd"
-   ],
-   "refused": [
-    "Algeo",
-    "Cuxson Gerrard & Company Limited",
-    "Koolpak Ltd",
+    "Phoenix Medical Ltd",
     "Physiolab Technologies Limited",
+    "Praxis Medical Ltd",
+    "Promedics Orthopaedics Ltd",
+    "Reliance Medical",
     "Thera Trainer UK Ltd"
    ],
+   "publishedElsewhere": [
+    "Orca Medical Ltd"
+   ],
+   "heldOnly": [],
+   "capturedNothingCounted": [],
+   "notCrawled": [],
+   "refused": [],
    "unknown": [],
-   "actionableTotal": 6,
+   "actionableTotal": 1,
    "blockedReason": null,
    "deferred": null
   },
@@ -10413,13 +10389,6 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Cuxson Gerrard & Company Limited",
-     "domain": "www.cuxsongerrard.com",
-     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-09-05",
-     "bucket": "refused"
-    },
-    {
      "supplier": "Lyreco UK Limited",
      "domain": "why.lyreco.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -10432,6 +10401,13 @@
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-10-01",
      "bucket": "refused"
+    },
+    {
+     "supplier": "Cuxson Gerrard & Company Limited",
+     "domain": "www.cuxsongerrard.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-05",
+     "bucket": "publishedElsewhere"
     },
     {
      "supplier": "Diversey",
@@ -10503,7 +10479,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 2,
+    "publishedElsewhereNeedingCategory": 3,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -10519,6 +10495,7 @@
     "Paul Hartmann (HARTMANN)"
    ],
    "publishedElsewhere": [
+    "Cuxson Gerrard & Company Limited",
     "Diversey",
     "Essity UK Limited",
     "Fenton Pharmaceuticals Limited",
@@ -10538,12 +10515,11 @@
     "Banner Group Limited",
     "Biotechnics Ltd",
     "Bioguard Hygiene Solutions",
-    "Cuxson Gerrard & Company Limited",
     "Lyreco UK Limited",
     "SC Johnson Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 4,
+   "actionableTotal": 5,
    "blockedReason": null,
    "deferred": null
   },
@@ -10668,12 +10644,10 @@
     "vascular:pivc",
     "vascular:sec"
    ],
-   "publishedElsewhereNoOwnRange": [
-    "Reliance Medical"
-   ],
+   "publishedElsewhereNoOwnRange": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 0,
+    "publishedElsewhereNeedingCategory": 1,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -10713,7 +10687,7 @@
     "TLB Medical Supplies"
    ],
    "unknown": [],
-   "actionableTotal": 3,
+   "actionableTotal": 4,
    "blockedReason": null,
    "deferred": null
   },
@@ -11171,12 +11145,10 @@
     "bloodcoll:set",
     "bloodcoll:tube"
    ],
-   "publishedElsewhereNoOwnRange": [
-    "Reliance Medical"
-   ],
+   "publishedElsewhereNoOwnRange": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 5,
+    "publishedElsewhereNeedingCategory": 6,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -11213,7 +11185,7 @@
     "Prosum Medical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 7,
+   "actionableTotal": 8,
    "blockedReason": null,
    "deferred": null
   },
@@ -11496,12 +11468,10 @@
     "infection:spec",
     "infection:vinyl"
    ],
-   "publishedElsewhereNoOwnRange": [
-    "Reliance Medical"
-   ],
+   "publishedElsewhereNoOwnRange": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 3,
+    "publishedElsewhereNeedingCategory": 4,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -11539,7 +11509,7 @@
     "Supermax Healthcare"
    ],
    "unknown": [],
-   "actionableTotal": 5,
+   "actionableTotal": 6,
    "blockedReason": null,
    "deferred": null
   },
@@ -11997,12 +11967,11 @@
     "theatres:warm"
    ],
    "publishedElsewhereNoOwnRange": [
-    "Ecolab",
-    "Reliance Medical"
+    "Ecolab"
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 1,
+    "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -12037,7 +12006,7 @@
    ],
    "refused": [],
    "unknown": [],
-   "actionableTotal": 3,
+   "actionableTotal": 4,
    "blockedReason": null,
    "deferred": null
   },
@@ -14747,12 +14716,11 @@
     "Aquilant Limited",
     "Delta Surgical",
     "Henry Schein UK Holdings",
-    "Reliance Medical",
     "Rocket Medical"
    ],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 26,
+    "publishedElsewhereNeedingCategory": 27,
     "heldNeedingCategory": 5,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -14823,7 +14791,7 @@
    "unknown": [
     "Apollo Medical Technologies Ltd"
    ],
-   "actionableTotal": 37,
+   "actionableTotal": 38,
    "blockedReason": null,
    "deferred": null
   },
@@ -14961,6 +14929,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Kinetik Medical Devices",
+     "domain": "kinetikwellbeing.com",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 403: Forbidden)",
+     "checked": "2026-09-05",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Mediq Healthcare UK Ltd",
      "domain": "www.mediq.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -15010,13 +14985,6 @@
      "bucket": "heldOnly"
     },
     {
-     "supplier": "Kinetik Medical Devices",
-     "domain": "kinetikwellbeing.com",
-     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 403: Forbidden)",
-     "checked": "2026-09-05",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "Prospect Diagnostics Ltd",
      "domain": "www.prospectdiagnostics.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -15042,13 +15010,12 @@
    "catsInScope": [],
    "publishedElsewhereNoOwnRange": [
     "Draeger Medical UK",
-    "NISSHA Medical Technologies",
-    "Reliance Medical"
+    "NISSHA Medical Technologies"
    ],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 16,
-    "heldNeedingCategory": 10,
+    "publishedElsewhereNeedingCategory": 18,
+    "heldNeedingCategory": 9,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -15062,6 +15029,7 @@
     "Drive DeVilbiss Healthcare UK",
     "GBUK Group",
     "Henleys Medical Supplies Limited",
+    "Kinetik Medical Devices",
     "medi UK",
     "Mediq Healthcare UK Ltd",
     "MedScience Distribution",
@@ -15080,7 +15048,6 @@
     "Albert Waeschle Ltd",
     "GE HealthCare",
     "Henry Schien Medical",
-    "Kinetik Medical Devices",
     "Marsden Weighing Machine Co Ltd",
     "Prospect Diagnostics Ltd",
     "Seca Ltd",
@@ -15106,7 +15073,7 @@
    "unknown": [
     "KCI Medical Ltd (3M)"
    ],
-   "actionableTotal": 31,
+   "actionableTotal": 32,
    "blockedReason": null,
    "deferred": null
   },
@@ -16127,12 +16094,10 @@
    ],
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
-   "publishedElsewhereNoOwnRange": [
-    "DJO UK Ltd (Enovis)"
-   ],
+   "publishedElsewhereNoOwnRange": [],
    "actionable": {
     "unresolvedNames": 2,
-    "publishedElsewhereNeedingCategory": 12,
+    "publishedElsewhereNeedingCategory": 13,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -16174,7 +16139,7 @@
     "crxcompression.com",
     "Gardamed Limited (Barcelcom SA)"
    ],
-   "actionableTotal": 18,
+   "actionableTotal": 19,
    "blockedReason": null,
    "deferred": null
   },
@@ -16295,12 +16260,11 @@
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "publishedElsewhereNoOwnRange": [
-    "OscarTech UK",
-    "Reliance Medical"
+    "OscarTech UK"
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 7,
+    "publishedElsewhereNeedingCategory": 8,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -16338,7 +16302,7 @@
     "Schiller UK Limited"
    ],
    "unknown": [],
-   "actionableTotal": 14,
+   "actionableTotal": 15,
    "blockedReason": null,
    "deferred": null
   },
@@ -20478,6 +20442,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Eureka Physiocare Ltd",
+     "domain": "www.eurekaphysiocare.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Stryker",
      "domain": "stryker.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -20490,13 +20461,6 @@
      "reason": "the site's WordPress API could not be read (<urlopen error timed out>); the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-13",
      "bucket": "heldOnly"
-    },
-    {
-     "supplier": "Eureka Physiocare Ltd",
-     "domain": "www.eurekaphysiocare.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "heldOnly"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
@@ -20506,8 +20470,8 @@
    ],
    "actionable": {
     "unresolvedNames": 27,
-    "publishedElsewhereNeedingCategory": 15,
-    "heldNeedingCategory": 2,
+    "publishedElsewhereNeedingCategory": 16,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -20521,6 +20485,7 @@
     "Anetic Aid Ltd",
     "Croyde Medical",
     "Drive DeVilbiss Healthcare UK",
+    "Eureka Physiocare Ltd",
     "Felgains",
     "Hospital Services Limited",
     "Medi-Plinth Equipment",
@@ -20533,8 +20498,7 @@
     "Wealden Rehab"
    ],
    "heldOnly": [
-    "D.P. Medical Systems Limited",
-    "Eureka Physiocare Ltd"
+    "D.P. Medical Systems Limited"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
