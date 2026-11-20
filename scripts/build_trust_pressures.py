@@ -63,7 +63,9 @@ SOURCES = {
     },
     "cdi": {
         "label": "UKHSA — mandatory C. difficile surveillance (hospital-onset)",
-        "url": "https://www.gov.uk/government/statistics/clostridioides-difficile-infection-annual-data",
+        # Corrected 20/11/2026: the "clostridioides-" slug 404s; GOV.UK keeps the
+        # old "clostridium-" slug for this series.
+        "url": "https://www.gov.uk/government/statistics/clostridium-difficile-infection-annual-data",
         "fields": ["cdi"],
     },
     "eric": {
@@ -141,6 +143,27 @@ def main():
         print("dropped %d trust(s) carrying figures but no longer legally live: %s"
               % (len(dropped), "; ".join(sorted(dropped))), file=sys.stderr)
 
+    # TRUSTS WITH NO RTT RETURN THIS MONTH (20/11/2026). A live trust that does
+    # not submit (Nottingham, Northampton and Lancashire and South Cumbria for
+    # September 2026: NHS England's "Missing data adjustments" file estimates
+    # them instead) is absent from the pipeline, so it vanished from Meeting
+    # Prep with no word said. Name them from the previous snapshot so the panel
+    # can say the trust filed no return, rather than showing nothing at all.
+    not_submitted = {}
+    try:
+        prev = json.load(open(OUT))
+        for code, rec in (prev.get("trusts") or {}).items():
+            if code not in out and code in live_codes:
+                not_submitted[code] = rec.get("name") or code
+        for code, name in (prev.get("rttNotSubmitted") or {}).items():
+            if code not in out and code in live_codes:
+                not_submitted.setdefault(code, name)
+    except (OSError, ValueError):
+        pass
+    if not_submitted:
+        print("no RTT return for %s: %s" % (a.get("rttPeriod"),
+              "; ".join("%s (%s)" % (n, c) for c, n in sorted(not_submitted.items()))), file=sys.stderr)
+
     doc = {
         # Its OWN marker ref, not a copied one. Lifting prep-config's notice
         # wholesale would stamp this file with prep-config's ref, so a leaked
@@ -179,6 +202,10 @@ def main():
             "capEq": "capital investment in equipment, £",
         },
         "national": a.get("national", {}),
+        "rttNotSubmitted": not_submitted,
+        "rttNotSubmittedNote": ("Live trusts with no RTT return for this period. NHS England "
+                                "estimates them in its 'Missing data adjustments' file for the month; "
+                                "the Hub shows no figure rather than an estimate."),
         "count": len(out),
         "trusts": out,
     }

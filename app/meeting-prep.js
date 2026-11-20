@@ -50,6 +50,9 @@
      brand line, instead of the grouped seed search terms (30/09/2026). Fails
      soft to the seed labels as they were. */
   var NHSSC = BASE + 'data/nhssc-cache.json' + CB;
+  /* The Hub's one product-type vocabulary, used to rank competitors by the
+     kind of product they sell (20/11/2026). Fails soft. */
+  var PTYPES_URL = BASE + 'data/product-types.json' + CB;
 
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
@@ -140,11 +143,12 @@
     fetchGated('trust-contacts').catch(function(){return null;}),
     fetch(PRESSURES).then(function(r){return r.json();}).catch(function(){return null;}),
     fetch(NHSSC).then(function(r){return r.json();}).catch(function(){return null;}),
-    fetch(TRUSTJAG).then(function(r){return r.json();}).catch(function(){return null;})
-  ]).then(function(res){ render(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8]); })
+    fetch(TRUSTJAG).then(function(r){return r.json();}).catch(function(){return null;}),
+    fetch(PTYPES_URL).then(function(r){return r.json();}).catch(function(){return null;})
+  ]).then(function(res){ render(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9]); })
     .catch(function(){ MOUNT.innerHTML = '<div style="font-family:Inter,system-ui,sans-serif;color:#8a6d00;">Meeting prep is temporarily unavailable — please try again shortly.</div>'; });
 
-  function render(index, cfg, seed, specMap, prodFile, contactFile, pressureFile, nhsscFile, jagFile){
+  function render(index, cfg, seed, specMap, prodFile, contactFile, pressureFile, nhsscFile, jagFile, ptypeFile){
     var CONTACT_BY_CODE = (contactFile && contactFile.trusts) || {};
     var CONTACTS_ASOF = (contactFile && contactFile.asOf) || '';
     var PRESS_BY_CODE = (pressureFile && pressureFile.trusts) || {};
@@ -606,7 +610,21 @@
         + '<div style="font-size:14px;line-height:1.65;color:#39424d;">' + bodyHtml + '</div></div>';
     }
     function li(items){ return '<ul style="margin:4px 0 0;padding-left:18px;">' + items.map(function(i){ return '<li style="margin:3px 0;">' + i + '</li>'; }).join('') + '</ul>'; }
-    function link(text, id){ return '<a href="/?page_id=' + id + '" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">' + text + '</a>'; }
+    /* Real paths, not ?page_id= numbers (20/11/2026). page_id=678 (the old
+       Framework Hub) no longer exists, and Compare, the Value Case Calculator
+       and the Stakeholder Mapper all live on one Tools page (1109), so three
+       differently named links all landed on its top. Each now opens its own
+       tab or section on that page. */
+    var HUBP = '/medical-sales-hub/';
+    var LINKS = {
+      compare: HUBP + 'med-sales-tools/#tool-compare',
+      calc: HUBP + 'med-sales-tools/#sec-calc',
+      mapper: HUBP + 'med-sales-tools/#sec-map',
+      suppliers: HUBP + 'suppliers/',
+      frameworks: HUBP + 'tender-history/',
+      livedesk: HUBP
+    };
+    function link(text, key){ return '<a href="' + (LINKS[key] || HUBP) + '" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;font-weight:600;">' + text + '</a>'; }
     // One-click LinkedIn lookups: the tool builds the exact people-search and
     // recent-posts search and opens them in the rep's own logged-in LinkedIn.
     // (LinkedIn blocks server-side scraping, so deep links are the robust route.)
@@ -639,6 +657,13 @@
        return missed) get no panel at all — an honest empty state. */
     function pressurePanel(code, sp){
       var p = code && PRESS_BY_CODE[code];
+      var noRtt = code && PRESS && PRESS.rttNotSubmitted && PRESS.rttNotSubmitted[code];
+      if (!p && noRtt){
+        var perN = (PRESS && PRESS.periods && PRESS.periods.rtt) || 'the latest period';
+        return panel('Where the pressure is — their own published figures',
+          'This trust filed no referral to treatment (RTT) return for <strong>' + esc(perN) + '</strong>, so NHS England publishes no waiting-list figure for it this month '
+          + '(it estimates the trust in its missing-data adjustments; the Hub does not show estimates).' + srcLink('rtt', 'NHS England'), '#6B2A34');
+      }
       if (!p) return '';
       var per = (PRESS && PRESS.periods) || {};
       var rows = [];
@@ -769,9 +794,42 @@
        title, a remit or a seniority claim, and this panel must never imply
        one — the 145-false-job-changes incident is what root rule 13 was
        written after. */
-    function contactsPanel(code, trName){
-      var list = (code && CONTACT_BY_CODE[code]) || [];
-      if (!list.length) return '';
+    /* SPECIALITY FIRST (20/11/2026). The panel used to show the six most recent
+       names at the trust whatever the speciality, so a urology rep at Liverpool
+       was handed the contact for a dental hospital heating tender. Each contact
+       carries notice_tags.py's tags for the NOTICE TITLE it came from (spec:
+       speciality ids; cls: clinical / nonclinical / unclear), the same tags the
+       Stakeholder Mapper sorts on. The brief now lists only names from notices
+       whose title matches the chosen speciality; failing that, names from other
+       clinical notices, labelled as such. Names from non-clinical or untagged
+       notices are not listed here, and the panel says how many there are and
+       that the Mapper holds them all: an untagged title is usually a coded one,
+       not a verdict on the person. With no speciality chosen, or a contact file
+       that carries no tags, it behaves as before. */
+    function contactsPanel(code, trName, sp){
+      var all = (code && CONTACT_BY_CODE[code]) || [];
+      if (!all.length) return '';
+      var tagged = all.some(function(c){ return c.spec || c.cls; });
+      var keys = sp ? wantedIds(sp) : [];
+      var mine = [], clin = [];
+      all.forEach(function(c){
+        if ((c.spec || []).some(function(t){ return keys.indexOf(t) !== -1; })) mine.push(c);
+        else if (c.cls === 'clinical') clin.push(c);
+      });
+      var mode = (!sp || !tagged) ? 'all' : (mine.length ? 'mine' : (clin.length ? 'clin' : 'none'));
+      var list = mode === 'all' ? all : (mode === 'mine' ? mine : clin);
+      var hidden = all.length - list.length;
+      var hiddenNote = hidden > 0
+        ? num(hidden) + ' more name' + (hidden === 1 ? '' : 's') + ' on file for this trust came from notices whose titles do not match '
+          + (mode === 'mine' ? esc(sp) : 'a clinical product') + ' (estates, IT, legal and the like, or short coded titles). All of them are in the ' + link('Stakeholder Mapper', 'mapper') + '. '
+        : '';
+      if (mode === 'none'){
+        return panel('Who to contact — named on this trust’s own tender notices',
+          'None of the ' + num(all.length) + ' names on file for this trust was published on a notice whose title matches ' + esc(sp)
+          + ' or another clinical product, so none is listed here. All of them, with the notice each came from, are in the ' + link('Stakeholder Mapper', 'mapper') + '.'
+          + '<div style="margin-top:6px;font-size:12px;color:#8a8778;">Source: Find a Tender, Open Government Licence v3' + (CONTACTS_ASOF ? ', index as at ' + esc(CONTACTS_ASOF) : '') + '.</div>',
+          '#2E6B3E');
+      }
       var sorted = list.slice().sort(function(a, b){
         return String(b.last || '').localeCompare(String(a.last || '')) || (b.n || 0) - (a.n || 0);
       });
@@ -787,26 +845,121 @@
               + encodeURIComponent('"' + c.name + '" ' + trustShort(trName)));
         return b;
       });
+      var lead = mode === 'mine' ? 'Named on notices whose titles match ' + esc(sp) + ':'
+        : (mode === 'clin' ? 'No notice title here matches ' + esc(sp) + ', so these are names from this trust&#8217;s other clinical notices:' : '');
       return panel('Who to contact — named on this trust’s own tender notices',
-        li(rows)
+        (lead ? '<div style="font-size:12.5px;color:#39424d;margin-bottom:2px;">' + lead + '</div>' : '')
+        + li(rows)
         + '<div style="margin-top:8px;font-size:12.5px;color:#39424d;">Each name was published as the enquiry contact for the notice shown — <strong>that notice is your reason to make contact</strong>. It is not a job title, and no seniority should be read into it.</div>'
         + '<div style="margin-top:6px;font-size:12px;color:#8a8778;">'
-        + (sorted.length > show.length ? num(sorted.length) + ' named contacts on file for this trust — the full list, tagged by what they buy, is in the ' + link('Stakeholder Mapper', 1109) + '. ' : 'Full list and notice tagging in the ' + link('Stakeholder Mapper', 1109) + '. ')
+        + hiddenNote
+        + (mode === 'all' && sorted.length > show.length ? num(sorted.length) + ' named contacts on file for this trust — the full list, tagged by what they buy, is in the ' + link('Stakeholder Mapper', 'mapper') + '. ' : (hiddenNote ? '' : 'Full list and notice tagging in the ' + link('Stakeholder Mapper', 'mapper') + '. '))
         + 'Source: Find a Tender, Open Government Licence v3' + (CONTACTS_ASOF ? ', index as at ' + esc(CONTACTS_ASOF) : '') + '.</div>',
         '#2E6B3E');
     }
 
+    /* COMPETITORS, RANKED BY RELEVANCE (20/11/2026). The list used to be every
+       supplier sharing the speciality, curated first, then alphabetical, cut at
+       eight: a Coloplast continence rep got Abena to B. Braun and nothing after
+       "B", with emollients (Aspire), sacral neuromodulation (Axonics) and
+       B. Braun's cannulas listed as rivals. A rival is now ranked on evidence
+       the Hub already holds, in this order:
+         1. sharing a framework with your company that belongs to this
+            speciality. A framework "belongs" when at least 40% of the
+            suppliers on it are filed under the speciality, counted from the
+            supplier index itself, so Urology and Bowel Management counts for
+            continence and Advanced Wound Care does not;
+         2. selling the same KIND of product, read from product names against
+            data/product-types.json, the Hub's one product-type vocabulary.
+       A supplier with neither is not shown as a rival. Each row says why it is
+       there, and only the products that overlap with yours are listed. When
+       your own company has no framework or typed product to compare on, the
+       list falls back to suppliers in the speciality, most products first,
+       and says so. */
+    var PTYPES = (ptypeFile && ptypeFile.types) || [];
+    var PT_ALIAS = { 'isc': 'intermittent catheter', 'intermittent': 'intermittent catheter', 'foley': 'indwelling catheter',
+      'external catheter': 'sheath', 'sheath': 'sheath', 'urine bag': 'drainage',
+      'leg bag': 'drainage', 'pads': 'incontinence pad', 'pants': 'pull up pants', 'irrigation': 'irrigation' };
+    function kindsOf(name){
+      var t = ' ' + String(name || '').toLowerCase() + ' ', out = {};
+      PTYPES.forEach(function(k){ if (k.trim().length <= 4 ? new RegExp('\\b' + k.trim() + 's?\\b').test(t) : t.indexOf(k) !== -1) out[(ptypeFile.type_alias && ptypeFile.type_alias[k]) || k.trim()] = 1; });
+      Object.keys(PT_ALIAS).forEach(function(k){ if (new RegExp('\\b' + k + '\\b').test(t)) out[PT_ALIAS[k]] = 1; });
+      return out;
+    }
+    function prodName(p){ return typeof p === 'string' ? p : (p && (p.n || p.name)) || ''; }
+    function fwKey(n){
+      return String(n || '').replace(/^\s*(NHS Supply Chain|NHSSC|NHS SBS|NHS England)\s*[—–-]\s*/i, '')
+        .replace(/\([^)]*\)/g, ' ').replace(/&/g, ' and ').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    }
+    function fwKeys(s){
+      var o = {}; ((s && s.frameworks) || []).forEach(function(f){ var k = fwKey(f && f.name); if (k) o[k] = f.name; });
+      return o;
+    }
+    var FW_SHARE_CACHE = {};
+    function fwShare(sp){
+      if (FW_SHARE_CACHE[sp]) return FW_SHARE_CACHE[sp];
+      var inSp = {}, tot = {}, wanted = wantedIds(sp);
+      suppliers.forEach(function(s){
+        var ks = fwKeys(s), hit = supplierSpecIds(s).some(function(id){ return wanted.indexOf(id) !== -1; });
+        Object.keys(ks).forEach(function(k){ tot[k] = (tot[k] || 0) + 1; if (hit) inSp[k] = (inSp[k] || 0) + 1; });
+      });
+      var share = {};
+      Object.keys(tot).forEach(function(k){ share[k] = tot[k] >= 3 ? (inSp[k] || 0) / tot[k] : 0; });
+      return (FW_SHARE_CACHE[sp] = share);
+    }
+    /* The same test for a KIND of product: "wound" belongs to wound care, not
+       continence, even though Coloplast and Convatec sell both; "catheter" on
+       its own spans vascular and continence, so it counts only where the
+       speciality's suppliers dominate it. Read from the curated product names. */
+    var KIND_SHARE_CACHE = {};
+    function kindShare(sp){
+      if (KIND_SHARE_CACHE[sp]) return KIND_SHARE_CACHE[sp];
+      var inSp = {}, tot = {}, wanted = wantedIds(sp);
+      suppliers.forEach(function(s){
+        var ks = {}; repProducts(s).forEach(function(n){ var k = kindsOf(n); for (var x in k) ks[x] = 1; });
+        var hit = supplierSpecIds(s).some(function(id){ return wanted.indexOf(id) !== -1; });
+        Object.keys(ks).forEach(function(k){ tot[k] = (tot[k] || 0) + 1; if (hit) inSp[k] = (inSp[k] || 0) + 1; });
+      });
+      var share = {};
+      Object.keys(tot).forEach(function(k){ share[k] = tot[k] >= 2 ? (inSp[k] || 0) / tot[k] : 0; });
+      return (KIND_SHARE_CACHE[sp] = share);
+    }
+    /* The names a rep recognises: the curated seed list where there is one
+       (Lou's own wording, e.g. "LoFric (hydrophilic ISC)"), else the verified
+       range. */
+    function repProducts(s){
+      var cur = ((s && s.products) || []).map(prodName).filter(Boolean);
+      return cur.length ? cur : normProducts(s).map(function(p){ return p.n; });
+    }
     function competitors(co, sp, all){
       var specs = sp ? [sp] : ((co && co.specialities) || []);
-      if (!specs.length) return [];
-      var seen = {}; var out = [];
+      if (!specs.length || !co) return { list: [], basis: 'none', total: 0 };
+      var share = sp ? fwShare(sp) : {};
+      var myFw = fwKeys(co), mySpecFw = Object.keys(myFw).filter(function(k){ return (share[k] || 0) >= 0.4; });
+      /* Only kinds that belong to the speciality count (kindShare), so BD's
+         midline catheters or Convatec's Aquacel do not make either a
+         continence rival on the strength of a shared word. */
+      var kShare = sp ? kindShare(sp) : null;
+      var myKinds = {};
+      repProducts(co).forEach(function(n){ var k = kindsOf(n); for (var x in k) if (!kShare || (kShare[x] || 0) >= 0.5) myKinds[x] = 1; });
+      var hasBasis = mySpecFw.length || Object.keys(myKinds).length;
+      var seen = {}, out = [];
       all.forEach(function(s){
-        if (!co || s.name === co.name) return;
-        var share = sharesSpeciality(specs, s);
-        if (share && !seen[s.name]){ seen[s.name] = 1; out.push(s); }
+        if (s.name === co.name || seen[s.name] || !sharesSpeciality(specs, s)) return;
+        seen[s.name] = 1;
+        var theirFw = fwKeys(s);
+        var sharedFw = mySpecFw.filter(function(k){ return theirFw[k]; });
+        var prods = repProducts(s);
+        var kindsHit = {};
+        var overlap = prods.filter(function(n){ var k = kindsOf(n), hit = false; for (var x in k) if (myKinds[x]){ kindsHit[x] = 1; hit = true; } return hit; });
+        var score = sharedFw.reduce(function(a, k){ return a + 10 * share[k]; }, 0) + 3 * Math.min(Object.keys(kindsHit).length, 4)
+          + (s.curated ? 1 : 0) + Math.min(prods.length, 10) / 100;
+        if (hasBasis && !sharedFw.length && !overlap.length) return;
+        out.push({ s: s, score: score, fw: sharedFw.map(function(k){ return myFw[k].replace(/^\s*NHS Supply Chain\s*[—–-]\s*/i, '').replace(/\s*\([^)]*\)\s*$/, ''); }),
+          prods: hasBasis ? overlap : prods });
       });
-      out.sort(function(a,b){ return (a.curated?0:1) - (b.curated?0:1); });
-      return out.slice(0, 8);
+      out.sort(function(a, b){ return b.score - a.score || (a.s.name < b.s.name ? -1 : 1); });
+      return { list: out.slice(0, 8), basis: hasBasis ? 'evidence' : 'speciality', total: out.length };
     }
 
     function brief(co, coName, sp, tr, trName, aud, isEarly, all, cfg){
@@ -825,22 +978,43 @@
 
       // Competitors & how you stack up
       if (!isEarly){
-        var comp = competitors(co, sp, all);
+        var cr = competitors(co, sp, all), comp = cr.list;
         if (comp.length){
-          var rows = comp.map(function(s){ var pr = (s.products || []).slice(0,3).map(esc).join(', '); return '<strong>' + esc(s.name) + '</strong>' + (pr ? ' — ' + pr : ''); });
+          var rows = comp.map(function(c){
+            var pr = c.prods.slice(0, 3).map(esc).join(', ');
+            var why = c.fw.length ? 'Also on ' + c.fw.slice(0, 3).map(esc).join(', ') + (c.fw.length > 3 ? ' and ' + (c.fw.length - 3) + ' more of your frameworks' : '') : '';
+            return '<strong>' + esc(c.s.name) + '</strong>' + (pr ? ' — ' + pr : '')
+              + (why ? '<br><span style="color:#6b7684;font-size:12.5px;">' + why + '</span>' : '');
+          });
+          var basisNote = cr.basis === 'evidence'
+            ? 'Ranked by how directly each one competes with you: a shared framework for this speciality first, then products of the same kind as yours. '
+              + (cr.total > comp.length ? 'Top ' + comp.length + ' of ' + cr.total + ' shown. ' : '')
+            : 'The Hub holds no framework or typed product for your company to rank rivals on, so these are suppliers in this speciality, most products first. ';
           h += panel('Your competitors' + (sp ? ' in ' + esc(sp) : '') + ' — and how you stack up',
             li(rows)
-            + '<div style="margin-top:8px;">Compare product-for-product on the ' + link('Compare tab', 1109) + ', and open any rival’s full profile in the ' + link('supplier directory', 677) + '.'
+            + '<div style="margin-top:8px;font-size:12px;color:#8a8778;">' + basisNote + '</div>'
+            + '<div style="margin-top:8px;">Compare product-for-product on the ' + link('Compare tab', 'compare') + ', and open any rival’s full profile in the ' + link('supplier directory', 'suppliers') + '.'
             + ' Then make your case where you win: ' + (v ? esc(v.angle) : 'your strengths') + ' — backed by the value figure below, not a feature list.</div>', '#6B2A34');
         }
       }
 
-      var vbp = 'Build the numbers in the <strong>Value Case Calculator</strong> (cost of the problem × frequency × efficacy × directness) and hand over a figure they can take to finance. ' + link('Open the Tools', 1109) + '.';
+      var vbp = 'Build the numbers in the <strong>Value Case Calculator</strong> (cost of the problem × frequency × efficacy × directness) and hand over a figure they can take to finance. ' + link('Open the Value Case Calculator', 'calc') + '.';
       h += panel('The value case', (aud && AUD[aud] && AUD[aud].key === 'green' ? 'Frame value as patient, planet and public purse. ' : (v && /price/.test(v.angle) ? 'Lead with the saving, then the value story. ' : 'Lead with value, not price — the national procurement standard. ')) + vbp);
 
       if (!isEarly && co && co.frameworks && co.frameworks.length){
-        var fr = co.frameworks.map(function(f){ return '<strong>' + esc(f.name) + '</strong>' + (f.value ? ' — ' + esc(f.value) : '') + (f.dates ? ' <span style="color:#6b7684;">(' + esc(f.dates) + ')</span>' : '') + (f.note ? '<br><span style="color:#6b7684;">' + esc(f.note) + '</span>' : ''); });
-        h += panel('Frameworks & timing', li(fr) + '<div style="margin-top:8px;">A framework’s final year is the selling window — see the ' + link('Framework Hub', 678) + '.</div>');
+        /* A curated seed line marked "not verified" sat above the record that
+           verifies the same framework (Coloplast: "NHS Supply Chain — Urology &
+           Bowel Management: not verified — check" above the launch-brief entry
+           naming Coloplast Limited on it, 19/11/2026). Where a verified entry
+           for the same framework is present, the unverified line is dropped;
+           where it is the only entry it stays, flag and all. */
+        var fwVerified = {};
+        co.frameworks.forEach(function(f){ if (!/not verified/i.test(String(f.value || '') + ' ' + String(f.note || ''))) fwVerified[fwKey(f.name)] = 1; });
+        var fwList = co.frameworks.filter(function(f){
+          return !(/not verified/i.test(String(f.value || '') + ' ' + String(f.note || '')) && fwVerified[fwKey(f.name)]);
+        });
+        var fr = fwList.map(function(f){ return '<strong>' + esc(f.name) + '</strong>' + (f.value ? ' — ' + esc(f.value) : '') + (f.dates ? ' <span style="color:#6b7684;">(' + esc(f.dates) + ')</span>' : '') + (f.note ? '<br><span style="color:#6b7684;">' + esc(f.note) + '</span>' : ''); });
+        h += panel('Frameworks & timing', li(fr) + '<div style="margin-top:8px;">A framework’s final year is the selling window — see the ' + link('Frameworks, Tenders and Awards page', 'frameworks') + '.</div>');
       }
 
       var nat = (cfg.nationalKeyInfo || []).map(function(n){ return '<strong>' + esc(n.title) + '</strong> — ' + esc(n.detail) + '<br><span style="color:#0B1C33;">Use it:</span> ' + esc(n.use); });
@@ -858,12 +1032,22 @@
           return (a.date ? '<span style="color:#6b7684;">' + esc(a.date) + '</span> — ' : '') + esc(txt);
         }).filter(function(s){ return s; });
         if (al.length){
-          h += panel('Your live alerts & recalls', li(al) + '<div style="margin-top:8px;">Know your own position — and watch the ' + link('Live Desk', 675) + ' for competitors’.</div>');
+          h += panel('Your live alerts & recalls', li(al) + '<div style="margin-top:8px;">Know your own position — and watch the ' + link('Live Desk', 'livedesk') + ' for competitors’.</div>');
         }
       }
 
       if (tr){
+        /* A hand-written profile quotes the waiting list as it stood when it was
+           researched (often July or August 2026), while the panel below carries
+           the latest NHS England month. Say which is current rather than leave
+           two different waiting lists side by side (20/11/2026). */
+        var ctxRtt = /RTT|waiting list|within 18 weeks/i.test(tr.context || '');
+        var curRtt = PRESS && PRESS.periods && PRESS.periods.rtt;
+        var ctxMonth = (String(tr.context || '').match(/(January|February|March|April|May|June|July|August|September|October|November|December) 20\d\d/) || [])[0];
         var body = esc(tr.context)
+          + (ctxRtt && curRtt && PRESS_BY_CODE[tr.code] && ctxMonth !== curRtt
+              ? '<br><span style="color:#8a6d00;font-size:12.5px;">Waiting-list figures in this paragraph are as researched for the profile. The latest, NHS England RTT ' + esc(curRtt) + ', are under &#8220;Where the pressure is&#8221; below.</span>'
+              : '')
           + (tr.news ? '<br><span style="color:#6b7684;">Recent: ' + esc(tr.news) + '</span>' : '');
         // From their own annual report — real figures, real source, no homework.
         if (tr.reportFacts && tr.reportFacts.length){
@@ -918,7 +1102,7 @@
         h += panel('The trust: ' + esc(tr.name), body);
         h += pressurePanel(tr.code, sp);
         h += jagPanel(tr.code);
-        h += contactsPanel(tr.code, tr.name);
+        h += contactsPanel(tr.code, tr.name, sp);
       } else if (trName && trName !== 'Other / any trust'){
         /* Every directory trust now gets a real profile built from verified
            data we already hold: the ODS register for who they are and who
@@ -938,7 +1122,7 @@
           (meta.length ? '<span style="color:#6b7684;font-size:12.5px;">' + meta.join(' · ') + ' — NHS ODS register' + (de.bc ? ' · buying centre: ' + esc(de.bc) : '') + '</span>' : ''));
         h += pressurePanel(de.code, sp);
         h += jagPanel(de.code);
-        h += contactsPanel(de.code, trName);
+        h += contactsPanel(de.code, trName, sp);
         h += panel('What the Hub hasn’t researched here yet',
           'This trust has no hand-researched profile yet, so there is no annual-report detail, procurement team structure or named executive above — everything shown is straight from the published data. Fill the gap in three clicks:'
           + '<br>' + liBtn('Procurement lead on LinkedIn', liPeopleUrl('Head of Procurement', trName))

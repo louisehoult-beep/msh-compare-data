@@ -165,7 +165,12 @@
         ? '<a href="' + esc(rtt.url) + '" target="_blank" rel="noopener" style="color:#14304F;text-decoration:underline;text-underline-offset:2px;">' + esc(rtt.label || 'NHS England RTT waiting times') + '</a>'
         : esc(rtt.label || 'NHS England RTT waiting times'))
       + ', period ' + esc(period) + '. Snapshot taken into the Hub on ' + esc(asOf) + '. '
-      + 'Trusts NHS England does not publish a ' + esc(rttKey) + ' median for are not listed.';
+      + 'The last column is the trust\'s whole RTT waiting list across every speciality, not the ' + esc(rttKey) + ' list alone. '
+      + 'Trusts NHS England does not publish a ' + esc(rttKey) + ' median for are not listed'
+      + (d.rttNotSubmitted && Object.keys(d.rttNotSubmitted).length
+          ? ', and ' + Object.keys(d.rttNotSubmitted).map(function (c) { return esc(d.rttNotSubmitted[c]); }).join(', ')
+            + ' filed no RTT return for this period (NHS England estimates them; the Hub does not show estimates).'
+          : '.');
     wrap.appendChild(foot);
 
     MOUNT.innerHTML = '';
@@ -188,7 +193,7 @@
         + '<th style="padding:8px 6px;color:' + MUTED + ';font-weight:700;">Trust</th>'
         + '<th style="padding:8px 6px;color:' + MUTED + ';font-weight:700;">Region</th>'
         + '<th style="padding:8px 6px;color:' + MUTED + ';font-weight:700;text-align:right;">Median wait</th>'
-        + '<th style="padding:8px 6px;color:' + MUTED + ';font-weight:700;text-align:right;">Whole waiting list</th>'
+        + '<th style="padding:8px 6px;color:' + MUTED + ';font-weight:700;text-align:right;">Trust waiting list, all specialities</th>'
         + '</tr></thead><tbody>';
       shown.forEach(function (t, i) {
         h += '<tr style="border-bottom:1px solid ' + LINE + ';background:' + (i % 2 ? SOFT : PANEL) + ';">'
