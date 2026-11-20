@@ -10,7 +10,7 @@
   "ref": "ETH-D8F73B696",
   "contact": "contact@elevateandthrive.uk"
  },
- "dataAsOf": "2026-11-15",
+ "dataAsOf": "2026-11-20",
  "owner": "NHS Supply Chain",
  "rule": "A supplier is shown on a lot ONLY where the framework owner's own published source for that framework names it against that lot: the NHS Supply Chain contract launch brief's lot-by-lot supplier lists or supplier-by-lot table, the Product/Supplier Matrix spreadsheet attached to that brief (only where the sheet has an explicit lot axis, and only where the supplier has a mark or a product in that lot), or the Find a Tender contract award notice for that framework's own procurement. Nothing is inferred from product ranges, specialities or lot titles. Lots attach to the exact supplier string the brief uses; a source name attaches only where its normalised form (brief_names.clean + company_match.key) equals that brief name's, or both resolve to the same single Hub company under the seed's recorded aliases. Where that normalised form reaches TWO brief names, it is retried on a narrower form that canonicalises the legal-form word but keeps the territory word (company_match.key_keep_territory), which separates two real companies named on the same brief whose names differ only by that word — and only where the seed holds BOTH the source name and that brief name verbatim on one record, which is the Hub's own evidence that the row is the company the notice names. A name still reaching two brief names, or reaching one the seed holds no verbatim evidence for, is quarantined, never picked. Unmatched names are listed in `unresolved`, never guessed. Where the brief breaks a framework into lots but no source names who holds which, lotStatus is 'notPublished' and the report says so.",
  "counts": {
@@ -2564,11 +2564,18 @@
       "Lot 1",
       "Lot 2"
      ],
+     "Genmed.Me Ltd": [
+      "Lot 2"
+     ],
      "InHealth Ltd": [
       "Lot 2",
       "Lot 3"
      ],
      "Medtronic Limited": [
+      "Lot 2"
+     ],
+     "Philips Electronics UK Limited": [
+      "Lot 1",
       "Lot 2"
      ],
      "Regent’s Park Healthcare": [
@@ -2581,18 +2588,11 @@
       "Lot 1",
       "Lot 2"
      ],
-     "WSR Medical Solutions Ltd": [
-      "Lot 4"
-     ],
-     "Genmed.Me Ltd": [
-      "Lot 2"
-     ],
-     "Philips Electronics UK Limited": [
-      "Lot 1",
-      "Lot 2"
-     ],
      "United Imaging Health Ltd": [
       "Lot 1"
+     ],
+     "WSR Medical Solutions Ltd": [
+      "Lot 4"
      ]
     }
    },
@@ -2603,23 +2603,23 @@
     "GE Medical Systems Ltd": [
      "GE Medical Systems"
     ],
-    "InHealth Ltd": [
-     "InHealth Limited"
-    ],
-    "Regent’s Park Healthcare": [
-     "Regent's Park Healthcare"
-    ],
-    "WSR Medical Solutions Ltd": [
-     "W S R Medical Solutions Limited"
-    ],
     "Genmed.Me Ltd": [
      "GenMed"
+    ],
+    "InHealth Ltd": [
+     "InHealth Limited"
     ],
     "Philips Electronics UK Limited": [
      "Philips Electronic Limited"
     ],
+    "Regent’s Park Healthcare": [
+     "Regent's Park Healthcare"
+    ],
     "United Imaging Health Ltd": [
      "United Imaging Limited"
+    ],
+    "WSR Medical Solutions Ltd": [
+     "W S R Medical Solutions Limited"
     ]
    },
    "supplierLots": {
@@ -5766,6 +5766,10 @@
       "Lot 1",
       "Lot 2"
      ],
+     "Orn Health": [
+      "Lot 1",
+      "Lot 2"
+     ],
      "Opal Health": [
       "Lot 2",
       "Lot 3"
@@ -5786,10 +5790,6 @@
       "Lot 2",
       "Lot 3",
       "Lot 4"
-     ],
-     "Orn Health": [
-      "Lot 1",
-      "Lot 2"
      ]
     }
    },
@@ -5803,6 +5803,9 @@
     "Marlux Medical": [
      "Marlux Medical Ltd"
     ],
+    "Orn Health": [
+     "ORN (Int) Limited T/A ORN Health"
+    ],
     "Opal Health": [
      "Opal Disposables Limited"
     ],
@@ -5811,9 +5814,6 @@
     ],
     "Sol Komfort Interiors Ltd": [
      "Sol Komfort Interiors Limited"
-    ],
-    "Orn Health": [
-     "ORN (Int) Limited T/A ORN Health"
     ]
    },
    "supplierLots": {
@@ -17137,6 +17137,10 @@
      "Alxr Limited": [
       "Lot 1"
      ],
+     "Accrington Surgical Inst. Suppliers": [
+      "Lot 1",
+      "Lot 2"
+     ],
      "Andersen Caledonia Ltd": [
       "Lot 1",
       "Lot 2"
@@ -17235,16 +17239,15 @@
      "Vygon Uk Ltd": [
       "Lot 1",
       "Lot 2"
-     ],
-     "Accrington Surgical Inst. Suppliers": [
-      "Lot 1",
-      "Lot 2"
      ]
     }
    },
    "namedAs": {
     "Alxr Limited": [
      "ALXR Limited"
+    ],
+    "Accrington Surgical Inst. Suppliers": [
+     "Accrington Surgical Instrument Suppliers Ltd"
     ],
     "Andersen Caledonia Ltd": [
      "Andersen Caledonia"
@@ -17290,9 +17293,6 @@
     ],
     "Vygon Uk Ltd": [
      "Vygon (UK) Limited."
-    ],
-    "Accrington Surgical Inst. Suppliers": [
-     "Accrington Surgical Instrument Suppliers Ltd"
     ]
    },
    "supplierLots": {
@@ -18176,14 +18176,14 @@
      "Intuitive Surgical Limited": [
       "Lot 1"
      ],
+     "MCT Lifesciences Ltd (New to framework)": [
+      "Lot 3"
+     ],
      "Medtronic Limited": [
       "Lot 1",
       "Lot 2"
      ],
      "Procept Biorobotics": [
-      "Lot 3"
-     ],
-     "MCT Lifesciences Ltd (New to framework)": [
       "Lot 3"
      ]
     }
@@ -18512,6 +18512,9 @@
       "Lot 2",
       "Lot 3"
      ],
+     "Beaver Visitec International Sales Ltd": [
+      "Lot 1"
+     ],
      "BioSpectrum Ltd": [
       "Lot 1",
       "Lot 2"
@@ -18641,18 +18644,15 @@
      ],
      "Vernacare International Limited": [
       "Lot 1"
-     ],
-     "Beaver Visitec International Sales Ltd": [
-      "Lot 1"
      ]
     }
    },
    "namedAs": {
-    "U.K. Medical Limited": [
-     "Its Interventional Ltd"
-    ],
     "Beaver Visitec International Sales Ltd": [
      "Beaver-Vistec"
+    ],
+    "U.K. Medical Limited": [
+     "Its Interventional Ltd"
     ]
    },
    "supplierLots": {
@@ -21853,7 +21853,20 @@
      "Acrostak": [
       "Lot 2"
      ],
+     "BVM": [
+      "Lot 2"
+     ],
      "Dot Medical": [
+      "Lot 2"
+     ],
+     "Edwards": [
+      "Lot 1",
+      "Lot 2"
+     ],
+     "Jenavalve": [
+      "Lot 1"
+     ],
+     "MCT": [
       "Lot 2"
      ],
      "Medtronic": [
@@ -21865,19 +21878,6 @@
      ],
      "SMT": [
       "Lot 1"
-     ],
-     "BVM": [
-      "Lot 2"
-     ],
-     "Edwards": [
-      "Lot 1",
-      "Lot 2"
-     ],
-     "MCT": [
-      "Lot 2"
-     ],
-     "Jenavalve": [
-      "Lot 1"
      ]
     }
    },
@@ -21885,8 +21885,20 @@
     "Acrostak": [
      "Acrostak UK Limited"
     ],
+    "BVM": [
+     "BVM Medical Limited"
+    ],
     "Dot Medical": [
      "Dot Medical Limited"
+    ],
+    "Edwards": [
+     "Edwards Lidesciences Limited"
+    ],
+    "Jenavalve": [
+     "Jenavalve Production Limited"
+    ],
+    "MCT": [
+     "MCT Lifesciences Limited"
     ],
     "Medtronic": [
      "Medtronic Limited"
@@ -21896,18 +21908,6 @@
     ],
     "SMT": [
      "SMT UK"
-    ],
-    "BVM": [
-     "BVM Medical Limited"
-    ],
-    "Edwards": [
-     "Edwards Lidesciences Limited"
-    ],
-    "MCT": [
-     "MCT Lifesciences Limited"
-    ],
-    "Jenavalve": [
-     "Jenavalve Production Limited"
     ]
    },
    "supplierLots": {
@@ -23181,11 +23181,17 @@
      "Chunc Limited": [
       "Lot 1"
      ],
+     "Consolor Ltd": [
+      "Lot 1"
+     ],
      "DGT Services Ltd": [
       "Lot 1",
       "Lot 2"
      ],
      "Etac Ltd": [
+      "Lot 1"
+     ],
+     "FormAL Group Ltd": [
       "Lot 1"
      ],
      "Independence Mobility Limited": [
@@ -23254,12 +23260,6 @@
      ],
      "William Davies Care Limited": [
       "Lot 1"
-     ],
-     "Consolor Ltd": [
-      "Lot 1"
-     ],
-     "FormAL Group Ltd": [
-      "Lot 1"
      ]
     }
    },
@@ -23270,20 +23270,20 @@
     "Blatchford Limited": [
      "Blatchford Limted"
     ],
+    "Consolor Ltd": [
+     "Consolar Limited"
+    ],
     "Etac Ltd": [
      "Etac Lmited"
+    ],
+    "FormAL Group Ltd": [
+     "Formal AL Group"
     ],
     "Pride Mobility Products Ltd": [
      "Pride Mobility Products Ltd."
     ],
     "Rehabilitation Manufacturing Services ltd": [
      "Rehabilitation Manufacturing Services Ltd"
-    ],
-    "Consolor Ltd": [
-     "Consolar Limited"
-    ],
-    "FormAL Group Ltd": [
-     "Formal AL Group"
     ]
    },
    "supplierLots": {
