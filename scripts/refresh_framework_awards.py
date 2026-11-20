@@ -220,6 +220,18 @@ def extract(release: dict, cpvs: list[str], reason: str) -> dict:
         "url": "https://www.find-tender.service.gov.uk/Notice/%s" % (
             (release.get("id") or "").replace("ocds-h6vhtk-", "")),
     }
+    # Tender-stage facts (20/11/2026): the speciality panels show an open framework
+    # tender's value and closing date, and the open-tenders feed does not always hold it.
+    period = tender.get("tenderPeriod") or {}
+    if period.get("endDate"):
+        rec["tenderClosing"] = period.get("endDate")
+    tval = tender.get("value") or {}
+    if tval.get("amountGross") is not None:
+        rec["tenderValue"] = {"amount": tval.get("amountGross"), "currency": tval.get("currency"),
+                              "basis": "estimated, including VAT"}
+    elif tval.get("amount") is not None:
+        rec["tenderValue"] = {"amount": tval.get("amount"), "currency": tval.get("currency"),
+                              "basis": "estimated, excluding VAT"}
     if fw:
         rec["framework"] = {
             "method": fw.get("method"),

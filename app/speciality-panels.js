@@ -166,6 +166,18 @@
     return (x === null || x === undefined) ? 'not stated' : Number(x).toLocaleString('en-GB');
   }
 
+  /* Money and dates as a notice states them (20/11/2026). A value of £1m or more is
+     shown in millions to one decimal place; below that, in full. */
+  function gbp(v) {
+    if (v === null || v === undefined || v === '' || isNaN(Number(v))) { return ''; }
+    v = Number(v);
+    return v >= 1e6 ? '\u00a3' + (Math.round(v / 1e5) / 10).toLocaleString('en-GB') + 'm' : '\u00a3' + Math.round(v).toLocaleString('en-GB');
+  }
+  function ukDate(s) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(s || ''));
+    return m ? m[3] + '/' + m[2] + '/' + m[1] : String(s || '');
+  }
+
   /* ---------- pin to My Hub, and the calendar (22/10/2026) ----------
      Pins are the member's own saved items (app/hub-account.js, kind "panel"),
      shown on My Hub by app/my-hub-panels.js. The buttons stay hidden for a
@@ -427,6 +439,16 @@
       h += '<td>' + esc(f.ends || 'not stated');
       if (m !== null && m <= 12) { h += ' <span class="sp-soon">(' + (m <= 0 ? 'expired' : m + ' months)') + '</span>'; }
       h += '</td><td>' + esc(f.supplierCount === null || f.supplierCount === undefined ? 'not stated' : f.supplierCount) + '</td></tr>';
+      /* An awarded successor (20/11/2026): the builder swaps in the new framework and
+         keeps the outgoing one on the row, so both are stated. */
+      if (f.replaces) {
+        h += '<tr><td colspan="4" style="font-size:12.5px;line-height:1.55;padding-top:0;">' +
+             '<b>New framework, awarded ' + esc(f.awardedOn || '') + '.</b> Runs ' + esc(f.starts || '') + ' to ' + esc(f.ends || 'not stated') +
+             (f.value ? ', ' + gbp(f.value) + ' estimated over the term, excluding VAT' : '') +
+             '. Suppliers named on the award notice: ' + esc((f.suppliers || []).join(', ')) + '. ' +
+             'It replaces the current framework (' + esc(f.replaces.reference || '') + '), which ends ' + esc(f.replaces.ends || 'not stated') +
+             (f.replaces.suppliers && f.replaces.suppliers.length ? ' and names ' + esc(f.replaces.suppliers.join(', ')) : '') + '.</td></tr>';
+      }
     }
     h += '</table></div>';
     /* WHO IS ON EACH LOT (01/10/2026). Only for a framework whose owner publishes a
@@ -451,11 +473,15 @@
     if (!d.openTenders.length) {
       h += '<div class="empty-state">No notice on this patch is open for bidding today. This is checked against the live feed, not left blank. When one opens it appears here.</div>';
     } else {
-      h += '<div class="sp-scroll"><table class="sp-tbl"><tr><th>Notice</th><th>Buyer</th><th>Closes</th></tr>';
+      h += '<div class="sp-scroll"><table class="sp-tbl"><tr><th>Notice</th><th>Buyer</th><th>Value</th><th>Closes</th></tr>';
       for (i = 0; i < d.openTenders.length; i++) {
         var o = d.openTenders[i];
-        h += '<tr><td>' + (o.url ? '<a href="' + esc(o.url) + '" target="_blank" rel="noopener">' + esc(o.title) + '</a>' : esc(o.title)) + '</td>';
-        h += '<td>' + esc(o.buyer) + '</td><td>' + esc(o.closingDate || 'not stated') + '</td></tr>';
+        var planning = o.status === 'planning';
+        h += '<tr><td>' + (o.url ? '<a href="' + esc(o.url) + '" target="_blank" rel="noopener">' + esc(o.title) + '</a>' : esc(o.title)) +
+             (planning ? ' <span class="sp-chip" style="font-weight:600;">Planning notice</span>' : '') + '</td>';
+        h += '<td>' + esc(o.buyer) + '</td>';
+        h += '<td style="white-space:nowrap;">' + (o.value ? gbp(o.value) + (o.valueBasis ? '<br><span style="font-size:11.5px;opacity:.75;">' + esc(o.valueBasis) + '</span>' : '') : 'not stated') + '</td>';
+        h += '<td style="white-space:nowrap;">' + (o.closingDate ? esc(ukDate(o.closingDate)) : (planning ? 'no closing date yet (planning stage)' : 'not stated')) + '</td></tr>';
       }
       h += '</table></div>';
     }
@@ -624,7 +650,7 @@
     if (!d.awards.length) {
       h += '<div class="empty-state">No award on this patch has been recorded in the feeds yet.</div>';
     } else {
-      h += '<div class="sp-scroll"><table class="sp-tbl"><tr><th>Date</th><th>Contract</th><th>Buyer</th><th>Awarded to</th></tr>';
+      h += '<div class="sp-scroll"><table class="sp-tbl"><tr><th>Date</th><th>Contract</th><th>Buyer</th><th>Awarded to</th><th>Value</th></tr>';
       for (i = 0; i < d.awards.length; i++) {
         var a = d.awards[i];
         h += '<tr><td style="white-space:nowrap;">' + esc(a.date || '') + '</td>';
@@ -633,8 +659,13 @@
         if (a.stage === 'planning' || a.stage === 'tender') {
           h += ' <span class="sp-chip" style="font-weight:600;">' + (a.stage === 'planning' ? 'Planning notice, not yet awarded' : 'Tender notice, not yet awarded') + '</span>';
         }
+        if (a.alsoPublishedAs && a.alsoPublishedAs.length) {
+          h += '<div style="font-size:11.5px;opacity:.75;">The buyer published this award more than once; shown once. Also: ' +
+               a.alsoPublishedAs.map(function (u) { return '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(String(u).split('/').pop()) + '</a>'; }).join(', ') + '</div>';
+        }
         h += '</td>';
-        h += '<td>' + esc(a.buyer || 'not stated') + '</td><td>' + esc(a.supplier || (a.stage === 'planning' || a.stage === 'tender' ? 'not yet awarded' : 'not named')) + '</td></tr>';
+        h += '<td>' + esc(a.buyer || 'not stated') + '</td><td>' + esc(a.supplier || (a.stage === 'planning' || a.stage === 'tender' ? 'not yet awarded' : 'not named')) + '</td>';
+        h += '<td style="white-space:nowrap;">' + (a.value ? gbp(a.value) : (a.stage === 'planning' || a.stage === 'tender' ? '' : 'not stated')) + '</td></tr>';
       }
       h += '</table></div>';
       if (d.counts.awardsMatched > d.awards.length) {

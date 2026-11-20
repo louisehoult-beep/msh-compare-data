@@ -8242,7 +8242,102 @@ def match_title(rx, title):
     return bool(rx["inc"].search(t)) and not rx["exc"].search(t)
 
 
-def build_frameworks(rx, rule, fw_doc):
+NHSSC_BUYER = "supply chain coordination limited"
+
+
+def _iso(d):
+    try:
+        return datetime.date.fromisoformat(str(d)[:10])
+    except (TypeError, ValueError):
+        return None
+
+
+def _long_date(d):
+    return "%d %s" % (d.day, d.strftime("%B %Y")) if d else None
+
+
+def successor_award(f, fa_doc):
+    """The NHS Supply Chain award notice for the framework that REPLACES `f`, if one
+    has been published (20/11/2026).
+
+    NHS Supply Chain's contract launch brief is only rewritten when a new framework
+    goes live, so for months after a renewal is awarded the brief, and so this panel,
+    still shows the outgoing framework and its supplier list. Negative Pressure Wound
+    Therapy is the case that found it: the brief shows the 2021 framework ending
+    28 March 2027 with H & R Healthcare and Talley on it, while Find a Tender 105016-2026
+    (published 5 November 2026) awards the replacement, 29 March 2027 to 28 March 2031,
+    to six suppliers including Creed and Oscartech.
+
+    A notice counts as the successor only when ALL of these hold: the buyer is Supply
+    Chain Coordination Limited; it establishes a framework; it is at award stage with
+    named suppliers; its title is the framework's own name; and its contract starts no
+    earlier than a week before the current framework ends. That last test is what keeps
+    the current framework's own award notice from being read as its successor.
+    """
+    ends = _parse_date(f.get("ends") or "")
+    name = (f.get("name") or "").strip().lower()
+    if not ends or not name or not fa_doc:
+        return None
+    best = None
+    for a in fa_doc.get("awards") or []:
+        buyer = a.get("buyer")
+        buyer = (buyer.get("name") if isinstance(buyer, dict) else buyer) or ""
+        if buyer.strip().lower() != NHSSC_BUYER or not a.get("is_framework"):
+            continue
+        if (a.get("title") or "").strip().lower() != name:
+            continue
+        if notice_stage(a.get("tag")) != "award" or not a.get("suppliers"):
+            continue
+        starts = [_iso(c.get("start")) for c in (a.get("contracts") or [])]
+        starts = [s for s in starts if s]
+        if not starts or min(starts) < ends - datetime.timedelta(days=7):
+            continue
+        if best is None or (a.get("published") or "") > (best.get("published") or ""):
+            best = a
+    return best
+
+
+def apply_successor(entry, a):
+    """Replace a framework row with its awarded successor, keeping the outgoing
+    framework on the row as `replaces` so the reader sees both."""
+    contracts = a.get("contracts") or []
+    start = min(_iso(c.get("start")) for c in contracts if _iso(c.get("start")))
+    ends = [_iso(c.get("end")) for c in contracts if _iso(c.get("end"))]
+    values = [c.get("value") for c in contracts if c.get("value") is not None]
+    names = []
+    for s in a.get("suppliers") or []:
+        n = (s.get("name") if isinstance(s, dict) else str(s)) or ""
+        # A trading name is not the supplier's name: "CREED MEDICAL LTD T/A Creed Health".
+        n = re.split(r"\s+t/a\s+", n, flags=re.I)[0].strip()
+        if n and n not in names:
+            names.append(n)
+    published = _iso(a.get("published"))
+    replaced = {k: entry.get(k) for k in ("name", "url", "reference", "supplyRoute", "starts",
+                                          "ends", "supplierCount", "suppliers")}
+    entry.update({
+        "url": a.get("url"),
+        "reference": "Find a Tender %s" % (a.get("notice_id") or ""),
+        "supplyRoute": None,
+        "starts": _long_date(start),
+        "ends": _long_date(max(ends)) if ends else None,
+        "supplierCount": len(names),
+        "supplierSource": ("the %d suppliers named on the Find a Tender award notice %s, "
+                           "published %s; NHS Supply Chain's contract launch brief still "
+                           "describes the outgoing framework" % (
+                               len(names), a.get("notice_id"), _long_date(published))),
+        "suppliers": names,
+        "delisted": None,
+        "awardedOn": _long_date(published),
+        "value": max(values) if values else None,
+        "valueBasis": "estimated total over the term, excluding VAT" if values else None,
+        "replaces": replaced,
+    })
+    entry.pop("lots", None)
+    entry.pop("lotOwner", None)
+    return entry
+
+
+def build_frameworks(rx, rule, fw_doc, fa_doc=None):
     """The speciality's NHSSC frameworks, with the supplier list each one carries.
 
     A `frameworkCorrections` entry on the rule removes names that frameworks.json
@@ -8304,6 +8399,9 @@ def build_frameworks(rx, rule, fw_doc):
         if lots:
             entry["lots"] = lots
             entry["lotOwner"] = f.get("lotOwner")
+        succ = successor_award(f, fa_doc)
+        if succ:
+            apply_successor(entry, succ)
         out.append(entry)
     out.sort(key=lambda x: (x.get("name") or ""))
     return out
@@ -8505,6 +8603,8 @@ def matched_awards(rx, rule, th_doc, fa_doc):
         buyer = a.get("buyer")
         if isinstance(buyer, dict):
             buyer = buyer.get("name")
+        cvals = [c.get("value") for c in (a.get("contracts") or []) if c.get("value") is not None]
+        signed = sorted(c.get("signed") for c in (a.get("contracts") or []) if c.get("signed"))
         rows.append({
             "title": a.get("title"),
             "buyer": buyer,
@@ -8514,7 +8614,10 @@ def matched_awards(rx, rule, th_doc, fa_doc):
             ) or None,
             "date": a.get("published"),
             "url": a.get("url"),
-            "value": None,
+            # The notice's own contract value (20/11/2026). One notice can carry several
+            # contracts; the largest is shown, since lots may share a single value.
+            "value": max(cvals) if cvals else (a.get("tenderValue") or {}).get("amount"),
+            "signed": signed[0] if signed else None,
             "periodEnd": None,
             "cpv": cpvs,
             "isFramework": a.get("is_framework"),
@@ -8530,6 +8633,27 @@ def matched_awards(rx, rule, th_doc, fa_doc):
             continue
         seen.add(k)
         uniq.append(r)
+    # THE SAME AWARD PUBLISHED TWICE (20/11/2026). Cardiff and Vale UHB published
+    # "Outsourcing of Urology Procedures for CAVUHB" as two notices on 11/11/2026,
+    # 107270-2026 and 107228-2026, under two OCIDs: same buyer, same supplier, same
+    # signed date, same £39,020. Keyed on the URL they both survived and the panel
+    # showed one contract as two. A second notice is folded into the first when title,
+    # buyer, supplier, signed date and value all agree and none of them is empty; the
+    # kept row lists the other notice so nothing is hidden.
+    folded, out = {}, []
+    for r in uniq:
+        k = None
+        if r.get("source") == "framework-awards" and r.get("supplier") and r.get("signed") \
+                and r.get("value") is not None:
+            k = ((r.get("title") or "").strip().lower(), (r.get("buyer") or "").strip().lower(),
+                 (r.get("supplier") or "").strip().lower(), r.get("signed"), r.get("value"))
+        if k and k in folded:
+            folded[k].setdefault("alsoPublishedAs", []).append(r.get("url"))
+            continue
+        if k:
+            folded[k] = r
+        out.append(r)
+    uniq = out
     if not rule.get("worksAreThePatch"):
         uniq = [r for r in uniq if not is_works_award(r)]
     return uniq
@@ -8567,9 +8691,17 @@ def cap_awards(rule, uniq):
     return shown[:AWARD_CAP], len(uniq), withheld
 
 
-def build_open_tenders(rx, slug, ot_doc):
+def build_open_tenders(rx, slug, ot_doc, fa_doc=None, today=None):
     """Notices still open for bidding. Usually empty for a given speciality, and an
-    empty list is the correct answer — never padded out with near-misses."""
+    empty list is the correct answer — never padded out with near-misses.
+
+    FRAMEWORK TENDERS (20/11/2026). The open-tenders feed missed NHS Supply Chain's
+    Urology and Bowel Management tender (107391-2026, £260m, closes 13 January 2027),
+    which framework-awards.json holds at tender stage. A tender-stage framework notice
+    whose own closing date has not passed is added here, with its value and closing
+    date as the notice states them. One with no closing date recorded is not added:
+    it cannot be shown to be open."""
+    today = today or datetime.date.today().isoformat()
     out = []
     for n in ot_doc["notices"]:
         if n.get("speciality") == slug or match_title(rx, n.get("title")):
@@ -8583,6 +8715,29 @@ def build_open_tenders(rx, slug, ot_doc):
                 "value": n.get("valueAmount"),
                 "source": n.get("source"),
             })
+    seen = {o.get("url") for o in out}
+    for a in (fa_doc or {}).get("awards") or []:
+        if notice_stage(a.get("tag")) != "tender" or a.get("url") in seen:
+            continue
+        closing = a.get("tenderClosing")
+        if not closing or str(closing)[:10] < today:
+            continue
+        if not match_title(rx, a.get("title")):
+            continue
+        buyer = a.get("buyer")
+        tv = a.get("tenderValue") or {}
+        out.append({
+            "title": a.get("title"),
+            "buyer": buyer.get("name") if isinstance(buyer, dict) else buyer,
+            "status": "active",
+            "stage": "open tender",
+            "closingDate": closing,
+            "url": a.get("url"),
+            "value": tv.get("amount"),
+            "valueBasis": tv.get("basis"),
+            "source": "Find a Tender",
+        })
+        seen.add(a.get("url"))
     return out
 
 
@@ -10049,13 +10204,13 @@ def build(slug, sources):
     fw_doc, th_doc = sources["frameworks"], sources["tender_history"]
     fa_doc, ot_doc, dt_doc = sources["framework_awards"], sources["open_tenders"], sources["drug_tariff"]
 
-    frameworks = build_frameworks(rx, rule, fw_doc)
+    frameworks = build_frameworks(rx, rule, fw_doc, fa_doc)
     suppliers = build_suppliers(frameworks, sources["registry"])
     directory, tagged = build_directory_suppliers(slug, frameworks, suppliers, sources)
     annotate_framework_suppliers(suppliers, tagged)
     matched = matched_awards(rx, rule, th_doc, fa_doc)
     awards, award_total, awards_withheld = cap_awards(rule, matched)
-    open_tenders = build_open_tenders(rx, slug, ot_doc)
+    open_tenders = build_open_tenders(rx, slug, ot_doc, fa_doc)
     tariff = build_tariff(rule, dt_doc)
     tariff_moves = build_tariff_moves(slug, rule, dt_doc, sources.get("tariff_snapshots"))
     local_intel = build_local_intel(slug, sources.get("local_intel") or {})

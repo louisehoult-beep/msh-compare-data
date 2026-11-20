@@ -1960,7 +1960,13 @@
     var TITLE = 'Company background';
     var rows = s.background || [];
     if (!rows.length) {
-      return sec(TITLE, gap('Not captured for this company yet.'));
+      /* Say why, and where the same ground is covered (20/11/2026). */
+      var dbg = deepFor(s);
+      if (dbg && (dbg.tagline || (dbg.ownership && dbg.ownership.length))) {
+        return sec(TITLE, gap('No separate background note is held for this company. Who they are is covered by the summary at the top of this report and by Structure &amp; ownership below, both read from Companies House and the filed accounts' +
+          (dbg.checked ? ' and checked ' + esc(dateUK(dbg.checked)) : '') + '.'));
+      }
+      return sec(TITLE, gap('Not captured for this company yet. Background notes are written only from a named source (the company\u2019s own materials or its filed accounts), and none has been read for this company.'));
     }
     var unsourced = rows.filter(function (r) { return !r.url; }).length;
     var body = rows.map(function (r) {
@@ -2063,7 +2069,7 @@
     var TITLE = 'Partnerships';
     var rows = s.partnerships || [];
     if (!rows.length) {
-      return sec(TITLE, gap('Not captured for this company yet.'));
+      return sec(TITLE, gap('No distribution or partnership arrangement is recorded for this company. One is added only when a source states it, so this is a gap in what has been read, not a finding that none exist.'));
     }
     var body = rule('Every row is a dated distribution or partnership arrangement, carrying the confidence the arrangement itself supports — <b>confirmed</b> where an independent source or both parties&rsquo; own primary materials state it as a contract, or <b>claimed by the parties, not independently confirmed</b> where it is stated by the parties but not otherwise evidenced. A claimed arrangement is never rendered as a verified commercial agreement.');
     body += rows.map(function (p) {
@@ -2464,6 +2470,10 @@
     if (ctx && ctx.asOf) meta.push('supplier index as of <b>' + esc(dateUK(ctx.asOf)) + '</b>');
     if (ctx && ctx.fwDoc && ctx.fwDoc.dataAsOf) meta.push('framework briefs captured <b>' + esc(dateUK(ctx.fwDoc.dataAsOf)) + '</b>');
     if (ctx && ctx.fin && ctx.fin.dataAsOf) meta.push('Companies House read <b>' + esc(dateUK(ctx.fin.dataAsOf)) + '</b>');
+    /* The curated profile (summary, company information, people, market position)
+       carries its own check date. Shown here so the header and the panels below
+       agree on when it was last checked (20/11/2026). */
+    if (d && d.checked) meta.push('company profile checked <b>' + esc(dateUK(d.checked)) + '</b>');
 
     /* A <div>, never a <header>, and that is load-bearing (30/09/2026). The
        report mounts inside div.msh, and the Hub nav's chrome CSS (WPCode
@@ -2563,6 +2573,19 @@
       g = { series: filed, prose: (g && g.prose) || null };
     }
     if (!(g && g.series && g.series.points && g.series.points.length)) {
+      /* CURATED FIGURES, NO CHART (20/11/2026). Coloplast's profile carries three
+         years of revenue read from its filed accounts, in prose, while the tagged
+         (iXBRL) feed holds none because the accounts are a PDF. The panel said
+         "No turnover series can be shown" directly under a Company information
+         tile quoting the same three years, which is a contradiction a member
+         reads as an error. Where curated prose exists, show it, and say only why
+         there is no chart. */
+      if (g && g.prose && g.prose.length) {
+        return sec('Growth', '<div style="font-size:13.5px;line-height:1.7;color:#37485a;">' +
+          g.prose.map(function (p) { return '<p style="margin:0 0 10px;">' + esc(p) + '</p>'; }).join('') + '</div>' +
+          srcLine('Figures read from the filed accounts by hand' + (d && d.checked ? ', profile checked ' + esc(dateUK(d.checked)) : '') +
+            '. No chart is drawn: the accounts are filed as a PDF with no machine-tagged turnover, so there is no tagged series to plot.'));
+      }
       var frec = ctx.fin ? finRecFor(s, ctx.fin) : null;
       var why = frec && frec.turnoverNote;
       /* Say WHY nothing was read when accounts are known to be filed. The old
