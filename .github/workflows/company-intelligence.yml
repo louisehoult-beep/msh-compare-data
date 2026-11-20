@@ -53,7 +53,7 @@ permissions:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 240
     # Job level ON PURPOSE. A step's own `env:` block is not in scope for that
     # step's `if:`, so the skip condition below would have been evaluated against
     # an empty value and the Companies House steps would have skipped even with

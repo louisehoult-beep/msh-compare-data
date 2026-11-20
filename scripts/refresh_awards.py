@@ -293,6 +293,8 @@ def rows_from_release(rel, source, section, only_award=None):
     return out
 
 
+FTS_TIMEOUT = 300
+FTS_RETRIES = 6
 DEAD_AWARD_STATUSES = {"cancelled", "unsuccessful"}
 AWARD_TAGS = {"award", "awardupdate", "contract", "contractupdate"}
 
@@ -353,7 +355,10 @@ def fetch_fts(days, max_pages=150):
     failed = ""
     while url and pages < max_pages:
         try:
-            data = get(url)
+            # Measured 20/11/2026: an unstaged page takes 90-120s from Find a
+            # Tender and sometimes answers 502, so the default 90s read timeout
+            # failed the first page on the Actions runner (run 44795973936).
+            data = get(url, timeout=FTS_TIMEOUT, retries=FTS_RETRIES)
         except Exception as exc:  # network failure after get()'s own retries
             failed, complete = "%s: %s" % (type(exc).__name__, exc), False
             break
