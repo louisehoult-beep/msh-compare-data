@@ -17,7 +17,9 @@ different stage filter
 ------------------------------------------------------------------------
 Find a Tender    — above-threshold, UK statutory. OCDS release packages.
     https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages
-        ?stages=tender&limit=100&updatedFrom=…&updatedTo=…
+        ?limit=100&updatedFrom=…&updatedTo=…      (NO stages filter: it drops
+        every Procurement Act 2023 notice, see walk_fts; stage read from
+        tender.status instead)
     Notice URL:  /Notice/{id}      id is "nnnnnn-yyyy"   (capital N)
 
 Contracts Finder — below-threshold and sub-£139k. OCDS search.
@@ -188,9 +190,31 @@ def get(url, timeout=90, retries=3):
             time.sleep(5 * attempt)
 
 
+def item_cpvs(tender):
+    """Every CPV on the notice's items, in order, de-duplicated."""
+    out = []
+    for item in tender.get("items") or []:
+        for c in [item.get("classification") or {}] + list(item.get("additionalClassifications") or []):
+            cid = str(c.get("id") or "")
+            if c.get("scheme") == "CPV" and cid and cid not in out:
+                out.append(cid)
+    return out
+
+
 def headline_cpv(tender):
+    """The notice's main CPV.
+
+    Fixed 20/11/2026: Procurement Act 2023 notices (legalBasis 2023/54) carry NO
+    tender.classification. Their CPVs sit only on tender.items[], the first one
+    being the main code. Reading tender.classification alone gave "" for every
+    such notice, so a medical tender with a plain title ("Urology and Bowel
+    Management", 107391-2026, all CPVs in 33) failed relevant() and was dropped.
+    """
     cl = tender.get("classification") or {}
-    return str(cl["id"]) if cl.get("scheme") == "CPV" and cl.get("id") else ""
+    if cl.get("scheme") == "CPV" and cl.get("id"):
+        return str(cl["id"])
+    items = item_cpvs(tender)
+    return items[0] if items else ""
 
 
 def relevant(tender, title):
@@ -257,43 +281,93 @@ def row_from_release(rel, source, today_iso, keep=None):
     }
 
 
-def fetch_fts(days, today_iso, max_pages=MAX_PAGES, stage="tender", keep=None):
-    """One pass over ONE OCDS stage.
+# Stage of a release, from the feed's own tender.status (the same field
+# row_from_release gates on). Used to split the single unstaged walk below.
+FTS_STAGE_STATUSES = {"tender": {"active"}, "planning": PLANNING_STATUSES}
 
-    Called once per stage (see fetch_fts_all). The two statutory feeds disagree
-    about how to ask for more than one stage in a single call, and BOTH failure
-    modes are silent — verified live 02/09/2026:
-      * Find a Tender: "stages=planning,tender" returns 0 releases (HTTP 200,
-        empty). Only repeated params work.
-      * Contracts Finder: repeated params make the LAST one win, dropping the
-        other stage entirely; only the comma form mixes them.
-    Rather than depend on either quirk, each stage gets its own pass and the
-    results are merged and de-duplicated. Slower, impossible to get silently
-    wrong.
+_FTS_WALKS = {}
+
+
+def walk_fts(days, max_pages=MAX_PAGES):
+    """Walk EVERY Find a Tender release updated in the window, with NO stage filter.
+
+    Fixed 20/11/2026. Until then this asked for "stages=tender" and
+    "stages=planning". Verified live 20/11/2026: Find a Tender's stages filter
+    returns ONLY old-regime notices (legalBasis 32014L0024/5, PCR 2015). Every
+    Procurement Act 2023 notice (legalBasis 2023/54), which is now most of the
+    feed, is silently left out. Over 12-20/11/2026 stages=tender gave 59 releases,
+    all old-regime; the unstaged feed for 09:00-10:00 on 12/11 alone held five
+    Act tenders (107380, 107390, 107391, 107392, 107396) that never appeared.
+    107391-2026, NHS Supply Chain's £260m Urology and Bowel Management tender,
+    was one of them. The stage is now decided here, from tender.status.
+
+    The walk is shared by both stage passes (and by refresh_digital_lane.py), so
+    the feed is read once per run. Returns (latest release per ocid, pages,
+    scanned, complete).
     """
+    key = (days, max_pages)
+    if key in _FTS_WALKS:
+        return _FTS_WALKS[key]
     now = dt.datetime.now(dt.timezone.utc)
     qs = urllib.parse.urlencode({
-        "stages": stage, "limit": 100,
+        "limit": 100,
         "updatedFrom": (now - dt.timedelta(days=days)).strftime("%Y-%m-%dT00:00:00"),
         "updatedTo": now.strftime("%Y-%m-%dT23:59:59")})
     url = "%s?%s" % (FTS_API, qs)
-    rows, pages, scanned, complete = [], 0, 0, True
+    releases, pages, scanned = [], 0, 0
     while url and pages < max_pages:
         data = get(url)
-        releases = data.get("releases", [])
-        scanned += len(releases)
-        for rel in releases:
-            row = row_from_release(rel, "Find a Tender", today_iso, keep)
-            if row:
-                rows.append(row)
+        got = data.get("releases", [])
+        scanned += len(got)
+        releases += got
         pages += 1
         url = (data.get("links") or {}).get("next")
         if url:
             time.sleep(PAGE_SLEEP)
-    if url and pages >= max_pages:
-        complete = False
+    complete = not (url and pages >= max_pages)
+    result = (latest_per_ocid(releases), pages, scanned, complete)
+    _FTS_WALKS[key] = result
+    return result
+
+
+def latest_per_ocid(releases):
+    """Keep only the newest release of each procurement, so a tender that has
+    since been awarded or cancelled is judged on its latest state, not on an
+    older "active" release still inside the window."""
+    best = {}
+    for rel in releases:
+        k = rel.get("ocid") or rel.get("id")
+        if k not in best or (rel.get("date") or "") > (best[k].get("date") or ""):
+            best[k] = rel
+    return sorted(best.values(), key=lambda r: r.get("date") or "", reverse=True)
+
+
+def release_stage(rel):
+    status = ((rel.get("tender") or {}).get("status") or "").strip().lower()
+    for stage, statuses in FTS_STAGE_STATUSES.items():
+        if status in statuses:
+            return stage
+    return None
+
+
+def fetch_fts(days, today_iso, max_pages=MAX_PAGES, stage="tender", keep=None):
+    """The rows for ONE stage, cut from the shared unstaged walk (walk_fts).
+
+    Contracts Finder still gets one feed pass per stage (see fetch_cf): its
+    stages filter does not have this fault. Find a Tender's does, so it is not
+    used at all; "stages=planning,tender" also returned 0 releases (02/09/2026).
+    """
+    releases, pages, scanned, complete = walk_fts(days, max_pages)
+    rows = []
+    for rel in releases:
+        if release_stage(rel) != stage:
+            continue
+        row = row_from_release(rel, "Find a Tender", today_iso, keep)
+        if row:
+            rows.append(row)
     note = ("Find a Tender (%s stage): %d open notice(s) from %d release(s) over "
-            "%d page(s)" % (stage, len(rows), scanned, pages))
+            "%d page(s), all notice types, stage read from tender.status"
+            % (stage, len(rows), scanned, pages))
     if not complete:
         note += (" — ⚠️ STOPPED AT THE %d-PAGE GUARD before the window was exhausted, "
                  "so this window was NOT fully walked and notices are missing." % max_pages)

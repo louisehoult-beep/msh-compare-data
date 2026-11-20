@@ -122,7 +122,10 @@ def lane_keep(tender, title, buyer):
     cpv = str(cl.get("id") or "") if cl.get("scheme") == "CPV" else ""
     extra = [str(c.get("id")) for c in tender.get("additionalClassifications") or []
              if c.get("scheme") == "CPV" and c.get("id")]
-    return R.in_lane(buyer, [cpv] + extra)
+    # Procurement Act 2023 notices carry their CPVs only on tender.items[]
+    # (20/11/2026, see refresh_open_tenders.headline_cpv).
+    import refresh_open_tenders as OT
+    return R.in_lane(buyer, [cpv] + extra + OT.item_cpvs(tender))
 
 
 def fetch_open_notices(days, today_iso):

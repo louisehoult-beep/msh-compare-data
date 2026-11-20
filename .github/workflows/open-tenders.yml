@@ -23,6 +23,11 @@ name: Open tenders and pipeline notices (daily)
 #     stage; only the comma form mixes them.
 # The script therefore runs one pass per stage and de-duplicates, rather than
 # relying on either quirk. Do not "tidy" it back into a single call.
+#
+# ⚠️ 20/11/2026: Find a Tender is now walked ONCE with NO stages filter. Its stages
+# filter returns only old-regime (PCR 2015) notices and silently drops every
+# Procurement Act 2023 notice, e.g. 107391-2026 (NHS Supply Chain, Urology and Bowel
+# Management, £260m). The stage is read from tender.status. Do not put stages= back.
 
 on:
   schedule:
