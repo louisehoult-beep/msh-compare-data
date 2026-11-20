@@ -617,8 +617,8 @@
        tab or section on that page. */
     var HUBP = '/medical-sales-hub/';
     var LINKS = {
-      compare: HUBP + 'med-sales-tools/#tool-compare',
-      calc: HUBP + 'med-sales-tools/#sec-calc',
+      compare: HUBP + 'med-sales-tools/#view-compare',
+      calc: HUBP + 'med-sales-tools/#tab-calc',
       mapper: HUBP + 'med-sales-tools/#sec-map',
       suppliers: HUBP + 'suppliers/',
       frameworks: HUBP + 'tender-history/',
