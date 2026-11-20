@@ -376,7 +376,31 @@ def looks_like_person(s):
             and not s.startswith("The "))
 
 
-def extract_people(lines):
+# A membership table's third column (Lincolnshire's Clinical and Care Directorate
+# Strategic Board, 20/11/2026: "Dr Colin Farquharson / Medical Director / United
+# Lincolnshire Hospitals NHS Trust") names the member's OWN organisation. Seven
+# partner medical directors were published as the ICB's because only the first two
+# columns were read. A short organisation line straight after the title, that is not
+# the ICB itself, marks a partner member.
+PARTNER_ORG = re.compile(r"(NHS (Foundation )?Trust|\bTrust$|Council$|Hospice$|Ambulance Service|"
+                         r"Medical Committee|Primary Care Networks?$|Hospitals?\b|Healthcare\b|"
+                         r"Allied Health Professionals$|Pharmacy, Optometry|University\b)", re.I)
+OWN_ORG = re.compile(r"\b(ICB|LICB|Integrated Care Board|Integrated Care System)\b", re.I)
+
+
+def partner_line(ln):
+    ln = (ln or "").strip()
+    return (0 < len(ln) <= 90 and not ln.endswith(".") and bool(PARTNER_ORG.search(ln))
+            and not OWN_ORG.search(ln) and not role_family(ln)
+            and not re.search(r"\b(Chief|Officer|Director|Manager|Lead|Head|Member)\b", ln))
+
+
+def bare_name(name):
+    bare = re.sub(r"^" + HONORIFIC, "", name.strip()).lower()
+    return re.sub(r",?\s+(obe|mbe|cbe|dl|cb)\b", "", bare)
+
+
+def extract_people(lines, partners=None):
     """Person–title pairs read directly off a page. Three layouts, all seen on
     ICB sites: 'Name, Title' on one line; 'Name' then 'Title' on the next
     line; 'Title' then 'Name'. Only a line that is plainly a job title (a role
@@ -428,15 +452,21 @@ def extract_people(lines):
     # section heading sitting above a name is never taken for that person's title.
     before = sum(1 for _, _, p, n in pairs if p and not n)
     after = sum(1 for _, _, p, n in pairs if n and not p)
-    for _, title, p, n in pairs:
+    for i, title, p, n in pairs:
         who = p if (p and not n) else n if (n and not p) else (p if before >= after else n)
         if who:
+            # Name, title, organisation: the line after the title (name-first
+            # layout) or after the name (title-first) is the member's own body.
+            org = lines[i + 1] if who is p and i + 1 < len(lines) else (
+                lines[i + 2] if who is n and i + 2 < len(lines) else "")
+            if partner_line(org):
+                if partners is not None:
+                    partners.append(bare_name(who))
+                continue
             found.append((who.strip(), title))
     seen, out = set(), []
     for name, title in found:
-        bare = re.sub(r"^" + HONORIFIC, "", name).lower()
-        bare = re.sub(r",?\s+(obe|mbe|cbe|dl|cb)\b", "", bare)
-        key = (bare, role_family(title))
+        key = (bare_name(name), role_family(title))
         if key not in seen:
             seen.add(key)
             out.append({"name": name, "title": title[:160], "family": role_family(title)})
@@ -452,14 +482,15 @@ def own_site_people(cfg):
     def one(code, url):
         try:
             lines = page_lines(fetch(url))
-            people = extract_people(lines)
+            partners = []
+            people = extract_people(lines, partners)
             # A digital title listed with no holder beside it (e.g. a clinical
             # leadership page naming the role as a responsibility) is recorded as
             # "listed, not named" so absence of a name is not read as absence of the role.
             named = {p["title"] for p in people if p["family"] == "digital"}
             mention = sorted({ln for ln in lines if len(ln) <= 80 and ln not in named
                               and role_family(ln) == "digital" and not looks_like_person(ln)})
-            return code, url, (people, mention), None
+            return code, url, (people, mention, partners), None
         except Exception as e:                                   # noqa: BLE001
             return code, url, None, "%s" % e.__class__.__name__
 
@@ -467,14 +498,21 @@ def own_site_people(cfg):
             for p in spec.get("pages", [])]
     with concurrent.futures.ThreadPoolExecutor(6) as ex:
         for code, url, people, err in ex.map(lambda a: one(*a), jobs):
-            r = results.setdefault(code, {"people": [], "errors": [], "urls": [], "digitalListed": []})
+            r = results.setdefault(code, {"people": [], "errors": [], "urls": [], "digitalListed": [],
+                                          "partners": []})
             r["urls"].append(url)
             if err:
                 r["errors"].append({"url": url, "error": err})
             else:
-                people, mention = people
+                people, mention, partners = people
                 r["digitalListed"].extend(mention)
+                r["partners"].extend(partners)
+                # One person on two of the ICB's pages ("Dr. Sunil Hindocha" and
+                # "Dr Sunil Hindocha, Medical Director") is one entry: first page wins.
+                have = {(x["family"], bare_name(x["name"])) for x in r["people"]}
                 for p in people:
+                    if (p["family"], bare_name(p["name"])) in have:
+                        continue
                     p["url"] = url
                     r["people"].append(p)
     return results
@@ -700,6 +738,20 @@ def build(prev, live, ended, leaders, leaders_updated, statement, own, curated, 
             rec["execs"] = p.get("execs", [])
         else:
             rec["fetchErrors"] = o["errors"]
+            # A stored entry now read as a partner member (its own organisation is
+            # named beside it), or a second spelling of someone already read today,
+            # was never the ICB's executive: drop it rather than carry it forward.
+            gone = set(o.get("partners") or [])
+            today_bare = {(x["family"], bare_name(x["name"])): x["name"].lower() for x in o["people"]}
+            kept_prev = []
+            for e in p.get("execs", []):
+                b = bare_name(e["name"])
+                if b in gone and (e["family"], b) not in today_bare:
+                    continue
+                if (e["family"], b) in today_bare and today_bare[(e["family"], b)] != e["name"].lower():
+                    continue
+                kept_prev.append(e)
+            p = dict(p, execs=kept_prev)
             prev_exec = {(e["family"], e["name"].lower()): e for e in p.get("execs", [])}
             prev_by_family = {}
             for e in p.get("execs", []):

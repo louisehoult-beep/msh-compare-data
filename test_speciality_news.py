@@ -182,5 +182,37 @@ class Jobs(unittest.TestCase):
         self.assertFalse(N.is_job("Response submitted to Government consultation on food advertising"))
 
 
+
+class PolishTest(unittest.TestCase):
+    """Hub Analysts live test (Marcus), 20/11/2026."""
+
+    def test_fda_link_rewritten(self):
+        out = N.polish([{"title": "US FDA 510(k) x", "link": "https://api.fda.gov/K262232",
+                           "published": "2026-11-06"}])
+        self.assertEqual(out[0]["link"],
+                         "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K262232")
+
+    def test_old_journal_paper_dropped(self):
+        old = {"title": "a", "link": "https://www.magonlinelibrary.com/doi/abs/10.12968/jowc.2023.0101?af=R",
+               "published": "2026-11-02"}
+        new = {"title": "b", "link": "https://www.magonlinelibrary.com/doi/abs/10.12968/jowc.2026.0101?af=R",
+               "published": "2026-11-02"}
+        self.assertEqual([i["title"] for i in N.polish([old, new])], ["b"])
+
+    def test_award_labels(self):
+        c = N.polish([{"title": "Award: Insulin Pumps", "link": "https://x/1", "published": "2026-10-26",
+                         "summary": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST. 1790 - Insulin Pumps."}])
+        f = N.polish([{"title": "Award: Falls Prevention", "link": "https://x/2", "published": "2026-10-26",
+                         "summary": "CPS wishes to award a framework agreement for Falls Prevention."}])
+        self.assertEqual(c[0]["title"], "Contract award: Insulin Pumps")
+        self.assertEqual(f[0]["title"], "Framework award: Falls Prevention")
+
+    def test_low_value_dropped(self):
+        rows = [{"title": "Essex author launches children’s book inspired by brother", "link": "https://x/3"},
+                {"title": "Ascensia announces winners of the 2026 ‘This is Diabetes’ art and photography competition",
+                 "link": "https://x/4"},
+                {"title": "MiniMed launches smallest insulin delivery system", "link": "https://x/5"}]
+        self.assertEqual(len(N.polish(rows)), 1)
+
 if __name__ == "__main__":
     unittest.main()

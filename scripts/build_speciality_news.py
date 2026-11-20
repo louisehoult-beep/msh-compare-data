@@ -807,6 +807,66 @@ def fetch_source_items(src, cutoff, pause=0.6):
     return items
 
 
+# ---------------------------------------------------------------- final polish
+# Hub Analysts live test, 19/11/2026 (Marcus), fixed 20/11/2026. Applied to every
+# file as the last step, so it holds whichever route an item came in by.
+FDA_API = re.compile(r"^https?://api\.fda\.gov/+(K\d{6})\b", re.I)
+FDA_PMN = "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=%s"
+# A journal contents feed re-lists papers in a print issue long after they were
+# first published: JoWC's November 2026 issue carried DOIs from 2022 to 2025.
+DOI_YEAR = re.compile(r"/10\.\d{4,9}/[a-z]+\.(\d{4})\.", re.I)
+LOW_VALUE = re.compile(
+    r"children(?:'|’)?s book|\bauthor launches\b|"
+    r"\b(?:art|photography|photo|poetry|writing|drawing)\b[^.]{0,30}\b(?:competition|contest|prize)s?\b|"
+    r"\bannounces winners\b|\bcolouring\b", re.I)
+
+
+def fda_link(url):
+    m = FDA_API.match(url or "")
+    return FDA_PMN % m.group(1).upper() if m else url
+
+
+def old_paper(it):
+    """True for a journal paper whose DOI year is before the year it was listed."""
+    m = DOI_YEAR.search(it.get("link") or "")
+    dt = parse_pubdate(it["published"]) if it.get("published") else None
+    if not m or not dt:
+        return False
+    year = int(m.group(1))
+    # Allow the turn of the year: a December paper in a January issue.
+    return year < dt.year - (1 if dt.month <= 2 else 0)
+
+
+def award_label(it):
+    """Find a Tender award rows arrive titled "Award: X". Most are one trust's
+    contract (100951-2026, Insulin Pumps: a £25,664 three-month Cambridge
+    contract), so say which it is: a framework only when the notice text says so."""
+    t = it.get("title") or ""
+    m = re.match(r"^\s*Award:\s*(.+)$", t)
+    if not m:
+        return t
+    text = t + " " + (it.get("summary") or "")
+    if re.search(r"\bframework\b", text, re.I) and not re.search(r"\bcall(?:ed)?[- ]off\b", text, re.I):
+        return "Framework award: " + m.group(1)
+    return "Contract award: " + m.group(1)
+
+
+def polish(items):
+    out, seen = [], set()
+    for it in items:
+        if LOW_VALUE.search(it.get("title") or "") or old_paper(it):
+            continue
+        it = dict(it)
+        it["link"] = fda_link(it.get("link"))
+        it["title"] = award_label(it)
+        key = (it.get("link") or "").split("?af=", 1)[0].rstrip("/").lower()
+        if key and key in seen:
+            continue
+        seen.add(key)
+        out.append(it)
+    return out
+
+
 def build(only_id=None, dry_run=False, pause=0.6):
     now = datetime.datetime.now(datetime.timezone.utc)
     cutoff = now - datetime.timedelta(days=MAX_AGE_DAYS)
@@ -943,7 +1003,7 @@ def build(only_id=None, dry_run=False, pause=0.6):
         # STABLE sort putting anything flagged as a sales opportunity on top
         # (Lou, 16/09/2026) before the cap, so an opportunity can never be cut.
         primary = carry_forward(fresh, read_previous(slug), cutoff, check=link_gone)
-        items = combine(primary, by_keyword.get(slug, []))
+        items = polish(combine(primary, by_keyword.get(slug, [])))
         doc = {
             "speciality": slug,
             "generatedAt": now.strftime("%Y-%m-%dT%H:%M:%SZ"),

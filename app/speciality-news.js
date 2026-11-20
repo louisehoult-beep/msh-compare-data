@@ -104,9 +104,61 @@
     return (Date.now() - d.getTime()) <= MAX_AGE_DAYS * 86400000;
   }
 
+  /* Hub Analysts live test (Marcus), 20/11/2026. The builder applies the same
+     rules (polish() in scripts/build_speciality_news.py); these cover a file
+     written before it did. FDA 510(k) links pointed at api.fda.gov (404);
+     journal contents feeds re-list papers first published years earlier; one
+     trust's contract was titled "Award:" like a framework; children's books and
+     art competitions are not market news. */
+  var LOW_VALUE = /children(?:'|’)?s book|\bauthor launches\b|\b(?:art|photography|photo|poetry|writing|drawing)\b[^.]{0,30}\b(?:competition|contest|prize)s?\b|\bannounces winners\b|\bcolouring\b/i;
+  function fixLink(u) {
+    var m = /^https?:\/\/api\.fda\.gov\/+(K\d{6})\b/i.exec(u || '');
+    return m ? 'https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=' + m[1].toUpperCase() : u;
+  }
+  function oldPaper(it) {
+    var m = /\/10\.\d{4,9}\/[a-z]+\.(\d{4})\./i.exec(it.link || '');
+    var d = it.published ? new Date(it.published) : null;
+    if (!m || !d || isNaN(d.getTime())) { return false; }
+    return +m[1] < d.getFullYear() - (d.getMonth() <= 1 ? 1 : 0);
+  }
+  function awardLabel(it) {
+    var t = String(it.title || ''), m = /^\s*Award:\s*(.+)$/.exec(t);
+    if (!m) { return t; }
+    var text = t + ' ' + (it.summary || '');
+    return (/\bframework\b/i.test(text) && !/\bcall(?:ed)?[- ]off\b/i.test(text) ? 'Framework award: ' : 'Contract award: ') + m[1];
+  }
+  function polish(items) {
+    var out = [], seen = {};
+    items.forEach(function (it) {
+      if (LOW_VALUE.test(it.title || '') || oldPaper(it)) { return; }
+      var c = {};
+      for (var k in it) { if (Object.prototype.hasOwnProperty.call(it, k)) { c[k] = it[k]; } }
+      c.link = fixLink(it.link);
+      c.title = awardLabel(it);
+      var key = String(c.link || '').split('?af=')[0].replace(/\/+$/, '').toLowerCase();
+      if (key && seen[key]) { return; }
+      seen[key] = 1;
+      out.push(c);
+    });
+    return out;
+  }
+  function stamp(it) {
+    var d = it.published ? new Date(it.published) : null;
+    return d && !isNaN(d.getTime()) ? d.getTime() : 0;
+  }
+
   function render(mount, doc) {
     // The whole rolling month, opportunities first as the file orders them.
-    var items = ((doc && doc.items) || []).filter(inDate);
+    var items = polish(((doc && doc.items) || []).filter(inDate));
+    // The Hub Analysts page (Marcus) reads as "what moved this month": newest
+    // first there, opportunities still badged (live test, 19/11/2026: a 21 Oct
+    // opportunity sat above November news). Speciality pages keep Lou's
+    // opportunities-first order (16/09/2026).
+    if (/\/analysts\/?/.test(location.pathname)) {
+      items = items.map(function (it, i) { return [it, i]; })
+        .sort(function (a, b) { return (stamp(b[0]) - stamp(a[0])) || (a[1] - b[1]); })
+        .map(function (x) { return x[0]; });
+    }
     if (!items.length) { return; }   // additive only — nothing to add, so add nothing
     css();
     var body = '';

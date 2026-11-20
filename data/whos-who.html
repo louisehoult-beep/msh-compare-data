@@ -86,20 +86,22 @@
     <h2>Name coverage across the 18 mapper roles</h2>
     <div class="wwm__bars">
       <div class="wwm__bar"><span>Named now, lawfully</span>
-        <div class="wwm__track"><div class="wwm__fill" style="width:11.8%;background:#2E6B3E"></div></div>
-        <span class="wwm__num">2 / 17</span></div>
+        <div class="wwm__track"><div class="wwm__fill" style="width:11.1%;background:#2E6B3E"></div></div>
+        <span class="wwm__num">2 / 18</span></div>
       <div class="wwm__bar"><span>Partial / findable</span>
-        <div class="wwm__track"><div class="wwm__fill" style="width:29.4%;background:#9A7A2E"></div></div>
-        <span class="wwm__num">5 / 17</span></div>
+        <div class="wwm__track"><div class="wwm__fill" style="width:22.2%;background:#9A7A2E"></div></div>
+        <span class="wwm__num">4 / 18</span></div>
       <div class="wwm__bar"><span>Earn it — relationship only</span>
-        <div class="wwm__track"><div class="wwm__fill" style="width:47%;background:#6B2A34"></div></div>
-        <span class="wwm__num">8 / 17</span></div>
+        <div class="wwm__track"><div class="wwm__fill" style="width:55.6%;background:#6B2A34"></div></div>
+        <span class="wwm__num">10 / 18</span></div>
       <div class="wwm__bar"><span>Not yet checked</span>
-        <div class="wwm__track"><div class="wwm__fill" style="width:11.8%;background:#8C8880"></div></div>
-        <span class="wwm__num">2 / 17</span></div>
+        <div class="wwm__track"><div class="wwm__fill" style="width:11.1%;background:#8C8880"></div></div>
+        <span class="wwm__num">2 / 18</span></div>
     </div>
-    <p class="wwm__note">Patient/carer is counted in &ldquo;earn it&rdquo; but is a different case — never a
-    prospecting target. Percentages are of the mapper&rsquo;s role library, not of any individual account.</p>
+    <p class="wwm__note">Each of the mapper&rsquo;s 18 roles is counted once. Procurement is counted under
+    &ldquo;named now&rdquo; (the national category lead); its trust-level category manager is shown under &ldquo;earn it&rdquo;
+    but not counted twice. Patient/carer is counted in &ldquo;earn it&rdquo; but is a different case — never a
+    prospecting target. The tendering-notice route under &ldquo;partial&rdquo; applies to any role and is not a role of its own. Percentages are of the mapper&rsquo;s role library, not of any individual account.</p>
   </div>
 
   <!-- ================= TIER 1 ================= -->
@@ -111,7 +113,7 @@
     </div>
     <div class="wwm__grid" style="margin-top:12px">
 
-      <div class="wwm__role wwm__role--t1">
+      <div class="wwm__role wwm__role--t1" data-roles="procurement">
         <h3>Procurement — national category lead</h3>
         <div class="wwm__who">NHS Supply Chain category manager</div>
         <div class="wwm__src"><b>Source:</b> NHS Supply Chain category contacts (~70 individuals, direct email and
@@ -123,7 +125,7 @@
         trust relationships; they don&rsquo;t replace them. Handle under the outreach evidence standard — not a bulk list.</div>
       </div>
 
-      <div class="wwm__role wwm__role--t1">
+      <div class="wwm__role wwm__role--t1" data-roles="payer">
         <h3>Payer — trust board tier only</h3>
         <div class="wwm__who">Chief Finance Officer / Finance Director</div>
         <div class="wwm__src"><b>Source:</b> ODS Senior Information Risk Owner register — ~11,363 rows, roughly
@@ -145,11 +147,11 @@
     <div class="wwm__tierhead">
       <span class="wwm__pill wwm__pill--t2">Partial</span>
       <h2 style="margin:0">Findable for some trusts, some of the time</h2>
-      <span class="wwm__count">5 roles</span>
+      <span class="wwm__count">4 roles, plus one route</span>
     </div>
     <div class="wwm__grid" style="margin-top:12px">
 
-      <div class="wwm__role wwm__role--t2">
+      <div class="wwm__role wwm__role--t2" data-roles="any">
         <h3>Any role at a trust currently tendering</h3>
         <div class="wwm__who">Named contact on the notice</div>
         <div class="wwm__src"><b>Source:</b> Find a Tender OCDS API (use the API — the HTML notice pages return 403
@@ -164,7 +166,7 @@
         tender is your reason to make it.</div>
       </div>
 
-      <div class="wwm__role wwm__role--t2">
+      <div class="wwm__role wwm__role--t2" data-roles="ebme">
         <h3>EBME / clinical engineering</h3>
         <div class="wwm__who">EBME / medical physics / clinical engineering</div>
         <div class="wwm__src"><b>Source:</b> Register of Clinical Technologists — <b>therct.org.uk</b> (public, free)
@@ -175,7 +177,7 @@
         skewed to large teaching centres. Realistic route is manual research per target.</div>
       </div>
 
-      <div class="wwm__role wwm__role--t2">
+      <div class="wwm__role wwm__role--t2" data-roles="pharmacy">
         <h3>Pharmacy / aseptic</h3>
         <div class="wwm__who">Chief pharmacist / aseptic services lead</div>
         <div class="wwm__src"><b>Source:</b> some Chief Pharmacists appear in the ODS registers.
@@ -184,7 +186,7 @@
         &ldquo;compiling an internal database&rdquo; and commercial extraction. A CRM import is precisely both.</div>
       </div>
 
-      <div class="wwm__role wwm__role--t2">
+      <div class="wwm__role wwm__role--t2" data-roles="medicines">
         <h3>Medicines optimisation</h3>
         <div class="wwm__who">Formulary pharmacist</div>
         <div class="wwm__src">Same position and same ABPI/IQVIA restriction as Pharmacy. Area Prescribing Committee
@@ -192,7 +194,7 @@
         are not.</div>
       </div>
 
-      <div class="wwm__role wwm__role--t2">
+      <div class="wwm__role wwm__role--t2" data-roles="decision_maker">
         <h3>Decision-maker</h3>
         <div class="wwm__who">Clinical lead + product evaluation committee</div>
         <div class="wwm__src">The clinical lead is sometimes identifiable via a royal college register — but the two
@@ -209,38 +211,38 @@
     <div class="wwm__tierhead">
       <span class="wwm__pill wwm__pill--t3">Earn it</span>
       <h2 style="margin:0">Not obtainable from any public source — by structure, not by oversight</h2>
-      <span class="wwm__count">9 roles</span>
+      <span class="wwm__count">10 roles</span>
     </div>
     <p>Across ODS, CQC, CIPS, the professional bodies, trust board papers and FOI, these roles are absent. In the ODS
     registers, filtered across <b>20,000+ named individuals</b>: procurement <b>3</b>, IPC <b>1</b>, MDSO <b>1</b>,
     EBME <b>5</b>, Category Manager <b>0</b>.</p>
     <div class="wwm__grid" style="margin-top:12px">
-      <div class="wwm__role wwm__role--t3"><h3>Procurement — trust category manager</h3>
+      <div class="wwm__role wwm__role--t3" data-roles="procurement"><h3>Procurement — trust category manager</h3>
         <div class="wwm__who">The person who actually buys your category</div>
         <div class="wwm__src">The single most valuable name in the map, and the least obtainable. See the three
         closed doors below.</div></div>
-      <div class="wwm__role wwm__role--t3"><h3>Infection Prevention &amp; Control</h3>
+      <div class="wwm__role wwm__role--t3" data-roles="ipc"><h3>Infection Prevention &amp; Control</h3>
         <div class="wwm__who">IPC lead nurse / team</div>
         <div class="wwm__src">ODS: <b>1</b> across 20,000+ rows.</div></div>
-      <div class="wwm__role wwm__role--t3"><h3>User</h3>
+      <div class="wwm__role wwm__role--t3" data-roles="user"><h3>User</h3>
         <div class="wwm__who">Front-line clinical team</div>
         <div class="wwm__src">Never published as a named list. Met, not looked up.</div></div>
-      <div class="wwm__role wwm__role--t3"><h3>Manual handling</h3>
+      <div class="wwm__role wwm__role--t3" data-roles="manual_handling"><h3>Manual handling</h3>
         <div class="wwm__who">Manual handling lead / back care adviser</div>
         <div class="wwm__src">No register lists trust manual handling leads, and the title moves about: manual handling lead, moving and handling adviser, back care adviser, patient handling trainer. Many belong to the National Back Exchange; its regional groups are public, its membership list is not. Added 12/08/2026 with the patient handling templates.</div></div>
-      <div class="wwm__role wwm__role--t3"><h3>Tissue viability</h3>
+      <div class="wwm__role wwm__role--t3" data-roles="tissue_viability"><h3>Tissue viability</h3>
         <div class="wwm__who">TVN / service</div>
         <div class="wwm__src">No register. Occasionally named on a trust service page.</div></div>
-      <div class="wwm__role wwm__role--t3"><h3>Microbiology / pathology</h3>
+      <div class="wwm__role wwm__role--t3" data-roles="microbiology"><h3>Microbiology / pathology</h3>
         <div class="wwm__who">Service lead</div>
         <div class="wwm__src">Would be reachable via the RCP register — permission-blocked.</div></div>
-      <div class="wwm__role wwm__role--t3"><h3>Antimicrobial stewardship</h3>
+      <div class="wwm__role wwm__role--t3" data-roles="stewardship"><h3>Antimicrobial stewardship</h3>
         <div class="wwm__who">Micro consultant / pharmacist</div>
         <div class="wwm__src">No register lists post-holders by trust.</div></div>
-      <div class="wwm__role wwm__role--t3"><h3>Decontamination / SSD &amp; Sharps / H&amp;S</h3>
+      <div class="wwm__role wwm__role--t3" data-roles="decontamination sharps"><h3>Decontamination / SSD &amp; Sharps / H&amp;S</h3>
         <div class="wwm__who">Sterile services lead; H&amp;S committee</div>
         <div class="wwm__src">Committee roles; membership unpublished.</div></div>
-      <div class="wwm__role wwm__role--t3"><h3>Dietetics / nutrition</h3>
+      <div class="wwm__role wwm__role--t3" data-roles="dietitian"><h3>Dietetics / nutrition</h3>
         <div class="wwm__who">Nutrition support team</div>
         <div class="wwm__src">No register.</div></div>
     </div>
@@ -273,10 +275,10 @@
       <span class="wwm__count">2 roles</span>
     </div>
     <div class="wwm__grid" style="margin-top:12px">
-      <div class="wwm__role wwm__role--unv"><h3>Sustainability / Green Plan lead</h3>
+      <div class="wwm__role wwm__role--unv" data-roles="sustainability"><h3>Sustainability / Green Plan lead</h3>
         <div class="wwm__src">Trust Green Plans are published and <i>may</i> name a lead. Not checked in the
         20/07/2026 research — do not assume either way.</div></div>
-      <div class="wwm__role wwm__role--unv"><h3>Radiation protection</h3>
+      <div class="wwm__role wwm__role--unv" data-roles="radiation_protection"><h3>Radiation protection</h3>
         <div class="wwm__who">RPA / Medical Physics Expert</div>
         <div class="wwm__src">RPAs are a statutory appointment, so a route may exist. Not checked — flagged rather
         than claimed.</div></div>
@@ -347,16 +349,16 @@
 
   <div class="wwm__card" style="border-top:3px solid var(--gold)">
     <h2>What this means for how you sell</h2>
-    <p>A rep looking at a map showing two evidenced names, five findable with a lookup, and eight marked
+    <p>A rep looking at a map showing two evidenced names, four findable with a lookup, and ten marked
     &ldquo;you must earn this&rdquo; has a genuinely useful account plan. They can see the <i>shape</i> of what they
     don&rsquo;t know. That is materially better than a tool that returns eight roles and leaves them guessing which
     are real.</p>
     <p style="margin-bottom:0"><b>The gap is the product.</b> Anything a competitor could buy from a list is not an
-    advantage. The eight roles in the red tier are your reason to be in the building.</p>
+    advantage. The ten roles in the red tier are your reason to be in the building.</p>
   </div>
 
   <p style="font-size:12px;color:#8a94a0;margin:14px 0 0">Compiled 20/07/2026 from the Stakeholder Mapper role library
-  (17 roles) and primary-source research. Availability verdicts reflect sources checked on that date; permission-blocked
+  (18 roles; counts corrected 20/11/2026) and primary-source research. Availability verdicts reflect sources checked on that date; permission-blocked
   sources may open if asked. Named individuals move — always confirm per target before use.</p>
 
 </div>

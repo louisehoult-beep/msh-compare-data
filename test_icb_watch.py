@@ -391,6 +391,20 @@ class DatedDigitalLeads(unittest.TestCase):
         v.check_icb_watch(d, today_iso="2026-10-21")
         self.assertIn("only the current one may show", " ".join(m for _, m in v.fails))
 
+    def test_membership_table_partner_members_dropped(self):
+        # Lincolnshire strategic board, 20/11/2026: name / role / representation.
+        lines = ["NAME", "ROLE/TITLE", "REPRESENTATION",
+                 "Dr. Sunil Hindocha", "Medical Director", "Clinical and Care Directorate – NHS LICB",
+                 "Dr. Anne-Louise Schokker", "Medical Director", "Lincolnshire Community Health Services NHS Trust",
+                 "Nicole Atkinson", "Medical Director", "East Midlands Ambulance Service",
+                 "Dr. Georgina Keenleyside", "Medical Director", "St. Barnabas Hospice",
+                 "Dr Karen Dunderdale", "Director of Nursing", "United Lincolnshire Hospitals NHS Trust"]
+        partners = []
+        got = [p["name"] for p in w.extract_people(lines, partners)]
+        self.assertEqual(got, ["Dr. Sunil Hindocha"])
+        self.assertIn("nicole atkinson", partners)
+        self.assertEqual(len(partners), 4)
+
     def test_panel_lists_current_names_and_starred_dated(self):
         import build_speciality_panels as bp
         _, d = self.doc()

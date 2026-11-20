@@ -59,6 +59,17 @@
     + '.icbw .icbw-foot{font-size:12.5px;color:#37485a;margin-top:12px}'
     + '@media (max-width:640px){.icbw{padding:16px}.icbw .icbw-row .k{display:block;min-width:0}}';
 
+  /* "Recent changes" is about who leads an ICB and how ICBs are structured
+     (Hub Analysts live test, 19/11/2026: formulary page edits and new committee
+     minutes were showing as ICB changes). Those events stay in the data for the
+     Live Desk and the speciality panels; this panel shows leadership and structure
+     only. */
+  function isLeadership(ev){
+    if (ev.kind === 'cluster') return false;
+    if (/formulary|minutes|page text changed/i.test(ev.headline || '')) return false;
+    return true;
+  }
+
   function eventHtml(ev, byCode){
     var who = ev.icb && byCode[ev.icb] ? shortName(byCode[ev.icb].name) : 'All ICBs';
     return '<div class="icbw-ev"><div class="icbw-when">' + ukDate(ev.date) + ' · ' + esc(who) + '</div>'
@@ -122,14 +133,15 @@
     (d.clusters || []).forEach(function(c){
       c.forEach(function(code){ if (byCode[code]) byCode[code].clusterCodes = c.filter(function(x){ return x !== code; }); });
     });
-    (d.events || []).forEach(function(ev){
+    var events = (d.events || []).filter(isLeadership);
+    events.forEach(function(ev){
       [ev.icb].concat(ev.alsoIcbs || []).forEach(function(c){ if (c && byCode[c]) byCode[c]._events.push(ev); });
     });
     var inClusters = 0; (d.clusters || []).forEach(function(c){ inClusters += c.length; });
     var regions = []; (d.icbs || []).forEach(function(i){ if (i.region && regions.indexOf(i.region) < 0) regions.push(i.region); });
     regions.sort();
     var st = d.nationalStatement || {};
-    var recent = (d.events || []).slice(0, 12);
+    var recent = events.slice(0, 12);
 
     var h = '<style>' + CSS + '</style><div class="icbw">'
       + '<h3>ICB watch: mergers, clusters and who leads each Integrated Care Board (ICB)</h3>'

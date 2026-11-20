@@ -1682,5 +1682,10 @@
   $('c-copy').addEventListener('click',copy);
   ['c-prob','c-cost','c-vol','c-eff','c-dir','c-price','c-units','c-cash'].forEach(function(id){$(id).addEventListener('input',vcRender);});
   $('tab-calc').addEventListener('click',vcRender);
+  /* ?mapper=<speciality id> (20/11/2026): the Hub Analysts page (Niamh) links here with the
+     rep's speciality so the map opens on it. Only a real SPECS id is taken; anything else is
+     ignored and the picker starts empty as before. Not ?spec=, which other tools on this page use. */
+  (function(){try{var q=new URLSearchParams(location.search).get('mapper');
+    if(q&&SPECS.some(function(x){return x.id===q;}))state.spec=q;}catch(e){}})();
   injectCSS();injectVcCSS();fillGeo();fillSpec();fillProd();ensureMounts();render();renderValueRefs();calc();vcMount();vcRender();loadTrustData();
 })();
