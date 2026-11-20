@@ -1,5 +1,5 @@
 {
-  "_note": "Speciality definitions for the ICB pack (scripts/build_icb_pack.py --speciality <id>). market = BNF presentation-code prefixes (NHSBSA English Prescribing Dataset). genericWords = first words of presentation names that are substances or formulations, not brands, so they fall into 'other'. rtt = NHS England Referral to Treatment treatment function, or null where none matches (it then reads Not applicable, never a substitute). Definitions are ours and are printed in the tool.",
+  "_note": "Speciality definitions for the ICB pack (scripts/build_icb_pack.py --speciality <id>). market = BNF presentation-code prefixes (NHSBSA English Prescribing Dataset). genericWords = first words of presentation names that are substances or formulations, not brands, so they fall into 'other'. notBrands = first words that are a range number, a drainage bag or a maker's name rather than a product brand (also 'other'; added 20/11/2026 after the live test: '365', 'Independence', 'Eakin'). brandLabels = first words that are only part of the product name, shown whole ('Nurse' is 'Nurse It'). marketNote = printed beside every share so the denominator is plain. rtt = NHS England Referral to Treatment treatment function, or null where none matches (it then reads Not applicable, never a substitute). Definitions are ours and are printed in the tool.",
   "dermatology": {
     "label": "Dermatology emollients", "short": "Dermatology", "noun": "emollient",
     "market": ["130201", "2122"],
@@ -23,6 +23,7 @@
     "market": ["0601"],
     "marketText": "BNF 0601 (drugs used in diabetes, including insulins, antidiabetic drugs and blood glucose testing), primary care items",
     "shards": ["0601"], "brandFloor": 5000,
+    "brandLabels": {"On": "On Call", "True": "True Metrix", "Mobile": "Accu-Chek Mobile", "Instant": "Accu-Chek Instant", "Guide": "Accu-Chek Guide", "Performa": "Accu-Chek Performa", "Aviva": "Accu-Chek Aviva"},
     "genericWords": ["metformin", "dapagliflozin", "gliclazide", "sitagliptin", "empagliflozin", "linagliptin", "tirzepatide", "alogliptin", "canagliflozin", "pioglitazone", "glimepiride", "glucose", "insulin", "semaglutide", "saxagliptin", "liraglutide", "dulaglutide", "exenatide", "acarbose", "repaglinide", "nateglinide", "vildagliptin", "ertugliflozin", "lixisenatide", "glibenclamide", "glipizide", "tolbutamide", "glucagon", "dextrose", "ketone", "blood", "lancets", "needles", "sodium", "biphasic", "isophane", "soluble"],
     "rtt": null,
     "defaultBrand": "mounjaro", "defaultIcb": "QHL", "policies": false, "otcNational": false
@@ -32,6 +33,9 @@
     "market": ["2003"],
     "marketText": "BNF-code section 2003 (wound management and other dressings, appliance list), primary care items",
     "shards": ["2003"], "brandFloor": 2000,
+    "notBrands": ["365", "Independence", "Eakin"],
+    "brandLabels": {"Nurse": "Nurse It", "Kendall": "Kendall AMD"},
+    "marketNote": "The market is every primary care item in BNF-code section 2003, which includes sterile dressing packs (Dressit and Nurse It are two of the largest lines), wound drainage bags and other appliances as well as dressings. A brand's share is of that whole section, not of dressings alone.",
     "genericWords": ["gauze", "cotton", "paraffin", "wool", "adhesive", "dressing", "dressings", "bandage", "sodium", "zinc", "silver", "foam", "hydrocolloid", "alginate", "film", "tape", "swab", "swabs", "sterile", "povidone", "iodine"],
     "rtt": null,
     "defaultBrand": "allevyn", "defaultIcb": "QHL", "policies": false, "otcNational": false

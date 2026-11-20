@@ -87,11 +87,20 @@ SPECS = {k: v for k, v in SPECS.items() if not k.startswith("_")}
 SPEC = dict(SPECS["dermatology"], id="dermatology")
 
 
+def brand_key(word):
+    return re.sub(r"[^a-z0-9]", "", (word or "").lower())
+
+
 def set_spec(sid):
-    global SPEC, GENERIC_WORDS, BRAND_FLOOR
+    global SPEC, GENERIC_WORDS, BRAND_FLOOR, NOT_BRANDS, BRAND_LABELS
     SPEC = dict(SPECS[sid], id=sid)
     GENERIC_WORDS = set(SPEC["genericWords"])
     BRAND_FLOOR = SPEC["brandFloor"]
+    # notBrands: first words that are a range number, a bag or a maker's name rather than a
+    # product brand (they fall into 'other'). brandLabels: first words that are only part of
+    # the product name ("Nurse" of "Nurse It"), shown as the whole name. Both per speciality.
+    NOT_BRANDS = {brand_key(w) for w in SPEC.get("notBrands", [])}
+    BRAND_LABELS = {brand_key(k): v for k, v in SPEC.get("brandLabels", {}).items()}
 
 
 set_spec("dermatology")
@@ -291,25 +300,67 @@ def load_rtt_history(cache):
 # practice-level pull: every brand, not just one
 # --------------------------------------------------------------------------
 OTHER = "other"
+# Practice-level cache, keyed "<PRACTICE_CODE>|<ICB_CODE that month>". The name changed on
+# 20/11/2026 when ICB_CODE was added, so an older cache is not read by mistake.
+PRAC_CACHE = "epd-practice-icb-brand-months.json"
+
+
+def prac_key(pr, icb):
+    return "%s|%s" % (pr, icb or "-")
+
+
+def split_key(k):
+    pr, _, icb = k.partition("|")
+    return pr, icb or "-"
+
+
+def icb_attribution(prac, periods):
+    """{period: {practice_key: current ICB}}, by the rule the item series use
+    (refresh_gp_prescribing rule 5): a practice goes to the ICB the latest month puts it
+    in; rows from an old ICB go to the current ICB that took most of its practices, with
+    split ICBs resolved practice by practice. So brand cost per ICB sits on the same
+    footing as brand items per ICB, community prescribers included."""
+    import refresh_gp_prescribing as g
+    current = {}
+    for k in prac[periods[-1]]:
+        pr, icb = split_key(k)
+        if icb != g.UNIDENTIFIED:
+            current[pr] = icb
+    out = {}
+    for p in periods:
+        mp = collections.Counter()
+        for k, bw in prac[p].items():
+            pr, icb = split_key(k)
+            mp[(pr, icb)] += sum(v[0] for v in bw.values())
+        primary, exceptions, _carried = g.plan_attribution([(pr, icb, i) for (pr, icb), i in mp.items()], current)
+        out[p] = {}
+        for k in prac[p]:
+            pr, icb = split_key(k)
+            out[p][k] = exceptions[pr] if pr in exceptions else primary.get(icb, g.UNIDENTIFIED)
+    return out
 
 
 def fetch_practice_level(cache, periods, refresh=False):
     """Practice x brand-word items and cost per month, England, through the NHSBSA datastore
     SQL API (server-side aggregation; ~133,000 rows a month, ~8 seconds)."""
     import refresh_gp_prescribing as g
-    path = os.path.join(cache, cfile("epd-practice-brand-months.json"))
+    path = os.path.join(cache, cfile(PRAC_CACHE))
     have = json.load(open(path)) if os.path.exists(path) and not refresh else {}
     res = dict(g.resources())
     for p in periods:
         if p in have:
             continue
         t = res[p]
-        q = ("SELECT PRACTICE_CODE AS pr, SPLIT(BNF_PRESENTATION_NAME,' ')[OFFSET(0)] AS b, "
+        # ICB_CODE comes with every row: community services (Y-codes such as district
+        # nursing teams) prescribe much of the dressings market and are not GP practices,
+        # so they are absent from the GP-registration map. Their cost must still reach
+        # their ICB, by the same rule the item series use (fixed 20/11/2026).
+        q = ("SELECT PRACTICE_CODE AS pr, ICB_CODE AS icb, SPLIT(BNF_PRESENTATION_NAME,' ')[OFFSET(0)] AS b, "
              "SUM(ITEMS) AS i, SUM(ACTUAL_COST) AS c FROM `{t}` "
-             "WHERE " + epd_where() + " GROUP BY PRACTICE_CODE, b").format(t=t)
+             "WHERE " + epd_where() + " GROUP BY PRACTICE_CODE, ICB_CODE, b").format(t=t)
         month = collections.defaultdict(dict)
         for r in g.sql(t, q):
-            month[r["pr"]][r["b"]] = [float(r["i"] or 0), float(r["c"] or 0)]
+            month[prac_key(r["pr"], r["icb"])][r["b"]] = [float(r["i"] or 0), float(r["c"] or 0)]
         have[p] = month
         json.dump(have, open(path, "w"))
     return have
@@ -358,8 +409,6 @@ def hospital_brand_key(name):
     return brand_key(w[0]) if w else ""
 
 
-def brand_key(word):
-    return re.sub(r"[^a-z0-9]", "", (word or "").lower())
 
 def zip_csv(path):
     with zipfile.ZipFile(path) as z:
@@ -535,7 +584,7 @@ def assemble(cache):
     rtt_hist = load_rtt_history(cache) if SPEC.get("rtt") else {}
     rtt_periods = sorted(rtt_hist)
     imd = load_imd_recomputed(cache)
-    prac = json.load(open(os.path.join(cache, cfile("epd-practice-brand-months.json"))))
+    prac = json.load(open(os.path.join(cache, cfile(PRAC_CACHE))))
     sources = json.load(open(os.path.join(cache, "sources.json")))
 
     # brand list: first words with enough national items, display name from NHSBSA
@@ -545,8 +594,9 @@ def assemble(cache):
             for w, (i, c) in bw.items():
                 tot[brand_key(w)] += i
                 disp.setdefault(brand_key(w), w)
-    brands = [k for k, v in tot.most_common() if v >= BRAND_FLOOR and k not in GENERIC_WORDS]
+    brands = [k for k, v in tot.most_common() if v >= BRAND_FLOOR and k not in GENERIC_WORDS and k not in NOT_BRANDS]
     bset = set(brands)
+    attr = icb_attribution(prac, periods)
 
     def bk_of(w):
         k = brand_key(w)
@@ -558,19 +608,22 @@ def assemble(cache):
     icb_cost = collections.defaultdict(lambda: collections.defaultdict(lambda: [0.0] * n))
     unmapped = 0.0
     for k, p in enumerate(periods):
-        for pr, bw in prac[p].items():
+        for pk, bw in prac[p].items():
+            pr, _ = split_key(pk)
             g = gmap.get(pr)
+            cur = attr[p][pk]
             for w, (i, c) in bw.items():
                 b = bk_of(w)
                 nat["items"][b][k] += i
                 nat["items"]["_market"][k] += i
                 nat["cost"][b][k] += c
                 nat["cost"]["_market"][k] += c
+                # cost follows the EPD ICB (as the item series do), not the GP map
+                icb_cost[cur][b][k] += c
+                icb_cost[cur]["_market"][k] += c
                 if not g:
                     unmapped += i
                     continue
-                icb_cost[g["icb"]][b][k] += c
-                icb_cost[g["icb"]]["_market"][k] += c
                 d = pcn.setdefault((g["icb"], g["pcn"]), {"name": g["pcn_name"], "practices": set(),
                                                            "m": [0.0] * n, "b": collections.defaultdict(lambda: [0.0] * n)})
                 d["practices"].add(pr)
@@ -656,7 +709,8 @@ def assemble(cache):
                        "defaultBrand": SPEC["defaultBrand"], "defaultIcb": SPEC["defaultIcb"],
                        "all": [{"id": k, "label": v["label"]} for k, v in SPECS.items()]},
         "market": SPEC["marketText"],
-        "brands": [{"key": b, "label": disp[b]} for b in brands],
+        "brands": [{"key": b, "label": BRAND_LABELS.get(b, disp[b]), "items12": int(sum(nat["items"][b][-12:]))} for b in brands],
+        "marketNote": SPEC.get("marketNote"),
         "icbs": icb_meta, "rank": rank,
         "national": {"items": {b: [int(x) for x in nat["items"][b]] for b in brands + ["_market"]},
                      "cost": {b: [r2(x, 0) for x in nat["cost"][b]] for b in brands + ["_market"]},
@@ -690,14 +744,14 @@ NOTICE = {
 
 def hospital_words(cache, periods):
     """Brand display words, from the practice-level pull (same rule as assemble)."""
-    prac = json.load(open(os.path.join(cache, cfile("epd-practice-brand-months.json"))))
+    prac = json.load(open(os.path.join(cache, cfile(PRAC_CACHE))))
     tot, disp = collections.Counter(), {}
     for p in periods[-12:]:
         for bw in prac[p].values():
             for w, (i, c) in bw.items():
                 tot[brand_key(w)] += i
                 disp.setdefault(brand_key(w), w)
-    return [disp[k] for k, v in tot.most_common() if v >= BRAND_FLOOR and k not in GENERIC_WORDS]
+    return [disp[k] for k, v in tot.most_common() if v >= BRAND_FLOOR and k not in GENERIC_WORDS and k not in NOT_BRANDS]
 
 
 def up_to_date(out, gp_periods):

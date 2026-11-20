@@ -125,14 +125,19 @@
     var icbOpts = Object.keys(D.icbs).sort(function (a, b) { return D.icbs[a].pretty.localeCompare(D.icbs[b].pretty); })
       .map(function (c) { return '<option value="' + c + '"' + (c === icb ? ' selected' : '') + '>' + esc(D.icbs[c].pretty) + '</option>'; }).join('');
     var specOpts = D.speciality.all.map(function (x) { return '<option value="' + x.id + '"' + (x.id === SPEC_ID ? ' selected' : '') + '>' + esc(x.label) + '</option>'; }).join('');
-    var brandOpts = D.brands.map(function (b) { return '<option value="' + b.key + '"' + (b.key === brand ? ' selected' : '') + '>' + esc(b.label) + '</option>'; }).join('');
+    // Ranked by items, England, latest 12 months (most first), so the list reads as a league table.
+    var brandOpts = D.brands.map(function (b) { return { b: b, n: b.items12 != null ? b.items12 : sum(last12(D.national.items[b.key] || [])) }; })
+      .sort(function (x, y) { return y.n - x.n; })
+      .map(function (x, i) { return '<option value="' + x.b.key + '"' + (x.b.key === brand ? ' selected' : '') + '>' + (i + 1) + '. ' + esc(x.b.label) + ' (' + Math.round(x.n).toLocaleString('en-GB') + ' items)</option>'; }).join('');
+    var mktNote = D.marketNote ? '<p class="note"><b>What the share is of.</b> ' + esc(D.marketNote) + '</p>' : '';
 
     // 1 national
     var natRtt = D.national.rtt;
     var nat = '<div class="kpis"><div class="kpi"><b>' + num(sum(last12(nb))) + '</b><span>' + esc(BL) + ' items, 12 months to ' + labels[labels.length - 1] + '</span></div>'
       + '<div class="kpi"><b>' + pc(ratio(sum(last12(nb)), sum(last12(nm_)))) + '</b><span>' + esc(BL) + ' share of ' + esc(N) + ' items (our market definition)</span></div>'
       + '<div class="kpi"><b>' + trendTxt(trend(nb, floor)) + '</b><span>' + esc(BL) + ' items ' + labels[labels.length - 1] + ' against ' + labels[0] + '</span></div>'
-      + '<div class="kpi"><b>' + money(sum(last12(nbc))) + '</b><span>' + esc(BL) + ' actual cost, 12 months</span></div></div>'
+      + '<div class="kpi"><b>' + money(sum(last12(nbc))) + '</b><span>' + esc(BL) + ' actual cost, 12 months, every prescriber in the ICB (community nursing services included)</span></div></div>'
+      + mktNote
       + '<p>' + (!D.speciality.rtt ? '<span class="nv">Not applicable</span>: NHS England publishes no Referral to Treatment waiting time for ' + esc(SP.toLowerCase()) + ' as a treatment function.' : natRtt ? esc(SP) + ', England, ' + esc(D.rttPeriod) + ': ' + num(natRtt.total) + ' incomplete pathways, median wait ' + num(natRtt.median, 1) + ' weeks, ' + num(natRtt.w52) + ' waiting 52 weeks or more.' : NV) + '</p>';
 
     // 2 ICB view
@@ -141,7 +146,8 @@
     var icbv = '<div class="kpis"><div class="kpi"><b>' + num(sum(last12(bi))) + '</b><span>' + esc(BL) + ' items, 12 months</span></div>'
       + '<div class="kpi"><b>' + pc(rk.share12) + '</b><span>share of ' + esc(N) + ' items in ' + esc(nm) + '</span></div>'
       + '<div class="kpi"><b>' + trendTxt(trend(bi, floor)) + '</b><span>' + esc(BL) + ' items ' + labels[labels.length - 1] + ' against ' + labels[0] + '</span></div>'
-      + '<div class="kpi"><b>' + money(sum(last12(bcost))) + '</b><span>' + esc(BL) + ' actual cost, 12 months</span></div></div>'
+      + '<div class="kpi"><b>' + money(sum(last12(bcost))) + '</b><span>' + esc(BL) + ' actual cost, 12 months, every prescriber in the ICB (community nursing services included)</span></div></div>'
+      + mktNote
       + line(bi, labels, DEEP)
       + '<p class="note">Monthly ' + esc(BL) + ' items in the ICB. Items in the ICB market: ' + num(m12) + ' in the 12 months.</p>'
       + '<h3>Top products in the ICB (12 months, items)</h3><table><tr><th>Product</th><th>Items</th><th>Share of ' + esc(N) + ' items</th></tr>' + prod + '</table>';
@@ -221,7 +227,7 @@
       return '<tr' + (c === icb ? ' style="background:#F3E9D2"' : '') + '><td>' + esc(mm.pretty) + '</td>' + td(x.share12, pc(x.share12)) + td(rShare[c], rShare[c] || '') + td(x.cv, x.cv == null ? NV : x.cv.toFixed(2)) + td(rCv[c], rCv[c] || '')
         + td(mm.imd && mm.imd.rank, mm.imd ? mm.imd.rank : NV) + (D.speciality.rtt ? td(rr && rr.median, rr ? num(rr.median, 1) : NV) + td(rr && rr.w52, rr ? num(rr.w52) : NV) : '') + '</tr>';
     }).join('');
-    var rank = '<div class="scroll"><table id="icbp-rank" class="sort"><tr><th>ICB</th><th>' + esc(BL) + ' share of ' + esc(N) + ' items</th><th>Rank (1 = lowest share)</th><th>PCN spread (CV)</th><th>Rank (1 = most varied)</th><th>IMD rank of ' + codes.length + ' (1 = most deprived)</th>' + (D.speciality.rtt ? '<th>' + esc(SP) + ' median wait (weeks)</th><th>' + esc(SP) + ' 52 weeks or more</th>' : '') + '</tr>' + trs + '</table></div>'
+    var rank = '<div class="scroll"><table id="icbp-rank" class="sort"><tr><th>ICB</th><th>' + esc(BL) + ' share of ' + esc(N) + ' items</th><th>Rank (1 = lowest share)</th><th>PCN spread (CV)</th><th>Rank (1 = most varied)</th><th>IMD rank of ' + codes.length + ' (1 = most deprived)</th>' + (D.speciality.rtt ? '<th>' + esc(SP) + ' median wait (weeks)</th><th>' + esc(SP) + ' 52 weeks or more</th>' : '') + '</tr>' + trs + '</table></div>' + mktNote
       + '<p class="note">Click a heading to sort. No composite score: pick the focus by reading the columns, not by a formula we invented. Share and spread are our definitions, printed below.</p>';
 
     var srcs = D.licences.map(function (l) { return '<li>' + esc(l.source) + ': ' + esc(l.licence) + '</li>'; }).join('');
@@ -231,9 +237,9 @@
       + '<h1 contenteditable="true">' + esc(BL) + ' — ' + esc(nm) + '</h1>'
       + '<p>' + esc(D.speciality.label) + ', from open data only. Every figure is from a named published source; anything that could not be verified is marked <span class="nv">Not verified</span>. Every block is editable in your browser: change it, then save an edited copy.</p>'
       + '<div class="pick"><div><label for="icbp-icb">Integrated Care Board (ICB)</label><select id="icbp-icb">' + icbOpts + '</select></div>'
-      + '<div><label for="icbp-spec">Speciality</label><select id="icbp-spec">' + specOpts + '</select></div><div><label for="icbp-brand">Brand</label><select id="icbp-brand">' + brandOpts + '</select></div></div>'
+      + '<div><label for="icbp-spec">Speciality</label><select id="icbp-spec">' + specOpts + '</select></div><div><label for="icbp-brand">Brand (ranked by items, England, 12 months)</label><select id="icbp-brand">' + brandOpts + '</select></div></div>'
       + '<p><button id="icbp-save">Save edited copy</button><button id="icbp-print">Print or save as PDF</button></p></div></div>'
-      + sec('', '1 · National overview', 'England', nat + '<p class="note">Market definition: ' + esc(D.market) + '. Brand: the first word of the NHSBSA presentation name. Items are the NHSBSA English Prescribing Dataset, primary care, 12 months to ' + labels[labels.length - 1] + '.</p>')
+      + sec('', '1 · National overview', 'England', nat + '<p class="note">Market definition: ' + esc(D.market) + '. Brand: the first word of the NHSBSA presentation name, shown as the full product name where the first word is only part of it (Nurse It), with range numbers, drainage bags and maker names left in other. Items are the NHSBSA English Prescribing Dataset, primary care, 12 months to ' + labels[labels.length - 1] + '.</p>')
       + sec('warm', '2 · ICB view', 'Brand share and trend', icbv)
       + sec('', '2b · Hospital use', 'Secondary care: medicines issued by trust pharmacies', hosp)
       + sec('warm', '3 · Primary Care Networks', 'Where it is prescribed, and how much it varies', pcn)

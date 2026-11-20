@@ -53,6 +53,7 @@ for sid in sorted(bip.SPECS):
     D = os.path.join(HERE, "data", "icb-pack", sid)
     idx = json.load(open(os.path.join(D, "index.json")))
     n = len(idx["periods"])
+    spec_cfg = bip.SPECS[sid]
     check(idx["speciality"]["id"] == sid, "%s: index speciality id" % sid)
     check(len(idx["icbs"]) == 36, "%s: 36 ICBs expected, got %d" % (sid, len(idx["icbs"])))
     check(len(idx["brands"]) >= 5, "%s: too few brands offered (%d)" % (sid, len(idx["brands"])))
@@ -76,6 +77,25 @@ for sid in sorted(bip.SPECS):
         check(all(c["list"] > 0 for c in s["pcns"]), "%s %s PCN without list size" % (sid, code))
         check(all(sum(b["items"][k] for b in s["brands"].values()) + s["otherBrands"]["items"][k] == s["market"]["items"][k]
                   for k in range(n)), "%s %s brands + other must equal market" % (sid, code))
+    # 6. COST REACHES THE ICB (added 20/11/2026). Brand cost per ICB once came only from GP
+    # practices in the registration map, so community nursing services (Y-codes) were lost and
+    # BSol Allevyn read GBP 728,485 against GBP 1,201,320 in the EPD. ICB costs must now add up
+    # to the national cost, less only rows NHSBSA attributes to no ICB.
+    for key in ["_market"] + [b["key"] for b in idx["brands"][:10]]:
+        nat12 = sum((idx["national"]["cost"][key] or [0])[-12:])
+        icb12 = sum(sum(x or 0 for x in ((s["market"]["cost"] if key == "_market" else s["brands"][key]["cost"])[-12:]))
+                    for s in shards.values())
+        check(nat12 and icb12 >= 0.98 * nat12, "%s %s: ICB costs add to %.0f of national %.0f (community prescribers lost?)"
+              % (sid, key, icb12, nat12))
+    # 7. BRAND LIST: ranked by items, no configured non-brands
+    nb = {bip.brand_key(w) for w in spec_cfg.get("notBrands", [])}
+    check(not nb & {b["key"] for b in idx["brands"]}, "%s: a notBrands word is offered as a brand" % sid)
+    its = [b.get("items12") for b in idx["brands"]]
+    check(all(x is not None for x in its) and its == sorted(its, reverse=True), "%s: brands must be ranked by items" % sid)
+    for k, lab in spec_cfg.get("brandLabels", {}).items():
+        for b in idx["brands"]:
+            if b["key"] == bip.brand_key(k):
+                check(b["label"] == lab, "%s: %s should read %s" % (sid, k, lab))
     for b, rows in idx["rank"].items():
         for code, r in rows.items():
             base = shards[code]["brands"][b]["items"][0]
