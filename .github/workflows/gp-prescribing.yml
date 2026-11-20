@@ -65,6 +65,12 @@ jobs:
       - name: Rebuild the emollient explorer (trends, practice and PCN files) when the month changed
         run: |
           if git status --porcelain data/gp-prescribing/ | grep -q .; then
+            # The explorer test reconciles trends.json to the dermatology panel's
+            # marketShare, and that panel reads data/gp-prescribing/. Rebuild it here
+            # (offline, under a second) so a new month lands in both together. Without
+            # this the test fails on every new month and the month never commits
+            # (first seen 20/11/2026 on 202609).
+            python3 scripts/build_speciality_panels.py dermatology
             python3 scripts/build_emollient_explorer.py --pcn
             python3 test_emollient_explorer.py
           else
@@ -78,7 +84,7 @@ jobs:
         run: |
           git config user.name "hub-bot"
           git config user.email "contact@elevateandthrive.uk"
-          git add data/gp-prescribing/ data/emollient-explorer/
+          git add data/gp-prescribing/ data/emollient-explorer/ data/speciality-panels/dermatology.json
           if git diff --cached --quiet; then
             echo "no change to commit"
             exit 0
