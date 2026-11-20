@@ -20,6 +20,24 @@ enum Hub {
               let h = u.host?.lowercased() else { return false }
         return h == host || h == "www." + host
     }
+
+    // Hub login (msh-login/v1/verify) sends the browser through the shared sign-in bridge
+    // on elevateandthrive.uk, which then returns to the Hub page in redirect_to.
+    // That one path must stay in the app, or the post-login page opens in the phone's browser.
+    static let bridgeHost = "elevateandthrive.uk"
+    static let bridgePath = "/sso-bridge"
+
+    static func isLoginBridge(_ url: URL?) -> Bool {
+        guard let u = url, u.scheme?.lowercased() == "https", let h = u.host?.lowercased() else { return false }
+        return (h == bridgeHost || h == "www." + bridgeHost) && u.path.hasPrefix(bridgePath)
+    }
+
+    static func staysInside(_ url: URL?) -> Bool { isHub(url) || isLoginBridge(url) }
+
+    // Never write a sign-in token to the log.
+    static func forLog(_ url: URL) -> String {
+        url.absoluteString.replacingOccurrences(of: "(msh_token=)[^&]*", with: "$1***", options: .regularExpression)
+    }
 }
 
 class MainViewController: CAPBridgeViewController {
@@ -148,7 +166,7 @@ final class HubWebViewController: UIViewController, WKNavigationDelegate, WKUIDe
             openOutside(url); decisionHandler(.cancel); return
         }
         if action.targetFrame?.isMainFrame == false { decisionHandler(.allow); return }   // embeds
-        if Hub.isHub(url) || ["about", "data", "blob"].contains(scheme) { decisionHandler(.allow); return }
+        if Hub.staysInside(url) || ["about", "data", "blob"].contains(scheme) { decisionHandler(.allow); return }
         openOutside(url); decisionHandler(.cancel)
     }
 
@@ -159,7 +177,7 @@ final class HubWebViewController: UIViewController, WKNavigationDelegate, WKUIDe
     }
 
     private func openOutside(_ url: URL) {
-        NSLog("MSHHubProbe outside %@", url.absoluteString)
+        NSLog("MSHHubProbe outside %@", Hub.forLog(url))
         UIApplication.shared.open(url)
     }
 

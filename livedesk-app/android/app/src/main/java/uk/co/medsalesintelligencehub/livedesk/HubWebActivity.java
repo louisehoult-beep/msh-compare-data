@@ -70,6 +70,28 @@ public class HubWebActivity extends AppCompatActivity {
         return h.equals(HUB_HOST) || h.equals("www." + HUB_HOST);
     }
 
+    // Hub login (msh-login/v1/verify) sends the browser through the shared sign-in bridge
+    // on elevateandthrive.uk, which then returns to the Hub page in redirect_to.
+    // That one path must stay in the app, or the post-login page opens in the phone's browser.
+    static final String BRIDGE_HOST = "elevateandthrive.uk";
+    static final String BRIDGE_PATH = "/sso-bridge";
+
+    static boolean isLoginBridge(Uri u) {
+        if (u == null || u.getHost() == null || !"https".equals(u.getScheme())) return false;
+        String h = u.getHost().toLowerCase();
+        String p = u.getPath() == null ? "" : u.getPath();
+        return (h.equals(BRIDGE_HOST) || h.equals("www." + BRIDGE_HOST)) && p.startsWith(BRIDGE_PATH);
+    }
+
+    static boolean staysInside(Uri u) {
+        return isHub(u) || isLoginBridge(u);
+    }
+
+    // Never write a sign-in token to the log.
+    static String forLog(Uri u) {
+        return String.valueOf(u).replaceAll("(msh_token=)[^&]*", "$1***");
+    }
+
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle saved) {
@@ -134,7 +156,7 @@ public class HubWebActivity extends AppCompatActivity {
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest req) {
                 if (!req.isForMainFrame()) return false;
                 Uri u = req.getUrl();
-                if (isHub(u)) return false;
+                if (staysInside(u)) return false;
                 String sc = u.getScheme() == null ? "" : u.getScheme();
                 if (sc.equals("about") || sc.equals("data") || sc.equals("blob")) return false;
                 openOutside(u);
@@ -193,11 +215,11 @@ public class HubWebActivity extends AppCompatActivity {
     }
 
     private void openOutside(Uri u) {
-        Log.i(TAG, "outside " + u);
+        Log.i(TAG, "outside " + forLog(u));
         try {
             startActivity(new Intent(Intent.ACTION_VIEW, u).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         } catch (ActivityNotFoundException e) {
-            Log.w(TAG, "no app for " + u);
+            Log.w(TAG, "no app for " + forLog(u));
         }
     }
 
