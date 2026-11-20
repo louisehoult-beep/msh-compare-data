@@ -366,6 +366,29 @@ def fetch_practice_level(cache, periods, refresh=False):
     return have
 
 
+def fetch_prescriber_names(cache, periods, refresh=False):
+    """{PRACTICE_CODE: PRACTICE_NAME} for every prescriber code in the market, latest month
+    then earlier months for codes that have since gone. Names the community services that
+    sit outside any PCN (added 20/11/2026)."""
+    import refresh_gp_prescribing as g
+    path = os.path.join(cache, cfile("epd-prescriber-names.json"))
+    if os.path.exists(path) and not refresh:
+        have = json.load(open(path))
+        if have.get("_periods") == periods:
+            return have
+    res = dict(g.resources())
+    names = {}
+    for p in reversed(periods):
+        t = res[p]
+        q = ("SELECT PRACTICE_CODE AS pr, MAX(PRACTICE_NAME) AS n FROM `%s` WHERE %s GROUP BY PRACTICE_CODE"
+             % (t, epd_where()))
+        for r in g.sql(t, q):
+            names.setdefault(r["pr"], r["n"])
+    names["_periods"] = periods
+    json.dump(names, open(path, "w"))
+    return names
+
+
 def scmd_tables(periods):
     """{YYYYMM: resource} for NHSBSA Secondary Care Medicines Data: finalised where it
     exists (to March 2026), provisional after."""
@@ -607,6 +630,12 @@ def assemble(cache):
     nat = {"items": collections.defaultdict(lambda: [0.0] * n), "cost": collections.defaultdict(lambda: [0.0] * n)}
     icb_cost = collections.defaultdict(lambda: collections.defaultdict(lambda: [0.0] * n))
     unmapped = 0.0
+    # Prescriber codes outside the GP-registration map (community nursing services and other
+    # non-practice prescribers), per current ICB. They have no PCN and no registered list,
+    # so they are shown as their own rows, never folded into a PCN (added 20/11/2026).
+    comm = {}
+    npath = os.path.join(cache, cfile("epd-prescriber-names.json"))
+    pnames = json.load(open(npath)) if os.path.exists(npath) else {}
     for k, p in enumerate(periods):
         for pk, bw in prac[p].items():
             pr, _ = split_key(pk)
@@ -623,6 +652,9 @@ def assemble(cache):
                 icb_cost[cur]["_market"][k] += c
                 if not g:
                     unmapped += i
+                    cd = comm.setdefault((cur, pr), {"m": [0.0] * n, "b": collections.defaultdict(lambda: [0.0] * n)})
+                    cd["m"][k] += i
+                    cd["b"][b][k] += i
                     continue
                 d = pcn.setdefault((g["icb"], g["pcn"]), {"name": g["pcn_name"], "practices": set(),
                                                            "m": [0.0] * n, "b": collections.defaultdict(lambda: [0.0] * n)})
@@ -676,6 +708,11 @@ def assemble(cache):
                          "trusts": [{"code": o, "name": (tmap.get(o) or {}).get("n", o),
                                      "cost12": {b: r2(v, 0) for b, v in bb.items()}}
                                     for o, bb in sorted(hosp_trust[code].items())]},
+            "outsidePcn": [{"code": pr, "name": pnames.get(pr) or pr,
+                            "market": [int(x) for x in d["m"]],
+                            "brands": {b: [int(x) for x in v] for b, v in d["b"].items() if b != OTHER and any(v)}}
+                           for (ic, pr), d in sorted(comm.items(), key=lambda kv: -sum(kv[1]["m"][-12:]))
+                           if ic == code and sum(d["m"][-12:]) > 0],
             "pcns": [{"code": c, "name": d["name"], "list": d["list"], "practices": len(d["practices"]),
                       "market": [int(x) for x in d["m"]],
                       "brands": {b: [int(x) for x in d["b"][b]] for b in brands}}
@@ -706,6 +743,7 @@ def assemble(cache):
         "rttPeriod": rtt_period, "rttPeriods": rtt_periods,
         "speciality": {"id": SPEC["id"], "label": SPEC["label"], "short": SPEC["short"], "noun": SPEC["noun"],
                        "rtt": SPEC.get("rtt"), "otcNational": bool(SPEC.get("otcNational")),
+                       "otcText": SPEC.get("otcText"), "hospitalEmpty": SPEC.get("hospitalEmpty"),
                        "defaultBrand": SPEC["defaultBrand"], "defaultIcb": SPEC["defaultIcb"],
                        "all": [{"id": k, "label": v["label"]} for k, v in SPECS.items()]},
         "market": SPEC["marketText"],
@@ -800,6 +838,7 @@ def main(argv=None):
     if not a.no_fetch:
         fetch_all(a.cache, a.refresh)
         fetch_practice_level(a.cache, idx["periods"], a.refresh)
+        fetch_prescriber_names(a.cache, idx["periods"], a.refresh)
         if SPEC.get("rtt"):
             fetch_rtt_history(a.cache, a.refresh)
         fetch_hospital(a.cache, idx["periods"], hospital_words(a.cache, idx["periods"]), a.refresh)

@@ -136,7 +136,7 @@
     var nat = '<div class="kpis"><div class="kpi"><b>' + num(sum(last12(nb))) + '</b><span>' + esc(BL) + ' items, 12 months to ' + labels[labels.length - 1] + '</span></div>'
       + '<div class="kpi"><b>' + pc(ratio(sum(last12(nb)), sum(last12(nm_)))) + '</b><span>' + esc(BL) + ' share of ' + esc(N) + ' items (our market definition)</span></div>'
       + '<div class="kpi"><b>' + trendTxt(trend(nb, floor)) + '</b><span>' + esc(BL) + ' items ' + labels[labels.length - 1] + ' against ' + labels[0] + '</span></div>'
-      + '<div class="kpi"><b>' + money(sum(last12(nbc))) + '</b><span>' + esc(BL) + ' actual cost, 12 months, every prescriber in the ICB (community nursing services included)</span></div></div>'
+      + '<div class="kpi"><b>' + money(sum(last12(nbc))) + '</b><span>' + esc(BL) + ' actual cost, 12 months, every prescriber in England</span></div></div>'
       + mktNote
       + '<p>' + (!D.speciality.rtt ? '<span class="nv">Not applicable</span>: NHS England publishes no Referral to Treatment waiting time for ' + esc(SP.toLowerCase()) + ' as a treatment function.' : natRtt ? esc(SP) + ', England, ' + esc(D.rttPeriod) + ': ' + num(natRtt.total) + ' incomplete pathways, median wait ' + num(natRtt.median, 1) + ' weeks, ' + num(natRtt.w52) + ' waiting 52 weeks or more.' : NV) + '</p>';
 
@@ -165,7 +165,8 @@
     } else if (hnat.length) {
       hosp = '<p>No ' + esc(BL) + ' issues are recorded for the trusts in ' + esc(nm) + ' in these 13 months (England: ' + money(sum(last12(hnat))) + ' indicative cost).</p>';
     } else {
-      hosp = '<p><span class="nv">' + NV + '</span>: no brand-named ' + esc(BL) + ' products in the hospital data.</p>';
+      hosp = D.speciality.hospitalEmpty ? '<p><span class="nv">Not applicable</span>: ' + esc(D.speciality.hospitalEmpty) + '</p>'
+        : '<p><span class="nv">' + NV + '</span>: no brand-named ' + esc(BL) + ' products in the hospital data.</p>';
     }
     hosp += '<p class="note">' + esc(D.hospital.scope) + ' Trusts are assigned to ICBs from the NHS Organisation Data Service (trust map, April 2026 ICBs).</p>';
 
@@ -183,8 +184,16 @@
       return '<tr><td>' + esc(r.name) + '</td>' + r.series.map(function (v) { var x = v / r.list * 1000, c = ramp(x, lo, hi); return '<td style="background:' + c[0] + ';color:' + c[1] + '">' + x.toFixed(1) + '</td>'; }).join('') + '</tr>';
     }).join('');
     var cover = ratio(rows.reduce(function (a, r) { return a + r.m12; }, 0), m12);
+    var out = (S.outsidePcn || []).map(function (c) { var q = sum(last12(c.brands[brand] || [])), mm = sum(last12(c.market)); return { name: c.name, code: c.code, q12: q, m12: mm, share: ratio(q, mm) }; });
+    var outCover = ratio(out.reduce(function (a, r) { return a + r.m12; }, 0), m12);
+    var outTop = out.slice().sort(function (a, b) { return b.q12 - a.q12 || b.m12 - a.m12; }).slice(0, 12).map(function (r) {
+      return '<tr><td>' + esc(r.name) + ' (' + esc(r.code) + ')</td><td>' + num(r.q12) + '</td><td>' + num(r.m12) + '</td><td>' + pc(r.share) + '</td></tr>';
+    }).join('');
+    var outTbl = out.length && outCover >= 2 ? '<h3>Prescribers outside any PCN, 12 months (' + pc(outCover) + ' of the ICB ' + esc(N) + ' items)</h3>'
+      + '<table><tr><th>Prescriber (NHSBSA name and code)</th><th>' + esc(BL) + ' items</th><th>' + esc(N.charAt(0).toUpperCase() + N.slice(1)) + ' items</th><th>' + esc(BL) + ' share</th></tr>' + outTop + '</table>'
+      + '<p class="note">Prescriber codes NHSBSA places in this ICB that are not GP practices in the NHS Digital registration map, so they belong to no PCN: mostly community nursing services and other community teams. They have no registered list, so there is no rate per 1,000 patients and they are not in the heat-map below. ' + (out.length > 12 ? 'Top 12 of ' + out.length + ' shown, by ' + esc(BL) + ' items.' : '') + '</p>' : '';
     var pcn = '<h3>Highest-prescribing Primary Care Networks (PCNs), 12 months</h3><table><tr><th>PCN</th><th>' + esc(BL) + ' items</th><th>Registered patients</th><th>Items per 1,000 patients</th><th>Share of ' + esc(N) + ' items</th></tr>' + top + '</table>'
-      + '<p class="note">Registered patients: NHS Digital practice totals, October 2026 snapshot, applied to every month. A PCN is the sum of its member practices as NHS Digital maps them today. PCN figures cover registered GP practices: ' + pc(cover) + ' of the ICB ' + esc(N) + ' items in the 12 months; the rest come from prescriber codes that have no PCN.</p>'
+      + '<p class="note">Registered patients: NHS Digital practice totals, October 2026 snapshot, applied to every month. A PCN is the sum of its member practices as NHS Digital maps them today. PCN figures cover registered GP practices: ' + pc(cover) + ' of the ICB ' + esc(N) + ' items in the 12 months' + (outTbl ? '; prescribers outside any PCN are listed next.' : '; the rest come from prescriber codes that have no PCN.') + '</p>' + outTbl
       + '<h3>Variation across the ICB\'s PCNs: ' + esc(BL) + ' items per 1,000 registered patients, by month</h3><div class="scroll"><table class="hm"><tr><th>PCN</th>' + labels.map(function (l) { return '<th>' + esc(l) + '</th>'; }).join('') + '</tr>' + hm + '</table></div>'
       + '<p class="note">Colour runs from the lowest to the highest cell in this ICB (' + lo.toFixed(1) + ' to ' + hi.toFixed(1) + '). Spread across PCNs (coefficient of variation of 12-month items per 1,000): ' + (rk.cv == null ? '<span class="nv">' + NV + '</span>' : rk.cv.toFixed(2)) + ', over ' + rk.nPcn + ' PCNs.</p>';
 
@@ -210,7 +219,8 @@
       : '<p><span class="nv">' + NV + '</span></p>';
 
     // 6 OTC context
-    var otc = !D.speciality.otcNational ? '<p><span class="nv">' + NV + '</span>: no over-the-counter or low-priority-prescribing position has been checked at source for ' + esc(SP.toLowerCase()) + '. What would settle it: the NHS England policy guidance on items which should not routinely be prescribed, and each ICB\'s formulary, read for this market.</p><div class="edit" contenteditable="true">Context notes: </div>' : '<p><b>National position (verified at source, 22/10/2026).</b> NHS England policy guidance, "Items which should not routinely be prescribed in primary care" (published 3 August 2023, updated 19 August 2025), lists bath and shower preparations for dry and pruritic skin conditions as prescribe only in exceptional circumstances, with the advice to substitute leave-on emollients. It does not list plain leave-on emollients.</p>'
+    var otc = (!D.speciality.otcNational && D.speciality.otcText) ? '<p>' + esc(D.speciality.otcText) + '</p><div class="edit" contenteditable="true">Context notes (this ICB\'s wound care formulary): </div>'
+      : !D.speciality.otcNational ? '<p><span class="nv">' + NV + '</span>: no over-the-counter or low-priority-prescribing position has been checked at source for ' + esc(SP.toLowerCase()) + '. What would settle it: the NHS England policy guidance on items which should not routinely be prescribed, and each ICB\'s formulary, read for this market.</p><div class="edit" contenteditable="true">Context notes: </div>' : '<p><b>National position (verified at source, 22/10/2026).</b> NHS England policy guidance, "Items which should not routinely be prescribed in primary care" (published 3 August 2023, updated 19 August 2025), lists bath and shower preparations for dry and pruritic skin conditions as prescribe only in exceptional circumstances, with the advice to substitute leave-on emollients. It does not list plain leave-on emollients.</p>'
       + (M.otc
         ? '<p><b>This ICB\'s own position (read at source, ' + esc(M.otc.verifiedOn) + ').</b></p><ul>' + M.otc.points.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>'
           + '<p class="note">Sources: ' + M.otc.sources.map(function (s) { return '<a href="' + esc(s.url) + '" style="color:' + DEEP + '">' + esc(s.title) + '</a>'; }).join('; ') + '. ' + esc(M.otc.limits) + '</p>'

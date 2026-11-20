@@ -87,6 +87,13 @@ for sid in sorted(bip.SPECS):
                     for s in shards.values())
         check(nat12 and icb12 >= 0.98 * nat12, "%s %s: ICB costs add to %.0f of national %.0f (community prescribers lost?)"
               % (sid, key, icb12, nat12))
+    # 8. EVERY ITEM HAS A HOME (added 20/11/2026): PCN rows plus the prescribers outside any
+    # PCN must account for the ICB market (wound care was 51% PCN-only in BSol).
+    for code, s in shards.items():
+        m12 = sum(s["market"]["items"][-12:])
+        got = sum(sum(c["market"][-12:]) for c in s["pcns"]) + sum(sum(c["market"][-12:]) for c in s.get("outsidePcn", []))
+        check(not m12 or got >= 0.97 * m12, "%s %s: PCNs + outside-PCN cover %.1f%% of market items" % (sid, code, 100.0 * got / m12))
+    check(all("outsidePcn" in s for s in shards.values()), "%s: shards must carry outsidePcn" % sid)
     # 7. BRAND LIST: ranked by items, no configured non-brands
     nb = {bip.brand_key(w) for w in spec_cfg.get("notBrands", [])}
     check(not nb & {b["key"] for b in idx["brands"]}, "%s: a notBrands word is offered as a brand" % sid)
