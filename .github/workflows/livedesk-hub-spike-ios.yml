@@ -62,16 +62,23 @@ jobs:
           app=$(ls -d build/Build/Products/Debug-iphonesimulator/*.app | head -1)
           xcrun simctl install "$udid" "$app"
           bid=uk.co.medsalesintelligencehub.livedesk
-          xcrun simctl spawn "$udid" log stream --style compact --predicate 'eventMessage CONTAINS "MSHHubProbe"' > ../evidence/ios-probe.log 2>&1 &
-          LOG=$!
           for page in login medical-sales-hub/my-hub medical-sales-hub/urology medical-sales-hub/calendar; do
             slug=$(echo "$page" | tr '/' '-')
             xcrun simctl terminate "$udid" "$bid" || true
-            xcrun simctl launch "$udid" "$bid" -hubUrl "https://medsalesintelligencehub.co.uk/$page/"
+            # --console-pty keeps the app's stdout/stderr (NSLog, crash reasons) for this launch
+            xcrun simctl launch --console-pty --terminate-running-process "$udid" "$bid" -hubUrl "https://medsalesintelligencehub.co.uk/$page/" > "../evidence/ios-console-$slug.log" 2>&1 &
+            CON=$!
             sleep 40
             xcrun simctl io "$udid" screenshot "../evidence/ios-$slug.png"
+            kill $CON 2>/dev/null || true
           done
-          kill $LOG || true
+          grep -h "MSHHubProbe" ../evidence/ios-console-*.log > ../evidence/ios-probe.log || true
+          # Unified log as a second source, and any crash reports
+          xcrun simctl spawn "$udid" log show --last 15m --style compact --predicate 'eventMessage CONTAINS "MSHHubProbe" OR (process == "App" AND messageType == fault)' >> ../evidence/ios-probe.log 2>&1 || true
+          mkdir -p ../evidence/crash
+          find ~/Library/Logs/DiagnosticReports -name "*.ips" -mmin -20 -exec cp {} ../evidence/crash/ \; 2>/dev/null || true
+          ls ../evidence/crash
+          tail -40 ../evidence/ios-console-login.log || true
           cat ../evidence/ios-probe.log
           grep -q 'MSHLiveDeskApp/ios' ../evidence/ios-probe.log
       - uses: actions/upload-artifact@v4
