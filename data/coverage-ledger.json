@@ -13,7 +13,7 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-11-20",
-  "differentiator.json published": 39513,
+  "differentiator.json published": 39521,
   "differentiator.json held": 297945
  },
  "counts": {
@@ -10329,8 +10329,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "11 June 2027",
    "suppliersAwarded": 21,
-   "suppliersPublished": 6,
-   "coverage": 28.6,
+   "suppliersPublished": 7,
+   "coverage": 33.3,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -10340,7 +10340,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 21,
-   "coverageOfTarget": 28.6,
+   "coverageOfTarget": 33.3,
    "crawlWorklist": [
     {
      "supplier": "Ecohydra Technologies Ltd",
@@ -10402,13 +10402,6 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Cuxson Gerrard & Company Limited",
-     "domain": "www.cuxsongerrard.com",
-     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-09-05",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Diversey",
      "domain": "solenis.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -10451,6 +10444,13 @@
      "bucket": "published"
     },
     {
+     "supplier": "Cuxson Gerrard & Company Limited",
+     "domain": "www.cuxsongerrard.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-05",
+     "bucket": "published"
+    },
+    {
      "supplier": "Ecolab",
      "domain": "en-uk.ecolab.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -10478,7 +10478,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 3,
+    "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -10487,6 +10487,7 @@
    },
    "published": [
     "B. Braun Medical",
+    "Cuxson Gerrard & Company Limited",
     "Ecolab",
     "GAMA Healthcare",
     "GDP Compliance Ltd",
@@ -10494,7 +10495,6 @@
     "Paul Hartmann (HARTMANN)"
    ],
    "publishedElsewhere": [
-    "Cuxson Gerrard & Company Limited",
     "Diversey",
     "Essity UK Limited",
     "Fenton Pharmaceuticals Limited",
@@ -10518,7 +10518,7 @@
     "SC Johnson Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 5,
+   "actionableTotal": 4,
    "blockedReason": null,
    "deferred": null
   },

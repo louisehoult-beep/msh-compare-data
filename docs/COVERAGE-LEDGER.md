@@ -67,7 +67,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 8 | 32.0% | 7 | 15 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 13 | 56.5% | 4 | 17 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 21 | 95.5% | 1 | 13 | STARTED |
-| Hand Hygiene and Associated Products and Services | infection | 21 | 6 | 28.6% | 5 | 16 | STARTED |
+| Hand Hygiene and Associated Products and Services | infection | 21 | 7 | 33.3% | 4 | 16 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 13 | 61.9% | 4 | 11 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 6 | 28.6% | 1 | 11 | STARTED · 5 EXCLUDED |
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 9 | 45.0% | 3 | 12 | STARTED |
