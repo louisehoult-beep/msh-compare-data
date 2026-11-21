@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "20/11/2026",
- "generated": "2026-11-20",
+ "dataAsOf": "21/11/2026",
+ "generated": "2026-11-21",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,23 +22,23 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-11-12",
-   "to": "2026-11-20",
+   "from": "2026-11-13",
+   "to": "2026-11-21",
    "days": 8,
-   "run": "2026-11-20"
+   "run": "2026-11-21"
   },
   "notes": [
-   "Find a Tender (tender stage): 0 digital lane notice(s) from 56 release(s) over 1 page(s)",
-   "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-12",
-   "Find a Tender (planning stage): 1 digital lane notice(s) from 33 release(s) over 1 page(s)",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-12"
+   "Find a Tender (tender stage): 2 digital lane notice(s) from 2558 release(s) over 26 page(s), all notice types, stage read from tender.status",
+   "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-13",
+   "Find a Tender (planning stage): 3 digital lane notice(s) from 2558 release(s) over 26 page(s), all notice types, stage read from tender.status",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-13"
   ]
  },
  "counts": {
   "awards": 408,
   "awardsClinical": 48,
-  "openNotices": 4,
-  "openNoticesClinical": 1,
+  "openNotices": 8,
+  "openNoticesClinical": 2,
   "marketEngagement": 2,
   "marketEngagementClinical": 0
  },
@@ -7837,6 +7837,50 @@
    "clinical": false
   },
   {
+   "title": "Recruitment, Reward, and Retention Solutions: Reward",
+   "buyer": "Mid South Essex NHS Foundation Trust",
+   "status": "active",
+   "rawStatus": "active",
+   "stage": "open tender",
+   "date": "2026-11-20",
+   "closingDate": "2026-12-16T12:00:00+00:00",
+   "startDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/110185-2026",
+   "source": "Find a Tender",
+   "cpv": "75310000",
+   "valueAmount": 145000000.0,
+   "valueCurrency": "GBP",
+   "valueBasis": "net",
+   "ocid": "ocds-h6vhtk-0695f2",
+   "lane": "digital",
+   "digitalCpv": [
+    "72212450"
+   ],
+   "clinical": false
+  },
+  {
+   "title": "Building Management System (BMS)",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "status": "active",
+   "rawStatus": "active",
+   "stage": "open tender",
+   "date": "2026-11-20",
+   "closingDate": "2026-12-16T14:00:00Z",
+   "startDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/110032-2026",
+   "source": "Find a Tender",
+   "cpv": "72267000",
+   "valueAmount": 1200000,
+   "valueCurrency": "GBP",
+   "valueBasis": "net",
+   "ocid": "ocds-h6vhtk-07c01e",
+   "lane": "digital",
+   "digitalCpv": [
+    "72267000"
+   ],
+   "clinical": false
+  },
+  {
    "title": "Population Health Management (PHM)",
    "buyer": "NHS SOUTH WEST LONDON INTEGRATED CARE BOARD",
    "status": "planning",
@@ -7868,8 +7912,58 @@
    "cpv": "72000000",
    "valueAmount": null,
    "valueCurrency": "",
+   "valueBasis": "",
    "ocid": "ocds-h6vhtk-07bbb8",
    "lane": "digital",
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": false
+  },
+  {
+   "title": "NHS Essex Preliminary Market Engagement Notice for Online Consultation Provision",
+   "buyer": "NHS ESSEX INTEGRATED CARE BOARD",
+   "status": "planning",
+   "rawStatus": "planning",
+   "stage": "preliminary market engagement / planning",
+   "date": "2026-11-18",
+   "closingDate": null,
+   "startDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/109218-2026",
+   "source": "Find a Tender",
+   "cpv": "72000000",
+   "valueAmount": null,
+   "valueCurrency": "",
+   "valueBasis": "",
+   "ocid": "ocds-h6vhtk-07bd97",
+   "lane": "digital",
+   "digitalCpv": [
+    "72000000"
+   ],
+   "clinical": true
+  },
+  {
+   "title": "Cyber Supplier and Third Party Risk Management capability - Market Engagement",
+   "buyer": "NHS England",
+   "status": "planning",
+   "rawStatus": "planning",
+   "stage": "preliminary market engagement / planning",
+   "date": "2026-11-13",
+   "closingDate": null,
+   "startDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/108132-2026",
+   "source": "Find a Tender",
+   "cpv": "48000000",
+   "valueAmount": 5000000.0,
+   "valueCurrency": "GBP",
+   "valueBasis": "net",
+   "ocid": "ocds-h6vhtk-07bbcf",
+   "lane": "digital",
+   "digitalCpv": [
+    "48000000",
+    "72000000",
+    "72212517"
+   ],
    "clinical": false
   }
  ],
@@ -8083,6 +8177,12 @@
    "to": "2026-11-20",
    "days": 8,
    "run": "2026-11-20"
+  },
+  {
+   "from": "2026-11-13",
+   "to": "2026-11-21",
+   "days": 8,
+   "run": "2026-11-21"
   }
  ]
 }
