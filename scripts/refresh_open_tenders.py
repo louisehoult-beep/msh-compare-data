@@ -291,7 +291,7 @@ def row_from_release(rel, source, today_iso, keep=None):
         stage = "preliminary market engagement / planning"
     else:
         stage = "open tender"
-    return {
+    row = {
         "title": title,
         "buyer": buyer,
         "status": status,
@@ -309,6 +309,21 @@ def row_from_release(rel, source, today_iso, keep=None):
         "speciality": tag_speciality(title, buyer),
         "ocid": rel.get("ocid", ""),
     }
+    if keep is not None:
+        # The digital lane admits on ANY CPV on the notice (headline, additional,
+        # items), so the row must carry them all or the gate re-tests only the
+        # headline and fails a correctly admitted row (21/11/2026: 110185-2026,
+        # headline 75310000, admitted on item CPV 72212450).
+        cl = tender.get("classification") or {}
+        allc = [str(cl["id"])] if cl.get("scheme") == "CPV" and cl.get("id") else []
+        for c in list(tender.get("additionalClassifications") or []):
+            if c.get("scheme") == "CPV" and c.get("id") and str(c["id"]) not in allc:
+                allc.append(str(c["id"]))
+        for c in item_cpvs(tender):
+            if c not in allc:
+                allc.append(c)
+        row["allCpv"] = allc
+    return row
 
 
 # Stage of a release, from the feed's own tender.status (the same field

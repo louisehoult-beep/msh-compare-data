@@ -147,6 +147,7 @@ def fetch_open_notices(days, today_iso):
         r = dict(r)
         r.pop("speciality", None)       # the medical tagger's slug; meaningless here
         r["lane"] = "digital"
+        r["digitalCpv"] = R.digital_cpvs(r.pop("allCpv", None) or [r.get("cpv")])
         r["clinical"] = R.clinical(r.get("title"))
         out.append(r)
     return out, notes, ok
