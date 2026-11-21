@@ -12,8 +12,8 @@
  },
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
-  "frameworks.json": "2026-11-15",
-  "differentiator.json published": 39511,
+  "frameworks.json": "2026-11-20",
+  "differentiator.json published": 39513,
   "differentiator.json held": 297945
  },
  "counts": {
@@ -7295,8 +7295,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "31 January 2028",
    "suppliersAwarded": 37,
-   "suppliersPublished": 15,
-   "coverage": 40.5,
+   "suppliersPublished": 16,
+   "coverage": 43.2,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -7306,7 +7306,7 @@
    ],
    "excludedByRuling": [],
    "targetSuppliers": 37,
-   "coverageOfTarget": 40.5,
+   "coverageOfTarget": 43.2,
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
@@ -7403,13 +7403,6 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Henry Schein UK Holdings",
-     "domain": "www.henryschein.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-10-01",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Solventum (3M Health Care)",
      "domain": "solventum.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
@@ -7480,6 +7473,13 @@
      "bucket": "published"
     },
     {
+     "supplier": "Henry Schein UK Holdings",
+     "domain": "www.henryschein.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-10-01",
+     "bucket": "published"
+    },
+    {
      "supplier": "MedScience Distribution",
      "domain": "medscienceuk.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap's product URLs are flat, so they carry no division structure (360 names, all uncategorised) \u2014 a product list without the company's own grouping is not the range this report shows",
@@ -7519,7 +7519,6 @@
     "cardiology:gel"
    ],
    "publishedElsewhereNoOwnRange": [
-    "Henry Schein UK Holdings",
     "Rocket Medical"
    ],
    "actionable": {
@@ -7539,6 +7538,7 @@
     "Fannin (UK) Limited",
     "GenX MediCare Ltd",
     "Henleys Medical Supplies Limited",
+    "Henry Schein UK Holdings",
     "MedScience Distribution",
     "NISSHA Medical Technologies",
     "Optimum Medical",
@@ -7549,7 +7549,6 @@
     "Zoll Medical UK Limited"
    ],
    "publishedElsewhere": [
-    "Henry Schein UK Holdings",
     "Solventum (3M Health Care)",
     "Mindray UK",
     "Philips",
