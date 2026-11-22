@@ -106,6 +106,13 @@ def mentions(text, terms):
     return any((' ' + term + ' ') in t for term in terms)
 
 
+# Words that must never reach a member's card (test_company_key_info.py
+# test_no_confidential_member_or_call_material holds the same list). A public
+# news item that happens to name one of them, e.g. a trade-press story citing
+# IQVIA data, is left out rather than shown.
+CONFIDENTIAL = re.compile(r'consultancy|IQVIA|logged in|VAT receipt|prep sheet|Aneeka', re.I)
+
+
 def fact(kind, title, text, url=None, source=None, when=None):
     f = {'k': kind, 't': title, 'x': text}
     if url:
@@ -250,6 +257,8 @@ def build():
         for f in facts:
             key = (f['k'], norm(f['t']))
             if key in seen:
+                continue
+            if CONFIDENTIAL.search(f['t'] + ' ' + f.get('x', '')):
                 continue
             seen.add(key)
             if len(f.get('x', '')) > 320:
