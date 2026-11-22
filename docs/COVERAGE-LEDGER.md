@@ -41,9 +41,9 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 43 | 35.2% | 39 | 55 | STARTED |
-| Total Orthopaedic Solutions 3 | ortho | 101 | 36 | 35.6% | 12 | 70 | STARTED |
+| Total Orthopaedic Solutions 3 | ortho | 101 | 36 | 35.6% | 11 | 70 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 27 | 42.9% | 20 | 31 | STARTED |
-| Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 22 | 42 | STARTED |
+| Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 21 | 42 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 28 | 48.3% | 11 | 33 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 26 | 45.6% | 14 | 32 | STARTED |
 | Urology and Bowel Management | continence | 57 | 20 | 35.1% | 26 | 34 | STARTED |
@@ -51,13 +51,13 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 1 | 39 | STARTED · 7 EXCLUDED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 14 | 32 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 29 | 54.7% | 13 | 31 | STARTED |
-| Surgical Instruments | surgical | 50 | 13 | 26.0% | 20 | 25 | STARTED |
-| Operating Theatres Equipment and Related Accessories and Services | theatres | 42 | 11 | 26.2% | 14 | 29 | STARTED |
+| Surgical Instruments | surgical | 50 | 13 | 26.0% | 19 | 25 | STARTED |
+| Operating Theatres Equipment and Related Accessories and Services | theatres | 42 | 13 | 31.0% | 12 | 29 | STARTED |
 | Wound Closure | closure | 39 | 14 | 35.9% | 19 | 20 | STARTED |
-| Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 16 | 43.2% | 7 | 28 | STARTED |
+| Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 16 | 43.2% | 6 | 28 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 18 | 48.6% | 12 | 20 | STARTED · 1 EXCLUDED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 13 | 37.1% | 7 | 21 | STARTED |
-| Electrosurgical Consumables and Related Accessories | theatres | 33 | 13 | 39.4% | 13 | 22 | STARTED |
+| Electrosurgical Consumables and Related Accessories | theatres | 33 | 15 | 45.5% | 11 | 22 | STARTED |
 | Aids for Daily Living | rehab | 31 | 16 | 51.6% | 7 | 17 | STARTED |
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 10 | 32.3% | 5 | 22 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 11 | 37.9% | 8 | 24 | STARTED |
