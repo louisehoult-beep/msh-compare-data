@@ -59,7 +59,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 13 | 37.1% | 7 | 21 | STARTED |
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 15 | 45.5% | 11 | 22 | STARTED |
 | Aids for Daily Living | rehab | 31 | 16 | 51.6% | 7 | 17 | STARTED |
-| Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 10 | 32.3% | 5 | 22 | STARTED |
+| Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 10 | 32.3% | 4 | 22 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 11 | 37.9% | 8 | 24 | STARTED |
 | General Wound Care | wound | 28 | 11 | 39.3% | 8 | 22 | STARTED |
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 11 | 40.7% | 9 | 16 | STARTED |
@@ -68,7 +68,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Neuromodulation Devices and Associated Products | neuro | 23 | 13 | 56.5% | 4 | 17 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 21 | 95.5% | 1 | 13 | STARTED |
 | Hand Hygiene and Associated Products and Services | infection | 21 | 7 | 33.3% | 4 | 16 | STARTED |
-| Intravenous Cannula and Associated Products | vascular | 21 | 13 | 61.9% | 4 | 11 | STARTED |
+| Intravenous Cannula and Associated Products | vascular | 21 | 15 | 71.4% | 2 | 11 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 6 | 28.6% | 1 | 11 | STARTED · 5 EXCLUDED |
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 9 | 45.0% | 3 | 12 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 9 | 47.4% | 8 | 11 | STARTED |
@@ -97,7 +97,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Lithotripsy and Associated Options and Related Services | endourology | 3 | 0 | 0.0% | 2 | 2 | NOT STARTED |
 | Male Intra-Urethral Catheter with Magnet Control | continence | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Non-Imaging Vibration Controlled Ultrasound System | ultrasound | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
-| Airway Management Products and Associated Equipment | — | 54 | 0 | 0.0% | 39 | 29 | UNMAPPED |
+| Airway Management Products and Associated Equipment | — | 54 | 0 | 0.0% | 38 | 29 | UNMAPPED |
 | Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 38 | 29 | UNMAPPED |
 | Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 32 | 22 | UNMAPPED |
 | Procedure Packs | — | 29 | 0 | 0.0% | 20 | 18 | UNMAPPED |
@@ -109,7 +109,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | External Defibrillation Devices and Related Services and Accessories | — | 21 | 0 | 0.0% | 15 | 8 | UNMAPPED |
 | Surgical Mesh | — | 21 | 0 | 0.0% | 15 | 11 | UNMAPPED |
 | Instrument Decontamination and Accessories | — | 20 | 0 | 0.0% | 11 | 12 | UNMAPPED |
-| Intravenous Accessories and Pressure Monitoring Accessories | — | 20 | 0 | 0.0% | 14 | 12 | UNMAPPED |
+| Intravenous Accessories and Pressure Monitoring Accessories | — | 20 | 0 | 0.0% | 13 | 12 | UNMAPPED |
 | Rigid Endoscopy and Associated Options and Related Services | — | 18 | 0 | 0.0% | 11 | 14 | UNMAPPED |
 | Needlefree Connection Systems and Associated Products | — | 16 | 0 | 0.0% | 16 | 8 | UNMAPPED |
 | Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services | — | 14 | 0 | 0.0% | 11 | 6 | UNMAPPED |
