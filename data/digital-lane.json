@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "22/11/2026",
- "generated": "2026-11-22",
+ "dataAsOf": "23/11/2026",
+ "generated": "2026-11-23",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,27 +22,158 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-11-14",
-   "to": "2026-11-22",
+   "from": "2026-11-15",
+   "to": "2026-11-23",
    "days": 8,
-   "run": "2026-11-22"
+   "run": "2026-11-23"
   },
   "notes": [
-   "Find a Tender (tender stage): 2 digital lane notice(s) from 2107 release(s) over 22 page(s), all notice types, stage read from tender.status",
-   "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-14",
-   "Find a Tender (planning stage): 1 digital lane notice(s) from 2107 release(s) over 22 page(s), all notice types, stage read from tender.status",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-14"
+   "Find a Tender (tender stage): 3 digital lane notice(s) from 2545 release(s) over 26 page(s), all notice types, stage read from tender.status",
+   "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-15",
+   "Find a Tender (planning stage): 2 digital lane notice(s) from 2545 release(s) over 26 page(s), all notice types, stage read from tender.status",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-15"
   ]
  },
  "counts": {
-  "awards": 408,
-  "awardsClinical": 48,
-  "openNotices": 8,
+  "awards": 415,
+  "awardsClinical": 49,
+  "openNotices": 10,
   "openNoticesClinical": 2,
   "marketEngagement": 2,
   "marketEngagementClinical": 0
  },
  "awards": [
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Scribe Voice Technology Solution",
+   "buyer": "Sussex Community NHS Foundation Trust",
+   "published": "2026-11-23",
+   "suppliers": [
+    "Accurx Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48314000",
+    "72260000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/110609-2026",
+   "ocid": "ocds-h6vhtk-07c15a"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "planning",
+   "title": "Data Archiving & Storage",
+   "buyer": "NHS Blood and Transplant",
+   "published": "2026-11-23",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72252000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/110594-2026",
+   "ocid": "ocds-h6vhtk-07c142"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "award",
+   "title": "Oncology ePrescribing",
+   "buyer": "Royal Surrey County Hospital NHS Foundation Trust",
+   "published": "2026-11-23",
+   "suppliers": [
+    "iQ HealthTech"
+   ],
+   "isFramework": false,
+   "contractEnd": "2031-11-22",
+   "value": 376391.0,
+   "digitalCpv": [
+    "48180000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/110567-2026",
+   "ocid": "ocds-h6vhtk-0551bb"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "LIAISON QuantiFERON-TB Gold Plus II",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "published": "2026-11-23",
+   "suppliers": [
+    "QIAGEN LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-11-22",
+   "value": 12059.48,
+   "digitalCpv": [
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/110506-2026",
+   "ocid": "ocds-h6vhtk-07c123"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "SBU-DCO-102-SP-26",
+   "buyer": "Swansea Bay University Health Board",
+   "published": "2026-11-23",
+   "suppliers": [
+    "CGI UK Ltd"
+   ],
+   "isFramework": true,
+   "contractEnd": null,
+   "value": 148770,
+   "digitalCpv": [
+    "72220000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/110455-2026",
+   "ocid": "ocds-h6vhtk-07c103"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "tender",
+   "title": "P0402 - Provision of a Risk Management System",
+   "buyer": "Hywel Dda University Health Board",
+   "published": "2026-11-23",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000",
+    "72000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/110422-2026",
+   "ocid": "ocds-h6vhtk-06bbe9"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Provision of Passive Structured Cabling Infrastructure",
+   "buyer": "NHS Lanarkshire",
+   "published": "2026-11-23",
+   "suppliers": [
+    "OCS Technical Services Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 200000,
+   "digitalCpv": [
+    "72700000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/110402-2026",
+   "ocid": "ocds-h6vhtk-07c0e8"
+  },
   {
    "lane": "digital",
    "clinical": false,
@@ -7881,6 +8012,29 @@
    "clinical": false
   },
   {
+   "title": "P0402 - Provision of a Risk Management System",
+   "buyer": "Hywel Dda University Health Board",
+   "status": "active",
+   "rawStatus": "active",
+   "stage": "open tender",
+   "date": "2026-11-23",
+   "closingDate": "2026-12-18T12:00:00+00:00",
+   "startDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/110422-2026",
+   "source": "Find a Tender",
+   "cpv": "48000000",
+   "valueAmount": 300000.0,
+   "valueCurrency": "GBP",
+   "valueBasis": "net",
+   "ocid": "ocds-h6vhtk-06bbe9",
+   "lane": "digital",
+   "digitalCpv": [
+    "48000000",
+    "72000000"
+   ],
+   "clinical": false
+  },
+  {
    "title": "Population Health Management (PHM)",
    "buyer": "NHS SOUTH WEST LONDON INTEGRATED CARE BOARD",
    "status": "planning",
@@ -7963,6 +8117,28 @@
     "48000000",
     "72000000",
     "72212517"
+   ],
+   "clinical": false
+  },
+  {
+   "title": "Data Archiving & Storage",
+   "buyer": "NHS Blood and Transplant",
+   "status": "planning",
+   "rawStatus": "planning",
+   "stage": "preliminary market engagement / planning",
+   "date": "2026-11-23",
+   "closingDate": null,
+   "startDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/110594-2026",
+   "source": "Find a Tender",
+   "cpv": "72252000",
+   "valueAmount": 1500000.0,
+   "valueCurrency": "GBP",
+   "valueBasis": "net",
+   "ocid": "ocds-h6vhtk-07c142",
+   "lane": "digital",
+   "digitalCpv": [
+    "72252000"
    ],
    "clinical": false
   }
@@ -8189,6 +8365,12 @@
    "to": "2026-11-22",
    "days": 8,
    "run": "2026-11-22"
+  },
+  {
+   "from": "2026-11-15",
+   "to": "2026-11-23",
+   "days": 8,
+   "run": "2026-11-23"
   }
  ]
 }

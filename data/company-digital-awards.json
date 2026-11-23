@@ -11,8 +11,8 @@
   "contact": "contact@elevateandthrive.uk"
  },
  "lane": "digital",
- "dataAsOf": "22/11/2026",
- "generated": "2026-11-22",
+ "dataAsOf": "23/11/2026",
+ "generated": "2026-11-23",
  "source": "Find a Tender and Contracts Finder award notices in the Hub's digital lane (data/digital-lane.json), Open Government Licence v3.",
  "sectionRule": "Software and IT notices only. Each row is one supplier named on one Find a Tender or Contracts Finder award notice that an NHS buyer classified under a Common Procurement Vocabulary (CPV) code beginning 48 (software packages and information systems) or 72 (IT services). Those codes cover payroll, finance and office systems as much as clinical ones, so a row is not a claim of health technology. A row is counted as clinical only where the notice title names a clinical system. Medical device awards (CPV division 33) appear in the award sections above and are never repeated here.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
@@ -24,23 +24,23 @@
   "laneCoverage": {
    "complete": true,
    "window": {
-    "from": "2026-11-14",
-    "to": "2026-11-22",
+    "from": "2026-11-15",
+    "to": "2026-11-23",
     "days": 8,
-    "run": "2026-11-22"
+    "run": "2026-11-23"
    },
    "notes": [
-    "Find a Tender (tender stage): 2 digital lane notice(s) from 2107 release(s) over 22 page(s), all notice types, stage read from tender.status",
-    "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-14",
-    "Find a Tender (planning stage): 1 digital lane notice(s) from 2107 release(s) over 22 page(s), all notice types, stage read from tender.status",
-    "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-14"
+    "Find a Tender (tender stage): 3 digital lane notice(s) from 2545 release(s) over 26 page(s), all notice types, stage read from tender.status",
+    "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-15",
+    "Find a Tender (planning stage): 2 digital lane notice(s) from 2545 release(s) over 26 page(s), all notice types, stage read from tender.status",
+    "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-15"
    ]
   }
  },
  "counts": {
-  "companies": 51,
-  "awardRows": 118,
-  "unmatched": 237,
+  "companies": 52,
+  "awardRows": 120,
+  "unmatched": 240,
   "ambiguous": 0,
   "alreadyInMedicalFeed": 0
  },
@@ -91,6 +91,28 @@
    }
   ],
   "Accurx": [
+   {
+    "title": "Scribe Voice Technology Solution",
+    "buyer": "Sussex Community NHS Foundation Trust",
+    "date": "2026-11-23",
+    "url": "https://www.find-tender.service.gov.uk/Notice/110609-2026",
+    "ocid": "ocds-h6vhtk-07c15a",
+    "source": "Find a Tender",
+    "valueAmount": null,
+    "valueCurrency": null,
+    "periodEnd": null,
+    "isFramework": false,
+    "digitalCpv": [
+     "48314000",
+     "72260000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "Accurx Limited",
+    "noticeSupplierCount": 1,
+    "company": "Accurx",
+    "matchedOn": "\"accurx limited\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   },
    {
     "title": "GP Practice Software",
     "buyer": "Aneurin Bevan University Health Board",
@@ -2363,6 +2385,29 @@
     "matchedOn": "\"philips electronics uk limited\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
    }
   ],
+  "QIAGEN UK": [
+   {
+    "title": "LIAISON QuantiFERON-TB Gold Plus II",
+    "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+    "date": "2026-11-23",
+    "url": "https://www.find-tender.service.gov.uk/Notice/110506-2026",
+    "ocid": "ocds-h6vhtk-07c123",
+    "source": "Find a Tender",
+    "valueAmount": 12059.48,
+    "valueCurrency": "GBP",
+    "periodEnd": "2027-11-22",
+    "isFramework": false,
+    "digitalCpv": [
+     "72000000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "QIAGEN LIMITED",
+    "noticeSupplierCount": 1,
+    "company": "QIAGEN UK",
+    "matchedOn": "the notice names \"QIAGEN LIMITED\", which normalises to \"qiagen\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
   "Raysearch UK Ltd": [
    {
     "title": "RayStation Service Contract",
@@ -2793,6 +2838,66 @@
   ]
  },
  "unmatched": [
+  {
+   "title": "Oncology ePrescribing",
+   "buyer": "Royal Surrey County Hospital NHS Foundation Trust",
+   "date": "2026-11-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/110567-2026",
+   "ocid": "ocds-h6vhtk-0551bb",
+   "source": "Find a Tender",
+   "valueAmount": 376391.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2031-11-22",
+   "isFramework": false,
+   "digitalCpv": [
+    "48180000"
+   ],
+   "clinical": true,
+   "lane": "digital",
+   "noticeSupplierName": "iQ HealthTech",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"iq healthtech\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "SBU-DCO-102-SP-26",
+   "buyer": "Swansea Bay University Health Board",
+   "date": "2026-11-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/110455-2026",
+   "ocid": "ocds-h6vhtk-07c103",
+   "source": "Find a Tender",
+   "valueAmount": 148770,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": true,
+   "digitalCpv": [
+    "72220000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "CGI UK Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"cgi\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Provision of Passive Structured Cabling Infrastructure",
+   "buyer": "NHS Lanarkshire",
+   "date": "2026-11-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/110402-2026",
+   "ocid": "ocds-h6vhtk-07c0e8",
+   "source": "Find a Tender",
+   "valueAmount": 200000,
+   "valueCurrency": "GBP",
+   "periodEnd": null,
+   "isFramework": false,
+   "digitalCpv": [
+    "72700000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "OCS Technical Services Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"ocs technical services\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
   {
    "title": "PAHT - Transformation Platform - NDL Evolve",
    "buyer": "The Princess Alexandra Hospital NHS Trust",
