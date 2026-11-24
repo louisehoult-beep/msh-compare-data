@@ -11,7 +11,7 @@
    scripts/build_speciality_panels.py in this repo. Edit the code HERE, never in
    the WordPress page — the page carries a loader only. */
 /* Calendar "You are here" marker (24/11/2026). Every speciality page's
-   calendar (.fcal) shipped with the marker hard-coded on the month the page
+   calendar shipped with the marker hard-coded on the month the page
    was written, so it went stale a month later: the vascular page still said
    August in November. This moves the existing marker element to today's
    month on the current year's row, and drops it if that row is not on the
@@ -20,15 +20,18 @@
 (function () {
   var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   function place() {
-    var cals = document.querySelectorAll('.fcal');
-    if (!cals.length) { return; }
+    // Scope is the element holding the .fcal-year rows: .fcal on some pages,
+    // .tl-fixed directly on 32 others, which have no .fcal wrapper.
+    var markers = document.querySelectorAll('.m-now');
+    if (!markers.length) { return; }
     var today = new Date();
     var year = String(today.getFullYear());
     var mon = MONTHS[today.getMonth()];
-    for (var c = 0; c < cals.length; c++) {
-      var cal = cals[c];
-      var marker = cal.querySelector('.m-now');
-      if (!marker) { continue; }
+    for (var c = 0; c < markers.length; c++) {
+      var marker = markers[c];
+      var row = marker.closest('.fcal-year');
+      if (!row) { continue; }
+      var cal = row.parentNode;
       var target = null;
       var years = cal.querySelectorAll('.fcal-year');
       for (var y = 0; y < years.length; y++) {
