@@ -10,6 +10,53 @@
    Data: data/speciality-panels/<slug>.json, built by
    scripts/build_speciality_panels.py in this repo. Edit the code HERE, never in
    the WordPress page — the page carries a loader only. */
+/* Calendar "You are here" marker (24/11/2026). Every speciality page's
+   calendar (.fcal) shipped with the marker hard-coded on the month the page
+   was written, so it went stale a month later: the vascular page still said
+   August in November. This moves the existing marker element to today's
+   month on the current year's row, and drops it if that row is not on the
+   page. It adds no date and no claim, only where the reader stands. Runs on
+   every page that loads this file, before and independent of the panels. */
+(function () {
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function place() {
+    var cals = document.querySelectorAll('.fcal');
+    if (!cals.length) { return; }
+    var today = new Date();
+    var year = String(today.getFullYear());
+    var mon = MONTHS[today.getMonth()];
+    for (var c = 0; c < cals.length; c++) {
+      var cal = cals[c];
+      var marker = cal.querySelector('.m-now');
+      if (!marker) { continue; }
+      var target = null;
+      var years = cal.querySelectorAll('.fcal-year');
+      for (var y = 0; y < years.length; y++) {
+        var lbl = years[y].querySelector('.fcal-year-lbl');
+        if (!lbl) { continue; }
+        if (lbl.textContent.trim() !== year) { continue; }
+        var ms = years[y].querySelectorAll('.fcal-m');
+        for (var i = 0; i < ms.length; i++) {
+          var n = ms[i].querySelector('.m-n');
+          if (!n) { continue; }
+          if (n.textContent.trim() === mon) { target = ms[i]; }
+        }
+      }
+      var olds = cal.querySelectorAll('.fcal-m.now');
+      for (var o = 0; o < olds.length; o++) { olds[o].classList.remove('now'); }
+      if (!target) { marker.parentNode.removeChild(marker); continue; }
+      var name = target.querySelector('.m-n');
+      target.classList.add('now');
+      name.parentNode.insertBefore(marker, name.nextSibling);
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', place);
+  } else {
+    place();
+  }
+})();
+
 (function () {
   var BASE = 'https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/speciality-panels/';
   var FW = document.getElementById('msh-spec-frameworks');
