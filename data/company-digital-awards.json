@@ -11,8 +11,8 @@
   "contact": "contact@elevateandthrive.uk"
  },
  "lane": "digital",
- "dataAsOf": "23/11/2026",
- "generated": "2026-11-23",
+ "dataAsOf": "24/11/2026",
+ "generated": "2026-11-24",
  "source": "Find a Tender and Contracts Finder award notices in the Hub's digital lane (data/digital-lane.json), Open Government Licence v3.",
  "sectionRule": "Software and IT notices only. Each row is one supplier named on one Find a Tender or Contracts Finder award notice that an NHS buyer classified under a Common Procurement Vocabulary (CPV) code beginning 48 (software packages and information systems) or 72 (IT services). Those codes cover payroll, finance and office systems as much as clinical ones, so a row is not a claim of health technology. A row is counted as clinical only where the notice title names a clinical system. Medical device awards (CPV division 33) appear in the award sections above and are never repeated here.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
@@ -24,23 +24,23 @@
   "laneCoverage": {
    "complete": true,
    "window": {
-    "from": "2026-11-15",
-    "to": "2026-11-23",
+    "from": "2026-11-16",
+    "to": "2026-11-24",
     "days": 8,
-    "run": "2026-11-23"
+    "run": "2026-11-24"
    },
    "notes": [
-    "Find a Tender (tender stage): 3 digital lane notice(s) from 2545 release(s) over 26 page(s), all notice types, stage read from tender.status",
-    "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-15",
-    "Find a Tender (planning stage): 2 digital lane notice(s) from 2545 release(s) over 26 page(s), all notice types, stage read from tender.status",
-    "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-15"
+    "Find a Tender (tender stage): 3 digital lane notice(s) from 3064 release(s) over 31 page(s), all notice types, stage read from tender.status",
+    "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-16",
+    "Find a Tender (planning stage): 3 digital lane notice(s) from 3064 release(s) over 31 page(s), all notice types, stage read from tender.status",
+    "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-16"
    ]
   }
  },
  "counts": {
   "companies": 52,
-  "awardRows": 120,
-  "unmatched": 240,
+  "awardRows": 121,
+  "unmatched": 243,
   "ambiguous": 0,
   "alreadyInMedicalFeed": 0
  },
@@ -581,6 +581,27 @@
    }
   ],
   "Change Healthcare": [
+   {
+    "title": "TNscope pipeline - site license",
+    "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+    "date": "2026-11-24",
+    "url": "https://www.find-tender.service.gov.uk/Notice/111073-2026",
+    "ocid": "ocds-h6vhtk-07c249",
+    "source": "Find a Tender",
+    "valueAmount": 13417.01,
+    "valueCurrency": "GBP",
+    "periodEnd": "2027-11-23",
+    "isFramework": false,
+    "digitalCpv": [
+     "48218000"
+    ],
+    "clinical": false,
+    "lane": "digital",
+    "noticeSupplierName": "CHANGE HEALTHCARE UK HOLDINGS LIMITED",
+    "noticeSupplierCount": 1,
+    "company": "Change Healthcare",
+    "matchedOn": "\"change healthcare uk holdings limited\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   },
    {
     "title": "Medcon Horizon Cardiology System",
     "buyer": "SOMERSET NHS FOUNDATION TRUST",
@@ -2838,6 +2859,67 @@
   ]
  },
  "unmatched": [
+  {
+   "title": "Firewall Planning",
+   "buyer": "LIVERPOOL HEART AND CHEST HOSPITAL NHS FOUNDATION TRUST",
+   "date": "2026-11-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/111261-2026",
+   "ocid": "ocds-h6vhtk-07c2ae",
+   "source": "Find a Tender",
+   "valueAmount": 27392.01,
+   "valueCurrency": "GBP",
+   "periodEnd": "2026-12-11",
+   "isFramework": false,
+   "digitalCpv": [
+    "72700000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "TRUSTMARQUE SOLUTIONS LIMITED",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"trustmarque solutions\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Associate Support with PLC Programme",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "date": "2026-11-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/110884-2026",
+   "ocid": "ocds-h6vhtk-07c1ef",
+   "source": "Find a Tender",
+   "valueAmount": 23200.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2026-12-23",
+   "isFramework": false,
+   "digitalCpv": [
+    "72224000"
+   ],
+   "clinical": false,
+   "lane": "digital",
+   "noticeSupplierName": "Kimberley Pledger Coaching and Consulting",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"kimberley pledger coaching and consulting\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "title": "Provision of similarity and AI writing detection service",
+   "buyer": "NHS England",
+   "date": "2026-11-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/110876-2026",
+   "ocid": "ocds-h6vhtk-07c1e9",
+   "source": "Find a Tender",
+   "valueAmount": 10975.0,
+   "valueCurrency": "GBP",
+   "periodEnd": "2027-11-02",
+   "isFramework": false,
+   "digitalCpv": [
+    "48000000",
+    "48517000"
+   ],
+   "clinical": true,
+   "lane": "digital",
+   "noticeSupplierName": "Turnitin UK Ltd",
+   "noticeSupplierCount": 1,
+   "reason": "no Hub company's name or recorded alias normalises to \"turnitin\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
   {
    "title": "Oncology ePrescribing",
    "buyer": "Royal Surrey County Hospital NHS Foundation Trust",
