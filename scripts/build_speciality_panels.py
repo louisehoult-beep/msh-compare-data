@@ -7958,7 +7958,11 @@ SPECIALITY_RULES = {
         #                        only as the recipient of the shared care paperwork
         #                        afterwards. Buying a secondary care drug service is not
         #                        a primary care contract.
-        "exclude": r"\b(primary care orthodontic\w*|shared care documentation|urgent treatment centres?)\b",
+        #   primary care dental -> "Provision of Lincolnshire Primary Care Dental Services
+        #                        and Orthodontics Service" (NHS Lincolnshire ICB, tender
+        #                        notice 110573-2026, 23/11/2026). NHS dentistry, same
+        #                        reason as primary care orthodontics. Added 24/11/2026.
+        "exclude": r"\b(primary care orthodontic\w*|primary care dental\w*|shared care documentation|urgent treatment centres?)\b",
         "excludeFinding": (
             "The exclusion list exists because every pattern in it matched a real notice "
             "that was not this speciality, and there were five rows across two patterns: "
@@ -7968,7 +7972,7 @@ SPECIALITY_RULES = {
             "agreement, where primary care appears only as the recipient of the shared "
             "care paperwork. A third pattern, urgent treatment centre, was added on 24/10/2026 when "
             "three NHS Kent and Medway ICB awards titled GP-led Urgent Treatment Centre matched on the GP token; "
-            "urgent care is counted on the Emergency and Urgent Care page and must not appear on two pages at once. WHAT A READER OF THIS LIST SHOULD KNOW BEFORE READING IT: "
+            "urgent care is counted on the Emergency and Urgent Care page and must not appear on two pages at once. A fourth, primary care dental, was added on 24/11/2026 when NHS Lincolnshire ICB's Primary Care Dental Services and Orthodontics tender matched on the primary care token; it is NHS dentistry, as the orthodontic contracts are. WHAT A READER OF THIS LIST SHOULD KNOW BEFORE READING IT: "
             "[[awardsTitle:Locally Commissioned Services]] of the [[awards]] matching notices are a single contract family - NHS South "
             "Yorkshire ICB's GP Locally Commissioned Services, awarded practice by "
             "practice across Sheffield, the first of them published on 9 and 10 September 2026. They "

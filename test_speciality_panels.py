@@ -7052,6 +7052,8 @@ check("the coverage note admits what the procurement record cannot see",
 print("  every false positive that was read and thrown out")
 _pc_absent("dentistry, not general practice", "Primary Care Orthodontic Services")
 _pc_absent("dentistry, not general practice", "Primary Care Orthodontic Services Suffolk")
+_pc_absent("dentistry, not general practice",
+           "Provision of Lincolnshire Primary Care Dental Services and Orthodontics Service")
 _pc_absent("a secondary care drug contract, not a primary care one",
            "Denosumab Therapy Outpatients (Short-term agreement) and provision of "
            "Shared Care Documentation to Primary Care")
