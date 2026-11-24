@@ -72,7 +72,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 6 | 28.6% | 2 | 10 | STARTED · 5 EXCLUDED |
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 9 | 45.0% | 3 | 12 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 9 | 47.4% | 8 | 11 | STARTED |
-| Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 12 | 63.2% | 5 | 10 | STARTED |
+| Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 14 | 73.7% | 3 | 10 | STARTED |
 | Examination Gloves | infection | 19 | 5 | 26.3% | 6 | 13 | STARTED |
 | Central Venous Catheters and Associated Products | vascular | 18 | 10 | 55.6% | 4 | 11 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 7 | 38.9% | 2 | 13 | STARTED |
