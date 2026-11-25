@@ -499,6 +499,17 @@ def parse_sbs_page(page_html):
     }
 
 
+def parse_sbs_suppliers(page_html):
+    """Company names from the page's own supplier block (div.supplierprofile), exactly as
+    listed, in page order. Lot headings share the block and are skipped. [] if none."""
+    out = []
+    for m in re.finditer(r'<div class="supplierprofile">(.*?)</div>', page_html or "", re.S):
+        n = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", m.group(1))).replace("\xa0", " ")).strip()
+        if n and not re.match(r"Lot \d", n) and n not in out:
+            out.append(n)
+    return out
+
+
 def award_suppliers(pkg):
     """{lot id: sorted company names} from the award notice, names exactly as published."""
     r = pkg["releases"][0]
@@ -574,9 +585,16 @@ def build_sbs_page_only(fetcher, slug, name, today, extra_nv=()):
     pg = parse_sbs_page(page_html)
     if not pg["reference"] or not pg["starts"]:
         raise RuntimeError("SBS page %s: reference or dates not found" % slug)
-    nv.append("Supplier list not read: the SBS page lists suppliers behind its own supplier tab "
-              "and no award notice was read for this framework. Settled by the SBS supplier "
-              "details or the award notice.")
+    names = parse_sbs_suppliers(page_html)
+    if names:
+        nv.append("Supplier names are as listed on the NHS SBS framework page itself (supplier "
+                  "details block, read %s), company names only; the page does not say which lot "
+                  "each supplier holds, so lot lists stay empty, and no award notice was read to "
+                  "cross-check. Names are not alias-resolved to Hub companies here." % today)
+    else:
+        nv.append("Supplier list not read: the SBS page lists suppliers behind its own supplier tab "
+                  "and no award notice was read for this framework. Settled by the SBS supplier "
+                  "details or the award notice.")
     return {
         "name": name,
         "reference": pg["reference"],
@@ -587,7 +605,7 @@ def build_sbs_page_only(fetcher, slug, name, today, extra_nv=()):
         "ends": pg["ends"],
         "extensionOption": pg["option"],
         "lots": [],
-        "suppliers": None,
+        "suppliers": names or None,
         "verifiedOn": today,
         "sourceQuote": pg["dateLine"],
         "notVerified": nv,
