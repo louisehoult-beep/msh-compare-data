@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "24/11/2026",
- "generated": "2026-11-24",
+ "dataAsOf": "25/11/2026",
+ "generated": "2026-11-25",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,20 +22,20 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-11-16",
-   "to": "2026-11-24",
+   "from": "2026-11-17",
+   "to": "2026-11-25",
    "days": 8,
-   "run": "2026-11-24"
+   "run": "2026-11-25"
   },
   "notes": [
-   "Find a Tender (tender stage): 3 digital lane notice(s) from 3064 release(s) over 31 page(s), all notice types, stage read from tender.status",
-   "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-16",
-   "Find a Tender (planning stage): 3 digital lane notice(s) from 3064 release(s) over 31 page(s), all notice types, stage read from tender.status",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-16"
+   "Find a Tender (tender stage): 3 digital lane notice(s) from 3125 release(s) over 32 page(s), all notice types, stage read from tender.status",
+   "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-17",
+   "Find a Tender (planning stage): 3 digital lane notice(s) from 3125 release(s) over 32 page(s), all notice types, stage read from tender.status",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-17"
   ]
  },
  "counts": {
-  "awards": 420,
+  "awards": 425,
   "awardsClinical": 50,
   "openNotices": 12,
   "openNoticesClinical": 2,
@@ -43,6 +43,120 @@
   "marketEngagementClinical": 0
  },
  "awards": [
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Fava Clinical Genomics Platform for PADEL",
+   "buyer": "Manchester University NHS Foundation Trust",
+   "published": "2026-11-25",
+   "suppliers": [
+    "Fava Health Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": "2029-10-31",
+   "value": 56750.0,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/111520-2026",
+   "ocid": "ocds-h6vhtk-07bf34"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Patient Growth Programme",
+   "buyer": "LIVERPOOL HEART AND CHEST HOSPITAL NHS FOUNDATION TRUST",
+   "published": "2026-11-25",
+   "suppliers": [
+    "RIVA HEALTHCARE LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-11-09",
+   "value": 90000,
+   "digitalCpv": [
+    "72224000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/111667-2026",
+   "ocid": "ocds-h6vhtk-07c3a0"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Genomic Analysis Platform – SomaHRD",
+   "buyer": "Manchester University NHS Foundation Trust",
+   "published": "2026-11-25",
+   "suppliers": [
+    "Congenica Ltd"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/111644-2026",
+   "ocid": "ocds-h6vhtk-07c38e"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Eolas Medical Device Platform License - Antimicrobial Space",
+   "buyer": "MERSEY AND WEST LANCASHIRE TEACHING HOSPITALS NHS TRUST",
+   "published": "2026-11-25",
+   "suppliers": [
+    "EOLAS MEDICAL LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-07-31",
+   "value": 14500.0,
+   "digitalCpv": [
+    "48180000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/111582-2026",
+   "ocid": "ocds-h6vhtk-07c36a"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Dalux Field Pro & Box Pro Platform",
+   "buyer": "Manchester University NHS Foundation Trust",
+   "published": "2026-11-25",
+   "suppliers": [
+    "Dalux Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/111573-2026",
+   "ocid": "ocds-h6vhtk-07c365"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Directory Manager",
+   "buyer": "Coventry and Warwickshire Partnership NHS Trust",
+   "published": "2026-11-25",
+   "suppliers": [
+    "CLOUD 21 LIMITED"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-19",
+   "value": 12360.0,
+   "digitalCpv": [
+    "48517000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/111460-2026",
+   "ocid": "ocds-h6vhtk-07c31e"
+  },
   {
    "lane": "digital",
    "clinical": false,
@@ -377,25 +491,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/109751-2026",
    "ocid": "ocds-h6vhtk-07bf8a"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "award",
-   "title": "Fava Clinical Genomics Platform",
-   "buyer": "Manchester University NHS Foundation Trust",
-   "published": "2026-11-19",
-   "suppliers": [
-    "Fava Health Ltd"
-   ],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "48000000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/109570-2026",
-   "ocid": "ocds-h6vhtk-07bf34"
   },
   {
    "lane": "digital",
@@ -8515,6 +8610,12 @@
    "to": "2026-11-24",
    "days": 8,
    "run": "2026-11-24"
+  },
+  {
+   "from": "2026-11-17",
+   "to": "2026-11-25",
+   "days": 8,
+   "run": "2026-11-25"
   }
  ]
 }
