@@ -465,6 +465,36 @@ def dedup_key(row):
     return row.get("url", "") or (row.get("ocid", ""), row.get("title", ""))
 
 
+def backfill_values(existing):
+    """Re-read stored Find a Tender rows that have no value, by notice number.
+
+    assemble() carries stored rows forward, and a notice older than the fetch
+    window is never re-read, so a row written before tender_value() existed (or
+    before the notice carried a value) keeps valueAmount None for good. That is
+    why 107391-2026 still showed "-" on 25/11/2026 after the 20/11 fix. Only
+    the value fields are touched; a failed fetch leaves the row as it was.
+    Returns the number of rows filled.
+    """
+    filled = 0
+    for row in (existing or {}).get("_rows", []):
+        if row.get("source") != "Find a Tender" or row.get("valueAmount") is not None:
+            continue
+        m = re.search(r"/Notice/(\d+-\d{4})", row.get("url", ""))
+        if not m:
+            continue
+        try:
+            pkg = get("%s/%s" % (FTS_API, m.group(1)))
+        except Exception:
+            continue
+        for rel in (pkg or {}).get("releases") or []:
+            amount, currency, basis = tender_value(rel.get("tender") or {})
+            if amount is not None:
+                row.update(valueAmount=amount, valueCurrency=currency, valueBasis=basis)
+                filled += 1
+                break
+    return filled
+
+
 def assemble(rows, existing, window, notes, complete, today):
     kept = {}
     for row in (existing or {}).get("_rows", []):
@@ -606,6 +636,11 @@ def main(argv=None):
     n_planning = sum(1 for r in deduped if r.get("status") == "planning")
     notes.append("Stage split: %d open tender(s), %d pipeline/PIN notice(s)."
                  % (len(deduped) - n_planning, n_planning))
+
+    n_filled = backfill_values(existing)
+    if n_filled:
+        notes.append("Filled the value on %d stored notice(s) from their own notice." % n_filled)
+        print("  filled value on %d stored notice(s)" % n_filled, flush=True)
 
     doc = assemble(deduped, existing, window, notes, ok, today)
 

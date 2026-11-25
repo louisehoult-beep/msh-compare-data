@@ -137,5 +137,34 @@ class ActNoticeValue(unittest.TestCase):
         self.assertEqual(OT.tender_value({}), (None, "", ""))
 
 
+class BackfillStoredValue(unittest.TestCase):
+    """A stored row older than the fetch window is never re-read, so it kept a
+    blank value. 107391-2026 still showed "-" on 25/11/2026."""
+
+    def setUp(self):
+        self._get = OT.get
+
+    def tearDown(self):
+        OT.get = self._get
+
+    def test_stored_row_without_value_is_filled(self):
+        OT.get = lambda url, *a, **k: {"releases": [copy.deepcopy(ACT_TENDER)]}
+        row = {"source": "Find a Tender", "valueAmount": None, "valueCurrency": "GBP",
+               "url": "https://www.find-tender.service.gov.uk/Notice/107391-2026"}
+        other = {"source": "Find a Tender", "valueAmount": 5, "url": "x/Notice/1-2026"}
+        self.assertEqual(OT.backfill_values({"_rows": [row, other]}), 1)
+        self.assertEqual((row["valueAmount"], row["valueBasis"]), (260000000, "gross"))
+        self.assertEqual(other["valueAmount"], 5)
+
+    def test_failed_fetch_leaves_row_alone(self):
+        def boom(*a, **k):
+            raise OSError("down")
+        OT.get = boom
+        row = {"source": "Find a Tender", "valueAmount": None,
+               "url": "https://www.find-tender.service.gov.uk/Notice/107391-2026"}
+        self.assertEqual(OT.backfill_values({"_rows": [row]}), 0)
+        self.assertIsNone(row["valueAmount"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
