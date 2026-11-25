@@ -151,6 +151,14 @@ REFS = {
     # Added 20/11/2026: hospitals inside each trust (NHS ODS), for the territory maps and
     # How the NHS Fits Together. Minted with `stamp_notice.py --mint`.
     "trust-sites.json":                "ETH-D712799E6",
+    # Added 25/11/2026 (Tussell / HSJ gaps 2 to 5), written from the pipeline repo:
+    # pipeline-notices.json (procurement-signals.yml), framework-calloffs.json
+    # (procurement-signals.yml), trust-table.json (trust-table.yml), trust-spend.json
+    # (trust-spend.yml). Minted with `stamp_notice.py --mint`.
+    "pipeline-notices.json": "ETH-DA0F95B9E",
+    "framework-calloffs.json": "ETH-DC9D93DC3",
+    "trust-table.json": "ETH-D08C2C56A",
+    "trust-spend.json": "ETH-D8C7EB47A",
     # Added 16/10/2026: one ref per speciality panel in data/speciality-panels/, keyed
     # "speciality-panels/<slug>.json". Hash input is the bare file name, as for every
     # other ref. A new panel needs `--mint <slug>.json` and a line here before it builds.
