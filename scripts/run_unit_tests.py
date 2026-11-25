@@ -214,6 +214,7 @@ RUN = [
     "test_vocabulary_duplicates.py",
     "test_whats_new.py",
     "test_weekly_briefing.py",           # 22/10/2026, offline, sends nothing
+    "test_workforce_source.py",          # 25/11/2026, offline
     "test_my_hub_logic.py",
     "test_my_hub_ui.py",             # 2026-10, My Hub modules wired, copy rules
     "test_my_hub_snapshot.py",       # 22/10/2026, My Hub snapshot cards

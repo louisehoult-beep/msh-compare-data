@@ -1,7 +1,8 @@
 #!/bin/bash
 # digital-sources-weekly.sh - LaunchAgent uk.co.elevateandthrive.digital-sources-weekly (added 20/10/2026).
 #
-# WHY IT RUNS ON THE MAC: digital.nhs.uk (NHS App partner lists, Digital Maturity Assessment)
+# WHY IT RUNS ON THE MAC: digital.nhs.uk (NHS App partner lists, Digital Maturity Assessment,
+# NHS Workforce Statistics zip location for the trust table)
 # answers GitHub's runners with HTTP 403 and england.nhs.uk (Federated Data Platform lists)
 # answers them with HTTP 202 and an empty body, so digital-lane.yml cannot refresh these two
 # sources. This job reads them from the Mac, in a throwaway clone (never the OneDrive checkout),
@@ -56,9 +57,14 @@ cd "$DEST" || exit 1
 fail=0
 python3 scripts/refresh_digital_sources.py || { echo "digital sources: not refreshed"; fail=1; }
 python3 scripts/refresh_fdp_live.py || { echo "Federated Data Platform: not refreshed"; fail=1; }
+# Added 25/11/2026: records the NHS Workforce Statistics core CSV zip URL for the pipeline's
+# trust-table.yml (Tuesdays 03:40 UTC), which cannot read digital.nhs.uk's pages from a runner
+# but can download the zip from files.digital.nhs.uk. readOn is re-stamped each Monday, and the
+# runner refuses a record older than 60 days.
+python3 scripts/refresh_workforce_source.py || { echo "workforce source: not refreshed"; fail=1; }
 python3 scripts/stamp_notice.py || true
 
-if git diff --quiet -- data/digital-sources.json data/trust-digital-profile.json; then
+if git diff --quiet -- data/digital-sources.json data/trust-digital-profile.json config/workforce-source.json; then
   echo "unchanged: nothing to land"
   rm -rf "$DEST"
   [ "$fail" = "0" ] && echo "$TODAY" > "$STAMP"
@@ -67,7 +73,7 @@ if git diff --quiet -- data/digital-sources.json data/trust-digital-profile.json
 fi
 
 if bash ./land.sh "Digital sources and Federated Data Platform profile $TODAY (Mac refresh)" \
-     data/digital-sources.json data/trust-digital-profile.json; then
+     data/digital-sources.json data/trust-digital-profile.json config/workforce-source.json; then
   echo "$TODAY" > "$STAMP"
   echo "== done (landed, fail=$fail)"
   exit "$fail"
