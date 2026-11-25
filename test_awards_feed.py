@@ -115,6 +115,18 @@ class FindATenderAwardsGap(unittest.TestCase):
         dead["awards"][0]["status"] = "cancelled"
         self.assertEqual(RA.rows_from_release(dead, "Find a Tender", "tender-awards"), [])
 
+    def test_zero_value_is_not_stated_value(self):
+        z = copy.deepcopy(ACT_AWARD)
+        z["awards"][0]["value"] = {"amount": 0, "currency": "GBP"}
+        rows = RA.rows_from_release(z, "Find a Tender", "tender-awards")
+        self.assertIsNone(rows[0]["valueAmount"])
+
+    def test_supplier_name_that_is_a_personal_email_is_dropped(self):
+        e = copy.deepcopy(ACT_AWARD)
+        e["awards"][0]["suppliers"] = [{"name": "matthew.wood7@nhs.net"}, {"name": "MRC Holland"}]
+        rows = RA.rows_from_release(e, "Find a Tender", "tender-awards")
+        self.assertEqual([r["noticeSupplierName"] for r in rows], ["MRC Holland"])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
