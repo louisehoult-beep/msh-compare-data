@@ -639,7 +639,8 @@ class ComparisonWoundCareTypes(unittest.TestCase):
             self.assertIn(t, self.wound)
 
     def test_exclusion_is_applied_in_both_filters(self):
-        self.assertEqual(self.src.count("if (spec && specExcludes(spec.toLowerCase(), p))"), 2)
+        # The two left-hand filters, and the rival side (sharesSpec, 26/11/2026).
+        self.assertEqual(self.src.count("if (spec && specExcludes(spec.toLowerCase(), p))"), 3)
 
     def test_skin_prep_and_theatre_swabs_stay_out(self):
         for name in ("AEROWIPE 70% Isopropyl Alcohol Swab 3 x 3cm Box/100",

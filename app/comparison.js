@@ -83,6 +83,12 @@
      found by the word match, as before 30/09/2026. */
   var PCATURL = BASE + 'data/product-categories.json' + CB;
   var PCAT_NPC = {}, PCAT_NAME = {};
+  /* data/speciality-map.json: the one vocabulary that says "Continence",
+     "Continence & urology" and "Continence / stoma" are the same speciality.
+     Used to keep rivals inside the speciality of the product on the left (see
+     specContext). On a failed fetch each label only matches itself. */
+  var SPECMAPURL = BASE + 'data/speciality-map.json' + CB;
+  var SPEC_IDS = {};
 
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
@@ -226,6 +232,9 @@
     mesh: /\b(bed|rail|siderail|bumper|basket|bag|sling|nebuli[sz]er|tray|cap|bin|shoe|hair|mitt|mitts|visor|laundry|cot|cradle|chair|filter|filters|hammock|bandage|bandages|hat|hats|nets|lead|shelf|mesh-free|fixation|universal|alto|pro-fit|pronto-fit|secure-fit|clip-fit)\b/i,
     suture: /\b(forceps|scissor|scissors|cart|couch|anchor|anchors|pack|packs|remov\w*|needle holders?|pusher|marker|button|clip|set|instruments?|fil de|smoother)\b/i
   };
+  /* Words that contain a type word and are a different product altogether.
+     Module scope: typeOf() runs while render() is still building PRODUCTS. */
+  var TYPE_INSIDE = { ostomy: /gastrostomy|jejunostomy|tracheostomy/, haemostat: /forcep/ };
   var KEYPOINTS = {
     'BD — Becton, Dickinson': { 'nexiva': 'Closed IV system — fewer blood exposures/disconnections vs an open cannula', 'chloraprep': 'Licensed medicinal product (UK marketing authorisation) — 2% CHG / 70% IPA sterile applicator, indicated for skin disinfection before invasive procedures' },
     'GAMA Healthcare': { 'hexi-prep': 'Licensed medicine (PL 40867/0002) — sterile 2% CHG / 70% IPA pad; its indication covers invasive procedures NOT requiring a clean-air environment (vascular access focus, per GAMA\u2019s prescribing information)' },
@@ -260,8 +269,12 @@
     fetch(DOSSIERURL).then(function(r){return r.json();}).catch(function(){return {dossiers:[]};}),
     fetch(DOSSIERURL_RESPIRATORY).then(function(r){return r.json();}).catch(function(){return {dossiers:[]};}),
     fetch(PCATURL).then(function(r){return r.json();}).catch(function(){return {categories:{}};}),
-    fetch(DOSSIERURL_DERMATOLOGY).then(function(r){return r.json();}).catch(function(){return {dossiers:[]};})
+    fetch(DOSSIERURL_DERMATOLOGY).then(function(r){return r.json();}).catch(function(){return {dossiers:[]};}),
+    fetch(SPECMAPURL).then(function(r){return r.json();}).catch(function(){return {};})
   ]).then(function(res){
+    var SM = res[12] || {};
+    (SM.canonicalSpecialities || []).forEach(function(c){ SPEC_IDS[nk(c.label)] = [c.id]; });
+    Object.keys(SM.supplierSpecialityMap || {}).forEach(function(l){ var to = SM.supplierSpecialityMap[l].to; if (to && to.length) SPEC_IDS[nk(l)] = to; });
     var PC = (res[10] && res[10].categories) || {};
     Object.keys(PC).forEach(function(c){
       (PC[c].npc || []).forEach(function(n){ (PCAT_NPC[n] = PCAT_NPC[n] || []).push(c); });
@@ -579,7 +592,7 @@
       for (var i = 0; i < TYPES.length; i++){ var t = TYPES[i].trim(); if (t && d.indexOf(t) === 0 && t.length > best.length) best = t; }
       return aliasType(best);
     }
-    function typeOf(n){ n = (n||'').toLowerCase(); for (var i=0;i<TYPES.length;i++){ if (n.indexOf(TYPES[i]) !== -1) return aliasType(TYPES[i].trim()); } return ''; }
+    function typeOf(n){ n = (n||'').toLowerCase(); for (var i=0;i<TYPES.length;i++){ if (n.indexOf(TYPES[i]) !== -1){ var not = TYPE_INSIDE[TYPES[i]]; if (not && not.test(n)) continue; return aliasType(TYPES[i].trim()); } } return ''; }
     function aliasType(t){ return (t && TYPE_ALIAS && typeof TYPE_ALIAS[t] === 'string') ? TYPE_ALIAS[t] : t; }
     // Type from the product name; if the name has no category word, fall back to the
     // real NHS Supply Chain catalogue description (e.g. "Intermittent Catheter…",
@@ -699,6 +712,101 @@
       var d = detailFor(p);
       var txt = (p.name + ' ' + ((d && d.items) || []).map(function(it){ return it.desc || ''; }).join(' ')).toLowerCase();
       return ex.test(txt);
+    }
+    /* RIVALS STAY IN THE SPECIALITY (Lou, 26/11/2026: "if I filter by company
+       and then product, all products in the comparisons are still coming up but
+       only products in the same speciality should come up"). The right-hand side
+       used to narrow by product type only, and by nothing at all until a single
+       product was named, so a company + product type left the whole index there.
+       A product's own Differentiator category outranks its supplier's list of
+       specialities, because every product inherits the whole of that list. */
+    var SPEC_EXTRA = { 'surgery / theatres': ['theatres'], 'patient handling and pressure area care': ['handling'] };
+    /* Differentiator category areas that sit inside a wider speciality. */
+    var AREA_IDS = { closure: ['closure','theatres'], mis: ['mis','theatres'], surgical: ['surgical','theatres'], gastro: ['gastro','endoscopy'], endourology: ['endourology','continence'], ultrasound: ['ultrasound','imaging'] };
+    function idsOfSpec(label){ var k = nk(label); return SPEC_IDS[k] || SPEC_EXTRA[k] || [k]; }
+    function addTo(set, ids){ ids.forEach(function(i){ set[i] = 1; }); return set; }
+    function hits(set, S){ for (var k in set){ if (S[k]) return true; } return false; }
+    function anyKey(set){ for (var k in set) return true; return false; }
+    function areaIds(cat){ var a = cat.split(':')[0]; var ids = AREA_IDS[a] || [a]; return (cat === 'closure:strips' || cat === 'closure:adhes') ? ids.concat('wound') : ids; }
+    function ownIds(p){ if (!p._sids){ p._sids = {}; (p.specs || []).forEach(function(sp){ addTo(p._sids, idsOfSpec(sp)); }); } return p._sids; }
+    var TYPE_IDS = {};
+    function typeIds(t){
+      if (!t) return {};
+      if (!TYPE_IDS[t]){ TYPE_IDS[t] = {}; for (var k in SPECMAP){ if (SPECMAP[k].indexOf(t) !== -1) addTo(TYPE_IDS[t], idsOfSpec(k)); } }
+      return TYPE_IDS[t];
+    }
+    /* A catheter or cannula that says what it is for. Read before its category
+       and its supplier's list, which for a broad firm would let its angiography and
+       central venous lines through as continence rivals. */
+    var CATH_SPEC = [
+      [/intermittent|foley|urinary|urethral|ureter|nephrostomy|bladder|leg bag/, ['continence','endourology']],
+      [/central venous|\bpicc\b|midline|peripheral i\.?v|\bi\.?v\.? (catheter|cannula)|arterial line/, ['vascular','anaesthesia']],
+      [/angiograph|angioplasty|coronary|\bptca\b|\bpci\b|\bivus\b|guiding|electrode|ablation|thrombolysis|microcatheter|balloon dilat|imaging catheter|transseptal|atrial/, ['cardiology','vascsurg','imaging']],
+      [/dialysis/, ['renal','vascular']],
+      [/suction/, ['respiratory','anaesthesia','theatres']],
+      [/umbilical|neonatal/, ['neonatal','vascular']]
+    ];
+    function namedIds(p){
+      var n = p.name.toLowerCase().replace(/_/g, ' ');
+      if (!/catheter|cannula|picc|midline/.test(n)) return null;
+      for (var i = 0; i < CATH_SPEC.length; i++){ if (CATH_SPEC[i][0].test(n)) return addTo({}, CATH_SPEC[i][1]); }
+      return null;
+    }
+    /* The speciality a product itself belongs to: where its categories and its
+       type agree, that; otherwise its main category plus whichever of its
+       supplier's specialities fit its type; otherwise the supplier's list. */
+    function productSpecIds(p){
+      if (p._pids) return p._pids;
+      var own = ownIds(p), T = typeIds(p.type), both = {}, out = {};
+      if (p.specsStated) return (p._pids = own);
+      var named = namedIds(p);
+      if (named) return (p._pids = named);
+      Object.keys(catsOf(p)).forEach(function(c){ areaIds(c).forEach(function(i){ if (T[i]) both[i] = 1; }); });
+      if (anyKey(both)) return (p._pids = both);
+      var main = catOf(p);
+      if (main) addTo(out, areaIds(main));
+      for (var i in T){ if (own[i]) out[i] = 1; }
+      return (p._pids = anyKey(out) ? out : own);
+    }
+    /* The speciality rivals must share. The picked speciality wins; otherwise it
+       is read off the product, or off everything the left-hand filters leave. */
+    function specContext(mine){
+      var spec = selSpec.sel.value;
+      if (spec && (!mine || inSpec(mine, spec))) return addTo({}, idsOfSpec(spec));
+      var S = {};
+      if (mine) addTo(S, Object.keys(productSpecIds(mine)));
+      else if (selSup.sel.value || selType.sel.value){
+        /* Across several products, the categorised ones speak for the range;
+           supplier-wide labels are only used where none is categorised. */
+        var left = subset(), cated = left.filter(function(p){ return catOf(p); });
+        (cated.length ? cated : left).forEach(function(p){ for (var i in productSpecIds(p)) S[i] = 1; });
+      }
+      return anyKey(S) ? S : null;
+    }
+    /* typed: the rivals are already held to one product type. Without that, a
+       supplier-wide speciality is not enough to show an uncategorised product
+       belongs (a sunscreen from a wound care supplier is not a wound product). */
+    function sharesSpec(p, S, typed){
+      if (!S) return true;
+      var spec = selSpec.sel.value;
+      if (spec && specExcludes(spec.toLowerCase(), p)) return false;
+      if (p.specsStated) return hits(ownIds(p), S);
+      var main = catOf(p);
+      /* The device-type list narrows this side exactly as it does the left. */
+      var allowed = (spec && !typed) ? SPECMAP[spec.toLowerCase()] : null;
+      if (allowed && p.type && allowed.indexOf(p.type) === -1) return false;
+      var named = namedIds(p);
+      if (named) return hits(named, S);
+      if (!main){
+        if (typed) return hits(ownIds(p), S);
+        var own = ownIds(p);
+        return Object.keys(typeIds(p.type)).some(function(i){ return own[i] && S[i]; });
+      }
+      if (areaIds(main).some(function(i){ return S[i]; })) return true;
+      /* A type that only ever belongs to one speciality (haemostat) outweighs
+         a stray category on a supplier who works in that speciality. */
+      var T = Object.keys(typeIds(p.type));
+      return T.length === 1 && !!S[T[0]] && !!ownIds(p)[T[0]];
     }
     /* THE TWO SIDES, SIDE BY SIDE — in the form as well as the result.
        Lou, 06/08/2026: the form stacked "your product" above "compare against",
@@ -874,23 +982,31 @@
        supplier has been picked, so the list only ever holds things that could
        genuinely compete with the product on the left. */
     function rivalsOf(mine, supFilter){
+      /* With no single product named yet, the company and product type already
+         picked on the left still narrow this side. */
+      var own = mine ? mine.supplier : selSup.sel.value;
+      var type = mine ? mine.type : selType.sel.value;
+      var S = specContext(mine);
       return PRODUCTS.filter(function(p){
-        if (mine && p.supplier === mine.supplier) return false;      // never your own range
+        if (own && p.supplier === own) return false;                 // never your own range
         if (supFilter && p.supplier !== supFilter) return false;
-        if (mine && mine.type && p.type && p.type !== mine.type) return false;
-        if (mine && mine.type && !p.type) return false;              // untyped can't be shown to compete
-        return true;
+        if (type && p.type !== type) return false;                   // untyped can't be shown to compete
+        return sharesSpec(p, S, !!type);
       });
     }
     function refreshList2(){
       dl2.innerHTML = '';
       var mine = resolveMine();
       var seenO = {};
-      rivalsOf(mine, selSup2.sel.value).forEach(function(p){
+      /* Rebuild the company list first: it drops a choice that no longer competes. */
+      refreshRivalCompanies(mine);
+      var list = rivalsOf(mine, selSup2.sel.value);
+      /* Nothing picked anywhere: the whole index is no help as a dropdown. */
+      if (!mine && !selSpec.sel.value && !selSup.sel.value && !selType.sel.value) list = list.slice(0, 500);
+      list.forEach(function(p){
         var v = p.name + '  ·  ' + p.supplier;
         if (!seenO[v]){ seenO[v] = 1; var o = el('option'); o.value = v; dl2.appendChild(o); }
       });
-      refreshRivalCompanies(mine);
     }
     /* And the company list on the right is rebuilt from those rivals, so it holds
        only suppliers that actually offer something comparable — not all 345. */
@@ -900,8 +1016,9 @@
       rivalsOf(mine, '').forEach(function(p){ if (!names[p.supplier]){ names[p.supplier] = 1; out.push(p.supplier); } });
       out.sort(function(a, b){ return a.toLowerCase() < b.toLowerCase() ? -1 : 1; });
       var lbl = selSup2.box.querySelector('label');
-      if (lbl) lbl.textContent = mine && mine.type
-        ? ('Their company — ' + out.length + ' with a ' + mine.type)
+      var type = mine ? mine.type : selType.sel.value;
+      if (lbl) lbl.textContent = type
+        ? ('Their company — ' + out.length + ' with a ' + type)
         : 'Their company (optional)';
       selSup2.sel.innerHTML = '';
       var o0 = el('option'); o0.value = ''; o0.textContent = '— any competitor —'; selSup2.sel.appendChild(o0);
@@ -935,7 +1052,12 @@
       refreshList2();
       updateSuggestPlaceholder();
     });
-    selType.sel.addEventListener('change', function(){ refreshList(); refreshList2(); updateSuggestPlaceholder(); });
+    selType.sel.addEventListener('change', function(){
+      /* A product of another type left in the box would keep steering the rivals. */
+      var typ = selType.sel.value, held = inp.value.trim() && resolveMine();
+      if (typ && held && held.type !== typ) inp.value = '';
+      refreshList(); refreshList2(); updateSuggestPlaceholder();
+    });
     inp.addEventListener('input', function(){ refreshList2(); updateSuggestPlaceholder(); });
     selSup2.sel.addEventListener('change', function(){ refreshList2(); updateSuggestPlaceholder(); });
     refreshList();
@@ -1287,8 +1409,9 @@
       var theirs = null, autoSuggested = false;
       if (mine){
         if (typedTheirs){
-          var pool2 = PRODUCTS.filter(function(p){ return !selSup2.sel.value || p.supplier === selSup2.sel.value; });
-          theirs = resolveByCodeOrName(typedTheirs, pool2);
+          /* Same-speciality rivals first; a product typed in full from outside
+             them is still found by the fallback inside resolveByCodeOrName. */
+          theirs = resolveByCodeOrName(typedTheirs, rivalsOf(mine, selSup2.sel.value));
         }
         if (!theirs && !typedTheirs){
           var comps0 = competitorsOf(mine, selSup2.sel.value);
@@ -1365,7 +1488,8 @@
     }
     function competitorsOf(mine, supFilter){
       var seen = {}, out = [];
-      function add(p){ var k = p.name + '|' + p.supplier; if (p.supplier !== mine.supplier && (!supFilter || p.supplier === supFilter) && !seen[k]){ seen[k] = 1; out.push(p); } }
+      var S = specContext(mine);
+      function add(p){ var k = p.name + '|' + p.supplier; if (p.supplier !== mine.supplier && (!supFilter || p.supplier === supFilter) && !seen[k] && sharesSpec(p, S, true)){ seen[k] = 1; out.push(p); } }
       // Rank the closest like-for-like first: overlap of 8-char word stems from the
       // product name + its live catalogue description (e.g. Pahacel [ORC] ranks
       // Surgicel [ORC] above a flowable matrix), then cached detail, then speciality.
