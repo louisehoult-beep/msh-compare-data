@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "25/11/2026",
- "generated": "2026-11-25",
+ "dataAsOf": "26/11/2026",
+ "generated": "2026-11-26",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,27 +22,103 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-11-17",
-   "to": "2026-11-25",
+   "from": "2026-11-18",
+   "to": "2026-11-26",
    "days": 8,
-   "run": "2026-11-25"
+   "run": "2026-11-26"
   },
   "notes": [
-   "Find a Tender (tender stage): 3 digital lane notice(s) from 3125 release(s) over 32 page(s), all notice types, stage read from tender.status",
-   "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-17",
-   "Find a Tender (planning stage): 3 digital lane notice(s) from 3125 release(s) over 32 page(s), all notice types, stage read from tender.status",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-17"
+   "Find a Tender (tender stage): 4 digital lane notice(s) from 3208 release(s) over 33 page(s), all notice types, stage read from tender.status",
+   "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-18",
+   "Find a Tender (planning stage): 3 digital lane notice(s) from 3208 release(s) over 33 page(s), all notice types, stage read from tender.status",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-18"
   ]
  },
  "counts": {
-  "awards": 425,
+  "awards": 428,
   "awardsClinical": 50,
-  "openNotices": 12,
-  "openNoticesClinical": 2,
+  "openNotices": 13,
+  "openNoticesClinical": 3,
   "marketEngagement": 2,
   "marketEngagementClinical": 0
  },
  "awards": [
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Drug Knowledge Base for Electronic Health and Care Record",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "published": "2026-11-26",
+   "suppliers": [
+    "FIRST DATABANK UK LTD"
+   ],
+   "isFramework": false,
+   "contractEnd": "2036-03-31",
+   "value": 2556297,
+   "digitalCpv": [
+    "48000000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/112114-2026",
+   "ocid": "ocds-h6vhtk-07b5c1"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Civica - Data Complaints, DPIAs & Incident  Breach MGMT",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "published": "2026-11-26",
+   "suppliers": [
+    "Civica UK Limited"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 75750,
+   "digitalCpv": [
+    "72268000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/112284-2026",
+   "ocid": "ocds-h6vhtk-07c500"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "SolarWinds",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "published": "2026-11-26",
+   "suppliers": [
+    "Prosperon Networks Ltd."
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 63879,
+   "digitalCpv": [
+    "72268000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/112250-2026",
+   "ocid": "ocds-h6vhtk-07c4f0"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "CoStar License Subscription",
+   "buyer": "NHS Property Services Limited",
+   "published": "2026-11-26",
+   "suppliers": [
+    "CoStar UK LImited"
+   ],
+   "isFramework": false,
+   "contractEnd": "2027-10-30",
+   "value": 156334.94,
+   "digitalCpv": [
+    "72212218"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/112091-2026",
+   "ocid": "ocds-h6vhtk-07c498"
+  },
   {
    "lane": "digital",
    "clinical": false,
@@ -1816,25 +1892,6 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/105431-2026",
    "ocid": "ocds-h6vhtk-07b5ce"
-  },
-  {
-   "lane": "digital",
-   "clinical": false,
-   "stage": "award",
-   "title": "Drug Knowledge Base for Electronic Health and Care Record",
-   "buyer": "SOMERSET NHS FOUNDATION TRUST",
-   "published": "2026-11-05",
-   "suppliers": [
-    "FIRST DATABANK UK LTD"
-   ],
-   "isFramework": false,
-   "contractEnd": null,
-   "value": null,
-   "digitalCpv": [
-    "48000000"
-   ],
-   "url": "https://www.find-tender.service.gov.uk/Notice/105425-2026",
-   "ocid": "ocds-h6vhtk-07b5c1"
   },
   {
    "lane": "digital",
@@ -8374,6 +8431,28 @@
     "72252000"
    ],
    "clinical": false
+  },
+  {
+   "title": "PN365 - Integrated EPR Patient Engagement Portal",
+   "buyer": "Sheffield Health Partnership University NHS Foundation Trust",
+   "status": "active",
+   "rawStatus": "active",
+   "stage": "open tender",
+   "date": "2026-11-26",
+   "closingDate": null,
+   "startDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/112318-2026",
+   "source": "Find a Tender",
+   "cpv": "48814200",
+   "valueAmount": 250000.0,
+   "valueCurrency": "GBP",
+   "valueBasis": "net",
+   "ocid": "ocds-h6vhtk-07c514",
+   "lane": "digital",
+   "digitalCpv": [
+    "48814200"
+   ],
+   "clinical": true
   }
  ],
  "marketEngagement": [
@@ -8616,6 +8695,12 @@
    "to": "2026-11-25",
    "days": 8,
    "run": "2026-11-25"
+  },
+  {
+   "from": "2026-11-18",
+   "to": "2026-11-26",
+   "days": 8,
+   "run": "2026-11-26"
   }
  ]
 }
