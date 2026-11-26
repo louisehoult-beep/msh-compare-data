@@ -52,7 +52,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 14 | 32 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 29 | 54.7% | 14 | 30 | STARTED |
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 19 | 25 | STARTED |
-| Operating Theatres Equipment and Related Accessories and Services | theatres | 42 | 13 | 31.0% | 13 | 28 | STARTED |
+| Operating Theatres Equipment and Related Accessories and Services | theatres | 42 | 14 | 33.3% | 12 | 28 | STARTED |
 | Wound Closure | closure | 39 | 14 | 35.9% | 19 | 20 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 16 | 43.2% | 6 | 28 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 18 | 48.6% | 12 | 20 | STARTED · 1 EXCLUDED |
