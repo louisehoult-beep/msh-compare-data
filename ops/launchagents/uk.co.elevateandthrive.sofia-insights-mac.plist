@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>uk.co.elevateandthrive.sofia-insights-mac</string>
+
+    <!-- Daily Mac read for Sofia (Analysts page): www.england.nhs.uk answers GitHub's runners
+         202 with an empty body. 07:20, 09:30 and 13:00 local and at load; the script exits at once
+         after the day's first success. Throwaway clone, lands through land.sh. The script is read
+         from the local mirror's main each run. Source of truth: msh-compare-data
+         ops/launchagents/. No Claude involved. -->
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>-c</string>
+        <string>mkdir -p "$HOME/.claude/state" "$HOME/Library/Logs"; M="$HOME/.claude/msh-mirror/msh-compare-data.git"; git -C "$M" fetch --quiet https://github.com/louisehoult-beep/msh-compare-data.git main:main 2&gt;&gt;"$HOME/Library/Logs/sofia-insights-mac.log"; git -C "$M" show main:ops/launchagents/sofia-insights-mac.sh &gt; "$HOME/.claude/state/sofia-insights-mac.sh" 2&gt;&gt;"$HOME/Library/Logs/sofia-insights-mac.log" &amp;&amp; /bin/bash "$HOME/.claude/state/sofia-insights-mac.sh"</string>
+    </array>
+
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict><key>Hour</key><integer>7</integer><key>Minute</key><integer>20</integer></dict>
+        <dict><key>Hour</key><integer>9</integer><key>Minute</key><integer>30</integer></dict>
+        <dict><key>Hour</key><integer>13</integer><key>Minute</key><integer>0</integer></dict>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+</dict>
+</plist>

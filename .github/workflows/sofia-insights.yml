@@ -1,12 +1,13 @@
 name: Sofia insights refresh (Analysts page, page 6790)
 
-# NOT INSTALLED until Lou says go. At go-live it goes to .github/workflows/sofia-insights.yml
-# in msh-compare-data, with scripts/, config/, app/ and data/ copied across and
-# data/sofia-insights.json given a ref in scripts/stamp_notice.py (--mint).
+# Every item is re-read from its official source; anything that fails is held and never written.
+# The page shows only items verified on today's London date, so a failed or late run shows
+# nothing rather than yesterday's facts.
 #
-# Every item is re-read from its official source each run; anything that fails is held and never
-# written. The page shows only items verified on today's London date, so a failed or late run
-# shows nothing rather than yesterday's facts. This is the only writer of data/sofia-insights.json.
+# TWO WRITERS of data/sofia-insights.json and state/sofia-held.json: this workflow, and the Mac
+# job ops/launchagents/sofia-insights-mac.sh. www.england.nhs.uk answers this runner with an empty
+# HTTP 202 (seen 27/11/2026), so its pages are read from the Mac; a run here keeps what the Mac
+# verified earlier the same day (refresh_sofia_insights.py, carry_today).
 
 on:
   schedule:

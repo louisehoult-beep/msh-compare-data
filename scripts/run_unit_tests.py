@@ -115,6 +115,7 @@ RUN = [
     "test_search_private_desks.py",      # 18/11/2026, private company desks never in the public search index
     "test_hub_search_findability.py",    # 18/11/2026, product searches reach the framework, Compare and pages (needs node)
     "test_digital_lane.py",              # 20/10/2026, digital health lane + Federated Data Platform profile
+    "test_sofia_carry.py",               # 27/11/2026, Sofia: only same-day verified items survive a refused read
     "test_open_tenders_feed.py",         # 20/11/2026, Find a Tender stages= filter dropped Procurement Act notices (107391-2026)
     "test_awards_feed.py",               # 20/11/2026, same stages= gap on the awards feed; Act award CPVs only on awards[].items (107411-2026)
     "test_company_digital_awards.py",    # 20/10/2026, digital awards layer (own file, exact-only match)

@@ -9,6 +9,12 @@ run and the check below passed:
   new document   the document itself re-opened and its title and date confirmed
 Anything that fails is held (state/sofia-held.json) and never shown.
 
+Two machines run this. www.england.nhs.uk answers GitHub's runners with an empty HTTP 202, so
+ops/launchagents/sofia-insights-mac.sh reads it from the Mac each morning. A later run that
+cannot read that site keeps an item ONLY if it was verified earlier the same London day (and,
+for a standing item, its words are unchanged). A page that was read and no longer carries the
+quote is held, never kept.
+
 Standard library only, plus the pdftotext command for the one PDF source (poppler-utils).
 Usage: python3 scripts/refresh_sofia_insights.py [--out data/sofia-insights.json]
 """
@@ -26,16 +32,34 @@ NOW = datetime.datetime.now(TZ)
 TODAY = NOW.date()
 
 _cache = {}
+_unreadable = {}
+
+
+class Unreadable(Exception):
+    """The site did not give this machine the page: not the same as the page having changed."""
+
+
+def host(url):
+    return urllib.parse.urlparse(url).netloc
 
 
 def fetch(url, binary=False):
+    if url in _unreadable:
+        raise Unreadable(_unreadable[url])
     if url not in _cache:
         last = None
         for attempt in range(3):
             try:
                 with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=45) as r:
-                    _cache[url] = r.read()
+                    status, body = r.status, r.read()
+                if status != 200 or not body:
+                    # not retried: do not keep asking a site that is declining this machine
+                    _unreadable[url] = 'page not readable from this machine (HTTP %s, %d bytes): %s' % (status, len(body), url)
+                    raise Unreadable(_unreadable[url])
+                _cache[url] = body
                 break
+            except Unreadable:
+                raise
             except Exception as e:
                 last = e
                 time.sleep(2 * (attempt + 1))
@@ -301,6 +325,31 @@ def nhs_feed(cfg, since, held):
     return out
 
 
+def carry_today(previous, standing_cfg, current_ids, unreadable_standing, blocked_hosts):
+    """Items verified earlier today that this run could not re-read because their site refused it."""
+    today = TODAY.isoformat()
+    if not previous or previous.get('dataAsOf') != today:
+        return []
+    cfg = {i['id']: i for i in standing_cfg}
+    kept = []
+    for old in previous.get('items') or []:
+        urls = [s.get('url', '') for s in old.get('sources') or []]
+        if old.get('verifiedOn') != today or old.get('id') in current_ids or not urls:
+            continue
+        if old.get('type') == 'standing':
+            want = cfg.get(old['id'])
+            if not want or old['id'] not in unreadable_standing:
+                continue
+            if any(old.get(k) != want.get(k) for k in ('area', 'title', 'summary', 'meaning', 'date', 'deadline', 'deadlineLabel')):
+                continue
+            if urls != [ev['url'] for ev in want['evidence']]:
+                continue
+        elif not all(host(u) in blocked_hosts for u in urls):
+            continue
+        kept.append(old)
+    return kept
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', default=os.path.join(ROOT, 'data', 'sofia-insights.json'))
@@ -310,13 +359,30 @@ def main():
     cfg = json.load(open(os.path.join(ROOT, 'config', 'sofia-sources.json'), encoding='utf-8'))
     standing_cfg = json.load(open(a.standing, encoding='utf-8'))['items']
     since = TODAY - datetime.timedelta(days=cfg['windowDays'])
-    held, standing = [], []
+    held, standing, unreadable = [], [], set()
     for item in standing_cfg:
         try:
             standing.append(check_standing(item))
         except Exception as e:
+            if isinstance(e, Unreadable):
+                unreadable.add(item['id'])
             held.append({'id': item['id'], 'reason': str(e)[:300]})
     new = watched(cfg, since, held) + searched(cfg, since, held) + legislation(cfg, since, held) + nhs_feed(cfg, since, held)
+    try:
+        with open(a.out, encoding='utf-8') as f:
+            previous = json.load(f)
+    except (OSError, ValueError):
+        previous = None
+    kept = carry_today(previous, standing_cfg, {i['id'] for i in standing + new}, unreadable,
+                       {host(u) for u in _unreadable})
+    kept_ids = {i['id'] for i in kept}
+    held = [h for h in held if h['id'] not in kept_ids]
+    standing += [i for i in kept if i['type'] == 'standing']
+    order = [i['id'] for i in standing_cfg]
+    standing.sort(key=lambda i: order.index(i['id']))
+    new += [i for i in kept if i['type'] != 'standing']
+    if kept:
+        print('kept %d item(s) verified earlier today that this machine could not re-read: %s' % (len(kept), ', '.join(sorted(kept_ids))))
     new.sort(key=lambda x: (x['date'], x['area'], x['title']), reverse=True)
     if not standing:
         sys.exit('No standing item passed. Nothing written. First reason: %s' % (held[0]['reason'] if held else 'unknown'))
