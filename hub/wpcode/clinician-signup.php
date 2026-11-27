@@ -15,7 +15,7 @@
    - Emails the clinician a welcome with next steps and a copy of the agreement
      they ticked, and emails Lou the full details and the CV link.
    - Hands back the reference and the Bookings link, so the page moves straight
-     to booking the 60-minute Teams call.
+     to booking the 30-minute Teams call.
 
    The gate: the form only accepts submissions from administrators (for
    testing) and shows everyone else "opening soon" until all three hold:
@@ -382,7 +382,7 @@ if ( ! function_exists( 'msh_cp_welcome_email' ) ) {
 		$yn   = function ( $v ) {
 			return $v ? 'yes' : 'no';
 		};
-		$btn  = $booking ? '<p style="margin:22px 0"><a href="' . $h( $booking ) . '" style="background:#CBA257;color:#1D2733;padding:14px 26px;text-decoration:none;font-weight:700;display:inline-block">Book your 60-minute call</a></p>' : '';
+		$btn  = $booking ? '<p style="margin:22px 0"><a href="' . $h( $booking ) . '" style="background:#CBA257;color:#1D2733;padding:14px 26px;text-decoration:none;font-weight:700;display:inline-block">Book your 30-minute call</a></p>' : '';
 		$when = msh_cp_uk_time( $r['agreement_accepted'] );
 		$html = '<div style="font-family:Arial,sans-serif;font-size:16px;line-height:1.55;color:#1D2733;background:#FFFFFF;max-width:640px">'
 			. '<div style="background:#FFFFFF;color:#1D2733;padding:22px 26px;border:1px solid #E6E8EC;border-top:4px solid #CBA257"><div style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#8A6A2E">Clinical to Commercial: The Gateway to Industry Roles</div>'
@@ -407,7 +407,7 @@ if ( ! function_exists( 'msh_cp_welcome_email' ) ) {
 			. '<li>I will never contact your current employer.</li>'
 			. '<li>You can leave, or change what you agreed to share, at any time by replying to this email.</li></ul>'
 			. '<p><strong>What happens next</strong></p>'
-			. '<p>Book your 60-minute Microsoft Teams call with me, if you have not already, and put your reference in the booking form so I have your details in front of me. Before then, have your CV to hand and your registration number.</p>'
+			. '<p>Book your 30-minute Microsoft Teams call with me, if you have not already, and put your reference in the booking form so I have your details in front of me. Before then, have your CV to hand and your registration number.</p>'
 			. $btn
 			. '<p>If anything here does not match what you meant to agree to, just reply and I will put it right.</p>'
 			. '<p>Best wishes,</p><p>Louise Hoult<br>Director, Elevate and Thrive Ltd<br>louisehoult@elevateandthrive.uk</p>'
@@ -664,7 +664,7 @@ add_shortcode( 'msh_clinician_signup', function () {
 	$form .= '<p class="mshcp-err" role="alert" hidden></p><button type="submit" class="mshcp-btn">Sign up and book my call</button></form>';
 
 	$done = '<div class="mshcp-done" hidden><h2>You are signed up</h2><p>Your reference is <strong class="mshcp-ref"></strong> <button type="button" class="mshcp-copy">Copy</button></p>'
-		. '<p>Now book your 60-minute Microsoft Teams call with me. <strong>Paste your reference into the booking form</strong> so I have your details and CV in front of me. A welcome email with your next steps, what you chose and a copy of the agreement is on its way.</p>'
+		. '<p>Now book your 30-minute Microsoft Teams call with me. <strong>Paste your reference into the booking form</strong> so I have your details and CV in front of me. A welcome email with your next steps, what you chose and a copy of the agreement is on its way.</p>'
 		. '<p><a class="mshcp-btn mshcp-book" href="#" target="_top">Book my call</a></p><iframe class="mshcp-frame" title="Book your call" hidden></iframe></div>';
 
 	$css = '<style>.mshcp{max-width:1080px;margin:0 auto;padding:0 40px;font-family:inherit;color:#1D2733}.mshcp .mshcp-card,.mshcp .mshcp-form,.mshcp .mshcp-done{background:#FFFFFF;color:#1D2733;border-top:4px solid #CBA257;padding:36px 40px;margin:0 0 40px}'
