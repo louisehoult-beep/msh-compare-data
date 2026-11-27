@@ -237,6 +237,7 @@ RUN = [
     "test_crawl_round2_shapes.py",
     # Added 16/10/2026 (^o524): hand-captured products survive a re-crawl.
     "test_crawl_manual_carry.py",
+    "test_supplier_holds.py",
     # 16/10/2026: framework-date guard (page 2802 contradiction). Offline.
     "test_framework_date_guard.py",
 ]

@@ -4074,6 +4074,26 @@ def check_supplier_ranges(doc):
 
     check_second_catalogues(doc)
     check_named_taxonomy_structure(doc)
+    check_held_ranges(doc)
+
+
+def check_held_ranges(doc):
+    """A range held by a ruling (_meta.holds) stays out of member view. The only
+    products a held supplier may publish are the ones the hold names as
+    `publishable`; a hold with none may not appear in `suppliers` at all."""
+    for name, hold in sorted(((doc.get("_meta") or {}).get("holds") or {}).items()):
+        rec = (doc.get("suppliers") or {}).get(name)
+        if rec is None:
+            continue
+        allowed = set(hold.get("publishable") or [])
+        extra = [p.get("n") or "" for p in rec.get("products") or []
+                 if p.get("n") not in allowed]
+        if extra or not allowed:
+            FAIL("supplier-products",
+                 "%s is held since %s under %s but publishes %d product(s) the hold does "
+                 "not allow (%s). Restore the hold; never publish over it."
+                 % (name, hold.get("heldOn"), hold.get("policy"),
+                    len(extra), "; ".join(extra[:3]) or "empty record"))
 
 
 # A SITE THAT FILES ITS RANGE ACROSS TWO CATALOGUES (29/08/2026).

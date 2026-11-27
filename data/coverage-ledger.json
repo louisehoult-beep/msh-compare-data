@@ -14,7 +14,7 @@
  "generatedFrom": {
   "frameworks.json": "2026-11-23",
   "differentiator.json published": 39744,
-  "differentiator.json held": 300444
+  "differentiator.json held": 298879
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 388,
-  "inScopeSuppliersNeedingCrawl": 207,
+  "inScopeSuppliersNeedingCrawl": 204,
   "inScopeSuppliersNeedingDomain": 188,
-  "suppliersRefused": 576,
+  "suppliersRefused": 579,
   "suppliersRefusedButPublishingElsewhere": 172,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 1,
@@ -1611,10 +1611,6 @@
    "coverageOfTarget": 35.2,
    "crawlWorklist": [
     {
-     "supplier": "EUROIMMUN UK",
-     "domain": "euroimmun.co.uk"
-    },
-    {
      "supplier": "Immucor (IBG Immucor)",
      "domain": null
     },
@@ -1872,6 +1868,13 @@
      "domain": "autoclave.uk.com",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-10-14",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "EUROIMMUN UK",
+     "domain": "euroimmun.co.uk",
+     "reason": "27/11/2026: euroimmun.co.uk redirects to the German parent's worldwide site euroimmun.com, whose subsidiaries page lists EUROIMMUN UK Ltd; its imprint reserves text and data mining rights. No NHS Supply Chain catalogue card found for the UK entity. Many captured entries are disease or technique page names.",
+     "checked": "2026-11-27",
      "bucket": "refused"
     },
     {
@@ -2179,7 +2182,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 4,
-    "heldNeedingCategory": 9,
+    "heldNeedingCategory": 8,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -2243,7 +2246,6 @@
    ],
    "heldOnly": [
     "Critical Healthcare",
-    "EUROIMMUN UK",
     "Immucor (IBG Immucor)",
     "Launch Diagnostics",
     "Oxford Biosystems",
@@ -2296,6 +2298,7 @@
     "DWK Life Sciences",
     "ELITech UK",
     "ESTS (GB)",
+    "EUROIMMUN UK",
     "Exact Sciences UK",
     "Fujifilm Healthcare UK",
     "Genetic Signatures",
@@ -2319,7 +2322,7 @@
     "Wolf Laboratories"
    ],
    "unknown": [],
-   "actionableTotal": 40,
+   "actionableTotal": 39,
    "blockedReason": null,
    "deferred": null
   },
@@ -9920,10 +9923,6 @@
    "coverageOfTarget": 56.5,
    "crawlWorklist": [
     {
-     "supplier": "Axonics Modulation Technologies UK Limited",
-     "domain": "bostonscientific.com"
-    },
-    {
      "supplier": "Far From Surgical Solutions",
      "domain": null
     },
@@ -9938,6 +9937,13 @@
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
+    {
+     "supplier": "Axonics Modulation Technologies UK Limited",
+     "domain": "bostonscientific.com",
+     "reason": "27/11/2026: captured from bostonscientific.com (axonics.com redirects there), Boston Scientific's worldwide catalogue, including navigation pages. NHS Supply Chain lists the Axonics lines under BOSTON SCIENTIFIC LTD, not AXONICS MODULATION TECHNOLOGIES, U.K. LIMITED (09622653); no card found under the UK entity.",
+     "checked": "2026-11-27",
+     "bucket": "refused"
+    },
     {
      "supplier": "Freedom Neuro BV",
      "domain": "curonix.com",
@@ -10064,7 +10070,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 1,
-    "heldNeedingCategory": 2,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -10089,7 +10095,6 @@
     "Globus Medical UK Ltd"
    ],
    "heldOnly": [
-    "Axonics Modulation Technologies UK Limited",
     "Creed Medical Ltd"
    ],
    "capturedNothingCounted": [],
@@ -10098,6 +10103,7 @@
     "P14 Medical Limited"
    ],
    "refused": [
+    "Axonics Modulation Technologies UK Limited",
     "Freedom Neuro BV",
     "inomed Neurocare Limited",
     "Nyxoah SA",
@@ -10105,7 +10111,7 @@
     "Phagenesis"
    ],
    "unknown": [],
-   "actionableTotal": 5,
+   "actionableTotal": 4,
    "blockedReason": null,
    "deferred": null
   },
@@ -12556,10 +12562,6 @@
    "coverageOfTarget": 46.2,
    "crawlWorklist": [
     {
-     "supplier": "Eckert & Ziegler BEBIG",
-     "domain": "ezag.com"
-    },
-    {
      "supplier": "Accuray UK",
      "domain": null
     },
@@ -12574,6 +12576,13 @@
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
+    {
+     "supplier": "Eckert & Ziegler BEBIG",
+     "domain": "www.ezag.com",
+     "reason": "18/08/2026, re-read 27/11/2026: ECKERT & ZIEGLER BEBIG LIMITED (05270457) was dissolved 05/03/2024 (Companies House). www.ezag.com is the German group's site and nothing read confirms it as a successor to this entity. No NHS Supply Chain catalogue card found.",
+     "checked": "2026-11-27",
+     "bucket": "refused"
+    },
     {
      "supplier": "Healthcare Supply Solutions Limited",
      "domain": "healthcaresupplysolutions.co.uk",
@@ -12636,7 +12645,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 0,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -12651,22 +12660,21 @@
     "Xstrahl"
    ],
    "publishedElsewhere": [],
-   "heldOnly": [
-    "Eckert & Ziegler BEBIG"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Accuray UK",
     "Viewray,Inc"
    ],
    "refused": [
+    "Eckert & Ziegler BEBIG",
     "Healthcare Supply Solutions Limited",
     "Oncology Systems Ltd (OSL)",
     "Sirtex Medical",
     "Vertec Scientific"
    ],
    "unknown": [],
-   "actionableTotal": 3,
+   "actionableTotal": 2,
    "blockedReason": null,
    "deferred": null
   },

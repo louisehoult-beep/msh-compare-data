@@ -40,7 +40,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
-| Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 43 | 35.2% | 40 | 54 | STARTED |
+| Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 43 | 35.2% | 39 | 55 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 36 | 35.6% | 12 | 69 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 27 | 42.9% | 20 | 30 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 21 | 42 | STARTED |
@@ -65,7 +65,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 11 | 40.7% | 9 | 16 | STARTED |
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 10 | 40.0% | 8 | 14 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 8 | 32.0% | 7 | 15 | STARTED |
-| Neuromodulation Devices and Associated Products | neuro | 23 | 13 | 56.5% | 5 | 16 | STARTED |
+| Neuromodulation Devices and Associated Products | neuro | 23 | 13 | 56.5% | 4 | 17 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 21 | 95.5% | 1 | 13 | STARTED |
 | Hand Hygiene and Associated Products and Services | infection | 21 | 7 | 33.3% | 4 | 16 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 15 | 71.4% | 2 | 11 | STARTED |
@@ -81,7 +81,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 10 | 66.7% | 4 | 6 | STARTED |
 | Clinical and Sharps Waste Management | infection | 14 | 4 | 28.6% | 5 | 12 | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | imaging, oncology | 13 | 4 | 30.8% | 1 | 9 | STARTED · DEFERRED |
-| Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 6 | 46.2% | 3 | 7 | STARTED |
+| Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 6 | 46.2% | 2 | 8 | STARTED |
 | Disposable and Washable Continence Care | continence | 12 | 5 | 41.7% | 1 | 10 | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 2 | 10 | STARTED |
 | Prosthetic Components and Associated Products | orthotics | 12 | 6 | 50.0% | 0 | 8 | STARTED · BLOCKED |

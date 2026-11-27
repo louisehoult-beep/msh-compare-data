@@ -3452,6 +3452,20 @@ def carry_manual_products(existing, shaped):
     return shaped
 
 
+def hold_for(doc, name):
+    """The standing hold on this supplier's range, or None.
+
+    A refusal in `refusals` is a read outcome and expires after --refusal-ttl. A
+    HOLD in _meta.holds is a ruling (data/identity-vocabulary-policy.json) and
+    does not: it is never crawled, by --auto, by name or with --retry-refused,
+    until someone removes the entry. Added 27/11/2026: four ranges ruled out or
+    refused by hand were republished on 24/11/2026, the day after their 25/08
+    mechanical refusals passed the 90-day TTL, and the hand reading kept in
+    _meta.refusedOnReading was read by nothing.
+    """
+    return ((doc.get("_meta") or {}).get("holds") or {}).get(name)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--supplier")
@@ -3512,6 +3526,12 @@ def main():
 
     targets = []
     if a.supplier:
+        h = hold_for(doc, a.supplier)
+        if h:
+            print("Held since %s under %s — not crawled. Remove its _meta.holds entry "
+                  "only with the document the policy asks for."
+                  % (h.get("heldOn"), h.get("policy")), flush=True)
+            return
         # THE TTL IS NOT ONLY AN --auto RULE. The named-supplier route used to
         # walk straight past a refusal recorded days earlier, which is how three
         # judged refusals were re-attempted inside the 90-day window on
@@ -3543,7 +3563,7 @@ def main():
         ranked = []
         for name, rec in index.items():
             k = key(name)
-            if k in count and name not in doc["suppliers"]:
+            if k in count and name not in doc["suppliers"] and not hold_for(doc, name):
                 if not a.retry_refused and recently_refused(name):
                     continue
                 d = domain_for(rec)
