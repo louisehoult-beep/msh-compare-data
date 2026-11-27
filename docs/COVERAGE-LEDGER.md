@@ -86,7 +86,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 2 | 10 | STARTED |
 | Prosthetic Components and Associated Products | orthotics | 12 | 6 | 50.0% | 0 | 8 | STARTED · BLOCKED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 4 | 6 | STARTED |
-| CT Scanners and Associated Options and Related Services | imaging | 8 | 2 | 25.0% | 4 | 6 | STARTED |
+| CT Scanners and Associated Options and Related Services | imaging | 8 | 3 | 37.5% | 3 | 6 | STARTED |
 | Polymer Aprons | infection | 8 | 2 | 25.0% | 1 | 8 | STARTED |
 | Contrast Injectors, Consumables and Associated Options and Related Services | imaging | 5 | 1 | 20.0% | 0 | 4 | STARTED · BLOCKED |
 | Polymer Products | infection | 5 | 2 | 40.0% | 2 | 3 | STARTED |
