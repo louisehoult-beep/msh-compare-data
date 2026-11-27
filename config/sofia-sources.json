@@ -1,0 +1,38 @@
+{
+ "_notice": "Where Sofia looks for new changes each morning. Speciality news (Marcus), tenders and awards (Helen), digital assurance (Grace) and safety alerts (Regulatory Desk) are deliberately left out. Meaning lines are information only.",
+ "windowDays": 30,
+ "watched": [
+  {"path": "guidance/register-medical-devices-to-place-on-the-market", "name": "MHRA, register medical devices", "area": "Device rules", "meaning": "This page sets who registers a device, and the fees, before it can be sold in the United Kingdom."},
+  {"path": "guidance/regulating-medical-devices-in-the-uk", "name": "MHRA, regulating medical devices", "area": "Device rules", "meaning": "This page sets the legal basis for placing a device on the Great Britain market."},
+  {"path": "guidance/medical-devices-eu-regulations-for-mdr-and-ivdr", "name": "MHRA, devices in Northern Ireland", "area": "Device rules", "meaning": "This page covers the separate rules for supplying devices to Northern Ireland."},
+  {"path": "government/publications/implementation-of-the-future-regulation-of-medical-devices", "name": "MHRA, future device regime", "area": "Device rules", "meaning": "This page tracks upcoming amendments to the Great Britain device regulations."},
+  {"path": "government/publications/timelines-for-acceptance-of-ce-marked-medical-devices-in-great-britain-gb", "name": "MHRA, CE marking timelines", "area": "Device rules", "meaning": "This page covers how long CE marked devices are accepted in Great Britain."},
+  {"path": "government/publications/medical-devices-post-market-surveillance-requirements", "name": "MHRA, post-market surveillance", "area": "Device rules", "meaning": "This page sets what manufacturers monitor and report once a device is in use."},
+  {"path": "guidance/medical-devices-how-to-comply-with-the-legal-requirements", "name": "MHRA, legal requirements", "area": "Device rules", "meaning": "This page covers the legal requirements for supplying devices in Great Britain."},
+  {"path": "guidance/notify-mhra-about-a-clinical-investigation-for-a-medical-device", "name": "MHRA, clinical investigations", "area": "Device rules", "meaning": "This page affects companies gathering clinical evidence for a device in the United Kingdom."},
+  {"path": "government/publications/medical-devices-given-exceptional-use-authorisations", "name": "MHRA, exceptional use authorisations", "area": "Device rules", "meaning": "These authorisations let named devices be supplied without the usual marking for a limited time, which changes what is available to a buyer."},
+  {"path": "government/collections/procurement-policy-notes", "name": "Cabinet Office, Procurement Policy Notes", "area": "How buyers decide", "meaning": "A Procurement Policy Note can change what a public buyer asks of bidders."},
+  {"path": "government/publications/ppn-026-the-social-value-model", "name": "Cabinet Office, social value model", "area": "How buyers decide", "meaning": "This affects how social value is scored in central government tenders."},
+  {"path": "government/publications/ppn-006-taking-account-of-carbon-reduction-plans-in-the-procurement-of-major-government-contracts", "name": "Cabinet Office, carbon reduction plans", "area": "Supplier duties", "meaning": "This affects the carbon reduction plan a bidder for major government contracts provides."},
+  {"path": "government/publications/value-based-procurement-for-medical-technology", "name": "Department of Health and Social Care, value based procurement", "area": "How buyers decide", "meaning": "This affects how NHS buyers score medical technology tenders."},
+  {"path": "government/consultations/the-disclosure-of-industry-payments-to-the-healthcare-sector", "name": "Department of Health and Social Care, industry payments", "area": "Supplier duties", "meaning": "This affects how payments from device and medicines companies to healthcare are reported."}
+ ],
+ "govukSearches": [
+  {"q": "medical devices", "org": "medicines-and-healthcare-products-regulatory-agency"},
+  {"q": "medical technology", "org": "department-of-health-and-social-care"},
+  {"q": "medtech supplier", "org": "department-of-health-and-social-care"},
+  {"q": "procurement policy note", "org": "cabinet-office"}
+ ],
+ "govukTitleRules": [
+  {"pattern": "medical device|in vitro diagnostic|\\bUKCA\\b|CE.mark", "area": "Device rules", "meaning": "A new official publication about the rules for supplying medical devices."},
+  {"pattern": "procurement policy note|\\bPPN \\d", "area": "How buyers decide", "meaning": "A new Procurement Policy Note, which can change what a public buyer asks of bidders."},
+  {"pattern": "medtech|medical technolog|health ?tech", "area": "Funding and access", "meaning": "A new official publication about how medical technology is bought, funded or adopted."}
+ ],
+ "govukTitleExclude": "digital|\\bAI\\b|software|cyber",
+ "govukExcludeTypes": ["medical_safety_alert", "drug_safety_update", "press_release_medicine", "recruitment", "transparency", "foi_release", "vacancy"],
+ "legislationFeeds": [
+  {"q": "medical devices", "pattern": "Medical Devices", "area": "Device rules", "meaning": "New legislation that changes the law on medical devices."},
+  {"q": "procurement", "pattern": "^The (National Health Service \\(Procurement|Procurement Act|Procurement \\(|Health Care Services \\(Provider Selection)", "area": "How buyers decide", "meaning": "New legislation that changes the law on how public and health service contracts are awarded."}
+ ],
+ "nhsFeed": {"url": "https://www.england.nhs.uk/publication/feed/", "pattern": "supplier|procurement|medical technolog|medtech|payment scheme|net zero supplier|high cost device", "exclude": "proposed contract award|Patient Choice and Procurement Panel", "name": "NHS England publications", "area": "Funding and access", "meaning": "A new NHS England publication on buying, paying for or supplying to the health service."}
+}
