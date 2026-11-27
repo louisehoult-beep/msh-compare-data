@@ -4075,6 +4075,25 @@ def check_supplier_ranges(doc):
     check_second_catalogues(doc)
     check_named_taxonomy_structure(doc)
     check_held_ranges(doc)
+    check_not_products(doc)
+
+
+def check_not_products(doc):
+    """A page read at source and ruled not a product (_meta.notProducts) is never
+    published again, whichever script wrote the range."""
+    scripts = os.path.join(os.path.dirname(os.path.abspath(__file__)), "scripts")
+    if scripts not in sys.path:
+        sys.path.insert(0, scripts)
+    from crawl_supplier_site import is_ruled_non_product
+    for name in sorted((doc.get("_meta") or {}).get("notProducts") or {}):
+        rec = (doc.get("suppliers") or {}).get(name) or {}
+        back = [p.get("n") or "" for p in rec.get("products") or []
+                if is_ruled_non_product(doc, name, p)]
+        if back:
+            FAIL("supplier-products",
+                 "%s publishes %d row(s) ruled not products (%s). Run them out with "
+                 "drop_non_products; never publish over _meta.notProducts."
+                 % (name, len(back), "; ".join(back[:3])))
 
 
 def check_held_ranges(doc):

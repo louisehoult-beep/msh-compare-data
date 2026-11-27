@@ -3466,6 +3466,44 @@ def hold_for(doc, name):
     return ((doc.get("_meta") or {}).get("holds") or {}).get(name)
 
 
+def is_ruled_non_product(doc, name, row):
+    """A page read at source and found not to be a product (_meta.notProducts),
+    matched on exact name, case-insensitively, and on division where the entry
+    names one."""
+    n = str(row.get("n") or "").strip().lower()
+    for e in ((doc.get("_meta") or {}).get("notProducts") or {}).get(name) or []:
+        if n == e["n"].lower() and e.get("division") in (None, row.get("division")):
+            return True
+    return False
+
+
+def drop_non_products(doc, name, shaped):
+    """Takes ruled non-products out of a range, in place, and restates its
+    division counts. Returns the rows removed. Added 27/11/2026: medi UK's
+    article pages removed by hand on 11/09 returned with the 09/10 re-crawl."""
+    rows = shaped.get("products") or []
+    removed = [p for p in rows if is_ruled_non_product(doc, name, p)]
+    if not removed:
+        return removed
+    kept = [p for p in rows if not is_ruled_non_product(doc, name, p)]
+    counts = {}
+    for p in kept:
+        d = p.get("division") or "Uncategorised"
+        counts[d] = counts.get(d, 0) + 1
+    shaped["products"] = kept
+    shaped["divisions"] = [{"name": k, "products": v}
+                           for k, v in sorted(counts.items(), key=lambda kv: -kv[1])]
+    uncat = counts.get("Uncategorised", 0)
+    shaped["hasDivisions"] = any(k != "Uncategorised" for k in counts) and uncat * 2 <= len(kept)
+    for k in ("captureCaveat", "filingRule"):
+        if shaped.get(k):
+            shaped[k] = re.sub(r"\b\d+ of \d+ product URLs", "%d of %d product URLs" % (uncat, len(kept)),
+                               shaped[k])
+    shaped["captureCaveat"] = ((shaped.get("captureCaveat") or "").rstrip() +
+                               " %d page(s) on the site that are not products were left out." % len(removed)).lstrip()
+    return removed
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--supplier")
@@ -3677,6 +3715,9 @@ def main():
                 shaped[k] = existing[k]
         drop_out_of_scope_ranges(name, shaped)
         carry_manual_products(existing, shaped)
+        dropped = drop_non_products(doc, name, shaped)
+        if dropped:
+            print("      %d page(s) ruled not products left out" % len(dropped), flush=True)
         doc["suppliers"][name] = shaped
         done += 1
         print("  OK %-30s %d products, %d divisions (%s)"
