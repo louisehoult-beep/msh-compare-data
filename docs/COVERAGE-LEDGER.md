@@ -73,7 +73,7 @@ They stay in Awarded and in every record; they leave Left and the pick list.
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 9 | 45.0% | 3 | 12 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 9 | 47.4% | 8 | 11 | STARTED |
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 14 | 73.7% | 3 | 10 | STARTED |
-| Examination Gloves | infection | 19 | 5 | 26.3% | 6 | 13 | STARTED |
+| Examination Gloves | infection | 19 | 6 | 31.6% | 5 | 13 | STARTED |
 | Central Venous Catheters and Associated Products | vascular | 18 | 10 | 55.6% | 4 | 11 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 7 | 38.9% | 2 | 13 | STARTED |
 | Patient Temperature Management | theatres | 18 | 13 | 72.2% | 4 | 12 | STARTED |
