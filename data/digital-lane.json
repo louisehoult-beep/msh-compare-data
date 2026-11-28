@@ -12,8 +12,8 @@
  },
  "lane": "digital",
  "panel": "digital-and-medical-it",
- "dataAsOf": "27/11/2026",
- "generated": "2026-11-27",
+ "dataAsOf": "28/11/2026",
+ "generated": "2026-11-28",
  "source": "Find a Tender and Contracts Finder OCDS notices (Open Government Licence v3), via data/framework-awards.json and a live tender/planning pass; Atamis Health Family public opportunity search via data/atamis-opportunities-live.json.",
  "laneRule": "A Find a Tender or Contracts Finder notice is in this lane when the buyer name is an NHS body (contains \"NHS\", \"Integrated Care Board\" or \"Health Board\"; bare \"Trust\" is not a match) AND a Common Procurement Vocabulary (CPV) code on the notice begins 48 (software package and information systems) or 72 (IT services). An Atamis opportunity carries no CPV code, so its own Category text stands in: a software, information systems or IT services category, or a title naming a clinical digital system. Every Atamis authority is an NHS body by construction.",
  "clinicalRule": "CPV 48 and 72 are bought for payroll, finance, human resources and office systems as much as for clinical ones, so a lane row is not a claim of health technology. A row is flagged clinical only when its TITLE names a clinical system or a regulated digital product (electronic patient record, electronic prescribing, picture archiving and communication system (PACS), laboratory information management system (LIMS), artificial intelligence (AI), ambient voice, virtual ward, remote monitoring and the other terms in scripts/digital_lane_rules.py). Bare 'software', 'digital', 'IT' and 'licence' never flag a row. The speciality page shows clinical rows only.",
@@ -22,22 +22,22 @@
  "coverage": {
   "complete": true,
   "window": {
-   "from": "2026-11-19",
-   "to": "2026-11-27",
+   "from": "2026-11-20",
+   "to": "2026-11-28",
    "days": 8,
-   "run": "2026-11-27"
+   "run": "2026-11-28"
   },
   "notes": [
-   "Find a Tender (tender stage): 4 digital lane notice(s) from 3258 release(s) over 33 page(s), all notice types, stage read from tender.status",
-   "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-19",
-   "Find a Tender (planning stage): 2 digital lane notice(s) from 3258 release(s) over 33 page(s), all notice types, stage read from tender.status",
-   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-19"
+   "Find a Tender (tender stage): 5 digital lane notice(s) from 2786 release(s) over 28 page(s), all notice types, stage read from tender.status",
+   "Contracts Finder (tender stage): 0 digital lane notice(s) from 99 release(s) over 1 page(s), back to 2026-11-20",
+   "Find a Tender (planning stage): 2 digital lane notice(s) from 2786 release(s) over 28 page(s), all notice types, stage read from tender.status",
+   "Contracts Finder (planning stage): 0 digital lane notice(s) from 100 release(s) over 1 page(s), back to 2026-11-20"
   ]
  },
  "counts": {
-  "awards": 433,
-  "awardsClinical": 52,
-  "openNotices": 13,
+  "awards": 437,
+  "awardsClinical": 54,
+  "openNotices": 14,
   "openNoticesClinical": 3,
   "marketEngagement": 2,
   "marketEngagementClinical": 0
@@ -137,6 +137,82 @@
    ],
    "url": "https://www.find-tender.service.gov.uk/Notice/112461-2026",
    "ocid": "ocds-h6vhtk-07c565"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "award",
+   "title": "Voluntary Ex Ante Transparency (VEAT) Notice: Extension of Bury, Rochdale and Oldham (BRO) Care Organisation Patient Administration System (PAS) Contract with DH Opco UK Ltd (Dedalus)",
+   "buyer": "NORTHERN CARE ALLIANCE NHS FOUNDATION TRUST",
+   "published": "2026-11-27",
+   "suppliers": [
+    "DH Opco UK Ltd (Dedalus)"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 468460.57,
+   "digitalCpv": [
+    "48814000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/112818-2026",
+   "ocid": "ocds-h6vhtk-07c639"
+  },
+  {
+   "lane": "digital",
+   "clinical": true,
+   "stage": "award",
+   "title": "Voluntary Ex Ante Transparency (VEAT) Notice: Extension of Salford Care Organisation (SCO) Patient Administration System (PAS) Contract with DH Opco UK Ltd (Dedalus)",
+   "buyer": "NORTHERN CARE ALLIANCE NHS FOUNDATION TRUST",
+   "published": "2026-11-27",
+   "suppliers": [
+    "DH Opco UK Ltd (Dedalus)"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": 717039.4,
+   "digitalCpv": [
+    "48814000",
+    "48814200"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/112816-2026",
+   "ocid": "ocds-h6vhtk-07c638"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "tender",
+   "title": "Sterile Services: Track and Trace Software | 7556/27",
+   "buyer": "Guy's and St Thomas' NHS Foundation Trust",
+   "published": "2026-11-27",
+   "suppliers": [],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "48517000",
+    "72320000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/112806-2026",
+   "ocid": "ocds-h6vhtk-07c633"
+  },
+  {
+   "lane": "digital",
+   "clinical": false,
+   "stage": "award",
+   "title": "Procurement of Specialist Support for the Implementation of a Cluster Data Platform (CDP) Programme",
+   "buyer": "NHS BATH AND NORTH EAST SOMERSET, SWINDON AND WILTSHIRE INTEGRATED CARE BOARD",
+   "published": "2026-11-27",
+   "suppliers": [
+    "Transparity"
+   ],
+   "isFramework": false,
+   "contractEnd": null,
+   "value": null,
+   "digitalCpv": [
+    "72200000"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/112774-2026",
+   "ocid": "ocds-h6vhtk-07c620"
   },
   {
    "lane": "digital",
@@ -8374,6 +8450,29 @@
    "clinical": false
   },
   {
+   "title": "Sterile Services: Track and Trace Software | 7556/27",
+   "buyer": "Guy's and St Thomas' NHS Foundation Trust",
+   "status": "active",
+   "rawStatus": "active",
+   "stage": "open tender",
+   "date": "2026-11-27",
+   "closingDate": "2027-01-06T12:00:00Z",
+   "startDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/112806-2026",
+   "source": "Find a Tender",
+   "cpv": "33169500",
+   "valueAmount": 700000.0,
+   "valueCurrency": "GBP",
+   "valueBasis": "net",
+   "ocid": "ocds-h6vhtk-07c633",
+   "lane": "digital",
+   "digitalCpv": [
+    "48517000",
+    "72320000"
+   ],
+   "clinical": false
+  },
+  {
    "title": "Population Health Management (PHM)",
    "buyer": "NHS SOUTH WEST LONDON INTEGRATED CARE BOARD",
    "status": "planning",
@@ -8800,6 +8899,12 @@
    "to": "2026-11-27",
    "days": 8,
    "run": "2026-11-27"
+  },
+  {
+   "from": "2026-11-20",
+   "to": "2026-11-28",
+   "days": 8,
+   "run": "2026-11-28"
   }
  ]
 }
